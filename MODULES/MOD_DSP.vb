@@ -7,19 +7,19 @@
 
         Dim columnIndex As Integer
 
-        If resizingListView.Items.Count = 0 Then
+        'If resizingListView.Items.Count = 0 Then
 
-            For columnIndex = 1 To resizingListView.Columns.Count - 1
-                resizingListView.AutoResizeColumn(columnIndex, ColumnHeaderAutoResizeStyle.HeaderSize)
-            Next
+        For columnIndex = 1 To resizingListView.Columns.Count - 1
+            resizingListView.AutoResizeColumn(columnIndex, ColumnHeaderAutoResizeStyle.HeaderSize)
+        Next
 
-        Else
+        'Else
 
-            For columnIndex = 1 To resizingListView.Columns.Count - 1
-                resizingListView.AutoResizeColumn(columnIndex, ColumnHeaderAutoResizeStyle.ColumnContent)
-            Next
+        '    For columnIndex = 1 To resizingListView.Columns.Count - 1
+        '        resizingListView.AutoResizeColumn(columnIndex, ColumnHeaderAutoResizeStyle.ColumnContent)
+        '    Next
 
-        End If
+        'End If
 
     End Sub
 

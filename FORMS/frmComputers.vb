@@ -605,6 +605,17 @@ Error_:
                             FillComboNET(Me.cmbOTHConnect, "name", "spr_other", "", False, True)
 
                             Call LOADot(d(1))
+
+                            Dim newThread3 As New Thread(AddressOf N_P_LOAD)
+                            newThread3.Start()
+
+                            Dim newThread4 As New Thread(AddressOf R_P_LOAD)
+                            newThread4.Start()
+
+                            Dim newThread5 As New Thread(AddressOf D_P_LOAD)
+                            newThread5.Start()
+
+
                             Call LOAD_PCL(Me.cmbOTHFil.Text, Me.cmbOTHDepart.Text, Me.cmbOTHOffice.Text, Me.cmbOTHPCL)
 
 
@@ -636,6 +647,14 @@ Error_:
 
                             Call LOADot(d(1))
 
+                            Dim newThread3 As New Thread(AddressOf N_P_LOAD)
+                            newThread3.Start()
+
+                            Dim newThread4 As New Thread(AddressOf R_P_LOAD)
+                            newThread4.Start()
+
+                            Dim newThread5 As New Thread(AddressOf D_P_LOAD)
+                            newThread5.Start()
 
                         Case "FAX"
                             CartrAddToolStripMenuItem.Visible = False
@@ -660,6 +679,15 @@ Error_:
                             cmbOTHPCL.Visible = False
 
                             Call LOADot(d(1))
+
+                            Dim newThread3 As New Thread(AddressOf N_P_LOAD)
+                            newThread3.Start()
+
+                            Dim newThread4 As New Thread(AddressOf R_P_LOAD)
+                            newThread4.Start()
+
+                            Dim newThread5 As New Thread(AddressOf D_P_LOAD)
+                            newThread5.Start()
 
                         Case "PHONE"
                             CartrAddToolStripMenuItem.Visible = False
@@ -686,6 +714,15 @@ Error_:
 
                             Call LOADot(d(1))
 
+                            Dim newThread3 As New Thread(AddressOf N_P_LOAD)
+                            newThread3.Start()
+
+                            Dim newThread4 As New Thread(AddressOf R_P_LOAD)
+                            newThread4.Start()
+
+                            Dim newThread5 As New Thread(AddressOf D_P_LOAD)
+                            newThread5.Start()
+
                         Case "ZIP"
                             CartrAddToolStripMenuItem.Visible = False
                             FillComboNET(Me.cmbOTH, "name", "spr_zip", "", False, True)
@@ -707,6 +744,15 @@ Error_:
                             lblOTPCL.Visible = True
                             cmbOTHPCL.Visible = True
                             Call LOADot(d(1))
+
+                            Dim newThread3 As New Thread(AddressOf N_P_LOAD)
+                            newThread3.Start()
+
+                            Dim newThread4 As New Thread(AddressOf R_P_LOAD)
+                            newThread4.Start()
+
+                            Dim newThread5 As New Thread(AddressOf D_P_LOAD)
+                            newThread5.Start()
 
                             Call LOAD_PCL(Me.cmbOTHFil.Text, Me.cmbOTHDepart.Text, Me.cmbOTHOffice.Text, Me.cmbOTHPCL)
                         Case "SCANER"
@@ -730,9 +776,17 @@ Error_:
                             lblOTPCL.Visible = True
                             cmbOTHPCL.Visible = True
                             Call LOADot(d(1))
+                            Dim newThread3 As New Thread(AddressOf N_P_LOAD)
+                            newThread3.Start()
 
+                            Dim newThread4 As New Thread(AddressOf R_P_LOAD)
+                            newThread4.Start()
+
+                            Dim newThread5 As New Thread(AddressOf D_P_LOAD)
+                            newThread5.Start()
 
                             Call LOAD_PCL(Me.cmbOTHFil.Text, Me.cmbOTHDepart.Text, Me.cmbOTHOffice.Text, Me.cmbOTHPCL)
+
                         Case "MONITOR"
                             CartrAddToolStripMenuItem.Visible = False
                             FillComboNET(Me.cmbOTH, "Name", "SPR_MONITOR", "", False, True)
@@ -798,6 +852,14 @@ Error_:
 
                             Call LOADot(d(1))
 
+                            Dim newThread3 As New Thread(AddressOf N_P_LOAD)
+                            newThread3.Start()
+
+                            Dim newThread4 As New Thread(AddressOf R_P_LOAD)
+                            newThread4.Start()
+
+                            Dim newThread5 As New Thread(AddressOf D_P_LOAD)
+                            newThread5.Start()
 
                             Call LOAD_PCL(Me.cmbOTHFil.Text, Me.cmbOTHDepart.Text, Me.cmbOTHOffice.Text, Me.cmbOTHPCL)
 
@@ -822,7 +884,14 @@ Error_:
                             cmbOTHPCL.Visible = True
 
                             Call LOADot(d(1))
+                            Dim newThread3 As New Thread(AddressOf N_P_LOAD)
+                            newThread3.Start()
 
+                            Dim newThread4 As New Thread(AddressOf R_P_LOAD)
+                            newThread4.Start()
+
+                            Dim newThread5 As New Thread(AddressOf D_P_LOAD)
+                            newThread5.Start()
                             Call LOAD_PCL(Me.cmbOTHFil.Text, Me.cmbOTHDepart.Text, Me.cmbOTHOffice.Text, Me.cmbOTHPCL)
 
                         Case "IBP"
@@ -846,8 +915,16 @@ Error_:
                             cmbOTHPCL.Visible = True
 
                             Call LOADot(d(1))
+                            Dim newThread3 As New Thread(AddressOf N_P_LOAD)
+                            newThread3.Start()
 
+                            Dim newThread4 As New Thread(AddressOf R_P_LOAD)
+                            newThread4.Start()
+
+                            Dim newThread5 As New Thread(AddressOf D_P_LOAD)
+                            newThread5.Start()
                             Call LOAD_PCL(Me.cmbOTHFil.Text, Me.cmbOTHDepart.Text, Me.cmbOTHOffice.Text, Me.cmbOTHPCL)
+
                         Case "FS"
                             CartrAddToolStripMenuItem.Visible = False
                             FillComboNET(Me.cmbOTH, "name", "SPR_FS", "", False, True)
@@ -869,6 +946,14 @@ Error_:
                             cmbOTHPCL.Visible = True
 
                             Call LOADot(d(1))
+                            Dim newThread3 As New Thread(AddressOf N_P_LOAD)
+                            newThread3.Start()
+
+                            Dim newThread4 As New Thread(AddressOf R_P_LOAD)
+                            newThread4.Start()
+
+                            Dim newThread5 As New Thread(AddressOf D_P_LOAD)
+                            newThread5.Start()
 
                             Call LOAD_PCL(Me.cmbOTHFil.Text, Me.cmbOTHDepart.Text, Me.cmbOTHOffice.Text, Me.cmbOTHPCL)
 
@@ -893,6 +978,14 @@ Error_:
                             cmbOTHPCL.Visible = True
 
                             Call LOADot(d(1))
+                            Dim newThread3 As New Thread(AddressOf N_P_LOAD)
+                            newThread3.Start()
+
+                            Dim newThread4 As New Thread(AddressOf R_P_LOAD)
+                            newThread4.Start()
+
+                            Dim newThread5 As New Thread(AddressOf D_P_LOAD)
+                            newThread5.Start()
                             Call LOAD_PCL(Me.cmbOTHFil.Text, Me.cmbOTHDepart.Text, Me.cmbOTHOffice.Text, Me.cmbOTHPCL)
 
                         Case "MOUSE"
@@ -916,6 +1009,14 @@ Error_:
                             cmbOTHPCL.Visible = True
 
                             Call LOADot(d(1))
+                            Dim newThread3 As New Thread(AddressOf N_P_LOAD)
+                            newThread3.Start()
+
+                            Dim newThread4 As New Thread(AddressOf R_P_LOAD)
+                            newThread4.Start()
+
+                            Dim newThread5 As New Thread(AddressOf D_P_LOAD)
+                            newThread5.Start()
                             Call LOAD_PCL(Me.cmbOTHFil.Text, Me.cmbOTHDepart.Text, Me.cmbOTHOffice.Text, Me.cmbOTHPCL)
                             '--------------VIP_Graff Добавление новой перефирии Конец------------------
 
@@ -942,6 +1043,14 @@ Error_:
                             cmbOTHPCL.Visible = False
 
                             Call LOADot(d(1))
+                            Dim newThread3 As New Thread(AddressOf N_P_LOAD)
+                            newThread3.Start()
+
+                            Dim newThread4 As New Thread(AddressOf R_P_LOAD)
+                            newThread4.Start()
+
+                            Dim newThread5 As New Thread(AddressOf D_P_LOAD)
+                            newThread5.Start()
                             ' Call LOAD_PCL(Me.cmbOTHFil.Text, Me.cmbOTHDepart.Text, Me.cmbOTHOffice.Text, Me.cmbOTHPCL)
 
 

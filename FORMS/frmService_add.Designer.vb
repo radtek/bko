@@ -22,35 +22,35 @@ Partial Class frmService_add
     'Не изменяйте ее в редакторе исходного кода.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.cmbCancel = New System.Windows.Forms.Button
-        Me.cmbAdd = New System.Windows.Forms.Button
-        Me.txtComent = New System.Windows.Forms.TextBox
-        Me.Label12 = New System.Windows.Forms.Label
-        Me.chkClose = New System.Windows.Forms.CheckBox
-        Me.cmbTip = New System.Windows.Forms.ComboBox
-        Me.cmbKrit = New System.Windows.Forms.ComboBox
-        Me.Label10 = New System.Windows.Forms.Label
-        Me.Label11 = New System.Windows.Forms.Label
-        Me.cmbOtv = New System.Windows.Forms.ComboBox
-        Me.cmbStatus = New System.Windows.Forms.ComboBox
-        Me.Label8 = New System.Windows.Forms.Label
-        Me.Label9 = New System.Windows.Forms.Label
-        Me.txtRem = New System.Windows.Forms.TextBox
-        Me.Label7 = New System.Windows.Forms.Label
-        Me.txtHead = New System.Windows.Forms.TextBox
-        Me.Label6 = New System.Windows.Forms.Label
-        Me.dtIsp = New System.Windows.Forms.DateTimePicker
-        Me.Label5 = New System.Windows.Forms.Label
-        Me.txtPhone = New System.Windows.Forms.TextBox
-        Me.Label4 = New System.Windows.Forms.Label
-        Me.dtReg = New System.Windows.Forms.DateTimePicker
-        Me.Label3 = New System.Windows.Forms.Label
-        Me.cmbMast = New System.Windows.Forms.ComboBox
-        Me.cmbIst = New System.Windows.Forms.ComboBox
-        Me.Label2 = New System.Windows.Forms.Label
-        Me.Label1 = New System.Windows.Forms.Label
-        Me.RemCashe = New System.Windows.Forms.NumericUpDown
-        Me.Label13 = New System.Windows.Forms.Label
+        Me.cmbCancel = New System.Windows.Forms.Button()
+        Me.cmbAdd = New System.Windows.Forms.Button()
+        Me.txtComent = New System.Windows.Forms.TextBox()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.chkClose = New System.Windows.Forms.CheckBox()
+        Me.cmbTip = New System.Windows.Forms.ComboBox()
+        Me.cmbKrit = New System.Windows.Forms.ComboBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.cmbOtv = New System.Windows.Forms.ComboBox()
+        Me.cmbStatus = New System.Windows.Forms.ComboBox()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.txtRem = New System.Windows.Forms.TextBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.txtHead = New System.Windows.Forms.TextBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.dtIsp = New System.Windows.Forms.DateTimePicker()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.txtPhone = New System.Windows.Forms.TextBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.dtReg = New System.Windows.Forms.DateTimePicker()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.cmbMast = New System.Windows.Forms.ComboBox()
+        Me.cmbIst = New System.Windows.Forms.ComboBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.RemCashe = New System.Windows.Forms.NumericUpDown()
+        Me.Label13 = New System.Windows.Forms.Label()
         CType(Me.RemCashe, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -86,9 +86,9 @@ Partial Class frmService_add
         Me.Label12.AutoSize = True
         Me.Label12.Location = New System.Drawing.Point(6, 422)
         Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(72, 13)
+        Me.Label12.Size = New System.Drawing.Size(146, 13)
         Me.Label12.TabIndex = 51
-        Me.Label12.Text = "Коментарий:"
+        Me.Label12.Text = "Действительный характер:"
         '
         'chkClose
         '

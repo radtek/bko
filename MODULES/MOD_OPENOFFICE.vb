@@ -7747,13 +7747,15 @@ err_:
     Public Sub SRASP2(ByVal sSID As String)
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
+        If sSID = 0 Then Exit Sub
+
         Dim rs As ADODB.Recordset
         Dim tipot, sSQL As String
 
         tipot = Directory.GetParent(Application.ExecutablePath).ToString & "\blanks\akt_z.dot"
 
 
-        Dim sTEXT, sMASTER, sISTOCHNIK, sDATE, sTIP, Sorganization, sMEMO, stTIME, stDATE, spTIME, spDATE As String
+        Dim sTEXT, sMASTER, sISTOCHNIK, sDATE, sTIP, Sorganization, sMEMO, stTIME, stDATE, spTIME, spDATE, sRAB As String
         Dim sIDCMP As Integer
 
 
@@ -7772,13 +7774,54 @@ err_:
             If Not IsDBNull(.Fields("starttime").Value) Then stTIME = .Fields("starttime").Value
             If Not IsDBNull(.Fields("startdate").Value) Then stDATE = .Fields("startdate").Value
 
-
             If Not IsDBNull(.Fields("stoptime").Value) Then spTIME = .Fields("stoptime").Value
             If Not IsDBNull(.Fields("stopdate").Value) Then spDATE = .Fields("stopdate").Value
 
         End With
         rs.Close()
         rs = Nothing
+
+
+        sSQL = "SELECT count(*) as t_n FROM remonty_plus WHERE id_rem = " & sSID
+        Dim rCOUNTer As Integer
+        rs = New ADODB.Recordset
+        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        With rs
+            .MoveFirst()
+            Do While Not .EOF
+
+                rCOUNTer = .Fields("t_n").Value
+
+                .MoveNext()
+            Loop
+        End With
+        rs.Close()
+        rs = Nothing
+
+
+        If rCOUNTer > 0 Then
+
+            sSQL = "SELECT * FROM remonty_plus WHERE id_rem = " & sSID
+            rs = New ADODB.Recordset
+            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            With rs
+                .MoveFirst()
+                Do While Not .EOF
+
+                    If Len(sRAB) = 0 Then
+                        If Not IsDBNull(.Fields("otzyv").Value) Then sRAB = .Fields("otzyv").Value
+                    Else
+                        If Not IsDBNull(.Fields("otzyv").Value) Then sRAB = sRAB & ", " & .Fields("otzyv").Value
+                    End If
+
+                    .MoveNext()
+                Loop
+            End With
+            rs.Close()
+            rs = Nothing
+
+        End If
+
 
 
         rs = New ADODB.Recordset
@@ -7876,6 +7919,10 @@ err_:
 
                 oSrch.setSearchString("#koment")
                 oSrch.setReplaceString(sMEMO)
+                Debug.Print(oDoc.replaceAll(oSrch))
+
+                oSrch.setSearchString("#raboty")
+                oSrch.setReplaceString(sRAB)
                 Debug.Print(oDoc.replaceAll(oSrch))
 
                 oSrch.setSearchString("#master")
@@ -8054,6 +8101,20 @@ err_:
                 With Wrd.Selection.Find
                     .Text = "#koment"
                     .Replacement.Text = sMEMO
+                    .Forward = True
+                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Format = False
+                    .MatchCase = True
+                    .MatchWholeWord = False
+                    .MatchWildcards = False
+                    ' .MatchSoundsLike = False
+                    .MatchAllWordForms = False
+                End With
+                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+
+                With Wrd.Selection.Find
+                    .Text = "#raboty"
+                    .Replacement.Text = sRAB
                     .Forward = True
                     .Wrap = Word.WdFindWrap.wdFindContinue
                     .Format = False

@@ -297,7 +297,7 @@ Partial Class frmserviceDesc
         Me.gbRem2.Size = New System.Drawing.Size(647, 266)
         Me.gbRem2.TabIndex = 2
         Me.gbRem2.TabStop = False
-        Me.gbRem2.Text = "События:"
+        Me.gbRem2.Text = "Выполненные работы:"
         '
         'lvRem2
         '
