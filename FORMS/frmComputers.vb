@@ -4775,8 +4775,8 @@ Error_:
     End Sub
 
     Private Sub lvMovementNET_ColumnClick(ByVal sender As Object, ByVal e As System.Windows.Forms.ColumnClickEventArgs) Handles lvMovementNET.ColumnClick
-        Dim new_sorting_column As ColumnHeader = _
- lvMovementNET.Columns(e.Column)
+
+        Dim new_sorting_column As ColumnHeader = lvMovementNET.Columns(e.Column)
 
         Dim sort_order As System.Windows.Forms.SortOrder
         If m_SortingColumn Is Nothing Then
@@ -4828,7 +4828,7 @@ Error_:
         Dim z As Integer
 
         For z = 0 To lvMovementNET.SelectedItems.Count - 1
-            dvCOUNT = (lvMovementPRN.SelectedItems(z).Text)
+            dvCOUNT = (lvMovementNET.SelectedItems(z).Text)
         Next
 
 
