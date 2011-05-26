@@ -6592,6 +6592,21 @@ err_:
                 End With
                 Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
 
+                uname = .Fields("NET_NAME").Value
+                With Wrd.Selection.Find
+                    .Text = "#NETNAME"
+                    .Replacement.Text = uname
+                    .Forward = True
+                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Format = False
+                    .MatchCase = True
+                    .MatchWholeWord = False
+                    .MatchWildcards = False
+                    ' .MatchSoundsLike = False
+                    .MatchAllWordForms = False
+                End With
+                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+
                 uname = .Fields("MESTO").Value
                 With Wrd.Selection.Find
                     .Text = "Department"

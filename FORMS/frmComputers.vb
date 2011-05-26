@@ -1273,6 +1273,31 @@ Error_:
 
     Private Sub N_P_LOAD_t()
         Call LOAD_NOTES(sCOUNT, Me.lvNotes)
+
+        Select Case TipTehn
+
+            Case "PC"
+
+                Call LOAD_NOTES(sCOUNT, Me.lvNotes)
+
+            Case "Printer"
+
+                Call LOAD_NOTES(sCOUNT, Me.lvNotesPRN)
+            Case "KOpir"
+                Call LOAD_NOTES(sCOUNT, Me.lvNotesPRN)
+            Case "MFU"
+                Call LOAD_NOTES(sCOUNT, Me.lvNotesPRN)
+            Case "NET"
+
+                Call LOAD_NOTES(sCOUNT, Me.lvNotesNET)
+            Case Else
+                Call LOAD_NOTES(sCOUNT, Me.lvNotesOTH)
+
+
+        End Select
+
+
+
     End Sub
 
     Private Sub R_P_LOAD()
@@ -1286,7 +1311,32 @@ Error_:
     End Sub
 
     Private Sub R_P_LOAD_t()
-        Call LOAD_REPAIR(sCOUNT, Me.lvRepair)
+
+
+        Select Case TipTehn
+
+            Case "PC"
+
+                Call LOAD_REPAIR(sCOUNT, Me.lvRepair)
+
+            Case "Printer"
+
+                Call LOAD_REPAIR(sCOUNT, Me.lvRepairPRN)
+            Case "KOpir"
+                Call LOAD_REPAIR(sCOUNT, Me.lvRepairPRN)
+            Case "MFU"
+                Call LOAD_REPAIR(sCOUNT, Me.lvRepairPRN)
+            Case "NET"
+
+                Call LOAD_REPAIR(sCOUNT, Me.lvRepairNET)
+            Case Else
+                Call LOAD_REPAIR(sCOUNT, Me.lvRepairOTH)
+
+
+        End Select
+
+
+
     End Sub
 
     Private Sub D_P_LOAD()
@@ -1300,7 +1350,31 @@ Error_:
     End Sub
 
     Private Sub D_P_LOAD_t()
-        Call LOAD_DVIG_TEHN(sCOUNT, Me.lvMovement)
+
+        Select Case TipTehn
+
+            Case "PC"
+
+                Call LOAD_DVIG_TEHN(sCOUNT, Me.lvMovement)
+
+            Case "Printer"
+                'lvMovementPRN
+                Call LOAD_DVIG_TEHN(sCOUNT, Me.lvMovementPRN)
+            Case "KOpir"
+                Call LOAD_DVIG_TEHN(sCOUNT, Me.lvMovementPRN)
+            Case "MFU"
+                Call LOAD_DVIG_TEHN(sCOUNT, Me.lvMovementPRN)
+            Case "NET"
+                'lvMovementNET
+                Call LOAD_DVIG_TEHN(sCOUNT, Me.lvMovementNET)
+            Case Else
+                Call LOAD_DVIG_TEHN(sCOUNT, Me.lvMovementOTH)
+                'lvMovementOTH
+
+
+
+        End Select
+
 
     End Sub
 
