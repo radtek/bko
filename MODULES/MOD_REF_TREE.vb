@@ -21,7 +21,7 @@ Module MOD_REF_TREE
 
 
 
-        Dim iA1, iA2, iA3, iA4, iA5, iA6 As String
+        Dim iA1, iA2, iA3, iA4, iA5, iA6, iA7 As String
 
         Dim sVISIBLE As String
  
@@ -41,11 +41,11 @@ Module MOD_REF_TREE
 
             Case 0
 
-                sSQL4 = "SELECT id, mesto, filial, tip_compa, tiptehn, PSEVDONIM, NET_NAME, kabn, Spisan, OS FROM kompy WHERE filial ='" & FILIAL1 & "' AND mesto ='" & OTDEL1 & "' AND kabn ='" & KABINET1 & "'  AND PCL =0 ORDER BY PSEVDONIM, tiptehn"
+                sSQL4 = "SELECT id, mesto, filial, tip_compa, tiptehn, PSEVDONIM, NET_NAME, kabn, Spisan, OS, PRINTER_NAME_4 FROM kompy WHERE filial ='" & FILIAL1 & "' AND mesto ='" & OTDEL1 & "' AND kabn ='" & KABINET1 & "'  AND PCL =0 ORDER BY PSEVDONIM, tiptehn"
 
             Case 1
 
-                sSQL4 = "SELECT id, mesto, filial, tip_compa, tiptehn, PSEVDONIM, NET_NAME, kabn, Spisan, OS FROM kompy WHERE filial ='" & FILIAL1 & "' AND mesto ='" & OTDEL1 & "' AND kabn ='" & KABINET1 & "' AND PCL =0 ORDER BY tiptehn, PSEVDONIM"
+                sSQL4 = "SELECT id, mesto, filial, tip_compa, tiptehn, PSEVDONIM, NET_NAME, kabn, Spisan, OS, PRINTER_NAME_4 FROM kompy WHERE filial ='" & FILIAL1 & "' AND mesto ='" & OTDEL1 & "' AND kabn ='" & KABINET1 & "' AND PCL =0 ORDER BY tiptehn, PSEVDONIM"
 
         End Select
 
@@ -65,9 +65,9 @@ Module MOD_REF_TREE
                 If Not IsDBNull(.Fields("Spisan").Value) Then iA4 = .Fields("Spisan").Value
                 If Not IsDBNull(.Fields("tiptehn").Value) Then iA5 = .Fields("tiptehn").Value
                 If Not IsDBNull(.Fields("OS").Value) Then iA6 = .Fields("OS").Value
+                If Not IsDBNull(.Fields("PRINTER_NAME_4").Value) Then iA7 = .Fields("PRINTER_NAME_4").Value
 
-
-                FILING_TREE(lstgroups1, iA5, iA1, iA2, iA3, .Fields("id").Value, iA4, BrancheNode1, iA6)
+                FILING_TREE(lstgroups1, iA5, iA1, iA2, iA3, .Fields("id").Value, iA4, BrancheNode1, iA6, iA7)
 
                 .MoveNext()
             Loop
@@ -597,7 +597,7 @@ ERR1:
 
     End Sub
 
-    Public Sub FILING_TREE(ByVal lstgroups As TreeView, ByVal iTipTehn As String, ByVal TipPC As String, ByVal NET_NAME As String, ByVal PSEVDONIM As String, ByVal iD As String, ByVal Spisan As String, ByVal DepNode As TreeNode, ByVal OS As String)
+    Public Sub FILING_TREE(ByVal lstgroups As TreeView, ByVal iTipTehn As String, ByVal TipPC As String, ByVal NET_NAME As String, ByVal PSEVDONIM As String, ByVal iD As String, ByVal Spisan As String, ByVal DepNode As TreeNode, ByVal OS As String, ByVal n_set As String)
 
         Dim iC As String
         Dim iA As String
@@ -786,11 +786,11 @@ ERR1:
 
                         Case 0
 
-                            sSQL4 = "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa FROM kompy WHERE PCL =" & iD & " ORDER BY PSEVDONIM, tiptehn"
+                            sSQL4 = "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa,PRINTER_NAME_4 FROM kompy WHERE PCL =" & iD & " ORDER BY PSEVDONIM, tiptehn"
 
                         Case 1
 
-                            sSQL4 = "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa FROM kompy WHERE PCL =" & iD & " ORDER BY tiptehn, PSEVDONIM"
+                            sSQL4 = "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa,PRINTER_NAME_4 FROM kompy WHERE PCL =" & iD & " ORDER BY tiptehn, PSEVDONIM"
 
                     End Select
 
@@ -845,6 +845,24 @@ ERR1:
                                     TEHNodePC.Tag = "C|" & .Fields("id").Value
                                     TEHNodePS.Nodes.Add(TEHNodePC)
                                     iD = .Fields("id").Value
+
+
+                                    Select Case n_set
+
+                                        Case "Off"
+                                            TEHNodePC.ForeColor = Color.Red
+
+                                        Case "Defective"
+
+                                            TEHNodePC.ForeColor = Color.Blue
+
+                                        Case Else
+
+                                            TEHNodePC.ForeColor = Color.Green
+
+                                    End Select
+
+
 
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                                         TEHNodePC.ForeColor = Color.Red
@@ -1603,11 +1621,11 @@ ERR1:
 
                         Case 0
 
-                            sSQL4 = "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa FROM kompy WHERE PCL =" & iD & " ORDER BY PSEVDONIM, tiptehn"
+                            sSQL4 = "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa,PRINTER_NAME_4 FROM kompy WHERE PCL =" & iD & " ORDER BY PSEVDONIM, tiptehn"
 
                         Case 1
 
-                            sSQL4 = "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa FROM kompy WHERE PCL =" & iD & " ORDER BY tiptehn, PSEVDONIM"
+                            sSQL4 = "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa,PRINTER_NAME_4 FROM kompy WHERE PCL =" & iD & " ORDER BY tiptehn, PSEVDONIM"
 
                     End Select
 
@@ -1979,9 +1997,27 @@ ERR1:
                 End If
 
             Case "NET"
+
                 Dim TEHNode As New TreeNode(L_NAME, 10, 10)
                 TEHNode.Tag = "C|" & iD
                 DepNode.Nodes.Add(TEHNode)
+
+                Select Case n_set
+
+                    Case "Off"
+                        TEHNode.ForeColor = Color.Red
+
+                    Case "Defective"
+
+                        TEHNode.ForeColor = Color.Blue
+
+                    Case Else
+
+                        TEHNode.ForeColor = Color.Green
+
+                End Select
+
+
 
                 If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                     TEHNode.ForeColor = Color.Red
