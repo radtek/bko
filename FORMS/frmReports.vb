@@ -4091,7 +4091,7 @@ Error_:
 
             Case Else
 
-                ExportListViewToExcel(LvKompOtd)
+                ExportListViewToExcel(LvKompOtd, sSTAB1.TabPages(0).Text)
 
         End Select
 
@@ -4114,7 +4114,7 @@ Err_:
 
             Case Else
 
-                ExportListViewToExcel(lvReport2Cl)
+                ExportListViewToExcel(lvReport2Cl, sSTAB1.TabPages(1).Text)
 
         End Select
 
@@ -4141,7 +4141,7 @@ Err_:
 
             Case Else
 
-                ExportListViewToExcel(lvRemont)
+                ExportListViewToExcel(lvRemont, sSTAB1.TabPages(2).Text)
 
         End Select
 
@@ -5265,7 +5265,7 @@ err:
 
             Case Else
 
-                ExportListViewToExcel(lvCashe)
+                ExportListViewToExcel(lvCashe, sSTAB1.TabPages(5).Text)
 
 
         End Select

@@ -320,7 +320,7 @@ SRCCH2:
 
             Case Else
 
-                ExportListViewToExcel(lstSearch)
+                ExportListViewToExcel(lstSearch, Me.Text & " " & txtSearch.Text)
 
         End Select
 

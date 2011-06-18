@@ -135,5 +135,3 @@ D:\Devel\BC2.NET\obj\Release\GenerateResource.write.1.tlog
 D:\Devel\BC2.NET\obj\Release\basekomp_net.exe
 D:\Devel\BC2.NET\obj\Release\basekomp_net.xml
 D:\Devel\BC2.NET\obj\Release\basekomp_net.pdb
-D:\Devel\BC2.NET\obj\Release\GenerateResource-ResGen.read.1.tlog
-D:\Devel\BC2.NET\obj\Release\GenerateResource-ResGen.write.1.tlog

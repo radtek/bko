@@ -281,7 +281,7 @@
 
             Case Else
 
-                ExportListViewToExcel(lvSclad)
+                ExportListViewToExcel(lvSclad, Me.Text)
 
 
         End Select
