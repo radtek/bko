@@ -451,9 +451,14 @@ error_Renamed:
         rs = Nothing
 
         rs = New ADODB.Recordset
+        rs.Open("DELETE FROM TBL_NET_MAG", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = Nothing
+
+        rs = New ADODB.Recordset
         rs.Open("DELETE FROM kompy", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
         rs = Nothing
 
+        
 
         Call frmComputers.STAT_INF()
         Call SHED_CHECK()
@@ -1989,5 +1994,11 @@ err_:
 
         'Call LOAD_PCL(frmComputers.cmbOTHFil.Text, frmComputers.cmbOTHDepart.Text, frmComputers.cmbOTHOffice.Text, frmComputers.cmbOTHPCL)
 
+    End Sub
+
+    Private Sub mnuNetMag_Click(sender As System.Object, e As System.EventArgs) Handles mnuNetMag.Click
+        frmNetMagazin.MdiParent = Me
+        frmNetMagazin.Show()
+        frmNetMagazin.Focus()
     End Sub
 End Class

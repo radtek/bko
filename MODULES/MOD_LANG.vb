@@ -6,6 +6,92 @@
 
 Module modLang
 
+    Public Sub frmNetMag_selectSVT_LANG()
+
+        frmNetMag_selectSVT.lvNetMagazin.Columns.Clear()
+
+        Dim LNGIniFile As New IniFile(sLANGPATH)
+
+        'lvNetMagazin
+        frmNetMag_selectSVT.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMag_selectSVT", "lvNetMagazin1", ""), 1, HorizontalAlignment.Left)
+        frmNetMag_selectSVT.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMag_selectSVT", "lvNetMagazin2", ""), 50, HorizontalAlignment.Left)
+        frmNetMag_selectSVT.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMag_selectSVT", "lvNetMagazin3", ""), 50, HorizontalAlignment.Left)
+        frmNetMag_selectSVT.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMag_selectSVT", "lvNetMagazin4", ""), 50, HorizontalAlignment.Left)
+        frmNetMag_selectSVT.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMag_selectSVT", "lvNetMagazin5", ""), 50, HorizontalAlignment.Left)
+        frmNetMag_selectSVT.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMag_selectSVT", "lvNetMagazin6", ""), 30, HorizontalAlignment.Left)
+        frmNetMag_selectSVT.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMag_selectSVT", "lvNetMagazin7", ""), 100, HorizontalAlignment.Left)
+        frmNetMag_selectSVT.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMag_selectSVT", "lvNetMagazin8", ""), 100, HorizontalAlignment.Left)
+
+
+        ResList(frmNetMag_selectSVT.lvNetMagazin)
+
+        frmNetMag_selectSVT.Text = LNGIniFile.GetString("frmNetMag_selectSVT", "frmNetMag_selectSVT ", "")
+        frmNetMag_selectSVT.Button1.Text = LNGIniFile.GetString("frmNetMag_selectSVT", "Button1", "")
+        frmNetMag_selectSVT.Button2.Text = LNGIniFile.GetString("frmNetMag_selectSVT", "Button2", "")
+
+
+    End Sub
+
+    Public Sub frmNetMag_Add_LANG()
+
+        Dim LNGIniFile As New IniFile(sLANGPATH)
+
+        frmNetMag_Add.Text = LNGIniFile.GetString("frmNetMag_Add", "frmNetMag_Add ", "")
+
+        frmNetMag_Add.Label1.Text = LNGIniFile.GetString("frmNetMag_Add", "Label1 ", "")
+        frmNetMag_Add.Label2.Text = LNGIniFile.GetString("frmNetMag_Add", "Label2 ", "")
+        frmNetMag_Add.Label3.Text = LNGIniFile.GetString("frmNetMag_Add", "Label3 ", "")
+        frmNetMag_Add.Label4.Text = LNGIniFile.GetString("frmNetMag_Add", "Label4 ", "")
+        frmNetMag_Add.Label5.Text = LNGIniFile.GetString("frmNetMag_Add", "Label5 ", "")
+        frmNetMag_Add.Label6.Text = LNGIniFile.GetString("frmNetMag_Add", "Label6 ", "")
+        frmNetMag_Add.Label7.Text = LNGIniFile.GetString("frmNetMag_Add", "Label7 ", "")
+        frmNetMag_Add.Label8.Text = LNGIniFile.GetString("frmNetMag_Add", "Label8 ", "")
+        frmNetMag_Add.Label9.Text = LNGIniFile.GetString("frmNetMag_Add", "Label9 ", "")
+        frmNetMag_Add.Label10.Text = LNGIniFile.GetString("frmNetMag_Add", "Label10 ", "")
+        frmNetMag_Add.Label11.Text = LNGIniFile.GetString("frmNetMag_Add", "Label11 ", "")
+        frmNetMag_Add.Label13.Text = LNGIniFile.GetString("frmNetMag_Add", "Label13 ", "")
+        frmNetMag_Add.Label14.Text = LNGIniFile.GetString("frmNetMag_Add", "Label14 ", "")
+
+        frmNetMag_Add.GroupBox1.Text = LNGIniFile.GetString("frmNetMag_Add", "GroupBox1", "")
+        frmNetMag_Add.GroupBox2.Text = LNGIniFile.GetString("frmNetMag_Add", "GroupBox2 ", "")
+
+        frmNetMag_Add.Button1.Text = LNGIniFile.GetString("frmNetMag_Add", "Button1 ", "")
+        frmNetMag_Add.Button2.Text = LNGIniFile.GetString("frmNetMag_Add", "Button2 ", "")
+
+
+
+    End Sub
+
+
+    Public Sub frmMagazin_LANG()
+
+        frmNetMagazin.lvNetMagazin.Columns.Clear()
+        Dim LNGIniFile As New IniFile(sLANGPATH)
+
+
+        'lvNetMagazin
+        frmNetMagazin.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMagazin", "lvNetMagazin1", ""), 1, HorizontalAlignment.Left)
+        frmNetMagazin.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMagazin", "lvNetMagazin2", ""), 50, HorizontalAlignment.Left)
+        frmNetMagazin.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMagazin", "lvNetMagazin3", ""), 50, HorizontalAlignment.Left)
+        frmNetMagazin.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMagazin", "lvNetMagazin4", ""), 50, HorizontalAlignment.Left)
+        frmNetMagazin.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMagazin", "lvNetMagazin5", ""), 50, HorizontalAlignment.Left)
+        frmNetMagazin.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMagazin", "lvNetMagazin6", ""), 30, HorizontalAlignment.Left)
+        frmNetMagazin.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMagazin", "lvNetMagazin7", ""), 100, HorizontalAlignment.Left)
+        frmNetMagazin.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMagazin", "lvNetMagazin8", ""), 100, HorizontalAlignment.Left)
+        frmNetMagazin.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMagazin", "lvNetMagazin9", ""), 100, HorizontalAlignment.Left)
+        frmNetMagazin.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMagazin", "lvNetMagazin10", ""), 100, HorizontalAlignment.Left)
+        frmNetMagazin.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMagazin", "lvNetMagazin11", ""), 100, HorizontalAlignment.Left)
+
+        ResList(frmNetMagazin.lvNetMagazin)
+
+        frmNetMagazin.gbTree.Text = LNGIniFile.GetString("frmNetMagazin", "gbTree", "")
+        frmNetMagazin.tsbExcell.Text = LNGIniFile.GetString("frmNetMagazin", "tsbExcell", "")
+        frmNetMagazin.Text = LNGIniFile.GetString("frmNetMagazin", "frmNetMagazin", "")
+
+
+    End Sub
+
+
     Public Sub frmCartr3_Lang()
         Dim objIniFile As New IniFile(sLANGPATH)
 
@@ -1328,6 +1414,10 @@ err_:
         frmMain.ToolStripButton1.Text = LNGIniFile.GetString("frmMain", "ToolStripButton1", "")
         frmMain.lblShed.Text = LNGIniFile.GetString("frmMain", "lblShed", "")
         frmMain.lblRem.Text = LNGIniFile.GetString("frmMain", "lblRem", "")
+
+        frmMain.mnuNetMag.Text = LNGIniFile.GetString("frmNetMagazin", "frmNetMagazin", "")
+
+        'mnuNetMag
 
         frmMain.USBУстройстваToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "39", "")
         frmMain.АккустическиеСистемыToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "40", "")

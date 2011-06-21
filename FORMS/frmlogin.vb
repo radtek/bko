@@ -175,9 +175,6 @@ err_:
         End If
 
 
-
-
-
         If DATAB = False Then
 
             Call LoadDatabase()
@@ -212,7 +209,7 @@ err_:
                 .Fields("SISADM").Value = "SISADM"
                 .Fields("Name_Prog").Value = "BKO.NET"
                 .Fields("Nr").Value = "Yes"
-                .Fields("access").Value = "1.7.1.1"
+                .Fields("access").Value = "1.7.2"
                 .Update()
             End With
             rs25.Close()
@@ -244,11 +241,11 @@ err_:
 
         tVER = My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor & "." & My.Application.Info.Version.Build
 
-        If sVER >= "1.7.1.1" Then
+        If sVER >= "1.7.2" Then
 
 
         Else
-            MsgBox(LNGIniFile.GetString("frmLogin", "MSG1", "") & vbCrLf & LNGIniFile.GetString("frmLogin", "MSG2", ""), MsgBoxStyle.Information, "БКО -" & tVER)
+            MsgBox(LNGIniFile.GetString("frmLogin", "MSG1", "") & vbCrLf & LNGIniFile.GetString("frmLogin", "MSG2", ""), MsgBoxStyle.Information, "BKO.NET - " & tVER)
 
             End
         End If

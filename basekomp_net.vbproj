@@ -226,6 +226,24 @@
     <Compile Include="FORMS\frmMain.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FORMS\frmNetMagazin.Designer.vb">
+      <DependentUpon>frmNetMagazin.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FORMS\frmNetMagazin.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FORMS\frmNetMag_Add.Designer.vb">
+      <DependentUpon>frmNetMag_Add.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FORMS\frmNetMag_Add.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FORMS\frmNetMag_selectSVT.Designer.vb">
+      <DependentUpon>frmNetMag_selectSVT.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FORMS\frmNetMag_selectSVT.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FORMS\frmReports.Designer.vb">
       <DependentUpon>frmReports.vb</DependentUpon>
     </Compile>
@@ -405,6 +423,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FORMS\frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FORMS\frmNetMagazin.resx">
+      <DependentUpon>frmNetMagazin.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FORMS\frmNetMag_Add.resx">
+      <DependentUpon>frmNetMag_Add.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FORMS\frmNetMag_selectSVT.resx">
+      <DependentUpon>frmNetMag_selectSVT.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FORMS\frmReports.resx">
       <DependentUpon>frmReports.vb</DependentUpon>
