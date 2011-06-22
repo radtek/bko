@@ -12,6 +12,27 @@ Public Class frmNetMagazin
         InitializeComponent()
     End Sub 'New
 
+    Private Sub frmNetMagazin_Resize(ByVal eventSender As System.Object, ByVal eventArgs As System.EventArgs) Handles MyBase.Resize
+
+        Call RESIZER()
+
+    End Sub
+
+    Private Sub SplitContainer1_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles SplitContainer1.Resize
+        Call RESIZER()
+    End Sub
+
+    Private Sub RESIZER()
+
+        If SplitContainer1.SplitterDistance > 450 Then SplitContainer1.SplitterDistance = 450
+        If SplitContainer1.SplitterDistance < 250 Then SplitContainer1.SplitterDistance = 250
+
+    End Sub
+
+    Private Sub SplitContainer1_SplitterMoved(ByVal sender As Object, ByVal e As System.Windows.Forms.SplitterEventArgs) Handles SplitContainer1.SplitterMoved
+        Call RESIZER()
+    End Sub
+
     Public Sub RefFilTreeNM()
         On Error GoTo ERR1
 
@@ -371,7 +392,7 @@ ERR1:
 
         Else
 
-            sSQL = "SELECT * FROM TBL_NET_MAG"
+            sSQL = "SELECT * FROM TBL_NET_MAG ORDER BY id, id_line asc, PREF,SID"
 
         End If
 
@@ -422,47 +443,113 @@ ERR1:
 
                 Dim sIDs As Integer = 0
 
-                sIDs = .Fields("SVT").Value
 
+                If Not IsDBNull(.Fields("SVT").Value) Then
 
-                If sIDs = 0 Or Len(sIDs) = 0 Then
+                    sIDs = .Fields("SVT").Value
 
-                    lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
+                    If sIDs = 0 Or Len(sIDs) = 0 Then
+
+                        lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
+                        lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
+
+                    Else
+
+                        rs1 = New ADODB.Recordset
+                        rs1.Open("SELECT * FROM kompy where id=" & sIDs, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        Dim LNGIniFile As New IniFile(sLANGPATH)
+
+                        With rs1
+
+                            If Not IsDBNull(.Fields("OTvetstvennyj").Value) Then
+                                lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("OTvetstvennyj").Value)
+                            Else
+                                lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
+                            End If
+
+                            If sBDO_Pref = "ROOT" Then
+
+                                If Not IsDBNull(.Fields("NET_NAME").Value) Then
+                                    lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("NET_NAME").Value) '& " " & LNGIniFile.GetString("frmNetMagazin", "MSG22", "") & " " & .Fields("filial").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+                                Else
+                                    lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
+                                End If
+
+                            Else
+                                If Not IsDBNull(.Fields("NET_NAME").Value) Then
+                                    lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("NET_NAME").Value)
+                                Else
+                                    lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
+                                End If
+                            End If
+
+                        End With
+                        rs1.Close()
+                        rs1 = Nothing
+                    End If
+
 
                 Else
-
-                    rs1 = New ADODB.Recordset
-                    rs1.Open("SELECT * FROM kompy where id=" & sIDs, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                    Dim LNGIniFile As New IniFile(sLANGPATH)
-
-                    With rs1
-
-                        If Not IsDBNull(.Fields("OTvetstvennyj").Value) Then
-                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("OTvetstvennyj").Value)
-                        Else
-                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
-                        End If
-
-                        If sBDO_Pref = "ROOT" Then
-
-                            If Not IsDBNull(.Fields("NET_NAME").Value) Then
-                                lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("NET_NAME").Value & " " & LNGIniFile.GetString("frmNetMagazin", "MSG22", "") & " " & .Fields("filial").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
-                            Else
-                                lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
-                            End If
-
-                        Else
-                            If Not IsDBNull(.Fields("NET_NAME").Value) Then
-                                lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("NET_NAME").Value)
-                            Else
-                                lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
-                            End If
-                        End If
-
-                    End With
-                    rs1.Close()
-                    rs1 = Nothing
+                    lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
+                    lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
                 End If
+
+
+                Dim A1, A2, A3, A4 As String
+
+                Select Case .Fields("PREF").Value
+
+                    Case "G"
+
+                        rs1 = New ADODB.Recordset
+                        rs1.Open("SELECT id, Filial as one_par FROM SPR_FILIAL where id=" & .Fields("sID").Value, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+                        With rs1
+
+                            A1 = .Fields("one_par").Value
+                            A2 = ""
+                            A3 = ""
+                        End With
+
+                        rs1.Close()
+                        rs1 = Nothing
+
+                    Case "O"
+
+                        rs1 = New ADODB.Recordset
+                        rs1.Open("SELECT id, Filial as one_par, N_Otd as two_par FROM SPR_OTD_FILIAL WHERE id=" & .Fields("sID").Value, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+                        With rs1
+
+                            A1 = .Fields("one_par").Value
+                            A2 = .Fields("two_par").Value
+                            A3 = ""
+                        End With
+
+                        rs1.Close()
+                        rs1 = Nothing
+                    Case "K"
+
+                        rs1 = New ADODB.Recordset
+                        rs1.Open("SELECT id, Name as tree_par, N_F as one_par, N_M as two_par FROM SPR_KAB where id=" & .Fields("sID").Value, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+                        With rs1
+
+                            A1 = .Fields("one_par").Value
+                            A2 = .Fields("two_par").Value
+                            A3 = .Fields("tree_par").Value
+                        End With
+
+                        rs1.Close()
+                        rs1 = Nothing
+
+                End Select
+
+                If Len(A1) <> 0 Then A4 = A1
+                If Len(A2) <> 0 Then A4 = A4 & "/" & A2
+                If Len(A3) <> 0 Then A4 = A4 & "/" & A3
+
+                lvNetMagazin.Items(CInt(intCount)).SubItems.Add(A4)
 
 
 
@@ -473,29 +560,34 @@ ERR1:
                 'End If
 
 
-                sIDs = .Fields("COMMUTATOR").Value
+                If Not IsDBNull(.Fields("COMMUTATOR").Value) Then
 
-                If sIDs = 0 Or Len(sIDs) = 0 Then
+                    sIDs = .Fields("COMMUTATOR").Value
 
-                    lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
+                    If sIDs = 0 Or Len(sIDs) = 0 Then
+
+                        lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
+
+                    Else
+
+                        rs1 = New ADODB.Recordset
+                        rs1.Open("SELECT * FROM kompy where id=" & sIDs, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        Dim LNGIniFile As New IniFile(sLANGPATH)
+
+                        With rs1
+
+                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG14", "") & ": " & .Fields("NET_NAME").Value & " , (" & LNGIniFile.GetString("frmNetMagazin", "MSG19", "") & " " & .Fields("OTvetstvennyj").Value & ")")
+
+
+                        End With
+                        rs1.Close()
+                        rs1 = Nothing
+
+                    End If
 
                 Else
-
-                    rs1 = New ADODB.Recordset
-                    rs1.Open("SELECT * FROM kompy where id=" & sIDs, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                    Dim LNGIniFile As New IniFile(sLANGPATH)
-
-                    With rs1
-
-                        lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG14", "") & ": " & .Fields("NET_NAME").Value & " , (" & LNGIniFile.GetString("frmNetMagazin", "MSG19", "") & " " & .Fields("OTvetstvennyj").Value & ")")
-
-
-                    End With
-                    rs1.Close()
-                    rs1 = Nothing
-
+                    lvNetMagazin.Items(CInt(intCount)).SubItems.Add("1")
                 End If
-
 
 
 
@@ -512,6 +604,8 @@ ERR1:
                 End If
 
 
+               
+
                 intCount = intCount + 1
                 .MoveNext()
             Loop
@@ -524,6 +618,9 @@ ERR1:
 
         rs.Close()
         rs = Nothing
+
+
+
 
         ResList(lvNetMagazin)
 
@@ -570,6 +667,8 @@ err_:
         sID = 0
 
         frmNetMag_Add.sEDT = False
+        frmNetMag_Add.sID = 0
+
         Me.sBDO_SVT_count = 0
 
         frmNetMag_Add.txtLineRoz.Text = ""
@@ -689,6 +788,12 @@ err_:
 
         frmNetMag_Add.sEDT = True
 
+        Me.sBDO_Pref = ""
+        Me.sBDO_count = 0
+        Me.sBDO_SVT_count = 0
+        Me.sBDO_NET_count = 0
+
+
         sSQL = "SELECT * FROM TBL_NET_MAG where id=" & frmNetMag_Add.sID
 
         Dim rs As ADODB.Recordset
@@ -709,6 +814,8 @@ err_:
 
             If z1 = 0 Or Len(z1) = 0 Then
 
+                frmNetMag_Add.txtSVT.Text = ""
+                frmNetMag_Add.txtKom.Text = ""
 
             Else
 
@@ -808,8 +915,11 @@ err_:
 
             z1 = .Fields("COMMUTATOR").Value
 
+            Me.sBDO_NET_count = z1
+
             If z1 = 0 Or Len(z1) = 0 Then
 
+                frmNetMag_Add.txtKom.Text = ""
 
             Else
 
@@ -832,8 +942,8 @@ err_:
 
 
 
-            '.Fields("PREF").Value = frmNetMagazin.sBDO_Pref
-            '.Fields("sID").Value = frmNetMagazin.sBDO_count
+            Me.sBDO_Pref = .Fields("PREF").Value
+            Me.sBDO_count = .Fields("sID").Value
 
         End With
         rs.Close()

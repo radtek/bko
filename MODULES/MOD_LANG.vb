@@ -12,8 +12,7 @@ Module modLang
 
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
-        'lvNetMagazin
-        frmNetMag_selectSVT.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMag_selectSVT", "lvNetMagazin1", ""), 1, HorizontalAlignment.Left)
+       frmNetMag_selectSVT.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMag_selectSVT", "lvNetMagazin1", ""), 1, HorizontalAlignment.Left)
         frmNetMag_selectSVT.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMag_selectSVT", "lvNetMagazin2", ""), 50, HorizontalAlignment.Left)
         frmNetMag_selectSVT.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMag_selectSVT", "lvNetMagazin3", ""), 50, HorizontalAlignment.Left)
         frmNetMag_selectSVT.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMag_selectSVT", "lvNetMagazin4", ""), 50, HorizontalAlignment.Left)
@@ -78,6 +77,9 @@ Module modLang
         frmNetMagazin.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMagazin", "lvNetMagazin6", ""), 30, HorizontalAlignment.Left)
         frmNetMagazin.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMagazin", "lvNetMagazin7", ""), 100, HorizontalAlignment.Left)
         frmNetMagazin.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMagazin", "lvNetMagazin8", ""), 100, HorizontalAlignment.Left)
+
+        frmNetMagazin.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMagazin", "lvNetMagazin12", ""), 100, HorizontalAlignment.Left)
+
         frmNetMagazin.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMagazin", "lvNetMagazin9", ""), 100, HorizontalAlignment.Left)
         frmNetMagazin.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMagazin", "lvNetMagazin10", ""), 100, HorizontalAlignment.Left)
         frmNetMagazin.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMagazin", "lvNetMagazin11", ""), 100, HorizontalAlignment.Left)

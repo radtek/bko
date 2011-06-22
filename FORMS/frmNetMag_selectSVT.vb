@@ -107,20 +107,20 @@
 
                     Case "G"
 
-                        sSQL = "SELECT * FROM kompy where PCL=0 AND filial='" & A1 & "' ORDER BY filial, mesto, kabn, net_name"
+                        sSQL = "SELECT * FROM kompy where tiptehn <> 'PC' AND PCL=0 AND filial='" & A1 & "' ORDER BY filial, mesto, kabn, net_name"
 
                     Case "O"
 
-                        sSQL = "SELECT * FROM kompy where PCL=0 AND filial='" & A1 & "' AND mesto='" & A2 & "' ORDER BY filial, mesto, kabn, net_name"
+                        sSQL = "SELECT * FROM kompy where tiptehn <> 'PC' AND PCL=0 AND filial='" & A1 & "' AND mesto='" & A2 & "' ORDER BY filial, mesto, kabn, net_name"
 
                     Case "K"
 
-                        sSQL = "SELECT * FROM kompy where PCL=0 AND filial='" & A1 & "' AND mesto='" & A2 & "' AND kabn='" & A3 & "' ORDER BY filial, mesto, kabn, net_name"
+                        sSQL = "SELECT * FROM kompy where tiptehn <> 'PC' AND PCL=0 AND filial='" & A1 & "' AND mesto='" & A2 & "' AND kabn='" & A3 & "' ORDER BY filial, mesto, kabn, net_name"
                         ' and tiptehn='PC' or tiptehn='Printer' or tiptehn='MFU' or tiptehn='FAX' or tiptehn='PHONE' or tiptehn='NET' or tiptehn='IBP'
 
                     Case "ROOT"
 
-                        sSQL = "SELECT * FROM kompy where PCL=0 ORDER BY filial, mesto, kabn, net_name"
+                        sSQL = "SELECT * FROM kompy where tiptehn <> 'PC' AND PCL=0 ORDER BY filial, mesto, kabn, net_name"
 
                 End Select
 
@@ -227,6 +227,16 @@
                         End If
 
                     Case "OT"
+
+                        lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("NET_NAME").Value & " " & .Fields("TIP_COMPA").Value)
+
+                        If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
+                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("INV_NO_PRINTER").Value)
+                        Else
+                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
+                        End If
+
+                    Case "CNT"
 
                         lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("NET_NAME").Value & " " & .Fields("TIP_COMPA").Value)
 
@@ -371,6 +381,100 @@
         End With
         rs.Close()
         rs = Nothing
+
+
+
+        If frmNetMagazin.sBDO_SVT_Pref = "PC" Then
+            '######################################################
+            Select Case frmNetMagazin.sBDO_SVT_Pref
+
+                Case "PC"
+
+                    Select Case frmNetMagazin.sBDO_Pref
+
+
+                        Case "G"
+
+                            sSQL = "SELECT * FROM kompy where tiptehn = 'PC' AND filial='" & A1 & "' ORDER BY filial, mesto, kabn, net_name"
+
+                        Case "O"
+
+                            sSQL = "SELECT * FROM kompy where tiptehn = 'PC' AND filial='" & A1 & "' AND mesto='" & A2 & "' ORDER BY filial, mesto, kabn, net_name"
+
+                        Case "K"
+
+                            sSQL = "SELECT * FROM kompy where tiptehn = 'PC' AND filial='" & A1 & "' AND mesto='" & A2 & "' AND kabn='" & A3 & "' ORDER BY filial, mesto, kabn, net_name"
+                            ' and tiptehn='PC' or tiptehn='Printer' or tiptehn='MFU' or tiptehn='FAX' or tiptehn='PHONE' or tiptehn='NET' or tiptehn='IBP'
+
+                        Case "ROOT"
+
+                            sSQL = "SELECT * FROM kompy where tiptehn = 'PC' ORDER BY filial, mesto, kabn, net_name"
+
+                    End Select
+
+
+            End Select
+            rs = New ADODB.Recordset
+            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+            lvNetMagazin.Sorting = False
+
+            With rs
+                .MoveFirst()
+                Do While Not .EOF
+
+                    lvNetMagazin.Items.Add(.Fields("id").Value) 'col no. 1
+
+
+                    lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG11", ""))
+
+                    If Not IsDBNull(.Fields("INV_NO_SYSTEM").Value) Then
+                        lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("INV_NO_SYSTEM").Value)
+                    Else
+                        lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
+                    End If
+
+                    If Not IsDBNull(.Fields("NET_NAME").Value) Then
+                        lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("NET_NAME").Value)
+                    Else
+                        lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
+                    End If
+
+                    If Not IsDBNull(.Fields("OTvetstvennyj").Value) Then
+                        lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("OTvetstvennyj").Value)
+                    Else
+                        lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
+                    End If
+
+                    If Not IsDBNull(.Fields("FILIAL").Value) Then
+                        lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("FILIAL").Value)
+                    Else
+                        lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
+                    End If
+
+                    If Not IsDBNull(.Fields("MESTO").Value) Then
+                        lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("MESTO").Value)
+                    Else
+                        lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
+                    End If
+
+                    If Not IsDBNull(.Fields("kabn").Value) Then
+                        lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("kabn").Value)
+                    Else
+                        lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
+                    End If
+
+
+                    intCount = intCount + 1
+                    .MoveNext()
+                Loop
+            End With
+            rs.Close()
+            rs = Nothing
+
+
+            '######################################################
+        End If
 
         ResList(lvNetMagazin)
 

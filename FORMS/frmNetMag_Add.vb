@@ -111,6 +111,9 @@
         rs = New ADODB.Recordset
         rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
+        Dim uname As String = frmNetMagazin.sBDO_SVT_count
+        Dim uname1 As String = frmNetMagazin.sBDO_NET_count
+
 
         With rs
 
@@ -162,14 +165,10 @@
 
 
 
-        frmNetMagazin.sBDO_NET_count = 0
-        frmNetMagazin.sBDO_SVT_count = 0
-
-
         Call frmNetMag_Add_LANG()
 
         If sEDT = False Then
-
+            frmNetMagazin.sBDO_NET_count = 0
             frmNetMagazin.sBDO_SVT_count = 0
 
             Me.txtLineRoz.Text = ""
@@ -184,6 +183,7 @@
             Me.txtKom.Text = ""
             Me.txtPortCom.Text = ""
             Me.txtComMemo.Text = ""
+
 
         End If
 
