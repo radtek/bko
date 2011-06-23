@@ -1700,17 +1700,16 @@ err_:
 
             frmMain.lblRem.Visible = True
 
-            Dim rs1 As ADODB.Recordset
-            rs1 = New ADODB.Recordset
-            rs1.Open("SELECT * FROM SPR_Master WHERE A='" & UserNames & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rs = New ADODB.Recordset
+            rs.Open("SELECT * FROM SPR_Master WHERE A='" & UserNames & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
 
-            With rs1
+            With rs
                 uname = .Fields("name").Value
             End With
 
-            rs1.Close()
-            rs1 = Nothing
+            rs.Close()
+            rs = Nothing
 
             If uname = Nothing Then uname = "ADMINISTRATOR"
 
@@ -1725,7 +1724,7 @@ err_:
             rs.Close()
             rs = Nothing
             'LNGIniFile.GetString("frmMain", "lblRem", "") & " " & 
-            frmMain.lblRem.Text = LNGIniFile.GetString("frmMain", "lblRem", "") & " " & "(" & "0" & "/" & SERT$ & ")"
+            frmMain.lblRem.Text = LNGIniFile.GetString("frmMain", "lblRem", "") & " " & "(" & "0" & "/" & SERT & ")"
 
             If SERT2 > 0 Then
 
@@ -1742,42 +1741,20 @@ err_:
 
                 If SERT3 > 0 Then
 
-                    sSQL = "SELECT * FROM Remont Where otvetstv='" & uname & "' and zakryt = 0"
+                    frmMain.lblRem.Text = LNGIniFile.GetString("frmMain", "lblRem", "") & " " & "(" & SERT3 & "/" & SERT & ")"
+                    frmMain.lblRem.ForeColor = Color.Red
 
-                    rs = New ADODB.Recordset
-                    rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                    Dim intj As Integer
-                    intj = 0
-
-                    With rs
-                        .MoveFirst()
-                        Do While Not .EOF
-
-                            If .Fields("otvetstv").Value = uname Then
-                                intj = intj + 1
-
-                                frmMain.lblRem.Text = LNGIniFile.GetString("frmMain", "lblRem", "") & " " & "(" & intj & "/" & SERT & ")"
-                                frmMain.lblRem.ForeColor = Color.Red
-                            End If
-
-                            .MoveNext()
-                            'DoEvents
-                        Loop
-                    End With
-
-                    rs.Close()
-                    rs = Nothing
 
                 Else
 
-                    frmMain.lblRem.Text = LNGIniFile.GetString("frmMain", "lblRem", "") & " " & "(" & "0" & "/" & SERT$ & ")"
+                    frmMain.lblRem.Text = LNGIniFile.GetString("frmMain", "lblRem", "") & " " & "(" & "0" & "/" & SERT & ")"
                     frmMain.lblRem.ForeColor = Color.Black
 
                 End If
 
             Else
 
-                frmMain.lblRem.Text = LNGIniFile.GetString("frmMain", "lblRem", "") & " " & "(" & "0" & "/" & SERT$ & ")"
+                frmMain.lblRem.Text = LNGIniFile.GetString("frmMain", "lblRem", "") & " " & "(" & "0" & "/" & SERT & ")"
 
             End If
 

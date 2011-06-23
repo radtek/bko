@@ -22,12 +22,12 @@ Partial Class frmSclad
     'Не изменяйте ее в редакторе исходного кода.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.lvSclad = New System.Windows.Forms.ListView
-        Me.btnAdd = New System.Windows.Forms.Button
-        Me.btnDel = New System.Windows.Forms.Button
-        Me.btnTREB = New System.Windows.Forms.Button
-        Me.btnOffice = New System.Windows.Forms.Button
-        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel
+        Me.lvSclad = New System.Windows.Forms.ListView()
+        Me.btnAdd = New System.Windows.Forms.Button()
+        Me.btnDel = New System.Windows.Forms.Button()
+        Me.btnTREB = New System.Windows.Forms.Button()
+        Me.btnOffice = New System.Windows.Forms.Button()
+        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -109,7 +109,7 @@ Partial Class frmSclad
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(992, 646)
         Me.Controls.Add(Me.TableLayoutPanel1)
-        Me.MinimumSize = New System.Drawing.Size(1000, 680)
+        Me.MinimumSize = New System.Drawing.Size(900, 600)
         Me.Name = "frmSclad"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Склад"

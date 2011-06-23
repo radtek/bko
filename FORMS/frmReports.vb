@@ -5602,4 +5602,110 @@ Err_:
     'err_:
     '    'MsgBox(Err.Description, MsgBoxStyle.Information, ProGramName)
     '    End Sub
+
+    Private Sub lvRemont_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvRemont.DoubleClick
+
+        LoadRepairEdit(lvRemont)
+
+    End Sub
+
+    Private Sub LoadRepairEdit(ByVal lvList As ListView)
+
+        If lvList.Items.Count = 0 Then Exit Sub
+
+        If uLevelRepEd = False And uLevel <> "Admin" Then Exit Sub
+
+        Dim z As Integer
+        Dim rCOUNT As Integer
+
+        For z = 0 To lvList.SelectedItems.Count - 1
+            rCOUNT = (lvList.SelectedItems(z).Text)
+        Next
+
+
+        'frmserviceDesc.MdiParent = frmMain
+        'frmserviceDesc.Show()
+        'Call frmserviceDesc.Load_Z_Form(rCOUNT)
+
+        '#################################################################
+
+        frmserviceDesc.rCOUNT = rCOUNT
+        Dim sSQL As String
+        Dim rs1 As ADODB.Recordset
+        rs1 = New ADODB.Recordset
+
+        sSQL = "SELECT * FROM Remont WHERE id=" & rCOUNT
+
+        Dim LNGIniFile As New IniFile(sLANGPATH)
+
+        frmService_add.Text = LNGIniFile.GetString("frmserviceDesc", "MSG1", "") '& " " & lvList.SelectedItems(z).SubItems(5).Text
+
+        rs1.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        Dim sSw As Date
+        Dim sSw2 As String
+
+        With rs1
+            .MoveFirst()
+            Do While Not .EOF
+
+                If Not IsDBNull(.Fields("istochnik").Value) Then frmService_add.cmbIst.Text = .Fields("istochnik").Value 'Источник
+                If Not IsDBNull(.Fields("Master").Value) Then frmService_add.cmbMast.Text = .Fields("Master").Value 'Мастер
+
+
+                If Not IsDBNull(.Fields("Date").Value) Then sSw = .Fields("Date").Value
+                If Not IsDBNull(.Fields("srok").Value) Then sSw2 = .Fields("srok").Value
+
+                If Len(sSw) = 0 Then
+                    sSw = Date.Today
+                End If
+
+                If Len(sSw2) = 0 Then
+                    sSw2 = Date.Today
+                End If
+
+                frmService_add.dtReg.Value = sSw 'Дата регистрации
+                frmService_add.dtIsp.Value = sSw2 'Срок исполнения
+
+
+                If Not IsDBNull(.Fields("phone").Value) Then frmService_add.txtPhone.Text = .Fields("phone").Value 'Телефон
+                If Not IsDBNull(.Fields("name_of_remont").Value) Then frmService_add.txtHead.Text = .Fields("name_of_remont").Value 'Название
+                If Not IsDBNull(.Fields("Remont").Value) Then frmService_add.txtRem.Text = .Fields("Remont").Value 'Сообщение
+                If Not IsDBNull(.Fields("vip").Value) Then frmService_add.cmbStatus.Text = .Fields("vip").Value 'Статус
+                If Not IsDBNull(.Fields("otvetstv").Value) Then frmService_add.cmbOtv.Text = .Fields("otvetstv").Value 'Ответственный
+
+                If Not IsDBNull(.Fields("krit_rem").Value) Then frmService_add.cmbTip.Text = .Fields("krit_rem").Value 'Критичность
+                If Not IsDBNull(.Fields("Uroven").Value) Then frmService_add.cmbKrit.Text = .Fields("Uroven").Value 'Тип
+
+
+                If Not IsDBNull(.Fields("MeMo").Value) Then frmService_add.txtComent.Text = .Fields("MeMo").Value 'Комментарий
+
+                If Not IsDBNull(.Fields("Summ").Value) Then frmService_add.RemCashe.Text = .Fields("Summ").Value 'Комментарий
+
+                '.Fields("Summ").Value = RemCashe.Text 'Сумма
+
+                If .Fields("zakryt").Value = -1 Then
+                    frmService_add.chkClose.Checked = 1
+                Else
+
+                    frmService_add.chkClose.Checked = 0
+                End If
+
+                .MoveNext()
+            Loop
+        End With
+
+        frmService_add.REMED = True
+
+        frmService_add.cmbAdd.Text = LNGIniFile.GetString("frmserviceDesc", "MSG2", "")
+
+        rs1.Close()
+        rs1 = Nothing
+
+        frmService_add.ShowDialog(Me)
+
+
+
+    End Sub
+
+
 End Class

@@ -82,6 +82,8 @@
         frmComputers.lblsID.Text = ""
         'TableLayoutPanel47
 
+
+
         For Each C In frmComputers.TableLayoutPanel47.Controls
             If TypeOf C Is TextBox Then C.Text = ""
             If TypeOf C Is ComboBox Then C.Text = ""

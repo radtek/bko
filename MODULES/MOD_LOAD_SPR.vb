@@ -269,7 +269,7 @@ Module Mod_Load_SPR
         Dim rs As ADODB.Recordset
 
         rs = New ADODB.Recordset
-        rs.Open("SELECT count(*) as t_n FROM " & pTable, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockReadOnly)
+        rs.Open("SELECT count(*) as t_n FROM " & pTable & " WHERE " & pField & "<>''", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockReadOnly)
         Dim COUnT As String
         With rs
 
@@ -289,7 +289,8 @@ Module Mod_Load_SPR
                 .MoveFirst()
                 Do While Not .EOF
 
-                    pCombo.Items.Add(.Fields(pField).Value)
+                    If Not IsDBNull(.Fields(pField).Value) Then pCombo.Items.Add(.Fields(pField).Value)
+
 
                     .MoveNext()
                 Loop

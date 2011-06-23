@@ -457,6 +457,13 @@ err_:
         Me.Focus()
         txtPassword.Focus()
 
+
+        ''Меняем шрифт
+        'SendFonts(Me)
+        'SendFonts(gbsql)
+        'SendFonts(gbData)
+
+
     End Sub
 
     Private Sub sSUBD()

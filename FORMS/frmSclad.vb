@@ -17,9 +17,16 @@
 
     Private Sub frmSclad_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
+
+        SendFonts(TableLayoutPanel1)
+
+
+
         Call frmSclad_Lang()
 
         Call Load_SCLAD3()
+
+
 
     End Sub
 

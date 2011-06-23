@@ -173,5 +173,84 @@
             chkClose.Enabled = False
         End If
 
+
+        If chkClose.Checked = True And REMED = True Then
+
+            cmbIst.Enabled = False
+            cmbMast.Enabled = False
+            dtReg.Enabled = False
+            txtPhone.Enabled = False
+            dtIsp.Enabled = False
+            txtHead.Enabled = False
+            txtRem.Enabled = False
+            cmbStatus.Enabled = False
+            cmbOtv.Enabled = False
+            cmbKrit.Enabled = False
+            cmbTip.Enabled = False
+            RemCashe.Enabled = False
+            txtComent.Enabled = False
+            'cmbAdd.Enabled = False
+
+        Else
+
+            cmbIst.Enabled = True
+            cmbMast.Enabled = True
+            dtReg.Enabled = True
+            txtPhone.Enabled = True
+            dtIsp.Enabled = True
+            txtHead.Enabled = True
+            txtRem.Enabled = True
+            cmbStatus.Enabled = True
+            cmbOtv.Enabled = True
+            cmbKrit.Enabled = True
+            cmbTip.Enabled = True
+            RemCashe.Enabled = True
+            txtComent.Enabled = True
+            'cmbAdd.Enabled = True
+
+        End If
+
+
+
+    End Sub
+
+    Private Sub chkClose_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkClose.CheckedChanged
+
+        If chkClose.Checked = True And REMED = True Then
+
+            cmbIst.Enabled = False
+            cmbMast.Enabled = False
+            dtReg.Enabled = False
+            txtPhone.Enabled = False
+            dtIsp.Enabled = False
+            txtHead.Enabled = False
+            txtRem.Enabled = False
+            cmbStatus.Enabled = False
+            cmbOtv.Enabled = False
+            cmbKrit.Enabled = False
+            cmbTip.Enabled = False
+            RemCashe.Enabled = False
+            txtComent.Enabled = False
+            'cmbAdd.Enabled = False
+
+        Else
+
+            cmbIst.Enabled = True
+            cmbMast.Enabled = True
+            dtReg.Enabled = True
+            txtPhone.Enabled = True
+            dtIsp.Enabled = True
+            txtHead.Enabled = True
+            txtRem.Enabled = True
+            cmbStatus.Enabled = True
+            cmbOtv.Enabled = True
+            cmbKrit.Enabled = True
+            cmbTip.Enabled = True
+            RemCashe.Enabled = True
+            txtComent.Enabled = True
+            'cmbAdd.Enabled = True
+
+        End If
+
     End Sub
 End Class

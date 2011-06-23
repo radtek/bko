@@ -1436,17 +1436,19 @@ err_1:
 
         Dim LNGIniFile As New IniFile(sLANGPATH)
         Dim rs1 As ADODB.Recordset
-        rs1 = New ADODB.Recordset
-
-        rs1.Open("Delete FROM Remont WHERE id=" & r1COUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-
-        rs1 = Nothing
 
         rs1 = New ADODB.Recordset
 
         rs1.Open("Delete FROM remonty_plus WHERE id_rem=" & r1COUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
         rs1 = Nothing
+
+        rs1 = New ADODB.Recordset
+
+        rs1.Open("Delete FROM Remont WHERE id=" & r1COUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+        rs1 = Nothing
+
 
         Call SaveActivityToLogDB(LNGIniFile.GetString("frmserviceDesc", "MSG7", "") & " " & lstGroups.SelectedNode.Text & " " & LNGIniFile.GetString("frmserviceDesc", "MSG8", "") & unamZ)
 

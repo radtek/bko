@@ -6,13 +6,15 @@
 
 Module modLang
 
+
     Public Sub frmNetMag_selectSVT_LANG()
 
         frmNetMag_selectSVT.lvNetMagazin.Columns.Clear()
 
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
-       frmNetMag_selectSVT.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMag_selectSVT", "lvNetMagazin1", ""), 1, HorizontalAlignment.Left)
+        'lvNetMagazin
+        frmNetMag_selectSVT.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMag_selectSVT", "lvNetMagazin1", ""), 1, HorizontalAlignment.Left)
         frmNetMag_selectSVT.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMag_selectSVT", "lvNetMagazin2", ""), 50, HorizontalAlignment.Left)
         frmNetMag_selectSVT.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMag_selectSVT", "lvNetMagazin3", ""), 50, HorizontalAlignment.Left)
         frmNetMag_selectSVT.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMag_selectSVT", "lvNetMagazin4", ""), 50, HorizontalAlignment.Left)
@@ -1416,10 +1418,6 @@ err_:
         frmMain.ToolStripButton1.Text = LNGIniFile.GetString("frmMain", "ToolStripButton1", "")
         frmMain.lblShed.Text = LNGIniFile.GetString("frmMain", "lblShed", "")
         frmMain.lblRem.Text = LNGIniFile.GetString("frmMain", "lblRem", "")
-
-        frmMain.mnuNetMag.Text = LNGIniFile.GetString("frmNetMagazin", "frmNetMagazin", "")
-
-        'mnuNetMag
 
         frmMain.USBУстройстваToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "39", "")
         frmMain.АккустическиеСистемыToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "40", "")

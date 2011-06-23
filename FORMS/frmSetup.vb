@@ -6,6 +6,24 @@ Public Class frmSetup
     Private uCOUNTs As String
     Private uEDT As Boolean
 
+    Public Function changeFont(ByVal FontWindow As FontDialog, ByVal str As Control)
+        ' Dim wndFont As FontDialog
+        Dim DialogResult As DialogResult
+        Dim PrevisiusFont As Font = str.Font
+        DialogResult = FontWindow.ShowDialog
+        'New System.Windows.Forms.FontDialog
+        If DialogResult = System.Windows.Forms.DialogResult.OK Then
+            Return FontWindow.Font
+
+        Else
+            Return PrevisiusFont
+
+        End If
+        'textbox1.font=changefont(wndfont)
+
+    End Function
+
+
     Private Sub USER_LIST()
         lvPrUsers.Items.Clear()
         Dim intCount As Decimal = 0
@@ -279,7 +297,7 @@ Public Class frmSetup
 
             Case "0"
 
-                chkVSUst.Checked = false
+                chkVSUst.Checked = False
 
         End Select
 
@@ -554,7 +572,11 @@ Public Class frmSetup
             rs = Nothing
 
         End If
-        
+
+
+        'Label9.Font = New Font(objIniFile.GetString("general", "Font", "Tahoma"), objIniFile.GetString("general", "FontSize", "10"))
+
+         Call FONT_LOAD
 
 
         'lvFindDB
@@ -630,7 +652,7 @@ Public Class frmSetup
     End Sub
 
     Private Sub lvPrUsers_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvPrUsers.DoubleClick
-      
+
         Call USER_CLICK_LOAD()
 
     End Sub
@@ -839,7 +861,7 @@ Public Class frmSetup
 
 
         Dim Us1 As String
-        
+
         If uEDT = True Then
 
             Dim USERCOMP As ADODB.Recordset
@@ -1004,33 +1026,131 @@ err_:
     End Sub
 
     Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
+
+
         Dim dlgFont As System.Windows.Forms.FontDialog
         dlgFont = New System.Windows.Forms.FontDialog
 
+
+
+        Label9.Font = changeFont(dlgFont, Label9)
+
+        FontN = Label9.Font.Name
+        fontS = Label9.Font.Size
+        FontB = Label9.Font.Bold
+
+        If fontS > 12 Then fontS = 12
+
+
+
+
         'dlgFont.Font = set your font here
 
-        If dlgFont.ShowDialog() = DialogResult.OK Then
-            Label9.Font = (dlgFont.Font)
-            Label9.ForeColor = (dlgFont.Color)
+        'If dlgFont.ShowDialog() = DialogResult.OK Then
+        '    Label9.Font = (dlgFont.Font)
+        '    Label9.ForeColor = (dlgFont.Color)
 
 
 
-            FontN = dlgFont.Font.Name
-            fontS = dlgFont.Font.Size
-            FontB = dlgFont.Font.Bold
+        '    FontN = dlgFont.Font.Name
+        '    fontS = dlgFont.Font.Size
+        '    FontB = dlgFont.Font.Bold
+        '    FontC = Label9.ForeColor
+
+        Dim objIniFile As New IniFile(PrPath & "base.ini")
+
+        objIniFile.WriteString("general", "Font", Label9.Font.Name)
+        objIniFile.WriteString("general", "FontSize", Label9.Font.Size)
+        objIniFile.WriteString("general", "FontBold", Label9.Font.Bold)
+
+        Call FONT_LOAD()
+        'End If
 
 
-            Dim objIniFile As New IniFile(PrPath & "base.ini")
-
-            objIniFile.WriteString("general", "Font", FontN)
-            objIniFile.WriteString("general", "FontSize", fontS)
-            objIniFile.WriteString("general", "FontBold", FontB)
-
-
-
-        End If
+        frmMain.MenuStrip.Font = New Font(FontN, fontS)
+        frmMain.ToolStrip.Font = New Font(FontN, fontS)
+        frmMain.StatusStrip.Font = New Font(FontN, fontS)
 
     End Sub
+
+    Private Sub FONT_LOAD()
+
+        SendFonts(TableLayoutPanel1)
+        SendFonts(SStab1)
+        SendFonts(SStab1.TabPages(0))
+        SendFonts(SStab1.TabPages(1))
+        SendFonts(SStab1.TabPages(2))
+        SendFonts(SStab1.TabPages(3))
+        SStab1.Font = New Font(FontN, fontS)
+
+
+        'Dim C As Control
+        'For Each C In Me.TableLayoutPanel1.Controls
+        '    If TypeOf C Is TextBox Then C.Font = New Font(FontN, fontS)
+        '    If TypeOf C Is ComboBox Then C.Font = New Font(FontN, fontS)
+        '    If TypeOf C Is Label Then C.Font = New Font(FontN, fontS)
+        '    If TypeOf C Is GroupBox Then C.Font = New Font(FontN, fontS)
+        '    If TypeOf C Is ListView Then C.Font = New Font(FontN, fontS)
+        '    If TypeOf C Is NumericUpDown Then C.Font = New Font(FontN, fontS)
+        '    If TypeOf C Is CheckBox Then C.Font = New Font(FontN, fontS)
+        '    If TypeOf C Is Button Then C.Font = New Font(FontN, fontS)
+        '    If TypeOf C Is TreeView Then C.Font = New Font(FontN, fontS)
+        'Next C
+
+
+
+
+        'For Each C In SStab1.TabPages(0).Controls
+        '    If TypeOf C Is TextBox Then C.Font = New Font(FontN, fontS)
+        '    If TypeOf C Is ComboBox Then C.Font = New Font(FontN, fontS)
+        '    If TypeOf C Is Label Then C.Font = New Font(FontN, fontS)
+        '    If TypeOf C Is GroupBox Then C.Font = New Font(FontN, fontS)
+        '    If TypeOf C Is ListView Then C.Font = New Font(FontN, fontS)
+        '    If TypeOf C Is NumericUpDown Then C.Font = New Font(FontN, fontS)
+        '    If TypeOf C Is CheckBox Then C.Font = New Font(FontN, fontS)
+        '    If TypeOf C Is Button Then C.Font = New Font(FontN, fontS)
+        '    If TypeOf C Is TreeView Then C.Font = New Font(FontN, fontS)
+        'Next C
+
+        'For Each C In SStab1.TabPages(1).Controls
+        '    If TypeOf C Is TextBox Then C.Font = New Font(FontN, fontS)
+        '    If TypeOf C Is ComboBox Then C.Font = New Font(FontN, fontS)
+        '    If TypeOf C Is Label Then C.Font = New Font(FontN, fontS)
+        '    If TypeOf C Is GroupBox Then C.Font = New Font(FontN, fontS)
+        '    If TypeOf C Is ListView Then C.Font = New Font(FontN, fontS)
+        '    If TypeOf C Is NumericUpDown Then C.Font = New Font(FontN, fontS)
+        '    If TypeOf C Is CheckBox Then C.Font = New Font(FontN, fontS)
+        '    If TypeOf C Is Button Then C.Font = New Font(FontN, fontS)
+        '    If TypeOf C Is TreeView Then C.Font = New Font(FontN, fontS)
+        'Next C
+
+        'For Each C In SStab1.TabPages(2).Controls
+        '    If TypeOf C Is TextBox Then C.Font = New Font(FontN, fontS)
+        '    If TypeOf C Is ComboBox Then C.Font = New Font(FontN, fontS)
+        '    If TypeOf C Is Label Then C.Font = New Font(FontN, fontS)
+        '    If TypeOf C Is GroupBox Then C.Font = New Font(FontN, fontS)
+        '    If TypeOf C Is ListView Then C.Font = New Font(FontN, fontS)
+        '    If TypeOf C Is NumericUpDown Then C.Font = New Font(FontN, fontS)
+        '    If TypeOf C Is CheckBox Then C.Font = New Font(FontN, fontS)
+        '    If TypeOf C Is Button Then C.Font = New Font(FontN, fontS)
+        '    If TypeOf C Is TreeView Then C.Font = New Font(FontN, fontS)
+        'Next C
+
+        'For Each C In SStab1.TabPages(3).Controls
+        '    If TypeOf C Is TextBox Then C.Font = New Font(FontN, fontS)
+        '    If TypeOf C Is ComboBox Then C.Font = New Font(FontN, fontS)
+        '    If TypeOf C Is Label Then C.Font = New Font(FontN, fontS)
+        '    If TypeOf C Is GroupBox Then C.Font = New Font(FontN, fontS)
+        '    If TypeOf C Is ListView Then C.Font = New Font(FontN, fontS)
+        '    If TypeOf C Is NumericUpDown Then C.Font = New Font(FontN, fontS)
+        '    If TypeOf C Is CheckBox Then C.Font = New Font(FontN, fontS)
+        '    If TypeOf C Is Button Then C.Font = New Font(FontN, fontS)
+        '    If TypeOf C Is TreeView Then C.Font = New Font(FontN, fontS)
+        'Next C
+
+        'C = Nothing
+    End Sub
+
 
     Private Sub RadioButton6_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton6.CheckedChanged
 

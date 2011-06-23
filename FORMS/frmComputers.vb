@@ -21,6 +21,7 @@ Public Class frmComputers
     Public portEDT As Boolean
     Public MASSLOAD As Boolean
     Public pDRAG As Boolean
+    Private lvServices As ListView
 
     Public Sub New()
         InitializeComponent()
@@ -52,9 +53,11 @@ Public Class frmComputers
         frmMain.ToolStripDropDownButton1.Enabled = False
     End Sub
 
-    
-
     Private Sub frmComputers_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+
+        'Меняем шрифт на форме
+        'Me.Invoke(New MethodInvoker(AddressOf Font_Form_For_Computer))
+
         Me.WindowState = FormWindowState.Maximized
         Me.Cursor = Cursors.WaitCursor
 
@@ -73,14 +76,6 @@ Public Class frmComputers
             treebranche.Text = uname
 
         End If
-
-
-
-
-
-
-
-
 
 
         Try
@@ -1968,10 +1963,87 @@ err_:
         Next
 
 
-        frmserviceDesc.MdiParent = frmMain
-        frmserviceDesc.Show()
+        'frmserviceDesc.MdiParent = frmMain
+        'frmserviceDesc.Show()
+        'Call frmserviceDesc.Load_Z_Form(rCOUNT)
 
-        Call frmserviceDesc.Load_Z_Form(rCOUNT)
+        '#################################################################
+
+        frmserviceDesc.rCOUNT = rCOUNT
+        Dim sSQL As String
+        Dim rs1 As ADODB.Recordset
+        rs1 = New ADODB.Recordset
+
+        sSQL = "SELECT * FROM Remont WHERE id=" & rCOUNT
+
+        Dim LNGIniFile As New IniFile(sLANGPATH)
+
+        frmService_add.Text = LNGIniFile.GetString("frmserviceDesc", "MSG1", "") & " " & lstGroups.SelectedNode.Text
+
+        rs1.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        Dim sSw As Date
+        Dim sSw2 As String
+
+        With rs1
+            .MoveFirst()
+            Do While Not .EOF
+
+                If Not IsDBNull(.Fields("istochnik").Value) Then frmService_add.cmbIst.Text = .Fields("istochnik").Value 'Источник
+                If Not IsDBNull(.Fields("Master").Value) Then frmService_add.cmbMast.Text = .Fields("Master").Value 'Мастер
+
+
+                If Not IsDBNull(.Fields("Date").Value) Then sSw = .Fields("Date").Value
+                If Not IsDBNull(.Fields("srok").Value) Then sSw2 = .Fields("srok").Value
+
+                If Len(sSw) = 0 Then
+                    sSw = Date.Today
+                End If
+
+                If Len(sSw2) = 0 Then
+                    sSw2 = Date.Today
+                End If
+
+                frmService_add.dtReg.Value = sSw 'Дата регистрации
+                frmService_add.dtIsp.Value = sSw2 'Срок исполнения
+
+
+                If Not IsDBNull(.Fields("phone").Value) Then frmService_add.txtPhone.Text = .Fields("phone").Value 'Телефон
+                If Not IsDBNull(.Fields("name_of_remont").Value) Then frmService_add.txtHead.Text = .Fields("name_of_remont").Value 'Название
+                If Not IsDBNull(.Fields("Remont").Value) Then frmService_add.txtRem.Text = .Fields("Remont").Value 'Сообщение
+                If Not IsDBNull(.Fields("vip").Value) Then frmService_add.cmbStatus.Text = .Fields("vip").Value 'Статус
+                If Not IsDBNull(.Fields("otvetstv").Value) Then frmService_add.cmbOtv.Text = .Fields("otvetstv").Value 'Ответственный
+
+                If Not IsDBNull(.Fields("krit_rem").Value) Then frmService_add.cmbTip.Text = .Fields("krit_rem").Value 'Критичность
+                If Not IsDBNull(.Fields("Uroven").Value) Then frmService_add.cmbKrit.Text = .Fields("Uroven").Value 'Тип
+
+
+                If Not IsDBNull(.Fields("MeMo").Value) Then frmService_add.txtComent.Text = .Fields("MeMo").Value 'Комментарий
+
+                If Not IsDBNull(.Fields("Summ").Value) Then frmService_add.RemCashe.Text = .Fields("Summ").Value 'Комментарий
+
+                '.Fields("Summ").Value = RemCashe.Text 'Сумма
+
+                If .Fields("zakryt").Value = -1 Then
+                    frmService_add.chkClose.Checked = 1
+                Else
+
+                    frmService_add.chkClose.Checked = 0
+                End If
+
+                .MoveNext()
+            Loop
+        End With
+
+        frmService_add.REMED = True
+
+        frmService_add.cmbAdd.Text = LNGIniFile.GetString("frmserviceDesc", "MSG2", "")
+
+        rs1.Close()
+        rs1 = Nothing
+
+        frmService_add.ShowDialog(Me)
+
+
 
     End Sub
 
@@ -5303,16 +5375,327 @@ err_:
         rs = Nothing
     End Sub
 
-    Private Sub lvNotesOTH_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvNotesOTH.SelectedIndexChanged
-       
+    Private Sub DeleteService_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DeleteService.Click
+
+
+
+        Dim langfile As New IniFile(sLANGPATH)
+
+
+        If MsgBox(langfile.GetString("frmserviceDesc", "MSG9 ", ""), MsgBoxStyle.YesNo, ProGramName) = MsgBoxResult.Yes Then
+
+            DELETE_SERVICE(lvServices)
+
+        Else
+
+        End If
+
+
+
     End Sub
 
-    Private Sub lvRepairOTH_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvRepairOTH.SelectedIndexChanged
+    Private Sub DELETE_SERVICE(ByVal lvList As ListView)
+        If lvList.Items.Count = 0 Then Exit Sub
+
+        Dim z As Integer
+        Dim rCOUNT As Integer
+
+        For z = 0 To lvList.SelectedItems.Count - 1
+            rCOUNT = (lvList.SelectedItems(z).Text)
+        Next
+
+        Dim unamZ As String
+
+        If Me.sPREF = "C" Then
+
+            Dim rs2 As ADODB.Recordset
+            rs2 = New ADODB.Recordset
+            rs2.Open("SELECT * FROM kompy WHERE id=" & Me.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+            With rs2
+                unamZ = .Fields("filial").Value & "/" & .Fields("mesto").Value
+            End With
+            rs2.Close()
+            rs2 = Nothing
+
+        End If
+
+        Dim LNGIniFile As New IniFile(sLANGPATH)
+        Dim rs1 As ADODB.Recordset
+
+        rs1 = New ADODB.Recordset
+
+        rs1.Open("Delete FROM remonty_plus WHERE id_rem=" & rCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+        rs1 = Nothing
+
+        rs1 = New ADODB.Recordset
+
+        rs1.Open("Delete FROM Remont WHERE id=" & rCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+        rs1 = Nothing
+
+        Call SaveActivityToLogDB(LNGIniFile.GetString("frmserviceDesc", "MSG7", "") & " " & lstGroups.SelectedNode.Text & " " & LNGIniFile.GetString("frmserviceDesc", "MSG8", "") & unamZ)
+
+        Call LOAD_REPAIR(Me.sCOUNT, lvServices)
+        Call REM_CHECK()
 
     End Sub
 
-    Private Sub lvNetPort_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvNetPort.SelectedIndexChanged
+    Private Sub lvRepairNET_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lvRepairNET.MouseUp
+
+        If lvRepairNET.Items.Count = 0 Then Exit Sub
+
+        If e.Button = Windows.Forms.MouseButtons.Right Then
+            CMServices.Show(CType(sender, Control), e.Location)
+            lvServices = lvRepairNET
+        Else
+
+        End If
 
     End Sub
+
+    Private Sub lvRepairOTH_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lvRepairOTH.MouseUp
+        If lvRepairOTH.Items.Count = 0 Then Exit Sub
+
+        If e.Button = Windows.Forms.MouseButtons.Right Then
+            CMServices.Show(CType(sender, Control), e.Location)
+            lvServices = lvRepairOTH
+        Else
+
+        End If
+    End Sub
+
+    Private Sub lvRepair_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lvRepair.MouseUp
+
+        If lvRepair.Items.Count = 0 Then Exit Sub
+
+        If e.Button = Windows.Forms.MouseButtons.Right Then
+            CMServices.Show(CType(sender, Control), e.Location)
+            lvServices = lvRepair
+        Else
+
+        End If
+    End Sub
+
+    Private Sub lvRepairbr_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lvRepairBR.MouseUp
+        If lvRepairBR.Items.Count = 0 Then Exit Sub
+
+        If e.Button = Windows.Forms.MouseButtons.Right Then
+            CMServices.Show(CType(sender, Control), e.Location)
+            lvServices = lvRepairBR
+        Else
+
+        End If
+    End Sub
+
+    Private Sub lvRepairprn_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lvRepairPRN.MouseUp
+        If lvRepairPRN.Items.Count = 0 Then Exit Sub
+
+        If e.Button = Windows.Forms.MouseButtons.Right Then
+            CMServices.Show(CType(sender, Control), e.Location)
+            lvServices = lvRepairPRN
+        Else
+
+        End If
+    End Sub
+
+
+
+    Private Sub EditService_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles EditService.Click
+        LoadRepairEdit(lvServices)
+    End Sub
+
+    Private Sub Font_Form_For_Computer()
+
+        lblSidPRN.Font = New Font(FontN, fontS)
+        lblSidNET.Font = New Font(FontN, fontS)
+        lblsIDOTH.Font = New Font(FontN, fontS)
+        lblsID.Font = New Font(FontN, fontS)
+
+        SendFonts(Me)
+        SendFonts(TableLayoutPanel1)
+        SendFonts(TableLayoutPanel2)
+        SendFonts(TableLayoutPanel3)
+        SendFonts(TableLayoutPanel4)
+        SendFonts(TableLayoutPanel5)
+        SendFonts(TableLayoutPanel6)
+        SendFonts(TableLayoutPanel7)
+        SendFonts(TableLayoutPanel8)
+        SendFonts(TableLayoutPanel9)
+        SendFonts(TableLayoutPanel10)
+        SendFonts(TableLayoutPanel11)
+        SendFonts(TableLayoutPanel12)
+        SendFonts(TableLayoutPanel13)
+        SendFonts(TableLayoutPanel14)
+        SendFonts(TableLayoutPanel15)
+        SendFonts(TableLayoutPanel16)
+        SendFonts(TableLayoutPanel17)
+        SendFonts(TableLayoutPanel18)
+        SendFonts(TableLayoutPanel19)
+        SendFonts(TableLayoutPanel20)
+        SendFonts(TableLayoutPanel21)
+        SendFonts(TableLayoutPanel22)
+        SendFonts(TableLayoutPanel23)
+        SendFonts(TableLayoutPanel24)
+        SendFonts(TableLayoutPanel25)
+        SendFonts(TableLayoutPanel26)
+        SendFonts(TableLayoutPanel27)
+        SendFonts(TableLayoutPanel28)
+        SendFonts(TableLayoutPanel29)
+        SendFonts(TableLayoutPanel30)
+        SendFonts(TableLayoutPanel31)
+        SendFonts(TableLayoutPanel32)
+        SendFonts(TableLayoutPanel33)
+        SendFonts(TableLayoutPanel34)
+        SendFonts(TableLayoutPanel35)
+        SendFonts(TableLayoutPanel36)
+        SendFonts(TableLayoutPanel37)
+        SendFonts(TableLayoutPanel38)
+        SendFonts(TableLayoutPanel39)
+        SendFonts(TableLayoutPanel40)
+        SendFonts(TableLayoutPanel41)
+        SendFonts(TableLayoutPanel42)
+        SendFonts(TableLayoutPanel43)
+        SendFonts(TableLayoutPanel44)
+        SendFonts(TableLayoutPanel45)
+        SendFonts(TableLayoutPanel46)
+        SendFonts(TableLayoutPanel47)
+        SendFonts(TableLayoutPanel48)
+        SendFonts(TableLayoutPanel49)
+        SendFonts(TableLayoutPanel50)
+        SendFonts(TableLayoutPanel51)
+        SendFonts(TableLayoutPanel52)
+        SendFonts(TableLayoutPanel53)
+        SendFonts(TableLayoutPanel54)
+        SendFonts(TableLayoutPanel55)
+        SendFonts(TableLayoutPanel56)
+        SendFonts(TableLayoutPanel57)
+        SendFonts(TableLayoutPanel58)
+        SendFonts(TableLayoutPanel59)
+        SendFonts(TableLayoutPanel60)
+        SendFonts(TableLayoutPanel61)
+        SendFonts(TableLayoutPanel62)
+        SendFonts(TableLayoutPanel63)
+        SendFonts(TableLayoutPanel64)
+        SendFonts(TableLayoutPanel65)
+        SendFonts(TableLayoutPanel66)
+        SendFonts(TableLayoutPanel67)
+        SendFonts(TableLayoutPanel68)
+        SendFonts(TableLayoutPanel69)
+        SendFonts(TableLayoutPanel70)
+        SendFonts(TableLayoutPanel71)
+        SendFonts(TableLayoutPanel72)
+
+        sSTAB1.Font = New Font(FontN, fontS)
+        sSTAB2.Font = New Font(FontN, fontS)
+        sSTAB3.Font = New Font(FontN, fontS)
+        sSTAB4.Font = New Font(FontN, fontS)
+        sSTAB5.Font = New Font(FontN, fontS)
+
+        SendFonts(sSTAB1.TabPages(7))
+        SendFonts(sSTAB1.TabPages(6))
+        SendFonts(sSTAB1.TabPages(5))
+        SendFonts(sSTAB1.TabPages(4))
+        SendFonts(sSTAB1.TabPages(3))
+        SendFonts(sSTAB1.TabPages(2))
+        SendFonts(sSTAB1.TabPages(1))
+        SendFonts(sSTAB1.TabPages(0))
+
+        SendFonts(sSTAB2.TabPages(0))
+        SendFonts(sSTAB2.TabPages(1))
+        SendFonts(sSTAB2.TabPages(2))
+        SendFonts(sSTAB2.TabPages(3))
+
+        SendFonts(sSTAB3.TabPages(0))
+        SendFonts(sSTAB3.TabPages(1))
+        SendFonts(sSTAB3.TabPages(2))
+        SendFonts(sSTAB3.TabPages(3))
+
+        SendFonts(sSTAB4.TabPages(0))
+        SendFonts(sSTAB4.TabPages(1))
+        SendFonts(sSTAB4.TabPages(2))
+        SendFonts(sSTAB4.TabPages(3))
+
+        SendFonts(sSTAB5.TabPages(0))
+        SendFonts(sSTAB5.TabPages(0))
+        SendFonts(sSTAB5.TabPages(0))
+
+
+        SendFonts(lstGroups)
+
+
+
+        cmMENU.Font = New Font(FontN, fontS)
+        cmBmenu.Font = New Font(FontN, fontS)
+        cmDvig.Font = New Font(FontN, fontS)
+        CMServices.Font = New Font(FontN, fontS)
+
+
+        SendFonts(gbNet)
+        SendFonts(gbNETNotes)
+
+
+
+        ''Принтеры
+        'cmbPRN.Font = New Font(FontN, fontS)
+        'txtPRNSN.Font = New Font(FontN, fontS)
+        'PROiZV38.Font = New Font(FontN, fontS)
+        'txtPRNinnumber.Font = New Font(FontN, fontS)
+        'cmbFormat.Font = New Font(FontN, fontS)
+        'cmbPRNFil.Font = New Font(FontN, fontS)
+        'cmbPRNDepart.Font = New Font(FontN, fontS)
+        'cmbPRNOffice.Font = New Font(FontN, fontS)
+        'cmbModCartr.Font = New Font(FontN, fontS)
+        'cmbPRNotv.Font = New Font(FontN, fontS)
+        'txtPRNphone.Font = New Font(FontN, fontS)
+        'txtPrnIP.Font = New Font(FontN, fontS)
+        'txtPRNMAC.Font = New Font(FontN, fontS)
+
+        'txtOTHSfN.Font = New Font(FontN, fontS)
+
+        'txtOTHZay.Font = New Font(FontN, fontS)
+
+        'dtOTHdataVvoda.Value = Date.Today.Date
+        'dtOTHSFdate.Value = Date.Today.Date
+        'txtPCSfN.Font = New Font(FontN, fontS)
+        'txtPCZay.Font = New Font(FontN, fontS)
+
+        'txtPRNSfN.Font = New Font(FontN, fontS)
+
+        'txtPRNZay.Font = New Font(FontN, fontS)
+
+
+        'txtNETSfN.Font = New Font(FontN, fontS)
+        'txtNETZay.Font = New Font(FontN, fontS)
+
+        'cmbPRNPostav.Font = New Font(FontN, fontS)
+
+
+        'cmbNETPostav.Font = New Font(FontN, fontS)
+
+
+        'cmbOTHPostav.Font = New Font(FontN, fontS)
+
+
+        'cmbOTH.Font = New Font(FontN, fontS)
+        'txtOTHSN.Font = New Font(FontN, fontS)
+        'PROiZV39.Font = New Font(FontN, fontS)
+        'txtOTHmemo.Font = New Font(FontN, fontS)
+        'cmbOTHFil.Font = New Font(FontN, fontS)
+        'cmbOTHDepart.Font = New Font(FontN, fontS)
+        'cmbOTHOffice.Font = New Font(FontN, fontS)
+        'cmbOTHotv.Font = New Font(FontN, fontS)
+        'txtOTHphone.Font = New Font(FontN, fontS)
+        'cmbOTHConnect.Font = New Font(FontN, fontS)
+        'txtOTHinnumber.Font = New Font(FontN, fontS)
+        'txtOTHIP.Font = New Font(FontN, fontS)
+        'txtOTHMAC.Font = New Font(FontN, fontS)
+        'txtMonDum.Font = New Font(FontN, fontS)
+        'cmbPCL.Font = New Font(FontN, fontS)
+        'cmbOTHPCL.Font = New Font(FontN, fontS)
+        ''txtMonDum
+    End Sub
+
 End Class
 

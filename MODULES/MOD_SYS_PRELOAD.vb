@@ -10,7 +10,7 @@ Module MOD_SYS_PRELOAD
     Public ProGramName As String
     Public FontN As String
     Public fontS As String
-    Public FontC As String
+    Public FontC As System.Drawing.Color
     Public FontB As String
     Public RAZDEL As String
 
@@ -94,9 +94,11 @@ Module MOD_SYS_PRELOAD
 
         Dim objIniFile As New IniFile(PrPath & "base.ini")
 
-        FontN = objIniFile.GetString("general", "Font", "")
-        fontS = objIniFile.GetString("general", "FontSize", "")
+        FontN = objIniFile.GetString("general", "Font", "Microsoft Sans Serif")
+        fontS = objIniFile.GetString("general", "FontSize", "8,25")
         FontB = objIniFile.GetString("general", "FontBold", "")
+
+
 
     End Sub
 
@@ -125,6 +127,83 @@ Module MOD_SYS_PRELOAD
         'rs = Nothing
 
     End Sub
+
+    'Public Sub ClearForm(ByVal ControlContainer As Object)
+
+    '    For Each Ctl As Object In ControlContainer.Controls
+    '        Try
+    '            If Not Ctl.Controls Is Nothing Then
+    '                SendFonts(Ctl)
+
+    '                If TypeOf Ctl Is TextBox Then
+    '                    Ctl.text = ""
+    '                End If
+
+    '                If TypeOf Ctl Is ComboBox Then
+    '                    Ctl.text = ""
+    '                End If
+
+    '                If TypeOf Ctl Is ListView Then
+    '                    Ctl.items.clear()
+    '                End If
+
+    '            End If
+
+    '        Catch ex As Exception
+    '            MsgBox(ex.Message)
+    '        End Try
+    '    Next
+
+    'End Sub
+
+
+
+    Public Sub SendFonts(ByVal ControlContainer As Object)
+
+        For Each Ctl As Object In ControlContainer.Controls
+            Try
+                If Not Ctl.Controls Is Nothing Then
+                    SendFonts(Ctl)
+
+                    If Ctl.Name.StartsWith("l") Then
+                        Ctl.Font = New Font(FontN, fontS)
+                    End If
+
+                    If Ctl.Name.StartsWith("t") Then
+                        Ctl.Font = New Font(FontN, fontS)
+                    End If
+                    If Ctl.Name.StartsWith("c") Then
+                        Ctl.Font = New Font(FontN, fontS)
+                    End If
+                    If Ctl.Name.StartsWith("g") Then
+                        Ctl.Font = New Font(FontN, fontS)
+                    End If
+                    If Ctl.Name.StartsWith("d") Then
+                        Ctl.Font = New Font(FontN, fontS)
+                    End If
+                    If Ctl.Name.StartsWith("l") Then
+                        Ctl.Font = New Font(FontN, fontS)
+                    End If
+                    If Ctl.Name.StartsWith("b") Then
+                        Ctl.Font = New Font(FontN, fontS)
+                    End If
+                    If Ctl.Name.StartsWith("T") Then
+                        Ctl.Font = New Font(FontN, fontS)
+                    End If
+                    If Ctl.Name.StartsWith("L") Then
+                        Ctl.Font = New Font(FontN, fontS)
+                    End If
+                End If
+
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
+        Next
+
+    End Sub
+
+   
+
 
 End Module
 

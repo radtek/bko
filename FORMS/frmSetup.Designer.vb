@@ -106,8 +106,8 @@ Partial Class frmSetup
         Me.chkREMONT = New System.Windows.Forms.CheckBox()
         Me.chkPOu = New System.Windows.Forms.CheckBox()
         Me.chkVSUst = New System.Windows.Forms.CheckBox()
-        Me.SStab1 = New System.Windows.Forms.TabControl()
         Me.chk_no_log = New System.Windows.Forms.CheckBox()
+        Me.SStab1 = New System.Windows.Forms.TabControl()
         Me.TabPage5.SuspendLayout()
         Me.gbUsers.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1049,6 +1049,16 @@ Partial Class frmSetup
         Me.chkVSUst.Text = "В составе устройства"
         Me.chkVSUst.UseVisualStyleBackColor = True
         '
+        'chk_no_log
+        '
+        Me.chk_no_log.AutoSize = True
+        Me.chk_no_log.Location = New System.Drawing.Point(3, 142)
+        Me.chk_no_log.Name = "chk_no_log"
+        Me.chk_no_log.Size = New System.Drawing.Size(92, 17)
+        Me.chk_no_log.TabIndex = 22
+        Me.chk_no_log.Text = "Не вести лог"
+        Me.chk_no_log.UseVisualStyleBackColor = True
+        '
         'SStab1
         '
         Me.SStab1.Controls.Add(Me.TabPage1)
@@ -1061,16 +1071,6 @@ Partial Class frmSetup
         Me.SStab1.SelectedIndex = 0
         Me.SStab1.Size = New System.Drawing.Size(984, 666)
         Me.SStab1.TabIndex = 0
-        '
-        'chk_no_log
-        '
-        Me.chk_no_log.AutoSize = True
-        Me.chk_no_log.Location = New System.Drawing.Point(3, 142)
-        Me.chk_no_log.Name = "chk_no_log"
-        Me.chk_no_log.Size = New System.Drawing.Size(92, 17)
-        Me.chk_no_log.TabIndex = 22
-        Me.chk_no_log.Text = "Не вести лог"
-        Me.chk_no_log.UseVisualStyleBackColor = True
         '
         'frmSetup
         '

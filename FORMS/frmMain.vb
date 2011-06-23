@@ -63,7 +63,11 @@ Public Class frmMain
 
     Private Sub frmMain_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
-        'My.Application.DoEvents()
+        ''Меняем шрифт
+        'SendFonts(MenuStrip)
+        'SendFonts(ToolStrip)
+        'SendFonts(StatusStrip)
+
 
         Call LANG_frmMain()
 
@@ -196,6 +200,12 @@ Public Class frmMain
             Next
 
         End If
+
+        Dim t As New System.Windows.Forms.Timer
+        t.Interval = 1000
+        t.Enabled = True
+        AddHandler t.Tick, AddressOf TimerEventHandler
+
 
 
     End Sub
@@ -451,14 +461,9 @@ error_Renamed:
         rs = Nothing
 
         rs = New ADODB.Recordset
-        rs.Open("DELETE FROM TBL_NET_MAG", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-        rs = Nothing
-
-        rs = New ADODB.Recordset
         rs.Open("DELETE FROM kompy", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
         rs = Nothing
 
-        
 
         Call frmComputers.STAT_INF()
         Call SHED_CHECK()
@@ -1996,9 +2001,92 @@ err_:
 
     End Sub
 
-    Private Sub mnuNetMag_Click(sender As System.Object, e As System.EventArgs) Handles mnuNetMag.Click
+    Private Sub КабельныеЖурналыToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles КабельныеЖурналыToolStripMenuItem.Click
         frmNetMagazin.MdiParent = Me
         frmNetMagazin.Show()
         frmNetMagazin.Focus()
     End Sub
+
+    Private Sub TimerEventHandler(ByVal obj As Object, ByVal ergs As EventArgs)
+        On Error Resume Next
+
+
+
+        If TimeOfDay.Minute = 0 And TimeOfDay.Second = 0 Then
+
+
+            Dim LNGIniFile As New IniFile(sLANGPATH)
+
+            Dim rs As ADODB.Recordset
+
+            Dim sSQL, SERT, SERT2, uname, SERT3 As String
+
+            sSQL = "SELECT COUNT(*) AS total_number FROM Remont"
+
+            rs = New ADODB.Recordset
+            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+            With rs
+                SERT = .Fields("total_number").Value
+            End With
+
+            rs.Close()
+            rs = Nothing
+
+
+            If SERT > 0 Then
+
+
+                rs = New ADODB.Recordset
+                rs.Open("SELECT * FROM SPR_Master WHERE A='" & UserNames & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+                With rs
+                    uname = .Fields("name").Value
+                End With
+
+                rs.Close()
+                rs = Nothing
+
+                If uname = Nothing Then uname = "ADMINISTRATOR"
+
+                sSQL = "SELECT COUNT(*) AS total_number FROM Remont WHERE otvetstv='" & uname & "'"
+
+                rs = New ADODB.Recordset
+                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+                With rs
+                    SERT2 = .Fields("total_number").Value
+                End With
+                rs.Close()
+                rs = Nothing
+
+                If SERT2 > 0 Then
+
+                    sSQL = "SELECT COUNT(*) AS total_number FROM Remont Where otvetstv='" & uname & "' and zakryt = 0"
+
+                    rs = New ADODB.Recordset
+                    rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+                    With rs
+                        SERT3 = .Fields("total_number").Value
+                    End With
+                    rs.Close()
+                    rs = Nothing
+
+                    If SERT3 > 0 Then
+
+                        MsgBox(LNGIniFile.GetString("frmMain", "MSG10", "") & " " & SERT3 & " " & LNGIniFile.GetString("frmMain", "MSG11", ""), MsgBoxStyle.Information, ProGramName)
+
+                    End If
+
+                End If
+
+
+            End If
+
+        End If
+
+
+    End Sub
+
 End Class
