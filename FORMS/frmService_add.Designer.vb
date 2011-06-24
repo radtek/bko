@@ -56,7 +56,7 @@ Partial Class frmService_add
         '
         'cmbCancel
         '
-        Me.cmbCancel.Location = New System.Drawing.Point(96, 531)
+        Me.cmbCancel.Location = New System.Drawing.Point(132, 532)
         Me.cmbCancel.Name = "cmbCancel"
         Me.cmbCancel.Size = New System.Drawing.Size(75, 23)
         Me.cmbCancel.TabIndex = 54

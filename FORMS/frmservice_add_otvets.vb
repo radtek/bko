@@ -403,6 +403,9 @@
     'End Sub
 
     Private Sub frmservice_add_otvets_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+
+        SendFonts(Me)
+
         Dim LNGIniFile As New IniFile(sLANGPATH)
         Call frmservice_add_otvets_Lang()
 

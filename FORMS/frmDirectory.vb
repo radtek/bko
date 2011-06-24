@@ -264,6 +264,8 @@
 
     Private Sub frmDirectory_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
+        SendFonts(Me)
+
         Call frmDirectory_Lang()
 
         Me.TreeDirectoryFill()

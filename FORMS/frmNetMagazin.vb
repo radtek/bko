@@ -322,6 +322,9 @@ ERR1:
 
     Private Sub frmNetMagazin_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
+
+        SendFonts(Me)
+
         Dim objIniFile As New IniFile(PrPath & "base.ini")
         Dim uname As String
 

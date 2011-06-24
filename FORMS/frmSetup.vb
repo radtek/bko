@@ -10,19 +10,23 @@ Public Class frmSetup
         ' Dim wndFont As FontDialog
         Dim DialogResult As DialogResult
         Dim PrevisiusFont As Font = str.Font
+
+        FontWindow.Font = New Font("Microsoft Sans Serif", 8, 0, 3, False)
+
         DialogResult = FontWindow.ShowDialog
+
         'New System.Windows.Forms.FontDialog
         If DialogResult = System.Windows.Forms.DialogResult.OK Then
             Return FontWindow.Font
 
         Else
             Return PrevisiusFont
+            ' SendFonts(Me)
 
         End If
         'textbox1.font=changefont(wndfont)
 
     End Function
-
 
     Private Sub USER_LIST()
         lvPrUsers.Items.Clear()
@@ -151,103 +155,9 @@ Public Class frmSetup
 
     End Sub
 
-    Private Sub chkSNPro_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkSNPro.CheckedChanged
-
-        Dim objIniFile As New IniFile(PrPath & "base.ini")
-
-        Select Case chkSNPro.Checked
-
-            Case False
-
-                objIniFile.WriteString("IdentifierMAC", "Check", "0")
-                IdentifierMAC = "0"
-            Case True
-
-                objIniFile.WriteString("IdentifierMAC", "Check", "1")
-                IdentifierMAC = "1"
-        End Select
-    End Sub
-
-    Private Sub chkSheduler_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkSheduler.CheckedChanged
-
-        Dim objIniFile As New IniFile(PrPath & "base.ini")
-
-        Select Case chkSheduler.Checked
-
-            Case False
-
-                objIniFile.WriteString("General", "Sheduler", "unChecked")
-
-            Case True
-
-                objIniFile.WriteString("General", "Sheduler", "Checked")
-
-        End Select
-    End Sub
-
-    Private Sub chkMenuServices_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkMenuServices.CheckedChanged
-
-        Dim objIniFile As New IniFile(PrPath & "base.ini")
-
-        Select Case chkMenuServices.Checked
-
-            Case False
-
-                objIniFile.WriteString("General", "SYS", "0")
-                frmMain.CleerDBToolStripMenuItem.Visible = False
-                frmMain.ЗапросыToolStripMenuItem.Visible = False
-
-            Case True
-
-                objIniFile.WriteString("General", "SYS", "1")
-
-                frmMain.CleerDBToolStripMenuItem.Visible = True
-                frmMain.ЗапросыToolStripMenuItem.Visible = True
-
-
-        End Select
-    End Sub
-
-    Private Sub RadioButton1_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton1.CheckedChanged
-
-        Dim objIniFile As New IniFile(PrPath & "base.ini")
-        objIniFile.WriteString("General", "NETNAME", "1")
-
-    End Sub
-
-    Private Sub RadioButton2_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton2.CheckedChanged
-        Dim objIniFile As New IniFile(PrPath & "base.ini")
-        objIniFile.WriteString("General", "NETNAME", "2")
-    End Sub
-
-    Private Sub RadioButton3_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton3.CheckedChanged
-        Dim objIniFile As New IniFile(PrPath & "base.ini")
-        objIniFile.WriteString("General", "NETNAME", "0")
-    End Sub
-
-    Private Sub cmbOffice_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbOffice.SelectedIndexChanged
-
-        Dim objIniFile As New IniFile(PrPath & "base.ini")
-        objIniFile.WriteString("General", "Office", cmbOffice.Text)
-
-        sOfficePACK = cmbOffice.Text
-
-    End Sub
-
-    Private Sub cmbSortTree_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbSortTree.SelectedIndexChanged
-        Dim objIniFile As New IniFile(PrPath & "base.ini")
-        Dim LNGIniFile As New IniFile(sLANGPATH)
-
-        Dim sText As String
-
-        If cmbSortTree.Text = LNGIniFile.GetString("frmSetup", "MSG1", "") Then sText = 0
-        If cmbSortTree.Text = LNGIniFile.GetString("frmSetup", "MSG2", "") Then sText = 1
-
-        objIniFile.WriteString("general", "Tree_S", sText)
-
-    End Sub
-
     Private Sub frmSetup_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+
+        SendFonts(Me)
 
         Call frmSetup_Lang()
         Call USER_LIST()
@@ -576,10 +486,106 @@ Public Class frmSetup
 
         'Label9.Font = New Font(objIniFile.GetString("general", "Font", "Tahoma"), objIniFile.GetString("general", "FontSize", "10"))
 
-         Call FONT_LOAD
+        'Call FONT_LOAD(Me)
 
 
         'lvFindDB
+    End Sub
+
+    Private Sub chkSNPro_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkSNPro.CheckedChanged
+
+        Dim objIniFile As New IniFile(PrPath & "base.ini")
+
+        Select Case chkSNPro.Checked
+
+            Case False
+
+                objIniFile.WriteString("IdentifierMAC", "Check", "0")
+                IdentifierMAC = "0"
+            Case True
+
+                objIniFile.WriteString("IdentifierMAC", "Check", "1")
+                IdentifierMAC = "1"
+        End Select
+    End Sub
+
+    Private Sub chkSheduler_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkSheduler.CheckedChanged
+
+        Dim objIniFile As New IniFile(PrPath & "base.ini")
+
+        Select Case chkSheduler.Checked
+
+            Case False
+
+                objIniFile.WriteString("General", "Sheduler", "unChecked")
+
+            Case True
+
+                objIniFile.WriteString("General", "Sheduler", "Checked")
+
+        End Select
+    End Sub
+
+    Private Sub chkMenuServices_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkMenuServices.CheckedChanged
+
+        Dim objIniFile As New IniFile(PrPath & "base.ini")
+
+        Select Case chkMenuServices.Checked
+
+            Case False
+
+                objIniFile.WriteString("General", "SYS", "0")
+                frmMain.CleerDBToolStripMenuItem.Visible = False
+                frmMain.ЗапросыToolStripMenuItem.Visible = False
+
+            Case True
+
+                objIniFile.WriteString("General", "SYS", "1")
+
+                frmMain.CleerDBToolStripMenuItem.Visible = True
+                frmMain.ЗапросыToolStripMenuItem.Visible = True
+
+
+        End Select
+    End Sub
+
+    Private Sub RadioButton1_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton1.CheckedChanged
+
+        Dim objIniFile As New IniFile(PrPath & "base.ini")
+        objIniFile.WriteString("General", "NETNAME", "1")
+
+    End Sub
+
+    Private Sub RadioButton2_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton2.CheckedChanged
+        Dim objIniFile As New IniFile(PrPath & "base.ini")
+        objIniFile.WriteString("General", "NETNAME", "2")
+    End Sub
+
+    Private Sub RadioButton3_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton3.CheckedChanged
+        Dim objIniFile As New IniFile(PrPath & "base.ini")
+        objIniFile.WriteString("General", "NETNAME", "0")
+    End Sub
+
+    Private Sub cmbOffice_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbOffice.SelectedIndexChanged
+
+        Dim objIniFile As New IniFile(PrPath & "base.ini")
+        objIniFile.WriteString("General", "Office", cmbOffice.Text)
+
+        sOfficePACK = cmbOffice.Text
+
+    End Sub
+
+    Private Sub cmbSortTree_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbSortTree.SelectedIndexChanged
+        Dim objIniFile As New IniFile(PrPath & "base.ini")
+        Dim LNGIniFile As New IniFile(sLANGPATH)
+
+        Dim sText As String
+
+        If cmbSortTree.Text = LNGIniFile.GetString("frmSetup", "MSG1", "") Then sText = 0
+        If cmbSortTree.Text = LNGIniFile.GetString("frmSetup", "MSG2", "") Then sText = 1
+
+        objIniFile.WriteString("general", "Tree_S", sText)
+
     End Sub
 
     Private Sub frmSetup_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Resize
@@ -594,10 +600,6 @@ Public Class frmSetup
 
     Private Sub lvFindDB_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvFindDB.Click
         sFILEBD = lvFindDB.Items.Item(lvFindDB.FocusedItem.Index).SubItems(1).Text
-    End Sub
-
-    Private Sub lvFindDB_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvFindDB.SelectedIndexChanged
-
     End Sub
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
@@ -775,7 +777,6 @@ Public Class frmSetup
         rs1.Close()
         rs1 = Nothing
     End Sub
-
 
     Private Sub SplitContainer1_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles SplitContainer1.Resize
         Call RESIZER()
@@ -956,14 +957,6 @@ Public Class frmSetup
         Call sUSER_CLEAR()
     End Sub
 
-    Private Sub lvPrUsers_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvPrUsers.SelectedIndexChanged
-
-    End Sub
-
-    Private Sub chkUpdate_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkUpdate.CheckedChanged
-
-    End Sub
-
     Private Sub cmbDefaultModul_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbDefaultModul.SelectedIndexChanged
         Dim objIniFile As New IniFile(PrPath & "base.ini")
         Dim LNGIniFile As New IniFile(sLANGPATH)
@@ -1035,13 +1028,14 @@ err_:
 
         Label9.Font = changeFont(dlgFont, Label9)
 
-        FontN = Label9.Font.Name
-        fontS = Label9.Font.Size
-        FontB = Label9.Font.Bold
+        FontN = dlgFont.Font.Name
+        fontS = dlgFont.Font.Size
+        FontB = dlgFont.Font.Bold
+        FontSt = dlgFont.Font.Style
+        FontD = dlgFont.Font.Unit
 
-        If fontS > 12 Then fontS = 12
 
-
+        'If fontS > 10 Then fontS = 10
 
 
         'dlgFont.Font = set your font here
@@ -1059,98 +1053,19 @@ err_:
 
         Dim objIniFile As New IniFile(PrPath & "base.ini")
 
-        objIniFile.WriteString("general", "Font", Label9.Font.Name)
-        objIniFile.WriteString("general", "FontSize", Label9.Font.Size)
-        objIniFile.WriteString("general", "FontBold", Label9.Font.Bold)
+        objIniFile.WriteString("general", "Font", FontN)
+        objIniFile.WriteString("general", "FontSize", fontS)
+        objIniFile.WriteString("general", "FontBold", FontB)
+        objIniFile.WriteString("general", "FontStyle", FontSt)
+        objIniFile.WriteString("general", "FontUnit", FontD)
 
-        Call FONT_LOAD()
+
         'End If
 
-
-        frmMain.MenuStrip.Font = New Font(FontN, fontS)
-        frmMain.ToolStrip.Font = New Font(FontN, fontS)
-        frmMain.StatusStrip.Font = New Font(FontN, fontS)
+        Call SendFonts(Me)
+        Call SendFonts(frmMain)
 
     End Sub
-
-    Private Sub FONT_LOAD()
-
-        SendFonts(TableLayoutPanel1)
-        SendFonts(SStab1)
-        SendFonts(SStab1.TabPages(0))
-        SendFonts(SStab1.TabPages(1))
-        SendFonts(SStab1.TabPages(2))
-        SendFonts(SStab1.TabPages(3))
-        SStab1.Font = New Font(FontN, fontS)
-
-
-        'Dim C As Control
-        'For Each C In Me.TableLayoutPanel1.Controls
-        '    If TypeOf C Is TextBox Then C.Font = New Font(FontN, fontS)
-        '    If TypeOf C Is ComboBox Then C.Font = New Font(FontN, fontS)
-        '    If TypeOf C Is Label Then C.Font = New Font(FontN, fontS)
-        '    If TypeOf C Is GroupBox Then C.Font = New Font(FontN, fontS)
-        '    If TypeOf C Is ListView Then C.Font = New Font(FontN, fontS)
-        '    If TypeOf C Is NumericUpDown Then C.Font = New Font(FontN, fontS)
-        '    If TypeOf C Is CheckBox Then C.Font = New Font(FontN, fontS)
-        '    If TypeOf C Is Button Then C.Font = New Font(FontN, fontS)
-        '    If TypeOf C Is TreeView Then C.Font = New Font(FontN, fontS)
-        'Next C
-
-
-
-
-        'For Each C In SStab1.TabPages(0).Controls
-        '    If TypeOf C Is TextBox Then C.Font = New Font(FontN, fontS)
-        '    If TypeOf C Is ComboBox Then C.Font = New Font(FontN, fontS)
-        '    If TypeOf C Is Label Then C.Font = New Font(FontN, fontS)
-        '    If TypeOf C Is GroupBox Then C.Font = New Font(FontN, fontS)
-        '    If TypeOf C Is ListView Then C.Font = New Font(FontN, fontS)
-        '    If TypeOf C Is NumericUpDown Then C.Font = New Font(FontN, fontS)
-        '    If TypeOf C Is CheckBox Then C.Font = New Font(FontN, fontS)
-        '    If TypeOf C Is Button Then C.Font = New Font(FontN, fontS)
-        '    If TypeOf C Is TreeView Then C.Font = New Font(FontN, fontS)
-        'Next C
-
-        'For Each C In SStab1.TabPages(1).Controls
-        '    If TypeOf C Is TextBox Then C.Font = New Font(FontN, fontS)
-        '    If TypeOf C Is ComboBox Then C.Font = New Font(FontN, fontS)
-        '    If TypeOf C Is Label Then C.Font = New Font(FontN, fontS)
-        '    If TypeOf C Is GroupBox Then C.Font = New Font(FontN, fontS)
-        '    If TypeOf C Is ListView Then C.Font = New Font(FontN, fontS)
-        '    If TypeOf C Is NumericUpDown Then C.Font = New Font(FontN, fontS)
-        '    If TypeOf C Is CheckBox Then C.Font = New Font(FontN, fontS)
-        '    If TypeOf C Is Button Then C.Font = New Font(FontN, fontS)
-        '    If TypeOf C Is TreeView Then C.Font = New Font(FontN, fontS)
-        'Next C
-
-        'For Each C In SStab1.TabPages(2).Controls
-        '    If TypeOf C Is TextBox Then C.Font = New Font(FontN, fontS)
-        '    If TypeOf C Is ComboBox Then C.Font = New Font(FontN, fontS)
-        '    If TypeOf C Is Label Then C.Font = New Font(FontN, fontS)
-        '    If TypeOf C Is GroupBox Then C.Font = New Font(FontN, fontS)
-        '    If TypeOf C Is ListView Then C.Font = New Font(FontN, fontS)
-        '    If TypeOf C Is NumericUpDown Then C.Font = New Font(FontN, fontS)
-        '    If TypeOf C Is CheckBox Then C.Font = New Font(FontN, fontS)
-        '    If TypeOf C Is Button Then C.Font = New Font(FontN, fontS)
-        '    If TypeOf C Is TreeView Then C.Font = New Font(FontN, fontS)
-        'Next C
-
-        'For Each C In SStab1.TabPages(3).Controls
-        '    If TypeOf C Is TextBox Then C.Font = New Font(FontN, fontS)
-        '    If TypeOf C Is ComboBox Then C.Font = New Font(FontN, fontS)
-        '    If TypeOf C Is Label Then C.Font = New Font(FontN, fontS)
-        '    If TypeOf C Is GroupBox Then C.Font = New Font(FontN, fontS)
-        '    If TypeOf C Is ListView Then C.Font = New Font(FontN, fontS)
-        '    If TypeOf C Is NumericUpDown Then C.Font = New Font(FontN, fontS)
-        '    If TypeOf C Is CheckBox Then C.Font = New Font(FontN, fontS)
-        '    If TypeOf C Is Button Then C.Font = New Font(FontN, fontS)
-        '    If TypeOf C Is TreeView Then C.Font = New Font(FontN, fontS)
-        'Next C
-
-        'C = Nothing
-    End Sub
-
 
     Private Sub RadioButton6_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton6.CheckedChanged
 
@@ -1329,4 +1244,126 @@ err_:
         End Select
 
     End Sub
+
+    Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
+
+        Dim dlgColor As System.Windows.Forms.ColorDialog
+        dlgColor = New System.Windows.Forms.ColorDialog
+        Label9.ForeColor = changeColor(dlgColor, Label9)
+
+        FontC = Label9.ForeColor.Name
+
+        Dim objIniFile As New IniFile(PrPath & "base.ini")
+
+        objIniFile.WriteString("general", "FontColor", FontC)
+
+        Call FONT_LOAD(Me)
+
+    End Sub
+
+    Public Function changeColor(ByVal FontWindow As ColorDialog, ByVal str As Control)
+
+        Dim DialogResult As DialogResult
+
+        Dim PrevisiusColor As Color = str.ForeColor
+
+        DialogResult = FontWindow.ShowDialog
+
+        If DialogResult = System.Windows.Forms.DialogResult.OK Then
+            Return FontWindow.Color
+
+        Else
+            Return PrevisiusColor
+
+        End If
+
+
+    End Function
+
+    Private Sub FONT_LOAD(ByVal ControlContainer As Object)
+
+        'SendFonts(Me)
+
+        For Each Ctl As Object In ControlContainer.Controls
+            Try
+                If Not Ctl.Controls Is Nothing Then
+                    FONT_LOAD(Ctl)
+                    If TypeOf Ctl Is Form Then Ctl.Font = New Font(FontN, fontS, FontSt, 0, FontB)
+                    If TypeOf Ctl Is TextBox Then Ctl.Font = New Font(FontN, fontS, FontSt, 0, FontB)
+                    If TypeOf Ctl Is ComboBox Then Ctl.Font = New Font(FontN, fontS, FontSt, 0, FontB)
+                    If TypeOf Ctl Is Label Then Ctl.Font = New Font(FontN, fontS, FontSt, 0, FontB)
+                    If TypeOf Ctl Is ListView Then Ctl.Font = New Font(FontN, fontS, FontSt, 0, FontB)
+                    If TypeOf Ctl Is TreeView Then Ctl.Font = New Font(FontN, fontS, FontSt, 0, FontB)
+                    If TypeOf Ctl Is TabPage Then Ctl.Font = New Font(FontN, fontS, FontSt, 0, FontB)
+                    If TypeOf Ctl Is GroupBox Then Ctl.Font = New Font(FontN, fontS, FontSt, 0, FontB)
+                    If TypeOf Ctl Is DateTimePicker Then Ctl.Font = New Font(FontN, fontS, FontSt, 0, FontB)
+                    If TypeOf Ctl Is NumericUpDown Then Ctl.Font = New Font(FontN, fontS, FontSt, 0, FontB)
+                    If TypeOf Ctl Is Button Then Ctl.Font = New Font(FontN, fontS, FontSt, 0, FontB)
+                    If TypeOf Ctl Is CheckBox Then Ctl.Font = New Font(FontN, fontS, FontSt, 0, FontB)
+                    If TypeOf Ctl Is RadioButton Then Ctl.Font = New Font(FontN, fontS, FontSt, 0, FontB)
+                    If TypeOf Ctl Is ListBox Then Ctl.Font = New Font(FontN, fontS, FontSt, 0, FontB)
+
+                    If TypeOf Ctl Is TabControl Then Ctl.Font = New Font(FontN, fontS)
+
+                    If TypeOf Ctl Is MenuStrip Then Ctl.Font = New Font(FontN, fontS)
+                    If TypeOf Ctl Is ToolStrip Then Ctl.Font = New Font(FontN, fontS)
+                    If TypeOf Ctl Is StatusStrip Then Ctl.Font = New Font(FontN, fontS)
+
+                    If TypeOf Ctl Is Button Then Ctl.autosize = True
+                    If TypeOf Ctl Is Label Then Ctl.autosize = True
+                    If TypeOf Ctl Is TableLayoutPanel Then Ctl.autosize = True
+                    If TypeOf Ctl Is GroupBox Then Ctl.autosize = True
+
+                End If
+
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
+        Next
+
+
+
+        Call COLOR_LOAD(Me)
+    End Sub
+
+
+    Private Sub COLOR_LOAD(ByVal ControlContainer As Object)
+
+        'Me.ForeColor = Drawing.Color.FromName(FontC)
+
+        'lvPrUsers.ForeColor = Drawing.Color.FromName(FontC)
+
+
+
+
+
+
+        For Each C As Object In ControlContainer.Controls
+            Try
+                If Not C.Controls Is Nothing Then
+                    COLOR_LOAD(C)
+                    If TypeOf C Is Form Then C.ForeColor = Drawing.Color.FromName(FontC)
+                    'If TypeOf C Is TabControl Then C.TabPage.ForeColor = Drawing.Color.FromName(FontC)
+                    If TypeOf C Is TableLayoutPanel Then C.ForeColor = Drawing.Color.FromName(FontC)
+                    If TypeOf C Is GroupBox Then C.ForeColor = Drawing.Color.FromName(FontC)
+                    If TypeOf C Is Label Then C.ForeColor = Drawing.Color.FromName(FontC)
+                    If TypeOf C Is CheckBox Then C.ForeColor = Drawing.Color.FromName(FontC)
+                    If TypeOf C Is RadioButton Then C.ForeColor = Drawing.Color.FromName(FontC)
+                    If TypeOf C Is TextBox Then C.ForeColor = Drawing.Color.FromName(FontC)
+                    If TypeOf C Is ComboBox Then C.ForeColor = Drawing.Color.FromName(FontC)
+                    If TypeOf C Is ListView Then C.ForeColor = Drawing.Color.FromName(FontC)
+                End If
+
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
+        Next
+
+
+
+
+
+    End Sub
+
+
 End Class

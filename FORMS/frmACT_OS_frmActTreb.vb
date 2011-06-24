@@ -72,6 +72,9 @@ Error_:
     End Sub
 
     Private Sub frmACT_OS_Act_treb_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+
+        SendFonts(Me)
+
         FillComboNET(Me.txt_akt_tip, "Name", "SPR_Complect", "", False, True)
         FillComboNET(Me.txt_akt_postavshik, "Name", "SPR_Postav", "", False, True)
 

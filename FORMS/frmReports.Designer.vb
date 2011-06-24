@@ -972,7 +972,7 @@ Partial Class frmReports
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(984, 640)
+        Me.TabPage2.Size = New System.Drawing.Size(984, 536)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Комплектующие"
         Me.TabPage2.UseVisualStyleBackColor = True
@@ -1320,7 +1320,7 @@ Partial Class frmReports
         Me.TabPage4.Controls.Add(Me.TableLayoutPanel5)
         Me.TabPage4.Location = New System.Drawing.Point(4, 22)
         Me.TabPage4.Name = "TabPage4"
-        Me.TabPage4.Size = New System.Drawing.Size(984, 640)
+        Me.TabPage4.Size = New System.Drawing.Size(984, 536)
         Me.TabPage4.TabIndex = 3
         Me.TabPage4.Text = "Гарантия"
         Me.TabPage4.UseVisualStyleBackColor = True
@@ -1386,7 +1386,7 @@ Partial Class frmReports
         Me.TabPage5.Controls.Add(Me.TableLayoutPanel6)
         Me.TabPage5.Location = New System.Drawing.Point(4, 22)
         Me.TabPage5.Name = "TabPage5"
-        Me.TabPage5.Size = New System.Drawing.Size(984, 640)
+        Me.TabPage5.Size = New System.Drawing.Size(984, 536)
         Me.TabPage5.TabIndex = 4
         Me.TabPage5.Text = "Выборка по ответственным"
         Me.TabPage5.UseVisualStyleBackColor = True
@@ -1464,7 +1464,7 @@ Partial Class frmReports
         Me.TabPage6.Controls.Add(Me.TableLayoutPanel4)
         Me.TabPage6.Location = New System.Drawing.Point(4, 22)
         Me.TabPage6.Name = "TabPage6"
-        Me.TabPage6.Size = New System.Drawing.Size(984, 640)
+        Me.TabPage6.Size = New System.Drawing.Size(984, 536)
         Me.TabPage6.TabIndex = 5
         Me.TabPage6.Text = "Затраты"
         Me.TabPage6.UseVisualStyleBackColor = True
@@ -1476,7 +1476,7 @@ Partial Class frmReports
         Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.99458!))
         Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.00542!))
         Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 98.0!))
-        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 270.0!))
+        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 271.0!))
         Me.TableLayoutPanel4.Controls.Add(Me.Label12, 0, 0)
         Me.TableLayoutPanel4.Controls.Add(Me.lvCashe, 0, 2)
         Me.TableLayoutPanel4.Controls.Add(Me.cmbDepartmentCashe, 2, 1)
@@ -1526,7 +1526,7 @@ Partial Class frmReports
         Me.cmbDepartmentCashe.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cmbDepartmentCashe.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cmbDepartmentCashe.FormattingEnabled = True
-        Me.cmbDepartmentCashe.Location = New System.Drawing.Point(366, 23)
+        Me.cmbDepartmentCashe.Location = New System.Drawing.Point(365, 23)
         Me.cmbDepartmentCashe.Name = "cmbDepartmentCashe"
         Me.cmbDepartmentCashe.Size = New System.Drawing.Size(246, 21)
         Me.cmbDepartmentCashe.TabIndex = 27
@@ -1548,7 +1548,7 @@ Partial Class frmReports
         Me.cmbBrancheCashe.FormattingEnabled = True
         Me.cmbBrancheCashe.Location = New System.Drawing.Point(103, 23)
         Me.cmbBrancheCashe.Name = "cmbBrancheCashe"
-        Me.cmbBrancheCashe.Size = New System.Drawing.Size(257, 21)
+        Me.cmbBrancheCashe.Size = New System.Drawing.Size(256, 21)
         Me.cmbBrancheCashe.TabIndex = 26
         '
         'cmbYearCashe
@@ -1565,7 +1565,7 @@ Partial Class frmReports
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(366, 0)
+        Me.Label10.Location = New System.Drawing.Point(365, 0)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(38, 13)
         Me.Label10.TabIndex = 31
@@ -1573,7 +1573,7 @@ Partial Class frmReports
         '
         'btnCashe
         '
-        Me.btnCashe.Location = New System.Drawing.Point(618, 23)
+        Me.btnCashe.Location = New System.Drawing.Point(617, 23)
         Me.btnCashe.Name = "btnCashe"
         Me.btnCashe.Size = New System.Drawing.Size(75, 23)
         Me.btnCashe.TabIndex = 32
@@ -1582,7 +1582,7 @@ Partial Class frmReports
         '
         'btnCacheOff
         '
-        Me.btnCacheOff.Location = New System.Drawing.Point(716, 23)
+        Me.btnCacheOff.Location = New System.Drawing.Point(715, 23)
         Me.btnCacheOff.Name = "btnCacheOff"
         Me.btnCacheOff.Size = New System.Drawing.Size(75, 23)
         Me.btnCacheOff.TabIndex = 33

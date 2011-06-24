@@ -9,6 +9,8 @@
 
     Private Sub frmGarCPL_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
+        SendFonts(Me)
+
         Call LANG_frmGAR_CPL()
 
         Dim objIniFile As New IniFile(sLANGPATH)

@@ -173,10 +173,10 @@ Partial Class frmserviceDesc
         'TableLayoutPanel2
         '
         Me.TableLayoutPanel2.ColumnCount = 5
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 121.0!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 119.0!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120.0!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel2.Controls.Add(Me.lvRem, 0, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.btnRemAdd, 0, 1)
@@ -192,9 +192,8 @@ Partial Class frmserviceDesc
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
         Me.TableLayoutPanel2.RowCount = 3
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26.0!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27.0!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel2.Size = New System.Drawing.Size(641, 383)
         Me.TableLayoutPanel2.TabIndex = 7
         '
@@ -207,7 +206,7 @@ Partial Class frmserviceDesc
         Me.lvRem.Location = New System.Drawing.Point(3, 3)
         Me.lvRem.MultiSelect = False
         Me.lvRem.Name = "lvRem"
-        Me.lvRem.Size = New System.Drawing.Size(647, 324)
+        Me.lvRem.Size = New System.Drawing.Size(635, 324)
         Me.lvRem.TabIndex = 6
         Me.lvRem.UseCompatibleStateImageBehavior = False
         Me.lvRem.View = System.Windows.Forms.View.Details
@@ -223,7 +222,7 @@ Partial Class frmserviceDesc
         '
         'btnSBTAdd
         '
-        Me.btnSBTAdd.Location = New System.Drawing.Point(124, 333)
+        Me.btnSBTAdd.Location = New System.Drawing.Point(123, 333)
         Me.btnSBTAdd.Name = "btnSBTAdd"
         Me.btnSBTAdd.Size = New System.Drawing.Size(113, 20)
         Me.btnSBTAdd.TabIndex = 2
@@ -233,7 +232,7 @@ Partial Class frmserviceDesc
         'btnRemDel
         '
         Me.btnRemDel.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.btnRemDel.Location = New System.Drawing.Point(243, 333)
+        Me.btnRemDel.Location = New System.Drawing.Point(242, 333)
         Me.btnRemDel.Name = "btnRemDel"
         Me.btnRemDel.Size = New System.Drawing.Size(114, 20)
         Me.btnRemDel.TabIndex = 3
@@ -243,7 +242,7 @@ Partial Class frmserviceDesc
         'chkNZ
         '
         Me.chkNZ.AutoSize = True
-        Me.chkNZ.Location = New System.Drawing.Point(363, 333)
+        Me.chkNZ.Location = New System.Drawing.Point(362, 333)
         Me.chkNZ.Name = "chkNZ"
         Me.chkNZ.Size = New System.Drawing.Size(113, 17)
         Me.chkNZ.TabIndex = 4
@@ -253,7 +252,7 @@ Partial Class frmserviceDesc
         'CheckBox2
         '
         Me.CheckBox2.AutoSize = True
-        Me.CheckBox2.Location = New System.Drawing.Point(483, 333)
+        Me.CheckBox2.Location = New System.Drawing.Point(481, 333)
         Me.CheckBox2.Name = "CheckBox2"
         Me.CheckBox2.Size = New System.Drawing.Size(133, 17)
         Me.CheckBox2.TabIndex = 5
@@ -262,7 +261,7 @@ Partial Class frmserviceDesc
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(124, 359)
+        Me.Button1.Location = New System.Drawing.Point(123, 359)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(113, 20)
         Me.Button1.TabIndex = 8
@@ -280,8 +279,7 @@ Partial Class frmserviceDesc
         '
         'btn_Z_to_Office
         '
-        Me.btn_Z_to_Office.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.btn_Z_to_Office.Location = New System.Drawing.Point(243, 359)
+        Me.btn_Z_to_Office.Location = New System.Drawing.Point(242, 359)
         Me.btn_Z_to_Office.Name = "btn_Z_to_Office"
         Me.btn_Z_to_Office.Size = New System.Drawing.Size(114, 21)
         Me.btn_Z_to_Office.TabIndex = 9

@@ -64,10 +64,7 @@ Public Class frmMain
     Private Sub frmMain_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
         ''Меняем шрифт
-        'SendFonts(MenuStrip)
-        'SendFonts(ToolStrip)
-        'SendFonts(StatusStrip)
-
+        SendFonts(Me)
 
         Call LANG_frmMain()
 
@@ -2001,7 +1998,7 @@ err_:
 
     End Sub
 
-    Private Sub КабельныеЖурналыToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles КабельныеЖурналыToolStripMenuItem.Click
+    Private Sub КабельныеЖурналыToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles mnuNetMag.Click
         frmNetMagazin.MdiParent = Me
         frmNetMagazin.Show()
         frmNetMagazin.Focus()

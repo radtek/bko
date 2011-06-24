@@ -881,6 +881,9 @@ Module MOD_INF_TECH_LOAD
         'Call LOAD_REPAIR(sID, frmComputers.lvRepair)
         'Call LOAD_DVIG_TEHN(sID, frmComputers.lvMovement)
 
+
+        'frmComputers.IN_PRN.Text = frmComputers.IN_PRN.Font.Size & "," & frmComputers.IN_PRN.Font.Style
+
     End Sub
 
     Public Sub LOADmon(ByVal sID As String)

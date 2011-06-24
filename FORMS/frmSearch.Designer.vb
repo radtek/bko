@@ -54,6 +54,7 @@ Partial Class frmSearch
         '
         'TableLayoutPanel2
         '
+        Me.TableLayoutPanel2.AutoSize = True
         Me.TableLayoutPanel2.ColumnCount = 4
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150.0!))
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100.0!))
@@ -71,10 +72,10 @@ Partial Class frmSearch
         Me.TableLayoutPanel2.Location = New System.Drawing.Point(3, 16)
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
         Me.TableLayoutPanel2.RowCount = 4
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28.0!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25.0!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28.0!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 11.0!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel2.Size = New System.Drawing.Size(980, 116)
         Me.TableLayoutPanel2.TabIndex = 3
         '
@@ -93,7 +94,7 @@ Partial Class frmSearch
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(3, 28)
+        Me.Label1.Location = New System.Drawing.Point(3, 27)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(64, 13)
         Me.Label1.TabIndex = 2
@@ -103,7 +104,7 @@ Partial Class frmSearch
         '
         Me.TableLayoutPanel2.SetColumnSpan(Me.txtSearch, 3)
         Me.txtSearch.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtSearch.Location = New System.Drawing.Point(153, 31)
+        Me.txtSearch.Location = New System.Drawing.Point(153, 30)
         Me.txtSearch.Name = "txtSearch"
         Me.txtSearch.Size = New System.Drawing.Size(824, 20)
         Me.txtSearch.TabIndex = 1
@@ -111,7 +112,7 @@ Partial Class frmSearch
         'CheckBox2
         '
         Me.CheckBox2.AutoSize = True
-        Me.CheckBox2.Location = New System.Drawing.Point(3, 84)
+        Me.CheckBox2.Location = New System.Drawing.Point(3, 79)
         Me.CheckBox2.Name = "CheckBox2"
         Me.CheckBox2.Size = New System.Drawing.Size(124, 17)
         Me.CheckBox2.TabIndex = 4
@@ -130,7 +131,7 @@ Partial Class frmSearch
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(153, 84)
+        Me.Button1.Location = New System.Drawing.Point(153, 79)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(75, 23)
         Me.Button1.TabIndex = 5
@@ -139,7 +140,7 @@ Partial Class frmSearch
         '
         'btnOfSend
         '
-        Me.btnOfSend.Location = New System.Drawing.Point(253, 84)
+        Me.btnOfSend.Location = New System.Drawing.Point(253, 79)
         Me.btnOfSend.Name = "btnOfSend"
         Me.btnOfSend.Size = New System.Drawing.Size(75, 23)
         Me.btnOfSend.TabIndex = 7
@@ -152,7 +153,7 @@ Partial Class frmSearch
         Me.Label3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label3.Location = New System.Drawing.Point(353, 53)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(624, 28)
+        Me.Label3.Size = New System.Drawing.Size(624, 23)
         Me.Label3.TabIndex = 8
         Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
@@ -170,10 +171,10 @@ Partial Class frmSearch
         Me.lstSearch.FullRowSelect = True
         Me.lstSearch.GridLines = True
         Me.lstSearch.HideSelection = False
-        Me.lstSearch.Location = New System.Drawing.Point(3, 144)
+        Me.lstSearch.Location = New System.Drawing.Point(3, 193)
         Me.lstSearch.MultiSelect = False
         Me.lstSearch.Name = "lstSearch"
-        Me.lstSearch.Size = New System.Drawing.Size(986, 519)
+        Me.lstSearch.Size = New System.Drawing.Size(986, 470)
         Me.lstSearch.TabIndex = 1
         Me.lstSearch.UseCompatibleStateImageBehavior = False
         Me.lstSearch.View = System.Windows.Forms.View.Details
@@ -189,7 +190,7 @@ Partial Class frmSearch
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 2
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(992, 666)
         Me.TableLayoutPanel1.TabIndex = 2
         '

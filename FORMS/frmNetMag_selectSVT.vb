@@ -12,6 +12,7 @@
     End Sub 'New
 
     Private Sub frmNetMag_selectSVT_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        SendFonts(Me)
 
         Call frmNetMag_selectSVT_LANG()
 

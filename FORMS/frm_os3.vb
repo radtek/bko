@@ -81,6 +81,8 @@
 
     Private Sub frm_os3_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
+        SendFonts(Me)
+
         Call LANG_frm_os3()
 
 

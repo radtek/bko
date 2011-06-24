@@ -434,6 +434,9 @@ err_:
 
     Private Sub frmLogin_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
+        'SendFonts(Me)
+
+
         Call LANG_frmLogin()
 
         Dim objIniFile As New IniFile(PrPath & "base.ini")
@@ -458,12 +461,6 @@ err_:
         txtPassword.Focus()
 
 
-        ''Меняем шрифт
-        'SendFonts(Me)
-        'SendFonts(gbsql)
-        'SendFonts(gbData)
-
-
     End Sub
 
     Private Sub sSUBD()
@@ -483,6 +480,7 @@ err_:
             Call UnLoadDatabase()
             Call LoadDatabase()
         End If
+
 
         Select Case cmbSUBD.Text
 

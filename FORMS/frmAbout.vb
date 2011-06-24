@@ -1,6 +1,10 @@
 ﻿Public NotInheritable Class frmAbout
 
     Private Sub frmAbout_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
+
+        SendFonts(Me)
+
         ' Установить заголовок формы.
         Dim ApplicationTitle As String
         If My.Application.Info.Title <> "" Then

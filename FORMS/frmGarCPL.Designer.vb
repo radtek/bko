@@ -22,38 +22,39 @@ Partial Class frmGarCPL
     'Не изменяйте ее в редакторе исходного кода.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.gbcpu = New System.Windows.Forms.GroupBox
-        Me.PROizV2 = New System.Windows.Forms.ComboBox
-        Me.txtSoc4 = New System.Windows.Forms.TextBox
-        Me.PROizV4 = New System.Windows.Forms.ComboBox
-        Me.txtMHZ4 = New System.Windows.Forms.TextBox
-        Me.cmbCPU4 = New System.Windows.Forms.ComboBox
-        Me.txtSoc3 = New System.Windows.Forms.TextBox
-        Me.PROizV3 = New System.Windows.Forms.ComboBox
-        Me.txtMHZ3 = New System.Windows.Forms.TextBox
-        Me.cmbCPU3 = New System.Windows.Forms.ComboBox
-        Me.txtSoc2 = New System.Windows.Forms.TextBox
-        Me.txtMHZ2 = New System.Windows.Forms.TextBox
-        Me.cmbCPU2 = New System.Windows.Forms.ComboBox
-        Me.txtSoc1 = New System.Windows.Forms.TextBox
-        Me.PROizV1 = New System.Windows.Forms.ComboBox
-        Me.txtMHZ1 = New System.Windows.Forms.TextBox
-        Me.cmbCPU1 = New System.Windows.Forms.ComboBox
-        Me.gbPost = New System.Windows.Forms.GroupBox
-        Me.DOG = New System.Windows.Forms.DateTimePicker
-        Me.Label1 = New System.Windows.Forms.Label
-        Me.DNG = New System.Windows.Forms.DateTimePicker
-        Me.Label2 = New System.Windows.Forms.Label
-        Me.cmbPostav = New System.Windows.Forms.ComboBox
-        Me.Label4 = New System.Windows.Forms.Label
-        Me.btnAdd = New System.Windows.Forms.Button
-        Me.btnCancel = New System.Windows.Forms.Button
+        Me.gbcpu = New System.Windows.Forms.GroupBox()
+        Me.PROizV2 = New System.Windows.Forms.ComboBox()
+        Me.txtSoc4 = New System.Windows.Forms.TextBox()
+        Me.PROizV4 = New System.Windows.Forms.ComboBox()
+        Me.txtMHZ4 = New System.Windows.Forms.TextBox()
+        Me.cmbCPU4 = New System.Windows.Forms.ComboBox()
+        Me.txtSoc3 = New System.Windows.Forms.TextBox()
+        Me.PROizV3 = New System.Windows.Forms.ComboBox()
+        Me.txtMHZ3 = New System.Windows.Forms.TextBox()
+        Me.cmbCPU3 = New System.Windows.Forms.ComboBox()
+        Me.txtSoc2 = New System.Windows.Forms.TextBox()
+        Me.txtMHZ2 = New System.Windows.Forms.TextBox()
+        Me.cmbCPU2 = New System.Windows.Forms.ComboBox()
+        Me.txtSoc1 = New System.Windows.Forms.TextBox()
+        Me.PROizV1 = New System.Windows.Forms.ComboBox()
+        Me.txtMHZ1 = New System.Windows.Forms.TextBox()
+        Me.cmbCPU1 = New System.Windows.Forms.ComboBox()
+        Me.gbPost = New System.Windows.Forms.GroupBox()
+        Me.DOG = New System.Windows.Forms.DateTimePicker()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.DNG = New System.Windows.Forms.DateTimePicker()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.cmbPostav = New System.Windows.Forms.ComboBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.btnAdd = New System.Windows.Forms.Button()
+        Me.btnCancel = New System.Windows.Forms.Button()
         Me.gbcpu.SuspendLayout()
         Me.gbPost.SuspendLayout()
         Me.SuspendLayout()
         '
         'gbcpu
         '
+        Me.gbcpu.AutoSize = True
         Me.gbcpu.Controls.Add(Me.PROizV2)
         Me.gbcpu.Controls.Add(Me.txtSoc4)
         Me.gbcpu.Controls.Add(Me.PROizV4)
@@ -72,7 +73,7 @@ Partial Class frmGarCPL
         Me.gbcpu.Controls.Add(Me.cmbCPU1)
         Me.gbcpu.Location = New System.Drawing.Point(2, 2)
         Me.gbcpu.Name = "gbcpu"
-        Me.gbcpu.Size = New System.Drawing.Size(662, 126)
+        Me.gbcpu.Size = New System.Drawing.Size(662, 141)
         Me.gbcpu.TabIndex = 0
         Me.gbcpu.TabStop = False
         Me.gbcpu.Text = "Процессор"
@@ -218,15 +219,16 @@ Partial Class frmGarCPL
         '
         'gbPost
         '
+        Me.gbPost.AutoSize = True
         Me.gbPost.Controls.Add(Me.DOG)
         Me.gbPost.Controls.Add(Me.Label1)
         Me.gbPost.Controls.Add(Me.DNG)
         Me.gbPost.Controls.Add(Me.Label2)
         Me.gbPost.Controls.Add(Me.cmbPostav)
         Me.gbPost.Controls.Add(Me.Label4)
-        Me.gbPost.Location = New System.Drawing.Point(2, 134)
+        Me.gbPost.Location = New System.Drawing.Point(3, 149)
         Me.gbPost.Name = "gbPost"
-        Me.gbPost.Size = New System.Drawing.Size(661, 91)
+        Me.gbPost.Size = New System.Drawing.Size(661, 97)
         Me.gbPost.TabIndex = 1
         Me.gbPost.TabStop = False
         Me.gbPost.Text = "Поставщик"
@@ -284,7 +286,7 @@ Partial Class frmGarCPL
         '
         'btnAdd
         '
-        Me.btnAdd.Location = New System.Drawing.Point(2, 230)
+        Me.btnAdd.Location = New System.Drawing.Point(2, 252)
         Me.btnAdd.Name = "btnAdd"
         Me.btnAdd.Size = New System.Drawing.Size(75, 23)
         Me.btnAdd.TabIndex = 2
@@ -293,7 +295,7 @@ Partial Class frmGarCPL
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(88, 230)
+        Me.btnCancel.Location = New System.Drawing.Point(99, 252)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(75, 23)
         Me.btnCancel.TabIndex = 3
@@ -304,7 +306,7 @@ Partial Class frmGarCPL
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(669, 257)
+        Me.ClientSize = New System.Drawing.Size(669, 280)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnAdd)
         Me.Controls.Add(Me.gbPost)
@@ -318,6 +320,7 @@ Partial Class frmGarCPL
         Me.gbPost.ResumeLayout(False)
         Me.gbPost.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents gbcpu As System.Windows.Forms.GroupBox

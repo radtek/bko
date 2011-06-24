@@ -52,10 +52,9 @@ Partial Class frmSQL
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 3
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 23.37662!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.220779!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 72.56493!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(992, 616)
         Me.TableLayoutPanel1.TabIndex = 21
         '
@@ -72,11 +71,11 @@ Partial Class frmSQL
         Me.TableLayoutPanel2.Location = New System.Drawing.Point(762, 3)
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
         Me.TableLayoutPanel2.RowCount = 5
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28.0!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28.0!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28.0!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28.0!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28.0!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel2.Size = New System.Drawing.Size(227, 137)
         Me.TableLayoutPanel2.TabIndex = 27
         '
@@ -151,7 +150,7 @@ Partial Class frmSQL
         Me.LvQ.Dock = System.Windows.Forms.DockStyle.Fill
         Me.LvQ.FullRowSelect = True
         Me.LvQ.GridLines = True
-        Me.LvQ.Location = New System.Drawing.Point(3, 171)
+        Me.LvQ.Location = New System.Drawing.Point(3, 173)
         Me.LvQ.MultiSelect = False
         Me.LvQ.Name = "LvQ"
         Me.LvQ.ShowItemToolTips = True
@@ -166,7 +165,7 @@ Partial Class frmSQL
         Me.lstTable.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
         Me.lstTable.FormattingEnabled = True
         Me.lstTable.ItemHeight = 16
-        Me.lstTable.Location = New System.Drawing.Point(762, 171)
+        Me.lstTable.Location = New System.Drawing.Point(762, 173)
         Me.lstTable.Name = "lstTable"
         Me.lstTable.Size = New System.Drawing.Size(227, 442)
         Me.lstTable.TabIndex = 26

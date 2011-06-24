@@ -12,6 +12,16 @@ Public Class frmAct_Treb
 
     Private Sub frmAct_Treb_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
+        SendFonts(Me)
+
+        TabControl1.Font = New Font(FontN, fontS)
+        SendFonts(TabControl1.TabPages(0))
+        SendFonts(TabControl1.TabPages(1))
+        SendFonts(TabControl1.TabPages(2))
+
+
+
+
         Call frmAct_treb_LANG()
 
         Call ACTOS3_LOAD()

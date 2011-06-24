@@ -3,6 +3,8 @@
 
     Private Sub frmCartr_Add_Zap_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
+        SendFonts(Me)
+
         FillComboNET(Me.cmbPost, "Name", "SPR_Postav", "", False, True)
 
 

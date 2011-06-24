@@ -1426,12 +1426,12 @@ err_:
 
         frmMain.ИнвентаризацияToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "43", "")
 
-
+        '
         frmMain.КлавиатураToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "44", "")
         frmMain.МышьToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "45", "")
         frmMain.СетевыеФильтрыToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "46", "")
         frmMain.СтатистическиеОтчетыToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "47", "")
-
+        frmMain.mnuNetMag.Text = LNGIniFile.GetString("frmNetMagazin", "frmNetMagazin", "")
 
 
 

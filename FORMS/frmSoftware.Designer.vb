@@ -53,6 +53,7 @@ Partial Class frmSoftware
         Me.Label1 = New System.Windows.Forms.Label()
         Me.gbTree.SuspendLayout()
         Me.TableLayoutPanel3.SuspendLayout()
+        CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
@@ -159,10 +160,10 @@ Partial Class frmSoftware
         'TableLayoutPanel1
         '
         Me.TableLayoutPanel1.ColumnCount = 4
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 180.0!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 213.0!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 149.0!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 135.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel1.Controls.Add(Me.cmbSoftware, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.lstSoftware, 0, 7)
         Me.TableLayoutPanel1.Controls.Add(Me.CheckBox1, 3, 5)
@@ -249,13 +250,13 @@ Partial Class frmSoftware
         Me.Label2.AutoSize = True
         Me.Label2.Location = New System.Drawing.Point(3, 34)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(174, 13)
+        Me.Label2.Size = New System.Drawing.Size(171, 13)
         Me.Label2.TabIndex = 2
         Me.Label2.Text = "Тип лицензии:"
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(183, 136)
+        Me.btnDelete.Location = New System.Drawing.Point(180, 136)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(75, 23)
         Me.btnDelete.TabIndex = 15
@@ -268,9 +269,9 @@ Partial Class frmSoftware
         Me.cmbTipLicense.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cmbTipLicense.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cmbTipLicense.FormattingEnabled = True
-        Me.cmbTipLicense.Location = New System.Drawing.Point(183, 30)
+        Me.cmbTipLicense.Location = New System.Drawing.Point(180, 30)
         Me.cmbTipLicense.Name = "cmbTipLicense"
-        Me.cmbTipLicense.Size = New System.Drawing.Size(207, 21)
+        Me.cmbTipLicense.Size = New System.Drawing.Size(210, 21)
         Me.cmbTipLicense.TabIndex = 3
         '
         'btnAdd
@@ -309,7 +310,7 @@ Partial Class frmSoftware
         Me.Label4.AutoSize = True
         Me.Label4.Location = New System.Drawing.Point(3, 54)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(174, 13)
+        Me.Label4.Size = New System.Drawing.Size(171, 13)
         Me.Label4.TabIndex = 6
         Me.Label4.Text = "Лицензионный номер:"
         '
@@ -374,7 +375,7 @@ Partial Class frmSoftware
         Me.Label7.AutoSize = True
         Me.Label7.Location = New System.Drawing.Point(3, 94)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(174, 13)
+        Me.Label7.Size = New System.Drawing.Size(171, 13)
         Me.Label7.TabIndex = 10
         Me.Label7.Text = "Дата приобретения (установки):"
         '
@@ -402,6 +403,7 @@ Partial Class frmSoftware
         Me.TableLayoutPanel3.PerformLayout()
         Me.SplitContainer1.Panel1.ResumeLayout(False)
         Me.SplitContainer1.Panel2.ResumeLayout(False)
+        CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer1.ResumeLayout(False)
         Me.gbSoftware.ResumeLayout(False)
         Me.gbSoftware.PerformLayout()

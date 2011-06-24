@@ -1456,7 +1456,8 @@ Error_:
 
     Private Sub frmCRT3_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
- 
+        SendFonts(Me)
+
 
         Me.Show()
 

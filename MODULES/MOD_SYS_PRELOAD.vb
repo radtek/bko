@@ -10,8 +10,11 @@ Module MOD_SYS_PRELOAD
     Public ProGramName As String
     Public FontN As String
     Public fontS As String
-    Public FontC As System.Drawing.Color
-    Public FontB As String
+    Public FontC As String
+    Public FontB As Boolean
+    Public FontSt As System.Drawing.FontStyle
+    Public FontD As System.Drawing.GraphicsUnit
+
     Public RAZDEL As String
 
     Public KCKey As Integer
@@ -96,8 +99,12 @@ Module MOD_SYS_PRELOAD
 
         FontN = objIniFile.GetString("general", "Font", "Microsoft Sans Serif")
         fontS = objIniFile.GetString("general", "FontSize", "8,25")
-        FontB = objIniFile.GetString("general", "FontBold", "")
+        FontC = objIniFile.GetString("general", "FontColor", "Black")
+        FontB = objIniFile.GetString("general", "FontBold", "False")
+        FontSt = objIniFile.GetString("general", "FontStyle", "0")
+        FontD = objIniFile.GetString("general", "FontUnit", "3")
 
+        If fontS > 10 Then fontS = 10
 
 
     End Sub
@@ -128,33 +135,25 @@ Module MOD_SYS_PRELOAD
 
     End Sub
 
-    'Public Sub ClearForm(ByVal ControlContainer As Object)
+    Public Sub ClearForm(ByVal ControlContainer As Object)
 
-    '    For Each Ctl As Object In ControlContainer.Controls
-    '        Try
-    '            If Not Ctl.Controls Is Nothing Then
-    '                SendFonts(Ctl)
+        For Each Ctl As Object In ControlContainer.Controls
+            Try
+                If Not Ctl.Controls Is Nothing Then
+                    ClearForm(Ctl)
 
-    '                If TypeOf Ctl Is TextBox Then
-    '                    Ctl.text = ""
-    '                End If
+                    If TypeOf Ctl Is TextBox Then Ctl.text = ""
+                    If TypeOf Ctl Is ComboBox Then Ctl.text = ""
+                    If TypeOf Ctl Is ListView Then Ctl.items.clear()
 
-    '                If TypeOf Ctl Is ComboBox Then
-    '                    Ctl.text = ""
-    '                End If
+                End If
 
-    '                If TypeOf Ctl Is ListView Then
-    '                    Ctl.items.clear()
-    '                End If
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
+        Next
 
-    '            End If
-
-    '        Catch ex As Exception
-    '            MsgBox(ex.Message)
-    '        End Try
-    '    Next
-
-    'End Sub
+    End Sub
 
 
 
@@ -165,34 +164,61 @@ Module MOD_SYS_PRELOAD
                 If Not Ctl.Controls Is Nothing Then
                     SendFonts(Ctl)
 
-                    If Ctl.Name.StartsWith("l") Then
-                        Ctl.Font = New Font(FontN, fontS)
-                    End If
+                    If TypeOf Ctl Is TextBox Then Ctl.Font = New Font(FontN, fontS, FontSt, FontD, FontB)
+                    If TypeOf Ctl Is ComboBox Then Ctl.Font = New Font(FontN, fontS, FontSt, FontD, FontB)
+                    If TypeOf Ctl Is Label Then Ctl.Font = New Font(FontN, fontS, FontSt, FontD, FontB)
+                    If TypeOf Ctl Is ListView Then Ctl.Font = New Font(FontN, fontS, FontSt, FontD, FontB)
+                    If TypeOf Ctl Is TreeView Then Ctl.Font = New Font(FontN, fontS, FontSt, FontD, FontB)
+                    If TypeOf Ctl Is TabPage Then Ctl.Font = New Font(FontN, fontS, FontSt, FontD, FontB)
+                    If TypeOf Ctl Is GroupBox Then Ctl.Font = New Font(FontN, fontS, FontSt, FontD, FontB)
+                    If TypeOf Ctl Is DateTimePicker Then Ctl.Font = New Font(FontN, fontS, FontSt, FontD, FontB)
+                    If TypeOf Ctl Is NumericUpDown Then Ctl.Font = New Font(FontN, fontS, FontSt, FontD, FontB)
+                    If TypeOf Ctl Is Button Then Ctl.Font = New Font(FontN, fontS, FontSt, FontD, FontB)
+                    If TypeOf Ctl Is CheckBox Then Ctl.Font = New Font(FontN, fontS, FontSt, FontD, FontB)
+                    If TypeOf Ctl Is RadioButton Then Ctl.Font = New Font(FontN, fontS, FontSt, FontD, FontB)
+                    If TypeOf Ctl Is MenuStrip Then Ctl.Font = New Font(FontN, fontS, FontSt, FontD, FontB)
+                    If TypeOf Ctl Is ToolStrip Then Ctl.Font = New Font(FontN, fontS, FontSt, FontD, FontB)
+                    If TypeOf Ctl Is StatusStrip Then Ctl.Font = New Font(FontN, fontS, FontSt, FontD, FontB)
+                    If TypeOf Ctl Is ListBox Then Ctl.Font = New Font(FontN, fontS, FontSt, FontD, FontB)
+                    If TypeOf Ctl Is Form Then Ctl.Font = New Font(FontN, fontS, FontSt, FontD, FontB)
+                    If TypeOf Ctl Is TabControl Then Ctl.Font = New Font(FontN, fontS, FontSt, FontD, FontB)
 
-                    If Ctl.Name.StartsWith("t") Then
-                        Ctl.Font = New Font(FontN, fontS)
-                    End If
-                    If Ctl.Name.StartsWith("c") Then
-                        Ctl.Font = New Font(FontN, fontS)
-                    End If
-                    If Ctl.Name.StartsWith("g") Then
-                        Ctl.Font = New Font(FontN, fontS)
-                    End If
-                    If Ctl.Name.StartsWith("d") Then
-                        Ctl.Font = New Font(FontN, fontS)
-                    End If
-                    If Ctl.Name.StartsWith("l") Then
-                        Ctl.Font = New Font(FontN, fontS)
-                    End If
-                    If Ctl.Name.StartsWith("b") Then
-                        Ctl.Font = New Font(FontN, fontS)
-                    End If
-                    If Ctl.Name.StartsWith("T") Then
-                        Ctl.Font = New Font(FontN, fontS)
-                    End If
-                    If Ctl.Name.StartsWith("L") Then
-                        Ctl.Font = New Font(FontN, fontS)
-                    End If
+
+                    If TypeOf Ctl Is Button Then Ctl.autosize = True
+                    If TypeOf Ctl Is Label Then Ctl.autosize = True
+                    If TypeOf Ctl Is TableLayoutPanel Then Ctl.autosize = True
+                    If TypeOf Ctl Is GroupBox Then Ctl.autosize = True
+                    If TypeOf Ctl Is CheckBox Then Ctl.autosize = True
+                    If TypeOf Ctl Is RadioButton Then Ctl.autosize = True
+
+                End If
+
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
+        Next
+
+        COLOR_LOAD(ControlContainer)
+
+
+    End Sub
+
+    Private Sub COLOR_LOAD(ByVal ControlContainer As Object)
+
+        For Each C As Object In ControlContainer.Controls
+            Try
+                If Not C.Controls Is Nothing Then
+                    COLOR_LOAD(C)
+                    If TypeOf C Is Form Then C.ForeColor = Drawing.Color.FromName(FontC)
+                    'If TypeOf C Is TabControl Then C.TabPage.ForeColor = Drawing.Color.FromName(FontC)
+                    If TypeOf C Is TableLayoutPanel Then C.ForeColor = Drawing.Color.FromName(FontC)
+                    If TypeOf C Is GroupBox Then C.ForeColor = Drawing.Color.FromName(FontC)
+                    If TypeOf C Is Label Then C.ForeColor = Drawing.Color.FromName(FontC)
+                    If TypeOf C Is CheckBox Then C.ForeColor = Drawing.Color.FromName(FontC)
+                    If TypeOf C Is RadioButton Then C.ForeColor = Drawing.Color.FromName(FontC)
+                    If TypeOf C Is TextBox Then C.ForeColor = Drawing.Color.FromName(FontC)
+                    If TypeOf C Is ComboBox Then C.ForeColor = Drawing.Color.FromName(FontC)
+                    If TypeOf C Is ListView Then C.ForeColor = Drawing.Color.FromName(FontC)
                 End If
 
             Catch ex As Exception
@@ -201,8 +227,6 @@ Module MOD_SYS_PRELOAD
         Next
 
     End Sub
-
-   
 
 
 End Module

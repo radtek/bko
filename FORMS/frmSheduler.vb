@@ -7,6 +7,9 @@
     End Sub
 
     Private Sub frmSheduler_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+
+        SendFonts(Me)
+
         Call frmSheduler_LANG()
 
         Call SHEDULER_LOAD()

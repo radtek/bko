@@ -22,17 +22,17 @@ Partial Class frmSheduler
     'Не изменяйте ее в редакторе исходного кода.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.Label1 = New System.Windows.Forms.Label
-        Me.Label2 = New System.Windows.Forms.Label
-        Me.DTSHED = New System.Windows.Forms.DateTimePicker
-        Me.cmbUser = New System.Windows.Forms.ComboBox
-        Me.txtShed = New System.Windows.Forms.TextBox
-        Me.btnAdd = New System.Windows.Forms.Button
-        Me.btnDel = New System.Windows.Forms.Button
-        Me.btnClear = New System.Windows.Forms.Button
-        Me.lstShed = New System.Windows.Forms.ListView
-        Me.btnAll = New System.Windows.Forms.Button
-        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.DTSHED = New System.Windows.Forms.DateTimePicker()
+        Me.cmbUser = New System.Windows.Forms.ComboBox()
+        Me.txtShed = New System.Windows.Forms.TextBox()
+        Me.btnAdd = New System.Windows.Forms.Button()
+        Me.btnDel = New System.Windows.Forms.Button()
+        Me.btnClear = New System.Windows.Forms.Button()
+        Me.lstShed = New System.Windows.Forms.ListView()
+        Me.btnAll = New System.Windows.Forms.Button()
+        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -40,7 +40,7 @@ Partial Class frmSheduler
         '
         Me.Label1.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(3, 10)
+        Me.Label1.Location = New System.Drawing.Point(3, 8)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(36, 13)
         Me.Label1.TabIndex = 0
@@ -50,7 +50,7 @@ Partial Class frmSheduler
         '
         Me.Label2.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(341, 10)
+        Me.Label2.Location = New System.Drawing.Point(341, 8)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(105, 13)
         Me.Label2.TabIndex = 1
@@ -59,7 +59,7 @@ Partial Class frmSheduler
         'DTSHED
         '
         Me.DTSHED.Anchor = System.Windows.Forms.AnchorStyles.Left
-        Me.DTSHED.Location = New System.Drawing.Point(103, 6)
+        Me.DTSHED.Location = New System.Drawing.Point(103, 4)
         Me.DTSHED.Name = "DTSHED"
         Me.DTSHED.Size = New System.Drawing.Size(131, 20)
         Me.DTSHED.TabIndex = 2
@@ -71,7 +71,7 @@ Partial Class frmSheduler
         Me.cmbUser.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
         Me.cmbUser.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cmbUser.FormattingEnabled = True
-        Me.cmbUser.Location = New System.Drawing.Point(460, 6)
+        Me.cmbUser.Location = New System.Drawing.Point(460, 4)
         Me.cmbUser.Name = "cmbUser"
         Me.cmbUser.Size = New System.Drawing.Size(302, 21)
         Me.cmbUser.TabIndex = 3
@@ -80,7 +80,7 @@ Partial Class frmSheduler
         '
         Me.TableLayoutPanel1.SetColumnSpan(Me.txtShed, 4)
         Me.txtShed.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtShed.Location = New System.Drawing.Point(3, 36)
+        Me.txtShed.Location = New System.Drawing.Point(3, 32)
         Me.txtShed.Multiline = True
         Me.txtShed.Name = "txtShed"
         Me.TableLayoutPanel1.SetRowSpan(Me.txtShed, 3)
@@ -99,7 +99,7 @@ Partial Class frmSheduler
         '
         'btnDel
         '
-        Me.btnDel.Location = New System.Drawing.Point(888, 36)
+        Me.btnDel.Location = New System.Drawing.Point(888, 32)
         Me.btnDel.Name = "btnDel"
         Me.btnDel.Size = New System.Drawing.Size(86, 23)
         Me.btnDel.TabIndex = 6
@@ -108,7 +108,7 @@ Partial Class frmSheduler
         '
         'btnClear
         '
-        Me.btnClear.Location = New System.Drawing.Point(888, 73)
+        Me.btnClear.Location = New System.Drawing.Point(888, 61)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Size = New System.Drawing.Size(86, 23)
         Me.btnClear.TabIndex = 7
@@ -122,17 +122,17 @@ Partial Class frmSheduler
         Me.lstShed.FullRowSelect = True
         Me.lstShed.GridLines = True
         Me.lstShed.HideSelection = False
-        Me.lstShed.Location = New System.Drawing.Point(3, 171)
+        Me.lstShed.Location = New System.Drawing.Point(3, 167)
         Me.lstShed.MultiSelect = False
         Me.lstShed.Name = "lstShed"
-        Me.lstShed.Size = New System.Drawing.Size(986, 492)
+        Me.lstShed.Size = New System.Drawing.Size(986, 496)
         Me.lstShed.TabIndex = 8
         Me.lstShed.UseCompatibleStateImageBehavior = False
         Me.lstShed.View = System.Windows.Forms.View.Details
         '
         'btnAll
         '
-        Me.btnAll.Location = New System.Drawing.Point(888, 111)
+        Me.btnAll.Location = New System.Drawing.Point(888, 107)
         Me.btnAll.Name = "btnAll"
         Me.btnAll.Size = New System.Drawing.Size(86, 23)
         Me.btnAll.TabIndex = 9
@@ -161,9 +161,9 @@ Partial Class frmSheduler
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 5
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 37.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(992, 666)

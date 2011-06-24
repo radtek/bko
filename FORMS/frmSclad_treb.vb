@@ -402,6 +402,8 @@ Error_:
 
     Private Sub frmSclad_treb_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
+        SendFonts(Me)
+
         Call LANG_frmSclad_treb()
 
         FillComboNET(Me.cmbLich, "Name", "SPR_OTV", "", False, True)

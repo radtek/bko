@@ -22,27 +22,27 @@ Partial Class frmACT_OS_Act_treb
     'Не изменяйте ее в редакторе исходного кода.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel
-        Me.Label1 = New System.Windows.Forms.Label
-        Me.Label2 = New System.Windows.Forms.Label
-        Me.Label3 = New System.Windows.Forms.Label
-        Me.Label4 = New System.Windows.Forms.Label
-        Me.Label5 = New System.Windows.Forms.Label
-        Me.Label6 = New System.Windows.Forms.Label
-        Me.Label7 = New System.Windows.Forms.Label
-        Me.Label8 = New System.Windows.Forms.Label
-        Me.Label9 = New System.Windows.Forms.Label
-        Me.txt_akt_nomer = New System.Windows.Forms.TextBox
-        Me.txt_akt_tip = New System.Windows.Forms.ComboBox
-        Me.txt_akt_mod = New System.Windows.Forms.TextBox
-        Me.txt_akt_cena = New System.Windows.Forms.NumericUpDown
-        Me.txt_akt_nomer_prikaza = New System.Windows.Forms.TextBox
-        Me.txt_akt_data_prikaza = New System.Windows.Forms.DateTimePicker
-        Me.txt_akt_postavshik = New System.Windows.Forms.ComboBox
-        Me.txt_akt_god_vipuska = New System.Windows.Forms.TextBox
-        Me.txt_akt_data_sostav = New System.Windows.Forms.DateTimePicker
-        Me.akt_add = New System.Windows.Forms.Button
-        Me.akt_cancel = New System.Windows.Forms.Button
+        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.txt_akt_nomer = New System.Windows.Forms.TextBox()
+        Me.txt_akt_tip = New System.Windows.Forms.ComboBox()
+        Me.txt_akt_mod = New System.Windows.Forms.TextBox()
+        Me.txt_akt_cena = New System.Windows.Forms.NumericUpDown()
+        Me.txt_akt_nomer_prikaza = New System.Windows.Forms.TextBox()
+        Me.txt_akt_data_prikaza = New System.Windows.Forms.DateTimePicker()
+        Me.txt_akt_postavshik = New System.Windows.Forms.ComboBox()
+        Me.txt_akt_god_vipuska = New System.Windows.Forms.TextBox()
+        Me.txt_akt_data_sostav = New System.Windows.Forms.DateTimePicker()
+        Me.akt_add = New System.Windows.Forms.Button()
+        Me.akt_cancel = New System.Windows.Forms.Button()
         Me.TableLayoutPanel1.SuspendLayout()
         CType(Me.txt_akt_cena, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()

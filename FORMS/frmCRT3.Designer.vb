@@ -233,21 +233,20 @@ Partial Class frmCRT3
         Me.TableLayoutPanel2.Location = New System.Drawing.Point(3, 3)
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
         Me.TableLayoutPanel2.RowCount = 14
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26.0!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26.0!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26.0!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26.0!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26.0!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26.0!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26.0!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26.0!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26.0!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26.0!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23.0!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 19.0!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27.0!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel2.Size = New System.Drawing.Size(641, 570)
         Me.TableLayoutPanel2.TabIndex = 1
         '
@@ -255,16 +254,16 @@ Partial Class frmCRT3
         '
         Me.TableLayoutPanel2.SetColumnSpan(Me.txtMemo, 3)
         Me.txtMemo.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtMemo.Location = New System.Drawing.Point(3, 305)
+        Me.txtMemo.Location = New System.Drawing.Point(3, 293)
         Me.txtMemo.Multiline = True
         Me.txtMemo.Name = "txtMemo"
         Me.txtMemo.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtMemo.Size = New System.Drawing.Size(635, 235)
+        Me.txtMemo.Size = New System.Drawing.Size(635, 247)
         Me.txtMemo.TabIndex = 29
         '
         'dtSale
         '
-        Me.dtSale.Location = New System.Drawing.Point(172, 237)
+        Me.dtSale.Location = New System.Drawing.Point(172, 231)
         Me.dtSale.Name = "dtSale"
         Me.dtSale.Size = New System.Drawing.Size(137, 20)
         Me.dtSale.TabIndex = 48
@@ -272,7 +271,7 @@ Partial Class frmCRT3
         '
         'txtCashe
         '
-        Me.txtCashe.Location = New System.Drawing.Point(172, 211)
+        Me.txtCashe.Location = New System.Drawing.Point(172, 205)
         Me.txtCashe.Maximum = New Decimal(New Integer() {100000, 0, 0, 0})
         Me.txtCashe.Name = "txtCashe"
         Me.txtCashe.Size = New System.Drawing.Size(137, 20)
@@ -282,7 +281,7 @@ Partial Class frmCRT3
         '
         Me.Label11.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(3, 240)
+        Me.Label11.Location = New System.Drawing.Point(3, 234)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(110, 13)
         Me.Label11.TabIndex = 47
@@ -292,7 +291,7 @@ Partial Class frmCRT3
         '
         Me.chkNZ.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.chkNZ.AutoSize = True
-        Me.chkNZ.Location = New System.Drawing.Point(172, 263)
+        Me.chkNZ.Location = New System.Drawing.Point(172, 257)
         Me.chkNZ.Name = "chkNZ"
         Me.chkNZ.Size = New System.Drawing.Size(97, 17)
         Me.chkNZ.TabIndex = 32
@@ -303,7 +302,7 @@ Partial Class frmCRT3
         '
         Me.Label1.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(3, 6)
+        Me.Label1.Location = New System.Drawing.Point(3, 1)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(18, 13)
         Me.Label1.TabIndex = 30
@@ -313,7 +312,7 @@ Partial Class frmCRT3
         '
         Me.chkNezap.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.chkNezap.AutoSize = True
-        Me.chkNezap.Location = New System.Drawing.Point(3, 263)
+        Me.chkNezap.Location = New System.Drawing.Point(3, 257)
         Me.chkNezap.Name = "chkNezap"
         Me.chkNezap.Size = New System.Drawing.Size(119, 17)
         Me.chkNezap.TabIndex = 31
@@ -328,14 +327,14 @@ Partial Class frmCRT3
         Me.lblRealNumber.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lblRealNumber.Location = New System.Drawing.Point(172, 0)
         Me.lblRealNumber.Name = "lblRealNumber"
-        Me.lblRealNumber.Size = New System.Drawing.Size(466, 26)
+        Me.lblRealNumber.Size = New System.Drawing.Size(466, 15)
         Me.lblRealNumber.TabIndex = 36
         '
         'Label2
         '
         Me.Label2.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(3, 32)
+        Me.Label2.Location = New System.Drawing.Point(3, 21)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(96, 13)
         Me.Label2.TabIndex = 31
@@ -345,7 +344,7 @@ Partial Class frmCRT3
         '
         Me.Label10.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(3, 214)
+        Me.Label10.Location = New System.Drawing.Point(3, 208)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(36, 13)
         Me.Label10.TabIndex = 46
@@ -355,7 +354,7 @@ Partial Class frmCRT3
         '
         Me.TableLayoutPanel2.SetColumnSpan(Me.txtSerNumb, 2)
         Me.txtSerNumb.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtSerNumb.Location = New System.Drawing.Point(172, 29)
+        Me.txtSerNumb.Location = New System.Drawing.Point(172, 18)
         Me.txtSerNumb.Name = "txtSerNumb"
         Me.txtSerNumb.Size = New System.Drawing.Size(466, 20)
         Me.txtSerNumb.TabIndex = 37
@@ -364,7 +363,7 @@ Partial Class frmCRT3
         '
         Me.TableLayoutPanel2.SetColumnSpan(Me.txtSaleNumb, 2)
         Me.txtSaleNumb.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtSaleNumb.Location = New System.Drawing.Point(172, 185)
+        Me.txtSaleNumb.Location = New System.Drawing.Point(172, 179)
         Me.txtSaleNumb.Name = "txtSaleNumb"
         Me.txtSaleNumb.Size = New System.Drawing.Size(466, 20)
         Me.txtSaleNumb.TabIndex = 45
@@ -376,7 +375,7 @@ Partial Class frmCRT3
         Me.TableLayoutPanel2.SetColumnSpan(Me.cmbProizv, 2)
         Me.cmbProizv.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cmbProizv.FormattingEnabled = True
-        Me.cmbProizv.Location = New System.Drawing.Point(172, 55)
+        Me.cmbProizv.Location = New System.Drawing.Point(172, 44)
         Me.cmbProizv.Name = "cmbProizv"
         Me.cmbProizv.Size = New System.Drawing.Size(466, 21)
         Me.cmbProizv.TabIndex = 38
@@ -385,7 +384,7 @@ Partial Class frmCRT3
         '
         Me.Label9.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(3, 188)
+        Me.Label9.Location = New System.Drawing.Point(3, 182)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(78, 13)
         Me.Label9.TabIndex = 44
@@ -395,7 +394,7 @@ Partial Class frmCRT3
         '
         Me.Label3.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(3, 58)
+        Me.Label3.Location = New System.Drawing.Point(3, 48)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(89, 13)
         Me.Label3.TabIndex = 32
@@ -408,7 +407,7 @@ Partial Class frmCRT3
         Me.TableLayoutPanel2.SetColumnSpan(Me.cmbSaler, 2)
         Me.cmbSaler.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cmbSaler.FormattingEnabled = True
-        Me.cmbSaler.Location = New System.Drawing.Point(172, 159)
+        Me.cmbSaler.Location = New System.Drawing.Point(172, 152)
         Me.cmbSaler.Name = "cmbSaler"
         Me.cmbSaler.Size = New System.Drawing.Size(466, 21)
         Me.cmbSaler.TabIndex = 43
@@ -417,7 +416,7 @@ Partial Class frmCRT3
         '
         Me.Label4.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(3, 84)
+        Me.Label4.Location = New System.Drawing.Point(3, 75)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(87, 13)
         Me.Label4.TabIndex = 33
@@ -427,7 +426,7 @@ Partial Class frmCRT3
         '
         Me.Label8.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(3, 162)
+        Me.Label8.Location = New System.Drawing.Point(3, 156)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(60, 13)
         Me.Label8.TabIndex = 42
@@ -440,7 +439,7 @@ Partial Class frmCRT3
         Me.TableLayoutPanel2.SetColumnSpan(Me.cmbTipC, 2)
         Me.cmbTipC.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cmbTipC.FormattingEnabled = True
-        Me.cmbTipC.Location = New System.Drawing.Point(172, 81)
+        Me.cmbTipC.Location = New System.Drawing.Point(172, 71)
         Me.cmbTipC.Name = "cmbTipC"
         Me.cmbTipC.Size = New System.Drawing.Size(466, 21)
         Me.cmbTipC.TabIndex = 39
@@ -452,7 +451,7 @@ Partial Class frmCRT3
         Me.TableLayoutPanel2.SetColumnSpan(Me.cmbSostUstr, 2)
         Me.cmbSostUstr.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cmbSostUstr.FormattingEnabled = True
-        Me.cmbSostUstr.Location = New System.Drawing.Point(172, 133)
+        Me.cmbSostUstr.Location = New System.Drawing.Point(172, 125)
         Me.cmbSostUstr.Name = "cmbSostUstr"
         Me.cmbSostUstr.Size = New System.Drawing.Size(466, 21)
         Me.cmbSostUstr.TabIndex = 41
@@ -461,7 +460,7 @@ Partial Class frmCRT3
         '
         Me.Label5.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(3, 110)
+        Me.Label5.Location = New System.Drawing.Point(3, 102)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(49, 13)
         Me.Label5.TabIndex = 34
@@ -472,7 +471,7 @@ Partial Class frmCRT3
         Me.Label6.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.Label6.AutoSize = True
         Me.Label6.Enabled = False
-        Me.Label6.Location = New System.Drawing.Point(3, 136)
+        Me.Label6.Location = New System.Drawing.Point(3, 129)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(121, 13)
         Me.Label6.TabIndex = 35
@@ -485,7 +484,7 @@ Partial Class frmCRT3
         Me.TableLayoutPanel2.SetColumnSpan(Me.cmbModC, 2)
         Me.cmbModC.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cmbModC.FormattingEnabled = True
-        Me.cmbModC.Location = New System.Drawing.Point(172, 107)
+        Me.cmbModC.Location = New System.Drawing.Point(172, 98)
         Me.cmbModC.Name = "cmbModC"
         Me.cmbModC.Size = New System.Drawing.Size(466, 21)
         Me.cmbModC.TabIndex = 40
@@ -494,7 +493,7 @@ Partial Class frmCRT3
         '
         Me.chkIznos.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.chkIznos.AutoSize = True
-        Me.chkIznos.Location = New System.Drawing.Point(342, 212)
+        Me.chkIznos.Location = New System.Drawing.Point(342, 206)
         Me.chkIznos.Name = "chkIznos"
         Me.chkIznos.Size = New System.Drawing.Size(72, 17)
         Me.chkIznos.TabIndex = 33
@@ -505,7 +504,7 @@ Partial Class frmCRT3
         '
         Me.chkNaSP.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.chkNaSP.AutoSize = True
-        Me.chkNaSP.Location = New System.Drawing.Point(342, 263)
+        Me.chkNaSP.Location = New System.Drawing.Point(342, 257)
         Me.chkNaSP.Name = "chkNaSP"
         Me.chkNaSP.Size = New System.Drawing.Size(91, 17)
         Me.chkNaSP.TabIndex = 35
@@ -516,7 +515,7 @@ Partial Class frmCRT3
         '
         Me.chkSPS.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.chkSPS.AutoSize = True
-        Me.chkSPS.Location = New System.Drawing.Point(342, 238)
+        Me.chkSPS.Location = New System.Drawing.Point(342, 232)
         Me.chkSPS.Name = "chkSPS"
         Me.chkSPS.Size = New System.Drawing.Size(63, 17)
         Me.chkSPS.TabIndex = 34
@@ -527,7 +526,7 @@ Partial Class frmCRT3
         '
         Me.Label7.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(3, 286)
+        Me.Label7.Location = New System.Drawing.Point(3, 277)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(73, 13)
         Me.Label7.TabIndex = 30

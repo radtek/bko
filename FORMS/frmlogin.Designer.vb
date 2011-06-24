@@ -110,6 +110,7 @@ Partial Class frmLogin
         '
         'gbsql
         '
+        Me.gbsql.AutoSize = True
         Me.gbsql.Controls.Add(Me.Button1)
         Me.gbsql.Controls.Add(Me.TextBox5)
         Me.gbsql.Controls.Add(Me.TextBox4)
@@ -123,7 +124,7 @@ Partial Class frmLogin
         Me.gbsql.Controls.Add(Me.lblServer)
         Me.gbsql.Location = New System.Drawing.Point(3, 53)
         Me.gbsql.Name = "gbsql"
-        Me.gbsql.Size = New System.Drawing.Size(322, 155)
+        Me.gbsql.Size = New System.Drawing.Size(322, 161)
         Me.gbsql.TabIndex = 1
         Me.gbsql.TabStop = False
         Me.gbsql.Text = "Соединение с сервером"
@@ -203,6 +204,7 @@ Partial Class frmLogin
         '
         'gbData
         '
+        Me.gbData.AutoSize = True
         Me.gbData.Controls.Add(Me.cmbLang)
         Me.gbData.Controls.Add(Me.Label5)
         Me.gbData.Controls.Add(Me.btnDBDir)
@@ -214,7 +216,7 @@ Partial Class frmLogin
         Me.gbData.Controls.Add(Me.lblBase)
         Me.gbData.Location = New System.Drawing.Point(3, 214)
         Me.gbData.Name = "gbData"
-        Me.gbData.Size = New System.Drawing.Size(322, 136)
+        Me.gbData.Size = New System.Drawing.Size(322, 144)
         Me.gbData.TabIndex = 2
         Me.gbData.TabStop = False
         Me.gbData.Text = "Вход в программу:"

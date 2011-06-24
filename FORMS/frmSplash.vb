@@ -1,6 +1,9 @@
 ﻿Public Class frmSplash
 
     Private Sub frmSplash_Activated(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Activated
+
+        'SendFonts(Me)
+
         'Dim sBackgroundImage As String = PrPath & "\img\BKO17.jpg"
         Call PreLoad()
 

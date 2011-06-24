@@ -270,6 +270,9 @@ SRCCH2:
     End Sub
 
     Private Sub frmSearch_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+
+        SendFonts(Me)
+
         Call frmSearch_Lang()
         FillComboNET(Me.lstGroups, "FILIAL", "SPR_FILIAL", "", False, True)
 

@@ -5,6 +5,8 @@
 
     Private Sub frmCartr_ADD_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
+        SendFonts(Me)
+
 
         FillComboNET(Me.cmbProizv, "PROIZV", "SPR_PROIZV", "", False, True)
         FillComboNET(Me.cmbSaler, "Name", "SPR_Postav", "", False, True)

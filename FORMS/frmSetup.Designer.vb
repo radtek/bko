@@ -73,6 +73,7 @@ Partial Class frmSetup
         Me.chkUpdate = New System.Windows.Forms.CheckBox()
         Me.chkSNPro = New System.Windows.Forms.CheckBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Button3 = New System.Windows.Forms.Button()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.chkSheduler = New System.Windows.Forms.CheckBox()
@@ -373,7 +374,7 @@ Partial Class frmSetup
         '
         'btnEnc
         '
-        Me.btnEnc.Location = New System.Drawing.Point(381, 122)
+        Me.btnEnc.Location = New System.Drawing.Point(458, 122)
         Me.btnEnc.Name = "btnEnc"
         Me.btnEnc.Size = New System.Drawing.Size(93, 23)
         Me.btnEnc.TabIndex = 10
@@ -382,7 +383,7 @@ Partial Class frmSetup
         '
         'txtRetipePassword
         '
-        Me.txtRetipePassword.Location = New System.Drawing.Point(101, 122)
+        Me.txtRetipePassword.Location = New System.Drawing.Point(178, 122)
         Me.txtRetipePassword.Name = "txtRetipePassword"
         Me.txtRetipePassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtRetipePassword.Size = New System.Drawing.Size(257, 20)
@@ -390,7 +391,7 @@ Partial Class frmSetup
         '
         'txtPassword
         '
-        Me.txtPassword.Location = New System.Drawing.Point(101, 99)
+        Me.txtPassword.Location = New System.Drawing.Point(178, 99)
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtPassword.Size = New System.Drawing.Size(257, 20)
@@ -398,7 +399,7 @@ Partial Class frmSetup
         '
         'txtLogin
         '
-        Me.txtLogin.Location = New System.Drawing.Point(101, 73)
+        Me.txtLogin.Location = New System.Drawing.Point(178, 73)
         Me.txtLogin.Name = "txtLogin"
         Me.txtLogin.Size = New System.Drawing.Size(257, 20)
         Me.txtLogin.TabIndex = 7
@@ -418,7 +419,7 @@ Partial Class frmSetup
         Me.cmbLevel.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cmbLevel.FormattingEnabled = True
         Me.cmbLevel.Items.AddRange(New Object() {"Admin", "User"})
-        Me.cmbLevel.Location = New System.Drawing.Point(101, 46)
+        Me.cmbLevel.Location = New System.Drawing.Point(178, 46)
         Me.cmbLevel.Name = "cmbLevel"
         Me.cmbLevel.Size = New System.Drawing.Size(257, 21)
         Me.cmbLevel.TabIndex = 5
@@ -452,7 +453,7 @@ Partial Class frmSetup
         '
         'txtUserName
         '
-        Me.txtUserName.Location = New System.Drawing.Point(101, 19)
+        Me.txtUserName.Location = New System.Drawing.Point(178, 19)
         Me.txtUserName.Name = "txtUserName"
         Me.txtUserName.Size = New System.Drawing.Size(257, 20)
         Me.txtUserName.TabIndex = 1
@@ -519,7 +520,7 @@ Partial Class frmSetup
         '
         'txtMail
         '
-        Me.txtMail.Location = New System.Drawing.Point(164, 61)
+        Me.txtMail.Location = New System.Drawing.Point(219, 61)
         Me.txtMail.Name = "txtMail"
         Me.txtMail.Size = New System.Drawing.Size(553, 20)
         Me.txtMail.TabIndex = 5
@@ -544,21 +545,21 @@ Partial Class frmSetup
         '
         'txtPRG
         '
-        Me.txtPRG.Location = New System.Drawing.Point(164, 87)
+        Me.txtPRG.Location = New System.Drawing.Point(219, 87)
         Me.txtPRG.Name = "txtPRG"
         Me.txtPRG.Size = New System.Drawing.Size(553, 20)
         Me.txtPRG.TabIndex = 6
         '
         'txtSA
         '
-        Me.txtSA.Location = New System.Drawing.Point(164, 35)
+        Me.txtSA.Location = New System.Drawing.Point(219, 35)
         Me.txtSA.Name = "txtSA"
         Me.txtSA.Size = New System.Drawing.Size(553, 20)
         Me.txtSA.TabIndex = 4
         '
         'txtORG
         '
-        Me.txtORG.Location = New System.Drawing.Point(164, 9)
+        Me.txtORG.Location = New System.Drawing.Point(219, 9)
         Me.txtORG.Name = "txtORG"
         Me.txtORG.Size = New System.Drawing.Size(553, 20)
         Me.txtORG.TabIndex = 3
@@ -651,7 +652,7 @@ Partial Class frmSetup
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
@@ -684,14 +685,25 @@ Partial Class frmSetup
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.Button3)
         Me.GroupBox1.Controls.Add(Me.Label9)
         Me.GroupBox1.Controls.Add(Me.Button2)
+        Me.GroupBox1.ForeColor = System.Drawing.SystemColors.ControlText
         Me.GroupBox1.Location = New System.Drawing.Point(3, 165)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(370, 79)
         Me.GroupBox1.TabIndex = 18
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Шрифт (пока не работает)"
+        '
+        'Button3
+        '
+        Me.Button3.Location = New System.Drawing.Point(284, 50)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(75, 23)
+        Me.Button3.TabIndex = 2
+        Me.Button3.Text = "Color"
+        Me.Button3.UseVisualStyleBackColor = True
         '
         'Label9
         '
@@ -1196,4 +1208,5 @@ Partial Class frmSetup
     Friend WithEvents chkVSUst As System.Windows.Forms.CheckBox
     Friend WithEvents chkDVIG As System.Windows.Forms.CheckBox
     Friend WithEvents chk_no_log As System.Windows.Forms.CheckBox
+    Friend WithEvents Button3 As System.Windows.Forms.Button
 End Class

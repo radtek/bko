@@ -291,6 +291,8 @@ Err_:
 
     Private Sub frmLOG_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
+        SendFonts(Me)
+
         Call LANG_frmLOG()
 
        

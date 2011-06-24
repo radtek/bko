@@ -144,6 +144,8 @@
 
     Private Sub frmService_add_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
+        SendFonts(Me)
+
         Dim objIniFile As New IniFile(sLANGPATH)
 
         Call frmService_add_Lang()

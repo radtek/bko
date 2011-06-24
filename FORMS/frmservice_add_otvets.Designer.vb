@@ -22,26 +22,26 @@ Partial Class frmservice_add_otvets
     'Не изменяйте ее в редакторе исходного кода.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.cmbObt = New System.Windows.Forms.ComboBox
-        Me.cmbKrit = New System.Windows.Forms.ComboBox
-        Me.cmbOtv = New System.Windows.Forms.ComboBox
-        Me.cmdCancel = New System.Windows.Forms.Button
-        Me.cmbStat = New System.Windows.Forms.ComboBox
-        Me.Label7 = New System.Windows.Forms.Label
-        Me.Label6 = New System.Windows.Forms.Label
-        Me.cmdAdd = New System.Windows.Forms.Button
-        Me.Label5 = New System.Windows.Forms.Label
-        Me.Label4 = New System.Windows.Forms.Label
-        Me.gbExt = New System.Windows.Forms.GroupBox
-        Me.chcClose = New System.Windows.Forms.CheckBox
-        Me.txtOtzyv = New System.Windows.Forms.TextBox
-        Me.cmbMaster = New System.Windows.Forms.ComboBox
-        Me.Label2 = New System.Windows.Forms.Label
-        Me.Label3 = New System.Windows.Forms.Label
-        Me.dtPic = New System.Windows.Forms.DateTimePicker
-        Me.cmbTip = New System.Windows.Forms.ComboBox
-        Me.Label1 = New System.Windows.Forms.Label
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox
+        Me.cmbObt = New System.Windows.Forms.ComboBox()
+        Me.cmbKrit = New System.Windows.Forms.ComboBox()
+        Me.cmbOtv = New System.Windows.Forms.ComboBox()
+        Me.cmdCancel = New System.Windows.Forms.Button()
+        Me.cmbStat = New System.Windows.Forms.ComboBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.cmdAdd = New System.Windows.Forms.Button()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.gbExt = New System.Windows.Forms.GroupBox()
+        Me.chcClose = New System.Windows.Forms.CheckBox()
+        Me.txtOtzyv = New System.Windows.Forms.TextBox()
+        Me.cmbMaster = New System.Windows.Forms.ComboBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.dtPic = New System.Windows.Forms.DateTimePicker()
+        Me.cmbTip = New System.Windows.Forms.ComboBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.gbExt.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
@@ -78,7 +78,7 @@ Partial Class frmservice_add_otvets
         '
         'cmdCancel
         '
-        Me.cmdCancel.Location = New System.Drawing.Point(87, 407)
+        Me.cmdCancel.Location = New System.Drawing.Point(106, 407)
         Me.cmdCancel.Name = "cmdCancel"
         Me.cmdCancel.Size = New System.Drawing.Size(75, 23)
         Me.cmdCancel.TabIndex = 11

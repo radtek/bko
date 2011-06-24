@@ -238,6 +238,9 @@ FoundiR:
     End Sub
 
     Private Sub frmSoftware_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+
+        SendFonts(Me)
+
         Me.Cursor = Cursors.WaitCursor
         Me.Show()
 

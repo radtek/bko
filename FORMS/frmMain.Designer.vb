@@ -42,6 +42,7 @@ Partial Class frmMain
         Me.УчётКартриджейToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.УчётПрограммногоОбеспеченияToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.СкладToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuNetMag = New System.Windows.Forms.ToolStripMenuItem()
         Me.СправочникиToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.СправочникиОборудованияToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ОрганизацияToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -131,7 +132,6 @@ Partial Class frmMain
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.ArhToolZipbutton = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
-        Me.КабельныеЖурналыToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip.SuspendLayout()
         Me.StatusStrip.SuspendLayout()
         Me.ToolStrip.SuspendLayout()
@@ -215,7 +215,7 @@ Partial Class frmMain
         '
         'УчётToolStripMenuItem
         '
-        Me.УчётToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FrmComputersMenuItem, Me.УчётЗаявокремонтовToolStripMenuItem, Me.УчётКартриджейToolStripMenuItem, Me.УчётПрограммногоОбеспеченияToolStripMenuItem, Me.СкладToolStripMenuItem, Me.КабельныеЖурналыToolStripMenuItem})
+        Me.УчётToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FrmComputersMenuItem, Me.УчётЗаявокремонтовToolStripMenuItem, Me.УчётКартриджейToolStripMenuItem, Me.УчётПрограммногоОбеспеченияToolStripMenuItem, Me.СкладToolStripMenuItem, Me.mnuNetMag})
         Me.УчётToolStripMenuItem.Name = "УчётToolStripMenuItem"
         Me.УчётToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
         Me.УчётToolStripMenuItem.Text = "Учёт"
@@ -254,6 +254,12 @@ Partial Class frmMain
         Me.СкладToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
         Me.СкладToolStripMenuItem.Size = New System.Drawing.Size(297, 22)
         Me.СкладToolStripMenuItem.Text = "Склад"
+        '
+        'mnuNetMag
+        '
+        Me.mnuNetMag.Name = "mnuNetMag"
+        Me.mnuNetMag.Size = New System.Drawing.Size(297, 22)
+        Me.mnuNetMag.Text = "Кабельные журналы"
         '
         'СправочникиToolStripMenuItem
         '
@@ -848,12 +854,6 @@ Partial Class frmMain
         Me.ToolStripButton1.Size = New System.Drawing.Size(68, 22)
         Me.ToolStripButton1.Text = "Отчеты"
         '
-        'КабельныеЖурналыToolStripMenuItem
-        '
-        Me.КабельныеЖурналыToolStripMenuItem.Name = "КабельныеЖурналыToolStripMenuItem"
-        Me.КабельныеЖурналыToolStripMenuItem.Size = New System.Drawing.Size(297, 22)
-        Me.КабельныеЖурналыToolStripMenuItem.Text = "Кабельные журналы"
-        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -985,6 +985,6 @@ Partial Class frmMain
     Friend WithEvents lblMassLoadEverest As System.Windows.Forms.ToolStripStatusLabel
     Friend WithEvents ToolStripMenuItem1 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents CNTToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents КабельныеЖурналыToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mnuNetMag As System.Windows.Forms.ToolStripMenuItem
 
 End Class
