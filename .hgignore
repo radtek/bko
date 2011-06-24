@@ -1,0 +1,4 @@
+syntax: glob
+bin/Debug/lang/en.ini
+bin/Release/database/Impuls.mdb
+bin/Release/database/basekomp(clear)!_.mdb
