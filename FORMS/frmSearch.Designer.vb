@@ -56,10 +56,10 @@ Partial Class frmSearch
         '
         Me.TableLayoutPanel2.AutoSize = True
         Me.TableLayoutPanel2.ColumnCount = 4
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150.0!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100.0!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100.0!))
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel2.Controls.Add(Me.lstGroups, 0, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.Label1, 0, 1)
         Me.TableLayoutPanel2.Controls.Add(Me.txtSearch, 1, 1)
@@ -104,9 +104,9 @@ Partial Class frmSearch
         '
         Me.TableLayoutPanel2.SetColumnSpan(Me.txtSearch, 3)
         Me.txtSearch.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtSearch.Location = New System.Drawing.Point(153, 30)
+        Me.txtSearch.Location = New System.Drawing.Point(133, 30)
         Me.txtSearch.Name = "txtSearch"
-        Me.txtSearch.Size = New System.Drawing.Size(824, 20)
+        Me.txtSearch.Size = New System.Drawing.Size(844, 20)
         Me.txtSearch.TabIndex = 1
         '
         'CheckBox2
@@ -131,7 +131,7 @@ Partial Class frmSearch
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(153, 79)
+        Me.Button1.Location = New System.Drawing.Point(133, 79)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(75, 23)
         Me.Button1.TabIndex = 5
@@ -140,7 +140,7 @@ Partial Class frmSearch
         '
         'btnOfSend
         '
-        Me.btnOfSend.Location = New System.Drawing.Point(253, 79)
+        Me.btnOfSend.Location = New System.Drawing.Point(214, 79)
         Me.btnOfSend.Name = "btnOfSend"
         Me.btnOfSend.Size = New System.Drawing.Size(75, 23)
         Me.btnOfSend.TabIndex = 7
@@ -151,9 +151,9 @@ Partial Class frmSearch
         '
         Me.Label3.AutoSize = True
         Me.Label3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label3.Location = New System.Drawing.Point(353, 53)
+        Me.Label3.Location = New System.Drawing.Point(295, 53)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(624, 23)
+        Me.Label3.Size = New System.Drawing.Size(682, 23)
         Me.Label3.TabIndex = 8
         Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
@@ -171,10 +171,10 @@ Partial Class frmSearch
         Me.lstSearch.FullRowSelect = True
         Me.lstSearch.GridLines = True
         Me.lstSearch.HideSelection = False
-        Me.lstSearch.Location = New System.Drawing.Point(3, 193)
+        Me.lstSearch.Location = New System.Drawing.Point(3, 144)
         Me.lstSearch.MultiSelect = False
         Me.lstSearch.Name = "lstSearch"
-        Me.lstSearch.Size = New System.Drawing.Size(986, 470)
+        Me.lstSearch.Size = New System.Drawing.Size(986, 519)
         Me.lstSearch.TabIndex = 1
         Me.lstSearch.UseCompatibleStateImageBehavior = False
         Me.lstSearch.View = System.Windows.Forms.View.Details

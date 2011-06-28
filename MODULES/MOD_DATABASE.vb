@@ -1,5 +1,6 @@
 ﻿Imports System
 Imports System.IO
+
 Module MOD_Database
 
     Public unamDB As String
@@ -18,6 +19,7 @@ Module MOD_Database
     Public SUBD As String
 
     Public DB7 As ADODB.Connection
+    Public ConNect As String
 
     Public Function GENID() As Long
 
@@ -65,11 +67,14 @@ Module MOD_Database
                 DB7.Open("Driver={SQL Server};Server=" & DBserv & ";Database=" & DBtabl & ";Uid=" & DBuser & ";Pwd=" & DBpass & ";")
 
 
+
+
             Case "MS Access"
 
 
 
                 DB7.Open("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & BasePath & "\" & sFile & ";Jet OLEDB:Database Password=" & MyShadowPassword & ";")
+
 
             Case "MySQL"
 

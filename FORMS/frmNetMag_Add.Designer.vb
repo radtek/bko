@@ -73,9 +73,9 @@ Partial Class frmNetMag_Add
         'TableLayoutPanel1
         '
         Me.TableLayoutPanel1.ColumnCount = 4
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200.0!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 188.0!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 181.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel1.Controls.Add(Me.Label1, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.Label2, 0, 1)
@@ -105,7 +105,7 @@ Partial Class frmNetMag_Add
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(3, 6)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(194, 13)
+        Me.Label1.Size = New System.Drawing.Size(164, 13)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Идентификатор линии розетки"
         '
@@ -115,7 +115,7 @@ Partial Class frmNetMag_Add
         Me.Label2.AutoSize = True
         Me.Label2.Location = New System.Drawing.Point(3, 33)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(194, 13)
+        Me.Label2.Size = New System.Drawing.Size(164, 13)
         Me.Label2.TabIndex = 1
         Me.Label2.Text = "Тип кабеля"
         '
@@ -125,16 +125,16 @@ Partial Class frmNetMag_Add
         Me.Label3.AutoSize = True
         Me.Label3.Location = New System.Drawing.Point(3, 60)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(194, 13)
+        Me.Label3.Size = New System.Drawing.Size(164, 13)
         Me.Label3.TabIndex = 2
         Me.Label3.Text = "Длинна кабельной линии м."
         '
         'txtLineRoz
         '
         Me.txtLineRoz.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtLineRoz.Location = New System.Drawing.Point(203, 3)
+        Me.txtLineRoz.Location = New System.Drawing.Point(173, 3)
         Me.txtLineRoz.Name = "txtLineRoz"
-        Me.txtLineRoz.Size = New System.Drawing.Size(182, 20)
+        Me.txtLineRoz.Size = New System.Drawing.Size(273, 20)
         Me.txtLineRoz.TabIndex = 3
         '
         'cmbTipCab
@@ -142,17 +142,17 @@ Partial Class frmNetMag_Add
         Me.cmbTipCab.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cmbTipCab.FormattingEnabled = True
         Me.cmbTipCab.Items.AddRange(New Object() {"UTP-5e", "UTP-6", "-"})
-        Me.cmbTipCab.Location = New System.Drawing.Point(203, 29)
+        Me.cmbTipCab.Location = New System.Drawing.Point(173, 29)
         Me.cmbTipCab.Name = "cmbTipCab"
-        Me.cmbTipCab.Size = New System.Drawing.Size(182, 21)
+        Me.cmbTipCab.Size = New System.Drawing.Size(273, 21)
         Me.cmbTipCab.TabIndex = 4
         '
         'txtDlina
         '
         Me.txtDlina.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtDlina.Location = New System.Drawing.Point(203, 56)
+        Me.txtDlina.Location = New System.Drawing.Point(173, 56)
         Me.txtDlina.Name = "txtDlina"
-        Me.txtDlina.Size = New System.Drawing.Size(182, 20)
+        Me.txtDlina.Size = New System.Drawing.Size(273, 20)
         Me.txtDlina.TabIndex = 5
         '
         'GroupBox1
@@ -170,10 +170,10 @@ Partial Class frmNetMag_Add
         'TableLayoutPanel2
         '
         Me.TableLayoutPanel2.ColumnCount = 4
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150.0!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60.0!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 362.0!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 197.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel2.Controls.Add(Me.Label5, 0, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.Label6, 0, 1)
         Me.TableLayoutPanel2.Controls.Add(Me.Label7, 0, 2)
@@ -192,8 +192,6 @@ Partial Class frmNetMag_Add
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.TableLayoutPanel2.Size = New System.Drawing.Size(769, 187)
         Me.TableLayoutPanel2.TabIndex = 0
         '
@@ -203,7 +201,7 @@ Partial Class frmNetMag_Add
         Me.Label5.AutoSize = True
         Me.Label5.Location = New System.Drawing.Point(3, 8)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(144, 13)
+        Me.Label5.Size = New System.Drawing.Size(110, 13)
         Me.Label5.TabIndex = 0
         Me.Label5.Text = "Подключенное СВТ"
         '
@@ -213,7 +211,7 @@ Partial Class frmNetMag_Add
         Me.Label6.AutoSize = True
         Me.Label6.Location = New System.Drawing.Point(3, 38)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(144, 13)
+        Me.Label6.Size = New System.Drawing.Size(110, 13)
         Me.Label6.TabIndex = 1
         Me.Label6.Text = "Сетевой порт СВТ"
         '
@@ -223,7 +221,7 @@ Partial Class frmNetMag_Add
         Me.Label7.AutoSize = True
         Me.Label7.Location = New System.Drawing.Point(3, 68)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(144, 13)
+        Me.Label7.Size = New System.Drawing.Size(110, 13)
         Me.Label7.TabIndex = 2
         Me.Label7.Text = "Подключен телефон"
         '
@@ -233,7 +231,7 @@ Partial Class frmNetMag_Add
         Me.Label8.AutoSize = True
         Me.Label8.Location = New System.Drawing.Point(3, 132)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(144, 13)
+        Me.Label8.Size = New System.Drawing.Size(110, 13)
         Me.Label8.TabIndex = 3
         Me.Label8.Text = "Примечание"
         '
@@ -242,7 +240,7 @@ Partial Class frmNetMag_Add
         Me.TableLayoutPanel2.SetColumnSpan(Me.txtSVT, 2)
         Me.txtSVT.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtSVT.Enabled = False
-        Me.txtSVT.Location = New System.Drawing.Point(153, 3)
+        Me.txtSVT.Location = New System.Drawing.Point(119, 3)
         Me.txtSVT.Name = "txtSVT"
         Me.txtSVT.Size = New System.Drawing.Size(416, 20)
         Me.txtSVT.TabIndex = 4
@@ -251,7 +249,7 @@ Partial Class frmNetMag_Add
         '
         Me.cmbPhone.FormattingEnabled = True
         Me.cmbPhone.Items.AddRange(New Object() {"ДА", "НЕТ"})
-        Me.cmbPhone.Location = New System.Drawing.Point(153, 63)
+        Me.cmbPhone.Location = New System.Drawing.Point(119, 63)
         Me.cmbPhone.Name = "cmbPhone"
         Me.cmbPhone.Size = New System.Drawing.Size(54, 21)
         Me.cmbPhone.TabIndex = 6
@@ -260,19 +258,19 @@ Partial Class frmNetMag_Add
         '
         Me.TableLayoutPanel2.SetColumnSpan(Me.txtSVT_MEMO, 3)
         Me.txtSVT_MEMO.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtSVT_MEMO.Location = New System.Drawing.Point(153, 93)
+        Me.txtSVT_MEMO.Location = New System.Drawing.Point(119, 93)
         Me.txtSVT_MEMO.Multiline = True
         Me.txtSVT_MEMO.Name = "txtSVT_MEMO"
-        Me.txtSVT_MEMO.Size = New System.Drawing.Size(613, 91)
+        Me.txtSVT_MEMO.Size = New System.Drawing.Size(647, 91)
         Me.txtSVT_MEMO.TabIndex = 7
         '
         'Label9
         '
         Me.Label9.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(575, 38)
+        Me.Label9.Location = New System.Drawing.Point(541, 38)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(191, 13)
+        Me.Label9.Size = New System.Drawing.Size(225, 13)
         Me.Label9.TabIndex = 8
         Me.Label9.Text = "(в формате Eth0, Eth1 и т.д.)"
         '
@@ -280,9 +278,9 @@ Partial Class frmNetMag_Add
         '
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton1, Me.ToolStripButton2})
         Me.ToolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow
-        Me.ToolStrip1.Location = New System.Drawing.Point(572, 0)
+        Me.ToolStrip1.Location = New System.Drawing.Point(538, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.Size = New System.Drawing.Size(197, 23)
+        Me.ToolStrip1.Size = New System.Drawing.Size(231, 23)
         Me.ToolStrip1.TabIndex = 9
         Me.ToolStrip1.Text = "ToolStrip1"
         '
@@ -312,7 +310,7 @@ Partial Class frmNetMag_Add
         Me.txtNetPortSVT.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtNetPortSVT.FormattingEnabled = True
         Me.txtNetPortSVT.Items.AddRange(New Object() {"Eth0", "Eth1", "Eth2", "Eth3", "Eth4", "Eth5", "Eth6", "Eth7", "Eth8", "Eth9", "Eth10", "Wlan0", "Wlan1", "Wlan2", "Wlan3", "Wlan4", "Wlan5", "Wlan6", "Wlan7", "Wlan8", "Wlan9", "Wlan10"})
-        Me.txtNetPortSVT.Location = New System.Drawing.Point(153, 33)
+        Me.txtNetPortSVT.Location = New System.Drawing.Point(119, 33)
         Me.txtNetPortSVT.Name = "txtNetPortSVT"
         Me.txtNetPortSVT.Size = New System.Drawing.Size(416, 21)
         Me.txtNetPortSVT.TabIndex = 10
@@ -332,10 +330,10 @@ Partial Class frmNetMag_Add
         'TableLayoutPanel3
         '
         Me.TableLayoutPanel3.ColumnCount = 4
-        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150.0!))
-        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 89.0!))
-        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 333.0!))
-        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 197.0!))
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel3.Controls.Add(Me.Label10, 0, 0)
         Me.TableLayoutPanel3.Controls.Add(Me.Label11, 0, 1)
         Me.TableLayoutPanel3.Controls.Add(Me.Label13, 0, 2)
@@ -354,8 +352,6 @@ Partial Class frmNetMag_Add
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 89.0!))
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 16.0!))
-        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.TableLayoutPanel3.Size = New System.Drawing.Size(769, 179)
         Me.TableLayoutPanel3.TabIndex = 1
         '
@@ -365,7 +361,7 @@ Partial Class frmNetMag_Add
         Me.Label10.AutoSize = True
         Me.Label10.Location = New System.Drawing.Point(3, 8)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(144, 13)
+        Me.Label10.Size = New System.Drawing.Size(145, 13)
         Me.Label10.TabIndex = 0
         Me.Label10.Text = "Коммутатор"
         '
@@ -373,9 +369,9 @@ Partial Class frmNetMag_Add
         '
         Me.Label11.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(3, 32)
+        Me.Label11.Location = New System.Drawing.Point(3, 38)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(144, 26)
+        Me.Label11.Size = New System.Drawing.Size(145, 13)
         Me.Label11.TabIndex = 1
         Me.Label11.Text = "Сетевой порт коммутатора"
         '
@@ -385,7 +381,7 @@ Partial Class frmNetMag_Add
         Me.Label13.AutoSize = True
         Me.Label13.Location = New System.Drawing.Point(3, 98)
         Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(144, 13)
+        Me.Label13.Size = New System.Drawing.Size(145, 13)
         Me.Label13.TabIndex = 3
         Me.Label13.Text = "Примечание"
         '
@@ -394,7 +390,7 @@ Partial Class frmNetMag_Add
         Me.TableLayoutPanel3.SetColumnSpan(Me.txtKom, 2)
         Me.txtKom.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtKom.Enabled = False
-        Me.txtKom.Location = New System.Drawing.Point(153, 3)
+        Me.txtKom.Location = New System.Drawing.Point(154, 3)
         Me.txtKom.Name = "txtKom"
         Me.txtKom.Size = New System.Drawing.Size(416, 20)
         Me.txtKom.TabIndex = 4
@@ -403,7 +399,7 @@ Partial Class frmNetMag_Add
         '
         Me.TableLayoutPanel3.SetColumnSpan(Me.txtPortCom, 2)
         Me.txtPortCom.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtPortCom.Location = New System.Drawing.Point(153, 33)
+        Me.txtPortCom.Location = New System.Drawing.Point(154, 33)
         Me.txtPortCom.Name = "txtPortCom"
         Me.txtPortCom.Size = New System.Drawing.Size(416, 20)
         Me.txtPortCom.TabIndex = 5
@@ -412,19 +408,19 @@ Partial Class frmNetMag_Add
         '
         Me.TableLayoutPanel3.SetColumnSpan(Me.txtComMemo, 3)
         Me.txtComMemo.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtComMemo.Location = New System.Drawing.Point(153, 63)
+        Me.txtComMemo.Location = New System.Drawing.Point(154, 63)
         Me.txtComMemo.Multiline = True
         Me.txtComMemo.Name = "txtComMemo"
-        Me.txtComMemo.Size = New System.Drawing.Size(613, 83)
+        Me.txtComMemo.Size = New System.Drawing.Size(612, 83)
         Me.txtComMemo.TabIndex = 7
         '
         'Label14
         '
         Me.Label14.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(575, 38)
+        Me.Label14.Location = New System.Drawing.Point(576, 38)
         Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(191, 13)
+        Me.Label14.Size = New System.Drawing.Size(190, 13)
         Me.Label14.TabIndex = 8
         Me.Label14.Text = "(в формате Fa 0/xx, Gi 1/0/xx и т.д.)"
         '
@@ -432,9 +428,9 @@ Partial Class frmNetMag_Add
         '
         Me.ToolStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton3, Me.ToolStripButton4})
         Me.ToolStrip2.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow
-        Me.ToolStrip2.Location = New System.Drawing.Point(572, 0)
+        Me.ToolStrip2.Location = New System.Drawing.Point(573, 0)
         Me.ToolStrip2.Name = "ToolStrip2"
-        Me.ToolStrip2.Size = New System.Drawing.Size(197, 23)
+        Me.ToolStrip2.Size = New System.Drawing.Size(196, 23)
         Me.ToolStrip2.TabIndex = 9
         Me.ToolStrip2.Text = "ToolStrip2"
         '
@@ -460,7 +456,7 @@ Partial Class frmNetMag_Add
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(153, 152)
+        Me.Button1.Location = New System.Drawing.Point(154, 152)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(68, 23)
         Me.Button1.TabIndex = 10
@@ -469,7 +465,7 @@ Partial Class frmNetMag_Add
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(242, 152)
+        Me.Button2.Location = New System.Drawing.Point(228, 152)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(75, 23)
         Me.Button2.TabIndex = 11
@@ -480,27 +476,27 @@ Partial Class frmNetMag_Add
         '
         Me.Label4.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(391, 6)
+        Me.Label4.Location = New System.Drawing.Point(452, 6)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(175, 13)
+        Me.Label4.Size = New System.Drawing.Size(116, 13)
         Me.Label4.TabIndex = 8
         Me.Label4.Text = "Тип кабельной линии"
         Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'cmbTipKabLine
         '
-        Me.cmbTipKabLine.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cmbTipKabLine.FormattingEnabled = True
         Me.cmbTipKabLine.Items.AddRange(New Object() {"Розетка - Патч панель.", "Патч панель - Патч Панель", "Оборудование - Патч Панель", "Оборудование - Оборудование"})
-        Me.cmbTipKabLine.Location = New System.Drawing.Point(572, 3)
+        Me.cmbTipKabLine.Location = New System.Drawing.Point(574, 3)
         Me.cmbTipKabLine.Name = "cmbTipKabLine"
-        Me.cmbTipKabLine.Size = New System.Drawing.Size(206, 21)
+        Me.cmbTipKabLine.Size = New System.Drawing.Size(201, 21)
         Me.cmbTipKabLine.TabIndex = 9
         '
         'frmNetMag_Add
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(781, 497)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow

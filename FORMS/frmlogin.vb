@@ -446,12 +446,15 @@ err_:
 
         sLoad = True
 
-        Me.Height = 230
-        gbData.Top = 54
-        cmbBD.Enabled = True
-        btnLogin.Top = 174
-        btnCancel.Top = btnLogin.Top
-        gbsql.Top = 205
+        'Me.Height = 230
+        'gbData.Top = 54
+        'cmbBD.Enabled = True
+        'btnLogin.Top = 174
+        'btnCancel.Top = btnLogin.Top
+        'gbsql.Top = 205
+
+
+
 
 
         Call sSUBD()
@@ -487,13 +490,18 @@ err_:
             Case "MS Access"
 
 
-                Me.Height = 245
-                gbData.Top = 53
+                gbsql.Visible = False
+
+
+                Me.Height = Me.Height - gbsql.Height
+
+                'Me.Height = 245
+                'gbData.Top = 53
                 cmbBD.Enabled = True
                 btnDBDir.Enabled = True
-                btnLogin.Top = 194
-                btnCancel.Top = btnLogin.Top
-                gbsql.Top = 225
+                'btnLogin.Top = 194
+                'btnCancel.Top = btnLogin.Top
+                'gbsql.Top = 225
 
                 unamDB = cmbSUBD.Text
 
@@ -509,15 +517,19 @@ err_:
 
             Case Else
 
-                Me.Height = 408
-                gbData.Top = 214
-                gbsql.Top = 50
+                gbsql.Visible = True
+
+                'Me.Height = 408
+                'gbData.Top = 214
+                'gbsql.Top = 50
 
                 cmbBD.Enabled = False
                 btnDBDir.Enabled = False
-                btnLogin.Top = 355
-                btnCancel.Top = btnLogin.Top
-                gbData.Top = 205
+                'btnLogin.Top = 355
+                'btnCancel.Top = btnLogin.Top
+                'gbData.Top = 205
+
+                Me.AutoSize = True
 
                 unamDB = cmbSUBD.Text
 

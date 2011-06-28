@@ -50,7 +50,7 @@ Partial Class frmACT_OS_Act_treb
         'TableLayoutPanel1
         '
         Me.TableLayoutPanel1.ColumnCount = 2
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 146.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel1.Controls.Add(Me.Label1, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.Label2, 0, 1)
@@ -182,51 +182,51 @@ Partial Class frmACT_OS_Act_treb
         'txt_akt_nomer
         '
         Me.txt_akt_nomer.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txt_akt_nomer.Location = New System.Drawing.Point(149, 3)
+        Me.txt_akt_nomer.Location = New System.Drawing.Point(141, 3)
         Me.txt_akt_nomer.Name = "txt_akt_nomer"
-        Me.txt_akt_nomer.Size = New System.Drawing.Size(351, 20)
+        Me.txt_akt_nomer.Size = New System.Drawing.Size(359, 20)
         Me.txt_akt_nomer.TabIndex = 9
         '
         'txt_akt_tip
         '
         Me.txt_akt_tip.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txt_akt_tip.FormattingEnabled = True
-        Me.txt_akt_tip.Location = New System.Drawing.Point(149, 29)
+        Me.txt_akt_tip.Location = New System.Drawing.Point(141, 29)
         Me.txt_akt_tip.Name = "txt_akt_tip"
-        Me.txt_akt_tip.Size = New System.Drawing.Size(351, 21)
+        Me.txt_akt_tip.Size = New System.Drawing.Size(359, 21)
         Me.txt_akt_tip.TabIndex = 10
         '
         'txt_akt_mod
         '
         Me.txt_akt_mod.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txt_akt_mod.Location = New System.Drawing.Point(149, 55)
+        Me.txt_akt_mod.Location = New System.Drawing.Point(141, 55)
         Me.txt_akt_mod.Name = "txt_akt_mod"
-        Me.txt_akt_mod.Size = New System.Drawing.Size(351, 20)
+        Me.txt_akt_mod.Size = New System.Drawing.Size(359, 20)
         Me.txt_akt_mod.TabIndex = 11
         '
         'txt_akt_cena
         '
         Me.txt_akt_cena.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txt_akt_cena.Location = New System.Drawing.Point(149, 81)
+        Me.txt_akt_cena.Location = New System.Drawing.Point(141, 81)
         Me.txt_akt_cena.Maximum = New Decimal(New Integer() {1000000, 0, 0, 0})
         Me.txt_akt_cena.Name = "txt_akt_cena"
-        Me.txt_akt_cena.Size = New System.Drawing.Size(351, 20)
+        Me.txt_akt_cena.Size = New System.Drawing.Size(359, 20)
         Me.txt_akt_cena.TabIndex = 12
         '
         'txt_akt_nomer_prikaza
         '
         Me.txt_akt_nomer_prikaza.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txt_akt_nomer_prikaza.Location = New System.Drawing.Point(149, 107)
+        Me.txt_akt_nomer_prikaza.Location = New System.Drawing.Point(141, 107)
         Me.txt_akt_nomer_prikaza.Name = "txt_akt_nomer_prikaza"
-        Me.txt_akt_nomer_prikaza.Size = New System.Drawing.Size(351, 20)
+        Me.txt_akt_nomer_prikaza.Size = New System.Drawing.Size(359, 20)
         Me.txt_akt_nomer_prikaza.TabIndex = 13
         '
         'txt_akt_data_prikaza
         '
         Me.txt_akt_data_prikaza.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txt_akt_data_prikaza.Location = New System.Drawing.Point(149, 133)
+        Me.txt_akt_data_prikaza.Location = New System.Drawing.Point(141, 133)
         Me.txt_akt_data_prikaza.Name = "txt_akt_data_prikaza"
-        Me.txt_akt_data_prikaza.Size = New System.Drawing.Size(351, 20)
+        Me.txt_akt_data_prikaza.Size = New System.Drawing.Size(359, 20)
         Me.txt_akt_data_prikaza.TabIndex = 14
         Me.txt_akt_data_prikaza.Value = New Date(2010, 5, 20, 0, 0, 0, 0)
         '
@@ -234,25 +234,25 @@ Partial Class frmACT_OS_Act_treb
         '
         Me.txt_akt_postavshik.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txt_akt_postavshik.FormattingEnabled = True
-        Me.txt_akt_postavshik.Location = New System.Drawing.Point(149, 159)
+        Me.txt_akt_postavshik.Location = New System.Drawing.Point(141, 159)
         Me.txt_akt_postavshik.Name = "txt_akt_postavshik"
-        Me.txt_akt_postavshik.Size = New System.Drawing.Size(351, 21)
+        Me.txt_akt_postavshik.Size = New System.Drawing.Size(359, 21)
         Me.txt_akt_postavshik.TabIndex = 15
         '
         'txt_akt_god_vipuska
         '
         Me.txt_akt_god_vipuska.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txt_akt_god_vipuska.Location = New System.Drawing.Point(149, 185)
+        Me.txt_akt_god_vipuska.Location = New System.Drawing.Point(141, 185)
         Me.txt_akt_god_vipuska.Name = "txt_akt_god_vipuska"
-        Me.txt_akt_god_vipuska.Size = New System.Drawing.Size(351, 20)
+        Me.txt_akt_god_vipuska.Size = New System.Drawing.Size(359, 20)
         Me.txt_akt_god_vipuska.TabIndex = 16
         '
         'txt_akt_data_sostav
         '
         Me.txt_akt_data_sostav.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txt_akt_data_sostav.Location = New System.Drawing.Point(149, 211)
+        Me.txt_akt_data_sostav.Location = New System.Drawing.Point(141, 211)
         Me.txt_akt_data_sostav.Name = "txt_akt_data_sostav"
-        Me.txt_akt_data_sostav.Size = New System.Drawing.Size(351, 20)
+        Me.txt_akt_data_sostav.Size = New System.Drawing.Size(359, 20)
         Me.txt_akt_data_sostav.TabIndex = 17
         Me.txt_akt_data_sostav.Value = New Date(2010, 5, 20, 0, 0, 0, 0)
         '
@@ -267,7 +267,7 @@ Partial Class frmACT_OS_Act_treb
         '
         'akt_cancel
         '
-        Me.akt_cancel.Location = New System.Drawing.Point(149, 237)
+        Me.akt_cancel.Location = New System.Drawing.Point(141, 237)
         Me.akt_cancel.Name = "akt_cancel"
         Me.akt_cancel.Size = New System.Drawing.Size(75, 23)
         Me.akt_cancel.TabIndex = 19

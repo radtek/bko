@@ -135,6 +135,41 @@ Module MOD_SYS_PRELOAD
 
     End Sub
 
+    Public Sub VisibleForm(ByVal ControlContainer As Object)
+
+        frmComputers.sCPU = 4
+        frmComputers.sRAM = 4
+        frmComputers.sHDD = 4
+        frmComputers.sVGA = 2
+        frmComputers.sOPTICAL = 3
+        frmComputers.sNET = 2
+
+        For Each Ctl As Object In ControlContainer.Controls
+            Try
+                If Not Ctl.Controls Is Nothing Then
+                    VisibleForm(Ctl)
+
+                    If TypeOf Ctl Is TextBox Then Ctl.visible = True
+                    If TypeOf Ctl Is ComboBox Then Ctl.visible = True
+
+                End If
+
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
+        Next
+
+        frmComputers.bCPUPlus.Visible = False
+        frmComputers.bRamPlus.Visible = False
+        frmComputers.bHddPlus.Visible = False
+        frmComputers.bSVGAPlus.Visible = False
+        frmComputers.bOpticalPlus.Visible = False
+        frmComputers.bNETPlus.Visible = False
+        frmComputers.bMonitorPlus.Visible = False
+        frmComputers.bPrinterPlus.Visible = False
+
+    End Sub
+
     Public Sub ClearForm(ByVal ControlContainer As Object)
 
         For Each Ctl As Object In ControlContainer.Controls
@@ -145,6 +180,8 @@ Module MOD_SYS_PRELOAD
                     If TypeOf Ctl Is TextBox Then Ctl.text = ""
                     If TypeOf Ctl Is ComboBox Then Ctl.text = ""
                     If TypeOf Ctl Is ListView Then Ctl.items.clear()
+                    If TypeOf Ctl Is CheckBox Then Ctl.checked = False
+                    If TypeOf Ctl Is RadioButton Then Ctl.checked = False
 
                 End If
 
@@ -190,6 +227,7 @@ Module MOD_SYS_PRELOAD
                     If TypeOf Ctl Is GroupBox Then Ctl.autosize = True
                     If TypeOf Ctl Is CheckBox Then Ctl.autosize = True
                     If TypeOf Ctl Is RadioButton Then Ctl.autosize = True
+                    If TypeOf Ctl Is Form Then Ctl.autosize = True
 
                 End If
 

@@ -1515,45 +1515,6 @@ err_:
         ' MsgBox(Err.Description, MsgBoxStyle.Information, ProGramName)
     End Sub
 
-    Private Sub chk_K46_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chk_K46.CheckedChanged
-
-        Select Case chk_K46.Checked
-
-            Case True
-
-                For Each C In gbSN.Controls
-                    If TypeOf C Is CheckBox Then C.Checked = True
-                Next C
-
-                For Each C In gbPer.Controls
-                    If TypeOf C Is CheckBox Then C.Checked = True
-                Next C
-
-                For Each C In gbInf.Controls
-                    If TypeOf C Is CheckBox Then C.Checked = True
-                Next C
-
-            Case False
-
-                For Each C In gbSN.Controls
-                    If TypeOf C Is CheckBox Then C.Checked = False
-                Next C
-
-                For Each C In gbPer.Controls
-                    If TypeOf C Is CheckBox Then C.Checked = False
-                Next C
-
-                For Each C In gbInf.Controls
-                    If TypeOf C Is CheckBox Then C.Checked = False
-                Next C
-                'gbInf
-
-        End Select
-
-
-
-    End Sub
-
     Private Sub btnUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdate.Click
         Dim langIni As New IniFile(sLANGPATH)
 
@@ -2284,6 +2245,8 @@ Error_:
         Dim unamS As String
         Dim intj As Long = 0
 
+        Dim A1, A2, A3, A4 As String
+
         With rs
             .MoveFirst()
             Do Until rs.EOF
@@ -2295,7 +2258,41 @@ Error_:
                 'If Len(.Fields("nomerPC").Value) <> 0 Then unamS = .Fields("nomerPC").Value Else 
                 unamS = .Fields("Id").Value
 
-                If chkTeh(1) = True Then LvKompOtd.Items(CInt(intj)).SubItems.Add(.Fields("CPU1").Value & " " & .Fields("CPUmhz1").Value & " / " & .Fields("CPU2").Value & " " & .Fields("CPUmhz2").Value & " / " & .Fields("CPU3").Value & " " & .Fields("CPUmhz3").Value & " / " & .Fields("CPU4").Value & " " & .Fields("CPUmhz4").Value)
+
+                A1 = .Fields("CPU1").Value & " " & .Fields("CPUmhz1").Value
+                A2 = .Fields("CPU2").Value & " " & .Fields("CPUmhz2").Value
+                A3 = .Fields("CPU3").Value & " " & .Fields("CPUmhz3").Value
+                A4 = .Fields("CPU4").Value & " " & .Fields("CPUmhz4").Value
+
+
+                'LvKompOtd.Items(CInt(intj)).SubItems.Add(.Fields("CPU1").Value & " " & .Fields("CPUmhz1").Value & " / " & .Fields("CPU2").Value & " " & .Fields("CPUmhz2").Value & " / " & .Fields("CPU3").Value & " " & .Fields("CPUmhz3").Value & " / " & .Fields("CPU4").Value & " " & .Fields("CPUmhz4").Value)
+
+                If chkTeh(1) = True Then
+
+                    If Len(A1) > 3 Then
+                        A1 = A1
+                    End If
+
+                    If Len(A2) > 3 Then
+                        A1 = A1 & " / " & A2
+                    End If
+
+                    If Len(A3) > 3 Then
+                        A1 = A1 & " / " & A3
+                    End If
+
+                    If Len(A4) > 3 Then
+                        A1 = A1 & " / " & A4
+                    End If
+
+                    LvKompOtd.Items(CInt(intj)).SubItems.Add(A1)
+                End If
+
+
+
+
+
+
                 If chkTeh(2) = True Then LvKompOtd.Items(CInt(intj)).SubItems.Add(.Fields("MB").Value)
                 If chkTeh(3) = True Then LvKompOtd.Items(CInt(intj)).SubItems.Add(.Fields("SVGA_NAME").Value & " " & .Fields("SVGA_OB_RAM").Value)
                 If chkTeh(4) = True Then LvKompOtd.Items(CInt(intj)).SubItems.Add(.Fields("SOUND_NAME").Value)
@@ -5705,6 +5702,46 @@ Err_:
         rs1 = Nothing
 
         frmService_add.ShowDialog(Me)
+
+
+
+    End Sub
+
+
+    Private Sub chk_K46_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chk_K46.CheckedChanged
+
+        Select Case chk_K46.Checked
+
+            Case True
+
+                For Each C In TableLayoutPanel7.Controls
+                    If TypeOf C Is CheckBox Then C.Checked = True
+                Next C
+
+                For Each C In TableLayoutPanel8.Controls
+                    If TypeOf C Is CheckBox Then C.Checked = True
+                Next C
+
+                For Each C In TableLayoutPanel9.Controls
+                    If TypeOf C Is CheckBox Then C.Checked = True
+                Next C
+
+            Case False
+
+                For Each C In TableLayoutPanel7.Controls
+                    If TypeOf C Is CheckBox Then C.Checked = False
+                Next C
+
+                For Each C In TableLayoutPanel8.Controls
+                    If TypeOf C Is CheckBox Then C.Checked = False
+                Next C
+
+                For Each C In TableLayoutPanel9.Controls
+                    If TypeOf C Is CheckBox Then C.Checked = False
+                Next C
+                'gbInf
+
+        End Select
 
 
 

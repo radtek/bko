@@ -42,7 +42,7 @@ Partial Class frmMain
         Me.УчётКартриджейToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.УчётПрограммногоОбеспеченияToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.СкладToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuNetMag = New System.Windows.Forms.ToolStripMenuItem()
+        Me.netMagmnu = New System.Windows.Forms.ToolStripMenuItem()
         Me.СправочникиToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.СправочникиОборудованияToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ОрганизацияToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -215,7 +215,7 @@ Partial Class frmMain
         '
         'УчётToolStripMenuItem
         '
-        Me.УчётToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FrmComputersMenuItem, Me.УчётЗаявокремонтовToolStripMenuItem, Me.УчётКартриджейToolStripMenuItem, Me.УчётПрограммногоОбеспеченияToolStripMenuItem, Me.СкладToolStripMenuItem, Me.mnuNetMag})
+        Me.УчётToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FrmComputersMenuItem, Me.УчётЗаявокремонтовToolStripMenuItem, Me.УчётКартриджейToolStripMenuItem, Me.УчётПрограммногоОбеспеченияToolStripMenuItem, Me.СкладToolStripMenuItem, Me.netMagmnu})
         Me.УчётToolStripMenuItem.Name = "УчётToolStripMenuItem"
         Me.УчётToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
         Me.УчётToolStripMenuItem.Text = "Учёт"
@@ -255,11 +255,12 @@ Partial Class frmMain
         Me.СкладToolStripMenuItem.Size = New System.Drawing.Size(297, 22)
         Me.СкладToolStripMenuItem.Text = "Склад"
         '
-        'mnuNetMag
+        'netMagmnu
         '
-        Me.mnuNetMag.Name = "mnuNetMag"
-        Me.mnuNetMag.Size = New System.Drawing.Size(297, 22)
-        Me.mnuNetMag.Text = "Кабельные журналы"
+        Me.netMagmnu.Name = "netMagmnu"
+        Me.netMagmnu.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.N), System.Windows.Forms.Keys)
+        Me.netMagmnu.Size = New System.Drawing.Size(297, 22)
+        Me.netMagmnu.Text = "Кабельные журналы"
         '
         'СправочникиToolStripMenuItem
         '
@@ -565,7 +566,7 @@ Partial Class frmMain
         '
         Me.ЗагрузитьИзEverestiniToolStripMenuItem.Name = "ЗагрузитьИзEverestiniToolStripMenuItem"
         Me.ЗагрузитьИзEverestiniToolStripMenuItem.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Alt) _
-            Or System.Windows.Forms.Keys.E), System.Windows.Forms.Keys)
+                    Or System.Windows.Forms.Keys.E), System.Windows.Forms.Keys)
         Me.ЗагрузитьИзEverestiniToolStripMenuItem.Size = New System.Drawing.Size(270, 22)
         Me.ЗагрузитьИзEverestiniToolStripMenuItem.Text = "Загрузить из Everest (ini)"
         '
@@ -573,7 +574,7 @@ Partial Class frmMain
         '
         Me.ЗагрузитьИзASTRA32ToolStripMenuItem.Name = "ЗагрузитьИзASTRA32ToolStripMenuItem"
         Me.ЗагрузитьИзASTRA32ToolStripMenuItem.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Alt) _
-            Or System.Windows.Forms.Keys.A), System.Windows.Forms.Keys)
+                    Or System.Windows.Forms.Keys.A), System.Windows.Forms.Keys)
         Me.ЗагрузитьИзASTRA32ToolStripMenuItem.Size = New System.Drawing.Size(270, 22)
         Me.ЗагрузитьИзASTRA32ToolStripMenuItem.Text = "Загрузить из ASTRA32"
         '
@@ -581,7 +582,7 @@ Partial Class frmMain
         '
         Me.ЗагрузитьЧерезWMIToolStripMenuItem.Name = "ЗагрузитьЧерезWMIToolStripMenuItem"
         Me.ЗагрузитьЧерезWMIToolStripMenuItem.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Alt) _
-            Or System.Windows.Forms.Keys.W), System.Windows.Forms.Keys)
+                    Or System.Windows.Forms.Keys.W), System.Windows.Forms.Keys)
         Me.ЗагрузитьЧерезWMIToolStripMenuItem.Size = New System.Drawing.Size(270, 22)
         Me.ЗагрузитьЧерезWMIToolStripMenuItem.Text = "Загрузить через WMI"
         '
@@ -596,7 +597,7 @@ Partial Class frmMain
         '
         Me.HANDINSERTToolStripMenuItem.Name = "HANDINSERTToolStripMenuItem"
         Me.HANDINSERTToolStripMenuItem.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Alt) _
-            Or System.Windows.Forms.Keys.R), System.Windows.Forms.Keys)
+                    Or System.Windows.Forms.Keys.R), System.Windows.Forms.Keys)
         Me.HANDINSERTToolStripMenuItem.Size = New System.Drawing.Size(270, 22)
         Me.HANDINSERTToolStripMenuItem.Text = "Ручной ввод"
         '
@@ -620,7 +621,7 @@ Partial Class frmMain
         '
         Me.СетевоеОборудованиеToolStripMenuItem.Name = "СетевоеОборудованиеToolStripMenuItem"
         Me.СетевоеОборудованиеToolStripMenuItem.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Alt) _
-            Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
+                    Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
         Me.СетевоеОборудованиеToolStripMenuItem.Size = New System.Drawing.Size(270, 22)
         Me.СетевоеОборудованиеToolStripMenuItem.Text = "Сетевое оборудование"
         '
@@ -808,7 +809,7 @@ Partial Class frmMain
         '
         Me.ДругоеОборудованиеToolStripMenuItem.Name = "ДругоеОборудованиеToolStripMenuItem"
         Me.ДругоеОборудованиеToolStripMenuItem.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Alt) _
-            Or System.Windows.Forms.Keys.O), System.Windows.Forms.Keys)
+                    Or System.Windows.Forms.Keys.O), System.Windows.Forms.Keys)
         Me.ДругоеОборудованиеToolStripMenuItem.Size = New System.Drawing.Size(270, 22)
         Me.ДругоеОборудованиеToolStripMenuItem.Text = "Другое оборудование"
         '
@@ -858,6 +859,7 @@ Partial Class frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(984, 662)
         Me.Controls.Add(Me.ToolStrip)
         Me.Controls.Add(Me.MenuStrip)
@@ -985,6 +987,6 @@ Partial Class frmMain
     Friend WithEvents lblMassLoadEverest As System.Windows.Forms.ToolStripStatusLabel
     Friend WithEvents ToolStripMenuItem1 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents CNTToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents mnuNetMag As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents netMagmnu As System.Windows.Forms.ToolStripMenuItem
 
 End Class

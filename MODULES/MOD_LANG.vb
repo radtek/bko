@@ -795,6 +795,12 @@ Module modLang
         frmComputers.Label88.Text = objIniFile.GetString("frmComputers", "Label83", "")
         frmComputers.lblPCLNET.Text = objIniFile.GetString("frmComputers", "Label83", "")
 
+        'EditService
+        'DeleteService
+
+        frmComputers.EditService.Text = objIniFile.GetString("frmComputers", "EditService", "")
+        frmComputers.DeleteService.Text = objIniFile.GetString("frmComputers", "DeleteService", "")
+
         Exit Sub
 err_:
         MsgBox(Err.Description)
@@ -1426,14 +1432,14 @@ err_:
 
         frmMain.ИнвентаризацияToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "43", "")
 
-        '
+
         frmMain.КлавиатураToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "44", "")
         frmMain.МышьToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "45", "")
         frmMain.СетевыеФильтрыToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "46", "")
         frmMain.СтатистическиеОтчетыToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "47", "")
-        frmMain.mnuNetMag.Text = LNGIniFile.GetString("frmNetMagazin", "frmNetMagazin", "")
 
-
+        frmMain.netMagmnu.Text = LNGIniFile.GetString("frmMain", "netMagmnu", "")
+        'netMagmnu
 
         'СетевыеФильтрыToolStripMenuItem
         'КлавиатураToolStripMenuItem

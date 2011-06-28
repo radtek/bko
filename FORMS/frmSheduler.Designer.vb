@@ -50,7 +50,7 @@ Partial Class frmSheduler
         '
         Me.Label2.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(341, 8)
+        Me.Label2.Location = New System.Drawing.Point(182, 8)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(105, 13)
         Me.Label2.TabIndex = 1
@@ -59,7 +59,7 @@ Partial Class frmSheduler
         'DTSHED
         '
         Me.DTSHED.Anchor = System.Windows.Forms.AnchorStyles.Left
-        Me.DTSHED.Location = New System.Drawing.Point(103, 4)
+        Me.DTSHED.Location = New System.Drawing.Point(45, 4)
         Me.DTSHED.Name = "DTSHED"
         Me.DTSHED.Size = New System.Drawing.Size(131, 20)
         Me.DTSHED.TabIndex = 2
@@ -71,7 +71,7 @@ Partial Class frmSheduler
         Me.cmbUser.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
         Me.cmbUser.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cmbUser.FormattingEnabled = True
-        Me.cmbUser.Location = New System.Drawing.Point(460, 4)
+        Me.cmbUser.Location = New System.Drawing.Point(293, 4)
         Me.cmbUser.Name = "cmbUser"
         Me.cmbUser.Size = New System.Drawing.Size(302, 21)
         Me.cmbUser.TabIndex = 3
@@ -132,7 +132,7 @@ Partial Class frmSheduler
         '
         'btnAll
         '
-        Me.btnAll.Location = New System.Drawing.Point(888, 107)
+        Me.btnAll.Location = New System.Drawing.Point(888, 90)
         Me.btnAll.Name = "btnAll"
         Me.btnAll.Size = New System.Drawing.Size(86, 23)
         Me.btnAll.TabIndex = 9
@@ -142,11 +142,11 @@ Partial Class frmSheduler
         'TableLayoutPanel1
         '
         Me.TableLayoutPanel1.ColumnCount = 5
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100.0!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 238.0!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 119.0!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80.0!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel1.Controls.Add(Me.Label1, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.lstShed, 0, 4)
         Me.TableLayoutPanel1.Controls.Add(Me.btnAll, 4, 3)
@@ -164,7 +164,7 @@ Partial Class frmSheduler
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(992, 666)
         Me.TableLayoutPanel1.TabIndex = 10

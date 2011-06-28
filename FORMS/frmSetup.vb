@@ -11,7 +11,7 @@ Public Class frmSetup
         Dim DialogResult As DialogResult
         Dim PrevisiusFont As Font = str.Font
 
-        FontWindow.Font = New Font("Microsoft Sans Serif", 8, 0, 3, False)
+        FontWindow.Font = New Font("Microsoft Sans Serif", 10, 0, 0, False)
 
         DialogResult = FontWindow.ShowDialog
 
@@ -21,7 +21,6 @@ Public Class frmSetup
 
         Else
             Return PrevisiusFont
-            ' SendFonts(Me)
 
         End If
         'textbox1.font=changefont(wndfont)
@@ -473,10 +472,11 @@ Public Class frmSetup
             rs.Open("Select * from CONFIGURE", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
             With rs
 
-                txtSA.Text = .Fields("SISADM").Value
-                txtORG.Text = .Fields("ORG").Value
-                txtPRG.Text = .Fields("Name_Prog").Value
-                txtMail.Text = .Fields("nr").Value
+                If Not IsDBNull(.Fields("SISADM").Value) Then txtSA.Text = .Fields("SISADM").Value
+                If Not IsDBNull(.Fields("ORG").Value) Then txtORG.Text = .Fields("ORG").Value
+                If Not IsDBNull(.Fields("Name_Prog").Value) Then txtPRG.Text = .Fields("Name_Prog").Value
+                If Not IsDBNull(.Fields("nr").Value) Then txtMail.Text = .Fields("nr").Value
+
             End With
             rs.Close()
             rs = Nothing

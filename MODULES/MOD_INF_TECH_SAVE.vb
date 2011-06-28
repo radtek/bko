@@ -6,8 +6,6 @@
     Private Sub SAVE_GARANT(ByVal sID As String, ByVal dPost As ComboBox, ByVal dtp As DateTimePicker, ByVal dto As DateTimePicker)
 
         Dim sSQL As String
-        Dim sA, sB, sC, sA1, sB1, sC1 As String
-
 
         Dim rs As ADODB.Recordset
         rs = New ADODB.Recordset
@@ -16,28 +14,6 @@
 
         sSQL = "SELECT * FROM Garantia_sis"
 
-        Dim arrAnimals() As String
-        arrAnimals = Split(dtp.Value, ".")
-
-        For iCounter = LBound(arrAnimals) To UBound(arrAnimals)
-            If iCounter <> 2 Then
-            Else
-                sA = arrAnimals(0)
-                sB = arrAnimals(1)
-                sC = arrAnimals(2)
-            End If
-        Next
-
-        arrAnimals = Split(dto.Value, ".")
-
-        For iCounter = LBound(arrAnimals) To UBound(arrAnimals)
-            If iCounter <> 2 Then
-            Else
-                sA1 = arrAnimals(0)
-                sB1 = arrAnimals(1)
-                sC1 = arrAnimals(2)
-            End If
-        Next
 
         rs = New ADODB.Recordset
         rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
@@ -47,22 +23,19 @@
         End If
 
         With rs
-
             .AddNew()
             .Fields("Id_Comp").Value = sID
             .Fields("Postav").Value = dPost.Text
-            .Fields("day").Value = sA
-            .Fields("month").Value = sB
-            .Fields("Year").Value = sC
-            .Fields("day_o").Value = sA1
-            .Fields("month_o").Value = sB1
-            .Fields("Year_o").Value = sC1
+            .Fields("day").Value = dtp.Value.Day
+            .Fields("month").Value = dtp.Value.Month
+            .Fields("Year").Value = dtp.Value.Year
+            .Fields("day_o").Value = dto.Value.Day
+            .Fields("month_o").Value = dto.Value.Month
+            .Fields("Year_o").Value = dto.Value.Year
             .Update()
         End With
         rs.Close()
         rs = Nothing
-
-
 
 
     End Sub
@@ -363,10 +336,6 @@ Err_:
                 If Not RSExists("OTHER", "name", Trim(frmComputers.cmbOTH.Text)) Then
                     AddOnePar(frmComputers.cmbOTH.Text, "NAME", "spr_other", frmComputers.cmbOTH)
                 End If
-
-                'If Not RSExists("OTHER", "name", Trim(frmComputers.cmbOTHConnect.Text)) Then
-                '    AddOnePar(frmComputers.cmbOTHConnect.Text, "NAME", "spr_other", frmComputers.cmbOTHConnect)
-                'End If
 
         End Select
 

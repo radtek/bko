@@ -22,6 +22,16 @@ Public Class frmComputers
     Public MASSLOAD As Boolean
     Public pDRAG As Boolean
     Private lvServices As ListView
+    Public sCPU As Integer = 1
+    Public sRAM As Integer = 1
+    Public sHDD As Integer = 1
+    Public sVGA As Integer = 1
+    Public sOPTICAL As Integer = 1
+    Public sNET As Integer = 1
+    Public sMonitor As Integer = 1
+    Public sPrinter As Integer = 1
+
+
 
     Public Sub New()
         InitializeComponent()
@@ -4688,27 +4698,235 @@ Error_:
     Private Sub lvNetPort_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvNetPort.DoubleClick
         If lvNetPort.Items.Count = 0 Then Exit Sub
 
-        portEDT = True
+        Dim rs1 As ADODB.Recordset
+        rs1 = New ADODB.Recordset
+        rs1.Open("SELECT count(*) as t_n FROM TBL_NET_MAG WHERE COMMUTATOR=" & sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenKeyset)
 
-        Dim z As Integer
-        For z = 0 To lvNetPort.SelectedItems.Count - 1
-            npCOUNT = (lvNetPort.SelectedItems(z).Text)
-        Next
-        Dim rs As ADODB.Recordset
-        rs = New ADODB.Recordset
-        Dim sSQL As String
-        sSQL = "SELECT * FROM net_port WHERE id=" & npCOUNT
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        Dim UCount As Integer
 
-        With rs
-
-            txtNetnumberPort.Text = .Fields("port").Value
-            txtNetPortMapping.Text = .Fields("net_n").Value
-            txtNetPortMac.Text = .Fields("mac").Value
-
+        With rs1
+            UCount = .Fields("t_n").Value
         End With
-        rs.Close()
-        rs = Nothing
+        rs1.Close()
+        rs1 = Nothing
+
+
+        If UCount > 0 Then
+
+            If uLevel <> "Admin" Then Exit Sub
+
+            frmNetMagazin.sBDO_SVT_Pref = "PC"
+
+            Dim z As Integer
+            Dim z1 As Integer
+            Dim LNGIniFile As New IniFile(sLANGPATH)
+
+
+
+            For z = 0 To lvNetPort.SelectedItems.Count - 1
+                frmNetMag_Add.sID = (lvNetPort.SelectedItems(z).Text)
+            Next
+
+            Dim sSQL As String
+
+            frmNetMag_Add.sEDT = True
+
+            frmNetMagazin.sBDO_Pref = ""
+            frmNetMagazin.sBDO_count = 0
+            frmNetMagazin.sBDO_SVT_count = 0
+            frmNetMagazin.sBDO_NET_count = 0
+
+
+            sSQL = "SELECT * FROM TBL_NET_MAG where id=" & frmNetMag_Add.sID
+
+            Dim rs As ADODB.Recordset
+            rs = New ADODB.Recordset
+            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+
+            With rs
+
+                frmNetMag_Add.txtLineRoz.Text = .Fields("id_line").Value
+                frmNetMag_Add.cmbTipCab.Text = .Fields("tip_cab").Value
+                frmNetMag_Add.txtDlina.Text = .Fields("dlin_cab").Value
+                frmNetMag_Add.cmbTipKabLine.Text = .Fields("tip_cab_line").Value
+
+                z1 = .Fields("SVT").Value
+                frmNetMagazin.sBDO_SVT_count = z1
+
+
+                If z1 = 0 Or Len(z1) = 0 Then
+
+                    frmNetMag_Add.txtSVT.Text = ""
+                    frmNetMag_Add.txtKom.Text = ""
+
+                Else
+
+
+                    Dim sTXT As String
+
+                    rs1 = New ADODB.Recordset
+                    rs1.Open("SELECT * FROM kompy where id=" & z1, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+
+                    With rs1
+
+                        Select Case .Fields("tiptehn").Value
+
+                            Case "PC"
+
+                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG11", "")
+                            Case "Printer"
+
+                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG6", "")
+                            Case "KOpir"
+
+                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG13", "")
+                            Case "MONITOR"
+                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG3", "")
+                            Case "SCANER"
+
+                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG8", "")
+                            Case "NET"
+
+                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG14", "")
+                            Case "PHOTO"
+
+                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG15", "")
+
+                            Case "OT"
+
+                                sTXT = .Fields("NET_NAME").Value & " " & .Fields("TIP_COMPA").Value
+                            Case "ZIP"
+
+                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG18", "")
+                            Case "PHONE"
+
+                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG16", "")
+                            Case "MFU"
+
+                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG7", "")
+                            Case "FAX"
+
+                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG17", "")
+
+                            Case "USB"
+
+
+                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG10", "")
+                            Case "IBP"
+
+
+                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG9", "")
+                            Case "FS"
+
+                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG5", "")
+
+                            Case "SOUND"
+
+                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG4", "")
+
+
+                        End Select
+
+
+                        Select Case frmNetMagazin.sBDO_SVT_Pref
+
+                            Case "PC"
+
+                                frmNetMag_Add.txtSVT.Text = sTXT & ": " & .Fields("NET_NAME").Value & " , (" & LNGIniFile.GetString("frmNetMagazin", "MSG19", "") & " " & .Fields("OTvetstvennyj").Value & ")"
+                                'Me.sBDO_SVT_count = .Fields("SVT").Value
+                            Case Else
+
+                                frmNetMag_Add.txtKom.Text = sTXT & ": " & .Fields("NET_NAME").Value & " , (" & LNGIniFile.GetString("frmNetMagazin", "MSG19", "") & " " & .Fields("OTvetstvennyj").Value & ")"
+
+                        End Select
+
+                    End With
+
+                    rs1.Close()
+                    rs1 = Nothing
+
+                End If
+
+
+
+
+                frmNetMag_Add.txtNetPortSVT.Text = .Fields("NET_PORT_SVT").Value
+                frmNetMag_Add.cmbPhone.Text = .Fields("PHONE").Value
+                frmNetMag_Add.txtSVT_MEMO.Text = .Fields("SVT_MEMO").Value
+
+                z1 = .Fields("COMMUTATOR").Value
+
+                frmNetMagazin.sBDO_NET_count = z1
+
+                If z1 = 0 Or Len(z1) = 0 Then
+
+                    frmNetMag_Add.txtKom.Text = ""
+
+                Else
+
+
+                    rs1 = New ADODB.Recordset
+                    rs1.Open("SELECT * FROM kompy where id=" & z1, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+                    With rs1
+
+                        frmNetMag_Add.txtKom.Text = LNGIniFile.GetString("frmNetMagazin", "MSG14", "") & ": " & .Fields("NET_NAME").Value & " , (" & LNGIniFile.GetString("frmNetMagazin", "MSG19", "") & " " & .Fields("OTvetstvennyj").Value & ")"
+
+                    End With
+                    rs1.Close()
+                    rs1 = Nothing
+
+                End If
+
+                frmNetMag_Add.txtPortCom.Text = .Fields("NET_PORT_COMMUTATOR").Value
+                frmNetMag_Add.txtComMemo.Text = .Fields("COMMUTATOR_MEMO").Value
+
+
+
+                frmNetMagazin.sBDO_Pref = .Fields("PREF").Value
+                frmNetMagazin.sBDO_count = .Fields("sID").Value
+
+            End With
+            rs.Close()
+            rs = Nothing
+
+            frmNetMag_Add.ShowDialog(Me)
+
+
+        Else
+
+
+            portEDT = True
+
+            Dim z As Integer
+            For z = 0 To lvNetPort.SelectedItems.Count - 1
+                npCOUNT = (lvNetPort.SelectedItems(z).Text)
+            Next
+            Dim rs As ADODB.Recordset
+            rs = New ADODB.Recordset
+            Dim sSQL As String
+            sSQL = "SELECT * FROM net_port WHERE id=" & npCOUNT
+            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+            With rs
+
+                txtNetnumberPort.Text = .Fields("port").Value
+                txtNetPortMapping.Text = .Fields("net_n").Value
+                txtNetPortMac.Text = .Fields("mac").Value
+
+            End With
+            rs.Close()
+            rs = Nothing
+
+
+        End If
+
+
+
+
+
     End Sub
 
     Private Sub cmbModCartr_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbModCartr.SelectedIndexChanged
@@ -5512,5 +5730,221 @@ err_:
 
     End Sub
 
+    Private Sub lvNetPort_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvNetPort.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub bCPUPlus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bCPUPlus.Click
+
+        Select Case sCPU
+
+            Case 1
+
+                sCPU = sCPU + 1
+                Me.cmbCPU2.Visible = True
+                Me.txtMHZ2.Visible = True
+                Me.txtSoc2.Visible = True
+                Me.PROizV2.Visible = True
+
+            Case 2
+
+                sCPU = sCPU + 1
+                Me.cmbCPU3.Visible = True
+                Me.txtMHZ3.Visible = True
+                Me.txtSoc3.Visible = True
+                Me.PROizV3.Visible = True
+
+            Case 3
+
+                sCPU = sCPU + 1
+                Me.cmbCPU4.Visible = True
+                Me.txtMHZ4.Visible = True
+                Me.txtSoc4.Visible = True
+                Me.PROizV4.Visible = True
+                Me.bCPUPlus.Visible = False
+            Case Else
+
+                sCPU = sCPU
+        End Select
+
+
+
+
+
+    End Sub
+
+
+    Private Sub bRamPlus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bRamPlus.Click
+        Select Case sRAM
+
+            Case 1
+
+                sRAM = sRAM + 1
+                Me.cmbRAM2.Visible = True
+                Me.txtRamSN2.Visible = True
+                Me.txtRamS2.Visible = True
+                Me.PROizV7.Visible = True
+            Case 2
+
+                sRAM = sRAM + 1
+                Me.cmbRAM3.Visible = True
+                Me.txtRamSN3.Visible = True
+                Me.txtRamS3.Visible = True
+                Me.PROizV8.Visible = True
+
+            Case 3
+
+                sRAM = sRAM + 1
+                Me.cmbRAM4.Visible = True
+                Me.txtRamSN4.Visible = True
+                Me.txtRamS4.Visible = True
+                Me.PROizV9.Visible = True
+                Me.bRamPlus.Visible = False
+            Case Else
+
+                sRAM = sRAM
+        End Select
+
+    End Sub
+
+    Private Sub bHddPlus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bHddPlus.Click
+        Select Case sHDD
+
+            Case 1
+
+                sHDD = sHDD + 1
+                Me.cmbHDD2.Visible = True
+                Me.txtHDDo2.Visible = True
+                Me.txtHDDsN2.Visible = True
+                Me.PROizV11.Visible = True
+            Case 2
+
+                sHDD = sHDD + 1
+                Me.cmbHDD3.Visible = True
+                Me.txtHDDo3.Visible = True
+                Me.txtHDDsN3.Visible = True
+                Me.PROizV12.Visible = True
+
+            Case 3
+
+                sHDD = sHDD + 1
+                Me.cmbHDD4.Visible = True
+                Me.txtHDDo4.Visible = True
+                Me.txtHDDsN4.Visible = True
+                Me.PROizV13.Visible = True
+                Me.bHddPlus.Visible = False
+            Case Else
+
+                sHDD = sHDD
+        End Select
+
+
+       
+    End Sub
+
+    Private Sub bSVGAPlus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bSVGAPlus.Click
+
+        Select Case sVGA
+
+            Case 1
+
+                sVGA = sVGA + 1
+                Me.cmbSVGA2.Visible = True
+                Me.txtSVGAr2.Visible = True
+                Me.txtSVGAs2.Visible = True
+                Me.PROizV15.Visible = True
+
+                Me.bSVGAPlus.Visible = False
+            Case Else
+
+                sVGA = sVGA
+        End Select
+    End Sub
+
+    Private Sub bOpticalPlus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bOpticalPlus.Click
+        Select Case sOPTICAL
+
+            Case 1
+
+                sOPTICAL = sOPTICAL + 1
+                Me.cmbOPTIC2.Visible = True
+                Me.txtOPTICs2.Visible = True
+                Me.txtOPTICsn2.Visible = True
+                Me.PROizV18.Visible = True
+            Case 2
+
+                sOPTICAL = sOPTICAL + 1
+                Me.cmbOPTIC3.Visible = True
+                Me.txtOPTICs3.Visible = True
+                Me.txtOPTICsn3.Visible = True
+                Me.PROizV19.Visible = True
+                Me.bOpticalPlus.Visible = False
+            Case Else
+
+                sOPTICAL = sOPTICAL
+        End Select
+    End Sub
+
+    Private Sub bNETPlus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bNETPlus.Click
+        
+
+        Select Case sNET
+
+            Case 1
+
+                sNET = sNET + 1
+                Me.cmbNET2.Visible = True
+                Me.txtNETip2.Visible = True
+                Me.txtNETmac2.Visible = True
+                Me.PROizV21.Visible = True
+                Me.bNETPlus.Visible = False
+            Case Else
+
+                sNET = sNET
+        End Select
+
+    End Sub
+
+    Private Sub bMonitorPlus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bMonitorPlus.Click
+        Select Case sMonitor
+
+            Case 1
+
+                sMonitor = sMonitor + 1
+                Me.cmbMon2.Visible = True
+                Me.txtMon2Dum.Visible = True
+                Me.txtMon2SN.Visible = True
+                Me.PROizV29.Visible = True
+                Me.bMonitorPlus.Visible = False
+            Case Else
+
+                sMonitor = sMonitor
+        End Select
+    End Sub
+
+    Private Sub bPrinterPlus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bPrinterPlus.Click
+        Select Case sPrinter
+
+            Case 1
+
+                sPrinter = sPrinter + 1
+                Me.cmbPrinters2.Visible = True
+                Me.txtPrint2SN.Visible = True
+                Me.txtPrint2Port.Visible = True
+                Me.PROizV35.Visible = True
+
+            Case 2
+
+                sPrinter = sPrinter + 1
+                Me.cmbPrinters3.Visible = True
+                Me.txtPrint3SN.Visible = True
+                Me.txtPrint3Port.Visible = True
+                Me.PROizV36.Visible = True
+                Me.bPrinterPlus.Visible = False
+            Case Else
+
+                sPrinter = sPrinter
+        End Select
+    End Sub
 End Class
 

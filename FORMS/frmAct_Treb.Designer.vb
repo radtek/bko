@@ -22,25 +22,25 @@ Partial Class frmAct_Treb
     'Не изменяйте ее в редакторе исходного кода.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.TabControl1 = New System.Windows.Forms.TabControl
-        Me.TabPage1 = New System.Windows.Forms.TabPage
-        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel
-        Me.btnAVOSadd = New System.Windows.Forms.Button
-        Me.lvACTVV = New System.Windows.Forms.ListView
-        Me.btnAVOSofsend = New System.Windows.Forms.Button
-        Me.btnAVOSdel = New System.Windows.Forms.Button
-        Me.TabPage2 = New System.Windows.Forms.TabPage
-        Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel
-        Me.lvACTSP = New System.Windows.Forms.ListView
-        Me.btnASPofsend = New System.Windows.Forms.Button
-        Me.btnASPadd = New System.Windows.Forms.Button
-        Me.btnASPdel = New System.Windows.Forms.Button
-        Me.TabPage3 = New System.Windows.Forms.TabPage
-        Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel
-        Me.lvTREB = New System.Windows.Forms.ListView
-        Me.btnTRofSend = New System.Windows.Forms.Button
-        Me.btnTRadd = New System.Windows.Forms.Button
-        Me.btnTRdel = New System.Windows.Forms.Button
+        Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.btnAVOSadd = New System.Windows.Forms.Button()
+        Me.lvACTVV = New System.Windows.Forms.ListView()
+        Me.btnAVOSofsend = New System.Windows.Forms.Button()
+        Me.btnAVOSdel = New System.Windows.Forms.Button()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
+        Me.lvACTSP = New System.Windows.Forms.ListView()
+        Me.btnASPofsend = New System.Windows.Forms.Button()
+        Me.btnASPadd = New System.Windows.Forms.Button()
+        Me.btnASPdel = New System.Windows.Forms.Button()
+        Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
+        Me.lvTREB = New System.Windows.Forms.ListView()
+        Me.btnTRofSend = New System.Windows.Forms.Button()
+        Me.btnTRadd = New System.Windows.Forms.Button()
+        Me.btnTRdel = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
@@ -76,8 +76,8 @@ Partial Class frmAct_Treb
         'TableLayoutPanel1
         '
         Me.TableLayoutPanel1.ColumnCount = 3
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100.0!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel1.Controls.Add(Me.btnAVOSadd, 0, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.lvACTVV, 0, 0)
@@ -116,7 +116,7 @@ Partial Class frmAct_Treb
         '
         'btnAVOSofsend
         '
-        Me.btnAVOSofsend.Location = New System.Drawing.Point(203, 587)
+        Me.btnAVOSofsend.Location = New System.Drawing.Point(165, 587)
         Me.btnAVOSofsend.Name = "btnAVOSofsend"
         Me.btnAVOSofsend.Size = New System.Drawing.Size(75, 23)
         Me.btnAVOSofsend.TabIndex = 7
@@ -125,7 +125,7 @@ Partial Class frmAct_Treb
         '
         'btnAVOSdel
         '
-        Me.btnAVOSdel.Location = New System.Drawing.Point(103, 587)
+        Me.btnAVOSdel.Location = New System.Drawing.Point(84, 587)
         Me.btnAVOSdel.Name = "btnAVOSdel"
         Me.btnAVOSdel.Size = New System.Drawing.Size(75, 23)
         Me.btnAVOSdel.TabIndex = 6
@@ -146,8 +146,8 @@ Partial Class frmAct_Treb
         'TableLayoutPanel2
         '
         Me.TableLayoutPanel2.ColumnCount = 3
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100.0!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel2.Controls.Add(Me.lvACTSP, 0, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.btnASPofsend, 2, 1)
@@ -177,7 +177,7 @@ Partial Class frmAct_Treb
         '
         'btnASPofsend
         '
-        Me.btnASPofsend.Location = New System.Drawing.Point(203, 587)
+        Me.btnASPofsend.Location = New System.Drawing.Point(165, 587)
         Me.btnASPofsend.Name = "btnASPofsend"
         Me.btnASPofsend.Size = New System.Drawing.Size(75, 23)
         Me.btnASPofsend.TabIndex = 10
@@ -195,7 +195,7 @@ Partial Class frmAct_Treb
         '
         'btnASPdel
         '
-        Me.btnASPdel.Location = New System.Drawing.Point(103, 587)
+        Me.btnASPdel.Location = New System.Drawing.Point(84, 587)
         Me.btnASPdel.Name = "btnASPdel"
         Me.btnASPdel.Size = New System.Drawing.Size(75, 23)
         Me.btnASPdel.TabIndex = 9
@@ -216,8 +216,8 @@ Partial Class frmAct_Treb
         'TableLayoutPanel3
         '
         Me.TableLayoutPanel3.ColumnCount = 3
-        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100.0!))
-        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100.0!))
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel3.Controls.Add(Me.lvTREB, 0, 0)
         Me.TableLayoutPanel3.Controls.Add(Me.btnTRofSend, 2, 1)
@@ -247,7 +247,7 @@ Partial Class frmAct_Treb
         '
         'btnTRofSend
         '
-        Me.btnTRofSend.Location = New System.Drawing.Point(203, 587)
+        Me.btnTRofSend.Location = New System.Drawing.Point(165, 587)
         Me.btnTRofSend.Name = "btnTRofSend"
         Me.btnTRofSend.Size = New System.Drawing.Size(75, 23)
         Me.btnTRofSend.TabIndex = 10
@@ -265,7 +265,7 @@ Partial Class frmAct_Treb
         '
         'btnTRdel
         '
-        Me.btnTRdel.Location = New System.Drawing.Point(103, 587)
+        Me.btnTRdel.Location = New System.Drawing.Point(84, 587)
         Me.btnTRdel.Name = "btnTRdel"
         Me.btnTRdel.Size = New System.Drawing.Size(75, 23)
         Me.btnTRdel.TabIndex = 9

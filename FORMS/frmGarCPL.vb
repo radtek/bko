@@ -31,18 +31,18 @@
         txtMHZ1.Width = 100
         txtSoc1.Visible = True
 
-        cmbCPU2.Enabled = True
-        cmbCPU3.Enabled = True
-        cmbCPU4.Enabled = True
-        txtMHZ2.Enabled = True
-        txtMHZ3.Enabled = True
-        txtMHZ4.Enabled = True
-        PROizV2.Enabled = True
-        PROizV3.Enabled = True
-        PROizV4.Enabled = True
-        txtSoc2.Enabled = True
-        txtSoc3.Enabled = True
-        txtSoc4.Enabled = True
+        cmbCPU2.Visible = True
+        cmbCPU3.Visible = True
+        cmbCPU4.Visible = True
+        txtMHZ2.Visible = True
+        txtMHZ3.Visible = True
+        txtMHZ4.Visible = True
+        PROizV2.Visible = True
+        PROizV3.Visible = True
+        PROizV4.Visible = True
+        txtSoc2.Visible = True
+        txtSoc3.Visible = True
+        txtSoc4.Visible = True
 
         cmbCPU2.Visible = True
         txtSoc2.Visible = True
@@ -79,21 +79,21 @@
 
             Case "SVGA"
                 gbcpu.Text = objIniFile.GetString("frmGarCPL", "MSG4", "")
-                cmbCPU2.Enabled = False
-                cmbCPU3.Enabled = False
-                cmbCPU4.Enabled = False
+                cmbCPU2.Visible = False
+                cmbCPU3.Visible = False
+                cmbCPU4.Visible = False
 
-                txtMHZ2.Enabled = False
-                txtMHZ3.Enabled = False
-                txtMHZ4.Enabled = False
+                txtMHZ2.Visible = False
+                txtMHZ3.Visible = False
+                txtMHZ4.Visible = False
 
-                txtSoc2.Enabled = False
-                txtSoc3.Enabled = False
-                txtSoc4.Enabled = False
+                txtSoc2.Visible = False
+                txtSoc3.Visible = False
+                txtSoc4.Visible = False
 
-                PROizV2.Enabled = False
-                PROizV3.Enabled = False
-                PROizV4.Enabled = False
+                PROizV2.Visible = False
+                PROizV3.Visible = False
+                PROizV4.Visible = False
 
                 gbcpu.Height = 73
                 gbPost.Top = 81
@@ -114,18 +114,18 @@
                 btnCancel.Top = 149
                 Me.Height = 198
 
-                cmbCPU2.Enabled = False
-                cmbCPU3.Enabled = False
-                cmbCPU4.Enabled = False
-                txtMHZ2.Enabled = False
-                txtMHZ3.Enabled = False
-                txtMHZ4.Enabled = False
-                txtSoc2.Enabled = False
-                txtSoc3.Enabled = False
-                txtSoc4.Enabled = False
-                PROizV2.Enabled = False
-                PROizV3.Enabled = False
-                PROizV4.Enabled = False
+                cmbCPU2.Visible = False
+                cmbCPU3.Visible = False
+                cmbCPU4.Visible = False
+                txtMHZ2.Visible = False
+                txtMHZ3.Visible = False
+                txtMHZ4.Visible = False
+                txtSoc2.Visible = False
+                txtSoc3.Visible = False
+                txtSoc4.Visible = False
+                PROizV2.Visible = False
+                PROizV3.Visible = False
+                PROizV4.Visible = False
 
                 FillComboNET(Me.cmbCPU1, "Name", "SPR_SOUND", "", False, True)
 
@@ -145,19 +145,19 @@
                 btnCancel.Top = 178
                 Me.Height = 231
 
-                cmbCPU2.Enabled = False
-                cmbCPU3.Enabled = False
-                cmbCPU4.Enabled = False
+                cmbCPU2.Visible = False
+                cmbCPU3.Visible = False
+                cmbCPU4.Visible = False
 
-                txtMHZ3.Enabled = False
-                txtMHZ4.Enabled = False
+                txtMHZ3.Visible = False
+                txtMHZ4.Visible = False
 
-                txtSoc2.Enabled = False
-                txtSoc3.Enabled = False
-                txtSoc4.Enabled = False
-                PROizV2.Enabled = False
-                PROizV3.Enabled = False
-                PROizV4.Enabled = False
+                txtSoc2.Visible = False
+                txtSoc3.Visible = False
+                txtSoc4.Visible = False
+                PROizV2.Visible = False
+                PROizV3.Visible = False
+                PROizV4.Visible = False
 
                 FillComboNET(Me.cmbCPU1, "Name", "SPR_MB", "", False, True)
 
@@ -170,10 +170,10 @@
                 btnCancel.Top = 198
                 Me.Height = 248
 
-                cmbCPU4.Enabled = False
-                txtMHZ4.Enabled = False
-                txtSoc4.Enabled = False
-                PROizV4.Enabled = False
+                cmbCPU4.Visible = False
+                txtMHZ4.Visible = False
+                txtSoc4.Visible = False
+                PROizV4.Visible = False
 
                 gbcpu.Text = objIniFile.GetString("frmGarCPL", "MSG7", "")
                 FillComboNET(Me.cmbCPU1, "Name", "SPR_OPTICAL", "", False, True)
@@ -183,17 +183,17 @@
             Case "NET"
                 gbcpu.Text = objIniFile.GetString("frmGarCPL", "MSG8", "")
 
-                cmbCPU3.Enabled = False
-                cmbCPU4.Enabled = False
+                cmbCPU3.Visible = False
+                cmbCPU4.Visible = False
 
-                txtMHZ3.Enabled = False
-                txtMHZ4.Enabled = False
+                txtMHZ3.Visible = False
+                txtMHZ4.Visible = False
 
-                txtSoc3.Enabled = False
-                txtSoc4.Enabled = False
+                txtSoc3.Visible = False
+                txtSoc4.Visible = False
 
-                PROizV3.Enabled = False
-                PROizV4.Enabled = False
+                PROizV3.Visible = False
+                PROizV4.Visible = False
 
                 gbcpu.Height = 73
                 gbPost.Top = 81
@@ -213,18 +213,18 @@
                 btnCancel.Top = 149
                 Me.Height = 198
 
-                cmbCPU2.Enabled = False
-                cmbCPU3.Enabled = False
-                cmbCPU4.Enabled = False
-                txtMHZ2.Enabled = False
-                txtMHZ3.Enabled = False
-                txtMHZ4.Enabled = False
-                txtSoc2.Enabled = False
-                txtSoc3.Enabled = False
-                txtSoc4.Enabled = False
-                PROizV2.Enabled = False
-                PROizV3.Enabled = False
-                PROizV4.Enabled = False
+                cmbCPU2.Visible = False
+                cmbCPU3.Visible = False
+                cmbCPU4.Visible = False
+                txtMHZ2.Visible = False
+                txtMHZ3.Visible = False
+                txtMHZ4.Visible = False
+                txtSoc2.Visible = False
+                txtSoc3.Visible = False
+                txtSoc4.Visible = False
+                PROizV2.Visible = False
+                PROizV3.Visible = False
+                PROizV4.Visible = False
 
                 FillComboNET(Me.cmbCPU1, "Name", "SPR_FDD", "", False, True)
 
@@ -237,35 +237,35 @@
                 btnCancel.Top = 149
                 Me.Height = 198
 
-                cmbCPU2.Enabled = False
-                cmbCPU3.Enabled = False
-                cmbCPU4.Enabled = False
-                txtMHZ2.Enabled = False
-                txtMHZ3.Enabled = False
-                txtMHZ4.Enabled = False
-                txtSoc2.Enabled = False
-                txtSoc3.Enabled = False
-                txtSoc4.Enabled = False
-                PROizV2.Enabled = False
-                PROizV3.Enabled = False
-                PROizV4.Enabled = False
+                cmbCPU2.Visible = False
+                cmbCPU3.Visible = False
+                cmbCPU4.Visible = False
+                txtMHZ2.Visible = False
+                txtMHZ3.Visible = False
+                txtMHZ4.Visible = False
+                txtSoc2.Visible = False
+                txtSoc3.Visible = False
+                txtSoc4.Visible = False
+                PROizV2.Visible = False
+                PROizV3.Visible = False
+                PROizV4.Visible = False
 
                 FillComboNET(Me.cmbCPU1, "Name", "SPR_MODEM", "", False, True)
 
             Case "MONITOR"
                 gbcpu.Text = objIniFile.GetString("frmGarCPL", "MSG11", "")
 
-                cmbCPU3.Enabled = False
-                cmbCPU4.Enabled = False
+                cmbCPU3.Visible = False
+                cmbCPU4.Visible = False
 
-                txtMHZ3.Enabled = False
-                txtMHZ4.Enabled = False
+                txtMHZ3.Visible = False
+                txtMHZ4.Visible = False
 
-                txtSoc3.Enabled = False
-                txtSoc4.Enabled = False
+                txtSoc3.Visible = False
+                txtSoc4.Visible = False
 
-                PROizV3.Enabled = False
-                PROizV4.Enabled = False
+                PROizV3.Visible = False
+                PROizV4.Visible = False
 
                 gbcpu.Height = 73
                 gbPost.Top = 81
@@ -286,18 +286,18 @@
                 btnCancel.Top = 149
                 Me.Height = 198
 
-                cmbCPU2.Enabled = False
-                cmbCPU3.Enabled = False
-                cmbCPU4.Enabled = False
-                txtMHZ2.Enabled = False
-                txtMHZ3.Enabled = False
-                txtMHZ4.Enabled = False
-                txtSoc2.Enabled = False
-                txtSoc3.Enabled = False
-                txtSoc4.Enabled = False
-                PROizV2.Enabled = False
-                PROizV3.Enabled = False
-                PROizV4.Enabled = False
+                cmbCPU2.Visible = False
+                cmbCPU3.Visible = False
+                cmbCPU4.Visible = False
+                txtMHZ2.Visible = False
+                txtMHZ3.Visible = False
+                txtMHZ4.Visible = False
+                txtSoc2.Visible = False
+                txtSoc3.Visible = False
+                txtSoc4.Visible = False
+                PROizV2.Visible = False
+                PROizV3.Visible = False
+                PROizV4.Visible = False
 
                 FillComboNET(Me.cmbCPU1, "Name", "SPR_KEYBOARD", "", False, True)
 
@@ -310,18 +310,18 @@
                 btnCancel.Top = 149
                 Me.Height = 198
 
-                cmbCPU2.Enabled = False
-                cmbCPU3.Enabled = False
-                cmbCPU4.Enabled = False
-                txtMHZ2.Enabled = False
-                txtMHZ3.Enabled = False
-                txtMHZ4.Enabled = False
-                txtSoc2.Enabled = False
-                txtSoc3.Enabled = False
-                txtSoc4.Enabled = False
-                PROizV2.Enabled = False
-                PROizV3.Enabled = False
-                PROizV4.Enabled = False
+                cmbCPU2.Visible = False
+                cmbCPU3.Visible = False
+                cmbCPU4.Visible = False
+                txtMHZ2.Visible = False
+                txtMHZ3.Visible = False
+                txtMHZ4.Visible = False
+                txtSoc2.Visible = False
+                txtSoc3.Visible = False
+                txtSoc4.Visible = False
+                PROizV2.Visible = False
+                PROizV3.Visible = False
+                PROizV4.Visible = False
 
                 FillComboNET(Me.cmbCPU1, "Name", "SPR_MOUSE", "", False, True)
 
@@ -334,18 +334,18 @@
                 btnCancel.Top = 149
                 Me.Height = 198
 
-                cmbCPU2.Enabled = False
-                cmbCPU3.Enabled = False
-                cmbCPU4.Enabled = False
-                txtMHZ2.Enabled = False
-                txtMHZ3.Enabled = False
-                txtMHZ4.Enabled = False
-                txtSoc2.Enabled = False
-                txtSoc3.Enabled = False
-                txtSoc4.Enabled = False
-                PROizV2.Enabled = False
-                PROizV3.Enabled = False
-                PROizV4.Enabled = False
+                cmbCPU2.Visible = False
+                cmbCPU3.Visible = False
+                cmbCPU4.Visible = False
+                txtMHZ2.Visible = False
+                txtMHZ3.Visible = False
+                txtMHZ4.Visible = False
+                txtSoc2.Visible = False
+                txtSoc3.Visible = False
+                txtSoc4.Visible = False
+                PROizV2.Visible = False
+                PROizV3.Visible = False
+                PROizV4.Visible = False
 
                 FillComboNET(Me.cmbCPU1, "Name", "SPR_FS", "", False, True)
 
@@ -359,18 +359,18 @@
                 btnCancel.Top = 149
                 Me.Height = 198
 
-                cmbCPU2.Enabled = False
-                cmbCPU3.Enabled = False
-                cmbCPU4.Enabled = False
-                txtMHZ2.Enabled = False
-                txtMHZ3.Enabled = False
-                txtMHZ4.Enabled = False
-                txtSoc2.Enabled = False
-                txtSoc3.Enabled = False
-                txtSoc4.Enabled = False
-                PROizV2.Enabled = False
-                PROizV3.Enabled = False
-                PROizV4.Enabled = False
+                cmbCPU2.Visible = False
+                cmbCPU3.Visible = False
+                cmbCPU4.Visible = False
+                txtMHZ2.Visible = False
+                txtMHZ3.Visible = False
+                txtMHZ4.Visible = False
+                txtSoc2.Visible = False
+                txtSoc3.Visible = False
+                txtSoc4.Visible = False
+                PROizV2.Visible = False
+                PROizV3.Visible = False
+                PROizV4.Visible = False
 
                 FillComboNET(Me.cmbCPU1, "Name", "SPR_USB", "", False, True)
 

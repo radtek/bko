@@ -411,7 +411,7 @@
             A = everIniFile.GetString("Оптические накопители", c, "")
             B = everIniFile.GetString("Оптические накопители", c & "|Свойства оптического накопителя|Тип устройства", "")
 
-            uname = everIniFile.GetString("Оптические накопители", "Оптические накопители2" & "|Свойства оптического накопителя|Описание устройства", "")
+            uname = everIniFile.GetString("Оптические накопители", "Оптические накопители1" & "|Свойства оптического накопителя|Описание устройства", "")
 
             If uname <> "Generic STEALTH DVD SCSI CdRom Device" Then
                 If uname <> "NERO IMAGEDRIVE2 SCSI CdRom Device" Then
@@ -419,8 +419,8 @@
                         If uname <> "RW8314B IMV135U SCSI CdRom Device" Then
 
                             frmComputers.cmbOPTIC1.Text = uname
-                            frmComputers.PROizV17.Text = everIniFile.GetString("Оптические накопители", "Оптические накопители2" & "|Производитель устройства|Фирма", "")
-                            frmComputers.txtOPTICs1.Text = everIniFile.GetString("Оптические накопители", "Оптические накопители2" & "|Свойства оптического накопителя|Скорость", "")
+                            frmComputers.PROizV17.Text = everIniFile.GetString("Оптические накопители", "Оптические накопители1" & "|Производитель устройства|Фирма", "")
+                            frmComputers.txtOPTICs1.Text = everIniFile.GetString("Оптические накопители", "Оптические накопители1" & "|Свойства оптического накопителя|Скорость", "")
                         Else
                             frmComputers.cmbOPTIC1.Text = ""
                             frmComputers.PROizV17.Text = ""
@@ -429,14 +429,14 @@
                     End If
                 End If
 
-                uname = everIniFile.GetString("Оптические накопители", "Оптические накопители1" & "|Свойства оптического накопителя|Описание устройства", "")
+                uname = everIniFile.GetString("Оптические накопители", "Оптические накопители2" & "|Свойства оптического накопителя|Описание устройства", "")
                 If uname <> "Generic STEALTH DVD SCSI CdRom Device" Then
                     If uname <> "NERO IMAGEDRIVE2 SCSI CdRom Device" Then
                         If uname <> "Generic DVD-ROM SCSI CdRom Device" Then
                             If uname <> "RW8314B IMV135U SCSI CdRom Device" Then
                                 frmComputers.cmbOPTIC2.Text = uname
-                                frmComputers.PROizV18.Text = everIniFile.GetString("Оптические накопители", "Оптические накопители1" & "|Производитель устройства|Фирма", "")
-                                frmComputers.txtOPTICs2.Text = everIniFile.GetString("Оптические накопители", "Оптические накопители1" & "|Свойства оптического накопителя|Скорость", "")
+                                frmComputers.PROizV18.Text = everIniFile.GetString("Оптические накопители", "Оптические накопители2" & "|Производитель устройства|Фирма", "")
+                                frmComputers.txtOPTICs2.Text = everIniFile.GetString("Оптические накопители", "Оптические накопители2" & "|Свойства оптического накопителя|Скорость", "")
                             Else
                                 frmComputers.cmbOPTIC2.Text = ""
                                 frmComputers.PROizV18.Text = ""

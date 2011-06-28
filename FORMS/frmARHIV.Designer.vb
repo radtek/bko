@@ -22,12 +22,12 @@ Partial Class frmARHIV
     'Не изменяйте ее в редакторе исходного кода.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.btnZipUp = New System.Windows.Forms.Button
-        Me.btnUnZip = New System.Windows.Forms.Button
-        Me.lblStatus = New System.Windows.Forms.Label
-        Me.ProgressBar2 = New System.Windows.Forms.ProgressBar
-        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar
-        Me.lbArh = New System.Windows.Forms.ListBox
+        Me.btnZipUp = New System.Windows.Forms.Button()
+        Me.btnUnZip = New System.Windows.Forms.Button()
+        Me.lblStatus = New System.Windows.Forms.Label()
+        Me.ProgressBar2 = New System.Windows.Forms.ProgressBar()
+        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
+        Me.lbArh = New System.Windows.Forms.ListBox()
         Me.SuspendLayout()
         '
         'btnZipUp
@@ -42,7 +42,7 @@ Partial Class frmARHIV
         'btnUnZip
         '
         Me.btnUnZip.Enabled = False
-        Me.btnUnZip.Location = New System.Drawing.Point(106, 422)
+        Me.btnUnZip.Location = New System.Drawing.Point(215, 422)
         Me.btnUnZip.Name = "btnUnZip"
         Me.btnUnZip.Size = New System.Drawing.Size(104, 23)
         Me.btnUnZip.TabIndex = 18

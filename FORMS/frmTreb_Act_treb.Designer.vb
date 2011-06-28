@@ -49,8 +49,8 @@ Partial Class frmTreb_Act_treb
         'TableLayoutPanel1
         '
         Me.TableLayoutPanel1.ColumnCount = 2
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 34.52381!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 65.47619!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel1.Controls.Add(Me.Label1, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.Label2, 0, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.Label3, 0, 2)
@@ -160,70 +160,70 @@ Partial Class frmTreb_Act_treb
         'txtNomer
         '
         Me.txtNomer.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtNomer.Location = New System.Drawing.Point(201, 3)
+        Me.txtNomer.Location = New System.Drawing.Point(141, 3)
         Me.txtNomer.Name = "txtNomer"
-        Me.txtNomer.Size = New System.Drawing.Size(371, 20)
+        Me.txtNomer.Size = New System.Drawing.Size(431, 20)
         Me.txtNomer.TabIndex = 8
         '
         'cmbTip
         '
         Me.cmbTip.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cmbTip.FormattingEnabled = True
-        Me.cmbTip.Location = New System.Drawing.Point(201, 29)
+        Me.cmbTip.Location = New System.Drawing.Point(141, 29)
         Me.cmbTip.Name = "cmbTip"
-        Me.cmbTip.Size = New System.Drawing.Size(371, 21)
+        Me.cmbTip.Size = New System.Drawing.Size(431, 21)
         Me.cmbTip.TabIndex = 9
         '
         'txtNodel
         '
         Me.txtNodel.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtNodel.Location = New System.Drawing.Point(201, 56)
+        Me.txtNodel.Location = New System.Drawing.Point(141, 56)
         Me.txtNodel.Name = "txtNodel"
-        Me.txtNodel.Size = New System.Drawing.Size(371, 20)
+        Me.txtNodel.Size = New System.Drawing.Size(431, 20)
         Me.txtNodel.TabIndex = 10
         '
         'txtCokVo
         '
         Me.txtCokVo.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtCokVo.Location = New System.Drawing.Point(201, 82)
+        Me.txtCokVo.Location = New System.Drawing.Point(141, 82)
         Me.txtCokVo.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
         Me.txtCokVo.Name = "txtCokVo"
-        Me.txtCokVo.Size = New System.Drawing.Size(371, 20)
+        Me.txtCokVo.Size = New System.Drawing.Size(431, 20)
         Me.txtCokVo.TabIndex = 11
         '
         'txtPrice
         '
         Me.txtPrice.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtPrice.Location = New System.Drawing.Point(201, 108)
+        Me.txtPrice.Location = New System.Drawing.Point(141, 108)
         Me.txtPrice.Maximum = New Decimal(New Integer() {1000000, 0, 0, 0})
         Me.txtPrice.Name = "txtPrice"
-        Me.txtPrice.Size = New System.Drawing.Size(371, 20)
+        Me.txtPrice.Size = New System.Drawing.Size(431, 20)
         Me.txtPrice.TabIndex = 12
         '
         'cmbLich
         '
         Me.cmbLich.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cmbLich.FormattingEnabled = True
-        Me.cmbLich.Location = New System.Drawing.Point(201, 134)
+        Me.cmbLich.Location = New System.Drawing.Point(141, 134)
         Me.cmbLich.Name = "cmbLich"
-        Me.cmbLich.Size = New System.Drawing.Size(371, 21)
+        Me.cmbLich.Size = New System.Drawing.Size(431, 21)
         Me.cmbLich.TabIndex = 13
         '
         'cmbLich2
         '
         Me.cmbLich2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cmbLich2.FormattingEnabled = True
-        Me.cmbLich2.Location = New System.Drawing.Point(201, 161)
+        Me.cmbLich2.Location = New System.Drawing.Point(141, 161)
         Me.cmbLich2.Name = "cmbLich2"
-        Me.cmbLich2.Size = New System.Drawing.Size(371, 21)
+        Me.cmbLich2.Size = New System.Drawing.Size(431, 21)
         Me.cmbLich2.TabIndex = 14
         '
         'txtDate
         '
         Me.txtDate.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtDate.Location = New System.Drawing.Point(201, 188)
+        Me.txtDate.Location = New System.Drawing.Point(141, 188)
         Me.txtDate.Name = "txtDate"
-        Me.txtDate.Size = New System.Drawing.Size(371, 20)
+        Me.txtDate.Size = New System.Drawing.Size(431, 20)
         Me.txtDate.TabIndex = 15
         Me.txtDate.Value = New Date(2010, 5, 19, 0, 0, 0, 0)
         '
@@ -238,7 +238,7 @@ Partial Class frmTreb_Act_treb
         '
         'cmdCancel
         '
-        Me.cmdCancel.Location = New System.Drawing.Point(201, 214)
+        Me.cmdCancel.Location = New System.Drawing.Point(141, 214)
         Me.cmdCancel.Name = "cmdCancel"
         Me.cmdCancel.Size = New System.Drawing.Size(75, 23)
         Me.cmdCancel.TabIndex = 17

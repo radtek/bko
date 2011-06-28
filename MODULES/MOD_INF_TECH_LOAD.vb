@@ -123,7 +123,8 @@ Module MOD_INF_TECH_LOAD
 
 
         Call LOAD_GARs(sID, frmComputers.cmbNETPostav, frmComputers.dtGNETPr, frmComputers.dtGNETok)
-        Call LOAD_NET_PORT(sID)
+        ' Call LOAD_NET_PORT(sID)
+        Call LOAD_NET_PORT2(sID)
         Call LOAD_NOTES(sID, frmComputers.lvNotesNET)
         Call LOAD_REPAIR(sID, frmComputers.lvRepairNET)
         Call LOAD_DVIG_TEHN(sID, frmComputers.lvMovementNET)
@@ -194,6 +195,132 @@ Module MOD_INF_TECH_LOAD
         End If
 
         ResList(frmComputers.lvNetPort)
+
+    End Sub
+
+    Public Sub LOAD_NET_PORT2(ByVal sID As String)
+        On Error GoTo err_
+
+
+        Dim rs1 As ADODB.Recordset
+        rs1 = New ADODB.Recordset
+        rs1.Open("SELECT count(*) as t_n FROM TBL_NET_MAG WHERE COMMUTATOR=" & sID, DB7, ADODB.CursorTypeEnum.adOpenKeyset)
+
+        frmComputers.lvNetPort.Sorting = SortOrder.None
+        frmComputers.lvNetPort.ListViewItemSorter = Nothing
+        frmComputers.lvNetPort.Items.Clear()
+
+        Dim UCount As Integer
+
+        With rs1
+            UCount = .Fields("t_n").Value
+        End With
+        rs1.Close()
+        rs1 = Nothing
+
+
+        If UCount > 0 Then
+
+            frmComputers.Label35.Visible = False
+            frmComputers.Label34.Visible = False
+            frmComputers.Label33.Visible = False
+            frmComputers.txtNetnumberPort.Visible = False
+            frmComputers.txtNetPortMapping.Visible = False
+            frmComputers.txtNetPortMac.Visible = False
+            frmComputers.btnNetPortAdd.Visible = False
+
+
+            rs1 = New ADODB.Recordset
+            rs1.Open("SELECT * FROM TBL_NET_MAG WHERE COMMUTATOR=" & sID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+            Dim intCount As Decimal = 0
+
+
+            With rs1
+                .MoveFirst()
+                Do While Not .EOF
+
+
+                    frmComputers.lvNetPort.Items.Add(.Fields("id").Value) 'col no. 1
+
+                    If Not IsDBNull(.Fields("NET_PORT_COMMUTATOR").Value) Then
+                        frmComputers.lvNetPort.Items(CInt(intCount)).SubItems.Add(.Fields("NET_PORT_COMMUTATOR").Value)
+                    Else
+                        frmComputers.lvNetPort.Items(CInt(intCount)).SubItems.Add("")
+                    End If
+
+
+                    Dim rs As ADODB.Recordset
+                    rs = New ADODB.Recordset
+                    rs.Open("SELECT count(*) as t_n FROM kompy WHERE id=" & .Fields("SVT").Value, DB7, ADODB.CursorTypeEnum.adOpenKeyset)
+
+
+                    With rs
+                        UCount = .Fields("t_n").Value
+                    End With
+                    rs.Close()
+                    rs = Nothing
+
+                    If UCount > 0 Then
+
+                        rs = New ADODB.Recordset
+                        rs.Open("SELECT net_name,NET_MAC_1 FROM kompy WHERE id=" & .Fields("SVT").Value, DB7, ADODB.CursorTypeEnum.adOpenKeyset)
+
+                        With rs
+                            If Not IsDBNull(.Fields("net_name").Value) Then
+                                frmComputers.lvNetPort.Items(CInt(intCount)).SubItems.Add(.Fields("net_name").Value)
+                            Else
+                                frmComputers.lvNetPort.Items(CInt(intCount)).SubItems.Add("")
+                            End If
+
+                            If Not IsDBNull(.Fields("NET_MAC_1").Value) Then
+                                frmComputers.lvNetPort.Items(CInt(intCount)).SubItems.Add(.Fields("NET_MAC_1").Value)
+                            Else
+                                frmComputers.lvNetPort.Items(CInt(intCount)).SubItems.Add("")
+                            End If
+
+                        End With
+                        rs.Close()
+                        rs = Nothing
+
+
+
+                    End If
+
+                    intCount = intCount + 1
+
+                    .MoveNext()
+                Loop
+            End With
+            rs1.Close()
+            rs1 = Nothing
+
+        Else
+
+            frmComputers.Label35.Visible = True
+            frmComputers.Label34.Visible = True
+            frmComputers.Label33.Visible = True
+            frmComputers.txtNetnumberPort.Visible = True
+            frmComputers.txtNetPortMapping.Visible = True
+            frmComputers.txtNetPortMac.Visible = True
+            frmComputers.btnNetPortAdd.Visible = True
+
+
+            LOAD_NET_PORT(sID)
+
+
+        End If
+
+        ResList(frmComputers.lvNetPort)
+
+
+
+        Exit Sub
+err_:
+        MsgBox(Err.Description)
+
+
+
 
     End Sub
 
@@ -520,6 +647,14 @@ Module MOD_INF_TECH_LOAD
         rs = New ADODB.Recordset
         rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
+        frmComputers.bCPUPlus.Visible = True
+        frmComputers.bRamPlus.Visible = True
+        frmComputers.bHddPlus.Visible = True
+        frmComputers.bSVGAPlus.Visible = True
+        frmComputers.bOpticalPlus.Visible = True
+        frmComputers.bNETPlus.Visible = True
+        frmComputers.bMonitorPlus.Visible = True
+        frmComputers.bPrinterPlus.Visible = True
 
         With rs
             'Процессоры
@@ -530,21 +665,67 @@ Module MOD_INF_TECH_LOAD
             If Not IsDBNull(.Fields("CPUmhz1").Value) Then frmComputers.txtMHZ1.Text = .Fields("CPUmhz1").Value
             If Not IsDBNull(.Fields("CPUSocket1").Value) Then frmComputers.txtSoc1.Text = .Fields("CPUSocket1").Value
             If Not IsDBNull(.Fields("CPUProizv1").Value) Then frmComputers.PROizV1.Text = .Fields("CPUProizv1").Value
+            frmComputers.sCPU = 1
 
-            If Not IsDBNull(.Fields("CPU2").Value) Then frmComputers.cmbCPU2.Text = .Fields("CPU2").Value
-            If Not IsDBNull(.Fields("CPUmhz2").Value) Then frmComputers.txtMHZ2.Text = .Fields("CPUmhz2").Value
-            If Not IsDBNull(.Fields("CPUSocket2").Value) Then frmComputers.txtSoc2.Text = .Fields("CPUSocket2").Value
-            If Not IsDBNull(.Fields("CPUProizv2").Value) Then frmComputers.PROizV2.Text = .Fields("CPUProizv2").Value
+            If Not IsDBNull(.Fields("CPU2").Value) And Len(.Fields("CPU2").Value) > 1 Then
+                frmComputers.cmbCPU2.Text = .Fields("CPU2").Value
+                frmComputers.sCPU = 2
+                frmComputers.cmbCPU2.Visible = True
+                frmComputers.txtMHZ2.Visible = True
+                frmComputers.txtSoc2.Visible = True
+                frmComputers.PROizV2.Visible = True
+                If Not IsDBNull(.Fields("CPUmhz2").Value) Then frmComputers.txtMHZ2.Text = .Fields("CPUmhz2").Value
+                If Not IsDBNull(.Fields("CPUSocket2").Value) Then frmComputers.txtSoc2.Text = .Fields("CPUSocket2").Value
+                If Not IsDBNull(.Fields("CPUProizv2").Value) Then frmComputers.PROizV2.Text = .Fields("CPUProizv2").Value
+            Else
+                frmComputers.cmbCPU2.Visible = False
+                frmComputers.txtMHZ2.Visible = False
+                frmComputers.txtSoc2.Visible = False
+                frmComputers.PROizV2.Visible = False
+            End If
 
-            If Not IsDBNull(.Fields("CPU3").Value) Then frmComputers.cmbCPU3.Text = .Fields("CPU3").Value
-            If Not IsDBNull(.Fields("CPUmhz3").Value) Then frmComputers.txtMHZ3.Text = .Fields("CPUmhz3").Value
-            If Not IsDBNull(.Fields("CPUSocket3").Value) Then frmComputers.txtSoc3.Text = .Fields("CPUSocket3").Value
-            If Not IsDBNull(.Fields("CPUProizv3").Value) Then frmComputers.PROizV3.Text = .Fields("CPUProizv3").Value
 
-            If Not IsDBNull(.Fields("CPU4").Value) Then frmComputers.cmbCPU4.Text = .Fields("CPU4").Value
-            If Not IsDBNull(.Fields("CPUmhz4").Value) Then frmComputers.txtMHZ4.Text = .Fields("CPUmhz4").Value
-            If Not IsDBNull(.Fields("CPUSocket4").Value) Then frmComputers.txtSoc4.Text = .Fields("CPUSocket4").Value
-            If Not IsDBNull(.Fields("CPUProizv4").Value) Then frmComputers.PROizV4.Text = .Fields("CPUProizv4").Value
+            If Not IsDBNull(.Fields("CPU3").Value) And Len(.Fields("CPU3").Value) > 1 Then
+                frmComputers.cmbCPU3.Text = .Fields("CPU3").Value
+                frmComputers.sCPU = 3
+                frmComputers.cmbCPU3.Visible = True
+                frmComputers.txtMHZ3.Visible = True
+                frmComputers.txtSoc3.Visible = True
+                frmComputers.PROizV3.Visible = True
+                If Not IsDBNull(.Fields("CPUmhz3").Value) Then frmComputers.txtMHZ3.Text = .Fields("CPUmhz3").Value
+                If Not IsDBNull(.Fields("CPUSocket3").Value) Then frmComputers.txtSoc3.Text = .Fields("CPUSocket3").Value
+                If Not IsDBNull(.Fields("CPUProizv3").Value) Then frmComputers.PROizV3.Text = .Fields("CPUProizv3").Value
+            Else
+                frmComputers.cmbCPU3.Visible = False
+                frmComputers.txtMHZ3.Visible = False
+                frmComputers.txtSoc3.Visible = False
+                frmComputers.PROizV3.Visible = False
+
+            End If
+
+
+            'If Not IsDBNull(.Fields("CPU4").Value) Then frmComputers.cmbCPU4.Text = .Fields("CPU4").Value
+
+            If Not IsDBNull(.Fields("CPU4").Value) And Len(.Fields("CPU4").Value) > 1 Then
+                frmComputers.cmbCPU4.Text = .Fields("CPU4").Value
+                frmComputers.sCPU = 4
+                frmComputers.bCPUPlus.Visible = False
+                frmComputers.cmbCPU4.Visible = True
+                frmComputers.txtMHZ4.Visible = True
+                frmComputers.txtSoc4.Visible = True
+                frmComputers.PROizV4.Visible = True
+                If Not IsDBNull(.Fields("CPUmhz4").Value) Then frmComputers.txtMHZ4.Text = .Fields("CPUmhz4").Value
+                If Not IsDBNull(.Fields("CPUSocket4").Value) Then frmComputers.txtSoc4.Text = .Fields("CPUSocket4").Value
+                If Not IsDBNull(.Fields("CPUProizv4").Value) Then frmComputers.PROizV4.Text = .Fields("CPUProizv4").Value
+            Else
+                frmComputers.cmbCPU4.Visible = False
+                frmComputers.txtMHZ4.Visible = False
+                frmComputers.txtSoc4.Visible = False
+                frmComputers.PROizV4.Visible = False
+
+            End If
+
+           
 
             'Материнская плата
             If Not IsDBNull(.Fields("Mb").Value) Then frmComputers.cmbMB.Text = .Fields("Mb").Value
@@ -559,20 +740,80 @@ Module MOD_INF_TECH_LOAD
             If Not IsDBNull(.Fields("RAM_speed_1").Value) Then frmComputers.txtRamS1.Text = .Fields("RAM_speed_1").Value
             If Not IsDBNull(.Fields("RAM_PROIZV_1").Value) Then frmComputers.PROizV6.Text = .Fields("RAM_PROIZV_1").Value
 
-            If Not IsDBNull(.Fields("RAM_2").Value) Then frmComputers.cmbRAM2.Text = .Fields("RAM_2").Value
-            If Not IsDBNull(.Fields("RAM_speed_2").Value) Then frmComputers.txtRamS2.Text = .Fields("RAM_speed_2").Value
-            If Not IsDBNull(.Fields("RAM_SN_2").Value) Then frmComputers.txtRamSN2.Text = .Fields("RAM_SN_2").Value
-            If Not IsDBNull(.Fields("RAM_PROIZV_2").Value) Then frmComputers.PROizV7.Text = .Fields("RAM_PROIZV_2").Value
+            'If Not IsDBNull(.Fields("RAM_2").Value) Then frmComputers.cmbRAM2.Text = .Fields("RAM_2").Value
+            frmComputers.sRAM = 1
 
-            If Not IsDBNull(.Fields("RAM_3").Value) Then frmComputers.cmbRAM3.Text = .Fields("RAM_3").Value
-            If Not IsDBNull(.Fields("RAM_speed_3").Value) Then frmComputers.txtRamS3.Text = .Fields("RAM_speed_3").Value
-            If Not IsDBNull(.Fields("RAM_SN_3").Value) Then frmComputers.txtRamSN3.Text = .Fields("RAM_SN_3").Value
-            If Not IsDBNull(.Fields("RAM_PROIZV_3").Value) Then frmComputers.PROizV8.Text = .Fields("RAM_PROIZV_3").Value
+            If Not IsDBNull(.Fields("RAM_2").Value) And Len(.Fields("RAM_2").Value) > 1 Then
+                frmComputers.cmbRAM2.Text = .Fields("RAM_2").Value
+                frmComputers.sRAM = frmComputers.sRAM + 1
+                frmComputers.cmbRAM2.Visible = True
+                frmComputers.txtRamSN2.Visible = True
+                frmComputers.txtRamS2.Visible = True
+                frmComputers.PROizV7.Visible = True
+                If Not IsDBNull(.Fields("RAM_speed_2").Value) Then frmComputers.txtRamS2.Text = .Fields("RAM_speed_2").Value
+                If Not IsDBNull(.Fields("RAM_SN_2").Value) Then frmComputers.txtRamSN2.Text = .Fields("RAM_SN_2").Value
+                If Not IsDBNull(.Fields("RAM_PROIZV_2").Value) Then frmComputers.PROizV7.Text = .Fields("RAM_PROIZV_2").Value
+            Else
+                frmComputers.cmbRAM2.Visible = False
+                frmComputers.txtRamSN2.Visible = False
+                frmComputers.txtRamS2.Visible = False
+                frmComputers.PROizV7.Visible = False
 
-            If Not IsDBNull(.Fields("RAM_4").Value) Then frmComputers.cmbRAM4.Text = .Fields("RAM_4").Value
-            If Not IsDBNull(.Fields("RAM_speed_4").Value) Then frmComputers.txtRamS4.Text = .Fields("RAM_speed_4").Value
-            If Not IsDBNull(.Fields("RAM_SN_4").Value) Then frmComputers.txtRamSN4.Text = .Fields("RAM_SN_4").Value
-            If Not IsDBNull(.Fields("RAM_PROIZV_4").Value) Then frmComputers.PROizV9.Text = .Fields("RAM_PROIZV_4").Value
+            End If
+
+            'If Not IsDBNull(.Fields("RAM_3").Value) Then frmComputers.cmbRAM3.Text = .Fields("RAM_3").Value
+
+            If Not IsDBNull(.Fields("RAM_3").Value) And Len(.Fields("RAM_3").Value) > 1 Then
+                frmComputers.cmbRAM3.Text = .Fields("RAM_3").Value
+                frmComputers.sRAM = frmComputers.sRAM + 1
+                frmComputers.cmbRAM2.Visible = True
+                frmComputers.txtRamSN2.Visible = True
+                frmComputers.txtRamS2.Visible = True
+                frmComputers.PROizV7.Visible = True
+                frmComputers.cmbRAM3.Visible = True
+                frmComputers.txtRamSN3.Visible = True
+                frmComputers.txtRamS3.Visible = True
+                frmComputers.PROizV8.Visible = True
+                If Not IsDBNull(.Fields("RAM_speed_3").Value) Then frmComputers.txtRamS3.Text = .Fields("RAM_speed_3").Value
+                If Not IsDBNull(.Fields("RAM_SN_3").Value) Then frmComputers.txtRamSN3.Text = .Fields("RAM_SN_3").Value
+                If Not IsDBNull(.Fields("RAM_PROIZV_3").Value) Then frmComputers.PROizV8.Text = .Fields("RAM_PROIZV_3").Value
+            Else
+                frmComputers.cmbRAM3.Visible = False
+                frmComputers.txtRamSN3.Visible = False
+                frmComputers.txtRamS3.Visible = False
+                frmComputers.PROizV8.Visible = False
+
+            End If
+
+
+            'If Not IsDBNull(.Fields("RAM_4").Value) Then frmComputers.cmbRAM4.Text = .Fields("RAM_4").Value
+            If Not IsDBNull(.Fields("RAM_4").Value) And Len(.Fields("RAM_4").Value) > 1 Then
+                frmComputers.cmbRAM4.Text = .Fields("RAM_4").Value
+                frmComputers.sRAM = frmComputers.sRAM + 1
+                frmComputers.bRamPlus.Visible = False
+                frmComputers.cmbRAM2.Visible = True
+                frmComputers.txtRamSN2.Visible = True
+                frmComputers.txtRamS2.Visible = True
+                frmComputers.PROizV7.Visible = True
+                frmComputers.cmbRAM3.Visible = True
+                frmComputers.txtRamSN3.Visible = True
+                frmComputers.txtRamS3.Visible = True
+                frmComputers.PROizV8.Visible = True
+                frmComputers.cmbRAM4.Visible = True
+                frmComputers.txtRamSN4.Visible = True
+                frmComputers.txtRamS4.Visible = True
+                frmComputers.PROizV9.Visible = True
+                If Not IsDBNull(.Fields("RAM_speed_4").Value) Then frmComputers.txtRamS4.Text = .Fields("RAM_speed_4").Value
+                If Not IsDBNull(.Fields("RAM_SN_4").Value) Then frmComputers.txtRamSN4.Text = .Fields("RAM_SN_4").Value
+                If Not IsDBNull(.Fields("RAM_PROIZV_4").Value) Then frmComputers.PROizV9.Text = .Fields("RAM_PROIZV_4").Value
+            Else
+                frmComputers.cmbRAM4.Visible = False
+                frmComputers.txtRamSN4.Visible = False
+                frmComputers.txtRamS4.Visible = False
+                frmComputers.PROizV9.Visible = False
+
+            End If
+           
 
             'Жесткие диски
 
@@ -580,21 +821,71 @@ Module MOD_INF_TECH_LOAD
             If Not IsDBNull(.Fields("HDD_OB_1").Value) Then frmComputers.txtHDDo1.Text = .Fields("HDD_OB_1").Value
             If Not IsDBNull(.Fields("HDD_SN_1").Value) Then frmComputers.txtHDDsN1.Text = .Fields("HDD_SN_1").Value
             If Not IsDBNull(.Fields("HDD_PROIZV_1").Value) Then frmComputers.PROizV10.Text = .Fields("HDD_PROIZV_1").Value
+            frmComputers.sHDD = 1
 
-            If Not IsDBNull(.Fields("HDD_Name_2").Value) Then frmComputers.cmbHDD2.Text = .Fields("HDD_Name_2").Value
-            If Not IsDBNull(.Fields("HDD_OB_2").Value) Then frmComputers.txtHDDo2.Text = .Fields("HDD_OB_2").Value
-            If Not IsDBNull(.Fields("HDD_SN_2").Value) Then frmComputers.txtHDDsN2.Text = .Fields("HDD_SN_2").Value
-            If Not IsDBNull(.Fields("HDD_PROIZV_2").Value) Then frmComputers.PROizV11.Text = .Fields("HDD_PROIZV_2").Value
+            If Not IsDBNull(.Fields("HDD_Name_2").Value) And Len(.Fields("HDD_Name_2").Value) > 1 Then
+                frmComputers.cmbHDD2.Text = .Fields("HDD_Name_2").Value
+                frmComputers.sHDD = 2
+                frmComputers.cmbHDD2.Visible = True
+                frmComputers.txtHDDo2.Visible = True
+                frmComputers.txtHDDsN2.Visible = True
+                frmComputers.PROizV11.Visible = True
 
-            If Not IsDBNull(.Fields("HDD_Name_3").Value) Then frmComputers.cmbHDD3.Text = .Fields("HDD_Name_3").Value
-            If Not IsDBNull(.Fields("HDD_OB_3").Value) Then frmComputers.txtHDDo3.Text = .Fields("HDD_OB_3").Value
-            If Not IsDBNull(.Fields("HDD_SN_3").Value) Then frmComputers.txtHDDsN3.Text = .Fields("HDD_SN_3").Value
-            If Not IsDBNull(.Fields("HDD_PROIZV_3").Value) Then frmComputers.PROizV12.Text = .Fields("HDD_PROIZV_3").Value
+                If Not IsDBNull(.Fields("HDD_OB_2").Value) Then frmComputers.txtHDDo2.Text = .Fields("HDD_OB_2").Value
+                If Not IsDBNull(.Fields("HDD_SN_2").Value) Then frmComputers.txtHDDsN2.Text = .Fields("HDD_SN_2").Value
+                If Not IsDBNull(.Fields("HDD_PROIZV_2").Value) Then frmComputers.PROizV11.Text = .Fields("HDD_PROIZV_2").Value
 
-            If Not IsDBNull(.Fields("HDD_Name_4").Value) Then frmComputers.cmbHDD4.Text = .Fields("HDD_Name_4").Value
-            If Not IsDBNull(.Fields("HDD_OB_4").Value) Then frmComputers.txtHDDo4.Text = .Fields("HDD_OB_4").Value
-            If Not IsDBNull(.Fields("HDD_SN_4").Value) Then frmComputers.txtHDDsN4.Text = .Fields("HDD_SN_4").Value
-            If Not IsDBNull(.Fields("HDD_PROIZV_4").Value) Then frmComputers.PROizV13.Text = .Fields("HDD_PROIZV_4").Value
+            Else
+                frmComputers.cmbHDD2.Visible = False
+                frmComputers.txtHDDo2.Visible = False
+                frmComputers.txtHDDsN2.Visible = False
+                frmComputers.PROizV11.Visible = False
+
+            End If
+
+
+            If Not IsDBNull(.Fields("HDD_Name_3").Value) And Len(.Fields("HDD_Name_3").Value) > 1 Then
+                frmComputers.cmbHDD3.Text = .Fields("HDD_Name_3").Value
+                frmComputers.sHDD = 3
+                frmComputers.cmbHDD3.Visible = True
+                frmComputers.txtHDDo3.Visible = True
+                frmComputers.txtHDDsN3.Visible = True
+                frmComputers.PROizV12.Visible = True
+
+                If Not IsDBNull(.Fields("HDD_OB_3").Value) Then frmComputers.txtHDDo3.Text = .Fields("HDD_OB_3").Value
+                If Not IsDBNull(.Fields("HDD_SN_3").Value) Then frmComputers.txtHDDsN3.Text = .Fields("HDD_SN_3").Value
+                If Not IsDBNull(.Fields("HDD_PROIZV_3").Value) Then frmComputers.PROizV12.Text = .Fields("HDD_PROIZV_3").Value
+
+            Else
+                frmComputers.cmbHDD3.Visible = False
+                frmComputers.txtHDDo3.Visible = False
+                frmComputers.txtHDDsN3.Visible = False
+                frmComputers.PROizV12.Visible = False
+
+            End If
+
+
+            If Not IsDBNull(.Fields("HDD_Name_4").Value) And Len(.Fields("HDD_Name_4").Value) > 1 Then
+                frmComputers.cmbHDD4.Text = .Fields("HDD_Name_4").Value
+                frmComputers.sHDD = 4
+                frmComputers.bHddPlus.Visible = False
+                frmComputers.cmbHDD4.Visible = True
+                frmComputers.txtHDDo4.Visible = True
+                frmComputers.txtHDDsN4.Visible = True
+                frmComputers.PROizV13.Visible = True
+
+                If Not IsDBNull(.Fields("HDD_OB_4").Value) Then frmComputers.txtHDDo4.Text = .Fields("HDD_OB_4").Value
+                If Not IsDBNull(.Fields("HDD_SN_4").Value) Then frmComputers.txtHDDsN4.Text = .Fields("HDD_SN_4").Value
+                If Not IsDBNull(.Fields("HDD_PROIZV_4").Value) Then frmComputers.PROizV13.Text = .Fields("HDD_PROIZV_4").Value
+
+            Else
+                frmComputers.cmbHDD4.Visible = False
+                frmComputers.txtHDDo4.Visible = False
+                frmComputers.txtHDDsN4.Visible = False
+                frmComputers.PROizV13.Visible = False
+
+            End If
+
 
             'Видео карта
             If Not IsDBNull(.Fields("SVGA_NAME").Value) Then frmComputers.cmbSVGA1.Text = .Fields("SVGA_NAME").Value
@@ -602,10 +893,28 @@ Module MOD_INF_TECH_LOAD
             If Not IsDBNull(.Fields("SVGA_SN").Value) Then frmComputers.txtSVGAs1.Text = .Fields("SVGA_SN").Value
             If Not IsDBNull(.Fields("SVGA_PROIZV").Value) Then frmComputers.PROizV14.Text = .Fields("SVGA_PROIZV").Value
 
-            If Not IsDBNull(.Fields("SVGA2_NAME").Value) Then frmComputers.cmbSVGA2.Text = .Fields("SVGA2_NAME").Value
-            If Not IsDBNull(.Fields("SVGA2_OB_RAM").Value) Then frmComputers.txtSVGAr2.Text = .Fields("SVGA2_OB_RAM").Value
-            If Not IsDBNull(.Fields("SVGA2_SN").Value) Then frmComputers.txtSVGAs2.Text = .Fields("SVGA2_SN").Value
-            If Not IsDBNull(.Fields("SVGA2_PROIZV").Value) Then frmComputers.PROizV15.Text = .Fields("SVGA2_PROIZV").Value
+            frmComputers.sVGA = 1
+            If Not IsDBNull(.Fields("SVGA2_NAME").Value) And Len(.Fields("SVGA2_NAME").Value) <> 0 Then
+                frmComputers.cmbSVGA2.Text = .Fields("SVGA2_NAME").Value
+                frmComputers.sVGA = 2
+                frmComputers.bSVGAPlus.Visible = False
+                frmComputers.cmbSVGA2.Visible = True
+                frmComputers.txtSVGAs2.Visible = True
+                frmComputers.txtSVGAr2.Visible = True
+                frmComputers.PROizV15.Visible = True
+
+                If Not IsDBNull(.Fields("SVGA2_OB_RAM").Value) Then frmComputers.txtSVGAr2.Text = .Fields("SVGA2_OB_RAM").Value
+                If Not IsDBNull(.Fields("SVGA2_SN").Value) Then frmComputers.txtSVGAs2.Text = .Fields("SVGA2_SN").Value
+                If Not IsDBNull(.Fields("SVGA2_PROIZV").Value) Then frmComputers.PROizV15.Text = .Fields("SVGA2_PROIZV").Value
+            Else
+                frmComputers.cmbSVGA2.Visible = False
+                frmComputers.txtSVGAr2.Visible = False
+                frmComputers.txtSVGAs2.Visible = False
+                frmComputers.PROizV15.Visible = False
+
+            End If
+
+
 
             'Звуковая карта
 
@@ -620,27 +929,76 @@ Module MOD_INF_TECH_LOAD
             If Not IsDBNull(.Fields("CD_SPEED").Value) Then frmComputers.txtOPTICs1.Text = .Fields("CD_SPEED").Value
             If Not IsDBNull(.Fields("CD_SN").Value) Then frmComputers.txtOPTICsn1.Text = .Fields("CD_SN").Value
             If Not IsDBNull(.Fields("CD_PROIZV").Value) Then frmComputers.PROizV17.Text = .Fields("CD_PROIZV").Value
+            frmComputers.sOPTICAL = 1
 
-            If Not IsDBNull(.Fields("CDRW_NAME").Value) Then frmComputers.cmbOPTIC2.Text = .Fields("CDRW_NAME").Value
-            If Not IsDBNull(.Fields("CDRW_SPEED").Value) Then frmComputers.txtOPTICs2.Text = .Fields("CDRW_SPEED").Value
-            If Not IsDBNull(.Fields("CDRW_SN").Value) Then frmComputers.txtOPTICsn2.Text = .Fields("CDRW_SN").Value
-            If Not IsDBNull(.Fields("CDRW_PROIZV").Value) Then frmComputers.PROizV18.Text = .Fields("CDRW_PROIZV").Value
+            If Not IsDBNull(.Fields("CDRW_NAME").Value) And Len(.Fields("CDRW_NAME").Value) > 1 Then
+                frmComputers.cmbOPTIC2.Text = .Fields("CDRW_NAME").Value
+                frmComputers.sOPTICAL = 2
+                frmComputers.cmbOPTIC2.Visible = True
+                frmComputers.txtOPTICs2.Visible = True
+                frmComputers.txtOPTICsn2.Visible = True
+                frmComputers.PROizV18.Visible = True
 
-            If Not IsDBNull(.Fields("DVD_NAME").Value) Then frmComputers.cmbOPTIC3.Text = .Fields("DVD_NAME").Value
-            If Not IsDBNull(.Fields("DVD_SPEED").Value) Then frmComputers.txtOPTICs3.Text = .Fields("DVD_SPEED").Value
-            If Not IsDBNull(.Fields("DVD_SN").Value) Then frmComputers.txtOPTICsn3.Text = .Fields("DVD_SN").Value
-            If Not IsDBNull(.Fields("DVD_PROIZV").Value) Then frmComputers.PROizV19.Text = .Fields("DVD_PROIZV").Value
+                If Not IsDBNull(.Fields("CDRW_SPEED").Value) Then frmComputers.txtOPTICs2.Text = .Fields("CDRW_SPEED").Value
+                If Not IsDBNull(.Fields("CDRW_SN").Value) Then frmComputers.txtOPTICsn2.Text = .Fields("CDRW_SN").Value
+                If Not IsDBNull(.Fields("CDRW_PROIZV").Value) Then frmComputers.PROizV18.Text = .Fields("CDRW_PROIZV").Value
+            Else
+                frmComputers.cmbOPTIC2.Visible = False
+                frmComputers.txtOPTICs2.Visible = False
+                frmComputers.txtOPTICsn2.Visible = False
+                frmComputers.PROizV18.Visible = False
+
+            End If
+
+
+            If Not IsDBNull(.Fields("DVD_NAME").Value) And Len(.Fields("DVD_NAME").Value) > 1 Then
+                frmComputers.cmbOPTIC3.Text = .Fields("DVD_NAME").Value
+                frmComputers.sOPTICAL = 2
+                frmComputers.bOpticalPlus.Visible = False
+                frmComputers.cmbOPTIC3.Visible = True
+                frmComputers.txtOPTICs3.Visible = True
+                frmComputers.txtOPTICsn3.Visible = True
+                frmComputers.PROizV19.Visible = True
+
+                If Not IsDBNull(.Fields("DVD_SPEED").Value) Then frmComputers.txtOPTICs3.Text = .Fields("DVD_SPEED").Value
+                If Not IsDBNull(.Fields("DVD_SN").Value) Then frmComputers.txtOPTICsn3.Text = .Fields("DVD_SN").Value
+                If Not IsDBNull(.Fields("DVD_PROIZV").Value) Then frmComputers.PROizV19.Text = .Fields("DVD_PROIZV").Value
+            Else
+                frmComputers.cmbOPTIC3.Visible = False
+                frmComputers.txtOPTICs3.Visible = False
+                frmComputers.txtOPTICsn3.Visible = False
+                frmComputers.PROizV19.Visible = False
+
+            End If
+
 
             'Сетевые карты
             If Not IsDBNull(.Fields("NET_NAME_1").Value) Then frmComputers.cmbNET1.Text = .Fields("NET_NAME_1").Value
             If Not IsDBNull(.Fields("NET_IP_1").Value) Then frmComputers.txtNETip1.Text = .Fields("NET_IP_1").Value
             If Not IsDBNull(.Fields("NET_MAC_1").Value) Then frmComputers.txtNETmac1.Text = .Fields("NET_MAC_1").Value
             If Not IsDBNull(.Fields("NET_PROIZV_1").Value) Then frmComputers.PROizV20.Text = .Fields("NET_PROIZV_1").Value
+            frmComputers.sNET = 1
 
-            If Not IsDBNull(.Fields("NET_NAME_2").Value) Then frmComputers.cmbNET2.Text = .Fields("NET_NAME_2").Value
-            If Not IsDBNull(.Fields("NET_IP_2").Value) Then frmComputers.txtNETip2.Text = .Fields("NET_IP_2").Value
-            If Not IsDBNull(.Fields("NET_MAC_2").Value) Then frmComputers.txtNETmac2.Text = .Fields("NET_MAC_2").Value
-            If Not IsDBNull(.Fields("NET_PROIZV_2").Value) Then frmComputers.PROizV21.Text = .Fields("NET_PROIZV_2").Value
+            If Not IsDBNull(.Fields("NET_NAME_2").Value) And Len(.Fields("NET_NAME_2").Value) > 1 Then
+                frmComputers.cmbNET2.Text = .Fields("NET_NAME_2").Value
+                frmComputers.sNET = 2
+                frmComputers.bNETPlus.Visible = False
+                frmComputers.cmbNET2.Visible = True
+                frmComputers.txtNETip2.Visible = True
+                frmComputers.txtNETmac2.Visible = True
+                frmComputers.PROizV21.Visible = True
+
+                If Not IsDBNull(.Fields("NET_IP_2").Value) Then frmComputers.txtNETip2.Text = .Fields("NET_IP_2").Value
+                If Not IsDBNull(.Fields("NET_MAC_2").Value) Then frmComputers.txtNETmac2.Text = .Fields("NET_MAC_2").Value
+                If Not IsDBNull(.Fields("NET_PROIZV_2").Value) Then frmComputers.PROizV21.Text = .Fields("NET_PROIZV_2").Value
+            Else
+                frmComputers.cmbNET2.Visible = False
+                frmComputers.txtNETip2.Visible = False
+                frmComputers.txtNETmac2.Visible = False
+                frmComputers.PROizV21.Visible = False
+
+            End If
+
 
             'Дисковод
             If Not IsDBNull(.Fields("FDD_NAME").Value) Then frmComputers.cmbFDD.Text = .Fields("FDD_NAME").Value
@@ -700,10 +1058,26 @@ Module MOD_INF_TECH_LOAD
             If Not IsDBNull(.Fields("MONITOR_PROIZV").Value) Then frmComputers.PROizV28.Text = .Fields("MONITOR_PROIZV").Value
 
             '2
-            If Not IsDBNull(.Fields("MONITOR_NAME2").Value) Then frmComputers.cmbMon2.Text = .Fields("MONITOR_NAME2").Value
-            If Not IsDBNull(.Fields("MONITOR_DUM2").Value) Then frmComputers.txtMon2Dum.Text = .Fields("MONITOR_DUM2").Value
-            If Not IsDBNull(.Fields("MONITOR_SN2").Value) Then frmComputers.txtMon2SN.Text = .Fields("MONITOR_SN2").Value
-            If Not IsDBNull(.Fields("MONITOR_PROIZV2").Value) Then frmComputers.PROizV29.Text = .Fields("MONITOR_PROIZV2").Value
+            frmComputers.sMonitor = 1
+            If Not IsDBNull(.Fields("MONITOR_NAME2").Value) And Len(.Fields("MONITOR_NAME2").Value) > 1 Then
+                frmComputers.cmbMon2.Text = .Fields("MONITOR_NAME2").Value
+                frmComputers.sMonitor = 2
+                frmComputers.bMonitorPlus.Visible = False
+                frmComputers.cmbMon2.Visible = True
+                frmComputers.txtMon2Dum.Visible = True
+                frmComputers.txtMon2SN.Visible = True
+                frmComputers.PROizV29.Visible = True
+                If Not IsDBNull(.Fields("MONITOR_DUM2").Value) Then frmComputers.txtMon2Dum.Text = .Fields("MONITOR_DUM2").Value
+                If Not IsDBNull(.Fields("MONITOR_SN2").Value) Then frmComputers.txtMon2SN.Text = .Fields("MONITOR_SN2").Value
+                If Not IsDBNull(.Fields("MONITOR_PROIZV2").Value) Then frmComputers.PROizV29.Text = .Fields("MONITOR_PROIZV2").Value
+            Else
+                frmComputers.cmbMon2.Visible = False
+                frmComputers.txtMon2Dum.Visible = False
+                frmComputers.txtMon2SN.Visible = False
+                frmComputers.PROizV29.Visible = False
+
+            End If
+
 
             'Клавиатура
             If Not IsDBNull(.Fields("KEYBOARD_NAME").Value) Then frmComputers.cmbKeyb.Text = .Fields("KEYBOARD_NAME").Value
@@ -736,16 +1110,47 @@ Module MOD_INF_TECH_LOAD
             If Not IsDBNull(.Fields("PRINTER_SN_1").Value) Then frmComputers.txtPrint1SN.Text = .Fields("PRINTER_SN_1").Value
             If Not IsDBNull(.Fields("PORT_1").Value) Then frmComputers.txtPrint1Port.Text = .Fields("PORT_1").Value
             If Not IsDBNull(.Fields("PRINTER_PROIZV_1").Value) Then frmComputers.PROizV34.Text = .Fields("PRINTER_PROIZV_1").Value
+            frmComputers.sPrinter = 1
 
-            If Not IsDBNull(.Fields("PRINTER_NAME_2").Value) Then frmComputers.cmbPrinters2.Text = .Fields("PRINTER_NAME_2").Value
-            If Not IsDBNull(.Fields("PRINTER_SN_2").Value) Then frmComputers.txtPrint2SN.Text = .Fields("PRINTER_SN_2").Value
-            If Not IsDBNull(.Fields("PORT_2").Value) Then frmComputers.txtPrint2Port.Text = .Fields("PORT_2").Value
-            If Not IsDBNull(.Fields("PRINTER_PROIZV_2").Value) Then frmComputers.PROizV35.Text = .Fields("PRINTER_PROIZV_2").Value
 
-            If Not IsDBNull(.Fields("PRINTER_NAME_3").Value) Then frmComputers.cmbPrinters3.Text = .Fields("PRINTER_NAME_3").Value
-            If Not IsDBNull(.Fields("PRINTER_SN_3").Value) Then frmComputers.txtPrint3SN.Text = .Fields("PRINTER_SN_3").Value
-            If Not IsDBNull(.Fields("PORT_3").Value) Then frmComputers.txtPrint3Port.Text = .Fields("PORT_3").Value
-            If Not IsDBNull(.Fields("PRINTER_PROIZV_3").Value) Then frmComputers.PROizV36.Text = .Fields("PRINTER_PROIZV_3").Value
+            If Not IsDBNull(.Fields("PRINTER_NAME_2").Value) And Len(.Fields("PRINTER_NAME_2").Value) > 1 Then
+                frmComputers.cmbPrinters2.Text = .Fields("PRINTER_NAME_2").Value
+                frmComputers.sPrinter = 2
+                frmComputers.cmbPrinters2.Visible = True
+                frmComputers.txtPrint2SN.Visible = True
+                frmComputers.txtPrint2Port.Visible = True
+                frmComputers.PROizV35.Visible = True
+                If Not IsDBNull(.Fields("PRINTER_SN_2").Value) Then frmComputers.txtPrint2SN.Text = .Fields("PRINTER_SN_2").Value
+                If Not IsDBNull(.Fields("PORT_2").Value) Then frmComputers.txtPrint2Port.Text = .Fields("PORT_2").Value
+                If Not IsDBNull(.Fields("PRINTER_PROIZV_2").Value) Then frmComputers.PROizV35.Text = .Fields("PRINTER_PROIZV_2").Value
+            Else
+                frmComputers.cmbPrinters2.Visible = False
+                frmComputers.txtPrint2SN.Visible = False
+                frmComputers.txtPrint2Port.Visible = False
+                frmComputers.PROizV35.Visible = False
+
+            End If
+
+
+            If Not IsDBNull(.Fields("PRINTER_NAME_3").Value) And Len(.Fields("PRINTER_NAME_3").Value) > 1 Then
+                frmComputers.cmbPrinters3.Text = .Fields("PRINTER_NAME_3").Value
+                frmComputers.sPrinter = 3
+                frmComputers.bPrinterPlus.Visible = False
+                frmComputers.cmbPrinters3.Visible = True
+                frmComputers.txtPrint3SN.Visible = True
+                frmComputers.txtPrint3Port.Visible = True
+                frmComputers.PROizV36.Visible = True
+                If Not IsDBNull(.Fields("PRINTER_SN_3").Value) Then frmComputers.txtPrint3SN.Text = .Fields("PRINTER_SN_3").Value
+                If Not IsDBNull(.Fields("PORT_3").Value) Then frmComputers.txtPrint3Port.Text = .Fields("PORT_3").Value
+                If Not IsDBNull(.Fields("PRINTER_PROIZV_3").Value) Then frmComputers.PROizV36.Text = .Fields("PRINTER_PROIZV_3").Value
+            Else
+                frmComputers.cmbPrinters3.Visible = False
+                frmComputers.txtPrint3SN.Visible = False
+                frmComputers.txtPrint3Port.Visible = False
+                frmComputers.PROizV36.Visible = False
+
+            End If
+           
 
             If Not IsDBNull(.Fields("NET_NAME").Value) Then frmComputers.txtSNAME.Text = .Fields("NET_NAME").Value
             If Not IsDBNull(.Fields("PSEVDONIM").Value) Then frmComputers.txtPSEUDONIM.Text = .Fields("PSEVDONIM").Value
@@ -1169,7 +1574,7 @@ Module MOD_INF_TECH_LOAD
         rs.Close()
         rs = Nothing
 
-        'ResList(lstGroups)
+        ResList(lstGroups)
 
         If uname = 0 Then Exit Sub
 
@@ -1581,6 +1986,9 @@ Module MOD_INF_TECH_LOAD
             rs.Close()
             rs = Nothing
         End If
+
+        ResList(frmComputers.lvNotesBR)
+
 
         Exit Sub
 err_:

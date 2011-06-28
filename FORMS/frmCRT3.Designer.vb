@@ -196,8 +196,8 @@ Partial Class frmCRT3
         'TableLayoutPanel2
         '
         Me.TableLayoutPanel2.ColumnCount = 3
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 169.0!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 170.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel2.Controls.Add(Me.txtMemo, 0, 12)
         Me.TableLayoutPanel2.Controls.Add(Me.dtSale, 1, 9)
@@ -263,7 +263,7 @@ Partial Class frmCRT3
         '
         'dtSale
         '
-        Me.dtSale.Location = New System.Drawing.Point(172, 231)
+        Me.dtSale.Location = New System.Drawing.Point(130, 231)
         Me.dtSale.Name = "dtSale"
         Me.dtSale.Size = New System.Drawing.Size(137, 20)
         Me.dtSale.TabIndex = 48
@@ -271,7 +271,7 @@ Partial Class frmCRT3
         '
         'txtCashe
         '
-        Me.txtCashe.Location = New System.Drawing.Point(172, 205)
+        Me.txtCashe.Location = New System.Drawing.Point(130, 205)
         Me.txtCashe.Maximum = New Decimal(New Integer() {100000, 0, 0, 0})
         Me.txtCashe.Name = "txtCashe"
         Me.txtCashe.Size = New System.Drawing.Size(137, 20)
@@ -291,7 +291,7 @@ Partial Class frmCRT3
         '
         Me.chkNZ.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.chkNZ.AutoSize = True
-        Me.chkNZ.Location = New System.Drawing.Point(172, 257)
+        Me.chkNZ.Location = New System.Drawing.Point(130, 257)
         Me.chkNZ.Name = "chkNZ"
         Me.chkNZ.Size = New System.Drawing.Size(97, 17)
         Me.chkNZ.TabIndex = 32
@@ -325,9 +325,9 @@ Partial Class frmCRT3
         Me.lblRealNumber.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.TableLayoutPanel2.SetColumnSpan(Me.lblRealNumber, 2)
         Me.lblRealNumber.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lblRealNumber.Location = New System.Drawing.Point(172, 0)
+        Me.lblRealNumber.Location = New System.Drawing.Point(130, 0)
         Me.lblRealNumber.Name = "lblRealNumber"
-        Me.lblRealNumber.Size = New System.Drawing.Size(466, 15)
+        Me.lblRealNumber.Size = New System.Drawing.Size(508, 15)
         Me.lblRealNumber.TabIndex = 36
         '
         'Label2
@@ -354,18 +354,18 @@ Partial Class frmCRT3
         '
         Me.TableLayoutPanel2.SetColumnSpan(Me.txtSerNumb, 2)
         Me.txtSerNumb.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtSerNumb.Location = New System.Drawing.Point(172, 18)
+        Me.txtSerNumb.Location = New System.Drawing.Point(130, 18)
         Me.txtSerNumb.Name = "txtSerNumb"
-        Me.txtSerNumb.Size = New System.Drawing.Size(466, 20)
+        Me.txtSerNumb.Size = New System.Drawing.Size(508, 20)
         Me.txtSerNumb.TabIndex = 37
         '
         'txtSaleNumb
         '
         Me.TableLayoutPanel2.SetColumnSpan(Me.txtSaleNumb, 2)
         Me.txtSaleNumb.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtSaleNumb.Location = New System.Drawing.Point(172, 179)
+        Me.txtSaleNumb.Location = New System.Drawing.Point(130, 179)
         Me.txtSaleNumb.Name = "txtSaleNumb"
-        Me.txtSaleNumb.Size = New System.Drawing.Size(466, 20)
+        Me.txtSaleNumb.Size = New System.Drawing.Size(508, 20)
         Me.txtSaleNumb.TabIndex = 45
         '
         'cmbProizv
@@ -375,9 +375,9 @@ Partial Class frmCRT3
         Me.TableLayoutPanel2.SetColumnSpan(Me.cmbProizv, 2)
         Me.cmbProizv.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cmbProizv.FormattingEnabled = True
-        Me.cmbProizv.Location = New System.Drawing.Point(172, 44)
+        Me.cmbProizv.Location = New System.Drawing.Point(130, 44)
         Me.cmbProizv.Name = "cmbProizv"
-        Me.cmbProizv.Size = New System.Drawing.Size(466, 21)
+        Me.cmbProizv.Size = New System.Drawing.Size(508, 21)
         Me.cmbProizv.TabIndex = 38
         '
         'Label9
@@ -407,9 +407,9 @@ Partial Class frmCRT3
         Me.TableLayoutPanel2.SetColumnSpan(Me.cmbSaler, 2)
         Me.cmbSaler.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cmbSaler.FormattingEnabled = True
-        Me.cmbSaler.Location = New System.Drawing.Point(172, 152)
+        Me.cmbSaler.Location = New System.Drawing.Point(130, 152)
         Me.cmbSaler.Name = "cmbSaler"
-        Me.cmbSaler.Size = New System.Drawing.Size(466, 21)
+        Me.cmbSaler.Size = New System.Drawing.Size(508, 21)
         Me.cmbSaler.TabIndex = 43
         '
         'Label4
@@ -439,9 +439,9 @@ Partial Class frmCRT3
         Me.TableLayoutPanel2.SetColumnSpan(Me.cmbTipC, 2)
         Me.cmbTipC.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cmbTipC.FormattingEnabled = True
-        Me.cmbTipC.Location = New System.Drawing.Point(172, 71)
+        Me.cmbTipC.Location = New System.Drawing.Point(130, 71)
         Me.cmbTipC.Name = "cmbTipC"
-        Me.cmbTipC.Size = New System.Drawing.Size(466, 21)
+        Me.cmbTipC.Size = New System.Drawing.Size(508, 21)
         Me.cmbTipC.TabIndex = 39
         '
         'cmbSostUstr
@@ -451,9 +451,9 @@ Partial Class frmCRT3
         Me.TableLayoutPanel2.SetColumnSpan(Me.cmbSostUstr, 2)
         Me.cmbSostUstr.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cmbSostUstr.FormattingEnabled = True
-        Me.cmbSostUstr.Location = New System.Drawing.Point(172, 125)
+        Me.cmbSostUstr.Location = New System.Drawing.Point(130, 125)
         Me.cmbSostUstr.Name = "cmbSostUstr"
-        Me.cmbSostUstr.Size = New System.Drawing.Size(466, 21)
+        Me.cmbSostUstr.Size = New System.Drawing.Size(508, 21)
         Me.cmbSostUstr.TabIndex = 41
         '
         'Label5
@@ -484,16 +484,16 @@ Partial Class frmCRT3
         Me.TableLayoutPanel2.SetColumnSpan(Me.cmbModC, 2)
         Me.cmbModC.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cmbModC.FormattingEnabled = True
-        Me.cmbModC.Location = New System.Drawing.Point(172, 98)
+        Me.cmbModC.Location = New System.Drawing.Point(130, 98)
         Me.cmbModC.Name = "cmbModC"
-        Me.cmbModC.Size = New System.Drawing.Size(466, 21)
+        Me.cmbModC.Size = New System.Drawing.Size(508, 21)
         Me.cmbModC.TabIndex = 40
         '
         'chkIznos
         '
         Me.chkIznos.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.chkIznos.AutoSize = True
-        Me.chkIznos.Location = New System.Drawing.Point(342, 206)
+        Me.chkIznos.Location = New System.Drawing.Point(273, 206)
         Me.chkIznos.Name = "chkIznos"
         Me.chkIznos.Size = New System.Drawing.Size(72, 17)
         Me.chkIznos.TabIndex = 33
@@ -504,7 +504,7 @@ Partial Class frmCRT3
         '
         Me.chkNaSP.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.chkNaSP.AutoSize = True
-        Me.chkNaSP.Location = New System.Drawing.Point(342, 257)
+        Me.chkNaSP.Location = New System.Drawing.Point(273, 257)
         Me.chkNaSP.Name = "chkNaSP"
         Me.chkNaSP.Size = New System.Drawing.Size(91, 17)
         Me.chkNaSP.TabIndex = 35
@@ -515,7 +515,7 @@ Partial Class frmCRT3
         '
         Me.chkSPS.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.chkSPS.AutoSize = True
-        Me.chkSPS.Location = New System.Drawing.Point(342, 232)
+        Me.chkSPS.Location = New System.Drawing.Point(273, 232)
         Me.chkSPS.Name = "chkSPS"
         Me.chkSPS.Size = New System.Drawing.Size(63, 17)
         Me.chkSPS.TabIndex = 34
@@ -543,7 +543,7 @@ Partial Class frmCRT3
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(172, 546)
+        Me.btnCancel.Location = New System.Drawing.Point(130, 546)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(75, 21)
         Me.btnCancel.TabIndex = 51
@@ -552,7 +552,7 @@ Partial Class frmCRT3
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(342, 546)
+        Me.btnDelete.Location = New System.Drawing.Point(273, 546)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(75, 21)
         Me.btnDelete.TabIndex = 52

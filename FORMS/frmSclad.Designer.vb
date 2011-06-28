@@ -57,7 +57,7 @@ Partial Class frmSclad
         '
         'btnDel
         '
-        Me.btnDel.Location = New System.Drawing.Point(103, 599)
+        Me.btnDel.Location = New System.Drawing.Point(84, 599)
         Me.btnDel.Name = "btnDel"
         Me.btnDel.Size = New System.Drawing.Size(75, 23)
         Me.btnDel.TabIndex = 20
@@ -66,7 +66,7 @@ Partial Class frmSclad
         '
         'btnTREB
         '
-        Me.btnTREB.Location = New System.Drawing.Point(193, 599)
+        Me.btnTREB.Location = New System.Drawing.Point(165, 599)
         Me.btnTREB.Name = "btnTREB"
         Me.btnTREB.Size = New System.Drawing.Size(133, 23)
         Me.btnTREB.TabIndex = 21
@@ -75,7 +75,7 @@ Partial Class frmSclad
         '
         'btnOffice
         '
-        Me.btnOffice.Location = New System.Drawing.Point(341, 599)
+        Me.btnOffice.Location = New System.Drawing.Point(304, 599)
         Me.btnOffice.Name = "btnOffice"
         Me.btnOffice.Size = New System.Drawing.Size(75, 23)
         Me.btnOffice.TabIndex = 22
@@ -85,9 +85,9 @@ Partial Class frmSclad
         'TableLayoutPanel1
         '
         Me.TableLayoutPanel1.ColumnCount = 4
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100.0!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90.0!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 148.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel1.Controls.Add(Me.lvSclad, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.btnOffice, 3, 1)

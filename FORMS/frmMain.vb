@@ -1125,6 +1125,8 @@ err_:
     End Sub
 
     Private Sub ЗагрузитьИзCSVEverestToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ЗагрузитьИзCSVEverestToolStripMenuItem.Click
+
+        Call VisibleForm(frmComputers)
         Dim ePatch As String
         Dim objIniFile As New IniFile(PrPath & "base.ini")
         ePatch = objIniFile.GetString("General", "aida", "c:\")
@@ -1171,6 +1173,8 @@ err_:
     End Sub
 
     Private Sub ЗагрузитьЧерезWMIToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ЗагрузитьЧерезWMIToolStripMenuItem.Click
+
+        Call VisibleForm(frmComputers)
         Me.Cursor = Cursors.WaitCursor
 
         frmComputers.selectTECMesto()
@@ -1193,7 +1197,7 @@ err_:
     End Sub
 
     Private Sub ЗагрузитьИзASTRA32ToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ЗагрузитьИзASTRA32ToolStripMenuItem.Click
-
+        Call VisibleForm(frmComputers)
         Dim ePatch As String
         Dim objIniFile As New IniFile(PrPath & "base.ini")
         ePatch = objIniFile.GetString("General", "aida", "c:\")
@@ -1322,6 +1326,7 @@ err_:
     End Sub
 
     Private Sub ЗагрузитьИзEverestiniToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ЗагрузитьИзEverestiniToolStripMenuItem.Click
+        Call VisibleForm(frmComputers)
 
         Dim ePatch As String
         Dim objIniFile As New IniFile(PrPath & "base.ini")
@@ -1657,7 +1662,11 @@ ADD:
         frmSetup.Focus()
     End Sub
 
+
+
     Private Sub HANDINSERTToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles HANDINSERTToolStripMenuItem.Click
+
+        Call VisibleForm(frmComputers)
 
         frmComputers.sSTAB2.Visible = False
         frmComputers.sSTAB1.Visible = True
@@ -1998,7 +2007,7 @@ err_:
 
     End Sub
 
-    Private Sub КабельныеЖурналыToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles mnuNetMag.Click
+    Private Sub КабельныеЖурналыToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles netMagmnu.Click
         frmNetMagazin.MdiParent = Me
         frmNetMagazin.Show()
         frmNetMagazin.Focus()

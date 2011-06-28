@@ -120,9 +120,27 @@
 
                 Case "PC"
                     frmComputers.sSTAB1.SelectedTab = frmComputers.sSTAB1.TabPages("TabPage7")
+                    LOAD_REPAIR(frmComputers.sCOUNT, frmComputers.lvRepair)
+
+                Case "NET"
+
+                    LOAD_REPAIR(frmComputers.sCOUNT, frmComputers.lvRepairNET)
+
+                Case "Printer"
+
+                    LOAD_REPAIR(frmComputers.sCOUNT, frmComputers.lvRepairPRN)
+
+                Case "KOpir"
+
+                    LOAD_REPAIR(frmComputers.sCOUNT, frmComputers.lvRepairPRN)
+
+                Case "OT"
+
+                    LOAD_REPAIR(frmComputers.sCOUNT, frmComputers.lvRepairOTH)
 
                 Case Else
 
+                    LOAD_REPAIR(frmComputers.sCOUNT, frmComputers.lvRepairOTH)
 
             End Select
 
