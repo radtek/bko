@@ -23,7 +23,7 @@
 
     Private Sub LOAD_SVT()
 
-        'On Error GoTo err_
+        On Error GoTo err_
 
         lvNetMagazin.Sorting = False
         lvNetMagazin.Items.Clear()
@@ -98,7 +98,7 @@
             rs = Nothing
 
         End If
-
+        Dim scCount As Integer
         Select Case frmNetMagazin.sBDO_SVT_Pref
 
             Case "PC"
@@ -108,25 +108,73 @@
 
                     Case "G"
 
+                        sSQL = "SELECT count(*) as t_n FROM kompy where tiptehn <> 'PC' AND PCL=0 AND filial='" & A1 & "'"
+                        rs = New ADODB.Recordset
+                        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+                        With rs
+                            scCount = .Fields("t_n").Value
+                        End With
+                        rs.Close()
+                        rs = Nothing
+
+
                         sSQL = "SELECT * FROM kompy where tiptehn <> 'PC' AND PCL=0 AND filial='" & A1 & "' ORDER BY filial, mesto, kabn, net_name"
 
                     Case "O"
 
+                        sSQL = "SELECT count(*) as t_n FROM kompy  where tiptehn <> 'PC' AND PCL=0 AND filial='" & A1 & "' AND mesto='" & A2 & "'"
+                        rs = New ADODB.Recordset
+                        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+                        With rs
+                            scCount = .Fields("t_n").Value
+                        End With
+                        rs.Close()
+                        rs = Nothing
+
                         sSQL = "SELECT * FROM kompy where tiptehn <> 'PC' AND PCL=0 AND filial='" & A1 & "' AND mesto='" & A2 & "' ORDER BY filial, mesto, kabn, net_name"
 
                     Case "K"
+                        sSQL = "SELECT count(*) as t_n FROM kompy where tiptehn <> 'PC' AND PCL=0 AND filial='" & A1 & "' AND mesto='" & A2 & "' AND kabn='" & A3 & "'"
+                        rs = New ADODB.Recordset
+                        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+                        With rs
+                            scCount = .Fields("t_n").Value
+                        End With
+                        rs.Close()
+                        rs = Nothing
 
                         sSQL = "SELECT * FROM kompy where tiptehn <> 'PC' AND PCL=0 AND filial='" & A1 & "' AND mesto='" & A2 & "' AND kabn='" & A3 & "' ORDER BY filial, mesto, kabn, net_name"
                         ' and tiptehn='PC' or tiptehn='Printer' or tiptehn='MFU' or tiptehn='FAX' or tiptehn='PHONE' or tiptehn='NET' or tiptehn='IBP'
 
                     Case "ROOT"
+                        sSQL = "SELECT count(*) as t_n FROM kompy where tiptehn <> 'PC' AND PCL=0"
+                        rs = New ADODB.Recordset
+                        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+                        With rs
+                            scCount = .Fields("t_n").Value
+                        End With
+                        rs.Close()
+                        rs = Nothing
+
 
                         sSQL = "SELECT * FROM kompy where tiptehn <> 'PC' AND PCL=0 ORDER BY filial, mesto, kabn, net_name"
 
                 End Select
 
             Case "NET"
+                sSQL = "SELECT count(*) as t_n FROM where tiptehn='NET'"
+                rs = New ADODB.Recordset
+                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
+                With rs
+                    scCount = .Fields("t_n").Value
+                End With
+                rs.Close()
+                rs = Nothing
                 sSQL = "SELECT * FROM kompy where tiptehn='NET' ORDER BY filial, mesto, kabn, net_name"
 
 
@@ -138,285 +186,14 @@
 
 
         Dim intCount As Decimal = 0
-
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
-        lvNetMagazin.Sorting = False
+        If scCount = 0 Then
 
-        With rs
-            .MoveFirst()
-            Do While Not .EOF
-
-                lvNetMagazin.Items.Add(.Fields("id").Value) 'col no. 1
-
-                'lvNetMagazin.Items(CInt(intCount)).SubItems.Add("Компьютер")
-
-                Select Case .Fields("tiptehn").Value
-
-                    Case "PC"
-
-                        lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG11", ""))
-
-                        If Not IsDBNull(.Fields("INV_NO_SYSTEM").Value) Then
-                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("INV_NO_SYSTEM").Value)
-                        Else
-                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
-                        End If
-
-
-                    Case "Printer"
-
-                        lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG6", ""))
-
-                        If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
-                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("INV_NO_PRINTER").Value)
-                        Else
-                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
-                        End If
-
-                    Case "KOpir"
-
-                        lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG13", ""))
-
-                        If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
-                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("INV_NO_PRINTER").Value)
-                        Else
-                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
-                        End If
-
-                    Case "MONITOR"
-                        lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG3", ""))
-
-                        If Not IsDBNull(.Fields("INV_NO_MONITOR").Value) Then
-                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("INV_NO_MONITOR").Value)
-                        Else
-                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
-                        End If
-
-
-                    Case "SCANER"
-
-                        lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG8", ""))
-
-                        If Not IsDBNull(.Fields("INV_NO_SCANER").Value) Then
-                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("INV_NO_SCANER").Value)
-                        Else
-                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
-                        End If
-
-                    Case "NET"
-
-                        lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG14", ""))
-
-                        If Not IsDBNull(.Fields("PRINTER_PROIZV_3").Value) Then
-                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("PRINTER_PROIZV_3").Value)
-                        Else
-                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
-                        End If
-
-
-                    Case "PHOTO"
-
-                        lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG15", ""))
-
-                        If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
-                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("INV_NO_PRINTER").Value)
-                        Else
-                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
-                        End If
-
-                    Case "OT"
-
-                        lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("NET_NAME").Value & " " & .Fields("TIP_COMPA").Value)
-
-                        If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
-                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("INV_NO_PRINTER").Value)
-                        Else
-                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
-                        End If
-
-                    Case "CNT"
-
-                        lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("NET_NAME").Value & " " & .Fields("TIP_COMPA").Value)
-
-                        If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
-                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("INV_NO_PRINTER").Value)
-                        Else
-                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
-                        End If
-
-                    Case "ZIP"
-
-                        lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG18", ""))
-
-                        If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
-                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("INV_NO_PRINTER").Value)
-                        Else
-                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
-                        End If
-
-                    Case "PHONE"
-
-                        lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG16", ""))
-
-                        If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
-                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("INV_NO_PRINTER").Value)
-                        Else
-                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
-                        End If
-
-                    Case "MFU"
-
-                        lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG7", ""))
-
-                        If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
-                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("INV_NO_PRINTER").Value)
-                        Else
-                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
-                        End If
-
-
-                    Case "FAX"
-
-                        lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG17", ""))
-
-                        If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
-                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("INV_NO_PRINTER").Value)
-                        Else
-                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
-                        End If
-
-                    Case "USB"
-
-                        lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG10", ""))
-                    Case "IBP"
-
-
-                        lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG9", ""))
-
-                        If Not IsDBNull(.Fields("INV_NO_IBP").Value) Then
-                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("INV_NO_IBP").Value)
-                        Else
-                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
-                        End If
-
-                    Case "FS"
-
-                        lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG5", ""))
-
-                        If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
-                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("INV_NO_PRINTER").Value)
-                        Else
-                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
-                        End If
-
-                    Case "SOUND"
-
-                        lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG4", ""))
-
-                        If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
-                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("INV_NO_PRINTER").Value)
-                        Else
-                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
-                        End If
-
-                    Case "KEYB"
-                        lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG1", ""))
-
-                        If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
-                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("INV_NO_PRINTER").Value)
-                        Else
-                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
-                        End If
-
-                    Case "MOUSE"
-
-                        lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG2", ""))
-
-                        If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
-                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("INV_NO_PRINTER").Value)
-                        Else
-                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
-                        End If
-
-                End Select
-
-
-
-                If Not IsDBNull(.Fields("NET_NAME").Value) Then
-                    lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("NET_NAME").Value)
-                Else
-                    lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
-                End If
-
-                If Not IsDBNull(.Fields("OTvetstvennyj").Value) Then
-                    lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("OTvetstvennyj").Value)
-                Else
-                    lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
-                End If
-
-                If Not IsDBNull(.Fields("FILIAL").Value) Then
-                    lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("FILIAL").Value)
-                Else
-                    lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
-                End If
-
-                If Not IsDBNull(.Fields("MESTO").Value) Then
-                    lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("MESTO").Value)
-                Else
-                    lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
-                End If
-
-                If Not IsDBNull(.Fields("kabn").Value) Then
-                    lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("kabn").Value)
-                Else
-                    lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
-                End If
-
-
-                intCount = intCount + 1
-                .MoveNext()
-            Loop
-        End With
-        rs.Close()
-        rs = Nothing
-
-
-
-        If frmNetMagazin.sBDO_SVT_Pref = "PC" Then
-            '######################################################
-            Select Case frmNetMagazin.sBDO_SVT_Pref
-
-                Case "PC"
-
-                    Select Case frmNetMagazin.sBDO_Pref
-
-
-                        Case "G"
-
-                            sSQL = "SELECT * FROM kompy where tiptehn = 'PC' AND filial='" & A1 & "' ORDER BY filial, mesto, kabn, net_name"
-
-                        Case "O"
-
-                            sSQL = "SELECT * FROM kompy where tiptehn = 'PC' AND filial='" & A1 & "' AND mesto='" & A2 & "' ORDER BY filial, mesto, kabn, net_name"
-
-                        Case "K"
-
-                            sSQL = "SELECT * FROM kompy where tiptehn = 'PC' AND filial='" & A1 & "' AND mesto='" & A2 & "' AND kabn='" & A3 & "' ORDER BY filial, mesto, kabn, net_name"
-                            ' and tiptehn='PC' or tiptehn='Printer' or tiptehn='MFU' or tiptehn='FAX' or tiptehn='PHONE' or tiptehn='NET' or tiptehn='IBP'
-
-                        Case "ROOT"
-
-                            sSQL = "SELECT * FROM kompy where tiptehn = 'PC' ORDER BY filial, mesto, kabn, net_name"
-
-                    End Select
-
-
-            End Select
+        Else
             rs = New ADODB.Recordset
             rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
 
             lvNetMagazin.Sorting = False
 
@@ -426,14 +203,199 @@
 
                     lvNetMagazin.Items.Add(.Fields("id").Value) 'col no. 1
 
+                    'lvNetMagazin.Items(CInt(intCount)).SubItems.Add("Компьютер")
 
-                    lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG11", ""))
+                    Select Case .Fields("tiptehn").Value
 
-                    If Not IsDBNull(.Fields("INV_NO_SYSTEM").Value) Then
-                        lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("INV_NO_SYSTEM").Value)
-                    Else
-                        lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
-                    End If
+                        Case "PC"
+
+                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG11", ""))
+
+                            If Not IsDBNull(.Fields("INV_NO_SYSTEM").Value) Then
+                                lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("INV_NO_SYSTEM").Value)
+                            Else
+                                lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
+                            End If
+
+
+                        Case "Printer"
+
+                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG6", ""))
+
+                            If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
+                                lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("INV_NO_PRINTER").Value)
+                            Else
+                                lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
+                            End If
+
+                        Case "KOpir"
+
+                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG13", ""))
+
+                            If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
+                                lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("INV_NO_PRINTER").Value)
+                            Else
+                                lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
+                            End If
+
+                        Case "MONITOR"
+                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG3", ""))
+
+                            If Not IsDBNull(.Fields("INV_NO_MONITOR").Value) Then
+                                lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("INV_NO_MONITOR").Value)
+                            Else
+                                lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
+                            End If
+
+
+                        Case "SCANER"
+
+                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG8", ""))
+
+                            If Not IsDBNull(.Fields("INV_NO_SCANER").Value) Then
+                                lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("INV_NO_SCANER").Value)
+                            Else
+                                lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
+                            End If
+
+                        Case "NET"
+
+                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG14", ""))
+
+                            If Not IsDBNull(.Fields("PRINTER_PROIZV_3").Value) Then
+                                lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("PRINTER_PROIZV_3").Value)
+                            Else
+                                lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
+                            End If
+
+
+                        Case "PHOTO"
+
+                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG15", ""))
+
+                            If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
+                                lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("INV_NO_PRINTER").Value)
+                            Else
+                                lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
+                            End If
+
+                        Case "OT"
+
+                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("NET_NAME").Value & " " & .Fields("TIP_COMPA").Value)
+
+                            If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
+                                lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("INV_NO_PRINTER").Value)
+                            Else
+                                lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
+                            End If
+
+                        Case "CNT"
+
+                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("NET_NAME").Value & " " & .Fields("TIP_COMPA").Value)
+
+                            If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
+                                lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("INV_NO_PRINTER").Value)
+                            Else
+                                lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
+                            End If
+
+                        Case "ZIP"
+
+                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG18", ""))
+
+                            If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
+                                lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("INV_NO_PRINTER").Value)
+                            Else
+                                lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
+                            End If
+
+                        Case "PHONE"
+
+                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG16", ""))
+
+                            If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
+                                lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("INV_NO_PRINTER").Value)
+                            Else
+                                lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
+                            End If
+
+                        Case "MFU"
+
+                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG7", ""))
+
+                            If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
+                                lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("INV_NO_PRINTER").Value)
+                            Else
+                                lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
+                            End If
+
+
+                        Case "FAX"
+
+                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG17", ""))
+
+                            If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
+                                lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("INV_NO_PRINTER").Value)
+                            Else
+                                lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
+                            End If
+
+                        Case "USB"
+
+                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG10", ""))
+                        Case "IBP"
+
+
+                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG9", ""))
+
+                            If Not IsDBNull(.Fields("INV_NO_IBP").Value) Then
+                                lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("INV_NO_IBP").Value)
+                            Else
+                                lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
+                            End If
+
+                        Case "FS"
+
+                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG5", ""))
+
+                            If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
+                                lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("INV_NO_PRINTER").Value)
+                            Else
+                                lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
+                            End If
+
+                        Case "SOUND"
+
+                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG4", ""))
+
+                            If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
+                                lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("INV_NO_PRINTER").Value)
+                            Else
+                                lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
+                            End If
+
+                        Case "KEYB"
+                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG1", ""))
+
+                            If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
+                                lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("INV_NO_PRINTER").Value)
+                            Else
+                                lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
+                            End If
+
+                        Case "MOUSE"
+
+                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG2", ""))
+
+                            If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
+                                lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("INV_NO_PRINTER").Value)
+                            Else
+                                lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
+                            End If
+
+                    End Select
+
+
 
                     If Not IsDBNull(.Fields("NET_NAME").Value) Then
                         lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("NET_NAME").Value)
@@ -473,8 +435,143 @@
             rs.Close()
             rs = Nothing
 
+        End If
 
+
+        If frmNetMagazin.sBDO_SVT_Pref = "PC" Then
             '######################################################
+            Select Case frmNetMagazin.sBDO_SVT_Pref
+
+                Case "PC"
+
+                    Select Case frmNetMagazin.sBDO_Pref
+
+
+                        Case "G"
+
+                            sSQL = "SELECT count(*) as t_n FROM where tiptehn = 'PC' AND filial='" & A1 & "'"
+                            rs = New ADODB.Recordset
+                            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+                            With rs
+                                scCount = .Fields("t_n").Value
+                            End With
+                            rs.Close()
+                            rs = Nothing
+
+                            sSQL = "SELECT * FROM kompy where tiptehn = 'PC' AND filial='" & A1 & "' ORDER BY filial, mesto, kabn, net_name"
+
+                        Case "O"
+
+                            sSQL = "SELECT count(*) as t_n FROM where tiptehn = 'PC' AND filial='" & A1 & "' AND mesto='" & A2 & "'"
+                            rs = New ADODB.Recordset
+                            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+                            With rs
+                                scCount = .Fields("t_n").Value
+                            End With
+                            rs.Close()
+                            rs = Nothing
+
+                            sSQL = "SELECT * FROM kompy where tiptehn = 'PC' AND filial='" & A1 & "' AND mesto='" & A2 & "' ORDER BY filial, mesto, kabn, net_name"
+
+                        Case "K"
+                            sSQL = "SELECT count(*) as t_n FROM kompy where tiptehn = 'PC' AND filial='" & A1 & "' AND mesto='" & A2 & "' AND kabn='" & A3 & "'"
+                            rs = New ADODB.Recordset
+                            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+                            With rs
+                                scCount = .Fields("t_n").Value
+                            End With
+                            rs.Close()
+                            rs = Nothing
+
+                            sSQL = "SELECT * FROM kompy where tiptehn = 'PC' AND filial='" & A1 & "' AND mesto='" & A2 & "' AND kabn='" & A3 & "' ORDER BY filial, mesto, kabn, net_name"
+                            ' and tiptehn='PC' or tiptehn='Printer' or tiptehn='MFU' or tiptehn='FAX' or tiptehn='PHONE' or tiptehn='NET' or tiptehn='IBP'
+
+                        Case "ROOT"
+                            sSQL = "SELECT count(*) as t_n FROM where tiptehn = 'PC'"
+                            rs = New ADODB.Recordset
+                            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+                            With rs
+                                scCount = .Fields("t_n").Value
+                            End With
+                            rs.Close()
+                            rs = Nothing
+
+                            sSQL = "SELECT * FROM kompy where tiptehn = 'PC' ORDER BY filial, mesto, kabn, net_name"
+
+                    End Select
+
+
+            End Select
+
+            If scCount = 0 Then
+
+
+            Else
+                rs = New ADODB.Recordset
+                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+                lvNetMagazin.Sorting = False
+
+                With rs
+                    .MoveFirst()
+                    Do While Not .EOF
+
+                        lvNetMagazin.Items.Add(.Fields("id").Value) 'col no. 1
+
+
+                        lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG11", ""))
+
+                        If Not IsDBNull(.Fields("INV_NO_SYSTEM").Value) Then
+                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("INV_NO_SYSTEM").Value)
+                        Else
+                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
+                        End If
+
+                        If Not IsDBNull(.Fields("NET_NAME").Value) Then
+                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("NET_NAME").Value)
+                        Else
+                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
+                        End If
+
+                        If Not IsDBNull(.Fields("OTvetstvennyj").Value) Then
+                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("OTvetstvennyj").Value)
+                        Else
+                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
+                        End If
+
+                        If Not IsDBNull(.Fields("FILIAL").Value) Then
+                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("FILIAL").Value)
+                        Else
+                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
+                        End If
+
+                        If Not IsDBNull(.Fields("MESTO").Value) Then
+                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("MESTO").Value)
+                        Else
+                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
+                        End If
+
+                        If Not IsDBNull(.Fields("kabn").Value) Then
+                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("kabn").Value)
+                        Else
+                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add("")
+                        End If
+
+
+                        intCount = intCount + 1
+                        .MoveNext()
+                    Loop
+                End With
+                rs.Close()
+                rs = Nothing
+
+
+                '######################################################
+            End If
         End If
 
         ResList(lvNetMagazin)
