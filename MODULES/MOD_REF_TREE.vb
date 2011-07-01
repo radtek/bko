@@ -21,7 +21,7 @@ Module MOD_REF_TREE
 
 
 
-        Dim iA1, iA2, iA3, iA4, iA5, iA6, iA7 As String
+        Dim iA1, iA2, iA3, iA4, iA5, iA6, iA7, iA8 As String
 
         Dim sVISIBLE As String
  
@@ -41,11 +41,11 @@ Module MOD_REF_TREE
 
             Case 0
 
-                sSQL4 = "SELECT id, mesto, filial, tip_compa, tiptehn, PSEVDONIM, NET_NAME, kabn, Spisan, OS, PRINTER_NAME_4 FROM kompy WHERE filial ='" & FILIAL1 & "' AND mesto ='" & OTDEL1 & "' AND kabn ='" & KABINET1 & "'  AND PCL =0 ORDER BY PSEVDONIM, tiptehn"
+                sSQL4 = "SELECT id, mesto, filial, tip_compa, tiptehn, PSEVDONIM, NET_NAME, kabn, Spisan, OS, PRINTER_NAME_4,balans FROM kompy WHERE filial ='" & FILIAL1 & "' AND mesto ='" & OTDEL1 & "' AND kabn ='" & KABINET1 & "'  AND PCL =0 ORDER BY PSEVDONIM, tiptehn"
 
             Case 1
 
-                sSQL4 = "SELECT id, mesto, filial, tip_compa, tiptehn, PSEVDONIM, NET_NAME, kabn, Spisan, OS, PRINTER_NAME_4 FROM kompy WHERE filial ='" & FILIAL1 & "' AND mesto ='" & OTDEL1 & "' AND kabn ='" & KABINET1 & "' AND PCL =0 ORDER BY tiptehn, PSEVDONIM"
+                sSQL4 = "SELECT id, mesto, filial, tip_compa, tiptehn, PSEVDONIM, NET_NAME, kabn, Spisan, OS, PRINTER_NAME_4,balans FROM kompy WHERE filial ='" & FILIAL1 & "' AND mesto ='" & OTDEL1 & "' AND kabn ='" & KABINET1 & "' AND PCL =0 ORDER BY tiptehn, PSEVDONIM"
 
         End Select
 
@@ -66,8 +66,9 @@ Module MOD_REF_TREE
                 If Not IsDBNull(.Fields("tiptehn").Value) Then iA5 = .Fields("tiptehn").Value
                 If Not IsDBNull(.Fields("OS").Value) Then iA6 = .Fields("OS").Value
                 If Not IsDBNull(.Fields("PRINTER_NAME_4").Value) Then iA7 = .Fields("PRINTER_NAME_4").Value
+                If Not IsDBNull(.Fields("Balans").Value) Then iA8 = .Fields("Balans").Value
 
-                FILING_TREE(lstgroups1, iA5, iA1, iA2, iA3, .Fields("id").Value, iA4, BrancheNode1, iA6, iA7)
+                FILING_TREE(lstgroups1, iA5, iA1, iA2, iA3, .Fields("id").Value, iA4, BrancheNode1, iA6, iA7, iA8)
 
                 .MoveNext()
             Loop
@@ -289,51 +290,6 @@ Module MOD_REF_TREE
                         Call FILING_FILIAL()
                     End If
 
-
-
-                    'Dim sText As String = objIniFile.GetString("general", "Tree_S", 0)
-
-                    'Select Case sText
-
-                    '    Case 0
-
-                    '        sSQL4 = "SELECT id, mesto, filial, tip_compa, tiptehn, PSEVDONIM, NET_NAME, kabn, Spisan, OS FROM kompy WHERE filial ='" & unameS & "' AND mesto ='' AND PCL =0 ORDER BY PSEVDONIM, tiptehn"
-
-                    '    Case 1
-
-                    '        sSQL4 = "SELECT id, mesto, filial, tip_compa, tiptehn, PSEVDONIM, NET_NAME, kabn, Spisan, OS FROM kompy WHERE filial ='" & unameS & "' AND mesto ='' AND PCL =0 ORDER BY tiptehn, PSEVDONIM"
-
-                    'End Select
-
-
-                    'rs3 = New ADODB.Recordset
-                    'rs3.Open(sSQL4, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-
-
-                    'With rs3
-                    '    .MoveFirst()
-
-                    '    Do While Not .EOF
-
-                    '        If Not IsDBNull(.Fields("tip_compa").Value) Then iA1 = .Fields("tip_compa").Value
-                    '        If Not IsDBNull(.Fields("NET_NAME").Value) Then iA2 = .Fields("NET_NAME").Value
-                    '        If Not IsDBNull(.Fields("PSEVDONIM").Value) Then iA3 = .Fields("PSEVDONIM").Value
-                    '        If Not IsDBNull(.Fields("Spisan").Value) Then iA4 = .Fields("Spisan").Value
-                    '        If Not IsDBNull(.Fields("tiptehn").Value) Then iA5 = .Fields("tiptehn").Value
-                    '        If Not IsDBNull(.Fields("OS").Value) Then iA6 = .Fields("OS").Value
-
-
-                    '        FILING_TREE(lstgroups, iA5, iA1, iA2, iA3, .Fields("id").Value, iA4, BrancheNode, iA6)
-
-
-
-
-                    '        .MoveNext()
-                    '    Loop
-                    'End With
-                    'rs3.Close()
-                    'rs3 = Nothing
-
                 End If
 
                 'Отделы в филиалах Второй уровень дерева
@@ -398,44 +354,7 @@ Module MOD_REF_TREE
                                 End If
 
 
-                                'Dim sText As String = objIniFile.GetString("general", "Tree_S", 0)
-
-                                'Select Case sText
-
-                                '    Case 0
-
-                                '        sSQL4 = "SELECT id, mesto, filial, tip_compa, tiptehn, PSEVDONIM, NET_NAME, kabn, Spisan, OS FROM kompy WHERE filial ='" & unameS & "' AND mesto ='" & unameS2 & "' AND kabn='' AND PCL =0 ORDER BY PSEVDONIM, tiptehn"
-
-                                '    Case 1
-
-                                '        sSQL4 = "SELECT id, mesto, filial, tip_compa, tiptehn, PSEVDONIM, NET_NAME, kabn, Spisan, OS FROM kompy WHERE filial ='" & unameS & "' AND mesto ='" & unameS2 & "' AND kabn='' AND PCL =0 ORDER BY tiptehn, PSEVDONIM"
-
-                                'End Select
-
-                                'rs3 = New ADODB.Recordset
-                                'rs3.Open(sSQL4, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-
-                                'With rs3
-                                '    .MoveFirst()
-
-                                '    Do While Not .EOF
-
-
-                                '        If Not IsDBNull(.Fields("tip_compa").Value) Then iA1 = .Fields("tip_compa").Value
-                                '        If Not IsDBNull(.Fields("NET_NAME").Value) Then iA2 = .Fields("NET_NAME").Value
-                                '        If Not IsDBNull(.Fields("PSEVDONIM").Value) Then iA3 = .Fields("PSEVDONIM").Value
-                                '        If Not IsDBNull(.Fields("Spisan").Value) Then iA4 = .Fields("Spisan").Value
-                                '        If Not IsDBNull(.Fields("tiptehn").Value) Then iA5 = .Fields("tiptehn").Value
-                                '        If Not IsDBNull(.Fields("OS").Value) Then iA6 = .Fields("OS").Value
-
-                                '        FILING_TREE(lstgroups, iA5, iA1, iA2, iA3, .Fields("id").Value, iA4, DepatrmentNode, iA6)
-
-
-                                '        .MoveNext()
-                                '    Loop
-                                'End With
-                                'rs3.Close()
-                                'rs3 = Nothing
+                              
 
 
                             End If
@@ -498,45 +417,6 @@ Module MOD_REF_TREE
                                                 Call FILING_FILIAL()
                                             End If
 
-                                            ' lstgroups.Invoke(New MethodInvoker(AddressOf FILING_KABINET))
-
-                                            'Dim sText As String = objIniFile.GetString("general", "Tree_S", 0)
-
-                                            'Select Case sText
-
-                                            '    Case 0
-
-                                            '        sSQL4 = "SELECT id, mesto, filial, tip_compa, tiptehn, PSEVDONIM, NET_NAME, kabn, Spisan, OS FROM kompy WHERE filial ='" & unameS & "' AND mesto ='" & unameS2 & "' AND kabn='" & unameS3 & "' AND PCL =0 ORDER BY PSEVDONIM, tiptehn"
-
-                                            '    Case 1
-
-                                            '        sSQL4 = "SELECT id, mesto, filial, tip_compa, tiptehn, PSEVDONIM, NET_NAME, kabn, Spisan, OS FROM kompy WHERE filial ='" & unameS & "' AND mesto ='" & unameS2 & "' AND kabn='" & unameS3 & "' AND PCL =0 ORDER BY tiptehn, PSEVDONIM"
-
-                                            'End Select
-
-
-                                            'rs3 = New ADODB.Recordset
-                                            'rs3.Open(sSQL4, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-
-                                            'With rs3
-                                            '    .MoveFirst()
-
-                                            '    Do While Not .EOF
-
-                                            '        If Not IsDBNull(.Fields("tip_compa").Value) Then iA1 = .Fields("tip_compa").Value
-                                            '        If Not IsDBNull(.Fields("NET_NAME").Value) Then iA2 = .Fields("NET_NAME").Value
-                                            '        If Not IsDBNull(.Fields("PSEVDONIM").Value) Then iA3 = .Fields("PSEVDONIM").Value
-                                            '        If Not IsDBNull(.Fields("Spisan").Value) Then iA4 = .Fields("Spisan").Value
-                                            '        If Not IsDBNull(.Fields("tiptehn").Value) Then iA5 = .Fields("tiptehn").Value
-                                            '        If Not IsDBNull(.Fields("OS").Value) Then iA6 = .Fields("OS").Value
-
-                                            '        FILING_TREE(lstgroups, iA5, iA1, iA2, iA3, .Fields("id").Value, iA4, OfficeNode, iA6)
-
-                                            '        .MoveNext()
-                                            '    Loop
-                                            'End With
-                                            'rs3.Close()
-                                            'rs3 = Nothing
 
 
                                         End If
@@ -597,7 +477,7 @@ ERR1:
 
     End Sub
 
-    Public Sub FILING_TREE(ByVal lstgroups As TreeView, ByVal iTipTehn As String, ByVal TipPC As String, ByVal NET_NAME As String, ByVal PSEVDONIM As String, ByVal iD As String, ByVal Spisan As String, ByVal DepNode As TreeNode, ByVal OS As String, ByVal n_set As String)
+    Public Sub FILING_TREE(ByVal lstgroups As TreeView, ByVal iTipTehn As String, ByVal TipPC As String, ByVal NET_NAME As String, ByVal PSEVDONIM As String, ByVal iD As String, ByVal Spisan As String, ByVal DepNode As TreeNode, ByVal OS As String, ByVal n_set As String, ByVal balans As String)
 
         Dim iC As String
         Dim iA As String
@@ -748,6 +628,11 @@ ERR1:
 
                 End If
 
+
+                If balans = "1" Or balans = "True" Or balans = "-1" Then
+                    TEHNodePS.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
+                End If
+
                 If KCKey <> 0 Then
                     If KCKey = iD Then
                         lstgroups.SelectedNode = TEHNodePS
@@ -858,6 +743,7 @@ ERR1:
 
                                         Case Else
 
+
                                             TEHNodePC.ForeColor = Color.Green
 
                                     End Select
@@ -866,6 +752,10 @@ ERR1:
 
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                                         TEHNodePC.ForeColor = Color.Red
+                                    End If
+
+                                    If balans = "1" Or balans = "True" Or balans = "-1" Then
+                                        TEHNodePC.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
                                     End If
 
                                     If KCKey <> 0 Then
@@ -932,6 +822,11 @@ ERR1:
 
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                                         TEHNodePC.ForeColor = Color.Red
+                                        TEHNodePC.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
+                                    End If
+
+                                    If balans = "1" Or balans = "True" Or balans = "-1" Then
+                                        TEHNodePC.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
                                     End If
 
                                     If KCKey <> 0 Then
@@ -1034,7 +929,11 @@ ERR1:
 
                                                         If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                                                             TEHNode.ForeColor = Color.Red
+                                                            TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
+                                                        End If
 
+                                                        If balans = "1" Or balans = "True" Or balans = "-1" Then
+                                                            TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
                                                         End If
 
                                                         If KCKey <> 0 Then
@@ -1052,7 +951,12 @@ ERR1:
 
                                                         If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                                                             TEHNode.ForeColor = Color.Red
+                                                            TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
+                                                        End If
 
+
+                                                        If balans = "1" Or balans = "True" Or balans = "-1" Then
+                                                            TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
                                                         End If
 
                                                         If KCKey <> 0 Then
@@ -1071,7 +975,11 @@ ERR1:
 
                                                         If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                                                             TEHNode.ForeColor = Color.Red
+                                                            TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
+                                                        End If
 
+                                                        If balans = "1" Or balans = "True" Or balans = "-1" Then
+                                                            TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
                                                         End If
 
                                                         If KCKey <> 0 Then
@@ -1088,7 +996,11 @@ ERR1:
 
                                                         If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                                                             TEHNode.ForeColor = Color.Red
+                                                            TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
+                                                        End If
 
+                                                        If balans = "1" Or balans = "True" Or balans = "-1" Then
+                                                            TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
                                                         End If
 
                                                         If KCKey <> 0 Then
@@ -1106,7 +1018,11 @@ ERR1:
 
                                                         If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                                                             TEHNode.ForeColor = Color.Red
+                                                            TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
+                                                        End If
 
+                                                        If balans = "1" Or balans = "True" Or balans = "-1" Then
+                                                            TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
                                                         End If
 
                                                         If KCKey <> 0 Then
@@ -1165,7 +1081,11 @@ ERR1:
 
                                                         If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                                                             TEHNode.ForeColor = Color.Red
+                                                            TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
+                                                        End If
 
+                                                        If balans = "1" Or balans = "True" Or balans = "-1" Then
+                                                            TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
                                                         End If
 
                                                         If KCKey <> 0 Then
@@ -1183,7 +1103,11 @@ ERR1:
 
                                                         If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                                                             TEHNode.ForeColor = Color.Red
+                                                            TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
+                                                        End If
 
+                                                        If balans = "1" Or balans = "True" Or balans = "-1" Then
+                                                            TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
                                                         End If
 
                                                         If KCKey <> 0 Then
@@ -1201,7 +1125,13 @@ ERR1:
                                                         TEHNodePC.Nodes.Add(TEHNode)
                                                         If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                                                             TEHNode.ForeColor = Color.Red
+                                                            TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
                                                         End If
+
+                                                        If balans = "1" Or balans = "True" Or balans = "-1" Then
+                                                            TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
+                                                        End If
+
                                                         If KCKey <> 0 Then
                                                             If KCKey = .Fields("id").Value Then
                                                                 lstgroups.SelectedNode = TEHNode
@@ -1215,7 +1145,14 @@ ERR1:
                                                         TEHNodePC.Nodes.Add(TEHNode)
                                                         If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                                                             TEHNode.ForeColor = Color.Red
+                                                            TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
                                                         End If
+
+
+                                                        If balans = "1" Or balans = "True" Or balans = "-1" Then
+                                                            TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
+                                                        End If
+
                                                         If KCKey <> 0 Then
                                                             If KCKey = .Fields("id").Value Then
                                                                 lstgroups.SelectedNode = TEHNode
@@ -1229,7 +1166,14 @@ ERR1:
                                                         TEHNodePC.Nodes.Add(TEHNode)
                                                         If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                                                             TEHNode.ForeColor = Color.Red
+                                                            TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
                                                         End If
+
+
+                                                        If balans = "1" Or balans = "True" Or balans = "-1" Then
+                                                            TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
+                                                        End If
+
                                                         If KCKey <> 0 Then
                                                             If KCKey = .Fields("id").Value Then
                                                                 lstgroups.SelectedNode = TEHNode
@@ -1241,9 +1185,16 @@ ERR1:
                                                         Dim TEHNode As New TreeNode(L_NAME, 65, 65)
                                                         TEHNode.Tag = "C|" & .Fields("id").Value
                                                         TEHNodePC.Nodes.Add(TEHNode)
+
                                                         If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                                                             TEHNode.ForeColor = Color.Red
+                                                            TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
                                                         End If
+
+                                                        If balans = "1" Or balans = "True" Or balans = "-1" Then
+                                                            TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
+                                                        End If
+
                                                         If KCKey <> 0 Then
                                                             If KCKey = .Fields("id").Value Then
                                                                 lstgroups.SelectedNode = TEHNode
@@ -1257,7 +1208,13 @@ ERR1:
                                                         TEHNodePC.Nodes.Add(TEHNode)
                                                         If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                                                             TEHNode.ForeColor = Color.Red
+                                                            TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
                                                         End If
+
+                                                        If balans = "1" Or balans = "True" Or balans = "-1" Then
+                                                            TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
+                                                        End If
+
                                                         If KCKey <> 0 Then
                                                             If KCKey = .Fields("id").Value Then
                                                                 lstgroups.SelectedNode = TEHNode
@@ -1269,9 +1226,16 @@ ERR1:
                                                         Dim TEHNode As New TreeNode(L_NAME, 47, 47)
                                                         TEHNode.Tag = "C|" & .Fields("id").Value
                                                         TEHNodePC.Nodes.Add(TEHNode)
+
                                                         If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                                                             TEHNode.ForeColor = Color.Red
+                                                            TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
                                                         End If
+
+                                                        If balans = "1" Or balans = "True" Or balans = "-1" Then
+                                                            TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
+                                                        End If
+
                                                         If KCKey <> 0 Then
                                                             If KCKey = .Fields("id").Value Then
                                                                 lstgroups.SelectedNode = TEHNode
@@ -1303,7 +1267,11 @@ ERR1:
 
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                                         TEHNode.ForeColor = Color.Red
+                                        TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
+                                    End If
 
+                                    If balans = "1" Or balans = "True" Or balans = "-1" Then
+                                        TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
                                     End If
 
                                     If KCKey <> 0 Then
@@ -1321,7 +1289,11 @@ ERR1:
 
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                                         TEHNode.ForeColor = Color.Red
+                                        TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
+                                    End If
 
+                                    If balans = "1" Or balans = "True" Or balans = "-1" Then
+                                        TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
                                     End If
 
                                     If KCKey <> 0 Then
@@ -1340,7 +1312,11 @@ ERR1:
 
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                                         TEHNode.ForeColor = Color.Red
+                                        TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
+                                    End If
 
+                                    If balans = "1" Or balans = "True" Or balans = "-1" Then
+                                        TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
                                     End If
 
                                     If KCKey <> 0 Then
@@ -1357,7 +1333,11 @@ ERR1:
 
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                                         TEHNode.ForeColor = Color.Red
+                                        TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
+                                    End If
 
+                                    If balans = "1" Or balans = "True" Or balans = "-1" Then
+                                        TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
                                     End If
 
                                     If KCKey <> 0 Then
@@ -1375,7 +1355,11 @@ ERR1:
 
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                                         TEHNode.ForeColor = Color.Red
+                                        TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
+                                    End If
 
+                                    If balans = "1" Or balans = "True" Or balans = "-1" Then
+                                        TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
                                     End If
 
                                     If KCKey <> 0 Then
@@ -1434,7 +1418,11 @@ ERR1:
 
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                                         TEHNode.ForeColor = Color.Red
+                                        TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
+                                    End If
 
+                                    If balans = "1" Or balans = "True" Or balans = "-1" Then
+                                        TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
                                     End If
 
                                     If KCKey <> 0 Then
@@ -1452,8 +1440,13 @@ ERR1:
 
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                                         TEHNode.ForeColor = Color.Red
-
+                                        TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
                                     End If
+
+                                    If balans = "1" Or balans = "True" Or balans = "-1" Then
+                                        TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
+                                    End If
+
 
                                     If KCKey <> 0 Then
                                         If KCKey = .Fields("id").Value Then
@@ -1470,7 +1463,13 @@ ERR1:
                                     TEHNodePS.Nodes.Add(TEHNode)
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                                         TEHNode.ForeColor = Color.Red
+                                        TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
                                     End If
+
+                                    If balans = "1" Or balans = "True" Or balans = "-1" Then
+                                        TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
+                                    End If
+
                                     If KCKey <> 0 Then
                                         If KCKey = .Fields("id").Value Then
                                             lstgroups.SelectedNode = TEHNode
@@ -1484,7 +1483,13 @@ ERR1:
                                     TEHNodePS.Nodes.Add(TEHNode)
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                                         TEHNode.ForeColor = Color.Red
+                                        TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
                                     End If
+
+                                    If balans = "1" Or balans = "True" Or balans = "-1" Then
+                                        TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
+                                    End If
+
                                     If KCKey <> 0 Then
                                         If KCKey = .Fields("id").Value Then
                                             lstgroups.SelectedNode = TEHNode
@@ -1498,7 +1503,13 @@ ERR1:
                                     TEHNodePS.Nodes.Add(TEHNode)
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                                         TEHNode.ForeColor = Color.Red
+                                        TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
                                     End If
+
+                                    If balans = "1" Or balans = "True" Or balans = "-1" Then
+                                        TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
+                                    End If
+
                                     If KCKey <> 0 Then
                                         If KCKey = .Fields("id").Value Then
                                             lstgroups.SelectedNode = TEHNode
@@ -1512,7 +1523,13 @@ ERR1:
                                     TEHNodePS.Nodes.Add(TEHNode)
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                                         TEHNode.ForeColor = Color.Red
+                                        TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
                                     End If
+
+                                    If balans = "1" Or balans = "True" Or balans = "-1" Then
+                                        TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
+                                    End If
+
                                     If KCKey <> 0 Then
                                         If KCKey = .Fields("id").Value Then
                                             lstgroups.SelectedNode = TEHNode
@@ -1526,7 +1543,13 @@ ERR1:
                                     TEHNodePS.Nodes.Add(TEHNode)
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                                         TEHNode.ForeColor = Color.Red
+                                        TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
                                     End If
+
+                                    If balans = "1" Or balans = "True" Or balans = "-1" Then
+                                        TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
+                                    End If
+
                                     If KCKey <> 0 Then
                                         If KCKey = .Fields("id").Value Then
                                             lstgroups.SelectedNode = TEHNode
@@ -1540,7 +1563,13 @@ ERR1:
                                     TEHNodePS.Nodes.Add(TEHNode)
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                                         TEHNode.ForeColor = Color.Red
+                                        TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
                                     End If
+
+                                    If balans = "1" Or balans = "True" Or balans = "-1" Then
+                                        TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
+                                    End If
+
                                     If KCKey <> 0 Then
                                         If KCKey = .Fields("id").Value Then
                                             lstgroups.SelectedNode = TEHNode
@@ -1581,6 +1610,11 @@ ERR1:
 
                 If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                     TEHNodePS.ForeColor = Color.Red
+                    TEHNodePS.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
+                End If
+
+                If balans = "1" Or balans = "True" Or balans = "-1" Then
+                    TEHNodePS.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
                 End If
 
                 If KCKey <> 0 Then
@@ -1683,7 +1717,11 @@ ERR1:
 
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                                         TEHNode.ForeColor = Color.Red
+                                        TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
+                                    End If
 
+                                    If balans = "1" Or balans = "True" Or balans = "-1" Then
+                                        TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
                                     End If
 
                                     If KCKey <> 0 Then
@@ -1701,7 +1739,11 @@ ERR1:
 
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                                         TEHNode.ForeColor = Color.Red
+                                        TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
+                                    End If
 
+                                    If balans = "1" Or balans = "True" Or balans = "-1" Then
+                                        TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
                                     End If
 
                                     If KCKey <> 0 Then
@@ -1720,7 +1762,11 @@ ERR1:
 
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                                         TEHNode.ForeColor = Color.Red
+                                        TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
+                                    End If
 
+                                    If balans = "1" Or balans = "True" Or balans = "-1" Then
+                                        TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
                                     End If
 
                                     If KCKey <> 0 Then
@@ -1737,7 +1783,11 @@ ERR1:
 
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                                         TEHNode.ForeColor = Color.Red
+                                        TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
+                                    End If
 
+                                    If balans = "1" Or balans = "True" Or balans = "-1" Then
+                                        TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
                                     End If
 
                                     If KCKey <> 0 Then
@@ -1755,7 +1805,11 @@ ERR1:
 
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                                         TEHNode.ForeColor = Color.Red
+                                        TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
+                                    End If
 
+                                    If balans = "1" Or balans = "True" Or balans = "-1" Then
+                                        TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
                                     End If
 
                                     If KCKey <> 0 Then
@@ -1814,7 +1868,11 @@ ERR1:
 
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                                         TEHNode.ForeColor = Color.Red
+                                        TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
+                                    End If
 
+                                    If balans = "1" Or balans = "True" Or balans = "-1" Then
+                                        TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
                                     End If
 
                                     If KCKey <> 0 Then
@@ -1832,8 +1890,13 @@ ERR1:
 
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                                         TEHNode.ForeColor = Color.Red
-
+                                        TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
                                     End If
+
+                                    If balans = "1" Or balans = "True" Or balans = "-1" Then
+                                        TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
+                                    End If
+
 
                                     If KCKey <> 0 Then
                                         If KCKey = .Fields("id").Value Then
@@ -1850,7 +1913,13 @@ ERR1:
                                     TEHNodePS.Nodes.Add(TEHNode)
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                                         TEHNode.ForeColor = Color.Red
+                                        TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
                                     End If
+
+                                    If balans = "1" Or balans = "True" Or balans = "-1" Then
+                                        TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
+                                    End If
+
                                     If KCKey <> 0 Then
                                         If KCKey = .Fields("id").Value Then
                                             lstgroups.SelectedNode = TEHNode
@@ -1864,7 +1933,13 @@ ERR1:
                                     TEHNodePS.Nodes.Add(TEHNode)
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                                         TEHNode.ForeColor = Color.Red
+                                        TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
                                     End If
+
+                                    If balans = "1" Or balans = "True" Or balans = "-1" Then
+                                        TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
+                                    End If
+
                                     If KCKey <> 0 Then
                                         If KCKey = .Fields("id").Value Then
                                             lstgroups.SelectedNode = TEHNode
@@ -1878,7 +1953,13 @@ ERR1:
                                     TEHNodePS.Nodes.Add(TEHNode)
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                                         TEHNode.ForeColor = Color.Red
+                                        TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
                                     End If
+
+                                    If balans = "1" Or balans = "True" Or balans = "-1" Then
+                                        TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
+                                    End If
+
                                     If KCKey <> 0 Then
                                         If KCKey = .Fields("id").Value Then
                                             lstgroups.SelectedNode = TEHNode
@@ -1892,7 +1973,13 @@ ERR1:
                                     TEHNodePS.Nodes.Add(TEHNode)
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                                         TEHNode.ForeColor = Color.Red
+                                        TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
                                     End If
+
+                                    If balans = "1" Or balans = "True" Or balans = "-1" Then
+                                        TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
+                                    End If
+
                                     If KCKey <> 0 Then
                                         If KCKey = .Fields("id").Value Then
                                             lstgroups.SelectedNode = TEHNode
@@ -1906,7 +1993,13 @@ ERR1:
                                     TEHNodePS.Nodes.Add(TEHNode)
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                                         TEHNode.ForeColor = Color.Red
+                                        TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
                                     End If
+
+                                    If balans = "1" Or balans = "True" Or balans = "-1" Then
+                                        TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
+                                    End If
+
                                     If KCKey <> 0 Then
                                         If KCKey = .Fields("id").Value Then
                                             lstgroups.SelectedNode = TEHNode
@@ -1920,7 +2013,13 @@ ERR1:
                                     TEHNodePS.Nodes.Add(TEHNode)
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                                         TEHNode.ForeColor = Color.Red
+                                        TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
                                     End If
+
+                                    If balans = "1" Or balans = "True" Or balans = "-1" Then
+                                        TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
+                                    End If
+
                                     If KCKey <> 0 Then
                                         If KCKey = .Fields("id").Value Then
                                             lstgroups.SelectedNode = TEHNode
@@ -1951,7 +2050,11 @@ ERR1:
 
                 If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                     TEHNode.ForeColor = Color.Red
+                    TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
+                End If
 
+                If balans = "1" Or balans = "True" Or balans = "-1" Then
+                    TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
                 End If
 
                 If KCKey <> 0 Then
@@ -1969,7 +2072,11 @@ ERR1:
 
                 If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                     TEHNode.ForeColor = Color.Red
+                    TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
+                End If
 
+                If balans = "1" Or balans = "True" Or balans = "-1" Then
+                    TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
                 End If
 
                 If KCKey <> 0 Then
@@ -1986,7 +2093,11 @@ ERR1:
 
                 If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                     TEHNode.ForeColor = Color.Red
+                    TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
+                End If
 
+                If balans = "1" Or balans = "True" Or balans = "-1" Then
+                    TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
                 End If
 
                 If KCKey <> 0 Then
@@ -2011,6 +2122,7 @@ ERR1:
 
                         TEHNode.ForeColor = Color.Blue
 
+
                     Case Else
 
                         TEHNode.ForeColor = Color.Green
@@ -2021,7 +2133,11 @@ ERR1:
 
                 If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                     TEHNode.ForeColor = Color.Red
+                    TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
+                End If
 
+                If balans = "1" Or balans = "True" Or balans = "-1" Then
+                    TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
                 End If
 
                 If KCKey <> 0 Then
@@ -2038,7 +2154,11 @@ ERR1:
 
                 If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                     TEHNode.ForeColor = Color.Red
+                    TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
+                End If
 
+                If balans = "1" Or balans = "True" Or balans = "-1" Then
+                    TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
                 End If
 
                 If KCKey <> 0 Then
@@ -2055,7 +2175,11 @@ ERR1:
 
                 If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                     TEHNode.ForeColor = Color.Red
+                    TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
+                End If
 
+                If balans = "1" Or balans = "True" Or balans = "-1" Then
+                    TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
                 End If
 
                 If KCKey <> 0 Then
@@ -2072,7 +2196,11 @@ ERR1:
 
                 If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                     TEHNode.ForeColor = Color.Red
+                    TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
+                End If
 
+                If balans = "1" Or balans = "True" Or balans = "-1" Then
+                    TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
                 End If
 
                 If KCKey <> 0 Then
@@ -2090,7 +2218,11 @@ ERR1:
 
                 If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                     TEHNode.ForeColor = Color.Red
+                    TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
+                End If
 
+                If balans = "1" Or balans = "True" Or balans = "-1" Then
+                    TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
                 End If
 
                 If KCKey <> 0 Then
@@ -2107,7 +2239,11 @@ ERR1:
 
                 If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                     TEHNode.ForeColor = Color.Red
+                    TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
+                End If
 
+                If balans = "1" Or balans = "True" Or balans = "-1" Then
+                    TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
                 End If
 
                 If KCKey <> 0 Then
@@ -2168,8 +2304,13 @@ ERR1:
 
                 If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                     TEHNode.ForeColor = Color.Red
-
+                    TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
                 End If
+
+                If balans = "1" Or balans = "True" Or balans = "-1" Then
+                    TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
+                End If
+
 
                 If KCKey <> 0 Then
                     If KCKey = iD Then
@@ -2187,7 +2328,11 @@ ERR1:
 
                 If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                     TEHNode.ForeColor = Color.Red
+                    TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
+                End If
 
+                If balans = "1" Or balans = "True" Or balans = "-1" Then
+                    TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
                 End If
 
                 If KCKey <> 0 Then
@@ -2204,7 +2349,12 @@ ERR1:
                 DepNode.Nodes.Add(TEHNode)
                 If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                     TEHNode.ForeColor = Color.Red
+                    TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
                 End If
+                If balans = "1" Or balans = "True" Or balans = "-1" Then
+                    TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
+                End If
+
                 If KCKey <> 0 Then
                     If KCKey = iD Then
                         lstgroups.SelectedNode = TEHNode
@@ -2218,7 +2368,13 @@ ERR1:
                 DepNode.Nodes.Add(TEHNode)
                 If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                     TEHNode.ForeColor = Color.Red
+                    TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
                 End If
+
+                If balans = "1" Or balans = "True" Or balans = "-1" Then
+                    TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
+                End If
+
                 If KCKey <> 0 Then
                     If KCKey = iD Then
                         lstgroups.SelectedNode = TEHNode
@@ -2232,7 +2388,13 @@ ERR1:
                 DepNode.Nodes.Add(TEHNode)
                 If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                     TEHNode.ForeColor = Color.Red
+                    TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
                 End If
+
+                If balans = "1" Or balans = "True" Or balans = "-1" Then
+                    TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
+                End If
+
                 If KCKey <> 0 Then
                     If KCKey = iD Then
                         lstgroups.SelectedNode = TEHNode
@@ -2246,7 +2408,13 @@ ERR1:
                 DepNode.Nodes.Add(TEHNode)
                 If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                     TEHNode.ForeColor = Color.Red
+                    TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
                 End If
+
+                If balans = "1" Or balans = "True" Or balans = "-1" Then
+                    TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
+                End If
+
                 If KCKey <> 0 Then
                     If KCKey = iD Then
                         lstgroups.SelectedNode = TEHNode
@@ -2260,7 +2428,13 @@ ERR1:
                 DepNode.Nodes.Add(TEHNode)
                 If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                     TEHNode.ForeColor = Color.Red
+                    TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
                 End If
+
+                If balans = "1" Or balans = "True" Or balans = "-1" Then
+                    TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
+                End If
+
                 If KCKey <> 0 Then
                     If KCKey = iD Then
                         lstgroups.SelectedNode = TEHNode
@@ -2274,7 +2448,13 @@ ERR1:
                 DepNode.Nodes.Add(TEHNode)
                 If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
                     TEHNode.ForeColor = Color.Red
+                    TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Strikeout)
                 End If
+
+                If balans = "1" Or balans = "True" Or balans = "-1" Then
+                    TEHNode.NodeFont = New Font(lstgroups.Font, FontStyle.Italic)
+                End If
+
                 If KCKey <> 0 Then
                     If KCKey = iD Then
                         lstgroups.SelectedNode = TEHNode

@@ -20,7 +20,7 @@ Public Class frmSetup
             Return FontWindow.Font
 
         Else
-            Return PrevisiusFont
+            'Return PrevisiusFont
 
         End If
         'textbox1.font=changefont(wndfont)
@@ -1025,14 +1025,13 @@ err_:
         dlgFont = New System.Windows.Forms.FontDialog
 
 
+        'Label9.Font = changeFont(dlgFont, Label9)
 
-        Label9.Font = changeFont(dlgFont, Label9)
-
-        FontN = dlgFont.Font.Name
-        fontS = dlgFont.Font.Size
-        FontB = dlgFont.Font.Bold
-        FontSt = dlgFont.Font.Style
-        FontD = dlgFont.Font.Unit
+        'FontN = dlgFont.Font.Name
+        'fontS = dlgFont.Font.Size
+        'FontB = dlgFont.Font.Bold
+        'FontSt = dlgFont.Font.Style
+        'FontD = dlgFont.Font.Unit
 
 
         'If fontS > 10 Then fontS = 10
@@ -1040,30 +1039,32 @@ err_:
 
         'dlgFont.Font = set your font here
 
-        'If dlgFont.ShowDialog() = DialogResult.OK Then
-        '    Label9.Font = (dlgFont.Font)
-        '    Label9.ForeColor = (dlgFont.Color)
+        If dlgFont.ShowDialog() = DialogResult.OK Then
+            Label9.Font = (dlgFont.Font)
+            Label9.ForeColor = (dlgFont.Color)
 
 
+            FontN = dlgFont.Font.Name
+            fontS = dlgFont.Font.Size
+            FontB = dlgFont.Font.Bold
+            FontSt = dlgFont.Font.Style
+            FontD = dlgFont.Font.Unit
 
-        '    FontN = dlgFont.Font.Name
-        '    fontS = dlgFont.Font.Size
-        '    FontB = dlgFont.Font.Bold
-        '    FontC = Label9.ForeColor
+            Call SendFonts(Me)
+            Call SendFonts(frmMain)
 
-        Dim objIniFile As New IniFile(PrPath & "base.ini")
+            Dim objIniFile As New IniFile(PrPath & "base.ini")
 
-        objIniFile.WriteString("general", "Font", FontN)
-        objIniFile.WriteString("general", "FontSize", fontS)
-        objIniFile.WriteString("general", "FontBold", FontB)
-        objIniFile.WriteString("general", "FontStyle", FontSt)
-        objIniFile.WriteString("general", "FontUnit", FontD)
+            objIniFile.WriteString("general", "Font", FontN)
+            objIniFile.WriteString("general", "FontSize", fontS)
+            objIniFile.WriteString("general", "FontBold", FontB)
+            objIniFile.WriteString("general", "FontStyle", FontSt)
+            objIniFile.WriteString("general", "FontUnit", FontD)
 
 
-        'End If
+        End If
 
-        Call SendFonts(Me)
-        Call SendFonts(frmMain)
+       
 
     End Sub
 
@@ -1257,8 +1258,8 @@ err_:
 
         objIniFile.WriteString("general", "FontColor", FontC)
 
-        Call FONT_LOAD(Me)
-
+        'Call FONT_LOAD(Me)
+        Call COLOR_LOAD(Me)
     End Sub
 
     Public Function changeColor(ByVal FontWindow As ColorDialog, ByVal str As Control)
@@ -1273,7 +1274,7 @@ err_:
             Return FontWindow.Color
 
         Else
-            Return PrevisiusColor
+            'Return PrevisiusColor
 
         End If
 
@@ -1321,8 +1322,6 @@ err_:
             End Try
         Next
 
-
-
         Call COLOR_LOAD(Me)
     End Sub
 
@@ -1332,11 +1331,6 @@ err_:
         'Me.ForeColor = Drawing.Color.FromName(FontC)
 
         'lvPrUsers.ForeColor = Drawing.Color.FromName(FontC)
-
-
-
-
-
 
         For Each C As Object In ControlContainer.Controls
             Try

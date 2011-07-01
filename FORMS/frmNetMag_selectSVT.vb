@@ -123,7 +123,7 @@
 
                     Case "O"
 
-                        sSQL = "SELECT count(*) as t_n FROM kompy  where tiptehn <> 'PC' AND PCL=0 AND filial='" & A1 & "' AND mesto='" & A2 & "'"
+                        sSQL = "SELECT count(*) as t_n FROM kompy where tiptehn <> 'PC' AND PCL=0 AND filial='" & A1 & "' AND mesto='" & A2 & "'"
                         rs = New ADODB.Recordset
                         rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
@@ -449,7 +449,7 @@
 
                         Case "G"
 
-                            sSQL = "SELECT count(*) as t_n FROM where tiptehn = 'PC' AND filial='" & A1 & "'"
+                            sSQL = "SELECT count(*) as t_n FROM kompy where tiptehn = 'PC' AND filial='" & A1 & "'"
                             rs = New ADODB.Recordset
                             rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
@@ -463,7 +463,7 @@
 
                         Case "O"
 
-                            sSQL = "SELECT count(*) as t_n FROM where tiptehn = 'PC' AND filial='" & A1 & "' AND mesto='" & A2 & "'"
+                            sSQL = "SELECT count(*) as t_n FROM kompy where tiptehn = 'PC' AND filial='" & A1 & "' AND mesto='" & A2 & "'"
                             rs = New ADODB.Recordset
                             rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
@@ -490,7 +490,7 @@
                             ' and tiptehn='PC' or tiptehn='Printer' or tiptehn='MFU' or tiptehn='FAX' or tiptehn='PHONE' or tiptehn='NET' or tiptehn='IBP'
 
                         Case "ROOT"
-                            sSQL = "SELECT count(*) as t_n FROM where tiptehn = 'PC'"
+                            sSQL = "SELECT count(*) as t_n FROM kompy where tiptehn = 'PC'"
                             rs = New ADODB.Recordset
                             rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
