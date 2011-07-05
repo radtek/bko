@@ -166,7 +166,7 @@
                 End Select
 
             Case "NET"
-                sSQL = "SELECT count(*) as t_n FROM where tiptehn='NET'"
+                sSQL = "SELECT count(*) as t_n FROM kompy where tiptehn='NET'"
                 rs = New ADODB.Recordset
                 rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 

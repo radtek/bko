@@ -3,7 +3,6 @@ Imports System.IO
 Public Class frmLogin
     Private sLoad As Boolean
 
-
     Private Sub frmLogin_Activated(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Activated
         PrPath = Directory.GetParent(Application.ExecutablePath).ToString & "\"
         txtPassword.Focus()

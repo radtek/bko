@@ -77,6 +77,28 @@ Public Class frmMain
         If Len(sText) > 2 Then sText = 0
 
 
+        Dim uname As String
+
+        uname = objIniFile.GetString("General", "FullScreen", "0")
+
+        Select Case uname
+
+            Case "1"
+
+                Me.WindowState = 2
+
+            Case "0"
+
+                Me.WindowState = 0
+
+        End Select
+
+
+
+
+
+
+
 
         Select Case sText
 

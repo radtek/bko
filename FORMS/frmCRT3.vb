@@ -44,7 +44,21 @@
         DCKey = objIniFile.GetString("general", "Default", 0)
         lstGroups.Nodes.Clear()
 
-        lstGroups.ImageList = frmComputers.ilsCommands
+        Select Case sICONS
+
+            Case "20*20"
+
+                lstGroups.ImageList = frmComputers.ilsCommands
+
+            Case "32*32"
+
+                lstGroups.ImageList = frmComputers.ImageList1
+
+            Case Else
+
+                lstGroups.ImageList = frmComputers.ilsCommands
+
+        End Select
 
 
         Dim zBranche As String

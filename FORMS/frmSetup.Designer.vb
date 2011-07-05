@@ -116,7 +116,10 @@ Partial Class frmSetup
         Me.chkVSUst = New System.Windows.Forms.CheckBox()
         Me.chkPOu = New System.Windows.Forms.CheckBox()
         Me.chkREMONT = New System.Windows.Forms.CheckBox()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.SStab1 = New System.Windows.Forms.TabControl()
+        Me.chkFullScreen = New System.Windows.Forms.CheckBox()
         Me.TabPage5.SuspendLayout()
         Me.TableLayoutPanel3.SuspendLayout()
         Me.gbUsers.SuspendLayout()
@@ -139,6 +142,7 @@ Partial Class frmSetup
         Me.TableLayoutPanel7.SuspendLayout()
         Me.gbMyBlank.SuspendLayout()
         Me.TableLayoutPanel5.SuspendLayout()
+        Me.GroupBox3.SuspendLayout()
         Me.SStab1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -724,7 +728,6 @@ Partial Class frmSetup
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel1.Controls.Add(Me.chkUpdate, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.chkSNPro, 0, 1)
-        Me.TableLayoutPanel1.Controls.Add(Me.GroupBox1, 0, 7)
         Me.TableLayoutPanel1.Controls.Add(Me.chkSheduler, 0, 2)
         Me.TableLayoutPanel1.Controls.Add(Me.chkMenuServices, 0, 3)
         Me.TableLayoutPanel1.Controls.Add(Me.cmbOffice, 2, 2)
@@ -733,8 +736,6 @@ Partial Class frmSetup
         Me.TableLayoutPanel1.Controls.Add(Me.lblDefaultModul, 1, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.lblSortTree, 1, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.lblOffice, 1, 2)
-        Me.TableLayoutPanel1.Controls.Add(Me.gbTree_o, 0, 8)
-        Me.TableLayoutPanel1.Controls.Add(Me.GroupBox2, 0, 9)
         Me.TableLayoutPanel1.Controls.Add(Me.lblOtchet, 1, 3)
         Me.TableLayoutPanel1.Controls.Add(Me.lblDB, 1, 4)
         Me.TableLayoutPanel1.Controls.Add(Me.txtEverestDir, 2, 3)
@@ -743,7 +744,12 @@ Partial Class frmSetup
         Me.TableLayoutPanel1.Controls.Add(Me.txtSUBD, 2, 4)
         Me.TableLayoutPanel1.Controls.Add(Me.chkArhiv2exit, 0, 4)
         Me.TableLayoutPanel1.Controls.Add(Me.chk_no_log, 0, 6)
-        Me.TableLayoutPanel1.Controls.Add(Me.gbMyBlank, 2, 7)
+        Me.TableLayoutPanel1.Controls.Add(Me.GroupBox2, 0, 10)
+        Me.TableLayoutPanel1.Controls.Add(Me.gbTree_o, 0, 9)
+        Me.TableLayoutPanel1.Controls.Add(Me.GroupBox1, 0, 8)
+        Me.TableLayoutPanel1.Controls.Add(Me.GroupBox3, 2, 9)
+        Me.TableLayoutPanel1.Controls.Add(Me.gbMyBlank, 2, 8)
+        Me.TableLayoutPanel1.Controls.Add(Me.chkFullScreen, 0, 7)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(3, 16)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
@@ -758,8 +764,8 @@ Partial Class frmSetup
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(964, 615)
@@ -790,7 +796,7 @@ Partial Class frmSetup
         Me.GroupBox1.Controls.Add(Me.TableLayoutPanel4)
         Me.GroupBox1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupBox1.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.GroupBox1.Location = New System.Drawing.Point(3, 165)
+        Me.GroupBox1.Location = New System.Drawing.Point(3, 188)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(370, 109)
         Me.GroupBox1.TabIndex = 18
@@ -936,9 +942,9 @@ Partial Class frmSetup
         '
         Me.gbTree_o.Controls.Add(Me.TableLayoutPanel6)
         Me.gbTree_o.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.gbTree_o.Location = New System.Drawing.Point(3, 280)
+        Me.gbTree_o.Location = New System.Drawing.Point(3, 303)
         Me.gbTree_o.Name = "gbTree_o"
-        Me.gbTree_o.Size = New System.Drawing.Size(370, 99)
+        Me.gbTree_o.Size = New System.Drawing.Size(370, 100)
         Me.gbTree_o.TabIndex = 17
         Me.gbTree_o.TabStop = False
         Me.gbTree_o.Text = "Отображение в дереве"
@@ -957,7 +963,7 @@ Partial Class frmSetup
         Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel6.Size = New System.Drawing.Size(364, 80)
+        Me.TableLayoutPanel6.Size = New System.Drawing.Size(364, 81)
         Me.TableLayoutPanel6.TabIndex = 23
         '
         'RadioButton3
@@ -997,7 +1003,7 @@ Partial Class frmSetup
         '
         Me.GroupBox2.Controls.Add(Me.TableLayoutPanel7)
         Me.GroupBox2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GroupBox2.Location = New System.Drawing.Point(3, 385)
+        Me.GroupBox2.Location = New System.Drawing.Point(3, 409)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(370, 90)
         Me.GroupBox2.TabIndex = 19
@@ -1172,7 +1178,7 @@ Partial Class frmSetup
         '
         Me.gbMyBlank.Controls.Add(Me.TableLayoutPanel5)
         Me.gbMyBlank.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.gbMyBlank.Location = New System.Drawing.Point(562, 165)
+        Me.gbMyBlank.Location = New System.Drawing.Point(562, 188)
         Me.gbMyBlank.Name = "gbMyBlank"
         Me.gbMyBlank.Size = New System.Drawing.Size(366, 109)
         Me.gbMyBlank.TabIndex = 21
@@ -1238,6 +1244,27 @@ Partial Class frmSetup
         Me.chkREMONT.Text = "Ремонты"
         Me.chkREMONT.UseVisualStyleBackColor = True
         '
+        'GroupBox3
+        '
+        Me.GroupBox3.Controls.Add(Me.ComboBox1)
+        Me.GroupBox3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GroupBox3.Location = New System.Drawing.Point(562, 303)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(366, 100)
+        Me.GroupBox3.TabIndex = 23
+        Me.GroupBox3.TabStop = False
+        Me.GroupBox3.Text = "Размер иконок в дереве"
+        '
+        'ComboBox1
+        '
+        Me.ComboBox1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Items.AddRange(New Object() {"20*20", "32*32"})
+        Me.ComboBox1.Location = New System.Drawing.Point(3, 16)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(360, 21)
+        Me.ComboBox1.TabIndex = 0
+        '
         'SStab1
         '
         Me.SStab1.Controls.Add(Me.TabPage1)
@@ -1251,6 +1278,16 @@ Partial Class frmSetup
         Me.SStab1.SelectedIndex = 0
         Me.SStab1.Size = New System.Drawing.Size(984, 666)
         Me.SStab1.TabIndex = 0
+        '
+        'chkFullScreen
+        '
+        Me.chkFullScreen.AutoSize = True
+        Me.chkFullScreen.Location = New System.Drawing.Point(3, 165)
+        Me.chkFullScreen.Name = "chkFullScreen"
+        Me.chkFullScreen.Size = New System.Drawing.Size(100, 17)
+        Me.chkFullScreen.TabIndex = 24
+        Me.chkFullScreen.Text = "На весь экран"
+        Me.chkFullScreen.UseVisualStyleBackColor = True
         '
         'frmSetup
         '
@@ -1292,6 +1329,7 @@ Partial Class frmSetup
         Me.gbMyBlank.ResumeLayout(False)
         Me.TableLayoutPanel5.ResumeLayout(False)
         Me.TableLayoutPanel5.PerformLayout()
+        Me.GroupBox3.ResumeLayout(False)
         Me.SStab1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
@@ -1391,4 +1429,7 @@ Partial Class frmSetup
     Friend WithEvents TableLayoutPanel6 As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents TableLayoutPanel7 As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents TableLayoutPanel5 As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
+    Friend WithEvents ComboBox1 As System.Windows.Forms.ComboBox
+    Friend WithEvents chkFullScreen As System.Windows.Forms.CheckBox
 End Class

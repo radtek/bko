@@ -31,12 +31,9 @@ Public Class frmComputers
     Public sMonitor As Integer = 1
     Public sPrinter As Integer = 1
 
-
-
     Public Sub New()
         InitializeComponent()
     End Sub 'New
-
 
     Private Sub frmComputers_Activated(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Activated
 

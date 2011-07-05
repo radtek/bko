@@ -20,7 +20,7 @@ Public Class frmSetup
             Return FontWindow.Font
 
         Else
-            'Return PrevisiusFont
+            Return PrevisiusFont
 
         End If
         'textbox1.font=changefont(wndfont)
@@ -194,6 +194,27 @@ Public Class frmSetup
                 RadioButton3.Checked = True
 
         End Select
+
+        uname = objIniFile.GetString("General", "ICONs", "20*20")
+
+        Select Case uname
+
+            Case "20*20"
+
+                ComboBox1.Text = uname
+                sICONS = uname
+            Case "32*32"
+
+                ComboBox1.Text = uname
+                sICONS = uname
+            Case Else
+
+                ComboBox1.Text = "20*20"
+                sICONS = "20*20"
+        End Select
+
+
+
 
 
         uname = objIniFile.GetString("MYBLANK", "VSU", "0")
@@ -393,6 +414,25 @@ Public Class frmSetup
 
                 cmbDefaultModul.Text = LNGIniFile.GetString("frmSetup", "MSG6", "Учёт картриджей") '"Учёт картриджей"
         End Select
+
+
+        'objIniFile.WriteString("General", "FullScreen", "0")
+
+        uname = objIniFile.GetString("General", "FullScreen", "0")
+
+        Select Case uname
+
+            Case "1"
+
+                chkFullScreen.Checked = True
+
+            Case "0"
+
+                chkFullScreen.Checked = False
+
+        End Select
+
+
 
 
 
@@ -1025,13 +1065,14 @@ err_:
         dlgFont = New System.Windows.Forms.FontDialog
 
 
-        'Label9.Font = changeFont(dlgFont, Label9)
 
-        'FontN = dlgFont.Font.Name
-        'fontS = dlgFont.Font.Size
-        'FontB = dlgFont.Font.Bold
-        'FontSt = dlgFont.Font.Style
-        'FontD = dlgFont.Font.Unit
+        Label9.Font = changeFont(dlgFont, Label9)
+
+        FontN = dlgFont.Font.Name
+        fontS = dlgFont.Font.Size
+        FontB = dlgFont.Font.Bold
+        FontSt = dlgFont.Font.Style
+        FontD = dlgFont.Font.Unit
 
 
         'If fontS > 10 Then fontS = 10
@@ -1039,32 +1080,30 @@ err_:
 
         'dlgFont.Font = set your font here
 
-        If dlgFont.ShowDialog() = DialogResult.OK Then
-            Label9.Font = (dlgFont.Font)
-            Label9.ForeColor = (dlgFont.Color)
+        'If dlgFont.ShowDialog() = DialogResult.OK Then
+        '    Label9.Font = (dlgFont.Font)
+        '    Label9.ForeColor = (dlgFont.Color)
 
 
-            FontN = dlgFont.Font.Name
-            fontS = dlgFont.Font.Size
-            FontB = dlgFont.Font.Bold
-            FontSt = dlgFont.Font.Style
-            FontD = dlgFont.Font.Unit
 
-            Call SendFonts(Me)
-            Call SendFonts(frmMain)
+        '    FontN = dlgFont.Font.Name
+        '    fontS = dlgFont.Font.Size
+        '    FontB = dlgFont.Font.Bold
+        '    FontC = Label9.ForeColor
 
-            Dim objIniFile As New IniFile(PrPath & "base.ini")
+        Dim objIniFile As New IniFile(PrPath & "base.ini")
 
-            objIniFile.WriteString("general", "Font", FontN)
-            objIniFile.WriteString("general", "FontSize", fontS)
-            objIniFile.WriteString("general", "FontBold", FontB)
-            objIniFile.WriteString("general", "FontStyle", FontSt)
-            objIniFile.WriteString("general", "FontUnit", FontD)
+        objIniFile.WriteString("general", "Font", FontN)
+        objIniFile.WriteString("general", "FontSize", fontS)
+        objIniFile.WriteString("general", "FontBold", FontB)
+        objIniFile.WriteString("general", "FontStyle", FontSt)
+        objIniFile.WriteString("general", "FontUnit", FontD)
 
 
-        End If
+        'End If
 
-       
+        Call SendFonts(Me)
+        Call SendFonts(frmMain)
 
     End Sub
 
@@ -1258,8 +1297,8 @@ err_:
 
         objIniFile.WriteString("general", "FontColor", FontC)
 
-        'Call FONT_LOAD(Me)
-        Call COLOR_LOAD(Me)
+        Call FONT_LOAD(Me)
+
     End Sub
 
     Public Function changeColor(ByVal FontWindow As ColorDialog, ByVal str As Control)
@@ -1274,7 +1313,7 @@ err_:
             Return FontWindow.Color
 
         Else
-            'Return PrevisiusColor
+            Return PrevisiusColor
 
         End If
 
@@ -1322,6 +1361,8 @@ err_:
             End Try
         Next
 
+
+
         Call COLOR_LOAD(Me)
     End Sub
 
@@ -1331,6 +1372,11 @@ err_:
         'Me.ForeColor = Drawing.Color.FromName(FontC)
 
         'lvPrUsers.ForeColor = Drawing.Color.FromName(FontC)
+
+
+
+
+
 
         For Each C As Object In ControlContainer.Controls
             Try
@@ -1360,4 +1406,32 @@ err_:
     End Sub
 
 
+    Private Sub ComboBox1_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ComboBox1.SelectedIndexChanged
+
+
+        Dim objIniFile As New IniFile(PrPath & "base.ini")
+        objIniFile.WriteString("general", "ICONs", ComboBox1.Text)
+
+
+
+        sICONS = ComboBox1.Text
+
+
+    End Sub
+
+    Private Sub chkFullScreen_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkFullScreen.CheckedChanged
+        Dim objIniFile As New IniFile(PrPath & "base.ini")
+
+        Select Case chkFullScreen.Checked
+
+            Case False
+
+                objIniFile.WriteString("General", "FullScreen", "0")
+
+            Case True
+
+                objIniFile.WriteString("General", "FullScreen", "1")
+
+        End Select
+    End Sub
 End Class

@@ -54,6 +54,7 @@ Module MOD_SYS_PRELOAD
     Public uUSERNAME As String
     Public uCASHE As String
     Public sLANGPATH As String
+    Public sICONS As String
 
     Public Sub PreLoad()
 
@@ -86,6 +87,21 @@ Module MOD_SYS_PRELOAD
 
         sLANGPATH = PrPath & "lang\" & objIniFile.GetString("general", "LANG", "ru.ini")
 
+        sICONS = objIniFile.GetString("General", "ICONs", "20*20")
+
+        Select Case sICONS
+
+            Case "20*20"
+
+                sICONS = sICONS
+            Case "32*32"
+
+                sICONS = sICONS
+            Case Else
+
+                sICONS = "20*20"
+
+        End Select
 
 
         Call UNAME_GET()
