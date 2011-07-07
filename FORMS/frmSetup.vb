@@ -195,22 +195,18 @@ Public Class frmSetup
 
         End Select
 
-        uname = objIniFile.GetString("General", "ICONs", "20*20")
+        uname = objIniFile.GetString("General", "ICONs", "24*24")
 
         Select Case uname
 
-            Case "20*20"
-
-                ComboBox1.Text = uname
-                sICONS = uname
             Case "32*32"
 
                 ComboBox1.Text = uname
                 sICONS = uname
             Case Else
 
-                ComboBox1.Text = "20*20"
-                sICONS = "20*20"
+                ComboBox1.Text = "24*24"
+                sICONS = "24*24"
         End Select
 
 

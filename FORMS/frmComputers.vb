@@ -31,9 +31,9 @@ Public Class frmComputers
     Public sMonitor As Integer = 1
     Public sPrinter As Integer = 1
 
-    Public Sub New()
-        InitializeComponent()
-    End Sub 'New
+    'Public Sub New()
+    '    InitializeComponent()
+    'End Sub 'New
 
     Private Sub frmComputers_Activated(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Activated
 
@@ -62,10 +62,25 @@ Public Class frmComputers
 
     Private Sub frmComputers_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
-        'Меняем шрифт на форме
-        Me.Invoke(New MethodInvoker(AddressOf Font_Form_For_Computer))
-
         Me.WindowState = FormWindowState.Maximized
+
+        'Меняем шрифт на форме
+
+        Dim newThread1 As New Thread(AddressOf Font_Form_For_Computer_1)
+        newThread1.Start()
+
+        Dim newThread2 As New Thread(AddressOf LoadSPR_1)
+        newThread2.Start()
+
+        Dim newThread3 As New Thread(AddressOf frmComputers_Lang_1)
+        newThread3.Start()
+
+        Me.Invoke(New MethodInvoker(AddressOf RESIZER))
+
+        Dim newThread4 As New Thread(AddressOf STAT_INF_1)
+        newThread4.Start()
+
+        Application.DoEvents()
         Me.Cursor = Cursors.WaitCursor
 
         'Call add_kabn_if_nothing()
@@ -76,6 +91,7 @@ Public Class frmComputers
         uname = objIniFile.GetString("General", "branche", "")
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
+        'Выбираем филиал если он выбран, если нет то "Все"
         If Len(uname) = 0 Then
             treebranche.Text = LNGIniFile.GetString("frmComputers", "MSG53", "")
 
@@ -83,33 +99,6 @@ Public Class frmComputers
             treebranche.Text = uname
 
         End If
-
-
-        Try
-            Dim dirs As String() = Directory.GetFiles(PrPath & "pic\", "*.png")
-
-            Dim dir As String
-
-            For Each dir In dirs
-                ilsCommands.Images.Add(Image.FromFile(dir))
-            Next
-        Catch e1 As Exception
-
-        End Try
-
-
-
-        Me.Invoke(New MethodInvoker(AddressOf frmComputers_Lang))
-        Me.Invoke(New MethodInvoker(AddressOf S_P_LOAD))
-        Me.Invoke(New MethodInvoker(AddressOf RESIZER))
-        Me.lblT_All.Invoke(New MethodInvoker(AddressOf STAT_INF))
-
-
-        ''My.Application.DoEvents()
-
-
-        ''My.Application.DoEvents()
-
 
         uname = objIniFile.GetString("General", "VisibleALL", "0")
 
@@ -124,6 +113,13 @@ Public Class frmComputers
                 chkVisibleSTR.Checked = False
 
         End Select
+
+
+        If Me.lstGroups.Nodes.Count = 0 Then
+            Dim newThread5 As New Thread(AddressOf R_T_LOAD)
+            newThread5.Start()
+
+        End If
 
 
         uname = objIniFile.GetString("General", "RAZDEL", "0")
@@ -168,56 +164,10 @@ Public Class frmComputers
         cmbTIPCartridg.Items.Add(langfile.GetString("frmComputers", "MSG12", ""))
 
 
-        If Me.lstGroups.Nodes.Count = 0 Then
-            'Call RefFilTree(Me.lstGroups)
-            R_T_LOAD()
-        End If
 
         Me.Cursor = Cursors.Default
 
 
-    End Sub
-
-    Private Sub S_P_LOAD()
-
-        If Me.InvokeRequired Then
-            Me.Invoke(New MethodInvoker(AddressOf S_P_LOAD))
-
-        Else
-            Call LoadSPR()
-        End If
-    End Sub
-
-    Public Sub R_T_LOAD()
-
-        If Me.lstGroups.InvokeRequired Then
-            Me.lstGroups.Invoke(New MethodInvoker(AddressOf R_T_LOAD))
-        Else
-            Call RefFilTree(Me.lstGroups)
-        End If
-    End Sub
-
-    Public Sub STAT_INF()
-        On Error GoTo err_
-        Dim langfile As New IniFile(sLANGPATH)
-
-
-
-        Dim rs As ADODB.Recordset 'Объявляем рекордсет
-        Dim sSQL As String 'Переменная, где будет размещён SQL запрос
-        sSQL = "select COUNT(*) as T_N from kompy"
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-
-
-        With rs
-            lblT_All.Text = (.Fields("T_N").Value) & " " & langfile.GetString("frmComputers", "MSG13", "")
-        End With
-        rs.Close()
-        rs = Nothing
-
-        Exit Sub
-err_:
     End Sub
 
     Private Sub frmComputers_Resize(ByVal eventSender As System.Object, ByVal eventArgs As System.EventArgs) Handles MyBase.Resize
@@ -246,16 +196,6 @@ err_:
 
     Private Sub spCont_SplitterMoved(ByVal sender As Object, ByVal e As System.Windows.Forms.SplitterEventArgs) Handles spCont.SplitterMoved
         Call RESIZER()
-    End Sub
-
-    Private Sub S_Tl_LOAD()
-
-        If Me.lstGroups.InvokeRequired Then
-            Me.lstGroups.Invoke(New MethodInvoker(AddressOf S_Tl_LOAD))
-
-        Else
-            Call LOAD_LIST()
-        End If
     End Sub
 
     Public Sub selectTECMesto()
@@ -365,49 +305,47 @@ Error_:
 
         pDRAG = False
 
-        'If uLevelTehAdd = False And uLevel <> "Admin" Then
-        'frmMain.ToolStripDropDownButton1.Enabled = False
-        'Me.CopyToolStripMenuItem.Enabled = False
-        'Me.addFoldertoBranch.Enabled = False
-        'Me.UpdateToolStripMenuItem.Enabled = False
-        'End If
+        Dim newThread1 As New Thread(AddressOf COLOR_Form_For_Computer_1)
+        newThread1.Start()
 
-        'Call LOAD_LIST()
+        Call LOAD_LIST()
 
-        'Dim newThread As New Thread(AddressOf S_Tl_LOAD)
-        'newThread.Start()
-        TipTehn = ""
+        Me.Cursor = Cursors.Default
+    End Sub
 
-        'Call COLOR_Form_For_Computer()
+    Private Sub COLOR_Form_For_Computer_1()
 
-        'Call LOAD_LIST()
         Me.Invoke(New MethodInvoker(AddressOf COLOR_Form_For_Computer))
 
-        Me.Invoke(New MethodInvoker(AddressOf LOAD_LIST))
-
-
-
-        'Call selectTECMesto()
-        Me.Cursor = Cursors.Default
     End Sub
 
     Private Sub LOAD_LIST()
         Dim langfile As New IniFile(sLANGPATH)
 
+        Me.Cursor = Cursors.WaitCursor
+
+        'If pDRAG = True Then
+
+        'Else
+        '    TipTehn = ""
+        'End If
 
 
         frmMain.SaveInfTehButton.Enabled = True
 
         Me.ChkPDC.Checked = False
 
+        Me.Invoke(New MethodInvoker(AddressOf SECUR_LEVEL))
 
-        Call SECUR_LEVEL()
+        'Call SECUR_LEVEL()
 
         Dim d() As String
         d = Split(lstGroups.SelectedNode.Tag, "|")
 
+        'Call Clear_Form_For_Computer()
 
-        Call Clear_Form_For_Computer()
+        Me.Invoke(New MethodInvoker(AddressOf Clear_Form_For_Computer))
+
 
         Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG14", "") & " " & Me.lstGroups.SelectedNode.Text)
 
@@ -475,23 +413,27 @@ Error_:
 
                             'Call LOADt(d(1))
 
-                            Dim newThread As New Thread(AddressOf O_P_LOAD_)
-                            newThread.Start()
 
-                            Dim newThread1 As New Thread(AddressOf S_P_LOAD_)
+                            Dim newThread1 As New Thread(AddressOf T_LOAD_T)
                             newThread1.Start()
 
-                            Dim newThread2 As New Thread(AddressOf U_P_LOAD)
+                            Dim newThread2 As New Thread(AddressOf S_P_LOAD_t)
                             newThread2.Start()
 
-                            Dim newThread3 As New Thread(AddressOf N_P_LOAD)
+                            Dim newThread3 As New Thread(AddressOf U_P_LOAD_t)
                             newThread3.Start()
 
-                            Dim newThread4 As New Thread(AddressOf R_P_LOAD)
+
+                            Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
                             newThread4.Start()
 
-                            Dim newThread5 As New Thread(AddressOf D_P_LOAD)
+                            Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
                             newThread5.Start()
+
+                            Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                            newThread6.Start()
+
+
 
                             Call LOAD_PCL(Me.cmbBranch.Text, Me.cmbDepartment.Text, Me.cmbOffice.Text, Me.cmbPCLK)
 
@@ -512,17 +454,18 @@ Error_:
 
                             'Call LOADp(d(1))
 
-                            Dim newThread6 As New Thread(AddressOf P_P_LOAD_)
-                            newThread6.Start()
 
-                            Dim newThread3 As New Thread(AddressOf N_P_LOAD)
+                            Dim newThread3 As New Thread(AddressOf T_LOAD_T)
                             newThread3.Start()
 
-                            Dim newThread4 As New Thread(AddressOf R_P_LOAD)
+                            Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
                             newThread4.Start()
 
-                            Dim newThread5 As New Thread(AddressOf D_P_LOAD)
+                            Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
                             newThread5.Start()
+
+                            Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                            newThread6.Start()
 
 
 
@@ -541,17 +484,19 @@ Error_:
                             Label83.Visible = True
                             cmbPCL.Visible = True
 
-                            Dim newThread6 As New Thread(AddressOf P_P_LOAD_)
-                            newThread6.Start()
+                           
 
-                            Dim newThread3 As New Thread(AddressOf N_P_LOAD)
+                            Dim newThread3 As New Thread(AddressOf T_LOAD_T)
                             newThread3.Start()
 
-                            Dim newThread4 As New Thread(AddressOf R_P_LOAD)
+                            Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
                             newThread4.Start()
 
-                            Dim newThread5 As New Thread(AddressOf D_P_LOAD)
+                            Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
                             newThread5.Start()
+
+                            Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                            newThread6.Start()
 
                             Call LOAD_PCL(cmbPRNFil.Text, cmbPRNDepart.Text, cmbPRNOffice.Text, cmbPCL)
 
@@ -570,17 +515,17 @@ Error_:
                             Label83.Visible = False
                             cmbPCL.Visible = False
 
-                            Dim newThread6 As New Thread(AddressOf P_P_LOAD_)
-                            newThread6.Start()
 
-                            Dim newThread3 As New Thread(AddressOf N_P_LOAD)
-                            newThread3.Start()
+                            Me.Invoke(New MethodInvoker(AddressOf T_LOAD_T))
 
-                            Dim newThread4 As New Thread(AddressOf R_P_LOAD)
+                            Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
                             newThread4.Start()
 
-                            Dim newThread5 As New Thread(AddressOf D_P_LOAD)
+                            Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
                             newThread5.Start()
+
+                            Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                            newThread6.Start()
 
                             'Call LOAD_PCL()
                         Case "OT"
@@ -606,22 +551,23 @@ Error_:
                             cmbOTHPCL.Visible = True
                             FillComboNET(Me.cmbOTHConnect, "name", "spr_other", "", False, True)
 
-                            Call LOADot(d(1))
-
-                            Dim newThread3 As New Thread(AddressOf N_P_LOAD)
+                            Dim newThread3 As New Thread(AddressOf T_LOAD_T)
                             newThread3.Start()
 
-                            Dim newThread4 As New Thread(AddressOf R_P_LOAD)
+                            Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
                             newThread4.Start()
 
-                            Dim newThread5 As New Thread(AddressOf D_P_LOAD)
+                            Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
                             newThread5.Start()
+
+                            Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                            newThread6.Start()
 
 
                             Call LOAD_PCL(Me.cmbOTHFil.Text, Me.cmbOTHDepart.Text, Me.cmbOTHOffice.Text, Me.cmbOTHPCL)
 
 
-                        
+
 
 
 
@@ -647,16 +593,17 @@ Error_:
                             lblOTPCL.Visible = False
                             cmbOTHPCL.Visible = False
 
-                            Call LOADot(d(1))
-
-                            Dim newThread3 As New Thread(AddressOf N_P_LOAD)
+                            Dim newThread3 As New Thread(AddressOf T_LOAD_T)
                             newThread3.Start()
 
-                            Dim newThread4 As New Thread(AddressOf R_P_LOAD)
+                            Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
                             newThread4.Start()
 
-                            Dim newThread5 As New Thread(AddressOf D_P_LOAD)
+                            Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
                             newThread5.Start()
+
+                            Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                            newThread6.Start()
 
                         Case "FAX"
                             CartrAddToolStripMenuItem.Visible = False
@@ -680,16 +627,17 @@ Error_:
                             lblOTPCL.Visible = False
                             cmbOTHPCL.Visible = False
 
-                            Call LOADot(d(1))
-
-                            Dim newThread3 As New Thread(AddressOf N_P_LOAD)
+                            Dim newThread3 As New Thread(AddressOf T_LOAD_T)
                             newThread3.Start()
 
-                            Dim newThread4 As New Thread(AddressOf R_P_LOAD)
+                            Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
                             newThread4.Start()
 
-                            Dim newThread5 As New Thread(AddressOf D_P_LOAD)
+                            Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
                             newThread5.Start()
+
+                            Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                            newThread6.Start()
 
                         Case "PHONE"
                             CartrAddToolStripMenuItem.Visible = False
@@ -714,16 +662,17 @@ Error_:
                             lblOTPCL.Visible = True
 
 
-                            Call LOADot(d(1))
-
-                            Dim newThread3 As New Thread(AddressOf N_P_LOAD)
+                            Dim newThread3 As New Thread(AddressOf T_LOAD_T)
                             newThread3.Start()
 
-                            Dim newThread4 As New Thread(AddressOf R_P_LOAD)
+                            Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
                             newThread4.Start()
 
-                            Dim newThread5 As New Thread(AddressOf D_P_LOAD)
+                            Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
                             newThread5.Start()
+
+                            Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                            newThread6.Start()
 
                         Case "ZIP"
                             CartrAddToolStripMenuItem.Visible = False
@@ -745,16 +694,18 @@ Error_:
                             sSTAB5.Visible = False
                             lblOTPCL.Visible = True
                             cmbOTHPCL.Visible = True
-                            Call LOADot(d(1))
 
-                            Dim newThread3 As New Thread(AddressOf N_P_LOAD)
+                            Dim newThread3 As New Thread(AddressOf T_LOAD_T)
                             newThread3.Start()
 
-                            Dim newThread4 As New Thread(AddressOf R_P_LOAD)
+                            Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
                             newThread4.Start()
 
-                            Dim newThread5 As New Thread(AddressOf D_P_LOAD)
+                            Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
                             newThread5.Start()
+
+                            Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                            newThread6.Start()
 
                             Call LOAD_PCL(Me.cmbOTHFil.Text, Me.cmbOTHDepart.Text, Me.cmbOTHOffice.Text, Me.cmbOTHPCL)
                         Case "SCANER"
@@ -777,15 +728,18 @@ Error_:
                             sSTAB5.Visible = False
                             lblOTPCL.Visible = True
                             cmbOTHPCL.Visible = True
-                            Call LOADot(d(1))
-                            Dim newThread3 As New Thread(AddressOf N_P_LOAD)
+
+                            Dim newThread3 As New Thread(AddressOf T_LOAD_T)
                             newThread3.Start()
 
-                            Dim newThread4 As New Thread(AddressOf R_P_LOAD)
+                            Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
                             newThread4.Start()
 
-                            Dim newThread5 As New Thread(AddressOf D_P_LOAD)
+                            Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
                             newThread5.Start()
+
+                            Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                            newThread6.Start()
 
                             Call LOAD_PCL(Me.cmbOTHFil.Text, Me.cmbOTHDepart.Text, Me.cmbOTHOffice.Text, Me.cmbOTHPCL)
 
@@ -815,6 +769,7 @@ Error_:
                             sSTAB5.Visible = False
 
                             Call LOADmon(d(1))
+
                             Call LOAD_PCL(Me.cmbOTHFil.Text, Me.cmbOTHDepart.Text, Me.cmbOTHOffice.Text, Me.cmbOTHPCL)
                             'MsgBox("Доделать открытие мониторов")
 
@@ -852,16 +807,17 @@ Error_:
                             lblOTPCL.Visible = True
                             cmbOTHPCL.Visible = True
 
-                            Call LOADot(d(1))
-
-                            Dim newThread3 As New Thread(AddressOf N_P_LOAD)
+                            Dim newThread3 As New Thread(AddressOf T_LOAD_T)
                             newThread3.Start()
 
-                            Dim newThread4 As New Thread(AddressOf R_P_LOAD)
+                            Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
                             newThread4.Start()
 
-                            Dim newThread5 As New Thread(AddressOf D_P_LOAD)
+                            Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
                             newThread5.Start()
+
+                            Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                            newThread6.Start()
 
                             Call LOAD_PCL(Me.cmbOTHFil.Text, Me.cmbOTHDepart.Text, Me.cmbOTHOffice.Text, Me.cmbOTHPCL)
 
@@ -885,15 +841,18 @@ Error_:
                             lblOTPCL.Visible = True
                             cmbOTHPCL.Visible = True
 
-                            Call LOADot(d(1))
-                            Dim newThread3 As New Thread(AddressOf N_P_LOAD)
+                            Dim newThread3 As New Thread(AddressOf T_LOAD_T)
                             newThread3.Start()
 
-                            Dim newThread4 As New Thread(AddressOf R_P_LOAD)
+                            Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
                             newThread4.Start()
 
-                            Dim newThread5 As New Thread(AddressOf D_P_LOAD)
+                            Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
                             newThread5.Start()
+
+                            Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                            newThread6.Start()
+
                             Call LOAD_PCL(Me.cmbOTHFil.Text, Me.cmbOTHDepart.Text, Me.cmbOTHOffice.Text, Me.cmbOTHPCL)
 
                         Case "IBP"
@@ -916,15 +875,18 @@ Error_:
                             lblOTPCL.Visible = True
                             cmbOTHPCL.Visible = True
 
-                            Call LOADot(d(1))
-                            Dim newThread3 As New Thread(AddressOf N_P_LOAD)
+                            Dim newThread3 As New Thread(AddressOf T_LOAD_T)
                             newThread3.Start()
 
-                            Dim newThread4 As New Thread(AddressOf R_P_LOAD)
+                            Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
                             newThread4.Start()
 
-                            Dim newThread5 As New Thread(AddressOf D_P_LOAD)
+                            Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
                             newThread5.Start()
+
+                            Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                            newThread6.Start()
+
                             Call LOAD_PCL(Me.cmbOTHFil.Text, Me.cmbOTHDepart.Text, Me.cmbOTHOffice.Text, Me.cmbOTHPCL)
 
                         Case "FS"
@@ -947,15 +909,17 @@ Error_:
                             lblOTPCL.Visible = True
                             cmbOTHPCL.Visible = True
 
-                            Call LOADot(d(1))
-                            Dim newThread3 As New Thread(AddressOf N_P_LOAD)
+                            Dim newThread3 As New Thread(AddressOf T_LOAD_T)
                             newThread3.Start()
 
-                            Dim newThread4 As New Thread(AddressOf R_P_LOAD)
+                            Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
                             newThread4.Start()
 
-                            Dim newThread5 As New Thread(AddressOf D_P_LOAD)
+                            Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
                             newThread5.Start()
+
+                            Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                            newThread6.Start()
 
                             Call LOAD_PCL(Me.cmbOTHFil.Text, Me.cmbOTHDepart.Text, Me.cmbOTHOffice.Text, Me.cmbOTHPCL)
 
@@ -979,15 +943,18 @@ Error_:
                             lblOTPCL.Visible = True
                             cmbOTHPCL.Visible = True
 
-                            Call LOADot(d(1))
-                            Dim newThread3 As New Thread(AddressOf N_P_LOAD)
+                            Dim newThread3 As New Thread(AddressOf T_LOAD_T)
                             newThread3.Start()
 
-                            Dim newThread4 As New Thread(AddressOf R_P_LOAD)
+                            Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
                             newThread4.Start()
 
-                            Dim newThread5 As New Thread(AddressOf D_P_LOAD)
+                            Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
                             newThread5.Start()
+
+                            Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                            newThread6.Start()
+
                             Call LOAD_PCL(Me.cmbOTHFil.Text, Me.cmbOTHDepart.Text, Me.cmbOTHOffice.Text, Me.cmbOTHPCL)
 
                         Case "MOUSE"
@@ -1010,15 +977,18 @@ Error_:
                             lblOTPCL.Visible = True
                             cmbOTHPCL.Visible = True
 
-                            Call LOADot(d(1))
-                            Dim newThread3 As New Thread(AddressOf N_P_LOAD)
+                            Dim newThread3 As New Thread(AddressOf T_LOAD_T)
                             newThread3.Start()
 
-                            Dim newThread4 As New Thread(AddressOf R_P_LOAD)
+                            Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
                             newThread4.Start()
 
-                            Dim newThread5 As New Thread(AddressOf D_P_LOAD)
+                            Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
                             newThread5.Start()
+
+                            Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                            newThread6.Start()
+
                             Call LOAD_PCL(Me.cmbOTHFil.Text, Me.cmbOTHDepart.Text, Me.cmbOTHOffice.Text, Me.cmbOTHPCL)
                             '--------------VIP_Graff Добавление новой перефирии Конец------------------
 
@@ -1044,19 +1014,21 @@ Error_:
                             lblOTPCL.Visible = False
                             cmbOTHPCL.Visible = False
 
-                            Call LOADot(d(1))
-                            Dim newThread3 As New Thread(AddressOf N_P_LOAD)
+                            'Me.Invoke(New MethodInvoker(AddressOf T_LOAD_T))
+
+                            Dim newThread3 As New Thread(AddressOf T_LOAD_T)
                             newThread3.Start()
 
-                            Dim newThread4 As New Thread(AddressOf R_P_LOAD)
+                            Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
                             newThread4.Start()
 
-                            Dim newThread5 As New Thread(AddressOf D_P_LOAD)
+                            Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
                             newThread5.Start()
+
+                            Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                            newThread6.Start()
+
                             ' Call LOAD_PCL(Me.cmbOTHFil.Text, Me.cmbOTHDepart.Text, Me.cmbOTHOffice.Text, Me.cmbOTHPCL)
-
-
-
 
                     End Select
 
@@ -1067,6 +1039,7 @@ Error_:
 
 
             Case "G"
+                Me.EDT = False
 
                 'frmMain.SaveInfTehButton.Enabled = False
 
@@ -1075,9 +1048,6 @@ Error_:
                 sSTAB2.Visible = False
                 sSTAB4.Visible = False
                 sSTAB5.Visible = True
-
-
-                Me.EDT = False
 
                 sPREF = d(0)
                 sCOUNT = d(1)
@@ -1104,10 +1074,12 @@ Error_:
                 Call LOAD_REPAIR(d(1), Me.lvRepairBR)
 
             Case "O"
+                
 
                 'frmMain.SaveInfTehButton.Enabled = False
 
                 Me.EDT = False
+
 
                 sPREF = d(0)
                 sCOUNT = d(1)
@@ -1151,9 +1123,12 @@ Error_:
                 Call LOAD_REPAIR(d(1), Me.lvRepairBR)
 
             Case "K"
+                'TipTehn = ""
+
                 'frmMain.SaveInfTehButton.Enabled = False
 
                 Me.EDT = False
+
                 sPREF = d(0)
                 sCOUNT = d(1)
 
@@ -1202,80 +1177,73 @@ Error_:
 
 
         End Select
+
+        Me.Cursor = Cursors.Default
+
     End Sub
 
     '######################
 
-    Private Sub P_P_LOAD_()
-
-        If Me.InvokeRequired Then
-            Me.Invoke(New MethodInvoker(AddressOf P_LOAD_t))
-
-        Else
-            Call P_LOAD_t()
-        End If
-    End Sub
-
-    Private Sub P_LOAD_t()
-        Call LOADp(sCOUNT)
-    End Sub
-
-
-    Private Sub O_P_LOAD_()
-
-        If Me.InvokeRequired Then
-            Me.Invoke(New MethodInvoker(AddressOf O_P_LOAD_t))
-
-        Else
-            Call O_P_LOAD_t()
-        End If
-    End Sub
-
-    Private Sub O_P_LOAD_t()
-        Call LOADt(sCOUNT)
-    End Sub
-
-    Private Sub S_P_LOAD_()
-
-        If Me.InvokeRequired Then
-            Me.Invoke(New MethodInvoker(AddressOf S_P_LOAD_t))
-
-        Else
-            Call S_P_LOAD_t()
-        End If
-    End Sub
-
     Private Sub S_P_LOAD_t()
+
+        Me.Invoke(New MethodInvoker(AddressOf S_P_LOAD_t_1))
+
+    End Sub
+
+    Private Sub S_P_LOAD_t_1()
         Call LOAD_SOFT(sCOUNT, Me.lstSoftware)
     End Sub
 
-    Private Sub U_P_LOAD()
+    Private Sub U_P_LOAD_t()
 
-        If Me.InvokeRequired Then
-            Me.Invoke(New MethodInvoker(AddressOf U_P_LOAD_t))
-
-        Else
-            Call U_P_LOAD_t()
-        End If
+        Me.Invoke(New MethodInvoker(AddressOf U_P_LOAD_t_1))
     End Sub
 
-    Private Sub U_P_LOAD_t()
+    Private Sub U_P_LOAD_t_1()
         Call LOAD_USER(sCOUNT)
     End Sub
 
-    Private Sub N_P_LOAD()
+    Private Sub T_LOAD_T()
 
-        If Me.InvokeRequired Then
-            Me.Invoke(New MethodInvoker(AddressOf N_P_LOAD_t))
 
-        Else
-            Call N_P_LOAD_t()
-        End If
+        Me.Invoke(New MethodInvoker(AddressOf T_LOAD_T_1))
+
+
+    End Sub
+
+    Private Sub T_LOAD_T_1()
+
+  Select TipTehn
+
+            Case "PC"
+                Call LOADt(sCOUNT)
+
+            Case "Printer"
+
+                Call LOADp(sCOUNT)
+            Case "KOpir"
+                Call LOADp(sCOUNT)
+
+            Case "MFU"
+                Call LOADp(sCOUNT)
+
+            Case "NET"
+
+            Case Else
+
+                Call LOADot(sCOUNT)
+
+        End Select
+
     End Sub
 
     Private Sub N_P_LOAD_t()
-        Call LOAD_NOTES(sCOUNT, Me.lvNotes)
 
+        Me.Invoke(New MethodInvoker(AddressOf N_P_LOAD_t_1))
+
+    End Sub
+
+    Private Sub N_P_LOAD_t_1()
         Select Case TipTehn
 
             Case "PC"
@@ -1297,24 +1265,15 @@ Error_:
 
 
         End Select
-
-
-
-    End Sub
-
-    Private Sub R_P_LOAD()
-
-        If Me.InvokeRequired Then
-            Me.Invoke(New MethodInvoker(AddressOf R_P_LOAD_t))
-
-        Else
-            Call R_P_LOAD_t()
-        End If
     End Sub
 
     Private Sub R_P_LOAD_t()
 
+        Me.Invoke(New MethodInvoker(AddressOf R_P_LOAD_t_1))
 
+    End Sub
+
+    Private Sub R_P_LOAD_t_1()
         Select Case TipTehn
 
             Case "PC"
@@ -1336,22 +1295,15 @@ Error_:
 
 
         End Select
-
-
-
-    End Sub
-
-    Private Sub D_P_LOAD()
-
-        If Me.InvokeRequired Then
-            Me.Invoke(New MethodInvoker(AddressOf D_P_LOAD_t))
-
-        Else
-            Call D_P_LOAD_t()
-        End If
     End Sub
 
     Private Sub D_P_LOAD_t()
+
+        Me.Invoke(New MethodInvoker(AddressOf D_PLOAD_T_1))
+
+    End Sub
+
+    Private Sub D_PLOAD_T_1()
 
         Select Case TipTehn
 
@@ -1373,13 +1325,65 @@ Error_:
                 Call LOAD_DVIG_TEHN(sCOUNT, Me.lvMovementOTH)
                 'lvMovementOTH
 
-
-
         End Select
+    End Sub
 
+    Public Sub Font_Form_For_Computer_1()
+
+        Me.lstGroups.Invoke(New MethodInvoker(AddressOf Font_Form_For_Computer))
 
     End Sub
 
+    Public Sub frmComputers_Lang_1()
+
+        Me.lstGroups.Invoke(New MethodInvoker(AddressOf frmComputers_Lang))
+
+    End Sub
+
+    Public Sub R_T_LOAD_1()
+        Call RefFilTree(Me.lstGroups)
+    End Sub
+
+    Public Sub STAT_INF_1()
+
+        Me.lstGroups.Invoke(New MethodInvoker(AddressOf STAT_INF))
+
+    End Sub
+
+    Private Sub S_Tl_LOAD()
+
+        Me.Invoke(New MethodInvoker(AddressOf LOAD_LIST))
+
+    End Sub
+
+    Public Sub R_T_LOAD()
+
+        Me.lstGroups.Invoke(New MethodInvoker(AddressOf R_T_LOAD_1))
+
+    End Sub
+
+    Public Sub STAT_INF()
+        On Error GoTo err_
+        Dim langfile As New IniFile(sLANGPATH)
+
+
+
+        Dim rs As ADODB.Recordset 'Объявляем рекордсет
+        Dim sSQL As String 'Переменная, где будет размещён SQL запрос
+        sSQL = "select COUNT(*) as T_N from kompy"
+        rs = New ADODB.Recordset
+        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+
+        With rs
+            lblT_All.Text = (.Fields("T_N").Value) & " " & langfile.GetString("frmComputers", "MSG13", "")
+        End With
+        rs.Close()
+        rs = Nothing
+
+        Exit Sub
+err_:
+    End Sub
     '######################
 
 
@@ -1387,33 +1391,28 @@ Error_:
 
         txtSearch.Text = ""
 
-        'Dim newThread As New Thread(AddressOf R_T_LOAD)
-        'newThread.Start()
         Me.Cursor = Cursors.WaitCursor
-        'Call RefFilTree(Me.lstGroups)
 
-        'Dim newThread1 As New Thread(AddressOf R_T_LOAD)
-        'newThread1.Start()
+        'Me.Invoke(New MethodInvoker(AddressOf LoadSPR))
 
-        Me.Invoke(New MethodInvoker(AddressOf S_P_LOAD))
-        Me.Invoke(New MethodInvoker(AddressOf R_T_LOAD))
+        Dim newThread1 As New Thread(AddressOf R_T_LOAD)
+        newThread1.Start()
 
 
-        'Dim myWorker As New Threading.Thread(AddressOf R_T_LOAD)
-        'myWorker.Start()
+        Dim newThread2 As New Thread(AddressOf LoadSPR_1)
+        newThread2.Start()
 
-        'While myWorker.IsAlive
-        '    Application.DoEvents()
-        'End While
-
-
-
+        'Me.Invoke(New MethodInvoker(AddressOf R_T_LOAD))
 
 
         Me.Cursor = Cursors.Default
 
     End Sub
+    Private Sub LoadSPR_1()
 
+        Me.Invoke(New MethodInvoker(AddressOf LoadSPR))
+
+    End Sub
 
     Private Sub txtSearch_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSearch.KeyDown
 
@@ -1442,7 +1441,6 @@ Error_:
     End Sub
 
     Private Sub S2_LOAD_t()
-
         Call Search2(txtSearch.Text)
     End Sub
 
@@ -1948,7 +1946,8 @@ err_:
 
             REMOVE_TEHN(d(1))
 
-            Call Me.STAT_INF()
+            Dim newThread1 As New Thread(AddressOf STAT_INF_1)
+            newThread1.Start()
 
         Else
 
@@ -2209,7 +2208,9 @@ err_:
 
         RefFilTree(Me.lstGroups)
 
-        Call STAT_INF()
+        Dim newThread1 As New Thread(AddressOf STAT_INF_1)
+        newThread1.Start()
+
         Me.Cursor = Cursors.Default
         Exit Sub
 err_:
@@ -2285,7 +2286,9 @@ err_:
                 End Try
 
                 MASSLOAD = False
-                Call Me.STAT_INF()
+
+                Dim newThread1 As New Thread(AddressOf STAT_INF_1)
+                newThread1.Start()
 
                 Dim langfile As New IniFile(sLANGPATH)
 
@@ -2369,28 +2372,6 @@ err_:
         frmService_add.chkClose.Checked = 0
 
         frmService_add.ShowDialog(frmserviceDesc)
-    End Sub
-
-    Private Sub chkVisibleSTR_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkVisibleSTR.CheckedChanged
-        Me.Cursor = Cursors.WaitCursor
-
-        Dim objIniFile As New IniFile(PrPath & "base.ini")
-
-        Select Case chkVisibleSTR.Checked
-
-            Case False
-
-                objIniFile.WriteString("General", "VisibleALL", "0")
-
-            Case True
-
-                objIniFile.WriteString("General", "VisibleALL", "1")
-
-        End Select
-
-        Call RefFilTree(Me.lstGroups)
-        Me.Cursor = Cursors.Default
-
     End Sub
 
     Private Sub DeleteBranche_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DeleteBranche.Click
@@ -3309,7 +3290,10 @@ err_:
 
                     SAVE_DRAG_DROP(Me.sCOUNT, sBranch, sDepartment, sOffice, Me.lstGroups.SelectedNode.Text)
 
-                    LOADt(Me.sCOUNT)
+                    Dim newThread1 As New Thread(AddressOf T_LOAD_T)
+                    newThread1.Start()
+                    Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                    newThread6.Start()
 
                 Case "KOpir"
 
@@ -3318,7 +3302,10 @@ err_:
                     Me.cmbPRNOffice.Text = sOffice
 
                     SAVE_DRAG_DROP(Me.sCOUNT, sBranch, sDepartment, sOffice, Me.lstGroups.SelectedNode.Text)
-                    LOADp(Me.sCOUNT)
+                    Dim newThread1 As New Thread(AddressOf T_LOAD_T)
+                    newThread1.Start()
+                    Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                    newThread6.Start()
                 Case "Printer"
 
                     Me.cmbPRNFil.Text = sBranch
@@ -3326,7 +3313,10 @@ err_:
                     Me.cmbPRNOffice.Text = sOffice
 
                     SAVE_DRAG_DROP(Me.sCOUNT, sBranch, sDepartment, sOffice, Me.lstGroups.SelectedNode.Text)
-                    LOADp(Me.sCOUNT)
+                    Dim newThread1 As New Thread(AddressOf T_LOAD_T)
+                    newThread1.Start()
+                    Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                    newThread6.Start()
                 Case "MFU"
 
                     Me.cmbPRNFil.Text = sBranch
@@ -3334,7 +3324,10 @@ err_:
                     Me.cmbPRNOffice.Text = sOffice
 
                     SAVE_DRAG_DROP(Me.sCOUNT, sBranch, sDepartment, sOffice, Me.lstGroups.SelectedNode.Text)
-                    LOADp(Me.sCOUNT)
+                    Dim newThread1 As New Thread(AddressOf T_LOAD_T)
+                    newThread1.Start()
+                    Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                    newThread6.Start()
                 Case "NET"
 
                     Me.cmbNETBranch.Text = sBranch
@@ -3358,7 +3351,10 @@ err_:
                     Me.cmbOTHOffice.Text = sOffice
 
                     SAVE_DRAG_DROP(Me.sCOUNT, sBranch, sDepartment, sOffice, Me.lstGroups.SelectedNode.Text)
-                    LOADot(Me.sCOUNT)
+                    Dim newThread1 As New Thread(AddressOf T_LOAD_T)
+                    newThread1.Start()
+                    Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                    newThread6.Start()
                 Case "PHOTO"
 
                     Me.cmbOTHFil.Text = sBranch
@@ -3366,7 +3362,10 @@ err_:
                     Me.cmbOTHOffice.Text = sOffice
 
                     SAVE_DRAG_DROP(Me.sCOUNT, sBranch, sDepartment, sOffice, Me.lstGroups.SelectedNode.Text)
-                    LOADot(Me.sCOUNT)
+                    Dim newThread1 As New Thread(AddressOf T_LOAD_T)
+                    newThread1.Start()
+                    Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                    newThread6.Start()
                 Case "FAX"
 
                     Me.cmbOTHFil.Text = sBranch
@@ -3374,7 +3373,10 @@ err_:
                     Me.cmbOTHOffice.Text = sOffice
 
                     SAVE_DRAG_DROP(Me.sCOUNT, sBranch, sDepartment, sOffice, Me.lstGroups.SelectedNode.Text)
-                    LOADot(Me.sCOUNT)
+                    Dim newThread1 As New Thread(AddressOf T_LOAD_T)
+                    newThread1.Start()
+                    Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                    newThread6.Start()
                 Case "ZIP"
 
                     Me.cmbOTHFil.Text = sBranch
@@ -3382,7 +3384,10 @@ err_:
                     Me.cmbOTHOffice.Text = sOffice
 
                     SAVE_DRAG_DROP(Me.sCOUNT, sBranch, sDepartment, sOffice, Me.lstGroups.SelectedNode.Text)
-                    LOADot(Me.sCOUNT)
+                    Dim newThread1 As New Thread(AddressOf T_LOAD_T)
+                    newThread1.Start()
+                    Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                    newThread6.Start()
                 Case "SCANER"
 
                     Me.cmbOTHFil.Text = sBranch
@@ -3390,7 +3395,10 @@ err_:
                     Me.cmbOTHOffice.Text = sOffice
 
                     SAVE_DRAG_DROP(Me.sCOUNT, sBranch, sDepartment, sOffice, Me.lstGroups.SelectedNode.Text)
-                    LOADot(Me.sCOUNT)
+                    Dim newThread1 As New Thread(AddressOf T_LOAD_T)
+                    newThread1.Start()
+                    Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                    newThread6.Start()
                 Case "OT"
 
                     Me.cmbOTHFil.Text = sBranch
@@ -3400,13 +3408,19 @@ err_:
                     SAVE_DRAG_DROP(Me.sCOUNT, sBranch, sDepartment, sOffice, Me.lstGroups.SelectedNode.Text)
                     '--------------VIP_Graff Добавление новой перефирии Конец------------------
 
-                    LOADot(Me.sCOUNT)
+                    Dim newThread1 As New Thread(AddressOf T_LOAD_T)
+                    newThread1.Start()
+                    Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                    newThread6.Start()
                 Case "USB"
                     Me.cmbOTHFil.Text = sBranch
                     Me.cmbOTHDepart.Text = sDepartment
                     Me.cmbOTHOffice.Text = sOffice
                     SAVE_DRAG_DROP(Me.sCOUNT, sBranch, sDepartment, sOffice, Me.lstGroups.SelectedNode.Text)
-
+                    Dim newThread1 As New Thread(AddressOf T_LOAD_T)
+                    newThread1.Start()
+                    Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                    newThread6.Start()
                 Case "SOUND"
                     Me.cmbOTHFil.Text = sBranch
                     Me.cmbOTHDepart.Text = sDepartment
@@ -3418,26 +3432,38 @@ err_:
                     Me.cmbOTHDepart.Text = sDepartment
                     Me.cmbOTHOffice.Text = sOffice
                     SAVE_DRAG_DROP(Me.sCOUNT, sBranch, sDepartment, sOffice, Me.lstGroups.SelectedNode.Text)
-                    LOADot(Me.sCOUNT)
+                    Dim newThread1 As New Thread(AddressOf T_LOAD_T)
+                    newThread1.Start()
+                    Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                    newThread6.Start()
                 Case "FS"
                     Me.cmbOTHFil.Text = sBranch
                     Me.cmbOTHDepart.Text = sDepartment
                     Me.cmbOTHOffice.Text = sOffice
                     SAVE_DRAG_DROP(Me.sCOUNT, sBranch, sDepartment, sOffice, Me.lstGroups.SelectedNode.Text)
-                    LOADot(Me.sCOUNT)
+                    Dim newThread1 As New Thread(AddressOf T_LOAD_T)
+                    newThread1.Start()
+                    Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                    newThread6.Start()
                 Case "KEYB"
                     Me.cmbOTHFil.Text = sBranch
                     Me.cmbOTHDepart.Text = sDepartment
                     Me.cmbOTHOffice.Text = sOffice
                     SAVE_DRAG_DROP(Me.sCOUNT, sBranch, sDepartment, sOffice, Me.lstGroups.SelectedNode.Text)
-                    LOADot(Me.sCOUNT)
+                    Dim newThread1 As New Thread(AddressOf T_LOAD_T)
+                    newThread1.Start()
+                    Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                    newThread6.Start()
                 Case "MOUSE"
                     Me.cmbOTHFil.Text = sBranch
                     Me.cmbOTHDepart.Text = sDepartment
                     Me.cmbOTHOffice.Text = sOffice
                     SAVE_DRAG_DROP(Me.sCOUNT, sBranch, sDepartment, sOffice, Me.lstGroups.SelectedNode.Text)
                     '--------------VIP_Graff Добавление новой перефирии Конец------------------
-                    LOADot(Me.sCOUNT)
+                    Dim newThread1 As New Thread(AddressOf T_LOAD_T)
+                    newThread1.Start()
+                    Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                    newThread6.Start()
 
                 Case "CNT"
 
@@ -3446,7 +3472,10 @@ err_:
                     Me.cmbOTHOffice.Text = sOffice
 
                     SAVE_DRAG_DROP(Me.sCOUNT, sBranch, sDepartment, sOffice, Me.lstGroups.SelectedNode.Text)
-
+                    Dim newThread1 As New Thread(AddressOf T_LOAD_T)
+                    newThread1.Start()
+                    Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                    newThread6.Start()
                 Case Else
 
             End Select
@@ -3591,7 +3620,9 @@ err_:
 
         Call Re_PRN()
 
-        Call STAT_INF()
+        Dim newThread1 As New Thread(AddressOf STAT_INF_1)
+        newThread1.Start()
+
     End Sub
 
     Private Sub cmdUserAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdUserAdd.Click
@@ -5942,6 +5973,29 @@ err_:
 
                 sPrinter = sPrinter
         End Select
+    End Sub
+
+    Private Sub chkVisibleSTR_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkVisibleSTR.CheckedChanged
+        Me.Cursor = Cursors.WaitCursor
+
+        Dim objIniFile As New IniFile(PrPath & "base.ini")
+
+        Select Case chkVisibleSTR.Checked
+
+            Case False
+
+                objIniFile.WriteString("General", "VisibleALL", "0")
+
+            Case True
+
+                objIniFile.WriteString("General", "VisibleALL", "1")
+
+        End Select
+
+        Me.Invoke(New MethodInvoker(AddressOf R_T_LOAD))
+        'Call RefFilTree(Me.lstGroups)
+        Me.Cursor = Cursors.Default
+
     End Sub
 End Class
 

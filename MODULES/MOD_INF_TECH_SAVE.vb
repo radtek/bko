@@ -1430,6 +1430,9 @@ sAR:
         Dim strTmp As String
         Dim sTmp As DateTime = DateTime.Now
 
+        'sNAMEs - переданное имя 
+
+
 
         Dim iA, iB, iC As String
 

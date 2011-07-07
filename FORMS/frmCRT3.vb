@@ -46,10 +46,6 @@
 
         Select Case sICONS
 
-            Case "20*20"
-
-                lstGroups.ImageList = frmComputers.ilsCommands
-
             Case "32*32"
 
                 lstGroups.ImageList = frmComputers.ImageList1

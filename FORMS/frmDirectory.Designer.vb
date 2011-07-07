@@ -26,6 +26,7 @@ Partial Class frmDirectory
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmDirectory))
         Me.tvDirectory = New System.Windows.Forms.TreeView()
         Me.gbSpr = New System.Windows.Forms.GroupBox()
+        Me.chkCont = New System.Windows.Forms.CheckBox()
         Me.btnCancell = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
@@ -51,7 +52,6 @@ Partial Class frmDirectory
         Me.Label1 = New System.Windows.Forms.Label()
         Me.lvDirectory = New System.Windows.Forms.ListView()
         Me.ilsCommands = New System.Windows.Forms.ImageList(Me.components)
-        Me.chkCont = New System.Windows.Forms.CheckBox()
         Me.gbSpr.SuspendLayout()
         Me.gbOther.SuspendLayout()
         CType(Me.pbOtherICO, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -92,6 +92,17 @@ Partial Class frmDirectory
         Me.gbSpr.TabIndex = 2
         Me.gbSpr.TabStop = False
         Me.gbSpr.Text = "Параметры"
+        '
+        'chkCont
+        '
+        Me.chkCont.AutoSize = True
+        Me.chkCont.Location = New System.Drawing.Point(425, 200)
+        Me.chkCont.Name = "chkCont"
+        Me.chkCont.Size = New System.Drawing.Size(158, 17)
+        Me.chkCont.TabIndex = 17
+        Me.chkCont.Text = "Может быть контейнером"
+        Me.chkCont.UseVisualStyleBackColor = True
+        Me.chkCont.Visible = False
         '
         'btnCancell
         '
@@ -327,46 +338,56 @@ Partial Class frmDirectory
         '
         Me.ilsCommands.ImageStream = CType(resources.GetObject("ilsCommands.ImageStream"), System.Windows.Forms.ImageListStreamer)
         Me.ilsCommands.TransparentColor = System.Drawing.Color.Transparent
-        Me.ilsCommands.Images.SetKeyName(0, "advancedsettings.png")
-        Me.ilsCommands.Images.SetKeyName(1, "input_devices_settings.png")
-        Me.ilsCommands.Images.SetKeyName(2, "ksim.png")
-        Me.ilsCommands.Images.SetKeyName(3, "kontact_contacts.png")
-        Me.ilsCommands.Images.SetKeyName(4, "folder_home2.png")
-        Me.ilsCommands.Images.SetKeyName(5, "Utilities.png")
-        Me.ilsCommands.Images.SetKeyName(6, "exec_wine.png")
-        Me.ilsCommands.Images.SetKeyName(7, "cpu.png")
-        Me.ilsCommands.Images.SetKeyName(8, "Modem1.ico")
-        Me.ilsCommands.Images.SetKeyName(9, "printer.ico")
-        Me.ilsCommands.Images.SetKeyName(10, "scanner.png")
-        Me.ilsCommands.Images.SetKeyName(11, "sound_box.ico")
-        Me.ilsCommands.Images.SetKeyName(12, "1265828640_kxkb.ico")
-        Me.ilsCommands.Images.SetKeyName(13, "1265828648_kdefax.ico")
-        Me.ilsCommands.Images.SetKeyName(14, "camera.ico")
-        Me.ilsCommands.Images.SetKeyName(15, "Dell Display.ico")
-        Me.ilsCommands.Images.SetKeyName(16, "harddisc.ico")
-        Me.ilsCommands.Images.SetKeyName(17, "USB HD.ico")
-        Me.ilsCommands.Images.SetKeyName(18, "User.ico")
-        Me.ilsCommands.Images.SetKeyName(19, "DVDDrive.png")
-        Me.ilsCommands.Images.SetKeyName(20, "input-mouse.png")
-        Me.ilsCommands.Images.SetKeyName(21, "motherboard.ico")
-        Me.ilsCommands.Images.SetKeyName(22, "drive-removable-media-usb.ico")
-        Me.ilsCommands.Images.SetKeyName(23, "Ram.png")
-        Me.ilsCommands.Images.SetKeyName(24, "IBP.png")
-        Me.ilsCommands.Images.SetKeyName(25, "usb.png")
-        Me.ilsCommands.Images.SetKeyName(26, "Filter.png")
-        Me.ilsCommands.Images.SetKeyName(27, "switch.png")
-        Me.ilsCommands.Images.SetKeyName(28, "fax.png")
-        '
-        'chkCont
-        '
-        Me.chkCont.AutoSize = True
-        Me.chkCont.Location = New System.Drawing.Point(425, 200)
-        Me.chkCont.Name = "chkCont"
-        Me.chkCont.Size = New System.Drawing.Size(158, 17)
-        Me.chkCont.TabIndex = 17
-        Me.chkCont.Text = "Может быть контейнером"
-        Me.chkCont.UseVisualStyleBackColor = True
-        Me.chkCont.Visible = False
+        Me.ilsCommands.Images.SetKeyName(0, "Folder3.png")
+        Me.ilsCommands.Images.SetKeyName(1, "Controller.png")
+        Me.ilsCommands.Images.SetKeyName(2, "46.ico")
+        Me.ilsCommands.Images.SetKeyName(3, "Floppy2.png")
+        Me.ilsCommands.Images.SetKeyName(4, "ICON 43.png")
+        Me.ilsCommands.Images.SetKeyName(5, "IBP.png")
+        Me.ilsCommands.Images.SetKeyName(6, "1265828640_kxkb.ico")
+        Me.ilsCommands.Images.SetKeyName(7, "10.png")
+        Me.ilsCommands.Images.SetKeyName(8, "18.png")
+        Me.ilsCommands.Images.SetKeyName(9, "9.png")
+        Me.ilsCommands.Images.SetKeyName(10, "48.png")
+        Me.ilsCommands.Images.SetKeyName(11, "8.png")
+        Me.ilsCommands.Images.SetKeyName(12, "62.png")
+        Me.ilsCommands.Images.SetKeyName(13, "11.png")
+        Me.ilsCommands.Images.SetKeyName(14, "15.ico")
+        Me.ilsCommands.Images.SetKeyName(15, "13.png")
+        Me.ilsCommands.Images.SetKeyName(16, "14.ico")
+        Me.ilsCommands.Images.SetKeyName(17, "12.ico")
+        Me.ilsCommands.Images.SetKeyName(18, "40.png")
+        Me.ilsCommands.Images.SetKeyName(19, "7800.png")
+        Me.ilsCommands.Images.SetKeyName(20, "Floppy.png")
+        Me.ilsCommands.Images.SetKeyName(21, "HardDisk.ico")
+        Me.ilsCommands.Images.SetKeyName(22, "audio-card.ico")
+        Me.ilsCommands.Images.SetKeyName(23, "Removable.png")
+        Me.ilsCommands.Images.SetKeyName(24, "motherboard.ico")
+        Me.ilsCommands.Images.SetKeyName(25, "Ram05.png")
+        Me.ilsCommands.Images.SetKeyName(26, "drive-optical.png")
+        Me.ilsCommands.Images.SetKeyName(27, "AMD64 1.png")
+        Me.ilsCommands.Images.SetKeyName(28, "PCi2.png")
+        Me.ilsCommands.Images.SetKeyName(29, "PCI.png")
+        Me.ilsCommands.Images.SetKeyName(30, "PSU.png")
+        Me.ilsCommands.Images.SetKeyName(31, "Removable.png")
+        Me.ilsCommands.Images.SetKeyName(32, "ICON 81.png")
+        Me.ilsCommands.Images.SetKeyName(33, "Modem1.png")
+        Me.ilsCommands.Images.SetKeyName(34, "User.ico")
+        Me.ilsCommands.Images.SetKeyName(35, "User.ico")
+        Me.ilsCommands.Images.SetKeyName(36, "1.png")
+        Me.ilsCommands.Images.SetKeyName(37, "3.png")
+        Me.ilsCommands.Images.SetKeyName(38, "2.ico")
+        Me.ilsCommands.Images.SetKeyName(39, "37.png")
+        Me.ilsCommands.Images.SetKeyName(40, "Settings.ico")
+        Me.ilsCommands.Images.SetKeyName(41, "mail-tagged.png")
+        Me.ilsCommands.Images.SetKeyName(42, "user-identity.png")
+        Me.ilsCommands.Images.SetKeyName(43, "application-x-executable.png")
+        Me.ilsCommands.Images.SetKeyName(44, "applications-office.png")
+        Me.ilsCommands.Images.SetKeyName(45, "nepomuk.png")
+        Me.ilsCommands.Images.SetKeyName(46, "accessories-calculator.png")
+        Me.ilsCommands.Images.SetKeyName(47, "kjournal.png")
+        Me.ilsCommands.Images.SetKeyName(48, "applications-other.png")
+        Me.ilsCommands.Images.SetKeyName(49, "preferences-other.png")
         '
         'frmDirectory
         '

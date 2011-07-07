@@ -1707,6 +1707,7 @@ err_:
     End Sub
 
     Public Sub LOAD_DVIG_TEHN(ByVal sID As String, ByVal lstGroup As ListView)
+        On Error Resume Next
         Dim sNom As Integer
         lstGroup.Items.Clear()
 

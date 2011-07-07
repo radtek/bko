@@ -85,7 +85,6 @@ Module MOD_REF_TREE
         On Error GoTo ERR1
 
         lstgroups.HideSelection = False
-        'lstgroups.Visible = False
 
         'frmComputers.gbTree.ForeColor = Color.Red
 
@@ -127,9 +126,19 @@ Module MOD_REF_TREE
         lstgroups.Nodes.Clear()
 
 
+        Select Case sICONS
 
+            Case "32*32"
 
-        lstgroups.ImageList = frmComputers.ilsCommands
+                lstgroups.ImageList = frmComputers.ImageList1
+
+            Case Else
+
+                lstgroups.ImageList = frmComputers.ilsCommands
+
+        End Select
+
+        'lstgroups.ImageList = frmComputers.ilsCommands
 
         Dim rs As ADODB.Recordset
         Dim rs2 As ADODB.Recordset
@@ -286,12 +295,14 @@ Module MOD_REF_TREE
                     'My.Application.DoEvents()
 
                     'lstgroups.BeginInvoke(New MethodInvoker(AddressOf FILING_FILIAL))
+                    lstgroups.Invoke(New MethodInvoker(AddressOf FILING_FILIAL))
 
-                    If frmComputers.lstGroups.InvokeRequired Then
-                        frmComputers.lstGroups.Invoke(New MethodInvoker(AddressOf FILING_FILIAL))
-                    Else
-                        Call FILING_FILIAL()
-                    End If
+
+                    'If frmComputers.lstGroups.InvokeRequired Then
+                    '    frmComputers.lstGroups.Invoke(New MethodInvoker(AddressOf FILING_FILIAL))
+                    'Else
+                    '    Call FILING_FILIAL()
+                    'End If
 
                 End If
 
@@ -350,11 +361,15 @@ Module MOD_REF_TREE
 
                                 'lstgroups.BeginInvoke(New MethodInvoker(AddressOf FILING_FILIAL))
 
-                                If frmComputers.lstGroups.InvokeRequired Then
-                                    frmComputers.lstGroups.Invoke(New MethodInvoker(AddressOf FILING_FILIAL))
-                                Else
-                                    Call FILING_FILIAL()
-                                End If
+                                lstgroups.Invoke(New MethodInvoker(AddressOf FILING_FILIAL))
+
+
+                                'If lstgroups.InvokeRequired Then
+                                '    'frmComputers.lstGroups.Invoke(New MethodInvoker(AddressOf FILING_FILIAL))
+                                '    lstgroups.Invoke(New MethodInvoker(AddressOf FILING_FILIAL))
+                                'Else
+                                '    Call FILING_FILIAL()
+                                'End If
 
                             End If
 
@@ -410,11 +425,14 @@ Module MOD_REF_TREE
 
                                         If cFil <> 0 Then
                                             'My.Application.DoEvents()
-                                            If frmComputers.lstGroups.InvokeRequired Then
-                                                frmComputers.lstGroups.Invoke(New MethodInvoker(AddressOf FILING_FILIAL))
-                                            Else
-                                                Call FILING_FILIAL()
-                                            End If
+
+                                            lstgroups.Invoke(New MethodInvoker(AddressOf FILING_FILIAL))
+
+                                            'If frmComputers.lstGroups.InvokeRequired Then
+                                            '    frmComputers.lstGroups.Invoke(New MethodInvoker(AddressOf FILING_FILIAL))
+                                            'Else
+                                            '    Call FILING_FILIAL()
+                                            'End If
 
 
 
@@ -456,7 +474,6 @@ Module MOD_REF_TREE
 
         End If
 
-        lstgroups.Visible = True
 
 exitsub:
 
@@ -624,7 +641,7 @@ ERR1:
                 DepNode.Nodes.Add(TEHNodeCNT)
 
                 If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                    TEHNodeCNT.ForeColor = Color.Red
+                    TEHNodeCNT.ForeColor = Color.DimGray
                     TEHNodeCNT.NodeFont = New Font(lstgroups.Font, 8)
                 End If
 
@@ -759,7 +776,7 @@ ERR1:
                                     End Select
 
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                        TEHNodePC.ForeColor = Color.Red
+                                        TEHNodePC.ForeColor = Color.DimGray
                                         TEHNodePC.NodeFont = New Font(lstgroups.Font, 8)
                                     End If
 
@@ -840,7 +857,7 @@ ERR1:
                                     'TEHNode.ForeColor = Color.Blue
 
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                        TEHNodePC.ForeColor = Color.Red
+                                        TEHNodePC.ForeColor = Color.DimGray
                                         TEHNodePC.NodeFont = New Font(lstgroups.Font, 8)
                                     End If
 
@@ -958,7 +975,7 @@ ERR1:
                                                         TEHNodePC.Nodes.Add(TEHNodePCL)
 
                                                         If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                                            TEHNodePCL.ForeColor = Color.Red
+                                                            TEHNodePCL.ForeColor = Color.DimGray
                                                             TEHNodePCL.NodeFont = New Font(lstgroups.Font, 8)
                                                         End If
 
@@ -985,7 +1002,7 @@ ERR1:
                                                         TEHNodePC.Nodes.Add(TEHNodePCL)
 
                                                         If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                                            TEHNodePCL.ForeColor = Color.Red
+                                                            TEHNodePCL.ForeColor = Color.DimGray
                                                             TEHNodePCL.NodeFont = New Font(lstgroups.Font, 8)
                                                         End If
 
@@ -1013,7 +1030,7 @@ ERR1:
                                                         TEHNodePC.Nodes.Add(TEHNodePCL)
 
                                                         If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                                            TEHNodePCL.ForeColor = Color.Red
+                                                            TEHNodePCL.ForeColor = Color.DimGray
                                                             TEHNodePCL.NodeFont = New Font(lstgroups.Font, 8)
                                                         End If
 
@@ -1039,7 +1056,7 @@ ERR1:
                                                         TEHNodePC.Nodes.Add(TEHNodePCL)
 
                                                         If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                                            TEHNodePCL.ForeColor = Color.Red
+                                                            TEHNodePCL.ForeColor = Color.DimGray
                                                             TEHNodePCL.NodeFont = New Font(lstgroups.Font, 8)
                                                         End If
 
@@ -1066,7 +1083,7 @@ ERR1:
                                                         TEHNodePC.Nodes.Add(TEHNodePCL)
 
                                                         If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                                            TEHNodePCL.ForeColor = Color.Red
+                                                            TEHNodePCL.ForeColor = Color.DimGray
                                                             TEHNodePCL.NodeFont = New Font(lstgroups.Font, 8)
                                                         End If
 
@@ -1134,7 +1151,7 @@ ERR1:
                                                         TEHNodePC.Nodes.Add(TEHNodePCL)
 
                                                         If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                                            TEHNodePCL.ForeColor = Color.Red
+                                                            TEHNodePCL.ForeColor = Color.DimGray
                                                             TEHNodePCL.NodeFont = New Font(lstgroups.Font, 8)
                                                         End If
 
@@ -1161,7 +1178,7 @@ ERR1:
                                                         TEHNodePC.Nodes.Add(TEHNodePCL)
 
                                                         If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                                            TEHNodePCL.ForeColor = Color.Red
+                                                            TEHNodePCL.ForeColor = Color.DimGray
                                                             TEHNodePCL.NodeFont = New Font(lstgroups.Font, 8)
                                                         End If
 
@@ -1189,7 +1206,7 @@ ERR1:
                                                         TEHNodePC.Nodes.Add(TEHNodePCL)
 
                                                         If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                                            TEHNodePCL.ForeColor = Color.Red
+                                                            TEHNodePCL.ForeColor = Color.DimGray
                                                             TEHNodePCL.NodeFont = New Font(lstgroups.Font, 8)
                                                         End If
 
@@ -1215,7 +1232,7 @@ ERR1:
                                                         TEHNodePC.Nodes.Add(TEHNodePCL)
 
                                                         If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                                            TEHNodePCL.ForeColor = Color.Red
+                                                            TEHNodePCL.ForeColor = Color.DimGray
                                                             TEHNodePCL.NodeFont = New Font(lstgroups.Font, 8)
                                                         End If
 
@@ -1241,7 +1258,7 @@ ERR1:
                                                         TEHNodePC.Nodes.Add(TEHNodePCL)
 
                                                         If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                                            TEHNodePCL.ForeColor = Color.Red
+                                                            TEHNodePCL.ForeColor = Color.DimGray
                                                             TEHNodePCL.NodeFont = New Font(lstgroups.Font, 8)
                                                         End If
 
@@ -1262,12 +1279,12 @@ ERR1:
                                                         End If
 
                                                     Case "FS"
-                                                        Dim TEHNodePCL As New TreeNode(L_NAME, 65, 65)
+                                                        Dim TEHNodePCL As New TreeNode(L_NAME, 61, 61)
                                                         TEHNodePCL.Tag = "C|" & .Fields("id").Value
                                                         TEHNodePC.Nodes.Add(TEHNodePCL)
 
                                                         If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                                            TEHNodePCL.ForeColor = Color.Red
+                                                            TEHNodePCL.ForeColor = Color.DimGray
                                                             TEHNodePCL.NodeFont = New Font(lstgroups.Font, 8)
                                                         End If
 
@@ -1293,7 +1310,7 @@ ERR1:
                                                         TEHNodePC.Nodes.Add(TEHNodePCL)
 
                                                         If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                                            TEHNodePCL.ForeColor = Color.Red
+                                                            TEHNodePCL.ForeColor = Color.DimGray
                                                             TEHNodePCL.NodeFont = New Font(lstgroups.Font, 8)
                                                         End If
 
@@ -1319,7 +1336,7 @@ ERR1:
                                                         TEHNodePC.Nodes.Add(TEHNodePCL)
 
                                                         If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                                            TEHNodePCL.ForeColor = Color.Red
+                                                            TEHNodePCL.ForeColor = Color.DimGray
                                                             TEHNodePCL.NodeFont = New Font(lstgroups.Font, 8)
                                                         End If
 
@@ -1367,7 +1384,7 @@ ERR1:
                                     TEHNodeCNT.Nodes.Add(TEHNode)
 
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                        TEHNode.ForeColor = Color.Red
+                                        TEHNode.ForeColor = Color.DimGray
                                         TEHNode.NodeFont = New Font(lstgroups.Font, 8)
                                     End If
 
@@ -1394,7 +1411,7 @@ ERR1:
                                     TEHNodeCNT.Nodes.Add(TEHNode)
 
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                        TEHNode.ForeColor = Color.Red
+                                        TEHNode.ForeColor = Color.DimGray
                                         TEHNode.NodeFont = New Font(lstgroups.Font, 8)
                                     End If
 
@@ -1422,7 +1439,7 @@ ERR1:
                                     TEHNodeCNT.Nodes.Add(TEHNode)
 
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                        TEHNode.ForeColor = Color.Red
+                                        TEHNode.ForeColor = Color.DimGray
                                         TEHNode.NodeFont = New Font(lstgroups.Font, 8)
                                     End If
 
@@ -1448,7 +1465,7 @@ ERR1:
                                     TEHNodeCNT.Nodes.Add(TEHNode)
 
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                        TEHNode.ForeColor = Color.Red
+                                        TEHNode.ForeColor = Color.DimGray
                                         TEHNode.NodeFont = New Font(lstgroups.Font, 8)
                                     End If
 
@@ -1475,7 +1492,7 @@ ERR1:
                                     TEHNodeCNT.Nodes.Add(TEHNode)
 
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                        TEHNode.ForeColor = Color.Red
+                                        TEHNode.ForeColor = Color.DimGray
                                         TEHNode.NodeFont = New Font(lstgroups.Font, 8)
                                     End If
 
@@ -1543,7 +1560,7 @@ ERR1:
                                     TEHNodeCNT.Nodes.Add(TEHNode)
 
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                        TEHNode.ForeColor = Color.Red
+                                        TEHNode.ForeColor = Color.DimGray
                                         TEHNode.NodeFont = New Font(lstgroups.Font, 8)
                                     End If
 
@@ -1570,7 +1587,7 @@ ERR1:
                                     TEHNodeCNT.Nodes.Add(TEHNode)
 
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                        TEHNode.ForeColor = Color.Red
+                                        TEHNode.ForeColor = Color.DimGray
                                         TEHNode.NodeFont = New Font(lstgroups.Font, 8)
                                     End If
 
@@ -1599,7 +1616,7 @@ ERR1:
                                     TEHNodeCNT.Nodes.Add(TEHNode)
 
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                        TEHNode.ForeColor = Color.Red
+                                        TEHNode.ForeColor = Color.DimGray
                                         TEHNode.NodeFont = New Font(lstgroups.Font, 8)
                                     End If
 
@@ -1618,7 +1635,7 @@ ERR1:
                                     TEHNodeCNT.Nodes.Add(TEHNode)
 
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                        TEHNode.ForeColor = Color.Red
+                                        TEHNode.ForeColor = Color.DimGray
                                         TEHNode.NodeFont = New Font(lstgroups.Font, 8)
                                     End If
 
@@ -1643,7 +1660,7 @@ ERR1:
                                     TEHNode.Tag = "C|" & .Fields("id").Value
                                     TEHNodeCNT.Nodes.Add(TEHNode)
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                        TEHNode.ForeColor = Color.Red
+                                        TEHNode.ForeColor = Color.DimGray
                                         TEHNode.NodeFont = New Font(lstgroups.Font, 8)
                                     End If
 
@@ -1664,11 +1681,11 @@ ERR1:
                                     End If
 
                                 Case "FS"
-                                    Dim TEHNode As New TreeNode(L_NAME, 65, 65)
+                                    Dim TEHNode As New TreeNode(L_NAME, 61, 61)
                                     TEHNode.Tag = "C|" & .Fields("id").Value
                                     TEHNodeCNT.Nodes.Add(TEHNode)
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                        TEHNode.ForeColor = Color.Red
+                                        TEHNode.ForeColor = Color.DimGray
                                         TEHNode.NodeFont = New Font(lstgroups.Font, 8)
                                     End If
 
@@ -1693,7 +1710,7 @@ ERR1:
                                     TEHNode.Tag = "C|" & .Fields("id").Value
                                     TEHNodeCNT.Nodes.Add(TEHNode)
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                        TEHNode.ForeColor = Color.Red
+                                        TEHNode.ForeColor = Color.DimGray
                                         TEHNode.NodeFont = New Font(lstgroups.Font, 8)
                                     End If
 
@@ -1718,7 +1735,7 @@ ERR1:
                                     TEHNode.Tag = "C|" & .Fields("id").Value
                                     TEHNodeCNT.Nodes.Add(TEHNode)
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                        TEHNode.ForeColor = Color.Red
+                                        TEHNode.ForeColor = Color.DimGray
                                         TEHNode.NodeFont = New Font(lstgroups.Font, 8)
                                     End If
 
@@ -1771,7 +1788,7 @@ ERR1:
 
                 'TEHNode.ForeColor = Color.Blue
                 If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                    TEHNodePC.ForeColor = Color.Red
+                    TEHNodePC.ForeColor = Color.DimGray
                     TEHNodePC.NodeFont = New Font(lstgroups.Font, 8)
                 End If
 
@@ -1888,7 +1905,7 @@ ERR1:
                                     TEHNodePC.Nodes.Add(TEHNodePCL)
 
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                        TEHNodePCL.ForeColor = Color.Red
+                                        TEHNodePCL.ForeColor = Color.DimGray
                                         TEHNodePCL.NodeFont = New Font(lstgroups.Font, 8)
                                     End If
 
@@ -1915,7 +1932,7 @@ ERR1:
                                     TEHNodePC.Nodes.Add(TEHNode)
 
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                        TEHNode.ForeColor = Color.Red
+                                        TEHNode.ForeColor = Color.DimGray
                                         TEHNode.NodeFont = New Font(lstgroups.Font, 8)
                                     End If
 
@@ -1943,7 +1960,7 @@ ERR1:
                                     TEHNodePC.Nodes.Add(TEHNode)
 
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                        TEHNode.ForeColor = Color.Red
+                                        TEHNode.ForeColor = Color.DimGray
                                         TEHNode.NodeFont = New Font(lstgroups.Font, 8)
                                     End If
 
@@ -1969,7 +1986,7 @@ ERR1:
                                     TEHNodePC.Nodes.Add(TEHNode)
 
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                        TEHNode.ForeColor = Color.Red
+                                        TEHNode.ForeColor = Color.DimGray
                                         TEHNode.NodeFont = New Font(lstgroups.Font, 8)
                                     End If
 
@@ -1996,7 +2013,7 @@ ERR1:
                                     TEHNodePC.Nodes.Add(TEHNode)
 
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                        TEHNode.ForeColor = Color.Red
+                                        TEHNode.ForeColor = Color.DimGray
                                         TEHNode.NodeFont = New Font(lstgroups.Font, 8)
                                     End If
 
@@ -2064,7 +2081,7 @@ ERR1:
                                     TEHNodePC.Nodes.Add(TEHNode)
 
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                        TEHNode.ForeColor = Color.Red
+                                        TEHNode.ForeColor = Color.DimGray
                                         TEHNode.NodeFont = New Font(lstgroups.Font, 8)
                                     End If
 
@@ -2091,7 +2108,7 @@ ERR1:
                                     TEHNodePC.Nodes.Add(TEHNode)
 
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                        TEHNode.ForeColor = Color.Red
+                                        TEHNode.ForeColor = Color.DimGray
                                         TEHNode.NodeFont = New Font(lstgroups.Font, 8)
                                     End If
 
@@ -2119,7 +2136,7 @@ ERR1:
                                     TEHNode.Tag = "C|" & .Fields("id").Value
                                     TEHNodePC.Nodes.Add(TEHNode)
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                        TEHNode.ForeColor = Color.Red
+                                        TEHNode.ForeColor = Color.DimGray
                                         TEHNode.NodeFont = New Font(lstgroups.Font, 8)
                                     End If
 
@@ -2144,7 +2161,7 @@ ERR1:
                                     TEHNode.Tag = "C|" & .Fields("id").Value
                                     TEHNodePC.Nodes.Add(TEHNode)
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                        TEHNode.ForeColor = Color.Red
+                                        TEHNode.ForeColor = Color.DimGray
                                         TEHNode.NodeFont = New Font(lstgroups.Font, 8)
                                     End If
 
@@ -2169,7 +2186,7 @@ ERR1:
                                     TEHNode.Tag = "C|" & .Fields("id").Value
                                     TEHNodePC.Nodes.Add(TEHNode)
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                        TEHNode.ForeColor = Color.Red
+                                        TEHNode.ForeColor = Color.DimGray
                                         TEHNode.NodeFont = New Font(lstgroups.Font, 8)
                                     End If
 
@@ -2190,11 +2207,11 @@ ERR1:
                                     End If
 
                                 Case "FS"
-                                    Dim TEHNode As New TreeNode(L_NAME, 65, 65)
+                                    Dim TEHNode As New TreeNode(L_NAME, 61, 61)
                                     TEHNode.Tag = "C|" & .Fields("id").Value
                                     TEHNodePC.Nodes.Add(TEHNode)
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                        TEHNode.ForeColor = Color.Red
+                                        TEHNode.ForeColor = Color.DimGray
                                         TEHNode.NodeFont = New Font(lstgroups.Font, 8)
                                     End If
 
@@ -2219,7 +2236,7 @@ ERR1:
                                     TEHNode.Tag = "C|" & .Fields("id").Value
                                     TEHNodePC.Nodes.Add(TEHNode)
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                        TEHNode.ForeColor = Color.Red
+                                        TEHNode.ForeColor = Color.DimGray
                                         TEHNode.NodeFont = New Font(lstgroups.Font, 8)
                                     End If
 
@@ -2244,7 +2261,7 @@ ERR1:
                                     TEHNode.Tag = "C|" & .Fields("id").Value
                                     TEHNodePC.Nodes.Add(TEHNode)
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                        TEHNode.ForeColor = Color.Red
+                                        TEHNode.ForeColor = Color.DimGray
                                         TEHNode.NodeFont = New Font(lstgroups.Font, 8)
                                     End If
 
@@ -2286,7 +2303,7 @@ ERR1:
                 DepNode.Nodes.Add(TEHNode)
 
                 If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                    TEHNode.ForeColor = Color.Red
+                    TEHNode.ForeColor = Color.DimGray
                     TEHNode.NodeFont = New Font(lstgroups.Font, 8)
                 End If
 
@@ -2313,7 +2330,7 @@ ERR1:
                 DepNode.Nodes.Add(TEHNode)
 
                 If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                    TEHNode.ForeColor = Color.Red
+                    TEHNode.ForeColor = Color.DimGray
                     TEHNode.NodeFont = New Font(lstgroups.Font, 8)
                 End If
 
@@ -2339,7 +2356,7 @@ ERR1:
                 DepNode.Nodes.Add(TEHNode)
 
                 If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                    TEHNode.ForeColor = Color.Red
+                    TEHNode.ForeColor = Color.DimGray
                     TEHNode.NodeFont = New Font(lstgroups.Font, 8)
                 End If
 
@@ -2384,7 +2401,7 @@ ERR1:
 
 
                 If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                    TEHNode.ForeColor = Color.Red
+                    TEHNode.ForeColor = Color.DimGray
                     TEHNode.NodeFont = New Font(lstgroups.Font, 8)
                 End If
 
@@ -2410,7 +2427,7 @@ ERR1:
                 DepNode.Nodes.Add(TEHNode)
 
                 If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                    TEHNode.ForeColor = Color.Red
+                    TEHNode.ForeColor = Color.DimGray
                     TEHNode.NodeFont = New Font(lstgroups.Font, 8)
                 End If
 
@@ -2436,7 +2453,7 @@ ERR1:
                 DepNode.Nodes.Add(TEHNode)
 
                 If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                    TEHNode.ForeColor = Color.Red
+                    TEHNode.ForeColor = Color.DimGray
                     TEHNode.NodeFont = New Font(lstgroups.Font, 8)
                 End If
 
@@ -2462,7 +2479,7 @@ ERR1:
                 DepNode.Nodes.Add(TEHNode)
 
                 If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                    TEHNode.ForeColor = Color.Red
+                    TEHNode.ForeColor = Color.DimGray
                     TEHNode.NodeFont = New Font(lstgroups.Font, 8)
                 End If
 
@@ -2489,7 +2506,7 @@ ERR1:
                 DepNode.Nodes.Add(TEHNode)
 
                 If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                    TEHNode.ForeColor = Color.Red
+                    TEHNode.ForeColor = Color.DimGray
                     TEHNode.NodeFont = New Font(lstgroups.Font, 8)
                 End If
 
@@ -2515,7 +2532,7 @@ ERR1:
                 DepNode.Nodes.Add(TEHNode)
 
                 If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                    TEHNode.ForeColor = Color.Red
+                    TEHNode.ForeColor = Color.DimGray
                     TEHNode.NodeFont = New Font(lstgroups.Font, 8)
                 End If
 
@@ -2585,7 +2602,7 @@ ERR1:
                 DepNode.Nodes.Add(TEHNode)
 
                 If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                    TEHNode.ForeColor = Color.Red
+                    TEHNode.ForeColor = Color.DimGray
                     TEHNode.NodeFont = New Font(lstgroups.Font, 8)
                 End If
 
@@ -2614,7 +2631,7 @@ ERR1:
                 DepNode.Nodes.Add(TEHNode)
 
                 If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                    TEHNode.ForeColor = Color.Red
+                    TEHNode.ForeColor = Color.DimGray
                     TEHNode.NodeFont = New Font(lstgroups.Font, 8)
                 End If
 
@@ -2640,7 +2657,7 @@ ERR1:
                 TEHNode.Tag = "C|" & iD
                 DepNode.Nodes.Add(TEHNode)
                 If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                    TEHNode.ForeColor = Color.Red
+                    TEHNode.ForeColor = Color.DimGray
                     TEHNode.NodeFont = New Font(lstgroups.Font, 8)
                 End If
 
@@ -2665,7 +2682,7 @@ ERR1:
                 TEHNode.Tag = "C|" & iD
                 DepNode.Nodes.Add(TEHNode)
                 If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                    TEHNode.ForeColor = Color.Red
+                    TEHNode.ForeColor = Color.DimGray
                     TEHNode.NodeFont = New Font(lstgroups.Font, 8)
                 End If
 
@@ -2690,7 +2707,7 @@ ERR1:
                 TEHNode.Tag = "C|" & iD
                 DepNode.Nodes.Add(TEHNode)
                 If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                    TEHNode.ForeColor = Color.Red
+                    TEHNode.ForeColor = Color.DimGray
                     TEHNode.NodeFont = New Font(lstgroups.Font, 8)
                 End If
 
@@ -2711,11 +2728,11 @@ ERR1:
                 End If
 
             Case "FS"
-                Dim TEHNode As New TreeNode(L_NAME, 65, 65)
+                Dim TEHNode As New TreeNode(L_NAME, 61, 61)
                 TEHNode.Tag = "C|" & iD
                 DepNode.Nodes.Add(TEHNode)
                 If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                    TEHNode.ForeColor = Color.Red
+                    TEHNode.ForeColor = Color.DimGray
                     TEHNode.NodeFont = New Font(lstgroups.Font, 8)
                 End If
 
@@ -2743,7 +2760,7 @@ ERR1:
 
 
                 If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                    TEHNode.ForeColor = Color.Red
+                    TEHNode.ForeColor = Color.DimGray
                     TEHNode.NodeFont = New Font(lstgroups.Font, 8)
                 End If
 
@@ -2773,7 +2790,7 @@ ERR1:
                 TEHNode.Tag = "C|" & iD
                 DepNode.Nodes.Add(TEHNode)
                 If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                    TEHNode.ForeColor = Color.Red
+                    TEHNode.ForeColor = Color.DimGray
                     TEHNode.NodeFont = New Font(lstgroups.Font, 8)
                 End If
 

@@ -9,7 +9,7 @@ Module MOD_SYS_PRELOAD
     Public iCOUNTFIELLDS As String
     Public ProGramName As String
     Public FontN As String
-    Public fontS As String
+    Public fontS As Double
     Public FontC As String
     Public FontB As Boolean
     Public FontSt As System.Drawing.FontStyle
@@ -66,9 +66,6 @@ Module MOD_SYS_PRELOAD
         IdentifierMAC = objIniFile.GetString("IdentifierMAC", "Check", "0")
 
         BasePath = BasePath & "\"
-        'If Len(langFile) = 0 Or langFile = "" Or langFile = Nothing Then langFile = "ru.ini"
-        'LangPath = Directory.GetParent(Application.ExecutablePath).ToString & "\lang\" & langFile
-
 
         If BasePath = Nothing Or Len(BasePath) < 3 Then
 
@@ -78,34 +75,30 @@ Module MOD_SYS_PRELOAD
 
         Base_Name = objIniFile.GetString("general", "file", "basekomp.mdb")
 
-
-
-
         sOfficePACK = objIniFile.GetString("general", "Office", "OpenOffice.org")
-
-        'sLANGPATH = PrPath & "lang\ru.ini"
 
         sLANGPATH = PrPath & "lang\" & objIniFile.GetString("general", "LANG", "ru.ini")
 
-        sICONS = objIniFile.GetString("General", "ICONs", "20*20")
+        sICONS = objIniFile.GetString("General", "ICONs", "24*24")
 
         Select Case sICONS
 
-            Case "20*20"
-
-                sICONS = sICONS
             Case "32*32"
 
                 sICONS = sICONS
             Case Else
 
-                sICONS = "20*20"
+                sICONS = "24*24"
 
         End Select
 
 
         Call UNAME_GET()
         Call iface_preload()
+
+
+       
+
 
     End Sub
 
@@ -114,7 +107,7 @@ Module MOD_SYS_PRELOAD
         Dim objIniFile As New IniFile(PrPath & "base.ini")
 
         FontN = objIniFile.GetString("general", "Font", "Microsoft Sans Serif")
-        fontS = objIniFile.GetString("general", "FontSize", "8,25")
+        fontS = objIniFile.GetString("general", "FontSize", "9")
         FontC = objIniFile.GetString("general", "FontColor", "Black")
         FontB = objIniFile.GetString("general", "FontBold", "False")
         FontSt = objIniFile.GetString("general", "FontStyle", "0")
@@ -187,6 +180,7 @@ Module MOD_SYS_PRELOAD
     End Sub
 
     Public Sub ClearForm(ByVal ControlContainer As Object)
+       
 
         For Each Ctl As Object In ControlContainer.Controls
             Try
@@ -196,7 +190,7 @@ Module MOD_SYS_PRELOAD
                     If TypeOf Ctl Is TextBox Then Ctl.text = ""
                     If TypeOf Ctl Is ComboBox Then Ctl.text = ""
                     If TypeOf Ctl Is ListView Then Ctl.items.clear()
-                    If TypeOf Ctl Is CheckBox Then Ctl.checked = False
+                    'If TypeOf Ctl Is CheckBox Then Ctl.checked = False
                     If TypeOf Ctl Is RadioButton Then Ctl.checked = False
 
                 End If
@@ -206,9 +200,17 @@ Module MOD_SYS_PRELOAD
             End Try
         Next
 
+        frmComputers.chkPCspis.Checked = False
+        frmComputers.chkPCNNb.Checked = False
+        frmComputers.chkPRNspis.Checked = False
+        frmComputers.chkPRNNNb.Checked = False
+        frmComputers.chkNETspis.Checked = False
+        frmComputers.chkNETNNb.Checked = False
+        frmComputers.chkOTHNNb.Checked = False
+        frmComputers.chkOTHspis.Checked = False
+
+
     End Sub
-
-
 
     Public Sub SendFonts(ByVal ControlContainer As Object)
 

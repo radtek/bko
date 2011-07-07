@@ -61,27 +61,91 @@ Public Class frmMain
 
     End Sub
 
+    Private Sub SendFonts_1()
+        SendFonts(Me)
+    End Sub
+
+    Public Sub LANG_frmMain_1()
+
+        Me.Invoke(New MethodInvoker(AddressOf LANG_frmMain))
+
+    End Sub
+
+    Public Sub SHED_CHECK_1()
+
+        Me.Invoke(New MethodInvoker(AddressOf SHED_CHECK))
+
+    End Sub
+
+    Public Sub REM_CHECK_1()
+
+        Me.Invoke(New MethodInvoker(AddressOf REM_CHECK))
+
+    End Sub
+
     Private Sub frmMain_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
         ''Меняем шрифт
         SendFonts(Me)
 
-        Call LANG_frmMain()
-
-        Dim objIniFile As New IniFile(PrPath & "base.ini")
-
         Dim sText As String
 
+        'Определяем путь до файла настроек
+        Dim objIniFile As New IniFile(PrPath & "base.ini")
+
+        'Какой модуль запускать
         sText = objIniFile.GetString("general", "MOD", 0)
 
         If Len(sText) > 2 Then sText = 0
 
+        Select Case sText
 
-        Dim uname As String
+            Case 0
 
-        uname = objIniFile.GetString("General", "FullScreen", "0")
+                'frmComputers.Visible = False
+                frmComputers.MdiParent = Me
+                ' My.Application.DoEvents()
+                frmComputers.Show()
+                ' My.Application.DoEvents()
 
-        Select Case uname
+            Case 1
+                frmserviceDesc.MdiParent = Me
+                ' My.Application.DoEvents()
+                frmserviceDesc.Show()
+                ' My.Application.DoEvents()
+            Case 2
+
+                frmSoftware.MdiParent = Me
+                '  My.Application.DoEvents()
+                frmSoftware.Show()
+                '  My.Application.DoEvents()
+            Case 3
+
+                frmCRT3.MdiParent = Me
+                '  My.Application.DoEvents()
+                frmCRT3.Show()
+                '   My.Application.DoEvents()
+        End Select
+
+
+        Dim newThread3 As New Thread(AddressOf LANG_frmMain_1)
+        newThread3.Start()
+
+        'Запускаем таймер
+
+        Dim t As New System.Windows.Forms.Timer
+        t.Interval = 1000
+        t.Enabled = True
+        AddHandler t.Tick, AddressOf TimerEventHandler
+
+
+
+        'На полный экран или нет
+
+
+        sText = objIniFile.GetString("General", "FullScreen", "0")
+
+        Select Case sText
 
             Case "1"
 
@@ -93,42 +157,9 @@ Public Class frmMain
 
         End Select
 
+        
 
-
-
-
-
-
-
-        Select Case sText
-
-            Case 0
-
-                'frmComputers.Visible = False
-                frmComputers.MdiParent = Me
-                My.Application.DoEvents()
-                frmComputers.Show()
-                My.Application.DoEvents()
-
-            Case 1
-                frmserviceDesc.MdiParent = Me
-                My.Application.DoEvents()
-                frmserviceDesc.Show()
-                My.Application.DoEvents()
-            Case 2
-
-                frmSoftware.MdiParent = Me
-                My.Application.DoEvents()
-                frmSoftware.Show()
-                My.Application.DoEvents()
-            Case 3
-
-                frmCRT3.MdiParent = Me
-                My.Application.DoEvents()
-                frmCRT3.Show()
-                My.Application.DoEvents()
-        End Select
-
+        'Показывать меню системные или нет
         sText = objIniFile.GetString("general", "SYS", 0)
 
         Select Case sText
@@ -147,6 +178,7 @@ Public Class frmMain
 
 
 
+        'Наименование программы 
         Dim rsG As ADODB.Recordset
         rsG = New ADODB.Recordset
 
@@ -158,16 +190,23 @@ Public Class frmMain
         rsG.Close()
         rsG = Nothing
 
-        If Len(ProGramName) = 0 Or ProGramName = Nothing Then ProGramName = "БКО"
+        If Len(ProGramName) = 0 Or ProGramName = Nothing Then ProGramName = "BKO.NET"
 
         Me.Text = ProGramName & " " & My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor & "." & My.Application.Info.Version.Build & "." & My.Application.Info.Version.Revision
 
 
+        'Напоминания есть или нет
+        Dim newThread4 As New Thread(AddressOf SHED_CHECK_1)
+        newThread4.Start()
 
-        Call SHED_CHECK()
-        Call REM_CHECK()
+        'Ремонты есть или нет
+        Dim newThread5 As New Thread(AddressOf REM_CHECK_1)
+        newThread5.Start()
+
 
         '###########################################################
+
+        'Добавляем в меню добавления техники другое оборудование
 
         Dim sCountOTH As Integer
         rsG = New ADODB.Recordset
@@ -195,7 +234,6 @@ Public Class frmMain
             With rs
                 .MoveFirst()
                 Do While Not .EOF
-
                     sNameZ(iz) = .Fields("name").Value
                     iz = iz + 1
                     .MoveNext()
@@ -207,9 +245,7 @@ Public Class frmMain
 
             For i As Integer = 0 To sCountOTH
                 Dim B As New ToolStripButton
-                'B.Width = 70
-                'B.Location = New Drawing.Point(B.Width * i, 10)
-                'B.Tag = i + 1
+
                 B.ForeColor = Color.Blue
                 B.Text = sNameZ(i)
                 Btn(i) = B
@@ -220,11 +256,30 @@ Public Class frmMain
 
         End If
 
-        Dim t As New System.Windows.Forms.Timer
-        t.Interval = 1000
-        t.Enabled = True
-        AddHandler t.Tick, AddressOf TimerEventHandler
 
+
+        Try
+            Dim dirs As String() = Directory.GetFiles(PrPath & "pic\", "*.png")
+
+            Dim dir As String
+
+            For Each dir In dirs
+
+                Select Case sICONS
+
+                    Case "32*32"
+
+                        frmComputers.ImageList1.Images.Add(Image.FromFile(dir))
+                    Case Else
+
+                        frmComputers.ilsCommands.Images.Add(Image.FromFile(dir))
+
+                End Select
+
+            Next
+        Catch e1 As Exception
+
+        End Try
 
 
     End Sub

@@ -76,7 +76,18 @@ Public Class frmNetMagazin
 
 
 
-        lstgroups.ImageList = frmComputers.ilsCommands
+        Select Case sICONS
+
+
+            Case "32*32"
+
+                lstGroups.ImageList = frmComputers.ImageList1
+
+            Case Else
+
+                lstGroups.ImageList = frmComputers.ilsCommands
+
+        End Select
 
         Dim rs As ADODB.Recordset
         Dim rs2 As ADODB.Recordset
