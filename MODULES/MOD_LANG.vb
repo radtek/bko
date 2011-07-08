@@ -546,7 +546,11 @@ Module modLang
         frmComputers.UpdateToolStripMenuItem.Text = objIniFile.GetString("frmComputers", "UpdateToolStripMenuItem", "")
         frmComputers.DeleteToolStripMenuItem.Text = objIniFile.GetString("frmComputers", "DeleteToolStripMenuItem", "")
         frmComputers.ОтделитьПринтерыИМониторыToolStripMenuItem.Text = objIniFile.GetString("frmComputers", "ОтделитьПринтерыИМониторыToolStripMenuItem", "")
+        frmComputers.ВернутьПерефериюToolStripMenuItem.Text = objIniFile.GetString("frmComputers", "ВернутьПерефериюToolStripMenuItem", "")
+
         frmComputers.MassRazdelPerf.Text = objIniFile.GetString("frmComputers", "ОтделитьПринтерыИМониторыToolStripMenuItem", "")
+        frmComputers.MassObedPerf.Text = objIniFile.GetString("frmComputers", "ВернутьПерефериюToolStripMenuItem", "")
+        'MassObedPerf
         'MassRazdelPerf
 
 

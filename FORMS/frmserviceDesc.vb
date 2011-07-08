@@ -1567,6 +1567,9 @@ err_:
             r1COUNT = (lvRem.SelectedItems(z).Text)
         Next
 
+
+        If r1COUNT = 0 Then Exit Sub
+
         Call REMONT_SEND_MASTER(r1COUNT)
 
 

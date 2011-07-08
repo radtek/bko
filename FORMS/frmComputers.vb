@@ -130,31 +130,34 @@ Public Class frmComputers
             Case "0"
 
                 ОтделитьПринтерыИМониторыToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG1", "")
+                ВернутьПерефериюToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG1.1", "")
 
             Case "1"
 
                 ОтделитьПринтерыИМониторыToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG2", "")
-
+                ВернутьПерефериюToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG2.1", "")
             Case "2"
 
                 ОтделитьПринтерыИМониторыToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG3", "")
-
+                ВернутьПерефериюToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG3.1", "")
             Case "3"
 
                 ОтделитьПринтерыИМониторыToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG4", "")
-
+                ВернутьПерефериюToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG4.1", "")
 
             Case "4"
 
                 ОтделитьПринтерыИМониторыToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG5", "")
-
+                ВернутьПерефериюToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG5.1", "")
             Case "5"
 
                 ОтделитьПринтерыИМониторыToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG6", "")
-
+                ВернутьПерефериюToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG6.1", "")
         End Select
 
         MassRazdelPerf.Text = ОтделитьПринтерыИМониторыToolStripMenuItem.Text
+        MassObedPerf.Text = ВернутьПерефериюToolStripMenuItem.Text
+
 
         cmbTIPCartridg.Items.Add(langfile.GetString("frmComputers", "MSG7", ""))
         cmbTIPCartridg.Items.Add(langfile.GetString("frmComputers", "MSG8", ""))
@@ -395,7 +398,7 @@ Error_:
                 rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
                 ОтделитьПринтерыИМониторыToolStripMenuItem.Visible = False
-
+                ВернутьПерефериюToolStripMenuItem.Visible = False
                 With rs
 
                     TipTehn = .Fields("tiptehn").Value
@@ -404,6 +407,25 @@ Error_:
 
                         Case "PC"
                             ОтделитьПринтерыИМониторыToolStripMenuItem.Visible = True
+
+                            Dim rs1 As ADODB.Recordset
+                            Dim sSQL1 As String 'Переменная, где будет размещён SQL запрос
+                            sSQL1 = "SELECT count(*) as t_n FROM kompy WHERE PCL =" & d(1)
+                            rs1 = New ADODB.Recordset
+                            rs1.Open(sSQL1, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                            Dim sCNTr As Integer
+
+                            With rs1
+
+                                sCNTr = .Fields("t_n").Value
+
+                            End With
+                            rs1.Close()
+                            rs1 = Nothing
+
+                            If sCNTr > 0 Then ВернутьПерефериюToolStripMenuItem.Visible = True
+
+
                             CartrAddToolStripMenuItem.Visible = False
                             sSTAB2.Visible = False
                             sSTAB1.Visible = True
@@ -5375,12 +5397,12 @@ lvMovementOTH.Columns(e.Column)
 
                 Re_PRN(.Fields("id").Value)
 
-
-
-
                 If zCtn = intj Then
                     MRZD = False
-                    Call R_T_LOAD()
+
+                    Dim newThread1 As New Thread(AddressOf STAT_INF_1)
+                    newThread1.Start()
+
                 End If
 
                 intj = intj + 1
@@ -5391,7 +5413,7 @@ lvMovementOTH.Columns(e.Column)
         rs.Close()
         rs = Nothing
 
-
+       
 
     End Sub
 
@@ -5758,10 +5780,6 @@ err_:
 
     End Sub
 
-    Private Sub lvNetPort_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvNetPort.SelectedIndexChanged
-
-    End Sub
-
     Private Sub bCPUPlus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bCPUPlus.Click
 
         Select Case sCPU
@@ -5995,6 +6013,110 @@ err_:
         Me.Invoke(New MethodInvoker(AddressOf R_T_LOAD))
         'Call RefFilTree(Me.lstGroups)
         Me.Cursor = Cursors.Default
+
+    End Sub
+
+    Private Sub ВернутьПерефериюToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ВернутьПерефериюToolStripMenuItem.Click
+
+        Call under_prn()
+
+
+    End Sub
+
+    Private Sub ПрисоеденитьПерефериюToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MassObedPerf.Click
+        Dim sSQL As String
+        Dim zCtn As String
+
+        Call selectTECMesto()
+        Dim d() As String
+        d = Split(lstGroups.SelectedNode.Tag, "|")
+
+
+
+
+        Select Case d(0)
+
+            Case "G"
+
+                sSQL = "SELECT count(*) as t_n FROM kompy where filial ='" & sBranch & "' and TipTehn='PC'"
+
+
+            Case "O"
+
+                sSQL = "SELECT count(*) as t_n FROM kompy where filial ='" & sBranch & "' and mesto='" & sDepartment & "' and TipTehn='PC'"
+
+
+            Case "K"
+
+                sSQL = "SELECT count(*) as t_n FROM kompy where filial ='" & sBranch & "' and mesto='" & sDepartment & "' AND kabn ='" & sOffice & "' and TipTehn='PC'"
+
+
+        End Select
+
+        Dim rs As ADODB.Recordset
+        rs = New ADODB.Recordset
+        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+        With rs
+            zCtn = .Fields("t_n").Value
+        End With
+        rs.Close()
+        rs = Nothing
+
+        If zCtn = 0 Then Exit Sub
+
+        Select Case d(0)
+
+            Case "G"
+
+                sSQL = "SELECT * FROM kompy where filial ='" & sBranch & "' and tiptehn='PC'"
+
+
+            Case "O"
+
+                sSQL = "SELECT * FROM kompy where filial ='" & sBranch & "' and mesto='" & sDepartment & "' and tiptehn='PC'"
+
+
+            Case "K"
+
+                sSQL = "SELECT id FROM kompy where filial ='" & sBranch & "' and mesto='" & sDepartment & "' AND kabn ='" & sOffice & "' and tiptehn='PC'"
+
+
+        End Select
+
+
+        rs = New ADODB.Recordset
+
+        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+        Dim intj As Integer = 1
+        MRZD = True
+        With rs
+            .MoveFirst()
+            Do While Not .EOF
+
+                under_prn(.Fields("id").Value)
+
+
+                If zCtn = intj Then
+                    MRZD = False
+                    'Call R_T_LOAD()
+                End If
+
+                intj = intj + 1
+
+                .MoveNext()
+            Loop
+        End With
+        rs.Close()
+        rs = Nothing
+
+
+        Dim newThread5 As New Thread(AddressOf R_T_LOAD)
+        newThread5.Start()
+
+        Dim newThread1 As New Thread(AddressOf STAT_INF_1)
+        newThread1.Start()
 
     End Sub
 End Class

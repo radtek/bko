@@ -9,18 +9,21 @@ Public Class frmSetup
     Public Function changeFont(ByVal FontWindow As FontDialog, ByVal str As Control)
         ' Dim wndFont As FontDialog
         Dim DialogResult As DialogResult
-        Dim PrevisiusFont As Font = str.Font
 
-        FontWindow.Font = New Font("Microsoft Sans Serif", 10, 0, 0, False)
+
+        FontWindow.Font = New Font(FontN, fontS, FontSt, FontD, FontB)
 
         DialogResult = FontWindow.ShowDialog
 
         'New System.Windows.Forms.FontDialog
+
         If DialogResult = System.Windows.Forms.DialogResult.OK Then
+
             Return FontWindow.Font
 
+
         Else
-            Return PrevisiusFont
+
 
         End If
         'textbox1.font=changefont(wndfont)
@@ -1061,45 +1064,33 @@ err_:
         dlgFont = New System.Windows.Forms.FontDialog
 
 
-
         Label9.Font = changeFont(dlgFont, Label9)
 
-        FontN = dlgFont.Font.Name
-        fontS = dlgFont.Font.Size
-        FontB = dlgFont.Font.Bold
-        FontSt = dlgFont.Font.Style
-        FontD = dlgFont.Font.Unit
 
+        If FontN <> dlgFont.Font.Name Or fontS <> dlgFont.Font.Size Then
 
-        'If fontS > 10 Then fontS = 10
+            FontN = dlgFont.Font.Name
+            fontS = dlgFont.Font.Size
+            FontB = dlgFont.Font.Bold
+            FontSt = dlgFont.Font.Style
+            FontD = dlgFont.Font.Unit
 
+            Dim objIniFile As New IniFile(PrPath & "base.ini")
 
-        'dlgFont.Font = set your font here
+            objIniFile.WriteString("general", "Font", FontN)
+            objIniFile.WriteString("general", "FontSize", fontS)
+            objIniFile.WriteString("general", "FontBold", FontB)
+            objIniFile.WriteString("general", "FontStyle", FontSt)
+            objIniFile.WriteString("general", "FontUnit", FontD)
 
-        'If dlgFont.ShowDialog() = DialogResult.OK Then
-        '    Label9.Font = (dlgFont.Font)
-        '    Label9.ForeColor = (dlgFont.Color)
+            Call SendFonts(frmMain)
 
-
-
-        '    FontN = dlgFont.Font.Name
-        '    fontS = dlgFont.Font.Size
-        '    FontB = dlgFont.Font.Bold
-        '    FontC = Label9.ForeColor
-
-        Dim objIniFile As New IniFile(PrPath & "base.ini")
-
-        objIniFile.WriteString("general", "Font", FontN)
-        objIniFile.WriteString("general", "FontSize", fontS)
-        objIniFile.WriteString("general", "FontBold", FontB)
-        objIniFile.WriteString("general", "FontStyle", FontSt)
-        objIniFile.WriteString("general", "FontUnit", FontD)
-
+        End If
 
         'End If
 
-        Call SendFonts(Me)
-        Call SendFonts(frmMain)
+        'Call SendFonts(Me)
+
 
     End Sub
 
@@ -1113,6 +1104,8 @@ err_:
 
         Dim LNGIniFile As New IniFile(sLANGPATH)
         frmComputers.ОтделитьПринтерыИМониторыToolStripMenuItem.Text = LNGIniFile.GetString("frmSetup", "MSG9", "Отделить периферию")
+        frmComputers.ВернутьПерефериюToolStripMenuItem.Text = LNGIniFile.GetString("frmSetup", "MSG9.1", "Присоеденить периферию")
+
     End Sub
 
     Private Sub RadioButton5_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton5.CheckedChanged
@@ -1125,9 +1118,11 @@ err_:
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
         frmComputers.ОтделитьПринтерыИМониторыToolStripMenuItem.Text = LNGIniFile.GetString("frmSetup", "MSG10", "Отделить Мониторы") '"Отделить Мониторы"
+        frmComputers.ВернутьПерефериюToolStripMenuItem.Text = LNGIniFile.GetString("frmSetup", "MSG10.1", "Присоеденить Мониторы")
     End Sub
 
     Private Sub RadioButton4_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton4.CheckedChanged
+
         If RadioButton4.Checked = True Then RAZDEL = 2
 
         Dim objIniFile As New IniFile(PrPath & "base.ini")
@@ -1137,6 +1132,7 @@ err_:
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
         frmComputers.ОтделитьПринтерыИМониторыToolStripMenuItem.Text = LNGIniFile.GetString("frmSetup", "MSG11", "Отделить принтеры")
+        frmComputers.ВернутьПерефериюToolStripMenuItem.Text = LNGIniFile.GetString("frmSetup", "MSG11.1", "Присоеденить принтеры")
 
     End Sub
 
@@ -1148,6 +1144,7 @@ err_:
 
         Dim LNGIniFile As New IniFile(sLANGPATH)
         frmComputers.ОтделитьПринтерыИМониторыToolStripMenuItem.Text = LNGIniFile.GetString("frmSetup", "MSG12", "Отделить ИБП")
+        frmComputers.ВернутьПерефериюToolStripMenuItem.Text = LNGIniFile.GetString("frmSetup", "MSG12.1", "Присоеденить ИБП")
     End Sub
 
     Private Sub RadioButton8_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton8.CheckedChanged
@@ -1160,6 +1157,7 @@ err_:
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
         frmComputers.ОтделитьПринтерыИМониторыToolStripMenuItem.Text = LNGIniFile.GetString("frmSetup", "MSG13", "Отделить Клавиатуры и мыши")
+        frmComputers.ВернутьПерефериюToolStripMenuItem.Text = LNGIniFile.GetString("frmSetup", "MSG13.1", "Присоеденить Клавиатуры и мыши")
     End Sub
 
     Private Sub RadioButton9_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton9.CheckedChanged
@@ -1172,6 +1170,7 @@ err_:
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
         frmComputers.ОтделитьПринтерыИМониторыToolStripMenuItem.Text = LNGIniFile.GetString("frmSetup", "MSG14", "Отделить сетевые фильтры")
+        frmComputers.ВернутьПерефериюToolStripMenuItem.Text = LNGIniFile.GetString("frmSetup", "MSG14.1", "Присоеденить сетевые фильтры")
     End Sub
 
     Private Sub chkArhiv2exit_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkArhiv2exit.CheckedChanged
@@ -1407,8 +1406,6 @@ err_:
 
         Dim objIniFile As New IniFile(PrPath & "base.ini")
         objIniFile.WriteString("general", "ICONs", ComboBox1.Text)
-
-
 
         sICONS = ComboBox1.Text
 

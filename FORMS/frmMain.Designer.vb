@@ -172,6 +172,7 @@ Partial Class frmMain
         '
         'ПроверитьОбновлениеToolStripMenuItem
         '
+        Me.ПроверитьОбновлениеToolStripMenuItem.Image = CType(resources.GetObject("ПроверитьОбновлениеToolStripMenuItem.Image"), System.Drawing.Image)
         Me.ПроверитьОбновлениеToolStripMenuItem.Name = "ПроверитьОбновлениеToolStripMenuItem"
         Me.ПроверитьОбновлениеToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.U), System.Windows.Forms.Keys)
         Me.ПроверитьОбновлениеToolStripMenuItem.Size = New System.Drawing.Size(246, 22)
@@ -187,6 +188,7 @@ Partial Class frmMain
         '
         'ФорумToolStripMenuItem
         '
+        Me.ФорумToolStripMenuItem.Image = CType(resources.GetObject("ФорумToolStripMenuItem.Image"), System.Drawing.Image)
         Me.ФорумToolStripMenuItem.Name = "ФорумToolStripMenuItem"
         Me.ФорумToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.F), System.Windows.Forms.Keys)
         Me.ФорумToolStripMenuItem.Size = New System.Drawing.Size(246, 22)
@@ -295,6 +297,7 @@ Partial Class frmMain
         'БланкиToolStripMenuItem
         '
         Me.БланкиToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ПаспортКомпьютераToolStripMenuItem, Me.ПаспортМФУToolStripMenuItem, Me.ПаспортСетевогоОборудованияToolStripMenuItem, Me.ПаспортПринтераToolStripMenuItem, Me.ПаспортКопираToolStripMenuItem, Me.ПаспортСканераToolStripMenuItem, Me.МойБланкToolStripMenuItem})
+        Me.БланкиToolStripMenuItem.Image = CType(resources.GetObject("БланкиToolStripMenuItem.Image"), System.Drawing.Image)
         Me.БланкиToolStripMenuItem.Name = "БланкиToolStripMenuItem"
         Me.БланкиToolStripMenuItem.Size = New System.Drawing.Size(232, 22)
         Me.БланкиToolStripMenuItem.Text = "Бланки"
@@ -351,6 +354,7 @@ Partial Class frmMain
         '
         'АктытребованияToolStripMenuItem
         '
+        Me.АктытребованияToolStripMenuItem.Image = CType(resources.GetObject("АктытребованияToolStripMenuItem.Image"), System.Drawing.Image)
         Me.АктытребованияToolStripMenuItem.Name = "АктытребованияToolStripMenuItem"
         Me.АктытребованияToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.T), System.Windows.Forms.Keys)
         Me.АктытребованияToolStripMenuItem.Size = New System.Drawing.Size(232, 22)
@@ -358,6 +362,7 @@ Partial Class frmMain
         '
         'ИнвентаризацияToolStripMenuItem
         '
+        Me.ИнвентаризацияToolStripMenuItem.Image = CType(resources.GetObject("ИнвентаризацияToolStripMenuItem.Image"), System.Drawing.Image)
         Me.ИнвентаризацияToolStripMenuItem.Name = "ИнвентаризацияToolStripMenuItem"
         Me.ИнвентаризацияToolStripMenuItem.Size = New System.Drawing.Size(232, 22)
         Me.ИнвентаризацияToolStripMenuItem.Text = "Инвентаризация"
@@ -374,7 +379,7 @@ Partial Class frmMain
         '
         Me.РемонтыToolStripMenuItem.Name = "РемонтыToolStripMenuItem"
         Me.РемонтыToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F11
-        Me.РемонтыToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.РемонтыToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.РемонтыToolStripMenuItem.Text = "Ремонты"
         '
         'ToolsMenu
@@ -386,6 +391,7 @@ Partial Class frmMain
         '
         'OptionsToolStripMenuItem
         '
+        Me.OptionsToolStripMenuItem.Image = CType(resources.GetObject("OptionsToolStripMenuItem.Image"), System.Drawing.Image)
         Me.OptionsToolStripMenuItem.Name = "OptionsToolStripMenuItem"
         Me.OptionsToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.N), System.Windows.Forms.Keys)
         Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(191, 22)
@@ -394,6 +400,7 @@ Partial Class frmMain
         'ОбслуживаниеБДToolStripMenuItem
         '
         Me.ОбслуживаниеБДToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CompareDBToolStripMenuItem, Me.ЗапросыToolStripMenuItem, Me.CleerDBToolStripMenuItem})
+        Me.ОбслуживаниеБДToolStripMenuItem.Image = CType(resources.GetObject("ОбслуживаниеБДToolStripMenuItem.Image"), System.Drawing.Image)
         Me.ОбслуживаниеБДToolStripMenuItem.Name = "ОбслуживаниеБДToolStripMenuItem"
         Me.ОбслуживаниеБДToolStripMenuItem.Size = New System.Drawing.Size(191, 22)
         Me.ОбслуживаниеБДToolStripMenuItem.Text = "Обслуживание БД"
@@ -401,19 +408,19 @@ Partial Class frmMain
         'CompareDBToolStripMenuItem
         '
         Me.CompareDBToolStripMenuItem.Name = "CompareDBToolStripMenuItem"
-        Me.CompareDBToolStripMenuItem.Size = New System.Drawing.Size(123, 22)
+        Me.CompareDBToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.CompareDBToolStripMenuItem.Text = "Сжатие"
         '
         'ЗапросыToolStripMenuItem
         '
         Me.ЗапросыToolStripMenuItem.Name = "ЗапросыToolStripMenuItem"
-        Me.ЗапросыToolStripMenuItem.Size = New System.Drawing.Size(123, 22)
+        Me.ЗапросыToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.ЗапросыToolStripMenuItem.Text = "Запросы"
         '
         'CleerDBToolStripMenuItem
         '
         Me.CleerDBToolStripMenuItem.Name = "CleerDBToolStripMenuItem"
-        Me.CleerDBToolStripMenuItem.Size = New System.Drawing.Size(123, 22)
+        Me.CleerDBToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.CleerDBToolStripMenuItem.Text = "Очистка"
         '
         'QRCodeTestingToolStripMenuItem

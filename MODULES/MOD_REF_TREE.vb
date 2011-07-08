@@ -14,6 +14,8 @@ Module MOD_REF_TREE
 
 
     Private Sub FILING_FILIAL()
+        On Error Resume Next
+
         Dim zFIL As String
 
         If Len(FILIAL1) = 0 Then Exit Sub

@@ -73,7 +73,7 @@
 
                 Case "K"
 
-                    sSQL = "SELECT id, Name as tree_par, N_F as one_par, N_M as two_par FROM SPR_KAB where N_F=" & A1 & "' AND N_M='" & A2 & "' AND Name='" & A3 & "'"
+                    sSQL = "SELECT id, Name as tree_par, N_F as one_par, N_M as two_par FROM SPR_KAB where N_F='" & A1 & "' AND N_M='" & A2 & "' AND Name='" & A3 & "'"
 
 
 

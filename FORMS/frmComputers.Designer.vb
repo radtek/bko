@@ -662,6 +662,7 @@ Me.CopyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 Me.UpdateToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 Me.DeleteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 Me.ОтделитьПринтерыИМониторыToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+Me.ВернутьПерефериюToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 Me.cmBmenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
 Me.mnuDeltoBranch = New System.Windows.Forms.ToolStripMenuItem()
 Me.addFoldertoBranch = New System.Windows.Forms.ToolStripMenuItem()
@@ -670,6 +671,7 @@ Me.RepAddBrToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 Me.SoftInstallToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 Me.ПаспортКомпьютераToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 Me.MassRazdelPerf = New System.Windows.Forms.ToolStripMenuItem()
+Me.MassObedPerf = New System.Windows.Forms.ToolStripMenuItem()
 Me.MassUpdatetoINI = New System.Windows.Forms.ToolStripMenuItem()
 Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
 Me.Button1 = New System.Windows.Forms.Button()
@@ -8251,9 +8253,9 @@ Me.chkOTHspis.UseVisualStyleBackColor = true
 '
 'cmMENU
 '
-Me.cmMENU.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.addRemToolStripMenuItem, Me.CartrAddToolStripMenuItem, Me.CopyToolStripMenuItem, Me.UpdateToolStripMenuItem, Me.DeleteToolStripMenuItem, Me.ОтделитьПринтерыИМониторыToolStripMenuItem})
+Me.cmMENU.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.addRemToolStripMenuItem, Me.CartrAddToolStripMenuItem, Me.CopyToolStripMenuItem, Me.UpdateToolStripMenuItem, Me.DeleteToolStripMenuItem, Me.ОтделитьПринтерыИМониторыToolStripMenuItem, Me.ВернутьПерефериюToolStripMenuItem})
 Me.cmMENU.Name = "cmMENU"
-Me.cmMENU.Size = New System.Drawing.Size(255, 136)
+Me.cmMENU.Size = New System.Drawing.Size(255, 158)
 '
 'addRemToolStripMenuItem
 '
@@ -8294,64 +8296,76 @@ Me.ОтделитьПринтерыИМониторыToolStripMenuItem.Name = "�
 Me.ОтделитьПринтерыИМониторыToolStripMenuItem.Size = New System.Drawing.Size(254, 22)
 Me.ОтделитьПринтерыИМониторыToolStripMenuItem.Text = "Отделить принтеры и мониторы"
 '
+'ВернутьПерефериюToolStripMenuItem
+'
+Me.ВернутьПерефериюToolStripMenuItem.Name = "ВернутьПерефериюToolStripMenuItem"
+Me.ВернутьПерефериюToolStripMenuItem.Size = New System.Drawing.Size(254, 22)
+Me.ВернутьПерефериюToolStripMenuItem.Text = "Вернуть переферию"
+'
 'cmBmenu
 '
-Me.cmBmenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDeltoBranch, Me.addFoldertoBranch, Me.DeleteBranche, Me.RepAddBrToolStripMenuItem, Me.SoftInstallToolStripMenuItem, Me.ПаспортКомпьютераToolStripMenuItem, Me.MassRazdelPerf, Me.MassUpdatetoINI})
+Me.cmBmenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDeltoBranch, Me.addFoldertoBranch, Me.DeleteBranche, Me.RepAddBrToolStripMenuItem, Me.SoftInstallToolStripMenuItem, Me.ПаспортКомпьютераToolStripMenuItem, Me.MassRazdelPerf, Me.MassObedPerf, Me.MassUpdatetoINI})
 Me.cmBmenu.Name = "cmMENU"
-Me.cmBmenu.Size = New System.Drawing.Size(204, 180)
+Me.cmBmenu.Size = New System.Drawing.Size(222, 224)
 '
 'mnuDeltoBranch
 '
 Me.mnuDeltoBranch.Image = CType(resources.GetObject("mnuDeltoBranch.Image"),System.Drawing.Image)
 Me.mnuDeltoBranch.Name = "mnuDeltoBranch"
-Me.mnuDeltoBranch.Size = New System.Drawing.Size(203, 22)
+Me.mnuDeltoBranch.Size = New System.Drawing.Size(221, 22)
 Me.mnuDeltoBranch.Text = "Удалить из..."
 '
 'addFoldertoBranch
 '
 Me.addFoldertoBranch.Image = CType(resources.GetObject("addFoldertoBranch.Image"),System.Drawing.Image)
 Me.addFoldertoBranch.Name = "addFoldertoBranch"
-Me.addFoldertoBranch.Size = New System.Drawing.Size(203, 22)
+Me.addFoldertoBranch.Size = New System.Drawing.Size(221, 22)
 Me.addFoldertoBranch.Text = "Добавить папку в... (ini)"
 '
 'DeleteBranche
 '
 Me.DeleteBranche.Image = CType(resources.GetObject("DeleteBranche.Image"),System.Drawing.Image)
 Me.DeleteBranche.Name = "DeleteBranche"
-Me.DeleteBranche.Size = New System.Drawing.Size(203, 22)
+Me.DeleteBranche.Size = New System.Drawing.Size(221, 22)
 Me.DeleteBranche.Text = "Удалить"
 '
 'RepAddBrToolStripMenuItem
 '
 Me.RepAddBrToolStripMenuItem.Image = CType(resources.GetObject("RepAddBrToolStripMenuItem.Image"),System.Drawing.Image)
 Me.RepAddBrToolStripMenuItem.Name = "RepAddBrToolStripMenuItem"
-Me.RepAddBrToolStripMenuItem.Size = New System.Drawing.Size(203, 22)
+Me.RepAddBrToolStripMenuItem.Size = New System.Drawing.Size(221, 22)
 Me.RepAddBrToolStripMenuItem.Text = "Добавить заявку"
 '
 'SoftInstallToolStripMenuItem
 '
 Me.SoftInstallToolStripMenuItem.Image = CType(resources.GetObject("SoftInstallToolStripMenuItem.Image"),System.Drawing.Image)
 Me.SoftInstallToolStripMenuItem.Name = "SoftInstallToolStripMenuItem"
-Me.SoftInstallToolStripMenuItem.Size = New System.Drawing.Size(203, 22)
+Me.SoftInstallToolStripMenuItem.Size = New System.Drawing.Size(221, 22)
 Me.SoftInstallToolStripMenuItem.Text = "Установленное П.О."
 '
 'ПаспортКомпьютераToolStripMenuItem
 '
 Me.ПаспортКомпьютераToolStripMenuItem.Image = CType(resources.GetObject("ПаспортКомпьютераToolStripMenuItem.Image"),System.Drawing.Image)
 Me.ПаспортКомпьютераToolStripMenuItem.Name = "ПаспортКомпьютераToolStripMenuItem"
-Me.ПаспортКомпьютераToolStripMenuItem.Size = New System.Drawing.Size(203, 22)
+Me.ПаспортКомпьютераToolStripMenuItem.Size = New System.Drawing.Size(221, 22)
 Me.ПаспортКомпьютераToolStripMenuItem.Text = "Паспорт компьютера"
 '
 'MassRazdelPerf
 '
 Me.MassRazdelPerf.Name = "MassRazdelPerf"
-Me.MassRazdelPerf.Size = New System.Drawing.Size(203, 22)
+Me.MassRazdelPerf.Size = New System.Drawing.Size(221, 22)
 Me.MassRazdelPerf.Text = "Отделить переферию"
+'
+'MassObedPerf
+'
+Me.MassObedPerf.Name = "MassObedPerf"
+Me.MassObedPerf.Size = New System.Drawing.Size(221, 22)
+Me.MassObedPerf.Text = "Присоеденить переферию"
 '
 'MassUpdatetoINI
 '
 Me.MassUpdatetoINI.Name = "MassUpdatetoINI"
-Me.MassUpdatetoINI.Size = New System.Drawing.Size(203, 22)
+Me.MassUpdatetoINI.Size = New System.Drawing.Size(221, 22)
 Me.MassUpdatetoINI.Text = "Обновить из папки"
 '
 'TableLayoutPanel2
@@ -9503,5 +9517,7 @@ End Sub
     Friend WithEvents ImageList1 As System.Windows.Forms.ImageList
     Friend WithEvents chkVisibleSTR As System.Windows.Forms.CheckBox
     Friend WithEvents txtMHZ1 As System.Windows.Forms.TextBox
+    Friend WithEvents ВернутьПерефериюToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MassObedPerf As System.Windows.Forms.ToolStripMenuItem
 
 End Class

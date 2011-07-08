@@ -3,6 +3,7 @@ Imports System.IO
 Public Class frmLogin
     Private sLoad As Boolean
 
+
     Private Sub frmLogin_Activated(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Activated
         PrPath = Directory.GetParent(Application.ExecutablePath).ToString & "\"
         txtPassword.Focus()
@@ -152,6 +153,8 @@ err_:
 
     Private Sub User_Pro()
 
+
+
         Dim objIniFile As New IniFile(PrPath & "base.ini")
         objIniFile.WriteString("general", "DefaultUser", cmbUser.Text)
         objIniFile.WriteString("DB", "DB", unamDB)
@@ -262,8 +265,25 @@ err_:
 
 
 
-
+        Dim sCOUNT As Integer
         Dim T_User As ADODB.Recordset
+
+        T_User = New ADODB.Recordset
+        T_User.Open("SELECT count(*) as t_n FROM T_User where Name ='" & cmbUser.Text & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+        With T_User
+            sCOUNT = .Fields("t_n").Value
+        End With
+        T_User.Close()
+        T_User = Nothing
+
+
+
+        If sCOUNT = 0 Then
+            MsgBox("This User is not valid", MsgBoxStyle.Critical, "Error!!!")
+            Exit Sub
+        End If
+
 
         T_User = New ADODB.Recordset
         T_User.Open("SELECT * FROM T_User where Name ='" & cmbUser.Text & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
