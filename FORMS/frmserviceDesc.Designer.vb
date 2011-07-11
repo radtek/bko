@@ -72,8 +72,8 @@ Partial Class frmserviceDesc
         'SplitContainer1.Panel2
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.TableLayoutPanel1)
-        Me.SplitContainer1.Size = New System.Drawing.Size(962, 680)
-        Me.SplitContainer1.SplitterDistance = 305
+        Me.SplitContainer1.Size = New System.Drawing.Size(926, 462)
+        Me.SplitContainer1.SplitterDistance = 293
         Me.SplitContainer1.TabIndex = 1
         '
         'gbTree
@@ -82,7 +82,7 @@ Partial Class frmserviceDesc
         Me.gbTree.Dock = System.Windows.Forms.DockStyle.Fill
         Me.gbTree.Location = New System.Drawing.Point(0, 0)
         Me.gbTree.Name = "gbTree"
-        Me.gbTree.Size = New System.Drawing.Size(305, 680)
+        Me.gbTree.Size = New System.Drawing.Size(293, 462)
         Me.gbTree.TabIndex = 0
         Me.gbTree.TabStop = False
         Me.gbTree.Text = "Дерево"
@@ -103,7 +103,7 @@ Partial Class frmserviceDesc
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26.0!))
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel3.Size = New System.Drawing.Size(299, 661)
+        Me.TableLayoutPanel3.Size = New System.Drawing.Size(287, 443)
         Me.TableLayoutPanel3.TabIndex = 4
         '
         'treebranche
@@ -113,14 +113,14 @@ Partial Class frmserviceDesc
         Me.treebranche.FormattingEnabled = True
         Me.treebranche.Location = New System.Drawing.Point(3, 33)
         Me.treebranche.Name = "treebranche"
-        Me.treebranche.Size = New System.Drawing.Size(293, 21)
+        Me.treebranche.Size = New System.Drawing.Size(281, 21)
         Me.treebranche.TabIndex = 7
         '
         'btnSearch
         '
         Me.btnSearch.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnSearch.Image = CType(resources.GetObject("btnSearch.Image"), System.Drawing.Image)
-        Me.btnSearch.Location = New System.Drawing.Point(267, 3)
+        Me.btnSearch.Location = New System.Drawing.Point(255, 3)
         Me.btnSearch.Name = "btnSearch"
         Me.btnSearch.Size = New System.Drawing.Size(29, 24)
         Me.btnSearch.TabIndex = 3
@@ -131,7 +131,7 @@ Partial Class frmserviceDesc
         Me.txtSearch.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtSearch.Location = New System.Drawing.Point(3, 3)
         Me.txtSearch.Name = "txtSearch"
-        Me.txtSearch.Size = New System.Drawing.Size(258, 20)
+        Me.txtSearch.Size = New System.Drawing.Size(246, 20)
         Me.txtSearch.TabIndex = 2
         '
         'lstGroups
@@ -141,7 +141,7 @@ Partial Class frmserviceDesc
         Me.lstGroups.FullRowSelect = True
         Me.lstGroups.Location = New System.Drawing.Point(3, 59)
         Me.lstGroups.Name = "lstGroups"
-        Me.lstGroups.Size = New System.Drawing.Size(293, 599)
+        Me.lstGroups.Size = New System.Drawing.Size(281, 381)
         Me.lstGroups.TabIndex = 0
         '
         'TableLayoutPanel1
@@ -156,7 +156,7 @@ Partial Class frmserviceDesc
         Me.TableLayoutPanel1.RowCount = 2
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(653, 680)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(629, 462)
         Me.TableLayoutPanel1.TabIndex = 3
         '
         'gbRem
@@ -165,7 +165,7 @@ Partial Class frmserviceDesc
         Me.gbRem.Dock = System.Windows.Forms.DockStyle.Fill
         Me.gbRem.Location = New System.Drawing.Point(3, 3)
         Me.gbRem.Name = "gbRem"
-        Me.gbRem.Size = New System.Drawing.Size(647, 402)
+        Me.gbRem.Size = New System.Drawing.Size(623, 271)
         Me.gbRem.TabIndex = 0
         Me.gbRem.TabStop = False
         Me.gbRem.Text = "Заявки:"
@@ -194,7 +194,7 @@ Partial Class frmserviceDesc
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel2.Size = New System.Drawing.Size(641, 383)
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(617, 252)
         Me.TableLayoutPanel2.TabIndex = 7
         '
         'lvRem
@@ -206,14 +206,14 @@ Partial Class frmserviceDesc
         Me.lvRem.Location = New System.Drawing.Point(3, 3)
         Me.lvRem.MultiSelect = False
         Me.lvRem.Name = "lvRem"
-        Me.lvRem.Size = New System.Drawing.Size(635, 324)
+        Me.lvRem.Size = New System.Drawing.Size(635, 193)
         Me.lvRem.TabIndex = 6
         Me.lvRem.UseCompatibleStateImageBehavior = False
         Me.lvRem.View = System.Windows.Forms.View.Details
         '
         'btnRemAdd
         '
-        Me.btnRemAdd.Location = New System.Drawing.Point(3, 333)
+        Me.btnRemAdd.Location = New System.Drawing.Point(3, 202)
         Me.btnRemAdd.Name = "btnRemAdd"
         Me.btnRemAdd.Size = New System.Drawing.Size(114, 20)
         Me.btnRemAdd.TabIndex = 1
@@ -222,7 +222,7 @@ Partial Class frmserviceDesc
         '
         'btnSBTAdd
         '
-        Me.btnSBTAdd.Location = New System.Drawing.Point(123, 333)
+        Me.btnSBTAdd.Location = New System.Drawing.Point(123, 202)
         Me.btnSBTAdd.Name = "btnSBTAdd"
         Me.btnSBTAdd.Size = New System.Drawing.Size(113, 20)
         Me.btnSBTAdd.TabIndex = 2
@@ -232,7 +232,7 @@ Partial Class frmserviceDesc
         'btnRemDel
         '
         Me.btnRemDel.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.btnRemDel.Location = New System.Drawing.Point(242, 333)
+        Me.btnRemDel.Location = New System.Drawing.Point(242, 202)
         Me.btnRemDel.Name = "btnRemDel"
         Me.btnRemDel.Size = New System.Drawing.Size(114, 20)
         Me.btnRemDel.TabIndex = 3
@@ -242,7 +242,7 @@ Partial Class frmserviceDesc
         'chkNZ
         '
         Me.chkNZ.AutoSize = True
-        Me.chkNZ.Location = New System.Drawing.Point(362, 333)
+        Me.chkNZ.Location = New System.Drawing.Point(362, 202)
         Me.chkNZ.Name = "chkNZ"
         Me.chkNZ.Size = New System.Drawing.Size(113, 17)
         Me.chkNZ.TabIndex = 4
@@ -252,7 +252,7 @@ Partial Class frmserviceDesc
         'CheckBox2
         '
         Me.CheckBox2.AutoSize = True
-        Me.CheckBox2.Location = New System.Drawing.Point(481, 333)
+        Me.CheckBox2.Location = New System.Drawing.Point(481, 202)
         Me.CheckBox2.Name = "CheckBox2"
         Me.CheckBox2.Size = New System.Drawing.Size(133, 17)
         Me.CheckBox2.TabIndex = 5
@@ -261,7 +261,7 @@ Partial Class frmserviceDesc
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(123, 359)
+        Me.Button1.Location = New System.Drawing.Point(123, 228)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(113, 20)
         Me.Button1.TabIndex = 8
@@ -270,7 +270,7 @@ Partial Class frmserviceDesc
         '
         'btnSendEmail
         '
-        Me.btnSendEmail.Location = New System.Drawing.Point(3, 359)
+        Me.btnSendEmail.Location = New System.Drawing.Point(3, 228)
         Me.btnSendEmail.Name = "btnSendEmail"
         Me.btnSendEmail.Size = New System.Drawing.Size(114, 21)
         Me.btnSendEmail.TabIndex = 7
@@ -279,7 +279,7 @@ Partial Class frmserviceDesc
         '
         'btn_Z_to_Office
         '
-        Me.btn_Z_to_Office.Location = New System.Drawing.Point(242, 359)
+        Me.btn_Z_to_Office.Location = New System.Drawing.Point(242, 228)
         Me.btn_Z_to_Office.Name = "btn_Z_to_Office"
         Me.btn_Z_to_Office.Size = New System.Drawing.Size(114, 21)
         Me.btn_Z_to_Office.TabIndex = 9
@@ -290,9 +290,9 @@ Partial Class frmserviceDesc
         '
         Me.gbRem2.Controls.Add(Me.lvRem2)
         Me.gbRem2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.gbRem2.Location = New System.Drawing.Point(3, 411)
+        Me.gbRem2.Location = New System.Drawing.Point(3, 280)
         Me.gbRem2.Name = "gbRem2"
-        Me.gbRem2.Size = New System.Drawing.Size(647, 266)
+        Me.gbRem2.Size = New System.Drawing.Size(623, 179)
         Me.gbRem2.TabIndex = 2
         Me.gbRem2.TabStop = False
         Me.gbRem2.Text = "Выполненные работы:"
@@ -306,7 +306,7 @@ Partial Class frmserviceDesc
         Me.lvRem2.MultiSelect = False
         Me.lvRem2.Name = "lvRem2"
         Me.lvRem2.ShowItemToolTips = True
-        Me.lvRem2.Size = New System.Drawing.Size(641, 247)
+        Me.lvRem2.Size = New System.Drawing.Size(617, 160)
         Me.lvRem2.TabIndex = 7
         Me.lvRem2.UseCompatibleStateImageBehavior = False
         Me.lvRem2.View = System.Windows.Forms.View.Details
@@ -332,8 +332,9 @@ Partial Class frmserviceDesc
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(962, 680)
+        Me.ClientSize = New System.Drawing.Size(926, 462)
         Me.Controls.Add(Me.SplitContainer1)
+        Me.MinimumSize = New System.Drawing.Size(942, 500)
         Me.Name = "frmserviceDesc"
         Me.Text = "Учёт заявок"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized

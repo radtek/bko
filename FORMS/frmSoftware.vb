@@ -253,6 +253,8 @@ FoundiR:
         treebranche.Items.Add(LNGIniFile.GetString("frmComputers", "MSG53", ""))
         uname = objIniFile.GetString("General", "branche", "")
 
+
+
         If Len(uname) = 0 Then
             treebranche.Text = LNGIniFile.GetString("frmComputers", "MSG53", "")
 
@@ -262,24 +264,15 @@ FoundiR:
         End If
 
 
+        If lstGroups.Nodes.Count = 0 Then
 
+            If Me.lstGroups.Nodes.Count = 0 Then
+                Dim newThread5 As New Thread(AddressOf R_T_LOAD)
+                newThread5.Start()
 
+            End If
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        RefFilTree(Me.lstGroups)
+        End If
 
 
 
@@ -295,6 +288,16 @@ FoundiR:
         DTInstall.Value = Date.Today
         dtGok.Value = Date.Now
         Me.Cursor = Cursors.Default
+    End Sub
+
+    Private Sub R_T_LOAD()
+
+        Me.lstGroups.Invoke(New MethodInvoker(AddressOf R_T_LOAD_1))
+
+    End Sub
+
+    Private Sub R_T_LOAD_1()
+        Call RefFilTree(Me.lstGroups)
     End Sub
 
     Private Sub SplitContainer1_Move(ByVal sender As Object, ByVal e As System.EventArgs) Handles SplitContainer1.Move
@@ -542,7 +545,10 @@ A:
 
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
         Me.Cursor = Cursors.WaitCursor
-        RefFilTree(Me.lstGroups)
+
+        Dim newThread5 As New Thread(AddressOf R_T_LOAD)
+        newThread5.Start()
+
         txtSearch.Text = ""
         Me.Cursor = Cursors.Default
     End Sub
@@ -696,6 +702,9 @@ err_:
         Dim objIniFile As New IniFile(PrPath & "base.ini")
         objIniFile.WriteString("General", "branche", treebranche.Text)
 
-        Call RefFilTree(Me.lstGroups)
+        Dim newThread5 As New Thread(AddressOf R_T_LOAD)
+        newThread5.Start()
+
+
     End Sub
 End Class

@@ -62,6 +62,9 @@ Public Class frmserviceDesc
 
                     LOAD_REPAIR(d(1), Me.lvRem)
 
+                   
+
+
                 End If
 
 
@@ -690,6 +693,7 @@ err_1:
         treebranche.Items.Add(LNGIniFile.GetString("frmComputers", "MSG53", ""))
         uname = objIniFile.GetString("General", "branche", "")
 
+
         If Len(uname) = 0 Then
             treebranche.Text = LNGIniFile.GetString("frmComputers", "MSG53", "")
 
@@ -699,14 +703,17 @@ err_1:
         End If
 
 
-
-
         Me.Cursor = Cursors.WaitCursor
         Me.Show()
 
-        If Me.lstGroups.Nodes.Count = 0 Then
-            'Call RefFilTree(Me.lstGroups)
-            R_T_LOAD()
+        If lstGroups.Nodes.Count = 0 Then
+
+            If Me.lstGroups.Nodes.Count = 0 Then
+                Dim newThread5 As New Thread(AddressOf R_T_LOAD)
+                newThread5.Start()
+
+            End If
+
         End If
 
 
@@ -721,14 +728,14 @@ err_1:
 
     Private Sub R_T_LOAD()
 
-        If Me.lstGroups.InvokeRequired Then
-            Me.lstGroups.Invoke(New MethodInvoker(AddressOf R_T_LOAD))
-        Else
-            Call RefFilTree(Me.lstGroups)
-        End If
-
+        Me.lstGroups.Invoke(New MethodInvoker(AddressOf R_T_LOAD_1))
 
     End Sub
+
+    Private Sub R_T_LOAD_1()
+        Call RefFilTree(Me.lstGroups)
+    End Sub
+
 
     Private Sub btnRemAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRemAdd.Click
 
@@ -849,7 +856,9 @@ Err_1:
         search_ = False
         txtSearch.Text = ""
 
-        Call RefFilTree(Me.lstGroups)
+        Dim newThread5 As New Thread(AddressOf R_T_LOAD)
+        newThread5.Start()
+
 
         Me.Cursor = Cursors.Default
 
@@ -1613,7 +1622,9 @@ err_:
         Dim objIniFile As New IniFile(PrPath & "base.ini")
         objIniFile.WriteString("General", "branche", treebranche.Text)
 
-        Call RefFilTree(Me.lstGroups)
+        Dim newThread5 As New Thread(AddressOf R_T_LOAD)
+        newThread5.Start()
+
     End Sub
 
     Private Sub btn_Z_to_Office_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_Z_to_Office.Click

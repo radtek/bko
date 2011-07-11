@@ -67,7 +67,7 @@ Partial Class frmSoftware
         Me.gbTree.Dock = System.Windows.Forms.DockStyle.Fill
         Me.gbTree.Location = New System.Drawing.Point(0, 0)
         Me.gbTree.Name = "gbTree"
-        Me.gbTree.Size = New System.Drawing.Size(305, 666)
+        Me.gbTree.Size = New System.Drawing.Size(306, 521)
         Me.gbTree.TabIndex = 0
         Me.gbTree.TabStop = False
         Me.gbTree.Text = "Дерево"
@@ -88,7 +88,7 @@ Partial Class frmSoftware
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel3.Size = New System.Drawing.Size(299, 647)
+        Me.TableLayoutPanel3.Size = New System.Drawing.Size(300, 502)
         Me.TableLayoutPanel3.TabIndex = 5
         '
         'treebranche
@@ -98,13 +98,13 @@ Partial Class frmSoftware
         Me.treebranche.FormattingEnabled = True
         Me.treebranche.Location = New System.Drawing.Point(3, 33)
         Me.treebranche.Name = "treebranche"
-        Me.treebranche.Size = New System.Drawing.Size(293, 21)
+        Me.treebranche.Size = New System.Drawing.Size(294, 21)
         Me.treebranche.TabIndex = 6
         '
         'btnSearch
         '
         Me.btnSearch.Image = CType(resources.GetObject("btnSearch.Image"), System.Drawing.Image)
-        Me.btnSearch.Location = New System.Drawing.Point(267, 3)
+        Me.btnSearch.Location = New System.Drawing.Point(268, 3)
         Me.btnSearch.Name = "btnSearch"
         Me.btnSearch.Size = New System.Drawing.Size(29, 24)
         Me.btnSearch.TabIndex = 3
@@ -115,7 +115,7 @@ Partial Class frmSoftware
         Me.txtSearch.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtSearch.Location = New System.Drawing.Point(3, 3)
         Me.txtSearch.Name = "txtSearch"
-        Me.txtSearch.Size = New System.Drawing.Size(258, 20)
+        Me.txtSearch.Size = New System.Drawing.Size(259, 20)
         Me.txtSearch.TabIndex = 2
         '
         'lstGroups
@@ -125,7 +125,7 @@ Partial Class frmSoftware
         Me.lstGroups.FullRowSelect = True
         Me.lstGroups.Location = New System.Drawing.Point(3, 63)
         Me.lstGroups.Name = "lstGroups"
-        Me.lstGroups.Size = New System.Drawing.Size(293, 581)
+        Me.lstGroups.Size = New System.Drawing.Size(294, 436)
         Me.lstGroups.TabIndex = 0
         '
         'SplitContainer1
@@ -141,8 +141,8 @@ Partial Class frmSoftware
         'SplitContainer1.Panel2
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.gbSoftware)
-        Me.SplitContainer1.Size = New System.Drawing.Size(992, 666)
-        Me.SplitContainer1.SplitterDistance = 305
+        Me.SplitContainer1.Size = New System.Drawing.Size(996, 521)
+        Me.SplitContainer1.SplitterDistance = 306
         Me.SplitContainer1.TabIndex = 2
         '
         'gbSoftware
@@ -152,7 +152,7 @@ Partial Class frmSoftware
         Me.gbSoftware.Dock = System.Windows.Forms.DockStyle.Fill
         Me.gbSoftware.Location = New System.Drawing.Point(0, 0)
         Me.gbSoftware.Name = "gbSoftware"
-        Me.gbSoftware.Size = New System.Drawing.Size(683, 666)
+        Me.gbSoftware.Size = New System.Drawing.Size(686, 521)
         Me.gbSoftware.TabIndex = 0
         Me.gbSoftware.TabStop = False
         Me.gbSoftware.Text = "Установленное программное обеспечение"
@@ -194,7 +194,7 @@ Partial Class frmSoftware
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(677, 647)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(680, 502)
         Me.TableLayoutPanel1.TabIndex = 19
         '
         'cmbSoftware
@@ -206,7 +206,7 @@ Partial Class frmSoftware
         Me.cmbSoftware.FormattingEnabled = True
         Me.cmbSoftware.Location = New System.Drawing.Point(3, 3)
         Me.cmbSoftware.Name = "cmbSoftware"
-        Me.cmbSoftware.Size = New System.Drawing.Size(671, 21)
+        Me.cmbSoftware.Size = New System.Drawing.Size(674, 21)
         Me.cmbSoftware.TabIndex = 1
         '
         'lstSoftware
@@ -219,7 +219,7 @@ Partial Class frmSoftware
         Me.lstSoftware.Location = New System.Drawing.Point(3, 165)
         Me.lstSoftware.MultiSelect = False
         Me.lstSoftware.Name = "lstSoftware"
-        Me.lstSoftware.Size = New System.Drawing.Size(671, 479)
+        Me.lstSoftware.Size = New System.Drawing.Size(674, 479)
         Me.lstSoftware.TabIndex = 17
         Me.lstSoftware.UseCompatibleStateImageBehavior = False
         Me.lstSoftware.View = System.Windows.Forms.View.Details
@@ -230,7 +230,7 @@ Partial Class frmSoftware
         Me.CheckBox1.AutoSize = True
         Me.CheckBox1.Location = New System.Drawing.Point(545, 111)
         Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(129, 17)
+        Me.CheckBox1.Size = New System.Drawing.Size(132, 17)
         Me.CheckBox1.TabIndex = 18
         Me.CheckBox1.Text = "Беcсрочно"
         Me.CheckBox1.UseVisualStyleBackColor = True
@@ -301,7 +301,7 @@ Partial Class frmSoftware
         Me.cmbTipPo.FormattingEnabled = True
         Me.cmbTipPo.Location = New System.Drawing.Point(545, 30)
         Me.cmbTipPo.Name = "cmbTipPo"
-        Me.cmbTipPo.Size = New System.Drawing.Size(129, 21)
+        Me.cmbTipPo.Size = New System.Drawing.Size(132, 21)
         Me.cmbTipPo.TabIndex = 5
         '
         'Label4
@@ -366,7 +366,7 @@ Partial Class frmSoftware
         Me.cmbSoftPr.FormattingEnabled = True
         Me.cmbSoftPr.Location = New System.Drawing.Point(396, 70)
         Me.cmbSoftPr.Name = "cmbSoftPr"
-        Me.cmbSoftPr.Size = New System.Drawing.Size(278, 21)
+        Me.cmbSoftPr.Size = New System.Drawing.Size(281, 21)
         Me.cmbSoftPr.TabIndex = 9
         '
         'Label7
@@ -392,9 +392,9 @@ Partial Class frmSoftware
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(992, 666)
+        Me.ClientSize = New System.Drawing.Size(996, 521)
         Me.Controls.Add(Me.SplitContainer1)
-        Me.MinimumSize = New System.Drawing.Size(1000, 700)
+        Me.MinimumSize = New System.Drawing.Size(1012, 559)
         Me.Name = "frmSoftware"
         Me.Text = "Учет программного обеспечения"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized

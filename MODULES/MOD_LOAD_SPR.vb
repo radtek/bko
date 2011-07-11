@@ -4,6 +4,8 @@ Module Mod_Load_SPR
 
     Public Sub LoadSPR()
 
+        If frmComputers.OneStart = 1 Then frmComputers.OneStart = 0
+
         'frmComputers.Cursor = Cursors.WaitCursor
 
         FillComboNET(frmComputers.PROizV1, "PROIZV", "SPR_PROIZV", "", False, True)
@@ -195,6 +197,7 @@ Module Mod_Load_SPR
         frmComputers.cmbPrinters3.Items.AddRange(obj9)
 
         'frmSplash.lblLoadSPR.Text = "Инфраструктура"
+
         FillComboNET(frmComputers.cmbBranch, "FILIAL", "SPR_FILIAL", "", False, True)
 
         Dim LNGIniFile As New IniFile(sLANGPATH)
@@ -249,7 +252,6 @@ Module Mod_Load_SPR
         FillComboNET(frmComputers.txtUserName, "Name", "SPR_USER", "", False, True)
         FillComboNET(frmComputers.txtUserFIO, "A", "SPR_USER", "", False, True)
         
-
         'frmSplash.lblLoadSPR.Text = "Построение дерева.."
 
 

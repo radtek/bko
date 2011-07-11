@@ -11,7 +11,7 @@ Module MOD_REF_TREE
     Private DepatrmentNode1 As TreeNode
     Private OfficeNode1 As TreeNode
     Private FontStyl As System.Drawing.FontStyle
-
+    Private iA1, iA2, iA3, iA4, iA5, iA6, iA7, iA8, iID As String
 
     Private Sub FILING_FILIAL()
         On Error Resume Next
@@ -23,9 +23,6 @@ Module MOD_REF_TREE
 
         zFIL = FILIAL1
 
-
-
-        Dim iA1, iA2, iA3, iA4, iA5, iA6, iA7, iA8 As String
 
         Dim sVISIBLE As String
 
@@ -72,7 +69,9 @@ Module MOD_REF_TREE
                 If Not IsDBNull(.Fields("PRINTER_NAME_4").Value) Then iA7 = .Fields("PRINTER_NAME_4").Value
                 If Not IsDBNull(.Fields("Balans").Value) Then iA8 = .Fields("Balans").Value
 
-                FILING_TREE(lstgroups1, iA5, iA1, iA2, iA3, .Fields("id").Value, iA4, BrancheNode1, iA6, iA7, iA8)
+                iID = .Fields("id").Value
+
+                FILING_TREE(lstgroups1, iA5, iA1, iA2, iA3, iID, iA4, BrancheNode1, iA6, iA7, iA8)
 
                 .MoveNext()
             Loop
@@ -83,14 +82,13 @@ Module MOD_REF_TREE
 
     End Sub
 
+
     Public Sub RefFilTree(ByVal lstgroups As TreeView)
         On Error GoTo ERR1
 
-        lstgroups.HideSelection = False
+        Dim starttime As DateTime
+        starttime = Now()
 
-        'frmComputers.gbTree.ForeColor = Color.Red
-
-        'On Error Resume Next
         Dim sTEN As String
         Dim sVISIBLE As String
         Dim sSQL1 As String
@@ -98,9 +96,6 @@ Module MOD_REF_TREE
         Dim sSQL3 As String
         Dim sSQL4 As String
         Dim sSQL5 As String
-
-
-
 
         Dim iA1, iA2, iA3, iA4, iA5, iA6 As String
 
@@ -124,7 +119,7 @@ Module MOD_REF_TREE
 
         End If
 
-
+        lstgroups.HideSelection = False
         lstgroups.Nodes.Clear()
 
 
@@ -140,13 +135,11 @@ Module MOD_REF_TREE
 
         End Select
 
-        'lstgroups.ImageList = frmComputers.ilsCommands
-
         Dim rs As ADODB.Recordset
         Dim rs2 As ADODB.Recordset
         Dim rs3 As ADODB.Recordset
-        Dim rs4 As ADODB.Recordset
-        Dim rs5 As ADODB.Recordset
+        'Dim rs4 As ADODB.Recordset
+        'Dim rs5 As ADODB.Recordset
         Dim rs6 As ADODB.Recordset
         Dim rs7 As ADODB.Recordset
 
@@ -220,7 +213,7 @@ Module MOD_REF_TREE
         lstgroups.Nodes.Add(nodeRoot)
 
 
-        '''My.Application.DoEvents()
+        'My.Application.DoEvents()
 
         'lstgroups.Invoke()
 
@@ -253,7 +246,7 @@ Module MOD_REF_TREE
         With rs
             .MoveFirst()
             Do While Not .EOF
-                '''My.Application.DoEvents()
+                'My.Application.DoEvents()
                 Dim BrancheNode As New TreeNode(.Fields("filial").Value, 0, 0)
                 BrancheNode.Tag = "G|" & .Fields("id").Value
                 sTEN = "G|" & .Fields("id").Value
@@ -294,17 +287,9 @@ Module MOD_REF_TREE
 
 
                 If cFil <> 0 Then
-                    'My.Application.DoEvents()
 
-                    'lstgroups.BeginInvoke(New MethodInvoker(AddressOf FILING_FILIAL))
                     lstgroups.Invoke(New MethodInvoker(AddressOf FILING_FILIAL))
 
-
-                    'If frmComputers.lstGroups.InvokeRequired Then
-                    '    frmComputers.lstGroups.Invoke(New MethodInvoker(AddressOf FILING_FILIAL))
-                    'Else
-                    '    Call FILING_FILIAL()
-                    'End If
 
                 End If
 
@@ -337,7 +322,6 @@ Module MOD_REF_TREE
                             KABINET1 = ""
 
                             If KCKey = 0 And Len(DCKey) <> 0 Then
-
                                 If DCKey = sTEN Then
                                     lstgroups.SelectedNode = DepatrmentNode
                                     lstgroups.SelectedNode.Expand()
@@ -357,21 +341,10 @@ Module MOD_REF_TREE
                             rs3.Close()
                             rs3 = Nothing
 
-
                             If cFil <> 0 Then
-                                'My.Application.DoEvents()
-
-                                'lstgroups.BeginInvoke(New MethodInvoker(AddressOf FILING_FILIAL))
 
                                 lstgroups.Invoke(New MethodInvoker(AddressOf FILING_FILIAL))
 
-
-                                'If lstgroups.InvokeRequired Then
-                                '    'frmComputers.lstGroups.Invoke(New MethodInvoker(AddressOf FILING_FILIAL))
-                                '    lstgroups.Invoke(New MethodInvoker(AddressOf FILING_FILIAL))
-                                'Else
-                                '    Call FILING_FILIAL()
-                                'End If
 
                             End If
 
@@ -426,17 +399,8 @@ Module MOD_REF_TREE
 
 
                                         If cFil <> 0 Then
-                                            'My.Application.DoEvents()
 
                                             lstgroups.Invoke(New MethodInvoker(AddressOf FILING_FILIAL))
-
-                                            'If frmComputers.lstGroups.InvokeRequired Then
-                                            '    frmComputers.lstGroups.Invoke(New MethodInvoker(AddressOf FILING_FILIAL))
-                                            'Else
-                                            '    Call FILING_FILIAL()
-                                            'End If
-
-
 
                                         End If
 
@@ -448,8 +412,6 @@ Module MOD_REF_TREE
 
                             End If
                             'Конец кабинетов
-
-
 
                         End If
 
@@ -476,12 +438,16 @@ Module MOD_REF_TREE
 
         End If
 
+        lstgroups.Enabled = True
+
+        'MessageBox.Show("done! " & Math.Round(Now.Subtract(starttime).TotalSeconds, 4).ToString)
 
 exitsub:
 
 
         Exit Sub
 ERR1:
+        'lstgroups.visible = True
         'MsgBox Err.Description
         Select Case Err.Number
             Case 3021 'ignore, no entries in list
@@ -494,9 +460,10 @@ ERR1:
         End Select
 
 
+
     End Sub
 
-    Public Sub FILING_TREE(ByVal lstgroups As TreeView, ByVal iTipTehn As String, ByVal TipPC As String, ByVal NET_NAME As String, ByVal PSEVDONIM As String, ByVal iD As String, ByVal Spisan As String, ByVal DepNode As TreeNode, ByVal OS As String, ByVal n_set As String, ByVal balans As String)
+     Public Sub FILING_TREE(ByVal lstgroups As TreeView, ByVal iTipTehn As String, ByVal TipPC As String, ByVal NET_NAME As String, ByVal PSEVDONIM As String, ByVal iD As String, ByVal Spisan As String, ByVal DepNode As TreeNode, ByVal OS As String, ByVal n_set As String, ByVal balans As String)
 
         Dim iC As String
         Dim iA As String
@@ -608,7 +575,8 @@ ERR1:
 
         End Select
 
-        '''My.Application.DoEvents()
+        'My.Application.DoEvents()
+
         Select Case iTipTehn
 
             Case "CNT"
@@ -637,8 +605,8 @@ ERR1:
 
                 End If
 
+
                 Dim TEHNodeCNT As New TreeNode(L_NAME, uname, uname)
-                'Dim TEHNode As New TreeNode(L_NAME, iA, iA)
                 TEHNodeCNT.Tag = "C|" & iD
                 DepNode.Nodes.Add(TEHNodeCNT)
 
@@ -755,6 +723,8 @@ ERR1:
                             Select Case .Fields("tiptehn").Value
 
                                 Case "NET"
+
+
                                     Dim TEHNodePC As New TreeNode(L_NAME, 10, 10)
                                     TEHNodePC.Tag = "C|" & .Fields("id").Value
                                     TEHNodeCNT.Nodes.Add(TEHNodePC)
@@ -972,139 +942,27 @@ ERR1:
 
 
                                                     Case "Printer"
-                                                        Dim TEHNodePCL As New TreeNode(L_NAME, 7, 7)
-                                                        TEHNodePCL.Tag = "C|" & .Fields("id").Value
-                                                        TEHNodePC.Nodes.Add(TEHNodePCL)
 
-                                                        If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                                            TEHNodePCL.ForeColor = Color.DimGray
-                                                            TEHNodePCL.NodeFont = New Font(lstgroups.Font, 8)
-                                                        End If
+                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 7)
 
-                                                        If balans = "1" Or balans = "True" Or balans = "-1" Then
-
-                                                            If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                                                TEHNodePCL.NodeFont = New Font(lstgroups.Font, 10)
-                                                            Else
-                                                                TEHNodePCL.NodeFont = New Font(lstgroups.Font, 2)
-                                                            End If
-                                                        End If
-
-                                                        If KCKey <> 0 Then
-                                                            If KCKey = .Fields("id").Value Then
-                                                                lstgroups.SelectedNode = TEHNodePCL
-                                                                lstgroups.SelectedNode.Expand()
-                                                            End If
-                                                        End If
 
                                                     Case "MFU"
 
-                                                        Dim TEHNodePCL As New TreeNode(L_NAME, 8, 8)
-                                                        TEHNodePCL.Tag = "C|" & .Fields("id").Value
-                                                        TEHNodePC.Nodes.Add(TEHNodePCL)
-
-                                                        If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                                            TEHNodePCL.ForeColor = Color.DimGray
-                                                            TEHNodePCL.NodeFont = New Font(lstgroups.Font, 8)
-                                                        End If
-
-                                                        If balans = "1" Or balans = "True" Or balans = "-1" Then
-
-                                                            If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                                                TEHNodePCL.NodeFont = New Font(lstgroups.Font, 10)
-                                                            Else
-                                                                TEHNodePCL.NodeFont = New Font(lstgroups.Font, 2)
-                                                            End If
-                                                        End If
-
-                                                        If KCKey <> 0 Then
-                                                            If KCKey = .Fields("id").Value Then
-                                                                lstgroups.SelectedNode = TEHNodePCL
-                                                                lstgroups.SelectedNode.Expand()
-                                                            End If
-                                                        End If
+                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 8)
 
 
                                                     Case "SCANER"
 
-                                                        Dim TEHNodePCL As New TreeNode(L_NAME, 14, 14)
-                                                        TEHNodePCL.Tag = "C|" & .Fields("id").Value
-                                                        TEHNodePC.Nodes.Add(TEHNodePCL)
-
-                                                        If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                                            TEHNodePCL.ForeColor = Color.DimGray
-                                                            TEHNodePCL.NodeFont = New Font(lstgroups.Font, 8)
-                                                        End If
-
-                                                        If balans = "1" Or balans = "True" Or balans = "-1" Then
-
-                                                            If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                                                TEHNodePCL.NodeFont = New Font(lstgroups.Font, 10)
-                                                            Else
-                                                                TEHNodePCL.NodeFont = New Font(lstgroups.Font, 2)
-                                                            End If
-                                                        End If
-
-                                                        If KCKey <> 0 Then
-                                                            If KCKey = .Fields("id").Value Then
-                                                                lstgroups.SelectedNode = TEHNodePCL
-                                                                lstgroups.SelectedNode.Expand()
-                                                            End If
-                                                        End If
+                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 14)
 
                                                     Case "ZIP"
-                                                        Dim TEHNodePCL As New TreeNode(L_NAME, 15, 15)
-                                                        TEHNodePCL.Tag = "C|" & .Fields("id").Value
-                                                        TEHNodePC.Nodes.Add(TEHNodePCL)
 
-                                                        If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                                            TEHNodePCL.ForeColor = Color.DimGray
-                                                            TEHNodePCL.NodeFont = New Font(lstgroups.Font, 8)
-                                                        End If
+                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 15)
 
-                                                        If balans = "1" Or balans = "True" Or balans = "-1" Then
-
-                                                            If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                                                TEHNodePCL.NodeFont = New Font(lstgroups.Font, 10)
-                                                            Else
-                                                                TEHNodePCL.NodeFont = New Font(lstgroups.Font, 2)
-                                                            End If
-                                                        End If
-
-                                                        If KCKey <> 0 Then
-                                                            If KCKey = .Fields("id").Value Then
-                                                                lstgroups.SelectedNode = TEHNodePCL
-                                                                lstgroups.SelectedNode.Expand()
-
-                                                            End If
-                                                        End If
 
                                                     Case "PHONE"
-                                                        Dim TEHNodePCL As New TreeNode(L_NAME, 12, 12)
-                                                        TEHNodePCL.Tag = "C|" & .Fields("id").Value
-                                                        TEHNodePC.Nodes.Add(TEHNodePCL)
 
-                                                        If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                                            TEHNodePCL.ForeColor = Color.DimGray
-                                                            TEHNodePCL.NodeFont = New Font(lstgroups.Font, 8)
-                                                        End If
-
-                                                        If balans = "1" Or balans = "True" Or balans = "-1" Then
-
-                                                            If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                                                TEHNodePCL.NodeFont = New Font(lstgroups.Font, 10)
-                                                            Else
-                                                                TEHNodePCL.NodeFont = New Font(lstgroups.Font, 2)
-                                                            End If
-                                                        End If
-
-                                                        If KCKey <> 0 Then
-                                                            If KCKey = .Fields("id").Value Then
-                                                                lstgroups.SelectedNode = TEHNodePCL
-                                                                lstgroups.SelectedNode.Expand()
-
-                                                            End If
-                                                        End If
+                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 12)
 
 
                                                     Case "OT"
@@ -1147,216 +1005,42 @@ ERR1:
                                                             iA = uname
                                                         End If
 
+                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, iA)
 
-                                                        Dim TEHNodePCL As New TreeNode(L_NAME, iA, iA)
-                                                        TEHNodePCL.Tag = "C|" & .Fields("id").Value
-                                                        TEHNodePC.Nodes.Add(TEHNodePCL)
-
-                                                        If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                                            TEHNodePCL.ForeColor = Color.DimGray
-                                                            TEHNodePCL.NodeFont = New Font(lstgroups.Font, 8)
-                                                        End If
-
-                                                        If balans = "1" Or balans = "True" Or balans = "-1" Then
-
-                                                            If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                                                TEHNodePCL.NodeFont = New Font(lstgroups.Font, 10)
-                                                            Else
-                                                                TEHNodePCL.NodeFont = New Font(lstgroups.Font, 2)
-                                                            End If
-                                                        End If
-
-                                                        If KCKey <> 0 Then
-                                                            If KCKey = .Fields("id").Value Then
-                                                                lstgroups.SelectedNode = TEHNodePCL
-                                                                lstgroups.SelectedNode.Expand()
-                                                            End If
-                                                        End If
 
                                                     Case "MONITOR"
 
-                                                        Dim TEHNodePCL As New TreeNode(L_NAME, 17, 17)
-                                                        TEHNodePCL.Tag = "C|" & .Fields("id").Value
-                                                        TEHNodePC.Nodes.Add(TEHNodePCL)
-
-                                                        If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                                            TEHNodePCL.ForeColor = Color.DimGray
-                                                            TEHNodePCL.NodeFont = New Font(lstgroups.Font, 8)
-                                                        End If
-
-                                                        If balans = "1" Or balans = "True" Or balans = "-1" Then
-
-                                                            If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                                                TEHNodePCL.NodeFont = New Font(lstgroups.Font, 10)
-                                                            Else
-                                                                TEHNodePCL.NodeFont = New Font(lstgroups.Font, 2)
-                                                            End If
-                                                        End If
-
-                                                        If KCKey <> 0 Then
-                                                            If KCKey = .Fields("id").Value Then
-                                                                lstgroups.SelectedNode = TEHNodePCL
-                                                                lstgroups.SelectedNode.Expand()
-                                                            End If
-                                                        End If
+                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 17)
 
 
                                                         '--------------VIP_Graff Добавление новой перефирии Начало-----------------
                                                     Case "USB"
-                                                        Dim TEHNodePCL As New TreeNode(L_NAME, 64, 64)
-                                                        TEHNodePCL.Tag = "C|" & .Fields("id").Value
-                                                        TEHNodePC.Nodes.Add(TEHNodePCL)
 
-                                                        If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                                            TEHNodePCL.ForeColor = Color.DimGray
-                                                            TEHNodePCL.NodeFont = New Font(lstgroups.Font, 8)
-                                                        End If
+                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 18)
 
-                                                        If balans = "1" Or balans = "True" Or balans = "-1" Then
-
-                                                            If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                                                TEHNodePCL.NodeFont = New Font(lstgroups.Font, 10)
-                                                            Else
-                                                                TEHNodePCL.NodeFont = New Font(lstgroups.Font, 2)
-                                                            End If
-                                                        End If
-
-                                                        If KCKey <> 0 Then
-                                                            If KCKey = .Fields("id").Value Then
-                                                                lstgroups.SelectedNode = TEHNodePCL
-                                                                lstgroups.SelectedNode.Expand()
-                                                            End If
-                                                        End If
 
                                                     Case "SOUND"
-                                                        Dim TEHNodePCL As New TreeNode(L_NAME, 44, 44)
-                                                        TEHNodePCL.Tag = "C|" & .Fields("id").Value
-                                                        TEHNodePC.Nodes.Add(TEHNodePCL)
 
-                                                        If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                                            TEHNodePCL.ForeColor = Color.DimGray
-                                                            TEHNodePCL.NodeFont = New Font(lstgroups.Font, 8)
-                                                        End If
-
-                                                        If balans = "1" Or balans = "True" Or balans = "-1" Then
-
-                                                            If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                                                TEHNodePCL.NodeFont = New Font(lstgroups.Font, 10)
-                                                            Else
-                                                                TEHNodePCL.NodeFont = New Font(lstgroups.Font, 2)
-                                                            End If
-                                                        End If
-
-                                                        If KCKey <> 0 Then
-                                                            If KCKey = .Fields("id").Value Then
-                                                                lstgroups.SelectedNode = TEHNodePCL
-                                                                lstgroups.SelectedNode.Expand()
-                                                            End If
-                                                        End If
+                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 44)
 
                                                     Case "IBP"
-                                                        Dim TEHNodePCL As New TreeNode(L_NAME, 41, 41)
-                                                        TEHNodePCL.Tag = "C|" & .Fields("id").Value
-                                                        TEHNodePC.Nodes.Add(TEHNodePCL)
 
-                                                        If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                                            TEHNodePCL.ForeColor = Color.DimGray
-                                                            TEHNodePCL.NodeFont = New Font(lstgroups.Font, 8)
-                                                        End If
+                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 41)
 
-                                                        If balans = "1" Or balans = "True" Or balans = "-1" Then
-
-                                                            If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                                                TEHNodePCL.NodeFont = New Font(lstgroups.Font, 10)
-                                                            Else
-                                                                TEHNodePCL.NodeFont = New Font(lstgroups.Font, 2)
-                                                            End If
-                                                        End If
-
-                                                        If KCKey <> 0 Then
-                                                            If KCKey = .Fields("id").Value Then
-                                                                lstgroups.SelectedNode = TEHNodePCL
-                                                                lstgroups.SelectedNode.Expand()
-                                                            End If
-                                                        End If
 
                                                     Case "FS"
-                                                        Dim TEHNodePCL As New TreeNode(L_NAME, 61, 61)
-                                                        TEHNodePCL.Tag = "C|" & .Fields("id").Value
-                                                        TEHNodePC.Nodes.Add(TEHNodePCL)
 
-                                                        If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                                            TEHNodePCL.ForeColor = Color.DimGray
-                                                            TEHNodePCL.NodeFont = New Font(lstgroups.Font, 8)
-                                                        End If
+                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 61)
 
-                                                        If balans = "1" Or balans = "True" Or balans = "-1" Then
-
-                                                            If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                                                TEHNodePCL.NodeFont = New Font(lstgroups.Font, 10)
-                                                            Else
-                                                                TEHNodePCL.NodeFont = New Font(lstgroups.Font, 2)
-                                                            End If
-                                                        End If
-
-                                                        If KCKey <> 0 Then
-                                                            If KCKey = .Fields("id").Value Then
-                                                                lstgroups.SelectedNode = TEHNodePCL
-                                                                lstgroups.SelectedNode.Expand()
-                                                            End If
-                                                        End If
 
                                                     Case "KEYB"
-                                                        Dim TEHNodePCL As New TreeNode(L_NAME, 46, 46)
-                                                        TEHNodePCL.Tag = "C|" & .Fields("id").Value
-                                                        TEHNodePC.Nodes.Add(TEHNodePCL)
 
-                                                        If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                                            TEHNodePCL.ForeColor = Color.DimGray
-                                                            TEHNodePCL.NodeFont = New Font(lstgroups.Font, 8)
-                                                        End If
-
-                                                        If balans = "1" Or balans = "True" Or balans = "-1" Then
-
-                                                            If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                                                TEHNodePCL.NodeFont = New Font(lstgroups.Font, 10)
-                                                            Else
-                                                                TEHNodePCL.NodeFont = New Font(lstgroups.Font, 2)
-                                                            End If
-                                                        End If
-
-                                                        If KCKey <> 0 Then
-                                                            If KCKey = .Fields("id").Value Then
-                                                                lstgroups.SelectedNode = TEHNodePCL
-                                                                lstgroups.SelectedNode.Expand()
-                                                            End If
-                                                        End If
+                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 46)
 
                                                     Case "MOUSE"
-                                                        Dim TEHNodePCL As New TreeNode(L_NAME, 47, 47)
-                                                        TEHNodePCL.Tag = "C|" & .Fields("id").Value
-                                                        TEHNodePC.Nodes.Add(TEHNodePCL)
 
-                                                        If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                                            TEHNodePCL.ForeColor = Color.DimGray
-                                                            TEHNodePCL.NodeFont = New Font(lstgroups.Font, 8)
-                                                        End If
+                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 47)
 
-                                                        If balans = "1" Or balans = "True" Or balans = "-1" Then
-
-                                                            If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                                                TEHNodePCL.NodeFont = New Font(lstgroups.Font, 10)
-                                                            Else
-                                                                TEHNodePCL.NodeFont = New Font(lstgroups.Font, 2)
-                                                            End If
-                                                        End If
-
-                                                        If KCKey <> 0 Then
-                                                            If KCKey = .Fields("id").Value Then
-                                                                lstgroups.SelectedNode = TEHNodePCL
-                                                                lstgroups.SelectedNode.Expand()
-                                                            End If
-                                                        End If
                                                         '--------------VIP_Graff Добавление новой перефирии Конец------------------
 
                                                     Case Else
@@ -1381,139 +1065,26 @@ ERR1:
 
                                 Case "Printer"
 
-                                    Dim TEHNode As New TreeNode(L_NAME, 7, 7)
-                                    TEHNode.Tag = "C|" & .Fields("id").Value
-                                    TEHNodeCNT.Nodes.Add(TEHNode)
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME, 7)
 
-                                    If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                        TEHNode.ForeColor = Color.DimGray
-                                        TEHNode.NodeFont = New Font(lstgroups.Font, 8)
-                                    End If
-
-                                    If balans = "1" Or balans = "True" Or balans = "-1" Then
-
-                                        If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                            TEHNode.NodeFont = New Font(lstgroups.Font, 10)
-                                        Else
-                                            TEHNode.NodeFont = New Font(lstgroups.Font, 2)
-                                        End If
-                                    End If
-
-                                    If KCKey <> 0 Then
-                                        If KCKey = .Fields("id").Value Then
-                                            lstgroups.SelectedNode = TEHNode
-                                            lstgroups.SelectedNode.Expand()
-                                        End If
-                                    End If
 
                                 Case "MFU"
 
-                                    Dim TEHNode As New TreeNode(L_NAME, 8, 8)
-                                    TEHNode.Tag = "C|" & .Fields("id").Value
-                                    TEHNodeCNT.Nodes.Add(TEHNode)
-
-                                    If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                        TEHNode.ForeColor = Color.DimGray
-                                        TEHNode.NodeFont = New Font(lstgroups.Font, 8)
-                                    End If
-
-                                    If balans = "1" Or balans = "True" Or balans = "-1" Then
-
-                                        If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                            TEHNode.NodeFont = New Font(lstgroups.Font, 10)
-                                        Else
-                                            TEHNode.NodeFont = New Font(lstgroups.Font, 2)
-                                        End If
-                                    End If
-
-                                    If KCKey <> 0 Then
-                                        If KCKey = .Fields("id").Value Then
-                                            lstgroups.SelectedNode = TEHNode
-                                            lstgroups.SelectedNode.Expand()
-                                        End If
-                                    End If
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME, 8)
 
 
                                 Case "SCANER"
 
-                                    Dim TEHNode As New TreeNode(L_NAME, 14, 14)
-                                    TEHNode.Tag = "C|" & .Fields("id").Value
-                                    TEHNodeCNT.Nodes.Add(TEHNode)
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME, 14)
 
-                                    If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                        TEHNode.ForeColor = Color.DimGray
-                                        TEHNode.NodeFont = New Font(lstgroups.Font, 8)
-                                    End If
-
-                                    If balans = "1" Or balans = "True" Or balans = "-1" Then
-
-                                        If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                            TEHNode.NodeFont = New Font(lstgroups.Font, 10)
-                                        Else
-                                            TEHNode.NodeFont = New Font(lstgroups.Font, 2)
-                                        End If
-                                    End If
-
-                                    If KCKey <> 0 Then
-                                        If KCKey = .Fields("id").Value Then
-                                            lstgroups.SelectedNode = TEHNode
-                                            lstgroups.SelectedNode.Expand()
-                                        End If
-                                    End If
 
                                 Case "ZIP"
-                                    Dim TEHNode As New TreeNode(L_NAME, 15, 15)
-                                    TEHNode.Tag = "C|" & .Fields("id").Value
-                                    TEHNodeCNT.Nodes.Add(TEHNode)
 
-                                    If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                        TEHNode.ForeColor = Color.DimGray
-                                        TEHNode.NodeFont = New Font(lstgroups.Font, 8)
-                                    End If
-
-                                    If balans = "1" Or balans = "True" Or balans = "-1" Then
-
-                                        If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                            TEHNode.NodeFont = New Font(lstgroups.Font, 10)
-                                        Else
-                                            TEHNode.NodeFont = New Font(lstgroups.Font, 2)
-                                        End If
-                                    End If
-
-                                    If KCKey <> 0 Then
-                                        If KCKey = .Fields("id").Value Then
-                                            lstgroups.SelectedNode = TEHNode
-                                            lstgroups.SelectedNode.Expand()
-
-                                        End If
-                                    End If
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME, 15)
 
                                 Case "PHONE"
-                                    Dim TEHNode As New TreeNode(L_NAME, 12, 12)
-                                    TEHNode.Tag = "C|" & .Fields("id").Value
-                                    TEHNodeCNT.Nodes.Add(TEHNode)
 
-                                    If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                        TEHNode.ForeColor = Color.DimGray
-                                        TEHNode.NodeFont = New Font(lstgroups.Font, 8)
-                                    End If
-
-                                    If balans = "1" Or balans = "True" Or balans = "-1" Then
-
-                                        If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                            TEHNode.NodeFont = New Font(lstgroups.Font, 10)
-                                        Else
-                                            TEHNode.NodeFont = New Font(lstgroups.Font, 2)
-                                        End If
-                                    End If
-
-                                    If KCKey <> 0 Then
-                                        If KCKey = .Fields("id").Value Then
-                                            lstgroups.SelectedNode = TEHNode
-                                            lstgroups.SelectedNode.Expand()
-
-                                        End If
-                                    End If
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME, 12)
 
 
                                 Case "OT"
@@ -1557,205 +1128,41 @@ ERR1:
                                     End If
 
 
-                                    Dim TEHNode As New TreeNode(L_NAME, iA, iA)
-                                    TEHNode.Tag = "C|" & .Fields("id").Value
-                                    TEHNodeCNT.Nodes.Add(TEHNode)
-
-                                    If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                        TEHNode.ForeColor = Color.DimGray
-                                        TEHNode.NodeFont = New Font(lstgroups.Font, 8)
-                                    End If
-
-                                    If balans = "1" Or balans = "True" Or balans = "-1" Then
-
-                                        If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                            TEHNode.NodeFont = New Font(lstgroups.Font, 10)
-                                        Else
-                                            TEHNode.NodeFont = New Font(lstgroups.Font, 2)
-                                        End If
-                                    End If
-
-                                    If KCKey <> 0 Then
-                                        If KCKey = .Fields("id").Value Then
-                                            lstgroups.SelectedNode = TEHNode
-                                            lstgroups.SelectedNode.Expand()
-                                        End If
-                                    End If
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME, iA)
 
                                 Case "MONITOR"
 
-                                    Dim TEHNode As New TreeNode(L_NAME, 17, 17)
-                                    TEHNode.Tag = "C|" & .Fields("id").Value
-                                    TEHNodeCNT.Nodes.Add(TEHNode)
-
-                                    If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                        TEHNode.ForeColor = Color.DimGray
-                                        TEHNode.NodeFont = New Font(lstgroups.Font, 8)
-                                    End If
-
-                                    If balans = "1" Or balans = "True" Or balans = "-1" Then
-
-                                        If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                            TEHNode.NodeFont = New Font(lstgroups.Font, 10)
-                                        Else
-                                            TEHNode.NodeFont = New Font(lstgroups.Font, 2)
-                                        End If
-                                    End If
-
-
-                                    If KCKey <> 0 Then
-                                        If KCKey = .Fields("id").Value Then
-                                            lstgroups.SelectedNode = TEHNode
-                                            lstgroups.SelectedNode.Expand()
-                                        End If
-                                    End If
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME, 17)
 
 
                                     '--------------VIP_Graff Добавление новой перефирии Начало-----------------
                                 Case "USB"
-                                    Dim TEHNode As New TreeNode(L_NAME, 64, 64)
-                                    TEHNode.Tag = "C|" & .Fields("id").Value
-                                    TEHNodeCNT.Nodes.Add(TEHNode)
 
-                                    If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                        TEHNode.ForeColor = Color.DimGray
-                                        TEHNode.NodeFont = New Font(lstgroups.Font, 8)
-                                    End If
-
-                                    If balans = "1" Or balans = "True" Or balans = "-1" Then
-
-                                        If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                            TEHNode.NodeFont = New Font(lstgroups.Font, 10)
-                                        Else
-                                            TEHNode.NodeFont = New Font(lstgroups.Font, 2)
-                                        End If
-                                    End If
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME, 18)
 
                                 Case "SOUND"
-                                    Dim TEHNode As New TreeNode(L_NAME, 44, 44)
-                                    TEHNode.Tag = "C|" & .Fields("id").Value
-                                    TEHNodeCNT.Nodes.Add(TEHNode)
 
-                                    If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                        TEHNode.ForeColor = Color.DimGray
-                                        TEHNode.NodeFont = New Font(lstgroups.Font, 8)
-                                    End If
-
-                                    If balans = "1" Or balans = "True" Or balans = "-1" Then
-
-                                        If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                            TEHNode.NodeFont = New Font(lstgroups.Font, 10)
-                                        Else
-                                            TEHNode.NodeFont = New Font(lstgroups.Font, 2)
-                                        End If
-                                    End If
-
-                                    If KCKey <> 0 Then
-                                        If KCKey = .Fields("id").Value Then
-                                            lstgroups.SelectedNode = TEHNode
-                                            lstgroups.SelectedNode.Expand()
-                                        End If
-                                    End If
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME, 44)
 
                                 Case "IBP"
-                                    Dim TEHNode As New TreeNode(L_NAME, 41, 41)
-                                    TEHNode.Tag = "C|" & .Fields("id").Value
-                                    TEHNodeCNT.Nodes.Add(TEHNode)
-                                    If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                        TEHNode.ForeColor = Color.DimGray
-                                        TEHNode.NodeFont = New Font(lstgroups.Font, 8)
-                                    End If
 
-                                    If balans = "1" Or balans = "True" Or balans = "-1" Then
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME, 41)
 
-                                        If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                            TEHNode.NodeFont = New Font(lstgroups.Font, 10)
-                                        Else
-                                            TEHNode.NodeFont = New Font(lstgroups.Font, 2)
-                                        End If
-                                    End If
-
-                                    If KCKey <> 0 Then
-                                        If KCKey = .Fields("id").Value Then
-                                            lstgroups.SelectedNode = TEHNode
-                                            lstgroups.SelectedNode.Expand()
-                                        End If
-                                    End If
 
                                 Case "FS"
-                                    Dim TEHNode As New TreeNode(L_NAME, 61, 61)
-                                    TEHNode.Tag = "C|" & .Fields("id").Value
-                                    TEHNodeCNT.Nodes.Add(TEHNode)
-                                    If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                        TEHNode.ForeColor = Color.DimGray
-                                        TEHNode.NodeFont = New Font(lstgroups.Font, 8)
-                                    End If
 
-                                    If balans = "1" Or balans = "True" Or balans = "-1" Then
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME, 61)
 
-                                        If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                            TEHNode.NodeFont = New Font(lstgroups.Font, 10)
-                                        Else
-                                            TEHNode.NodeFont = New Font(lstgroups.Font, 2)
-                                        End If
-                                    End If
-
-                                    If KCKey <> 0 Then
-                                        If KCKey = .Fields("id").Value Then
-                                            lstgroups.SelectedNode = TEHNode
-                                            lstgroups.SelectedNode.Expand()
-                                        End If
-                                    End If
 
                                 Case "KEYB"
-                                    Dim TEHNode As New TreeNode(L_NAME, 46, 46)
-                                    TEHNode.Tag = "C|" & .Fields("id").Value
-                                    TEHNodeCNT.Nodes.Add(TEHNode)
-                                    If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                        TEHNode.ForeColor = Color.DimGray
-                                        TEHNode.NodeFont = New Font(lstgroups.Font, 8)
-                                    End If
 
-                                    If balans = "1" Or balans = "True" Or balans = "-1" Then
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME, 46)
 
-                                        If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                            TEHNode.NodeFont = New Font(lstgroups.Font, 10)
-                                        Else
-                                            TEHNode.NodeFont = New Font(lstgroups.Font, 2)
-                                        End If
-                                    End If
-
-                                    If KCKey <> 0 Then
-                                        If KCKey = .Fields("id").Value Then
-                                            lstgroups.SelectedNode = TEHNode
-                                            lstgroups.SelectedNode.Expand()
-                                        End If
-                                    End If
 
                                 Case "MOUSE"
-                                    Dim TEHNode As New TreeNode(L_NAME, 47, 47)
-                                    TEHNode.Tag = "C|" & .Fields("id").Value
-                                    TEHNodeCNT.Nodes.Add(TEHNode)
-                                    If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                        TEHNode.ForeColor = Color.DimGray
-                                        TEHNode.NodeFont = New Font(lstgroups.Font, 8)
-                                    End If
 
-                                    If balans = "1" Or balans = "True" Or balans = "-1" Then
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME, 47)
 
-                                        If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                            TEHNode.NodeFont = New Font(lstgroups.Font, 10)
-                                        Else
-                                            TEHNode.NodeFont = New Font(lstgroups.Font, 2)
-                                        End If
-                                    End If
-
-                                    If KCKey <> 0 Then
-                                        If KCKey = .Fields("id").Value Then
-                                            lstgroups.SelectedNode = TEHNode
-                                            lstgroups.SelectedNode.Expand()
-                                        End If
-                                    End If
                                     '--------------VIP_Graff Добавление новой перефирии Конец------------------
 
                                 Case Else
@@ -1902,139 +1309,26 @@ ERR1:
 
 
                                 Case "Printer"
-                                    Dim TEHNodePCL As New TreeNode(L_NAME, 7, 7)
-                                    TEHNodePCL.Tag = "C|" & .Fields("id").Value
-                                    TEHNodePC.Nodes.Add(TEHNodePCL)
 
-                                    If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                        TEHNodePCL.ForeColor = Color.DimGray
-                                        TEHNodePCL.NodeFont = New Font(lstgroups.Font, 8)
-                                    End If
-
-                                    If balans = "1" Or balans = "True" Or balans = "-1" Then
-
-                                        If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                            TEHNodePCL.NodeFont = New Font(lstgroups.Font, 10)
-                                        Else
-                                            TEHNodePCL.NodeFont = New Font(lstgroups.Font, 2)
-                                        End If
-                                    End If
-
-                                    If KCKey <> 0 Then
-                                        If KCKey = .Fields("id").Value Then
-                                            lstgroups.SelectedNode = TEHNodePCL
-                                            lstgroups.SelectedNode.Expand()
-                                        End If
-                                    End If
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 7)
 
                                 Case "MFU"
 
-                                    Dim TEHNode As New TreeNode(L_NAME, 8, 8)
-                                    TEHNode.Tag = "C|" & .Fields("id").Value
-                                    TEHNodePC.Nodes.Add(TEHNode)
 
-                                    If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                        TEHNode.ForeColor = Color.DimGray
-                                        TEHNode.NodeFont = New Font(lstgroups.Font, 8)
-                                    End If
-
-                                    If balans = "1" Or balans = "True" Or balans = "-1" Then
-
-                                        If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                            TEHNode.NodeFont = New Font(lstgroups.Font, 10)
-                                        Else
-                                            TEHNode.NodeFont = New Font(lstgroups.Font, 2)
-                                        End If
-                                    End If
-
-                                    If KCKey <> 0 Then
-                                        If KCKey = .Fields("id").Value Then
-                                            lstgroups.SelectedNode = TEHNode
-                                            lstgroups.SelectedNode.Expand()
-                                        End If
-                                    End If
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 8)
 
 
                                 Case "SCANER"
 
-                                    Dim TEHNode As New TreeNode(L_NAME, 14, 14)
-                                    TEHNode.Tag = "C|" & .Fields("id").Value
-                                    TEHNodePC.Nodes.Add(TEHNode)
-
-                                    If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                        TEHNode.ForeColor = Color.DimGray
-                                        TEHNode.NodeFont = New Font(lstgroups.Font, 8)
-                                    End If
-
-                                    If balans = "1" Or balans = "True" Or balans = "-1" Then
-
-                                        If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                            TEHNode.NodeFont = New Font(lstgroups.Font, 10)
-                                        Else
-                                            TEHNode.NodeFont = New Font(lstgroups.Font, 2)
-                                        End If
-                                    End If
-
-                                    If KCKey <> 0 Then
-                                        If KCKey = .Fields("id").Value Then
-                                            lstgroups.SelectedNode = TEHNode
-                                            lstgroups.SelectedNode.Expand()
-                                        End If
-                                    End If
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 14)
 
                                 Case "ZIP"
-                                    Dim TEHNode As New TreeNode(L_NAME, 15, 15)
-                                    TEHNode.Tag = "C|" & .Fields("id").Value
-                                    TEHNodePC.Nodes.Add(TEHNode)
 
-                                    If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                        TEHNode.ForeColor = Color.DimGray
-                                        TEHNode.NodeFont = New Font(lstgroups.Font, 8)
-                                    End If
-
-                                    If balans = "1" Or balans = "True" Or balans = "-1" Then
-
-                                        If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                            TEHNode.NodeFont = New Font(lstgroups.Font, 10)
-                                        Else
-                                            TEHNode.NodeFont = New Font(lstgroups.Font, 2)
-                                        End If
-                                    End If
-
-                                    If KCKey <> 0 Then
-                                        If KCKey = .Fields("id").Value Then
-                                            lstgroups.SelectedNode = TEHNode
-                                            lstgroups.SelectedNode.Expand()
-
-                                        End If
-                                    End If
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 15)
 
                                 Case "PHONE"
-                                    Dim TEHNode As New TreeNode(L_NAME, 12, 12)
-                                    TEHNode.Tag = "C|" & .Fields("id").Value
-                                    TEHNodePC.Nodes.Add(TEHNode)
 
-                                    If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                        TEHNode.ForeColor = Color.DimGray
-                                        TEHNode.NodeFont = New Font(lstgroups.Font, 8)
-                                    End If
-
-                                    If balans = "1" Or balans = "True" Or balans = "-1" Then
-
-                                        If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                            TEHNode.NodeFont = New Font(lstgroups.Font, 10)
-                                        Else
-                                            TEHNode.NodeFont = New Font(lstgroups.Font, 2)
-                                        End If
-                                    End If
-
-                                    If KCKey <> 0 Then
-                                        If KCKey = .Fields("id").Value Then
-                                            lstgroups.SelectedNode = TEHNode
-                                            lstgroups.SelectedNode.Expand()
-
-                                        End If
-                                    End If
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 12)
 
 
                                 Case "OT"
@@ -2077,211 +1371,41 @@ ERR1:
                                         iA = uname
                                     End If
 
-
-                                    Dim TEHNode As New TreeNode(L_NAME, iA, iA)
-                                    TEHNode.Tag = "C|" & .Fields("id").Value
-                                    TEHNodePC.Nodes.Add(TEHNode)
-
-                                    If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                        TEHNode.ForeColor = Color.DimGray
-                                        TEHNode.NodeFont = New Font(lstgroups.Font, 8)
-                                    End If
-
-                                    If balans = "1" Or balans = "True" Or balans = "-1" Then
-
-                                        If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                            TEHNode.NodeFont = New Font(lstgroups.Font, 10)
-                                        Else
-                                            TEHNode.NodeFont = New Font(lstgroups.Font, 2)
-                                        End If
-                                    End If
-
-                                    If KCKey <> 0 Then
-                                        If KCKey = .Fields("id").Value Then
-                                            lstgroups.SelectedNode = TEHNode
-                                            lstgroups.SelectedNode.Expand()
-                                        End If
-                                    End If
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, iA)
 
                                 Case "MONITOR"
 
-                                    Dim TEHNode As New TreeNode(L_NAME, 17, 17)
-                                    TEHNode.Tag = "C|" & .Fields("id").Value
-                                    TEHNodePC.Nodes.Add(TEHNode)
-
-                                    If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                        TEHNode.ForeColor = Color.DimGray
-                                        TEHNode.NodeFont = New Font(lstgroups.Font, 8)
-                                    End If
-
-                                    If balans = "1" Or balans = "True" Or balans = "-1" Then
-
-                                        If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                            TEHNode.NodeFont = New Font(lstgroups.Font, 10)
-                                        Else
-                                            TEHNode.NodeFont = New Font(lstgroups.Font, 2)
-                                        End If
-                                    End If
-
-
-                                    If KCKey <> 0 Then
-                                        If KCKey = .Fields("id").Value Then
-                                            lstgroups.SelectedNode = TEHNode
-                                            lstgroups.SelectedNode.Expand()
-                                        End If
-                                    End If
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 17)
 
 
                                     '--------------VIP_Graff Добавление новой перефирии Начало-----------------
                                 Case "USB"
-                                    Dim TEHNode As New TreeNode(L_NAME, 64, 64)
-                                    TEHNode.Tag = "C|" & .Fields("id").Value
-                                    TEHNodePC.Nodes.Add(TEHNode)
-                                    If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                        TEHNode.ForeColor = Color.DimGray
-                                        TEHNode.NodeFont = New Font(lstgroups.Font, 8)
-                                    End If
 
-                                    If balans = "1" Or balans = "True" Or balans = "-1" Then
-
-                                        If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                            TEHNode.NodeFont = New Font(lstgroups.Font, 10)
-                                        Else
-                                            TEHNode.NodeFont = New Font(lstgroups.Font, 2)
-                                        End If
-                                    End If
-
-                                    If KCKey <> 0 Then
-                                        If KCKey = .Fields("id").Value Then
-                                            lstgroups.SelectedNode = TEHNode
-                                            lstgroups.SelectedNode.Expand()
-                                        End If
-                                    End If
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 18)
 
                                 Case "SOUND"
-                                    Dim TEHNode As New TreeNode(L_NAME, 44, 44)
-                                    TEHNode.Tag = "C|" & .Fields("id").Value
-                                    TEHNodePC.Nodes.Add(TEHNode)
-                                    If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                        TEHNode.ForeColor = Color.DimGray
-                                        TEHNode.NodeFont = New Font(lstgroups.Font, 8)
-                                    End If
 
-                                    If balans = "1" Or balans = "True" Or balans = "-1" Then
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 44)
 
-                                        If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                            TEHNode.NodeFont = New Font(lstgroups.Font, 10)
-                                        Else
-                                            TEHNode.NodeFont = New Font(lstgroups.Font, 2)
-                                        End If
-                                    End If
-
-                                    If KCKey <> 0 Then
-                                        If KCKey = .Fields("id").Value Then
-                                            lstgroups.SelectedNode = TEHNode
-                                            lstgroups.SelectedNode.Expand()
-                                        End If
-                                    End If
 
                                 Case "IBP"
-                                    Dim TEHNode As New TreeNode(L_NAME, 41, 41)
-                                    TEHNode.Tag = "C|" & .Fields("id").Value
-                                    TEHNodePC.Nodes.Add(TEHNode)
-                                    If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                        TEHNode.ForeColor = Color.DimGray
-                                        TEHNode.NodeFont = New Font(lstgroups.Font, 8)
-                                    End If
 
-                                    If balans = "1" Or balans = "True" Or balans = "-1" Then
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 41)
 
-                                        If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                            TEHNode.NodeFont = New Font(lstgroups.Font, 10)
-                                        Else
-                                            TEHNode.NodeFont = New Font(lstgroups.Font, 2)
-                                        End If
-                                    End If
-
-                                    If KCKey <> 0 Then
-                                        If KCKey = .Fields("id").Value Then
-                                            lstgroups.SelectedNode = TEHNode
-                                            lstgroups.SelectedNode.Expand()
-                                        End If
-                                    End If
 
                                 Case "FS"
-                                    Dim TEHNode As New TreeNode(L_NAME, 61, 61)
-                                    TEHNode.Tag = "C|" & .Fields("id").Value
-                                    TEHNodePC.Nodes.Add(TEHNode)
-                                    If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                        TEHNode.ForeColor = Color.DimGray
-                                        TEHNode.NodeFont = New Font(lstgroups.Font, 8)
-                                    End If
 
-                                    If balans = "1" Or balans = "True" Or balans = "-1" Then
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 61)
 
-                                        If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                            TEHNode.NodeFont = New Font(lstgroups.Font, 10)
-                                        Else
-                                            TEHNode.NodeFont = New Font(lstgroups.Font, 2)
-                                        End If
-                                    End If
-
-                                    If KCKey <> 0 Then
-                                        If KCKey = .Fields("id").Value Then
-                                            lstgroups.SelectedNode = TEHNode
-                                            lstgroups.SelectedNode.Expand()
-                                        End If
-                                    End If
 
                                 Case "KEYB"
-                                    Dim TEHNode As New TreeNode(L_NAME, 46, 46)
-                                    TEHNode.Tag = "C|" & .Fields("id").Value
-                                    TEHNodePC.Nodes.Add(TEHNode)
-                                    If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                        TEHNode.ForeColor = Color.DimGray
-                                        TEHNode.NodeFont = New Font(lstgroups.Font, 8)
-                                    End If
 
-                                    If balans = "1" Or balans = "True" Or balans = "-1" Then
-
-                                        If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                            TEHNode.NodeFont = New Font(lstgroups.Font, 10)
-                                        Else
-                                            TEHNode.NodeFont = New Font(lstgroups.Font, 2)
-                                        End If
-                                    End If
-
-                                    If KCKey <> 0 Then
-                                        If KCKey = .Fields("id").Value Then
-                                            lstgroups.SelectedNode = TEHNode
-                                            lstgroups.SelectedNode.Expand()
-                                        End If
-                                    End If
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 46)
 
                                 Case "MOUSE"
-                                    Dim TEHNode As New TreeNode(L_NAME, 47, 47)
-                                    TEHNode.Tag = "C|" & .Fields("id").Value
-                                    TEHNodePC.Nodes.Add(TEHNode)
-                                    If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                        TEHNode.ForeColor = Color.DimGray
-                                        TEHNode.NodeFont = New Font(lstgroups.Font, 8)
-                                    End If
 
-                                    If balans = "1" Or balans = "True" Or balans = "-1" Then
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 47)
 
-                                        If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                            TEHNode.NodeFont = New Font(lstgroups.Font, 10)
-                                        Else
-                                            TEHNode.NodeFont = New Font(lstgroups.Font, 2)
-                                        End If
-                                    End If
-
-                                    If KCKey <> 0 Then
-                                        If KCKey = .Fields("id").Value Then
-                                            lstgroups.SelectedNode = TEHNode
-                                            lstgroups.SelectedNode.Expand()
-                                        End If
-                                    End If
                                     '--------------VIP_Graff Добавление новой перефирии Конец------------------
 
                                 Case Else
@@ -2300,83 +1424,17 @@ ERR1:
 
 
             Case "Printer"
-                Dim TEHNode As New TreeNode(L_NAME, 7, 7)
-                TEHNode.Tag = "C|" & iD
-                DepNode.Nodes.Add(TEHNode)
 
-                If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                    TEHNode.ForeColor = Color.DimGray
-                    TEHNode.NodeFont = New Font(lstgroups.Font, 8)
-                End If
-
-                If balans = "1" Or balans = "True" Or balans = "-1" Then
-
-                    If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                        TEHNode.NodeFont = New Font(lstgroups.Font, 10)
-                    Else
-                        TEHNode.NodeFont = New Font(lstgroups.Font, 2)
-                    End If
-                End If
-
-                If KCKey <> 0 Then
-                    If KCKey = iD Then
-                        lstgroups.SelectedNode = TEHNode
-                        lstgroups.SelectedNode.Expand()
-                    End If
-                End If
+                Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 7)
 
             Case "MFU"
 
-                Dim TEHNode As New TreeNode(L_NAME, 8, 8)
-                TEHNode.Tag = "C|" & iD
-                DepNode.Nodes.Add(TEHNode)
-
-                If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                    TEHNode.ForeColor = Color.DimGray
-                    TEHNode.NodeFont = New Font(lstgroups.Font, 8)
-                End If
-
-                If balans = "1" Or balans = "True" Or balans = "-1" Then
-
-                    If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                        TEHNode.NodeFont = New Font(lstgroups.Font, 10)
-                    Else
-                        TEHNode.NodeFont = New Font(lstgroups.Font, 2)
-                    End If
-                End If
-
-                If KCKey <> 0 Then
-                    If KCKey = iD Then
-                        lstgroups.SelectedNode = TEHNode
-                        lstgroups.SelectedNode.Expand()
-                    End If
-                End If
+                Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 8)
 
             Case "KOpir"
-                Dim TEHNode As New TreeNode(L_NAME, 9, 9)
-                TEHNode.Tag = "C|" & iD
-                DepNode.Nodes.Add(TEHNode)
 
-                If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                    TEHNode.ForeColor = Color.DimGray
-                    TEHNode.NodeFont = New Font(lstgroups.Font, 8)
-                End If
+                Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 9)
 
-                If balans = "1" Or balans = "True" Or balans = "-1" Then
-
-                    If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                        TEHNode.NodeFont = New Font(lstgroups.Font, 10)
-                    Else
-                        TEHNode.NodeFont = New Font(lstgroups.Font, 2)
-                    End If
-                End If
-
-                If KCKey <> 0 Then
-                    If KCKey = iD Then
-                        lstgroups.SelectedNode = TEHNode
-                        lstgroups.SelectedNode.Expand()
-                    End If
-                End If
 
             Case "NET"
 
@@ -2424,136 +1482,27 @@ ERR1:
                 End If
 
             Case "PHOTO"
-                Dim TEHNode As New TreeNode(L_NAME, 11, 11)
-                TEHNode.Tag = "C|" & iD
-                DepNode.Nodes.Add(TEHNode)
 
-                If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                    TEHNode.ForeColor = Color.DimGray
-                    TEHNode.NodeFont = New Font(lstgroups.Font, 8)
-                End If
-
-                If balans = "1" Or balans = "True" Or balans = "-1" Then
-
-                    If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                        TEHNode.NodeFont = New Font(lstgroups.Font, 10)
-                    Else
-                        TEHNode.NodeFont = New Font(lstgroups.Font, 2)
-                    End If
-                End If
-
-                If KCKey <> 0 Then
-                    If KCKey = iD Then
-                        lstgroups.SelectedNode = TEHNode
-                        lstgroups.SelectedNode.Expand()
-                    End If
-                End If
+                Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 11)
 
             Case "PHONE"
-                Dim TEHNode As New TreeNode(L_NAME, 12, 12)
-                TEHNode.Tag = "C|" & iD
-                DepNode.Nodes.Add(TEHNode)
 
-                If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                    TEHNode.ForeColor = Color.DimGray
-                    TEHNode.NodeFont = New Font(lstgroups.Font, 8)
-                End If
-
-                If balans = "1" Or balans = "True" Or balans = "-1" Then
-
-                    If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                        TEHNode.NodeFont = New Font(lstgroups.Font, 10)
-                    Else
-                        TEHNode.NodeFont = New Font(lstgroups.Font, 2)
-                    End If
-                End If
-
-                If KCKey <> 0 Then
-                    If KCKey = iD Then
-                        lstgroups.SelectedNode = TEHNode
-                        lstgroups.SelectedNode.Expand()
-                    End If
-                End If
+                Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 12)
 
             Case "FAX"
-                Dim TEHNode As New TreeNode(L_NAME, 13, 13)
-                TEHNode.Tag = "C|" & iD
-                DepNode.Nodes.Add(TEHNode)
 
-                If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                    TEHNode.ForeColor = Color.DimGray
-                    TEHNode.NodeFont = New Font(lstgroups.Font, 8)
-                End If
+                Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 13)
 
-                If balans = "1" Or balans = "True" Or balans = "-1" Then
-
-                    If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                        TEHNode.NodeFont = New Font(lstgroups.Font, 10)
-                    Else
-                        TEHNode.NodeFont = New Font(lstgroups.Font, 2)
-                    End If
-                End If
-
-                If KCKey <> 0 Then
-                    If KCKey = iD Then
-                        lstgroups.SelectedNode = TEHNode
-                        lstgroups.SelectedNode.Expand()
-                    End If
-                End If
 
             Case "SCANER"
 
-                Dim TEHNode As New TreeNode(L_NAME, 14, 14)
-                TEHNode.Tag = "C|" & iD
-                DepNode.Nodes.Add(TEHNode)
+                Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 14)
 
-                If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                    TEHNode.ForeColor = Color.DimGray
-                    TEHNode.NodeFont = New Font(lstgroups.Font, 8)
-                End If
-
-                If balans = "1" Or balans = "True" Or balans = "-1" Then
-
-                    If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                        TEHNode.NodeFont = New Font(lstgroups.Font, 10)
-                    Else
-                        TEHNode.NodeFont = New Font(lstgroups.Font, 2)
-                    End If
-                End If
-
-                If KCKey <> 0 Then
-                    If KCKey = iD Then
-                        lstgroups.SelectedNode = TEHNode
-                        lstgroups.SelectedNode.Expand()
-                    End If
-                End If
 
             Case "ZIP"
-                Dim TEHNode As New TreeNode(L_NAME, 15, 15)
-                TEHNode.Tag = "C|" & iD
-                DepNode.Nodes.Add(TEHNode)
 
-                If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                    TEHNode.ForeColor = Color.DimGray
-                    TEHNode.NodeFont = New Font(lstgroups.Font, 8)
-                End If
+                Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 15)
 
-                If balans = "1" Or balans = "True" Or balans = "-1" Then
-
-                    If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                        TEHNode.NodeFont = New Font(lstgroups.Font, 10)
-                    Else
-                        TEHNode.NodeFont = New Font(lstgroups.Font, 2)
-                    End If
-                End If
-
-                If KCKey <> 0 Then
-                    If KCKey = iD Then
-                        lstgroups.SelectedNode = TEHNode
-                        lstgroups.SelectedNode.Expand()
-
-                    End If
-                End If
 
             Case "OT"
 
@@ -2573,14 +1522,9 @@ ERR1:
                     rsOT.Open("SELECT A FROM spr_other where Name ='" & TipPC & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
                     With rsOT
-                        '.MoveFirst()
-                        'Do While Not .EOF
 
                         If Not IsDBNull(.Fields("A").Value) Then uname = .Fields("A").Value
 
-                        '    .MoveNext()
-
-                        'Loop
                     End With
 
 
@@ -2598,219 +1542,44 @@ ERR1:
                     iA = uname
                 End If
 
+                Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, iA)
 
-                Dim TEHNode As New TreeNode(L_NAME, iA, iA)
-                TEHNode.Tag = "C|" & iD
-                DepNode.Nodes.Add(TEHNode)
-
-                If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                    TEHNode.ForeColor = Color.DimGray
-                    TEHNode.NodeFont = New Font(lstgroups.Font, 8)
-                End If
-
-                If balans = "1" Or balans = "True" Or balans = "-1" Then
-
-                    If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                        TEHNode.NodeFont = New Font(lstgroups.Font, 10)
-                    Else
-                        TEHNode.NodeFont = New Font(lstgroups.Font, 2)
-                    End If
-                End If
-
-
-                If KCKey <> 0 Then
-                    If KCKey = iD Then
-                        lstgroups.SelectedNode = TEHNode
-                        lstgroups.SelectedNode.Expand()
-                    End If
-                End If
 
             Case "MONITOR"
 
+                Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 17)
 
-                Dim TEHNode As New TreeNode(L_NAME, 17, 17)
-                TEHNode.Tag = "C|" & iD
-                DepNode.Nodes.Add(TEHNode)
-
-                If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                    TEHNode.ForeColor = Color.DimGray
-                    TEHNode.NodeFont = New Font(lstgroups.Font, 8)
-                End If
-
-                If balans = "1" Or balans = "True" Or balans = "-1" Then
-
-                    If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                        TEHNode.NodeFont = New Font(lstgroups.Font, 10)
-                    Else
-                        TEHNode.NodeFont = New Font(lstgroups.Font, 2)
-                    End If
-                End If
-
-                If KCKey <> 0 Then
-                    If KCKey = iD Then
-                        lstgroups.SelectedNode = TEHNode
-                        lstgroups.SelectedNode.Expand()
-                    End If
-                End If
 
                 '--------------VIP_Graff Добавление новой перефирии Начало-----------------
             Case "USB"
-                Dim TEHNode As New TreeNode(L_NAME, 64, 64)
-                TEHNode.Tag = "C|" & iD
-                DepNode.Nodes.Add(TEHNode)
-                If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                    TEHNode.ForeColor = Color.DimGray
-                    TEHNode.NodeFont = New Font(lstgroups.Font, 8)
-                End If
 
-                If balans = "1" Or balans = "True" Or balans = "-1" Then
+                Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 18)
 
-                    If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                        TEHNode.NodeFont = New Font(lstgroups.Font, 10)
-                    Else
-                        TEHNode.NodeFont = New Font(lstgroups.Font, 2)
-                    End If
-                End If
-
-                If KCKey <> 0 Then
-                    If KCKey = iD Then
-                        lstgroups.SelectedNode = TEHNode
-                        lstgroups.SelectedNode.Expand()
-                    End If
-                End If
 
             Case "SOUND"
-                Dim TEHNode As New TreeNode(L_NAME, 44, 44)
-                TEHNode.Tag = "C|" & iD
-                DepNode.Nodes.Add(TEHNode)
-                If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                    TEHNode.ForeColor = Color.DimGray
-                    TEHNode.NodeFont = New Font(lstgroups.Font, 8)
-                End If
 
-                If balans = "1" Or balans = "True" Or balans = "-1" Then
+                Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 44)
 
-                    If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                        TEHNode.NodeFont = New Font(lstgroups.Font, 10)
-                    Else
-                        TEHNode.NodeFont = New Font(lstgroups.Font, 2)
-                    End If
-                End If
-
-                If KCKey <> 0 Then
-                    If KCKey = iD Then
-                        lstgroups.SelectedNode = TEHNode
-                        lstgroups.SelectedNode.Expand()
-                    End If
-                End If
 
             Case "IBP"
-                Dim TEHNode As New TreeNode(L_NAME, 41, 41)
-                TEHNode.Tag = "C|" & iD
-                DepNode.Nodes.Add(TEHNode)
-                If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                    TEHNode.ForeColor = Color.DimGray
-                    TEHNode.NodeFont = New Font(lstgroups.Font, 8)
-                End If
 
-                If balans = "1" Or balans = "True" Or balans = "-1" Then
+                Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 41)
 
-                    If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                        TEHNode.NodeFont = New Font(lstgroups.Font, 10)
-                    Else
-                        TEHNode.NodeFont = New Font(lstgroups.Font, 2)
-                    End If
-                End If
-
-                If KCKey <> 0 Then
-                    If KCKey = iD Then
-                        lstgroups.SelectedNode = TEHNode
-                        lstgroups.SelectedNode.Expand()
-                    End If
-                End If
 
             Case "FS"
-                Dim TEHNode As New TreeNode(L_NAME, 61, 61)
-                TEHNode.Tag = "C|" & iD
-                DepNode.Nodes.Add(TEHNode)
-                If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                    TEHNode.ForeColor = Color.DimGray
-                    TEHNode.NodeFont = New Font(lstgroups.Font, 8)
-                End If
 
-                If balans = "1" Or balans = "True" Or balans = "-1" Then
+                Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 61)
 
-                    If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                        TEHNode.NodeFont = New Font(lstgroups.Font, 10)
-                    Else
-                        TEHNode.NodeFont = New Font(lstgroups.Font, 2)
-                    End If
-                End If
-
-                If KCKey <> 0 Then
-                    If KCKey = iD Then
-                        lstgroups.SelectedNode = TEHNode
-                        lstgroups.SelectedNode.Expand()
-                    End If
-                End If
 
             Case "KEYB"
-                Dim TEHNode As New TreeNode(L_NAME, 46, 46)
-                TEHNode.Tag = "C|" & iD
-                DepNode.Nodes.Add(TEHNode)
 
+                Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 46)
 
-
-                If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                    TEHNode.ForeColor = Color.DimGray
-                    TEHNode.NodeFont = New Font(lstgroups.Font, 8)
-                End If
-
-                If balans = "1" Or balans = "True" Or balans = "-1" Then
-
-                    If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                        TEHNode.NodeFont = New Font(lstgroups.Font, 10)
-                    Else
-                        TEHNode.NodeFont = New Font(lstgroups.Font, 2)
-                    End If
-
-                End If
-
-
-
-
-
-                If KCKey <> 0 Then
-                    If KCKey = iD Then
-                        lstgroups.SelectedNode = TEHNode
-                        lstgroups.SelectedNode.Expand()
-                    End If
-                End If
 
             Case "MOUSE"
-                Dim TEHNode As New TreeNode(L_NAME, 47, 47)
-                TEHNode.Tag = "C|" & iD
-                DepNode.Nodes.Add(TEHNode)
-                If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                    TEHNode.ForeColor = Color.DimGray
-                    TEHNode.NodeFont = New Font(lstgroups.Font, 8)
-                End If
 
-                If balans = "1" Or balans = "True" Or balans = "-1" Then
+                Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 47)
 
-                    If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                        TEHNode.NodeFont = New Font(lstgroups.Font, 10)
-                    Else
-                        TEHNode.NodeFont = New Font(lstgroups.Font, 2)
-                    End If
-                End If
-
-                If KCKey <> 0 Then
-                    If KCKey = iD Then
-                        lstgroups.SelectedNode = TEHNode
-                        lstgroups.SelectedNode.Expand()
-                    End If
-                End If
                 '--------------VIP_Graff Добавление новой перефирии Конец------------------
 
 
@@ -2822,6 +1591,36 @@ ERR1:
 
     End Sub
 
+    Private Sub Filling_TREE_DATA(ByVal lstgroups As TreeView, ByVal sID As Integer, ByVal TEHNodePCL As TreeNode, ByVal Spisan As String, ByVal balans As String, ByVal L_NAME As String, ByVal sNUM As Decimal)
+
+        Dim TEHNodeCNT As New TreeNode(L_NAME, sNUM, sNUM)
+        TEHNodeCNT.Tag = "C|" & sID
+        TEHNodePCL.Nodes.Add(TEHNodeCNT)
+
+        If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
+            TEHNodeCNT.ForeColor = Color.DimGray
+            TEHNodeCNT.NodeFont = New Font(lstgroups.Font, 8)
+        End If
+
+        If balans = "1" Or balans = "True" Or balans = "-1" Then
+
+            If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
+                TEHNodeCNT.NodeFont = New Font(lstgroups.Font, 10)
+            Else
+                TEHNodeCNT.NodeFont = New Font(lstgroups.Font, 2)
+            End If
+
+        End If
+
+        If KCKey <> 0 Then
+            If KCKey = sID Then
+                lstgroups.SelectedNode = TEHNodeCNT
+                lstgroups.SelectedNode.Expand()
+            End If
+        End If
+
+
+    End Sub
 
 
 End Module

@@ -31,6 +31,8 @@ Public Class frmComputers
     Public sMonitor As Integer = 1
     Public sPrinter As Integer = 1
 
+    Public OneStart As Decimal = 0
+
     'Public Sub New()
     '    InitializeComponent()
     'End Sub 'New
@@ -92,13 +94,15 @@ Public Class frmComputers
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
         'Выбираем филиал если он выбран, если нет то "Все"
+
         If Len(uname) = 0 Then
             treebranche.Text = LNGIniFile.GetString("frmComputers", "MSG53", "")
 
         Else
             treebranche.Text = uname
-
         End If
+
+
 
         uname = objIniFile.GetString("General", "VisibleALL", "0")
 
@@ -114,14 +118,7 @@ Public Class frmComputers
 
         End Select
 
-
-        If Me.lstGroups.Nodes.Count = 0 Then
-            Dim newThread5 As New Thread(AddressOf R_T_LOAD)
-            newThread5.Start()
-
-        End If
-
-
+      
         uname = objIniFile.GetString("General", "RAZDEL", "0")
 
         Dim langfile As New IniFile(sLANGPATH)
@@ -166,10 +163,19 @@ Public Class frmComputers
         cmbTIPCartridg.Items.Add(langfile.GetString("frmComputers", "MSG11", ""))
         cmbTIPCartridg.Items.Add(langfile.GetString("frmComputers", "MSG12", ""))
 
+        If lstGroups.Nodes.Count = 0 Then
+
+            If Me.lstGroups.Nodes.Count = 0 Then
+                Dim newThread5 As New Thread(AddressOf R_T_LOAD)
+                newThread5.Start()
+
+            End If
+
+        End If
 
 
         Me.Cursor = Cursors.Default
-
+        OneStart = 1
 
     End Sub
 
@@ -1414,21 +1420,18 @@ err_:
         txtSearch.Text = ""
 
         Me.Cursor = Cursors.WaitCursor
-
-        'Me.Invoke(New MethodInvoker(AddressOf LoadSPR))
-
-        Dim newThread1 As New Thread(AddressOf R_T_LOAD)
-        newThread1.Start()
-
+        OneStart = 0
 
         Dim newThread2 As New Thread(AddressOf LoadSPR_1)
         newThread2.Start()
 
-        'Me.Invoke(New MethodInvoker(AddressOf R_T_LOAD))
+        Dim newThread1 As New Thread(AddressOf R_T_LOAD)
+        newThread1.Start()
 
+        OneStart = 1
 
         Me.Cursor = Cursors.Default
-
+        OneStart = 1
     End Sub
     Private Sub LoadSPR_1()
 
@@ -5418,12 +5421,16 @@ lvMovementOTH.Columns(e.Column)
     End Sub
 
     Private Sub treebranche_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles treebranche.SelectedIndexChanged
+
         Dim objIniFile As New IniFile(PrPath & "base.ini")
         objIniFile.WriteString("General", "branche", treebranche.Text)
 
-        Call R_T_LOAD()
 
-        'Me.lstGroups.ExpandAll()
+        If OneStart = 0 Then Exit Sub
+
+        Dim newThread5 As New Thread(AddressOf R_T_LOAD)
+        newThread5.Start()
+
 
     End Sub
 
@@ -6010,8 +6017,11 @@ err_:
 
         End Select
 
-        Me.Invoke(New MethodInvoker(AddressOf R_T_LOAD))
-        'Call RefFilTree(Me.lstGroups)
+        If OneStart = 0 Then Exit Sub
+
+        Dim newThread5 As New Thread(AddressOf R_T_LOAD)
+        newThread5.Start()
+
         Me.Cursor = Cursors.Default
 
     End Sub

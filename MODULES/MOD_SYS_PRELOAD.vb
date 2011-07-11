@@ -181,6 +181,9 @@ Module MOD_SYS_PRELOAD
 
     Public Sub ClearForm(ByVal ControlContainer As Object)
        
+        Dim sTMP As String
+
+        sTMP = frmComputers.treebranche.Text
 
         For Each Ctl As Object In ControlContainer.Controls
             Try
@@ -208,7 +211,7 @@ Module MOD_SYS_PRELOAD
         frmComputers.chkNETNNb.Checked = False
         frmComputers.chkOTHNNb.Checked = False
         frmComputers.chkOTHspis.Checked = False
-
+        frmComputers.treebranche.Text = sTMP
 
     End Sub
 
