@@ -198,13 +198,13 @@ Module MOD_INF_TECH_LOAD
 
     End Sub
 
-    Public Sub LOAD_NET_PORT2(ByVal sID As String)
+    Public Sub LOAD_NET_PORT2(ByVal sID As Integer)
         On Error GoTo err_
 
 
         Dim rs1 As ADODB.Recordset
         rs1 = New ADODB.Recordset
-        rs1.Open("SELECT count(*) as t_n FROM TBL_NET_MAG WHERE COMMUTATOR=" & sID, DB7, ADODB.CursorTypeEnum.adOpenKeyset)
+        rs1.Open("SELECT count(*) as t_n FROM TBL_NET_MAG WHERE COMMUTATOR=" & sID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
         frmComputers.lvNetPort.Sorting = SortOrder.None
         frmComputers.lvNetPort.ListViewItemSorter = Nothing
@@ -1227,6 +1227,45 @@ err_:
             If Not IsDBNull(.Fields("Spisan").Value) Then frmComputers.chkPCspis.Checked = .Fields("Spisan").Value
             If Not IsDBNull(.Fields("Balans").Value) Then frmComputers.chkPCNNb.Checked = .Fields("Balans").Value
             If Not IsDBNull(.Fields("PCL").Value) Then unaPCL = .Fields("PCL").Value
+
+
+            'Получаем номер розетки если он есть
+
+            Dim rs1 As ADODB.Recordset
+            rs1 = New ADODB.Recordset
+            rs1.Open("SELECT count(*) as t_n FROM TBL_NET_MAG WHERE SVT=" & .Fields("id").Value, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+            Dim UCount As Integer
+
+            With rs1
+                UCount = .Fields("t_n").Value
+            End With
+            rs1.Close()
+            rs1 = Nothing
+
+            If UCount = 0 Then
+                frmComputers.Label89.Visible = False
+                frmComputers.lblNumberNET.Visible = False
+            Else
+
+                frmComputers.Label89.Visible = True
+                frmComputers.lblNumberNET.Visible = True
+
+                rs1 = New ADODB.Recordset
+                rs1.Open("SELECT id_line FROM TBL_NET_MAG WHERE SVT=" & .Fields("id").Value, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+                With rs1
+                    frmComputers.lblNumberNET.Text = .Fields("id_line").Value
+                End With
+                rs1.Close()
+                rs1 = Nothing
+
+            End If
+
+
+
+
+
 
         End With
 

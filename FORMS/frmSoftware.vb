@@ -239,8 +239,7 @@ FoundiR:
 
     Private Sub frmSoftware_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
-        SendFonts(Me)
-
+        frmComputers.OneStart = 0
         Me.Cursor = Cursors.WaitCursor
         Me.Show()
 
@@ -253,30 +252,20 @@ FoundiR:
         treebranche.Items.Add(LNGIniFile.GetString("frmComputers", "MSG53", ""))
         uname = objIniFile.GetString("General", "branche", "")
 
-
-
         If Len(uname) = 0 Then
             treebranche.Text = LNGIniFile.GetString("frmComputers", "MSG53", "")
-
         Else
             treebranche.Text = uname
-
         End If
-
-
-        If lstGroups.Nodes.Count = 0 Then
-
-            If Me.lstGroups.Nodes.Count = 0 Then
-                Dim newThread5 As New Thread(AddressOf R_T_LOAD)
-                newThread5.Start()
-
-            End If
-
-        End If
-
-
 
         Call frmSoftware_Lang()
+        SendFonts(Me)
+
+        If lstGroups.Nodes.Count = 0 Then
+            Call RefFilTree(Me.lstGroups)
+        End If
+
+        
 
 
         FillComboNET(Me.cmbTipLicense, "name", "SPR_LIC", "", False, True)
@@ -288,12 +277,12 @@ FoundiR:
         DTInstall.Value = Date.Today
         dtGok.Value = Date.Now
         Me.Cursor = Cursors.Default
+
+        frmComputers.OneStart = 1
     End Sub
 
     Private Sub R_T_LOAD()
-
         Me.lstGroups.Invoke(New MethodInvoker(AddressOf R_T_LOAD_1))
-
     End Sub
 
     Private Sub R_T_LOAD_1()
@@ -336,7 +325,6 @@ FoundiR:
     Private Sub SplitContainer1_SplitterMoved(ByVal sender As Object, ByVal e As System.Windows.Forms.SplitterEventArgs) Handles SplitContainer1.SplitterMoved
         Call Resizer()
     End Sub
-
 
     Private Sub lstGroups_AfterSelect(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TreeViewEventArgs) Handles lstGroups.AfterSelect
         Dim LNGIniFile As New IniFile(sLANGPATH)
@@ -406,7 +394,9 @@ FoundiR:
     End Sub
 
     Public Sub Soft_Click(Optional ByVal sSid As Integer = 0)
+
         If lstSoftware.Items.Count = 0 Then Exit Sub
+
 
         If sSid <> 0 Then
 
@@ -514,8 +504,6 @@ A:
 
         lstSoftware.Sort()
     End Sub
-
-
 
     Private Sub lstSoftware_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstSoftware.DoubleClick
 
@@ -699,8 +687,12 @@ err_:
 
     Private Sub treebranche_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles treebranche.SelectedIndexChanged
 
+
+
         Dim objIniFile As New IniFile(PrPath & "base.ini")
         objIniFile.WriteString("General", "branche", treebranche.Text)
+
+        If frmComputers.OneStart = 0 Then Exit Sub
 
         Dim newThread5 As New Thread(AddressOf R_T_LOAD)
         newThread5.Start()

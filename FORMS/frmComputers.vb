@@ -6129,5 +6129,9 @@ err_:
         newThread1.Start()
 
     End Sub
+
+    Private Sub lstSoftware_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lstSoftware.SelectedIndexChanged
+
+    End Sub
 End Class
 

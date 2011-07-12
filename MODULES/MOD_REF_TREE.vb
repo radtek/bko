@@ -82,12 +82,14 @@ Module MOD_REF_TREE
 
     End Sub
 
-
     Public Sub RefFilTree(ByVal lstgroups As TreeView)
         On Error GoTo ERR1
 
-        Dim starttime As DateTime
-        starttime = Now()
+        'Dim starttime As DateTime
+        'starttime = Now()
+
+        'lstgroups.visible = False
+        lstgroups.HideSelection = False
 
         Dim sTEN As String
         Dim sVISIBLE As String
@@ -119,7 +121,7 @@ Module MOD_REF_TREE
 
         End If
 
-        lstgroups.HideSelection = False
+
         lstgroups.Nodes.Clear()
 
 
@@ -135,11 +137,13 @@ Module MOD_REF_TREE
 
         End Select
 
+        'lstgroups.ImageList = frmComputers.ilsCommands
+
         Dim rs As ADODB.Recordset
         Dim rs2 As ADODB.Recordset
         Dim rs3 As ADODB.Recordset
-        'Dim rs4 As ADODB.Recordset
-        'Dim rs5 As ADODB.Recordset
+        Dim rs4 As ADODB.Recordset
+        Dim rs5 As ADODB.Recordset
         Dim rs6 As ADODB.Recordset
         Dim rs7 As ADODB.Recordset
 
@@ -438,13 +442,11 @@ Module MOD_REF_TREE
 
         End If
 
-        lstgroups.Enabled = True
+        ' MessageBox.Show("done! " & Math.Round(Now.Subtract(starttime).TotalSeconds, 4).ToString)
 
-        'MessageBox.Show("done! " & Math.Round(Now.Subtract(starttime).TotalSeconds, 4).ToString)
 
+        'lstgroups.visible = True
 exitsub:
-
-
         Exit Sub
 ERR1:
         'lstgroups.visible = True
@@ -460,10 +462,9 @@ ERR1:
         End Select
 
 
-
     End Sub
 
-     Public Sub FILING_TREE(ByVal lstgroups As TreeView, ByVal iTipTehn As String, ByVal TipPC As String, ByVal NET_NAME As String, ByVal PSEVDONIM As String, ByVal iD As String, ByVal Spisan As String, ByVal DepNode As TreeNode, ByVal OS As String, ByVal n_set As String, ByVal balans As String)
+    Public Sub FILING_TREE(ByVal lstgroups As TreeView, ByVal iTipTehn As String, ByVal TipPC As String, ByVal NET_NAME As String, ByVal PSEVDONIM As String, ByVal iD As String, ByVal Spisan As String, ByVal DepNode As TreeNode, ByVal OS As String, ByVal n_set As String, ByVal balans As String)
 
         Dim iC As String
         Dim iA As String

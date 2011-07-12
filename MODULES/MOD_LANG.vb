@@ -799,6 +799,8 @@ Module modLang
         frmComputers.Label88.Text = objIniFile.GetString("frmComputers", "Label83", "")
         frmComputers.lblPCLNET.Text = objIniFile.GetString("frmComputers", "Label83", "")
 
+        frmComputers.Label89.Text = objIniFile.GetString("frmComputers", "Label89", "")
+
         'EditService
         'DeleteService
 
