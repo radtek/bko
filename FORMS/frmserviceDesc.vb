@@ -538,6 +538,10 @@ err_1:
         MsgBox(Err.Description, MsgBoxStyle.Information, ProGramName)
     End Sub
 
+    Private Sub lvRem_ClientSizeChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvRem.ClientSizeChanged
+
+    End Sub
+
     Private Sub lvRem_ColumnClick(ByVal sender As Object, ByVal e As System.Windows.Forms.ColumnClickEventArgs) Handles lvRem.ColumnClick
         Dim new_sorting_column As ColumnHeader = _
      lvRem.Columns(e.Column)
@@ -728,7 +732,7 @@ err_1:
 
     Private Sub R_T_LOAD()
 
-        Me.lstGroups.Invoke(New MethodInvoker(AddressOf R_T_LOAD_1))
+        Me.lstGroups.BeginInvoke(New MethodInvoker(AddressOf R_T_LOAD_1))
 
     End Sub
 
@@ -869,6 +873,8 @@ Err_1:
 
         lstGroups.Nodes.Clear()
 
+        FINDTXT = sFindText
+
         search_ = True
         Dim FirstColumn As Boolean
 
@@ -963,11 +969,50 @@ Foundit:
 
                 Else
 
-
                     Select Case .Fields("tiptehn").Value
 
                         Case "PC"
-                            Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 4, 4)
+
+                            Dim iC, iA As String
+                            iC = .Fields("TIP_COMPA").Value
+
+
+                            If iC = "Ноутбук" Or iC = "notebook" Or iC = "Notebook" Or iC = "NoteBook" Then
+                                iC = "Ноутбук"
+                            End If
+
+                            If iC = "КПК" Or iC = "Pocket PC" Or iC = "Pocket" Or iC = "Palm" Then
+                                iC = "КПК"
+                            End If
+
+                            If iC = "Сервер" Or iC = "Server" Or iC = "Сервер для тонких клиентов" Or iC = "Сервер видео наблюдения" Then
+                                iC = "Сервер"
+                            End If
+
+                            'Pocket PC
+
+                            Select Case iC
+
+                                Case "Рабочая станция"
+                                    iA = 4
+
+
+                                Case "Сервер"
+
+                                    iA = 3
+
+                                Case "КПК"
+                                    iA = 31
+
+                                Case "Ноутбук"
+                                    iA = 5
+
+                                Case Else
+                                    iA = 4
+
+                            End Select
+
+                            Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, iA, iA)
                             TEHNode.Tag = "C|" & .Fields(0).Value
                             TempNode.Nodes.Add(TEHNode)
 
@@ -1017,7 +1062,20 @@ Foundit:
                             TempNode.Nodes.Add(TEHNode)
 
                         Case "OT"
-                            Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 16, 16)
+
+                            Dim uname As String
+                            Dim rsOT As ADODB.Recordset
+                            rsOT = New ADODB.Recordset
+                            rsOT.Open("SELECT A FROM spr_other where Name ='" & .Fields("NET_NAME").Value & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+                            With rsOT
+                                If Not IsDBNull(.Fields("A").Value) Then uname = .Fields("A").Value
+                            End With
+
+                            rsOT.Close()
+                            rsOT = Nothing
+
+                            Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, uname, uname)
                             TEHNode.Tag = "C|" & .Fields(0).Value
                             TempNode.Nodes.Add(TEHNode)
 
@@ -1025,7 +1083,55 @@ Foundit:
                             Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 17, 17)
                             TEHNode.Tag = "C|" & .Fields(0).Value
                             TempNode.Nodes.Add(TEHNode)
+                            '--------------VIP_Graff Добавление новой перефирии Начало-----------------
+                        Case "USB"
+                            Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 18, 18)
+                            TEHNode.Tag = "C|" & .Fields(0).Value
+                            TempNode.Nodes.Add(TEHNode)
 
+                        Case "SOUND"
+                            Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 44, 44)
+                            TEHNode.Tag = "C|" & .Fields(0).Value
+                            TempNode.Nodes.Add(TEHNode)
+
+                        Case "IBP"
+                            Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 41, 41)
+                            TEHNode.Tag = "C|" & .Fields(0).Value
+                            TempNode.Nodes.Add(TEHNode)
+
+                        Case "FS"
+                            Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 61, 61)
+                            TEHNode.Tag = "C|" & .Fields(0).Value
+                            TempNode.Nodes.Add(TEHNode)
+
+                        Case "KEYB"
+                            Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 46, 46)
+                            TEHNode.Tag = "C|" & .Fields(0).Value
+                            TempNode.Nodes.Add(TEHNode)
+
+                        Case "MOUSE"
+                            Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 47, 47)
+                            TEHNode.Tag = "C|" & .Fields(0).Value
+                            TempNode.Nodes.Add(TEHNode)
+                            '--------------VIP_Graff Добавление новой перефирии Конец------------------
+
+                        Case "CNT"
+
+                            Dim uname As String
+                            Dim rsOT As ADODB.Recordset
+                            rsOT = New ADODB.Recordset
+                            rsOT.Open("SELECT A FROM spr_other where Name ='" & .Fields("NET_NAME").Value & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+                            With rsOT
+                                If Not IsDBNull(.Fields("A").Value) Then uname = .Fields("A").Value
+                            End With
+
+                            rsOT.Close()
+                            rsOT = Nothing
+
+                            Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, uname, uname)
+                            TEHNode.Tag = "C|" & .Fields(0).Value
+                            TempNode.Nodes.Add(TEHNode)
 
                         Case Else
 
@@ -1072,68 +1178,169 @@ FoundiR:
                         Do While Not .EOF
                             If GID <> -1 Then
 
-                                Select Case .Fields("tiptehn").Value
+                                 Select .Fields("tiptehn").Value
 
                                     Case "PC"
-                                        Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 4, 4)
+
+                                        Dim iC, iA As String
+                                        iC = .Fields("TIP_COMPA").Value
+
+
+                                        If iC = "Ноутбук" Or iC = "notebook" Or iC = "Notebook" Or iC = "NoteBook" Then
+                                            iC = "Ноутбук"
+                                        End If
+
+                                        If iC = "КПК" Or iC = "Pocket PC" Or iC = "Pocket" Or iC = "Palm" Then
+                                            iC = "КПК"
+                                        End If
+
+                                        If iC = "Сервер" Or iC = "Server" Or iC = "Сервер для тонких клиентов" Or iC = "Сервер видео наблюдения" Then
+                                            iC = "Сервер"
+                                        End If
+
+                                        'Pocket PC
+
+                                        Select Case iC
+
+                                            Case "Рабочая станция"
+                                                iA = 4
+
+
+                                            Case "Сервер"
+
+                                                iA = 3
+
+                                            Case "КПК"
+                                                iA = 31
+
+                                            Case "Ноутбук"
+                                                iA = 5
+
+                                            Case Else
+                                                iA = 4
+
+                                        End Select
+
+                                        Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, iA, iA)
                                         TEHNode.Tag = "C|" & .Fields(0).Value
-                                        TempNode2.Nodes.Add(TEHNode)
+                                        TempNode.Nodes.Add(TEHNode)
 
                                     Case "Printer"
                                         Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 7, 7)
                                         TEHNode.Tag = "C|" & .Fields(0).Value
-                                        TempNode2.Nodes.Add(TEHNode)
+                                        TempNode.Nodes.Add(TEHNode)
 
                                     Case "MFU"
 
                                         Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 8, 8)
                                         TEHNode.Tag = "C|" & .Fields(0).Value
-                                        TempNode2.Nodes.Add(TEHNode)
+                                        TempNode.Nodes.Add(TEHNode)
 
                                     Case "KOpir"
                                         Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 9, 9)
                                         TEHNode.Tag = "C|" & .Fields(0).Value
-                                        TempNode2.Nodes.Add(TEHNode)
+                                        TempNode.Nodes.Add(TEHNode)
 
                                     Case "NET"
                                         Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 10, 10)
                                         TEHNode.Tag = "C|" & .Fields(0).Value
-                                        TempNode2.Nodes.Add(TEHNode)
+                                        TempNode.Nodes.Add(TEHNode)
 
                                     Case "PHOTO"
                                         Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 11, 11)
                                         TEHNode.Tag = "C|" & .Fields(0).Value
-                                        TempNode2.Nodes.Add(TEHNode)
+                                        TempNode.Nodes.Add(TEHNode)
 
                                     Case "PHONE"
                                         Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 12, 12)
                                         TEHNode.Tag = "C|" & .Fields(0).Value
-                                        TempNode2.Nodes.Add(TEHNode)
+                                        TempNode.Nodes.Add(TEHNode)
 
                                     Case "FAX"
                                         Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 13, 13)
                                         TEHNode.Tag = "C|" & .Fields(0).Value
-                                        TempNode2.Nodes.Add(TEHNode)
+                                        TempNode.Nodes.Add(TEHNode)
                                     Case "SCANER"
 
                                         Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 14, 14)
                                         TEHNode.Tag = "C|" & .Fields(0).Value
-                                        TempNode2.Nodes.Add(TEHNode)
+                                        TempNode.Nodes.Add(TEHNode)
                                     Case "ZIP"
                                         Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 15, 15)
                                         TEHNode.Tag = "C|" & .Fields(0).Value
-                                        TempNode2.Nodes.Add(TEHNode)
+                                        TempNode.Nodes.Add(TEHNode)
 
                                     Case "OT"
-                                        Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 16, 16)
+
+                                        Dim uname As String
+                                        Dim rsOT As ADODB.Recordset
+                                        rsOT = New ADODB.Recordset
+                                        rsOT.Open("SELECT A FROM spr_other where Name ='" & .Fields("NET_NAME").Value & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+                                        With rsOT
+                                            If Not IsDBNull(.Fields("A").Value) Then uname = .Fields("A").Value
+                                        End With
+
+                                        rsOT.Close()
+                                        rsOT = Nothing
+
+                                        Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, uname, uname)
                                         TEHNode.Tag = "C|" & .Fields(0).Value
-                                        TempNode2.Nodes.Add(TEHNode)
+                                        TempNode.Nodes.Add(TEHNode)
 
                                     Case "MONITOR"
                                         Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 17, 17)
                                         TEHNode.Tag = "C|" & .Fields(0).Value
-                                        TempNode2.Nodes.Add(TEHNode)
+                                        TempNode.Nodes.Add(TEHNode)
+                                        '--------------VIP_Graff Добавление новой перефирии Начало-----------------
+                                    Case "USB"
+                                        Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 18, 18)
+                                        TEHNode.Tag = "C|" & .Fields(0).Value
+                                        TempNode.Nodes.Add(TEHNode)
 
+                                    Case "SOUND"
+                                        Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 44, 44)
+                                        TEHNode.Tag = "C|" & .Fields(0).Value
+                                        TempNode.Nodes.Add(TEHNode)
+
+                                    Case "IBP"
+                                        Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 41, 41)
+                                        TEHNode.Tag = "C|" & .Fields(0).Value
+                                        TempNode.Nodes.Add(TEHNode)
+
+                                    Case "FS"
+                                        Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 61, 61)
+                                        TEHNode.Tag = "C|" & .Fields(0).Value
+                                        TempNode.Nodes.Add(TEHNode)
+
+                                    Case "KEYB"
+                                        Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 46, 46)
+                                        TEHNode.Tag = "C|" & .Fields(0).Value
+                                        TempNode.Nodes.Add(TEHNode)
+
+                                    Case "MOUSE"
+                                        Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 47, 47)
+                                        TEHNode.Tag = "C|" & .Fields(0).Value
+                                        TempNode.Nodes.Add(TEHNode)
+                                        '--------------VIP_Graff Добавление новой перефирии Конец------------------
+
+                                    Case "CNT"
+
+                                        Dim uname As String
+                                        Dim rsOT As ADODB.Recordset
+                                        rsOT = New ADODB.Recordset
+                                        rsOT.Open("SELECT A FROM spr_other where Name ='" & .Fields("NET_NAME").Value & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+                                        With rsOT
+                                            If Not IsDBNull(.Fields("A").Value) Then uname = .Fields("A").Value
+                                        End With
+
+                                        rsOT.Close()
+                                        rsOT = Nothing
+
+                                        Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, uname, uname)
+                                        TEHNode.Tag = "C|" & .Fields(0).Value
+                                        TempNode.Nodes.Add(TEHNode)
 
                                     Case Else
 
@@ -1183,9 +1390,6 @@ FoundiR:
 
     End Sub
 
-
-
-
     Private Sub Searche2(ByVal sFindText As String, Optional ByVal MtchWord As Byte = 0, Optional ByVal MtchCase As Byte = 0)
         Dim rs3 As ADODB.Recordset 'Объявляем рекордсет
         Dim sSQL3 As String 'Переменная, где будет размещён SQL запрос
@@ -1200,9 +1404,10 @@ FoundiR:
 
 
         'sSQL3 = "SELECT * FROM Remont where id_comp =" & frmMain.nomerPCAbs & " order by Date desc"
-        sSQL3 = "SELECT id, NomerRemKomp, date, Remont, Uroven, Master, vip, username, zakryt FROM Remont WHERE id_comp=" & frmComputers.sCOUNT & " ORDER BY date DESC, id DESC"
+        'sSQL3 = "SELECT id, NomerRemKomp, date, Remont, Uroven, Master, vip, username, zakryt FROM Remont WHERE id_comp=" & frmComputers.sCOUNT & " ORDER BY date DESC, id DESC"
 
-
+        sSQL3 = "SELECT * FROM Remont where id_comp=" & frmComputers.sCOUNT & " and Remont like '%" & sFindText & "%'"
+        'sSQL3 = "SELECT * FROM Remont WHERE id_comp=" & frmComputers.sCOUNT & " or Date like '%" & sFindText & "%' and Remont like '%" & sFindText & "%' or Uroven like '%" & sFindText & "%' or Master like '%" & sFindText & "%' or NomerRemKomp like '%" & sFindText & "%' or Comp_Name like '%" & sFindText & "%' or Mesto_Compa like '%" & sFindText & "%' or vip like '%" & sFindText & "%' or UserName like '%" & sFindText & "%' or istochnik like '%" & sFindText & "%' or phone like '%" & sFindText & "%' or srok like '%" & sFindText & "%' or name_of_remont like '%" & sFindText & "%' or otvetstv like '%" & sFindText & "%' or krit_rem like '%" & sFindText & "%' or MeMo like '%" & sFindText & "%' or zakryt like '%" & sFindText & "%' or PREF like '%" & sFindText & "%' or Summ like '%" & sFindText & "%'"
 
         rs3 = New ADODB.Recordset
         rs3.Open(sSQL3, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
@@ -1225,6 +1430,7 @@ FoundiR:
 
         Dim intCount As Integer
         intCount = 0
+
         With rs3
             .MoveFirst()
             Do While Not .EOF
@@ -1232,7 +1438,7 @@ FoundiR:
                 FINDTXT = ""
 
 
-                For lngCounter = 0 To 184
+                For lngCounter = 0 To 9
 
                     If FirstColumn Then
 
@@ -1613,7 +1819,6 @@ err_:
 
     End Sub
 
-
     Private Sub txtSearch_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtSearch.TextChanged
 
     End Sub
@@ -1638,5 +1843,9 @@ err_:
 
 
         Call SRASP2(r1COUNT)
+    End Sub
+
+    Private Sub lvRem_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvRem.SelectedIndexChanged
+
     End Sub
 End Class

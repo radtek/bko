@@ -807,6 +807,11 @@ Module modLang
         frmComputers.EditService.Text = objIniFile.GetString("frmComputers", "EditService", "")
         frmComputers.DeleteService.Text = objIniFile.GetString("frmComputers", "DeleteService", "")
 
+        frmComputers.MnuSendEmail.Text = objIniFile.GetString("frmComputers", "MnuSendEmail", "")
+        frmComputers.mnu_Z_to_Office.Text = objIniFile.GetString("frmComputers", "mnu_Z_to_Office", "")
+        frmComputers.mnu_z_rasp.Text = objIniFile.GetString("frmComputers", "mnu_z_rasp", "")
+
+
         Exit Sub
 err_:
         MsgBox(Err.Description)

@@ -1,4 +1,6 @@
-﻿Public Class frmSearch
+﻿Imports System.Threading
+
+Public Class frmSearch
     Public FINDTXT As String
     Public SfilS As String
     Private mde As Decimal
@@ -301,13 +303,19 @@ SRCCH2:
             b = 0
         End If
 
-        Me.Invoke(New MethodInvoker(AddressOf RT_SEARCHE))
+        Dim newThread4 As New Thread(AddressOf RT_SEARCHE)
+        newThread4.Start()
 
     End Sub
 
     Private Sub RT_SEARCHE()
+        lstGroups.BeginInvoke(New MethodInvoker(AddressOf RT_SEARCHE_1))
+    End Sub
+
+    Private Sub RT_SEARCHE_1()
         Search(lstGroups.Text, txtSearch.Text, a, b)
     End Sub
+
 
     Private Sub btnOfSend_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOfSend.Click
         On Error GoTo Err_
@@ -344,7 +352,10 @@ Err_:
             objIniFile.WriteString("general", "Default", 0)
         Next
 
-        frmComputers.R_T_LOAD()
+        Dim newThread4 As New Thread(AddressOf frmComputers.R_T_LOAD)
+        newThread4.Start()
+
+
         frmComputers.Focus()
 
     End Sub
@@ -369,7 +380,8 @@ Err_:
                     b = 0
                 End If
 
-                Me.Invoke(New MethodInvoker(AddressOf RT_SEARCHE))
+                Dim newThread4 As New Thread(AddressOf RT_SEARCHE)
+                newThread4.Start()
 
         End Select
     End Sub

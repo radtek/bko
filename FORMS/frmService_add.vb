@@ -160,7 +160,11 @@
 
     End Sub
 
+   
+
     Private Sub frmService_add_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+
+
 
         SendFonts(Me)
 
@@ -273,4 +277,6 @@
         End If
 
     End Sub
+
+
 End Class

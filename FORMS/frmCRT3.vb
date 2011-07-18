@@ -17,6 +17,7 @@
     Private FINDTXT_ As String
     Private search_ As Boolean
     Private mde As Integer
+    Private OneStart As Decimal = 0
 
 
     Private Sub RefFilTreePRN()
@@ -1168,7 +1169,7 @@ ERR1:
                     rs.Open("SELECT * FROM kompy WHERE id=" & uname, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
                     With rs
-                        cmbSostUstr.Text = .Fields("PRINTER_NAME_1").Value & " (" & .Fields("filial").Value & "/" & .Fields("mesto").Value & ")" & " № " & .Fields("id").Value
+                        cmbSostUstr.Text = " № " & .Fields("id").Value & " " & .Fields("PRINTER_NAME_1").Value & " (" & .Fields("filial").Value & "/" & .Fields("mesto").Value & ")"
                     End With
 
                     rs.Close()
@@ -1457,7 +1458,7 @@ Error_:
 
     Private Sub frmCRT3_Activated(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Activated
 
-  
+
 
 
         frmMain.SaveInfTehButton.Enabled = False
@@ -1533,6 +1534,7 @@ Error_:
 
 
 
+        OneStart = 1
 
         Exit Sub
 err_:
@@ -1564,7 +1566,7 @@ err_:
                 .MoveFirst()
                 Do While Not .EOF
                     'If .Fields("TipTehn").Value = "Printer" Or .Fields("TipTehn").Value = "KOpir" Or .Fields("TipTehn").Value = "MFU" Then
-                    cmbSostUstr.Items.Add(.Fields("PRINTER_NAME_1").Value & " (" & .Fields("filial").Value & "/" & .Fields("mesto").Value & ")" & " № " & .Fields("id").Value)
+                    cmbSostUstr.Items.Add(" № " & .Fields("id").Value & " " & .Fields("PRINTER_NAME_1").Value & " (" & .Fields("filial").Value & "/" & .Fields("mesto").Value & ")")
                     'Else
                     'End If
                     .MoveNext()
@@ -1596,7 +1598,6 @@ err_:
 
         End If
     End Sub
-
 
     Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
         Dim uname As String
@@ -1658,7 +1659,7 @@ err_:
                 Else
                     .MoveFirst()
                     Do While Not .EOF
-                        If uname3 = .Fields("PRINTER_NAME_1").Value & " (" & .Fields("filial").Value & "/" & .Fields("mesto").Value & ")" & " № " & .Fields("id").Value Then
+                        If uname3 = " № " & .Fields("id").Value & " " & .Fields("PRINTER_NAME_1").Value & " (" & .Fields("filial").Value & "/" & .Fields("mesto").Value & ")" Then
                             uname3 = .Fields("id").Value
                         End If
                         .MoveNext()
@@ -1845,7 +1846,7 @@ err_:
         txtMemo.Text = ""
         dtSale.Value = Date.Today
 
-  
+
 
     End Sub
 
@@ -2407,7 +2408,7 @@ err_:
 
                         End If
                     End If
-                    
+
 
             End Select
 
@@ -2432,7 +2433,7 @@ err_:
         cmbSostUstr.Text = ""
 
         Me.Invoke(New MethodInvoker(AddressOf PreLoad))
-        
+
 
         TableLayoutPanel2.Enabled = True
 
@@ -2865,14 +2866,14 @@ err_:
 
             End If
 
-            Else
+        Else
 
-            End If
+        End If
 
 
-            Exit Sub
+        Exit Sub
 Error_:
-            MsgBox(Err.Description, vbInformation, ProGramName)
+        MsgBox(Err.Description, vbInformation, ProGramName)
     End Sub
 
     Public Sub LOAD_MOVE(ByVal sID As String)
@@ -3276,7 +3277,7 @@ FoundiR:
                 Else
                     .MoveFirst()
                     Do While Not .EOF
-                        If sTEXT = .Fields("PRINTER_NAME_1").Value & " (" & .Fields("filial").Value & "/" & .Fields("mesto").Value & ")" & " № " & .Fields("id").Value Then
+                        If sTEXT = " № " & .Fields("id").Value & " " & .Fields("PRINTER_NAME_1").Value & " (" & .Fields("filial").Value & "/" & .Fields("mesto").Value & ")" Then
                             NewM = .Fields("PRINTER_NAME_1").Value & " " & .Fields("filial").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value
                         End If
                         .MoveNext()
@@ -3349,8 +3350,8 @@ FoundiR:
                 With rs
                     .AddNew()
                     .Fields("id_comp").Value = rCOUNT
-                    .Fields("oldMesto").Value = iA
-                    .Fields("NewMesto").Value = sTEXT
+                    .Fields("oldMesto").Value = OldM
+                    .Fields("NewMesto").Value = NewM
                     .Fields("prich").Value = strTmp
                     .Fields("data").Value = Date.Today.Date
                     .Fields("time").Value = sTmp
@@ -3415,6 +3416,9 @@ Error_:
     End Sub
 
     Private Sub treebranche_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles treebranche.SelectedIndexChanged
+
+        If OneStart = 0 Then Exit Sub
+
         Dim objIniFile As New IniFile(PrPath & "base.ini")
         objIniFile.WriteString("General", "branche", treebranche.Text)
 

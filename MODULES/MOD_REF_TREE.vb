@@ -16,25 +16,17 @@ Module MOD_REF_TREE
     Private Sub FILING_FILIAL()
         On Error Resume Next
 
-        Dim zFIL As String
+        'Dim zFIL As String
 
         If Len(FILIAL1) = 0 Then Exit Sub
 
-
-        zFIL = FILIAL1
-
+        ' zFIL = FILIAL1
 
         Dim sVISIBLE As String
 
         Dim sSQL4 As String
 
-        Dim rs3 As ADODB.Recordset
-
         Dim objIniFile As New IniFile(PrPath & "base.ini")
-        sVISIBLE = objIniFile.GetString("general", "VisibleALL", "")
-        KCKey = objIniFile.GetString("general", "DK", 0)
-        DCKey = objIniFile.GetString("general", "Default", 0)
-        'Вставляем технику если есть
 
         Dim sText As String = objIniFile.GetString("general", "Tree_S", 0)
 
@@ -50,7 +42,7 @@ Module MOD_REF_TREE
 
         End Select
 
-
+        Dim rs3 As ADODB.Recordset
         rs3 = New ADODB.Recordset
         rs3.Open(sSQL4, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
@@ -72,6 +64,8 @@ Module MOD_REF_TREE
                 iID = .Fields("id").Value
 
                 FILING_TREE(lstgroups1, iA5, iA1, iA2, iA3, iID, iA4, BrancheNode1, iA6, iA7, iA8)
+                'lstgroups1.BeginInvoke(New MethodInvoker(AddressOf S_P_LOAD_t_1))
+
 
                 .MoveNext()
             Loop
@@ -81,6 +75,10 @@ Module MOD_REF_TREE
 
 
     End Sub
+
+    ' Private Sub S_P_LOAD_t_1()
+    '  FILING_TREE(lstgroups1, iA5, iA1, iA2, iA3, iID, iA4, BrancheNode1, iA6, iA7, iA8)
+    ' End Sub
 
     Public Sub RefFilTree(ByVal lstgroups As TreeView)
         On Error GoTo ERR1
@@ -143,27 +141,18 @@ Module MOD_REF_TREE
         Dim rs2 As ADODB.Recordset
         Dim rs3 As ADODB.Recordset
         Dim rs4 As ADODB.Recordset
-        Dim rs5 As ADODB.Recordset
-        Dim rs6 As ADODB.Recordset
-        Dim rs7 As ADODB.Recordset
-
-        rs3 = New ADODB.Recordset
-        rs6 = New ADODB.Recordset
-
 
         Dim strItemText As String
         Dim unamS2, unamS As Integer
 
+        rs = New ADODB.Recordset
+        rs.Open("SELECT count(*) as t_nim FROM SPR_KAB", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
-        rs7 = New ADODB.Recordset
-        rs7.Open("SELECT count(*) as t_nim FROM SPR_KAB", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-
-        With rs7
+        With rs
             unamS2 = .Fields("t_nim").Value
         End With
-
-        rs7.Close()
-        rs7 = Nothing
+        rs.Close()
+        rs = Nothing
 
 
         If unamS2 = 0 Then
@@ -175,21 +164,19 @@ Module MOD_REF_TREE
                 sSQL5 = "SELECT id, Name, N_F, N_M FROM SPR_KAB where Arhiv=0 ORDER BY N_F, N_M, Name"
             End If
 
-            rs7 = New ADODB.Recordset
-            rs7.Open(sSQL5, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
         End If
 
 
         'Компы
 
+        rs = New ADODB.Recordset
+        rs.Open("SELECT count(*) as t_n FROM SPR_MESTO", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
-        rs6.Open("SELECT count(*) as t_n FROM SPR_MESTO", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-
-        With rs6
+        With rs
             unamS = .Fields("t_n").Value
         End With
-        rs6.Close()
-        rs6 = Nothing
+        rs.Close()
+        rs = Nothing
 
 
 
@@ -199,27 +186,22 @@ Module MOD_REF_TREE
         Dim unameS4 As String
 
         'Верхний нулевой уровень - вставляем название организации
-        Dim rsG As ADODB.Recordset
-        rsG = New ADODB.Recordset
 
-        rsG.Open("SELECT ORG FROM CONFIGURE", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New ADODB.Recordset
+        rs.Open("SELECT ORG FROM CONFIGURE", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
         Dim ORG As String
 
-        With rsG
+        With rs
             If Not IsDBNull(.Fields("ORG").Value) Then ORG = .Fields("ORG").Value
         End With
 
-        rsG.Close()
-        rsG = Nothing
+        rs.Close()
+        rs = Nothing
 
         Dim nodeRoot As New TreeNode(ORG, 0, 0)
         nodeRoot.Tag = "ROOT" & GENID()
         lstgroups.Nodes.Add(nodeRoot)
 
-
-        'My.Application.DoEvents()
-
-        'lstgroups.Invoke()
 
         'Филиалы Первый уровень дерева
         'Проверяем все показывать или только активные
@@ -256,7 +238,6 @@ Module MOD_REF_TREE
                 sTEN = "G|" & .Fields("id").Value
                 nodeRoot.Nodes.Add(BrancheNode)
 
-
                 FILIAL1 = .Fields("filial").Value
                 OTDEL1 = ""
                 KABINET1 = ""
@@ -275,25 +256,23 @@ Module MOD_REF_TREE
                 End If
 
                 BrancheNode.ForeColor = Color.DarkBlue
-                'BrancheNode.NodeFont = New Font(BrancheNode.NodeFont, FontStyle.Bold)
-
 
                 'Вставляем технику если есть
                 Dim cFil As String
                 sSQL4 = "SELECT count(*) as t_n FROM kompy WHERE filial ='" & unameS & "' AND mesto =''"
-                rs3 = New ADODB.Recordset
-                rs3.Open(sSQL4, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                With rs3
+                rs4 = New ADODB.Recordset
+                rs4.Open(sSQL4, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                With rs4
                     cFil = .Fields("t_n").Value
                 End With
-                rs3.Close()
-                rs3 = Nothing
+                rs4.Close()
+                rs4 = Nothing
 
 
                 If cFil <> 0 Then
 
-                    lstgroups.Invoke(New MethodInvoker(AddressOf FILING_FILIAL))
-
+                    'lstgroups.BeginInvoke(New MethodInvoker(AddressOf FILING_FILIAL))
+                    Call FILING_FILIAL()
 
                 End If
 
@@ -337,17 +316,18 @@ Module MOD_REF_TREE
 
 
                             sSQL4 = "SELECT count(*) as t_n FROM kompy WHERE filial ='" & unameS & "' AND mesto ='" & unameS2 & "' AND kabn=''"
-                            rs3 = New ADODB.Recordset
-                            rs3.Open(sSQL4, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                            With rs3
+                            rs4 = New ADODB.Recordset
+                            rs4.Open(sSQL4, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                            With rs4
                                 cFil = .Fields("t_n").Value
                             End With
-                            rs3.Close()
-                            rs3 = Nothing
+                            rs4.Close()
+                            rs4 = Nothing
 
                             If cFil <> 0 Then
 
-                                lstgroups.Invoke(New MethodInvoker(AddressOf FILING_FILIAL))
+                                'lstgroups.BeginInvoke(New MethodInvoker(AddressOf FILING_FILIAL))
+                                Call FILING_FILIAL()
 
 
                             End If
@@ -363,10 +343,10 @@ Module MOD_REF_TREE
                                     sSQL5 = "SELECT id, Name, N_F, N_M FROM SPR_KAB where N_F='" & unameS & "' AND N_M ='" & unameS2 & "' AND Arhiv=0 ORDER BY N_F, N_M, Name"
                                 End If
 
-                                rs7 = New ADODB.Recordset
-                                rs7.Open(sSQL5, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                                rs3 = New ADODB.Recordset
+                                rs3.Open(sSQL5, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
-                                With rs7
+                                With rs3
                                     .MoveFirst()
                                     Do While Not .EOF
 
@@ -393,26 +373,27 @@ Module MOD_REF_TREE
 
 
                                         sSQL4 = "SELECT count(*) as t_n FROM kompy WHERE filial ='" & unameS & "' AND mesto ='" & unameS2 & "' AND kabn='" & unameS3 & "'"
-                                        rs3 = New ADODB.Recordset
-                                        rs3.Open(sSQL4, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                                        With rs3
+                                        rs4 = New ADODB.Recordset
+                                        rs4.Open(sSQL4, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                                        With rs4
                                             cFil = .Fields("t_n").Value
                                         End With
-                                        rs3.Close()
-                                        rs3 = Nothing
+                                        rs4.Close()
+                                        rs4 = Nothing
 
 
                                         If cFil <> 0 Then
 
-                                            lstgroups.Invoke(New MethodInvoker(AddressOf FILING_FILIAL))
+                                            'lstgroups.BeginInvoke(New MethodInvoker(AddressOf FILING_FILIAL))
+                                            Call FILING_FILIAL()
 
                                         End If
 
                                         .MoveNext()
                                     Loop
                                 End With
-                                rs7.Close()
-                                rs7 = Nothing
+                                rs3.Close()
+                                rs3 = Nothing
 
                             End If
                             'Конец кабинетов
@@ -451,20 +432,21 @@ exitsub:
 ERR1:
         'lstgroups.visible = True
         'MsgBox Err.Description
+
         Select Case Err.Number
             Case 3021 'ignore, no entries in list
-                'MsgBox(Err.Description, vbCritical, "KZ")
+                'MsgBox(Err.Description, vbCritical, ProGramName)
                 Resume Next
             Case Else
 
-                MsgBox(Err.Description, vbCritical, "KZ")
+                MsgBox(Err.Description, vbCritical, ProGramName)
 
         End Select
 
 
     End Sub
 
-    Public Sub FILING_TREE(ByVal lstgroups As TreeView, ByVal iTipTehn As String, ByVal TipPC As String, ByVal NET_NAME As String, ByVal PSEVDONIM As String, ByVal iD As String, ByVal Spisan As String, ByVal DepNode As TreeNode, ByVal OS As String, ByVal n_set As String, ByVal balans As String)
+    Private Sub FILING_TREE(ByVal lstgroups As TreeView, ByVal iTipTehn As String, ByVal TipPC As String, ByVal NET_NAME As String, ByVal PSEVDONIM As String, ByVal iD As String, ByVal Spisan As String, ByVal DepNode As TreeNode, ByVal OS As String, ByVal n_set As String, ByVal balans As String)
 
         Dim iC As String
         Dim iA As String
@@ -659,8 +641,6 @@ ERR1:
 
                 If sCount > 0 Then
 
-
-
                     Select Case sText
 
                         Case 0
@@ -773,7 +753,6 @@ ERR1:
                                     End If
 
 
-
                                 Case "PC"
 
                                     iC = .Fields("TIP_COMPA").Value
@@ -797,30 +776,25 @@ ERR1:
 
                                         Case "Рабочая станция"
                                             iA = 4
-                                            iB = 4
+
 
                                         Case "Сервер"
 
                                             iA = 3
-                                            iB = 3
-
+                                            
                                         Case "КПК"
                                             iA = 31
-                                            iB = 31
-
+                                           
                                         Case "Ноутбук"
                                             iA = 5
-                                            iB = 5
 
                                         Case Else
                                             iA = 4
-                                            iB = 4
-
 
                                     End Select
 
 
-                                    Dim TEHNodePC As New TreeNode(L_NAME, iA, iB)
+                                    Dim TEHNodePC As New TreeNode(L_NAME, iA, iA)
                                     iD = .Fields("id").Value
                                     TEHNodePC.Tag = "C|" & .Fields("id").Value
                                     iPSid = .Fields("id").Value
@@ -1105,13 +1079,9 @@ ERR1:
                                         rsOT.Open("SELECT A FROM spr_other where Name ='" & .Fields("tip_compa").Value & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
                                         With rsOT
-                                            '.MoveFirst()
-                                            'Do While Not .EOF
 
                                             If Not IsDBNull(.Fields("A").Value) Then uname = .Fields("A").Value
 
-                                            '.MoveNext()
-                                            'Loop
                                         End With
 
 
@@ -1349,13 +1319,9 @@ ERR1:
                                         rsOT.Open("SELECT A FROM spr_other where Name ='" & .Fields("tip_compa").Value & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
                                         With rsOT
-                                            '.MoveFirst()
-                                            'Do While Not .EOF
 
                                             If Not IsDBNull(.Fields("A").Value) Then uname = .Fields("A").Value
 
-                                            '.MoveNext()
-                                            'Loop
                                         End With
 
 
@@ -1451,7 +1417,6 @@ ERR1:
                     Case "Defective"
 
                         TEHNode.ForeColor = Color.Blue
-
 
                     Case Else
 

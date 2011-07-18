@@ -4,6 +4,10 @@
     Private eDTI As Boolean
     Private sREALNAME As String
 
+    'Public Shared Function GetUser(ByVal UserName As String, ByVal Password As String) As directoryEntry
+
+    'End Function
+
 
     Private Sub TreeDirectoryFill()
         Dim objIniFile As New IniFile(sLANGPATH)

@@ -88,8 +88,6 @@
 
         BASECOMP.Open("DELETE FROM kompy WHERE id=" & sSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
-        frmComputers.lstGroups.Nodes.Remove(frmComputers.lstGroups.SelectedNode)
-
         'frmMain.MNUCOMPARE_DB_Click
 
         CARTRIDG.Close()

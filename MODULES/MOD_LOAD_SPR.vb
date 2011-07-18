@@ -4,55 +4,37 @@ Module Mod_Load_SPR
 
     Public Sub LoadSPR()
 
-        If frmComputers.OneStart = 1 Then frmComputers.OneStart = 0
-
         'frmComputers.Cursor = Cursors.WaitCursor
+        ClearCMB(frmComputers)
+
+        frmComputers.cmbPRNConnect.Items.Add("BlueTouch")
+        frmComputers.cmbPRNConnect.Items.Add("LPT")
+        frmComputers.cmbPRNConnect.Items.Add("NetWork")
+        frmComputers.cmbPRNConnect.Items.Add("USB")
+        frmComputers.cmbPRNConnect.Items.Add("Wi-Fi")
+        frmComputers.cmbPRNConnect.Items.Add("IR")
+        frmComputers.cmbPRNConnect.Items.Add("Usb Printserver")
+        frmComputers.cmbPRNConnect.Items.Add("LPT Printserver")
+
+        frmComputers.cmbNetCable.Items.Add("Coaxial")
+        frmComputers.cmbNetCable.Items.Add("Fiber-Optic Cable")
+        frmComputers.cmbNetCable.Items.Add("Quadrax")
+        frmComputers.cmbNetCable.Items.Add("Quadshield")
+        frmComputers.cmbNetCable.Items.Add("S-STP")
+        frmComputers.cmbNetCable.Items.Add("STP")
+        frmComputers.cmbNetCable.Items.Add("Twinaxial")
+        frmComputers.cmbNetCable.Items.Add("UTP")
+
+        frmComputers.cmbNetVkl.Items.Add("On")
+        frmComputers.cmbNetVkl.Items.Add("Off")
+        frmComputers.cmbNetVkl.Items.Add("Defective")
+
+
 
         FillComboNET(frmComputers.PROizV1, "PROIZV", "SPR_PROIZV", "", False, True)
 
         Dim obj As Object() = New Object(frmComputers.PROizV1.Items.Count - 1) {}
         frmComputers.PROizV1.Items.CopyTo(obj, 0)
-        frmComputers.PROizV2.Items.Clear()
-        frmComputers.PROizV3.Items.Clear()
-        frmComputers.PROizV4.Items.Clear()
-        frmComputers.PROizV5.Items.Clear()
-        frmComputers.PROizV6.Items.Clear()
-        frmComputers.PROizV7.Items.Clear()
-        frmComputers.PROizV8.Items.Clear()
-        frmComputers.PROizV9.Items.Clear()
-        frmComputers.PROizV10.Items.Clear()
-        frmComputers.PROizV11.Items.Clear()
-        frmComputers.PROizV12.Items.Clear()
-        frmComputers.PROizV13.Items.Clear()
-        frmComputers.PROizV14.Items.Clear()
-        frmComputers.PROizV15.Items.Clear()
-        frmComputers.PROizV16.Items.Clear()
-        frmComputers.PROizV17.Items.Clear()
-        frmComputers.PROizV18.Items.Clear()
-        frmComputers.PROizV19.Items.Clear()
-        frmComputers.PROizV20.Items.Clear()
-        frmComputers.PROizV21.Items.Clear()
-        frmComputers.PROizV22.Items.Clear()
-        frmComputers.PROizV23.Items.Clear()
-        frmComputers.PROizV24.Items.Clear()
-        frmComputers.PROizV25.Items.Clear()
-        frmComputers.PROizV26.Items.Clear()
-        frmComputers.PROizV27.Items.Clear()
-        frmComputers.PROizV28.Items.Clear()
-        frmComputers.PROizV29.Items.Clear()
-        frmComputers.PROizV30.Items.Clear()
-        frmComputers.PROizV31.Items.Clear()
-        frmComputers.PROizV32.Items.Clear()
-        frmComputers.PROizV33.Items.Clear()
-        frmComputers.PROizV34.Items.Clear()
-        frmComputers.PROizV35.Items.Clear()
-        frmComputers.PROizV36.Items.Clear()
-        frmComputers.PROiZV38.Items.Clear()
-        frmComputers.PROiZV39.Items.Clear()
-        frmComputers.PROiZV40.Items.Clear()
-        frmComputers.PROizV41.Items.Clear()
-        frmComputers.PROizV42.Items.Clear()
-        frmComputers.PROizV43.Items.Clear()
         frmComputers.PROizV2.Items.AddRange(obj)
         frmComputers.PROizV3.Items.AddRange(obj)
         frmComputers.PROizV4.Items.AddRange(obj)
@@ -102,9 +84,6 @@ Module Mod_Load_SPR
 
         Dim obj6 As Object() = New Object(frmComputers.cmbPostav.Items.Count - 1) {}
         frmComputers.cmbPostav.Items.CopyTo(obj6, 0)
-        frmComputers.cmbOTHPostav.Items.Clear()
-        frmComputers.cmbPRNPostav.Items.Clear()
-        frmComputers.cmbNETPostav.Items.Clear()
         frmComputers.cmbOTHPostav.Items.AddRange(obj6)
         frmComputers.cmbPRNPostav.Items.AddRange(obj6)
         frmComputers.cmbNETPostav.Items.AddRange(obj6)
@@ -114,9 +93,6 @@ Module Mod_Load_SPR
 
         Dim obj1 As Object() = New Object(frmComputers.cmbCPU1.Items.Count - 1) {}
         frmComputers.cmbCPU1.Items.CopyTo(obj1, 0)
-        frmComputers.cmbCPU2.Items.Clear()
-        frmComputers.cmbCPU3.Items.Clear()
-        frmComputers.cmbCPU4.Items.Clear()
         frmComputers.cmbCPU2.Items.AddRange(obj1)
         frmComputers.cmbCPU3.Items.AddRange(obj1)
         frmComputers.cmbCPU4.Items.AddRange(obj1)
@@ -129,9 +105,6 @@ Module Mod_Load_SPR
 
         Dim obj2 As Object() = New Object(frmComputers.cmbRAM1.Items.Count - 1) {}
         frmComputers.cmbRAM1.Items.CopyTo(obj2, 0)
-        frmComputers.cmbRAM2.Items.Clear()
-        frmComputers.cmbRAM3.Items.Clear()
-        frmComputers.cmbRAM4.Items.Clear()
         frmComputers.cmbRAM2.Items.AddRange(obj2)
         frmComputers.cmbRAM3.Items.AddRange(obj2)
         frmComputers.cmbRAM4.Items.AddRange(obj2)
@@ -141,9 +114,6 @@ Module Mod_Load_SPR
 
         Dim obj3 As Object() = New Object(frmComputers.cmbHDD1.Items.Count - 1) {}
         frmComputers.cmbHDD1.Items.CopyTo(obj3, 0)
-        frmComputers.cmbHDD2.Items.Clear()
-        frmComputers.cmbHDD3.Items.Clear()
-        frmComputers.cmbHDD4.Items.Clear()
         frmComputers.cmbHDD2.Items.AddRange(obj3)
         frmComputers.cmbHDD3.Items.AddRange(obj3)
         frmComputers.cmbHDD4.Items.AddRange(obj3)
@@ -159,8 +129,6 @@ Module Mod_Load_SPR
 
         Dim obj10 As Object() = New Object(frmComputers.cmbOPTIC1.Items.Count - 1) {}
         frmComputers.cmbOPTIC1.Items.CopyTo(obj10, 0)
-        frmComputers.cmbOPTIC2.Items.Clear()
-        frmComputers.cmbOPTIC3.Items.Clear()
         frmComputers.cmbOPTIC2.Items.AddRange(obj10)
         frmComputers.cmbOPTIC3.Items.AddRange(obj10)
 
@@ -191,24 +159,17 @@ Module Mod_Load_SPR
 
         Dim obj9 As Object() = New Object(frmComputers.cmbPrinters1.Items.Count - 1) {}
         frmComputers.cmbPrinters1.Items.CopyTo(obj9, 0)
-        frmComputers.cmbPrinters2.Items.Clear()
-        frmComputers.cmbPrinters3.Items.Clear()
         frmComputers.cmbPrinters2.Items.AddRange(obj9)
         frmComputers.cmbPrinters3.Items.AddRange(obj9)
 
         'frmSplash.lblLoadSPR.Text = "Инфраструктура"
-
         FillComboNET(frmComputers.cmbBranch, "FILIAL", "SPR_FILIAL", "", False, True)
 
         Dim LNGIniFile As New IniFile(sLANGPATH)
-        frmComputers.treebranche.Items.Clear()
         frmComputers.treebranche.Items.Add(LNGIniFile.GetString("frmComputers", "MSG53", ""))
 
         Dim obj5 As Object() = New Object(frmComputers.cmbBranch.Items.Count - 1) {}
         frmComputers.cmbBranch.Items.CopyTo(obj5, 0)
-        frmComputers.cmbPRNFil.Items.Clear()
-        frmComputers.cmbOTHFil.Items.Clear()
-        frmComputers.cmbNETBranch.Items.Clear()
         frmComputers.cmbPRNFil.Items.AddRange(obj5)
         frmComputers.cmbOTHFil.Items.AddRange(obj5)
         frmComputers.cmbNETBranch.Items.AddRange(obj5)
@@ -219,9 +180,6 @@ Module Mod_Load_SPR
 
         Dim obj7 As Object() = New Object(frmComputers.cmbResponsible.Items.Count - 1) {}
         frmComputers.cmbResponsible.Items.CopyTo(obj7, 0)
-        frmComputers.cmbPRNotv.Items.Clear()
-        frmComputers.cmbOTHotv.Items.Clear()
-        frmComputers.cmbNETotv.Items.Clear()
         frmComputers.cmbPRNotv.Items.AddRange(obj7)
         frmComputers.cmbOTHotv.Items.AddRange(obj7)
         frmComputers.cmbNETotv.Items.AddRange(obj7)
@@ -234,10 +192,6 @@ Module Mod_Load_SPR
 
         Dim obj8 As Object() = New Object(frmComputers.cmbNotesMaster.Items.Count - 1) {}
         frmComputers.cmbNotesMaster.Items.CopyTo(obj8, 0)
-        frmComputers.cmbNotesPRNMaster.Items.Clear()
-        frmComputers.cmbNotesNETMaster.Items.Clear()
-        frmComputers.cmbNotesOTHMaster.Items.Clear()
-        frmComputers.cmbBRMaster.Items.Clear()
         frmComputers.cmbNotesPRNMaster.Items.AddRange(obj8)
         frmComputers.cmbNotesNETMaster.Items.AddRange(obj8)
         frmComputers.cmbNotesOTHMaster.Items.AddRange(obj8)
@@ -252,6 +206,7 @@ Module Mod_Load_SPR
         FillComboNET(frmComputers.txtUserName, "Name", "SPR_USER", "", False, True)
         FillComboNET(frmComputers.txtUserFIO, "A", "SPR_USER", "", False, True)
         
+
         'frmSplash.lblLoadSPR.Text = "Построение дерева.."
 
 
@@ -265,6 +220,7 @@ Module Mod_Load_SPR
     Public Sub FillComboNET(ByVal pCombo As ComboBox, ByVal pField As String, ByVal pTable As String, Optional ByVal WHEREClause As String = "", Optional ByVal AddBlank As Boolean = False, Optional ByVal ClearFirst As Boolean = True, Optional ByVal PreserveValue As Boolean = True)
         'On Error Resume Next
         On Error GoTo err_
+
         pCombo.Items.Clear()
 
 

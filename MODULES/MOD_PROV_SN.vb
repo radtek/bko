@@ -76,8 +76,7 @@
 
         rs.Close()
         rs = Nothing
-        'rs3.Close
-        'Set rs3 = Nothing
+
 
 
         '############################
@@ -93,7 +92,7 @@
 
         With rs
             'If .RecordCount <> 0 Then
-            '.MoveFirst
+            .MoveFirst()
             Do While Not .EOF
                 If .Fields("Mb_Id").Value = frmComputers.txtSN_MB.Text And Len(frmComputers.txtSN_MB.Text) <> 0 And .Fields(30).Value = frmComputers.cmbMB.Text And frmComputers.txtSN_MB.Text <> "<N/A>" And frmComputers.txtSN_MB.Text <> "123456789000" And frmComputers.txtSN_MB.Text <> "To be filled by O.E.M." And frmComputers.txtSN_MB.Text <> "MB-1234567890" And frmComputers.txtSN_MB.Text <> "MS9874353456379863" Then     'MS9874353456379863
                     MsgBox(LNGIniFile.GetString("MOD_PROV_SN", "MSG8", "") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG9", "") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG2", "") & vbCrLf & "Дальнейшее добавление не возможно" & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG4", "") & " " & .Fields(31).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG5", "") & " " & .Fields(32).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG6", "") & " " & .Fields(33).Value, MsgBoxStyle.Exclamation, "!")
@@ -275,9 +274,7 @@
 
 
                 .MoveNext()
-                'DoEvents
             Loop
-
         End With
 
         rs.Close()

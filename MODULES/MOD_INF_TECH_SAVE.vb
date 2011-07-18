@@ -3693,6 +3693,9 @@ Error_:
     End Function
 
     Public Sub NotesEditAdd(ByVal btAdd As Button, ByVal lvsNotes As ListView, ByVal NotesMaster As ComboBox, ByVal textNotes As TextBox, ByVal DateNotes As DateTimePicker, ByVal txtSNAME As String, ByVal Branch As ComboBox, ByVal Department As ComboBox)
+
+        If Len(textNotes) = 0 Then Exit Sub
+
         Dim sSQL As String
         Dim langfile As New IniFile(sLANGPATH)
 
@@ -3942,6 +3945,9 @@ Error_:
     End Sub
 
     Public Sub BR_NOTES_ADD()
+
+        If Len(frmComputers.Notesbrtxt.Text) = 0 Then Exit Sub
+
         Dim StrS As String
 
         Dim langfile As New IniFile(sLANGPATH)

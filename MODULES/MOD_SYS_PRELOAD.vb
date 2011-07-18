@@ -181,9 +181,6 @@ Module MOD_SYS_PRELOAD
 
     Public Sub ClearForm(ByVal ControlContainer As Object)
        
-        Dim sTMP As String
-
-        sTMP = frmComputers.treebranche.Text
 
         For Each Ctl As Object In ControlContainer.Controls
             Try
@@ -211,11 +208,13 @@ Module MOD_SYS_PRELOAD
         frmComputers.chkNETNNb.Checked = False
         frmComputers.chkOTHNNb.Checked = False
         frmComputers.chkOTHspis.Checked = False
-        frmComputers.treebranche.Text = sTMP
+
 
     End Sub
 
     Public Sub SendFonts(ByVal ControlContainer As Object)
+
+        If FontN = "Microsoft Sans Serif" And fontS = "8,25" And FontC = "Black" And FontB = False And FontSt = 0 And FontD = 3 Then Exit Sub
 
         For Each Ctl As Object In ControlContainer.Controls
             Try
@@ -259,7 +258,6 @@ Module MOD_SYS_PRELOAD
 
         COLOR_LOAD(ControlContainer)
 
-
     End Sub
 
     Private Sub COLOR_LOAD(ByVal ControlContainer As Object)
@@ -287,6 +285,38 @@ Module MOD_SYS_PRELOAD
 
     End Sub
 
+    Public Sub ClearCMB(ByVal ControlContainer As Object)
 
+        For Each Ctl As Object In ControlContainer.Controls
+            Try
+                If Not Ctl.Controls Is Nothing Then
+                    ClearCMB(Ctl)
+
+                    If TypeOf Ctl Is ComboBox Then Ctl.Items.Clear()
+
+                End If
+
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
+        Next
+    End Sub
+
+    'Public Sub fLATCMB(ByVal ControlContainer As Object)
+
+    '    For Each Ctl As Object In ControlContainer.Controls
+    '        Try
+    '            If Not Ctl.Controls Is Nothing Then
+    '                fLATCMB(Ctl)
+
+    '                If TypeOf Ctl Is ComboBox Then Ctl.FlatStyle = FlatStyle.Flat
+    '                If TypeOf Ctl Is Button Then Ctl.FlatStyle = FlatStyle.Flat
+    '            End If
+
+    '        Catch ex As Exception
+    '            MsgBox(ex.Message)
+    '        End Try
+    '    Next
+    'End Sub
 End Module
 

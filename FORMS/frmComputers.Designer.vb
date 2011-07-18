@@ -685,6 +685,9 @@ Me.DELTEdVIGToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 Me.CMServices = New System.Windows.Forms.ContextMenuStrip(Me.components)
 Me.EditService = New System.Windows.Forms.ToolStripMenuItem()
 Me.DeleteService = New System.Windows.Forms.ToolStripMenuItem()
+Me.MnuSendEmail = New System.Windows.Forms.ToolStripMenuItem()
+Me.mnu_Z_to_Office = New System.Windows.Forms.ToolStripMenuItem()
+Me.mnu_z_rasp = New System.Windows.Forms.ToolStripMenuItem()
 Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
 CType(Me.spCont,System.ComponentModel.ISupportInitialize).BeginInit
 Me.spCont.Panel1.SuspendLayout
@@ -5728,7 +5731,6 @@ Me.cmbPRNConnect.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.cmbPRNConnect.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
 Me.cmbPRNConnect.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbPRNConnect.FormattingEnabled = true
-Me.cmbPRNConnect.Items.AddRange(New Object() {"BlueTouch", "LPT", "NetWork", "USB", "Wi-Fi", "Usb Printserver", "LPT Printserver"})
 Me.cmbPRNConnect.Location = New System.Drawing.Point(131, 209)
 Me.cmbPRNConnect.Name = "cmbPRNConnect"
 Me.cmbPRNConnect.Size = New System.Drawing.Size(204, 21)
@@ -6618,7 +6620,6 @@ Me.cmbNetCable.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.cmbNetCable.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
 Me.cmbNetCable.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbNetCable.FormattingEnabled = true
-Me.cmbNetCable.Items.AddRange(New Object() {"Coaxial", "Fiber-Optic Cable", "Quadrax", "Quadshield", "S-STP", "STP", "Twinaxial", "UTP"})
 Me.cmbNetCable.Location = New System.Drawing.Point(530, 55)
 Me.cmbNetCable.Name = "cmbNetCable"
 Me.cmbNetCable.Size = New System.Drawing.Size(131, 21)
@@ -8331,7 +8332,7 @@ Me.ВернутьПерефериюToolStripMenuItem.Text = "Вернуть пе
 '
 Me.cmBmenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDeltoBranch, Me.addFoldertoBranch, Me.DeleteBranche, Me.RepAddBrToolStripMenuItem, Me.SoftInstallToolStripMenuItem, Me.ПаспортКомпьютераToolStripMenuItem, Me.MassRazdelPerf, Me.MassObedPerf, Me.MassUpdatetoINI})
 Me.cmBmenu.Name = "cmMENU"
-Me.cmBmenu.Size = New System.Drawing.Size(222, 224)
+Me.cmBmenu.Size = New System.Drawing.Size(222, 202)
 '
 'mnuDeltoBranch
 '
@@ -8519,21 +8520,44 @@ Me.DELTEdVIGToolStripMenuItem.Text = "Удалить"
 '
 'CMServices
 '
-Me.CMServices.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EditService, Me.DeleteService})
+Me.CMServices.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EditService, Me.DeleteService, Me.MnuSendEmail, Me.mnu_Z_to_Office, Me.mnu_z_rasp})
 Me.CMServices.Name = "CMServices"
-Me.CMServices.Size = New System.Drawing.Size(155, 48)
+Me.CMServices.Size = New System.Drawing.Size(175, 114)
 '
 'EditService
 '
+Me.EditService.Image = CType(resources.GetObject("EditService.Image"),System.Drawing.Image)
 Me.EditService.Name = "EditService"
-Me.EditService.Size = New System.Drawing.Size(154, 22)
+Me.EditService.Size = New System.Drawing.Size(174, 22)
 Me.EditService.Text = "Редактировать"
 '
 'DeleteService
 '
+Me.DeleteService.Image = CType(resources.GetObject("DeleteService.Image"),System.Drawing.Image)
 Me.DeleteService.Name = "DeleteService"
-Me.DeleteService.Size = New System.Drawing.Size(154, 22)
+Me.DeleteService.Size = New System.Drawing.Size(174, 22)
 Me.DeleteService.Text = "Удалить"
+'
+'MnuSendEmail
+'
+Me.MnuSendEmail.Image = CType(resources.GetObject("MnuSendEmail.Image"),System.Drawing.Image)
+Me.MnuSendEmail.Name = "MnuSendEmail"
+Me.MnuSendEmail.Size = New System.Drawing.Size(174, 22)
+Me.MnuSendEmail.Text = "Отправить матеру"
+'
+'mnu_Z_to_Office
+'
+Me.mnu_Z_to_Office.Image = CType(resources.GetObject("mnu_Z_to_Office.Image"),System.Drawing.Image)
+Me.mnu_Z_to_Office.Name = "mnu_Z_to_Office"
+Me.mnu_Z_to_Office.Size = New System.Drawing.Size(174, 22)
+Me.mnu_Z_to_Office.Text = "Распечатать"
+'
+'mnu_z_rasp
+'
+Me.mnu_z_rasp.Image = CType(resources.GetObject("mnu_z_rasp.Image"),System.Drawing.Image)
+Me.mnu_z_rasp.Name = "mnu_z_rasp"
+Me.mnu_z_rasp.Size = New System.Drawing.Size(174, 22)
+Me.mnu_z_rasp.Text = "Расписка"
 '
 'ImageList1
 '
@@ -9546,5 +9570,8 @@ End Sub
     Friend WithEvents MassObedPerf As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents Label89 As System.Windows.Forms.Label
     Friend WithEvents lblNumberNET As System.Windows.Forms.Label
+    Friend WithEvents MnuSendEmail As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mnu_Z_to_Office As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mnu_z_rasp As System.Windows.Forms.ToolStripMenuItem
 
 End Class

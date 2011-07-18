@@ -1,7 +1,6 @@
-﻿'Imports System.Threading
+﻿Imports System.Threading
 Imports System
 Imports System.IO
-Imports System.Threading
 Imports System.ComponentModel
 
 
@@ -15,8 +14,6 @@ Public Class frmComputers
     Public uCOUNT As Decimal
     Private dvCOUNT As Decimal
     Private npCOUNT As Decimal
-    Private FINDTXT As String
-    Private mde As Decimal
     Public EDT As Boolean
     Public portEDT As Boolean
     Public MASSLOAD As Boolean
@@ -318,7 +315,6 @@ Error_:
         newThread1.Start()
 
         Call LOAD_LIST()
-
         Me.Cursor = Cursors.Default
     End Sub
 
@@ -1412,8 +1408,13 @@ Error_:
         Exit Sub
 err_:
     End Sub
-    '######################
 
+    Private Sub LoadSPR_1()
+
+        Me.Invoke(New MethodInvoker(AddressOf LoadSPR))
+
+    End Sub
+    '######################
 
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
 
@@ -1432,11 +1433,6 @@ err_:
 
         Me.Cursor = Cursors.Default
         OneStart = 1
-    End Sub
-    Private Sub LoadSPR_1()
-
-        Me.Invoke(New MethodInvoker(AddressOf LoadSPR))
-
     End Sub
 
     Private Sub txtSearch_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSearch.KeyDown
@@ -1457,301 +1453,16 @@ err_:
 
     Private Sub S2_LOAD_()
 
-        If Me.InvokeRequired Then
-            Me.Invoke(New MethodInvoker(AddressOf S2_LOAD_t))
+        Me.Invoke(New MethodInvoker(AddressOf S2_LOAD_t))
 
-        Else
-            Call S2_LOAD_t()
-        End If
     End Sub
 
     Private Sub S2_LOAD_t()
-        Call Search2(txtSearch.Text)
-    End Sub
+        'Call Search2(txtSearch.Text)
 
-
-    Private Sub Search2(ByVal sFindText As String, Optional ByVal MtchWord As Byte = 0, Optional ByVal MtchCase As Byte = 0)
-
-
-        Me.gbTree.ForeColor = Color.Red
-        Dim FirstColumn As Boolean
-
-        Dim rs3 As ADODB.Recordset 'Объявляем рекордсет
-        Dim sSQL3 As String 'Переменная, где будет размещён SQL запрос
-        Dim rs As ADODB.Recordset 'Объявляем рекордсет
-        Dim sSQL As String 'Переменная, где будет размещён SQL запрос
-
-        Dim rs4 As ADODB.Recordset 'Объявляем рекордсет
-        Dim sSQL4 As String 'Переменная, где будет размещён SQL запрос
-
-
-
-        On Error Resume Next
-
-        Dim GID As Integer
-
-
-        If MtchWord = 1 And MtchCase = 1 Then
-            mde = 3
-        Else
-            If MtchWord = 1 And MtchCase = 0 Then
-                mde = 2
-            Else
-                If MtchCase = 1 And MtchWord = 0 Then
-                    mde = 1
-                Else
-                    If MtchCase = 0 And MtchWord = 0 Then
-                        mde = 0
-                    End If
-                End If
-            End If
-        End If
-
-        Dim langfile As New IniFile(sLANGPATH)
-
-
-
-        Dim nodeRoot As New TreeNode(ProGramName, 0, 0)
-        nodeRoot.Tag = "ROOT" & GENID()
-
-        lstGroups.Nodes.Add(nodeRoot)
-
-        Dim TempNode As New TreeNode(langfile.GetString("frmComputers", "MSG18", ""), 0, 0)
-        TempNode.Tag = "G1|2"
-        nodeRoot.Nodes.Add(TempNode)
-
-        'sSQL3 = "SELECT * FROM kompy order by PSEVDONIM, filial"
-        sSQL3 = "SELECT * FROM kompy where ID like '%" & sFindText & "%' or CPU1 like '%" & sFindText & "%' or CPUmhz1 like '%" & sFindText & "%' or CPU2 like '%" & sFindText & "%' or CPUmhz2 like '%" & sFindText & "%' or CPU3 like '%" & sFindText & "%' or CPUmhz3 like '%" & sFindText & "%' or CPU4 like '%" & sFindText & "%' or CPUmhz4 like '%" & sFindText & "%' or Mb like '%" & sFindText & "%' or Mb_Chip like '%" & sFindText & "%' or Mb_Proizvod like '%" & sFindText & "%' or RAM_1 like '%" & sFindText & "%' or RAM_2 like '%" & sFindText & "%' or RAM_3 like '%" & sFindText & "%' or RAM_4 like '%" & sFindText & "%' or HDD_Name_1 like '%" & sFindText & "%' or HDD_OB_1 like '%" & sFindText & "%' or HDD_SN_1 like '%" & sFindText & "%' or HDD_Name_2 like '%" & sFindText & "%' or HDD_OB_2 like '%" & sFindText & "%' or HDD_SN_2 like '%" & sFindText & "%' or HDD_Name_3 like '%" & sFindText & "%' or HDD_OB_3 like '%" & sFindText & "%' or HDD_SN_3 like '%" & sFindText & "%' or HDD_Name_4 like '%" & sFindText & "%' or HDD_OB_4 like '%" & sFindText & "%' or HDD_SN_4 like '%" & sFindText & "%' or SVGA_NAME like '%" & sFindText & "%' or SVGA_SN like '%" & sFindText & "%' or SOUND_NAME like '%" & sFindText & "%' or CD_NAME like '%" & sFindText & "%' or CD_SPEED like '%" & sFindText & "%' or CD_SN like '%" & sFindText & "%' or CDRW_NAME like '%" & sFindText & "%' or CDRW_SPEED like '%" & sFindText & "%' or CDRW_SN like '%" & sFindText & "%' or DVD_NAME like '%" & sFindText & "%' or DVD_SPEED like '%" & sFindText & "%' or DVD_SN like '%" & sFindText & "%' or NET_NAME_1 like '%" & sFindText & "%' or NET_IP_1 like '%" & sFindText & "%' or NET_NAME_2 like '%" & sFindText & "%' or NET_IP_2 like '%" & sFindText & "%' or NET_MAC_2 like '%" & sFindText & "%' or MODEM_NAME like '%" & sFindText & "%' or MODEM_SN like '%" & sFindText & "%' or MONITOR_NAME like '%" & sFindText & "%' or MONITOR_NAME2 like '%" & sFindText & "%' or MONITOR_SN like '%" & sFindText & "%' or MONITOR_SN2 like '%" & sFindText & "%' or AS_NAME like '%" & sFindText & "%' or AS_PROIZV like '%" & sFindText & "%' or IBP_NAME like '%" & sFindText & "%' or FILTR_NAME like '%" & sFindText & "%' or PRINTER_NAME_1 like '%" & sFindText & "%' or PRINTER_SN_1 like '%" & sFindText & "%' or PORT_1 like '%" & sFindText & "%' or PRINTER_PROIZV_1 like '%" & sFindText & "%' or PRINTER_NAME_2 like '%" & sFindText & "%' or PORT_2 like '%" & sFindText & "%' or PRINTER_SN_2 like '%" & sFindText & "%' or PRINTER_PROIZV_2 like '%" & sFindText & "%' or PRINTER_NAME_3 like '%" & sFindText & "%' or PORT_3 like '%" & sFindText & "%' or PRINTER_SN_3 like '%" & sFindText & "%' or PRINTER_PROIZV_3 like '%" & sFindText & "%' or PORT_4 like '%" & sFindText & "%' or PRINTER_NAME_4 like '%" & sFindText & "%' or PRINTER_SN_4 like '%" & sFindText & "%' or PRINTER_PROIZV_4 like '%" & sFindText & "%' or SCANER_NAME like '%" & sFindText & "%' or NET_NAME like '%" & sFindText & "%' or PSEVDONIM like '%" & sFindText & "%' or MESTO like '%" & sFindText & "%' or kabn like '%" & sFindText & "%' or FILIAL like '%" & sFindText & "%' or TELEPHONE like '%" & sFindText & "%' or INV_NO_SYSTEM like '%" & sFindText & "%' or INV_NO_PRINTER like '%" & sFindText & "%' or INV_NO_MODEM like '%" & sFindText & "%' or INV_NO_SCANER like '%" & sFindText & "%' or INV_NO_MONITOR like '%" & sFindText & "%' or INV_NO_IBP like '%" & sFindText & "%' or OTvetstvennyj like '%" & sFindText & "%' or Ser_N_SIS like '%" & sFindText & "%' or BLOCK like '%" & sFindText & "%' or SN_BLOCK like '%" & sFindText & "%' or CREADER_NAME like '%" & sFindText & "%' or CASE_NAME like '%" & sFindText & "%' or CASE_SN like '%" & sFindText & "%' or CASE_PROIZV like '%" & sFindText & "%' or SYS_PR like '%" & sFindText & "%' order by PSEVDONIM, filial"
-
-        rs3 = New ADODB.Recordset
-        rs3.Open(sSQL3, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-
-        With rs3
-            .MoveFirst()
-            Do While Not .EOF
-                FINDTXT = ""
-                FirstColumn = True
-                'Ищем то что нам нужно
-
-                For lngCounter = 0 To 184
-
-                    If FirstColumn Then
-
-                        If Not IsDBNull(.Fields(lngCounter).Value) Then If isThere(.Fields(lngCounter).Value, sFindText, mde) = True Then GoTo Foundit
-
-                    Else
-
-                    End If                  'TO KEEP DATA FROM SHIFTING LEFT
-
-                Next
-
-Foundit:
-
-                My.Application.DoEvents()
-
-                If Len(FINDTXT) = 0 Then
-
-                Else
-
-
-                    Select Case .Fields("tiptehn").Value
-
-                        Case "PC"
-                            Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 4, 4)
-                            TEHNode.Tag = "C|" & .Fields(0).Value
-                            TempNode.Nodes.Add(TEHNode)
-
-                        Case "Printer"
-                            Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 7, 7)
-                            TEHNode.Tag = "C|" & .Fields(0).Value
-                            TempNode.Nodes.Add(TEHNode)
-
-                        Case "MFU"
-
-                            Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 8, 8)
-                            TEHNode.Tag = "C|" & .Fields(0).Value
-                            TempNode.Nodes.Add(TEHNode)
-
-                        Case "KOpir"
-                            Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 9, 9)
-                            TEHNode.Tag = "C|" & .Fields(0).Value
-                            TempNode.Nodes.Add(TEHNode)
-
-                        Case "NET"
-                            Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 10, 10)
-                            TEHNode.Tag = "C|" & .Fields(0).Value
-                            TempNode.Nodes.Add(TEHNode)
-
-                        Case "PHOTO"
-                            Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 11, 11)
-                            TEHNode.Tag = "C|" & .Fields(0).Value
-                            TempNode.Nodes.Add(TEHNode)
-
-                        Case "PHONE"
-                            Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 12, 12)
-                            TEHNode.Tag = "C|" & .Fields(0).Value
-                            TempNode.Nodes.Add(TEHNode)
-
-                        Case "FAX"
-                            Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 13, 13)
-                            TEHNode.Tag = "C|" & .Fields(0).Value
-                            TempNode.Nodes.Add(TEHNode)
-                        Case "SCANER"
-
-                            Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 14, 14)
-                            TEHNode.Tag = "C|" & .Fields(0).Value
-                            TempNode.Nodes.Add(TEHNode)
-                        Case "ZIP"
-                            Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 15, 15)
-                            TEHNode.Tag = "C|" & .Fields(0).Value
-                            TempNode.Nodes.Add(TEHNode)
-
-                        Case "OT"
-                            Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 16, 16)
-                            TEHNode.Tag = "C|" & .Fields(0).Value
-                            TempNode.Nodes.Add(TEHNode)
-
-                        Case "MONITOR"
-                            Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 17, 17)
-                            TEHNode.Tag = "C|" & .Fields(0).Value
-                            TempNode.Nodes.Add(TEHNode)
-                            '--------------VIP_Graff Добавление новой перефирии Начало-----------------
-                        Case "USB"
-                            Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 64, 64)
-                            TEHNode.Tag = "C|" & .Fields(0).Value
-                            TempNode.Nodes.Add(TEHNode)
-
-                        Case "SOUND"
-                            Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 44, 44)
-                            TEHNode.Tag = "C|" & .Fields(0).Value
-                            TempNode.Nodes.Add(TEHNode)
-
-                        Case "IBP"
-                            Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 41, 41)
-                            TEHNode.Tag = "C|" & .Fields(0).Value
-                            TempNode.Nodes.Add(TEHNode)
-
-                        Case "FS"
-                            Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 65, 65)
-                            TEHNode.Tag = "C|" & .Fields(0).Value
-                            TempNode.Nodes.Add(TEHNode)
-
-                        Case "KEYB"
-                            Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 46, 46)
-                            TEHNode.Tag = "C|" & .Fields(0).Value
-                            TempNode.Nodes.Add(TEHNode)
-
-                        Case "MOUSE"
-                            Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 47, 47)
-                            TEHNode.Tag = "C|" & .Fields(0).Value
-                            TempNode.Nodes.Add(TEHNode)
-                            '--------------VIP_Graff Добавление новой перефирии Конец------------------
-
-                        Case "CNT"
-                            Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 16, 16)
-                            TEHNode.Tag = "C|" & .Fields(0).Value
-                            TempNode.Nodes.Add(TEHNode)
-
-                        Case Else
-
-                    End Select
-
-                End If
-
-                .MoveNext()
-            Loop
-        End With
-
-        Me.gbTree.ForeColor = Me.gbStat.ForeColor
-        lstGroups.SelectedNode = nodeRoot
-
-        Dim tNode As New TreeNode
-        tNode = lstGroups.Nodes(0)
-        tNode.Expand()
-
-        rs3.Close()
-        rs3 = Nothing
-
+        Call Search(txtSearch.Text, lstGroups, gbTree)
 
     End Sub
-
-    Private Sub FindRecursive(ByVal tNode As TreeNode)
-
-        Dim tn As TreeNode
-        For Each tn In tNode.Nodes
-            ' if the text properties match, color the item
-            If tn.Text = Me.txtSearch.Text Then
-                tn.BackColor = Color.Yellow
-                lstGroups.SelectedNode = tn
-
-                lstGroups.SelectedNode.Expand()
-            End If
-
-            FindRecursive(tn)
-        Next
-
-    End Sub
-
-    Private Sub ClearBackColor()
-
-        Dim nodes As TreeNodeCollection
-        nodes = lstGroups.Nodes
-        Dim n As TreeNode
-
-        For Each n In nodes
-            ClearRecursive(n)
-        Next
-
-    End Sub
-
-    Private Sub ClearRecursive(ByVal treeNode As TreeNode)
-
-        Dim tn As TreeNode
-
-        For Each tn In treeNode.Nodes
-            tn.BackColor = Color.White
-            ClearRecursive(tn)
-        Next
-
-    End Sub
-
-
-
-    Private Function isThere(ByVal sTxt As String, ByVal sComp As String, ByVal sMode As Long) As Boolean
-        Dim TST() As String
-        isThere = False
-
-        Select Case sMode
-            Case 1
-                'match case
-                TST = Split(sTxt, sComp)
-                If UBound(TST) > 0 Then isThere = True : Exit Function
-                Exit Function
-            Case 2
-                'match word
-                TST = Split(LCase(sTxt), LCase(sComp))
-                If UBound(TST) <= 0 Then isThere = False : Exit Function
-                If Trim(Mid(TST(0), 1, 1)) = "" And Trim(Mid(TST(1), 1, 1)) = "" Then isThere = True : Exit Function
-
-            Case 3
-                'match word+case
-                TST = Split(sTxt, sComp)
-                If UBound(TST) <= 0 Then isThere = False : Exit Function
-                If Trim(Mid(TST(0), 1, 1)) = "" And Trim(Mid(TST(1), 1, 1)) = "" Then isThere = True : Exit Function
-
-
-
-
-            Case 0
-                'match any
-                TST = Split(LCase(sTxt), LCase(sComp))
-                If UBound(TST) > 0 Then isThere = True : FINDTXT = LCase(sTxt) : Exit Function
-
-
-                Exit Function
-        End Select
-
-    End Function
 
     Private Sub BrainchLoad(ByVal fCombo As ComboBox, ByVal dCombo As ComboBox)
 
@@ -1970,6 +1681,7 @@ err_:
             d = Split(lstGroups.SelectedNode.Tag, "|")
 
             REMOVE_TEHN(d(1))
+            Me.lstGroups.Nodes.Remove(Me.lstGroups.SelectedNode)
 
             Dim newThread1 As New Thread(AddressOf STAT_INF_1)
             newThread1.Start()
@@ -2181,6 +1893,13 @@ err_:
         Me.Cursor = Cursors.WaitCursor
         On Error GoTo err_
         Dim d() As String
+        'Dim uname As String
+        'Dim N_NAME As String
+        'Dim P_NAME As String
+        'Dim L_NAME As String
+
+        'Dim objIniFile As New IniFile(PrPath & "base.ini")
+        'uname = objIniFile.GetString("general", "NETNAME", "1")
 
         d = Split(lstGroups.SelectedNode.Tag, "|")
 
@@ -2195,19 +1914,19 @@ err_:
 
             Case "G"
 
-                sSQL = "SELECT * FROM kompy where filial ='" & sBranch & "' and mesto=''"
+                sSQL = "SELECT id,net_name,psevdonim FROM kompy where filial ='" & sBranch & "' and mesto=''"
 
                 Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG26", "") & " " & sBranch)
 
             Case "O"
 
-                sSQL = "SELECT * FROM kompy where filial ='" & sBranch & "' and mesto='" & sDepartment & "' and kabn=''"
+                sSQL = "SELECT id,net_name,psevdonim FROM kompy where filial ='" & sBranch & "' and mesto='" & sDepartment & "' and kabn=''"
 
                 Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG26", "") & " " & sBranch & "/" & sDepartment)
 
             Case "K"
 
-                sSQL = "SELECT id FROM kompy where filial ='" & sBranch & "' and mesto='" & sDepartment & "' AND kabn ='" & sOffice & "'"
+                sSQL = "SELECT id,net_name,psevdonim FROM kompy where filial ='" & sBranch & "' and mesto='" & sDepartment & "' AND kabn ='" & sOffice & "'"
 
                 Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG26", "") & " " & sBranch & "/" & sDepartment & "/" & sOffice)
 
@@ -2222,7 +1941,45 @@ err_:
             .MoveFirst()
             Do While Not .EOF
 
+
+                'Select Case uname
+
+                '    Case 0
+                '        N_NAME = .Fields("net_name").Value
+                '        P_NAME = .Fields("psevdonim").Value
+
+                '        If Len(N_NAME) = 0 Then
+                '            N_NAME = "NoName"
+                '        End If
+
+                '        If Len(P_NAME) = 0 Then
+                '            P_NAME = "NoName"
+                '        End If
+                '        L_NAME = N_NAME & " (" & P_NAME & ")"
+
+                '    Case 2
+                '        P_NAME = .Fields("psevdonim").Value
+
+                '        If Len(P_NAME) = 0 Then
+                '            P_NAME = "NoName"
+                '        End If
+                '        L_NAME = P_NAME
+
+                '    Case 1
+
+                '        N_NAME = .Fields("net_name").Value
+                '        If Len(N_NAME) = 0 Then
+                '            N_NAME = "NoName"
+                '        End If
+
+                '        L_NAME = N_NAME
+                'End Select
+
                 REMOVE_TEHN(.Fields("id").Value)
+
+                'Dim TEHNodeCNT As New TreeNode(L_NAME)
+                'Me.lstGroups.Nodes.Remove(TEHNodeCNT)
+
 
                 .MoveNext()
             Loop
@@ -2231,10 +1988,13 @@ err_:
         rs = Nothing
 
 
-        RefFilTree(Me.lstGroups)
-
-        Dim newThread1 As New Thread(AddressOf STAT_INF_1)
+        Dim newThread1 As New Thread(AddressOf R_T_LOAD)
         newThread1.Start()
+
+        'RefFilTree(Me.lstGroups)
+
+        Dim newThread2 As New Thread(AddressOf STAT_INF_1)
+        newThread2.Start()
 
         Me.Cursor = Cursors.Default
         Exit Sub
@@ -2296,8 +2056,12 @@ err_:
 
                         EverestFilePatch = sTXTDIR & d(d.Length - 1)
 
-                        Clear_Form_For_Computer()
-                        Call Everest_Load()
+                        Me.Invoke(New MethodInvoker(AddressOf Clear_Form_For_Computer))
+                        Me.Invoke(New MethodInvoker(AddressOf Everest_Load))
+
+
+                        'Clear_Form_For_Computer()
+                        'Call Everest_Load()
 
                         cmbBranch.Text = sBranch
                         cmbDepartment.Text = sDepartment
@@ -5724,6 +5488,7 @@ err_:
         If e.Button = Windows.Forms.MouseButtons.Right Then
             CMServices.Show(CType(sender, Control), e.Location)
             lvServices = lvRepairNET
+            Call MNU_SERVICES_BUTTON(lvServices)
         Else
 
         End If
@@ -5736,8 +5501,41 @@ err_:
         If e.Button = Windows.Forms.MouseButtons.Right Then
             CMServices.Show(CType(sender, Control), e.Location)
             lvServices = lvRepairOTH
+            Call MNU_SERVICES_BUTTON(lvServices)
         Else
 
+        End If
+    End Sub
+
+    Private Sub MNU_SERVICES_BUTTON(ByVal lvServices As ListView)
+        Dim z As Integer
+        Dim rCOUNT As Integer
+
+        For z = 0 To lvServices.SelectedItems.Count - 1
+            rCOUNT = (lvServices.SelectedItems(z).Text)
+        Next
+
+        Dim unam As String
+        Dim rs As ADODB.Recordset 'Объявляем рекордсет
+        Dim sSQL As String 'Переменная, где будет размещён SQL запрос
+
+        sSQL = "SELECT zakryt FROM Remont WHERE id=" & rCOUNT
+        rs = New ADODB.Recordset
+        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+        With rs
+            unam = .Fields("zakryt").Value
+        End With
+        rs.Close()
+        rs = Nothing
+
+        If unam = "1" Or unam = True Then
+
+            mnu_z_rasp.Enabled = False
+            MnuSendEmail.Enabled = False
+        Else
+            mnu_z_rasp.Enabled = True
+            MnuSendEmail.Enabled = True
         End If
     End Sub
 
@@ -5748,6 +5546,7 @@ err_:
         If e.Button = Windows.Forms.MouseButtons.Right Then
             CMServices.Show(CType(sender, Control), e.Location)
             lvServices = lvRepair
+            Call MNU_SERVICES_BUTTON(lvServices)
         Else
 
         End If
@@ -5759,6 +5558,7 @@ err_:
         If e.Button = Windows.Forms.MouseButtons.Right Then
             CMServices.Show(CType(sender, Control), e.Location)
             lvServices = lvRepairBR
+            Call MNU_SERVICES_BUTTON(lvServices)
         Else
 
         End If
@@ -5770,6 +5570,7 @@ err_:
         If e.Button = Windows.Forms.MouseButtons.Right Then
             CMServices.Show(CType(sender, Control), e.Location)
             lvServices = lvRepairPRN
+            Call MNU_SERVICES_BUTTON(lvServices)
         Else
 
         End If
@@ -6130,7 +5931,50 @@ err_:
 
     End Sub
 
-    Private Sub lstSoftware_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lstSoftware.SelectedIndexChanged
+    Private Sub MnuSendEmail_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MnuSendEmail.Click
+        If lvServices.Items.Count = 0 Then Exit Sub
+        Dim z As Integer
+        Dim rCOUNT As Integer
+
+        For z = 0 To lvServices.SelectedItems.Count - 1
+            rCOUNT = (lvServices.SelectedItems(z).Text)
+        Next
+
+        If rCOUNT = 0 Then Exit Sub
+        Call REMONT_SEND_MASTER(rCOUNT)
+
+    End Sub
+
+    Private Sub mnu_z_rasp_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnu_z_rasp.Click
+
+        If lvServices.Items.Count = 0 Then Exit Sub
+
+        Dim z As Integer
+        Dim rCOUNT As Integer
+
+        For z = 0 To lvServices.SelectedItems.Count - 1
+            rCOUNT = (lvServices.SelectedItems(z).Text)
+        Next
+
+
+        Call SRASP(rCOUNT)
+    End Sub
+
+    Private Sub mnu_Z_to_Office_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnu_Z_to_Office.Click
+        If lvServices.Items.Count = 0 Then Exit Sub
+
+        Dim z As Integer
+        Dim rCOUNT As Integer
+
+        For z = 0 To lvServices.SelectedItems.Count - 1
+            rCOUNT = (lvServices.SelectedItems(z).Text)
+        Next
+
+        Call SRASP2(rCOUNT)
+
+    End Sub
+
+    Private Sub txtSearch_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtSearch.TextChanged
 
     End Sub
 End Class
