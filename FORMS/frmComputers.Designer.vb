@@ -873,11 +873,11 @@ Me.spCont.Panel1.Controls.Add(Me.TableLayoutPanel65)
 '
 'spCont.Panel2
 '
-Me.spCont.Panel2.Controls.Add(Me.sSTAB1)
 Me.spCont.Panel2.Controls.Add(Me.sSTAB5)
 Me.spCont.Panel2.Controls.Add(Me.sSTAB2)
 Me.spCont.Panel2.Controls.Add(Me.sSTAB4)
 Me.spCont.Panel2.Controls.Add(Me.sSTAB3)
+Me.spCont.Panel2.Controls.Add(Me.sSTAB1)
 Me.spCont.Size = New System.Drawing.Size(992, 646)
 Me.spCont.SplitterDistance = 298
 Me.spCont.TabIndex = 0
@@ -4165,7 +4165,7 @@ Me.lstUsers.Location = New System.Drawing.Point(3, 283)
 Me.lstUsers.MultiSelect = false
 Me.lstUsers.Name = "lstUsers"
 Me.lstUsers.ShowItemToolTips = true
-Me.lstUsers.Size = New System.Drawing.Size(676, 353)
+Me.lstUsers.Size = New System.Drawing.Size(676, 334)
 Me.lstUsers.TabIndex = 38
 Me.lstUsers.UseCompatibleStateImageBehavior = false
 Me.lstUsers.View = System.Windows.Forms.View.Details
@@ -4264,7 +4264,7 @@ Me.lvNotes.FullRowSelect = true
 Me.lvNotes.GridLines = true
 Me.lvNotes.Location = New System.Drawing.Point(3, 108)
 Me.lvNotes.Name = "lvNotes"
-Me.lvNotes.Size = New System.Drawing.Size(664, 120)
+Me.lvNotes.Size = New System.Drawing.Size(664, 112)
 Me.lvNotes.TabIndex = 4
 Me.lvNotes.UseCompatibleStateImageBehavior = false
 Me.lvNotes.View = System.Windows.Forms.View.Details
@@ -4971,7 +4971,7 @@ Me.lvNotesBR.FullRowSelect = true
 Me.lvNotesBR.GridLines = true
 Me.lvNotesBR.Location = New System.Drawing.Point(3, 108)
 Me.lvNotesBR.Name = "lvNotesBR"
-Me.lvNotesBR.Size = New System.Drawing.Size(658, 120)
+Me.lvNotesBR.Size = New System.Drawing.Size(658, 109)
 Me.lvNotesBR.TabIndex = 4
 Me.lvNotesBR.UseCompatibleStateImageBehavior = false
 Me.lvNotesBR.View = System.Windows.Forms.View.Details
@@ -5901,7 +5901,7 @@ Me.lvNotesPRN.FullRowSelect = true
 Me.lvNotesPRN.GridLines = true
 Me.lvNotesPRN.Location = New System.Drawing.Point(3, 108)
 Me.lvNotesPRN.Name = "lvNotesPRN"
-Me.lvNotesPRN.Size = New System.Drawing.Size(658, 120)
+Me.lvNotesPRN.Size = New System.Drawing.Size(658, 109)
 Me.lvNotesPRN.TabIndex = 4
 Me.lvNotesPRN.UseCompatibleStateImageBehavior = false
 Me.lvNotesPRN.View = System.Windows.Forms.View.Details
@@ -7947,7 +7947,7 @@ Me.lvNotesOTH.FullRowSelect = true
 Me.lvNotesOTH.GridLines = true
 Me.lvNotesOTH.Location = New System.Drawing.Point(3, 110)
 Me.lvNotesOTH.Name = "lvNotesOTH"
-Me.lvNotesOTH.Size = New System.Drawing.Size(658, 120)
+Me.lvNotesOTH.Size = New System.Drawing.Size(658, 107)
 Me.lvNotesOTH.TabIndex = 4
 Me.lvNotesOTH.UseCompatibleStateImageBehavior = false
 Me.lvNotesOTH.View = System.Windows.Forms.View.Details
@@ -8514,6 +8514,7 @@ Me.cmDvig.Size = New System.Drawing.Size(119, 26)
 '
 'DELTEdVIGToolStripMenuItem
 '
+Me.DELTEdVIGToolStripMenuItem.Image = CType(resources.GetObject("DELTEdVIGToolStripMenuItem.Image"),System.Drawing.Image)
 Me.DELTEdVIGToolStripMenuItem.Name = "DELTEdVIGToolStripMenuItem"
 Me.DELTEdVIGToolStripMenuItem.Size = New System.Drawing.Size(118, 22)
 Me.DELTEdVIGToolStripMenuItem.Text = "Удалить"

@@ -1427,4 +1427,10 @@ err_:
 
         End Select
     End Sub
+
+    Private Sub Button4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button4.Click
+        Me.Cursor = Cursors.WaitCursor
+        add_kabn_if_nothing()
+        Me.Cursor = Cursors.Default
+    End Sub
 End Class

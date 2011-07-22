@@ -1,10 +1,10 @@
 ﻿Imports System.Threading
+Imports System.ComponentModel
 
 Public Class frmSearch
-    Public FINDTXT As String
     Public SfilS As String
-    Private mde As Decimal
     Private a, b As Integer
+    Private _backgroundWorker1 As System.ComponentModel.BackgroundWorker
 
     Private Sub status(ByVal strText As String)
 
@@ -17,7 +17,6 @@ Public Class frmSearch
 Error_:
 
     End Sub
-
 
     Public Sub Search(ByVal sGroupName As String, ByVal sFindText As String, Optional ByVal MtchWord As Byte = 0, Optional ByVal MtchCase As Byte = 0)
         Dim sSQL As String
@@ -92,7 +91,7 @@ SRCCH:
 
                 GoTo SRCCH2
 Foundit:
-                Application.DoEvents()
+                ' Application.DoEvents()
 
                 lstSearch.Items.Add(.Fields("id").Value) 'col no. 1
 
@@ -209,10 +208,11 @@ Foundit:
                 Else
                 End If
 
-                Application.DoEvents()
+                'Application.DoEvents()
+
                 Label3.Text = "Идет поиск ждите, найдено: " & intCount
 SRCCH2:
-                Application.DoEvents()
+                'Application.DoEvents()
                 .MoveNext()
             Loop
         End With
@@ -232,39 +232,6 @@ SRCCH2:
 
     End Sub
 
-    Private Function isThere(ByVal sTxt As String, ByVal sComp As String, ByVal sMode As Long) As Boolean
-        Dim TST() As String
-        isThere = False
-
-        Select Case sMode
-            Case 1
-                'match case
-                TST = Split(sTxt, sComp)
-                If UBound(TST) > 0 Then isThere = True : Exit Function
-                Exit Function
-            Case 2
-                'match word
-                TST = Split(LCase(sTxt), LCase(sComp))
-                If UBound(TST) <= 0 Then isThere = False : Exit Function
-                If Trim(Mid(TST(0), 1, 1)) = "" And Trim(Mid(TST(1), 1, 1)) = "" Then isThere = True : Exit Function
-
-            Case 3
-                'match word+case
-                TST = Split(sTxt, sComp)
-                If UBound(TST) <= 0 Then isThere = False : Exit Function
-                If Trim(Mid(TST(0), 1, 1)) = "" And Trim(Mid(TST(1), 1, 1)) = "" Then isThere = True : Exit Function
-
-
-            Case 0
-                'match any
-                TST = Split(LCase(sTxt), LCase(sComp))
-                If UBound(TST) > 0 Then isThere = True : FINDTXT = LCase(sTxt) : Exit Function
-
-
-                Exit Function
-        End Select
-
-    End Function
 
     Private Sub frmSearch_Activated(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Activated
         frmMain.SaveInfTehButton.Enabled = False
@@ -303,8 +270,15 @@ SRCCH2:
             b = 0
         End If
 
-        Dim newThread4 As New Thread(AddressOf RT_SEARCHE)
-        newThread4.Start()
+        _backgroundWorker1 = New System.ComponentModel.BackgroundWorker()
+        _backgroundWorker1.WorkerSupportsCancellation = False
+        _backgroundWorker1.WorkerReportsProgress = False
+
+        AddHandler Me._backgroundWorker1.DoWork, New DoWorkEventHandler(AddressOf RT_SEARCHE)
+        _backgroundWorker1.RunWorkerAsync()
+
+        'Dim newThread4 As New Thread(AddressOf RT_SEARCHE)
+        'newThread4.Start()
 
     End Sub
 
@@ -380,8 +354,15 @@ Err_:
                     b = 0
                 End If
 
-                Dim newThread4 As New Thread(AddressOf RT_SEARCHE)
-                newThread4.Start()
+                'Dim newThread4 As New Thread(AddressOf RT_SEARCHE)
+                'newThread4.Start()
+
+                _backgroundWorker1 = New System.ComponentModel.BackgroundWorker()
+                _backgroundWorker1.WorkerSupportsCancellation = False
+                _backgroundWorker1.WorkerReportsProgress = False
+
+                AddHandler Me._backgroundWorker1.DoWork, New DoWorkEventHandler(AddressOf RT_SEARCHE)
+                _backgroundWorker1.RunWorkerAsync()
 
         End Select
     End Sub

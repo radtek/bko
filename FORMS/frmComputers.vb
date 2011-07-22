@@ -65,21 +65,25 @@ Public Class frmComputers
 
         'Меняем шрифт на форме
 
+
         Dim newThread1 As New Thread(AddressOf Font_Form_For_Computer_1)
         newThread1.Start()
 
         Dim newThread2 As New Thread(AddressOf LoadSPR_1)
         newThread2.Start()
 
+
         Dim newThread3 As New Thread(AddressOf frmComputers_Lang_1)
         newThread3.Start()
 
-        Me.Invoke(New MethodInvoker(AddressOf RESIZER))
+        Me.BeginInvoke(New MethodInvoker(AddressOf RESIZER))
 
         Dim newThread4 As New Thread(AddressOf STAT_INF_1)
         newThread4.Start()
 
         Application.DoEvents()
+
+
         Me.Cursor = Cursors.WaitCursor
 
         'Call add_kabn_if_nothing()
@@ -115,7 +119,7 @@ Public Class frmComputers
 
         End Select
 
-      
+
         uname = objIniFile.GetString("General", "RAZDEL", "0")
 
         Dim langfile As New IniFile(sLANGPATH)
@@ -224,6 +228,7 @@ Public Class frmComputers
         sBranch = ""
         sDepartment = ""
 
+        Dim langfile As New IniFile(sLANGPATH)
 
         Select Case d(0)
 
@@ -239,6 +244,33 @@ Public Class frmComputers
                 End With
                 rs2.Close()
                 rs2 = Nothing
+
+
+                '#########################################################################################################################
+
+                If Len(sBranch) <> 0 Then lblT_O_T.Text = langfile.GetString("frmComputers", "MSG15", "")
+                If Len(sDepartment) <> 0 Then lblT_O_T.Text = langfile.GetString("frmComputers", "MSG16", "")
+                If Len(sOffice) <> 0 Then lblT_O_T.Text = langfile.GetString("frmComputers", "MSG17", "")
+
+
+
+                Dim rs As ADODB.Recordset 'Объявляем рекордсет
+                Dim sSQL As String 'Переменная, где будет размещён SQL запрос
+
+
+                sSQL = "SELECT COUNT(*) as t_n FROM kompy WHERE filial ='" & sBranch & "' and mesto='" & sDepartment & "' and kabn='" & sOffice & "'"
+                rs = New ADODB.Recordset
+                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+
+                With rs
+                    lblT_O.Text = .Fields("t_n").Value & " " & langfile.GetString("frmComputers", "MSG13", "") '& langIni.GetString("messages", "l4", "")
+                End With
+
+                rs.Close()
+                rs = Nothing
+
+
 
             Case "G"
 
@@ -268,6 +300,8 @@ Public Class frmComputers
 
             Case "OT"
 
+
+
                 rs2.Open("SELECT * FROM SPR_MESTO where mestoId = " & d(1), DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockBatchOptimistic)
 
                 With rs2
@@ -292,8 +326,6 @@ Public Class frmComputers
                 rs2 = Nothing
 
 
-
-
                 Exit Sub
 Error_:
                 'MsgBox Err.Description
@@ -311,21 +343,19 @@ Error_:
 
         pDRAG = False
 
-        Dim newThread1 As New Thread(AddressOf COLOR_Form_For_Computer_1)
-        newThread1.Start()
+        COLOR_Form_For_Computer(Me)
 
-        Call LOAD_LIST()
+        'Call LOAD_LIST()
+        Me.BeginInvoke(New MethodInvoker(AddressOf LOAD_LIST))
+        Me.BeginInvoke(New MethodInvoker(AddressOf selectTECMesto))
+
         Me.Cursor = Cursors.Default
-    End Sub
-
-    Private Sub COLOR_Form_For_Computer_1()
-
-        Me.Invoke(New MethodInvoker(AddressOf COLOR_Form_For_Computer))
-
     End Sub
 
     Private Sub LOAD_LIST()
         Dim langfile As New IniFile(sLANGPATH)
+
+        'selectTECMesto
 
         Me.Cursor = Cursors.WaitCursor
 
@@ -340,7 +370,7 @@ Error_:
 
         Me.ChkPDC.Checked = False
 
-        Me.Invoke(New MethodInvoker(AddressOf SECUR_LEVEL))
+        Me.BeginInvoke(New MethodInvoker(AddressOf SECUR_LEVEL))
 
         'Call SECUR_LEVEL()
 
@@ -349,7 +379,10 @@ Error_:
 
         'Call Clear_Form_For_Computer()
 
-        Me.Invoke(New MethodInvoker(AddressOf Clear_Form_For_Computer))
+        'Me.BeginInvoke(New MethodInvoker(AddressOf Clear_Form_For_Computer))
+
+        Call Clear_Form_For_Computer()
+
 
 
         Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG14", "") & " " & Me.lstGroups.SelectedNode.Text)
@@ -444,6 +477,7 @@ Error_:
                             Dim newThread2 As New Thread(AddressOf S_P_LOAD_t)
                             newThread2.Start()
 
+
                             Dim newThread3 As New Thread(AddressOf U_P_LOAD_t)
                             newThread3.Start()
 
@@ -508,7 +542,7 @@ Error_:
                             Label83.Visible = True
                             cmbPCL.Visible = True
 
-                           
+
 
                             Dim newThread3 As New Thread(AddressOf T_LOAD_T)
                             newThread3.Start()
@@ -540,7 +574,7 @@ Error_:
                             cmbPCL.Visible = False
 
 
-                            Me.Invoke(New MethodInvoker(AddressOf T_LOAD_T))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
 
                             Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
                             newThread4.Start()
@@ -792,7 +826,20 @@ Error_:
                             sSTAB4.Visible = False
                             sSTAB5.Visible = False
 
-                            Call LOADmon(d(1))
+                            ' Call LOADmon(d(1))
+
+
+                            Dim newThread3 As New Thread(AddressOf T_LOAD_T)
+                            newThread3.Start()
+
+                            Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
+                            newThread4.Start()
+
+                            Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
+                            newThread5.Start()
+
+                            Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                            newThread6.Start()
 
                             Call LOAD_PCL(Me.cmbOTHFil.Text, Me.cmbOTHDepart.Text, Me.cmbOTHOffice.Text, Me.cmbOTHPCL)
                             'MsgBox("Доделать открытие мониторов")
@@ -1038,7 +1085,7 @@ Error_:
                             lblOTPCL.Visible = False
                             cmbOTHPCL.Visible = False
 
-                            'Me.Invoke(New MethodInvoker(AddressOf T_LOAD_T))
+                            'Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
 
                             Dim newThread3 As New Thread(AddressOf T_LOAD_T)
                             newThread3.Start()
@@ -1093,12 +1140,11 @@ Error_:
                 rs.Close()
                 rs = Nothing
 
-
                 LOAD_INF_BRANCHE(d(1))
                 Call LOAD_REPAIR(d(1), Me.lvRepairBR)
 
             Case "O"
-                
+
 
                 'frmMain.SaveInfTehButton.Enabled = False
 
@@ -1202,7 +1248,11 @@ Error_:
 
         End Select
 
+
         Me.Cursor = Cursors.Default
+
+
+        If OneStart = 0 Then OneStart = 1
 
     End Sub
 
@@ -1210,7 +1260,7 @@ Error_:
 
     Private Sub S_P_LOAD_t()
 
-        Me.Invoke(New MethodInvoker(AddressOf S_P_LOAD_t_1))
+        Me.BeginInvoke(New MethodInvoker(AddressOf S_P_LOAD_t_1))
 
     End Sub
 
@@ -1220,7 +1270,7 @@ Error_:
 
     Private Sub U_P_LOAD_t()
 
-        Me.Invoke(New MethodInvoker(AddressOf U_P_LOAD_t_1))
+        Me.BeginInvoke(New MethodInvoker(AddressOf U_P_LOAD_t_1))
     End Sub
 
     Private Sub U_P_LOAD_t_1()
@@ -1230,14 +1280,14 @@ Error_:
     Private Sub T_LOAD_T()
 
 
-        Me.Invoke(New MethodInvoker(AddressOf T_LOAD_T_1))
+        Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
 
 
     End Sub
 
     Private Sub T_LOAD_T_1()
 
-  Select TipTehn
+        Select Case TipTehn
 
             Case "PC"
                 Call LOADt(sCOUNT)
@@ -1251,6 +1301,11 @@ Error_:
             Case "MFU"
                 Call LOADp(sCOUNT)
 
+
+            Case "MONITOR"
+
+                LOADmon(sCOUNT)
+
             Case "NET"
 
             Case Else
@@ -1263,7 +1318,7 @@ Error_:
 
     Private Sub N_P_LOAD_t()
 
-        Me.Invoke(New MethodInvoker(AddressOf N_P_LOAD_t_1))
+        Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t_1))
 
     End Sub
 
@@ -1293,7 +1348,7 @@ Error_:
 
     Private Sub R_P_LOAD_t()
 
-        Me.Invoke(New MethodInvoker(AddressOf R_P_LOAD_t_1))
+        Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t_1))
 
     End Sub
 
@@ -1323,7 +1378,7 @@ Error_:
 
     Private Sub D_P_LOAD_t()
 
-        Me.Invoke(New MethodInvoker(AddressOf D_PLOAD_T_1))
+        Me.BeginInvoke(New MethodInvoker(AddressOf D_PLOAD_T_1))
 
     End Sub
 
@@ -1376,13 +1431,13 @@ Error_:
 
     Private Sub S_Tl_LOAD()
 
-        Me.Invoke(New MethodInvoker(AddressOf LOAD_LIST))
+        Me.BeginInvoke(New MethodInvoker(AddressOf LOAD_LIST))
 
     End Sub
 
     Public Sub R_T_LOAD()
 
-        Me.lstGroups.Invoke(New MethodInvoker(AddressOf R_T_LOAD_1))
+        Me.BeginInvoke(New MethodInvoker(AddressOf R_T_LOAD_1), Nothing)
 
     End Sub
 
@@ -1390,14 +1445,11 @@ Error_:
         On Error GoTo err_
         Dim langfile As New IniFile(sLANGPATH)
 
-
-
         Dim rs As ADODB.Recordset 'Объявляем рекордсет
         Dim sSQL As String 'Переменная, где будет размещён SQL запрос
         sSQL = "select COUNT(*) as T_N from kompy"
         rs = New ADODB.Recordset
         rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-
 
         With rs
             lblT_All.Text = (.Fields("T_N").Value) & " " & langfile.GetString("frmComputers", "MSG13", "")
@@ -1411,28 +1463,32 @@ err_:
 
     Private Sub LoadSPR_1()
 
-        Me.Invoke(New MethodInvoker(AddressOf LoadSPR))
+        Me.BeginInvoke(New MethodInvoker(AddressOf LoadSPR))
 
     End Sub
     '######################
 
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
+        OneStart = 0
 
         txtSearch.Text = ""
 
         Me.Cursor = Cursors.WaitCursor
-        OneStart = 0
 
-        Dim newThread2 As New Thread(AddressOf LoadSPR_1)
-        newThread2.Start()
+
+        'Dim newThread2 As New Thread(AddressOf LoadSPR_1)
+        'newThread2.Start()
 
         Dim newThread1 As New Thread(AddressOf R_T_LOAD)
         newThread1.Start()
+        'newThread2.Join()
+        newThread1.Join()
 
-        OneStart = 1
+        'Call LoadSPR()
+        'Call RefFilTree(lstGroups)
+
 
         Me.Cursor = Cursors.Default
-        OneStart = 1
     End Sub
 
     Private Sub txtSearch_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSearch.KeyDown
@@ -1453,14 +1509,14 @@ err_:
 
     Private Sub S2_LOAD_()
 
-        Me.Invoke(New MethodInvoker(AddressOf S2_LOAD_t))
+        Me.BeginInvoke(New MethodInvoker(AddressOf S2_LOAD_t))
 
     End Sub
 
     Private Sub S2_LOAD_t()
         'Call Search2(txtSearch.Text)
 
-        Call Search(txtSearch.Text, lstGroups, gbTree)
+        Call Search(txtSearch.Text, lstGroups, gbTree, "COMP")
 
     End Sub
 
@@ -1891,7 +1947,8 @@ err_:
         Dim langfile As New IniFile(sLANGPATH)
 
         Me.Cursor = Cursors.WaitCursor
-        On Error GoTo err_
+        'On Error GoTo err_
+
         Dim d() As String
         'Dim uname As String
         'Dim N_NAME As String
@@ -1991,6 +2048,7 @@ err_:
         Dim newThread1 As New Thread(AddressOf R_T_LOAD)
         newThread1.Start()
 
+
         'RefFilTree(Me.lstGroups)
 
         Dim newThread2 As New Thread(AddressOf STAT_INF_1)
@@ -2056,8 +2114,8 @@ err_:
 
                         EverestFilePatch = sTXTDIR & d(d.Length - 1)
 
-                        Me.Invoke(New MethodInvoker(AddressOf Clear_Form_For_Computer))
-                        Me.Invoke(New MethodInvoker(AddressOf Everest_Load))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf Clear_Form_For_Computer))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf Everest_Load))
 
 
                         'Clear_Form_For_Computer()
@@ -4883,7 +4941,7 @@ Error_:
         lvMovementPRN.Sort()
     End Sub
 
-    
+
     Private Sub lvMovementPRN_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lvMovementPRN.MouseUp
 
         If lvMovementPRN.Items.Count = 0 Then Exit Sub
@@ -5076,7 +5134,7 @@ lvMovementOTH.Columns(e.Column)
 
     End Sub
 
-    
+
     Private Sub lstGroups_NodeMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.TreeNodeMouseClickEventArgs) Handles lstGroups.NodeMouseClick
 
         '#############################################
@@ -5099,7 +5157,7 @@ lvMovementOTH.Columns(e.Column)
         d = Split(lstGroups.SelectedNode.Tag, "|")
 
 
-       
+
 
         Select Case d(0)
 
@@ -5180,15 +5238,18 @@ lvMovementOTH.Columns(e.Column)
         rs.Close()
         rs = Nothing
 
-       
 
+
+    End Sub
+
+    Private Sub treebranche_SelectedValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles treebranche.SelectedValueChanged
+     
     End Sub
 
     Private Sub treebranche_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles treebranche.SelectedIndexChanged
 
         Dim objIniFile As New IniFile(PrPath & "base.ini")
         objIniFile.WriteString("General", "branche", treebranche.Text)
-
 
         If OneStart = 0 Then Exit Sub
 
@@ -5693,7 +5754,7 @@ err_:
         End Select
 
 
-       
+
     End Sub
 
     Private Sub bSVGAPlus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bSVGAPlus.Click
@@ -5740,7 +5801,7 @@ err_:
     End Sub
 
     Private Sub bNETPlus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bNETPlus.Click
-        
+
 
         Select Case sNET
 
@@ -5802,6 +5863,7 @@ err_:
     End Sub
 
     Private Sub chkVisibleSTR_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkVisibleSTR.CheckedChanged
+
         Me.Cursor = Cursors.WaitCursor
 
         Dim objIniFile As New IniFile(PrPath & "base.ini")
@@ -5822,6 +5884,8 @@ err_:
 
         Dim newThread5 As New Thread(AddressOf R_T_LOAD)
         newThread5.Start()
+
+       
 
         Me.Cursor = Cursors.Default
 
@@ -5922,7 +5986,6 @@ err_:
         rs.Close()
         rs = Nothing
 
-
         Dim newThread5 As New Thread(AddressOf R_T_LOAD)
         newThread5.Start()
 
@@ -5977,5 +6040,7 @@ err_:
     Private Sub txtSearch_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtSearch.TextChanged
 
     End Sub
+
+   
 End Class
 

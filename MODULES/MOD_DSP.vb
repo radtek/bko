@@ -476,279 +476,279 @@
         'txtMonDum
     End Sub
 
-    Public Sub COLOR_Form_For_Computer()
+    'Public Sub COLOR_Form_For_Computer()
 
 
-        Dim C As Control
+    '    Dim C As Control
 
 
-        For Each C In frmComputers.TableLayoutPanel24.Controls
-            If TypeOf C Is TextBox Then C.BackColor = Color.White
-            If TypeOf C Is ComboBox Then C.BackColor = Color.White
-        Next C
+    '    For Each C In frmComputers.TableLayoutPanel24.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
 
-        For Each C In frmComputers.TableLayoutPanel25.Controls
-            If TypeOf C Is TextBox Then C.BackColor = Color.White
-            If TypeOf C Is ComboBox Then C.BackColor = Color.White
-        Next C
+    '    For Each C In frmComputers.TableLayoutPanel25.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
 
-        For Each C In frmComputers.TableLayoutPanel26.Controls
-            If TypeOf C Is TextBox Then C.BackColor = Color.White
-            If TypeOf C Is ComboBox Then C.BackColor = Color.White
-        Next C
+    '    For Each C In frmComputers.TableLayoutPanel26.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
 
-        For Each C In frmComputers.TableLayoutPanel27.Controls
-            If TypeOf C Is TextBox Then C.BackColor = Color.White
-            If TypeOf C Is ComboBox Then C.BackColor = Color.White
-        Next C
+    '    For Each C In frmComputers.TableLayoutPanel27.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
 
-        For Each C In frmComputers.TableLayoutPanel28.Controls
-            If TypeOf C Is TextBox Then C.BackColor = Color.White
-            If TypeOf C Is ComboBox Then C.BackColor = Color.White
-        Next C
+    '    For Each C In frmComputers.TableLayoutPanel28.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
 
-        For Each C In frmComputers.TableLayoutPanel29.Controls
-            If TypeOf C Is TextBox Then C.BackColor = Color.White
-            If TypeOf C Is ComboBox Then C.BackColor = Color.White
-        Next C
+    '    For Each C In frmComputers.TableLayoutPanel29.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
 
-        For Each C In frmComputers.TableLayoutPanel30.Controls
-            If TypeOf C Is TextBox Then C.BackColor = Color.White
-            If TypeOf C Is ComboBox Then C.BackColor = Color.White
-        Next C
+    '    For Each C In frmComputers.TableLayoutPanel30.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
 
-        For Each C In frmComputers.TableLayoutPanel31.Controls
-            If TypeOf C Is TextBox Then C.BackColor = Color.White
-            If TypeOf C Is ComboBox Then C.BackColor = Color.White
-        Next C
+    '    For Each C In frmComputers.TableLayoutPanel31.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
 
-        For Each C In frmComputers.TableLayoutPanel32.Controls
-            If TypeOf C Is TextBox Then C.BackColor = Color.White
-            If TypeOf C Is ComboBox Then C.BackColor = Color.White
-        Next C
+    '    For Each C In frmComputers.TableLayoutPanel32.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
 
-        For Each C In frmComputers.TableLayoutPanel33.Controls
-            If TypeOf C Is TextBox Then C.BackColor = Color.White
-            If TypeOf C Is ComboBox Then C.BackColor = Color.White
-        Next C
+    '    For Each C In frmComputers.TableLayoutPanel33.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
 
-        For Each C In frmComputers.TableLayoutPanel34.Controls
-            If TypeOf C Is TextBox Then C.BackColor = Color.White
-            If TypeOf C Is ComboBox Then C.BackColor = Color.White
-        Next C
+    '    For Each C In frmComputers.TableLayoutPanel34.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
 
-        For Each C In frmComputers.TableLayoutPanel35.Controls
-            If TypeOf C Is TextBox Then C.BackColor = Color.White
-            If TypeOf C Is ComboBox Then C.BackColor = Color.White
-        Next C
+    '    For Each C In frmComputers.TableLayoutPanel35.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
 
-        For Each C In frmComputers.TableLayoutPanel36.Controls
-            If TypeOf C Is TextBox Then C.BackColor = Color.White
-            If TypeOf C Is ComboBox Then C.BackColor = Color.White
-        Next C
+    '    For Each C In frmComputers.TableLayoutPanel36.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
 
-        For Each C In frmComputers.TableLayoutPanel37.Controls
-            If TypeOf C Is TextBox Then C.BackColor = Color.White
-            If TypeOf C Is ComboBox Then C.BackColor = Color.White
-        Next C
+    '    For Each C In frmComputers.TableLayoutPanel37.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
 
-        For Each C In frmComputers.TableLayoutPanel38.Controls
-            If TypeOf C Is TextBox Then C.BackColor = Color.White
-            If TypeOf C Is ComboBox Then C.BackColor = Color.White
-        Next C
+    '    For Each C In frmComputers.TableLayoutPanel38.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
 
-        For Each C In frmComputers.TableLayoutPanel39.Controls
-            If TypeOf C Is TextBox Then C.BackColor = Color.White
-            If TypeOf C Is ComboBox Then C.BackColor = Color.White
-        Next C
+    '    For Each C In frmComputers.TableLayoutPanel39.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
 
-        For Each C In frmComputers.TableLayoutPanel40.Controls
-            If TypeOf C Is TextBox Then C.BackColor = Color.White
-            If TypeOf C Is ComboBox Then C.BackColor = Color.White
-        Next C
+    '    For Each C In frmComputers.TableLayoutPanel40.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
 
-        For Each C In frmComputers.TableLayoutPanel41.Controls
-            If TypeOf C Is TextBox Then C.BackColor = Color.White
-            If TypeOf C Is ComboBox Then C.BackColor = Color.White
-        Next C
+    '    For Each C In frmComputers.TableLayoutPanel41.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
 
-        For Each C In frmComputers.TableLayoutPanel42.Controls
-            If TypeOf C Is TextBox Then C.BackColor = Color.White
-            If TypeOf C Is ComboBox Then C.BackColor = Color.White
-        Next C
+    '    For Each C In frmComputers.TableLayoutPanel42.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
 
-        For Each C In frmComputers.TableLayoutPanel43.Controls
-            If TypeOf C Is TextBox Then C.BackColor = Color.White
-            If TypeOf C Is ComboBox Then C.BackColor = Color.White
-        Next C
+    '    For Each C In frmComputers.TableLayoutPanel43.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
 
-        For Each C In frmComputers.TableLayoutPanel44.Controls
-            If TypeOf C Is TextBox Then C.BackColor = Color.White
-            If TypeOf C Is ComboBox Then C.BackColor = Color.White
-        Next C
+    '    For Each C In frmComputers.TableLayoutPanel44.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
 
-        For Each C In frmComputers.TableLayoutPanel4.Controls
-            If TypeOf C Is TextBox Then C.BackColor = Color.White
-            If TypeOf C Is ComboBox Then C.BackColor = Color.White
-        Next C
+    '    For Each C In frmComputers.TableLayoutPanel4.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
 
-        For Each C In frmComputers.TableLayoutPanel6.Controls
-            If TypeOf C Is TextBox Then C.BackColor = Color.White
-            If TypeOf C Is ComboBox Then C.BackColor = Color.White
-        Next C
-
-
-        For Each C In frmComputers.TableLayoutPanel60.Controls
-            If TypeOf C Is TextBox Then C.BackColor = Color.White
-            If TypeOf C Is ComboBox Then C.BackColor = Color.White
-        Next C
-
-        For Each C In frmComputers.TableLayoutPanel23.Controls
-            If TypeOf C Is TextBox Then C.BackColor = Color.White
-            If TypeOf C Is ComboBox Then C.BackColor = Color.White
-        Next C
-
-        For Each C In frmComputers.TableLayoutPanel20.Controls
-            If TypeOf C Is TextBox Then C.BackColor = Color.White
-            If TypeOf C Is ComboBox Then C.BackColor = Color.White
-        Next C
-
-        For Each C In frmComputers.TableLayoutPanel47.Controls
-            If TypeOf C Is TextBox Then C.BackColor = Color.White
-            If TypeOf C Is ComboBox Then C.BackColor = Color.White
-        Next C
-
-        'Пользователи
-        For Each C In frmComputers.sSTAB1.TabPages(4).Controls
-            If TypeOf C Is TextBox Then C.BackColor = Color.White
-            If TypeOf C Is ComboBox Then C.BackColor = Color.White
-        Next C
-
-        For Each C In frmComputers.sSTAB1.TabPages(5).Controls
-            If TypeOf C Is TextBox Then C.BackColor = Color.White
-            If TypeOf C Is ComboBox Then C.BackColor = Color.White
-        Next C
+    '    For Each C In frmComputers.TableLayoutPanel6.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
 
 
-        C = Nothing
+    '    For Each C In frmComputers.TableLayoutPanel60.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
+
+    '    For Each C In frmComputers.TableLayoutPanel23.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
+
+    '    For Each C In frmComputers.TableLayoutPanel20.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
+
+    '    For Each C In frmComputers.TableLayoutPanel47.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
+
+    '    'Пользователи
+    '    For Each C In frmComputers.sSTAB1.TabPages(4).Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
+
+    '    For Each C In frmComputers.sSTAB1.TabPages(5).Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
 
 
-
-        'frmComputers.txtUserName.BackColor = Color.White
-        'frmComputers.txtUserPass.BackColor = Color.White
-        'frmComputers.txtUserEmail.BackColor = Color.White
-        'frmComputers.txtUserEmailPwd.BackColor = Color.White
-        'frmComputers.txtUserFIO.BackColor = Color.White
-        'frmComputers.txtUserIcq.BackColor = Color.White
-        'frmComputers.txtUserName.BackColor = Color.White
-
-        'frmComputers.txtSNAME.BackColor = Color.White
-        'frmComputers.txtPSEUDONIM.BackColor = Color.White
-        'frmComputers.cmbBranch.BackColor = Color.White
-        'frmComputers.cmbDepartment.BackColor = Color.White
-        'frmComputers.cmbOffice.BackColor = Color.White
-        'frmComputers.cmbResponsible.BackColor = Color.White
-        'frmComputers.txtPHONE.BackColor = Color.White
-        'frmComputers.cmbAppointment.BackColor = Color.White
-
-
-        'Сетевое оборудование
-        For Each C In frmComputers.sSTAB4.TabPages(0).Controls
-            If TypeOf C Is TextBox Then C.BackColor = Color.White
-            If TypeOf C Is ComboBox Then C.BackColor = Color.White
-        Next C
-
-        For Each C In frmComputers.gbNet.Controls
-            If TypeOf C Is TextBox Then C.BackColor = Color.White
-            If TypeOf C Is ComboBox Then C.BackColor = Color.White
-        Next C
-
-        For Each C In frmComputers.gbExNet.Controls
-            If TypeOf C Is TextBox Then C.BackColor = Color.White
-            If TypeOf C Is ComboBox Then C.BackColor = Color.White
-        Next C
-
-        For Each C In frmComputers.gbNETNotes.Controls
-            If TypeOf C Is TextBox Then C.BackColor = Color.White
-            If TypeOf C Is ComboBox Then C.BackColor = Color.White
-        Next C
-
-        For Each C In frmComputers.gbNetPortMapping.Controls
-            If TypeOf C Is TextBox Then C.BackColor = Color.White
-            If TypeOf C Is ComboBox Then C.BackColor = Color.White
-        Next C
-
-        For Each C In frmComputers.sSTAB4.TabPages(1).Controls
-            If TypeOf C Is TextBox Then C.BackColor = Color.White
-            If TypeOf C Is ComboBox Then C.BackColor = Color.White
-        Next C
-
-        For Each C In frmComputers.sSTAB4.TabPages(2).Controls
-            If TypeOf C Is TextBox Then C.BackColor = Color.White
-            If TypeOf C Is ComboBox Then C.BackColor = Color.White
-        Next C
-
-
-        'Принтеры
-        frmComputers.cmbPRN.BackColor = Color.White
-        frmComputers.txtPRNSN.BackColor = Color.White
-        frmComputers.PROiZV38.BackColor = Color.White
-        frmComputers.txtPRNinnumber.BackColor = Color.White
-        frmComputers.cmbFormat.BackColor = Color.White
-        frmComputers.cmbPRNFil.BackColor = Color.White
-        frmComputers.cmbPRNDepart.BackColor = Color.White
-        frmComputers.cmbPRNOffice.BackColor = Color.White
-        frmComputers.cmbModCartr.BackColor = Color.White
-        frmComputers.cmbPRNotv.BackColor = Color.White
-        frmComputers.txtPRNphone.BackColor = Color.White
-        frmComputers.txtPrnIP.BackColor = Color.White
-        frmComputers.txtPRNMAC.BackColor = Color.White
-
-
-        frmComputers.txtOTHSfN.BackColor = Color.White
-        frmComputers.txtOTHcash.BackColor = Color.White
-        frmComputers.txtOTHSumm.BackColor = Color.White
-        frmComputers.txtOTHZay.BackColor = Color.White
-
-
-        frmComputers.txtPCSfN.BackColor = Color.White
-        frmComputers.txtPCcash.BackColor = Color.White
-        frmComputers.txtPCSumm.BackColor = Color.White
-        frmComputers.txtPCZay.BackColor = Color.White
-
-
-        frmComputers.txtPRNSfN.BackColor = Color.White
-        frmComputers.txtPRNcash.BackColor = Color.White
-        frmComputers.txtPRNSumm.BackColor = Color.White
-        frmComputers.txtPRNZay.BackColor = Color.White
+    '    C = Nothing
 
 
 
-        frmComputers.txtNETSfN.BackColor = Color.White
-        frmComputers.txtNETcash.BackColor = Color.White
-        frmComputers.txtNETSumm.BackColor = Color.White
-        frmComputers.txtNETZay.BackColor = Color.White
+    '    'frmComputers.txtUserName.BackColor = Color.White
+    '    'frmComputers.txtUserPass.BackColor = Color.White
+    '    'frmComputers.txtUserEmail.BackColor = Color.White
+    '    'frmComputers.txtUserEmailPwd.BackColor = Color.White
+    '    'frmComputers.txtUserFIO.BackColor = Color.White
+    '    'frmComputers.txtUserIcq.BackColor = Color.White
+    '    'frmComputers.txtUserName.BackColor = Color.White
 
-        frmComputers.cmbPRNPostav.BackColor = Color.White
+    '    'frmComputers.txtSNAME.BackColor = Color.White
+    '    'frmComputers.txtPSEUDONIM.BackColor = Color.White
+    '    'frmComputers.cmbBranch.BackColor = Color.White
+    '    'frmComputers.cmbDepartment.BackColor = Color.White
+    '    'frmComputers.cmbOffice.BackColor = Color.White
+    '    'frmComputers.cmbResponsible.BackColor = Color.White
+    '    'frmComputers.txtPHONE.BackColor = Color.White
+    '    'frmComputers.cmbAppointment.BackColor = Color.White
 
-        frmComputers.cmbNETPostav.BackColor = Color.White
 
-        frmComputers.cmbOTHPostav.BackColor = Color.White
-        frmComputers.cmbOTH.BackColor = Color.White
-        frmComputers.txtOTHSN.BackColor = Color.White
-        frmComputers.PROiZV39.BackColor = Color.White
-        frmComputers.txtOTHmemo.BackColor = Color.White
-        frmComputers.cmbOTHFil.BackColor = Color.White
-        frmComputers.cmbOTHDepart.BackColor = Color.White
-        frmComputers.cmbOTHOffice.BackColor = Color.White
-        frmComputers.cmbOTHotv.BackColor = Color.White
-        frmComputers.txtOTHphone.BackColor = Color.White
-        frmComputers.cmbOTHConnect.BackColor = Color.White
-        frmComputers.txtOTHinnumber.BackColor = Color.White
-        frmComputers.txtOTHIP.BackColor = Color.White
-        frmComputers.txtOTHMAC.BackColor = Color.White
+    '    'Сетевое оборудование
+    '    For Each C In frmComputers.sSTAB4.TabPages(0).Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
 
-    End Sub
+    '    For Each C In frmComputers.gbNet.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
+
+    '    For Each C In frmComputers.gbExNet.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
+
+    '    For Each C In frmComputers.gbNETNotes.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
+
+    '    For Each C In frmComputers.gbNetPortMapping.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
+
+    '    For Each C In frmComputers.sSTAB4.TabPages(1).Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
+
+    '    For Each C In frmComputers.sSTAB4.TabPages(2).Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
+
+
+    '    'Принтеры
+    '    frmComputers.cmbPRN.BackColor = Color.White
+    '    frmComputers.txtPRNSN.BackColor = Color.White
+    '    frmComputers.PROiZV38.BackColor = Color.White
+    '    frmComputers.txtPRNinnumber.BackColor = Color.White
+    '    frmComputers.cmbFormat.BackColor = Color.White
+    '    frmComputers.cmbPRNFil.BackColor = Color.White
+    '    frmComputers.cmbPRNDepart.BackColor = Color.White
+    '    frmComputers.cmbPRNOffice.BackColor = Color.White
+    '    frmComputers.cmbModCartr.BackColor = Color.White
+    '    frmComputers.cmbPRNotv.BackColor = Color.White
+    '    frmComputers.txtPRNphone.BackColor = Color.White
+    '    frmComputers.txtPrnIP.BackColor = Color.White
+    '    frmComputers.txtPRNMAC.BackColor = Color.White
+
+
+    '    frmComputers.txtOTHSfN.BackColor = Color.White
+    '    frmComputers.txtOTHcash.BackColor = Color.White
+    '    frmComputers.txtOTHSumm.BackColor = Color.White
+    '    frmComputers.txtOTHZay.BackColor = Color.White
+
+
+    '    frmComputers.txtPCSfN.BackColor = Color.White
+    '    frmComputers.txtPCcash.BackColor = Color.White
+    '    frmComputers.txtPCSumm.BackColor = Color.White
+    '    frmComputers.txtPCZay.BackColor = Color.White
+
+
+    '    frmComputers.txtPRNSfN.BackColor = Color.White
+    '    frmComputers.txtPRNcash.BackColor = Color.White
+    '    frmComputers.txtPRNSumm.BackColor = Color.White
+    '    frmComputers.txtPRNZay.BackColor = Color.White
+
+
+
+    '    frmComputers.txtNETSfN.BackColor = Color.White
+    '    frmComputers.txtNETcash.BackColor = Color.White
+    '    frmComputers.txtNETSumm.BackColor = Color.White
+    '    frmComputers.txtNETZay.BackColor = Color.White
+
+    '    frmComputers.cmbPRNPostav.BackColor = Color.White
+
+    '    frmComputers.cmbNETPostav.BackColor = Color.White
+
+    '    frmComputers.cmbOTHPostav.BackColor = Color.White
+    '    frmComputers.cmbOTH.BackColor = Color.White
+    '    frmComputers.txtOTHSN.BackColor = Color.White
+    '    frmComputers.PROiZV39.BackColor = Color.White
+    '    frmComputers.txtOTHmemo.BackColor = Color.White
+    '    frmComputers.cmbOTHFil.BackColor = Color.White
+    '    frmComputers.cmbOTHDepart.BackColor = Color.White
+    '    frmComputers.cmbOTHOffice.BackColor = Color.White
+    '    frmComputers.cmbOTHotv.BackColor = Color.White
+    '    frmComputers.txtOTHphone.BackColor = Color.White
+    '    frmComputers.cmbOTHConnect.BackColor = Color.White
+    '    frmComputers.txtOTHinnumber.BackColor = Color.White
+    '    frmComputers.txtOTHIP.BackColor = Color.White
+    '    frmComputers.txtOTHMAC.BackColor = Color.White
+
+    'End Sub
 
     Public Function SaveUpdateLogDB(ByVal A As String, ByVal A2 As String)
         Dim strTime As String

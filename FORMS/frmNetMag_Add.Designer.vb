@@ -277,11 +277,11 @@ Partial Class frmNetMag_Add
         'ToolStrip1
         '
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton1, Me.ToolStripButton2})
-        Me.ToolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow
+        Me.ToolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
         Me.ToolStrip1.Location = New System.Drawing.Point(538, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
-        Me.ToolStrip1.Size = New System.Drawing.Size(231, 23)
+        Me.ToolStrip1.Size = New System.Drawing.Size(231, 25)
         Me.ToolStrip1.TabIndex = 9
         Me.ToolStrip1.Text = "ToolStrip1"
         '
@@ -292,7 +292,7 @@ Partial Class frmNetMag_Add
         Me.ToolStripButton1.Image = CType(resources.GetObject("ToolStripButton1.Image"), System.Drawing.Image)
         Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton1.Name = "ToolStripButton1"
-        Me.ToolStripButton1.Size = New System.Drawing.Size(23, 20)
+        Me.ToolStripButton1.Size = New System.Drawing.Size(23, 22)
         Me.ToolStripButton1.Text = "+"
         '
         'ToolStripButton2
@@ -302,7 +302,7 @@ Partial Class frmNetMag_Add
         Me.ToolStripButton2.Image = CType(resources.GetObject("ToolStripButton2.Image"), System.Drawing.Image)
         Me.ToolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton2.Name = "ToolStripButton2"
-        Me.ToolStripButton2.Size = New System.Drawing.Size(23, 20)
+        Me.ToolStripButton2.Size = New System.Drawing.Size(23, 22)
         Me.ToolStripButton2.Text = "-"
         '
         'txtNetPortSVT
@@ -428,11 +428,11 @@ Partial Class frmNetMag_Add
         'ToolStrip2
         '
         Me.ToolStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton3, Me.ToolStripButton4})
-        Me.ToolStrip2.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow
+        Me.ToolStrip2.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
         Me.ToolStrip2.Location = New System.Drawing.Point(573, 0)
         Me.ToolStrip2.Name = "ToolStrip2"
         Me.ToolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
-        Me.ToolStrip2.Size = New System.Drawing.Size(196, 23)
+        Me.ToolStrip2.Size = New System.Drawing.Size(196, 25)
         Me.ToolStrip2.TabIndex = 9
         Me.ToolStrip2.Text = "ToolStrip2"
         '
@@ -443,7 +443,7 @@ Partial Class frmNetMag_Add
         Me.ToolStripButton3.Image = CType(resources.GetObject("ToolStripButton3.Image"), System.Drawing.Image)
         Me.ToolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton3.Name = "ToolStripButton3"
-        Me.ToolStripButton3.Size = New System.Drawing.Size(23, 20)
+        Me.ToolStripButton3.Size = New System.Drawing.Size(23, 22)
         Me.ToolStripButton3.Text = "+"
         '
         'ToolStripButton4
@@ -453,7 +453,7 @@ Partial Class frmNetMag_Add
         Me.ToolStripButton4.Image = CType(resources.GetObject("ToolStripButton4.Image"), System.Drawing.Image)
         Me.ToolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton4.Name = "ToolStripButton4"
-        Me.ToolStripButton4.Size = New System.Drawing.Size(23, 20)
+        Me.ToolStripButton4.Size = New System.Drawing.Size(23, 22)
         Me.ToolStripButton4.Text = "-"
         '
         'Button1

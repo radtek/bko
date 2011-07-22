@@ -19,8 +19,6 @@ Public Class frmARHIV
     Private Delegate Sub SaveEntryProgress(ByVal e As SaveProgressEventArgs)
     Private Delegate Sub ButtonClick(ByVal sender As Object, ByVal e As EventArgs)
 
-
-
     Private Sub frmARHIV_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
         SendFonts(Me)
@@ -55,7 +53,6 @@ Public Class frmARHIV
 
 
     End Sub
-
 
     Private Sub btnZIP_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnZipUp.Click
         UnLoadDatabase()
@@ -125,7 +122,6 @@ Public Class frmARHIV
         End Try
     End Sub
 
-
     Private Sub zip1_SaveProgress(ByVal sender As Object, ByVal e As SaveProgressEventArgs)
         If Me._saveCanceled Then
             e.Cancel = True
@@ -145,7 +141,6 @@ Public Class frmARHIV
         End Select
     End Sub
 
-
     Private Sub StepArchiveProgress(ByVal e As SaveProgressEventArgs)
 
         If Me.ProgressBar1.InvokeRequired Then
@@ -162,7 +157,6 @@ Public Class frmARHIV
             MyBase.Update()
         End If
     End Sub
-
 
     Private Sub SaveCompleted()
         If Me.lblStatus.InvokeRequired Then
@@ -201,17 +195,14 @@ Public Class frmARHIV
         End If
     End Sub
 
-
     Private Sub ResetState()
         'Me.btnCancel.Enabled = False
         Me.btnZipUp.Enabled = True
         'Me.btnZipUp.Text = "Zip it!"
-        Me.progressBar1.Value = 0
-        Me.progressBar2.Value = 0
+        Me.ProgressBar1.Value = 0
+        Me.ProgressBar2.Value = 0
         Me.Cursor = Cursors.Default
     End Sub
-
-
 
     Private Sub SetProgressBars()
         If Me.ProgressBar1.InvokeRequired Then
@@ -228,7 +219,6 @@ Public Class frmARHIV
             Me.ProgressBar2.Step = 2
         End If
     End Sub
-
 
     Public Class WorkerOptions
         ' Fields

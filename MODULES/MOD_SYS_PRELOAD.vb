@@ -180,7 +180,9 @@ Module MOD_SYS_PRELOAD
     End Sub
 
     Public Sub ClearForm(ByVal ControlContainer As Object)
-       
+
+        Dim A1 As String
+        A1 = frmComputers.treebranche.Text
 
         For Each Ctl As Object In ControlContainer.Controls
             Try
@@ -208,6 +210,31 @@ Module MOD_SYS_PRELOAD
         frmComputers.chkNETNNb.Checked = False
         frmComputers.chkOTHNNb.Checked = False
         frmComputers.chkOTHspis.Checked = False
+
+        frmComputers.treebranche.Text = A1
+
+
+
+
+
+    End Sub
+
+    Public Sub COLOR_Form_For_Computer(ByVal ControlContainer As Object)
+
+        For Each Ctl As Object In ControlContainer.Controls
+            Try
+                If Not Ctl.Controls Is Nothing Then
+                    COLOR_Form_For_Computer(Ctl)
+
+                    If TypeOf Ctl Is TextBox Then Ctl.BackColor = Color.White
+                    If TypeOf Ctl Is ComboBox Then Ctl.BackColor = Color.White
+
+                End If
+
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
+        Next
 
 
     End Sub
@@ -300,6 +327,9 @@ Module MOD_SYS_PRELOAD
                 MsgBox(ex.Message)
             End Try
         Next
+
+
+
     End Sub
 
     'Public Sub fLATCMB(ByVal ControlContainer As Object)

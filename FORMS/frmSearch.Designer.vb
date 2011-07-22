@@ -174,7 +174,7 @@ Partial Class frmSearch
         Me.lstSearch.Location = New System.Drawing.Point(3, 144)
         Me.lstSearch.MultiSelect = False
         Me.lstSearch.Name = "lstSearch"
-        Me.lstSearch.Size = New System.Drawing.Size(986, 519)
+        Me.lstSearch.Size = New System.Drawing.Size(986, 415)
         Me.lstSearch.TabIndex = 1
         Me.lstSearch.UseCompatibleStateImageBehavior = False
         Me.lstSearch.View = System.Windows.Forms.View.Details
@@ -191,14 +191,14 @@ Partial Class frmSearch
         Me.TableLayoutPanel1.RowCount = 2
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(992, 666)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(992, 562)
         Me.TableLayoutPanel1.TabIndex = 2
         '
         'frmSearch
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(992, 666)
+        Me.ClientSize = New System.Drawing.Size(992, 562)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.MinimumSize = New System.Drawing.Size(900, 600)
         Me.Name = "frmSearch"

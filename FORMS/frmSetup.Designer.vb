@@ -120,6 +120,7 @@ Partial Class frmSetup
         Me.chkREMONT = New System.Windows.Forms.CheckBox()
         Me.chkFullScreen = New System.Windows.Forms.CheckBox()
         Me.SStab1 = New System.Windows.Forms.TabControl()
+        Me.Button4 = New System.Windows.Forms.Button()
         Me.TabPage5.SuspendLayout()
         Me.TableLayoutPanel3.SuspendLayout()
         Me.gbUsers.SuspendLayout()
@@ -750,6 +751,7 @@ Partial Class frmSetup
         Me.TableLayoutPanel1.Controls.Add(Me.GroupBox3, 2, 9)
         Me.TableLayoutPanel1.Controls.Add(Me.gbMyBlank, 2, 8)
         Me.TableLayoutPanel1.Controls.Add(Me.chkFullScreen, 0, 7)
+        Me.TableLayoutPanel1.Controls.Add(Me.Button4, 0, 12)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(3, 16)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
@@ -766,7 +768,7 @@ Partial Class frmSetup
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(964, 615)
         Me.TableLayoutPanel1.TabIndex = 20
@@ -1289,6 +1291,15 @@ Partial Class frmSetup
         Me.SStab1.Size = New System.Drawing.Size(984, 666)
         Me.SStab1.TabIndex = 0
         '
+        'Button4
+        '
+        Me.Button4.Location = New System.Drawing.Point(3, 568)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(75, 23)
+        Me.Button4.TabIndex = 25
+        Me.Button4.Text = "+"
+        Me.Button4.UseVisualStyleBackColor = True
+        '
         'frmSetup
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1432,4 +1443,5 @@ Partial Class frmSetup
     Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
     Friend WithEvents ComboBox1 As System.Windows.Forms.ComboBox
     Friend WithEvents chkFullScreen As System.Windows.Forms.CheckBox
+    Friend WithEvents Button4 As System.Windows.Forms.Button
 End Class

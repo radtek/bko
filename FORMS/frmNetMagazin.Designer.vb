@@ -155,10 +155,11 @@ Partial Class frmNetMagazin
         Me.tsPanNetMag.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.tsPanNetMag.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
         Me.tsPanNetMag.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbAdd, Me.tsbDel, Me.tsbExcell})
-        Me.tsPanNetMag.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow
+        Me.tsPanNetMag.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
         Me.tsPanNetMag.Location = New System.Drawing.Point(0, 409)
         Me.tsPanNetMag.Name = "tsPanNetMag"
-        Me.tsPanNetMag.Size = New System.Drawing.Size(508, 23)
+        Me.tsPanNetMag.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
+        Me.tsPanNetMag.Size = New System.Drawing.Size(508, 25)
         Me.tsPanNetMag.TabIndex = 1
         Me.tsPanNetMag.Text = "ToolStrip1"
         '
@@ -168,7 +169,7 @@ Partial Class frmNetMagazin
         Me.tsbAdd.Image = CType(resources.GetObject("tsbAdd.Image"), System.Drawing.Image)
         Me.tsbAdd.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbAdd.Name = "tsbAdd"
-        Me.tsbAdd.Size = New System.Drawing.Size(23, 20)
+        Me.tsbAdd.Size = New System.Drawing.Size(23, 22)
         Me.tsbAdd.Text = "+"
         Me.tsbAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage
         '

@@ -13,10 +13,7 @@
     Private sTEXT As String
     Private zPREF As String
     Private zCC As String
-    Private FINDTXT As String
-    Private FINDTXT_ As String
     Private search_ As Boolean
-    Private mde As Integer
     Private OneStart As Decimal = 0
 
 
@@ -155,7 +152,7 @@
         nodeRoot.Tag = "ROOT" & GENID()
         lstGroups.Nodes.Add(nodeRoot)
 
-        Application.DoEvents()
+        'Application.DoEvents()
         'Филиалы Первый уровень дерева
         'Проверяем все показывать или только активные
 
@@ -303,7 +300,7 @@
                         rs3 = Nothing
                     End If
 
-                    Application.DoEvents()
+                    'Application.DoEvents()
                     'Отделы в филиалах Второй уровень дерева
 
                     If sVISIBLE = 1 Then
@@ -438,7 +435,7 @@
 
                                 End If
                                 'Кабинеты Третий уровень дерева
-                                Application.DoEvents()
+                                ' Application.DoEvents()
 
                                 If unamS2 > 0 Then
 
@@ -578,7 +575,7 @@
                                     rs7 = Nothing
 
                                 End If
-                                Application.DoEvents()
+                                ' Application.DoEvents()
                                 'Конец кабинетов
 
 
@@ -3009,42 +3006,6 @@ Error_:
 
         End Select
     End Sub
-
-    Private Function isThere(ByVal sTxt As String, ByVal sComp As String, ByVal sMode As Long) As Boolean
-        Dim TST() As String
-        isThere = False
-
-        Select Case sMode
-            Case 1
-                'match case
-                TST = Split(sTxt, sComp)
-                If UBound(TST) > 0 Then isThere = True : Exit Function
-                Exit Function
-            Case 2
-                'match word
-                TST = Split(LCase(sTxt), LCase(sComp))
-                If UBound(TST) <= 0 Then isThere = False : Exit Function
-                If Trim(Mid(TST(0), 1, 1)) = "" And Trim(Mid(TST(1), 1, 1)) = "" Then isThere = True : Exit Function
-
-            Case 3
-                'match word+case
-                TST = Split(sTxt, sComp)
-                If UBound(TST) <= 0 Then isThere = False : Exit Function
-                If Trim(Mid(TST(0), 1, 1)) = "" And Trim(Mid(TST(1), 1, 1)) = "" Then isThere = True : Exit Function
-
-
-
-
-            Case 0
-                'match any
-                TST = Split(LCase(sTxt), LCase(sComp))
-                If UBound(TST) > 0 Then isThere = True : FINDTXT = LCase(sTxt) : Exit Function
-
-
-                Exit Function
-        End Select
-
-    End Function
 
     Private Sub Search2(ByVal sFindText As String, Optional ByVal MtchWord As Byte = 0, Optional ByVal MtchCase As Byte = 0)
 

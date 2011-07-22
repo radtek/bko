@@ -1824,7 +1824,7 @@ Error_:
         rs = Nothing
 
         'Санитарный паспорт
-
+        On Error GoTo err_
         If Len(frmComputers.txtspplo.Text) = 0 Then Exit Sub
 
         rs = New ADODB.Recordset
@@ -1876,7 +1876,9 @@ Error_:
         rs.Close()
         rs = Nothing
 
-
+        Exit Sub
+err_:
+        MsgBox(Err.Description)
     End Sub
 
     Public Sub SAVE_DRAG_DROP(ByVal sID As String, ByVal sBRANCHE As String, ByVal sDEPARTMENT As String, ByVal sOFFICE As String, ByVal sNAME As String)

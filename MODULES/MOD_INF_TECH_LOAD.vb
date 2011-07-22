@@ -1402,10 +1402,10 @@ err_:
 
 
 
-        Call LOAD_GARs(sID, frmComputers.cmbOTHPostav, frmComputers.dtGOTHPr, frmComputers.dtGOTHok)
-        Call LOAD_NOTES(sID, frmComputers.lvNotesOTH)
-        Call LOAD_REPAIR(sID, frmComputers.lvRepairOTH)
-        Call LOAD_DVIG_TEHN(sID, frmComputers.lvMovementOTH)
+        'Call LOAD_GARs(sID, frmComputers.cmbOTHPostav, frmComputers.dtGOTHPr, frmComputers.dtGOTHok)
+        'Call LOAD_NOTES(sID, frmComputers.lvNotesOTH)
+        'Call LOAD_REPAIR(sID, frmComputers.lvRepairOTH)
+        'Call LOAD_DVIG_TEHN(sID, frmComputers.lvMovementOTH)
     End Sub
 
     Public Sub LOAD_SOFT(ByVal sID As String, ByVal lstSoftware As ListView)
@@ -1918,17 +1918,25 @@ err_:
             rs.Open(sSQL1, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
             With rs
-                frmComputers.txtspplo.Text = .Fields("Ploshad").Value
-                frmComputers.txtspvis.Text = .Fields("visota").Value
-                frmComputers.txtspPloOneEVM.Text = .Fields("Pl1Pk").Value
-                frmComputers.txtspObOneEVM.Text = .Fields("ob1Pk").Value
-                frmComputers.cmbSpRemEVM.Text = .Fields("nalpom").Value
-                frmComputers.cmbSpVent.Text = .Fields("vent").Value
-                frmComputers.cmbSpWater.Text = .Fields("voda").Value
-                frmComputers.cmbSpTeplo.Text = .Fields("kanal").Value
-                frmComputers.cmbSpKanal.Text = .Fields("teplo").Value
-                frmComputers.txtSpWall.Text = .Fields("otdelka").Value
-                frmComputers.txtSpMebel.Text = .Fields("mebel").Value
+
+                If Not IsDBNull(.Fields("Ploshad").Value) Then frmComputers.txtspplo.Text = .Fields("Ploshad").Value
+
+
+                If Not IsDBNull(.Fields("visota").Value) Then frmComputers.txtspvis.Text = .Fields("visota").Value
+                If Not IsDBNull(.Fields("Pl1Pk").Value) Then frmComputers.txtspPloOneEVM.Text = .Fields("Pl1Pk").Value
+                If Not IsDBNull(.Fields("ob1Pk").Value) Then frmComputers.txtspObOneEVM.Text = .Fields("ob1Pk").Value
+
+
+                If Not IsDBNull(.Fields("nalpom").Value) Then frmComputers.cmbSpRemEVM.Text = .Fields("nalpom").Value
+                If Not IsDBNull(.Fields("vent").Value) Then frmComputers.cmbSpVent.Text = .Fields("vent").Value
+                If Not IsDBNull(.Fields("voda").Value) Then frmComputers.cmbSpWater.Text = .Fields("voda").Value
+                If Not IsDBNull(.Fields("kanal").Value) Then frmComputers.cmbSpTeplo.Text = .Fields("kanal").Value
+
+                If Not IsDBNull(.Fields("teplo").Value) Then frmComputers.cmbSpKanal.Text = .Fields("teplo").Value
+                If Not IsDBNull(.Fields("otdelka").Value) Then frmComputers.txtSpWall.Text = .Fields("otdelka").Value
+                If Not IsDBNull(.Fields("mebel").Value) Then frmComputers.txtSpMebel.Text = .Fields("mebel").Value
+
+
             End With
 
             rs.Close()

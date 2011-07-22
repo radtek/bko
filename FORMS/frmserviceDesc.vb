@@ -4,11 +4,9 @@ Public Class frmserviceDesc
     Inherits System.Windows.Forms.Form
     Private m_SortingColumn As ColumnHeader
     Public rCOUNT As Integer
-    Public mde As Integer
     Public r1COUNT As Integer
     Public EDTID As Integer
     Public rtxtC As String
-    Private FINDTXT As String
     Private search_ As Boolean
     Public ZaiavkR As Boolean
     Public ZaiavkC As Integer
@@ -686,7 +684,8 @@ err_1:
 
         SendFonts(Me)
 
-        Call LANG_frmserviceDesk()
+        Dim newThread1 As New Thread(AddressOf LANG_frmserviceDesk)
+        newThread1.Start()
 
 
         Dim objIniFile As New IniFile(PrPath & "base.ini")
@@ -721,8 +720,7 @@ err_1:
         End If
 
 
-        Dim newThread1 As New Thread(AddressOf LANG_frmserviceDesk)
-        newThread1.Start()
+      
 
         Me.Cursor = Cursors.Default
 
@@ -821,40 +819,6 @@ Err_1:
 
     End Sub
 
-    Private Function isThere(ByVal sTxt As String, ByVal sComp As String, ByVal sMode As Long) As Boolean
-        Dim TST() As String
-        isThere = False
-
-        Select Case sMode
-            Case 1
-                'match case
-                TST = Split(sTxt, sComp)
-                If UBound(TST) > 0 Then isThere = True : Exit Function
-                Exit Function
-            Case 2
-                'match word
-                TST = Split(LCase(sTxt), LCase(sComp))
-                If UBound(TST) <= 0 Then isThere = False : Exit Function
-                If Trim(Mid(TST(0), 1, 1)) = "" And Trim(Mid(TST(1), 1, 1)) = "" Then isThere = True : Exit Function
-
-            Case 3
-                'match word+case
-                TST = Split(sTxt, sComp)
-                If UBound(TST) <= 0 Then isThere = False : Exit Function
-                If Trim(Mid(TST(0), 1, 1)) = "" And Trim(Mid(TST(1), 1, 1)) = "" Then isThere = True : Exit Function
-
-
-            Case 0
-                'match any
-                TST = Split(LCase(sTxt), LCase(sComp))
-                If UBound(TST) > 0 Then isThere = True : FINDTXT = LCase(sTxt) : Exit Function
-
-
-                Exit Function
-        End Select
-
-    End Function
-
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
         Me.Cursor = Cursors.WaitCursor
         search_ = False
@@ -872,8 +836,6 @@ Err_1:
     Private Sub Search2(ByVal sFindText As String, Optional ByVal MtchWord As Byte = 0, Optional ByVal MtchCase As Byte = 0)
 
         lstGroups.Nodes.Clear()
-
-        FINDTXT = sFindText
 
         search_ = True
         Dim FirstColumn As Boolean
@@ -968,6 +930,7 @@ Foundit:
                 If Len(FINDTXT) = 0 Then
 
                 Else
+
 
                     Select Case .Fields("tiptehn").Value
 
@@ -1178,7 +1141,7 @@ FoundiR:
                         Do While Not .EOF
                             If GID <> -1 Then
 
-                                 Select .Fields("tiptehn").Value
+                                Select Case .Fields("tiptehn").Value
 
                                     Case "PC"
 
@@ -1223,52 +1186,52 @@ FoundiR:
 
                                         Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, iA, iA)
                                         TEHNode.Tag = "C|" & .Fields(0).Value
-                                        TempNode.Nodes.Add(TEHNode)
+                                        TempNode2.Nodes.Add(TEHNode)
 
                                     Case "Printer"
                                         Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 7, 7)
                                         TEHNode.Tag = "C|" & .Fields(0).Value
-                                        TempNode.Nodes.Add(TEHNode)
+                                        TempNode2.Nodes.Add(TEHNode)
 
                                     Case "MFU"
 
                                         Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 8, 8)
                                         TEHNode.Tag = "C|" & .Fields(0).Value
-                                        TempNode.Nodes.Add(TEHNode)
+                                        TempNode2.Nodes.Add(TEHNode)
 
                                     Case "KOpir"
                                         Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 9, 9)
                                         TEHNode.Tag = "C|" & .Fields(0).Value
-                                        TempNode.Nodes.Add(TEHNode)
+                                        TempNode2.Nodes.Add(TEHNode)
 
                                     Case "NET"
                                         Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 10, 10)
                                         TEHNode.Tag = "C|" & .Fields(0).Value
-                                        TempNode.Nodes.Add(TEHNode)
+                                        TempNode2.Nodes.Add(TEHNode)
 
                                     Case "PHOTO"
                                         Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 11, 11)
                                         TEHNode.Tag = "C|" & .Fields(0).Value
-                                        TempNode.Nodes.Add(TEHNode)
+                                        TempNode2.Nodes.Add(TEHNode)
 
                                     Case "PHONE"
                                         Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 12, 12)
                                         TEHNode.Tag = "C|" & .Fields(0).Value
-                                        TempNode.Nodes.Add(TEHNode)
+                                        TempNode2.Nodes.Add(TEHNode)
 
                                     Case "FAX"
                                         Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 13, 13)
                                         TEHNode.Tag = "C|" & .Fields(0).Value
-                                        TempNode.Nodes.Add(TEHNode)
+                                        TempNode2.Nodes.Add(TEHNode)
                                     Case "SCANER"
 
                                         Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 14, 14)
                                         TEHNode.Tag = "C|" & .Fields(0).Value
-                                        TempNode.Nodes.Add(TEHNode)
+                                        TempNode2.Nodes.Add(TEHNode)
                                     Case "ZIP"
                                         Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 15, 15)
                                         TEHNode.Tag = "C|" & .Fields(0).Value
-                                        TempNode.Nodes.Add(TEHNode)
+                                        TempNode2.Nodes.Add(TEHNode)
 
                                     Case "OT"
 
@@ -1286,42 +1249,42 @@ FoundiR:
 
                                         Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, uname, uname)
                                         TEHNode.Tag = "C|" & .Fields(0).Value
-                                        TempNode.Nodes.Add(TEHNode)
+                                        TempNode2.Nodes.Add(TEHNode)
 
                                     Case "MONITOR"
                                         Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 17, 17)
                                         TEHNode.Tag = "C|" & .Fields(0).Value
-                                        TempNode.Nodes.Add(TEHNode)
+                                        TempNode2.Nodes.Add(TEHNode)
                                         '--------------VIP_Graff Добавление новой перефирии Начало-----------------
                                     Case "USB"
                                         Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 18, 18)
                                         TEHNode.Tag = "C|" & .Fields(0).Value
-                                        TempNode.Nodes.Add(TEHNode)
+                                        TempNode2.Nodes.Add(TEHNode)
 
                                     Case "SOUND"
                                         Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 44, 44)
                                         TEHNode.Tag = "C|" & .Fields(0).Value
-                                        TempNode.Nodes.Add(TEHNode)
+                                        TempNode2.Nodes.Add(TEHNode)
 
                                     Case "IBP"
                                         Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 41, 41)
                                         TEHNode.Tag = "C|" & .Fields(0).Value
-                                        TempNode.Nodes.Add(TEHNode)
+                                        TempNode2.Nodes.Add(TEHNode)
 
                                     Case "FS"
                                         Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 61, 61)
                                         TEHNode.Tag = "C|" & .Fields(0).Value
-                                        TempNode.Nodes.Add(TEHNode)
+                                        TempNode2.Nodes.Add(TEHNode)
 
                                     Case "KEYB"
                                         Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 46, 46)
                                         TEHNode.Tag = "C|" & .Fields(0).Value
-                                        TempNode.Nodes.Add(TEHNode)
+                                        TempNode2.Nodes.Add(TEHNode)
 
                                     Case "MOUSE"
                                         Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 47, 47)
                                         TEHNode.Tag = "C|" & .Fields(0).Value
-                                        TempNode.Nodes.Add(TEHNode)
+                                        TempNode2.Nodes.Add(TEHNode)
                                         '--------------VIP_Graff Добавление новой перефирии Конец------------------
 
                                     Case "CNT"
@@ -1340,7 +1303,7 @@ FoundiR:
 
                                         Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, uname, uname)
                                         TEHNode.Tag = "C|" & .Fields(0).Value
-                                        TempNode.Nodes.Add(TEHNode)
+                                        TempNode2.Nodes.Add(TEHNode)
 
                                     Case Else
 
@@ -1374,22 +1337,6 @@ FoundiR:
 
     End Sub
 
-    Private Sub txtSearch_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSearch.KeyDown
-
-        Select Case e.KeyCode
-
-            Case Keys.Enter
-
-                search_ = True
-                Search2(txtSearch.Text)
-                FINDTXT_ = txtSearch.Text
-
-        End Select
-
-
-
-    End Sub
-
     Private Sub Searche2(ByVal sFindText As String, Optional ByVal MtchWord As Byte = 0, Optional ByVal MtchCase As Byte = 0)
         Dim rs3 As ADODB.Recordset 'Объявляем рекордсет
         Dim sSQL3 As String 'Переменная, где будет размещён SQL запрос
@@ -1404,10 +1351,9 @@ FoundiR:
 
 
         'sSQL3 = "SELECT * FROM Remont where id_comp =" & frmMain.nomerPCAbs & " order by Date desc"
-        'sSQL3 = "SELECT id, NomerRemKomp, date, Remont, Uroven, Master, vip, username, zakryt FROM Remont WHERE id_comp=" & frmComputers.sCOUNT & " ORDER BY date DESC, id DESC"
+        sSQL3 = "SELECT id, NomerRemKomp, date, Remont, Uroven, Master, vip, username, zakryt FROM Remont WHERE id_comp=" & frmComputers.sCOUNT & " ORDER BY date DESC, id DESC"
 
-        sSQL3 = "SELECT * FROM Remont where id_comp=" & frmComputers.sCOUNT & " and Remont like '%" & sFindText & "%'"
-        'sSQL3 = "SELECT * FROM Remont WHERE id_comp=" & frmComputers.sCOUNT & " or Date like '%" & sFindText & "%' and Remont like '%" & sFindText & "%' or Uroven like '%" & sFindText & "%' or Master like '%" & sFindText & "%' or NomerRemKomp like '%" & sFindText & "%' or Comp_Name like '%" & sFindText & "%' or Mesto_Compa like '%" & sFindText & "%' or vip like '%" & sFindText & "%' or UserName like '%" & sFindText & "%' or istochnik like '%" & sFindText & "%' or phone like '%" & sFindText & "%' or srok like '%" & sFindText & "%' or name_of_remont like '%" & sFindText & "%' or otvetstv like '%" & sFindText & "%' or krit_rem like '%" & sFindText & "%' or MeMo like '%" & sFindText & "%' or zakryt like '%" & sFindText & "%' or PREF like '%" & sFindText & "%' or Summ like '%" & sFindText & "%'"
+
 
         rs3 = New ADODB.Recordset
         rs3.Open(sSQL3, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
@@ -1430,7 +1376,6 @@ FoundiR:
 
         Dim intCount As Integer
         intCount = 0
-
         With rs3
             .MoveFirst()
             Do While Not .EOF
@@ -1438,7 +1383,7 @@ FoundiR:
                 FINDTXT = ""
 
 
-                For lngCounter = 0 To 9
+                For lngCounter = 0 To 8
 
                     If FirstColumn Then
 
@@ -1454,7 +1399,6 @@ FoundiR:
                 If Len(FINDTXT) = 0 Then
 
                 Else
-
 
 
                     lvRem.Items.Add(.Fields(0).Value) 'col no. 1
@@ -1516,6 +1460,24 @@ FoundiR:
 
         Exit Sub
 Error_:
+
+
+    End Sub
+
+
+
+    Private Sub txtSearch_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSearch.KeyDown
+
+        Select Case e.KeyCode
+
+            Case Keys.Enter
+
+                search_ = True
+                Search2(txtSearch.Text)
+                FINDTXT_ = txtSearch.Text
+
+        End Select
+
 
 
     End Sub

@@ -62,7 +62,7 @@ Partial Class frmCartr_ADD
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(3, 1)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(114, 13)
+        Me.Label1.Size = New System.Drawing.Size(121, 13)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "№"
         '
@@ -72,7 +72,7 @@ Partial Class frmCartr_ADD
         Me.Label2.AutoSize = True
         Me.Label2.Location = New System.Drawing.Point(3, 21)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(114, 13)
+        Me.Label2.Size = New System.Drawing.Size(121, 13)
         Me.Label2.TabIndex = 1
         Me.Label2.Text = "Серийный номер:"
         '
@@ -82,7 +82,7 @@ Partial Class frmCartr_ADD
         Me.Label3.AutoSize = True
         Me.Label3.Location = New System.Drawing.Point(3, 48)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(114, 13)
+        Me.Label3.Size = New System.Drawing.Size(121, 13)
         Me.Label3.TabIndex = 2
         Me.Label3.Text = "Производитель:"
         '
@@ -92,7 +92,7 @@ Partial Class frmCartr_ADD
         Me.Label4.AutoSize = True
         Me.Label4.Location = New System.Drawing.Point(3, 75)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(114, 13)
+        Me.Label4.Size = New System.Drawing.Size(121, 13)
         Me.Label4.TabIndex = 3
         Me.Label4.Text = "Тип картриджа:"
         '
@@ -102,7 +102,7 @@ Partial Class frmCartr_ADD
         Me.Label5.AutoSize = True
         Me.Label5.Location = New System.Drawing.Point(3, 102)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(114, 13)
+        Me.Label5.Size = New System.Drawing.Size(121, 13)
         Me.Label5.TabIndex = 4
         Me.Label5.Text = "Модель:"
         '
@@ -111,9 +111,9 @@ Partial Class frmCartr_ADD
         Me.Label6.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label6.AutoSize = True
         Me.Label6.Enabled = False
-        Me.Label6.Location = New System.Drawing.Point(3, 122)
+        Me.Label6.Location = New System.Drawing.Point(3, 129)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(114, 26)
+        Me.Label6.Size = New System.Drawing.Size(121, 13)
         Me.Label6.TabIndex = 5
         Me.Label6.Text = "В составе устройства:"
         '
@@ -121,7 +121,7 @@ Partial Class frmCartr_ADD
         '
         Me.lblRealNumber.AutoSize = True
         Me.lblRealNumber.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.lblRealNumber.Location = New System.Drawing.Point(123, 0)
+        Me.lblRealNumber.Location = New System.Drawing.Point(130, 0)
         Me.lblRealNumber.Name = "lblRealNumber"
         Me.lblRealNumber.Size = New System.Drawing.Size(2, 15)
         Me.lblRealNumber.TabIndex = 6
@@ -130,9 +130,9 @@ Partial Class frmCartr_ADD
         '
         Me.TableLayoutPanel1.SetColumnSpan(Me.txtSerNumb, 2)
         Me.txtSerNumb.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtSerNumb.Location = New System.Drawing.Point(123, 18)
+        Me.txtSerNumb.Location = New System.Drawing.Point(130, 18)
         Me.txtSerNumb.Name = "txtSerNumb"
-        Me.txtSerNumb.Size = New System.Drawing.Size(277, 20)
+        Me.txtSerNumb.Size = New System.Drawing.Size(270, 20)
         Me.txtSerNumb.TabIndex = 7
         '
         'cmbProizv
@@ -142,9 +142,9 @@ Partial Class frmCartr_ADD
         Me.TableLayoutPanel1.SetColumnSpan(Me.cmbProizv, 2)
         Me.cmbProizv.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cmbProizv.FormattingEnabled = True
-        Me.cmbProizv.Location = New System.Drawing.Point(123, 44)
+        Me.cmbProizv.Location = New System.Drawing.Point(130, 44)
         Me.cmbProizv.Name = "cmbProizv"
-        Me.cmbProizv.Size = New System.Drawing.Size(277, 21)
+        Me.cmbProizv.Size = New System.Drawing.Size(270, 21)
         Me.cmbProizv.TabIndex = 8
         '
         'cmbTipC
@@ -154,9 +154,9 @@ Partial Class frmCartr_ADD
         Me.TableLayoutPanel1.SetColumnSpan(Me.cmbTipC, 2)
         Me.cmbTipC.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cmbTipC.FormattingEnabled = True
-        Me.cmbTipC.Location = New System.Drawing.Point(123, 71)
+        Me.cmbTipC.Location = New System.Drawing.Point(130, 71)
         Me.cmbTipC.Name = "cmbTipC"
-        Me.cmbTipC.Size = New System.Drawing.Size(277, 21)
+        Me.cmbTipC.Size = New System.Drawing.Size(270, 21)
         Me.cmbTipC.TabIndex = 9
         '
         'cmbModC
@@ -166,9 +166,9 @@ Partial Class frmCartr_ADD
         Me.TableLayoutPanel1.SetColumnSpan(Me.cmbModC, 2)
         Me.cmbModC.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cmbModC.FormattingEnabled = True
-        Me.cmbModC.Location = New System.Drawing.Point(123, 98)
+        Me.cmbModC.Location = New System.Drawing.Point(130, 98)
         Me.cmbModC.Name = "cmbModC"
-        Me.cmbModC.Size = New System.Drawing.Size(277, 21)
+        Me.cmbModC.Size = New System.Drawing.Size(270, 21)
         Me.cmbModC.TabIndex = 10
         '
         'cmbSostUstr
@@ -179,9 +179,9 @@ Partial Class frmCartr_ADD
         Me.cmbSostUstr.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cmbSostUstr.Enabled = False
         Me.cmbSostUstr.FormattingEnabled = True
-        Me.cmbSostUstr.Location = New System.Drawing.Point(123, 125)
+        Me.cmbSostUstr.Location = New System.Drawing.Point(130, 125)
         Me.cmbSostUstr.Name = "cmbSostUstr"
-        Me.cmbSostUstr.Size = New System.Drawing.Size(277, 21)
+        Me.cmbSostUstr.Size = New System.Drawing.Size(270, 21)
         Me.cmbSostUstr.TabIndex = 11
         '
         'cmbSaler
@@ -191,9 +191,9 @@ Partial Class frmCartr_ADD
         Me.TableLayoutPanel1.SetColumnSpan(Me.cmbSaler, 2)
         Me.cmbSaler.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cmbSaler.FormattingEnabled = True
-        Me.cmbSaler.Location = New System.Drawing.Point(123, 152)
+        Me.cmbSaler.Location = New System.Drawing.Point(130, 152)
         Me.cmbSaler.Name = "cmbSaler"
-        Me.cmbSaler.Size = New System.Drawing.Size(277, 21)
+        Me.cmbSaler.Size = New System.Drawing.Size(270, 21)
         Me.cmbSaler.TabIndex = 13
         '
         'Label8
@@ -202,7 +202,7 @@ Partial Class frmCartr_ADD
         Me.Label8.AutoSize = True
         Me.Label8.Location = New System.Drawing.Point(3, 156)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(114, 13)
+        Me.Label8.Size = New System.Drawing.Size(121, 13)
         Me.Label8.TabIndex = 12
         Me.Label8.Text = "Продавец:"
         '
@@ -210,9 +210,9 @@ Partial Class frmCartr_ADD
         '
         Me.TableLayoutPanel1.SetColumnSpan(Me.txtSaleNumb, 2)
         Me.txtSaleNumb.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtSaleNumb.Location = New System.Drawing.Point(123, 179)
+        Me.txtSaleNumb.Location = New System.Drawing.Point(130, 179)
         Me.txtSaleNumb.Name = "txtSaleNumb"
-        Me.txtSaleNumb.Size = New System.Drawing.Size(277, 20)
+        Me.txtSaleNumb.Size = New System.Drawing.Size(270, 20)
         Me.txtSaleNumb.TabIndex = 15
         '
         'Label9
@@ -221,7 +221,7 @@ Partial Class frmCartr_ADD
         Me.Label9.AutoSize = True
         Me.Label9.Location = New System.Drawing.Point(3, 182)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(114, 13)
+        Me.Label9.Size = New System.Drawing.Size(121, 13)
         Me.Label9.TabIndex = 14
         Me.Label9.Text = "Счёт фактура:"
         '
@@ -231,7 +231,7 @@ Partial Class frmCartr_ADD
         Me.Label10.AutoSize = True
         Me.Label10.Location = New System.Drawing.Point(3, 208)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(114, 13)
+        Me.Label10.Size = New System.Drawing.Size(121, 13)
         Me.Label10.TabIndex = 16
         Me.Label10.Text = "Цена:"
         '
@@ -241,7 +241,7 @@ Partial Class frmCartr_ADD
         Me.Label11.AutoSize = True
         Me.Label11.Location = New System.Drawing.Point(3, 234)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(114, 13)
+        Me.Label11.Size = New System.Drawing.Size(121, 13)
         Me.Label11.TabIndex = 18
         Me.Label11.Text = "Дата приобретения:"
         '
@@ -249,21 +249,22 @@ Partial Class frmCartr_ADD
         '
         Me.TableLayoutPanel1.SetColumnSpan(Me.dtSale, 2)
         Me.dtSale.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.dtSale.Location = New System.Drawing.Point(123, 231)
+        Me.dtSale.Location = New System.Drawing.Point(130, 231)
         Me.dtSale.Name = "dtSale"
-        Me.dtSale.Size = New System.Drawing.Size(277, 20)
+        Me.dtSale.Size = New System.Drawing.Size(270, 20)
         Me.dtSale.TabIndex = 19
         Me.dtSale.Value = New Date(2010, 4, 1, 0, 0, 0, 0)
         '
         'txtMemo
         '
         Me.TableLayoutPanel1.SetColumnSpan(Me.txtMemo, 2)
-        Me.txtMemo.Location = New System.Drawing.Point(123, 303)
+        Me.txtMemo.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtMemo.Location = New System.Drawing.Point(130, 303)
         Me.txtMemo.Multiline = True
         Me.txtMemo.Name = "txtMemo"
         Me.TableLayoutPanel1.SetRowSpan(Me.txtMemo, 2)
         Me.txtMemo.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtMemo.Size = New System.Drawing.Size(277, 113)
+        Me.txtMemo.Size = New System.Drawing.Size(270, 113)
         Me.txtMemo.TabIndex = 20
         '
         'Label7
@@ -273,7 +274,7 @@ Partial Class frmCartr_ADD
         Me.Label7.Location = New System.Drawing.Point(3, 353)
         Me.Label7.Name = "Label7"
         Me.TableLayoutPanel1.SetRowSpan(Me.Label7, 2)
-        Me.Label7.Size = New System.Drawing.Size(114, 13)
+        Me.Label7.Size = New System.Drawing.Size(121, 13)
         Me.Label7.TabIndex = 21
         Me.Label7.Text = "Примечания:"
         '
@@ -288,7 +289,7 @@ Partial Class frmCartr_ADD
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(123, 422)
+        Me.btnCancel.Location = New System.Drawing.Point(130, 422)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(75, 23)
         Me.btnCancel.TabIndex = 23
@@ -300,7 +301,7 @@ Partial Class frmCartr_ADD
         Me.chkNezap.AutoSize = True
         Me.chkNezap.Location = New System.Drawing.Point(3, 257)
         Me.chkNezap.Name = "chkNezap"
-        Me.chkNezap.Size = New System.Drawing.Size(114, 17)
+        Me.chkNezap.Size = New System.Drawing.Size(119, 17)
         Me.chkNezap.TabIndex = 24
         Me.chkNezap.Text = "Не заправляемый"
         Me.chkNezap.UseVisualStyleBackColor = True
@@ -308,7 +309,7 @@ Partial Class frmCartr_ADD
         'chkNZ
         '
         Me.chkNZ.AutoSize = True
-        Me.chkNZ.Location = New System.Drawing.Point(123, 257)
+        Me.chkNZ.Location = New System.Drawing.Point(130, 257)
         Me.chkNZ.Name = "chkNZ"
         Me.chkNZ.Size = New System.Drawing.Size(97, 17)
         Me.chkNZ.TabIndex = 25
@@ -318,7 +319,7 @@ Partial Class frmCartr_ADD
         'chkIznos
         '
         Me.chkIznos.AutoSize = True
-        Me.chkIznos.Location = New System.Drawing.Point(243, 257)
+        Me.chkIznos.Location = New System.Drawing.Point(233, 257)
         Me.chkIznos.Name = "chkIznos"
         Me.chkIznos.Size = New System.Drawing.Size(72, 17)
         Me.chkIznos.TabIndex = 26
@@ -338,7 +339,7 @@ Partial Class frmCartr_ADD
         'chkNaSP
         '
         Me.chkNaSP.AutoSize = True
-        Me.chkNaSP.Location = New System.Drawing.Point(123, 280)
+        Me.chkNaSP.Location = New System.Drawing.Point(130, 280)
         Me.chkNaSP.Name = "chkNaSP"
         Me.chkNaSP.Size = New System.Drawing.Size(91, 17)
         Me.chkNaSP.TabIndex = 28
@@ -349,18 +350,18 @@ Partial Class frmCartr_ADD
         '
         Me.TableLayoutPanel1.SetColumnSpan(Me.txtCashe, 2)
         Me.txtCashe.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtCashe.Location = New System.Drawing.Point(123, 205)
+        Me.txtCashe.Location = New System.Drawing.Point(130, 205)
         Me.txtCashe.Maximum = New Decimal(New Integer() {100000, 0, 0, 0})
         Me.txtCashe.Name = "txtCashe"
-        Me.txtCashe.Size = New System.Drawing.Size(277, 20)
+        Me.txtCashe.Size = New System.Drawing.Size(270, 20)
         Me.txtCashe.TabIndex = 29
         '
         'TableLayoutPanel1
         '
         Me.TableLayoutPanel1.ColumnCount = 3
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 163.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel1.Controls.Add(Me.Label1, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.btnCancel, 1, 14)
         Me.TableLayoutPanel1.Controls.Add(Me.chkNaSP, 1, 11)
@@ -416,6 +417,7 @@ Partial Class frmCartr_ADD
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(403, 455)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow

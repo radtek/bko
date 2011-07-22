@@ -206,7 +206,7 @@ Partial Class frmserviceDesc
         Me.lvRem.Location = New System.Drawing.Point(3, 3)
         Me.lvRem.MultiSelect = False
         Me.lvRem.Name = "lvRem"
-        Me.lvRem.Size = New System.Drawing.Size(635, 193)
+        Me.lvRem.Size = New System.Drawing.Size(611, 193)
         Me.lvRem.TabIndex = 6
         Me.lvRem.UseCompatibleStateImageBehavior = False
         Me.lvRem.View = System.Windows.Forms.View.Details

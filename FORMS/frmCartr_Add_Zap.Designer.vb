@@ -93,7 +93,7 @@ Partial Class frmCartr_Add_Zap
         Me.cmbPost.FormattingEnabled = True
         Me.cmbPost.Location = New System.Drawing.Point(138, 26)
         Me.cmbPost.Name = "cmbPost"
-        Me.cmbPost.Size = New System.Drawing.Size(357, 21)
+        Me.cmbPost.Size = New System.Drawing.Size(359, 21)
         Me.cmbPost.TabIndex = 11
         '
         'txtAvR
@@ -227,7 +227,8 @@ Partial Class frmCartr_Add_Zap
         Me.TableLayoutPanel1.Controls.Add(Me.Label5, 0, 3)
         Me.TableLayoutPanel1.Controls.Add(Me.Label4, 2, 2)
         Me.TableLayoutPanel1.Controls.Add(Me.dtAvR, 3, 2)
-        Me.TableLayoutPanel1.Location = New System.Drawing.Point(3, 0)
+        Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 9
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
@@ -239,14 +240,15 @@ Partial Class frmCartr_Add_Zap
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(498, 199)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(500, 188)
         Me.TableLayoutPanel1.TabIndex = 26
         '
         'frmCartr_Add_Zap
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(506, 204)
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(500, 188)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "frmCartr_Add_Zap"
