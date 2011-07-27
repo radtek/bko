@@ -119,8 +119,8 @@ Partial Class frmSetup
         Me.chkPOu = New System.Windows.Forms.CheckBox()
         Me.chkREMONT = New System.Windows.Forms.CheckBox()
         Me.chkFullScreen = New System.Windows.Forms.CheckBox()
-        Me.SStab1 = New System.Windows.Forms.TabControl()
         Me.Button4 = New System.Windows.Forms.Button()
+        Me.SStab1 = New System.Windows.Forms.TabControl()
         Me.TabPage5.SuspendLayout()
         Me.TableLayoutPanel3.SuspendLayout()
         Me.gbUsers.SuspendLayout()
@@ -1277,6 +1277,15 @@ Partial Class frmSetup
         Me.chkFullScreen.Text = "На весь экран"
         Me.chkFullScreen.UseVisualStyleBackColor = True
         '
+        'Button4
+        '
+        Me.Button4.Location = New System.Drawing.Point(3, 568)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(75, 23)
+        Me.Button4.TabIndex = 25
+        Me.Button4.Text = "+"
+        Me.Button4.UseVisualStyleBackColor = True
+        '
         'SStab1
         '
         Me.SStab1.Controls.Add(Me.TabPage1)
@@ -1290,15 +1299,6 @@ Partial Class frmSetup
         Me.SStab1.SelectedIndex = 0
         Me.SStab1.Size = New System.Drawing.Size(984, 666)
         Me.SStab1.TabIndex = 0
-        '
-        'Button4
-        '
-        Me.Button4.Location = New System.Drawing.Point(3, 568)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(75, 23)
-        Me.Button4.TabIndex = 25
-        Me.Button4.Text = "+"
-        Me.Button4.UseVisualStyleBackColor = True
         '
         'frmSetup
         '

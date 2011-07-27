@@ -158,7 +158,6 @@ Partial Class frmMain
         '
         'NewToolStripMenuItem
         '
-        Me.NewToolStripMenuItem.Image = CType(resources.GetObject("NewToolStripMenuItem.Image"), System.Drawing.Image)
         Me.NewToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Black
         Me.NewToolStripMenuItem.Name = "NewToolStripMenuItem"
         Me.NewToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.N), System.Windows.Forms.Keys)
@@ -172,7 +171,6 @@ Partial Class frmMain
         '
         'ПроверитьОбновлениеToolStripMenuItem
         '
-        Me.ПроверитьОбновлениеToolStripMenuItem.Image = CType(resources.GetObject("ПроверитьОбновлениеToolStripMenuItem.Image"), System.Drawing.Image)
         Me.ПроверитьОбновлениеToolStripMenuItem.Name = "ПроверитьОбновлениеToolStripMenuItem"
         Me.ПроверитьОбновлениеToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.U), System.Windows.Forms.Keys)
         Me.ПроверитьОбновлениеToolStripMenuItem.Size = New System.Drawing.Size(246, 22)
@@ -180,7 +178,6 @@ Partial Class frmMain
         '
         'MailToAuthors
         '
-        Me.MailToAuthors.Image = CType(resources.GetObject("MailToAuthors.Image"), System.Drawing.Image)
         Me.MailToAuthors.Name = "MailToAuthors"
         Me.MailToAuthors.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.M), System.Windows.Forms.Keys)
         Me.MailToAuthors.Size = New System.Drawing.Size(246, 22)
@@ -188,7 +185,6 @@ Partial Class frmMain
         '
         'ФорумToolStripMenuItem
         '
-        Me.ФорумToolStripMenuItem.Image = CType(resources.GetObject("ФорумToolStripMenuItem.Image"), System.Drawing.Image)
         Me.ФорумToolStripMenuItem.Name = "ФорумToolStripMenuItem"
         Me.ФорумToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.F), System.Windows.Forms.Keys)
         Me.ФорумToolStripMenuItem.Size = New System.Drawing.Size(246, 22)
@@ -196,7 +192,6 @@ Partial Class frmMain
         '
         'BugTrackerToolStripMenuItem
         '
-        Me.BugTrackerToolStripMenuItem.Image = CType(resources.GetObject("BugTrackerToolStripMenuItem.Image"), System.Drawing.Image)
         Me.BugTrackerToolStripMenuItem.Name = "BugTrackerToolStripMenuItem"
         Me.BugTrackerToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.B), System.Windows.Forms.Keys)
         Me.BugTrackerToolStripMenuItem.Size = New System.Drawing.Size(246, 22)
@@ -209,7 +204,6 @@ Partial Class frmMain
         '
         'ExitToolStripMenuItem
         '
-        Me.ExitToolStripMenuItem.Image = CType(resources.GetObject("ExitToolStripMenuItem.Image"), System.Drawing.Image)
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
         Me.ExitToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.E), System.Windows.Forms.Keys)
         Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(246, 22)
@@ -379,7 +373,7 @@ Partial Class frmMain
         '
         Me.РемонтыToolStripMenuItem.Name = "РемонтыToolStripMenuItem"
         Me.РемонтыToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F11
-        Me.РемонтыToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.РемонтыToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
         Me.РемонтыToolStripMenuItem.Text = "Ремонты"
         '
         'ToolsMenu
@@ -557,17 +551,16 @@ Partial Class frmMain
         Me.ToolStrip.Location = New System.Drawing.Point(0, 24)
         Me.ToolStrip.Name = "ToolStrip"
         Me.ToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
-        Me.ToolStrip.Size = New System.Drawing.Size(984, 31)
+        Me.ToolStrip.Size = New System.Drawing.Size(984, 25)
         Me.ToolStrip.TabIndex = 13
         Me.ToolStrip.Text = "ToolStrip"
         '
         'ToolStripDropDownButton1
         '
         Me.ToolStripDropDownButton1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ЗагрузитьИзEverestiniToolStripMenuItem, Me.ЗагрузитьИзASTRA32ToolStripMenuItem, Me.ЗагрузитьЧерезWMIToolStripMenuItem, Me.ЗагрузитьИзCSVEverestToolStripMenuItem, Me.HANDINSERTToolStripMenuItem, Me.ToolStripMenuItem1, Me.CNTToolStripMenuItem, Me.ToolStripSeparator7, Me.СетевоеОборудованиеToolStripMenuItem, Me.ToolStripSeparator9, Me.ПерефирийныеУстройстваToolStripMenuItem, Me.КомплектующиеToolStripMenuItem, Me.ToolStripSeparator10, Me.ДругоеОборудованиеToolStripMenuItem})
-        Me.ToolStripDropDownButton1.Image = CType(resources.GetObject("ToolStripDropDownButton1.Image"), System.Drawing.Image)
         Me.ToolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripDropDownButton1.Name = "ToolStripDropDownButton1"
-        Me.ToolStripDropDownButton1.Size = New System.Drawing.Size(91, 28)
+        Me.ToolStripDropDownButton1.Size = New System.Drawing.Size(67, 22)
         Me.ToolStripDropDownButton1.Text = "Новый..."
         '
         'ЗагрузитьИзEverestiniToolStripMenuItem
@@ -823,44 +816,40 @@ Partial Class frmMain
         '
         'NewToolStripButton
         '
-        Me.NewToolStripButton.Image = CType(resources.GetObject("NewToolStripButton.Image"), System.Drawing.Image)
         Me.NewToolStripButton.ImageTransparentColor = System.Drawing.Color.Black
         Me.NewToolStripButton.Name = "NewToolStripButton"
-        Me.NewToolStripButton.Size = New System.Drawing.Size(70, 28)
+        Me.NewToolStripButton.Size = New System.Drawing.Size(46, 22)
         Me.NewToolStripButton.Text = "Поиск"
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 31)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 25)
         '
         'SaveInfTehButton
         '
-        Me.SaveInfTehButton.Image = CType(resources.GetObject("SaveInfTehButton.Image"), System.Drawing.Image)
         Me.SaveInfTehButton.ImageTransparentColor = System.Drawing.Color.Black
         Me.SaveInfTehButton.Name = "SaveInfTehButton"
-        Me.SaveInfTehButton.Size = New System.Drawing.Size(101, 28)
+        Me.SaveInfTehButton.Size = New System.Drawing.Size(77, 22)
         Me.SaveInfTehButton.Text = "Сохранение"
         '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 31)
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 25)
         '
         'ArhToolZipbutton
         '
-        Me.ArhToolZipbutton.Image = CType(resources.GetObject("ArhToolZipbutton.Image"), System.Drawing.Image)
         Me.ArhToolZipbutton.ImageTransparentColor = System.Drawing.Color.Black
         Me.ArhToolZipbutton.Name = "ArhToolZipbutton"
-        Me.ArhToolZipbutton.Size = New System.Drawing.Size(94, 28)
+        Me.ArhToolZipbutton.Size = New System.Drawing.Size(70, 22)
         Me.ArhToolZipbutton.Text = "Архивация"
         '
         'ToolStripButton1
         '
-        Me.ToolStripButton1.Image = CType(resources.GetObject("ToolStripButton1.Image"), System.Drawing.Image)
         Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton1.Name = "ToolStripButton1"
-        Me.ToolStripButton1.Size = New System.Drawing.Size(76, 28)
+        Me.ToolStripButton1.Size = New System.Drawing.Size(52, 22)
         Me.ToolStripButton1.Text = "Отчеты"
         '
         'frmMain

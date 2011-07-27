@@ -198,7 +198,7 @@ Module MOD_REF_TREE
         rs.Close()
         rs = Nothing
 
-        Dim nodeRoot As New TreeNode(ORG, 37, 37) '------Замена номера иконки------
+        Dim nodeRoot As New TreeNode(ORG, 0, 0)
         nodeRoot.Tag = "ROOT" & GENID()
         lstgroups.Nodes.Add(nodeRoot)
 
@@ -225,7 +225,6 @@ Module MOD_REF_TREE
         End If
 
 
-
         rs = New ADODB.Recordset
         rs.Open(sSQL1, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
@@ -233,7 +232,7 @@ Module MOD_REF_TREE
             .MoveFirst()
             Do While Not .EOF
                 'My.Application.DoEvents()
-                Dim BrancheNode As New TreeNode(.Fields("filial").Value, 38, 38) '------Замена номера иконки------
+                Dim BrancheNode As New TreeNode(.Fields("filial").Value, 0, 0)
                 BrancheNode.Tag = "G|" & .Fields("id").Value
                 sTEN = "G|" & .Fields("id").Value
                 nodeRoot.Nodes.Add(BrancheNode)
@@ -292,7 +291,7 @@ Module MOD_REF_TREE
 
                         If .Fields("filial").Value = unameS Then
 
-                            Dim DepatrmentNode As New TreeNode(.Fields("N_Otd").Value, 39, 39) '------Замена номера иконки------
+                            Dim DepatrmentNode As New TreeNode(.Fields("N_Otd").Value, 1, 1)
                             DepatrmentNode.Tag = "O|" & .Fields("id").Value
                             sTEN = "O|" & .Fields("id").Value
                             BrancheNode.Nodes.Add(DepatrmentNode)
@@ -350,7 +349,7 @@ Module MOD_REF_TREE
                                     .MoveFirst()
                                     Do While Not .EOF
 
-                                        Dim OfficeNode As New TreeNode(.Fields("name").Value, 40, 40) '------Замена номера иконки------
+                                        Dim OfficeNode As New TreeNode(.Fields("name").Value, 2, 2)
                                         OfficeNode.Tag = "K|" & .Fields("id").Value
                                         sTEN = "K|" & .Fields("id").Value
                                         DepatrmentNode.Nodes.Add(OfficeNode)

@@ -165,7 +165,7 @@ Partial Class frmNetMagazin
         '
         'tsbAdd
         '
-        Me.tsbAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.tsbAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.tsbAdd.Image = CType(resources.GetObject("tsbAdd.Image"), System.Drawing.Image)
         Me.tsbAdd.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbAdd.Name = "tsbAdd"
@@ -175,11 +175,11 @@ Partial Class frmNetMagazin
         '
         'tsbDel
         '
-        Me.tsbDel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.tsbDel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.tsbDel.Image = CType(resources.GetObject("tsbDel.Image"), System.Drawing.Image)
         Me.tsbDel.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbDel.Name = "tsbDel"
-        Me.tsbDel.Size = New System.Drawing.Size(23, 20)
+        Me.tsbDel.Size = New System.Drawing.Size(23, 22)
         Me.tsbDel.Text = "-"
         Me.tsbDel.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage
         '
@@ -189,7 +189,7 @@ Partial Class frmNetMagazin
         Me.tsbExcell.Image = CType(resources.GetObject("tsbExcell.Image"), System.Drawing.Image)
         Me.tsbExcell.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbExcell.Name = "tsbExcell"
-        Me.tsbExcell.Size = New System.Drawing.Size(66, 20)
+        Me.tsbExcell.Size = New System.Drawing.Size(66, 22)
         Me.tsbExcell.Text = "В Офис"
         Me.tsbExcell.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage
         '

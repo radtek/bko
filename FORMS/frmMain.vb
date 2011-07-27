@@ -88,6 +88,32 @@ Public Class frmMain
         ''Меняем шрифт
         SendFonts(Me)
 
+        ToolStripDropDownButton1.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\new.png")
+        NewToolStripButton.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\find.png")
+        SaveInfTehButton.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\save.png")
+        ArhToolZipbutton.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\zip.png")
+        ToolStripButton1.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\report.png")
+
+
+        NewToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\setup.png")
+        ПроверитьОбновлениеToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\update.png")
+        MailToAuthors.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\Mail.png")
+        ФорумToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\forum.png")
+        BugTrackerToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\bug.png")
+        ExitToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\exit.png")
+
+        'СправочникиОборудованияToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\new.png")
+        'ОрганизацияToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\new.png")
+        'БланкиToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\new.png")
+        'ЖурналыПрограммыToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\new.png")
+        'АктытребованияToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\new.png")
+        'ИнвентаризацияToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\new.png")
+        'OptionsToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\new.png")
+        'ОбслуживаниеБДToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\new.png")
+
+
+
+
         Dim sText As String
 
         'Определяем путь до файла настроек
@@ -95,6 +121,11 @@ Public Class frmMain
 
         'Какой модуль запускать
         sText = objIniFile.GetString("general", "MOD", 0)
+
+
+        Call Tree_Icons_Feel()
+
+
 
         If Len(sText) > 2 Then sText = 0
 
@@ -258,28 +289,6 @@ Public Class frmMain
 
 
 
-        Try
-            Dim dirs As String() = Directory.GetFiles(PrPath & "pic\", "*.png")
-
-            Dim dir As String
-
-            For Each dir In dirs
-
-                Select Case sICONS
-
-                    Case "32*32"
-
-                        frmComputers.ImageList1.Images.Add(Image.FromFile(dir))
-                    Case Else
-
-                        frmComputers.ilsCommands.Images.Add(Image.FromFile(dir))
-
-                End Select
-
-            Next
-        Catch e1 As Exception
-
-        End Try
 
 
     End Sub

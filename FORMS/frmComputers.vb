@@ -63,6 +63,18 @@ Public Class frmComputers
 
         Me.WindowState = FormWindowState.Maximized
 
+
+        If ilsCommands.Images.Count = 0 Then
+
+            Call Tree_Icons_Feel()
+
+        End If
+
+
+
+
+
+
         'Меняем шрифт на форме
 
 
@@ -379,10 +391,7 @@ Error_:
 
         'Call Clear_Form_For_Computer()
 
-        'Me.BeginInvoke(New MethodInvoker(AddressOf Clear_Form_For_Computer))
-
-        Call Clear_Form_For_Computer()
-
+        Me.BeginInvoke(New MethodInvoker(AddressOf Clear_Form_For_Computer))
 
 
         Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG14", "") & " " & Me.lstGroups.SelectedNode.Text)
@@ -6041,6 +6050,7 @@ err_:
 
     End Sub
 
+   
    
 End Class
 

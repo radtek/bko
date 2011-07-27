@@ -679,7 +679,6 @@ Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
 Me.Button1 = New System.Windows.Forms.Button()
 Me.Button2 = New System.Windows.Forms.Button()
 Me.Button3 = New System.Windows.Forms.Button()
-Me.ilsCommands = New System.Windows.Forms.ImageList(Me.components)
 Me.cmDvig = New System.Windows.Forms.ContextMenuStrip(Me.components)
 Me.DELTEdVIGToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 Me.CMServices = New System.Windows.Forms.ContextMenuStrip(Me.components)
@@ -688,6 +687,7 @@ Me.DeleteService = New System.Windows.Forms.ToolStripMenuItem()
 Me.MnuSendEmail = New System.Windows.Forms.ToolStripMenuItem()
 Me.mnu_Z_to_Office = New System.Windows.Forms.ToolStripMenuItem()
 Me.mnu_z_rasp = New System.Windows.Forms.ToolStripMenuItem()
+Me.ilsCommands = New System.Windows.Forms.ImageList(Me.components)
 Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
 CType(Me.spCont,System.ComponentModel.ISupportInitialize).BeginInit
 Me.spCont.Panel1.SuspendLayout
@@ -873,11 +873,11 @@ Me.spCont.Panel1.Controls.Add(Me.TableLayoutPanel65)
 '
 'spCont.Panel2
 '
+Me.spCont.Panel2.Controls.Add(Me.sSTAB1)
 Me.spCont.Panel2.Controls.Add(Me.sSTAB5)
 Me.spCont.Panel2.Controls.Add(Me.sSTAB2)
 Me.spCont.Panel2.Controls.Add(Me.sSTAB4)
 Me.spCont.Panel2.Controls.Add(Me.sSTAB3)
-Me.spCont.Panel2.Controls.Add(Me.sSTAB1)
 Me.spCont.Size = New System.Drawing.Size(992, 646)
 Me.spCont.SplitterDistance = 298
 Me.spCont.TabIndex = 0
@@ -999,10 +999,10 @@ Me.TableLayoutPanel64.TabIndex = 5
 'btnSearch
 '
 Me.btnSearch.Image = CType(resources.GetObject("btnSearch.Image"),System.Drawing.Image)
-Me.btnSearch.Location = New System.Drawing.Point(261, 3)
+Me.btnSearch.Location = New System.Drawing.Point(254, 3)
 Me.btnSearch.Name = "btnSearch"
-Me.btnSearch.Size = New System.Drawing.Size(22, 22)
-Me.btnSearch.TabIndex = 1
+Me.btnSearch.Size = New System.Drawing.Size(29, 24)
+Me.btnSearch.TabIndex = 8
 Me.btnSearch.UseVisualStyleBackColor = true
 '
 'txtSearch
@@ -1010,7 +1010,7 @@ Me.btnSearch.UseVisualStyleBackColor = true
 Me.txtSearch.Dock = System.Windows.Forms.DockStyle.Fill
 Me.txtSearch.Location = New System.Drawing.Point(3, 3)
 Me.txtSearch.Name = "txtSearch"
-Me.txtSearch.Size = New System.Drawing.Size(252, 20)
+Me.txtSearch.Size = New System.Drawing.Size(245, 20)
 Me.txtSearch.TabIndex = 0
 '
 'lstGroups
@@ -1020,9 +1020,9 @@ Me.TableLayoutPanel64.SetColumnSpan(Me.lstGroups, 2)
 Me.lstGroups.Dock = System.Windows.Forms.DockStyle.Fill
 Me.lstGroups.FullRowSelect = true
 Me.lstGroups.HideSelection = false
-Me.lstGroups.Location = New System.Drawing.Point(3, 81)
+Me.lstGroups.Location = New System.Drawing.Point(3, 83)
 Me.lstGroups.Name = "lstGroups"
-Me.lstGroups.Size = New System.Drawing.Size(280, 455)
+Me.lstGroups.Size = New System.Drawing.Size(280, 453)
 Me.lstGroups.TabIndex = 2
 '
 'treebranche
@@ -1030,7 +1030,7 @@ Me.lstGroups.TabIndex = 2
 Me.TableLayoutPanel64.SetColumnSpan(Me.treebranche, 2)
 Me.treebranche.Dock = System.Windows.Forms.DockStyle.Fill
 Me.treebranche.FormattingEnabled = true
-Me.treebranche.Location = New System.Drawing.Point(3, 54)
+Me.treebranche.Location = New System.Drawing.Point(3, 56)
 Me.treebranche.Name = "treebranche"
 Me.treebranche.Size = New System.Drawing.Size(280, 21)
 Me.treebranche.TabIndex = 5
@@ -1038,7 +1038,7 @@ Me.treebranche.TabIndex = 5
 'chkVisibleSTR
 '
 Me.chkVisibleSTR.AutoSize = true
-Me.chkVisibleSTR.Location = New System.Drawing.Point(3, 31)
+Me.chkVisibleSTR.Location = New System.Drawing.Point(3, 33)
 Me.chkVisibleSTR.Name = "chkVisibleSTR"
 Me.chkVisibleSTR.Size = New System.Drawing.Size(96, 17)
 Me.chkVisibleSTR.TabIndex = 6
@@ -8298,6 +8298,7 @@ Me.CartrAddToolStripMenuItem.Text = "Добавить картридж"
 '
 'CopyToolStripMenuItem
 '
+Me.CopyToolStripMenuItem.Image = CType(resources.GetObject("CopyToolStripMenuItem.Image"),System.Drawing.Image)
 Me.CopyToolStripMenuItem.Name = "CopyToolStripMenuItem"
 Me.CopyToolStripMenuItem.Size = New System.Drawing.Size(254, 22)
 Me.CopyToolStripMenuItem.Text = "Скопировать"
@@ -8318,12 +8319,14 @@ Me.DeleteToolStripMenuItem.Text = "Удалить"
 '
 'ОтделитьПринтерыИМониторыToolStripMenuItem
 '
+Me.ОтделитьПринтерыИМониторыToolStripMenuItem.Image = CType(resources.GetObject("ОтделитьПринтерыИМониторыToolStripMenuItem.Image"),System.Drawing.Image)
 Me.ОтделитьПринтерыИМониторыToolStripMenuItem.Name = "ОтделитьПринтерыИМониторыToolStripMenuItem"
 Me.ОтделитьПринтерыИМониторыToolStripMenuItem.Size = New System.Drawing.Size(254, 22)
 Me.ОтделитьПринтерыИМониторыToolStripMenuItem.Text = "Отделить принтеры и мониторы"
 '
 'ВернутьПерефериюToolStripMenuItem
 '
+Me.ВернутьПерефериюToolStripMenuItem.Image = CType(resources.GetObject("ВернутьПерефериюToolStripMenuItem.Image"),System.Drawing.Image)
 Me.ВернутьПерефериюToolStripMenuItem.Name = "ВернутьПерефериюToolStripMenuItem"
 Me.ВернутьПерефериюToolStripMenuItem.Size = New System.Drawing.Size(254, 22)
 Me.ВернутьПерефериюToolStripMenuItem.Text = "Вернуть переферию"
@@ -8378,18 +8381,21 @@ Me.ПаспортКомпьютераToolStripMenuItem.Text = "Паспорт к
 '
 'MassRazdelPerf
 '
+Me.MassRazdelPerf.Image = CType(resources.GetObject("MassRazdelPerf.Image"),System.Drawing.Image)
 Me.MassRazdelPerf.Name = "MassRazdelPerf"
 Me.MassRazdelPerf.Size = New System.Drawing.Size(221, 22)
 Me.MassRazdelPerf.Text = "Отделить переферию"
 '
 'MassObedPerf
 '
+Me.MassObedPerf.Image = CType(resources.GetObject("MassObedPerf.Image"),System.Drawing.Image)
 Me.MassObedPerf.Name = "MassObedPerf"
 Me.MassObedPerf.Size = New System.Drawing.Size(221, 22)
 Me.MassObedPerf.Text = "Присоеденить переферию"
 '
 'MassUpdatetoINI
 '
+Me.MassUpdatetoINI.Image = CType(resources.GetObject("MassUpdatetoINI.Image"),System.Drawing.Image)
 Me.MassUpdatetoINI.Name = "MassUpdatetoINI"
 Me.MassUpdatetoINI.Size = New System.Drawing.Size(221, 22)
 Me.MassUpdatetoINI.Text = "Обновить из папки"
@@ -8435,76 +8441,6 @@ Me.Button3.Size = New System.Drawing.Size(93, 22)
 Me.Button3.TabIndex = 36
 Me.Button3.Text = "Добавить"
 Me.Button3.UseVisualStyleBackColor = true
-'
-'ilsCommands
-'
-Me.ilsCommands.ImageStream = CType(resources.GetObject("ilsCommands.ImageStream"),System.Windows.Forms.ImageListStreamer)
-Me.ilsCommands.TransparentColor = System.Drawing.Color.RoyalBlue
-Me.ilsCommands.Images.SetKeyName(0, "1.png")
-Me.ilsCommands.Images.SetKeyName(1, "2.ico")
-Me.ilsCommands.Images.SetKeyName(2, "3.png")
-Me.ilsCommands.Images.SetKeyName(3, "4.ico")
-Me.ilsCommands.Images.SetKeyName(4, "5.ico")
-Me.ilsCommands.Images.SetKeyName(5, "6.png")
-Me.ilsCommands.Images.SetKeyName(6, "7.png")
-Me.ilsCommands.Images.SetKeyName(7, "8.png")
-Me.ilsCommands.Images.SetKeyName(8, "9.png")
-Me.ilsCommands.Images.SetKeyName(9, "10.png")
-Me.ilsCommands.Images.SetKeyName(10, "11.png")
-Me.ilsCommands.Images.SetKeyName(11, "12.ico")
-Me.ilsCommands.Images.SetKeyName(12, "13.png")
-Me.ilsCommands.Images.SetKeyName(13, "14.ico")
-Me.ilsCommands.Images.SetKeyName(14, "15.png")
-Me.ilsCommands.Images.SetKeyName(15, "16.png")
-Me.ilsCommands.Images.SetKeyName(16, "17.png")
-Me.ilsCommands.Images.SetKeyName(17, "18.png")
-Me.ilsCommands.Images.SetKeyName(18, "19.png")
-Me.ilsCommands.Images.SetKeyName(19, "20.png")
-Me.ilsCommands.Images.SetKeyName(20, "21.png")
-Me.ilsCommands.Images.SetKeyName(21, "22.png")
-Me.ilsCommands.Images.SetKeyName(22, "23.png")
-Me.ilsCommands.Images.SetKeyName(23, "24.png")
-Me.ilsCommands.Images.SetKeyName(24, "25.png")
-Me.ilsCommands.Images.SetKeyName(25, "26.png")
-Me.ilsCommands.Images.SetKeyName(26, "27.png")
-Me.ilsCommands.Images.SetKeyName(27, "28.png")
-Me.ilsCommands.Images.SetKeyName(28, "29.png")
-Me.ilsCommands.Images.SetKeyName(29, "30.png")
-Me.ilsCommands.Images.SetKeyName(30, "31.png")
-Me.ilsCommands.Images.SetKeyName(31, "32.png")
-Me.ilsCommands.Images.SetKeyName(32, "33.png")
-Me.ilsCommands.Images.SetKeyName(33, "34.png")
-Me.ilsCommands.Images.SetKeyName(34, "35.png")
-Me.ilsCommands.Images.SetKeyName(35, "36.png")
-Me.ilsCommands.Images.SetKeyName(36, "37.png")
-Me.ilsCommands.Images.SetKeyName(37, "38.ico")
-Me.ilsCommands.Images.SetKeyName(38, "39.ico")
-Me.ilsCommands.Images.SetKeyName(39, "40.png")
-Me.ilsCommands.Images.SetKeyName(40, "41.ico")
-Me.ilsCommands.Images.SetKeyName(41, "42.jpg")
-Me.ilsCommands.Images.SetKeyName(42, "43.png")
-Me.ilsCommands.Images.SetKeyName(43, "44.png")
-Me.ilsCommands.Images.SetKeyName(44, "45.png")
-Me.ilsCommands.Images.SetKeyName(45, "46.ico")
-Me.ilsCommands.Images.SetKeyName(46, "47.png")
-Me.ilsCommands.Images.SetKeyName(47, "48.png")
-Me.ilsCommands.Images.SetKeyName(48, "49.png")
-Me.ilsCommands.Images.SetKeyName(49, "50.png")
-Me.ilsCommands.Images.SetKeyName(50, "51.png")
-Me.ilsCommands.Images.SetKeyName(51, "52.png")
-Me.ilsCommands.Images.SetKeyName(52, "53.png")
-Me.ilsCommands.Images.SetKeyName(53, "54.png")
-Me.ilsCommands.Images.SetKeyName(54, "55.png")
-Me.ilsCommands.Images.SetKeyName(55, "56.png")
-Me.ilsCommands.Images.SetKeyName(56, "57.png")
-Me.ilsCommands.Images.SetKeyName(57, "58.png")
-Me.ilsCommands.Images.SetKeyName(58, "59.png")
-Me.ilsCommands.Images.SetKeyName(59, "60.png")
-Me.ilsCommands.Images.SetKeyName(60, "61.png")
-Me.ilsCommands.Images.SetKeyName(61, "62.png")
-Me.ilsCommands.Images.SetKeyName(62, "63.png")
-Me.ilsCommands.Images.SetKeyName(63, "64.png")
-Me.ilsCommands.Images.SetKeyName(64, "65.png")
 '
 'cmDvig
 '
@@ -8560,75 +8496,17 @@ Me.mnu_z_rasp.Name = "mnu_z_rasp"
 Me.mnu_z_rasp.Size = New System.Drawing.Size(174, 22)
 Me.mnu_z_rasp.Text = "Расписка"
 '
+'ilsCommands
+'
+Me.ilsCommands.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit
+Me.ilsCommands.ImageSize = New System.Drawing.Size(24, 24)
+Me.ilsCommands.TransparentColor = System.Drawing.Color.White
+'
 'ImageList1
 '
-Me.ImageList1.ImageStream = CType(resources.GetObject("ImageList1.ImageStream"),System.Windows.Forms.ImageListStreamer)
-Me.ImageList1.TransparentColor = System.Drawing.Color.Transparent
-Me.ImageList1.Images.SetKeyName(0, "1.png")
-Me.ImageList1.Images.SetKeyName(1, "2.ico")
-Me.ImageList1.Images.SetKeyName(2, "3.png")
-Me.ImageList1.Images.SetKeyName(3, "4.ico")
-Me.ImageList1.Images.SetKeyName(4, "5.ico")
-Me.ImageList1.Images.SetKeyName(5, "6.png")
-Me.ImageList1.Images.SetKeyName(6, "7.png")
-Me.ImageList1.Images.SetKeyName(7, "8.png")
-Me.ImageList1.Images.SetKeyName(8, "9.png")
-Me.ImageList1.Images.SetKeyName(9, "10.png")
-Me.ImageList1.Images.SetKeyName(10, "11.png")
-Me.ImageList1.Images.SetKeyName(11, "12.ico")
-Me.ImageList1.Images.SetKeyName(12, "13.png")
-Me.ImageList1.Images.SetKeyName(13, "14.ico")
-Me.ImageList1.Images.SetKeyName(14, "15.png")
-Me.ImageList1.Images.SetKeyName(15, "16.png")
-Me.ImageList1.Images.SetKeyName(16, "17.png")
-Me.ImageList1.Images.SetKeyName(17, "18.png")
-Me.ImageList1.Images.SetKeyName(18, "19.png")
-Me.ImageList1.Images.SetKeyName(19, "20.png")
-Me.ImageList1.Images.SetKeyName(20, "21.png")
-Me.ImageList1.Images.SetKeyName(21, "22.png")
-Me.ImageList1.Images.SetKeyName(22, "23.png")
-Me.ImageList1.Images.SetKeyName(23, "24.png")
-Me.ImageList1.Images.SetKeyName(24, "25.png")
-Me.ImageList1.Images.SetKeyName(25, "26.png")
-Me.ImageList1.Images.SetKeyName(26, "27.png")
-Me.ImageList1.Images.SetKeyName(27, "28.png")
-Me.ImageList1.Images.SetKeyName(28, "29.png")
-Me.ImageList1.Images.SetKeyName(29, "30.png")
-Me.ImageList1.Images.SetKeyName(30, "31.png")
-Me.ImageList1.Images.SetKeyName(31, "32.png")
-Me.ImageList1.Images.SetKeyName(32, "33.png")
-Me.ImageList1.Images.SetKeyName(33, "34.png")
-Me.ImageList1.Images.SetKeyName(34, "35.png")
-Me.ImageList1.Images.SetKeyName(35, "36.png")
-Me.ImageList1.Images.SetKeyName(36, "37.png")
-Me.ImageList1.Images.SetKeyName(37, "38.ico")
-Me.ImageList1.Images.SetKeyName(38, "39.ico")
-Me.ImageList1.Images.SetKeyName(39, "40.png")
-Me.ImageList1.Images.SetKeyName(40, "41.ico")
-Me.ImageList1.Images.SetKeyName(41, "42.jpg")
-Me.ImageList1.Images.SetKeyName(42, "43.png")
-Me.ImageList1.Images.SetKeyName(43, "44.png")
-Me.ImageList1.Images.SetKeyName(44, "45.png")
-Me.ImageList1.Images.SetKeyName(45, "46.ico")
-Me.ImageList1.Images.SetKeyName(46, "47.png")
-Me.ImageList1.Images.SetKeyName(47, "48.png")
-Me.ImageList1.Images.SetKeyName(48, "49.png")
-Me.ImageList1.Images.SetKeyName(49, "50.png")
-Me.ImageList1.Images.SetKeyName(50, "51.png")
-Me.ImageList1.Images.SetKeyName(51, "52.png")
-Me.ImageList1.Images.SetKeyName(52, "53.png")
-Me.ImageList1.Images.SetKeyName(53, "54.png")
-Me.ImageList1.Images.SetKeyName(54, "55.png")
-Me.ImageList1.Images.SetKeyName(55, "56.png")
-Me.ImageList1.Images.SetKeyName(56, "57.png")
-Me.ImageList1.Images.SetKeyName(57, "58.png")
-Me.ImageList1.Images.SetKeyName(58, "59.png")
-Me.ImageList1.Images.SetKeyName(59, "60.png")
-Me.ImageList1.Images.SetKeyName(60, "61.png")
-Me.ImageList1.Images.SetKeyName(61, "62.png")
-Me.ImageList1.Images.SetKeyName(62, "63.png")
-Me.ImageList1.Images.SetKeyName(63, "64.png")
-Me.ImageList1.Images.SetKeyName(64, "65.png")
+Me.ImageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit
+Me.ImageList1.ImageSize = New System.Drawing.Size(32, 32)
+Me.ImageList1.TransparentColor = System.Drawing.Color.White
 '
 'frmComputers
 '
@@ -8914,7 +8792,6 @@ End Sub
     Friend WithEvents TabPage9 As System.Windows.Forms.TabPage
     Friend WithEvents TabPage10 As System.Windows.Forms.TabPage
     Friend WithEvents gbTree As System.Windows.Forms.GroupBox
-    Friend WithEvents btnSearch As System.Windows.Forms.Button
     Friend WithEvents txtSearch As System.Windows.Forms.TextBox
     Friend WithEvents sSTAB1 As System.Windows.Forms.TabControl
     Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
@@ -9527,7 +9404,6 @@ End Sub
     Friend WithEvents lblT_O_T As System.Windows.Forms.Label
     Friend WithEvents lblT_All As System.Windows.Forms.Label
     Friend WithEvents btnUserCancel As System.Windows.Forms.Button
-    Friend WithEvents ilsCommands As System.Windows.Forms.ImageList
     Friend WithEvents cmDvig As System.Windows.Forms.ContextMenuStrip
     Friend WithEvents DELTEdVIGToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents treebranche As System.Windows.Forms.ComboBox
@@ -9564,7 +9440,6 @@ End Sub
     Friend WithEvents bNETPlus As System.Windows.Forms.Button
     Friend WithEvents bMonitorPlus As System.Windows.Forms.Button
     Friend WithEvents bPrinterPlus As System.Windows.Forms.Button
-    Friend WithEvents ImageList1 As System.Windows.Forms.ImageList
     Friend WithEvents chkVisibleSTR As System.Windows.Forms.CheckBox
     Friend WithEvents txtMHZ1 As System.Windows.Forms.TextBox
     Friend WithEvents ВернутьПерефериюToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
@@ -9574,5 +9449,8 @@ End Sub
     Friend WithEvents MnuSendEmail As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mnu_Z_to_Office As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mnu_z_rasp As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ilsCommands As System.Windows.Forms.ImageList
+    Friend WithEvents ImageList1 As System.Windows.Forms.ImageList
+    Friend WithEvents btnSearch As System.Windows.Forms.Button
 
 End Class

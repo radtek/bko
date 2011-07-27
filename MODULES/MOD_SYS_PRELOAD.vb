@@ -56,6 +56,41 @@ Module MOD_SYS_PRELOAD
     Public sLANGPATH As String
     Public sICONS As String
 
+    Public Sub Tree_Icons_Feel()
+        Try
+            Dim dirs As String() = Directory.GetFiles(PrPath & "pic\tree\", "*.png")
+
+            Dim dir As String
+
+            For Each dir In dirs
+
+
+                frmComputers.ImageList1.Images.Add(Image.FromFile(dir))
+                frmComputers.ilsCommands.Images.Add(Image.FromFile(dir))
+
+            Next
+        Catch e1 As Exception
+
+        End Try
+
+
+        Try
+            Dim dirs As String() = Directory.GetFiles(PrPath & "pic\", "*.png")
+
+            Dim dir As String
+
+            For Each dir In dirs
+
+                frmComputers.ImageList1.Images.Add(Image.FromFile(dir))
+                frmComputers.ilsCommands.Images.Add(Image.FromFile(dir))
+
+            Next
+        Catch e1 As Exception
+
+        End Try
+    End Sub
+
+
     Public Sub PreLoad()
 
         'Dim langFile As String
@@ -213,10 +248,6 @@ Module MOD_SYS_PRELOAD
 
         frmComputers.treebranche.Text = A1
 
-
-
-
-
     End Sub
 
     Public Sub COLOR_Form_For_Computer(ByVal ControlContainer As Object)
@@ -327,9 +358,6 @@ Module MOD_SYS_PRELOAD
                 MsgBox(ex.Message)
             End Try
         Next
-
-
-
     End Sub
 
     'Public Sub fLATCMB(ByVal ControlContainer As Object)
