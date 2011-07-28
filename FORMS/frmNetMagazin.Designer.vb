@@ -166,7 +166,6 @@ Partial Class frmNetMagazin
         'tsbAdd
         '
         Me.tsbAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbAdd.Image = CType(resources.GetObject("tsbAdd.Image"), System.Drawing.Image)
         Me.tsbAdd.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbAdd.Name = "tsbAdd"
         Me.tsbAdd.Size = New System.Drawing.Size(23, 22)
@@ -176,7 +175,6 @@ Partial Class frmNetMagazin
         'tsbDel
         '
         Me.tsbDel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbDel.Image = CType(resources.GetObject("tsbDel.Image"), System.Drawing.Image)
         Me.tsbDel.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbDel.Name = "tsbDel"
         Me.tsbDel.Size = New System.Drawing.Size(23, 22)

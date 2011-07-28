@@ -23,7 +23,6 @@ Partial Class frmserviceDesc
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmserviceDesc))
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.gbTree = New System.Windows.Forms.GroupBox()
         Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
@@ -119,7 +118,6 @@ Partial Class frmserviceDesc
         'btnSearch
         '
         Me.btnSearch.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.btnSearch.Image = CType(resources.GetObject("btnSearch.Image"), System.Drawing.Image)
         Me.btnSearch.Location = New System.Drawing.Point(255, 3)
         Me.btnSearch.Name = "btnSearch"
         Me.btnSearch.Size = New System.Drawing.Size(29, 24)
@@ -313,11 +311,9 @@ Partial Class frmserviceDesc
         '
         'ilsCMD
         '
-        Me.ilsCMD.ImageStream = CType(resources.GetObject("ilsCMD.ImageStream"), System.Windows.Forms.ImageListStreamer)
+        Me.ilsCMD.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit
+        Me.ilsCMD.ImageSize = New System.Drawing.Size(16, 16)
         Me.ilsCMD.TransparentColor = System.Drawing.Color.Transparent
-        Me.ilsCMD.Images.SetKeyName(0, "apply.ico")
-        Me.ilsCMD.Images.SetKeyName(1, "cnrdelete-all_.ico")
-        Me.ilsCMD.Images.SetKeyName(2, "Refresh.ico")
         '
         'ToolTip1
         '

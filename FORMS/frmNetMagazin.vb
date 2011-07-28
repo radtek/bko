@@ -76,18 +76,20 @@ Public Class frmNetMagazin
 
 
 
-        Select Case sICONS
+        'Select Case sICONS
 
 
-            Case "32*32"
+        '    Case "32*32"
 
-                lstGroups.ImageList = frmComputers.ImageList1
+        '        lstGroups.ImageList = frmComputers.ImageList11
 
-            Case Else
+        '    Case Else
 
-                lstGroups.ImageList = frmComputers.ilsCommands
+        '        lstGroups.ImageList = frmComputers.ilsCommands
 
-        End Select
+        'End Select
+
+        lstGroups.ImageList = frmComputers.ilsCommands
 
         Dim rs As ADODB.Recordset
         Dim rs2 As ADODB.Recordset
@@ -335,6 +337,10 @@ ERR1:
 
 
         SendFonts(Me)
+
+        tsbAdd.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\add.png")
+        tsbDel.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\remove.png")
+
 
         Dim objIniFile As New IniFile(PrPath & "base.ini")
         Dim uname As String

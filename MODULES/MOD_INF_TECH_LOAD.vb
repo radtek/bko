@@ -1597,6 +1597,16 @@ err_:
         On Error Resume Next
         lstGroups.Items.Clear()
 
+        If frmserviceDesc.ilsCMD.Images.Count = 0 Then
+
+
+
+            Call frmservills_load()
+
+
+        End If
+
+
 
         Dim rs As ADODB.Recordset 'Объявляем рекордсет
         Dim sSQL As String 'Переменная, где будет размещён SQL запрос
@@ -1918,25 +1928,17 @@ err_:
             rs.Open(sSQL1, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
             With rs
-
-                If Not IsDBNull(.Fields("Ploshad").Value) Then frmComputers.txtspplo.Text = .Fields("Ploshad").Value
-
-
-                If Not IsDBNull(.Fields("visota").Value) Then frmComputers.txtspvis.Text = .Fields("visota").Value
-                If Not IsDBNull(.Fields("Pl1Pk").Value) Then frmComputers.txtspPloOneEVM.Text = .Fields("Pl1Pk").Value
-                If Not IsDBNull(.Fields("ob1Pk").Value) Then frmComputers.txtspObOneEVM.Text = .Fields("ob1Pk").Value
-
-
-                If Not IsDBNull(.Fields("nalpom").Value) Then frmComputers.cmbSpRemEVM.Text = .Fields("nalpom").Value
-                If Not IsDBNull(.Fields("vent").Value) Then frmComputers.cmbSpVent.Text = .Fields("vent").Value
-                If Not IsDBNull(.Fields("voda").Value) Then frmComputers.cmbSpWater.Text = .Fields("voda").Value
-                If Not IsDBNull(.Fields("kanal").Value) Then frmComputers.cmbSpTeplo.Text = .Fields("kanal").Value
-
-                If Not IsDBNull(.Fields("teplo").Value) Then frmComputers.cmbSpKanal.Text = .Fields("teplo").Value
-                If Not IsDBNull(.Fields("otdelka").Value) Then frmComputers.txtSpWall.Text = .Fields("otdelka").Value
-                If Not IsDBNull(.Fields("mebel").Value) Then frmComputers.txtSpMebel.Text = .Fields("mebel").Value
-
-
+                frmComputers.txtspplo.Text = .Fields("Ploshad").Value
+                frmComputers.txtspvis.Text = .Fields("visota").Value
+                frmComputers.txtspPloOneEVM.Text = .Fields("Pl1Pk").Value
+                frmComputers.txtspObOneEVM.Text = .Fields("ob1Pk").Value
+                frmComputers.cmbSpRemEVM.Text = .Fields("nalpom").Value
+                frmComputers.cmbSpVent.Text = .Fields("vent").Value
+                frmComputers.cmbSpWater.Text = .Fields("voda").Value
+                frmComputers.cmbSpTeplo.Text = .Fields("kanal").Value
+                frmComputers.cmbSpKanal.Text = .Fields("teplo").Value
+                frmComputers.txtSpWall.Text = .Fields("otdelka").Value
+                frmComputers.txtSpMebel.Text = .Fields("mebel").Value
             End With
 
             rs.Close()

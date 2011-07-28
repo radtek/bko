@@ -59,17 +59,65 @@ Public Class frmComputers
         frmMain.ToolStripDropDownButton1.Enabled = False
     End Sub
 
+    Private Sub Load_ICONS()
+
+        On Error Resume Next
+
+        mnuDeltoBranch.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\delete.png")
+        DeleteBranche.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\delete.png")
+
+        addFoldertoBranch.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\fadd.png")
+        RepAddBrToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\service.png")
+        SoftInstallToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\soft.png")
+        ПаспортКомпьютераToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\pasport.png")
+        MassRazdelPerf.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\remove.png")
+        MassObedPerf.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\add.png")
+        MassUpdatetoINI.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\updatefolder.png")
+
+        DELTEdVIGToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\delete.png")
+        DeleteService.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\delete.png")
+
+        EditService.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\editservice.png")
+        MnuSendEmail.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\sendmail.png")
+        mnu_Z_to_Office.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\serviceprint.png")
+        mnu_z_rasp.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\servicerasp.png")
+
+        addRemToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\service.png")
+        'CartrAddToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\servicerasp.png")
+
+        CopyToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\copy.png")
+        UpdateToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\pcupdate.png")
+
+        DeleteToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\delete.png")
+
+        ОтделитьПринтерыИМониторыToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\remove.png")
+        ВернутьПерефериюToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\add.png")
+
+        btnSearch.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\search.png")
+        'search
+
+
+
+
+        If ilsCommands.Images.Count = 0 Then
+
+            Call Tree_Icons_Feel(ilsCommands, "sCMP", "pic\tree\")
+            'Call Tree_Icons_Feel(ImageList11, "sCMP", "pic\tree\")
+
+        End If
+
+
+    End Sub
+
+
+
     Private Sub frmComputers_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
         Me.WindowState = FormWindowState.Maximized
 
 
-        If ilsCommands.Images.Count = 0 Then
-
-            Call Tree_Icons_Feel()
-
-        End If
-
+       
+        Call Load_ICONS()
 
 
 
@@ -367,7 +415,7 @@ Error_:
     Private Sub LOAD_LIST()
         Dim langfile As New IniFile(sLANGPATH)
 
-        'selectTECMesto
+        Call selectTECMesto()
 
         Me.Cursor = Cursors.WaitCursor
 
@@ -389,9 +437,8 @@ Error_:
         Dim d() As String
         d = Split(lstGroups.SelectedNode.Tag, "|")
 
-        'Call Clear_Form_For_Computer()
 
-        Me.BeginInvoke(New MethodInvoker(AddressOf Clear_Form_For_Computer))
+        Call Clear_Form_For_Computer()
 
 
         Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG14", "") & " " & Me.lstGroups.SelectedNode.Text)
@@ -502,7 +549,7 @@ Error_:
 
 
 
-                            Call LOAD_PCL(Me.cmbBranch.Text, Me.cmbDepartment.Text, Me.cmbOffice.Text, Me.cmbPCLK)
+                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbPCLK)
 
                         Case "Printer"
 
@@ -536,8 +583,9 @@ Error_:
 
 
 
+                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbPCL)
                             'me.cmbPCL
-                            Call LOAD_PCL(cmbPRNFil.Text, cmbPRNDepart.Text, cmbPRNOffice.Text, cmbPCL)
+
                         Case "MFU"
                             CartrAddToolStripMenuItem.Visible = True
                             FillComboNET(Me.cmbPRN, "name", "SPR_MFU", "", False, True)
@@ -565,8 +613,7 @@ Error_:
                             Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
                             newThread6.Start()
 
-                            Call LOAD_PCL(cmbPRNFil.Text, cmbPRNDepart.Text, cmbPRNOffice.Text, cmbPCL)
-
+                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbPCL)
 
                         Case "KOpir"
                             CartrAddToolStripMenuItem.Visible = True
@@ -631,9 +678,7 @@ Error_:
                             newThread6.Start()
 
 
-                            Call LOAD_PCL(Me.cmbOTHFil.Text, Me.cmbOTHDepart.Text, Me.cmbOTHOffice.Text, Me.cmbOTHPCL)
-
-
+                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL)
 
 
 
@@ -774,7 +819,8 @@ Error_:
                             Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
                             newThread6.Start()
 
-                            Call LOAD_PCL(Me.cmbOTHFil.Text, Me.cmbOTHDepart.Text, Me.cmbOTHOffice.Text, Me.cmbOTHPCL)
+                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL)
+
                         Case "SCANER"
                             CartrAddToolStripMenuItem.Visible = False
                             FillComboNET(Me.cmbOTH, "name", "SPR_SCANER", "", False, True)
@@ -808,8 +854,8 @@ Error_:
                             Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
                             newThread6.Start()
 
-                            Call LOAD_PCL(Me.cmbOTHFil.Text, Me.cmbOTHDepart.Text, Me.cmbOTHOffice.Text, Me.cmbOTHPCL)
 
+                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL)
                         Case "MONITOR"
                             CartrAddToolStripMenuItem.Visible = False
                             FillComboNET(Me.cmbOTH, "Name", "SPR_MONITOR", "", False, True)
@@ -850,8 +896,8 @@ Error_:
                             Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
                             newThread6.Start()
 
-                            Call LOAD_PCL(Me.cmbOTHFil.Text, Me.cmbOTHDepart.Text, Me.cmbOTHOffice.Text, Me.cmbOTHPCL)
-                            'MsgBox("Доделать открытие мониторов")
+                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL)
+
 
                         Case "NET"
                             CartrAddToolStripMenuItem.Visible = False
@@ -899,7 +945,7 @@ Error_:
                             Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
                             newThread6.Start()
 
-                            Call LOAD_PCL(Me.cmbOTHFil.Text, Me.cmbOTHDepart.Text, Me.cmbOTHOffice.Text, Me.cmbOTHPCL)
+                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL)
 
                         Case "SOUND"
                             CartrAddToolStripMenuItem.Visible = False
@@ -933,7 +979,7 @@ Error_:
                             Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
                             newThread6.Start()
 
-                            Call LOAD_PCL(Me.cmbOTHFil.Text, Me.cmbOTHDepart.Text, Me.cmbOTHOffice.Text, Me.cmbOTHPCL)
+                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL)
 
                         Case "IBP"
                             CartrAddToolStripMenuItem.Visible = False
@@ -967,7 +1013,7 @@ Error_:
                             Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
                             newThread6.Start()
 
-                            Call LOAD_PCL(Me.cmbOTHFil.Text, Me.cmbOTHDepart.Text, Me.cmbOTHOffice.Text, Me.cmbOTHPCL)
+                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL)
 
                         Case "FS"
                             CartrAddToolStripMenuItem.Visible = False
@@ -1001,7 +1047,7 @@ Error_:
                             Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
                             newThread6.Start()
 
-                            Call LOAD_PCL(Me.cmbOTHFil.Text, Me.cmbOTHDepart.Text, Me.cmbOTHOffice.Text, Me.cmbOTHPCL)
+                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL)
 
                         Case "KEYB"
                             CartrAddToolStripMenuItem.Visible = False
@@ -1035,7 +1081,7 @@ Error_:
                             Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
                             newThread6.Start()
 
-                            Call LOAD_PCL(Me.cmbOTHFil.Text, Me.cmbOTHDepart.Text, Me.cmbOTHOffice.Text, Me.cmbOTHPCL)
+                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL)
 
                         Case "MOUSE"
                             CartrAddToolStripMenuItem.Visible = False
@@ -1069,7 +1115,7 @@ Error_:
                             Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
                             newThread6.Start()
 
-                            Call LOAD_PCL(Me.cmbOTHFil.Text, Me.cmbOTHDepart.Text, Me.cmbOTHOffice.Text, Me.cmbOTHPCL)
+                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL)
                             '--------------VIP_Graff Добавление новой перефирии Конец------------------
 
                         Case "CNT"
@@ -1108,7 +1154,7 @@ Error_:
                             Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
                             newThread6.Start()
 
-                            ' Call LOAD_PCL(Me.cmbOTHFil.Text, Me.cmbOTHDepart.Text, Me.cmbOTHOffice.Text, Me.cmbOTHPCL)
+                            ' Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL)
 
                     End Select
 
@@ -1727,6 +1773,8 @@ err_:
         frmService_add.cmbTip.Text = ""
         frmService_add.txtComent.Text = ""
         frmService_add.RemCashe.Text = 0
+        frmService_add.chkClose.Checked = False
+
 
         frmService_add.ShowDialog(frmserviceDesc)
 
@@ -1769,7 +1817,7 @@ err_:
         For z = 0 To lvList.SelectedItems.Count - 1
             rCOUNT = (lvList.SelectedItems(z).Text)
         Next
-
+        frmService_add.REMED = True
 
         'frmserviceDesc.MdiParent = frmMain
         'frmserviceDesc.Show()
@@ -2123,12 +2171,10 @@ err_:
 
                         EverestFilePatch = sTXTDIR & d(d.Length - 1)
 
-                        Me.BeginInvoke(New MethodInvoker(AddressOf Clear_Form_For_Computer))
+                        Call Clear_Form_For_Computer()
+
                         Me.BeginInvoke(New MethodInvoker(AddressOf Everest_Load))
 
-
-                        'Clear_Form_For_Computer()
-                        'Call Everest_Load()
 
                         cmbBranch.Text = sBranch
                         cmbDepartment.Text = sDepartment
@@ -5649,6 +5695,7 @@ err_:
 
 
     Private Sub EditService_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles EditService.Click
+
         LoadRepairEdit(lvServices)
     End Sub
 

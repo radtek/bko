@@ -83,10 +83,9 @@ Public Class frmMain
 
     End Sub
 
-    Private Sub frmMain_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+    Private Sub load_ICONS()
 
-        ''Меняем шрифт
-        SendFonts(Me)
+        On Error Resume Next
 
         ToolStripDropDownButton1.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\new.png")
         NewToolStripButton.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\find.png")
@@ -102,14 +101,24 @@ Public Class frmMain
         BugTrackerToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\bug.png")
         ExitToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\exit.png")
 
-        'СправочникиОборудованияToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\new.png")
-        'ОрганизацияToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\new.png")
-        'БланкиToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\new.png")
-        'ЖурналыПрограммыToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\new.png")
-        'АктытребованияToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\new.png")
-        'ИнвентаризацияToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\new.png")
-        'OptionsToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\new.png")
-        'ОбслуживаниеБДToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\new.png")
+        СправочникиОборудованияToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\direct.png")
+        ОрганизацияToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\org.png")
+        БланкиToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\blank.png")
+        ЖурналыПрограммыToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\log.png")
+        АктытребованияToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\akt.png")
+        ИнвентаризацияToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\invent.png")
+        OptionsToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\notes.png")
+        ОбслуживаниеБДToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\database.png")
+    End Sub
+
+
+
+    Private Sub frmMain_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+
+        ''Меняем шрифт
+        SendFonts(Me)
+
+        Call load_ICONS()
 
 
 
@@ -123,7 +132,8 @@ Public Class frmMain
         sText = objIniFile.GetString("general", "MOD", 0)
 
 
-        Call Tree_Icons_Feel()
+        Call Tree_Icons_Feel(frmComputers.ilsCommands, "sCMP", "pic\tree\")
+        ' Call Tree_Icons_Feel(frmComputers.ImageList11, "sCMP", "pic\tree\")
 
 
 
@@ -297,7 +307,8 @@ Public Class frmMain
         Dim senderButton As ToolStripButton = CType(sender, ToolStripButton)
         'Me.ForeColor = senderButton.ForeColor
 
-        Clear_Form_For_Computer()
+        Call Clear_Form_For_Computer()
+
         frmComputers.cmbOTH.Items.Clear()
 
         FillComboNET(frmComputers.cmbOTH, "name", "SPR_OTH_DEV", "", False, True)
@@ -983,7 +994,8 @@ err_:
         frmComputers.sSTAB4.Visible = False
         frmComputers.sSTAB5.Visible = False
         TipTehn = "PHOTO"
-        Clear_Form_For_Computer()
+        Call Clear_Form_For_Computer()
+
         frmComputers.EDT = False
 
         frmComputers.selectTECMesto()
@@ -1016,7 +1028,8 @@ err_:
         frmComputers.sSTAB4.Visible = False
         frmComputers.sSTAB5.Visible = False
         TipTehn = "FAX"
-        Clear_Form_For_Computer()
+        Call Clear_Form_For_Computer()
+
         frmComputers.EDT = False
 
         frmComputers.selectTECMesto()
@@ -1034,7 +1047,8 @@ err_:
         frmComputers.txtOTHSN.Left = "249"
         frmComputers.txtOTHSN.Width = "214"
 
-        Clear_Form_For_Computer()
+        Call Clear_Form_For_Computer()
+
         FillComboNET(frmComputers.cmbOTH, "name", "spr_phone", "", False, True)
         frmComputers.lblTipOther.Visible = False
         frmComputers.cmbOTHConnect.Visible = False
@@ -1069,7 +1083,8 @@ err_:
         frmComputers.txtOTHSN.Left = "249"
         frmComputers.txtOTHSN.Width = "214"
 
-        Clear_Form_For_Computer()
+        Call Clear_Form_For_Computer()
+
         FillComboNET(frmComputers.cmbOTH, "name", "spr_zip", "", False, True)
         frmComputers.lblTipOther.Visible = False
         frmComputers.cmbOTHConnect.Visible = False
@@ -1101,7 +1116,8 @@ err_:
         frmComputers.txtOTHSN.Left = "249"
         frmComputers.txtOTHSN.Width = "214"
 
-        Clear_Form_For_Computer()
+        Call Clear_Form_For_Computer()
+
         FillComboNET(frmComputers.cmbOTH, "name", "SPR_SCANER", "", False, True)
         frmComputers.lblTipOther.Visible = False
         frmComputers.cmbOTHConnect.Visible = False
@@ -1134,7 +1150,8 @@ err_:
 
 
 
-        Clear_Form_For_Computer()
+        Call Clear_Form_For_Computer()
+
         frmComputers.cmbOTH.Items.Clear()
 
         FillComboNET(frmComputers.cmbOTH, "name", "SPR_OTH_DEV", "", False, True)
@@ -1168,7 +1185,8 @@ err_:
     End Sub
 
     Private Sub МониторToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles МониторToolStripMenuItem.Click
-        Clear_Form_For_Computer()
+        Call Clear_Form_For_Computer()
+
         FillComboNET(frmComputers.cmbOTH, "name", "SPR_MONITOR", "", False, True)
         frmComputers.lblTipOther.Visible = False
         frmComputers.cmbOTHConnect.Visible = False
@@ -1347,7 +1365,8 @@ err_:
     End Sub
 
     Private Sub КопирToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles КопирToolStripMenuItem.Click
-        Clear_Form_For_Computer()
+        Call Clear_Form_For_Computer()
+
         frmComputers.EDT = False
         FillComboNET(frmComputers.cmbPRN, "name", "SPR_KOPIR", "", False, True)
 
@@ -1368,7 +1387,8 @@ err_:
     End Sub
 
     Private Sub ПринтерToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ПринтерToolStripMenuItem.Click
-        Clear_Form_For_Computer()
+        Call Clear_Form_For_Computer()
+
         frmComputers.EDT = False
         FillComboNET(frmComputers.cmbPRN, "name", "SPR_PRINTER", "", False, True)
 
@@ -1389,7 +1409,8 @@ err_:
     End Sub
 
     Private Sub МФУToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles МФУToolStripMenuItem.Click
-        Clear_Form_For_Computer()
+        Call Clear_Form_For_Computer()
+
 
         frmComputers.EDT = False
         FillComboNET(frmComputers.cmbPRN, "name", "SPR_MFU", "", False, True)
@@ -1788,7 +1809,7 @@ ADD:
         frmComputers.txtOTHSN.Left = "249"
         frmComputers.txtOTHSN.Width = "214"
 
-        Clear_Form_For_Computer()
+        Call Clear_Form_For_Computer()
         FillComboNET(frmComputers.cmbOTH, "name", "SPR_FS", "", False, True)
         frmComputers.lblTipOther.Visible = False
         frmComputers.cmbOTHConnect.Visible = False
@@ -1822,7 +1843,9 @@ ADD:
         frmComputers.txtOTHSN.Left = "249"
         frmComputers.txtOTHSN.Width = "214"
 
-        Clear_Form_For_Computer()
+        Call Clear_Form_For_Computer()
+
+
         FillComboNET(frmComputers.cmbOTH, "name", "SPR_IBP", "", False, True)
         frmComputers.lblTipOther.Visible = False
         frmComputers.cmbOTHConnect.Visible = False
@@ -1856,7 +1879,8 @@ ADD:
         frmComputers.txtOTHSN.Left = "249"
         frmComputers.txtOTHSN.Width = "214"
 
-        Clear_Form_For_Computer()
+        Call Clear_Form_For_Computer()
+
         FillComboNET(frmComputers.cmbOTH, "name", "SPR_ASISTEM", "", False, True)
         frmComputers.lblTipOther.Visible = False
         frmComputers.cmbOTHConnect.Visible = False
@@ -1891,7 +1915,8 @@ ADD:
         frmComputers.txtOTHSN.Left = "249"
         frmComputers.txtOTHSN.Width = "214"
 
-        Clear_Form_For_Computer()
+        Call Clear_Form_For_Computer()
+
         FillComboNET(frmComputers.cmbOTH, "name", "SPR_USB", "", False, True)
         frmComputers.lblTipOther.Visible = False
         frmComputers.cmbOTHConnect.Visible = False
@@ -1926,7 +1951,8 @@ ADD:
         frmComputers.txtOTHSN.Left = "249"
         frmComputers.txtOTHSN.Width = "214"
 
-        Clear_Form_For_Computer()
+        Call Clear_Form_For_Computer()
+
         FillComboNET(frmComputers.cmbOTH, "name", "SPR_KEYBOARD", "", False, True)
         frmComputers.lblTipOther.Visible = False
         frmComputers.cmbOTHConnect.Visible = False
@@ -1961,7 +1987,8 @@ ADD:
         frmComputers.txtOTHSN.Left = "249"
         frmComputers.txtOTHSN.Width = "214"
 
-        Clear_Form_For_Computer()
+        Call Clear_Form_For_Computer()
+
         FillComboNET(frmComputers.cmbOTH, "name", "SPR_MOUSE", "", False, True)
         frmComputers.lblTipOther.Visible = False
         frmComputers.cmbOTHConnect.Visible = False
@@ -2014,7 +2041,8 @@ ADD:
 
 
     Private Sub CNTToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CNTToolStripMenuItem.Click
-        Clear_Form_For_Computer()
+        Call Clear_Form_For_Computer()
+
         frmComputers.cmbOTH.Items.Clear()
 
         'FillComboNET(frmComputers.cmbOTH, "name", "SPR_OTH_DEV", "", False, True)
@@ -2181,4 +2209,14 @@ err_:
 
     End Sub
 
+    Private Sub ПерегрузкаСрправочниковToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ПерегрузкаСрправочниковToolStripMenuItem.Click
+        Dim newThread2 As New Thread(AddressOf LoadSPR_1)
+        newThread2.Start()
+    End Sub
+
+    Private Sub LoadSPR_1()
+
+        Me.BeginInvoke(New MethodInvoker(AddressOf LoadSPR))
+
+    End Sub
 End Class

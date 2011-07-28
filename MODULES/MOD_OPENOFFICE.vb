@@ -7278,7 +7278,7 @@ err_:
 
 
 
-        ' Dim ExcelReport As Excel.ApplicationClass
+        'Dim ExcelReport As Excel.ApplicationClass
 
 
 

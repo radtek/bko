@@ -271,21 +271,8 @@ Public Class frmDirectory
 
     Private Sub frmDirectory_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
-        Try
-            Dim dirs As String() = Directory.GetFiles(PrPath & "pic\directory\", "*.png")
 
-            Dim dir As String
-
-            For Each dir In dirs
-
-
-                Me.ilsCommands.Images.Add(Image.FromFile(dir))
-
-            Next
-        Catch e1 As Exception
-
-        End Try
-
+        Call Tree_Icons_Feel(ilsCommands, "sDIR", "pic\directory\")
 
 
         SendFonts(Me)
@@ -894,23 +881,25 @@ Public Class frmDirectory
 
                 cmbIcon.Items.Clear()
 
-                Select Case sICONS
+                'Select Case sICONS
 
-                    Case "32*32"
+                '    Case "32*32"
 
-                        For intj = 0 To frmComputers.ImageList1.Images.Count - 1
-                            cmbIcon.Items.Add(intj)
-                        Next
+                '        For intj = 0 To frmComputers.ImageList11.Images.Count - 1
+                '            cmbIcon.Items.Add(intj)
+                '        Next
 
-                    Case Else
+                '    Case Else
 
-                        For intj = 0 To frmComputers.ilsCommands.Images.Count - 1
-                            cmbIcon.Items.Add(intj)
-                        Next
+                '        For intj = 0 To frmComputers.ilsCommands.Images.Count - 1
+                '            cmbIcon.Items.Add(intj)
+                '        Next
 
-                End Select
+                'End Select
 
-
+                For intj = 0 To frmComputers.ilsCommands.Images.Count - 1
+                    cmbIcon.Items.Add(intj)
+                Next
 
 
                 Me.lvDirectory.Columns.Clear()
@@ -2777,18 +2766,19 @@ err_:
         'frmComputers.ilsCommands.ImageSize = New System.Drawing.Size(32, 32)
 
 
-        Select Case sICONS
+        'Select Case sICONS
 
-            Case "32*32"
+        '    Case "32*32"
 
-                pbOtherICO.Image = frmComputers.ImageList1.Images(s1)
-            Case Else
+        '        pbOtherICO.Image = frmComputers.ImageList11.Images(s1)
 
-                pbOtherICO.Image = frmComputers.ilsCommands.Images(s1)
+        '    Case Else
 
-        End Select
+        '        pbOtherICO.Image = frmComputers.ilsCommands.Images(s1)
 
+        'End Select
 
+        pbOtherICO.Image = frmComputers.ilsCommands.Images(s1)
 
         'frmMain.imglist_cont.ListImages(s1).Picture
     End Sub

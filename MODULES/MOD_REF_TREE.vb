@@ -127,15 +127,19 @@ Module MOD_REF_TREE
 
             Case "32*32"
 
-                lstgroups.ImageList = frmComputers.ImageList1
+                sICONS = sICONS
 
+                frmComputers.ilsCommands.ImageSize = New System.Drawing.Size(32, 32)
+                Tree_Icons_Feel(frmComputers.ilsCommands, "sCMP", "pic\tree\")
             Case Else
 
-                lstgroups.ImageList = frmComputers.ilsCommands
-
+                sICONS = "24*24"
+                frmComputers.ilsCommands.ImageSize = New System.Drawing.Size(24, 24)
+                Tree_Icons_Feel(frmComputers.ilsCommands, "sCMP", "pic\tree\")
         End Select
 
-        'lstgroups.ImageList = frmComputers.ilsCommands
+
+        lstgroups.ImageList = frmComputers.ilsCommands
 
         Dim rs As ADODB.Recordset
         Dim rs2 As ADODB.Recordset

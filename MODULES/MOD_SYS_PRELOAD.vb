@@ -56,41 +56,145 @@ Module MOD_SYS_PRELOAD
     Public sLANGPATH As String
     Public sICONS As String
 
-    Public Sub Tree_Icons_Feel()
-        Try
-            Dim dirs As String() = Directory.GetFiles(PrPath & "pic\tree\", "*.png")
+    Public Sub Tree_Icons_Feel(ByVal ills As ImageList, ByVal sFRM As String, ByVal sPATH As String)
 
-            Dim dir As String
+        On Error Resume Next
 
-            For Each dir In dirs
+        ills.Images.Clear()
 
 
-                frmComputers.ImageList1.Images.Add(Image.FromFile(dir))
-                frmComputers.ilsCommands.Images.Add(Image.FromFile(dir))
 
+        Select Case sICONS
+
+
+            Case "32*32"
+
+                frmComputers.ilsCommands.ImageSize = New System.Drawing.Size(32, 32)
+
+            Case Else
+
+                frmComputers.ilsCommands.ImageSize = New System.Drawing.Size(24, 24)
+
+        End Select
+
+
+        ills.Images.Add(Image.FromFile(PrPath & sPATH & "A1.png"))
+        ills.Images.Add(Image.FromFile(PrPath & sPATH & "A2.png"))
+        ills.Images.Add(Image.FromFile(PrPath & sPATH & "A3.png"))
+        ills.Images.Add(Image.FromFile(PrPath & sPATH & "A4.png"))
+        ills.Images.Add(Image.FromFile(PrPath & sPATH & "A5.png"))
+        ills.Images.Add(Image.FromFile(PrPath & sPATH & "A6.png"))
+        ills.Images.Add(Image.FromFile(PrPath & sPATH & "A7.png"))
+        ills.Images.Add(Image.FromFile(PrPath & sPATH & "A8.png"))
+        ills.Images.Add(Image.FromFile(PrPath & sPATH & "A9.png"))
+
+        ills.Images.Add(Image.FromFile(PrPath & sPATH & "B1.png"))
+        ills.Images.Add(Image.FromFile(PrPath & sPATH & "B2.png"))
+        ills.Images.Add(Image.FromFile(PrPath & sPATH & "B3.png"))
+        ills.Images.Add(Image.FromFile(PrPath & sPATH & "B4.png"))
+        ills.Images.Add(Image.FromFile(PrPath & sPATH & "B5.png"))
+        ills.Images.Add(Image.FromFile(PrPath & sPATH & "B6.png"))
+        ills.Images.Add(Image.FromFile(PrPath & sPATH & "B7.png"))
+        ills.Images.Add(Image.FromFile(PrPath & sPATH & "B8.png"))
+        ills.Images.Add(Image.FromFile(PrPath & sPATH & "B9.png"))
+
+        ills.Images.Add(Image.FromFile(PrPath & sPATH & "C1.png"))
+        ills.Images.Add(Image.FromFile(PrPath & sPATH & "C2.png"))
+        ills.Images.Add(Image.FromFile(PrPath & sPATH & "C3.png"))
+        ills.Images.Add(Image.FromFile(PrPath & sPATH & "C4.png"))
+        ills.Images.Add(Image.FromFile(PrPath & sPATH & "C5.png"))
+        ills.Images.Add(Image.FromFile(PrPath & sPATH & "C6.png"))
+        ills.Images.Add(Image.FromFile(PrPath & sPATH & "C7.png"))
+        ills.Images.Add(Image.FromFile(PrPath & sPATH & "C8.png"))
+        ills.Images.Add(Image.FromFile(PrPath & sPATH & "C9.png"))
+
+        ills.Images.Add(Image.FromFile(PrPath & sPATH & "D1.png"))
+        ills.Images.Add(Image.FromFile(PrPath & sPATH & "D2.png"))
+        ills.Images.Add(Image.FromFile(PrPath & sPATH & "D3.png"))
+        ills.Images.Add(Image.FromFile(PrPath & sPATH & "D4.png"))
+        ills.Images.Add(Image.FromFile(PrPath & sPATH & "D5.png"))
+        ills.Images.Add(Image.FromFile(PrPath & sPATH & "D6.png"))
+        ills.Images.Add(Image.FromFile(PrPath & sPATH & "D7.png"))
+        ills.Images.Add(Image.FromFile(PrPath & sPATH & "D8.png"))
+        ills.Images.Add(Image.FromFile(PrPath & sPATH & "D9.png"))
+
+        ills.Images.Add(Image.FromFile(PrPath & sPATH & "E1.png"))
+        ills.Images.Add(Image.FromFile(PrPath & sPATH & "E2.png"))
+        ills.Images.Add(Image.FromFile(PrPath & sPATH & "E3.png"))
+        ills.Images.Add(Image.FromFile(PrPath & sPATH & "E4.png"))
+        ills.Images.Add(Image.FromFile(PrPath & sPATH & "E5.png"))
+        ills.Images.Add(Image.FromFile(PrPath & sPATH & "E6.png"))
+        ills.Images.Add(Image.FromFile(PrPath & sPATH & "E7.png"))
+        ills.Images.Add(Image.FromFile(PrPath & sPATH & "E8.png"))
+        ills.Images.Add(Image.FromFile(PrPath & sPATH & "E9.png"))
+
+        ills.Images.Add(Image.FromFile(PrPath & sPATH & "F1.png"))
+        ills.Images.Add(Image.FromFile(PrPath & sPATH & "F2.png"))
+        ills.Images.Add(Image.FromFile(PrPath & sPATH & "F3.png"))
+        ills.Images.Add(Image.FromFile(PrPath & sPATH & "F4.png"))
+        ills.Images.Add(Image.FromFile(PrPath & sPATH & "F5.png"))
+
+        If sFRM <> "DIR" Then
+
+
+            ills.Images.Add(Image.FromFile(PrPath & sPATH & "F6.png"))
+            ills.Images.Add(Image.FromFile(PrPath & sPATH & "F7.png"))
+            ills.Images.Add(Image.FromFile(PrPath & sPATH & "F8.png"))
+            ills.Images.Add(Image.FromFile(PrPath & sPATH & "F9.png"))
+
+            ills.Images.Add(Image.FromFile(PrPath & sPATH & "G1.png"))
+            ills.Images.Add(Image.FromFile(PrPath & sPATH & "G2.png"))
+            ills.Images.Add(Image.FromFile(PrPath & sPATH & "G3.png"))
+            ills.Images.Add(Image.FromFile(PrPath & sPATH & "G4.png"))
+            ills.Images.Add(Image.FromFile(PrPath & sPATH & "G5.png"))
+            ills.Images.Add(Image.FromFile(PrPath & sPATH & "G6.png"))
+            ills.Images.Add(Image.FromFile(PrPath & sPATH & "G7.png"))
+            ills.Images.Add(Image.FromFile(PrPath & sPATH & "G8.png"))
+            ills.Images.Add(Image.FromFile(PrPath & sPATH & "G9.png"))
+
+            ills.Images.Add(Image.FromFile(PrPath & sPATH & "H1.png"))
+            ills.Images.Add(Image.FromFile(PrPath & sPATH & "H2.png"))
+            ills.Images.Add(Image.FromFile(PrPath & sPATH & "H3.png"))
+            ills.Images.Add(Image.FromFile(PrPath & sPATH & "H4.png"))
+            ills.Images.Add(Image.FromFile(PrPath & sPATH & "H5.png"))
+
+            ills.Images.Add(Image.FromFile(PrPath & sPATH & "I1.png"))
+
+        Else
+
+        End If
+
+
+        Dim allowedExtensions() As String = {".png"}
+        Dim dirFiles() As String = IO.Directory.GetFiles(PrPath & "pic\")
+
+
+        For Each dirFile As String In dirFiles
+            For Each extension As String In allowedExtensions
+                If extension = IO.Path.GetExtension(dirFile) Then
+                    ills.Images.Add(Image.FromFile(dirFile))
+                End If
             Next
-        Catch e1 As Exception
-
-        End Try
+        Next
 
 
-        Try
-            Dim dirs As String() = Directory.GetFiles(PrPath & "pic\", "*.png")
 
-            Dim dir As String
 
-            For Each dir In dirs
-
-                frmComputers.ImageList1.Images.Add(Image.FromFile(dir))
-                frmComputers.ilsCommands.Images.Add(Image.FromFile(dir))
-
-            Next
-        Catch e1 As Exception
-
-        End Try
     End Sub
 
+    Public Sub frmservills_load()
 
+
+
+        If frmserviceDesc.ilsCMD.Images.Count = 0 Then
+
+            frmserviceDesc.ilsCMD.Images.Add(Image.FromFile(PrPath & "pic\iface\ok.png"))
+            frmserviceDesc.ilsCMD.Images.Add(Image.FromFile(PrPath & "pic\iface\servnz.png"))
+            frmserviceDesc.ilsCMD.Images.Add(Image.FromFile(PrPath & "pic\iface\pcupdate.png"))
+
+        End If
+
+    End Sub
     Public Sub PreLoad()
 
         'Dim langFile As String
@@ -116,16 +220,19 @@ Module MOD_SYS_PRELOAD
 
         sICONS = objIniFile.GetString("General", "ICONs", "24*24")
 
+
         Select Case sICONS
 
             Case "32*32"
 
                 sICONS = sICONS
+
             Case Else
 
                 sICONS = "24*24"
 
         End Select
+
 
 
         Call UNAME_GET()

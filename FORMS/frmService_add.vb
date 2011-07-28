@@ -110,11 +110,10 @@
         rs.Close()
         rs = Nothing
 
-        Call REM_CHECK()
 
+        If REMFU = True Or REMED = True Then
 
-        If REMFU = True Then
-            Call LOAD_REPAIR(frmComputers.sCOUNT, frmComputers.lvRepair)
+            'Call LOAD_REPAIR(frmComputers.sCOUNT, frmComputers.lvRepair)
 
             Select Case TipTehn
 
@@ -150,6 +149,8 @@
         End If
 
 
+
+        Call REM_CHECK()
         Me.Close()
 
     End Sub

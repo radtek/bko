@@ -303,6 +303,9 @@ FoundiR:
     Private Sub frmSoftware_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
         frmComputers.OneStart = 0
+
+        btnSearch.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\search.png")
+
         Me.Cursor = Cursors.WaitCursor
         Me.Show()
 

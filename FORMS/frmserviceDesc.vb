@@ -684,6 +684,17 @@ err_1:
 
         SendFonts(Me)
 
+        If Me.ilsCMD.Images.Count = 0 Then
+
+            Call frmservills_load()
+
+        End If
+
+
+
+        btnSearch.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\search.png")
+
+
         Dim newThread1 As New Thread(AddressOf LANG_frmserviceDesk)
         newThread1.Start()
 

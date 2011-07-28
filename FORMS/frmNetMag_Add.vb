@@ -166,6 +166,15 @@
 
         SendFonts(Me)
 
+
+        'btnSearch.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\search.png")
+        ToolStripButton1.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\add.png")
+        ToolStripButton2.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\remove.png")
+
+        ToolStripButton3.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\add.png")
+        ToolStripButton4.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\remove.png")
+
+
         Call frmNetMag_Add_LANG()
 
         If sEDT = False Then

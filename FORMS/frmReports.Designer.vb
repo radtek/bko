@@ -52,7 +52,6 @@ Partial Class frmReports
         Me.chk_K8 = New System.Windows.Forms.CheckBox()
         Me.chk_K19 = New System.Windows.Forms.CheckBox()
         Me.chk_K9 = New System.Windows.Forms.CheckBox()
-        Me.chk_K18 = New System.Windows.Forms.CheckBox()
         Me.chk_K10 = New System.Windows.Forms.CheckBox()
         Me.chk_K17 = New System.Windows.Forms.CheckBox()
         Me.chk_K11 = New System.Windows.Forms.CheckBox()
@@ -60,6 +59,7 @@ Partial Class frmReports
         Me.chk_K12 = New System.Windows.Forms.CheckBox()
         Me.chk_K14 = New System.Windows.Forms.CheckBox()
         Me.chk_K13 = New System.Windows.Forms.CheckBox()
+        Me.chk_K18 = New System.Windows.Forms.CheckBox()
         Me.optOTH = New System.Windows.Forms.RadioButton()
         Me.LvKompOtd = New System.Windows.Forms.ListView()
         Me.Label7 = New System.Windows.Forms.Label()
@@ -304,7 +304,6 @@ Partial Class frmReports
         Me.TableLayoutPanel7.Controls.Add(Me.chk_K8, 0, 7)
         Me.TableLayoutPanel7.Controls.Add(Me.chk_K19, 1, 4)
         Me.TableLayoutPanel7.Controls.Add(Me.chk_K9, 0, 8)
-        Me.TableLayoutPanel7.Controls.Add(Me.chk_K18, 1, 3)
         Me.TableLayoutPanel7.Controls.Add(Me.chk_K10, 0, 9)
         Me.TableLayoutPanel7.Controls.Add(Me.chk_K17, 1, 2)
         Me.TableLayoutPanel7.Controls.Add(Me.chk_K11, 0, 10)
@@ -312,6 +311,7 @@ Partial Class frmReports
         Me.TableLayoutPanel7.Controls.Add(Me.chk_K12, 0, 11)
         Me.TableLayoutPanel7.Controls.Add(Me.chk_K14, 0, 13)
         Me.TableLayoutPanel7.Controls.Add(Me.chk_K13, 0, 12)
+        Me.TableLayoutPanel7.Controls.Add(Me.chk_K18, 1, 3)
         Me.TableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel7.Location = New System.Drawing.Point(3, 16)
         Me.TableLayoutPanel7.Name = "TableLayoutPanel7"
@@ -533,16 +533,6 @@ Partial Class frmReports
         Me.chk_K9.Text = "HDD (3)"
         Me.chk_K9.UseVisualStyleBackColor = True
         '
-        'chk_K18
-        '
-        Me.chk_K18.AutoSize = True
-        Me.chk_K18.Location = New System.Drawing.Point(135, 72)
-        Me.chk_K18.Name = "chk_K18"
-        Me.chk_K18.Size = New System.Drawing.Size(163, 17)
-        Me.chk_K18.TabIndex = 17
-        Me.chk_K18.Text = "Оптический накопитель (2)"
-        Me.chk_K18.UseVisualStyleBackColor = True
-        '
         'chk_K10
         '
         Me.chk_K10.AutoSize = True
@@ -612,6 +602,16 @@ Partial Class frmReports
         Me.chk_K13.TabIndex = 12
         Me.chk_K13.Text = "RAM (1)"
         Me.chk_K13.UseVisualStyleBackColor = True
+        '
+        'chk_K18
+        '
+        Me.chk_K18.AutoSize = True
+        Me.chk_K18.Location = New System.Drawing.Point(135, 72)
+        Me.chk_K18.Name = "chk_K18"
+        Me.chk_K18.Size = New System.Drawing.Size(163, 17)
+        Me.chk_K18.TabIndex = 17
+        Me.chk_K18.Text = "Оптический накопитель (2)"
+        Me.chk_K18.UseVisualStyleBackColor = True
         '
         'optOTH
         '

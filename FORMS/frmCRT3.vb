@@ -42,17 +42,19 @@
         DCKey = objIniFile.GetString("general", "Default", 0)
         lstGroups.Nodes.Clear()
 
-        Select Case sICONS
+        'Select Case sICONS
 
-            Case "32*32"
+        '    Case "32*32"
 
-                lstGroups.ImageList = frmComputers.ImageList1
+        '        lstGroups.ImageList = frmComputers.ImageList11
 
-            Case Else
+        '    Case Else
 
-                lstGroups.ImageList = frmComputers.ilsCommands
+        '        lstGroups.ImageList = frmComputers.ilsCommands
 
-        End Select
+        'End Select
+
+        lstGroups.ImageList = frmComputers.ilsCommands
 
 
         Dim zBranche As String
@@ -1465,6 +1467,7 @@ Error_:
     Private Sub frmCRT3_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
         SendFonts(Me)
+        btnSearch.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\search.png")
 
 
         Me.Show()

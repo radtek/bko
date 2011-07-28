@@ -164,6 +164,15 @@ Public Class frmReports
 
         lvRemont.Items.Clear()
 
+        If frmserviceDesc.ilsCMD.Images.Count = 0 Then
+
+            Call frmservills_load()
+
+        End If
+
+        lvRemont.SmallImageList = frmserviceDesc.ilsCMD
+
+
         rs = New ADODB.Recordset
         rs.Open("Select COUNT(*) as tot_num FROM Remont", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
@@ -304,6 +313,7 @@ ADR:
 
         'ListViewLoad master_otch.lvRemont, rs
         Dim intCount As Decimal = 0
+        Dim uname As Integer
         With rs
             .MoveFirst()
             Do While Not .EOF
@@ -312,7 +322,20 @@ ADR:
 
                     Case False
 
-                        lvRemont.Items.Add(.Fields("id").Value)
+
+                        'lvRemont.Items.Add(.Fields("id").Value)
+
+                        If .Fields("zakryt").Value = 1 Or .Fields("zakryt").Value = True Then
+                            uname = 0
+                        Else
+                            uname = 1
+                        End If
+
+                        Dim item As ListViewItem = lvRemont.Items.Add(.Fields("id").Value)
+                        item.ImageIndex = uname
+
+
+
                         lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("Date").Value)
                         lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("Remont").Value)
 
@@ -383,18 +406,23 @@ ADR:
 
 
 
-
-
-
-
-
-
                         intCount = intCount + 1
+
                     Case Else
+
+
 
                         If .Fields("zakryt").Value = 0 Then
 
-                            lvRemont.Items.Add(.Fields("id").Value)
+                            If .Fields("zakryt").Value = 1 Or .Fields("zakryt").Value = True Then
+                                uname = 0
+                            Else
+                                uname = 1
+                            End If
+
+                            Dim item As ListViewItem = lvRemont.Items.Add(.Fields("id").Value)
+                            item.ImageIndex = uname
+
                             lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("Date").Value)
                             lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("Remont").Value)
 
@@ -499,7 +527,16 @@ ADR2:
                         If SP >= DTP.Value Then
                             If SP <= DTPD.Value Then
 
-                                lvRemont.Items.Add(.Fields("id").Value)
+                                If .Fields("zakryt").Value = 1 Or .Fields("zakryt").Value = True Then
+                                    uname = 0
+                                Else
+                                    uname = 1
+                                End If
+
+                                Dim item As ListViewItem = lvRemont.Items.Add(.Fields("id").Value)
+                                item.ImageIndex = uname
+
+
                                 lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("Date").Value)
                                 lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("Remont").Value)
 
@@ -576,6 +613,7 @@ ADR2:
 
                     Case Else
 
+
                         If .Fields("zakryt").Value = 0 Then
                             SP = rs.Fields("Date").Value
                             PP = rs.Fields("Date").Value
@@ -585,7 +623,15 @@ ADR2:
 
                                     If .Fields("zakryt").Value = 0 Then
 
-                                        lvRemont.Items.Add(.Fields("id").Value)
+                                        If .Fields("zakryt").Value = 1 Or .Fields("zakryt").Value = True Then
+                                            uname = 0
+                                        Else
+                                            uname = 1
+                                        End If
+
+                                        Dim item As ListViewItem = lvRemont.Items.Add(.Fields("id").Value)
+                                        item.ImageIndex = uname
+
                                         lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("Date").Value)
                                         lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("Remont").Value)
 
@@ -4617,19 +4663,19 @@ err:
 
         If cmbBrancheCashe.Text = langIni.GetString("frmReports", "MSG1", "") And cmbDepartmentCashe.Text = langIni.GetString("frmReports", "MSG1", "") Then
 
-            sSQL = "SELECT * FROM kompy"
+            sSQL = "SELECT * FROM kompy where DataVVoda like '%" & cmbYearCashe.Text & "%'"
 
         End If
 
         If cmbBrancheCashe.Text <> langIni.GetString("frmReports", "MSG1", "") And cmbDepartmentCashe.Text = langIni.GetString("frmReports", "MSG1", "") Then
 
-            sSQL = "SELECT * FROM kompy where filial ='" & cmbBrancheCashe.Text & "'"
+            sSQL = "SELECT * FROM kompy where filial ='" & cmbBrancheCashe.Text & "' AND DataVVoda like '%" & cmbYearCashe.Text & "%'"
 
         End If
 
         If cmbBrancheCashe.Text <> langIni.GetString("frmReports", "MSG1", "") And cmbDepartmentCashe.Text <> langIni.GetString("frmReports", "MSG1", "") Then
 
-            sSQL = "SELECT * FROM kompy where filial ='" & cmbBrancheCashe.Text & "' AND mesto='" & cmbDepartmentCashe.Text & "'"
+            sSQL = "SELECT * FROM kompy where filial ='" & cmbBrancheCashe.Text & "' AND mesto='" & cmbDepartmentCashe.Text & "' AND DataVVoda like '%" & cmbYearCashe.Text & "%'"
 
         End If
 
@@ -4651,340 +4697,340 @@ err:
                 If Not IsDBNull(.Fields("DataVVoda").Value) Then Uname = Split(.Fields("DataVVoda").Value, ".")
 
 
-                If Uname(2) = cmbYearCashe.Text Then
+                ' If Uname(2) = cmbYearCashe.Text Then
 
-                    Select Case .Fields("tiptehn").Value
+                Select Case .Fields("tiptehn").Value
 
-                        Case "PC"
+                    Case "PC"
 
-                            lvCashe.Items.Add(langIni.GetString("frmReports", "MSG26", "") & " - " & .Fields("NET_NAME").Value)
+                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG26", "") & " - " & .Fields("NET_NAME").Value)
 
-                            If Not IsDBNull(.Fields("CenaRub").Value) Then
-                                lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
-                            Else
-                                lvCashe.Items(intj).SubItems.Add("")
-                            End If
+                        If Not IsDBNull(.Fields("CenaRub").Value) Then
+                            lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
+                        Else
+                            lvCashe.Items(intj).SubItems.Add("")
+                        End If
 
-                            If Not IsDBNull(.Fields("DataVVoda").Value) Then
-                                lvCashe.Items(intj).SubItems.Add(.Fields("DataVVoda").Value)
-                            Else
-                                lvCashe.Items(intj).SubItems.Add("")
-                            End If
+                        If Not IsDBNull(.Fields("DataVVoda").Value) Then
+                            lvCashe.Items(intj).SubItems.Add(.Fields("DataVVoda").Value)
+                        Else
+                            lvCashe.Items(intj).SubItems.Add("")
+                        End If
 
-                            lvCashe.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
-                            intj = intj + 1
+                        lvCashe.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+                        intj = intj + 1
 
-                            Uname2 = Uname2 + .Fields("CenaRub").Value
+                        Uname2 = Uname2 + .Fields("CenaRub").Value
 
-                        Case "Printer"
-                            lvCashe.Items.Add(langIni.GetString("frmReports", "MSG30", "") & " - " & .Fields("NET_NAME").Value)
+                    Case "Printer"
+                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG30", "") & " - " & .Fields("NET_NAME").Value)
 
-                            If Not IsDBNull(.Fields("CenaRub").Value) Then
-                                lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
-                            Else
-                                lvCashe.Items(intj).SubItems.Add("")
-                            End If
+                        If Not IsDBNull(.Fields("CenaRub").Value) Then
+                            lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
+                        Else
+                            lvCashe.Items(intj).SubItems.Add("")
+                        End If
 
-                            If Not IsDBNull(.Fields("DataVVoda").Value) Then
-                                lvCashe.Items(intj).SubItems.Add(.Fields("DataVVoda").Value)
-                            Else
-                                lvCashe.Items(intj).SubItems.Add("")
-                            End If
+                        If Not IsDBNull(.Fields("DataVVoda").Value) Then
+                            lvCashe.Items(intj).SubItems.Add(.Fields("DataVVoda").Value)
+                        Else
+                            lvCashe.Items(intj).SubItems.Add("")
+                        End If
 
-                            lvCashe.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
-                            intj = intj + 1
-                            Uname2 = Uname2 + .Fields("CenaRub").Value
+                        lvCashe.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+                        intj = intj + 1
+                        Uname2 = Uname2 + .Fields("CenaRub").Value
 
-                        Case "MFU"
-                            lvCashe.Items.Add(langIni.GetString("frmReports", "MSG21", "") & " - " & .Fields("NET_NAME").Value)
+                    Case "MFU"
+                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG21", "") & " - " & .Fields("NET_NAME").Value)
 
-                            If Not IsDBNull(.Fields("CenaRub").Value) Then
-                                lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
-                            Else
-                                lvCashe.Items(intj).SubItems.Add("")
-                            End If
+                        If Not IsDBNull(.Fields("CenaRub").Value) Then
+                            lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
+                        Else
+                            lvCashe.Items(intj).SubItems.Add("")
+                        End If
 
-                            If Not IsDBNull(.Fields("DataVVoda").Value) Then
-                                lvCashe.Items(intj).SubItems.Add(.Fields("DataVVoda").Value)
-                            Else
-                                lvCashe.Items(intj).SubItems.Add("")
-                            End If
+                        If Not IsDBNull(.Fields("DataVVoda").Value) Then
+                            lvCashe.Items(intj).SubItems.Add(.Fields("DataVVoda").Value)
+                        Else
+                            lvCashe.Items(intj).SubItems.Add("")
+                        End If
 
-                            lvCashe.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
-                            intj = intj + 1
+                        lvCashe.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+                        intj = intj + 1
 
-                            Uname2 = Uname2 + .Fields("CenaRub").Value
+                        Uname2 = Uname2 + .Fields("CenaRub").Value
 
-                        Case "OT"
+                    Case "OT"
 
-                            If Len(.Fields("TIP_COMPA").Value) = 0 Then
+                        If Len(.Fields("TIP_COMPA").Value) = 0 Then
 
 
-                                lvCashe.Items.Add(langIni.GetString("frmReports", "MSG25", "") & " - (" & .Fields("TIP_COMPA").Value & ") " & .Fields("NET_NAME").Value)
+                            lvCashe.Items.Add(langIni.GetString("frmReports", "MSG25", "") & " - (" & .Fields("TIP_COMPA").Value & ") " & .Fields("NET_NAME").Value)
 
-                            Else
+                        Else
 
-                                lvCashe.Items.Add(.Fields("TIP_COMPA").Value & " - " & .Fields("NET_NAME").Value)
+                            lvCashe.Items.Add(.Fields("TIP_COMPA").Value & " - " & .Fields("NET_NAME").Value)
 
-                            End If
+                        End If
 
 
-                            If Not IsDBNull(.Fields("CenaRub").Value) Then
-                                lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
-                            Else
-                                lvCashe.Items(intj).SubItems.Add("")
-                            End If
+                        If Not IsDBNull(.Fields("CenaRub").Value) Then
+                            lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
+                        Else
+                            lvCashe.Items(intj).SubItems.Add("")
+                        End If
 
-                            If Not IsDBNull(.Fields("DataVVoda").Value) Then
-                                lvCashe.Items(intj).SubItems.Add(.Fields("DataVVoda").Value)
-                            Else
-                                lvCashe.Items(intj).SubItems.Add("")
-                            End If
+                        If Not IsDBNull(.Fields("DataVVoda").Value) Then
+                            lvCashe.Items(intj).SubItems.Add(.Fields("DataVVoda").Value)
+                        Else
+                            lvCashe.Items(intj).SubItems.Add("")
+                        End If
 
-                            lvCashe.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
-                            intj = intj + 1
+                        lvCashe.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+                        intj = intj + 1
 
-                            Uname2 = Uname2 + .Fields("CenaRub").Value
+                        Uname2 = Uname2 + .Fields("CenaRub").Value
 
-                        Case "KOpir"
-                            lvCashe.Items.Add(langIni.GetString("frmReports", "MSG31", "") & " - " & .Fields("NET_NAME").Value)
+                    Case "KOpir"
+                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG31", "") & " - " & .Fields("NET_NAME").Value)
 
-                            If Not IsDBNull(.Fields("CenaRub").Value) Then
-                                lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
-                            Else
-                                lvCashe.Items(intj).SubItems.Add("")
-                            End If
-
-                            If Not IsDBNull(.Fields("DataVVoda").Value) Then
-                                lvCashe.Items(intj).SubItems.Add(.Fields("DataVVoda").Value)
-                            Else
-                                lvCashe.Items(intj).SubItems.Add("")
-                            End If
-
-                            lvCashe.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
-                            intj = intj + 1
-                            Uname2 = Uname2 + .Fields("CenaRub").Value
-
-                        Case "NET"
-                            lvCashe.Items.Add(langIni.GetString("frmReports", "MSG32", "") & " - " & .Fields("NET_NAME").Value)
-
-                            If Not IsDBNull(.Fields("CenaRub").Value) Then
-                                lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
-                            Else
-                                lvCashe.Items(intj).SubItems.Add("")
-                            End If
-
-                            If Not IsDBNull(.Fields("DataVVoda").Value) Then
-                                lvCashe.Items(intj).SubItems.Add(.Fields("DataVVoda").Value)
-                            Else
-                                lvCashe.Items(intj).SubItems.Add("")
-                            End If
-
-                            lvCashe.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
-                            intj = intj + 1
-                            Uname2 = Uname2 + .Fields("CenaRub").Value
-
-                        Case "PHOTO"
-                            lvCashe.Items.Add(langIni.GetString("frmReports", "MSG24", "") & " - " & .Fields("NET_NAME").Value)
-
-                            If Not IsDBNull(.Fields("CenaRub").Value) Then
-                                lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
-                            Else
-                                lvCashe.Items(intj).SubItems.Add("")
-                            End If
-
-                            If Not IsDBNull(.Fields("DataVVoda").Value) Then
-                                lvCashe.Items(intj).SubItems.Add(.Fields("DataVVoda").Value)
-                            Else
-                                lvCashe.Items(intj).SubItems.Add("")
-                            End If
-
-                            lvCashe.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
-                            intj = intj + 1
-                            Uname2 = Uname2 + .Fields("CenaRub").Value
-
-                        Case "PHONE"
-                            lvCashe.Items.Add(langIni.GetString("frmReports", "MSG22", "") & " - " & .Fields("NET_NAME").Value)
-
-                            If Not IsDBNull(.Fields("CenaRub").Value) Then
-                                lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
-                            Else
-                                lvCashe.Items(intj).SubItems.Add("")
-                            End If
-
-                            If Not IsDBNull(.Fields("DataVVoda").Value) Then
-                                lvCashe.Items(intj).SubItems.Add(.Fields("DataVVoda").Value)
-                            Else
-                                lvCashe.Items(intj).SubItems.Add("")
-                            End If
-
-                            lvCashe.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
-                            intj = intj + 1
-                            Uname2 = Uname2 + .Fields("CenaRub").Value
-
-                        Case "FAX"
-
-                            lvCashe.Items.Add(langIni.GetString("frmReports", "MSG23", "") & " - " & .Fields("NET_NAME").Value)
-
-                            If Not IsDBNull(.Fields("CenaRub").Value) Then
-                                lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
-                            Else
-                                lvCashe.Items(intj).SubItems.Add("")
-                            End If
-
-                            If Not IsDBNull(.Fields("DataVVoda").Value) Then
-                                lvCashe.Items(intj).SubItems.Add(.Fields("DataVVoda").Value)
-                            Else
-                                lvCashe.Items(intj).SubItems.Add("")
-                            End If
-
-                            lvCashe.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
-                            intj = intj + 1
-                            Uname2 = Uname2 + .Fields("CenaRub").Value
-
-                        Case "SCANER"
-                            lvCashe.Items.Add(langIni.GetString("frmReports", "MSG33", "") & " - " & .Fields("NET_NAME").Value)
-
-                            If Not IsDBNull(.Fields("CenaRub").Value) Then
-                                lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
-                            Else
-                                lvCashe.Items(intj).SubItems.Add("")
-                            End If
-
-                            If Not IsDBNull(.Fields("DataVVoda").Value) Then
-                                lvCashe.Items(intj).SubItems.Add(.Fields("DataVVoda").Value)
-                            Else
-                                lvCashe.Items(intj).SubItems.Add("")
-                            End If
-
-                            lvCashe.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
-                            intj = intj + 1
-                            Uname2 = Uname2 + .Fields("CenaRub").Value
-
-                        Case "ZIP"
-                            lvCashe.Items.Add(langIni.GetString("frmReports", "MSG34", "") & " - " & .Fields("NET_NAME").Value)
-
-                            If Not IsDBNull(.Fields("CenaRub").Value) Then
-                                lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
-                            Else
-                                lvCashe.Items(intj).SubItems.Add("")
-                            End If
-
-                            If Not IsDBNull(.Fields("DataVVoda").Value) Then
-                                lvCashe.Items(intj).SubItems.Add(.Fields("DataVVoda").Value)
-                            Else
-                                lvCashe.Items(intj).SubItems.Add("")
-                            End If
-
-                            lvCashe.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
-                            intj = intj + 1
-                            Uname2 = Uname2 + .Fields("CenaRub").Value
-
-
-                        Case "MONITOR"
-                            lvCashe.Items.Add(langIni.GetString("frmReports", "MSG9", "") & " - " & .Fields("NET_NAME").Value)
-
-                            If Not IsDBNull(.Fields("CenaRub").Value) Then
-                                lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
-                            Else
-                                lvCashe.Items(intj).SubItems.Add("")
-                            End If
-
-                            If Not IsDBNull(.Fields("DataVVoda").Value) Then
-                                lvCashe.Items(intj).SubItems.Add(.Fields("DataVVoda").Value)
-                            Else
-                                lvCashe.Items(intj).SubItems.Add("")
-                            End If
-
-                            lvCashe.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
-                            intj = intj + 1
-                            Uname2 = Uname2 + .Fields("CenaRub").Value
-
-
-                        Case "USB"
-
-                            lvCashe.Items.Add(langIni.GetString("frmReports", "MSG3", "") & " - " & .Fields("NET_NAME").Value)
-
-                            If Not IsDBNull(.Fields("CenaRub").Value) Then
-                                lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
-                            Else
-                                lvCashe.Items(intj).SubItems.Add("")
-                            End If
-
-                            If Not IsDBNull(.Fields("DataVVoda").Value) Then
-                                lvCashe.Items(intj).SubItems.Add(.Fields("DataVVoda").Value)
-                            Else
-                                lvCashe.Items(intj).SubItems.Add("")
-                            End If
-
-                            lvCashe.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
-                            intj = intj + 1
-                            Uname2 = Uname2 + .Fields("CenaRub").Value
-
-                        Case "SOUND"
-
-                            lvCashe.Items.Add(langIni.GetString("frmReports", "MSG35", "") & " - " & .Fields("NET_NAME").Value)
-
-                            If Not IsDBNull(.Fields("CenaRub").Value) Then
-                                lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
-                            Else
-                                lvCashe.Items(intj).SubItems.Add("")
-                            End If
-
-                            If Not IsDBNull(.Fields("DataVVoda").Value) Then
-                                lvCashe.Items(intj).SubItems.Add(.Fields("DataVVoda").Value)
-                            Else
-                                lvCashe.Items(intj).SubItems.Add("")
-                            End If
-
-                            lvCashe.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
-                            intj = intj + 1
-                            Uname2 = Uname2 + .Fields("CenaRub").Value
-
-                        Case "IBP"
-
-                            lvCashe.Items.Add(langIni.GetString("frmReports", "MSG36", "") & " - " & .Fields("NET_NAME").Value)
-
-                            If Not IsDBNull(.Fields("CenaRub").Value) Then
-                                lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
-                            Else
-                                lvCashe.Items(intj).SubItems.Add("")
-                            End If
-
-                            If Not IsDBNull(.Fields("DataVVoda").Value) Then
-                                lvCashe.Items(intj).SubItems.Add(.Fields("DataVVoda").Value)
-                            Else
-                                lvCashe.Items(intj).SubItems.Add("")
-                            End If
-
-                            lvCashe.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
-                            intj = intj + 1
-                            Uname2 = Uname2 + .Fields("CenaRub").Value
-
-                        Case "FS"
-
-                            lvCashe.Items.Add(langIni.GetString("frmReports", "MSG37", "") & " - " & .Fields("NET_NAME").Value)
-
-                            If Not IsDBNull(.Fields("CenaRub").Value) Then
-                                lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
-                            Else
-                                lvCashe.Items(intj).SubItems.Add("")
-                            End If
-
-                            If Not IsDBNull(.Fields("DataVVoda").Value) Then
-                                lvCashe.Items(intj).SubItems.Add(.Fields("DataVVoda").Value)
-                            Else
-                                lvCashe.Items(intj).SubItems.Add("")
-                            End If
-
-                            lvCashe.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
-                            intj = intj + 1
-                            Uname2 = Uname2 + .Fields("CenaRub").Value
-
-
-                    End Select
-
-                End If
+                        If Not IsDBNull(.Fields("CenaRub").Value) Then
+                            lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
+                        Else
+                            lvCashe.Items(intj).SubItems.Add("")
+                        End If
+
+                        If Not IsDBNull(.Fields("DataVVoda").Value) Then
+                            lvCashe.Items(intj).SubItems.Add(.Fields("DataVVoda").Value)
+                        Else
+                            lvCashe.Items(intj).SubItems.Add("")
+                        End If
+
+                        lvCashe.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+                        intj = intj + 1
+                        Uname2 = Uname2 + .Fields("CenaRub").Value
+
+                    Case "NET"
+                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG32", "") & " - " & .Fields("NET_NAME").Value)
+
+                        If Not IsDBNull(.Fields("CenaRub").Value) Then
+                            lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
+                        Else
+                            lvCashe.Items(intj).SubItems.Add("")
+                        End If
+
+                        If Not IsDBNull(.Fields("DataVVoda").Value) Then
+                            lvCashe.Items(intj).SubItems.Add(.Fields("DataVVoda").Value)
+                        Else
+                            lvCashe.Items(intj).SubItems.Add("")
+                        End If
+
+                        lvCashe.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+                        intj = intj + 1
+                        Uname2 = Uname2 + .Fields("CenaRub").Value
+
+                    Case "PHOTO"
+                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG24", "") & " - " & .Fields("NET_NAME").Value)
+
+                        If Not IsDBNull(.Fields("CenaRub").Value) Then
+                            lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
+                        Else
+                            lvCashe.Items(intj).SubItems.Add("")
+                        End If
+
+                        If Not IsDBNull(.Fields("DataVVoda").Value) Then
+                            lvCashe.Items(intj).SubItems.Add(.Fields("DataVVoda").Value)
+                        Else
+                            lvCashe.Items(intj).SubItems.Add("")
+                        End If
+
+                        lvCashe.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+                        intj = intj + 1
+                        Uname2 = Uname2 + .Fields("CenaRub").Value
+
+                    Case "PHONE"
+                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG22", "") & " - " & .Fields("NET_NAME").Value)
+
+                        If Not IsDBNull(.Fields("CenaRub").Value) Then
+                            lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
+                        Else
+                            lvCashe.Items(intj).SubItems.Add("")
+                        End If
+
+                        If Not IsDBNull(.Fields("DataVVoda").Value) Then
+                            lvCashe.Items(intj).SubItems.Add(.Fields("DataVVoda").Value)
+                        Else
+                            lvCashe.Items(intj).SubItems.Add("")
+                        End If
+
+                        lvCashe.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+                        intj = intj + 1
+                        Uname2 = Uname2 + .Fields("CenaRub").Value
+
+                    Case "FAX"
+
+                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG23", "") & " - " & .Fields("NET_NAME").Value)
+
+                        If Not IsDBNull(.Fields("CenaRub").Value) Then
+                            lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
+                        Else
+                            lvCashe.Items(intj).SubItems.Add("")
+                        End If
+
+                        If Not IsDBNull(.Fields("DataVVoda").Value) Then
+                            lvCashe.Items(intj).SubItems.Add(.Fields("DataVVoda").Value)
+                        Else
+                            lvCashe.Items(intj).SubItems.Add("")
+                        End If
+
+                        lvCashe.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+                        intj = intj + 1
+                        Uname2 = Uname2 + .Fields("CenaRub").Value
+
+                    Case "SCANER"
+                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG33", "") & " - " & .Fields("NET_NAME").Value)
+
+                        If Not IsDBNull(.Fields("CenaRub").Value) Then
+                            lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
+                        Else
+                            lvCashe.Items(intj).SubItems.Add("")
+                        End If
+
+                        If Not IsDBNull(.Fields("DataVVoda").Value) Then
+                            lvCashe.Items(intj).SubItems.Add(.Fields("DataVVoda").Value)
+                        Else
+                            lvCashe.Items(intj).SubItems.Add("")
+                        End If
+
+                        lvCashe.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+                        intj = intj + 1
+                        Uname2 = Uname2 + .Fields("CenaRub").Value
+
+                    Case "ZIP"
+                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG34", "") & " - " & .Fields("NET_NAME").Value)
+
+                        If Not IsDBNull(.Fields("CenaRub").Value) Then
+                            lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
+                        Else
+                            lvCashe.Items(intj).SubItems.Add("")
+                        End If
+
+                        If Not IsDBNull(.Fields("DataVVoda").Value) Then
+                            lvCashe.Items(intj).SubItems.Add(.Fields("DataVVoda").Value)
+                        Else
+                            lvCashe.Items(intj).SubItems.Add("")
+                        End If
+
+                        lvCashe.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+                        intj = intj + 1
+                        Uname2 = Uname2 + .Fields("CenaRub").Value
+
+
+                    Case "MONITOR"
+                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG9", "") & " - " & .Fields("NET_NAME").Value)
+
+                        If Not IsDBNull(.Fields("CenaRub").Value) Then
+                            lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
+                        Else
+                            lvCashe.Items(intj).SubItems.Add("")
+                        End If
+
+                        If Not IsDBNull(.Fields("DataVVoda").Value) Then
+                            lvCashe.Items(intj).SubItems.Add(.Fields("DataVVoda").Value)
+                        Else
+                            lvCashe.Items(intj).SubItems.Add("")
+                        End If
+
+                        lvCashe.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+                        intj = intj + 1
+                        Uname2 = Uname2 + .Fields("CenaRub").Value
+
+
+                    Case "USB"
+
+                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG3", "") & " - " & .Fields("NET_NAME").Value)
+
+                        If Not IsDBNull(.Fields("CenaRub").Value) Then
+                            lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
+                        Else
+                            lvCashe.Items(intj).SubItems.Add("")
+                        End If
+
+                        If Not IsDBNull(.Fields("DataVVoda").Value) Then
+                            lvCashe.Items(intj).SubItems.Add(.Fields("DataVVoda").Value)
+                        Else
+                            lvCashe.Items(intj).SubItems.Add("")
+                        End If
+
+                        lvCashe.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+                        intj = intj + 1
+                        Uname2 = Uname2 + .Fields("CenaRub").Value
+
+                    Case "SOUND"
+
+                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG35", "") & " - " & .Fields("NET_NAME").Value)
+
+                        If Not IsDBNull(.Fields("CenaRub").Value) Then
+                            lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
+                        Else
+                            lvCashe.Items(intj).SubItems.Add("")
+                        End If
+
+                        If Not IsDBNull(.Fields("DataVVoda").Value) Then
+                            lvCashe.Items(intj).SubItems.Add(.Fields("DataVVoda").Value)
+                        Else
+                            lvCashe.Items(intj).SubItems.Add("")
+                        End If
+
+                        lvCashe.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+                        intj = intj + 1
+                        Uname2 = Uname2 + .Fields("CenaRub").Value
+
+                    Case "IBP"
+
+                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG36", "") & " - " & .Fields("NET_NAME").Value)
+
+                        If Not IsDBNull(.Fields("CenaRub").Value) Then
+                            lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
+                        Else
+                            lvCashe.Items(intj).SubItems.Add("")
+                        End If
+
+                        If Not IsDBNull(.Fields("DataVVoda").Value) Then
+                            lvCashe.Items(intj).SubItems.Add(.Fields("DataVVoda").Value)
+                        Else
+                            lvCashe.Items(intj).SubItems.Add("")
+                        End If
+
+                        lvCashe.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+                        intj = intj + 1
+                        Uname2 = Uname2 + .Fields("CenaRub").Value
+
+                    Case "FS"
+
+                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG37", "") & " - " & .Fields("NET_NAME").Value)
+
+                        If Not IsDBNull(.Fields("CenaRub").Value) Then
+                            lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
+                        Else
+                            lvCashe.Items(intj).SubItems.Add("")
+                        End If
+
+                        If Not IsDBNull(.Fields("DataVVoda").Value) Then
+                            lvCashe.Items(intj).SubItems.Add(.Fields("DataVVoda").Value)
+                        Else
+                            lvCashe.Items(intj).SubItems.Add("")
+                        End If
+
+                        lvCashe.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+                        intj = intj + 1
+                        Uname2 = Uname2 + .Fields("CenaRub").Value
+
+
+                End Select
+
+                ' End If
 
                 .MoveNext()
                 'DoEvents
