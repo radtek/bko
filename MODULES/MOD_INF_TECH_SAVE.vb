@@ -3694,9 +3694,9 @@ Error_:
 
     End Function
 
-    Public Sub NotesEditAdd(ByVal btAdd As Button, ByVal lvsNotes As ListView, ByVal NotesMaster As ComboBox, ByVal textNotes As TextBox, ByVal DateNotes As DateTimePicker, ByVal txtSNAME As String, ByVal Branch As ComboBox, ByVal Department As ComboBox)
+    Public Sub NotesEditAdd(ByVal btAdd As Button, ByVal lvsNotes As ListView, ByVal NotesMaster As ComboBox, ByVal textNotes As TextBox, ByVal DateNotes As DateTimePicker, ByVal txtSNAME As String, ByVal Branch As ComboBox, ByVal Department As ComboBox, ByVal Office As ComboBox)
 
-        If Len(textNotes) = 0 Then Exit Sub
+        If Len(textNotes.Text) = 0 Then Exit Sub
 
         Dim sSQL As String
         Dim langfile As New IniFile(sLANGPATH)
@@ -3719,6 +3719,8 @@ Error_:
         rs = New ADODB.Recordset
         rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
+        Dim uname As String
+
         With rs
 
             If btAdd.Text = langfile.GetString("frmComputers", "MSG42", "") Then
@@ -3735,7 +3737,22 @@ Error_:
             .Fields("Id_Comp").Value = frmComputers.sCOUNT
 
             .Fields("Comp_name").Value = txtSNAME
-            .Fields("Mesto_Compa").Value = Branch.Text & "/" & Department.Text
+
+            uname = Branch.Text
+
+            If Len(Department.Text) <> 0 Then
+
+                uname = uname & "/" & Department.Text
+
+            End If
+
+            If Len(Office.Text) <> 0 Then
+
+                uname = uname & "/" & Office.Text
+
+            End If
+
+            .Fields("Mesto_Compa").Value = uname
 
             .Update()
         End With

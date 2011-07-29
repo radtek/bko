@@ -77,6 +77,9 @@ Module MOD_SYS_PRELOAD
 
         End Select
 
+        If sFRM <> "DIR" Then
+            ills.Images.Add(Image.FromFile(PrPath & sPATH & "A0.png"))
+        End If
 
         ills.Images.Add(Image.FromFile(PrPath & sPATH & "A1.png"))
         ills.Images.Add(Image.FromFile(PrPath & sPATH & "A2.png"))
@@ -133,14 +136,15 @@ Module MOD_SYS_PRELOAD
         ills.Images.Add(Image.FromFile(PrPath & sPATH & "F3.png"))
         ills.Images.Add(Image.FromFile(PrPath & sPATH & "F4.png"))
         ills.Images.Add(Image.FromFile(PrPath & sPATH & "F5.png"))
+        ills.Images.Add(Image.FromFile(PrPath & sPATH & "F6.png"))
+        ills.Images.Add(Image.FromFile(PrPath & sPATH & "F7.png"))
+        ills.Images.Add(Image.FromFile(PrPath & sPATH & "F8.png"))
+        ills.Images.Add(Image.FromFile(PrPath & sPATH & "F9.png"))
 
         If sFRM <> "DIR" Then
 
 
-            ills.Images.Add(Image.FromFile(PrPath & sPATH & "F6.png"))
-            ills.Images.Add(Image.FromFile(PrPath & sPATH & "F7.png"))
-            ills.Images.Add(Image.FromFile(PrPath & sPATH & "F8.png"))
-            ills.Images.Add(Image.FromFile(PrPath & sPATH & "F9.png"))
+            
 
             ills.Images.Add(Image.FromFile(PrPath & sPATH & "G1.png"))
             ills.Images.Add(Image.FromFile(PrPath & sPATH & "G2.png"))

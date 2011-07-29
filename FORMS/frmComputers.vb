@@ -3691,7 +3691,7 @@ lvRepair.Columns(e.Column)
     Private Sub btnNotesAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNotesAdd.Click
         Dim sStr As String = txtSNAME.Text
 
-        NotesEditAdd(btnNotesAdd, lvNotes, cmbNotesMaster, txtNotes, dtDateNotes, sStr, cmbBranch, cmbDepartment)
+        NotesEditAdd(btnNotesAdd, lvNotes, cmbNotesMaster, txtNotes, dtDateNotes, sStr, cmbBranch, cmbDepartment, cmbOffice)
 
     End Sub
 
@@ -3790,7 +3790,7 @@ lvNotes.Columns(e.Column)
 
     Private Sub btnPRNNotesAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPRNNotesAdd.Click
         Dim sStr As String = cmbPRN.Text
-        NotesEditAdd(btnPRNNotesAdd, lvNotesPRN, cmbNotesPRNMaster, NotesPRNtxt, NotesPRNdate, sStr, cmbPRNFil, cmbPRNDepart)
+        NotesEditAdd(btnPRNNotesAdd, lvNotesPRN, cmbNotesPRNMaster, NotesPRNtxt, NotesPRNdate, sStr, cmbPRNFil, cmbPRNDepart, cmbPRNOffice)
     End Sub
 
     Private Sub btnPRNNotesDel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPRNNotesDel.Click
@@ -3890,7 +3890,7 @@ lvNotes.Columns(e.Column)
     Private Sub btnNETAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNETAdd.Click
         Dim sStr As String = cmbDevNet.Text
 
-        NotesEditAdd(btnNETAdd, lvNotesNET, cmbNotesNETMaster, NotesNETtxt, NotesNETdate, sStr, cmbNETBranch, cmbNetDepart)
+        NotesEditAdd(btnNETAdd, lvNotesNET, cmbNotesNETMaster, NotesNETtxt, NotesNETdate, sStr, cmbNETBranch, cmbNetDepart, cmbNETOffice)
     End Sub
 
     Private Sub btnNETNotesDel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNETNotesDel.Click
@@ -3981,7 +3981,7 @@ lvNotes.Columns(e.Column)
     Private Sub btnOTHAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOTHAdd.Click
         Dim sStr As String = cmbOTH.Text
 
-        NotesEditAdd(btnOTHAdd, lvNotesOTH, cmbNotesOTHMaster, txtNotesOTH, NotesOTHdate, sStr, cmbOTHFil, cmbOTHDepart)
+        NotesEditAdd(btnOTHAdd, lvNotesOTH, cmbNotesOTHMaster, txtNotesOTH, NotesOTHdate, sStr, cmbOTHFil, cmbOTHDepart, cmbOTHOffice)
 
     End Sub
 
