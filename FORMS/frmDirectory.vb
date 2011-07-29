@@ -156,7 +156,7 @@ Public Class frmDirectory
 
         '#############################################################
 
-        'Создаем группу в дереве
+        'народонаселение
         Dim TempNode3 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG35", ""), 34, 34)
         TempNode3.Tag = "G|" & GENID()
         nodeRoot.Nodes.Add(TempNode3)
@@ -175,8 +175,8 @@ Public Class frmDirectory
         TempNode3.Nodes.Add(TEHNode57)
 
 
-        'Создаем группу в дереве
-        Dim TempNode4 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG38", ""), 36, 36)
+        'Структура
+        Dim TempNode4 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG38", ""), 50, 50)
         TempNode4.Tag = "G|" & GENID()
         nodeRoot.Nodes.Add(TempNode4)
 
@@ -193,20 +193,20 @@ Public Class frmDirectory
         TempNode4.Nodes.Add(TEHNode32)
 
         '#############################################################
-        'Создаем группу в дереве
+        'Заявки
         Dim TempNode5 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG42", ""), 39, 39)
         TempNode5.Tag = "G|" & GENID()
         nodeRoot.Nodes.Add(TempNode5)
 
-        Dim TEHNode33 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG43", ""), 40, 40)
+        Dim TEHNode33 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG43", ""), 51, 51)
         TEHNode33.Tag = "C|" & GENID()
         TempNode5.Nodes.Add(TEHNode33)
 
-        Dim TEHNode34 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG44", ""), 40, 40)
+        Dim TEHNode34 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG44", ""), 52, 52)
         TEHNode34.Tag = "C|" & GENID()
         TempNode5.Nodes.Add(TEHNode34)
 
-        Dim TEHNode35 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG45", ""), 40, 40)
+        Dim TEHNode35 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG45", ""), 53, 53)
         TEHNode35.Tag = "C|" & GENID()
         TempNode5.Nodes.Add(TEHNode35)
 
