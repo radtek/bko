@@ -71,7 +71,6 @@
 
     Public Sub Clear_Form_For_Computer()
 
-
         ClearForm(frmComputers)
 
         Exit Sub

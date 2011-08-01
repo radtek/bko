@@ -4,9 +4,14 @@
     Public REMED As Boolean
 
     Private Sub cmbAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbAdd.Click
+        On Error Resume Next
+
         Dim sSQL As String
         Dim unamZ As String
+        Dim sCOUNTER As String
         Dim objIniFile As New IniFile(sLANGPATH)
+
+        Dim rs As ADODB.Recordset
 
         If Not (RSExists("otv", "name", Trim(cmbIst.Text))) Then
             AddOnePar(cmbIst.Text, "NAME", "SPR_OTV", cmbIst)
@@ -16,22 +21,50 @@
 
             Case "C"
 
-                Dim rs1 As ADODB.Recordset
-                rs1 = New ADODB.Recordset
-                sSQL = "SELECT filial, mesto, net_name FROM kompy WHERE id=" & frmComputers.sCOUNT
-                rs1.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+               
+                rs = New ADODB.Recordset
+                sSQL = "SELECT filial, mesto, net_name,kabn FROM kompy WHERE id=" & frmComputers.sCOUNT
+                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
-                With rs1
-                    unamZ = .Fields("filial").Value & "/" & .Fields("mesto").Value
+                With rs
+
+                    unamZ = .Fields("filial").Value
+
+                    If Len(.Fields("mesto").Value) <> 0 Then
+
+                        unamZ = unamZ & "/" & .Fields("mesto").Value
+
+                    End If
+
+                    If Len(.Fields("kabn").Value) <> 0 Then
+
+                        unamZ = unamZ & "/" & .Fields("kabn").Value
+
+                    End If
+
+
                     frmserviceDesc.rtxtC = .Fields("net_name").Value
                 End With
 
-                rs1.Close()
-                rs1 = Nothing
+                rs.Close()
+                rs = Nothing
+
+
+
 
         End Select
 
-        Dim rs As ADODB.Recordset
+
+        rs = New ADODB.Recordset
+        sSQL = "SELECT count(*) as t_n FROM Remont WHERE Id_Comp=" & frmComputers.sCOUNT & " AND PREF='" & frmComputers.sPREF & "'"
+        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+        With rs
+            sCOUNTER = .Fields("t_n").Value
+        End With
+
+        rs.Close()
+        rs = Nothing
 
 
         If cmbAdd.Text = objIniFile.GetString("frmService_add", "MSG1", "") Then
@@ -56,7 +89,7 @@
 
                 .Fields("PREF").Value = frmComputers.sPREF
                 .Fields("Id_Comp").Value = frmComputers.sCOUNT
-                .Fields("NomerRemKomp").Value = frmserviceDesc.lvRem.Items.Count + 1
+                .Fields("NomerRemKomp").Value = sCOUNTER + 1
                 .Fields("starttime").Value = strTime 'Физическое нажатие начала ремонта
                 .Fields("startdate").Value = Date.Today 'Физическое нажатие начала ремонта
                 .Fields("Id_Comp").Value = frmComputers.sCOUNT
@@ -115,31 +148,43 @@
 
             'Call LOAD_REPAIR(frmComputers.sCOUNT, frmComputers.lvRepair)
 
-            Select Case TipTehn
 
-                Case "PC"
-                    frmComputers.sSTAB1.SelectedTab = frmComputers.sSTAB1.TabPages("TabPage7")
-                    LOAD_REPAIR(frmComputers.sCOUNT, frmComputers.lvRepair)
+            Select frmComputers.sPREF
 
-                Case "NET"
+                Case "C"
 
-                    LOAD_REPAIR(frmComputers.sCOUNT, frmComputers.lvRepairNET)
+                    Select Case TipTehn
 
-                Case "Printer"
+                        Case "PC"
+                            frmComputers.sSTAB1.SelectedTab = frmComputers.sSTAB1.TabPages("TabPage7")
+                            LOAD_REPAIR(frmComputers.sCOUNT, frmComputers.lvRepair)
 
-                    LOAD_REPAIR(frmComputers.sCOUNT, frmComputers.lvRepairPRN)
+                        Case "NET"
 
-                Case "KOpir"
+                            LOAD_REPAIR(frmComputers.sCOUNT, frmComputers.lvRepairNET)
 
-                    LOAD_REPAIR(frmComputers.sCOUNT, frmComputers.lvRepairPRN)
+                        Case "Printer"
 
-                Case "OT"
+                            LOAD_REPAIR(frmComputers.sCOUNT, frmComputers.lvRepairPRN)
 
-                    LOAD_REPAIR(frmComputers.sCOUNT, frmComputers.lvRepairOTH)
+                        Case "KOpir"
+
+                            LOAD_REPAIR(frmComputers.sCOUNT, frmComputers.lvRepairPRN)
+
+                        Case "OT"
+
+                            LOAD_REPAIR(frmComputers.sCOUNT, frmComputers.lvRepairOTH)
+
+                        Case Else
+
+                            LOAD_REPAIR(frmComputers.sCOUNT, frmComputers.lvRepairOTH)
+
+                    End Select
+
 
                 Case Else
 
-                    LOAD_REPAIR(frmComputers.sCOUNT, frmComputers.lvRepairOTH)
+                    Call LOAD_REPAIR(frmComputers.sCOUNT, frmComputers.lvRepairBR)
 
             End Select
 
@@ -149,6 +194,8 @@
         End If
 
 
+        REMFU = False
+        REMED = False
 
         Call REM_CHECK()
         Me.Close()

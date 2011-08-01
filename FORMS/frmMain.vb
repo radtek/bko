@@ -1479,6 +1479,8 @@ err_:
 
     Private Sub SaveInfTehButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SaveInfTehButton.Click
         Me.Cursor = Cursors.WaitCursor
+        On Error Resume Next
+
 
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
@@ -1781,6 +1783,14 @@ ADD:
         frmComputers.sSTAB4.Visible = False
         frmComputers.sSTAB5.Visible = False
         Call Clear_Form_For_Computer()
+
+        Call frmComputers.selectTECMesto()
+
+        frmComputers.cmbBranch.Text = sBranch
+        frmComputers.cmbDepartment.Text = sDepartment
+        frmComputers.cmbOffice.Text = sOffice
+
+
         frmComputers.EDT = False
         TipTehn = "PC"
 

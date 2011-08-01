@@ -7,7 +7,6 @@ Module Mod_Load_SPR
         'frmComputers.Cursor = Cursors.WaitCursor
         ClearCMB(frmComputers)
 
-
         frmComputers.cmbPRNConnect.Items.Add("BlueTouch")
         frmComputers.cmbPRNConnect.Items.Add("LPT")
         frmComputers.cmbPRNConnect.Items.Add("NetWork")
@@ -79,18 +78,7 @@ Module Mod_Load_SPR
         frmComputers.PROizV42.Items.AddRange(obj)
         frmComputers.PROizV43.Items.AddRange(obj)
 
-
-        frmComputers.cmbSpRemEVM.Items.Add("Да")
-        frmComputers.cmbSpRemEVM.Items.Add("Нет")
-        Dim obj77 As Object() = New Object(frmComputers.cmbSpRemEVM.Items.Count - 1) {}
-        frmComputers.cmbSpRemEVM.Items.CopyTo(obj77, 0)
-
-        frmComputers.cmbSpVent.Items.AddRange(obj77)
-        frmComputers.cmbSpTeplo.Items.AddRange(obj77)
-        frmComputers.cmbSpWater.Items.AddRange(obj77)
-        frmComputers.cmbSpKanal.Items.AddRange(obj77)
-
-
+        
 
         FillComboNET(frmComputers.cmbPostav, "Name", "SPR_Postav", "", False, True)
 

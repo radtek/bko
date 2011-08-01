@@ -63,7 +63,7 @@
         End Select
 
 
-        Dim nodeRoot As New TreeNode(ProGramName, 0, 0)
+        Dim nodeRoot As New TreeNode(ProGramName, 69, 69)
         nodeRoot.Tag = "ROOT" & GENID()
 
         lstGroups.Nodes.Add(nodeRoot)
@@ -148,61 +148,122 @@ Foundit:
 
                             End Select
 
-                            Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, iA, iA)
-                            TEHNode.Tag = "C|" & .Fields(0).Value
-                            TempNode.Nodes.Add(TEHNode)
+                            'Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, iA, iA)
+                            'TEHNode.Tag = "C|" & .Fields(0).Value
+                            'TempNode.Nodes.Add(TEHNode)
+
+                            'If .Fields("balans").Value = "1" Or .Fields("balans").Value = "True" Or .Fields("balans").Value = "-1" Then
+
+                            '    If .Fields("Spisan").Value = "1" Or .Fields("Spisan").Value = "True" Or .Fields("Spisan").Value = "-1" Then
+                            '        TEHNode.NodeFont = New Font(lstGroups.Font, 10)
+                            '    Else
+                            '        TEHNode.NodeFont = New Font(lstGroups.Font, 2)
+                            '    End If
+
+                            'End If
+
+                            Filling_TREE_DATA(lstGroups, .Fields("id").Value, TempNode, .Fields("Spisan").Value, .Fields("balans").Value, .Fields("NET_NAME").Value, iA)
+
 
                         Case "Printer"
-                            Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 7, 7)
-                            TEHNode.Tag = "C|" & .Fields(0).Value
-                            TempNode.Nodes.Add(TEHNode)
+                            'Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 7, 7)
+                            'TEHNode.Tag = "C|" & .Fields(0).Value
+                            'TempNode.Nodes.Add(TEHNode)
+
+                            Filling_TREE_DATA(lstGroups, .Fields("id").Value, TempNode, .Fields("Spisan").Value, .Fields("balans").Value, .Fields("NET_NAME").Value, 7)
 
                         Case "MFU"
 
-                            Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 8, 8)
-                            TEHNode.Tag = "C|" & .Fields(0).Value
-                            TempNode.Nodes.Add(TEHNode)
+                            'Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 8, 8)
+                            'TEHNode.Tag = "C|" & .Fields(0).Value
+                            'TempNode.Nodes.Add(TEHNode)
+
+                            Filling_TREE_DATA(lstGroups, .Fields("id").Value, TempNode, .Fields("Spisan").Value, .Fields("balans").Value, .Fields("NET_NAME").Value, 8)
 
                         Case "KOpir"
-                            Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 9, 9)
-                            TEHNode.Tag = "C|" & .Fields(0).Value
-                            TempNode.Nodes.Add(TEHNode)
+                            'Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 9, 9)
+                            'TEHNode.Tag = "C|" & .Fields(0).Value
+                            'TempNode.Nodes.Add(TEHNode)
+
+                            Filling_TREE_DATA(lstGroups, .Fields("id").Value, TempNode, .Fields("Spisan").Value, .Fields("balans").Value, .Fields("NET_NAME").Value, 9)
 
                         Case "NET"
                             Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 10, 10)
                             TEHNode.Tag = "C|" & .Fields(0).Value
                             TempNode.Nodes.Add(TEHNode)
 
+                            Select Case .Fields("PRINTER_NAME_4").Value
+
+                                Case "Off"
+                                    TEHNode.ForeColor = Color.Red
+
+                                Case "Defective"
+
+                                    TEHNode.ForeColor = Color.Blue
+
+                                Case Else
+
+                                    TEHNode.ForeColor = Color.Green
+
+                            End Select
+
+
+
+                            If .Fields("balans").Value = "1" Or .Fields("balans").Value = "True" Or .Fields("balans").Value = "-1" Then
+
+                                If .Fields("Spisan").Value = "1" Or .Fields("Spisan").Value = "True" Or .Fields("Spisan").Value = "-1" Then
+                                    TEHNode.NodeFont = New Font(lstGroups.Font, 10)
+                                Else
+                                    TEHNode.NodeFont = New Font(lstGroups.Font, 2)
+                                End If
+
+                            End If
+
+
+
                         Case "PHOTO"
-                            Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 11, 11)
-                            TEHNode.Tag = "C|" & .Fields(0).Value
-                            TempNode.Nodes.Add(TEHNode)
+                            'Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 11, 11)
+                            'TEHNode.Tag = "C|" & .Fields(0).Value
+                            'TempNode.Nodes.Add(TEHNode)
+
+                            Filling_TREE_DATA(lstGroups, .Fields("id").Value, TempNode, .Fields("Spisan").Value, .Fields("balans").Value, .Fields("NET_NAME").Value, 11)
 
                         Case "PHONE"
-                            Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 12, 12)
-                            TEHNode.Tag = "C|" & .Fields(0).Value
-                            TempNode.Nodes.Add(TEHNode)
+                            'Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 12, 12)
+                            'TEHNode.Tag = "C|" & .Fields(0).Value
+                            'TempNode.Nodes.Add(TEHNode)
+
+                            Filling_TREE_DATA(lstGroups, .Fields("id").Value, TempNode, .Fields("Spisan").Value, .Fields("balans").Value, .Fields("NET_NAME").Value, 12)
 
                         Case "FAX"
-                            Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 13, 13)
-                            TEHNode.Tag = "C|" & .Fields(0).Value
-                            TempNode.Nodes.Add(TEHNode)
+                            'Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 13, 13)
+                            'TEHNode.Tag = "C|" & .Fields(0).Value
+                            'TempNode.Nodes.Add(TEHNode)
+
+                            Filling_TREE_DATA(lstGroups, .Fields("id").Value, TempNode, .Fields("Spisan").Value, .Fields("balans").Value, .Fields("NET_NAME").Value, 13)
+
                         Case "SCANER"
 
-                            Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 14, 14)
-                            TEHNode.Tag = "C|" & .Fields(0).Value
-                            TempNode.Nodes.Add(TEHNode)
+                            'Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 14, 14)
+                            'TEHNode.Tag = "C|" & .Fields(0).Value
+                            'TempNode.Nodes.Add(TEHNode)
+
+                            Filling_TREE_DATA(lstGroups, .Fields("id").Value, TempNode, .Fields("Spisan").Value, .Fields("balans").Value, .Fields("NET_NAME").Value, 14)
+
+
                         Case "ZIP"
-                            Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 15, 15)
-                            TEHNode.Tag = "C|" & .Fields(0).Value
-                            TempNode.Nodes.Add(TEHNode)
+                            'Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 15, 15)
+                            'TEHNode.Tag = "C|" & .Fields(0).Value
+                            'TempNode.Nodes.Add(TEHNode)
+
+                            Filling_TREE_DATA(lstGroups, .Fields("id").Value, TempNode, .Fields("Spisan").Value, .Fields("balans").Value, .Fields("NET_NAME").Value, 15)
 
                         Case "OT"
 
                             Dim uname As String
                             Dim rsOT As ADODB.Recordset
                             rsOT = New ADODB.Recordset
-                            rsOT.Open("SELECT A FROM spr_other where Name ='" & .Fields("NET_NAME").Value & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                            rsOT.Open("SELECT A FROM spr_other where Name ='" & .Fields("tip_compa").Value & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
                             With rsOT
                                 If Not IsDBNull(.Fields("A").Value) Then uname = .Fields("A").Value
@@ -216,39 +277,55 @@ Foundit:
                             TempNode.Nodes.Add(TEHNode)
 
                         Case "MONITOR"
-                            Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 17, 17)
-                            TEHNode.Tag = "C|" & .Fields(0).Value
-                            TempNode.Nodes.Add(TEHNode)
+                            'Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 17, 17)
+                            'TEHNode.Tag = "C|" & .Fields(0).Value
+                            'TempNode.Nodes.Add(TEHNode)
+
+                            Filling_TREE_DATA(lstGroups, .Fields("id").Value, TempNode, .Fields("Spisan").Value, .Fields("balans").Value, .Fields("NET_NAME").Value, 17)
+
                             '--------------VIP_Graff Добавление новой перефирии Начало-----------------
                         Case "USB"
-                            Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 18, 18)
-                            TEHNode.Tag = "C|" & .Fields(0).Value
-                            TempNode.Nodes.Add(TEHNode)
+                            'Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 18, 18)
+                            'TEHNode.Tag = "C|" & .Fields(0).Value
+                            'TempNode.Nodes.Add(TEHNode)
+
+                            Filling_TREE_DATA(lstGroups, .Fields("id").Value, TempNode, .Fields("Spisan").Value, .Fields("balans").Value, .Fields("NET_NAME").Value, 18)
 
                         Case "SOUND"
-                            Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 44, 44)
-                            TEHNode.Tag = "C|" & .Fields(0).Value
-                            TempNode.Nodes.Add(TEHNode)
+                            'Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 44, 44)
+                            'TEHNode.Tag = "C|" & .Fields(0).Value
+                            'TempNode.Nodes.Add(TEHNode)
+
+                            Filling_TREE_DATA(lstGroups, .Fields("id").Value, TempNode, .Fields("Spisan").Value, .Fields("balans").Value, .Fields("NET_NAME").Value, 44)
 
                         Case "IBP"
-                            Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 41, 41)
-                            TEHNode.Tag = "C|" & .Fields(0).Value
-                            TempNode.Nodes.Add(TEHNode)
+                            'Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 41, 41)
+                            'TEHNode.Tag = "C|" & .Fields(0).Value
+                            'TempNode.Nodes.Add(TEHNode)
+
+                            Filling_TREE_DATA(lstGroups, .Fields("id").Value, TempNode, .Fields("Spisan").Value, .Fields("balans").Value, .Fields("NET_NAME").Value, 41)
 
                         Case "FS"
-                            Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 61, 61)
-                            TEHNode.Tag = "C|" & .Fields(0).Value
-                            TempNode.Nodes.Add(TEHNode)
+                            'Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 61, 61)
+                            'TEHNode.Tag = "C|" & .Fields(0).Value
+                            'TempNode.Nodes.Add(TEHNode)
+
+                            Filling_TREE_DATA(lstGroups, .Fields("id").Value, TempNode, .Fields("Spisan").Value, .Fields("balans").Value, .Fields("NET_NAME").Value, 61)
 
                         Case "KEYB"
-                            Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 46, 46)
-                            TEHNode.Tag = "C|" & .Fields(0).Value
-                            TempNode.Nodes.Add(TEHNode)
+                            'Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 46, 46)
+                            'TEHNode.Tag = "C|" & .Fields(0).Value
+                            'TempNode.Nodes.Add(TEHNode)
+
+                            Filling_TREE_DATA(lstGroups, .Fields("id").Value, TempNode, .Fields("Spisan").Value, .Fields("balans").Value, .Fields("NET_NAME").Value, 46)
 
                         Case "MOUSE"
-                            Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 47, 47)
-                            TEHNode.Tag = "C|" & .Fields(0).Value
-                            TempNode.Nodes.Add(TEHNode)
+                            'Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, 47, 47)
+                            'TEHNode.Tag = "C|" & .Fields(0).Value
+                            'TempNode.Nodes.Add(TEHNode)
+
+                            Filling_TREE_DATA(lstGroups, .Fields("id").Value, TempNode, .Fields("Spisan").Value, .Fields("balans").Value, .Fields("NET_NAME").Value, 47)
+
                             '--------------VIP_Graff Добавление новой перефирии Конец------------------
 
                         Case "CNT"
@@ -265,9 +342,11 @@ Foundit:
                             rsOT.Close()
                             rsOT = Nothing
 
-                            Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, uname, uname)
-                            TEHNode.Tag = "C|" & .Fields(0).Value
-                            TempNode.Nodes.Add(TEHNode)
+                            'Dim TEHNode As New TreeNode(.Fields("NET_NAME").Value, uname, uname)
+                            'TEHNode.Tag = "C|" & .Fields(0).Value
+                            'TempNode.Nodes.Add(TEHNode)
+
+                            Filling_TREE_DATA(lstGroups, .Fields("id").Value, TempNode, .Fields("Spisan").Value, .Fields("balans").Value, .Fields("NET_NAME").Value, uname)
 
                         Case Else
 

@@ -1824,7 +1824,7 @@ Error_:
         rs = Nothing
 
         'Санитарный паспорт
-        On Error GoTo err_
+
         If Len(frmComputers.txtspplo.Text) = 0 Then Exit Sub
 
         rs = New ADODB.Recordset
@@ -1876,9 +1876,7 @@ Error_:
         rs.Close()
         rs = Nothing
 
-        Exit Sub
-err_:
-        MsgBox(Err.Description)
+
     End Sub
 
     Public Sub SAVE_DRAG_DROP(ByVal sID As String, ByVal sBRANCHE As String, ByVal sDEPARTMENT As String, ByVal sOFFICE As String, ByVal sNAME As String)
@@ -3696,6 +3694,8 @@ Error_:
 
     Public Sub NotesEditAdd(ByVal btAdd As Button, ByVal lvsNotes As ListView, ByVal NotesMaster As ComboBox, ByVal textNotes As TextBox, ByVal DateNotes As DateTimePicker, ByVal txtSNAME As String, ByVal Branch As ComboBox, ByVal Department As ComboBox, ByVal Office As ComboBox)
 
+        On Error Resume Next
+
         If Len(textNotes.Text) = 0 Then Exit Sub
 
         Dim sSQL As String
@@ -3714,12 +3714,21 @@ Error_:
 
 
 
+        Dim uname As String
+
+        uname = Branch.Text
+
+        If Len(Department.Text) <> 0 Then
+            uname = uname & "/" & Department.Text
+        End If
+
+        If Len(Office.Text) <> 0 Then
+            uname = uname & "/" & Office.Text
+        End If
 
         Dim rs As ADODB.Recordset
         rs = New ADODB.Recordset
         rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-
-        Dim uname As String
 
         With rs
 
@@ -3737,21 +3746,6 @@ Error_:
             .Fields("Id_Comp").Value = frmComputers.sCOUNT
 
             .Fields("Comp_name").Value = txtSNAME
-
-            uname = Branch.Text
-
-            If Len(Department.Text) <> 0 Then
-
-                uname = uname & "/" & Department.Text
-
-            End If
-
-            If Len(Office.Text) <> 0 Then
-
-                uname = uname & "/" & Office.Text
-
-            End If
-
             .Fields("Mesto_Compa").Value = uname
 
             .Update()

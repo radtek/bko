@@ -1409,21 +1409,6 @@ err_:
 
         sICONS = ComboBox1.Text
 
-        Select Case sICONS
-
-            Case "32*32"
-
-                sICONS = sICONS
-
-                frmComputers.ilsCommands.ImageSize = New System.Drawing.Size(32, 32)
-                Tree_Icons_Feel(frmComputers.ilsCommands, "sCMP", "pic\tree\")
-            Case Else
-
-                sICONS = "24*24"
-                frmComputers.ilsCommands.ImageSize = New System.Drawing.Size(24, 24)
-                Tree_Icons_Feel(frmComputers.ilsCommands, "sCMP", "pic\tree\")
-        End Select
-
 
     End Sub
 

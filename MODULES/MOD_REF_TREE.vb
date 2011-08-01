@@ -123,6 +123,21 @@ Module MOD_REF_TREE
         lstgroups.Nodes.Clear()
 
 
+        Select Case sICONS
+
+            Case "32*32"
+
+                sICONS = sICONS
+
+                frmComputers.ilsCommands.ImageSize = New System.Drawing.Size(32, 32)
+                Tree_Icons_Feel(frmComputers.ilsCommands, "sCMP", "pic\tree\")
+            Case Else
+
+                sICONS = "24*24"
+                frmComputers.ilsCommands.ImageSize = New System.Drawing.Size(24, 24)
+                Tree_Icons_Feel(frmComputers.ilsCommands, "sCMP", "pic\tree\")
+        End Select
+
 
         lstgroups.ImageList = frmComputers.ilsCommands
 
@@ -187,9 +202,7 @@ Module MOD_REF_TREE
         rs.Close()
         rs = Nothing
 
-        'Dim nodeRoot As New TreeNode(ORG, 0, 0)
-        Dim nodeRoot As New TreeNode(ORG, 0, 0) '------Замена номера иконки------
-
+        Dim nodeRoot As New TreeNode(ORG, 69, 69)
         nodeRoot.Tag = "ROOT" & GENID()
         lstgroups.Nodes.Add(nodeRoot)
 
@@ -223,7 +236,7 @@ Module MOD_REF_TREE
             .MoveFirst()
             Do While Not .EOF
                 'My.Application.DoEvents()
-                Dim BrancheNode As New TreeNode(.Fields("filial").Value, 1, 1)
+                Dim BrancheNode As New TreeNode(.Fields("filial").Value, 0, 0)
                 BrancheNode.Tag = "G|" & .Fields("id").Value
                 sTEN = "G|" & .Fields("id").Value
                 nodeRoot.Nodes.Add(BrancheNode)
@@ -282,7 +295,7 @@ Module MOD_REF_TREE
 
                         If .Fields("filial").Value = unameS Then
 
-                            Dim DepatrmentNode As New TreeNode(.Fields("N_Otd").Value, 2, 2)
+                            Dim DepatrmentNode As New TreeNode(.Fields("N_Otd").Value, 1, 1)
                             DepatrmentNode.Tag = "O|" & .Fields("id").Value
                             sTEN = "O|" & .Fields("id").Value
                             BrancheNode.Nodes.Add(DepatrmentNode)
@@ -340,7 +353,7 @@ Module MOD_REF_TREE
                                     .MoveFirst()
                                     Do While Not .EOF
 
-                                        Dim OfficeNode As New TreeNode(.Fields("name").Value, 3, 3)
+                                        Dim OfficeNode As New TreeNode(.Fields("name").Value, 2, 2)
                                         OfficeNode.Tag = "K|" & .Fields("id").Value
                                         sTEN = "K|" & .Fields("id").Value
                                         DepatrmentNode.Nodes.Add(OfficeNode)
@@ -480,25 +493,25 @@ ERR1:
         Select Case iC
 
             Case "Рабочая станция"
-                iA = 5
-                iB = 5
-
-            Case "Сервер"
-
                 iA = 4
                 iB = 4
 
+            Case "Сервер"
+
+                iA = 3
+                iB = 3
+
             Case "КПК"
-                iA = 32
-                iB = 32
+                iA = 31
+                iB = 31
 
             Case "Ноутбук"
-                iA = 6
-                iB = 6
-
-            Case Else
                 iA = 5
                 iB = 5
+
+            Case Else
+                iA = 4
+                iB = 4
 
 
         End Select
@@ -699,7 +712,7 @@ ERR1:
                                 Case "NET"
 
 
-                                    Dim TEHNodePC As New TreeNode(L_NAME, 11, 11)
+                                    Dim TEHNodePC As New TreeNode(L_NAME, 10, 10)
                                     TEHNodePC.Tag = "C|" & .Fields("id").Value
                                     TEHNodeCNT.Nodes.Add(TEHNodePC)
                                     iD = .Fields("id").Value
@@ -768,21 +781,21 @@ ERR1:
                                     Select Case iC
 
                                         Case "Рабочая станция"
-                                            iA = 5
+                                            iA = 4
 
 
                                         Case "Сервер"
 
-                                            iA = 4
+                                            iA = 3
                                             
                                         Case "КПК"
-                                            iA = 32
+                                            iA = 31
                                            
                                         Case "Ноутбук"
-                                            iA = 6
+                                            iA = 5
 
                                         Case Else
-                                            iA = 5
+                                            iA = 4
 
                                     End Select
 
@@ -911,26 +924,26 @@ ERR1:
 
                                                     Case "Printer"
 
-                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 8)
+                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 7)
 
 
                                                     Case "MFU"
 
-                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 9)
+                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 8)
 
 
                                                     Case "SCANER"
 
-                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 15)
+                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 14)
 
                                                     Case "ZIP"
 
-                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 16)
+                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 15)
 
 
                                                     Case "PHONE"
 
-                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 13)
+                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 12)
 
 
                                                     Case "OT"
@@ -968,7 +981,7 @@ ERR1:
 
 
                                                         If Len(uname) = 0 Or uname = " " Or uname = " 0" Or uname = "" Then
-                                                            iA = 17
+                                                            iA = 16
                                                         Else
                                                             iA = uname
                                                         End If
@@ -978,36 +991,36 @@ ERR1:
 
                                                     Case "MONITOR"
 
-                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 18)
+                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 17)
 
 
                                                         '--------------VIP_Graff Добавление новой перефирии Начало-----------------
                                                     Case "USB"
 
-                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 19)
+                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 18)
 
 
                                                     Case "SOUND"
 
-                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 45)
+                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 44)
 
                                                     Case "IBP"
 
-                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 42)
+                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 41)
 
 
                                                     Case "FS"
 
-                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 62)
+                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 61)
 
 
                                                     Case "KEYB"
 
-                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 47)
+                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 46)
 
                                                     Case "MOUSE"
 
-                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 48)
+                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 47)
 
                                                         '--------------VIP_Graff Добавление новой перефирии Конец------------------
 
@@ -1033,26 +1046,26 @@ ERR1:
 
                                 Case "Printer"
 
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME, 8)
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME, 7)
 
 
                                 Case "MFU"
 
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME, 9)
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME, 8)
 
 
                                 Case "SCANER"
 
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME, 15)
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME, 14)
 
 
                                 Case "ZIP"
 
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME, 16)
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME, 15)
 
                                 Case "PHONE"
 
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME, 13)
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME, 12)
 
 
                                 Case "OT"
@@ -1086,7 +1099,7 @@ ERR1:
 
 
                                     If Len(uname) = 0 Or uname = " " Or uname = " 0" Or uname = "" Then
-                                        iA = 17
+                                        iA = 16
                                     Else
                                         iA = uname
                                     End If
@@ -1096,36 +1109,36 @@ ERR1:
 
                                 Case "MONITOR"
 
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME, 18)
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME, 17)
 
 
                                     '--------------VIP_Graff Добавление новой перефирии Начало-----------------
                                 Case "USB"
 
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME, 19)
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME, 18)
 
                                 Case "SOUND"
 
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME, 45)
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME, 44)
 
                                 Case "IBP"
 
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME, 42)
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME, 41)
 
 
                                 Case "FS"
 
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME, 62)
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME, 61)
 
 
                                 Case "KEYB"
 
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME, 47)
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME, 46)
 
 
                                 Case "MOUSE"
 
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME, 48)
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME, 47)
 
                                     '--------------VIP_Graff Добавление новой перефирии Конец------------------
 
@@ -1274,25 +1287,25 @@ ERR1:
 
                                 Case "Printer"
 
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 8)
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 7)
 
                                 Case "MFU"
 
 
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 9)
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 8)
 
 
                                 Case "SCANER"
 
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 15)
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 14)
 
                                 Case "ZIP"
 
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 16)
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 15)
 
                                 Case "PHONE"
 
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 13)
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 12)
 
 
                                 Case "OT"
@@ -1326,7 +1339,7 @@ ERR1:
 
 
                                     If Len(uname) = 0 Or uname = " " Or uname = " 0" Or uname = "" Then
-                                        iA = 17
+                                        iA = 16
                                     Else
                                         iA = uname
                                     End If
@@ -1335,36 +1348,36 @@ ERR1:
 
                                 Case "MONITOR"
 
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 18)
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 17)
 
 
                                     '--------------VIP_Graff Добавление новой перефирии Начало-----------------
                                 Case "USB"
 
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 19)
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 18)
 
                                 Case "SOUND"
 
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 45)
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 44)
 
 
                                 Case "IBP"
 
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 42)
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 41)
 
 
                                 Case "FS"
 
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 62)
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 61)
 
 
                                 Case "KEYB"
 
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 47)
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 46)
 
                                 Case "MOUSE"
 
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 48)
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 47)
 
                                     '--------------VIP_Graff Добавление новой перефирии Конец------------------
 
@@ -1385,20 +1398,20 @@ ERR1:
 
             Case "Printer"
 
-                Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 8)
+                Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 7)
 
             Case "MFU"
 
-                Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 9)
+                Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 8)
 
             Case "KOpir"
 
-                Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 10)
+                Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 9)
 
 
             Case "NET"
 
-                Dim TEHNode As New TreeNode(L_NAME, 11, 11)
+                Dim TEHNode As New TreeNode(L_NAME, 10, 10)
                 TEHNode.Tag = "C|" & iD
                 DepNode.Nodes.Add(TEHNode)
 
@@ -1442,25 +1455,25 @@ ERR1:
 
             Case "PHOTO"
 
-                Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 12)
+                Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 11)
 
             Case "PHONE"
 
-                Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 13)
+                Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 12)
 
             Case "FAX"
 
-                Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 14)
+                Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 13)
 
 
             Case "SCANER"
 
-                Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 15)
+                Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 14)
 
 
             Case "ZIP"
 
-                Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 16)
+                Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 15)
 
 
             Case "OT"
@@ -1496,7 +1509,7 @@ ERR1:
 
 
                 If Len(uname) = 0 Or uname = " " Or uname = " 0" Or uname = "" Then
-                    iA = 17
+                    iA = 16
                 Else
                     iA = uname
                 End If
@@ -1506,38 +1519,38 @@ ERR1:
 
             Case "MONITOR"
 
-                Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 18)
+                Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 17)
 
 
                 '--------------VIP_Graff Добавление новой перефирии Начало-----------------
             Case "USB"
 
-                Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 19)
+                Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 18)
 
 
             Case "SOUND"
 
-                Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 45)
+                Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 44)
 
 
             Case "IBP"
 
-                Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 42)
+                Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 41)
 
 
             Case "FS"
 
-                Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 62)
+                Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 61)
 
 
             Case "KEYB"
 
-                Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 47)
+                Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 46)
 
 
             Case "MOUSE"
 
-                Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 48)
+                Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 47)
 
                 '--------------VIP_Graff Добавление новой перефирии Конец------------------
 
@@ -1550,7 +1563,7 @@ ERR1:
 
     End Sub
 
-    Private Sub Filling_TREE_DATA(ByVal lstgroups As TreeView, ByVal sID As Integer, ByVal TEHNodePCL As TreeNode, ByVal Spisan As String, ByVal balans As String, ByVal L_NAME As String, ByVal sNUM As Decimal)
+    Public Sub Filling_TREE_DATA(ByVal lstgroups As TreeView, ByVal sID As Integer, ByVal TEHNodePCL As TreeNode, ByVal Spisan As String, ByVal balans As String, ByVal L_NAME As String, ByVal sNUM As Decimal)
 
         Dim TEHNodeCNT As New TreeNode(L_NAME, sNUM, sNUM)
         TEHNodeCNT.Tag = "C|" & sID

@@ -30,9 +30,9 @@ Public Class frmComputers
 
     Public OneStart As Decimal = 0
 
-    'Public Sub New()
-    '    InitializeComponent()
-    'End Sub 'New
+    Public Sub New()
+        InitializeComponent()
+    End Sub 'New
 
     Private Sub frmComputers_Activated(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Activated
 
@@ -115,12 +115,11 @@ Public Class frmComputers
 
         Me.WindowState = FormWindowState.Maximized
 
-
-       
-        Call Load_ICONS()
+        'Call Load_ICONS()
 
 
-
+        Dim newThread7 As New Thread(AddressOf Load_ICONS)
+        newThread7.Start()
 
 
         'Меняем шрифт на форме
@@ -224,6 +223,8 @@ Public Class frmComputers
         cmbTIPCartridg.Items.Add(langfile.GetString("frmComputers", "MSG11", ""))
         cmbTIPCartridg.Items.Add(langfile.GetString("frmComputers", "MSG12", ""))
 
+
+
         If lstGroups.Nodes.Count = 0 Then
 
             If Me.lstGroups.Nodes.Count = 0 Then
@@ -233,7 +234,6 @@ Public Class frmComputers
             End If
 
         End If
-
 
         Me.Cursor = Cursors.Default
         OneStart = 1
@@ -440,8 +440,9 @@ Error_:
 
         Call Clear_Form_For_Computer()
 
-
         Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG14", "") & " " & Me.lstGroups.SelectedNode.Text)
+
+
 
         Select Case d(0)
 

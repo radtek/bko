@@ -77,9 +77,6 @@ Module MOD_SYS_PRELOAD
 
         End Select
 
-        If sFRM <> "DIR" Then
-            ills.Images.Add(Image.FromFile(PrPath & sPATH & "A0.png"))
-        End If
 
         ills.Images.Add(Image.FromFile(PrPath & sPATH & "A1.png"))
         ills.Images.Add(Image.FromFile(PrPath & sPATH & "A2.png"))
@@ -136,15 +133,13 @@ Module MOD_SYS_PRELOAD
         ills.Images.Add(Image.FromFile(PrPath & sPATH & "F3.png"))
         ills.Images.Add(Image.FromFile(PrPath & sPATH & "F4.png"))
         ills.Images.Add(Image.FromFile(PrPath & sPATH & "F5.png"))
+
         ills.Images.Add(Image.FromFile(PrPath & sPATH & "F6.png"))
         ills.Images.Add(Image.FromFile(PrPath & sPATH & "F7.png"))
         ills.Images.Add(Image.FromFile(PrPath & sPATH & "F8.png"))
         ills.Images.Add(Image.FromFile(PrPath & sPATH & "F9.png"))
 
         If sFRM <> "DIR" Then
-
-
-            
 
             ills.Images.Add(Image.FromFile(PrPath & sPATH & "G1.png"))
             ills.Images.Add(Image.FromFile(PrPath & sPATH & "G2.png"))
@@ -163,7 +158,7 @@ Module MOD_SYS_PRELOAD
             ills.Images.Add(Image.FromFile(PrPath & sPATH & "H5.png"))
 
             ills.Images.Add(Image.FromFile(PrPath & sPATH & "I1.png"))
-
+            ills.Images.Add(Image.FromFile(PrPath & sPATH & "A0.png"))
         Else
 
         End If
@@ -199,6 +194,7 @@ Module MOD_SYS_PRELOAD
         End If
 
     End Sub
+
     Public Sub PreLoad()
 
         'Dim langFile As String
@@ -229,7 +225,7 @@ Module MOD_SYS_PRELOAD
 
             Case "32*32"
 
-                sICONS = sICONS
+                sICONS = "32*32"
 
             Case Else
 
@@ -243,7 +239,7 @@ Module MOD_SYS_PRELOAD
         Call iface_preload()
 
 
-       
+
 
 
     End Sub
@@ -335,8 +331,8 @@ Module MOD_SYS_PRELOAD
                 If Not Ctl.Controls Is Nothing Then
                     ClearForm(Ctl)
 
-                    If TypeOf Ctl Is TextBox Then Ctl.text = ""
-                    If TypeOf Ctl Is ComboBox Then Ctl.text = ""
+                    If TypeOf Ctl Is TextBox Then Ctl.ResetText()
+                    If TypeOf Ctl Is ComboBox Then Ctl.ResetText()
                     If TypeOf Ctl Is ListView Then Ctl.items.clear()
                     'If TypeOf Ctl Is CheckBox Then Ctl.checked = False
                     If TypeOf Ctl Is RadioButton Then Ctl.checked = False
