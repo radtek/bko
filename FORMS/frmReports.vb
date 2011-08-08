@@ -1,4 +1,5 @@
-﻿
+﻿Imports System.Threading
+
 Public Class frmReports
     Private m_SortingColumn As ColumnHeader
 
@@ -3564,9 +3565,24 @@ err_:
     End Sub
 
     Private Sub cmbGar_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbGar.SelectedIndexChanged
+
+        Dim newThread1 As New Thread(AddressOf GaRanT_Load_t)
+        newThread1.Start()
+        newThread1.Priority = 4
+
+    End Sub
+
+    Private Sub GaRanT_Load_t()
+
+        Me.BeginInvoke(New MethodInvoker(AddressOf GaRanT_Load))
+
+    End Sub
+
+
+    Private Sub GaRanT_Load()
         Dim ZakZ As String
         Dim dp As Date
-        Dim nom As String
+        Dim nom As Integer
         Dim Nam As String
         Dim Komp As String
         Dim NameKomp As String
@@ -3781,9 +3797,9 @@ err_:
                     With rs
                         .MoveFirst()
                         Do While Not .EOF
-                            If .Fields("id").Value = nom Then
-                                Nam = langIni.GetString("frmReports", "MSG26", "") & ": " & .Fields("NET_NAME").Value & " " & langIni.GetString("frmReports", "MSG27", "") & ": " & .Fields("MESTO").Value & "/" & .Fields("FILIAL").Value
-                            End If
+
+                            Nam = langIni.GetString("frmReports", "MSG26", "") & ": " & .Fields("NET_NAME").Value & " " & langIni.GetString("frmReports", "MSG27", "") & ": " & .Fields("MESTO").Value & "/" & .Fields("FILIAL").Value
+
                             .MoveNext()
                             'DoEvents
                         Loop
@@ -4124,6 +4140,7 @@ Error_:
         ResList(Me.lvGar)
     End Sub
 
+
     Private Sub btnSendToOffice_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSendToOffice.Click
         On Error GoTo Err_
 
@@ -4133,7 +4150,7 @@ Error_:
 
             Case "OpenOffice.org"
 
-                ExportListViewToCalc(LvKompOtd)
+                ExportListViewToCalc(LvKompOtd, sSTAB1.TabPages(0).Text)
 
             Case Else
 
@@ -4156,7 +4173,7 @@ Err_:
 
             Case "OpenOffice.org"
 
-                ExportListViewToCalc(lvReport2Cl)
+                ExportListViewToCalc(lvReport2Cl, sSTAB1.TabPages(1).Text)
 
             Case Else
 
@@ -4183,7 +4200,7 @@ Err_:
 
             Case "OpenOffice.org"
 
-                ExportListViewToCalc(lvRemont)
+                ExportListViewToCalc(lvRemont, sSTAB1.TabPages(2).Text)
 
             Case Else
 
@@ -5306,7 +5323,7 @@ err:
 
             Case "OpenOffice.org"
 
-                ExportListViewToCalc(lvCashe)
+                ExportListViewToCalc(lvCashe, sSTAB1.TabPages(5).Text)
 
 
             Case Else

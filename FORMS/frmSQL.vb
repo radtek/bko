@@ -180,7 +180,7 @@ Err_:
 
             Case "OpenOffice.org"
 
-                ExportListViewToCalc(LvQ)
+                ExportListViewToCalc(LvQ, Me.Text)
 
             Case Else
 

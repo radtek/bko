@@ -2229,4 +2229,13 @@ err_:
         Me.BeginInvoke(New MethodInvoker(AddressOf LoadSPR))
 
     End Sub
+
+    Private Sub ПроверитьФилиалыОтделыToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ПроверитьФилиалыОтделыToolStripMenuItem.Click
+
+        Dim newThread1 As New Thread(AddressOf add_kabn_if_nothing)
+        newThread1.Start()
+        newThread1.Priority = 4
+
+
+    End Sub
 End Class

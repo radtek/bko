@@ -1089,7 +1089,7 @@ err_:
 
             Case "OpenOffice.org"
 
-                ExportListViewToCalc(lvNetMagazin)
+                ExportListViewToCalc(lvNetMagazin, Me.Text & " (" & A4 & ")")
 
             Case Else
 

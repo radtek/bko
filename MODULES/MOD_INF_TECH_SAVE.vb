@@ -1949,7 +1949,6 @@ Error_:
 
         Dim sCount As Integer
         Dim rs As ADODB.Recordset
-        Dim rs1 As ADODB.Recordset
 
 
         Dim sSQL As String
@@ -1969,6 +1968,7 @@ Error_:
 
         If sCount = 0 Then Exit Sub
 
+        Dim rs1 As ADODB.Recordset
 
         Dim objIniFile As New IniFile(PrPath & "base.ini")
 
@@ -1999,6 +1999,8 @@ Error_:
                 rs = New ADODB.Recordset
                 rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
+                Dim i As Integer = 1
+
                 With rs
                     .MoveFirst()
                     Do While Not .EOF
@@ -2008,9 +2010,35 @@ Error_:
                         rs1 = New ADODB.Recordset
                         rs1.Open("Select * from kompy where id=" & sSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
-                        Select Case sCount
+                        If sCount = 1 Then
 
-                            Case 1
+                            With rs1
+                                rs1.Fields("MONITOR_NAME").Value = rs.Fields("MONITOR_NAME").Value
+                                rs1.Fields("MONITOR_DUM").Value = rs.Fields("MONITOR_DUM").Value
+                                rs1.Fields("MONITOR_SN").Value = rs.Fields("MONITOR_SN").Value
+                                rs1.Fields("MONITOR_PROIZV").Value = rs.Fields("MONITOR_PROIZV").Value
+                                rs1.Fields("INV_NO_MONITOR").Value = rs.Fields("INV_NO_MONITOR").Value
+                                .Update()
+                            End With
+                            rs1.Close()
+                            rs1 = Nothing
+
+                        Else
+
+                            If i = 2 Then
+
+                                With rs1
+                                    rs1.Fields("MONITOR_NAME2").Value = rs.Fields("MONITOR_NAME").Value
+                                    rs1.Fields("MONITOR_DUM2").Value = rs.Fields("MONITOR_DUM").Value
+                                    rs1.Fields("MONITOR_SN2").Value = rs.Fields("MONITOR_SN").Value
+                                    rs1.Fields("MONITOR_PROIZV2").Value = rs.Fields("MONITOR_PROIZV").Value
+                                    rs1.Fields("INV_NO_MONITOR").Value = rs.Fields("INV_NO_MONITOR").Value
+                                    .Update()
+                                End With
+                                rs1.Close()
+                                rs1 = Nothing
+
+                            Else
 
                                 With rs1
                                     rs1.Fields("MONITOR_NAME").Value = rs.Fields("MONITOR_NAME").Value
@@ -2020,19 +2048,15 @@ Error_:
                                     rs1.Fields("INV_NO_MONITOR").Value = rs.Fields("INV_NO_MONITOR").Value
                                     .Update()
                                 End With
+                                rs1.Close()
+                                rs1 = Nothing
 
-                            Case 2
+                            End If
 
-                                With rs1
-                                    rs1.Fields("MONITOR_NAME2").Value = rs.Fields("MONITOR_NAME").Value
-                                    rs1.Fields("MONITOR_DUM2").Value = rs.Fields("MONITOR_DUM").Value
-                                    rs1.Fields("MONITOR_SN2").Value = rs.Fields("MONITOR_SN").Value
-                                    rs1.Fields("MONITOR_PROIZV2").Value = rs.Fields("MONITOR_PROIZV").Value
-                                    rs1.Fields("INV_NO_MONITOR2").Value = rs.Fields("INV_NO_MONITOR").Value
-                                    .Update()
-                                End With
+                        End If
 
-                        End Select
+
+                        i = i + 1
 
 
                         rs1.Close()
@@ -2080,6 +2104,9 @@ Error_:
                 rs = New ADODB.Recordset
                 rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
+                i = 1
+                Dim pField As String
+
                 With rs
                     .MoveFirst()
                     Do While Not .EOF
@@ -2089,42 +2116,29 @@ Error_:
                         rs1 = New ADODB.Recordset
                         rs1.Open("Select * from kompy where id=" & sSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
-                        Select Case sCount
 
-                            Case 1
+                        With rs1
+                            pField = "PRINTER_NAME_" & i
 
-                                With rs1
-                                    rs1.Fields("PRINTER_NAME_1").Value = rs.Fields("PRINTER_NAME_1").Value
-                                    rs1.Fields("PRINTER_SN_1").Value = rs.Fields("PRINTER_SN_1").Value
-                                    rs1.Fields("PRINTER_PROIZV_1").Value = rs.Fields("PRINTER_PROIZV_1").Value
-                                    rs1.Fields("INV_NO_PRINTER").Value = rs.Fields("INV_NO_PRINTER").Value
-                                    rs1.Fields("port_1").Value = rs.Fields("port_2").Value
-                                    .Update()
-                                End With
+                            rs1.Fields(pField).Value = rs.Fields("PRINTER_NAME_1").Value
 
-                            Case 2
+                            pField = "PRINTER_SN_" & i
 
-                                With rs1
-                                    rs1.Fields("PRINTER_NAME_2").Value = rs.Fields("PRINTER_NAME_2").Value
-                                    rs1.Fields("PRINTER_SN_2").Value = rs.Fields("PRINTER_SN_2").Value
-                                    rs1.Fields("PRINTER_PROIZV_2").Value = rs.Fields("PRINTER_PROIZV_2").Value
-                                    rs1.Fields("INV_NO_PRINTER").Value = rs.Fields("INV_NO_PRINTER").Value
-                                    rs1.Fields("port_2").Value = rs.Fields("port_2").Value
-                                    .Update()
-                                End With
+                            rs1.Fields(pField).Value = rs.Fields("PRINTER_SN_1").Value
 
-                            Case 3
+                            pField = "PRINTER_PROIZV_" & i
 
-                                With rs1
-                                    rs1.Fields("PRINTER_NAME_3").Value = rs.Fields("PRINTER_NAME_3").Value
-                                    rs1.Fields("PRINTER_SN_3").Value = rs.Fields("PRINTER_SN_3").Value
-                                    rs1.Fields("PRINTER_PROIZV_3").Value = rs.Fields("PRINTER_PROIZV_31").Value
-                                    rs1.Fields("INV_NO_PRINTER").Value = rs.Fields("INV_NO_PRINTER").Value
-                                    rs1.Fields("port_3").Value = rs.Fields("port_2").Value
-                                    .Update()
-                                End With
+                            rs1.Fields(pField).Value = rs.Fields("PRINTER_PROIZV_1").Value
+                            rs1.Fields("INV_NO_PRINTER").Value = rs.Fields("INV_NO_PRINTER").Value
 
-                        End Select
+                            pField = "port_" & i
+
+                            rs1.Fields(pField).Value = rs.Fields("port_2").Value
+                            .Update()
+                        End With
+
+
+                        i = i + 1
 
 
                         rs1.Close()
@@ -2369,6 +2383,10 @@ Error_:
                 rs = New ADODB.Recordset
                 rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
+                Dim i As Integer = 1
+
+                Dim pField As String
+
                 With rs
                     .MoveFirst()
                     Do While Not .EOF
@@ -2378,9 +2396,36 @@ Error_:
                         rs1 = New ADODB.Recordset
                         rs1.Open("Select * from kompy where id=" & sSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
-                        Select Case sCount
 
-                            Case 1
+                        If sCount = 1 Then
+
+                            With rs1
+                                rs1.Fields("MONITOR_NAME").Value = rs.Fields("MONITOR_NAME").Value
+                                rs1.Fields("MONITOR_DUM").Value = rs.Fields("MONITOR_DUM").Value
+                                rs1.Fields("MONITOR_SN").Value = rs.Fields("MONITOR_SN").Value
+                                rs1.Fields("MONITOR_PROIZV").Value = rs.Fields("MONITOR_PROIZV").Value
+                                rs1.Fields("INV_NO_MONITOR").Value = rs.Fields("INV_NO_MONITOR").Value
+                                .Update()
+                            End With
+                            rs1.Close()
+                            rs1 = Nothing
+
+                        Else
+
+                            If i = 2 Then
+
+                                With rs1
+                                    rs1.Fields("MONITOR_NAME2").Value = rs.Fields("MONITOR_NAME").Value
+                                    rs1.Fields("MONITOR_DUM2").Value = rs.Fields("MONITOR_DUM").Value
+                                    rs1.Fields("MONITOR_SN2").Value = rs.Fields("MONITOR_SN").Value
+                                    rs1.Fields("MONITOR_PROIZV2").Value = rs.Fields("MONITOR_PROIZV").Value
+                                    rs1.Fields("INV_NO_MONITOR").Value = rs.Fields("INV_NO_MONITOR").Value
+                                    .Update()
+                                End With
+                                rs1.Close()
+                                rs1 = Nothing
+
+                            Else
 
                                 With rs1
                                     rs1.Fields("MONITOR_NAME").Value = rs.Fields("MONITOR_NAME").Value
@@ -2390,42 +2435,36 @@ Error_:
                                     rs1.Fields("INV_NO_MONITOR").Value = rs.Fields("INV_NO_MONITOR").Value
                                     .Update()
                                 End With
+                                rs1.Close()
+                                rs1 = Nothing
 
-                            Case 2
+                            End If
 
-                                With rs1
-                                    rs1.Fields("MONITOR_NAME2").Value = rs.Fields("MONITOR_NAME").Value
-                                    rs1.Fields("MONITOR_DUM2").Value = rs.Fields("MONITOR_DUM").Value
-                                    rs1.Fields("MONITOR_SN2").Value = rs.Fields("MONITOR_SN").Value
-                                    rs1.Fields("MONITOR_PROIZV2").Value = rs.Fields("MONITOR_PROIZV").Value
-                                    rs1.Fields("INV_NO_MONITOR2").Value = rs.Fields("INV_NO_MONITOR").Value
-                                    .Update()
-                                End With
-
-                        End Select
+                        End If
 
 
-                        rs1.Close()
-                        rs1 = Nothing
-
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
-
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
-
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("Delete from Garantia_sis where Id_Comp=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
-
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("Delete from kompy where id=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        i = i + 1
+                       
 
 
-                        .MoveNext()
+        rs1 = New ADODB.Recordset
+        rs1.Open("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs1 = Nothing
+
+        rs1 = New ADODB.Recordset
+        rs1.Open("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs1 = Nothing
+
+        rs1 = New ADODB.Recordset
+        rs1.Open("Delete from Garantia_sis where Id_Comp=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs1 = Nothing
+
+        rs1 = New ADODB.Recordset
+        rs1.Open("Delete from kompy where id=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs1 = Nothing
+
+
+        .MoveNext()
                     Loop
                 End With
                 rs.Close()
@@ -2451,6 +2490,12 @@ Error_:
                 rs = New ADODB.Recordset
                 rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
+
+                Dim i As Integer = 1
+
+                Dim pField As String
+
+
                 With rs
                     .MoveFirst()
                     Do While Not .EOF
@@ -2460,43 +2505,29 @@ Error_:
                         rs1 = New ADODB.Recordset
                         rs1.Open("Select * from kompy where id=" & sSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
-                        Select Case sCount
 
-                            Case 1
+                        With rs1
+                            pField = "PRINTER_NAME_" & i
 
-                                With rs1
-                                    rs1.Fields("PRINTER_NAME_1").Value = rs.Fields("PRINTER_NAME_1").Value
-                                    rs1.Fields("PRINTER_SN_1").Value = rs.Fields("PRINTER_SN_1").Value
-                                    rs1.Fields("PRINTER_PROIZV_1").Value = rs.Fields("PRINTER_PROIZV_1").Value
-                                    rs1.Fields("INV_NO_PRINTER").Value = rs.Fields("INV_NO_PRINTER").Value
-                                    rs1.Fields("port_1").Value = rs.Fields("port_2").Value
-                                    .Update()
-                                End With
+                            rs1.Fields(pField).Value = rs.Fields("PRINTER_NAME_1").Value
 
-                            Case 2
+                            pField = "PRINTER_SN_" & i
 
-                                With rs1
-                                    rs1.Fields("PRINTER_NAME_2").Value = rs.Fields("PRINTER_NAME_2").Value
-                                    rs1.Fields("PRINTER_SN_2").Value = rs.Fields("PRINTER_SN_2").Value
-                                    rs1.Fields("PRINTER_PROIZV_2").Value = rs.Fields("PRINTER_PROIZV_2").Value
-                                    rs1.Fields("INV_NO_PRINTER").Value = rs.Fields("INV_NO_PRINTER").Value
-                                    rs1.Fields("port_2").Value = rs.Fields("port_2").Value
-                                    .Update()
-                                End With
+                            rs1.Fields(pField).Value = rs.Fields("PRINTER_SN_1").Value
 
-                            Case 3
+                            pField = "PRINTER_PROIZV_" & i
 
-                                With rs1
-                                    rs1.Fields("PRINTER_NAME_3").Value = rs.Fields("PRINTER_NAME_3").Value
-                                    rs1.Fields("PRINTER_SN_3").Value = rs.Fields("PRINTER_SN_3").Value
-                                    rs1.Fields("PRINTER_PROIZV_3").Value = rs.Fields("PRINTER_PROIZV_31").Value
-                                    rs1.Fields("INV_NO_PRINTER").Value = rs.Fields("INV_NO_PRINTER").Value
-                                    rs1.Fields("port_3").Value = rs.Fields("port_2").Value
-                                    .Update()
-                                End With
+                            rs1.Fields(pField).Value = rs.Fields("PRINTER_PROIZV_1").Value
+                            rs1.Fields("INV_NO_PRINTER").Value = rs.Fields("INV_NO_PRINTER").Value
 
-                        End Select
+                            pField = "port_" & i
 
+                            rs1.Fields(pField).Value = rs.Fields("port_2").Value
+                            .Update()
+                        End With
+
+
+                        i = i + 1
 
                         rs1.Close()
                         rs1 = Nothing
@@ -2759,7 +2790,7 @@ Error_:
 
                 sADD = False
 
-                If Left(sTEMP0, 2) <> "\\" And Left(sTEMP1, 2) <> "IP" And Len(sTEMP0) <> 0 And sTEMP0 <> "Microsoft Office Document Image Writer" Then
+                If Left(sTEMP0, 2) <> "\\" And Left(sTEMP1, 2) <> "IP" And Len(sTEMP0) <> 0 And sTEMP0 <> "Microsoft Office Document Image Writer" And sTEMP0 <> "Microsoft XPS Document Writer" And sTEMP0 <> "Microsoft XPS Document Writer" And sTEMP0 <> "Fax" Then
 
 
                     If Not RSPRNExt(sTEMP0, sSID) Then

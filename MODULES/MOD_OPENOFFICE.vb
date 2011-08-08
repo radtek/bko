@@ -7274,393 +7274,263 @@ err_:
 
     End Sub
 
-    Public Function ExportListViewToExcel(ByVal MyListView As ListView, ByVal sTXT As String)
+    'Public Function ExportListViewToExcel(ByVal MyListView As ListView, ByVal sTXT As String)
 
+    '    'Dim ExcelReport As Excel.ApplicationClass
 
+    '    Const MAX_COLOURS As Int16 = 40
 
-        'Dim ExcelReport As Excel.ApplicationClass
+    '    Const MAX_COLUMS As Int16 = 254
 
+    '    Dim i As Integer
 
+    '    Dim New_Item As Windows.Forms.ListViewItem
 
-        Const MAX_COLOURS As Int16 = 40
+    '    Dim TempColum As Int16
 
+    '    Dim ColumLetter As String
 
+    '    Dim TempRow As Int16
 
-        Const MAX_COLUMS As Int16 = 254
+    '    Dim TempColum2 As Int16
 
+    '    Dim AddedColours As Int16 = 1
 
+    '    Dim MyColours As Hashtable = New Hashtable
 
-        Dim i As Integer
+    '    Dim AddNewBackColour As Boolean = True
 
-        Dim New_Item As Windows.Forms.ListViewItem
+    '    Dim AddNewFrontColour As Boolean = True
 
+    '    Dim BackColour As String
 
+    '    Dim FrontColour As String
 
-        Dim TempColum As Int16
 
-        Dim ColumLetter As String
+    '    '##########################
 
-        Dim TempRow As Int16
+    '    Dim chartRange As Excel.Range
 
-        Dim TempColum2 As Int16
+    '    '##########################
 
 
+    '    Dim ExcelReport As Excel.Application
 
-        Dim AddedColours As Int16 = 1
+    '    'ExcelReport = New Excel.ApplicationClass
 
-        Dim MyColours As Hashtable = New Hashtable
+    '    ExcelReport = New Excel.Application
 
+    '    ExcelReport.Visible = True
 
+    '    ExcelReport.Workbooks.Add()
 
-        Dim AddNewBackColour As Boolean = True
 
-        Dim AddNewFrontColour As Boolean = True
+    '    'ExcelReport.Worksheets("Sheet1").Select()
 
-        Dim BackColour As String
+    '    'ExcelReport.Sheets("Sheet1").Name = sTXT
 
-        Dim FrontColour As String
 
+    '    i = 0
 
+    '    Do Until i = MyListView.Columns.Count
 
-        '##########################
+    '        If i > MAX_COLUMS Then
 
-        Dim chartRange As Excel.Range
+    '            MsgBox("Too many Colums added")
 
-        '##########################
+    '            Exit Do
 
+    '        End If
 
+    '        TempColum = i
 
+    '        TempColum2 = 0
 
+    '        Do While TempColum > 25
 
+    '            TempColum -= 26
 
+    '            TempColum2 += 1
 
-        Dim ExcelReport As Excel.Application
+    '        Loop
 
+    '        ColumLetter = Chr(97 + TempColum)
 
+    '        If TempColum2 > 0 Then ColumLetter = Chr(96 + TempColum2) & ColumLetter
 
-        'ExcelReport = New Excel.ApplicationClass
+    '        ExcelReport.Range(ColumLetter & 3).Value = MyListView.Columns(i).Text
 
-        ExcelReport = New Excel.Application
+    '        ExcelReport.Range(ColumLetter & 3).Font.Name = MyListView.Font.Name
 
+    '        ExcelReport.Range(ColumLetter & 3).Font.Size = MyListView.Font.Size + 2
 
+    '        ExcelReport.Range(ColumLetter & 3).Font.Bold = True
 
+    '        chartRange = ExcelReport.Range(ColumLetter & 3)
 
+    '        chartRange.BorderAround(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlMedium, Excel.XlColorIndex.xlColorIndexAutomatic, Excel.XlColorIndex.xlColorIndexAutomatic)
 
-        ExcelReport.Visible = True
+    '        i += 1
 
-        ExcelReport.Workbooks.Add()
+    '    Loop
 
+    '    '###############################################
 
+    '    'Вставляем заголовок
 
-        'ExcelReport.Worksheets("Sheet1").Select()
+    '    '###############################################
 
-        'ExcelReport.Sheets("Sheet1").Name = sTXT
+    '    'Устанавливаем диапазон ячеек
 
+    '    chartRange = ExcelReport.Range("A1", ColumLetter & 2)
 
+    '    'Объединяем ячейки
 
+    '    chartRange.Merge()
 
+    '    'Вставляем текст
 
+    '    chartRange.FormulaR1C1 = sTXT
 
+    '    'Выравниваем по центру
 
+    '    chartRange.HorizontalAlignment = 3
 
+    '    chartRange.VerticalAlignment = 2
 
+    '    'Устанавливаем шрифт
 
+    '    ExcelReport.Range("A1").Font.Name = MyListView.Font.Name
 
+    '    'Увеличиваем шрифт
 
+    '    ExcelReport.Range("A1").Font.Size = MyListView.Font.Size + 4
 
-        i = 0
+    '    'Делаем шрифт жирным
 
-        Do Until i = MyListView.Columns.Count
+    '    ExcelReport.Range("A1").Font.Bold = True
 
+    '    '###############################################
 
+    '    '###############################################
 
-            If i > MAX_COLUMS Then
 
+    '    TempRow = 4
 
+    '    For Each New_Item In MyListView.Items
 
-                MsgBox("Too many Colums added")
+    '        i = 0
 
-                Exit Do
+    '        Do Until i = New_Item.SubItems.Count
 
+    '            If i > MAX_COLUMS Then
 
+    '                MsgBox("Too many Colums added")
 
-            End If
+    '                Exit Do
 
-            TempColum = i
+    '            End If
 
-            TempColum2 = 0
+    '            TempColum = i
 
-            Do While TempColum > 25
+    '            TempColum2 = 0
 
+    '            Do While TempColum > 25
 
+    '                TempColum -= 26
 
-                TempColum -= 26
+    '                TempColum2 += 1
 
-                TempColum2 += 1
+    '            Loop
 
+    '            ColumLetter = Chr(97 + TempColum)
 
+    '            If TempColum2 > 0 Then ColumLetter = Chr(96 + TempColum2) & ColumLetter
 
-            Loop
+    '            ExcelReport.Range(ColumLetter & TempRow).Value = New_Item.SubItems(i).Text
 
+    '            ExcelReport.Range(ColumLetter & TempRow).Font.Name = New_Item.Font.Name
 
+    '            ExcelReport.Range(ColumLetter & TempRow).Font.Size = New_Item.Font.Size
 
-            ColumLetter = Chr(97 + TempColum)
+    '            chartRange = ExcelReport.Range(ColumLetter & TempRow)
 
+    '            chartRange.BorderAround(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlMedium, Excel.XlColorIndex.xlColorIndexAutomatic, Excel.XlColorIndex.xlColorIndexAutomatic)
 
+    '            AddNewFrontColour = False
 
-            If TempColum2 > 0 Then ColumLetter = Chr(96 + TempColum2) & ColumLetter
+    '            AddNewBackColour = False
 
+    '            Try
 
+    '                BackColour = MyColours(New_Item.BackColor.ToString)
 
+    '                If BackColour = "" Then AddNewBackColour = True
 
+    '                FrontColour = MyColours(New_Item.ForeColor.ToString)
 
-            ExcelReport.Range(ColumLetter & 3).Value = MyListView.Columns(i).Text
+    '                If FrontColour = "" Then AddNewFrontColour = True
 
-            ExcelReport.Range(ColumLetter & 3).Font.Name = MyListView.Font.Name
+    '            Catch ex As Exception
 
-            ExcelReport.Range(ColumLetter & 3).Font.Size = MyListView.Font.Size + 2
+    '                AddNewFrontColour = False
 
-            ExcelReport.Range(ColumLetter & 3).Font.Bold = True
+    '                AddNewBackColour = False
 
+    '            End Try
 
+    '            If AddedColours < MAX_COLOURS And (AddNewFrontColour Or AddNewBackColour) And (New_Item.BackColor.ToArgb <> -1) Then
 
-            chartRange = ExcelReport.Range(ColumLetter & 3)
+    '                If AddNewBackColour Then
 
-            chartRange.BorderAround(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlMedium, Excel.XlColorIndex.xlColorIndexAutomatic, Excel.XlColorIndex.xlColorIndexAutomatic)
+    '                    MyColours.Add(New_Item.BackColor.ToString, AddedColours)
 
+    '                    ExcelReport.Workbooks.Item(1).Colors(AddedColours) = RGB(New_Item.BackColor.R, New_Item.BackColor.G, New_Item.BackColor.B)
 
+    '                    AddedColours += 1
 
-            i += 1
+    '                End If
 
+    '                If AddNewFrontColour Then
 
+    '                    MyColours.Add(New_Item.ForeColor.ToString, AddedColours)
 
+    '                    ExcelReport.Workbooks.Item(1).Colors(AddedColours) = RGB(New_Item.ForeColor.R, New_Item.ForeColor.G, New_Item.ForeColor.B)
 
+    '                    AddedColours += 1
 
+    '                End If
 
+    '            End If
 
+    '            ExcelReport.Rows(TempRow & ":" & TempRow).select()
 
+    '            ExcelReport.Selection.Interior.ColorIndex = MyColours(New_Item.BackColor.ToString)
 
-        Loop
+    '            ExcelReport.Selection.Font.ColorIndex = MyColours(New_Item.ForeColor.ToString)
 
+    '            i += 1
 
+    '        Loop
 
-        '###############################################
+    '        TempRow += 1
 
-        'Вставляем заголовок
+    '    Next
 
-        '###############################################
 
-        'Устанавливаем диапазон ячеек
+    '    ExcelReport.Cells.Select()
 
-        chartRange = ExcelReport.Range("A1", ColumLetter & 2)
+    '    ExcelReport.Cells.EntireColumn.AutoFit()
 
-        'Объединяем ячейки
+    '    ExcelReport.Cells.Range("A1").Select()
 
-        chartRange.Merge()
 
-        'Вставляем текст
 
-        chartRange.FormulaR1C1 = sTXT
 
-        'Выравниваем по центру
 
-        chartRange.HorizontalAlignment = 3
+    'End Function
 
-        chartRange.VerticalAlignment = 2
-
-        'Устанавливаем шрифт
-
-        ExcelReport.Range("A1").Font.Name = MyListView.Font.Name
-
-        'Увеличиваем шрифт
-
-        ExcelReport.Range("A1").Font.Size = MyListView.Font.Size + 4
-
-        'Делаем шрифт жирным
-
-        ExcelReport.Range("A1").Font.Bold = True
-
-        '###############################################
-
-        '###############################################
-
-
-
-
-
-        TempRow = 4
-
-        For Each New_Item In MyListView.Items
-
-
-
-            i = 0
-
-            Do Until i = New_Item.SubItems.Count
-
-
-
-                If i > MAX_COLUMS Then
-
-
-
-                    MsgBox("Too many Colums added")
-
-                    Exit Do
-
-
-
-                End If
-
-
-
-                TempColum = i
-
-                TempColum2 = 0
-
-
-
-                Do While TempColum > 25
-
-
-
-                    TempColum -= 26
-
-                    TempColum2 += 1
-
-
-
-                Loop
-
-
-
-                ColumLetter = Chr(97 + TempColum)
-
-                If TempColum2 > 0 Then ColumLetter = Chr(96 + TempColum2) & ColumLetter
-
-
-
-                ExcelReport.Range(ColumLetter & TempRow).Value = New_Item.SubItems(i).Text
-
-                ExcelReport.Range(ColumLetter & TempRow).Font.Name = New_Item.Font.Name
-
-                ExcelReport.Range(ColumLetter & TempRow).Font.Size = New_Item.Font.Size
-
-
-
-                chartRange = ExcelReport.Range(ColumLetter & TempRow)
-
-                chartRange.BorderAround(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlMedium, Excel.XlColorIndex.xlColorIndexAutomatic, Excel.XlColorIndex.xlColorIndexAutomatic)
-
-
-
-                AddNewFrontColour = False
-
-                AddNewBackColour = False
-
-                Try
-
-
-
-                    BackColour = MyColours(New_Item.BackColor.ToString)
-
-                    If BackColour = "" Then AddNewBackColour = True
-
-
-
-                    FrontColour = MyColours(New_Item.ForeColor.ToString)
-
-                    If FrontColour = "" Then AddNewFrontColour = True
-
-
-
-                Catch ex As Exception
-
-                    AddNewFrontColour = False
-
-                    AddNewBackColour = False
-
-
-
-                End Try
-
-
-
-                If AddedColours < MAX_COLOURS And (AddNewFrontColour Or AddNewBackColour) And (New_Item.BackColor.ToArgb <> -1) Then
-
-
-
-                    If AddNewBackColour Then
-
-
-
-                        MyColours.Add(New_Item.BackColor.ToString, AddedColours)
-
-                        ExcelReport.Workbooks.Item(1).Colors(AddedColours) = RGB(New_Item.BackColor.R, New_Item.BackColor.G, New_Item.BackColor.B)
-
-                        AddedColours += 1
-
-
-
-                    End If
-
-
-
-
-
-                    If AddNewFrontColour Then
-
-
-
-                        MyColours.Add(New_Item.ForeColor.ToString, AddedColours)
-
-                        ExcelReport.Workbooks.Item(1).Colors(AddedColours) = RGB(New_Item.ForeColor.R, New_Item.ForeColor.G, New_Item.ForeColor.B)
-
-                        AddedColours += 1
-
-
-
-                    End If
-
-                End If
-
-
-
-                ExcelReport.Rows(TempRow & ":" & TempRow).select()
-
-                ExcelReport.Selection.Interior.ColorIndex = MyColours(New_Item.BackColor.ToString)
-
-                ExcelReport.Selection.Font.ColorIndex = MyColours(New_Item.ForeColor.ToString)
-
-
-
-                i += 1
-
-
-
-            Loop
-
-            TempRow += 1
-
-
-
-        Next
-
-
-
-        ExcelReport.Cells.Select()
-
-        ExcelReport.Cells.EntireColumn.AutoFit()
-
-        ExcelReport.Cells.Range("A1").Select()
-
-
-
-
-
-    End Function
-
-    Public Sub ExportListViewToCalc(ByVal listV As ListView)
+    Public Sub ExportListViewToCalc(ByVal listV As ListView, ByVal sTXT As String)
         Dim replacer As Object
         Dim objServiceManager, objDesktop, Cell As Object 'ODS, Sheets,
         Dim objCoreReflection, oDoc, oSheet As Object 'objDocument,
@@ -7691,7 +7561,12 @@ err_:
         Dim intj As Integer = 0
         Dim a, b As String
 
+
         intj = 1
+        a = "A1" '& intj
+        oSheet.getCellByPosition(intj - 1, 0).setString(sTXT)
+
+        intj = 3
 
         For Each CurrentHeader In listV.Columns
 
@@ -8484,5 +8359,261 @@ err_:
 
         End Select
     End Sub
+
+    Public Function ExportListViewToExcel(ByVal MyListView As ListView, ByVal sTXT As String)
+
+        'Dim ExcelReport As Excel.ApplicationClass
+
+        ' Const MAX_COLOURS As Int16 = 40
+
+        Const MAX_COLUMS As Int16 = 254
+
+        Dim i As Integer
+
+        Dim New_Item As Windows.Forms.ListViewItem
+
+        Dim TempColum As Int16
+
+        Dim ColumLetter As String
+
+        Dim TempRow As Int16
+
+        Dim TempColum2 As Int16
+
+        Dim AddedColours As Int16 = 1
+
+        Dim MyColours As Hashtable = New Hashtable
+
+        Dim AddNewBackColour As Boolean = True
+
+        Dim AddNewFrontColour As Boolean = True
+
+        'Dim BackColour As String
+
+        'Dim FrontColour As String
+
+
+        '##########################
+
+        Dim chartRange As Excel.Range
+
+        '##########################
+
+
+        Dim ExcelReport As Excel.Application
+
+        'ExcelReport = New Excel.ApplicationClass
+
+        ExcelReport = New Excel.Application
+
+        ExcelReport.Visible = True
+
+        ExcelReport.Workbooks.Add()
+
+
+        'ExcelReport.Worksheets("Sheet1").Select()
+
+        'ExcelReport.Sheets("Sheet1").Name = sTXT
+
+
+        i = 0
+
+        Do Until i = MyListView.Columns.Count
+
+            If i > MAX_COLUMS Then
+
+                MsgBox("Too many Colums added")
+
+                Exit Do
+
+            End If
+
+            TempColum = i
+
+            TempColum2 = 0
+
+            Do While TempColum > 25
+
+                TempColum -= 26
+
+                TempColum2 += 1
+
+            Loop
+
+            ColumLetter = Chr(97 + TempColum)
+
+            If TempColum2 > 0 Then ColumLetter = Chr(96 + TempColum2) & ColumLetter
+
+            ExcelReport.Range(ColumLetter & 3).Value = MyListView.Columns(i).Text
+
+            'ExcelReport.Range(ColumLetter & 3).Font.Name = MyListView.Font.Name
+
+            ' ExcelReport.Range(ColumLetter & 3).Font.Size = MyListView.Font.Size + 2
+
+            ExcelReport.Range(ColumLetter & 3).Font.Bold = True
+
+            chartRange = ExcelReport.Range(ColumLetter & 3)
+
+            chartRange.BorderAround(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlMedium, Excel.XlColorIndex.xlColorIndexAutomatic, Excel.XlColorIndex.xlColorIndexAutomatic)
+
+            i += 1
+
+        Loop
+
+        '###############################################
+
+        'Вставляем заголовок
+
+        '###############################################
+
+        'Устанавливаем диапазон ячеек
+
+        chartRange = ExcelReport.Range("A1", ColumLetter & 2)
+
+        'Объединяем ячейки
+
+        chartRange.Merge()
+
+        'Вставляем текст
+
+        chartRange.FormulaR1C1 = sTXT
+
+        'Выравниваем по центру
+
+        chartRange.HorizontalAlignment = 3
+
+        chartRange.VerticalAlignment = 2
+
+        'Устанавливаем шрифт
+
+        ExcelReport.Range("A1").Font.Name = MyListView.Font.Name
+
+        'Увеличиваем шрифт
+
+        ExcelReport.Range("A1").Font.Size = MyListView.Font.Size + 4
+
+        'Делаем шрифт жирным
+
+        ExcelReport.Range("A1").Font.Bold = True
+
+        '###############################################
+
+        '###############################################
+
+
+        TempRow = 4
+
+        For Each New_Item In MyListView.Items
+
+            i = 0
+
+            Do Until i = New_Item.SubItems.Count
+
+                If i > MAX_COLUMS Then
+
+                    MsgBox("Too many Colums added")
+
+                    Exit Do
+
+                End If
+
+                TempColum = i
+
+                TempColum2 = 0
+
+                Do While TempColum > 25
+
+                    TempColum -= 26
+
+                    TempColum2 += 1
+
+                Loop
+
+                ColumLetter = Chr(97 + TempColum)
+
+                If TempColum2 > 0 Then ColumLetter = Chr(96 + TempColum2) & ColumLetter
+
+                ExcelReport.Range(ColumLetter & TempRow).Value = New_Item.SubItems(i).Text
+
+                'ExcelReport.Range(ColumLetter & TempRow).Font.Name = New_Item.Font.Name
+
+                'ExcelReport.Range(ColumLetter & TempRow).Font.Size = New_Item.Font.Size
+
+                chartRange = ExcelReport.Range(ColumLetter & TempRow)
+
+                chartRange.BorderAround(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlMedium, Excel.XlColorIndex.xlColorIndexAutomatic, Excel.XlColorIndex.xlColorIndexAutomatic)
+
+                'AddNewFrontColour = False
+
+                'AddNewBackColour = False
+
+                'Try
+
+                '    BackColour = MyColours(New_Item.BackColor.ToString)
+
+                '    If BackColour = "" Then AddNewBackColour = True
+
+                '    FrontColour = MyColours(New_Item.ForeColor.ToString)
+
+                '    If FrontColour = "" Then AddNewFrontColour = True
+
+                'Catch ex As Exception
+
+                '    AddNewFrontColour = False
+
+                '    AddNewBackColour = False
+
+                'End Try
+
+                'If AddedColours < MAX_COLOURS And (AddNewFrontColour Or AddNewBackColour) And (New_Item.BackColor.ToArgb <> -1) Then
+
+                '    If AddNewBackColour Then
+
+                '        MyColours.Add(New_Item.BackColor.ToString, AddedColours)
+
+                '        ExcelReport.Workbooks.Item(1).Colors(AddedColours) = RGB(New_Item.BackColor.R, New_Item.BackColor.G, New_Item.BackColor.B)
+
+                '        AddedColours += 1
+
+                '    End If
+
+                '    If AddNewFrontColour Then
+
+                '        MyColours.Add(New_Item.ForeColor.ToString, AddedColours)
+
+                '        ExcelReport.Workbooks.Item(1).Colors(AddedColours) = RGB(New_Item.ForeColor.R, New_Item.ForeColor.G, New_Item.ForeColor.B)
+
+                '        AddedColours += 1
+
+                '    End If
+
+                'End If
+
+                'ExcelReport.Rows(TempRow & ":" & TempRow).select()
+
+                'ExcelReport.Selection.Interior.ColorIndex = MyColours(New_Item.BackColor.ToString)
+
+                'ExcelReport.Selection.Font.ColorIndex = MyColours(New_Item.ForeColor.ToString)
+
+                i += 1
+
+            Loop
+
+            TempRow += 1
+
+        Next
+
+
+        ExcelReport.Cells.Select()
+
+        ExcelReport.Cells.EntireColumn.AutoFit()
+
+        ExcelReport.Cells.Range("A1").Select()
+
+
+
+
+
+    End Function
 
 End Module

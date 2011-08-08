@@ -301,7 +301,7 @@ SRCCH2:
 
             Case "OpenOffice.org"
 
-                ExportListViewToCalc(lstSearch)
+                ExportListViewToCalc(lstSearch, Me.Text & " " & txtSearch.Text)
 
             Case Else
 

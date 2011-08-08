@@ -283,7 +283,7 @@
 
             Case "OpenOffice.org"
 
-                ExportListViewToCalc(lvSclad)
+                ExportListViewToCalc(lvSclad, Me.Text)
 
             Case Else
 

@@ -67,6 +67,7 @@ Partial Class frmMain
         Me.ЗапросыToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CleerDBToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.QRCodeTestingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ПерегрузкаСрправочниковToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ViewMenu = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolBarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusBarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -132,7 +133,7 @@ Partial Class frmMain
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.ArhToolZipbutton = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
-        Me.ПерегрузкаСрправочниковToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ПроверитьФилиалыОтделыToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip.SuspendLayout()
         Me.StatusStrip.SuspendLayout()
         Me.ToolStrip.SuspendLayout()
@@ -368,7 +369,7 @@ Partial Class frmMain
         '
         Me.РемонтыToolStripMenuItem.Name = "РемонтыToolStripMenuItem"
         Me.РемонтыToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F11
-        Me.РемонтыToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.РемонтыToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
         Me.РемонтыToolStripMenuItem.Text = "Ремонты"
         '
         'ToolsMenu
@@ -387,7 +388,7 @@ Partial Class frmMain
         '
         'ОбслуживаниеБДToolStripMenuItem
         '
-        Me.ОбслуживаниеБДToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CompareDBToolStripMenuItem, Me.ЗапросыToolStripMenuItem, Me.CleerDBToolStripMenuItem})
+        Me.ОбслуживаниеБДToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CompareDBToolStripMenuItem, Me.ЗапросыToolStripMenuItem, Me.CleerDBToolStripMenuItem, Me.ПроверитьФилиалыОтделыToolStripMenuItem})
         Me.ОбслуживаниеБДToolStripMenuItem.Name = "ОбслуживаниеБДToolStripMenuItem"
         Me.ОбслуживаниеБДToolStripMenuItem.Size = New System.Drawing.Size(251, 22)
         Me.ОбслуживаниеБДToolStripMenuItem.Text = "Обслуживание БД"
@@ -395,19 +396,19 @@ Partial Class frmMain
         'CompareDBToolStripMenuItem
         '
         Me.CompareDBToolStripMenuItem.Name = "CompareDBToolStripMenuItem"
-        Me.CompareDBToolStripMenuItem.Size = New System.Drawing.Size(123, 22)
+        Me.CompareDBToolStripMenuItem.Size = New System.Drawing.Size(191, 22)
         Me.CompareDBToolStripMenuItem.Text = "Сжатие"
         '
         'ЗапросыToolStripMenuItem
         '
         Me.ЗапросыToolStripMenuItem.Name = "ЗапросыToolStripMenuItem"
-        Me.ЗапросыToolStripMenuItem.Size = New System.Drawing.Size(123, 22)
+        Me.ЗапросыToolStripMenuItem.Size = New System.Drawing.Size(191, 22)
         Me.ЗапросыToolStripMenuItem.Text = "Запросы"
         '
         'CleerDBToolStripMenuItem
         '
         Me.CleerDBToolStripMenuItem.Name = "CleerDBToolStripMenuItem"
-        Me.CleerDBToolStripMenuItem.Size = New System.Drawing.Size(123, 22)
+        Me.CleerDBToolStripMenuItem.Size = New System.Drawing.Size(191, 22)
         Me.CleerDBToolStripMenuItem.Text = "Очистка"
         '
         'QRCodeTestingToolStripMenuItem
@@ -416,6 +417,14 @@ Partial Class frmMain
         Me.QRCodeTestingToolStripMenuItem.Size = New System.Drawing.Size(251, 22)
         Me.QRCodeTestingToolStripMenuItem.Text = "QR Code Testing"
         Me.QRCodeTestingToolStripMenuItem.Visible = False
+        '
+        'ПерегрузкаСрправочниковToolStripMenuItem
+        '
+        Me.ПерегрузкаСрправочниковToolStripMenuItem.Name = "ПерегрузкаСрправочниковToolStripMenuItem"
+        Me.ПерегрузкаСрправочниковToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F12
+        Me.ПерегрузкаСрправочниковToolStripMenuItem.Size = New System.Drawing.Size(251, 22)
+        Me.ПерегрузкаСрправочниковToolStripMenuItem.Text = "Перегрузка срправочников"
+        Me.ПерегрузкаСрправочниковToolStripMenuItem.Visible = False
         '
         'ViewMenu
         '
@@ -845,13 +854,11 @@ Partial Class frmMain
         Me.ToolStripButton1.Size = New System.Drawing.Size(52, 22)
         Me.ToolStripButton1.Text = "Отчеты"
         '
-        'ПерегрузкаСрправочниковToolStripMenuItem
+        'ПроверитьФилиалыОтделыToolStripMenuItem
         '
-        Me.ПерегрузкаСрправочниковToolStripMenuItem.Name = "ПерегрузкаСрправочниковToolStripMenuItem"
-        Me.ПерегрузкаСрправочниковToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F12
-        Me.ПерегрузкаСрправочниковToolStripMenuItem.Size = New System.Drawing.Size(251, 22)
-        Me.ПерегрузкаСрправочниковToolStripMenuItem.Text = "Перегрузка срправочников"
-        Me.ПерегрузкаСрправочниковToolStripMenuItem.Visible = False
+        Me.ПроверитьФилиалыОтделыToolStripMenuItem.Name = "ПроверитьФилиалыОтделыToolStripMenuItem"
+        Me.ПроверитьФилиалыОтделыToolStripMenuItem.Size = New System.Drawing.Size(191, 22)
+        Me.ПроверитьФилиалыОтделыToolStripMenuItem.Text = "Проверить структуру"
         '
         'frmMain
         '
@@ -987,5 +994,6 @@ Partial Class frmMain
     Friend WithEvents CNTToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents netMagmnu As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ПерегрузкаСрправочниковToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ПроверитьФилиалыОтделыToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

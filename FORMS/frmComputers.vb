@@ -109,43 +109,37 @@ Public Class frmComputers
 
     End Sub
 
-
-
     Private Sub frmComputers_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
         Me.WindowState = FormWindowState.Maximized
 
-        'Call Load_ICONS()
 
-
-        Dim newThread7 As New Thread(AddressOf Load_ICONS)
-        newThread7.Start()
-
+        Me.BeginInvoke(New MethodInvoker(AddressOf Load_ICONS))
 
         'Меняем шрифт на форме
 
+        Me.BeginInvoke(New MethodInvoker(AddressOf Font_Form_For_Computer_1))
 
-        Dim newThread1 As New Thread(AddressOf Font_Form_For_Computer_1)
-        newThread1.Start()
+        Me.BeginInvoke(New MethodInvoker(AddressOf frmComputers_Lang_1))
+
 
         Dim newThread2 As New Thread(AddressOf LoadSPR_1)
         newThread2.Start()
+        newThread2.Priority = 4
 
-
-        Dim newThread3 As New Thread(AddressOf frmComputers_Lang_1)
-        newThread3.Start()
 
         Me.BeginInvoke(New MethodInvoker(AddressOf RESIZER))
 
         Dim newThread4 As New Thread(AddressOf STAT_INF_1)
         newThread4.Start()
+        newThread4.Priority = 4
 
         Application.DoEvents()
 
 
         Me.Cursor = Cursors.WaitCursor
 
-        'Call add_kabn_if_nothing()
+
 
         Dim objIniFile As New IniFile(PrPath & "base.ini")
         Dim uname As String
@@ -161,7 +155,6 @@ Public Class frmComputers
         Else
             treebranche.Text = uname
         End If
-
 
 
         uname = objIniFile.GetString("General", "VisibleALL", "0")
@@ -230,7 +223,7 @@ Public Class frmComputers
             If Me.lstGroups.Nodes.Count = 0 Then
                 Dim newThread5 As New Thread(AddressOf R_T_LOAD)
                 newThread5.Start()
-
+                newThread5.Priority = 4
             End If
 
         End If
@@ -530,6 +523,7 @@ Error_:
 
                             Dim newThread1 As New Thread(AddressOf T_LOAD_T)
                             newThread1.Start()
+                            newThread1.Priority = 4
 
                             Dim newThread2 As New Thread(AddressOf S_P_LOAD_t)
                             newThread2.Start()
@@ -572,6 +566,7 @@ Error_:
 
                             Dim newThread3 As New Thread(AddressOf T_LOAD_T)
                             newThread3.Start()
+                            newThread3.Priority = 4
 
                             Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
                             newThread4.Start()
@@ -604,6 +599,7 @@ Error_:
 
                             Dim newThread3 As New Thread(AddressOf T_LOAD_T)
                             newThread3.Start()
+                            newThread3.Priority = 4
 
                             Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
                             newThread4.Start()
@@ -631,7 +627,9 @@ Error_:
                             cmbPCL.Visible = False
 
 
-                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                            Dim newThread3 As New Thread(AddressOf T_LOAD_T)
+                            newThread3.Start()
+                            newThread3.Priority = 4
 
                             Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
                             newThread4.Start()
@@ -668,6 +666,7 @@ Error_:
 
                             Dim newThread3 As New Thread(AddressOf T_LOAD_T)
                             newThread3.Start()
+                            newThread3.Priority = 4
 
                             Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
                             newThread4.Start()
@@ -708,6 +707,7 @@ Error_:
 
                             Dim newThread3 As New Thread(AddressOf T_LOAD_T)
                             newThread3.Start()
+                            newThread3.Priority = 4
 
                             Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
                             newThread4.Start()
@@ -742,6 +742,7 @@ Error_:
 
                             Dim newThread3 As New Thread(AddressOf T_LOAD_T)
                             newThread3.Start()
+                            newThread3.Priority = 4
 
                             Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
                             newThread4.Start()
@@ -777,6 +778,7 @@ Error_:
 
                             Dim newThread3 As New Thread(AddressOf T_LOAD_T)
                             newThread3.Start()
+                            newThread3.Priority = 4
 
                             Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
                             newThread4.Start()
@@ -810,6 +812,7 @@ Error_:
 
                             Dim newThread3 As New Thread(AddressOf T_LOAD_T)
                             newThread3.Start()
+                            newThread3.Priority = 4
 
                             Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
                             newThread4.Start()
@@ -845,6 +848,7 @@ Error_:
 
                             Dim newThread3 As New Thread(AddressOf T_LOAD_T)
                             newThread3.Start()
+                            newThread3.Priority = 4
 
                             Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
                             newThread4.Start()
@@ -887,6 +891,7 @@ Error_:
 
                             Dim newThread3 As New Thread(AddressOf T_LOAD_T)
                             newThread3.Start()
+                            newThread3.Priority = 4
 
                             Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
                             newThread4.Start()
@@ -936,6 +941,7 @@ Error_:
 
                             Dim newThread3 As New Thread(AddressOf T_LOAD_T)
                             newThread3.Start()
+                            newThread3.Priority = 4
 
                             Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
                             newThread4.Start()
@@ -970,6 +976,7 @@ Error_:
 
                             Dim newThread3 As New Thread(AddressOf T_LOAD_T)
                             newThread3.Start()
+                            newThread3.Priority = 4
 
                             Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
                             newThread4.Start()
@@ -1004,6 +1011,7 @@ Error_:
 
                             Dim newThread3 As New Thread(AddressOf T_LOAD_T)
                             newThread3.Start()
+                            newThread3.Priority = 4
 
                             Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
                             newThread4.Start()
@@ -1038,6 +1046,7 @@ Error_:
 
                             Dim newThread3 As New Thread(AddressOf T_LOAD_T)
                             newThread3.Start()
+                            newThread3.Priority = 4
 
                             Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
                             newThread4.Start()
@@ -1072,6 +1081,7 @@ Error_:
 
                             Dim newThread3 As New Thread(AddressOf T_LOAD_T)
                             newThread3.Start()
+                            newThread3.Priority = 4
 
                             Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
                             newThread4.Start()
@@ -1106,6 +1116,7 @@ Error_:
 
                             Dim newThread3 As New Thread(AddressOf T_LOAD_T)
                             newThread3.Start()
+                            newThread3.Priority = 4
 
                             Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
                             newThread4.Start()
@@ -1145,6 +1156,7 @@ Error_:
 
                             Dim newThread3 As New Thread(AddressOf T_LOAD_T)
                             newThread3.Start()
+                            newThread3.Priority = 4
 
                             Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
                             newThread4.Start()
@@ -1537,8 +1549,7 @@ err_:
 
         Dim newThread1 As New Thread(AddressOf R_T_LOAD)
         newThread1.Start()
-        'newThread2.Join()
-        newThread1.Join()
+        newThread1.Priority = 4
 
         'Call LoadSPR()
         'Call RefFilTree(lstGroups)
@@ -1557,6 +1568,7 @@ err_:
                 lstGroups.Nodes.Clear()
                 Dim newThread1 As New Thread(AddressOf S2_LOAD_)
                 newThread1.Start()
+                newThread1.Priority = 3
 
         End Select
 
