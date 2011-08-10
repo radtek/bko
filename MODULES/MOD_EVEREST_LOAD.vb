@@ -838,6 +838,9 @@ nextA:
         frmComputers.lstSoftware.Items.Clear()
         intcount = 0
         For intj = 1 To 400
+            uname = ""
+            uname1 = ""
+            uname2 = ""
 
             A = "Установленные программы" & intj
 

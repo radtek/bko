@@ -59,87 +59,7 @@ Public Class frmComputers
         frmMain.ToolStripDropDownButton1.Enabled = False
     End Sub
 
-    Private Sub Load_ICONS()
-
-        On Error Resume Next
-
-        mnuDeltoBranch.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\delete.png")
-        DeleteBranche.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\delete.png")
-
-        addFoldertoBranch.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\fadd.png")
-        RepAddBrToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\service.png")
-        SoftInstallToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\soft.png")
-        ПаспортКомпьютераToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\pasport.png")
-        MassRazdelPerf.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\remove.png")
-        MassObedPerf.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\add.png")
-        MassUpdatetoINI.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\updatefolder.png")
-
-        DELTEdVIGToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\delete.png")
-        DeleteService.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\delete.png")
-
-        EditService.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\editservice.png")
-        MnuSendEmail.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\sendmail.png")
-        mnu_Z_to_Office.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\serviceprint.png")
-        mnu_z_rasp.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\servicerasp.png")
-
-        addRemToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\service.png")
-        'CartrAddToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\servicerasp.png")
-
-        CopyToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\copy.png")
-        UpdateToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\pcupdate.png")
-
-        DeleteToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\delete.png")
-
-        ОтделитьПринтерыИМониторыToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\remove.png")
-        ВернутьПерефериюToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\add.png")
-
-        btnSearch.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\search.png")
-        'search
-
-
-
-
-        If ilsCommands.Images.Count = 0 Then
-
-            Call Tree_Icons_Feel(ilsCommands, "sCMP", "pic\tree\")
-            'Call Tree_Icons_Feel(ImageList11, "sCMP", "pic\tree\")
-
-        End If
-
-
-    End Sub
-
-    Private Sub frmComputers_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-
-        Me.WindowState = FormWindowState.Maximized
-
-
-        Me.BeginInvoke(New MethodInvoker(AddressOf Load_ICONS))
-
-        'Меняем шрифт на форме
-
-        Me.BeginInvoke(New MethodInvoker(AddressOf Font_Form_For_Computer_1))
-
-        Me.BeginInvoke(New MethodInvoker(AddressOf frmComputers_Lang_1))
-
-
-        Dim newThread2 As New Thread(AddressOf LoadSPR_1)
-        newThread2.Start()
-        newThread2.Priority = 4
-
-
-        Me.BeginInvoke(New MethodInvoker(AddressOf RESIZER))
-
-        Dim newThread4 As New Thread(AddressOf STAT_INF_1)
-        newThread4.Start()
-        newThread4.Priority = 4
-
-        Application.DoEvents()
-
-
-        Me.Cursor = Cursors.WaitCursor
-
-
+    Private Sub PRELOAD_FORM()
 
         Dim objIniFile As New IniFile(PrPath & "base.ini")
         Dim uname As String
@@ -148,6 +68,7 @@ Public Class frmComputers
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
         'Выбираем филиал если он выбран, если нет то "Все"
+
 
         If Len(uname) = 0 Then
             treebranche.Text = LNGIniFile.GetString("frmComputers", "MSG53", "")
@@ -215,6 +136,141 @@ Public Class frmComputers
         cmbTIPCartridg.Items.Add(langfile.GetString("frmComputers", "MSG10", ""))
         cmbTIPCartridg.Items.Add(langfile.GetString("frmComputers", "MSG11", ""))
         cmbTIPCartridg.Items.Add(langfile.GetString("frmComputers", "MSG12", ""))
+    End Sub
+
+    Private Sub Load_ICONS()
+
+        On Error Resume Next
+
+        mnuDeltoBranch.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\delete.png")
+        DeleteBranche.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\delete.png")
+
+        addFoldertoBranch.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\fadd.png")
+        RepAddBrToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\service.png")
+        SoftInstallToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\soft.png")
+        ПаспортКомпьютераToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\pasport.png")
+        MassRazdelPerf.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\remove.png")
+        MassObedPerf.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\add.png")
+        MassUpdatetoINI.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\updatefolder.png")
+
+        DELTEdVIGToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\delete.png")
+        DeleteService.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\delete.png")
+
+        EditService.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\editservice.png")
+        MnuSendEmail.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\sendmail.png")
+        mnu_Z_to_Office.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\serviceprint.png")
+        mnu_z_rasp.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\servicerasp.png")
+
+        addRemToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\service.png")
+        'CartrAddToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\servicerasp.png")
+
+        CopyToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\copy.png")
+        UpdateToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\pcupdate.png")
+
+        DeleteToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\delete.png")
+
+        ОтделитьПринтерыИМониторыToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\remove.png")
+        ВернутьПерефериюToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\add.png")
+
+        btnSearch.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\search.png")
+
+
+        addServiseWork.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\add.png")
+
+
+        If ilsCommands.Images.Count = 0 Then
+
+            Call Tree_Icons_Feel(ilsCommands, "sCMP", "pic\tree\")
+            'Call Tree_Icons_Feel(ImageList11, "sCMP", "pic\tree\")
+
+        End If
+
+
+    End Sub
+
+    Private Sub frmComputers_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+
+        Dim objIniFile As New IniFile(PrPath & "base.ini")
+
+        KCKey = objIniFile.GetString("general", "DK", 0)
+        DCKey = objIniFile.GetString("general", "Default", 0)
+
+
+        If Len(DCKey) <> 0 And DCKey <> "0" Then sSTAB5.Visible = True
+
+        If KCKey <> 0 Then
+
+            Dim rs As ADODB.Recordset
+            rs = New ADODB.Recordset
+
+            Dim VisibleSSTAB As String
+
+            rs.Open("SELECT tiptehn from kompy where id=" & KCKey, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+            With rs
+
+                VisibleSSTAB = .Fields("tiptehn").Value
+
+            End With
+
+            rs.Close()
+            rs = Nothing
+
+            Select Case VisibleSSTAB
+
+                Case "PC"
+                    sSTAB1.Visible = True
+
+                Case "Printer"
+                    sSTAB2.Visible = True
+
+                Case "KOpir"
+                    sSTAB2.Visible = True
+
+                Case "MFU"
+                    sSTAB2.Visible = True
+
+                Case "NET"
+                    sSTAB4.Visible = True
+                Case Else
+                    sSTAB3.Visible = True
+
+            End Select
+
+
+        End If
+
+
+        'Загружаем иконки
+        Me.BeginInvoke(New MethodInvoker(AddressOf Load_ICONS))
+
+        ' Меняем шрифт на форме
+        Me.BeginInvoke(New MethodInvoker(AddressOf Font_Form_For_Computer_1))
+        Me.BeginInvoke(New MethodInvoker(AddressOf frmComputers_Lang_1))
+
+
+
+        Me.BeginInvoke(New MethodInvoker(AddressOf RESIZER))
+
+        Dim newThread2 As New Thread(AddressOf LoadSPR_1)
+        newThread2.Start()
+        'newThread2.Priority = 4
+
+        Dim newThread4 As New Thread(AddressOf STAT_INF_1)
+        newThread4.Start()
+        'newThread4.Priority = 4
+
+
+        Me.WindowState = FormWindowState.Maximized
+
+        Me.Cursor = Cursors.WaitCursor
+
+
+        Application.DoEvents()
+
+        Me.BeginInvoke(New MethodInvoker(AddressOf PRELOAD_FORM))
+
+        Application.DoEvents()
 
 
 
@@ -223,7 +279,7 @@ Public Class frmComputers
             If Me.lstGroups.Nodes.Count = 0 Then
                 Dim newThread5 As New Thread(AddressOf R_T_LOAD)
                 newThread5.Start()
-                newThread5.Priority = 4
+                'newThread5.Priority = 4
             End If
 
         End If
@@ -402,6 +458,8 @@ Error_:
         Me.BeginInvoke(New MethodInvoker(AddressOf LOAD_LIST))
         Me.BeginInvoke(New MethodInvoker(AddressOf selectTECMesto))
 
+        Application.DoEvents()
+
         Me.Cursor = Cursors.Default
     End Sub
 
@@ -523,7 +581,7 @@ Error_:
 
                             Dim newThread1 As New Thread(AddressOf T_LOAD_T)
                             newThread1.Start()
-                            newThread1.Priority = 4
+                            'newThread1.Priority = 4
 
                             Dim newThread2 As New Thread(AddressOf S_P_LOAD_t)
                             newThread2.Start()
@@ -566,7 +624,7 @@ Error_:
 
                             Dim newThread3 As New Thread(AddressOf T_LOAD_T)
                             newThread3.Start()
-                            newThread3.Priority = 4
+                            'newThread3.Priority = 4
 
                             Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
                             newThread4.Start()
@@ -599,7 +657,7 @@ Error_:
 
                             Dim newThread3 As New Thread(AddressOf T_LOAD_T)
                             newThread3.Start()
-                            newThread3.Priority = 4
+                            'newThread3.Priority = 4
 
                             Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
                             newThread4.Start()
@@ -629,7 +687,7 @@ Error_:
 
                             Dim newThread3 As New Thread(AddressOf T_LOAD_T)
                             newThread3.Start()
-                            newThread3.Priority = 4
+                            'newThread3.Priority = 4
 
                             Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
                             newThread4.Start()
@@ -666,7 +724,7 @@ Error_:
 
                             Dim newThread3 As New Thread(AddressOf T_LOAD_T)
                             newThread3.Start()
-                            newThread3.Priority = 4
+                            'newThread3.Priority = 4
 
                             Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
                             newThread4.Start()
@@ -707,7 +765,7 @@ Error_:
 
                             Dim newThread3 As New Thread(AddressOf T_LOAD_T)
                             newThread3.Start()
-                            newThread3.Priority = 4
+                            'newThread3.Priority = 4
 
                             Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
                             newThread4.Start()
@@ -742,7 +800,7 @@ Error_:
 
                             Dim newThread3 As New Thread(AddressOf T_LOAD_T)
                             newThread3.Start()
-                            newThread3.Priority = 4
+                            'newThread3.Priority = 4
 
                             Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
                             newThread4.Start()
@@ -778,7 +836,7 @@ Error_:
 
                             Dim newThread3 As New Thread(AddressOf T_LOAD_T)
                             newThread3.Start()
-                            newThread3.Priority = 4
+                            'newThread3.Priority = 4
 
                             Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
                             newThread4.Start()
@@ -812,7 +870,7 @@ Error_:
 
                             Dim newThread3 As New Thread(AddressOf T_LOAD_T)
                             newThread3.Start()
-                            newThread3.Priority = 4
+                            'newThread3.Priority = 4
 
                             Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
                             newThread4.Start()
@@ -848,7 +906,7 @@ Error_:
 
                             Dim newThread3 As New Thread(AddressOf T_LOAD_T)
                             newThread3.Start()
-                            newThread3.Priority = 4
+                            'newThread3.Priority = 4
 
                             Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
                             newThread4.Start()
@@ -891,7 +949,7 @@ Error_:
 
                             Dim newThread3 As New Thread(AddressOf T_LOAD_T)
                             newThread3.Start()
-                            newThread3.Priority = 4
+                            'newThread3.Priority = 4
 
                             Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
                             newThread4.Start()
@@ -941,7 +999,7 @@ Error_:
 
                             Dim newThread3 As New Thread(AddressOf T_LOAD_T)
                             newThread3.Start()
-                            newThread3.Priority = 4
+                            'newThread3.Priority = 4
 
                             Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
                             newThread4.Start()
@@ -976,7 +1034,7 @@ Error_:
 
                             Dim newThread3 As New Thread(AddressOf T_LOAD_T)
                             newThread3.Start()
-                            newThread3.Priority = 4
+                            'newThread3.Priority = 4
 
                             Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
                             newThread4.Start()
@@ -1011,7 +1069,7 @@ Error_:
 
                             Dim newThread3 As New Thread(AddressOf T_LOAD_T)
                             newThread3.Start()
-                            newThread3.Priority = 4
+                            'newThread3.Priority = 4
 
                             Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
                             newThread4.Start()
@@ -1046,7 +1104,7 @@ Error_:
 
                             Dim newThread3 As New Thread(AddressOf T_LOAD_T)
                             newThread3.Start()
-                            newThread3.Priority = 4
+                            'newThread3.Priority = 4
 
                             Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
                             newThread4.Start()
@@ -1081,7 +1139,7 @@ Error_:
 
                             Dim newThread3 As New Thread(AddressOf T_LOAD_T)
                             newThread3.Start()
-                            newThread3.Priority = 4
+                            'newThread3.Priority = 4
 
                             Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
                             newThread4.Start()
@@ -1116,7 +1174,7 @@ Error_:
 
                             Dim newThread3 As New Thread(AddressOf T_LOAD_T)
                             newThread3.Start()
-                            newThread3.Priority = 4
+                            'newThread3.Priority = 4
 
                             Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
                             newThread4.Start()
@@ -1156,7 +1214,7 @@ Error_:
 
                             Dim newThread3 As New Thread(AddressOf T_LOAD_T)
                             newThread3.Start()
-                            newThread3.Priority = 4
+                            'newThread3.Priority = 4
 
                             Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
                             newThread4.Start()
@@ -1549,7 +1607,7 @@ err_:
 
         Dim newThread1 As New Thread(AddressOf R_T_LOAD)
         newThread1.Start()
-        newThread1.Priority = 4
+        'newThread1.Priority = 4
 
         'Call LoadSPR()
         'Call RefFilTree(lstGroups)
@@ -1568,7 +1626,7 @@ err_:
                 lstGroups.Nodes.Clear()
                 Dim newThread1 As New Thread(AddressOf S2_LOAD_)
                 newThread1.Start()
-                newThread1.Priority = 3
+                'newThread1.Priority = 3
 
         End Select
 
@@ -1830,6 +1888,9 @@ err_:
         For z = 0 To lvList.SelectedItems.Count - 1
             rCOUNT = (lvList.SelectedItems(z).Text)
         Next
+
+        If rCOUNT = 0 Then Exit Sub
+
         frmService_add.REMED = True
 
         'frmserviceDesc.MdiParent = frmMain
@@ -3150,6 +3211,8 @@ err_:
     Public Sub lstGroups_DragDrop(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles lstGroups.DragDrop
         On Error Resume Next
 
+        Dim sBranch_, sDepartment_, sOffice_ As String
+
         If uLevelTehAdd = False And uLevel <> "Admin" Then Exit Sub
 
         'Check that there is a TreeNode being dragged
@@ -3184,6 +3247,13 @@ err_:
 
             Call selectTECMesto()
 
+
+
+            sBranch_ = sBranch
+            sDepartment_ = sDepartment
+            sOffice_ = sOffice
+
+
         End If
 
         'Ensure the newley created node is visible to the user and select it
@@ -3199,11 +3269,11 @@ err_:
 
                 Case "PC"
 
-                    Me.cmbBranch.Text = sBranch
-                    Me.cmbDepartment.Text = sDepartment
-                    Me.cmbOffice.Text = sOffice
+                    Me.cmbBranch.Text = sBranch_
+                    Me.cmbDepartment.Text = sDepartment_
+                    Me.cmbOffice.Text = sOffice_
 
-                    SAVE_DRAG_DROP(Me.sCOUNT, sBranch, sDepartment, sOffice, Me.lstGroups.SelectedNode.Text)
+                    SAVE_DRAG_DROP(Me.sCOUNT, sBranch_, sDepartment_, sOffice_, Me.lstGroups.SelectedNode.Text)
 
                     Dim newThread1 As New Thread(AddressOf T_LOAD_T)
                     newThread1.Start()
@@ -3212,115 +3282,115 @@ err_:
 
                 Case "KOpir"
 
-                    Me.cmbPRNFil.Text = sBranch
-                    Me.cmbPRNDepart.Text = sDepartment
-                    Me.cmbPRNOffice.Text = sOffice
+                    Me.cmbPRNFil.Text = sBranch_
+                    Me.cmbPRNDepart.Text = sDepartment_
+                    Me.cmbPRNOffice.Text = sOffice_
 
-                    SAVE_DRAG_DROP(Me.sCOUNT, sBranch, sDepartment, sOffice, Me.lstGroups.SelectedNode.Text)
+                    SAVE_DRAG_DROP(Me.sCOUNT, sBranch_, sDepartment_, sOffice_, Me.lstGroups.SelectedNode.Text)
                     Dim newThread1 As New Thread(AddressOf T_LOAD_T)
                     newThread1.Start()
                     Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
                     newThread6.Start()
                 Case "Printer"
 
-                    Me.cmbPRNFil.Text = sBranch
-                    Me.cmbPRNDepart.Text = sDepartment
-                    Me.cmbPRNOffice.Text = sOffice
+                    Me.cmbPRNFil.Text = sBranch_
+                    Me.cmbPRNDepart.Text = sDepartment_
+                    Me.cmbPRNOffice.Text = sOffice_
 
-                    SAVE_DRAG_DROP(Me.sCOUNT, sBranch, sDepartment, sOffice, Me.lstGroups.SelectedNode.Text)
+                    SAVE_DRAG_DROP(Me.sCOUNT, sBranch_, sDepartment_, sOffice_, Me.lstGroups.SelectedNode.Text)
                     Dim newThread1 As New Thread(AddressOf T_LOAD_T)
                     newThread1.Start()
                     Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
                     newThread6.Start()
                 Case "MFU"
 
-                    Me.cmbPRNFil.Text = sBranch
-                    Me.cmbPRNDepart.Text = sDepartment
-                    Me.cmbPRNOffice.Text = sOffice
+                    Me.cmbPRNFil.Text = sBranch_
+                    Me.cmbPRNDepart.Text = sDepartment_
+                    Me.cmbPRNOffice.Text = sOffice_
 
-                    SAVE_DRAG_DROP(Me.sCOUNT, sBranch, sDepartment, sOffice, Me.lstGroups.SelectedNode.Text)
+                    SAVE_DRAG_DROP(Me.sCOUNT, sBranch_, sDepartment_, sOffice_, Me.lstGroups.SelectedNode.Text)
                     Dim newThread1 As New Thread(AddressOf T_LOAD_T)
                     newThread1.Start()
                     Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
                     newThread6.Start()
                 Case "NET"
 
-                    Me.cmbNETBranch.Text = sBranch
-                    Me.cmbNetDepart.Text = sDepartment
-                    Me.cmbNETOffice.Text = sOffice
+                    Me.cmbNETBranch.Text = sBranch_
+                    Me.cmbNetDepart.Text = sDepartment_
+                    Me.cmbNETOffice.Text = sOffice_
 
-                    SAVE_DRAG_DROP(Me.sCOUNT, sBranch, sDepartment, sOffice, Me.lstGroups.SelectedNode.Text)
+                    SAVE_DRAG_DROP(Me.sCOUNT, sBranch_, sDepartment_, sOffice_, Me.lstGroups.SelectedNode.Text)
                     LOADnet(Me.sCOUNT)
                 Case "MONITOR"
 
-                    Me.cmbOTHFil.Text = sBranch
-                    Me.cmbOTHDepart.Text = sDepartment
-                    Me.cmbOTHOffice.Text = sOffice
+                    Me.cmbOTHFil.Text = sBranch_
+                    Me.cmbOTHDepart.Text = sDepartment_
+                    Me.cmbOTHOffice.Text = sOffice_
 
-                    SAVE_DRAG_DROP(Me.sCOUNT, sBranch, sDepartment, sOffice, Me.lstGroups.SelectedNode.Text)
+                    SAVE_DRAG_DROP(Me.sCOUNT, sBranch_, sDepartment_, sOffice_, Me.lstGroups.SelectedNode.Text)
                     LOADmon(Me.sCOUNT)
                 Case "PHONE"
 
-                    Me.cmbOTHFil.Text = sBranch
-                    Me.cmbOTHDepart.Text = sDepartment
-                    Me.cmbOTHOffice.Text = sOffice
+                    Me.cmbOTHFil.Text = sBranch_
+                    Me.cmbOTHDepart.Text = sDepartment_
+                    Me.cmbOTHOffice.Text = sOffice_
 
-                    SAVE_DRAG_DROP(Me.sCOUNT, sBranch, sDepartment, sOffice, Me.lstGroups.SelectedNode.Text)
+                    SAVE_DRAG_DROP(Me.sCOUNT, sBranch_, sDepartment_, sOffice_, Me.lstGroups.SelectedNode.Text)
                     Dim newThread1 As New Thread(AddressOf T_LOAD_T)
                     newThread1.Start()
                     Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
                     newThread6.Start()
                 Case "PHOTO"
 
-                    Me.cmbOTHFil.Text = sBranch
-                    Me.cmbOTHDepart.Text = sDepartment
-                    Me.cmbOTHOffice.Text = sOffice
+                    Me.cmbOTHFil.Text = sBranch_
+                    Me.cmbOTHDepart.Text = sDepartment_
+                    Me.cmbOTHOffice.Text = sOffice_
 
-                    SAVE_DRAG_DROP(Me.sCOUNT, sBranch, sDepartment, sOffice, Me.lstGroups.SelectedNode.Text)
+                    SAVE_DRAG_DROP(Me.sCOUNT, sBranch_, sDepartment_, sOffice_, Me.lstGroups.SelectedNode.Text)
                     Dim newThread1 As New Thread(AddressOf T_LOAD_T)
                     newThread1.Start()
                     Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
                     newThread6.Start()
                 Case "FAX"
 
-                    Me.cmbOTHFil.Text = sBranch
-                    Me.cmbOTHDepart.Text = sDepartment
-                    Me.cmbOTHOffice.Text = sOffice
+                    Me.cmbOTHFil.Text = sBranch_
+                    Me.cmbOTHDepart.Text = sDepartment_
+                    Me.cmbOTHOffice.Text = sOffice_
 
-                    SAVE_DRAG_DROP(Me.sCOUNT, sBranch, sDepartment, sOffice, Me.lstGroups.SelectedNode.Text)
+                    SAVE_DRAG_DROP(Me.sCOUNT, sBranch_, sDepartment_, sOffice_, Me.lstGroups.SelectedNode.Text)
                     Dim newThread1 As New Thread(AddressOf T_LOAD_T)
                     newThread1.Start()
                     Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
                     newThread6.Start()
                 Case "ZIP"
 
-                    Me.cmbOTHFil.Text = sBranch
-                    Me.cmbOTHDepart.Text = sDepartment
-                    Me.cmbOTHOffice.Text = sOffice
+                    Me.cmbOTHFil.Text = sBranch_
+                    Me.cmbOTHDepart.Text = sDepartment_
+                    Me.cmbOTHOffice.Text = sOffice_
 
-                    SAVE_DRAG_DROP(Me.sCOUNT, sBranch, sDepartment, sOffice, Me.lstGroups.SelectedNode.Text)
+                    SAVE_DRAG_DROP(Me.sCOUNT, sBranch_, sDepartment_, sOffice_, Me.lstGroups.SelectedNode.Text)
                     Dim newThread1 As New Thread(AddressOf T_LOAD_T)
                     newThread1.Start()
                     Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
                     newThread6.Start()
                 Case "SCANER"
 
-                    Me.cmbOTHFil.Text = sBranch
-                    Me.cmbOTHDepart.Text = sDepartment
-                    Me.cmbOTHOffice.Text = sOffice
+                    Me.cmbOTHFil.Text = sBranch_
+                    Me.cmbOTHDepart.Text = sDepartment_
+                    Me.cmbOTHOffice.Text = sOffice_
 
-                    SAVE_DRAG_DROP(Me.sCOUNT, sBranch, sDepartment, sOffice, Me.lstGroups.SelectedNode.Text)
+                    SAVE_DRAG_DROP(Me.sCOUNT, sBranch_, sDepartment_, sOffice_, Me.lstGroups.SelectedNode.Text)
                     Dim newThread1 As New Thread(AddressOf T_LOAD_T)
                     newThread1.Start()
                     Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
                     newThread6.Start()
                 Case "OT"
 
-                    Me.cmbOTHFil.Text = sBranch
-                    Me.cmbOTHDepart.Text = sDepartment
-                    Me.cmbOTHOffice.Text = sOffice
+                    Me.cmbOTHFil.Text = sBranch_
+                    Me.cmbOTHDepart.Text = sDepartment_
+                    Me.cmbOTHOffice.Text = sOffice_
 
-                    SAVE_DRAG_DROP(Me.sCOUNT, sBranch, sDepartment, sOffice, Me.lstGroups.SelectedNode.Text)
+                    SAVE_DRAG_DROP(Me.sCOUNT, sBranch_, sDepartment_, sOffice_, Me.lstGroups.SelectedNode.Text)
                     '--------------VIP_Graff Добавление новой перефирии Конец------------------
 
                     Dim newThread1 As New Thread(AddressOf T_LOAD_T)
@@ -3328,52 +3398,52 @@ err_:
                     Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
                     newThread6.Start()
                 Case "USB"
-                    Me.cmbOTHFil.Text = sBranch
-                    Me.cmbOTHDepart.Text = sDepartment
-                    Me.cmbOTHOffice.Text = sOffice
-                    SAVE_DRAG_DROP(Me.sCOUNT, sBranch, sDepartment, sOffice, Me.lstGroups.SelectedNode.Text)
+                    Me.cmbOTHFil.Text = sBranch_
+                    Me.cmbOTHDepart.Text = sDepartment_
+                    Me.cmbOTHOffice.Text = sOffice_
+                    SAVE_DRAG_DROP(Me.sCOUNT, sBranch_, sDepartment_, sOffice_, Me.lstGroups.SelectedNode.Text)
                     Dim newThread1 As New Thread(AddressOf T_LOAD_T)
                     newThread1.Start()
                     Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
                     newThread6.Start()
                 Case "SOUND"
-                    Me.cmbOTHFil.Text = sBranch
-                    Me.cmbOTHDepart.Text = sDepartment
-                    Me.cmbOTHOffice.Text = sOffice
-                    SAVE_DRAG_DROP(Me.sCOUNT, sBranch, sDepartment, sOffice, Me.lstGroups.SelectedNode.Text)
+                    Me.cmbOTHFil.Text = sBranch_
+                    Me.cmbOTHDepart.Text = sDepartment_
+                    Me.cmbOTHOffice.Text = sOffice_
+                    SAVE_DRAG_DROP(Me.sCOUNT, sBranch_, sDepartment_, sOffice_, Me.lstGroups.SelectedNode.Text)
                     LOADot(Me.sCOUNT)
                 Case "IBP"
-                    Me.cmbOTHFil.Text = sBranch
-                    Me.cmbOTHDepart.Text = sDepartment
-                    Me.cmbOTHOffice.Text = sOffice
-                    SAVE_DRAG_DROP(Me.sCOUNT, sBranch, sDepartment, sOffice, Me.lstGroups.SelectedNode.Text)
+                    Me.cmbOTHFil.Text = sBranch_
+                    Me.cmbOTHDepart.Text = sDepartment_
+                    Me.cmbOTHOffice.Text = sOffice_
+                    SAVE_DRAG_DROP(Me.sCOUNT, sBranch_, sDepartment_, sOffice_, Me.lstGroups.SelectedNode.Text)
                     Dim newThread1 As New Thread(AddressOf T_LOAD_T)
                     newThread1.Start()
                     Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
                     newThread6.Start()
                 Case "FS"
-                    Me.cmbOTHFil.Text = sBranch
-                    Me.cmbOTHDepart.Text = sDepartment
-                    Me.cmbOTHOffice.Text = sOffice
-                    SAVE_DRAG_DROP(Me.sCOUNT, sBranch, sDepartment, sOffice, Me.lstGroups.SelectedNode.Text)
+                    Me.cmbOTHFil.Text = sBranch_
+                    Me.cmbOTHDepart.Text = sDepartment_
+                    Me.cmbOTHOffice.Text = sOffice_
+                    SAVE_DRAG_DROP(Me.sCOUNT, sBranch_, sDepartment_, sOffice_, Me.lstGroups.SelectedNode.Text)
                     Dim newThread1 As New Thread(AddressOf T_LOAD_T)
                     newThread1.Start()
                     Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
                     newThread6.Start()
                 Case "KEYB"
-                    Me.cmbOTHFil.Text = sBranch
-                    Me.cmbOTHDepart.Text = sDepartment
-                    Me.cmbOTHOffice.Text = sOffice
-                    SAVE_DRAG_DROP(Me.sCOUNT, sBranch, sDepartment, sOffice, Me.lstGroups.SelectedNode.Text)
+                    Me.cmbOTHFil.Text = sBranch_
+                    Me.cmbOTHDepart.Text = sDepartment_
+                    Me.cmbOTHOffice.Text = sOffice_
+                    SAVE_DRAG_DROP(Me.sCOUNT, sBranch_, sDepartment_, sOffice_, Me.lstGroups.SelectedNode.Text)
                     Dim newThread1 As New Thread(AddressOf T_LOAD_T)
                     newThread1.Start()
                     Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
                     newThread6.Start()
                 Case "MOUSE"
-                    Me.cmbOTHFil.Text = sBranch
-                    Me.cmbOTHDepart.Text = sDepartment
-                    Me.cmbOTHOffice.Text = sOffice
-                    SAVE_DRAG_DROP(Me.sCOUNT, sBranch, sDepartment, sOffice, Me.lstGroups.SelectedNode.Text)
+                    Me.cmbOTHFil.Text = sBranch_
+                    Me.cmbOTHDepart.Text = sDepartment_
+                    Me.cmbOTHOffice.Text = sOffice_
+                    SAVE_DRAG_DROP(Me.sCOUNT, sBranch_, sDepartment_, sOffice_, Me.lstGroups.SelectedNode.Text)
                     '--------------VIP_Graff Добавление новой перефирии Конец------------------
                     Dim newThread1 As New Thread(AddressOf T_LOAD_T)
                     newThread1.Start()
@@ -3382,11 +3452,11 @@ err_:
 
                 Case "CNT"
 
-                    Me.cmbOTHFil.Text = sBranch
-                    Me.cmbOTHDepart.Text = sDepartment
-                    Me.cmbOTHOffice.Text = sOffice
+                    Me.cmbOTHFil.Text = sBranch_
+                    Me.cmbOTHDepart.Text = sDepartment_
+                    Me.cmbOTHOffice.Text = sOffice_
 
-                    SAVE_DRAG_DROP(Me.sCOUNT, sBranch, sDepartment, sOffice, Me.lstGroups.SelectedNode.Text)
+                    SAVE_DRAG_DROP(Me.sCOUNT, sBranch_, sDepartment_, sOffice_, Me.lstGroups.SelectedNode.Text)
                     Dim newThread1 As New Thread(AddressOf T_LOAD_T)
                     newThread1.Start()
                     Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
@@ -5572,6 +5642,8 @@ err_:
             rCOUNT = (lvList.SelectedItems(z).Text)
         Next
 
+        If rCOUNT = 0 Then Exit Sub
+
         Dim unamZ As String
 
         If Me.sPREF = "C" Then
@@ -5644,6 +5716,8 @@ err_:
             rCOUNT = (lvServices.SelectedItems(z).Text)
         Next
 
+        If rCOUNT = 0 Then Exit Sub
+
         Dim unam As String
         Dim rs As ADODB.Recordset 'Объявляем рекордсет
         Dim sSQL As String 'Переменная, где будет размещён SQL запрос
@@ -5662,15 +5736,25 @@ err_:
 
             mnu_z_rasp.Enabled = False
             MnuSendEmail.Enabled = False
+            addServiseWork.Enabled = False
         Else
             mnu_z_rasp.Enabled = True
             MnuSendEmail.Enabled = True
+            addServiseWork.Enabled = True
         End If
     End Sub
 
     Private Sub lvRepair_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lvRepair.MouseUp
 
         If lvRepair.Items.Count = 0 Then Exit Sub
+
+        Dim z As Integer
+        Dim rCOUNT As Integer
+
+        For z = 0 To lvRepair.SelectedItems.Count - 1
+            rCOUNT = (lvRepair.SelectedItems(z).Text)
+        Next
+        If rCOUNT = 0 Then Exit Sub
 
         If e.Button = Windows.Forms.MouseButtons.Right Then
             CMServices.Show(CType(sender, Control), e.Location)
@@ -6084,10 +6168,12 @@ err_:
         Dim z As Integer
         Dim rCOUNT As Integer
 
+
         For z = 0 To lvServices.SelectedItems.Count - 1
             rCOUNT = (lvServices.SelectedItems(z).Text)
         Next
 
+        If rCOUNT = 0 Then Exit Sub
 
         Call SRASP(rCOUNT)
     End Sub
@@ -6102,6 +6188,8 @@ err_:
             rCOUNT = (lvServices.SelectedItems(z).Text)
         Next
 
+        If rCOUNT = 0 Then Exit Sub
+
         Call SRASP2(rCOUNT)
 
     End Sub
@@ -6110,7 +6198,54 @@ err_:
 
     End Sub
 
-   
-   
+    Private Sub addServiseWork_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles addServiseWork.Click
+        On Error GoTo err_1
+        frmservice_add_otvets.REMFU = True
+
+        If lvRepair.Items.Count = 0 Then Exit Sub
+
+
+        Dim rCOUNT As Integer
+
+        For z = 0 To lvServices.SelectedItems.Count - 1
+            rCOUNT = (lvServices.SelectedItems(z).Text)
+        Next
+
+        If rCOUNT = 0 Then Exit Sub
+
+        frmserviceDesc.ZaiavkR = False
+
+        frmserviceDesc.r1COUNT = rCOUNT
+
+        Dim d() As String
+
+        d = Split(lstGroups.SelectedNode.Tag, "|")
+        Me.sPREF = d(0)
+        Me.sCOUNT = d(1)
+
+        If Len(Me.sCOUNT) = 0 Then Exit Sub
+
+
+        frmservice_add_otvets.cmbMaster.Text = ""
+        frmservice_add_otvets.txtOtzyv.Text = ""
+        frmservice_add_otvets.cmbMaster.Text = ""
+        frmservice_add_otvets.dtPic.Value = Date.Today
+        frmservice_add_otvets.cmbStat.Text = ""
+        frmservice_add_otvets.cmbOtv.Text = ""
+        frmservice_add_otvets.cmbKrit.Text = ""
+        frmservice_add_otvets.cmbMaster.Text = ""
+        frmservice_add_otvets.cmbTip.Text = "Base"
+
+
+        frmservice_add_otvets.ShowDialog(Me)
+
+        Exit Sub
+err_1:
+        MsgBox(Err.Description, MsgBoxStyle.Information, ProGramName)
+    End Sub
+
+    Private Sub lvRepair_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvRepair.SelectedIndexChanged
+
+    End Sub
 End Class
 

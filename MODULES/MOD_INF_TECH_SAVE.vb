@@ -1499,12 +1499,18 @@ sAR:
 
                 'sTmp = (DateTime.Now.Hour & ":" & DateTime.Now.Minute & ":" & DateTime.Now.Second)
 
+                If Len(iB) <> 0 Then iA = iA & "/" & iB
+                If Len(iC) <> 0 Then iA = iA & "/" & iC
+
+                If Len(sOTDEL) <> 0 Then sFIALIAL = sFIALIAL & "/" & sOTDEL
+                If Len(sKABN) <> 0 Then sFIALIAL = sFIALIAL & "/" & sKABN
+
 
                 With rs
                     .AddNew()
                     .Fields("id_comp").Value = frmComputers.sCOUNT
-                    .Fields("oldMesto").Value = iA & "/" & iB & "/" & iC
-                    .Fields("NewMesto").Value = sFIALIAL & "/" & sOTDEL & "/" & sKABN
+                    .Fields("oldMesto").Value = iA
+                    .Fields("NewMesto").Value = sFIALIAL
                     .Fields("prich").Value = strTmp
                     .Fields("data").Value = Date.Today
                     .Fields("time").Value = sTmp.ToLongTimeString
@@ -1542,13 +1548,14 @@ sAR:
                         Do While Not .EOF
                             sCN = .Fields("id").Value
 
+
                             rs1 = New ADODB.Recordset
                             rs1.Open("SELECT * FROM dvig", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
                             With rs1
                                 .AddNew()
                                 .Fields("id_comp").Value = sCN
-                                .Fields("oldMesto").Value = iA & "/" & iB & "/" & iC
-                                .Fields("NewMesto").Value = sFIALIAL & "/" & sOTDEL & "/" & sKABN
+                                .Fields("oldMesto").Value = iA
+                                .Fields("NewMesto").Value = sFIALIAL
                                 .Fields("prich").Value = strTmp
                                 .Fields("data").Value = Date.Today
                                 .Fields("time").Value = sTmp.ToLongTimeString
@@ -1566,7 +1573,7 @@ sAR:
                     rs.Close()
                     rs = Nothing
 
-                   
+
                 End If
 
 

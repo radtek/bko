@@ -811,8 +811,10 @@ Module modLang
         frmComputers.mnu_Z_to_Office.Text = objIniFile.GetString("frmComputers", "mnu_Z_to_Office", "")
         frmComputers.mnu_z_rasp.Text = objIniFile.GetString("frmComputers", "mnu_z_rasp", "")
 
+        frmComputers.addServiseWork.Text = objIniFile.GetString("frmserviceDesc", "btnSBTAdd", "")
 
         Exit Sub
+
 err_:
         MsgBox(Err.Description)
     End Sub

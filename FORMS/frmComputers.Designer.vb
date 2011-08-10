@@ -687,6 +687,7 @@ Me.DeleteService = New System.Windows.Forms.ToolStripMenuItem()
 Me.MnuSendEmail = New System.Windows.Forms.ToolStripMenuItem()
 Me.mnu_Z_to_Office = New System.Windows.Forms.ToolStripMenuItem()
 Me.mnu_z_rasp = New System.Windows.Forms.ToolStripMenuItem()
+Me.addServiseWork = New System.Windows.Forms.ToolStripMenuItem()
 Me.ilsCommands = New System.Windows.Forms.ImageList(Me.components)
 CType(Me.spCont,System.ComponentModel.ISupportInitialize).BeginInit
 Me.spCont.Panel1.SuspendLayout
@@ -1059,6 +1060,7 @@ Me.sSTAB1.Name = "sSTAB1"
 Me.sSTAB1.SelectedIndex = 0
 Me.sSTAB1.Size = New System.Drawing.Size(690, 646)
 Me.sSTAB1.TabIndex = 8
+Me.sSTAB1.Visible = false
 '
 'TabPage6
 '
@@ -4198,8 +4200,8 @@ Me.TableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill
 Me.TableLayoutPanel5.Location = New System.Drawing.Point(0, 0)
 Me.TableLayoutPanel5.Name = "TableLayoutPanel5"
 Me.TableLayoutPanel5.RowCount = 2
-Me.TableLayoutPanel5.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40!))
-Me.TableLayoutPanel5.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60!))
+Me.TableLayoutPanel5.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 39.35484!))
+Me.TableLayoutPanel5.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60.64516!))
 Me.TableLayoutPanel5.Size = New System.Drawing.Size(682, 620)
 Me.TableLayoutPanel5.TabIndex = 5
 '
@@ -4208,9 +4210,9 @@ Me.TableLayoutPanel5.TabIndex = 5
 Me.gbRepair.AutoSize = true
 Me.gbRepair.Controls.Add(Me.lvRepair)
 Me.gbRepair.Dock = System.Windows.Forms.DockStyle.Fill
-Me.gbRepair.Location = New System.Drawing.Point(3, 251)
+Me.gbRepair.Location = New System.Drawing.Point(3, 247)
 Me.gbRepair.Name = "gbRepair"
-Me.gbRepair.Size = New System.Drawing.Size(676, 366)
+Me.gbRepair.Size = New System.Drawing.Size(676, 370)
 Me.gbRepair.TabIndex = 4
 Me.gbRepair.TabStop = false
 Me.gbRepair.Text = "Ремонты"
@@ -4224,19 +4226,18 @@ Me.lvRepair.Location = New System.Drawing.Point(3, 16)
 Me.lvRepair.MultiSelect = false
 Me.lvRepair.Name = "lvRepair"
 Me.lvRepair.ShowItemToolTips = true
-Me.lvRepair.Size = New System.Drawing.Size(670, 347)
+Me.lvRepair.Size = New System.Drawing.Size(670, 351)
 Me.lvRepair.TabIndex = 4
 Me.lvRepair.UseCompatibleStateImageBehavior = false
 Me.lvRepair.View = System.Windows.Forms.View.Details
 '
 'gbNotes
 '
-Me.gbNotes.AutoSize = true
 Me.gbNotes.Controls.Add(Me.TableLayoutPanel6)
 Me.gbNotes.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbNotes.Location = New System.Drawing.Point(3, 3)
 Me.gbNotes.Name = "gbNotes"
-Me.gbNotes.Size = New System.Drawing.Size(676, 242)
+Me.gbNotes.Size = New System.Drawing.Size(676, 238)
 Me.gbNotes.TabIndex = 3
 Me.gbNotes.TabStop = false
 Me.gbNotes.Text = "Заметки"
@@ -4260,7 +4261,7 @@ Me.TableLayoutPanel6.RowCount = 3
 Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25!))
 Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80!))
 Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle())
-Me.TableLayoutPanel6.Size = New System.Drawing.Size(670, 223)
+Me.TableLayoutPanel6.Size = New System.Drawing.Size(670, 219)
 Me.TableLayoutPanel6.TabIndex = 1
 '
 'lvNotes
@@ -4271,7 +4272,7 @@ Me.lvNotes.FullRowSelect = true
 Me.lvNotes.GridLines = true
 Me.lvNotes.Location = New System.Drawing.Point(3, 108)
 Me.lvNotes.Name = "lvNotes"
-Me.lvNotes.Size = New System.Drawing.Size(664, 112)
+Me.lvNotes.Size = New System.Drawing.Size(664, 108)
 Me.lvNotes.TabIndex = 4
 Me.lvNotes.UseCompatibleStateImageBehavior = false
 Me.lvNotes.View = System.Windows.Forms.View.Details
@@ -8448,9 +8449,9 @@ Me.DELTEdVIGToolStripMenuItem.Text = "Удалить"
 '
 'CMServices
 '
-Me.CMServices.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EditService, Me.DeleteService, Me.MnuSendEmail, Me.mnu_Z_to_Office, Me.mnu_z_rasp})
+Me.CMServices.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EditService, Me.DeleteService, Me.MnuSendEmail, Me.mnu_Z_to_Office, Me.mnu_z_rasp, Me.addServiseWork})
 Me.CMServices.Name = "CMServices"
-Me.CMServices.Size = New System.Drawing.Size(175, 114)
+Me.CMServices.Size = New System.Drawing.Size(175, 136)
 '
 'EditService
 '
@@ -8481,6 +8482,12 @@ Me.mnu_Z_to_Office.Text = "Распечатать"
 Me.mnu_z_rasp.Name = "mnu_z_rasp"
 Me.mnu_z_rasp.Size = New System.Drawing.Size(174, 22)
 Me.mnu_z_rasp.Text = "Расписка"
+'
+'addServiseWork
+'
+Me.addServiseWork.Name = "addServiseWork"
+Me.addServiseWork.Size = New System.Drawing.Size(174, 22)
+Me.addServiseWork.Text = "Добавить работы"
 '
 'ilsCommands
 '
@@ -9431,5 +9438,6 @@ End Sub
     Friend WithEvents ilsCommands As System.Windows.Forms.ImageList
     Friend WithEvents btnSearch As System.Windows.Forms.Button
     Friend WithEvents MassObedPerf As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents addServiseWork As System.Windows.Forms.ToolStripMenuItem
 
 End Class

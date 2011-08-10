@@ -1,4 +1,6 @@
 ﻿Public Class frmservice_add_otvets
+    Public REMFU As Boolean
+    Public REMED As Boolean
 
     Private Sub service_add_otvets_Activated(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Activated
         
@@ -370,7 +372,62 @@
 
         End Select
 
-        Call frmserviceDesc.load_rplus(frmserviceDesc.r1COUNT)
+
+        If REMFU = True Or REMED = True Then
+
+            'Call LOAD_REPAIR(frmComputers.sCOUNT, frmComputers.lvRepair)
+
+
+            Select Case frmComputers.sPREF
+
+                Case "C"
+
+                    Select Case TipTehn
+
+                        Case "PC"
+                            frmComputers.sSTAB1.SelectedTab = frmComputers.sSTAB1.TabPages("TabPage7")
+                            LOAD_REPAIR(frmComputers.sCOUNT, frmComputers.lvRepair)
+
+                        Case "NET"
+
+                            LOAD_REPAIR(frmComputers.sCOUNT, frmComputers.lvRepairNET)
+
+                        Case "Printer"
+
+                            LOAD_REPAIR(frmComputers.sCOUNT, frmComputers.lvRepairPRN)
+
+                        Case "KOpir"
+
+                            LOAD_REPAIR(frmComputers.sCOUNT, frmComputers.lvRepairPRN)
+
+                        Case "OT"
+
+                            LOAD_REPAIR(frmComputers.sCOUNT, frmComputers.lvRepairOTH)
+
+                        Case Else
+
+                            LOAD_REPAIR(frmComputers.sCOUNT, frmComputers.lvRepairOTH)
+
+                    End Select
+
+
+                Case Else
+
+                    Call LOAD_REPAIR(frmComputers.sCOUNT, frmComputers.lvRepairBR)
+
+            End Select
+
+
+        Else
+
+            Call frmserviceDesc.load_rplus(frmserviceDesc.r1COUNT)
+
+        End If
+
+        REMFU = False
+        REMED = False
+
+        Call REM_CHECK()
 
         Me.Close()
 

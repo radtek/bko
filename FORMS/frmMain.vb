@@ -116,11 +116,16 @@ Public Class frmMain
     Private Sub frmMain_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
         ''Меняем шрифт
-        SendFonts(Me)
+        Call SendFonts(Me)
 
         Call load_ICONS()
 
+        Dim newThread3 As New Thread(AddressOf LANG_frmMain_1)
+        newThread3.Start()
 
+
+        Call Tree_Icons_Feel(frmComputers.ilsCommands, "sCMP", "pic\tree\")
+        ' Call Tree_Icons_Feel(frmComputers.ImageList11, "sCMP", "pic\tree\")
 
 
         Dim sText As String
@@ -128,62 +133,8 @@ Public Class frmMain
         'Определяем путь до файла настроек
         Dim objIniFile As New IniFile(PrPath & "base.ini")
 
-        'Какой модуль запускать
-        sText = objIniFile.GetString("general", "MOD", 0)
-
-
-        Call Tree_Icons_Feel(frmComputers.ilsCommands, "sCMP", "pic\tree\")
-        ' Call Tree_Icons_Feel(frmComputers.ImageList11, "sCMP", "pic\tree\")
-
-
-
-        If Len(sText) > 2 Then sText = 0
-
-        Select Case sText
-
-            Case 0
-
-                'frmComputers.Visible = False
-                frmComputers.MdiParent = Me
-                ' My.Application.DoEvents()
-                frmComputers.Show()
-                ' My.Application.DoEvents()
-
-            Case 1
-                frmserviceDesc.MdiParent = Me
-                ' My.Application.DoEvents()
-                frmserviceDesc.Show()
-                ' My.Application.DoEvents()
-            Case 2
-
-                frmSoftware.MdiParent = Me
-                '  My.Application.DoEvents()
-                frmSoftware.Show()
-                '  My.Application.DoEvents()
-            Case 3
-
-                frmCRT3.MdiParent = Me
-                '  My.Application.DoEvents()
-                frmCRT3.Show()
-                '   My.Application.DoEvents()
-        End Select
-
-
-        Dim newThread3 As New Thread(AddressOf LANG_frmMain_1)
-        newThread3.Start()
-
-        'Запускаем таймер
-
-        Dim t As New System.Windows.Forms.Timer
-        t.Interval = 1000
-        t.Enabled = True
-        AddHandler t.Tick, AddressOf TimerEventHandler
-
-
 
         'На полный экран или нет
-
-
         sText = objIniFile.GetString("General", "FullScreen", "0")
 
         Select Case sText
@@ -198,7 +149,7 @@ Public Class frmMain
 
         End Select
 
-        
+
 
         'Показывать меню системные или нет
         sText = objIniFile.GetString("general", "SYS", 0)
@@ -296,6 +247,73 @@ Public Class frmMain
             Next
 
         End If
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        'Какой модуль запускать
+        sText = objIniFile.GetString("general", "MOD", 0)
+
+        If Len(sText) > 2 Then sText = 0
+
+        Select Case sText
+
+            Case 0
+
+                'frmComputers.Visible = False
+                frmComputers.MdiParent = Me
+                ' My.Application.DoEvents()
+                frmComputers.Show()
+                ' My.Application.DoEvents()
+
+            Case 1
+                frmserviceDesc.MdiParent = Me
+                ' My.Application.DoEvents()
+                frmserviceDesc.Show()
+                ' My.Application.DoEvents()
+            Case 2
+
+                frmSoftware.MdiParent = Me
+                '  My.Application.DoEvents()
+                frmSoftware.Show()
+                '  My.Application.DoEvents()
+            Case 3
+
+                frmCRT3.MdiParent = Me
+                '  My.Application.DoEvents()
+                frmCRT3.Show()
+                '   My.Application.DoEvents()
+        End Select
+
+
+        'Запускаем таймер
+
+        Dim t As New System.Windows.Forms.Timer
+        t.Interval = 1000
+        t.Enabled = True
+        AddHandler t.Tick, AddressOf TimerEventHandler
+
+
+
+
+
+
+       
 
 
 
@@ -729,6 +747,8 @@ err_:
     Private Sub ПаспортКомпьютераToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ПаспортКомпьютераToolStripMenuItem.Click
 
 
+        If TipTehn <> "PC" Then Exit Sub
+
         Select Case frmComputers.sPREF
 
             Case "C"
@@ -919,24 +939,38 @@ err_:
     End Sub
 
     Private Sub ПаспортМФУToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ПаспортМФУToolStripMenuItem.Click
-        
+
+        If TipTehn <> "MFU" Then Exit Sub
+
         Call PASSWORD_MFU(frmComputers.sCOUNT, "MFU")
 
     End Sub
 
     Private Sub ПаспортПринтераToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ПаспортПринтераToolStripMenuItem.Click
+
+        If TipTehn <> "Printer" Then Exit Sub
+
         Call PASSWORD_MFU(frmComputers.sCOUNT, "Printer")
     End Sub
 
     Private Sub ПаспортКопираToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ПаспортКопираToolStripMenuItem.Click
+
+        If TipTehn <> "KOpir" Then Exit Sub
+
         Call PASSWORD_MFU(frmComputers.sCOUNT, "KOpir")
     End Sub
 
     Private Sub ПаспортСетевогоОборудованияToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ПаспортСетевогоОборудованияToolStripMenuItem.Click
+
+        If TipTehn <> "NET" Then Exit Sub
+
         Call PASSWORD_NET(frmComputers.sCOUNT)
     End Sub
 
     Private Sub ПаспортСканераToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ПаспортСканераToolStripMenuItem.Click
+
+        If TipTehn <> "SCANER" Then Exit Sub
+
         Call PASSWORD_OTH(frmComputers.sCOUNT, "SCANER")
     End Sub
 
@@ -2234,7 +2268,7 @@ err_:
 
         Dim newThread1 As New Thread(AddressOf add_kabn_if_nothing)
         newThread1.Start()
-        newThread1.Priority = 4
+        'newThread1.Priority = 4
 
 
     End Sub

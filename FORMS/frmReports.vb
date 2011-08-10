@@ -3568,7 +3568,7 @@ err_:
 
         Dim newThread1 As New Thread(AddressOf GaRanT_Load_t)
         newThread1.Start()
-        newThread1.Priority = 4
+        ''newThread1.Priority = 4
 
     End Sub
 
