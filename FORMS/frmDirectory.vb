@@ -326,6 +326,9 @@ Public Class frmDirectory
         Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", ""), 1, HorizontalAlignment.Left)
         Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory2", ""), 300, HorizontalAlignment.Left)
         Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory3", ""), 300, HorizontalAlignment.Left)
+        Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "MSG99", ""), 70, HorizontalAlignment.Left)
+
+
 
         FillComboNET(Me.cmbName3, "PROIZV", "SPR_PROIZV", "", False, True)
 
@@ -364,8 +367,9 @@ Public Class frmDirectory
                 Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", ""), 1, HorizontalAlignment.Left)
                 Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory2", ""), 300, HorizontalAlignment.Left)
                 Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory4", ""), 300, HorizontalAlignment.Left)
+                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "MSG99", ""), 70, HorizontalAlignment.Left)
 
-                sSQL = "SELECT id, name, A from SPR_USER ORDER BY NAME"
+                sSQL = "SELECT SPR_USER.id, SPR_USER.name, SPR_USER.A, (Select count(*) FROM USER_COMP where USER_COMP.USERNAME=SPR_USER.Name) as temp from SPR_USER ORDER BY NAME"
 
                 cmbName2.Visible = True
                 Label2.Visible = True
@@ -380,7 +384,7 @@ Public Class frmDirectory
             Case objIniFile.GetString("frmDirectory", "MSG27", "")
 
 
-                sSQL = "SELECT SPR_OPTICAL.Id, SPR_OPTICAL.Name, SPR_PROIZV.PROIZV FROM SPR_PROIZV INNER JOIN SPR_OPTICAL ON (SPR_PROIZV.iD = SPR_OPTICAL.Proizv) AND (SPR_PROIZV.iD = SPR_OPTICAL.Proizv) WHERE ((SPR_OPTICAL.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
+                sSQL = "SELECT SPR_OPTICAL.Id, SPR_OPTICAL.Name, SPR_PROIZV.PROIZV, (Select count(*) FROM  (SELECT cpus.CD_NAME FROM (SELECT CD_NAME FROM kompy WHERE tiptehn = 'PC' union all SELECT CDRW_NAME FROM kompy WHERE tiptehn = 'PC'  union all SELECT DVD_NAME FROM kompy WHERE tiptehn = 'PC') AS cpus)  where cpus.CD_NAME=SPR_OPTICAL.Name) as temp FROM SPR_PROIZV INNER JOIN SPR_OPTICAL ON (SPR_PROIZV.iD = SPR_OPTICAL.Proizv) AND (SPR_PROIZV.iD = SPR_OPTICAL.Proizv) WHERE ((SPR_OPTICAL.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
 
 
                 lbl1.Visible = True
@@ -415,11 +419,11 @@ Public Class frmDirectory
                 Next
                 lbl1.Text = objIniFile.GetString("frmDirectory", "MSG59", "")
 
-                sSQL = "SELECT SPR_USB.Id, SPR_USB.Name, SPR_PROIZV.PROIZV FROM SPR_PROIZV INNER JOIN SPR_USB ON (SPR_PROIZV.id = SPR_USB.Proizv) AND (SPR_PROIZV.iD = SPR_USB.Proizv) WHERE ((SPR_USB.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
+                sSQL = "SELECT SPR_USB.Id, SPR_USB.Name, SPR_PROIZV.PROIZV, (Select count(*) FROM kompy where kompy.USB_NAME=SPR_USB.Name) as temp FROM SPR_PROIZV INNER JOIN SPR_USB ON (SPR_PROIZV.id = SPR_USB.Proizv) AND (SPR_PROIZV.iD = SPR_USB.Proizv) WHERE ((SPR_USB.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
 
             Case objIniFile.GetString("frmDirectory", "MSG4", "")
 
-                sSQL = "SELECT spr_zip.Id, spr_zip.NAME, SPR_PROIZV.PROIZV FROM SPR_PROIZV INNER JOIN spr_zip ON (SPR_PROIZV.id = spr_zip.Proizv) AND (SPR_PROIZV.iD = spr_zip.Proizv) WHERE ((spr_zip.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
+                sSQL = "SELECT spr_zip.Id, spr_zip.NAME, SPR_PROIZV.PROIZV, (Select count(*) FROM kompy where kompy.net_name=spr_zip.Name and tiptehn='zip') as temp FROM SPR_PROIZV INNER JOIN spr_zip ON (SPR_PROIZV.id = spr_zip.Proizv) AND (SPR_PROIZV.iD = spr_zip.Proizv) WHERE ((spr_zip.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
 
             Case objIniFile.GetString("frmDirectory", "MSG5", "")
                 lbl1.Visible = True
@@ -434,7 +438,7 @@ Public Class frmDirectory
                 cmb1.Items.Add("8.1")
 
                 lbl1.Text = objIniFile.GetString("frmDirectory", "MSG5", "")
-                sSQL = "SELECT SPR_ASISTEM.Id, SPR_ASISTEM.Name, SPR_PROIZV.PROIZV FROM SPR_PROIZV INNER JOIN SPR_ASISTEM ON (SPR_PROIZV.id = SPR_ASISTEM.Proizv) AND (SPR_PROIZV.iD = SPR_ASISTEM.Proizv) WHERE ((SPR_ASISTEM.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
+                sSQL = "SELECT SPR_ASISTEM.Id, SPR_ASISTEM.Name, SPR_PROIZV.PROIZV, (Select count(*) FROM kompy where kompy.AS_NAME=SPR_ASISTEM.Name) as temp FROM SPR_PROIZV INNER JOIN SPR_ASISTEM ON (SPR_PROIZV.id = SPR_ASISTEM.Proizv) AND (SPR_PROIZV.iD = SPR_ASISTEM.Proizv) WHERE ((SPR_ASISTEM.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
 
             Case objIniFile.GetString("frmDirectory", "MSG6", "")
 
@@ -443,11 +447,11 @@ Public Class frmDirectory
                 gb1.Text = objIniFile.GetString("frmDirectory", "MSG60", "")
                 lbl1.Text = objIniFile.GetString("frmDirectory", "MSG61", "")
 
-                sSQL = "SELECT SPR_IBP.Id, SPR_IBP.Name, SPR_PROIZV.PROIZV FROM SPR_PROIZV INNER JOIN SPR_IBP ON (SPR_PROIZV.id = SPR_IBP.Proizv) AND (SPR_PROIZV.iD = SPR_IBP.Proizv) WHERE ((SPR_IBP.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
+                sSQL = "SELECT SPR_IBP.Id, SPR_IBP.Name, SPR_PROIZV.PROIZV, (Select count(*) FROM kompy where kompy.IBP_NAME=SPR_IBP.Name) as temp FROM SPR_PROIZV INNER JOIN SPR_IBP ON (SPR_PROIZV.id = SPR_IBP.Proizv) AND (SPR_PROIZV.iD = SPR_IBP.Proizv) WHERE ((SPR_IBP.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
 
             Case objIniFile.GetString("frmDirectory", "MSG7", "")
 
-                sSQL = "SELECT SPR_KEYBOARD.Id, SPR_KEYBOARD.Name, SPR_PROIZV.PROIZV FROM SPR_PROIZV INNER JOIN SPR_KEYBOARD ON (SPR_PROIZV.id = SPR_KEYBOARD.Proizv) AND (SPR_PROIZV.iD = SPR_KEYBOARD.Proizv) WHERE ((SPR_KEYBOARD.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
+                sSQL = "SELECT SPR_KEYBOARD.Id, SPR_KEYBOARD.Name, SPR_PROIZV.PROIZV, (Select count(*) FROM kompy where kompy.KEYBOARD_NAME=SPR_KEYBOARD.Name) as temp FROM SPR_PROIZV INNER JOIN SPR_KEYBOARD ON (SPR_PROIZV.id = SPR_KEYBOARD.Proizv) AND (SPR_PROIZV.iD = SPR_KEYBOARD.Proizv) WHERE ((SPR_KEYBOARD.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
 
             Case objIniFile.GetString("frmDirectory", "MSG8", "")
                 lbl1.Visible = True
@@ -468,7 +472,7 @@ Public Class frmDirectory
 
                 lbl2.Text = objIniFile.GetString("frmDirectory", "MSG64", "")
 
-                sSQL = "SELECT SPR_KOPIR.Id, SPR_KOPIR.Name, SPR_PROIZV.PROIZV FROM SPR_PROIZV INNER JOIN SPR_KOPIR ON (SPR_PROIZV.iD = SPR_KOPIR.Proizv) AND (SPR_PROIZV.iD = SPR_KOPIR.Proizv) WHERE ((SPR_KOPIR.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
+                sSQL = "SELECT SPR_KOPIR.Id, SPR_KOPIR.Name, SPR_PROIZV.PROIZV, (Select count(*) FROM kompy where kompy.net_name=SPR_KOPIR.Name and tiptehn='KOpir') as temp FROM SPR_PROIZV INNER JOIN SPR_KOPIR ON (SPR_PROIZV.iD = SPR_KOPIR.Proizv) AND (SPR_PROIZV.iD = SPR_KOPIR.Proizv) WHERE ((SPR_KOPIR.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
 
             Case objIniFile.GetString("frmDirectory", "MSG34", "")
                 lbl1.Visible = True
@@ -477,7 +481,7 @@ Public Class frmDirectory
                 lbl1.Text = objIniFile.GetString("frmDirectory", "MSG65", "")
 
 
-                sSQL = "SELECT SPR_MODEM.Id, SPR_MODEM.Name, SPR_PROIZV.PROIZV FROM SPR_PROIZV INNER JOIN SPR_MODEM ON (SPR_PROIZV.id = SPR_MODEM.Proizv) AND (SPR_PROIZV.iD = SPR_MODEM.Proizv) WHERE ((SPR_MODEM.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
+                sSQL = "SELECT SPR_MODEM.Id, SPR_MODEM.Name, SPR_PROIZV.PROIZV, (Select count(*) FROM kompy where kompy.MODEM_NAME=SPR_MODEM.Name) as temp FROM SPR_PROIZV INNER JOIN SPR_MODEM ON (SPR_PROIZV.id = SPR_MODEM.Proizv) AND (SPR_PROIZV.iD = SPR_MODEM.Proizv) WHERE ((SPR_MODEM.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
 
             Case objIniFile.GetString("frmDirectory", "MSG9", "")
 
@@ -501,7 +505,7 @@ Public Class frmDirectory
                 cmb1.Items.Add("20 CRT")
                 cmb1.Items.Add("21 CRT")
 
-                sSQL = "SELECT SPR_MONITOR.Id, SPR_MONITOR.Name, SPR_PROIZV.PROIZV FROM SPR_PROIZV INNER JOIN SPR_MONITOR ON (SPR_PROIZV.id = SPR_MONITOR.Proizv) AND (SPR_PROIZV.iD = SPR_MONITOR.Proizv) WHERE ((SPR_MONITOR.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
+                sSQL = "SELECT SPR_MONITOR.Id, SPR_MONITOR.Name, SPR_PROIZV.PROIZV,(Select count(*) FROM  (SELECT cpus.MONITOR_NAME FROM (SELECT MONITOR_NAME FROM kompy union all SELECT MONITOR_NAME2 FROM kompy) AS cpus) where cpus.MONITOR_NAME=SPR_MONITOR.Name) as temp FROM SPR_PROIZV INNER JOIN SPR_MONITOR ON (SPR_PROIZV.id = SPR_MONITOR.Proizv) AND (SPR_PROIZV.iD = SPR_MONITOR.Proizv) WHERE ((SPR_MONITOR.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
 
             Case objIniFile.GetString("frmDirectory", "MSG10", "")
                 lbl1.Visible = True
@@ -522,11 +526,11 @@ Public Class frmDirectory
 
                 lbl2.Text = objIniFile.GetString("frmDirectory", "MSG64", "")
 
-                sSQL = "SELECT SPR_MFU.Id, SPR_MFU.Name, SPR_PROIZV.PROIZV FROM SPR_PROIZV INNER JOIN SPR_MFU ON (SPR_PROIZV.iD = SPR_MFU.Proizv) AND (SPR_PROIZV.iD = SPR_MFU.Proizv) WHERE ((SPR_MFU.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
+                sSQL = "SELECT SPR_MFU.Id, SPR_MFU.Name, SPR_PROIZV.PROIZV, (Select count(*) FROM kompy where kompy.net_name=SPR_MFU.Name and tiptehn='MFU') as temp FROM SPR_PROIZV INNER JOIN SPR_MFU ON (SPR_PROIZV.iD = SPR_MFU.Proizv) AND (SPR_PROIZV.iD = SPR_MFU.Proizv) WHERE ((SPR_MFU.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
 
             Case objIniFile.GetString("frmDirectory", "MSG11", "")
 
-                sSQL = "SELECT SPR_MOUSE.Id, SPR_MOUSE.Name, SPR_PROIZV.PROIZV FROM SPR_PROIZV INNER JOIN SPR_MOUSE ON (SPR_PROIZV.id = SPR_MOUSE.Proizv) AND (SPR_PROIZV.iD = SPR_MOUSE.Proizv) WHERE ((SPR_MOUSE.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
+                sSQL = "SELECT SPR_MOUSE.Id, SPR_MOUSE.Name, SPR_PROIZV.PROIZV, (Select count(*) FROM kompy where kompy.MOUSE_NAME=SPR_MOUSE.Name) as temp FROM SPR_PROIZV INNER JOIN SPR_MOUSE ON (SPR_PROIZV.id = SPR_MOUSE.Proizv) AND (SPR_PROIZV.iD = SPR_MOUSE.Proizv) WHERE ((SPR_MOUSE.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
 
             Case objIniFile.GetString("frmDirectory", "MSG12", "")
                 lbl1.Visible = True
@@ -547,11 +551,11 @@ Public Class frmDirectory
 
                 lbl2.Text = objIniFile.GetString("frmDirectory", "MSG64", "")
 
-                sSQL = "SELECT SPR_PRINTER.Id, SPR_PRINTER.Name, SPR_PROIZV.PROIZV FROM SPR_PROIZV INNER JOIN SPR_PRINTER ON (SPR_PROIZV.id = SPR_PRINTER.Proizv) AND (SPR_PROIZV.iD = SPR_PRINTER.Proizv) WHERE ((SPR_PRINTER.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
+                sSQL = "SELECT SPR_PRINTER.Id, SPR_PRINTER.Name, SPR_PROIZV.PROIZV, (Select count(*) FROM (SELECT cpus.PRINTER_NAME_1 FROM (SELECT PRINTER_NAME_1 FROM kompy WHERE tiptehn = 'PC' union all SELECT PRINTER_NAME_2 FROM kompy WHERE tiptehn = 'PC' union all SELECT PRINTER_NAME_3 FROM kompy WHERE tiptehn = 'PC' union all SELECT  PRINTER_NAME_4 FROM kompy WHERE tiptehn = 'PC') AS cpus) where cpus.PRINTER_NAME_1=SPR_PRINTER.Name) as temp FROM SPR_PROIZV INNER JOIN SPR_PRINTER ON (SPR_PROIZV.id = SPR_PRINTER.Proizv) AND (SPR_PROIZV.iD = SPR_PRINTER.Proizv) WHERE ((SPR_PRINTER.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
 
             Case objIniFile.GetString("frmDirectory", "MSG13", "")
 
-                sSQL = "SELECT SPR_FS.Id, SPR_FS.Name, SPR_PROIZV.PROIZV FROM SPR_PROIZV INNER JOIN SPR_FS ON (SPR_PROIZV.id = SPR_FS.Proizv) AND (SPR_PROIZV.iD = SPR_FS.Proizv) WHERE ((SPR_FS.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
+                sSQL = "SELECT SPR_FS.Id, SPR_FS.Name, SPR_PROIZV.PROIZV, (Select count(*) FROM kompy where kompy.FILTR_NAME=SPR_FS.Name) as temp FROM SPR_PROIZV INNER JOIN SPR_FS ON (SPR_PROIZV.id = SPR_FS.Proizv) AND (SPR_PROIZV.iD = SPR_FS.Proizv) WHERE ((SPR_FS.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
 
             Case objIniFile.GetString("frmDirectory", "MSG14", "")
                 gb1.Visible = True
@@ -562,20 +566,20 @@ Public Class frmDirectory
                 lbl2.Text = ""
                 FillComboNET(Me.cmb1, "name", "SPR_NET_DEV", "", False, True)
 
-                sSQL = "SELECT SPR_DEV_NET.Id, SPR_DEV_NET.Name, SPR_PROIZV.PROIZV FROM SPR_PROIZV INNER JOIN SPR_DEV_NET ON (SPR_PROIZV.id = SPR_DEV_NET.Proizv) AND (SPR_PROIZV.iD = SPR_DEV_NET.Proizv) WHERE ((SPR_DEV_NET.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
+                sSQL = "SELECT SPR_DEV_NET.Id, SPR_DEV_NET.Name, SPR_PROIZV.PROIZV, (Select count(*) FROM kompy where kompy.NET_NAME=SPR_DEV_NET.Name and tiptehn='NET') as temp FROM SPR_PROIZV INNER JOIN SPR_DEV_NET ON (SPR_PROIZV.id = SPR_DEV_NET.Proizv) AND (SPR_PROIZV.iD = SPR_DEV_NET.Proizv) WHERE ((SPR_DEV_NET.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
 
             Case objIniFile.GetString("frmDirectory", "MSG15", "")
                 gb1.Visible = True
 
-                sSQL = "SELECT SPR_SCANER.Id, SPR_SCANER.Name, SPR_PROIZV.PROIZV FROM SPR_PROIZV INNER JOIN SPR_SCANER ON (SPR_PROIZV.id = SPR_SCANER.Proizv) AND (SPR_PROIZV.iD = SPR_SCANER.Proizv) WHERE ((SPR_SCANER.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
+                sSQL = "SELECT SPR_SCANER.Id, SPR_SCANER.Name, SPR_PROIZV.PROIZV, (Select count(*) FROM kompy where kompy.NET_NAME=SPR_SCANER.Name and tiptehn='SCANER') as temp FROM SPR_PROIZV INNER JOIN SPR_SCANER ON (SPR_PROIZV.id = SPR_SCANER.Proizv) AND (SPR_PROIZV.iD = SPR_SCANER.Proizv) WHERE ((SPR_SCANER.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
 
             Case objIniFile.GetString("frmDirectory", "MSG16", "")
                 gb1.Visible = True
-                sSQL = "SELECT spr_phone.Id, spr_phone.NAME, SPR_PROIZV.PROIZV FROM SPR_PROIZV INNER JOIN spr_phone ON (SPR_PROIZV.id = spr_phone.Proizv) AND (SPR_PROIZV.iD = spr_phone.Proizv) WHERE ((spr_phone.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
+                sSQL = "SELECT spr_phone.Id, spr_phone.NAME, SPR_PROIZV.PROIZV, (Select count(*) FROM kompy where kompy.NET_NAME=spr_phone.Name and tiptehn='PHONE') as temp FROM SPR_PROIZV INNER JOIN spr_phone ON (SPR_PROIZV.id = spr_phone.Proizv) AND (SPR_PROIZV.iD = spr_phone.Proizv) WHERE ((spr_phone.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
 
             Case objIniFile.GetString("frmDirectory", "MSG17", "")
                 gb1.Visible = True
-                sSQL = "SELECT spr_fax.Id, spr_fax.NAME, SPR_PROIZV.PROIZV FROM SPR_PROIZV INNER JOIN spr_fax ON (SPR_PROIZV.id = spr_fax.Proizv) AND (SPR_PROIZV.iD = spr_fax.Proizv) WHERE ((spr_fax.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
+                sSQL = "SELECT spr_fax.Id, spr_fax.NAME, SPR_PROIZV.PROIZV, (Select count(*) FROM kompy where kompy.NET_NAME=spr_fax.Name and tiptehn='FAX') as temp FROM SPR_PROIZV INNER JOIN spr_fax ON (SPR_PROIZV.id = spr_fax.Proizv) AND (SPR_PROIZV.iD = spr_fax.Proizv) WHERE ((spr_fax.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
 
             Case objIniFile.GetString("frmDirectory", "MSG18", "")
                 gb1.Visible = True
@@ -584,7 +588,7 @@ Public Class frmDirectory
                 lbl1.Text = objIniFile.GetString("frmDirectory", "MSG70", "")
                 gb2.Text = objIniFile.GetString("frmDirectory", "MSG71", "")
                 lbl2.Text = objIniFile.GetString("frmDirectory", "MSG71", "")
-                sSQL = "SELECT spr_photo.Id, spr_photo.NAME, SPR_PROIZV.PROIZV FROM SPR_PROIZV INNER JOIN spr_photo ON (SPR_PROIZV.id = spr_photo.Proizv) AND (SPR_PROIZV.iD = spr_photo.Proizv) WHERE ((spr_photo.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
+                sSQL = "SELECT spr_photo.Id, spr_photo.NAME, SPR_PROIZV.PROIZV, (Select count(*) FROM kompy where kompy.NET_NAME=spr_photo.Name and tiptehn='PHOTO') as temp FROM SPR_PROIZV INNER JOIN spr_photo ON (SPR_PROIZV.id = spr_photo.Proizv) AND (SPR_PROIZV.iD = spr_photo.Proizv) WHERE ((spr_photo.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
 
             Case objIniFile.GetString("frmDirectory", "MSG20", "")
                 lbl1.Visible = True
@@ -593,7 +597,7 @@ Public Class frmDirectory
                 lbl1.Text = objIniFile.GetString("frmDirectory", "MSG73", "")
 
 
-                sSQL = "SELECT SPR_SVGA.Id, SPR_SVGA.Name, SPR_PROIZV.PROIZV FROM SPR_PROIZV INNER JOIN SPR_SVGA ON (SPR_PROIZV.id = SPR_SVGA.Proizv) AND (SPR_PROIZV.iD = SPR_SVGA.Proizv) WHERE ((SPR_SVGA.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
+                sSQL = "SELECT SPR_SVGA.Id, SPR_SVGA.Name, SPR_PROIZV.PROIZV, (Select count(*) FROM kompy where kompy.SVGA_NAME=SPR_SVGA.Name) as temp FROM SPR_PROIZV INNER JOIN SPR_SVGA ON (SPR_PROIZV.id = SPR_SVGA.Proizv) AND (SPR_PROIZV.iD = SPR_SVGA.Proizv) WHERE ((SPR_SVGA.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
 
             Case objIniFile.GetString("frmDirectory", "MSG21", "")
                 lbl1.Visible = True
@@ -604,7 +608,7 @@ Public Class frmDirectory
                 gb1.Text = objIniFile.GetString("frmDirectory", "MSG74", "")
                 lbl1.Text = objIniFile.GetString("frmDirectory", "MSG75", "")
 
-                sSQL = "SELECT SPR_FDD.Id, SPR_FDD.Name, SPR_PROIZV.PROIZV FROM SPR_PROIZV INNER JOIN SPR_FDD ON (SPR_PROIZV.id = SPR_FDD.Proizv) AND (SPR_PROIZV.iD = SPR_FDD.Proizv) WHERE ((SPR_FDD.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
+                sSQL = "SELECT SPR_FDD.Id, SPR_FDD.Name, SPR_PROIZV.PROIZV, (Select count(*) FROM kompy where kompy.FDD_NAME=SPR_FDD.Name) as temp FROM SPR_PROIZV INNER JOIN SPR_FDD ON (SPR_PROIZV.id = SPR_FDD.Proizv) AND (SPR_PROIZV.iD = SPR_FDD.Proizv) WHERE ((SPR_FDD.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
 
 
             Case objIniFile.GetString("frmDirectory", "MSG22", "")
@@ -613,21 +617,21 @@ Public Class frmDirectory
                 gb1.Text = objIniFile.GetString("frmDirectory", "MSG76", "")
                 lbl1.Text = objIniFile.GetString("frmDirectory", "MSG77", "")
 
-                sSQL = "SELECT SPR_HDD.Id, SPR_HDD.Name, SPR_PROIZV.PROIZV FROM SPR_PROIZV INNER JOIN SPR_HDD ON (SPR_PROIZV.id = SPR_HDD.Proizv) AND (SPR_PROIZV.iD = SPR_HDD.Proizv) WHERE ((SPR_HDD.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
+                sSQL = "SELECT SPR_HDD.Id, SPR_HDD.Name, SPR_PROIZV.PROIZV,(Select count(*) FROM  (SELECT cpus.HDD_Name_1 FROM (SELECT HDD_Name_1 FROM kompy WHERE tiptehn = 'PC' union all SELECT HDD_Name_2 FROM kompy WHERE tiptehn = 'PC' union all SELECT HDD_Name_3 FROM kompy WHERE tiptehn = 'PC' union all SELECT  HDD_Name_4 FROM kompy WHERE tiptehn = 'PC' ) AS cpus) where cpus.HDD_Name_1=SPR_HDD.Name) as temp FROM SPR_PROIZV INNER JOIN SPR_HDD ON (SPR_PROIZV.id = SPR_HDD.Proizv) AND (SPR_PROIZV.iD = SPR_HDD.Proizv) WHERE ((SPR_HDD.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
 
             Case objIniFile.GetString("frmDirectory", "MSG23", "")
                 lbl1.Visible = True
                 gb1.Visible = True
                 gb1.Text = objIniFile.GetString("frmDirectory", "MSG78", "")
                 lbl1.Text = objIniFile.GetString("frmDirectory", "MSG79", "")
-                sSQL = "SELECT SPR_SOUND.Id, SPR_SOUND.Name, SPR_PROIZV.PROIZV FROM SPR_PROIZV INNER JOIN SPR_SOUND ON (SPR_PROIZV.id = SPR_SOUND.Proizv) AND (SPR_PROIZV.iD = SPR_SOUND.Proizv) WHERE ((SPR_SOUND.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
+                sSQL = "SELECT SPR_SOUND.Id, SPR_SOUND.Name, SPR_PROIZV.PROIZV, (Select count(*) FROM kompy where kompy.SOUND_NAME=SPR_SOUND.Name) as temp FROM SPR_PROIZV INNER JOIN SPR_SOUND ON (SPR_PROIZV.id = SPR_SOUND.Proizv) AND (SPR_PROIZV.iD = SPR_SOUND.Proizv) WHERE ((SPR_SOUND.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
 
             Case objIniFile.GetString("frmDirectory", "MSG24", "")
                 lbl1.Visible = True
                 gb1.Visible = True
                 gb1.Text = objIniFile.GetString("frmDirectory", "MSG78", "")
                 lbl1.Text = objIniFile.GetString("frmDirectory", "MSG79", "")
-                sSQL = "SELECT SPR_CREADER.Id, SPR_CREADER.Name, SPR_PROIZV.PROIZV FROM SPR_PROIZV INNER JOIN SPR_CREADER ON (SPR_PROIZV.id = SPR_CREADER.Proizv) AND (SPR_PROIZV.iD = SPR_CREADER.Proizv) WHERE ((SPR_CREADER.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
+                sSQL = "SELECT SPR_CREADER.Id, SPR_CREADER.Name, SPR_PROIZV.PROIZV, (Select count(*) FROM kompy where kompy.CREADER_NAME=SPR_CREADER.Name) as temp FROM SPR_PROIZV INNER JOIN SPR_CREADER ON (SPR_PROIZV.id = SPR_CREADER.Proizv) AND (SPR_PROIZV.iD = SPR_CREADER.Proizv) WHERE ((SPR_CREADER.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
 
 
             Case objIniFile.GetString("frmDirectory", "MSG25", "")
@@ -636,14 +640,14 @@ Public Class frmDirectory
                 gb1.Text = objIniFile.GetString("frmDirectory", "MSG80", "")
                 lbl1.Text = objIniFile.GetString("frmDirectory", "MSG81", "")
 
-                sSQL = "SELECT SPR_MB.Id, SPR_MB.Name, SPR_PROIZV.PROIZV FROM SPR_PROIZV INNER JOIN SPR_MB ON (SPR_PROIZV.id = SPR_MB.Proizv) AND (SPR_PROIZV.iD = SPR_MB.Proizv) WHERE ((SPR_MB.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
+                sSQL = "SELECT SPR_MB.Id, SPR_MB.Name, SPR_PROIZV.PROIZV, (Select count(*) FROM kompy where kompy.mb=SPR_MB.Name) as temp FROM SPR_PROIZV INNER JOIN SPR_MB ON (SPR_PROIZV.id = SPR_MB.Proizv) AND (SPR_PROIZV.iD = SPR_MB.Proizv) WHERE ((SPR_MB.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
 
             Case objIniFile.GetString("frmDirectory", "MSG26", "")
                 lbl1.Visible = True
                 gb1.Visible = True
                 gb1.Text = objIniFile.GetString("frmDirectory", "MSG82", "")
                 lbl1.Text = objIniFile.GetString("frmDirectory", "MSG83", "")
-                sSQL = "SELECT SPR_RAM.Id, SPR_RAM.Name, SPR_PROIZV.PROIZV FROM SPR_PROIZV INNER JOIN SPR_RAM ON (SPR_PROIZV.id = SPR_RAM.Proizv) AND (SPR_PROIZV.iD = SPR_RAM.Proizv) WHERE ((SPR_RAM.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
+                sSQL = "SELECT SPR_RAM.Id, SPR_RAM.Name, SPR_PROIZV.PROIZV,(Select count(*) FROM  (SELECT cpus.RAM_1 FROM (SELECT RAM_1 FROM kompy WHERE tiptehn = 'PC' union all SELECT RAM_2 FROM kompy WHERE tiptehn = 'PC' union all SELECT RAM_3 FROM kompy WHERE  tiptehn = 'PC' union all SELECT  RAM_4 FROM kompy WHERE tiptehn = 'PC' ) AS cpus)  where cpus.RAM_1=SPR_RAM.Name) as temp FROM SPR_PROIZV INNER JOIN SPR_RAM ON (SPR_PROIZV.id = SPR_RAM.Proizv) AND (SPR_PROIZV.iD = SPR_RAM.Proizv) WHERE ((SPR_RAM.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
 
             Case objIniFile.GetString("frmDirectory", "MSG28", "")
                 lbl1.Visible = True
@@ -662,18 +666,19 @@ Public Class frmDirectory
                 gb2.Text = objIniFile.GetString("frmDirectory", "MSG86", "")
                 lbl2.Text = objIniFile.GetString("frmDirectory", "MSG87", "")
 
-                sSQL = "SELECT SPR_CPU.Id, SPR_CPU.Name, SPR_PROIZV.PROIZV FROM SPR_PROIZV INNER JOIN SPR_CPU ON (SPR_PROIZV.id = SPR_CPU.Proizv) AND (SPR_PROIZV.iD = SPR_CPU.Proizv) WHERE ((SPR_CPU.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
+                sSQL = "SELECT SPR_CPU.Id, SPR_CPU.Name, SPR_PROIZV.PROIZV,(Select count(*) FROM  (SELECT cpus.cpu1 FROM (SELECT cpu1 FROM kompy WHERE tiptehn = 'PC' union all SELECT cpu2 FROM kompy WHERE tiptehn = 'PC'  union all SELECT cpu3 FROM kompy WHERE tiptehn = 'PC'  union all SELECT cpu4 FROM kompy WHERE tiptehn = 'PC') AS cpus)  where cpus.cpu1=SPR_CPU.Name) as temp FROM SPR_PROIZV INNER JOIN SPR_CPU ON (SPR_PROIZV.id = SPR_CPU.Proizv) AND (SPR_PROIZV.iD = SPR_CPU.Proizv) WHERE ((SPR_CPU.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
 
 
             Case objIniFile.GetString("frmDirectory", "MSG29", "")
 
-                sSQL = "SELECT SPR_NET.Id, SPR_NET.Name, SPR_PROIZV.PROIZV FROM SPR_PROIZV INNER JOIN SPR_NET ON (SPR_PROIZV.id = SPR_NET.Proizv) AND (SPR_PROIZV.iD = SPR_NET.Proizv) WHERE ((SPR_NET.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
+                sSQL = "SELECT SPR_NET.Id, SPR_NET.Name, SPR_PROIZV.PROIZV, (Select count(*) FROM (SELECT cpus.NET_NAME_1 FROM (SELECT NET_NAME_1 FROM kompy WHERE tiptehn = 'PC' union all SELECT NET_NAME_2 FROM kompy WHERE tiptehn = 'PC' ) AS cpus) where cpus.NET_NAME_1=SPR_NET.Name) as temp FROM SPR_PROIZV INNER JOIN SPR_NET ON (SPR_PROIZV.id = SPR_NET.Proizv) AND (SPR_PROIZV.iD = SPR_NET.Proizv) WHERE ((SPR_NET.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
 
             Case objIniFile.GetString("frmDirectory", "MSG30", "")
 
-                sSQL = "SELECT SPR_PCI.Id, SPR_PCI.Name, SPR_PROIZV.PROIZV FROM SPR_PROIZV INNER JOIN SPR_PCI ON (SPR_PROIZV.id = SPR_PCI.Proizv) AND (SPR_PROIZV.iD = SPR_PCI.Proizv) WHERE ((SPR_PCI.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
+                sSQL = "SELECT SPR_PCI.Id, SPR_PCI.Name, SPR_PROIZV.PROIZV, (Select count(*) FROM kompy where kompy.PCI_Name=SPR_PCI.Name) as temp FROM SPR_PROIZV INNER JOIN SPR_PCI ON (SPR_PROIZV.id = SPR_PCI.Proizv) AND (SPR_PROIZV.iD = SPR_PCI.Proizv) WHERE ((SPR_PCI.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
 
             Case objIniFile.GetString("frmDirectory", "MSG36", "")
+
                 Label3.Visible = False
                 txtName.Visible = False
                 cmbName3.Visible = False
@@ -775,6 +780,8 @@ Public Class frmDirectory
                 Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "MSG39", ""), 250, HorizontalAlignment.Left)
                 Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "MSG40", ""), 250, HorizontalAlignment.Left)
                 Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "MSG41", ""), 250, HorizontalAlignment.Left)
+                'Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "MSG99", ""), 70, HorizontalAlignment.Left)
+
 
             Case objIniFile.GetString("frmDirectory", "MSG43", "")
                 Label2.Visible = False
@@ -918,7 +925,7 @@ Public Class frmDirectory
 
                 FillComboNET(Me.cmb1, "Name", "spr_other", "", False, True)
 
-                sSQL = "SELECT SPR_OTH_DEV.Id, SPR_OTH_DEV.Name, SPR_PROIZV.PROIZV FROM SPR_PROIZV INNER JOIN SPR_OTH_DEV ON (SPR_PROIZV.id = SPR_OTH_DEV.Proizv) AND (SPR_PROIZV.iD = SPR_OTH_DEV.Proizv) WHERE ((SPR_OTH_DEV.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
+                sSQL = "SELECT SPR_OTH_DEV.Id, SPR_OTH_DEV.Name, SPR_PROIZV.PROIZV, (Select count(*) FROM kompy where kompy.net_Name=SPR_OTH_DEV.Name) as temp FROM SPR_PROIZV INNER JOIN SPR_OTH_DEV ON (SPR_PROIZV.id = SPR_OTH_DEV.Proizv) AND (SPR_PROIZV.iD = SPR_OTH_DEV.Proizv) WHERE ((SPR_OTH_DEV.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
 
 
             Case objIniFile.GetString("frmDirectory", "MSG53", "")
@@ -973,7 +980,7 @@ Public Class frmDirectory
 
                 FillComboNET(Me.cmbName2, "Name", "SPR_TIP_PO", "", False, True)
 
-                sSQL = "SELECT SPR_PO.Id, SPR_PO.Name, SPR_PROIZV.PROIZV FROM SPR_PROIZV INNER JOIN SPR_PO ON (SPR_PROIZV.id = SPR_PO.Proizv) AND (SPR_PROIZV.iD = SPR_PO.Proizv) WHERE ((SPR_PO.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
+                sSQL = "SELECT SPR_PO.Id, SPR_PO.Name, SPR_PROIZV.PROIZV, (Select count(*) FROM SOFT_INSTALL where SOFT_INSTALL.Soft=SPR_PO.Name) as temp FROM SPR_PROIZV INNER JOIN SPR_PO ON (SPR_PROIZV.id = SPR_PO.Proizv) AND (SPR_PROIZV.iD = SPR_PO.Proizv) WHERE ((SPR_PO.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
 
 
             Case objIniFile.GetString("frmDirectory", "MSG33", "")
@@ -981,14 +988,14 @@ Public Class frmDirectory
                 gb1.Visible = True
                 gb1.Text = objIniFile.GetString("frmDirectory", "MSG78", "")
                 lbl1.Text = objIniFile.GetString("frmDirectory", "MSG79", "")
-                sSQL = "SELECT SPR_CASE.Id, SPR_CASE.Name, SPR_PROIZV.PROIZV FROM SPR_PROIZV INNER JOIN SPR_CASE ON (SPR_PROIZV.id = SPR_CASE.Proizv) AND (SPR_PROIZV.iD = SPR_CASE.Proizv) WHERE ((SPR_CASE.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
+                sSQL = "SELECT SPR_CASE.Id, SPR_CASE.Name, SPR_PROIZV.PROIZV, (Select count(*) FROM kompy where kompy.CASE_NAME=SPR_CASE.Name) as temp FROM SPR_PROIZV INNER JOIN SPR_CASE ON (SPR_PROIZV.id = SPR_CASE.Proizv) AND (SPR_PROIZV.iD = SPR_CASE.Proizv) WHERE ((SPR_CASE.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
 
             Case objIniFile.GetString("frmDirectory", "MSG31", "")
                 lbl1.Visible = True
                 gb1.Visible = True
                 gb1.Text = objIniFile.GetString("frmDirectory", "MSG78", "")
                 lbl1.Text = objIniFile.GetString("frmDirectory", "MSG79", "")
-                sSQL = "SELECT SPR_BP.Id, SPR_BP.Name, SPR_PROIZV.PROIZV FROM SPR_PROIZV INNER JOIN SPR_BP ON (SPR_PROIZV.id = SPR_BP.Proizv) AND (SPR_PROIZV.iD = SPR_BP.Proizv) WHERE ((SPR_BP.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
+                sSQL = "SELECT SPR_BP.Id, SPR_BP.Name, SPR_PROIZV.PROIZV, (Select count(*) FROM kompy where kompy.BLOCK=SPR_BP.Name) as temp FROM SPR_PROIZV INNER JOIN SPR_BP ON (SPR_PROIZV.id = SPR_BP.Proizv) AND (SPR_PROIZV.iD = SPR_BP.Proizv) WHERE ((SPR_BP.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
 
 
 
@@ -1001,14 +1008,13 @@ Public Class frmDirectory
 
 
         Dim rs As ADODB.Recordset
+
+        Dim FirstColumn As Boolean
+
         rs = New ADODB.Recordset
-
-
         rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
         ' Dim intCount As Decimal = 0
-
-        Dim FirstColumn As Boolean
 
         Do Until rs.EOF
 
@@ -1039,8 +1045,6 @@ Public Class frmDirectory
         FirstColumn = False
         rs.Close()
         rs = Nothing
-
-
 
 
 

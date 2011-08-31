@@ -88,6 +88,8 @@ Module MOD_REF_TREE
 
         'lstgroups.visible = False
         lstgroups.HideSelection = False
+        lstgroups.ShowRootLines = False
+
 
         Dim sTEN As String
         Dim sVISIBLE As String
@@ -543,7 +545,16 @@ ERR1:
                 If Len(P_NAME) = 0 Then
                     P_NAME = "NoName"
                 End If
-                L_NAME = N_NAME & " (" & P_NAME & ")"
+
+                If N_NAME = P_NAME Then
+
+                    L_NAME = N_NAME
+
+                Else
+
+                    L_NAME = N_NAME & " (" & P_NAME & ")"
+
+                End If
 
             Case 2
                 P_NAME = PSEVDONIM
@@ -787,10 +798,10 @@ ERR1:
                                         Case "Сервер"
 
                                             iA = 3
-                                            
+
                                         Case "КПК"
                                             iA = 31
-                                           
+
                                         Case "Ноутбук"
                                             iA = 5
 
@@ -897,7 +908,16 @@ ERR1:
                                                         If Len(P_NAME) = 0 Then
                                                             P_NAME = "NoName"
                                                         End If
-                                                        L_NAME = N_NAME & " (" & P_NAME & ")"
+
+                                                        If N_NAME = P_NAME Then
+
+                                                            L_NAME = N_NAME
+
+                                                        Else
+
+                                                            L_NAME = N_NAME & " (" & P_NAME & ")"
+
+                                                        End If
 
                                                     Case 2
                                                         P_NAME = .Fields("PSEVDONIM").Value
@@ -1260,7 +1280,16 @@ ERR1:
                                     If Len(P_NAME) = 0 Then
                                         P_NAME = "NoName"
                                     End If
-                                    L_NAME = N_NAME & " (" & P_NAME & ")"
+
+                                    If N_NAME = P_NAME Then
+
+                                        L_NAME = N_NAME
+
+                                    Else
+
+                                        L_NAME = N_NAME & " (" & P_NAME & ")"
+
+                                    End If
 
                                 Case 2
                                     P_NAME = .Fields("PSEVDONIM").Value

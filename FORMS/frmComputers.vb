@@ -59,6 +59,48 @@ Public Class frmComputers
         frmMain.ToolStripDropDownButton1.Enabled = False
     End Sub
 
+    Private Sub chkVisibleSTR_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkVisibleSTR.CheckedChanged
+
+        Me.Cursor = Cursors.WaitCursor
+
+        Dim objIniFile As New IniFile(PrPath & "base.ini")
+
+        Select Case chkVisibleSTR.Checked
+
+            Case False
+
+                objIniFile.WriteString("General", "VisibleALL", "0")
+
+            Case True
+
+                objIniFile.WriteString("General", "VisibleALL", "1")
+
+        End Select
+
+        If OneStart = 0 Then Exit Sub
+
+        Dim newThread5 As New Thread(AddressOf R_T_LOAD)
+        newThread5.Start()
+
+
+
+        Me.Cursor = Cursors.Default
+
+    End Sub
+
+    Private Sub treebranche_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles treebranche.SelectedIndexChanged
+
+        Dim objIniFile As New IniFile(PrPath & "base.ini")
+        objIniFile.WriteString("General", "branche", treebranche.Text)
+
+        If OneStart = 0 Then Exit Sub
+
+        Dim newThread5 As New Thread(AddressOf R_T_LOAD)
+        newThread5.Start()
+
+
+    End Sub
+
     Private Sub PRELOAD_FORM()
 
         Dim objIniFile As New IniFile(PrPath & "base.ini")
@@ -67,9 +109,23 @@ Public Class frmComputers
         uname = objIniFile.GetString("General", "branche", "")
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
+
+        'Загружаем иконки
+        Me.BeginInvoke(New MethodInvoker(AddressOf Load_ICONS))
+
+        ' Меняем шрифт на форме
+        Me.BeginInvoke(New MethodInvoker(AddressOf Font_Form_For_Computer_1))
+
+        'Подгружаем язык
+        Me.BeginInvoke(New MethodInvoker(AddressOf frmComputers_Lang_1))
+
+        'Справочники
+        'Call LoadSPR()
+
+        Dim newThread2 As New Thread(AddressOf LoadSPR_1)
+        newThread2.Start()
+
         'Выбираем филиал если он выбран, если нет то "Все"
-
-
         If Len(uname) = 0 Then
             treebranche.Text = LNGIniFile.GetString("frmComputers", "MSG53", "")
 
@@ -136,61 +192,9 @@ Public Class frmComputers
         cmbTIPCartridg.Items.Add(langfile.GetString("frmComputers", "MSG10", ""))
         cmbTIPCartridg.Items.Add(langfile.GetString("frmComputers", "MSG11", ""))
         cmbTIPCartridg.Items.Add(langfile.GetString("frmComputers", "MSG12", ""))
-    End Sub
-
-    Private Sub Load_ICONS()
-
-        On Error Resume Next
-
-        mnuDeltoBranch.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\delete.png")
-        DeleteBranche.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\delete.png")
-
-        addFoldertoBranch.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\fadd.png")
-        RepAddBrToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\service.png")
-        SoftInstallToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\soft.png")
-        ПаспортКомпьютераToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\pasport.png")
-        MassRazdelPerf.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\remove.png")
-        MassObedPerf.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\add.png")
-        MassUpdatetoINI.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\updatefolder.png")
-
-        DELTEdVIGToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\delete.png")
-        DeleteService.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\delete.png")
-
-        EditService.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\editservice.png")
-        MnuSendEmail.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\sendmail.png")
-        mnu_Z_to_Office.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\serviceprint.png")
-        mnu_z_rasp.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\servicerasp.png")
-
-        addRemToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\service.png")
-        'CartrAddToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\servicerasp.png")
-
-        CopyToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\copy.png")
-        UpdateToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\pcupdate.png")
-
-        DeleteToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\delete.png")
-
-        ОтделитьПринтерыИМониторыToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\remove.png")
-        ВернутьПерефериюToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\add.png")
-
-        btnSearch.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\search.png")
 
 
-        addServiseWork.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\add.png")
-
-
-        If ilsCommands.Images.Count = 0 Then
-
-            Call Tree_Icons_Feel(ilsCommands, "sCMP", "pic\tree\")
-            'Call Tree_Icons_Feel(ImageList11, "sCMP", "pic\tree\")
-
-        End If
-
-
-    End Sub
-
-    Private Sub frmComputers_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-
-        Dim objIniFile As New IniFile(PrPath & "base.ini")
+        'Dim objIniFile As New IniFile(PrPath & "base.ini")
 
         KCKey = objIniFile.GetString("general", "DK", 0)
         DCKey = objIniFile.GetString("general", "Default", 0)
@@ -241,21 +245,87 @@ Public Class frmComputers
         End If
 
 
-        'Загружаем иконки
-        Me.BeginInvoke(New MethodInvoker(AddressOf Load_ICONS))
-
-        ' Меняем шрифт на форме
-        Me.BeginInvoke(New MethodInvoker(AddressOf Font_Form_For_Computer_1))
-        Me.BeginInvoke(New MethodInvoker(AddressOf frmComputers_Lang_1))
 
 
 
-        Me.BeginInvoke(New MethodInvoker(AddressOf RESIZER))
+    End Sub
 
-        Dim newThread2 As New Thread(AddressOf LoadSPR_1)
-        newThread2.Start()
-        'newThread2.Priority = 4
+    Private Sub Load_ICONS()
 
+        On Error Resume Next
+
+        mnuDeltoBranch.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\delete.png")
+        DeleteBranche.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\delete.png")
+
+        addFoldertoBranch.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\fadd.png")
+        RepAddBrToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\service.png")
+        SoftInstallToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\soft.png")
+        ПаспортКомпьютераToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\pasport.png")
+        MassRazdelPerf.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\remove.png")
+        MassObedPerf.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\add.png")
+        MassUpdatetoINI.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\updatefolder.png")
+
+        DELTEdVIGToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\delete.png")
+        DeleteService.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\delete.png")
+
+        EditService.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\editservice.png")
+        MnuSendEmail.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\sendmail.png")
+        mnu_Z_to_Office.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\serviceprint.png")
+        mnu_z_rasp.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\servicerasp.png")
+
+        addRemToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\service.png")
+        'CartrAddToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\servicerasp.png")
+
+        CopyToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\copy.png")
+        UpdateToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\pcupdate.png")
+
+        DeleteToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\delete.png")
+
+        ОтделитьПринтерыИМониторыToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\remove.png")
+        ВернутьПерефериюToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\add.png")
+
+        btnSearch.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\search.png")
+
+
+        addServiseWork.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\add.png")
+
+
+
+        'bCPUPlus.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\add.png")
+        'bRamPlus.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\add.png")
+        'bHddPlus.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\add.png")
+        'bSVGAPlus.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\add.png")
+        'bOpticalPlus.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\add.png")
+        'bNETPlus.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\add.png")
+        'bMonitorPlus.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\add.png")
+        'bPrinterPlus.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\add.png")
+
+
+
+        If ilsCommands.Images.Count = 0 Then
+
+            Call Tree_Icons_Feel(ilsCommands, "sCMP", "pic\tree\")
+            'Call Tree_Icons_Feel(ImageList11, "sCMP", "pic\tree\")
+
+        End If
+
+
+    End Sub
+
+    Private Sub frmComputers_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+
+        'Me.BeginInvoke(New MethodInvoker(AddressOf PRELOAD_FORM))
+
+        Call PRELOAD_FORM()
+
+        ' Application.DoEvents()
+
+
+
+        'Меняем форму
+        'Me.BeginInvoke(New MethodInvoker(AddressOf RESIZER))
+
+        'Статистика
         Dim newThread4 As New Thread(AddressOf STAT_INF_1)
         newThread4.Start()
         'newThread4.Priority = 4
@@ -268,11 +338,7 @@ Public Class frmComputers
 
         Application.DoEvents()
 
-        Me.BeginInvoke(New MethodInvoker(AddressOf PRELOAD_FORM))
-
-        Application.DoEvents()
-
-
+       
 
         If lstGroups.Nodes.Count = 0 Then
 
@@ -5384,19 +5450,6 @@ lvMovementOTH.Columns(e.Column)
      
     End Sub
 
-    Private Sub treebranche_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles treebranche.SelectedIndexChanged
-
-        Dim objIniFile As New IniFile(PrPath & "base.ini")
-        objIniFile.WriteString("General", "branche", treebranche.Text)
-
-        If OneStart = 0 Then Exit Sub
-
-        Dim newThread5 As New Thread(AddressOf R_T_LOAD)
-        newThread5.Start()
-
-
-    End Sub
-
     Private Sub txtUserName_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtUserName.SelectedIndexChanged
 
         Dim rs As ADODB.Recordset
@@ -6015,34 +6068,6 @@ err_:
         End Select
     End Sub
 
-    Private Sub chkVisibleSTR_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkVisibleSTR.CheckedChanged
-
-        Me.Cursor = Cursors.WaitCursor
-
-        Dim objIniFile As New IniFile(PrPath & "base.ini")
-
-        Select Case chkVisibleSTR.Checked
-
-            Case False
-
-                objIniFile.WriteString("General", "VisibleALL", "0")
-
-            Case True
-
-                objIniFile.WriteString("General", "VisibleALL", "1")
-
-        End Select
-
-        If OneStart = 0 Then Exit Sub
-
-        Dim newThread5 As New Thread(AddressOf R_T_LOAD)
-        newThread5.Start()
-
-       
-
-        Me.Cursor = Cursors.Default
-
-    End Sub
 
     Private Sub ВернутьПерефериюToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ВернутьПерефериюToolStripMenuItem.Click
 

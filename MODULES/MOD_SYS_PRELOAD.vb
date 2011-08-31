@@ -164,6 +164,94 @@ Module MOD_SYS_PRELOAD
         End If
 
 
+
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-branche.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-department.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-office.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-server.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-pc.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-notebook.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-pda.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-printer.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-mfu.png"))
+
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-copir.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-network.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-photo.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-phone.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-fax.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-scanner.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-zip.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-other.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-monitor.png"))
+
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-flash.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-calc.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-garnitura.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-microphone.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-webcamera.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-gamepad.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-planshet.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-flash-2.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-flash-3.png"))
+
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-flash-4.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-video.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-ipad.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-antenna.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-mobile-1.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-mobile-2.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-monitor-2.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-projector.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-monitor-3.png"))
+
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-workkey.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-usb.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-dvd.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-hdd.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-photo-2.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-ups.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-rupor.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-people.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-audio.png"))
+
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-usb-2.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-keyboard.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-mouse.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-acdc.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-cartridg.png"))
+
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-cable.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-portfel.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-battery.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-papper.png"))
+
+        'If sFRM <> "DIR" Then
+
+        '    ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-battery-2.png"))
+        '    ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-bp.png"))
+        '    ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-cable-2.png"))
+        '    ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-other-2.png"))
+        '    ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-other-3.png"))
+        '    ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-pcmci.png"))
+        '    ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-other-4.png"))
+        '    ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-fs.png"))
+        '    ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-flash-5.png"))
+
+        '    ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-soft.png"))
+        '    ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-scanner-2.png"))
+        '    ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-other-5.png"))
+        '    ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-other-6.png"))
+        '    ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-bluetouch.png"))
+
+        '    ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-server-2.png"))
+        '    ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-root.png"))
+        'Else
+
+        'End If
+
+
+
         Dim allowedExtensions() As String = {".png"}
         Dim dirFiles() As String = IO.Directory.GetFiles(PrPath & "pic\")
 
