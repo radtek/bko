@@ -1023,7 +1023,6 @@ Me.lstGroups.Location = New System.Drawing.Point(3, 83)
 Me.lstGroups.Name = "lstGroups"
 Me.lstGroups.PathSeparator = "|"
 Me.lstGroups.ShowNodeToolTips = true
-Me.lstGroups.ShowRootLines = false
 Me.lstGroups.Size = New System.Drawing.Size(280, 453)
 Me.lstGroups.TabIndex = 2
 '

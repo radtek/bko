@@ -107,9 +107,10 @@ Partial Class frmSetup
         Me.RadioButton2 = New System.Windows.Forms.RadioButton()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.TableLayoutPanel4 = New System.Windows.Forms.TableLayoutPanel()
-        Me.Label9 = New System.Windows.Forms.Label()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.chkFonts = New System.Windows.Forms.CheckBox()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.gbMyBlank = New System.Windows.Forms.GroupBox()
@@ -1135,9 +1136,10 @@ Partial Class frmSetup
         Me.TableLayoutPanel4.ColumnCount = 2
         Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-        Me.TableLayoutPanel4.Controls.Add(Me.Label9, 0, 0)
         Me.TableLayoutPanel4.Controls.Add(Me.Button3, 1, 1)
         Me.TableLayoutPanel4.Controls.Add(Me.Button2, 1, 0)
+        Me.TableLayoutPanel4.Controls.Add(Me.Label9, 0, 1)
+        Me.TableLayoutPanel4.Controls.Add(Me.chkFonts, 0, 0)
         Me.TableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel4.Location = New System.Drawing.Point(3, 16)
         Me.TableLayoutPanel4.Name = "TableLayoutPanel4"
@@ -1147,17 +1149,6 @@ Partial Class frmSetup
         Me.TableLayoutPanel4.Size = New System.Drawing.Size(364, 90)
         Me.TableLayoutPanel4.TabIndex = 3
         '
-        'Label9
-        '
-        Me.Label9.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(3, 38)
-        Me.Label9.Name = "Label9"
-        Me.TableLayoutPanel4.SetRowSpan(Me.Label9, 2)
-        Me.Label9.Size = New System.Drawing.Size(277, 13)
-        Me.Label9.TabIndex = 1
-        Me.Label9.Text = "База Компьютеров Организации"
-        '
         'Button3
         '
         Me.Button3.Location = New System.Drawing.Point(286, 48)
@@ -1166,6 +1157,7 @@ Partial Class frmSetup
         Me.Button3.TabIndex = 2
         Me.Button3.Text = "Color"
         Me.Button3.UseVisualStyleBackColor = True
+        Me.Button3.Visible = False
         '
         'Button2
         '
@@ -1175,6 +1167,27 @@ Partial Class frmSetup
         Me.Button2.TabIndex = 0
         Me.Button2.Text = "Выбрать"
         Me.Button2.UseVisualStyleBackColor = True
+        Me.Button2.Visible = False
+        '
+        'Label9
+        '
+        Me.Label9.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(3, 61)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(277, 13)
+        Me.Label9.TabIndex = 1
+        Me.Label9.Text = "База Компьютеров Организации"
+        '
+        'chkFonts
+        '
+        Me.chkFonts.AutoSize = True
+        Me.chkFonts.Location = New System.Drawing.Point(3, 3)
+        Me.chkFonts.Name = "chkFonts"
+        Me.chkFonts.Size = New System.Drawing.Size(200, 17)
+        Me.chkFonts.TabIndex = 3
+        Me.chkFonts.Text = "Использовать изменение шрифта"
+        Me.chkFonts.UseVisualStyleBackColor = True
         '
         'GroupBox3
         '
@@ -1444,4 +1457,5 @@ Partial Class frmSetup
     Friend WithEvents ComboBox1 As System.Windows.Forms.ComboBox
     Friend WithEvents chkFullScreen As System.Windows.Forms.CheckBox
     Friend WithEvents Button4 As System.Windows.Forms.Button
+    Friend WithEvents chkFonts As System.Windows.Forms.CheckBox
 End Class

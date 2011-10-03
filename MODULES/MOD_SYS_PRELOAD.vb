@@ -14,7 +14,7 @@ Module MOD_SYS_PRELOAD
     Public FontB As Boolean
     Public FontSt As System.Drawing.FontStyle
     Public FontD As System.Drawing.GraphicsUnit
-
+    Public FontI As Integer
     Public RAZDEL As String
 
     Public KCKey As Integer
@@ -309,6 +309,10 @@ Module MOD_SYS_PRELOAD
         sICONS = objIniFile.GetString("General", "ICONs", "24*24")
 
 
+
+
+        FontI = objIniFile.GetString("General", "chkFonts", "0")
+
         Select Case sICONS
 
             Case "32*32"
@@ -466,6 +470,8 @@ Module MOD_SYS_PRELOAD
     End Sub
 
     Public Sub SendFonts(ByVal ControlContainer As Object)
+
+        If FontI = 0 Then Exit Sub
 
         If FontN = "Microsoft Sans Serif" And fontS = "8,25" And FontC = "Black" And FontB = False And FontSt = 0 And FontD = 3 Then Exit Sub
 

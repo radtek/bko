@@ -433,7 +433,19 @@ Public Class frmSetup
 
 
 
+        uname = objIniFile.GetString("General", "chkFonts", "0")
 
+        Select Case uname
+
+            Case "1"
+
+                chkFonts.Checked = True
+
+            Case "0"
+
+                chkFonts.Checked = False
+
+        End Select
 
         sText = objIniFile.GetString("general", "Tree_S", 0)
 
@@ -1432,5 +1444,29 @@ err_:
         Me.Cursor = Cursors.WaitCursor
         add_kabn_if_nothing()
         Me.Cursor = Cursors.Default
+    End Sub
+
+    Private Sub TableLayoutPanel4_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles TableLayoutPanel4.Paint
+
+    End Sub
+
+    Private Sub chkFonts_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkFonts.CheckedChanged
+        Dim objIniFile As New IniFile(PrPath & "base.ini")
+
+        Select Case chkFonts.Checked
+
+            Case False
+
+                objIniFile.WriteString("General", "chkFonts", "0")
+                FontI = 0
+                Button2.Visible = False
+                Button3.Visible = False
+            Case True
+
+                objIniFile.WriteString("General", "chkFonts", "1")
+                FontI = 1
+                Button2.Visible = True
+                Button3.Visible = True
+        End Select
     End Sub
 End Class

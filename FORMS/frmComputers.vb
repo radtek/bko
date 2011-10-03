@@ -314,11 +314,11 @@ Public Class frmComputers
 
     Private Sub frmComputers_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
-        'Me.BeginInvoke(New MethodInvoker(AddressOf PRELOAD_FORM))
+        Me.BeginInvoke(New MethodInvoker(AddressOf PRELOAD_FORM))
 
-        Call PRELOAD_FORM()
+        'Call PRELOAD_FORM()
 
-        ' Application.DoEvents()
+        Application.DoEvents()
 
 
 
@@ -338,7 +338,7 @@ Public Class frmComputers
 
         Application.DoEvents()
 
-       
+
 
         If lstGroups.Nodes.Count = 0 Then
 
