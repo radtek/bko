@@ -203,14 +203,29 @@ Public Class frmComputers
         If Len(DCKey) <> 0 And DCKey <> "0" Then sSTAB5.Visible = True
 
         If KCKey <> 0 Then
-
+            Dim VisibleSSTAB As String
+            Dim sCOUNT As Integer
             Dim rs As ADODB.Recordset
             rs = New ADODB.Recordset
 
-            Dim VisibleSSTAB As String
+            rs.Open("SELECT count(*) as t_n from kompy where id=" & KCKey, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
+            With rs
+
+                sCOUNT = .Fields("t_n").Value
+
+            End With
+
+            rs.Close()
+            rs = Nothing
+
+            If sCOUNT = 0 Then
+                sSTAB1.Visible = True
+                Exit Sub
+            End If
+
+            rs = New ADODB.Recordset
             rs.Open("SELECT tiptehn from kompy where id=" & KCKey, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-
             With rs
 
                 VisibleSSTAB = .Fields("tiptehn").Value
@@ -314,9 +329,9 @@ Public Class frmComputers
 
     Private Sub frmComputers_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
-        Me.BeginInvoke(New MethodInvoker(AddressOf PRELOAD_FORM))
+        ' Me.BeginInvoke(New MethodInvoker(AddressOf PRELOAD_FORM))
 
-        'Call PRELOAD_FORM()
+        Call PRELOAD_FORM()
 
         Application.DoEvents()
 

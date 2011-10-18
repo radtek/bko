@@ -153,7 +153,7 @@ Partial Class frmSetup
         Me.TabPage5.Controls.Add(Me.TableLayoutPanel3)
         Me.TabPage5.Location = New System.Drawing.Point(4, 22)
         Me.TabPage5.Name = "TabPage5"
-        Me.TabPage5.Size = New System.Drawing.Size(976, 640)
+        Me.TabPage5.Size = New System.Drawing.Size(876, 578)
         Me.TabPage5.TabIndex = 4
         Me.TabPage5.Text = "Пользователи"
         Me.TabPage5.UseVisualStyleBackColor = True
@@ -192,7 +192,7 @@ Partial Class frmSetup
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel3.Size = New System.Drawing.Size(976, 640)
+        Me.TableLayoutPanel3.Size = New System.Drawing.Size(876, 536)
         Me.TableLayoutPanel3.TabIndex = 15
         '
         'Label1
@@ -212,7 +212,7 @@ Partial Class frmSetup
         Me.gbUsers.Dock = System.Windows.Forms.DockStyle.Fill
         Me.gbUsers.Location = New System.Drawing.Point(3, 166)
         Me.gbUsers.Name = "gbUsers"
-        Me.gbUsers.Size = New System.Drawing.Size(970, 471)
+        Me.gbUsers.Size = New System.Drawing.Size(970, 367)
         Me.gbUsers.TabIndex = 11
         Me.gbUsers.TabStop = False
         Me.gbUsers.Text = "Пользователи"
@@ -230,8 +230,8 @@ Partial Class frmSetup
         'SplitContainer1.Panel2
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.gbUserLevel)
-        Me.SplitContainer1.Size = New System.Drawing.Size(964, 452)
-        Me.SplitContainer1.SplitterDistance = 704
+        Me.SplitContainer1.Size = New System.Drawing.Size(964, 348)
+        Me.SplitContainer1.SplitterDistance = 696
         Me.SplitContainer1.TabIndex = 0
         '
         'lvPrUsers
@@ -243,7 +243,7 @@ Partial Class frmSetup
         Me.lvPrUsers.MultiSelect = False
         Me.lvPrUsers.Name = "lvPrUsers"
         Me.lvPrUsers.ShowItemToolTips = True
-        Me.lvPrUsers.Size = New System.Drawing.Size(704, 452)
+        Me.lvPrUsers.Size = New System.Drawing.Size(696, 348)
         Me.lvPrUsers.TabIndex = 18
         Me.lvPrUsers.UseCompatibleStateImageBehavior = False
         Me.lvPrUsers.View = System.Windows.Forms.View.Details
@@ -266,7 +266,7 @@ Partial Class frmSetup
         Me.gbUserLevel.Dock = System.Windows.Forms.DockStyle.Fill
         Me.gbUserLevel.Location = New System.Drawing.Point(0, 0)
         Me.gbUserLevel.Name = "gbUserLevel"
-        Me.gbUserLevel.Size = New System.Drawing.Size(256, 452)
+        Me.gbUserLevel.Size = New System.Drawing.Size(264, 348)
         Me.gbUserLevel.TabIndex = 0
         Me.gbUserLevel.TabStop = False
         Me.gbUserLevel.Text = "Разрешения"
@@ -530,7 +530,7 @@ Partial Class frmSetup
         Me.TabPage4.Controls.Add(Me.Button1)
         Me.TabPage4.Location = New System.Drawing.Point(4, 22)
         Me.TabPage4.Name = "TabPage4"
-        Me.TabPage4.Size = New System.Drawing.Size(976, 640)
+        Me.TabPage4.Size = New System.Drawing.Size(876, 578)
         Me.TabPage4.TabIndex = 3
         Me.TabPage4.Text = "Найденные базы"
         Me.TabPage4.UseVisualStyleBackColor = True
@@ -562,7 +562,7 @@ Partial Class frmSetup
         Me.TabPage3.Controls.Add(Me.TableLayoutPanel2)
         Me.TabPage3.Location = New System.Drawing.Point(4, 22)
         Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.Size = New System.Drawing.Size(976, 640)
+        Me.TabPage3.Size = New System.Drawing.Size(876, 578)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "Организация и сисадмин"
         Me.TabPage3.UseVisualStyleBackColor = True
@@ -594,7 +594,7 @@ Partial Class frmSetup
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 8.0!))
-        Me.TableLayoutPanel2.Size = New System.Drawing.Size(976, 640)
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(876, 536)
         Me.TableLayoutPanel2.TabIndex = 8
         '
         'Label6
@@ -612,7 +612,7 @@ Partial Class frmSetup
         Me.txtMail.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtMail.Location = New System.Drawing.Point(162, 55)
         Me.txtMail.Name = "txtMail"
-        Me.txtMail.Size = New System.Drawing.Size(811, 20)
+        Me.txtMail.Size = New System.Drawing.Size(711, 20)
         Me.txtMail.TabIndex = 5
         '
         'txtPRG
@@ -620,7 +620,7 @@ Partial Class frmSetup
         Me.txtPRG.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtPRG.Location = New System.Drawing.Point(162, 81)
         Me.txtPRG.Name = "txtPRG"
-        Me.txtPRG.Size = New System.Drawing.Size(811, 20)
+        Me.txtPRG.Size = New System.Drawing.Size(711, 20)
         Me.txtPRG.TabIndex = 6
         '
         'Label7
@@ -658,7 +658,7 @@ Partial Class frmSetup
         Me.txtSA.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtSA.Location = New System.Drawing.Point(162, 29)
         Me.txtSA.Name = "txtSA"
-        Me.txtSA.Size = New System.Drawing.Size(811, 20)
+        Me.txtSA.Size = New System.Drawing.Size(711, 20)
         Me.txtSA.TabIndex = 4
         '
         'txtORG
@@ -666,7 +666,7 @@ Partial Class frmSetup
         Me.txtORG.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtORG.Location = New System.Drawing.Point(162, 3)
         Me.txtORG.Name = "txtORG"
-        Me.txtORG.Size = New System.Drawing.Size(811, 20)
+        Me.txtORG.Size = New System.Drawing.Size(711, 20)
         Me.txtORG.TabIndex = 3
         '
         'btnSave
@@ -694,7 +694,7 @@ Partial Class frmSetup
         Me.txtBigBoss.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtBigBoss.Location = New System.Drawing.Point(162, 107)
         Me.txtBigBoss.Name = "txtBigBoss"
-        Me.txtBigBoss.Size = New System.Drawing.Size(811, 20)
+        Me.txtBigBoss.Size = New System.Drawing.Size(711, 20)
         Me.txtBigBoss.TabIndex = 9
         Me.txtBigBoss.Visible = False
         '
@@ -705,7 +705,7 @@ Partial Class frmSetup
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(976, 640)
+        Me.TabPage1.Size = New System.Drawing.Size(973, 578)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Настройки программы"
         Me.TabPage1.UseVisualStyleBackColor = True
@@ -716,7 +716,7 @@ Partial Class frmSetup
         Me.gbSetup.Dock = System.Windows.Forms.DockStyle.Fill
         Me.gbSetup.Location = New System.Drawing.Point(3, 3)
         Me.gbSetup.Name = "gbSetup"
-        Me.gbSetup.Size = New System.Drawing.Size(970, 634)
+        Me.gbSetup.Size = New System.Drawing.Size(967, 572)
         Me.gbSetup.TabIndex = 0
         Me.gbSetup.TabStop = False
         Me.gbSetup.Text = "Настройки"
@@ -771,7 +771,7 @@ Partial Class frmSetup
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(964, 615)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(961, 553)
         Me.TableLayoutPanel1.TabIndex = 20
         '
         'chkUpdate
@@ -1191,11 +1191,12 @@ Partial Class frmSetup
         '
         'GroupBox3
         '
+        Me.TableLayoutPanel1.SetColumnSpan(Me.GroupBox3, 2)
         Me.GroupBox3.Controls.Add(Me.ComboBox1)
         Me.GroupBox3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupBox3.Location = New System.Drawing.Point(562, 303)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(366, 100)
+        Me.GroupBox3.Size = New System.Drawing.Size(399, 100)
         Me.GroupBox3.TabIndex = 23
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Размер иконок в дереве"
@@ -1207,16 +1208,17 @@ Partial Class frmSetup
         Me.ComboBox1.Items.AddRange(New Object() {"24*24", "32*32"})
         Me.ComboBox1.Location = New System.Drawing.Point(3, 16)
         Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(360, 21)
+        Me.ComboBox1.Size = New System.Drawing.Size(393, 21)
         Me.ComboBox1.TabIndex = 0
         '
         'gbMyBlank
         '
+        Me.TableLayoutPanel1.SetColumnSpan(Me.gbMyBlank, 2)
         Me.gbMyBlank.Controls.Add(Me.TableLayoutPanel5)
         Me.gbMyBlank.Dock = System.Windows.Forms.DockStyle.Fill
         Me.gbMyBlank.Location = New System.Drawing.Point(562, 188)
         Me.gbMyBlank.Name = "gbMyBlank"
-        Me.gbMyBlank.Size = New System.Drawing.Size(366, 109)
+        Me.gbMyBlank.Size = New System.Drawing.Size(399, 109)
         Me.gbMyBlank.TabIndex = 21
         Me.gbMyBlank.TabStop = False
         Me.gbMyBlank.Text = "Мой бланк"
@@ -1237,7 +1239,7 @@ Partial Class frmSetup
         Me.TableLayoutPanel5.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel5.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel5.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel5.Size = New System.Drawing.Size(360, 90)
+        Me.TableLayoutPanel5.Size = New System.Drawing.Size(393, 90)
         Me.TableLayoutPanel5.TabIndex = 4
         '
         'chkDVIG
@@ -1292,12 +1294,13 @@ Partial Class frmSetup
         '
         'Button4
         '
-        Me.Button4.Location = New System.Drawing.Point(3, 568)
+        Me.Button4.Location = New System.Drawing.Point(3, 506)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(75, 23)
         Me.Button4.TabIndex = 25
         Me.Button4.Text = "+"
         Me.Button4.UseVisualStyleBackColor = True
+        Me.Button4.Visible = False
         '
         'SStab1
         '
@@ -1310,16 +1313,16 @@ Partial Class frmSetup
         Me.SStab1.Multiline = True
         Me.SStab1.Name = "SStab1"
         Me.SStab1.SelectedIndex = 0
-        Me.SStab1.Size = New System.Drawing.Size(984, 666)
+        Me.SStab1.Size = New System.Drawing.Size(981, 604)
         Me.SStab1.TabIndex = 0
         '
         'frmSetup
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(984, 666)
+        Me.ClientSize = New System.Drawing.Size(981, 604)
         Me.Controls.Add(Me.SStab1)
-        Me.MinimumSize = New System.Drawing.Size(1000, 700)
+        Me.MinimumSize = New System.Drawing.Size(900, 600)
         Me.Name = "frmSetup"
         Me.Text = "Настройки"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
