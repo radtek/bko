@@ -1412,6 +1412,9 @@ err_:
         On Error Resume Next
         lstSoftware.Items.Clear()
 
+        lstSoftware.Sorting = SortOrder.None
+        lstSoftware.ListViewItemSorter = Nothing
+
 
         Dim rs As ADODB.Recordset 'Объявляем рекордсет
         Dim sSQL As String 'Переменная, где будет размещён SQL запрос
@@ -1606,6 +1609,8 @@ err_:
 
         End If
 
+        lstGroups.Sorting = SortOrder.None
+        lstGroups.ListViewItemSorter = Nothing
 
 
         Dim rs As ADODB.Recordset 'Объявляем рекордсет

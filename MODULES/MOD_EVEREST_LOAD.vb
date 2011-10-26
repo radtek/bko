@@ -1443,27 +1443,33 @@ Err_handler:
 
         '################
         'Звуковая карта
-        uname = everIniFile.GetString("Аудио PCI / PnP", "Аудио PCI / PnP1", "")
+        uname = everIniFile.GetString("Аудио PCI / PnP", "Аудио PCI / PnP1", "0")
         uname = Replace(uname, "'", " ", "")
 
-        If frmComputers.cmbSound.Text = uname Then
-        Else
+        If frmComputers.cmbSound.Text <> uname And uname <> "0" Then
+
             SaveUpdateLogDB(frmComputers.cmbSound.Text, uname)
 
             frmComputers.cmbSound.Text = uname
             frmComputers.cmbSound.BackColor = Color.Green
+
+        Else
+           
         End If
 
-        If Len(frmComputers.cmbSound.Text) = 0 Then
+        If Len(uname) = 0 Or Len(frmComputers.cmbSound.Text) = 0 Then
             uname = everIniFile.GetString("Суммарная информация", "Мультимедиа|Звуковой адаптер1", "")
             uname = Replace(uname, "'", " ", "")
+
             If frmComputers.cmbSound.Text = uname Then
+
             Else
                 SaveUpdateLogDB(frmComputers.cmbSound.Text, uname)
 
                 frmComputers.cmbSound.Text = uname
                 frmComputers.cmbSound.BackColor = Color.Green
             End If
+
         End If
 
         If Len(frmComputers.cmbSound.Text) = 0 Then
@@ -1797,6 +1803,7 @@ nextA:
         'Имя компа
         frmComputers.txtSNAME.Text = everIniFile.GetString("Имя компьютера", "Имя NetBIOS|Имя компьютера", "")
         'frmComputers.ps.Text = everIniFile.GetString("Имя компьютера", "Имя NetBIOS|Имя компьютера","")
+        If Len(frmComputers.txtSNAME.Text) = 0 Then frmComputers.txtSNAME.Text = everIniFile.GetString("Суммарная информация", "Компьютер|Имя компьютера", "NoName")
 
         '################
         'Принтеры

@@ -2278,6 +2278,11 @@ err_:
 
         Call selectTECMesto()
 
+        cmbBranch.Text = sBranch
+        cmbDepartment.Text = sDepartment
+        cmbOffice.Text = sOffice
+
+
         EDT = False
         MASSLOAD = True
         TipTehn = "PC"
@@ -2297,7 +2302,7 @@ err_:
 
             If Len(sTXTDIR) = 0 Then
                 ' Select the C:\Windows directory on entry.
-                .SelectedPath = "c:\windows"
+                .SelectedPath = PrPath
             Else
                 .SelectedPath = sTXTDIR
             End If
@@ -2328,8 +2333,9 @@ err_:
 
                         Call Clear_Form_For_Computer()
 
-                        Me.BeginInvoke(New MethodInvoker(AddressOf Everest_Load))
+                        'Me.BeginInvoke(New MethodInvoker(AddressOf Everest_Load))
 
+                        Call Everest_Load()
 
                         cmbBranch.Text = sBranch
                         cmbDepartment.Text = sDepartment
@@ -2344,8 +2350,10 @@ err_:
 
                 MASSLOAD = False
 
-                Dim newThread1 As New Thread(AddressOf STAT_INF_1)
-                newThread1.Start()
+                'Dim newThread1 As New Thread(AddressOf STAT_INF_1)
+                'newThread1.Start()
+
+                Call STAT_INF()
 
                 Dim langfile As New IniFile(sLANGPATH)
 
@@ -2375,11 +2383,11 @@ err_:
 
         Dim ePatch As String
         Dim objIniFile As New IniFile(PrPath & "base.ini")
-        ePatch = objIniFile.GetString("General", "aida", "c:\")
+        ePatch = objIniFile.GetString("General", "aida", PrPath)
 
         Dim fdlg As OpenFileDialog = New OpenFileDialog()
 
-        fdlg.Title = "Everest Cirporate Edition ini file"
+        fdlg.Title = "Everest Corporate Edition ini file"
         fdlg.InitialDirectory = ePatch
         fdlg.Filter = "ini files (*.ini)|*.ini"
         fdlg.FilterIndex = 2
@@ -5513,7 +5521,7 @@ lvMovementOTH.Columns(e.Column)
 
             If Len(sTXTDIR) = 0 Then
                 ' Select the C:\Windows directory on entry.
-                .SelectedPath = "c:\windows"
+                .SelectedPath = PrPath
             Else
                 .SelectedPath = sTXTDIR
             End If
@@ -6285,6 +6293,10 @@ err_1:
     End Sub
 
     Private Sub lvRepair_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvRepair.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub lstUsers_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lstUsers.SelectedIndexChanged
 
     End Sub
 End Class

@@ -695,9 +695,11 @@ err_1:
         btnSearch.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\search.png")
 
 
-        Dim newThread1 As New Thread(AddressOf LANG_frmserviceDesk)
-        newThread1.Start()
 
+        Call LANG_frmserviceDesk()
+
+        'Dim newThread1 As New Thread(AddressOf LANG_frmserviceDesk)
+        'newThread1.Start()
 
         Dim objIniFile As New IniFile(PrPath & "base.ini")
         Dim uname As String
