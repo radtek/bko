@@ -66,6 +66,7 @@ Partial Class frmMain
         Me.CompareDBToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ЗапросыToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CleerDBToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ПроверитьФилиалыОтделыToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.QRCodeTestingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ПерегрузкаСрправочниковToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ViewMenu = New System.Windows.Forms.ToolStripMenuItem()
@@ -133,7 +134,7 @@ Partial Class frmMain
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.ArhToolZipbutton = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
-        Me.ПроверитьФилиалыОтделыToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SaveToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip.SuspendLayout()
         Me.StatusStrip.SuspendLayout()
         Me.ToolStrip.SuspendLayout()
@@ -152,7 +153,7 @@ Partial Class frmMain
         '
         'FileMenu
         '
-        Me.FileMenu.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripMenuItem, Me.ToolStripSeparator5, Me.ПроверитьОбновлениеToolStripMenuItem, Me.MailToAuthors, Me.ФорумToolStripMenuItem, Me.BugTrackerToolStripMenuItem, Me.ToolStripSeparator3, Me.ExitToolStripMenuItem})
+        Me.FileMenu.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripMenuItem, Me.ToolStripSeparator5, Me.ПроверитьОбновлениеToolStripMenuItem, Me.MailToAuthors, Me.ФорумToolStripMenuItem, Me.BugTrackerToolStripMenuItem, Me.ToolStripSeparator3, Me.ExitToolStripMenuItem, Me.SaveToolStripMenuItem})
         Me.FileMenu.ImageTransparentColor = System.Drawing.SystemColors.ActiveBorder
         Me.FileMenu.Name = "FileMenu"
         Me.FileMenu.Size = New System.Drawing.Size(79, 20)
@@ -369,7 +370,7 @@ Partial Class frmMain
         '
         Me.РемонтыToolStripMenuItem.Name = "РемонтыToolStripMenuItem"
         Me.РемонтыToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F11
-        Me.РемонтыToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.РемонтыToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.РемонтыToolStripMenuItem.Text = "Ремонты"
         '
         'ToolsMenu
@@ -410,6 +411,12 @@ Partial Class frmMain
         Me.CleerDBToolStripMenuItem.Name = "CleerDBToolStripMenuItem"
         Me.CleerDBToolStripMenuItem.Size = New System.Drawing.Size(191, 22)
         Me.CleerDBToolStripMenuItem.Text = "Очистка"
+        '
+        'ПроверитьФилиалыОтделыToolStripMenuItem
+        '
+        Me.ПроверитьФилиалыОтделыToolStripMenuItem.Name = "ПроверитьФилиалыОтделыToolStripMenuItem"
+        Me.ПроверитьФилиалыОтделыToolStripMenuItem.Size = New System.Drawing.Size(191, 22)
+        Me.ПроверитьФилиалыОтделыToolStripMenuItem.Text = "Проверить структуру"
         '
         'QRCodeTestingToolStripMenuItem
         '
@@ -832,8 +839,9 @@ Partial Class frmMain
         '
         Me.SaveInfTehButton.ImageTransparentColor = System.Drawing.Color.Black
         Me.SaveInfTehButton.Name = "SaveInfTehButton"
-        Me.SaveInfTehButton.Size = New System.Drawing.Size(77, 22)
-        Me.SaveInfTehButton.Text = "Сохранение"
+        Me.SaveInfTehButton.Size = New System.Drawing.Size(69, 22)
+        Me.SaveInfTehButton.Text = "Сохранить"
+        Me.SaveInfTehButton.ToolTipText = "Сохранить"
         '
         'ToolStripSeparator2
         '
@@ -854,11 +862,13 @@ Partial Class frmMain
         Me.ToolStripButton1.Size = New System.Drawing.Size(52, 22)
         Me.ToolStripButton1.Text = "Отчеты"
         '
-        'ПроверитьФилиалыОтделыToolStripMenuItem
+        'SaveToolStripMenuItem
         '
-        Me.ПроверитьФилиалыОтделыToolStripMenuItem.Name = "ПроверитьФилиалыОтделыToolStripMenuItem"
-        Me.ПроверитьФилиалыОтделыToolStripMenuItem.Size = New System.Drawing.Size(191, 22)
-        Me.ПроверитьФилиалыОтделыToolStripMenuItem.Text = "Проверить структуру"
+        Me.SaveToolStripMenuItem.Name = "SaveToolStripMenuItem"
+        Me.SaveToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
+        Me.SaveToolStripMenuItem.Size = New System.Drawing.Size(246, 22)
+        Me.SaveToolStripMenuItem.Text = "Save"
+        Me.SaveToolStripMenuItem.Visible = False
         '
         'frmMain
         '
@@ -995,5 +1005,6 @@ Partial Class frmMain
     Friend WithEvents netMagmnu As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ПерегрузкаСрправочниковToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ПроверитьФилиалыОтделыToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents SaveToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

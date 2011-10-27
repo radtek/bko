@@ -111,8 +111,6 @@ Public Class frmMain
         ОбслуживаниеБДToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\database.png")
     End Sub
 
-
-
     Private Sub frmMain_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
         ''Меняем шрифт
@@ -313,7 +311,7 @@ Public Class frmMain
 
 
 
-       
+
 
 
 
@@ -1512,6 +1510,12 @@ err_:
     End Sub
 
     Private Sub SaveInfTehButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SaveInfTehButton.Click
+
+        Call SaveInfTeh()
+
+    End Sub
+
+    Private Sub SaveInfTeh()
         Me.Cursor = Cursors.WaitCursor
         On Error Resume Next
 
@@ -2271,5 +2275,11 @@ err_:
         'newThread1.Priority = 4
 
 
+    End Sub
+
+    Private Sub SaveToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SaveToolStripMenuItem.Click
+        If SaveInfTehButton.Enabled = False Then Exit Sub
+
+        Call SaveInfTeh()
     End Sub
 End Class
