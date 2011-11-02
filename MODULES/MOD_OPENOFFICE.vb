@@ -2,6 +2,7 @@
 Imports System.IO
 
 Module MOD_OPENOFFICE
+    Public oSheet As Object
 
     Sub insertIntoCell(ByVal strCellName, ByVal strText, ByVal objTable)
         Dim objCellText, objCellCursor As Object ' objects from OOo API 
@@ -7531,9 +7532,11 @@ err_:
     'End Function
 
     Public Sub ExportListViewToCalc(ByVal listV As ListView, ByVal sTXT As String)
+        On Error Resume Next
+
         Dim replacer As Object
         Dim objServiceManager, objDesktop, Cell As Object 'ODS, Sheets,
-        Dim objCoreReflection, oDoc, oSheet As Object 'objDocument,
+        Dim objCoreReflection, oDoc As Object 'objDocument,oSheet
         'Dim objText, objCursor As Object
         ' Dim objTable As Object
         Dim oCol As Object 'objRows, objRow,
@@ -7561,12 +7564,21 @@ err_:
         Dim intj As Integer = 0
         Dim a, b As String
 
+        ''Объединение ячеек
+        'Dim intParaAdjust As Integer
+        'Dim oRange As Object
+        'oRange = oSheet.getCellRangeByName("A1:E1")
+        'oRange.Merge(True)
+        'oRange.ParaAdjust = intParaAdjust
+
+
 
         intj = 1
         a = "A1" '& intj
-        oSheet.getCellByPosition(intj - 1, 0).setString(sTXT)
 
-        intj = 3
+
+        'oSheet.getCellByPosition(intj - 1, 0).setString(sTXT)
+        'intj = 3
 
         For Each CurrentHeader In listV.Columns
 
@@ -7577,6 +7589,7 @@ err_:
 
             intj = intj + 1
         Next
+
 
         Dim STrX As Integer
         STrX = intj - 2
@@ -7596,6 +7609,7 @@ err_:
                 oCol.optimalWidth = True 'Autofit
                 oCol = oSheet.getColumns().getByIndex(STrX)
                 oCol.optimalWidth = True 'Autofit
+
             Next
 
 
@@ -7609,6 +7623,7 @@ err_:
 
 
     End Sub
+
 
     Public Sub SRASP(ByVal sSID As String)
         Dim LNGIniFile As New IniFile(sLANGPATH)
