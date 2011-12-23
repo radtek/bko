@@ -125,7 +125,6 @@ Partial Class frmSetup
         Me.TabPage5.SuspendLayout()
         Me.TableLayoutPanel3.SuspendLayout()
         Me.gbUsers.SuspendLayout()
-        CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
@@ -153,7 +152,7 @@ Partial Class frmSetup
         Me.TabPage5.Controls.Add(Me.TableLayoutPanel3)
         Me.TabPage5.Location = New System.Drawing.Point(4, 22)
         Me.TabPage5.Name = "TabPage5"
-        Me.TabPage5.Size = New System.Drawing.Size(876, 578)
+        Me.TabPage5.Size = New System.Drawing.Size(973, 578)
         Me.TabPage5.TabIndex = 4
         Me.TabPage5.Text = "Пользователи"
         Me.TabPage5.UseVisualStyleBackColor = True
@@ -530,7 +529,7 @@ Partial Class frmSetup
         Me.TabPage4.Controls.Add(Me.Button1)
         Me.TabPage4.Location = New System.Drawing.Point(4, 22)
         Me.TabPage4.Name = "TabPage4"
-        Me.TabPage4.Size = New System.Drawing.Size(876, 578)
+        Me.TabPage4.Size = New System.Drawing.Size(973, 578)
         Me.TabPage4.TabIndex = 3
         Me.TabPage4.Text = "Найденные базы"
         Me.TabPage4.UseVisualStyleBackColor = True
@@ -562,7 +561,7 @@ Partial Class frmSetup
         Me.TabPage3.Controls.Add(Me.TableLayoutPanel2)
         Me.TabPage3.Location = New System.Drawing.Point(4, 22)
         Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.Size = New System.Drawing.Size(876, 578)
+        Me.TabPage3.Size = New System.Drawing.Size(973, 578)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "Организация и сисадмин"
         Me.TabPage3.UseVisualStyleBackColor = True
@@ -1332,7 +1331,6 @@ Partial Class frmSetup
         Me.gbUsers.ResumeLayout(False)
         Me.SplitContainer1.Panel1.ResumeLayout(False)
         Me.SplitContainer1.Panel2.ResumeLayout(False)
-        CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer1.ResumeLayout(False)
         Me.gbUserLevel.ResumeLayout(False)
         Me.gbUserLevel.PerformLayout()

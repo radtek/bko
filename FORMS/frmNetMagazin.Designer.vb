@@ -35,7 +35,6 @@ Partial Class frmNetMagazin
         Me.tsbAdd = New System.Windows.Forms.ToolStripButton()
         Me.tsbDel = New System.Windows.Forms.ToolStripButton()
         Me.tsbExcell = New System.Windows.Forms.ToolStripButton()
-        CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
@@ -201,7 +200,6 @@ Partial Class frmNetMagazin
         Me.Text = "Кабельные журналы"
         Me.SplitContainer1.Panel1.ResumeLayout(False)
         Me.SplitContainer1.Panel2.ResumeLayout(False)
-        CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer1.ResumeLayout(False)
         Me.gbTree.ResumeLayout(False)
         Me.TableLayoutPanel3.ResumeLayout(False)

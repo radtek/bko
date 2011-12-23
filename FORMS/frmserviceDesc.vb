@@ -682,24 +682,14 @@ err_1:
 
     Private Sub frmserviceDesc_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
-        SendFonts(Me)
 
-        If Me.ilsCMD.Images.Count = 0 Then
-
-            Call frmservills_load()
-
-        End If
-
-
+        frmComputers.OneStart = 0
 
         btnSearch.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\search.png")
 
+        Me.Cursor = Cursors.WaitCursor
+        Me.Show()
 
-
-        Call LANG_frmserviceDesk()
-
-        'Dim newThread1 As New Thread(AddressOf LANG_frmserviceDesk)
-        'newThread1.Start()
 
         Dim objIniFile As New IniFile(PrPath & "base.ini")
         Dim uname As String
@@ -709,35 +699,28 @@ err_1:
         treebranche.Items.Add(LNGIniFile.GetString("frmComputers", "MSG53", ""))
         uname = objIniFile.GetString("General", "branche", "")
 
-
         If Len(uname) = 0 Then
             treebranche.Text = LNGIniFile.GetString("frmComputers", "MSG53", "")
-
         Else
             treebranche.Text = uname
-
         End If
 
+        Me.BeginInvoke(New MethodInvoker(AddressOf LANG_frmserviceDesk))
 
-        Me.Cursor = Cursors.WaitCursor
-        Me.Show()
+        SendFonts(Me)
+
 
         If lstGroups.Nodes.Count = 0 Then
-
-            If Me.lstGroups.Nodes.Count = 0 Then
-                Dim newThread5 As New Thread(AddressOf R_T_LOAD)
-                newThread5.Start()
-
-            End If
-
+            Dim newThread5 As New Thread(AddressOf R_T_LOAD)
+            newThread5.Start()
         End If
 
 
-      
+
 
         Me.Cursor = Cursors.Default
 
-
+        frmComputers.OneStart = 1
 
     End Sub
 
@@ -1958,8 +1941,11 @@ err_:
     End Sub
 
     Private Sub treebranche_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles treebranche.SelectedIndexChanged
+
         Dim objIniFile As New IniFile(PrPath & "base.ini")
         objIniFile.WriteString("General", "branche", treebranche.Text)
+
+        If frmComputers.OneStart = 0 Then Exit Sub
 
         Dim newThread5 As New Thread(AddressOf R_T_LOAD)
         newThread5.Start()

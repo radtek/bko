@@ -689,7 +689,6 @@ Me.mnu_Z_to_Office = New System.Windows.Forms.ToolStripMenuItem()
 Me.mnu_z_rasp = New System.Windows.Forms.ToolStripMenuItem()
 Me.addServiseWork = New System.Windows.Forms.ToolStripMenuItem()
 Me.ilsCommands = New System.Windows.Forms.ImageList(Me.components)
-CType(Me.spCont,System.ComponentModel.ISupportInitialize).BeginInit
 Me.spCont.Panel1.SuspendLayout
 Me.spCont.Panel2.SuspendLayout
 Me.spCont.SuspendLayout
@@ -1021,7 +1020,6 @@ Me.lstGroups.FullRowSelect = true
 Me.lstGroups.HideSelection = false
 Me.lstGroups.Location = New System.Drawing.Point(3, 83)
 Me.lstGroups.Name = "lstGroups"
-Me.lstGroups.PathSeparator = "|"
 Me.lstGroups.ShowNodeToolTips = true
 Me.lstGroups.Size = New System.Drawing.Size(280, 453)
 Me.lstGroups.TabIndex = 2
@@ -8510,7 +8508,6 @@ Me.Text = "Учёт оргтехники"
 Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
 Me.spCont.Panel1.ResumeLayout(false)
 Me.spCont.Panel2.ResumeLayout(false)
-CType(Me.spCont,System.ComponentModel.ISupportInitialize).EndInit
 Me.spCont.ResumeLayout(false)
 Me.TableLayoutPanel65.ResumeLayout(false)
 Me.gbStat.ResumeLayout(false)
