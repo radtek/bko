@@ -1010,6 +1010,7 @@ err_:
 
 
         frmReports.lvReport2Cl.Columns.Add((langIni.GetString("frmReports", "lvReport2Cl1", "")), 300, HorizontalAlignment.Left)
+        ' frmReports.lvReport2Cl.Columns.Add(("Производитель"), 300, HorizontalAlignment.Left)
         frmReports.lvReport2Cl.Columns.Add((langIni.GetString("frmReports", "lvReport2Cl2", "")), 100, HorizontalAlignment.Left)
 
         'ResList(frmReports.lvReport2Cl)

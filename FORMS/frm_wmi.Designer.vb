@@ -33,6 +33,8 @@ Partial Class frm_wmi
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.txtIP = New System.Windows.Forms.TextBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.txtIP2 = New System.Windows.Forms.TextBox()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -50,7 +52,7 @@ Partial Class frm_wmi
         '
         Me.Label2.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(3, 32)
+        Me.Label2.Location = New System.Drawing.Point(3, 58)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(103, 13)
         Me.Label2.TabIndex = 1
@@ -60,7 +62,7 @@ Partial Class frm_wmi
         '
         Me.Label3.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(3, 58)
+        Me.Label3.Location = New System.Drawing.Point(3, 84)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(45, 13)
         Me.Label3.TabIndex = 2
@@ -70,7 +72,7 @@ Partial Class frm_wmi
         '
         Me.Label4.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(3, 84)
+        Me.Label4.Location = New System.Drawing.Point(3, 110)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(42, 13)
         Me.Label4.TabIndex = 3
@@ -82,31 +84,33 @@ Partial Class frm_wmi
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel1.Controls.Add(Me.Label1, 0, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.Label4, 0, 3)
-        Me.TableLayoutPanel1.Controls.Add(Me.Label2, 0, 1)
-        Me.TableLayoutPanel1.Controls.Add(Me.Label3, 0, 2)
-        Me.TableLayoutPanel1.Controls.Add(Me.txtUserName, 1, 1)
-        Me.TableLayoutPanel1.Controls.Add(Me.txtPassword, 1, 2)
-        Me.TableLayoutPanel1.Controls.Add(Me.txtDomen, 1, 3)
-        Me.TableLayoutPanel1.Controls.Add(Me.Button1, 0, 4)
-        Me.TableLayoutPanel1.Controls.Add(Me.Button2, 1, 4)
         Me.TableLayoutPanel1.Controls.Add(Me.txtIP, 1, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.Button1, 0, 5)
+        Me.TableLayoutPanel1.Controls.Add(Me.Label4, 0, 4)
+        Me.TableLayoutPanel1.Controls.Add(Me.Label3, 0, 3)
+        Me.TableLayoutPanel1.Controls.Add(Me.Label2, 0, 2)
+        Me.TableLayoutPanel1.Controls.Add(Me.Button2, 1, 5)
+        Me.TableLayoutPanel1.Controls.Add(Me.Label5, 0, 1)
+        Me.TableLayoutPanel1.Controls.Add(Me.txtDomen, 1, 4)
+        Me.TableLayoutPanel1.Controls.Add(Me.txtPassword, 1, 3)
+        Me.TableLayoutPanel1.Controls.Add(Me.txtUserName, 1, 2)
+        Me.TableLayoutPanel1.Controls.Add(Me.txtIP2, 1, 1)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
-        Me.TableLayoutPanel1.RowCount = 5
+        Me.TableLayoutPanel1.RowCount = 6
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(413, 143)
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(413, 161)
         Me.TableLayoutPanel1.TabIndex = 4
         '
         'txtUserName
         '
-        Me.txtUserName.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtUserName.Location = New System.Drawing.Point(119, 29)
+        Me.txtUserName.Location = New System.Drawing.Point(119, 55)
         Me.txtUserName.Name = "txtUserName"
         Me.txtUserName.Size = New System.Drawing.Size(291, 20)
         Me.txtUserName.TabIndex = 5
@@ -114,8 +118,7 @@ Partial Class frm_wmi
         '
         'txtPassword
         '
-        Me.txtPassword.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtPassword.Location = New System.Drawing.Point(119, 55)
+        Me.txtPassword.Location = New System.Drawing.Point(119, 81)
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtPassword.Size = New System.Drawing.Size(291, 20)
@@ -123,15 +126,14 @@ Partial Class frm_wmi
         '
         'txtDomen
         '
-        Me.txtDomen.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtDomen.Location = New System.Drawing.Point(119, 81)
+        Me.txtDomen.Location = New System.Drawing.Point(119, 107)
         Me.txtDomen.Name = "txtDomen"
         Me.txtDomen.Size = New System.Drawing.Size(291, 20)
         Me.txtDomen.TabIndex = 7
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(3, 107)
+        Me.Button1.Location = New System.Drawing.Point(3, 133)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(110, 23)
         Me.Button1.TabIndex = 8
@@ -140,7 +142,7 @@ Partial Class frm_wmi
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(119, 107)
+        Me.Button2.Location = New System.Drawing.Point(119, 133)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(75, 23)
         Me.Button2.TabIndex = 9
@@ -155,12 +157,29 @@ Partial Class frm_wmi
         Me.txtIP.Size = New System.Drawing.Size(291, 20)
         Me.txtIP.TabIndex = 10
         '
+        'Label5
+        '
+        Me.Label5.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(3, 32)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(110, 13)
+        Me.Label5.TabIndex = 11
+        Me.Label5.Text = "Ip адрес 2"
+        '
+        'txtIP2
+        '
+        Me.txtIP2.Location = New System.Drawing.Point(119, 29)
+        Me.txtIP2.Name = "txtIP2"
+        Me.txtIP2.Size = New System.Drawing.Size(291, 20)
+        Me.txtIP2.TabIndex = 12
+        '
         'frm_wmi
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(413, 143)
+        Me.ClientSize = New System.Drawing.Size(413, 161)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "frm_wmi"
@@ -182,4 +201,6 @@ Partial Class frm_wmi
     Friend WithEvents Button1 As System.Windows.Forms.Button
     Friend WithEvents Button2 As System.Windows.Forms.Button
     Friend WithEvents txtIP As System.Windows.Forms.TextBox
+    Friend WithEvents Label5 As System.Windows.Forms.Label
+    Friend WithEvents txtIP2 As System.Windows.Forms.TextBox
 End Class

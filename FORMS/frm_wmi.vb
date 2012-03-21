@@ -1,5 +1,6 @@
 ﻿Public Class frm_wmi
     Public wmiIP As String
+    Public wmiIP2 As String
     Public wmiUser As String
     Public wmiPasword As String
     Public wmiDomen As String
@@ -39,11 +40,16 @@
     End Sub
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+
         On Error GoTo err_
         wmiIP = txtIP.Text
+        wmiIP2 = txtIP2.Text
         wmiUser = txtUserName.Text
         wmiPasword = txtPassword.Text
         wmiDomen = txtDomen.Text
+
+
+
 
         Call LOAD_WMI2()
         Me.Close()

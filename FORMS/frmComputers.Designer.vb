@@ -8289,7 +8289,7 @@ Me.chkOTHspis.UseVisualStyleBackColor = true
 '
 Me.cmMENU.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.addRemToolStripMenuItem, Me.CartrAddToolStripMenuItem, Me.CopyToolStripMenuItem, Me.UpdateToolStripMenuItem, Me.DeleteToolStripMenuItem, Me.ОтделитьПринтерыИМониторыToolStripMenuItem, Me.ВернутьПерефериюToolStripMenuItem})
 Me.cmMENU.Name = "cmMENU"
-Me.cmMENU.Size = New System.Drawing.Size(255, 158)
+Me.cmMENU.Size = New System.Drawing.Size(255, 180)
 '
 'addRemToolStripMenuItem
 '

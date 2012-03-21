@@ -20,13 +20,74 @@ Module MOD_LOAD_WMI
     End Sub
 
     Public Sub LOAD_WMI2()
+        Dim intj As Integer
+
+        Dim sTmp() As String
+        Dim sTmp2() As String
+
+        If Len(frm_wmi.wmiIP2) <> 0 Then
+            Dim A1, A2 As Integer
+
+            sTmp = Split(frm_wmi.wmiIP, ".")
+            A1 = sTmp(3)
+            sTmp2 = Split(frm_wmi.wmiIP2, ".")
+            A2 = sTmp2(3)
+
+
+            For intj = A1 To A2
+
+                Call VisibleForm(frmComputers)
+                Call Clear_Form_For_Computer()
+                'frmComputers.selectTECMesto()
+                frmComputers.EDT = False
+                TipTehn = "PC"
+
+                strComputer = sTmp2(0) & "." & sTmp2(1) & "." & sTmp2(2) & "." & intj
+
+                connection.Username = frm_wmi.wmiUser
+                connection.Password = frm_wmi.wmiPasword
+                Authority = frm_wmi.wmiDomen
+                connection.Authority = "ntlmdomain:" & Authority
+
+
+                frmComputers.cmbBranch.Text = sBranch
+                frmComputers.cmbDepartment.Text = sDepartment
+                frmComputers.cmbOffice.Text = sOffice
+
+                Call LOAD_WMI_3()
+
+                Call frmMain.SaveInfTeh()
+
+            Next
+
+
+
+        Else
+
+            strComputer = frm_wmi.wmiIP
+            connection.Username = frm_wmi.wmiUser
+            connection.Password = frm_wmi.wmiPasword
+            Authority = frm_wmi.wmiDomen
+            connection.Authority = "ntlmdomain:" & Authority
+
+
+            Call LOAD_WMI_3()
+
+            frmComputers.cmbBranch.Text = sBranch
+            frmComputers.cmbDepartment.Text = sDepartment
+            frmComputers.cmbOffice.Text = sOffice
+
+        End If
+
+
+
+    End Sub
+
+    Private Sub LOAD_WMI_3()
         On Error GoTo err_
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
-        strComputer = frm_wmi.wmiIP
-        connection.Username = frm_wmi.wmiUser
-        connection.Password = frm_wmi.wmiPasword
-        Authority = frm_wmi.wmiDomen
+
 
 
         If Len(strComputer) = 0 Or Len(connection.Username) = 0 Or Len(Authority) = 0 Then
@@ -36,10 +97,12 @@ Module MOD_LOAD_WMI
 
 
 
-        connection.Authority = "ntlmdomain:" & Authority
+
         'connection.EnablePrivileges = True
 
         frmMain.Cursor = Cursors.WaitCursor
+
+
 
 
         If frmComputers.InvokeRequired Then
@@ -132,7 +195,7 @@ Module MOD_LOAD_WMI
             Call wMONITOR()
         End If
 
-        
+
 
         If frmComputers.InvokeRequired Then
             frmComputers.Invoke(New MethodInvoker(AddressOf wSYS))
@@ -147,8 +210,10 @@ Module MOD_LOAD_WMI
         Exit Sub
 err_:
         frmMain.Cursor = Cursors.Default
-
     End Sub
+
+
+
 
     Private Sub wCPU()
 
@@ -496,7 +561,7 @@ err_:
 
             frmComputers.cmbMouse.Text = queryObj("Description")
             frmComputers.txtSNAME.Text = queryObj("SystemName")
-
+            frmComputers.txtPSEUDONIM.Text = queryObj("SystemName")
             'txtSNAME
         Next
 

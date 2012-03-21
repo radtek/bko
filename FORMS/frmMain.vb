@@ -1325,10 +1325,6 @@ err_:
 
         Call LOAD_WMI()
 
-        frmComputers.cmbBranch.Text = sBranch
-        frmComputers.cmbDepartment.Text = sDepartment
-        frmComputers.cmbOffice.Text = sOffice
-
         Me.Cursor = Cursors.Default
     End Sub
 
@@ -1515,7 +1511,7 @@ err_:
 
     End Sub
 
-    Private Sub SaveInfTeh()
+    Public Sub SaveInfTeh()
         Me.Cursor = Cursors.WaitCursor
         On Error Resume Next
 

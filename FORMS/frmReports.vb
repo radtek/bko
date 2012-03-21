@@ -1215,6 +1215,7 @@ err:
                 If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "") Then
                     'sSQL = "SELECT cpus.RAM_1, Count(*) AS tot_num FROM (SELECT RAM_1 FROM kompy union all SELECT RAM_2 FROM kompy union all SELECT RAM_3 FROM kompy union all SELECT  RAM_4 FROM kompy) AS cpus GROUP BY cpus.RAM_1"
                     sSQL = "SELECT cpus.RAM_1, Count(*) AS tot_num FROM (SELECT RAM_1 FROM kompy WHERE tiptehn = 'PC' union all SELECT RAM_2 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' union all SELECT RAM_3 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' union all SELECT  RAM_4 FROM kompy WHERE tiptehn = 'PC' ) AS cpus GROUP BY cpus.RAM_1"
+
                 Else
 
                     If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "") Then
@@ -1225,6 +1226,9 @@ err:
 
                     End If
                 End If
+
+                'SELECT cpus.CPU1 as [Наименование], cpus.CPUProizv1 as [Производитель], Count(*) AS [Количество] FROM (SELECT CPU1,CPUProizv1 FROM kompy WHERE tiptehn = 'PC' and CPU1 <> ''  union all SELECT CPU2,CPUProizv2 FROM kompy WHERE tiptehn = 'PC'  and CPU2<> '' union all  SELECT CPU3,CPUProizv3 FROM kompy WHERE tiptehn = 'PC'  and CPU3 <> '' union all  SELECT CPU4,CPUProizv4 FROM kompy WHERE tiptehn = 'PC' and CPU4 <> ''  ) AS cpus GROUP BY cpus.CPU1, cpus.CPUProizv1 
+
 
 
 
@@ -1390,6 +1394,7 @@ err:
                 If Not IsDBNull(.Fields(0).Value) Then
                     If Len(.Fields(0).Value) > 1 Then
                         lvReport2Cl.Items.Add(.Fields(0).Value)
+                        'lvReport2Cl.Items(intj).SubItems.Add(.Fields(1).Value)
                         lvReport2Cl.Items(intj).SubItems.Add(.Fields("tot_num").Value)
                         intj = intj + 1
                     Else
