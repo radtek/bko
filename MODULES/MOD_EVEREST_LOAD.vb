@@ -33,6 +33,8 @@
             frmComputers.cmbCPU1.Text = everIniFile.GetString("Суммарная информация", "Системная плата|Тип ЦП", "")
         End If
 
+
+        frmComputers.txtModSB.Text = everIniFile.GetString("Суммарная информация", "DMI|DMI система", "")
         frmComputers.txtSNSB.Text = everIniFile.GetString("DMI", "Система|Свойства системы|Серийный номер", "")
         frmComputers.PROizV27.Text = everIniFile.GetString("Суммарная информация", "DMI|DMI производитель системы", "")
 
@@ -1838,6 +1840,9 @@ nextA:
         End If
 
 
+        frmComputers.txtModSB.Text = everIniFile.GetString("Суммарная информация", "DMI|DMI система", "")
+        frmComputers.txtSNSB.Text = everIniFile.GetString("DMI", "Система|Свойства системы|Серийный номер", "")
+        frmComputers.PROizV27.Text = everIniFile.GetString("Суммарная информация", "DMI|DMI производитель системы", "")
 
 
         Exit Sub

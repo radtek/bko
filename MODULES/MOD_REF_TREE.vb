@@ -87,8 +87,8 @@ Module MOD_REF_TREE
         'starttime = Now()
 
         'lstgroups.visible = False
-        lstgroups.HideSelection = False
-        lstgroups.ShowRootLines = False
+        'lstgroups.HideSelection = False
+        ' lstgroups.ShowRootLines = False
 
 
         Dim sTEN As String

@@ -248,22 +248,6 @@ Public Class frmMain
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         'Какой модуль запускать
         sText = objIniFile.GetString("general", "MOD", 0)
 
@@ -307,16 +291,8 @@ Public Class frmMain
         AddHandler t.Tick, AddressOf TimerEventHandler
 
 
-
-
-
-
-
-
-
-
-
-
+        LBL_SUBD.Text = unamDB & " - " & Base_Name
+        LBL_USER.Text = UserNames
     End Sub
 
     Public Sub colorButtonsClick(ByVal sender As [Object], ByVal e As EventArgs)

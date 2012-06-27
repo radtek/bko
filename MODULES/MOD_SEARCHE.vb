@@ -359,7 +359,7 @@ Foundit:
         End With
 
 
-        gbTree.ForeColor = frmComputers.gbStat.ForeColor
+        'gbTree.ForeColor = frmComputers.gbStat.ForeColor
         lstGroups.SelectedNode = nodeRoot
 
         Dim tNode As New TreeNode

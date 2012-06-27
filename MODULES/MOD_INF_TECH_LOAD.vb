@@ -24,8 +24,18 @@ Module MOD_INF_TECH_LOAD
             If Not IsDBNull(.Fields("PRINTER_SN_1").Value) Then frmComputers.cmbDevNet.Text = .Fields("PRINTER_SN_1").Value
             If Not IsDBNull(.Fields("PRINTER_PROIZV_1").Value) Then frmComputers.PROiZV40.Text = .Fields("PRINTER_PROIZV_1").Value
 
-            If Not IsDBNull(.Fields("PRINTER_NAME_2").Value) Then frmComputers.txtNetIP.Text = .Fields("PRINTER_NAME_2").Value
-            If Not IsDBNull(.Fields("PRINTER_PROIZV_2").Value) Then frmComputers.txtNetMac.Text = .Fields("PRINTER_PROIZV_2").Value
+            If Not IsDBNull(.Fields("NET_IP_1").Value) Then frmComputers.txtNetIP.Text = .Fields("NET_IP_1").Value
+            If Not IsDBNull(.Fields("NET_MAC_1").Value) Then frmComputers.txtNetMac.Text = .Fields("NET_MAC_1").Value
+
+
+            If Len(frmComputers.txtNetIP.Text) = 0 Then
+
+                If Not IsDBNull(.Fields("PRINTER_NAME_2").Value) Then frmComputers.txtNetIP.Text = .Fields("PRINTER_NAME_2").Value
+                If Not IsDBNull(.Fields("PRINTER_PROIZV_2").Value) Then frmComputers.txtNetMac.Text = .Fields("PRINTER_PROIZV_2").Value
+
+            End If
+
+
             If Not IsDBNull(.Fields("PRINTER_SN_2").Value) Then frmComputers.txtNetPort.Text = .Fields("PRINTER_SN_2").Value
 
             If Not IsDBNull(.Fields("PRINTER_PROIZV_3").Value) Then frmComputers.txtNetINN.Text = .Fields("PRINTER_PROIZV_3").Value

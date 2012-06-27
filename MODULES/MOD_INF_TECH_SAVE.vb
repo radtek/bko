@@ -1336,8 +1336,8 @@ sAR:
 
             .Fields("PRINTER_PROIZV_1").Value = frmComputers.PROiZV40.Text
 
-            .Fields("PRINTER_NAME_2").Value = frmComputers.txtNetIP.Text
-            .Fields("PRINTER_PROIZV_2").Value = frmComputers.txtNetMac.Text
+            .Fields("NET_IP_1").Value = frmComputers.txtNetIP.Text
+            .Fields("NET_MAC_1").Value = frmComputers.txtNetMac.Text
             .Fields("PRINTER_SN_2").Value = frmComputers.txtNetPort.Text
 
             .Fields("PRINTER_PROIZV_3").Value = frmComputers.txtNetINN.Text

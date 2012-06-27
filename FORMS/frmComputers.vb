@@ -79,9 +79,18 @@ Public Class frmComputers
 
         If OneStart = 0 Then Exit Sub
 
-        Dim newThread5 As New Thread(AddressOf R_T_LOAD)
-        newThread5.Start()
 
+
+        If MsgBox("Обновить дерево?", MsgBoxStyle.YesNo, ProGramName) = MsgBoxResult.Yes Then
+
+            lstGroups.Nodes.Clear()
+            Dim newThread5 As New Thread(AddressOf R_T_LOAD)
+            newThread5.Start()
+
+
+        Else
+
+        End If
 
 
         Me.Cursor = Cursors.Default
@@ -95,9 +104,15 @@ Public Class frmComputers
 
         If OneStart = 0 Then Exit Sub
 
-        Dim newThread5 As New Thread(AddressOf R_T_LOAD)
-        newThread5.Start()
+        If MsgBox("Обновить дерево?", MsgBoxStyle.YesNo, ProGramName) = MsgBoxResult.Yes Then
 
+            lstGroups.Nodes.Clear()
+            Dim newThread5 As New Thread(AddressOf R_T_LOAD)
+            newThread5.Start()
+
+        Else
+
+        End If
 
     End Sub
 
@@ -108,6 +123,28 @@ Public Class frmComputers
 
         uname = objIniFile.GetString("General", "branche", "")
         Dim LNGIniFile As New IniFile(sLANGPATH)
+
+
+        'Выбираем филиал если он выбран, если нет то "Все"
+        If Len(uname) = 0 Then
+            treebranche.Text = LNGIniFile.GetString("frmComputers", "MSG53", "")
+        Else
+            treebranche.Text = uname
+        End If
+
+        uname = objIniFile.GetString("General", "VisibleALL", "0")
+
+        Select Case uname
+
+            Case "1"
+
+                chkVisibleSTR.Checked = True
+
+            Case "0"
+
+                chkVisibleSTR.Checked = False
+
+        End Select
 
 
         'Загружаем иконки
@@ -125,28 +162,6 @@ Public Class frmComputers
         Dim newThread2 As New Thread(AddressOf LoadSPR_1)
         newThread2.Start()
 
-        'Выбираем филиал если он выбран, если нет то "Все"
-        If Len(uname) = 0 Then
-            treebranche.Text = LNGIniFile.GetString("frmComputers", "MSG53", "")
-
-        Else
-            treebranche.Text = uname
-        End If
-
-
-        uname = objIniFile.GetString("General", "VisibleALL", "0")
-
-        Select Case uname
-
-            Case "1"
-
-                chkVisibleSTR.Checked = True
-
-            Case "0"
-
-                chkVisibleSTR.Checked = False
-
-        End Select
 
 
         uname = objIniFile.GetString("General", "RAZDEL", "0")
@@ -438,9 +453,9 @@ Public Class frmComputers
 
                 '#########################################################################################################################
 
-                If Len(sBranch) <> 0 Then lblT_O_T.Text = langfile.GetString("frmComputers", "MSG15", "")
-                If Len(sDepartment) <> 0 Then lblT_O_T.Text = langfile.GetString("frmComputers", "MSG16", "")
-                If Len(sOffice) <> 0 Then lblT_O_T.Text = langfile.GetString("frmComputers", "MSG17", "")
+                If Len(sBranch) <> 0 Then frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "MSG15", "")
+                If Len(sDepartment) <> 0 Then frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "MSG16", "")
+                If Len(sOffice) <> 0 Then frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "MSG17", "")
 
 
 
@@ -454,7 +469,11 @@ Public Class frmComputers
 
 
                 With rs
-                    lblT_O.Text = .Fields("t_n").Value & " " & langfile.GetString("frmComputers", "MSG13", "") '& langIni.GetString("messages", "l4", "")
+                    'lblT_O.Text = .Fields("t_n").Value & " " & langfile.GetString("frmComputers", "MSG13", "") '& langIni.GetString("messages", "l4", "")
+
+                    frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "lblT_O_T", "")
+                    frmMain.LBL_STAT_3.Text = .Fields("t_n").Value & " " & langfile.GetString("frmComputers", "MSG13", "")
+
                 End With
 
                 rs.Close()
@@ -474,6 +493,9 @@ Public Class frmComputers
                 rs2.Close()
                 rs2 = Nothing
 
+                If Len(sBranch) <> 0 Then frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "MSG15", "")
+
+
 
             Case "O"
 
@@ -487,6 +509,9 @@ Public Class frmComputers
                 rs2.Close()
                 rs2 = Nothing
 
+                'If Len(sBranch) <> 0 Then frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "MSG15", "")
+                If Len(sDepartment) <> 0 Then frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "MSG16", "")
+                'If Len(sOffice) <> 0 Then frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "MSG17", "")
 
             Case "OT"
 
@@ -502,6 +527,10 @@ Public Class frmComputers
                 rs2.Close()
                 rs2 = Nothing
 
+                ' If Len(sBranch) <> 0 Then frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "MSG15", "")
+                If Len(sDepartment) <> 0 Then frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "MSG16", "")
+                ' If Len(sOffice) <> 0 Then frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "MSG17", "")
+
             Case "K"
 
                 rs2.Open("SELECT * FROM SPR_KAB where Id = " & d(1), DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockBatchOptimistic)
@@ -515,6 +544,9 @@ Public Class frmComputers
                 rs2.Close()
                 rs2 = Nothing
 
+                'If Len(sBranch) <> 0 Then frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "MSG15", "")
+                ' If Len(sDepartment) <> 0 Then frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "MSG16", "")
+                If Len(sOffice) <> 0 Then frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "MSG17", "")
 
                 Exit Sub
 Error_:
@@ -535,9 +567,13 @@ Error_:
 
         COLOR_Form_For_Computer(Me)
 
-        'Call LOAD_LIST()
+        ' Call LOAD_LIST()
+        ' Call selectTECMesto()
+
         Me.BeginInvoke(New MethodInvoker(AddressOf LOAD_LIST))
         Me.BeginInvoke(New MethodInvoker(AddressOf selectTECMesto))
+
+
 
         Application.DoEvents()
 
@@ -562,16 +598,15 @@ Error_:
 
         Me.ChkPDC.Checked = False
 
-        Me.BeginInvoke(New MethodInvoker(AddressOf SECUR_LEVEL))
+        'Me.BeginInvoke(New MethodInvoker(AddressOf SECUR_LEVEL))
 
-        'Call SECUR_LEVEL()
+        Call SECUR_LEVEL()
 
         Dim d() As String
         d = Split(lstGroups.SelectedNode.Tag, "|")
 
 
-        Call Clear_Form_For_Computer()
-
+        'Call Clear_Form_For_Computer()
         Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG14", "") & " " & Me.lstGroups.SelectedNode.Text)
 
 
@@ -1133,10 +1168,10 @@ Error_:
                             FillComboNET(Me.cmbOTH, "name", "SPR_IBP", "", False, True)
                             lblTipOther.Visible = False
                             cmbOTHConnect.Visible = False
-                            lblOTMac.Visible = False
-                            lblOtIp.Visible = False
-                            txtOTHIP.Visible = False
-                            txtOTHMAC.Visible = False
+                            lblOTMac.Visible = True
+                            lblOtIp.Visible = True
+                            txtOTHIP.Visible = True
+                            txtOTHMAC.Visible = True
 
                             'CopyToolStripMenuItem.Enabled = False
                             UpdateToolStripMenuItem.Enabled = False
@@ -1330,7 +1365,7 @@ Error_:
                 sPREF = d(0)
                 sCOUNT = d(1)
 
-                lblT_O_T.Text = langfile.GetString("frmComputers", "MSG15", "") 'langini.GetString("messages", "l1", "")
+                ' lblT_O_T.Text = langfile.GetString("frmComputers", "MSG15", "") 'langini.GetString("messages", "l1", "")
                 'langini.GetString("language", "l1001", "")
 
                 Dim rs As ADODB.Recordset 'Объявляем рекордсет
@@ -1341,7 +1376,11 @@ Error_:
 
 
                 With rs
-                    lblT_O.Text = .Fields("t_n").Value & " " & langfile.GetString("frmComputers", "MSG13", "") '& langIni.GetString("messages", "l4", "")
+                    '  lblT_O.Text = .Fields("t_n").Value & " " & langfile.GetString("frmComputers", "MSG13", "") '& langIni.GetString("messages", "l4", "")
+
+                    frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "lblT_O_T", "")
+                    frmMain.LBL_STAT_3.Text = .Fields("t_n").Value & " " & langfile.GetString("frmComputers", "MSG13", "")
+
                 End With
 
                 rs.Close()
@@ -1361,7 +1400,7 @@ Error_:
                 sPREF = d(0)
                 sCOUNT = d(1)
 
-                lblT_O_T.Text = langfile.GetString("frmComputers", "MSG16", "") 'langini.GetString("messages", "l2", "")
+                ' lblT_O_T.Text = langfile.GetString("frmComputers", "MSG16", "") 'langini.GetString("messages", "l2", "")
 
                 Dim rs As ADODB.Recordset 'Объявляем рекордсет
                 Dim sSQL As String 'Переменная, где будет размещён SQL запрос
@@ -1385,7 +1424,11 @@ Error_:
 
 
                 With rs
-                    lblT_O.Text = .Fields("t_n").Value & " " & langfile.GetString("frmComputers", "MSG13", "") '& langIni.GetString("messages", "l4", "")
+                    'lblT_O.Text = .Fields("t_n").Value & " " & langfile.GetString("frmComputers", "MSG13", "") '& langIni.GetString("messages", "l4", "")
+
+                    frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "lblT_O_T", "")
+                    frmMain.LBL_STAT_3.Text = .Fields("t_n").Value & " " & langfile.GetString("frmComputers", "MSG13", "")
+
                 End With
 
                 rs.Close()
@@ -1409,7 +1452,7 @@ Error_:
                 sPREF = d(0)
                 sCOUNT = d(1)
 
-                lblT_O_T.Text = langfile.GetString("frmComputers", "MSG17", "") 'langini.GetString("messages", "l3", "")
+                ' lblT_O_T.Text = langfile.GetString("frmComputers", "MSG17", "") 'langini.GetString("messages", "l3", "")
 
 
                 '###################################################################################
@@ -1438,7 +1481,11 @@ Error_:
 
 
                 With rs
-                    lblT_O.Text = .Fields("t_n").Value & " " & langfile.GetString("frmComputers", "MSG13", "") '& langIni.GetString("messages", "l4", "")
+                    ' lblT_O.Text = .Fields("t_n").Value & " " & langfile.GetString("frmComputers", "MSG13", "") '& langIni.GetString("messages", "l4", "")
+
+                    frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "lblT_O_T", "")
+                    frmMain.LBL_STAT_3.Text = .Fields("t_n").Value & " " & langfile.GetString("frmComputers", "MSG13", "")
+
                 End With
 
                 rs.Close()
@@ -1659,7 +1706,11 @@ Error_:
         rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
         With rs
-            lblT_All.Text = (.Fields("T_N").Value) & " " & langfile.GetString("frmComputers", "MSG13", "")
+            ' lblT_All.Text = (.Fields("T_N").Value) & " " & langfile.GetString("frmComputers", "MSG13", "")
+
+            frmMain.LBL_STAT_1.Text = langfile.GetString("frmComputers", "lblT_All_T", "") & ": " & (.Fields("T_N").Value) & " " & langfile.GetString("frmComputers", "MSG13", "")
+
+
         End With
         rs.Close()
         rs = Nothing
@@ -2492,7 +2543,7 @@ err_:
 
     End Sub
 
-    Private Sub lstGroups_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lstGroups.MouseDown
+    Private Sub lstGroups_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs)
         Select Case e.Button
             Case MouseButtons.Left
                 BTN = 1
@@ -2503,7 +2554,7 @@ err_:
         End Select
     End Sub
 
-    Private Sub lstGroups_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lstGroups.MouseUp
+    Private Sub lstGroups_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs)
 
 
         'BTN = Button
@@ -2684,7 +2735,7 @@ err_:
         Debug.Print(oDoc.replaceAll(oSrch))
 
         oSrch.setSearchString("KOLKOM")
-        oSrch.setReplaceString(Me.lblT_O.Text)
+        oSrch.setReplaceString(frmMain.LBL_STAT_2.Text)
         Debug.Print(oDoc.replaceAll(oSrch))
 
 
@@ -3179,7 +3230,7 @@ err_:
         frmGarCPL.ShowDialog(Me)
     End Sub
 
-    Public Sub lstGroups_ItemDrag(ByVal sender As System.Object, ByVal e As System.Windows.Forms.ItemDragEventArgs) Handles lstGroups.ItemDrag
+    Public Sub lstGroups_ItemDrag(ByVal sender As System.Object, ByVal e As System.Windows.Forms.ItemDragEventArgs)
         On Error Resume Next
 
         If uLevelTehAdd = False And uLevel <> "Admin" Then Exit Sub
@@ -3205,7 +3256,7 @@ err_:
 
     End Sub
 
-    Public Sub lstGroups_DragEnter(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles lstGroups.DragEnter
+    Public Sub lstGroups_DragEnter(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DragEventArgs)
         On Error Resume Next
 
         If uLevelTehAdd = False And uLevel <> "Admin" Then Exit Sub
@@ -3236,7 +3287,7 @@ err_:
 
     End Sub
 
-    Public Sub lstGroups_DragOver(ByVal sender As System.Object, ByVal e As DragEventArgs) Handles lstGroups.DragOver
+    Public Sub lstGroups_DragOver(ByVal sender As System.Object, ByVal e As DragEventArgs)
         On Error Resume Next
 
         If uLevelTehAdd = False And uLevel <> "Admin" Then Exit Sub
@@ -3297,7 +3348,7 @@ err_:
 
     End Sub
 
-    Public Sub lstGroups_DragDrop(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles lstGroups.DragDrop
+    Public Sub lstGroups_DragDrop(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DragEventArgs)
         On Error Resume Next
 
         Dim sBranch_, sDepartment_, sOffice_ As String
@@ -5362,7 +5413,7 @@ lvMovementOTH.Columns(e.Column)
     End Sub
 
 
-    Private Sub lstGroups_NodeMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.TreeNodeMouseClickEventArgs) Handles lstGroups.NodeMouseClick
+    Private Sub lstGroups_NodeMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.TreeNodeMouseClickEventArgs)
 
         '#############################################
         'Выделение по правому клику мышкой
@@ -6292,11 +6343,8 @@ err_1:
         MsgBox(Err.Description, MsgBoxStyle.Information, ProGramName)
     End Sub
 
-    Private Sub lvRepair_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvRepair.SelectedIndexChanged
 
-    End Sub
-
-    Private Sub lstUsers_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lstUsers.SelectedIndexChanged
+    Private Sub lstSoftware_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lstSoftware.SelectedIndexChanged
 
     End Sub
 End Class

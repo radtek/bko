@@ -1176,6 +1176,9 @@ Public Class frmDirectory
 
                 sSQL = "SELECT SPR_PO.Id, SPR_PO.Name, SPR_PROIZV.PROIZV, (Select count(*) FROM SOFT_INSTALL where SOFT_INSTALL.Soft=SPR_PO.Name) as temp FROM SPR_PROIZV INNER JOIN SPR_PO ON (SPR_PROIZV.id = SPR_PO.Proizv) AND (SPR_PROIZV.iD = SPR_PO.Proizv) WHERE ((SPR_PO.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
 
+                'sSQL = "SELECT SPR_PO.Id, SPR_PO.Name, SPR_PROIZV.PROIZV FROM SPR_PROIZV INNER JOIN SPR_PO ON (SPR_PROIZV.id = SPR_PO.Proizv) AND (SPR_PROIZV.iD = SPR_PO.Proizv) WHERE ((SPR_PO.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
+
+
 
             Case objIniFile.GetString("frmDirectory", "MSG33", "")
                 lbl1.Visible = True

@@ -5,7 +5,7 @@
 
     Private Sub cmbAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbAdd.Click
         On Error Resume Next
-
+        On Error GoTo err_
         Dim sSQL As String
         Dim unamZ As String
         Dim sCOUNTER As String
@@ -88,11 +88,18 @@
                 .AddNew()
 
                 .Fields("PREF").Value = frmComputers.sPREF
-                .Fields("Id_Comp").Value = frmComputers.sCOUNT
+
+                If frmComputers.sPREF <> "C" Then
+
+                Else
+                    .Fields("Id_Comp").Value = frmComputers.sCOUNT
+                End If
+
+
+
                 .Fields("NomerRemKomp").Value = sCOUNTER + 1
                 .Fields("starttime").Value = strTime 'Физическое нажатие начала ремонта
                 .Fields("startdate").Value = Date.Today 'Физическое нажатие начала ремонта
-                .Fields("Id_Comp").Value = frmComputers.sCOUNT
                 .Fields("Comp_name").Value = frmserviceDesc.rtxtC 'Имя устройства
                 .Fields("Mesto_Compa").Value = unamZ 'Место установки устройства
 
@@ -200,7 +207,11 @@
         Call REM_CHECK()
         Me.Close()
 
+        Exit Sub
+err_:
+        MsgBox(Err.Description)
     End Sub
+
 
     Private Sub cmbCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbCancel.Click
 

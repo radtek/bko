@@ -5816,4 +5816,7 @@ Err_:
     End Sub
 
 
+    Private Sub cmbOthers_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbOthers.SelectedIndexChanged
+
+    End Sub
 End Class

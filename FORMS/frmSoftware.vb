@@ -383,6 +383,17 @@ FoundiR:
 
         frmComputers.OneStart = 0
 
+        Me.BeginInvoke(New MethodInvoker(AddressOf frmSoftware_Lang))
+
+        SendFonts(Me)
+
+        If lstGroups.Nodes.Count = 0 Then
+
+           Me.lstGroups.BeginInvoke(New MethodInvoker(AddressOf R_T_LOAD_1))
+
+        End If
+
+
         btnSearch.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\search.png")
 
         Me.Cursor = Cursors.WaitCursor
@@ -403,17 +414,7 @@ FoundiR:
             treebranche.Text = uname
         End If
 
-        Me.BeginInvoke(New MethodInvoker(AddressOf frmSoftware_Lang))
-
-        SendFonts(Me)
-
-        If lstGroups.Nodes.Count = 0 Then
-
-            Dim newThread5 As New Thread(AddressOf R_T_LOAD)
-            newThread5.Start()
-
-        End If
-
+        Application.DoEvents()
 
 
         FillComboNET(Me.cmbTipLicense, "name", "SPR_LIC", "", False, True)
@@ -427,10 +428,6 @@ FoundiR:
         Me.Cursor = Cursors.Default
 
         frmComputers.OneStart = 1
-    End Sub
-
-    Private Sub R_T_LOAD()
-        Me.lstGroups.BeginInvoke(New MethodInvoker(AddressOf R_T_LOAD_1))
     End Sub
 
     Private Sub R_T_LOAD_1()
@@ -682,7 +679,7 @@ A:
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
         Me.Cursor = Cursors.WaitCursor
 
-        Dim newThread5 As New Thread(AddressOf R_T_LOAD)
+        Dim newThread5 As New Thread(AddressOf R_T_LOAD_1)
         newThread5.Start()
 
         txtSearch.Text = ""
@@ -842,7 +839,7 @@ err_:
 
         If frmComputers.OneStart = 0 Then Exit Sub
 
-        Dim newThread5 As New Thread(AddressOf R_T_LOAD)
+        Dim newThread5 As New Thread(AddressOf R_T_LOAD_1)
         newThread5.Start()
 
 

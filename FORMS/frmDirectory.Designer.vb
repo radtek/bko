@@ -154,9 +154,9 @@ Partial Class frmDirectory
         '
         Me.gbOther.Controls.Add(Me.cmbIcon)
         Me.gbOther.Controls.Add(Me.pbOtherICO)
-        Me.gbOther.Location = New System.Drawing.Point(537, 20)
+        Me.gbOther.Location = New System.Drawing.Point(537, 16)
         Me.gbOther.Name = "gbOther"
-        Me.gbOther.Size = New System.Drawing.Size(126, 127)
+        Me.gbOther.Size = New System.Drawing.Size(126, 131)
         Me.gbOther.TabIndex = 11
         Me.gbOther.TabStop = False
         Me.gbOther.Text = "Иконка"
