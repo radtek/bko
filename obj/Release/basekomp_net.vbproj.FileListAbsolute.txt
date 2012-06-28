@@ -117,6 +117,7 @@ D:\Devel\BC2.NET\obj\Release\basekomp_net.frmMain.resources
 D:\Devel\BC2.NET\obj\Release\basekomp_net.frmNetMagazin.resources
 D:\Devel\BC2.NET\obj\Release\basekomp_net.frmNetMag_Add.resources
 D:\Devel\BC2.NET\obj\Release\basekomp_net.frmNetMag_selectSVT.resources
+D:\Devel\BC2.NET\obj\Release\basekomp_net.frmPPR.resources
 D:\Devel\BC2.NET\obj\Release\basekomp_net.frmReports.resources
 D:\Devel\BC2.NET\obj\Release\basekomp_net.frmSclad.resources
 D:\Devel\BC2.NET\obj\Release\basekomp_net.frmSclad_ADD.resources

@@ -211,7 +211,7 @@ err_:
                 .Fields("SISADM").Value = "SISADM"
                 .Fields("Name_Prog").Value = "BKO.NET"
                 .Fields("Nr").Value = "Yes"
-                .Fields("access").Value = "1.7.2"
+                .Fields("access").Value = "1.7.3"
                 .Update()
             End With
             rs25.Close()
@@ -243,7 +243,7 @@ err_:
 
         tVER = My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor & "." & My.Application.Info.Version.Build
 
-        If sVER >= "1.7.2" Then
+        If sVER >= "1.7.3" Then
 
 
         Else

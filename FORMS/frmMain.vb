@@ -291,8 +291,20 @@ Public Class frmMain
         AddHandler t.Tick, AddressOf TimerEventHandler
 
 
+        If lblShed.Visible = False Then
+
+            lblSplet.Visible = False
+
+        End If
+
+        If lblRem.Visible = False Then
+
+            ToolStripStatusLabel4.Visible = False
+
+        End If
+
         LBL_SUBD.Text = unamDB & " - " & Base_Name
-        LBL_USER.Text = UserNames
+        LBL_USER.Text = UserNames & "/" & uLevel
     End Sub
 
     Public Sub colorButtonsClick(ByVal sender As [Object], ByVal e As EventArgs)
@@ -547,6 +559,10 @@ error_Renamed:
         rs = Nothing
 
         rs = New ADODB.Recordset
+        rs.Open("DELETE FROM tbl_ppr", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = Nothing
+
+        rs = New ADODB.Recordset
         rs.Open("DELETE FROM kompy", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
         rs = Nothing
 
@@ -565,9 +581,6 @@ error_Renamed:
 
         MsgBox(LNGIniFile.GetString("frmMain", "MSG4", ""), MsgBoxStyle.Information)
         'Exit Sub
-
-
-
 
 
         Exit Sub

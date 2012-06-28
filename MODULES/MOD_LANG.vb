@@ -1168,6 +1168,17 @@ err_:
 
         'ResList(frmReports.lvCRT)
 
+
+
+        frmReports.lstvPPR.Columns.Add(langIni.GetString("frmReports", "lstvPPR1", ""), 1, HorizontalAlignment.Left)
+        frmReports.lstvPPR.Columns.Add(langIni.GetString("frmReports", "lstvPPR2", ""), 100, HorizontalAlignment.Left)
+        frmReports.lstvPPR.Columns.Add(langIni.GetString("frmReports", "lstvPPR3", ""), 100, HorizontalAlignment.Left)
+        frmReports.lstvPPR.Columns.Add(langIni.GetString("frmReports", "lstvPPR4", ""), 100, HorizontalAlignment.Left)
+        frmReports.lstvPPR.Columns.Add(langIni.GetString("frmReports", "lstvPPR5", ""), 100, HorizontalAlignment.Left)
+        frmReports.lstvPPR.Columns.Add(langIni.GetString("frmReports", "lstvPPR6", ""), 100, HorizontalAlignment.Left)
+
+
+
     End Sub
 
     Public Sub frmAct_treb_LANG()

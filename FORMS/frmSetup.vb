@@ -575,6 +575,9 @@ Public Class frmSetup
                 objIniFile.WriteString("General", "Sheduler", "Checked")
 
         End Select
+
+        Call SHED_CHECK()
+
     End Sub
 
     Private Sub chkMenuServices_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkMenuServices.CheckedChanged

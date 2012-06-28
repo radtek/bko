@@ -148,6 +148,12 @@ Partial Class frmReports
         Me.Label10 = New System.Windows.Forms.Label()
         Me.btnCashe = New System.Windows.Forms.Button()
         Me.btnCacheOff = New System.Windows.Forms.Button()
+        Me.TabPage7 = New System.Windows.Forms.TabPage()
+        Me.TableLayoutPanel10 = New System.Windows.Forms.TableLayoutPanel()
+        Me.lstvPPR = New System.Windows.Forms.ListView()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.cmbPPR_Year = New System.Windows.Forms.ComboBox()
+        Me.btnPPR_Update = New System.Windows.Forms.Button()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.sSTAB1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -168,6 +174,8 @@ Partial Class frmReports
         Me.TableLayoutPanel6.SuspendLayout()
         Me.TabPage6.SuspendLayout()
         Me.TableLayoutPanel4.SuspendLayout()
+        Me.TabPage7.SuspendLayout()
+        Me.TableLayoutPanel10.SuspendLayout()
         Me.SuspendLayout()
         '
         'sSTAB1
@@ -178,6 +186,7 @@ Partial Class frmReports
         Me.sSTAB1.Controls.Add(Me.TabPage4)
         Me.sSTAB1.Controls.Add(Me.TabPage5)
         Me.sSTAB1.Controls.Add(Me.TabPage6)
+        Me.sSTAB1.Controls.Add(Me.TabPage7)
         Me.sSTAB1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.sSTAB1.Location = New System.Drawing.Point(0, 0)
         Me.sSTAB1.Name = "sSTAB1"
@@ -1671,6 +1680,78 @@ Partial Class frmReports
         Me.btnCacheOff.Text = "В офис"
         Me.btnCacheOff.UseVisualStyleBackColor = True
         '
+        'TabPage7
+        '
+        Me.TabPage7.Controls.Add(Me.TableLayoutPanel10)
+        Me.TabPage7.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage7.Name = "TabPage7"
+        Me.TabPage7.Size = New System.Drawing.Size(937, 536)
+        Me.TabPage7.TabIndex = 6
+        Me.TabPage7.Text = "Планово предупредительный ремонт"
+        Me.TabPage7.UseVisualStyleBackColor = True
+        '
+        'TableLayoutPanel10
+        '
+        Me.TableLayoutPanel10.ColumnCount = 3
+        Me.TableLayoutPanel10.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel10.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel10.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 677.0!))
+        Me.TableLayoutPanel10.Controls.Add(Me.lstvPPR, 0, 1)
+        Me.TableLayoutPanel10.Controls.Add(Me.Label14, 0, 0)
+        Me.TableLayoutPanel10.Controls.Add(Me.cmbPPR_Year, 1, 0)
+        Me.TableLayoutPanel10.Controls.Add(Me.btnPPR_Update, 2, 0)
+        Me.TableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel10.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel10.Name = "TableLayoutPanel10"
+        Me.TableLayoutPanel10.RowCount = 3
+        Me.TableLayoutPanel10.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel10.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel10.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.TableLayoutPanel10.Size = New System.Drawing.Size(937, 536)
+        Me.TableLayoutPanel10.TabIndex = 0
+        '
+        'lstvPPR
+        '
+        Me.TableLayoutPanel10.SetColumnSpan(Me.lstvPPR, 5)
+        Me.lstvPPR.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lstvPPR.FullRowSelect = True
+        Me.lstvPPR.GridLines = True
+        Me.lstvPPR.Location = New System.Drawing.Point(3, 32)
+        Me.lstvPPR.MultiSelect = False
+        Me.lstvPPR.Name = "lstvPPR"
+        Me.lstvPPR.ShowItemToolTips = True
+        Me.lstvPPR.Size = New System.Drawing.Size(931, 481)
+        Me.lstvPPR.TabIndex = 29
+        Me.lstvPPR.UseCompatibleStateImageBehavior = False
+        Me.lstvPPR.View = System.Windows.Forms.View.Details
+        '
+        'Label14
+        '
+        Me.Label14.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label14.AutoSize = True
+        Me.Label14.Location = New System.Drawing.Point(3, 8)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(51, 13)
+        Me.Label14.TabIndex = 0
+        Me.Label14.Text = "Год ППР"
+        '
+        'cmbPPR_Year
+        '
+        Me.cmbPPR_Year.FormattingEnabled = True
+        Me.cmbPPR_Year.Location = New System.Drawing.Point(60, 3)
+        Me.cmbPPR_Year.Name = "cmbPPR_Year"
+        Me.cmbPPR_Year.Size = New System.Drawing.Size(121, 21)
+        Me.cmbPPR_Year.TabIndex = 1
+        '
+        'btnPPR_Update
+        '
+        Me.btnPPR_Update.Location = New System.Drawing.Point(263, 3)
+        Me.btnPPR_Update.Name = "btnPPR_Update"
+        Me.btnPPR_Update.Size = New System.Drawing.Size(75, 23)
+        Me.btnPPR_Update.TabIndex = 2
+        Me.btnPPR_Update.Text = "Обновить"
+        Me.btnPPR_Update.UseVisualStyleBackColor = True
+        '
         'ToolTip1
         '
         Me.ToolTip1.AutoPopDelay = 9000
@@ -1717,6 +1798,9 @@ Partial Class frmReports
         Me.TabPage6.ResumeLayout(False)
         Me.TableLayoutPanel4.ResumeLayout(False)
         Me.TableLayoutPanel4.PerformLayout()
+        Me.TabPage7.ResumeLayout(False)
+        Me.TableLayoutPanel10.ResumeLayout(False)
+        Me.TableLayoutPanel10.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1845,4 +1929,10 @@ Partial Class frmReports
     Friend WithEvents chk_K43 As System.Windows.Forms.CheckBox
     Friend WithEvents chk_K44 As System.Windows.Forms.CheckBox
     Friend WithEvents chk_K45 As System.Windows.Forms.CheckBox
+    Friend WithEvents TabPage7 As System.Windows.Forms.TabPage
+    Friend WithEvents TableLayoutPanel10 As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents lstvPPR As System.Windows.Forms.ListView
+    Friend WithEvents Label14 As System.Windows.Forms.Label
+    Friend WithEvents cmbPPR_Year As System.Windows.Forms.ComboBox
+    Friend WithEvents btnPPR_Update As System.Windows.Forms.Button
 End Class

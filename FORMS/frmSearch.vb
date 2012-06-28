@@ -125,8 +125,6 @@ Foundit:
                             lstSearch.Items(CInt(intCount)).SubItems.Add("")
                             lstSearch.Items(CInt(intCount)).SubItems.Add("")
 
-
-
                         Case "Printer"
                             lstSearch.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmSearch", "MSG3", ""))
                             lstSearch.Items(CInt(intCount)).SubItems.Add("")

@@ -151,6 +151,18 @@ Public Class frmReports
 
         cmbYearCashe.Text = Date.Today.Year
 
+
+
+        cmbPPR_Year.Items.Clear()
+
+        Dim z As Integer
+
+        For z = 0 To 10
+            cmbPPR_Year.Items.Add(Date.Today.Year + z)
+        Next
+        cmbPPR_Year.Text = Date.Today.Year
+
+
     End Sub
 
     Public Sub Rem_clk()
@@ -5817,6 +5829,199 @@ Err_:
 
 
     Private Sub cmbOthers_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbOthers.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub btnPPR_Update_Click(sender As System.Object, e As System.EventArgs) Handles btnPPR_Update.Click
+        'cmbPPR_Year
+
+        If Len(cmbPPR_Year.Text) = 0 Then Exit Sub
+
+        lstvPPR.Items.Clear()
+
+        Dim sSQL, sSQL1 As String
+        Dim rs As ADODB.Recordset
+        Dim Uname As Integer
+        Dim Uname1 As String
+
+        sSQL = "SELECT count(*) as t_n FROM TBL_PPR WHERE YEAR_TO='" & cmbPPR_Year.Text & "'"
+        rs = New ADODB.Recordset
+        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+        With rs
+            Uname = .Fields("t_n").Value
+        End With
+        rs.Close()
+        rs = Nothing
+
+        If Uname = 0 Then Exit Sub
+
+        sSQL = "SELECT * FROM TBL_PPR WHERE YEAR_TO='" & cmbPPR_Year.Text & "'"
+
+        rs = New ADODB.Recordset
+        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+        Dim intj As Integer
+
+        intj = 0
+
+        With rs
+            .MoveFirst()
+            Do While Not .EOF
+
+                lstvPPR.Items.Add(.Fields("id").Value)
+                Uname = .Fields("id_comp").Value
+
+                Dim rs1 As ADODB.Recordset
+                sSQL1 = "SELECT * FROM kompy WHERE id=" & Uname
+                rs1 = New ADODB.Recordset
+                rs1.Open(sSQL1, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+
+                With rs1
+
+                    'Uname1 = .Fields("tiptehn").Value
+                    Dim LNGIniFile As New IniFile(sLANGPATH)
+
+                    Select Case .Fields("Tiptehn").Value
+
+                        Case "MFU"
+                            Uname1 = (LNGIniFile.GetString("frmMain", "30", ""))
+
+                        Case "Printer"
+                            Uname1 = (LNGIniFile.GetString("frmMain", "29", ""))
+
+                        Case "KOpir"
+                            Uname1 = (LNGIniFile.GetString("frmMain", "28", ""))
+
+
+                        Case "PHOTO"
+                            Uname1 = (LNGIniFile.GetString("frmMain", "33", ""))
+
+
+                        Case "PHONE"
+                            Uname1 = (LNGIniFile.GetString("frmMain", "32", ""))
+
+
+                        Case "FAX"
+                            Uname1 = (LNGIniFile.GetString("frmMain", "34", ""))
+
+
+                        Case "ZIP"
+                            Uname1 = (LNGIniFile.GetString("frmMain", "36", ""))
+
+
+                        Case "MONITOR"
+                            Uname1 = (LNGIniFile.GetString("frmMain", "35", ""))
+
+
+                        Case "SCANER"
+                            Uname1 = (LNGIniFile.GetString("frmMain", "37", ""))
+
+
+                        Case "NET"
+                            Uname1 = (LNGIniFile.GetString("frmMain", "31", ""))
+
+
+                        Case "OT"
+                            Uname1 = (LNGIniFile.GetString("frmMain", "38", ""))
+
+                        Case "CNT"
+                            'Uname1 = (LNGIniFile.GetString("frmMain", "MSG12", ""))
+                            Uname1 = .Fields("NET_NAME").Value
+
+
+                        Case "USB"
+
+                            Uname1 = (LNGIniFile.GetString("frmMain", "39", ""))
+
+                        Case "SOUND"
+
+                            Uname1 = (LNGIniFile.GetString("frmMain", "40", ""))
+
+                        Case "IBP"
+
+                            Uname1 = (LNGIniFile.GetString("frmMain", "41", ""))
+
+                        Case "FS"
+
+                            Uname1 = (LNGIniFile.GetString("frmMain", "46", ""))
+
+                        Case "KEYB"
+
+                            Uname1 = (LNGIniFile.GetString("frmMain", "44", ""))
+
+                        Case "MOUSE"
+
+                            Uname1 = (LNGIniFile.GetString("frmMain", "45", ""))
+
+
+                        Case Else
+
+                            Uname1 = (LNGIniFile.GetString("MOD_OPENOFFICE", "MSG58", ""))
+
+                    End Select
+
+                    lstvPPR.Items(intj).SubItems.Add(Uname1)
+                    lstvPPR.Items(CInt(intj)).SubItems.Add(.Fields("NET_NAME").Value)
+                    lstvPPR.Items(CInt(intj)).SubItems.Add(.Fields("filial").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+
+                End With
+
+                rs1.Close()
+                rs1 = Nothing
+
+                lstvPPR.Items(CInt(intj)).SubItems.Add(.Fields("TIP_TO").Value)
+                lstvPPR.Items(CInt(intj)).SubItems.Add(.Fields("KVARTAL_TO").Value)
+
+
+                intj = intj + 1
+                .MoveNext()
+            Loop
+        End With
+
+
+
+                rs.Close()
+                rs = Nothing
+
+        ResList(lstvPPR)
+
+    End Sub
+
+    Private Sub lstvPPR_ColumnClick(sender As Object, e As System.Windows.Forms.ColumnClickEventArgs) Handles lstvPPR.ColumnClick
+        Dim new_sorting_column As ColumnHeader = _
+         lstvPPR.Columns(e.Column)
+        Dim sort_order As System.Windows.Forms.SortOrder
+        If m_SortingColumn Is Nothing Then
+            sort_order = SortOrder.Ascending
+        Else
+            If new_sorting_column.Equals(m_SortingColumn) Then
+                If m_SortingColumn.Text.StartsWith("> ") Then
+                    sort_order = SortOrder.Descending
+                Else
+                    sort_order = SortOrder.Ascending
+                End If
+            Else
+                sort_order = SortOrder.Ascending
+            End If
+
+            m_SortingColumn.Text = m_SortingColumn.Text.Substring(2)
+        End If
+
+        m_SortingColumn = new_sorting_column
+        If sort_order = SortOrder.Ascending Then
+            m_SortingColumn.Text = "> " & m_SortingColumn.Text
+        Else
+            m_SortingColumn.Text = "< " & m_SortingColumn.Text
+        End If
+
+        lstvPPR.ListViewItemSorter = New ListViewComparer(e.Column, sort_order)
+
+        lstvPPR.Sort()
+    End Sub
+
+    Private Sub lstvPPR_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles lstvPPR.SelectedIndexChanged
 
     End Sub
 End Class

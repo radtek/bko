@@ -83,10 +83,18 @@ Partial Class frmMain
         Me.HelpMenu = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip = New System.Windows.Forms.StatusStrip()
         Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.LBL_STAT_1 = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ToolStripStatusLabel2 = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.LBL_STAT_2 = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.LBL_STAT_3 = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ToolStripStatusLabel3 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.lblShed = New System.Windows.Forms.ToolStripStatusLabel()
         Me.lblSplet = New System.Windows.Forms.ToolStripStatusLabel()
         Me.lblRem = New System.Windows.Forms.ToolStripStatusLabel()
         Me.lblMassLoadEverest = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ToolStripStatusLabel4 = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.LBL_SUBD = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.LBL_USER = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStrip = New System.Windows.Forms.ToolStrip()
         Me.ToolStripDropDownButton1 = New System.Windows.Forms.ToolStripDropDownButton()
         Me.ЗагрузитьИзEverestiniToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -135,14 +143,7 @@ Partial Class frmMain
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.ArhToolZipbutton = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripStatusLabel2 = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.LBL_STAT_1 = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.ToolStripStatusLabel4 = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.LBL_STAT_2 = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.LBL_STAT_3 = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.ToolStripStatusLabel3 = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.LBL_SUBD = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.LBL_USER = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ToolStripStatusLabel5 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.MenuStrip.SuspendLayout()
         Me.StatusStrip.SuspendLayout()
         Me.ToolStrip.SuspendLayout()
@@ -528,7 +529,7 @@ Partial Class frmMain
         '
         'StatusStrip
         '
-        Me.StatusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1, Me.LBL_STAT_1, Me.ToolStripStatusLabel2, Me.LBL_STAT_2, Me.LBL_STAT_3, Me.ToolStripStatusLabel3, Me.lblShed, Me.lblSplet, Me.lblRem, Me.lblMassLoadEverest, Me.ToolStripStatusLabel4, Me.LBL_SUBD, Me.LBL_USER})
+        Me.StatusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1, Me.LBL_STAT_1, Me.ToolStripStatusLabel2, Me.LBL_STAT_2, Me.LBL_STAT_3, Me.ToolStripStatusLabel3, Me.lblShed, Me.lblSplet, Me.lblRem, Me.lblMassLoadEverest, Me.ToolStripStatusLabel4, Me.LBL_SUBD, Me.ToolStripStatusLabel5, Me.LBL_USER})
         Me.StatusStrip.Location = New System.Drawing.Point(0, 638)
         Me.StatusStrip.Name = "StatusStrip"
         Me.StatusStrip.Size = New System.Drawing.Size(984, 24)
@@ -540,6 +541,43 @@ Partial Class frmMain
         Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
         Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(0, 19)
         '
+        'LBL_STAT_1
+        '
+        Me.LBL_STAT_1.BorderSides = CType((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) _
+            Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) _
+            Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom), System.Windows.Forms.ToolStripStatusLabelBorderSides)
+        Me.LBL_STAT_1.Name = "LBL_STAT_1"
+        Me.LBL_STAT_1.Size = New System.Drawing.Size(127, 19)
+        Me.LBL_STAT_1.Text = "Техники всего: __ шт."
+        '
+        'ToolStripStatusLabel2
+        '
+        Me.ToolStripStatusLabel2.Name = "ToolStripStatusLabel2"
+        Me.ToolStripStatusLabel2.Size = New System.Drawing.Size(10, 19)
+        Me.ToolStripStatusLabel2.Text = "|"
+        '
+        'LBL_STAT_2
+        '
+        Me.LBL_STAT_2.BorderSides = CType(((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) _
+            Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom), System.Windows.Forms.ToolStripStatusLabelBorderSides)
+        Me.LBL_STAT_2.Name = "LBL_STAT_2"
+        Me.LBL_STAT_2.Size = New System.Drawing.Size(68, 19)
+        Me.LBL_STAT_2.Text = "Техники в:"
+        '
+        'LBL_STAT_3
+        '
+        Me.LBL_STAT_3.BorderSides = CType(((System.Windows.Forms.ToolStripStatusLabelBorderSides.Top Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) _
+            Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom), System.Windows.Forms.ToolStripStatusLabelBorderSides)
+        Me.LBL_STAT_3.Name = "LBL_STAT_3"
+        Me.LBL_STAT_3.Size = New System.Drawing.Size(43, 19)
+        Me.LBL_STAT_3.Text = "__ шт."
+        '
+        'ToolStripStatusLabel3
+        '
+        Me.ToolStripStatusLabel3.Name = "ToolStripStatusLabel3"
+        Me.ToolStripStatusLabel3.Size = New System.Drawing.Size(10, 19)
+        Me.ToolStripStatusLabel3.Text = "|"
+        '
         'lblShed
         '
         Me.lblShed.BorderSides = CType((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) _
@@ -547,8 +585,8 @@ Partial Class frmMain
             Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom), System.Windows.Forms.ToolStripStatusLabelBorderSides)
         Me.lblShed.DoubleClickEnabled = True
         Me.lblShed.Name = "lblShed"
-        Me.lblShed.Size = New System.Drawing.Size(89, 19)
-        Me.lblShed.Text = "Напоминания"
+        Me.lblShed.Size = New System.Drawing.Size(92, 19)
+        Me.lblShed.Text = "Напоминания:"
         '
         'lblSplet
         '
@@ -563,8 +601,8 @@ Partial Class frmMain
             Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom), System.Windows.Forms.ToolStripStatusLabelBorderSides)
         Me.lblRem.DoubleClickEnabled = True
         Me.lblRem.Name = "lblRem"
-        Me.lblRem.Size = New System.Drawing.Size(49, 19)
-        Me.lblRem.Text = "Заявки"
+        Me.lblRem.Size = New System.Drawing.Size(52, 19)
+        Me.lblRem.Text = "Заявки:"
         '
         'lblMassLoadEverest
         '
@@ -574,6 +612,30 @@ Partial Class frmMain
         Me.lblMassLoadEverest.Name = "lblMassLoadEverest"
         Me.lblMassLoadEverest.Size = New System.Drawing.Size(0, 19)
         Me.lblMassLoadEverest.Visible = False
+        '
+        'ToolStripStatusLabel4
+        '
+        Me.ToolStripStatusLabel4.Name = "ToolStripStatusLabel4"
+        Me.ToolStripStatusLabel4.Size = New System.Drawing.Size(10, 19)
+        Me.ToolStripStatusLabel4.Text = "|"
+        '
+        'LBL_SUBD
+        '
+        Me.LBL_SUBD.BorderSides = CType((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) _
+            Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) _
+            Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom), System.Windows.Forms.ToolStripStatusLabelBorderSides)
+        Me.LBL_SUBD.Name = "LBL_SUBD"
+        Me.LBL_SUBD.Size = New System.Drawing.Size(41, 19)
+        Me.LBL_SUBD.Text = "СУБД"
+        '
+        'LBL_USER
+        '
+        Me.LBL_USER.BorderSides = CType((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) _
+            Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) _
+            Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom), System.Windows.Forms.ToolStripStatusLabelBorderSides)
+        Me.LBL_USER.Name = "LBL_USER"
+        Me.LBL_USER.Size = New System.Drawing.Size(88, 19)
+        Me.LBL_USER.Text = "Пользователь"
         '
         'ToolStrip
         '
@@ -884,61 +946,11 @@ Partial Class frmMain
         Me.ToolStripButton1.Size = New System.Drawing.Size(52, 22)
         Me.ToolStripButton1.Text = "Отчеты"
         '
-        'ToolStripStatusLabel2
+        'ToolStripStatusLabel5
         '
-        Me.ToolStripStatusLabel2.Name = "ToolStripStatusLabel2"
-        Me.ToolStripStatusLabel2.Size = New System.Drawing.Size(10, 19)
-        Me.ToolStripStatusLabel2.Text = "|"
-        '
-        'LBL_STAT_1
-        '
-        Me.LBL_STAT_1.BorderSides = CType((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) _
-            Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) _
-            Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom), System.Windows.Forms.ToolStripStatusLabelBorderSides)
-        Me.LBL_STAT_1.Name = "LBL_STAT_1"
-        Me.LBL_STAT_1.Size = New System.Drawing.Size(4, 19)
-        '
-        'ToolStripStatusLabel4
-        '
-        Me.ToolStripStatusLabel4.Name = "ToolStripStatusLabel4"
-        Me.ToolStripStatusLabel4.Size = New System.Drawing.Size(10, 19)
-        Me.ToolStripStatusLabel4.Text = "|"
-        '
-        'LBL_STAT_2
-        '
-        Me.LBL_STAT_2.BorderSides = CType(((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) _
-            Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom), System.Windows.Forms.ToolStripStatusLabelBorderSides)
-        Me.LBL_STAT_2.Name = "LBL_STAT_2"
-        Me.LBL_STAT_2.Size = New System.Drawing.Size(4, 19)
-        '
-        'LBL_STAT_3
-        '
-        Me.LBL_STAT_3.BorderSides = CType(((System.Windows.Forms.ToolStripStatusLabelBorderSides.Top Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) _
-            Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom), System.Windows.Forms.ToolStripStatusLabelBorderSides)
-        Me.LBL_STAT_3.Name = "LBL_STAT_3"
-        Me.LBL_STAT_3.Size = New System.Drawing.Size(4, 19)
-        '
-        'ToolStripStatusLabel3
-        '
-        Me.ToolStripStatusLabel3.Name = "ToolStripStatusLabel3"
-        Me.ToolStripStatusLabel3.Size = New System.Drawing.Size(10, 19)
-        Me.ToolStripStatusLabel3.Text = "|"
-        '
-        'LBL_SUBD
-        '
-        Me.LBL_SUBD.BorderSides = CType((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) _
-            Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) _
-            Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom), System.Windows.Forms.ToolStripStatusLabelBorderSides)
-        Me.LBL_SUBD.Name = "LBL_SUBD"
-        Me.LBL_SUBD.Size = New System.Drawing.Size(4, 19)
-        '
-        'LBL_USER
-        '
-        Me.LBL_USER.BorderSides = CType((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) _
-            Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) _
-            Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom), System.Windows.Forms.ToolStripStatusLabelBorderSides)
-        Me.LBL_USER.Name = "LBL_USER"
-        Me.LBL_USER.Size = New System.Drawing.Size(4, 19)
+        Me.ToolStripStatusLabel5.Name = "ToolStripStatusLabel5"
+        Me.ToolStripStatusLabel5.Size = New System.Drawing.Size(10, 19)
+        Me.ToolStripStatusLabel5.Text = "|"
         '
         'frmMain
         '
@@ -1084,5 +1096,6 @@ Partial Class frmMain
     Friend WithEvents ToolStripStatusLabel3 As System.Windows.Forms.ToolStripStatusLabel
     Friend WithEvents LBL_SUBD As System.Windows.Forms.ToolStripStatusLabel
     Friend WithEvents LBL_USER As System.Windows.Forms.ToolStripStatusLabel
+    Friend WithEvents ToolStripStatusLabel5 As System.Windows.Forms.ToolStripStatusLabel
 
 End Class

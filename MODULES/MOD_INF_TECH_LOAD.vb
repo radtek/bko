@@ -1893,6 +1893,8 @@ err_:
         'On Error GoTo err_
         frmComputers.lvNotesBR.Items.Clear()
 
+        TipTehn = ""
+
         Dim SerD As String
         Dim rs As ADODB.Recordset
 
@@ -2061,6 +2063,32 @@ err_:
     End Sub
 
     Public Sub SHED_CHECK()
+
+        Dim objIniFile As New IniFile(PrPath & "base.ini")
+
+        Dim uname As String
+
+        uname = objIniFile.GetString("General", "Sheduler", "unChecked")
+
+        If uname = "unChecked" Then
+
+            frmMain.lblShed.Visible = False
+
+            If frmMain.lblShed.Visible = False Then
+
+                frmMain.lblSplet.Visible = False
+
+            End If
+
+            Exit Sub
+
+
+        Else
+
+        End If
+
+
+
         Dim rs As ADODB.Recordset
 
         Dim sSQL, SERT, SERT2 As String
@@ -2079,10 +2107,16 @@ err_:
         rs.Close()
         rs = Nothing
 
-
-
         If SERT > 0 Then
             frmMain.lblShed.Visible = True
+
+
+            If frmMain.lblShed.Visible = True Then
+
+                frmMain.lblSplet.Visible = True
+
+            End If
+
             'frmMain lblShed
             'LNGIniFile.GetString("frmMain", "lblShed", "")
             frmMain.lblShed.Text = LNGIniFile.GetString("frmMain", "lblShed", "") & " " & "(" & "0" & "/" & SERT$ & ")"
@@ -2143,6 +2177,14 @@ err_:
         Else
 
             frmMain.lblShed.Visible = False
+
+            If frmMain.lblShed.Visible = False Then
+
+                frmMain.lblSplet.Visible = False
+
+            End If
+
+
         End If
 
         'frmMain.lblShed.Text = "Напоминания "
@@ -2175,6 +2217,13 @@ err_:
         If SERT > 0 Then
 
             frmMain.lblRem.Visible = True
+
+            If frmMain.lblRem.Visible = True Then
+
+                frmMain.ToolStripStatusLabel4.Visible = True
+
+            End If
+
 
             rs = New ADODB.Recordset
             rs.Open("SELECT * FROM SPR_Master WHERE A='" & UserNames & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
@@ -2238,6 +2287,14 @@ err_:
         Else
 
             frmMain.lblRem.Visible = False
+
+
+            If frmMain.lblRem.Visible = False Then
+
+                frmMain.ToolStripStatusLabel4.Visible = False
+
+            End If
+
         End If
 
 

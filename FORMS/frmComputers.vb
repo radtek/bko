@@ -28,6 +28,9 @@ Public Class frmComputers
     Public sMonitor As Integer = 1
     Public sPrinter As Integer = 1
 
+    Public TIP_TO As String
+
+
     Public OneStart As Decimal = 0
 
     Public Sub New()
@@ -81,38 +84,29 @@ Public Class frmComputers
 
 
 
-        If MsgBox("Обновить дерево?", MsgBoxStyle.YesNo, ProGramName) = MsgBoxResult.Yes Then
+        ' If MsgBox("Обновить дерево?", MsgBoxStyle.YesNo, ProGramName) = MsgBoxResult.Yes Then
 
-            lstGroups.Nodes.Clear()
-            Dim newThread5 As New Thread(AddressOf R_T_LOAD)
-            newThread5.Start()
+        lstGroups.Nodes.Clear()
+        Dim newThread5 As New Thread(AddressOf R_T_LOAD)
+        newThread5.Start()
 
 
-        Else
+        'Else
 
-        End If
+        'End If
 
 
         Me.Cursor = Cursors.Default
 
     End Sub
 
+    Private Sub treebranche_Click(sender As Object, e As System.EventArgs) Handles treebranche.Click
+
+    End Sub
+
     Private Sub treebranche_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles treebranche.SelectedIndexChanged
 
-        Dim objIniFile As New IniFile(PrPath & "base.ini")
-        objIniFile.WriteString("General", "branche", treebranche.Text)
-
-        If OneStart = 0 Then Exit Sub
-
-        If MsgBox("Обновить дерево?", MsgBoxStyle.YesNo, ProGramName) = MsgBoxResult.Yes Then
-
-            lstGroups.Nodes.Clear()
-            Dim newThread5 As New Thread(AddressOf R_T_LOAD)
-            newThread5.Start()
-
-        Else
-
-        End If
+      
 
     End Sub
 
@@ -319,6 +313,7 @@ Public Class frmComputers
 
         addServiseWork.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\add.png")
 
+        ППРToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\setup.png")
 
 
         'bCPUPlus.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\add.png")
@@ -368,20 +363,16 @@ Public Class frmComputers
 
         Application.DoEvents()
 
+        'If Me.lstGroups.Nodes.Count = 0 Then
+        '    Dim newThread5 As New Thread(AddressOf R_T_LOAD)
+        '    newThread5.Start()
+        'End If
 
-
-        If lstGroups.Nodes.Count = 0 Then
-
-            If Me.lstGroups.Nodes.Count = 0 Then
-                Dim newThread5 As New Thread(AddressOf R_T_LOAD)
-                newThread5.Start()
-                'newThread5.Priority = 4
-            End If
-
-        End If
+        Call R_T_LOAD()
 
         Me.Cursor = Cursors.Default
-        OneStart = 1
+
+        Application.DoEvents()
 
     End Sub
 
@@ -573,8 +564,6 @@ Error_:
         Me.BeginInvoke(New MethodInvoker(AddressOf LOAD_LIST))
         Me.BeginInvoke(New MethodInvoker(AddressOf selectTECMesto))
 
-
-
         Application.DoEvents()
 
         Me.Cursor = Cursors.Default
@@ -602,11 +591,11 @@ Error_:
 
         Call SECUR_LEVEL()
 
+
         Dim d() As String
         d = Split(lstGroups.SelectedNode.Tag, "|")
 
-
-        'Call Clear_Form_For_Computer()
+        Call Clear_Form_For_Computer()
         Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG14", "") & " " & Me.lstGroups.SelectedNode.Text)
 
 
@@ -2543,7 +2532,7 @@ err_:
 
     End Sub
 
-    Private Sub lstGroups_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs)
+    Private Sub lstGroups_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lstGroups.MouseDown
         Select Case e.Button
             Case MouseButtons.Left
                 BTN = 1
@@ -2554,7 +2543,7 @@ err_:
         End Select
     End Sub
 
-    Private Sub lstGroups_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs)
+    Private Sub lstGroups_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lstGroups.MouseUp
 
 
         'BTN = Button
@@ -3230,7 +3219,7 @@ err_:
         frmGarCPL.ShowDialog(Me)
     End Sub
 
-    Public Sub lstGroups_ItemDrag(ByVal sender As System.Object, ByVal e As System.Windows.Forms.ItemDragEventArgs)
+    Public Sub lstGroups_ItemDrag(ByVal sender As System.Object, ByVal e As System.Windows.Forms.ItemDragEventArgs) Handles lstGroups.ItemDrag
         On Error Resume Next
 
         If uLevelTehAdd = False And uLevel <> "Admin" Then Exit Sub
@@ -3256,7 +3245,7 @@ err_:
 
     End Sub
 
-    Public Sub lstGroups_DragEnter(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DragEventArgs)
+    Public Sub lstGroups_DragEnter(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles lstGroups.DragEnter
         On Error Resume Next
 
         If uLevelTehAdd = False And uLevel <> "Admin" Then Exit Sub
@@ -3287,7 +3276,7 @@ err_:
 
     End Sub
 
-    Public Sub lstGroups_DragOver(ByVal sender As System.Object, ByVal e As DragEventArgs)
+    Public Sub lstGroups_DragOver(ByVal sender As System.Object, ByVal e As DragEventArgs) Handles lstGroups.DragOver
         On Error Resume Next
 
         If uLevelTehAdd = False And uLevel <> "Admin" Then Exit Sub
@@ -3348,7 +3337,7 @@ err_:
 
     End Sub
 
-    Public Sub lstGroups_DragDrop(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DragEventArgs)
+    Public Sub lstGroups_DragDrop(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles lstGroups.DragDrop
         On Error Resume Next
 
         Dim sBranch_, sDepartment_, sOffice_ As String
@@ -5413,7 +5402,7 @@ lvMovementOTH.Columns(e.Column)
     End Sub
 
 
-    Private Sub lstGroups_NodeMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.TreeNodeMouseClickEventArgs)
+    Private Sub lstGroups_NodeMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.TreeNodeMouseClickEventArgs) Handles lstGroups.NodeMouseClick
 
         '#############################################
         'Выделение по правому клику мышкой
@@ -5518,10 +5507,6 @@ lvMovementOTH.Columns(e.Column)
 
 
 
-    End Sub
-
-    Private Sub treebranche_SelectedValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles treebranche.SelectedValueChanged
-     
     End Sub
 
     Private Sub txtUserName_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtUserName.SelectedIndexChanged
@@ -6346,6 +6331,56 @@ err_1:
 
     Private Sub lstSoftware_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lstSoftware.SelectedIndexChanged
 
+    End Sub
+
+    Private Sub treebranche_SelectedValueChanged(sender As Object, e As System.EventArgs) Handles treebranche.SelectedValueChanged
+        Dim objIniFile As New IniFile(PrPath & "base.ini")
+        objIniFile.WriteString("General", "branche", treebranche.Text)
+
+        If OneStart = 0 Then Exit Sub
+
+        'If MsgBox("Обновить дерево?", MsgBoxStyle.YesNo, ProGramName) = MsgBoxResult.Yes Then
+
+        lstGroups.Nodes.Clear()
+        Dim newThread5 As New Thread(AddressOf R_T_LOAD)
+        newThread5.Start()
+
+        ' Else
+
+        ' End If
+    End Sub
+
+    Private Sub ТО1ToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ТО1ToolStripMenuItem.Click
+
+        TIP_TO = "TO1"
+
+        frmPPR.ShowDialog(Me)
+
+    End Sub
+
+    Private Sub ТО2ToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ТО2ToolStripMenuItem.Click
+        TIP_TO = "TO2"
+        frmPPR.ShowDialog(Me)
+    End Sub
+
+    Private Sub ТО3ToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ТО3ToolStripMenuItem.Click
+        TIP_TO = "TO3"
+        frmPPR.ShowDialog(Me)
+    End Sub
+
+    Private Sub ТО4ToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ТО4ToolStripMenuItem.Click
+        TIP_TO = "TO4"
+        frmPPR.ShowDialog(Me)
+    End Sub
+
+    Private Sub ТО5ToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ТО5ToolStripMenuItem.Click
+        TIP_TO = "TO5"
+        frmPPR.ShowDialog(Me)
+    End Sub
+
+    Private Sub ТО6ToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ТО6ToolStripMenuItem.Click
+        TIP_TO = "TO6"
+        frmPPR.ShowDialog(Me)
     End Sub
 End Class
 

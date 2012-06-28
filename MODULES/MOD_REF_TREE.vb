@@ -428,18 +428,16 @@ Module MOD_REF_TREE
 
         End If
 
-
-        'frmComputers.OneStart = 1
-
-        ' MessageBox.Show("done! " & Math.Round(Now.Subtract(starttime).TotalSeconds, 4).ToString)
-
-
         'lstgroups.visible = True
 exitsub:
         Exit Sub
 ERR1:
         'lstgroups.visible = True
         'MsgBox Err.Description
+
+        'If frmComputers.OneStart = 0 Then
+        '    frmComputers.OneStart = 1
+        'End If
 
         Select Case Err.Number
             Case 3021 'ignore, no entries in list
@@ -1617,6 +1615,7 @@ ERR1:
             If KCKey = sID Then
                 lstgroups.SelectedNode = TEHNodeCNT
                 lstgroups.SelectedNode.Expand()
+
             End If
         End If
 

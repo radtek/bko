@@ -38,7 +38,8 @@
         dvig = New ADODB.Recordset
         Dim net_port As ADODB.Recordset
         net_port = New ADODB.Recordset
-
+        Dim tbl_ppr As ADODB.Recordset
+        tbl_ppr = New ADODB.Recordset
 
 
         'frmComputers.RefContactList
@@ -59,7 +60,7 @@
         dvig.Open("DELETE FROM dvig WHERE Id_Comp=" & sSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
         net_port.Open("DELETE FROM net_port WHERE id_net=" & sSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-
+        tbl_ppr.Open("DELETE FROM net_port WHERE Id_Comp=" & sSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
         Dim rs As ADODB.Recordset
         rs = New ADODB.Recordset
@@ -104,7 +105,7 @@
         dvig.Close()
         net_port.Close()
         BASECOMP.Close()
-
+        tbl_ppr.Close()
 
         rs1 = New ADODB.Recordset
 

@@ -244,6 +244,12 @@
     <Compile Include="FORMS\frmNetMag_selectSVT.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FORMS\frmPPR.Designer.vb">
+      <DependentUpon>frmPPR.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FORMS\frmPPR.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FORMS\frmReports.Designer.vb">
       <DependentUpon>frmReports.vb</DependentUpon>
     </Compile>
@@ -343,6 +349,7 @@
     <Compile Include="FORMS\QrCode.Designer.vb">
       <DependentUpon>QrCode.vb</DependentUpon>
     </Compile>
+    <None Include="ClassDiagram1.cd" />
     <None Include="FORMS\QrCode.vb">
       <SubType>Form</SubType>
     </None>
@@ -433,6 +440,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FORMS\frmNetMag_selectSVT.resx">
       <DependentUpon>frmNetMag_selectSVT.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FORMS\frmPPR.resx">
+      <DependentUpon>frmPPR.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FORMS\frmReports.resx">
       <DependentUpon>frmReports.vb</DependentUpon>
@@ -593,6 +603,9 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

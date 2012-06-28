@@ -271,8 +271,6 @@ Module MOD_SYS_PRELOAD
 
     Public Sub frmservills_load()
 
-
-
         If frmserviceDesc.ilsCMD.Images.Count = 0 Then
 
             frmserviceDesc.ilsCMD.Images.Add(Image.FromFile(PrPath & "pic\iface\ok.png"))
@@ -421,6 +419,7 @@ Module MOD_SYS_PRELOAD
         For Each Ctl As Object In ControlContainer.Controls
             Try
                 If Not Ctl.Controls Is Nothing Then
+
                     ClearForm(Ctl)
 
                     If TypeOf Ctl Is TextBox Then Ctl.ResetText()
@@ -446,6 +445,7 @@ Module MOD_SYS_PRELOAD
         frmComputers.chkOTHspis.Checked = False
 
         frmComputers.treebranche.Text = A1
+
 
     End Sub
 
