@@ -153,8 +153,6 @@ Me.txtHDDsN1 = New System.Windows.Forms.TextBox()
 Me.txtHDDo3 = New System.Windows.Forms.TextBox()
 Me.txtHDDo2 = New System.Windows.Forms.TextBox()
 Me.txtHDDsN2 = New System.Windows.Forms.TextBox()
-Me.TabPage2 = New System.Windows.Forms.TabPage()
-Me.TableLayoutPanel62 = New System.Windows.Forms.TableLayoutPanel()
 Me.gbOptical = New System.Windows.Forms.GroupBox()
 Me.TableLayoutPanel30 = New System.Windows.Forms.TableLayoutPanel()
 Me.bOpticalPlus = New System.Windows.Forms.Button()
@@ -170,16 +168,6 @@ Me.cmbOPTIC3 = New System.Windows.Forms.ComboBox()
 Me.txtOPTICsn1 = New System.Windows.Forms.TextBox()
 Me.txtOPTICs1 = New System.Windows.Forms.TextBox()
 Me.txtOPTICs2 = New System.Windows.Forms.TextBox()
-Me.gbSBP = New System.Windows.Forms.GroupBox()
-Me.TableLayoutPanel39 = New System.Windows.Forms.TableLayoutPanel()
-Me.txtModSB = New System.Windows.Forms.TextBox()
-Me.txtSNSB = New System.Windows.Forms.TextBox()
-Me.PROizV27 = New System.Windows.Forms.ComboBox()
-Me.gbPCI = New System.Windows.Forms.GroupBox()
-Me.TableLayoutPanel38 = New System.Windows.Forms.TableLayoutPanel()
-Me.cmbPCI = New System.Windows.Forms.ComboBox()
-Me.txtSNPCI = New System.Windows.Forms.TextBox()
-Me.PROizV42 = New System.Windows.Forms.ComboBox()
 Me.gbNetwork = New System.Windows.Forms.GroupBox()
 Me.TableLayoutPanel31 = New System.Windows.Forms.TableLayoutPanel()
 Me.bNETPlus = New System.Windows.Forms.Button()
@@ -191,21 +179,11 @@ Me.cmbNET2 = New System.Windows.Forms.ComboBox()
 Me.txtNETmac1 = New System.Windows.Forms.TextBox()
 Me.txtNETip2 = New System.Windows.Forms.TextBox()
 Me.txtNETip1 = New System.Windows.Forms.TextBox()
-Me.gbUSB = New System.Windows.Forms.GroupBox()
-Me.TableLayoutPanel37 = New System.Windows.Forms.TableLayoutPanel()
-Me.cmbUSB = New System.Windows.Forms.ComboBox()
-Me.txtUSBSN = New System.Windows.Forms.TextBox()
-Me.PROizV41 = New System.Windows.Forms.ComboBox()
 Me.gbFDD = New System.Windows.Forms.GroupBox()
 Me.TableLayoutPanel32 = New System.Windows.Forms.TableLayoutPanel()
 Me.PROizV22 = New System.Windows.Forms.ComboBox()
 Me.cmbFDD = New System.Windows.Forms.ComboBox()
 Me.txtSN = New System.Windows.Forms.TextBox()
-Me.gbBP = New System.Windows.Forms.GroupBox()
-Me.TableLayoutPanel36 = New System.Windows.Forms.TableLayoutPanel()
-Me.cmbBP = New System.Windows.Forms.ComboBox()
-Me.txtBP1 = New System.Windows.Forms.TextBox()
-Me.PROizV26 = New System.Windows.Forms.ComboBox()
 Me.gbCreader = New System.Windows.Forms.GroupBox()
 Me.TableLayoutPanel33 = New System.Windows.Forms.TableLayoutPanel()
 Me.PROizV23 = New System.Windows.Forms.ComboBox()
@@ -221,6 +199,26 @@ Me.TableLayoutPanel35 = New System.Windows.Forms.TableLayoutPanel()
 Me.cmbCase = New System.Windows.Forms.ComboBox()
 Me.txtCase1 = New System.Windows.Forms.TextBox()
 Me.PROizV25 = New System.Windows.Forms.ComboBox()
+Me.gbBP = New System.Windows.Forms.GroupBox()
+Me.TableLayoutPanel36 = New System.Windows.Forms.TableLayoutPanel()
+Me.cmbBP = New System.Windows.Forms.ComboBox()
+Me.txtBP1 = New System.Windows.Forms.TextBox()
+Me.PROizV26 = New System.Windows.Forms.ComboBox()
+Me.gbUSB = New System.Windows.Forms.GroupBox()
+Me.TableLayoutPanel37 = New System.Windows.Forms.TableLayoutPanel()
+Me.cmbUSB = New System.Windows.Forms.ComboBox()
+Me.txtUSBSN = New System.Windows.Forms.TextBox()
+Me.PROizV41 = New System.Windows.Forms.ComboBox()
+Me.gbPCI = New System.Windows.Forms.GroupBox()
+Me.TableLayoutPanel38 = New System.Windows.Forms.TableLayoutPanel()
+Me.cmbPCI = New System.Windows.Forms.ComboBox()
+Me.txtSNPCI = New System.Windows.Forms.TextBox()
+Me.PROizV42 = New System.Windows.Forms.ComboBox()
+Me.gbSBP = New System.Windows.Forms.GroupBox()
+Me.TableLayoutPanel39 = New System.Windows.Forms.TableLayoutPanel()
+Me.txtModSB = New System.Windows.Forms.TextBox()
+Me.txtSNSB = New System.Windows.Forms.TextBox()
+Me.PROizV27 = New System.Windows.Forms.ComboBox()
 Me.TabPage3 = New System.Windows.Forms.TabPage()
 Me.TableLayoutPanel61 = New System.Windows.Forms.TableLayoutPanel()
 Me.gbMonitor = New System.Windows.Forms.GroupBox()
@@ -716,28 +714,26 @@ Me.gbRAM.SuspendLayout
 Me.TableLayoutPanel25.SuspendLayout
 Me.gbHDD.SuspendLayout
 Me.TableLayoutPanel26.SuspendLayout
-Me.TabPage2.SuspendLayout
-Me.TableLayoutPanel62.SuspendLayout
 Me.gbOptical.SuspendLayout
 Me.TableLayoutPanel30.SuspendLayout
-Me.gbSBP.SuspendLayout
-Me.TableLayoutPanel39.SuspendLayout
-Me.gbPCI.SuspendLayout
-Me.TableLayoutPanel38.SuspendLayout
 Me.gbNetwork.SuspendLayout
 Me.TableLayoutPanel31.SuspendLayout
-Me.gbUSB.SuspendLayout
-Me.TableLayoutPanel37.SuspendLayout
 Me.gbFDD.SuspendLayout
 Me.TableLayoutPanel32.SuspendLayout
-Me.gbBP.SuspendLayout
-Me.TableLayoutPanel36.SuspendLayout
 Me.gbCreader.SuspendLayout
 Me.TableLayoutPanel33.SuspendLayout
 Me.gbModem.SuspendLayout
 Me.TableLayoutPanel34.SuspendLayout
 Me.gbCase.SuspendLayout
 Me.TableLayoutPanel35.SuspendLayout
+Me.gbBP.SuspendLayout
+Me.TableLayoutPanel36.SuspendLayout
+Me.gbUSB.SuspendLayout
+Me.TableLayoutPanel37.SuspendLayout
+Me.gbPCI.SuspendLayout
+Me.TableLayoutPanel38.SuspendLayout
+Me.gbSBP.SuspendLayout
+Me.TableLayoutPanel39.SuspendLayout
 Me.TabPage3.SuspendLayout
 Me.TableLayoutPanel61.SuspendLayout
 Me.gbMonitor.SuspendLayout
@@ -928,6 +924,7 @@ Me.TableLayoutPanel64.TabIndex = 5
 '
 'lstGroups
 '
+Me.lstGroups.AllowDrop = true
 Me.TableLayoutPanel64.SetColumnSpan(Me.lstGroups, 2)
 Me.lstGroups.Dock = System.Windows.Forms.DockStyle.Fill
 Me.lstGroups.FullRowSelect = true
@@ -976,7 +973,6 @@ Me.chkVisibleSTR.UseVisualStyleBackColor = true
 '
 Me.sSTAB1.Controls.Add(Me.TabPage6)
 Me.sSTAB1.Controls.Add(Me.TabPage1)
-Me.sSTAB1.Controls.Add(Me.TabPage2)
 Me.sSTAB1.Controls.Add(Me.TabPage3)
 Me.sSTAB1.Controls.Add(Me.TabPage4)
 Me.sSTAB1.Controls.Add(Me.TabPage5)
@@ -1405,6 +1401,7 @@ Me.cmbPCLK.Visible = false
 '
 'TabPage1
 '
+Me.TabPage1.AutoScroll = true
 Me.TabPage1.Controls.Add(Me.TableLayoutPanel63)
 Me.TabPage1.Location = New System.Drawing.Point(4, 22)
 Me.TabPage1.Name = "TabPage1"
@@ -1416,6 +1413,7 @@ Me.TabPage1.UseVisualStyleBackColor = true
 '
 'TableLayoutPanel63
 '
+Me.TableLayoutPanel63.AutoScroll = true
 Me.TableLayoutPanel63.ColumnCount = 1
 Me.TableLayoutPanel63.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100!))
 Me.TableLayoutPanel63.Controls.Add(Me.gbcpu, 0, 0)
@@ -1424,10 +1422,20 @@ Me.TableLayoutPanel63.Controls.Add(Me.gbMB, 0, 1)
 Me.TableLayoutPanel63.Controls.Add(Me.gbSVGA, 0, 4)
 Me.TableLayoutPanel63.Controls.Add(Me.gbRAM, 0, 2)
 Me.TableLayoutPanel63.Controls.Add(Me.gbHDD, 0, 3)
+Me.TableLayoutPanel63.Controls.Add(Me.gbOptical, 0, 6)
+Me.TableLayoutPanel63.Controls.Add(Me.gbNetwork, 0, 7)
+Me.TableLayoutPanel63.Controls.Add(Me.gbFDD, 0, 8)
+Me.TableLayoutPanel63.Controls.Add(Me.gbCreader, 0, 9)
+Me.TableLayoutPanel63.Controls.Add(Me.gbModem, 0, 10)
+Me.TableLayoutPanel63.Controls.Add(Me.gbCase, 0, 11)
+Me.TableLayoutPanel63.Controls.Add(Me.gbBP, 0, 12)
+Me.TableLayoutPanel63.Controls.Add(Me.gbUSB, 0, 13)
+Me.TableLayoutPanel63.Controls.Add(Me.gbPCI, 0, 14)
+Me.TableLayoutPanel63.Controls.Add(Me.gbSBP, 0, 15)
 Me.TableLayoutPanel63.Dock = System.Windows.Forms.DockStyle.Fill
 Me.TableLayoutPanel63.Location = New System.Drawing.Point(3, 3)
 Me.TableLayoutPanel63.Name = "TableLayoutPanel63"
-Me.TableLayoutPanel63.RowCount = 7
+Me.TableLayoutPanel63.RowCount = 18
 Me.TableLayoutPanel63.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel63.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel63.RowStyles.Add(New System.Windows.Forms.RowStyle())
@@ -1435,6 +1443,17 @@ Me.TableLayoutPanel63.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel63.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel63.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel63.RowStyles.Add(New System.Windows.Forms.RowStyle())
+Me.TableLayoutPanel63.RowStyles.Add(New System.Windows.Forms.RowStyle())
+Me.TableLayoutPanel63.RowStyles.Add(New System.Windows.Forms.RowStyle())
+Me.TableLayoutPanel63.RowStyles.Add(New System.Windows.Forms.RowStyle())
+Me.TableLayoutPanel63.RowStyles.Add(New System.Windows.Forms.RowStyle())
+Me.TableLayoutPanel63.RowStyles.Add(New System.Windows.Forms.RowStyle())
+Me.TableLayoutPanel63.RowStyles.Add(New System.Windows.Forms.RowStyle())
+Me.TableLayoutPanel63.RowStyles.Add(New System.Windows.Forms.RowStyle())
+Me.TableLayoutPanel63.RowStyles.Add(New System.Windows.Forms.RowStyle())
+Me.TableLayoutPanel63.RowStyles.Add(New System.Windows.Forms.RowStyle())
+Me.TableLayoutPanel63.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20!))
+Me.TableLayoutPanel63.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20!))
 Me.TableLayoutPanel63.Size = New System.Drawing.Size(676, 614)
 Me.TableLayoutPanel63.TabIndex = 6
 '
@@ -1503,6 +1522,7 @@ Me.bCPUPlus.UseVisualStyleBackColor = true
 Me.PROizV4.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.PROizV4.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
 Me.TableLayoutPanel24.SetColumnSpan(Me.PROizV4, 2)
+Me.PROizV4.Cursor = System.Windows.Forms.Cursors.Default
 Me.PROizV4.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV4.FormattingEnabled = true
 Me.PROizV4.Location = New System.Drawing.Point(504, 84)
@@ -1516,7 +1536,7 @@ Me.PROizV2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.PROizV2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
 Me.PROizV2.BackColor = System.Drawing.SystemColors.Window
 Me.TableLayoutPanel24.SetColumnSpan(Me.PROizV2, 2)
-Me.PROizV2.Cursor = System.Windows.Forms.Cursors.IBeam
+Me.PROizV2.Cursor = System.Windows.Forms.Cursors.Default
 Me.PROizV2.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV2.ForeColor = System.Drawing.SystemColors.WindowText
 Me.PROizV2.Location = New System.Drawing.Point(504, 30)
@@ -1530,6 +1550,7 @@ Me.PROizV2.TabIndex = 8
 Me.PROizV3.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.PROizV3.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
 Me.TableLayoutPanel24.SetColumnSpan(Me.PROizV3, 2)
+Me.PROizV3.Cursor = System.Windows.Forms.Cursors.Default
 Me.PROizV3.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV3.FormattingEnabled = true
 Me.PROizV3.Location = New System.Drawing.Point(504, 57)
@@ -1541,6 +1562,7 @@ Me.PROizV3.TabIndex = 12
 '
 Me.cmbCPU1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.cmbCPU1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+Me.cmbCPU1.Cursor = System.Windows.Forms.Cursors.Default
 Me.cmbCPU1.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbCPU1.FormattingEnabled = true
 Me.cmbCPU1.Location = New System.Drawing.Point(3, 3)
@@ -1560,6 +1582,7 @@ Me.txtSoc4.Tag = ""
 '
 Me.cmbCPU2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.cmbCPU2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+Me.cmbCPU2.Cursor = System.Windows.Forms.Cursors.Default
 Me.cmbCPU2.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbCPU2.FormattingEnabled = true
 Me.cmbCPU2.Location = New System.Drawing.Point(3, 30)
@@ -1571,6 +1594,7 @@ Me.cmbCPU2.TabIndex = 5
 '
 Me.PROizV1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.PROizV1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+Me.PROizV1.Cursor = System.Windows.Forms.Cursors.Default
 Me.PROizV1.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV1.FormattingEnabled = true
 Me.PROizV1.Location = New System.Drawing.Point(504, 3)
@@ -1582,6 +1606,7 @@ Me.PROizV1.TabIndex = 4
 '
 Me.cmbCPU3.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.cmbCPU3.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+Me.cmbCPU3.Cursor = System.Windows.Forms.Cursors.Default
 Me.cmbCPU3.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbCPU3.FormattingEnabled = true
 Me.cmbCPU3.Location = New System.Drawing.Point(3, 57)
@@ -1609,6 +1634,7 @@ Me.txtMHZ4.Tag = ""
 '
 Me.cmbCPU4.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.cmbCPU4.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+Me.cmbCPU4.Cursor = System.Windows.Forms.Cursors.Default
 Me.cmbCPU4.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbCPU4.FormattingEnabled = true
 Me.cmbCPU4.Location = New System.Drawing.Point(3, 84)
@@ -1692,6 +1718,7 @@ Me.TableLayoutPanel28.TabIndex = 1
 '
 Me.PROizV16.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.PROizV16.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+Me.PROizV16.Cursor = System.Windows.Forms.Cursors.Default
 Me.PROizV16.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV16.FormattingEnabled = true
 Me.PROizV16.Location = New System.Drawing.Point(508, 3)
@@ -1789,6 +1816,7 @@ Me.txtChip.TabIndex = 9
 '
 Me.PROizV5.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.PROizV5.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+Me.PROizV5.Cursor = System.Windows.Forms.Cursors.Default
 Me.PROizV5.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV5.FormattingEnabled = true
 Me.PROizV5.Location = New System.Drawing.Point(510, 3)
@@ -1861,6 +1889,7 @@ Me.bSVGAPlus.UseVisualStyleBackColor = true
 Me.PROizV15.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.PROizV15.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
 Me.TableLayoutPanel27.SetColumnSpan(Me.PROizV15, 2)
+Me.PROizV15.Cursor = System.Windows.Forms.Cursors.Default
 Me.PROizV15.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV15.FormattingEnabled = true
 Me.PROizV15.Location = New System.Drawing.Point(504, 30)
@@ -1879,6 +1908,7 @@ Me.txtSVGAs2.TabIndex = 14
 '
 Me.PROizV14.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.PROizV14.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+Me.PROizV14.Cursor = System.Windows.Forms.Cursors.Default
 Me.PROizV14.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV14.FormattingEnabled = true
 Me.PROizV14.Location = New System.Drawing.Point(504, 3)
@@ -1993,6 +2023,7 @@ Me.bRamPlus.UseVisualStyleBackColor = true
 Me.PROizV9.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.PROizV9.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
 Me.TableLayoutPanel25.SetColumnSpan(Me.PROizV9, 2)
+Me.PROizV9.Cursor = System.Windows.Forms.Cursors.Default
 Me.PROizV9.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV9.FormattingEnabled = true
 Me.PROizV9.Location = New System.Drawing.Point(504, 84)
@@ -2012,6 +2043,7 @@ Me.txtRamSN4.TabIndex = 30
 Me.PROizV8.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.PROizV8.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
 Me.TableLayoutPanel25.SetColumnSpan(Me.PROizV8, 2)
+Me.PROizV8.Cursor = System.Windows.Forms.Cursors.Default
 Me.PROizV8.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV8.FormattingEnabled = true
 Me.PROizV8.Location = New System.Drawing.Point(504, 57)
@@ -2023,6 +2055,7 @@ Me.PROizV8.TabIndex = 27
 '
 Me.cmbRAM1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.cmbRAM1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+Me.cmbRAM1.Cursor = System.Windows.Forms.Cursors.Default
 Me.cmbRAM1.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbRAM1.FormattingEnabled = true
 Me.cmbRAM1.Location = New System.Drawing.Point(3, 3)
@@ -2035,6 +2068,7 @@ Me.cmbRAM1.TabIndex = 16
 Me.PROizV7.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.PROizV7.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
 Me.TableLayoutPanel25.SetColumnSpan(Me.PROizV7, 2)
+Me.PROizV7.Cursor = System.Windows.Forms.Cursors.Default
 Me.PROizV7.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV7.FormattingEnabled = true
 Me.PROizV7.Location = New System.Drawing.Point(504, 30)
@@ -2046,6 +2080,7 @@ Me.PROizV7.TabIndex = 23
 '
 Me.cmbRAM2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.cmbRAM2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+Me.cmbRAM2.Cursor = System.Windows.Forms.Cursors.Default
 Me.cmbRAM2.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbRAM2.FormattingEnabled = true
 Me.cmbRAM2.Location = New System.Drawing.Point(3, 30)
@@ -2057,6 +2092,7 @@ Me.cmbRAM2.TabIndex = 20
 '
 Me.PROizV6.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.PROizV6.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+Me.PROizV6.Cursor = System.Windows.Forms.Cursors.Default
 Me.PROizV6.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV6.FormattingEnabled = true
 Me.PROizV6.Location = New System.Drawing.Point(504, 3)
@@ -2082,6 +2118,7 @@ Me.txtRamS4.TabIndex = 29
 '
 Me.cmbRAM3.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.cmbRAM3.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+Me.cmbRAM3.Cursor = System.Windows.Forms.Cursors.Default
 Me.cmbRAM3.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbRAM3.FormattingEnabled = true
 Me.cmbRAM3.Location = New System.Drawing.Point(3, 57)
@@ -2100,6 +2137,7 @@ Me.txtRamSN2.TabIndex = 22
 '
 Me.cmbRAM4.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.cmbRAM4.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+Me.cmbRAM4.Cursor = System.Windows.Forms.Cursors.Default
 Me.cmbRAM4.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbRAM4.FormattingEnabled = true
 Me.cmbRAM4.Location = New System.Drawing.Point(3, 84)
@@ -2199,6 +2237,7 @@ Me.bHddPlus.UseVisualStyleBackColor = true
 Me.PROizV13.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.PROizV13.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
 Me.TableLayoutPanel26.SetColumnSpan(Me.PROizV13, 2)
+Me.PROizV13.Cursor = System.Windows.Forms.Cursors.Default
 Me.PROizV13.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV13.FormattingEnabled = true
 Me.PROizV13.Location = New System.Drawing.Point(504, 84)
@@ -2218,6 +2257,7 @@ Me.txtHDDsN4.TabIndex = 30
 Me.PROizV12.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.PROizV12.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
 Me.TableLayoutPanel26.SetColumnSpan(Me.PROizV12, 2)
+Me.PROizV12.Cursor = System.Windows.Forms.Cursors.Default
 Me.PROizV12.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV12.FormattingEnabled = true
 Me.PROizV12.Location = New System.Drawing.Point(504, 57)
@@ -2229,6 +2269,7 @@ Me.PROizV12.TabIndex = 27
 '
 Me.cmbHDD1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.cmbHDD1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+Me.cmbHDD1.Cursor = System.Windows.Forms.Cursors.Default
 Me.cmbHDD1.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbHDD1.FormattingEnabled = true
 Me.cmbHDD1.Location = New System.Drawing.Point(3, 3)
@@ -2241,6 +2282,7 @@ Me.cmbHDD1.TabIndex = 16
 Me.PROizV11.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.PROizV11.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
 Me.TableLayoutPanel26.SetColumnSpan(Me.PROizV11, 2)
+Me.PROizV11.Cursor = System.Windows.Forms.Cursors.Default
 Me.PROizV11.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV11.FormattingEnabled = true
 Me.PROizV11.Location = New System.Drawing.Point(504, 30)
@@ -2252,6 +2294,7 @@ Me.PROizV11.TabIndex = 23
 '
 Me.cmbHDD2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.cmbHDD2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+Me.cmbHDD2.Cursor = System.Windows.Forms.Cursors.Default
 Me.cmbHDD2.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbHDD2.FormattingEnabled = true
 Me.cmbHDD2.Location = New System.Drawing.Point(3, 30)
@@ -2263,6 +2306,7 @@ Me.cmbHDD2.TabIndex = 20
 '
 Me.PROizV10.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.PROizV10.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+Me.PROizV10.Cursor = System.Windows.Forms.Cursors.Default
 Me.PROizV10.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV10.FormattingEnabled = true
 Me.PROizV10.Location = New System.Drawing.Point(504, 3)
@@ -2288,6 +2332,7 @@ Me.txtHDDo4.TabIndex = 29
 '
 Me.cmbHDD3.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.cmbHDD3.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+Me.cmbHDD3.Cursor = System.Windows.Forms.Cursors.Default
 Me.cmbHDD3.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbHDD3.FormattingEnabled = true
 Me.cmbHDD3.Location = New System.Drawing.Point(3, 57)
@@ -2299,6 +2344,7 @@ Me.cmbHDD3.TabIndex = 24
 '
 Me.cmbHDD4.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.cmbHDD4.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+Me.cmbHDD4.Cursor = System.Windows.Forms.Cursors.Default
 Me.cmbHDD4.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbHDD4.FormattingEnabled = true
 Me.cmbHDD4.Location = New System.Drawing.Point(3, 84)
@@ -2341,58 +2387,15 @@ Me.txtHDDsN2.Name = "txtHDDsN2"
 Me.txtHDDsN2.Size = New System.Drawing.Size(94, 20)
 Me.txtHDDsN2.TabIndex = 22
 '
-'TabPage2
-'
-Me.TabPage2.Controls.Add(Me.TableLayoutPanel62)
-Me.TabPage2.Location = New System.Drawing.Point(4, 22)
-Me.TabPage2.Name = "TabPage2"
-Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-Me.TabPage2.Size = New System.Drawing.Size(682, 620)
-Me.TabPage2.TabIndex = 1
-Me.TabPage2.Text = "Системный блок"
-Me.TabPage2.UseVisualStyleBackColor = true
-'
-'TableLayoutPanel62
-'
-Me.TableLayoutPanel62.ColumnCount = 1
-Me.TableLayoutPanel62.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100!))
-Me.TableLayoutPanel62.Controls.Add(Me.gbOptical, 0, 0)
-Me.TableLayoutPanel62.Controls.Add(Me.gbSBP, 0, 9)
-Me.TableLayoutPanel62.Controls.Add(Me.gbPCI, 0, 8)
-Me.TableLayoutPanel62.Controls.Add(Me.gbNetwork, 0, 1)
-Me.TableLayoutPanel62.Controls.Add(Me.gbUSB, 0, 7)
-Me.TableLayoutPanel62.Controls.Add(Me.gbFDD, 0, 2)
-Me.TableLayoutPanel62.Controls.Add(Me.gbBP, 0, 6)
-Me.TableLayoutPanel62.Controls.Add(Me.gbCreader, 0, 3)
-Me.TableLayoutPanel62.Controls.Add(Me.gbModem, 0, 4)
-Me.TableLayoutPanel62.Controls.Add(Me.gbCase, 0, 5)
-Me.TableLayoutPanel62.Dock = System.Windows.Forms.DockStyle.Fill
-Me.TableLayoutPanel62.Location = New System.Drawing.Point(3, 3)
-Me.TableLayoutPanel62.Name = "TableLayoutPanel62"
-Me.TableLayoutPanel62.RowCount = 11
-Me.TableLayoutPanel62.RowStyles.Add(New System.Windows.Forms.RowStyle())
-Me.TableLayoutPanel62.RowStyles.Add(New System.Windows.Forms.RowStyle())
-Me.TableLayoutPanel62.RowStyles.Add(New System.Windows.Forms.RowStyle())
-Me.TableLayoutPanel62.RowStyles.Add(New System.Windows.Forms.RowStyle())
-Me.TableLayoutPanel62.RowStyles.Add(New System.Windows.Forms.RowStyle())
-Me.TableLayoutPanel62.RowStyles.Add(New System.Windows.Forms.RowStyle())
-Me.TableLayoutPanel62.RowStyles.Add(New System.Windows.Forms.RowStyle())
-Me.TableLayoutPanel62.RowStyles.Add(New System.Windows.Forms.RowStyle())
-Me.TableLayoutPanel62.RowStyles.Add(New System.Windows.Forms.RowStyle())
-Me.TableLayoutPanel62.RowStyles.Add(New System.Windows.Forms.RowStyle())
-Me.TableLayoutPanel62.RowStyles.Add(New System.Windows.Forms.RowStyle())
-Me.TableLayoutPanel62.Size = New System.Drawing.Size(676, 614)
-Me.TableLayoutPanel62.TabIndex = 10
-'
 'gbOptical
 '
 Me.gbOptical.AutoSize = true
 Me.gbOptical.Controls.Add(Me.TableLayoutPanel30)
 Me.gbOptical.Dock = System.Windows.Forms.DockStyle.Fill
-Me.gbOptical.Location = New System.Drawing.Point(3, 3)
+Me.gbOptical.Location = New System.Drawing.Point(3, 611)
 Me.gbOptical.Name = "gbOptical"
 Me.gbOptical.Size = New System.Drawing.Size(670, 100)
-Me.gbOptical.TabIndex = 0
+Me.gbOptical.TabIndex = 6
 Me.gbOptical.TabStop = false
 Me.gbOptical.Text = "Оптические накопители"
 '
@@ -2547,134 +2550,15 @@ Me.txtOPTICs2.Name = "txtOPTICs2"
 Me.txtOPTICs2.Size = New System.Drawing.Size(94, 20)
 Me.txtOPTICs2.TabIndex = 17
 '
-'gbSBP
-'
-Me.gbSBP.AutoSize = true
-Me.gbSBP.Controls.Add(Me.TableLayoutPanel39)
-Me.gbSBP.Dock = System.Windows.Forms.DockStyle.Fill
-Me.gbSBP.Location = New System.Drawing.Point(3, 552)
-Me.gbSBP.Name = "gbSBP"
-Me.gbSBP.Size = New System.Drawing.Size(670, 46)
-Me.gbSBP.TabIndex = 9
-Me.gbSBP.TabStop = false
-Me.gbSBP.Text = "Модель, серийный номер, производитель системного блока"
-'
-'TableLayoutPanel39
-'
-Me.TableLayoutPanel39.AutoSize = true
-Me.TableLayoutPanel39.ColumnCount = 4
-Me.TableLayoutPanel39.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 67.88793!))
-Me.TableLayoutPanel39.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-Me.TableLayoutPanel39.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-Me.TableLayoutPanel39.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 32.11207!))
-Me.TableLayoutPanel39.Controls.Add(Me.txtModSB, 0, 0)
-Me.TableLayoutPanel39.Controls.Add(Me.txtSNSB, 1, 0)
-Me.TableLayoutPanel39.Controls.Add(Me.PROizV27, 3, 0)
-Me.TableLayoutPanel39.Dock = System.Windows.Forms.DockStyle.Fill
-Me.TableLayoutPanel39.Location = New System.Drawing.Point(3, 16)
-Me.TableLayoutPanel39.Name = "TableLayoutPanel39"
-Me.TableLayoutPanel39.RowCount = 1
-Me.TableLayoutPanel39.RowStyles.Add(New System.Windows.Forms.RowStyle())
-Me.TableLayoutPanel39.Size = New System.Drawing.Size(664, 27)
-Me.TableLayoutPanel39.TabIndex = 3
-'
-'txtModSB
-'
-Me.txtModSB.Dock = System.Windows.Forms.DockStyle.Fill
-Me.txtModSB.Location = New System.Drawing.Point(3, 3)
-Me.txtModSB.Name = "txtModSB"
-Me.txtModSB.Size = New System.Drawing.Size(309, 20)
-Me.txtModSB.TabIndex = 3
-'
-'txtSNSB
-'
-Me.TableLayoutPanel39.SetColumnSpan(Me.txtSNSB, 2)
-Me.txtSNSB.Location = New System.Drawing.Point(318, 3)
-Me.txtSNSB.Name = "txtSNSB"
-Me.txtSNSB.Size = New System.Drawing.Size(194, 20)
-Me.txtSNSB.TabIndex = 4
-'
-'PROizV27
-'
-Me.PROizV27.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
-Me.PROizV27.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-Me.PROizV27.Dock = System.Windows.Forms.DockStyle.Fill
-Me.PROizV27.FormattingEnabled = true
-Me.PROizV27.Location = New System.Drawing.Point(518, 3)
-Me.PROizV27.Name = "PROizV27"
-Me.PROizV27.Size = New System.Drawing.Size(143, 21)
-Me.PROizV27.TabIndex = 5
-'
-'gbPCI
-'
-Me.gbPCI.AutoSize = true
-Me.gbPCI.Controls.Add(Me.TableLayoutPanel38)
-Me.gbPCI.Dock = System.Windows.Forms.DockStyle.Fill
-Me.gbPCI.Location = New System.Drawing.Point(3, 500)
-Me.gbPCI.Name = "gbPCI"
-Me.gbPCI.Size = New System.Drawing.Size(670, 46)
-Me.gbPCI.TabIndex = 8
-Me.gbPCI.TabStop = false
-Me.gbPCI.Text = "PCI Устройства"
-'
-'TableLayoutPanel38
-'
-Me.TableLayoutPanel38.AutoSize = true
-Me.TableLayoutPanel38.ColumnCount = 4
-Me.TableLayoutPanel38.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 67.88793!))
-Me.TableLayoutPanel38.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-Me.TableLayoutPanel38.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-Me.TableLayoutPanel38.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 32.11207!))
-Me.TableLayoutPanel38.Controls.Add(Me.cmbPCI, 0, 0)
-Me.TableLayoutPanel38.Controls.Add(Me.txtSNPCI, 1, 0)
-Me.TableLayoutPanel38.Controls.Add(Me.PROizV42, 3, 0)
-Me.TableLayoutPanel38.Dock = System.Windows.Forms.DockStyle.Fill
-Me.TableLayoutPanel38.Location = New System.Drawing.Point(3, 16)
-Me.TableLayoutPanel38.Name = "TableLayoutPanel38"
-Me.TableLayoutPanel38.RowCount = 1
-Me.TableLayoutPanel38.RowStyles.Add(New System.Windows.Forms.RowStyle())
-Me.TableLayoutPanel38.Size = New System.Drawing.Size(664, 27)
-Me.TableLayoutPanel38.TabIndex = 3
-'
-'cmbPCI
-'
-Me.cmbPCI.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
-Me.cmbPCI.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-Me.cmbPCI.Dock = System.Windows.Forms.DockStyle.Fill
-Me.cmbPCI.FormattingEnabled = true
-Me.cmbPCI.Location = New System.Drawing.Point(3, 3)
-Me.cmbPCI.Name = "cmbPCI"
-Me.cmbPCI.Size = New System.Drawing.Size(309, 21)
-Me.cmbPCI.TabIndex = 3
-'
-'txtSNPCI
-'
-Me.TableLayoutPanel38.SetColumnSpan(Me.txtSNPCI, 2)
-Me.txtSNPCI.Location = New System.Drawing.Point(318, 3)
-Me.txtSNPCI.Name = "txtSNPCI"
-Me.txtSNPCI.Size = New System.Drawing.Size(194, 20)
-Me.txtSNPCI.TabIndex = 4
-'
-'PROizV42
-'
-Me.PROizV42.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
-Me.PROizV42.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-Me.PROizV42.Dock = System.Windows.Forms.DockStyle.Fill
-Me.PROizV42.FormattingEnabled = true
-Me.PROizV42.Location = New System.Drawing.Point(518, 3)
-Me.PROizV42.Name = "PROizV42"
-Me.PROizV42.Size = New System.Drawing.Size(143, 21)
-Me.PROizV42.TabIndex = 5
-'
 'gbNetwork
 '
 Me.gbNetwork.AutoSize = true
 Me.gbNetwork.Controls.Add(Me.TableLayoutPanel31)
 Me.gbNetwork.Dock = System.Windows.Forms.DockStyle.Fill
-Me.gbNetwork.Location = New System.Drawing.Point(3, 109)
+Me.gbNetwork.Location = New System.Drawing.Point(3, 717)
 Me.gbNetwork.Name = "gbNetwork"
 Me.gbNetwork.Size = New System.Drawing.Size(670, 73)
-Me.gbNetwork.TabIndex = 1
+Me.gbNetwork.TabIndex = 7
 Me.gbNetwork.TabStop = false
 Me.gbNetwork.Text = "Сетевые карты"
 '
@@ -2787,76 +2671,15 @@ Me.txtNETip1.Name = "txtNETip1"
 Me.txtNETip1.Size = New System.Drawing.Size(94, 20)
 Me.txtNETip1.TabIndex = 9
 '
-'gbUSB
-'
-Me.gbUSB.AutoSize = true
-Me.gbUSB.Controls.Add(Me.TableLayoutPanel37)
-Me.gbUSB.Dock = System.Windows.Forms.DockStyle.Fill
-Me.gbUSB.Location = New System.Drawing.Point(3, 448)
-Me.gbUSB.Name = "gbUSB"
-Me.gbUSB.Size = New System.Drawing.Size(670, 46)
-Me.gbUSB.TabIndex = 7
-Me.gbUSB.TabStop = false
-Me.gbUSB.Text = "USB Устройства"
-'
-'TableLayoutPanel37
-'
-Me.TableLayoutPanel37.AutoSize = true
-Me.TableLayoutPanel37.ColumnCount = 4
-Me.TableLayoutPanel37.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 67.67242!))
-Me.TableLayoutPanel37.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-Me.TableLayoutPanel37.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-Me.TableLayoutPanel37.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 32.32759!))
-Me.TableLayoutPanel37.Controls.Add(Me.cmbUSB, 0, 0)
-Me.TableLayoutPanel37.Controls.Add(Me.txtUSBSN, 1, 0)
-Me.TableLayoutPanel37.Controls.Add(Me.PROizV41, 3, 0)
-Me.TableLayoutPanel37.Dock = System.Windows.Forms.DockStyle.Fill
-Me.TableLayoutPanel37.Location = New System.Drawing.Point(3, 16)
-Me.TableLayoutPanel37.Name = "TableLayoutPanel37"
-Me.TableLayoutPanel37.RowCount = 1
-Me.TableLayoutPanel37.RowStyles.Add(New System.Windows.Forms.RowStyle())
-Me.TableLayoutPanel37.Size = New System.Drawing.Size(664, 27)
-Me.TableLayoutPanel37.TabIndex = 3
-'
-'cmbUSB
-'
-Me.cmbUSB.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
-Me.cmbUSB.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-Me.cmbUSB.Dock = System.Windows.Forms.DockStyle.Fill
-Me.cmbUSB.FormattingEnabled = true
-Me.cmbUSB.Location = New System.Drawing.Point(3, 3)
-Me.cmbUSB.Name = "cmbUSB"
-Me.cmbUSB.Size = New System.Drawing.Size(307, 21)
-Me.cmbUSB.TabIndex = 3
-'
-'txtUSBSN
-'
-Me.TableLayoutPanel37.SetColumnSpan(Me.txtUSBSN, 2)
-Me.txtUSBSN.Location = New System.Drawing.Point(316, 3)
-Me.txtUSBSN.Name = "txtUSBSN"
-Me.txtUSBSN.Size = New System.Drawing.Size(194, 20)
-Me.txtUSBSN.TabIndex = 4
-'
-'PROizV41
-'
-Me.PROizV41.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
-Me.PROizV41.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-Me.PROizV41.Dock = System.Windows.Forms.DockStyle.Fill
-Me.PROizV41.FormattingEnabled = true
-Me.PROizV41.Location = New System.Drawing.Point(516, 3)
-Me.PROizV41.Name = "PROizV41"
-Me.PROizV41.Size = New System.Drawing.Size(145, 21)
-Me.PROizV41.TabIndex = 5
-'
 'gbFDD
 '
 Me.gbFDD.AutoSize = true
 Me.gbFDD.Controls.Add(Me.TableLayoutPanel32)
 Me.gbFDD.Dock = System.Windows.Forms.DockStyle.Fill
-Me.gbFDD.Location = New System.Drawing.Point(3, 188)
+Me.gbFDD.Location = New System.Drawing.Point(3, 796)
 Me.gbFDD.Name = "gbFDD"
 Me.gbFDD.Size = New System.Drawing.Size(670, 46)
-Me.gbFDD.TabIndex = 2
+Me.gbFDD.TabIndex = 8
 Me.gbFDD.TabStop = false
 Me.gbFDD.Text = "Дисковод"
 '
@@ -2909,76 +2732,15 @@ Me.txtSN.Name = "txtSN"
 Me.txtSN.Size = New System.Drawing.Size(194, 20)
 Me.txtSN.TabIndex = 5
 '
-'gbBP
-'
-Me.gbBP.AutoSize = true
-Me.gbBP.Controls.Add(Me.TableLayoutPanel36)
-Me.gbBP.Dock = System.Windows.Forms.DockStyle.Fill
-Me.gbBP.Location = New System.Drawing.Point(3, 396)
-Me.gbBP.Name = "gbBP"
-Me.gbBP.Size = New System.Drawing.Size(670, 46)
-Me.gbBP.TabIndex = 6
-Me.gbBP.TabStop = false
-Me.gbBP.Text = "Блок питания"
-'
-'TableLayoutPanel36
-'
-Me.TableLayoutPanel36.AutoSize = true
-Me.TableLayoutPanel36.ColumnCount = 4
-Me.TableLayoutPanel36.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 67.45689!))
-Me.TableLayoutPanel36.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-Me.TableLayoutPanel36.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-Me.TableLayoutPanel36.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 32.5431!))
-Me.TableLayoutPanel36.Controls.Add(Me.cmbBP, 0, 0)
-Me.TableLayoutPanel36.Controls.Add(Me.txtBP1, 1, 0)
-Me.TableLayoutPanel36.Controls.Add(Me.PROizV26, 3, 0)
-Me.TableLayoutPanel36.Dock = System.Windows.Forms.DockStyle.Fill
-Me.TableLayoutPanel36.Location = New System.Drawing.Point(3, 16)
-Me.TableLayoutPanel36.Name = "TableLayoutPanel36"
-Me.TableLayoutPanel36.RowCount = 1
-Me.TableLayoutPanel36.RowStyles.Add(New System.Windows.Forms.RowStyle())
-Me.TableLayoutPanel36.Size = New System.Drawing.Size(664, 27)
-Me.TableLayoutPanel36.TabIndex = 3
-'
-'cmbBP
-'
-Me.cmbBP.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
-Me.cmbBP.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-Me.cmbBP.Dock = System.Windows.Forms.DockStyle.Fill
-Me.cmbBP.FormattingEnabled = true
-Me.cmbBP.Location = New System.Drawing.Point(3, 3)
-Me.cmbBP.Name = "cmbBP"
-Me.cmbBP.Size = New System.Drawing.Size(307, 21)
-Me.cmbBP.TabIndex = 4
-'
-'txtBP1
-'
-Me.TableLayoutPanel36.SetColumnSpan(Me.txtBP1, 2)
-Me.txtBP1.Location = New System.Drawing.Point(316, 3)
-Me.txtBP1.Name = "txtBP1"
-Me.txtBP1.Size = New System.Drawing.Size(194, 20)
-Me.txtBP1.TabIndex = 5
-'
-'PROizV26
-'
-Me.PROizV26.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
-Me.PROizV26.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-Me.PROizV26.Dock = System.Windows.Forms.DockStyle.Fill
-Me.PROizV26.FormattingEnabled = true
-Me.PROizV26.Location = New System.Drawing.Point(516, 3)
-Me.PROizV26.Name = "PROizV26"
-Me.PROizV26.Size = New System.Drawing.Size(145, 21)
-Me.PROizV26.TabIndex = 6
-'
 'gbCreader
 '
 Me.gbCreader.AutoSize = true
 Me.gbCreader.Controls.Add(Me.TableLayoutPanel33)
 Me.gbCreader.Dock = System.Windows.Forms.DockStyle.Fill
-Me.gbCreader.Location = New System.Drawing.Point(3, 240)
+Me.gbCreader.Location = New System.Drawing.Point(3, 848)
 Me.gbCreader.Name = "gbCreader"
 Me.gbCreader.Size = New System.Drawing.Size(670, 46)
-Me.gbCreader.TabIndex = 3
+Me.gbCreader.TabIndex = 9
 Me.gbCreader.TabStop = false
 Me.gbCreader.Text = "КардРидер"
 '
@@ -3036,10 +2798,10 @@ Me.txtCreader1.TabIndex = 5
 Me.gbModem.AutoSize = true
 Me.gbModem.Controls.Add(Me.TableLayoutPanel34)
 Me.gbModem.Dock = System.Windows.Forms.DockStyle.Fill
-Me.gbModem.Location = New System.Drawing.Point(3, 292)
+Me.gbModem.Location = New System.Drawing.Point(3, 900)
 Me.gbModem.Name = "gbModem"
 Me.gbModem.Size = New System.Drawing.Size(670, 46)
-Me.gbModem.TabIndex = 4
+Me.gbModem.TabIndex = 10
 Me.gbModem.TabStop = false
 Me.gbModem.Text = "Модем"
 '
@@ -3097,10 +2859,10 @@ Me.txtModemSN.TabIndex = 5
 Me.gbCase.AutoSize = true
 Me.gbCase.Controls.Add(Me.TableLayoutPanel35)
 Me.gbCase.Dock = System.Windows.Forms.DockStyle.Fill
-Me.gbCase.Location = New System.Drawing.Point(3, 344)
+Me.gbCase.Location = New System.Drawing.Point(3, 952)
 Me.gbCase.Name = "gbCase"
 Me.gbCase.Size = New System.Drawing.Size(670, 46)
-Me.gbCase.TabIndex = 5
+Me.gbCase.TabIndex = 11
 Me.gbCase.TabStop = false
 Me.gbCase.Text = "Корпус"
 '
@@ -3152,6 +2914,247 @@ Me.PROizV25.Location = New System.Drawing.Point(516, 3)
 Me.PROizV25.Name = "PROizV25"
 Me.PROizV25.Size = New System.Drawing.Size(145, 21)
 Me.PROizV25.TabIndex = 6
+'
+'gbBP
+'
+Me.gbBP.AutoSize = true
+Me.gbBP.Controls.Add(Me.TableLayoutPanel36)
+Me.gbBP.Dock = System.Windows.Forms.DockStyle.Fill
+Me.gbBP.Location = New System.Drawing.Point(3, 1004)
+Me.gbBP.Name = "gbBP"
+Me.gbBP.Size = New System.Drawing.Size(670, 46)
+Me.gbBP.TabIndex = 12
+Me.gbBP.TabStop = false
+Me.gbBP.Text = "Блок питания"
+'
+'TableLayoutPanel36
+'
+Me.TableLayoutPanel36.AutoSize = true
+Me.TableLayoutPanel36.ColumnCount = 4
+Me.TableLayoutPanel36.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 67.45689!))
+Me.TableLayoutPanel36.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+Me.TableLayoutPanel36.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+Me.TableLayoutPanel36.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 32.5431!))
+Me.TableLayoutPanel36.Controls.Add(Me.cmbBP, 0, 0)
+Me.TableLayoutPanel36.Controls.Add(Me.txtBP1, 1, 0)
+Me.TableLayoutPanel36.Controls.Add(Me.PROizV26, 3, 0)
+Me.TableLayoutPanel36.Dock = System.Windows.Forms.DockStyle.Fill
+Me.TableLayoutPanel36.Location = New System.Drawing.Point(3, 16)
+Me.TableLayoutPanel36.Name = "TableLayoutPanel36"
+Me.TableLayoutPanel36.RowCount = 1
+Me.TableLayoutPanel36.RowStyles.Add(New System.Windows.Forms.RowStyle())
+Me.TableLayoutPanel36.Size = New System.Drawing.Size(664, 27)
+Me.TableLayoutPanel36.TabIndex = 3
+'
+'cmbBP
+'
+Me.cmbBP.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
+Me.cmbBP.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+Me.cmbBP.Dock = System.Windows.Forms.DockStyle.Fill
+Me.cmbBP.FormattingEnabled = true
+Me.cmbBP.Location = New System.Drawing.Point(3, 3)
+Me.cmbBP.Name = "cmbBP"
+Me.cmbBP.Size = New System.Drawing.Size(307, 21)
+Me.cmbBP.TabIndex = 4
+'
+'txtBP1
+'
+Me.TableLayoutPanel36.SetColumnSpan(Me.txtBP1, 2)
+Me.txtBP1.Location = New System.Drawing.Point(316, 3)
+Me.txtBP1.Name = "txtBP1"
+Me.txtBP1.Size = New System.Drawing.Size(194, 20)
+Me.txtBP1.TabIndex = 5
+'
+'PROizV26
+'
+Me.PROizV26.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
+Me.PROizV26.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+Me.PROizV26.Dock = System.Windows.Forms.DockStyle.Fill
+Me.PROizV26.FormattingEnabled = true
+Me.PROizV26.Location = New System.Drawing.Point(516, 3)
+Me.PROizV26.Name = "PROizV26"
+Me.PROizV26.Size = New System.Drawing.Size(145, 21)
+Me.PROizV26.TabIndex = 6
+'
+'gbUSB
+'
+Me.gbUSB.AutoSize = true
+Me.gbUSB.Controls.Add(Me.TableLayoutPanel37)
+Me.gbUSB.Dock = System.Windows.Forms.DockStyle.Fill
+Me.gbUSB.Location = New System.Drawing.Point(3, 1056)
+Me.gbUSB.Name = "gbUSB"
+Me.gbUSB.Size = New System.Drawing.Size(670, 46)
+Me.gbUSB.TabIndex = 13
+Me.gbUSB.TabStop = false
+Me.gbUSB.Text = "USB Устройства"
+'
+'TableLayoutPanel37
+'
+Me.TableLayoutPanel37.AutoSize = true
+Me.TableLayoutPanel37.ColumnCount = 4
+Me.TableLayoutPanel37.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 67.67242!))
+Me.TableLayoutPanel37.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+Me.TableLayoutPanel37.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+Me.TableLayoutPanel37.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 32.32759!))
+Me.TableLayoutPanel37.Controls.Add(Me.cmbUSB, 0, 0)
+Me.TableLayoutPanel37.Controls.Add(Me.txtUSBSN, 1, 0)
+Me.TableLayoutPanel37.Controls.Add(Me.PROizV41, 3, 0)
+Me.TableLayoutPanel37.Dock = System.Windows.Forms.DockStyle.Fill
+Me.TableLayoutPanel37.Location = New System.Drawing.Point(3, 16)
+Me.TableLayoutPanel37.Name = "TableLayoutPanel37"
+Me.TableLayoutPanel37.RowCount = 1
+Me.TableLayoutPanel37.RowStyles.Add(New System.Windows.Forms.RowStyle())
+Me.TableLayoutPanel37.Size = New System.Drawing.Size(664, 27)
+Me.TableLayoutPanel37.TabIndex = 3
+'
+'cmbUSB
+'
+Me.cmbUSB.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
+Me.cmbUSB.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+Me.cmbUSB.Dock = System.Windows.Forms.DockStyle.Fill
+Me.cmbUSB.FormattingEnabled = true
+Me.cmbUSB.Location = New System.Drawing.Point(3, 3)
+Me.cmbUSB.Name = "cmbUSB"
+Me.cmbUSB.Size = New System.Drawing.Size(307, 21)
+Me.cmbUSB.TabIndex = 3
+'
+'txtUSBSN
+'
+Me.TableLayoutPanel37.SetColumnSpan(Me.txtUSBSN, 2)
+Me.txtUSBSN.Location = New System.Drawing.Point(316, 3)
+Me.txtUSBSN.Name = "txtUSBSN"
+Me.txtUSBSN.Size = New System.Drawing.Size(194, 20)
+Me.txtUSBSN.TabIndex = 4
+'
+'PROizV41
+'
+Me.PROizV41.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
+Me.PROizV41.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+Me.PROizV41.Dock = System.Windows.Forms.DockStyle.Fill
+Me.PROizV41.FormattingEnabled = true
+Me.PROizV41.Location = New System.Drawing.Point(516, 3)
+Me.PROizV41.Name = "PROizV41"
+Me.PROizV41.Size = New System.Drawing.Size(145, 21)
+Me.PROizV41.TabIndex = 5
+'
+'gbPCI
+'
+Me.gbPCI.AutoSize = true
+Me.gbPCI.Controls.Add(Me.TableLayoutPanel38)
+Me.gbPCI.Dock = System.Windows.Forms.DockStyle.Fill
+Me.gbPCI.Location = New System.Drawing.Point(3, 1108)
+Me.gbPCI.Name = "gbPCI"
+Me.gbPCI.Size = New System.Drawing.Size(670, 46)
+Me.gbPCI.TabIndex = 14
+Me.gbPCI.TabStop = false
+Me.gbPCI.Text = "PCI Устройства"
+'
+'TableLayoutPanel38
+'
+Me.TableLayoutPanel38.AutoSize = true
+Me.TableLayoutPanel38.ColumnCount = 4
+Me.TableLayoutPanel38.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 67.88793!))
+Me.TableLayoutPanel38.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+Me.TableLayoutPanel38.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+Me.TableLayoutPanel38.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 32.11207!))
+Me.TableLayoutPanel38.Controls.Add(Me.cmbPCI, 0, 0)
+Me.TableLayoutPanel38.Controls.Add(Me.txtSNPCI, 1, 0)
+Me.TableLayoutPanel38.Controls.Add(Me.PROizV42, 3, 0)
+Me.TableLayoutPanel38.Dock = System.Windows.Forms.DockStyle.Fill
+Me.TableLayoutPanel38.Location = New System.Drawing.Point(3, 16)
+Me.TableLayoutPanel38.Name = "TableLayoutPanel38"
+Me.TableLayoutPanel38.RowCount = 1
+Me.TableLayoutPanel38.RowStyles.Add(New System.Windows.Forms.RowStyle())
+Me.TableLayoutPanel38.Size = New System.Drawing.Size(664, 27)
+Me.TableLayoutPanel38.TabIndex = 3
+'
+'cmbPCI
+'
+Me.cmbPCI.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
+Me.cmbPCI.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+Me.cmbPCI.Dock = System.Windows.Forms.DockStyle.Fill
+Me.cmbPCI.FormattingEnabled = true
+Me.cmbPCI.Location = New System.Drawing.Point(3, 3)
+Me.cmbPCI.Name = "cmbPCI"
+Me.cmbPCI.Size = New System.Drawing.Size(309, 21)
+Me.cmbPCI.TabIndex = 3
+'
+'txtSNPCI
+'
+Me.TableLayoutPanel38.SetColumnSpan(Me.txtSNPCI, 2)
+Me.txtSNPCI.Location = New System.Drawing.Point(318, 3)
+Me.txtSNPCI.Name = "txtSNPCI"
+Me.txtSNPCI.Size = New System.Drawing.Size(194, 20)
+Me.txtSNPCI.TabIndex = 4
+'
+'PROizV42
+'
+Me.PROizV42.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
+Me.PROizV42.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+Me.PROizV42.Dock = System.Windows.Forms.DockStyle.Fill
+Me.PROizV42.FormattingEnabled = true
+Me.PROizV42.Location = New System.Drawing.Point(518, 3)
+Me.PROizV42.Name = "PROizV42"
+Me.PROizV42.Size = New System.Drawing.Size(143, 21)
+Me.PROizV42.TabIndex = 5
+'
+'gbSBP
+'
+Me.gbSBP.AutoSize = true
+Me.gbSBP.Controls.Add(Me.TableLayoutPanel39)
+Me.gbSBP.Dock = System.Windows.Forms.DockStyle.Fill
+Me.gbSBP.Location = New System.Drawing.Point(3, 1160)
+Me.gbSBP.Name = "gbSBP"
+Me.gbSBP.Size = New System.Drawing.Size(670, 46)
+Me.gbSBP.TabIndex = 15
+Me.gbSBP.TabStop = false
+Me.gbSBP.Text = "Модель, серийный номер, производитель системного блока"
+'
+'TableLayoutPanel39
+'
+Me.TableLayoutPanel39.AutoSize = true
+Me.TableLayoutPanel39.ColumnCount = 4
+Me.TableLayoutPanel39.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 67.88793!))
+Me.TableLayoutPanel39.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+Me.TableLayoutPanel39.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+Me.TableLayoutPanel39.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 32.11207!))
+Me.TableLayoutPanel39.Controls.Add(Me.txtModSB, 0, 0)
+Me.TableLayoutPanel39.Controls.Add(Me.txtSNSB, 1, 0)
+Me.TableLayoutPanel39.Controls.Add(Me.PROizV27, 3, 0)
+Me.TableLayoutPanel39.Dock = System.Windows.Forms.DockStyle.Fill
+Me.TableLayoutPanel39.Location = New System.Drawing.Point(3, 16)
+Me.TableLayoutPanel39.Name = "TableLayoutPanel39"
+Me.TableLayoutPanel39.RowCount = 1
+Me.TableLayoutPanel39.RowStyles.Add(New System.Windows.Forms.RowStyle())
+Me.TableLayoutPanel39.Size = New System.Drawing.Size(664, 27)
+Me.TableLayoutPanel39.TabIndex = 3
+'
+'txtModSB
+'
+Me.txtModSB.Dock = System.Windows.Forms.DockStyle.Fill
+Me.txtModSB.Location = New System.Drawing.Point(3, 3)
+Me.txtModSB.Name = "txtModSB"
+Me.txtModSB.Size = New System.Drawing.Size(309, 20)
+Me.txtModSB.TabIndex = 3
+'
+'txtSNSB
+'
+Me.TableLayoutPanel39.SetColumnSpan(Me.txtSNSB, 2)
+Me.txtSNSB.Location = New System.Drawing.Point(318, 3)
+Me.txtSNSB.Name = "txtSNSB"
+Me.txtSNSB.Size = New System.Drawing.Size(194, 20)
+Me.txtSNSB.TabIndex = 4
+'
+'PROizV27
+'
+Me.PROizV27.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
+Me.PROizV27.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+Me.PROizV27.Dock = System.Windows.Forms.DockStyle.Fill
+Me.PROizV27.FormattingEnabled = true
+Me.PROizV27.Location = New System.Drawing.Point(518, 3)
+Me.PROizV27.Name = "PROizV27"
+Me.PROizV27.Size = New System.Drawing.Size(143, 21)
+Me.PROizV27.TabIndex = 5
 '
 'TabPage3
 '
@@ -8520,37 +8523,18 @@ Me.gbHDD.ResumeLayout(false)
 Me.gbHDD.PerformLayout
 Me.TableLayoutPanel26.ResumeLayout(false)
 Me.TableLayoutPanel26.PerformLayout
-Me.TabPage2.ResumeLayout(false)
-Me.TableLayoutPanel62.ResumeLayout(false)
-Me.TableLayoutPanel62.PerformLayout
 Me.gbOptical.ResumeLayout(false)
 Me.gbOptical.PerformLayout
 Me.TableLayoutPanel30.ResumeLayout(false)
 Me.TableLayoutPanel30.PerformLayout
-Me.gbSBP.ResumeLayout(false)
-Me.gbSBP.PerformLayout
-Me.TableLayoutPanel39.ResumeLayout(false)
-Me.TableLayoutPanel39.PerformLayout
-Me.gbPCI.ResumeLayout(false)
-Me.gbPCI.PerformLayout
-Me.TableLayoutPanel38.ResumeLayout(false)
-Me.TableLayoutPanel38.PerformLayout
 Me.gbNetwork.ResumeLayout(false)
 Me.gbNetwork.PerformLayout
 Me.TableLayoutPanel31.ResumeLayout(false)
 Me.TableLayoutPanel31.PerformLayout
-Me.gbUSB.ResumeLayout(false)
-Me.gbUSB.PerformLayout
-Me.TableLayoutPanel37.ResumeLayout(false)
-Me.TableLayoutPanel37.PerformLayout
 Me.gbFDD.ResumeLayout(false)
 Me.gbFDD.PerformLayout
 Me.TableLayoutPanel32.ResumeLayout(false)
 Me.TableLayoutPanel32.PerformLayout
-Me.gbBP.ResumeLayout(false)
-Me.gbBP.PerformLayout
-Me.TableLayoutPanel36.ResumeLayout(false)
-Me.TableLayoutPanel36.PerformLayout
 Me.gbCreader.ResumeLayout(false)
 Me.gbCreader.PerformLayout
 Me.TableLayoutPanel33.ResumeLayout(false)
@@ -8563,6 +8547,22 @@ Me.gbCase.ResumeLayout(false)
 Me.gbCase.PerformLayout
 Me.TableLayoutPanel35.ResumeLayout(false)
 Me.TableLayoutPanel35.PerformLayout
+Me.gbBP.ResumeLayout(false)
+Me.gbBP.PerformLayout
+Me.TableLayoutPanel36.ResumeLayout(false)
+Me.TableLayoutPanel36.PerformLayout
+Me.gbUSB.ResumeLayout(false)
+Me.gbUSB.PerformLayout
+Me.TableLayoutPanel37.ResumeLayout(false)
+Me.TableLayoutPanel37.PerformLayout
+Me.gbPCI.ResumeLayout(false)
+Me.gbPCI.PerformLayout
+Me.TableLayoutPanel38.ResumeLayout(false)
+Me.TableLayoutPanel38.PerformLayout
+Me.gbSBP.ResumeLayout(false)
+Me.gbSBP.PerformLayout
+Me.TableLayoutPanel39.ResumeLayout(false)
+Me.TableLayoutPanel39.PerformLayout
 Me.TabPage3.ResumeLayout(false)
 Me.TableLayoutPanel61.ResumeLayout(false)
 Me.TableLayoutPanel61.PerformLayout
@@ -8755,15 +8755,6 @@ End Sub
     Friend WithEvents gbRAM As System.Windows.Forms.GroupBox
     Friend WithEvents gbMB As System.Windows.Forms.GroupBox
     Friend WithEvents gbcpu As System.Windows.Forms.GroupBox
-    Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
-    Friend WithEvents gbBP As System.Windows.Forms.GroupBox
-    Friend WithEvents gbSBP As System.Windows.Forms.GroupBox
-    Friend WithEvents gbCase As System.Windows.Forms.GroupBox
-    Friend WithEvents gbModem As System.Windows.Forms.GroupBox
-    Friend WithEvents gbCreader As System.Windows.Forms.GroupBox
-    Friend WithEvents gbFDD As System.Windows.Forms.GroupBox
-    Friend WithEvents gbNetwork As System.Windows.Forms.GroupBox
-    Friend WithEvents gbOptical As System.Windows.Forms.GroupBox
     Friend WithEvents TabPage3 As System.Windows.Forms.TabPage
     Friend WithEvents gbPrinters As System.Windows.Forms.GroupBox
     Friend WithEvents gbFilter As System.Windows.Forms.GroupBox
@@ -8846,8 +8837,6 @@ End Sub
     Friend WithEvents btnOfficeSend As System.Windows.Forms.Button
     Friend WithEvents SoftInstallToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ПаспортКомпьютераToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents gbPCI As System.Windows.Forms.GroupBox
-    Friend WithEvents gbUSB As System.Windows.Forms.GroupBox
     Friend WithEvents gbIBP As System.Windows.Forms.GroupBox
     Friend WithEvents ОтделитьПринтерыИМониторыToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents TableLayoutPanel1 As System.Windows.Forms.TableLayoutPanel
@@ -9112,60 +9101,6 @@ End Sub
     Friend WithEvents txtChip As System.Windows.Forms.TextBox
     Friend WithEvents PROizV5 As System.Windows.Forms.ComboBox
     Friend WithEvents cmbMB As System.Windows.Forms.ComboBox
-    Friend WithEvents TableLayoutPanel30 As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents PROizV19 As System.Windows.Forms.ComboBox
-    Friend WithEvents txtOPTICsn3 As System.Windows.Forms.TextBox
-    Friend WithEvents PROizV18 As System.Windows.Forms.ComboBox
-    Friend WithEvents cmbOPTIC1 As System.Windows.Forms.ComboBox
-    Friend WithEvents PROizV17 As System.Windows.Forms.ComboBox
-    Friend WithEvents cmbOPTIC2 As System.Windows.Forms.ComboBox
-    Friend WithEvents txtOPTICsn2 As System.Windows.Forms.TextBox
-    Friend WithEvents txtOPTICs3 As System.Windows.Forms.TextBox
-    Friend WithEvents cmbOPTIC3 As System.Windows.Forms.ComboBox
-    Friend WithEvents txtOPTICsn1 As System.Windows.Forms.TextBox
-    Friend WithEvents txtOPTICs1 As System.Windows.Forms.TextBox
-    Friend WithEvents txtOPTICs2 As System.Windows.Forms.TextBox
-    Friend WithEvents TableLayoutPanel31 As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents PROizV21 As System.Windows.Forms.ComboBox
-    Friend WithEvents txtNETmac2 As System.Windows.Forms.TextBox
-    Friend WithEvents PROizV20 As System.Windows.Forms.ComboBox
-    Friend WithEvents cmbNET1 As System.Windows.Forms.ComboBox
-    Friend WithEvents cmbNET2 As System.Windows.Forms.ComboBox
-    Friend WithEvents txtNETmac1 As System.Windows.Forms.TextBox
-    Friend WithEvents txtNETip2 As System.Windows.Forms.TextBox
-    Friend WithEvents txtNETip1 As System.Windows.Forms.TextBox
-    Friend WithEvents TableLayoutPanel32 As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents PROizV22 As System.Windows.Forms.ComboBox
-    Friend WithEvents cmbFDD As System.Windows.Forms.ComboBox
-    Friend WithEvents txtSN As System.Windows.Forms.TextBox
-    Friend WithEvents TableLayoutPanel33 As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents PROizV23 As System.Windows.Forms.ComboBox
-    Friend WithEvents cmbCreader As System.Windows.Forms.ComboBox
-    Friend WithEvents txtCreader1 As System.Windows.Forms.TextBox
-    Friend WithEvents TableLayoutPanel34 As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents PROizV24 As System.Windows.Forms.ComboBox
-    Friend WithEvents cmbModem As System.Windows.Forms.ComboBox
-    Friend WithEvents txtModemSN As System.Windows.Forms.TextBox
-    Friend WithEvents TableLayoutPanel35 As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents cmbCase As System.Windows.Forms.ComboBox
-    Friend WithEvents txtCase1 As System.Windows.Forms.TextBox
-    Friend WithEvents PROizV25 As System.Windows.Forms.ComboBox
-    Friend WithEvents TableLayoutPanel36 As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents cmbBP As System.Windows.Forms.ComboBox
-    Friend WithEvents txtBP1 As System.Windows.Forms.TextBox
-    Friend WithEvents PROizV26 As System.Windows.Forms.ComboBox
-    Friend WithEvents TableLayoutPanel37 As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents cmbUSB As System.Windows.Forms.ComboBox
-    Friend WithEvents txtUSBSN As System.Windows.Forms.TextBox
-    Friend WithEvents PROizV41 As System.Windows.Forms.ComboBox
-    Friend WithEvents TableLayoutPanel38 As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents cmbPCI As System.Windows.Forms.ComboBox
-    Friend WithEvents txtSNPCI As System.Windows.Forms.TextBox
-    Friend WithEvents PROizV42 As System.Windows.Forms.ComboBox
-    Friend WithEvents TableLayoutPanel39 As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents txtModSB As System.Windows.Forms.TextBox
-    Friend WithEvents txtSNSB As System.Windows.Forms.TextBox
-    Friend WithEvents PROizV27 As System.Windows.Forms.ComboBox
     Friend WithEvents TableLayoutPanel40 As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents PROizV29 As System.Windows.Forms.ComboBox
     Friend WithEvents txtMon2SN As System.Windows.Forms.TextBox
@@ -9333,7 +9268,6 @@ End Sub
     Friend WithEvents rbKompl As System.Windows.Forms.RadioButton
     Friend WithEvents rbSist As System.Windows.Forms.RadioButton
     Friend WithEvents TableLayoutPanel61 As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents TableLayoutPanel62 As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents TableLayoutPanel63 As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents TableLayoutPanel64 As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents TableLayoutPanel65 As System.Windows.Forms.TableLayoutPanel
@@ -9383,8 +9317,6 @@ End Sub
     Friend WithEvents bSVGAPlus As System.Windows.Forms.Button
     Friend WithEvents bRamPlus As System.Windows.Forms.Button
     Friend WithEvents bHddPlus As System.Windows.Forms.Button
-    Friend WithEvents bOpticalPlus As System.Windows.Forms.Button
-    Friend WithEvents bNETPlus As System.Windows.Forms.Button
     Friend WithEvents bMonitorPlus As System.Windows.Forms.Button
     Friend WithEvents bPrinterPlus As System.Windows.Forms.Button
     Friend WithEvents chkVisibleSTR As System.Windows.Forms.CheckBox
@@ -9407,5 +9339,71 @@ End Sub
     Friend WithEvents ТО5ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ТО6ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents lstGroups As System.Windows.Forms.TreeView
+    Friend WithEvents gbOptical As System.Windows.Forms.GroupBox
+    Friend WithEvents TableLayoutPanel30 As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents bOpticalPlus As System.Windows.Forms.Button
+    Friend WithEvents PROizV19 As System.Windows.Forms.ComboBox
+    Friend WithEvents txtOPTICsn3 As System.Windows.Forms.TextBox
+    Friend WithEvents PROizV18 As System.Windows.Forms.ComboBox
+    Friend WithEvents cmbOPTIC1 As System.Windows.Forms.ComboBox
+    Friend WithEvents PROizV17 As System.Windows.Forms.ComboBox
+    Friend WithEvents cmbOPTIC2 As System.Windows.Forms.ComboBox
+    Friend WithEvents txtOPTICsn2 As System.Windows.Forms.TextBox
+    Friend WithEvents txtOPTICs3 As System.Windows.Forms.TextBox
+    Friend WithEvents cmbOPTIC3 As System.Windows.Forms.ComboBox
+    Friend WithEvents txtOPTICsn1 As System.Windows.Forms.TextBox
+    Friend WithEvents txtOPTICs1 As System.Windows.Forms.TextBox
+    Friend WithEvents txtOPTICs2 As System.Windows.Forms.TextBox
+    Friend WithEvents gbNetwork As System.Windows.Forms.GroupBox
+    Friend WithEvents TableLayoutPanel31 As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents bNETPlus As System.Windows.Forms.Button
+    Friend WithEvents PROizV21 As System.Windows.Forms.ComboBox
+    Friend WithEvents txtNETmac2 As System.Windows.Forms.TextBox
+    Friend WithEvents PROizV20 As System.Windows.Forms.ComboBox
+    Friend WithEvents cmbNET1 As System.Windows.Forms.ComboBox
+    Friend WithEvents cmbNET2 As System.Windows.Forms.ComboBox
+    Friend WithEvents txtNETmac1 As System.Windows.Forms.TextBox
+    Friend WithEvents txtNETip2 As System.Windows.Forms.TextBox
+    Friend WithEvents txtNETip1 As System.Windows.Forms.TextBox
+    Friend WithEvents gbFDD As System.Windows.Forms.GroupBox
+    Friend WithEvents TableLayoutPanel32 As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents PROizV22 As System.Windows.Forms.ComboBox
+    Friend WithEvents cmbFDD As System.Windows.Forms.ComboBox
+    Friend WithEvents txtSN As System.Windows.Forms.TextBox
+    Friend WithEvents gbCreader As System.Windows.Forms.GroupBox
+    Friend WithEvents TableLayoutPanel33 As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents PROizV23 As System.Windows.Forms.ComboBox
+    Friend WithEvents cmbCreader As System.Windows.Forms.ComboBox
+    Friend WithEvents txtCreader1 As System.Windows.Forms.TextBox
+    Friend WithEvents gbModem As System.Windows.Forms.GroupBox
+    Friend WithEvents TableLayoutPanel34 As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents PROizV24 As System.Windows.Forms.ComboBox
+    Friend WithEvents cmbModem As System.Windows.Forms.ComboBox
+    Friend WithEvents txtModemSN As System.Windows.Forms.TextBox
+    Friend WithEvents gbCase As System.Windows.Forms.GroupBox
+    Friend WithEvents TableLayoutPanel35 As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents cmbCase As System.Windows.Forms.ComboBox
+    Friend WithEvents txtCase1 As System.Windows.Forms.TextBox
+    Friend WithEvents PROizV25 As System.Windows.Forms.ComboBox
+    Friend WithEvents gbBP As System.Windows.Forms.GroupBox
+    Friend WithEvents TableLayoutPanel36 As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents cmbBP As System.Windows.Forms.ComboBox
+    Friend WithEvents txtBP1 As System.Windows.Forms.TextBox
+    Friend WithEvents PROizV26 As System.Windows.Forms.ComboBox
+    Friend WithEvents gbUSB As System.Windows.Forms.GroupBox
+    Friend WithEvents TableLayoutPanel37 As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents cmbUSB As System.Windows.Forms.ComboBox
+    Friend WithEvents txtUSBSN As System.Windows.Forms.TextBox
+    Friend WithEvents PROizV41 As System.Windows.Forms.ComboBox
+    Friend WithEvents gbPCI As System.Windows.Forms.GroupBox
+    Friend WithEvents TableLayoutPanel38 As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents cmbPCI As System.Windows.Forms.ComboBox
+    Friend WithEvents txtSNPCI As System.Windows.Forms.TextBox
+    Friend WithEvents PROizV42 As System.Windows.Forms.ComboBox
+    Friend WithEvents gbSBP As System.Windows.Forms.GroupBox
+    Friend WithEvents TableLayoutPanel39 As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents txtModSB As System.Windows.Forms.TextBox
+    Friend WithEvents txtSNSB As System.Windows.Forms.TextBox
+    Friend WithEvents PROizV27 As System.Windows.Forms.ComboBox
 
 End Class

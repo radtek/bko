@@ -345,6 +345,27 @@ Public Class frmComputers
 
         Application.DoEvents()
 
+        Dim ToolTip1 As New ToolTip
+        ToolTip1.SetToolTip(cmbCPU1, "Наименование первого процессора.")
+        ToolTip1.SetToolTip(cmbCPU2, "Наименование второго процессора.")
+        ToolTip1.SetToolTip(cmbCPU3, "Наименование третьего процессора.")
+        ToolTip1.SetToolTip(cmbCPU4, "Наименование четвертого процессора.")
+
+        ' txtMHZ1
+        ToolTip1.SetToolTip(txtMHZ1, "Частота первого процессора.")
+        ToolTip1.SetToolTip(txtMHZ2, "Частота второго процессора.")
+        ToolTip1.SetToolTip(txtMHZ3, "Частота третьего процессора.")
+        ToolTip1.SetToolTip(txtMHZ4, "Частота четвертого процессора.")
+        'txtSoc1
+        ToolTip1.SetToolTip(txtSoc1, "Сокет первого процессора.")
+        ToolTip1.SetToolTip(txtSoc2, "Сокет второго процессора.")
+        ToolTip1.SetToolTip(txtSoc3, "Сокет третьего процессора.")
+        ToolTip1.SetToolTip(txtSoc4, "Сокет четвертого процессора.")
+        'PROizV1
+        ToolTip1.SetToolTip(PROizV1, "Производитель первого процессора.")
+        ToolTip1.SetToolTip(PROizV2, "Производитель второго процессора.")
+        ToolTip1.SetToolTip(PROizV3, "Производитель третьего процессора.")
+        ToolTip1.SetToolTip(PROizV4, "Производитель четвертого процессора.")
 
 
         'Меняем форму
@@ -3204,7 +3225,7 @@ err_:
         frmGarCPL.ShowDialog(Me)
     End Sub
 
-    Private Sub gbOptical_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles gbOptical.DoubleClick
+    Private Sub gbOptical_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs)
         If rbSist.Checked = True Then Exit Sub
 
         If Len(gbRAM.Text) = 0 Then
@@ -3601,7 +3622,7 @@ err_:
 
     End Sub
 
-    Private Sub gbNetwork_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles gbNetwork.DoubleClick
+    Private Sub gbNetwork_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs)
         If rbSist.Checked = True Then Exit Sub
 
         If Len(gbNetwork.Text) = 0 Then
@@ -3616,7 +3637,7 @@ err_:
         frmGarCPL.ShowDialog(Me)
     End Sub
 
-    Private Sub gbFDD_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles gbFDD.DoubleClick
+    Private Sub gbFDD_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs)
         If rbSist.Checked = True Then Exit Sub
 
         If Len(gbNetwork.Text) = 0 Then
@@ -3631,7 +3652,7 @@ err_:
         frmGarCPL.ShowDialog(Me)
     End Sub
 
-    Private Sub gbModem_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles gbModem.DoubleClick
+    Private Sub gbModem_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs)
         If rbSist.Checked = True Then Exit Sub
 
         If Len(gbNetwork.Text) = 0 Then
@@ -3706,7 +3727,7 @@ err_:
         frmGarCPL.ShowDialog(Me)
     End Sub
 
-    Private Sub gbUSB_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles gbUSB.DoubleClick
+    Private Sub gbUSB_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs)
         If rbSist.Checked = True Then Exit Sub
 
         If Len(gbNetwork.Text) = 0 Then
@@ -4577,51 +4598,51 @@ err_:
         ExLoadParTree(cmbMB.Text, txtChip, PROizV5, "SPR_MB")
     End Sub
 
-    Private Sub cmbOPTIC1_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbOPTIC1.SelectedIndexChanged
+    Private Sub cmbOPTIC1_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
         ExLoadParTree(cmbOPTIC1.Text, txtOPTICs1, PROizV17, "SPR_OPTICAL")
     End Sub
 
-    Private Sub cmbOPTIC2_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbOPTIC2.SelectedIndexChanged
+    Private Sub cmbOPTIC2_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
         ExLoadParTree(cmbOPTIC2.Text, txtOPTICs2, PROizV18, "SPR_OPTICAL")
     End Sub
 
-    Private Sub cmbOPTIC3_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbOPTIC3.SelectedIndexChanged
+    Private Sub cmbOPTIC3_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
         ExLoadParTree(cmbOPTIC3.Text, txtOPTICs3, PROizV19, "SPR_OPTICAL")
     End Sub
 
-    Private Sub cmbNET1_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbNET1.SelectedIndexChanged
+    Private Sub cmbNET1_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
         ExLoadParTwo(cmbNET1.Text, PROizV20, "SPR_NET")
     End Sub
 
-    Private Sub cmbNET2_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbNET2.SelectedIndexChanged
+    Private Sub cmbNET2_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
         ExLoadParTwo(cmbNET2.Text, PROizV21, "SPR_NET")
     End Sub
 
-    Private Sub cmbFDD_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbFDD.SelectedIndexChanged
+    Private Sub cmbFDD_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
         ExLoadParTwo(cmbFDD.Text, PROizV22, "SPR_FDD")
     End Sub
 
-    Private Sub cmbCreader_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbCreader.SelectedIndexChanged
+    Private Sub cmbCreader_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
         ExLoadParTwo(cmbCreader.Text, PROizV23, "SPR_CREADER")
     End Sub
 
-    Private Sub cmbModem_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbModem.SelectedIndexChanged
+    Private Sub cmbModem_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
         ExLoadParTwo(cmbModem.Text, PROizV24, "SPR_MODEM")
     End Sub
 
-    Private Sub cmbCase_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbCase.SelectedIndexChanged
+    Private Sub cmbCase_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
         ExLoadParTwo(cmbCase.Text, PROizV25, "SPR_CASE")
     End Sub
 
-    Private Sub cmbBP_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbBP.SelectedIndexChanged
+    Private Sub cmbBP_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
         ExLoadParTwo(cmbBP.Text, PROizV26, "SPR_BP")
     End Sub
 
-    Private Sub cmbUSB_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbUSB.SelectedIndexChanged
+    Private Sub cmbUSB_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
         ExLoadParTwo(cmbUSB.Text, PROizV41, "SPR_USB")
     End Sub
 
-    Private Sub cmbPCI_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbPCI.SelectedIndexChanged
+    Private Sub cmbPCI_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
         ExLoadParTwo(cmbPCI.Text, PROizV42, "SPR_PCI")
     End Sub
 
@@ -6041,7 +6062,7 @@ err_:
         End Select
     End Sub
 
-    Private Sub bOpticalPlus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bOpticalPlus.Click
+    Private Sub bOpticalPlus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Select Case sOPTICAL
 
             Case 1
@@ -6065,7 +6086,7 @@ err_:
         End Select
     End Sub
 
-    Private Sub bNETPlus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bNETPlus.Click
+    Private Sub bNETPlus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
 
 
         Select Case sNET

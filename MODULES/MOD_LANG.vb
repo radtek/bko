@@ -609,7 +609,7 @@ Module modLang
         ' frmComputers.lblT_O_T.Text = objIniFile.GetString("frmComputers", "lblT_O_T", "")
         frmComputers.sSTAB1.TabPages("TabPage6").Text = objIniFile.GetString("frmComputers", "sSTAB1.TabPages(6)", "")
         frmComputers.sSTAB1.TabPages("TabPage1").Text = objIniFile.GetString("frmComputers", "sSTAB1.TabPages(1)", "")
-        frmComputers.sSTAB1.TabPages("TabPage2").Text = objIniFile.GetString("frmComputers", "sSTAB1.TabPages(2)", "")
+        'frmComputers.sSTAB1.TabPages("TabPage2").Text = objIniFile.GetString("frmComputers", "sSTAB1.TabPages(2)", "")
         frmComputers.sSTAB1.TabPages("TabPage3").Text = objIniFile.GetString("frmComputers", "sSTAB1.TabPages(3)", "")
         frmComputers.sSTAB1.TabPages("TabPage4").Text = objIniFile.GetString("frmComputers", "sSTAB1.TabPages(4)", "")
         frmComputers.sSTAB1.TabPages("TabPage5").Text = objIniFile.GetString("frmComputers", "sSTAB1.TabPages(5)", "")

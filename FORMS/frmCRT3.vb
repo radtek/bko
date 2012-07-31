@@ -15,6 +15,7 @@
     Private zCC As String
     Private search_ As Boolean
     Private OneStart As Decimal = 0
+    Private index As ArrayList = New ArrayList '!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
     Private Sub RefFilTreePRN()
@@ -1467,7 +1468,7 @@ Error_:
     Private Sub frmCRT3_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
         SendFonts(Me)
-        btnSearch.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\search.png")
+        'btnSearch.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\search.png")
 
 
         Me.Show()
@@ -1567,6 +1568,7 @@ err_:
                 Do While Not .EOF
                     'If .Fields("TipTehn").Value = "Printer" Or .Fields("TipTehn").Value = "KOpir" Or .Fields("TipTehn").Value = "MFU" Then
                     cmbSostUstr.Items.Add(" № " & .Fields("id").Value & " " & .Fields("PRINTER_NAME_1").Value & " (" & .Fields("filial").Value & "/" & .Fields("mesto").Value & ")")
+                    index.Add(.Fields("id").Value) '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                     'Else
                     'End If
                     .MoveNext()
@@ -1649,27 +1651,29 @@ err_:
 
             uname3 = cmbSostUstr.Text
 
-            Dim BASECOMP As ADODB.Recordset
-            BASECOMP = New ADODB.Recordset
-            BASECOMP.Open("SELECT * FROM kompy", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-            With BASECOMP
+            'Dim BASECOMP As ADODB.Recordset
+            'BASECOMP = New ADODB.Recordset '!!!!!!!!!!!!!!!!!!!!!!!!
+            'BASECOMP.Open("SELECT * FROM kompy  where TipTehn='Printer' or TipTehn='KOpir' or TipTehn='MFU'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            'With BASECOMP
 
-                If Len(cmbSostUstr.Text) = 0 Then
-                    uname3 = 0
-                Else
-                    .MoveFirst()
-                    Do While Not .EOF
-                        If uname3 = " № " & .Fields("id").Value & " " & .Fields("PRINTER_NAME_1").Value & " (" & .Fields("filial").Value & "/" & .Fields("mesto").Value & ")" Then
-                            uname3 = .Fields("id").Value
-                        End If
-                        .MoveNext()
-                        'DoEvents
-                    Loop
+            If Len(cmbSostUstr.Text) = 0 Then
+                uname3 = 0
+            Else
 
-                End If
-            End With
-            BASECOMP.Close()
-            BASECOMP = Nothing
+                uname3 = index(cmbSostUstr.SelectedIndex)
+                ' .MoveFirst()
+                'Do While (Not .EOF)
+                'If uname3 = " № " & .Fields("id").Value & " " & .Fields("PRINTER_NAME_1").Value & " (" & .Fields("filial").Value & "/" & .Fields("mesto").Value & ")" Then
+                'uname3 = .Fields("id").Value
+                'End If
+                '.MoveNext()
+                'DoEvents
+                'Loop
+
+            End If
+            'End With
+            'BASECOMP.Close()
+            'BASECOMP = Nothing
 
 
         Else
@@ -2697,6 +2701,9 @@ err_:
         Dim strTmp As String
         Dim sTmp As String
 
+        Dim oldID, NewID As Integer
+
+
         Dim iA, iB, iC, iD, iZ, iUSTR, iZAPR As String
 
 
@@ -2718,6 +2725,7 @@ err_:
                     iB = .Fields("filial").Value
                     iC = .Fields("mesto").Value
                     iD = .Fields("kabn").Value
+                    oldID = .Fields("id").Value
                 End With
                 rs.Close()
                 rs = Nothing
@@ -2757,6 +2765,7 @@ err_:
                         iB = .Fields("filial").Value
                         iC = .Fields("mesto").Value
                         iD = .Fields("kabn").Value
+                        NewID = .Fields("id").Value
                     End With
                     rs.Close()
                     rs = Nothing
@@ -2781,7 +2790,8 @@ err_:
             End If
 
             Dim objIniFile As New IniFile(sLANGPATH)
-            If iA <> sTEXT Then
+
+            If oldID <> NewID Then
 
                 DV = False
                 'objIniFile.GetString("frmCRT3", "btnAdd", "")
@@ -2870,6 +2880,8 @@ err_:
 
         End If
 
+
+        Call LOAD_MOVE(rCOUNT)
 
         Exit Sub
 Error_:
@@ -3178,6 +3190,8 @@ FoundiR:
         Dim OldM, NewM As String
 
 
+        Dim oldID, NewID As Integer
+
         If EDTRCART = True Then
 
             DV = True
@@ -3210,6 +3224,7 @@ FoundiR:
                 OldM = iZAPR
 
             Else
+                OldM = iUSTR 'Старое место - номер старого устройства
 
                 rs = New ADODB.Recordset
                 rs.Open("SELECT * FROM kompy where id =" & iUSTR, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
@@ -3219,6 +3234,9 @@ FoundiR:
                     iB = .Fields("filial").Value
                     iC = .Fields("mesto").Value
                     iD = .Fields("kabn").Value
+
+                    oldID = .Fields("id").Value
+
                 End With
                 rs.Close()
                 rs = Nothing
@@ -3226,34 +3244,51 @@ FoundiR:
                 OldM = OldM & " " & iB & "/" & iC & "/" & iD
 
 
+                rs = New ADODB.Recordset
+                rs.Open("SELECT * FROM kompy where id =" & sUSTR, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+                With rs
+                    NewM = .Fields("NET_NAME").Value
+                    iB = .Fields("filial").Value
+                    iC = .Fields("mesto").Value
+                    iD = .Fields("kabn").Value
+
+                    NewID = .Fields("id").Value
+
+                End With
+                rs.Close()
+                rs = Nothing
+
+                NewM = NewM & " " & iB & "/" & iC & "/" & iD
+
+
+
+
             End If
 
+            'sTEXT = cmbSostUstr.Text
 
-            sTEXT = cmbSostUstr.Text
+            'Dim BASECOMP As ADODB.Recordset
+            'BASECOMP = New ADODB.Recordset
+            'BASECOMP.Open("SELECT * FROM kompy", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            'With BASECOMP
 
-            Dim BASECOMP As ADODB.Recordset
-            BASECOMP = New ADODB.Recordset
-            BASECOMP.Open("SELECT * FROM kompy", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-            With BASECOMP
+            '    If Len(cmbSostUstr.Text) = 0 Then
+            '        sTEXT = 0
+            '    Else
+            '        .MoveFirst()
+            '        Do While Not .EOF
+            '            If sTEXT = " № " & .Fields("id").Value & " " & .Fields("PRINTER_NAME_1").Value & " (" & .Fields("filial").Value & "/" & .Fields("mesto").Value & ")" Then
+            '                NewM = .Fields("PRINTER_NAME_1").Value & " " & .Fields("filial").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value
+            '            End If
+            '            .MoveNext()
+            '        Loop
 
-                If Len(cmbSostUstr.Text) = 0 Then
-                    sTEXT = 0
-                Else
-                    .MoveFirst()
-                    Do While Not .EOF
-                        If sTEXT = " № " & .Fields("id").Value & " " & .Fields("PRINTER_NAME_1").Value & " (" & .Fields("filial").Value & "/" & .Fields("mesto").Value & ")" Then
-                            NewM = .Fields("PRINTER_NAME_1").Value & " " & .Fields("filial").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value
-                        End If
-                        .MoveNext()
-                        'DoEvents
-                    Loop
+            '    End If
+            'End With
 
-                End If
-            End With
-
-
-            BASECOMP.Close()
-            BASECOMP = Nothing
+            'BASECOMP.Close()
+            'BASECOMP = Nothing
 
 
             If iA = 0 Then
@@ -3270,7 +3305,8 @@ FoundiR:
 
             If Len(cmbSostUstr.Text) = 0 Then Exit Sub
 
-            If OldM <> NewM Then
+
+            If oldID <> sUSTR Then '!!!!!!!!!!!!!!!!!!!!!!!!11
 
                 DV = False
 
@@ -3361,7 +3397,7 @@ FoundiR:
 
         End If
 
-
+        Call LOAD_MOVE(rCOUNT)
         Exit Sub
 Error_:
         MsgBox(Err.Description, vbInformation, ProGramName)
@@ -3447,6 +3483,10 @@ Error_:
 
         rs1 = Nothing
 
+
+    End Sub
+
+    Private Sub cmbSostUstr_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbSostUstr.SelectedIndexChanged
 
     End Sub
 End Class
