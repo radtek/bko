@@ -52,6 +52,7 @@ Public Class frmLogin
             'Console.WriteLine("The process failed: {0}", e1.ToString())
         End Try
 
+        'ITEM_DB_COUNT = cmbBD.Items.Count
 
     End Sub
 

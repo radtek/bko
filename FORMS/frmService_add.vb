@@ -63,6 +63,10 @@
             sCOUNTER = .Fields("t_n").Value
         End With
 
+
+        Dim ASRT As String
+        ASRT = frmComputers.sCOUNT
+
         rs.Close()
         rs = Nothing
 
@@ -89,11 +93,11 @@
 
                 .Fields("PREF").Value = frmComputers.sPREF
 
-                If frmComputers.sPREF <> "C" Then
+                'If frmComputers.sPREF <> "C" Then
 
-                Else
-                    .Fields("Id_Comp").Value = frmComputers.sCOUNT
-                End If
+                'Else
+                .Fields("Id_Comp").Value = frmComputers.sCOUNT
+                'End If
 
 
 

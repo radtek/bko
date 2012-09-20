@@ -14,6 +14,7 @@ Imports Ionic.Zip
 Public Class frmMain
     Inherits System.Windows.Forms.Form
     Private Btn(500) As ToolStripButton
+    Private Btn2(500) As ToolStripButton
 
     Private Sub frmMain_Activated(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Activated
 
@@ -112,6 +113,71 @@ Public Class frmMain
     End Sub
 
     Private Sub frmMain_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+
+
+        If DB_N = "MS Access" Then
+
+            DB_USE.Text = Base_Name
+            LBL_SUBD.Visible = False
+
+
+            DB_USE.DropDown.Items.Clear()
+
+            Try
+                ' Only get files that begin with the letter "c."
+                Dim dirs As String() = Directory.GetFiles(BasePath, "*.mdb")
+                ' Console.WriteLine("The number of files starting with c is {0}.", dirs.Length)
+                Dim dir As String
+
+                Dim B1 As New ToolStripButton
+                Dim i As Integer = 0
+                Dim sNameS(500) As String
+
+
+                For Each dir In dirs
+
+
+                    Dim d() As String
+                    d = Split(dir, "\")
+                    'd(d.Length - 1
+                    sNameS(i) = d(d.Length - 1)
+
+                    i = i + 1
+                Next
+
+
+                For i1 As Integer = 0 To i
+                    Dim B As New ToolStripButton
+
+                    B.ForeColor = Color.Blue
+                    B.Text = sNameS(i1)
+                    Btn(i1) = B
+
+                    AddHandler Btn(i1).Click, AddressOf DBButtonsClick
+                    DB_USE.DropDown.Items.AddRange(New ToolStripItem() {Btn(i1)})
+                Next
+
+
+
+
+            Catch e1 As Exception
+                'Console.WriteLine("The process failed: {0}", e1.ToString())
+            End Try
+
+
+
+
+
+
+            DB_USE.Text = Base_Name
+
+        Else
+            LBL_SUBD.Visible = True
+            DB_USE.Visible = False
+
+        End If
+
+
 
         ''Меняем шрифт
         Call SendFonts(Me)
@@ -305,7 +371,59 @@ Public Class frmMain
 
         LBL_SUBD.Text = unamDB & " - " & Base_Name
         LBL_USER.Text = UserNames & "/" & uLevel
+
+       
+
+
     End Sub
+    Public Sub DBButtonsClick(ByVal sender As [Object], ByVal e As EventArgs)
+
+        Dim senderButton As ToolStripButton = CType(sender, ToolStripButton)
+
+        DB_USE.Text = senderButton.Text
+
+        Me.Cursor = Cursors.Hand
+
+        Base_Name = senderButton.Text
+
+        Dim objIniFile As New IniFile(PrPath & "base.ini")
+        objIniFile.WriteString("general", "file", DB_USE.Text)
+
+        LoadDatabase()
+
+        frmComputers.STAT_INF()
+        Call SHED_CHECK()
+        Call REM_CHECK()
+        Call LoadSPR()
+
+
+        Dim rsG As ADODB.Recordset
+        rsG = New ADODB.Recordset
+
+        rsG.Open("SELECT * FROM CONFIGURE", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+        With rsG
+            If Not IsDBNull(.Fields("Name_Prog").Value) Then ProGramName = .Fields("Name_Prog").Value
+        End With
+        rsG.Close()
+        rsG = Nothing
+
+        Dim LNGIniFile As New IniFile(sLANGPATH)
+        If Len(ProGramName) = 0 Or ProGramName = Nothing Then ProGramName = LNGIniFile.GetString("frmSetup", "MSG7", "БКО") '"БКО"
+
+        Me.Text = ProGramName & " " & My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor & "." & My.Application.Info.Version.Build & "." & My.Application.Info.Version.Revision
+
+
+        RefFilTree(frmComputers.lstGroups)
+
+        Me.Cursor = Cursors.Default
+
+
+
+
+
+    End Sub
+
 
     Public Sub colorButtonsClick(ByVal sender As [Object], ByVal e As EventArgs)
         Dim senderButton As ToolStripButton = CType(sender, ToolStripButton)
@@ -454,8 +572,6 @@ error_Renamed:
 
         Dim rs As ADODB.Recordset
         rs = New ADODB.Recordset
-
-
 
         'On Error GoTo error
         On Error Resume Next
@@ -1169,8 +1285,6 @@ err_:
 
     Private Sub ДругоеОборудованиеToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ДругоеОборудованиеToolStripMenuItem.Click
 
-
-
         Call Clear_Form_For_Computer()
 
         frmComputers.cmbOTH.Items.Clear()
@@ -1794,8 +1908,6 @@ ADD:
         frmSetup.Focus()
     End Sub
 
-
-
     Private Sub HANDINSERTToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles HANDINSERTToolStripMenuItem.Click
 
         Call VisibleForm(frmComputers)
@@ -2051,13 +2163,11 @@ ADD:
 
     End Sub
 
-
     Private Sub ИнвентаризацияToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ИнвентаризацияToolStripMenuItem.Click
         Call INVENT()
 
     End Sub
 
-    
     Private Sub СтатистическиеОтчетыToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles СтатистическиеОтчетыToolStripMenuItem.Click
 
 
@@ -2071,7 +2181,6 @@ ADD:
 
 
     End Sub
-
 
     Private Sub CNTToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CNTToolStripMenuItem.Click
         Call Clear_Form_For_Computer()
@@ -2162,7 +2271,6 @@ err_:
 
     Private Sub TimerEventHandler(ByVal obj As Object, ByVal ergs As EventArgs)
         On Error Resume Next
-
 
 
         If TimeOfDay.Minute = 0 And TimeOfDay.Second = 0 Then
@@ -2267,4 +2375,7 @@ err_:
 
         Call SaveInfTeh()
     End Sub
+
+ 
+   
 End Class

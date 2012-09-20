@@ -94,7 +94,9 @@ Partial Class frmMain
         Me.lblMassLoadEverest = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusLabel4 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.LBL_SUBD = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ToolStripStatusLabel5 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.LBL_USER = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.DB_USE = New System.Windows.Forms.ToolStripDropDownButton()
         Me.ToolStrip = New System.Windows.Forms.ToolStrip()
         Me.ToolStripDropDownButton1 = New System.Windows.Forms.ToolStripDropDownButton()
         Me.ЗагрузитьИзEverestiniToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -143,7 +145,6 @@ Partial Class frmMain
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.ArhToolZipbutton = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripStatusLabel5 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.MenuStrip.SuspendLayout()
         Me.StatusStrip.SuspendLayout()
         Me.ToolStrip.SuspendLayout()
@@ -529,7 +530,7 @@ Partial Class frmMain
         '
         'StatusStrip
         '
-        Me.StatusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1, Me.LBL_STAT_1, Me.ToolStripStatusLabel2, Me.LBL_STAT_2, Me.LBL_STAT_3, Me.ToolStripStatusLabel3, Me.lblShed, Me.lblSplet, Me.lblRem, Me.lblMassLoadEverest, Me.ToolStripStatusLabel4, Me.LBL_SUBD, Me.ToolStripStatusLabel5, Me.LBL_USER})
+        Me.StatusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1, Me.LBL_STAT_1, Me.ToolStripStatusLabel2, Me.LBL_STAT_2, Me.LBL_STAT_3, Me.ToolStripStatusLabel3, Me.lblShed, Me.lblSplet, Me.lblRem, Me.lblMassLoadEverest, Me.ToolStripStatusLabel4, Me.LBL_SUBD, Me.DB_USE, Me.ToolStripStatusLabel5, Me.LBL_USER})
         Me.StatusStrip.Location = New System.Drawing.Point(0, 638)
         Me.StatusStrip.Name = "StatusStrip"
         Me.StatusStrip.Size = New System.Drawing.Size(984, 24)
@@ -628,6 +629,12 @@ Partial Class frmMain
         Me.LBL_SUBD.Size = New System.Drawing.Size(41, 19)
         Me.LBL_SUBD.Text = "СУБД"
         '
+        'ToolStripStatusLabel5
+        '
+        Me.ToolStripStatusLabel5.Name = "ToolStripStatusLabel5"
+        Me.ToolStripStatusLabel5.Size = New System.Drawing.Size(10, 19)
+        Me.ToolStripStatusLabel5.Text = "|"
+        '
         'LBL_USER
         '
         Me.LBL_USER.BorderSides = CType((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) _
@@ -636,6 +643,15 @@ Partial Class frmMain
         Me.LBL_USER.Name = "LBL_USER"
         Me.LBL_USER.Size = New System.Drawing.Size(88, 19)
         Me.LBL_USER.Text = "Пользователь"
+        '
+        'DB_USE
+        '
+        Me.DB_USE.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.DB_USE.Image = CType(resources.GetObject("DB_USE.Image"), System.Drawing.Image)
+        Me.DB_USE.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.DB_USE.Name = "DB_USE"
+        Me.DB_USE.Size = New System.Drawing.Size(87, 22)
+        Me.DB_USE.Text = "База данных"
         '
         'ToolStrip
         '
@@ -946,12 +962,6 @@ Partial Class frmMain
         Me.ToolStripButton1.Size = New System.Drawing.Size(52, 22)
         Me.ToolStripButton1.Text = "Отчеты"
         '
-        'ToolStripStatusLabel5
-        '
-        Me.ToolStripStatusLabel5.Name = "ToolStripStatusLabel5"
-        Me.ToolStripStatusLabel5.Size = New System.Drawing.Size(10, 19)
-        Me.ToolStripStatusLabel5.Text = "|"
-        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1097,5 +1107,6 @@ Partial Class frmMain
     Friend WithEvents LBL_SUBD As System.Windows.Forms.ToolStripStatusLabel
     Friend WithEvents LBL_USER As System.Windows.Forms.ToolStripStatusLabel
     Friend WithEvents ToolStripStatusLabel5 As System.Windows.Forms.ToolStripStatusLabel
+    Friend WithEvents DB_USE As System.Windows.Forms.ToolStripDropDownButton
 
 End Class
