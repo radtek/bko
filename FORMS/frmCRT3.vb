@@ -15,7 +15,6 @@
     Private zCC As String
     Private search_ As Boolean
     Private OneStart As Decimal = 0
-    Private index As ArrayList = New ArrayList '!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
     Private Sub RefFilTreePRN()
@@ -1468,7 +1467,7 @@ Error_:
     Private Sub frmCRT3_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
         SendFonts(Me)
-        'btnSearch.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\search.png")
+        btnSearch.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\search.png")
 
 
         Me.Show()
@@ -1561,14 +1560,13 @@ err_:
         If Counter > 0 Then
             cmbSostUstr.Items.Clear()
             rs = New ADODB.Recordset
-            rs.Open("SELECT * FROM kompy where TipTehn='Printer' or TipTehn='KOpir' or TipTehn='MFU'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rs.Open("SELECT id,PRINTER_NAME_1,filial,mesto FROM kompy where TipTehn='Printer' or TipTehn='KOpir' or TipTehn='MFU' ORDER BY filial,mesto", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
             With rs
                 .MoveFirst()
                 Do While Not .EOF
                     'If .Fields("TipTehn").Value = "Printer" Or .Fields("TipTehn").Value = "KOpir" Or .Fields("TipTehn").Value = "MFU" Then
                     cmbSostUstr.Items.Add(" № " & .Fields("id").Value & " " & .Fields("PRINTER_NAME_1").Value & " (" & .Fields("filial").Value & "/" & .Fields("mesto").Value & ")")
-                    index.Add(.Fields("id").Value) '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                     'Else
                     'End If
                     .MoveNext()
@@ -1649,28 +1647,38 @@ err_:
 
         If EDTRCART = True Then
 
-            uname3 = cmbSostUstr.Text
-
-            'Dim BASECOMP As ADODB.Recordset
-            'BASECOMP = New ADODB.Recordset '!!!!!!!!!!!!!!!!!!!!!!!!
-            'BASECOMP.Open("SELECT * FROM kompy  where TipTehn='Printer' or TipTehn='KOpir' or TipTehn='MFU'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-            'With BASECOMP
 
             If Len(cmbSostUstr.Text) = 0 Then
                 uname3 = 0
             Else
 
-                uname3 = index(cmbSostUstr.SelectedIndex)
-                ' .MoveFirst()
-                'Do While (Not .EOF)
-                'If uname3 = " № " & .Fields("id").Value & " " & .Fields("PRINTER_NAME_1").Value & " (" & .Fields("filial").Value & "/" & .Fields("mesto").Value & ")" Then
-                'uname3 = .Fields("id").Value
-                'End If
-                '.MoveNext()
-                'DoEvents
-                'Loop
+                uname3 = cmbSostUstr.Text
+
+                Dim sTmp() As String
+                sTmp = Split(cmbSostUstr.Text, " ")
+                uname3 = sTmp(2)
 
             End If
+
+
+            'Dim BASECOMP As ADODB.Recordset
+            'BASECOMP = New ADODB.Recordset
+            'BASECOMP.Open("SELECT * FROM kompy", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            'With BASECOMP
+
+            '    If Len(cmbSostUstr.Text) = 0 Then
+            '        uname3 = 0
+            '    Else
+            '        .MoveFirst()
+            '        Do While Not .EOF
+            '            If uname3 = " № " & .Fields("id").Value & " " & .Fields("PRINTER_NAME_1").Value & " (" & .Fields("filial").Value & "/" & .Fields("mesto").Value & ")" Then
+            '                uname3 = .Fields("id").Value
+            '            End If
+            '            .MoveNext()
+            '            'DoEvents
+            '        Loop
+
+            '    End If
             'End With
             'BASECOMP.Close()
             'BASECOMP = Nothing
@@ -1684,130 +1692,130 @@ err_:
 
 
 
-        uname4 = cmbSaler.Text
+            uname4 = cmbSaler.Text
 
 
-        If Len(cmbSaler.Text) = 0 Then
+            If Len(cmbSaler.Text) = 0 Then
 
-            uname4 = 0
-
-        Else
-
-            If Not (RSExists("Postav", "name", cmbSaler.Text)) Then
-                ' AddPost(cmbSaler.Text)
-            End If
-
-            Dim Postav As ADODB.Recordset
-            Postav = New ADODB.Recordset
-            Postav.Open("SELECT * FROM SPR_Postav WHERE Name='" & uname4 & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-
-            With Postav
-                uname4 = .Fields("id").Value
-            End With
-            Postav.Close()
-            Postav = Nothing
-
-        End If
-
-
-        Dim sSQL As String
-        If EDTRCART = True Then
-            sSQL = "SELECT * FROM CARTRIDG WHERE id = " & EDTIDTr
-        Else
-
-            sSQL = "SELECT * FROM CARTRIDG"
-
-        End If
-
-        Dim LNGIniFile As New IniFile(sLANGPATH)
-
-        If EDTRCART = True And uname3 <> 0 Then
-
-
-
-            Call DVIG_CRt2(uname3, lstGroups.SelectedNode.Text)
-
-            If DV = True Then
+                uname4 = 0
 
             Else
 
-                If Sav = False Then
+                If Not (RSExists("Postav", "name", cmbSaler.Text)) Then
+                    ' AddPost(cmbSaler.Text)
+                End If
 
-                    MsgBox(LNGIniFile.GetString("frmCRT3", "MSG10", ""), MsgBoxStyle.Exclamation, ProGramName)
+                Dim Postav As ADODB.Recordset
+                Postav = New ADODB.Recordset
+                Postav.Open("SELECT * FROM SPR_Postav WHERE Name='" & uname4 & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
-                    If pDRAG = True Then
+                With Postav
+                    uname4 = .Fields("id").Value
+                End With
+                Postav.Close()
+                Postav = Nothing
 
-                        RefFilTreePRN()
+            End If
 
-                    End If
 
-                    Zap_load(rCOUNT)
-                    LOAD_CRR2(rCOUNT)
-                    LOAD_MOVE(rCOUNT)
+            Dim sSQL As String
+            If EDTRCART = True Then
+                sSQL = "SELECT * FROM CARTRIDG WHERE id = " & EDTIDTr
+            Else
 
-                    Exit Sub
+                sSQL = "SELECT * FROM CARTRIDG"
+
+            End If
+
+            Dim LNGIniFile As New IniFile(sLANGPATH)
+
+            If EDTRCART = True Then
+
+
+
+                Call DVIG_CRt2(uname3, lstGroups.SelectedNode.Text)
+
+                If DV = True Then
 
                 Else
 
+                    If Sav = False Then
+
+                        MsgBox(LNGIniFile.GetString("frmCRT3", "MSG10", ""), MsgBoxStyle.Exclamation, ProGramName)
+
+                        If pDRAG = True Then
+
+                            RefFilTreePRN()
+
+                        End If
+
+                        Zap_load(rCOUNT)
+                        LOAD_CRR2(rCOUNT)
+                        LOAD_MOVE(rCOUNT)
+
+                        Exit Sub
+
+                    Else
 
 
+
+                    End If
                 End If
-            End If
 
-        Else
-
-
-        End If
-
-        Dim rs1 As ADODB.Recordset
-        rs1 = New ADODB.Recordset
-        rs1.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-
-        If Len(txtSerNumb.Text) = 0 Then txtSerNumb.Text = "Б\Н"
-        If Len(txtSaleNumb.Text) = 0 Then txtSaleNumb.Text = 0
-        If Len(txtCashe.Text) = 0 Then txtCashe.Text = 0
-
-        With rs1
-            If EDTRCART = True Then
             Else
-                .AddNew()
+
+
             End If
 
-            .Fields("SN").Value = txtSerNumb.Text
-            .Fields("Proizv").Value = uname
-            .Fields("TIP").Value = cmbTipC.Text
-            .Fields("Model").Value = uname2
-            .Fields("USTR").Value = uname3
-            .Fields("PROD").Value = uname4
-            .Fields("SCHET").Value = txtSaleNumb.Text
-            .Fields("Cena").Value = txtCashe.Text
-            .Fields("DATA").Value = dtSale.Value
-            .Fields("NZap").Value = chkNezap.Checked
-            .Fields("NeZap").Value = chkNZ.Checked
-            .Fields("Iznos").Value = chkIznos.Checked
-            .Fields("Spisan").Value = chkSPS.Checked
-            .Fields("NaSpisanie").Value = chkNaSP.Checked
-            .Fields("PRIM").Value = txtMemo.Text
+            Dim rs1 As ADODB.Recordset
+            rs1 = New ADODB.Recordset
+            rs1.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
-            .Fields("Pref").Value = 0
+            If Len(txtSerNumb.Text) = 0 Then txtSerNumb.Text = "Б\Н"
+            If Len(txtSaleNumb.Text) = 0 Then txtSaleNumb.Text = 0
+            If Len(txtCashe.Text) = 0 Then txtCashe.Text = 0
 
-            .Update()
-        End With
+            With rs1
+                If EDTRCART = True Then
+                Else
+                    .AddNew()
+                End If
 
-        rs1.Close()
-        rs1 = Nothing
+                .Fields("SN").Value = txtSerNumb.Text
+                .Fields("Proizv").Value = uname
+                .Fields("TIP").Value = cmbTipC.Text
+                .Fields("Model").Value = uname2
+                .Fields("USTR").Value = uname3
+                .Fields("PROD").Value = uname4
+                .Fields("SCHET").Value = txtSaleNumb.Text
+                .Fields("Cena").Value = txtCashe.Text
+                .Fields("DATA").Value = dtSale.Value
+                .Fields("NZap").Value = chkNezap.Checked
+                .Fields("NeZap").Value = chkNZ.Checked
+                .Fields("Iznos").Value = chkIznos.Checked
+                .Fields("Spisan").Value = chkSPS.Checked
+                .Fields("NaSpisanie").Value = chkNaSP.Checked
+                .Fields("PRIM").Value = txtMemo.Text
 
-        Dim objIniFile As New IniFile(PrPath & "base.ini")
-        objIniFile.WriteString("general", "DK", uname3)
-        objIniFile.WriteString("general", "Default", 0)
+                .Fields("Pref").Value = 0
+
+                .Update()
+            End With
+
+            rs1.Close()
+            rs1 = Nothing
+
+            Dim objIniFile As New IniFile(PrPath & "base.ini")
+            objIniFile.WriteString("general", "DK", uname3)
+            objIniFile.WriteString("general", "Default", 0)
 
 
-        Call RefFilTreePRN()
+            Call RefFilTreePRN()
 
 
 
-        Me.btnAdd.Text = LNGIniFile.GetString("frmCRT3", "btnAdd", "")
-        CRTFU = False
+            Me.btnAdd.Text = LNGIniFile.GetString("frmCRT3", "btnAdd", "")
+            CRTFU = False
     End Sub
 
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
@@ -2701,9 +2709,6 @@ err_:
         Dim strTmp As String
         Dim sTmp As String
 
-        Dim oldID, NewID As Integer
-
-
         Dim iA, iB, iC, iD, iZ, iUSTR, iZAPR As String
 
 
@@ -2725,7 +2730,6 @@ err_:
                     iB = .Fields("filial").Value
                     iC = .Fields("mesto").Value
                     iD = .Fields("kabn").Value
-                    oldID = .Fields("id").Value
                 End With
                 rs.Close()
                 rs = Nothing
@@ -2765,7 +2769,6 @@ err_:
                         iB = .Fields("filial").Value
                         iC = .Fields("mesto").Value
                         iD = .Fields("kabn").Value
-                        NewID = .Fields("id").Value
                     End With
                     rs.Close()
                     rs = Nothing
@@ -2790,8 +2793,7 @@ err_:
             End If
 
             Dim objIniFile As New IniFile(sLANGPATH)
-
-            If oldID <> NewID Then
+            If iA <> sTEXT Then
 
                 DV = False
                 'objIniFile.GetString("frmCRT3", "btnAdd", "")
@@ -2881,8 +2883,6 @@ err_:
         End If
 
 
-        Call LOAD_MOVE(rCOUNT)
-
         Exit Sub
 Error_:
         MsgBox(Err.Description, vbInformation, ProGramName)
@@ -2913,7 +2913,7 @@ Error_:
             Dim rs As ADODB.Recordset 'Объявляем рекордсет
             Dim sSQL As String 'Переменная, где будет размещён SQL запрос
 
-            sSQL = "SELECT ID_comp, data, id, oldmesto, newmesto, prich, time FROM CARTRIDG_D where id_comp=" & sID
+            sSQL = "SELECT ID_comp, data, id, oldmesto, newmesto, prich, time FROM CARTRIDG_D where id_comp=" & sID & " ORDER BY id"
             rs = New ADODB.Recordset
             rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
@@ -3190,17 +3190,15 @@ FoundiR:
         Dim OldM, NewM As String
 
 
-        Dim oldID, NewID As Integer
-
         If EDTRCART = True Then
 
             DV = True
-
 
             rs = New ADODB.Recordset
             rs.Open("SELECT * FROM CARTRIDG where id =" & rCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
             With rs
+
                 iA = .Fields("USTR").Value
                 iZ = .Fields("PREF").Value
                 iUSTR = .Fields("USTR").Value
@@ -3224,71 +3222,66 @@ FoundiR:
                 OldM = iZAPR
 
             Else
-                OldM = iUSTR 'Старое место - номер старого устройства
-
-                rs = New ADODB.Recordset
-                rs.Open("SELECT * FROM kompy where id =" & iUSTR, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-
-                With rs
-                    OldM = .Fields("NET_NAME").Value
-                    iB = .Fields("filial").Value
-                    iC = .Fields("mesto").Value
-                    iD = .Fields("kabn").Value
-
-                    oldID = .Fields("id").Value
-
-                End With
-                rs.Close()
-                rs = Nothing
-
-                OldM = OldM & " " & iB & "/" & iC & "/" & iD
 
 
-                rs = New ADODB.Recordset
-                rs.Open("SELECT * FROM kompy where id =" & sUSTR, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                If iUSTR = 0 Then
 
-                With rs
-                    NewM = .Fields("NET_NAME").Value
-                    iB = .Fields("filial").Value
-                    iC = .Fields("mesto").Value
-                    iD = .Fields("kabn").Value
+                    OldM = "Картридж"
 
-                    NewID = .Fields("id").Value
+                Else
 
-                End With
-                rs.Close()
-                rs = Nothing
+                    rs = New ADODB.Recordset
+                    rs.Open("SELECT * FROM kompy where id =" & iUSTR, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
-                NewM = NewM & " " & iB & "/" & iC & "/" & iD
+                    With rs
 
+                        OldM = .Fields("NET_NAME").Value & " " & .Fields("filial").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value
 
+                    End With
+                    rs.Close()
+                    rs = Nothing
 
+                End If
 
             End If
 
-            'sTEXT = cmbSostUstr.Text
 
-            'Dim BASECOMP As ADODB.Recordset
-            'BASECOMP = New ADODB.Recordset
-            'BASECOMP.Open("SELECT * FROM kompy", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-            'With BASECOMP
+            sTEXT = cmbSostUstr.Text
 
-            '    If Len(cmbSostUstr.Text) = 0 Then
-            '        sTEXT = 0
-            '    Else
-            '        .MoveFirst()
-            '        Do While Not .EOF
-            '            If sTEXT = " № " & .Fields("id").Value & " " & .Fields("PRINTER_NAME_1").Value & " (" & .Fields("filial").Value & "/" & .Fields("mesto").Value & ")" Then
-            '                NewM = .Fields("PRINTER_NAME_1").Value & " " & .Fields("filial").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value
-            '            End If
-            '            .MoveNext()
-            '        Loop
+            
+            If Len(cmbSostUstr.Text) = 0 Then
+                sTEXT = 0
+            Else
 
-            '    End If
-            'End With
 
-            'BASECOMP.Close()
-            'BASECOMP = Nothing
+                Dim s1Tmp() As String
+                s1Tmp = Split(sTEXT, " ")
+                sTEXT = s1Tmp(2)
+
+
+                Dim BASECOMP As ADODB.Recordset
+                BASECOMP = New ADODB.Recordset
+                BASECOMP.Open("SELECT * FROM kompy where id=" & sTEXT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+
+                With BASECOMP
+
+                    .MoveFirst()
+                    Do While Not .EOF
+                        ' If sTEXT = " № " & .Fields("id").Value & " " & .Fields("PRINTER_NAME_1").Value & " (" & .Fields("filial").Value & "/" & .Fields("mesto").Value & ")" Then
+                        NewM = .Fields("PRINTER_NAME_1").Value & " " & .Fields("filial").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value
+                        ' End If
+                        .MoveNext()
+                        'DoEvents
+                    Loop
+
+                End With
+
+
+                BASECOMP.Close()
+                BASECOMP = Nothing
+
+            End If
 
 
             If iA = 0 Then
@@ -3303,10 +3296,9 @@ FoundiR:
 
             Dim objIniFile As New IniFile(sLANGPATH)
 
-            If Len(cmbSostUstr.Text) = 0 Then Exit Sub
+            If Len(cmbSostUstr.Text) = 0 Then NewM = "Картриджи"
 
-
-            If oldID <> sUSTR Then '!!!!!!!!!!!!!!!!!!!!!!!!11
+            If OldM <> NewM Then
 
                 DV = False
 
@@ -3346,6 +3338,8 @@ FoundiR:
                 rs.Open("SELECT * FROM CARTRIDG_D", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
                 sTmp = (DateTime.Now.Hour & ":" & DateTime.Now.Minute & ":" & DateTime.Now.Second)
+
+
 
                 With rs
                     .AddNew()
@@ -3397,7 +3391,7 @@ FoundiR:
 
         End If
 
-        Call LOAD_MOVE(rCOUNT)
+
         Exit Sub
 Error_:
         MsgBox(Err.Description, vbInformation, ProGramName)
@@ -3483,10 +3477,6 @@ Error_:
 
         rs1 = Nothing
 
-
-    End Sub
-
-    Private Sub cmbSostUstr_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbSostUstr.SelectedIndexChanged
 
     End Sub
 End Class
