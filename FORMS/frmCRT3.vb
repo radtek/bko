@@ -1745,7 +1745,7 @@ err_:
 
                         If pDRAG = True Then
 
-                            RefFilTreePRN()
+                        Me.Invoke(New MethodInvoker(AddressOf RefFilTreePRN))
 
                         End If
 
@@ -1810,7 +1810,7 @@ err_:
             objIniFile.WriteString("general", "Default", 0)
 
 
-            Call RefFilTreePRN()
+        Me.Invoke(New MethodInvoker(AddressOf RefFilTreePRN))
 
 
 
@@ -2393,7 +2393,7 @@ err_:
 
                                 If pDRAG = True Then
 
-                                    RefFilTreePRN()
+                                    Me.Invoke(New MethodInvoker(AddressOf RefFilTreePRN))
 
                                 End If
 
@@ -3173,7 +3173,7 @@ FoundiR:
 
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
         Me.Cursor = Cursors.WaitCursor
-        RefFilTreePRN()
+        Me.Invoke(New MethodInvoker(AddressOf RefFilTreePRN))
         txtSearch.Text = ""
         Me.Cursor = Cursors.Default
     End Sub

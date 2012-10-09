@@ -95,8 +95,6 @@ D:\Devel\BC2.NET\bin\Release\basekomp_net.exe
 D:\Devel\BC2.NET\bin\Release\basekomp_net.pdb
 D:\Devel\BC2.NET\bin\Release\basekomp_net.xml
 D:\Devel\BC2.NET\bin\Release\ADODB.dll
-D:\Devel\BC2.NET\bin\Release\Microsoft.Office.Interop.Excel.dll
-D:\Devel\BC2.NET\bin\Release\Microsoft.Office.Interop.Word.dll
 D:\Devel\BC2.NET\bin\Release\Interop.JRO.dll
 D:\Devel\BC2.NET\obj\Release\ResolveAssemblyReference.cache
 D:\Devel\BC2.NET\obj\Release\Interop.JRO.dll
@@ -136,8 +134,10 @@ D:\Devel\BC2.NET\obj\Release\basekomp_net.frm_os3.resources
 D:\Devel\BC2.NET\obj\Release\basekomp_net.frm_wmi.resources
 D:\Devel\BC2.NET\obj\Release\basekomp_net.QrCode.resources
 D:\Devel\BC2.NET\obj\Release\basekomp_net.Resources.resources
-D:\Devel\BC2.NET\obj\Release\ResGen.read.1.tlog
-D:\Devel\BC2.NET\obj\Release\ResGen.write.1.tlog
 D:\Devel\BC2.NET\obj\Release\basekomp_net.exe
 D:\Devel\BC2.NET\obj\Release\basekomp_net.xml
 D:\Devel\BC2.NET\obj\Release\basekomp_net.pdb
+D:\Devel\BC2.NET\bin\Release\Microsoft.Office.Interop.Excel.dll
+D:\Devel\BC2.NET\bin\Release\Microsoft.Office.Interop.Word.dll
+D:\Devel\BC2.NET\obj\Release\ResGen.read.1.tlog
+D:\Devel\BC2.NET\obj\Release\ResGen.write.1.tlog

@@ -29,25 +29,14 @@ Public Class frmserviceDesc
         'rtxtC = lstGroups.SelectedNode.Parent.Text
         rtxtC = lstGroups.SelectedNode.Text
 
+        Dim objIniFile As New IniFile(PrPath & "base.ini")
+
         Select Case d(0)
 
             Case "C"
 
-                Dim objIniFile As New IniFile(PrPath & "base.ini")
                 objIniFile.WriteString("general", "DK", d(1))
                 objIniFile.WriteString("general", "Default", 0)
-
-            Case Else
-
-                Dim objIniFile As New IniFile(PrPath & "base.ini")
-                objIniFile.WriteString("general", "DK", 0)
-                objIniFile.WriteString("general", "Default", lstGroups.SelectedNode.Tag)
-
-        End Select
-
-        Select Case d(0)
-
-            Case "C"
 
                 frmComputers.sPREF = Trim(d(0))
                 frmComputers.sCOUNT = Trim(d(1))
@@ -60,14 +49,14 @@ Public Class frmserviceDesc
 
                     LOAD_REPAIR(d(1), Me.lvRem)
 
-                   
-
-
                 End If
 
 
 
             Case "G"
+
+                objIniFile.WriteString("general", "DK", 0)
+                objIniFile.WriteString("general", "Default", lstGroups.SelectedNode.Tag)
 
                 frmComputers.sPREF = Trim(d(0))
                 frmComputers.sCOUNT = Trim(d(1))
@@ -85,6 +74,9 @@ Public Class frmserviceDesc
 
             Case "O"
 
+                objIniFile.WriteString("general", "DK", 0)
+                objIniFile.WriteString("general", "Default", lstGroups.SelectedNode.Tag)
+
                 frmComputers.sPREF = Trim(d(0))
                 frmComputers.sCOUNT = Trim(d(1))
 
@@ -99,6 +91,9 @@ Public Class frmserviceDesc
                 End If
 
             Case "K"
+
+                objIniFile.WriteString("general", "DK", 0)
+                objIniFile.WriteString("general", "Default", lstGroups.SelectedNode.Tag)
 
                 frmComputers.sPREF = Trim(d(0))
                 frmComputers.sCOUNT = Trim(d(1))
@@ -424,6 +419,8 @@ Public Class frmserviceDesc
 
     Private Sub lvRem_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvRem.Click
 
+        If lvRem.Items.Count = 0 Then Exit Sub
+
         lvRem2.ListViewItemSorter = Nothing
 
         Dim z As Integer
@@ -440,6 +437,9 @@ Public Class frmserviceDesc
     End Sub
 
     Public Sub load_rplus(ByVal sSID As Integer)
+
+        If sSID = 0 Then Exit Sub
+
         On Error GoTo err_1
         Dim unam As String
 
@@ -449,7 +449,10 @@ Public Class frmserviceDesc
         Dim rs As ADODB.Recordset 'Объявляем рекордсет
         Dim sSQL As String 'Переменная, где будет размещён SQL запрос
 
-        sSQL = "SELECT zakryt FROM Remont WHERE id=" & sSID
+
+        sSQL = "SELECT count(*) as zakryt FROM Remont WHERE id=" & sSID
+
+
         rs = New ADODB.Recordset
         rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
@@ -459,16 +462,29 @@ Public Class frmserviceDesc
         rs.Close()
         rs = Nothing
 
-        If unam = "1" Or unam = True Then
-
-            btnSBTAdd.Enabled = False
-            btnSendEmail.Enabled = False
+        If unam = 0 Then
+           
         Else
-            btnSBTAdd.Enabled = True
-            btnSendEmail.Enabled = True
+            sSQL = "SELECT zakryt FROM Remont WHERE id=" & sSID
+            rs = New ADODB.Recordset
+            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+            With rs
+                unam = .Fields("zakryt").Value
+            End With
+            rs.Close()
+            rs = Nothing
+
+            If unam = "1" Or unam = True Then
+
+                btnSBTAdd.Enabled = False
+                btnSendEmail.Enabled = False
+            Else
+                btnSBTAdd.Enabled = True
+                btnSendEmail.Enabled = True
+            End If
+
         End If
-
-
 
 
         sSQL = "SELECT COUNT(*) AS t_number FROM remonty_plus WHERE id_rem=" & sSID
@@ -1744,16 +1760,84 @@ err_1:
     End Sub
 
     Private Sub btnRemDel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRemDel.Click
-
         If lvRem.Items.Count = 0 Then Exit Sub
-
-        Dim z As Integer
 
         For z = 0 To lvRem.SelectedItems.Count - 1
             r1COUNT = (lvRem.SelectedItems(z).Text)
         Next
 
+
+        Dim intj As Integer = 0
+        Dim intj1 As Integer = 0
+
+
+        '   If MsgBox("Вы собираетесь удалить заявки, продолжить?", MsgBoxStyle.YesNo, ProGramName) = MsgBoxResult.Yes Then
+
+        lvRem.Select()
+
+        For intj = 0 To lvRem.Items.Count - 1
+
+            lvRem.Items(intj).Selected = True
+            lvRem.Items(intj).EnsureVisible()
+
+            If lvRem.Items(intj).Checked = True Then
+
+                intj1 = intj1 + 1
+
+            End If
+
+        Next
+
+
+        If intj1 > 0 Then
+
+            lvRem.Select()
+
+            For intj = 0 To lvRem.Items.Count - 1
+
+                lvRem.Items(intj).Selected = True
+                lvRem.Items(intj).EnsureVisible()
+
+                If lvRem.Items(intj).Checked = True Then
+
+
+                    Call DELETE_SERVICES()
+
+                End If
+
+            Next
+
+        Else
+
+            Call DELETE_SERVICES(r1COUNT)
+
+        End If
+
+
+        Call Me.LOAD_REPAIR(frmComputers.sCOUNT, Me.lvRem)
+        Call REM_CHECK()
+
+    End Sub
+
+    Private Sub DELETE_SERVICES(Optional ByVal ssid As Integer = 0)
+
+        Dim LNGIniFile As New IniFile(sLANGPATH)
         Dim unamZ As String
+        Dim intj As Integer = 0
+
+
+        If ssid <> 0 Then
+
+            r1COUNT = ssid
+
+        Else
+
+            For z = 0 To lvRem.SelectedItems.Count - 1
+                r1COUNT = (lvRem.SelectedItems(z).Text)
+            Next
+
+        End If
+
 
         If frmComputers.sPREF = "C" Then
 
@@ -1769,7 +1853,6 @@ err_1:
 
         End If
 
-        Dim LNGIniFile As New IniFile(sLANGPATH)
         Dim rs1 As ADODB.Recordset
 
         rs1 = New ADODB.Recordset
@@ -1785,13 +1868,14 @@ err_1:
         rs1 = Nothing
 
 
-        Call SaveActivityToLogDB(LNGIniFile.GetString("frmserviceDesc", "MSG7", "") & " " & lstGroups.SelectedNode.Text & " " & LNGIniFile.GetString("frmserviceDesc", "MSG8", "") & unamZ)
 
-        Call Me.LOAD_REPAIR(frmComputers.sCOUNT, Me.lvRem)
 
-        Call REM_CHECK()
+        'Call SaveActivityToLogDB(LNGIniFile.GetString("frmserviceDesc", "MSG7", "") & " " & lstGroups.SelectedNode.Text & " " & LNGIniFile.GetString("frmserviceDesc", "MSG8", "") & unamZ)
+
+       
 
     End Sub
+
 
     Private Sub CheckBox2_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckBox2.CheckedChanged
         On Error GoTo err_

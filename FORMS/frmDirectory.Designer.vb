@@ -322,6 +322,7 @@ Partial Class frmDirectory
         '
         'lvDirectory
         '
+        Me.lvDirectory.CheckBoxes = True
         Me.lvDirectory.FullRowSelect = True
         Me.lvDirectory.GridLines = True
         Me.lvDirectory.Location = New System.Drawing.Point(310, 3)
