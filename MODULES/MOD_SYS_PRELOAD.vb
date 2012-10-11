@@ -7,6 +7,7 @@ Module MOD_SYS_PRELOAD
     Public new_prov As Boolean
     'Public lngCounter As Integer
     Public iCOUNTFIELLDS As String
+    Public ITEM_DB_COUNT As String
     Public ProGramName As String
     Public FontN As String
     Public fontS As Double

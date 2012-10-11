@@ -867,7 +867,7 @@ err_:
     Public Sub LANG_SOFT(ByVal lstGroups As ListView)
         Dim objIniFile As New IniFile(sLANGPATH)
 
-        lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstSOFT1", ""), 1, HorizontalAlignment.Left)
+        lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstSOFT1", ""), 20, HorizontalAlignment.Left)
 
         lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstSOFT9", ""), 20, HorizontalAlignment.Left)
 

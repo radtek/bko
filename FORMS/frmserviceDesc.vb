@@ -124,7 +124,7 @@ Public Class frmserviceDesc
         'Call LANG_frmserviceDesk()
 
         Dim LNGIniFile As New IniFile(sLANGPATH)
-        lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem1", ""), 20, HorizontalAlignment.Left)
+        lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem1", ""), 40, HorizontalAlignment.Left)
         'lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem2", ""), 300, HorizontalAlignment.Left)
         lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem3", ""), 30, HorizontalAlignment.Left)
         lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem4", ""), 90, HorizontalAlignment.Left)
@@ -282,7 +282,7 @@ Public Class frmserviceDesc
 
 
         Dim LNGIniFile As New IniFile(sLANGPATH)
-        lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem1", ""), 20, HorizontalAlignment.Left)
+        lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem1", ""), 40, HorizontalAlignment.Left)
         lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem2", ""), 300, HorizontalAlignment.Left)
         lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem3", ""), 30, HorizontalAlignment.Left)
         lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem4", ""), 90, HorizontalAlignment.Left)
@@ -1771,7 +1771,7 @@ err_1:
         Dim intj1 As Integer = 0
 
 
-        '   If MsgBox("Вы собираетесь удалить заявки, продолжить?", MsgBoxStyle.YesNo, ProGramName) = MsgBoxResult.Yes Then
+
 
         lvRem.Select()
 
@@ -1791,22 +1791,24 @@ err_1:
 
         If intj1 > 0 Then
 
-            lvRem.Select()
+            If MsgBox("Вы собираетесь удалить заявки - " & intj1 & " шт." & vbNewLine & "продолжить?", MsgBoxStyle.YesNo, ProGramName) = MsgBoxResult.Yes Then
 
-            For intj = 0 To lvRem.Items.Count - 1
+                lvRem.Select()
 
-                lvRem.Items(intj).Selected = True
-                lvRem.Items(intj).EnsureVisible()
+                For intj = 0 To lvRem.Items.Count - 1
 
-                If lvRem.Items(intj).Checked = True Then
+                    lvRem.Items(intj).Selected = True
+                    lvRem.Items(intj).EnsureVisible()
+
+                    If lvRem.Items(intj).Checked = True Then
 
 
-                    Call DELETE_SERVICES()
+                        Call DELETE_SERVICES()
 
-                End If
+                    End If
 
-            Next
-
+                Next
+            End If
         Else
 
             Call DELETE_SERVICES(r1COUNT)
@@ -1814,8 +1816,12 @@ err_1:
         End If
 
 
+
         Call Me.LOAD_REPAIR(frmComputers.sCOUNT, Me.lvRem)
         Call REM_CHECK()
+
+
+
 
     End Sub
 

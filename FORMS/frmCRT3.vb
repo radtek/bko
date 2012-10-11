@@ -1560,13 +1560,13 @@ err_:
         If Counter > 0 Then
             cmbSostUstr.Items.Clear()
             rs = New ADODB.Recordset
-            rs.Open("SELECT id,PRINTER_NAME_1,filial,mesto FROM kompy where TipTehn='Printer' or TipTehn='KOpir' or TipTehn='MFU' ORDER BY filial,mesto", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rs.Open("SELECT id,PRINTER_NAME_1,filial,mesto,kabn FROM kompy where TipTehn='Printer' or TipTehn='KOpir' or TipTehn='MFU' ORDER BY filial,mesto,kabn", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
             With rs
                 .MoveFirst()
                 Do While Not .EOF
                     'If .Fields("TipTehn").Value = "Printer" Or .Fields("TipTehn").Value = "KOpir" Or .Fields("TipTehn").Value = "MFU" Then
-                    cmbSostUstr.Items.Add(" № " & .Fields("id").Value & " " & .Fields("PRINTER_NAME_1").Value & " (" & .Fields("filial").Value & "/" & .Fields("mesto").Value & ")")
+                    cmbSostUstr.Items.Add(" № " & .Fields("id").Value & " " & .Fields("PRINTER_NAME_1").Value & " (" & .Fields("filial").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value & ")")
                     'Else
                     'End If
                     .MoveNext()

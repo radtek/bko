@@ -540,6 +540,9 @@ FoundiR:
 
     Public Sub Soft_Click(Optional ByVal sSid As Integer = 0)
 
+        On Error GoTo err_
+
+
         If lstSoftware.Items.Count = 0 Then Exit Sub
 
 
@@ -613,6 +616,7 @@ FoundiR:
         rs1 = Nothing
 
         Exit Sub
+err_:
 A:
         DTInstall.Value = Date.Today
         dtGok.Value = Date.Today
@@ -687,6 +691,7 @@ A:
     End Sub
 
     Private Sub btnDelete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDelete.Click
+
         If lstSoftware.Items.Count = 0 Then Exit Sub
 
         Dim z As Integer
@@ -695,18 +700,79 @@ A:
             rCOUNT = (lstSoftware.SelectedItems(z).Text)
         Next
 
-        Dim rs1 As ADODB.Recordset
-        rs1 = New ADODB.Recordset
 
-        rs1.Open("Delete FROM SOFT_INSTALL WHERE id=" & rCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        Dim intj As Integer = 0
+        Dim intj1 As Integer = 0
 
-        rs1 = Nothing
+        lstSoftware.Select()
 
+        For intj = 0 To lstSoftware.Items.Count - 1
+
+            lstSoftware.Items(intj).Selected = True
+            lstSoftware.Items(intj).EnsureVisible()
+
+            If lstSoftware.Items(intj).Checked = True Then
+
+                intj1 = intj1 + 1
+
+            End If
+
+        Next
+
+
+
+        If intj1 > 0 Then
+
+            If MsgBox("Вы собираетесь удалить П.О. - " & intj1 & " шт." & vbNewLine & "продолжить?", MsgBoxStyle.YesNo, ProGramName) = MsgBoxResult.Yes Then
+                lstSoftware.Select()
+
+                For intj = 0 To lstSoftware.Items.Count - 1
+
+                    lstSoftware.Items(intj).Selected = True
+                    lstSoftware.Items(intj).EnsureVisible()
+
+                    If lstSoftware.Items(intj).Checked = True Then
+
+
+                        Call DELETE_SOFT()
+
+                    End If
+
+                Next
+            End If
+        Else
+
+            Call DELETE_SOFT(rCOUNT)
+
+        End If
 
         Call LOAD_SOFT(sCOUNT, Me.lstSoftware)
 
+    End Sub
+
+    Private Sub DELETE_SOFT(Optional ByVal ssid As Integer = 0)
+        Dim z As Integer
+
+        If ssid = 0 Then
+
+
+            For z = 0 To lstSoftware.SelectedItems.Count - 1
+                rCOUNT = (lstSoftware.SelectedItems(z).Text)
+            Next
+
+            ssid = rCOUNT
+
+        End If
+
+        Dim rs1 As ADODB.Recordset
+        rs1 = New ADODB.Recordset
+
+        rs1.Open("Delete FROM SOFT_INSTALL WHERE id=" & ssid, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+        rs1 = Nothing
 
     End Sub
+
 
     Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
 

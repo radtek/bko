@@ -212,9 +212,6 @@ err_:
         frmMain.Cursor = Cursors.Default
     End Sub
 
-
-
-
     Private Sub wCPU()
 
         On Error GoTo err_

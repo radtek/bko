@@ -6,6 +6,38 @@
     Private Sub cmbAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbAdd.Click
         On Error Resume Next
         On Error GoTo err_
+
+        If Len(cmbIst.Text) = 0 Then
+
+            MsgBox("Не указан источник", MsgBoxStyle.Information, ProGramName)
+            Exit Sub
+        End If
+
+        If Len(cmbMast.Text) = 0 Then
+
+            MsgBox("Не указан Мастер", MsgBoxStyle.Information, ProGramName)
+            Exit Sub
+        End If
+
+        If Len(txtRem.Text) = 0 Then
+
+            MsgBox("Нет информации о ремонте", MsgBoxStyle.Information, ProGramName)
+            Exit Sub
+        End If
+
+        If Len(cmbStatus.Text) = 0 Then
+
+            MsgBox("Не указан статус заявки", MsgBoxStyle.Information, ProGramName)
+            Exit Sub
+        End If
+
+        If Len(cmbOtv.Text) = 0 Then
+
+            MsgBox("Не указан ответственный", MsgBoxStyle.Information, ProGramName)
+            Exit Sub
+        End If
+
+
         Dim sSQL As String
         Dim unamZ As String
         Dim sCOUNTER As String
@@ -21,7 +53,6 @@
 
             Case "C"
 
-               
                 rs = New ADODB.Recordset
                 sSQL = "SELECT filial, mesto, net_name,kabn FROM kompy WHERE id=" & frmComputers.sCOUNT
                 rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)

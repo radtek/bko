@@ -208,6 +208,7 @@ Partial Class frmSoftware
         '
         'lstSoftware
         '
+        Me.lstSoftware.CheckBoxes = True
         Me.TableLayoutPanel1.SetColumnSpan(Me.lstSoftware, 4)
         Me.lstSoftware.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lstSoftware.FullRowSelect = True
@@ -216,7 +217,7 @@ Partial Class frmSoftware
         Me.lstSoftware.Location = New System.Drawing.Point(3, 165)
         Me.lstSoftware.MultiSelect = False
         Me.lstSoftware.Name = "lstSoftware"
-        Me.lstSoftware.Size = New System.Drawing.Size(674, 479)
+        Me.lstSoftware.Size = New System.Drawing.Size(674, 334)
         Me.lstSoftware.TabIndex = 17
         Me.lstSoftware.UseCompatibleStateImageBehavior = False
         Me.lstSoftware.View = System.Windows.Forms.View.Details

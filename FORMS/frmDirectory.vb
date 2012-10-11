@@ -325,7 +325,7 @@ Public Class frmDirectory
         Label1.Text = objIniFile.GetString("frmDirectory", "Label2", "")
 
         Me.lvDirectory.Columns.Clear()
-        Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", ""), 10, HorizontalAlignment.Left)
+        Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", ""), 20, HorizontalAlignment.Left)
         Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory2", ""), 300, HorizontalAlignment.Left)
         Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory3", ""), 300, HorizontalAlignment.Left)
         Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "MSG99", ""), 70, HorizontalAlignment.Left)
@@ -366,7 +366,7 @@ Public Class frmDirectory
                 gb2.Visible = False
 
                 Me.lvDirectory.Columns.Clear()
-                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", ""), 10, HorizontalAlignment.Left)
+                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", ""), 20, HorizontalAlignment.Left)
                 Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory2", ""), 300, HorizontalAlignment.Left)
                 Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory4", ""), 300, HorizontalAlignment.Left)
                 Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "MSG99", ""), 70, HorizontalAlignment.Left)
@@ -907,7 +907,7 @@ Public Class frmDirectory
                 rs1 = Nothing
 
                 Me.lvDirectory.Columns.Clear()
-                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", ""), 10, HorizontalAlignment.Left)
+                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", ""), 20, HorizontalAlignment.Left)
                 Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory2", ""), 300, HorizontalAlignment.Left)
                 'Me.lotd.Columns.Add(("Производитель"), 300, HorizontalAlignment.Left)
 
@@ -923,7 +923,7 @@ Public Class frmDirectory
                 gb2.Visible = False
 
                 Me.lvDirectory.Columns.Clear()
-                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", ""), 10, HorizontalAlignment.Left)
+                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", ""), 20, HorizontalAlignment.Left)
                 Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory2", ""), 300, HorizontalAlignment.Left)
 
                 sSQL = "SELECT id, Name FROM SPR_OTV ORDER BY NAME"
@@ -936,7 +936,7 @@ Public Class frmDirectory
                 cmbName3.Visible = False
 
                 Me.lvDirectory.Columns.Clear()
-                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", ""), 10, HorizontalAlignment.Left)
+                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", ""), 20, HorizontalAlignment.Left)
                 Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory2", ""), 300, HorizontalAlignment.Left)
 
                 sSQL = "SELECT Id, filial FROM SPR_FILIAL ORDER BY filial"
@@ -952,7 +952,7 @@ Public Class frmDirectory
                 FillComboNET(Me.cmbName, "FILIAL", "SPR_FILIAL", "", False, True)
 
                 Me.lvDirectory.Columns.Clear()
-                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", ""), 10, HorizontalAlignment.Left)
+                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", ""), 20, HorizontalAlignment.Left)
                 Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "MSG39", ""), 300, HorizontalAlignment.Left)
                 Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "MSG40", ""), 300, HorizontalAlignment.Left)
 
@@ -976,7 +976,7 @@ Public Class frmDirectory
                 sSQL = "SELECT id, N_F, N_M, Name FROM SPR_KAB ORDER BY Name"
 
                 Me.lvDirectory.Columns.Clear()
-                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", ""), 10, HorizontalAlignment.Left)
+                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", ""), 20, HorizontalAlignment.Left)
                 Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "MSG39", ""), 250, HorizontalAlignment.Left)
                 Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "MSG40", ""), 250, HorizontalAlignment.Left)
                 Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "MSG41", ""), 250, HorizontalAlignment.Left)
@@ -993,7 +993,7 @@ Public Class frmDirectory
                 gb2.Visible = False
                 sSQL = "SELECT id, uroven  FROM SPR_Uroven order by uroven"
                 Me.lvDirectory.Columns.Clear()
-                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", ""), 10, HorizontalAlignment.Left)
+                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", ""), 20, HorizontalAlignment.Left)
                 Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory2", ""), 300, HorizontalAlignment.Left)
 
             Case objIniFile.GetString("frmDirectory", "MSG44", "")
@@ -1007,7 +1007,7 @@ Public Class frmDirectory
                 sSQL = "SELECT id, name FROM spr_vip order by name"
 
                 Me.lvDirectory.Columns.Clear()
-                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", ""), 10, HorizontalAlignment.Left)
+                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", ""), 20, HorizontalAlignment.Left)
                 Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory2", ""), 300, HorizontalAlignment.Left)
 
             Case objIniFile.GetString("frmDirectory", "MSG45", "")
@@ -1021,7 +1021,7 @@ Public Class frmDirectory
                 sSQL = "SELECT id, name FROM spr_tip_z order by name"
 
                 Me.lvDirectory.Columns.Clear()
-                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", ""), 10, HorizontalAlignment.Left)
+                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", ""), 20, HorizontalAlignment.Left)
                 Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory2", ""), 300, HorizontalAlignment.Left)
 
             Case objIniFile.GetString("frmDirectory", "MSG47", "")
@@ -1032,7 +1032,7 @@ Public Class frmDirectory
                 sSQL = "SELECT id, Name FROM SPR_Postav ORDER BY Name"
 
                 Me.lvDirectory.Columns.Clear()
-                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", ""), 10, HorizontalAlignment.Left)
+                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", ""), 20, HorizontalAlignment.Left)
                 Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory2", ""), 300, HorizontalAlignment.Left)
 
             Case objIniFile.GetString("frmDirectory", "MSG48", "")
@@ -1043,7 +1043,7 @@ Public Class frmDirectory
                 sSQL = "SELECT SPR_PROIZV.Id, SPR_PROIZV.PROIZV FROM SPR_PROIZV ORDER BY PROIZV"
 
                 Me.lvDirectory.Columns.Clear()
-                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", ""), 10, HorizontalAlignment.Left)
+                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", ""), 20, HorizontalAlignment.Left)
                 Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory2", ""), 300, HorizontalAlignment.Left)
 
             Case objIniFile.GetString("frmDirectory", "MSG49", "")
@@ -1057,7 +1057,7 @@ Public Class frmDirectory
                 sSQL = "SELECT id, tip FROM SPR_TIP ORDER BY tip"
 
                 Me.lvDirectory.Columns.Clear()
-                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", ""), 10, HorizontalAlignment.Left)
+                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", ""), 20, HorizontalAlignment.Left)
                 Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory2", ""), 300, HorizontalAlignment.Left)
 
             Case objIniFile.GetString("frmDirectory", "MSG50", "")
@@ -1110,7 +1110,7 @@ Public Class frmDirectory
 
 
                 Me.lvDirectory.Columns.Clear()
-                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", ""), 10, HorizontalAlignment.Left)
+                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", ""), 20, HorizontalAlignment.Left)
                 Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory2", ""), 300, HorizontalAlignment.Left)
 
                 'sSQL = "SELECT spr_other.Id, spr_other.Name, SPR_PROIZV.PROIZV FROM SPR_PROIZV INNER JOIN SPR_PCI ON (SPR_PROIZV.id = spr_other.Proizv) AND (SPR_PROIZV.iD = spr_other.Proizv) WHERE ((spr_other.Proizv=SPR_PROIZV.iD)) ORDER BY Name"
@@ -1144,7 +1144,7 @@ Public Class frmDirectory
                 sSQL = "SELECT SPR_LIC.Id, SPR_LIC.name FROM SPR_LIC ORDER BY Name"
 
                 Me.lvDirectory.Columns.Clear()
-                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", ""), 10, HorizontalAlignment.Left)
+                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", ""), 20, HorizontalAlignment.Left)
                 Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory2", ""), 300, HorizontalAlignment.Left)
 
             Case objIniFile.GetString("frmDirectory", "MSG54", "")
@@ -1159,7 +1159,7 @@ Public Class frmDirectory
                 sSQL = "SELECT id, Name FROM SPR_TIP_PO order by Name"
 
                 Me.lvDirectory.Columns.Clear()
-                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", ""), 10, HorizontalAlignment.Left)
+                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", ""), 20, HorizontalAlignment.Left)
                 Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory2", ""), 300, HorizontalAlignment.Left)
 
             Case objIniFile.GetString("frmDirectory", "MSG55", "")
@@ -1174,7 +1174,7 @@ Public Class frmDirectory
                 sSQL = "SELECT Id, Name FROM SPR_Complect ORDER BY Name"
 
                 Me.lvDirectory.Columns.Clear()
-                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", ""), 10, HorizontalAlignment.Left)
+                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", ""), 20, HorizontalAlignment.Left)
                 Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory2", ""), 300, HorizontalAlignment.Left)
 
             Case objIniFile.GetString("frmDirectory", "MSG56", "")
@@ -2710,22 +2710,23 @@ err_:
 
         If intj1 > 0 Then
 
-            lvDirectory.Select()
+            If MsgBox("Вы собираетесь удалить объекты справочника - " & intj1 & " шт." & vbNewLine & "продолжить?", MsgBoxStyle.YesNo, ProGramName) = MsgBoxResult.Yes Then
+                lvDirectory.Select()
 
-            For intj = 0 To lvDirectory.Items.Count - 1
+                For intj = 0 To lvDirectory.Items.Count - 1
 
-                lvDirectory.Items(intj).Selected = True
-                lvDirectory.Items(intj).EnsureVisible()
+                    lvDirectory.Items(intj).Selected = True
+                    lvDirectory.Items(intj).EnsureVisible()
 
-                If lvDirectory.Items(intj).Checked = True Then
+                    If lvDirectory.Items(intj).Checked = True Then
 
 
-                    Call DELETE_SPR()
+                        Call DELETE_SPR()
 
-                End If
+                    End If
 
-            Next
-
+                Next
+            End If
         Else
 
             Call DELETE_SPR(dSID)
