@@ -275,11 +275,11 @@ Partial Class frmNetMag_Add
         '
         'ToolStrip1
         '
+        Me.ToolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton1, Me.ToolStripButton2})
         Me.ToolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
         Me.ToolStrip1.Location = New System.Drawing.Point(538, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
         Me.ToolStrip1.Size = New System.Drawing.Size(231, 25)
         Me.ToolStrip1.TabIndex = 9
         Me.ToolStrip1.Text = "ToolStrip1"
@@ -425,11 +425,11 @@ Partial Class frmNetMag_Add
         '
         'ToolStrip2
         '
+        Me.ToolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
         Me.ToolStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton3, Me.ToolStripButton4})
         Me.ToolStrip2.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
         Me.ToolStrip2.Location = New System.Drawing.Point(573, 0)
         Me.ToolStrip2.Name = "ToolStrip2"
-        Me.ToolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
         Me.ToolStrip2.Size = New System.Drawing.Size(196, 25)
         Me.ToolStrip2.TabIndex = 9
         Me.ToolStrip2.Text = "ToolStrip2"

@@ -29,10 +29,11 @@ Me.TableLayoutPanel65 = New System.Windows.Forms.TableLayoutPanel()
 Me.gbTree = New System.Windows.Forms.GroupBox()
 Me.TableLayoutPanel64 = New System.Windows.Forms.TableLayoutPanel()
 Me.lstGroups = New System.Windows.Forms.TreeView()
-Me.btnSearch = New System.Windows.Forms.Button()
 Me.txtSearch = New System.Windows.Forms.TextBox()
 Me.treebranche = New System.Windows.Forms.ComboBox()
 Me.chkVisibleSTR = New System.Windows.Forms.CheckBox()
+Me.ToolStrip7 = New System.Windows.Forms.ToolStrip()
+Me.btnSearch = New System.Windows.Forms.ToolStripButton()
 Me.sSTAB1 = New System.Windows.Forms.TabControl()
 Me.TabPage6 = New System.Windows.Forms.TabPage()
 Me.TableLayoutPanel20 = New System.Windows.Forms.TableLayoutPanel()
@@ -277,6 +278,15 @@ Me.lstSoftware = New System.Windows.Forms.ListView()
 Me.TabPage5 = New System.Windows.Forms.TabPage()
 Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
 Me.TableLayoutPanel4 = New System.Windows.Forms.TableLayoutPanel()
+Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+Me.cmdUserAdd = New System.Windows.Forms.ToolStripButton()
+Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+Me.cmdUserDel = New System.Windows.Forms.ToolStripButton()
+Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+Me.cmdUserPassEncript = New System.Windows.Forms.ToolStripButton()
+Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
+Me.btnUserCancel = New System.Windows.Forms.ToolStripButton()
+Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
 Me.txtUMEMO = New System.Windows.Forms.TextBox()
 Me.Label36 = New System.Windows.Forms.Label()
 Me.txtUserEmailPwd = New System.Windows.Forms.TextBox()
@@ -294,11 +304,6 @@ Me.lblUsername = New System.Windows.Forms.Label()
 Me.ChkPDC = New System.Windows.Forms.CheckBox()
 Me.txtUserName = New System.Windows.Forms.ComboBox()
 Me.txtUserFIO = New System.Windows.Forms.ComboBox()
-Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
-Me.cmdUserPassEncript = New System.Windows.Forms.Button()
-Me.cmdUserAdd = New System.Windows.Forms.Button()
-Me.cmdUserDel = New System.Windows.Forms.Button()
-Me.btnUserCancel = New System.Windows.Forms.Button()
 Me.lstUsers = New System.Windows.Forms.ListView()
 Me.TabPage7 = New System.Windows.Forms.TabPage()
 Me.TableLayoutPanel5 = New System.Windows.Forms.TableLayoutPanel()
@@ -306,14 +311,17 @@ Me.gbRepair = New System.Windows.Forms.GroupBox()
 Me.lvRepair = New System.Windows.Forms.ListView()
 Me.gbNotes = New System.Windows.Forms.GroupBox()
 Me.TableLayoutPanel6 = New System.Windows.Forms.TableLayoutPanel()
+Me.ToolStrip2 = New System.Windows.Forms.ToolStrip()
+Me.btnNotesAdd = New System.Windows.Forms.ToolStripButton()
+Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
+Me.btnNotesDel = New System.Windows.Forms.ToolStripButton()
+Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
+Me.btnNotesCancel = New System.Windows.Forms.ToolStripButton()
+Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
 Me.lvNotes = New System.Windows.Forms.ListView()
 Me.txtNotes = New System.Windows.Forms.TextBox()
 Me.cmbNotesMaster = New System.Windows.Forms.ComboBox()
 Me.dtDateNotes = New System.Windows.Forms.DateTimePicker()
-Me.TableLayoutPanel7 = New System.Windows.Forms.TableLayoutPanel()
-Me.btnNotesCancel = New System.Windows.Forms.Button()
-Me.btnNotesAdd = New System.Windows.Forms.Button()
-Me.btnNotesDel = New System.Windows.Forms.Button()
 Me.TabPage8 = New System.Windows.Forms.TabPage()
 Me.TableLayoutPanel66 = New System.Windows.Forms.TableLayoutPanel()
 Me.gbGuarantee = New System.Windows.Forms.GroupBox()
@@ -361,10 +369,13 @@ Me.gbBRRemont = New System.Windows.Forms.GroupBox()
 Me.lvRepairBR = New System.Windows.Forms.ListView()
 Me.gbBRNotes = New System.Windows.Forms.GroupBox()
 Me.TableLayoutPanel9 = New System.Windows.Forms.TableLayoutPanel()
-Me.TableLayoutPanel10 = New System.Windows.Forms.TableLayoutPanel()
-Me.btnBRNotesCancel = New System.Windows.Forms.Button()
-Me.btnBRNotesAdd = New System.Windows.Forms.Button()
-Me.btnBRNotesDel = New System.Windows.Forms.Button()
+Me.ToolStrip3 = New System.Windows.Forms.ToolStrip()
+Me.btnBRNotesAdd = New System.Windows.Forms.ToolStripButton()
+Me.ToolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
+Me.btnBRNotesDel = New System.Windows.Forms.ToolStripButton()
+Me.ToolStripSeparator9 = New System.Windows.Forms.ToolStripSeparator()
+Me.btnBRNotesCancel = New System.Windows.Forms.ToolStripButton()
+Me.ToolStripSeparator10 = New System.Windows.Forms.ToolStripSeparator()
 Me.lvNotesBR = New System.Windows.Forms.ListView()
 Me.Notesbrtxt = New System.Windows.Forms.TextBox()
 Me.cmbBRMaster = New System.Windows.Forms.ComboBox()
@@ -443,14 +454,17 @@ Me.gbPRNRemont = New System.Windows.Forms.GroupBox()
 Me.lvRepairPRN = New System.Windows.Forms.ListView()
 Me.gbPRNNotes = New System.Windows.Forms.GroupBox()
 Me.TableLayoutPanel12 = New System.Windows.Forms.TableLayoutPanel()
+Me.ToolStrip4 = New System.Windows.Forms.ToolStrip()
+Me.btnPRNNotesAdd = New System.Windows.Forms.ToolStripButton()
+Me.ToolStripSeparator11 = New System.Windows.Forms.ToolStripSeparator()
+Me.btnPRNNotesDel = New System.Windows.Forms.ToolStripButton()
+Me.ToolStripSeparator12 = New System.Windows.Forms.ToolStripSeparator()
+Me.btnPRNNotesCancel = New System.Windows.Forms.ToolStripButton()
+Me.ToolStripSeparator13 = New System.Windows.Forms.ToolStripSeparator()
 Me.lvNotesPRN = New System.Windows.Forms.ListView()
 Me.NotesPRNtxt = New System.Windows.Forms.TextBox()
 Me.cmbNotesPRNMaster = New System.Windows.Forms.ComboBox()
 Me.NotesPRNdate = New System.Windows.Forms.DateTimePicker()
-Me.TableLayoutPanel13 = New System.Windows.Forms.TableLayoutPanel()
-Me.btnPRNNotesCancel = New System.Windows.Forms.Button()
-Me.btnPRNNotesAdd = New System.Windows.Forms.Button()
-Me.btnPRNNotesDel = New System.Windows.Forms.Button()
 Me.TabPage16 = New System.Windows.Forms.TabPage()
 Me.TableLayoutPanel67 = New System.Windows.Forms.TableLayoutPanel()
 Me.gbPostPRN = New System.Windows.Forms.GroupBox()
@@ -541,10 +555,13 @@ Me.gbNETRemont = New System.Windows.Forms.GroupBox()
 Me.lvRepairNET = New System.Windows.Forms.ListView()
 Me.gbNETNotes = New System.Windows.Forms.GroupBox()
 Me.TableLayoutPanel15 = New System.Windows.Forms.TableLayoutPanel()
-Me.TableLayoutPanel16 = New System.Windows.Forms.TableLayoutPanel()
-Me.btnNETNotesCancel = New System.Windows.Forms.Button()
-Me.btnNETAdd = New System.Windows.Forms.Button()
-Me.btnNETNotesDel = New System.Windows.Forms.Button()
+Me.ToolStrip5 = New System.Windows.Forms.ToolStrip()
+Me.btnNETAdd = New System.Windows.Forms.ToolStripButton()
+Me.ToolStripSeparator14 = New System.Windows.Forms.ToolStripSeparator()
+Me.btnNETNotesDel = New System.Windows.Forms.ToolStripButton()
+Me.ToolStripSeparator15 = New System.Windows.Forms.ToolStripSeparator()
+Me.btnNETNotesCancel = New System.Windows.Forms.ToolStripButton()
+Me.ToolStripSeparator16 = New System.Windows.Forms.ToolStripSeparator()
 Me.lvNotesNET = New System.Windows.Forms.ListView()
 Me.cmbNotesNETMaster = New System.Windows.Forms.ComboBox()
 Me.NotesNETdate = New System.Windows.Forms.DateTimePicker()
@@ -615,10 +632,13 @@ Me.gbOTHRemont = New System.Windows.Forms.GroupBox()
 Me.lvRepairOTH = New System.Windows.Forms.ListView()
 Me.gbOTHNotes = New System.Windows.Forms.GroupBox()
 Me.TableLayoutPanel18 = New System.Windows.Forms.TableLayoutPanel()
-Me.TableLayoutPanel19 = New System.Windows.Forms.TableLayoutPanel()
-Me.btnOTHNotesCancel = New System.Windows.Forms.Button()
-Me.btnOTHAdd = New System.Windows.Forms.Button()
-Me.btnOTHNotesDel = New System.Windows.Forms.Button()
+Me.ToolStrip6 = New System.Windows.Forms.ToolStrip()
+Me.btnOTHAdd = New System.Windows.Forms.ToolStripButton()
+Me.ToolStripSeparator17 = New System.Windows.Forms.ToolStripSeparator()
+Me.btnOTHNotesDel = New System.Windows.Forms.ToolStripButton()
+Me.ToolStripSeparator18 = New System.Windows.Forms.ToolStripSeparator()
+Me.btnOTHNotesCancel = New System.Windows.Forms.ToolStripButton()
+Me.ToolStripSeparator19 = New System.Windows.Forms.ToolStripSeparator()
 Me.lvNotesOTH = New System.Windows.Forms.ListView()
 Me.txtNotesOTH = New System.Windows.Forms.TextBox()
 Me.cmbNotesOTHMaster = New System.Windows.Forms.ComboBox()
@@ -688,12 +708,14 @@ Me.mnu_Z_to_Office = New System.Windows.Forms.ToolStripMenuItem()
 Me.mnu_z_rasp = New System.Windows.Forms.ToolStripMenuItem()
 Me.addServiseWork = New System.Windows.Forms.ToolStripMenuItem()
 Me.ilsCommands = New System.Windows.Forms.ImageList(Me.components)
+CType(Me.spCont,System.ComponentModel.ISupportInitialize).BeginInit
 Me.spCont.Panel1.SuspendLayout
 Me.spCont.Panel2.SuspendLayout
 Me.spCont.SuspendLayout
 Me.TableLayoutPanel65.SuspendLayout
 Me.gbTree.SuspendLayout
 Me.TableLayoutPanel64.SuspendLayout
+Me.ToolStrip7.SuspendLayout
 Me.sSTAB1.SuspendLayout
 Me.TabPage6.SuspendLayout
 Me.TableLayoutPanel20.SuspendLayout
@@ -754,13 +776,13 @@ Me.TabPage4.SuspendLayout
 Me.TabPage5.SuspendLayout
 Me.TableLayoutPanel1.SuspendLayout
 Me.TableLayoutPanel4.SuspendLayout
-Me.TableLayoutPanel3.SuspendLayout
+Me.ToolStrip1.SuspendLayout
 Me.TabPage7.SuspendLayout
 Me.TableLayoutPanel5.SuspendLayout
 Me.gbRepair.SuspendLayout
 Me.gbNotes.SuspendLayout
 Me.TableLayoutPanel6.SuspendLayout
-Me.TableLayoutPanel7.SuspendLayout
+Me.ToolStrip2.SuspendLayout
 Me.TabPage8.SuspendLayout
 Me.TableLayoutPanel66.SuspendLayout
 Me.gbGuarantee.SuspendLayout
@@ -779,7 +801,7 @@ Me.TableLayoutPanel8.SuspendLayout
 Me.gbBRRemont.SuspendLayout
 Me.gbBRNotes.SuspendLayout
 Me.TableLayoutPanel9.SuspendLayout
-Me.TableLayoutPanel10.SuspendLayout
+Me.ToolStrip3.SuspendLayout
 Me.TabPage21.SuspendLayout
 Me.TableLayoutPanel73.SuspendLayout
 Me.sSTAB2.SuspendLayout
@@ -794,7 +816,7 @@ Me.TableLayoutPanel11.SuspendLayout
 Me.gbPRNRemont.SuspendLayout
 Me.gbPRNNotes.SuspendLayout
 Me.TableLayoutPanel12.SuspendLayout
-Me.TableLayoutPanel13.SuspendLayout
+Me.ToolStrip4.SuspendLayout
 Me.TabPage16.SuspendLayout
 Me.TableLayoutPanel67.SuspendLayout
 Me.gbPostPRN.SuspendLayout
@@ -820,7 +842,7 @@ Me.TableLayoutPanel14.SuspendLayout
 Me.gbNETRemont.SuspendLayout
 Me.gbNETNotes.SuspendLayout
 Me.TableLayoutPanel15.SuspendLayout
-Me.TableLayoutPanel16.SuspendLayout
+Me.ToolStrip5.SuspendLayout
 Me.TabPage17.SuspendLayout
 Me.TableLayoutPanel68.SuspendLayout
 Me.gbPostNET.SuspendLayout
@@ -839,7 +861,7 @@ Me.TableLayoutPanel17.SuspendLayout
 Me.gbOTHRemont.SuspendLayout
 Me.gbOTHNotes.SuspendLayout
 Me.TableLayoutPanel18.SuspendLayout
-Me.TableLayoutPanel19.SuspendLayout
+Me.ToolStrip6.SuspendLayout
 Me.TabPage18.SuspendLayout
 Me.TableLayoutPanel70.SuspendLayout
 Me.gbPostOTH.SuspendLayout
@@ -907,10 +929,10 @@ Me.TableLayoutPanel64.ColumnCount = 2
 Me.TableLayoutPanel64.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100!))
 Me.TableLayoutPanel64.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 Me.TableLayoutPanel64.Controls.Add(Me.lstGroups, 0, 3)
-Me.TableLayoutPanel64.Controls.Add(Me.btnSearch, 1, 0)
 Me.TableLayoutPanel64.Controls.Add(Me.txtSearch, 0, 0)
 Me.TableLayoutPanel64.Controls.Add(Me.treebranche, 0, 2)
 Me.TableLayoutPanel64.Controls.Add(Me.chkVisibleSTR, 0, 1)
+Me.TableLayoutPanel64.Controls.Add(Me.ToolStrip7, 1, 0)
 Me.TableLayoutPanel64.Dock = System.Windows.Forms.DockStyle.Fill
 Me.TableLayoutPanel64.Location = New System.Drawing.Point(3, 16)
 Me.TableLayoutPanel64.Name = "TableLayoutPanel64"
@@ -928,25 +950,17 @@ Me.lstGroups.AllowDrop = true
 Me.TableLayoutPanel64.SetColumnSpan(Me.lstGroups, 2)
 Me.lstGroups.Dock = System.Windows.Forms.DockStyle.Fill
 Me.lstGroups.FullRowSelect = true
-Me.lstGroups.Location = New System.Drawing.Point(3, 83)
+Me.lstGroups.Location = New System.Drawing.Point(3, 79)
 Me.lstGroups.Name = "lstGroups"
-Me.lstGroups.Size = New System.Drawing.Size(280, 535)
+Me.lstGroups.Size = New System.Drawing.Size(280, 539)
 Me.lstGroups.TabIndex = 9
-'
-'btnSearch
-'
-Me.btnSearch.Location = New System.Drawing.Point(254, 3)
-Me.btnSearch.Name = "btnSearch"
-Me.btnSearch.Size = New System.Drawing.Size(29, 24)
-Me.btnSearch.TabIndex = 8
-Me.btnSearch.UseVisualStyleBackColor = true
 '
 'txtSearch
 '
 Me.txtSearch.Dock = System.Windows.Forms.DockStyle.Fill
 Me.txtSearch.Location = New System.Drawing.Point(3, 3)
 Me.txtSearch.Name = "txtSearch"
-Me.txtSearch.Size = New System.Drawing.Size(245, 20)
+Me.txtSearch.Size = New System.Drawing.Size(223, 20)
 Me.txtSearch.TabIndex = 0
 '
 'treebranche
@@ -954,7 +968,7 @@ Me.txtSearch.TabIndex = 0
 Me.TableLayoutPanel64.SetColumnSpan(Me.treebranche, 2)
 Me.treebranche.Dock = System.Windows.Forms.DockStyle.Fill
 Me.treebranche.FormattingEnabled = true
-Me.treebranche.Location = New System.Drawing.Point(3, 56)
+Me.treebranche.Location = New System.Drawing.Point(3, 52)
 Me.treebranche.Name = "treebranche"
 Me.treebranche.Size = New System.Drawing.Size(280, 21)
 Me.treebranche.TabIndex = 5
@@ -962,12 +976,31 @@ Me.treebranche.TabIndex = 5
 'chkVisibleSTR
 '
 Me.chkVisibleSTR.AutoSize = true
-Me.chkVisibleSTR.Location = New System.Drawing.Point(3, 33)
+Me.chkVisibleSTR.Location = New System.Drawing.Point(3, 29)
 Me.chkVisibleSTR.Name = "chkVisibleSTR"
 Me.chkVisibleSTR.Size = New System.Drawing.Size(96, 17)
 Me.chkVisibleSTR.TabIndex = 6
 Me.chkVisibleSTR.Text = "Показать всё"
 Me.chkVisibleSTR.UseVisualStyleBackColor = true
+'
+'ToolStrip7
+'
+Me.ToolStrip7.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
+Me.ToolStrip7.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnSearch})
+Me.ToolStrip7.Location = New System.Drawing.Point(229, 0)
+Me.ToolStrip7.Name = "ToolStrip7"
+Me.ToolStrip7.Size = New System.Drawing.Size(57, 25)
+Me.ToolStrip7.TabIndex = 10
+Me.ToolStrip7.Text = "ToolStrip7"
+'
+'btnSearch
+'
+Me.btnSearch.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+Me.btnSearch.Image = CType(resources.GetObject("btnSearch.Image"),System.Drawing.Image)
+Me.btnSearch.ImageTransparentColor = System.Drawing.Color.Magenta
+Me.btnSearch.Name = "btnSearch"
+Me.btnSearch.Size = New System.Drawing.Size(23, 22)
+Me.btnSearch.Text = "Обновить дерево, удалить результат поиска"
 '
 'sSTAB1
 '
@@ -980,6 +1013,7 @@ Me.sSTAB1.Controls.Add(Me.TabPage7)
 Me.sSTAB1.Controls.Add(Me.TabPage8)
 Me.sSTAB1.Dock = System.Windows.Forms.DockStyle.Fill
 Me.sSTAB1.Location = New System.Drawing.Point(0, 0)
+Me.sSTAB1.Multiline = true
 Me.sSTAB1.Name = "sSTAB1"
 Me.sSTAB1.SelectedIndex = 0
 Me.sSTAB1.Size = New System.Drawing.Size(690, 646)
@@ -3818,11 +3852,9 @@ Me.TabPage5.UseVisualStyleBackColor = true
 '
 'TableLayoutPanel1
 '
-Me.TableLayoutPanel1.ColumnCount = 2
-Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 84.16422!))
-Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.83578!))
+Me.TableLayoutPanel1.ColumnCount = 1
+Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 84.01759!))
 Me.TableLayoutPanel1.Controls.Add(Me.TableLayoutPanel4, 0, 0)
-Me.TableLayoutPanel1.Controls.Add(Me.TableLayoutPanel3, 1, 0)
 Me.TableLayoutPanel1.Controls.Add(Me.lstUsers, 0, 1)
 Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
 Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
@@ -3830,17 +3862,20 @@ Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
 Me.TableLayoutPanel1.RowCount = 2
 Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
+Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20!))
 Me.TableLayoutPanel1.Size = New System.Drawing.Size(682, 620)
 Me.TableLayoutPanel1.TabIndex = 0
 '
 'TableLayoutPanel4
 '
 Me.TableLayoutPanel4.AutoSize = true
-Me.TableLayoutPanel4.ColumnCount = 4
+Me.TableLayoutPanel4.ColumnCount = 5
 Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50!))
 Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50!))
+Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+Me.TableLayoutPanel4.Controls.Add(Me.ToolStrip1, 4, 0)
 Me.TableLayoutPanel4.Controls.Add(Me.txtUMEMO, 0, 5)
 Me.TableLayoutPanel4.Controls.Add(Me.Label36, 0, 4)
 Me.TableLayoutPanel4.Controls.Add(Me.txtUserEmailPwd, 3, 3)
@@ -3868,8 +3903,77 @@ Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Wind
 Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25!))
 Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25!))
 Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 149!))
-Me.TableLayoutPanel4.Size = New System.Drawing.Size(567, 274)
+Me.TableLayoutPanel4.Size = New System.Drawing.Size(676, 274)
 Me.TableLayoutPanel4.TabIndex = 43
+'
+'ToolStrip1
+'
+Me.ToolStrip1.Dock = System.Windows.Forms.DockStyle.Fill
+Me.ToolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
+Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cmdUserAdd, Me.ToolStripSeparator1, Me.cmdUserDel, Me.ToolStripSeparator2, Me.cmdUserPassEncript, Me.ToolStripSeparator3, Me.btnUserCancel, Me.ToolStripSeparator4})
+Me.ToolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow
+Me.ToolStrip1.Location = New System.Drawing.Point(581, 0)
+Me.ToolStrip1.Name = "ToolStrip1"
+Me.TableLayoutPanel4.SetRowSpan(Me.ToolStrip1, 5)
+Me.ToolStrip1.Size = New System.Drawing.Size(95, 125)
+Me.ToolStrip1.TabIndex = 44
+Me.ToolStrip1.Text = "ToolStrip1"
+'
+'cmdUserAdd
+'
+Me.cmdUserAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+Me.cmdUserAdd.Image = CType(resources.GetObject("cmdUserAdd.Image"),System.Drawing.Image)
+Me.cmdUserAdd.ImageTransparentColor = System.Drawing.Color.Magenta
+Me.cmdUserAdd.Name = "cmdUserAdd"
+Me.cmdUserAdd.Size = New System.Drawing.Size(93, 19)
+Me.cmdUserAdd.Text = "Добавить"
+'
+'ToolStripSeparator1
+'
+Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+Me.ToolStripSeparator1.Size = New System.Drawing.Size(93, 6)
+'
+'cmdUserDel
+'
+Me.cmdUserDel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+Me.cmdUserDel.Image = CType(resources.GetObject("cmdUserDel.Image"),System.Drawing.Image)
+Me.cmdUserDel.ImageTransparentColor = System.Drawing.Color.Magenta
+Me.cmdUserDel.Name = "cmdUserDel"
+Me.cmdUserDel.Size = New System.Drawing.Size(93, 19)
+Me.cmdUserDel.Text = "Удалить"
+'
+'ToolStripSeparator2
+'
+Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+Me.ToolStripSeparator2.Size = New System.Drawing.Size(93, 6)
+'
+'cmdUserPassEncript
+'
+Me.cmdUserPassEncript.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+Me.cmdUserPassEncript.Image = CType(resources.GetObject("cmdUserPassEncript.Image"),System.Drawing.Image)
+Me.cmdUserPassEncript.ImageTransparentColor = System.Drawing.Color.Magenta
+Me.cmdUserPassEncript.Name = "cmdUserPassEncript"
+Me.cmdUserPassEncript.Size = New System.Drawing.Size(93, 19)
+Me.cmdUserPassEncript.Text = "Расшифровать"
+'
+'ToolStripSeparator3
+'
+Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
+Me.ToolStripSeparator3.Size = New System.Drawing.Size(93, 6)
+'
+'btnUserCancel
+'
+Me.btnUserCancel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+Me.btnUserCancel.Image = CType(resources.GetObject("btnUserCancel.Image"),System.Drawing.Image)
+Me.btnUserCancel.ImageTransparentColor = System.Drawing.Color.Magenta
+Me.btnUserCancel.Name = "btnUserCancel"
+Me.btnUserCancel.Size = New System.Drawing.Size(93, 19)
+Me.btnUserCancel.Text = "Отмена"
+'
+'ToolStripSeparator4
+'
+Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
+Me.ToolStripSeparator4.Size = New System.Drawing.Size(93, 6)
 '
 'txtUMEMO
 '
@@ -3879,7 +3983,7 @@ Me.txtUMEMO.Location = New System.Drawing.Point(3, 128)
 Me.txtUMEMO.Multiline = true
 Me.txtUMEMO.Name = "txtUMEMO"
 Me.txtUMEMO.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-Me.txtUMEMO.Size = New System.Drawing.Size(561, 143)
+Me.txtUMEMO.Size = New System.Drawing.Size(670, 143)
 Me.txtUMEMO.TabIndex = 46
 '
 'Label36
@@ -3895,17 +3999,17 @@ Me.Label36.Text = "Примечание:"
 'txtUserEmailPwd
 '
 Me.txtUserEmailPwd.Dock = System.Windows.Forms.DockStyle.Fill
-Me.txtUserEmailPwd.Location = New System.Drawing.Point(417, 78)
+Me.txtUserEmailPwd.Location = New System.Drawing.Point(424, 78)
 Me.txtUserEmailPwd.Name = "txtUserEmailPwd"
 Me.txtUserEmailPwd.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
-Me.txtUserEmailPwd.Size = New System.Drawing.Size(147, 20)
+Me.txtUserEmailPwd.Size = New System.Drawing.Size(154, 20)
 Me.txtUserEmailPwd.TabIndex = 44
 '
 'lblEmailPass
 '
 Me.lblEmailPass.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
 Me.lblEmailPass.AutoSize = true
-Me.lblEmailPass.Location = New System.Drawing.Point(265, 81)
+Me.lblEmailPass.Location = New System.Drawing.Point(272, 81)
 Me.lblEmailPass.Name = "lblEmailPass"
 Me.lblEmailPass.Size = New System.Drawing.Size(146, 13)
 Me.lblEmailPass.TabIndex = 43
@@ -3916,7 +4020,7 @@ Me.lblEmailPass.Text = "Пароль электронной почты"
 Me.txtUserEmail.Dock = System.Windows.Forms.DockStyle.Fill
 Me.txtUserEmail.Location = New System.Drawing.Point(112, 78)
 Me.txtUserEmail.Name = "txtUserEmail"
-Me.txtUserEmail.Size = New System.Drawing.Size(147, 20)
+Me.txtUserEmail.Size = New System.Drawing.Size(154, 20)
 Me.txtUserEmail.TabIndex = 42
 '
 'lblEMAIL
@@ -3932,16 +4036,16 @@ Me.lblEMAIL.Text = "Email"
 'txtUserJab
 '
 Me.txtUserJab.Dock = System.Windows.Forms.DockStyle.Fill
-Me.txtUserJab.Location = New System.Drawing.Point(417, 53)
+Me.txtUserJab.Location = New System.Drawing.Point(424, 53)
 Me.txtUserJab.Name = "txtUserJab"
-Me.txtUserJab.Size = New System.Drawing.Size(147, 20)
+Me.txtUserJab.Size = New System.Drawing.Size(154, 20)
 Me.txtUserJab.TabIndex = 40
 '
 'lblJabber
 '
 Me.lblJabber.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
 Me.lblJabber.AutoSize = true
-Me.lblJabber.Location = New System.Drawing.Point(265, 56)
+Me.lblJabber.Location = New System.Drawing.Point(272, 56)
 Me.lblJabber.Name = "lblJabber"
 Me.lblJabber.Size = New System.Drawing.Size(146, 13)
 Me.lblJabber.TabIndex = 39
@@ -3952,7 +4056,7 @@ Me.lblJabber.Text = "Jabber"
 Me.txtUserIcq.Dock = System.Windows.Forms.DockStyle.Fill
 Me.txtUserIcq.Location = New System.Drawing.Point(112, 53)
 Me.txtUserIcq.Name = "txtUserIcq"
-Me.txtUserIcq.Size = New System.Drawing.Size(147, 20)
+Me.txtUserIcq.Size = New System.Drawing.Size(154, 20)
 Me.txtUserIcq.TabIndex = 31
 '
 'lblICQ
@@ -3978,17 +4082,17 @@ Me.lblSurname.Text = "ФИО"
 'txtUserPass
 '
 Me.txtUserPass.Dock = System.Windows.Forms.DockStyle.Fill
-Me.txtUserPass.Location = New System.Drawing.Point(417, 3)
+Me.txtUserPass.Location = New System.Drawing.Point(424, 3)
 Me.txtUserPass.Name = "txtUserPass"
 Me.txtUserPass.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
-Me.txtUserPass.Size = New System.Drawing.Size(147, 20)
+Me.txtUserPass.Size = New System.Drawing.Size(154, 20)
 Me.txtUserPass.TabIndex = 25
 '
 'lbluserPassword
 '
 Me.lbluserPassword.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
 Me.lbluserPassword.AutoSize = true
-Me.lbluserPassword.Location = New System.Drawing.Point(265, 6)
+Me.lbluserPassword.Location = New System.Drawing.Point(272, 6)
 Me.lbluserPassword.Name = "lbluserPassword"
 Me.lbluserPassword.Size = New System.Drawing.Size(146, 13)
 Me.lbluserPassword.TabIndex = 24
@@ -4007,7 +4111,7 @@ Me.lblUsername.Text = "Имя пользователя"
 'ChkPDC
 '
 Me.ChkPDC.AutoSize = true
-Me.ChkPDC.Location = New System.Drawing.Point(417, 103)
+Me.ChkPDC.Location = New System.Drawing.Point(424, 103)
 Me.ChkPDC.Name = "ChkPDC"
 Me.ChkPDC.Size = New System.Drawing.Size(142, 17)
 Me.ChkPDC.TabIndex = 47
@@ -4020,7 +4124,7 @@ Me.txtUserName.Dock = System.Windows.Forms.DockStyle.Fill
 Me.txtUserName.FormattingEnabled = true
 Me.txtUserName.Location = New System.Drawing.Point(112, 3)
 Me.txtUserName.Name = "txtUserName"
-Me.txtUserName.Size = New System.Drawing.Size(147, 21)
+Me.txtUserName.Size = New System.Drawing.Size(154, 21)
 Me.txtUserName.TabIndex = 48
 '
 'txtUserFIO
@@ -4030,74 +4134,11 @@ Me.txtUserFIO.Dock = System.Windows.Forms.DockStyle.Fill
 Me.txtUserFIO.FormattingEnabled = true
 Me.txtUserFIO.Location = New System.Drawing.Point(112, 28)
 Me.txtUserFIO.Name = "txtUserFIO"
-Me.txtUserFIO.Size = New System.Drawing.Size(452, 21)
+Me.txtUserFIO.Size = New System.Drawing.Size(466, 21)
 Me.txtUserFIO.TabIndex = 49
-'
-'TableLayoutPanel3
-'
-Me.TableLayoutPanel3.AutoSize = true
-Me.TableLayoutPanel3.ColumnCount = 1
-Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100!))
-Me.TableLayoutPanel3.Controls.Add(Me.cmdUserPassEncript, 0, 2)
-Me.TableLayoutPanel3.Controls.Add(Me.cmdUserAdd, 0, 0)
-Me.TableLayoutPanel3.Controls.Add(Me.cmdUserDel, 0, 1)
-Me.TableLayoutPanel3.Controls.Add(Me.btnUserCancel, 0, 3)
-Me.TableLayoutPanel3.Location = New System.Drawing.Point(576, 3)
-Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
-Me.TableLayoutPanel3.RowCount = 4
-Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle())
-Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle())
-Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle())
-Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle())
-Me.TableLayoutPanel3.Size = New System.Drawing.Size(99, 116)
-Me.TableLayoutPanel3.TabIndex = 42
-'
-'cmdUserPassEncript
-'
-Me.cmdUserPassEncript.AutoSize = true
-Me.cmdUserPassEncript.Location = New System.Drawing.Point(3, 61)
-Me.cmdUserPassEncript.Name = "cmdUserPassEncript"
-Me.cmdUserPassEncript.Size = New System.Drawing.Size(93, 23)
-Me.cmdUserPassEncript.TabIndex = 36
-Me.cmdUserPassEncript.Text = "Расшифровать"
-Me.cmdUserPassEncript.UseVisualStyleBackColor = true
-'
-'cmdUserAdd
-'
-Me.cmdUserAdd.AutoSize = true
-Me.cmdUserAdd.Dock = System.Windows.Forms.DockStyle.Fill
-Me.cmdUserAdd.Location = New System.Drawing.Point(3, 3)
-Me.cmdUserAdd.Name = "cmdUserAdd"
-Me.cmdUserAdd.Size = New System.Drawing.Size(93, 23)
-Me.cmdUserAdd.TabIndex = 33
-Me.cmdUserAdd.Text = "Добавить"
-Me.cmdUserAdd.UseVisualStyleBackColor = true
-'
-'cmdUserDel
-'
-Me.cmdUserDel.AutoSize = true
-Me.cmdUserDel.Dock = System.Windows.Forms.DockStyle.Fill
-Me.cmdUserDel.Location = New System.Drawing.Point(3, 32)
-Me.cmdUserDel.Name = "cmdUserDel"
-Me.cmdUserDel.Size = New System.Drawing.Size(93, 23)
-Me.cmdUserDel.TabIndex = 35
-Me.cmdUserDel.Text = "Удалить"
-Me.cmdUserDel.UseVisualStyleBackColor = true
-'
-'btnUserCancel
-'
-Me.btnUserCancel.AutoSize = true
-Me.btnUserCancel.Dock = System.Windows.Forms.DockStyle.Fill
-Me.btnUserCancel.Location = New System.Drawing.Point(3, 90)
-Me.btnUserCancel.Name = "btnUserCancel"
-Me.btnUserCancel.Size = New System.Drawing.Size(93, 23)
-Me.btnUserCancel.TabIndex = 37
-Me.btnUserCancel.Text = "Отмена"
-Me.btnUserCancel.UseVisualStyleBackColor = true
 '
 'lstUsers
 '
-Me.TableLayoutPanel1.SetColumnSpan(Me.lstUsers, 2)
 Me.lstUsers.Dock = System.Windows.Forms.DockStyle.Fill
 Me.lstUsers.FullRowSelect = true
 Me.lstUsers.GridLines = true
@@ -4180,11 +4221,11 @@ Me.TableLayoutPanel6.ColumnCount = 3
 Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 126!))
 Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100!))
 Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120!))
+Me.TableLayoutPanel6.Controls.Add(Me.ToolStrip2, 2, 0)
 Me.TableLayoutPanel6.Controls.Add(Me.lvNotes, 0, 2)
 Me.TableLayoutPanel6.Controls.Add(Me.txtNotes, 0, 1)
 Me.TableLayoutPanel6.Controls.Add(Me.cmbNotesMaster, 1, 0)
 Me.TableLayoutPanel6.Controls.Add(Me.dtDateNotes, 0, 0)
-Me.TableLayoutPanel6.Controls.Add(Me.TableLayoutPanel7, 2, 0)
 Me.TableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill
 Me.TableLayoutPanel6.Location = New System.Drawing.Point(3, 16)
 Me.TableLayoutPanel6.Name = "TableLayoutPanel6"
@@ -4192,8 +4233,64 @@ Me.TableLayoutPanel6.RowCount = 3
 Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25!))
 Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80!))
 Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle())
+Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20!))
 Me.TableLayoutPanel6.Size = New System.Drawing.Size(670, 219)
 Me.TableLayoutPanel6.TabIndex = 1
+'
+'ToolStrip2
+'
+Me.ToolStrip2.Dock = System.Windows.Forms.DockStyle.Fill
+Me.ToolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
+Me.ToolStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnNotesAdd, Me.ToolStripSeparator5, Me.btnNotesDel, Me.ToolStripSeparator6, Me.btnNotesCancel, Me.ToolStripSeparator7})
+Me.ToolStrip2.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow
+Me.ToolStrip2.Location = New System.Drawing.Point(550, 0)
+Me.ToolStrip2.Name = "ToolStrip2"
+Me.TableLayoutPanel6.SetRowSpan(Me.ToolStrip2, 2)
+Me.ToolStrip2.Size = New System.Drawing.Size(120, 105)
+Me.ToolStrip2.TabIndex = 8
+Me.ToolStrip2.Text = "ToolStrip2"
+'
+'btnNotesAdd
+'
+Me.btnNotesAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+Me.btnNotesAdd.Image = CType(resources.GetObject("btnNotesAdd.Image"),System.Drawing.Image)
+Me.btnNotesAdd.ImageTransparentColor = System.Drawing.Color.Magenta
+Me.btnNotesAdd.Name = "btnNotesAdd"
+Me.btnNotesAdd.Size = New System.Drawing.Size(118, 19)
+Me.btnNotesAdd.Text = "Добавить"
+'
+'ToolStripSeparator5
+'
+Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
+Me.ToolStripSeparator5.Size = New System.Drawing.Size(118, 6)
+'
+'btnNotesDel
+'
+Me.btnNotesDel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+Me.btnNotesDel.Image = CType(resources.GetObject("btnNotesDel.Image"),System.Drawing.Image)
+Me.btnNotesDel.ImageTransparentColor = System.Drawing.Color.Magenta
+Me.btnNotesDel.Name = "btnNotesDel"
+Me.btnNotesDel.Size = New System.Drawing.Size(118, 19)
+Me.btnNotesDel.Text = "Удалить"
+'
+'ToolStripSeparator6
+'
+Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
+Me.ToolStripSeparator6.Size = New System.Drawing.Size(118, 6)
+'
+'btnNotesCancel
+'
+Me.btnNotesCancel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+Me.btnNotesCancel.Image = CType(resources.GetObject("btnNotesCancel.Image"),System.Drawing.Image)
+Me.btnNotesCancel.ImageTransparentColor = System.Drawing.Color.Magenta
+Me.btnNotesCancel.Name = "btnNotesCancel"
+Me.btnNotesCancel.Size = New System.Drawing.Size(118, 19)
+Me.btnNotesCancel.Text = "Отмена"
+'
+'ToolStripSeparator7
+'
+Me.ToolStripSeparator7.Name = "ToolStripSeparator7"
+Me.ToolStripSeparator7.Size = New System.Drawing.Size(118, 6)
 '
 'lvNotes
 '
@@ -4237,57 +4334,6 @@ Me.dtDateNotes.Location = New System.Drawing.Point(3, 3)
 Me.dtDateNotes.Name = "dtDateNotes"
 Me.dtDateNotes.Size = New System.Drawing.Size(120, 20)
 Me.dtDateNotes.TabIndex = 1
-'
-'TableLayoutPanel7
-'
-Me.TableLayoutPanel7.ColumnCount = 1
-Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50!))
-Me.TableLayoutPanel7.Controls.Add(Me.btnNotesCancel, 0, 2)
-Me.TableLayoutPanel7.Controls.Add(Me.btnNotesAdd, 0, 0)
-Me.TableLayoutPanel7.Controls.Add(Me.btnNotesDel, 0, 1)
-Me.TableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Right
-Me.TableLayoutPanel7.Location = New System.Drawing.Point(579, 3)
-Me.TableLayoutPanel7.Name = "TableLayoutPanel7"
-Me.TableLayoutPanel7.RowCount = 3
-Me.TableLayoutPanel6.SetRowSpan(Me.TableLayoutPanel7, 2)
-Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50!))
-Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50!))
-Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30!))
-Me.TableLayoutPanel7.Size = New System.Drawing.Size(88, 99)
-Me.TableLayoutPanel7.TabIndex = 5
-'
-'btnNotesCancel
-'
-Me.btnNotesCancel.AutoSize = true
-Me.btnNotesCancel.Dock = System.Windows.Forms.DockStyle.Fill
-Me.btnNotesCancel.Location = New System.Drawing.Point(3, 71)
-Me.btnNotesCancel.Name = "btnNotesCancel"
-Me.btnNotesCancel.Size = New System.Drawing.Size(82, 25)
-Me.btnNotesCancel.TabIndex = 6
-Me.btnNotesCancel.Text = "Отмена"
-Me.btnNotesCancel.UseVisualStyleBackColor = true
-'
-'btnNotesAdd
-'
-Me.btnNotesAdd.AutoSize = true
-Me.btnNotesAdd.Dock = System.Windows.Forms.DockStyle.Fill
-Me.btnNotesAdd.Location = New System.Drawing.Point(3, 3)
-Me.btnNotesAdd.Name = "btnNotesAdd"
-Me.btnNotesAdd.Size = New System.Drawing.Size(82, 28)
-Me.btnNotesAdd.TabIndex = 4
-Me.btnNotesAdd.Text = "Добавить"
-Me.btnNotesAdd.UseVisualStyleBackColor = true
-'
-'btnNotesDel
-'
-Me.btnNotesDel.AutoSize = true
-Me.btnNotesDel.Dock = System.Windows.Forms.DockStyle.Fill
-Me.btnNotesDel.Location = New System.Drawing.Point(3, 37)
-Me.btnNotesDel.Name = "btnNotesDel"
-Me.btnNotesDel.Size = New System.Drawing.Size(82, 28)
-Me.btnNotesDel.TabIndex = 5
-Me.btnNotesDel.Text = "Удалить"
-Me.btnNotesDel.UseVisualStyleBackColor = true
 '
 'TabPage8
 '
@@ -4836,7 +4882,7 @@ Me.TableLayoutPanel9.ColumnCount = 3
 Me.TableLayoutPanel9.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 126!))
 Me.TableLayoutPanel9.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100!))
 Me.TableLayoutPanel9.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120!))
-Me.TableLayoutPanel9.Controls.Add(Me.TableLayoutPanel10, 2, 0)
+Me.TableLayoutPanel9.Controls.Add(Me.ToolStrip3, 2, 0)
 Me.TableLayoutPanel9.Controls.Add(Me.lvNotesBR, 0, 2)
 Me.TableLayoutPanel9.Controls.Add(Me.Notesbrtxt, 0, 1)
 Me.TableLayoutPanel9.Controls.Add(Me.cmbBRMaster, 1, 0)
@@ -4848,59 +4894,64 @@ Me.TableLayoutPanel9.RowCount = 3
 Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25!))
 Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80!))
 Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle())
+Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20!))
 Me.TableLayoutPanel9.Size = New System.Drawing.Size(664, 220)
 Me.TableLayoutPanel9.TabIndex = 1
 '
-'TableLayoutPanel10
+'ToolStrip3
 '
-Me.TableLayoutPanel10.ColumnCount = 1
-Me.TableLayoutPanel10.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50!))
-Me.TableLayoutPanel10.Controls.Add(Me.btnBRNotesCancel, 0, 2)
-Me.TableLayoutPanel10.Controls.Add(Me.btnBRNotesAdd, 0, 0)
-Me.TableLayoutPanel10.Controls.Add(Me.btnBRNotesDel, 0, 1)
-Me.TableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Right
-Me.TableLayoutPanel10.Location = New System.Drawing.Point(572, 3)
-Me.TableLayoutPanel10.Name = "TableLayoutPanel10"
-Me.TableLayoutPanel10.RowCount = 3
-Me.TableLayoutPanel9.SetRowSpan(Me.TableLayoutPanel10, 2)
-Me.TableLayoutPanel10.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50!))
-Me.TableLayoutPanel10.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50!))
-Me.TableLayoutPanel10.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30!))
-Me.TableLayoutPanel10.Size = New System.Drawing.Size(89, 99)
-Me.TableLayoutPanel10.TabIndex = 5
-'
-'btnBRNotesCancel
-'
-Me.btnBRNotesCancel.AutoSize = true
-Me.btnBRNotesCancel.Dock = System.Windows.Forms.DockStyle.Fill
-Me.btnBRNotesCancel.Location = New System.Drawing.Point(3, 71)
-Me.btnBRNotesCancel.Name = "btnBRNotesCancel"
-Me.btnBRNotesCancel.Size = New System.Drawing.Size(83, 25)
-Me.btnBRNotesCancel.TabIndex = 6
-Me.btnBRNotesCancel.Text = "Отмена"
-Me.btnBRNotesCancel.UseVisualStyleBackColor = true
+Me.ToolStrip3.Dock = System.Windows.Forms.DockStyle.Fill
+Me.ToolStrip3.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
+Me.ToolStrip3.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnBRNotesAdd, Me.ToolStripSeparator8, Me.btnBRNotesDel, Me.ToolStripSeparator9, Me.btnBRNotesCancel, Me.ToolStripSeparator10})
+Me.ToolStrip3.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow
+Me.ToolStrip3.Location = New System.Drawing.Point(544, 0)
+Me.ToolStrip3.Name = "ToolStrip3"
+Me.TableLayoutPanel9.SetRowSpan(Me.ToolStrip3, 2)
+Me.ToolStrip3.Size = New System.Drawing.Size(120, 105)
+Me.ToolStrip3.TabIndex = 10
+Me.ToolStrip3.Text = "ToolStrip3"
 '
 'btnBRNotesAdd
 '
-Me.btnBRNotesAdd.AutoSize = true
-Me.btnBRNotesAdd.Dock = System.Windows.Forms.DockStyle.Fill
-Me.btnBRNotesAdd.Location = New System.Drawing.Point(3, 3)
+Me.btnBRNotesAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+Me.btnBRNotesAdd.Image = CType(resources.GetObject("btnBRNotesAdd.Image"),System.Drawing.Image)
+Me.btnBRNotesAdd.ImageTransparentColor = System.Drawing.Color.Magenta
 Me.btnBRNotesAdd.Name = "btnBRNotesAdd"
-Me.btnBRNotesAdd.Size = New System.Drawing.Size(83, 28)
-Me.btnBRNotesAdd.TabIndex = 4
+Me.btnBRNotesAdd.Size = New System.Drawing.Size(118, 19)
 Me.btnBRNotesAdd.Text = "Добавить"
-Me.btnBRNotesAdd.UseVisualStyleBackColor = true
+'
+'ToolStripSeparator8
+'
+Me.ToolStripSeparator8.Name = "ToolStripSeparator8"
+Me.ToolStripSeparator8.Size = New System.Drawing.Size(118, 6)
 '
 'btnBRNotesDel
 '
-Me.btnBRNotesDel.AutoSize = true
-Me.btnBRNotesDel.Dock = System.Windows.Forms.DockStyle.Fill
-Me.btnBRNotesDel.Location = New System.Drawing.Point(3, 37)
+Me.btnBRNotesDel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+Me.btnBRNotesDel.Image = CType(resources.GetObject("btnBRNotesDel.Image"),System.Drawing.Image)
+Me.btnBRNotesDel.ImageTransparentColor = System.Drawing.Color.Magenta
 Me.btnBRNotesDel.Name = "btnBRNotesDel"
-Me.btnBRNotesDel.Size = New System.Drawing.Size(83, 28)
-Me.btnBRNotesDel.TabIndex = 5
+Me.btnBRNotesDel.Size = New System.Drawing.Size(118, 19)
 Me.btnBRNotesDel.Text = "Удалить"
-Me.btnBRNotesDel.UseVisualStyleBackColor = true
+'
+'ToolStripSeparator9
+'
+Me.ToolStripSeparator9.Name = "ToolStripSeparator9"
+Me.ToolStripSeparator9.Size = New System.Drawing.Size(118, 6)
+'
+'btnBRNotesCancel
+'
+Me.btnBRNotesCancel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+Me.btnBRNotesCancel.Image = CType(resources.GetObject("btnBRNotesCancel.Image"),System.Drawing.Image)
+Me.btnBRNotesCancel.ImageTransparentColor = System.Drawing.Color.Magenta
+Me.btnBRNotesCancel.Name = "btnBRNotesCancel"
+Me.btnBRNotesCancel.Size = New System.Drawing.Size(118, 19)
+Me.btnBRNotesCancel.Text = "Отмена"
+'
+'ToolStripSeparator10
+'
+Me.ToolStripSeparator10.Name = "ToolStripSeparator10"
+Me.ToolStripSeparator10.Size = New System.Drawing.Size(118, 6)
 '
 'lvNotesBR
 '
@@ -5817,11 +5868,11 @@ Me.TableLayoutPanel12.ColumnCount = 3
 Me.TableLayoutPanel12.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 126!))
 Me.TableLayoutPanel12.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100!))
 Me.TableLayoutPanel12.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120!))
+Me.TableLayoutPanel12.Controls.Add(Me.ToolStrip4, 2, 0)
 Me.TableLayoutPanel12.Controls.Add(Me.lvNotesPRN, 0, 2)
 Me.TableLayoutPanel12.Controls.Add(Me.NotesPRNtxt, 0, 1)
 Me.TableLayoutPanel12.Controls.Add(Me.cmbNotesPRNMaster, 1, 0)
 Me.TableLayoutPanel12.Controls.Add(Me.NotesPRNdate, 0, 0)
-Me.TableLayoutPanel12.Controls.Add(Me.TableLayoutPanel13, 2, 0)
 Me.TableLayoutPanel12.Dock = System.Windows.Forms.DockStyle.Fill
 Me.TableLayoutPanel12.Location = New System.Drawing.Point(3, 16)
 Me.TableLayoutPanel12.Name = "TableLayoutPanel12"
@@ -5829,8 +5880,64 @@ Me.TableLayoutPanel12.RowCount = 3
 Me.TableLayoutPanel12.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25!))
 Me.TableLayoutPanel12.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80!))
 Me.TableLayoutPanel12.RowStyles.Add(New System.Windows.Forms.RowStyle())
+Me.TableLayoutPanel12.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20!))
 Me.TableLayoutPanel12.Size = New System.Drawing.Size(664, 220)
 Me.TableLayoutPanel12.TabIndex = 1
+'
+'ToolStrip4
+'
+Me.ToolStrip4.Dock = System.Windows.Forms.DockStyle.Fill
+Me.ToolStrip4.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
+Me.ToolStrip4.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnPRNNotesAdd, Me.ToolStripSeparator11, Me.btnPRNNotesDel, Me.ToolStripSeparator12, Me.btnPRNNotesCancel, Me.ToolStripSeparator13})
+Me.ToolStrip4.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow
+Me.ToolStrip4.Location = New System.Drawing.Point(544, 0)
+Me.ToolStrip4.Name = "ToolStrip4"
+Me.TableLayoutPanel12.SetRowSpan(Me.ToolStrip4, 2)
+Me.ToolStrip4.Size = New System.Drawing.Size(120, 105)
+Me.ToolStrip4.TabIndex = 12
+Me.ToolStrip4.Text = "ToolStrip4"
+'
+'btnPRNNotesAdd
+'
+Me.btnPRNNotesAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+Me.btnPRNNotesAdd.Image = CType(resources.GetObject("btnPRNNotesAdd.Image"),System.Drawing.Image)
+Me.btnPRNNotesAdd.ImageTransparentColor = System.Drawing.Color.Magenta
+Me.btnPRNNotesAdd.Name = "btnPRNNotesAdd"
+Me.btnPRNNotesAdd.Size = New System.Drawing.Size(118, 19)
+Me.btnPRNNotesAdd.Text = "Добавить"
+'
+'ToolStripSeparator11
+'
+Me.ToolStripSeparator11.Name = "ToolStripSeparator11"
+Me.ToolStripSeparator11.Size = New System.Drawing.Size(118, 6)
+'
+'btnPRNNotesDel
+'
+Me.btnPRNNotesDel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+Me.btnPRNNotesDel.Image = CType(resources.GetObject("btnPRNNotesDel.Image"),System.Drawing.Image)
+Me.btnPRNNotesDel.ImageTransparentColor = System.Drawing.Color.Magenta
+Me.btnPRNNotesDel.Name = "btnPRNNotesDel"
+Me.btnPRNNotesDel.Size = New System.Drawing.Size(118, 19)
+Me.btnPRNNotesDel.Text = "Удалить"
+'
+'ToolStripSeparator12
+'
+Me.ToolStripSeparator12.Name = "ToolStripSeparator12"
+Me.ToolStripSeparator12.Size = New System.Drawing.Size(118, 6)
+'
+'btnPRNNotesCancel
+'
+Me.btnPRNNotesCancel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+Me.btnPRNNotesCancel.Image = CType(resources.GetObject("btnPRNNotesCancel.Image"),System.Drawing.Image)
+Me.btnPRNNotesCancel.ImageTransparentColor = System.Drawing.Color.Magenta
+Me.btnPRNNotesCancel.Name = "btnPRNNotesCancel"
+Me.btnPRNNotesCancel.Size = New System.Drawing.Size(118, 19)
+Me.btnPRNNotesCancel.Text = "Отмена"
+'
+'ToolStripSeparator13
+'
+Me.ToolStripSeparator13.Name = "ToolStripSeparator13"
+Me.ToolStripSeparator13.Size = New System.Drawing.Size(118, 6)
 '
 'lvNotesPRN
 '
@@ -5874,57 +5981,6 @@ Me.NotesPRNdate.Location = New System.Drawing.Point(3, 3)
 Me.NotesPRNdate.Name = "NotesPRNdate"
 Me.NotesPRNdate.Size = New System.Drawing.Size(120, 20)
 Me.NotesPRNdate.TabIndex = 1
-'
-'TableLayoutPanel13
-'
-Me.TableLayoutPanel13.ColumnCount = 1
-Me.TableLayoutPanel13.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50!))
-Me.TableLayoutPanel13.Controls.Add(Me.btnPRNNotesCancel, 0, 2)
-Me.TableLayoutPanel13.Controls.Add(Me.btnPRNNotesAdd, 0, 0)
-Me.TableLayoutPanel13.Controls.Add(Me.btnPRNNotesDel, 0, 1)
-Me.TableLayoutPanel13.Dock = System.Windows.Forms.DockStyle.Right
-Me.TableLayoutPanel13.Location = New System.Drawing.Point(572, 3)
-Me.TableLayoutPanel13.Name = "TableLayoutPanel13"
-Me.TableLayoutPanel13.RowCount = 3
-Me.TableLayoutPanel12.SetRowSpan(Me.TableLayoutPanel13, 2)
-Me.TableLayoutPanel13.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50!))
-Me.TableLayoutPanel13.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50!))
-Me.TableLayoutPanel13.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30!))
-Me.TableLayoutPanel13.Size = New System.Drawing.Size(89, 99)
-Me.TableLayoutPanel13.TabIndex = 5
-'
-'btnPRNNotesCancel
-'
-Me.btnPRNNotesCancel.AutoSize = true
-Me.btnPRNNotesCancel.Dock = System.Windows.Forms.DockStyle.Fill
-Me.btnPRNNotesCancel.Location = New System.Drawing.Point(3, 71)
-Me.btnPRNNotesCancel.Name = "btnPRNNotesCancel"
-Me.btnPRNNotesCancel.Size = New System.Drawing.Size(83, 25)
-Me.btnPRNNotesCancel.TabIndex = 6
-Me.btnPRNNotesCancel.Text = "Отмена"
-Me.btnPRNNotesCancel.UseVisualStyleBackColor = true
-'
-'btnPRNNotesAdd
-'
-Me.btnPRNNotesAdd.AutoSize = true
-Me.btnPRNNotesAdd.Dock = System.Windows.Forms.DockStyle.Fill
-Me.btnPRNNotesAdd.Location = New System.Drawing.Point(3, 3)
-Me.btnPRNNotesAdd.Name = "btnPRNNotesAdd"
-Me.btnPRNNotesAdd.Size = New System.Drawing.Size(83, 28)
-Me.btnPRNNotesAdd.TabIndex = 4
-Me.btnPRNNotesAdd.Text = "Добавить"
-Me.btnPRNNotesAdd.UseVisualStyleBackColor = true
-'
-'btnPRNNotesDel
-'
-Me.btnPRNNotesDel.AutoSize = true
-Me.btnPRNNotesDel.Dock = System.Windows.Forms.DockStyle.Fill
-Me.btnPRNNotesDel.Location = New System.Drawing.Point(3, 37)
-Me.btnPRNNotesDel.Name = "btnPRNNotesDel"
-Me.btnPRNNotesDel.Size = New System.Drawing.Size(83, 28)
-Me.btnPRNNotesDel.TabIndex = 5
-Me.btnPRNNotesDel.Text = "Удалить"
-Me.btnPRNNotesDel.UseVisualStyleBackColor = true
 '
 'TabPage16
 '
@@ -6952,7 +7008,7 @@ Me.TableLayoutPanel15.ColumnCount = 3
 Me.TableLayoutPanel15.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 126!))
 Me.TableLayoutPanel15.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100!))
 Me.TableLayoutPanel15.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120!))
-Me.TableLayoutPanel15.Controls.Add(Me.TableLayoutPanel16, 2, 0)
+Me.TableLayoutPanel15.Controls.Add(Me.ToolStrip5, 2, 0)
 Me.TableLayoutPanel15.Controls.Add(Me.lvNotesNET, 0, 2)
 Me.TableLayoutPanel15.Controls.Add(Me.cmbNotesNETMaster, 1, 0)
 Me.TableLayoutPanel15.Controls.Add(Me.NotesNETdate, 0, 0)
@@ -6960,64 +7016,69 @@ Me.TableLayoutPanel15.Controls.Add(Me.NotesNETtxt, 0, 1)
 Me.TableLayoutPanel15.Dock = System.Windows.Forms.DockStyle.Fill
 Me.TableLayoutPanel15.Location = New System.Drawing.Point(3, 16)
 Me.TableLayoutPanel15.Name = "TableLayoutPanel15"
-Me.TableLayoutPanel15.RowCount = 3
+Me.TableLayoutPanel15.RowCount = 4
 Me.TableLayoutPanel15.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25!))
 Me.TableLayoutPanel15.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80!))
 Me.TableLayoutPanel15.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel15.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20!))
+Me.TableLayoutPanel15.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20!))
 Me.TableLayoutPanel15.Size = New System.Drawing.Size(664, 220)
 Me.TableLayoutPanel15.TabIndex = 1
 '
-'TableLayoutPanel16
+'ToolStrip5
 '
-Me.TableLayoutPanel16.ColumnCount = 1
-Me.TableLayoutPanel16.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50!))
-Me.TableLayoutPanel16.Controls.Add(Me.btnNETNotesCancel, 0, 2)
-Me.TableLayoutPanel16.Controls.Add(Me.btnNETAdd, 0, 0)
-Me.TableLayoutPanel16.Controls.Add(Me.btnNETNotesDel, 0, 1)
-Me.TableLayoutPanel16.Dock = System.Windows.Forms.DockStyle.Right
-Me.TableLayoutPanel16.Location = New System.Drawing.Point(572, 3)
-Me.TableLayoutPanel16.Name = "TableLayoutPanel16"
-Me.TableLayoutPanel16.RowCount = 3
-Me.TableLayoutPanel15.SetRowSpan(Me.TableLayoutPanel16, 2)
-Me.TableLayoutPanel16.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50!))
-Me.TableLayoutPanel16.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50!))
-Me.TableLayoutPanel16.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30!))
-Me.TableLayoutPanel16.Size = New System.Drawing.Size(89, 99)
-Me.TableLayoutPanel16.TabIndex = 5
-'
-'btnNETNotesCancel
-'
-Me.btnNETNotesCancel.AutoSize = true
-Me.btnNETNotesCancel.Dock = System.Windows.Forms.DockStyle.Fill
-Me.btnNETNotesCancel.Location = New System.Drawing.Point(3, 71)
-Me.btnNETNotesCancel.Name = "btnNETNotesCancel"
-Me.btnNETNotesCancel.Size = New System.Drawing.Size(83, 25)
-Me.btnNETNotesCancel.TabIndex = 6
-Me.btnNETNotesCancel.Text = "Отмена"
-Me.btnNETNotesCancel.UseVisualStyleBackColor = true
+Me.ToolStrip5.Dock = System.Windows.Forms.DockStyle.Fill
+Me.ToolStrip5.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
+Me.ToolStrip5.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnNETAdd, Me.ToolStripSeparator14, Me.btnNETNotesDel, Me.ToolStripSeparator15, Me.btnNETNotesCancel, Me.ToolStripSeparator16})
+Me.ToolStrip5.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow
+Me.ToolStrip5.Location = New System.Drawing.Point(544, 0)
+Me.ToolStrip5.Name = "ToolStrip5"
+Me.TableLayoutPanel15.SetRowSpan(Me.ToolStrip5, 2)
+Me.ToolStrip5.Size = New System.Drawing.Size(120, 105)
+Me.ToolStrip5.TabIndex = 14
+Me.ToolStrip5.Text = "ToolStrip5"
 '
 'btnNETAdd
 '
-Me.btnNETAdd.AutoSize = true
-Me.btnNETAdd.Dock = System.Windows.Forms.DockStyle.Fill
-Me.btnNETAdd.Location = New System.Drawing.Point(3, 3)
+Me.btnNETAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+Me.btnNETAdd.Image = CType(resources.GetObject("btnNETAdd.Image"),System.Drawing.Image)
+Me.btnNETAdd.ImageTransparentColor = System.Drawing.Color.Magenta
 Me.btnNETAdd.Name = "btnNETAdd"
-Me.btnNETAdd.Size = New System.Drawing.Size(83, 28)
-Me.btnNETAdd.TabIndex = 4
+Me.btnNETAdd.Size = New System.Drawing.Size(118, 19)
 Me.btnNETAdd.Text = "Добавить"
-Me.btnNETAdd.UseVisualStyleBackColor = true
+'
+'ToolStripSeparator14
+'
+Me.ToolStripSeparator14.Name = "ToolStripSeparator14"
+Me.ToolStripSeparator14.Size = New System.Drawing.Size(118, 6)
 '
 'btnNETNotesDel
 '
-Me.btnNETNotesDel.AutoSize = true
-Me.btnNETNotesDel.Dock = System.Windows.Forms.DockStyle.Fill
-Me.btnNETNotesDel.Location = New System.Drawing.Point(3, 37)
+Me.btnNETNotesDel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+Me.btnNETNotesDel.Image = CType(resources.GetObject("btnNETNotesDel.Image"),System.Drawing.Image)
+Me.btnNETNotesDel.ImageTransparentColor = System.Drawing.Color.Magenta
 Me.btnNETNotesDel.Name = "btnNETNotesDel"
-Me.btnNETNotesDel.Size = New System.Drawing.Size(83, 28)
-Me.btnNETNotesDel.TabIndex = 5
+Me.btnNETNotesDel.Size = New System.Drawing.Size(118, 19)
 Me.btnNETNotesDel.Text = "Удалить"
-Me.btnNETNotesDel.UseVisualStyleBackColor = true
+'
+'ToolStripSeparator15
+'
+Me.ToolStripSeparator15.Name = "ToolStripSeparator15"
+Me.ToolStripSeparator15.Size = New System.Drawing.Size(118, 6)
+'
+'btnNETNotesCancel
+'
+Me.btnNETNotesCancel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+Me.btnNETNotesCancel.Image = CType(resources.GetObject("btnNETNotesCancel.Image"),System.Drawing.Image)
+Me.btnNETNotesCancel.ImageTransparentColor = System.Drawing.Color.Magenta
+Me.btnNETNotesCancel.Name = "btnNETNotesCancel"
+Me.btnNETNotesCancel.Size = New System.Drawing.Size(118, 19)
+Me.btnNETNotesCancel.Text = "Отмена"
+'
+'ToolStripSeparator16
+'
+Me.ToolStripSeparator16.Name = "ToolStripSeparator16"
+Me.ToolStripSeparator16.Size = New System.Drawing.Size(118, 6)
 '
 'lvNotesNET
 '
@@ -7812,7 +7873,7 @@ Me.TableLayoutPanel18.ColumnCount = 3
 Me.TableLayoutPanel18.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 126!))
 Me.TableLayoutPanel18.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100!))
 Me.TableLayoutPanel18.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120!))
-Me.TableLayoutPanel18.Controls.Add(Me.TableLayoutPanel19, 2, 0)
+Me.TableLayoutPanel18.Controls.Add(Me.ToolStrip6, 2, 0)
 Me.TableLayoutPanel18.Controls.Add(Me.lvNotesOTH, 0, 2)
 Me.TableLayoutPanel18.Controls.Add(Me.txtNotesOTH, 0, 1)
 Me.TableLayoutPanel18.Controls.Add(Me.cmbNotesOTHMaster, 1, 0)
@@ -7824,59 +7885,64 @@ Me.TableLayoutPanel18.RowCount = 3
 Me.TableLayoutPanel18.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel18.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel18.RowStyles.Add(New System.Windows.Forms.RowStyle())
+Me.TableLayoutPanel18.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20!))
 Me.TableLayoutPanel18.Size = New System.Drawing.Size(664, 220)
 Me.TableLayoutPanel18.TabIndex = 1
 '
-'TableLayoutPanel19
+'ToolStrip6
 '
-Me.TableLayoutPanel19.ColumnCount = 1
-Me.TableLayoutPanel19.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50!))
-Me.TableLayoutPanel19.Controls.Add(Me.btnOTHNotesCancel, 0, 2)
-Me.TableLayoutPanel19.Controls.Add(Me.btnOTHAdd, 0, 0)
-Me.TableLayoutPanel19.Controls.Add(Me.btnOTHNotesDel, 0, 1)
-Me.TableLayoutPanel19.Dock = System.Windows.Forms.DockStyle.Right
-Me.TableLayoutPanel19.Location = New System.Drawing.Point(572, 3)
-Me.TableLayoutPanel19.Name = "TableLayoutPanel19"
-Me.TableLayoutPanel19.RowCount = 3
-Me.TableLayoutPanel18.SetRowSpan(Me.TableLayoutPanel19, 2)
-Me.TableLayoutPanel19.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50!))
-Me.TableLayoutPanel19.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50!))
-Me.TableLayoutPanel19.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30!))
-Me.TableLayoutPanel19.Size = New System.Drawing.Size(89, 101)
-Me.TableLayoutPanel19.TabIndex = 5
-'
-'btnOTHNotesCancel
-'
-Me.btnOTHNotesCancel.AutoSize = true
-Me.btnOTHNotesCancel.Dock = System.Windows.Forms.DockStyle.Fill
-Me.btnOTHNotesCancel.Location = New System.Drawing.Point(3, 73)
-Me.btnOTHNotesCancel.Name = "btnOTHNotesCancel"
-Me.btnOTHNotesCancel.Size = New System.Drawing.Size(83, 25)
-Me.btnOTHNotesCancel.TabIndex = 6
-Me.btnOTHNotesCancel.Text = "Отмена"
-Me.btnOTHNotesCancel.UseVisualStyleBackColor = true
+Me.ToolStrip6.Dock = System.Windows.Forms.DockStyle.Fill
+Me.ToolStrip6.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
+Me.ToolStrip6.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnOTHAdd, Me.ToolStripSeparator17, Me.btnOTHNotesDel, Me.ToolStripSeparator18, Me.btnOTHNotesCancel, Me.ToolStripSeparator19})
+Me.ToolStrip6.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow
+Me.ToolStrip6.Location = New System.Drawing.Point(544, 0)
+Me.ToolStrip6.Name = "ToolStrip6"
+Me.TableLayoutPanel18.SetRowSpan(Me.ToolStrip6, 2)
+Me.ToolStrip6.Size = New System.Drawing.Size(120, 107)
+Me.ToolStrip6.TabIndex = 10
+Me.ToolStrip6.Text = "ToolStrip6"
 '
 'btnOTHAdd
 '
-Me.btnOTHAdd.AutoSize = true
-Me.btnOTHAdd.Dock = System.Windows.Forms.DockStyle.Fill
-Me.btnOTHAdd.Location = New System.Drawing.Point(3, 3)
+Me.btnOTHAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+Me.btnOTHAdd.Image = CType(resources.GetObject("btnOTHAdd.Image"),System.Drawing.Image)
+Me.btnOTHAdd.ImageTransparentColor = System.Drawing.Color.Magenta
 Me.btnOTHAdd.Name = "btnOTHAdd"
-Me.btnOTHAdd.Size = New System.Drawing.Size(83, 29)
-Me.btnOTHAdd.TabIndex = 4
+Me.btnOTHAdd.Size = New System.Drawing.Size(118, 19)
 Me.btnOTHAdd.Text = "Добавить"
-Me.btnOTHAdd.UseVisualStyleBackColor = true
+'
+'ToolStripSeparator17
+'
+Me.ToolStripSeparator17.Name = "ToolStripSeparator17"
+Me.ToolStripSeparator17.Size = New System.Drawing.Size(118, 6)
 '
 'btnOTHNotesDel
 '
-Me.btnOTHNotesDel.AutoSize = true
-Me.btnOTHNotesDel.Dock = System.Windows.Forms.DockStyle.Fill
-Me.btnOTHNotesDel.Location = New System.Drawing.Point(3, 38)
+Me.btnOTHNotesDel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+Me.btnOTHNotesDel.Image = CType(resources.GetObject("btnOTHNotesDel.Image"),System.Drawing.Image)
+Me.btnOTHNotesDel.ImageTransparentColor = System.Drawing.Color.Magenta
 Me.btnOTHNotesDel.Name = "btnOTHNotesDel"
-Me.btnOTHNotesDel.Size = New System.Drawing.Size(83, 29)
-Me.btnOTHNotesDel.TabIndex = 5
+Me.btnOTHNotesDel.Size = New System.Drawing.Size(118, 19)
 Me.btnOTHNotesDel.Text = "Удалить"
-Me.btnOTHNotesDel.UseVisualStyleBackColor = true
+'
+'ToolStripSeparator18
+'
+Me.ToolStripSeparator18.Name = "ToolStripSeparator18"
+Me.ToolStripSeparator18.Size = New System.Drawing.Size(118, 6)
+'
+'btnOTHNotesCancel
+'
+Me.btnOTHNotesCancel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+Me.btnOTHNotesCancel.Image = CType(resources.GetObject("btnOTHNotesCancel.Image"),System.Drawing.Image)
+Me.btnOTHNotesCancel.ImageTransparentColor = System.Drawing.Color.Magenta
+Me.btnOTHNotesCancel.Name = "btnOTHNotesCancel"
+Me.btnOTHNotesCancel.Size = New System.Drawing.Size(118, 19)
+Me.btnOTHNotesCancel.Text = "Отмена"
+'
+'ToolStripSeparator19
+'
+Me.ToolStripSeparator19.Name = "ToolStripSeparator19"
+Me.ToolStripSeparator19.Size = New System.Drawing.Size(118, 6)
 '
 'lvNotesOTH
 '
@@ -8220,7 +8286,7 @@ Me.chkOTHspis.UseVisualStyleBackColor = true
 '
 Me.cmMENU.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.addRemToolStripMenuItem, Me.CartrAddToolStripMenuItem, Me.CopyToolStripMenuItem, Me.UpdateToolStripMenuItem, Me.DeleteToolStripMenuItem, Me.ОтделитьПринтерыИМониторыToolStripMenuItem, Me.ВернутьПерефериюToolStripMenuItem, Me.ППРToolStripMenuItem})
 Me.cmMENU.Name = "cmMENU"
-Me.cmMENU.Size = New System.Drawing.Size(255, 202)
+Me.cmMENU.Size = New System.Drawing.Size(255, 180)
 '
 'addRemToolStripMenuItem
 '
@@ -8482,11 +8548,14 @@ Me.Text = "Учёт оргтехники"
 Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
 Me.spCont.Panel1.ResumeLayout(false)
 Me.spCont.Panel2.ResumeLayout(false)
+CType(Me.spCont,System.ComponentModel.ISupportInitialize).EndInit
 Me.spCont.ResumeLayout(false)
 Me.TableLayoutPanel65.ResumeLayout(false)
 Me.gbTree.ResumeLayout(false)
 Me.TableLayoutPanel64.ResumeLayout(false)
 Me.TableLayoutPanel64.PerformLayout
+Me.ToolStrip7.ResumeLayout(false)
+Me.ToolStrip7.PerformLayout
 Me.sSTAB1.ResumeLayout(false)
 Me.TabPage6.ResumeLayout(false)
 Me.TableLayoutPanel20.ResumeLayout(false)
@@ -8600,8 +8669,8 @@ Me.TableLayoutPanel1.ResumeLayout(false)
 Me.TableLayoutPanel1.PerformLayout
 Me.TableLayoutPanel4.ResumeLayout(false)
 Me.TableLayoutPanel4.PerformLayout
-Me.TableLayoutPanel3.ResumeLayout(false)
-Me.TableLayoutPanel3.PerformLayout
+Me.ToolStrip1.ResumeLayout(false)
+Me.ToolStrip1.PerformLayout
 Me.TabPage7.ResumeLayout(false)
 Me.TabPage7.PerformLayout
 Me.TableLayoutPanel5.ResumeLayout(false)
@@ -8611,8 +8680,8 @@ Me.gbNotes.ResumeLayout(false)
 Me.gbNotes.PerformLayout
 Me.TableLayoutPanel6.ResumeLayout(false)
 Me.TableLayoutPanel6.PerformLayout
-Me.TableLayoutPanel7.ResumeLayout(false)
-Me.TableLayoutPanel7.PerformLayout
+Me.ToolStrip2.ResumeLayout(false)
+Me.ToolStrip2.PerformLayout
 Me.TabPage8.ResumeLayout(false)
 Me.TabPage8.PerformLayout
 Me.TableLayoutPanel66.ResumeLayout(false)
@@ -8640,8 +8709,8 @@ Me.gbBRRemont.ResumeLayout(false)
 Me.gbBRNotes.ResumeLayout(false)
 Me.TableLayoutPanel9.ResumeLayout(false)
 Me.TableLayoutPanel9.PerformLayout
-Me.TableLayoutPanel10.ResumeLayout(false)
-Me.TableLayoutPanel10.PerformLayout
+Me.ToolStrip3.ResumeLayout(false)
+Me.ToolStrip3.PerformLayout
 Me.TabPage21.ResumeLayout(false)
 Me.TableLayoutPanel73.ResumeLayout(false)
 Me.TableLayoutPanel73.PerformLayout
@@ -8660,8 +8729,8 @@ Me.gbPRNRemont.ResumeLayout(false)
 Me.gbPRNNotes.ResumeLayout(false)
 Me.TableLayoutPanel12.ResumeLayout(false)
 Me.TableLayoutPanel12.PerformLayout
-Me.TableLayoutPanel13.ResumeLayout(false)
-Me.TableLayoutPanel13.PerformLayout
+Me.ToolStrip4.ResumeLayout(false)
+Me.ToolStrip4.PerformLayout
 Me.TabPage16.ResumeLayout(false)
 Me.TableLayoutPanel67.ResumeLayout(false)
 Me.gbPostPRN.ResumeLayout(false)
@@ -8693,8 +8762,8 @@ Me.gbNETRemont.ResumeLayout(false)
 Me.gbNETNotes.ResumeLayout(false)
 Me.TableLayoutPanel15.ResumeLayout(false)
 Me.TableLayoutPanel15.PerformLayout
-Me.TableLayoutPanel16.ResumeLayout(false)
-Me.TableLayoutPanel16.PerformLayout
+Me.ToolStrip5.ResumeLayout(false)
+Me.ToolStrip5.PerformLayout
 Me.TabPage17.ResumeLayout(false)
 Me.TableLayoutPanel68.ResumeLayout(false)
 Me.gbPostNET.ResumeLayout(false)
@@ -8719,8 +8788,8 @@ Me.gbOTHRemont.ResumeLayout(false)
 Me.gbOTHNotes.ResumeLayout(false)
 Me.TableLayoutPanel18.ResumeLayout(false)
 Me.TableLayoutPanel18.PerformLayout
-Me.TableLayoutPanel19.ResumeLayout(false)
-Me.TableLayoutPanel19.PerformLayout
+Me.ToolStrip6.ResumeLayout(false)
+Me.ToolStrip6.PerformLayout
 Me.TabPage18.ResumeLayout(false)
 Me.TableLayoutPanel70.ResumeLayout(false)
 Me.TableLayoutPanel70.PerformLayout
@@ -8747,29 +8816,6 @@ End Sub
     Friend WithEvents TabPage10 As System.Windows.Forms.TabPage
     Friend WithEvents gbTree As System.Windows.Forms.GroupBox
     Friend WithEvents txtSearch As System.Windows.Forms.TextBox
-    Friend WithEvents sSTAB1 As System.Windows.Forms.TabControl
-    Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
-    Friend WithEvents gbSOUND As System.Windows.Forms.GroupBox
-    Friend WithEvents gbSVGA As System.Windows.Forms.GroupBox
-    Friend WithEvents gbHDD As System.Windows.Forms.GroupBox
-    Friend WithEvents gbRAM As System.Windows.Forms.GroupBox
-    Friend WithEvents gbMB As System.Windows.Forms.GroupBox
-    Friend WithEvents gbcpu As System.Windows.Forms.GroupBox
-    Friend WithEvents TabPage3 As System.Windows.Forms.TabPage
-    Friend WithEvents gbPrinters As System.Windows.Forms.GroupBox
-    Friend WithEvents gbFilter As System.Windows.Forms.GroupBox
-    Friend WithEvents gbAsystem As System.Windows.Forms.GroupBox
-    Friend WithEvents gbMouse As System.Windows.Forms.GroupBox
-    Friend WithEvents gbKeyboard As System.Windows.Forms.GroupBox
-    Friend WithEvents gbMonitor As System.Windows.Forms.GroupBox
-    Friend WithEvents TabPage4 As System.Windows.Forms.TabPage
-    Friend WithEvents lstSoftware As System.Windows.Forms.ListView
-    Friend WithEvents TabPage5 As System.Windows.Forms.TabPage
-    Friend WithEvents TabPage6 As System.Windows.Forms.TabPage
-    Friend WithEvents TabPage7 As System.Windows.Forms.TabPage
-    Friend WithEvents TabPage8 As System.Windows.Forms.TabPage
-    Friend WithEvents gbSale As System.Windows.Forms.GroupBox
-    Friend WithEvents gbGuarantee As System.Windows.Forms.GroupBox
     Friend WithEvents sSTAB3 As System.Windows.Forms.TabControl
     Friend WithEvents TabPage11 As System.Windows.Forms.TabPage
     Friend WithEvents TabPage12 As System.Windows.Forms.TabPage
@@ -8837,55 +8883,16 @@ End Sub
     Friend WithEvents btnOfficeSend As System.Windows.Forms.Button
     Friend WithEvents SoftInstallToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ПаспортКомпьютераToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents gbIBP As System.Windows.Forms.GroupBox
     Friend WithEvents ОтделитьПринтерыИМониторыToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents TableLayoutPanel1 As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents lstUsers As System.Windows.Forms.ListView
     Friend WithEvents TableLayoutPanel2 As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents Button1 As System.Windows.Forms.Button
     Friend WithEvents Button2 As System.Windows.Forms.Button
     Friend WithEvents Button3 As System.Windows.Forms.Button
-    Friend WithEvents TableLayoutPanel3 As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents cmdUserPassEncript As System.Windows.Forms.Button
-    Friend WithEvents cmdUserAdd As System.Windows.Forms.Button
-    Friend WithEvents cmdUserDel As System.Windows.Forms.Button
-    Friend WithEvents TableLayoutPanel4 As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents txtUMEMO As System.Windows.Forms.TextBox
-    Friend WithEvents Label36 As System.Windows.Forms.Label
-    Friend WithEvents txtUserEmailPwd As System.Windows.Forms.TextBox
-    Friend WithEvents lblEmailPass As System.Windows.Forms.Label
-    Friend WithEvents txtUserEmail As System.Windows.Forms.TextBox
-    Friend WithEvents lblEMAIL As System.Windows.Forms.Label
-    Friend WithEvents txtUserJab As System.Windows.Forms.TextBox
-    Friend WithEvents lblJabber As System.Windows.Forms.Label
-    Friend WithEvents txtUserIcq As System.Windows.Forms.TextBox
-    Friend WithEvents lblICQ As System.Windows.Forms.Label
-    Friend WithEvents lblSurname As System.Windows.Forms.Label
-    Friend WithEvents txtUserPass As System.Windows.Forms.TextBox
-    Friend WithEvents lbluserPassword As System.Windows.Forms.Label
-    Friend WithEvents lblUsername As System.Windows.Forms.Label
-    Friend WithEvents TableLayoutPanel5 As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents gbRepair As System.Windows.Forms.GroupBox
-    Friend WithEvents lvRepair As System.Windows.Forms.ListView
-    Friend WithEvents gbNotes As System.Windows.Forms.GroupBox
-    Friend WithEvents TableLayoutPanel6 As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents TableLayoutPanel7 As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents btnNotesCancel As System.Windows.Forms.Button
-    Friend WithEvents btnNotesAdd As System.Windows.Forms.Button
-    Friend WithEvents btnNotesDel As System.Windows.Forms.Button
-    Friend WithEvents lvNotes As System.Windows.Forms.ListView
-    Friend WithEvents txtNotes As System.Windows.Forms.TextBox
-    Friend WithEvents cmbNotesMaster As System.Windows.Forms.ComboBox
-    Friend WithEvents dtDateNotes As System.Windows.Forms.DateTimePicker
     Friend WithEvents TableLayoutPanel8 As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents gbBRRemont As System.Windows.Forms.GroupBox
     Friend WithEvents lvRepairBR As System.Windows.Forms.ListView
     Friend WithEvents gbBRNotes As System.Windows.Forms.GroupBox
     Friend WithEvents TableLayoutPanel9 As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents TableLayoutPanel10 As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents btnBRNotesCancel As System.Windows.Forms.Button
-    Friend WithEvents btnBRNotesAdd As System.Windows.Forms.Button
-    Friend WithEvents btnBRNotesDel As System.Windows.Forms.Button
     Friend WithEvents lvNotesBR As System.Windows.Forms.ListView
     Friend WithEvents Notesbrtxt As System.Windows.Forms.TextBox
     Friend WithEvents cmbBRMaster As System.Windows.Forms.ComboBox
@@ -8895,10 +8902,6 @@ End Sub
     Friend WithEvents lvRepairPRN As System.Windows.Forms.ListView
     Friend WithEvents gbPRNNotes As System.Windows.Forms.GroupBox
     Friend WithEvents TableLayoutPanel12 As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents TableLayoutPanel13 As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents btnPRNNotesCancel As System.Windows.Forms.Button
-    Friend WithEvents btnPRNNotesAdd As System.Windows.Forms.Button
-    Friend WithEvents btnPRNNotesDel As System.Windows.Forms.Button
     Friend WithEvents lvNotesPRN As System.Windows.Forms.ListView
     Friend WithEvents NotesPRNtxt As System.Windows.Forms.TextBox
     Friend WithEvents cmbNotesPRNMaster As System.Windows.Forms.ComboBox
@@ -8908,10 +8911,6 @@ End Sub
     Friend WithEvents lvRepairNET As System.Windows.Forms.ListView
     Friend WithEvents gbNETNotes As System.Windows.Forms.GroupBox
     Friend WithEvents TableLayoutPanel15 As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents TableLayoutPanel16 As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents btnNETNotesCancel As System.Windows.Forms.Button
-    Friend WithEvents btnNETAdd As System.Windows.Forms.Button
-    Friend WithEvents btnNETNotesDel As System.Windows.Forms.Button
     Friend WithEvents lvNotesNET As System.Windows.Forms.ListView
     Friend WithEvents NotesNETtxt As System.Windows.Forms.TextBox
     Friend WithEvents cmbNotesNETMaster As System.Windows.Forms.ComboBox
@@ -8921,35 +8920,11 @@ End Sub
     Friend WithEvents lvRepairOTH As System.Windows.Forms.ListView
     Friend WithEvents gbOTHNotes As System.Windows.Forms.GroupBox
     Friend WithEvents TableLayoutPanel18 As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents TableLayoutPanel19 As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents btnOTHNotesCancel As System.Windows.Forms.Button
-    Friend WithEvents btnOTHAdd As System.Windows.Forms.Button
-    Friend WithEvents btnOTHNotesDel As System.Windows.Forms.Button
     Friend WithEvents lvNotesOTH As System.Windows.Forms.ListView
     Friend WithEvents txtNotesOTH As System.Windows.Forms.TextBox
     Friend WithEvents cmbNotesOTHMaster As System.Windows.Forms.ComboBox
     Friend WithEvents NotesOTHdate As System.Windows.Forms.DateTimePicker
     Friend WithEvents CartrAddToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents TableLayoutPanel20 As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents gbMovement As System.Windows.Forms.GroupBox
-    Friend WithEvents lvMovement As System.Windows.Forms.ListView
-    Friend WithEvents lblPseudonym As System.Windows.Forms.Label
-    Friend WithEvents txtSNAME As System.Windows.Forms.TextBox
-    Friend WithEvents lblNetName As System.Windows.Forms.Label
-    Friend WithEvents txtPSEUDONIM As System.Windows.Forms.TextBox
-    Friend WithEvents lblBranch As System.Windows.Forms.Label
-    Friend WithEvents cmbBranch As System.Windows.Forms.ComboBox
-    Friend WithEvents lblResponsible As System.Windows.Forms.Label
-    Friend WithEvents cmbResponsible As System.Windows.Forms.ComboBox
-    Friend WithEvents lblDepartment As System.Windows.Forms.Label
-    Friend WithEvents cmbDepartment As System.Windows.Forms.ComboBox
-    Friend WithEvents lblPhone As System.Windows.Forms.Label
-    Friend WithEvents txtPHONE As System.Windows.Forms.TextBox
-    Friend WithEvents lblOffice As System.Windows.Forms.Label
-    Friend WithEvents cmbOffice As System.Windows.Forms.ComboBox
-    Friend WithEvents lblAppointment As System.Windows.Forms.Label
-    Friend WithEvents cmbAppointment As System.Windows.Forms.ComboBox
-    Friend WithEvents gbInNumber As System.Windows.Forms.GroupBox
     Friend WithEvents TableLayoutPanel21 As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents gbPRNCartr As System.Windows.Forms.GroupBox
     Friend WithEvents lvPRNCartr As System.Windows.Forms.ListView
@@ -9016,142 +8991,6 @@ End Sub
     Friend WithEvents lvMovementNET As System.Windows.Forms.ListView
     Friend WithEvents TabPage22 As System.Windows.Forms.TabPage
     Friend WithEvents lvMovementOTH As System.Windows.Forms.ListView
-    Friend WithEvents TableLayoutPanel23 As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents chkPCNNb As System.Windows.Forms.CheckBox
-    Friend WithEvents txtPCSumm As System.Windows.Forms.NumericUpDown
-    Friend WithEvents chkPCspis As System.Windows.Forms.CheckBox
-    Friend WithEvents dtPCdataVvoda As System.Windows.Forms.DateTimePicker
-    Friend WithEvents Label43 As System.Windows.Forms.Label
-    Friend WithEvents Label48 As System.Windows.Forms.Label
-    Friend WithEvents txtPCSfN As System.Windows.Forms.TextBox
-    Friend WithEvents txtPCcash As System.Windows.Forms.NumericUpDown
-    Friend WithEvents Label46 As System.Windows.Forms.Label
-    Friend WithEvents txtPCZay As System.Windows.Forms.TextBox
-    Friend WithEvents Label45 As System.Windows.Forms.Label
-    Friend WithEvents dtPCSFdate As System.Windows.Forms.DateTimePicker
-    Friend WithEvents Label47 As System.Windows.Forms.Label
-    Friend WithEvents Label44 As System.Windows.Forms.Label
-    Friend WithEvents TableLayoutPanel24 As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents PROizV4 As System.Windows.Forms.ComboBox
-    Public WithEvents PROizV2 As System.Windows.Forms.ComboBox
-    Friend WithEvents PROizV3 As System.Windows.Forms.ComboBox
-    Friend WithEvents cmbCPU1 As System.Windows.Forms.ComboBox
-    Friend WithEvents txtSoc4 As System.Windows.Forms.TextBox
-    Friend WithEvents cmbCPU2 As System.Windows.Forms.ComboBox
-    Friend WithEvents PROizV1 As System.Windows.Forms.ComboBox
-    Friend WithEvents cmbCPU3 As System.Windows.Forms.ComboBox
-    Friend WithEvents txtSoc3 As System.Windows.Forms.TextBox
-    Friend WithEvents txtMHZ4 As System.Windows.Forms.TextBox
-    Friend WithEvents cmbCPU4 As System.Windows.Forms.ComboBox
-    Friend WithEvents txtSoc2 As System.Windows.Forms.TextBox
-    Friend WithEvents txtSoc1 As System.Windows.Forms.TextBox
-    Friend WithEvents txtMHZ2 As System.Windows.Forms.TextBox
-    Friend WithEvents txtMHZ3 As System.Windows.Forms.TextBox
-    Friend WithEvents TableLayoutPanel25 As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents PROizV9 As System.Windows.Forms.ComboBox
-    Friend WithEvents txtRamSN4 As System.Windows.Forms.TextBox
-    Friend WithEvents PROizV8 As System.Windows.Forms.ComboBox
-    Friend WithEvents cmbRAM1 As System.Windows.Forms.ComboBox
-    Friend WithEvents PROizV7 As System.Windows.Forms.ComboBox
-    Friend WithEvents cmbRAM2 As System.Windows.Forms.ComboBox
-    Friend WithEvents PROizV6 As System.Windows.Forms.ComboBox
-    Friend WithEvents txtRamSN3 As System.Windows.Forms.TextBox
-    Friend WithEvents txtRamS4 As System.Windows.Forms.TextBox
-    Friend WithEvents cmbRAM3 As System.Windows.Forms.ComboBox
-    Friend WithEvents txtRamSN2 As System.Windows.Forms.TextBox
-    Friend WithEvents cmbRAM4 As System.Windows.Forms.ComboBox
-    Friend WithEvents txtRamS1 As System.Windows.Forms.TextBox
-    Friend WithEvents txtRamSN1 As System.Windows.Forms.TextBox
-    Friend WithEvents txtRamS3 As System.Windows.Forms.TextBox
-    Friend WithEvents txtRamS2 As System.Windows.Forms.TextBox
-    Friend WithEvents TableLayoutPanel26 As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents PROizV13 As System.Windows.Forms.ComboBox
-    Friend WithEvents txtHDDsN4 As System.Windows.Forms.TextBox
-    Friend WithEvents PROizV12 As System.Windows.Forms.ComboBox
-    Friend WithEvents cmbHDD1 As System.Windows.Forms.ComboBox
-    Friend WithEvents PROizV11 As System.Windows.Forms.ComboBox
-    Friend WithEvents cmbHDD2 As System.Windows.Forms.ComboBox
-    Friend WithEvents PROizV10 As System.Windows.Forms.ComboBox
-    Friend WithEvents txtHDDsN3 As System.Windows.Forms.TextBox
-    Friend WithEvents txtHDDo4 As System.Windows.Forms.TextBox
-    Friend WithEvents cmbHDD3 As System.Windows.Forms.ComboBox
-    Friend WithEvents cmbHDD4 As System.Windows.Forms.ComboBox
-    Friend WithEvents txtHDDo1 As System.Windows.Forms.TextBox
-    Friend WithEvents txtHDDsN1 As System.Windows.Forms.TextBox
-    Friend WithEvents txtHDDo3 As System.Windows.Forms.TextBox
-    Friend WithEvents txtHDDo2 As System.Windows.Forms.TextBox
-    Friend WithEvents txtHDDsN2 As System.Windows.Forms.TextBox
-    Friend WithEvents TableLayoutPanel27 As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents PROizV15 As System.Windows.Forms.ComboBox
-    Friend WithEvents txtSVGAs2 As System.Windows.Forms.TextBox
-    Friend WithEvents PROizV14 As System.Windows.Forms.ComboBox
-    Friend WithEvents cmbSVGA1 As System.Windows.Forms.ComboBox
-    Friend WithEvents cmbSVGA2 As System.Windows.Forms.ComboBox
-    Friend WithEvents txtSVGAs1 As System.Windows.Forms.TextBox
-    Friend WithEvents txtSVGAr2 As System.Windows.Forms.TextBox
-    Friend WithEvents txtSVGAr1 As System.Windows.Forms.TextBox
-    Friend WithEvents TableLayoutPanel28 As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents PROizV16 As System.Windows.Forms.ComboBox
-    Friend WithEvents txtSoundS As System.Windows.Forms.TextBox
-    Friend WithEvents cmbSound As System.Windows.Forms.ComboBox
-    Friend WithEvents txtSoundB As System.Windows.Forms.TextBox
-    Friend WithEvents TableLayoutPanel29 As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents lblMBsn As System.Windows.Forms.Label
-    Friend WithEvents txtSN_MB As System.Windows.Forms.TextBox
-    Friend WithEvents txtChip As System.Windows.Forms.TextBox
-    Friend WithEvents PROizV5 As System.Windows.Forms.ComboBox
-    Friend WithEvents cmbMB As System.Windows.Forms.ComboBox
-    Friend WithEvents TableLayoutPanel40 As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents PROizV29 As System.Windows.Forms.ComboBox
-    Friend WithEvents txtMon2SN As System.Windows.Forms.TextBox
-    Friend WithEvents PROizV28 As System.Windows.Forms.ComboBox
-    Friend WithEvents cmbMon1 As System.Windows.Forms.ComboBox
-    Friend WithEvents cmbMon2 As System.Windows.Forms.ComboBox
-    Friend WithEvents txtMon1SN As System.Windows.Forms.TextBox
-    Friend WithEvents txtMon2Dum As System.Windows.Forms.TextBox
-    Friend WithEvents txtMon1Dum As System.Windows.Forms.TextBox
-    Friend WithEvents TableLayoutPanel41 As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents cmbPrinters1 As System.Windows.Forms.ComboBox
-    Friend WithEvents PROizV36 As System.Windows.Forms.ComboBox
-    Friend WithEvents txtPrint3Port As System.Windows.Forms.TextBox
-    Friend WithEvents PROizV35 As System.Windows.Forms.ComboBox
-    Friend WithEvents cmbPrinters2 As System.Windows.Forms.ComboBox
-    Friend WithEvents PROizV34 As System.Windows.Forms.ComboBox
-    Friend WithEvents cmbPrinters3 As System.Windows.Forms.ComboBox
-    Friend WithEvents txtPrint2Port As System.Windows.Forms.TextBox
-    Friend WithEvents txtPrint3SN As System.Windows.Forms.TextBox
-    Friend WithEvents txtPrint1SN As System.Windows.Forms.TextBox
-    Friend WithEvents txtPrint1Port As System.Windows.Forms.TextBox
-    Friend WithEvents txtPrint2SN As System.Windows.Forms.TextBox
-    Friend WithEvents TableLayoutPanel42 As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents PROizV30 As System.Windows.Forms.ComboBox
-    Friend WithEvents cmbKeyb As System.Windows.Forms.ComboBox
-    Friend WithEvents txtKeybSN As System.Windows.Forms.TextBox
-    Friend WithEvents TableLayoutPanel43 As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents txtMouseSN As System.Windows.Forms.TextBox
-    Friend WithEvents cmbMouse As System.Windows.Forms.ComboBox
-    Friend WithEvents PROizV31 As System.Windows.Forms.ComboBox
-    Friend WithEvents TableLayoutPanel44 As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents PROizV32 As System.Windows.Forms.ComboBox
-    Friend WithEvents cmbAsist As System.Windows.Forms.ComboBox
-    Friend WithEvents txtAsistSN As System.Windows.Forms.TextBox
-    Friend WithEvents TableLayoutPanel45 As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents PROizV33 As System.Windows.Forms.ComboBox
-    Friend WithEvents cmbFilter As System.Windows.Forms.ComboBox
-    Friend WithEvents txtFilterSN As System.Windows.Forms.TextBox
-    Friend WithEvents TableLayoutPanel46 As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents PROizV43 As System.Windows.Forms.ComboBox
-    Friend WithEvents cmbIBP As System.Windows.Forms.ComboBox
-    Friend WithEvents txtSNIBP As System.Windows.Forms.TextBox
-    Friend WithEvents TableLayoutPanel47 As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents IN_PRN As System.Windows.Forms.TextBox
-    Friend WithEvents Label16 As System.Windows.Forms.Label
-    Friend WithEvents IN_IBP As System.Windows.Forms.TextBox
-    Friend WithEvents Label19 As System.Windows.Forms.Label
-    Friend WithEvents txtMSN As System.Windows.Forms.TextBox
-    Friend WithEvents Label17 As System.Windows.Forms.Label
-    Friend WithEvents txtSBSN As System.Windows.Forms.TextBox
-    Friend WithEvents Label18 As System.Windows.Forms.Label
     Friend WithEvents TableLayoutPanel48 As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents cmbNetCable As System.Windows.Forms.ComboBox
     Friend WithEvents txtNetSN As System.Windows.Forms.TextBox
@@ -9256,44 +9095,22 @@ End Sub
     Friend WithEvents cmbNETPostav As System.Windows.Forms.ComboBox
     Friend WithEvents dtGNETPr As System.Windows.Forms.DateTimePicker
     Friend WithEvents Label38 As System.Windows.Forms.Label
-    Friend WithEvents TableLayoutPanel59 As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents gbSeller As System.Windows.Forms.GroupBox
-    Friend WithEvents TableLayoutPanel60 As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents dtGok As System.Windows.Forms.DateTimePicker
-    Friend WithEvents Label20 As System.Windows.Forms.Label
-    Friend WithEvents Label21 As System.Windows.Forms.Label
-    Friend WithEvents Label22 As System.Windows.Forms.Label
-    Friend WithEvents dtGPr As System.Windows.Forms.DateTimePicker
-    Friend WithEvents cmbPostav As System.Windows.Forms.ComboBox
-    Friend WithEvents rbKompl As System.Windows.Forms.RadioButton
-    Friend WithEvents rbSist As System.Windows.Forms.RadioButton
-    Friend WithEvents TableLayoutPanel61 As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents TableLayoutPanel63 As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents TableLayoutPanel64 As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents TableLayoutPanel65 As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents TableLayoutPanel66 As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents TableLayoutPanel67 As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents TableLayoutPanel68 As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents TableLayoutPanel69 As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents TableLayoutPanel70 As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents TableLayoutPanel71 As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents ChkPDC As System.Windows.Forms.CheckBox
-    Friend WithEvents Label84 As System.Windows.Forms.Label
-    Friend WithEvents lblsID As System.Windows.Forms.Label
     Friend WithEvents Label85 As System.Windows.Forms.Label
     Friend WithEvents lblSidPRN As System.Windows.Forms.Label
     Friend WithEvents Label87 As System.Windows.Forms.Label
     Friend WithEvents lblsIDOTH As System.Windows.Forms.Label
-    Friend WithEvents btnUserCancel As System.Windows.Forms.Button
     Friend WithEvents cmDvig As System.Windows.Forms.ContextMenuStrip
     Friend WithEvents DELTEdVIGToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents treebranche As System.Windows.Forms.ComboBox
     Friend WithEvents MassRazdelPerf As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents txtUserName As System.Windows.Forms.ComboBox
-    Friend WithEvents txtUserFIO As System.Windows.Forms.ComboBox
     Friend WithEvents MassUpdatetoINI As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents Label88 As System.Windows.Forms.Label
-    Friend WithEvents cmbPCLK As System.Windows.Forms.ComboBox
     Friend WithEvents TableLayoutPanel49 As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents cmbNETotv As System.Windows.Forms.ComboBox
     Friend WithEvents txtNETphone As System.Windows.Forms.TextBox
@@ -9313,22 +9130,12 @@ End Sub
     Friend WithEvents EditService As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents DeleteService As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents TableLayoutPanel73 As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents bCPUPlus As System.Windows.Forms.Button
-    Friend WithEvents bSVGAPlus As System.Windows.Forms.Button
-    Friend WithEvents bRamPlus As System.Windows.Forms.Button
-    Friend WithEvents bHddPlus As System.Windows.Forms.Button
-    Friend WithEvents bMonitorPlus As System.Windows.Forms.Button
-    Friend WithEvents bPrinterPlus As System.Windows.Forms.Button
     Friend WithEvents chkVisibleSTR As System.Windows.Forms.CheckBox
-    Friend WithEvents txtMHZ1 As System.Windows.Forms.TextBox
     Friend WithEvents ВернутьПерефериюToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents Label89 As System.Windows.Forms.Label
-    Friend WithEvents lblNumberNET As System.Windows.Forms.Label
     Friend WithEvents MnuSendEmail As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mnu_Z_to_Office As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mnu_z_rasp As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ilsCommands As System.Windows.Forms.ImageList
-    Friend WithEvents btnSearch As System.Windows.Forms.Button
     Friend WithEvents MassObedPerf As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents addServiseWork As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ППРToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
@@ -9339,6 +9146,126 @@ End Sub
     Friend WithEvents ТО5ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ТО6ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents lstGroups As System.Windows.Forms.TreeView
+    Friend WithEvents sSTAB1 As System.Windows.Forms.TabControl
+    Friend WithEvents TabPage6 As System.Windows.Forms.TabPage
+    Friend WithEvents TableLayoutPanel20 As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents gbMovement As System.Windows.Forms.GroupBox
+    Friend WithEvents lvMovement As System.Windows.Forms.ListView
+    Friend WithEvents lblPseudonym As System.Windows.Forms.Label
+    Friend WithEvents txtSNAME As System.Windows.Forms.TextBox
+    Friend WithEvents lblNetName As System.Windows.Forms.Label
+    Friend WithEvents txtPSEUDONIM As System.Windows.Forms.TextBox
+    Friend WithEvents lblBranch As System.Windows.Forms.Label
+    Friend WithEvents cmbBranch As System.Windows.Forms.ComboBox
+    Friend WithEvents lblResponsible As System.Windows.Forms.Label
+    Friend WithEvents cmbResponsible As System.Windows.Forms.ComboBox
+    Friend WithEvents lblDepartment As System.Windows.Forms.Label
+    Friend WithEvents cmbDepartment As System.Windows.Forms.ComboBox
+    Friend WithEvents lblPhone As System.Windows.Forms.Label
+    Friend WithEvents txtPHONE As System.Windows.Forms.TextBox
+    Friend WithEvents lblOffice As System.Windows.Forms.Label
+    Friend WithEvents cmbOffice As System.Windows.Forms.ComboBox
+    Friend WithEvents lblAppointment As System.Windows.Forms.Label
+    Friend WithEvents cmbAppointment As System.Windows.Forms.ComboBox
+    Friend WithEvents gbInNumber As System.Windows.Forms.GroupBox
+    Friend WithEvents TableLayoutPanel47 As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents IN_PRN As System.Windows.Forms.TextBox
+    Friend WithEvents Label16 As System.Windows.Forms.Label
+    Friend WithEvents IN_IBP As System.Windows.Forms.TextBox
+    Friend WithEvents Label19 As System.Windows.Forms.Label
+    Friend WithEvents txtMSN As System.Windows.Forms.TextBox
+    Friend WithEvents Label17 As System.Windows.Forms.Label
+    Friend WithEvents txtSBSN As System.Windows.Forms.TextBox
+    Friend WithEvents Label18 As System.Windows.Forms.Label
+    Friend WithEvents Label89 As System.Windows.Forms.Label
+    Friend WithEvents lblNumberNET As System.Windows.Forms.Label
+    Friend WithEvents Label84 As System.Windows.Forms.Label
+    Friend WithEvents lblsID As System.Windows.Forms.Label
+    Friend WithEvents Label88 As System.Windows.Forms.Label
+    Friend WithEvents cmbPCLK As System.Windows.Forms.ComboBox
+    Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
+    Friend WithEvents TableLayoutPanel63 As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents gbcpu As System.Windows.Forms.GroupBox
+    Friend WithEvents TableLayoutPanel24 As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents bCPUPlus As System.Windows.Forms.Button
+    Friend WithEvents PROizV4 As System.Windows.Forms.ComboBox
+    Public WithEvents PROizV2 As System.Windows.Forms.ComboBox
+    Friend WithEvents PROizV3 As System.Windows.Forms.ComboBox
+    Friend WithEvents cmbCPU1 As System.Windows.Forms.ComboBox
+    Friend WithEvents txtSoc4 As System.Windows.Forms.TextBox
+    Friend WithEvents cmbCPU2 As System.Windows.Forms.ComboBox
+    Friend WithEvents PROizV1 As System.Windows.Forms.ComboBox
+    Friend WithEvents cmbCPU3 As System.Windows.Forms.ComboBox
+    Friend WithEvents txtSoc3 As System.Windows.Forms.TextBox
+    Friend WithEvents txtMHZ4 As System.Windows.Forms.TextBox
+    Friend WithEvents cmbCPU4 As System.Windows.Forms.ComboBox
+    Friend WithEvents txtSoc2 As System.Windows.Forms.TextBox
+    Friend WithEvents txtMHZ1 As System.Windows.Forms.TextBox
+    Friend WithEvents txtSoc1 As System.Windows.Forms.TextBox
+    Friend WithEvents txtMHZ2 As System.Windows.Forms.TextBox
+    Friend WithEvents txtMHZ3 As System.Windows.Forms.TextBox
+    Friend WithEvents gbSOUND As System.Windows.Forms.GroupBox
+    Friend WithEvents TableLayoutPanel28 As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents PROizV16 As System.Windows.Forms.ComboBox
+    Friend WithEvents txtSoundS As System.Windows.Forms.TextBox
+    Friend WithEvents cmbSound As System.Windows.Forms.ComboBox
+    Friend WithEvents txtSoundB As System.Windows.Forms.TextBox
+    Friend WithEvents gbMB As System.Windows.Forms.GroupBox
+    Friend WithEvents TableLayoutPanel29 As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents lblMBsn As System.Windows.Forms.Label
+    Friend WithEvents txtSN_MB As System.Windows.Forms.TextBox
+    Friend WithEvents txtChip As System.Windows.Forms.TextBox
+    Friend WithEvents PROizV5 As System.Windows.Forms.ComboBox
+    Friend WithEvents cmbMB As System.Windows.Forms.ComboBox
+    Friend WithEvents gbSVGA As System.Windows.Forms.GroupBox
+    Friend WithEvents TableLayoutPanel27 As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents bSVGAPlus As System.Windows.Forms.Button
+    Friend WithEvents PROizV15 As System.Windows.Forms.ComboBox
+    Friend WithEvents txtSVGAs2 As System.Windows.Forms.TextBox
+    Friend WithEvents PROizV14 As System.Windows.Forms.ComboBox
+    Friend WithEvents cmbSVGA1 As System.Windows.Forms.ComboBox
+    Friend WithEvents cmbSVGA2 As System.Windows.Forms.ComboBox
+    Friend WithEvents txtSVGAs1 As System.Windows.Forms.TextBox
+    Friend WithEvents txtSVGAr2 As System.Windows.Forms.TextBox
+    Friend WithEvents txtSVGAr1 As System.Windows.Forms.TextBox
+    Friend WithEvents gbRAM As System.Windows.Forms.GroupBox
+    Friend WithEvents TableLayoutPanel25 As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents bRamPlus As System.Windows.Forms.Button
+    Friend WithEvents PROizV9 As System.Windows.Forms.ComboBox
+    Friend WithEvents txtRamSN4 As System.Windows.Forms.TextBox
+    Friend WithEvents PROizV8 As System.Windows.Forms.ComboBox
+    Friend WithEvents cmbRAM1 As System.Windows.Forms.ComboBox
+    Friend WithEvents PROizV7 As System.Windows.Forms.ComboBox
+    Friend WithEvents cmbRAM2 As System.Windows.Forms.ComboBox
+    Friend WithEvents PROizV6 As System.Windows.Forms.ComboBox
+    Friend WithEvents txtRamSN3 As System.Windows.Forms.TextBox
+    Friend WithEvents txtRamS4 As System.Windows.Forms.TextBox
+    Friend WithEvents cmbRAM3 As System.Windows.Forms.ComboBox
+    Friend WithEvents txtRamSN2 As System.Windows.Forms.TextBox
+    Friend WithEvents cmbRAM4 As System.Windows.Forms.ComboBox
+    Friend WithEvents txtRamS1 As System.Windows.Forms.TextBox
+    Friend WithEvents txtRamSN1 As System.Windows.Forms.TextBox
+    Friend WithEvents txtRamS3 As System.Windows.Forms.TextBox
+    Friend WithEvents txtRamS2 As System.Windows.Forms.TextBox
+    Friend WithEvents gbHDD As System.Windows.Forms.GroupBox
+    Friend WithEvents TableLayoutPanel26 As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents bHddPlus As System.Windows.Forms.Button
+    Friend WithEvents PROizV13 As System.Windows.Forms.ComboBox
+    Friend WithEvents txtHDDsN4 As System.Windows.Forms.TextBox
+    Friend WithEvents PROizV12 As System.Windows.Forms.ComboBox
+    Friend WithEvents cmbHDD1 As System.Windows.Forms.ComboBox
+    Friend WithEvents PROizV11 As System.Windows.Forms.ComboBox
+    Friend WithEvents cmbHDD2 As System.Windows.Forms.ComboBox
+    Friend WithEvents PROizV10 As System.Windows.Forms.ComboBox
+    Friend WithEvents txtHDDsN3 As System.Windows.Forms.TextBox
+    Friend WithEvents txtHDDo4 As System.Windows.Forms.TextBox
+    Friend WithEvents cmbHDD3 As System.Windows.Forms.ComboBox
+    Friend WithEvents cmbHDD4 As System.Windows.Forms.ComboBox
+    Friend WithEvents txtHDDo1 As System.Windows.Forms.TextBox
+    Friend WithEvents txtHDDsN1 As System.Windows.Forms.TextBox
+    Friend WithEvents txtHDDo3 As System.Windows.Forms.TextBox
+    Friend WithEvents txtHDDo2 As System.Windows.Forms.TextBox
+    Friend WithEvents txtHDDsN2 As System.Windows.Forms.TextBox
     Friend WithEvents gbOptical As System.Windows.Forms.GroupBox
     Friend WithEvents TableLayoutPanel30 As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents bOpticalPlus As System.Windows.Forms.Button
@@ -9405,5 +9332,167 @@ End Sub
     Friend WithEvents txtModSB As System.Windows.Forms.TextBox
     Friend WithEvents txtSNSB As System.Windows.Forms.TextBox
     Friend WithEvents PROizV27 As System.Windows.Forms.ComboBox
+    Friend WithEvents TabPage3 As System.Windows.Forms.TabPage
+    Friend WithEvents TableLayoutPanel61 As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents gbMonitor As System.Windows.Forms.GroupBox
+    Friend WithEvents TableLayoutPanel40 As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents PROizV29 As System.Windows.Forms.ComboBox
+    Friend WithEvents txtMon2SN As System.Windows.Forms.TextBox
+    Friend WithEvents PROizV28 As System.Windows.Forms.ComboBox
+    Friend WithEvents cmbMon1 As System.Windows.Forms.ComboBox
+    Friend WithEvents cmbMon2 As System.Windows.Forms.ComboBox
+    Friend WithEvents txtMon1SN As System.Windows.Forms.TextBox
+    Friend WithEvents txtMon2Dum As System.Windows.Forms.TextBox
+    Friend WithEvents txtMon1Dum As System.Windows.Forms.TextBox
+    Friend WithEvents bMonitorPlus As System.Windows.Forms.Button
+    Friend WithEvents gbPrinters As System.Windows.Forms.GroupBox
+    Friend WithEvents TableLayoutPanel41 As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents cmbPrinters1 As System.Windows.Forms.ComboBox
+    Friend WithEvents PROizV36 As System.Windows.Forms.ComboBox
+    Friend WithEvents txtPrint3Port As System.Windows.Forms.TextBox
+    Friend WithEvents PROizV35 As System.Windows.Forms.ComboBox
+    Friend WithEvents cmbPrinters2 As System.Windows.Forms.ComboBox
+    Friend WithEvents PROizV34 As System.Windows.Forms.ComboBox
+    Friend WithEvents cmbPrinters3 As System.Windows.Forms.ComboBox
+    Friend WithEvents txtPrint2Port As System.Windows.Forms.TextBox
+    Friend WithEvents txtPrint3SN As System.Windows.Forms.TextBox
+    Friend WithEvents txtPrint1SN As System.Windows.Forms.TextBox
+    Friend WithEvents txtPrint1Port As System.Windows.Forms.TextBox
+    Friend WithEvents txtPrint2SN As System.Windows.Forms.TextBox
+    Friend WithEvents bPrinterPlus As System.Windows.Forms.Button
+    Friend WithEvents gbIBP As System.Windows.Forms.GroupBox
+    Friend WithEvents TableLayoutPanel46 As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents PROizV43 As System.Windows.Forms.ComboBox
+    Friend WithEvents cmbIBP As System.Windows.Forms.ComboBox
+    Friend WithEvents txtSNIBP As System.Windows.Forms.TextBox
+    Friend WithEvents gbKeyboard As System.Windows.Forms.GroupBox
+    Friend WithEvents TableLayoutPanel42 As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents PROizV30 As System.Windows.Forms.ComboBox
+    Friend WithEvents cmbKeyb As System.Windows.Forms.ComboBox
+    Friend WithEvents txtKeybSN As System.Windows.Forms.TextBox
+    Friend WithEvents gbMouse As System.Windows.Forms.GroupBox
+    Friend WithEvents TableLayoutPanel43 As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents txtMouseSN As System.Windows.Forms.TextBox
+    Friend WithEvents cmbMouse As System.Windows.Forms.ComboBox
+    Friend WithEvents PROizV31 As System.Windows.Forms.ComboBox
+    Friend WithEvents gbFilter As System.Windows.Forms.GroupBox
+    Friend WithEvents TableLayoutPanel45 As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents PROizV33 As System.Windows.Forms.ComboBox
+    Friend WithEvents cmbFilter As System.Windows.Forms.ComboBox
+    Friend WithEvents txtFilterSN As System.Windows.Forms.TextBox
+    Friend WithEvents gbAsystem As System.Windows.Forms.GroupBox
+    Friend WithEvents TableLayoutPanel44 As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents PROizV32 As System.Windows.Forms.ComboBox
+    Friend WithEvents cmbAsist As System.Windows.Forms.ComboBox
+    Friend WithEvents txtAsistSN As System.Windows.Forms.TextBox
+    Friend WithEvents TabPage4 As System.Windows.Forms.TabPage
+    Friend WithEvents lstSoftware As System.Windows.Forms.ListView
+    Friend WithEvents TabPage5 As System.Windows.Forms.TabPage
+    Friend WithEvents TableLayoutPanel1 As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents ToolStrip1 As System.Windows.Forms.ToolStrip
+    Friend WithEvents cmdUserAdd As System.Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents cmdUserDel As System.Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStripSeparator2 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents cmdUserPassEncript As System.Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStripSeparator3 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents btnUserCancel As System.Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStripSeparator4 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents TableLayoutPanel4 As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents txtUMEMO As System.Windows.Forms.TextBox
+    Friend WithEvents Label36 As System.Windows.Forms.Label
+    Friend WithEvents txtUserEmailPwd As System.Windows.Forms.TextBox
+    Friend WithEvents lblEmailPass As System.Windows.Forms.Label
+    Friend WithEvents txtUserEmail As System.Windows.Forms.TextBox
+    Friend WithEvents lblEMAIL As System.Windows.Forms.Label
+    Friend WithEvents txtUserJab As System.Windows.Forms.TextBox
+    Friend WithEvents lblJabber As System.Windows.Forms.Label
+    Friend WithEvents txtUserIcq As System.Windows.Forms.TextBox
+    Friend WithEvents lblICQ As System.Windows.Forms.Label
+    Friend WithEvents lblSurname As System.Windows.Forms.Label
+    Friend WithEvents txtUserPass As System.Windows.Forms.TextBox
+    Friend WithEvents lbluserPassword As System.Windows.Forms.Label
+    Friend WithEvents lblUsername As System.Windows.Forms.Label
+    Friend WithEvents ChkPDC As System.Windows.Forms.CheckBox
+    Friend WithEvents txtUserName As System.Windows.Forms.ComboBox
+    Friend WithEvents txtUserFIO As System.Windows.Forms.ComboBox
+    Friend WithEvents lstUsers As System.Windows.Forms.ListView
+    Friend WithEvents TabPage7 As System.Windows.Forms.TabPage
+    Friend WithEvents TableLayoutPanel5 As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents gbRepair As System.Windows.Forms.GroupBox
+    Friend WithEvents lvRepair As System.Windows.Forms.ListView
+    Friend WithEvents gbNotes As System.Windows.Forms.GroupBox
+    Friend WithEvents TableLayoutPanel6 As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents lvNotes As System.Windows.Forms.ListView
+    Friend WithEvents txtNotes As System.Windows.Forms.TextBox
+    Friend WithEvents cmbNotesMaster As System.Windows.Forms.ComboBox
+    Friend WithEvents dtDateNotes As System.Windows.Forms.DateTimePicker
+    Friend WithEvents TabPage8 As System.Windows.Forms.TabPage
+    Friend WithEvents TableLayoutPanel66 As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents gbGuarantee As System.Windows.Forms.GroupBox
+    Friend WithEvents TableLayoutPanel59 As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents gbSeller As System.Windows.Forms.GroupBox
+    Friend WithEvents TableLayoutPanel60 As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents dtGok As System.Windows.Forms.DateTimePicker
+    Friend WithEvents Label20 As System.Windows.Forms.Label
+    Friend WithEvents Label21 As System.Windows.Forms.Label
+    Friend WithEvents Label22 As System.Windows.Forms.Label
+    Friend WithEvents cmbPostav As System.Windows.Forms.ComboBox
+    Friend WithEvents dtGPr As System.Windows.Forms.DateTimePicker
+    Friend WithEvents rbKompl As System.Windows.Forms.RadioButton
+    Friend WithEvents rbSist As System.Windows.Forms.RadioButton
+    Friend WithEvents gbSale As System.Windows.Forms.GroupBox
+    Friend WithEvents TableLayoutPanel23 As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents chkPCNNb As System.Windows.Forms.CheckBox
+    Friend WithEvents txtPCSumm As System.Windows.Forms.NumericUpDown
+    Friend WithEvents chkPCspis As System.Windows.Forms.CheckBox
+    Friend WithEvents dtPCdataVvoda As System.Windows.Forms.DateTimePicker
+    Friend WithEvents Label43 As System.Windows.Forms.Label
+    Friend WithEvents Label48 As System.Windows.Forms.Label
+    Friend WithEvents txtPCSfN As System.Windows.Forms.TextBox
+    Friend WithEvents txtPCcash As System.Windows.Forms.NumericUpDown
+    Friend WithEvents Label46 As System.Windows.Forms.Label
+    Friend WithEvents txtPCZay As System.Windows.Forms.TextBox
+    Friend WithEvents Label45 As System.Windows.Forms.Label
+    Friend WithEvents dtPCSFdate As System.Windows.Forms.DateTimePicker
+    Friend WithEvents Label47 As System.Windows.Forms.Label
+    Friend WithEvents Label44 As System.Windows.Forms.Label
+    Friend WithEvents ToolStrip2 As System.Windows.Forms.ToolStrip
+    Friend WithEvents btnNotesAdd As System.Windows.Forms.ToolStripButton
+    Friend WithEvents btnNotesDel As System.Windows.Forms.ToolStripButton
+    Friend WithEvents btnNotesCancel As System.Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStripSeparator5 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents ToolStripSeparator6 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents ToolStripSeparator7 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents ToolStrip3 As System.Windows.Forms.ToolStrip
+    Friend WithEvents btnBRNotesAdd As System.Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStripSeparator8 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents btnBRNotesDel As System.Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStripSeparator9 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents btnBRNotesCancel As System.Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStripSeparator10 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents ToolStrip4 As System.Windows.Forms.ToolStrip
+    Friend WithEvents btnPRNNotesAdd As System.Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStripSeparator11 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents btnPRNNotesDel As System.Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStripSeparator12 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents btnPRNNotesCancel As System.Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStripSeparator13 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents ToolStrip5 As System.Windows.Forms.ToolStrip
+    Friend WithEvents btnNETAdd As System.Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStripSeparator14 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents btnNETNotesDel As System.Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStripSeparator15 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents btnNETNotesCancel As System.Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStripSeparator16 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents ToolStrip6 As System.Windows.Forms.ToolStrip
+    Friend WithEvents btnOTHAdd As System.Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStripSeparator17 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents btnOTHNotesDel As System.Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStripSeparator18 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents btnOTHNotesCancel As System.Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStripSeparator19 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents ToolStrip7 As System.Windows.Forms.ToolStrip
+    Friend WithEvents btnSearch As System.Windows.Forms.ToolStripButton
 
 End Class

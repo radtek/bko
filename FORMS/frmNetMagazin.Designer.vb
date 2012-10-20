@@ -35,6 +35,7 @@ Partial Class frmNetMagazin
         Me.tsbAdd = New System.Windows.Forms.ToolStripButton()
         Me.tsbDel = New System.Windows.Forms.ToolStripButton()
         Me.tsbExcell = New System.Windows.Forms.ToolStripButton()
+        CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
@@ -153,11 +154,11 @@ Partial Class frmNetMagazin
         '
         Me.tsPanNetMag.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.tsPanNetMag.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.tsPanNetMag.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
         Me.tsPanNetMag.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbAdd, Me.tsbDel, Me.tsbExcell})
         Me.tsPanNetMag.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
         Me.tsPanNetMag.Location = New System.Drawing.Point(0, 409)
         Me.tsPanNetMag.Name = "tsPanNetMag"
-        Me.tsPanNetMag.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
         Me.tsPanNetMag.Size = New System.Drawing.Size(508, 25)
         Me.tsPanNetMag.TabIndex = 1
         Me.tsPanNetMag.Text = "ToolStrip1"
@@ -200,6 +201,7 @@ Partial Class frmNetMagazin
         Me.Text = "Кабельные журналы"
         Me.SplitContainer1.Panel1.ResumeLayout(False)
         Me.SplitContainer1.Panel2.ResumeLayout(False)
+        CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer1.ResumeLayout(False)
         Me.gbTree.ResumeLayout(False)
         Me.TableLayoutPanel3.ResumeLayout(False)

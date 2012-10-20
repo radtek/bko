@@ -750,50 +750,6 @@ err_1:
         Call RefFilTree(Me.lstGroups)
     End Sub
 
-    Private Sub btnRemAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRemAdd.Click
-
-
-
-        On Error GoTo Err_1
-        frmService_add.REMFU = False
-        frmService_add.REMED = False
-
-        Dim d() As String
-
-        d = Split(lstGroups.SelectedNode.Tag, "|")
-        frmComputers.sPREF = d(0)
-        frmComputers.sCOUNT = d(1)
-
-        If frmComputers.sCOUNT = 0 Then Exit Sub
-
-        If Len(frmComputers.sCOUNT) = 0 Then Exit Sub
-        Dim LNGIniFile As New IniFile(sLANGPATH)
-        frmService_add.Text = LNGIniFile.GetString("frmserviceDesc", "MSG1", "") & " " & lstGroups.SelectedNode.Text
-
-        frmService_add.cmbIst.Text = ""
-        frmService_add.cmbMast.Text = ""
-        frmService_add.txtPhone.Text = ""
-        frmService_add.dtReg.Value = Date.Today
-        frmService_add.dtIsp.Value = Date.Today
-        frmService_add.txtHead.Text = ""
-        frmService_add.txtRem.Text = ""
-        frmService_add.cmbStatus.Text = ""
-        frmService_add.cmbOtv.Text = ""
-        frmService_add.cmbKrit.Text = ""
-        frmService_add.cmbTip.Text = ""
-        frmService_add.txtComent.Text = ""
-        frmService_add.RemCashe.Text = 0
-        frmService_add.cmbAdd.Text = LNGIniFile.GetString("frmService_add", "cmbAdd", "")
-        frmService_add.chkClose.Checked = 0
-
-        frmService_add.ShowDialog(Me)
-
-        Call SaveActivityToLogDB(LNGIniFile.GetString("frmserviceDesc", "MSG4", "") & " " & lstGroups.SelectedNode.Text)
-
-        Exit Sub
-Err_1:
-        MsgBox(Err.Description, MsgBoxStyle.Information, ProGramName)
-    End Sub
 
     Private Sub chkNZ_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkNZ.CheckedChanged
 
@@ -835,9 +791,9 @@ Err_1:
         search_ = False
         txtSearch.Text = ""
 
-        Dim newThread5 As New Thread(AddressOf R_T_LOAD)
-        newThread5.Start()
-
+        'Dim newThread5 As New Thread(AddressOf R_T_LOAD)
+        'newThread5.Start()
+        Me.BeginInvoke(New MethodInvoker(AddressOf R_T_LOAD))
 
         Me.Cursor = Cursors.Default
 
@@ -1653,40 +1609,7 @@ Error_:
 
     End Sub
 
-    Private Sub btnSBTAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSBTAdd.Click
-        On Error GoTo err_1
-
-        If lvRem.Items.Count = 0 Then Exit Sub
-        If r1COUNT = 0 Then Exit Sub
-
-
-        ZaiavkR = False
-
-        Dim d() As String
-
-        d = Split(lstGroups.SelectedNode.Tag, "|")
-        frmComputers.sPREF = d(0)
-        frmComputers.sCOUNT = d(1)
-
-        If Len(frmComputers.sCOUNT) = 0 Then Exit Sub
-
-
-        frmservice_add_otvets.cmbMaster.Text = ""
-        frmservice_add_otvets.txtOtzyv.Text = ""
-        frmservice_add_otvets.cmbMaster.Text = ""
-        frmservice_add_otvets.dtPic.Value = Date.Today
-        frmservice_add_otvets.cmbStat.Text = ""
-        frmservice_add_otvets.cmbOtv.Text = ""
-        frmservice_add_otvets.cmbKrit.Text = ""
-        frmservice_add_otvets.cmbMaster.Text = ""
-        frmservice_add_otvets.cmbTip.Text = "Base"
-
-
-        frmservice_add_otvets.ShowDialog(Me)
-
-        Exit Sub
-err_1:
-        MsgBox(Err.Description, MsgBoxStyle.Information, ProGramName)
+    Private Sub btnSBTAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
 
 
     End Sub
@@ -1759,71 +1682,7 @@ err_1:
 
     End Sub
 
-    Private Sub btnRemDel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRemDel.Click
-        If lvRem.Items.Count = 0 Then Exit Sub
-
-        For z = 0 To lvRem.SelectedItems.Count - 1
-            r1COUNT = (lvRem.SelectedItems(z).Text)
-        Next
-
-
-        Dim intj As Integer = 0
-        Dim intj1 As Integer = 0
-
-
-
-
-        lvRem.Select()
-
-        For intj = 0 To lvRem.Items.Count - 1
-
-            lvRem.Items(intj).Selected = True
-            lvRem.Items(intj).EnsureVisible()
-
-            If lvRem.Items(intj).Checked = True Then
-
-                intj1 = intj1 + 1
-
-            End If
-
-        Next
-
-
-        If intj1 > 0 Then
-
-            If MsgBox("Вы собираетесь удалить заявки - " & intj1 & " шт." & vbNewLine & "продолжить?", MsgBoxStyle.YesNo, ProGramName) = MsgBoxResult.Yes Then
-
-                lvRem.Select()
-
-                For intj = 0 To lvRem.Items.Count - 1
-
-                    lvRem.Items(intj).Selected = True
-                    lvRem.Items(intj).EnsureVisible()
-
-                    If lvRem.Items(intj).Checked = True Then
-
-
-                        Call DELETE_SERVICES()
-
-                    End If
-
-                Next
-            End If
-        Else
-
-            Call DELETE_SERVICES(r1COUNT)
-
-        End If
-
-
-
-        Call Me.LOAD_REPAIR(frmComputers.sCOUNT, Me.lvRem)
-        Call REM_CHECK()
-
-
-
-
-    End Sub
+   
 
     Private Sub DELETE_SERVICES(Optional ByVal ssid As Integer = 0)
 
@@ -1979,41 +1838,6 @@ err_:
         lvRem2.Sort()
     End Sub
 
-    Private Sub btnSendEmail_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSendEmail.Click
-
-        If lvRem.Items.Count = 0 Then Exit Sub
-
-        Dim z As Integer
-
-        For z = 0 To lvRem.SelectedItems.Count - 1
-            r1COUNT = (lvRem.SelectedItems(z).Text)
-        Next
-
-
-        If r1COUNT = 0 Then Exit Sub
-
-        Call REMONT_SEND_MASTER(r1COUNT)
-
-
-
-    End Sub
-
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
-
-        If lvRem.Items.Count = 0 Then Exit Sub
-
-        Dim z As Integer
-
-        For z = 0 To lvRem.SelectedItems.Count - 1
-            r1COUNT = (lvRem.SelectedItems(z).Text)
-        Next
-
-
-        Call SRASP(r1COUNT)
-
-
-    End Sub
-
     Private Sub lstGroups_NodeMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.TreeNodeMouseClickEventArgs) Handles lstGroups.NodeMouseClick
 
         '#############################################
@@ -2037,12 +1861,170 @@ err_:
 
         If frmComputers.OneStart = 0 Then Exit Sub
 
-        Dim newThread5 As New Thread(AddressOf R_T_LOAD)
-        newThread5.Start()
+        Me.BeginInvoke(New MethodInvoker(AddressOf R_T_LOAD))
+
+        'Dim newThread5 As New Thread(AddressOf R_T_LOAD)
+        'newThread5.Start()
 
     End Sub
 
-    Private Sub btn_Z_to_Office_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_Z_to_Office.Click
+    Private Sub ToolStripButton1_Click(sender As System.Object, e As System.EventArgs) Handles btnRemAdd.Click
+
+        On Error GoTo Err_1
+        frmService_add.REMFU = False
+        frmService_add.REMED = False
+
+        Dim d() As String
+
+        d = Split(lstGroups.SelectedNode.Tag, "|")
+        frmComputers.sPREF = d(0)
+        frmComputers.sCOUNT = d(1)
+
+        If frmComputers.sCOUNT = 0 Then Exit Sub
+
+        If Len(frmComputers.sCOUNT) = 0 Then Exit Sub
+        Dim LNGIniFile As New IniFile(sLANGPATH)
+        frmService_add.Text = LNGIniFile.GetString("frmserviceDesc", "MSG1", "") & " " & lstGroups.SelectedNode.Text
+
+        frmService_add.cmbIst.Text = ""
+        frmService_add.cmbMast.Text = ""
+        frmService_add.txtPhone.Text = ""
+        frmService_add.dtReg.Value = Date.Today
+        frmService_add.dtIsp.Value = Date.Today
+        frmService_add.txtHead.Text = ""
+        frmService_add.txtRem.Text = ""
+        frmService_add.cmbStatus.Text = ""
+        frmService_add.cmbOtv.Text = ""
+        frmService_add.cmbKrit.Text = ""
+        frmService_add.cmbTip.Text = ""
+        frmService_add.txtComent.Text = ""
+        frmService_add.RemCashe.Text = 0
+        frmService_add.cmbAdd.Text = LNGIniFile.GetString("frmService_add", "cmbAdd", "")
+        frmService_add.chkClose.Checked = 0
+
+        frmService_add.ShowDialog(Me)
+
+        Call SaveActivityToLogDB(LNGIniFile.GetString("frmserviceDesc", "MSG4", "") & " " & lstGroups.SelectedNode.Text)
+
+        Exit Sub
+Err_1:
+        MsgBox(Err.Description, MsgBoxStyle.Information, ProGramName)
+    End Sub
+
+    Private Sub ToolStripButton2_Click(sender As System.Object, e As System.EventArgs) Handles btnSBTAdd.Click
+        On Error GoTo err_1
+
+        If lvRem.Items.Count = 0 Then Exit Sub
+        If r1COUNT = 0 Then Exit Sub
+
+
+        ZaiavkR = False
+
+        Dim d() As String
+
+        d = Split(lstGroups.SelectedNode.Tag, "|")
+        frmComputers.sPREF = d(0)
+        frmComputers.sCOUNT = d(1)
+
+        If Len(frmComputers.sCOUNT) = 0 Then Exit Sub
+
+
+        frmservice_add_otvets.cmbMaster.Text = ""
+        frmservice_add_otvets.txtOtzyv.Text = ""
+        frmservice_add_otvets.cmbMaster.Text = ""
+        frmservice_add_otvets.dtPic.Value = Date.Today
+        frmservice_add_otvets.cmbStat.Text = ""
+        frmservice_add_otvets.cmbOtv.Text = ""
+        frmservice_add_otvets.cmbKrit.Text = ""
+        frmservice_add_otvets.cmbMaster.Text = ""
+        frmservice_add_otvets.cmbTip.Text = "Base"
+
+
+        frmservice_add_otvets.ShowDialog(Me)
+
+        Exit Sub
+err_1:
+        MsgBox(Err.Description, MsgBoxStyle.Information, ProGramName)
+
+    End Sub
+
+    Private Sub ToolStripButton1_Click_1(sender As System.Object, e As System.EventArgs) Handles btnRemDel.Click
+        If lvRem.Items.Count = 0 Then Exit Sub
+
+        For z = 0 To lvRem.SelectedItems.Count - 1
+            r1COUNT = (lvRem.SelectedItems(z).Text)
+        Next
+
+
+        Dim intj As Integer = 0
+        Dim intj1 As Integer = 0
+
+
+        '   If MsgBox("Вы собираетесь удалить заявки, продолжить?", MsgBoxStyle.YesNo, ProGramName) = MsgBoxResult.Yes Then
+
+        lvRem.Select()
+
+        For intj = 0 To lvRem.Items.Count - 1
+
+            lvRem.Items(intj).Selected = True
+            lvRem.Items(intj).EnsureVisible()
+
+            If lvRem.Items(intj).Checked = True Then
+
+                intj1 = intj1 + 1
+
+            End If
+
+        Next
+
+
+        If intj1 > 0 Then
+
+            lvRem.Select()
+
+            For intj = 0 To lvRem.Items.Count - 1
+
+                lvRem.Items(intj).Selected = True
+                lvRem.Items(intj).EnsureVisible()
+
+                If lvRem.Items(intj).Checked = True Then
+
+
+                    Call DELETE_SERVICES()
+
+                End If
+
+            Next
+
+        Else
+
+            Call DELETE_SERVICES(r1COUNT)
+
+        End If
+
+
+        Call Me.LOAD_REPAIR(frmComputers.sCOUNT, Me.lvRem)
+        Call REM_CHECK()
+    End Sub
+
+    Private Sub ToolStripButton1_Click_2(sender As System.Object, e As System.EventArgs) Handles btnSendEmail.Click
+        If lvRem.Items.Count = 0 Then Exit Sub
+
+        Dim z As Integer
+
+        For z = 0 To lvRem.SelectedItems.Count - 1
+            r1COUNT = (lvRem.SelectedItems(z).Text)
+        Next
+
+
+        If r1COUNT = 0 Then Exit Sub
+
+        Call REMONT_SEND_MASTER(r1COUNT)
+    End Sub
+
+    
+
+    Private Sub btn_Z_to_Office_Click(sender As System.Object, e As System.EventArgs) Handles btn_Z_to_Office.Click
         If lvRem.Items.Count = 0 Then Exit Sub
 
         Dim z As Integer
@@ -2055,7 +2037,25 @@ err_:
         Call SRASP2(r1COUNT)
     End Sub
 
-    Private Sub lvRem_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvRem.SelectedIndexChanged
+    Private Sub Button1_Click(sender As System.Object, e As System.EventArgs) Handles Button1.Click
+        If lvRem.Items.Count = 0 Then Exit Sub
+
+        Dim z As Integer
+
+        For z = 0 To lvRem.SelectedItems.Count - 1
+            r1COUNT = (lvRem.SelectedItems(z).Text)
+        Next
+
+
+        Call SRASP(r1COUNT)
+    End Sub
+
+    Private Sub CheckBox1_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CheckBox1.CheckedChanged
+        If CheckBox1.Checked = True Then lvRem.CheckBoxes = True
+        If CheckBox1.Checked = False Then lvRem.CheckBoxes = False
+    End Sub
+
+    Private Sub ToolStrip1_ItemClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.ToolStripItemClickedEventArgs) Handles ToolStrip1.ItemClicked
 
     End Sub
 End Class

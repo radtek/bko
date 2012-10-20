@@ -7626,6 +7626,9 @@ err_:
 
 
     Public Sub SRASP(ByVal sSID As String)
+        On Error GoTo err_
+
+
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
 
@@ -7884,20 +7887,27 @@ err_:
                 Wrd = Nothing
 
         End Select
+
+        Exit Sub
+err_:
+        MsgBox(Err.Description, MsgBoxStyle.Critical, ProGramName)
     End Sub
 
     Public Sub SRASP2(ByVal sSID As String)
+        On Error GoTo err_
+
+
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
         If sSID = 0 Then Exit Sub
 
         Dim rs As ADODB.Recordset
-        Dim tipot, sSQL As String
+        Dim tipot, sSQL, uname As String
 
         tipot = Directory.GetParent(Application.ExecutablePath).ToString & "\blanks\akt_z.dot"
 
 
-        Dim sTEXT, sMASTER, sISTOCHNIK, sDATE, sTIP, Sorganization, sMEMO, stTIME, stDATE, spTIME, spDATE, sRAB As String
+        Dim sTEXT, sMASTER, sISTOCHNIK, sDATE, sTIP, Sorganization, sMEMO, stTIME, stDATE, spTIME, spDATE, sRAB, sSERNUM, spCena As String
         Dim sIDCMP As Integer
 
 
@@ -7918,6 +7928,7 @@ err_:
 
             If Not IsDBNull(.Fields("stoptime").Value) Then spTIME = .Fields("stoptime").Value
             If Not IsDBNull(.Fields("stopdate").Value) Then spDATE = .Fields("stopdate").Value
+            If Not IsDBNull(.Fields("Summ").Value) Then spCena = .Fields("Summ").Value
 
         End With
         rs.Close()
@@ -7967,7 +7978,7 @@ err_:
 
 
         rs = New ADODB.Recordset
-        rs.Open("select * from kompy where id=" & sIDCMP, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs.Open("select INV_NO_SYSTEM,FILIAL,MESTO,kabn,NET_NAME,TipTehn,Ser_N_SIS,PRINTER_SN_1,port_1,MONITOR_SN from kompy where id=" & sIDCMP, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
         Dim sINN, sBR, sDEP, sKab, Snname As String
         With rs
@@ -7976,6 +7987,47 @@ err_:
             If Not IsDBNull(.Fields("MESTO").Value) Then sDEP = .Fields("MESTO").Value
             If Not IsDBNull(.Fields("kabn").Value) Then sKab = .Fields("kabn").Value
             If Not IsDBNull(.Fields("NET_NAME").Value) Then Snname = .Fields("NET_NAME").Value
+            'If Not IsDBNull(.Fields("TipTehn").Value) Then uname = .Fields("TipTehn").Value
+
+
+            Select Case .Fields("TipTehn").Value
+
+
+                Case "PC"
+                    sSERNUM = .Fields("Ser_N_SIS").Value
+                Case "Printer"
+                    sSERNUM = .Fields("PRINTER_SN_1").Value
+                Case "MFU"
+                    sSERNUM = .Fields("PRINTER_SN_1").Value
+                Case "OT"
+                    sSERNUM = .Fields("PRINTER_SN_1").Value
+                Case "KOpir"
+                    sSERNUM = .Fields("PRINTER_SN_1").Value
+                Case "NET"
+                    sSERNUM = .Fields("port_1").Value
+                Case "PHOTO"
+                    sSERNUM = .Fields("PRINTER_SN_1").Value
+                Case "PHONE"
+                    sSERNUM = .Fields("PRINTER_SN_1").Value
+                Case "FAX"
+                    sSERNUM = .Fields("PRINTER_SN_1").Value
+                Case "SCANER"
+                    sSERNUM = .Fields("PRINTER_SN_1").Value
+                Case "ZIP"
+                    sSERNUM = .Fields("PRINTER_SN_1").Value
+                Case "MONITOR"
+                    sSERNUM = .Fields("MONITOR_SN").Value
+                Case "USB"
+                    sSERNUM = .Fields("PRINTER_SN_1").Value
+                Case "SOUND"
+                    sSERNUM = .Fields("PRINTER_SN_1").Value
+                Case "IBP"
+                    sSERNUM = .Fields("PRINTER_SN_1").Value
+                Case ("FS")
+                    sSERNUM = .Fields("PRINTER_SN_1").Value
+            End Select
+
+
 
         End With
         rs.Close()
@@ -8029,6 +8081,12 @@ err_:
                 oSrch.setReplaceString(sSID)
                 Debug.Print(oDoc.replaceAll(oSrch))
 
+
+                oSrch = oDoc.createReplaceDescriptor
+                oSrch.setSearchString("#sernumber")
+                oSrch.setReplaceString(sSERNUM)
+                Debug.Print(oDoc.replaceAll(oSrch))
+
                 'Set oSrch = oDoc.createSearchDescriptor
                 oSrch = oDoc.createReplaceDescriptor
                 oSrch.setSearchString("#branche")
@@ -8065,6 +8123,10 @@ err_:
 
                 oSrch.setSearchString("#raboty")
                 oSrch.setReplaceString(sRAB)
+                Debug.Print(oDoc.replaceAll(oSrch))
+
+                oSrch.setSearchString("#stoim_Rab")
+                oSrch.setReplaceString(spCena)
                 Debug.Print(oDoc.replaceAll(oSrch))
 
                 oSrch.setSearchString("#master")
@@ -8183,6 +8245,22 @@ err_:
                 End With
                 Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
 
+
+                With Wrd.Selection.Find
+                    .Text = "#sernumber"
+                    .Replacement.Text = sSERNUM
+                    .Forward = True
+                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Format = False
+                    .MatchCase = True
+                    .MatchWholeWord = False
+                    .MatchWildcards = False
+                    ' .MatchSoundsLike = False
+                    .MatchAllWordForms = False
+                End With
+                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+
+
                 With Wrd.Selection.Find
                     .Text = "#textzaiavki"
                     .Replacement.Text = sTEXT
@@ -8257,6 +8335,20 @@ err_:
                 With Wrd.Selection.Find
                     .Text = "#raboty"
                     .Replacement.Text = sRAB
+                    .Forward = True
+                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Format = False
+                    .MatchCase = True
+                    .MatchWholeWord = False
+                    .MatchWildcards = False
+                    ' .MatchSoundsLike = False
+                    .MatchAllWordForms = False
+                End With
+                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+
+                With Wrd.Selection.Find
+                    .Text = "#stoim_Rab"
+                    .Replacement.Text = spCena
                     .Forward = True
                     .Wrap = Word.WdFindWrap.wdFindContinue
                     .Format = False
@@ -8373,6 +8465,10 @@ err_:
                 Wrd = Nothing
 
         End Select
+
+        Exit Sub
+err_:
+        MsgBox(Err.Description, MsgBoxStyle.Critical, ProGramName)
     End Sub
 
     Public Function ExportListViewToExcel(ByVal MyListView As ListView, ByVal sTXT As String)

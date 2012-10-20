@@ -883,7 +883,7 @@ err_:
 
     End Sub
 
-    Private Sub NOTES_P_LANG(ByVal gb As GroupBox, ByVal badd As Button, ByVal bdel As Button, ByVal bcancel As Button)
+    Private Sub NOTES_P_LANG(ByVal gb As GroupBox, ByVal badd As ToolStripButton, ByVal bdel As ToolStripButton, ByVal bcancel As ToolStripButton)
         Dim objIniFile As New IniFile(sLANGPATH)
 
         gb.Text = objIniFile.GetString("frmComputers", "gbNotes", "")

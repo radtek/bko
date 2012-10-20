@@ -23,13 +23,20 @@ Partial Class frmDirectory
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmDirectory))
         Me.tvDirectory = New System.Windows.Forms.TreeView()
         Me.gbSpr = New System.Windows.Forms.GroupBox()
+        Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+        Me.btnDirAdd = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.Button2 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.btnCancell = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
+        Me.Button3 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
+        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
         Me.chkCont = New System.Windows.Forms.CheckBox()
-        Me.btnCancell = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.btnDirAdd = New System.Windows.Forms.Button()
         Me.chkVisibleSTR = New System.Windows.Forms.CheckBox()
         Me.gbOther = New System.Windows.Forms.GroupBox()
         Me.cmbIcon = New System.Windows.Forms.ComboBox()
@@ -52,6 +59,7 @@ Partial Class frmDirectory
         Me.lvDirectory = New System.Windows.Forms.ListView()
         Me.ilsCommands = New System.Windows.Forms.ImageList(Me.components)
         Me.gbSpr.SuspendLayout()
+        Me.ToolStrip1.SuspendLayout()
         Me.gbOther.SuspendLayout()
         CType(Me.pbOtherICO, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.gb2.SuspendLayout()
@@ -67,11 +75,9 @@ Partial Class frmDirectory
         '
         'gbSpr
         '
+        Me.gbSpr.Controls.Add(Me.ToolStrip1)
+        Me.gbSpr.Controls.Add(Me.CheckBox2)
         Me.gbSpr.Controls.Add(Me.chkCont)
-        Me.gbSpr.Controls.Add(Me.btnCancell)
-        Me.gbSpr.Controls.Add(Me.Button3)
-        Me.gbSpr.Controls.Add(Me.Button2)
-        Me.gbSpr.Controls.Add(Me.btnDirAdd)
         Me.gbSpr.Controls.Add(Me.chkVisibleSTR)
         Me.gbSpr.Controls.Add(Me.gbOther)
         Me.gbSpr.Controls.Add(Me.gb2)
@@ -92,6 +98,83 @@ Partial Class frmDirectory
         Me.gbSpr.TabStop = False
         Me.gbSpr.Text = "Параметры"
         '
+        'ToolStrip1
+        '
+        Me.ToolStrip1.Dock = System.Windows.Forms.DockStyle.None
+        Me.ToolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnDirAdd, Me.ToolStripSeparator1, Me.Button2, Me.ToolStripSeparator2, Me.btnCancell, Me.ToolStripSeparator4, Me.Button3, Me.ToolStripSeparator3})
+        Me.ToolStrip1.Location = New System.Drawing.Point(10, 265)
+        Me.ToolStrip1.Name = "ToolStrip1"
+        Me.ToolStrip1.Size = New System.Drawing.Size(243, 25)
+        Me.ToolStrip1.TabIndex = 21
+        Me.ToolStrip1.Text = "ToolStrip1"
+        '
+        'btnDirAdd
+        '
+        Me.btnDirAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.btnDirAdd.Image = CType(resources.GetObject("btnDirAdd.Image"), System.Drawing.Image)
+        Me.btnDirAdd.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnDirAdd.Name = "btnDirAdd"
+        Me.btnDirAdd.Size = New System.Drawing.Size(63, 22)
+        Me.btnDirAdd.Text = "Добавить"
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 25)
+        '
+        'Button2
+        '
+        Me.Button2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.Button2.Image = CType(resources.GetObject("Button2.Image"), System.Drawing.Image)
+        Me.Button2.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(55, 22)
+        Me.Button2.Text = "Удалить"
+        '
+        'ToolStripSeparator2
+        '
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 25)
+        '
+        'btnCancell
+        '
+        Me.btnCancell.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.btnCancell.Image = CType(resources.GetObject("btnCancell.Image"), System.Drawing.Image)
+        Me.btnCancell.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnCancell.Name = "btnCancell"
+        Me.btnCancell.Size = New System.Drawing.Size(53, 22)
+        Me.btnCancell.Text = "Отмена"
+        '
+        'ToolStripSeparator4
+        '
+        Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
+        Me.ToolStripSeparator4.Size = New System.Drawing.Size(6, 25)
+        '
+        'Button3
+        '
+        Me.Button3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.Button3.Image = CType(resources.GetObject("Button3.Image"), System.Drawing.Image)
+        Me.Button3.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(45, 22)
+        Me.Button3.Text = "Выход"
+        '
+        'ToolStripSeparator3
+        '
+        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(6, 25)
+        '
+        'CheckBox2
+        '
+        Me.CheckBox2.AutoSize = True
+        Me.CheckBox2.Location = New System.Drawing.Point(80, 293)
+        Me.CheckBox2.Name = "CheckBox2"
+        Me.CheckBox2.Size = New System.Drawing.Size(127, 17)
+        Me.CheckBox2.TabIndex = 20
+        Me.CheckBox2.Text = "Массовое удаление"
+        Me.CheckBox2.UseVisualStyleBackColor = True
+        '
         'chkCont
         '
         Me.chkCont.AutoSize = True
@@ -102,42 +185,6 @@ Partial Class frmDirectory
         Me.chkCont.Text = "Может быть контейнером"
         Me.chkCont.UseVisualStyleBackColor = True
         Me.chkCont.Visible = False
-        '
-        'btnCancell
-        '
-        Me.btnCancell.Location = New System.Drawing.Point(172, 268)
-        Me.btnCancell.Name = "btnCancell"
-        Me.btnCancell.Size = New System.Drawing.Size(75, 23)
-        Me.btnCancell.TabIndex = 16
-        Me.btnCancell.Text = "Отмена"
-        Me.btnCancell.UseVisualStyleBackColor = True
-        '
-        'Button3
-        '
-        Me.Button3.Location = New System.Drawing.Point(253, 268)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(75, 23)
-        Me.Button3.TabIndex = 15
-        Me.Button3.Text = "Выход"
-        Me.Button3.UseVisualStyleBackColor = True
-        '
-        'Button2
-        '
-        Me.Button2.Location = New System.Drawing.Point(91, 268)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(75, 23)
-        Me.Button2.TabIndex = 14
-        Me.Button2.Text = "Удалить"
-        Me.Button2.UseVisualStyleBackColor = True
-        '
-        'btnDirAdd
-        '
-        Me.btnDirAdd.Location = New System.Drawing.Point(10, 268)
-        Me.btnDirAdd.Name = "btnDirAdd"
-        Me.btnDirAdd.Size = New System.Drawing.Size(75, 23)
-        Me.btnDirAdd.TabIndex = 13
-        Me.btnDirAdd.Text = "Добавить"
-        Me.btnDirAdd.UseVisualStyleBackColor = True
         '
         'chkVisibleSTR
         '
@@ -322,7 +369,6 @@ Partial Class frmDirectory
         '
         'lvDirectory
         '
-        Me.lvDirectory.CheckBoxes = True
         Me.lvDirectory.FullRowSelect = True
         Me.lvDirectory.GridLines = True
         Me.lvDirectory.Location = New System.Drawing.Point(310, 3)
@@ -355,6 +401,8 @@ Partial Class frmDirectory
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.gbSpr.ResumeLayout(False)
         Me.gbSpr.PerformLayout()
+        Me.ToolStrip1.ResumeLayout(False)
+        Me.ToolStrip1.PerformLayout()
         Me.gbOther.ResumeLayout(False)
         CType(Me.pbOtherICO, System.ComponentModel.ISupportInitialize).EndInit()
         Me.gb2.ResumeLayout(False)
@@ -383,13 +431,19 @@ Partial Class frmDirectory
     Friend WithEvents cmbName As System.Windows.Forms.ComboBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents chkVisibleSTR As System.Windows.Forms.CheckBox
-    Friend WithEvents Button3 As System.Windows.Forms.Button
-    Friend WithEvents Button2 As System.Windows.Forms.Button
-    Friend WithEvents btnDirAdd As System.Windows.Forms.Button
     Friend WithEvents lvDirectory As System.Windows.Forms.ListView
     Friend WithEvents lbl1 As System.Windows.Forms.Label
     Friend WithEvents ilsCommands As System.Windows.Forms.ImageList
     Friend WithEvents lbl2 As System.Windows.Forms.Label
-    Friend WithEvents btnCancell As System.Windows.Forms.Button
     Friend WithEvents chkCont As System.Windows.Forms.CheckBox
+    Friend WithEvents ToolStrip1 As System.Windows.Forms.ToolStrip
+    Friend WithEvents btnDirAdd As System.Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents Button2 As System.Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStripSeparator2 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents btnCancell As System.Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStripSeparator4 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents Button3 As System.Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStripSeparator3 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents CheckBox2 As System.Windows.Forms.CheckBox
 End Class

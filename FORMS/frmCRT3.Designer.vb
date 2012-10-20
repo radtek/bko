@@ -22,13 +22,15 @@ Partial Class frmCRT3
     'Не изменяйте ее в редакторе исходного кода.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmCRT3))
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.gbTree = New System.Windows.Forms.GroupBox()
         Me.TableLayoutPanel4 = New System.Windows.Forms.TableLayoutPanel()
-        Me.btnSearch = New System.Windows.Forms.Button()
         Me.txtSearch = New System.Windows.Forms.TextBox()
         Me.lstGroups = New System.Windows.Forms.TreeView()
         Me.treebranche = New System.Windows.Forms.ComboBox()
+        Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+        Me.btnSearch = New System.Windows.Forms.ToolStripButton()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
@@ -73,6 +75,7 @@ Partial Class frmCRT3
         Me.TableLayoutPanel1.SuspendLayout()
         Me.gbTree.SuspendLayout()
         Me.TableLayoutPanel4.SuspendLayout()
+        Me.ToolStrip1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
@@ -115,10 +118,10 @@ Partial Class frmCRT3
         Me.TableLayoutPanel4.ColumnCount = 2
         Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 35.0!))
-        Me.TableLayoutPanel4.Controls.Add(Me.btnSearch, 2, 0)
         Me.TableLayoutPanel4.Controls.Add(Me.txtSearch, 0, 0)
         Me.TableLayoutPanel4.Controls.Add(Me.lstGroups, 0, 2)
         Me.TableLayoutPanel4.Controls.Add(Me.treebranche, 0, 1)
+        Me.TableLayoutPanel4.Controls.Add(Me.ToolStrip1, 1, 0)
         Me.TableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel4.Location = New System.Drawing.Point(3, 16)
         Me.TableLayoutPanel4.Name = "TableLayoutPanel4"
@@ -126,16 +129,9 @@ Partial Class frmCRT3
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.TableLayoutPanel4.Size = New System.Drawing.Size(302, 583)
         Me.TableLayoutPanel4.TabIndex = 4
-        '
-        'btnSearch
-        '
-        Me.btnSearch.Location = New System.Drawing.Point(270, 3)
-        Me.btnSearch.Name = "btnSearch"
-        Me.btnSearch.Size = New System.Drawing.Size(29, 24)
-        Me.btnSearch.TabIndex = 5
-        Me.btnSearch.UseVisualStyleBackColor = True
         '
         'txtSearch
         '
@@ -166,6 +162,26 @@ Partial Class frmCRT3
         Me.treebranche.Name = "treebranche"
         Me.treebranche.Size = New System.Drawing.Size(296, 21)
         Me.treebranche.TabIndex = 6
+        '
+        'ToolStrip1
+        '
+        Me.ToolStrip1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ToolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnSearch})
+        Me.ToolStrip1.Location = New System.Drawing.Point(267, 0)
+        Me.ToolStrip1.Name = "ToolStrip1"
+        Me.ToolStrip1.Size = New System.Drawing.Size(35, 30)
+        Me.ToolStrip1.TabIndex = 7
+        Me.ToolStrip1.Text = "ToolStrip1"
+        '
+        'btnSearch
+        '
+        Me.btnSearch.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.btnSearch.Image = CType(resources.GetObject("btnSearch.Image"), System.Drawing.Image)
+        Me.btnSearch.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnSearch.Name = "btnSearch"
+        Me.btnSearch.Size = New System.Drawing.Size(23, 27)
+        Me.btnSearch.Text = "ToolStripButton1"
         '
         'TabControl1
         '
@@ -665,6 +681,8 @@ Partial Class frmCRT3
         Me.gbTree.ResumeLayout(False)
         Me.TableLayoutPanel4.ResumeLayout(False)
         Me.TableLayoutPanel4.PerformLayout()
+        Me.ToolStrip1.ResumeLayout(False)
+        Me.ToolStrip1.PerformLayout()
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         Me.TableLayoutPanel2.ResumeLayout(False)
@@ -722,6 +740,7 @@ Partial Class frmCRT3
     Friend WithEvents btnDelete As System.Windows.Forms.Button
     Friend WithEvents TableLayoutPanel4 As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents txtSearch As System.Windows.Forms.TextBox
-    Friend WithEvents btnSearch As System.Windows.Forms.Button
     Friend WithEvents treebranche As System.Windows.Forms.ComboBox
+    Friend WithEvents ToolStrip1 As System.Windows.Forms.ToolStrip
+    Friend WithEvents btnSearch As System.Windows.Forms.ToolStripButton
 End Class

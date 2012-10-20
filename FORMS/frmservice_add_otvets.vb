@@ -156,6 +156,8 @@
         rs1.Close()
         rs1 = Nothing
 
+        Dim strTime As String
+        strTime = TimeString
 
         rs = New ADODB.Recordset
         sSQL = "SELECT * FROM Remont"
@@ -189,20 +191,18 @@
 
                     If unamDB = "MS access" Then
                         .Fields("zakryt").Value = True
-
                     Else
-
                         .Fields("zakryt").Value = "1"
                     End If
 
+                    .Fields("stopdate").Value = Date.Today 'Физическое нажатие закрытие ремонта
+                    .Fields("stoptime").Value = strTime 'Физическое нажатие начала ремонта
 
                 Case False
 
                     If unamDB = "MS access" Then
                         .Fields("zakryt").Value = False
-
                     Else
-
                         .Fields("zakryt").Value = "0"
                     End If
 
@@ -234,6 +234,8 @@
         Dim sSQL As String
         Dim sSQL1 As String
 
+        Dim strTime As String
+        strTime = TimeString
 
         Select Case frmserviceDesc.ZaiavkR
 
@@ -260,26 +262,24 @@
 
                 With rs
 
-                    Select Case chcClose.Checked
+                     Select Case chcClose.Checked
 
                         Case True
 
                             If unamDB = "MS access" Then
                                 .Fields("zakryt").Value = True
-
                             Else
-
                                 .Fields("zakryt").Value = "1"
                             End If
 
+                            .Fields("stopdate").Value = Date.Today 'Физическое нажатие закрытие ремонта
+                            .Fields("stoptime").Value = strTime 'Физическое нажатие начала ремонта
 
                         Case False
 
                             If unamDB = "MS access" Then
                                 .Fields("zakryt").Value = False
-
                             Else
-
                                 .Fields("zakryt").Value = "0"
                             End If
 
@@ -317,26 +317,24 @@
                 rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
                 With rs
-                    Select Case chcClose.Checked
+                   Select Case chcClose.Checked
 
                         Case True
 
                             If unamDB = "MS access" Then
                                 .Fields("zakryt").Value = True
-
                             Else
-
                                 .Fields("zakryt").Value = "1"
                             End If
 
+                            .Fields("stopdate").Value = Date.Today 'Физическое нажатие закрытие ремонта
+                            .Fields("stoptime").Value = strTime 'Физическое нажатие начала ремонта
 
                         Case False
 
                             If unamDB = "MS access" Then
                                 .Fields("zakryt").Value = False
-
                             Else
-
                                 .Fields("zakryt").Value = "0"
                             End If
 

@@ -101,3 +101,6 @@ D:\Devel\BC2.NET\obj\Debug\basekomp_net.exe
 D:\Devel\BC2.NET\obj\Debug\basekomp_net.xml
 D:\Devel\BC2.NET\obj\Debug\basekomp_net.pdb
 D:\Devel\BC2.NET\obj\Debug\ResolveAssemblyReference.cache
+D:\_TEMP\OTHER\BC2.NET\bin\Debug\basekomp_net.exe.config
+D:\_TEMP\OTHER\BC2.NET\obj\Debug\Interop.JRO.dll
+D:\_TEMP\OTHER\BC2.NET\obj\Debug\basekomp_net.vbproj.ResolveComReference.cache

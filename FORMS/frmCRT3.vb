@@ -1,4 +1,6 @@
-﻿Public Class frmCRT3
+﻿Imports System.Threading
+
+Public Class frmCRT3
     Public rCOUNT As Decimal
     Public zCOUNT As Decimal
     Public cCOUNT As Integer
@@ -53,6 +55,9 @@
         '        lstGroups.ImageList = frmComputers.ilsCommands
 
         'End Select
+
+
+        lstGroups.Nodes.Clear()
 
         lstGroups.ImageList = frmComputers.ilsCommands
 
@@ -607,7 +612,7 @@
         ' On Error Resume Next
         ' Dim LnGIniFile As New IniFile(sLANGPATH)
 
-        Dim CRT_NULL As New TreeNode(LnGIniFile.GetString("frmCRT3", "MSG1", ""), 0, 0)
+        Dim CRT_NULL As New TreeNode(LNGIniFile.GetString("frmCRT3", "MSG1", ""), 0, 0)
         CRT_NULL.Tag = "GС|" & GENID()
         nodeRoot.Nodes.Add(CRT_NULL)
 
@@ -677,7 +682,7 @@
 
 
 
-        Dim CRT_NULL1 As New TreeNode(LnGIniFile.GetString("frmCRT3", "MSG2", ""), 0, 0)
+        Dim CRT_NULL1 As New TreeNode(LNGIniFile.GetString("frmCRT3", "MSG2", ""), 0, 0)
         CRT_NULL1.Tag = "Z|" & GENID()
         nodeRoot.Nodes.Add(CRT_NULL1)
 
@@ -1560,13 +1565,13 @@ err_:
         If Counter > 0 Then
             cmbSostUstr.Items.Clear()
             rs = New ADODB.Recordset
-            rs.Open("SELECT id,PRINTER_NAME_1,filial,mesto,kabn FROM kompy where TipTehn='Printer' or TipTehn='KOpir' or TipTehn='MFU' ORDER BY filial,mesto,kabn", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rs.Open("SELECT id,PRINTER_NAME_1,filial,mesto FROM kompy where TipTehn='Printer' or TipTehn='KOpir' or TipTehn='MFU' ORDER BY filial,mesto", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
             With rs
                 .MoveFirst()
                 Do While Not .EOF
                     'If .Fields("TipTehn").Value = "Printer" Or .Fields("TipTehn").Value = "KOpir" Or .Fields("TipTehn").Value = "MFU" Then
-                    cmbSostUstr.Items.Add(" № " & .Fields("id").Value & " " & .Fields("PRINTER_NAME_1").Value & " (" & .Fields("filial").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value & ")")
+                    cmbSostUstr.Items.Add(" № " & .Fields("id").Value & " " & .Fields("PRINTER_NAME_1").Value & " (" & .Fields("filial").Value & "/" & .Fields("mesto").Value & ")")
                     'Else
                     'End If
                     .MoveNext()
@@ -1692,130 +1697,130 @@ err_:
 
 
 
-            uname4 = cmbSaler.Text
+        uname4 = cmbSaler.Text
 
 
-            If Len(cmbSaler.Text) = 0 Then
+        If Len(cmbSaler.Text) = 0 Then
 
-                uname4 = 0
+            uname4 = 0
+
+        Else
+
+            If Not (RSExists("Postav", "name", cmbSaler.Text)) Then
+                ' AddPost(cmbSaler.Text)
+            End If
+
+            Dim Postav As ADODB.Recordset
+            Postav = New ADODB.Recordset
+            Postav.Open("SELECT * FROM SPR_Postav WHERE Name='" & uname4 & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+            With Postav
+                uname4 = .Fields("id").Value
+            End With
+            Postav.Close()
+            Postav = Nothing
+
+        End If
+
+
+        Dim sSQL As String
+        If EDTRCART = True Then
+            sSQL = "SELECT * FROM CARTRIDG WHERE id = " & EDTIDTr
+        Else
+
+            sSQL = "SELECT * FROM CARTRIDG"
+
+        End If
+
+        Dim LNGIniFile As New IniFile(sLANGPATH)
+
+        If EDTRCART = True Then
+
+
+
+            Call DVIG_CRt2(uname3, lstGroups.SelectedNode.Text)
+
+            If DV = True Then
 
             Else
 
-                If Not (RSExists("Postav", "name", cmbSaler.Text)) Then
-                    ' AddPost(cmbSaler.Text)
-                End If
+                If Sav = False Then
 
-                Dim Postav As ADODB.Recordset
-                Postav = New ADODB.Recordset
-                Postav.Open("SELECT * FROM SPR_Postav WHERE Name='" & uname4 & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                    MsgBox(LNGIniFile.GetString("frmCRT3", "MSG10", ""), MsgBoxStyle.Exclamation, ProGramName)
 
-                With Postav
-                    uname4 = .Fields("id").Value
-                End With
-                Postav.Close()
-                Postav = Nothing
-
-            End If
-
-
-            Dim sSQL As String
-            If EDTRCART = True Then
-                sSQL = "SELECT * FROM CARTRIDG WHERE id = " & EDTIDTr
-            Else
-
-                sSQL = "SELECT * FROM CARTRIDG"
-
-            End If
-
-            Dim LNGIniFile As New IniFile(sLANGPATH)
-
-            If EDTRCART = True Then
-
-
-
-                Call DVIG_CRt2(uname3, lstGroups.SelectedNode.Text)
-
-                If DV = True Then
-
-                Else
-
-                    If Sav = False Then
-
-                        MsgBox(LNGIniFile.GetString("frmCRT3", "MSG10", ""), MsgBoxStyle.Exclamation, ProGramName)
-
-                        If pDRAG = True Then
+                    If pDRAG = True Then
 
                         Me.Invoke(New MethodInvoker(AddressOf RefFilTreePRN))
 
-                        End If
-
-                        Zap_load(rCOUNT)
-                        LOAD_CRR2(rCOUNT)
-                        LOAD_MOVE(rCOUNT)
-
-                        Exit Sub
-
-                    Else
-
-
-
                     End If
+
+                    Zap_load(rCOUNT)
+                    LOAD_CRR2(rCOUNT)
+                    LOAD_MOVE(rCOUNT)
+
+                    Exit Sub
+
+                Else
+
+
+
                 End If
-
-            Else
-
-
             End If
 
-            Dim rs1 As ADODB.Recordset
-            rs1 = New ADODB.Recordset
-            rs1.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        Else
 
-            If Len(txtSerNumb.Text) = 0 Then txtSerNumb.Text = "Б\Н"
-            If Len(txtSaleNumb.Text) = 0 Then txtSaleNumb.Text = 0
-            If Len(txtCashe.Text) = 0 Then txtCashe.Text = 0
 
-            With rs1
-                If EDTRCART = True Then
-                Else
-                    .AddNew()
-                End If
+        End If
 
-                .Fields("SN").Value = txtSerNumb.Text
-                .Fields("Proizv").Value = uname
-                .Fields("TIP").Value = cmbTipC.Text
-                .Fields("Model").Value = uname2
-                .Fields("USTR").Value = uname3
-                .Fields("PROD").Value = uname4
-                .Fields("SCHET").Value = txtSaleNumb.Text
-                .Fields("Cena").Value = txtCashe.Text
-                .Fields("DATA").Value = dtSale.Value
-                .Fields("NZap").Value = chkNezap.Checked
-                .Fields("NeZap").Value = chkNZ.Checked
-                .Fields("Iznos").Value = chkIznos.Checked
-                .Fields("Spisan").Value = chkSPS.Checked
-                .Fields("NaSpisanie").Value = chkNaSP.Checked
-                .Fields("PRIM").Value = txtMemo.Text
+        Dim rs1 As ADODB.Recordset
+        rs1 = New ADODB.Recordset
+        rs1.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
-                .Fields("Pref").Value = 0
+        If Len(txtSerNumb.Text) = 0 Then txtSerNumb.Text = "Б\Н"
+        If Len(txtSaleNumb.Text) = 0 Then txtSaleNumb.Text = 0
+        If Len(txtCashe.Text) = 0 Then txtCashe.Text = 0
 
-                .Update()
-            End With
+        With rs1
+            If EDTRCART = True Then
+            Else
+                .AddNew()
+            End If
 
-            rs1.Close()
-            rs1 = Nothing
+            .Fields("SN").Value = txtSerNumb.Text
+            .Fields("Proizv").Value = uname
+            .Fields("TIP").Value = cmbTipC.Text
+            .Fields("Model").Value = uname2
+            .Fields("USTR").Value = uname3
+            .Fields("PROD").Value = uname4
+            .Fields("SCHET").Value = txtSaleNumb.Text
+            .Fields("Cena").Value = txtCashe.Text
+            .Fields("DATA").Value = dtSale.Value
+            .Fields("NZap").Value = chkNezap.Checked
+            .Fields("NeZap").Value = chkNZ.Checked
+            .Fields("Iznos").Value = chkIznos.Checked
+            .Fields("Spisan").Value = chkSPS.Checked
+            .Fields("NaSpisanie").Value = chkNaSP.Checked
+            .Fields("PRIM").Value = txtMemo.Text
 
-            Dim objIniFile As New IniFile(PrPath & "base.ini")
-            objIniFile.WriteString("general", "DK", uname3)
-            objIniFile.WriteString("general", "Default", 0)
+            .Fields("Pref").Value = 0
+
+            .Update()
+        End With
+
+        rs1.Close()
+        rs1 = Nothing
+
+        Dim objIniFile As New IniFile(PrPath & "base.ini")
+        objIniFile.WriteString("general", "DK", uname3)
+        objIniFile.WriteString("general", "Default", 0)
 
 
         Me.Invoke(New MethodInvoker(AddressOf RefFilTreePRN))
 
 
 
-            Me.btnAdd.Text = LNGIniFile.GetString("frmCRT3", "btnAdd", "")
-            CRTFU = False
+        Me.btnAdd.Text = LNGIniFile.GetString("frmCRT3", "btnAdd", "")
+        CRTFU = False
     End Sub
 
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
@@ -3167,14 +3172,19 @@ FoundiR:
 
     End Sub
 
-    Private Sub txtSearch_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtSearch.TextChanged
-
-    End Sub
 
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
         Me.Cursor = Cursors.WaitCursor
-        Me.Invoke(New MethodInvoker(AddressOf RefFilTreePRN))
+
+        'Dim newThread5 As New Thread(AddressOf RefFilTreePRN)
+        'newThread5.Start()
+
+        Me.BeginInvoke(New MethodInvoker(AddressOf RefFilTreePRN))
+
         txtSearch.Text = ""
+
+        Application.DoEvents()
+
         Me.Cursor = Cursors.Default
     End Sub
 
@@ -3248,7 +3258,7 @@ FoundiR:
 
             sTEXT = cmbSostUstr.Text
 
-            
+
             If Len(cmbSostUstr.Text) = 0 Then
                 sTEXT = 0
             Else
@@ -3479,4 +3489,6 @@ Error_:
 
 
     End Sub
+
+
 End Class

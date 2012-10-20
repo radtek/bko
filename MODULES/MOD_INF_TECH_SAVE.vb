@@ -2082,9 +2082,12 @@ Error_:
                         rs1 = Nothing
 
                         rs1 = New ADODB.Recordset
-                        rs1.Open("Delete from kompy where id=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1.Open("Delete from dvig where Id_Comp=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
+                        rs1 = New ADODB.Recordset
+                        rs1.Open("Delete from kompy where id=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = Nothing
 
                         .MoveNext()
                     Loop
@@ -2161,6 +2164,10 @@ Error_:
 
                         rs1 = New ADODB.Recordset
                         rs1.Open("Delete from Garantia_sis where Id_Comp=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = Nothing
+
+                        rs1 = New ADODB.Recordset
+                        rs1.Open("Delete from dvig where Id_Comp=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
                         rs1 = New ADODB.Recordset
@@ -3730,7 +3737,7 @@ Error_:
 
     End Function
 
-    Public Sub NotesEditAdd(ByVal btAdd As Button, ByVal lvsNotes As ListView, ByVal NotesMaster As ComboBox, ByVal textNotes As TextBox, ByVal DateNotes As DateTimePicker, ByVal txtSNAME As String, ByVal Branch As ComboBox, ByVal Department As ComboBox, ByVal Office As ComboBox)
+    Public Sub NotesEditAdd(ByVal btAdd As ToolStripButton, ByVal lvsNotes As ListView, ByVal NotesMaster As ComboBox, ByVal textNotes As TextBox, ByVal DateNotes As DateTimePicker, ByVal txtSNAME As String, ByVal Branch As ComboBox, ByVal Department As ComboBox, ByVal Office As ComboBox)
 
         On Error Resume Next
 

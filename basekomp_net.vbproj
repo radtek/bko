@@ -12,7 +12,7 @@
     <AssemblyName>basekomp_net</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
-    <TargetFrameworkVersion>v3.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <OptionExplicit>On</OptionExplicit>
     <OptionCompare>Binary</OptionCompare>
     <OptionStrict>Off</OptionStrict>
@@ -345,7 +345,6 @@
     <Compile Include="FORMS\QrCode.Designer.vb">
       <DependentUpon>QrCode.vb</DependentUpon>
     </Compile>
-    <None Include="ClassDiagram1.cd" />
     <None Include="FORMS\QrCode.vb">
       <SubType>Form</SubType>
     </None>

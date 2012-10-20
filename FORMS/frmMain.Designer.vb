@@ -94,9 +94,9 @@ Partial Class frmMain
         Me.lblMassLoadEverest = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusLabel4 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.LBL_SUBD = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.DB_USE = New System.Windows.Forms.ToolStripDropDownButton()
         Me.ToolStripStatusLabel5 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.LBL_USER = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.DB_USE = New System.Windows.Forms.ToolStripDropDownButton()
         Me.ToolStrip = New System.Windows.Forms.ToolStrip()
         Me.ToolStripDropDownButton1 = New System.Windows.Forms.ToolStripDropDownButton()
         Me.ЗагрузитьИзEverestiniToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -156,7 +156,6 @@ Partial Class frmMain
         Me.MenuStrip.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip.MdiWindowListItem = Me.WindowsMenu
         Me.MenuStrip.Name = "MenuStrip"
-        Me.MenuStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
         Me.MenuStrip.Size = New System.Drawing.Size(984, 24)
         Me.MenuStrip.TabIndex = 9
         Me.MenuStrip.Text = "MenuStrip"
@@ -629,6 +628,15 @@ Partial Class frmMain
         Me.LBL_SUBD.Size = New System.Drawing.Size(41, 19)
         Me.LBL_SUBD.Text = "СУБД"
         '
+        'DB_USE
+        '
+        Me.DB_USE.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.DB_USE.Image = CType(resources.GetObject("DB_USE.Image"), System.Drawing.Image)
+        Me.DB_USE.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.DB_USE.Name = "DB_USE"
+        Me.DB_USE.Size = New System.Drawing.Size(87, 22)
+        Me.DB_USE.Text = "База данных"
+        '
         'ToolStripStatusLabel5
         '
         Me.ToolStripStatusLabel5.Name = "ToolStripStatusLabel5"
@@ -644,22 +652,13 @@ Partial Class frmMain
         Me.LBL_USER.Size = New System.Drawing.Size(88, 19)
         Me.LBL_USER.Text = "Пользователь"
         '
-        'DB_USE
-        '
-        Me.DB_USE.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.DB_USE.Image = CType(resources.GetObject("DB_USE.Image"), System.Drawing.Image)
-        Me.DB_USE.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.DB_USE.Name = "DB_USE"
-        Me.DB_USE.Size = New System.Drawing.Size(87, 22)
-        Me.DB_USE.Text = "База данных"
-        '
         'ToolStrip
         '
+        Me.ToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
         Me.ToolStrip.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.ToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripDropDownButton1, Me.NewToolStripButton, Me.ToolStripSeparator1, Me.SaveInfTehButton, Me.ToolStripSeparator2, Me.ArhToolZipbutton, Me.ToolStripButton1})
         Me.ToolStrip.Location = New System.Drawing.Point(0, 24)
         Me.ToolStrip.Name = "ToolStrip"
-        Me.ToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
         Me.ToolStrip.Size = New System.Drawing.Size(984, 25)
         Me.ToolStrip.TabIndex = 13
         Me.ToolStrip.Text = "ToolStrip"

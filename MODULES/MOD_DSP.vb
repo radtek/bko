@@ -58,12 +58,12 @@
         frmGarCPL.PROizV4.Text = ""
     End Sub
 
-    Public Sub Notes_Clear(ByVal btnNotes As Button, ByVal dt As DateTimePicker, ByVal cmaster As ComboBox, ByVal tNotes As TextBox)
+    Public Sub Notes_Clear(ByVal btnNotes As ToolStripButton, ByVal dt As DateTimePicker, ByVal cmaster As ComboBox, ByVal tNotes As TextBox)
 
         'MSG19 
         Dim objIniFile As New IniFile(sLANGPATH)
 
-        btnNotes.Text = objIniFile.GetString("frmComputers", "MSG19", "")
+        btnNotes.Text = objIniFile.GetString("frmComputers", "MSG30", "")
         dt.Value = Date.Today
         cmaster.Text = ""
         tNotes.Text = ""

@@ -337,6 +337,143 @@ Public Class frmComputers
 
     End Sub
 
+    Private Sub Tool_Tips_Forms()
+        Dim ToolTip1 As New ToolTip
+        ToolTip1.SetToolTip(cmbCPU1, "Наименование процессора.")
+        ToolTip1.SetToolTip(cmbCPU2, "Наименование процессора.")
+        ToolTip1.SetToolTip(cmbCPU3, "Наименование процессора.")
+        ToolTip1.SetToolTip(cmbCPU4, "Наименование процессора.")
+
+        ' txtMHZ1
+        ToolTip1.SetToolTip(txtMHZ1, "Частота  процессора.")
+        ToolTip1.SetToolTip(txtMHZ2, "Частота  процессора.")
+        ToolTip1.SetToolTip(txtMHZ3, "Частота  процессора.")
+        ToolTip1.SetToolTip(txtMHZ4, "Частота  процессора.")
+        'txtSoc1
+        ToolTip1.SetToolTip(txtSoc1, "Сокет")
+        ToolTip1.SetToolTip(txtSoc2, "Сокет")
+        ToolTip1.SetToolTip(txtSoc3, "Сокет")
+        ToolTip1.SetToolTip(txtSoc4, "Сокет")
+        'PROizV1
+        ToolTip1.SetToolTip(PROizV1, "Производитель")
+        ToolTip1.SetToolTip(PROizV2, "Производитель")
+        ToolTip1.SetToolTip(PROizV3, "Производитель")
+        ToolTip1.SetToolTip(PROizV4, "Производитель")
+
+        ToolTip1.SetToolTip(cmbMB, "Материнская плата, модель.")
+        ToolTip1.SetToolTip(txtChip, "Чипсет материнской платы.")
+        ToolTip1.SetToolTip(PROizV5, "Производитель")
+        ToolTip1.SetToolTip(txtSN_MB, "серийный номер")
+
+        ToolTip1.SetToolTip(cmbRAM1, "Модуль памяти.")
+        ToolTip1.SetToolTip(cmbRAM2, "Модуль памяти.")
+        ToolTip1.SetToolTip(cmbRAM3, "Модуль памяти.")
+        ToolTip1.SetToolTip(cmbRAM4, "Модуль памяти.")
+
+        ToolTip1.SetToolTip(txtRamS1, "Тип и Частота")
+        ToolTip1.SetToolTip(txtRamS2, "Тип и Частота")
+        ToolTip1.SetToolTip(txtRamS3, "Тип и Частота")
+        ToolTip1.SetToolTip(txtRamS4, "Тип и Частота")
+
+        ToolTip1.SetToolTip(txtRamSN1, "Серийный номер")
+        ToolTip1.SetToolTip(txtRamSN2, "Серийный номер")
+        ToolTip1.SetToolTip(txtRamSN3, "Серийный номер")
+        ToolTip1.SetToolTip(txtRamSN4, "Серийный номер")
+
+        ToolTip1.SetToolTip(PROizV6, "Производитель")
+        ToolTip1.SetToolTip(PROizV7, "Производитель")
+        ToolTip1.SetToolTip(PROizV8, "Производитель")
+        ToolTip1.SetToolTip(PROizV9, "Производитель")
+
+        ToolTip1.SetToolTip(cmbHDD1, "Жесткий диск")
+        ToolTip1.SetToolTip(cmbHDD2, "Жесткий диск")
+        ToolTip1.SetToolTip(cmbHDD3, "Жесткий диск")
+        ToolTip1.SetToolTip(cmbHDD4, "Жесткий диск")
+
+        ToolTip1.SetToolTip(txtHDDo1, "Объем жесткого диска")
+        ToolTip1.SetToolTip(txtHDDo2, "Объем жесткого диска")
+        ToolTip1.SetToolTip(txtHDDo3, "Объем жесткого диска")
+        ToolTip1.SetToolTip(txtHDDo4, "Объем жесткого диска")
+
+        ToolTip1.SetToolTip(txtHDDsN1, "Серийный номер")
+        ToolTip1.SetToolTip(txtHDDsN2, "Серийный номер")
+        ToolTip1.SetToolTip(txtHDDsN3, "Серийный номер")
+        ToolTip1.SetToolTip(txtHDDsN4, "Серийный номер")
+
+        ToolTip1.SetToolTip(PROizV10, "Производитель")
+        ToolTip1.SetToolTip(PROizV11, "Производитель")
+        ToolTip1.SetToolTip(PROizV12, "Производитель")
+        ToolTip1.SetToolTip(PROizV13, "Производитель")
+
+        ToolTip1.SetToolTip(cmbSVGA1, "Видеокарта, модель")
+        ToolTip1.SetToolTip(txtSVGAr1, "Объем памяти")
+        ToolTip1.SetToolTip(txtSVGAs1, "Серийный номер")
+        ToolTip1.SetToolTip(PROizV14, "Производитель")
+
+        ToolTip1.SetToolTip(cmbSVGA2, "Видеокарта, модель")
+        ToolTip1.SetToolTip(txtSVGAr2, "Объем памяти")
+        ToolTip1.SetToolTip(txtSVGAs2, "Серийный номер")
+        ToolTip1.SetToolTip(PROizV15, "Производитель")
+
+        ToolTip1.SetToolTip(cmbSound, "Звуковая карта, модель")
+        ToolTip1.SetToolTip(txtSoundB, "Чип")
+        ToolTip1.SetToolTip(txtSoundS, "Серийный номер")
+        ToolTip1.SetToolTip(PROizV16, "Производитель")
+
+        ToolTip1.SetToolTip(cmbOPTIC1, "Оптический привод, модель")
+        ToolTip1.SetToolTip(txtOPTICs1, "Скорость чтения-записи")
+        ToolTip1.SetToolTip(txtOPTICsn1, "Серийный номер")
+        ToolTip1.SetToolTip(PROizV17, "Производитель")
+
+        ToolTip1.SetToolTip(cmbOPTIC2, "Оптический привод, модель")
+        ToolTip1.SetToolTip(txtOPTICs2, "Скорость чтения-записи")
+        ToolTip1.SetToolTip(txtOPTICsn2, "Серийный номер")
+        ToolTip1.SetToolTip(PROizV18, "Производитель")
+
+        ToolTip1.SetToolTip(cmbOPTIC3, "Оптический привод, модель")
+        ToolTip1.SetToolTip(txtOPTICs3, "Скорость чтения-записи")
+        ToolTip1.SetToolTip(txtOPTICsn3, "Серийный номер")
+        ToolTip1.SetToolTip(PROizV19, "Производитель")
+
+
+        ToolTip1.SetToolTip(cmbNET1, "Сетевой адаптер, модель")
+        ToolTip1.SetToolTip(txtNETip1, "IP адрес")
+        ToolTip1.SetToolTip(txtNETmac1, "MAC адрес")
+        ToolTip1.SetToolTip(PROizV20, "Производитель")
+
+        ToolTip1.SetToolTip(cmbNET2, "Сетевой адаптер, модель")
+        ToolTip1.SetToolTip(txtNETip2, "IP адрес")
+        ToolTip1.SetToolTip(txtNETmac2, "MAC адрес")
+        ToolTip1.SetToolTip(PROizV21, "Производитель")
+
+        ToolTip1.SetToolTip(cmbMon1, "Монитор, модель")
+        ToolTip1.SetToolTip(txtMon1Dum, "Диагональ")
+        ToolTip1.SetToolTip(txtMon1SN, "Серийный номер")
+        ToolTip1.SetToolTip(PROizV28, "Производитель")
+
+        ToolTip1.SetToolTip(cmbMon2, "Монитор, модель")
+        ToolTip1.SetToolTip(txtMon2Dum, "Диагональ")
+        ToolTip1.SetToolTip(txtMon2SN, "Серийный номер")
+        ToolTip1.SetToolTip(PROizV29, "Производитель")
+
+        ToolTip1.SetToolTip(cmbPrinters1, "Принтер, модель")
+        ToolTip1.SetToolTip(txtPrint1SN, "Серийный номер")
+        ToolTip1.SetToolTip(txtPrint1Port, "Порт подключения")
+        ToolTip1.SetToolTip(PROizV34, "Производитель")
+
+        ToolTip1.SetToolTip(cmbPrinters2, "Принтер, модель")
+        ToolTip1.SetToolTip(txtPrint2SN, "Серийный номер")
+        ToolTip1.SetToolTip(txtPrint2Port, "Порт подключения")
+        ToolTip1.SetToolTip(PROizV35, "Производитель")
+
+        ToolTip1.SetToolTip(cmbPrinters3, "Принтер, модель")
+        ToolTip1.SetToolTip(txtPrint3SN, "Серийный номер")
+        ToolTip1.SetToolTip(txtPrint3Port, "Порт подключения")
+        ToolTip1.SetToolTip(PROizV36, "Производитель")
+
+
+    End Sub
+
     Private Sub frmComputers_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
         ' Me.BeginInvoke(New MethodInvoker(AddressOf PRELOAD_FORM))
@@ -345,51 +482,20 @@ Public Class frmComputers
 
         Application.DoEvents()
 
-        Dim ToolTip1 As New ToolTip
-        ToolTip1.SetToolTip(cmbCPU1, "Наименование первого процессора.")
-        ToolTip1.SetToolTip(cmbCPU2, "Наименование второго процессора.")
-        ToolTip1.SetToolTip(cmbCPU3, "Наименование третьего процессора.")
-        ToolTip1.SetToolTip(cmbCPU4, "Наименование четвертого процессора.")
-
-        ' txtMHZ1
-        ToolTip1.SetToolTip(txtMHZ1, "Частота первого процессора.")
-        ToolTip1.SetToolTip(txtMHZ2, "Частота второго процессора.")
-        ToolTip1.SetToolTip(txtMHZ3, "Частота третьего процессора.")
-        ToolTip1.SetToolTip(txtMHZ4, "Частота четвертого процессора.")
-        'txtSoc1
-        ToolTip1.SetToolTip(txtSoc1, "Сокет первого процессора.")
-        ToolTip1.SetToolTip(txtSoc2, "Сокет второго процессора.")
-        ToolTip1.SetToolTip(txtSoc3, "Сокет третьего процессора.")
-        ToolTip1.SetToolTip(txtSoc4, "Сокет четвертого процессора.")
-        'PROizV1
-        ToolTip1.SetToolTip(PROizV1, "Производитель первого процессора.")
-        ToolTip1.SetToolTip(PROizV2, "Производитель второго процессора.")
-        ToolTip1.SetToolTip(PROizV3, "Производитель третьего процессора.")
-        ToolTip1.SetToolTip(PROizV4, "Производитель четвертого процессора.")
-
-
-        'Меняем форму
-        'Me.BeginInvoke(New MethodInvoker(AddressOf RESIZER))
+        Me.BeginInvoke(New MethodInvoker(AddressOf Tool_Tips_Forms))
 
         'Статистика
-        Dim newThread4 As New Thread(AddressOf STAT_INF_1)
-        newThread4.Start()
-        'newThread4.Priority = 4
-
+        Me.BeginInvoke(New MethodInvoker(AddressOf STAT_INF_1))
 
         Me.WindowState = FormWindowState.Maximized
 
         Me.Cursor = Cursors.WaitCursor
 
-
         Application.DoEvents()
 
-        'If Me.lstGroups.Nodes.Count = 0 Then
-        '    Dim newThread5 As New Thread(AddressOf R_T_LOAD)
-        '    newThread5.Start()
-        'End If
 
-        Call R_T_LOAD()
+        Me.BeginInvoke(New MethodInvoker(AddressOf R_T_LOAD))
+        ' Call R_T_LOAD()
 
         Me.Cursor = Cursors.Default
 
@@ -1735,29 +1841,6 @@ err_:
 
     End Sub
     '######################
-
-    Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
-        OneStart = 0
-
-        txtSearch.Text = ""
-
-        Me.Cursor = Cursors.WaitCursor
-
-
-        'Dim newThread2 As New Thread(AddressOf LoadSPR_1)
-        'newThread2.Start()
-
-        Dim newThread1 As New Thread(AddressOf R_T_LOAD)
-        newThread1.Start()
-        'newThread1.Priority = 4
-
-        'Call LoadSPR()
-        'Call RefFilTree(lstGroups)
-
-
-        Me.Cursor = Cursors.Default
-    End Sub
-
     Private Sub txtSearch_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSearch.KeyDown
 
         Select Case e.KeyCode
@@ -1766,8 +1849,7 @@ err_:
 
                 'Search2(txtSearch.Text)
                 lstGroups.Nodes.Clear()
-                Dim newThread1 As New Thread(AddressOf S2_LOAD_)
-                newThread1.Start()
+                Me.BeginInvoke(New MethodInvoker(AddressOf S2_LOAD_t))
                 'newThread1.Priority = 3
 
         End Select
@@ -1775,11 +1857,6 @@ err_:
 
     End Sub
 
-    Private Sub S2_LOAD_()
-
-        Me.BeginInvoke(New MethodInvoker(AddressOf S2_LOAD_t))
-
-    End Sub
 
     Private Sub S2_LOAD_t()
         'Call Search2(txtSearch.Text)
@@ -1910,7 +1987,7 @@ err_:
         Next
     End Sub
 
-    Private Sub NotesLoaded(ByVal lvNotes As ListView, ByVal dtdatenotes As DateTimePicker, ByVal cmbNotesMaster As ComboBox, ByVal txtNotes As TextBox, ByVal btnNotes As Button)
+    Private Sub NotesLoaded(ByVal lvNotes As ListView, ByVal dtdatenotes As DateTimePicker, ByVal cmbNotesMaster As ComboBox, ByVal txtNotes As TextBox, ByVal btnNotes As ToolStripButton)
 
         If lvNotes.Items.Count = 0 Then Exit Sub
 
@@ -3921,22 +3998,6 @@ lvRepair.Columns(e.Column)
         LoadRepairEdit(lvRepair)
     End Sub
 
-    Private Sub btnNotesAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNotesAdd.Click
-        Dim sStr As String = txtSNAME.Text
-
-        NotesEditAdd(btnNotesAdd, lvNotes, cmbNotesMaster, txtNotes, dtDateNotes, sStr, cmbBranch, cmbDepartment, cmbOffice)
-
-    End Sub
-
-    Private Sub btnNotesDel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNotesDel.Click
-        RemoVe_Notes(lvNotes)
-        Notes_Clear(btnNotesAdd, dtDateNotes, cmbNotesMaster, txtNotes)
-    End Sub
-
-    Private Sub btnNotesCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNotesCancel.Click
-        Notes_Clear(btnNotesAdd, dtDateNotes, cmbNotesMaster, txtNotes)
-    End Sub
-
     Private Sub lvNotes_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvNotes.Click
         zCOUNT_LOAD(lvNotes)
     End Sub
@@ -3977,16 +4038,6 @@ lvNotes.Columns(e.Column)
         NotesLoaded(lvNotes, dtDateNotes, cmbNotesMaster, txtNotes, btnNotesAdd)
     End Sub
 
-    Private Sub btnBRNotesAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBRNotesAdd.Click
-
-        Call BR_NOTES_ADD()
-
-    End Sub
-
-    Private Sub btnBRNotesCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBRNotesCancel.Click
-        Notes_Clear(btnBRNotesAdd, Notesbrdate, cmbBRMaster, Notesbrtxt)
-    End Sub
-
     Private Sub lvNotesBR_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvNotesBR.DoubleClick
         If lvNotesBR.Items.Count = 0 Then Exit Sub
 
@@ -4019,20 +4070,6 @@ lvNotes.Columns(e.Column)
 
         rs.Close()
         rs = Nothing
-    End Sub
-
-    Private Sub btnPRNNotesAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPRNNotesAdd.Click
-        Dim sStr As String = cmbPRN.Text
-        NotesEditAdd(btnPRNNotesAdd, lvNotesPRN, cmbNotesPRNMaster, NotesPRNtxt, NotesPRNdate, sStr, cmbPRNFil, cmbPRNDepart, cmbPRNOffice)
-    End Sub
-
-    Private Sub btnPRNNotesDel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPRNNotesDel.Click
-        RemoVe_Notes(lvNotesPRN)
-        Notes_Clear(btnPRNNotesAdd, NotesPRNdate, cmbNotesPRNMaster, NotesPRNtxt)
-    End Sub
-
-    Private Sub btnPRNNotesCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPRNNotesCancel.Click
-        Notes_Clear(btnPRNNotesAdd, NotesPRNdate, cmbNotesPRNMaster, NotesPRNtxt)
     End Sub
 
     Private Sub lvNotesPRN_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvNotesPRN.Click
@@ -4115,26 +4152,6 @@ lvNotes.Columns(e.Column)
         LoadRepairEdit(lvRepairBR)
     End Sub
 
-    Private Sub btnBRNotesDel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBRNotesDel.Click
-        RemoVe_Notes(lvNotesBR)
-        Notes_Clear(btnBRNotesAdd, Notesbrdate, cmbBRMaster, Notesbrtxt)
-    End Sub
-
-    Private Sub btnNETAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNETAdd.Click
-        Dim sStr As String = cmbDevNet.Text
-
-        NotesEditAdd(btnNETAdd, lvNotesNET, cmbNotesNETMaster, NotesNETtxt, NotesNETdate, sStr, cmbNETBranch, cmbNetDepart, cmbNETOffice)
-    End Sub
-
-    Private Sub btnNETNotesDel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNETNotesDel.Click
-        RemoVe_Notes(lvNotesNET)
-        Notes_Clear(btnNETAdd, NotesNETdate, cmbNotesNETMaster, NotesNETtxt)
-    End Sub
-
-    Private Sub btnNETNotesCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNETNotesCancel.Click
-        Notes_Clear(btnNETAdd, NotesNETdate, cmbNotesNETMaster, NotesNETtxt)
-    End Sub
-
     Private Sub lvNotesNET_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvNotesNET.Click
         zCOUNT_LOAD(lvNotesNET)
     End Sub
@@ -4209,22 +4226,6 @@ lvNotes.Columns(e.Column)
 
     Private Sub lvRepairNET_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvRepairNET.DoubleClick
         LoadRepairEdit(lvRepairNET)
-    End Sub
-
-    Private Sub btnOTHAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOTHAdd.Click
-        Dim sStr As String = cmbOTH.Text
-
-        NotesEditAdd(btnOTHAdd, lvNotesOTH, cmbNotesOTHMaster, txtNotesOTH, NotesOTHdate, sStr, cmbOTHFil, cmbOTHDepart, cmbOTHOffice)
-
-    End Sub
-
-    Private Sub btnOTHNotesDel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOTHNotesDel.Click
-        RemoVe_Notes(lvNotesOTH)
-        Notes_Clear(btnOTHAdd, NotesOTHdate, cmbNotesOTHMaster, txtNotesOTH)
-    End Sub
-
-    Private Sub btnOTHNotesCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOTHNotesCancel.Click
-        Notes_Clear(btnOTHAdd, NotesOTHdate, cmbNotesOTHMaster, txtNotesOTH)
     End Sub
 
     Private Sub lvRepairOTH_ColumnClick(ByVal sender As Object, ByVal e As System.Windows.Forms.ColumnClickEventArgs) Handles lvRepairOTH.ColumnClick
@@ -5120,23 +5121,7 @@ Error_:
         rs = Nothing
     End Sub
 
-    Private Sub btnUserCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUserCancel.Click
-
-
-        Dim langfile As New IniFile(sLANGPATH)
-
-
-        Me.cmdUserAdd.Text = langfile.GetString("frmComputers", "MSG30", "")
-
-        Me.txtUserName.Text = ""
-        Me.txtUserPass.Text = ""
-        Me.txtUserEmail.Text = ""
-        Me.txtUserEmailPwd.Text = ""
-        Me.txtUserFIO.Text = ""
-        Me.txtUserIcq.Text = ""
-        Me.txtUMEMO.Text = ""
-
-    End Sub
+   
 
     Private Sub lvMovement_ColumnClick(ByVal sender As Object, ByVal e As System.Windows.Forms.ColumnClickEventArgs) Handles lvMovement.ColumnClick
         Dim new_sorting_column As ColumnHeader = _
@@ -6165,8 +6150,6 @@ err_:
         d = Split(lstGroups.SelectedNode.Tag, "|")
 
 
-
-
         Select Case d(0)
 
             Case "G"
@@ -6402,6 +6385,121 @@ err_1:
     Private Sub ТО6ToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ТО6ToolStripMenuItem.Click
         TIP_TO = "TO6"
         frmPPR.ShowDialog(Me)
+    End Sub
+
+    Private Sub btnUserCancel_Click(sender As System.Object, e As System.EventArgs) Handles btnUserCancel.Click
+        Dim langfile As New IniFile(sLANGPATH)
+
+
+        Me.cmdUserAdd.Text = langfile.GetString("frmComputers", "MSG30", "")
+
+        Me.txtUserName.Text = ""
+        Me.txtUserPass.Text = ""
+        Me.txtUserEmail.Text = ""
+        Me.txtUserEmailPwd.Text = ""
+        Me.txtUserFIO.Text = ""
+        Me.txtUserIcq.Text = ""
+        Me.txtUMEMO.Text = ""
+        Me.txtUserJab.Text = ""
+
+    End Sub
+
+    Private Sub btnNotesAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNotesDel.Click
+        Dim sStr As String = txtSNAME.Text
+
+        NotesEditAdd(btnNotesAdd, lvNotes, cmbNotesMaster, txtNotes, dtDateNotes, sStr, cmbBranch, cmbDepartment, cmbOffice)
+
+    End Sub
+
+    Private Sub btnNotesDel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNotesDel.Click
+        RemoVe_Notes(lvNotes)
+        Notes_Clear(btnNotesAdd, dtDateNotes, cmbNotesMaster, txtNotes)
+    End Sub
+
+    Private Sub btnNotesCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNotesCancel.Click
+        Notes_Clear(btnNotesAdd, dtDateNotes, cmbNotesMaster, txtNotes)
+    End Sub
+
+    Private Sub btnBRNotesAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBRNotesAdd.Click
+
+        Call BR_NOTES_ADD()
+
+    End Sub
+
+    Private Sub btnBRNotesCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBRNotesCancel.Click
+        Notes_Clear(btnBRNotesAdd, Notesbrdate, cmbBRMaster, Notesbrtxt)
+    End Sub
+
+    Private Sub btnBRNotesDel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBRNotesDel.Click
+        RemoVe_Notes(lvNotesBR)
+        Notes_Clear(btnBRNotesAdd, Notesbrdate, cmbBRMaster, Notesbrtxt)
+    End Sub
+
+    Private Sub btnPRNNotesAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPRNNotesAdd.Click
+        Dim sStr As String = cmbPRN.Text
+        NotesEditAdd(btnPRNNotesAdd, lvNotesPRN, cmbNotesPRNMaster, NotesPRNtxt, NotesPRNdate, sStr, cmbPRNFil, cmbPRNDepart, cmbPRNOffice)
+    End Sub
+
+    Private Sub btnPRNNotesDel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPRNNotesDel.Click
+        RemoVe_Notes(lvNotesPRN)
+        Notes_Clear(btnPRNNotesAdd, NotesPRNdate, cmbNotesPRNMaster, NotesPRNtxt)
+    End Sub
+
+    Private Sub btnPRNNotesCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPRNNotesCancel.Click
+        Notes_Clear(btnPRNNotesAdd, NotesPRNdate, cmbNotesPRNMaster, NotesPRNtxt)
+    End Sub
+
+    Private Sub btnNETAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNETAdd.Click
+        Dim sStr As String = cmbDevNet.Text
+
+        NotesEditAdd(btnNETAdd, lvNotesNET, cmbNotesNETMaster, NotesNETtxt, NotesNETdate, sStr, cmbNETBranch, cmbNetDepart, cmbNETOffice)
+    End Sub
+
+    Private Sub btnNETNotesDel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNETNotesDel.Click
+        RemoVe_Notes(lvNotesNET)
+        Notes_Clear(btnNETAdd, NotesNETdate, cmbNotesNETMaster, NotesNETtxt)
+    End Sub
+
+    Private Sub btnNETNotesCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNETNotesCancel.Click
+        Notes_Clear(btnNETAdd, NotesNETdate, cmbNotesNETMaster, NotesNETtxt)
+    End Sub
+
+    Private Sub btnOTHAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOTHAdd.Click
+        Dim sStr As String = cmbOTH.Text
+
+        NotesEditAdd(btnOTHAdd, lvNotesOTH, cmbNotesOTHMaster, txtNotesOTH, NotesOTHdate, sStr, cmbOTHFil, cmbOTHDepart, cmbOTHOffice)
+
+    End Sub
+
+    Private Sub btnOTHNotesDel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOTHNotesDel.Click
+        RemoVe_Notes(lvNotesOTH)
+        Notes_Clear(btnOTHAdd, NotesOTHdate, cmbNotesOTHMaster, txtNotesOTH)
+    End Sub
+
+    Private Sub btnOTHNotesCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOTHNotesCancel.Click
+        Notes_Clear(btnOTHAdd, NotesOTHdate, cmbNotesOTHMaster, txtNotesOTH)
+    End Sub
+
+    Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
+        OneStart = 0
+
+        txtSearch.Text = ""
+
+        Me.Cursor = Cursors.WaitCursor
+
+
+        'Dim newThread2 As New Thread(AddressOf LoadSPR_1)
+        'newThread2.Start()
+
+        Dim newThread1 As New Thread(AddressOf R_T_LOAD)
+        newThread1.Start()
+        'newThread1.Priority = 4
+
+        'Call LoadSPR()
+        'Call RefFilTree(lstGroups)
+
+
+        Me.Cursor = Cursors.Default
     End Sub
 End Class
 

@@ -1777,6 +1777,426 @@ err_:
 
     End Sub
 
+    Private Sub frmDirectory_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Resize
+        tvDirectory.Height = Me.Height - 65
+
+        lvDirectory.Height = Me.Height - (gbSpr.Height + 70)
+        gbSpr.Top = lvDirectory.Height + 10
+
+        gbSpr.Width = Me.Width - (tvDirectory.Width + 20)
+        lvDirectory.Width = Me.Width - (tvDirectory.Width + 20)
+
+    End Sub
+
+    Private Sub cmbName_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbName.SelectedIndexChanged
+        On Error GoTo err_
+        Dim objIniFile As New IniFile(sLANGPATH)
+
+        If tvDirectory.SelectedNode.Text = objIniFile.GetString("frmDirectory", "MSG41", "") Then
+
+
+            cmbName2.Items.Clear()
+            Dim rs1 As ADODB.Recordset
+            rs1 = New ADODB.Recordset
+            rs1.Open("select * from SPR_OTD_FILIAL WHERE Filial='" & cmbName.Text & "' ORDER BY N_Otd", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            cmbName2.Items.Clear()
+            With rs1
+                .MoveFirst()
+                Do While Not .EOF
+
+                    If Not IsDBNull(.Fields("N_Otd").Value) Then cmbName2.Items.Add(.Fields("N_Otd").Value)
+
+                    .MoveNext()
+                Loop
+            End With
+
+            rs1.Close()
+            rs1 = Nothing
+
+        End If
+
+        Exit Sub
+err_:
+    End Sub
+
+    Private Sub DELETE_SPR(Optional ByVal ssid As Integer = 0)
+        'Тут код на удаление
+
+        Dim rs As ADODB.Recordset
+        Dim objIniFile As New IniFile(sLANGPATH)
+
+        If ssid <> 0 Then
+
+            dSID = ssid
+
+        Else
+
+            For z = 0 To lvDirectory.SelectedItems.Count - 1
+                dSID = (lvDirectory.SelectedItems(z).Text)
+            Next
+
+        End If
+
+
+
+        Select Case tvDirectory.SelectedNode.Text
+
+            Case objIniFile.GetString("frmDirectory", "MSG57", "")
+
+                '#######################################
+                'Пользователь экспериментально
+                '#######################################
+                rs = New ADODB.Recordset
+                rs.Open("Delete FROM SPR_USER WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+
+            Case objIniFile.GetString("frmDirectory", "MSG27", "")
+                rs = New ADODB.Recordset
+                rs.Open("Delete FROM SPR_OPTICAL WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+            Case objIniFile.GetString("frmDirectory", "MSG3", "")
+
+                rs = New ADODB.Recordset
+                rs.Open("Delete FROM SPR_USB WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+            Case objIniFile.GetString("frmDirectory", "MSG4", "")
+                rs = New ADODB.Recordset
+                rs.Open("Delete FROM spr_zip WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+
+            Case objIniFile.GetString("frmDirectory", "MSG5", "")
+
+                rs = New ADODB.Recordset
+                rs.Open("Delete FROM SPR_ASISTEM WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+            Case objIniFile.GetString("frmDirectory", "MSG6", "")
+
+                rs = New ADODB.Recordset
+                rs.Open("Delete FROM SPR_IBP WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+
+            Case objIniFile.GetString("frmDirectory", "MSG7", "")
+                rs = New ADODB.Recordset
+                rs.Open("Delete FROM SPR_KEYBOARD WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+
+            Case objIniFile.GetString("frmDirectory", "MSG8", "")
+                rs = New ADODB.Recordset
+                rs.Open("Delete FROM SPR_KOPIR WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+
+            Case objIniFile.GetString("frmDirectory", "MSG34", "")
+                rs = New ADODB.Recordset
+                rs.Open("Delete FROM SPR_MODEM WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+
+            Case objIniFile.GetString("frmDirectory", "MSG9", "")
+                rs = New ADODB.Recordset
+                rs.Open("Delete FROM SPR_MONITOR WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+
+            Case objIniFile.GetString("frmDirectory", "MSG10", "")
+
+                rs = New ADODB.Recordset
+                rs.Open("Delete FROM SPR_MFU WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+            Case objIniFile.GetString("frmDirectory", "MSG11", "")
+                rs = New ADODB.Recordset
+                rs.Open("Delete FROM SPR_MOUSE WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+
+            Case objIniFile.GetString("frmDirectory", "MSG12", "")
+                rs = New ADODB.Recordset
+                rs.Open("Delete FROM SPR_PRINTER WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+
+            Case objIniFile.GetString("frmDirectory", "MSG13", "")
+                rs = New ADODB.Recordset
+                rs.Open("Delete FROM SPR_FS WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+
+            Case objIniFile.GetString("frmDirectory", "MSG14", "")
+                rs = New ADODB.Recordset
+                rs.Open("Delete FROM SPR_DEV_NET WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+
+            Case objIniFile.GetString("frmDirectory", "MSG15", "")
+                rs = New ADODB.Recordset
+                rs.Open("Delete FROM SPR_SCANER WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+
+            Case objIniFile.GetString("frmDirectory", "MSG16", "")
+                rs = New ADODB.Recordset
+                rs.Open("Delete FROM spr_phone WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+
+            Case objIniFile.GetString("frmDirectory", "MSG17", "")
+                rs = New ADODB.Recordset
+                rs.Open("Delete FROM spr_fax WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+
+            Case objIniFile.GetString("frmDirectory", "MSG18", "")
+                rs = New ADODB.Recordset
+                rs.Open("Delete FROM spr_photo WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+            Case objIniFile.GetString("frmDirectory", "MSG20", "")
+                rs = New ADODB.Recordset
+                rs.Open("Delete FROM SPR_SVGA WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+
+            Case objIniFile.GetString("frmDirectory", "MSG21", "")
+                rs = New ADODB.Recordset
+                rs.Open("Delete FROM SPR_FDD WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+
+            Case objIniFile.GetString("frmDirectory", "MSG22", "")
+                rs = New ADODB.Recordset
+                rs.Open("Delete FROM SPR_HDD WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+            Case objIniFile.GetString("frmDirectory", "MSG23", "")
+                rs = New ADODB.Recordset
+                rs.Open("Delete FROM SPR_SOUND WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+
+            Case objIniFile.GetString("frmDirectory", "MSG25", "")
+                rs = New ADODB.Recordset
+                rs.Open("Delete FROM SPR_MB WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+
+
+            Case objIniFile.GetString("frmDirectory", "MSG26", "")
+                rs = New ADODB.Recordset
+                rs.Open("Delete FROM SPR_RAM WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+
+            Case objIniFile.GetString("frmDirectory", "MSG28", "")
+                rs = New ADODB.Recordset
+                rs.Open("Delete FROM SPR_CPU WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+
+            Case objIniFile.GetString("frmDirectory", "MSG29", "")
+                rs = New ADODB.Recordset
+                rs.Open("Delete FROM SPR_NET WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+
+            Case objIniFile.GetString("frmDirectory", "MSG30", "")
+                rs = New ADODB.Recordset
+                rs.Open("Delete FROM SPR_PCI WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+
+
+            Case objIniFile.GetString("frmDirectory", "MSG37", "")
+                rs = New ADODB.Recordset
+                rs.Open("Delete FROM SPR_OTV WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+
+            Case objIniFile.GetString("frmDirectory", "MSG39", "")
+
+                RemoveBrainch(lvDirectory.Items.Item(lvDirectory.FocusedItem.Index).SubItems(1).Text)
+
+            Case objIniFile.GetString("frmDirectory", "MSG40", "")
+
+                RemoveDepartment(dSID)
+
+            Case objIniFile.GetString("frmDirectory", "MSG41", "")
+
+                RemoveOffice(dSID)
+
+            Case objIniFile.GetString("frmDirectory", "MSG43", "")
+                rs = New ADODB.Recordset
+                rs.Open("Delete FROM SPR_Uroven WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+
+            Case objIniFile.GetString("frmDirectory", "MSG44", "")
+                rs = New ADODB.Recordset
+                rs.Open("Delete FROM spr_vip WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+
+            Case objIniFile.GetString("frmDirectory", "MSG45", "")
+                rs = New ADODB.Recordset
+                rs.Open("Delete FROM spr_tip_z WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+
+            Case objIniFile.GetString("frmDirectory", "MSG47", "")
+                rs = New ADODB.Recordset
+                rs.Open("Delete FROM SPR_Postav WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+
+            Case objIniFile.GetString("frmDirectory", "MSG48", "")
+
+                Call RemoveProyzv(dSID)
+
+            Case objIniFile.GetString("frmDirectory", "MSG49", "")
+                rs = New ADODB.Recordset
+                rs.Open("Delete FROM SPR_TIP WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+
+            Case objIniFile.GetString("frmDirectory", "MSG50", "")
+                rs = New ADODB.Recordset
+                rs.Open("Delete FROM spr_cart WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+
+            Case objIniFile.GetString("frmDirectory", "MSG51", "")
+                rs = New ADODB.Recordset
+                rs.Open("Delete FROM spr_other WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+            Case objIniFile.GetString("frmDirectory", "MSG52", "")
+                rs = New ADODB.Recordset
+                rs.Open("Delete FROM SPR_OTH_DEV WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+            Case objIniFile.GetString("frmDirectory", "MSG53", "")
+                rs = New ADODB.Recordset
+                rs.Open("Delete FROM SPR_LIC WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+
+            Case objIniFile.GetString("frmDirectory", "MSG54", "")
+                rs = New ADODB.Recordset
+                rs.Open("Delete FROM SPR_TIP_PO WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+
+            Case objIniFile.GetString("frmDirectory", "MSG55", "")
+                rs = New ADODB.Recordset
+                rs.Open("Delete FROM SPR_Complect WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+
+            Case objIniFile.GetString("frmDirectory", "MSG56", "")
+                rs = New ADODB.Recordset
+                rs.Open("Delete FROM SPR_PO WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+            Case objIniFile.GetString("frmDirectory", "MSG33", "")
+                rs = New ADODB.Recordset
+                rs.Open("Delete FROM SPR_CASE WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+            Case objIniFile.GetString("frmDirectory", "MSG24", "")
+                rs = New ADODB.Recordset
+                rs.Open("Delete FROM SPR_CREADER WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+            Case objIniFile.GetString("frmDirectory", "MSG31", "")
+                rs = New ADODB.Recordset
+                rs.Open("Delete FROM SPR_BP WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+            Case objIniFile.GetString("frmDirectory", "MSG36", "")
+                rs = New ADODB.Recordset
+                rs.Open("Delete FROM SPR_Master WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+
+        End Select
+
+
+        btnDirAdd.Text = objIniFile.GetString("frmDirectory", "btnDirAdd", "")
+
+
+    End Sub
+
+
+    Private Sub lvDirectory_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lvDirectory.MouseUp
+
+    End Sub
+
+    Private Sub lvDirectory_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvDirectory.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub cmbIcon_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbIcon.SelectedIndexChanged
+        'pbOtherICO.Image=
+
+        Dim s1 As Integer
+        s1 = cmbIcon.Text
+        'frmComputers.ilsCommands.ImageSize = New System.Drawing.Size(32, 32)
+
+
+        'Select Case sICONS
+
+        '    Case "32*32"
+
+        '        pbOtherICO.Image = frmComputers.ImageList11.Images(s1)
+
+        '    Case Else
+
+        '        pbOtherICO.Image = frmComputers.ilsCommands.Images(s1)
+
+        'End Select
+
+        pbOtherICO.Image = frmComputers.ilsCommands.Images(s1)
+
+        'frmMain.imglist_cont.ListImages(s1).Picture
+    End Sub
+
+    Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
+        Me.Cursor = Cursors.WaitCursor
+
+        Call LoadSPR()
+
+        Me.Cursor = Cursors.Default
+        Me.Close()
+
+
+    End Sub
+
+    Private Sub btnCancell_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancell.Click
+        Dim objIniFile As New IniFile(sLANGPATH)
+        eDTI = False
+
+        btnDirAdd.Text = objIniFile.GetString("frmDirectory", "btnDirAdd", "")
+
+        cmbName.Text = ""
+        cmbName2.Text = ""
+        txtName.Text = ""
+        cmbName3.Text = ""
+        txtMemo.Text = ""
+        cmb1.Text = ""
+        cmb2.Text = ""
+        cmbIcon.Text = ""
+        chkVisibleSTR.Checked = False
+
+
+    End Sub
+
     Private Sub btnDirAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDirAdd.Click
         'Тут код редактирования, добавления
         If Len(cmbName.Text) = 0 Then Exit Sub
@@ -2639,48 +3059,6 @@ err_:
         eDTI = False
     End Sub
 
-    Private Sub frmDirectory_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Resize
-        tvDirectory.Height = Me.Height - 65
-
-        lvDirectory.Height = Me.Height - (gbSpr.Height + 70)
-        gbSpr.Top = lvDirectory.Height + 10
-
-        gbSpr.Width = Me.Width - (tvDirectory.Width + 20)
-        lvDirectory.Width = Me.Width - (tvDirectory.Width + 20)
-
-    End Sub
-
-    Private Sub cmbName_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbName.SelectedIndexChanged
-        On Error GoTo err_
-        Dim objIniFile As New IniFile(sLANGPATH)
-
-        If tvDirectory.SelectedNode.Text = objIniFile.GetString("frmDirectory", "MSG41", "") Then
-
-
-            cmbName2.Items.Clear()
-            Dim rs1 As ADODB.Recordset
-            rs1 = New ADODB.Recordset
-            rs1.Open("select * from SPR_OTD_FILIAL WHERE Filial='" & cmbName.Text & "' ORDER BY N_Otd", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-            cmbName2.Items.Clear()
-            With rs1
-                .MoveFirst()
-                Do While Not .EOF
-
-                    If Not IsDBNull(.Fields("N_Otd").Value) Then cmbName2.Items.Add(.Fields("N_Otd").Value)
-
-                    .MoveNext()
-                Loop
-            End With
-
-            rs1.Close()
-            rs1 = Nothing
-
-        End If
-
-        Exit Sub
-err_:
-    End Sub
-
     Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
 
         For z = 0 To lvDirectory.SelectedItems.Count - 1
@@ -2710,23 +3088,22 @@ err_:
 
         If intj1 > 0 Then
 
-            If MsgBox("Вы собираетесь удалить объекты справочника - " & intj1 & " шт." & vbNewLine & "продолжить?", MsgBoxStyle.YesNo, ProGramName) = MsgBoxResult.Yes Then
-                lvDirectory.Select()
+            lvDirectory.Select()
 
-                For intj = 0 To lvDirectory.Items.Count - 1
+            For intj = 0 To lvDirectory.Items.Count - 1
 
-                    lvDirectory.Items(intj).Selected = True
-                    lvDirectory.Items(intj).EnsureVisible()
+                lvDirectory.Items(intj).Selected = True
+                lvDirectory.Items(intj).EnsureVisible()
 
-                    If lvDirectory.Items(intj).Checked = True Then
+                If lvDirectory.Items(intj).Checked = True Then
 
 
-                        Call DELETE_SPR()
+                    Call DELETE_SPR()
 
-                    End If
+                End If
 
-                Next
-            End If
+            Next
+
         Else
 
             Call DELETE_SPR(dSID)
@@ -2741,381 +3118,10 @@ err_:
         eDTI = False
     End Sub
 
-    Private Sub DELETE_SPR(Optional ByVal ssid As Integer = 0)
-        'Тут код на удаление
 
-        Dim rs As ADODB.Recordset
-        Dim objIniFile As New IniFile(sLANGPATH)
 
-        If ssid <> 0 Then
-
-            dSID = ssid
-
-        Else
-
-            For z = 0 To lvDirectory.SelectedItems.Count - 1
-                dSID = (lvDirectory.SelectedItems(z).Text)
-            Next
-
-        End If
-
-
-
-        Select Case tvDirectory.SelectedNode.Text
-
-            Case objIniFile.GetString("frmDirectory", "MSG57", "")
-
-                '#######################################
-                'Пользователь экспериментально
-                '#######################################
-                rs = New ADODB.Recordset
-                rs.Open("Delete FROM SPR_USER WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                rs = Nothing
-
-
-            Case objIniFile.GetString("frmDirectory", "MSG27", "")
-                rs = New ADODB.Recordset
-                rs.Open("Delete FROM SPR_OPTICAL WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                rs = Nothing
-
-            Case objIniFile.GetString("frmDirectory", "MSG3", "")
-
-                rs = New ADODB.Recordset
-                rs.Open("Delete FROM SPR_USB WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                rs = Nothing
-
-            Case objIniFile.GetString("frmDirectory", "MSG4", "")
-                rs = New ADODB.Recordset
-                rs.Open("Delete FROM spr_zip WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                rs = Nothing
-
-
-            Case objIniFile.GetString("frmDirectory", "MSG5", "")
-
-                rs = New ADODB.Recordset
-                rs.Open("Delete FROM SPR_ASISTEM WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                rs = Nothing
-
-            Case objIniFile.GetString("frmDirectory", "MSG6", "")
-
-                rs = New ADODB.Recordset
-                rs.Open("Delete FROM SPR_IBP WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                rs = Nothing
-
-
-            Case objIniFile.GetString("frmDirectory", "MSG7", "")
-                rs = New ADODB.Recordset
-                rs.Open("Delete FROM SPR_KEYBOARD WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                rs = Nothing
-
-
-            Case objIniFile.GetString("frmDirectory", "MSG8", "")
-                rs = New ADODB.Recordset
-                rs.Open("Delete FROM SPR_KOPIR WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                rs = Nothing
-
-
-            Case objIniFile.GetString("frmDirectory", "MSG34", "")
-                rs = New ADODB.Recordset
-                rs.Open("Delete FROM SPR_MODEM WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                rs = Nothing
-
-
-            Case objIniFile.GetString("frmDirectory", "MSG9", "")
-                rs = New ADODB.Recordset
-                rs.Open("Delete FROM SPR_MONITOR WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                rs = Nothing
-
-
-            Case objIniFile.GetString("frmDirectory", "MSG10", "")
-
-                rs = New ADODB.Recordset
-                rs.Open("Delete FROM SPR_MFU WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                rs = Nothing
-
-            Case objIniFile.GetString("frmDirectory", "MSG11", "")
-                rs = New ADODB.Recordset
-                rs.Open("Delete FROM SPR_MOUSE WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                rs = Nothing
-
-
-            Case objIniFile.GetString("frmDirectory", "MSG12", "")
-                rs = New ADODB.Recordset
-                rs.Open("Delete FROM SPR_PRINTER WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                rs = Nothing
-
-
-            Case objIniFile.GetString("frmDirectory", "MSG13", "")
-                rs = New ADODB.Recordset
-                rs.Open("Delete FROM SPR_FS WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                rs = Nothing
-
-
-            Case objIniFile.GetString("frmDirectory", "MSG14", "")
-                rs = New ADODB.Recordset
-                rs.Open("Delete FROM SPR_DEV_NET WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                rs = Nothing
-
-
-            Case objIniFile.GetString("frmDirectory", "MSG15", "")
-                rs = New ADODB.Recordset
-                rs.Open("Delete FROM SPR_SCANER WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                rs = Nothing
-
-
-            Case objIniFile.GetString("frmDirectory", "MSG16", "")
-                rs = New ADODB.Recordset
-                rs.Open("Delete FROM spr_phone WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                rs = Nothing
-
-
-            Case objIniFile.GetString("frmDirectory", "MSG17", "")
-                rs = New ADODB.Recordset
-                rs.Open("Delete FROM spr_fax WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                rs = Nothing
-
-
-            Case objIniFile.GetString("frmDirectory", "MSG18", "")
-                rs = New ADODB.Recordset
-                rs.Open("Delete FROM spr_photo WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                rs = Nothing
-
-            Case objIniFile.GetString("frmDirectory", "MSG20", "")
-                rs = New ADODB.Recordset
-                rs.Open("Delete FROM SPR_SVGA WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                rs = Nothing
-
-
-            Case objIniFile.GetString("frmDirectory", "MSG21", "")
-                rs = New ADODB.Recordset
-                rs.Open("Delete FROM SPR_FDD WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                rs = Nothing
-
-
-            Case objIniFile.GetString("frmDirectory", "MSG22", "")
-                rs = New ADODB.Recordset
-                rs.Open("Delete FROM SPR_HDD WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                rs = Nothing
-
-            Case objIniFile.GetString("frmDirectory", "MSG23", "")
-                rs = New ADODB.Recordset
-                rs.Open("Delete FROM SPR_SOUND WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                rs = Nothing
-
-
-            Case objIniFile.GetString("frmDirectory", "MSG25", "")
-                rs = New ADODB.Recordset
-                rs.Open("Delete FROM SPR_MB WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                rs = Nothing
-
-
-
-            Case objIniFile.GetString("frmDirectory", "MSG26", "")
-                rs = New ADODB.Recordset
-                rs.Open("Delete FROM SPR_RAM WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                rs = Nothing
-
-
-            Case objIniFile.GetString("frmDirectory", "MSG28", "")
-                rs = New ADODB.Recordset
-                rs.Open("Delete FROM SPR_CPU WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                rs = Nothing
-
-
-            Case objIniFile.GetString("frmDirectory", "MSG29", "")
-                rs = New ADODB.Recordset
-                rs.Open("Delete FROM SPR_NET WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                rs = Nothing
-
-
-            Case objIniFile.GetString("frmDirectory", "MSG30", "")
-                rs = New ADODB.Recordset
-                rs.Open("Delete FROM SPR_PCI WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                rs = Nothing
-
-
-
-            Case objIniFile.GetString("frmDirectory", "MSG37", "")
-                rs = New ADODB.Recordset
-                rs.Open("Delete FROM SPR_OTV WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                rs = Nothing
-
-
-            Case objIniFile.GetString("frmDirectory", "MSG39", "")
-
-                RemoveBrainch(lvDirectory.Items.Item(lvDirectory.FocusedItem.Index).SubItems(1).Text)
-
-            Case objIniFile.GetString("frmDirectory", "MSG40", "")
-
-                RemoveDepartment(dSID)
-
-            Case objIniFile.GetString("frmDirectory", "MSG41", "")
-
-                RemoveOffice(dSID)
-
-            Case objIniFile.GetString("frmDirectory", "MSG43", "")
-                rs = New ADODB.Recordset
-                rs.Open("Delete FROM SPR_Uroven WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                rs = Nothing
-
-
-            Case objIniFile.GetString("frmDirectory", "MSG44", "")
-                rs = New ADODB.Recordset
-                rs.Open("Delete FROM spr_vip WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                rs = Nothing
-
-
-            Case objIniFile.GetString("frmDirectory", "MSG45", "")
-                rs = New ADODB.Recordset
-                rs.Open("Delete FROM spr_tip_z WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                rs = Nothing
-
-
-            Case objIniFile.GetString("frmDirectory", "MSG47", "")
-                rs = New ADODB.Recordset
-                rs.Open("Delete FROM SPR_Postav WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                rs = Nothing
-
-
-            Case objIniFile.GetString("frmDirectory", "MSG48", "")
-
-                Call RemoveProyzv(dSID)
-
-            Case objIniFile.GetString("frmDirectory", "MSG49", "")
-                rs = New ADODB.Recordset
-                rs.Open("Delete FROM SPR_TIP WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                rs = Nothing
-
-
-            Case objIniFile.GetString("frmDirectory", "MSG50", "")
-                rs = New ADODB.Recordset
-                rs.Open("Delete FROM spr_cart WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                rs = Nothing
-
-
-            Case objIniFile.GetString("frmDirectory", "MSG51", "")
-                rs = New ADODB.Recordset
-                rs.Open("Delete FROM spr_other WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                rs = Nothing
-
-            Case objIniFile.GetString("frmDirectory", "MSG52", "")
-                rs = New ADODB.Recordset
-                rs.Open("Delete FROM SPR_OTH_DEV WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                rs = Nothing
-
-            Case objIniFile.GetString("frmDirectory", "MSG53", "")
-                rs = New ADODB.Recordset
-                rs.Open("Delete FROM SPR_LIC WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                rs = Nothing
-
-
-            Case objIniFile.GetString("frmDirectory", "MSG54", "")
-                rs = New ADODB.Recordset
-                rs.Open("Delete FROM SPR_TIP_PO WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                rs = Nothing
-
-
-            Case objIniFile.GetString("frmDirectory", "MSG55", "")
-                rs = New ADODB.Recordset
-                rs.Open("Delete FROM SPR_Complect WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                rs = Nothing
-
-
-            Case objIniFile.GetString("frmDirectory", "MSG56", "")
-                rs = New ADODB.Recordset
-                rs.Open("Delete FROM SPR_PO WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                rs = Nothing
-
-            Case objIniFile.GetString("frmDirectory", "MSG33", "")
-                rs = New ADODB.Recordset
-                rs.Open("Delete FROM SPR_CASE WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                rs = Nothing
-
-            Case objIniFile.GetString("frmDirectory", "MSG24", "")
-                rs = New ADODB.Recordset
-                rs.Open("Delete FROM SPR_CREADER WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                rs = Nothing
-
-            Case objIniFile.GetString("frmDirectory", "MSG31", "")
-                rs = New ADODB.Recordset
-                rs.Open("Delete FROM SPR_BP WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                rs = Nothing
-
-            Case objIniFile.GetString("frmDirectory", "MSG36", "")
-                rs = New ADODB.Recordset
-                rs.Open("Delete FROM SPR_Master WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                rs = Nothing
-
-
-        End Select
-
-
-        btnDirAdd.Text = objIniFile.GetString("frmDirectory", "btnDirAdd", "")
-
-
-    End Sub
-
-
-    Private Sub lvDirectory_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lvDirectory.MouseUp
-
-    End Sub
-
-    Private Sub lvDirectory_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvDirectory.SelectedIndexChanged
-
-    End Sub
-
-    Private Sub cmbIcon_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbIcon.SelectedIndexChanged
-        'pbOtherICO.Image=
-
-        Dim s1 As Integer
-        s1 = cmbIcon.Text
-        'frmComputers.ilsCommands.ImageSize = New System.Drawing.Size(32, 32)
-
-
-        'Select Case sICONS
-
-        '    Case "32*32"
-
-        '        pbOtherICO.Image = frmComputers.ImageList11.Images(s1)
-
-        '    Case Else
-
-        '        pbOtherICO.Image = frmComputers.ilsCommands.Images(s1)
-
-        'End Select
-
-        pbOtherICO.Image = frmComputers.ilsCommands.Images(s1)
-
-        'frmMain.imglist_cont.ListImages(s1).Picture
-    End Sub
-
-    Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
-        Me.Cursor = Cursors.WaitCursor
-
-        Call LoadSPR()
-
-        Me.Cursor = Cursors.Default
-        Me.Close()
-
-
-    End Sub
-
-    Private Sub btnCancell_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancell.Click
-        Dim objIniFile As New IniFile(sLANGPATH)
-        eDTI = False
-
-        btnDirAdd.Text = objIniFile.GetString("frmDirectory", "btnDirAdd", "")
-
-        cmbName.Text = ""
-        cmbName2.Text = ""
-        txtName.Text = ""
-        cmbName3.Text = ""
-        txtMemo.Text = ""
-        cmb1.Text = ""
-        cmb2.Text = ""
-        cmbIcon.Text = ""
-        chkVisibleSTR.Checked = False
-
-
+    Private Sub CheckBox2_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CheckBox2.CheckedChanged
+        If CheckBox2.Checked = True Then lvDirectory.CheckBoxes = True
+        If CheckBox2.Checked = False Then lvDirectory.CheckBoxes = False
     End Sub
 End Class

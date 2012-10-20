@@ -22,23 +22,22 @@ Partial Class frmSoftware
     'Не изменяйте ее в редакторе исходного кода.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmSoftware))
         Me.gbTree = New System.Windows.Forms.GroupBox()
         Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
         Me.treebranche = New System.Windows.Forms.ComboBox()
-        Me.btnSearch = New System.Windows.Forms.Button()
         Me.txtSearch = New System.Windows.Forms.TextBox()
         Me.lstGroups = New System.Windows.Forms.TreeView()
+        Me.ToolStrip2 = New System.Windows.Forms.ToolStrip()
+        Me.btnSearch = New System.Windows.Forms.ToolStripButton()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.gbSoftware = New System.Windows.Forms.GroupBox()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.cmbSoftware = New System.Windows.Forms.ComboBox()
         Me.lstSoftware = New System.Windows.Forms.ListView()
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
-        Me.btnCancel = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.btnDelete = New System.Windows.Forms.Button()
         Me.cmbTipLicense = New System.Windows.Forms.ComboBox()
-        Me.btnAdd = New System.Windows.Forms.Button()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.cmbTipPo = New System.Windows.Forms.ComboBox()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -49,14 +48,25 @@ Partial Class frmSoftware
         Me.Label6 = New System.Windows.Forms.Label()
         Me.cmbSoftPr = New System.Windows.Forms.ComboBox()
         Me.Label7 = New System.Windows.Forms.Label()
+        Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+        Me.btnAdd = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.btnDelete = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.btnCancel = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
+        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.gbTree.SuspendLayout()
         Me.TableLayoutPanel3.SuspendLayout()
+        Me.ToolStrip2.SuspendLayout()
+        CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
         Me.gbSoftware.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
+        Me.ToolStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'gbTree
@@ -76,9 +86,9 @@ Partial Class frmSoftware
         Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 35.0!))
         Me.TableLayoutPanel3.Controls.Add(Me.treebranche, 0, 1)
-        Me.TableLayoutPanel3.Controls.Add(Me.btnSearch, 1, 0)
         Me.TableLayoutPanel3.Controls.Add(Me.txtSearch, 0, 0)
         Me.TableLayoutPanel3.Controls.Add(Me.lstGroups, 0, 2)
+        Me.TableLayoutPanel3.Controls.Add(Me.ToolStrip2, 1, 0)
         Me.TableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel3.Location = New System.Drawing.Point(3, 16)
         Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
@@ -99,14 +109,6 @@ Partial Class frmSoftware
         Me.treebranche.Size = New System.Drawing.Size(294, 21)
         Me.treebranche.TabIndex = 6
         '
-        'btnSearch
-        '
-        Me.btnSearch.Location = New System.Drawing.Point(268, 3)
-        Me.btnSearch.Name = "btnSearch"
-        Me.btnSearch.Size = New System.Drawing.Size(29, 24)
-        Me.btnSearch.TabIndex = 3
-        Me.btnSearch.UseVisualStyleBackColor = True
-        '
         'txtSearch
         '
         Me.txtSearch.Dock = System.Windows.Forms.DockStyle.Fill
@@ -125,6 +127,26 @@ Partial Class frmSoftware
         Me.lstGroups.Size = New System.Drawing.Size(294, 436)
         Me.lstGroups.TabIndex = 0
         '
+        'ToolStrip2
+        '
+        Me.ToolStrip2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ToolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
+        Me.ToolStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnSearch})
+        Me.ToolStrip2.Location = New System.Drawing.Point(265, 0)
+        Me.ToolStrip2.Name = "ToolStrip2"
+        Me.ToolStrip2.Size = New System.Drawing.Size(35, 30)
+        Me.ToolStrip2.TabIndex = 7
+        Me.ToolStrip2.Text = "ToolStrip2"
+        '
+        'btnSearch
+        '
+        Me.btnSearch.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.btnSearch.Image = CType(resources.GetObject("btnSearch.Image"), System.Drawing.Image)
+        Me.btnSearch.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnSearch.Name = "btnSearch"
+        Me.btnSearch.Size = New System.Drawing.Size(23, 20)
+        Me.btnSearch.Text = "ToolStripButton1"
+        '
         'SplitContainer1
         '
         Me.SplitContainer1.Dock = System.Windows.Forms.DockStyle.Fill
@@ -138,7 +160,7 @@ Partial Class frmSoftware
         'SplitContainer1.Panel2
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.gbSoftware)
-        Me.SplitContainer1.Size = New System.Drawing.Size(996, 521)
+        Me.SplitContainer1.Size = New System.Drawing.Size(997, 521)
         Me.SplitContainer1.SplitterDistance = 306
         Me.SplitContainer1.TabIndex = 2
         '
@@ -149,7 +171,7 @@ Partial Class frmSoftware
         Me.gbSoftware.Dock = System.Windows.Forms.DockStyle.Fill
         Me.gbSoftware.Location = New System.Drawing.Point(0, 0)
         Me.gbSoftware.Name = "gbSoftware"
-        Me.gbSoftware.Size = New System.Drawing.Size(686, 521)
+        Me.gbSoftware.Size = New System.Drawing.Size(687, 521)
         Me.gbSoftware.TabIndex = 0
         Me.gbSoftware.TabStop = False
         Me.gbSoftware.Text = "Установленное программное обеспечение"
@@ -164,11 +186,8 @@ Partial Class frmSoftware
         Me.TableLayoutPanel1.Controls.Add(Me.cmbSoftware, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.lstSoftware, 0, 7)
         Me.TableLayoutPanel1.Controls.Add(Me.CheckBox1, 3, 5)
-        Me.TableLayoutPanel1.Controls.Add(Me.btnCancel, 2, 6)
         Me.TableLayoutPanel1.Controls.Add(Me.Label2, 0, 1)
-        Me.TableLayoutPanel1.Controls.Add(Me.btnDelete, 1, 6)
         Me.TableLayoutPanel1.Controls.Add(Me.cmbTipLicense, 1, 1)
-        Me.TableLayoutPanel1.Controls.Add(Me.btnAdd, 0, 6)
         Me.TableLayoutPanel1.Controls.Add(Me.Label3, 2, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.cmbTipPo, 3, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.Label4, 0, 2)
@@ -179,6 +198,8 @@ Partial Class frmSoftware
         Me.TableLayoutPanel1.Controls.Add(Me.Label6, 2, 4)
         Me.TableLayoutPanel1.Controls.Add(Me.cmbSoftPr, 2, 3)
         Me.TableLayoutPanel1.Controls.Add(Me.Label7, 0, 4)
+        Me.TableLayoutPanel1.Controls.Add(Me.ToolStrip1, 0, 6)
+        Me.TableLayoutPanel1.Controls.Add(Me.CheckBox2, 2, 6)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(3, 16)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
@@ -191,7 +212,7 @@ Partial Class frmSoftware
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(680, 502)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(681, 502)
         Me.TableLayoutPanel1.TabIndex = 19
         '
         'cmbSoftware
@@ -203,21 +224,20 @@ Partial Class frmSoftware
         Me.cmbSoftware.FormattingEnabled = True
         Me.cmbSoftware.Location = New System.Drawing.Point(3, 3)
         Me.cmbSoftware.Name = "cmbSoftware"
-        Me.cmbSoftware.Size = New System.Drawing.Size(674, 21)
+        Me.cmbSoftware.Size = New System.Drawing.Size(675, 21)
         Me.cmbSoftware.TabIndex = 1
         '
         'lstSoftware
         '
-        Me.lstSoftware.CheckBoxes = True
         Me.TableLayoutPanel1.SetColumnSpan(Me.lstSoftware, 4)
         Me.lstSoftware.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lstSoftware.FullRowSelect = True
         Me.lstSoftware.GridLines = True
         Me.lstSoftware.HideSelection = False
-        Me.lstSoftware.Location = New System.Drawing.Point(3, 165)
+        Me.lstSoftware.Location = New System.Drawing.Point(3, 161)
         Me.lstSoftware.MultiSelect = False
         Me.lstSoftware.Name = "lstSoftware"
-        Me.lstSoftware.Size = New System.Drawing.Size(674, 334)
+        Me.lstSoftware.Size = New System.Drawing.Size(675, 338)
         Me.lstSoftware.TabIndex = 17
         Me.lstSoftware.UseCompatibleStateImageBehavior = False
         Me.lstSoftware.View = System.Windows.Forms.View.Details
@@ -228,19 +248,10 @@ Partial Class frmSoftware
         Me.CheckBox1.AutoSize = True
         Me.CheckBox1.Location = New System.Drawing.Point(545, 111)
         Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(132, 17)
+        Me.CheckBox1.Size = New System.Drawing.Size(133, 17)
         Me.CheckBox1.TabIndex = 18
         Me.CheckBox1.Text = "Беcсрочно"
         Me.CheckBox1.UseVisualStyleBackColor = True
-        '
-        'btnCancel
-        '
-        Me.btnCancel.Location = New System.Drawing.Point(396, 136)
-        Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(75, 23)
-        Me.btnCancel.TabIndex = 16
-        Me.btnCancel.Text = "Отмена"
-        Me.btnCancel.UseVisualStyleBackColor = True
         '
         'Label2
         '
@@ -252,15 +263,6 @@ Partial Class frmSoftware
         Me.Label2.TabIndex = 2
         Me.Label2.Text = "Тип лицензии:"
         '
-        'btnDelete
-        '
-        Me.btnDelete.Location = New System.Drawing.Point(180, 136)
-        Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(75, 23)
-        Me.btnDelete.TabIndex = 15
-        Me.btnDelete.Text = "Удалить"
-        Me.btnDelete.UseVisualStyleBackColor = True
-        '
         'cmbTipLicense
         '
         Me.cmbTipLicense.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
@@ -271,15 +273,6 @@ Partial Class frmSoftware
         Me.cmbTipLicense.Name = "cmbTipLicense"
         Me.cmbTipLicense.Size = New System.Drawing.Size(210, 21)
         Me.cmbTipLicense.TabIndex = 3
-        '
-        'btnAdd
-        '
-        Me.btnAdd.Location = New System.Drawing.Point(3, 136)
-        Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(75, 23)
-        Me.btnAdd.TabIndex = 14
-        Me.btnAdd.Text = "Добавить"
-        Me.btnAdd.UseVisualStyleBackColor = True
         '
         'Label3
         '
@@ -299,7 +292,7 @@ Partial Class frmSoftware
         Me.cmbTipPo.FormattingEnabled = True
         Me.cmbTipPo.Location = New System.Drawing.Point(545, 30)
         Me.cmbTipPo.Name = "cmbTipPo"
-        Me.cmbTipPo.Size = New System.Drawing.Size(132, 21)
+        Me.cmbTipPo.Size = New System.Drawing.Size(133, 21)
         Me.cmbTipPo.TabIndex = 5
         '
         'Label4
@@ -364,7 +357,7 @@ Partial Class frmSoftware
         Me.cmbSoftPr.FormattingEnabled = True
         Me.cmbSoftPr.Location = New System.Drawing.Point(396, 70)
         Me.cmbSoftPr.Name = "cmbSoftPr"
-        Me.cmbSoftPr.Size = New System.Drawing.Size(281, 21)
+        Me.cmbSoftPr.Size = New System.Drawing.Size(282, 21)
         Me.cmbSoftPr.TabIndex = 9
         '
         'Label7
@@ -376,6 +369,70 @@ Partial Class frmSoftware
         Me.Label7.Size = New System.Drawing.Size(171, 13)
         Me.Label7.TabIndex = 10
         Me.Label7.Text = "Дата приобретения (установки):"
+        '
+        'ToolStrip1
+        '
+        Me.TableLayoutPanel1.SetColumnSpan(Me.ToolStrip1, 2)
+        Me.ToolStrip1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ToolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnAdd, Me.ToolStripSeparator1, Me.btnDelete, Me.ToolStripSeparator2, Me.btnCancel, Me.ToolStripSeparator3})
+        Me.ToolStrip1.Location = New System.Drawing.Point(0, 133)
+        Me.ToolStrip1.Name = "ToolStrip1"
+        Me.ToolStrip1.Size = New System.Drawing.Size(393, 25)
+        Me.ToolStrip1.TabIndex = 20
+        Me.ToolStrip1.Text = "ToolStrip1"
+        '
+        'btnAdd
+        '
+        Me.btnAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.btnAdd.Image = CType(resources.GetObject("btnAdd.Image"), System.Drawing.Image)
+        Me.btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnAdd.Name = "btnAdd"
+        Me.btnAdd.Size = New System.Drawing.Size(63, 22)
+        Me.btnAdd.Text = "Добавить"
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 25)
+        '
+        'btnDelete
+        '
+        Me.btnDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.btnDelete.Image = CType(resources.GetObject("btnDelete.Image"), System.Drawing.Image)
+        Me.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.Size = New System.Drawing.Size(55, 22)
+        Me.btnDelete.Text = "Удалить"
+        '
+        'ToolStripSeparator2
+        '
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 25)
+        '
+        'btnCancel
+        '
+        Me.btnCancel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.btnCancel.Image = CType(resources.GetObject("btnCancel.Image"), System.Drawing.Image)
+        Me.btnCancel.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(53, 22)
+        Me.btnCancel.Text = "Отмена"
+        '
+        'ToolStripSeparator3
+        '
+        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(6, 25)
+        '
+        'CheckBox2
+        '
+        Me.CheckBox2.AutoSize = True
+        Me.CheckBox2.Location = New System.Drawing.Point(396, 136)
+        Me.CheckBox2.Name = "CheckBox2"
+        Me.CheckBox2.Size = New System.Drawing.Size(127, 17)
+        Me.CheckBox2.TabIndex = 19
+        Me.CheckBox2.Text = "Массовое удаление"
+        Me.CheckBox2.UseVisualStyleBackColor = True
         '
         'Label1
         '
@@ -390,7 +447,7 @@ Partial Class frmSoftware
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(996, 521)
+        Me.ClientSize = New System.Drawing.Size(997, 521)
         Me.Controls.Add(Me.SplitContainer1)
         Me.MinimumSize = New System.Drawing.Size(1012, 559)
         Me.Name = "frmSoftware"
@@ -399,18 +456,22 @@ Partial Class frmSoftware
         Me.gbTree.ResumeLayout(False)
         Me.TableLayoutPanel3.ResumeLayout(False)
         Me.TableLayoutPanel3.PerformLayout()
+        Me.ToolStrip2.ResumeLayout(False)
+        Me.ToolStrip2.PerformLayout()
         Me.SplitContainer1.Panel1.ResumeLayout(False)
         Me.SplitContainer1.Panel2.ResumeLayout(False)
+        CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer1.ResumeLayout(False)
         Me.gbSoftware.ResumeLayout(False)
         Me.gbSoftware.PerformLayout()
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.TableLayoutPanel1.PerformLayout()
+        Me.ToolStrip1.ResumeLayout(False)
+        Me.ToolStrip1.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
     Friend WithEvents gbTree As System.Windows.Forms.GroupBox
-    Friend WithEvents btnSearch As System.Windows.Forms.Button
     Friend WithEvents txtSearch As System.Windows.Forms.TextBox
     Friend WithEvents lstGroups As System.Windows.Forms.TreeView
     Friend WithEvents SplitContainer1 As System.Windows.Forms.SplitContainer
@@ -425,9 +486,6 @@ Partial Class frmSoftware
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents cmbSoftPr As System.Windows.Forms.ComboBox
     Friend WithEvents Label5 As System.Windows.Forms.Label
-    Friend WithEvents btnCancel As System.Windows.Forms.Button
-    Friend WithEvents btnDelete As System.Windows.Forms.Button
-    Friend WithEvents btnAdd As System.Windows.Forms.Button
     Friend WithEvents dtGok As System.Windows.Forms.DateTimePicker
     Friend WithEvents DTInstall As System.Windows.Forms.DateTimePicker
     Friend WithEvents Label6 As System.Windows.Forms.Label
@@ -437,4 +495,14 @@ Partial Class frmSoftware
     Friend WithEvents TableLayoutPanel3 As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents TableLayoutPanel1 As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents treebranche As System.Windows.Forms.ComboBox
+    Friend WithEvents CheckBox2 As System.Windows.Forms.CheckBox
+    Friend WithEvents ToolStrip1 As System.Windows.Forms.ToolStrip
+    Friend WithEvents btnAdd As System.Windows.Forms.ToolStripButton
+    Friend WithEvents btnDelete As System.Windows.Forms.ToolStripButton
+    Friend WithEvents btnCancel As System.Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents ToolStripSeparator2 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents ToolStripSeparator3 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents ToolStrip2 As System.Windows.Forms.ToolStrip
+    Friend WithEvents btnSearch As System.Windows.Forms.ToolStripButton
 End Class

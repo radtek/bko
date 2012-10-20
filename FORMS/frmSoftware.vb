@@ -389,7 +389,9 @@ FoundiR:
 
         If lstGroups.Nodes.Count = 0 Then
 
-           Me.lstGroups.BeginInvoke(New MethodInvoker(AddressOf R_T_LOAD_1))
+            'Dim newThread1 As New Thread(AddressOf R_T_LOAD_1)
+            'newThread1.Start()
+            Me.BeginInvoke(New MethodInvoker(AddressOf R_T_LOAD_1))
 
         End If
 
@@ -665,90 +667,20 @@ A:
 
     End Sub
 
-    Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
-        Dim LNGIniFile As New IniFile(sLANGPATH)
-        btnAdd.Text = LNGIniFile.GetString("frmSoftware", "MSG2", "")
-        cmbSoftware.Text = ""
-        cmbTipLicense.Text = ""
-        cmbTipPo.Text = ""
-        txtLicKey.Text = ""
-        cmbSoftPr.Text = ""
-        DTInstall.Value = Date.Today
-        dtGok.Value = Date.Today
-
-
-
-    End Sub
-
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
         Me.Cursor = Cursors.WaitCursor
 
-        Dim newThread5 As New Thread(AddressOf R_T_LOAD_1)
-        newThread5.Start()
+        'Dim newThread3 As New Thread(AddressOf R_T_LOAD_1)
+        'newThread3.Start()
+
+        Me.BeginInvoke(New MethodInvoker(AddressOf R_T_LOAD_1))
 
         txtSearch.Text = ""
+
+        Application.DoEvents()
         Me.Cursor = Cursors.Default
     End Sub
 
-    Private Sub btnDelete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDelete.Click
-
-        If lstSoftware.Items.Count = 0 Then Exit Sub
-
-        Dim z As Integer
-
-        For z = 0 To lstSoftware.SelectedItems.Count - 1
-            rCOUNT = (lstSoftware.SelectedItems(z).Text)
-        Next
-
-
-        Dim intj As Integer = 0
-        Dim intj1 As Integer = 0
-
-        lstSoftware.Select()
-
-        For intj = 0 To lstSoftware.Items.Count - 1
-
-            lstSoftware.Items(intj).Selected = True
-            lstSoftware.Items(intj).EnsureVisible()
-
-            If lstSoftware.Items(intj).Checked = True Then
-
-                intj1 = intj1 + 1
-
-            End If
-
-        Next
-
-
-
-        If intj1 > 0 Then
-
-            If MsgBox("Вы собираетесь удалить П.О. - " & intj1 & " шт." & vbNewLine & "продолжить?", MsgBoxStyle.YesNo, ProGramName) = MsgBoxResult.Yes Then
-                lstSoftware.Select()
-
-                For intj = 0 To lstSoftware.Items.Count - 1
-
-                    lstSoftware.Items(intj).Selected = True
-                    lstSoftware.Items(intj).EnsureVisible()
-
-                    If lstSoftware.Items(intj).Checked = True Then
-
-
-                        Call DELETE_SOFT()
-
-                    End If
-
-                Next
-            End If
-        Else
-
-            Call DELETE_SOFT(rCOUNT)
-
-        End If
-
-        Call LOAD_SOFT(sCOUNT, Me.lstSoftware)
-
-    End Sub
 
     Private Sub DELETE_SOFT(Optional ByVal ssid As Integer = 0)
         Dim z As Integer
@@ -773,10 +705,81 @@ A:
 
     End Sub
 
+    Private Sub cmbSoftware_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbSoftware.SelectedIndexChanged
+        On Error Resume Next
+        Dim rs As ADODB.Recordset
+        Dim sSQL As String
+        Dim uNI As String
+        rs = New ADODB.Recordset
+        cmbTipPo.Text = ""
+        cmbSoftPr.Text = ""
+
+
+        sSQL = "SELECT * FROM SPR_PO WHERE Name = '" & cmbSoftware.Text & "'"
+
+        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+        With rs
+
+            If Not IsDBNull(.Fields("proizv").Value) Then uNI = .Fields("proizv").Value
+            If Not IsDBNull(.Fields("A").Value) Then cmbTipPo.Text = .Fields("A").Value
+
+            Dim PROYZV As ADODB.Recordset
+            PROYZV = New ADODB.Recordset
+            PROYZV.Open("SELECT * FROM SPR_PROIZV WHERE iD=" & uNI, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+            With PROYZV
+                cmbSoftPr.Text = .Fields("proizv").Value
+            End With
+            PROYZV.Close()
+            PROYZV = Nothing
+
+        End With
+
+        rs.Close()
+        rs = Nothing
+    End Sub
+
+    Private Sub lstGroups_NodeMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.TreeNodeMouseClickEventArgs) Handles lstGroups.NodeMouseClick
+
+        '#############################################
+        'Выделение по правому клику мышкой
+        '#############################################
+
+        If e.Button = Windows.Forms.MouseButtons.Right Then
+            Me.lstGroups.SelectedNode = e.Node
+        End If
+
+    End Sub
+
+
+    Private Sub treebranche_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles treebranche.SelectedIndexChanged
+
+
+
+        Dim objIniFile As New IniFile(PrPath & "base.ini")
+        objIniFile.WriteString("General", "branche", treebranche.Text)
+
+        If frmComputers.OneStart = 0 Then Exit Sub
+
+        'Dim newThread2 As New Thread(AddressOf R_T_LOAD_1)
+        'newThread2.Start()
+        Me.BeginInvoke(New MethodInvoker(AddressOf R_T_LOAD_1))
+
+    End Sub
+
+    Private Sub CheckBox2_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CheckBox2.CheckedChanged
+        If CheckBox2.Checked = True Then lstSoftware.CheckBoxes = True
+        If CheckBox2.Checked = False Then lstSoftware.CheckBoxes = False
+
+    End Sub
 
     Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
 
         On Error GoTo err_
+
+
+        If Len(cmbSoftware.Text) = 0 Then Exit Sub
 
         If sCOUNT = 0 Or Len(sCOUNT) = 0 Then Exit Sub
 
@@ -848,66 +851,78 @@ err_:
         MsgBox(Err.Description)
     End Sub
 
-    Private Sub cmbSoftware_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbSoftware.SelectedIndexChanged
-        On Error Resume Next
-        Dim rs As ADODB.Recordset
-        Dim sSQL As String
-        Dim uNI As String
-        rs = New ADODB.Recordset
-        cmbTipPo.Text = ""
-        cmbSoftPr.Text = ""
+    Private Sub btnDelete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDelete.Click
+
+        If lstSoftware.Items.Count = 0 Then Exit Sub
+
+        Dim z As Integer
+
+        For z = 0 To lstSoftware.SelectedItems.Count - 1
+            rCOUNT = (lstSoftware.SelectedItems(z).Text)
+        Next
 
 
-        sSQL = "SELECT * FROM SPR_PO WHERE Name = '" & cmbSoftware.Text & "'"
+        Dim intj As Integer = 0
+        Dim intj1 As Integer = 0
 
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        lstSoftware.Select()
 
-        With rs
+        For intj = 0 To lstSoftware.Items.Count - 1
 
-            If Not IsDBNull(.Fields("proizv").Value) Then uNI = .Fields("proizv").Value
-            If Not IsDBNull(.Fields("A").Value) Then cmbTipPo.Text = .Fields("A").Value
+            lstSoftware.Items(intj).Selected = True
+            lstSoftware.Items(intj).EnsureVisible()
 
-            Dim PROYZV As ADODB.Recordset
-            PROYZV = New ADODB.Recordset
-            PROYZV.Open("SELECT * FROM SPR_PROIZV WHERE iD=" & uNI, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            If lstSoftware.Items(intj).Checked = True Then
 
-            With PROYZV
-                cmbSoftPr.Text = .Fields("proizv").Value
-            End With
-            PROYZV.Close()
-            PROYZV = Nothing
+                intj1 = intj1 + 1
 
-        End With
+            End If
 
-        rs.Close()
-        rs = Nothing
-    End Sub
+        Next
 
-    Private Sub lstGroups_NodeMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.TreeNodeMouseClickEventArgs) Handles lstGroups.NodeMouseClick
 
-        '#############################################
-        'Выделение по правому клику мышкой
-        '#############################################
 
-        If e.Button = Windows.Forms.MouseButtons.Right Then
-            Me.lstGroups.SelectedNode = e.Node
+        If intj1 > 0 Then
+
+            lstSoftware.Select()
+
+            For intj = 0 To lstSoftware.Items.Count - 1
+
+                lstSoftware.Items(intj).Selected = True
+                lstSoftware.Items(intj).EnsureVisible()
+
+                If lstSoftware.Items(intj).Checked = True Then
+
+
+                    Call DELETE_SOFT()
+
+                End If
+
+            Next
+
+        Else
+
+            Call DELETE_SOFT(rCOUNT)
+
         End If
 
-    End Sub
-
-
-    Private Sub treebranche_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles treebranche.SelectedIndexChanged
-
-
-
-        Dim objIniFile As New IniFile(PrPath & "base.ini")
-        objIniFile.WriteString("General", "branche", treebranche.Text)
-
-        If frmComputers.OneStart = 0 Then Exit Sub
-
-        Dim newThread5 As New Thread(AddressOf R_T_LOAD_1)
-        newThread5.Start()
-
+        Call LOAD_SOFT(sCOUNT, Me.lstSoftware)
 
     End Sub
+
+    Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
+        Dim LNGIniFile As New IniFile(sLANGPATH)
+        btnAdd.Text = LNGIniFile.GetString("frmSoftware", "MSG2", "")
+        cmbSoftware.Text = ""
+        cmbTipLicense.Text = ""
+        cmbTipPo.Text = ""
+        txtLicKey.Text = ""
+        cmbSoftPr.Text = ""
+        DTInstall.Value = Date.Today
+        dtGok.Value = Date.Today
+
+
+
+    End Sub
+
 End Class
