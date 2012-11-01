@@ -87,9 +87,9 @@ Public Class frmComputers
         ' If MsgBox("Обновить дерево?", MsgBoxStyle.YesNo, ProGramName) = MsgBoxResult.Yes Then
 
         lstGroups.Nodes.Clear()
-        Dim newThread5 As New Thread(AddressOf R_T_LOAD)
-        newThread5.Start()
-
+        'Dim newThread5 As New Thread(AddressOf R_T_LOAD)
+        'newThread5.Start()
+        Me.BeginInvoke(New MethodInvoker(AddressOf R_T_LOAD))
 
         'Else
 
@@ -97,16 +97,6 @@ Public Class frmComputers
 
 
         Me.Cursor = Cursors.Default
-
-    End Sub
-
-    Private Sub treebranche_Click(sender As Object, e As System.EventArgs) Handles treebranche.Click
-
-    End Sub
-
-    Private Sub treebranche_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles treebranche.SelectedIndexChanged
-
-      
 
     End Sub
 
@@ -153,10 +143,10 @@ Public Class frmComputers
         'Справочники
         'Call LoadSPR()
 
-        Dim newThread2 As New Thread(AddressOf LoadSPR_1)
-        newThread2.Start()
+        'Dim newThread2 As New Thread(AddressOf LoadSPR_1)
+        'newThread2.Start()
 
-
+        Me.BeginInvoke(New MethodInvoker(AddressOf LoadSPR_1))
 
         uname = objIniFile.GetString("General", "RAZDEL", "0")
 
@@ -354,15 +344,9 @@ Public Class frmComputers
         ToolTip1.SetToolTip(txtSoc2, "Сокет")
         ToolTip1.SetToolTip(txtSoc3, "Сокет")
         ToolTip1.SetToolTip(txtSoc4, "Сокет")
-        'PROizV1
-        ToolTip1.SetToolTip(PROizV1, "Производитель")
-        ToolTip1.SetToolTip(PROizV2, "Производитель")
-        ToolTip1.SetToolTip(PROizV3, "Производитель")
-        ToolTip1.SetToolTip(PROizV4, "Производитель")
 
         ToolTip1.SetToolTip(cmbMB, "Материнская плата, модель.")
         ToolTip1.SetToolTip(txtChip, "Чипсет материнской платы.")
-        ToolTip1.SetToolTip(PROizV5, "Производитель")
         ToolTip1.SetToolTip(txtSN_MB, "серийный номер")
 
         ToolTip1.SetToolTip(cmbRAM1, "Модуль памяти.")
@@ -375,16 +359,6 @@ Public Class frmComputers
         ToolTip1.SetToolTip(txtRamS3, "Тип и Частота")
         ToolTip1.SetToolTip(txtRamS4, "Тип и Частота")
 
-        ToolTip1.SetToolTip(txtRamSN1, "Серийный номер")
-        ToolTip1.SetToolTip(txtRamSN2, "Серийный номер")
-        ToolTip1.SetToolTip(txtRamSN3, "Серийный номер")
-        ToolTip1.SetToolTip(txtRamSN4, "Серийный номер")
-
-        ToolTip1.SetToolTip(PROizV6, "Производитель")
-        ToolTip1.SetToolTip(PROizV7, "Производитель")
-        ToolTip1.SetToolTip(PROizV8, "Производитель")
-        ToolTip1.SetToolTip(PROizV9, "Производитель")
-
         ToolTip1.SetToolTip(cmbHDD1, "Жесткий диск")
         ToolTip1.SetToolTip(cmbHDD2, "Жесткий диск")
         ToolTip1.SetToolTip(cmbHDD3, "Жесткий диск")
@@ -395,81 +369,126 @@ Public Class frmComputers
         ToolTip1.SetToolTip(txtHDDo3, "Объем жесткого диска")
         ToolTip1.SetToolTip(txtHDDo4, "Объем жесткого диска")
 
-        ToolTip1.SetToolTip(txtHDDsN1, "Серийный номер")
-        ToolTip1.SetToolTip(txtHDDsN2, "Серийный номер")
-        ToolTip1.SetToolTip(txtHDDsN3, "Серийный номер")
-        ToolTip1.SetToolTip(txtHDDsN4, "Серийный номер")
-
-        ToolTip1.SetToolTip(PROizV10, "Производитель")
-        ToolTip1.SetToolTip(PROizV11, "Производитель")
-        ToolTip1.SetToolTip(PROizV12, "Производитель")
-        ToolTip1.SetToolTip(PROizV13, "Производитель")
-
         ToolTip1.SetToolTip(cmbSVGA1, "Видеокарта, модель")
-        ToolTip1.SetToolTip(txtSVGAr1, "Объем памяти")
-        ToolTip1.SetToolTip(txtSVGAs1, "Серийный номер")
-        ToolTip1.SetToolTip(PROizV14, "Производитель")
+        ToolTip1.SetToolTip(txtSVGAr1, "объем памяти")
 
         ToolTip1.SetToolTip(cmbSVGA2, "Видеокарта, модель")
-        ToolTip1.SetToolTip(txtSVGAr2, "Объем памяти")
-        ToolTip1.SetToolTip(txtSVGAs2, "Серийный номер")
-        ToolTip1.SetToolTip(PROizV15, "Производитель")
+        ToolTip1.SetToolTip(txtSVGAr2, "объем памяти")
 
         ToolTip1.SetToolTip(cmbSound, "Звуковая карта, модель")
         ToolTip1.SetToolTip(txtSoundB, "Чип")
-        ToolTip1.SetToolTip(txtSoundS, "Серийный номер")
-        ToolTip1.SetToolTip(PROizV16, "Производитель")
 
         ToolTip1.SetToolTip(cmbOPTIC1, "Оптический привод, модель")
         ToolTip1.SetToolTip(txtOPTICs1, "Скорость чтения-записи")
-        ToolTip1.SetToolTip(txtOPTICsn1, "Серийный номер")
-        ToolTip1.SetToolTip(PROizV17, "Производитель")
 
         ToolTip1.SetToolTip(cmbOPTIC2, "Оптический привод, модель")
         ToolTip1.SetToolTip(txtOPTICs2, "Скорость чтения-записи")
-        ToolTip1.SetToolTip(txtOPTICsn2, "Серийный номер")
-        ToolTip1.SetToolTip(PROizV18, "Производитель")
 
         ToolTip1.SetToolTip(cmbOPTIC3, "Оптический привод, модель")
         ToolTip1.SetToolTip(txtOPTICs3, "Скорость чтения-записи")
-        ToolTip1.SetToolTip(txtOPTICsn3, "Серийный номер")
-        ToolTip1.SetToolTip(PROizV19, "Производитель")
-
 
         ToolTip1.SetToolTip(cmbNET1, "Сетевой адаптер, модель")
         ToolTip1.SetToolTip(txtNETip1, "IP адрес")
         ToolTip1.SetToolTip(txtNETmac1, "MAC адрес")
-        ToolTip1.SetToolTip(PROizV20, "Производитель")
 
         ToolTip1.SetToolTip(cmbNET2, "Сетевой адаптер, модель")
         ToolTip1.SetToolTip(txtNETip2, "IP адрес")
         ToolTip1.SetToolTip(txtNETmac2, "MAC адрес")
-        ToolTip1.SetToolTip(PROizV21, "Производитель")
 
         ToolTip1.SetToolTip(cmbMon1, "Монитор, модель")
         ToolTip1.SetToolTip(txtMon1Dum, "Диагональ")
-        ToolTip1.SetToolTip(txtMon1SN, "Серийный номер")
-        ToolTip1.SetToolTip(PROizV28, "Производитель")
 
         ToolTip1.SetToolTip(cmbMon2, "Монитор, модель")
         ToolTip1.SetToolTip(txtMon2Dum, "Диагональ")
-        ToolTip1.SetToolTip(txtMon2SN, "Серийный номер")
-        ToolTip1.SetToolTip(PROizV29, "Производитель")
 
         ToolTip1.SetToolTip(cmbPrinters1, "Принтер, модель")
-        ToolTip1.SetToolTip(txtPrint1SN, "Серийный номер")
         ToolTip1.SetToolTip(txtPrint1Port, "Порт подключения")
-        ToolTip1.SetToolTip(PROizV34, "Производитель")
 
         ToolTip1.SetToolTip(cmbPrinters2, "Принтер, модель")
-        ToolTip1.SetToolTip(txtPrint2SN, "Серийный номер")
         ToolTip1.SetToolTip(txtPrint2Port, "Порт подключения")
-        ToolTip1.SetToolTip(PROizV35, "Производитель")
 
         ToolTip1.SetToolTip(cmbPrinters3, "Принтер, модель")
-        ToolTip1.SetToolTip(txtPrint3SN, "Серийный номер")
         ToolTip1.SetToolTip(txtPrint3Port, "Порт подключения")
+
+        ToolTip1.SetToolTip(PROizV1, "Производитель")
+        ToolTip1.SetToolTip(PROizV2, "Производитель")
+        ToolTip1.SetToolTip(PROizV3, "Производитель")
+        ToolTip1.SetToolTip(PROizV4, "Производитель")
+        ToolTip1.SetToolTip(PROizV5, "Производитель")
+        ToolTip1.SetToolTip(PROizV6, "Производитель")
+        ToolTip1.SetToolTip(PROizV7, "Производитель")
+        ToolTip1.SetToolTip(PROizV8, "Производитель")
+        ToolTip1.SetToolTip(PROizV9, "Производитель")
+        ToolTip1.SetToolTip(PROizV10, "Производитель")
+        ToolTip1.SetToolTip(PROizV11, "Производитель")
+        ToolTip1.SetToolTip(PROizV12, "Производитель")
+        ToolTip1.SetToolTip(PROizV13, "Производитель")
+        ToolTip1.SetToolTip(PROizV14, "Производитель")
+        ToolTip1.SetToolTip(PROizV15, "Производитель")
+        ToolTip1.SetToolTip(PROizV16, "Производитель")
+        ToolTip1.SetToolTip(PROizV17, "Производитель")
+        ToolTip1.SetToolTip(PROizV18, "Производитель")
+        ToolTip1.SetToolTip(PROizV19, "Производитель")
+        ToolTip1.SetToolTip(PROizV20, "Производитель")
+        ToolTip1.SetToolTip(PROizV21, "Производитель")
+        ToolTip1.SetToolTip(PROizV22, "Производитель")
+        ToolTip1.SetToolTip(PROizV23, "Производитель")
+        ToolTip1.SetToolTip(PROizV24, "Производитель")
+        ToolTip1.SetToolTip(PROizV25, "Производитель")
+        ToolTip1.SetToolTip(PROizV26, "Производитель")
+        ToolTip1.SetToolTip(PROizV27, "Производитель")
+        ToolTip1.SetToolTip(PROizV28, "Производитель")
+        ToolTip1.SetToolTip(PROizV29, "Производитель")
+        ToolTip1.SetToolTip(PROizV30, "Производитель")
+        ToolTip1.SetToolTip(PROizV31, "Производитель")
+        ToolTip1.SetToolTip(PROizV32, "Производитель")
+        ToolTip1.SetToolTip(PROizV33, "Производитель")
+        ToolTip1.SetToolTip(PROizV34, "Производитель")
+        ToolTip1.SetToolTip(PROizV35, "Производитель")
         ToolTip1.SetToolTip(PROizV36, "Производитель")
+
+        ToolTip1.SetToolTip(PROiZV38, "Производитель")
+        ToolTip1.SetToolTip(PROiZV39, "Производитель")
+        ToolTip1.SetToolTip(PROiZV40, "Производитель")
+        ToolTip1.SetToolTip(PROizV41, "Производитель")
+        ToolTip1.SetToolTip(PROizV42, "Производитель")
+        ToolTip1.SetToolTip(PROizV43, "Производитель")
+
+
+        ToolTip1.SetToolTip(txtRamSN1, "Серийный номер")
+        ToolTip1.SetToolTip(txtRamSN2, "Серийный номер")
+        ToolTip1.SetToolTip(txtRamSN3, "Серийный номер")
+        ToolTip1.SetToolTip(txtRamSN4, "Серийный номер")
+        ToolTip1.SetToolTip(txtHDDsN1, "Серийный номер")
+        ToolTip1.SetToolTip(txtHDDsN2, "Серийный номер")
+        ToolTip1.SetToolTip(txtHDDsN3, "Серийный номер")
+        ToolTip1.SetToolTip(txtHDDsN4, "Серийный номер")
+        ToolTip1.SetToolTip(txtSVGAs1, "Серийный номер")
+        ToolTip1.SetToolTip(txtSVGAs2, "Серийный номер")
+        ToolTip1.SetToolTip(txtSoundS, "Серийный номер")
+        ToolTip1.SetToolTip(txtOPTICsn1, "Серийный номер")
+        ToolTip1.SetToolTip(txtOPTICsn2, "Серийный номер")
+        ToolTip1.SetToolTip(txtOPTICsn3, "Серийный номер")
+        ToolTip1.SetToolTip(txtMon1SN, "Серийный номер")
+        ToolTip1.SetToolTip(txtMon2SN, "Серийный номер")
+        ToolTip1.SetToolTip(txtPrint1SN, "Серийный номер")
+        ToolTip1.SetToolTip(txtPrint2SN, "Серийный номер")
+        ToolTip1.SetToolTip(txtPrint3SN, "Серийный номер")
+        ToolTip1.SetToolTip(txtSN, "Серийный номер")
+        ToolTip1.SetToolTip(txtCreader1, "Серийный номер")
+        ToolTip1.SetToolTip(txtModemSN, "Серийный номер")
+        ToolTip1.SetToolTip(txtCase1, "Серийный номер")
+        ToolTip1.SetToolTip(txtBP1, "Серийный номер")
+        ToolTip1.SetToolTip(txtUSBSN, "Серийный номер")
+        ToolTip1.SetToolTip(txtSNPCI, "Серийный номер")
+        ToolTip1.SetToolTip(txtSNSB, "Серийный номер")
+        ToolTip1.SetToolTip(txtKeybSN, "Серийный номер")
+        ToolTip1.SetToolTip(txtMouseSN, "Серийный номер")
+        ToolTip1.SetToolTip(txtAsistSN, "Серийный номер")
+        ToolTip1.SetToolTip(txtFilterSN, "Серийный номер")
+        ToolTip1.SetToolTip(txtSNIBP, "Серийный номер")
+        ToolTip1.SetToolTip(txtPRNSN, "Серийный номер")
+        ToolTip1.SetToolTip(txtOTHSN, "Серийный номер")
 
 
     End Sub
@@ -810,27 +829,34 @@ Error_:
 
                             'Call LOADt(d(1))
 
-
-                            Dim newThread1 As New Thread(AddressOf T_LOAD_T)
-                            newThread1.Start()
-                            'newThread1.Priority = 4
-
-                            Dim newThread2 As New Thread(AddressOf S_P_LOAD_t)
-                            newThread2.Start()
-
-
-                            Dim newThread3 As New Thread(AddressOf U_P_LOAD_t)
-                            newThread3.Start()
+                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf S_P_LOAD_t))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf U_P_LOAD_t))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
 
-                            Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
-                            newThread4.Start()
+                            'Dim newThread1 As New Thread(AddressOf T_LOAD_T)
+                            'newThread1.Start()
+                            ''newThread1.Priority = 4
 
-                            Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
-                            newThread5.Start()
+                            'Dim newThread2 As New Thread(AddressOf S_P_LOAD_t)
+                            'newThread2.Start()
 
-                            Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
-                            newThread6.Start()
+
+                            'Dim newThread3 As New Thread(AddressOf U_P_LOAD_t)
+                            'newThread3.Start()
+
+
+                            'Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
+                            'newThread4.Start()
+
+                            'Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
+                            'newThread5.Start()
+
+                            'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                            'newThread6.Start()
 
 
 
@@ -854,18 +880,23 @@ Error_:
                             'Call LOADp(d(1))
 
 
-                            Dim newThread3 As New Thread(AddressOf T_LOAD_T)
-                            newThread3.Start()
-                            'newThread3.Priority = 4
+                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
-                            Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
-                            newThread4.Start()
+                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T)
+                            'newThread3.Start()
+                            ''newThread3.Priority = 4
 
-                            Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
-                            newThread5.Start()
+                            'Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
+                            'newThread4.Start()
 
-                            Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
-                            newThread6.Start()
+                            'Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
+                            'newThread5.Start()
+
+                            'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                            'newThread6.Start()
 
 
 
@@ -885,20 +916,23 @@ Error_:
                             Label83.Visible = True
                             cmbPCL.Visible = True
 
+                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
+                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T)
+                            'newThread3.Start()
+                            ''newThread3.Priority = 4
 
-                            Dim newThread3 As New Thread(AddressOf T_LOAD_T)
-                            newThread3.Start()
-                            'newThread3.Priority = 4
+                            'Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
+                            'newThread4.Start()
 
-                            Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
-                            newThread4.Start()
+                            'Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
+                            'newThread5.Start()
 
-                            Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
-                            newThread5.Start()
-
-                            Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
-                            newThread6.Start()
+                            'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                            'newThread6.Start()
 
                             Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbPCL)
 
@@ -917,18 +951,24 @@ Error_:
                             cmbPCL.Visible = False
 
 
-                            Dim newThread3 As New Thread(AddressOf T_LOAD_T)
-                            newThread3.Start()
-                            'newThread3.Priority = 4
+                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
-                            Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
-                            newThread4.Start()
 
-                            Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
-                            newThread5.Start()
+                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T)
+                            'newThread3.Start()
+                            ''newThread3.Priority = 4
 
-                            Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
-                            newThread6.Start()
+                            'Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
+                            'newThread4.Start()
+
+                            'Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
+                            'newThread5.Start()
+
+                            'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                            'newThread6.Start()
 
                             'Call LOAD_PCL()
                         Case "OT"
@@ -954,18 +994,25 @@ Error_:
                             cmbOTHPCL.Visible = True
                             FillComboNET(Me.cmbOTHConnect, "name", "spr_other", "", False, True)
 
-                            Dim newThread3 As New Thread(AddressOf T_LOAD_T)
-                            newThread3.Start()
-                            'newThread3.Priority = 4
 
-                            Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
-                            newThread4.Start()
+                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
-                            Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
-                            newThread5.Start()
 
-                            Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
-                            newThread6.Start()
+                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T)
+                            'newThread3.Start()
+                            ''newThread3.Priority = 4
+
+                            'Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
+                            'newThread4.Start()
+
+                            'Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
+                            'newThread5.Start()
+
+                            'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                            'newThread6.Start()
 
 
                             Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL)
@@ -995,18 +1042,25 @@ Error_:
                             lblOTPCL.Visible = False
                             cmbOTHPCL.Visible = False
 
-                            Dim newThread3 As New Thread(AddressOf T_LOAD_T)
-                            newThread3.Start()
-                            'newThread3.Priority = 4
 
-                            Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
-                            newThread4.Start()
+                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
-                            Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
-                            newThread5.Start()
 
-                            Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
-                            newThread6.Start()
+                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T)
+                            'newThread3.Start()
+                            ''newThread3.Priority = 4
+
+                            'Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
+                            'newThread4.Start()
+
+                            'Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
+                            'newThread5.Start()
+
+                            'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                            'newThread6.Start()
 
                         Case "FAX"
                             CartrAddToolStripMenuItem.Visible = False
@@ -1030,18 +1084,25 @@ Error_:
                             lblOTPCL.Visible = False
                             cmbOTHPCL.Visible = False
 
-                            Dim newThread3 As New Thread(AddressOf T_LOAD_T)
-                            newThread3.Start()
-                            'newThread3.Priority = 4
 
-                            Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
-                            newThread4.Start()
+                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
-                            Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
-                            newThread5.Start()
 
-                            Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
-                            newThread6.Start()
+                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T)
+                            'newThread3.Start()
+                            ''newThread3.Priority = 4
+
+                            'Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
+                            'newThread4.Start()
+
+                            'Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
+                            'newThread5.Start()
+
+                            'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                            'newThread6.Start()
 
                         Case "PHONE"
                             CartrAddToolStripMenuItem.Visible = False
@@ -1066,18 +1127,24 @@ Error_:
                             lblOTPCL.Visible = True
 
 
-                            Dim newThread3 As New Thread(AddressOf T_LOAD_T)
-                            newThread3.Start()
-                            'newThread3.Priority = 4
+                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
-                            Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
-                            newThread4.Start()
 
-                            Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
-                            newThread5.Start()
+                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T)
+                            'newThread3.Start()
+                            ''newThread3.Priority = 4
 
-                            Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
-                            newThread6.Start()
+                            'Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
+                            'newThread4.Start()
+
+                            'Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
+                            'newThread5.Start()
+
+                            'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                            'newThread6.Start()
 
                         Case "ZIP"
                             CartrAddToolStripMenuItem.Visible = False
@@ -1100,18 +1167,24 @@ Error_:
                             lblOTPCL.Visible = True
                             cmbOTHPCL.Visible = True
 
-                            Dim newThread3 As New Thread(AddressOf T_LOAD_T)
-                            newThread3.Start()
-                            'newThread3.Priority = 4
 
-                            Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
-                            newThread4.Start()
+                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
-                            Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
-                            newThread5.Start()
+                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T)
+                            'newThread3.Start()
+                            ''newThread3.Priority = 4
 
-                            Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
-                            newThread6.Start()
+                            'Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
+                            'newThread4.Start()
+
+                            'Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
+                            'newThread5.Start()
+
+                            'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                            'newThread6.Start()
 
                             Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL)
 
@@ -1136,18 +1209,24 @@ Error_:
                             lblOTPCL.Visible = True
                             cmbOTHPCL.Visible = True
 
-                            Dim newThread3 As New Thread(AddressOf T_LOAD_T)
-                            newThread3.Start()
-                            'newThread3.Priority = 4
 
-                            Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
-                            newThread4.Start()
+                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
-                            Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
-                            newThread5.Start()
+                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T)
+                            'newThread3.Start()
+                            ''newThread3.Priority = 4
 
-                            Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
-                            newThread6.Start()
+                            'Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
+                            'newThread4.Start()
+
+                            'Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
+                            'newThread5.Start()
+
+                            'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                            'newThread6.Start()
 
 
                             Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL)
@@ -1178,19 +1257,24 @@ Error_:
 
                             ' Call LOADmon(d(1))
 
+                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
-                            Dim newThread3 As New Thread(AddressOf T_LOAD_T)
-                            newThread3.Start()
-                            'newThread3.Priority = 4
 
-                            Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
-                            newThread4.Start()
+                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T)
+                            'newThread3.Start()
+                            ''newThread3.Priority = 4
 
-                            Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
-                            newThread5.Start()
+                            'Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
+                            'newThread4.Start()
 
-                            Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
-                            newThread6.Start()
+                            'Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
+                            'newThread5.Start()
+
+                            'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                            'newThread6.Start()
 
                             Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL)
 
@@ -1229,18 +1313,25 @@ Error_:
                             lblOTPCL.Visible = True
                             cmbOTHPCL.Visible = True
 
-                            Dim newThread3 As New Thread(AddressOf T_LOAD_T)
-                            newThread3.Start()
-                            'newThread3.Priority = 4
 
-                            Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
-                            newThread4.Start()
+                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
-                            Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
-                            newThread5.Start()
 
-                            Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
-                            newThread6.Start()
+                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T)
+                            'newThread3.Start()
+                            ''newThread3.Priority = 4
+
+                            'Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
+                            'newThread4.Start()
+
+                            'Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
+                            'newThread5.Start()
+
+                            'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                            'newThread6.Start()
 
                             Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL)
 
@@ -1264,18 +1355,24 @@ Error_:
                             lblOTPCL.Visible = True
                             cmbOTHPCL.Visible = True
 
-                            Dim newThread3 As New Thread(AddressOf T_LOAD_T)
-                            newThread3.Start()
-                            'newThread3.Priority = 4
 
-                            Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
-                            newThread4.Start()
+                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
-                            Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
-                            newThread5.Start()
+                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T)
+                            'newThread3.Start()
+                            ''newThread3.Priority = 4
 
-                            Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
-                            newThread6.Start()
+                            'Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
+                            'newThread4.Start()
+
+                            'Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
+                            'newThread5.Start()
+
+                            'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                            'newThread6.Start()
 
                             Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL)
 
@@ -1299,18 +1396,24 @@ Error_:
                             lblOTPCL.Visible = True
                             cmbOTHPCL.Visible = True
 
-                            Dim newThread3 As New Thread(AddressOf T_LOAD_T)
-                            newThread3.Start()
-                            'newThread3.Priority = 4
 
-                            Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
-                            newThread4.Start()
+                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
-                            Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
-                            newThread5.Start()
+                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T)
+                            'newThread3.Start()
+                            ''newThread3.Priority = 4
 
-                            Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
-                            newThread6.Start()
+                            'Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
+                            'newThread4.Start()
+
+                            'Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
+                            'newThread5.Start()
+
+                            'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                            'newThread6.Start()
 
                             Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL)
 
@@ -1334,18 +1437,24 @@ Error_:
                             lblOTPCL.Visible = True
                             cmbOTHPCL.Visible = True
 
-                            Dim newThread3 As New Thread(AddressOf T_LOAD_T)
-                            newThread3.Start()
-                            'newThread3.Priority = 4
 
-                            Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
-                            newThread4.Start()
+                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
-                            Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
-                            newThread5.Start()
+                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T)
+                            'newThread3.Start()
+                            ''newThread3.Priority = 4
 
-                            Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
-                            newThread6.Start()
+                            'Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
+                            'newThread4.Start()
+
+                            'Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
+                            'newThread5.Start()
+
+                            'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                            'newThread6.Start()
 
                             Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL)
 
@@ -1369,18 +1478,24 @@ Error_:
                             lblOTPCL.Visible = True
                             cmbOTHPCL.Visible = True
 
-                            Dim newThread3 As New Thread(AddressOf T_LOAD_T)
-                            newThread3.Start()
-                            'newThread3.Priority = 4
+                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
-                            Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
-                            newThread4.Start()
 
-                            Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
-                            newThread5.Start()
+                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T)
+                            'newThread3.Start()
+                            ''newThread3.Priority = 4
 
-                            Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
-                            newThread6.Start()
+                            'Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
+                            'newThread4.Start()
+
+                            'Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
+                            'newThread5.Start()
+
+                            'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                            'newThread6.Start()
 
                             Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL)
 
@@ -1404,18 +1519,24 @@ Error_:
                             lblOTPCL.Visible = True
                             cmbOTHPCL.Visible = True
 
-                            Dim newThread3 As New Thread(AddressOf T_LOAD_T)
-                            newThread3.Start()
-                            'newThread3.Priority = 4
+                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
-                            Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
-                            newThread4.Start()
 
-                            Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
-                            newThread5.Start()
+                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T)
+                            'newThread3.Start()
+                            ''newThread3.Priority = 4
 
-                            Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
-                            newThread6.Start()
+                            'Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
+                            'newThread4.Start()
+
+                            'Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
+                            'newThread5.Start()
+
+                            'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                            'newThread6.Start()
 
                             Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL)
                             '--------------VIP_Graff Добавление новой перефирии Конец------------------
@@ -1444,18 +1565,24 @@ Error_:
 
                             'Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
 
-                            Dim newThread3 As New Thread(AddressOf T_LOAD_T)
-                            newThread3.Start()
-                            'newThread3.Priority = 4
+                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
-                            Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
-                            newThread4.Start()
 
-                            Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
-                            newThread5.Start()
+                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T)
+                            'newThread3.Start()
+                            ''newThread3.Priority = 4
 
-                            Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
-                            newThread6.Start()
+                            'Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
+                            'newThread4.Start()
+
+                            'Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
+                            'newThread5.Start()
+
+                            'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                            'newThread6.Start()
 
                             ' Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL)
 
@@ -2086,8 +2213,11 @@ err_:
             REMOVE_TEHN(d(1))
             Me.lstGroups.Nodes.Remove(Me.lstGroups.SelectedNode)
 
-            Dim newThread1 As New Thread(AddressOf STAT_INF_1)
-            newThread1.Start()
+            'Dim newThread1 As New Thread(AddressOf STAT_INF_1)
+            'newThread1.Start()
+
+
+            Me.BeginInvoke(New MethodInvoker(AddressOf STAT_INF_1))
 
         Else
 
@@ -2395,14 +2525,17 @@ err_:
         rs = Nothing
 
 
-        Dim newThread1 As New Thread(AddressOf R_T_LOAD)
-        newThread1.Start()
+        'Dim newThread1 As New Thread(AddressOf R_T_LOAD)
+        'newThread1.Start()
 
+
+        Me.BeginInvoke(New MethodInvoker(AddressOf R_T_LOAD))
+        Me.BeginInvoke(New MethodInvoker(AddressOf STAT_INF_1))
 
         'RefFilTree(Me.lstGroups)
 
-        Dim newThread2 As New Thread(AddressOf STAT_INF_1)
-        newThread2.Start()
+        'Dim newThread2 As New Thread(AddressOf STAT_INF_1)
+        'newThread2.Start()
 
         Me.Cursor = Cursors.Default
         Exit Sub
@@ -3502,10 +3635,14 @@ err_:
 
                     SAVE_DRAG_DROP(Me.sCOUNT, sBranch_, sDepartment_, sOffice_, Me.lstGroups.SelectedNode.Text)
 
-                    Dim newThread1 As New Thread(AddressOf T_LOAD_T)
-                    newThread1.Start()
-                    Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
-                    newThread6.Start()
+
+                    Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                    Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
+
+                    'Dim newThread1 As New Thread(AddressOf T_LOAD_T)
+                    'newThread1.Start()
+                    'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                    'newThread6.Start()
 
                 Case "KOpir"
 
@@ -3514,10 +3651,14 @@ err_:
                     Me.cmbPRNOffice.Text = sOffice_
 
                     SAVE_DRAG_DROP(Me.sCOUNT, sBranch_, sDepartment_, sOffice_, Me.lstGroups.SelectedNode.Text)
-                    Dim newThread1 As New Thread(AddressOf T_LOAD_T)
-                    newThread1.Start()
-                    Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
-                    newThread6.Start()
+
+                    Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                    Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
+
+                    'Dim newThread1 As New Thread(AddressOf T_LOAD_T)
+                    'newThread1.Start()
+                    'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                    'newThread6.Start()
                 Case "Printer"
 
                     Me.cmbPRNFil.Text = sBranch_
@@ -3525,10 +3666,15 @@ err_:
                     Me.cmbPRNOffice.Text = sOffice_
 
                     SAVE_DRAG_DROP(Me.sCOUNT, sBranch_, sDepartment_, sOffice_, Me.lstGroups.SelectedNode.Text)
-                    Dim newThread1 As New Thread(AddressOf T_LOAD_T)
-                    newThread1.Start()
-                    Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
-                    newThread6.Start()
+
+
+                    Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                    Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
+
+                    'Dim newThread1 As New Thread(AddressOf T_LOAD_T)
+                    'newThread1.Start()
+                    'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                    'newThread6.Start()
                 Case "MFU"
 
                     Me.cmbPRNFil.Text = sBranch_
@@ -3536,10 +3682,14 @@ err_:
                     Me.cmbPRNOffice.Text = sOffice_
 
                     SAVE_DRAG_DROP(Me.sCOUNT, sBranch_, sDepartment_, sOffice_, Me.lstGroups.SelectedNode.Text)
-                    Dim newThread1 As New Thread(AddressOf T_LOAD_T)
-                    newThread1.Start()
-                    Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
-                    newThread6.Start()
+
+                    Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                    Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
+
+                    'Dim newThread1 As New Thread(AddressOf T_LOAD_T)
+                    'newThread1.Start()
+                    'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                    'newThread6.Start()
                 Case "NET"
 
                     Me.cmbNETBranch.Text = sBranch_
@@ -3563,10 +3713,15 @@ err_:
                     Me.cmbOTHOffice.Text = sOffice_
 
                     SAVE_DRAG_DROP(Me.sCOUNT, sBranch_, sDepartment_, sOffice_, Me.lstGroups.SelectedNode.Text)
-                    Dim newThread1 As New Thread(AddressOf T_LOAD_T)
-                    newThread1.Start()
-                    Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
-                    newThread6.Start()
+
+                    Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                    Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
+
+
+                    'Dim newThread1 As New Thread(AddressOf T_LOAD_T)
+                    'newThread1.Start()
+                    'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                    'newThread6.Start()
                 Case "PHOTO"
 
                     Me.cmbOTHFil.Text = sBranch_
@@ -3574,10 +3729,14 @@ err_:
                     Me.cmbOTHOffice.Text = sOffice_
 
                     SAVE_DRAG_DROP(Me.sCOUNT, sBranch_, sDepartment_, sOffice_, Me.lstGroups.SelectedNode.Text)
-                    Dim newThread1 As New Thread(AddressOf T_LOAD_T)
-                    newThread1.Start()
-                    Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
-                    newThread6.Start()
+
+                    Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                    Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
+
+                    'Dim newThread1 As New Thread(AddressOf T_LOAD_T)
+                    'newThread1.Start()
+                    'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                    'newThread6.Start()
                 Case "FAX"
 
                     Me.cmbOTHFil.Text = sBranch_
@@ -3585,10 +3744,14 @@ err_:
                     Me.cmbOTHOffice.Text = sOffice_
 
                     SAVE_DRAG_DROP(Me.sCOUNT, sBranch_, sDepartment_, sOffice_, Me.lstGroups.SelectedNode.Text)
-                    Dim newThread1 As New Thread(AddressOf T_LOAD_T)
-                    newThread1.Start()
-                    Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
-                    newThread6.Start()
+
+                    Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                    Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
+
+                    'Dim newThread1 As New Thread(AddressOf T_LOAD_T)
+                    'newThread1.Start()
+                    'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                    'newThread6.Start()
                 Case "ZIP"
 
                     Me.cmbOTHFil.Text = sBranch_
@@ -3596,10 +3759,14 @@ err_:
                     Me.cmbOTHOffice.Text = sOffice_
 
                     SAVE_DRAG_DROP(Me.sCOUNT, sBranch_, sDepartment_, sOffice_, Me.lstGroups.SelectedNode.Text)
-                    Dim newThread1 As New Thread(AddressOf T_LOAD_T)
-                    newThread1.Start()
-                    Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
-                    newThread6.Start()
+
+                    Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                    Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
+
+                    'Dim newThread1 As New Thread(AddressOf T_LOAD_T)
+                    'newThread1.Start()
+                    'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                    'newThread6.Start()
                 Case "SCANER"
 
                     Me.cmbOTHFil.Text = sBranch_
@@ -3607,10 +3774,14 @@ err_:
                     Me.cmbOTHOffice.Text = sOffice_
 
                     SAVE_DRAG_DROP(Me.sCOUNT, sBranch_, sDepartment_, sOffice_, Me.lstGroups.SelectedNode.Text)
-                    Dim newThread1 As New Thread(AddressOf T_LOAD_T)
-                    newThread1.Start()
-                    Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
-                    newThread6.Start()
+
+                    Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                    Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
+
+                    'Dim newThread1 As New Thread(AddressOf T_LOAD_T)
+                    'newThread1.Start()
+                    'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                    'newThread6.Start()
                 Case "OT"
 
                     Me.cmbOTHFil.Text = sBranch_
@@ -3620,62 +3791,92 @@ err_:
                     SAVE_DRAG_DROP(Me.sCOUNT, sBranch_, sDepartment_, sOffice_, Me.lstGroups.SelectedNode.Text)
                     '--------------VIP_Graff Добавление новой перефирии Конец------------------
 
-                    Dim newThread1 As New Thread(AddressOf T_LOAD_T)
-                    newThread1.Start()
-                    Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
-                    newThread6.Start()
+                    Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                    Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
+
+                    'Dim newThread1 As New Thread(AddressOf T_LOAD_T)
+                    'newThread1.Start()
+                    'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                    'newThread6.Start()
+
                 Case "USB"
                     Me.cmbOTHFil.Text = sBranch_
                     Me.cmbOTHDepart.Text = sDepartment_
                     Me.cmbOTHOffice.Text = sOffice_
                     SAVE_DRAG_DROP(Me.sCOUNT, sBranch_, sDepartment_, sOffice_, Me.lstGroups.SelectedNode.Text)
-                    Dim newThread1 As New Thread(AddressOf T_LOAD_T)
-                    newThread1.Start()
-                    Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
-                    newThread6.Start()
+
+                    Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                    Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
+
+                    'Dim newThread1 As New Thread(AddressOf T_LOAD_T)
+                    'newThread1.Start()
+                    'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                    'newThread6.Start()
                 Case "SOUND"
                     Me.cmbOTHFil.Text = sBranch_
                     Me.cmbOTHDepart.Text = sDepartment_
                     Me.cmbOTHOffice.Text = sOffice_
                     SAVE_DRAG_DROP(Me.sCOUNT, sBranch_, sDepartment_, sOffice_, Me.lstGroups.SelectedNode.Text)
                     LOADot(Me.sCOUNT)
+
                 Case "IBP"
                     Me.cmbOTHFil.Text = sBranch_
                     Me.cmbOTHDepart.Text = sDepartment_
                     Me.cmbOTHOffice.Text = sOffice_
                     SAVE_DRAG_DROP(Me.sCOUNT, sBranch_, sDepartment_, sOffice_, Me.lstGroups.SelectedNode.Text)
-                    Dim newThread1 As New Thread(AddressOf T_LOAD_T)
-                    newThread1.Start()
-                    Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
-                    newThread6.Start()
+
+
+                    Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                    Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
+
+                    'Dim newThread1 As New Thread(AddressOf T_LOAD_T)
+                    'newThread1.Start()
+                    'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                    'newThread6.Start()
+
                 Case "FS"
                     Me.cmbOTHFil.Text = sBranch_
                     Me.cmbOTHDepart.Text = sDepartment_
                     Me.cmbOTHOffice.Text = sOffice_
                     SAVE_DRAG_DROP(Me.sCOUNT, sBranch_, sDepartment_, sOffice_, Me.lstGroups.SelectedNode.Text)
-                    Dim newThread1 As New Thread(AddressOf T_LOAD_T)
-                    newThread1.Start()
-                    Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
-                    newThread6.Start()
+
+
+                    Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                    Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
+
+                    'Dim newThread1 As New Thread(AddressOf T_LOAD_T)
+                    'newThread1.Start()
+                    'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                    'newThread6.Start()
+
                 Case "KEYB"
                     Me.cmbOTHFil.Text = sBranch_
                     Me.cmbOTHDepart.Text = sDepartment_
                     Me.cmbOTHOffice.Text = sOffice_
                     SAVE_DRAG_DROP(Me.sCOUNT, sBranch_, sDepartment_, sOffice_, Me.lstGroups.SelectedNode.Text)
-                    Dim newThread1 As New Thread(AddressOf T_LOAD_T)
-                    newThread1.Start()
-                    Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
-                    newThread6.Start()
+
+                    Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                    Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
+
+                    'Dim newThread1 As New Thread(AddressOf T_LOAD_T)
+                    'newThread1.Start()
+                    'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                    'newThread6.Start()
+
                 Case "MOUSE"
                     Me.cmbOTHFil.Text = sBranch_
                     Me.cmbOTHDepart.Text = sDepartment_
                     Me.cmbOTHOffice.Text = sOffice_
                     SAVE_DRAG_DROP(Me.sCOUNT, sBranch_, sDepartment_, sOffice_, Me.lstGroups.SelectedNode.Text)
                     '--------------VIP_Graff Добавление новой перефирии Конец------------------
-                    Dim newThread1 As New Thread(AddressOf T_LOAD_T)
-                    newThread1.Start()
-                    Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
-                    newThread6.Start()
+
+                    Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                    Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
+
+                    'Dim newThread1 As New Thread(AddressOf T_LOAD_T)
+                    'newThread1.Start()
+                    'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                    'newThread6.Start()
 
                 Case "CNT"
 
@@ -3684,10 +3885,14 @@ err_:
                     Me.cmbOTHOffice.Text = sOffice_
 
                     SAVE_DRAG_DROP(Me.sCOUNT, sBranch_, sDepartment_, sOffice_, Me.lstGroups.SelectedNode.Text)
-                    Dim newThread1 As New Thread(AddressOf T_LOAD_T)
-                    newThread1.Start()
-                    Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
-                    newThread6.Start()
+
+                    Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                    Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
+
+                    'Dim newThread1 As New Thread(AddressOf T_LOAD_T)
+                    'newThread1.Start()
+                    'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
+                    'newThread6.Start()
                 Case Else
 
             End Select
@@ -3832,8 +4037,10 @@ err_:
 
         Call Re_PRN()
 
-        Dim newThread1 As New Thread(AddressOf STAT_INF_1)
-        newThread1.Start()
+        'Dim newThread1 As New Thread(AddressOf STAT_INF_1)
+        'newThread1.Start()
+        Me.BeginInvoke(New MethodInvoker(AddressOf STAT_INF_1))
+
 
     End Sub
 
@@ -5498,9 +5705,9 @@ lvMovementOTH.Columns(e.Column)
                 If zCtn = intj Then
                     MRZD = False
 
-                    Dim newThread1 As New Thread(AddressOf STAT_INF_1)
-                    newThread1.Start()
-
+                    'Dim newThread1 As New Thread(AddressOf STAT_INF_1)
+                    'newThread1.Start()
+                    Me.BeginInvoke(New MethodInvoker(AddressOf STAT_INF_1))
                 End If
 
                 intj = intj + 1
@@ -6227,11 +6434,14 @@ err_:
         rs.Close()
         rs = Nothing
 
-        Dim newThread5 As New Thread(AddressOf R_T_LOAD)
-        newThread5.Start()
+        Me.BeginInvoke(New MethodInvoker(AddressOf R_T_LOAD))
+        Me.BeginInvoke(New MethodInvoker(AddressOf STAT_INF_1))
 
-        Dim newThread1 As New Thread(AddressOf STAT_INF_1)
-        newThread1.Start()
+        'Dim newThread5 As New Thread(AddressOf R_T_LOAD)
+        'newThread5.Start()
+
+        'Dim newThread1 As New Thread(AddressOf STAT_INF_1)
+        'newThread1.Start()
 
     End Sub
 
@@ -6278,7 +6488,7 @@ err_:
 
         If rCOUNT = 0 Then Exit Sub
 
-        Call SRASP2(rCOUNT)
+        Call SRASP2(rCOUNT, "\blanks\akt_z.dot")
 
     End Sub
 
@@ -6346,8 +6556,9 @@ err_1:
         'If MsgBox("Обновить дерево?", MsgBoxStyle.YesNo, ProGramName) = MsgBoxResult.Yes Then
 
         lstGroups.Nodes.Clear()
-        Dim newThread5 As New Thread(AddressOf R_T_LOAD)
-        newThread5.Start()
+        'Dim newThread5 As New Thread(AddressOf R_T_LOAD)
+        'newThread5.Start()
+        Me.BeginInvoke(New MethodInvoker(AddressOf R_T_LOAD))
 
         ' Else
 
@@ -6491,8 +6702,11 @@ err_1:
         'Dim newThread2 As New Thread(AddressOf LoadSPR_1)
         'newThread2.Start()
 
-        Dim newThread1 As New Thread(AddressOf R_T_LOAD)
-        newThread1.Start()
+        'Dim newThread1 As New Thread(AddressOf R_T_LOAD)
+        'newThread1.Start()
+
+        Me.BeginInvoke(New MethodInvoker(AddressOf R_T_LOAD))
+
         'newThread1.Priority = 4
 
         'Call LoadSPR()

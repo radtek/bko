@@ -727,8 +727,9 @@ err_1:
 
 
         If lstGroups.Nodes.Count = 0 Then
-            Dim newThread5 As New Thread(AddressOf R_T_LOAD)
-            newThread5.Start()
+            'Dim newThread5 As New Thread(AddressOf R_T_LOAD)
+            'newThread5.Start()
+            Me.BeginInvoke(New MethodInvoker(AddressOf R_T_LOAD_1))
         End If
 
 
@@ -737,12 +738,6 @@ err_1:
         Me.Cursor = Cursors.Default
 
         frmComputers.OneStart = 1
-
-    End Sub
-
-    Private Sub R_T_LOAD()
-
-        Me.lstGroups.BeginInvoke(New MethodInvoker(AddressOf R_T_LOAD_1))
 
     End Sub
 
@@ -793,7 +788,7 @@ err_1:
 
         'Dim newThread5 As New Thread(AddressOf R_T_LOAD)
         'newThread5.Start()
-        Me.BeginInvoke(New MethodInvoker(AddressOf R_T_LOAD))
+        Me.BeginInvoke(New MethodInvoker(AddressOf R_T_LOAD_1))
 
         Me.Cursor = Cursors.Default
 
@@ -1691,17 +1686,18 @@ Error_:
         Dim intj As Integer = 0
 
 
-        If ssid <> 0 Then
-
-            r1COUNT = ssid
-
-        Else
+        If ssid = 0 Then
 
             For z = 0 To lvRem.SelectedItems.Count - 1
                 r1COUNT = (lvRem.SelectedItems(z).Text)
             Next
 
+        Else
+
+            r1COUNT = ssid
+
         End If
+
 
 
         If frmComputers.sPREF = "C" Then
@@ -1861,10 +1857,10 @@ err_:
 
         If frmComputers.OneStart = 0 Then Exit Sub
 
-        Me.BeginInvoke(New MethodInvoker(AddressOf R_T_LOAD))
-
         'Dim newThread5 As New Thread(AddressOf R_T_LOAD)
         'newThread5.Start()
+
+        Me.BeginInvoke(New MethodInvoker(AddressOf R_T_LOAD_1))
 
     End Sub
 
@@ -1989,8 +1985,7 @@ err_1:
 
                 If lvRem.Items(intj).Checked = True Then
 
-
-                    Call DELETE_SERVICES()
+                    Call DELETE_SERVICES(lvRem.SelectedItems(intj).Text)
 
                 End If
 
@@ -2034,7 +2029,7 @@ err_1:
         Next
 
 
-        Call SRASP2(r1COUNT)
+        Call SRASP2(r1COUNT, "\blanks\akt_z.dot")
     End Sub
 
     Private Sub Button1_Click(sender As System.Object, e As System.EventArgs) Handles Button1.Click
@@ -2051,11 +2046,64 @@ err_1:
     End Sub
 
     Private Sub CheckBox1_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CheckBox1.CheckedChanged
-        If CheckBox1.Checked = True Then lvRem.CheckBoxes = True
-        If CheckBox1.Checked = False Then lvRem.CheckBoxes = False
+
+        If CheckBox1.Checked = True Then
+            lvRem.CheckBoxes = True
+            lvRem.MultiSelect = True
+        End If
+
+        If CheckBox1.Checked = False Then
+            lvRem.CheckBoxes = False
+            lvRem.MultiSelect = False
+        End If
+
+
+
     End Sub
 
-    Private Sub ToolStrip1_ItemClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.ToolStripItemClickedEventArgs) Handles ToolStrip1.ItemClicked
+    Private Sub НарядToolStripMenuItem1_Click(sender As System.Object, e As System.EventArgs) Handles НарядToolStripMenuItem1.Click
+        If lvRem.Items.Count = 0 Then Exit Sub
+
+        Dim z As Integer
+
+        For z = 0 To lvRem.SelectedItems.Count - 1
+            r1COUNT = (lvRem.SelectedItems(z).Text)
+        Next
+
+
+        Call SRASP2(r1COUNT, "\blanks\nariad.doc")
+    End Sub
+
+    Private Sub МатериальныйПропускToolStripMenuItem1_Click(sender As System.Object, e As System.EventArgs) Handles МатериальныйПропускToolStripMenuItem1.Click
+
+        'Фамилия:
+        'Имя:
+        'Отчество:
+
+        '        Количество(мест) : ___________()
+        '        Что(выносит(вносит))
+
+        'Марка:
+        '        Заводской(номер)
+        '        Инв.номер()
+
+        'Организация – собственник оборудования:
+        'Дата: “___”_______ 2012 г.
+
+        'Печать:
+        'Подпись лица, выдавшего пропуск:
+
+
+        If lvRem.Items.Count = 0 Then Exit Sub
+
+        Dim z As Integer
+
+        For z = 0 To lvRem.SelectedItems.Count - 1
+            r1COUNT = (lvRem.SelectedItems(z).Text)
+        Next
+
+
+        Call SRASP2(r1COUNT, "\blanks\mp.doc")
 
     End Sub
 End Class

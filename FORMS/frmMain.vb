@@ -184,9 +184,10 @@ Public Class frmMain
 
         Call load_ICONS()
 
-        Dim newThread3 As New Thread(AddressOf LANG_frmMain_1)
-        newThread3.Start()
+        'Dim newThread3 As New Thread(AddressOf LANG_frmMain_1)
+        'newThread3.Start()
 
+        Me.BeginInvoke(New MethodInvoker(AddressOf LANG_frmMain_1))
 
         Call Tree_Icons_Feel(frmComputers.ilsCommands, "sCMP", "pic\tree\")
         ' Call Tree_Icons_Feel(frmComputers.ImageList11, "sCMP", "pic\tree\")
@@ -214,7 +215,6 @@ Public Class frmMain
         End Select
 
 
-
         'Показывать меню системные или нет
         sText = objIniFile.GetString("general", "SYS", 0)
 
@@ -231,6 +231,63 @@ Public Class frmMain
                 Me.ЗапросыToolStripMenuItem.Visible = True
 
         End Select
+
+
+        sText = objIniFile.GetString("general", "IMAGE_TEXT", 1)
+
+
+         Select sText
+
+            Case 0
+
+                Me.LabelPanelToolStripMenuItem.Checked = False
+                ToolStripDropDownButton1.DisplayStyle = ToolStripItemDisplayStyle.Image
+                NewToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image
+                SaveInfTehButton.DisplayStyle = ToolStripItemDisplayStyle.Image
+                ArhToolZipbutton.DisplayStyle = ToolStripItemDisplayStyle.Image
+                ToolStripButton1.DisplayStyle = ToolStripItemDisplayStyle.Image
+            Case 1
+
+                Me.LabelPanelToolStripMenuItem.Checked = True
+                ToolStripDropDownButton1.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText
+                NewToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText
+                SaveInfTehButton.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText
+                ArhToolZipbutton.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText
+                ToolStripButton1.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText
+        End Select
+
+
+        sText = objIniFile.GetString("general", "StatusStrip", 1)
+
+          Select sText
+
+            Case 0
+
+                Me.StatusBarToolStripMenuItem.Checked = False
+
+            Case 1
+
+                Me.StatusBarToolStripMenuItem.Checked = True
+
+        End Select
+        Me.StatusStrip.Visible = Me.StatusBarToolStripMenuItem.Checked
+
+
+        sText = objIniFile.GetString("general", "ToolStrip", 1)
+
+        Select Case sText
+
+            Case 0
+
+                Me.ToolBarToolStripMenuItem.Checked = False
+
+            Case 1
+
+                Me.ToolBarToolStripMenuItem.Checked = True
+
+        End Select
+        Me.ToolStrip.Visible = Me.ToolBarToolStripMenuItem.Checked
+
 
 
 
@@ -252,13 +309,17 @@ Public Class frmMain
 
 
         'Напоминания есть или нет
-        Dim newThread4 As New Thread(AddressOf SHED_CHECK_1)
-        newThread4.Start()
+        'Dim newThread4 As New Thread(AddressOf SHED_CHECK_1)
+        'newThread4.Start()
+
+        Me.BeginInvoke(New MethodInvoker(AddressOf SHED_CHECK_1))
+
 
         'Ремонты есть или нет
-        Dim newThread5 As New Thread(AddressOf REM_CHECK_1)
-        newThread5.Start()
+        'Dim newThread5 As New Thread(AddressOf REM_CHECK_1)
+        'newThread5.Start()
 
+        Me.BeginInvoke(New MethodInvoker(AddressOf REM_CHECK_1))
 
         '###########################################################
 
@@ -372,7 +433,7 @@ Public Class frmMain
         LBL_SUBD.Text = unamDB & " - " & Base_Name
         LBL_USER.Text = UserNames & "/" & uLevel
 
-       
+
 
 
     End Sub
@@ -521,11 +582,46 @@ error_Renamed:
     End Sub
 
     Private Sub ToolBarToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolBarToolStripMenuItem.Click
+        Dim objIniFile As New IniFile(PrPath & "base.ini")
+
         Me.ToolStrip.Visible = Me.ToolBarToolStripMenuItem.Checked
+
+        Select Case Me.ToolBarToolStripMenuItem.Checked
+
+            Case True
+
+                objIniFile.WriteString("General", "ToolStrip", 1)
+
+            Case False
+
+                objIniFile.WriteString("General", "ToolStrip", 0)
+
+        End Select
+
+
     End Sub
 
     Private Sub StatusBarToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles StatusBarToolStripMenuItem.Click
+        Dim objIniFile As New IniFile(PrPath & "base.ini")
+
+
         Me.StatusStrip.Visible = Me.StatusBarToolStripMenuItem.Checked
+
+        Select Case Me.StatusBarToolStripMenuItem.Checked
+
+            Case True
+
+                objIniFile.WriteString("General", "StatusStrip", 1)
+
+            Case False
+
+                objIniFile.WriteString("General", "StatusStrip", 0)
+
+        End Select
+
+
+
+
     End Sub
 
     Private Sub TileVerticalToolStripMenuItem_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TileVerticalToolStripMenuItem.Click
@@ -809,7 +905,7 @@ err_:
     End Sub
 
     Private Sub BugTrackerToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BugTrackerToolStripMenuItem.Click
-        System.Diagnostics.Process.Start("http://bko.shatki.info:3000/projects/bko")
+        System.Diagnostics.Process.Start("http://code.google.com/p/bko/issued/list")
     End Sub
 
     Private Sub MailToAuthors_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MailToAuthors.Click
@@ -934,63 +1030,65 @@ err_:
 
     Private Sub ПроверитьОбновлениеToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ПроверитьОбновлениеToolStripMenuItem.Click
 
-        Dim reader As XmlNodeReader = Nothing
+        System.Diagnostics.Process.Start("http://code.google/p/bko/downloads/list")
 
-        Dim iA, iB, iC As String
+        'Dim reader As XmlNodeReader = Nothing
 
-
-        Try
-            Dim s As String = ""
-            ' The xml document to read from.
-            Dim doc As New XmlDocument()
-
-            ' Load the xml document.
-            doc.Load("http://bko.shatki.info/bko.xml")
-
-            ' Set the reader to open the xml document.
-            reader = New XmlNodeReader(doc)
-
-            ' Read all the data in the XML document and display it.
-            While reader.Read()
-                Select Case reader.NodeType
-                    Case XmlNodeType.Element
-                        ' Keep track of the element that the user is on.
-                        s = reader.Name
-                    Case XmlNodeType.Text
-                        If s.Equals("version") Then
-                            ' With the first name add a line to the listview control.
-                            iA = (reader.Value)
-                            ' For all other data itmes in the list just add
-                            ' as sub itmes since they are in the correct order.
-                        Else
-
-                            iB = (reader.Value)
-
-                        End If
-                End Select
-            End While
-        Finally
-            ' Do the necessary clean up.
-            If Not (reader Is Nothing) Then
-                reader.Close()
-            End If
-        End Try
-
-        iC = My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor & "." & My.Application.Info.Version.Build & "." & My.Application.Info.Version.Revision
-
-        If iA > iC Then
-
-            Dim LNGIniFile As New IniFile(sLANGPATH)
-            If MsgBox(LNGIniFile.GetString("frmMain", "MSG7", "") & " " & iA & vbCrLf & iB & vbCrLf & LNGIniFile.GetString("frmMain", "MSG8", ""), ProGramName, MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
-                System.Diagnostics.Process.Start("http://suse.shatki.info/opensuse/alex_plotnikov/BKO/UPDATE/")
-
-            Else
-
-            End If
+        'Dim iA, iB, iC As String
 
 
-            '"На сервере появилась новая версия программы - " & " " & xmlNode.childNodes(0).Text & ". Открыть страницу загрузки?" & vbNewLine & "Изменения:" & vbNewLine & xmlNode.childNodes(2).Text
-        End If
+        'Try
+        '    Dim s As String = ""
+        '    ' The xml document to read from.
+        '    Dim doc As New XmlDocument()
+
+        '    ' Load the xml document.
+        '    doc.Load("http://bko.shatki.info/bko.xml")
+
+        '    ' Set the reader to open the xml document.
+        '    reader = New XmlNodeReader(doc)
+
+        '    ' Read all the data in the XML document and display it.
+        '    While reader.Read()
+        '        Select Case reader.NodeType
+        '            Case XmlNodeType.Element
+        '                ' Keep track of the element that the user is on.
+        '                s = reader.Name
+        '            Case XmlNodeType.Text
+        '                If s.Equals("version") Then
+        '                    ' With the first name add a line to the listview control.
+        '                    iA = (reader.Value)
+        '                    ' For all other data itmes in the list just add
+        '                    ' as sub itmes since they are in the correct order.
+        '                Else
+
+        '                    iB = (reader.Value)
+
+        '                End If
+        '        End Select
+        '    End While
+        'Finally
+        '    ' Do the necessary clean up.
+        '    If Not (reader Is Nothing) Then
+        '        reader.Close()
+        '    End If
+        'End Try
+
+        'iC = My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor & "." & My.Application.Info.Version.Build & "." & My.Application.Info.Version.Revision
+
+        'If iA > iC Then
+
+        '    Dim LNGIniFile As New IniFile(sLANGPATH)
+        '    If MsgBox(LNGIniFile.GetString("frmMain", "MSG7", "") & " " & iA & vbCrLf & iB & vbCrLf & LNGIniFile.GetString("frmMain", "MSG8", ""), ProGramName, MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+        '        System.Diagnostics.Process.Start("http://code.google/p/bko/downloads/list")
+
+        '    Else
+
+        '    End If
+
+
+        '    '"На сервере появилась новая версия программы - " & " " & xmlNode.childNodes(0).Text & ". Открыть страницу загрузки?" & vbNewLine & "Изменения:" & vbNewLine & xmlNode.childNodes(2).Text
+        'End If
 
 
     End Sub
@@ -1079,6 +1177,8 @@ err_:
 
     Private Sub LabelPanelToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LabelPanelToolStripMenuItem.Click
 
+        Dim objIniFile As New IniFile(PrPath & "base.ini")
+
         Select Case Me.LabelPanelToolStripMenuItem.Checked
 
             Case True
@@ -1089,7 +1189,7 @@ err_:
                 ArhToolZipbutton.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText
                 ToolStripButton1.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText
 
-
+                objIniFile.WriteString("General", "IMAGE_TEXT", 1)
             Case False
 
                 ToolStripDropDownButton1.DisplayStyle = ToolStripItemDisplayStyle.Image
@@ -1098,8 +1198,10 @@ err_:
                 ArhToolZipbutton.DisplayStyle = ToolStripItemDisplayStyle.Image
                 ToolStripButton1.DisplayStyle = ToolStripItemDisplayStyle.Image
 
+                objIniFile.WriteString("General", "IMAGE_TEXT", 0)
 
         End Select
+
 
 
 
@@ -2351,11 +2453,8 @@ err_:
     End Sub
 
     Private Sub ПерегрузкаСрправочниковToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ПерегрузкаСрправочниковToolStripMenuItem.Click
-        Dim newThread2 As New Thread(AddressOf LoadSPR_1)
-        newThread2.Start()
-    End Sub
-
-    Private Sub LoadSPR_1()
+        'Dim newThread2 As New Thread(AddressOf LoadSPR_1)
+        'newThread2.Start()
 
         Me.BeginInvoke(New MethodInvoker(AddressOf LoadSPR))
 
@@ -2363,10 +2462,10 @@ err_:
 
     Private Sub ПроверитьФилиалыОтделыToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ПроверитьФилиалыОтделыToolStripMenuItem.Click
 
-        Dim newThread1 As New Thread(AddressOf add_kabn_if_nothing)
-        newThread1.Start()
+        'Dim newThread1 As New Thread(AddressOf add_kabn_if_nothing)
+        'newThread1.Start()
         'newThread1.Priority = 4
-
+        Me.BeginInvoke(New MethodInvoker(AddressOf add_kabn_if_nothing))
 
     End Sub
 

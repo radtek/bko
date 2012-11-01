@@ -389,9 +389,7 @@ FoundiR:
 
         If lstGroups.Nodes.Count = 0 Then
 
-            'Dim newThread1 As New Thread(AddressOf R_T_LOAD_1)
-            'newThread1.Start()
-            Me.BeginInvoke(New MethodInvoker(AddressOf R_T_LOAD_1))
+           Me.lstGroups.BeginInvoke(New MethodInvoker(AddressOf R_T_LOAD_1))
 
         End If
 
@@ -670,14 +668,12 @@ A:
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
         Me.Cursor = Cursors.WaitCursor
 
-        'Dim newThread3 As New Thread(AddressOf R_T_LOAD_1)
-        'newThread3.Start()
+        'Dim newThread5 As New Thread(AddressOf R_T_LOAD_1)
+        'newThread5.Start()
 
         Me.BeginInvoke(New MethodInvoker(AddressOf R_T_LOAD_1))
 
         txtSearch.Text = ""
-
-        Application.DoEvents()
         Me.Cursor = Cursors.Default
     End Sub
 
@@ -762,15 +758,25 @@ A:
 
         If frmComputers.OneStart = 0 Then Exit Sub
 
-        'Dim newThread2 As New Thread(AddressOf R_T_LOAD_1)
-        'newThread2.Start()
+        'Dim newThread5 As New Thread(AddressOf R_T_LOAD_1)
+        'newThread5.Start()
+
         Me.BeginInvoke(New MethodInvoker(AddressOf R_T_LOAD_1))
 
     End Sub
 
     Private Sub CheckBox2_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CheckBox2.CheckedChanged
-        If CheckBox2.Checked = True Then lstSoftware.CheckBoxes = True
-        If CheckBox2.Checked = False Then lstSoftware.CheckBoxes = False
+
+        If CheckBox2.Checked = True Then
+            lstSoftware.CheckBoxes = True
+            lstSoftware.MultiSelect = True
+        End If
+
+        If CheckBox2.Checked = False Then
+            lstSoftware.CheckBoxes = False
+            lstSoftware.MultiSelect = False
+        End If
+
 
     End Sub
 
@@ -881,7 +887,6 @@ err_:
         Next
 
 
-
         If intj1 > 0 Then
 
             lstSoftware.Select()
@@ -893,8 +898,7 @@ err_:
 
                 If lstSoftware.Items(intj).Checked = True Then
 
-
-                    Call DELETE_SOFT()
+                    Call DELETE_SOFT(lstSoftware.SelectedItems(intj).Text)
 
                 End If
 

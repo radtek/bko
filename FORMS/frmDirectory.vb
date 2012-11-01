@@ -3097,8 +3097,7 @@ err_:
 
                 If lvDirectory.Items(intj).Checked = True Then
 
-
-                    Call DELETE_SPR()
+                    Call DELETE_SPR(lvDirectory.SelectedItems(intj).Text)
 
                 End If
 
@@ -3121,7 +3120,16 @@ err_:
 
 
     Private Sub CheckBox2_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CheckBox2.CheckedChanged
-        If CheckBox2.Checked = True Then lvDirectory.CheckBoxes = True
-        If CheckBox2.Checked = False Then lvDirectory.CheckBoxes = False
+
+        If CheckBox2.Checked = True Then
+            lvDirectory.CheckBoxes = True
+            lvDirectory.MultiSelect = True
+        End If
+
+        If CheckBox2.Checked = False Then
+            lvDirectory.CheckBoxes = False
+            lvDirectory.MultiSelect = False
+        End If
+
     End Sub
 End Class

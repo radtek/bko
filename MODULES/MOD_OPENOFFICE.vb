@@ -7893,9 +7893,9 @@ err_:
         MsgBox(Err.Description, MsgBoxStyle.Critical, ProGramName)
     End Sub
 
-    Public Sub SRASP2(ByVal sSID As String)
+    Public Sub SRASP2(ByVal sSID As String, ByVal doc As String)
         On Error GoTo err_
-
+        On Error Resume Next
 
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
@@ -7904,10 +7904,10 @@ err_:
         Dim rs As ADODB.Recordset
         Dim tipot, sSQL, uname As String
 
-        tipot = Directory.GetParent(Application.ExecutablePath).ToString & "\blanks\akt_z.dot"
+        tipot = Directory.GetParent(Application.ExecutablePath).ToString & doc
 
 
-        Dim sTEXT, sMASTER, sISTOCHNIK, sDATE, sTIP, Sorganization, sMEMO, stTIME, stDATE, spTIME, spDATE, sRAB, sSERNUM, spCena As String
+        Dim sTEXT, sMASTER, sISTOCHNIK, sDATE, sTIP, Sorganization, sMEMO, stTIME, stDATE, spTIME, spDATE, sRAB, sSERNUM, spCena, sTIPteh As String
         Dim sIDCMP As Integer
 
 
@@ -7918,7 +7918,7 @@ err_:
             If Not IsDBNull(.Fields("Remont").Value) Then sTEXT = .Fields("Remont").Value
             If Not IsDBNull(.Fields("Master").Value) Then sMASTER = .Fields("Master").Value
             If Not IsDBNull(.Fields("istochnik").Value) Then sISTOCHNIK = .Fields("istochnik").Value
-            If Not IsDBNull(.Fields("Date").Value) Then sDATE = .Fields("Date").Value
+            If Not IsDBNull(.Fields("srok").Value) Then sDATE = .Fields("srok").Value
             If Not IsDBNull(.Fields("Id_Comp").Value) Then sIDCMP = .Fields("Id_Comp").Value
             If Not IsDBNull(.Fields("Uroven").Value) Then sTIP = .Fields("Uroven").Value
             If Not IsDBNull(.Fields("MeMo").Value) Then sMEMO = .Fields("MeMo").Value
@@ -7978,54 +7978,131 @@ err_:
 
 
         rs = New ADODB.Recordset
-        rs.Open("select INV_NO_SYSTEM,FILIAL,MESTO,kabn,NET_NAME,TipTehn,Ser_N_SIS,PRINTER_SN_1,port_1,MONITOR_SN from kompy where id=" & sIDCMP, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs.Open("select * from kompy where id=" & sIDCMP, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
         Dim sINN, sBR, sDEP, sKab, Snname As String
         With rs
-            If Not IsDBNull(.Fields("INV_NO_SYSTEM").Value) Then sINN = .Fields("INV_NO_SYSTEM").Value
+
             If Not IsDBNull(.Fields("FILIAL").Value) Then sBR = .Fields("FILIAL").Value
             If Not IsDBNull(.Fields("MESTO").Value) Then sDEP = .Fields("MESTO").Value
             If Not IsDBNull(.Fields("kabn").Value) Then sKab = .Fields("kabn").Value
             If Not IsDBNull(.Fields("NET_NAME").Value) Then Snname = .Fields("NET_NAME").Value
             'If Not IsDBNull(.Fields("TipTehn").Value) Then uname = .Fields("TipTehn").Value
-
+            '
 
             Select Case .Fields("TipTehn").Value
 
 
                 Case "PC"
                     sSERNUM = .Fields("Ser_N_SIS").Value
+                    If Not IsDBNull(.Fields("INV_NO_SYSTEM").Value) Then sINN = .Fields("INV_NO_SYSTEM").Value
+
                 Case "Printer"
                     sSERNUM = .Fields("PRINTER_SN_1").Value
+                    If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then sINN = .Fields("INV_NO_PRINTER").Value
+
                 Case "MFU"
                     sSERNUM = .Fields("PRINTER_SN_1").Value
+                    If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then sINN = .Fields("INV_NO_PRINTER").Value
                 Case "OT"
                     sSERNUM = .Fields("PRINTER_SN_1").Value
+                    If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then sINN = .Fields("INV_NO_PRINTER").Value
                 Case "KOpir"
                     sSERNUM = .Fields("PRINTER_SN_1").Value
+                    If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then sINN = .Fields("INV_NO_PRINTER").Value
                 Case "NET"
                     sSERNUM = .Fields("port_1").Value
+
+                    If Not IsDBNull(.Fields("PRINTER_PROIZV_3").Value) Then sINN = .Fields("PRINTER_PROIZV_3").Value
+
                 Case "PHOTO"
                     sSERNUM = .Fields("PRINTER_SN_1").Value
+                    If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then sINN = .Fields("INV_NO_PRINTER").Value
                 Case "PHONE"
                     sSERNUM = .Fields("PRINTER_SN_1").Value
+                    If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then sINN = .Fields("INV_NO_PRINTER").Value
                 Case "FAX"
                     sSERNUM = .Fields("PRINTER_SN_1").Value
+                    If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then sINN = .Fields("INV_NO_PRINTER").Value
                 Case "SCANER"
                     sSERNUM = .Fields("PRINTER_SN_1").Value
+                    If Not IsDBNull(.Fields("INV_NO_SCANER").Value) Then sINN = .Fields("INV_NO_SCANER").Value
                 Case "ZIP"
                     sSERNUM = .Fields("PRINTER_SN_1").Value
+                    If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then sINN = .Fields("INV_NO_PRINTER").Value
                 Case "MONITOR"
                     sSERNUM = .Fields("MONITOR_SN").Value
+                    If Not IsDBNull(.Fields("INV_NO_MONITOR").Value) Then sINN = .Fields("INV_NO_MONITOR").Value
                 Case "USB"
                     sSERNUM = .Fields("PRINTER_SN_1").Value
+                    If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then sINN = .Fields("INV_NO_PRINTER").Value
                 Case "SOUND"
                     sSERNUM = .Fields("PRINTER_SN_1").Value
+                    If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then sINN = .Fields("INV_NO_PRINTER").Value
                 Case "IBP"
                     sSERNUM = .Fields("PRINTER_SN_1").Value
+                    If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then sINN = .Fields("INV_NO_PRINTER").Value
                 Case ("FS")
                     sSERNUM = .Fields("PRINTER_SN_1").Value
+                    If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then sINN = .Fields("INV_NO_PRINTER").Value
             End Select
+
+            Select Case .Fields("TipTehn").Value
+
+                Case "PC"
+
+                    sTIPteh = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG66", "")
+                Case "Printer"
+
+                    sTIPteh = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG27", "")
+                Case "KOpir"
+
+                    sTIPteh = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG60", "")
+                Case "MONITOR"
+
+                    sTIPteh = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG24", "")
+                Case "SCANER"
+
+                    sTIPteh = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG34", "")
+                Case "NET"
+
+                    sTIPteh = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG61", "")
+                Case "PHOTO"
+
+                    sTIPteh = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG62", "")
+                Case "OT"
+
+                    sTIPteh = .Fields("NET_NAME").Value & " " & .Fields("TIP_COMPA").Value
+                Case "ZIP"
+
+                    sTIPteh = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG65", "")
+                Case "PHONE"
+
+                    sTIPteh = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG63", "")
+                Case "MFU"
+
+                    sTIPteh = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG32", "")
+                Case "FAX"
+
+                    sTIPteh = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG64", "")
+
+                Case "USB"
+
+                    sTIPteh = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG37", "")
+                Case "IBP"
+
+
+                    sTIPteh = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG35", "")
+                Case "FS"
+
+                    sTIPteh = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG262", "")
+
+                Case "SOUND"
+
+                    sTIPteh = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG25", "")
+
+            End Select
+
 
 
 
@@ -8042,7 +8119,6 @@ err_:
         End With
         rs1.Close()
         rs1 = Nothing
-
 
 
 
@@ -8075,12 +8151,10 @@ err_:
                 oSrch.setReplaceString(Sorganization)
                 Debug.Print(oDoc.replaceAll(oSrch))
 
-
                 oSrch = oDoc.createReplaceDescriptor
                 oSrch.setSearchString("#number")
                 oSrch.setReplaceString(sSID)
                 Debug.Print(oDoc.replaceAll(oSrch))
-
 
                 oSrch = oDoc.createReplaceDescriptor
                 oSrch.setSearchString("#sernumber")
@@ -8094,7 +8168,7 @@ err_:
                 Debug.Print(oDoc.replaceAll(oSrch))
 
                 oSrch.setSearchString("#tehn_name")
-                oSrch.setReplaceString(Snname)
+                oSrch.setReplaceString(sTIPteh & "::" & Snname)
                 Debug.Print(oDoc.replaceAll(oSrch))
 
                 oSrch.setSearchString("#invnumber")
@@ -8157,6 +8231,26 @@ err_:
                 oSrch.setReplaceString(DateTime.Now.Hour & ":" & DateTime.Now.Minute)
                 Debug.Print(oDoc.replaceAll(oSrch))
 
+                oSrch.setSearchString("#tiptehn")
+                oSrch.setReplaceString(sTIPteh)
+                Debug.Print(oDoc.replaceAll(oSrch))
+
+                Dim d() As String
+                d = Split(sMASTER, " ")
+
+                oSrch.setSearchString("#Fmaster")
+                oSrch.setReplaceString(d(0))
+                Debug.Print(oDoc.replaceAll(oSrch))
+
+                oSrch.setSearchString("#Imaster")
+                oSrch.setReplaceString(d(1))
+                Debug.Print(oDoc.replaceAll(oSrch))
+
+                oSrch.setSearchString("#Omaster")
+                oSrch.setReplaceString(d(2))
+                Debug.Print(oDoc.replaceAll(oSrch))
+
+
                 '#date #time
                 '#organization
 
@@ -8172,6 +8266,68 @@ err_:
                 Wrd.Selection.Find.ClearFormatting()
                 Wrd.Selection.Find.Replacement.ClearFormatting()
                 'Номер
+
+                Dim d() As String
+                d = Split(sMASTER, " ")
+
+                With Wrd.Selection.Find
+                    .Text = "#Fmaster"
+                    .Replacement.Text = d(0)
+                    .Forward = True
+                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Format = False
+                    .MatchCase = True
+                    .MatchWholeWord = False
+                    .MatchWildcards = False
+                    ' .MatchSoundsLike = False
+                    .MatchAllWordForms = False
+                End With
+                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+
+                With Wrd.Selection.Find
+                    .Text = "#Imaster"
+                    .Replacement.Text = d(1)
+                    .Forward = True
+                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Format = False
+                    .MatchCase = True
+                    .MatchWholeWord = False
+                    .MatchWildcards = False
+                    ' .MatchSoundsLike = False
+                    .MatchAllWordForms = False
+                End With
+                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+
+
+                With Wrd.Selection.Find
+                    .Text = "#Omaster"
+                    .Replacement.Text = d(2)
+                    .Forward = True
+                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Format = False
+                    .MatchCase = True
+                    .MatchWholeWord = False
+                    .MatchWildcards = False
+                    ' .MatchSoundsLike = False
+                    .MatchAllWordForms = False
+                End With
+                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+
+
+                With Wrd.Selection.Find
+                    .Text = "#tiptehn"
+                    .Replacement.Text = sTIPteh
+                    .Forward = True
+                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Format = False
+                    .MatchCase = True
+                    .MatchWholeWord = False
+                    .MatchWildcards = False
+                    ' .MatchSoundsLike = False
+                    .MatchAllWordForms = False
+                End With
+                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+
 
                 '#number
                 With Wrd.Selection.Find
@@ -8219,7 +8375,7 @@ err_:
 
                 With Wrd.Selection.Find
                     .Text = "#tehn_name"
-                    .Replacement.Text = Snname
+                    .Replacement.Text = sTIPteh & "::" & Snname
                     .Forward = True
                     .Wrap = Word.WdFindWrap.wdFindContinue
                     .Format = False

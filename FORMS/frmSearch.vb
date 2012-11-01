@@ -342,9 +342,9 @@ Err_:
             objIniFile.WriteString("general", "Default", 0)
         Next
 
-        Dim newThread4 As New Thread(AddressOf frmComputers.R_T_LOAD)
-        newThread4.Start()
-
+        'Dim newThread4 As New Thread(AddressOf frmComputers.R_T_LOAD)
+        'newThread4.Start()
+        Me.BeginInvoke(New MethodInvoker(AddressOf frmComputers.R_T_LOAD))
 
         frmComputers.Focus()
 
