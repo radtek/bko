@@ -925,8 +925,100 @@ err_:
         DTInstall.Value = Date.Today
         dtGok.Value = Date.Today
 
-
-
     End Sub
 
+    Private Sub ToolStripButton1_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripButton1.Click
+
+        If TipTehn <> "PC" Then Exit Sub
+        Me.lstSoftware.Visible = False
+
+
+
+        Dim ePatch As String
+        Dim objIniFile As New IniFile(PrPath & "base.ini")
+        ePatch = objIniFile.GetString("General", "aida", PrPath)
+
+        Dim fdlg As OpenFileDialog = New OpenFileDialog()
+
+        fdlg.Title = "Everest Corporate Edition ini file"
+        fdlg.InitialDirectory = ePatch
+        fdlg.Filter = "ini files (*.ini)|*.ini"
+        fdlg.FilterIndex = 2
+
+        fdlg.RestoreDirectory = True
+
+        If fdlg.ShowDialog() = DialogResult.OK Then
+            Me.Cursor = Cursors.WaitCursor
+
+            EverestFilePatch = fdlg.FileName
+
+        End If
+
+        If Len(EverestFilePatch) > 3 Then
+
+            Dim everIniFile As New IniFile(EverestFilePatch)
+
+
+            If MsgBox("Проверять правильность имени компьютера?", vbExclamation + vbYesNo, "Обновление информации") = vbNo Then
+
+            Else
+
+                Dim rs As ADODB.Recordset
+                Dim A1 As String
+                rs = New ADODB.Recordset
+                rs.Open("SELECT NET_NAME FROM kompy where id=" & sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+                With rs
+
+                    A1 = .Fields("NET_NAME").Value
+
+                End With
+                rs.Close()
+                rs = Nothing
+
+
+
+
+                If A1 <> everIniFile.GetString("Суммарная информация", "Компьютер|Имя компьютера", "") Then
+
+                    If A1 <> everIniFile.GetString("Имя компьютера", "Имя NetBIOS|Имя компьютера", "") Then
+
+                        MsgBox("Имя компьютера не соответствует выбранному файлу." & vbCrLf & "Выберите другой файл.", MsgBoxStyle.Critical, ProGramName)
+                        Exit Sub
+
+                    End If
+
+                End If
+            End If
+
+        End If
+
+        Call textp_Upd(Me.lstSoftware)
+
+
+
+
+
+
+
+
+
+
+
+        Dim langfile As New IniFile(sLANGPATH)
+
+
+        Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG28", "") & " " & lstGroups.SelectedNode.Text)
+        Me.Cursor = Cursors.Default
+
+        Me.lstSoftware.Visible = False
+
+
+        Call SAVE_SOFT(Me.lstSoftware, sCOUNT)
+
+        Call LOAD_SOFT(sCOUNT, Me.lstSoftware)
+
+        Me.lstSoftware.Visible = True
+
+    End Sub
 End Class

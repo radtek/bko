@@ -785,35 +785,54 @@ nextA:
         '################
         'Принтеры
 
-        frmComputers.cmbPrinters1.Text = everIniFile.GetString("Принтеры", "Принтеры1|Свойства принтера|Имя принтера", "")
-        frmComputers.PROizV34.Text = everIniFile.GetString("Принтеры", "Принтеры1|Производитель принтера|Фирма", "")
-
-        frmComputers.txtPrint1Port.Text = everIniFile.GetString("Принтеры", "Принтеры1|Свойства принтера|Порт принтера", "")
+        uname = everIniFile.GetString("Принтеры", "Принтеры1|Свойства принтера|Имя принтера", "")
 
 
-        If Len(frmComputers.cmbPrinters1.Text) = 0 Then
-            frmComputers.cmbPrinters1.Text = everIniFile.GetString("Суммарная информация", "Периферийные устройства|Принтер1", "")
+        If uname = "Fax" Or uname = "Microsoft XPS Document Writer" Or uname = "Отправить в OneNote 2010" Then
+            uname = everIniFile.GetString("Суммарная информация", "Периферийные устройства|Принтер1", "")
         End If
 
-        '2
+        If uname = "Fax" Or uname = "Microsoft XPS Document Writer" Or uname = "Отправить в OneNote 2010" Then
 
-        frmComputers.cmbPrinters2.Text = everIniFile.GetString("Принтеры", "Принтеры2|Свойства принтера|Имя принтера", "")
-        frmComputers.PROizV35.Text = everIniFile.GetString("Принтеры", "Принтеры2|Производитель принтера|Фирма", "")
-        frmComputers.txtPrint2Port.Text = everIniFile.GetString("Принтеры", "Принтеры2|Свойства принтера|Порт принтера", "")
-
-
-        If Len(frmComputers.cmbPrinters2.Text) = 0 Then
-            frmComputers.cmbPrinters2.Text = everIniFile.GetString("Суммарная информация", "Периферийные устройства|Принтер", "")
+        Else
+            frmComputers.cmbPrinters1.Text = uname
+            frmComputers.PROizV34.Text = everIniFile.GetString("Принтеры", "Принтеры1|Производитель принтера|Фирма", "")
+            frmComputers.txtPrint1Port.Text = everIniFile.GetString("Принтеры", "Принтеры1|Свойства принтера|Порт принтера", "")
         End If
 
-        '3
-        frmComputers.cmbPrinters3.Text = everIniFile.GetString("Принтеры", "Принтеры3|Свойства принтера|Имя принтера", "")
-        frmComputers.PROizV36.Text = everIniFile.GetString("Принтеры", "Принтеры3|Производитель принтера|Фирма", "")
-        frmComputers.txtPrint3Port.Text = everIniFile.GetString("Принтеры", "Принтеры3|Свойства принтера|Порт принтера", "")
 
-        If Len(frmComputers.cmbPrinters3.Text) = 0 Then
-            frmComputers.cmbPrinters3.Text = everIniFile.GetString("Суммарная информация", "Периферийные устройства|Принтер3", "")
+        uname = everIniFile.GetString("Принтеры", "Принтеры2|Свойства принтера|Имя принтера", "")
+
+
+        If uname = "Fax" Or uname = "Microsoft XPS Document Writer" Or uname = "Отправить в OneNote 2010" Then
+            uname = everIniFile.GetString("Суммарная информация", "Периферийные устройства|Принтер2", "")
         End If
+
+        If uname = "Fax" Or uname = "Microsoft XPS Document Writer" Or uname = "Отправить в OneNote 2010" Then
+
+        Else
+            frmComputers.cmbPrinters2.Text = uname
+            frmComputers.PROizV35.Text = everIniFile.GetString("Принтеры", "Принтеры2|Производитель принтера|Фирма", "")
+            frmComputers.txtPrint2Port.Text = everIniFile.GetString("Принтеры", "Принтеры2|Свойства принтера|Порт принтера", "")
+        End If
+
+        uname = everIniFile.GetString("Принтеры", "Принтеры1|Свойства принтера|Имя принтера", "")
+
+
+        If uname = "Fax" Or uname = "Microsoft XPS Document Writer" Or uname = "Отправить в OneNote 2010" Then
+            uname = everIniFile.GetString("Суммарная информация", "Периферийные устройства|Принтер3", "")
+        End If
+
+        If uname = "Fax" Or uname = "Microsoft XPS Document Writer" Or uname = "Отправить в OneNote 2010" Then
+
+        Else
+            frmComputers.cmbPrinters3.Text = uname
+            frmComputers.PROizV36.Text = everIniFile.GetString("Принтеры", "Принтеры3|Производитель принтера|Фирма", "")
+            frmComputers.txtPrint3Port.Text = everIniFile.GetString("Принтеры", "Принтеры3|Свойства принтера|Порт принтера", "")
+        End If
+
+       
+
 
         'Установленное програмное обеспечение
         textpo()
@@ -944,7 +963,7 @@ Err_handler:
 
         On Error Resume Next
 
-        Call textp_Upd()
+        Call textp_Upd(frmComputers.lstSoftware)
 
         '################
         'Процессор
@@ -1850,7 +1869,7 @@ Err_handler:
         'cdat
     End Sub
 
-    Public Sub textp_Upd()
+    Public Sub textp_Upd(ByVal lstV As ListView)
         Dim uname As String
         Dim uname1 As String
         Dim uname2 As String
@@ -1862,7 +1881,7 @@ Err_handler:
 
         On Error GoTo Err_handler
         A = "Установленные программы"
-        'frmComputers.lstSoftware.ListItems.Clear
+        'lstV.ListItems.Clear
 
 
 
@@ -1873,6 +1892,11 @@ Err_handler:
 
             Dim everIniFile As New IniFile(EverestFilePatch)
             uname = everIniFile.GetString("Установленные программы", A, "")
+
+            If uname Like "Update" Then GoTo A2
+            If uname Like "Обновление" Then GoTo A2
+
+
             uname1 = everIniFile.GetString("Установленные программы", uname & "|Publisher", "")
             uname2 = everIniFile.GetString("Установленные программы", uname & "|Дата", "")
 
@@ -1894,16 +1918,16 @@ Err_handler:
                         If uname2 = "<N/A>" Then uname2 = Date.Today
                         If Len(uname2) = 0 Then uname2 = Date.Today
 
-                        frmComputers.lstSoftware.Items.Add(frmComputers.lstSoftware.Items.Count + 1)
-                        frmComputers.lstSoftware.Items(intj).SubItems.Add(frmComputers.lstSoftware.Items.Count)
-                        frmComputers.lstSoftware.Items(intj).SubItems.Add(uname)
-                        frmComputers.lstSoftware.Items(intj).SubItems.Add("")
-                        frmComputers.lstSoftware.Items(intj).SubItems.Add("")
-                        frmComputers.lstSoftware.Items(intj).SubItems.Add(uname2)
-                        frmComputers.lstSoftware.Items(intj).SubItems.Add(Date.Today)
-                        frmComputers.lstSoftware.Items(intj).SubItems.Add(uname1)
-                        'frmComputers.lstSoftware.ListItems(intj).SubItems(7) = uname2
-                        frmComputers.lstSoftware.Items(intj).EnsureVisible()
+                        lstV.Items.Add(lstV.Items.Count + 1)
+                        lstV.Items(intj).SubItems.Add(lstV.Items.Count)
+                        lstV.Items(intj).SubItems.Add(uname)
+                        lstV.Items(intj).SubItems.Add("")
+                        lstV.Items(intj).SubItems.Add("")
+                        lstV.Items(intj).SubItems.Add(uname2)
+                        lstV.Items(intj).SubItems.Add(Date.Today)
+                        lstV.Items(intj).SubItems.Add(uname1)
+                        lstV.Items(intj).SubItems.Add("")
+                        lstV.Items(intj).EnsureVisible()
                     End If
 
                 Else
@@ -1914,15 +1938,15 @@ Err_handler:
                     OS_OS = OS_OS & " " & everIniFile.GetString("Операционная система", "Свойства операционной системы|Пакет обновления ОС", "")
 
                     If Not (RSExistsSoft(frmComputers.sCOUNT, OS_OS)) Then
-                        frmComputers.lstSoftware.Items.Add(frmComputers.lstSoftware.Items.Count + 1)
-                        frmComputers.lstSoftware.Items(intj).SubItems.Add(frmComputers.lstSoftware.Items.Count)
-                        frmComputers.lstSoftware.Items(intj).SubItems.Add(OS_OS)
-                        frmComputers.lstSoftware.Items(intj).SubItems.Add(SAGAZOD)
-                        frmComputers.lstSoftware.Items(intj).SubItems.Add("")
-                        frmComputers.lstSoftware.Items(intj).SubItems.Add(Date.Today)
-                        frmComputers.lstSoftware.Items(intj).SubItems.Add(Date.Today)
-                        frmComputers.lstSoftware.Items(intj).SubItems.Add("Microsoft Corporation")
-                        frmComputers.lstSoftware.Items(intj).SubItems.Add("Операционная система")
+                        lstV.Items.Add(lstV.Items.Count + 1)
+                        lstV.Items(intj).SubItems.Add(lstV.Items.Count)
+                        lstV.Items(intj).SubItems.Add(OS_OS)
+                        lstV.Items(intj).SubItems.Add(SAGAZOD)
+                        lstV.Items(intj).SubItems.Add("")
+                        lstV.Items(intj).SubItems.Add(Date.Today)
+                        lstV.Items(intj).SubItems.Add(Date.Today)
+                        lstV.Items(intj).SubItems.Add("Microsoft Corporation")
+                        lstV.Items(intj).SubItems.Add("Операционная система")
 
                         Exit Sub
                     End If
@@ -1941,22 +1965,26 @@ Err_handler:
                         If uname2 = "<N/A>" Then uname2 = Date.Today
                         If Len(uname2) = 0 Then uname2 = Date.Today
 
-                        frmComputers.lstSoftware.Items.Add(frmComputers.lstSoftware.Items.Count + 1)
-                        frmComputers.lstSoftware.Items(intj).SubItems.Add(frmComputers.lstSoftware.Items.Count)
-                        frmComputers.lstSoftware.Items(intj).SubItems.Add(uname)
-                        frmComputers.lstSoftware.Items(intj).SubItems.Add("")
-                        frmComputers.lstSoftware.Items(intj).SubItems.Add("")
-                        frmComputers.lstSoftware.Items(intj).SubItems.Add(uname2)
-                        frmComputers.lstSoftware.Items(intj).SubItems.Add(Date.Today)
-                        frmComputers.lstSoftware.Items(intj).SubItems.Add(uname1)
-                        'frmComputers.lstSoftware.ListItems(intj).SubItems(7) = uname2
-                        frmComputers.lstSoftware.Items(intj).EnsureVisible()
+                        lstV.Items.Add(lstV.Items.Count + 1)
+                        lstV.Items(intj).SubItems.Add(lstV.Items.Count)
+                        lstV.Items(intj).SubItems.Add(uname)
+                        lstV.Items(intj).SubItems.Add("")
+                        lstV.Items(intj).SubItems.Add("")
+                        lstV.Items(intj).SubItems.Add(uname2)
+                        lstV.Items(intj).SubItems.Add(Date.Today)
+                        lstV.Items(intj).SubItems.Add(uname1)
+                        lstV.Items(intj).SubItems.Add("")
+                        'lstV.ListItems(intj).SubItems(7) = uname2
+                        lstV.Items(intj).EnsureVisible()
                     End If
 
                 Else
                 End If
 
             End If
+
+A2:
+
         Next
 
 

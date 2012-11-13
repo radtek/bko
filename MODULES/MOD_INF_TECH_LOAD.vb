@@ -1429,7 +1429,7 @@ err_:
         Dim rs As ADODB.Recordset 'Объявляем рекордсет
         Dim sSQL As String 'Переменная, где будет размещён SQL запрос
 
-        sSQL = "SELECT * FROM SOFT_INSTALL WHERE Id_Comp =" & sID & " ORDER BY Soft, NomerSoftKomp"
+        sSQL = "SELECT * FROM SOFT_INSTALL WHERE Id_Comp =" & sID & " and Soft not like '%update%' and Soft not like '%Обновление%' ORDER BY Soft, NomerSoftKomp"
         rs = New ADODB.Recordset
         rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 

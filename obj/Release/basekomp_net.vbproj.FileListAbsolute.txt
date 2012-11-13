@@ -187,8 +187,8 @@ D:\Devel\BC2.NET\obj\Release\basekomp_net.frm_os3.resources
 D:\Devel\BC2.NET\obj\Release\basekomp_net.frm_wmi.resources
 D:\Devel\BC2.NET\obj\Release\basekomp_net.QrCode.resources
 D:\Devel\BC2.NET\obj\Release\basekomp_net.Resources.resources
-D:\Devel\BC2.NET\obj\Release\GenerateResource.read.1.tlog
-D:\Devel\BC2.NET\obj\Release\GenerateResource.write.1.tlog
 D:\Devel\BC2.NET\obj\Release\basekomp_net.exe
 D:\Devel\BC2.NET\obj\Release\basekomp_net.xml
 D:\Devel\BC2.NET\obj\Release\basekomp_net.pdb
+D:\Devel\BC2.NET\obj\Release\GenerateResource.read.1.tlog
+D:\Devel\BC2.NET\obj\Release\GenerateResource.write.1.tlog

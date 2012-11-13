@@ -879,9 +879,11 @@ sAR:
 
         If frmComputers.EDT = False Then
 
-            Call SAVE_SOFT(frmComputers.sCOUNT)
+            Call SAVE_SOFT(frmComputers.lstSoftware, frmComputers.sCOUNT)
 
         Else
+
+            Call SAVE_SOFT(frmComputers.lstSoftware, frmComputers.sCOUNT)
 
         End If
 
@@ -923,11 +925,11 @@ err_:
     'End Sub
 
 
-    Public Sub SAVE_SOFT(Optional ByVal sSID As Integer = 0)
+    Public Sub SAVE_SOFT(ByVal lstV As ListView, Optional ByVal sSID As Integer = 0)
         On Error Resume Next
 
         If sSID = 0 Then Exit Sub
-
+        lstV.Visible = False
 
 
         Dim A1, B1, C1, F1, G1, H1 As String
@@ -937,10 +939,10 @@ err_:
 
         Dim uname34 As String
 
-        For intj = 0 To frmComputers.lstSoftware.Items.Count - 1
+        For intj = 0 To lstV.Items.Count - 1
 
-            If frmComputers.lstSoftware.Items(intj).SubItems(6).Text <> "" Or frmComputers.lstSoftware.Items(intj).SubItems(6).Text <> "<N/A>" Or Len(frmComputers.lstSoftware.Items(intj).SubItems(6).Text) <> 0 Then
-                uname34 = frmComputers.lstSoftware.Items(intj).SubItems(6).Text
+            If lstV.Items(intj).SubItems(6).Text <> "" Or lstV.Items(intj).SubItems(6).Text <> "<N/A>" Or Len(lstV.Items(intj).SubItems(6).Text) <> 0 Then
+                uname34 = lstV.Items(intj).SubItems(6).Text
             Else
                 uname34 = "NoName"
             End If
@@ -952,58 +954,72 @@ err_:
 
         Dim rsSoft As ADODB.Recordset
 
-        For intj = 0 To frmComputers.lstSoftware.Items.Count - 1
+        rsSoft = New ADODB.Recordset
+        rsSoft.Open("SELECT count(*) as t_n FROM SOFT_INSTALL where id_comp=" & sSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
-            If Len(frmComputers.lstSoftware.Items(intj).SubItems(1).Text) > 0 Then
-                frmComputers.lstSoftware.Items(intj).Selected = True
-                frmComputers.lstSoftware.Items(intj).EnsureVisible()
-                'frmComputers.lstSoftware.SetFocus()
+        With rsSoft
+
+            A1 = .Fields("t_n").Value
+
+        End With
+        rsSoft.Close()
+        rsSoft = Nothing
+
+        A1 = lstV.Items.Count
 
 
-                frmComputers.lstSoftware.Items(intj).Focused = True
+        For intj = 0 To lstV.Items.Count - 1
 
-                If Len(frmComputers.lstSoftware.Items(intj).Text) = 0 Then frmComputers.lstSoftware.Items(intj).Text = 1
-                A1 = frmComputers.lstSoftware.Items(intj).Text
+          
+
+                    If Len(lstV.Items(intj).SubItems(1).Text) > 0 Then
+                        lstV.Items(intj).Selected = True
+                        lstV.Items(intj).EnsureVisible()
+                        'lstV.SetFocus()
+
+                        lstV.Items(intj).Focused = True
+
+                        If Len(lstV.Items(intj).Text) = 0 Then lstV.Items(intj).Text = 1
 
 
-                H1 = frmComputers.lstSoftware.Items(intj).SubItems(2).Text
+                        H1 = lstV.Items(intj).SubItems(2).Text
 
-                If Len(frmComputers.lstSoftware.Items(intj).SubItems(3).Text) = 0 Then
-                    B1 = ""
-                Else
-                    B1 = frmComputers.lstSoftware.Items(intj).SubItems(3).Text
-                End If
+                        If Len(lstV.Items(intj).SubItems(3).Text) = 0 Then
+                            B1 = ""
+                        Else
+                            B1 = lstV.Items(intj).SubItems(3).Text
+                        End If
 
-                If Len(frmComputers.lstSoftware.Items(intj).SubItems(4).Text) = 0 Then
-                    C1 = ""
-                Else
-                    C1 = frmComputers.lstSoftware.Items(intj).SubItems(4).Text
-                End If
+                        If Len(lstV.Items(intj).SubItems(4).Text) = 0 Then
+                            C1 = ""
+                        Else
+                            C1 = lstV.Items(intj).SubItems(4).Text
+                        End If
 
-                If Len(frmComputers.lstSoftware.Items(intj).SubItems(5).Text) = 0 Then
-                    D1 = Date.Today
-                Else
-                    D1 = frmComputers.lstSoftware.Items(intj).SubItems(5).Text
-                End If
+                        If Len(lstV.Items(intj).SubItems(5).Text) = 0 Then
+                            D1 = Date.Today
+                        Else
+                            D1 = lstV.Items(intj).SubItems(5).Text
+                        End If
 
-                If Len(frmComputers.lstSoftware.Items(intj).SubItems(6).Text) = 0 Then
-                    E1 = Date.Today
-                Else
-                    E1 = frmComputers.lstSoftware.Items(intj).SubItems(6).Text
-                End If
+                        If Len(lstV.Items(intj).SubItems(6).Text) = 0 Then
+                            E1 = Date.Today
+                        Else
+                            E1 = lstV.Items(intj).SubItems(6).Text
+                        End If
 
-                If Len(frmComputers.lstSoftware.Items(intj).SubItems(7).Text) = 0 Then
-                    F1 = ""
-                Else
-                    F1 = frmComputers.lstSoftware.Items(intj).SubItems(7).Text
-                    If F1 = "<N/A>" Then F1 = ""
-                End If
+                        If Len(lstV.Items(intj).SubItems(7).Text) = 0 Then
+                            F1 = ""
+                        Else
+                            F1 = lstV.Items(intj).SubItems(7).Text
+                            If F1 = "<N/A>" Then F1 = ""
+                        End If
 
-                If Len(frmComputers.lstSoftware.Items(intj).SubItems(8).Text) = 0 Then
-                    G1 = ""
-                Else '
-                    G1 = frmComputers.lstSoftware.Items(intj).SubItems(9).Text
-                End If
+                        If Len(lstV.Items(intj).SubItems(8).Text) = 0 Then
+                            G1 = ""
+                        Else '
+                            G1 = lstV.Items(intj).SubItems(9).Text
+                        End If
 
 
 
@@ -1032,6 +1048,9 @@ err_:
 
                         rsSoft.Close()
                         rsSoft = Nothing
+
+                        A1 = A1 - 1
+
                     End If
                 End If
             End If
@@ -1043,6 +1062,7 @@ err_:
         rsSoft.Close()
         rsSoft = Nothing
 
+        lstV.Visible = True
 
     End Sub
 

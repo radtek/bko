@@ -742,7 +742,7 @@ Error_:
         d = Split(lstGroups.SelectedNode.Tag, "|")
 
         Call Clear_Form_For_Computer()
-        Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG14", "") & " " & Me.lstGroups.SelectedNode.Text)
+        ' Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG14", "") & " " & Me.lstGroups.SelectedNode.Text)
 
 
 
@@ -6715,5 +6715,6 @@ err_1:
 
         Me.Cursor = Cursors.Default
     End Sub
+
 End Class
 
