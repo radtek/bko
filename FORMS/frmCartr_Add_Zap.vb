@@ -20,7 +20,7 @@
 
 
         If Len(cmbPost.Text) = 0 Then
-            MsgBox(objIniFile.GetString("frmCartr_Add_Zap", "MSG1", ""), MsgBoxStyle.Critical, ProGramName)
+            MsgBox(objIniFile.GetString("frmCartr_Add_Zap", "MSG1", "Не выбран сервис центр!"), MsgBoxStyle.Critical, ProGramName)
             cmbPost.Focus()
             Exit Sub
         End If

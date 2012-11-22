@@ -55,14 +55,13 @@ Partial Class frmSoftware
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.btnCancel = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
-        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
-        Me.Label1 = New System.Windows.Forms.Label()
         Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
+        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.gbTree.SuspendLayout()
         Me.TableLayoutPanel3.SuspendLayout()
         Me.ToolStrip2.SuspendLayout()
-        CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
@@ -136,6 +135,7 @@ Partial Class frmSoftware
         Me.ToolStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnSearch})
         Me.ToolStrip2.Location = New System.Drawing.Point(265, 0)
         Me.ToolStrip2.Name = "ToolStrip2"
+        Me.ToolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
         Me.ToolStrip2.Size = New System.Drawing.Size(35, 30)
         Me.ToolStrip2.TabIndex = 7
         Me.ToolStrip2.Text = "ToolStrip2"
@@ -379,6 +379,7 @@ Partial Class frmSoftware
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnAdd, Me.ToolStripSeparator1, Me.btnDelete, Me.ToolStripSeparator2, Me.btnCancel, Me.ToolStripSeparator3, Me.ToolStripButton1, Me.ToolStripSeparator4})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 133)
         Me.ToolStrip1.Name = "ToolStrip1"
+        Me.ToolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
         Me.ToolStrip1.Size = New System.Drawing.Size(393, 25)
         Me.ToolStrip1.TabIndex = 20
         Me.ToolStrip1.Text = "ToolStrip1"
@@ -425,6 +426,20 @@ Partial Class frmSoftware
         Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
         Me.ToolStripSeparator3.Size = New System.Drawing.Size(6, 25)
         '
+        'ToolStripButton1
+        '
+        Me.ToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.ToolStripButton1.Image = CType(resources.GetObject("ToolStripButton1.Image"), System.Drawing.Image)
+        Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton1.Name = "ToolStripButton1"
+        Me.ToolStripButton1.Size = New System.Drawing.Size(86, 22)
+        Me.ToolStripButton1.Text = "Обновить ПО"
+        '
+        'ToolStripSeparator4
+        '
+        Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
+        Me.ToolStripSeparator4.Size = New System.Drawing.Size(6, 25)
+        '
         'CheckBox2
         '
         Me.CheckBox2.AutoSize = True
@@ -444,20 +459,6 @@ Partial Class frmSoftware
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Программное обеспечение"
         '
-        'ToolStripButton1
-        '
-        Me.ToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.ToolStripButton1.Image = CType(resources.GetObject("ToolStripButton1.Image"), System.Drawing.Image)
-        Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton1.Name = "ToolStripButton1"
-        Me.ToolStripButton1.Size = New System.Drawing.Size(86, 22)
-        Me.ToolStripButton1.Text = "Обновить ПО"
-        '
-        'ToolStripSeparator4
-        '
-        Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
-        Me.ToolStripSeparator4.Size = New System.Drawing.Size(6, 25)
-        '
         'frmSoftware
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -475,7 +476,6 @@ Partial Class frmSoftware
         Me.ToolStrip2.PerformLayout()
         Me.SplitContainer1.Panel1.ResumeLayout(False)
         Me.SplitContainer1.Panel2.ResumeLayout(False)
-        CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer1.ResumeLayout(False)
         Me.gbSoftware.ResumeLayout(False)
         Me.gbSoftware.PerformLayout()

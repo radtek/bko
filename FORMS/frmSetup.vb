@@ -167,14 +167,14 @@ Public Class frmSetup
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
         cmbDefaultModul.Items.Clear()
-        cmbDefaultModul.Items.Add(LNGIniFile.GetString("frmSetup", "MSG3", ""))
-        cmbDefaultModul.Items.Add(LNGIniFile.GetString("frmSetup", "MSG4", ""))
-        cmbDefaultModul.Items.Add(LNGIniFile.GetString("frmSetup", "MSG5", ""))
-        cmbDefaultModul.Items.Add(LNGIniFile.GetString("frmSetup", "MSG6", ""))
+        cmbDefaultModul.Items.Add(LNGIniFile.GetString("frmSetup", "MSG3", "Учёт оргтехники"))
+        cmbDefaultModul.Items.Add(LNGIniFile.GetString("frmSetup", "MSG4", "Учёт заявок"))
+        cmbDefaultModul.Items.Add(LNGIniFile.GetString("frmSetup", "MSG5", "Учёт П.О."))
+        cmbDefaultModul.Items.Add(LNGIniFile.GetString("frmSetup", "MSG6", "Учёт картриджей"))
 
         cmbSortTree.Items.Clear()
-        cmbSortTree.Items.Add(LNGIniFile.GetString("frmSetup", "MSG1", ""))
-        cmbSortTree.Items.Add(LNGIniFile.GetString("frmSetup", "MSG2", ""))
+        cmbSortTree.Items.Add(LNGIniFile.GetString("frmSetup", "MSG1", "По имени техники"))
+        cmbSortTree.Items.Add(LNGIniFile.GetString("frmSetup", "MSG2", "По типу техники"))
 
         Dim uname As String
         Dim objIniFile As New IniFile(PrPath & "base.ini")
@@ -463,47 +463,47 @@ Public Class frmSetup
 
 
         txtSUBD.Text = objIniFile.GetString("General", "BasePath", BasePath)
-        txtEverestDir.Text = objIniFile.GetString("General", "aida", "d:\")
+        txtEverestDir.Text = objIniFile.GetString("General", "aida", PrPath)
 
 
-        If DB_N <> "MS Access" Then
+        'If DB_N <> "MS Access" Then
 
-            lvFindDB.Items.Add(1) 'col no. 1
-            lvFindDB.Items(CInt(0)).SubItems.Add(DB_N)
-            lvFindDB.Items(CInt(0)).SubItems.Add("X")
-            Button1.Enabled = False
-        Else
+        '    lvFindDB.Items.Add(1) 'col no. 1
+        '    lvFindDB.Items(CInt(0)).SubItems.Add(DB_N)
+        '    lvFindDB.Items(CInt(0)).SubItems.Add("X")
+        '    Button1.Enabled = False
+        'Else
 
-            uname = objIniFile.GetString("General", "file", "basekomp.mdb")
+        '    uname = objIniFile.GetString("General", "file", "basekomp.mdb")
 
-            Dim intCount As Decimal = 0
-            Try
-                ' Only get files that begin with the letter "c."
-                Dim dirs As String() = Directory.GetFiles(BasePath, "*.mdb")
-                ' Console.WriteLine("The number of files starting with c is {0}.", dirs.Length)
-                Dim dir As String
+        '    Dim intCount As Decimal = 0
+        '    Try
+        '        ' Only get files that begin with the letter "c."
+        '        Dim dirs As String() = Directory.GetFiles(BasePath, "*.mdb")
+        '        ' Console.WriteLine("The number of files starting with c is {0}.", dirs.Length)
+        '        Dim dir As String
 
-                For Each dir In dirs
-                    Dim d() As String
-                    d = Split(dir, "\")
+        '        For Each dir In dirs
+        '            Dim d() As String
+        '            d = Split(dir, "\")
 
-                    lvFindDB.Items.Add(lvFindDB.Items.Count + 1) 'col no. 1
-                    lvFindDB.Items(CInt(intCount)).SubItems.Add(d(d.Length - 1))
+        '            lvFindDB.Items.Add(lvFindDB.Items.Count + 1) 'col no. 1
+        '            lvFindDB.Items(CInt(intCount)).SubItems.Add(d(d.Length - 1))
 
-                    If uname = d(d.Length - 1) Then
-                        lvFindDB.Items(CInt(intCount)).SubItems.Add("X")
-                    Else
+        '            If uname = d(d.Length - 1) Then
+        '                lvFindDB.Items(CInt(intCount)).SubItems.Add("X")
+        '            Else
 
-                        lvFindDB.Items(CInt(intCount)).SubItems.Add("")
-                    End If
+        '                lvFindDB.Items(CInt(intCount)).SubItems.Add("")
+        '            End If
 
-                    intCount = intCount + 1
-                Next
-            Catch e1 As Exception
+        '            intCount = intCount + 1
+        '        Next
+        '    Catch e1 As Exception
 
-            End Try
+        '    End Try
 
-        End If
+        'End If
 
 
         Dim rs As ADODB.Recordset
@@ -527,6 +527,7 @@ Public Class frmSetup
                 If Not IsDBNull(.Fields("ORG").Value) Then txtORG.Text = .Fields("ORG").Value
                 If Not IsDBNull(.Fields("Name_Prog").Value) Then txtPRG.Text = .Fields("Name_Prog").Value
                 If Not IsDBNull(.Fields("nr").Value) Then txtMail.Text = .Fields("nr").Value
+                If Not IsDBNull(.Fields("nomer_compa").Value) Then txtBigBoss.Text = .Fields("nomer_compa").Value
 
             End With
             rs.Close()
@@ -635,8 +636,8 @@ Public Class frmSetup
 
         Dim sText As String
 
-        If cmbSortTree.Text = LNGIniFile.GetString("frmSetup", "MSG1", "") Then sText = 0
-        If cmbSortTree.Text = LNGIniFile.GetString("frmSetup", "MSG2", "") Then sText = 1
+        If cmbSortTree.Text = LNGIniFile.GetString("frmSetup", "MSG1", "По имени техники") Then sText = 0
+        If cmbSortTree.Text = LNGIniFile.GetString("frmSetup", "MSG2", "По типу техники") Then sText = 1
 
         objIniFile.WriteString("general", "Tree_S", sText)
 
@@ -647,16 +648,16 @@ Public Class frmSetup
 
         SStab1.Width = Me.Width
         SStab1.Height = Me.Height
-        lvFindDB.Width = SStab1.Width - 5
+        ' lvFindDB.Width = SStab1.Width - 5
         gbUsers.Width = SStab1.Width - 5
 
     End Sub
 
-    Private Sub lvFindDB_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvFindDB.Click
-        sFILEBD = lvFindDB.Items.Item(lvFindDB.FocusedItem.Index).SubItems(1).Text
-    End Sub
+    'Private Sub lvFindDB_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvFindDB.Click
+    '    sFILEBD = lvFindDB.Items.Item(lvFindDB.FocusedItem.Index).SubItems(1).Text
+    'End Sub
 
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
 
         'lvFindDB
 
@@ -1056,8 +1057,7 @@ Public Class frmSetup
             .Fields("ORG").Value = txtORG.Text
             .Fields("Name_Prog").Value = txtPRG.Text
             .Fields("nr").Value = txtMail.Text
-            '.Fields("access").Value = "1.6.94"
-            '.Fields("nomer_compa").Value = "0"
+            .Fields("nomer_compa").Value = txtBigBoss.Text
             '.Fields("asc").Value = 0
 
             .Update()

@@ -2,6 +2,7 @@
 
     Private Sub frmSplash_Activated(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Activated
 
+        On Error Resume Next
         'SendFonts(Me)
 
         'Dim sBackgroundImage As String = PrPath & "\img\BKO17.jpg"
@@ -12,7 +13,7 @@
 
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
-        Version.Text = LNGIniFile.GetString("frmSplash", "MSG1", "") & " " & My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor & "." & My.Application.Info.Version.Build & "." & My.Application.Info.Version.Revision
+        Version.Text = LNGIniFile.GetString("frmSplash", "MSG1", "Версия:") & " " & My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor & "." & My.Application.Info.Version.Build & "." & My.Application.Info.Version.Revision
 
 
     End Sub

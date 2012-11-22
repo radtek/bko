@@ -414,6 +414,7 @@ Module MOD_SYS_PRELOAD
 
     Public Sub ClearForm(ByVal ControlContainer As Object)
 
+
         Dim A1 As String
         A1 = frmComputers.treebranche.Text
 
@@ -428,6 +429,9 @@ Module MOD_SYS_PRELOAD
                     If TypeOf Ctl Is ListView Then Ctl.items.clear()
                     'If TypeOf Ctl Is CheckBox Then Ctl.checked = False
                     If TypeOf Ctl Is RadioButton Then Ctl.checked = False
+
+
+                    ' If TypeOf Ctl Is ToolStrip Then Ctl.rendermode = ToolStripRenderMode.System
 
                 End If
 
@@ -444,6 +448,35 @@ Module MOD_SYS_PRELOAD
         frmComputers.chkNETNNb.Checked = False
         frmComputers.chkOTHNNb.Checked = False
         frmComputers.chkOTHspis.Checked = False
+
+        'frmComputers.chkSNMP.Checked = False
+
+        'If TipTehn = "IBP" Then
+
+        '    frmComputers.chkSNMP.Visible = True
+
+        'Else
+
+        '   frmComputers.chkSNMP.Visible = False
+
+        'End If
+
+
+
+        'frmComputers.Label94.Text = "---"
+        'frmComputers.Label95.Text = "---"
+        'frmComputers.Label96.Text = "---"
+        'frmComputers.Label97.Text = "---"
+        'frmComputers.Label110.Text = "---"
+        'frmComputers.Label111.Text = "---"
+        'frmComputers.Label112.Text = "---"
+        'frmComputers.Label113.Text = "---"
+        'frmComputers.Label102.Text = "---"
+        'frmComputers.Label103.Text = "---"
+        'frmComputers.Label104.Text = "---"
+        'frmComputers.Label105.Text = "---"
+        'frmComputers.txtOTHSN.Text = "---"
+        'frmComputers.txtOTHMAC.Text = "---"
 
         frmComputers.treebranche.Text = A1
 
@@ -578,5 +611,32 @@ Module MOD_SYS_PRELOAD
     '        End Try
     '    Next
     'End Sub
+
+    Public Sub LOAD_COMBO_SPR()
+        Dim oRS As ADODB.Recordset
+
+        oRS = DB7.OpenSchema(ADODB.SchemaEnum.adSchemaTables, New Object() {Nothing, Nothing, Nothing, "TABLE"})
+
+        If Not (oRS.EOF) Then
+            Do Until oRS.EOF
+                If UCase(oRS.Fields.Item("TABLE_TYPE").Value) = "TABLE" Then
+
+
+                    If Left(oRS.Fields.Item("TABLE_NAME").Value, 3) = "SPR" Then
+
+                        frmDirectory.cmb1.Items.Add(oRS.Fields.Item("TABLE_NAME").Value)
+
+                    End If
+
+
+                End If
+                oRS.MoveNext()
+            Loop
+        End If
+
+        oRS.Close()
+        oRS = Nothing
+    End Sub
+
 End Module
 

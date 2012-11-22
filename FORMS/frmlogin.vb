@@ -248,7 +248,7 @@ err_:
 
 
         Else
-            MsgBox(LNGIniFile.GetString("frmLogin", "MSG1", "") & vbCrLf & LNGIniFile.GetString("frmLogin", "MSG2", ""), MsgBoxStyle.Information, "BKO.NET - " & tVER)
+            MsgBox(LNGIniFile.GetString("frmLogin", "MSG1", "Версия базы данных не является эталонной") & vbCrLf & LNGIniFile.GetString("frmLogin", "MSG2", "воспользуйтесь конвертором"), MsgBoxStyle.Information, "BKO.NET - " & tVER)
 
             End
         End If
@@ -381,7 +381,7 @@ err_:
 
                         End If
 
-                        Call SaveActivityToLogDB(LNGIniFile.GetString("frmLogin", "MSG3", ""))
+                        Call SaveActivityToLogDB(LNGIniFile.GetString("frmLogin", "MSG3", "Вход в программу"))
 
                         Call ALTER_DB()
                         Me.Hide()
@@ -391,7 +391,7 @@ err_:
 
                     Else
 
-                        Call SaveActivityToLogDB(LNGIniFile.GetString("frmLogin", "MSG4", ""))
+                        Call SaveActivityToLogDB(LNGIniFile.GetString("frmLogin", "MSG4", "Ввод не верного пароля"))
 
                         System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.Default
                         Me.Enabled = True

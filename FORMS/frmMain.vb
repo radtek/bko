@@ -4,10 +4,9 @@ Imports System.IO
 Imports System.Drawing
 Imports System.Collections
 Imports System.ComponentModel
-Imports System.Xml
-Imports System.Xml.XPath
 Imports System.Threading
 Imports Ionic.Zip
+Imports System.Net.Mail
 
 
 
@@ -123,51 +122,37 @@ Public Class frmMain
 
             DB_USE.DropDown.Items.Clear()
 
-            Try
-                ' Only get files that begin with the letter "c."
-                Dim dirs As String() = Directory.GetFiles(BasePath, "*.mdb")
-                ' Console.WriteLine("The number of files starting with c is {0}.", dirs.Length)
-                Dim dir As String
+            ' Only get files that begin with the letter "c."
+            Dim dirs As String() = Directory.GetFiles(BasePath, "*.mdb")
+            ' Console.WriteLine("The number of files starting with c is {0}.", dirs.Length)
+            Dim dir As String
 
-                Dim B1 As New ToolStripButton
-                Dim i As Integer = 0
-                Dim sNameS(500) As String
-
-
-                For Each dir In dirs
+            Dim B1 As New ToolStripButton
+            Dim i As Integer = 0
+            Dim sNameS(500) As String
 
 
-                    Dim d() As String
-                    d = Split(dir, "\")
-                    'd(d.Length - 1
-                    sNameS(i) = d(d.Length - 1)
+            For Each dir In dirs
 
-                    i = i + 1
-                Next
+                Dim d() As String
+                d = Split(dir, "\")
+                'd(d.Length - 1
+                sNameS(i) = d(d.Length - 1)
 
-
-                For i1 As Integer = 0 To i
-                    Dim B As New ToolStripButton
-
-                    B.ForeColor = Color.Blue
-                    B.Text = sNameS(i1)
-                    Btn(i1) = B
-
-                    AddHandler Btn(i1).Click, AddressOf DBButtonsClick
-                    DB_USE.DropDown.Items.AddRange(New ToolStripItem() {Btn(i1)})
-                Next
+                i = i + 1
+            Next
 
 
+            For i1 As Integer = 0 To i
+                Dim B As New ToolStripButton
 
+                B.ForeColor = Color.Blue
+                B.Text = sNameS(i1)
+                Btn(i1) = B
 
-            Catch e1 As Exception
-                'Console.WriteLine("The process failed: {0}", e1.ToString())
-            End Try
-
-
-
-
-
+                AddHandler Btn(i1).Click, AddressOf DBButtonsClick
+                DB_USE.DropDown.Items.AddRange(New ToolStripItem() {Btn(i1)})
+            Next
 
             DB_USE.Text = Base_Name
 
@@ -176,8 +161,6 @@ Public Class frmMain
             DB_USE.Visible = False
 
         End If
-
-
 
         ''Меняем шрифт
         Call SendFonts(Me)
@@ -288,9 +271,6 @@ Public Class frmMain
         End Select
         Me.ToolStrip.Visible = Me.ToolBarToolStripMenuItem.Checked
 
-
-
-
         'Наименование программы 
         Dim rsG As ADODB.Recordset
         rsG = New ADODB.Recordset
@@ -306,7 +286,6 @@ Public Class frmMain
         If Len(ProGramName) = 0 Or ProGramName = Nothing Then ProGramName = "BKO.NET"
 
         Me.Text = ProGramName & " " & My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor & "." & My.Application.Info.Version.Build & "." & My.Application.Info.Version.Revision
-
 
         'Напоминания есть или нет
         'Dim newThread4 As New Thread(AddressOf SHED_CHECK_1)
@@ -373,8 +352,6 @@ Public Class frmMain
 
         End If
 
-
-
         'Какой модуль запускать
         sText = objIniFile.GetString("general", "MOD", 0)
 
@@ -409,7 +386,6 @@ Public Class frmMain
                 '   My.Application.DoEvents()
         End Select
 
-
         'Запускаем таймер
 
         Dim t As New System.Windows.Forms.Timer
@@ -433,8 +409,7 @@ Public Class frmMain
         LBL_SUBD.Text = unamDB & " - " & Base_Name
         LBL_USER.Text = UserNames & "/" & uLevel
 
-
-
+       
 
     End Sub
     Public Sub DBButtonsClick(ByVal sender As [Object], ByVal e As EventArgs)
@@ -778,6 +753,10 @@ error_Renamed:
         rs.Open("DELETE FROM kompy", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
         rs = Nothing
 
+        rs = New ADODB.Recordset
+        rs.Open("DELETE FROM SPR_USER", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = Nothing
+
 
         Call frmComputers.STAT_INF()
         Call SHED_CHECK()
@@ -791,7 +770,7 @@ error_Renamed:
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
 
-        MsgBox(LNGIniFile.GetString("frmMain", "MSG4", ""), MsgBoxStyle.Information)
+        MsgBox(LNGIniFile.GetString("frmMain", "MSG4", "Очистка базы завершено успешно!"), MsgBoxStyle.Information)
         'Exit Sub
 
 
@@ -820,7 +799,7 @@ Error_:
             Kill(BasePath & Base_Name)
             Rename(BasePath & sBname, BasePath & Base_Name)
             LoadDatabase()
-            MsgBox(LNGIniFile.GetString("frmMain", "MSG5", ""), MsgBoxStyle.Information, ProGramName)
+            MsgBox(LNGIniFile.GetString("frmMain", "MSG5", "Сжатие базы завершено успешно!"), MsgBoxStyle.Information, ProGramName)
 
         End If
 
@@ -1104,7 +1083,7 @@ err_:
         Dim fdlg As OpenFileDialog = New OpenFileDialog()
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
-        fdlg.Title = LNGIniFile.GetString("frmMain", "MSG9", "")
+        fdlg.Title = LNGIniFile.GetString("frmMain", "MSG9", "Шаблоны бланков")
         fdlg.InitialDirectory = ePatch
         fdlg.Filter = "Шаблоны документов MS Word(*.dot)|*.dot|Документы MS Word(*.doc)|*.doc"
 
@@ -1393,6 +1372,8 @@ err_:
 
         FillComboNET(frmComputers.cmbOTH, "name", "SPR_OTH_DEV", "", False, True)
         FillComboNET(frmComputers.cmbOTHConnect, "name", "spr_other", "", False, True)
+
+
         frmComputers.lblTipOther.Visible = True
         frmComputers.cmbOTHConnect.Visible = True
 
@@ -1470,12 +1451,12 @@ err_:
         Call VisibleForm(frmComputers)
         Dim ePatch As String
         Dim objIniFile As New IniFile(PrPath & "base.ini")
-        ePatch = objIniFile.GetString("General", "aida", "c:\")
+        ePatch = objIniFile.GetString("General", "aida", PrPath)
 
         Dim fdlg As OpenFileDialog = New OpenFileDialog()
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
-        fdlg.Title = LNGIniFile.GetString("frmMain", "MSG3", "")
+        fdlg.Title = LNGIniFile.GetString("frmMain", "MSG3", "Загрузка из Everest Corporate Edition")
 
         fdlg.InitialDirectory = ePatch
         fdlg.Filter = "csv files (*.csv)|*.csv"
@@ -1537,11 +1518,11 @@ err_:
         Call VisibleForm(frmComputers)
         Dim ePatch As String
         Dim objIniFile As New IniFile(PrPath & "base.ini")
-        ePatch = objIniFile.GetString("General", "aida", "c:\")
+        ePatch = objIniFile.GetString("General", "aida", PrPath)
 
         Dim fdlg As OpenFileDialog = New OpenFileDialog()
         Dim LNGIniFile As New IniFile(sLANGPATH)
-        fdlg.Title = LNGIniFile.GetString("frmMain", "MSG6", "")
+        fdlg.Title = LNGIniFile.GetString("frmMain", "MSG6", "Загрузка из ASTRA32")
         fdlg.InitialDirectory = ePatch
         fdlg.Filter = "ini files (*.ini)|*.ini"
         fdlg.FilterIndex = 2
@@ -1670,11 +1651,11 @@ err_:
 
         Dim ePatch As String
         Dim objIniFile As New IniFile(PrPath & "base.ini")
-        ePatch = objIniFile.GetString("General", "aida", "c:\")
+        ePatch = objIniFile.GetString("General", "aida", PrPath)
 
         Dim fdlg As OpenFileDialog = New OpenFileDialog()
         Dim LNGIniFile As New IniFile(sLANGPATH)
-        fdlg.Title = LNGIniFile.GetString("frmMain", "MSG3", "")
+        fdlg.Title = LNGIniFile.GetString("frmMain", "MSG3", "Загрузка из Everest Corporate Edition")
         fdlg.InitialDirectory = ePatch
         fdlg.Filter = "ini files (*.ini)|*.ini"
         fdlg.FilterIndex = 2
@@ -1685,7 +1666,6 @@ err_:
             Me.Cursor = Cursors.WaitCursor
 
             EverestFilePatch = fdlg.FileName
-
 
         End If
         frmComputers.selectTECMesto()
@@ -1725,10 +1705,10 @@ err_:
 
 
         If frmComputers.EDT = True Then
-            Call SaveActivityToLogDB(LNGIniFile.GetString("frmMain", "MSG1", "") & " " & frmComputers.lstGroups.SelectedNode.Text)
+            Call SaveActivityToLogDB(LNGIniFile.GetString("frmMain", "MSG1", "Сохранение техники") & " " & frmComputers.lstGroups.SelectedNode.Text)
 
         Else
-            Call SaveActivityToLogDB(LNGIniFile.GetString("frmMain", "MSG2", ""))
+            Call SaveActivityToLogDB(LNGIniFile.GetString("frmMain", "MSG2", "Создание новой техники"))
         End If
 
 
@@ -1982,11 +1962,11 @@ ADD:
 
         If frmComputers.EDT = True Then
 
-            Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG51", "") & " " & frmComputers.lstGroups.SelectedNode.Text)
+            Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG51", "Редактирование техники") & " " & frmComputers.lstGroups.SelectedNode.Text)
 
         Else
 
-            Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG50", "") & " /" & sBranch & "/" & sDepartment & "/" & sOffice)
+            Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG50", "Добавление новой техники в") & " /" & sBranch & "/" & sDepartment & "/" & sOffice)
 
         End If
 
@@ -2353,7 +2333,7 @@ ADD:
         frmComputers.lblOTPCL.Visible = False
         frmComputers.cmbOTHPCL.Visible = False
 
-
+        '  Call LOAD_PCL(frmComputers.cmbOTHFil.Text, frmComputers.cmbOTHDepart.Text, frmComputers.cmbOTHOffice.Text, frmComputers.cmbOTHPCL)
 
         Exit Sub
 err_:
@@ -2438,7 +2418,7 @@ err_:
 
                     If SERT3 > 0 Then
 
-                        MsgBox(LNGIniFile.GetString("frmMain", "MSG10", "") & " " & SERT3 & " " & LNGIniFile.GetString("frmMain", "MSG11", ""), MsgBoxStyle.Information, ProGramName)
+                        MsgBox(LNGIniFile.GetString("frmMain", "MSG10", "Имеются не завершенные ремонты в количестве:") & " " & SERT3 & " " & LNGIniFile.GetString("frmMain", "MSG11", "шт."), MsgBoxStyle.Information, ProGramName)
 
                     End If
 

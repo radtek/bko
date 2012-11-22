@@ -63,7 +63,7 @@
         'MSG19 
         Dim objIniFile As New IniFile(sLANGPATH)
 
-        btnNotes.Text = objIniFile.GetString("frmComputers", "MSG30", "")
+        btnNotes.Text = objIniFile.GetString("frmComputers", "MSG30", "Добавить")
         dt.Value = Date.Today
         cmaster.Text = ""
         tNotes.Text = ""
@@ -1094,12 +1094,12 @@ Error_:
             Case Else
 
                 If A1 = 0 Then
-                    sSQL = "Select NET_NAME From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "' and TipTehn='PC'"
+                    sSQL = "Select NET_NAME From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "' and TipTehn='PC' or TipTehn='CNT'"
                 Else
-                    sSQL = "Select NET_NAME From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "' and TipTehn='PC'"
+                    sSQL = "Select NET_NAME From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "' and TipTehn='PC' or TipTehn='CNT'"
                 End If
 
-                rs.Open("Select count(*) as t_n From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "' and TipTehn='PC'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs.Open("Select count(*) as t_n From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "' and TipTehn='PC' or TipTehn='CNT'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
                 'Dim a1 As String
                 With rs
@@ -1130,39 +1130,41 @@ Error_:
         rs = Nothing
 
 
-        If TipTehn <> "PC" And TipTehn <> "NET" Then
-            rs = New ADODB.Recordset
-            rs.Open("Select count(*) as t_n From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "' and TipTehn='CNT'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        'If TipTehn <> "PC" And TipTehn <> "NET" Then
+        '    rs = New ADODB.Recordset
+        '    rs.Open("Select count(*) as t_n From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "' and TipTehn='CNT' or TipTehn='PC'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
-            'Dim a1 As String
-            With rs
+        '    'Dim a1 As String
+        '    With rs
 
-                A1 = .Fields("t_n").Value
-            End With
-            rs.Close()
-            rs = Nothing
+        '        A1 = .Fields("t_n").Value
+        '    End With
+        '    rs.Close()
+        '    rs = Nothing
 
 
 
-            If A1 <> 0 Then
-                sSQL = "Select NET_NAME From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "' and TipTehn='CNT'"
-                rs = New ADODB.Recordset
-                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        '    If A1 <> 0 Then
+        '        sSQL = "Select NET_NAME From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "' and TipTehn='CNT' or TipTehn='PC'"
+        '        rs = New ADODB.Recordset
+        '        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
-                With rs
-                    .MoveFirst()
-                    Do While Not .EOF
+        '        sCMB.Items.Clear()
 
-                        sCMB.Items.Add(.Fields("NET_NAME").Value)
+        '        With rs
+        '            .MoveFirst()
+        '            Do While Not .EOF
 
-                        .MoveNext()
-                    Loop
-                End With
-                rs.Close()
-                rs = Nothing
+        '                sCMB.Items.Add(.Fields("NET_NAME").Value)
 
-            End If
-        End If
+        '                .MoveNext()
+        '            Loop
+        '        End With
+        '        rs.Close()
+        '        rs = Nothing
+
+        '    End If
+        'End If
 
 
 

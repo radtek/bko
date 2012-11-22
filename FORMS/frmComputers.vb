@@ -111,7 +111,7 @@ Public Class frmComputers
 
         'Выбираем филиал если он выбран, если нет то "Все"
         If Len(uname) = 0 Then
-            treebranche.Text = LNGIniFile.GetString("frmComputers", "MSG53", "")
+            treebranche.Text = LNGIniFile.GetString("frmComputers", "MSG53", "Все")
         Else
             treebranche.Text = uname
         End If
@@ -130,15 +130,14 @@ Public Class frmComputers
 
         End Select
 
-
         'Загружаем иконки
         Me.BeginInvoke(New MethodInvoker(AddressOf Load_ICONS))
 
         ' Меняем шрифт на форме
-        Me.BeginInvoke(New MethodInvoker(AddressOf Font_Form_For_Computer_1))
+        Me.BeginInvoke(New MethodInvoker(AddressOf Font_Form_For_Computer))
 
         'Подгружаем язык
-        Me.BeginInvoke(New MethodInvoker(AddressOf frmComputers_Lang_1))
+        Me.BeginInvoke(New MethodInvoker(AddressOf frmComputers_Lang))
 
         'Справочники
         'Call LoadSPR()
@@ -146,7 +145,7 @@ Public Class frmComputers
         'Dim newThread2 As New Thread(AddressOf LoadSPR_1)
         'newThread2.Start()
 
-        Me.BeginInvoke(New MethodInvoker(AddressOf LoadSPR_1))
+        Me.BeginInvoke(New MethodInvoker(AddressOf LoadSPR))
 
         uname = objIniFile.GetString("General", "RAZDEL", "0")
 
@@ -155,42 +154,41 @@ Public Class frmComputers
 
             Case "0"
 
-                ОтделитьПринтерыИМониторыToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG1", "")
-                ВернутьПерефериюToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG1.1", "")
+                ОтделитьПринтерыИМониторыToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG1", "Отделить периферию")
+                ВернутьПерефериюToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG1.1", "Присоеденить периферию")
 
             Case "1"
 
-                ОтделитьПринтерыИМониторыToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG2", "")
-                ВернутьПерефериюToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG2.1", "")
+                ОтделитьПринтерыИМониторыToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG2", "Отделить мониторы")
+                ВернутьПерефериюToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG2.1", "Присоеденить мониторы")
             Case "2"
 
-                ОтделитьПринтерыИМониторыToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG3", "")
-                ВернутьПерефериюToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG3.1", "")
+                ОтделитьПринтерыИМониторыToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG3", "Отделить принтеры")
+                ВернутьПерефериюToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG3.1", "Присоеденить принтеры")
             Case "3"
 
-                ОтделитьПринтерыИМониторыToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG4", "")
-                ВернутьПерефериюToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG4.1", "")
+                ОтделитьПринтерыИМониторыToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG4", "Отделить ИБП")
+                ВернутьПерефериюToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG4.1", "Присоеденить ИБП")
 
             Case "4"
 
-                ОтделитьПринтерыИМониторыToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG5", "")
-                ВернутьПерефериюToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG5.1", "")
+                ОтделитьПринтерыИМониторыToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG5", "Отделить клавиатуры и мыши")
+                ВернутьПерефериюToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG5.1", "Присоеденить клавиатуры и мыши")
             Case "5"
 
-                ОтделитьПринтерыИМониторыToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG6", "")
-                ВернутьПерефериюToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG6.1", "")
+                ОтделитьПринтерыИМониторыToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG6", " Отделить сетевые фильтры")
+                ВернутьПерефериюToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG6.1", "Присоеденить сетевые фильтры")
         End Select
 
         MassRazdelPerf.Text = ОтделитьПринтерыИМониторыToolStripMenuItem.Text
         MassObedPerf.Text = ВернутьПерефериюToolStripMenuItem.Text
 
-
-        cmbTIPCartridg.Items.Add(langfile.GetString("frmComputers", "MSG7", ""))
-        cmbTIPCartridg.Items.Add(langfile.GetString("frmComputers", "MSG8", ""))
-        cmbTIPCartridg.Items.Add(langfile.GetString("frmComputers", "MSG9", ""))
-        cmbTIPCartridg.Items.Add(langfile.GetString("frmComputers", "MSG10", ""))
-        cmbTIPCartridg.Items.Add(langfile.GetString("frmComputers", "MSG11", ""))
-        cmbTIPCartridg.Items.Add(langfile.GetString("frmComputers", "MSG12", ""))
+        cmbTIPCartridg.Items.Add(langfile.GetString("frmComputers", "MSG7", "Струйный"))
+        cmbTIPCartridg.Items.Add(langfile.GetString("frmComputers", "MSG8", "Матричный"))
+        cmbTIPCartridg.Items.Add(langfile.GetString("frmComputers", "MSG9", "Лазерный"))
+        cmbTIPCartridg.Items.Add(langfile.GetString("frmComputers", "MSG10", "Барабан"))
+        cmbTIPCartridg.Items.Add(langfile.GetString("frmComputers", "MSG11", "Термо Пленка"))
+        cmbTIPCartridg.Items.Add(langfile.GetString("frmComputers", "MSG12", "Фотокондуктор"))
 
 
         'Dim objIniFile As New IniFile(PrPath & "base.ini")
@@ -255,12 +253,7 @@ Public Class frmComputers
 
             End Select
 
-
         End If
-
-
-
-
 
     End Sub
 
@@ -270,7 +263,6 @@ Public Class frmComputers
 
         mnuDeltoBranch.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\delete.png")
         DeleteBranche.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\delete.png")
-
         addFoldertoBranch.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\fadd.png")
         RepAddBrToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\service.png")
         SoftInstallToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\soft.png")
@@ -278,217 +270,188 @@ Public Class frmComputers
         MassRazdelPerf.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\remove.png")
         MassObedPerf.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\add.png")
         MassUpdatetoINI.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\updatefolder.png")
-
         DELTEdVIGToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\delete.png")
         DeleteService.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\delete.png")
-
         EditService.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\editservice.png")
         MnuSendEmail.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\sendmail.png")
         mnu_Z_to_Office.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\serviceprint.png")
         mnu_z_rasp.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\servicerasp.png")
-
         addRemToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\service.png")
-        'CartrAddToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\servicerasp.png")
-
         CopyToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\copy.png")
         UpdateToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\pcupdate.png")
-
         DeleteToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\delete.png")
-
         ОтделитьПринтерыИМониторыToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\remove.png")
         ВернутьПерефериюToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\add.png")
-
         btnSearch.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\search.png")
-
-
         addServiseWork.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\add.png")
-
         ППРToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\setup.png")
-
-
-        'bCPUPlus.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\add.png")
-        'bRamPlus.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\add.png")
-        'bHddPlus.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\add.png")
-        'bSVGAPlus.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\add.png")
-        'bOpticalPlus.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\add.png")
-        'bNETPlus.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\add.png")
-        'bMonitorPlus.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\add.png")
-        'bPrinterPlus.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\add.png")
-
-
-
-        If ilsCommands.Images.Count = 0 Then
-
-            Call Tree_Icons_Feel(ilsCommands, "sCMP", "pic\tree\")
-            'Call Tree_Icons_Feel(ImageList11, "sCMP", "pic\tree\")
-
-        End If
-
 
     End Sub
 
     Private Sub Tool_Tips_Forms()
+
         Dim ToolTip1 As New ToolTip
-        ToolTip1.SetToolTip(cmbCPU1, "Наименование процессора.")
-        ToolTip1.SetToolTip(cmbCPU2, "Наименование процессора.")
-        ToolTip1.SetToolTip(cmbCPU3, "Наименование процессора.")
-        ToolTip1.SetToolTip(cmbCPU4, "Наименование процессора.")
+        Dim LNGIniFile As New IniFile(sLANGPATH)
+
+
+        ToolTip1.SetToolTip(cmbCPU1, LNGIniFile.GetString("frmComputers", "ToolTips1", "Наименование процессора"))
+        ToolTip1.SetToolTip(cmbCPU2, LNGIniFile.GetString("frmComputers", "ToolTips1", "Наименование процессора"))
+        ToolTip1.SetToolTip(cmbCPU3, LNGIniFile.GetString("frmComputers", "ToolTips1", "Наименование процессора"))
+        ToolTip1.SetToolTip(cmbCPU4, LNGIniFile.GetString("frmComputers", "ToolTips1", "Наименование процессора"))
 
         ' txtMHZ1
-        ToolTip1.SetToolTip(txtMHZ1, "Частота  процессора.")
-        ToolTip1.SetToolTip(txtMHZ2, "Частота  процессора.")
-        ToolTip1.SetToolTip(txtMHZ3, "Частота  процессора.")
-        ToolTip1.SetToolTip(txtMHZ4, "Частота  процессора.")
+        ToolTip1.SetToolTip(txtMHZ1, LNGIniFile.GetString("frmComputers", "ToolTips2", "Частота  процессора"))
+        ToolTip1.SetToolTip(txtMHZ2, LNGIniFile.GetString("frmComputers", "ToolTips2", "Частота  процессора"))
+        ToolTip1.SetToolTip(txtMHZ3, LNGIniFile.GetString("frmComputers", "ToolTips2", "Частота  процессора"))
+        ToolTip1.SetToolTip(txtMHZ4, LNGIniFile.GetString("frmComputers", "ToolTips2", "Частота  процессора"))
         'txtSoc1
-        ToolTip1.SetToolTip(txtSoc1, "Сокет")
-        ToolTip1.SetToolTip(txtSoc2, "Сокет")
-        ToolTip1.SetToolTip(txtSoc3, "Сокет")
-        ToolTip1.SetToolTip(txtSoc4, "Сокет")
+        ToolTip1.SetToolTip(txtSoc1, LNGIniFile.GetString("frmComputers", "ToolTips3", "Сокет"))
+        ToolTip1.SetToolTip(txtSoc2, LNGIniFile.GetString("frmComputers", "ToolTips3", "Сокет"))
+        ToolTip1.SetToolTip(txtSoc3, LNGIniFile.GetString("frmComputers", "ToolTips3", "Сокет"))
+        ToolTip1.SetToolTip(txtSoc4, LNGIniFile.GetString("frmComputers", "ToolTips3", "Сокет"))
 
-        ToolTip1.SetToolTip(cmbMB, "Материнская плата, модель.")
-        ToolTip1.SetToolTip(txtChip, "Чипсет материнской платы.")
-        ToolTip1.SetToolTip(txtSN_MB, "серийный номер")
+        ToolTip1.SetToolTip(cmbMB, LNGIniFile.GetString("frmComputers", "ToolTips4", "Материнская плата, модель"))
+        ToolTip1.SetToolTip(txtChip, LNGIniFile.GetString("frmComputers", "ToolTips5", "Чипсет материнской платы"))
+        ToolTip1.SetToolTip(txtSN_MB, LNGIniFile.GetString("frmComputers", "ToolTips6", "Cерийный номер"))
 
-        ToolTip1.SetToolTip(cmbRAM1, "Модуль памяти.")
-        ToolTip1.SetToolTip(cmbRAM2, "Модуль памяти.")
-        ToolTip1.SetToolTip(cmbRAM3, "Модуль памяти.")
-        ToolTip1.SetToolTip(cmbRAM4, "Модуль памяти.")
+        ToolTip1.SetToolTip(cmbRAM1, LNGIniFile.GetString("frmComputers", "ToolTips7", "Модуль памяти"))
+        ToolTip1.SetToolTip(cmbRAM2, LNGIniFile.GetString("frmComputers", "ToolTips7", "Модуль памяти"))
+        ToolTip1.SetToolTip(cmbRAM3, LNGIniFile.GetString("frmComputers", "ToolTips7", "Модуль памяти"))
+        ToolTip1.SetToolTip(cmbRAM4, LNGIniFile.GetString("frmComputers", "ToolTips7", "Модуль памяти"))
 
-        ToolTip1.SetToolTip(txtRamS1, "Тип и Частота")
-        ToolTip1.SetToolTip(txtRamS2, "Тип и Частота")
-        ToolTip1.SetToolTip(txtRamS3, "Тип и Частота")
-        ToolTip1.SetToolTip(txtRamS4, "Тип и Частота")
+        ToolTip1.SetToolTip(txtRamS1, LNGIniFile.GetString("frmComputers", "ToolTips8", "Тип и Частота"))
+        ToolTip1.SetToolTip(txtRamS2, LNGIniFile.GetString("frmComputers", "ToolTips8", "Тип и Частота"))
+        ToolTip1.SetToolTip(txtRamS3, LNGIniFile.GetString("frmComputers", "ToolTips8", "Тип и Частота"))
+        ToolTip1.SetToolTip(txtRamS4, LNGIniFile.GetString("frmComputers", "ToolTips8", "Тип и Частота"))
 
-        ToolTip1.SetToolTip(cmbHDD1, "Жесткий диск")
-        ToolTip1.SetToolTip(cmbHDD2, "Жесткий диск")
-        ToolTip1.SetToolTip(cmbHDD3, "Жесткий диск")
-        ToolTip1.SetToolTip(cmbHDD4, "Жесткий диск")
+        ToolTip1.SetToolTip(cmbHDD1, LNGIniFile.GetString("frmComputers", "ToolTips9", "Жесткий диск"))
+        ToolTip1.SetToolTip(cmbHDD2, LNGIniFile.GetString("frmComputers", "ToolTips9", "Жесткий диск"))
+        ToolTip1.SetToolTip(cmbHDD3, LNGIniFile.GetString("frmComputers", "ToolTips9", "Жесткий диск"))
+        ToolTip1.SetToolTip(cmbHDD4, LNGIniFile.GetString("frmComputers", "ToolTips9", "Жесткий диск"))
 
-        ToolTip1.SetToolTip(txtHDDo1, "Объем жесткого диска")
-        ToolTip1.SetToolTip(txtHDDo2, "Объем жесткого диска")
-        ToolTip1.SetToolTip(txtHDDo3, "Объем жесткого диска")
-        ToolTip1.SetToolTip(txtHDDo4, "Объем жесткого диска")
+        ToolTip1.SetToolTip(txtHDDo1, LNGIniFile.GetString("frmComputers", "ToolTips10", "Объем жесткого диска"))
+        ToolTip1.SetToolTip(txtHDDo2, LNGIniFile.GetString("frmComputers", "ToolTips10", "Объем жесткого диска"))
+        ToolTip1.SetToolTip(txtHDDo3, LNGIniFile.GetString("frmComputers", "ToolTips10", "Объем жесткого диска"))
+        ToolTip1.SetToolTip(txtHDDo4, LNGIniFile.GetString("frmComputers", "ToolTips10", "Объем жесткого диска"))
 
-        ToolTip1.SetToolTip(cmbSVGA1, "Видеокарта, модель")
-        ToolTip1.SetToolTip(txtSVGAr1, "объем памяти")
+        ToolTip1.SetToolTip(cmbSVGA1, LNGIniFile.GetString("frmComputers", "ToolTips11", "Видеокарта, модель"))
+        ToolTip1.SetToolTip(txtSVGAr1, LNGIniFile.GetString("frmComputers", "ToolTips12", "объем памяти"))
 
-        ToolTip1.SetToolTip(cmbSVGA2, "Видеокарта, модель")
-        ToolTip1.SetToolTip(txtSVGAr2, "объем памяти")
+        ToolTip1.SetToolTip(cmbSVGA2, LNGIniFile.GetString("frmComputers", "ToolTips11", "Видеокарта, модель"))
+        ToolTip1.SetToolTip(txtSVGAr2, LNGIniFile.GetString("frmComputers", "ToolTips12", "объем памяти"))
 
-        ToolTip1.SetToolTip(cmbSound, "Звуковая карта, модель")
-        ToolTip1.SetToolTip(txtSoundB, "Чип")
+        ToolTip1.SetToolTip(cmbSound, LNGIniFile.GetString("frmComputers", "ToolTips13", "Звуковая карта, модель"))
+        ToolTip1.SetToolTip(txtSoundB, LNGIniFile.GetString("frmComputers", "ToolTips14", "Чип"))
 
-        ToolTip1.SetToolTip(cmbOPTIC1, "Оптический привод, модель")
-        ToolTip1.SetToolTip(txtOPTICs1, "Скорость чтения-записи")
+        ToolTip1.SetToolTip(cmbOPTIC1, LNGIniFile.GetString("frmComputers", "ToolTips15", "Оптический привод, модель"))
+        ToolTip1.SetToolTip(txtOPTICs1, LNGIniFile.GetString("frmComputers", "ToolTips16", "Скорость чтения-записи"))
 
-        ToolTip1.SetToolTip(cmbOPTIC2, "Оптический привод, модель")
-        ToolTip1.SetToolTip(txtOPTICs2, "Скорость чтения-записи")
+        ToolTip1.SetToolTip(cmbOPTIC2, LNGIniFile.GetString("frmComputers", "ToolTips15", "Оптический привод, модель"))
+        ToolTip1.SetToolTip(txtOPTICs2, LNGIniFile.GetString("frmComputers", "ToolTips16", "Скорость чтения-записи"))
 
-        ToolTip1.SetToolTip(cmbOPTIC3, "Оптический привод, модель")
-        ToolTip1.SetToolTip(txtOPTICs3, "Скорость чтения-записи")
+        ToolTip1.SetToolTip(cmbOPTIC3, LNGIniFile.GetString("frmComputers", "ToolTips15", "Оптический привод, модель"))
+        ToolTip1.SetToolTip(txtOPTICs3, LNGIniFile.GetString("frmComputers", "ToolTips16", "Скорость чтения-записи"))
 
-        ToolTip1.SetToolTip(cmbNET1, "Сетевой адаптер, модель")
-        ToolTip1.SetToolTip(txtNETip1, "IP адрес")
-        ToolTip1.SetToolTip(txtNETmac1, "MAC адрес")
+        ToolTip1.SetToolTip(cmbNET1, LNGIniFile.GetString("frmComputers", "ToolTips17", "Сетевой адаптер, модель"))
+        ToolTip1.SetToolTip(txtNETip1, LNGIniFile.GetString("frmComputers", "ToolTips18", "IP адрес"))
+        ToolTip1.SetToolTip(txtNETmac1, LNGIniFile.GetString("frmComputers", "ToolTips19", "MAC адрес"))
 
-        ToolTip1.SetToolTip(cmbNET2, "Сетевой адаптер, модель")
-        ToolTip1.SetToolTip(txtNETip2, "IP адрес")
-        ToolTip1.SetToolTip(txtNETmac2, "MAC адрес")
+        ToolTip1.SetToolTip(cmbNET2, LNGIniFile.GetString("frmComputers", "ToolTips17", "Сетевой адаптер, модель"))
+        ToolTip1.SetToolTip(txtNETip2, LNGIniFile.GetString("frmComputers", "ToolTips18", "IP адрес"))
+        ToolTip1.SetToolTip(txtNETmac2, LNGIniFile.GetString("frmComputers", "ToolTips19", "MAC адрес"))
 
-        ToolTip1.SetToolTip(cmbMon1, "Монитор, модель")
-        ToolTip1.SetToolTip(txtMon1Dum, "Диагональ")
+        ToolTip1.SetToolTip(cmbMon1, LNGIniFile.GetString("frmComputers", "ToolTips20", "Монитор, модель"))
+        ToolTip1.SetToolTip(txtMon1Dum, LNGIniFile.GetString("frmComputers", "ToolTips21", "Диагональ"))
 
-        ToolTip1.SetToolTip(cmbMon2, "Монитор, модель")
-        ToolTip1.SetToolTip(txtMon2Dum, "Диагональ")
+        ToolTip1.SetToolTip(cmbMon2, LNGIniFile.GetString("frmComputers", "ToolTips20", "Монитор, модель"))
+        ToolTip1.SetToolTip(txtMon2Dum, LNGIniFile.GetString("frmComputers", "ToolTips21", "Диагональ"))
 
-        ToolTip1.SetToolTip(cmbPrinters1, "Принтер, модель")
-        ToolTip1.SetToolTip(txtPrint1Port, "Порт подключения")
+        ToolTip1.SetToolTip(cmbPrinters1, LNGIniFile.GetString("frmComputers", "ToolTips22", "Принтер, модель"))
+        ToolTip1.SetToolTip(txtPrint1Port, LNGIniFile.GetString("frmComputers", "ToolTips23", "Порт подключения"))
 
-        ToolTip1.SetToolTip(cmbPrinters2, "Принтер, модель")
-        ToolTip1.SetToolTip(txtPrint2Port, "Порт подключения")
+        ToolTip1.SetToolTip(cmbPrinters2, LNGIniFile.GetString("frmComputers", "ToolTips22", "Принтер, модель"))
+        ToolTip1.SetToolTip(txtPrint2Port, LNGIniFile.GetString("frmComputers", "ToolTips23", "Порт подключения"))
 
-        ToolTip1.SetToolTip(cmbPrinters3, "Принтер, модель")
-        ToolTip1.SetToolTip(txtPrint3Port, "Порт подключения")
+        ToolTip1.SetToolTip(cmbPrinters3, LNGIniFile.GetString("frmComputers", "ToolTips22", "Принтер, модель"))
+        ToolTip1.SetToolTip(txtPrint3Port, LNGIniFile.GetString("frmComputers", "ToolTips23", "Порт подключения"))
 
-        ToolTip1.SetToolTip(PROizV1, "Производитель")
-        ToolTip1.SetToolTip(PROizV2, "Производитель")
-        ToolTip1.SetToolTip(PROizV3, "Производитель")
-        ToolTip1.SetToolTip(PROizV4, "Производитель")
-        ToolTip1.SetToolTip(PROizV5, "Производитель")
-        ToolTip1.SetToolTip(PROizV6, "Производитель")
-        ToolTip1.SetToolTip(PROizV7, "Производитель")
-        ToolTip1.SetToolTip(PROizV8, "Производитель")
-        ToolTip1.SetToolTip(PROizV9, "Производитель")
-        ToolTip1.SetToolTip(PROizV10, "Производитель")
-        ToolTip1.SetToolTip(PROizV11, "Производитель")
-        ToolTip1.SetToolTip(PROizV12, "Производитель")
-        ToolTip1.SetToolTip(PROizV13, "Производитель")
-        ToolTip1.SetToolTip(PROizV14, "Производитель")
-        ToolTip1.SetToolTip(PROizV15, "Производитель")
-        ToolTip1.SetToolTip(PROizV16, "Производитель")
-        ToolTip1.SetToolTip(PROizV17, "Производитель")
-        ToolTip1.SetToolTip(PROizV18, "Производитель")
-        ToolTip1.SetToolTip(PROizV19, "Производитель")
-        ToolTip1.SetToolTip(PROizV20, "Производитель")
-        ToolTip1.SetToolTip(PROizV21, "Производитель")
-        ToolTip1.SetToolTip(PROizV22, "Производитель")
-        ToolTip1.SetToolTip(PROizV23, "Производитель")
-        ToolTip1.SetToolTip(PROizV24, "Производитель")
-        ToolTip1.SetToolTip(PROizV25, "Производитель")
-        ToolTip1.SetToolTip(PROizV26, "Производитель")
-        ToolTip1.SetToolTip(PROizV27, "Производитель")
-        ToolTip1.SetToolTip(PROizV28, "Производитель")
-        ToolTip1.SetToolTip(PROizV29, "Производитель")
-        ToolTip1.SetToolTip(PROizV30, "Производитель")
-        ToolTip1.SetToolTip(PROizV31, "Производитель")
-        ToolTip1.SetToolTip(PROizV32, "Производитель")
-        ToolTip1.SetToolTip(PROizV33, "Производитель")
-        ToolTip1.SetToolTip(PROizV34, "Производитель")
-        ToolTip1.SetToolTip(PROizV35, "Производитель")
-        ToolTip1.SetToolTip(PROizV36, "Производитель")
+        ToolTip1.SetToolTip(PROizV1, LNGIniFile.GetString("frmComputers", "ToolTips24", "Производитель"))
+        ToolTip1.SetToolTip(PROizV2, LNGIniFile.GetString("frmComputers", "ToolTips24", "Производитель"))
+        ToolTip1.SetToolTip(PROizV3, LNGIniFile.GetString("frmComputers", "ToolTips24", "Производитель"))
+        ToolTip1.SetToolTip(PROizV4, LNGIniFile.GetString("frmComputers", "ToolTips24", "Производитель"))
+        ToolTip1.SetToolTip(PROizV5, LNGIniFile.GetString("frmComputers", "ToolTips24", "Производитель"))
+        ToolTip1.SetToolTip(PROizV6, LNGIniFile.GetString("frmComputers", "ToolTips24", "Производитель"))
+        ToolTip1.SetToolTip(PROizV7, LNGIniFile.GetString("frmComputers", "ToolTips24", "Производитель"))
+        ToolTip1.SetToolTip(PROizV8, LNGIniFile.GetString("frmComputers", "ToolTips24", "Производитель"))
+        ToolTip1.SetToolTip(PROizV9, LNGIniFile.GetString("frmComputers", "ToolTips24", "Производитель"))
+        ToolTip1.SetToolTip(PROizV10, LNGIniFile.GetString("frmComputers", "ToolTips24", "Производитель"))
+        ToolTip1.SetToolTip(PROizV11, LNGIniFile.GetString("frmComputers", "ToolTips24", "Производитель"))
+        ToolTip1.SetToolTip(PROizV12, LNGIniFile.GetString("frmComputers", "ToolTips24", "Производитель"))
+        ToolTip1.SetToolTip(PROizV13, LNGIniFile.GetString("frmComputers", "ToolTips24", "Производитель"))
+        ToolTip1.SetToolTip(PROizV14, LNGIniFile.GetString("frmComputers", "ToolTips24", "Производитель"))
+        ToolTip1.SetToolTip(PROizV15, LNGIniFile.GetString("frmComputers", "ToolTips24", "Производитель"))
+        ToolTip1.SetToolTip(PROizV16, LNGIniFile.GetString("frmComputers", "ToolTips24", "Производитель"))
+        ToolTip1.SetToolTip(PROizV17, LNGIniFile.GetString("frmComputers", "ToolTips24", "Производитель"))
+        ToolTip1.SetToolTip(PROizV18, LNGIniFile.GetString("frmComputers", "ToolTips24", "Производитель"))
+        ToolTip1.SetToolTip(PROizV19, LNGIniFile.GetString("frmComputers", "ToolTips24", "Производитель"))
+        ToolTip1.SetToolTip(PROizV20, LNGIniFile.GetString("frmComputers", "ToolTips24", "Производитель"))
+        ToolTip1.SetToolTip(PROizV21, LNGIniFile.GetString("frmComputers", "ToolTips24", "Производитель"))
+        ToolTip1.SetToolTip(PROizV22, LNGIniFile.GetString("frmComputers", "ToolTips24", "Производитель"))
+        ToolTip1.SetToolTip(PROizV23, LNGIniFile.GetString("frmComputers", "ToolTips24", "Производитель"))
+        ToolTip1.SetToolTip(PROizV24, LNGIniFile.GetString("frmComputers", "ToolTips24", "Производитель"))
+        ToolTip1.SetToolTip(PROizV25, LNGIniFile.GetString("frmComputers", "ToolTips24", "Производитель"))
+        ToolTip1.SetToolTip(PROizV26, LNGIniFile.GetString("frmComputers", "ToolTips24", "Производитель"))
+        ToolTip1.SetToolTip(PROizV27, LNGIniFile.GetString("frmComputers", "ToolTips24", "Производитель"))
+        ToolTip1.SetToolTip(PROizV28, LNGIniFile.GetString("frmComputers", "ToolTips24", "Производитель"))
+        ToolTip1.SetToolTip(PROizV29, LNGIniFile.GetString("frmComputers", "ToolTips24", "Производитель"))
+        ToolTip1.SetToolTip(PROizV30, LNGIniFile.GetString("frmComputers", "ToolTips24", "Производитель"))
+        ToolTip1.SetToolTip(PROizV31, LNGIniFile.GetString("frmComputers", "ToolTips24", "Производитель"))
+        ToolTip1.SetToolTip(PROizV32, LNGIniFile.GetString("frmComputers", "ToolTips24", "Производитель"))
+        ToolTip1.SetToolTip(PROizV33, LNGIniFile.GetString("frmComputers", "ToolTips24", "Производитель"))
+        ToolTip1.SetToolTip(PROizV34, LNGIniFile.GetString("frmComputers", "ToolTips24", "Производитель"))
+        ToolTip1.SetToolTip(PROizV35, LNGIniFile.GetString("frmComputers", "ToolTips24", "Производитель"))
+        ToolTip1.SetToolTip(PROizV36, LNGIniFile.GetString("frmComputers", "ToolTips24", "Производитель"))
+        ToolTip1.SetToolTip(PROiZV38, LNGIniFile.GetString("frmComputers", "ToolTips24", "Производитель"))
+        ToolTip1.SetToolTip(PROiZV39, LNGIniFile.GetString("frmComputers", "ToolTips24", "Производитель"))
+        ToolTip1.SetToolTip(PROiZV40, LNGIniFile.GetString("frmComputers", "ToolTips24", "Производитель"))
+        ToolTip1.SetToolTip(PROizV41, LNGIniFile.GetString("frmComputers", "ToolTips24", "Производитель"))
+        ToolTip1.SetToolTip(PROizV42, LNGIniFile.GetString("frmComputers", "ToolTips24", "Производитель"))
+        ToolTip1.SetToolTip(PROizV43, LNGIniFile.GetString("frmComputers", "ToolTips24", "Производитель"))
 
-        ToolTip1.SetToolTip(PROiZV38, "Производитель")
-        ToolTip1.SetToolTip(PROiZV39, "Производитель")
-        ToolTip1.SetToolTip(PROiZV40, "Производитель")
-        ToolTip1.SetToolTip(PROizV41, "Производитель")
-        ToolTip1.SetToolTip(PROizV42, "Производитель")
-        ToolTip1.SetToolTip(PROizV43, "Производитель")
-
-
-        ToolTip1.SetToolTip(txtRamSN1, "Серийный номер")
-        ToolTip1.SetToolTip(txtRamSN2, "Серийный номер")
-        ToolTip1.SetToolTip(txtRamSN3, "Серийный номер")
-        ToolTip1.SetToolTip(txtRamSN4, "Серийный номер")
-        ToolTip1.SetToolTip(txtHDDsN1, "Серийный номер")
-        ToolTip1.SetToolTip(txtHDDsN2, "Серийный номер")
-        ToolTip1.SetToolTip(txtHDDsN3, "Серийный номер")
-        ToolTip1.SetToolTip(txtHDDsN4, "Серийный номер")
-        ToolTip1.SetToolTip(txtSVGAs1, "Серийный номер")
-        ToolTip1.SetToolTip(txtSVGAs2, "Серийный номер")
-        ToolTip1.SetToolTip(txtSoundS, "Серийный номер")
-        ToolTip1.SetToolTip(txtOPTICsn1, "Серийный номер")
-        ToolTip1.SetToolTip(txtOPTICsn2, "Серийный номер")
-        ToolTip1.SetToolTip(txtOPTICsn3, "Серийный номер")
-        ToolTip1.SetToolTip(txtMon1SN, "Серийный номер")
-        ToolTip1.SetToolTip(txtMon2SN, "Серийный номер")
-        ToolTip1.SetToolTip(txtPrint1SN, "Серийный номер")
-        ToolTip1.SetToolTip(txtPrint2SN, "Серийный номер")
-        ToolTip1.SetToolTip(txtPrint3SN, "Серийный номер")
-        ToolTip1.SetToolTip(txtSN, "Серийный номер")
-        ToolTip1.SetToolTip(txtCreader1, "Серийный номер")
-        ToolTip1.SetToolTip(txtModemSN, "Серийный номер")
-        ToolTip1.SetToolTip(txtCase1, "Серийный номер")
-        ToolTip1.SetToolTip(txtBP1, "Серийный номер")
-        ToolTip1.SetToolTip(txtUSBSN, "Серийный номер")
-        ToolTip1.SetToolTip(txtSNPCI, "Серийный номер")
-        ToolTip1.SetToolTip(txtSNSB, "Серийный номер")
-        ToolTip1.SetToolTip(txtKeybSN, "Серийный номер")
-        ToolTip1.SetToolTip(txtMouseSN, "Серийный номер")
-        ToolTip1.SetToolTip(txtAsistSN, "Серийный номер")
-        ToolTip1.SetToolTip(txtFilterSN, "Серийный номер")
-        ToolTip1.SetToolTip(txtSNIBP, "Серийный номер")
-        ToolTip1.SetToolTip(txtPRNSN, "Серийный номер")
-        ToolTip1.SetToolTip(txtOTHSN, "Серийный номер")
+        ToolTip1.SetToolTip(txtRamSN1, LNGIniFile.GetString("frmComputers", "ToolTips6", "Cерийный номер"))
+        ToolTip1.SetToolTip(txtRamSN2, LNGIniFile.GetString("frmComputers", "ToolTips6", "Cерийный номер"))
+        ToolTip1.SetToolTip(txtRamSN3, LNGIniFile.GetString("frmComputers", "ToolTips6", "Cерийный номер"))
+        ToolTip1.SetToolTip(txtRamSN4, LNGIniFile.GetString("frmComputers", "ToolTips6", "Cерийный номер"))
+        ToolTip1.SetToolTip(txtHDDsN1, LNGIniFile.GetString("frmComputers", "ToolTips6", "Cерийный номер"))
+        ToolTip1.SetToolTip(txtHDDsN2, LNGIniFile.GetString("frmComputers", "ToolTips6", "Cерийный номер"))
+        ToolTip1.SetToolTip(txtHDDsN3, LNGIniFile.GetString("frmComputers", "ToolTips6", "Cерийный номер"))
+        ToolTip1.SetToolTip(txtHDDsN4, LNGIniFile.GetString("frmComputers", "ToolTips6", "Cерийный номер"))
+        ToolTip1.SetToolTip(txtSVGAs1, LNGIniFile.GetString("frmComputers", "ToolTips6", "Cерийный номер"))
+        ToolTip1.SetToolTip(txtSVGAs2, LNGIniFile.GetString("frmComputers", "ToolTips6", "Cерийный номер"))
+        ToolTip1.SetToolTip(txtSoundS, LNGIniFile.GetString("frmComputers", "ToolTips6", "Cерийный номер"))
+        ToolTip1.SetToolTip(txtOPTICsn1, LNGIniFile.GetString("frmComputers", "ToolTips6", "Cерийный номер"))
+        ToolTip1.SetToolTip(txtOPTICsn2, LNGIniFile.GetString("frmComputers", "ToolTips6", "Cерийный номер"))
+        ToolTip1.SetToolTip(txtOPTICsn3, LNGIniFile.GetString("frmComputers", "ToolTips6", "Cерийный номер"))
+        ToolTip1.SetToolTip(txtMon1SN, LNGIniFile.GetString("frmComputers", "ToolTips6", "Cерийный номер"))
+        ToolTip1.SetToolTip(txtMon2SN, LNGIniFile.GetString("frmComputers", "ToolTips6", "Cерийный номер"))
+        ToolTip1.SetToolTip(txtPrint1SN, LNGIniFile.GetString("frmComputers", "ToolTips6", "Cерийный номер"))
+        ToolTip1.SetToolTip(txtPrint2SN, LNGIniFile.GetString("frmComputers", "ToolTips6", "Cерийный номер"))
+        ToolTip1.SetToolTip(txtPrint3SN, LNGIniFile.GetString("frmComputers", "ToolTips6", "Cерийный номер"))
+        ToolTip1.SetToolTip(txtSN, LNGIniFile.GetString("frmComputers", "ToolTips6", "Cерийный номер"))
+        ToolTip1.SetToolTip(txtCreader1, LNGIniFile.GetString("frmComputers", "ToolTips6", "Cерийный номер"))
+        ToolTip1.SetToolTip(txtModemSN, LNGIniFile.GetString("frmComputers", "ToolTips6", "Cерийный номер"))
+        ToolTip1.SetToolTip(txtCase1, LNGIniFile.GetString("frmComputers", "ToolTips6", "Cерийный номер"))
+        ToolTip1.SetToolTip(txtBP1, LNGIniFile.GetString("frmComputers", "ToolTips6", "Cерийный номер"))
+        ToolTip1.SetToolTip(txtUSBSN, LNGIniFile.GetString("frmComputers", "ToolTips6", "Cерийный номер"))
+        ToolTip1.SetToolTip(txtSNPCI, LNGIniFile.GetString("frmComputers", "ToolTips6", "Cерийный номер"))
+        ToolTip1.SetToolTip(txtSNSB, LNGIniFile.GetString("frmComputers", "ToolTips6", "Cерийный номер"))
+        ToolTip1.SetToolTip(txtKeybSN, LNGIniFile.GetString("frmComputers", "ToolTips6", "Cерийный номер"))
+        ToolTip1.SetToolTip(txtMouseSN, LNGIniFile.GetString("frmComputers", "ToolTips6", "Cерийный номер"))
+        ToolTip1.SetToolTip(txtAsistSN, LNGIniFile.GetString("frmComputers", "ToolTips6", "Cерийный номер"))
+        ToolTip1.SetToolTip(txtFilterSN, LNGIniFile.GetString("frmComputers", "ToolTips6", "Cерийный номер"))
+        ToolTip1.SetToolTip(txtSNIBP, LNGIniFile.GetString("frmComputers", "ToolTips6", "Cерийный номер"))
+        ToolTip1.SetToolTip(txtPRNSN, LNGIniFile.GetString("frmComputers", "ToolTips6", "Cерийный номер"))
+        ToolTip1.SetToolTip(txtOTHSN, LNGIniFile.GetString("frmComputers", "ToolTips6", "Cерийный номер"))
 
 
     End Sub
@@ -504,7 +467,7 @@ Public Class frmComputers
         Me.BeginInvoke(New MethodInvoker(AddressOf Tool_Tips_Forms))
 
         'Статистика
-        Me.BeginInvoke(New MethodInvoker(AddressOf STAT_INF_1))
+        Me.BeginInvoke(New MethodInvoker(AddressOf STAT_INF))
 
         Me.WindowState = FormWindowState.Maximized
 
@@ -512,13 +475,15 @@ Public Class frmComputers
 
         Application.DoEvents()
 
-
         Me.BeginInvoke(New MethodInvoker(AddressOf R_T_LOAD))
-        ' Call R_T_LOAD()
 
         Me.Cursor = Cursors.Default
 
         Application.DoEvents()
+
+
+        '   If OneStart = 0 Then OneStart = 1
+
 
     End Sub
 
@@ -590,9 +555,9 @@ Public Class frmComputers
 
                 '#########################################################################################################################
 
-                If Len(sBranch) <> 0 Then frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "MSG15", "")
-                If Len(sDepartment) <> 0 Then frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "MSG16", "")
-                If Len(sOffice) <> 0 Then frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "MSG17", "")
+                If Len(sBranch) <> 0 Then frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "MSG15", "Техники в филиале:")
+                If Len(sDepartment) <> 0 Then frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "MSG16", "Техники в отделе:")
+                If Len(sOffice) <> 0 Then frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "MSG17", "Техники в кабинете:")
 
 
 
@@ -608,8 +573,8 @@ Public Class frmComputers
                 With rs
                     'lblT_O.Text = .Fields("t_n").Value & " " & langfile.GetString("frmComputers", "MSG13", "") '& langIni.GetString("messages", "l4", "")
 
-                    frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "lblT_O_T", "")
-                    frmMain.LBL_STAT_3.Text = .Fields("t_n").Value & " " & langfile.GetString("frmComputers", "MSG13", "")
+                    frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "lblT_O_T", "Техники в:")
+                    frmMain.LBL_STAT_3.Text = .Fields("t_n").Value & " " & langfile.GetString("frmComputers", "MSG13", "шт.")
 
                 End With
 
@@ -630,7 +595,7 @@ Public Class frmComputers
                 rs2.Close()
                 rs2 = Nothing
 
-                If Len(sBranch) <> 0 Then frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "MSG15", "")
+                If Len(sBranch) <> 0 Then frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "MSG15", "Техники в филиале:")
 
 
 
@@ -647,7 +612,7 @@ Public Class frmComputers
                 rs2 = Nothing
 
                 'If Len(sBranch) <> 0 Then frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "MSG15", "")
-                If Len(sDepartment) <> 0 Then frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "MSG16", "")
+                If Len(sDepartment) <> 0 Then frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "MSG16", "Техники в отделе:")
                 'If Len(sOffice) <> 0 Then frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "MSG17", "")
 
             Case "OT"
@@ -665,7 +630,7 @@ Public Class frmComputers
                 rs2 = Nothing
 
                 ' If Len(sBranch) <> 0 Then frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "MSG15", "")
-                If Len(sDepartment) <> 0 Then frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "MSG16", "")
+                If Len(sDepartment) <> 0 Then frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "MSG16", "Техники в отделе:")
                 ' If Len(sOffice) <> 0 Then frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "MSG17", "")
 
             Case "K"
@@ -683,7 +648,7 @@ Public Class frmComputers
 
                 'If Len(sBranch) <> 0 Then frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "MSG15", "")
                 ' If Len(sDepartment) <> 0 Then frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "MSG16", "")
-                If Len(sOffice) <> 0 Then frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "MSG17", "")
+                If Len(sOffice) <> 0 Then frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "MSG17", "Техники в кабинете:")
 
                 Exit Sub
 Error_:
@@ -829,7 +794,7 @@ Error_:
 
                             'Call LOADt(d(1))
 
-                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
                             Me.BeginInvoke(New MethodInvoker(AddressOf S_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf U_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
@@ -837,7 +802,7 @@ Error_:
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
 
-                            'Dim newThread1 As New Thread(AddressOf T_LOAD_T)
+                            'Dim newThread1 As New Thread(AddressOf T_LOAD_T_1)
                             'newThread1.Start()
                             ''newThread1.Priority = 4
 
@@ -880,12 +845,12 @@ Error_:
                             'Call LOADp(d(1))
 
 
-                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
                             Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
-                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T)
+                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T_1)
                             'newThread3.Start()
                             ''newThread3.Priority = 4
 
@@ -916,12 +881,12 @@ Error_:
                             Label83.Visible = True
                             cmbPCL.Visible = True
 
-                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
                             Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
-                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T)
+                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T_1)
                             'newThread3.Start()
                             ''newThread3.Priority = 4
 
@@ -951,13 +916,13 @@ Error_:
                             cmbPCL.Visible = False
 
 
-                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
                             Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
 
-                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T)
+                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T_1)
                             'newThread3.Start()
                             ''newThread3.Priority = 4
 
@@ -992,16 +957,16 @@ Error_:
                             sSTAB5.Visible = False
                             lblOTPCL.Visible = True
                             cmbOTHPCL.Visible = True
-                            FillComboNET(Me.cmbOTHConnect, "name", "spr_other", "", False, True)
+                            ' FillComboNET(Me.cmbOTHConnect, "name", "spr_other", "", False, True)
+                            FillComboNET(cmbOTHConnect, "name", "spr_other", "", False, True)
 
-
-                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
                             Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
 
-                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T)
+                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T_1)
                             'newThread3.Start()
                             ''newThread3.Priority = 4
 
@@ -1043,13 +1008,13 @@ Error_:
                             cmbOTHPCL.Visible = False
 
 
-                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
                             Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
 
-                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T)
+                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T_1)
                             'newThread3.Start()
                             ''newThread3.Priority = 4
 
@@ -1085,13 +1050,13 @@ Error_:
                             cmbOTHPCL.Visible = False
 
 
-                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
                             Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
 
-                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T)
+                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T_1)
                             'newThread3.Start()
                             ''newThread3.Priority = 4
 
@@ -1127,13 +1092,13 @@ Error_:
                             lblOTPCL.Visible = True
 
 
-                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
                             Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
 
-                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T)
+                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T_1)
                             'newThread3.Start()
                             ''newThread3.Priority = 4
 
@@ -1168,12 +1133,12 @@ Error_:
                             cmbOTHPCL.Visible = True
 
 
-                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
                             Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
-                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T)
+                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T_1)
                             'newThread3.Start()
                             ''newThread3.Priority = 4
 
@@ -1210,12 +1175,12 @@ Error_:
                             cmbOTHPCL.Visible = True
 
 
-                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
                             Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
-                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T)
+                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T_1)
                             'newThread3.Start()
                             ''newThread3.Priority = 4
 
@@ -1257,13 +1222,13 @@ Error_:
 
                             ' Call LOADmon(d(1))
 
-                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
                             Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
 
-                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T)
+                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T_1)
                             'newThread3.Start()
                             ''newThread3.Priority = 4
 
@@ -1314,13 +1279,13 @@ Error_:
                             cmbOTHPCL.Visible = True
 
 
-                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
                             Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
 
-                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T)
+                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T_1)
                             'newThread3.Start()
                             ''newThread3.Priority = 4
 
@@ -1356,12 +1321,12 @@ Error_:
                             cmbOTHPCL.Visible = True
 
 
-                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
                             Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
-                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T)
+                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T_1)
                             'newThread3.Start()
                             ''newThread3.Priority = 4
 
@@ -1397,12 +1362,12 @@ Error_:
                             cmbOTHPCL.Visible = True
 
 
-                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
                             Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
-                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T)
+                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T_1)
                             'newThread3.Start()
                             ''newThread3.Priority = 4
 
@@ -1438,12 +1403,12 @@ Error_:
                             cmbOTHPCL.Visible = True
 
 
-                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
                             Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
-                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T)
+                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T_1)
                             'newThread3.Start()
                             ''newThread3.Priority = 4
 
@@ -1478,13 +1443,13 @@ Error_:
                             lblOTPCL.Visible = True
                             cmbOTHPCL.Visible = True
 
-                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
                             Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
 
-                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T)
+                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T_1)
                             'newThread3.Start()
                             ''newThread3.Priority = 4
 
@@ -1519,13 +1484,13 @@ Error_:
                             lblOTPCL.Visible = True
                             cmbOTHPCL.Visible = True
 
-                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
                             Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
 
-                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T)
+                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T_1)
                             'newThread3.Start()
                             ''newThread3.Priority = 4
 
@@ -1563,15 +1528,15 @@ Error_:
                             lblOTPCL.Visible = False
                             cmbOTHPCL.Visible = False
 
-                            'Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                            'Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
 
-                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
                             Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
 
-                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T)
+                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T_1)
                             'newThread3.Start()
                             ''newThread3.Priority = 4
 
@@ -1621,8 +1586,8 @@ Error_:
                 With rs
                     '  lblT_O.Text = .Fields("t_n").Value & " " & langfile.GetString("frmComputers", "MSG13", "") '& langIni.GetString("messages", "l4", "")
 
-                    frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "lblT_O_T", "")
-                    frmMain.LBL_STAT_3.Text = .Fields("t_n").Value & " " & langfile.GetString("frmComputers", "MSG13", "")
+                    frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "lblT_O_T", "Техники в:")
+                    frmMain.LBL_STAT_3.Text = .Fields("t_n").Value & " " & langfile.GetString("frmComputers", "MSG13", "шт")
 
                 End With
 
@@ -1669,8 +1634,8 @@ Error_:
                 With rs
                     'lblT_O.Text = .Fields("t_n").Value & " " & langfile.GetString("frmComputers", "MSG13", "") '& langIni.GetString("messages", "l4", "")
 
-                    frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "lblT_O_T", "")
-                    frmMain.LBL_STAT_3.Text = .Fields("t_n").Value & " " & langfile.GetString("frmComputers", "MSG13", "")
+                    frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "lblT_O_T", "Техники в: ")
+                    frmMain.LBL_STAT_3.Text = .Fields("t_n").Value & " " & langfile.GetString("frmComputers", "MSG13", "шт")
 
                 End With
 
@@ -1726,8 +1691,8 @@ Error_:
                 With rs
                     ' lblT_O.Text = .Fields("t_n").Value & " " & langfile.GetString("frmComputers", "MSG13", "") '& langIni.GetString("messages", "l4", "")
 
-                    frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "lblT_O_T", "")
-                    frmMain.LBL_STAT_3.Text = .Fields("t_n").Value & " " & langfile.GetString("frmComputers", "MSG13", "")
+                    frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "lblT_O_T", "Техники в: ")
+                    frmMain.LBL_STAT_3.Text = .Fields("t_n").Value & " " & langfile.GetString("frmComputers", "MSG13", "шт.")
 
                 End With
 
@@ -1753,32 +1718,15 @@ Error_:
 
     End Sub
 
-    '######################
-
     Private Sub S_P_LOAD_t()
 
-        Me.BeginInvoke(New MethodInvoker(AddressOf S_P_LOAD_t_1))
-
-    End Sub
-
-    Private Sub S_P_LOAD_t_1()
         Call LOAD_SOFT(sCOUNT, Me.lstSoftware)
+
     End Sub
 
     Private Sub U_P_LOAD_t()
 
-        Me.BeginInvoke(New MethodInvoker(AddressOf U_P_LOAD_t_1))
-    End Sub
-
-    Private Sub U_P_LOAD_t_1()
         Call LOAD_USER(sCOUNT)
-    End Sub
-
-    Private Sub T_LOAD_T()
-
-
-        Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
-
 
     End Sub
 
@@ -1814,12 +1762,6 @@ Error_:
     End Sub
 
     Private Sub N_P_LOAD_t()
-
-        Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t_1))
-
-    End Sub
-
-    Private Sub N_P_LOAD_t_1()
         Select Case TipTehn
 
             Case "PC"
@@ -1844,12 +1786,6 @@ Error_:
     End Sub
 
     Private Sub R_P_LOAD_t()
-
-        Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t_1))
-
-    End Sub
-
-    Private Sub R_P_LOAD_t_1()
         Select Case TipTehn
 
             Case "PC"
@@ -1875,12 +1811,6 @@ Error_:
 
     Private Sub D_P_LOAD_t()
 
-        Me.BeginInvoke(New MethodInvoker(AddressOf D_PLOAD_T_1))
-
-    End Sub
-
-    Private Sub D_PLOAD_T_1()
-
         Select Case TipTehn
 
             Case "PC"
@@ -1904,37 +1834,9 @@ Error_:
         End Select
     End Sub
 
-    Public Sub Font_Form_For_Computer_1()
-
-        Me.lstGroups.Invoke(New MethodInvoker(AddressOf Font_Form_For_Computer))
-
-    End Sub
-
-    Public Sub frmComputers_Lang_1()
-
-        Me.lstGroups.Invoke(New MethodInvoker(AddressOf frmComputers_Lang))
-
-    End Sub
-
-    Public Sub R_T_LOAD_1()
-        Call RefFilTree(Me.lstGroups)
-    End Sub
-
-    Public Sub STAT_INF_1()
-
-        Me.lstGroups.Invoke(New MethodInvoker(AddressOf STAT_INF))
-
-    End Sub
-
-    Private Sub S_Tl_LOAD()
-
-        Me.BeginInvoke(New MethodInvoker(AddressOf LOAD_LIST))
-
-    End Sub
-
     Public Sub R_T_LOAD()
 
-        Me.BeginInvoke(New MethodInvoker(AddressOf R_T_LOAD_1), Nothing)
+        Call RefFilTree(Me.lstGroups)
 
     End Sub
 
@@ -1951,7 +1853,7 @@ Error_:
         With rs
             ' lblT_All.Text = (.Fields("T_N").Value) & " " & langfile.GetString("frmComputers", "MSG13", "")
 
-            frmMain.LBL_STAT_1.Text = langfile.GetString("frmComputers", "lblT_All_T", "") & ": " & (.Fields("T_N").Value) & " " & langfile.GetString("frmComputers", "MSG13", "")
+            frmMain.LBL_STAT_1.Text = langfile.GetString("frmComputers", "lblT_All_T", "Техники всего:") & ": " & (.Fields("T_N").Value) & " " & langfile.GetString("frmComputers", "MSG13", "шт.")
 
 
         End With
@@ -1962,12 +1864,6 @@ Error_:
 err_:
     End Sub
 
-    Private Sub LoadSPR_1()
-
-        Me.BeginInvoke(New MethodInvoker(AddressOf LoadSPR))
-
-    End Sub
-    '######################
     Private Sub txtSearch_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSearch.KeyDown
 
         Select Case e.KeyCode
@@ -1983,7 +1879,6 @@ err_:
 
 
     End Sub
-
 
     Private Sub S2_LOAD_t()
         'Call Search2(txtSearch.Text)
@@ -2140,7 +2035,7 @@ err_:
         Dim langfile As New IniFile(sLANGPATH)
 
 
-        btnNotes.Text = langfile.GetString("frmComputers", "MSG19", "")
+        btnNotes.Text = langfile.GetString("frmComputers", "MSG19", "Сохранить")
 
         rs.Close()
         rs = Nothing
@@ -2154,7 +2049,7 @@ err_:
         Dim langfile As New IniFile(sLANGPATH)
 
 
-        Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG20", "") & " " & Me.lstGroups.SelectedNode.Text)
+        Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG20", "Удаление заметки для") & " " & Me.lstGroups.SelectedNode.Text)
 
         Dim rs As ADODB.Recordset
         rs = New ADODB.Recordset
@@ -2171,7 +2066,7 @@ err_:
     Private Sub addRemToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles addRemToolStripMenuItem.Click
         Dim langfile As New IniFile(sLANGPATH)
 
-        frmService_add.Text = langfile.GetString("frmComputers", "MSG21", "") & " " & lstGroups.SelectedNode.Text
+        frmService_add.Text = langfile.GetString("frmComputers", "MSG21", "Добавление (редактирование) заявки для ") & " " & lstGroups.SelectedNode.Text
 
         'serviceDesc.MdiParent = frmMain
         'serviceDesc.Show()
@@ -2195,17 +2090,17 @@ err_:
 
         frmService_add.ShowDialog(frmserviceDesc)
 
-        Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG22", "") & " " & lstGroups.SelectedNode.Text)
+        Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG22", "Добавление заявки для ") & " " & lstGroups.SelectedNode.Text)
     End Sub
 
     Private Sub DeleteToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DeleteToolStripMenuItem.Click
         Dim langfile As New IniFile(sLANGPATH)
 
 
-        If MsgBox(langfile.GetString("frmComputers", "MSG23", "") & " " & lstGroups.SelectedNode.Text, MsgBoxStyle.YesNo, ProGramName) = MsgBoxResult.Yes Then
+        If MsgBox(langfile.GetString("frmComputers", "MSG23", "Вы уверены что хотите удалить") & " " & lstGroups.SelectedNode.Text, MsgBoxStyle.YesNo, ProGramName) = MsgBoxResult.Yes Then
 
 
-            Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG24", "") & " " & lstGroups.SelectedNode.Text)
+            Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG24", "Удаление техники") & " " & lstGroups.SelectedNode.Text)
 
             Dim d() As String
             d = Split(lstGroups.SelectedNode.Tag, "|")
@@ -2217,7 +2112,7 @@ err_:
             'newThread1.Start()
 
 
-            Me.BeginInvoke(New MethodInvoker(AddressOf STAT_INF_1))
+            Me.BeginInvoke(New MethodInvoker(AddressOf STAT_INF))
 
         Else
 
@@ -2257,7 +2152,7 @@ err_:
 
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
-        frmService_add.Text = LNGIniFile.GetString("frmserviceDesc", "MSG1", "") & " " & lstGroups.SelectedNode.Text
+        frmService_add.Text = LNGIniFile.GetString("frmserviceDesc", "MSG1", "Добавление (редактирование) заявки для") & " " & lstGroups.SelectedNode.Text
 
         rs1.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
         Dim sSw As Date
@@ -2315,7 +2210,7 @@ err_:
 
         frmService_add.REMED = True
 
-        frmService_add.cmbAdd.Text = LNGIniFile.GetString("frmserviceDesc", "MSG2", "")
+        frmService_add.cmbAdd.Text = LNGIniFile.GetString("frmserviceDesc", "MSG2", "Сохранить")
 
         rs1.Close()
         rs1 = Nothing
@@ -2419,7 +2314,7 @@ err_:
 
         Dim langfile As New IniFile(sLANGPATH)
 
-        Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG25", "") & " " & lstGroups.SelectedNode.Text)
+        Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG25", "Копирование техники") & " " & lstGroups.SelectedNode.Text)
 
     End Sub
 
@@ -2453,19 +2348,19 @@ err_:
 
                 sSQL = "SELECT id,net_name,psevdonim FROM kompy where filial ='" & sBranch & "' and mesto=''"
 
-                Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG26", "") & " " & sBranch)
+                Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG26", "Массовое удаление техники из") & " " & sBranch)
 
             Case "O"
 
                 sSQL = "SELECT id,net_name,psevdonim FROM kompy where filial ='" & sBranch & "' and mesto='" & sDepartment & "' and kabn=''"
 
-                Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG26", "") & " " & sBranch & "/" & sDepartment)
+                Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG26", "Массовое удаление техники из") & " " & sBranch & "/" & sDepartment)
 
             Case "K"
 
                 sSQL = "SELECT id,net_name,psevdonim FROM kompy where filial ='" & sBranch & "' and mesto='" & sDepartment & "' AND kabn ='" & sOffice & "'"
 
-                Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG26", "") & " " & sBranch & "/" & sDepartment & "/" & sOffice)
+                Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG26", "Массовое удаление техники из") & " " & sBranch & "/" & sDepartment & "/" & sOffice)
 
         End Select
 
@@ -2530,7 +2425,7 @@ err_:
 
 
         Me.BeginInvoke(New MethodInvoker(AddressOf R_T_LOAD))
-        Me.BeginInvoke(New MethodInvoker(AddressOf STAT_INF_1))
+        Me.BeginInvoke(New MethodInvoker(AddressOf STAT_INF))
 
         'RefFilTree(Me.lstGroups)
 
@@ -2629,7 +2524,7 @@ err_:
                 Dim langfile As New IniFile(sLANGPATH)
 
 
-                Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG27", ""))
+                Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG27", "Массовое добавление техники"))
 
                 RefFilTree(Me.lstGroups)
                 'Dim newThread As New Thread(AddressOf R_T_LOAD)
@@ -2677,7 +2572,7 @@ err_:
         Dim langfile As New IniFile(sLANGPATH)
 
 
-        Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG28", "") & " " & lstGroups.SelectedNode.Text)
+        Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG28", "Обновление компьютера") & " " & lstGroups.SelectedNode.Text)
         Me.Cursor = Cursors.Default
 
 
@@ -2687,7 +2582,7 @@ err_:
 
         Dim langfile As New IniFile(sLANGPATH)
 
-        frmService_add.Text = langfile.GetString("frmComputers", "MSG21", "") & " " & lstGroups.SelectedNode.Text
+        frmService_add.Text = langfile.GetString("frmComputers", "MSG21", "Добавление (редактирование) заявки для ") & " " & lstGroups.SelectedNode.Text
         'serviceDesc.MdiParent = frmMain
         'serviceDesc.Show()
         frmService_add.REMFU = True
@@ -2704,7 +2599,7 @@ err_:
         frmService_add.cmbTip.Text = ""
         frmService_add.txtComent.Text = ""
         frmService_add.RemCashe.Text = 0
-        frmService_add.cmbAdd.Text = langfile.GetString("frmComputers", "MSG30", "")
+        frmService_add.cmbAdd.Text = langfile.GetString("frmComputers", "MSG30", "Добавить")
         frmService_add.chkClose.Checked = 0
 
         frmService_add.ShowDialog(frmserviceDesc)
@@ -2715,7 +2610,7 @@ err_:
         Dim langfile As New IniFile(sLANGPATH)
 
 
-        If MsgBox(langfile.GetString("frmComputers", "MSG23", "") & " " & lstGroups.SelectedNode.Text, MsgBoxStyle.YesNo, ProGramName) = MsgBoxResult.Yes Then
+        If MsgBox(langfile.GetString("frmComputers", "MSG23", "Вы уверены что хотите удалить") & " " & lstGroups.SelectedNode.Text, MsgBoxStyle.YesNo, ProGramName) = MsgBoxResult.Yes Then
 
             Me.Cursor = Cursors.WaitCursor
             On Error GoTo err_
@@ -2736,17 +2631,17 @@ err_:
                 Case "G"
 
                     RemoveBrainch(lstGroups.SelectedNode.Text)
-                    Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG31", "") & " " & sBranch)
+                    Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG31", "Удаление филиала") & " " & sBranch)
 
                 Case "O"
 
                     RemoveDepartment(d(1))
-                    Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG32", "") & " " & sBranch & "/" & sDepartment)
+                    Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG32", "Удаление отдела") & " " & sBranch & "/" & sDepartment)
 
                 Case "K"
 
                     RemoveOffice(d(1))
-                    Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG33", "") & " " & sBranch & "/" & sDepartment & "/" & sOffice)
+                    Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG33", "Удаление кабинета") & " " & sBranch & "/" & sDepartment & "/" & sOffice)
 
             End Select
 
@@ -2801,7 +2696,7 @@ err_:
             Case "G"
 
                 If e.Button = Windows.Forms.MouseButtons.Right Then
-                    mnuDeltoBranch.Text = langfile.GetString("frmComputers", "MSG34", "")
+                    mnuDeltoBranch.Text = langfile.GetString("frmComputers", "MSG34", "Удалить из филиала")
 
                     cmBmenu.Show(CType(sender, Control), e.Location)
 
@@ -2810,7 +2705,7 @@ err_:
             Case "K"
 
                 If e.Button = Windows.Forms.MouseButtons.Right Then
-                    mnuDeltoBranch.Text = langfile.GetString("frmComputers", "MSG35", "")
+                    mnuDeltoBranch.Text = langfile.GetString("frmComputers", "MSG35", "Удалить из кабинета")
 
                     cmBmenu.Show(CType(sender, Control), e.Location)
 
@@ -2819,7 +2714,7 @@ err_:
             Case "O"
 
                 If e.Button = Windows.Forms.MouseButtons.Right Then
-                    mnuDeltoBranch.Text = langfile.GetString("frmComputers", "MSG36", "")
+                    mnuDeltoBranch.Text = langfile.GetString("frmComputers", "MSG36", "Удалить из отдела")
 
                     cmBmenu.Show(CType(sender, Control), e.Location)
 
@@ -2828,7 +2723,7 @@ err_:
             Case "OT"
 
                 If e.Button = Windows.Forms.MouseButtons.Right Then
-                    mnuDeltoBranch.Text = langfile.GetString("frmComputers", "MSG36", "")
+                    mnuDeltoBranch.Text = langfile.GetString("frmComputers", "MSG36", "Удалить из отдела")
 
                     cmBmenu.Show(CType(sender, Control), e.Location)
 
@@ -2837,7 +2732,7 @@ err_:
             Case "CNT"
 
                 If e.Button = Windows.Forms.MouseButtons.Right Then
-                    mnuDeltoBranch.Text = langfile.GetString("frmComputers", "MSG36", "")
+                    mnuDeltoBranch.Text = langfile.GetString("frmComputers", "MSG36", "Удалить из отдела")
 
                     cmBmenu.Show(CType(sender, Control), e.Location)
 
@@ -3070,8 +2965,8 @@ err_:
                         If tiptehCP = "PC" Then
                             objText.insertString(objCursor, " " & vbLf, False)
 
-                            objText.insertString(objCursor, langfile.GetString("frmComputers", "MSG37", "") & " " & .Fields("PSEVDONIM").Value & vbLf, False)
-                            objText.insertString(objCursor, langfile.GetString("frmComputers", "MSG38", "") & " " & .Fields("FILIAL").Value & "/" & .Fields("MESTO").Value & "/" & .Fields("kabn").Value & vbLf, False)
+                            objText.insertString(objCursor, langfile.GetString("frmComputers", "MSG37", "Имя компьютера:") & " " & .Fields("PSEVDONIM").Value & vbLf, False)
+                            objText.insertString(objCursor, langfile.GetString("frmComputers", "MSG38", "Место установки:") & " " & .Fields("FILIAL").Value & "/" & .Fields("MESTO").Value & "/" & .Fields("kabn").Value & vbLf, False)
                             'objText.insertString(objCursor, "Операционная система : " & .Fields("OS").Value & vbLf, False)
 
                             objText.insertString(objCursor, " " & vbLf, False)
@@ -3113,7 +3008,7 @@ err_:
 
 
                                 intj = 1
-                                insertIntoCell("A1", langfile.GetString("frmComputers", "MSG39", ""), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                                insertIntoCell("A1", langfile.GetString("frmComputers", "MSG39", "Установленное П.О."), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
 
                                 sSQL1 = "SELECT * FROM SOFT_INSTALL WHERE id_comp=" & uname
                                 rs1 = New ADODB.Recordset
@@ -3178,13 +3073,13 @@ err_:
                         If tiptehCP = "PC" Then
 
                             oPara1 = oDoc.Content.Paragraphs.Add
-                            oPara1.Range.Text = langfile.GetString("frmComputers", "MSG37", "") & " " & .Fields("PSEVDONIM").Value
+                            oPara1.Range.Text = langfile.GetString("frmComputers", "MSG37", "Имя компьютера:") & " " & .Fields("PSEVDONIM").Value
                             oPara1.Range.Font.Bold = True
                             oPara1.Format.SpaceAfter = 6
                             oPara1.Range.InsertParagraphAfter()
 
                             oPara1 = oDoc.Content.Paragraphs.Add
-                            oPara1.Range.Text = langfile.GetString("frmComputers", "MSG38", "") & " " & .Fields("FILIAL").Value & "/" & .Fields("MESTO").Value & "/" & .Fields("kabn").Value
+                            oPara1.Range.Text = langfile.GetString("frmComputers", "MSG38", "Место установки:") & " " & .Fields("FILIAL").Value & "/" & .Fields("MESTO").Value & "/" & .Fields("kabn").Value
                             oPara1.Range.Font.Bold = True
                             oPara1.Format.SpaceAfter = 24
                             oPara1.Range.InsertParagraphAfter()
@@ -3213,7 +3108,7 @@ err_:
 
                                 oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, GIST + 1, 1)
                                 oTable.Range.ParagraphFormat.SpaceAfter = 6
-                                oTable.Cell(1, 1).Range.Text = langfile.GetString("frmComputers", "MSG39", "")
+                                oTable.Cell(1, 1).Range.Text = langfile.GetString("frmComputers", "MSG39", "Установленное П.О.")
 
                                 sSQL1 = "SELECT * FROM SOFT_INSTALL WHERE id_comp=" & uname
                                 rs1 = New ADODB.Recordset
@@ -3435,7 +3330,7 @@ err_:
         frmGarCPL.ShowDialog(Me)
     End Sub
 
-    Private Sub gbOptical_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs)
+    Private Sub gbOptical_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles gbOptical.DoubleClick
         If rbSist.Checked = True Then Exit Sub
 
         If Len(gbRAM.Text) = 0 Then
@@ -3636,10 +3531,10 @@ err_:
                     SAVE_DRAG_DROP(Me.sCOUNT, sBranch_, sDepartment_, sOffice_, Me.lstGroups.SelectedNode.Text)
 
 
-                    Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                    Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
                     Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
-                    'Dim newThread1 As New Thread(AddressOf T_LOAD_T)
+                    'Dim newThread1 As New Thread(AddressOf T_LOAD_T_1)
                     'newThread1.Start()
                     'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
                     'newThread6.Start()
@@ -3652,10 +3547,10 @@ err_:
 
                     SAVE_DRAG_DROP(Me.sCOUNT, sBranch_, sDepartment_, sOffice_, Me.lstGroups.SelectedNode.Text)
 
-                    Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                    Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
                     Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
-                    'Dim newThread1 As New Thread(AddressOf T_LOAD_T)
+                    'Dim newThread1 As New Thread(AddressOf T_LOAD_T_1)
                     'newThread1.Start()
                     'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
                     'newThread6.Start()
@@ -3668,10 +3563,10 @@ err_:
                     SAVE_DRAG_DROP(Me.sCOUNT, sBranch_, sDepartment_, sOffice_, Me.lstGroups.SelectedNode.Text)
 
 
-                    Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                    Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
                     Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
-                    'Dim newThread1 As New Thread(AddressOf T_LOAD_T)
+                    'Dim newThread1 As New Thread(AddressOf T_LOAD_T_1)
                     'newThread1.Start()
                     'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
                     'newThread6.Start()
@@ -3683,10 +3578,10 @@ err_:
 
                     SAVE_DRAG_DROP(Me.sCOUNT, sBranch_, sDepartment_, sOffice_, Me.lstGroups.SelectedNode.Text)
 
-                    Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                    Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
                     Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
-                    'Dim newThread1 As New Thread(AddressOf T_LOAD_T)
+                    'Dim newThread1 As New Thread(AddressOf T_LOAD_T_1)
                     'newThread1.Start()
                     'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
                     'newThread6.Start()
@@ -3714,11 +3609,11 @@ err_:
 
                     SAVE_DRAG_DROP(Me.sCOUNT, sBranch_, sDepartment_, sOffice_, Me.lstGroups.SelectedNode.Text)
 
-                    Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                    Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
                     Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
 
-                    'Dim newThread1 As New Thread(AddressOf T_LOAD_T)
+                    'Dim newThread1 As New Thread(AddressOf T_LOAD_T_1)
                     'newThread1.Start()
                     'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
                     'newThread6.Start()
@@ -3730,10 +3625,10 @@ err_:
 
                     SAVE_DRAG_DROP(Me.sCOUNT, sBranch_, sDepartment_, sOffice_, Me.lstGroups.SelectedNode.Text)
 
-                    Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                    Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
                     Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
-                    'Dim newThread1 As New Thread(AddressOf T_LOAD_T)
+                    'Dim newThread1 As New Thread(AddressOf T_LOAD_T_1)
                     'newThread1.Start()
                     'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
                     'newThread6.Start()
@@ -3745,10 +3640,10 @@ err_:
 
                     SAVE_DRAG_DROP(Me.sCOUNT, sBranch_, sDepartment_, sOffice_, Me.lstGroups.SelectedNode.Text)
 
-                    Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                    Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
                     Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
-                    'Dim newThread1 As New Thread(AddressOf T_LOAD_T)
+                    'Dim newThread1 As New Thread(AddressOf T_LOAD_T_1)
                     'newThread1.Start()
                     'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
                     'newThread6.Start()
@@ -3760,10 +3655,10 @@ err_:
 
                     SAVE_DRAG_DROP(Me.sCOUNT, sBranch_, sDepartment_, sOffice_, Me.lstGroups.SelectedNode.Text)
 
-                    Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                    Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
                     Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
-                    'Dim newThread1 As New Thread(AddressOf T_LOAD_T)
+                    'Dim newThread1 As New Thread(AddressOf T_LOAD_T_1)
                     'newThread1.Start()
                     'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
                     'newThread6.Start()
@@ -3775,10 +3670,10 @@ err_:
 
                     SAVE_DRAG_DROP(Me.sCOUNT, sBranch_, sDepartment_, sOffice_, Me.lstGroups.SelectedNode.Text)
 
-                    Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                    Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
                     Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
-                    'Dim newThread1 As New Thread(AddressOf T_LOAD_T)
+                    'Dim newThread1 As New Thread(AddressOf T_LOAD_T_1)
                     'newThread1.Start()
                     'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
                     'newThread6.Start()
@@ -3791,10 +3686,10 @@ err_:
                     SAVE_DRAG_DROP(Me.sCOUNT, sBranch_, sDepartment_, sOffice_, Me.lstGroups.SelectedNode.Text)
                     '--------------VIP_Graff Добавление новой перефирии Конец------------------
 
-                    Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                    Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
                     Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
-                    'Dim newThread1 As New Thread(AddressOf T_LOAD_T)
+                    'Dim newThread1 As New Thread(AddressOf T_LOAD_T_1)
                     'newThread1.Start()
                     'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
                     'newThread6.Start()
@@ -3805,10 +3700,10 @@ err_:
                     Me.cmbOTHOffice.Text = sOffice_
                     SAVE_DRAG_DROP(Me.sCOUNT, sBranch_, sDepartment_, sOffice_, Me.lstGroups.SelectedNode.Text)
 
-                    Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                    Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
                     Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
-                    'Dim newThread1 As New Thread(AddressOf T_LOAD_T)
+                    'Dim newThread1 As New Thread(AddressOf T_LOAD_T_1)
                     'newThread1.Start()
                     'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
                     'newThread6.Start()
@@ -3826,10 +3721,10 @@ err_:
                     SAVE_DRAG_DROP(Me.sCOUNT, sBranch_, sDepartment_, sOffice_, Me.lstGroups.SelectedNode.Text)
 
 
-                    Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                    Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
                     Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
-                    'Dim newThread1 As New Thread(AddressOf T_LOAD_T)
+                    'Dim newThread1 As New Thread(AddressOf T_LOAD_T_1)
                     'newThread1.Start()
                     'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
                     'newThread6.Start()
@@ -3841,10 +3736,10 @@ err_:
                     SAVE_DRAG_DROP(Me.sCOUNT, sBranch_, sDepartment_, sOffice_, Me.lstGroups.SelectedNode.Text)
 
 
-                    Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                    Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
                     Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
-                    'Dim newThread1 As New Thread(AddressOf T_LOAD_T)
+                    'Dim newThread1 As New Thread(AddressOf T_LOAD_T_1)
                     'newThread1.Start()
                     'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
                     'newThread6.Start()
@@ -3855,10 +3750,10 @@ err_:
                     Me.cmbOTHOffice.Text = sOffice_
                     SAVE_DRAG_DROP(Me.sCOUNT, sBranch_, sDepartment_, sOffice_, Me.lstGroups.SelectedNode.Text)
 
-                    Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                    Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
                     Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
-                    'Dim newThread1 As New Thread(AddressOf T_LOAD_T)
+                    'Dim newThread1 As New Thread(AddressOf T_LOAD_T_1)
                     'newThread1.Start()
                     'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
                     'newThread6.Start()
@@ -3870,10 +3765,10 @@ err_:
                     SAVE_DRAG_DROP(Me.sCOUNT, sBranch_, sDepartment_, sOffice_, Me.lstGroups.SelectedNode.Text)
                     '--------------VIP_Graff Добавление новой перефирии Конец------------------
 
-                    Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                    Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
                     Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
-                    'Dim newThread1 As New Thread(AddressOf T_LOAD_T)
+                    'Dim newThread1 As New Thread(AddressOf T_LOAD_T_1)
                     'newThread1.Start()
                     'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
                     'newThread6.Start()
@@ -3886,10 +3781,10 @@ err_:
 
                     SAVE_DRAG_DROP(Me.sCOUNT, sBranch_, sDepartment_, sOffice_, Me.lstGroups.SelectedNode.Text)
 
-                    Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T))
+                    Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
                     Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
-                    'Dim newThread1 As New Thread(AddressOf T_LOAD_T)
+                    'Dim newThread1 As New Thread(AddressOf T_LOAD_T_1)
                     'newThread1.Start()
                     'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
                     'newThread6.Start()
@@ -3904,7 +3799,7 @@ err_:
 
     End Sub
 
-    Private Sub gbNetwork_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs)
+    Private Sub gbNetwork_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles gbNetwork.DoubleClick
         If rbSist.Checked = True Then Exit Sub
 
         If Len(gbNetwork.Text) = 0 Then
@@ -3919,7 +3814,7 @@ err_:
         frmGarCPL.ShowDialog(Me)
     End Sub
 
-    Private Sub gbFDD_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs)
+    Private Sub gbFDD_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles gbFDD.DoubleClick
         If rbSist.Checked = True Then Exit Sub
 
         If Len(gbNetwork.Text) = 0 Then
@@ -3934,7 +3829,7 @@ err_:
         frmGarCPL.ShowDialog(Me)
     End Sub
 
-    Private Sub gbModem_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs)
+    Private Sub gbModem_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles gbModem.DoubleClick
         If rbSist.Checked = True Then Exit Sub
 
         If Len(gbNetwork.Text) = 0 Then
@@ -4009,7 +3904,7 @@ err_:
         frmGarCPL.ShowDialog(Me)
     End Sub
 
-    Private Sub gbUSB_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs)
+    Private Sub gbUSB_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles gbUSB.DoubleClick
         If rbSist.Checked = True Then Exit Sub
 
         If Len(gbNetwork.Text) = 0 Then
@@ -4031,7 +3926,7 @@ err_:
 
         If TipTehn <> "PC" Then Exit Sub
 
-        Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG40", "") & " " & Me.lstGroups.SelectedNode.Text)
+        Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG40", "Разделение техники") & " " & Me.lstGroups.SelectedNode.Text)
 
         Call selectTECMesto()
 
@@ -4039,7 +3934,7 @@ err_:
 
         'Dim newThread1 As New Thread(AddressOf STAT_INF_1)
         'newThread1.Start()
-        Me.BeginInvoke(New MethodInvoker(AddressOf STAT_INF_1))
+        Me.BeginInvoke(New MethodInvoker(AddressOf STAT_INF))
 
 
     End Sub
@@ -4069,7 +3964,7 @@ err_:
         Dim langfile As New IniFile(sLANGPATH)
 
 
-        Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG41", "") & " " & Me.lstGroups.SelectedNode.Text)
+        Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG41", "Расшифровка пароля пользователя на компьютере") & " " & Me.lstGroups.SelectedNode.Text)
 
         txtUserPass.PasswordChar = ""
         txtUserEmailPwd.PasswordChar = ""
@@ -4086,8 +3981,8 @@ err_:
     End Sub
 
     Private Sub lstUsers_ColumnClick(ByVal sender As Object, ByVal e As System.Windows.Forms.ColumnClickEventArgs) Handles lstUsers.ColumnClick
-        Dim new_sorting_column As ColumnHeader = _
- lstUsers.Columns(e.Column)
+
+        Dim new_sorting_column As ColumnHeader = lstUsers.Columns(e.Column)
 
         Dim sort_order As System.Windows.Forms.SortOrder
         If m_SortingColumn Is Nothing Then
@@ -4163,15 +4058,15 @@ err_:
         Dim langfile As New IniFile(sLANGPATH)
 
 
-        cmdUserAdd.Text = langfile.GetString("frmComputers", "MSG42", "")
+        cmdUserAdd.Text = langfile.GetString("frmComputers", "MSG42", "Сохранить")
 
         rs.Close()
         rs = Nothing
     End Sub
 
     Private Sub lvRepair_ColumnClick(ByVal sender As Object, ByVal e As System.Windows.Forms.ColumnClickEventArgs) Handles lvRepair.ColumnClick
-        Dim new_sorting_column As ColumnHeader = _
-lvRepair.Columns(e.Column)
+
+        Dim new_sorting_column As ColumnHeader = lvRepair.Columns(e.Column)
 
         Dim sort_order As System.Windows.Forms.SortOrder
         If m_SortingColumn Is Nothing Then
@@ -4273,7 +4168,7 @@ lvNotes.Columns(e.Column)
 
         Dim langfile As New IniFile(sLANGPATH)
 
-        btnBRNotesAdd.Text = langfile.GetString("frmComputers", "MSG42", "")
+        btnBRNotesAdd.Text = langfile.GetString("frmComputers", "MSG42", "Сохранить")
 
         rs.Close()
         rs = Nothing
@@ -4518,7 +4413,7 @@ lvNotesOTH.Columns(e.Column)
 
         Dim langfile As New IniFile(sLANGPATH)
 
-        frmCartr_ADD.Text = langfile.GetString("frmComputers", "MSG43", "") & " " & lstGroups.SelectedNode.Text
+        frmCartr_ADD.Text = langfile.GetString("frmComputers", "MSG43", "Добавление (редактирование) картриджа для") & " " & lstGroups.SelectedNode.Text
 
         'serviceDesc.MdiParent = frmMain
         'serviceDesc.Show()
@@ -4546,7 +4441,7 @@ lvNotesOTH.Columns(e.Column)
         frmCRT3.cCOUNT = Me.sCOUNT
         frmCartr_ADD.ShowDialog(Me)
 
-        Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG44", "") & " " & lstGroups.SelectedNode.Text)
+        Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG44", "Добавление картриджа для") & " " & lstGroups.SelectedNode.Text)
     End Sub
 
     Private Sub cmbBranch_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbBranch.SelectedIndexChanged
@@ -4665,37 +4560,59 @@ err_:
                 ExLoadParTwo(cmbOTH.Text, PROiZV39, "spr_zip")
 
             Case "OT"
-                'ExLoadParTwo(cmbOTH.Text, PROiZV39, "SPR_OTH_DEV")
+                'ExLoadParTwo(cmbOTH.Text, PROiZV39, .Fields("A").Value)
 
-                Dim rs As ADODB.Recordset
-                Dim sSQL As String
-                Dim uNI As String
+                Dim rs As ADODB.Recordset 'Объявляем рекордсет
+                Dim sSQL As String 'Переменная, где будет размещён SQL запрос
+
+
+                sSQL = "SELECT B FROM spr_other WHERE name ='" & cmbOTHConnect.Text & "'"
                 rs = New ADODB.Recordset
-
-                sSQL = "SELECT * FROM SPR_OTH_DEV WHERE Name = '" & cmbOTH.Text & "'"
-
                 rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
 
                 With rs
 
-                    If Not IsDBNull(.Fields("proizv").Value) Then uNI = .Fields("proizv").Value
-
-                    Dim PROYZV As ADODB.Recordset
-                    PROYZV = New ADODB.Recordset
-                    PROYZV.Open("SELECT * FROM SPR_PROIZV WHERE iD=" & uNI, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-
-                    With PROYZV
-                        PROiZV39.Text = .Fields("proizv").Value
-                    End With
-                    PROYZV.Close()
-                    PROYZV = Nothing
-
-                    If Not IsDBNull(.Fields("A").Value) Then cmbOTHConnect.Text = .Fields("A").Value
+                    If Not IsDBNull(.Fields("B").Value) Then ExLoadParTwo(cmbOTH.Text, PROiZV39, .Fields("B").Value)
 
                 End With
 
                 rs.Close()
                 rs = Nothing
+
+
+
+
+
+                'Dim rs As ADODB.Recordset
+                'Dim sSQL As String
+                'Dim uNI As String
+                'rs = New ADODB.Recordset
+
+                'sSQL = "SELECT * FROM SPR_OTH_DEV WHERE Name = '" & cmbOTH.Text & "'"
+
+                'rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+                'With rs
+
+                '    If Not IsDBNull(.Fields("proizv").Value) Then uNI = .Fields("proizv").Value
+
+                '    Dim PROYZV As ADODB.Recordset
+                '    PROYZV = New ADODB.Recordset
+                '    PROYZV.Open("SELECT * FROM SPR_PROIZV WHERE iD=" & uNI, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+                '    With PROYZV
+                '        PROiZV39.Text = .Fields("proizv").Value
+                '    End With
+                '    PROYZV.Close()
+                '    PROYZV = Nothing
+
+                '    If Not IsDBNull(.Fields("A").Value) Then cmbOTHConnect.Text = .Fields("A").Value
+
+                'End With
+
+                'rs.Close()
+                'rs = Nothing
 
                 '--------------VIP_Graff Добавление новой перефирии Начало-----------------
             Case "USB"
@@ -4806,51 +4723,51 @@ err_:
         ExLoadParTree(cmbMB.Text, txtChip, PROizV5, "SPR_MB")
     End Sub
 
-    Private Sub cmbOPTIC1_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub cmbOPTIC1_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbOPTIC1.SelectedIndexChanged
         ExLoadParTree(cmbOPTIC1.Text, txtOPTICs1, PROizV17, "SPR_OPTICAL")
     End Sub
 
-    Private Sub cmbOPTIC2_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub cmbOPTIC2_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbOPTIC2.SelectedIndexChanged
         ExLoadParTree(cmbOPTIC2.Text, txtOPTICs2, PROizV18, "SPR_OPTICAL")
     End Sub
 
-    Private Sub cmbOPTIC3_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub cmbOPTIC3_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbOPTIC3.SelectedIndexChanged
         ExLoadParTree(cmbOPTIC3.Text, txtOPTICs3, PROizV19, "SPR_OPTICAL")
     End Sub
 
-    Private Sub cmbNET1_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub cmbNET1_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbNET1.SelectedIndexChanged
         ExLoadParTwo(cmbNET1.Text, PROizV20, "SPR_NET")
     End Sub
 
-    Private Sub cmbNET2_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub cmbNET2_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbNET2.SelectedIndexChanged
         ExLoadParTwo(cmbNET2.Text, PROizV21, "SPR_NET")
     End Sub
 
-    Private Sub cmbFDD_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub cmbFDD_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbFDD.SelectedIndexChanged
         ExLoadParTwo(cmbFDD.Text, PROizV22, "SPR_FDD")
     End Sub
 
-    Private Sub cmbCreader_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub cmbCreader_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbCreader.SelectedIndexChanged
         ExLoadParTwo(cmbCreader.Text, PROizV23, "SPR_CREADER")
     End Sub
 
-    Private Sub cmbModem_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub cmbModem_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbModem.SelectedIndexChanged
         ExLoadParTwo(cmbModem.Text, PROizV24, "SPR_MODEM")
     End Sub
 
-    Private Sub cmbCase_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub cmbCase_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbCase.SelectedIndexChanged
         ExLoadParTwo(cmbCase.Text, PROizV25, "SPR_CASE")
     End Sub
 
-    Private Sub cmbBP_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub cmbBP_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbBP.SelectedIndexChanged
         ExLoadParTwo(cmbBP.Text, PROizV26, "SPR_BP")
     End Sub
 
-    Private Sub cmbUSB_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub cmbUSB_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbUSB.SelectedIndexChanged
         ExLoadParTwo(cmbUSB.Text, PROizV41, "SPR_USB")
     End Sub
 
-    Private Sub cmbPCI_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub cmbPCI_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbPCI.SelectedIndexChanged
         ExLoadParTwo(cmbPCI.Text, PROizV42, "SPR_PCI")
     End Sub
 
@@ -4894,7 +4811,7 @@ err_:
         ExLoadParTwo(cmbIBP.Text, PROizV43, "SPR_IBP")
     End Sub
 
-    Private Sub cmbNETBranch_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub cmbNETBranch_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbNETBranch.SelectedIndexChanged
         On Error GoTo err_
 
         BrainchLoad(cmbNETBranch, cmbNetDepart)
@@ -4904,7 +4821,7 @@ err_:
         MsgBox(Err.Description, MsgBoxStyle.Information, ProGramName)
     End Sub
 
-    Private Sub cmbNetDepart_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub cmbNetDepart_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbNetDepart.SelectedIndexChanged
         On Error GoTo err_
 
         DepartmentLoad(cmbNETBranch, cmbNetDepart, cmbNETOffice)
@@ -5146,56 +5063,56 @@ Error_:
 
                             Case "PC"
 
-                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG11", "")
+                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG11", "Компьютер")
                             Case "Printer"
 
-                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG6", "")
+                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG6", "Принтер")
                             Case "KOpir"
 
-                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG13", "")
+                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG13", "Копир")
                             Case "MONITOR"
-                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG3", "")
+                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG3", "Монитор")
                             Case "SCANER"
 
-                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG8", "")
+                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG8", "Сканер")
                             Case "NET"
 
-                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG14", "")
+                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG14", "Сетевое оборудование")
                             Case "PHOTO"
 
-                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG15", "")
+                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG15", "Фотоаппарат")
 
                             Case "OT"
 
                                 sTXT = .Fields("NET_NAME").Value & " " & .Fields("TIP_COMPA").Value
                             Case "ZIP"
 
-                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG18", "")
+                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG18", "Дисковод ZIP")
                             Case "PHONE"
 
-                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG16", "")
+                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG16", "Телефон")
                             Case "MFU"
 
-                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG7", "")
+                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG7", "МФУ")
                             Case "FAX"
 
-                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG17", "")
+                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG17", "Факс")
 
                             Case "USB"
 
 
-                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG10", "")
+                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG10", "USB Устройство")
                             Case "IBP"
 
 
-                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG9", "")
+                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG9", "Источник бесперебойного питания")
                             Case "FS"
 
-                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG5", "")
+                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG5", "Сетевой фильтр")
 
                             Case "SOUND"
 
-                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG4", "")
+                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG4", "Акустическая система")
 
 
                         End Select
@@ -5205,11 +5122,11 @@ Error_:
 
                             Case "PC"
 
-                                frmNetMag_Add.txtSVT.Text = sTXT & ": " & .Fields("NET_NAME").Value & " , (" & LNGIniFile.GetString("frmNetMagazin", "MSG19", "") & " " & .Fields("OTvetstvennyj").Value & ")"
+                                frmNetMag_Add.txtSVT.Text = sTXT & ": " & .Fields("NET_NAME").Value & " , (" & LNGIniFile.GetString("frmNetMagazin", "MSG19", "Отв.:") & " " & .Fields("OTvetstvennyj").Value & ")"
                                 'Me.sBDO_SVT_count = .Fields("SVT").Value
                             Case Else
 
-                                frmNetMag_Add.txtKom.Text = sTXT & ": " & .Fields("NET_NAME").Value & " , (" & LNGIniFile.GetString("frmNetMagazin", "MSG19", "") & " " & .Fields("OTvetstvennyj").Value & ")"
+                                frmNetMag_Add.txtKom.Text = sTXT & ": " & .Fields("NET_NAME").Value & " , (" & LNGIniFile.GetString("frmNetMagazin", "MSG19", "Отв.:") & " " & .Fields("OTvetstvennyj").Value & ")"
 
                         End Select
 
@@ -5243,7 +5160,7 @@ Error_:
 
                     With rs1
 
-                        frmNetMag_Add.txtKom.Text = LNGIniFile.GetString("frmNetMagazin", "MSG14", "") & ": " & .Fields("NET_NAME").Value & " , (" & LNGIniFile.GetString("frmNetMagazin", "MSG19", "") & " " & .Fields("OTvetstvennyj").Value & ")"
+                        frmNetMag_Add.txtKom.Text = LNGIniFile.GetString("frmNetMagazin", "MSG14", "Акустическая система") & ": " & .Fields("NET_NAME").Value & " , (" & LNGIniFile.GetString("frmNetMagazin", "MSG19", "Отв.:") & " " & .Fields("OTvetstvennyj").Value & ")"
 
                     End With
                     rs1.Close()
@@ -5304,7 +5221,6 @@ Error_:
         Call Tip_Model_CARTR()
     End Sub
 
-
     Public Sub Tip_Model_CARTR()
         Dim sSQL As String
         cmbTIPCartridg.Text = ""
@@ -5327,8 +5243,6 @@ Error_:
         rs.Close()
         rs = Nothing
     End Sub
-
-   
 
     Private Sub lvMovement_ColumnClick(ByVal sender As Object, ByVal e As System.Windows.Forms.ColumnClickEventArgs) Handles lvMovement.ColumnClick
         Dim new_sorting_column As ColumnHeader = _
@@ -5421,7 +5335,6 @@ Error_:
         lvMovementPRN.Sort()
     End Sub
 
-
     Private Sub lvMovementPRN_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lvMovementPRN.MouseUp
 
         If lvMovementPRN.Items.Count = 0 Then Exit Sub
@@ -5449,7 +5362,6 @@ Error_:
 
 
     End Sub
-
 
     Private Sub DELTEdVIGToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DELTEdVIGToolStripMenuItem.Click
 
@@ -5614,7 +5526,6 @@ lvMovementOTH.Columns(e.Column)
 
     End Sub
 
-
     Private Sub lstGroups_NodeMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.TreeNodeMouseClickEventArgs) Handles lstGroups.NodeMouseClick
 
         '#############################################
@@ -5707,7 +5618,7 @@ lvMovementOTH.Columns(e.Column)
 
                     'Dim newThread1 As New Thread(AddressOf STAT_INF_1)
                     'newThread1.Start()
-                    Me.BeginInvoke(New MethodInvoker(AddressOf STAT_INF_1))
+                    Me.BeginInvoke(New MethodInvoker(AddressOf STAT_INF))
                 End If
 
                 intj = intj + 1
@@ -5830,7 +5741,7 @@ err_:
         Dim A1 As String
 
 
-        A1 = everIniFile.GetString("Имя компьютера", "Имя NetBIOS|Имя компьютера", "")
+        A1 = everIniFile.GetString("Имя компьютера", "Имя NetBIOS|Имя компьютера", "NoName")
         If Len(A1) = 0 Then A1 = everIniFile.GetString("Суммарная информация", "Компьютер|Имя компьютера", "NoName")
 
 
@@ -5945,7 +5856,7 @@ err_:
         Dim langfile As New IniFile(sLANGPATH)
 
 
-        If MsgBox(langfile.GetString("frmserviceDesc", "MSG9 ", ""), MsgBoxStyle.YesNo, ProGramName) = MsgBoxResult.Yes Then
+        If MsgBox(langfile.GetString("frmserviceDesc", "MSG9 ", "Удаление ремонта, продолжить?"), MsgBoxStyle.YesNo, ProGramName) = MsgBoxResult.Yes Then
 
             DELETE_SERVICE(lvServices)
 
@@ -6000,7 +5911,7 @@ err_:
 
         rs1 = Nothing
 
-        Call SaveActivityToLogDB(LNGIniFile.GetString("frmserviceDesc", "MSG7", "") & " " & lstGroups.SelectedNode.Text & " " & LNGIniFile.GetString("frmserviceDesc", "MSG8", "") & unamZ)
+        Call SaveActivityToLogDB(LNGIniFile.GetString("frmserviceDesc", "MSG7", "Удаление ремонта - объект - ") & " " & lstGroups.SelectedNode.Text & " " & LNGIniFile.GetString("frmserviceDesc", "MSG8", "установлен") & unamZ)
 
         Call LOAD_REPAIR(Me.sCOUNT, lvServices)
         Call REM_CHECK()
@@ -6114,8 +6025,6 @@ err_:
         End If
     End Sub
 
-
-
     Private Sub EditService_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles EditService.Click
 
         LoadRepairEdit(lvServices)
@@ -6165,7 +6074,6 @@ err_:
 
 
     End Sub
-
 
     Private Sub bRamPlus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bRamPlus.Click
         Select Case sRAM
@@ -6254,7 +6162,7 @@ err_:
         End Select
     End Sub
 
-    Private Sub bOpticalPlus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub bOpticalPlus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bOpticalPlus.Click
         Select Case sOPTICAL
 
             Case 1
@@ -6278,7 +6186,7 @@ err_:
         End Select
     End Sub
 
-    Private Sub bNETPlus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub bNETPlus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bNETPlus.Click
 
 
         Select Case sNET
@@ -6339,7 +6247,6 @@ err_:
                 sPrinter = sPrinter
         End Select
     End Sub
-
 
     Private Sub ВернутьПерефериюToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ВернутьПерефериюToolStripMenuItem.Click
 
@@ -6435,7 +6342,7 @@ err_:
         rs = Nothing
 
         Me.BeginInvoke(New MethodInvoker(AddressOf R_T_LOAD))
-        Me.BeginInvoke(New MethodInvoker(AddressOf STAT_INF_1))
+        Me.BeginInvoke(New MethodInvoker(AddressOf STAT_INF))
 
         'Dim newThread5 As New Thread(AddressOf R_T_LOAD)
         'newThread5.Start()
@@ -6488,11 +6395,8 @@ err_:
 
         If rCOUNT = 0 Then Exit Sub
 
-        Call SRASP2(rCOUNT, "\blanks\akt_z.dot")
-
-    End Sub
-
-    Private Sub txtSearch_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtSearch.TextChanged
+        Call SRASP2(rCOUNT, Directory.GetParent(Application.ExecutablePath).ToString & "\blanks\akt_z.dot")
+        ' Call SRASP2(rCOUNT, "\blanks\akt_z.dot")
 
     End Sub
 
@@ -6542,29 +6446,6 @@ err_1:
         MsgBox(Err.Description, MsgBoxStyle.Information, ProGramName)
     End Sub
 
-
-    Private Sub lstSoftware_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lstSoftware.SelectedIndexChanged
-
-    End Sub
-
-    Private Sub treebranche_SelectedValueChanged(sender As Object, e As System.EventArgs) Handles treebranche.SelectedValueChanged
-        Dim objIniFile As New IniFile(PrPath & "base.ini")
-        objIniFile.WriteString("General", "branche", treebranche.Text)
-
-        If OneStart = 0 Then Exit Sub
-
-        'If MsgBox("Обновить дерево?", MsgBoxStyle.YesNo, ProGramName) = MsgBoxResult.Yes Then
-
-        lstGroups.Nodes.Clear()
-        'Dim newThread5 As New Thread(AddressOf R_T_LOAD)
-        'newThread5.Start()
-        Me.BeginInvoke(New MethodInvoker(AddressOf R_T_LOAD))
-
-        ' Else
-
-        ' End If
-    End Sub
-
     Private Sub ТО1ToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ТО1ToolStripMenuItem.Click
 
         TIP_TO = "TO1"
@@ -6602,7 +6483,7 @@ err_1:
         Dim langfile As New IniFile(sLANGPATH)
 
 
-        Me.cmdUserAdd.Text = langfile.GetString("frmComputers", "MSG30", "")
+        Me.cmdUserAdd.Text = langfile.GetString("frmComputers", "MSG30", "Добавить")
 
         Me.txtUserName.Text = ""
         Me.txtUserPass.Text = ""
@@ -6714,6 +6595,77 @@ err_1:
 
 
         Me.Cursor = Cursors.Default
+    End Sub
+
+    'Private Sub chkSNMP_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles chkSNMP.CheckedChanged
+
+    '    If chkSNMP.Checked = True And TipTehn = "IBP" Then
+
+    '        lblSNMP.Visible = True
+    '        txtSNMP.Visible = True
+    '        gbSNMP.Visible = True
+
+    '    Else
+
+    '        lblSNMP.Visible = False
+    '        txtSNMP.Visible = False
+    '        gbSNMP.Visible = False
+
+    '    End If
+
+    'End Sub
+
+    Private Sub treebranche_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles treebranche.SelectedIndexChanged
+
+    End Sub
+
+
+    Private Sub TreeBrancheDU()
+
+        Dim objIniFile As New IniFile(PrPath & "base.ini")
+        objIniFile.WriteString("General", "branche", treebranche.Text)
+
+        If OneStart = 0 Then Exit Sub
+
+        lstGroups.Nodes.Clear()
+        Me.BeginInvoke(New MethodInvoker(AddressOf R_T_LOAD))
+
+        lstGroups.ExpandAll()
+
+    End Sub
+
+    Private Sub treebranche_SelectedValueChanged(sender As Object, e As System.EventArgs) Handles treebranche.SelectedValueChanged
+
+        Me.BeginInvoke(New MethodInvoker(AddressOf TreeBrancheDU))
+
+    End Sub
+
+    Private Sub cmbOTHConnect_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles cmbOTHConnect.SelectedIndexChanged
+        On Error GoTo err_
+
+
+        Dim rs As ADODB.Recordset 'Объявляем рекордсет
+        Dim sSQL As String 'Переменная, где будет размещён SQL запрос
+
+
+        sSQL = "SELECT B  FROM spr_other WHERE name ='" & cmbOTHConnect.Text & "'"
+        rs = New ADODB.Recordset
+        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+
+
+        With rs
+
+            If Not IsDBNull(.Fields("B").Value) And Len(.Fields("B").Value) > 5 Then FillComboNET(cmbOTH, "name", .Fields("B").Value, "", False, True)
+
+        End With
+
+        rs.Close()
+        rs = Nothing
+
+
+err_:
+
     End Sub
 
 End Class

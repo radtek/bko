@@ -38,11 +38,13 @@ Public Class IniFile
     End Property
 
     Public Function GetString(ByVal Section As String, ByVal Key As String, ByVal [Default] As String) As String
+        On Error GoTo err_
         ' Returns a string from your INI file
         Dim intCharCount As Integer
         Dim objResult As New System.Text.StringBuilder(256)
         intCharCount = GetPrivateProfileString(Section, Key, [Default], objResult, objResult.Capacity, strFilename)
         If intCharCount > 0 Then GetString = Left(objResult.ToString, intCharCount)
+err_:
 
     End Function
 

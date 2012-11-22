@@ -253,8 +253,11 @@ Error_:
                 sSQL2 = "SELECT COUNT(*) AS total_number FROM SPR_USER WHERE " & fs & "='" & sGroupName & "'"
 
 
-                'SPR_USER
-                'SPR_FS
+            Case "COMPL"
+
+
+                sSQL2 = "SELECT COUNT(*) AS total_number FROM SPR_Complect WHERE " & fs & "='" & sGroupName & "'"
+
 
         End Select
 

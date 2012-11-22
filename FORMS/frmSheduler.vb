@@ -40,7 +40,7 @@
         DTSHED.Value = Date.Today.AddDays(+1)
         txtShed.Text = ""
         cmbUser.Text = ""
-        btnAdd.Text = LNGIniFile.GetString("frmSheduler", "MSG1", "")
+        btnAdd.Text = LNGIniFile.GetString("frmSheduler", "MSG1", "Добавить")
 
     End Sub
 
@@ -188,7 +188,7 @@ Error_:
         rs.Close()
         rs = Nothing
         Dim LNGIniFile As New IniFile(sLANGPATH)
-        btnAdd.Text = LNGIniFile.GetString("frmSheduler", "MSG2", "")
+        btnAdd.Text = LNGIniFile.GetString("frmSheduler", "MSG2", "Сохранить")
 
 
 
@@ -206,7 +206,7 @@ Error_:
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
 
-        If btnAdd.Text = LNGIniFile.GetString("frmSheduler", "MSG2", "") Then
+        If btnAdd.Text = LNGIniFile.GetString("frmSheduler", "MSG2", "Сохранить") Then
 
             sSQL = "SELECT * FROM Sheduler WHERE id = " & Me.uCOUNT
         Else
@@ -218,7 +218,7 @@ Error_:
         rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
         With rs
-            If btnAdd.Text = LNGIniFile.GetString("frmSheduler", "MSG2", "") Then
+            If btnAdd.Text = LNGIniFile.GetString("frmSheduler", "MSG2", "Сохранить") Then
                 '.Edit
             Else
                 .AddNew()

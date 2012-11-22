@@ -40,31 +40,31 @@
             .MoveFirst()
             Do While Not .EOF
 
-                'LNGIniFile.GetString("MOD_PROV_SN", "MSG1", "")
+                'LNGIniFile.GetString("MOD_PROV_SN", "MSG1", "Инвентарный номер")
                 If Len(Trim(frmComputers.txtSBSN.Text)) > 0 Then
                     If .Fields("INV_NO_SYSTEM").Value = frmComputers.txtSBSN.Text Then
-                        MsgBox(LNGIniFile.GetString("MOD_PROV_SN", "MSG1", "") & " системного блока " & LNGIniFile.GetString("MOD_PROV_SN", "MSG2", "") & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG3", "") & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG4", "") & " " & .Fields("NET_NAME").Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG5", "") & " " & .Fields("FILIAL").Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG6", "") & " " & .Fields("MESTO").Value, MsgBoxStyle.Exclamation, "!")
+                        MsgBox(LNGIniFile.GetString("MOD_PROV_SN", "MSG1", "Инвентарный номер") & " системного блока " & LNGIniFile.GetString("MOD_PROV_SN", "MSG2", "присутствует в базе,") & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG3", "нужно выбрать другой номер") & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG4", "Компьютер:") & " " & .Fields("NET_NAME").Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG5", "Филиал:") & " " & .Fields("FILIAL").Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG6", "Отдел:") & " " & .Fields("MESTO").Value, MsgBoxStyle.Exclamation, "!")
                         intj = intj + 1
                     End If
                 End If
 
                 If Len(Trim(frmComputers.txtMSN.Text)) > 0 Then
                     If .Fields("INV_NO_MONITOR").Value = frmComputers.txtMSN.Text Then
-                        MsgBox(LNGIniFile.GetString("MOD_PROV_SN", "MSG1", "") & " монитора " & LNGIniFile.GetString("MOD_PROV_SN", "MSG2", "") & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG3", "") & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG4", "") & " " & .Fields("NET_NAME").Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG5", "") & " " & .Fields("FILIAL").Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG6", "") & " " & .Fields("MESTO").Value, MsgBoxStyle.Exclamation, "!")
+                        MsgBox(LNGIniFile.GetString("MOD_PROV_SN", "MSG1", "Инвентарный номер") & " монитора " & LNGIniFile.GetString("MOD_PROV_SN", "MSG2", "присутствует в базе,") & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG3", "нужно выбрать другой номер") & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG4", "Компьютер:") & " " & .Fields("NET_NAME").Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG5", "Филиал:") & " " & .Fields("FILIAL").Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG6", "Отдел:") & " " & .Fields("MESTO").Value, MsgBoxStyle.Exclamation, "!")
                         intj = intj + 1
                     End If
                 End If
 
                 If Len(Trim(frmComputers.IN_IBP.Text)) > 0 Then
                     If .Fields("INV_NO_IBP").Value = frmComputers.IN_IBP.Text Then
-                        MsgBox(LNGIniFile.GetString("MOD_PROV_SN", "MSG1", "") & " ИБП " & LNGIniFile.GetString("MOD_PROV_SN", "MSG2", "") & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG3", "") & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG4", "") & " " & .Fields("NET_NAME").Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG5", "") & " " & .Fields("FILIAL").Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG6", "") & " " & .Fields("MESTO").Value, MsgBoxStyle.Exclamation, "!")
+                        MsgBox(LNGIniFile.GetString("MOD_PROV_SN", "MSG1", "Инвентарный номер") & " ИБП " & LNGIniFile.GetString("MOD_PROV_SN", "MSG2", "присутствует в базе,") & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG3", "нужно выбрать другой номер") & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG4", "Компьютер:") & " " & .Fields("NET_NAME").Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG5", "Филиал:") & " " & .Fields("FILIAL").Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG6", "Отдел:") & " " & .Fields("MESTO").Value, MsgBoxStyle.Exclamation, "!")
                         intj = intj + 1
                     End If
                 End If
 
                 If Len(Trim(frmComputers.txtNETmac1.Text)) > 0 Then
                     If .Fields("NET_MAC_1").Value = frmComputers.txtNETmac1.Text Then
-                        MsgBox("MAC адрес и имя компьютера " & LNGIniFile.GetString("MOD_PROV_SN", "MSG2", "") & vbCrLf & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG7", "") & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG4", "") & " " & .Fields("NET_NAME").Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG5", "") & " " & .Fields("FILIAL").Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG6", "") & " " & .Fields("MESTO").Value, MsgBoxStyle.Exclamation, "!")
+                        MsgBox("MAC адрес и имя компьютера " & LNGIniFile.GetString("MOD_PROV_SN", "MSG2", "присутствует в базе,") & vbCrLf & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG7", "дальнейшее сохранение не возможно") & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG4", "Компьютер:") & " " & .Fields("NET_NAME").Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG5", "Филиал:") & " " & .Fields("FILIAL").Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG6", "Отдел:") & " " & .Fields("MESTO").Value, MsgBoxStyle.Exclamation, "!")
                         intj = intj + 1
                     End If
                 End If
@@ -95,7 +95,7 @@
             .MoveFirst()
             Do While Not .EOF
                 If .Fields("Mb_Id").Value = frmComputers.txtSN_MB.Text And Len(frmComputers.txtSN_MB.Text) <> 0 And .Fields(30).Value = frmComputers.cmbMB.Text And frmComputers.txtSN_MB.Text <> "<N/A>" And frmComputers.txtSN_MB.Text <> "123456789000" And frmComputers.txtSN_MB.Text <> "To be filled by O.E.M." And frmComputers.txtSN_MB.Text <> "MB-1234567890" And frmComputers.txtSN_MB.Text <> "MS9874353456379863" Then     'MS9874353456379863
-                    MsgBox(LNGIniFile.GetString("MOD_PROV_SN", "MSG8", "") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG9", "") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG2", "") & vbCrLf & "Дальнейшее добавление не возможно" & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG4", "") & " " & .Fields(31).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG5", "") & " " & .Fields(32).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG6", "") & " " & .Fields(33).Value, MsgBoxStyle.Exclamation, "!")
+                    MsgBox(LNGIniFile.GetString("MOD_PROV_SN", "MSG8", "Серийный номер") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG9", "материнской платы") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG2", "присутствует в базе,") & vbCrLf & "Дальнейшее добавление не возможно" & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG4", "Компьютер:") & " " & .Fields(31).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG5", "Филиал:") & " " & .Fields(32).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG6", "Отдел:") & " " & .Fields(33).Value, MsgBoxStyle.Exclamation, "!")
                     intj = intj + 1
                 End If
 
@@ -107,7 +107,7 @@
                 If Len(.Fields(1)) <= 3 Then
                 Else
                     If .Fields(1).Value = frmComputers.txtRamSN1.Text And Len(frmComputers.txtRamSN1.Text) <> 0 Or .Fields(1).Value = frmComputers.txtRamSN2.Text Or .Fields(1).Value = frmComputers.txtRamSN3.Text Or .Fields(1).Value = frmComputers.txtRamSN4.Text And frmComputers.txtRamSN1.Text <> "Нет" Then '
-                        'MsgBox LNGIniFile.GetString("MOD_PROV_SN", "MSG8", "")  & " модуля памяти " &  LNGIniFile.GetString("MOD_PROV_SN", "MSG2", "")  & vbCrLf & "Дальнейшее добавление не возможно" & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG4", "") & " " & .Fields(31).value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG5", "") & " " & .Fields(32).value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG6", "") & " " & .Fields(33).value, MsgBoxStyle.Exclamation, "!"
+                        'MsgBox LNGIniFile.GetString("MOD_PROV_SN", "MSG8", "Серийный номер")  & " модуля памяти " &  LNGIniFile.GetString("MOD_PROV_SN", "MSG2", "присутствует в базе,")  & vbCrLf & "Дальнейшее добавление не возможно" & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG4", "Компьютер:") & " " & .Fields(31).value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG5", "Филиал:") & " " & .Fields(32).value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG6", "Отдел:") & " " & .Fields(33).value, MsgBoxStyle.Exclamation, "!"
                         mpamt = True
                         intj = intj + 1
                     End If
@@ -116,7 +116,7 @@
                 If Len(.Fields(2)) <= 3 Then
                 Else
                     If .Fields(2).Value = frmComputers.txtRamSN2.Text And Len(frmComputers.txtRamSN2.Text) <> 0 Or .Fields(2).Value = frmComputers.txtRamSN1.Text Or .Fields(2).Value = frmComputers.txtRamSN3.Text Or .Fields(2).Value = frmComputers.txtRamSN4.Text And frmComputers.txtRamSN2.Text <> "Нет" Then
-                        'MsgBox LNGIniFile.GetString("MOD_PROV_SN", "MSG8", "")  & " модуля памяти " &  LNGIniFile.GetString("MOD_PROV_SN", "MSG2", "")  & vbCrLf & "Дальнейшее добавление не возможно" & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG4", "") & " " & .Fields(31).value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG5", "") & " " & .Fields(32).value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG6", "") & " " & .Fields(33).value, MsgBoxStyle.Exclamation, "!"
+                        'MsgBox LNGIniFile.GetString("MOD_PROV_SN", "MSG8", "Серийный номер")  & " модуля памяти " &  LNGIniFile.GetString("MOD_PROV_SN", "MSG2", "присутствует в базе,")  & vbCrLf & "Дальнейшее добавление не возможно" & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG4", "Компьютер:") & " " & .Fields(31).value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG5", "Филиал:") & " " & .Fields(32).value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG6", "Отдел:") & " " & .Fields(33).value, MsgBoxStyle.Exclamation, "!"
                         mpamt = True
                         intj = intj + 1
                     End If
@@ -125,7 +125,7 @@
                 If Len(.Fields(3)) <= 3 Then
                 Else
                     If .Fields(3).Value = frmComputers.txtRamSN3.Text And Len(frmComputers.txtRamSN3.Text) <> 0 Or .Fields(3).Value = frmComputers.txtRamSN1.Text Or .Fields(3).Value = frmComputers.txtRamSN2.Text Or .Fields(3).Value = frmComputers.txtRamSN4.Text And frmComputers.txtRamSN3.Text <> "Нет" Then
-                        'MsgBox LNGIniFile.GetString("MOD_PROV_SN", "MSG8", "")  & " модуля памяти " &  LNGIniFile.GetString("MOD_PROV_SN", "MSG2", "")  & vbCrLf & "Дальнейшее добавление не возможно" & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG4", "") & " " & .Fields(31).value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG5", "") & " " & .Fields(32).value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG6", "") & " " & .Fields(33).value, MsgBoxStyle.Exclamation, "!"
+                        'MsgBox LNGIniFile.GetString("MOD_PROV_SN", "MSG8", "Серийный номер")  & " модуля памяти " &  LNGIniFile.GetString("MOD_PROV_SN", "MSG2", "присутствует в базе,")  & vbCrLf & "Дальнейшее добавление не возможно" & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG4", "Компьютер:") & " " & .Fields(31).value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG5", "Филиал:") & " " & .Fields(32).value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG6", "Отдел:") & " " & .Fields(33).value, MsgBoxStyle.Exclamation, "!"
                         mpamt = True
                         intj = intj + 1
                     End If
@@ -134,14 +134,14 @@
                 If Len(.Fields(4)) <= 3 Then
                 Else
                     If .Fields(4).Value = frmComputers.txtRamSN4.Text And Len(frmComputers.txtRamSN4.Text) <> 0 Or .Fields(4).Value = frmComputers.txtRamSN1.Text Or .Fields(4).Value = frmComputers.txtRamSN2.Text Or .Fields(4).Value = frmComputers.txtRamSN3.Text And frmComputers.txtRamSN4.Text <> "Нет" Then
-                        'MsgBox LNGIniFile.GetString("MOD_PROV_SN", "MSG8", "")  & " модуля памяти " &  LNGIniFile.GetString("MOD_PROV_SN", "MSG2", "")  & vbCrLf & "Дальнейшее добавление не возможно" & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG4", "") & " " & .Fields(31).value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG5", "") & " " & .Fields(32).value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG6", "") & " " & .Fields(33).value, MsgBoxStyle.Exclamation, "!"
+                        'MsgBox LNGIniFile.GetString("MOD_PROV_SN", "MSG8", "Серийный номер")  & " модуля памяти " &  LNGIniFile.GetString("MOD_PROV_SN", "MSG2", "присутствует в базе,")  & vbCrLf & "Дальнейшее добавление не возможно" & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG4", "Компьютер:") & " " & .Fields(31).value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG5", "Филиал:") & " " & .Fields(32).value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG6", "Отдел:") & " " & .Fields(33).value, MsgBoxStyle.Exclamation, "!"
                         mpamt = True
                         intj = intj + 1
                     End If
                 End If
 
                 If mpamt = True Then
-                    MsgBox(LNGIniFile.GetString("MOD_PROV_SN", "MSG8", "") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG10", "") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG2", "") & vbCrLf & "Дальнейшее добавление не возможно" & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG4", "") & " " & .Fields(31).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG5", "") & " " & .Fields(32).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG6", "") & " " & .Fields(33).Value, MsgBoxStyle.Exclamation, "!")
+                    MsgBox(LNGIniFile.GetString("MOD_PROV_SN", "MSG8", "Серийный номер") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG10", "модуля памяти") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG2", "присутствует в базе,") & vbCrLf & "Дальнейшее добавление не возможно" & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG4", "Компьютер:") & " " & .Fields(31).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG5", "Филиал:") & " " & .Fields(32).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG6", "Отдел:") & " " & .Fields(33).Value, MsgBoxStyle.Exclamation, "!")
                     mpamt = False
                 Else
                 End If
@@ -185,90 +185,90 @@
                 End If
 
                 If mpamt = True Then
-                    MsgBox(LNGIniFile.GetString("MOD_PROV_SN", "MSG8", "") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG11", "") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG2", "") & vbCrLf & "Дальнейшее добавление не возможно" & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG4", "") & " " & .Fields(31).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG5", "") & " " & .Fields(32).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG6", "") & " " & .Fields(33).Value, MsgBoxStyle.Exclamation, "!")
+                    MsgBox(LNGIniFile.GetString("MOD_PROV_SN", "MSG8", "Серийный номер") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG11", "Жесткого диска") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG2", "присутствует в базе,") & vbCrLf & "Дальнейшее добавление не возможно" & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG4", "Компьютер:") & " " & .Fields(31).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG5", "Филиал:") & " " & .Fields(32).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG6", "Отдел:") & " " & .Fields(33).Value, MsgBoxStyle.Exclamation, "!")
                     mpamt = False
                 Else
                 End If
 
                 '######################################
                 If .Fields(9).Value = frmComputers.txtSVGAs1.Text And Len(frmComputers.txtSVGAs1.Text) <> 0 Then
-                    MsgBox(LNGIniFile.GetString("MOD_PROV_SN", "MSG8", "") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG12", "") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG2", "") & vbCrLf & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG7", "") & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG4", "") & " " & .Fields(31).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG5", "") & " " & .Fields(32).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG6", "") & " " & .Fields(33).Value, MsgBoxStyle.Exclamation, "!")
+                    MsgBox(LNGIniFile.GetString("MOD_PROV_SN", "MSG8", "Серийный номер") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG12", "Видео карты") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG2", "присутствует в базе,") & vbCrLf & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG7", "дальнейшее сохранение не возможно") & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG4", "Компьютер:") & " " & .Fields(31).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG5", "Филиал:") & " " & .Fields(32).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG6", "Отдел:") & " " & .Fields(33).Value, MsgBoxStyle.Exclamation, "!")
                     intj = intj + 1
                 End If
 
                 If .Fields(10).Value = frmComputers.txtSoundS.Text And Len(frmComputers.txtSoundS.Text) <> 0 Then
-                    MsgBox(LNGIniFile.GetString("MOD_PROV_SN", "MSG8", "") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG13", "") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG2", "") & vbCrLf & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG7", "") & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG4", "") & " " & .Fields(31).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG5", "") & " " & .Fields(32).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG6", "") & " " & .Fields(33).Value, MsgBoxStyle.Exclamation, "!")
+                    MsgBox(LNGIniFile.GetString("MOD_PROV_SN", "MSG8", "Серийный номер") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG13", "Звуковой карты") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG2", "присутствует в базе,") & vbCrLf & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG7", "дальнейшее сохранение не возможно") & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG4", "Компьютер:") & " " & .Fields(31).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG5", "Филиал:") & " " & .Fields(32).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG6", "Отдел:") & " " & .Fields(33).Value, MsgBoxStyle.Exclamation, "!")
                     intj = intj + 1
                 End If
 
                 If .Fields(11).Value = frmComputers.txtSoundS.Text And Len(frmComputers.txtSoundS.Text) <> 0 Then
-                    MsgBox(LNGIniFile.GetString("MOD_PROV_SN", "MSG8", "") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG14", "") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG2", "") & vbCrLf & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG7", "") & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG4", "") & " " & .Fields(31).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG5", "") & " " & .Fields(32).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG6", "") & " " & .Fields(33).Value, MsgBoxStyle.Exclamation, "!")
+                    MsgBox(LNGIniFile.GetString("MOD_PROV_SN", "MSG8", "Серийный номер") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG14", "Оптического накопителя") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG2", "присутствует в базе,") & vbCrLf & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG7", "дальнейшее сохранение не возможно") & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG4", "Компьютер:") & " " & .Fields(31).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG5", "Филиал:") & " " & .Fields(32).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG6", "Отдел:") & " " & .Fields(33).Value, MsgBoxStyle.Exclamation, "!")
                     intj = intj + 1
                 End If
 
                 If .Fields(12).Value = frmComputers.txtOPTICsn1.Text And Len(frmComputers.txtOPTICsn1.Text) <> 0 Then
-                    MsgBox(LNGIniFile.GetString("MOD_PROV_SN", "MSG8", "") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG14", "") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG2", "") & vbCrLf & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG7", "") & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG4", "") & " " & .Fields(31).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG5", "") & " " & .Fields(32).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG6", "") & " " & .Fields(33).Value, MsgBoxStyle.Exclamation, "!")
+                    MsgBox(LNGIniFile.GetString("MOD_PROV_SN", "MSG8", "Серийный номер") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG14", "Оптического накопителя") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG2", "присутствует в базе,") & vbCrLf & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG7", "дальнейшее сохранение не возможно") & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG4", "Компьютер:") & " " & .Fields(31).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG5", "Филиал:") & " " & .Fields(32).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG6", "Отдел:") & " " & .Fields(33).Value, MsgBoxStyle.Exclamation, "!")
                     intj = intj + 1
                 End If
 
                 If .Fields(13).Value = frmComputers.txtOPTICsn2.Text And Len(frmComputers.txtOPTICsn2.Text) <> 0 Then
-                    MsgBox(LNGIniFile.GetString("MOD_PROV_SN", "MSG8", "") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG14", "") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG2", "") & vbCrLf & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG7", "") & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG4", "") & " " & .Fields(31).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG5", "") & " " & .Fields(32).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG6", "") & " " & .Fields(33).Value, MsgBoxStyle.Exclamation, "!")
+                    MsgBox(LNGIniFile.GetString("MOD_PROV_SN", "MSG8", "Серийный номер") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG14", "Оптического накопителя") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG2", "присутствует в базе,") & vbCrLf & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG7", "дальнейшее сохранение не возможно") & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG4", "Компьютер:") & " " & .Fields(31).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG5", "Филиал:") & " " & .Fields(32).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG6", "Отдел:") & " " & .Fields(33).Value, MsgBoxStyle.Exclamation, "!")
                     intj = intj + 1
                 End If
 
                 If .Fields(14).Value = frmComputers.txtSN.Text And Len(frmComputers.txtSN.Text) <> 0 Then
-                    MsgBox(LNGIniFile.GetString("MOD_PROV_SN", "MSG8", "") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG15", "") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG2", "") & vbCrLf & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG7", "") & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG4", "") & " " & .Fields(31).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG5", "") & " " & .Fields(32).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG6", "") & " " & .Fields(33).Value, MsgBoxStyle.Exclamation, "!")
+                    MsgBox(LNGIniFile.GetString("MOD_PROV_SN", "MSG8", "Серийный номер") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG15", "FDD привода") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG2", "присутствует в базе,") & vbCrLf & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG7", "дальнейшее сохранение не возможно") & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG4", "Компьютер:") & " " & .Fields(31).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG5", "Филиал:") & " " & .Fields(32).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG6", "Отдел:") & " " & .Fields(33).Value, MsgBoxStyle.Exclamation, "!")
                     intj = intj + 1
                 End If
 
                 If .Fields(15).Value = frmComputers.txtModemSN.Text And Len(frmComputers.txtModemSN.Text) <> 0 Then
-                    MsgBox(LNGIniFile.GetString("MOD_PROV_SN", "MSG8", "") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG16", "") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG2", "") & vbCrLf & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG7", "") & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG4", "") & " " & .Fields(31).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG5", "") & " " & .Fields(32).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG6", "") & " " & .Fields(33).Value, MsgBoxStyle.Exclamation, "!")
+                    MsgBox(LNGIniFile.GetString("MOD_PROV_SN", "MSG8", "Серийный номер") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG16", "Модема") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG2", "присутствует в базе,") & vbCrLf & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG7", "дальнейшее сохранение не возможно") & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG4", "Компьютер:") & " " & .Fields(31).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG5", "Филиал:") & " " & .Fields(32).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG6", "Отдел:") & " " & .Fields(33).Value, MsgBoxStyle.Exclamation, "!")
                     intj = intj + 1
                 End If
 
                 If .Fields(16).Value = frmComputers.txtKeybSN.Text And Len(frmComputers.txtKeybSN.Text) <> 0 Then
-                    MsgBox(LNGIniFile.GetString("MOD_PROV_SN", "MSG8", "") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG17", "") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG2", "") & vbCrLf & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG7", "") & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG4", "") & " " & .Fields(31).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG5", "") & " " & .Fields(32).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG6", "") & " " & .Fields(33).Value, MsgBoxStyle.Exclamation, "!")
+                    MsgBox(LNGIniFile.GetString("MOD_PROV_SN", "MSG8", "Серийный номер") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG17", "Клавиатуры") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG2", "присутствует в базе,") & vbCrLf & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG7", "дальнейшее сохранение не возможно") & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG4", "Компьютер:") & " " & .Fields(31).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG5", "Филиал:") & " " & .Fields(32).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG6", "Отдел:") & " " & .Fields(33).Value, MsgBoxStyle.Exclamation, "!")
                     intj = intj + 1
                 End If
 
                 If .Fields(17).Value = frmComputers.txtMouseSN.Text And Len(frmComputers.txtMouseSN.Text) <> 0 Then
-                    MsgBox(LNGIniFile.GetString("MOD_PROV_SN", "MSG8", "") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG18", "") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG2", "") & vbCrLf & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG7", "") & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG4", "") & " " & .Fields(31).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG5", "") & " " & .Fields(32).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG6", "") & " " & .Fields(33).Value, MsgBoxStyle.Exclamation, "!")
+                    MsgBox(LNGIniFile.GetString("MOD_PROV_SN", "MSG8", "Серийный номер") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG18", "Мыши") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG2", "присутствует в базе,") & vbCrLf & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG7", "дальнейшее сохранение не возможно") & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG4", "Компьютер:") & " " & .Fields(31).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG5", "Филиал:") & " " & .Fields(32).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG6", "Отдел:") & " " & .Fields(33).Value, MsgBoxStyle.Exclamation, "!")
                     intj = intj + 1
                 End If
 
 
                 If .Fields(20).Value = frmComputers.txtMon1SN.Text And Len(frmComputers.txtMon1SN.Text) <> 0 And Len(frmComputers.txtMon1SN.Text) > 3 And frmComputers.txtMon1SN.Text <> "141016843009" Then
-                    MsgBox(LNGIniFile.GetString("MOD_PROV_SN", "MSG8", "") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG19", "") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG2", "") & vbCrLf & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG7", "") & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG4", "") & " " & .Fields(31).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG5", "") & " " & .Fields(32).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG6", "") & " " & .Fields(33).Value, MsgBoxStyle.Exclamation, "!")
+                    MsgBox(LNGIniFile.GetString("MOD_PROV_SN", "MSG8", "Серийный номер") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG19", "Монитора") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG2", "присутствует в базе,") & vbCrLf & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG7", "дальнейшее сохранение не возможно") & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG4", "Компьютер:") & " " & .Fields(31).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG5", "Филиал:") & " " & .Fields(32).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG6", "Отдел:") & " " & .Fields(33).Value, MsgBoxStyle.Exclamation, "!")
                     intj = intj + 1
                 End If
 
                 If .Fields(21).Value = frmComputers.txtMon2SN.Text And Len(frmComputers.txtMon2SN.Text) <> 0 And Len(frmComputers.txtMon2SN.Text) > 3 And frmComputers.txtMon2SN.Text <> "141016843009" Then
-                    MsgBox(LNGIniFile.GetString("MOD_PROV_SN", "MSG8", "") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG19", "") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG2", "") & vbCrLf & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG7", "") & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG4", "") & " " & .Fields(31).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG5", "") & " " & .Fields(32).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG6", "") & " " & .Fields(33).Value, MsgBoxStyle.Exclamation, "!")
+                    MsgBox(LNGIniFile.GetString("MOD_PROV_SN", "MSG8", "Серийный номер") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG19", "Монитора") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG2", "присутствует в базе,") & vbCrLf & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG7", "дальнейшее сохранение не возможно") & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG4", "Компьютер:") & " " & .Fields(31).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG5", "Филиал:") & " " & .Fields(32).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG6", "Отдел:") & " " & .Fields(33).Value, MsgBoxStyle.Exclamation, "!")
                     intj = intj + 1
                 End If
 
                 If .Fields(22).Value = frmComputers.txtAsistSN.Text And Len(frmComputers.txtAsistSN.Text) <> 0 Then
-                    MsgBox(LNGIniFile.GetString("MOD_PROV_SN", "MSG8", "") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG20", "") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG2", "") & vbCrLf & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG7", "") & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG4", "") & " " & .Fields(31).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG5", "") & " " & .Fields(32).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG6", "") & " " & .Fields(33).Value, MsgBoxStyle.Exclamation, "!")
+                    MsgBox(LNGIniFile.GetString("MOD_PROV_SN", "MSG8", "Серийный номер") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG20", "Акустической системы") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG2", "присутствует в базе,") & vbCrLf & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG7", "дальнейшее сохранение не возможно") & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG4", "Компьютер:") & " " & .Fields(31).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG5", "Филиал:") & " " & .Fields(32).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG6", "Отдел:") & " " & .Fields(33).Value, MsgBoxStyle.Exclamation, "!")
                     intj = intj + 1
                 End If
 
                 If .Fields(24).Value = frmComputers.txtFilterSN.Text And Len(frmComputers.txtFilterSN.Text) <> 0 Then
-                    MsgBox(LNGIniFile.GetString("MOD_PROV_SN", "MSG8", "") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG21", "") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG2", "") & vbCrLf & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG7", "") & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG4", "") & " " & .Fields(31).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG5", "") & " " & .Fields(32).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG6", "") & " " & .Fields(33).Value, MsgBoxStyle.Exclamation, "!")
+                    MsgBox(LNGIniFile.GetString("MOD_PROV_SN", "MSG8", "Серийный номер") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG21", "Сетевого фильтра") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG2", "присутствует в базе,") & vbCrLf & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG7", "дальнейшее сохранение не возможно") & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG4", "Компьютер:") & " " & .Fields(31).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG5", "Филиал:") & " " & .Fields(32).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG6", "Отдел:") & " " & .Fields(33).Value, MsgBoxStyle.Exclamation, "!")
                     intj = intj + 1
                 End If
 
                 If .Fields(25).Value = frmComputers.txtPrint1SN.Text And Len(frmComputers.txtPrint1SN.Text) <> 0 Then
-                    MsgBox(LNGIniFile.GetString("MOD_PROV_SN", "MSG8", "") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG22", "") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG2", "") & vbCrLf & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG7", "") & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG4", "") & " " & .Fields(31).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG5", "") & " " & .Fields(32).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG6", "") & " " & .Fields(33).Value, MsgBoxStyle.Exclamation, "!")
+                    MsgBox(LNGIniFile.GetString("MOD_PROV_SN", "MSG8", "Серийный номер") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG22", "Принтера") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG2", "присутствует в базе,") & vbCrLf & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG7", "дальнейшее сохранение не возможно") & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG4", "Компьютер:") & " " & .Fields(31).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG5", "Филиал:") & " " & .Fields(32).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG6", "Отдел:") & " " & .Fields(33).Value, MsgBoxStyle.Exclamation, "!")
                     intj = intj + 1
                 End If
 
                 If .Fields(26).Value = frmComputers.txtPrint2SN.Text And Len(frmComputers.txtPrint2SN.Text) <> 0 Then
-                    MsgBox(LNGIniFile.GetString("MOD_PROV_SN", "MSG8", "") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG22", "") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG2", "") & vbCrLf & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG7", "") & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG4", "") & " " & .Fields(31).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG5", "") & " " & .Fields(32).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG6", "") & " " & .Fields(33).Value, MsgBoxStyle.Exclamation, "!")
+                    MsgBox(LNGIniFile.GetString("MOD_PROV_SN", "MSG8", "Серийный номер") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG22", "Принтера") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG2", "присутствует в базе,") & vbCrLf & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG7", "дальнейшее сохранение не возможно") & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG4", "Компьютер:") & " " & .Fields(31).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG5", "Филиал:") & " " & .Fields(32).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG6", "Отдел:") & " " & .Fields(33).Value, MsgBoxStyle.Exclamation, "!")
                     intj = intj + 1
                 End If
 
                 If .Fields(27).Value = frmComputers.txtPrint3SN.Text And Len(frmComputers.txtPrint3SN.Text) <> 0 Then
-                    MsgBox(LNGIniFile.GetString("MOD_PROV_SN", "MSG8", "") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG22", "") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG2", "") & vbCrLf & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG7", "") & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG4", "") & " " & .Fields(31).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG5", "") & " " & .Fields(32).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG6", "") & " " & .Fields(33).Value, MsgBoxStyle.Exclamation, "!")
+                    MsgBox(LNGIniFile.GetString("MOD_PROV_SN", "MSG8", "Серийный номер") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG22", "Принтера") & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG2", "присутствует в базе,") & vbCrLf & " " & LNGIniFile.GetString("MOD_PROV_SN", "MSG7", "дальнейшее сохранение не возможно") & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG4", "Компьютер:") & " " & .Fields(31).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG5", "Филиал:") & " " & .Fields(32).Value & vbCrLf & LNGIniFile.GetString("MOD_PROV_SN", "MSG6", "Отдел:") & " " & .Fields(33).Value, MsgBoxStyle.Exclamation, "!")
                     intj = intj + 1
                 End If
 

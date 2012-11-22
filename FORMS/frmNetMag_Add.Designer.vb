@@ -140,7 +140,7 @@ Partial Class frmNetMag_Add
         '
         Me.cmbTipCab.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cmbTipCab.FormattingEnabled = True
-        Me.cmbTipCab.Items.AddRange(New Object() {"UTP-5e", "UTP-6", "-"})
+        Me.cmbTipCab.Items.AddRange(New Object() {"UTP-5e", "UTP-6", "OPTICAL", "-"})
         Me.cmbTipCab.Location = New System.Drawing.Point(173, 29)
         Me.cmbTipCab.Name = "cmbTipCab"
         Me.cmbTipCab.Size = New System.Drawing.Size(273, 21)
@@ -150,6 +150,7 @@ Partial Class frmNetMag_Add
         '
         Me.txtDlina.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtDlina.Location = New System.Drawing.Point(173, 56)
+        Me.txtDlina.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
         Me.txtDlina.Name = "txtDlina"
         Me.txtDlina.Size = New System.Drawing.Size(273, 20)
         Me.txtDlina.TabIndex = 5
@@ -280,6 +281,7 @@ Partial Class frmNetMag_Add
         Me.ToolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
         Me.ToolStrip1.Location = New System.Drawing.Point(538, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
+        Me.ToolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
         Me.ToolStrip1.Size = New System.Drawing.Size(231, 25)
         Me.ToolStrip1.TabIndex = 9
         Me.ToolStrip1.Text = "ToolStrip1"
@@ -430,6 +432,7 @@ Partial Class frmNetMag_Add
         Me.ToolStrip2.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
         Me.ToolStrip2.Location = New System.Drawing.Point(573, 0)
         Me.ToolStrip2.Name = "ToolStrip2"
+        Me.ToolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
         Me.ToolStrip2.Size = New System.Drawing.Size(196, 25)
         Me.ToolStrip2.TabIndex = 9
         Me.ToolStrip2.Text = "ToolStrip2"

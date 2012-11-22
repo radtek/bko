@@ -6,34 +6,37 @@
     Private Sub cmbAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbAdd.Click
         On Error Resume Next
         On Error GoTo err_
+        Dim objIniFile As New IniFile(sLANGPATH)
+
+
 
         If Len(cmbIst.Text) = 0 Then
 
-            MsgBox("Не указан источник", MsgBoxStyle.Information, ProGramName)
+            MsgBox(objIniFile.GetString("frmService_add", "MSG2", "Не указан") & " " & objIniFile.GetString("frmService_add", "MSG3", "источник"), MsgBoxStyle.Information, ProGramName)
             Exit Sub
         End If
 
         If Len(cmbMast.Text) = 0 Then
 
-            MsgBox("Не указан Мастер", MsgBoxStyle.Information, ProGramName)
+            MsgBox(objIniFile.GetString("frmService_add", "MSG2", "Не указан") & " " & objIniFile.GetString("frmService_add", "MSG4", "Мастер"), MsgBoxStyle.Information, ProGramName)
             Exit Sub
         End If
 
         If Len(txtRem.Text) = 0 Then
 
-            MsgBox("Нет информации о ремонте", MsgBoxStyle.Information, ProGramName)
+            MsgBox(objIniFile.GetString("frmService_add", "MSG2", "Не указан") & " " & objIniFile.GetString("frmService_add", "MSG5", "ремонт"), MsgBoxStyle.Information, ProGramName)
             Exit Sub
         End If
 
         If Len(cmbStatus.Text) = 0 Then
 
-            MsgBox("Не указан статус заявки", MsgBoxStyle.Information, ProGramName)
+            MsgBox(objIniFile.GetString("frmService_add", "MSG2", "Не указан") & " " & objIniFile.GetString("frmService_add", "MSG6", "статус заявки"), MsgBoxStyle.Information, ProGramName)
             Exit Sub
         End If
 
         If Len(cmbOtv.Text) = 0 Then
 
-            MsgBox("Не указан ответственный", MsgBoxStyle.Information, ProGramName)
+            MsgBox(objIniFile.GetString("frmService_add", "MSG2", "Не указан") & " " & objIniFile.GetString("frmService_add", "MSG7", "ответственный"), MsgBoxStyle.Information, ProGramName)
             Exit Sub
         End If
 
@@ -41,7 +44,7 @@
         Dim sSQL As String
         Dim unamZ As String
         Dim sCOUNTER As String
-        Dim objIniFile As New IniFile(sLANGPATH)
+
 
         Dim rs As ADODB.Recordset
 
@@ -102,7 +105,7 @@
         rs = Nothing
 
 
-        If cmbAdd.Text = objIniFile.GetString("frmService_add", "MSG1", "") Then
+        If cmbAdd.Text = objIniFile.GetString("frmService_add", "MSG1", "Сохранить") Then
             sSQL = "SELECT * FROM Remont WHERE id=" & frmserviceDesc.rCOUNT
 
         Else
@@ -117,7 +120,7 @@
         strTime = TimeString
 
         With rs
-            If cmbAdd.Text = objIniFile.GetString("frmService_add", "MSG1", "") Then
+            If cmbAdd.Text = objIniFile.GetString("frmService_add", "MSG1", "Сохранить") Then
 
             Else
                 .AddNew()
@@ -267,7 +270,7 @@ err_:
         Call frmService_add_Lang()
 
         If REMED = True Then
-            cmbAdd.Text = objIniFile.GetString("frmService_add", "MSG1", "")
+            cmbAdd.Text = objIniFile.GetString("frmService_add", "MSG1", "Сохранить")
             'cmbAdd 
         Else
 
@@ -283,7 +286,7 @@ err_:
 
 
 
-        If cmbAdd.Text = objIniFile.GetString("frmService_add", "MSG1", "") Then
+        If cmbAdd.Text = objIniFile.GetString("frmService_add", "MSG1", "Сохранить") Then
 
             chkClose.Enabled = True
 

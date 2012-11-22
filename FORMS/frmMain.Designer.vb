@@ -532,6 +532,7 @@ Partial Class frmMain
         Me.StatusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1, Me.LBL_STAT_1, Me.ToolStripStatusLabel2, Me.LBL_STAT_2, Me.LBL_STAT_3, Me.ToolStripStatusLabel3, Me.lblShed, Me.lblSplet, Me.lblRem, Me.lblMassLoadEverest, Me.ToolStripStatusLabel4, Me.LBL_SUBD, Me.DB_USE, Me.ToolStripStatusLabel5, Me.LBL_USER})
         Me.StatusStrip.Location = New System.Drawing.Point(0, 638)
         Me.StatusStrip.Name = "StatusStrip"
+        Me.StatusStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.ManagerRenderMode
         Me.StatusStrip.Size = New System.Drawing.Size(984, 24)
         Me.StatusStrip.TabIndex = 11
         Me.StatusStrip.Text = "StatusStrip"

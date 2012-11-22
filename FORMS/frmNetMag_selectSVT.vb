@@ -119,11 +119,11 @@
                         rs = Nothing
 
 
-                        sSQL = "SELECT * FROM kompy where tiptehn <> 'PC' AND PCL=0 AND filial='" & A1 & "' ORDER BY filial, mesto, kabn, net_name"
+                        sSQL = "SELECT * FROM kompy where tiptehn <> 'PC' AND filial='" & A1 & "' ORDER BY filial, mesto, kabn, net_name"
 
                     Case "O"
 
-                        sSQL = "SELECT count(*) as t_n FROM kompy where tiptehn <> 'PC' AND PCL=0 AND filial='" & A1 & "' AND mesto='" & A2 & "'"
+                        sSQL = "SELECT count(*) as t_n FROM kompy where tiptehn <> 'PC' AND filial='" & A1 & "' AND mesto='" & A2 & "'"
                         rs = New ADODB.Recordset
                         rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
@@ -133,10 +133,10 @@
                         rs.Close()
                         rs = Nothing
 
-                        sSQL = "SELECT * FROM kompy where tiptehn <> 'PC' AND PCL=0 AND filial='" & A1 & "' AND mesto='" & A2 & "' ORDER BY filial, mesto, kabn, net_name"
+                        sSQL = "SELECT * FROM kompy where tiptehn <> 'PC' AND filial='" & A1 & "' AND mesto='" & A2 & "' ORDER BY filial, mesto, kabn, net_name"
 
                     Case "K"
-                        sSQL = "SELECT count(*) as t_n FROM kompy where tiptehn <> 'PC' AND PCL=0 AND filial='" & A1 & "' AND mesto='" & A2 & "' AND kabn='" & A3 & "'"
+                        sSQL = "SELECT count(*) as t_n FROM kompy where tiptehn <> 'PC' AND filial='" & A1 & "' AND mesto='" & A2 & "' AND kabn='" & A3 & "'" 'AND PCL=0 
                         rs = New ADODB.Recordset
                         rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
@@ -146,7 +146,7 @@
                         rs.Close()
                         rs = Nothing
 
-                        sSQL = "SELECT * FROM kompy where tiptehn <> 'PC' AND PCL=0 AND filial='" & A1 & "' AND mesto='" & A2 & "' AND kabn='" & A3 & "' ORDER BY filial, mesto, kabn, net_name"
+                        sSQL = "SELECT * FROM kompy where tiptehn <> 'PC' AND filial='" & A1 & "' AND mesto='" & A2 & "' AND kabn='" & A3 & "' ORDER BY filial, mesto, kabn, net_name"
                         ' and tiptehn='PC' or tiptehn='Printer' or tiptehn='MFU' or tiptehn='FAX' or tiptehn='PHONE' or tiptehn='NET' or tiptehn='IBP'
 
                     Case "ROOT"
@@ -161,7 +161,7 @@
                         rs = Nothing
 
 
-                        sSQL = "SELECT * FROM kompy where tiptehn <> 'PC' AND PCL=0 ORDER BY filial, mesto, kabn, net_name"
+                        sSQL = "SELECT * FROM kompy where tiptehn <> 'PC' ORDER BY filial, mesto, kabn, net_name"
 
                 End Select
 
@@ -209,7 +209,7 @@
 
                         Case "PC"
 
-                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG11", ""))
+                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG11", "Компьютер"))
 
                             If Not IsDBNull(.Fields("INV_NO_SYSTEM").Value) Then
                                 lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("INV_NO_SYSTEM").Value)
@@ -220,7 +220,7 @@
 
                         Case "Printer"
 
-                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG6", ""))
+                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG6", "Принтер"))
 
                             If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
                                 lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("INV_NO_PRINTER").Value)
@@ -230,7 +230,7 @@
 
                         Case "KOpir"
 
-                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG13", ""))
+                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG13", "Копир"))
 
                             If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
                                 lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("INV_NO_PRINTER").Value)
@@ -239,7 +239,7 @@
                             End If
 
                         Case "MONITOR"
-                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG3", ""))
+                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG3", "Монитор"))
 
                             If Not IsDBNull(.Fields("INV_NO_MONITOR").Value) Then
                                 lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("INV_NO_MONITOR").Value)
@@ -250,7 +250,7 @@
 
                         Case "SCANER"
 
-                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG8", ""))
+                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG8", "Сканер"))
 
                             If Not IsDBNull(.Fields("INV_NO_SCANER").Value) Then
                                 lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("INV_NO_SCANER").Value)
@@ -260,7 +260,7 @@
 
                         Case "NET"
 
-                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG14", ""))
+                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG14", "Сетевое оборудование"))
 
                             If Not IsDBNull(.Fields("PRINTER_PROIZV_3").Value) Then
                                 lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("PRINTER_PROIZV_3").Value)
@@ -271,7 +271,7 @@
 
                         Case "PHOTO"
 
-                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG15", ""))
+                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG15", "Фотоаппарат"))
 
                             If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
                                 lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("INV_NO_PRINTER").Value)
@@ -301,7 +301,7 @@
 
                         Case "ZIP"
 
-                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG18", ""))
+                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG18", "Дисковод ZIP"))
 
                             If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
                                 lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("INV_NO_PRINTER").Value)
@@ -311,7 +311,7 @@
 
                         Case "PHONE"
 
-                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG16", ""))
+                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG16", "Телефон"))
 
                             If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
                                 lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("INV_NO_PRINTER").Value)
@@ -321,7 +321,7 @@
 
                         Case "MFU"
 
-                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG7", ""))
+                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG7", "МФУ"))
 
                             If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
                                 lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("INV_NO_PRINTER").Value)
@@ -332,7 +332,7 @@
 
                         Case "FAX"
 
-                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG17", ""))
+                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG17", "Факс"))
 
                             If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
                                 lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("INV_NO_PRINTER").Value)
@@ -342,11 +342,11 @@
 
                         Case "USB"
 
-                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG10", ""))
+                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG10", "USB Устройство"))
                         Case "IBP"
 
 
-                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG9", ""))
+                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG9", "Источник бесперебойного питания"))
 
                             If Not IsDBNull(.Fields("INV_NO_IBP").Value) Then
                                 lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("INV_NO_IBP").Value)
@@ -356,7 +356,7 @@
 
                         Case "FS"
 
-                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG5", ""))
+                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG5", "Сетевой фильтр"))
 
                             If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
                                 lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("INV_NO_PRINTER").Value)
@@ -366,7 +366,7 @@
 
                         Case "SOUND"
 
-                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG4", ""))
+                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG4", "Акустическая система"))
 
                             If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
                                 lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("INV_NO_PRINTER").Value)
@@ -375,7 +375,7 @@
                             End If
 
                         Case "KEYB"
-                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG1", ""))
+                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG1", "Клавиатура"))
 
                             If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
                                 lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("INV_NO_PRINTER").Value)
@@ -385,7 +385,7 @@
 
                         Case "MOUSE"
 
-                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG2", ""))
+                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG2", "Мышь"))
 
                             If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
                                 lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("INV_NO_PRINTER").Value)
@@ -523,7 +523,7 @@
                         lvNetMagazin.Items.Add(.Fields("id").Value) 'col no. 1
 
 
-                        lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG11", ""))
+                        lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG11", "Компьютер"))
 
                         If Not IsDBNull(.Fields("INV_NO_SYSTEM").Value) Then
                             lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("INV_NO_SYSTEM").Value)
@@ -617,56 +617,56 @@ err_:
 
                 Case "PC"
 
-                    sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG11", "")
+                    sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG11", "Компьютер")
                 Case "Printer"
 
-                    sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG6", "")
+                    sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG6", "Принтер")
                 Case "KOpir"
 
-                    sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG13", "")
+                    sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG13", "Копир")
                 Case "MONITOR"
-                    sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG3", "")
+                    sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG3", "Монитор")
                 Case "SCANER"
 
-                    sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG8", "")
+                    sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG8", "Сканер")
                 Case "NET"
 
-                    sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG14", "")
+                    sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG14", "Сетевое оборудование")
                 Case "PHOTO"
 
-                    sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG15", "")
+                    sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG15", "Фотоаппарат")
 
                 Case "OT"
 
                     sTXT = .Fields("NET_NAME").Value & " " & .Fields("TIP_COMPA").Value
                 Case "ZIP"
 
-                    sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG18", "")
+                    sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG18", "Дисковод ZIP")
                 Case "PHONE"
 
-                    sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG16", "")
+                    sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG16", "Телефон")
                 Case "MFU"
 
-                    sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG7", "")
+                    sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG7", "МФУ")
                 Case "FAX"
 
-                    sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG17", "")
+                    sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG17", "Факс")
 
                 Case "USB"
 
 
-                    sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG10", "")
+                    sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG10", "USB Устройство")
                 Case "IBP"
 
 
-                    sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG9", "")
+                    sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG9", "Источник бесперебойного питания")
                 Case "FS"
 
-                    sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG5", "")
+                    sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG5", "Сетевой фильтр")
 
                 Case "SOUND"
 
-                    sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG4", "")
+                    sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG4", "Акустическая система")
 
 
             End Select
@@ -678,13 +678,13 @@ err_:
 
                 Case "PC"
 
-                    frmNetMag_Add.txtSVT.Text = sTXT & ": " & .Fields("NET_NAME").Value & " , (" & LNGIniFile.GetString("frmNetMagazin", "MSG19", "") & " " & .Fields("OTvetstvennyj").Value & ")"
+                    frmNetMag_Add.txtSVT.Text = sTXT & ": " & .Fields("NET_NAME").Value & " , (" & LNGIniFile.GetString("frmNetMagazin", "MSG19", "Отв.:") & " " & .Fields("OTvetstvennyj").Value & ")"
                     frmNetMagazin.sBDO_SVT_count = sCNT
 
                 Case Else
 
-                    frmNetMag_Add.txtKom.Text = sTXT & ": " & .Fields("NET_NAME").Value & " , (" & LNGIniFile.GetString("frmNetMagazin", "MSG19", "") & " " & .Fields("OTvetstvennyj").Value & ")"
-                    'frmNetMag_Add.txtKom.Text = LNGIniFile.GetString("frmNetMagazin", "MSG14", "") & ": " & .Fields("NET_NAME").Value & " , (" & LNGIniFile.GetString("frmNetMagazin", "MSG19", "") & " " & .Fields("OTvetstvennyj").Value & ")"
+                    frmNetMag_Add.txtKom.Text = sTXT & ": " & .Fields("NET_NAME").Value & " , (" & LNGIniFile.GetString("frmNetMagazin", "MSG19", "Отв.:") & " " & .Fields("OTvetstvennyj").Value & ")"
+                    'frmNetMag_Add.txtKom.Text = LNGIniFile.GetString("frmNetMagazin", "MSG14", "Сетевое оборудование") & ": " & .Fields("NET_NAME").Value & " , (" & LNGIniFile.GetString("frmNetMagazin", "MSG19", "") & " " & .Fields("OTvetstvennyj").Value & ")"
                     frmNetMagazin.sBDO_NET_count = sCNT
 
             End Select

@@ -239,15 +239,15 @@
                 objCursor.setPropertyValue("CharColor", 255)
                 objCursor.setPropertyValue("CharShadowed", True)
 
-                'LNGIniFile.GetString("MOD_INVENT", "MSG1", "")
+                'LNGIniFile.GetString("MOD_INVENT", "MSG1", "Количество единиц техники по типам:")
 
 
-                objText.insertString(objCursor, LNGIniFile.GetString("MOD_INVENT", "MSG1", "") & " " & vbLf, False)
+                objText.insertString(objCursor, LNGIniFile.GetString("MOD_INVENT", "MSG1", "Количество единиц техники по типам:") & " " & vbLf, False)
 
                 objText.insertString(objCursor, " " & vbLf, False)
                 objCursor.setPropertyValue("CharColor", 255)
                 objCursor.setPropertyValue("CharShadowed", True)
-                objText.insertString(objCursor, LNGIniFile.GetString("MOD_INVENT", "MSG2", "") & " " & uname & vbLf, False)
+                objText.insertString(objCursor, LNGIniFile.GetString("MOD_INVENT", "MSG2", "Организация:") & " " & uname & vbLf, False)
                 objText.insertString(objCursor, " " & vbLf, False)
                 'objText.insertString objCursor, " " & vbLf, False
 
@@ -269,67 +269,67 @@
                 objCursor.setPropertyValue("CharColor", 255)
                 objCursor.setPropertyValue("CharShadowed", True)
 
-                insertIntoCell("A1", LNGIniFile.GetString("MOD_INVENT", "MSG3", ""), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
-                insertIntoCell("B1", LNGIniFile.GetString("MOD_INVENT", "MSG4", ""), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                insertIntoCell("A1", LNGIniFile.GetString("MOD_INVENT", "MSG3", "Тип техники"), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                insertIntoCell("B1", LNGIniFile.GetString("MOD_INVENT", "MSG4", "Кол-во"), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
 
-                insertIntoCell("A2", LNGIniFile.GetString("MOD_INVENT", "MSG5", ""), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                insertIntoCell("A2", LNGIniFile.GetString("MOD_INVENT", "MSG5", "Компьютеров"), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                 insertIntoCell("B2", TEH1, objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
 
-                insertIntoCell("A3", LNGIniFile.GetString("MOD_INVENT", "MSG6", ""), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                insertIntoCell("A3", LNGIniFile.GetString("MOD_INVENT", "MSG6", "Принтеров"), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                 insertIntoCell("B3", TEH2, objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
 
-                insertIntoCell("A4", LNGIniFile.GetString("MOD_INVENT", "MSG7", ""), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                insertIntoCell("A4", LNGIniFile.GetString("MOD_INVENT", "MSG7", "МФУ"), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                 insertIntoCell("B4", TEH3, objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
 
-                insertIntoCell("A5", LNGIniFile.GetString("MOD_INVENT", "MSG8", ""), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                insertIntoCell("A5", LNGIniFile.GetString("MOD_INVENT", "MSG8", "Копиров"), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                 insertIntoCell("B5", TEH4, objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
 
-                insertIntoCell("A6", LNGIniFile.GetString("MOD_INVENT", "MSG9", ""), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                insertIntoCell("A6", LNGIniFile.GetString("MOD_INVENT", "MSG9", "Другое"), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                 insertIntoCell("B6", TEH5, objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
 
-                insertIntoCell("A7", LNGIniFile.GetString("MOD_INVENT", "MSG10", ""), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                insertIntoCell("A7", LNGIniFile.GetString("MOD_INVENT", "MSG10", "Фотоаппаратов"), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                 insertIntoCell("B7", TEH6, objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
 
-                insertIntoCell("A8", LNGIniFile.GetString("MOD_INVENT", "MSG11", ""), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                insertIntoCell("A8", LNGIniFile.GetString("MOD_INVENT", "MSG11", "Факсов"), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                 insertIntoCell("B8", TEH7, objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
 
-                insertIntoCell("A9", LNGIniFile.GetString("MOD_INVENT", "MSG12", ""), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                insertIntoCell("A9", LNGIniFile.GetString("MOD_INVENT", "MSG12", "Телефонов"), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                 insertIntoCell("B9", TEH8, objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
 
-                insertIntoCell("A10", LNGIniFile.GetString("MOD_INVENT", "MSG13", ""), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                insertIntoCell("A10", LNGIniFile.GetString("MOD_INVENT", "MSG13", "ZIP"), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                 insertIntoCell("B10", TEH9, objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
 
-                insertIntoCell("A11", LNGIniFile.GetString("MOD_INVENT", "MSG14", ""), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                insertIntoCell("A11", LNGIniFile.GetString("MOD_INVENT", "MSG14", "Сканеров"), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                 insertIntoCell("B11", TEH10, objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
 
-                insertIntoCell("A12", LNGIniFile.GetString("MOD_INVENT", "MSG15", ""), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                insertIntoCell("A12", LNGIniFile.GetString("MOD_INVENT", "MSG15", "Сетевого оборудования"), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                 insertIntoCell("B12", TEH11, objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
 
-                insertIntoCell("A13", LNGIniFile.GetString("MOD_INVENT", "MSG16", ""), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                insertIntoCell("A13", LNGIniFile.GetString("MOD_INVENT", "MSG16", "Мониторов"), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                 insertIntoCell("B13", TEH12, objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
 
-                insertIntoCell("A14", LNGIniFile.GetString("MOD_INVENT", "MSG17", ""), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                insertIntoCell("A14", LNGIniFile.GetString("MOD_INVENT", "MSG17", "USB устройств"), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                 insertIntoCell("B14", TEH13, objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
 
-                insertIntoCell("A15", LNGIniFile.GetString("MOD_INVENT", "MSG18", ""), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                insertIntoCell("A15", LNGIniFile.GetString("MOD_INVENT", "MSG18", "Акустики"), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                 insertIntoCell("B15", TEH14, objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
 
-                insertIntoCell("A16", LNGIniFile.GetString("MOD_INVENT", "MSG19", ""), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                insertIntoCell("A16", LNGIniFile.GetString("MOD_INVENT", "MSG19", "Источников бесперебойного питания"), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                 insertIntoCell("B16", TEH15, objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
 
-                insertIntoCell("A17", LNGIniFile.GetString("MOD_INVENT", "MSG20", ""), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                insertIntoCell("A17", LNGIniFile.GetString("MOD_INVENT", "MSG20", "Сетевых фильтров"), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                 insertIntoCell("B17", TEH16, objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
 
-                insertIntoCell("A18", LNGIniFile.GetString("MOD_INVENT", "MSG21", ""), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                insertIntoCell("A18", LNGIniFile.GetString("MOD_INVENT", "MSG21", "Клавиатур"), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                 insertIntoCell("B18", TEH17, objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
 
-                insertIntoCell("A19", LNGIniFile.GetString("MOD_INVENT", "MSG22", ""), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                insertIntoCell("A19", LNGIniFile.GetString("MOD_INVENT", "MSG22", "Мышей"), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                 insertIntoCell("B19", TEH18, objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
 
 
                 'objText.insertString objCursor, " " & vbLf, False
                 objText.insertString(objCursor, " " & vbLf, False)
-                objText.insertString(objCursor, LNGIniFile.GetString("MOD_INVENT", "MSG23", "") & vbLf, False)
+                objText.insertString(objCursor, LNGIniFile.GetString("MOD_INVENT", "MSG23", "Из них по филиалам (отделам)") & vbLf, False)
                 objText.insertString(objCursor, " " & vbLf, False)
                 'objText.insertString objCursor, " " & vbLf, False
 
@@ -565,7 +565,7 @@
                         rs1 = Nothing
 
 
-                        objText.insertString(objCursor, LNGIniFile.GetString("MOD_INVENT", "MSG24", "") & " " & .Fields("filial").Value & vbLf, False)
+                        objText.insertString(objCursor, LNGIniFile.GetString("MOD_INVENT", "MSG24", "Филиал (отдел):") & " " & .Fields("filial").Value & vbLf, False)
 
 
                         'objText.insertString objCursor, " " & vbLf, False
@@ -588,116 +588,116 @@
                         objCursor.setPropertyValue("CharColor", 255)
                         objCursor.setPropertyValue("CharShadowed", True)
 
-                        insertIntoCell("A1", LNGIniFile.GetString("MOD_INVENT", "MSG3", ""), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
-                        insertIntoCell("B1", LNGIniFile.GetString("MOD_INVENT", "MSG4", ""), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                        insertIntoCell("A1", LNGIniFile.GetString("MOD_INVENT", "MSG3", "Тип техники"), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                        insertIntoCell("B1", LNGIniFile.GetString("MOD_INVENT", "MSG4", "Кол-во"), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
 
 
                         intj = 2
 
                         If TEH1 <> 0 Then
-                            insertIntoCell("A" & intj, LNGIniFile.GetString("MOD_INVENT", "MSG5", ""), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                            insertIntoCell("A" & intj, LNGIniFile.GetString("MOD_INVENT", "MSG5", "Компьютеров"), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             insertIntoCell("B" & intj, TEH1, objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             intj = intj + 1
                         End If
 
                         If TEH2 <> 0 Then
-                            insertIntoCell("A" & intj, LNGIniFile.GetString("MOD_INVENT", "MSG6", ""), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                            insertIntoCell("A" & intj, LNGIniFile.GetString("MOD_INVENT", "MSG6", "Принтеров"), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             insertIntoCell("B" & intj, TEH2, objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             intj = intj + 1
                         End If
 
                         If TEH3 <> 0 Then
-                            insertIntoCell("A" & intj, LNGIniFile.GetString("MOD_INVENT", "MSG7", ""), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                            insertIntoCell("A" & intj, LNGIniFile.GetString("MOD_INVENT", "MSG7", "МФУ"), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             insertIntoCell("B" & intj, TEH3, objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             intj = intj + 1
                         End If
 
                         If TEH4 <> 0 Then
-                            insertIntoCell("A" & intj, LNGIniFile.GetString("MOD_INVENT", "MSG8", ""), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                            insertIntoCell("A" & intj, LNGIniFile.GetString("MOD_INVENT", "MSG8", "Копиров"), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             insertIntoCell("B" & intj, TEH4, objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             intj = intj + 1
                         End If
 
                         If TEH5 <> 0 Then
-                            insertIntoCell("A" & intj, LNGIniFile.GetString("MOD_INVENT", "MSG9", ""), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                            insertIntoCell("A" & intj, LNGIniFile.GetString("MOD_INVENT", "MSG9", "Другое"), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             insertIntoCell("B" & intj, TEH5, objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             intj = intj + 1
                         End If
 
                         If TEH6 <> 0 Then
-                            insertIntoCell("A" & intj, LNGIniFile.GetString("MOD_INVENT", "MSG10", ""), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                            insertIntoCell("A" & intj, LNGIniFile.GetString("MOD_INVENT", "MSG10", "Фотоаппаратов"), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             insertIntoCell("B" & intj, TEH6, objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             intj = intj + 1
                         End If
 
                         If TEH7 <> 0 Then
-                            insertIntoCell("A" & intj, LNGIniFile.GetString("MOD_INVENT", "MSG11", ""), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                            insertIntoCell("A" & intj, LNGIniFile.GetString("MOD_INVENT", "MSG11", "Факсов"), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             insertIntoCell("B" & intj, TEH7, objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             intj = intj + 1
                         End If
 
                         If TEH8 <> 0 Then
-                            insertIntoCell("A" & intj, LNGIniFile.GetString("MOD_INVENT", "MSG12", ""), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                            insertIntoCell("A" & intj, LNGIniFile.GetString("MOD_INVENT", "MSG12", "Телефонов"), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             insertIntoCell("B" & intj, TEH8, objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             intj = intj + 1
                         End If
 
                         If TEH9 <> 0 Then
-                            insertIntoCell("A" & intj, LNGIniFile.GetString("MOD_INVENT", "MSG13", ""), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                            insertIntoCell("A" & intj, LNGIniFile.GetString("MOD_INVENT", "MSG13", "ZIP"), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             insertIntoCell("B" & intj, TEH9, objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             intj = intj + 1
                         End If
 
                         If TEH10 <> 0 Then
-                            insertIntoCell("A" & intj, LNGIniFile.GetString("MOD_INVENT", "MSG14", ""), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                            insertIntoCell("A" & intj, LNGIniFile.GetString("MOD_INVENT", "MSG14", "Сканеров"), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             insertIntoCell("B" & intj, TEH10, objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             intj = intj + 1
                         End If
 
                         If TEH11 <> 0 Then
-                            insertIntoCell("A" & intj, LNGIniFile.GetString("MOD_INVENT", "MSG15", ""), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                            insertIntoCell("A" & intj, LNGIniFile.GetString("MOD_INVENT", "MSG15", "Сетевого оборудования"), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             insertIntoCell("B" & intj, TEH11, objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             intj = intj + 1
                         End If
 
                         If TEH12 <> 0 Then
-                            insertIntoCell("A" & intj, LNGIniFile.GetString("MOD_INVENT", "MSG16", ""), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                            insertIntoCell("A" & intj, LNGIniFile.GetString("MOD_INVENT", "MSG16", "Мониторов"), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             insertIntoCell("B" & intj, TEH12, objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             intj = intj + 1
                         End If
 
                         If TEH13 <> 0 Then
-                            insertIntoCell("A" & intj, LNGIniFile.GetString("MOD_INVENT", "MSG17", ""), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                            insertIntoCell("A" & intj, LNGIniFile.GetString("MOD_INVENT", "MSG17", "USB устройств"), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             insertIntoCell("B" & intj, TEH13, objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             intj = intj + 1
                         End If
 
                         If TEH14 <> 0 Then
-                            insertIntoCell("A" & intj, LNGIniFile.GetString("MOD_INVENT", "MSG18", ""), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                            insertIntoCell("A" & intj, LNGIniFile.GetString("MOD_INVENT", "MSG18", "Акустики"), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             insertIntoCell("B" & intj, TEH14, objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             intj = intj + 1
                         End If
 
                         If TEH15 <> 0 Then
-                            insertIntoCell("A" & intj, LNGIniFile.GetString("MOD_INVENT", "MSG19", ""), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                            insertIntoCell("A" & intj, LNGIniFile.GetString("MOD_INVENT", "MSG19", "Источников бесперебойного питания"), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             insertIntoCell("B" & intj, TEH15, objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             intj = intj + 1
                         End If
 
                         If TEH16 <> 0 Then
-                            insertIntoCell("A" & intj, LNGIniFile.GetString("MOD_INVENT", "MSG20", ""), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                            insertIntoCell("A" & intj, LNGIniFile.GetString("MOD_INVENT", "MSG20", "Сетевых фильтров"), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             insertIntoCell("B" & intj, TEH16, objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             intj = intj + 1
                         End If
 
                         If TEH17 <> 0 Then
-                            insertIntoCell("A" & intj, LNGIniFile.GetString("MOD_INVENT", "MSG21", ""), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                            insertIntoCell("A" & intj, LNGIniFile.GetString("MOD_INVENT", "MSG21", "Клавиатур"), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             insertIntoCell("B" & intj, TEH17, objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             intj = intj + 1
                         End If
 
                         If TEH18 <> 0 Then
-                            insertIntoCell("A" & intj, LNGIniFile.GetString("MOD_INVENT", "MSG22", ""), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                            insertIntoCell("A" & intj, LNGIniFile.GetString("MOD_INVENT", "MSG22", "Мышей"), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             insertIntoCell("B" & intj, TEH18, objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             intj = intj + 1
                         End If
@@ -745,13 +745,13 @@
                 'Insert a paragraph at the beginning of the document.
                 oPara1 = oDoc.Content.Paragraphs.Add
 
-                oPara1.Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG1", "") & " "
+                oPara1.Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG1", "Количество единиц техники по типам:") & " "
                 oPara1.Range.Font.Bold = True
                 oPara1.Format.SpaceAfter = 24    '24 pt spacing after paragraph.
                 oPara1.Range.InsertParagraphAfter()
 
 
-                oPara1.Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG2", "") & " " & uname
+                oPara1.Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG2", "Организация:") & " " & uname
                 oPara1.Range.Font.Bold = True
                 oPara1.Format.SpaceAfter = 24    '24 pt spacing after paragraph.
                 oPara1.Range.InsertParagraphAfter()
@@ -759,59 +759,59 @@
                 oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 19, 2)
                 oTable.Range.ParagraphFormat.SpaceAfter = 6
 
-                oTable.Cell(1, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG3", "")
-                oTable.Cell(1, 2).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG4", "")
+                oTable.Cell(1, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG3", "Тип техники")
+                oTable.Cell(1, 2).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG4", "Кол-во")
 
-                oTable.Cell(2, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG5", "")
+                oTable.Cell(2, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG5", "Компьютеров")
                 oTable.Cell(2, 2).Range.Text = TEH1
-                oTable.Cell(3, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG6", "")
+                oTable.Cell(3, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG6", "Принтеров")
                 oTable.Cell(3, 2).Range.Text = TEH2
-                oTable.Cell(4, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG7", "")
+                oTable.Cell(4, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG7", "МФУ")
                 oTable.Cell(4, 2).Range.Text = TEH3
 
-                oTable.Cell(5, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG8", "")
+                oTable.Cell(5, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG8", "Копиров")
                 oTable.Cell(5, 2).Range.Text = TEH4
 
-                oTable.Cell(6, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG9", "")
+                oTable.Cell(6, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG9", "Другое")
                 oTable.Cell(6, 2).Range.Text = TEH5
 
-                oTable.Cell(7, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG10", "")
+                oTable.Cell(7, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG10", "Фотоаппаратов")
                 oTable.Cell(7, 2).Range.Text = TEH6
 
-                oTable.Cell(8, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG11", "")
+                oTable.Cell(8, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG11", "Факсов")
                 oTable.Cell(8, 2).Range.Text = TEH7
 
-                oTable.Cell(9, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG12", "")
+                oTable.Cell(9, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG12", "Телефонов")
                 oTable.Cell(9, 2).Range.Text = TEH8
 
-                oTable.Cell(10, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG13", "")
+                oTable.Cell(10, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG13", "ZIP")
                 oTable.Cell(10, 2).Range.Text = TEH9
 
-                oTable.Cell(11, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG14", "")
+                oTable.Cell(11, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG14", "Сканеров")
                 oTable.Cell(11, 2).Range.Text = TEH10
 
-                oTable.Cell(12, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG15", "")
+                oTable.Cell(12, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG15", "Сетевого оборудования")
                 oTable.Cell(12, 2).Range.Text = TEH11
 
-                oTable.Cell(13, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG16", "")
+                oTable.Cell(13, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG16", "Мониторов")
                 oTable.Cell(13, 2).Range.Text = TEH12
 
-                oTable.Cell(14, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG17", "")
+                oTable.Cell(14, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG17", "USB устройств")
                 oTable.Cell(14, 2).Range.Text = TEH13
 
-                oTable.Cell(15, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG18", "")
+                oTable.Cell(15, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG18", "Акустики")
                 oTable.Cell(15, 2).Range.Text = TEH14
 
-                oTable.Cell(16, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG19", "")
+                oTable.Cell(16, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG19", "Источников бесперебойного питания")
                 oTable.Cell(16, 2).Range.Text = TEH15
 
-                oTable.Cell(17, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG20", "")
+                oTable.Cell(17, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG20", "Сетевых фильтров")
                 oTable.Cell(17, 2).Range.Text = TEH16
 
-                oTable.Cell(18, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG21", "")
+                oTable.Cell(18, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG21", "Клавиатур")
                 oTable.Cell(18, 2).Range.Text = TEH17
 
-                oTable.Cell(19, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG22", "")
+                oTable.Cell(19, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG22", "Мышей")
                 oTable.Cell(19, 2).Range.Text = TEH18
 
                 oTable.Rows.Item(1).Range.Font.Bold = True
@@ -827,7 +827,7 @@
 
 
                 oPara1 = oDoc.Content.Paragraphs.Add
-                oPara1.Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG23", "")
+                oPara1.Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG23", "Из них по филиалам (отделам)")
                 oPara1.Range.Font.Bold = True
                 oPara1.Format.SpaceAfter = 12    '24 pt spacing after paragraph.
                 oPara1.Range.InsertParagraphAfter()
@@ -1075,7 +1075,7 @@
                         oPara1.Format.SpaceAfter = 12    '24 pt spacing after paragraph.
                         oPara1.Range.InsertParagraphAfter()
 
-                        oPara1.Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG24", "") & " " & .Fields("filial").Value
+                        oPara1.Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG24", "Филиал (отдел):") & " " & .Fields("filial").Value
                         oPara1.Range.Font.Bold = True
                         oPara1.Format.SpaceAfter = 24    '24 pt spacing after paragraph.
                         oPara1.Range.InsertParagraphAfter()
@@ -1083,116 +1083,116 @@
                         oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, zint, 2)
                         oTable.Range.ParagraphFormat.SpaceAfter = 6
 
-                        oTable.Cell(1, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG3", "")
-                        oTable.Cell(1, 2).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG4", "")
+                        oTable.Cell(1, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG3", "Тип техники")
+                        oTable.Cell(1, 2).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG4", "Кол-во")
 
 
                         intj = 2
 
                         If TEH1 <> 0 Then
-                            oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG5", "")  'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                            oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG5", "Компьютеров")  'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             oTable.Cell(intj, 2).Range.Text = TEH1 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             intj = intj + 1
                         End If
 
                         If TEH2 <> 0 Then
-                            oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG6", "")  'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                            oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG6", "Принтеров")  'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             oTable.Cell(intj, 2).Range.Text = TEH2 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             intj = intj + 1
                         End If
 
                         If TEH3 <> 0 Then
-                            oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG7", "")  'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                            oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG7", "МФУ")  'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             oTable.Cell(intj, 2).Range.Text = TEH3 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             intj = intj + 1
                         End If
 
                         If TEH4 <> 0 Then
-                            oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG8", "")  'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                            oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG8", "Копиров")  'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             oTable.Cell(intj, 2).Range.Text = TEH4 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             intj = intj + 1
                         End If
 
                         If TEH5 <> 0 Then
-                            oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG9", "")  'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                            oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG9", "Другое")  'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             oTable.Cell(intj, 2).Range.Text = TEH5 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             intj = intj + 1
                         End If
 
                         If TEH6 <> 0 Then
-                            oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG10", "")  'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                            oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG10", "Фотоаппаратов")  'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             oTable.Cell(intj, 2).Range.Text = TEH6 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             intj = intj + 1
                         End If
 
                         If TEH7 <> 0 Then
-                            oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG11", "")  'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                            oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG11", "Факсов")  'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             oTable.Cell(intj, 2).Range.Text = TEH7 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             intj = intj + 1
                         End If
 
                         If TEH8 <> 0 Then
-                            oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG12", "")  'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                            oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG12", "Телефонов")  'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             oTable.Cell(intj, 2).Range.Text = TEH8 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             intj = intj + 1
                         End If
 
                         If TEH9 <> 0 Then
-                            oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG13", "")  'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                            oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG13", "ZIP")  'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             oTable.Cell(intj, 2).Range.Text = TEH9 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             intj = intj + 1
                         End If
 
                         If TEH10 <> 0 Then
-                            oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG14", "")  'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                            oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG14", "Сканеров")  'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             oTable.Cell(intj, 2).Range.Text = TEH10 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             intj = intj + 1
                         End If
 
                         If TEH11 <> 0 Then
-                            oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG15", "")  'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                            oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG15", "Сетевого оборудования")  'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             oTable.Cell(intj, 2).Range.Text = TEH11 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             intj = intj + 1
                         End If
 
                         If TEH12 <> 0 Then
-                            oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG16", "")  'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                            oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG16", "Мониторов")  'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             oTable.Cell(intj, 2).Range.Text = TEH12 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             intj = intj + 1
                         End If
 
                         If TEH13 <> 0 Then
-                            oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG17", "")  'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                            oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG17", "USB устройств")  'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             oTable.Cell(intj, 2).Range.Text = TEH13 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             intj = intj + 1
                         End If
 
                         If TEH14 <> 0 Then
-                            oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG18", "")  'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                            oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG18", "Акустики")  'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             oTable.Cell(intj, 2).Range.Text = TEH14 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             intj = intj + 1
                         End If
 
                         If TEH15 <> 0 Then
-                            oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG19", "")  'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                            oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG19", "Источников бесперебойного питания")  'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             oTable.Cell(intj, 2).Range.Text = TEH15 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             intj = intj + 1
                         End If
 
                         If TEH16 <> 0 Then
-                            oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG20", "")  'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                            oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG20", "Сетевых фильтров")  'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             oTable.Cell(intj, 2).Range.Text = TEH16 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             intj = intj + 1
                         End If
 
                         If TEH17 <> 0 Then
-                            oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG21", "")  'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                            oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG21", "Клавиатур")  'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             oTable.Cell(intj, 2).Range.Text = TEH17 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             intj = intj + 1
                         End If
 
                         If TEH18 <> 0 Then
-                            oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG22", "")  'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                            oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG22", "Мышей")  'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             oTable.Cell(intj, 2).Range.Text = TEH18 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             intj = intj + 1
                         End If

@@ -56,7 +56,7 @@
         Select Case sTEXT
 
             Case "CPU"
-                gbcpu.Text = objIniFile.GetString("frmGarCPL", "MSG1", "")
+                gbcpu.Text = objIniFile.GetString("frmGarCPL", "MSG1", "Процессор")
 
                 FillComboNET(Me.cmbCPU1, "Name", "SPR_CPU", "", False, True)
                 FillComboNET(Me.cmbCPU2, "Name", "SPR_CPU", "", False, True)
@@ -64,21 +64,21 @@
                 FillComboNET(Me.cmbCPU4, "Name", "SPR_CPU", "", False, True)
 
             Case "RAM"
-                gbcpu.Text = objIniFile.GetString("frmGarCPL", "MSG2", "")
+                gbcpu.Text = objIniFile.GetString("frmGarCPL", "MSG2", "Память")
                 FillComboNET(Me.cmbCPU1, "Name", "SPR_RAM", "", False, True)
                 FillComboNET(Me.cmbCPU2, "Name", "SPR_RAM", "", False, True)
                 FillComboNET(Me.cmbCPU3, "Name", "SPR_RAM", "", False, True)
                 FillComboNET(Me.cmbCPU4, "Name", "SPR_RAM", "", False, True)
 
             Case "HDD"
-                gbcpu.Text = objIniFile.GetString("frmGarCPL", "MSG3", "")
+                gbcpu.Text = objIniFile.GetString("frmGarCPL", "MSG3", "Жесткий диск")
                 FillComboNET(Me.cmbCPU1, "Name", "SPR_HDD", "", False, True)
                 FillComboNET(Me.cmbCPU2, "Name", "SPR_HDD", "", False, True)
                 FillComboNET(Me.cmbCPU3, "Name", "SPR_HDD", "", False, True)
                 FillComboNET(Me.cmbCPU4, "Name", "SPR_HDD", "", False, True)
 
             Case "SVGA"
-                gbcpu.Text = objIniFile.GetString("frmGarCPL", "MSG4", "")
+                gbcpu.Text = objIniFile.GetString("frmGarCPL", "MSG4", "Видео карта")
                 cmbCPU2.Visible = False
                 cmbCPU3.Visible = False
                 cmbCPU4.Visible = False
@@ -106,7 +106,7 @@
                 FillComboNET(Me.cmbCPU2, "Name", "SPR_SVGA", "", False, True)
 
             Case "SOUND"
-                gbcpu.Text = objIniFile.GetString("frmGarCPL", "MSG5", "")
+                gbcpu.Text = objIniFile.GetString("frmGarCPL", "MSG5", "Звуковая карта")
 
                 gbcpu.Height = 44
                 gbPost.Top = 52
@@ -130,7 +130,7 @@
                 FillComboNET(Me.cmbCPU1, "Name", "SPR_SOUND", "", False, True)
 
             Case "MB"
-                gbcpu.Text = objIniFile.GetString("frmGarCPL", "MSG6", "")
+                gbcpu.Text = objIniFile.GetString("frmGarCPL", "MSG6", "Материнская плата")
                 txtMHZ1.Width = 205
                 txtSoc1.Visible = False
                 cmbCPU2.Visible = False
@@ -175,13 +175,13 @@
                 txtSoc4.Visible = False
                 PROizV4.Visible = False
 
-                gbcpu.Text = objIniFile.GetString("frmGarCPL", "MSG7", "")
+                gbcpu.Text = objIniFile.GetString("frmGarCPL", "MSG7", "Оптические накопители")
                 FillComboNET(Me.cmbCPU1, "Name", "SPR_OPTICAL", "", False, True)
                 FillComboNET(Me.cmbCPU2, "Name", "SPR_OPTICAL", "", False, True)
                 FillComboNET(Me.cmbCPU3, "Name", "SPR_OPTICAL", "", False, True)
 
             Case "NET"
-                gbcpu.Text = objIniFile.GetString("frmGarCPL", "MSG8", "")
+                gbcpu.Text = objIniFile.GetString("frmGarCPL", "MSG8", "Сетевая карта")
 
                 cmbCPU3.Visible = False
                 cmbCPU4.Visible = False
@@ -205,7 +205,7 @@
                 FillComboNET(Me.cmbCPU2, "Name", "SPR_NET", "", False, True)
 
             Case "FDD"
-                gbcpu.Text = objIniFile.GetString("frmGarCPL", "MSG9", "")
+                gbcpu.Text = objIniFile.GetString("frmGarCPL", "MSG9", "Дисковод")
 
                 gbcpu.Height = 44
                 gbPost.Top = 52
@@ -229,7 +229,7 @@
                 FillComboNET(Me.cmbCPU1, "Name", "SPR_FDD", "", False, True)
 
             Case "MODEM"
-                gbcpu.Text = objIniFile.GetString("frmGarCPL", "MSG10", "")
+                gbcpu.Text = objIniFile.GetString("frmGarCPL", "MSG10", "Модем")
 
                 gbcpu.Height = 44
                 gbPost.Top = 52
@@ -253,7 +253,7 @@
                 FillComboNET(Me.cmbCPU1, "Name", "SPR_MODEM", "", False, True)
 
             Case "MONITOR"
-                gbcpu.Text = objIniFile.GetString("frmGarCPL", "MSG11", "")
+                gbcpu.Text = objIniFile.GetString("frmGarCPL", "MSG11", "Монитор")
 
                 cmbCPU3.Visible = False
                 cmbCPU4.Visible = False
@@ -278,7 +278,7 @@
 
 
             Case "KEYBOARD"
-                gbcpu.Text = objIniFile.GetString("frmGarCPL", "MSG12", "")
+                gbcpu.Text = objIniFile.GetString("frmGarCPL", "MSG12", "Клавиатура")
 
                 gbcpu.Height = 44
                 gbPost.Top = 52
@@ -302,7 +302,7 @@
                 FillComboNET(Me.cmbCPU1, "Name", "SPR_KEYBOARD", "", False, True)
 
             Case "MOUSE"
-                gbcpu.Text = objIniFile.GetString("frmGarCPL", "MSG13", "")
+                gbcpu.Text = objIniFile.GetString("frmGarCPL", "MSG13", "Мышь")
 
                 gbcpu.Height = 44
                 gbPost.Top = 52
@@ -326,7 +326,7 @@
                 FillComboNET(Me.cmbCPU1, "Name", "SPR_MOUSE", "", False, True)
 
             Case "FS"
-                gbcpu.Text = objIniFile.GetString("frmGarCPL", "MSG14", "")
+                gbcpu.Text = objIniFile.GetString("frmGarCPL", "MSG14", "Фильтр сетевой")
 
                 gbcpu.Height = 44
                 gbPost.Top = 52
@@ -351,7 +351,7 @@
 
 
             Case "USB"
-                gbcpu.Text = objIniFile.GetString("frmGarCPL", "MSG15", "")
+                gbcpu.Text = objIniFile.GetString("frmGarCPL", "MSG15", "USB устройства")
 
                 gbcpu.Height = 44
                 gbPost.Top = 52

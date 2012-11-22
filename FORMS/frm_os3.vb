@@ -122,59 +122,59 @@
 
         Select Case cmbCPL.Text
 
-            Case objIniFile.GetString("frm_os3", "cmbCPL1", "")
+            Case objIniFile.GetString("frm_os3", "cmbCPL1", "Оптический привод")
 
                 sSQL = "SELECT CD_NAME, CDRW_NAME, DVD_NAME from kompy where id=" & frmComputers.sCOUNT
 
-            Case objIniFile.GetString("frm_os3", "cmbCPL2", "")
+            Case objIniFile.GetString("frm_os3", "cmbCPL2", "Блок питания")
 
                 sSQL = "SELECT BLOCK from kompy where id=" & frmComputers.sCOUNT
 
-            Case objIniFile.GetString("frm_os3", "cmbCPL3", "")
+            Case objIniFile.GetString("frm_os3", "cmbCPL3", "Видео карта")
 
                 sSQL = "SELECT SVGA_NAME from kompy where id=" & frmComputers.sCOUNT
 
-            Case objIniFile.GetString("frm_os3", "cmbCPL4", "")
+            Case objIniFile.GetString("frm_os3", "cmbCPL4", "Жесткий диск")
 
                 sSQL = "SELECT HDD_Name_1, HDD_Name_2, HDD_Name_3, HDD_Name_4 from kompy where id=" & frmComputers.sCOUNT
 
-            Case objIniFile.GetString("frm_os3", "cmbCPL5", "")
+            Case objIniFile.GetString("frm_os3", "cmbCPL5", "Звуковая карта")
 
                 sSQL = "SELECT SOUND_NAME from kompy where id=" & frmComputers.sCOUNT
 
-            Case objIniFile.GetString("frm_os3", "cmbCPL6", "")
+            Case objIniFile.GetString("frm_os3", "cmbCPL6", "ИБП")
 
                 sSQL = "SELECT IBP_NAME from kompy where id=" & frmComputers.sCOUNT
 
-            Case objIniFile.GetString("frm_os3", "cmbCPL7", "")
+            Case objIniFile.GetString("frm_os3", "cmbCPL7", "Корпус")
 
                 sSQL = "SELECT CASE_NAME from kompy where id=" & frmComputers.sCOUNT
 
-            Case objIniFile.GetString("frm_os3", "cmbCPL8", "")
+            Case objIniFile.GetString("frm_os3", "cmbCPL8", "Материнская плата")
 
                 sSQL = "SELECT Mb from kompy where id=" & frmComputers.sCOUNT
 
-            Case objIniFile.GetString("frm_os3", "cmbCPL9", "")
+            Case objIniFile.GetString("frm_os3", "cmbCPL9", "Модем")
 
                 sSQL = "SELECT MODEM_NAME from kompy where id=" & frmComputers.sCOUNT
 
-            Case objIniFile.GetString("frm_os3", "cmbCPL10", "")
+            Case objIniFile.GetString("frm_os3", "cmbCPL10", "Модуль памяти")
 
                 sSQL = "SELECT RAM_1, RAM_2, RAM_3, RAM_4 from kompy where id=" & frmComputers.sCOUNT
 
-            Case objIniFile.GetString("frm_os3", "cmbCPL11", "")
+            Case objIniFile.GetString("frm_os3", "cmbCPL11", "Монитор")
 
                 sSQL = "SELECT MONITOR_NAME, MONITOR_NAME2 from kompy where id=" & frmComputers.sCOUNT
 
-            Case objIniFile.GetString("frm_os3", "cmbCPL12", "")
+            Case objIniFile.GetString("frm_os3", "cmbCPL12", "Принтер")
 
                 sSQL = "SELECT PRINTER_NAME_1, PRINTER_NAME_2, PRINTER_NAME_3 from kompy where id=" & frmComputers.sCOUNT
 
-            Case objIniFile.GetString("frm_os3", "cmbCPL13", "")
+            Case objIniFile.GetString("frm_os3", "cmbCPL13", "Процессор")
 
                 sSQL = "SELECT CPU1, CPU2, CPU3, CPU4 from kompy where id=" & frmComputers.sCOUNT
 
-            Case objIniFile.GetString("frm_os3", "cmbCPL14", "")
+            Case objIniFile.GetString("frm_os3", "cmbCPL14", "Сетевой адаптер")
 
                 sSQL = "SELECT NET_NAME_1, NET_NAME_2 from kompy where id=" & frmComputers.sCOUNT
 

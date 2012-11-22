@@ -1,4 +1,6 @@
 ﻿Imports System.Threading
+Imports System.IO
+
 Public Class frmserviceDesc
 
     Inherits System.Windows.Forms.Form
@@ -124,16 +126,16 @@ Public Class frmserviceDesc
         'Call LANG_frmserviceDesk()
 
         Dim LNGIniFile As New IniFile(sLANGPATH)
-        lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem1", ""), 40, HorizontalAlignment.Left)
+        lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem1", "id"), 40, HorizontalAlignment.Left)
         'lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem2", ""), 300, HorizontalAlignment.Left)
-        lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem3", ""), 30, HorizontalAlignment.Left)
-        lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem4", ""), 90, HorizontalAlignment.Left)
-        lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem5", ""), 300, HorizontalAlignment.Left)
-        lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem6", ""), 100, HorizontalAlignment.Left)
-        lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem7", ""), 100, HorizontalAlignment.Left)
-        lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem8", ""), 100, HorizontalAlignment.Left)
-        lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem9", ""), 90, HorizontalAlignment.Left)
-        lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem10", ""), 100, HorizontalAlignment.Left)
+        lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem3", "№"), 30, HorizontalAlignment.Left)
+        lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem4", "Дата"), 90, HorizontalAlignment.Left)
+        lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem5", "Описание"), 300, HorizontalAlignment.Left)
+        lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem6", "Уровень"), 100, HorizontalAlignment.Left)
+        lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem7", "Мастер"), 100, HorizontalAlignment.Left)
+        lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem8", "Выполнение"), 100, HorizontalAlignment.Left)
+        lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem9", "Срок выполнения"), 90, HorizontalAlignment.Left)
+        lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem10", "Пользователь"), 100, HorizontalAlignment.Left)
 
 
         Dim zSTR As Integer
@@ -282,16 +284,20 @@ Public Class frmserviceDesc
 
 
         Dim LNGIniFile As New IniFile(sLANGPATH)
-        lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem1", ""), 40, HorizontalAlignment.Left)
-        lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem2", ""), 300, HorizontalAlignment.Left)
-        lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem3", ""), 30, HorizontalAlignment.Left)
-        lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem4", ""), 90, HorizontalAlignment.Left)
-        lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem5", ""), 300, HorizontalAlignment.Left)
-        lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem6", ""), 100, HorizontalAlignment.Left)
-        lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem7", ""), 100, HorizontalAlignment.Left)
-        lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem8", ""), 100, HorizontalAlignment.Left)
-        lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem9", ""), 90, HorizontalAlignment.Left)
-        lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem10", ""), 100, HorizontalAlignment.Left)
+
+        lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem1", "id"), 40, HorizontalAlignment.Left)
+        lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem2", "Техника и место установки"), 300, HorizontalAlignment.Left)
+        lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem3", "№"), 30, HorizontalAlignment.Left)
+        lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem4", "Дата"), 90, HorizontalAlignment.Left)
+        lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem5", "Описание"), 300, HorizontalAlignment.Left)
+        lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem6", "Уровень"), 100, HorizontalAlignment.Left)
+        lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem7", "Мастер"), 100, HorizontalAlignment.Left)
+        lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem8", "Выполнение"), 100, HorizontalAlignment.Left)
+        lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem9", "Срок выполнения"), 90, HorizontalAlignment.Left)
+        lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem10", "Пользователь"), 100, HorizontalAlignment.Left)
+
+
+
 
 
         lvRem2.Items.Clear()
@@ -463,7 +469,7 @@ Public Class frmserviceDesc
         rs = Nothing
 
         If unam = 0 Then
-           
+
         Else
             sSQL = "SELECT zakryt FROM Remont WHERE id=" & sSID
             rs = New ADODB.Recordset
@@ -623,7 +629,7 @@ err_1:
 
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
-        frmService_add.Text = LNGIniFile.GetString("frmserviceDesc", "MSG1", "") & " " & lstGroups.SelectedNode.Text
+        frmService_add.Text = LNGIniFile.GetString("frmserviceDesc", "MSG1", "Добавление (редактирование) заявки для") & " " & lstGroups.SelectedNode.Text
 
         rs1.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
         Dim sSw As Date
@@ -681,7 +687,7 @@ err_1:
 
         frmService_add.REMED = True
 
-        frmService_add.cmbAdd.Text = LNGIniFile.GetString("frmserviceDesc", "MSG2", "")
+        frmService_add.cmbAdd.Text = LNGIniFile.GetString("frmserviceDesc", "MSG2", "Сохранить")
 
         rs1.Close()
         rs1 = Nothing
@@ -712,11 +718,11 @@ err_1:
         FillComboNET(Me.treebranche, "FILIAL", "SPR_FILIAL", "", False, True)
 
         Dim LNGIniFile As New IniFile(sLANGPATH)
-        treebranche.Items.Add(LNGIniFile.GetString("frmComputers", "MSG53", ""))
+        treebranche.Items.Add(LNGIniFile.GetString("frmComputers", "MSG53", "Все"))
         uname = objIniFile.GetString("General", "branche", "")
 
         If Len(uname) = 0 Then
-            treebranche.Text = LNGIniFile.GetString("frmComputers", "MSG53", "")
+            treebranche.Text = LNGIniFile.GetString("frmComputers", "MSG53", "Все")
         Else
             treebranche.Text = uname
         End If
@@ -839,12 +845,12 @@ err_1:
 
         lstGroups.Nodes.Add(nodeRoot)
 
-        Dim TempNode As New TreeNode(LNGIniFile.GetString("frmserviceDesc", "MSG5", ""), 0, 0)
+        Dim TempNode As New TreeNode(LNGIniFile.GetString("frmserviceDesc", "MSG5", "Компьютеры"), 0, 0)
         TempNode.Tag = "G1|2"
         nodeRoot.Nodes.Add(TempNode)
 
 
-        Dim TempNode2 As New TreeNode(LNGIniFile.GetString("frmserviceDesc", "MSG6", ""), 0, 0)
+        Dim TempNode2 As New TreeNode(LNGIniFile.GetString("frmserviceDesc", "MSG6", "Ремонты"), 0, 0)
         TempNode.Tag = "G1|2"
         nodeRoot.Nodes.Add(TempNode2)
 
@@ -1677,7 +1683,7 @@ Error_:
 
     End Sub
 
-   
+
 
     Private Sub DELETE_SERVICES(Optional ByVal ssid As Integer = 0)
 
@@ -1733,7 +1739,7 @@ Error_:
 
         'Call SaveActivityToLogDB(LNGIniFile.GetString("frmserviceDesc", "MSG7", "") & " " & lstGroups.SelectedNode.Text & " " & LNGIniFile.GetString("frmserviceDesc", "MSG8", "") & unamZ)
 
-       
+
 
     End Sub
 
@@ -1880,7 +1886,7 @@ err_:
 
         If Len(frmComputers.sCOUNT) = 0 Then Exit Sub
         Dim LNGIniFile As New IniFile(sLANGPATH)
-        frmService_add.Text = LNGIniFile.GetString("frmserviceDesc", "MSG1", "") & " " & lstGroups.SelectedNode.Text
+        frmService_add.Text = LNGIniFile.GetString("frmserviceDesc", "MSG1", "Добавление (редактирование) заявки для") & " " & lstGroups.SelectedNode.Text
 
         frmService_add.cmbIst.Text = ""
         frmService_add.cmbMast.Text = ""
@@ -1895,12 +1901,12 @@ err_:
         frmService_add.cmbTip.Text = ""
         frmService_add.txtComent.Text = ""
         frmService_add.RemCashe.Text = 0
-        frmService_add.cmbAdd.Text = LNGIniFile.GetString("frmService_add", "cmbAdd", "")
+        frmService_add.cmbAdd.Text = LNGIniFile.GetString("frmService_add", "cmbAdd", "Добавить")
         frmService_add.chkClose.Checked = 0
 
         frmService_add.ShowDialog(Me)
 
-        Call SaveActivityToLogDB(LNGIniFile.GetString("frmserviceDesc", "MSG4", "") & " " & lstGroups.SelectedNode.Text)
+        Call SaveActivityToLogDB(LNGIniFile.GetString("frmserviceDesc", "MSG4", "Добавление заявки для") & " " & lstGroups.SelectedNode.Text)
 
         Exit Sub
 Err_1:
@@ -2017,7 +2023,7 @@ err_1:
         Call REMONT_SEND_MASTER(r1COUNT)
     End Sub
 
-    
+
 
     Private Sub btn_Z_to_Office_Click(sender As System.Object, e As System.EventArgs) Handles btn_Z_to_Office.Click
         If lvRem.Items.Count = 0 Then Exit Sub
@@ -2028,8 +2034,9 @@ err_1:
             r1COUNT = (lvRem.SelectedItems(z).Text)
         Next
 
+        If r1COUNT = 0 Then Exit Sub
 
-        Call SRASP2(r1COUNT, "\blanks\akt_z.dot")
+        Call SRASP2(r1COUNT, Directory.GetParent(Application.ExecutablePath).ToString & "\blanks\akt_z.dot")
     End Sub
 
     Private Sub Button1_Click(sender As System.Object, e As System.EventArgs) Handles Button1.Click
@@ -2041,6 +2048,7 @@ err_1:
             r1COUNT = (lvRem.SelectedItems(z).Text)
         Next
 
+        If r1COUNT = 0 Then Exit Sub
 
         Call SRASP(r1COUNT)
     End Sub
@@ -2061,7 +2069,7 @@ err_1:
 
     End Sub
 
-    Private Sub НарядToolStripMenuItem1_Click(sender As System.Object, e As System.EventArgs) Handles НарядToolStripMenuItem1.Click
+    Private Sub НарядToolStripMenuItem1_Click(sender As System.Object, e As System.EventArgs) Handles btn_N_to_Office.Click
         If lvRem.Items.Count = 0 Then Exit Sub
 
         Dim z As Integer
@@ -2070,11 +2078,12 @@ err_1:
             r1COUNT = (lvRem.SelectedItems(z).Text)
         Next
 
+        If r1COUNT = 0 Then Exit Sub
 
-        Call SRASP2(r1COUNT, "\blanks\nariad.doc")
+        Call SRASP2(r1COUNT, Directory.GetParent(Application.ExecutablePath).ToString & "\blanks\nariad.doc")
     End Sub
 
-    Private Sub МатериальныйПропускToolStripMenuItem1_Click(sender As System.Object, e As System.EventArgs) Handles МатериальныйПропускToolStripMenuItem1.Click
+    Private Sub МатериальныйПропускToolStripMenuItem1_Click(sender As System.Object, e As System.EventArgs) Handles btn_MAT_to_Office.Click
 
         'Фамилия:
         'Имя:
@@ -2102,8 +2111,56 @@ err_1:
             r1COUNT = (lvRem.SelectedItems(z).Text)
         Next
 
+        If r1COUNT = 0 Then Exit Sub
 
-        Call SRASP2(r1COUNT, "\blanks\mp.doc")
+        Call SRASP2(r1COUNT, Directory.GetParent(Application.ExecutablePath).ToString & "\blanks\mp.doc")
 
     End Sub
+
+    Private Sub MnuBlank_Click(sender As System.Object, e As System.EventArgs) Handles MnuBlank.Click
+
+        If lvRem.Items.Count = 0 Then Exit Sub
+
+        Dim z As Integer
+
+        For z = 0 To lvRem.SelectedItems.Count - 1
+            r1COUNT = (lvRem.SelectedItems(z).Text)
+        Next
+
+        If r1COUNT = 0 Then Exit Sub
+
+        Dim sTMP As String
+        Dim ePatch As String
+
+        ePatch = Directory.GetParent(Application.ExecutablePath).ToString & "\blanks"
+
+        Dim fdlg As OpenFileDialog = New OpenFileDialog()
+        Dim LNGIniFile As New IniFile(sLANGPATH)
+
+        fdlg.Title = LNGIniFile.GetString("frmMain", "MSG9", "Шаблоны бланков")
+        fdlg.InitialDirectory = ePatch
+        fdlg.Filter = "Документы MS Word(*.doc)|*.doc|Шаблоны документов MS Word(*.dot)|*.dot"
+
+        'fdlg.Filter = "All files (*.*)|*.*|Access Database(*.mdb) files (*.mdb)|*.mdb" ;
+        '"Шаблоны Microsoft Word (*.doc)|*.doc"
+        fdlg.FilterIndex = 2
+
+        fdlg.RestoreDirectory = True
+
+        If fdlg.ShowDialog() = DialogResult.OK Then
+            Me.Cursor = Cursors.WaitCursor
+
+            sTMP = fdlg.FileName
+
+
+        End If
+
+
+        Call SRASP2(r1COUNT, fdlg.FileName)
+
+
+        Me.Cursor = Cursors.Default
+
+    End Sub
+
 End Class

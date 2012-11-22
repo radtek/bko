@@ -470,13 +470,13 @@
 
                 Label3.Visible = False
                 cmbTip.Visible = False
-                cmdAdd.Text = LNGIniFile.GetString("frmservice_add_otvets", "MSG1", "")
+                cmdAdd.Text = LNGIniFile.GetString("frmservice_add_otvets", "MSG1", "Сохранить")
 
             Case False
 
                 Label3.Visible = True
                 cmbTip.Visible = True
-                cmdAdd.Text = LNGIniFile.GetString("frmservice_add_otvets", "MSG2", "")
+                cmdAdd.Text = LNGIniFile.GetString("frmservice_add_otvets", "MSG2", "Добавить")
 
         End Select
 

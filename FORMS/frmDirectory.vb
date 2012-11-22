@@ -16,140 +16,140 @@ Public Class frmDirectory
 
         tvDirectory.ImageList = Me.ilsCommands
 
-        Dim nodeRoot As New TreeNode(objIniFile.GetString("frmDirectory", "MSG1", ""), 0, 0)
+        Dim nodeRoot As New TreeNode(objIniFile.GetString("frmDirectory", "MSG1", "Справочники"), 0, 0)
         nodeRoot.Tag = "ROOT" & GENID()
 
         tvDirectory.Nodes.Add(nodeRoot)
         '#############################################################
         'Создаем группу в дереве
-        Dim TempNode As New TreeNode(objIniFile.GetString("frmDirectory", "MSG2", ""), 1, 1)
+        Dim TempNode As New TreeNode(objIniFile.GetString("frmDirectory", "MSG2", "Периферийные устройства"), 1, 1)
         TempNode.Tag = "G|" & GENID()
         nodeRoot.Nodes.Add(TempNode)
 
-        Dim TEHNode1 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG3", ""), 2, 2) '--------------VIP_Graff Обновлен------------------
+        Dim TEHNode1 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG3", "USB Устройства"), 2, 2) '--------------VIP_Graff Обновлен------------------
         TEHNode1.Tag = "C|" & GENID()
         TempNode.Nodes.Add(TEHNode1)
 
-        Dim TEHNode2 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG4", ""), 3, 3)
+        Dim TEHNode2 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG4", "ZIP"), 3, 3)
         TEHNode2.Tag = "C|" & GENID()
         TempNode.Nodes.Add(TEHNode2)
 
-        Dim TEHNode3 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG5", ""), 4, 4)
+        Dim TEHNode3 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG5", "Акустические системы"), 4, 4)
         TEHNode3.Tag = "C|" & GENID()
         TempNode.Nodes.Add(TEHNode3)
 
-        Dim TEHNode4 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG6", ""), 5, 5) '--------------VIP_Graff Обновлен------------------
+        Dim TEHNode4 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG6", "Источники БП"), 5, 5) '--------------VIP_Graff Обновлен------------------
         TEHNode4.Tag = "C|" & GENID()
         TempNode.Nodes.Add(TEHNode4)
 
-        Dim TEHNode5 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG7", ""), 6, 6)
+        Dim TEHNode5 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG7", "Клавиатуры"), 6, 6)
         TEHNode5.Tag = "C|" & GENID()
         TempNode.Nodes.Add(TEHNode5)
 
-        Dim TEHNode6 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG8", ""), 7, 7)
+        Dim TEHNode6 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG8", "Копиры"), 7, 7)
         TEHNode6.Tag = "C|" & GENID()
         TempNode.Nodes.Add(TEHNode6)
 
-        Dim TEHNode8 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG9", ""), 8, 8)
+        Dim TEHNode8 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG9", "Мониторы"), 8, 8)
         TEHNode8.Tag = "C|" & GENID()
         TempNode.Nodes.Add(TEHNode8)
 
-        Dim TEHNode9 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG10", ""), 9, 9)
+        Dim TEHNode9 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG10", "МФУ"), 9, 9)
         TEHNode9.Tag = "C|" & GENID()
         TempNode.Nodes.Add(TEHNode9)
 
-        Dim TEHNode10 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG11", ""), 10, 10)
+        Dim TEHNode10 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG11", "Мыши"), 10, 10)
         TEHNode10.Tag = "C|" & GENID()
         TempNode.Nodes.Add(TEHNode10)
 
-        Dim TEHNode11 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG12", ""), 11, 11)
+        Dim TEHNode11 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG12", "Принтеры"), 11, 11)
         TEHNode11.Tag = "C|" & GENID()
         TempNode.Nodes.Add(TEHNode11)
 
-        Dim TEHNode12 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG13", ""), 12, 12) '--------------VIP_Graff Обновлен------------------
+        Dim TEHNode12 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG13", "Сетевые фильтры"), 12, 12) '--------------VIP_Graff Обновлен------------------
         TEHNode12.Tag = "C|" & GENID()
         TempNode.Nodes.Add(TEHNode12)
 
-        Dim TEHNode13 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG14", ""), 13, 13) '--------------VIP_Graff Обновлен------------------
+        Dim TEHNode13 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG14", "Сетевые устройства"), 13, 13) '--------------VIP_Graff Обновлен------------------
         TEHNode13.Tag = "C|" & GENID()
         TempNode.Nodes.Add(TEHNode13)
 
-        Dim TEHNode14 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG15", ""), 14, 14)
+        Dim TEHNode14 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG15", "Сканер"), 14, 14)
         TEHNode14.Tag = "C|" & GENID()
         TempNode.Nodes.Add(TEHNode14)
 
-        Dim TEHNode15 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG16", ""), 15, 15) '(4,4)
+        Dim TEHNode15 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG16", "Телефон"), 15, 15) '(4,4)
         TEHNode15.Tag = "C|" & GENID()
         TempNode.Nodes.Add(TEHNode15)
 
-        Dim TEHNode16 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG17", ""), 16, 16) '--------------VIP_Graff Обновлен------------------
+        Dim TEHNode16 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG17", "Факс"), 16, 16) '--------------VIP_Graff Обновлен------------------
         TEHNode16.Tag = "C|" & GENID()
         TempNode.Nodes.Add(TEHNode16)
 
-        Dim TEHNode17 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG18", ""), 17, 17)
+        Dim TEHNode17 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG18", "Фотоаппарат"), 17, 17)
         TEHNode17.Tag = "C|" & GENID()
         TempNode.Nodes.Add(TEHNode17)
         '#############################################################
         'Создаем группу в дереве
-        Dim TempNode2 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG19", ""), 21, 21)
+        Dim TempNode2 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG19", "Комплектующие"), 21, 21)
         TempNode2.Tag = "G|" & GENID()
         nodeRoot.Nodes.Add(TempNode2)
 
-        Dim TEHNode18 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG20", ""), 19, 19)
+        Dim TEHNode18 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG20", "Видео карты"), 19, 19)
         TEHNode18.Tag = "C|" & GENID()
         TempNode2.Nodes.Add(TEHNode18)
 
-        Dim TEHNode19 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG21", ""), 20, 20)
+        Dim TEHNode19 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG21", "Дисководы"), 20, 20)
         TEHNode19.Tag = "C|" & GENID()
         TempNode2.Nodes.Add(TEHNode19)
 
-        Dim TEHNode20 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG22", ""), 18, 18)
+        Dim TEHNode20 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG22", "Жесткие диски"), 18, 18)
         TEHNode20.Tag = "C|" & GENID()
         TempNode2.Nodes.Add(TEHNode20)
 
-        Dim TEHNode21 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG23", ""), 22, 22)
+        Dim TEHNode21 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG23", "Звуковые карты"), 22, 22)
         TEHNode21.Tag = "C|" & GENID()
         TempNode2.Nodes.Add(TEHNode21)
 
-        Dim TEHNode27 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG24", ""), 23, 23)
+        Dim TEHNode27 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG24", "Кардридер"), 23, 23)
         TEHNode27.Tag = "C|" & GENID()
         TempNode2.Nodes.Add(TEHNode27)
 
-        Dim TEHNode22 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG25", ""), 24, 24)
+        Dim TEHNode22 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG25", "Материнские платы"), 24, 24)
         TEHNode22.Tag = "C|" & GENID()
         TempNode2.Nodes.Add(TEHNode22)
 
-        Dim TEHNode23 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG26", ""), 25, 25)
+        Dim TEHNode23 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG26", "Модули памяти"), 25, 25)
         TEHNode23.Tag = "C|" & GENID()
         TempNode2.Nodes.Add(TEHNode23)
 
         'Добавляем узлы
-        Dim TEHNode As New TreeNode(objIniFile.GetString("frmDirectory", "MSG27", ""), 26, 26)
+        Dim TEHNode As New TreeNode(objIniFile.GetString("frmDirectory", "MSG27", "Оптические накопители"), 26, 26)
         TEHNode.Tag = "C|" & GENID()
         TempNode2.Nodes.Add(TEHNode)
 
-        Dim TEHNode24 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG28", ""), 27, 27)
+        Dim TEHNode24 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG28", "Процессор"), 27, 27)
         TEHNode24.Tag = "C|" & GENID()
         TempNode2.Nodes.Add(TEHNode24)
 
-        Dim TEHNode25 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG29", ""), 28, 28)
+        Dim TEHNode25 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG29", "Сетевые карты"), 28, 28)
         TEHNode25.Tag = "C|" & GENID()
         TempNode2.Nodes.Add(TEHNode25)
 
-        Dim TEHNode26 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG30", ""), 29, 29)
+        Dim TEHNode26 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG30", "Устройства PCI"), 29, 29)
         TEHNode26.Tag = "C|" & GENID()
         TempNode2.Nodes.Add(TEHNode26)
 
         '#############################################################
-        Dim TEHNode44 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG31", ""), 30, 30)
+        Dim TEHNode44 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG31", "Блок питания"), 30, 30)
         TEHNode44.Tag = "C|" & GENID()
         TempNode2.Nodes.Add(TEHNode44)
 
-        Dim TEHNode48 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG33", ""), 32, 32)
+        Dim TEHNode48 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG33", "Корпус"), 32, 32)
         TEHNode48.Tag = "C|" & GENID()
         TempNode2.Nodes.Add(TEHNode48)
 
-        Dim TEHNode7 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG34", ""), 33, 33)
+        Dim TEHNode7 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG34", "Модемы"), 33, 33)
         TEHNode7.Tag = "C|" & GENID()
         TempNode2.Nodes.Add(TEHNode7)
 
@@ -157,102 +157,102 @@ Public Class frmDirectory
         '#############################################################
 
         'Создаем группу в дереве
-        Dim TempNode3 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG35", ""), 34, 34)
+        Dim TempNode3 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG35", "Сотрудники"), 34, 34)
         TempNode3.Tag = "G|" & GENID()
         nodeRoot.Nodes.Add(TempNode3)
 
-        Dim TEHNode28 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG36", ""), 35, 35)
+        Dim TEHNode28 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG36", "Мастер"), 35, 35)
         TEHNode28.Tag = "C|" & GENID()
         TempNode3.Nodes.Add(TEHNode28)
 
-        Dim TEHNode29 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG37", ""), 34, 34)
+        Dim TEHNode29 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG37", "Ответственный"), 34, 34)
         TEHNode29.Tag = "C|" & GENID()
         TempNode3.Nodes.Add(TEHNode29)
 
         'Пользователь - экспереминтально
-        Dim TEHNode57 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG57", ""), 34, 34)
+        Dim TEHNode57 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG57", "Пользователь"), 34, 34)
         TEHNode57.Tag = "C|" & GENID()
         TempNode3.Nodes.Add(TEHNode57)
 
 
         'Создаем группу в дереве
-        Dim TempNode4 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG38", ""), 50, 50)
+        Dim TempNode4 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG38", "Структура"), 50, 50)
         TempNode4.Tag = "G|" & GENID()
         nodeRoot.Nodes.Add(TempNode4)
 
-        Dim TEHNode30 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG39", ""), 36, 36)
+        Dim TEHNode30 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG39", "Филиал"), 36, 36)
         TEHNode30.Tag = "C|" & GENID()
         TempNode4.Nodes.Add(TEHNode30)
 
-        Dim TEHNode31 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG40", ""), 37, 37)
+        Dim TEHNode31 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG40", "Отдел"), 37, 37)
         TEHNode31.Tag = "C|" & GENID()
         TempNode4.Nodes.Add(TEHNode31)
 
-        Dim TEHNode32 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG41", ""), 38, 38)
+        Dim TEHNode32 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG41", "Кабинет"), 38, 38)
         TEHNode32.Tag = "C|" & GENID()
         TempNode4.Nodes.Add(TEHNode32)
 
         '#############################################################
         'Создаем группу в дереве
-        Dim TempNode5 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG42", ""), 39, 39)
+        Dim TempNode5 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG42", "Заявки"), 39, 39)
         TempNode5.Tag = "G|" & GENID()
         nodeRoot.Nodes.Add(TempNode5)
 
-        Dim TEHNode33 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG43", ""), 51, 51)
+        Dim TEHNode33 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG43", "Уровень заявки"), 51, 51)
         TEHNode33.Tag = "C|" & GENID()
         TempNode5.Nodes.Add(TEHNode33)
 
-        Dim TEHNode34 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG44", ""), 52, 52)
+        Dim TEHNode34 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG44", "Уровень выполнения"), 52, 52)
         TEHNode34.Tag = "C|" & GENID()
         TempNode5.Nodes.Add(TEHNode34)
 
-        Dim TEHNode35 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG45", ""), 53, 53)
+        Dim TEHNode35 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG45", "Тип заявки"), 53, 53)
         TEHNode35.Tag = "C|" & GENID()
         TempNode5.Nodes.Add(TEHNode35)
 
         '#############################################################
         'Создаем группу в дереве
-        Dim TempNode6 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG46", ""), 41, 41)
+        Dim TempNode6 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG46", "Разное"), 41, 41)
         TempNode6.Tag = "G|" & GENID()
         nodeRoot.Nodes.Add(TempNode6)
 
-        Dim TEHNode36 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG47", ""), 42, 42)
+        Dim TEHNode36 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG47", "Поставщики"), 42, 42)
         TEHNode36.Tag = "C|" & GENID()
         TempNode6.Nodes.Add(TEHNode36)
 
-        Dim TEHNode37 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG48", ""), 43, 43)
+        Dim TEHNode37 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG48", "Производители"), 43, 43)
         TEHNode37.Tag = "C|" & GENID()
         TempNode6.Nodes.Add(TEHNode37)
 
-        Dim TEHNode38 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG49", ""), 44, 44)
+        Dim TEHNode38 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG49", "Тип компьютера"), 44, 44)
         TEHNode38.Tag = "C|" & GENID()
         TempNode6.Nodes.Add(TEHNode38)
 
-        Dim TEHNode39 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG50", ""), 45, 45)
+        Dim TEHNode39 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG50", "Модель картриджа"), 45, 45)
         TEHNode39.Tag = "C|" & GENID()
         TempNode6.Nodes.Add(TEHNode39)
 
-        Dim TEHNode40 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG51", ""), 46, 46)
+        Dim TEHNode40 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG51", "Оборудование (Другое-тип)"), 46, 46)
         TEHNode40.Tag = "C|" & GENID()
         TempNode6.Nodes.Add(TEHNode40)
 
-        Dim TEHNode47 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG52", ""), 46, 46)
+        Dim TEHNode47 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG52", "Оборудование (Другое-устройства)"), 46, 46)
         TEHNode47.Tag = "C|" & GENID()
         TempNode6.Nodes.Add(TEHNode47)
 
-        Dim TEHNode41 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG53", ""), 47, 47)
+        Dim TEHNode41 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG53", "Тип лицензии"), 47, 47)
         TEHNode41.Tag = "C|" & GENID()
         TempNode6.Nodes.Add(TEHNode41)
 
-        Dim TEHNode42 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG54", ""), 48, 48)
+        Dim TEHNode42 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG54", "Тип программного обеспечения"), 48, 48)
         TEHNode42.Tag = "C|" & GENID()
         TempNode6.Nodes.Add(TEHNode42)
 
-        Dim TEHNode43 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG55", ""), 49, 49)
+        Dim TEHNode43 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG55", "Комплектующие"), 49, 49)
         TEHNode43.Tag = "C|" & GENID()
         TempNode6.Nodes.Add(TEHNode43)
 
-        Dim TEHNode46 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG56", ""), 48, 48)
+        Dim TEHNode46 As New TreeNode(objIniFile.GetString("frmDirectory", "MSG56", "Программное обеспечение"), 48, 48)
         TEHNode46.Tag = "C|" & GENID()
         TempNode6.Nodes.Add(TEHNode46)
 
@@ -294,7 +294,10 @@ Public Class frmDirectory
 
     End Sub
 
-    Private Sub LOAD_LIST_SPR()
+    Public Sub LOAD_LIST_SPR()
+        ToolStripButton1.Visible = False
+        ToolStripSeparator5.Visible = False
+
         On Error GoTo err_
         chkCont.Visible = False
 
@@ -309,7 +312,7 @@ Public Class frmDirectory
 
 
 
-        btnDirAdd.Text = objIniFile.GetString("frmDirectory", "btnDirAdd", "")
+        btnDirAdd.Text = objIniFile.GetString("frmDirectory", "btnDirAdd", "Добавить")
         cmbName.Items.Clear()
         cmbName2.Items.Clear()
         cmbName3.Items.Clear()
@@ -317,18 +320,19 @@ Public Class frmDirectory
         cmb2.Items.Clear()
         cmb1.Text = ""
         cmb2.Text = ""
-        cmbName.Text = ""
-        cmbName2.Text = ""
+
         cmbName3.Text = ""
+        txtName.Text = ""
+
         txtMemo.Text = ""
-        Label3.Text = objIniFile.GetString("frmDirectory", "Label3", "")
-        Label1.Text = objIniFile.GetString("frmDirectory", "Label2", "")
+        Label3.Text = objIniFile.GetString("frmDirectory", "Label3", "Производитель")
+        Label1.Text = objIniFile.GetString("frmDirectory", "Label2", "Наименование")
 
         Me.lvDirectory.Columns.Clear()
-        Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", ""), 20, HorizontalAlignment.Left)
-        Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory2", ""), 300, HorizontalAlignment.Left)
-        Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory3", ""), 300, HorizontalAlignment.Left)
-        Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "MSG99", ""), 70, HorizontalAlignment.Left)
+        Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", "id"), 20, HorizontalAlignment.Left)
+        Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory2", "Наименование"), 300, HorizontalAlignment.Left)
+        Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory3", "Производитель"), 300, HorizontalAlignment.Left)
+        Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "MSG99", "Используется"), 70, HorizontalAlignment.Left)
 
 
 
@@ -350,11 +354,24 @@ Public Class frmDirectory
 
         lvDirectory.Items.Clear()
 
+
+        If tvDirectory.SelectedNode.Text <> objIniFile.GetString("frmDirectory", "MSG41", "Кабинет") Then
+
+            cmbName.Text = ""
+            cmbName2.Text = ""
+
+        Else
+
+
+        End If
+
+
+
         Dim sSQL As String
 
         Select Case tvDirectory.SelectedNode.Text
 
-            Case objIniFile.GetString("frmDirectory", "MSG57", "")
+            Case objIniFile.GetString("frmDirectory", "MSG57", "Пользователь")
                 '#######################################
                 'Пользователь экспериментально
                 '#######################################
@@ -366,10 +383,10 @@ Public Class frmDirectory
                 gb2.Visible = False
 
                 Me.lvDirectory.Columns.Clear()
-                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", ""), 20, HorizontalAlignment.Left)
-                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory2", ""), 300, HorizontalAlignment.Left)
-                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory4", ""), 300, HorizontalAlignment.Left)
-                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "MSG99", ""), 70, HorizontalAlignment.Left)
+                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", "id"), 20, HorizontalAlignment.Left)
+                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory2", "Наименование"), 300, HorizontalAlignment.Left)
+                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory4", "ФИО"), 300, HorizontalAlignment.Left)
+                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "MSG99", "Используется"), 70, HorizontalAlignment.Left)
 
 
                 If unamDB <> "MS Access" Then
@@ -388,7 +405,7 @@ Public Class frmDirectory
 
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG27", "")
+            Case objIniFile.GetString("frmDirectory", "MSG27", "Оптические накопители")
 
 
 
@@ -409,28 +426,28 @@ Public Class frmDirectory
                 txtName.Visible = False
 
                 cmb1.Items.Clear()
-                gb1.Text = objIniFile.GetString("frmDirectory", "MSG98", "")
+                gb1.Text = objIniFile.GetString("frmDirectory", "MSG98", "Скорость")
                 For intj = 1 To 77
                     cmb1.Items.Add(intj & "x")
                 Next
-                lbl1.Text = objIniFile.GetString("frmDirectory", "MSG57", "")
+                lbl1.Text = objIniFile.GetString("frmDirectory", "MSG57", "Скорость чтения оптического диска (Max)")
 
                 cmb2.Items.Clear()
-                gb2.Text = objIniFile.GetString("frmDirectory", "MSG98", "")
+                gb2.Text = objIniFile.GetString("frmDirectory", "MSG98", "Скорость")
                 For intj = 1 To 77
                     cmb2.Items.Add(intj & "x")
                 Next
-                lbl2.Text = objIniFile.GetString("frmDirectory", "MSG58", "")
+                lbl2.Text = objIniFile.GetString("frmDirectory", "MSG58", "Скорость записи оптического диска (Max)")
 
-            Case objIniFile.GetString("frmDirectory", "MSG3", "")
+            Case objIniFile.GetString("frmDirectory", "MSG3", "USB Устройства")
                 lbl1.Visible = True
                 gb1.Visible = True
-                gb1.Text = objIniFile.GetString("frmDirectory", "MSG59", "")
+                gb1.Text = objIniFile.GetString("frmDirectory", "MSG59", "Версия USB")
 
                 For intj = 1 To 3
                     cmb1.Items.Add(intj & "x")
                 Next
-                lbl1.Text = objIniFile.GetString("frmDirectory", "MSG59", "")
+                lbl1.Text = objIniFile.GetString("frmDirectory", "MSG59", "Версия USB")
 
 
 
@@ -443,7 +460,7 @@ Public Class frmDirectory
 
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG4", "")
+            Case objIniFile.GetString("frmDirectory", "MSG4", "ZIP")
 
 
 
@@ -455,10 +472,10 @@ Public Class frmDirectory
                 End If
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG5", "")
+            Case objIniFile.GetString("frmDirectory", "MSG5", "Акустические системы")
                 lbl1.Visible = True
                 gb1.Visible = True
-                gb1.Text = objIniFile.GetString("frmDirectory", "MSG5", "")
+                gb1.Text = objIniFile.GetString("frmDirectory", "MSG5", "Акустические системы")
                 cmb1.Items.Add("2.0")
                 cmb1.Items.Add("2.1")
                 cmb1.Items.Add("5.0")
@@ -467,7 +484,7 @@ Public Class frmDirectory
                 cmb1.Items.Add("7.1")
                 cmb1.Items.Add("8.1")
 
-                lbl1.Text = objIniFile.GetString("frmDirectory", "MSG5", "")
+                lbl1.Text = objIniFile.GetString("frmDirectory", "MSG5", "Акустические системы")
 
 
 
@@ -479,23 +496,30 @@ Public Class frmDirectory
                 End If
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG6", "")
+            Case objIniFile.GetString("frmDirectory", "MSG6", "Источники БП")
+
+                ToolStripButton1.Visible = True
+                ToolStripSeparator5.Visible = True
 
                 lbl1.Visible = True
                 gb1.Visible = True
-                gb1.Text = objIniFile.GetString("frmDirectory", "MSG60", "")
-                lbl1.Text = objIniFile.GetString("frmDirectory", "MSG61", "")
+                gb1.Text = objIniFile.GetString("frmDirectory", "MSG60", "Мощность Ватт")
+                lbl1.Text = objIniFile.GetString("frmDirectory", "MSG61", "Укажите мощность в Вт.")
 
+                gb2.Visible = True
+                gb2.Text = "SNMP Model"
 
+                'cmb2
+                FillComboNET(Me.cmb2, "Model", "TBL_DEV_OID", "", False, True)
 
                 If unamDB <> "MS Access" Then
                     sSQL = "SELECT SPR_IBP.Id, SPR_IBP.Name, SPR_PROIZV.PROIZV FROM SPR_PROIZV INNER JOIN SPR_IBP ON (SPR_PROIZV.id = SPR_IBP.Proizv) AND (SPR_PROIZV.iD = SPR_IBP.Proizv) WHERE ((SPR_IBP.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
 
                 Else
-                    sSQL = "SELECT SPR_IBP.Id, SPR_IBP.Name, SPR_PROIZV.PROIZV, (Select count(*) FROM kompy where kompy.IBP_NAME=SPR_IBP.Name) as temp FROM SPR_PROIZV INNER JOIN SPR_IBP ON (SPR_PROIZV.id = SPR_IBP.Proizv) AND (SPR_PROIZV.iD = SPR_IBP.Proizv) WHERE ((SPR_IBP.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
+                    sSQL = "SELECT SPR_IBP.Id, SPR_IBP.Name, SPR_PROIZV.PROIZV, (Select count(*) FROM kompy where kompy.NET_NAME=SPR_IBP.Name) as temp FROM SPR_PROIZV INNER JOIN SPR_IBP ON (SPR_PROIZV.id = SPR_IBP.Proizv) AND (SPR_PROIZV.iD = SPR_IBP.Proizv) WHERE ((SPR_IBP.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
                 End If
 
-            Case objIniFile.GetString("frmDirectory", "MSG7", "")
+            Case objIniFile.GetString("frmDirectory", "MSG7", "Клавиатуры")
 
 
 
@@ -507,24 +531,24 @@ Public Class frmDirectory
                 End If
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG8", "")
+            Case objIniFile.GetString("frmDirectory", "MSG8", "Копиры")
                 lbl1.Visible = True
                 gb1.Visible = True
                 cmb1.Items.Clear()
-                gb1.Text = objIniFile.GetString("frmDirectory", "MSG62", "")
+                gb1.Text = objIniFile.GetString("frmDirectory", "MSG62", "Формат")
                 For intj = 1 To 5
                     cmb1.Items.Add("A" & intj)
                 Next
-                lbl1.Text = objIniFile.GetString("frmDirectory", "MSG63", "")
+                lbl1.Text = objIniFile.GetString("frmDirectory", "MSG63", "Формат бумаги")
 
                 lbl2.Visible = True
                 gb2.Visible = True
                 cmb2.Items.Clear()
-                gb2.Text = objIniFile.GetString("frmDirectory", "MSG64", "")
+                gb2.Text = objIniFile.GetString("frmDirectory", "MSG64", "Модель картриджа")
 
                 FillComboNET(Me.cmb2, "name", "spr_cart", "", False, True)
 
-                lbl2.Text = objIniFile.GetString("frmDirectory", "MSG64", "")
+                lbl2.Text = objIniFile.GetString("frmDirectory", "MSG64", "Модель картриджа")
 
                 If unamDB <> "MS Access" Then
 
@@ -536,11 +560,11 @@ Public Class frmDirectory
 
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG34", "")
+            Case objIniFile.GetString("frmDirectory", "MSG34", "Модемы")
                 lbl1.Visible = True
                 gb1.Visible = True
-                gb1.Text = objIniFile.GetString("frmDirectory", "MSG65", "")
-                lbl1.Text = objIniFile.GetString("frmDirectory", "MSG65", "")
+                gb1.Text = objIniFile.GetString("frmDirectory", "MSG65", "Скорость BOD")
+                lbl1.Text = objIniFile.GetString("frmDirectory", "MSG65", "Скорость BOD")
 
                 If unamDB <> "MS Access" Then
                     sSQL = "SELECT SPR_MODEM.Id, SPR_MODEM.Name, SPR_PROIZV.PROIZV FROM SPR_PROIZV INNER JOIN SPR_MODEM ON (SPR_PROIZV.id = SPR_MODEM.Proizv) AND (SPR_PROIZV.iD = SPR_MODEM.Proizv) WHERE ((SPR_MODEM.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
@@ -550,12 +574,12 @@ Public Class frmDirectory
                 End If
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG9", "")
+            Case objIniFile.GetString("frmDirectory", "MSG9", "Мониторы")
 
                 lbl1.Visible = True
                 gb1.Visible = True
-                gb1.Text = objIniFile.GetString("frmDirectory", "gb1", "")
-                lbl1.Text = objIniFile.GetString("frmDirectory", "MSG66", "")
+                gb1.Text = objIniFile.GetString("frmDirectory", "gb1", "Тип")
+                lbl1.Text = objIniFile.GetString("frmDirectory", "MSG66", "Укажите тип")
                 cmb1.Items.Add("14 LCD")
                 cmb1.Items.Add("15 LCD")
                 cmb1.Items.Add("17 LCD")
@@ -580,24 +604,24 @@ Public Class frmDirectory
                 End If
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG10", "")
+            Case objIniFile.GetString("frmDirectory", "MSG10", "МФУ")
                 lbl1.Visible = True
                 gb1.Visible = True
                 cmb1.Items.Clear()
-                gb1.Text = objIniFile.GetString("frmDirectory", "MSG62", "")
+                gb1.Text = objIniFile.GetString("frmDirectory", "MSG62", "Формат")
                 For intj = 1 To 5
                     cmb1.Items.Add("A" & intj)
                 Next
-                lbl1.Text = objIniFile.GetString("frmDirectory", "MSG63", "")
+                lbl1.Text = objIniFile.GetString("frmDirectory", "MSG63", "Формат бумаги")
 
                 lbl2.Visible = True
                 gb2.Visible = True
                 cmb2.Items.Clear()
-                gb2.Text = objIniFile.GetString("frmDirectory", "MSG64", "")
+                gb2.Text = objIniFile.GetString("frmDirectory", "MSG64", "Модель картриджа")
 
                 FillComboNET(Me.cmb2, "name", "spr_cart", "", False, True)
 
-                lbl2.Text = objIniFile.GetString("frmDirectory", "MSG64", "")
+                lbl2.Text = objIniFile.GetString("frmDirectory", "MSG64", "Модель картриджа")
 
 
 
@@ -611,7 +635,7 @@ Public Class frmDirectory
 
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG11", "")
+            Case objIniFile.GetString("frmDirectory", "MSG11", "Мыши")
 
 
 
@@ -624,24 +648,24 @@ Public Class frmDirectory
                 End If
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG12", "")
+            Case objIniFile.GetString("frmDirectory", "MSG12", "Принтеры")
                 lbl1.Visible = True
                 gb1.Visible = True
                 cmb1.Items.Clear()
-                gb1.Text = objIniFile.GetString("frmDirectory", "MSG62", "")
+                gb1.Text = objIniFile.GetString("frmDirectory", "MSG62", "Формат")
                 For intj = 1 To 5
                     cmb1.Items.Add("A" & intj)
                 Next
-                lbl1.Text = objIniFile.GetString("frmDirectory", "MSG63", "")
+                lbl1.Text = objIniFile.GetString("frmDirectory", "MSG63", "Формат бумаги")
 
                 lbl2.Visible = True
                 gb2.Visible = True
                 cmb2.Items.Clear()
-                gb2.Text = objIniFile.GetString("frmDirectory", "MSG64", "")
+                gb2.Text = objIniFile.GetString("frmDirectory", "MSG64", "Модель картриджа")
 
                 FillComboNET(Me.cmb2, "name", "spr_cart", "", False, True)
 
-                lbl2.Text = objIniFile.GetString("frmDirectory", "MSG64", "")
+                lbl2.Text = objIniFile.GetString("frmDirectory", "MSG64", "Модель картриджа")
 
 
                 If unamDB <> "MS Access" Then
@@ -654,7 +678,7 @@ Public Class frmDirectory
 
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG13", "")
+            Case objIniFile.GetString("frmDirectory", "MSG13", "Сетевые фильтры")
 
                 If unamDB <> "MS Access" Then
 
@@ -665,12 +689,12 @@ Public Class frmDirectory
                 End If
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG14", "")
+            Case objIniFile.GetString("frmDirectory", "MSG14", "Сетевые устройства")
                 gb1.Visible = True
                 gb2.Visible = True
-                gb1.Text = objIniFile.GetString("frmDirectory", "MSG67", "")
+                gb1.Text = objIniFile.GetString("frmDirectory", "MSG67", "Тип устройства")
                 lbl1.Text = ""
-                gb2.Text = objIniFile.GetString("frmDirectory", "MSG68", "")
+                gb2.Text = objIniFile.GetString("frmDirectory", "MSG68", "Количество портов")
                 lbl2.Text = ""
                 FillComboNET(Me.cmb1, "name", "SPR_NET_DEV", "", False, True)
 
@@ -685,7 +709,7 @@ Public Class frmDirectory
 
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG15", "")
+            Case objIniFile.GetString("frmDirectory", "MSG15", "Сканер")
                 gb1.Visible = True
 
                 If unamDB <> "MS Access" Then
@@ -697,7 +721,7 @@ Public Class frmDirectory
                 End If
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG16", "")
+            Case objIniFile.GetString("frmDirectory", "MSG16", "Телефон")
                 gb1.Visible = True
 
                 If unamDB <> "MS Access" Then
@@ -709,7 +733,7 @@ Public Class frmDirectory
                 End If
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG17", "")
+            Case objIniFile.GetString("frmDirectory", "MSG17", "Факс")
                 gb1.Visible = True
 
                 If unamDB <> "MS Access" Then
@@ -721,13 +745,13 @@ Public Class frmDirectory
                 End If
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG18", "")
+            Case objIniFile.GetString("frmDirectory", "MSG18", "Фотоаппарат")
                 gb1.Visible = True
                 gb2.Visible = True
-                gb1.Text = objIniFile.GetString("frmDirectory", "MSG69", "")
-                lbl1.Text = objIniFile.GetString("frmDirectory", "MSG70", "")
-                gb2.Text = objIniFile.GetString("frmDirectory", "MSG71", "")
-                lbl2.Text = objIniFile.GetString("frmDirectory", "MSG71", "")
+                gb1.Text = objIniFile.GetString("frmDirectory", "MSG69", "Мегапикселов")
+                lbl1.Text = objIniFile.GetString("frmDirectory", "MSG70", "Укажите Mp")
+                gb2.Text = objIniFile.GetString("frmDirectory", "MSG71", "Объем карты памяти")
+                lbl2.Text = objIniFile.GetString("frmDirectory", "MSG71", "Объем карты памяти")
 
                 If unamDB <> "MS Access" Then
 
@@ -738,11 +762,11 @@ Public Class frmDirectory
                 End If
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG20", "")
+            Case objIniFile.GetString("frmDirectory", "MSG20", "Видео карты")
                 lbl1.Visible = True
                 gb1.Visible = True
-                gb1.Text = objIniFile.GetString("frmDirectory", "MSG72", "")
-                lbl1.Text = objIniFile.GetString("frmDirectory", "MSG73", "")
+                gb1.Text = objIniFile.GetString("frmDirectory", "MSG72", "Объем памяти")
+                lbl1.Text = objIniFile.GetString("frmDirectory", "MSG73", "Укажите объем памяти в Мб.")
 
                 If unamDB <> "MS Access" Then
 
@@ -754,14 +778,14 @@ Public Class frmDirectory
 
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG21", "")
+            Case objIniFile.GetString("frmDirectory", "MSG21", "Дисководы")
                 lbl1.Visible = True
                 gb1.Visible = True
                 cmb1.Items.Add("3.5")
                 cmb1.Items.Add("5.5")
 
-                gb1.Text = objIniFile.GetString("frmDirectory", "MSG74", "")
-                lbl1.Text = objIniFile.GetString("frmDirectory", "MSG75", "")
+                gb1.Text = objIniFile.GetString("frmDirectory", "MSG74", "Форм Фактор")
+                lbl1.Text = objIniFile.GetString("frmDirectory", "MSG75", "Укажите формфактор")
 
 
                 If unamDB <> "MS Access" Then
@@ -770,11 +794,11 @@ Public Class frmDirectory
                     sSQL = "SELECT SPR_FDD.Id, SPR_FDD.Name, SPR_PROIZV.PROIZV, (Select count(*) FROM kompy where kompy.FDD_NAME=SPR_FDD.Name) as temp FROM SPR_PROIZV INNER JOIN SPR_FDD ON (SPR_PROIZV.id = SPR_FDD.Proizv) AND (SPR_PROIZV.iD = SPR_FDD.Proizv) WHERE ((SPR_FDD.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
                 End If
 
-            Case objIniFile.GetString("frmDirectory", "MSG22", "")
+            Case objIniFile.GetString("frmDirectory", "MSG22", "Жесткие диски")
                 lbl1.Visible = True
                 gb1.Visible = True
-                gb1.Text = objIniFile.GetString("frmDirectory", "MSG76", "")
-                lbl1.Text = objIniFile.GetString("frmDirectory", "MSG77", "")
+                gb1.Text = objIniFile.GetString("frmDirectory", "MSG76", "Объем в Гб.")
+                lbl1.Text = objIniFile.GetString("frmDirectory", "MSG77", "Укажите Объем HDD в Гб.")
 
 
                 If unamDB <> "MS Access" Then
@@ -783,11 +807,11 @@ Public Class frmDirectory
                     sSQL = "SELECT SPR_HDD.Id, SPR_HDD.Name, SPR_PROIZV.PROIZV,(Select count(*) FROM  (SELECT cpus.HDD_Name_1 FROM (SELECT HDD_Name_1 FROM kompy WHERE tiptehn = 'PC' union all SELECT HDD_Name_2 FROM kompy WHERE tiptehn = 'PC' union all SELECT HDD_Name_3 FROM kompy WHERE tiptehn = 'PC' union all SELECT  HDD_Name_4 FROM kompy WHERE tiptehn = 'PC' ) AS cpus) where cpus.HDD_Name_1=SPR_HDD.Name) as temp FROM SPR_PROIZV INNER JOIN SPR_HDD ON (SPR_PROIZV.id = SPR_HDD.Proizv) AND (SPR_PROIZV.iD = SPR_HDD.Proizv) WHERE ((SPR_HDD.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
                 End If
 
-            Case objIniFile.GetString("frmDirectory", "MSG23", "")
+            Case objIniFile.GetString("frmDirectory", "MSG23", "Звуковые карты")
                 lbl1.Visible = True
                 gb1.Visible = True
-                gb1.Text = objIniFile.GetString("frmDirectory", "MSG78", "")
-                lbl1.Text = objIniFile.GetString("frmDirectory", "MSG79", "")
+                gb1.Text = objIniFile.GetString("frmDirectory", "MSG78", "Дополнительно")
+                lbl1.Text = objIniFile.GetString("frmDirectory", "MSG79", "Параметры")
 
                 If unamDB <> "MS Access" Then
                     sSQL = "SELECT SPR_SOUND.Id, SPR_SOUND.Name, SPR_PROIZV.PROIZV FROM SPR_PROIZV INNER JOIN SPR_SOUND ON (SPR_PROIZV.id = SPR_SOUND.Proizv) AND (SPR_PROIZV.iD = SPR_SOUND.Proizv) WHERE ((SPR_SOUND.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
@@ -795,11 +819,11 @@ Public Class frmDirectory
                     sSQL = "SELECT SPR_SOUND.Id, SPR_SOUND.Name, SPR_PROIZV.PROIZV, (Select count(*) FROM kompy where kompy.SOUND_NAME=SPR_SOUND.Name) as temp FROM SPR_PROIZV INNER JOIN SPR_SOUND ON (SPR_PROIZV.id = SPR_SOUND.Proizv) AND (SPR_PROIZV.iD = SPR_SOUND.Proizv) WHERE ((SPR_SOUND.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
                 End If
 
-            Case objIniFile.GetString("frmDirectory", "MSG24", "")
+            Case objIniFile.GetString("frmDirectory", "MSG24", "Кардридер")
                 lbl1.Visible = True
                 gb1.Visible = True
-                gb1.Text = objIniFile.GetString("frmDirectory", "MSG78", "")
-                lbl1.Text = objIniFile.GetString("frmDirectory", "MSG79", "")
+                gb1.Text = objIniFile.GetString("frmDirectory", "MSG78", "Дополнительно")
+                lbl1.Text = objIniFile.GetString("frmDirectory", "MSG79", "Параметры")
 
                 If unamDB <> "MS Access" Then
                     sSQL = "SELECT SPR_CREADER.Id, SPR_CREADER.Name, SPR_PROIZV.PROIZV FROM SPR_PROIZV INNER JOIN SPR_CREADER ON (SPR_PROIZV.id = SPR_CREADER.Proizv) AND (SPR_PROIZV.iD = SPR_CREADER.Proizv) WHERE ((SPR_CREADER.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
@@ -807,11 +831,11 @@ Public Class frmDirectory
                     sSQL = "SELECT SPR_CREADER.Id, SPR_CREADER.Name, SPR_PROIZV.PROIZV, (Select count(*) FROM kompy where kompy.CREADER_NAME=SPR_CREADER.Name) as temp FROM SPR_PROIZV INNER JOIN SPR_CREADER ON (SPR_PROIZV.id = SPR_CREADER.Proizv) AND (SPR_PROIZV.iD = SPR_CREADER.Proizv) WHERE ((SPR_CREADER.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
                 End If
 
-            Case objIniFile.GetString("frmDirectory", "MSG25", "")
+            Case objIniFile.GetString("frmDirectory", "MSG25", "Материнские платы")
                 lbl1.Visible = True
                 gb1.Visible = True
-                gb1.Text = objIniFile.GetString("frmDirectory", "MSG80", "")
-                lbl1.Text = objIniFile.GetString("frmDirectory", "MSG81", "")
+                gb1.Text = objIniFile.GetString("frmDirectory", "MSG80", "Чипсет")
+                lbl1.Text = objIniFile.GetString("frmDirectory", "MSG81", "Укажите Чипсет")
 
 
 
@@ -822,11 +846,11 @@ Public Class frmDirectory
                 End If
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG26", "")
+            Case objIniFile.GetString("frmDirectory", "MSG26", "Модули памяти")
                 lbl1.Visible = True
                 gb1.Visible = True
-                gb1.Text = objIniFile.GetString("frmDirectory", "MSG82", "")
-                lbl1.Text = objIniFile.GetString("frmDirectory", "MSG83", "")
+                gb1.Text = objIniFile.GetString("frmDirectory", "MSG82", "Скорость памяти")
+                lbl1.Text = objIniFile.GetString("frmDirectory", "MSG83", "(Частота)")
 
 
                 If unamDB <> "MS Access" Then
@@ -836,7 +860,7 @@ Public Class frmDirectory
                 End If
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG28", "")
+            Case objIniFile.GetString("frmDirectory", "MSG28", "Процессор")
                 lbl1.Visible = True
                 gb1.Visible = True
                 gb2.Visible = True
@@ -846,12 +870,12 @@ Public Class frmDirectory
                 txtName.Visible = False
 
                 cmb1.Items.Clear()
-                gb1.Text = objIniFile.GetString("frmDirectory", "MSG84", "")
-                lbl1.Text = objIniFile.GetString("frmDirectory", "MSG85", "")
+                gb1.Text = objIniFile.GetString("frmDirectory", "MSG84", "Реальная частота")
+                lbl1.Text = objIniFile.GetString("frmDirectory", "MSG85", "Укажите реальную частоту процессора")
 
                 cmb2.Items.Clear()
-                gb2.Text = objIniFile.GetString("frmDirectory", "MSG86", "")
-                lbl2.Text = objIniFile.GetString("frmDirectory", "MSG87", "")
+                gb2.Text = objIniFile.GetString("frmDirectory", "MSG86", "Сокет")
+                lbl2.Text = objIniFile.GetString("frmDirectory", "MSG87", "Укажите сокет")
 
                 If unamDB <> "MS Access" Then
                     sSQL = "SELECT SPR_CPU.Id, SPR_CPU.Name, SPR_PROIZV.PROIZV FROM SPR_PROIZV INNER JOIN SPR_CPU ON (SPR_PROIZV.id = SPR_CPU.Proizv) AND (SPR_PROIZV.iD = SPR_CPU.Proizv) WHERE ((SPR_CPU.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
@@ -859,7 +883,7 @@ Public Class frmDirectory
                     sSQL = "SELECT SPR_CPU.Id, SPR_CPU.Name, SPR_PROIZV.PROIZV,(Select count(*) FROM  (SELECT cpus.cpu1 FROM (SELECT cpu1 FROM kompy WHERE tiptehn = 'PC' union all SELECT cpu2 FROM kompy WHERE tiptehn = 'PC'  union all SELECT cpu3 FROM kompy WHERE tiptehn = 'PC'  union all SELECT cpu4 FROM kompy WHERE tiptehn = 'PC') AS cpus)  where cpus.cpu1=SPR_CPU.Name) as temp FROM SPR_PROIZV INNER JOIN SPR_CPU ON (SPR_PROIZV.id = SPR_CPU.Proizv) AND (SPR_PROIZV.iD = SPR_CPU.Proizv) WHERE ((SPR_CPU.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
                 End If
 
-            Case objIniFile.GetString("frmDirectory", "MSG29", "")
+            Case objIniFile.GetString("frmDirectory", "MSG29", "Сетевые карты")
 
                 If unamDB <> "MS Access" Then
                     sSQL = "SELECT SPR_NET.Id, SPR_NET.Name, SPR_PROIZV.PROIZV FROM SPR_PROIZV INNER JOIN SPR_NET ON (SPR_PROIZV.id = SPR_NET.Proizv) AND (SPR_PROIZV.iD = SPR_NET.Proizv) WHERE ((SPR_NET.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
@@ -869,7 +893,7 @@ Public Class frmDirectory
 
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG30", "")
+            Case objIniFile.GetString("frmDirectory", "MSG30", "Устройства PCI")
 
                 If unamDB <> "MS Access" Then
                     sSQL = "SELECT SPR_PCI.Id, SPR_PCI.Name, SPR_PROIZV.PROIZV FROM SPR_PROIZV INNER JOIN SPR_PCI ON (SPR_PROIZV.id = SPR_PCI.Proizv) AND (SPR_PROIZV.iD = SPR_PCI.Proizv) WHERE ((SPR_PCI.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
@@ -877,20 +901,20 @@ Public Class frmDirectory
                     sSQL = "SELECT SPR_PCI.Id, SPR_PCI.Name, SPR_PROIZV.PROIZV, (Select count(*) FROM kompy where kompy.PCI_Name=SPR_PCI.Name) as temp FROM SPR_PROIZV INNER JOIN SPR_PCI ON (SPR_PROIZV.id = SPR_PCI.Proizv) AND (SPR_PROIZV.iD = SPR_PCI.Proizv) WHERE ((SPR_PCI.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
                 End If
 
-            Case objIniFile.GetString("frmDirectory", "MSG36", "")
+            Case objIniFile.GetString("frmDirectory", "MSG36", "Мастер")
 
                 Label3.Visible = False
                 txtName.Visible = False
                 cmbName3.Visible = False
                 cmbName2.Visible = True
                 Label2.Visible = True
-                Label2.Text = objIniFile.GetString("frmDirectory", "MSG88", "")
+                Label2.Text = objIniFile.GetString("frmDirectory", "MSG88", "Пользователь")
 
                 gb1.Visible = True
-                gb1.Text = objIniFile.GetString("frmDirectory", "MSG89", "")
+                gb1.Text = objIniFile.GetString("frmDirectory", "MSG89", "E-Mail")
 
                 gb2.Visible = True
-                gb2.Text = objIniFile.GetString("frmDirectory", "MSG90", "")
+                gb2.Text = objIniFile.GetString("frmDirectory", "MSG90", "SMTP Сервер")
 
                 Dim rs1 As ADODB.Recordset
                 rs1 = New ADODB.Recordset
@@ -907,13 +931,13 @@ Public Class frmDirectory
                 rs1 = Nothing
 
                 Me.lvDirectory.Columns.Clear()
-                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", ""), 20, HorizontalAlignment.Left)
-                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory2", ""), 300, HorizontalAlignment.Left)
+                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", "id"), 20, HorizontalAlignment.Left)
+                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory2", "Наименование"), 300, HorizontalAlignment.Left)
                 'Me.lotd.Columns.Add(("Производитель"), 300, HorizontalAlignment.Left)
 
                 sSQL = "SELECT id, Name,A FROM SPR_Master ORDER BY NAME"
 
-            Case objIniFile.GetString("frmDirectory", "MSG37", "")
+            Case objIniFile.GetString("frmDirectory", "MSG37", "Ответственный")
                 Label2.Visible = False
                 cmbName2.Visible = False
                 Label3.Visible = False
@@ -923,12 +947,12 @@ Public Class frmDirectory
                 gb2.Visible = False
 
                 Me.lvDirectory.Columns.Clear()
-                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", ""), 20, HorizontalAlignment.Left)
-                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory2", ""), 300, HorizontalAlignment.Left)
+                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", "id"), 20, HorizontalAlignment.Left)
+                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory2", "Наименование"), 300, HorizontalAlignment.Left)
 
                 sSQL = "SELECT id, Name FROM SPR_OTV ORDER BY NAME"
 
-            Case objIniFile.GetString("frmDirectory", "MSG39", "")
+            Case objIniFile.GetString("frmDirectory", "MSG39", "Филиал")
 
                 chkVisibleSTR.Visible = True
                 Label3.Visible = False
@@ -936,33 +960,35 @@ Public Class frmDirectory
                 cmbName3.Visible = False
 
                 Me.lvDirectory.Columns.Clear()
-                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", ""), 20, HorizontalAlignment.Left)
-                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory2", ""), 300, HorizontalAlignment.Left)
+                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", "id"), 20, HorizontalAlignment.Left)
+                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory2", "Наименование"), 300, HorizontalAlignment.Left)
 
                 sSQL = "SELECT Id, filial FROM SPR_FILIAL ORDER BY filial"
 
-            Case objIniFile.GetString("frmDirectory", "MSG40", "")
-                Label1.Text = objIniFile.GetString("frmDirectory", "MSG39", "")
+            Case objIniFile.GetString("frmDirectory", "MSG40", "Отдел")
+
+                Label1.Text = objIniFile.GetString("frmDirectory", "MSG39", "Филиал")
 
                 chkVisibleSTR.Visible = True
-                Label3.Text = objIniFile.GetString("frmDirectory", "MSG40", "")
+                Label3.Text = objIniFile.GetString("frmDirectory", "MSG40", "Отдел")
                 txtName.Visible = True
                 cmbName3.Visible = False
                 cmbName.Items.Clear()
                 FillComboNET(Me.cmbName, "FILIAL", "SPR_FILIAL", "", False, True)
 
                 Me.lvDirectory.Columns.Clear()
-                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", ""), 20, HorizontalAlignment.Left)
-                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "MSG39", ""), 300, HorizontalAlignment.Left)
-                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "MSG40", ""), 300, HorizontalAlignment.Left)
+                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", "id"), 20, HorizontalAlignment.Left)
+                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "MSG39", "Филиал"), 300, HorizontalAlignment.Left)
+                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "MSG40", "Отдел"), 300, HorizontalAlignment.Left)
 
                 sSQL = "SELECT id, filial, n_otd FROM SPR_OTD_FILIAL ORDER BY filial"
 
-            Case objIniFile.GetString("frmDirectory", "MSG41", "")
-                Label1.Text = objIniFile.GetString("frmDirectory", "MSG39", "")
+            Case objIniFile.GetString("frmDirectory", "MSG41", "Кабинет")
+
+                Label1.Text = objIniFile.GetString("frmDirectory", "MSG39", "Филиал")
                 chkVisibleSTR.Visible = True
-                Label3.Text = objIniFile.GetString("frmDirectory", "MSG41", "")
-                Label2.Text = objIniFile.GetString("frmDirectory", "MSG40", "")
+                Label3.Text = objIniFile.GetString("frmDirectory", "MSG41", "Кабинет")
+                Label2.Text = objIniFile.GetString("frmDirectory", "MSG40", "Отдел")
                 Label2.Visible = True
                 cmbName2.Visible = True
                 txtName.Visible = True
@@ -976,14 +1002,14 @@ Public Class frmDirectory
                 sSQL = "SELECT id, N_F, N_M, Name FROM SPR_KAB ORDER BY Name"
 
                 Me.lvDirectory.Columns.Clear()
-                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", ""), 20, HorizontalAlignment.Left)
-                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "MSG39", ""), 250, HorizontalAlignment.Left)
-                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "MSG40", ""), 250, HorizontalAlignment.Left)
-                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "MSG41", ""), 250, HorizontalAlignment.Left)
-                'Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "MSG99", ""), 70, HorizontalAlignment.Left)
+                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", "id"), 20, HorizontalAlignment.Left)
+                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "MSG39", "Филиал"), 250, HorizontalAlignment.Left)
+                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "MSG40", "Отдел"), 250, HorizontalAlignment.Left)
+                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "MSG41", "Кабинет"), 250, HorizontalAlignment.Left)
+                'Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "MSG99", "Используется"), 70, HorizontalAlignment.Left)
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG43", "")
+            Case objIniFile.GetString("frmDirectory", "MSG43", "Уровень заявки")
                 Label2.Visible = False
                 cmbName2.Visible = False
                 Label3.Visible = False
@@ -993,10 +1019,10 @@ Public Class frmDirectory
                 gb2.Visible = False
                 sSQL = "SELECT id, uroven  FROM SPR_Uroven order by uroven"
                 Me.lvDirectory.Columns.Clear()
-                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", ""), 20, HorizontalAlignment.Left)
-                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory2", ""), 300, HorizontalAlignment.Left)
+                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", "id"), 20, HorizontalAlignment.Left)
+                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory2", "Наименование"), 300, HorizontalAlignment.Left)
 
-            Case objIniFile.GetString("frmDirectory", "MSG44", "")
+            Case objIniFile.GetString("frmDirectory", "MSG44", "Уровень выполнения")
                 Label2.Visible = False
                 cmbName2.Visible = False
                 Label3.Visible = False
@@ -1007,10 +1033,10 @@ Public Class frmDirectory
                 sSQL = "SELECT id, name FROM spr_vip order by name"
 
                 Me.lvDirectory.Columns.Clear()
-                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", ""), 20, HorizontalAlignment.Left)
-                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory2", ""), 300, HorizontalAlignment.Left)
+                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", "id"), 20, HorizontalAlignment.Left)
+                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory2", "Наименование"), 300, HorizontalAlignment.Left)
 
-            Case objIniFile.GetString("frmDirectory", "MSG45", "")
+            Case objIniFile.GetString("frmDirectory", "MSG45", "Тип заявки")
                 Label2.Visible = False
                 cmbName2.Visible = False
                 Label3.Visible = False
@@ -1021,10 +1047,10 @@ Public Class frmDirectory
                 sSQL = "SELECT id, name FROM spr_tip_z order by name"
 
                 Me.lvDirectory.Columns.Clear()
-                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", ""), 20, HorizontalAlignment.Left)
-                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory2", ""), 300, HorizontalAlignment.Left)
+                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", "id"), 20, HorizontalAlignment.Left)
+                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory2", "Наименование"), 300, HorizontalAlignment.Left)
 
-            Case objIniFile.GetString("frmDirectory", "MSG47", "")
+            Case objIniFile.GetString("frmDirectory", "MSG47", "Поставщики")
                 Label3.Visible = False
                 txtName.Visible = False
                 cmbName3.Visible = False
@@ -1032,10 +1058,10 @@ Public Class frmDirectory
                 sSQL = "SELECT id, Name FROM SPR_Postav ORDER BY Name"
 
                 Me.lvDirectory.Columns.Clear()
-                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", ""), 20, HorizontalAlignment.Left)
-                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory2", ""), 300, HorizontalAlignment.Left)
+                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", "id"), 20, HorizontalAlignment.Left)
+                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory2", "Наименование"), 300, HorizontalAlignment.Left)
 
-            Case objIniFile.GetString("frmDirectory", "MSG48", "")
+            Case objIniFile.GetString("frmDirectory", "MSG48", "Производители")
                 cmbName3.Visible = False
                 txtName.Visible = False
                 Label3.Visible = False
@@ -1043,10 +1069,10 @@ Public Class frmDirectory
                 sSQL = "SELECT SPR_PROIZV.Id, SPR_PROIZV.PROIZV FROM SPR_PROIZV ORDER BY PROIZV"
 
                 Me.lvDirectory.Columns.Clear()
-                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", ""), 20, HorizontalAlignment.Left)
-                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory2", ""), 300, HorizontalAlignment.Left)
+                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", "id"), 20, HorizontalAlignment.Left)
+                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory2", "Наименование"), 300, HorizontalAlignment.Left)
 
-            Case objIniFile.GetString("frmDirectory", "MSG49", "")
+            Case objIniFile.GetString("frmDirectory", "MSG49", "Тип компьютера")
                 Label2.Visible = False
                 cmbName2.Visible = False
                 Label3.Visible = False
@@ -1057,10 +1083,10 @@ Public Class frmDirectory
                 sSQL = "SELECT id, tip FROM SPR_TIP ORDER BY tip"
 
                 Me.lvDirectory.Columns.Clear()
-                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", ""), 20, HorizontalAlignment.Left)
-                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory2", ""), 300, HorizontalAlignment.Left)
+                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", "id"), 20, HorizontalAlignment.Left)
+                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory2", "Наименование"), 300, HorizontalAlignment.Left)
 
-            Case objIniFile.GetString("frmDirectory", "MSG50", "")
+            Case objIniFile.GetString("frmDirectory", "MSG50", "Модель картриджа")
                 Label2.Visible = False
                 cmbName2.Visible = False
                 Label3.Visible = True
@@ -1069,40 +1095,27 @@ Public Class frmDirectory
                 gb1.Visible = True
                 gb2.Visible = False
                 cmb1.Items.Clear()
-                gb1.Text = objIniFile.GetString("frmDirectory", "gb1", "")
-                cmb1.Items.Add(objIniFile.GetString("frmDirectory", "MSG91", ""))
-                cmb1.Items.Add(objIniFile.GetString("frmDirectory", "MSG92", ""))
-                cmb1.Items.Add(objIniFile.GetString("frmDirectory", "MSG93", ""))
-                cmb1.Items.Add(objIniFile.GetString("frmDirectory", "MSG94", ""))
-                cmb1.Items.Add(objIniFile.GetString("frmDirectory", "MSG95", ""))
-                cmb1.Items.Add(objIniFile.GetString("frmDirectory", "MSG96", ""))
+                gb1.Text = objIniFile.GetString("frmDirectory", "gb1", "Тип")
+                cmb1.Items.Add(objIniFile.GetString("frmDirectory", "MSG91", "Струйный"))
+                cmb1.Items.Add(objIniFile.GetString("frmDirectory", "MSG92", "Матричный"))
+                cmb1.Items.Add(objIniFile.GetString("frmDirectory", "MSG93", "Лазерный"))
+                cmb1.Items.Add(objIniFile.GetString("frmDirectory", "MSG94", "Барабан"))
+                cmb1.Items.Add(objIniFile.GetString("frmDirectory", "MSG95", "Термо Пленка"))
+                cmb1.Items.Add(objIniFile.GetString("frmDirectory", "MSG96", "Фотокондуктор"))
 
 
                 sSQL = "SELECT spr_cart.Id, spr_cart.Name, SPR_PROIZV.PROIZV FROM SPR_PROIZV INNER JOIN spr_cart ON (SPR_PROIZV.iD = spr_cart.Proizv) AND (SPR_PROIZV.iD = spr_cart.Proizv) WHERE ((spr_cart.Proizv=SPR_PROIZV.iD)) ORDER BY Name"
 
-            Case objIniFile.GetString("frmDirectory", "MSG51", "")
+            Case objIniFile.GetString("frmDirectory", "MSG51", "Оборудование (Другое-тип)")
 
                 chkCont.Visible = True
                 gbOther.Visible = True
+                gb1.Visible = True
+                gb1.Text = objIniFile.GetString("frmDirectory", "frmDirectory", "Справочники")
                 Dim intj As Decimal
 
+
                 cmbIcon.Items.Clear()
-
-                'Select Case sICONS
-
-                '    Case "32*32"
-
-                '        For intj = 0 To frmComputers.ImageList11.Images.Count - 1
-                '            cmbIcon.Items.Add(intj)
-                '        Next
-
-                '    Case Else
-
-                '        For intj = 0 To frmComputers.ilsCommands.Images.Count - 1
-                '            cmbIcon.Items.Add(intj)
-                '        Next
-
-                'End Select
 
                 For intj = 0 To frmComputers.ilsCommands.Images.Count - 1
                     cmbIcon.Items.Add(intj)
@@ -1110,18 +1123,20 @@ Public Class frmDirectory
 
 
                 Me.lvDirectory.Columns.Clear()
-                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", ""), 20, HorizontalAlignment.Left)
-                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory2", ""), 300, HorizontalAlignment.Left)
+                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", "id"), 20, HorizontalAlignment.Left)
+                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory2", "Наименование"), 300, HorizontalAlignment.Left)
 
                 'sSQL = "SELECT spr_other.Id, spr_other.Name, SPR_PROIZV.PROIZV FROM SPR_PROIZV INNER JOIN SPR_PCI ON (SPR_PROIZV.id = spr_other.Proizv) AND (SPR_PROIZV.iD = spr_other.Proizv) WHERE ((spr_other.Proizv=SPR_PROIZV.iD)) ORDER BY Name"
                 sSQL = "SELECT Id, Name FROM spr_other"
 
+                Call LOAD_COMBO_SPR()
 
-            Case objIniFile.GetString("frmDirectory", "MSG52", "")
+
+            Case objIniFile.GetString("frmDirectory", "MSG52", "Оборудование (Другое-устройства)")
                 lbl1.Visible = True
                 gb1.Visible = True
-                gb1.Text = objIniFile.GetString("frmDirectory", "gb1", "")
-                lbl1.Text = objIniFile.GetString("frmDirectory", "gb1", "")
+                gb1.Text = objIniFile.GetString("frmDirectory", "gb1", "Тип")
+                lbl1.Text = objIniFile.GetString("frmDirectory", "gb1", "Тип")
 
                 FillComboNET(Me.cmb1, "Name", "spr_other", "", False, True)
 
@@ -1132,7 +1147,8 @@ Public Class frmDirectory
                     sSQL = "SELECT SPR_OTH_DEV.Id, SPR_OTH_DEV.Name, SPR_PROIZV.PROIZV, (Select count(*) FROM kompy where kompy.net_Name=SPR_OTH_DEV.Name) as temp FROM SPR_PROIZV INNER JOIN SPR_OTH_DEV ON (SPR_PROIZV.id = SPR_OTH_DEV.Proizv) AND (SPR_PROIZV.iD = SPR_OTH_DEV.Proizv) WHERE ((SPR_OTH_DEV.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
                 End If
 
-            Case objIniFile.GetString("frmDirectory", "MSG53", "")
+
+            Case objIniFile.GetString("frmDirectory", "MSG53", "Тип лицензии")
                 Label2.Visible = False
                 cmbName2.Visible = False
                 Label3.Visible = False
@@ -1144,10 +1160,10 @@ Public Class frmDirectory
                 sSQL = "SELECT SPR_LIC.Id, SPR_LIC.name FROM SPR_LIC ORDER BY Name"
 
                 Me.lvDirectory.Columns.Clear()
-                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", ""), 20, HorizontalAlignment.Left)
-                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory2", ""), 300, HorizontalAlignment.Left)
+                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", "id"), 20, HorizontalAlignment.Left)
+                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory2", "Наименование"), 300, HorizontalAlignment.Left)
 
-            Case objIniFile.GetString("frmDirectory", "MSG54", "")
+            Case objIniFile.GetString("frmDirectory", "MSG54", "Тип программного обеспечения")
                 Label2.Visible = False
                 cmbName2.Visible = False
                 Label3.Visible = False
@@ -1159,10 +1175,10 @@ Public Class frmDirectory
                 sSQL = "SELECT id, Name FROM SPR_TIP_PO order by Name"
 
                 Me.lvDirectory.Columns.Clear()
-                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", ""), 20, HorizontalAlignment.Left)
-                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory2", ""), 300, HorizontalAlignment.Left)
+                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", "id"), 20, HorizontalAlignment.Left)
+                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory2", "Наименование"), 300, HorizontalAlignment.Left)
 
-            Case objIniFile.GetString("frmDirectory", "MSG55", "")
+            Case objIniFile.GetString("frmDirectory", "MSG55", "Комплектующие")
                 Label2.Visible = False
                 cmbName2.Visible = False
                 Label3.Visible = False
@@ -1170,17 +1186,28 @@ Public Class frmDirectory
                 cmbName3.Visible = False
                 gb1.Visible = False
                 gb2.Visible = False
+                gbOther.Visible = False
+
+                'Dim intj As Decimal
+
+                'cmbIcon.Items.Clear()
+
+                'For intj = 0 To frmComputers.ilsCommands.Images.Count - 1
+                '    cmbIcon.Items.Add(intj)
+                'Next
+                'gb1.Text = objIniFile.GetString("frmDirectory", "frmDirectory", "Справочники")
 
                 sSQL = "SELECT Id, Name FROM SPR_Complect ORDER BY Name"
 
-                Me.lvDirectory.Columns.Clear()
-                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", ""), 20, HorizontalAlignment.Left)
-                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory2", ""), 300, HorizontalAlignment.Left)
 
-            Case objIniFile.GetString("frmDirectory", "MSG56", "")
+                Me.lvDirectory.Columns.Clear()
+                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", "id"), 20, HorizontalAlignment.Left)
+                Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory2", "Наименование"), 300, HorizontalAlignment.Left)
+
+            Case objIniFile.GetString("frmDirectory", "MSG56", "Программное обеспечение")
                 cmbName2.Visible = True
                 Label2.Visible = True
-                Label2.Text = objIniFile.GetString("frmDirectory", "gb1", "")
+                Label2.Text = objIniFile.GetString("frmDirectory", "gb1", "Тип")
 
                 FillComboNET(Me.cmbName2, "Name", "SPR_TIP_PO", "", False, True)
 
@@ -1196,11 +1223,11 @@ Public Class frmDirectory
 
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG33", "")
+            Case objIniFile.GetString("frmDirectory", "MSG33", "Корпус")
                 lbl1.Visible = True
                 gb1.Visible = True
-                gb1.Text = objIniFile.GetString("frmDirectory", "MSG78", "")
-                lbl1.Text = objIniFile.GetString("frmDirectory", "MSG79", "")
+                gb1.Text = objIniFile.GetString("frmDirectory", "MSG78", "Дополнительно")
+                lbl1.Text = objIniFile.GetString("frmDirectory", "MSG79", "Параметры")
 
 
                 If unamDB <> "MS Access" Then
@@ -1209,11 +1236,11 @@ Public Class frmDirectory
                     sSQL = "SELECT SPR_CASE.Id, SPR_CASE.Name, SPR_PROIZV.PROIZV, (Select count(*) FROM kompy where kompy.CASE_NAME=SPR_CASE.Name) as temp FROM SPR_PROIZV INNER JOIN SPR_CASE ON (SPR_PROIZV.id = SPR_CASE.Proizv) AND (SPR_PROIZV.iD = SPR_CASE.Proizv) WHERE ((SPR_CASE.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
                 End If
 
-            Case objIniFile.GetString("frmDirectory", "MSG31", "")
+            Case objIniFile.GetString("frmDirectory", "MSG31", "Блок питания")
                 lbl1.Visible = True
                 gb1.Visible = True
-                gb1.Text = objIniFile.GetString("frmDirectory", "MSG78", "")
-                lbl1.Text = objIniFile.GetString("frmDirectory", "MSG79", "")
+                gb1.Text = objIniFile.GetString("frmDirectory", "MSG78", "Дополнительно")
+                lbl1.Text = objIniFile.GetString("frmDirectory", "MSG79", "Параметры")
 
                 If unamDB <> "MS Access" Then
                     sSQL = "SELECT SPR_BP.Id, SPR_BP.Name, SPR_PROIZV.PROIZV FROM SPR_PROIZV INNER JOIN SPR_BP ON (SPR_PROIZV.id = SPR_BP.Proizv) AND (SPR_PROIZV.iD = SPR_BP.Proizv) WHERE ((SPR_BP.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
@@ -1350,7 +1377,7 @@ err_:
         Select Case tvDirectory.SelectedNode.Text
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG57", "")
+            Case objIniFile.GetString("frmDirectory", "MSG57", "Пользователь")
 
                 '######################################
                 'Пользователи - экспериментально
@@ -1360,127 +1387,127 @@ err_:
 
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG27", "")
+            Case objIniFile.GetString("frmDirectory", "MSG27", "Оптические накопители")
 
                 'SELECT * FROM SPR_OPTICAL INNER JOIN SPR_PROIZV ON SPR_OPTICAL.PROIZV = SPR_PROIZV.PROIZV AND ON SPR_OPTICAL.id =" & dSID
 
                 sSQL = "SELECT * FROM SPR_OPTICAL WHERE id =" & dSID
 
-            Case objIniFile.GetString("frmDirectory", "MSG3", "")
+            Case objIniFile.GetString("frmDirectory", "MSG3", "USB Устройства")
 
                 sSQL = "SELECT * FROM SPR_USB WHERE id =" & dSID
 
-            Case objIniFile.GetString("frmDirectory", "MSG4", "")
+            Case objIniFile.GetString("frmDirectory", "MSG4", "ZIP")
 
                 sSQL = "SELECT * FROM spr_zip WHERE id =" & dSID
 
-            Case objIniFile.GetString("frmDirectory", "MSG5", "")
+            Case objIniFile.GetString("frmDirectory", "MSG5", "Акустические системы")
 
                 sSQL = "SELECT * FROM SPR_ASISTEM WHERE id =" & dSID
 
-            Case objIniFile.GetString("frmDirectory", "MSG6", "")
+            Case objIniFile.GetString("frmDirectory", "MSG6", "Источники БП")
 
                 sSQL = "SELECT * FROM SPR_IBP WHERE id =" & dSID
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG7", "")
+            Case objIniFile.GetString("frmDirectory", "MSG7", "Клавиатуры")
 
                 sSQL = "SELECT * FROM SPR_KEYBOARD WHERE id =" & dSID
 
-            Case objIniFile.GetString("frmDirectory", "MSG8", "")
+            Case objIniFile.GetString("frmDirectory", "MSG8", "Копиры")
 
                 sSQL = "SELECT * FROM SPR_KOPIR WHERE id =" & dSID
 
-            Case objIniFile.GetString("frmDirectory", "MSG34", "")
+            Case objIniFile.GetString("frmDirectory", "MSG34", "Модемы")
 
                 sSQL = "SELECT * FROM SPR_MODEM WHERE id =" & dSID
 
-            Case objIniFile.GetString("frmDirectory", "MSG9", "")
+            Case objIniFile.GetString("frmDirectory", "MSG9", "Мониторы")
 
                 sSQL = "SELECT * FROM SPR_MONITOR WHERE id =" & dSID
 
-            Case objIniFile.GetString("frmDirectory", "MSG10", "")
+            Case objIniFile.GetString("frmDirectory", "MSG10", "МФУ")
 
                 sSQL = "SELECT * FROM SPR_MFU WHERE id =" & dSID
 
-            Case objIniFile.GetString("frmDirectory", "MSG11", "")
+            Case objIniFile.GetString("frmDirectory", "MSG11", "Мыши")
 
                 sSQL = "SELECT * FROM SPR_MOUSE WHERE id =" & dSID
 
-            Case objIniFile.GetString("frmDirectory", "MSG12", "")
+            Case objIniFile.GetString("frmDirectory", "MSG12", "Принтеры")
 
                 sSQL = "SELECT * FROM SPR_PRINTER WHERE id =" & dSID
 
-            Case objIniFile.GetString("frmDirectory", "MSG13", "")
+            Case objIniFile.GetString("frmDirectory", "MSG13", "Сетевые фильтры")
 
                 sSQL = "SELECT * FROM SPR_FS WHERE id =" & dSID
 
-            Case objIniFile.GetString("frmDirectory", "MSG14", "")
+            Case objIniFile.GetString("frmDirectory", "MSG14", "Сетевые устройства")
 
                 sSQL = "SELECT * FROM SPR_DEV_NET WHERE id =" & dSID
 
-            Case objIniFile.GetString("frmDirectory", "MSG15", "")
+            Case objIniFile.GetString("frmDirectory", "MSG15", "Сканер")
 
                 sSQL = "SELECT * FROM SPR_SCANER WHERE id =" & dSID
 
-            Case objIniFile.GetString("frmDirectory", "MSG16", "")
+            Case objIniFile.GetString("frmDirectory", "MSG16", "Телефон")
 
                 sSQL = "SELECT * FROM spr_phone WHERE id =" & dSID
 
-            Case objIniFile.GetString("frmDirectory", "MSG17", "")
+            Case objIniFile.GetString("frmDirectory", "MSG17", "Факс")
 
                 sSQL = "SELECT * FROM spr_fax WHERE id =" & dSID
 
-            Case objIniFile.GetString("frmDirectory", "MSG18", "")
+            Case objIniFile.GetString("frmDirectory", "MSG18", "Фотоаппарат")
 
                 sSQL = "SELECT * FROM spr_photo WHERE id =" & dSID
 
-            Case objIniFile.GetString("frmDirectory", "MSG20", "")
+            Case objIniFile.GetString("frmDirectory", "MSG20", "Видео карты")
 
                 sSQL = "SELECT * FROM SPR_SVGA WHERE id =" & dSID
 
-            Case objIniFile.GetString("frmDirectory", "MSG21", "")
+            Case objIniFile.GetString("frmDirectory", "MSG21", "Дисководы")
 
                 sSQL = "SELECT * FROM SPR_FDD WHERE id =" & dSID
 
-            Case objIniFile.GetString("frmDirectory", "MSG22", "")
+            Case objIniFile.GetString("frmDirectory", "MSG22", "Жесткие диски")
 
                 sSQL = "SELECT * FROM SPR_HDD WHERE id =" & dSID
 
-            Case objIniFile.GetString("frmDirectory", "MSG23", "")
+            Case objIniFile.GetString("frmDirectory", "MSG23", "Звуковые карты")
 
                 sSQL = "SELECT * FROM SPR_SOUND WHERE id =" & dSID
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG25", "")
+            Case objIniFile.GetString("frmDirectory", "MSG25", "Материнские платы")
 
                 sSQL = "SELECT * FROM SPR_MB WHERE id =" & dSID
 
-            Case objIniFile.GetString("frmDirectory", "MSG26", "")
+            Case objIniFile.GetString("frmDirectory", "MSG26", "Модули памяти")
 
                 sSQL = "SELECT * FROM SPR_RAM WHERE id =" & dSID
 
-            Case objIniFile.GetString("frmDirectory", "MSG28", "")
+            Case objIniFile.GetString("frmDirectory", "MSG28", "Процессор")
 
                 sSQL = "SELECT * FROM SPR_CPU WHERE id =" & dSID
 
-            Case objIniFile.GetString("frmDirectory", "MSG29", "")
+            Case objIniFile.GetString("frmDirectory", "MSG29", "Сетевые карты")
 
                 sSQL = "SELECT * FROM SPR_NET WHERE id =" & dSID
 
-            Case objIniFile.GetString("frmDirectory", "MSG30", "")
+            Case objIniFile.GetString("frmDirectory", "MSG30", "Устройства PCI")
 
                 sSQL = "SELECT * FROM SPR_PCI WHERE id =" & dSID
 
-            Case objIniFile.GetString("frmDirectory", "MSG36", "")
+            Case objIniFile.GetString("frmDirectory", "MSG36", "Мастер")
 
                 sSQL = "SELECT * FROM SPR_Master WHERE id =" & dSID
 
-            Case objIniFile.GetString("frmDirectory", "MSG37", "")
+            Case objIniFile.GetString("frmDirectory", "MSG37", "Ответственный")
 
                 sSQL = "SELECT * FROM SPR_OTV WHERE id =" & dSID
 
-            Case objIniFile.GetString("frmDirectory", "MSG39", "")
+            Case objIniFile.GetString("frmDirectory", "MSG39", "Филиал")
 
                 sSQL = "SELECT * FROM SPR_FILIAL WHERE id =" & dSID
 
@@ -1511,12 +1538,12 @@ err_:
                 rs = Nothing
 
                 sREALNAME = cmbName.Text
-                btnDirAdd.Text = objIniFile.GetString("frmDirectory", "MSG97", "")
+                btnDirAdd.Text = objIniFile.GetString("frmDirectory", "MSG97", "Сохранить")
 
                 Exit Sub
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG40", "")
+            Case objIniFile.GetString("frmDirectory", "MSG40", "Отдел")
 
                 sSQL = "SELECT * FROM SPR_OTD_FILIAL WHERE id =" & dSID
 
@@ -1548,11 +1575,11 @@ err_:
                 rs = Nothing
 
                 sREALNAME = txtName.Text
-                btnDirAdd.Text = objIniFile.GetString("frmDirectory", "MSG97", "")
+                btnDirAdd.Text = objIniFile.GetString("frmDirectory", "MSG97", "Сохранить")
                 Exit Sub
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG41", "")
+            Case objIniFile.GetString("frmDirectory", "MSG41", "Кабинет")
 
                 sSQL = "SELECT * FROM SPR_KAB WHERE id =" & dSID
 
@@ -1585,73 +1612,73 @@ err_:
                 rs = Nothing
 
                 sREALNAME = txtName.Text
-                btnDirAdd.Text = objIniFile.GetString("frmDirectory", "MSG97", "")
+                btnDirAdd.Text = objIniFile.GetString("frmDirectory", "MSG97", "Сохранить")
 
                 Exit Sub
 
-            Case objIniFile.GetString("frmDirectory", "MSG43", "")
+            Case objIniFile.GetString("frmDirectory", "MSG43", "Уровень заявки")
 
                 sSQL = "SELECT id, uroven as name, proizv, Prim, a, b, c FROM SPR_Uroven WHERE id =" & dSID
 
-            Case objIniFile.GetString("frmDirectory", "MSG44", "")
+            Case objIniFile.GetString("frmDirectory", "MSG44", "Уровень выполнения")
 
                 sSQL = "SELECT * FROM spr_vip WHERE id =" & dSID
 
-            Case objIniFile.GetString("frmDirectory", "MSG45", "")
+            Case objIniFile.GetString("frmDirectory", "MSG45", "Тип заявки")
 
                 sSQL = "SELECT * FROM spr_tip_z WHERE id =" & dSID
 
-            Case objIniFile.GetString("frmDirectory", "MSG47", "")
+            Case objIniFile.GetString("frmDirectory", "MSG47", "Поставщики")
 
                 sSQL = "SELECT * FROM SPR_Postav WHERE id =" & dSID
 
-            Case objIniFile.GetString("frmDirectory", "MSG48", "")
+            Case objIniFile.GetString("frmDirectory", "MSG48", "Производители")
 
                 sSQL = "SELECT * FROM SPR_PROIZV WHERE id =" & dSID
 
-            Case objIniFile.GetString("frmDirectory", "MSG49", "")
+            Case objIniFile.GetString("frmDirectory", "MSG49", "Тип компьютера")
 
                 sSQL = "SELECT * FROM SPR_TIP WHERE id =" & dSID
 
-            Case objIniFile.GetString("frmDirectory", "MSG50", "")
+            Case objIniFile.GetString("frmDirectory", "MSG50", "Модель картриджа")
 
                 sSQL = "SELECT * FROM spr_cart WHERE id =" & dSID
 
-            Case objIniFile.GetString("frmDirectory", "MSG51", "")
+            Case objIniFile.GetString("frmDirectory", "MSG51", "Оборудование (Другое-тип)")
 
                 sSQL = "SELECT * FROM spr_other WHERE id =" & dSID
 
-            Case objIniFile.GetString("frmDirectory", "MSG52", "")
+            Case objIniFile.GetString("frmDirectory", "MSG52", "Оборудование (Другое-устройства)")
 
                 sSQL = "SELECT * FROM SPR_OTH_DEV WHERE id =" & dSID
 
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG53", "")
+            Case objIniFile.GetString("frmDirectory", "MSG53", "Тип лицензии")
 
                 sSQL = "SELECT * FROM SPR_LIC WHERE id =" & dSID
 
-            Case objIniFile.GetString("frmDirectory", "MSG54", "")
+            Case objIniFile.GetString("frmDirectory", "MSG54", "Тип программного обеспечения")
 
                 sSQL = "SELECT * FROM SPR_TIP_PO WHERE id =" & dSID
 
-            Case objIniFile.GetString("frmDirectory", "MSG55", "")
+            Case objIniFile.GetString("frmDirectory", "MSG55", "Комплектующие")
 
                 sSQL = "SELECT * FROM SPR_Complect WHERE id =" & dSID
 
-            Case objIniFile.GetString("frmDirectory", "MSG56", "")
+            Case objIniFile.GetString("frmDirectory", "MSG56", "Программное обеспечение")
 
                 sSQL = "SELECT * FROM SPR_PO WHERE id =" & dSID
 
-            Case objIniFile.GetString("frmDirectory", "MSG33", "")
+            Case objIniFile.GetString("frmDirectory", "MSG33", "Корпус")
 
                 sSQL = "SELECT * FROM SPR_CASE WHERE id =" & dSID
 
-            Case objIniFile.GetString("frmDirectory", "MSG24", "")
+            Case objIniFile.GetString("frmDirectory", "MSG24", "Кардридер")
 
                 sSQL = "SELECT * FROM SPR_CREADER WHERE id =" & dSID
 
-            Case objIniFile.GetString("frmDirectory", "MSG31", "")
+            Case objIniFile.GetString("frmDirectory", "MSG31", "Блок питания")
 
                 sSQL = "SELECT * FROM SPR_BP WHERE id =" & dSID
 
@@ -1670,7 +1697,7 @@ err_:
 
         With rs
 
-            If tvDirectory.SelectedNode.Text = objIniFile.GetString("frmDirectory", "MSG48", "") Then
+            If tvDirectory.SelectedNode.Text = objIniFile.GetString("frmDirectory", "MSG48", "Производители") Then
 
                 cmbName.Text = .Fields("PROIZV").Value
             Else
@@ -1690,27 +1717,43 @@ err_:
             Select Case tvDirectory.SelectedNode.Text
 
 
-                Case objIniFile.GetString("frmDirectory", "MSG36", "")
+                Case objIniFile.GetString("frmDirectory", "MSG36", "Мастер")
 
                     If Not IsDBNull(.Fields("A")) Then
                         cmbName2.Text = .Fields("A").Value
                         cmb1.Text = .Fields("B").Value
                     End If
 
-                Case objIniFile.GetString("frmDirectory", "MSG51", "")
+                Case objIniFile.GetString("frmDirectory", "MSG51", "Оборудование (Другое-тип)")
 
                     If Not IsDBNull(.Fields("A")) Then
                         cmbIcon.Text = .Fields("A").Value
                     End If
 
+                    If Not IsDBNull(.Fields("B")) Then
+                        cmb1.Text = .Fields("B").Value
+                    End If
 
-                Case objIniFile.GetString("frmDirectory", "MSG56", "")
+
+                    'Case objIniFile.GetString("frmDirectory", "MSG55", "Комплектующие")
+
+                    '    If Not IsDBNull(.Fields("B")) Then
+                    '        cmbIcon.Text = .Fields("B").Value
+                    '    End If
+
+                    '    If Not IsDBNull(.Fields("A")) Then
+                    '        cmb1.Text = .Fields("A").Value
+                    '    End If
+
+
+
+                Case objIniFile.GetString("frmDirectory", "MSG56", "Программное обеспечение")
 
                     If Not IsDBNull(.Fields("A")) Then
                         cmbName2.Text = .Fields("A").Value
                     End If
 
-                Case objIniFile.GetString("frmDirectory", "MSG57", "")
+                Case objIniFile.GetString("frmDirectory", "MSG57", "Пользователь")
 
                     If Not IsDBNull(.Fields("A")) Then
                         cmbName2.Text = .Fields("A").Value
@@ -1724,7 +1767,7 @@ err_:
                     End If
             End Select
 
-            If tvDirectory.SelectedNode.Text = objIniFile.GetString("frmDirectory", "MSG36", "") Then
+            If tvDirectory.SelectedNode.Text = objIniFile.GetString("frmDirectory", "MSG36", "Мастер") Then
 
                 If Not IsDBNull(.Fields("C")) Then
                     cmb2.Text = .Fields("C").Value
@@ -1737,7 +1780,7 @@ err_:
             End If
 
 
-            If tvDirectory.SelectedNode.Text = objIniFile.GetString("frmDirectory", "MSG51", "") Then
+            If tvDirectory.SelectedNode.Text = objIniFile.GetString("frmDirectory", "MSG51", "Оборудование (Другое-тип)") Then
                 chkCont.Checked = False
 
 
@@ -1771,20 +1814,20 @@ err_:
         rs = Nothing
 
         sREALNAME = cmbName.Text
-        btnDirAdd.Text = objIniFile.GetString("frmDirectory", "MSG97", "")
+        btnDirAdd.Text = objIniFile.GetString("frmDirectory", "MSG97", "Сохранить")
 
 
 
     End Sub
 
     Private Sub frmDirectory_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Resize
-        tvDirectory.Height = Me.Height - 65
+        'tvDirectory.Height = Me.Height - 65
 
-        lvDirectory.Height = Me.Height - (gbSpr.Height + 70)
-        gbSpr.Top = lvDirectory.Height + 10
+        'lvDirectory.Height = Me.Height - (gbSpr.Height + 70)
+        'gbSpr.Top = lvDirectory.Height + 10
 
-        gbSpr.Width = Me.Width - (tvDirectory.Width + 20)
-        lvDirectory.Width = Me.Width - (tvDirectory.Width + 20)
+        'gbSpr.Width = Me.Width - (tvDirectory.Width + 20)
+        'lvDirectory.Width = Me.Width - (tvDirectory.Width + 20)
 
     End Sub
 
@@ -1792,7 +1835,7 @@ err_:
         On Error GoTo err_
         Dim objIniFile As New IniFile(sLANGPATH)
 
-        If tvDirectory.SelectedNode.Text = objIniFile.GetString("frmDirectory", "MSG41", "") Then
+        If tvDirectory.SelectedNode.Text = objIniFile.GetString("frmDirectory", "MSG41", "Кабинет") Then
 
 
             cmbName2.Items.Clear()
@@ -1841,7 +1884,7 @@ err_:
 
         Select Case tvDirectory.SelectedNode.Text
 
-            Case objIniFile.GetString("frmDirectory", "MSG57", "")
+            Case objIniFile.GetString("frmDirectory", "MSG57", "Пользователь")
 
                 '#######################################
                 'Пользователь экспериментально
@@ -1851,275 +1894,275 @@ err_:
                 rs = Nothing
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG27", "")
+            Case objIniFile.GetString("frmDirectory", "MSG27", "Оптические накопители")
                 rs = New ADODB.Recordset
                 rs.Open("Delete FROM SPR_OPTICAL WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
-            Case objIniFile.GetString("frmDirectory", "MSG3", "")
+            Case objIniFile.GetString("frmDirectory", "MSG3", "USB Устройства")
 
                 rs = New ADODB.Recordset
                 rs.Open("Delete FROM SPR_USB WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
-            Case objIniFile.GetString("frmDirectory", "MSG4", "")
+            Case objIniFile.GetString("frmDirectory", "MSG4", "ZIP")
                 rs = New ADODB.Recordset
                 rs.Open("Delete FROM spr_zip WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG5", "")
+            Case objIniFile.GetString("frmDirectory", "MSG5", "Акустические системы")
 
                 rs = New ADODB.Recordset
                 rs.Open("Delete FROM SPR_ASISTEM WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
-            Case objIniFile.GetString("frmDirectory", "MSG6", "")
+            Case objIniFile.GetString("frmDirectory", "MSG6", "Источники БП")
 
                 rs = New ADODB.Recordset
                 rs.Open("Delete FROM SPR_IBP WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG7", "")
+            Case objIniFile.GetString("frmDirectory", "MSG7", "Клавиатуры")
                 rs = New ADODB.Recordset
                 rs.Open("Delete FROM SPR_KEYBOARD WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG8", "")
+            Case objIniFile.GetString("frmDirectory", "MSG8", "Копиры")
                 rs = New ADODB.Recordset
                 rs.Open("Delete FROM SPR_KOPIR WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG34", "")
+            Case objIniFile.GetString("frmDirectory", "MSG34", "Модемы")
                 rs = New ADODB.Recordset
                 rs.Open("Delete FROM SPR_MODEM WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG9", "")
+            Case objIniFile.GetString("frmDirectory", "MSG9", "Мониторы")
                 rs = New ADODB.Recordset
                 rs.Open("Delete FROM SPR_MONITOR WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG10", "")
+            Case objIniFile.GetString("frmDirectory", "MSG10", "МФУ")
 
                 rs = New ADODB.Recordset
                 rs.Open("Delete FROM SPR_MFU WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
-            Case objIniFile.GetString("frmDirectory", "MSG11", "")
+            Case objIniFile.GetString("frmDirectory", "MSG11", "Мыши")
                 rs = New ADODB.Recordset
                 rs.Open("Delete FROM SPR_MOUSE WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG12", "")
+            Case objIniFile.GetString("frmDirectory", "MSG12", "Принтеры")
                 rs = New ADODB.Recordset
                 rs.Open("Delete FROM SPR_PRINTER WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG13", "")
+            Case objIniFile.GetString("frmDirectory", "MSG13", "Сетевые фильтры")
                 rs = New ADODB.Recordset
                 rs.Open("Delete FROM SPR_FS WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG14", "")
+            Case objIniFile.GetString("frmDirectory", "MSG14", "Сетевые устройства")
                 rs = New ADODB.Recordset
                 rs.Open("Delete FROM SPR_DEV_NET WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG15", "")
+            Case objIniFile.GetString("frmDirectory", "MSG15", "Сканер")
                 rs = New ADODB.Recordset
                 rs.Open("Delete FROM SPR_SCANER WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG16", "")
+            Case objIniFile.GetString("frmDirectory", "MSG16", "Телефон")
                 rs = New ADODB.Recordset
                 rs.Open("Delete FROM spr_phone WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG17", "")
+            Case objIniFile.GetString("frmDirectory", "MSG17", "Факс")
                 rs = New ADODB.Recordset
                 rs.Open("Delete FROM spr_fax WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG18", "")
+            Case objIniFile.GetString("frmDirectory", "MSG18", "Фотоаппарат")
                 rs = New ADODB.Recordset
                 rs.Open("Delete FROM spr_photo WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
-            Case objIniFile.GetString("frmDirectory", "MSG20", "")
+            Case objIniFile.GetString("frmDirectory", "MSG20", "Видео карты")
                 rs = New ADODB.Recordset
                 rs.Open("Delete FROM SPR_SVGA WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG21", "")
+            Case objIniFile.GetString("frmDirectory", "MSG21", "Дисководы")
                 rs = New ADODB.Recordset
                 rs.Open("Delete FROM SPR_FDD WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG22", "")
+            Case objIniFile.GetString("frmDirectory", "MSG22", "Жесткие диски")
                 rs = New ADODB.Recordset
                 rs.Open("Delete FROM SPR_HDD WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
-            Case objIniFile.GetString("frmDirectory", "MSG23", "")
+            Case objIniFile.GetString("frmDirectory", "MSG23", "Звуковые карты")
                 rs = New ADODB.Recordset
                 rs.Open("Delete FROM SPR_SOUND WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG25", "")
+            Case objIniFile.GetString("frmDirectory", "MSG25", "Материнские платы")
                 rs = New ADODB.Recordset
                 rs.Open("Delete FROM SPR_MB WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG26", "")
+            Case objIniFile.GetString("frmDirectory", "MSG26", "Модули памяти")
                 rs = New ADODB.Recordset
                 rs.Open("Delete FROM SPR_RAM WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG28", "")
+            Case objIniFile.GetString("frmDirectory", "MSG28", "Процессор")
                 rs = New ADODB.Recordset
                 rs.Open("Delete FROM SPR_CPU WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG29", "")
+            Case objIniFile.GetString("frmDirectory", "MSG29", "Сетевые карты")
                 rs = New ADODB.Recordset
                 rs.Open("Delete FROM SPR_NET WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG30", "")
+            Case objIniFile.GetString("frmDirectory", "MSG30", "Устройства PCI")
                 rs = New ADODB.Recordset
                 rs.Open("Delete FROM SPR_PCI WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG37", "")
+            Case objIniFile.GetString("frmDirectory", "MSG37", "Ответственный")
                 rs = New ADODB.Recordset
                 rs.Open("Delete FROM SPR_OTV WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG39", "")
+            Case objIniFile.GetString("frmDirectory", "MSG39", "Филиал")
 
                 RemoveBrainch(lvDirectory.Items.Item(lvDirectory.FocusedItem.Index).SubItems(1).Text)
 
-            Case objIniFile.GetString("frmDirectory", "MSG40", "")
+            Case objIniFile.GetString("frmDirectory", "MSG40", "Отдел")
 
                 RemoveDepartment(dSID)
 
-            Case objIniFile.GetString("frmDirectory", "MSG41", "")
+            Case objIniFile.GetString("frmDirectory", "MSG41", "Кабинет")
 
                 RemoveOffice(dSID)
 
-            Case objIniFile.GetString("frmDirectory", "MSG43", "")
+            Case objIniFile.GetString("frmDirectory", "MSG43", "Уровень заявки")
                 rs = New ADODB.Recordset
                 rs.Open("Delete FROM SPR_Uroven WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG44", "")
+            Case objIniFile.GetString("frmDirectory", "MSG44", "Уровень выполнения")
                 rs = New ADODB.Recordset
                 rs.Open("Delete FROM spr_vip WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG45", "")
+            Case objIniFile.GetString("frmDirectory", "MSG45", "Тип заявки")
                 rs = New ADODB.Recordset
                 rs.Open("Delete FROM spr_tip_z WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG47", "")
+            Case objIniFile.GetString("frmDirectory", "MSG47", "Поставщики")
                 rs = New ADODB.Recordset
                 rs.Open("Delete FROM SPR_Postav WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG48", "")
+            Case objIniFile.GetString("frmDirectory", "MSG48", "Производители")
 
                 Call RemoveProyzv(dSID)
 
-            Case objIniFile.GetString("frmDirectory", "MSG49", "")
+            Case objIniFile.GetString("frmDirectory", "MSG49", "Тип компьютера")
                 rs = New ADODB.Recordset
                 rs.Open("Delete FROM SPR_TIP WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG50", "")
+            Case objIniFile.GetString("frmDirectory", "MSG50", "Модель картриджа")
                 rs = New ADODB.Recordset
                 rs.Open("Delete FROM spr_cart WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG51", "")
+            Case objIniFile.GetString("frmDirectory", "MSG51", "Оборудование (Другое-тип)")
                 rs = New ADODB.Recordset
                 rs.Open("Delete FROM spr_other WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
-            Case objIniFile.GetString("frmDirectory", "MSG52", "")
+            Case objIniFile.GetString("frmDirectory", "MSG52", "Оборудование (Другое-устройства)")
                 rs = New ADODB.Recordset
                 rs.Open("Delete FROM SPR_OTH_DEV WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
-            Case objIniFile.GetString("frmDirectory", "MSG53", "")
+            Case objIniFile.GetString("frmDirectory", "MSG53", "Тип лицензии")
                 rs = New ADODB.Recordset
                 rs.Open("Delete FROM SPR_LIC WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG54", "")
+            Case objIniFile.GetString("frmDirectory", "MSG54", "Тип программного обеспечения")
                 rs = New ADODB.Recordset
                 rs.Open("Delete FROM SPR_TIP_PO WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG55", "")
+            Case objIniFile.GetString("frmDirectory", "MSG55", "Комплектующие")
                 rs = New ADODB.Recordset
                 rs.Open("Delete FROM SPR_Complect WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG56", "")
+            Case objIniFile.GetString("frmDirectory", "MSG56", "Программное обеспечение")
                 rs = New ADODB.Recordset
                 rs.Open("Delete FROM SPR_PO WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
-            Case objIniFile.GetString("frmDirectory", "MSG33", "")
+            Case objIniFile.GetString("frmDirectory", "MSG33", "Корпус")
                 rs = New ADODB.Recordset
                 rs.Open("Delete FROM SPR_CASE WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
-            Case objIniFile.GetString("frmDirectory", "MSG24", "")
+            Case objIniFile.GetString("frmDirectory", "MSG24", "Кардридер")
                 rs = New ADODB.Recordset
                 rs.Open("Delete FROM SPR_CREADER WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
-            Case objIniFile.GetString("frmDirectory", "MSG31", "")
+            Case objIniFile.GetString("frmDirectory", "MSG31", "Блок питания")
                 rs = New ADODB.Recordset
                 rs.Open("Delete FROM SPR_BP WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
-            Case objIniFile.GetString("frmDirectory", "MSG36", "")
+            Case objIniFile.GetString("frmDirectory", "MSG36", "Мастер")
                 rs = New ADODB.Recordset
                 rs.Open("Delete FROM SPR_Master WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
                 rs = Nothing
@@ -2128,7 +2171,7 @@ err_:
         End Select
 
 
-        btnDirAdd.Text = objIniFile.GetString("frmDirectory", "btnDirAdd", "")
+        btnDirAdd.Text = objIniFile.GetString("frmDirectory", "btnDirAdd", "Добавить")
 
 
     End Sub
@@ -2182,7 +2225,7 @@ err_:
         Dim objIniFile As New IniFile(sLANGPATH)
         eDTI = False
 
-        btnDirAdd.Text = objIniFile.GetString("frmDirectory", "btnDirAdd", "")
+        btnDirAdd.Text = objIniFile.GetString("frmDirectory", "btnDirAdd", "Добавить")
 
         cmbName.Text = ""
         cmbName2.Text = ""
@@ -2211,7 +2254,7 @@ err_:
 
         Dim objIniFile As New IniFile(sLANGPATH)
 
-        If tvDirectory.SelectedNode.Text = objIniFile.GetString("frmDirectory", "MSG47", "") Or tvDirectory.SelectedNode.Text = objIniFile.GetString("frmDirectory", "MSG39", "") Or tvDirectory.SelectedNode.Text = objIniFile.GetString("frmDirectory", "MSG40", "") Or tvDirectory.SelectedNode.Text = objIniFile.GetString("frmDirectory", "MSG41", "") Or tvDirectory.SelectedNode.Text = objIniFile.GetString("frmDirectory", "MSG48", "") Or tvDirectory.SelectedNode.Text = objIniFile.GetString("frmDirectory", "MSG36", "") Or tvDirectory.SelectedNode.Text = objIniFile.GetString("frmDirectory", "MSG37", "") Then
+        If tvDirectory.SelectedNode.Text = objIniFile.GetString("frmDirectory", "MSG47", "Поставщики") Or tvDirectory.SelectedNode.Text = objIniFile.GetString("frmDirectory", "MSG39", "Филиал") Or tvDirectory.SelectedNode.Text = objIniFile.GetString("frmDirectory", "MSG40", "Отдел") Or tvDirectory.SelectedNode.Text = objIniFile.GetString("frmDirectory", "MSG41", "Кабинет") Or tvDirectory.SelectedNode.Text = objIniFile.GetString("frmDirectory", "MSG48", "Производители") Or tvDirectory.SelectedNode.Text = objIniFile.GetString("frmDirectory", "MSG36", "Мастер") Or tvDirectory.SelectedNode.Text = objIniFile.GetString("frmDirectory", "MSG37", "Ответственный") Then
 
 
         Else
@@ -2247,7 +2290,7 @@ err_:
 
         Select Case tvDirectory.SelectedNode.Text
 
-            Case objIniFile.GetString("frmDirectory", "MSG57", "")
+            Case objIniFile.GetString("frmDirectory", "MSG57", "Пользователь")
 
                 '#######################################
                 'Пользователь экспериментально
@@ -2264,7 +2307,7 @@ err_:
 
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG27", "")
+            Case objIniFile.GetString("frmDirectory", "MSG27", "Оптические накопители")
 
                 If eDTI = False Then
                     sSQL = "SELECT * FROM SPR_OPTICAL"
@@ -2273,7 +2316,7 @@ err_:
                     sSQL = "SELECT * FROM SPR_OPTICAL WHERE id =" & dSID
                 End If
 
-            Case objIniFile.GetString("frmDirectory", "MSG3", "")
+            Case objIniFile.GetString("frmDirectory", "MSG3", "USB Устройства")
 
                 If eDTI = False Then
                     sSQL = "SELECT * FROM SPR_USB"
@@ -2282,7 +2325,7 @@ err_:
                 End If
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG4", "")
+            Case objIniFile.GetString("frmDirectory", "MSG4", "ZIP")
 
                 If eDTI = False Then
                     sSQL = "SELECT * FROM spr_zip"
@@ -2291,7 +2334,7 @@ err_:
                 End If
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG5", "")
+            Case objIniFile.GetString("frmDirectory", "MSG5", "Акустические системы")
 
                 If eDTI = False Then
                     sSQL = "SELECT * FROM SPR_ASISTEM"
@@ -2300,7 +2343,7 @@ err_:
                 End If
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG6", "")
+            Case objIniFile.GetString("frmDirectory", "MSG6", "Источники БП")
 
                 If eDTI = False Then
                     sSQL = "SELECT * FROM SPR_IBP"
@@ -2308,7 +2351,7 @@ err_:
                     sSQL = "SELECT * FROM SPR_IBP WHERE id =" & dSID
                 End If
 
-            Case objIniFile.GetString("frmDirectory", "MSG7", "")
+            Case objIniFile.GetString("frmDirectory", "MSG7", "Клавиатуры")
 
                 If eDTI = False Then
                     sSQL = "SELECT * FROM SPR_KEYBOARD"
@@ -2316,7 +2359,7 @@ err_:
                     sSQL = "SELECT * FROM SPR_KEYBOARD WHERE id =" & dSID
                 End If
 
-            Case objIniFile.GetString("frmDirectory", "MSG8", "")
+            Case objIniFile.GetString("frmDirectory", "MSG8", "Копиры")
 
                 If eDTI = False Then
                     sSQL = "SELECT * FROM SPR_KOPIR"
@@ -2330,7 +2373,7 @@ err_:
 
                 End If
 
-            Case objIniFile.GetString("frmDirectory", "MSG34", "")
+            Case objIniFile.GetString("frmDirectory", "MSG34", "Модемы")
 
                 If eDTI = False Then
                     sSQL = "SELECT * FROM SPR_MODEM"
@@ -2339,7 +2382,7 @@ err_:
                 End If
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG9", "")
+            Case objIniFile.GetString("frmDirectory", "MSG9", "Мониторы")
 
                 If eDTI = False Then
                     sSQL = "SELECT * FROM SPR_MONITOR"
@@ -2347,7 +2390,7 @@ err_:
                     sSQL = "SELECT * FROM SPR_MONITOR WHERE id =" & dSID
                 End If
 
-            Case objIniFile.GetString("frmDirectory", "MSG10", "")
+            Case objIniFile.GetString("frmDirectory", "MSG10", "МФУ")
 
                 If eDTI = False Then
                     sSQL = "SELECT * FROM SPR_MFU"
@@ -2359,7 +2402,7 @@ err_:
                     BASECOMP = Nothing
                 End If
 
-            Case objIniFile.GetString("frmDirectory", "MSG11", "")
+            Case objIniFile.GetString("frmDirectory", "MSG11", "Мыши")
 
                 If eDTI = False Then
                     sSQL = "SELECT * FROM SPR_MOUSE"
@@ -2367,7 +2410,7 @@ err_:
                     sSQL = "SELECT * FROM SPR_MOUSE WHERE id =" & dSID
                 End If
 
-            Case objIniFile.GetString("frmDirectory", "MSG12", "")
+            Case objIniFile.GetString("frmDirectory", "MSG12", "Принтеры")
 
                 If eDTI = False Then
                     sSQL = "SELECT * FROM SPR_PRINTER"
@@ -2379,7 +2422,7 @@ err_:
                     BASECOMP = Nothing
                 End If
 
-            Case objIniFile.GetString("frmDirectory", "MSG13", "")
+            Case objIniFile.GetString("frmDirectory", "MSG13", "Сетевые фильтры")
 
                 If eDTI = False Then
                     sSQL = "SELECT * FROM SPR_FS"
@@ -2387,7 +2430,7 @@ err_:
                     sSQL = "SELECT * FROM SPR_FS WHERE id =" & dSID
                 End If
 
-            Case objIniFile.GetString("frmDirectory", "MSG14", "")
+            Case objIniFile.GetString("frmDirectory", "MSG14", "Сетевые устройства")
 
                 If eDTI = False Then
                     sSQL = "SELECT * FROM SPR_DEV_NET"
@@ -2395,7 +2438,7 @@ err_:
                     sSQL = "SELECT * FROM SPR_DEV_NET WHERE id =" & dSID
                 End If
 
-            Case objIniFile.GetString("frmDirectory", "MSG15", "")
+            Case objIniFile.GetString("frmDirectory", "MSG15", "Сканер")
 
                 If eDTI = False Then
                     sSQL = "SELECT * FROM SPR_SCANER"
@@ -2403,7 +2446,7 @@ err_:
                     sSQL = "SELECT * FROM SPR_SCANER WHERE id =" & dSID
                 End If
 
-            Case objIniFile.GetString("frmDirectory", "MSG16", "")
+            Case objIniFile.GetString("frmDirectory", "MSG16", "Телефон")
 
                 If eDTI = False Then
                     sSQL = "SELECT * FROM spr_phone"
@@ -2411,7 +2454,7 @@ err_:
                     sSQL = "SELECT * FROM spr_phone WHERE id =" & dSID
                 End If
 
-            Case objIniFile.GetString("frmDirectory", "MSG17", "")
+            Case objIniFile.GetString("frmDirectory", "MSG17", "Факс")
 
                 If eDTI = False Then
                     sSQL = "SELECT * FROM spr_fax"
@@ -2419,7 +2462,7 @@ err_:
                     sSQL = "SELECT * FROM spr_fax WHERE id =" & dSID
                 End If
 
-            Case objIniFile.GetString("frmDirectory", "MSG18", "")
+            Case objIniFile.GetString("frmDirectory", "MSG18", "Фотоаппарат")
 
                 If eDTI = False Then
                     sSQL = "SELECT * FROM spr_photo"
@@ -2427,7 +2470,7 @@ err_:
                     sSQL = "SELECT * FROM spr_photo WHERE id =" & dSID
                 End If
 
-            Case objIniFile.GetString("frmDirectory", "MSG20", "")
+            Case objIniFile.GetString("frmDirectory", "MSG20", "Видео карты")
 
                 If eDTI = False Then
                     sSQL = "SELECT * FROM SPR_SVGA"
@@ -2435,7 +2478,7 @@ err_:
                     sSQL = "SELECT * FROM SPR_SVGA WHERE id =" & dSID
                 End If
 
-            Case objIniFile.GetString("frmDirectory", "MSG21", "")
+            Case objIniFile.GetString("frmDirectory", "MSG21", "Дисководы")
 
                 If eDTI = False Then
                     sSQL = "SELECT * FROM SPR_FDD"
@@ -2443,7 +2486,7 @@ err_:
                     sSQL = "SELECT * FROM SPR_FDD WHERE id =" & dSID
                 End If
 
-            Case objIniFile.GetString("frmDirectory", "MSG22", "")
+            Case objIniFile.GetString("frmDirectory", "MSG22", "Жесткие диски")
 
                 If eDTI = False Then
                     sSQL = "SELECT * FROM SPR_HDD"
@@ -2451,7 +2494,7 @@ err_:
                     sSQL = "SELECT * FROM SPR_HDD WHERE id =" & dSID
                 End If
 
-            Case objIniFile.GetString("frmDirectory", "MSG23", "")
+            Case objIniFile.GetString("frmDirectory", "MSG23", "Звуковые карты")
                 If eDTI = False Then
                     sSQL = "SELECT * FROM SPR_SOUND"
                 Else
@@ -2459,7 +2502,7 @@ err_:
                 End If
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG25", "")
+            Case objIniFile.GetString("frmDirectory", "MSG25", "Материнские платы")
 
                 If eDTI = False Then
                     sSQL = "SELECT * FROM SPR_MB"
@@ -2467,7 +2510,7 @@ err_:
                     sSQL = "SELECT * FROM SPR_MB WHERE id =" & dSID
                 End If
 
-            Case objIniFile.GetString("frmDirectory", "MSG26", "")
+            Case objIniFile.GetString("frmDirectory", "MSG26", "Модули памяти")
 
                 If eDTI = False Then
                     sSQL = "SELECT * FROM SPR_RAM"
@@ -2475,7 +2518,7 @@ err_:
                     sSQL = "SELECT * FROM SPR_RAM WHERE id =" & dSID
                 End If
 
-            Case objIniFile.GetString("frmDirectory", "MSG28", "")
+            Case objIniFile.GetString("frmDirectory", "MSG28", "Процессор")
 
                 If eDTI = False Then
                     sSQL = "SELECT * FROM SPR_CPU"
@@ -2483,7 +2526,7 @@ err_:
                     sSQL = "SELECT * FROM SPR_CPU WHERE id =" & dSID
                 End If
 
-            Case objIniFile.GetString("frmDirectory", "MSG29", "")
+            Case objIniFile.GetString("frmDirectory", "MSG29", "Сетевые карты")
 
                 If eDTI = False Then
                     sSQL = "SELECT * FROM SPR_NET"
@@ -2491,7 +2534,7 @@ err_:
                     sSQL = "SELECT * FROM SPR_NET WHERE id =" & dSID
                 End If
 
-            Case objIniFile.GetString("frmDirectory", "MSG30", "")
+            Case objIniFile.GetString("frmDirectory", "MSG30", "Устройства PCI")
 
                 If eDTI = False Then
                     sSQL = "SELECT * FROM SPR_PCI"
@@ -2499,7 +2542,7 @@ err_:
                     sSQL = "SELECT * FROM SPR_PCI WHERE id =" & dSID
                 End If
 
-            Case objIniFile.GetString("frmDirectory", "MSG36", "")
+            Case objIniFile.GetString("frmDirectory", "MSG36", "Мастер")
 
                 If eDTI = False Then
                     sSQL = "SELECT * FROM SPR_Master"
@@ -2576,7 +2619,7 @@ err_:
                     rscount = Nothing
                 End If
 
-            Case objIniFile.GetString("frmDirectory", "MSG37", "")
+            Case objIniFile.GetString("frmDirectory", "MSG37", "Ответственный")
 
 
                 If eDTI = False Then
@@ -2611,7 +2654,7 @@ err_:
                 'Добавить код проверяющий в оргтехники ответственного
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG39", "")
+            Case objIniFile.GetString("frmDirectory", "MSG39", "Филиал")
 
                 If eDTI = False Then
 
@@ -2664,11 +2707,11 @@ err_:
 
                 Call RefFilTree(frmComputers.lstGroups)
 
-                btnDirAdd.Text = objIniFile.GetString("frmDirectory", "btnDirAdd", "")
+                btnDirAdd.Text = objIniFile.GetString("frmDirectory", "btnDirAdd", "Добавить")
                 eDTI = False
                 Exit Sub
 
-            Case objIniFile.GetString("frmDirectory", "MSG40", "")
+            Case objIniFile.GetString("frmDirectory", "MSG40", "Отдел")
 
                 If eDTI = False Then
 
@@ -2717,11 +2760,11 @@ err_:
 
                 Call LOAD_LIST_SPR()
                 Call RefFilTree(frmComputers.lstGroups)
-                btnDirAdd.Text = objIniFile.GetString("frmDirectory", "btnDirAdd", "")
+                btnDirAdd.Text = objIniFile.GetString("frmDirectory", "btnDirAdd", "Добавить")
                 eDTI = False
                 Exit Sub
 
-            Case objIniFile.GetString("frmDirectory", "MSG41", "")
+            Case objIniFile.GetString("frmDirectory", "MSG41", "Кабинет")
 
                 If eDTI = False Then
 
@@ -2768,12 +2811,12 @@ err_:
                 Call LOAD_LIST_SPR()
                 Call RefFilTree(frmComputers.lstGroups)
 
-                btnDirAdd.Text = objIniFile.GetString("frmDirectory", "btnDirAdd", "")
+                btnDirAdd.Text = objIniFile.GetString("frmDirectory", "btnDirAdd", "Добавить")
                 eDTI = False
 
                 Exit Sub
 
-            Case objIniFile.GetString("frmDirectory", "MSG43", "")
+            Case objIniFile.GetString("frmDirectory", "MSG43", "Уровень заявки")
 
                 If eDTI = False Then
                     sSQL = "SELECT * FROM SPR_Uroven"
@@ -2806,13 +2849,13 @@ err_:
 
                 Call LOAD_LIST_SPR()
 
-                btnDirAdd.Text = objIniFile.GetString("frmDirectory", "btnDirAdd", "")
+                btnDirAdd.Text = objIniFile.GetString("frmDirectory", "btnDirAdd", "Добавить")
                 eDTI = False
 
                 Exit Sub
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG44", "")
+            Case objIniFile.GetString("frmDirectory", "MSG44", "Уровень выполнения")
 
                 If eDTI = False Then
                     sSQL = "SELECT * FROM spr_vip"
@@ -2820,7 +2863,7 @@ err_:
                     sSQL = "SELECT * FROM spr_vip WHERE id =" & dSID
                 End If
 
-            Case objIniFile.GetString("frmDirectory", "MSG45", "")
+            Case objIniFile.GetString("frmDirectory", "MSG45", "Тип заявки")
 
                 If eDTI = False Then
                     sSQL = "SELECT * FROM spr_tip_z"
@@ -2828,7 +2871,7 @@ err_:
                     sSQL = "SELECT * FROM spr_tip_z WHERE id =" & dSID
                 End If
 
-            Case objIniFile.GetString("frmDirectory", "MSG47", "")
+            Case objIniFile.GetString("frmDirectory", "MSG47", "Поставщики")
 
                 If eDTI = False Then
                     sSQL = "SELECT * FROM SPR_Postav"
@@ -2836,7 +2879,7 @@ err_:
                     sSQL = "SELECT * FROM SPR_Postav WHERE id =" & dSID
                 End If
 
-            Case objIniFile.GetString("frmDirectory", "MSG48", "")
+            Case objIniFile.GetString("frmDirectory", "MSG48", "Производители")
 
                 If eDTI = False Then
 
@@ -2855,14 +2898,14 @@ err_:
 
                 End If
 
-                btnDirAdd.Text = objIniFile.GetString("frmDirectory", "btnDirAdd", "")
+                btnDirAdd.Text = objIniFile.GetString("frmDirectory", "btnDirAdd", "Добавить")
                 eDTI = False
                 Call LOAD_LIST_SPR()
 
                 'Выходим из процедуры за ненадобностью
                 Exit Sub
 
-            Case objIniFile.GetString("frmDirectory", "MSG49", "")
+            Case objIniFile.GetString("frmDirectory", "MSG49", "Тип компьютера")
 
                 If eDTI = False Then
                     sSQL = "SELECT * FROM SPR_TIP"
@@ -2871,7 +2914,7 @@ err_:
                 End If
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG50", "")
+            Case objIniFile.GetString("frmDirectory", "MSG50", "Модель картриджа")
 
                 If eDTI = False Then
                     sSQL = "SELECT * FROM spr_cart"
@@ -2880,7 +2923,7 @@ err_:
                 End If
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG51", "")
+            Case objIniFile.GetString("frmDirectory", "MSG51", "Оборудование (Другое-тип)")
 
                 If eDTI = False Then
                     sSQL = "SELECT * FROM spr_other"
@@ -2898,13 +2941,15 @@ err_:
 
                     'TIP_COMPA
                 End If
+
                 sPAR1 = cmbIcon.Text
+                sPAR2 = cmb1.Text
 
                 If chkCont.Checked = True Then sPAR3 = 1 Else sPAR3 = ""
 
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG52", "")
+            Case objIniFile.GetString("frmDirectory", "MSG52", "Оборудование (Другое-устройства)")
 
                 If eDTI = False Then
                     sSQL = "SELECT * FROM SPR_OTH_DEV"
@@ -2912,10 +2957,19 @@ err_:
                     sSQL = "SELECT * FROM SPR_OTH_DEV WHERE id =" & dSID
                 End If
 
+
+                If Not (RSExists("COMPL", "Name", cmb1.Text)) Then
+
+                    AddOnePar(cmb1.Text, "Name", "SPR_Complect", cmb1)
+
+                End If
+
+
+
                 'sPAR1 = cmbIcon.Text
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG53", "")
+            Case objIniFile.GetString("frmDirectory", "MSG53", "Тип лицензии")
 
                 If eDTI = False Then
                     sSQL = "SELECT * FROM SPR_LIC"
@@ -2923,7 +2977,7 @@ err_:
                     sSQL = "SELECT * FROM SPR_LIC WHERE id =" & dSID
                 End If
 
-            Case objIniFile.GetString("frmDirectory", "MSG54", "")
+            Case objIniFile.GetString("frmDirectory", "MSG54", "Тип программного обеспечения")
 
 
                 If eDTI = False Then
@@ -2959,7 +3013,8 @@ err_:
 
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG55", "")
+            Case objIniFile.GetString("frmDirectory", "MSG55", "Комплектующие")
+
 
                 If eDTI = False Then
                     sSQL = "SELECT * FROM SPR_Complect"
@@ -2967,7 +3022,9 @@ err_:
                     sSQL = "SELECT * FROM SPR_Complect WHERE id =" & dSID
                 End If
 
-            Case objIniFile.GetString("frmDirectory", "MSG56", "")
+               
+
+            Case objIniFile.GetString("frmDirectory", "MSG56", "Программное обеспечение")
 
                 If eDTI = False Then
                     sSQL = "SELECT * FROM SPR_PO"
@@ -2984,7 +3041,7 @@ err_:
                 sPAR1 = cmbName2.Text
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG24", "")
+            Case objIniFile.GetString("frmDirectory", "MSG24", "Кардридер")
 
 
                 If eDTI = False Then
@@ -2994,7 +3051,7 @@ err_:
                 End If
 
 
-            Case objIniFile.GetString("frmDirectory", "MSG31", "")
+            Case objIniFile.GetString("frmDirectory", "MSG31", "Блок питания")
 
 
                 If eDTI = False Then
@@ -3003,7 +3060,7 @@ err_:
                     sSQL = "SELECT * FROM SPR_BP WHERE id =" & dSID
                 End If
 
-            Case objIniFile.GetString("frmDirectory", "MSG33", "")
+            Case objIniFile.GetString("frmDirectory", "MSG33", "Корпус")
 
 
                 If eDTI = False Then
@@ -3029,14 +3086,14 @@ err_:
             End If
 
 
-            If tvDirectory.SelectedNode.Text = objIniFile.GetString("frmDirectory", "MSG49", "") Then
+            If tvDirectory.SelectedNode.Text = objIniFile.GetString("frmDirectory", "MSG49", "Тип компьютера") Then
                 .Fields("tip").Value = LTrim(sNAME)
             Else
                 .Fields("Name").Value = LTrim(sNAME)
             End If
 
 
-            If tvDirectory.SelectedNode.Text = objIniFile.GetString("frmDirectory", "MSG53", "") Or tvDirectory.SelectedNode.Text = objIniFile.GetString("frmDirectory", "MSG45", "") Or tvDirectory.SelectedNode.Text = objIniFile.GetString("frmDirectory", "MSG44", "") Or tvDirectory.SelectedNode.Text = objIniFile.GetString("frmDirectory", "MSG43", "") Or tvDirectory.SelectedNode.Text = objIniFile.GetString("frmDirectory", "MSG55", "") Or tvDirectory.SelectedNode.Text = objIniFile.GetString("frmDirectory", "MSG54", "") Then
+            If tvDirectory.SelectedNode.Text = objIniFile.GetString("frmDirectory", "MSG53", "Тип лицензии") Or tvDirectory.SelectedNode.Text = objIniFile.GetString("frmDirectory", "MSG45", "Тип заявки") Or tvDirectory.SelectedNode.Text = objIniFile.GetString("frmDirectory", "MSG44", "Уровень выполнения") Or tvDirectory.SelectedNode.Text = objIniFile.GetString("frmDirectory", "MSG43", "Уровень заявки") Or tvDirectory.SelectedNode.Text = objIniFile.GetString("frmDirectory", "MSG54", "Тип программного обеспечения") Then
 
             Else
                 .Fields("Proizv").Value = sPRID
@@ -3055,7 +3112,7 @@ err_:
 
 
         Call LOAD_LIST_SPR()
-        btnDirAdd.Text = objIniFile.GetString("frmDirectory", "btnDirAdd", "")
+        btnDirAdd.Text = objIniFile.GetString("frmDirectory", "btnDirAdd", "Добавить")
         eDTI = False
     End Sub
 
@@ -3130,6 +3187,29 @@ err_:
             lvDirectory.CheckBoxes = False
             lvDirectory.MultiSelect = False
         End If
+
+    End Sub
+
+    Private Sub ToolStripButton1_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripButton1.Click
+        dSID = 0
+
+        If lvDirectory.Items.Count = 0 Then Exit Sub
+
+        For z = 0 To lvDirectory.SelectedItems.Count - 1
+            dSID = (lvDirectory.SelectedItems(z).Text)
+        Next
+
+        If cmbName.Text = "" Or Len(cmbName.Text) = 0 Then Exit Sub
+
+        If dSID = 0 Then Exit Sub
+
+
+        'frmDev.sTIPtehn = "IBP"
+
+        'frmDev.ShowDialog(Me)
+
+
+
 
     End Sub
 End Class

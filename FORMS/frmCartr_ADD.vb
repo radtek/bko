@@ -17,12 +17,12 @@
         Dim objIniFile As New IniFile(sLANGPATH)
 
         cmbTipC.Items.Clear()
-        cmbTipC.Items.Add(objIniFile.GetString("frmCartr_ADD", "MSG1", ""))
-        cmbTipC.Items.Add(objIniFile.GetString("frmCartr_ADD", "MSG2", ""))
-        cmbTipC.Items.Add(objIniFile.GetString("frmCartr_ADD", "MSG3", ""))
-        cmbTipC.Items.Add(objIniFile.GetString("frmCartr_ADD", "MSG4", ""))
-        cmbTipC.Items.Add(objIniFile.GetString("frmCartr_ADD", "MSG5", ""))
-        cmbTipC.Items.Add(objIniFile.GetString("frmCartr_ADD", "MSG6", ""))
+        cmbTipC.Items.Add(objIniFile.GetString("frmCartr_ADD", "MSG1", "Струйный"))
+        cmbTipC.Items.Add(objIniFile.GetString("frmCartr_ADD", "MSG2", "Матричный"))
+        cmbTipC.Items.Add(objIniFile.GetString("frmCartr_ADD", "MSG3", "Лазерный"))
+        cmbTipC.Items.Add(objIniFile.GetString("frmCartr_ADD", "MSG4", "Барабан"))
+        cmbTipC.Items.Add(objIniFile.GetString("frmCartr_ADD", "MSG5", "Термо Пленка"))
+        cmbTipC.Items.Add(objIniFile.GetString("frmCartr_ADD", "MSG6", "Фотокондуктор"))
 
         'dtSale.Value = Date.Today
 
@@ -276,7 +276,7 @@
         End If
 
         Dim objIniFile As New IniFile(sLANGPATH)
-        Me.btnAdd.Text = objIniFile.GetString("frmCartr_ADD", "btnAdd", "")
+        Me.btnAdd.Text = objIniFile.GetString("frmCartr_ADD", "btnAdd", "Добавить")
         CRTFU = False
         Me.Close()
 

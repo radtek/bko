@@ -48,8 +48,9 @@ Partial Class frmserviceDesc
         Me.ToolStripDropDownButton1 = New System.Windows.Forms.ToolStripDropDownButton()
         Me.btn_Z_to_Office = New System.Windows.Forms.ToolStripMenuItem()
         Me.Button1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.НарядToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.МатериальныйПропускToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btn_N_to_Office = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btn_MAT_to_Office = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuBlank = New System.Windows.Forms.ToolStripMenuItem()
         Me.CheckBox2 = New System.Windows.Forms.CheckBox()
         Me.chkNZ = New System.Windows.Forms.CheckBox()
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
@@ -57,7 +58,6 @@ Partial Class frmserviceDesc
         Me.lvRem2 = New System.Windows.Forms.ListView()
         Me.ilsCMD = New System.Windows.Forms.ImageList(Me.components)
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
@@ -300,7 +300,7 @@ Partial Class frmserviceDesc
         'ToolStripDropDownButton1
         '
         Me.ToolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.ToolStripDropDownButton1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btn_Z_to_Office, Me.Button1, Me.НарядToolStripMenuItem1, Me.МатериальныйПропускToolStripMenuItem1})
+        Me.ToolStripDropDownButton1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btn_Z_to_Office, Me.Button1, Me.btn_N_to_Office, Me.btn_MAT_to_Office, Me.MnuBlank})
         Me.ToolStripDropDownButton1.Image = CType(resources.GetObject("ToolStripDropDownButton1.Image"), System.Drawing.Image)
         Me.ToolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripDropDownButton1.Name = "ToolStripDropDownButton1"
@@ -319,17 +319,23 @@ Partial Class frmserviceDesc
         Me.Button1.Size = New System.Drawing.Size(207, 22)
         Me.Button1.Text = "Расписка"
         '
-        'НарядToolStripMenuItem1
+        'btn_N_to_Office
         '
-        Me.НарядToolStripMenuItem1.Name = "НарядToolStripMenuItem1"
-        Me.НарядToolStripMenuItem1.Size = New System.Drawing.Size(207, 22)
-        Me.НарядToolStripMenuItem1.Text = "Наряд"
+        Me.btn_N_to_Office.Name = "btn_N_to_Office"
+        Me.btn_N_to_Office.Size = New System.Drawing.Size(207, 22)
+        Me.btn_N_to_Office.Text = "Наряд"
         '
-        'МатериальныйПропускToolStripMenuItem1
+        'btn_MAT_to_Office
         '
-        Me.МатериальныйПропускToolStripMenuItem1.Name = "МатериальныйПропускToolStripMenuItem1"
-        Me.МатериальныйПропускToolStripMenuItem1.Size = New System.Drawing.Size(207, 22)
-        Me.МатериальныйПропускToolStripMenuItem1.Text = "Материальный пропуск"
+        Me.btn_MAT_to_Office.Name = "btn_MAT_to_Office"
+        Me.btn_MAT_to_Office.Size = New System.Drawing.Size(207, 22)
+        Me.btn_MAT_to_Office.Text = "Материальный пропуск"
+        '
+        'MnuBlank
+        '
+        Me.MnuBlank.Name = "MnuBlank"
+        Me.MnuBlank.Size = New System.Drawing.Size(207, 22)
+        Me.MnuBlank.Text = "Бланк"
         '
         'CheckBox2
         '
@@ -413,7 +419,6 @@ Partial Class frmserviceDesc
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.SplitContainer1.Panel1.ResumeLayout(False)
         Me.SplitContainer1.Panel2.ResumeLayout(False)
-        CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer1.ResumeLayout(False)
         Me.gbTree.ResumeLayout(False)
         Me.TableLayoutPanel3.ResumeLayout(False)
@@ -458,9 +463,10 @@ Partial Class frmserviceDesc
     Friend WithEvents ToolStripDropDownButton1 As System.Windows.Forms.ToolStripDropDownButton
     Friend WithEvents btn_Z_to_Office As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents Button1 As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents НарядToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents МатериальныйПропускToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents btn_N_to_Office As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents btn_MAT_to_Office As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents CheckBox1 As System.Windows.Forms.CheckBox
     Friend WithEvents ToolStrip1 As System.Windows.Forms.ToolStrip
     Friend WithEvents btnSearch As System.Windows.Forms.ToolStripButton
+    Friend WithEvents MnuBlank As System.Windows.Forms.ToolStripMenuItem
 End Class

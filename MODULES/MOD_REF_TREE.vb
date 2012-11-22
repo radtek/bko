@@ -112,7 +112,7 @@ Module MOD_REF_TREE
 
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
-        If Len(zBranche) = 0 Or zBranche = LNGIniFile.GetString("frmComputers", "MSG53", "") Then
+        If Len(zBranche) = 0 Or zBranche = LNGIniFile.GetString("frmComputers", "MSG53", "Все") Then
 
             zBranche = "0"
 
@@ -439,15 +439,18 @@ ERR1:
         '    frmComputers.OneStart = 1
         'End If
 
+
         Select Case Err.Number
             Case 3021 'ignore, no entries in list
-                'MsgBox(Err.Description, vbCritical, ProGramName)
+                ' MsgBox(Err.Description, vbCritical, ProGramName)
                 Resume Next
             Case Else
 
                 MsgBox(Err.Description, vbCritical, ProGramName)
 
         End Select
+
+        ' lstgroups.SelectedNode.ExpandAll()
 
 
     End Sub
@@ -1585,6 +1588,9 @@ ERR1:
             Case Else
 
         End Select
+
+
+
 
 
 

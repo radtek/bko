@@ -68,7 +68,7 @@
 
         lstGroups.Nodes.Add(nodeRoot)
 
-        Dim TempNode As New TreeNode(langfile.GetString("frmComputers", "MSG18", ""), 0, 0)
+        Dim TempNode As New TreeNode(langfile.GetString("frmComputers", "MSG18", "Компьютеры"), 0, 0)
         TempNode.Tag = "G1|2"
         nodeRoot.Nodes.Add(TempNode)
 

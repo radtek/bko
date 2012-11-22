@@ -366,8 +366,42 @@ err_:
             If Not IsDBNull(.Fields("NET_MAC_1").Value) Then frmComputers.txtOTHMAC.Text = .Fields("NET_MAC_1").Value
             If Not IsDBNull(.Fields("TIP_COMPA").Value) Then frmComputers.cmbOTHConnect.Text = .Fields("TIP_COMPA").Value
 
-            frmComputers.txtOTHphone.Text = .Fields("TELEPHONE").Value
 
+            'If Len(.Fields("NET_IP_1").Value) > 4 And TipTehn = "IBP" Then
+
+            '    frmComputers.chkSNMP.Checked = .Fields("SNMP").Value
+            '    frmComputers.chkSNMP.Visible = True
+
+
+            '    If Not IsDBNull(.Fields("SNMP_COMMUNITY").Value) Then
+
+            '        frmComputers.txtSNMP.Text = .Fields("SNMP_COMMUNITY").Value
+
+            '        Dim rsSNMP As ADODB.Recordset
+            '        Dim sTXT As String
+            '        rsSNMP = New ADODB.Recordset
+            '        rsSNMP.Open("SELECT B FROM SPR_IBP WHERE Name='" & .Fields("PRINTER_NAME_1").Value & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+            '        With rsSNMP
+
+            '            sTXT = .Fields("B").Value
+
+            '        End With
+            '        rsSNMP.Close()
+            '        rsSNMP = Nothing
+
+
+            '        If frmComputers.chkSNMP.Checked = True Then Call REQUEST_OID_IBP_DB(.Fields("NET_IP_1").Value, .Fields("SNMP_COMMUNITY").Value, sTXT)
+
+            '    End If
+
+            'Else
+
+            '    frmComputers.chkSNMP.Visible = False
+
+            'End If
+
+            frmComputers.txtOTHphone.Text = .Fields("TELEPHONE").Value
 
             If Not IsDBNull(.Fields("SFAktNo").Value) Then frmComputers.txtOTHSfN.Text = .Fields("SFAktNo").Value
             If Not IsDBNull(.Fields("CenaRub").Value) Then frmComputers.txtOTHcash.Text = .Fields("CenaRub").Value
@@ -2118,8 +2152,8 @@ err_:
             End If
 
             'frmMain lblShed
-            'LNGIniFile.GetString("frmMain", "lblShed", "")
-            frmMain.lblShed.Text = LNGIniFile.GetString("frmMain", "lblShed", "") & " " & "(" & "0" & "/" & SERT$ & ")"
+            'LNGIniFile.GetString("frmMain", "lblShed", "Напоминания")
+            frmMain.lblShed.Text = LNGIniFile.GetString("frmMain", "lblShed", "Напоминания") & " " & "(" & "0" & "/" & SERT$ & ")"
 
             sSQL = "SELECT COUNT(*) AS total_number FROM Sheduler Where foruser='" & UserNames & "'"
 
@@ -2151,7 +2185,7 @@ err_:
                             If .Fields(1).Value = UserNames Then
                                 intj = intj + 1
 
-                                frmMain.lblShed.Text = LNGIniFile.GetString("frmMain", "lblShed", "") & " " & "(" & intj & "/" & SERT$ & ")"
+                                frmMain.lblShed.Text = LNGIniFile.GetString("frmMain", "lblShed", "Напоминания") & " " & "(" & intj & "/" & SERT$ & ")"
                                 frmMain.lblShed.ForeColor = Color.Red
 
                             Else
@@ -2168,7 +2202,7 @@ err_:
 
             Else
 
-                frmMain.lblShed.Text = LNGIniFile.GetString("frmMain", "lblShed", "") & " " & "(" & "0" & "/" & SERT$ & ")"
+                frmMain.lblShed.Text = LNGIniFile.GetString("frmMain", "lblShed", "Напоминания") & " " & "(" & "0" & "/" & SERT$ & ")"
                 frmMain.lblShed.ForeColor = Color.Black
 
             End If
@@ -2248,8 +2282,8 @@ err_:
             End With
             rs.Close()
             rs = Nothing
-            'LNGIniFile.GetString("frmMain", "lblRem", "") & " " & 
-            frmMain.lblRem.Text = LNGIniFile.GetString("frmMain", "lblRem", "") & " " & "(" & "0" & "/" & SERT & ")"
+            'LNGIniFile.GetString("frmMain", "lblRem", "Заявки") & " " & 
+            frmMain.lblRem.Text = LNGIniFile.GetString("frmMain", "lblRem", "Заявки") & " " & "(" & "0" & "/" & SERT & ")"
 
             If SERT2 > 0 Then
 
@@ -2266,20 +2300,20 @@ err_:
 
                 If SERT3 > 0 Then
 
-                    frmMain.lblRem.Text = LNGIniFile.GetString("frmMain", "lblRem", "") & " " & "(" & SERT3 & "/" & SERT & ")"
+                    frmMain.lblRem.Text = LNGIniFile.GetString("frmMain", "lblRem", "Заявки") & " " & "(" & SERT3 & "/" & SERT & ")"
                     frmMain.lblRem.ForeColor = Color.Red
 
 
                 Else
 
-                    frmMain.lblRem.Text = LNGIniFile.GetString("frmMain", "lblRem", "") & " " & "(" & "0" & "/" & SERT & ")"
+                    frmMain.lblRem.Text = LNGIniFile.GetString("frmMain", "lblRem", "Заявки") & " " & "(" & "0" & "/" & SERT & ")"
                     frmMain.lblRem.ForeColor = Color.Black
 
                 End If
 
             Else
 
-                frmMain.lblRem.Text = LNGIniFile.GetString("frmMain", "lblRem", "") & " " & "(" & "0" & "/" & SERT & ")"
+                frmMain.lblRem.Text = LNGIniFile.GetString("frmMain", "lblRem", "Заявки") & " " & "(" & "0" & "/" & SERT & ")"
 
             End If
 
@@ -2582,6 +2616,9 @@ err_:
         On Error GoTo err_
 
         Dim client As New SmtpClient(smtp)
+        client.EnableSsl = True
+        client.Credentials = New Net.NetworkCredential("ldragon24@gmail.com", "lfplhf1vf!")
+
         Dim fromAdr As MailAddress = New MailAddress(frm, ProGramName, System.Text.Encoding.UTF8)
         Dim toAdr As MailAddress = New MailAddress(m1)
         Dim message As MailMessage = New MailMessage(fromAdr, toAdr)

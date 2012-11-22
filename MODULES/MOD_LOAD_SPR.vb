@@ -166,7 +166,7 @@ Module Mod_Load_SPR
         ' FillComboNET(frmComputers.cmbBranch, "FILIAL", "SPR_FILIAL", "", False, True)
 
         Dim LNGIniFile As New IniFile(sLANGPATH)
-        frmComputers.treebranche.Items.Add(LNGIniFile.GetString("frmComputers", "MSG53", ""))
+        frmComputers.treebranche.Items.Add(LNGIniFile.GetString("frmComputers", "MSG53", "Все"))
 
         FillComboNET(frmComputers.cmbBranch, "FILIAL", "SPR_FILIAL", "", False, True)
 

@@ -61,7 +61,7 @@ Public Class frmNetMagazin
 
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
-        If Len(zBranche) = 0 Or zBranche = LNGIniFile.GetString("frmComputers", "MSG53", "") Then
+        If Len(zBranche) = 0 Or zBranche = LNGIniFile.GetString("frmComputers", "MSG53", "Все") Then
 
             zBranche = "0"
 
@@ -349,7 +349,7 @@ ERR1:
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
         If Len(uname) = 0 Then
-            treebranche.Text = LNGIniFile.GetString("frmComputers", "MSG53", "")
+            treebranche.Text = LNGIniFile.GetString("frmComputers", "MSG53", "Все")
 
         Else
             treebranche.Text = uname
@@ -373,8 +373,14 @@ ERR1:
 
         On Error GoTo err_
 
+        Dim LNGIniFile As New IniFile(sLANGPATH)
+
         lvNetMagazin.Items.Clear()
         lvNetMagazin.Sorting = False
+
+        Label4.Text = "-"
+        Label5.Text = "-"
+        Label6.Text = "-"
 
         'TBL_NET_MAG
 
@@ -401,8 +407,54 @@ ERR1:
         rs.Close()
         rs = Nothing
 
+        Label4.Text = scCount
 
         If scCount = 0 Then Exit Sub
+
+
+        If sBDO_Pref <> "ROOT" Then
+
+            sSQL = "SELECT count(*) as t_N FROM TBL_NET_MAG where sID=" & Me.sBDO_count & " AND PREF='" & Me.sBDO_Pref & "' AND SVT <> 0"
+
+        Else
+
+            sSQL = "SELECT count(*) as t_N FROM TBL_NET_MAG where SVT <> 0"
+
+        End If
+
+
+        rs = New ADODB.Recordset
+        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        With rs
+            scCount = .Fields("t_n").Value
+        End With
+        rs.Close()
+        rs = Nothing
+
+        Label5.Text = scCount
+
+
+        If sBDO_Pref <> "ROOT" Then
+
+            sSQL = "SELECT sum(dlin_cab) as summa FROM TBL_NET_MAG where sID=" & Me.sBDO_count & " AND PREF='" & Me.sBDO_Pref & "'"
+
+        Else
+
+            sSQL = "SELECT sum(dlin_cab) as summa FROM TBL_NET_MAG"
+
+        End If
+
+
+        rs = New ADODB.Recordset
+        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        With rs
+            scCount = .Fields("summa").Value
+        End With
+        rs.Close()
+        rs = Nothing
+
+        Label6.Text = scCount & " " & LNGIniFile.GetString("frmNetMagazin", "MSG23", "м.")
+
 
 
 
@@ -477,7 +529,6 @@ ERR1:
 
                         rs1 = New ADODB.Recordset
                         rs1.Open("SELECT * FROM kompy where id=" & sIDs, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                        Dim LNGIniFile As New IniFile(sLANGPATH)
 
                         With rs1
 
@@ -592,11 +643,10 @@ ERR1:
 
                         rs1 = New ADODB.Recordset
                         rs1.Open("SELECT * FROM kompy where id=" & sIDs, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                        Dim LNGIniFile As New IniFile(sLANGPATH)
 
                         With rs1
 
-                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG14", "") & ": " & .Fields("NET_NAME").Value & " , (" & LNGIniFile.GetString("frmNetMagazin", "MSG19", "") & " " & .Fields("OTvetstvennyj").Value & ")")
+                            lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG14", "Сетевое оборудование") & ": " & .Fields("NET_NAME").Value & " , (" & LNGIniFile.GetString("frmNetMagazin", "MSG19", "Отв.:") & " " & .Fields("OTvetstvennyj").Value & ")")
 
 
                         End With
@@ -624,7 +674,7 @@ ERR1:
                 End If
 
 
-               
+
 
                 intCount = intCount + 1
                 .MoveNext()
@@ -757,7 +807,7 @@ err_:
 
                 sBDO_Pref = Trim(d(0))
                 sBDO_count = Trim(d(1))
-               
+
 
             Case "K"
 
@@ -789,7 +839,7 @@ err_:
         If lvNetMagazin.Items.Count = 0 Then Exit Sub
 
 
-        
+
 
         Me.sBDO_SVT_Pref = "PC"
 
@@ -852,56 +902,56 @@ err_:
 
                         Case "PC"
 
-                            sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG11", "")
+                            sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG11", "Компьютер")
                         Case "Printer"
 
-                            sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG6", "")
+                            sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG6", "Принтер")
                         Case "KOpir"
 
-                            sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG13", "")
+                            sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG13", "Копир")
                         Case "MONITOR"
-                            sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG3", "")
+                            sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG3", "Монитор")
                         Case "SCANER"
 
-                            sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG8", "")
+                            sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG8", "Сканер")
                         Case "NET"
 
-                            sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG14", "")
+                            sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG14", "Сетевое оборудование")
                         Case "PHOTO"
 
-                            sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG15", "")
+                            sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG15", "Фотоаппарат")
 
                         Case "OT"
 
                             sTXT = .Fields("NET_NAME").Value & " " & .Fields("TIP_COMPA").Value
                         Case "ZIP"
 
-                            sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG18", "")
+                            sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG18", "Дисковод ZIP")
                         Case "PHONE"
 
-                            sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG16", "")
+                            sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG16", "Телефон")
                         Case "MFU"
 
-                            sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG7", "")
+                            sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG7", "МФУ")
                         Case "FAX"
 
-                            sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG17", "")
+                            sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG17", "Факс")
 
                         Case "USB"
 
 
-                            sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG10", "")
+                            sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG10", "USB Устройство")
                         Case "IBP"
 
 
-                            sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG9", "")
+                            sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG9", "Источник бесперебойного питания")
                         Case "FS"
 
-                            sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG5", "")
+                            sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG5", "Сетевой фильтр")
 
                         Case "SOUND"
 
-                            sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG4", "")
+                            sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG4", "Акустическая система")
 
 
                     End Select
@@ -911,11 +961,11 @@ err_:
 
                         Case "PC"
 
-                            frmNetMag_Add.txtSVT.Text = sTXT & ": " & .Fields("NET_NAME").Value & " , (" & LNGIniFile.GetString("frmNetMagazin", "MSG19", "") & " " & .Fields("OTvetstvennyj").Value & ")"
+                            frmNetMag_Add.txtSVT.Text = sTXT & ": " & .Fields("NET_NAME").Value & " , (" & LNGIniFile.GetString("frmNetMagazin", "MSG19", "Отв.:") & " " & .Fields("OTvetstvennyj").Value & ")"
                             'Me.sBDO_SVT_count = .Fields("SVT").Value
                         Case Else
 
-                            frmNetMag_Add.txtKom.Text = sTXT & ": " & .Fields("NET_NAME").Value & " , (" & LNGIniFile.GetString("frmNetMagazin", "MSG19", "") & " " & .Fields("OTvetstvennyj").Value & ")"
+                            frmNetMag_Add.txtKom.Text = sTXT & ": " & .Fields("NET_NAME").Value & " , (" & LNGIniFile.GetString("frmNetMagazin", "MSG19", "Отв.:") & " " & .Fields("OTvetstvennyj").Value & ")"
 
                     End Select
 
@@ -949,7 +999,7 @@ err_:
 
                 With rs1
 
-                    frmNetMag_Add.txtKom.Text = LNGIniFile.GetString("frmNetMagazin", "MSG14", "") & ": " & .Fields("NET_NAME").Value & " , (" & LNGIniFile.GetString("frmNetMagazin", "MSG19", "") & " " & .Fields("OTvetstvennyj").Value & ")"
+                    frmNetMag_Add.txtKom.Text = LNGIniFile.GetString("frmNetMagazin", "MSG14", "Сетевое оборудование") & ": " & .Fields("NET_NAME").Value & " , (" & LNGIniFile.GetString("frmNetMagazin", "MSG19", "Отв.:") & " " & .Fields("OTvetstvennyj").Value & ")"
 
                 End With
                 rs1.Close()
@@ -994,7 +1044,7 @@ err_:
 
         Else
             Dim LNGIniFile As New IniFile(sLANGPATH)
-            If MsgBox(LNGIniFile.GetString("frmNetMagazin", "MSG20", "") & vbCrLf & LNGIniFile.GetString("frmNetMagazin", "MSG21", ""), vbExclamation + vbYesNo, ProGramName) = vbNo Then
+            If MsgBox(LNGIniFile.GetString("frmNetMagazin", "MSG20", "Будет произведено удаление розетки") & vbCrLf & LNGIniFile.GetString("frmNetMagazin", "MSG21", "Хотите продолжить?"), vbExclamation + vbYesNo, ProGramName) = vbNo Then
                 Exit Sub
             Else
 

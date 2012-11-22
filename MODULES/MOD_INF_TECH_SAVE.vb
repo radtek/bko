@@ -218,7 +218,6 @@ Err_:
     Public Sub Save_OT(Optional ByVal sSID As String = "")
         On Error GoTo Err_
 
-
         If Len(frmComputers.cmbOTH.Text) = 0 Or Len(frmComputers.cmbOTHFil.Text) = 0 Then
 
             MsgBox("Не заполнены обязательные поля", MsgBoxStyle.Information, ProGramName)
@@ -261,7 +260,6 @@ Err_:
 
         Select Case TipTehn
 
-
             Case "OT"
 
                 If Not RSExists("OTHER", "name", Trim(frmComputers.cmbOTHConnect.Text)) Then
@@ -279,7 +277,6 @@ Err_:
                 If Not RSExists("FAX", "name", Trim(frmComputers.cmbOTH.Text)) Then
                     AddTwoPar(frmComputers.cmbOTH.Text, frmComputers.PROiZV39.Text, "spr_fax", frmComputers.cmbOTH)
                 End If
-
 
             Case "PHONE"
 
@@ -339,8 +336,6 @@ Err_:
 
         End Select
 
-
-
         If Not RSExists("otv", "name", Trim(frmComputers.cmbOTHotv.Text)) Then
             AddOnePar(frmComputers.cmbOTHotv.Text, "NAME", "SPR_OTV", frmComputers.cmbOTHotv)
         End If
@@ -348,7 +343,6 @@ Err_:
         If Not RSExists("OTHD", "name", Trim(frmComputers.cmbOTH.Text)) Then
             AddTreePar(frmComputers.cmbOTH.Text, frmComputers.cmbOTHConnect.Text, frmComputers.PROiZV39.Text, "SPR_OTH_DEV", frmComputers.cmbOTH)
         End If
-
 
         Dim rs As ADODB.Recordset
         Dim unaPCL As String
@@ -417,6 +411,10 @@ sAR:
 
             .Fields("Spisan").Value = frmComputers.chkOTHspis.Checked
             .Fields("Balans").Value = frmComputers.chkOTHNNb.Checked
+
+            '.Fields("SNMP").Value = frmComputers.chkSNMP.Checked
+            '.Fields("SNMP_COMMUNITY").Value = frmComputers.txtSNMP.Text
+
 
 
             .Update()
@@ -1541,7 +1539,7 @@ sAR:
                 'Call SaveActivityToLogDB("Перемещение техники " & frmComputers.SelNde.Text & " из " & frmComputers.FilD & "/" & frmComputers.OtdD & " в " & sfilial & "/" & sOTDEL)
 
                 Dim langfile As New IniFile(sLANGPATH)
-                Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG52", "") & " " & frmComputers.lstGroups.SelectedNode.Text)
+                Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG52", "Перемещение техники") & " " & frmComputers.lstGroups.SelectedNode.Text)
 
 
 
@@ -3767,12 +3765,12 @@ Error_:
         Dim langfile As New IniFile(sLANGPATH)
 
 
-        If btAdd.Text = langfile.GetString("frmComputers", "MSG30", "") Then
-            Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG45", "") & " " & frmComputers.lstGroups.SelectedNode.Text)
+        If btAdd.Text = langfile.GetString("frmComputers", "MSG30", "Добавить") Then
+            Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG45", "Добавление заметки для") & " " & frmComputers.lstGroups.SelectedNode.Text)
             sSQL = "Select * from Zametki"
 
         Else
-            Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG46", "") & " " & frmComputers.lstGroups.SelectedNode.Text)
+            Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG46", "Редактирование заметки для") & " " & frmComputers.lstGroups.SelectedNode.Text)
             sSQL = "Select * from Zametki WHERE id =" & frmComputers.zCOUNT
 
         End If
@@ -3797,7 +3795,7 @@ Error_:
 
         With rs
 
-            If btAdd.Text = langfile.GetString("frmComputers", "MSG42", "") Then
+            If btAdd.Text = langfile.GetString("frmComputers", "MSG42", "Сохранить") Then
                 '.Edit
             Else
                 .AddNew()
@@ -3819,7 +3817,7 @@ Error_:
         rs.Close()
         rs = Nothing
 
-        btAdd.Text = langfile.GetString("frmComputers", "MSG30", "")
+        btAdd.Text = langfile.GetString("frmComputers", "MSG30", "Добавить")
         DateNotes.Value = Date.Today
         NotesMaster.Text = ""
         textNotes.Text = ""
@@ -3838,7 +3836,7 @@ Error_:
         If frmComputers.portEDT = True Then
         Else
             If frmComputers.lvNetPort.Items.Count >= frmComputers.txtNetPort.Text Then
-                MsgBox(langfile.GetString("frmComputers", "MSG47", ""), MsgBoxStyle.Information, ProGramName)
+                MsgBox(langfile.GetString("frmComputers", "MSG47", "Количество портов достигло допустимого предела для этого устройства"), MsgBoxStyle.Information, ProGramName)
                 Exit Sub
             End If
         End If
@@ -3889,7 +3887,7 @@ Error_:
         Dim Us1 As String
         Dim Us2 As String
 
-        If frmComputers.cmdUserAdd.Text = langfile.GetString("frmComputers", "MSG42", "") Then
+        If frmComputers.cmdUserAdd.Text = langfile.GetString("frmComputers", "MSG42", "Сохранить") Then
 
             Dim USERCOMP As ADODB.Recordset
             USERCOMP = New ADODB.Recordset
@@ -3909,11 +3907,11 @@ Error_:
         Dim rs As ADODB.Recordset
         rs = New ADODB.Recordset
 
-        If frmComputers.cmdUserAdd.Text = langfile.GetString("frmComputers", "MSG30", "") Then
-            Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG48", "") & " " & frmComputers.lstGroups.SelectedNode.Text)
+        If frmComputers.cmdUserAdd.Text = langfile.GetString("frmComputers", "MSG30", "Добавить") Then
+            Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG48", "Добавление пользователя на компьютере") & " " & frmComputers.lstGroups.SelectedNode.Text)
             sSQL = "Select * from USER_COMP"
         Else
-            Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG49", "") & " " & frmComputers.lstGroups.SelectedNode.Text)
+            Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG49", "Редактирование пользователя на компьютере") & " " & frmComputers.lstGroups.SelectedNode.Text)
             sSQL = "Select * from USER_COMP WHERE id =" & frmComputers.uCOUNT
         End If
 
@@ -3921,7 +3919,7 @@ Error_:
 
         With rs
 
-            If frmComputers.cmdUserAdd.Text = langfile.GetString("frmComputers", "MSG42", "") Then
+            If frmComputers.cmdUserAdd.Text = langfile.GetString("frmComputers", "MSG42", "Сохранить") Then
                 '.Edit
             Else
                 .AddNew()
@@ -3933,7 +3931,7 @@ Error_:
             .Fields("FIO").Value = frmComputers.txtUserFIO.Text
             .Fields("icq").Value = frmComputers.txtUserIcq.Text
 
-            If frmComputers.cmdUserAdd.Text = langfile.GetString("frmComputers", "MSG42", "") Then
+            If frmComputers.cmdUserAdd.Text = langfile.GetString("frmComputers", "MSG42", "Сохранить") Then
 
 
                 If Us1 = frmComputers.txtUserPass.Text Or Us1 = Nothing Then
@@ -4009,7 +4007,7 @@ Error_:
 
 
 
-        frmComputers.cmdUserAdd.Text = langfile.GetString("frmComputers", "MSG30", "")
+        frmComputers.cmdUserAdd.Text = langfile.GetString("frmComputers", "MSG30", "Добавить")
 
         frmComputers.txtUserName.Text = ""
         frmComputers.txtUserPass.Text = ""
@@ -4050,7 +4048,7 @@ Error_:
         End Select
 
 
-        If frmComputers.btnBRNotesAdd.Text = langfile.GetString("frmComputers", "MSG42", "") Then
+        If frmComputers.btnBRNotesAdd.Text = langfile.GetString("frmComputers", "MSG42", "Сохранить") Then
 
             Dim z As Integer
 
@@ -4067,7 +4065,7 @@ Error_:
 
         With rs
 
-            If frmComputers.btnBRNotesAdd.Text = langfile.GetString("frmComputers", "MSG42", "") Then
+            If frmComputers.btnBRNotesAdd.Text = langfile.GetString("frmComputers", "MSG42", "Сохранить") Then
                 '.Edit
             Else
                 .AddNew()

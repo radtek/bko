@@ -1,101 +1,6 @@
-e:\Develop\NET\BKO\basekomp_net\bin\Release\basekomp_net.exe.config
-e:\Develop\NET\BKO\basekomp_net\bin\Release\basekomp_net.exe
-e:\Develop\NET\BKO\basekomp_net\bin\Release\basekomp_net.pdb
-e:\Develop\NET\BKO\basekomp_net\bin\Release\basekomp_net.xml
-e:\Develop\NET\BKO\basekomp_net\bin\Release\Interop.JRO.dll
-e:\Develop\NET\BKO\basekomp_net\obj\Release\ResolveAssemblyReference.cache
-e:\Develop\NET\BKO\basekomp_net\obj\Release\Interop.JRO.dll
-e:\Develop\NET\BKO\basekomp_net\obj\Release\basekomp_net.vbproj.ResolveComReference.cache
-e:\Develop\NET\BKO\basekomp_net\obj\Release\basekomp_net.frmAbout.resources
-e:\Develop\NET\BKO\basekomp_net\obj\Release\basekomp_net.frmARHIV.resources
-e:\Develop\NET\BKO\basekomp_net\obj\Release\basekomp_net.frmCartr_ADD.resources
-e:\Develop\NET\BKO\basekomp_net\obj\Release\basekomp_net.frmCartr_Add_Zap.resources
-e:\Develop\NET\BKO\basekomp_net\obj\Release\basekomp_net.frmComputers.resources
-e:\Develop\NET\BKO\basekomp_net\obj\Release\basekomp_net.frmDirectory.resources
-e:\Develop\NET\BKO\basekomp_net\obj\Release\basekomp_net.frmLogin.resources
-e:\Develop\NET\BKO\basekomp_net\obj\Release\basekomp_net.frmMain.resources
-e:\Develop\NET\BKO\basekomp_net\obj\Release\basekomp_net.frmReports.resources
-e:\Develop\NET\BKO\basekomp_net\obj\Release\basekomp_net.frmSclad.resources
-e:\Develop\NET\BKO\basekomp_net\obj\Release\basekomp_net.frmSclad_ADD.resources
-e:\Develop\NET\BKO\basekomp_net\obj\Release\basekomp_net.frmSclad_treb.resources
-e:\Develop\NET\BKO\basekomp_net\obj\Release\basekomp_net.frmSetup.resources
-e:\Develop\NET\BKO\basekomp_net\obj\Release\basekomp_net.frmSoftware.resources
-e:\Develop\NET\BKO\basekomp_net\obj\Release\basekomp_net.frmSplash.resources
-e:\Develop\NET\BKO\basekomp_net\obj\Release\basekomp_net.frmserviceDesc.resources
-e:\Develop\NET\BKO\basekomp_net\obj\Release\basekomp_net.frmService_add.resources
-e:\Develop\NET\BKO\basekomp_net\obj\Release\basekomp_net.frmservice_add_otvets.resources
-e:\Develop\NET\BKO\basekomp_net\obj\Release\basekomp_net.Resources.resources
-e:\Develop\NET\BKO\basekomp_net\obj\Release\basekomp_net.vbproj.GenerateResource.Cache
-e:\Develop\NET\BKO\basekomp_net\obj\Release\basekomp_net.exe
-e:\Develop\NET\BKO\basekomp_net\obj\Release\basekomp_net.xml
-e:\Develop\NET\BKO\basekomp_net\obj\Release\basekomp_net.pdb
-e:\Develop\NET\BKO\basekomp_net\obj\Release\basekomp_net.frmSearch.resources
-e:\Develop\NET\BKO\basekomp_net\obj\Release\basekomp_net.frmLOG.resources
-e:\Develop\NET\BKO\basekomp_net\bin\Release\ADODB.dll
-e:\Develop\NET\BKO\basekomp_net\obj\Release\basekomp_net.frmAct_Treb.resources
-e:\Develop\NET\BKO\basekomp_net\obj\Release\basekomp_net.frmSheduler.resources
-e:\Develop\NET\BKO\basekomp_net\obj\Release\basekomp_net.frmSQL.resources
-e:\Develop\NET\BKO\basekomp_net\obj\Release\basekomp_net.frmGarCPL.resources
-C:\Users\Alex\Documents\Visual Studio 2008\Projects\BKO_17\BKO_17\bin\Release\basekomp_net.exe.config
-C:\Users\Alex\Documents\Visual Studio 2008\Projects\BKO_17\BKO_17\obj\Release\Interop.JRO.dll
-C:\Users\Alex\Documents\Visual Studio 2008\Projects\BKO_17\BKO_17\obj\Release\basekomp_net.vbproj.ResolveComReference.cache
-C:\Users\Alex\Documents\Visual Studio 2008\Projects\BKO_17\BKO_17\obj\Release\basekomp_net.exe
-C:\Users\Alex\Documents\Visual Studio 2008\Projects\BKO_17\BKO_17\obj\Release\basekomp_net.xml
-C:\Users\Alex\Documents\Visual Studio 2008\Projects\BKO_17\BKO_17\obj\Release\basekomp_net.pdb
-C:\Users\Alex\Documents\Visual Studio 2008\Projects\BKO_17\BKO_17\bin\Release\basekomp_net.exe.manifest
-C:\Users\Alex\Documents\Visual Studio 2008\Projects\BKO_17\BKO_17\bin\Release\basekomp_net.application
-C:\Users\Alex\Documents\Visual Studio 2008\Projects\BKO_17\BKO_17\bin\Release\basekomp_net.exe
-C:\Users\Alex\Documents\Visual Studio 2008\Projects\BKO_17\BKO_17\bin\Release\basekomp_net.pdb
-C:\Users\Alex\Documents\Visual Studio 2008\Projects\BKO_17\BKO_17\bin\Release\basekomp_net.xml
-C:\Users\Alex\Documents\Visual Studio 2008\Projects\BKO_17\BKO_17\bin\Release\ADODB.dll
-C:\Users\Alex\Documents\Visual Studio 2008\Projects\BKO_17\BKO_17\bin\Release\Interop.JRO.dll
-C:\Users\Alex\Documents\Visual Studio 2008\Projects\BKO_17\BKO_17\obj\Release\ResolveAssemblyReference.cache
-C:\Users\Alex\Documents\Visual Studio 2008\Projects\BKO_17\BKO_17\obj\Release\basekomp_net.frmAbout.resources
-C:\Users\Alex\Documents\Visual Studio 2008\Projects\BKO_17\BKO_17\obj\Release\basekomp_net.frmAct_Treb.resources
-C:\Users\Alex\Documents\Visual Studio 2008\Projects\BKO_17\BKO_17\obj\Release\basekomp_net.frmARHIV.resources
-C:\Users\Alex\Documents\Visual Studio 2008\Projects\BKO_17\BKO_17\obj\Release\basekomp_net.frmCartr_ADD.resources
-C:\Users\Alex\Documents\Visual Studio 2008\Projects\BKO_17\BKO_17\obj\Release\basekomp_net.frmCartr_Add_Zap.resources
-C:\Users\Alex\Documents\Visual Studio 2008\Projects\BKO_17\BKO_17\obj\Release\basekomp_net.frmComputers.resources
-C:\Users\Alex\Documents\Visual Studio 2008\Projects\BKO_17\BKO_17\obj\Release\basekomp_net.frmDirectory.resources
-C:\Users\Alex\Documents\Visual Studio 2008\Projects\BKO_17\BKO_17\obj\Release\basekomp_net.frmGarCPL.resources
-C:\Users\Alex\Documents\Visual Studio 2008\Projects\BKO_17\BKO_17\obj\Release\basekomp_net.frmLOG.resources
-C:\Users\Alex\Documents\Visual Studio 2008\Projects\BKO_17\BKO_17\obj\Release\basekomp_net.frmLogin.resources
-C:\Users\Alex\Documents\Visual Studio 2008\Projects\BKO_17\BKO_17\obj\Release\basekomp_net.frmMain.resources
-C:\Users\Alex\Documents\Visual Studio 2008\Projects\BKO_17\BKO_17\obj\Release\basekomp_net.frmReports.resources
-C:\Users\Alex\Documents\Visual Studio 2008\Projects\BKO_17\BKO_17\obj\Release\basekomp_net.frmSclad.resources
-C:\Users\Alex\Documents\Visual Studio 2008\Projects\BKO_17\BKO_17\obj\Release\basekomp_net.frmSclad_ADD.resources
-C:\Users\Alex\Documents\Visual Studio 2008\Projects\BKO_17\BKO_17\obj\Release\basekomp_net.frmSclad_treb.resources
-C:\Users\Alex\Documents\Visual Studio 2008\Projects\BKO_17\BKO_17\obj\Release\basekomp_net.frmSearch.resources
-C:\Users\Alex\Documents\Visual Studio 2008\Projects\BKO_17\BKO_17\obj\Release\basekomp_net.frmSetup.resources
-C:\Users\Alex\Documents\Visual Studio 2008\Projects\BKO_17\BKO_17\obj\Release\basekomp_net.frmSheduler.resources
-C:\Users\Alex\Documents\Visual Studio 2008\Projects\BKO_17\BKO_17\obj\Release\basekomp_net.frmSoftware.resources
-C:\Users\Alex\Documents\Visual Studio 2008\Projects\BKO_17\BKO_17\obj\Release\basekomp_net.frmSplash.resources
-C:\Users\Alex\Documents\Visual Studio 2008\Projects\BKO_17\BKO_17\obj\Release\basekomp_net.frmserviceDesc.resources
-C:\Users\Alex\Documents\Visual Studio 2008\Projects\BKO_17\BKO_17\obj\Release\basekomp_net.frmService_add.resources
-C:\Users\Alex\Documents\Visual Studio 2008\Projects\BKO_17\BKO_17\obj\Release\basekomp_net.frmservice_add_otvets.resources
-C:\Users\Alex\Documents\Visual Studio 2008\Projects\BKO_17\BKO_17\obj\Release\basekomp_net.frmSQL.resources
-C:\Users\Alex\Documents\Visual Studio 2008\Projects\BKO_17\BKO_17\obj\Release\basekomp_net.Resources.resources
-C:\Users\Alex\Documents\Visual Studio 2008\Projects\BKO_17\BKO_17\obj\Release\basekomp_net.vbproj.GenerateResource.Cache
-C:\Users\Alex\Documents\Visual Studio 2008\Projects\BKO_17\BKO_17\obj\Release\basekomp_net.TrustInfo.xml
-C:\Users\Alex\Documents\Visual Studio 2008\Projects\BKO_17\BKO_17\obj\Release\basekomp_net.exe.manifest
-C:\Users\Alex\Documents\Visual Studio 2008\Projects\BKO_17\BKO_17\obj\Release\basekomp_net.application
-C:\Users\Alex\Documents\Visual Studio 2008\Projects\BKO_17\BKO_17\obj\Release\basekomp_net.frmCartr2.resources
-e:\Develop\NET\BKO\basekomp_net\obj\Release\basekomp_net.frm_os3.resources
-e:\Develop\NET\BKO\basekomp_net\bin\Release\Interop.Word.dll
-e:\Develop\NET\BKO\basekomp_net\obj\Release\Interop.Word.dll
-e:\Develop\NET\BKO\basekomp_net\bin\Release\Interop.Excel.dll
-e:\Develop\NET\BKO\basekomp_net\obj\Release\Interop.Excel.dll
-e:\Develop\NET\BKO\basekomp_net\obj\Release\basekomp_net.frmCRT3.resources
-e:\Develop\NET\BKO\basekomp_net\obj\Release\basekomp_net.frmTreb_Act_treb.resources
-e:\Develop\NET\BKO\basekomp_net\obj\Release\basekomp_net.frmACT_OS_Act_treb.resources
-e:\Develop\NET\BKO\basekomp_net\obj\Release\basekomp_net.frm_wmi.resources
-e:\Develop\NET\BKO\basekomp_net\obj\Release\basekomp_net.QrCode.resources
 d:\_TEMP\OTHER\BC2.NET\bin\Release\basekomp_net.exe.config
 d:\_TEMP\OTHER\BC2.NET\obj\Release\Interop.JRO.dll
 d:\_TEMP\OTHER\BC2.NET\obj\Release\basekomp_net.vbproj.ResolveComReference.cache
-d:\_TEMP\OTHER\BC2.NET\obj\Release\basekomp_net.exe
-d:\_TEMP\OTHER\BC2.NET\obj\Release\basekomp_net.xml
-d:\_TEMP\OTHER\BC2.NET\obj\Release\basekomp_net.pdb
 d:\_TEMP\OTHER\BC2.NET\bin\Release\basekomp_net.exe
 d:\_TEMP\OTHER\BC2.NET\bin\Release\basekomp_net.pdb
 d:\_TEMP\OTHER\BC2.NET\bin\Release\basekomp_net.xml
@@ -137,17 +42,79 @@ d:\_TEMP\OTHER\BC2.NET\obj\Release\basekomp_net.frm_os3.resources
 d:\_TEMP\OTHER\BC2.NET\obj\Release\basekomp_net.frm_wmi.resources
 d:\_TEMP\OTHER\BC2.NET\obj\Release\basekomp_net.QrCode.resources
 d:\_TEMP\OTHER\BC2.NET\obj\Release\basekomp_net.Resources.resources
-d:\_TEMP\OTHER\BC2.NET\obj\Release\GenerateResource-ResGen.read.1.tlog
 d:\_TEMP\OTHER\BC2.NET\obj\Release\GenerateResource.read.1.tlog
-d:\_TEMP\OTHER\BC2.NET\obj\Release\ResGen.read.1.tlog
-d:\_TEMP\OTHER\BC2.NET\obj\Release\GenerateResource-ResGen.write.1.tlog
 d:\_TEMP\OTHER\BC2.NET\obj\Release\GenerateResource.write.1.tlog
-d:\_TEMP\OTHER\BC2.NET\obj\Release\ResGen.write.1.tlog
+d:\_TEMP\OTHER\BC2.NET\obj\Release\basekomp_net.exe
+d:\_TEMP\OTHER\BC2.NET\obj\Release\basekomp_net.xml
+d:\_TEMP\OTHER\BC2.NET\obj\Release\basekomp_net.pdb
+d:\_TEMP\OTHER\BC2.NET\bin\Release\SnmpSharpNet.dll
+d:\_TEMP\OTHER\BC2.NET\obj\Release\basekomp_net.frmDev.resources
+D:\_TEMP\OTHER\BC2.NET\bin\Release\Microsoft.Office.Interop.Excel.dll
+D:\_TEMP\OTHER\BC2.NET\bin\Release\Microsoft.Office.Interop.Word.dll
+D:\_TEMP\OTHER\BC2.NET\obj\Release\GenerateResource-ResGen.read.1.tlog
+D:\_TEMP\OTHER\BC2.NET\obj\Release\GenerateResource-ResGen.write.1.tlog
+F:\BC2.NET\bin\Release\basekomp_net.exe.config
+F:\BC2.NET\obj\Release\Interop.JRO.dll
+F:\BC2.NET\obj\Release\basekomp_net.vbproj.ResolveComReference.cache
+F:\BC2.NET\obj\Release\basekomp_net.exe
+F:\BC2.NET\obj\Release\basekomp_net.xml
+F:\BC2.NET\obj\Release\basekomp_net.pdb
+F:\BC2.NET\bin\Release\basekomp_net.exe
+F:\BC2.NET\bin\Release\basekomp_net.pdb
+F:\BC2.NET\bin\Release\basekomp_net.xml
+F:\BC2.NET\bin\Release\SnmpSharpNet.dll
+F:\BC2.NET\bin\Release\ADODB.dll
+F:\BC2.NET\bin\Release\Microsoft.Office.Interop.Excel.dll
+F:\BC2.NET\bin\Release\Microsoft.Office.Interop.Word.dll
+F:\BC2.NET\bin\Release\Interop.JRO.dll
+F:\BC2.NET\obj\Release\ResolveAssemblyReference.cache
+F:\BC2.NET\obj\Release\basekomp_net.frmAbout.resources
+F:\BC2.NET\obj\Release\basekomp_net.frmACT_OS_Act_treb.resources
+F:\BC2.NET\obj\Release\basekomp_net.frmAct_Treb.resources
+F:\BC2.NET\obj\Release\basekomp_net.frmARHIV.resources
+F:\BC2.NET\obj\Release\basekomp_net.frmCartr_ADD.resources
+F:\BC2.NET\obj\Release\basekomp_net.frmCartr_Add_Zap.resources
+F:\BC2.NET\obj\Release\basekomp_net.frmComputers.resources
+F:\BC2.NET\obj\Release\basekomp_net.frmCRT3.resources
+F:\BC2.NET\obj\Release\basekomp_net.frmDev.resources
+F:\BC2.NET\obj\Release\basekomp_net.frmDirectory.resources
+F:\BC2.NET\obj\Release\basekomp_net.frmGarCPL.resources
+F:\BC2.NET\obj\Release\basekomp_net.frmLOG.resources
+F:\BC2.NET\obj\Release\basekomp_net.frmLogin.resources
+F:\BC2.NET\obj\Release\basekomp_net.frmMain.resources
+F:\BC2.NET\obj\Release\basekomp_net.frmNetMagazin.resources
+F:\BC2.NET\obj\Release\basekomp_net.frmNetMag_Add.resources
+F:\BC2.NET\obj\Release\basekomp_net.frmNetMag_selectSVT.resources
+F:\BC2.NET\obj\Release\basekomp_net.frmPPR.resources
+F:\BC2.NET\obj\Release\basekomp_net.frmReports.resources
+F:\BC2.NET\obj\Release\basekomp_net.frmSclad.resources
+F:\BC2.NET\obj\Release\basekomp_net.frmSclad_ADD.resources
+F:\BC2.NET\obj\Release\basekomp_net.frmSclad_treb.resources
+F:\BC2.NET\obj\Release\basekomp_net.frmSearch.resources
+F:\BC2.NET\obj\Release\basekomp_net.frmSetup.resources
+F:\BC2.NET\obj\Release\basekomp_net.frmSheduler.resources
+F:\BC2.NET\obj\Release\basekomp_net.frmSoftware.resources
+F:\BC2.NET\obj\Release\basekomp_net.frmSplash.resources
+F:\BC2.NET\obj\Release\basekomp_net.frmserviceDesc.resources
+F:\BC2.NET\obj\Release\basekomp_net.frmService_add.resources
+F:\BC2.NET\obj\Release\basekomp_net.frmservice_add_otvets.resources
+F:\BC2.NET\obj\Release\basekomp_net.frmSQL.resources
+F:\BC2.NET\obj\Release\basekomp_net.frmTreb_Act_treb.resources
+F:\BC2.NET\obj\Release\basekomp_net.frm_os3.resources
+F:\BC2.NET\obj\Release\basekomp_net.frm_wmi.resources
+F:\BC2.NET\obj\Release\basekomp_net.QrCode.resources
+F:\BC2.NET\obj\Release\basekomp_net.Resources.resources
+F:\BC2.NET\obj\Release\GenerateResource-ResGen.read.1.tlog
+F:\BC2.NET\obj\Release\GenerateResource.read.1.tlog
+F:\BC2.NET\obj\Release\GenerateResource-ResGen.write.1.tlog
+F:\BC2.NET\obj\Release\GenerateResource.write.1.tlog
 D:\Devel\BC2.NET\bin\Release\basekomp_net.exe.config
 D:\Devel\BC2.NET\bin\Release\basekomp_net.exe
 D:\Devel\BC2.NET\bin\Release\basekomp_net.pdb
 D:\Devel\BC2.NET\bin\Release\basekomp_net.xml
 D:\Devel\BC2.NET\bin\Release\ADODB.dll
+D:\Devel\BC2.NET\bin\Release\Microsoft.Office.Interop.Excel.dll
+D:\Devel\BC2.NET\bin\Release\Microsoft.Office.Interop.Word.dll
 D:\Devel\BC2.NET\bin\Release\Interop.JRO.dll
 D:\Devel\BC2.NET\obj\Release\ResolveAssemblyReference.cache
 D:\Devel\BC2.NET\obj\Release\Interop.JRO.dll
@@ -160,6 +127,7 @@ D:\Devel\BC2.NET\obj\Release\basekomp_net.frmCartr_ADD.resources
 D:\Devel\BC2.NET\obj\Release\basekomp_net.frmCartr_Add_Zap.resources
 D:\Devel\BC2.NET\obj\Release\basekomp_net.frmComputers.resources
 D:\Devel\BC2.NET\obj\Release\basekomp_net.frmCRT3.resources
+D:\Devel\BC2.NET\obj\Release\basekomp_net.frmDev.resources
 D:\Devel\BC2.NET\obj\Release\basekomp_net.frmDirectory.resources
 D:\Devel\BC2.NET\obj\Release\basekomp_net.frmGarCPL.resources
 D:\Devel\BC2.NET\obj\Release\basekomp_net.frmLOG.resources
@@ -187,8 +155,12 @@ D:\Devel\BC2.NET\obj\Release\basekomp_net.frm_os3.resources
 D:\Devel\BC2.NET\obj\Release\basekomp_net.frm_wmi.resources
 D:\Devel\BC2.NET\obj\Release\basekomp_net.QrCode.resources
 D:\Devel\BC2.NET\obj\Release\basekomp_net.Resources.resources
+D:\Devel\BC2.NET\obj\Release\GenerateResource-ResGen.read.1.tlog
+D:\Devel\BC2.NET\obj\Release\GenerateResource.read.1.tlog
+D:\Devel\BC2.NET\obj\Release\ResGen.read.1.tlog
+D:\Devel\BC2.NET\obj\Release\GenerateResource-ResGen.write.1.tlog
+D:\Devel\BC2.NET\obj\Release\GenerateResource.write.1.tlog
+D:\Devel\BC2.NET\obj\Release\ResGen.write.1.tlog
 D:\Devel\BC2.NET\obj\Release\basekomp_net.exe
 D:\Devel\BC2.NET\obj\Release\basekomp_net.xml
 D:\Devel\BC2.NET\obj\Release\basekomp_net.pdb
-D:\Devel\BC2.NET\obj\Release\GenerateResource.read.1.tlog
-D:\Devel\BC2.NET\obj\Release\GenerateResource.write.1.tlog

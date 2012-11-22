@@ -168,6 +168,7 @@ Partial Class frmCRT3
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnSearch})
         Me.ToolStrip1.Location = New System.Drawing.Point(267, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
+        Me.ToolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
         Me.ToolStrip1.Size = New System.Drawing.Size(35, 25)
         Me.ToolStrip1.TabIndex = 7
         Me.ToolStrip1.Text = "ToolStrip1"
@@ -178,7 +179,7 @@ Partial Class frmCRT3
         Me.btnSearch.Image = CType(resources.GetObject("btnSearch.Image"), System.Drawing.Image)
         Me.btnSearch.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnSearch.Name = "btnSearch"
-        Me.btnSearch.Size = New System.Drawing.Size(23, 20)
+        Me.btnSearch.Size = New System.Drawing.Size(23, 22)
         '
         'TabControl1
         '

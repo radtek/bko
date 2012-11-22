@@ -11,7 +11,7 @@ Public Class frmSearch
         On Error GoTo Error_
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
-        Label2.Text = LNGIniFile.GetString("frmSearch", "MSG1", "") & " " & strText
+        Label2.Text = LNGIniFile.GetString("frmSearch", "MSG1", "Результатов найдено:") & " " & strText
 
         Exit Sub
 Error_:
@@ -58,7 +58,7 @@ Error_:
         sSQL = "SELECT * FROM kompy where ID like '%" & sFindText & "%' or CPU1 like '%" & sFindText & "%' or CPUmhz1 like '%" & sFindText & "%' or CPU2 like '%" & sFindText & "%' or CPUmhz2 like '%" & sFindText & "%' or CPU3 like '%" & sFindText & "%' or CPUmhz3 like '%" & sFindText & "%' or CPU4 like '%" & sFindText & "%' or CPUmhz4 like '%" & sFindText & "%' or Mb like '%" & sFindText & "%' or Mb_Chip like '%" & sFindText & "%' or Mb_Proizvod like '%" & sFindText & "%' or RAM_1 like '%" & sFindText & "%' or RAM_2 like '%" & sFindText & "%' or RAM_3 like '%" & sFindText & "%' or RAM_4 like '%" & sFindText & "%' or HDD_Name_1 like '%" & sFindText & "%' or HDD_OB_1 like '%" & sFindText & "%' or HDD_SN_1 like '%" & sFindText & "%' or HDD_Name_2 like '%" & sFindText & "%' or HDD_OB_2 like '%" & sFindText & "%' or HDD_SN_2 like '%" & sFindText & "%' or HDD_Name_3 like '%" & sFindText & "%' or HDD_OB_3 like '%" & sFindText & "%' or HDD_SN_3 like '%" & sFindText & "%' or HDD_Name_4 like '%" & sFindText & "%' or HDD_OB_4 like '%" & sFindText & "%' or HDD_SN_4 like '%" & sFindText & "%' or SVGA_NAME like '%" & sFindText & "%' or SVGA_SN like '%" & sFindText & "%' or SOUND_NAME like '%" & sFindText & "%' or CD_NAME like '%" & sFindText & "%' or CD_SPEED like '%" & sFindText & "%' or CD_SN like '%" & sFindText & "%' or CDRW_NAME like '%" & sFindText & "%' or CDRW_SPEED like '%" & sFindText & "%' or CDRW_SN like '%" & sFindText & "%' or DVD_NAME like '%" & sFindText & "%' or DVD_SPEED like '%" & sFindText & "%' or DVD_SN like '%" & sFindText & "%' or NET_NAME_1 like '%" & sFindText & "%' or NET_IP_1 like '%" & sFindText & "%' or NET_MAC_1 like '%" & sFindText & "%' or NET_NAME_2 like '%" & sFindText & "%' or NET_IP_2 like '%" & sFindText & "%' or NET_MAC_2 like '%" & sFindText & "%' or MODEM_NAME like '%" & sFindText & "%' or MODEM_SN like '%" & sFindText & "%' or MONITOR_NAME like '%" & sFindText & "%' or MONITOR_NAME2 like '%" & sFindText & "%' or MONITOR_SN like '%" & sFindText & "%' or MONITOR_SN2 like '%" & sFindText & "%'or AS_NAME like '%" & sFindText & "%' or AS_PROIZV like '%" & sFindText & "%' or IBP_NAME like '%" & sFindText & "%' or FILTR_NAME like '%" & sFindText & "%' or PRINTER_NAME_1 like '%" & sFindText & "%' or PRINTER_SN_1 like '%" & sFindText & "%' or PORT_1 like '%" & sFindText & "%' or PRINTER_PROIZV_1 like '%" & sFindText & "%' or PRINTER_NAME_2 like '%" & sFindText & "%' or PORT_2 like '%" & sFindText & "%' or PRINTER_SN_2 like '%" & sFindText & "%' or PRINTER_PROIZV_2 like '%" & sFindText & "%' or PRINTER_NAME_3 like '%" & sFindText & "%' or PORT_3 like '%" & sFindText & "%' or PRINTER_SN_3 like '%" & sFindText & "%' or PRINTER_PROIZV_3 like '%" & sFindText & "%' or PORT_4 like '%" & sFindText & "%' or PRINTER_NAME_4 like '%" & sFindText & "%' or PRINTER_SN_4 like '%" & sFindText & "%' or PRINTER_PROIZV_4 like '%" & sFindText & "%' or SCANER_NAME like '%" & sFindText & "%' or NET_NAME like '%" & sFindText & "%' or PSEVDONIM like '%" & sFindText & "%' or MESTO like '%" & sFindText & "%' or kabn like '%" & sFindText & "%' or FILIAL like '%" & sFindText & "%' or TELEPHONE like '%" & sFindText & "%' or INV_NO_SYSTEM like '%" & sFindText & "%' or INV_NO_PRINTER like '%" & sFindText & "%' or INV_NO_MODEM like '%" & sFindText & "%' or INV_NO_SCANER like '%" & sFindText & "%' or INV_NO_MONITOR like '%" & sFindText & "%' or INV_NO_IBP like '%" & sFindText & "%' or OTvetstvennyj like '%" & sFindText & "%' or Ser_N_SIS like '%" & sFindText & "%' or BLOCK like '%" & sFindText & "%' or SN_BLOCK like '%" & sFindText & "%' or CREADER_NAME like '%" & sFindText & "%' or CASE_NAME like '%" & sFindText & "%' or CASE_SN like '%" & sFindText & "%' or CASE_PROIZV like '%" & sFindText & "%' or SYS_PR like '%" & sFindText & "%'order by PSEVDONIM, filial"
         rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
-        If Trim(sGroupName) = LNGIniFile.GetString("frmSearch", "MSG13", "") Then
+        If Trim(sGroupName) = LNGIniFile.GetString("frmSearch", "MSG13", "Все") Then
             sGroupName = "*"
         End If
 
@@ -119,77 +119,77 @@ Foundit:
                     Select Case .Fields("Tiptehn").Value
 
                         Case "MFU"
-                            lstSearch.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmSearch", "MSG2", ""))
+                            lstSearch.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmSearch", "MSG2", "МФУ"))
                             lstSearch.Items(CInt(intCount)).SubItems.Add("")
                             lstSearch.Items(CInt(intCount)).SubItems.Add("")
                             lstSearch.Items(CInt(intCount)).SubItems.Add("")
                             lstSearch.Items(CInt(intCount)).SubItems.Add("")
 
                         Case "Printer"
-                            lstSearch.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmSearch", "MSG3", ""))
+                            lstSearch.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmSearch", "MSG3", "Принтер"))
                             lstSearch.Items(CInt(intCount)).SubItems.Add("")
                             lstSearch.Items(CInt(intCount)).SubItems.Add("")
                             lstSearch.Items(CInt(intCount)).SubItems.Add("")
                             lstSearch.Items(CInt(intCount)).SubItems.Add("")
 
                         Case "KOpir"
-                            lstSearch.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmSearch", "MSG4", ""))
+                            lstSearch.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmSearch", "MSG4", "Копировальный аппарат"))
                             lstSearch.Items(CInt(intCount)).SubItems.Add("")
                             lstSearch.Items(CInt(intCount)).SubItems.Add("")
                             lstSearch.Items(CInt(intCount)).SubItems.Add("")
                             lstSearch.Items(CInt(intCount)).SubItems.Add("")
 
                         Case "PHOTO"
-                            lstSearch.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmSearch", "MSG5", ""))
+                            lstSearch.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmSearch", "MSG5", "Фотоаппарат"))
                             lstSearch.Items(CInt(intCount)).SubItems.Add("")
                             lstSearch.Items(CInt(intCount)).SubItems.Add("")
                             lstSearch.Items(CInt(intCount)).SubItems.Add("")
                             lstSearch.Items(CInt(intCount)).SubItems.Add("")
 
                         Case "PHONE"
-                            lstSearch.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmSearch", "MSG6", ""))
+                            lstSearch.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmSearch", "MSG6", "Телефон"))
                             lstSearch.Items(CInt(intCount)).SubItems.Add("")
                             lstSearch.Items(CInt(intCount)).SubItems.Add("")
                             lstSearch.Items(CInt(intCount)).SubItems.Add("")
                             lstSearch.Items(CInt(intCount)).SubItems.Add("")
 
                         Case "FAX"
-                            lstSearch.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmSearch", "MSG7", ""))
+                            lstSearch.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmSearch", "MSG7", "Факс"))
                             lstSearch.Items(CInt(intCount)).SubItems.Add("")
                             lstSearch.Items(CInt(intCount)).SubItems.Add("")
                             lstSearch.Items(CInt(intCount)).SubItems.Add("")
                             lstSearch.Items(CInt(intCount)).SubItems.Add("")
 
                         Case "ZIP"
-                            lstSearch.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmSearch", "MSG8", ""))
+                            lstSearch.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmSearch", "MSG8", "ZIP"))
                             lstSearch.Items(CInt(intCount)).SubItems.Add("")
                             lstSearch.Items(CInt(intCount)).SubItems.Add("")
                             lstSearch.Items(CInt(intCount)).SubItems.Add("")
                             lstSearch.Items(CInt(intCount)).SubItems.Add("")
 
                         Case "MONITOR"
-                            lstSearch.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmSearch", "MSG9", ""))
+                            lstSearch.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmSearch", "MSG9", "Монитор"))
                             lstSearch.Items(CInt(intCount)).SubItems.Add("")
                             lstSearch.Items(CInt(intCount)).SubItems.Add("")
                             lstSearch.Items(CInt(intCount)).SubItems.Add("")
                             lstSearch.Items(CInt(intCount)).SubItems.Add("")
 
                         Case "SCANER"
-                            lstSearch.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmSearch", "MSG10", ""))
+                            lstSearch.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmSearch", "MSG10", "Сканер"))
                             lstSearch.Items(CInt(intCount)).SubItems.Add("")
                             lstSearch.Items(CInt(intCount)).SubItems.Add("")
                             lstSearch.Items(CInt(intCount)).SubItems.Add("")
                             lstSearch.Items(CInt(intCount)).SubItems.Add("")
 
                         Case "NET"
-                            lstSearch.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmSearch", "MSG11", ""))
+                            lstSearch.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmSearch", "MSG11", "Сетевое устройство"))
                             lstSearch.Items(CInt(intCount)).SubItems.Add("")
                             lstSearch.Items(CInt(intCount)).SubItems.Add("")
                             lstSearch.Items(CInt(intCount)).SubItems.Add("")
                             lstSearch.Items(CInt(intCount)).SubItems.Add("")
 
                         Case "OT"
-                            lstSearch.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmSearch", "MSG12", ""))
+                            lstSearch.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmSearch", "MSG12", "Другое оборудование"))
                             lstSearch.Items(CInt(intCount)).SubItems.Add("")
                             lstSearch.Items(CInt(intCount)).SubItems.Add("")
                             lstSearch.Items(CInt(intCount)).SubItems.Add("")
@@ -262,9 +262,9 @@ SRCCH2:
         FillComboNET(Me.lstGroups, "FILIAL", "SPR_FILIAL", "", False, True)
 
         Dim objIniFile As New IniFile(sLANGPATH)
-        lstGroups.Items.Add(objIniFile.GetString("frmSearch", "MSG13", ""))
+        lstGroups.Items.Add(objIniFile.GetString("frmSearch", "MSG13", "Все"))
 
-        lstGroups.Text = objIniFile.GetString("frmSearch", "MSG13", "")
+        lstGroups.Text = objIniFile.GetString("frmSearch", "MSG13", "Все")
         txtSearch.Focus()
 
     End Sub

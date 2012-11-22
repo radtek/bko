@@ -12,7 +12,7 @@
     <AssemblyName>basekomp_net</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.0</TargetFrameworkVersion>
     <OptionExplicit>On</OptionExplicit>
     <OptionCompare>Binary</OptionCompare>
     <OptionStrict>Off</OptionStrict>
@@ -126,7 +126,6 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
     <Import Include="ADODB" />
@@ -192,6 +191,12 @@
     <Compile Include="FORMS\frmCRT3.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FORMS\frmDev.designer.vb">
+      <DependentUpon>frmDev.vb</DependentUpon>
+    </Compile>
+    <None Include="FORMS\frmDev.vb">
+      <SubType>Form</SubType>
+    </None>
     <Compile Include="FORMS\frmDirectory.Designer.vb">
       <DependentUpon>frmDirectory.vb</DependentUpon>
     </Compile>
@@ -359,6 +364,7 @@
     <Compile Include="MODULES\MOD_LOAD_WMI.vb" />
     <Compile Include="MODULES\MOD_REF_TREE.vb" />
     <Compile Include="MODULES\MOD_SEARCHE.vb" />
+    <None Include="MODULES\MOD_SNMP.vb" />
     <Compile Include="MODULES\MOD_SYS_PRELOAD.vb" />
     <Compile Include="MODULES\MOD_ADD_FUNCTION.vb" />
     <Compile Include="MODULES\MOD_DSP.vb" />
@@ -411,6 +417,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FORMS\frmCRT3.resx">
       <DependentUpon>frmCRT3.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FORMS\frmDev.resx">
+      <DependentUpon>frmDev.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FORMS\frmDirectory.resx">
       <DependentUpon>frmDirectory.vb</DependentUpon>
@@ -584,12 +593,12 @@
   <ItemGroup>
     <PublishFile Include="basekomp_net.XmlSerializers">
       <Visible>False</Visible>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Exclude</PublishState>
-      <IncludeHash>False</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
   </ItemGroup>

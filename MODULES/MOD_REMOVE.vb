@@ -374,10 +374,10 @@ Error_:
 
 
         Dim LNGIniFile As New IniFile(sLANGPATH)
-        'LNGIniFile.GetString("MOD_REMOVE", "MSG1", "")
+        'LNGIniFile.GetString("MOD_REMOVE", "MSG1", "Найдено")
         If UC > 0 Then
             'users are in this group
-            If MsgBox(LNGIniFile.GetString("MOD_REMOVE", "MSG1", "") & " " & UC & " " & LNGIniFile.GetString("MOD_REMOVE", "MSG2", ""), MsgBoxStyle.Exclamation + vbYesNo, ProGramName) = vbNo Then Exit Function
+            If MsgBox(LNGIniFile.GetString("MOD_REMOVE", "MSG1", "Найдено") & " " & UC & " " & LNGIniFile.GetString("MOD_REMOVE", "MSG2", "производителей в справочниках, Ваше действие может привести к потере данных, желаете продолжить удаление?"), MsgBoxStyle.Exclamation + vbYesNo, ProGramName) = vbNo Then Exit Function
 
         Else
 
@@ -420,11 +420,11 @@ ERR1:
         rs.Close()
         rs = Nothing
 
-        'LNGIniFile.GetString("MOD_REMOVE", "MSG1", "")
+        'LNGIniFile.GetString("MOD_REMOVE", "MSG1", "Найдено")
 
         If UC > 0 Then
             'users are in this group
-            If MsgBox(LNGIniFile.GetString("MOD_REMOVE", "MSG1", "") & " " & UC & " " & LNGIniFile.GetString("MOD_REMOVE", "MSG3", "") & " " & sGroupName & " ?" & vbCrLf & LNGIniFile.GetString("MOD_REMOVE", "MSG6", ""), vbExclamation + vbYesNo, ProGramName) = vbNo Then
+            If MsgBox(LNGIniFile.GetString("MOD_REMOVE", "MSG1", "Найдено") & " " & UC & " " & LNGIniFile.GetString("MOD_REMOVE", "MSG3", "единиц техники в филиале, Ваше действие может привести к потере данных, желаете продолжить удаление -") & " " & sGroupName & " ?" & vbCrLf & LNGIniFile.GetString("MOD_REMOVE", "MSG6", "ри удалении структуры техника не удаляется. Будьте внимательны."), vbExclamation + vbYesNo, ProGramName) = vbNo Then
                 Exit Function
             End If
 
@@ -496,7 +496,7 @@ ERR1:
         If UC > 0 Then
             'users are in this group
 
-            If MsgBox(LNGIniFile.GetString("MOD_REMOVE", "MSG1", "") & " " & UC & " " & LNGIniFile.GetString("MOD_REMOVE", "MSG4", "") & " " & sGroupName & " ?" & vbCrLf & LNGIniFile.GetString("MOD_REMOVE", "MSG6", ""), vbExclamation + vbYesNo, ProGramName) = vbNo Then
+            If MsgBox(LNGIniFile.GetString("MOD_REMOVE", "MSG1", "Найдено") & " " & UC & " " & LNGIniFile.GetString("MOD_REMOVE", "MSG4", "единиц техники в отделе, Ваше действие может привести к потере данных, желаете продолжить удаление") & " " & sGroupName & " ?" & vbCrLf & LNGIniFile.GetString("MOD_REMOVE", "MSG6", "При удалении структуры техника не удаляется. Будьте внимательны."), vbExclamation + vbYesNo, ProGramName) = vbNo Then
                 Exit Function
             End If
 
@@ -562,7 +562,7 @@ ERR1:
 
         If UC > 0 Then
 
-            If MsgBox(LNGIniFile.GetString("MOD_REMOVE", "MSG1", "") & " " & UC & " " & LNGIniFile.GetString("MOD_REMOVE", "MSG5", "") & " " & sOffice & " ?" & vbCrLf & LNGIniFile.GetString("MOD_REMOVE", "MSG6", ""), vbExclamation + vbYesNo, ProGramName) = vbNo Then
+            If MsgBox(LNGIniFile.GetString("MOD_REMOVE", "MSG1", "Найдено") & " " & UC & " " & LNGIniFile.GetString("MOD_REMOVE", "MSG5", "единиц техники в кабинете, Ваше действие может привести к потере данных, желаете продолжить удаление") & " " & sOffice & " ?" & vbCrLf & LNGIniFile.GetString("MOD_REMOVE", "MSG6", "При удалении структуры техника не удаляется. Будьте внимательны."), vbExclamation + vbYesNo, ProGramName) = vbNo Then
                 Exit Function
             End If
 
@@ -582,7 +582,7 @@ ERR1:
         Exit Function
 
         RemoveOffice = -1
-        MsgBox("Не найден кабинет" & " " & sOffice & "'", vbExclamation + vbApplicationModal, "Error!")
+        MsgBox(LNGIniFile.GetString("MOD_REMOVE", "MSG7", "Не найден кабинет") & " " & sOffice & "'", vbExclamation + vbApplicationModal, "Error!")
 
 
         Exit Function

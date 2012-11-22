@@ -62,7 +62,7 @@
 
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
-        If Len(zBranche) = 0 Or zBranche = LNGIniFile.GetString("frmComputers", "MSG53", "") Then
+        If Len(zBranche) = 0 Or zBranche = LNGIniFile.GetString("frmComputers", "MSG53", "Все") Then
 
             zBranche = "0"
 
@@ -607,7 +607,7 @@
         ' On Error Resume Next
         ' Dim LnGIniFile As New IniFile(sLANGPATH)
 
-        Dim CRT_NULL As New TreeNode(LnGIniFile.GetString("frmCRT3", "MSG1", ""), 0, 0)
+        Dim CRT_NULL As New TreeNode(LNGIniFile.GetString("frmCRT3", "MSG1", "Картриджи"), 0, 0)
         CRT_NULL.Tag = "GС|" & GENID()
         nodeRoot.Nodes.Add(CRT_NULL)
 
@@ -677,7 +677,7 @@
 
 
 
-        Dim CRT_NULL1 As New TreeNode(LnGIniFile.GetString("frmCRT3", "MSG2", ""), 0, 0)
+        Dim CRT_NULL1 As New TreeNode(LNGIniFile.GetString("frmCRT3", "MSG2", "Заправщики"), 0, 0)
         CRT_NULL1.Tag = "Z|" & GENID()
         nodeRoot.Nodes.Add(CRT_NULL1)
 
@@ -1112,7 +1112,7 @@ ERR1:
 
         'On Error GoTo Error_
         On Error Resume Next
-        btnAdd.Text = objIniFile.GetString("frmCRT3", "MSG3", "")
+        btnAdd.Text = objIniFile.GetString("frmCRT3", "MSG3", "Сохранить")
 
 
         Dim CARTRIDG As ADODB.Recordset
@@ -1481,11 +1481,11 @@ Error_:
         FillComboNET(Me.treebranche, "FILIAL", "SPR_FILIAL", "", False, True)
 
         Dim LNGIniFile As New IniFile(sLANGPATH)
-        treebranche.Items.Add(LNGIniFile.GetString("frmComputers", "MSG53", ""))
+        treebranche.Items.Add(LNGIniFile.GetString("frmComputers", "MSG53", "Все"))
         uname = objIniFile.GetString("General", "branche", "")
 
         If Len(uname) = 0 Then
-            treebranche.Text = LNGIniFile.GetString("frmComputers", "MSG53", "")
+            treebranche.Text = LNGIniFile.GetString("frmComputers", "MSG53", "Все")
 
         Else
             treebranche.Text = uname
@@ -1507,12 +1507,12 @@ Error_:
 
         cmbTipC.Items.Clear()
 
-        cmbTipC.Items.Add(LNGIniFile.GetString("frmCRT3", "MSG4", ""))
-        cmbTipC.Items.Add(LNGIniFile.GetString("frmCRT3", "MSG5", ""))
-        cmbTipC.Items.Add(LNGIniFile.GetString("frmCRT3", "MSG6", ""))
-        cmbTipC.Items.Add(LNGIniFile.GetString("frmCRT3", "MSG7", ""))
-        cmbTipC.Items.Add(LNGIniFile.GetString("frmCRT3", "MSG8", ""))
-        cmbTipC.Items.Add(LNGIniFile.GetString("frmCRT3", "MSG9", ""))
+        cmbTipC.Items.Add(LNGIniFile.GetString("frmCRT3", "MSG4", "Струйный"))
+        cmbTipC.Items.Add(LNGIniFile.GetString("frmCRT3", "MSG5", "Матричный"))
+        cmbTipC.Items.Add(LNGIniFile.GetString("frmCRT3", "MSG6", "Лазерный"))
+        cmbTipC.Items.Add(LNGIniFile.GetString("frmCRT3", "MSG7", "Барабан"))
+        cmbTipC.Items.Add(LNGIniFile.GetString("frmCRT3", "MSG8", "Термо Пленка"))
+        cmbTipC.Items.Add(LNGIniFile.GetString("frmCRT3", "MSG9", "Фотокондуктор"))
 
         'dtSale.Value = Date.Today
 
@@ -1741,7 +1741,7 @@ err_:
 
                     If Sav = False Then
 
-                        MsgBox(LNGIniFile.GetString("frmCRT3", "MSG10", ""), MsgBoxStyle.Exclamation, ProGramName)
+                    MsgBox(LNGIniFile.GetString("frmCRT3", "MSG10", "Отмена перемещения"), MsgBoxStyle.Exclamation, ProGramName)
 
                         If pDRAG = True Then
 
@@ -1814,7 +1814,7 @@ err_:
 
 
 
-            Me.btnAdd.Text = LNGIniFile.GetString("frmCRT3", "btnAdd", "")
+        Me.btnAdd.Text = LNGIniFile.GetString("frmCRT3", "btnAdd", "Добавить")
             CRTFU = False
     End Sub
 
@@ -1839,7 +1839,7 @@ err_:
 
 
         Dim LNGIniFile As New IniFile(sLANGPATH)
-        btnAdd.Text = LNGIniFile.GetString("frmCRT3", "btnAdd", "")
+        btnAdd.Text = LNGIniFile.GetString("frmCRT3", "btnAdd", "Добавить")
         EDTRCART = False
         chkNaSP.Checked = 0
         chkSPS.Checked = 0
@@ -1977,7 +1977,7 @@ err_:
                     ' replace all
 
                     objText.insertControlCharacter(objCursor, 0, False)
-                    objText.insertString(objCursor, objIniFile.GetString("frmCRT3", "MSG11", "") & vbLf, False)
+                    objText.insertString(objCursor, objIniFile.GetString("frmCRT3", "MSG11", "Заправка картриджей") & vbLf, False)
 
                     objTable = objDocument.createInstance("com.sun.star.text.TextTable")
                     objTable.Initialize(Coun1 + 1, 5)
@@ -1997,11 +1997,11 @@ err_:
 
                     'Формируем заголовок
                     'objIniFile.GetString("frmCRT3", "MSG11", "")
-                    insertIntoCell("A1", objIniFile.GetString("frmCRT3", "MSG12", ""), objTable)
-                    insertIntoCell("B1", objIniFile.GetString("frmCRT3", "MSG13", ""), objTable)
-                    insertIntoCell("C1", objIniFile.GetString("frmCRT3", "MSG14", ""), objTable)
-                    insertIntoCell("D1", objIniFile.GetString("frmCRT3", "MSG15", ""), objTable)
-                    insertIntoCell("E1", objIniFile.GetString("frmCRT3", "MSG16", ""), objTable)
+                    insertIntoCell("A1", objIniFile.GetString("frmCRT3", "MSG12", "Порядковый номер"), objTable)
+                    insertIntoCell("B1", objIniFile.GetString("frmCRT3", "MSG13", "Дата заправки"), objTable)
+                    insertIntoCell("C1", objIniFile.GetString("frmCRT3", "MSG14", "Модель картриджа"), objTable)
+                    insertIntoCell("D1", objIniFile.GetString("frmCRT3", "MSG15", "Восстановлен"), objTable)
+                    insertIntoCell("E1", objIniFile.GetString("frmCRT3", "MSG16", "Место установки"), objTable)
 
 
                     rscount = New ADODB.Recordset
@@ -2054,9 +2054,9 @@ err_:
 
 
                             If .Fields("VOST").Value = False Or .Fields("VOST").Value = 0 Then
-                                uname1 = objIniFile.GetString("frmCRT3", "MSG17", "")
+                                uname1 = objIniFile.GetString("frmCRT3", "MSG17", "Нет")
                             Else
-                                uname1 = objIniFile.GetString("frmCRT3", "MSG18", "")
+                                uname1 = objIniFile.GetString("frmCRT3", "MSG18", "Да")
                             End If
                             insertIntoCell(d, uname1, objTable)
 
@@ -2113,7 +2113,7 @@ err_:
 
                     'Insert a paragraph at the beginning of the document.
                     oPara1 = oDoc.Content.Paragraphs.Add
-                    oPara1.Range.Text = objIniFile.GetString("frmCRT3", "MSG11", "")
+                    oPara1.Range.Text = objIniFile.GetString("frmCRT3", "MSG11", "Заправка картриджей")
                     oPara1.Range.Font.Bold = True
                     oPara1.Format.SpaceAfter = 24    '24 pt spacing after paragraph.
                     oPara1.Range.InsertParagraphAfter()
@@ -2122,11 +2122,11 @@ err_:
                     oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, Coun1 + 1, 5)
                     oTable.Range.ParagraphFormat.SpaceAfter = 6
 
-                    oTable.Cell(1, 1).Range.Text = objIniFile.GetString("frmCRT3", "MSG12", "")
-                    oTable.Cell(1, 2).Range.Text = objIniFile.GetString("frmCRT3", "MSG13", "")
-                    oTable.Cell(1, 3).Range.Text = objIniFile.GetString("frmCRT3", "MSG14", "")
-                    oTable.Cell(1, 4).Range.Text = objIniFile.GetString("frmCRT3", "MSG15", "")
-                    oTable.Cell(1, 5).Range.Text = objIniFile.GetString("frmCRT3", "MSG16", "")
+                    oTable.Cell(1, 1).Range.Text = objIniFile.GetString("frmCRT3", "MSG12", "Порядковый номер")
+                    oTable.Cell(1, 2).Range.Text = objIniFile.GetString("frmCRT3", "MSG13", "Дата заправки")
+                    oTable.Cell(1, 3).Range.Text = objIniFile.GetString("frmCRT3", "MSG14", "Модель картриджа")
+                    oTable.Cell(1, 4).Range.Text = objIniFile.GetString("frmCRT3", "MSG15", "Восстановлен")
+                    oTable.Cell(1, 5).Range.Text = objIniFile.GetString("frmCRT3", "MSG16", "Место установки")
 
 
                     rscount = New ADODB.Recordset
@@ -2186,9 +2186,9 @@ err_:
                             On Error Resume Next
 
                             If .Fields("VOST").Value = False Or .Fields("VOST").Value = 0 Then
-                                uname1 = objIniFile.GetString("frmCRT3", "MSG17", "")
+                                uname1 = objIniFile.GetString("frmCRT3", "MSG17", "Нет")
                             Else
-                                uname1 = objIniFile.GetString("frmCRT3", "MSG18", "")
+                                uname1 = objIniFile.GetString("frmCRT3", "MSG18", "Да")
                             End If
 
 
@@ -2389,7 +2389,7 @@ err_:
 
                             If Sav = False Then
 
-                                MsgBox(objIniFile.GetString("frmCRT3", "MSG10", ""), MsgBoxStyle.Exclamation, ProGramName)
+                                MsgBox(objIniFile.GetString("frmCRT3", "MSG10", "Отмена перемещения"), MsgBoxStyle.Exclamation, ProGramName)
 
                                 If pDRAG = True Then
 
@@ -2464,7 +2464,7 @@ err_:
                 cCOUNT = d(1)
                 rCOUNT = 0
 
-                btnAdd.Text = LNGIniFile.GetString("frmCRT3", "btnAdd", "")
+                btnAdd.Text = LNGIniFile.GetString("frmCRT3", "btnAdd", "Добавить")
                 EDTRCART = False
                 chkNaSP.Checked = 0
                 chkSPS.Checked = 0
@@ -2522,7 +2522,7 @@ err_:
                 cCOUNT = 0
                 rCOUNT = 0
                 zPREF = ""
-                btnAdd.Text = LNGIniFile.GetString("frmCRT3", "btnAdd", "")
+                btnAdd.Text = LNGIniFile.GetString("frmCRT3", "btnAdd", "Добавить")
                 EDTRCART = False
                 chkNaSP.Checked = 0
                 chkSPS.Checked = 0
@@ -2796,18 +2796,18 @@ err_:
             If iA <> sTEXT Then
 
                 DV = False
-                'objIniFile.GetString("frmCRT3", "btnAdd", "")
-                Message = objIniFile.GetString("frmCRT3", "MSG19", "")
-                Title = objIniFile.GetString("frmCRT3", "MSG20", "")
+                'objIniFile.GetString("frmCRT3", "btnAdd", "Добавить")
+                Message = objIniFile.GetString("frmCRT3", "MSG19", "Укажите причину перемещения картриджа")
+                Title = objIniFile.GetString("frmCRT3", "MSG20", "Перемещение картриджа")
 
                 If iZ = 0 Then
 
-                    Defaults = objIniFile.GetString("frmCRT3", "MSG21", "")
+                    Defaults = objIniFile.GetString("frmCRT3", "MSG21", "Причина")
 
                 Else
 
 
-                    Defaults = objIniFile.GetString("frmCRT3", "MSG22", "") & " " & iZAPR
+                    Defaults = objIniFile.GetString("frmCRT3", "MSG22", "С заправки в") & " " & iZAPR
 
                 End If
 
@@ -2978,7 +2978,7 @@ Error_:
         Dim objIniFile As New IniFile(sLANGPATH)
 
 
-        If MsgBox(objIniFile.GetString("frmCRT3", "MSG23", "") & " " & vbNewLine & vbNewLine & lstGroups.SelectedNode.Text, vbExclamation + vbYesNo, "Удаление техники") = vbNo Then Exit Sub
+        If MsgBox(objIniFile.GetString("frmCRT3", "MSG23", "Вы желаете удалить картридж?") & " " & vbNewLine & vbNewLine & lstGroups.SelectedNode.Text, vbExclamation + vbYesNo, "Удаление техники") = vbNo Then Exit Sub
 
 
         Dim rs1 As ADODB.Recordset
@@ -3080,7 +3080,7 @@ Error_:
 
         lstGroups.Nodes.Add(nodeRoot)
 
-        Dim TempNode2 As New TreeNode(objIniFile.GetString("frmCRT3", "MSG1", ""), 0, 0)
+        Dim TempNode2 As New TreeNode(objIniFile.GetString("frmCRT3", "MSG1", "Картриджи"), 0, 0)
         TempNode2.Tag = "G1|2"
         nodeRoot.Nodes.Add(TempNode2)
 
@@ -3302,18 +3302,18 @@ FoundiR:
 
                 DV = False
 
-                Message = objIniFile.GetString("frmCRT3", "MSG19", "")
+                Message = objIniFile.GetString("frmCRT3", "MSG19", "Укажите причину перемещения картриджа")
 
-                Title = objIniFile.GetString("frmCRT3", "MSG20", "")
+                Title = objIniFile.GetString("frmCRT3", "MSG20", "Перемещение картриджа")
 
                 If iZ = 0 Then
 
-                    Defaults = objIniFile.GetString("frmCRT3", "MSG21", "")
+                    Defaults = objIniFile.GetString("frmCRT3", "MSG21", "Причина")
 
                 Else
 
 
-                    Defaults = objIniFile.GetString("frmCRT3", "MSG22", "") & " " & iZAPR
+                    Defaults = objIniFile.GetString("frmCRT3", "MSG22", "С заправки в") & " " & iZAPR
 
                 End If
 

@@ -351,7 +351,7 @@ Public Class frmAct_Treb
         If dSID = 0 Then Exit Sub
 
 
-        If MsgBox(objIniFile.GetString("frmAct_Treb", "MSG1", ""), MsgBoxStyle.YesNo, ProGramName) = MsgBoxResult.Yes Then
+        If MsgBox(objIniFile.GetString("frmAct_Treb", "MSG1", "Вы уверены что хотите удалить"), MsgBoxStyle.YesNo, ProGramName) = MsgBoxResult.Yes Then
             Dim rs As ADODB.Recordset
             rs = New ADODB.Recordset
             rs.Open("DELETE FROM AKT_SP_OS3 WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
@@ -1300,7 +1300,7 @@ Public Class frmAct_Treb
         frmACT_OS_Act_treb.txt_akt_data_sostav.Value = Date.Today
         frmACT_OS_Act_treb.txt_akt_mod.Text = ""
 
-        Call SaveActivityToLogDB(objIniFile.GetString("frmAct_Treb", "MSG4", "") & " " & frmComputers.lstGroups.SelectedNode.Text)
+        Call SaveActivityToLogDB(objIniFile.GetString("frmAct_Treb", "MSG4", "Акты ввода основных средств - добавить") & " " & frmComputers.lstGroups.SelectedNode.Text)
 
 
         frmACT_OS_Act_treb.ShowDialog(Me)
@@ -1362,7 +1362,7 @@ Public Class frmAct_Treb
         If dSID = 0 Then Exit Sub
         Dim objIniFile As New IniFile(sLANGPATH)
 
-        If MsgBox(objIniFile.GetString("frmAct_Treb", "MSG1", ""), MsgBoxStyle.YesNo, ProGramName) = MsgBoxResult.Yes Then
+        If MsgBox(objIniFile.GetString("frmAct_Treb", "MSG1", "Вы уверены что хотите удалить"), MsgBoxStyle.YesNo, ProGramName) = MsgBoxResult.Yes Then
             Dim rs As ADODB.Recordset
             rs = New ADODB.Recordset
             rs.Open("DELETE FROM ActOS WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
@@ -1378,7 +1378,7 @@ Public Class frmAct_Treb
         If dSID = 0 Then Exit Sub
         Dim objIniFile As New IniFile(sLANGPATH)
 
-        If MsgBox(objIniFile.GetString("frmAct_Treb", "MSG1", ""), MsgBoxStyle.YesNo, ProGramName) = MsgBoxResult.Yes Then
+        If MsgBox(objIniFile.GetString("frmAct_Treb", "MSG1", "Вы уверены что хотите удалить"), MsgBoxStyle.YesNo, ProGramName) = MsgBoxResult.Yes Then
             Dim rs As ADODB.Recordset
             rs = New ADODB.Recordset
             rs.Open("DELETE FROM TrebOvanie WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)

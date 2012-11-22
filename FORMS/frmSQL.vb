@@ -11,7 +11,6 @@
         Call LANG_frmSQL()
 
         Dim oRS As ADODB.Recordset
-        
 
         oRS = DB7.OpenSchema(ADODB.SchemaEnum.adSchemaTables, New Object() {Nothing, Nothing, Nothing, "TABLE"})
 
@@ -90,7 +89,7 @@ Error_:
 
 
         If uname = "DELETE" Then
-            If MsgBox(LNGIniFile.GetString("frmSQL", "MSG1", ""), vbExclamation + vbYesNo, "Запрос на удаление") = vbNo Then Exit Sub
+            If MsgBox(LNGIniFile.GetString("frmSQL", "MSG1", "Данный запрос приведет к удалению информации продолжить?"), vbExclamation + vbYesNo, "Запрос на удаление") = vbNo Then Exit Sub
             rs = New ADODB.Recordset
             rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
             rs = Nothing
@@ -211,9 +210,9 @@ Err_:
         If Not (RSExists("T_Que", "sqlsq", Me.txtQ.Text)) Then
 
             Dim Message, Title, Default1 As String
-            Message = LNGIniFile.GetString("frmSQL", "MSG2", "")
-            Title = LNGIniFile.GetString("frmSQL", "MSG3", "")
-            Default1 = LNGIniFile.GetString("frmSQL", "MSG3", "") & " " & Date.Today
+            Message = LNGIniFile.GetString("frmSQL", "MSG2", "Укажите Название для запроса")
+            Title = LNGIniFile.GetString("frmSQL", "MSG3", "Запрос")
+            Default1 = LNGIniFile.GetString("frmSQL", "MSG3", "Запрос") & " " & Date.Today
             strTmp = InputBox(Message, Title, Default1)
             If Len(strTmp) = 0 Then Exit Sub
 

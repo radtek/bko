@@ -61,7 +61,7 @@ Public Class frmSoftware
 
         lstGroups.Nodes.Add(nodeRoot)
 
-        Dim TempNode As New TreeNode(LNGIniFile.GetString("frmSoftware", "MSG1", ""), 0, 0)
+        Dim TempNode As New TreeNode(LNGIniFile.GetString("frmSoftware", "MSG1", "Программное обеспечение"), 0, 0)
         TempNode.Tag = "G1|2"
         nodeRoot.Nodes.Add(TempNode)
 
@@ -405,11 +405,11 @@ FoundiR:
         FillComboNET(Me.treebranche, "FILIAL", "SPR_FILIAL", "", False, True)
 
         Dim LNGIniFile As New IniFile(sLANGPATH)
-        treebranche.Items.Add(LNGIniFile.GetString("frmComputers", "MSG53", ""))
+        treebranche.Items.Add(LNGIniFile.GetString("frmComputers", "MSG53", "Все"))
         uname = objIniFile.GetString("General", "branche", "")
 
         If Len(uname) = 0 Then
-            treebranche.Text = LNGIniFile.GetString("frmComputers", "MSG53", "")
+            treebranche.Text = LNGIniFile.GetString("frmComputers", "MSG53", "Все")
         Else
             treebranche.Text = uname
         End If
@@ -476,7 +476,7 @@ FoundiR:
 
         If lstGroups.Nodes.Count <= 0 Then Exit Sub
         Me.Cursor = Cursors.WaitCursor
-        btnAdd.Text = LNGIniFile.GetString("frmSoftware", "MSG2", "")
+        btnAdd.Text = LNGIniFile.GetString("frmSoftware", "MSG2", "Добавить")
         cmbSoftware.Text = ""
         cmbTipLicense.Text = ""
         cmbTipPo.Text = ""
@@ -563,7 +563,7 @@ FoundiR:
 
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
-        Call SaveActivityToLogDB(LNGIniFile.GetString("frmSoftware", "MSG3", "") & " " & Me.lstGroups.SelectedNode.Text)
+        Call SaveActivityToLogDB(LNGIniFile.GetString("frmSoftware", "MSG3", "Просмотр программного обеспечения для") & " " & Me.lstGroups.SelectedNode.Text)
 
         Dim sSQL As String
         Dim rs1 As ADODB.Recordset
@@ -610,7 +610,7 @@ FoundiR:
             Loop
         End With
 
-        btnAdd.Text = LNGIniFile.GetString("frmSoftware", "MSG4", "")
+        btnAdd.Text = LNGIniFile.GetString("frmSoftware", "MSG4", "Сохранить")
 
         rs1.Close()
         rs1 = Nothing
@@ -797,8 +797,8 @@ A:
         Dim rs2 As ADODB.Recordset
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
-        If btnAdd.Text = LNGIniFile.GetString("frmSoftware", "MSG4", "") Then
-            Call SaveActivityToLogDB(LNGIniFile.GetString("frmSoftware", "MSG5", "") & " " & Me.lstGroups.SelectedNode.Text)
+        If btnAdd.Text = LNGIniFile.GetString("frmSoftware", "MSG4", "Сохранить") Then
+            Call SaveActivityToLogDB(LNGIniFile.GetString("frmSoftware", "MSG5", "Редактирование программного обеспечения для") & " " & Me.lstGroups.SelectedNode.Text)
 
             rs2 = New ADODB.Recordset
             rs2.Open("SELECT * FROM SOFT_INSTALL WHERE Id=" & rCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
@@ -819,7 +819,7 @@ A:
             rs2 = Nothing
 
         Else
-            Call SaveActivityToLogDB(LNGIniFile.GetString("frmSoftware", "MSG6", "") & " " & Me.lstGroups.SelectedNode.Text)
+            Call SaveActivityToLogDB(LNGIniFile.GetString("frmSoftware", "MSG6", "Добавление программного обеспечения для") & " " & Me.lstGroups.SelectedNode.Text)
             rs2 = New ADODB.Recordset
             rs2.Open("SELECT * FROM SOFT_INSTALL", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
@@ -841,7 +841,7 @@ A:
 
         End If
 
-        btnAdd.Text = LNGIniFile.GetString("frmSoftware", "MSG2", "")
+        btnAdd.Text = LNGIniFile.GetString("frmSoftware", "MSG2", "Добавить")
         cmbSoftware.Text = ""
         cmbTipLicense.Text = ""
         cmbTipPo.Text = ""
@@ -916,7 +916,7 @@ err_:
 
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
         Dim LNGIniFile As New IniFile(sLANGPATH)
-        btnAdd.Text = LNGIniFile.GetString("frmSoftware", "MSG2", "")
+        btnAdd.Text = LNGIniFile.GetString("frmSoftware", "MSG2", "Добавить")
         cmbSoftware.Text = ""
         cmbTipLicense.Text = ""
         cmbTipPo.Text = ""
@@ -1008,7 +1008,7 @@ err_:
         Dim langfile As New IniFile(sLANGPATH)
 
 
-        Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG28", "") & " " & lstGroups.SelectedNode.Text)
+        Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG28", "Обновление компьютера") & " " & lstGroups.SelectedNode.Text)
         Me.Cursor = Cursors.Default
 
         Me.lstSoftware.Visible = False

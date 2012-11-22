@@ -23,11 +23,11 @@
 
         lvLOG.Columns.Clear()
         lvLOG.Items.Clear()
-        lvLOG.Columns.Add(objIniFile.GetString("frmLOG", "MSG1", ""), 1, HorizontalAlignment.Left)
-        lvLOG.Columns.Add(objIniFile.GetString("frmLOG", "MSG2", ""), 130, HorizontalAlignment.Left)
-        lvLOG.Columns.Add(objIniFile.GetString("frmLOG", "MSG3", ""), 400, HorizontalAlignment.Left)
-        lvLOG.Columns.Add(objIniFile.GetString("frmLOG", "MSG4", ""), 70, HorizontalAlignment.Left)
-        lvLOG.Columns.Add(objIniFile.GetString("frmLOG", "MSG5", ""), 70, HorizontalAlignment.Left)
+        lvLOG.Columns.Add(objIniFile.GetString("frmLOG", "MSG1", "id"), 1, HorizontalAlignment.Left)
+        lvLOG.Columns.Add(objIniFile.GetString("frmLOG", "MSG2", "Пользователь"), 130, HorizontalAlignment.Left)
+        lvLOG.Columns.Add(objIniFile.GetString("frmLOG", "MSG3", "Деятельность"), 400, HorizontalAlignment.Left)
+        lvLOG.Columns.Add(objIniFile.GetString("frmLOG", "MSG4", "Дата"), 70, HorizontalAlignment.Left)
+        lvLOG.Columns.Add(objIniFile.GetString("frmLOG", "MSG5", "Время"), 70, HorizontalAlignment.Left)
 
 
         Dim a, b, c As String
@@ -142,13 +142,13 @@ Err_:
 
         lvLOG.Columns.Clear()
         lvLOG.Items.Clear()
-        lvLOG.Columns.Add(objIniFile.GetString("frmLOG", "MSG1", ""), 1, HorizontalAlignment.Left)
-        lvLOG.Columns.Add(objIniFile.GetString("frmLOG", "MSG6", ""), 200, HorizontalAlignment.Left)
-        lvLOG.Columns.Add(objIniFile.GetString("frmLOG", "MSG7", ""), 150, HorizontalAlignment.Left)
-        lvLOG.Columns.Add(objIniFile.GetString("frmLOG", "MSG8", ""), 150, HorizontalAlignment.Left)
-        lvLOG.Columns.Add(objIniFile.GetString("frmLOG", "MSG9", ""), 300, HorizontalAlignment.Left)
-        lvLOG.Columns.Add(objIniFile.GetString("frmLOG", "MSG10", ""), 70, HorizontalAlignment.Left)
-        lvLOG.Columns.Add(objIniFile.GetString("frmLOG", "MSG11", ""), 70, HorizontalAlignment.Left)
+        lvLOG.Columns.Add(objIniFile.GetString("frmLOG", "MSG1", "id"), 1, HorizontalAlignment.Left)
+        lvLOG.Columns.Add(objIniFile.GetString("frmLOG", "MSG6", "Техника"), 200, HorizontalAlignment.Left)
+        lvLOG.Columns.Add(objIniFile.GetString("frmLOG", "MSG7", "От куда"), 150, HorizontalAlignment.Left)
+        lvLOG.Columns.Add(objIniFile.GetString("frmLOG", "MSG8", "Куда"), 150, HorizontalAlignment.Left)
+        lvLOG.Columns.Add(objIniFile.GetString("frmLOG", "MSG9", "Причина"), 300, HorizontalAlignment.Left)
+        lvLOG.Columns.Add(objIniFile.GetString("frmLOG", "MSG10", "Дата"), 70, HorizontalAlignment.Left)
+        lvLOG.Columns.Add(objIniFile.GetString("frmLOG", "MSG11", "Время"), 70, HorizontalAlignment.Left)
 
 
         Dim ZUG As Decimal = 0
@@ -314,12 +314,12 @@ Err_:
 
         lvLOG.Columns.Clear()
         lvLOG.Items.Clear()
-        lvLOG.Columns.Add(objIniFile.GetString("frmLOG", "MSG1", ""), 1, HorizontalAlignment.Left)
-        lvLOG.Columns.Add(objIniFile.GetString("frmLOG", "MSG12", ""), 200, HorizontalAlignment.Left)
-        lvLOG.Columns.Add(objIniFile.GetString("frmLOG", "MSG13", ""), 150, HorizontalAlignment.Left)
-        lvLOG.Columns.Add(objIniFile.GetString("frmLOG", "MSG14", ""), 150, HorizontalAlignment.Left)
-        lvLOG.Columns.Add(objIniFile.GetString("frmLOG", "MSG15", ""), 300, HorizontalAlignment.Left)
-        lvLOG.Columns.Add(objIniFile.GetString("frmLOG", "MSG16", ""), 70, HorizontalAlignment.Left)
+        lvLOG.Columns.Add(objIniFile.GetString("frmLOG", "MSG1", "id"), 1, HorizontalAlignment.Left)
+        lvLOG.Columns.Add(objIniFile.GetString("frmLOG", "MSG12", "Компьютер"), 200, HorizontalAlignment.Left)
+        lvLOG.Columns.Add(objIniFile.GetString("frmLOG", "MSG13", "Старая комплектующая"), 150, HorizontalAlignment.Left)
+        lvLOG.Columns.Add(objIniFile.GetString("frmLOG", "MSG14", "Новая комплектующая"), 150, HorizontalAlignment.Left)
+        lvLOG.Columns.Add(objIniFile.GetString("frmLOG", "MSG15", "Дата"), 300, HorizontalAlignment.Left)
+        lvLOG.Columns.Add(objIniFile.GetString("frmLOG", "MSG16", "Время"), 70, HorizontalAlignment.Left)
 
 
         Dim ZUG As Decimal = 0

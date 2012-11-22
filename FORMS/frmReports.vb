@@ -25,47 +25,47 @@ Public Class frmReports
         Call frmReports_LANG()
         Dim langIni As New IniFile(sLANGPATH)
 
-        cmnReport2Compl.Items.Add(langIni.GetString("frmReports", "MSG2", ""))
-        cmnReport2Compl.Items.Add(langIni.GetString("frmReports", "MSG3", ""))
-        cmnReport2Compl.Items.Add(langIni.GetString("frmReports", "MSG4", ""))
-        cmnReport2Compl.Items.Add(langIni.GetString("frmReports", "MSG5", ""))
-        cmnReport2Compl.Items.Add(langIni.GetString("frmReports", "MSG6", ""))
-        cmnReport2Compl.Items.Add(langIni.GetString("frmReports", "MSG7", ""))
-        cmnReport2Compl.Items.Add(langIni.GetString("frmReports", "MSG8", ""))
-        cmnReport2Compl.Items.Add(langIni.GetString("frmReports", "MSG9", ""))
-        cmnReport2Compl.Items.Add(langIni.GetString("frmReports", "MSG10", ""))
-        cmnReport2Compl.Items.Add(langIni.GetString("frmReports", "MSG11", ""))
-        cmnReport2Compl.Items.Add(langIni.GetString("frmReports", "MSG12", ""))
-        cmnReport2Compl.Items.Add(langIni.GetString("frmReports", "MSG13", ""))
-        cmnReport2Compl.Items.Add(langIni.GetString("frmReports", "MSG14", ""))
-        cmnReport2Compl.Items.Add(langIni.GetString("frmReports", "MSG15", ""))
-        cmnReport2Compl.Items.Add(langIni.GetString("frmReports", "MSG16", ""))
-        cmnReport2Compl.Items.Add(langIni.GetString("frmReports", "MSG17", ""))
-        cmnReport2Compl.Items.Add(langIni.GetString("frmReports", "MSG18", ""))
-        cmnReport2Compl.Items.Add(langIni.GetString("frmReports", "MSG19", ""))
-        cmnReport2Compl.Items.Add(langIni.GetString("frmReports", "MSG20", ""))
-        cmnReport2Compl.Items.Add(langIni.GetString("frmReports", "MSG21", ""))
-        cmnReport2Compl.Items.Add(langIni.GetString("frmReports", "MSG22", ""))
-        cmnReport2Compl.Items.Add(langIni.GetString("frmReports", "MSG23", ""))
-        cmnReport2Compl.Items.Add(langIni.GetString("frmReports", "MSG24", ""))
-        cmnReport2Compl.Items.Add(langIni.GetString("frmReports", "MSG25", ""))
+        cmnReport2Compl.Items.Add(langIni.GetString("frmReports", "MSG2", "PCI"))
+        cmnReport2Compl.Items.Add(langIni.GetString("frmReports", "MSG3", "USB"))
+        cmnReport2Compl.Items.Add(langIni.GetString("frmReports", "MSG4", "Видео карты"))
+        cmnReport2Compl.Items.Add(langIni.GetString("frmReports", "MSG5", "Жесткие диски"))
+        cmnReport2Compl.Items.Add(langIni.GetString("frmReports", "MSG6", "Звуковая карта"))
+        cmnReport2Compl.Items.Add(langIni.GetString("frmReports", "MSG7", "Материнские платы"))
+        cmnReport2Compl.Items.Add(langIni.GetString("frmReports", "MSG8", "Модем"))
+        cmnReport2Compl.Items.Add(langIni.GetString("frmReports", "MSG9", "Монитор"))
+        cmnReport2Compl.Items.Add(langIni.GetString("frmReports", "MSG10", "Память ОЗУ"))
+        cmnReport2Compl.Items.Add(langIni.GetString("frmReports", "MSG11", "Принтеры"))
+        cmnReport2Compl.Items.Add(langIni.GetString("frmReports", "MSG12", "Производители жестких дисков"))
+        cmnReport2Compl.Items.Add(langIni.GetString("frmReports", "MSG13", "Процессоры"))
+        cmnReport2Compl.Items.Add(langIni.GetString("frmReports", "MSG14", "Сетевые карты"))
+        cmnReport2Compl.Items.Add(langIni.GetString("frmReports", "MSG15", "Тип и частота процессора"))
+        cmnReport2Compl.Items.Add(langIni.GetString("frmReports", "MSG16", "Установленное ПО"))
+        cmnReport2Compl.Items.Add(langIni.GetString("frmReports", "MSG17", "Тип и диагональ монитора"))
+        cmnReport2Compl.Items.Add(langIni.GetString("frmReports", "MSG18", "Сетевые устройства"))
+        cmnReport2Compl.Items.Add(langIni.GetString("frmReports", "MSG19", "Оптические накопители"))
+        cmnReport2Compl.Items.Add(langIni.GetString("frmReports", "MSG20", "Копиры"))
+        cmnReport2Compl.Items.Add(langIni.GetString("frmReports", "MSG21", "МФУ"))
+        cmnReport2Compl.Items.Add(langIni.GetString("frmReports", "MSG22", "Телефон"))
+        cmnReport2Compl.Items.Add(langIni.GetString("frmReports", "MSG23", "Факс"))
+        cmnReport2Compl.Items.Add(langIni.GetString("frmReports", "MSG24", "Фотоаппарат"))
+        cmnReport2Compl.Items.Add(langIni.GetString("frmReports", "MSG25", "Другое"))
 
 
-        cmbOthers.Items.Add(langIni.GetString("frmMain", "28", ""))
-        cmbOthers.Items.Add(langIni.GetString("frmMain", "29", ""))
-        cmbOthers.Items.Add(langIni.GetString("frmMain", "30", ""))
-        cmbOthers.Items.Add(langIni.GetString("frmMain", "31", ""))
-        cmbOthers.Items.Add(langIni.GetString("frmMain", "32", ""))
-        cmbOthers.Items.Add(langIni.GetString("frmMain", "33", ""))
-        cmbOthers.Items.Add(langIni.GetString("frmMain", "34", ""))
-        cmbOthers.Items.Add(langIni.GetString("frmMain", "35", ""))
-        cmbOthers.Items.Add(langIni.GetString("frmMain", "36", ""))
-        cmbOthers.Items.Add(langIni.GetString("frmMain", "37", ""))
-        cmbOthers.Items.Add(langIni.GetString("frmMain", "38", ""))
-        cmbOthers.Items.Add(langIni.GetString("frmMain", "39", ""))
-        cmbOthers.Items.Add(langIni.GetString("frmMain", "40", ""))
-        cmbOthers.Items.Add(langIni.GetString("frmMain", "41", ""))
-        cmbOthers.Items.Add(langIni.GetString("frmReports", "MSG1", ""))
+        cmbOthers.Items.Add(langIni.GetString("frmMain", "28", "Копир"))
+        cmbOthers.Items.Add(langIni.GetString("frmMain", "29", "Принтер"))
+        cmbOthers.Items.Add(langIni.GetString("frmMain", "30", "МФУ"))
+        cmbOthers.Items.Add(langIni.GetString("frmMain", "31", "Сетевое оборудование"))
+        cmbOthers.Items.Add(langIni.GetString("frmMain", "32", "Телефон"))
+        cmbOthers.Items.Add(langIni.GetString("frmMain", "33", "Фотоаппарат"))
+        cmbOthers.Items.Add(langIni.GetString("frmMain", "34", "Факс"))
+        cmbOthers.Items.Add(langIni.GetString("frmMain", "35", "Монитор"))
+        cmbOthers.Items.Add(langIni.GetString("frmMain", "36", "дисковод ZIP"))
+        cmbOthers.Items.Add(langIni.GetString("frmMain", "37", "Сканер"))
+        cmbOthers.Items.Add(langIni.GetString("frmMain", "38", "Другое оборудование"))
+        cmbOthers.Items.Add(langIni.GetString("frmMain", "39", "USB Устройства"))
+        cmbOthers.Items.Add(langIni.GetString("frmMain", "40", "Акустические Системы"))
+        cmbOthers.Items.Add(langIni.GetString("frmMain", "41", "Бесперебойники"))
+        cmbOthers.Items.Add(langIni.GetString("frmReports", "MSG1", "Все"))
 
 
 
@@ -104,32 +104,32 @@ Public Class frmReports
 
 
 
-        cmbGar.Items.Add(langIni.GetString("frmReports", "MSG4", ""))
-        cmbGar.Items.Add(langIni.GetString("frmReports", "MSG5", ""))
-        cmbGar.Items.Add(langIni.GetString("frmReports", "MSG6", ""))
-        cmbGar.Items.Add(langIni.GetString("frmReports", "MSG7", ""))
-        cmbGar.Items.Add(langIni.GetString("frmReports", "MSG8", ""))
-        cmbGar.Items.Add(langIni.GetString("frmReports", "MSG9", ""))
-        cmbGar.Items.Add(langIni.GetString("frmReports", "MSG10", ""))
-        cmbGar.Items.Add(langIni.GetString("frmReports", "MSG13", ""))
+        cmbGar.Items.Add(langIni.GetString("frmReports", "MSG4", "Видео карты"))
+        cmbGar.Items.Add(langIni.GetString("frmReports", "MSG5", "Жесткие диски"))
+        cmbGar.Items.Add(langIni.GetString("frmReports", "MSG6", "Звуковая карта"))
+        cmbGar.Items.Add(langIni.GetString("frmReports", "MSG7", "Материнские платы"))
+        cmbGar.Items.Add(langIni.GetString("frmReports", "MSG8", "Модем"))
+        cmbGar.Items.Add(langIni.GetString("frmReports", "MSG9", "Монитор"))
+        cmbGar.Items.Add(langIni.GetString("frmReports", "MSG10", "Память ОЗУ"))
+        cmbGar.Items.Add(langIni.GetString("frmReports", "MSG13", "Процессоры"))
 
 
         FillComboNET(Me.cmbReport2fil, "FILIAL", "SPR_FILIAL", "", False, True)
         FillComboNET(Me.cmbBrancheCashe, "FILIAL", "SPR_FILIAL", "", False, True)
         ' FillComboNET(Me.cmbBrancheC, "FILIAL", "SPR_FILIAL", "", False, True)
 
-        cmbBrancheCashe.Items.Add(langIni.GetString("frmReports", "MSG1", ""))
+        cmbBrancheCashe.Items.Add(langIni.GetString("frmReports", "MSG1", "Все"))
 
-        cmbReport2fil.Items.Add(langIni.GetString("frmReports", "MSG1", ""))
+        cmbReport2fil.Items.Add(langIni.GetString("frmReports", "MSG1", "Все"))
 
         FillComboNET(Me.cmbBranche, "FILIAL", "SPR_FILIAL", "", False, True)
-        cmbBranche.Items.Add(langIni.GetString("frmReports", "MSG1", ""))
+        cmbBranche.Items.Add(langIni.GetString("frmReports", "MSG1", "Все"))
 
-        ' cmbBrancheC.Items.Add(langIni.GetString("frmReports", "MSG1", ""))
+        ' cmbBrancheC.Items.Add(langIni.GetString("frmReports", "MSG1", "Все"))
 
         'Отчет по ремонтам
         FillComboNET(Me.CmbRemont, "Name", "SPR_Master", "", False, True)
-        CmbRemont.Items.Add(langIni.GetString("frmReports", "MSG1", ""))
+        CmbRemont.Items.Add(langIni.GetString("frmReports", "MSG1", "Все"))
         FillComboNET(Me.cmbUr, "uroven", "SPR_Uroven", "", False, True)
         'UROVEN
         FillComboNET(Me.cmbVip, "Name", "spr_vip", "", False, True)
@@ -200,7 +200,7 @@ Public Class frmReports
 
         Dim langIni As New IniFile(sLANGPATH)
 
-        poPs = langIni.GetString("frmReports", "MSG1", "")
+        poPs = langIni.GetString("frmReports", "MSG1", "Все")
 
 
 
@@ -409,7 +409,7 @@ ADR:
                             A2 = (A1 \ 60)
                             A1 = (A1 Mod 60)
 
-                            A3 = age & " " & langIni.GetString("frmReports", "MSG42", "") & " " & A2 & ":" & A1 & " " & langIni.GetString("frmReports", "MSG43", "")
+                            A3 = age & " " & langIni.GetString("frmReports", "MSG42", "дн.") & " " & A2 & ":" & A1 & " " & langIni.GetString("frmReports", "MSG43", "ч.")
 
 
                             lvRemont.Items(CInt(intCount)).SubItems.Add(A3)
@@ -493,7 +493,7 @@ ADR:
                                 A2 = (A1 \ 60)
                                 A1 = (A1 Mod 60)
 
-                                A3 = age & " " & langIni.GetString("frmReports", "MSG42", "") & " " & A2 & ":" & A1 & " " & langIni.GetString("frmReports", "MSG43", "")
+                                A3 = age & " " & langIni.GetString("frmReports", "MSG42", "дн.") & " " & A2 & ":" & A1 & " " & langIni.GetString("frmReports", "MSG43", "ч.")
 
                                 lvRemont.Items(CInt(intCount)).SubItems.Add(A3)
                             Else
@@ -606,7 +606,7 @@ ADR2:
                                     A2 = (A1 \ 60)
                                     A1 = (A1 Mod 60)
 
-                                    A3 = age & " " & langIni.GetString("frmReports", "MSG42", "") & " " & A2 & ":" & A1 & " " & langIni.GetString("frmReports", "MSG43", "")
+                                    A3 = age & " " & langIni.GetString("frmReports", "MSG42", "дн.") & " " & A2 & ":" & A1 & " " & langIni.GetString("frmReports", "MSG43", "ч.")
 
                                     lvRemont.Items(CInt(intCount)).SubItems.Add(A3)
                                 Else
@@ -701,7 +701,7 @@ ADR2:
                                             A2 = (A1 \ 60)
                                             A1 = (A1 Mod 60)
 
-                                            A3 = age & " " & langIni.GetString("frmReports", "MSG42", "") & " " & A2 & ":" & A1 & " " & langIni.GetString("frmReports", "MSG43", "")
+                                            A3 = age & " " & langIni.GetString("frmReports", "MSG42", "дн.") & " " & A2 & ":" & A1 & " " & langIni.GetString("frmReports", "MSG43", "ч.")
 
 
 
@@ -747,8 +747,8 @@ Error_:
         cmbReport2Department.Items.Clear()
         Dim langIni As New IniFile(sLANGPATH)
 
-        If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "") Then
-            cmbReport2Department.Items.Add(langIni.GetString("frmReports", "MSG1", ""))
+        If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
+            cmbReport2Department.Items.Add(langIni.GetString("frmReports", "MSG1", "Все"))
             Exit Sub
 
         End If
@@ -766,7 +766,7 @@ Error_:
             Loop
         End With
 
-        cmbReport2Department.Items.Add(langIni.GetString("frmReports", "MSG1", ""))
+        cmbReport2Department.Items.Add(langIni.GetString("frmReports", "MSG1", "Все"))
 
         rs.Close()
         rs = Nothing
@@ -819,16 +819,16 @@ err:
 
         Select Case Trim(cmnReport2Compl.Text)
 
-            Case langIni.GetString("frmReports", "MSG25", "")
+            Case langIni.GetString("frmReports", "MSG25", "Другое")
 
-                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "") Then
+                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
                     'sSQL = "SELECT NET_NAME FROM kompy WHERE (kompy.tiptehn) = 'MFU'"
                     sSQL = "SELECT net_name, COUNT(net_name) as tot_num FROM kompy WHERE tiptehn = 'OT' group by net_name"
 
                 Else
 
-                    If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "") Then
+                    If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
                         'sSQL = "SELECT NET_NAME FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND kompy.tiptehn = 'MFU'"
                         sSQL = "SELECT net_name, COUNT(net_name) as tot_num FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'OT' group by net_name"
@@ -841,16 +841,16 @@ err:
                 End If
 
 
-            Case langIni.GetString("frmReports", "MSG21", "")
+            Case langIni.GetString("frmReports", "MSG21", "МФУ")
 
-                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "") Then
+                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
                     'sSQL = "SELECT NET_NAME FROM kompy WHERE (kompy.tiptehn) = 'MFU'"
                     sSQL = "SELECT net_name, COUNT(tiptehn) as tot_num FROM kompy WHERE tiptehn = 'MFU' group by net_name"
 
                 Else
 
-                    If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "") Then
+                    If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
                         'sSQL = "SELECT NET_NAME FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND kompy.tiptehn = 'MFU'"
                         sSQL = "SELECT net_name, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'MFU' group by net_name"
@@ -863,16 +863,16 @@ err:
                 End If
 
 
-            Case langIni.GetString("frmReports", "MSG24", "")
+            Case langIni.GetString("frmReports", "MSG24", "Фотоаппарат")
 
-                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "") Then
+                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
                     'sSQL = "SELECT NET_NAME FROM kompy WHERE (kompy.tiptehn) = 'MFU'"
                     sSQL = "SELECT net_name, COUNT(tiptehn) as tot_num FROM kompy WHERE tiptehn = 'PHOTO' group by net_name"
 
                 Else
 
-                    If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "") Then
+                    If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
                         'sSQL = "SELECT NET_NAME FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND kompy.tiptehn = 'MFU'"
                         sSQL = "SELECT net_name, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PHOTO' group by net_name"
@@ -884,16 +884,16 @@ err:
                     End If
                 End If
 
-            Case langIni.GetString("frmReports", "MSG23", "")
+            Case langIni.GetString("frmReports", "MSG23", "Факс")
 
-                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "") Then
+                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
                     'sSQL = "SELECT NET_NAME FROM kompy WHERE (kompy.tiptehn) = 'MFU'"
                     sSQL = "SELECT net_name, COUNT(tiptehn) as tot_num FROM kompy WHERE tiptehn = 'FAX' group by net_name"
 
                 Else
 
-                    If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "") Then
+                    If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
                         'sSQL = "SELECT NET_NAME FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND kompy.tiptehn = 'MFU'"
                         sSQL = "SELECT net_name, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'FAX' group by net_name"
@@ -910,16 +910,16 @@ err:
 
 
                 'Êîïèðû
-            Case langIni.GetString("frmReports", "MSG20", "")
+            Case langIni.GetString("frmReports", "MSG20", "Копиры")
 
-                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "") Then
+                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
                     'sSQL = "SELECT NET_NAME FROM kompy WHERE (kompy.tiptehn) = 'MFU'"
                     sSQL = "SELECT net_name, COUNT(tiptehn) as tot_num FROM kompy WHERE tiptehn = 'KOpir' group by net_name"
 
                 Else
 
-                    If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "") Then
+                    If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
                         'sSQL = "SELECT NET_NAME FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND kompy.tiptehn = 'MFU'"
                         sSQL = "SELECT net_name, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'KOpir' group by net_name"
@@ -934,16 +934,16 @@ err:
 
 
 
-            Case langIni.GetString("frmReports", "MSG22", "")
+            Case langIni.GetString("frmReports", "MSG22", "Телефон")
 
-                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "") Then
+                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
                     'sSQL = "SELECT NET_NAME FROM kompy WHERE (kompy.tiptehn) = 'MFU'"
                     sSQL = "SELECT net_name, COUNT(tiptehn) as tot_num FROM kompy WHERE tiptehn = 'PHONE' group by net_name"
 
                 Else
 
-                    If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "") Then
+                    If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
                         'sSQL = "SELECT NET_NAME FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND kompy.tiptehn = 'MFU'"
                         sSQL = "SELECT net_name, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PHONE' group by net_name"
@@ -960,15 +960,15 @@ err:
 
 
 
-            Case langIni.GetString("frmReports", "MSG13", "")
+            Case langIni.GetString("frmReports", "MSG13", "Процессоры")
 
-                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "") Then
+                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
                     'sSQL = "SELECT cpus.cpu1, Count(*) AS tot_num FROM (SELECT cpu1 FROM kompy union all SELECT cpu2 FROM kompy union all SELECT cpu3 FROM kompy union all SELECT cpu4 FROM kompy) AS cpus GROUP BY cpus.cpu1"
                     sSQL = "SELECT cpus.cpu1, Count(*) AS tot_num FROM (SELECT cpu1 FROM kompy WHERE tiptehn = 'PC' union all SELECT cpu2 FROM kompy WHERE tiptehn = 'PC'  union all SELECT cpu3 FROM kompy WHERE tiptehn = 'PC'  union all SELECT cpu4 FROM kompy WHERE tiptehn = 'PC') AS cpus GROUP BY cpus.cpu1"
                     'sSQL = "SELECT cpus.cpu1, Count(*) AS tot_num FROM (SELECT cpu1 FROM kompy union all SELECT cpu2 FROM kompy union all SELECT cpu3 FROM kompy union all SELECT cpu4 FROM kompy) AS cpus GROUP BY cpus.cpu1"
                 Else
 
-                    If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "") Then
+                    If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
                         sSQL = "SELECT cpus.cpu1, Count(*) AS tot_num FROM (SELECT cpu1 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' union all SELECT cpu2 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC'  union all SELECT cpu3 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC'  union all SELECT cpu4 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC') AS cpus GROUP BY cpus.cpu1"
                     Else
                         sSQL = "SELECT cpus.cpu1, Count(*) AS tot_num FROM (SELECT cpu1 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'PC' union all SELECT cpu2 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'PC' union all SELECT cpu3 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'PC' union all SELECT cpu4 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'PC') AS cpus GROUP BY cpus.cpu1"
@@ -976,18 +976,18 @@ err:
                 End If
 
 
-            Case langIni.GetString("frmReports", "MSG15", "")
+            Case langIni.GetString("frmReports", "MSG15", "Тип и частота процессора")
 
                 Select Case DB_N
 
                     Case "MySQL"
 
-                        If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "") Then
+                        If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
                             sSQL = "SELECT cpu1, count(*) as tot_num FROM (SELECT CONCAT(cpu1,' ', cpumhz1) as cpu1 FROM kompy union all SELECT CONCAT(cpu2,' ', cpumhz2) FROM kompy union all SELECT CONCAT(cpu3,' ', cpumhz3) FROM kompy union all SELECT CONCAT(cpu4,' ', cpumhz4) FROM kompy) AS cpus group by cpu1"
 
                         Else
 
-                            If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "") Then
+                            If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
                                 sSQL = "SELECT cpu1, count(*) as tot_num FROM (SELECT CONCAT(cpu1,' ', cpumhz1) as cpu1 FROM kompy  WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' union all SELECT CONCAT(cpu2,' ', cpumhz2) FROM kompy  WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC'  union all SELECT CONCAT(cpu3,' ', cpumhz3) FROM kompy  WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC'  union all SELECT CONCAT(cpu4,' ', cpumhz4) FROM kompy  WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' ) AS cpus group by cpu1"
                             Else
                                 sSQL = "SELECT cpu1, count(*) as tot_num FROM (SELECT CONCAT(cpu1,' ', cpumhz1) as cpu1 FROM kompy  WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'PC' union all SELECT CONCAT(cpu2,' ', cpumhz2) FROM kompy  WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'PC' union all SELECT CONCAT(cpu3,' ', cpumhz3) FROM kompy  WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'PC' union all SELECT CONCAT(cpu4,' ', cpumhz4) FROM kompy  WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'PC') AS cpus group by cpu1"
@@ -997,12 +997,12 @@ err:
 
                     Case Else
 
-                        If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "") Then
+                        If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
                             sSQL = "SELECT cpu1, count(*) as tot_num FROM (SELECT (cpu1+' '+ cpumhz1) as cpu1 FROM kompy union all SELECT (cpu2+' '+ cpumhz2) FROM kompy union all SELECT (cpu3+' '+ cpumhz3) FROM kompy union all SELECT (cpu4+' '+ cpumhz4) FROM kompy) AS cpus group by cpu1"
 
                         Else
 
-                            If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "") Then
+                            If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
                                 sSQL = "SELECT cpu1, count(*) as tot_num FROM (SELECT (cpu1+' '+ cpumhz1) as cpu1 FROM kompy  WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' union all SELECT (cpu2+' '+ cpumhz2) FROM kompy  WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC'  union all SELECT (cpu3+' '+ cpumhz3) FROM kompy  WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC'  union all SELECT (cpu4+' '+ cpumhz4) FROM kompy  WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC') AS cpus group by cpu1"
 
                             Else
@@ -1014,15 +1014,15 @@ err:
 
                 End Select
 
-            Case langIni.GetString("frmReports", "MSG7", "")
+            Case langIni.GetString("frmReports", "MSG7", "Материнские платы")
 
-                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "") Then
+                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
                     sSQL = "SELECT mb, COUNT(tiptehn) as tot_num FROM kompy WHERE tiptehn = 'PC' group by mb"
 
                 Else
 
-                    If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "") Then
+                    If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
 
                         sSQL = "SELECT mb, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' group by mb"
@@ -1039,16 +1039,16 @@ err:
 
 
 
-            Case langIni.GetString("frmReports", "MSG4", "")
+            Case langIni.GetString("frmReports", "MSG4", "Видео карты")
 
-                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "") Then
+                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
                     'sSQL = "SELECT NET_NAME FROM kompy WHERE (kompy.tiptehn) = 'MFU'"
                     sSQL = "SELECT SVGA_NAME, COUNT(tiptehn) as tot_num FROM kompy WHERE tiptehn = 'PC' group by SVGA_NAME"
 
                 Else
 
-                    If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "") Then
+                    If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
                         'sSQL = "SELECT NET_NAME FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND kompy.tiptehn = 'MFU'"
                         sSQL = "SELECT SVGA_NAME, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' group by SVGA_NAME"
@@ -1063,15 +1063,15 @@ err:
 
 
 
-            Case langIni.GetString("frmReports", "MSG5", "")
+            Case langIni.GetString("frmReports", "MSG5", "Жесткие диски")
 
-                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "") Then
+                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
                     'sSQL = "SELECT cpus.HDD_Name_1, Count(*) AS tot_num FROM (SELECT HDD_Name_1 FROM kompy WHERE tiptehn = 'PC' union all SELECT HDD_Name_2 FROM kompy union all SELECT HDD_Name_3 FROM kompy union all SELECT  HDD_Name_4 FROM kompy) AS cpus GROUP BY cpus.HDD_Name_1"
                     sSQL = "SELECT cpus.HDD_Name_1, Count(*) AS tot_num FROM (SELECT HDD_Name_1 FROM kompy WHERE tiptehn = 'PC' union all SELECT HDD_Name_2 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' union all SELECT HDD_Name_3 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' union all SELECT  HDD_Name_4 FROM kompy WHERE tiptehn = 'PC' ) AS cpus GROUP BY cpus.HDD_Name_1"
                 Else
 
-                    If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "") Then
+                    If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
                         sSQL = "SELECT cpus.HDD_Name_1, Count(*) AS tot_num FROM (SELECT HDD_Name_1 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' union all SELECT HDD_Name_2 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' union all SELECT HDD_Name_3 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' union all SELECT  HDD_Name_4 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' ) AS cpus GROUP BY cpus.HDD_Name_1"
 
                     Else
@@ -1081,14 +1081,14 @@ err:
                 End If
 
 
-            Case langIni.GetString("frmReports", "MSG14", "")
+            Case langIni.GetString("frmReports", "MSG14", "Сетевые карты")
 
-                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "") Then
+                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
                     'sSQL = "SELECT cpus.NET_NAME_1, Count(*) AS tot_num FROM (SELECT NET_NAME_1 FROM kompy union all SELECT NET_NAME_2 FROM kompy) AS cpus GROUP BY cpus.NET_NAME_1"
                     sSQL = "SELECT cpus.NET_NAME_1, Count(*) AS tot_num FROM (SELECT NET_NAME_1 FROM kompy WHERE tiptehn = 'PC' union all SELECT NET_NAME_2 FROM kompy WHERE tiptehn = 'PC' ) AS cpus GROUP BY cpus.NET_NAME_1"
                 Else
 
-                    If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "") Then
+                    If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
                         sSQL = "SELECT cpus.NET_NAME_1, Count(*) AS tot_num FROM (SELECT NET_NAME_1 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' union all SELECT NET_NAME_2 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' ) AS cpus GROUP BY cpus.NET_NAME_1"
 
                     Else
@@ -1097,15 +1097,15 @@ err:
                     End If
                 End If
 
-            Case langIni.GetString("frmReports", "MSG8", "")
+            Case langIni.GetString("frmReports", "MSG8", "Модем")
 
-                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "") Then
+                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
                     sSQL = "SELECT MODEM_NAME, COUNT(tiptehn) as tot_num FROM kompy WHERE tiptehn = 'PC' group by MODEM_NAME"
 
                 Else
 
-                    If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "") Then
+                    If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
 
                         sSQL = "SELECT MODEM_NAME, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' group by MODEM_NAME"
@@ -1119,15 +1119,15 @@ err:
 
 
 
-            Case langIni.GetString("frmReports", "MSG3", "")
+            Case langIni.GetString("frmReports", "MSG3", "USB")
 
-                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "") Then
+                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
                     sSQL = "SELECT USB_NAME, COUNT(tiptehn) as tot_num FROM kompy WHERE tiptehn = 'PC' group by USB_NAME"
 
                 Else
 
-                    If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "") Then
+                    If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
 
                         sSQL = "SELECT USB_NAME, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' group by USB_NAME"
@@ -1142,15 +1142,15 @@ err:
 
 
 
-            Case langIni.GetString("frmReports", "MSG2", "")
+            Case langIni.GetString("frmReports", "MSG2", "PCI")
 
-                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "") Then
+                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
                     sSQL = "SELECT PCI_NAME, COUNT(tiptehn) as tot_num FROM kompy WHERE tiptehn = 'PC' group by PCI_NAME"
 
                 Else
 
-                    If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "") Then
+                    If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
 
                         sSQL = "SELECT PCI_NAME, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' group by PCI_NAME"
@@ -1163,14 +1163,14 @@ err:
                 End If
 
 
-            Case langIni.GetString("frmReports", "MSG19", "")
+            Case langIni.GetString("frmReports", "MSG19", "Оптические накопители")
 
-                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "") Then
+                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
                     'sSQL = "SELECT cpus.CD_NAME, Count(*) AS tot_num FROM (SELECT CD_NAME FROM kompy union all SELECT CDRW_NAME FROM kompy union all SELECT DVD_NAME FROM kompy) AS cpus GROUP BY cpus.CD_NAME"
                     sSQL = "SELECT cpus.CD_NAME, Count(*) AS tot_num FROM (SELECT CD_NAME FROM kompy WHERE tiptehn = 'PC' union all SELECT CDRW_NAME FROM kompy WHERE tiptehn = 'PC'  union all SELECT DVD_NAME FROM kompy WHERE tiptehn = 'PC') AS cpus GROUP BY cpus.CD_NAME"
                 Else
 
-                    If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "") Then
+                    If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
                         sSQL = "SELECT cpus.CD_NAME, Count(*) AS tot_num FROM (SELECT CD_NAME FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' union all SELECT CDRW_NAME FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC'  union all SELECT DVD_NAME FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC') AS cpus GROUP BY cpus.CD_NAME"
                     Else
                         sSQL = "SELECT cpus.CD_NAME, Count(*) AS tot_num FROM (SELECT CD_NAME FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'PC' union all SELECT CDRW_NAME FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'PC' union all SELECT DVD_NAME FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'PC') AS cpus GROUP BY cpus.CD_NAME"
@@ -1179,14 +1179,14 @@ err:
 
 
 
-            Case langIni.GetString("frmReports", "MSG9", "")
+            Case langIni.GetString("frmReports", "MSG9", "Монитор")
 
-                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "") Then
+                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
                     'sSQL = "SELECT cpus.MONITOR_NAME, Count(*) AS tot_num FROM (SELECT MONITOR_NAME FROM kompy union all SELECT MONITOR_NAME2 FROM kompy) AS cpus GROUP BY cpus.MONITOR_NAME"
                     sSQL = "SELECT cpus.MONITOR_NAME, Count(*) AS tot_num FROM (SELECT MONITOR_NAME FROM kompy union all SELECT MONITOR_NAME2 FROM kompy) AS cpus GROUP BY cpus.MONITOR_NAME"
                 Else
 
-                    If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "") Then
+                    If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
                         sSQL = "SELECT cpus.MONITOR_NAME, Count(*) AS tot_num FROM (SELECT MONITOR_NAME FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' union all SELECT MONITOR_NAME2 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "') AS cpus GROUP BY cpus.MONITOR_NAME"
 
                     Else
@@ -1196,16 +1196,16 @@ err:
                 End If
 
 
-            Case langIni.GetString("frmReports", "MSG9", "")
+            Case langIni.GetString("frmReports", "MSG9", "Монитор")
 
-                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "") Then
+                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
                     'sSQL = "SELECT NET_NAME FROM kompy WHERE (kompy.tiptehn) = 'MFU'"
                     sSQL = "SELECT SOUND_NAME, COUNT(tiptehn) as tot_num FROM kompy WHERE tiptehn = 'PC' group by SOUND_NAME"
 
                 Else
 
-                    If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "") Then
+                    If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
                         'sSQL = "SELECT NET_NAME FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND kompy.tiptehn = 'MFU'"
                         sSQL = "SELECT SOUND_NAME, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' group by SOUND_NAME"
@@ -1220,15 +1220,15 @@ err:
 
 
 
-            Case langIni.GetString("frmReports", "MSG10", "")
+            Case langIni.GetString("frmReports", "MSG10", "Память ОЗУ")
 
-                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "") Then
+                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
                     'sSQL = "SELECT cpus.RAM_1, Count(*) AS tot_num FROM (SELECT RAM_1 FROM kompy union all SELECT RAM_2 FROM kompy union all SELECT RAM_3 FROM kompy union all SELECT  RAM_4 FROM kompy) AS cpus GROUP BY cpus.RAM_1"
                     sSQL = "SELECT cpus.RAM_1, Count(*) AS tot_num FROM (SELECT RAM_1 FROM kompy WHERE tiptehn = 'PC' union all SELECT RAM_2 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' union all SELECT RAM_3 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' union all SELECT  RAM_4 FROM kompy WHERE tiptehn = 'PC' ) AS cpus GROUP BY cpus.RAM_1"
 
                 Else
 
-                    If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "") Then
+                    If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
                         sSQL = "SELECT cpus.RAM_1, Count(*) AS tot_num FROM (SELECT RAM_1 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' union all SELECT RAM_2 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' union all SELECT RAM_3 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' union all SELECT  RAM_4 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' ) AS cpus GROUP BY cpus.RAM_1"
 
                     Else
@@ -1242,14 +1242,14 @@ err:
 
 
 
-            Case langIni.GetString("frmReports", "MSG12", "")
+            Case langIni.GetString("frmReports", "MSG12", "Производители жестких дисков")
 
-                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "") Then
+                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
                     'sSQL = "SELECT cpus.HDD_PROIZV_1, Count(*) AS tot_num FROM (SELECT HDD_PROIZV_1 FROM kompy union all SELECT HDD_PROIZV_2 FROM kompy union all SELECT HDD_PROIZV_3 FROM kompy union all SELECT  HDD_PROIZV_4 FROM kompy) AS cpus GROUP BY cpus.HDD_PROIZV_1"
                     sSQL = "SELECT cpus.HDD_PROIZV_1, Count(*) AS tot_num FROM (SELECT HDD_PROIZV_1 FROM kompy WHERE tiptehn = 'PC' union all SELECT HDD_PROIZV_2 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' union all SELECT HDD_PROIZV_3 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' union all SELECT  HDD_PROIZV_4 FROM kompy WHERE tiptehn = 'PC' ) AS cpus GROUP BY cpus.HDD_PROIZV_1"
                 Else
 
-                    If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "") Then
+                    If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
                         sSQL = "SELECT cpus.HDD_PROIZV_1, Count(*) AS tot_num FROM (SELECT HDD_PROIZV_1 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' union all SELECT HDD_PROIZV_2 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' union all SELECT HDD_PROIZV_3 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' union all SELECT  HDD_PROIZV_4 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' ) AS cpus GROUP BY cpus.HDD_PROIZV_1"
 
                     Else
@@ -1260,7 +1260,7 @@ err:
 
                 '#PRINTERS
                 '######################################################
-            Case langIni.GetString("frmReports", "MSG11", "")
+            Case langIni.GetString("frmReports", "MSG11", "Принтеры")
 
                 chkReport2Prn.Visible = True
 
@@ -1270,12 +1270,12 @@ err:
                     Case 0
 
 
-                        If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "") Then
+                        If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
                             sSQL = "SELECT net_name as cpus, COUNT(tiptehn) as tot_num  FROM kompy WHERE tiptehn = 'Printer' group by net_name"
 
                         Else
 
-                            If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "") Then
+                            If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
                                 sSQL = "SELECT net_name as cpus, COUNT(tiptehn) as tot_num  FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'Printer' group by net_name"
 
                             Else
@@ -1286,12 +1286,12 @@ err:
 
                     Case 1
 
-                        If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "") Then
+                        If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
                             sSQL = "SELECT cpus.PRINTER_NAME_1, Count(*) AS tot_num FROM (SELECT PRINTER_NAME_1 FROM kompy WHERE tiptehn = 'PC' union all SELECT PRINTER_NAME_2 FROM kompy WHERE tiptehn = 'PC' union all SELECT PRINTER_NAME_3 FROM kompy WHERE tiptehn = 'PC' union all SELECT  PRINTER_NAME_4 FROM kompy WHERE tiptehn = 'PC') AS cpus GROUP BY cpus.PRINTER_NAME_1"
 
                         Else
 
-                            If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "") Then
+                            If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
                                 sSQL = "SELECT cpus.PRINTER_NAME_1, Count(*) AS tot_num FROM (SELECT PRINTER_NAME_1 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' union all SELECT PRINTER_NAME_2 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' union all SELECT PRINTER_NAME_3 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' union all SELECT  PRINTER_NAME_4 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' ) AS cpus GROUP BY cpus.PRINTER_NAME_1"
 
                             Else
@@ -1305,16 +1305,16 @@ err:
 
                 'ÓÑÒÀÍÎÂËÅÍÍÛÉ ÑÎÔÒ
 
-            Case langIni.GetString("frmReports", "MSG16", "")
+            Case langIni.GetString("frmReports", "MSG16", "Установленное ПО")
                 Dim intCount As Integer = 0
 
-                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "") Then
+                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
                     sSQL = "SELECT SOFT_INSTALL.Soft, COUNT(SOFT_INSTALL.Soft) as tot_num FROM SOFT_INSTALL, kompy WHERE SOFT_INSTALL.Id_Comp=kompy.ID group by SOFT_INSTALL.Soft order by SOFT_INSTALL.Soft"
 
                 Else
 
-                    If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "") Then
+                    If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
                         sSQL = "SELECT SOFT_INSTALL.Soft, COUNT(SOFT_INSTALL.Soft) as tot_num FROM SOFT_INSTALL, kompy WHERE SOFT_INSTALL.Id_Comp=kompy.ID AND kompy.FILIAL='" & cmbReport2fil.Text & "' group by SOFT_INSTALL.Soft order by SOFT_INSTALL.Soft"
 
@@ -1328,14 +1328,14 @@ err:
 
 
 
-            Case langIni.GetString("frmReports", "MSG17", "")
+            Case langIni.GetString("frmReports", "MSG17", "Тип и диагональ монитора")
 
-                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "") Then
+                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
                     'sSQL = "SELECT cpus.Monitor_dum, Count(*) AS tot_num FROM (SELECT Monitor_dum FROM kompy union all SELECT Monitor_dum2 FROM kompy) AS cpus GROUP BY cpus.Monitor_dum"
                     sSQL = "SELECT cpus.Monitor_dum, Count(*) AS tot_num FROM (SELECT Monitor_dum FROM kompy WHERE tiptehn = 'PC' union all SELECT Monitor_dum2 FROM kompy WHERE tiptehn = 'PC' ) AS cpus GROUP BY cpus.Monitor_dum"
                 Else
 
-                    If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "") Then
+                    If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
                         sSQL = "SELECT cpus.Monitor_dum, Count(*) AS tot_num FROM (SELECT Monitor_dum FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' union all SELECT Monitor_dum2 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' ) AS cpus GROUP BY cpus.Monitor_dum"
 
                     Else
@@ -1344,16 +1344,16 @@ err:
                     End If
                 End If
 
-            Case langIni.GetString("frmReports", "MSG18", "")
+            Case langIni.GetString("frmReports", "MSG18", "Сетевые устройства")
 
-                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "") Then
+                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
                     'sSQL = "SELECT NET_NAME FROM kompy WHERE (kompy.tiptehn) = 'MFU'"
                     sSQL = "SELECT PRINTER_SN_1, COUNT(tiptehn) as tot_num FROM kompy WHERE tiptehn = 'NET' group by PRINTER_SN_1"
 
                 Else
 
-                    If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "") Then
+                    If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
                         'sSQL = "SELECT NET_NAME FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND kompy.tiptehn = 'MFU'"
                         sSQL = "SELECT PRINTER_SN_1, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'NET' group by PRINTER_SN_1"
@@ -1368,13 +1368,13 @@ err:
 
             Case Else
 
-                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "") Then
+                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
                     sSQL = "SELECT SOFT_INSTALL.Soft, COUNT(SOFT_INSTALL.Soft) as tot_num FROM SOFT_INSTALL, kompy WHERE SOFT_INSTALL.Id_Comp=kompy.ID and SOFT_INSTALL.TIP='" & cmnReport2Compl.Text & "' group by SOFT_INSTALL.Soft order by SOFT_INSTALL.Soft"
 
                 Else
 
-                    If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "") Then
+                    If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
                         sSQL = "SELECT SOFT_INSTALL.Soft, COUNT(SOFT_INSTALL.Soft) as tot_num FROM SOFT_INSTALL, kompy WHERE SOFT_INSTALL.Id_Comp=kompy.ID and SOFT_INSTALL.TIP='" & cmnReport2Compl.Text & "' AND kompy.FILIAL='" & cmbReport2fil.Text & "' group by SOFT_INSTALL.Soft order by SOFT_INSTALL.Soft"
 
@@ -1521,17 +1521,17 @@ Error_:
 
         cmbDepartment.Items.Clear()
 
-        If cmbBranche.Text = langIni.GetString("frmReports", "MSG1", "") Then
+        If cmbBranche.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
-            cmbDepartment.Items.Add(langIni.GetString("frmReports", "MSG1", ""))
-            cmbDepartment.Text = langIni.GetString("frmReports", "MSG1", "")
+            cmbDepartment.Items.Add(langIni.GetString("frmReports", "MSG1", "Все"))
+            cmbDepartment.Text = langIni.GetString("frmReports", "MSG1", "Все")
 
-            cmbOffice.Text = langIni.GetString("frmReports", "MSG1", "")
+            cmbOffice.Text = langIni.GetString("frmReports", "MSG1", "Все")
 
             Exit Sub
         End If
 
-        If Len(cmbDepartment.Text) = 0 Then cmbDepartment.Text = langIni.GetString("frmReports", "MSG1", "")
+        If Len(cmbDepartment.Text) = 0 Then cmbDepartment.Text = langIni.GetString("frmReports", "MSG1", "Все")
 
         Dim rs1 As ADODB.Recordset
         rs1 = New ADODB.Recordset
@@ -1565,13 +1565,13 @@ Error_:
                 Loop
             End With
 
-            cmbDepartment.Items.Add(langIni.GetString("frmReports", "MSG1", ""))
+            cmbDepartment.Items.Add(langIni.GetString("frmReports", "MSG1", "Все"))
 
             rs1.Close()
             rs1 = Nothing
 
         Else
-            cmbDepartment.Items.Add(langIni.GetString("frmReports", "MSG1", ""))
+            cmbDepartment.Items.Add(langIni.GetString("frmReports", "MSG1", "Все"))
 
         End If
 
@@ -1583,9 +1583,9 @@ err_:
     Private Sub btnUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdate.Click
         Dim langIni As New IniFile(sLANGPATH)
 
-        If Len(cmbBranche.Text) = 0 Then cmbBranche.Text = langIni.GetString("frmReports", "MSG1", "")
-        If Len(cmbDepartment.Text) = 0 Then cmbDepartment.Text = langIni.GetString("frmReports", "MSG1", "")
-        If Len(cmbOffice.Text) = 0 Then cmbOffice.Text = langIni.GetString("frmReports", "MSG1", "")
+        If Len(cmbBranche.Text) = 0 Then cmbBranche.Text = langIni.GetString("frmReports", "MSG1", "Все")
+        If Len(cmbDepartment.Text) = 0 Then cmbDepartment.Text = langIni.GetString("frmReports", "MSG1", "Все")
+        If Len(cmbOffice.Text) = 0 Then cmbOffice.Text = langIni.GetString("frmReports", "MSG1", "Все")
 
 
         Me.Cursor = Cursors.WaitCursor
@@ -1605,264 +1605,264 @@ err_:
         LvKompOtd.Columns.Clear()
         LvKompOtd.Items.Clear()
 
-        LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(48)", ""))
+        LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(48)", "Имя компьютера"))
 
         Dim intj As Long
         intj = 0
 
 
         If chk_K1.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(1)", ""), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(1)", "ЦПУ"), 100, HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K2.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(2)", ""), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(2)", "Материнская плата"), 100, HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K3.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(3)", ""), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(3)", "Видео карта"), 100, HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K4.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(4)", ""), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(4)", "Звуковая карта"), 100, HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K5.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(5)", ""), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(5)", "Жесткий диск 1"), 100, HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K6.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(6)", ""), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(6)", "Жесткий диск 1 SN"), 100, HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K7.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(7)", ""), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(7)", "Жесткий диск 2"), 100, HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K8.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(8)", ""), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(8)", "Жесткий диск 2 SN"), 100, HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K9.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(9)", ""), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(9)", "Жесткий диск 3"), 100, HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K10.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(10)", ""), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(10)", "Жесткий диск 3 SN"), 100, HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K11.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(11)", ""), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(11)", "Жесткий диск 4"), 100, HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K12.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(12)", ""), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(12)", "Жесткий диск 4 SN"), 100, HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K13.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(13)", ""), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(13)", "Модуль памяти 1"), 100, HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K14.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(14)", ""), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(14)", "Модуль памяти 2"), 100, HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K15.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(15)", ""), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(15)", "Модуль памяти 3"), 100, HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K16.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(16)", ""), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(16)", "Модуль памяти 4"), 100, HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K17.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(17)", ""), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(17)", "Оптический диск 1"), 100, HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K18.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(18)", ""), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(18)", "Оптический диск 2"), 100, HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K19.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(19)", ""), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(19)", "Оптический диск 3"), 100, HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K20.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(20)", ""), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(20)", "Сетевая карта 1"), 100, HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K21.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(21)", ""), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(21)", "Сетевая карта 2"), 100, HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K22.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(22)", ""), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(22)", "IP 1"), 100, HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K23.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(23)", ""), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(23)", "IP 2"), 100, HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K24.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(24)", ""), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(24)", "MAC 1"), 100, HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K25.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(25)", ""), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(25)", "MAC 2"), 100, HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K26.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(26)", ""), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(26)", "Дисковод"), 100, HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K27.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(27)", ""), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(27)", "Производитель системного блока"), 100, HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K28.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(28)", ""), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(28)", "SN Sys"), 100, HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K29.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(29)", ""), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(29)", "Монитор"), 100, HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K30.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(30)", ""), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(30)", "Номер монитора"), 100, HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K31.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(31)", ""), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(31)", "Принтер 1"), 100, HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K32.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(32)", ""), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(32)", "Принтер 2"), 100, HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K33.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(33)", ""), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(33)", "Принтер 3"), 100, HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K34.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(34)", ""), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(34)", "Акустическая система"), 100, HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K35.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(35)", ""), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(35)", "Модем"), 100, HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K36.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(36)", ""), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(36)", "Клавиатура"), 100, HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K37.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(37)", ""), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(37)", "Мышь"), 100, HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K38.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(38)", ""), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(38)", "Корпус"), 100, HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K39.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(39)", ""), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(39)", "Блок питания"), 100, HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K40.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(40)", ""), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(40)", "И.Н. системного блока"), 100, HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K41.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(41)", ""), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(41)", "И.Н. монитора"), 100, HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K42.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(42)", ""), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(42)", "И.Н. ИБП"), 100, HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K47.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(49)", ""), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(49)", "И.Н. Принтера"), 100, HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K43.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(43)", ""), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(43)", "Псевдоним"), 100, HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K44.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(44)", ""), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(44)", "Ответственный"), 100, HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K45.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(45)", ""), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(45)", "Место установки"), 100, HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K48.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(70)", ""), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(70)", "Стоимость"), 100, HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K49.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(71)", ""), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(71)", "Дата ввода"), 100, HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K50.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(72)", ""), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(72)", "Поставщик"), 100, HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K51.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(73)", ""), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(73)", "Назначение"), 100, HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K52.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(74)", ""), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(74)", "Пользователь"), 100, HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
@@ -2224,15 +2224,15 @@ err_:
 
 
         If Len(cmbBranche.Text) = 0 Then Exit Sub
-        If Len(cmbDepartment.Text) = 0 Then cmbDepartment.Text = langIni.GetString("frmReports", "MSG1", "")
-        If Len(cmbOffice.Text) = 0 Then cmbOffice.Text = langIni.GetString("frmReports", "MSG1", "")
+        If Len(cmbDepartment.Text) = 0 Then cmbDepartment.Text = langIni.GetString("frmReports", "MSG1", "Все")
+        If Len(cmbOffice.Text) = 0 Then cmbOffice.Text = langIni.GetString("frmReports", "MSG1", "Все")
 
 
         'Call Pereschet()
         Me.BeginInvoke(New MethodInvoker(AddressOf Pereschet))
 
 
-        pTEXT(1) = langIni.GetString("frmReports", "MSG1", "")
+        pTEXT(1) = langIni.GetString("frmReports", "MSG1", "Все")
 
 
         If optPC.Checked = True Then TIPST = "PC"
@@ -2614,65 +2614,65 @@ Error_:
 
             Select Case cmbOthers.Text
 
-                Case langIni.GetString("frmMain", "28", "")
+                Case langIni.GetString("frmMain", "28", "Копир")
 
                     sTEXTP = "KOpir"
 
-                Case langIni.GetString("frmMain", "29", "")
+                Case langIni.GetString("frmMain", "29", "Принтер")
 
                     sTEXTP = "Printer"
 
 
-                Case langIni.GetString("frmMain", "30", "")
+                Case langIni.GetString("frmMain", "30", "МФУ")
 
                     sTEXTP = "MFU"
 
 
-                Case langIni.GetString("frmMain", "31", "")
+                Case langIni.GetString("frmMain", "31", "Сетевое оборудование")
 
                     sTEXTP = "NET"
 
 
-                Case langIni.GetString("frmMain", "32", "")
+                Case langIni.GetString("frmMain", "32", "Телефон")
 
                     sTEXTP = "PHONE"
 
-                Case langIni.GetString("frmMain", "33", "")
+                Case langIni.GetString("frmMain", "33", "Фотоаппарат")
 
                     sTEXTP = "PHOTO"
 
-                Case langIni.GetString("frmMain", "34", "")
+                Case langIni.GetString("frmMain", "34", "Факс")
 
 
                     sTEXTP = "FAX"
 
 
-                Case langIni.GetString("frmMain", "35", "")
+                Case langIni.GetString("frmMain", "35", "Монитор")
 
-                   
+
                     sTEXTP = "MONITOR"
 
-                Case langIni.GetString("frmMain", "36", "")
+                Case langIni.GetString("frmMain", "36", "дисковод ZIP")
 
                     sTEXTP = "ZIP"
 
-                Case langIni.GetString("frmMain", "37", "")
+                Case langIni.GetString("frmMain", "37", "Сканер")
 
                     sTEXTP = "SCANER"
 
-                Case langIni.GetString("frmMain", "38", "")
+                Case langIni.GetString("frmMain", "38", "Другое оборудование")
 
                     sTEXTP = "OT"
 
-                Case langIni.GetString("frmMain", "39", "")
+                Case langIni.GetString("frmMain", "39", "USB Устройства")
 
                     sTEXTP = "USB"
 
-                Case langIni.GetString("frmMain", "40", "")
+                Case langIni.GetString("frmMain", "40", "Акустические Системы")
 
                     sTEXTP = "SOUND"
 
-                Case langIni.GetString("frmMain", "41", "")
+                Case langIni.GetString("frmMain", "41", "Бесперебойники")
 
                     sTEXTP = "IBP"
 
@@ -2724,16 +2724,16 @@ Error_:
 
 
         LvKompOtd.Columns.Clear()
-        LvKompOtd.Columns.Add((langIni.GetString("frmReports", "B(49)", "")), 1, HorizontalAlignment.Left)
-        LvKompOtd.Columns.Add((langIni.GetString("frmReports", "B(50)", "")), 100, HorizontalAlignment.Left)
-        LvKompOtd.Columns.Add((langIni.GetString("frmReports", "B(51)", "")), 100, HorizontalAlignment.Left)
-        LvKompOtd.Columns.Add((langIni.GetString("frmReports", "B(52)", "")), 100, HorizontalAlignment.Left)
-        LvKompOtd.Columns.Add((langIni.GetString("frmReports", "B(53)", "")), 100, HorizontalAlignment.Left)
-        LvKompOtd.Columns.Add((langIni.GetString("frmReports", "B(54)", "")), 100, HorizontalAlignment.Left)
-        LvKompOtd.Columns.Add((langIni.GetString("frmReports", "B(55)", "")), 100, HorizontalAlignment.Left)
-        LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(70)", ""), 100, HorizontalAlignment.Left)
-        LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(71)", ""), 100, HorizontalAlignment.Left)
-        LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(72)", ""), 100, HorizontalAlignment.Left)
+        LvKompOtd.Columns.Add(("№"), 1, HorizontalAlignment.Left)
+        LvKompOtd.Columns.Add((langIni.GetString("frmReports", "B(50)", "Наименование")), 100, HorizontalAlignment.Left)
+        LvKompOtd.Columns.Add((langIni.GetString("frmReports", "B(51)", "Место установки")), 100, HorizontalAlignment.Left)
+        LvKompOtd.Columns.Add((langIni.GetString("frmReports", "B(52)", "Ответственный")), 100, HorizontalAlignment.Left)
+        LvKompOtd.Columns.Add((langIni.GetString("frmReports", "B(53)", "Тип")), 100, HorizontalAlignment.Left)
+        LvKompOtd.Columns.Add((langIni.GetString("frmReports", "B(54)", "Серийный номер")), 100, HorizontalAlignment.Left)
+        LvKompOtd.Columns.Add((langIni.GetString("frmReports", "B(55)", "Инвентарный номер")), 100, HorizontalAlignment.Left)
+        LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(70)", "Стоимость"), 100, HorizontalAlignment.Left)
+        LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(71)", "Дата ввода"), 100, HorizontalAlignment.Left)
+        LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(72)", "Поставщик"), 100, HorizontalAlignment.Left)
         LvKompOtd.Columns.Add("IP", 100, HorizontalAlignment.Left)
         LvKompOtd.Columns.Add("MAC", 100, HorizontalAlignment.Left)
         'If chkTeh(49) = True Then LvKompOtd.Items(CInt(intj)).SubItems.Add(.Fields("DataVVoda").Value)
@@ -2813,7 +2813,7 @@ Error_:
                         Case "PHOTO"
 
                             LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(langIni.GetString("frmReports", "B(56)", ""))
+                            LvKompOtd.Items(CInt(intj)).SubItems.Add(langIni.GetString("frmReports", "B(56)", "Фотоаппарат"))
                             If Not IsDBNull(.Fields("PRINTER_SN_1").Value) Then
                                 LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("PRINTER_SN_1").Value)
                             Else
@@ -2845,7 +2845,7 @@ Error_:
                         Case "PHONE"
 
                             LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(langIni.GetString("frmReports", "B(57)", ""))
+                            LvKompOtd.Items(CInt(intj)).SubItems.Add(langIni.GetString("frmReports", "B(57)", "Телефон"))
                             If Not IsDBNull(.Fields("PRINTER_SN_1").Value) Then
                                 LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("PRINTER_SN_1").Value)
                             Else
@@ -2874,7 +2874,7 @@ Error_:
                         Case "FAX"
 
                             LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(langIni.GetString("frmReports", "B(58)", ""))
+                            LvKompOtd.Items(CInt(intj)).SubItems.Add(langIni.GetString("frmReports", "B(58)", "Факс"))
                             If Not IsDBNull(.Fields("PRINTER_SN_1").Value) Then
                                 LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("PRINTER_SN_1").Value)
                             Else
@@ -2903,7 +2903,7 @@ Error_:
                         Case "SCANER"
 
                             LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(langIni.GetString("frmReports", "B(59)", ""))
+                            LvKompOtd.Items(CInt(intj)).SubItems.Add(langIni.GetString("frmReports", "B(59)", "Сканер"))
                             If Not IsDBNull(.Fields("PRINTER_SN_1").Value) Then
                                 LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("PRINTER_SN_1").Value)
                             Else
@@ -2932,7 +2932,7 @@ Error_:
                         Case "ZIP"
 
                             LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(langIni.GetString("frmReports", "B(60)", ""))
+                            LvKompOtd.Items(CInt(intj)).SubItems.Add(langIni.GetString("frmReports", "B(60)", "Дисковод ZIP"))
                             If Not IsDBNull(.Fields("PRINTER_SN_1").Value) Then
                                 LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("PRINTER_SN_1").Value)
                             Else
@@ -3053,7 +3053,7 @@ Error_:
                         Case "MONITOR"
 
                             LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(langIni.GetString("frmReports", "B(61)", ""))
+                            LvKompOtd.Items(CInt(intj)).SubItems.Add(langIni.GetString("frmReports", "B(61)", "Монитор"))
                             LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("MONITOR_SN").Value)
                             LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("INV_NO_MONITOR").Value)
                             LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("StoimRub").Value)
@@ -3064,7 +3064,7 @@ Error_:
                         Case "NET"
 
                             LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(langIni.GetString("frmReports", "B(62)", ""))
+                            LvKompOtd.Items(CInt(intj)).SubItems.Add(langIni.GetString("frmReports", "B(62)", "Сетевое оборудование"))
                             LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("PORT_1").Value)
                             LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("PRINTER_PROIZV_3").Value)
                             LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("StoimRub").Value)
@@ -3075,7 +3075,7 @@ Error_:
 
 
                             LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(langIni.GetString("frmReports", "B(63)", ""))
+                            LvKompOtd.Items(CInt(intj)).SubItems.Add(langIni.GetString("frmReports", "B(63)", "Принтер"))
                             If Not IsDBNull(.Fields("PRINTER_SN_1").Value) Then
                                 LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("PRINTER_SN_1").Value)
                             Else
@@ -3104,7 +3104,7 @@ Error_:
                         Case "KOpir"
 
                             LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(langIni.GetString("frmReports", "B(64)", ""))
+                            LvKompOtd.Items(CInt(intj)).SubItems.Add(langIni.GetString("frmReports", "B(64)", "Копир"))
                             If Not IsDBNull(.Fields("PRINTER_SN_1").Value) Then
                                 LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("PRINTER_SN_1").Value)
                             Else
@@ -3133,7 +3133,7 @@ Error_:
                         Case "MFU"
 
                             LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(langIni.GetString("frmReports", "B(65)", ""))
+                            LvKompOtd.Items(CInt(intj)).SubItems.Add(langIni.GetString("frmReports", "B(65)", "МФУ"))
                             If Not IsDBNull(.Fields("PRINTER_SN_1").Value) Then
                                 LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("PRINTER_SN_1").Value)
                             Else
@@ -3162,7 +3162,7 @@ Error_:
                         Case "USB"
 
                             LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(langIni.GetString("frmReports", "B(66)", ""))
+                            LvKompOtd.Items(CInt(intj)).SubItems.Add(langIni.GetString("frmReports", "B(66)", "USB"))
                             If Not IsDBNull(.Fields("PRINTER_SN_1").Value) Then
                                 LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("PRINTER_SN_1").Value)
                             Else
@@ -3191,7 +3191,7 @@ Error_:
                         Case "SOUND"
 
                             LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(langIni.GetString("frmReports", "B(67)", ""))
+                            LvKompOtd.Items(CInt(intj)).SubItems.Add(langIni.GetString("frmReports", "B(67)", "Акустика"))
                             If Not IsDBNull(.Fields("PRINTER_SN_1").Value) Then
                                 LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("PRINTER_SN_1").Value)
                             Else
@@ -3220,7 +3220,7 @@ Error_:
                         Case "IBP"
 
                             LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(langIni.GetString("frmReports", "B(68)", ""))
+                            LvKompOtd.Items(CInt(intj)).SubItems.Add(langIni.GetString("frmReports", "B(68)", "Источник бесперебойного питания"))
                             If Not IsDBNull(.Fields("PRINTER_SN_1").Value) Then
                                 LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("PRINTER_SN_1").Value)
                             Else
@@ -3249,7 +3249,7 @@ Error_:
                         Case "FS"
 
                             LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(langIni.GetString("frmReports", "B(69)", ""))
+                            LvKompOtd.Items(CInt(intj)).SubItems.Add(langIni.GetString("frmReports", "B(69)", "Сетевой фильтр"))
                             If Not IsDBNull(.Fields("PRINTER_SN_1").Value) Then
                                 LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("PRINTER_SN_1").Value)
                             Else
@@ -3315,7 +3315,7 @@ Error_:
 
 
         cmbOthers.Visible = True
-        cmbOthers.Text = (langIni.GetString("frmReports", "MSG1", ""))
+        cmbOthers.Text = (langIni.GetString("frmReports", "MSG1", "Все"))
 
 
     End Sub
@@ -3614,16 +3614,16 @@ Error_:
 
         cmbOffice.Items.Clear()
 
-        If cmbDepartment.Text = langIni.GetString("frmReports", "MSG1", "") Then
+        If cmbDepartment.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
-            cmbOffice.Items.Add(langIni.GetString("frmReports", "MSG1", ""))
-            cmbOffice.Text = langIni.GetString("frmReports", "MSG1", "")
+            cmbOffice.Items.Add(langIni.GetString("frmReports", "MSG1", "Все"))
+            cmbOffice.Text = langIni.GetString("frmReports", "MSG1", "Все")
 
 
             Exit Sub
         End If
 
-        If Len(cmbOffice.Text) = 0 Then cmbOffice.Text = langIni.GetString("frmReports", "MSG1", "")
+        If Len(cmbOffice.Text) = 0 Then cmbOffice.Text = langIni.GetString("frmReports", "MSG1", "Все")
 
         Dim rs1 As ADODB.Recordset
 
@@ -3654,13 +3654,13 @@ Error_:
                 Loop
             End With
 
-            cmbOffice.Items.Add(langIni.GetString("frmReports", "MSG1", ""))
+            cmbOffice.Items.Add(langIni.GetString("frmReports", "MSG1", "Все"))
 
             rs1.Close()
             rs1 = Nothing
         Else
 
-            cmbOffice.Items.Add(langIni.GetString("frmReports", "MSG1", ""))
+            cmbOffice.Items.Add(langIni.GetString("frmReports", "MSG1", "Все"))
 
         End If
 
@@ -3956,7 +3956,7 @@ err_:
 
                     Select Case cmbGar.Text
 
-                        Case langIni.GetString("frmReports", "MSG4", "")
+                        Case langIni.GetString("frmReports", "MSG4", "Видео карты")
 
                             sSQL = "SELECT * FROM kompy where id=" & nom
                             rs = New ADODB.Recordset
@@ -3975,7 +3975,7 @@ err_:
                             rs.Close()
                             rs = Nothing
 
-                        Case langIni.GetString("frmReports", "MSG5", "")
+                        Case langIni.GetString("frmReports", "MSG5", "Жесткие диски")
 
                             sSQL = "SELECT * FROM kompy where id=" & nom
                             rs = New ADODB.Recordset
@@ -3994,7 +3994,7 @@ err_:
                             rs = Nothing
 
 
-                        Case langIni.GetString("frmReports", "MSG6", "")
+                        Case langIni.GetString("frmReports", "MSG6", "Звуковая карта")
 
                             sSQL = "SELECT * FROM kompy where id=" & nom
                             rs = New ADODB.Recordset
@@ -4012,7 +4012,7 @@ err_:
                             rs.Close()
                             rs = Nothing
 
-                        Case langIni.GetString("frmReports", "MSG7", "")
+                        Case langIni.GetString("frmReports", "MSG7", "Материнские платы")
 
                             sSQL = "SELECT * FROM kompy where id=" & nom
                             rs = New ADODB.Recordset
@@ -4030,7 +4030,7 @@ err_:
                             rs.Close()
                             rs = Nothing
 
-                        Case langIni.GetString("frmReports", "MSG8", "")
+                        Case langIni.GetString("frmReports", "MSG8", "Модем")
 
                             sSQL = "SELECT * FROM kompy where id=" & nom
                             rs = New ADODB.Recordset
@@ -4048,7 +4048,7 @@ err_:
                             rs.Close()
                             rs = Nothing
 
-                        Case langIni.GetString("frmReports", "MSG9", "")
+                        Case langIni.GetString("frmReports", "MSG9", "Монитор")
                             sSQL = "SELECT * FROM kompy where id=" & nom
                             rs = New ADODB.Recordset
                             rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
@@ -4065,7 +4065,7 @@ err_:
                             rs.Close()
                             rs = Nothing
 
-                        Case langIni.GetString("frmReports", "MSG10", "")
+                        Case langIni.GetString("frmReports", "MSG10", "Память ОЗУ")
                             sSQL = "SELECT * FROM kompy where id=" & nom
                             rs = New ADODB.Recordset
                             rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
@@ -4084,7 +4084,7 @@ err_:
                             rs = Nothing
 
 
-                        Case langIni.GetString("frmReports", "MSG13", "")
+                        Case langIni.GetString("frmReports", "MSG13", "Процессоры")
 
                             sSQL = "SELECT * FROM kompy where id=" & nom
                             rs = New ADODB.Recordset
@@ -4111,7 +4111,7 @@ err_:
                         .MoveFirst()
                         Do While Not .EOF
 
-                            Nam = langIni.GetString("frmReports", "MSG26", "") & ": " & .Fields("NET_NAME").Value & " " & langIni.GetString("frmReports", "MSG27", "") & ": " & .Fields("MESTO").Value & "/" & .Fields("FILIAL").Value
+                            Nam = langIni.GetString("frmReports", "MSG26", "Компьютер") & ": " & .Fields("NET_NAME").Value & " " & langIni.GetString("frmReports", "MSG27", "Место") & ": " & .Fields("MESTO").Value & "/" & .Fields("FILIAL").Value
 
                             .MoveNext()
                             'DoEvents
@@ -4148,7 +4148,7 @@ err_:
                     End If
 
 
-                    If Len(NameKomp) = 0 Or NameKomp = langIni.GetString("frmReports", "MSG28", "") Or NameKomp = langIni.GetString("frmReports", "MSG29", "") Then
+                    If Len(NameKomp) = 0 Or NameKomp = langIni.GetString("frmReports", "MSG28", "Отсутствует") Or NameKomp = langIni.GetString("frmReports", "MSG29", "Нет") Then
                     Else
 
                         lvGar.Items.Add(NameKomp)
@@ -4193,7 +4193,7 @@ err_:
                         'g$ = "0"
 
 
-                        Case langIni.GetString("frmReports", "MSG4", "")
+                        Case langIni.GetString("frmReports", "MSG4", "Видео карты")
 
                             sSQL = "SELECT * FROM kompy where id=" & nom
                             rs = New ADODB.Recordset
@@ -4217,7 +4217,7 @@ err_:
                             m$ = .Fields("SVGA_MPo").Value
                             g$ = .Fields("SVGA_GPo").Value
 
-                        Case langIni.GetString("frmReports", "MSG5", "")
+                        Case langIni.GetString("frmReports", "MSG5", "Жесткие диски")
                             sSQL = "SELECT * FROM kompy where id=" & nom
                             rs = New ADODB.Recordset
                             rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
@@ -4238,7 +4238,7 @@ err_:
                             m$ = .Fields("HDD_MPo").Value
                             g$ = .Fields("HDD_GPo").Value
 
-                        Case langIni.GetString("frmReports", "MSG6", "")
+                        Case langIni.GetString("frmReports", "MSG6", "Звуковая карта")
                             sSQL = "SELECT * FROM kompy where id=" & nom
                             rs = New ADODB.Recordset
                             rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
@@ -4259,7 +4259,7 @@ err_:
                             g$ = .Fields("SOUND_GPo").Value
 
 
-                        Case langIni.GetString("frmReports", "MSG7", "")
+                        Case langIni.GetString("frmReports", "MSG7", "Материнские платы")
                             sSQL = "SELECT * FROM kompy where id=" & nom
                             rs = New ADODB.Recordset
                             rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
@@ -4279,7 +4279,7 @@ err_:
                             m$ = .Fields("MB_MPo").Value
                             g$ = .Fields("MB_GPo").Value
 
-                        Case langIni.GetString("frmReports", "MSG8", "")
+                        Case langIni.GetString("frmReports", "MSG8", "Модем")
                             sSQL = "SELECT * FROM kompy where id=" & nom
                             rs = New ADODB.Recordset
                             rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
@@ -4299,7 +4299,7 @@ err_:
                             m$ = .Fields("MODEM_MPo").Value
                             g$ = .Fields("MODEM_GPo").Value
 
-                        Case langIni.GetString("frmReports", "MSG9", "")
+                        Case langIni.GetString("frmReports", "MSG9", "Монитор")
 
                             sSQL = "SELECT * FROM kompy where id=" & nom
                             rs = New ADODB.Recordset
@@ -4321,7 +4321,7 @@ err_:
                             g$ = .Fields("MONITOR_GPo").Value
 
 
-                        Case langIni.GetString("frmReports", "MSG10", "")
+                        Case langIni.GetString("frmReports", "MSG10", "Память ОЗУ")
                             sSQL = "SELECT * FROM kompy where id=" & nom
                             rs = New ADODB.Recordset
                             rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
@@ -4341,7 +4341,7 @@ err_:
                             m$ = .Fields("RAM_MPo").Value
                             g$ = .Fields("RAM_GPo").Value
 
-                        Case langIni.GetString("frmReports", "MSG13", "")
+                        Case langIni.GetString("frmReports", "MSG13", "Процессоры")
                             sSQL = "SELECT * FROM kompy where id=" & nom
                             rs = New ADODB.Recordset
                             rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
@@ -4371,7 +4371,7 @@ err_:
                         .MoveFirst()
                         Do While Not .EOF
                             If .Fields("id").Value = nom Then
-                                Nam = langIni.GetString("frmReports", "MSG26", "") & ": " & .Fields("NET_NAME").Value & " " & langIni.GetString("frmReports", "MSG27", "") & " : " & .Fields("MESTO").Value & "/" & .Fields("FILIAL").Value
+                                Nam = langIni.GetString("frmReports", "MSG26", "Компьютер") & ": " & .Fields("NET_NAME").Value & " " & langIni.GetString("frmReports", "MSG27", "Место") & " : " & .Fields("MESTO").Value & "/" & .Fields("FILIAL").Value
                             End If
                             .MoveNext()
                             'DoEvents
@@ -4413,7 +4413,7 @@ err_:
 
 
 
-                    If Len(NameKomp) = 0 Or NameKomp = langIni.GetString("frmReports", "MSG28", "") Or NameKomp = langIni.GetString("frmReports", "MSG29", "") Then
+                    If Len(NameKomp) = 0 Or NameKomp = langIni.GetString("frmReports", "MSG28", "Отсутствует") Or NameKomp = langIni.GetString("frmReports", "MSG29", "Нет") Then
                     Else
 
                         lvGar.Items.Add(NameKomp)
@@ -4564,14 +4564,14 @@ Err_:
                 Select Case .Fields("tiptehn").Value
 
                     Case "PC"
-                        lvOTV.Items.Add(langIni.GetString("frmReports", "MSG26", "") & " - " & .Fields("NET_NAME").Value)
+                        lvOTV.Items.Add(langIni.GetString("frmReports", "MSG26", "Компьютер") & " - " & .Fields("NET_NAME").Value)
                         lvOTV.Items(intj).SubItems.Add(.Fields("INV_NO_SYSTEM").Value)
                         lvOTV.Items(intj).SubItems.Add(.Fields("Ser_N_SIS").Value)
                         lvOTV.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
                         intj = intj + 1
 
                     Case "Printer"
-                        lvOTV.Items.Add(langIni.GetString("frmReports", "MSG30", "") & " - " & .Fields("NET_NAME").Value)
+                        lvOTV.Items.Add(langIni.GetString("frmReports", "MSG30", "Принтер") & " - " & .Fields("NET_NAME").Value)
 
                         If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
                             lvOTV.Items(intj).SubItems.Add(.Fields("INV_NO_PRINTER").Value)
@@ -4592,7 +4592,7 @@ Err_:
                         intj = intj + 1
 
                     Case "MFU"
-                        lvOTV.Items.Add(langIni.GetString("frmReports", "MSG30", "") & " - " & .Fields("NET_NAME").Value)
+                        lvOTV.Items.Add(langIni.GetString("frmReports", "MSG30", "Принтер") & " - " & .Fields("NET_NAME").Value)
 
                         If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
                             lvOTV.Items(intj).SubItems.Add(.Fields("INV_NO_PRINTER").Value)
@@ -4618,7 +4618,7 @@ Err_:
 
                         If Len(unameZ) = 0 Then
 
-                            unameZ = langIni.GetString("frmReports", "MSG25", "") & " - (" & .Fields("TIP_COMPA").Value & ") " & .Fields("NET_NAME").Value
+                            unameZ = langIni.GetString("frmReports", "MSG25", "Другое") & " - (" & .Fields("TIP_COMPA").Value & ") " & .Fields("NET_NAME").Value
                         Else
 
                             unameZ = .Fields("TIP_COMPA").Value & " - " & .Fields("NET_NAME").Value
@@ -4646,7 +4646,7 @@ Err_:
 
 
                     Case "KOpir"
-                        lvOTV.Items.Add(langIni.GetString("frmReports", "MSG31", "") & " - " & .Fields("NET_NAME").Value)
+                        lvOTV.Items.Add(langIni.GetString("frmReports", "MSG31", "Копир") & " - " & .Fields("NET_NAME").Value)
 
                         If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
                             lvOTV.Items(intj).SubItems.Add(.Fields("INV_NO_PRINTER").Value)
@@ -4666,14 +4666,14 @@ Err_:
                         intj = intj + 1
 
                     Case "NET"
-                        lvOTV.Items.Add(langIni.GetString("frmReports", "MSG32", "") & " - " & .Fields("NET_NAME").Value)
+                        lvOTV.Items.Add(langIni.GetString("frmReports", "MSG32", "Сетевое оборудование") & " - " & .Fields("NET_NAME").Value)
                         lvOTV.Items(intj).SubItems.Add(.Fields("PRINTER_PROIZV_3").Value)
                         lvOTV.Items(intj).SubItems.Add(.Fields("port_1").Value)
                         lvOTV.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
                         intj = intj + 1
 
                     Case "PHOTO"
-                        lvOTV.Items.Add(langIni.GetString("frmReports", "MSG24", "") & " - " & .Fields("NET_NAME").Value)
+                        lvOTV.Items.Add(langIni.GetString("frmReports", "MSG24", "Фотоаппарат") & " - " & .Fields("NET_NAME").Value)
 
                         If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
                             lvOTV.Items(intj).SubItems.Add(.Fields("INV_NO_PRINTER").Value)
@@ -4693,7 +4693,7 @@ Err_:
                         intj = intj + 1
 
                     Case "PHONE"
-                        lvOTV.Items.Add(langIni.GetString("frmReports", "MSG22", "") & " - " & .Fields("NET_NAME").Value)
+                        lvOTV.Items.Add(langIni.GetString("frmReports", "MSG22", "Телефон") & " - " & .Fields("NET_NAME").Value)
 
                         If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
                             lvOTV.Items(intj).SubItems.Add(.Fields("INV_NO_PRINTER").Value)
@@ -4714,7 +4714,7 @@ Err_:
 
                     Case "FAX"
 
-                        lvOTV.Items.Add(langIni.GetString("frmReports", "MSG23", "") & " - " & .Fields("NET_NAME").Value)
+                        lvOTV.Items.Add(langIni.GetString("frmReports", "MSG23", "Факс") & " - " & .Fields("NET_NAME").Value)
 
                         If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
                             lvOTV.Items(intj).SubItems.Add(.Fields("INV_NO_PRINTER").Value)
@@ -4734,7 +4734,7 @@ Err_:
                         intj = intj + 1
 
                     Case "SCANER"
-                        lvOTV.Items.Add(langIni.GetString("frmReports", "MSG33", "") & " - " & .Fields("NET_NAME").Value)
+                        lvOTV.Items.Add(langIni.GetString("frmReports", "MSG33", "Сканер") & " - " & .Fields("NET_NAME").Value)
 
                         If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
                             lvOTV.Items(intj).SubItems.Add(.Fields("INV_NO_PRINTER").Value)
@@ -4754,7 +4754,7 @@ Err_:
                         intj = intj + 1
 
                     Case "ZIP"
-                        lvOTV.Items.Add(langIni.GetString("frmReports", "MSG34", "") & " - " & .Fields("NET_NAME").Value)
+                        lvOTV.Items.Add(langIni.GetString("frmReports", "MSG34", "Дисковод ZIP") & " - " & .Fields("NET_NAME").Value)
 
                         If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
                             lvOTV.Items(intj).SubItems.Add(.Fields("INV_NO_PRINTER").Value)
@@ -4775,7 +4775,7 @@ Err_:
 
 
                     Case "MONITOR"
-                        lvOTV.Items.Add(langIni.GetString("frmReports", "MSG9", "") & " - " & .Fields("NET_NAME").Value)
+                        lvOTV.Items.Add(langIni.GetString("frmReports", "MSG9", "Монитор") & " - " & .Fields("NET_NAME").Value)
                         lvOTV.Items(intj).SubItems.Add(.Fields("INV_NO_MONITOR").Value)
                         lvOTV.Items(intj).SubItems.Add(.Fields("MONITOR_SN").Value)
                         lvOTV.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
@@ -4789,7 +4789,7 @@ Err_:
 
                         If Len(unameZ) = 0 Then
 
-                            unameZ = langIni.GetString("frmReports", "MSG3", "") & " - (" & .Fields("TIP_COMPA").Value & ") " & .Fields("NET_NAME").Value
+                            unameZ = langIni.GetString("frmReports", "MSG3", "USB") & " - (" & .Fields("TIP_COMPA").Value & ") " & .Fields("NET_NAME").Value
                         Else
 
                             unameZ = .Fields("TIP_COMPA").Value & " - " & .Fields("NET_NAME").Value
@@ -4824,7 +4824,7 @@ Err_:
 
                         If Len(unameZ) = 0 Then
 
-                            unameZ = langIni.GetString("frmReports", "MSG35", "") & " - (" & .Fields("TIP_COMPA").Value & ") " & .Fields("NET_NAME").Value
+                            unameZ = langIni.GetString("frmReports", "MSG35", "Акустика") & " - (" & .Fields("TIP_COMPA").Value & ") " & .Fields("NET_NAME").Value
                         Else
 
                             unameZ = .Fields("TIP_COMPA").Value & " - " & .Fields("NET_NAME").Value
@@ -4858,7 +4858,7 @@ Err_:
 
                         If Len(unameZ) = 0 Then
 
-                            unameZ = langIni.GetString("frmReports", "MSG36", "") & " - (" & .Fields("TIP_COMPA").Value & ") " & .Fields("NET_NAME").Value
+                            unameZ = langIni.GetString("frmReports", "MSG36", "ИБП") & " - (" & .Fields("TIP_COMPA").Value & ") " & .Fields("NET_NAME").Value
                         Else
 
                             unameZ = .Fields("TIP_COMPA").Value & " - " & .Fields("NET_NAME").Value
@@ -4891,7 +4891,7 @@ Err_:
 
                         If Len(unameZ) = 0 Then
 
-                            unameZ = langIni.GetString("frmReports", "MSG37", "") & " - (" & .Fields("TIP_COMPA").Value & ") " & .Fields("NET_NAME").Value
+                            unameZ = langIni.GetString("frmReports", "MSG37", "Сетевой фильтр") & " - (" & .Fields("TIP_COMPA").Value & ") " & .Fields("NET_NAME").Value
                         Else
 
                             unameZ = .Fields("TIP_COMPA").Value & " - " & .Fields("NET_NAME").Value
@@ -4945,8 +4945,8 @@ err_:
         cmbDepartmentCashe.Items.Clear()
         Dim langIni As New IniFile(sLANGPATH)
 
-        If cmbBrancheCashe.Text = langIni.GetString("frmReports", "MSG1", "") Then
-            cmbDepartmentCashe.Items.Add(langIni.GetString("frmReports", "MSG1", ""))
+        If cmbBrancheCashe.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
+            cmbDepartmentCashe.Items.Add(langIni.GetString("frmReports", "MSG1", "Все"))
             Exit Sub
 
         End If
@@ -4964,7 +4964,7 @@ err_:
             Loop
         End With
 
-        cmbDepartmentCashe.Items.Add(langIni.GetString("frmReports", "MSG1", ""))
+        cmbDepartmentCashe.Items.Add(langIni.GetString("frmReports", "MSG1", "Все"))
 
         rs.Close()
         rs = Nothing
@@ -4991,19 +4991,19 @@ err:
 
         rs = New ADODB.Recordset
 
-        If cmbBrancheCashe.Text = langIni.GetString("frmReports", "MSG1", "") And cmbDepartmentCashe.Text = langIni.GetString("frmReports", "MSG1", "") Then
+        If cmbBrancheCashe.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbDepartmentCashe.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
             sSQL = "SELECT * FROM kompy where DataVVoda like '%" & cmbYearCashe.Text & "%'"
 
         End If
 
-        If cmbBrancheCashe.Text <> langIni.GetString("frmReports", "MSG1", "") And cmbDepartmentCashe.Text = langIni.GetString("frmReports", "MSG1", "") Then
+        If cmbBrancheCashe.Text <> langIni.GetString("frmReports", "MSG1", "Все") And cmbDepartmentCashe.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
             sSQL = "SELECT * FROM kompy where filial ='" & cmbBrancheCashe.Text & "' AND DataVVoda like '%" & cmbYearCashe.Text & "%'"
 
         End If
 
-        If cmbBrancheCashe.Text <> langIni.GetString("frmReports", "MSG1", "") And cmbDepartmentCashe.Text <> langIni.GetString("frmReports", "MSG1", "") Then
+        If cmbBrancheCashe.Text <> langIni.GetString("frmReports", "MSG1", "Все") And cmbDepartmentCashe.Text <> langIni.GetString("frmReports", "MSG1", "Все") Then
 
             sSQL = "SELECT * FROM kompy where filial ='" & cmbBrancheCashe.Text & "' AND mesto='" & cmbDepartmentCashe.Text & "' AND DataVVoda like '%" & cmbYearCashe.Text & "%'"
 
@@ -5033,7 +5033,7 @@ err:
 
                     Case "PC"
 
-                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG26", "") & " - " & .Fields("NET_NAME").Value)
+                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG26", "Компьютер") & " - " & .Fields("NET_NAME").Value)
 
                         If Not IsDBNull(.Fields("CenaRub").Value) Then
                             lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
@@ -5053,7 +5053,7 @@ err:
                         Uname2 = Uname2 + .Fields("CenaRub").Value
 
                     Case "Printer"
-                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG30", "") & " - " & .Fields("NET_NAME").Value)
+                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG30", "Принтер") & " - " & .Fields("NET_NAME").Value)
 
                         If Not IsDBNull(.Fields("CenaRub").Value) Then
                             lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
@@ -5072,7 +5072,7 @@ err:
                         Uname2 = Uname2 + .Fields("CenaRub").Value
 
                     Case "MFU"
-                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG21", "") & " - " & .Fields("NET_NAME").Value)
+                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG21", "МФУ") & " - " & .Fields("NET_NAME").Value)
 
                         If Not IsDBNull(.Fields("CenaRub").Value) Then
                             lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
@@ -5096,7 +5096,7 @@ err:
                         If Len(.Fields("TIP_COMPA").Value) = 0 Then
 
 
-                            lvCashe.Items.Add(langIni.GetString("frmReports", "MSG25", "") & " - (" & .Fields("TIP_COMPA").Value & ") " & .Fields("NET_NAME").Value)
+                            lvCashe.Items.Add(langIni.GetString("frmReports", "MSG25", "Другое") & " - (" & .Fields("TIP_COMPA").Value & ") " & .Fields("NET_NAME").Value)
 
                         Else
 
@@ -5123,7 +5123,7 @@ err:
                         Uname2 = Uname2 + .Fields("CenaRub").Value
 
                     Case "KOpir"
-                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG31", "") & " - " & .Fields("NET_NAME").Value)
+                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG31", "Копир") & " - " & .Fields("NET_NAME").Value)
 
                         If Not IsDBNull(.Fields("CenaRub").Value) Then
                             lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
@@ -5142,7 +5142,7 @@ err:
                         Uname2 = Uname2 + .Fields("CenaRub").Value
 
                     Case "NET"
-                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG32", "") & " - " & .Fields("NET_NAME").Value)
+                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG32", "Сетевое оборудование") & " - " & .Fields("NET_NAME").Value)
 
                         If Not IsDBNull(.Fields("CenaRub").Value) Then
                             lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
@@ -5161,7 +5161,7 @@ err:
                         Uname2 = Uname2 + .Fields("CenaRub").Value
 
                     Case "PHOTO"
-                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG24", "") & " - " & .Fields("NET_NAME").Value)
+                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG24", "Фотоаппарат") & " - " & .Fields("NET_NAME").Value)
 
                         If Not IsDBNull(.Fields("CenaRub").Value) Then
                             lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
@@ -5180,7 +5180,7 @@ err:
                         Uname2 = Uname2 + .Fields("CenaRub").Value
 
                     Case "PHONE"
-                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG22", "") & " - " & .Fields("NET_NAME").Value)
+                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG22", "Телефон") & " - " & .Fields("NET_NAME").Value)
 
                         If Not IsDBNull(.Fields("CenaRub").Value) Then
                             lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
@@ -5200,7 +5200,7 @@ err:
 
                     Case "FAX"
 
-                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG23", "") & " - " & .Fields("NET_NAME").Value)
+                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG23", "Факс") & " - " & .Fields("NET_NAME").Value)
 
                         If Not IsDBNull(.Fields("CenaRub").Value) Then
                             lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
@@ -5219,7 +5219,7 @@ err:
                         Uname2 = Uname2 + .Fields("CenaRub").Value
 
                     Case "SCANER"
-                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG33", "") & " - " & .Fields("NET_NAME").Value)
+                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG33", "Сканер") & " - " & .Fields("NET_NAME").Value)
 
                         If Not IsDBNull(.Fields("CenaRub").Value) Then
                             lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
@@ -5238,7 +5238,7 @@ err:
                         Uname2 = Uname2 + .Fields("CenaRub").Value
 
                     Case "ZIP"
-                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG34", "") & " - " & .Fields("NET_NAME").Value)
+                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG34", "Дисковод ZIP") & " - " & .Fields("NET_NAME").Value)
 
                         If Not IsDBNull(.Fields("CenaRub").Value) Then
                             lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
@@ -5258,7 +5258,7 @@ err:
 
 
                     Case "MONITOR"
-                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG9", "") & " - " & .Fields("NET_NAME").Value)
+                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG9", "Монитор") & " - " & .Fields("NET_NAME").Value)
 
                         If Not IsDBNull(.Fields("CenaRub").Value) Then
                             lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
@@ -5279,7 +5279,7 @@ err:
 
                     Case "USB"
 
-                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG3", "") & " - " & .Fields("NET_NAME").Value)
+                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG3", "USB") & " - " & .Fields("NET_NAME").Value)
 
                         If Not IsDBNull(.Fields("CenaRub").Value) Then
                             lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
@@ -5299,7 +5299,7 @@ err:
 
                     Case "SOUND"
 
-                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG35", "") & " - " & .Fields("NET_NAME").Value)
+                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG35", "Акустика") & " - " & .Fields("NET_NAME").Value)
 
                         If Not IsDBNull(.Fields("CenaRub").Value) Then
                             lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
@@ -5319,7 +5319,7 @@ err:
 
                     Case "IBP"
 
-                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG36", "") & " - " & .Fields("NET_NAME").Value)
+                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG36", "ИБП") & " - " & .Fields("NET_NAME").Value)
 
                         If Not IsDBNull(.Fields("CenaRub").Value) Then
                             lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
@@ -5339,7 +5339,7 @@ err:
 
                     Case "FS"
 
-                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG37", "") & " - " & .Fields("NET_NAME").Value)
+                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG37", "Сетевой фильтр") & " - " & .Fields("NET_NAME").Value)
 
                         If Not IsDBNull(.Fields("CenaRub").Value) Then
                             lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
@@ -5372,7 +5372,7 @@ err:
 
 
 
-        If cmbBrancheCashe.Text = langIni.GetString("frmReports", "MSG1", "") And cmbDepartmentCashe.Text = langIni.GetString("frmReports", "MSG1", "") Then
+        If cmbBrancheCashe.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbDepartmentCashe.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
 
             'Заправки
@@ -5444,7 +5444,7 @@ err:
                             End If
 
 
-                            lvCashe.Items.Add(langIni.GetString("frmReports", "MSG38", "") & " - " & B2)
+                            lvCashe.Items.Add(langIni.GetString("frmReports", "MSG38", "Заправка картриджа") & " - " & B2)
 
 
                             If Not IsDBNull(.Fields("STOIM").Value) Then
@@ -5506,7 +5506,7 @@ err:
                         If Uname(2) = cmbYearCashe.Text Then
 
 
-                            lvCashe.Items.Add(langIni.GetString("frmReports", "MSG39", "") & " - " & .Fields("ComplectName").Value & "(" & .Fields("Prim").Value & ")")
+                            lvCashe.Items.Add(langIni.GetString("frmReports", "MSG39", "На складе") & " - " & .Fields("ComplectName").Value & "(" & .Fields("Prim").Value & ")")
 
 
                             If Not IsDBNull(.Fields("Cena").Value) Then
@@ -5575,7 +5575,7 @@ err:
                             Else
 
 
-                                lvCashe.Items.Add(langIni.GetString("frmReports", "MSG40", "") & " - " & .Fields("Comp_Name").Value)
+                                lvCashe.Items.Add(langIni.GetString("frmReports", "MSG40", "Затраты на ремонт") & " - " & .Fields("Comp_Name").Value)
 
 
                                 If Not IsDBNull(.Fields("Summ").Value) Then
@@ -5614,7 +5614,7 @@ err:
         End If
 
         If Uname2 > 0 Then
-            lvCashe.Items.Add(langIni.GetString("frmReports", "MSG41", ""))
+            lvCashe.Items.Add(langIni.GetString("frmReports", "MSG41", "Итого затрат за период:"))
             lvCashe.Items(intj).SubItems.Add(Uname2)
             lvCashe.Items(intj).SubItems.Add(Date.Today)
             lvCashe.Items(intj).SubItems.Add("")
@@ -5632,7 +5632,7 @@ err:
         If lvCashe.Items.Count = 0 Then Exit Sub
 
 
-         Select sOfficePACK
+        Select Case sOfficePACK
 
             Case "OpenOffice.org"
 
@@ -5795,17 +5795,17 @@ Err_:
 
     '        cmbDepartmentC.Items.Clear()
 
-    '        If cmbBrancheC.Text = langIni.GetString("frmReports", "MSG1", "") Then
+    '        If cmbBrancheC.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
-    '            cmbDepartmentC.Items.Add(langIni.GetString("frmReports", "MSG1", ""))
-    '            cmbDepartmentC.Text = langIni.GetString("frmReports", "MSG1", "")
+    '            cmbDepartmentC.Items.Add(langIni.GetString("frmReports", "MSG1", "Все"))
+    '            cmbDepartmentC.Text = langIni.GetString("frmReports", "MSG1", "Все")
 
-    '            cmbOfficeC.Text = langIni.GetString("frmReports", "MSG1", "")
+    '            cmbOfficeC.Text = langIni.GetString("frmReports", "MSG1", "Все")
 
     '            Exit Sub
     '        End If
 
-    '        If Len(cmbDepartmentC.Text) = 0 Then cmbDepartmentC.Text = langIni.GetString("frmReports", "MSG1", "")
+    '        If Len(cmbDepartmentC.Text) = 0 Then cmbDepartmentC.Text = langIni.GetString("frmReports", "MSG1", "Все")
 
     '        Dim rs1 As ADODB.Recordset
     '        rs1 = New ADODB.Recordset
@@ -5839,13 +5839,13 @@ Err_:
     '                Loop
     '            End With
 
-    '            cmbDepartmentC.Items.Add(langIni.GetString("frmReports", "MSG1", ""))
+    '            cmbDepartmentC.Items.Add(langIni.GetString("frmReports", "MSG1", "Все"))
 
     '            rs1.Close()
     '            rs1 = Nothing
 
     '        Else
-    '            cmbDepartmentC.Items.Add(langIni.GetString("frmReports", "MSG1", ""))
+    '            cmbDepartmentC.Items.Add(langIni.GetString("frmReports", "MSG1", "Все"))
 
     '        End If
 
@@ -5922,16 +5922,16 @@ Err_:
 
     '        cmbOfficeC.Items.Clear()
 
-    '        If cmbDepartmentC.Text = langIni.GetString("frmReports", "MSG1", "") Then
+    '        If cmbDepartmentC.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
-    '            cmbOfficeC.Items.Add(langIni.GetString("frmReports", "MSG1", ""))
-    '            cmbOfficeC.Text = langIni.GetString("frmReports", "MSG1", "")
+    '            cmbOfficeC.Items.Add(langIni.GetString("frmReports", "MSG1", "Все"))
+    '            cmbOfficeC.Text = langIni.GetString("frmReports", "MSG1", "Все")
 
 
     '            Exit Sub
     '        End If
 
-    '        If Len(cmbOfficeC.Text) = 0 Then cmbOfficeC.Text = langIni.GetString("frmReports", "MSG1", "")
+    '        If Len(cmbOfficeC.Text) = 0 Then cmbOfficeC.Text = langIni.GetString("frmReports", "MSG1", "Все")
 
     '    Dim rs1 As ADODB.Recordset
 
@@ -5962,13 +5962,13 @@ Err_:
     '                Loop
     '            End With
 
-    '            cmbOfficeC.Items.Add(langIni.GetString("frmReports", "MSG1", ""))
+    '            cmbOfficeC.Items.Add(langIni.GetString("frmReports", "MSG1", "Все"))
 
     '            rs1.Close()
     '            rs1 = Nothing
     '        Else
 
-    '            cmbOfficeC.Items.Add(langIni.GetString("frmReports", "MSG1", ""))
+    '            cmbOfficeC.Items.Add(langIni.GetString("frmReports", "MSG1", "Все"))
 
     '        End If
 
@@ -6014,7 +6014,7 @@ Err_:
 
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
-        frmService_add.Text = LNGIniFile.GetString("frmserviceDesc", "MSG1", "") '& " " & lvList.SelectedItems(z).SubItems(5).Text
+        frmService_add.Text = LNGIniFile.GetString("frmserviceDesc", "MSG1", "Добавление (редактирование) заявки для") '& " " & lvList.SelectedItems(z).SubItems(5).Text
 
         rs1.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
         Dim sSw As Date
@@ -6072,7 +6072,7 @@ Err_:
 
         frmService_add.REMED = True
 
-        frmService_add.cmbAdd.Text = LNGIniFile.GetString("frmserviceDesc", "MSG2", "")
+        frmService_add.cmbAdd.Text = LNGIniFile.GetString("frmserviceDesc", "MSG2", "Сохранить")
 
         rs1.Close()
         rs1 = Nothing
@@ -6182,45 +6182,45 @@ Err_:
                     Select Case .Fields("Tiptehn").Value
 
                         Case "MFU"
-                            Uname1 = (LNGIniFile.GetString("frmMain", "30", ""))
+                            Uname1 = (LNGIniFile.GetString("frmMain", "30", "МФУ"))
 
                         Case "Printer"
-                            Uname1 = (LNGIniFile.GetString("frmMain", "29", ""))
+                            Uname1 = (LNGIniFile.GetString("frmMain", "29", "Принтер"))
 
                         Case "KOpir"
-                            Uname1 = (LNGIniFile.GetString("frmMain", "28", ""))
+                            Uname1 = (LNGIniFile.GetString("frmMain", "28", "Копир"))
 
 
                         Case "PHOTO"
-                            Uname1 = (LNGIniFile.GetString("frmMain", "33", ""))
+                            Uname1 = (LNGIniFile.GetString("frmMain", "33", "Фотоаппарат"))
 
 
                         Case "PHONE"
-                            Uname1 = (LNGIniFile.GetString("frmMain", "32", ""))
+                            Uname1 = (LNGIniFile.GetString("frmMain", "32", "Телефон"))
 
 
                         Case "FAX"
-                            Uname1 = (LNGIniFile.GetString("frmMain", "34", ""))
+                            Uname1 = (LNGIniFile.GetString("frmMain", "34", "Факс"))
 
 
                         Case "ZIP"
-                            Uname1 = (LNGIniFile.GetString("frmMain", "36", ""))
+                            Uname1 = (LNGIniFile.GetString("frmMain", "36", "дисковод ZIP"))
 
 
                         Case "MONITOR"
-                            Uname1 = (LNGIniFile.GetString("frmMain", "35", ""))
+                            Uname1 = (LNGIniFile.GetString("frmMain", "35", "Монитор"))
 
 
                         Case "SCANER"
-                            Uname1 = (LNGIniFile.GetString("frmMain", "37", ""))
+                            Uname1 = (LNGIniFile.GetString("frmMain", "37", "Сканер"))
 
 
                         Case "NET"
-                            Uname1 = (LNGIniFile.GetString("frmMain", "31", ""))
+                            Uname1 = (LNGIniFile.GetString("frmMain", "31", "Сетевое оборудование"))
 
 
                         Case "OT"
-                            Uname1 = (LNGIniFile.GetString("frmMain", "38", ""))
+                            Uname1 = (LNGIniFile.GetString("frmMain", "38", "Другое оборудование"))
 
                         Case "CNT"
                             'Uname1 = (LNGIniFile.GetString("frmMain", "MSG12", ""))
@@ -6229,32 +6229,32 @@ Err_:
 
                         Case "USB"
 
-                            Uname1 = (LNGIniFile.GetString("frmMain", "39", ""))
+                            Uname1 = (LNGIniFile.GetString("frmMain", "39", "USB Устройства"))
 
                         Case "SOUND"
 
-                            Uname1 = (LNGIniFile.GetString("frmMain", "40", ""))
+                            Uname1 = (LNGIniFile.GetString("frmMain", "40", "Акустические Системы"))
 
                         Case "IBP"
 
-                            Uname1 = (LNGIniFile.GetString("frmMain", "41", ""))
+                            Uname1 = (LNGIniFile.GetString("frmMain", "41", "Бесперебойники"))
 
                         Case "FS"
 
-                            Uname1 = (LNGIniFile.GetString("frmMain", "46", ""))
+                            Uname1 = (LNGIniFile.GetString("frmMain", "46", "Сетевой фильтр"))
 
                         Case "KEYB"
 
-                            Uname1 = (LNGIniFile.GetString("frmMain", "44", ""))
+                            Uname1 = (LNGIniFile.GetString("frmMain", "44", "Клавиатура"))
 
                         Case "MOUSE"
 
-                            Uname1 = (LNGIniFile.GetString("frmMain", "45", ""))
+                            Uname1 = (LNGIniFile.GetString("frmMain", "45", "Мышь"))
 
 
                         Case Else
 
-                            Uname1 = (LNGIniFile.GetString("MOD_OPENOFFICE", "MSG58", ""))
+                            Uname1 = (LNGIniFile.GetString("MOD_OPENOFFICE", "MSG58", "Компьютер"))
 
                     End Select
 

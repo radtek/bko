@@ -55,9 +55,6 @@ Partial Class frmSetup
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.txtPassword = New System.Windows.Forms.TextBox()
-        Me.TabPage4 = New System.Windows.Forms.TabPage()
-        Me.lvFindDB = New System.Windows.Forms.ListView()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.Label6 = New System.Windows.Forms.Label()
@@ -68,9 +65,9 @@ Partial Class frmSetup
         Me.Label8 = New System.Windows.Forms.Label()
         Me.txtSA = New System.Windows.Forms.TextBox()
         Me.txtORG = New System.Windows.Forms.TextBox()
-        Me.btnSave = New System.Windows.Forms.Button()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.txtBigBoss = New System.Windows.Forms.TextBox()
+        Me.btnSave = New System.Windows.Forms.Button()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.gbSetup = New System.Windows.Forms.GroupBox()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
@@ -125,12 +122,10 @@ Partial Class frmSetup
         Me.TabPage5.SuspendLayout()
         Me.TableLayoutPanel3.SuspendLayout()
         Me.gbUsers.SuspendLayout()
-        CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
         Me.gbUserLevel.SuspendLayout()
-        Me.TabPage4.SuspendLayout()
         Me.TabPage3.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -192,7 +187,7 @@ Partial Class frmSetup
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel3.Size = New System.Drawing.Size(876, 536)
+        Me.TableLayoutPanel3.Size = New System.Drawing.Size(973, 578)
         Me.TableLayoutPanel3.TabIndex = 15
         '
         'Label1
@@ -212,7 +207,7 @@ Partial Class frmSetup
         Me.gbUsers.Dock = System.Windows.Forms.DockStyle.Fill
         Me.gbUsers.Location = New System.Drawing.Point(3, 166)
         Me.gbUsers.Name = "gbUsers"
-        Me.gbUsers.Size = New System.Drawing.Size(970, 367)
+        Me.gbUsers.Size = New System.Drawing.Size(970, 409)
         Me.gbUsers.TabIndex = 11
         Me.gbUsers.TabStop = False
         Me.gbUsers.Text = "Пользователи"
@@ -230,7 +225,7 @@ Partial Class frmSetup
         'SplitContainer1.Panel2
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.gbUserLevel)
-        Me.SplitContainer1.Size = New System.Drawing.Size(964, 348)
+        Me.SplitContainer1.Size = New System.Drawing.Size(964, 390)
         Me.SplitContainer1.SplitterDistance = 696
         Me.SplitContainer1.TabIndex = 0
         '
@@ -243,7 +238,7 @@ Partial Class frmSetup
         Me.lvPrUsers.MultiSelect = False
         Me.lvPrUsers.Name = "lvPrUsers"
         Me.lvPrUsers.ShowItemToolTips = True
-        Me.lvPrUsers.Size = New System.Drawing.Size(696, 348)
+        Me.lvPrUsers.Size = New System.Drawing.Size(696, 390)
         Me.lvPrUsers.TabIndex = 18
         Me.lvPrUsers.UseCompatibleStateImageBehavior = False
         Me.lvPrUsers.View = System.Windows.Forms.View.Details
@@ -266,7 +261,7 @@ Partial Class frmSetup
         Me.gbUserLevel.Dock = System.Windows.Forms.DockStyle.Fill
         Me.gbUserLevel.Location = New System.Drawing.Point(0, 0)
         Me.gbUserLevel.Name = "gbUserLevel"
-        Me.gbUserLevel.Size = New System.Drawing.Size(264, 348)
+        Me.gbUserLevel.Size = New System.Drawing.Size(264, 390)
         Me.gbUserLevel.TabIndex = 0
         Me.gbUserLevel.TabStop = False
         Me.gbUserLevel.Text = "Разрешения"
@@ -524,39 +519,6 @@ Partial Class frmSetup
         Me.txtPassword.Size = New System.Drawing.Size(257, 20)
         Me.txtPassword.TabIndex = 8
         '
-        'TabPage4
-        '
-        Me.TabPage4.Controls.Add(Me.lvFindDB)
-        Me.TabPage4.Controls.Add(Me.Button1)
-        Me.TabPage4.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage4.Name = "TabPage4"
-        Me.TabPage4.Size = New System.Drawing.Size(973, 578)
-        Me.TabPage4.TabIndex = 3
-        Me.TabPage4.Text = "Найденные базы"
-        Me.TabPage4.UseVisualStyleBackColor = True
-        '
-        'lvFindDB
-        '
-        Me.lvFindDB.FullRowSelect = True
-        Me.lvFindDB.GridLines = True
-        Me.lvFindDB.Location = New System.Drawing.Point(1, 0)
-        Me.lvFindDB.MultiSelect = False
-        Me.lvFindDB.Name = "lvFindDB"
-        Me.lvFindDB.ShowItemToolTips = True
-        Me.lvFindDB.Size = New System.Drawing.Size(959, 474)
-        Me.lvFindDB.TabIndex = 16
-        Me.lvFindDB.UseCompatibleStateImageBehavior = False
-        Me.lvFindDB.View = System.Windows.Forms.View.Details
-        '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(9, 483)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(89, 23)
-        Me.Button1.TabIndex = 1
-        Me.Button1.Text = "Подключить"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
         'TabPage3
         '
         Me.TabPage3.Controls.Add(Me.TableLayoutPanel2)
@@ -580,21 +542,22 @@ Partial Class frmSetup
         Me.TableLayoutPanel2.Controls.Add(Me.Label8, 0, 3)
         Me.TableLayoutPanel2.Controls.Add(Me.txtSA, 1, 1)
         Me.TableLayoutPanel2.Controls.Add(Me.txtORG, 1, 0)
-        Me.TableLayoutPanel2.Controls.Add(Me.btnSave, 0, 5)
         Me.TableLayoutPanel2.Controls.Add(Me.Label11, 0, 4)
         Me.TableLayoutPanel2.Controls.Add(Me.txtBigBoss, 1, 4)
+        Me.TableLayoutPanel2.Controls.Add(Me.btnSave, 0, 6)
         Me.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel2.Location = New System.Drawing.Point(0, 0)
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
-        Me.TableLayoutPanel2.RowCount = 7
+        Me.TableLayoutPanel2.RowCount = 8
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 8.0!))
-        Me.TableLayoutPanel2.Size = New System.Drawing.Size(876, 536)
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 15.0!))
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(973, 578)
         Me.TableLayoutPanel2.TabIndex = 8
         '
         'Label6
@@ -612,7 +575,7 @@ Partial Class frmSetup
         Me.txtMail.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtMail.Location = New System.Drawing.Point(162, 55)
         Me.txtMail.Name = "txtMail"
-        Me.txtMail.Size = New System.Drawing.Size(711, 20)
+        Me.txtMail.Size = New System.Drawing.Size(808, 20)
         Me.txtMail.TabIndex = 5
         '
         'txtPRG
@@ -620,7 +583,7 @@ Partial Class frmSetup
         Me.txtPRG.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtPRG.Location = New System.Drawing.Point(162, 81)
         Me.txtPRG.Name = "txtPRG"
-        Me.txtPRG.Size = New System.Drawing.Size(711, 20)
+        Me.txtPRG.Size = New System.Drawing.Size(808, 20)
         Me.txtPRG.TabIndex = 6
         '
         'Label7
@@ -658,7 +621,7 @@ Partial Class frmSetup
         Me.txtSA.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtSA.Location = New System.Drawing.Point(162, 29)
         Me.txtSA.Name = "txtSA"
-        Me.txtSA.Size = New System.Drawing.Size(711, 20)
+        Me.txtSA.Size = New System.Drawing.Size(808, 20)
         Me.txtSA.TabIndex = 4
         '
         'txtORG
@@ -666,17 +629,8 @@ Partial Class frmSetup
         Me.txtORG.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtORG.Location = New System.Drawing.Point(162, 3)
         Me.txtORG.Name = "txtORG"
-        Me.txtORG.Size = New System.Drawing.Size(711, 20)
+        Me.txtORG.Size = New System.Drawing.Size(808, 20)
         Me.txtORG.TabIndex = 3
-        '
-        'btnSave
-        '
-        Me.btnSave.Location = New System.Drawing.Point(3, 133)
-        Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(75, 23)
-        Me.btnSave.TabIndex = 7
-        Me.btnSave.Text = "Сохранить"
-        Me.btnSave.UseVisualStyleBackColor = True
         '
         'Label11
         '
@@ -687,16 +641,23 @@ Partial Class frmSetup
         Me.Label11.Size = New System.Drawing.Size(153, 13)
         Me.Label11.TabIndex = 8
         Me.Label11.Text = "Начальник службы"
-        Me.Label11.Visible = False
         '
         'txtBigBoss
         '
         Me.txtBigBoss.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtBigBoss.Location = New System.Drawing.Point(162, 107)
         Me.txtBigBoss.Name = "txtBigBoss"
-        Me.txtBigBoss.Size = New System.Drawing.Size(711, 20)
+        Me.txtBigBoss.Size = New System.Drawing.Size(808, 20)
         Me.txtBigBoss.TabIndex = 9
-        Me.txtBigBoss.Visible = False
+        '
+        'btnSave
+        '
+        Me.btnSave.Location = New System.Drawing.Point(3, 133)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(75, 23)
+        Me.btnSave.TabIndex = 7
+        Me.btnSave.Text = "Сохранить"
+        Me.btnSave.UseVisualStyleBackColor = True
         '
         'TabPage1
         '
@@ -1306,7 +1267,6 @@ Partial Class frmSetup
         '
         Me.SStab1.Controls.Add(Me.TabPage1)
         Me.SStab1.Controls.Add(Me.TabPage3)
-        Me.SStab1.Controls.Add(Me.TabPage4)
         Me.SStab1.Controls.Add(Me.TabPage5)
         Me.SStab1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SStab1.Location = New System.Drawing.Point(0, 0)
@@ -1332,11 +1292,9 @@ Partial Class frmSetup
         Me.gbUsers.ResumeLayout(False)
         Me.SplitContainer1.Panel1.ResumeLayout(False)
         Me.SplitContainer1.Panel2.ResumeLayout(False)
-        CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer1.ResumeLayout(False)
         Me.gbUserLevel.ResumeLayout(False)
         Me.gbUserLevel.PerformLayout()
-        Me.TabPage4.ResumeLayout(False)
         Me.TabPage3.ResumeLayout(False)
         Me.TableLayoutPanel2.ResumeLayout(False)
         Me.TableLayoutPanel2.PerformLayout()
@@ -1362,9 +1320,6 @@ Partial Class frmSetup
 
     End Sub
     Friend WithEvents TabPage5 As System.Windows.Forms.TabPage
-    Friend WithEvents TabPage4 As System.Windows.Forms.TabPage
-    Friend WithEvents lvFindDB As System.Windows.Forms.ListView
-    Friend WithEvents Button1 As System.Windows.Forms.Button
     Friend WithEvents TabPage3 As System.Windows.Forms.TabPage
     Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
     Friend WithEvents gbSetup As System.Windows.Forms.GroupBox
