@@ -237,7 +237,7 @@ Partial Class frmserviceDesc
         Me.New_Button_SD.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow
         Me.New_Button_SD.Location = New System.Drawing.Point(0, 206)
         Me.New_Button_SD.Name = "New_Button_SD"
-        Me.New_Button_SD.Size = New System.Drawing.Size(555, 23)
+        Me.New_Button_SD.Size = New System.Drawing.Size(524, 23)
         Me.New_Button_SD.TabIndex = 10
         Me.New_Button_SD.Text = "ToolStrip1"
         '

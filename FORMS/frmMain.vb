@@ -406,10 +406,42 @@ Public Class frmMain
 
         End If
 
+
         LBL_SUBD.Text = unamDB & " - " & Base_Name
         LBL_USER.Text = UserNames & "/" & uLevel
 
-       
+        '###################################################################3
+        'On Error GoTo err_
+
+        'Dim client As New SmtpClient
+        'client.Port = 587
+        'client.Host = "SMTP Сервер"
+        'client.EnableSsl = True
+
+        'Call EncryptDecrypt("пароль тут")
+
+        'client.Credentials = New Net.NetworkCredential("Имя пользователя", "Пароль")
+
+        'Dim fromAdr As MailAddress = New MailAddress("От Кого почта (адрес)", ProGramName, System.Text.Encoding.UTF8)
+        'Dim toAdr As MailAddress = New MailAddress("Кому почта (адрес)")
+        'Dim message As MailMessage = New MailMessage(fromAdr, toAdr)
+        'message.Subject = "БКО " & My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor & "." & My.Application.Info.Version.Build & "." & My.Application.Info.Version.Revision
+        'message.SubjectEncoding = System.Text.Encoding.UTF8
+
+        'message.Body = "Тестирование отправки почтового отправления из БКО с вложением - " & uUSERNAME
+        'message.BodyEncoding = System.Text.Encoding.UTF8
+        'Dim attach As New Attachment("Тут путь до файла вложения")
+        'message.Attachments.Add(attach)
+
+        'client.Send(message)
+        'message.Dispose()
+
+
+        Exit Sub
+err_:
+        'MsgBox(Err.Description)
+
+        '###################################################################3
 
     End Sub
     Public Sub DBButtonsClick(ByVal sender As [Object], ByVal e As EventArgs)
@@ -1009,7 +1041,7 @@ err_:
 
     Private Sub ПроверитьОбновлениеToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ПроверитьОбновлениеToolStripMenuItem.Click
 
-        System.Diagnostics.Process.Start("http://code.google/p/bko/downloads/list")
+        System.Diagnostics.Process.Start("http://code.google.com/p/bko/downloads/list")
 
         'Dim reader As XmlNodeReader = Nothing
 

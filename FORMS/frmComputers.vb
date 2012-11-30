@@ -33,9 +33,9 @@ Public Class frmComputers
 
     Public OneStart As Decimal = 0
 
-    Public Sub New()
-        InitializeComponent()
-    End Sub 'New
+    'Public Sub New()
+    '    InitializeComponent()
+    'End Sub 'New
 
     Private Sub frmComputers_Activated(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Activated
 
@@ -60,6 +60,7 @@ Public Class frmComputers
 
         frmMain.SaveInfTehButton.Enabled = False
         frmMain.ToolStripDropDownButton1.Enabled = False
+
     End Sub
 
     Private Sub chkVisibleSTR_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkVisibleSTR.CheckedChanged
@@ -140,12 +141,9 @@ Public Class frmComputers
         Me.BeginInvoke(New MethodInvoker(AddressOf frmComputers_Lang))
 
         'Справочники
-        'Call LoadSPR()
-
-        'Dim newThread2 As New Thread(AddressOf LoadSPR_1)
-        'newThread2.Start()
 
         Me.BeginInvoke(New MethodInvoker(AddressOf LoadSPR))
+
 
         uname = objIniFile.GetString("General", "RAZDEL", "0")
 
@@ -285,6 +283,13 @@ Public Class frmComputers
         btnSearch.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\search.png")
         addServiseWork.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\add.png")
         ППРToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\setup.png")
+        bCPUPlus.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\add.png")
+        bRamPlus.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\add.png")
+        bHddPlus.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\add.png")
+        bSVGAPlus.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\add.png")
+        bOpticalPlus.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\add.png")
+        bNetPlus.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\add.png")
+
 
     End Sub
 
@@ -6186,7 +6191,7 @@ err_:
         End Select
     End Sub
 
-    Private Sub bNETPlus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bNETPlus.Click
+    Private Sub bNETPlus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bNetPlus.Click
 
 
         Select Case sNET
@@ -6198,7 +6203,7 @@ err_:
                 Me.txtNETip2.Visible = True
                 Me.txtNETmac2.Visible = True
                 Me.PROizV21.Visible = True
-                Me.bNETPlus.Visible = False
+                Me.bNetPlus.Visible = False
             Case Else
 
                 sNET = sNET
@@ -6668,5 +6673,6 @@ err_:
 
     End Sub
 
+  
 End Class
 

@@ -136,7 +136,6 @@
     <Import Include="System.Collections.Generic" />
     <Import Include="System.Drawing" />
     <Import Include="System.Diagnostics" />
-    <Import Include="System.Linq" />
     <Import Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
@@ -593,12 +592,12 @@
   <ItemGroup>
     <PublishFile Include="basekomp_net.XmlSerializers">
       <Visible>False</Visible>
-      <PublishState>Exclude</PublishState>
-      <IncludeHash>False</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
   </ItemGroup>

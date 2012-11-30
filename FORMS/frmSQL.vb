@@ -120,18 +120,21 @@ Error_:
         Do Until rs.EOF
             FirstColumn = True      'FIRST COLUMN IS A LISTITEM, REST ARE LISTSUBITEMS
 
-            For lngCounter = 0 To rs.Fields.Count - 1
+
+            If DB_N <> "MS Access" Then uname = 2 Else uname = 1
+
+            For lngCounter = 0 To rs.Fields.Count - uname
 
                 If FirstColumn Then
                     If Not IsDBNull(rs.Fields(lngCounter).Value) Then
-                        LvQ.Items.Add(rs.Fields(lngCounter).Value)
+                        LvQ.Items.Add(rs.Fields(lngCounter).Value).ToString()
                     Else
                         LvQ.Items.Add("")  'NULL FIELDS NEED A BLANK ITEM
                     End If                  'TO KEEP DATA FROM SHIFTING LEFT
                     FirstColumn = False
                 Else
                     If Not IsDBNull(rs.Fields(lngCounter).Value) Then
-                        LvQ.Items(LvQ.Items.Count - 1).SubItems.Add(rs.Fields(lngCounter).Value)
+                        LvQ.Items(LvQ.Items.Count - 1).SubItems.Add(rs.Fields(lngCounter).Value).ToString()
                     Else
                         LvQ.Items(LvQ.Items.Count - 1).SubItems.Add("")
                     End If

@@ -45,6 +45,8 @@ Module MOD_Database
         DATAB = True
         sFile = Base_Name
 
+
+
         MyShadowPassword = ""
 
 
@@ -60,36 +62,33 @@ Module MOD_Database
 
                 DB7.Open("Driver={SQL Server Native Client 10.0};Server=" & DBserv & ";Database=" & DBtabl & ";Uid=" & DBuser & ";Pwd=" & DBpass & ";")
 
-
+                Base_Name = DBserv & "\" & DBtabl
             Case "MS SQL"
 
                 '2000
                 DB7.Open("Driver={SQL Server};Server=" & DBserv & ";Database=" & DBtabl & ";Uid=" & DBuser & ";Pwd=" & DBpass & ";")
 
-
-
+                Base_Name = DBserv & "\" & DBtabl
 
             Case "MS Access"
 
-
-
                 DB7.Open("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & BasePath & "\" & sFile & ";Jet OLEDB:Database Password=" & MyShadowPassword & ";")
-
 
             Case "MySQL"
 
                 DB7.Open("Driver={MySQL ODBC 3.51 Driver};Server=" & DBserv & ";Port=" & DBport & ";Database=" & DBtabl & ";User=" & DBuser & "; Password=" & DBpass & ";OPTION=2059; -С;")
 
                 'Driver={MySQL ODBC 3.51 Driver};Server=myServerAddress;charset=UTF8;Database=myDataBase;User=myUsername; Password=myPassword;Option=3;
-
-
                 'DB7.Open("Driver={MySQL ODBC 5.1 Driver};Server=" & DBserv & ";Port=" & DBport & ";Database=" & DBtabl & ";User=" & DBuser & "; Password=" & DBpass & ";OPTION=2059;")
-
                 'DB7.Open("DSN=BKO2;Server=" & DBserv & ";Port=" & DBport & ";Database=" & DBtabl & ";Uid=" & DBuser & ";Pwd=" & DBpass & ";")
+
+                Base_Name = DBserv & "\" & DBtabl
 
             Case "MySQL (MyODBC 5.1)"
 
                 DB7.Open("Driver={MySQL ODBC 5.1 Driver};Server=" & DBserv & ";Database=" & DBtabl & ";Port=" & DBport & ";User=" & DBuser & "; Password=" & DBpass & ";Option=2059;-С;")
+
+                Base_Name = DBserv & "\" & DBtabl
 
             Case "PostgreSQL"
 
@@ -99,10 +98,11 @@ Module MOD_Database
 
                 'DB7.Open("DSN=PGS" & ";UID=" & DBuser & ";PWD=" & DBpass & ";" & "Database=" & DBtabl & ";")
 
+                Base_Name = DBserv & "\" & DBtabl
+
             Case "SQLLite"
 
                 DB7.Open("DRIVER=SQLite3 ODBC Driver;Database=" & BasePath & "\" & sFile & ";LongNames=0;Timeout=1000;NoTXN=0;SyncPragma=NORMAL;StepAPI=0;")
-
 
             Case "DSN"
                 DB7.Open("DSN=" & DBserv & ";UID=" & DBuser & ";PWD=" & DBpass & ";")
