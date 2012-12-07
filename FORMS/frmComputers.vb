@@ -81,6 +81,8 @@ Public Class frmComputers
 
         End Select
 
+        Me.Cursor = Cursors.Default
+
         If OneStart = 0 Then Exit Sub
 
 
@@ -97,7 +99,7 @@ Public Class frmComputers
         'End If
 
 
-        Me.Cursor = Cursors.Default
+
 
     End Sub
 
@@ -1719,7 +1721,7 @@ Error_:
         Me.Cursor = Cursors.Default
 
 
-        If OneStart = 0 Then OneStart = 1
+        ' If OneStart = 0 Then OneStart = 1
 
     End Sub
 

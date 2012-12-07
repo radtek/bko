@@ -697,7 +697,12 @@ ERR1:
                                     If Len(P_NAME) = 0 Then
                                         P_NAME = "NoName"
                                     End If
+
                                     L_NAME = N_NAME & " (" & P_NAME & ")"
+
+                                    If N_NAME = P_NAME Then
+                                        L_NAME = N_NAME
+                                    End If
 
                                 Case 2
                                     P_NAME = .Fields("PSEVDONIM").Value
@@ -718,6 +723,7 @@ ERR1:
 
                             End Select
 
+                           
 
                             Select Case .Fields("tiptehn").Value
 

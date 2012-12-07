@@ -498,19 +498,20 @@ Public Class frmDirectory
 
             Case objIniFile.GetString("frmDirectory", "MSG6", "Источники БП")
 
-                ToolStripButton1.Visible = True
-                ToolStripSeparator5.Visible = True
-
                 lbl1.Visible = True
                 gb1.Visible = True
                 gb1.Text = objIniFile.GetString("frmDirectory", "MSG60", "Мощность Ватт")
                 lbl1.Text = objIniFile.GetString("frmDirectory", "MSG61", "Укажите мощность в Вт.")
 
-                gb2.Visible = True
-                gb2.Text = "SNMP Model"
+
+
+                ' ToolStripButton1.Visible = True
+                ' ToolStripSeparator5.Visible = True
+                'gb2.Visible = True
+                'gb2.Text = "SNMP Model"
 
                 'cmb2
-                FillComboNET(Me.cmb2, "Model", "TBL_DEV_OID", "", False, True)
+                'FillComboNET(Me.cmb2, "Model", "TBL_DEV_OID", "", False, True)
 
                 If unamDB <> "MS Access" Then
                     sSQL = "SELECT SPR_IBP.Id, SPR_IBP.Name, SPR_PROIZV.PROIZV FROM SPR_PROIZV INNER JOIN SPR_IBP ON (SPR_PROIZV.id = SPR_IBP.Proizv) AND (SPR_PROIZV.iD = SPR_IBP.Proizv) WHERE ((SPR_IBP.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
@@ -685,7 +686,9 @@ Public Class frmDirectory
                     sSQL = "SELECT SPR_FS.Id, SPR_FS.Name, SPR_PROIZV.PROIZV FROM SPR_PROIZV INNER JOIN SPR_FS ON (SPR_PROIZV.id = SPR_FS.Proizv) AND (SPR_PROIZV.iD = SPR_FS.Proizv) WHERE ((SPR_FS.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
 
                 Else
-                    sSQL = "SELECT SPR_FS.Id, SPR_FS.Name, SPR_PROIZV.PROIZV, (Select count(*) FROM kompy where kompy.FILTR_NAME=SPR_FS.Name) as temp FROM SPR_PROIZV INNER JOIN SPR_FS ON (SPR_PROIZV.id = SPR_FS.Proizv) AND (SPR_PROIZV.iD = SPR_FS.Proizv) WHERE ((SPR_FS.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
+                    'sSQL = "SELECT SPR_FS.Id, SPR_FS.Name, SPR_PROIZV.PROIZV, (Select count(*) FROM kompy where kompy.FILTR_NAME=SPR_FS.Name)               as temp FROM SPR_PROIZV INNER JOIN SPR_FS ON (SPR_PROIZV.id = SPR_FS.Proizv) AND (SPR_PROIZV.iD = SPR_FS.Proizv) WHERE ((SPR_FS.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
+                    sSQL = "SELECT SPR_FS.Id, SPR_FS.Name, SPR_PROIZV.PROIZV, (Select count(*) FROM kompy where kompy.NET_NAME=SPR_FS.Name and tiptehn='FS') as temp FROM SPR_PROIZV INNER JOIN SPR_FS ON (SPR_PROIZV.id = SPR_FS.Proizv) AND (SPR_PROIZV.iD = SPR_FS.Proizv) WHERE ((SPR_FS.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
+
                 End If
 
 

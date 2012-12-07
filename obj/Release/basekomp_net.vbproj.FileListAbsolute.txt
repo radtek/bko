@@ -47,7 +47,6 @@ d:\_TEMP\OTHER\BC2.NET\obj\Release\GenerateResource.write.1.tlog
 d:\_TEMP\OTHER\BC2.NET\obj\Release\basekomp_net.exe
 d:\_TEMP\OTHER\BC2.NET\obj\Release\basekomp_net.xml
 d:\_TEMP\OTHER\BC2.NET\obj\Release\basekomp_net.pdb
-d:\_TEMP\OTHER\BC2.NET\bin\Release\SnmpSharpNet.dll
 d:\_TEMP\OTHER\BC2.NET\obj\Release\basekomp_net.frmDev.resources
 D:\_TEMP\OTHER\BC2.NET\bin\Release\Microsoft.Office.Interop.Excel.dll
 D:\_TEMP\OTHER\BC2.NET\bin\Release\Microsoft.Office.Interop.Word.dll
@@ -108,6 +107,8 @@ F:\BC2.NET\obj\Release\GenerateResource-ResGen.read.1.tlog
 F:\BC2.NET\obj\Release\GenerateResource.read.1.tlog
 F:\BC2.NET\obj\Release\GenerateResource-ResGen.write.1.tlog
 F:\BC2.NET\obj\Release\GenerateResource.write.1.tlog
+D:\_TEMP\OTHER\BC2.NET\obj\Release\ResGen.read.1.tlog
+D:\_TEMP\OTHER\BC2.NET\obj\Release\ResGen.write.1.tlog
 D:\Devel\BC2.NET\bin\Release\basekomp_net.exe.config
 D:\Devel\BC2.NET\bin\Release\basekomp_net.exe
 D:\Devel\BC2.NET\bin\Release\basekomp_net.pdb
@@ -155,11 +156,7 @@ D:\Devel\BC2.NET\obj\Release\basekomp_net.frm_os3.resources
 D:\Devel\BC2.NET\obj\Release\basekomp_net.frm_wmi.resources
 D:\Devel\BC2.NET\obj\Release\basekomp_net.QrCode.resources
 D:\Devel\BC2.NET\obj\Release\basekomp_net.Resources.resources
-D:\Devel\BC2.NET\obj\Release\GenerateResource-ResGen.read.1.tlog
-D:\Devel\BC2.NET\obj\Release\GenerateResource.read.1.tlog
 D:\Devel\BC2.NET\obj\Release\ResGen.read.1.tlog
-D:\Devel\BC2.NET\obj\Release\GenerateResource-ResGen.write.1.tlog
-D:\Devel\BC2.NET\obj\Release\GenerateResource.write.1.tlog
 D:\Devel\BC2.NET\obj\Release\ResGen.write.1.tlog
 D:\Devel\BC2.NET\obj\Release\basekomp_net.exe
 D:\Devel\BC2.NET\obj\Release\basekomp_net.xml

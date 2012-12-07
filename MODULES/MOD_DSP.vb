@@ -1026,6 +1026,8 @@ Error_:
         'cmbPCL
         On Error GoTo err_
         'frmComputers.selectTECMesto()
+        sCMB.Enabled = True
+
 
         'If TipTehn <> "Printer" Then Exit Sub
         'If Len(sBranch) = 0 Then Exit Sub
@@ -1058,8 +1060,10 @@ Error_:
             Case "PC"
 
                 If A1 = 0 Then
+
                     'sSQL = "Select NET_NAME From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "' and TipTehn='PC'"
                 Else
+
                     sSQL = "Select NET_NAME From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "' and TipTehn='CNT'"
                 End If
 
@@ -1076,6 +1080,7 @@ Error_:
             Case "NET"
 
                 If A1 = 0 Then
+
                     'sSQL = "Select NET_NAME From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "' and TipTehn='PC'"
                 Else
                     sSQL = "Select NET_NAME From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "' and TipTehn='CNT'"
@@ -1099,20 +1104,24 @@ Error_:
                     sSQL = "Select NET_NAME From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "' and TipTehn='PC' or TipTehn='CNT'"
                 End If
 
-                rs.Open("Select count(*) as t_n From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "' and TipTehn='PC' or TipTehn='CNT'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                'rs.Open("Select count(*) as t_n From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "' and TipTehn='PC' or TipTehn='CNT'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
-                'Dim a1 As String
-                With rs
+                ''Dim a1 As String
+                'With rs
 
-                    A1 = .Fields("t_n").Value
-                End With
-                rs.Close()
-                rs = Nothing
+                '    A1 = .Fields("t_n").Value
+                'End With
+                'rs.Close()
+                'rs = Nothing
 
         End Select
 
 
-        If a1 = 0 Then Exit Sub
+        If A1 = 0 Then
+            sCMB.Enabled = False
+            Exit Sub
+        End If
+
 
         rs = New ADODB.Recordset
         rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
@@ -1128,43 +1137,6 @@ Error_:
         End With
         rs.Close()
         rs = Nothing
-
-
-        'If TipTehn <> "PC" And TipTehn <> "NET" Then
-        '    rs = New ADODB.Recordset
-        '    rs.Open("Select count(*) as t_n From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "' and TipTehn='CNT' or TipTehn='PC'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-
-        '    'Dim a1 As String
-        '    With rs
-
-        '        A1 = .Fields("t_n").Value
-        '    End With
-        '    rs.Close()
-        '    rs = Nothing
-
-
-
-        '    If A1 <> 0 Then
-        '        sSQL = "Select NET_NAME From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "' and TipTehn='CNT' or TipTehn='PC'"
-        '        rs = New ADODB.Recordset
-        '        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-
-        '        sCMB.Items.Clear()
-
-        '        With rs
-        '            .MoveFirst()
-        '            Do While Not .EOF
-
-        '                sCMB.Items.Add(.Fields("NET_NAME").Value)
-
-        '                .MoveNext()
-        '            Loop
-        '        End With
-        '        rs.Close()
-        '        rs = Nothing
-
-        '    End If
-        'End If
 
 
 
