@@ -367,39 +367,40 @@ err_:
             If Not IsDBNull(.Fields("TIP_COMPA").Value) Then frmComputers.cmbOTHConnect.Text = .Fields("TIP_COMPA").Value
 
 
-            'If Len(.Fields("NET_IP_1").Value) > 4 And TipTehn = "IBP" Then
+            If Len(.Fields("NET_IP_1").Value) > 4 And TipTehn = "IBP" Then
 
-            '    frmComputers.chkSNMP.Checked = .Fields("SNMP").Value
-            '    frmComputers.chkSNMP.Visible = True
-
-
-            '    If Not IsDBNull(.Fields("SNMP_COMMUNITY").Value) Then
-
-            '        frmComputers.txtSNMP.Text = .Fields("SNMP_COMMUNITY").Value
-
-            '        Dim rsSNMP As ADODB.Recordset
-            '        Dim sTXT As String
-            '        rsSNMP = New ADODB.Recordset
-            '        rsSNMP.Open("SELECT B FROM SPR_IBP WHERE Name='" & .Fields("PRINTER_NAME_1").Value & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-
-            '        With rsSNMP
-
-            '            sTXT = .Fields("B").Value
-
-            '        End With
-            '        rsSNMP.Close()
-            '        rsSNMP = Nothing
+                frmComputers.chkSNMP.Checked = .Fields("SNMP").Value
+                frmComputers.chkSNMP.Visible = True
 
 
-            '        If frmComputers.chkSNMP.Checked = True Then Call REQUEST_OID_IBP_DB(.Fields("NET_IP_1").Value, .Fields("SNMP_COMMUNITY").Value, sTXT)
+                If Not IsDBNull(.Fields("SNMP_COMMUNITY").Value) Then
 
-            '    End If
+                    frmComputers.txtSNMP.Text = .Fields("SNMP_COMMUNITY").Value
 
-            'Else
+                    Dim rsSNMP As ADODB.Recordset
+                    Dim sTXT As String
+                    rsSNMP = New ADODB.Recordset
+                    rsSNMP.Open("SELECT B FROM SPR_IBP WHERE Name='" & .Fields("PRINTER_NAME_1").Value & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
-            '    frmComputers.chkSNMP.Visible = False
+                    With rsSNMP
 
-            'End If
+                        sTXT = .Fields("B").Value
+
+                    End With
+                    rsSNMP.Close()
+                    rsSNMP = Nothing
+
+                    'lblSNMP_Ping
+
+                    If frmComputers.chkSNMP.Checked = True Then Call REQUEST_OID_IBP_DB(.Fields("NET_IP_1").Value, .Fields("SNMP_COMMUNITY").Value, sTXT)
+
+                End If
+
+            Else
+
+                frmComputers.chkSNMP.Visible = False
+
+            End If
 
             frmComputers.txtOTHphone.Text = .Fields("TELEPHONE").Value
 

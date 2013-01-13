@@ -870,6 +870,21 @@ Error_:
                             'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
                             'newThread6.Start()
 
+                            cmbFormat.Items.Clear()
+
+                            For intj = 1 To 5
+                                cmbFormat.Items.Add("A" & intj)
+                            Next
+
+                            cmbTIPCartridg.Items.Clear()
+                            cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG91", "Струйный"))
+                            cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG92", "Матричный"))
+                            cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG93", "Лазерный"))
+                            cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG94", "Барабан"))
+                            cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG95", "Термо Пленка"))
+                            cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG96", "Фотокондуктор"))
+
+
 
 
                             Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbPCL)
@@ -906,6 +921,20 @@ Error_:
                             'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
                             'newThread6.Start()
 
+                            cmbFormat.Items.Clear()
+
+                            For intj = 1 To 5
+                                cmbFormat.Items.Add("A" & intj)
+                            Next
+
+                            cmbTIPCartridg.Items.Clear()
+                            cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG91", "Струйный"))
+                            cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG92", "Матричный"))
+                            cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG93", "Лазерный"))
+                            cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG94", "Барабан"))
+                            cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG95", "Термо Пленка"))
+                            cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG96", "Фотокондуктор"))
+
                             Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbPCL)
 
                         Case "KOpir"
@@ -927,6 +956,21 @@ Error_:
                             Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
+
+
+                            cmbFormat.Items.Clear()
+
+                            For intj = 1 To 5
+                                cmbFormat.Items.Add("A" & intj)
+                            Next
+
+                            cmbTIPCartridg.Items.Clear()
+                            cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG91", "Струйный"))
+                            cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG92", "Матричный"))
+                            cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG93", "Лазерный"))
+                            cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG94", "Барабан"))
+                            cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG95", "Термо Пленка"))
+                            cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG96", "Фотокондуктор"))
 
 
                             'Dim newThread3 As New Thread(AddressOf T_LOAD_T_1)
@@ -6604,23 +6648,23 @@ err_1:
         Me.Cursor = Cursors.Default
     End Sub
 
-    'Private Sub chkSNMP_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles chkSNMP.CheckedChanged
+    Private Sub chkSNMP_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkSNMP.CheckedChanged
 
-    '    If chkSNMP.Checked = True And TipTehn = "IBP" Then
+        If chkSNMP.Checked = True And TipTehn = "IBP" Then
 
-    '        lblSNMP.Visible = True
-    '        txtSNMP.Visible = True
-    '        gbSNMP.Visible = True
+            lblSNMP.Visible = True
+            txtSNMP.Visible = True
+            gbSNMP.Visible = True
 
-    '    Else
+        Else
 
-    '        lblSNMP.Visible = False
-    '        txtSNMP.Visible = False
-    '        gbSNMP.Visible = False
+            lblSNMP.Visible = False
+            txtSNMP.Visible = False
+            gbSNMP.Visible = False
 
-    '    End If
+        End If
 
-    'End Sub
+    End Sub
 
     Private Sub treebranche_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles treebranche.SelectedIndexChanged
 
@@ -6676,5 +6720,50 @@ err_:
     End Sub
 
   
+    Private Sub PingToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PingToolStripMenuItem.Click
+
+        Dim d() As String
+        d = Split(lstGroups.SelectedNode.Tag, "|")
+
+        Select Case d(0)
+
+            Case "C"
+
+                'Call SAVE_INF_CONF(d(1))
+
+            Case Else
+
+
+        End Select
+
+        Dim rs As ADODB.Recordset 'Объявляем рекордсет
+        Dim sSQL As String 'Переменная, где будет размещён SQL запрос
+        sSQL = "SELECT NET_IP_1 FROM kompy WHERE id =" & d(1)
+        rs = New ADODB.Recordset
+        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+        Dim sPING As String
+
+        With rs
+
+            sPING = .Fields("NET_IP_1").Value
+
+        End With
+        rs.Close()
+        rs = Nothing
+
+
+        If Len(sPING) <> 0 Then
+
+
+            If My.Computer.Network.Ping(sPING) Then
+                MsgBox("success", MsgBoxStyle.Exclamation, ProGramName)
+            Else
+                MsgBox("no reply", MsgBoxStyle.Exclamation, ProGramName)
+            End If
+
+        End If
+
+    End Sub
 End Class
 

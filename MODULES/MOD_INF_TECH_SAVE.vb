@@ -412,8 +412,8 @@ sAR:
             .Fields("Spisan").Value = frmComputers.chkOTHspis.Checked
             .Fields("Balans").Value = frmComputers.chkOTHNNb.Checked
 
-            '.Fields("SNMP").Value = frmComputers.chkSNMP.Checked
-            '.Fields("SNMP_COMMUNITY").Value = frmComputers.txtSNMP.Text
+            .Fields("SNMP").Value = frmComputers.chkSNMP.Checked
+            .Fields("SNMP_COMMUNITY").Value = frmComputers.txtSNMP.Text
 
 
 

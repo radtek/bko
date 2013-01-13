@@ -26,7 +26,7 @@
 
         Dim sCOUNT As Integer
 
-        sSQL = "SELECT count(*) as t_n FROM TBL_PPR WHERE id_comp=" & frmComputers.sCOUNT & " AND YEAR_TO='" & cmbYear.Text & "'"
+        sSQL = "SELECT count(*) as t_n FROM TBL_PPR WHERE id_comp=" & frmComputers.sCOUNT & " AND YEAR_TO='" & cmbYear.Text & "'" & " AND TIP_TO='" & frmComputers.TIP_TO & "'" & " AND KVARTAL_TO='" & cmbKvartal.Text & "'"
         rs = New ADODB.Recordset
         rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 

@@ -504,14 +504,12 @@ Public Class frmDirectory
                 lbl1.Text = objIniFile.GetString("frmDirectory", "MSG61", "Укажите мощность в Вт.")
 
 
+                ToolStripButton1.Visible = True
+                ToolStripSeparator5.Visible = True
+                gb2.Visible = True
+                gb2.Text = "SNMP Model"
+                FillComboNET(Me.cmb2, "Model", "TBL_DEV_OID", "", False, True)
 
-                ' ToolStripButton1.Visible = True
-                ' ToolStripSeparator5.Visible = True
-                'gb2.Visible = True
-                'gb2.Text = "SNMP Model"
-
-                'cmb2
-                'FillComboNET(Me.cmb2, "Model", "TBL_DEV_OID", "", False, True)
 
                 If unamDB <> "MS Access" Then
                     sSQL = "SELECT SPR_IBP.Id, SPR_IBP.Name, SPR_PROIZV.PROIZV FROM SPR_PROIZV INNER JOIN SPR_IBP ON (SPR_PROIZV.id = SPR_IBP.Proizv) AND (SPR_PROIZV.iD = SPR_IBP.Proizv) WHERE ((SPR_IBP.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
@@ -3207,9 +3205,9 @@ err_:
         If dSID = 0 Then Exit Sub
 
 
-        'frmDev.sTIPtehn = "IBP"
+        frmDev.sTIPtehn = "IBP"
 
-        'frmDev.ShowDialog(Me)
+        frmDev.ShowDialog(Me)
 
 
 

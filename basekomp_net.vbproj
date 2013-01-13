@@ -119,6 +119,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Release\Ionic.Zip.dll</HintPath>
     </Reference>
+    <Reference Include="SnmpSharpNet">
+      <HintPath>.\SnmpSharpNet.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -193,9 +196,9 @@
     <Compile Include="FORMS\frmDev.designer.vb">
       <DependentUpon>frmDev.vb</DependentUpon>
     </Compile>
-    <None Include="FORMS\frmDev.vb">
+    <Compile Include="FORMS\frmDev.vb">
       <SubType>Form</SubType>
-    </None>
+    </Compile>
     <Compile Include="FORMS\frmDirectory.Designer.vb">
       <DependentUpon>frmDirectory.vb</DependentUpon>
     </Compile>
@@ -363,7 +366,7 @@
     <Compile Include="MODULES\MOD_LOAD_WMI.vb" />
     <Compile Include="MODULES\MOD_REF_TREE.vb" />
     <Compile Include="MODULES\MOD_SEARCHE.vb" />
-    <None Include="MODULES\MOD_SNMP.vb" />
+    <Compile Include="MODULES\MOD_SNMP.vb" />
     <Compile Include="MODULES\MOD_SYS_PRELOAD.vb" />
     <Compile Include="MODULES\MOD_ADD_FUNCTION.vb" />
     <Compile Include="MODULES\MOD_DSP.vb" />
