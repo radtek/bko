@@ -120,9 +120,6 @@
   <metadata name="ToolStrip7.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>445, 42</value>
   </metadata>
-  <metadata name="ToolStrip7.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>445, 42</value>
-  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnSearch.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -139,9 +136,6 @@
         KlSA8/zRh9ABIDUG+1JpAAAAAElFTkSuQmCC
 </value>
   </data>
-  <metadata name="ToolStrip6.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>338, 42</value>
-  </metadata>
   <metadata name="ToolStrip6.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>338, 42</value>
   </metadata>
@@ -193,12 +187,6 @@
   <metadata name="ToolStrip8.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>552, 42</value>
   </metadata>
-  <metadata name="ToolStrip8.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>552, 42</value>
-  </metadata>
-  <metadata name="ToolStrip11.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>880, 42</value>
-  </metadata>
   <metadata name="ToolStrip11.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>880, 42</value>
   </metadata>
@@ -220,17 +208,8 @@
   <metadata name="ToolStrip9.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>659, 42</value>
   </metadata>
-  <metadata name="ToolStrip9.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>659, 42</value>
-  </metadata>
   <metadata name="ToolStrip10.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>766, 42</value>
-  </metadata>
-  <metadata name="ToolStrip10.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>766, 42</value>
-  </metadata>
-  <metadata name="ToolStrip12.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>994, 42</value>
   </metadata>
   <metadata name="ToolStrip12.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>994, 42</value>
@@ -250,9 +229,6 @@
         KlSA8/zRh9ABIDUG+1JpAAAAAElFTkSuQmCC
 </value>
   </data>
-  <metadata name="ToolStrip13.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1108, 42</value>
-  </metadata>
   <metadata name="ToolStrip13.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>1108, 42</value>
   </metadata>
@@ -283,9 +259,6 @@
         AAAILAAFCBxIsODAAAgTKhzAsOEAhA0BNITIUCJDiAAyZnwYIOLEjhU/OvyoUGFAADs=
 </value>
   </data>
-  <metadata name="ToolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>715, 3</value>
-  </metadata>
   <metadata name="ToolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>715, 3</value>
   </metadata>
@@ -352,9 +325,6 @@
   <metadata name="ToolStrip2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>929, 3</value>
   </metadata>
-  <metadata name="ToolStrip2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>929, 3</value>
-  </metadata>
   <data name="btnNotesAdd.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -400,9 +370,6 @@
         KlSA8/zRh9ABIDUG+1JpAAAAAElFTkSuQmCC
 </value>
   </data>
-  <metadata name="ToolStrip3.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1143, 3</value>
-  </metadata>
   <metadata name="ToolStrip3.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>1143, 3</value>
   </metadata>
@@ -454,9 +421,6 @@
   <metadata name="ToolStrip4.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>1357, 3</value>
   </metadata>
-  <metadata name="ToolStrip4.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1357, 3</value>
-  </metadata>
   <data name="btnPRNNotesAdd.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -502,9 +466,6 @@
         KlSA8/zRh9ABIDUG+1JpAAAAAElFTkSuQmCC
 </value>
   </data>
-  <metadata name="ToolStrip5.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>124, 42</value>
-  </metadata>
   <metadata name="ToolStrip5.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>124, 42</value>
   </metadata>

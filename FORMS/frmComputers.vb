@@ -85,8 +85,6 @@ Public Class frmComputers
 
         If OneStart = 0 Then Exit Sub
 
-
-
         ' If MsgBox("Обновить дерево?", MsgBoxStyle.YesNo, ProGramName) = MsgBoxResult.Yes Then
 
         lstGroups.Nodes.Clear()
@@ -491,6 +489,15 @@ Public Class frmComputers
 
         '   If OneStart = 0 Then OneStart = 1
 
+
+        'Dim BASECOMP As ADODB.Recordset
+        'BASECOMP = New ADODB.Recordset
+        'BASECOMP.Open("UPDATE kompy SET NET_IP_1=PRINTER_NAME_2 WHERE TipTehn = 'NET' And PRINTER_NAME_2 <>'' And NET_IP_1 <>''", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        'BASECOMP = Nothing
+
+        'BASECOMP = New ADODB.Recordset
+        'BASECOMP.Open("UPDATE kompy SET PRINTER_NAME_2='' WHERE TipTehn = 'NET' And PRINTER_NAME_2 <>'' And NET_IP_1 <>''", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        'BASECOMP = Nothing
 
     End Sub
 
@@ -6721,6 +6728,7 @@ err_:
 
   
     Private Sub PingToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PingToolStripMenuItem.Click
+        On Error GoTo Err_
 
         Dim d() As String
         d = Split(lstGroups.SelectedNode.Tag, "|")
@@ -6764,6 +6772,12 @@ err_:
 
         End If
 
+
+        Exit Sub
+Err_:
+        MsgBox("no reply", MsgBoxStyle.Exclamation, ProGramName)
+
     End Sub
+
 End Class
 

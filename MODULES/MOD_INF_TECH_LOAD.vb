@@ -373,9 +373,16 @@ err_:
                 frmComputers.chkSNMP.Visible = True
 
 
+
+
                 If Not IsDBNull(.Fields("SNMP_COMMUNITY").Value) Then
 
                     frmComputers.txtSNMP.Text = .Fields("SNMP_COMMUNITY").Value
+
+                    frmComputers.lblSNMP.Visible = True
+                    frmComputers.txtSNMP.Visible = True
+                    frmComputers.gbSNMP.Visible = True
+
 
                     Dim rsSNMP As ADODB.Recordset
                     Dim sTXT As String
@@ -392,13 +399,16 @@ err_:
 
                     'lblSNMP_Ping
 
-                    If frmComputers.chkSNMP.Checked = True Then Call REQUEST_OID_IBP_DB(.Fields("NET_IP_1").Value, .Fields("SNMP_COMMUNITY").Value, sTXT)
+                    If frmComputers.chkSNMP.Checked = True Then Call REQUEST_OID_IBP_DB(.Fields("NET_IP_1").Value, .Fields("SNMP_COMMUNITY").Value, sTXT, .Fields("PRINTER_PROIZV_1").Value)
 
                 End If
 
             Else
 
                 frmComputers.chkSNMP.Visible = False
+                frmComputers.lblSNMP.Visible = False
+                frmComputers.txtSNMP.Visible = False
+                frmComputers.gbSNMP.Visible = False
 
             End If
 

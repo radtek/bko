@@ -1024,9 +1024,14 @@ Error_:
 
     Public Sub LOAD_PCL(ByVal sFIL As String, ByVal sDEP As String, ByVal sOFF As String, ByVal sCMB As ComboBox)
         'cmbPCL
+
+        If Len(sFIL) = 0 Then Exit Sub
+
+
         On Error GoTo err_
         'frmComputers.selectTECMesto()
         sCMB.Enabled = True
+
 
 
         'If TipTehn <> "Printer" Then Exit Sub
@@ -1040,7 +1045,7 @@ Error_:
 
         Dim A1 As String
         With rs
-            a1 = .Fields("t_n").Value
+            A1 = .Fields("t_n").Value
         End With
         rs.Close()
         rs = Nothing

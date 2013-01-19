@@ -6,7 +6,7 @@
 
         Dim z As Integer
 
-        For z = 1 To 10
+        For z = 0 To 10
             cmbYear.Items.Add(Date.Today.Year + z)
         Next
 
@@ -48,11 +48,6 @@
 
         End If
 
-
-
-
-
-
         sSQL = "SELECT * FROM TBL_PPR"
 
         rs = New ADODB.Recordset
@@ -73,13 +68,7 @@
         rs.Close()
         rs = Nothing
 
-
-
-
         Me.Close()
-
-
-
 
     End Sub
 End Class

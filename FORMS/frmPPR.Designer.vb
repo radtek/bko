@@ -56,9 +56,9 @@ Partial Class frmPPR
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(3, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(49, 13)
+        Me.Label1.Size = New System.Drawing.Size(40, 13)
         Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Квартал"
+        Me.Label1.Text = "Месяц"
         '
         'Label2
         '
@@ -73,7 +73,7 @@ Partial Class frmPPR
         '
         Me.cmbKvartal.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cmbKvartal.FormattingEnabled = True
-        Me.cmbKvartal.Items.AddRange(New Object() {"1 Квартал", "2 Квартал", "3 Квартал", "4 Квартал"})
+        Me.cmbKvartal.Items.AddRange(New Object() {"Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"})
         Me.cmbKvartal.Location = New System.Drawing.Point(3, 16)
         Me.cmbKvartal.Name = "cmbKvartal"
         Me.cmbKvartal.Size = New System.Drawing.Size(186, 21)

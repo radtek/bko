@@ -4936,7 +4936,7 @@ Err_:
         Exit Sub
 err_:
         Me.Cursor = Cursors.Default
-
+        MsgBox(Err.Description)
     End Sub
 
 

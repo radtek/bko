@@ -1630,10 +1630,28 @@ err_:
         'Call LOAD_PCL(frmComputers.cmbPRNFil.Text, frmComputers.cmbPRNDepart.Text, frmComputers.cmbPRNOffice.Text, frmComputers.cmbPCL)
         TipTehn = "KOpir"
 
+
+        frmComputers.cmbFormat.Items.Clear()
+
+        Dim langfile As New IniFile(sLANGPATH)
+
+        For intj = 1 To 5
+            frmComputers.cmbFormat.Items.Add("A" & intj)
+        Next
+
+        frmComputers.cmbTIPCartridg.Items.Clear()
+        frmComputers.cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG91", "Струйный"))
+        frmComputers.cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG92", "Матричный"))
+        frmComputers.cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG93", "Лазерный"))
+        frmComputers.cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG94", "Барабан"))
+        frmComputers.cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG95", "Термо Пленка"))
+        frmComputers.cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG96", "Фотокондуктор"))
+
     End Sub
 
     Private Sub ПринтерToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ПринтерToolStripMenuItem.Click
         Call Clear_Form_For_Computer()
+
 
         frmComputers.EDT = False
         FillComboNET(frmComputers.cmbPRN, "name", "SPR_PRINTER", "", False, True)
@@ -1648,6 +1666,24 @@ err_:
         frmComputers.cmbPRNFil.Text = sBranch
         frmComputers.cmbPRNDepart.Text = sDepartment
         frmComputers.cmbPRNOffice.Text = sOffice
+
+        frmComputers.cmbFormat.Items.Clear()
+
+        Dim langfile As New IniFile(sLANGPATH)
+
+        For intj = 1 To 5
+            frmComputers.cmbFormat.Items.Add("A" & intj)
+        Next
+
+        frmComputers.cmbTIPCartridg.Items.Clear()
+        frmComputers.cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG91", "Струйный"))
+        frmComputers.cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG92", "Матричный"))
+        frmComputers.cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG93", "Лазерный"))
+        frmComputers.cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG94", "Барабан"))
+        frmComputers.cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG95", "Термо Пленка"))
+        frmComputers.cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG96", "Фотокондуктор"))
+
+
 
         TipTehn = "Printer"
         Call LOAD_PCL(frmComputers.cmbPRNFil.Text, frmComputers.cmbPRNDepart.Text, frmComputers.cmbPRNOffice.Text, frmComputers.cmbPCL)
@@ -1673,6 +1709,23 @@ err_:
         frmComputers.cmbPRNOffice.Text = sOffice
 
         TipTehn = "MFU"
+
+        frmComputers.cmbFormat.Items.Clear()
+
+        Dim langfile As New IniFile(sLANGPATH)
+
+        For intj = 1 To 5
+            frmComputers.cmbFormat.Items.Add("A" & intj)
+        Next
+
+        frmComputers.cmbTIPCartridg.Items.Clear()
+        frmComputers.cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG91", "Струйный"))
+        frmComputers.cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG92", "Матричный"))
+        frmComputers.cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG93", "Лазерный"))
+        frmComputers.cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG94", "Барабан"))
+        frmComputers.cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG95", "Термо Пленка"))
+        frmComputers.cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG96", "Фотокондуктор"))
+
 
         Call LOAD_PCL(frmComputers.cmbPRNFil.Text, frmComputers.cmbPRNDepart.Text, frmComputers.cmbPRNOffice.Text, frmComputers.cmbPCL)
 

@@ -2242,6 +2242,8 @@ err_:
     End Sub
 
     Private Sub btnDirAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDirAdd.Click
+        On Error GoTo Err_
+
         'Тут код редактирования, добавления
         If Len(cmbName.Text) = 0 Then Exit Sub
 
@@ -2367,10 +2369,10 @@ err_:
                 Else
                     sSQL = "SELECT * FROM SPR_KOPIR WHERE id =" & dSID
 
-                    Dim BASECOMP As ADODB.Recordset
-                    BASECOMP = New ADODB.Recordset
-                    BASECOMP.Open("UPDATE kompy SET PSEVDONIM='" & LTrim(sNAME) & "', PRINTER_NAME_1='" & LTrim(sNAME) & "', Net_name = '" & LTrim(sNAME) & "', printer_proizv_1 = '" & LTrim(cmbName3.Text) & "' WHERE TipTehn = 'KOpir' And Net_name = '" & LTrim(sREALNAME) & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                    BASECOMP = Nothing
+                    'Dim BASECOMP As ADODB.Recordset
+                    'BASECOMP = New ADODB.Recordset
+                    'BASECOMP.Open("UPDATE kompy SET PSEVDONIM='" & LTrim(sNAME) & "', PRINTER_NAME_1='" & LTrim(sNAME) & "', Net_name = '" & LTrim(sNAME) & "', printer_proizv_1 = '" & LTrim(cmbName3.Text) & "' WHERE TipTehn = 'KOpir' And Net_name = '" & LTrim(sREALNAME) & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                    'BASECOMP = Nothing
 
                 End If
 
@@ -2397,10 +2399,10 @@ err_:
                     sSQL = "SELECT * FROM SPR_MFU"
                 Else
                     sSQL = "SELECT * FROM SPR_MFU WHERE id =" & dSID
-                    Dim BASECOMP As ADODB.Recordset
-                    BASECOMP = New ADODB.Recordset
-                    BASECOMP.Open("UPDATE kompy SET PSEVDONIM='" & LTrim(sNAME) & "', PRINTER_NAME_1='" & LTrim(sNAME) & "', Net_name = '" & LTrim(sNAME) & "', printer_proizv_1 = '" & LTrim(cmbName3.Text) & "' WHERE TipTehn = 'MFU' And Net_name = '" & LTrim(sREALNAME) & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                    BASECOMP = Nothing
+                    'Dim BASECOMP As ADODB.Recordset
+                    'BASECOMP = New ADODB.Recordset
+                    'BASECOMP.Open("UPDATE kompy SET PSEVDONIM='" & LTrim(sNAME) & "', PRINTER_NAME_1='" & LTrim(sNAME) & "', Net_name = '" & LTrim(sNAME) & "', printer_proizv_1 = '" & LTrim(cmbName3.Text) & "' WHERE TipTehn = 'MFU' And Net_name = '" & LTrim(sREALNAME) & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                    'BASECOMP = Nothing
                 End If
 
             Case objIniFile.GetString("frmDirectory", "MSG11", "Мыши")
@@ -2417,10 +2419,11 @@ err_:
                     sSQL = "SELECT * FROM SPR_PRINTER"
                 Else
                     sSQL = "SELECT * FROM SPR_PRINTER WHERE id =" & dSID
-                    Dim BASECOMP As ADODB.Recordset
-                    BASECOMP = New ADODB.Recordset
-                    BASECOMP.Open("UPDATE kompy SET PSEVDONIM='" & LTrim(sNAME) & "', PRINTER_NAME_1='" & LTrim(sNAME) & "', Net_name = '" & LTrim(sNAME) & "', printer_proizv_1 = '" & LTrim(cmbName3.Text) & "' WHERE TipTehn = 'Printer' And Net_name = '" & LTrim(sREALNAME) & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                    BASECOMP = Nothing
+
+                    'Dim BASECOMP As ADODB.Recordset
+                    'BASECOMP = New ADODB.Recordset
+                    'BASECOMP.Open("UPDATE kompy SET PSEVDONIM='" & LTrim(sNAME) & "', PRINTER_NAME_1='" & LTrim(sNAME) & "', Net_name = '" & LTrim(sNAME) & "', printer_proizv_1 = '" & LTrim(cmbName3.Text) & "' WHERE TipTehn = 'Printer' And Net_name = '" & LTrim(sREALNAME) & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                    'BASECOMP = Nothing
                 End If
 
             Case objIniFile.GetString("frmDirectory", "MSG13", "Сетевые фильтры")
@@ -3073,10 +3076,10 @@ err_:
         End Select
 
 
-        If Len(sPAR1) = 0 Then sPAR1 = " "
-        If Len(sPAR2) = 0 Then sPAR2 = " "
-        If Len(sPAR3) = 0 Then sPAR3 = " "
-        If Len(sPRIM) = 0 Then sPRIM = " "
+        If Len(sPAR1) = 0 Then sPAR1 = ""
+        If Len(sPAR2) = 0 Then sPAR2 = ""
+        If Len(sPAR3) = 0 Then sPAR3 = ""
+        If Len(sPRIM) = 0 Then sPRIM = ""
 
         rs = New ADODB.Recordset
         rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
@@ -3112,9 +3115,17 @@ err_:
         rs = Nothing
 
 
-        Call LOAD_LIST_SPR()
+
+        Me.BeginInvoke(New MethodInvoker(AddressOf LOAD_LIST_SPR))
+        ' Call LOAD_LIST_SPR()
+
         btnDirAdd.Text = objIniFile.GetString("frmDirectory", "btnDirAdd", "Добавить")
         eDTI = False
+
+        Exit Sub
+Err_:
+6:      MsgBox(Err.Description)
+
     End Sub
 
     Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
