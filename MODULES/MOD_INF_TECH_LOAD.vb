@@ -868,7 +868,156 @@ err_:
                 frmComputers.PROizV9.Visible = False
 
             End If
-           
+
+            'Новые модули памяти
+            If Not IsDBNull(.Fields("RAM_5").Value) And Len(.Fields("RAM_5").Value) > 1 Then
+                frmComputers.cmbRAM5.Text = .Fields("RAM_5").Value
+                frmComputers.sRAM = frmComputers.sRAM + 1
+                frmComputers.bRamPlus.Visible = False
+                frmComputers.cmbRAM2.Visible = True
+                frmComputers.txtRamSN2.Visible = True
+                frmComputers.txtRamS2.Visible = True
+                frmComputers.PROizV7.Visible = True
+                frmComputers.cmbRAM3.Visible = True
+                frmComputers.txtRamSN3.Visible = True
+                frmComputers.txtRamS3.Visible = True
+                frmComputers.PROizV8.Visible = True
+                frmComputers.cmbRAM4.Visible = True
+                frmComputers.txtRamSN4.Visible = True
+                frmComputers.txtRamS4.Visible = True
+                frmComputers.PROizV9.Visible = True
+                frmComputers.cmbRAM5.Visible = True
+                frmComputers.txtRamSN5.Visible = True
+                frmComputers.txtRamS5.Visible = True
+                frmComputers.PROizV44.Visible = True
+                If Not IsDBNull(.Fields("RAM_speed_5").Value) Then frmComputers.txtRamS5.Text = .Fields("RAM_speed_5").Value
+                If Not IsDBNull(.Fields("RAM_SN_5").Value) Then frmComputers.txtRamSN5.Text = .Fields("RAM_SN_5").Value
+                If Not IsDBNull(.Fields("RAM_PROIZV_5").Value) Then frmComputers.PROizV44.Text = .Fields("RAM_PROIZV_5").Value
+            Else
+                frmComputers.cmbRAM5.Visible = False
+                frmComputers.txtRamSN5.Visible = False
+                frmComputers.txtRamS5.Visible = False
+                frmComputers.PROizV44.Visible = False
+
+            End If
+
+            If Not IsDBNull(.Fields("RAM_6").Value) And Len(.Fields("RAM_6").Value) > 1 Then
+                frmComputers.cmbRAM6.Text = .Fields("RAM_6").Value
+                frmComputers.sRAM = frmComputers.sRAM + 1
+                frmComputers.bRamPlus.Visible = False
+                frmComputers.cmbRAM2.Visible = True
+                frmComputers.txtRamSN2.Visible = True
+                frmComputers.txtRamS2.Visible = True
+                frmComputers.PROizV7.Visible = True
+                frmComputers.cmbRAM3.Visible = True
+                frmComputers.txtRamSN3.Visible = True
+                frmComputers.txtRamS3.Visible = True
+                frmComputers.PROizV8.Visible = True
+                frmComputers.cmbRAM4.Visible = True
+                frmComputers.txtRamSN4.Visible = True
+                frmComputers.txtRamS4.Visible = True
+                frmComputers.PROizV9.Visible = True
+                frmComputers.cmbRAM5.Visible = True
+                frmComputers.txtRamSN5.Visible = True
+                frmComputers.txtRamS5.Visible = True
+                frmComputers.PROizV44.Visible = True
+                frmComputers.cmbRAM6.Visible = True
+                frmComputers.txtRamSN6.Visible = True
+                frmComputers.txtRamS6.Visible = True
+                frmComputers.PROizV45.Visible = True
+                If Not IsDBNull(.Fields("RAM_speed_6").Value) Then frmComputers.txtRamS6.Text = .Fields("RAM_speed_6").Value
+                If Not IsDBNull(.Fields("RAM_SN_6").Value) Then frmComputers.txtRamSN6.Text = .Fields("RAM_SN_6").Value
+                If Not IsDBNull(.Fields("RAM_PROIZV_6").Value) Then frmComputers.PROizV45.Text = .Fields("RAM_PROIZV_6").Value
+            Else
+                frmComputers.cmbRAM6.Visible = False
+                frmComputers.txtRamSN6.Visible = False
+                frmComputers.txtRamS6.Visible = False
+                frmComputers.PROizV45.Visible = False
+
+            End If
+
+            If Not IsDBNull(.Fields("RAM_7").Value) And Len(.Fields("RAM_7").Value) > 1 Then
+                frmComputers.cmbRAM7.Text = .Fields("RAM_7").Value
+                frmComputers.sRAM = frmComputers.sRAM + 1
+                frmComputers.bRamPlus.Visible = False
+                frmComputers.cmbRAM2.Visible = True
+                frmComputers.txtRamSN2.Visible = True
+                frmComputers.txtRamS2.Visible = True
+                frmComputers.PROizV7.Visible = True
+                frmComputers.cmbRAM3.Visible = True
+                frmComputers.txtRamSN3.Visible = True
+                frmComputers.txtRamS3.Visible = True
+                frmComputers.PROizV8.Visible = True
+                frmComputers.cmbRAM4.Visible = True
+                frmComputers.txtRamSN4.Visible = True
+                frmComputers.txtRamS4.Visible = True
+                frmComputers.PROizV9.Visible = True
+                frmComputers.cmbRAM5.Visible = True
+                frmComputers.txtRamSN5.Visible = True
+                frmComputers.txtRamS5.Visible = True
+                frmComputers.PROizV44.Visible = True
+                frmComputers.cmbRAM6.Visible = True
+                frmComputers.txtRamSN6.Visible = True
+                frmComputers.txtRamS6.Visible = True
+                frmComputers.PROizV45.Visible = True
+                frmComputers.cmbRAM6.Visible = True
+                frmComputers.txtRamSN6.Visible = True
+                frmComputers.txtRamS6.Visible = True
+                frmComputers.PROizV45.Visible = True
+                If Not IsDBNull(.Fields("RAM_speed_7").Value) Then frmComputers.txtRamS7.Text = .Fields("RAM_speed_7").Value
+                If Not IsDBNull(.Fields("RAM_SN_7").Value) Then frmComputers.txtRamSN7.Text = .Fields("RAM_SN_7").Value
+                If Not IsDBNull(.Fields("RAM_PROIZV_7").Value) Then frmComputers.PROizV46.Text = .Fields("RAM_PROIZV_7").Value
+            Else
+                frmComputers.cmbRAM7.Visible = False
+                frmComputers.txtRamSN7.Visible = False
+                frmComputers.txtRamS7.Visible = False
+                frmComputers.PROizV46.Visible = False
+
+            End If
+
+            If Not IsDBNull(.Fields("RAM_8").Value) And Len(.Fields("RAM_8").Value) > 1 Then
+                frmComputers.cmbRAM8.Text = .Fields("RAM_8").Value
+                frmComputers.sRAM = frmComputers.sRAM + 1
+                frmComputers.bRamPlus.Visible = False
+                frmComputers.cmbRAM2.Visible = True
+                frmComputers.txtRamSN2.Visible = True
+                frmComputers.txtRamS2.Visible = True
+                frmComputers.PROizV7.Visible = True
+                frmComputers.cmbRAM3.Visible = True
+                frmComputers.txtRamSN3.Visible = True
+                frmComputers.txtRamS3.Visible = True
+                frmComputers.PROizV8.Visible = True
+                frmComputers.cmbRAM4.Visible = True
+                frmComputers.txtRamSN4.Visible = True
+                frmComputers.txtRamS4.Visible = True
+                frmComputers.PROizV9.Visible = True
+                frmComputers.cmbRAM5.Visible = True
+                frmComputers.txtRamSN5.Visible = True
+                frmComputers.txtRamS5.Visible = True
+                frmComputers.PROizV44.Visible = True
+                frmComputers.cmbRAM6.Visible = True
+                frmComputers.txtRamSN6.Visible = True
+                frmComputers.txtRamS6.Visible = True
+                frmComputers.PROizV45.Visible = True
+                frmComputers.cmbRAM6.Visible = True
+                frmComputers.txtRamSN6.Visible = True
+                frmComputers.txtRamS6.Visible = True
+                frmComputers.PROizV45.Visible = True
+                frmComputers.cmbRAM7.Visible = True
+                frmComputers.txtRamSN7.Visible = True
+                frmComputers.txtRamS7.Visible = True
+                frmComputers.PROizV46.Visible = True
+                If Not IsDBNull(.Fields("RAM_speed_8").Value) Then frmComputers.txtRamS8.Text = .Fields("RAM_speed_8").Value
+                If Not IsDBNull(.Fields("RAM_SN_8").Value) Then frmComputers.txtRamSN8.Text = .Fields("RAM_SN_8").Value
+                If Not IsDBNull(.Fields("RAM_PROIZV_8").Value) Then frmComputers.PROizV47.Text = .Fields("RAM_PROIZV_8").Value
+            Else
+                frmComputers.cmbRAM8.Visible = False
+                frmComputers.txtRamSN8.Visible = False
+                frmComputers.txtRamS8.Visible = False
+                frmComputers.PROizV47.Visible = False
+
+            End If
+
 
             'Жесткие диски
 
@@ -880,7 +1029,7 @@ err_:
 
             If Not IsDBNull(.Fields("HDD_Name_2").Value) And Len(.Fields("HDD_Name_2").Value) > 1 Then
                 frmComputers.cmbHDD2.Text = .Fields("HDD_Name_2").Value
-                frmComputers.sHDD = 2
+                frmComputers.sHDD = frmComputers.sHDD + 1
                 frmComputers.cmbHDD2.Visible = True
                 frmComputers.txtHDDo2.Visible = True
                 frmComputers.txtHDDsN2.Visible = True
@@ -901,7 +1050,7 @@ err_:
 
             If Not IsDBNull(.Fields("HDD_Name_3").Value) And Len(.Fields("HDD_Name_3").Value) > 1 Then
                 frmComputers.cmbHDD3.Text = .Fields("HDD_Name_3").Value
-                frmComputers.sHDD = 3
+                frmComputers.sHDD = frmComputers.sHDD + 1
                 frmComputers.cmbHDD3.Visible = True
                 frmComputers.txtHDDo3.Visible = True
                 frmComputers.txtHDDsN3.Visible = True
@@ -922,8 +1071,8 @@ err_:
 
             If Not IsDBNull(.Fields("HDD_Name_4").Value) And Len(.Fields("HDD_Name_4").Value) > 1 Then
                 frmComputers.cmbHDD4.Text = .Fields("HDD_Name_4").Value
-                frmComputers.sHDD = 4
-                frmComputers.bHddPlus.Visible = False
+                frmComputers.sHDD = frmComputers.sHDD + 1
+                'frmComputers.bHddPlus.Visible = False
                 frmComputers.cmbHDD4.Visible = True
                 frmComputers.txtHDDo4.Visible = True
                 frmComputers.txtHDDsN4.Visible = True
@@ -938,6 +1087,90 @@ err_:
                 frmComputers.txtHDDo4.Visible = False
                 frmComputers.txtHDDsN4.Visible = False
                 frmComputers.PROizV13.Visible = False
+
+            End If
+
+            If Not IsDBNull(.Fields("HDD_Name_5").Value) And Len(.Fields("HDD_Name_5").Value) > 1 Then
+                frmComputers.cmbHDD5.Text = .Fields("HDD_Name_5").Value
+                frmComputers.sHDD = frmComputers.sHDD + 1
+                'frmComputers.bHddPlus.Visible = False
+                frmComputers.cmbHDD5.Visible = True
+                frmComputers.txtHDDo5.Visible = True
+                frmComputers.txtHDDsN5.Visible = True
+                frmComputers.PROizV48.Visible = True
+
+                If Not IsDBNull(.Fields("HDD_OB_5").Value) Then frmComputers.txtHDDo5.Text = .Fields("HDD_OB_5").Value
+                If Not IsDBNull(.Fields("HDD_SN_5").Value) Then frmComputers.txtHDDsN5.Text = .Fields("HDD_SN_5").Value
+                If Not IsDBNull(.Fields("HDD_PROIZV_5").Value) Then frmComputers.PROizV48.Text = .Fields("HDD_PROIZV_5").Value
+
+            Else
+                frmComputers.cmbHDD5.Visible = False
+                frmComputers.txtHDDo5.Visible = False
+                frmComputers.txtHDDsN5.Visible = False
+                frmComputers.PROizV48.Visible = False
+
+            End If
+            
+            If Not IsDBNull(.Fields("HDD_Name_6").Value) And Len(.Fields("HDD_Name_6").Value) > 1 Then
+                frmComputers.cmbHDD6.Text = .Fields("HDD_Name_6").Value
+                frmComputers.sHDD = frmComputers.sHDD + 1
+                'frmComputers.bHddPlus.Visible = False
+                frmComputers.cmbHDD6.Visible = True
+                frmComputers.txtHDDo6.Visible = True
+                frmComputers.txtHDDsN6.Visible = True
+                frmComputers.PROizV49.Visible = True
+
+                If Not IsDBNull(.Fields("HDD_OB_6").Value) Then frmComputers.txtHDDo6.Text = .Fields("HDD_OB_6").Value
+                If Not IsDBNull(.Fields("HDD_SN_6").Value) Then frmComputers.txtHDDsN6.Text = .Fields("HDD_SN_6").Value
+                If Not IsDBNull(.Fields("HDD_PROIZV_6").Value) Then frmComputers.PROizV49.Text = .Fields("HDD_PROIZV_6").Value
+
+            Else
+                frmComputers.cmbHDD6.Visible = False
+                frmComputers.txtHDDo6.Visible = False
+                frmComputers.txtHDDsN6.Visible = False
+                frmComputers.PROizV49.Visible = False
+
+            End If
+
+            If Not IsDBNull(.Fields("HDD_Name_7").Value) And Len(.Fields("HDD_Name_7").Value) > 1 Then
+                frmComputers.cmbHDD7.Text = .Fields("HDD_Name_7").Value
+                frmComputers.sHDD = frmComputers.sHDD + 1
+                'frmComputers.bHddPlus.Visible = False
+                frmComputers.cmbHDD7.Visible = True
+                frmComputers.txtHDDo7.Visible = True
+                frmComputers.txtHDDsN7.Visible = True
+                frmComputers.PROizV50.Visible = True
+
+                If Not IsDBNull(.Fields("HDD_OB_7").Value) Then frmComputers.txtHDDo7.Text = .Fields("HDD_OB_7").Value
+                If Not IsDBNull(.Fields("HDD_SN_7").Value) Then frmComputers.txtHDDsN7.Text = .Fields("HDD_SN_7").Value
+                If Not IsDBNull(.Fields("HDD_PROIZV_7").Value) Then frmComputers.PROizV49.Text = .Fields("HDD_PROIZV_7").Value
+
+            Else
+                frmComputers.cmbHDD7.Visible = False
+                frmComputers.txtHDDo7.Visible = False
+                frmComputers.txtHDDsN7.Visible = False
+                frmComputers.PROizV50.Visible = False
+
+            End If
+
+            If Not IsDBNull(.Fields("HDD_Name_8").Value) And Len(.Fields("HDD_Name_8").Value) > 1 Then
+                frmComputers.cmbHDD8.Text = .Fields("HDD_Name_8").Value
+                frmComputers.sHDD = frmComputers.sHDD + 1
+                'frmComputers.bHddPlus.Visible = False
+                frmComputers.cmbHDD8.Visible = True
+                frmComputers.txtHDDo8.Visible = True
+                frmComputers.txtHDDsN8.Visible = True
+                frmComputers.PROizV51.Visible = True
+
+                If Not IsDBNull(.Fields("HDD_OB_8").Value) Then frmComputers.txtHDDo8.Text = .Fields("HDD_OB_8").Value
+                If Not IsDBNull(.Fields("HDD_SN_8").Value) Then frmComputers.txtHDDsN8.Text = .Fields("HDD_SN_8").Value
+                If Not IsDBNull(.Fields("HDD_PROIZV_8").Value) Then frmComputers.PROizV49.Text = .Fields("HDD_PROIZV_8").Value
+
+            Else
+                frmComputers.cmbHDD8.Visible = False
+                frmComputers.txtHDDo8.Visible = False
+                frmComputers.txtHDDsN8.Visible = False
+                frmComputers.PROizV51.Visible = False
 
             End If
 

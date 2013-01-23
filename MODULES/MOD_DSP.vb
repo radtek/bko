@@ -1088,10 +1088,10 @@ Error_:
 
                     'sSQL = "Select NET_NAME From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "' and TipTehn='PC'"
                 Else
-                    sSQL = "Select NET_NAME From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "' and TipTehn='CNT'"
+                    sSQL = "Select NET_NAME From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "' and tipTehn<>'Printer' And tipTehn<>'MFU' And tipTehn<>'KOpir' And tipTehn<>'OT' And tipTehn<>'PHOTO' And tipTehn<>'FAX' And tipTehn<>'PHONE' And tipTehn<>'ZIP' And tipTehn<>'SCANER' And tipTehn<>'MONITOR' And tipTehn<>'NET' And tipTehn<>'USB' And tipTehn<>'SOUND' And tipTehn<>'IBP' And tipTehn<>'FS' And tipTehn<>'KEYB' And tipTehn<>'MOUSE' and tiptehn <>'PC'"
                 End If
 
-                rs.Open("Select count(*) as t_n From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "' and TipTehn='CNT'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs.Open("Select count(*) as t_n From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "' and tipTehn<>'Printer' And tipTehn<>'MFU' And tipTehn<>'KOpir' And tipTehn<>'OT' And tipTehn<>'PHOTO' And tipTehn<>'FAX' And tipTehn<>'PHONE' And tipTehn<>'ZIP' And tipTehn<>'SCANER' And tipTehn<>'MONITOR' And tipTehn<>'NET' And tipTehn<>'USB' And tipTehn<>'SOUND' And tipTehn<>'IBP' And tipTehn<>'FS' And tipTehn<>'KEYB' And tipTehn<>'MOUSE' and tiptehn <>'PC'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
                 'Dim a1 As String
                 With rs
@@ -1104,20 +1104,20 @@ Error_:
             Case Else
 
                 If A1 = 0 Then
-                    sSQL = "Select NET_NAME From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "' and TipTehn='PC' or TipTehn='CNT'"
+                    sSQL = "Select NET_NAME From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "' and tipTehn<>'Printer' And tipTehn<>'MFU' And tipTehn<>'KOpir' And tipTehn<>'OT' And tipTehn<>'PHOTO' And tipTehn<>'FAX' And tipTehn<>'PHONE' And tipTehn<>'ZIP' And tipTehn<>'SCANER' And tipTehn<>'MONITOR' And tipTehn<>'NET' And tipTehn<>'USB' And tipTehn<>'SOUND' And tipTehn<>'IBP' And tipTehn<>'FS' And tipTehn<>'KEYB' And tipTehn<>'MOUSE'"
                 Else
-                    sSQL = "Select NET_NAME From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "' and TipTehn='PC' or TipTehn='CNT'"
+                    sSQL = "Select NET_NAME From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "' and tipTehn<>'Printer' And tipTehn<>'MFU' And tipTehn<>'KOpir' And tipTehn<>'OT' And tipTehn<>'PHOTO' And tipTehn<>'FAX' And tipTehn<>'PHONE' And tipTehn<>'ZIP' And tipTehn<>'SCANER' And tipTehn<>'MONITOR' And tipTehn<>'NET' And tipTehn<>'USB' And tipTehn<>'SOUND' And tipTehn<>'IBP' And tipTehn<>'FS' And tipTehn<>'KEYB' And tipTehn<>'MOUSE'"
                 End If
 
-                'rs.Open("Select count(*) as t_n From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "' and TipTehn='PC' or TipTehn='CNT'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs.Open("Select count(*) as t_n From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "'  and tipTehn<>'Printer' And tipTehn<>'MFU' And tipTehn<>'KOpir' And tipTehn<>'OT' And tipTehn<>'PHOTO' And tipTehn<>'FAX' And tipTehn<>'PHONE' And tipTehn<>'ZIP' And tipTehn<>'SCANER' And tipTehn<>'MONITOR' And tipTehn<>'NET' And tipTehn<>'USB' And tipTehn<>'SOUND' And tipTehn<>'IBP' And tipTehn<>'FS' And tipTehn<>'KEYB' And tipTehn<>'MOUSE'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
-                ''Dim a1 As String
-                'With rs
+                'Dim a1 As String
+                With rs
 
-                '    A1 = .Fields("t_n").Value
-                'End With
-                'rs.Close()
-                'rs = Nothing
+                    A1 = .Fields("t_n").Value
+                End With
+                rs.Close()
+                rs = Nothing
 
         End Select
 

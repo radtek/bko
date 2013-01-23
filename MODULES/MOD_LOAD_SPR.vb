@@ -77,8 +77,16 @@ Module Mod_Load_SPR
         frmComputers.PROizV41.Items.AddRange(obj)
         frmComputers.PROizV42.Items.AddRange(obj)
         frmComputers.PROizV43.Items.AddRange(obj)
+        frmComputers.PROizV44.Items.AddRange(obj)
+        frmComputers.PROizV45.Items.AddRange(obj)
+        frmComputers.PROizV46.Items.AddRange(obj)
+        frmComputers.PROizV47.Items.AddRange(obj)
+        frmComputers.PROizV48.Items.AddRange(obj)
+        frmComputers.PROizV49.Items.AddRange(obj)
+        frmComputers.PROizV50.Items.AddRange(obj)
+        frmComputers.PROizV51.Items.AddRange(obj)
 
-        
+
 
         FillComboNET(frmComputers.cmbPostav, "Name", "SPR_Postav", "", False, True)
 
@@ -108,7 +116,10 @@ Module Mod_Load_SPR
         frmComputers.cmbRAM2.Items.AddRange(obj2)
         frmComputers.cmbRAM3.Items.AddRange(obj2)
         frmComputers.cmbRAM4.Items.AddRange(obj2)
-
+        frmComputers.cmbRAM5.Items.AddRange(obj2)
+        frmComputers.cmbRAM6.Items.AddRange(obj2)
+        frmComputers.cmbRAM7.Items.AddRange(obj2)
+        frmComputers.cmbRAM8.Items.AddRange(obj2)
 
         FillComboNET(frmComputers.cmbHDD1, "Name", "SPR_HDD", "", False, True)
 
@@ -117,7 +128,10 @@ Module Mod_Load_SPR
         frmComputers.cmbHDD2.Items.AddRange(obj3)
         frmComputers.cmbHDD3.Items.AddRange(obj3)
         frmComputers.cmbHDD4.Items.AddRange(obj3)
-
+        frmComputers.cmbHDD5.Items.CopyTo(obj3, 0)
+        frmComputers.cmbHDD6.Items.AddRange(obj3)
+        frmComputers.cmbHDD7.Items.AddRange(obj3)
+        frmComputers.cmbHDD8.Items.AddRange(obj3)
 
 
         FillComboNET(frmComputers.cmbSVGA1, "Name", "SPR_SVGA", "", False, True)

@@ -489,16 +489,21 @@ Public Class frmComputers
 
         '   If OneStart = 0 Then OneStart = 1
 
+        On Error GoTo err_
 
-        'Dim BASECOMP As ADODB.Recordset
-        'BASECOMP = New ADODB.Recordset
-        'BASECOMP.Open("UPDATE kompy SET NET_IP_1=PRINTER_NAME_2 WHERE TipTehn = 'NET' And PRINTER_NAME_2 <>'' And NET_IP_1 <>''", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-        'BASECOMP = Nothing
+        Dim BASECOMP As ADODB.Recordset
+        BASECOMP = New ADODB.Recordset
+        BASECOMP.Open("UPDATE kompy SET NET_IP_1=PRINTER_NAME_2 WHERE TipTehn = 'NET' And PRINTER_NAME_2 <>'' And NET_IP_1 <>''", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        BASECOMP = Nothing
 
-        'BASECOMP = New ADODB.Recordset
-        'BASECOMP.Open("UPDATE kompy SET PRINTER_NAME_2='' WHERE TipTehn = 'NET' And PRINTER_NAME_2 <>'' And NET_IP_1 <>''", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-        'BASECOMP = Nothing
+        BASECOMP = New ADODB.Recordset
+        BASECOMP.Open("UPDATE kompy SET PRINTER_NAME_2='' WHERE TipTehn = 'NET' And PRINTER_NAME_2 <>'' And NET_IP_1 <>''", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        BASECOMP = Nothing
 
+
+        Exit Sub
+err_:
+        BASECOMP = Nothing
     End Sub
 
     Private Sub frmComputers_Resize(ByVal eventSender As System.Object, ByVal eventArgs As System.EventArgs) Handles MyBase.Resize
@@ -4749,6 +4754,24 @@ err_:
         ExLoadParTree(cmbRAM4.Text, txtRamS4, PROizV9, "SPR_RAM")
     End Sub
 
+    Private Sub cmbRAM5_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbRAM5.SelectedIndexChanged
+        ExLoadParTree(cmbRAM5.Text, txtRamS5, PROizV44, "SPR_RAM")
+    End Sub
+
+    Private Sub cmbRAM6_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbRAM6.SelectedIndexChanged
+        ExLoadParTree(cmbRAM6.Text, txtRamS6, PROizV45, "SPR_RAM")
+    End Sub
+
+    Private Sub cmbRAM7_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbRAM7.SelectedIndexChanged
+        ExLoadParTree(cmbRAM7.Text, txtRamS7, PROizV46, "SPR_RAM")
+    End Sub
+
+    Private Sub cmbRAM8_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbRAM8.SelectedIndexChanged
+        ExLoadParTree(cmbRAM8.Text, txtRamS8, PROizV47, "SPR_RAM")
+    End Sub
+
+
+
     Private Sub cmbHDD1_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbHDD1.SelectedIndexChanged
         ExLoadParTree(cmbHDD1.Text, txtHDDo1, PROizV10, "SPR_HDD")
     End Sub
@@ -4764,6 +4787,24 @@ err_:
     Private Sub cmbHDD4_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbHDD4.SelectedIndexChanged
         ExLoadParTree(cmbHDD4.Text, txtHDDo4, PROizV13, "SPR_HDD")
     End Sub
+
+    Private Sub cmbHDD5_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbHDD5.SelectedIndexChanged
+        ExLoadParTree(cmbHDD5.Text, txtHDDo5, PROizV48, "SPR_HDD")
+    End Sub
+
+    Private Sub cmbHDD6_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbHDD6.SelectedIndexChanged
+        ExLoadParTree(cmbHDD6.Text, txtHDDo6, PROizV49, "SPR_HDD")
+    End Sub
+
+    Private Sub cmbHDD7_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbHDD7.SelectedIndexChanged
+        ExLoadParTree(cmbHDD7.Text, txtHDDo7, PROizV50, "SPR_HDD")
+    End Sub
+
+    Private Sub cmbHDD8_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbHDD8.SelectedIndexChanged
+        ExLoadParTree(cmbHDD8.Text, txtHDDo8, PROizV51, "SPR_HDD")
+    End Sub
+
+
 
     Private Sub cmbSVGA1_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbSVGA1.SelectedIndexChanged
         ExLoadParTree(cmbSVGA1.Text, txtSVGAr1, PROizV14, "SPR_SVGA")
@@ -6134,6 +6175,8 @@ err_:
     End Sub
 
     Private Sub bRamPlus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bRamPlus.Click
+
+A:
         Select Case sRAM
 
             Case 1
@@ -6158,10 +6201,50 @@ err_:
                 Me.txtRamSN4.Visible = True
                 Me.txtRamS4.Visible = True
                 Me.PROizV9.Visible = True
-                Me.bRamPlus.Visible = False
+                ' Me.bRamPlus.Visible = False
+
+            Case 4
+
+                sRAM = sRAM + 1
+                Me.cmbRAM5.Visible = True
+                Me.txtRamSN5.Visible = True
+                Me.txtRamS5.Visible = True
+                Me.PROizV44.Visible = True
+                ' Me.bRamPlus.Visible = False
+
+            Case 5
+
+                sRAM = sRAM + 1
+                Me.cmbRAM6.Visible = True
+                Me.txtRamSN6.Visible = True
+                Me.txtRamS6.Visible = True
+                Me.PROizV45.Visible = True
+                'Me.bRamPlus.Visible = False
+
+            Case 6
+
+                sRAM = sRAM + 1
+                Me.cmbRAM7.Visible = True
+                Me.txtRamSN7.Visible = True
+                Me.txtRamS7.Visible = True
+                Me.PROizV46.Visible = True
+                'Me.bRamPlus.Visible = False
+
+            Case 7
+
+                sRAM = sRAM + 1
+                Me.cmbRAM8.Visible = True
+                Me.txtRamSN8.Visible = True
+                Me.txtRamS8.Visible = True
+                Me.PROizV47.Visible = True
+                'Me.bRamPlus.Visible = False
+
+
             Case Else
 
-                sRAM = sRAM
+                sRAM = sRAM - 1
+                GoTo A
+
         End Select
 
     End Sub
@@ -6191,7 +6274,43 @@ err_:
                 Me.txtHDDo4.Visible = True
                 Me.txtHDDsN4.Visible = True
                 Me.PROizV13.Visible = True
+                'Me.bHddPlus.Visible = False
+
+            Case 4
+
+                sHDD = sHDD + 1
+                Me.cmbHDD5.Visible = True
+                Me.txtHDDo5.Visible = True
+                Me.txtHDDsN5.Visible = True
+                Me.PROizV48.Visible = True
+                ' Me.bHddPlus.Visible = False
+
+            Case 5
+
+                sHDD = sHDD + 1
+                Me.cmbHDD6.Visible = True
+                Me.txtHDDo6.Visible = True
+                Me.txtHDDsN6.Visible = True
+                Me.PROizV49.Visible = True
+                ' Me.bHddPlus.Visible = False
+            Case 6
+
+                sHDD = sHDD + 1
+                Me.cmbHDD7.Visible = True
+                Me.txtHDDo7.Visible = True
+                Me.txtHDDsN7.Visible = True
+                Me.PROizV50.Visible = True
+                ' Me.bHddPlus.Visible = False
+
+            Case 7
+
+                sHDD = sHDD + 1
+                Me.cmbHDD8.Visible = True
+                Me.txtHDDo8.Visible = True
+                Me.txtHDDsN8.Visible = True
+                Me.PROizV51.Visible = True
                 Me.bHddPlus.Visible = False
+
             Case Else
 
                 sHDD = sHDD
@@ -6776,6 +6895,10 @@ err_:
         Exit Sub
 Err_:
         MsgBox("no reply", MsgBoxStyle.Exclamation, ProGramName)
+
+    End Sub
+
+    Private Sub ToolStrip10_ItemClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.ToolStripItemClickedEventArgs) Handles ToolStrip10.ItemClicked
 
     End Sub
 

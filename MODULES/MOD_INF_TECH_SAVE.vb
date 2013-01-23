@@ -620,6 +620,31 @@ sAR:
             .Fields("RAM_SN_4").Value = frmComputers.txtRamSN4.Text
             .Fields("RAM_PROIZV_4").Value = frmComputers.PROizV9.Text
 
+            '##########################################################
+            .Fields("RAM_5").Value = frmComputers.cmbRAM5.Text
+            .Fields("RAM_speed_5").Value = frmComputers.txtRamS5.Text
+            .Fields("RAM_SN_5").Value = frmComputers.txtRamSN5.Text
+            .Fields("RAM_PROIZV_5").Value = frmComputers.PROizV44.Text
+
+            .Fields("RAM_6").Value = frmComputers.cmbRAM6.Text
+            .Fields("RAM_speed_6").Value = frmComputers.txtRamS6.Text
+            .Fields("RAM_SN_6").Value = frmComputers.txtRamSN6.Text
+            .Fields("RAM_PROIZV_6").Value = frmComputers.PROizV45.Text
+
+            .Fields("RAM_7").Value = frmComputers.cmbRAM7.Text
+            .Fields("RAM_speed_7").Value = frmComputers.txtRamS7.Text
+            .Fields("RAM_SN_7").Value = frmComputers.txtRamSN7.Text
+            .Fields("RAM_PROIZV_7").Value = frmComputers.PROizV46.Text
+
+            .Fields("RAM_8").Value = frmComputers.cmbRAM8.Text
+            .Fields("RAM_speed_8").Value = frmComputers.txtRamS8.Text
+            .Fields("RAM_SN_8").Value = frmComputers.txtRamSN8.Text
+            .Fields("RAM_PROIZV_8").Value = frmComputers.PROizV47.Text
+
+            '##########################################################
+
+
+
             .Fields("HDD_Name_1").Value = frmComputers.cmbHDD1.Text
             .Fields("HDD_OB_1").Value = frmComputers.txtHDDo1.Text
             .Fields("HDD_SN_1").Value = frmComputers.txtHDDsN1.Text
@@ -639,6 +664,29 @@ sAR:
             .Fields("HDD_OB_4").Value = frmComputers.txtHDDo4.Text
             .Fields("HDD_SN_4").Value = frmComputers.txtHDDsN4.Text
             .Fields("HDD_PROIZV_4").Value = frmComputers.PROizV13.Text
+
+            '##########################################################
+            .Fields("HDD_Name_5").Value = frmComputers.cmbHDD5.Text
+            .Fields("HDD_OB_5").Value = frmComputers.txtHDDo5.Text
+            .Fields("HDD_SN_5").Value = frmComputers.txtHDDsN5.Text
+            .Fields("HDD_PROIZV_5").Value = frmComputers.PROizV48.Text
+
+            .Fields("HDD_Name_6").Value = frmComputers.cmbHDD6.Text
+            .Fields("HDD_OB_6").Value = frmComputers.txtHDDo6.Text
+            .Fields("HDD_SN_6").Value = frmComputers.txtHDDsN6.Text
+            .Fields("HDD_PROIZV_6").Value = frmComputers.PROizV49.Text
+
+            .Fields("HDD_Name_7").Value = frmComputers.cmbHDD7.Text
+            .Fields("HDD_OB_7").Value = frmComputers.txtHDDo7.Text
+            .Fields("HDD_SN_7").Value = frmComputers.txtHDDsN7.Text
+            .Fields("HDD_PROIZV_7").Value = frmComputers.PROizV50.Text
+
+            .Fields("HDD_Name_8").Value = frmComputers.cmbHDD8.Text
+            .Fields("HDD_OB_8").Value = frmComputers.txtHDDo8.Text
+            .Fields("HDD_SN_8").Value = frmComputers.txtHDDsN8.Text
+            .Fields("HDD_PROIZV_8").Value = frmComputers.PROizV51.Text
+
+            '##########################################################
 
             .Fields("SVGA_NAME").Value = frmComputers.cmbSVGA1.Text
             .Fields("SVGA_OB_RAM").Value = frmComputers.txtSVGAr1.Text
