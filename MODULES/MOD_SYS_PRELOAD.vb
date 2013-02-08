@@ -56,6 +56,9 @@ Module MOD_SYS_PRELOAD
     Public uCASHE As String
     Public sLANGPATH As String
     Public sICONS As String
+    Public sRelogin As Boolean = False
+    Public sTechINF As String
+
 
     Public Sub Tree_Icons_Feel(ByVal ills As ImageList, ByVal sFRM As String, ByVal sPATH As String)
 
@@ -307,8 +310,7 @@ Module MOD_SYS_PRELOAD
 
         sICONS = objIniFile.GetString("General", "ICONs", "24*24")
 
-
-
+        sTechINF = objIniFile.GetString("General", "TechINF", "AIDA64(Everest)")
 
         FontI = objIniFile.GetString("General", "chkFonts", "0")
 

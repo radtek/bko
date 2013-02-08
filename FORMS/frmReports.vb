@@ -203,31 +203,32 @@ Public Class frmReports
         poPs = langIni.GetString("frmReports", "MSG1", "Все")
 
 
-
+        'SELECT Remont.Id, Remont.Date, Remont.Id_Comp, Remont.Remont, Remont.Uroven, Remont.Master, Remont.NomerRemKomp, Remont.Comp_Name, Remont.Mesto_Compa, Remont.vip, Remont.UserName, Remont.istochnik, Remont.phone, Remont.srok, Remont.name_of_remont, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE master='" & CmbRemont.Text & "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt;
 
         If CmbRemont.Text <> poPs And chkFltr.Checked = False And chkUroven.Checked = False And ChckVip.Checked = False Then
-            sSQL = "SELECT * FROM Remont WHERE master='" & CmbRemont.Text & "' ORDER BY date DESC, id DESC, zakryt"
+            ' sSQL = "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE master='" & CmbRemont.Text & "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
+            sSQL = "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE master='" & CmbRemont.Text & "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
             rs = New ADODB.Recordset
             rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
             GoTo ADR
         End If
 
         If CmbRemont.Text <> poPs And chkFltr.Checked = False And chkUroven.Checked = True And ChckVip.Checked = False Then
-            sSQL = "SELECT * FROM Remont WHERE master='" & CmbRemont.Text & "' AND uroven='" & cmbUr.Text & "' ORDER BY date DESC, id DESC, zakryt"
+            sSQL = "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE master='" & CmbRemont.Text & "' AND uroven='" & cmbUr.Text & "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
             rs = New ADODB.Recordset
             rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
             GoTo ADR
         End If
 
         If CmbRemont.Text <> poPs And chkFltr.Checked = False And chkUroven.Checked = True And ChckVip.Checked = True Then
-            sSQL = "SELECT * FROM Remont WHERE master='" & CmbRemont.Text & "' AND uroven='" & cmbUr.Text & "' AND vip='" & cmbVip.Text & "' ORDER BY date DESC, id DESC, zakryt"
+            sSQL = "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE master='" & CmbRemont.Text & "' AND uroven='" & cmbUr.Text & "' AND vip='" & cmbVip.Text & "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
             rs = New ADODB.Recordset
             rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
             GoTo ADR
         End If
 
         If CmbRemont.Text <> poPs And chkFltr.Checked = False And ChckVip.Checked = True And chkUroven.Checked = False Then
-            sSQL = "SELECT * FROM Remont WHERE master='" & CmbRemont.Text & "' AND vip='" & cmbVip.Text & "' ORDER BY date DESC, id DESC, zakryt"
+            sSQL = "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE master='" & CmbRemont.Text & "' AND vip='" & cmbVip.Text & "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
             rs = New ADODB.Recordset
             rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
             GoTo ADR
@@ -235,28 +236,28 @@ Public Class frmReports
 
         '#########
         If CmbRemont.Text = poPs And chkFltr.Checked = False And chkUroven.Checked = False And ChckVip.Checked = False Then
-            sSQL = "SELECT * FROM Remont ORDER BY date DESC, id DESC, zakryt"
+            sSQL = "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
             rs = New ADODB.Recordset
             rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
             GoTo ADR
         End If
 
         If CmbRemont.Text = poPs And chkFltr.Checked = False And chkUroven.Checked = True And ChckVip.Checked = False Then
-            sSQL = "SELECT * FROM Remont WHERE uroven='" & cmbUr.Text & "' ORDER BY date DESC, id DESC, zakryt"
+            sSQL = "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE uroven='" & cmbUr.Text & "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
             rs = New ADODB.Recordset
             rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
             GoTo ADR
         End If
 
         If CmbRemont.Text = poPs And chkFltr.Checked = False And chkUroven.Checked = True And ChckVip.Checked = True Then
-            sSQL = "SELECT * FROM Remont WHERE uroven='" & cmbUr.Text & "' AND vip='" & cmbVip.Text & "' ORDER BY date DESC, id DESC, zakryt"
+            sSQL = "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE uroven='" & cmbUr.Text & "' AND vip='" & cmbVip.Text & "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
             rs = New ADODB.Recordset
             rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
             GoTo ADR
         End If
 
         If CmbRemont.Text = poPs And chkFltr.Checked = False And ChckVip.Checked = True And chkUroven.Checked = False Then
-            sSQL = "SELECT * FROM Remont WHERE vip='" & cmbVip.Text & "' ORDER BY date DESC, id DESC, zakryt"
+            sSQL = "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE vip='" & cmbVip.Text & "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
             rs = New ADODB.Recordset
             rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
             GoTo ADR
@@ -264,56 +265,56 @@ Public Class frmReports
         '#########
 
         If CmbRemont.Text <> poPs And chkFltr.Checked = True And chkUroven.Checked = False And ChckVip.Checked = False Then
-            sSQL = "SELECT * FROM Remont WHERE master='" & CmbRemont.Text & "' ORDER BY date DESC, id DESC, zakryt"
+            sSQL = "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE master='" & CmbRemont.Text & "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
             rs = New ADODB.Recordset
             rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
             GoTo ADR2
         End If
 
         If CmbRemont.Text <> poPs And chkFltr.Checked = True And chkUroven.Checked = True And ChckVip.Checked = False Then
-            sSQL = "SELECT * FROM Remont WHERE master='" & CmbRemont.Text & "' AND uroven='" & cmbUr.Text & "' ORDER BY date DESC, id DESC, zakryt"
+            sSQL = "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE master='" & CmbRemont.Text & "' AND uroven='" & cmbUr.Text & "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
             rs = New ADODB.Recordset
             rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
             GoTo ADR2
         End If
 
         If CmbRemont.Text <> poPs And chkFltr.Checked = True And chkUroven.Checked = True And ChckVip.Checked = True Then
-            sSQL = "SELECT * FROM Remont WHERE master='" & CmbRemont.Text & "' AND uroven='" & cmbUr.Text & "' AND vip='" & cmbVip.Text & "' ORDER BY date DESC, id DESC, zakryt"
+            sSQL = "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE master='" & CmbRemont.Text & "' AND uroven='" & cmbUr.Text & "' AND vip='" & cmbVip.Text & "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
             rs = New ADODB.Recordset
             rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
             GoTo ADR2
         End If
 
         If CmbRemont.Text <> poPs And chkFltr.Checked = True And ChckVip.Checked = True And chkUroven.Checked = False Then
-            sSQL = "SELECT * FROM Remont WHERE master='" & CmbRemont.Text & "' AND vip='" & cmbVip.Text & "' ORDER BY date DESC, id DESC, zakryt"
+            sSQL = "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE master='" & CmbRemont.Text & "' AND vip='" & cmbVip.Text & "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
             rs = New ADODB.Recordset
             rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
             GoTo ADR2
         End If
 
         If CmbRemont.Text = poPs And chkFltr.Checked = True And chkUroven.Checked = False And ChckVip.Checked = False Then
-            sSQL = "SELECT * FROM Remont ORDER BY date DESC, id DESC, zakryt"
+            sSQL = "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
             rs = New ADODB.Recordset
             rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
             GoTo ADR2
         End If
 
         If CmbRemont.Text = poPs And chkFltr.Checked = True And chkUroven.Checked = True And ChckVip.Checked = False Then
-            sSQL = "SELECT * FROM Remont WHERE uroven='" & cmbUr.Text & "' ORDER BY date DESC, id DESC, zakryt"
+            sSQL = "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE uroven='" & cmbUr.Text & "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
             rs = New ADODB.Recordset
             rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
             GoTo ADR2
         End If
 
         If CmbRemont.Text = poPs And chkFltr.Checked = True And chkUroven.Checked = True And ChckVip.Checked = True Then
-            sSQL = "SELECT * FROM Remont WHERE uroven='" & cmbUr.Text & "' AND vip='" & cmbVip.Text & "' ORDER BY date DESC, id DESC, zakryt"
+            sSQL = "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE uroven='" & cmbUr.Text & "' AND vip='" & cmbVip.Text & "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
             rs = New ADODB.Recordset
             rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
             GoTo ADR2
         End If
 
         If CmbRemont.Text = poPs And chkFltr.Checked = True And ChckVip.Checked = True And chkUroven.Checked = False Then
-            sSQL = "SELECT * FROM Remont WHERE vip='" & cmbVip.Text & "' ORDER BY date DESC, id DESC, zakryt"
+            sSQL = "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE vip='" & cmbVip.Text & "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
             rs = New ADODB.Recordset
             rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
             GoTo ADR2
@@ -396,8 +397,6 @@ ADR:
                         End If
 
 
-
-
                         If Not IsDBNull(.Fields("stoptime").Value) Then
                             Dim A1 As Integer
                             Dim A3, A2 As String
@@ -418,6 +417,12 @@ ADR:
 
                         End If
 
+                        If Not IsDBNull(.Fields("Ser_N_SIS").Value) Then
+                            lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("Ser_N_SIS").Value)
+                        Else
+                            lvRemont.Items(CInt(intCount)).SubItems.Add("")
+
+                        End If
 
 
                         intCount = intCount + 1
@@ -501,6 +506,13 @@ ADR:
 
                             End If
 
+
+                            If Not IsDBNull(.Fields("Ser_N_SIS").Value) Then
+                                lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("Ser_N_SIS").Value)
+                            Else
+                                lvRemont.Items(CInt(intCount)).SubItems.Add("")
+
+                            End If
 
 
                             intCount = intCount + 1
@@ -614,7 +626,12 @@ ADR2:
 
                                 End If
 
+                                If Not IsDBNull(.Fields("Ser_N_SIS").Value) Then
+                                    lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("Ser_N_SIS").Value)
+                                Else
+                                    lvRemont.Items(CInt(intCount)).SubItems.Add("")
 
+                                End If
 
                                 intCount = intCount + 1
 
@@ -711,6 +728,12 @@ ADR2:
 
                                         End If
 
+                                        If Not IsDBNull(.Fields("Ser_N_SIS").Value) Then
+                                            lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("Ser_N_SIS").Value)
+                                        Else
+                                            lvRemont.Items(CInt(intCount)).SubItems.Add("")
+
+                                        End If
 
                                         intCount = intCount + 1
                                     End If
@@ -1196,7 +1219,7 @@ err:
                 End If
 
 
-            Case langIni.GetString("frmReports", "MSG9", "Монитор")
+            Case langIni.GetString("frmReports", "MSG6", "Звуковая карта")
 
                 If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 

@@ -466,6 +466,11 @@ Public Class frmSetup
         txtEverestDir.Text = objIniFile.GetString("General", "aida", PrPath)
 
 
+        ComboBox2.Text = objIniFile.GetString("General", "TechINF", "AIDA64(Everest)")
+        sTechINF = ComboBox2.Text
+
+
+
         'If DB_N <> "MS Access" Then
 
         '    lvFindDB.Items.Add(1) 'col no. 1
@@ -1471,5 +1476,17 @@ err_:
                 Button2.Visible = True
                 Button3.Visible = True
         End Select
+    End Sub
+
+    Private Sub ComboBox2_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles ComboBox2.SelectedIndexChanged
+
+        Dim objIniFile As New IniFile(PrPath & "base.ini")
+        objIniFile.WriteString("General", "TechINF", ComboBox2.Text)
+
+        sTechINF = ComboBox2.Text
+    End Sub
+
+    Private Sub chkUpdate_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles chkUpdate.CheckedChanged
+
     End Sub
 End Class

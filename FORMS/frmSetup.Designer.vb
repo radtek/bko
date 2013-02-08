@@ -118,6 +118,8 @@ Partial Class frmSetup
         Me.chkREMONT = New System.Windows.Forms.CheckBox()
         Me.chkFullScreen = New System.Windows.Forms.CheckBox()
         Me.Button4 = New System.Windows.Forms.Button()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
         Me.SStab1 = New System.Windows.Forms.TabControl()
         Me.TabPage5.SuspendLayout()
         Me.TableLayoutPanel3.SuspendLayout()
@@ -714,6 +716,8 @@ Partial Class frmSetup
         Me.TableLayoutPanel1.Controls.Add(Me.gbMyBlank, 2, 8)
         Me.TableLayoutPanel1.Controls.Add(Me.chkFullScreen, 0, 7)
         Me.TableLayoutPanel1.Controls.Add(Me.Button4, 0, 12)
+        Me.TableLayoutPanel1.Controls.Add(Me.Label12, 1, 6)
+        Me.TableLayoutPanel1.Controls.Add(Me.ComboBox2, 2, 6)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(3, 16)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
@@ -925,7 +929,7 @@ Partial Class frmSetup
         '
         Me.GroupBox2.Controls.Add(Me.TableLayoutPanel7)
         Me.GroupBox2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GroupBox2.Location = New System.Drawing.Point(3, 409)
+        Me.GroupBox2.Location = New System.Drawing.Point(3, 413)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(370, 90)
         Me.GroupBox2.TabIndex = 19
@@ -1023,7 +1027,7 @@ Partial Class frmSetup
         '
         Me.gbTree_o.Controls.Add(Me.TableLayoutPanel6)
         Me.gbTree_o.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.gbTree_o.Location = New System.Drawing.Point(3, 303)
+        Me.gbTree_o.Location = New System.Drawing.Point(3, 307)
         Me.gbTree_o.Name = "gbTree_o"
         Me.gbTree_o.Size = New System.Drawing.Size(370, 100)
         Me.gbTree_o.TabIndex = 17
@@ -1085,7 +1089,7 @@ Partial Class frmSetup
         Me.GroupBox1.Controls.Add(Me.TableLayoutPanel4)
         Me.GroupBox1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupBox1.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.GroupBox1.Location = New System.Drawing.Point(3, 188)
+        Me.GroupBox1.Location = New System.Drawing.Point(3, 192)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(370, 109)
         Me.GroupBox1.TabIndex = 18
@@ -1155,7 +1159,7 @@ Partial Class frmSetup
         Me.TableLayoutPanel1.SetColumnSpan(Me.GroupBox3, 2)
         Me.GroupBox3.Controls.Add(Me.ComboBox1)
         Me.GroupBox3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GroupBox3.Location = New System.Drawing.Point(562, 303)
+        Me.GroupBox3.Location = New System.Drawing.Point(562, 307)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(399, 100)
         Me.GroupBox3.TabIndex = 23
@@ -1177,7 +1181,7 @@ Partial Class frmSetup
         Me.TableLayoutPanel1.SetColumnSpan(Me.gbMyBlank, 2)
         Me.gbMyBlank.Controls.Add(Me.TableLayoutPanel5)
         Me.gbMyBlank.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.gbMyBlank.Location = New System.Drawing.Point(562, 188)
+        Me.gbMyBlank.Location = New System.Drawing.Point(562, 192)
         Me.gbMyBlank.Name = "gbMyBlank"
         Me.gbMyBlank.Size = New System.Drawing.Size(399, 109)
         Me.gbMyBlank.TabIndex = 21
@@ -1246,7 +1250,7 @@ Partial Class frmSetup
         'chkFullScreen
         '
         Me.chkFullScreen.AutoSize = True
-        Me.chkFullScreen.Location = New System.Drawing.Point(3, 165)
+        Me.chkFullScreen.Location = New System.Drawing.Point(3, 169)
         Me.chkFullScreen.Name = "chkFullScreen"
         Me.chkFullScreen.Size = New System.Drawing.Size(100, 17)
         Me.chkFullScreen.TabIndex = 24
@@ -1262,6 +1266,29 @@ Partial Class frmSetup
         Me.Button4.Text = "+"
         Me.Button4.UseVisualStyleBackColor = True
         Me.Button4.Visible = False
+        '
+        'Label12
+        '
+        Me.Label12.Anchor = System.Windows.Forms.AnchorStyles.Right
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(409, 146)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(147, 13)
+        Me.Label12.TabIndex = 26
+        Me.Label12.Text = "Информация по умолчанию"
+        '
+        'ComboBox2
+        '
+        Me.ComboBox2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
+        Me.ComboBox2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.ComboBox2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ComboBox2.FormattingEnabled = True
+        Me.ComboBox2.Items.AddRange(New Object() {"ASTRA32", "AIDA64 (Everest)"})
+        Me.ComboBox2.Location = New System.Drawing.Point(562, 142)
+        Me.ComboBox2.Name = "ComboBox2"
+        Me.ComboBox2.Size = New System.Drawing.Size(366, 21)
+        Me.ComboBox2.TabIndex = 27
+        Me.ComboBox2.Text = "AIDA64 (Everest)"
         '
         'SStab1
         '
@@ -1416,4 +1443,6 @@ Partial Class frmSetup
     Friend WithEvents chkFullScreen As System.Windows.Forms.CheckBox
     Friend WithEvents Button4 As System.Windows.Forms.Button
     Friend WithEvents chkFonts As System.Windows.Forms.CheckBox
+    Friend WithEvents Label12 As System.Windows.Forms.Label
+    Friend WithEvents ComboBox2 As System.Windows.Forms.ComboBox
 End Class

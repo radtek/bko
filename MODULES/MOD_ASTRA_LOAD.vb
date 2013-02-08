@@ -30,26 +30,51 @@
         '################
         'Память
 
-        frmComputers.cmbRAM1.Text = everIniFile.GetString("SPD", "1stModuleSize", "")
-        frmComputers.PROizV6.Text = everIniFile.GetString("SPD", "1stModuleManufacturer", "")
-        frmComputers.txtRamSN1.Text = everIniFile.GetString("SPD", "1stSerialNumber", "")
-        frmComputers.txtRamS1.Text = everIniFile.GetString("SPD", "1stMemoryType", "")
+        Dim uname As String
 
-        frmComputers.cmbRAM2.Text = everIniFile.GetString("SPD", "2ndModuleSize", "")
-        frmComputers.PROizV7.Text = everIniFile.GetString("SPD", "2ndModuleManufacturer", "")
-        frmComputers.txtRamSN2.Text = everIniFile.GetString("SPD", "2ndSerialNumber", "")
-        frmComputers.txtRamS2.Text = everIniFile.GetString("SPD", "2ndMemoryType", "")
+        uname = everIniFile.GetString("SPD", "1stModuleSize", "")
 
-        frmComputers.cmbRAM3.Text = everIniFile.GetString("SPD", "3rdModuleSize", "")
-        frmComputers.PROizV8.Text = everIniFile.GetString("SPD", "3rdModuleManufacturer", "")
-        frmComputers.txtRamSN3.Text = everIniFile.GetString("SPD", "3rdSerialNumber", "")
-        frmComputers.txtRamS3.Text = everIniFile.GetString("SPD", "3rdMemoryType", "")
+        If uname <> 0 Then
 
-        frmComputers.cmbRAM4.Text = everIniFile.GetString("SPD", "4thModuleSize", "")
-        frmComputers.PROizV9.Text = everIniFile.GetString("SPD", "4thModuleManufacturer", "")
-        frmComputers.txtRamSN4.Text = everIniFile.GetString("SPD", "4thSerialNumber", "")
-        frmComputers.txtRamS4.Text = everIniFile.GetString("SPD", "4thMemoryType", "")
-        
+            frmComputers.cmbRAM1.Text = everIniFile.GetString("SPD", "1stModuleSize", "")
+            frmComputers.PROizV6.Text = everIniFile.GetString("SPD", "1stModuleManufacturer", "")
+            frmComputers.txtRamSN1.Text = everIniFile.GetString("SPD", "1stSerialNumber", "")
+            frmComputers.txtRamS1.Text = everIniFile.GetString("SPD", "1stMemoryType", "")
+
+        End If
+
+        uname = everIniFile.GetString("SPD", "2ndModuleSize", "")
+
+        If uname <> 0 Then
+
+            frmComputers.cmbRAM2.Text = everIniFile.GetString("SPD", "2ndModuleSize", "")
+            frmComputers.PROizV7.Text = everIniFile.GetString("SPD", "2ndModuleManufacturer", "")
+            frmComputers.txtRamSN2.Text = everIniFile.GetString("SPD", "2ndSerialNumber", "")
+            frmComputers.txtRamS2.Text = everIniFile.GetString("SPD", "2ndMemoryType", "")
+
+        End If
+
+        uname = everIniFile.GetString("SPD", "3rdModuleSize", "")
+
+        If uname <> 0 Then
+
+            frmComputers.cmbRAM3.Text = everIniFile.GetString("SPD", "3rdModuleSize", "")
+            frmComputers.PROizV8.Text = everIniFile.GetString("SPD", "3rdModuleManufacturer", "")
+            frmComputers.txtRamSN3.Text = everIniFile.GetString("SPD", "3rdSerialNumber", "")
+            frmComputers.txtRamS3.Text = everIniFile.GetString("SPD", "3rdMemoryType", "")
+
+        End If
+
+        uname = everIniFile.GetString("SPD", "4thModuleSize", "")
+
+        If uname <> 0 Then
+
+
+            frmComputers.cmbRAM4.Text = everIniFile.GetString("SPD", "4thModuleSize", "")
+            frmComputers.PROizV9.Text = everIniFile.GetString("SPD", "4thModuleManufacturer", "")
+            frmComputers.txtRamSN4.Text = everIniFile.GetString("SPD", "4thSerialNumber", "")
+            frmComputers.txtRamS4.Text = everIniFile.GetString("SPD", "4thMemoryType", "")
+        End If
 
         '################
         'Жесткий диск
@@ -76,7 +101,7 @@
         frmComputers.txtHDDsN4.Text = everIniFile.GetString("HDD", "4thSerialNumber", "")
         'frmComputers.PROizV10.Text = everIniFile.GetString("HDD", "ATA1|Производитель ATA-устройства|Фирма", "")
 
-       
+
 
 
         '################
@@ -87,7 +112,7 @@
         'frmComputers.txtSVGAs1.Text = everIniFile.GetString("Видео Windows", "Номер видео карты", "")
         frmComputers.PROizV14.Text = everIniFile.GetString("Video", "VideoChipVendor", "")
 
-        
+
 
         '################
         'Звуковая карта
@@ -127,7 +152,7 @@
         frmComputers.txtNETmac2.Text = everIniFile.GetString("Network", "2ndMACAddress", "")
         frmComputers.PROizV21.Text = everIniFile.GetString("Network", "2ndPCINetworkVendor", "")
 
-        
+
 
         '################
         'Монитор
@@ -149,17 +174,17 @@
         frmComputers.cmbModem.Text = everIniFile.GetString("Other", "1ModemModel", "")
         frmComputers.PROizV24.Text = everIniFile.GetString("Other", "1ModemVendor", "")
 
-        
+
 
         '################
         'Клавиатура
         'frmComputers.cmbKeyb.Text = everIniFile.GetString("Суммарная информация", "Ввод|Клавиатура", "")
-        
+
 
         '################
         'Мышь
         'frmComputers.cmbMouse.Text = everIniFile.GetString("Суммарная информация", "Ввод|Мышь", "")
-        
+
 
         '################
         'Имя компа

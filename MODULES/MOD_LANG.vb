@@ -1047,6 +1047,7 @@ err_:
         frmReports.lvRemont.Columns.Add(langIni.GetString("frmReports", "lvRemont8", "Выполнение"), 70, HorizontalAlignment.Left)
         frmReports.lvRemont.Columns.Add(langIni.GetString("frmReports", "lvRemont9", "Пользователь"), 30, HorizontalAlignment.Left)
         frmReports.lvRemont.Columns.Add(langIni.GetString("frmReports", "lvRemont10", "Затраченное время"), 30, HorizontalAlignment.Left)
+        frmReports.lvRemont.Columns.Add(langIni.GetString("frmReports", "lvRemont11", "SN"), 30, HorizontalAlignment.Left)
         'ResList(frmReports.lvRemont)
 
         frmReports.lvGar.Columns.Add(langIni.GetString("frmReports", "lvGar1", "Наименование"), 100, HorizontalAlignment.Left)

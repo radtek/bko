@@ -25,6 +25,10 @@
         Dim TEH16 As String
         Dim TEH17 As String
         Dim TEH18 As String
+        Dim TEH19 As String
+        Dim TEH20 As String
+        Dim TEH21 As String
+
 
         Dim rs As ADODB.Recordset
         rs = New ADODB.Recordset
@@ -190,6 +194,32 @@
         rs.Close()
         rs = Nothing
 
+        rs = New ADODB.Recordset
+        rs.Open("SELECT count(*) as t_n FROM kompy where Balans=true", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+        With rs
+            TEH19 = .Fields("t_n").Value
+        End With
+        rs.Close()
+        rs = Nothing
+
+        rs = New ADODB.Recordset
+        rs.Open("SELECT count(*) as t_n FROM kompy where Spisan=true", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+        With rs
+            TEH20 = .Fields("t_n").Value
+        End With
+        rs.Close()
+        rs = Nothing
+
+        rs = New ADODB.Recordset
+        rs.Open("SELECT count(*) as t_n FROM kompy", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+        With rs
+            TEH21 = .Fields("t_n").Value
+        End With
+        rs.Close()
+        rs = Nothing
 
         'Dim rs As ADODB.Recordset
         rs = New ADODB.Recordset
@@ -252,7 +282,7 @@
                 'objText.insertString objCursor, " " & vbLf, False
 
                 objTable = oDoc.createInstance("com.sun.star.text.TextTable")
-                objTable.Initialize(19, 2)
+                objTable.Initialize(23, 2)
 
                 'Insert the table
                 objText.insertTextContent(objCursor, objTable, False)
@@ -325,6 +355,17 @@
 
                 insertIntoCell("A19", LNGIniFile.GetString("MOD_INVENT", "MSG22", "Мышей"), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                 insertIntoCell("B19", TEH18, objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
+
+
+                insertIntoCell("A20", "Всего", objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                insertIntoCell("B20", TEH21, objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
+
+                insertIntoCell("A21", "Не на балансе", objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                insertIntoCell("B21", TEH19, objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
+
+                insertIntoCell("A22", "Списано", objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                insertIntoCell("B22", TEH20, objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
+
 
 
                 'objText.insertString objCursor, " " & vbLf, False
@@ -756,7 +797,7 @@
                 oPara1.Format.SpaceAfter = 24    '24 pt spacing after paragraph.
                 oPara1.Range.InsertParagraphAfter()
 
-                oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 19, 2)
+                oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 23, 2)
                 oTable.Range.ParagraphFormat.SpaceAfter = 6
 
                 oTable.Cell(1, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG3", "Тип техники")
@@ -813,6 +854,17 @@
 
                 oTable.Cell(19, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG22", "Мышей")
                 oTable.Cell(19, 2).Range.Text = TEH18
+
+
+                oTable.Cell(20, 1).Range.Text = "Всего"
+                oTable.Cell(20, 2).Range.Text = TEH21
+
+                oTable.Cell(21, 1).Range.Text = "Не на балансе"
+                oTable.Cell(21, 2).Range.Text = TEH19
+
+                oTable.Cell(22, 1).Range.Text = "Списано"
+                oTable.Cell(22, 2).Range.Text = TEH20
+
 
                 oTable.Rows.Item(1).Range.Font.Bold = True
                 oTable.Rows.Item(1).Range.Font.Italic = False

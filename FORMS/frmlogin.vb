@@ -385,7 +385,54 @@ err_:
 
                         Call ALTER_DB()
                         Me.Hide()
-                        frmMain.Show()
+
+                        If sRelogin = True Then
+                            sRelogin = False
+                            'Какой модуль запускать
+                            Dim sText As String
+                            sText = objIniFile.GetString("general", "MOD", 0)
+
+                            If Len(sText) > 2 Then sText = 0
+
+                            Select Case sText
+
+                                Case 0
+
+                                    'frmComputers.Visible = False
+                                    frmComputers.MdiParent = frmMain
+                                    ' My.Application.DoEvents()
+                                    frmComputers.Show()
+                                    ' My.Application.DoEvents()
+
+                                Case 1
+                                    frmserviceDesc.MdiParent = frmMain
+                                    ' My.Application.DoEvents()
+                                    frmserviceDesc.Show()
+                                    ' My.Application.DoEvents()
+                                Case 2
+
+                                    frmSoftware.MdiParent = frmMain
+                                    '  My.Application.DoEvents()
+                                    frmSoftware.Show()
+                                    '  My.Application.DoEvents()
+                                Case 3
+
+                                    frmCRT3.MdiParent = frmMain
+                                    '  My.Application.DoEvents()
+                                    frmCRT3.Show()
+                                    '   My.Application.DoEvents()
+                            End Select
+
+                            'frmComputers.MdiParent = frmMain
+                            'frmComputers.Show()
+                            'frmComputers.Focus()
+                        Else
+
+                            frmMain.Show()
+
+                        End If
+
+
 
                         Me.Close()
 
@@ -533,6 +580,26 @@ err_:
                 Call Find_DB()
 
 
+            Case "MS SQL 2008-file"
+
+                gbsql.Visible = False
+
+
+                Me.Height = Me.Height - gbsql.Height
+
+                'Me.Height = 245
+                'gbData.Top = 53
+                cmbBD.Enabled = True
+                btnDBDir.Enabled = True
+                'btnLogin.Top = 194
+                'btnCancel.Top = btnLogin.Top
+                'gbsql.Top = 225
+
+                unamDB = cmbSUBD.Text
+
+                cmbBD.Text = langIni.GetString("general", "file", "")
+
+                langIni.WriteString("DB", "DB", cmbSUBD.Text)
 
 
             Case Else

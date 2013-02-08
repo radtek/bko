@@ -145,6 +145,7 @@ Partial Class frmMain
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.ArhToolZipbutton = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
+        Me.ReloginToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip.SuspendLayout()
         Me.StatusStrip.SuspendLayout()
         Me.ToolStrip.SuspendLayout()
@@ -162,7 +163,7 @@ Partial Class frmMain
         '
         'FileMenu
         '
-        Me.FileMenu.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripMenuItem, Me.ToolStripSeparator5, Me.ПроверитьОбновлениеToolStripMenuItem, Me.MailToAuthors, Me.ФорумToolStripMenuItem, Me.BugTrackerToolStripMenuItem, Me.ToolStripSeparator3, Me.ExitToolStripMenuItem, Me.SaveToolStripMenuItem})
+        Me.FileMenu.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripMenuItem, Me.ReloginToolStripMenuItem, Me.ToolStripSeparator5, Me.ПроверитьОбновлениеToolStripMenuItem, Me.MailToAuthors, Me.ФорумToolStripMenuItem, Me.BugTrackerToolStripMenuItem, Me.ToolStripSeparator3, Me.ExitToolStripMenuItem, Me.SaveToolStripMenuItem})
         Me.FileMenu.ImageTransparentColor = System.Drawing.SystemColors.ActiveBorder
         Me.FileMenu.Name = "FileMenu"
         Me.FileMenu.Size = New System.Drawing.Size(79, 20)
@@ -962,6 +963,12 @@ Partial Class frmMain
         Me.ToolStripButton1.Size = New System.Drawing.Size(52, 22)
         Me.ToolStripButton1.Text = "Отчеты"
         '
+        'ReloginToolStripMenuItem
+        '
+        Me.ReloginToolStripMenuItem.Name = "ReloginToolStripMenuItem"
+        Me.ReloginToolStripMenuItem.Size = New System.Drawing.Size(246, 22)
+        Me.ReloginToolStripMenuItem.Text = "Relogin"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1108,5 +1115,6 @@ Partial Class frmMain
     Friend WithEvents LBL_USER As System.Windows.Forms.ToolStripStatusLabel
     Friend WithEvents ToolStripStatusLabel5 As System.Windows.Forms.ToolStripStatusLabel
     Friend WithEvents DB_USE As System.Windows.Forms.ToolStripDropDownButton
+    Friend WithEvents ReloginToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

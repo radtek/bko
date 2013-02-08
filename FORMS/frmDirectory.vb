@@ -286,6 +286,8 @@ Public Class frmDirectory
     End Sub
 
     Private Sub tvDirectory_AfterSelect(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TreeViewEventArgs) Handles tvDirectory.AfterSelect
+
+        lvDirectory.Sorting = SortOrder.None
         lvDirectory.ListViewItemSorter = Nothing
 
         ' Call LOAD_LIST_SPR()
@@ -1309,7 +1311,7 @@ err_:
     End Sub
 
     Private Sub lvDirectory_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvDirectory.Click
-        Call Load_SPR_TO_EDIT()
+        'Call Load_SPR_TO_EDIT()
     End Sub
 
     Private Sub lvDirectory_ColumnClick(ByVal sender As Object, ByVal e As System.Windows.Forms.ColumnClickEventArgs) Handles lvDirectory.ColumnClick
@@ -2183,7 +2185,7 @@ err_:
     End Sub
 
     Private Sub lvDirectory_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvDirectory.SelectedIndexChanged
-
+        'Call Load_SPR_TO_EDIT()
     End Sub
 
     Private Sub cmbIcon_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbIcon.SelectedIndexChanged
@@ -2243,6 +2245,9 @@ err_:
 
     Private Sub btnDirAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDirAdd.Click
         On Error GoTo Err_
+        lvDirectory.Sorting = SortOrder.None
+        lvDirectory.ListViewItemSorter = Nothing
+
 
         'Тут код редактирования, добавления
         If Len(cmbName.Text) = 0 Then Exit Sub
@@ -3140,6 +3145,15 @@ Err_:
 
         lvDirectory.Select()
 
+        'If CheckBox2.Checked = False Then
+
+        '    Call DELETE_SPR(dSID)
+        '    Call LOAD_LIST_SPR()
+        '    Exit Sub
+
+        'End If
+
+
         For intj = 0 To lvDirectory.Items.Count - 1
 
             lvDirectory.Items(intj).Selected = True
@@ -3152,8 +3166,6 @@ Err_:
             End If
 
         Next
-
-
 
         If intj1 > 0 Then
 

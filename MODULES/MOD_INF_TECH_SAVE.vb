@@ -128,6 +128,7 @@ sAR:
             .Fields("MONITOR_NAME").Value = frmComputers.cmbOTH.Text
             .Fields("MONITOR_DUM").Value = frmComputers.txtMonDum.Text
             .Fields("MONITOR_SN").Value = frmComputers.txtOTHSN.Text
+            .Fields("Ser_N_SIS").Value = frmComputers.txtOTHSN.Text
             .Fields("MONITOR_PROIZV").Value = frmComputers.PROiZV39.Text
 
             .Fields("port_1").Value = frmComputers.txtOTHmemo.Text
@@ -379,6 +380,7 @@ sAR:
             .Fields("PRINTER_NAME_1").Value = frmComputers.cmbOTH.Text
             'sName = .Fields("PRINTER_NAME_1").Value
             .Fields("PRINTER_SN_1").Value = frmComputers.txtOTHSN.Text
+            .Fields("Ser_N_SIS").Value = frmComputers.txtOTHSN.Text
             .Fields("PRINTER_PROIZV_1").Value = frmComputers.PROiZV39.Text
             .Fields("port_1").Value = frmComputers.txtOTHmemo.Text
             .Fields("OTvetstvennyj").Value = frmComputers.cmbOTHotv.Text
@@ -1226,6 +1228,7 @@ sAR:
 
             .Fields("PRINTER_NAME_1").Value = frmComputers.cmbPRN.Text
             .Fields("PRINTER_SN_1").Value = frmComputers.txtPRNSN.Text
+            .Fields("Ser_N_SIS").Value = frmComputers.txtPRNSN.Text
             .Fields("PRINTER_PROIZV_1").Value = frmComputers.PROiZV38.Text
             .Fields("INV_NO_PRINTER").Value = frmComputers.txtPRNinnumber.Text
             .Fields("port_1").Value = frmComputers.cmbFormat.Text
@@ -1427,6 +1430,7 @@ sAR:
             'sDepartment = .Fields("MESTO").Value
             'sOffice = .Fields("kabn").Value
             .Fields("port_1").Value = frmComputers.txtNetSN.Text
+            .Fields("Ser_N_SIS").Value = frmComputers.txtNetSN.Text
             .Fields("TIPtehn").Value = TipTehn
 
             .Fields("PSEVDONIM").Value = frmComputers.cmbNetDev.Text

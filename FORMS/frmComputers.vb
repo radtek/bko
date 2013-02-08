@@ -491,19 +491,34 @@ Public Class frmComputers
 
         On Error GoTo err_
 
-        Dim BASECOMP As ADODB.Recordset
-        BASECOMP = New ADODB.Recordset
-        BASECOMP.Open("UPDATE kompy SET NET_IP_1=PRINTER_NAME_2 WHERE TipTehn = 'NET' And PRINTER_NAME_2 <>'' And NET_IP_1 <>''", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-        BASECOMP = Nothing
 
-        BASECOMP = New ADODB.Recordset
-        BASECOMP.Open("UPDATE kompy SET PRINTER_NAME_2='' WHERE TipTehn = 'NET' And PRINTER_NAME_2 <>'' And NET_IP_1 <>''", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-        BASECOMP = Nothing
+        'Добавить в конвертор...
+
+        'UPDATE kompy SET NET_IP_1=PRINTER_NAME_2 WHERE TipTehn = 'NET' And PRINTER_NAME_2 <>'' And NET_IP_1 <>''
+        'UPDATE kompy SET PRINTER_NAME_2='' WHERE TipTehn = 'NET' And PRINTER_NAME_2 <>'' And NET_IP_1 <>''
+        'update kompy set Ser_N_SIS=MONITOR_SN Where tiptehn = 'MONITOR'
+        'update kompy set Ser_N_SIS=port_1 Where tiptehn = 'NET'
+        'update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = 'Printer'
+        'update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = 'KOpir'
+        'update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = 'MFU'
+        'update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = 'PHONE'
+        'update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = 'PHOTO'
+        'update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = 'FAX'
+        'update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = 'ZIP'
+        'update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = 'OT'
+        'update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = 'USB'
+        'update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = 'SOUND'
+        'update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = 'IBP'
+        'update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = 'FS'
+        'update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = 'KEYB'
+        'update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = 'MOUSE'
+        'update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = 'CNT'
+
+
 
 
         Exit Sub
 err_:
-        BASECOMP = Nothing
     End Sub
 
     Private Sub frmComputers_Resize(ByVal eventSender As System.Object, ByVal eventArgs As System.EventArgs) Handles MyBase.Resize
@@ -1907,6 +1922,9 @@ Error_:
         On Error GoTo err_
         Dim langfile As New IniFile(sLANGPATH)
 
+        Dim sALL, sSP, sBal As String
+
+
         Dim rs As ADODB.Recordset 'Объявляем рекордсет
         Dim sSQL As String 'Переменная, где будет размещён SQL запрос
         sSQL = "select COUNT(*) as T_N from kompy"
@@ -1916,12 +1934,52 @@ Error_:
         With rs
             ' lblT_All.Text = (.Fields("T_N").Value) & " " & langfile.GetString("frmComputers", "MSG13", "")
 
-            frmMain.LBL_STAT_1.Text = langfile.GetString("frmComputers", "lblT_All_T", "Техники всего:") & ": " & (.Fields("T_N").Value) & " " & langfile.GetString("frmComputers", "MSG13", "шт.")
-
+            sALL = (.Fields("T_N").Value) & " " & langfile.GetString("frmComputers", "MSG13", "шт.")
 
         End With
         rs.Close()
         rs = Nothing
+
+
+
+        If DB_N = "MS Access" Then
+
+            sSQL = "SELECT count(*) as t_n FROM kompy where Balans=true"
+            rs = New ADODB.Recordset
+            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+            With rs
+                ' lblT_All.Text = (.Fields("T_N").Value) & " " & langfile.GetString("frmComputers", "MSG13", "")
+
+                sBal = (.Fields("T_N").Value) & " " & langfile.GetString("frmComputers", "MSG13", "шт.")
+
+            End With
+            rs.Close()
+            rs = Nothing
+
+            sALL = sALL & "/ Не на балансе: " & sBal
+
+            sSQL = "SELECT count(*) as t_n FROM kompy where Spisan=true"
+            rs = New ADODB.Recordset
+            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+            With rs
+                ' lblT_All.Text = (.Fields("T_N").Value) & " " & langfile.GetString("frmComputers", "MSG13", "")
+
+                sSP = (.Fields("T_N").Value) & " " & langfile.GetString("frmComputers", "MSG13", "шт.")
+
+            End With
+            rs.Close()
+            rs = Nothing
+
+            sALL = sALL & "/ Списано: " & sSP
+
+        Else
+
+        End If
+
+        frmMain.LBL_STAT_1.Text = langfile.GetString("frmComputers", "lblT_All_T", "Техники всего:") & ": " & sALL
+
 
         Exit Sub
 err_:
@@ -2564,7 +2622,20 @@ err_:
 
                         'Me.BeginInvoke(New MethodInvoker(AddressOf Everest_Load))
 
-                        Call Everest_Load()
+                        Select Case sTechINF
+
+                            Case "ASTRA32"
+
+                                ASTRA_Load()
+
+                            Case Else
+
+                                Call Everest_Load()
+
+                        End Select
+
+
+
 
                         cmbBranch.Text = sBranch
                         cmbDepartment.Text = sDepartment
@@ -6176,7 +6247,6 @@ err_:
 
     Private Sub bRamPlus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bRamPlus.Click
 
-A:
         Select Case sRAM
 
             Case 1
@@ -6237,13 +6307,12 @@ A:
                 Me.txtRamSN8.Visible = True
                 Me.txtRamS8.Visible = True
                 Me.PROizV47.Visible = True
-                'Me.bRamPlus.Visible = False
+                Me.bRamPlus.Visible = False
 
 
             Case Else
 
-                sRAM = sRAM - 1
-                GoTo A
+                sRAM = sRAM
 
         End Select
 
@@ -6659,7 +6728,6 @@ err_1:
     Private Sub btnUserCancel_Click(sender As System.Object, e As System.EventArgs) Handles btnUserCancel.Click
         Dim langfile As New IniFile(sLANGPATH)
 
-
         Me.cmdUserAdd.Text = langfile.GetString("frmComputers", "MSG30", "Добавить")
 
         Me.txtUserName.Text = ""
@@ -6673,7 +6741,7 @@ err_1:
 
     End Sub
 
-    Private Sub btnNotesAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNotesDel.Click
+    Private Sub btnNotesAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNotesAdd.Click
         Dim sStr As String = txtSNAME.Text
 
         NotesEditAdd(btnNotesAdd, lvNotes, cmbNotesMaster, txtNotes, dtDateNotes, sStr, cmbBranch, cmbDepartment, cmbOffice)
@@ -6902,5 +6970,6 @@ Err_:
 
     End Sub
 
+    
 End Class
 

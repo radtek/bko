@@ -93,6 +93,26 @@
         frmComputers.txtRamSN4.Text = everIniFile.GetString("SPD", "SPD4|Свойства модуля памяти|Серийный номер", "")
         frmComputers.txtRamS4.Text = everIniFile.GetString("SPD", "SPD4|Свойства модуля памяти|Скорость памяти", "")
 
+        frmComputers.cmbRAM5.Text = everIniFile.GetString("SPD", "SPD5|Свойства модуля памяти|Размер модуля", "")
+        frmComputers.PROizV44.Text = everIniFile.GetString("SPD", "SPD5|Производитель модуля памяти|Фирма", "")
+        frmComputers.txtRamSN5.Text = everIniFile.GetString("SPD", "SPD5|Свойства модуля памяти|Серийный номер", "")
+        frmComputers.txtRamS5.Text = everIniFile.GetString("SPD", "SPD5|Свойства модуля памяти|Скорость памяти", "")
+
+        frmComputers.cmbRAM6.Text = everIniFile.GetString("SPD", "SPD6|Свойства модуля памяти|Размер модуля", "")
+        frmComputers.PROizV45.Text = everIniFile.GetString("SPD", "SPD6|Производитель модуля памяти|Фирма", "")
+        frmComputers.txtRamSN6.Text = everIniFile.GetString("SPD", "SPD6|Свойства модуля памяти|Серийный номер", "")
+        frmComputers.txtRamS6.Text = everIniFile.GetString("SPD", "SPD6|Свойства модуля памяти|Скорость памяти", "")
+
+        frmComputers.cmbRAM7.Text = everIniFile.GetString("SPD", "SPD7|Свойства модуля памяти|Размер модуля", "")
+        frmComputers.PROizV46.Text = everIniFile.GetString("SPD", "SPD7|Производитель модуля памяти|Фирма", "")
+        frmComputers.txtRamSN7.Text = everIniFile.GetString("SPD", "SPD7|Свойства модуля памяти|Серийный номер", "")
+        frmComputers.txtRamS7.Text = everIniFile.GetString("SPD", "SPD7|Свойства модуля памяти|Скорость памяти", "")
+
+        frmComputers.cmbRAM8.Text = everIniFile.GetString("SPD", "SPD8|Свойства модуля памяти|Размер модуля", "")
+        frmComputers.PROizV47.Text = everIniFile.GetString("SPD", "SPD8|Производитель модуля памяти|Фирма", "")
+        frmComputers.txtRamSN8.Text = everIniFile.GetString("SPD", "SPD8|Свойства модуля памяти|Серийный номер", "")
+        frmComputers.txtRamS8.Text = everIniFile.GetString("SPD", "SPD8|Свойства модуля памяти|Скорость памяти", "")
+
 
         'If Len(frmComputers.cmbRAM1.Text) = 0 Then
         '    frmComputers.cmbRAM1.Text = everIniFile.GetString("DMI", "Устройства памяти1|Свойства устройства памяти|Размер", "")
@@ -176,6 +196,25 @@
         frmComputers.txtHDDsN4.Text = everIniFile.GetString("ATA", "ATA4|Свойства устройства ATA|Серийный номер", "")
         frmComputers.PROizV13.Text = everIniFile.GetString("ATA", "ATA4|Производитель ATA-устройства|Фирма", "")
 
+        frmComputers.cmbHDD5.Text = everIniFile.GetString("ATA", "ATA5|Свойства устройства ATA|ID модели", "")
+        frmComputers.txtHDDo5.Text = everIniFile.GetString("ATA", "ATA5|Физические данные устройства ATA|Форматированная ёмкость", "")
+        frmComputers.txtHDDsN5.Text = everIniFile.GetString("ATA", "ATA5|Свойства устройства ATA|Серийный номер", "")
+        frmComputers.PROizV48.Text = everIniFile.GetString("ATA", "ATA5|Производитель ATA-устройства|Фирма", "")
+
+        frmComputers.cmbHDD6.Text = everIniFile.GetString("ATA", "ATA6|Свойства устройства ATA|ID модели", "")
+        frmComputers.txtHDDo6.Text = everIniFile.GetString("ATA", "ATA6|Физические данные устройства ATA|Форматированная ёмкость", "")
+        frmComputers.txtHDDsN6.Text = everIniFile.GetString("ATA", "ATA6|Свойства устройства ATA|Серийный номер", "")
+        frmComputers.PROizV49.Text = everIniFile.GetString("ATA", "ATA6|Производитель ATA-устройства|Фирма", "")
+
+        frmComputers.cmbHDD7.Text = everIniFile.GetString("ATA", "ATA7|Свойства устройства ATA|ID модели", "")
+        frmComputers.txtHDDo7.Text = everIniFile.GetString("ATA", "ATA7|Физические данные устройства ATA|Форматированная ёмкость", "")
+        frmComputers.txtHDDsN7.Text = everIniFile.GetString("ATA", "ATA7|Свойства устройства ATA|Серийный номер", "")
+        frmComputers.PROizV50.Text = everIniFile.GetString("ATA", "ATA7|Производитель ATA-устройства|Фирма", "")
+
+        frmComputers.cmbHDD8.Text = everIniFile.GetString("ATA", "ATA8|Свойства устройства ATA|ID модели", "")
+        frmComputers.txtHDDo8.Text = everIniFile.GetString("ATA", "ATA8|Физические данные устройства ATA|Форматированная ёмкость", "")
+        frmComputers.txtHDDsN8.Text = everIniFile.GetString("ATA", "ATA8|Свойства устройства ATA|Серийный номер", "")
+        frmComputers.PROizV51.Text = everIniFile.GetString("ATA", "ATA8|Производитель ATA-устройства|Фирма", "")
 
         '------------------
         If Len(frmComputers.cmbHDD1.Text) = 0 Or frmComputers.cmbHDD1.Text = "IOMEGA ZIP 100" Then

@@ -411,31 +411,10 @@ Public Class frmMain
         LBL_USER.Text = UserNames & "/" & uLevel
 
         '###################################################################3
-        'On Error GoTo err_
 
-        'Dim client As New SmtpClient
-        'client.Port = 587
-        'client.Host = "SMTP Сервер"
-        'client.EnableSsl = True
+        '  Exit Sub
 
-        'Call EncryptDecrypt("пароль тут")
-
-        'client.Credentials = New Net.NetworkCredential("Имя пользователя", "Пароль")
-
-        'Dim fromAdr As MailAddress = New MailAddress("От Кого почта (адрес)", ProGramName, System.Text.Encoding.UTF8)
-        'Dim toAdr As MailAddress = New MailAddress("Кому почта (адрес)")
-        'Dim message As MailMessage = New MailMessage(fromAdr, toAdr)
-        'message.Subject = "БКО " & My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor & "." & My.Application.Info.Version.Build & "." & My.Application.Info.Version.Revision
-        'message.SubjectEncoding = System.Text.Encoding.UTF8
-
-        'message.Body = "Тестирование отправки почтового отправления из БКО с вложением - " & uUSERNAME
-        'message.BodyEncoding = System.Text.Encoding.UTF8
-        'Dim attach As New Attachment("Тут путь до файла вложения")
-        'message.Attachments.Add(attach)
-
-        'client.Send(message)
-        'message.Dispose()
-
+        Call SendMail()
 
         Exit Sub
 err_:
@@ -444,6 +423,7 @@ err_:
         '###################################################################3
 
     End Sub
+
     Public Sub DBButtonsClick(ByVal sender As [Object], ByVal e As EventArgs)
 
         Dim senderButton As ToolStripButton = CType(sender, ToolStripButton)
@@ -456,6 +436,10 @@ err_:
 
         Dim objIniFile As New IniFile(PrPath & "base.ini")
         objIniFile.WriteString("general", "file", DB_USE.Text)
+
+        Call RELOGIN()
+
+        Exit Sub
 
         LoadDatabase()
 
@@ -789,6 +773,9 @@ error_Renamed:
         rs.Open("DELETE FROM SPR_USER", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
         rs = Nothing
 
+        rs = New ADODB.Recordset
+        rs.Open("DELETE FROM TBL_NET_MAG", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = Nothing
 
         Call frmComputers.STAT_INF()
         Call SHED_CHECK()
@@ -2542,4 +2529,58 @@ err_:
 
  
    
+    Private Sub ReloginToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ReloginToolStripMenuItem.Click
+
+        Call RELOGIN()
+
+    End Sub
+
+    Private Sub RELOGIN()
+
+        sRelogin = True
+
+        UnLoadDatabase()
+
+        ' Call Clear_Form_For_Computer()
+
+        frm_os3.Close()
+        frm_wmi.Close()
+        frmACT_OS_Act_treb.Close()
+        frmAct_Treb.Close()
+        frmARHIV.Close()
+        frmCartr_ADD.Close()
+        frmCartr_Add_Zap.Close()
+        frmComputers.Close()
+        frmCRT3.Close()
+        frmDev.Close()
+        frmDirectory.Close()
+        frmGarCPL.Close()
+        frmLOG.Close()
+        frmNetMag_Add.Close()
+        frmNetMag_selectSVT.Close()
+        frmNetMagazin.Close()
+        frmPPR.Close()
+        frmReports.Close()
+        frmSclad.Close()
+        frmSclad_ADD.Close()
+        frmSclad_treb.Close()
+        frmSearch.Close()
+        frmserviceDesc.Close()
+        frmService_add.Close()
+        frmservice_add_otvets.Close()
+        frmSetup.Close()
+        frmSheduler.Close()
+        frmSoftware.Close()
+        frmSQL.Close()
+        frmTreb_Act_treb.Close()
+
+        frmLogin.txtPassword.Text = ""
+        frmLogin.ShowDialog(Me)
+
+    End Sub
+
+
+    Private Sub DB_USE_Click(sender As System.Object, e As System.EventArgs) Handles DB_USE.Click
+
+    End Sub
 End Class

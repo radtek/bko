@@ -58,6 +58,12 @@ Module MOD_Database
 
         Select Case unamDB
 
+            'Case "MS SQL 2008-file"
+
+
+            '    DB7.Open("Driver={SQL Server Native Client 10.0};Server=./SQLEXPRESS;AttachDBFileName=" & BasePath & "\" & "mSQL.bak;Database=mSQL;Uid=sa;Pwd=lfplhf1vf!;Trusted_connection=Yes;")
+
+
             Case "MS SQL 2008"
 
                 DB7.Open("Driver={SQL Server Native Client 10.0};Server=" & DBserv & ";Database=" & DBtabl & ";Uid=" & DBuser & ";Pwd=" & DBpass & ";")
@@ -146,6 +152,8 @@ ERR1:
 
     Public Sub UnLoadDatabase(Optional ByRef sFile As String = "")
 
+        On Error GoTo err_
+
         If Len(unamDB) = 0 Or unamDB = Nothing Then Exit Sub
         'If unamDB = "MS Access" And Len(sFile) = 0 Then Exit Sub
         If DATAB = False Then Exit Sub
@@ -154,6 +162,8 @@ ERR1:
         DB7 = Nothing
 
         DATAB = False
+        Exit Sub
+Err_:
 
     End Sub
 
