@@ -4996,9 +4996,13 @@ err:
     End Sub
 
     Private Sub btnCashe_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCashe.Click
-        Me.Cursor = Cursors.WaitCursor
+        On Error GoTo err_
+
+
 
         lvCashe.Items.Clear()
+
+
         Dim langIni As New IniFile(sLANGPATH)
 
 
@@ -5006,8 +5010,8 @@ err:
         If Len(cmbBrancheCashe.Text) = 0 Then Exit Sub
         If Len(cmbDepartmentCashe.Text) = 0 Then Exit Sub
 
-        On Error Resume Next
-
+        'On Error Resume Next
+        Me.Cursor = Cursors.WaitCursor
 
         Dim rs As ADODB.Recordset
         Dim sSQL As String
@@ -5647,6 +5651,11 @@ err:
 
         Me.Cursor = Cursors.Default
 
+
+        Exit Sub
+err_:
+        Me.Cursor = Cursors.Default
+        MsgBox(Err.Description, MsgBoxStyle.Exclamation, ProGramName)
     End Sub
 
     Private Sub btnCacheOff_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCacheOff.Click

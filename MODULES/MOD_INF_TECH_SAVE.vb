@@ -3982,7 +3982,9 @@ Error_:
             .Fields("EMAIL").Value = frmComputers.txtUserEmail.Text
             .Fields("FIO").Value = frmComputers.txtUserFIO.Text
             .Fields("icq").Value = frmComputers.txtUserIcq.Text
+            .Fields("jabber").Value = frmComputers.txtUserJab.Text
 
+            'txtUserJab
             If frmComputers.cmdUserAdd.Text = langfile.GetString("frmComputers", "MSG42", "Сохранить") Then
 
 

@@ -373,7 +373,17 @@ err_:
                 frmComputers.chkSNMP.Visible = True
 
 
-
+                If frmComputers.chkSNMP.Checked = True Or 0 Then
+                    'frmComputers.chkSNMP.Visible = True
+                    frmComputers.lblSNMP.Visible = True
+                    frmComputers.txtSNMP.Visible = True
+                    frmComputers.gbSNMP.Visible = True
+                Else
+                    ' frmComputers.chkSNMP.Visible = False
+                    frmComputers.lblSNMP.Visible = False
+                    frmComputers.txtSNMP.Visible = False
+                    frmComputers.gbSNMP.Visible = False
+                End If
 
                 If Not IsDBNull(.Fields("SNMP_COMMUNITY").Value) Then
 
@@ -425,6 +435,20 @@ err_:
             If Not IsDBNull(.Fields("Spisan").Value) Then frmComputers.chkOTHspis.Checked = .Fields("Spisan").Value
             If Not IsDBNull(.Fields("Balans").Value) Then frmComputers.chkOTHNNb.Checked = .Fields("Balans").Value
             If Not IsDBNull(.Fields("PCL").Value) Then unaPCL = .Fields("PCL").Value
+
+
+            If frmComputers.chkSNMP.Checked = True Or 0 Then
+                'frmComputers.chkSNMP.Visible = True
+                frmComputers.lblSNMP.Visible = True
+                frmComputers.txtSNMP.Visible = True
+                frmComputers.gbSNMP.Visible = True
+            Else
+                'frmComputers.chkSNMP.Visible = False
+                frmComputers.lblSNMP.Visible = False
+                frmComputers.txtSNMP.Visible = False
+                frmComputers.gbSNMP.Visible = False
+            End If
+
 
         End With
 
@@ -1814,11 +1838,11 @@ err_:
                     frmComputers.lstUsers.Items(CInt(intCount)).SubItems.Add("")
                 End If
 
-                'If Not IsDBNull(.fields("jabber").value) Then
-                'frmComputers.lstUsers.Items(CInt(intCount)).SubItems.Add(.fields("jabber").value)
-                'Else
-                'frmComputers.lstUsers.Items(CInt(intCount)).SubItems.Add("").value
-                'End If
+                If Not IsDBNull(.Fields("jabber").Value) Then
+                    frmComputers.lstUsers.Items(CInt(intCount)).SubItems.Add(.Fields("jabber").Value)
+                Else
+                    frmComputers.lstUsers.Items(CInt(intCount)).SubItems.Add("")
+                End If
 
 
                 intCount = intCount + 1

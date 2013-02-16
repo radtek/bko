@@ -1439,7 +1439,6 @@ Error_:
                             lblOTPCL.Visible = True
                             cmbOTHPCL.Visible = True
 
-
                             Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
                             Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
@@ -1457,6 +1456,18 @@ Error_:
 
                             'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
                             'newThread6.Start()
+
+                            If chkSNMP.Checked = True Then
+                                ' chkSNMP.Visible = True
+                                lblSNMP.Visible = True
+                                txtSNMP.Visible = True
+                                gbSNMP.Visible = True
+                            Else
+                                ' chkSNMP.Visible = False
+                                lblSNMP.Visible = False
+                                txtSNMP.Visible = False
+                                gbSNMP.Visible = False
+                            End If
 
                             Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL)
 
@@ -4177,6 +4188,7 @@ err_:
             If Not IsDBNull(.Fields("FIO").Value) Then txtUserFIO.Text = .Fields("FIO").Value
             If Not IsDBNull(.Fields("icq").Value) Then txtUserIcq.Text = .Fields("icq").Value
             If Not IsDBNull(.Fields("MEMO").Value) Then txtUMEMO.Text = .Fields("MEMO").Value
+            If Not IsDBNull(.Fields("jabber").Value) Then txtUserJab.Text = .Fields("jabber").Value
 
 
             If .Fields("PDC").Value = True Then
@@ -6971,5 +6983,8 @@ Err_:
     End Sub
 
     
+    Private Sub lstUsers_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lstUsers.SelectedIndexChanged
+
+    End Sub
 End Class
 
