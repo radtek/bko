@@ -153,16 +153,13 @@ err_:
     End Sub
 
     Private Sub User_Pro()
-
-
+START:
 
         Dim objIniFile As New IniFile(PrPath & "base.ini")
         objIniFile.WriteString("general", "DefaultUser", cmbUser.Text)
         objIniFile.WriteString("DB", "DB", unamDB)
 
-
         If cmbSUBD.Text <> "MS Access" Then
-
 
             objIniFile.WriteString("DB", "SERVER", TextBox1.Text)
             objIniFile.WriteString("DB", "PORT", TextBox2.Text)
@@ -170,13 +167,11 @@ err_:
             objIniFile.WriteString("DB", "USER", TextBox4.Text)
             objIniFile.WriteString("DB", "PASSWORD", TextBox5.Text)
 
-
         Else
             Base_Name = cmbBD.Text
             objIniFile.WriteString("general", "file", cmbBD.Text)
 
         End If
-
 
         If DATAB = False Then
 
@@ -185,13 +180,10 @@ err_:
 
         End If
 
-
-
         Dim rscount As ADODB.Recordset
         Dim QWERT As Long
         rscount = New ADODB.Recordset
         rscount.Open("SELECT COUNT(*) AS total_number FROM CONFIGURE", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-
 
         With rscount
             QWERT = .Fields("total_number").Value
@@ -220,14 +212,11 @@ err_:
 
         End If
 
-
-
         Dim rs As ADODB.Recordset
         rs = New ADODB.Recordset
 
-        Dim sVER, tVER As String
+        Dim tVER As String
         Dim sPass1 As String = ""
-
 
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
@@ -236,7 +225,7 @@ err_:
 
         With rs
 
-            sVER = .Fields("access").Value
+            sVERSIA = .Fields("access").Value
 
         End With
         rs.Close()
@@ -244,27 +233,86 @@ err_:
 
         tVER = My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor & "." & My.Application.Info.Version.Build
 
-        If sVER >= "1.7.3.5" Then
+        If sVERSIA >= "1.7.3.5.1" Then
 
 
         Else
+
             MsgBox(LNGIniFile.GetString("frmLogin", "MSG1", "Версия базы данных не является эталонной") & vbCrLf & LNGIniFile.GetString("frmLogin", "MSG2", "воспользуйтесь конвертором"), MsgBoxStyle.Information, "BKO.NET - " & tVER)
+            MsgBox("Пробуем внести изменения в базу, в случае не удачи пользуйтесь конвертором", MsgBoxStyle.Information, "BKO.NET - " & tVER)
 
-            End
+            _DBALTER = True
+            'Вносим изменения в базу (для MS Access)
+            Call ALTER_DB()
+
+            If _DBALTER = True Then
+
+                MsgBox("Внесение изменений провалилось", MsgBoxStyle.Information, "BKO.NET - " & tVER)
+
+                End
+
+            Else
+
+                GoTo START
+
+            End If
+
+
+
+            'Select Case sVERSIA
+
+            '    Case "1.7.3.5"
+
+            '        _DBALTER = True
+            '        'Вносим изменения в базу (для MS Access)
+            '        Call ALTER_DB()
+
+            '        If _DBALTER = True Then
+
+            '            MsgBox("Внесение изменений провалилось", MsgBoxStyle.Information, "BKO.NET - " & tVER)
+
+            '            End
+
+            '        Else
+
+            '            GoTo START
+
+            '        End If
+
+            '    Case "1.7.4"
+
+            '        MsgBox("Внесение изменений провалилось", MsgBoxStyle.Information, "BKO.NET - " & tVER)
+
+            '        End
+
+            '    Case "1.7.4"
+
+            '        MsgBox("Внесение изменений провалилось", MsgBoxStyle.Information, "BKO.NET - " & tVER)
+
+            '        End
+
+            '    Case "1.7.3"
+
+            '        MsgBox("Внесение изменений провалилось", MsgBoxStyle.Information, "BKO.NET - " & tVER)
+
+            '        End
+
+            '    Case "1.7.3.4.1"
+
+            '        MsgBox("Внесение изменений провалилось", MsgBoxStyle.Information, "BKO.NET - " & tVER)
+
+            '        End
+
+            'End Select
+
+
         End If
-
-
-        'langini.GetString("messages", "l1", "")
 
         If Len(txtPassword.Text) = 0 Then Exit Sub
 
         strPassword = Trim(txtPassword.Text)
         Call EncryptDecrypt(strPassword)
         txtPassword.Text = Temp
-
-
-
-
 
         Dim sCOUNT As Integer
         Dim T_User As ADODB.Recordset
@@ -278,188 +326,179 @@ err_:
         T_User.Close()
         T_User = Nothing
 
-
-
         If sCOUNT = 0 Then
             MsgBox("This User is not valid", MsgBoxStyle.Critical, "Error!!!")
             Exit Sub
         End If
 
-
         T_User = New ADODB.Recordset
         T_User.Open("SELECT * FROM T_User where Name ='" & cmbUser.Text & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
         With T_User
-            .MoveFirst()
-            Do While Not .EOF
+            '   .MoveFirst()
+            '   Do While Not .EOF
 
-                If cmbUser.Text = .Fields("Name").Value Then
+            If cmbUser.Text = .Fields("Name").Value Then
 
-                    If cmbUser.Text = .Fields("Name").Value And txtPassword.Text = .Fields("password").Value Then
+                If cmbUser.Text = .Fields("Name").Value And txtPassword.Text = .Fields("password").Value Then
 
+                    uLevel = .Fields("Level").Value
+                    uSERID = .Fields("User_ID").Value
+                    UserNames = .Fields("Name").Value
 
-                        uLevel = .Fields("Level").Value
-                        uSERID = .Fields("User_ID").Value
-                        UserNames = .Fields("Name").Value
-
-                        If uLevel = "Admin" Then
-
-                        Else
-
-
-
-                            If .Fields("SETUP").Value = 1 Or .Fields("SETUP").Value = True Then
-                                uLevelSetup = True
-                            Else
-                                uLevelSetup = False
-                            End If
-                            If .Fields("PCADD").Value = 1 Or .Fields("PCADD").Value = True Then
-                                uLevelTehAdd = True
-                            Else
-                                uLevelTehAdd = False
-                            End If
-                            If .Fields("PCDEL").Value = 1 Or .Fields("PCDEL").Value = True Then
-                                uLevelTehDel = True
-                            Else
-                                uLevelTehDel = False
-                            End If
-                            If .Fields("CAPADD").Value = 1 Or .Fields("CAPADD").Value = True Then
-                                uLevelNotesAdd = True
-                            Else
-                                uLevelNotesAdd = False
-                            End If
-
-                            If .Fields("CAPDEL").Value = 1 Or .Fields("CAPDEL").Value = True Then
-                                uLevelNotesDel = True
-                            Else
-                                uLevelNotesDel = False
-                            End If
-                            If .Fields("REPADD").Value = 1 Or .Fields("REPADD").Value = True Then
-                                uLevelRepAdd = True
-                            Else
-                                uLevelRepAdd = False
-                            End If
-
-                            If .Fields("REPDEL").Value = 1 Or .Fields("REPDEL").Value = True Then
-                                uLevelRepDel = True
-                            Else
-                                uLevelRepDel = False
-                            End If
-                            If .Fields("REPed").Value = 1 Or .Fields("REPed").Value = True Then
-                                uLevelRepEd = True
-                            Else
-                                uLevelRepEd = False
-                            End If
-
-                            If .Fields("POADD").Value = 1 Or .Fields("POADD").Value = True Then
-                                uLevelPOAdd = True
-                            Else
-                                uLevelPOAdd = False
-                            End If
-                            If .Fields("PODEL").Value = 1 Or .Fields("PODEL").Value = True Then
-                                uLevelPODel = True
-                            Else
-                                uLevelPODel = False
-                            End If
-                            If .Fields("CARTR").Value = 1 Or .Fields("CARTR").Value = True Then
-                                uLevelCart = True
-                            Else
-                                uLevelCart = False
-                            End If
-                            If .Fields("PO").Value = 1 Or .Fields("PO").Value = True Then
-                                uLevelPO = True
-                            Else
-                                uLevelPO = False
-                            End If
-                            If .Fields("SCLAD").Value = 1 Or .Fields("SCLAD").Value = True Then
-                                uLevelWarehause = True
-                            Else
-                                uLevelWarehause = False
-                            End If
-
-
-
-                        End If
-
-                        Call SaveActivityToLogDB(LNGIniFile.GetString("frmLogin", "MSG3", "Вход в программу"))
-
-                        Call ALTER_DB()
-                        Me.Hide()
-
-                        If sRelogin = True Then
-                            sRelogin = False
-                            'Какой модуль запускать
-                            Dim sText As String
-                            sText = objIniFile.GetString("general", "MOD", 0)
-
-                            If Len(sText) > 2 Then sText = 0
-
-                            Select Case sText
-
-                                Case 0
-
-                                    'frmComputers.Visible = False
-                                    frmComputers.MdiParent = frmMain
-                                    ' My.Application.DoEvents()
-                                    frmComputers.Show()
-                                    ' My.Application.DoEvents()
-
-                                Case 1
-                                    frmserviceDesc.MdiParent = frmMain
-                                    ' My.Application.DoEvents()
-                                    frmserviceDesc.Show()
-                                    ' My.Application.DoEvents()
-                                Case 2
-
-                                    frmSoftware.MdiParent = frmMain
-                                    '  My.Application.DoEvents()
-                                    frmSoftware.Show()
-                                    '  My.Application.DoEvents()
-                                Case 3
-
-                                    frmCRT3.MdiParent = frmMain
-                                    '  My.Application.DoEvents()
-                                    frmCRT3.Show()
-                                    '   My.Application.DoEvents()
-                            End Select
-
-                            'frmComputers.MdiParent = frmMain
-                            'frmComputers.Show()
-                            'frmComputers.Focus()
-                        Else
-
-                            frmMain.Show()
-
-                        End If
-
-
-
-                        Me.Close()
+                    If uLevel = "Admin" Then
 
                     Else
 
-                        Call SaveActivityToLogDB(LNGIniFile.GetString("frmLogin", "MSG4", "Ввод не верного пароля"))
+                        If .Fields("SETUP").Value = 1 Or .Fields("SETUP").Value = True Then
+                            uLevelSetup = True
+                        Else
+                            uLevelSetup = False
+                        End If
+                        If .Fields("PCADD").Value = 1 Or .Fields("PCADD").Value = True Then
+                            uLevelTehAdd = True
+                        Else
+                            uLevelTehAdd = False
+                        End If
+                        If .Fields("PCDEL").Value = 1 Or .Fields("PCDEL").Value = True Then
+                            uLevelTehDel = True
+                        Else
+                            uLevelTehDel = False
+                        End If
+                        If .Fields("CAPADD").Value = 1 Or .Fields("CAPADD").Value = True Then
+                            uLevelNotesAdd = True
+                        Else
+                            uLevelNotesAdd = False
+                        End If
 
-                        System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.Default
-                        Me.Enabled = True
-                        MsgBox("This Password is not valid", MsgBoxStyle.Critical, "Error!!!")
-                        txtPassword.Text = ""
-                        txtPassword.Focus()
-                        Me.Enabled = True
+                        If .Fields("CAPDEL").Value = 1 Or .Fields("CAPDEL").Value = True Then
+                            uLevelNotesDel = True
+                        Else
+                            uLevelNotesDel = False
+                        End If
+                        If .Fields("REPADD").Value = 1 Or .Fields("REPADD").Value = True Then
+                            uLevelRepAdd = True
+                        Else
+                            uLevelRepAdd = False
+                        End If
+
+                        If .Fields("REPDEL").Value = 1 Or .Fields("REPDEL").Value = True Then
+                            uLevelRepDel = True
+                        Else
+                            uLevelRepDel = False
+                        End If
+                        If .Fields("REPed").Value = 1 Or .Fields("REPed").Value = True Then
+                            uLevelRepEd = True
+                        Else
+                            uLevelRepEd = False
+                        End If
+
+                        If .Fields("POADD").Value = 1 Or .Fields("POADD").Value = True Then
+                            uLevelPOAdd = True
+                        Else
+                            uLevelPOAdd = False
+                        End If
+                        If .Fields("PODEL").Value = 1 Or .Fields("PODEL").Value = True Then
+                            uLevelPODel = True
+                        Else
+                            uLevelPODel = False
+                        End If
+                        If .Fields("CARTR").Value = 1 Or .Fields("CARTR").Value = True Then
+                            uLevelCart = True
+                        Else
+                            uLevelCart = False
+                        End If
+                        If .Fields("PO").Value = 1 Or .Fields("PO").Value = True Then
+                            uLevelPO = True
+                        Else
+                            uLevelPO = False
+                        End If
+                        If .Fields("SCLAD").Value = 1 Or .Fields("SCLAD").Value = True Then
+                            uLevelWarehause = True
+                        Else
+                            uLevelWarehause = False
+                        End If
+
                     End If
 
+                    Call SaveActivityToLogDB(LNGIniFile.GetString("frmLogin", "MSG3", "Вход в программу"))
+
+                    Me.Hide()
+
+                    If sRelogin = True Then
+                        sRelogin = False
+                        'Какой модуль запускать
+                        Dim sText As String
+                        sText = objIniFile.GetString("general", "MOD", 0)
+
+                        If Len(sText) > 2 Then sText = 0
+
+                        Select Case sText
+
+                            Case 0
+
+                                'frmComputers.Visible = False
+                                frmComputers.MdiParent = frmMain
+                                ' My.Application.DoEvents()
+                                frmComputers.Show()
+                                ' My.Application.DoEvents()
+
+                            Case 1
+                                frmserviceDesc.MdiParent = frmMain
+                                ' My.Application.DoEvents()
+                                frmserviceDesc.Show()
+                                ' My.Application.DoEvents()
+                            Case 2
+
+                                frmSoftware.MdiParent = frmMain
+                                '  My.Application.DoEvents()
+                                frmSoftware.Show()
+                                '  My.Application.DoEvents()
+                            Case 3
+
+                                frmCRT3.MdiParent = frmMain
+                                '  My.Application.DoEvents()
+                                frmCRT3.Show()
+                                '   My.Application.DoEvents()
+                        End Select
+
+                        'frmComputers.MdiParent = frmMain
+                        'frmComputers.Show()
+                        'frmComputers.Focus()
+                    Else
+
+                        frmMain.Show()
+
+                    End If
+
+
+                    '  T_User.Close()
+                    '  T_User = Nothing
+                    Me.Close()
+
                 Else
+
+                    Call SaveActivityToLogDB(LNGIniFile.GetString("frmLogin", "MSG4", "Ввод не верного пароля"))
+
+                    System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.Default
+                    Me.Enabled = True
+                    MsgBox("This Password is not valid", MsgBoxStyle.Critical, "Error!!!")
+                    txtPassword.Text = ""
+                    txtPassword.Focus()
+                    Me.Enabled = True
                 End If
-                .MoveNext()
-                'DoEvents
-            Loop
+
+            Else
+            End If
+            '  .MoveNext()
+            'DoEvents
+            ' Loop
         End With
         T_User.Close()
         T_User = Nothing
 
-
-
-
+        Exit Sub
+err_:
 
     End Sub
 

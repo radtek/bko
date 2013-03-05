@@ -269,12 +269,14 @@ Public Class frmComputers
         MassObedPerf.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\add.png")
         MassUpdatetoINI.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\updatefolder.png")
         DELTEdVIGToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\delete.png")
-        DeleteService.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\delete.png")
+
         EditService.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\editservice.png")
+        DeleteService.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\delete.png")
         MnuSendEmail.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\sendmail.png")
         mnu_Z_to_Office.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\serviceprint.png")
         mnu_z_rasp.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\servicerasp.png")
         addRemToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\service.png")
+
         CopyToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\copy.png")
         UpdateToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\pcupdate.png")
         DeleteToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\delete.png")
@@ -2339,13 +2341,38 @@ err_:
                 .MoveNext()
             Loop
         End With
+        rs1.Close()
+        rs1 = Nothing
 
         frmService_add.REMED = True
 
-        frmService_add.cmbAdd.Text = LNGIniFile.GetString("frmserviceDesc", "MSG2", "Сохранить")
+        Dim unam As String
+        sSQL = "SELECT COUNT(*) AS t_number FROM remonty_plus WHERE id_rem=" & rCOUNT
+        rs1 = New ADODB.Recordset
+        rs1.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
+        With rs1
+            unam = .Fields("t_number").Value
+        End With
         rs1.Close()
         rs1 = Nothing
+
+
+        If unam = 0 Then
+            frmService_add.Height = 535
+
+            frmService_add.gbS.Visible = False
+            frmService_add.Height = 535
+        Else
+            Call frmserviceDesc.load_rplus(rCOUNT, frmService_add.lvRem2)
+
+            frmService_add.gbS.Visible = True
+            frmService_add.Height = 686
+
+            frmService_add.cmbAdd.Text = LNGIniFile.GetString("frmserviceDesc", "MSG2", "Сохранить")
+
+
+        End If
 
         frmService_add.ShowDialog(Me)
 

@@ -58,6 +58,13 @@ Partial Class frmserviceDesc
         Me.lvRem2 = New System.Windows.Forms.ListView()
         Me.ilsCMD = New System.Windows.Forms.ImageList(Me.components)
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.CMServices = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.EditService = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DeleteService = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuSendEmail = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnu_Z_to_Office = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnu_z_rasp = New System.Windows.Forms.ToolStripMenuItem()
+        Me.addServiseWork = New System.Windows.Forms.ToolStripMenuItem()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
@@ -69,6 +76,7 @@ Partial Class frmserviceDesc
         Me.TableLayoutPanel2.SuspendLayout()
         Me.New_Button_SD.SuspendLayout()
         Me.gbRem2.SuspendLayout()
+        Me.CMServices.SuspendLayout()
         Me.SuspendLayout()
         '
         'SplitContainer1
@@ -407,6 +415,48 @@ Partial Class frmserviceDesc
         Me.ToolTip1.ShowAlways = True
         Me.ToolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
         '
+        'CMServices
+        '
+        Me.CMServices.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EditService, Me.DeleteService, Me.MnuSendEmail, Me.mnu_Z_to_Office, Me.mnu_z_rasp, Me.addServiseWork})
+        Me.CMServices.Name = "CMServices"
+        Me.CMServices.Size = New System.Drawing.Size(175, 136)
+        '
+        'EditService
+        '
+        Me.EditService.Name = "EditService"
+        Me.EditService.Size = New System.Drawing.Size(174, 22)
+        Me.EditService.Text = "Редактировать"
+        '
+        'DeleteService
+        '
+        Me.DeleteService.Name = "DeleteService"
+        Me.DeleteService.Size = New System.Drawing.Size(174, 22)
+        Me.DeleteService.Text = "Удалить"
+        '
+        'MnuSendEmail
+        '
+        Me.MnuSendEmail.Name = "MnuSendEmail"
+        Me.MnuSendEmail.Size = New System.Drawing.Size(174, 22)
+        Me.MnuSendEmail.Text = "Отправить матеру"
+        '
+        'mnu_Z_to_Office
+        '
+        Me.mnu_Z_to_Office.Name = "mnu_Z_to_Office"
+        Me.mnu_Z_to_Office.Size = New System.Drawing.Size(174, 22)
+        Me.mnu_Z_to_Office.Text = "Распечатать"
+        '
+        'mnu_z_rasp
+        '
+        Me.mnu_z_rasp.Name = "mnu_z_rasp"
+        Me.mnu_z_rasp.Size = New System.Drawing.Size(174, 22)
+        Me.mnu_z_rasp.Text = "Расписка"
+        '
+        'addServiseWork
+        '
+        Me.addServiseWork.Name = "addServiseWork"
+        Me.addServiseWork.Size = New System.Drawing.Size(174, 22)
+        Me.addServiseWork.Text = "Добавить работы"
+        '
         'frmserviceDesc
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -432,6 +482,7 @@ Partial Class frmserviceDesc
         Me.New_Button_SD.ResumeLayout(False)
         Me.New_Button_SD.PerformLayout()
         Me.gbRem2.ResumeLayout(False)
+        Me.CMServices.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -469,4 +520,11 @@ Partial Class frmserviceDesc
     Friend WithEvents ToolStrip1 As System.Windows.Forms.ToolStrip
     Friend WithEvents btnSearch As System.Windows.Forms.ToolStripButton
     Friend WithEvents MnuBlank As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents CMServices As System.Windows.Forms.ContextMenuStrip
+    Friend WithEvents EditService As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents DeleteService As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MnuSendEmail As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mnu_Z_to_Office As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mnu_z_rasp As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents addServiseWork As System.Windows.Forms.ToolStripMenuItem
 End Class

@@ -12,7 +12,7 @@
     <AssemblyName>basekomp</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
-    <TargetFrameworkVersion>v3.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <OptionExplicit>On</OptionExplicit>
     <OptionCompare>Binary</OptionCompare>
     <OptionStrict>Off</OptionStrict>
@@ -64,7 +64,8 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>basekomp.xml</DocumentationFile>
+    <DocumentationFile>
+    </DocumentationFile>
     <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42030,42032,42036,42104,42108,42109,42353,42354,42355</NoWarn>
     <WarningsAsErrors>
     </WarningsAsErrors>
@@ -77,9 +78,10 @@
     <DebugType>Full</DebugType>
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
-    <Optimize>false</Optimize>
+    <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>basekomp.xml</DocumentationFile>
+    <DocumentationFile>
+    </DocumentationFile>
     <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42030,42032,42036,42104,42108,42109,42353,42354,42355</NoWarn>
     <WarningsAsErrors>
     </WarningsAsErrors>
@@ -95,7 +97,8 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\x86\Debug\</OutputPath>
-    <DocumentationFile>basekomp.xml</DocumentationFile>
+    <DocumentationFile>
+    </DocumentationFile>
     <WarningLevel>1</WarningLevel>
     <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42030,42032,42036,42104,42108,42109,42353,42354,42355</NoWarn>
     <DebugType>full</DebugType>
@@ -108,7 +111,8 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\x86\Release\</OutputPath>
-    <DocumentationFile>basekomp.xml</DocumentationFile>
+    <DocumentationFile>
+    </DocumentationFile>
     <WarningLevel>1</WarningLevel>
     <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42030,42032,42036,42104,42108,42109,42353,42354,42355</NoWarn>
     <DebugType>pdbonly</DebugType>
@@ -611,7 +615,9 @@
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Service References\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

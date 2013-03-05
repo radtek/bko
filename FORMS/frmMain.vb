@@ -18,7 +18,7 @@ Public Class frmMain
     Private Sub frmMain_Activated(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Activated
 
         Me.Show()
-        My.Application.DoEvents()
+        ' My.Application.DoEvents()
 
         If unamDB <> "MS Access" Then ArhToolZipbutton.Enabled = False
 

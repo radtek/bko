@@ -677,7 +677,6 @@ A:
         Me.Cursor = Cursors.Default
     End Sub
 
-
     Private Sub DELETE_SOFT(Optional ByVal ssid As Integer = 0)
         Dim z As Integer
 
@@ -932,8 +931,6 @@ err_:
         If TipTehn <> "PC" Then Exit Sub
         Me.lstSoftware.Visible = False
 
-
-
         Dim ePatch As String
         Dim objIniFile As New IniFile(PrPath & "base.ini")
         ePatch = objIniFile.GetString("General", "aida", PrPath)
@@ -976,9 +973,6 @@ err_:
                 rs.Close()
                 rs = Nothing
 
-
-
-
                 If A1 <> everIniFile.GetString("Суммарная информация", "Компьютер|Имя компьютера", "") Then
 
                     If A1 <> everIniFile.GetString("Имя компьютера", "Имя NetBIOS|Имя компьютера", "") Then
@@ -995,16 +989,6 @@ err_:
 
         Call textp_Upd(Me.lstSoftware)
 
-
-
-
-
-
-
-
-
-
-
         Dim langfile As New IniFile(sLANGPATH)
 
 
@@ -1012,7 +996,6 @@ err_:
         Me.Cursor = Cursors.Default
 
         Me.lstSoftware.Visible = False
-
 
         Call SAVE_SOFT(Me.lstSoftware, sCOUNT)
 

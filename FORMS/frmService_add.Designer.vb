@@ -52,13 +52,18 @@ Partial Class frmService_add
         Me.RemCashe = New System.Windows.Forms.NumericUpDown()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.gbS = New System.Windows.Forms.GroupBox()
+        Me.lvRem2 = New System.Windows.Forms.ListView()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.dtGarRem = New System.Windows.Forms.DateTimePicker()
         CType(Me.RemCashe, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TableLayoutPanel1.SuspendLayout()
+        Me.gbS.SuspendLayout()
         Me.SuspendLayout()
         '
         'cmbCancel
         '
-        Me.cmbCancel.Location = New System.Drawing.Point(153, 503)
+        Me.cmbCancel.Location = New System.Drawing.Point(153, 638)
         Me.cmbCancel.Name = "cmbCancel"
         Me.cmbCancel.Size = New System.Drawing.Size(75, 23)
         Me.cmbCancel.TabIndex = 54
@@ -67,7 +72,7 @@ Partial Class frmService_add
         '
         'cmbAdd
         '
-        Me.cmbAdd.Location = New System.Drawing.Point(3, 503)
+        Me.cmbAdd.Location = New System.Drawing.Point(3, 638)
         Me.cmbAdd.Name = "cmbAdd"
         Me.cmbAdd.Size = New System.Drawing.Size(75, 23)
         Me.cmbAdd.TabIndex = 53
@@ -82,14 +87,14 @@ Partial Class frmService_add
         Me.txtComent.Multiline = True
         Me.txtComent.Name = "txtComent"
         Me.txtComent.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtComent.Size = New System.Drawing.Size(324, 87)
+        Me.txtComent.Size = New System.Drawing.Size(326, 68)
         Me.txtComent.TabIndex = 52
         '
         'Label12
         '
         Me.Label12.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(3, 440)
+        Me.Label12.Location = New System.Drawing.Point(3, 431)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(144, 26)
         Me.Label12.TabIndex = 51
@@ -99,9 +104,9 @@ Partial Class frmService_add
         '
         Me.chkClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.chkClose.AutoSize = True
-        Me.chkClose.Location = New System.Drawing.Point(3, 385)
+        Me.chkClose.Location = New System.Drawing.Point(346, 644)
         Me.chkClose.Name = "chkClose"
-        Me.chkClose.Size = New System.Drawing.Size(144, 17)
+        Me.chkClose.Size = New System.Drawing.Size(133, 17)
         Me.chkClose.TabIndex = 50
         Me.chkClose.Text = "Заявка закрыта"
         Me.chkClose.UseVisualStyleBackColor = True
@@ -198,7 +203,7 @@ Partial Class frmService_add
         Me.txtRem.Multiline = True
         Me.txtRem.Name = "txtRem"
         Me.txtRem.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtRem.Size = New System.Drawing.Size(324, 109)
+        Me.txtRem.Size = New System.Drawing.Size(326, 109)
         Me.txtRem.TabIndex = 41
         '
         'Label7
@@ -332,8 +337,9 @@ Partial Class frmService_add
         '
         'Label13
         '
+        Me.Label13.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(287, 381)
+        Me.Label13.Location = New System.Drawing.Point(287, 387)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(53, 13)
         Me.Label13.TabIndex = 56
@@ -341,15 +347,15 @@ Partial Class frmService_add
         '
         'TableLayoutPanel1
         '
+        Me.TableLayoutPanel1.AutoSize = True
+        Me.TableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.TableLayoutPanel1.ColumnCount = 4
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150.0!))
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel1.Controls.Add(Me.Label1, 0, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.cmbCancel, 1, 15)
         Me.TableLayoutPanel1.Controls.Add(Me.RemCashe, 3, 11)
-        Me.TableLayoutPanel1.Controls.Add(Me.cmbAdd, 0, 15)
         Me.TableLayoutPanel1.Controls.Add(Me.cmbIst, 1, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.txtComent, 1, 12)
         Me.TableLayoutPanel1.Controls.Add(Me.Label2, 0, 1)
@@ -374,11 +380,16 @@ Partial Class frmService_add
         Me.TableLayoutPanel1.Controls.Add(Me.txtRem, 1, 6)
         Me.TableLayoutPanel1.Controls.Add(Me.Label9, 0, 7)
         Me.TableLayoutPanel1.Controls.Add(Me.Label13, 2, 11)
-        Me.TableLayoutPanel1.Controls.Add(Me.chkClose, 0, 11)
+        Me.TableLayoutPanel1.Controls.Add(Me.cmbAdd, 0, 16)
+        Me.TableLayoutPanel1.Controls.Add(Me.cmbCancel, 1, 16)
+        Me.TableLayoutPanel1.Controls.Add(Me.gbS, 0, 15)
+        Me.TableLayoutPanel1.Controls.Add(Me.chkClose, 3, 16)
+        Me.TableLayoutPanel1.Controls.Add(Me.Label14, 0, 11)
+        Me.TableLayoutPanel1.Controls.Add(Me.dtGarRem, 1, 11)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
-        Me.TableLayoutPanel1.RowCount = 16
+        Me.TableLayoutPanel1.RowCount = 17
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
@@ -395,15 +406,63 @@ Partial Class frmService_add
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(480, 532)
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(480, 670)
         Me.TableLayoutPanel1.TabIndex = 57
+        '
+        'gbS
+        '
+        Me.gbS.AutoSize = True
+        Me.TableLayoutPanel1.SetColumnSpan(Me.gbS, 4)
+        Me.gbS.Controls.Add(Me.lvRem2)
+        Me.gbS.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.gbS.Location = New System.Drawing.Point(3, 484)
+        Me.gbS.Name = "gbS"
+        Me.gbS.Size = New System.Drawing.Size(476, 148)
+        Me.gbS.TabIndex = 58
+        Me.gbS.TabStop = False
+        Me.gbS.Text = "События"
+        Me.gbS.Visible = False
+        '
+        'lvRem2
+        '
+        Me.lvRem2.FullRowSelect = True
+        Me.lvRem2.GridLines = True
+        Me.lvRem2.Location = New System.Drawing.Point(0, 15)
+        Me.lvRem2.MultiSelect = False
+        Me.lvRem2.Name = "lvRem2"
+        Me.lvRem2.ShowItemToolTips = True
+        Me.lvRem2.Size = New System.Drawing.Size(470, 114)
+        Me.lvRem2.TabIndex = 57
+        Me.lvRem2.UseCompatibleStateImageBehavior = False
+        Me.lvRem2.View = System.Windows.Forms.View.Details
+        '
+        'Label14
+        '
+        Me.Label14.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label14.AutoSize = True
+        Me.Label14.Location = New System.Drawing.Point(3, 387)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(144, 13)
+        Me.Label14.TabIndex = 59
+        Me.Label14.Text = "Гарантия:"
+        '
+        'dtGarRem
+        '
+        Me.dtGarRem.Location = New System.Drawing.Point(153, 384)
+        Me.dtGarRem.MaxDate = New Date(3000, 12, 31, 0, 0, 0, 0)
+        Me.dtGarRem.MinDate = New Date(1992, 1, 1, 0, 0, 0, 0)
+        Me.dtGarRem.Name = "dtGarRem"
+        Me.dtGarRem.Size = New System.Drawing.Size(128, 20)
+        Me.dtGarRem.TabIndex = 60
+        Me.dtGarRem.Value = New Date(2013, 3, 5, 0, 0, 0, 0)
         '
         'frmService_add
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(480, 532)
+        Me.ClientSize = New System.Drawing.Size(480, 670)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "frmService_add"
@@ -412,7 +471,9 @@ Partial Class frmService_add
         CType(Me.RemCashe, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.TableLayoutPanel1.PerformLayout()
+        Me.gbS.ResumeLayout(False)
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents cmbCancel As System.Windows.Forms.Button
@@ -445,4 +506,8 @@ Partial Class frmService_add
     Friend WithEvents RemCashe As System.Windows.Forms.NumericUpDown
     Friend WithEvents Label13 As System.Windows.Forms.Label
     Friend WithEvents TableLayoutPanel1 As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents lvRem2 As System.Windows.Forms.ListView
+    Friend WithEvents gbS As System.Windows.Forms.GroupBox
+    Friend WithEvents Label14 As System.Windows.Forms.Label
+    Friend WithEvents dtGarRem As System.Windows.Forms.DateTimePicker
 End Class

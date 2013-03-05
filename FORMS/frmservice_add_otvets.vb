@@ -1,11 +1,7 @@
 ﻿Public Class frmservice_add_otvets
     Public REMFU As Boolean
     Public REMED As Boolean
-
-    Private Sub service_add_otvets_Activated(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Activated
-        
-
-    End Sub
+    Public EDT As Boolean = False
 
     Private Sub cmbTip_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbTip.SelectedIndexChanged
 
@@ -226,8 +222,6 @@
 
     End Sub
 
-
-
     Private Sub Base_R()
 
         Dim rs As ADODB.Recordset 'Объявляем рекордсет
@@ -262,7 +256,7 @@
 
                 With rs
 
-                     Select Case chcClose.Checked
+                    Select Case chcClose.Checked
 
                         Case True
 
@@ -284,8 +278,6 @@
                             End If
 
                     End Select
-
-
 
                     'If Len(UserName11) = 0 Then UserName11 = UserId & "-on-" & ComputerName
                     '.Fields("UserName") = UserName11
@@ -317,7 +309,7 @@
                 rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
                 With rs
-                   Select Case chcClose.Checked
+                    Select Case chcClose.Checked
 
                         Case True
 
@@ -348,13 +340,7 @@
 
         End Select
 
-
-
-
-
     End Sub
-
-
 
     Private Sub cmdAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdAdd.Click
 
@@ -418,7 +404,7 @@
 
         Else
 
-            Call frmserviceDesc.load_rplus(frmserviceDesc.r1COUNT)
+            Call frmserviceDesc.load_rplus(frmserviceDesc.r1COUNT, frmserviceDesc.lvRem2)
 
         End If
 
@@ -462,6 +448,7 @@
         SendFonts(Me)
 
         Dim LNGIniFile As New IniFile(sLANGPATH)
+
         Call frmservice_add_otvets_Lang()
 
         Select Case frmserviceDesc.ZaiavkR

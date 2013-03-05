@@ -13,6 +13,7 @@ Public Class frmserviceDesc
     Public ZaiavkR As Boolean
     Public ZaiavkC As Integer
     Private FINDTXT_ As String
+    Private _sTMP As String
 
     Private Sub lstGroups_AfterSelect(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TreeViewEventArgs) Handles lstGroups.AfterSelect
         btnSBTAdd.Enabled = True
@@ -438,15 +439,15 @@ Public Class frmserviceDesc
         Next
 
 
-        Call load_rplus(r1COUNT)
+        Call _load_rplus(r1COUNT, lvRem2)
 
     End Sub
 
-    Public Sub load_rplus(ByVal sSID As Integer)
-
+    Private Sub _load_rplus(ByVal sSID As Integer, ByVal sLIST As ListView)
         If sSID = 0 Then Exit Sub
 
-        On Error GoTo err_1
+        On Error GoTo err1_
+
         Dim unam As String
 
         lvRem2.Items.Clear()
@@ -493,6 +494,21 @@ Public Class frmserviceDesc
         End If
 
 
+        Call load_rplus(sSID, sLIST)
+
+err1_:
+    End Sub
+
+    Public Sub load_rplus(ByVal sSID As Integer, ByVal sLIST As ListView)
+
+        Dim unam As String
+
+        sLIST.Items.Clear()
+
+
+        Dim rs As ADODB.Recordset 'Объявляем рекордсет
+        Dim sSQL As String 'Переменная, где будет размещён SQL запрос
+
         sSQL = "SELECT COUNT(*) AS t_number FROM remonty_plus WHERE id_rem=" & sSID
         rs = New ADODB.Recordset
         rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
@@ -504,7 +520,6 @@ Public Class frmserviceDesc
         rs = Nothing
 
         If unam = 0 Then Exit Sub
-
 
         rs = New ADODB.Recordset
         sSQL = "SELECT * FROM remonty_plus WHERE id_rem =" & sSID
@@ -519,24 +534,24 @@ Public Class frmserviceDesc
             .MoveFirst()
             Do While Not .EOF
 
-                lvRem2.Items.Add(.Fields(0).Value) 'col no. 1
+                sLIST.Items.Add(.Fields(0).Value) 'col no. 1
 
                 If Not IsDBNull(.Fields("data").Value) Then
-                    lvRem2.Items(CInt(intj)).SubItems.Add(.Fields("data").Value)
+                    sLIST.Items(CInt(intj)).SubItems.Add(.Fields("data").Value)
                 Else
-                    lvRem2.Items(CInt(intj)).SubItems.Add("")
+                    sLIST.Items(CInt(intj)).SubItems.Add("")
                 End If
 
                 If Not IsDBNull(.Fields("master").Value) Then
-                    lvRem2.Items(CInt(intj)).SubItems.Add(.Fields("master").Value)
+                    sLIST.Items(CInt(intj)).SubItems.Add(.Fields("master").Value)
                 Else
-                    lvRem2.Items(CInt(intj)).SubItems.Add("")
+                    sLIST.Items(CInt(intj)).SubItems.Add("")
                 End If
 
                 If Not IsDBNull(.Fields("otzyv").Value) Then
-                    lvRem2.Items(CInt(intj)).SubItems.Add(.Fields("otzyv").Value)
+                    sLIST.Items(CInt(intj)).SubItems.Add(.Fields("otzyv").Value)
                 Else
-                    lvRem2.Items(CInt(intj)).SubItems.Add("")
+                    sLIST.Items(CInt(intj)).SubItems.Add("")
                 End If
 
                 intj = intj + 1
@@ -549,17 +564,11 @@ Public Class frmserviceDesc
         rs.Close()
         rs = Nothing
 
-
-
-        ResList(Me.lvRem2)
+        ResList(sLIST)
 
         Exit Sub
 err_1:
         MsgBox(Err.Description, MsgBoxStyle.Information, ProGramName)
-    End Sub
-
-    Private Sub lvRem_ClientSizeChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvRem.ClientSizeChanged
-
     End Sub
 
     Private Sub lvRem_ColumnClick(ByVal sender As Object, ByVal e As System.Windows.Forms.ColumnClickEventArgs) Handles lvRem.ColumnClick
@@ -605,6 +614,8 @@ err_1:
 
     Public Sub Load_Z_Form(Optional ByVal sSID As Integer = 0)
         If lvRem.Items.Count = 0 Then Exit Sub
+
+        frmService_add.Height = 535
 
         Dim z As Integer
 
@@ -670,7 +681,17 @@ err_1:
 
                 If Not IsDBNull(.Fields("MeMo").Value) Then frmService_add.txtComent.Text = .Fields("MeMo").Value 'Комментарий
 
-                If Not IsDBNull(.Fields("Summ").Value) Then frmService_add.RemCashe.Text = .Fields("Summ").Value 'Комментарий
+                If Not IsDBNull(.Fields("Summ").Value) Then frmService_add.RemCashe.Text = .Fields("Summ").Value 'Сумма
+
+                If Not IsDBNull(.Fields("GARANT").Value) Then
+                    frmService_add.dtGarRem.Value = .Fields("GARANT").Value 'Гарантия
+                Else
+
+                    frmService_add.dtGarRem.Value = Date.Today
+
+                End If
+
+
 
                 '.Fields("Summ").Value = RemCashe.Text 'Сумма
 
@@ -704,10 +725,16 @@ err_1:
 
     Private Sub frmserviceDesc_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
-
         frmComputers.OneStart = 0
 
+        On Error Resume Next
         btnSearch.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\search.png")
+        EditService.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\editservice.png")
+        DeleteService.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\delete.png")
+        MnuSendEmail.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\sendmail.png")
+        mnu_Z_to_Office.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\serviceprint.png")
+        mnu_z_rasp.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\servicerasp.png")
+
 
         Me.Cursor = Cursors.WaitCursor
         Me.Show()
@@ -739,8 +766,6 @@ err_1:
         End If
 
 
-
-
         Me.Cursor = Cursors.Default
 
         frmComputers.OneStart = 1
@@ -750,7 +775,6 @@ err_1:
     Private Sub R_T_LOAD_1()
         Call RefFilTree(Me.lstGroups)
     End Sub
-
 
     Private Sub chkNZ_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkNZ.CheckedChanged
 
@@ -1592,8 +1616,6 @@ Error_:
 
     End Sub
 
-
-
     Private Sub txtSearch_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSearch.KeyDown
 
         Select Case e.KeyCode
@@ -1610,12 +1632,7 @@ Error_:
 
     End Sub
 
-    Private Sub btnSBTAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-
-
-    End Sub
-
-    Private Sub lvRem2_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs)
+    Private Sub lvRem2_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvRem2.DoubleClick
 
         If lvRem2.Items.Count = 0 Then Exit Sub
 
@@ -1676,14 +1693,9 @@ Error_:
         rs1.Close()
         rs1 = Nothing
 
-
         frmservice_add_otvets.ShowDialog(Me)
 
-
-
     End Sub
-
-
 
     Private Sub DELETE_SERVICES(Optional ByVal ssid As Integer = 0)
 
@@ -1742,7 +1754,6 @@ Error_:
 
 
     End Sub
-
 
     Private Sub CheckBox2_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckBox2.CheckedChanged
         On Error GoTo err_
@@ -1852,10 +1863,6 @@ err_:
 
     End Sub
 
-    Private Sub txtSearch_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtSearch.TextChanged
-
-    End Sub
-
     Private Sub treebranche_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles treebranche.SelectedIndexChanged
 
         Dim objIniFile As New IniFile(PrPath & "base.ini")
@@ -1914,6 +1921,12 @@ Err_1:
     End Sub
 
     Private Sub ToolStripButton2_Click(sender As System.Object, e As System.EventArgs) Handles btnSBTAdd.Click
+      
+        Call ADD_WORK()
+
+    End Sub
+
+    Private Sub ADD_WORK()
         On Error GoTo err_1
 
         If lvRem.Items.Count = 0 Then Exit Sub
@@ -1947,10 +1960,18 @@ Err_1:
         Exit Sub
 err_1:
         MsgBox(Err.Description, MsgBoxStyle.Information, ProGramName)
-
     End Sub
 
     Private Sub ToolStripButton1_Click_1(sender As System.Object, e As System.EventArgs) Handles btnRemDel.Click
+
+        If uLevelRepDel = False And uLevel <> "Admin" Then Exit Sub
+
+        Call DELETE_Z()
+
+    End Sub
+
+    Private Sub DELETE_Z()
+
         If lvRem.Items.Count = 0 Then Exit Sub
 
         For z = 0 To lvRem.SelectedItems.Count - 1
@@ -1960,7 +1981,6 @@ err_1:
 
         Dim intj As Integer = 0
         Dim intj1 As Integer = 0
-
 
         '   If MsgBox("Вы собираетесь удалить заявки, продолжить?", MsgBoxStyle.YesNo, ProGramName) = MsgBoxResult.Yes Then
 
@@ -2023,8 +2043,6 @@ err_1:
         Call REMONT_SEND_MASTER(r1COUNT)
     End Sub
 
-
-
     Private Sub btn_Z_to_Office_Click(sender As System.Object, e As System.EventArgs) Handles btn_Z_to_Office.Click
         If lvRem.Items.Count = 0 Then Exit Sub
 
@@ -2084,24 +2102,6 @@ err_1:
     End Sub
 
     Private Sub МатериальныйПропускToolStripMenuItem1_Click(sender As System.Object, e As System.EventArgs) Handles btn_MAT_to_Office.Click
-
-        'Фамилия:
-        'Имя:
-        'Отчество:
-
-        '        Количество(мест) : ___________()
-        '        Что(выносит(вносит))
-
-        'Марка:
-        '        Заводской(номер)
-        '        Инв.номер()
-
-        'Организация – собственник оборудования:
-        'Дата: “___”_______ 2012 г.
-
-        'Печать:
-        'Подпись лица, выдавшего пропуск:
-
 
         If lvRem.Items.Count = 0 Then Exit Sub
 
@@ -2163,4 +2163,191 @@ err_1:
 
     End Sub
 
+    Private Sub lvRem_MouseUp(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles lvRem.MouseUp
+        If lvRem.Items.Count = 0 Then Exit Sub
+
+        If e.Button = Windows.Forms.MouseButtons.Right Then
+            CMServices.Show(CType(sender, Control), e.Location)
+
+            Call MNU_SERVICES_BUTTON(lvRem, "lvRem")
+
+        Else
+
+        End If
+    End Sub
+
+    Private Sub MNU_SERVICES_BUTTON(ByVal lvServices As ListView, ByVal sTMP As String)
+
+        _sTMP = sTMP
+
+        Dim z As Integer
+        Dim rCOUNT As Integer
+
+        For z = 0 To lvServices.SelectedItems.Count - 1
+            rCOUNT = (lvServices.SelectedItems(z).Text)
+        Next
+
+        If rCOUNT = 0 Then Exit Sub
+
+        Dim unam As String
+
+        Select Case sTMP
+
+            Case "lvRem"
+                EditService.Visible = True
+                DeleteService.Visible = True
+                MnuSendEmail.Visible = True
+                mnu_Z_to_Office.Visible = True
+                mnu_z_rasp.Visible = True
+                addServiseWork.Visible = True
+
+                Dim rs As ADODB.Recordset 'Объявляем рекордсет
+                Dim sSQL As String 'Переменная, где будет размещён SQL запрос
+
+                sSQL = "SELECT zakryt FROM Remont WHERE id=" & rCOUNT
+                rs = New ADODB.Recordset
+                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+                With rs
+                    unam = .Fields("zakryt").Value
+                End With
+                rs.Close()
+                rs = Nothing
+
+
+                If unam = "1" Or unam = True Then
+                    mnu_z_rasp.Enabled = False
+                    MnuSendEmail.Enabled = False
+                    addServiseWork.Enabled = False
+                Else
+                    mnu_z_rasp.Enabled = True
+                    MnuSendEmail.Enabled = True
+                    addServiseWork.Enabled = True
+                End If
+
+            Case "lvRem2"
+
+                EditService.Visible = True
+                DeleteService.Visible = True
+                MnuSendEmail.Visible = False
+                mnu_Z_to_Office.Visible = False
+                mnu_z_rasp.Visible = False
+                addServiseWork.Visible = False
+
+
+        End Select
+
+
+
+
+    End Sub
+
+    Private Sub EditService_Click(sender As System.Object, e As System.EventArgs) Handles EditService.Click
+
+        If uLevelRepEd = False And uLevel <> "Admin" Then Exit Sub
+        frmService_add.REMFU = False
+        Call Load_Z_Form()
+
+
+    End Sub
+
+    Private Sub MnuSendEmail_Click(sender As System.Object, e As System.EventArgs) Handles MnuSendEmail.Click
+        If lvRem.Items.Count = 0 Then Exit Sub
+
+        Dim z As Integer
+
+        For z = 0 To lvRem.SelectedItems.Count - 1
+            r1COUNT = (lvRem.SelectedItems(z).Text)
+        Next
+
+        If r1COUNT = 0 Then Exit Sub
+
+        Call REMONT_SEND_MASTER(r1COUNT)
+
+    End Sub
+
+    Private Sub mnu_Z_to_Office_Click(sender As System.Object, e As System.EventArgs) Handles mnu_Z_to_Office.Click
+        If lvRem.Items.Count = 0 Then Exit Sub
+
+        Dim z As Integer
+
+        For z = 0 To lvRem.SelectedItems.Count - 1
+            r1COUNT = (lvRem.SelectedItems(z).Text)
+        Next
+
+        If r1COUNT = 0 Then Exit Sub
+
+        Call SRASP2(r1COUNT, Directory.GetParent(Application.ExecutablePath).ToString & "\blanks\akt_z.dot")
+
+    End Sub
+
+    Private Sub mnu_z_rasp_Click(sender As System.Object, e As System.EventArgs) Handles mnu_z_rasp.Click
+        If lvRem.Items.Count = 0 Then Exit Sub
+
+        Dim z As Integer
+
+        For z = 0 To lvRem.SelectedItems.Count - 1
+            r1COUNT = (lvRem.SelectedItems(z).Text)
+        Next
+
+        If r1COUNT = 0 Then Exit Sub
+
+        Call SRASP(r1COUNT)
+    End Sub
+
+    Private Sub addServiseWork_Click(sender As System.Object, e As System.EventArgs) Handles addServiseWork.Click
+
+        Call ADD_WORK()
+
+    End Sub
+
+    Private Sub DeleteService_Click(sender As System.Object, e As System.EventArgs) Handles DeleteService.Click
+
+        If uLevelRepDel = False And uLevel <> "Admin" Then Exit Sub
+
+        Select Case _sTMP
+
+            Case "lvRem"
+
+                Call DELETE_Z()
+
+            Case "lvRem2"
+                If lvRem2.Items.Count = 0 Then Exit Sub
+
+                For z = 0 To lvRem2.SelectedItems.Count - 1
+                    rCOUNT = (lvRem2.SelectedItems(z).Text)
+                Next
+
+                Dim rs1 As ADODB.Recordset
+                rs1 = New ADODB.Recordset
+                rs1.Open("Delete FROM remonty_plus WHERE id=" & rCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs1 = Nothing
+
+                Call load_rplus(r1COUNT, lvRem2)
+
+        End Select
+
+
+    End Sub
+
+    Private Sub lvRem2_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles lvRem2.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub lvRem2_MouseUp(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles lvRem2.MouseUp
+        If lvRem2.Items.Count = 0 Then Exit Sub
+
+        If e.Button = Windows.Forms.MouseButtons.Right Then
+            CMServices.Show(CType(sender, Control), e.Location)
+
+            Call MNU_SERVICES_BUTTON(lvRem2, "lvRem2")
+
+        Else
+
+        End If
+    End Sub
+
+    Private Sub lvRem_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles lvRem.SelectedIndexChanged
+
+    End Sub
 End Class

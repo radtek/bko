@@ -436,7 +436,6 @@ err_:
             If Not IsDBNull(.Fields("Balans").Value) Then frmComputers.chkOTHNNb.Checked = .Fields("Balans").Value
             If Not IsDBNull(.Fields("PCL").Value) Then unaPCL = .Fields("PCL").Value
 
-
             If frmComputers.chkSNMP.Checked = True Or 0 Then
                 'frmComputers.chkSNMP.Visible = True
                 frmComputers.lblSNMP.Visible = True
@@ -448,7 +447,6 @@ err_:
                 frmComputers.txtSNMP.Visible = False
                 frmComputers.gbSNMP.Visible = False
             End If
-
 
         End With
 

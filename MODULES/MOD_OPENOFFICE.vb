@@ -7906,7 +7906,7 @@ err_:
         tipot = doc
 
 
-        Dim sTEXT, sMASTER, sISTOCHNIK, sDATE, sTIP, Sorganization, sMEMO, stTIME, stDATE, spTIME, spDATE, sRAB, sSERNUM, spCena, sTIPteh, sBIGBOSS As String
+        Dim sTEXT, sMASTER, sISTOCHNIK, sDATE, sTIP, Sorganization, sMEMO, stTIME, stDATE, spTIME, spDATE, sRAB, sSERNUM, spCena, sTIPteh, sBIGBOSS, sGAR As String
         Dim sIDCMP As Integer
 
         sSQL = "SELECT * FROM CONFIGURE"
@@ -7940,6 +7940,7 @@ err_:
             If Not IsDBNull(.Fields("stoptime").Value) Then spTIME = .Fields("stoptime").Value
             If Not IsDBNull(.Fields("stopdate").Value) Then spDATE = .Fields("stopdate").Value
             If Not IsDBNull(.Fields("Summ").Value) Then spCena = .Fields("Summ").Value
+            If Not IsDBNull(.Fields("GARANT").Value) Then sGAR = .Fields("GARANT").Value
 
         End With
         rs.Close()
@@ -7975,7 +7976,7 @@ err_:
                     If Len(sRAB) = 0 Then
                         If Not IsDBNull(.Fields("otzyv").Value) Then sRAB = .Fields("otzyv").Value
                     Else
-                        If Not IsDBNull(.Fields("otzyv").Value) Then sRAB = sRAB & ", " & .Fields("otzyv").Value
+                        If Not IsDBNull(.Fields("otzyv").Value) Then sRAB = sRAB & vbNewLine & vbNewLine & .Fields("otzyv").Value
                     End If
 
                     .MoveNext()
@@ -8266,7 +8267,11 @@ err_:
                 oSrch.setReplaceString(d(2))
                 Debug.Print(oDoc.replaceAll(oSrch))
 
+                oSrch.setSearchString("#garant_Rem")
+                oSrch.setReplaceString(sGAR)
+                Debug.Print(oDoc.replaceAll(oSrch))
 
+                '#garant_Rem
                 '#date #time
                 '#organization
 
@@ -8644,8 +8649,22 @@ err_:
                 End With
                 Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
 
-                '#date
-                '#time
+                With Wrd.Selection.Find
+                    .Text = "#garant_Rem"
+                    .Replacement.Text = sGAR
+                    .Forward = True
+                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Format = False
+                    .MatchCase = True
+                    .MatchWholeWord = False
+                    .MatchWildcards = False
+                    ' .MatchSoundsLike = False
+                    .MatchAllWordForms = False
+                End With
+                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+
+
+                ' '#garant_Rem
 
                 WrdDc = Nothing
                 Wrd = Nothing

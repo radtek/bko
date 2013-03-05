@@ -8,8 +8,6 @@
         On Error GoTo err_
         Dim objIniFile As New IniFile(sLANGPATH)
 
-
-
         If Len(cmbIst.Text) = 0 Then
 
             MsgBox(objIniFile.GetString("frmService_add", "MSG2", "Не указан") & " " & objIniFile.GetString("frmService_add", "MSG3", "источник"), MsgBoxStyle.Information, ProGramName)
@@ -40,11 +38,9 @@
             Exit Sub
         End If
 
-
         Dim sSQL As String
         Dim unamZ As String
         Dim sCOUNTER As String
-
 
         Dim rs As ADODB.Recordset
 
@@ -76,18 +72,13 @@
 
                     End If
 
-
                     frmserviceDesc.rtxtC = .Fields("net_name").Value
                 End With
 
                 rs.Close()
                 rs = Nothing
 
-
-
-
         End Select
-
 
         rs = New ADODB.Recordset
         sSQL = "SELECT count(*) as t_n FROM Remont WHERE Id_Comp=" & frmComputers.sCOUNT & " AND PREF='" & frmComputers.sPREF & "'"
@@ -97,13 +88,11 @@
             sCOUNTER = .Fields("t_n").Value
         End With
 
-
         Dim ASRT As String
         ASRT = frmComputers.sCOUNT
 
         rs.Close()
         rs = Nothing
-
 
         If cmbAdd.Text = objIniFile.GetString("frmService_add", "MSG1", "Сохранить") Then
             sSQL = "SELECT * FROM Remont WHERE id=" & frmserviceDesc.rCOUNT
@@ -111,7 +100,6 @@
         Else
             sSQL = "SELECT * FROM Remont"
         End If
-
 
         rs = New ADODB.Recordset
         rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
@@ -132,8 +120,6 @@
                 'Else
                 .Fields("Id_Comp").Value = frmComputers.sCOUNT
                 'End If
-
-
 
                 .Fields("NomerRemKomp").Value = sCOUNTER + 1
                 .Fields("starttime").Value = strTime 'Физическое нажатие начала ремонта
@@ -157,6 +143,7 @@
             .Fields("Uroven").Value = cmbKrit.Text 'Тип
             .Fields("MeMo").Value = txtComent.Text 'Комментарий
             .Fields("Summ").Value = RemCashe.Text 'Сумма
+            .Fields("GARANT").Value = dtGarRem.Value 'Гарантия
 
             Select Case chkClose.Checked
 
@@ -187,7 +174,6 @@
         End With
         rs.Close()
         rs = Nothing
-
 
         If REMFU = True Or REMED = True Then
 
@@ -233,7 +219,6 @@
 
             End Select
 
-
         Else
             Call frmserviceDesc.LOAD_REPAIR(frmComputers.sCOUNT, frmserviceDesc.lvRem)
         End If
@@ -250,18 +235,23 @@ err_:
         MsgBox(Err.Description)
     End Sub
 
-
     Private Sub cmbCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbCancel.Click
 
         Me.Close()
 
     End Sub
 
-   
+    Private Sub frmService_add_Activated(sender As Object, e As System.EventArgs) Handles Me.Activated
+
+        If gbS.Visible = False Then
+            Me.Height = 535
+        Else
+            Me.Height = 683
+        End If
+
+    End Sub
 
     Private Sub frmService_add_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-
-
 
         SendFonts(Me)
 
@@ -273,6 +263,8 @@ err_:
             cmbAdd.Text = objIniFile.GetString("frmService_add", "MSG1", "Сохранить")
             'cmbAdd 
         Else
+            gbS.Visible = False
+            Me.Height = 535
 
         End If
 
@@ -310,6 +302,7 @@ err_:
             cmbTip.Enabled = False
             RemCashe.Enabled = False
             txtComent.Enabled = False
+            dtGarRem.Enabled = False
             'cmbAdd.Enabled = False
 
         Else
@@ -327,11 +320,18 @@ err_:
             cmbTip.Enabled = True
             RemCashe.Enabled = True
             txtComent.Enabled = True
+            dtGarRem.Enabled = True
             'cmbAdd.Enabled = True
 
         End If
 
+        Dim LNGIniFile As New IniFile(sLANGPATH)
 
+        lvRem2.Columns.Clear()
+        lvRem2.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem2_1", "id"), 20, HorizontalAlignment.Left)
+        lvRem2.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem2_2", "Дата"), 90, HorizontalAlignment.Left)
+        lvRem2.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem2_3", "Мастер"), 100, HorizontalAlignment.Left)
+        lvRem2.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem2_4", "Описание"), 300, HorizontalAlignment.Left)
 
     End Sub
 
@@ -352,6 +352,8 @@ err_:
             cmbTip.Enabled = False
             RemCashe.Enabled = False
             txtComent.Enabled = False
+            dtGarRem.Enabled = False
+            gbS.Enabled = False
             'cmbAdd.Enabled = False
 
         Else
@@ -369,11 +371,12 @@ err_:
             cmbTip.Enabled = True
             RemCashe.Enabled = True
             txtComent.Enabled = True
+            dtGarRem.Enabled = True
+            gbS.Enabled = True
             'cmbAdd.Enabled = True
 
         End If
 
     End Sub
-
 
 End Class

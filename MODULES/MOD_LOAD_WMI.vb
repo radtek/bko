@@ -685,12 +685,19 @@ err_:
             intj = intj + 1
         Next
 
+
+
+
+
+
+
         Exit Sub
 err_:
         'MsgBox(Err.Description)
     End Sub
 
     Private Sub wSYS()
+
         On Error GoTo err_
 
         Dim scope As New ManagementScope("\\" & strComputer & "\root\CIMV2", connection)
@@ -699,8 +706,6 @@ err_:
         Dim query As New ObjectQuery("SELECT * FROM Win32_OperatingSystem")
 
         Dim searcher As New ManagementObjectSearcher(scope, query)
-
-
 
         Dim intj As Integer = 1
         For Each queryObj As ManagementObject In searcher.Get()
@@ -714,8 +719,6 @@ err_:
             li.SubItems.Add(Date.Today)
             li.SubItems.Add(Date.Today)
             li.SubItems.Add(queryObj.Item("Manufacturer").ToString)
-
-
 
         Next
 

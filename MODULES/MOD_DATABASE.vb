@@ -45,8 +45,6 @@ Module MOD_Database
         DATAB = True
         sFile = Base_Name
 
-
-
         MyShadowPassword = ""
 
 
@@ -55,6 +53,8 @@ Module MOD_Database
         Else
         End If
         DB7 = New ADODB.Connection
+
+        DB_N = unamDB
 
         Select Case unamDB
 
@@ -116,9 +116,6 @@ Module MOD_Database
 
 
         End Select
-
-        DB_N = unamDB
-
 
 
         Exit Sub
