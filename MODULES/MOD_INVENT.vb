@@ -195,7 +195,7 @@
         rs = Nothing
 
         rs = New ADODB.Recordset
-        rs.Open("SELECT count(*) as t_n FROM kompy where Balans=true", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs.Open("SELECT count(*) as t_n FROM kompy where Balans=1", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
         With rs
             TEH19 = .Fields("t_n").Value
@@ -204,7 +204,7 @@
         rs = Nothing
 
         rs = New ADODB.Recordset
-        rs.Open("SELECT count(*) as t_n FROM kompy where Spisan=true", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs.Open("SELECT count(*) as t_n FROM kompy where Spisan=1", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
         With rs
             TEH20 = .Fields("t_n").Value

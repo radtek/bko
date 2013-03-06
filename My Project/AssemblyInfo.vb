@@ -12,10 +12,10 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("Программа учёта оргтехники")> 
 <Assembly: AssemblyCompany("Squee&Dragon")> 
 <Assembly: AssemblyProduct("База Компьютеров Организации")> 
-<Assembly: AssemblyCopyright("Copyright © Alex Plotnikov 2012")> 
+<Assembly: AssemblyCopyright("Copyright © Alex Plotnikov 2013")> 
 <Assembly: AssemblyTrademark("Squee&Dragon")> 
 
-<Assembly: ComVisible(False)> 
+<Assembly: ComVisible(True)> 
 
 'Следующий GUID служит для идентификации библиотеки типов, если этот проект будет видимым для COM
 <Assembly: Guid("9b10b4f3-a6b1-431e-887b-c1095cbcb7c5")> 
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' используя "*", как показано ниже:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("1.7.3.4")> 
-<Assembly: AssemblyFileVersion("1.7.3.56")> 
+<Assembly: AssemblyVersion("1.7.3.5")> 
+<Assembly: AssemblyFileVersion("1.7.3.78")> 

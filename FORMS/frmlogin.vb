@@ -204,7 +204,7 @@ START:
                 .Fields("SISADM").Value = "SISADM"
                 .Fields("Name_Prog").Value = "BKO.NET"
                 .Fields("Nr").Value = "Yes"
-                .Fields("access").Value = "1.7.3.5"
+                .Fields("access").Value = "1.7.3.5.1"
                 .Update()
             End With
             rs25.Close()
@@ -242,12 +242,13 @@ START:
             MsgBox("Пробуем внести изменения в базу, в случае не удачи пользуйтесь конвертором", MsgBoxStyle.Information, "BKO.NET - " & tVER)
 
             _DBALTER = True
-            'Вносим изменения в базу (для MS Access)
+
+            'Вносим изменения в базу
             Call ALTER_DB()
 
             If _DBALTER = True Then
 
-                MsgBox("Внесение изменений провалилось", MsgBoxStyle.Information, "BKO.NET - " & tVER)
+                MsgBox("Внесение изменений провалилось", MsgBoxStyle.Critical, "BKO.NET - " & tVER)
 
                 End
 
@@ -256,54 +257,6 @@ START:
                 GoTo START
 
             End If
-
-
-
-            'Select Case sVERSIA
-
-            '    Case "1.7.3.5"
-
-            '        _DBALTER = True
-            '        'Вносим изменения в базу (для MS Access)
-            '        Call ALTER_DB()
-
-            '        If _DBALTER = True Then
-
-            '            MsgBox("Внесение изменений провалилось", MsgBoxStyle.Information, "BKO.NET - " & tVER)
-
-            '            End
-
-            '        Else
-
-            '            GoTo START
-
-            '        End If
-
-            '    Case "1.7.4"
-
-            '        MsgBox("Внесение изменений провалилось", MsgBoxStyle.Information, "BKO.NET - " & tVER)
-
-            '        End
-
-            '    Case "1.7.4"
-
-            '        MsgBox("Внесение изменений провалилось", MsgBoxStyle.Information, "BKO.NET - " & tVER)
-
-            '        End
-
-            '    Case "1.7.3"
-
-            '        MsgBox("Внесение изменений провалилось", MsgBoxStyle.Information, "BKO.NET - " & tVER)
-
-            '        End
-
-            '    Case "1.7.3.4.1"
-
-            '        MsgBox("Внесение изменений провалилось", MsgBoxStyle.Information, "BKO.NET - " & tVER)
-
-            '        End
-
-            'End Select
 
 
         End If
@@ -499,7 +452,9 @@ START:
 
         Exit Sub
 err_:
-
+        txtPassword.Text = ""
+        txtPassword.Focus()
+        Me.Enabled = True
     End Sub
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click

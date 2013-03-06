@@ -361,6 +361,7 @@
     </None>
     <Compile Include="MODULES\ListViewComparer.vb">
     </Compile>
+    <Compile Include="MODULES\MOD_ALTER_DB.vb" />
     <Compile Include="MODULES\MOD_ASTRA_LOAD.vb" />
     <None Include="MODULES\MOD_CSV.vb" />
     <Compile Include="MODULES\MOD_GAR_CPL.vb" />
