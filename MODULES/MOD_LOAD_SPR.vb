@@ -1,7 +1,6 @@
-﻿Imports System.Threading
+﻿
 
 Module Mod_Load_SPR
-
     Public Sub LoadSPR()
 
         'frmComputers.Cursor = Cursors.WaitCursor
@@ -28,7 +27,6 @@ Module Mod_Load_SPR
         frmComputers.cmbNetVkl.Items.Add("On")
         frmComputers.cmbNetVkl.Items.Add("Off")
         frmComputers.cmbNetVkl.Items.Add("Defective")
-
 
 
         FillComboNET(frmComputers.PROizV1, "PROIZV", "SPR_PROIZV", "", False, True)
@@ -85,7 +83,6 @@ Module Mod_Load_SPR
         frmComputers.PROizV49.Items.AddRange(obj)
         frmComputers.PROizV50.Items.AddRange(obj)
         frmComputers.PROizV51.Items.AddRange(obj)
-
 
 
         FillComboNET(frmComputers.cmbPostav, "Name", "SPR_Postav", "", False, True)
@@ -191,7 +188,6 @@ Module Mod_Load_SPR
         frmComputers.cmbNETBranch.Items.AddRange(obj5)
         frmComputers.treebranche.Items.AddRange(obj5)
 
-        
 
         'Ответственный компьютеров
         FillComboNET(frmComputers.cmbResponsible, "Name", "SPR_OTV", "", False, True)
@@ -223,7 +219,7 @@ Module Mod_Load_SPR
 
         FillComboNET(frmComputers.txtUserName, "Name", "SPR_USER", "", False, True)
         FillComboNET(frmComputers.txtUserFIO, "A", "SPR_USER", "", False, True)
-        
+
 
         'frmSplash.lblLoadSPR.Text = "Построение дерева.."
 
@@ -233,20 +229,22 @@ Module Mod_Load_SPR
         'frmComputers.Cursor = Cursors.Default
 
         'OPTIC
-
     End Sub
 
-    Public Sub FillComboNET(ByVal pCombo As ComboBox, ByVal pField As String, ByVal pTable As String, Optional ByVal WHEREClause As String = "", Optional ByVal AddBlank As Boolean = False, Optional ByVal ClearFirst As Boolean = True, Optional ByVal PreserveValue As Boolean = True)
+    Public Sub FillComboNET(ByVal pCombo As ComboBox, ByVal pField As String, ByVal pTable As String,
+                            Optional ByVal WHEREClause As String = "", Optional ByVal AddBlank As Boolean = False,
+                            Optional ByVal ClearFirst As Boolean = True, Optional ByVal PreserveValue As Boolean = True)
         'On Error Resume Next
         On Error GoTo err_
 
         pCombo.Items.Clear()
 
 
-        Dim rs As ADODB.Recordset
+        Dim rs As Recordset
 
-        rs = New ADODB.Recordset
-        rs.Open("SELECT count(*) as t_n FROM " & pTable & " WHERE " & pField & "<>''", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockReadOnly)
+        rs = New Recordset
+        rs.Open("SELECT count(*) as t_n FROM " & pTable & " WHERE " & pField & "<>''", DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockReadOnly)
         Dim COUnT As String
         With rs
 
@@ -259,8 +257,9 @@ Module Mod_Load_SPR
 
         If COUnT > 0 Then
 
-            rs = New ADODB.Recordset
-            rs.Open("SELECT " & pField & " FROM " & pTable & " WHERE " & pField & "<>'' ORDER BY " & pField, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockReadOnly)
+            rs = New Recordset
+            rs.Open("SELECT " & pField & " FROM " & pTable & " WHERE " & pField & "<>'' ORDER BY " & pField, DB7,
+                    CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockReadOnly)
 
             With rs
                 .MoveFirst()
@@ -279,15 +278,8 @@ Module Mod_Load_SPR
         End If
 
 
-
-
         Exit Sub
-err_:
+        err_:
         MsgBox(Err.Description, MsgBoxStyle.Information, ProGramName)
     End Sub
-
-
-
-
-
 End Module

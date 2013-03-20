@@ -1,8 +1,8 @@
-﻿Imports System
-Imports System.IO
-Public Class frmSclad_treb
+﻿Imports System.IO
+Imports Microsoft.Office.Interop.Word
 
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVipiska.Click
+Public Class frmSclad_treb
+    Private Sub Button1_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnVipiska.Click
 
 
         On Error GoTo Error_
@@ -14,11 +14,11 @@ Public Class frmSclad_treb
         Dim tipot As String
         'On Error Resume Next
 
-        tipot = Directory.GetParent(Application.ExecutablePath).ToString & "/blanks/tr2.dot"
+        tipot = Directory.GetParent(System.Windows.Forms.Application.ExecutablePath).ToString & "/blanks/tr2.dot"
 
-        Dim CONFIGURE As ADODB.Recordset
-        CONFIGURE = New ADODB.Recordset
-        CONFIGURE.Open("SELECT * FROM CONFIGURE", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        Dim CONFIGURE As Recordset
+        CONFIGURE = New Recordset
+        CONFIGURE.Open("SELECT * FROM CONFIGURE", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With CONFIGURE
             oragn = .Fields("org").Value
@@ -28,9 +28,10 @@ Public Class frmSclad_treb
         CONFIGURE = Nothing
 
 
-        Dim rscount As ADODB.Recordset 'Объявляем рекордсет
-        rscount = New ADODB.Recordset
-        rscount.Open("SELECT COUNT(*) AS total_number FROM TrebOvanie", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        Dim rscount As Recordset 'Объявляем рекордсет
+        rscount = New Recordset
+        rscount.Open("SELECT COUNT(*) AS total_number FROM TrebOvanie", DB7, CursorTypeEnum.adOpenDynamic,
+                     LockTypeEnum.adLockOptimistic)
 
         Dim nNumb As String
         With rscount
@@ -52,15 +53,18 @@ Public Class frmSclad_treb
         Else
 
 
-            Dim BASECOMP As ADODB.Recordset
-            BASECOMP = New ADODB.Recordset
-            BASECOMP.Open("SELECT * FROM kompy", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            Dim BASECOMP As Recordset
+            BASECOMP = New Recordset
+            BASECOMP.Open("SELECT * FROM kompy", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
 
             With BASECOMP
                 .MoveFirst()
                 Do While Not .EOF
-                    If uname = .Fields("NET_NAME").Value & " (" & .Fields("filial").Value & "/" & .Fields("mesto").Value & ")" & " № " & .Fields("id").Value Then
+                    If _
+                        uname =
+                        .Fields("NET_NAME").Value & " (" & .Fields("filial").Value & "/" & .Fields("mesto").Value & ")" &
+                        " № " & .Fields("id").Value Then
                         uname = .Fields("id").Value
                     End If
                     .MoveNext()
@@ -72,9 +76,9 @@ Public Class frmSclad_treb
             BASECOMP = Nothing
 
 
-            Dim rs As ADODB.Recordset
-            rs = New ADODB.Recordset
-            rs.Open("SELECT * FROM TrebOvanie", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            Dim rs As Recordset
+            rs = New Recordset
+            rs.Open("SELECT * FROM TrebOvanie", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
             With rs
                 .AddNew()
@@ -98,7 +102,7 @@ Public Class frmSclad_treb
         End If
 
 
-         Select sOfficePACK
+        Select sOfficePACK
 
             Case "OpenOffice.org"
 
@@ -107,7 +111,7 @@ Public Class frmSclad_treb
 
                 Dim oSM As Object                 'Root object for accessing OpenOffice FROM VB
                 Dim oDesk, oDoc As Object 'First objects FROM the API
-                Dim arg(-1) As Object                 'Ignore it for the moment !
+                Dim arg(- 1) As Object                 'Ignore it for the moment !
                 Dim mmerge As Object
                 Dim objCoreReflection As Object ' objects from OOo API 
 
@@ -178,7 +182,7 @@ Public Class frmSclad_treb
                 Dim ASD As String
                 oSrch.setSearchString("price")
                 If Len(frmSclad.cf1) <> 0 Then
-                    ASD = Fix(frmSclad.cf1 * 1.18)
+                    ASD = Fix(frmSclad.cf1*1.18)
                     oSrch.setReplaceString(ASD)
                 Else
                     oSrch.setReplaceString("")
@@ -186,7 +190,7 @@ Public Class frmSclad_treb
                 Debug.Print(oDoc.replaceAll(oSrch))
 
                 oSrch.setSearchString("Cen_free")
-                oSrch.setReplaceString(frmSclad.cf1 * Me.txtkol.Text)
+                oSrch.setReplaceString(frmSclad.cf1*Me.txtkol.Text)
                 Debug.Print(oDoc.replaceAll(oSrch))
 
                 oSrch.setSearchString("Lic3")
@@ -197,16 +201,16 @@ Public Class frmSclad_treb
 
             Case Else
 
-                Dim Wrd As Word.Application
-                Dim WrdDc As Word.Document
-                Wrd = New Word.Application
+                Dim Wrd As Application
+                Dim WrdDc As Document
+                Wrd = New Application
 
-                Dim oDoc As Word.Document
-                Dim oTable As Word.Table
-                Dim oPara1 As Word.Paragraph, oPara2 As Word.Paragraph
-                Dim oPara3 As Word.Paragraph, oPara4 As Word.Paragraph
-                Dim oRng As Word.Range
-                Dim oShape As Word.InlineShape
+                Dim oDoc As Document
+                Dim oTable As Table
+                Dim oPara1 As Paragraph, oPara2 As Paragraph
+                Dim oPara3 As Paragraph, oPara4 As Paragraph
+                Dim oRng As Range
+                Dim oShape As InlineShape
                 Dim oChart As Object
                 Dim Pos As Double
 
@@ -220,7 +224,7 @@ Public Class frmSclad_treb
                     .Text = "nom"
                     .Replacement.Text = Me.txtNom.Text
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -228,13 +232,13 @@ Public Class frmSclad_treb
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "datsost"
                     .Replacement.Text = Date.Today
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -242,13 +246,13 @@ Public Class frmSclad_treb
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "org"
                     .Replacement.Text = oragn
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -256,13 +260,13 @@ Public Class frmSclad_treb
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "Lic1"
                     .Replacement.Text = Me.cmbLich.Text
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -270,13 +274,13 @@ Public Class frmSclad_treb
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "Lic2"
                     .Replacement.Text = Me.cmbLich2.Text
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -284,13 +288,13 @@ Public Class frmSclad_treb
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "kol"
                     .Replacement.Text = Me.txtkol.Text
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -298,13 +302,13 @@ Public Class frmSclad_treb
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "pol"
                     .Replacement.Text = Me.Combo3.Text
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -312,13 +316,13 @@ Public Class frmSclad_treb
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "otpr"
                     .Replacement.Text = frmSclad.otd1
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -326,13 +330,13 @@ Public Class frmSclad_treb
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "otp"
                     .Replacement.Text = Me.txtkol.Text
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -340,13 +344,13 @@ Public Class frmSclad_treb
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "ot1p"
                     .Replacement.Text = Me.Text1.Text
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -354,13 +358,13 @@ Public Class frmSclad_treb
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "po1l"
                     .Replacement.Text = Me.Text2.Text
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -368,15 +372,15 @@ Public Class frmSclad_treb
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
         End Select
 
 
-
-        Dim Sclad As ADODB.Recordset
-        Sclad = New ADODB.Recordset
-        Sclad.Open("SELECT * FROM Sclad where number =" & frmSclad.scCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        Dim Sclad As Recordset
+        Sclad = New Recordset
+        Sclad.Open("SELECT * FROM Sclad where number =" & frmSclad.scCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                   LockTypeEnum.adLockOptimistic)
 
         With Sclad
             '.Edit
@@ -392,15 +396,15 @@ Public Class frmSclad_treb
         Me.Close()
 
         Exit Sub
-Error_:
+        Error_:
         MsgBox(Err.Description)
     End Sub
-    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
-        Me.Close()
 
+    Private Sub Button2_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCancel.Click
+        Me.Close()
     End Sub
 
-    Private Sub frmSclad_treb_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+    Private Sub frmSclad_treb_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
 
         SendFonts(Me)
 
@@ -410,9 +414,9 @@ Error_:
         FillComboNET(Me.cmbLich2, "Name", "SPR_OTV", "", False, True)
         FillComboNET(Me.cmbLich3, "Name", "SPR_OTV", "", False, True)
 
-        Dim rs As ADODB.Recordset
-        rs = New ADODB.Recordset
-        rs.Open("SELECT * FROM kompy", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        Dim rs As Recordset
+        rs = New Recordset
+        rs.Open("SELECT * FROM kompy", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         FillComboNET(Me.Combo2, "filial", "SPR_FILIAL", "", False, True)
 
@@ -421,8 +425,12 @@ Error_:
         With rs
             .MoveFirst()
             Do While Not .EOF
-                If .Fields("TipTehn").Value = "Printer" Or .Fields("TipTehn").Value = "PC" Or .Fields("TipTehn").Value = "KOpir" Or .Fields("TipTehn").Value = "MFU" Then
-                    Combo1.Items.Add(.Fields("NET_NAME").Value & " (" & .Fields("filial").Value & "/" & .Fields("mesto").Value & ")" & " № " & .Fields("id").Value)
+                If _
+                    .Fields("TipTehn").Value = "Printer" Or .Fields("TipTehn").Value = "PC" Or
+                    .Fields("TipTehn").Value = "KOpir" Or .Fields("TipTehn").Value = "MFU" Then
+                    Combo1.Items.Add(
+                        .Fields("NET_NAME").Value & " (" & .Fields("filial").Value & "/" & .Fields("mesto").Value & ")" &
+                        " № " & .Fields("id").Value)
                 Else
                 End If
                 .MoveNext()
@@ -431,15 +439,15 @@ Error_:
         End With
         rs.Close()
         rs = Nothing
-
     End Sub
 
-    Private Sub Combo2_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Combo2.SelectedIndexChanged
-        Dim rs As New ADODB.Recordset 'Объявляем рекордсет
+    Private Sub Combo2_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles Combo2.SelectedIndexChanged
+        Dim rs As New Recordset 'Объявляем рекордсет
         Dim sSQL As String 'Переменная, где будет размещён SQL запрос
 
         sSQL = "SELECT * FROM SPR_OTD_FILIAL WHERE Filial='" & Combo2.Text & "' ORDER BY N_Otd"
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         On Error GoTo Error_
         Combo3.Items.Clear()
@@ -459,7 +467,6 @@ Error_:
         rs.Close()
         rs = Nothing
 
-Error_:
+        Error_:
     End Sub
-
 End Class

@@ -1,8 +1,8 @@
-﻿Public Class frmLOG
+﻿Friend Class frmLOG
     Private LOGLOAD As Decimal
     Private m_SortingColumn As ColumnHeader
 
-    Private Sub RadioButton1_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RBPrLog.CheckedChanged
+    Private Sub RadioButton1_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles RBPrLog.CheckedChanged
 
         LOGLOAD = 0
 
@@ -10,7 +10,6 @@
             Call PROGRAMLOG_LOAD()
 
         End If
-
     End Sub
 
     Private Sub PROGRAMLOG_LOAD()
@@ -43,10 +42,11 @@
 
 
         Dim ZUG As Decimal = 0
-        Dim rscount As ADODB.Recordset 'Объявляем рекордсет
-        rscount = New ADODB.Recordset
+        Dim rscount As Recordset 'Объявляем рекордсет
+        rscount = New Recordset
 
-        rscount.Open("SELECT COUNT(*) AS total_number FROM T_Log", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rscount.Open("SELECT COUNT(*) AS total_number FROM T_Log", DB7, CursorTypeEnum.adOpenDynamic,
+                     LockTypeEnum.adLockOptimistic)
 
         With rscount
             ZUG = .Fields("total_number").Value
@@ -67,9 +67,9 @@
 
         If ZUG > 0 Then
 
-            Dim rs As ADODB.Recordset
-            rs = New ADODB.Recordset
-            rs.Open(sSQl, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            Dim rs As Recordset
+            rs = New Recordset
+            rs.Open(sSQl, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
             Dim intCount As Decimal = 0
             With rs
@@ -152,10 +152,11 @@ Err_:
 
 
         Dim ZUG As Decimal = 0
-        Dim rscount As ADODB.Recordset 'Объявляем рекордсет
-        rscount = New ADODB.Recordset
+        Dim rscount As Recordset 'Объявляем рекордсет
+        rscount = New Recordset
 
-        rscount.Open("SELECT COUNT(*) AS total_number FROM dvig", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rscount.Open("SELECT COUNT(*) AS total_number FROM dvig", DB7, CursorTypeEnum.adOpenDynamic,
+                     LockTypeEnum.adLockOptimistic)
 
         With rscount
             ZUG = .Fields("total_number").Value
@@ -172,11 +173,11 @@ Err_:
 
         If ZUG > 0 Then
 
-            Dim rs2 As ADODB.Recordset
+            Dim rs2 As Recordset
             Dim Namr
-            Dim rs As ADODB.Recordset
-            rs = New ADODB.Recordset
-            rs.Open(sSQl, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            Dim rs As Recordset
+            rs = New Recordset
+            rs.Open(sSQl, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
             Dim intCount As Decimal = 0
             With rs
@@ -188,8 +189,9 @@ Err_:
 
                         lvLOG.Items.Add(.Fields("id").Value) 'col no. 1
 
-                        rs2 = New ADODB.Recordset
-                        rs2.Open("SELECT id, NET_name FROM kompy WHERE id = " & .Fields("Id_Comp").Value, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs2 = New Recordset
+                        rs2.Open("SELECT id, NET_name FROM kompy WHERE id = " & .Fields("Id_Comp").Value, DB7,
+                                 CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                         With rs2
 
                             If Not IsDBNull(.Fields("NET_name").Value) Then Namr = .Fields("NET_name").Value
@@ -259,18 +261,16 @@ Err_:
         Me.Cursor = Cursors.Default
     End Sub
 
-    Private Sub rbMove_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbMove.CheckedChanged
+    Private Sub rbMove_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles rbMove.CheckedChanged
 
         LOGLOAD = 1
 
         If rbMove.Checked = True Then
             Call MOVE_LOG()
         End If
-
-
     End Sub
 
-    Private Sub rbUpdate_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbUpdate.CheckedChanged
+    Private Sub rbUpdate_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles rbUpdate.CheckedChanged
         LOGLOAD = 2
         Me.Cursor = Cursors.WaitCursor
 
@@ -284,25 +284,23 @@ Err_:
         Me.Cursor = Cursors.Default
     End Sub
 
-    Private Sub frmLOG_Activated(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Activated
+    Private Sub frmLOG_Activated(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Activated
         frmMain.SaveInfTehButton.Enabled = False
         frmMain.ToolStripDropDownButton1.Enabled = False
     End Sub
 
-    Private Sub frmLOG_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+    Private Sub frmLOG_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
 
         SendFonts(Me)
 
         Call LANG_frmLOG()
 
-       
+
         DTLOG.Value = Date.Today.AddDays(-1)
         DTLOG1.Value = Date.Today
-
-        
     End Sub
 
-    Private Sub frmLOG_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Resize
+    Private Sub frmLOG_Resize(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Resize
         lvLOG.Width = Me.Width - 15
         lvLOG.Height = Me.Height - 110
     End Sub
@@ -323,10 +321,11 @@ Err_:
 
 
         Dim ZUG As Decimal = 0
-        Dim rscount As ADODB.Recordset 'Объявляем рекордсет
-        rscount = New ADODB.Recordset
+        Dim rscount As Recordset 'Объявляем рекордсет
+        rscount = New Recordset
 
-        rscount.Open("SELECT COUNT(*) AS total_number FROM Update_Log", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rscount.Open("SELECT COUNT(*) AS total_number FROM Update_Log", DB7, CursorTypeEnum.adOpenDynamic,
+                     LockTypeEnum.adLockOptimistic)
 
         With rscount
             ZUG = .Fields("total_number").Value
@@ -343,11 +342,11 @@ Err_:
 
         If ZUG > 0 Then
 
-            Dim rs2 As ADODB.Recordset
+            Dim rs2 As Recordset
             Dim Namr
-            Dim rs As ADODB.Recordset
-            rs = New ADODB.Recordset
-            rs.Open(sSQl, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            Dim rs As Recordset
+            rs = New Recordset
+            rs.Open(sSQl, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
             Dim intCount As Decimal = 0
             With rs
@@ -359,8 +358,9 @@ Err_:
 
                         lvLOG.Items.Add(.Fields("id").Value) 'col no. 1
 
-                        rs2 = New ADODB.Recordset
-                        rs2.Open("SELECT id, NET_name FROM kompy WHERE id = " & .Fields("Id_Comp").Value, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs2 = New Recordset
+                        rs2.Open("SELECT id, NET_name FROM kompy WHERE id = " & .Fields("Id_Comp").Value, DB7,
+                                 CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                         With rs2
 
                             If Not IsDBNull(.Fields("NET_name").Value) Then Namr = .Fields("NET_name").Value
@@ -424,7 +424,7 @@ Err_:
         Me.Cursor = Cursors.Default
     End Sub
 
-    Private Sub btnUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdate.Click
+    Private Sub btnUpdate_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnUpdate.Click
 
         Select Case LOGLOAD
 
@@ -441,14 +441,12 @@ Err_:
                 Call IZM_LOG()
 
         End Select
-
-
     End Sub
 
-    Private Sub lvLOG_ColumnClick(ByVal sender As Object, ByVal e As System.Windows.Forms.ColumnClickEventArgs) Handles lvLOG.ColumnClick
-        Dim new_sorting_column As ColumnHeader = _
-    lvLOG.Columns(e.Column)
-        Dim sort_order As System.Windows.Forms.SortOrder
+    Private Sub lvLOG_ColumnClick(ByVal sender As Object, ByVal e As ColumnClickEventArgs) Handles lvLOG.ColumnClick
+        Dim new_sorting_column As ColumnHeader =
+                lvLOG.Columns(e.Column)
+        Dim sort_order As SortOrder
         If m_SortingColumn Is Nothing Then
             sort_order = SortOrder.Ascending
         Else
@@ -477,7 +475,7 @@ Err_:
         lvLOG.Sort()
     End Sub
 
-    Private Sub lvLOG_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvLOG.SelectedIndexChanged
-
+    Private Sub lvLOG_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles lvLOG.SelectedIndexChanged
     End Sub
 End Class

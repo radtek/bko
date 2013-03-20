@@ -1,5 +1,4 @@
 ﻿Module MOD_ASTRA_LOAD
-
     Public Sub ASTRA_Load()
         On Error Resume Next
 
@@ -24,7 +23,6 @@
         frmComputers.txtChip.Text = everIniFile.GetString("Other", "ChipsetName", "")
         frmComputers.txtSN_MB.Text = everIniFile.GetString("BIOS", "BIOSID", "")
         frmComputers.PROizV5.Text = everIniFile.GetString("BIOS", "MotherBoardOEM", "")
-
 
 
         '################
@@ -102,8 +100,6 @@
         'frmComputers.PROizV10.Text = everIniFile.GetString("HDD", "ATA1|Производитель ATA-устройства|Фирма", "")
 
 
-
-
         '################
         'SVGA
 
@@ -113,14 +109,12 @@
         frmComputers.PROizV14.Text = everIniFile.GetString("Video", "VideoChipVendor", "")
 
 
-
         '################
         'Звуковая карта
 
         frmComputers.cmbSound.Text = everIniFile.GetString("Other", "CodecName", "")
         frmComputers.PROizV16.Text = everIniFile.GetString("Other", "SoundSubsystemVendor", "")
         'frmComputers.cmbSound.Text = Replace(frmComputers.cmbSound.Text, "'", " ", "")
-
 
 
         '################
@@ -137,8 +131,6 @@
         frmComputers.txtOPTICs2.Text = everIniFile.GetString("ATAPI", "2ndWriteSpeed", "")
 
 
-
-
         '################
         'Сетевая карта
 
@@ -151,7 +143,6 @@
         frmComputers.txtNETip2.Text = everIniFile.GetString("Network", "2ndIPAddress", "")
         frmComputers.txtNETmac2.Text = everIniFile.GetString("Network", "2ndMACAddress", "")
         frmComputers.PROizV21.Text = everIniFile.GetString("Network", "2ndPCINetworkVendor", "")
-
 
 
         '################
@@ -173,7 +164,6 @@
 
         frmComputers.cmbModem.Text = everIniFile.GetString("Other", "1ModemModel", "")
         frmComputers.PROizV24.Text = everIniFile.GetString("Other", "1ModemVendor", "")
-
 
 
         '################
@@ -203,11 +193,8 @@
         'frmComputers.txtPrint1Port.Text = everIniFile.GetString("Other", "Принтеры1|Свойства принтера|Порт принтера", "")
 
 
-
-
         'Установленное програмное обеспечение
         textpo()
-
     End Sub
 
     Private Sub textpo()
@@ -276,10 +263,7 @@
         'intcount = intcount + 1
 
         Exit Sub
-Err_handler:
+        Err_handler:
         MsgBox(Err.Description)
-
-
     End Sub
-
 End Module

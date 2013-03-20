@@ -3,7 +3,8 @@
     Public REMED As Boolean
     Public EDT As Boolean = False
 
-    Private Sub cmbTip_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbTip.SelectedIndexChanged
+    Private Sub cmbTip_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbTip.SelectedIndexChanged
 
         Select Case cmbTip.Text
 
@@ -12,15 +13,15 @@
                 Me.Height = 330
 
                 gbExt.Visible = False
-                cmdAdd.Location = New System.Drawing.Size(6, 275)
-                cmdCancel.Location = New System.Drawing.Size(106, 275)
+                cmdAdd.Location = New Size(6, 275)
+                cmdCancel.Location = New Size(106, 275)
 
             Case Else
 
                 Me.Height = 464
                 gbExt.Visible = True
-                cmdAdd.Location = New System.Drawing.Size(6, 409)
-                cmdCancel.Location = New System.Drawing.Size(106, 409)
+                cmdAdd.Location = New Size(6, 409)
+                cmdCancel.Location = New Size(106, 409)
 
         End Select
 
@@ -28,11 +29,12 @@
 
             Case "C"
 
-                Dim rs As ADODB.Recordset
+                Dim rs As Recordset
                 Dim A, B, c As String
-                rs = New ADODB.Recordset
+                rs = New Recordset
 
-                rs.Open("Select filial, mesto, kabn from kompy where id=" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs.Open("Select filial, mesto, kabn from kompy where id=" & frmComputers.sCOUNT, DB7,
+                        CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 With rs
                     A = .Fields("filial").Value
@@ -45,13 +47,15 @@
 
                 If Len(A) <> 0 Then
 
-                    rs = New ADODB.Recordset
-                    rs.Open("Select id, NET_NAME from kompy where filial='" & A & "'  Order by NET_NAME", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                    rs = New Recordset
+                    rs.Open("Select id, NET_NAME from kompy where filial='" & A & "'  Order by NET_NAME", DB7,
+                            CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 Else
 
-                    rs = New ADODB.Recordset
-                    rs.Open("Select id, NET_NAME from kompy where filial='' and mesto='" & B & "'  Order by NET_NAME", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                    rs = New Recordset
+                    rs.Open("Select id, NET_NAME from kompy where filial='' and mesto='" & B & "'  Order by NET_NAME",
+                            DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
 
                 End If
@@ -74,13 +78,7 @@
             Case Else
 
 
-
-
-
         End Select
-
-
-
     End Sub
 
     Private Sub Base_A()
@@ -102,11 +100,11 @@
         frmserviceDesc.EDTID = g(1)
 
 
-        Dim rs As ADODB.Recordset
+        Dim rs As Recordset
         Dim sSQL, sSQL1, uname As String
-        rs = New ADODB.Recordset
+        rs = New Recordset
         sSQL1 = "SELECT * FROM remonty_plus"
-        rs.Open(sSQL1, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
             .AddNew()
@@ -121,9 +119,9 @@
         rs = Nothing
 
 
-        rs = New ADODB.Recordset
+        rs = New Recordset
         sSQL = "SELECT * FROM Remont WHERE id=" & frmserviceDesc.r1COUNT
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
             .Fields("zakryt").Value = chcClose.Checked
@@ -139,10 +137,10 @@
         'Добавляем новый ремонт для выбранного объекта
         '#################################################
 
-        Dim rs1 As ADODB.Recordset
-        rs1 = New ADODB.Recordset
+        Dim rs1 As Recordset
+        rs1 = New Recordset
         sSQL = "SELECT * FROM kompy WHERE id=" & frmserviceDesc.EDTID
-        rs1.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs1
             uname = .Fields("filial").Value & "/" & .Fields("mesto").Value
@@ -155,9 +153,9 @@
         Dim strTime As String
         strTime = TimeString
 
-        rs = New ADODB.Recordset
+        rs = New Recordset
         sSQL = "SELECT * FROM Remont"
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
 
@@ -205,7 +203,6 @@
             End Select
 
 
-
             'If Len(UserName11) = 0 Then UserName11 = UserId & "-on-" & ComputerName
             '.Fields("UserName") = UserName11
             .Update()
@@ -218,13 +215,11 @@
         'Call serviceDesc.LOAD_REPAIR(serviceDesc.sCOUNT, serviceDesc.lvRem)
 
         Me.Close()
-
-
     End Sub
 
     Private Sub Base_R()
 
-        Dim rs As ADODB.Recordset 'Объявляем рекордсет
+        Dim rs As Recordset 'Объявляем рекордсет
         Dim sSQL As String
         Dim sSQL1 As String
 
@@ -236,8 +231,8 @@
             Case True
 
                 sSQL = "SELECT * FROM remonty_plus WHERE id=" & frmserviceDesc.rCOUNT
-                rs = New ADODB.Recordset
-                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 With rs
                     .Fields("otzyv").Value = txtOtzyv.Text
@@ -251,8 +246,8 @@
 
 
                 sSQL = "SELECT * FROM Remont WHERE id=" & frmserviceDesc.r1COUNT
-                rs = New ADODB.Recordset
-                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 With rs
 
@@ -288,9 +283,9 @@
 
             Case Else
 
-                rs = New ADODB.Recordset
+                rs = New Recordset
                 sSQL1 = "SELECT * FROM remonty_plus"
-                rs.Open(sSQL1, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 With rs
                     .AddNew()
@@ -304,9 +299,9 @@
                 rs = Nothing
 
 
-                rs = New ADODB.Recordset
+                rs = New Recordset
                 sSQL = "SELECT * FROM Remont WHERE id=" & frmserviceDesc.r1COUNT
-                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 With rs
                     Select Case chcClose.Checked
@@ -339,10 +334,9 @@
                 rs = Nothing
 
         End Select
-
     End Sub
 
-    Private Sub cmdAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdAdd.Click
+    Private Sub cmdAdd_Click(ByVal sender As Object, ByVal e As EventArgs) Handles cmdAdd.Click
 
         Select Case cmbTip.Text
 
@@ -414,7 +408,6 @@
         Call REM_CHECK()
 
         Me.Close()
-
     End Sub
 
     'Private Sub cmbMaster_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cmbMaster.TextChanged, cmbStat.TextChanged, cmbOtv.TextChanged, cmbKrit.TextChanged, cmbObt.TextChanged
@@ -443,7 +436,7 @@
     '    End If
     'End Sub
 
-    Private Sub frmservice_add_otvets_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+    Private Sub frmservice_add_otvets_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
 
         SendFonts(Me)
 
@@ -470,15 +463,13 @@
         Me.Height = 330
         gbExt.Visible = False
 
-        cmdAdd.Location = New System.Drawing.Size(6, 275)
-        cmdCancel.Location = New System.Drawing.Size(106, 275)
+        cmdAdd.Location = New Size(6, 275)
+        cmdCancel.Location = New Size(106, 275)
 
         FillComboNET(Me.cmbStat, "name", "spr_vip", "", False, True)
         FillComboNET(Me.cmbOtv, "Name", "SPR_Master", "", False, True)
         FillComboNET(Me.cmbKrit, "Uroven", "SPR_Uroven", "", False, True)
         FillComboNET(Me.cmbMaster, "Name", "SPR_Master", "", False, True)
-
-
 
 
         dtPic.Value = Date.Today

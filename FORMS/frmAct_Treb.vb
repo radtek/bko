@@ -1,25 +1,24 @@
 ﻿Imports System.IO
+Imports Microsoft.Office.Interop.Word
+
 Public Class frmAct_Treb
     Public dSID As Integer
     Private eDTI As Boolean
 
-    Private Sub frmAct_Treb_Activated(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Activated
+    Private Sub frmAct_Treb_Activated(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Activated
 
         frmMain.SaveInfTehButton.Enabled = False
         frmMain.ToolStripDropDownButton1.Enabled = False
-
     End Sub
 
-    Private Sub frmAct_Treb_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+    Private Sub frmAct_Treb_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
 
         SendFonts(Me)
 
-        TabControl1.Font = New Font(FontN, fontS)
+        TabControl1.Font = New Drawing.Font(FontN, fontS)
         SendFonts(TabControl1.TabPages(0))
         SendFonts(TabControl1.TabPages(1))
         SendFonts(TabControl1.TabPages(2))
-
-
 
 
         Call frmAct_treb_LANG()
@@ -27,19 +26,17 @@ Public Class frmAct_Treb
         Call ACTOS3_LOAD()
         Call ACTVV_LOAD()
         Call TREB_LOAD()
-
-
-
     End Sub
 
     Public Sub ACTOS3_LOAD()
 
         lvACTSP.Items.Clear()
 
-        Dim rs As ADODB.Recordset
+        Dim rs As Recordset
         Dim iCount As String
-        rs = New ADODB.Recordset
-        rs.Open("SELECT count(*) as t_n FROM AKT_SP_OS3 where ID_COMP=" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open("SELECT count(*) as t_n FROM AKT_SP_OS3 where ID_COMP=" & frmComputers.sCOUNT, DB7,
+                CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
             iCount = .Fields("t_n").Value
@@ -51,8 +48,9 @@ Public Class frmAct_Treb
         If iCount = 0 Then Exit Sub
 
 
-        rs = New ADODB.Recordset
-        rs.Open("SELECT * FROM AKT_SP_OS3 where ID_COMP=" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open("SELECT * FROM AKT_SP_OS3 where ID_COMP=" & frmComputers.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
 
         Dim intCount As Decimal = 0
 
@@ -128,10 +126,11 @@ Public Class frmAct_Treb
     End Sub
 
     Public Sub ACTVV_LOAD()
-        Dim rs As ADODB.Recordset
+        Dim rs As Recordset
         Dim iCount As String
-        rs = New ADODB.Recordset
-        rs.Open("SELECT count(*) as t_n FROM ActOS where computer ='" & frmComputers.sCOUNT & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open("SELECT count(*) as t_n FROM ActOS where computer ='" & frmComputers.sCOUNT & "'", DB7,
+                CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
             iCount = .Fields("t_n").Value
@@ -143,8 +142,9 @@ Public Class frmAct_Treb
         If iCount = 0 Then Exit Sub
 
 
-        rs = New ADODB.Recordset
-        rs.Open("SELECT * FROM ActOS where computer='" & frmComputers.sCOUNT & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open("SELECT * FROM ActOS where computer='" & frmComputers.sCOUNT & "'", DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
 
         Dim intCount As Decimal = 0
 
@@ -199,10 +199,11 @@ Public Class frmAct_Treb
     End Sub
 
     Public Sub TREB_LOAD()
-        Dim rs As ADODB.Recordset
+        Dim rs As Recordset
         Dim iCount As String
-        rs = New ADODB.Recordset
-        rs.Open("SELECT count(*) as t_n FROM TrebOvanie where computer ='" & frmComputers.sCOUNT & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open("SELECT count(*) as t_n FROM TrebOvanie where computer ='" & frmComputers.sCOUNT & "'", DB7,
+                CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
             iCount = .Fields("t_n").Value
@@ -215,8 +216,9 @@ Public Class frmAct_Treb
 
         lvTREB.Items.Clear()
 
-        rs = New ADODB.Recordset
-        rs.Open("SELECT * FROM TrebOvanie where computer='" & frmComputers.sCOUNT & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open("SELECT * FROM TrebOvanie where computer='" & frmComputers.sCOUNT & "'", DB7,
+                CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         Dim intCount As Decimal = 0
 
@@ -268,13 +270,10 @@ Public Class frmAct_Treb
         ResList(Me.lvTREB)
     End Sub
 
-    Private Sub frmAct_Treb_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Resize
-
-       
-
+    Private Sub frmAct_Treb_Resize(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Resize
     End Sub
 
-    Private Sub btnASPadd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnASPadd.Click
+    Private Sub btnASPadd_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnASPadd.Click
 
         frm_os3.sEDT = False
 
@@ -292,7 +291,7 @@ Public Class frmAct_Treb
         frm_os3.ShowDialog(Me)
     End Sub
 
-    Private Sub lvACTSP_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvACTSP.Click
+    Private Sub lvACTSP_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lvACTSP.Click
         If lvACTSP.Items.Count = 0 Then Exit Sub
 
         Dim z As Integer
@@ -300,19 +299,17 @@ Public Class frmAct_Treb
         For z = 0 To lvACTSP.SelectedItems.Count - 1
             dSID = (lvACTSP.SelectedItems(z).Text)
         Next
-
-
-
     End Sub
 
-    Private Sub lvACTSP_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvACTSP.DoubleClick
+    Private Sub lvACTSP_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles lvACTSP.DoubleClick
         If lvACTSP.Items.Count = 0 Then Exit Sub
 
         frm_os3.sEDT = True
 
-        Dim rs As ADODB.Recordset
-        rs = New ADODB.Recordset
-        rs.Open("SELECT * FROM AKT_SP_OS3 WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        Dim rs As Recordset
+        rs = New Recordset
+        rs.Open("SELECT * FROM AKT_SP_OS3 WHERE id =" & dSID, DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
 
         With rs
 
@@ -333,17 +330,14 @@ Public Class frmAct_Treb
         rs = Nothing
 
 
-
-
-
         frm_os3.ShowDialog(Me)
     End Sub
 
-    Private Sub lvACTSP_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvACTSP.SelectedIndexChanged
-
+    Private Sub lvACTSP_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles lvACTSP.SelectedIndexChanged
     End Sub
 
-    Private Sub btnASPdel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnASPdel.Click
+    Private Sub btnASPdel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnASPdel.Click
 
         Dim objIniFile As New IniFile(sLANGPATH)
 
@@ -351,30 +345,32 @@ Public Class frmAct_Treb
         If dSID = 0 Then Exit Sub
 
 
-        If MsgBox(objIniFile.GetString("frmAct_Treb", "MSG1", "Вы уверены что хотите удалить"), MsgBoxStyle.YesNo, ProGramName) = MsgBoxResult.Yes Then
-            Dim rs As ADODB.Recordset
-            rs = New ADODB.Recordset
-            rs.Open("DELETE FROM AKT_SP_OS3 WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        If _
+            MsgBox(objIniFile.GetString("frmAct_Treb", "MSG1", "Вы уверены что хотите удалить"), MsgBoxStyle.YesNo,
+                   ProGramName) = MsgBoxResult.Yes Then
+            Dim rs As Recordset
+            rs = New Recordset
+            rs.Open("DELETE FROM AKT_SP_OS3 WHERE id =" & dSID, DB7, CursorTypeEnum.adOpenDynamic,
+                    LockTypeEnum.adLockOptimistic)
             rs = Nothing
 
             Call ACTOS3_LOAD()
 
         End If
-
     End Sub
 
-    Private Sub btnASPofsend_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnASPofsend.Click
+    Private Sub btnASPofsend_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnASPofsend.Click
         If lvACTSP.Items.Count = 0 Then Exit Sub
         If dSID = 0 Then Exit Sub
 
-        Dim rs As ADODB.Recordset
+        Dim rs As Recordset
 
         Dim ORG As String
         Dim u1, u2, u3, u4, u5, u6, u7, u8, u9, u10 As String
 
 
-        rs = New ADODB.Recordset
-        rs.Open("SELECT * FROM CONFIGURE", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open("SELECT * FROM CONFIGURE", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
             ORG = .Fields("org").Value
@@ -382,8 +378,9 @@ Public Class frmAct_Treb
         rs.Close()
         rs = Nothing
 
-        rs = New ADODB.Recordset
-        rs.Open("SELECT * FROM AKT_SP_OS3 WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open("SELECT * FROM AKT_SP_OS3 WHERE id =" & dSID, DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
 
 
         With rs
@@ -406,7 +403,7 @@ Public Class frmAct_Treb
 
         Dim tipot As String
 
-        tipot = Directory.GetParent(Application.ExecutablePath).ToString & "\blanks\sp.dot"
+        tipot = Directory.GetParent(System.Windows.Forms.Application.ExecutablePath).ToString & "\blanks\sp.dot"
 
         Select Case sOfficePACK
 
@@ -414,7 +411,7 @@ Public Class frmAct_Treb
 
                 Dim oSM                   'Root object for accessing OpenOffice FROM VB
                 Dim oDesk, oDoc As Object 'First objects FROM the API
-                Dim arg(-1)                 'Ignore it for the moment !
+                Dim arg(- 1)                 'Ignore it for the moment !
                 'Dim mmerge As Object
                 'Instanciate OOo : this line is mandatory with VB for OOo API
                 oSM = CreateObject("com.sun.star.ServiceManager")
@@ -482,9 +479,9 @@ Public Class frmAct_Treb
 
             Case Else
 
-                Dim Wrd As Word.Application
+                Dim Wrd As Application
                 Dim WrdDc As Object
-                Wrd = New Word.Application
+                Wrd = New Application
 
                 WrdDc = Wrd.Documents.Open(tipot, , False)  'Application.
                 WrdDc.Application.Visible = True
@@ -496,7 +493,7 @@ Public Class frmAct_Treb
                     .Text = "Hw"
                     .Replacement.Text = u2$
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -504,7 +501,7 @@ Public Class frmAct_Treb
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
 
                 'Дата акта
@@ -512,7 +509,7 @@ Public Class frmAct_Treb
                     .Text = "dataV"
                     .Replacement.Text = u1$
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -520,13 +517,13 @@ Public Class frmAct_Treb
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
                 'Организация
                 With Wrd.Selection.Find
                     .Text = "nmN"
                     .Replacement.Text = u3$ 'uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -534,14 +531,14 @@ Public Class frmAct_Treb
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
                 'Номер акта
 
                 With Wrd.Selection.Find
                     .Text = "InM"
                     .Replacement.Text = "" 'l$ 'Text3.Text
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -549,14 +546,14 @@ Public Class frmAct_Treb
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 'Тип ОС
                 With Wrd.Selection.Find
                     .Text = "Year"
                     .Replacement.Text = u4$ 'ostip.Text
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -565,13 +562,13 @@ Public Class frmAct_Treb
                     .MatchAllWordForms = False
                 End With
 
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
                 'Тип ОС
                 With Wrd.Selection.Find
                     .Text = "Dtu"
                     .Replacement.Text = u5$ 'ostip.Text
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -580,14 +577,14 @@ Public Class frmAct_Treb
                     .MatchAllWordForms = False
                 End With
 
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 'Год выпуска
                 With Wrd.Selection.Find
                     .Text = "Exp"
                     .Replacement.Text = "" 'k$ 'Text6.Text
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -596,14 +593,14 @@ Public Class frmAct_Treb
                     .MatchAllWordForms = False
                 End With
 
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 'Год выпуска
                 With Wrd.Selection.Find
                     .Text = "Cena"
                     .Replacement.Text = u6$
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -612,14 +609,14 @@ Public Class frmAct_Treb
                     .MatchAllWordForms = False
                 End With
 
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 'Цена
                 With Wrd.Selection.Find
                     .Text = "KolRem"
                     .Replacement.Text = u8$
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -628,13 +625,13 @@ Public Class frmAct_Treb
                     .MatchAllWordForms = False
                 End With
 
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "DtPR"
                     .Replacement.Text = u9$
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -643,13 +640,13 @@ Public Class frmAct_Treb
                     .MatchAllWordForms = False
                 End With
 
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "opis"
                     .Replacement.Text = u10$
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -658,13 +655,13 @@ Public Class frmAct_Treb
                     .MatchAllWordForms = False
                 End With
 
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "nnm"
                     .Replacement.Text = u3$
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -673,20 +670,15 @@ Public Class frmAct_Treb
                     .MatchAllWordForms = False
                 End With
 
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
                 WrdDc = Nothing
                 Wrd = Nothing
 
 
         End Select
-
-        
-
-
-
     End Sub
 
-    Private Sub btnAVOSofsend_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAVOSofsend.Click
+    Private Sub btnAVOSofsend_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAVOSofsend.Click
 
         If lvACTVV.Items.Count = 0 Then Exit Sub
 
@@ -701,13 +693,13 @@ Public Class frmAct_Treb
 
         'Call SaveActivityToLogDB("Акты ввода оснавных средств в офис " & frmContacts.nnet.Text)
 
-        tipot = Directory.GetParent(Application.ExecutablePath).ToString & "\blanks\os.dot"
+        tipot = Directory.GetParent(System.Windows.Forms.Application.ExecutablePath).ToString & "\blanks\os.dot"
 
 
-        Dim rs As ADODB.Recordset
-        rs = New ADODB.Recordset
+        Dim rs As Recordset
+        rs = New Recordset
 
-        rs.Open("SELECT * FROM CONFIGURE", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs.Open("SELECT * FROM CONFIGURE", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
             ORG = .Fields("org").Value
@@ -716,8 +708,9 @@ Public Class frmAct_Treb
         rs = Nothing
 
 
-        rs = New ADODB.Recordset
-        rs.Open("SELECT * FROM ActOS WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open("SELECT * FROM ActOS WHERE id =" & dSID, DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
 
 
         With rs
@@ -752,7 +745,7 @@ Public Class frmAct_Treb
                 '#############################
                 Dim oSM                   'Root object for accessing OpenOffice FROM VB
                 Dim oDesk, oDoc As Object 'First objects FROM the API
-                Dim arg(-1)                 'Ignore it for the moment !
+                Dim arg(- 1)                 'Ignore it for the moment !
                 'Dim mmerge As Object
                 'Instanciate OOo : this line is mandatory with VB for OOo API
                 oSM = CreateObject("com.sun.star.ServiceManager")
@@ -775,7 +768,7 @@ Public Class frmAct_Treb
                 Debug.Print(oDoc.replaceAll(oSrch))
 
                 oSrch.setSearchString("data")
-                oSrch.setReplaceString(Of Date)()
+                oSrch.setReplaceString (Of Date)()
                 Debug.Print(oDoc.replaceAll(oSrch))
 
                 oSrch.setSearchString("org")
@@ -808,9 +801,9 @@ Public Class frmAct_Treb
 
             Case Else
 
-                Dim Wrd As Word.Application
+                Dim Wrd As Application
                 Dim WrdDc As Object
-                Wrd = New Word.Application
+                Wrd = New Application
 
 
                 WrdDc = Wrd.Documents.Open(tipot, , False)  'Application.
@@ -824,7 +817,7 @@ Public Class frmAct_Treb
                     .Text = "nn"
                     .Replacement.Text = u$
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -832,7 +825,7 @@ Public Class frmAct_Treb
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
 
                 'Дата акта
@@ -840,7 +833,7 @@ Public Class frmAct_Treb
                     .Text = "data"
                     .Replacement.Text = Date.Today
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -848,14 +841,14 @@ Public Class frmAct_Treb
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
                 'Организация
 
                 With Wrd.Selection.Find
                     .Text = "org"
                     .Replacement.Text = ORG 'uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -863,14 +856,14 @@ Public Class frmAct_Treb
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
 
                 With Wrd.Selection.Find
                     .Text = "datsost"
                     .Replacement.Text = l$ 'Text3.Text
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -878,14 +871,14 @@ Public Class frmAct_Treb
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 'Тип ОС
                 With Wrd.Selection.Find
                     .Text = "fil"
                     .Replacement.Text = u1 & "\" & u2
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -894,14 +887,14 @@ Public Class frmAct_Treb
                     .MatchAllWordForms = False
                 End With
 
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 'Тип ОС
                 With Wrd.Selection.Find
                     .Text = "datprik"
                     .Replacement.Text = t$ 'ostip.Text
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -910,14 +903,14 @@ Public Class frmAct_Treb
                     .MatchAllWordForms = False
                 End With
 
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 'Год выпуска
                 With Wrd.Selection.Find
                     .Text = "Tip_tex"
                     .Replacement.Text = k$ 'Text6.Text
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -926,14 +919,14 @@ Public Class frmAct_Treb
                     .MatchAllWordForms = False
                 End With
 
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 'Год выпуска
                 With Wrd.Selection.Find
                     .Text = "gv"
                     .Replacement.Text = c$
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -942,7 +935,7 @@ Public Class frmAct_Treb
                     .MatchAllWordForms = False
                 End With
 
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 'Цена
 
@@ -950,7 +943,7 @@ Public Class frmAct_Treb
                     .Text = "dvv"
                     .Replacement.Text = dvv$
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -959,18 +952,16 @@ Public Class frmAct_Treb
                     .MatchAllWordForms = False
                 End With
 
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 WrdDc = Nothing
                 Wrd = Nothing
                 'Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
 
         End Select
-
-
     End Sub
 
-    Private Sub btnTRofSend_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnTRofSend.Click
+    Private Sub btnTRofSend_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnTRofSend.Click
 
         If lvTREB.Items.Count = 0 Then Exit Sub
         If dSID = 0 Then Exit Sub
@@ -978,14 +969,14 @@ Public Class frmAct_Treb
 
         Dim tipot As String
 
-        Dim rs As ADODB.Recordset
+        Dim rs As Recordset
 
         Dim ORG As String
         Dim u1, u2, u3, u4, u5, u6, u7 As String
 
 
-        rs = New ADODB.Recordset
-        rs.Open("SELECT * FROM CONFIGURE", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open("SELECT * FROM CONFIGURE", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
             ORG = .Fields("org").Value
@@ -993,8 +984,9 @@ Public Class frmAct_Treb
         rs.Close()
         rs = Nothing
 
-        rs = New ADODB.Recordset
-        rs.Open("SELECT * FROM TrebOvanie WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open("SELECT * FROM TrebOvanie WHERE id =" & dSID, DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
 
         With rs
 
@@ -1012,8 +1004,7 @@ Public Class frmAct_Treb
         rs.Close()
         rs = Nothing
 
-        tipot = Directory.GetParent(Application.ExecutablePath).ToString & "\blanks\tr.dot"
-
+        tipot = Directory.GetParent(System.Windows.Forms.Application.ExecutablePath).ToString & "\blanks\tr.dot"
 
 
         Select Case sOfficePACK
@@ -1021,7 +1012,7 @@ Public Class frmAct_Treb
             Case "OpenOffice.org"
                 Dim oSM                   'Root object for accessing OpenOffice FROM VB
                 Dim oDesk, oDoc As Object 'First objects FROM the API
-                Dim arg(-1)                 'Ignore it for the moment !
+                Dim arg(- 1)                 'Ignore it for the moment !
                 'Dim mmerge As Object
                 'Instanciate OOo : this line is mandatory with VB for OOo API
                 oSM = CreateObject("com.sun.star.ServiceManager")
@@ -1073,14 +1064,14 @@ Public Class frmAct_Treb
                 Debug.Print(oDoc.replaceAll(oSrch))
 
                 oSrch.setSearchString("cen")
-                oSrch.setReplaceString(Fix((u4 / 1.18) * u5))
+                oSrch.setReplaceString(Fix((u4/1.18)*u5))
                 Debug.Print(oDoc.replaceAll(oSrch))
 
             Case Else
 
-                Dim Wrd As Word.Application
+                Dim Wrd As Application
                 Dim WrdDc As Object
-                Wrd = New Word.Application
+                Wrd = New Application
 
                 WrdDc = Wrd.Documents.Open(tipot, , False)  'Application.
                 WrdDc.Application.Visible = True
@@ -1092,7 +1083,7 @@ Public Class frmAct_Treb
                     .Text = "nom"
                     .Replacement.Text = u7
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -1100,13 +1091,13 @@ Public Class frmAct_Treb
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "dat"
                     .Replacement.Text = u1
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -1114,13 +1105,13 @@ Public Class frmAct_Treb
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "org"
                     .Replacement.Text = ORG
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -1128,13 +1119,13 @@ Public Class frmAct_Treb
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "Lich"
                     .Replacement.Text = u3
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -1142,13 +1133,13 @@ Public Class frmAct_Treb
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "Luch2"
                     .Replacement.Text = u2
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -1156,13 +1147,13 @@ Public Class frmAct_Treb
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "nam"
                     .Replacement.Text = u6
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -1170,13 +1161,13 @@ Public Class frmAct_Treb
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "kol"
                     .Replacement.Text = u5
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -1184,13 +1175,13 @@ Public Class frmAct_Treb
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "price"
                     .Replacement.Text = u4
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -1198,13 +1189,13 @@ Public Class frmAct_Treb
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "cen"
-                    .Replacement.Text = Fix((u4 / 1.18) * u5)
+                    .Replacement.Text = Fix((u4/1.18)*u5)
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -1212,15 +1203,14 @@ Public Class frmAct_Treb
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
                 WrdDc = Nothing
                 Wrd = Nothing
 
         End Select
-
     End Sub
 
-    Private Sub btnTRadd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnTRadd.Click
+    Private Sub btnTRadd_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnTRadd.Click
 
 
         frmTreb_Act_treb.EDTR = False
@@ -1235,11 +1225,9 @@ Public Class frmAct_Treb
         frmTreb_Act_treb.txtNodel.Text = ""
 
         frmTreb_Act_treb.ShowDialog(Me)
-
-
     End Sub
 
-    Private Sub lvTREB_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvTREB.Click
+    Private Sub lvTREB_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lvTREB.Click
         If lvTREB.Items.Count = 0 Then Exit Sub
 
         Dim z As Integer
@@ -1247,19 +1235,19 @@ Public Class frmAct_Treb
         For z = 0 To lvTREB.SelectedItems.Count - 1
             dSID = (lvTREB.SelectedItems(z).Text)
         Next
-
     End Sub
 
-    Private Sub lvTREB_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvTREB.DoubleClick
+    Private Sub lvTREB_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles lvTREB.DoubleClick
         If lvTREB.Items.Count = 0 Then Exit Sub
 
         frmTreb_Act_treb.EDTR = True
 
         frmTreb_Act_treb.sIDTR = dSID
 
-        Dim rs As ADODB.Recordset
-        rs = New ADODB.Recordset
-        rs.Open("SELECT * FROM TrebOvanie WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        Dim rs As Recordset
+        rs = New Recordset
+        rs.Open("SELECT * FROM TrebOvanie WHERE id =" & dSID, DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
 
         With rs
 
@@ -1277,14 +1265,13 @@ Public Class frmAct_Treb
         rs = Nothing
 
         frmTreb_Act_treb.ShowDialog(Me)
-
     End Sub
 
-    Private Sub lvTREB_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvTREB.SelectedIndexChanged
-
+    Private Sub lvTREB_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles lvTREB.SelectedIndexChanged
     End Sub
 
-    Private Sub btnAVOSadd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAVOSadd.Click
+    Private Sub btnAVOSadd_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAVOSadd.Click
         frmACT_OS_Act_treb.EDTR = False
         'frmACT_OS_Act_treb.EDTRs = 0
         Dim objIniFile As New IniFile(sLANGPATH)
@@ -1300,14 +1287,16 @@ Public Class frmAct_Treb
         frmACT_OS_Act_treb.txt_akt_data_sostav.Value = Date.Today
         frmACT_OS_Act_treb.txt_akt_mod.Text = ""
 
-        Call SaveActivityToLogDB(objIniFile.GetString("frmAct_Treb", "MSG4", "Акты ввода основных средств - добавить") & " " & frmComputers.lstGroups.SelectedNode.Text)
+        Call _
+            SaveActivityToLogDB(
+                objIniFile.GetString("frmAct_Treb", "MSG4", "Акты ввода основных средств - добавить") & " " &
+                frmComputers.lstGroups.SelectedNode.Text)
 
 
         frmACT_OS_Act_treb.ShowDialog(Me)
-
     End Sub
 
-    Private Sub lvACTVV_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvACTVV.Click
+    Private Sub lvACTVV_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lvACTVV.Click
         If lvACTVV.Items.Count = 0 Then Exit Sub
 
         Dim z As Integer
@@ -1317,16 +1306,17 @@ Public Class frmAct_Treb
         Next
     End Sub
 
-    Private Sub lvACTVV_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvACTVV.DoubleClick
+    Private Sub lvACTVV_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles lvACTVV.DoubleClick
         If lvACTVV.Items.Count = 0 Then Exit Sub
 
         frmACT_OS_Act_treb.EDTR = True
 
         frmACT_OS_Act_treb.EDTRs = dSID
 
-        Dim rs As ADODB.Recordset
-        rs = New ADODB.Recordset
-        rs.Open("SELECT * FROM ActOS WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        Dim rs As Recordset
+        rs = New Recordset
+        rs.Open("SELECT * FROM ActOS WHERE id =" & dSID, DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
 
         With rs
 
@@ -1349,23 +1339,25 @@ Public Class frmAct_Treb
         frmACT_OS_Act_treb.ShowDialog(Me)
     End Sub
 
-    Private Sub lvACTVV_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvACTVV.SelectedIndexChanged
-
+    Private Sub lvACTVV_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles lvACTVV.SelectedIndexChanged
     End Sub
 
-    Private Sub TabPage2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TabPage2.Click
-
+    Private Sub TabPage2_Click(ByVal sender As Object, ByVal e As EventArgs) Handles TabPage2.Click
     End Sub
 
-    Private Sub btnAVOSdel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAVOSdel.Click
+    Private Sub btnAVOSdel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAVOSdel.Click
         If lvACTVV.Items.Count = 0 Then Exit Sub
         If dSID = 0 Then Exit Sub
         Dim objIniFile As New IniFile(sLANGPATH)
 
-        If MsgBox(objIniFile.GetString("frmAct_Treb", "MSG1", "Вы уверены что хотите удалить"), MsgBoxStyle.YesNo, ProGramName) = MsgBoxResult.Yes Then
-            Dim rs As ADODB.Recordset
-            rs = New ADODB.Recordset
-            rs.Open("DELETE FROM ActOS WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        If _
+            MsgBox(objIniFile.GetString("frmAct_Treb", "MSG1", "Вы уверены что хотите удалить"), MsgBoxStyle.YesNo,
+                   ProGramName) = MsgBoxResult.Yes Then
+            Dim rs As Recordset
+            rs = New Recordset
+            rs.Open("DELETE FROM ActOS WHERE id =" & dSID, DB7, CursorTypeEnum.adOpenDynamic,
+                    LockTypeEnum.adLockOptimistic)
             rs = Nothing
 
             Call ACTVV_LOAD()
@@ -1373,15 +1365,18 @@ Public Class frmAct_Treb
         End If
     End Sub
 
-    Private Sub btnTRdel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnTRdel.Click
+    Private Sub btnTRdel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnTRdel.Click
         If lvTREB.Items.Count = 0 Then Exit Sub
         If dSID = 0 Then Exit Sub
         Dim objIniFile As New IniFile(sLANGPATH)
 
-        If MsgBox(objIniFile.GetString("frmAct_Treb", "MSG1", "Вы уверены что хотите удалить"), MsgBoxStyle.YesNo, ProGramName) = MsgBoxResult.Yes Then
-            Dim rs As ADODB.Recordset
-            rs = New ADODB.Recordset
-            rs.Open("DELETE FROM TrebOvanie WHERE id =" & dSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        If _
+            MsgBox(objIniFile.GetString("frmAct_Treb", "MSG1", "Вы уверены что хотите удалить"), MsgBoxStyle.YesNo,
+                   ProGramName) = MsgBoxResult.Yes Then
+            Dim rs As Recordset
+            rs = New Recordset
+            rs.Open("DELETE FROM TrebOvanie WHERE id =" & dSID, DB7, CursorTypeEnum.adOpenDynamic,
+                    LockTypeEnum.adLockOptimistic)
             rs = Nothing
 
             Call TREB_LOAD()

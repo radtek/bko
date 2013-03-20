@@ -1,22 +1,21 @@
 ﻿Public Class frm_os3
     Public sEDT As Boolean
 
-    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
+    Private Sub Button2_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Button2.Click
         Me.Close()
-
     End Sub
 
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Button1.Click
 
-        Dim AKT_SP_OS3 As ADODB.Recordset
+        Dim AKT_SP_OS3 As Recordset
         Dim sSQL As String
 
 
         If Len(txtActNumber.Text) = 0 Then
 
             sSQL = "SELECT count(*) as t_n FROM AKT_SP_OS3"
-            AKT_SP_OS3 = New ADODB.Recordset
-            AKT_SP_OS3.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            AKT_SP_OS3 = New Recordset
+            AKT_SP_OS3.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
             With AKT_SP_OS3
                 txtActNumber.Text = .Fields("t_n").Value + 1
@@ -26,7 +25,6 @@
             AKT_SP_OS3 = Nothing
 
         End If
-
 
 
         If Me.sEDT = False Then
@@ -40,11 +38,8 @@
         End If
 
 
-
-
-
-        AKT_SP_OS3 = New ADODB.Recordset
-        AKT_SP_OS3.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        AKT_SP_OS3 = New Recordset
+        AKT_SP_OS3.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With AKT_SP_OS3
             If Me.sEDT = False Then
@@ -76,10 +71,9 @@
         Call frmAct_Treb.ACTOS3_LOAD()
 
         Me.Close()
-
     End Sub
 
-    Private Sub frm_os3_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+    Private Sub frm_os3_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
 
         SendFonts(Me)
 
@@ -92,12 +86,12 @@
         If sEDT = False Then
 
             Dim sSQL As String
-            Dim rs As ADODB.Recordset
+            Dim rs As Recordset
 
 
             sSQL = "SELECT count(*) as t_n FROM AKT_SP_OS3"
-            rs = New ADODB.Recordset
-            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rs = New Recordset
+            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
             With rs
                 txtActNumber.Text = .Fields("t_n").Value + 1
@@ -107,17 +101,15 @@
             rs = Nothing
 
         End If
-
-
     End Sub
 
-    Private Sub cmbCPL_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbCPL.SelectedIndexChanged
+    Private Sub cmbCPL_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbCPL.SelectedIndexChanged
         cmbModCPL.Items.Clear()
         Dim objIniFile As New IniFile(sLANGPATH)
 
 
-
-        Dim rs As ADODB.Recordset
+        Dim rs As Recordset
         Dim sSQL As String
 
         Select Case cmbCPL.Text
@@ -136,7 +128,8 @@
 
             Case objIniFile.GetString("frm_os3", "cmbCPL4", "Жесткий диск")
 
-                sSQL = "SELECT HDD_Name_1, HDD_Name_2, HDD_Name_3, HDD_Name_4 from kompy where id=" & frmComputers.sCOUNT
+                sSQL = "SELECT HDD_Name_1, HDD_Name_2, HDD_Name_3, HDD_Name_4 from kompy where id=" &
+                       frmComputers.sCOUNT
 
             Case objIniFile.GetString("frm_os3", "cmbCPL5", "Звуковая карта")
 
@@ -168,7 +161,8 @@
 
             Case objIniFile.GetString("frm_os3", "cmbCPL12", "Принтер")
 
-                sSQL = "SELECT PRINTER_NAME_1, PRINTER_NAME_2, PRINTER_NAME_3 from kompy where id=" & frmComputers.sCOUNT
+                sSQL = "SELECT PRINTER_NAME_1, PRINTER_NAME_2, PRINTER_NAME_3 from kompy where id=" &
+                       frmComputers.sCOUNT
 
             Case objIniFile.GetString("frm_os3", "cmbCPL13", "Процессор")
 
@@ -181,14 +175,12 @@
             Case Else
 
 
-
-
         End Select
 
         If Len(sSQL) = 0 Then Exit Sub
 
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
 
         Dim FirstColumn As Boolean
@@ -223,10 +215,5 @@
 
         rs.Close()
         rs = Nothing
-
-
-
-
-
     End Sub
 End Class

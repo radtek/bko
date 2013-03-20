@@ -1,4 +1,4 @@
-﻿Imports System.Threading
+﻿
 
 Public Class frmReports
     Private m_SortingColumn As ColumnHeader
@@ -10,14 +10,13 @@ Public Class frmReports
     Private TIPST As String
 
 
-    Private Sub frmReports_Activated(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Activated
+    Private Sub frmReports_Activated(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Activated
 
         frmMain.SaveInfTehButton.Enabled = False
         frmMain.ToolStripDropDownButton1.Enabled = False
-
     End Sub
 
-    Private Sub frmReports_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+    Private Sub frmReports_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
 
         SendFonts(Me)
 
@@ -68,12 +67,11 @@ Public Class frmReports
         cmbOthers.Items.Add(langIni.GetString("frmReports", "MSG1", "Все"))
 
 
+        Dim rs As Recordset
 
-
-        Dim rs As ADODB.Recordset
-
-        rs = New ADODB.Recordset
-        rs.Open("Select count(*) as t_n from SPR_TIP_PO", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open("Select count(*) as t_n from SPR_TIP_PO", DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
         Dim sCOUNT As String
         With rs
             sCOUNT = .Fields("t_n").Value
@@ -84,8 +82,8 @@ Public Class frmReports
 
         If sCOUNT > 0 Then
 
-            rs = New ADODB.Recordset
-            rs.Open("Select name from SPR_TIP_PO", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rs = New Recordset
+            rs.Open("Select name from SPR_TIP_PO", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
             With rs
                 .MoveFirst()
@@ -100,8 +98,6 @@ Public Class frmReports
             rs = Nothing
 
         End If
-
-
 
 
         cmbGar.Items.Add(langIni.GetString("frmReports", "MSG4", "Видео карты"))
@@ -136,7 +132,7 @@ Public Class frmReports
         DTP.Value = Date.Today
         DTPD.Value = Date.Today
 
-        DTP.Value = DTP.Value.AddDays(-1)
+        DTP.Value = DTP.Value.AddDays(- 1)
         DTPD.Value = DTPD.Value.AddDays(1)
 
         FillComboNET(Me.cmbOTV, "Name", "SPR_OTV", "", False, True)
@@ -152,7 +148,6 @@ Public Class frmReports
         cmbYearCashe.Text = Date.Today.Year
 
 
-
         cmbPPR_Year.Items.Clear()
 
         Dim z As Integer
@@ -161,8 +156,6 @@ Public Class frmReports
             cmbPPR_Year.Items.Add(Date.Today.Year + z)
         Next
         cmbPPR_Year.Text = Date.Today.Year
-
-
     End Sub
 
     Public Sub Rem_clk()
@@ -173,7 +166,7 @@ Public Class frmReports
         Dim SP As Date
         Dim PP As Date
 
-        Dim rs As ADODB.Recordset 'Объявляем рекордсет
+        Dim rs As Recordset 'Объявляем рекордсет
         Dim sSQL As String 'Переменная, где будет размещён SQL запрос
 
         lvRemont.Items.Clear()
@@ -187,8 +180,9 @@ Public Class frmReports
         lvRemont.SmallImageList = frmserviceDesc.ilsCMD
 
 
-        rs = New ADODB.Recordset
-        rs.Open("Select COUNT(*) as tot_num FROM Remont", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open("Select COUNT(*) as tot_num FROM Remont", DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
 
         With rs
             Count1 = .Fields("tot_num").Value
@@ -205,118 +199,169 @@ Public Class frmReports
 
         'SELECT Remont.Id, Remont.Date, Remont.Id_Comp, Remont.Remont, Remont.Uroven, Remont.Master, Remont.NomerRemKomp, Remont.Comp_Name, Remont.Mesto_Compa, Remont.vip, Remont.UserName, Remont.istochnik, Remont.phone, Remont.srok, Remont.name_of_remont, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE master='" & CmbRemont.Text & "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt;
 
-        If CmbRemont.Text <> poPs And chkFltr.Checked = False And chkUroven.Checked = False And ChckVip.Checked = False Then
+        If CmbRemont.Text <> poPs And chkFltr.Checked = False And chkUroven.Checked = False And ChckVip.Checked = False _
+            Then
             ' sSQL = "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE master='" & CmbRemont.Text & "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
-            sSQL = "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE master='" & CmbRemont.Text & "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
-            rs = New ADODB.Recordset
-            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            sSQL =
+                "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE master='" &
+                CmbRemont.Text & "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
+            rs = New Recordset
+            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
             GoTo ADR
         End If
 
-        If CmbRemont.Text <> poPs And chkFltr.Checked = False And chkUroven.Checked = True And ChckVip.Checked = False Then
-            sSQL = "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE master='" & CmbRemont.Text & "' AND uroven='" & cmbUr.Text & "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
-            rs = New ADODB.Recordset
-            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        If CmbRemont.Text <> poPs And chkFltr.Checked = False And chkUroven.Checked = True And ChckVip.Checked = False _
+            Then
+            sSQL =
+                "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE master='" &
+                CmbRemont.Text & "' AND uroven='" & cmbUr.Text &
+                "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
+            rs = New Recordset
+            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
             GoTo ADR
         End If
 
-        If CmbRemont.Text <> poPs And chkFltr.Checked = False And chkUroven.Checked = True And ChckVip.Checked = True Then
-            sSQL = "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE master='" & CmbRemont.Text & "' AND uroven='" & cmbUr.Text & "' AND vip='" & cmbVip.Text & "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
-            rs = New ADODB.Recordset
-            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        If CmbRemont.Text <> poPs And chkFltr.Checked = False And chkUroven.Checked = True And ChckVip.Checked = True _
+            Then
+            sSQL =
+                "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE master='" &
+                CmbRemont.Text & "' AND uroven='" & cmbUr.Text & "' AND vip='" & cmbVip.Text &
+                "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
+            rs = New Recordset
+            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
             GoTo ADR
         End If
 
-        If CmbRemont.Text <> poPs And chkFltr.Checked = False And ChckVip.Checked = True And chkUroven.Checked = False Then
-            sSQL = "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE master='" & CmbRemont.Text & "' AND vip='" & cmbVip.Text & "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
-            rs = New ADODB.Recordset
-            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        If CmbRemont.Text <> poPs And chkFltr.Checked = False And ChckVip.Checked = True And chkUroven.Checked = False _
+            Then
+            sSQL =
+                "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE master='" &
+                CmbRemont.Text & "' AND vip='" & cmbVip.Text &
+                "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
+            rs = New Recordset
+            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
             GoTo ADR
         End If
 
         '#########
-        If CmbRemont.Text = poPs And chkFltr.Checked = False And chkUroven.Checked = False And ChckVip.Checked = False Then
-            sSQL = "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
-            rs = New ADODB.Recordset
-            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        If CmbRemont.Text = poPs And chkFltr.Checked = False And chkUroven.Checked = False And ChckVip.Checked = False _
+            Then
+            sSQL =
+                "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
+            rs = New Recordset
+            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
             GoTo ADR
         End If
 
-        If CmbRemont.Text = poPs And chkFltr.Checked = False And chkUroven.Checked = True And ChckVip.Checked = False Then
-            sSQL = "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE uroven='" & cmbUr.Text & "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
-            rs = New ADODB.Recordset
-            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        If CmbRemont.Text = poPs And chkFltr.Checked = False And chkUroven.Checked = True And ChckVip.Checked = False _
+            Then
+            sSQL =
+                "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE uroven='" &
+                cmbUr.Text & "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
+            rs = New Recordset
+            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
             GoTo ADR
         End If
 
-        If CmbRemont.Text = poPs And chkFltr.Checked = False And chkUroven.Checked = True And ChckVip.Checked = True Then
-            sSQL = "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE uroven='" & cmbUr.Text & "' AND vip='" & cmbVip.Text & "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
-            rs = New ADODB.Recordset
-            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        If CmbRemont.Text = poPs And chkFltr.Checked = False And chkUroven.Checked = True And ChckVip.Checked = True _
+            Then
+            sSQL =
+                "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE uroven='" &
+                cmbUr.Text & "' AND vip='" & cmbVip.Text & "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
+            rs = New Recordset
+            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
             GoTo ADR
         End If
 
-        If CmbRemont.Text = poPs And chkFltr.Checked = False And ChckVip.Checked = True And chkUroven.Checked = False Then
-            sSQL = "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE vip='" & cmbVip.Text & "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
-            rs = New ADODB.Recordset
-            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        If CmbRemont.Text = poPs And chkFltr.Checked = False And ChckVip.Checked = True And chkUroven.Checked = False _
+            Then
+            sSQL =
+                "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE vip='" &
+                cmbVip.Text & "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
+            rs = New Recordset
+            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
             GoTo ADR
         End If
         '#########
 
-        If CmbRemont.Text <> poPs And chkFltr.Checked = True And chkUroven.Checked = False And ChckVip.Checked = False Then
-            sSQL = "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE master='" & CmbRemont.Text & "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
-            rs = New ADODB.Recordset
-            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        If CmbRemont.Text <> poPs And chkFltr.Checked = True And chkUroven.Checked = False And ChckVip.Checked = False _
+            Then
+            sSQL =
+                "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE master='" &
+                CmbRemont.Text & "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
+            rs = New Recordset
+            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
             GoTo ADR2
         End If
 
-        If CmbRemont.Text <> poPs And chkFltr.Checked = True And chkUroven.Checked = True And ChckVip.Checked = False Then
-            sSQL = "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE master='" & CmbRemont.Text & "' AND uroven='" & cmbUr.Text & "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
-            rs = New ADODB.Recordset
-            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        If CmbRemont.Text <> poPs And chkFltr.Checked = True And chkUroven.Checked = True And ChckVip.Checked = False _
+            Then
+            sSQL =
+                "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE master='" &
+                CmbRemont.Text & "' AND uroven='" & cmbUr.Text &
+                "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
+            rs = New Recordset
+            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
             GoTo ADR2
         End If
 
-        If CmbRemont.Text <> poPs And chkFltr.Checked = True And chkUroven.Checked = True And ChckVip.Checked = True Then
-            sSQL = "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE master='" & CmbRemont.Text & "' AND uroven='" & cmbUr.Text & "' AND vip='" & cmbVip.Text & "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
-            rs = New ADODB.Recordset
-            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        If CmbRemont.Text <> poPs And chkFltr.Checked = True And chkUroven.Checked = True And ChckVip.Checked = True _
+            Then
+            sSQL =
+                "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE master='" &
+                CmbRemont.Text & "' AND uroven='" & cmbUr.Text & "' AND vip='" & cmbVip.Text &
+                "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
+            rs = New Recordset
+            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
             GoTo ADR2
         End If
 
-        If CmbRemont.Text <> poPs And chkFltr.Checked = True And ChckVip.Checked = True And chkUroven.Checked = False Then
-            sSQL = "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE master='" & CmbRemont.Text & "' AND vip='" & cmbVip.Text & "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
-            rs = New ADODB.Recordset
-            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        If CmbRemont.Text <> poPs And chkFltr.Checked = True And ChckVip.Checked = True And chkUroven.Checked = False _
+            Then
+            sSQL =
+                "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE master='" &
+                CmbRemont.Text & "' AND vip='" & cmbVip.Text &
+                "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
+            rs = New Recordset
+            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
             GoTo ADR2
         End If
 
-        If CmbRemont.Text = poPs And chkFltr.Checked = True And chkUroven.Checked = False And ChckVip.Checked = False Then
-            sSQL = "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
-            rs = New ADODB.Recordset
-            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        If CmbRemont.Text = poPs And chkFltr.Checked = True And chkUroven.Checked = False And ChckVip.Checked = False _
+            Then
+            sSQL =
+                "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
+            rs = New Recordset
+            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
             GoTo ADR2
         End If
 
-        If CmbRemont.Text = poPs And chkFltr.Checked = True And chkUroven.Checked = True And ChckVip.Checked = False Then
-            sSQL = "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE uroven='" & cmbUr.Text & "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
-            rs = New ADODB.Recordset
-            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        If CmbRemont.Text = poPs And chkFltr.Checked = True And chkUroven.Checked = True And ChckVip.Checked = False _
+            Then
+            sSQL =
+                "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE uroven='" &
+                cmbUr.Text & "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
+            rs = New Recordset
+            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
             GoTo ADR2
         End If
 
         If CmbRemont.Text = poPs And chkFltr.Checked = True And chkUroven.Checked = True And ChckVip.Checked = True Then
-            sSQL = "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE uroven='" & cmbUr.Text & "' AND vip='" & cmbVip.Text & "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
-            rs = New ADODB.Recordset
-            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            sSQL =
+                "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE uroven='" &
+                cmbUr.Text & "' AND vip='" & cmbVip.Text & "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
+            rs = New Recordset
+            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
             GoTo ADR2
         End If
 
-        If CmbRemont.Text = poPs And chkFltr.Checked = True And ChckVip.Checked = True And chkUroven.Checked = False Then
-            sSQL = "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE vip='" & cmbVip.Text & "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
-            rs = New ADODB.Recordset
-            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        If CmbRemont.Text = poPs And chkFltr.Checked = True And ChckVip.Checked = True And chkUroven.Checked = False _
+            Then
+            sSQL =
+                "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE vip='" &
+                cmbVip.Text & "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
+            rs = New Recordset
+            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
             GoTo ADR2
         End If
 
@@ -324,7 +369,7 @@ Public Class frmReports
         rs = Nothing
 
         Exit Sub
-ADR:
+        ADR:
 
         'ListViewLoad master_otch.lvRemont, rs
         Dim intCount As Decimal = 0
@@ -348,7 +393,6 @@ ADR:
 
                         Dim item As ListViewItem = lvRemont.Items.Add(.Fields("id").Value)
                         item.ImageIndex = uname
-
 
 
                         lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("Date").Value)
@@ -405,10 +449,11 @@ ADR:
                             age = DateDiff(DateInterval.Day, .Fields("startdate").Value, .Fields("stopdate").Value)
                             A1 = DateDiff(DateInterval.Minute, .Fields("starttime").Value, .Fields("stoptime").Value)
 
-                            A2 = (A1 \ 60)
+                            A2 = (A1\60)
                             A1 = (A1 Mod 60)
 
-                            A3 = age & " " & langIni.GetString("frmReports", "MSG42", "дн.") & " " & A2 & ":" & A1 & " " & langIni.GetString("frmReports", "MSG43", "ч.")
+                            A3 = age & " " & langIni.GetString("frmReports", "MSG42", "дн.") & " " & A2 & ":" & A1 & " " &
+                                 langIni.GetString("frmReports", "MSG43", "ч.")
 
 
                             lvRemont.Items(CInt(intCount)).SubItems.Add(A3)
@@ -428,7 +473,6 @@ ADR:
                         intCount = intCount + 1
 
                     Case Else
-
 
 
                         If .Fields("zakryt").Value = 0 Then
@@ -495,10 +539,11 @@ ADR:
                                 age = DateDiff(DateInterval.Day, .Fields("startdate").Value, .Fields("stopdate").Value)
                                 A1 = DateDiff(DateInterval.Minute, .Fields("starttime").Value, .Fields("stoptime").Value)
 
-                                A2 = (A1 \ 60)
+                                A2 = (A1\60)
                                 A1 = (A1 Mod 60)
 
-                                A3 = age & " " & langIni.GetString("frmReports", "MSG42", "дн.") & " " & A2 & ":" & A1 & " " & langIni.GetString("frmReports", "MSG43", "ч.")
+                                A3 = age & " " & langIni.GetString("frmReports", "MSG42", "дн.") & " " & A2 & ":" & A1 &
+                                     " " & langIni.GetString("frmReports", "MSG43", "ч.")
 
                                 lvRemont.Items(CInt(intCount)).SubItems.Add(A3)
                             Else
@@ -528,14 +573,12 @@ ADR:
         End With
 
 
-
         rs.Close()
         rs = Nothing
 
 
-
         Exit Sub
-ADR2:
+        ADR2:
 
         intCount = 0
 
@@ -612,13 +655,16 @@ ADR2:
                                     Dim A1 As Integer
                                     Dim A3, A2 As String
                                     Dim age As Integer
-                                    age = DateDiff(DateInterval.Day, .Fields("startdate").Value, .Fields("stopdate").Value)
-                                    A1 = DateDiff(DateInterval.Minute, .Fields("starttime").Value, .Fields("stoptime").Value)
+                                    age = DateDiff(DateInterval.Day, .Fields("startdate").Value,
+                                                   .Fields("stopdate").Value)
+                                    A1 = DateDiff(DateInterval.Minute, .Fields("starttime").Value,
+                                                  .Fields("stoptime").Value)
 
-                                    A2 = (A1 \ 60)
+                                    A2 = (A1\60)
                                     A1 = (A1 Mod 60)
 
-                                    A3 = age & " " & langIni.GetString("frmReports", "MSG42", "дн.") & " " & A2 & ":" & A1 & " " & langIni.GetString("frmReports", "MSG43", "ч.")
+                                    A3 = age & " " & langIni.GetString("frmReports", "MSG42", "дн.") & " " & A2 & ":" &
+                                         A1 & " " & langIni.GetString("frmReports", "MSG43", "ч.")
 
                                     lvRemont.Items(CInt(intCount)).SubItems.Add(A3)
                                 Else
@@ -638,8 +684,6 @@ ADR2:
                             End If
 
                         End If
-
-
 
 
                     Case Else
@@ -712,14 +756,16 @@ ADR2:
                                             Dim A1 As Integer
                                             Dim A3, A2 As String
                                             Dim age As Integer
-                                            age = DateDiff(DateInterval.Day, .Fields("startdate").Value, .Fields("stopdate").Value)
-                                            A1 = DateDiff(DateInterval.Minute, .Fields("starttime").Value, .Fields("stoptime").Value)
+                                            age = DateDiff(DateInterval.Day, .Fields("startdate").Value,
+                                                           .Fields("stopdate").Value)
+                                            A1 = DateDiff(DateInterval.Minute, .Fields("starttime").Value,
+                                                          .Fields("stoptime").Value)
 
-                                            A2 = (A1 \ 60)
+                                            A2 = (A1\60)
                                             A1 = (A1 Mod 60)
 
-                                            A3 = age & " " & langIni.GetString("frmReports", "MSG42", "дн.") & " " & A2 & ":" & A1 & " " & langIni.GetString("frmReports", "MSG43", "ч.")
-
+                                            A3 = age & " " & langIni.GetString("frmReports", "MSG42", "дн.") & " " & A2 &
+                                                 ":" & A1 & " " & langIni.GetString("frmReports", "MSG43", "ч.")
 
 
                                             lvRemont.Items(CInt(intCount)).SubItems.Add(A3)
@@ -752,20 +798,17 @@ ADR2:
         End With
 
 
-
         rs.Close()
         rs = Nothing
 
 
-
-
-
         Exit Sub
-Error_:
+        Error_:
         MsgBox(Err.Description)
     End Sub
 
-    Private Sub cmbReport2fil_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbReport2fil.SelectedIndexChanged
+    Private Sub cmbReport2fil_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbReport2fil.SelectedIndexChanged
         On Error GoTo err
         cmbReport2Department.Items.Clear()
         Dim langIni As New IniFile(sLANGPATH)
@@ -776,9 +819,10 @@ Error_:
 
         End If
 
-        Dim rs As ADODB.Recordset
-        rs = New ADODB.Recordset
-        rs.Open("SELECT * FROM SPR_OTD_FILIAL WHERE filial ='" & cmbReport2fil.Text & "' order by N_Otd", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        Dim rs As Recordset
+        rs = New Recordset
+        rs.Open("SELECT * FROM SPR_OTD_FILIAL WHERE filial ='" & cmbReport2fil.Text & "' order by N_Otd", DB7,
+                CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
         With rs
             .MoveFirst()
             Do While Not .EOF
@@ -794,11 +838,11 @@ Error_:
         rs.Close()
         rs = Nothing
 
-err:
-
+        err:
     End Sub
 
-    Private Sub cmbReport2Department_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbReport2Department.SelectedIndexChanged
+    Private Sub cmbReport2Department_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbReport2Department.SelectedIndexChanged
         Me.Cursor = Cursors.WaitCursor
 
         Me.BeginInvoke(New MethodInvoker(AddressOf LOAD_REPORT_COMPL))
@@ -829,7 +873,6 @@ err:
         lvReport2Cl.Items.Clear()
 
 
-
         'If cmbReport2fil.Text = Totd Then cmbReport2fil.Text = "
         'FILIAL.Close
         'Dim FILIAL As ADODB.Recordset
@@ -844,21 +887,27 @@ err:
 
             Case langIni.GetString("frmReports", "MSG25", "Другое")
 
-                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
+                If _
+                    cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And
+                    cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
                     'sSQL = "SELECT NET_NAME FROM kompy WHERE (kompy.tiptehn) = 'MFU'"
-                    sSQL = "SELECT net_name, COUNT(net_name) as tot_num FROM kompy WHERE tiptehn = 'OT' group by net_name"
+                    sSQL =
+                        "SELECT net_name, COUNT(net_name) as tot_num FROM kompy WHERE tiptehn = 'OT' group by net_name"
 
                 Else
 
                     If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
                         'sSQL = "SELECT NET_NAME FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND kompy.tiptehn = 'MFU'"
-                        sSQL = "SELECT net_name, COUNT(net_name) as tot_num FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'OT' group by net_name"
+                        sSQL = "SELECT net_name, COUNT(net_name) as tot_num FROM kompy WHERE kompy.FILIAL='" &
+                               cmbReport2fil.Text & "' AND tiptehn = 'OT' group by net_name"
 
                     Else
                         'sSQL = "SELECT NET_NAME FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND kompy.tiptehn = 'MFU'"
-                        sSQL = "SELECT net_name, COUNT(net_name) as tot_num FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'OT' group by net_name"
+                        sSQL = "SELECT net_name, COUNT(net_name) as tot_num FROM kompy WHERE kompy.FILIAL='" &
+                               cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text &
+                               "' AND tiptehn = 'OT' group by net_name"
 
                     End If
                 End If
@@ -866,21 +915,27 @@ err:
 
             Case langIni.GetString("frmReports", "MSG21", "МФУ")
 
-                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
+                If _
+                    cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And
+                    cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
                     'sSQL = "SELECT NET_NAME FROM kompy WHERE (kompy.tiptehn) = 'MFU'"
-                    sSQL = "SELECT net_name, COUNT(tiptehn) as tot_num FROM kompy WHERE tiptehn = 'MFU' group by net_name"
+                    sSQL =
+                        "SELECT net_name, COUNT(tiptehn) as tot_num FROM kompy WHERE tiptehn = 'MFU' group by net_name"
 
                 Else
 
                     If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
                         'sSQL = "SELECT NET_NAME FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND kompy.tiptehn = 'MFU'"
-                        sSQL = "SELECT net_name, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'MFU' group by net_name"
+                        sSQL = "SELECT net_name, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" &
+                               cmbReport2fil.Text & "' AND tiptehn = 'MFU' group by net_name"
 
                     Else
                         'sSQL = "SELECT NET_NAME FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND kompy.tiptehn = 'MFU'"
-                        sSQL = "SELECT net_name, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'MFU' group by net_name"
+                        sSQL = "SELECT net_name, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" &
+                               cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text &
+                               "' AND tiptehn = 'MFU' group by net_name"
 
                     End If
                 End If
@@ -888,113 +943,148 @@ err:
 
             Case langIni.GetString("frmReports", "MSG24", "Фотоаппарат")
 
-                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
+                If _
+                    cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And
+                    cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
                     'sSQL = "SELECT NET_NAME FROM kompy WHERE (kompy.tiptehn) = 'MFU'"
-                    sSQL = "SELECT net_name, COUNT(tiptehn) as tot_num FROM kompy WHERE tiptehn = 'PHOTO' group by net_name"
+                    sSQL =
+                        "SELECT net_name, COUNT(tiptehn) as tot_num FROM kompy WHERE tiptehn = 'PHOTO' group by net_name"
 
                 Else
 
                     If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
                         'sSQL = "SELECT NET_NAME FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND kompy.tiptehn = 'MFU'"
-                        sSQL = "SELECT net_name, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PHOTO' group by net_name"
+                        sSQL = "SELECT net_name, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" &
+                               cmbReport2fil.Text & "' AND tiptehn = 'PHOTO' group by net_name"
 
                     Else
                         'sSQL = "SELECT NET_NAME FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND kompy.tiptehn = 'MFU'"
-                        sSQL = "SELECT net_name, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'PHOTO' group by net_name"
+                        sSQL = "SELECT net_name, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" &
+                               cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text &
+                               "' AND tiptehn = 'PHOTO' group by net_name"
 
                     End If
                 End If
 
             Case langIni.GetString("frmReports", "MSG23", "Факс")
 
-                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
+                If _
+                    cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And
+                    cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
                     'sSQL = "SELECT NET_NAME FROM kompy WHERE (kompy.tiptehn) = 'MFU'"
-                    sSQL = "SELECT net_name, COUNT(tiptehn) as tot_num FROM kompy WHERE tiptehn = 'FAX' group by net_name"
+                    sSQL =
+                        "SELECT net_name, COUNT(tiptehn) as tot_num FROM kompy WHERE tiptehn = 'FAX' group by net_name"
 
                 Else
 
                     If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
                         'sSQL = "SELECT NET_NAME FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND kompy.tiptehn = 'MFU'"
-                        sSQL = "SELECT net_name, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'FAX' group by net_name"
+                        sSQL = "SELECT net_name, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" &
+                               cmbReport2fil.Text & "' AND tiptehn = 'FAX' group by net_name"
 
                     Else
                         'sSQL = "SELECT NET_NAME FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND kompy.tiptehn = 'MFU'"
-                        sSQL = "SELECT net_name, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'FAX' group by net_name"
+                        sSQL = "SELECT net_name, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" &
+                               cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text &
+                               "' AND tiptehn = 'FAX' group by net_name"
 
                     End If
                 End If
-
-
-
 
 
                 'Êîïèðû
             Case langIni.GetString("frmReports", "MSG20", "Копиры")
 
-                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
+                If _
+                    cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And
+                    cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
                     'sSQL = "SELECT NET_NAME FROM kompy WHERE (kompy.tiptehn) = 'MFU'"
-                    sSQL = "SELECT net_name, COUNT(tiptehn) as tot_num FROM kompy WHERE tiptehn = 'KOpir' group by net_name"
+                    sSQL =
+                        "SELECT net_name, COUNT(tiptehn) as tot_num FROM kompy WHERE tiptehn = 'KOpir' group by net_name"
 
                 Else
 
                     If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
                         'sSQL = "SELECT NET_NAME FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND kompy.tiptehn = 'MFU'"
-                        sSQL = "SELECT net_name, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'KOpir' group by net_name"
+                        sSQL = "SELECT net_name, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" &
+                               cmbReport2fil.Text & "' AND tiptehn = 'KOpir' group by net_name"
 
                     Else
                         'sSQL = "SELECT NET_NAME FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND kompy.tiptehn = 'MFU'"
-                        sSQL = "SELECT net_name, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'KOpir' group by net_name"
+                        sSQL = "SELECT net_name, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" &
+                               cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text &
+                               "' AND tiptehn = 'KOpir' group by net_name"
 
                     End If
                 End If
-
-
 
 
             Case langIni.GetString("frmReports", "MSG22", "Телефон")
 
-                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
+                If _
+                    cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And
+                    cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
                     'sSQL = "SELECT NET_NAME FROM kompy WHERE (kompy.tiptehn) = 'MFU'"
-                    sSQL = "SELECT net_name, COUNT(tiptehn) as tot_num FROM kompy WHERE tiptehn = 'PHONE' group by net_name"
+                    sSQL =
+                        "SELECT net_name, COUNT(tiptehn) as tot_num FROM kompy WHERE tiptehn = 'PHONE' group by net_name"
 
                 Else
 
                     If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
                         'sSQL = "SELECT NET_NAME FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND kompy.tiptehn = 'MFU'"
-                        sSQL = "SELECT net_name, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PHONE' group by net_name"
+                        sSQL = "SELECT net_name, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" &
+                               cmbReport2fil.Text & "' AND tiptehn = 'PHONE' group by net_name"
 
                     Else
                         'sSQL = "SELECT NET_NAME FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND kompy.tiptehn = 'MFU'"
-                        sSQL = "SELECT net_name, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'PHONE' group by net_name"
+                        sSQL = "SELECT net_name, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" &
+                               cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text &
+                               "' AND tiptehn = 'PHONE' group by net_name"
 
                     End If
                 End If
 
 
-
-
-
-
             Case langIni.GetString("frmReports", "MSG13", "Процессоры")
 
-                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
+                If _
+                    cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And
+                    cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
                     'sSQL = "SELECT cpus.cpu1, Count(*) AS tot_num FROM (SELECT cpu1 FROM kompy union all SELECT cpu2 FROM kompy union all SELECT cpu3 FROM kompy union all SELECT cpu4 FROM kompy) AS cpus GROUP BY cpus.cpu1"
-                    sSQL = "SELECT cpus.cpu1, Count(*) AS tot_num FROM (SELECT cpu1 FROM kompy WHERE tiptehn = 'PC' union all SELECT cpu2 FROM kompy WHERE tiptehn = 'PC'  union all SELECT cpu3 FROM kompy WHERE tiptehn = 'PC'  union all SELECT cpu4 FROM kompy WHERE tiptehn = 'PC') AS cpus GROUP BY cpus.cpu1"
+                    sSQL =
+                        "SELECT cpus.cpu1, Count(*) AS tot_num FROM (SELECT cpu1 FROM kompy WHERE tiptehn = 'PC' union all SELECT cpu2 FROM kompy WHERE tiptehn = 'PC'  union all SELECT cpu3 FROM kompy WHERE tiptehn = 'PC'  union all SELECT cpu4 FROM kompy WHERE tiptehn = 'PC') AS cpus GROUP BY cpus.cpu1"
                     'sSQL = "SELECT cpus.cpu1, Count(*) AS tot_num FROM (SELECT cpu1 FROM kompy union all SELECT cpu2 FROM kompy union all SELECT cpu3 FROM kompy union all SELECT cpu4 FROM kompy) AS cpus GROUP BY cpus.cpu1"
                 Else
 
                     If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
-                        sSQL = "SELECT cpus.cpu1, Count(*) AS tot_num FROM (SELECT cpu1 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' union all SELECT cpu2 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC'  union all SELECT cpu3 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC'  union all SELECT cpu4 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC') AS cpus GROUP BY cpus.cpu1"
+                        sSQL =
+                            "SELECT cpus.cpu1, Count(*) AS tot_num FROM (SELECT cpu1 FROM kompy WHERE kompy.FILIAL='" &
+                            cmbReport2fil.Text &
+                            "' AND tiptehn = 'PC' union all SELECT cpu2 FROM kompy WHERE kompy.FILIAL='" &
+                            cmbReport2fil.Text &
+                            "' AND tiptehn = 'PC'  union all SELECT cpu3 FROM kompy WHERE kompy.FILIAL='" &
+                            cmbReport2fil.Text &
+                            "' AND tiptehn = 'PC'  union all SELECT cpu4 FROM kompy WHERE kompy.FILIAL='" &
+                            cmbReport2fil.Text & "' AND tiptehn = 'PC') AS cpus GROUP BY cpus.cpu1"
                     Else
-                        sSQL = "SELECT cpus.cpu1, Count(*) AS tot_num FROM (SELECT cpu1 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'PC' union all SELECT cpu2 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'PC' union all SELECT cpu3 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'PC' union all SELECT cpu4 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'PC') AS cpus GROUP BY cpus.cpu1"
+                        sSQL =
+                            "SELECT cpus.cpu1, Count(*) AS tot_num FROM (SELECT cpu1 FROM kompy WHERE kompy.FILIAL='" &
+                            cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text &
+                            "' AND tiptehn = 'PC' union all SELECT cpu2 FROM kompy WHERE kompy.FILIAL='" &
+                            cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text &
+                            "' AND tiptehn = 'PC' union all SELECT cpu3 FROM kompy WHERE kompy.FILIAL='" &
+                            cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text &
+                            "' AND tiptehn = 'PC' union all SELECT cpu4 FROM kompy WHERE kompy.FILIAL='" &
+                            cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text &
+                            "' AND tiptehn = 'PC') AS cpus GROUP BY cpus.cpu1"
                     End If
                 End If
 
@@ -1005,31 +1095,71 @@ err:
 
                     Case "MySQL"
 
-                        If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
-                            sSQL = "SELECT cpu1, count(*) as tot_num FROM (SELECT CONCAT(cpu1,' ', cpumhz1) as cpu1 FROM kompy union all SELECT CONCAT(cpu2,' ', cpumhz2) FROM kompy union all SELECT CONCAT(cpu3,' ', cpumhz3) FROM kompy union all SELECT CONCAT(cpu4,' ', cpumhz4) FROM kompy) AS cpus group by cpu1"
+                        If _
+                            cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And
+                            cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
+                            sSQL =
+                                "SELECT cpu1, count(*) as tot_num FROM (SELECT CONCAT(cpu1,' ', cpumhz1) as cpu1 FROM kompy union all SELECT CONCAT(cpu2,' ', cpumhz2) FROM kompy union all SELECT CONCAT(cpu3,' ', cpumhz3) FROM kompy union all SELECT CONCAT(cpu4,' ', cpumhz4) FROM kompy) AS cpus group by cpu1"
 
                         Else
 
                             If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
-                                sSQL = "SELECT cpu1, count(*) as tot_num FROM (SELECT CONCAT(cpu1,' ', cpumhz1) as cpu1 FROM kompy  WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' union all SELECT CONCAT(cpu2,' ', cpumhz2) FROM kompy  WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC'  union all SELECT CONCAT(cpu3,' ', cpumhz3) FROM kompy  WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC'  union all SELECT CONCAT(cpu4,' ', cpumhz4) FROM kompy  WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' ) AS cpus group by cpu1"
+                                sSQL =
+                                    "SELECT cpu1, count(*) as tot_num FROM (SELECT CONCAT(cpu1,' ', cpumhz1) as cpu1 FROM kompy  WHERE kompy.FILIAL='" &
+                                    cmbReport2fil.Text &
+                                    "' AND tiptehn = 'PC' union all SELECT CONCAT(cpu2,' ', cpumhz2) FROM kompy  WHERE kompy.FILIAL='" &
+                                    cmbReport2fil.Text &
+                                    "' AND tiptehn = 'PC'  union all SELECT CONCAT(cpu3,' ', cpumhz3) FROM kompy  WHERE kompy.FILIAL='" &
+                                    cmbReport2fil.Text &
+                                    "' AND tiptehn = 'PC'  union all SELECT CONCAT(cpu4,' ', cpumhz4) FROM kompy  WHERE kompy.FILIAL='" &
+                                    cmbReport2fil.Text & "' AND tiptehn = 'PC' ) AS cpus group by cpu1"
                             Else
-                                sSQL = "SELECT cpu1, count(*) as tot_num FROM (SELECT CONCAT(cpu1,' ', cpumhz1) as cpu1 FROM kompy  WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'PC' union all SELECT CONCAT(cpu2,' ', cpumhz2) FROM kompy  WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'PC' union all SELECT CONCAT(cpu3,' ', cpumhz3) FROM kompy  WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'PC' union all SELECT CONCAT(cpu4,' ', cpumhz4) FROM kompy  WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'PC') AS cpus group by cpu1"
+                                sSQL =
+                                    "SELECT cpu1, count(*) as tot_num FROM (SELECT CONCAT(cpu1,' ', cpumhz1) as cpu1 FROM kompy  WHERE kompy.FILIAL='" &
+                                    cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text &
+                                    "' AND tiptehn = 'PC' union all SELECT CONCAT(cpu2,' ', cpumhz2) FROM kompy  WHERE kompy.FILIAL='" &
+                                    cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text &
+                                    "' AND tiptehn = 'PC' union all SELECT CONCAT(cpu3,' ', cpumhz3) FROM kompy  WHERE kompy.FILIAL='" &
+                                    cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text &
+                                    "' AND tiptehn = 'PC' union all SELECT CONCAT(cpu4,' ', cpumhz4) FROM kompy  WHERE kompy.FILIAL='" &
+                                    cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text &
+                                    "' AND tiptehn = 'PC') AS cpus group by cpu1"
                             End If
                         End If
 
 
                     Case Else
 
-                        If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
-                            sSQL = "SELECT cpu1, count(*) as tot_num FROM (SELECT (cpu1+' '+ cpumhz1) as cpu1 FROM kompy union all SELECT (cpu2+' '+ cpumhz2) FROM kompy union all SELECT (cpu3+' '+ cpumhz3) FROM kompy union all SELECT (cpu4+' '+ cpumhz4) FROM kompy) AS cpus group by cpu1"
+                        If _
+                            cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And
+                            cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
+                            sSQL =
+                                "SELECT cpu1, count(*) as tot_num FROM (SELECT (cpu1+' '+ cpumhz1) as cpu1 FROM kompy union all SELECT (cpu2+' '+ cpumhz2) FROM kompy union all SELECT (cpu3+' '+ cpumhz3) FROM kompy union all SELECT (cpu4+' '+ cpumhz4) FROM kompy) AS cpus group by cpu1"
 
                         Else
 
                             If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
-                                sSQL = "SELECT cpu1, count(*) as tot_num FROM (SELECT (cpu1+' '+ cpumhz1) as cpu1 FROM kompy  WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' union all SELECT (cpu2+' '+ cpumhz2) FROM kompy  WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC'  union all SELECT (cpu3+' '+ cpumhz3) FROM kompy  WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC'  union all SELECT (cpu4+' '+ cpumhz4) FROM kompy  WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC') AS cpus group by cpu1"
+                                sSQL =
+                                    "SELECT cpu1, count(*) as tot_num FROM (SELECT (cpu1+' '+ cpumhz1) as cpu1 FROM kompy  WHERE kompy.FILIAL='" &
+                                    cmbReport2fil.Text &
+                                    "' AND tiptehn = 'PC' union all SELECT (cpu2+' '+ cpumhz2) FROM kompy  WHERE kompy.FILIAL='" &
+                                    cmbReport2fil.Text &
+                                    "' AND tiptehn = 'PC'  union all SELECT (cpu3+' '+ cpumhz3) FROM kompy  WHERE kompy.FILIAL='" &
+                                    cmbReport2fil.Text &
+                                    "' AND tiptehn = 'PC'  union all SELECT (cpu4+' '+ cpumhz4) FROM kompy  WHERE kompy.FILIAL='" &
+                                    cmbReport2fil.Text & "' AND tiptehn = 'PC') AS cpus group by cpu1"
 
                             Else
-                                sSQL = "SELECT cpu1, count(*) as tot_num FROM (SELECT (cpu1+' '+ cpumhz1) as cpu1 FROM kompy  WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'PC' union all SELECT (cpu2+' '+ cpumhz2) FROM kompy  WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'PC' union all SELECT (cpu3+' '+ cpumhz3) FROM kompy  WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'PC' union all SELECT (cpu4+' '+ cpumhz4) FROM kompy  WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'PC') AS cpus group by cpu1"
+                                sSQL =
+                                    "SELECT cpu1, count(*) as tot_num FROM (SELECT (cpu1+' '+ cpumhz1) as cpu1 FROM kompy  WHERE kompy.FILIAL='" &
+                                    cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text &
+                                    "' AND tiptehn = 'PC' union all SELECT (cpu2+' '+ cpumhz2) FROM kompy  WHERE kompy.FILIAL='" &
+                                    cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text &
+                                    "' AND tiptehn = 'PC' union all SELECT (cpu3+' '+ cpumhz3) FROM kompy  WHERE kompy.FILIAL='" &
+                                    cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text &
+                                    "' AND tiptehn = 'PC' union all SELECT (cpu4+' '+ cpumhz4) FROM kompy  WHERE kompy.FILIAL='" &
+                                    cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text &
+                                    "' AND tiptehn = 'PC') AS cpus group by cpu1"
 
                             End If
                         End If
@@ -1039,7 +1169,9 @@ err:
 
             Case langIni.GetString("frmReports", "MSG7", "Материнские платы")
 
-                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
+                If _
+                    cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And
+                    cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
                     sSQL = "SELECT mb, COUNT(tiptehn) as tot_num FROM kompy WHERE tiptehn = 'PC' group by mb"
 
@@ -1048,57 +1180,84 @@ err:
                     If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
 
-                        sSQL = "SELECT mb, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' group by mb"
+                        sSQL = "SELECT mb, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" &
+                               cmbReport2fil.Text & "' AND tiptehn = 'PC' group by mb"
 
                     Else
 
-                        sSQL = "SELECT mb, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'PC' group by mb"
+                        sSQL = "SELECT mb, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" &
+                               cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text &
+                               "' AND tiptehn = 'PC' group by mb"
 
                     End If
                 End If
 
 
-
-
-
-
             Case langIni.GetString("frmReports", "MSG4", "Видео карты")
 
-                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
+                If _
+                    cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And
+                    cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
                     'sSQL = "SELECT NET_NAME FROM kompy WHERE (kompy.tiptehn) = 'MFU'"
-                    sSQL = "SELECT SVGA_NAME, COUNT(tiptehn) as tot_num FROM kompy WHERE tiptehn = 'PC' group by SVGA_NAME"
+                    sSQL =
+                        "SELECT SVGA_NAME, COUNT(tiptehn) as tot_num FROM kompy WHERE tiptehn = 'PC' group by SVGA_NAME"
 
                 Else
 
                     If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
                         'sSQL = "SELECT NET_NAME FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND kompy.tiptehn = 'MFU'"
-                        sSQL = "SELECT SVGA_NAME, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' group by SVGA_NAME"
+                        sSQL = "SELECT SVGA_NAME, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" &
+                               cmbReport2fil.Text & "' AND tiptehn = 'PC' group by SVGA_NAME"
 
                     Else
                         'sSQL = "SELECT NET_NAME FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND kompy.tiptehn = 'MFU'"
-                        sSQL = "SELECT SVGA_NAME, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'PC' group by SVGA_NAME"
+                        sSQL = "SELECT SVGA_NAME, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" &
+                               cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text &
+                               "' AND tiptehn = 'PC' group by SVGA_NAME"
 
                     End If
                 End If
 
 
-
-
             Case langIni.GetString("frmReports", "MSG5", "Жесткие диски")
 
-                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
+                If _
+                    cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And
+                    cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
                     'sSQL = "SELECT cpus.HDD_Name_1, Count(*) AS tot_num FROM (SELECT HDD_Name_1 FROM kompy WHERE tiptehn = 'PC' union all SELECT HDD_Name_2 FROM kompy union all SELECT HDD_Name_3 FROM kompy union all SELECT  HDD_Name_4 FROM kompy) AS cpus GROUP BY cpus.HDD_Name_1"
-                    sSQL = "SELECT cpus.HDD_Name_1, Count(*) AS tot_num FROM (SELECT HDD_Name_1 FROM kompy WHERE tiptehn = 'PC' union all SELECT HDD_Name_2 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' union all SELECT HDD_Name_3 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' union all SELECT  HDD_Name_4 FROM kompy WHERE tiptehn = 'PC' ) AS cpus GROUP BY cpus.HDD_Name_1"
+                    sSQL =
+                        "SELECT cpus.HDD_Name_1, Count(*) AS tot_num FROM (SELECT HDD_Name_1 FROM kompy WHERE tiptehn = 'PC' union all SELECT HDD_Name_2 FROM kompy WHERE kompy.FILIAL='" &
+                        cmbReport2fil.Text &
+                        "' AND tiptehn = 'PC' union all SELECT HDD_Name_3 FROM kompy WHERE kompy.FILIAL='" &
+                        cmbReport2fil.Text &
+                        "' AND tiptehn = 'PC' union all SELECT  HDD_Name_4 FROM kompy WHERE tiptehn = 'PC' ) AS cpus GROUP BY cpus.HDD_Name_1"
                 Else
 
                     If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
-                        sSQL = "SELECT cpus.HDD_Name_1, Count(*) AS tot_num FROM (SELECT HDD_Name_1 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' union all SELECT HDD_Name_2 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' union all SELECT HDD_Name_3 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' union all SELECT  HDD_Name_4 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' ) AS cpus GROUP BY cpus.HDD_Name_1"
+                        sSQL =
+                            "SELECT cpus.HDD_Name_1, Count(*) AS tot_num FROM (SELECT HDD_Name_1 FROM kompy WHERE kompy.FILIAL='" &
+                            cmbReport2fil.Text &
+                            "' AND tiptehn = 'PC' union all SELECT HDD_Name_2 FROM kompy WHERE kompy.FILIAL='" &
+                            cmbReport2fil.Text &
+                            "' AND tiptehn = 'PC' union all SELECT HDD_Name_3 FROM kompy WHERE kompy.FILIAL='" &
+                            cmbReport2fil.Text &
+                            "' AND tiptehn = 'PC' union all SELECT  HDD_Name_4 FROM kompy WHERE kompy.FILIAL='" &
+                            cmbReport2fil.Text & "' AND tiptehn = 'PC' ) AS cpus GROUP BY cpus.HDD_Name_1"
 
                     Else
-                        sSQL = "SELECT cpus.HDD_Name_1, Count(*) AS tot_num FROM (SELECT HDD_Name_1 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'PC'union all SELECT HDD_Name_2 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'PC'union all SELECT HDD_Name_3 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'PC' union all SELECT HDD_Name_4 FROM kompy  WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'PC') AS cpus GROUP BY cpus.HDD_Name_1"
+                        sSQL =
+                            "SELECT cpus.HDD_Name_1, Count(*) AS tot_num FROM (SELECT HDD_Name_1 FROM kompy WHERE kompy.FILIAL='" &
+                            cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text &
+                            "' AND tiptehn = 'PC'union all SELECT HDD_Name_2 FROM kompy WHERE kompy.FILIAL='" &
+                            cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text &
+                            "' AND tiptehn = 'PC'union all SELECT HDD_Name_3 FROM kompy WHERE kompy.FILIAL='" &
+                            cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text &
+                            "' AND tiptehn = 'PC' union all SELECT HDD_Name_4 FROM kompy  WHERE kompy.FILIAL='" &
+                            cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text &
+                            "' AND tiptehn = 'PC') AS cpus GROUP BY cpus.HDD_Name_1"
 
                     End If
                 End If
@@ -1106,81 +1265,108 @@ err:
 
             Case langIni.GetString("frmReports", "MSG14", "Сетевые карты")
 
-                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
+                If _
+                    cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And
+                    cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
                     'sSQL = "SELECT cpus.NET_NAME_1, Count(*) AS tot_num FROM (SELECT NET_NAME_1 FROM kompy union all SELECT NET_NAME_2 FROM kompy) AS cpus GROUP BY cpus.NET_NAME_1"
-                    sSQL = "SELECT cpus.NET_NAME_1, Count(*) AS tot_num FROM (SELECT NET_NAME_1 FROM kompy WHERE tiptehn = 'PC' union all SELECT NET_NAME_2 FROM kompy WHERE tiptehn = 'PC' ) AS cpus GROUP BY cpus.NET_NAME_1"
+                    sSQL =
+                        "SELECT cpus.NET_NAME_1, Count(*) AS tot_num FROM (SELECT NET_NAME_1 FROM kompy WHERE tiptehn = 'PC' union all SELECT NET_NAME_2 FROM kompy WHERE tiptehn = 'PC' ) AS cpus GROUP BY cpus.NET_NAME_1"
                 Else
 
                     If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
-                        sSQL = "SELECT cpus.NET_NAME_1, Count(*) AS tot_num FROM (SELECT NET_NAME_1 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' union all SELECT NET_NAME_2 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' ) AS cpus GROUP BY cpus.NET_NAME_1"
+                        sSQL =
+                            "SELECT cpus.NET_NAME_1, Count(*) AS tot_num FROM (SELECT NET_NAME_1 FROM kompy WHERE kompy.FILIAL='" &
+                            cmbReport2fil.Text &
+                            "' AND tiptehn = 'PC' union all SELECT NET_NAME_2 FROM kompy WHERE kompy.FILIAL='" &
+                            cmbReport2fil.Text & "' AND tiptehn = 'PC' ) AS cpus GROUP BY cpus.NET_NAME_1"
 
                     Else
-                        sSQL = "SELECT cpus.NET_NAME_1, Count(*) AS tot_num FROM (SELECT NET_NAME_1 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'PC'union all SELECT NET_NAME_2 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'PC') AS cpus GROUP BY cpus.NET_NAME_1"
+                        sSQL =
+                            "SELECT cpus.NET_NAME_1, Count(*) AS tot_num FROM (SELECT NET_NAME_1 FROM kompy WHERE kompy.FILIAL='" &
+                            cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text &
+                            "' AND tiptehn = 'PC'union all SELECT NET_NAME_2 FROM kompy WHERE kompy.FILIAL='" &
+                            cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text &
+                            "' AND tiptehn = 'PC') AS cpus GROUP BY cpus.NET_NAME_1"
 
                     End If
                 End If
 
             Case langIni.GetString("frmReports", "MSG8", "Модем")
 
-                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
+                If _
+                    cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And
+                    cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
-                    sSQL = "SELECT MODEM_NAME, COUNT(tiptehn) as tot_num FROM kompy WHERE tiptehn = 'PC' group by MODEM_NAME"
+                    sSQL =
+                        "SELECT MODEM_NAME, COUNT(tiptehn) as tot_num FROM kompy WHERE tiptehn = 'PC' group by MODEM_NAME"
 
                 Else
 
                     If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
 
-                        sSQL = "SELECT MODEM_NAME, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' group by MODEM_NAME"
+                        sSQL = "SELECT MODEM_NAME, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" &
+                               cmbReport2fil.Text & "' AND tiptehn = 'PC' group by MODEM_NAME"
 
                     Else
 
-                        sSQL = "SELECT MODEM_NAME, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'PC' group by MODEM_NAME"
+                        sSQL = "SELECT MODEM_NAME, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" &
+                               cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text &
+                               "' AND tiptehn = 'PC' group by MODEM_NAME"
 
                     End If
                 End If
-
 
 
             Case langIni.GetString("frmReports", "MSG3", "USB")
 
-                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
+                If _
+                    cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And
+                    cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
-                    sSQL = "SELECT USB_NAME, COUNT(tiptehn) as tot_num FROM kompy WHERE tiptehn = 'PC' group by USB_NAME"
+                    sSQL =
+                        "SELECT USB_NAME, COUNT(tiptehn) as tot_num FROM kompy WHERE tiptehn = 'PC' group by USB_NAME"
 
                 Else
 
                     If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
 
-                        sSQL = "SELECT USB_NAME, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' group by USB_NAME"
+                        sSQL = "SELECT USB_NAME, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" &
+                               cmbReport2fil.Text & "' AND tiptehn = 'PC' group by USB_NAME"
 
                     Else
 
-                        sSQL = "SELECT USB_NAME, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'PC' group by USB_NAME"
+                        sSQL = "SELECT USB_NAME, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" &
+                               cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text &
+                               "' AND tiptehn = 'PC' group by USB_NAME"
 
                     End If
                 End If
 
 
-
-
             Case langIni.GetString("frmReports", "MSG2", "PCI")
 
-                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
+                If _
+                    cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And
+                    cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
-                    sSQL = "SELECT PCI_NAME, COUNT(tiptehn) as tot_num FROM kompy WHERE tiptehn = 'PC' group by PCI_NAME"
+                    sSQL =
+                        "SELECT PCI_NAME, COUNT(tiptehn) as tot_num FROM kompy WHERE tiptehn = 'PC' group by PCI_NAME"
 
                 Else
 
                     If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
 
-                        sSQL = "SELECT PCI_NAME, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' group by PCI_NAME"
+                        sSQL = "SELECT PCI_NAME, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" &
+                               cmbReport2fil.Text & "' AND tiptehn = 'PC' group by PCI_NAME"
 
                     Else
 
-                        sSQL = "SELECT PCI_NAME, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'PC' group by PCI_NAME"
+                        sSQL = "SELECT PCI_NAME, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" &
+                               cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text &
+                               "' AND tiptehn = 'PC' group by PCI_NAME"
 
                     End If
                 End If
@@ -1188,32 +1374,57 @@ err:
 
             Case langIni.GetString("frmReports", "MSG19", "Оптические накопители")
 
-                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
+                If _
+                    cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And
+                    cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
                     'sSQL = "SELECT cpus.CD_NAME, Count(*) AS tot_num FROM (SELECT CD_NAME FROM kompy union all SELECT CDRW_NAME FROM kompy union all SELECT DVD_NAME FROM kompy) AS cpus GROUP BY cpus.CD_NAME"
-                    sSQL = "SELECT cpus.CD_NAME, Count(*) AS tot_num FROM (SELECT CD_NAME FROM kompy WHERE tiptehn = 'PC' union all SELECT CDRW_NAME FROM kompy WHERE tiptehn = 'PC'  union all SELECT DVD_NAME FROM kompy WHERE tiptehn = 'PC') AS cpus GROUP BY cpus.CD_NAME"
+                    sSQL =
+                        "SELECT cpus.CD_NAME, Count(*) AS tot_num FROM (SELECT CD_NAME FROM kompy WHERE tiptehn = 'PC' union all SELECT CDRW_NAME FROM kompy WHERE tiptehn = 'PC'  union all SELECT DVD_NAME FROM kompy WHERE tiptehn = 'PC') AS cpus GROUP BY cpus.CD_NAME"
                 Else
 
                     If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
-                        sSQL = "SELECT cpus.CD_NAME, Count(*) AS tot_num FROM (SELECT CD_NAME FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' union all SELECT CDRW_NAME FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC'  union all SELECT DVD_NAME FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC') AS cpus GROUP BY cpus.CD_NAME"
+                        sSQL =
+                            "SELECT cpus.CD_NAME, Count(*) AS tot_num FROM (SELECT CD_NAME FROM kompy WHERE kompy.FILIAL='" &
+                            cmbReport2fil.Text &
+                            "' AND tiptehn = 'PC' union all SELECT CDRW_NAME FROM kompy WHERE kompy.FILIAL='" &
+                            cmbReport2fil.Text &
+                            "' AND tiptehn = 'PC'  union all SELECT DVD_NAME FROM kompy WHERE kompy.FILIAL='" &
+                            cmbReport2fil.Text & "' AND tiptehn = 'PC') AS cpus GROUP BY cpus.CD_NAME"
                     Else
-                        sSQL = "SELECT cpus.CD_NAME, Count(*) AS tot_num FROM (SELECT CD_NAME FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'PC' union all SELECT CDRW_NAME FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'PC' union all SELECT DVD_NAME FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'PC') AS cpus GROUP BY cpus.CD_NAME"
+                        sSQL =
+                            "SELECT cpus.CD_NAME, Count(*) AS tot_num FROM (SELECT CD_NAME FROM kompy WHERE kompy.FILIAL='" &
+                            cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text &
+                            "' AND tiptehn = 'PC' union all SELECT CDRW_NAME FROM kompy WHERE kompy.FILIAL='" &
+                            cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text &
+                            "' AND tiptehn = 'PC' union all SELECT DVD_NAME FROM kompy WHERE kompy.FILIAL='" &
+                            cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text &
+                            "' AND tiptehn = 'PC') AS cpus GROUP BY cpus.CD_NAME"
                     End If
                 End If
 
 
-
             Case langIni.GetString("frmReports", "MSG9", "Монитор")
 
-                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
+                If _
+                    cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And
+                    cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
                     'sSQL = "SELECT cpus.MONITOR_NAME, Count(*) AS tot_num FROM (SELECT MONITOR_NAME FROM kompy union all SELECT MONITOR_NAME2 FROM kompy) AS cpus GROUP BY cpus.MONITOR_NAME"
-                    sSQL = "SELECT cpus.MONITOR_NAME, Count(*) AS tot_num FROM (SELECT MONITOR_NAME FROM kompy union all SELECT MONITOR_NAME2 FROM kompy) AS cpus GROUP BY cpus.MONITOR_NAME"
+                    sSQL =
+                        "SELECT cpus.MONITOR_NAME, Count(*) AS tot_num FROM (SELECT MONITOR_NAME FROM kompy union all SELECT MONITOR_NAME2 FROM kompy) AS cpus GROUP BY cpus.MONITOR_NAME"
                 Else
 
                     If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
-                        sSQL = "SELECT cpus.MONITOR_NAME, Count(*) AS tot_num FROM (SELECT MONITOR_NAME FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' union all SELECT MONITOR_NAME2 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "') AS cpus GROUP BY cpus.MONITOR_NAME"
+                        sSQL =
+                            "SELECT cpus.MONITOR_NAME, Count(*) AS tot_num FROM (SELECT MONITOR_NAME FROM kompy WHERE kompy.FILIAL='" &
+                            cmbReport2fil.Text & "' union all SELECT MONITOR_NAME2 FROM kompy WHERE kompy.FILIAL='" &
+                            cmbReport2fil.Text & "') AS cpus GROUP BY cpus.MONITOR_NAME"
 
                     Else
-                        sSQL = "SELECT cpus.MONITOR_NAME, Count(*) AS tot_num FROM (SELECT MONITOR_NAME FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' union all SELECT MONITOR_NAME2 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "') AS cpus GROUP BY cpus.MONITOR_NAME"
+                        sSQL =
+                            "SELECT cpus.MONITOR_NAME, Count(*) AS tot_num FROM (SELECT MONITOR_NAME FROM kompy WHERE kompy.FILIAL='" &
+                            cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text &
+                            "' union all SELECT MONITOR_NAME2 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text &
+                            "' and kompy.MESTO='" & cmbReport2Department.Text & "') AS cpus GROUP BY cpus.MONITOR_NAME"
 
                     End If
                 End If
@@ -1221,41 +1432,69 @@ err:
 
             Case langIni.GetString("frmReports", "MSG6", "Звуковая карта")
 
-                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
+                If _
+                    cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And
+                    cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
                     'sSQL = "SELECT NET_NAME FROM kompy WHERE (kompy.tiptehn) = 'MFU'"
-                    sSQL = "SELECT SOUND_NAME, COUNT(tiptehn) as tot_num FROM kompy WHERE tiptehn = 'PC' group by SOUND_NAME"
+                    sSQL =
+                        "SELECT SOUND_NAME, COUNT(tiptehn) as tot_num FROM kompy WHERE tiptehn = 'PC' group by SOUND_NAME"
 
                 Else
 
                     If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
                         'sSQL = "SELECT NET_NAME FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND kompy.tiptehn = 'MFU'"
-                        sSQL = "SELECT SOUND_NAME, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' group by SOUND_NAME"
+                        sSQL = "SELECT SOUND_NAME, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" &
+                               cmbReport2fil.Text & "' AND tiptehn = 'PC' group by SOUND_NAME"
 
                     Else
                         'sSQL = "SELECT NET_NAME FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND kompy.tiptehn = 'MFU'"
-                        sSQL = "SELECT SOUND_NAME, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'PC' group by SOUND_NAME"
+                        sSQL = "SELECT SOUND_NAME, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" &
+                               cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text &
+                               "' AND tiptehn = 'PC' group by SOUND_NAME"
 
                     End If
                 End If
 
 
-
-
             Case langIni.GetString("frmReports", "MSG10", "Память ОЗУ")
 
-                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
+                If _
+                    cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And
+                    cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
                     'sSQL = "SELECT cpus.RAM_1, Count(*) AS tot_num FROM (SELECT RAM_1 FROM kompy union all SELECT RAM_2 FROM kompy union all SELECT RAM_3 FROM kompy union all SELECT  RAM_4 FROM kompy) AS cpus GROUP BY cpus.RAM_1"
-                    sSQL = "SELECT cpus.RAM_1, Count(*) AS tot_num FROM (SELECT RAM_1 FROM kompy WHERE tiptehn = 'PC' union all SELECT RAM_2 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' union all SELECT RAM_3 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' union all SELECT  RAM_4 FROM kompy WHERE tiptehn = 'PC' ) AS cpus GROUP BY cpus.RAM_1"
+                    sSQL =
+                        "SELECT cpus.RAM_1, Count(*) AS tot_num FROM (SELECT RAM_1 FROM kompy WHERE tiptehn = 'PC' union all SELECT RAM_2 FROM kompy WHERE kompy.FILIAL='" &
+                        cmbReport2fil.Text &
+                        "' AND tiptehn = 'PC' union all SELECT RAM_3 FROM kompy WHERE kompy.FILIAL='" &
+                        cmbReport2fil.Text &
+                        "' AND tiptehn = 'PC' union all SELECT  RAM_4 FROM kompy WHERE tiptehn = 'PC' ) AS cpus GROUP BY cpus.RAM_1"
 
                 Else
 
                     If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
-                        sSQL = "SELECT cpus.RAM_1, Count(*) AS tot_num FROM (SELECT RAM_1 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' union all SELECT RAM_2 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' union all SELECT RAM_3 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' union all SELECT  RAM_4 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' ) AS cpus GROUP BY cpus.RAM_1"
+                        sSQL =
+                            "SELECT cpus.RAM_1, Count(*) AS tot_num FROM (SELECT RAM_1 FROM kompy WHERE kompy.FILIAL='" &
+                            cmbReport2fil.Text &
+                            "' AND tiptehn = 'PC' union all SELECT RAM_2 FROM kompy WHERE kompy.FILIAL='" &
+                            cmbReport2fil.Text &
+                            "' AND tiptehn = 'PC' union all SELECT RAM_3 FROM kompy WHERE kompy.FILIAL='" &
+                            cmbReport2fil.Text &
+                            "' AND tiptehn = 'PC' union all SELECT  RAM_4 FROM kompy WHERE kompy.FILIAL='" &
+                            cmbReport2fil.Text & "' AND tiptehn = 'PC' ) AS cpus GROUP BY cpus.RAM_1"
 
                     Else
-                        sSQL = "SELECT cpus.RAM_1, Count(*) AS tot_num FROM (SELECT RAM_1 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'PC'union all SELECT RAM_2 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'PC'union all SELECT RAM_3 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'PC' union all SELECT RAM_4 FROM kompy  WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'PC') AS cpus GROUP BY cpus.RAM_1"
+                        sSQL =
+                            "SELECT cpus.RAM_1, Count(*) AS tot_num FROM (SELECT RAM_1 FROM kompy WHERE kompy.FILIAL='" &
+                            cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text &
+                            "' AND tiptehn = 'PC'union all SELECT RAM_2 FROM kompy WHERE kompy.FILIAL='" &
+                            cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text &
+                            "' AND tiptehn = 'PC'union all SELECT RAM_3 FROM kompy WHERE kompy.FILIAL='" &
+                            cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text &
+                            "' AND tiptehn = 'PC' union all SELECT RAM_4 FROM kompy  WHERE kompy.FILIAL='" &
+                            cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text &
+                            "' AND tiptehn = 'PC') AS cpus GROUP BY cpus.RAM_1"
 
                     End If
                 End If
@@ -1263,20 +1502,42 @@ err:
                 'SELECT cpus.CPU1 as [Наименование], cpus.CPUProizv1 as [Производитель], Count(*) AS [Количество] FROM (SELECT CPU1,CPUProizv1 FROM kompy WHERE tiptehn = 'PC' and CPU1 <> ''  union all SELECT CPU2,CPUProizv2 FROM kompy WHERE tiptehn = 'PC'  and CPU2<> '' union all  SELECT CPU3,CPUProizv3 FROM kompy WHERE tiptehn = 'PC'  and CPU3 <> '' union all  SELECT CPU4,CPUProizv4 FROM kompy WHERE tiptehn = 'PC' and CPU4 <> ''  ) AS cpus GROUP BY cpus.CPU1, cpus.CPUProizv1 
 
 
-
-
             Case langIni.GetString("frmReports", "MSG12", "Производители жестких дисков")
 
-                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
+                If _
+                    cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And
+                    cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
                     'sSQL = "SELECT cpus.HDD_PROIZV_1, Count(*) AS tot_num FROM (SELECT HDD_PROIZV_1 FROM kompy union all SELECT HDD_PROIZV_2 FROM kompy union all SELECT HDD_PROIZV_3 FROM kompy union all SELECT  HDD_PROIZV_4 FROM kompy) AS cpus GROUP BY cpus.HDD_PROIZV_1"
-                    sSQL = "SELECT cpus.HDD_PROIZV_1, Count(*) AS tot_num FROM (SELECT HDD_PROIZV_1 FROM kompy WHERE tiptehn = 'PC' union all SELECT HDD_PROIZV_2 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' union all SELECT HDD_PROIZV_3 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' union all SELECT  HDD_PROIZV_4 FROM kompy WHERE tiptehn = 'PC' ) AS cpus GROUP BY cpus.HDD_PROIZV_1"
+                    sSQL =
+                        "SELECT cpus.HDD_PROIZV_1, Count(*) AS tot_num FROM (SELECT HDD_PROIZV_1 FROM kompy WHERE tiptehn = 'PC' union all SELECT HDD_PROIZV_2 FROM kompy WHERE kompy.FILIAL='" &
+                        cmbReport2fil.Text &
+                        "' AND tiptehn = 'PC' union all SELECT HDD_PROIZV_3 FROM kompy WHERE kompy.FILIAL='" &
+                        cmbReport2fil.Text &
+                        "' AND tiptehn = 'PC' union all SELECT  HDD_PROIZV_4 FROM kompy WHERE tiptehn = 'PC' ) AS cpus GROUP BY cpus.HDD_PROIZV_1"
                 Else
 
                     If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
-                        sSQL = "SELECT cpus.HDD_PROIZV_1, Count(*) AS tot_num FROM (SELECT HDD_PROIZV_1 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' union all SELECT HDD_PROIZV_2 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' union all SELECT HDD_PROIZV_3 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' union all SELECT  HDD_PROIZV_4 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' ) AS cpus GROUP BY cpus.HDD_PROIZV_1"
+                        sSQL =
+                            "SELECT cpus.HDD_PROIZV_1, Count(*) AS tot_num FROM (SELECT HDD_PROIZV_1 FROM kompy WHERE kompy.FILIAL='" &
+                            cmbReport2fil.Text &
+                            "' AND tiptehn = 'PC' union all SELECT HDD_PROIZV_2 FROM kompy WHERE kompy.FILIAL='" &
+                            cmbReport2fil.Text &
+                            "' AND tiptehn = 'PC' union all SELECT HDD_PROIZV_3 FROM kompy WHERE kompy.FILIAL='" &
+                            cmbReport2fil.Text &
+                            "' AND tiptehn = 'PC' union all SELECT  HDD_PROIZV_4 FROM kompy WHERE kompy.FILIAL='" &
+                            cmbReport2fil.Text & "' AND tiptehn = 'PC' ) AS cpus GROUP BY cpus.HDD_PROIZV_1"
 
                     Else
-                        sSQL = "SELECT cpus.HDD_PROIZV_1, Count(*) AS tot_num FROM (SELECT HDD_PROIZV_1 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'PC'union all SELECT HDD_PROIZV_2 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'PC'union all SELECT HDD_PROIZV_3 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'PC' union all SELECT HDD_PROIZV_4 FROM kompy  WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'PC') AS cpus GROUP BY cpus.HDD_PROIZV_1"
+                        sSQL =
+                            "SELECT cpus.HDD_PROIZV_1, Count(*) AS tot_num FROM (SELECT HDD_PROIZV_1 FROM kompy WHERE kompy.FILIAL='" &
+                            cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text &
+                            "' AND tiptehn = 'PC'union all SELECT HDD_PROIZV_2 FROM kompy WHERE kompy.FILIAL='" &
+                            cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text &
+                            "' AND tiptehn = 'PC'union all SELECT HDD_PROIZV_3 FROM kompy WHERE kompy.FILIAL='" &
+                            cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text &
+                            "' AND tiptehn = 'PC' union all SELECT HDD_PROIZV_4 FROM kompy  WHERE kompy.FILIAL='" &
+                            cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text &
+                            "' AND tiptehn = 'PC') AS cpus GROUP BY cpus.HDD_PROIZV_1"
 
                     End If
                 End If
@@ -1293,32 +1554,60 @@ err:
                     Case 0
 
 
-                        If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
-                            sSQL = "SELECT net_name as cpus, COUNT(tiptehn) as tot_num  FROM kompy WHERE tiptehn = 'Printer' group by net_name"
+                        If _
+                            cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And
+                            cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
+                            sSQL =
+                                "SELECT net_name as cpus, COUNT(tiptehn) as tot_num  FROM kompy WHERE tiptehn = 'Printer' group by net_name"
 
                         Else
 
                             If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
-                                sSQL = "SELECT net_name as cpus, COUNT(tiptehn) as tot_num  FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'Printer' group by net_name"
+                                sSQL =
+                                    "SELECT net_name as cpus, COUNT(tiptehn) as tot_num  FROM kompy WHERE kompy.FILIAL='" &
+                                    cmbReport2fil.Text & "' AND tiptehn = 'Printer' group by net_name"
 
                             Else
-                                sSQL = "SELECT net_name as cpus, COUNT(tiptehn) as tot_num  FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'Printer' group by net_name"
+                                sSQL =
+                                    "SELECT net_name as cpus, COUNT(tiptehn) as tot_num  FROM kompy WHERE kompy.FILIAL='" &
+                                    cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text &
+                                    "' AND tiptehn = 'Printer' group by net_name"
 
                             End If
                         End If
 
                     Case 1
 
-                        If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
-                            sSQL = "SELECT cpus.PRINTER_NAME_1, Count(*) AS tot_num FROM (SELECT PRINTER_NAME_1 FROM kompy WHERE tiptehn = 'PC' union all SELECT PRINTER_NAME_2 FROM kompy WHERE tiptehn = 'PC' union all SELECT PRINTER_NAME_3 FROM kompy WHERE tiptehn = 'PC' union all SELECT  PRINTER_NAME_4 FROM kompy WHERE tiptehn = 'PC') AS cpus GROUP BY cpus.PRINTER_NAME_1"
+                        If _
+                            cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And
+                            cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
+                            sSQL =
+                                "SELECT cpus.PRINTER_NAME_1, Count(*) AS tot_num FROM (SELECT PRINTER_NAME_1 FROM kompy WHERE tiptehn = 'PC' union all SELECT PRINTER_NAME_2 FROM kompy WHERE tiptehn = 'PC' union all SELECT PRINTER_NAME_3 FROM kompy WHERE tiptehn = 'PC' union all SELECT  PRINTER_NAME_4 FROM kompy WHERE tiptehn = 'PC') AS cpus GROUP BY cpus.PRINTER_NAME_1"
 
                         Else
 
                             If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
-                                sSQL = "SELECT cpus.PRINTER_NAME_1, Count(*) AS tot_num FROM (SELECT PRINTER_NAME_1 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' union all SELECT PRINTER_NAME_2 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' union all SELECT PRINTER_NAME_3 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' union all SELECT  PRINTER_NAME_4 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' ) AS cpus GROUP BY cpus.PRINTER_NAME_1"
+                                sSQL =
+                                    "SELECT cpus.PRINTER_NAME_1, Count(*) AS tot_num FROM (SELECT PRINTER_NAME_1 FROM kompy WHERE kompy.FILIAL='" &
+                                    cmbReport2fil.Text &
+                                    "' AND tiptehn = 'PC' union all SELECT PRINTER_NAME_2 FROM kompy WHERE kompy.FILIAL='" &
+                                    cmbReport2fil.Text &
+                                    "' AND tiptehn = 'PC' union all SELECT PRINTER_NAME_3 FROM kompy WHERE kompy.FILIAL='" &
+                                    cmbReport2fil.Text &
+                                    "' AND tiptehn = 'PC' union all SELECT  PRINTER_NAME_4 FROM kompy WHERE kompy.FILIAL='" &
+                                    cmbReport2fil.Text & "' AND tiptehn = 'PC' ) AS cpus GROUP BY cpus.PRINTER_NAME_1"
 
                             Else
-                                sSQL = "SELECT cpus.PRINTER_NAME_1, Count(*) AS tot_num FROM (SELECT PRINTER_NAME_1 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'PC' union all SELECT PRINTER_NAME_2 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'PC' union all SELECT PRINTER_NAME_3 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'PC' union all SELECT PRINTER_NAME_4 FROM kompy  WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'PC') AS cpus GROUP BY cpus.PRINTER_NAME_1"
+                                sSQL =
+                                    "SELECT cpus.PRINTER_NAME_1, Count(*) AS tot_num FROM (SELECT PRINTER_NAME_1 FROM kompy WHERE kompy.FILIAL='" &
+                                    cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text &
+                                    "' AND tiptehn = 'PC' union all SELECT PRINTER_NAME_2 FROM kompy WHERE kompy.FILIAL='" &
+                                    cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text &
+                                    "' AND tiptehn = 'PC' union all SELECT PRINTER_NAME_3 FROM kompy WHERE kompy.FILIAL='" &
+                                    cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text &
+                                    "' AND tiptehn = 'PC' union all SELECT PRINTER_NAME_4 FROM kompy  WHERE kompy.FILIAL='" &
+                                    cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text &
+                                    "' AND tiptehn = 'PC') AS cpus GROUP BY cpus.PRINTER_NAME_1"
 
                             End If
                         End If
@@ -1331,59 +1620,84 @@ err:
             Case langIni.GetString("frmReports", "MSG16", "Установленное ПО")
                 Dim intCount As Integer = 0
 
-                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
+                If _
+                    cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And
+                    cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
-                    sSQL = "SELECT SOFT_INSTALL.Soft, COUNT(SOFT_INSTALL.Soft) as tot_num FROM SOFT_INSTALL, kompy WHERE SOFT_INSTALL.Id_Comp=kompy.ID group by SOFT_INSTALL.Soft order by SOFT_INSTALL.Soft"
+                    sSQL =
+                        "SELECT SOFT_INSTALL.Soft, COUNT(SOFT_INSTALL.Soft) as tot_num FROM SOFT_INSTALL, kompy WHERE SOFT_INSTALL.Id_Comp=kompy.ID group by SOFT_INSTALL.Soft order by SOFT_INSTALL.Soft"
 
                 Else
 
                     If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
-                        sSQL = "SELECT SOFT_INSTALL.Soft, COUNT(SOFT_INSTALL.Soft) as tot_num FROM SOFT_INSTALL, kompy WHERE SOFT_INSTALL.Id_Comp=kompy.ID AND kompy.FILIAL='" & cmbReport2fil.Text & "' group by SOFT_INSTALL.Soft order by SOFT_INSTALL.Soft"
+                        sSQL =
+                            "SELECT SOFT_INSTALL.Soft, COUNT(SOFT_INSTALL.Soft) as tot_num FROM SOFT_INSTALL, kompy WHERE SOFT_INSTALL.Id_Comp=kompy.ID AND kompy.FILIAL='" &
+                            cmbReport2fil.Text & "' group by SOFT_INSTALL.Soft order by SOFT_INSTALL.Soft"
 
                     Else
 
-                        sSQL = "SELECT SOFT_INSTALL.Soft, COUNT(SOFT_INSTALL.Soft) as tot_num FROM SOFT_INSTALL, kompy WHERE SOFT_INSTALL.Id_Comp=kompy.ID AND kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' group by SOFT_INSTALL.Soft order by SOFT_INSTALL.Soft"
+                        sSQL =
+                            "SELECT SOFT_INSTALL.Soft, COUNT(SOFT_INSTALL.Soft) as tot_num FROM SOFT_INSTALL, kompy WHERE SOFT_INSTALL.Id_Comp=kompy.ID AND kompy.FILIAL='" &
+                            cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text &
+                            "' group by SOFT_INSTALL.Soft order by SOFT_INSTALL.Soft"
 
                     End If
 
                 End If
 
 
-
             Case langIni.GetString("frmReports", "MSG17", "Тип и диагональ монитора")
 
-                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
+                If _
+                    cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And
+                    cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
                     'sSQL = "SELECT cpus.Monitor_dum, Count(*) AS tot_num FROM (SELECT Monitor_dum FROM kompy union all SELECT Monitor_dum2 FROM kompy) AS cpus GROUP BY cpus.Monitor_dum"
-                    sSQL = "SELECT cpus.Monitor_dum, Count(*) AS tot_num FROM (SELECT Monitor_dum FROM kompy WHERE tiptehn = 'PC' union all SELECT Monitor_dum2 FROM kompy WHERE tiptehn = 'PC' ) AS cpus GROUP BY cpus.Monitor_dum"
+                    sSQL =
+                        "SELECT cpus.Monitor_dum, Count(*) AS tot_num FROM (SELECT Monitor_dum FROM kompy WHERE tiptehn = 'PC' union all SELECT Monitor_dum2 FROM kompy WHERE tiptehn = 'PC' ) AS cpus GROUP BY cpus.Monitor_dum"
                 Else
 
                     If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
-                        sSQL = "SELECT cpus.Monitor_dum, Count(*) AS tot_num FROM (SELECT Monitor_dum FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' union all SELECT Monitor_dum2 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'PC' ) AS cpus GROUP BY cpus.Monitor_dum"
+                        sSQL =
+                            "SELECT cpus.Monitor_dum, Count(*) AS tot_num FROM (SELECT Monitor_dum FROM kompy WHERE kompy.FILIAL='" &
+                            cmbReport2fil.Text &
+                            "' AND tiptehn = 'PC' union all SELECT Monitor_dum2 FROM kompy WHERE kompy.FILIAL='" &
+                            cmbReport2fil.Text & "' AND tiptehn = 'PC' ) AS cpus GROUP BY cpus.Monitor_dum"
 
                     Else
-                        sSQL = "SELECT cpus.Monitor_dum, Count(*) AS tot_num FROM (SELECT Monitor_dum FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'PC'union all SELECT Monitor_dum2 FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'PC') AS cpus GROUP BY cpus.Monitor_dum"
+                        sSQL =
+                            "SELECT cpus.Monitor_dum, Count(*) AS tot_num FROM (SELECT Monitor_dum FROM kompy WHERE kompy.FILIAL='" &
+                            cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text &
+                            "' AND tiptehn = 'PC'union all SELECT Monitor_dum2 FROM kompy WHERE kompy.FILIAL='" &
+                            cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text &
+                            "' AND tiptehn = 'PC') AS cpus GROUP BY cpus.Monitor_dum"
 
                     End If
                 End If
 
             Case langIni.GetString("frmReports", "MSG18", "Сетевые устройства")
 
-                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
+                If _
+                    cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And
+                    cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
                     'sSQL = "SELECT NET_NAME FROM kompy WHERE (kompy.tiptehn) = 'MFU'"
-                    sSQL = "SELECT PRINTER_SN_1, COUNT(tiptehn) as tot_num FROM kompy WHERE tiptehn = 'NET' group by PRINTER_SN_1"
+                    sSQL =
+                        "SELECT PRINTER_SN_1, COUNT(tiptehn) as tot_num FROM kompy WHERE tiptehn = 'NET' group by PRINTER_SN_1"
 
                 Else
 
                     If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
                         'sSQL = "SELECT NET_NAME FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND kompy.tiptehn = 'MFU'"
-                        sSQL = "SELECT PRINTER_SN_1, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' AND tiptehn = 'NET' group by PRINTER_SN_1"
+                        sSQL = "SELECT PRINTER_SN_1, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" &
+                               cmbReport2fil.Text & "' AND tiptehn = 'NET' group by PRINTER_SN_1"
 
                     Else
                         'sSQL = "SELECT NET_NAME FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND kompy.tiptehn = 'MFU'"
-                        sSQL = "SELECT PRINTER_SN_1, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' AND tiptehn = 'NET' group by PRINTER_SN_1"
+                        sSQL = "SELECT PRINTER_SN_1, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" &
+                               cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text &
+                               "' AND tiptehn = 'NET' group by PRINTER_SN_1"
 
                     End If
                 End If
@@ -1391,19 +1705,29 @@ err:
 
             Case Else
 
-                If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
+                If _
+                    cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And
+                    cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
-                    sSQL = "SELECT SOFT_INSTALL.Soft, COUNT(SOFT_INSTALL.Soft) as tot_num FROM SOFT_INSTALL, kompy WHERE SOFT_INSTALL.Id_Comp=kompy.ID and SOFT_INSTALL.TIP='" & cmnReport2Compl.Text & "' group by SOFT_INSTALL.Soft order by SOFT_INSTALL.Soft"
+                    sSQL =
+                        "SELECT SOFT_INSTALL.Soft, COUNT(SOFT_INSTALL.Soft) as tot_num FROM SOFT_INSTALL, kompy WHERE SOFT_INSTALL.Id_Comp=kompy.ID and SOFT_INSTALL.TIP='" &
+                        cmnReport2Compl.Text & "' group by SOFT_INSTALL.Soft order by SOFT_INSTALL.Soft"
 
                 Else
 
                     If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
-                        sSQL = "SELECT SOFT_INSTALL.Soft, COUNT(SOFT_INSTALL.Soft) as tot_num FROM SOFT_INSTALL, kompy WHERE SOFT_INSTALL.Id_Comp=kompy.ID and SOFT_INSTALL.TIP='" & cmnReport2Compl.Text & "' AND kompy.FILIAL='" & cmbReport2fil.Text & "' group by SOFT_INSTALL.Soft order by SOFT_INSTALL.Soft"
+                        sSQL =
+                            "SELECT SOFT_INSTALL.Soft, COUNT(SOFT_INSTALL.Soft) as tot_num FROM SOFT_INSTALL, kompy WHERE SOFT_INSTALL.Id_Comp=kompy.ID and SOFT_INSTALL.TIP='" &
+                            cmnReport2Compl.Text & "' AND kompy.FILIAL='" & cmbReport2fil.Text &
+                            "' group by SOFT_INSTALL.Soft order by SOFT_INSTALL.Soft"
 
                     Else
 
-                        sSQL = "SELECT SOFT_INSTALL.Soft, COUNT(SOFT_INSTALL.Soft) as tot_num FROM SOFT_INSTALL, kompy WHERE SOFT_INSTALL.Id_Comp=kompy.ID and SOFT_INSTALL.TIP='" & cmnReport2Compl.Text & "' AND kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text & "' group by SOFT_INSTALL.Soft order by SOFT_INSTALL.Soft"
+                        sSQL =
+                            "SELECT SOFT_INSTALL.Soft, COUNT(SOFT_INSTALL.Soft) as tot_num FROM SOFT_INSTALL, kompy WHERE SOFT_INSTALL.Id_Comp=kompy.ID and SOFT_INSTALL.TIP='" &
+                            cmnReport2Compl.Text & "' AND kompy.FILIAL='" & cmbReport2fil.Text & "' and kompy.MESTO='" &
+                            cmbReport2Department.Text & "' group by SOFT_INSTALL.Soft order by SOFT_INSTALL.Soft"
 
                     End If
 
@@ -1412,13 +1736,12 @@ err:
         End Select
 
 
-
         Dim intj As Integer = 0
 
         'On Error Resume Next
-        Dim rs As ADODB.Recordset
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        Dim rs As Recordset
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
         With rs
             .MoveFirst()
             Do While Not .EOF
@@ -1447,22 +1770,25 @@ err:
         'ListViewRavn master_otch.lvReport2Cl, master_otch
 
         Exit Sub
-Error_:
+        Error_:
         'MsgBox(Err.Description)
     End Sub
 
-    Private Sub cmnReport2Compl_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmnReport2Compl.SelectedIndexChanged
+    Private Sub cmnReport2Compl_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmnReport2Compl.SelectedIndexChanged
         Call LOAD_REPORT_COMPL()
     End Sub
 
-    Private Sub chkReport2Prn_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkReport2Prn.CheckedChanged
+    Private Sub chkReport2Prn_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles chkReport2Prn.CheckedChanged
         Call LOAD_REPORT_COMPL()
     End Sub
 
-    Private Sub lvReport2Cl_ColumnClick(ByVal sender As Object, ByVal e As System.Windows.Forms.ColumnClickEventArgs) Handles lvReport2Cl.ColumnClick
-        Dim new_sorting_column As ColumnHeader = _
-          lvReport2Cl.Columns(e.Column)
-        Dim sort_order As System.Windows.Forms.SortOrder
+    Private Sub lvReport2Cl_ColumnClick(ByVal sender As Object, ByVal e As ColumnClickEventArgs) _
+        Handles lvReport2Cl.ColumnClick
+        Dim new_sorting_column As ColumnHeader =
+                lvReport2Cl.Columns(e.Column)
+        Dim sort_order As SortOrder
         If m_SortingColumn Is Nothing Then
             sort_order = SortOrder.Ascending
         Else
@@ -1491,7 +1817,7 @@ Error_:
         lvReport2Cl.Sort()
     End Sub
 
-    Private Sub btnRefresh_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRefresh.Click
+    Private Sub btnRefresh_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnRefresh.Click
         Me.Cursor = Cursors.WaitCursor
         lvRemont.Sorting = SortOrder.None
         lvRemont.ListViewItemSorter = Nothing
@@ -1505,10 +1831,11 @@ Error_:
     End Sub
 
 
-    Private Sub lvRemont_ColumnClick(ByVal sender As Object, ByVal e As System.Windows.Forms.ColumnClickEventArgs) Handles lvRemont.ColumnClick
-        Dim new_sorting_column As ColumnHeader = _
-          lvRemont.Columns(e.Column)
-        Dim sort_order As System.Windows.Forms.SortOrder
+    Private Sub lvRemont_ColumnClick(ByVal sender As Object, ByVal e As ColumnClickEventArgs) _
+        Handles lvRemont.ColumnClick
+        Dim new_sorting_column As ColumnHeader =
+                lvRemont.Columns(e.Column)
+        Dim sort_order As SortOrder
         If m_SortingColumn Is Nothing Then
             sort_order = SortOrder.Ascending
         Else
@@ -1538,7 +1865,8 @@ Error_:
     End Sub
 
 
-    Private Sub cmbBranche_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbBranche.SelectedIndexChanged
+    Private Sub cmbBranche_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbBranche.SelectedIndexChanged
         On Error GoTo err_
         Dim langIni As New IniFile(sLANGPATH)
 
@@ -1556,9 +1884,10 @@ Error_:
 
         If Len(cmbDepartment.Text) = 0 Then cmbDepartment.Text = langIni.GetString("frmReports", "MSG1", "Все")
 
-        Dim rs1 As ADODB.Recordset
-        rs1 = New ADODB.Recordset
-        rs1.Open("select count(*) as t_n from SPR_OTD_FILIAL WHERE Filial='" & cmbBranche.Text & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        Dim rs1 As Recordset
+        rs1 = New Recordset
+        rs1.Open("select count(*) as t_n from SPR_OTD_FILIAL WHERE Filial='" & cmbBranche.Text & "'", DB7,
+                 CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
         Dim sCNN As Integer
 
         With rs1
@@ -1571,9 +1900,10 @@ Error_:
 
         If sCNN > 0 Then
 
-            rs1 = New ADODB.Recordset
+            rs1 = New Recordset
 
-            rs1.Open("select * from SPR_OTD_FILIAL WHERE Filial='" & cmbBranche.Text & "' ORDER BY N_Otd", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rs1.Open("select * from SPR_OTD_FILIAL WHERE Filial='" & cmbBranche.Text & "' ORDER BY N_Otd", DB7,
+                     CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
 
             cmbDepartment.Items.Clear()
@@ -1599,11 +1929,11 @@ Error_:
         End If
 
         Exit Sub
-err_:
+        err_:
         ' MsgBox(Err.Description, MsgBoxStyle.Information, ProGramName)
     End Sub
 
-    Private Sub btnUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdate.Click
+    Private Sub btnUpdate_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnUpdate.Click
         Dim langIni As New IniFile(sLANGPATH)
 
         If Len(cmbBranche.Text) = 0 Then cmbBranche.Text = langIni.GetString("frmReports", "MSG1", "Все")
@@ -1617,9 +1947,6 @@ err_:
 
 
         Dim Contrl As Control
-
-
-
 
 
         On Error Resume Next
@@ -1640,7 +1967,8 @@ err_:
         End If
 
         If chk_K2.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(2)", "Материнская плата"), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(2)", "Материнская плата"), 100,
+                                  HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
@@ -1650,92 +1978,110 @@ err_:
         End If
 
         If chk_K4.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(4)", "Звуковая карта"), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(4)", "Звуковая карта"), 100,
+                                  HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K5.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(5)", "Жесткий диск 1"), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(5)", "Жесткий диск 1"), 100,
+                                  HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K6.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(6)", "Жесткий диск 1 SN"), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(6)", "Жесткий диск 1 SN"), 100,
+                                  HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K7.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(7)", "Жесткий диск 2"), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(7)", "Жесткий диск 2"), 100,
+                                  HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K8.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(8)", "Жесткий диск 2 SN"), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(8)", "Жесткий диск 2 SN"), 100,
+                                  HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K9.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(9)", "Жесткий диск 3"), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(9)", "Жесткий диск 3"), 100,
+                                  HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K10.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(10)", "Жесткий диск 3 SN"), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(10)", "Жесткий диск 3 SN"), 100,
+                                  HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K11.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(11)", "Жесткий диск 4"), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(11)", "Жесткий диск 4"), 100,
+                                  HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K12.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(12)", "Жесткий диск 4 SN"), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(12)", "Жесткий диск 4 SN"), 100,
+                                  HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K13.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(13)", "Модуль памяти 1"), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(13)", "Модуль памяти 1"), 100,
+                                  HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K14.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(14)", "Модуль памяти 2"), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(14)", "Модуль памяти 2"), 100,
+                                  HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K15.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(15)", "Модуль памяти 3"), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(15)", "Модуль памяти 3"), 100,
+                                  HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K16.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(16)", "Модуль памяти 4"), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(16)", "Модуль памяти 4"), 100,
+                                  HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K17.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(17)", "Оптический диск 1"), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(17)", "Оптический диск 1"), 100,
+                                  HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K18.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(18)", "Оптический диск 2"), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(18)", "Оптический диск 2"), 100,
+                                  HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K19.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(19)", "Оптический диск 3"), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(19)", "Оптический диск 3"), 100,
+                                  HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K20.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(20)", "Сетевая карта 1"), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(20)", "Сетевая карта 1"), 100,
+                                  HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K21.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(21)", "Сетевая карта 2"), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(21)", "Сетевая карта 2"), 100,
+                                  HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
@@ -1765,7 +2111,8 @@ err_:
         End If
 
         If chk_K27.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(27)", "Производитель системного блока"), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(27)", "Производитель системного блока"), 100,
+                                  HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
@@ -1780,7 +2127,8 @@ err_:
         End If
 
         If chk_K30.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(30)", "Номер монитора"), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(30)", "Номер монитора"), 100,
+                                  HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
@@ -1800,7 +2148,8 @@ err_:
         End If
 
         If chk_K34.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(34)", "Акустическая система"), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(34)", "Акустическая система"), 100,
+                                  HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
@@ -1825,17 +2174,20 @@ err_:
         End If
 
         If chk_K39.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(39)", "Блок питания"), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(39)", "Блок питания"), 100,
+                                  HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K40.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(40)", "И.Н. системного блока"), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(40)", "И.Н. системного блока"), 100,
+                                  HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K41.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(41)", "И.Н. монитора"), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(41)", "И.Н. монитора"), 100,
+                                  HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
@@ -1845,7 +2197,8 @@ err_:
         End If
 
         If chk_K47.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(49)", "И.Н. Принтера"), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(49)", "И.Н. Принтера"), 100,
+                                  HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
@@ -1855,12 +2208,14 @@ err_:
         End If
 
         If chk_K44.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(44)", "Ответственный"), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(44)", "Ответственный"), 100,
+                                  HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
         If chk_K45.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(45)", "Место установки"), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(45)", "Место установки"), 100,
+                                  HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
 
@@ -1885,10 +2240,10 @@ err_:
         End If
 
         If chk_K52.Checked = True Then
-            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(74)", "Пользователь"), 100, HorizontalAlignment.Left)
+            LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(74)", "Пользователь"), 100,
+                                  HorizontalAlignment.Left)
             cifTeh(intj + 1) = LvKompOtd.Columns.Count
         End If
-
 
 
         Me.BeginInvoke(New MethodInvoker(AddressOf Pereschet))
@@ -2238,7 +2593,6 @@ err_:
         Else
             cifTeh(52) = 0
         End If
-
     End Sub
 
     Private Sub Refresh_otdellist()
@@ -2281,9 +2635,8 @@ err_:
 
 
         Exit Sub
-Error_:
+        Error_:
         Debug.Print(Err.Description)
-
     End Sub
 
     Private Sub Refr_KOMPL_PC()
@@ -2291,9 +2644,7 @@ Error_:
         On Error Resume Next
 
 
-
         LvKompOtd.Items.Clear()
-
 
 
         Dim sSQL As String
@@ -2305,23 +2656,29 @@ Error_:
         End If
 
         If cmbBranche.Text = pTEXT(2) Then
-            sSQL = "SELECT * FROM kompy WHERE mesto = '" & cmbDepartment.Text & "' and tiptehn = 'PC' ORDER BY mesto, NET_NAME"
+            sSQL = "SELECT * FROM kompy WHERE mesto = '" & cmbDepartment.Text &
+                   "' and tiptehn = 'PC' ORDER BY mesto, NET_NAME"
         Else
         End If
 
         If cmbBranche.Text <> pTEXT(1) And cmbDepartment.Text <> pTEXT(1) And cmbBranche.Text <> pTEXT(2) Then
-            sSQL = "SELECT * FROM kompy WHERE tiptehn = 'PC' and filial = '" & cmbBranche.Text & "' AND mesto = '" & cmbDepartment.Text & "' ORDER BY FILIAL, NET_NAME"
+            sSQL = "SELECT * FROM kompy WHERE tiptehn = 'PC' and filial = '" & cmbBranche.Text & "' AND mesto = '" &
+                   cmbDepartment.Text & "' ORDER BY FILIAL, NET_NAME"
         Else
         End If
 
         If cmbBranche.Text <> pTEXT(1) And cmbDepartment.Text = pTEXT(1) And cmbOffice.Text = pTEXT(1) Then
-            sSQL = "SELECT * FROM kompy WHERE tiptehn = 'PC' and filial = '" & cmbBranche.Text & "' ORDER BY FILIAL, NET_NAME"
+            sSQL = "SELECT * FROM kompy WHERE tiptehn = 'PC' and filial = '" & cmbBranche.Text &
+                   "' ORDER BY FILIAL, NET_NAME"
         Else
         End If
 
 
-        If cmbBranche.Text <> pTEXT(1) And cmbDepartment.Text <> pTEXT(1) And cmbBranche.Text <> pTEXT(2) And cmbOffice.Text <> pTEXT(1) Then
-            sSQL = "SELECT * FROM kompy WHERE tiptehn = 'PC' and filial = '" & cmbBranche.Text & "' AND mesto = '" & cmbDepartment.Text & "' AND kabn='" & cmbOffice.Text & "' ORDER BY FILIAL, NET_NAME"
+        If _
+            cmbBranche.Text <> pTEXT(1) And cmbDepartment.Text <> pTEXT(1) And cmbBranche.Text <> pTEXT(2) And
+            cmbOffice.Text <> pTEXT(1) Then
+            sSQL = "SELECT * FROM kompy WHERE tiptehn = 'PC' and filial = '" & cmbBranche.Text & "' AND mesto = '" &
+                   cmbDepartment.Text & "' AND kabn='" & cmbOffice.Text & "' ORDER BY FILIAL, NET_NAME"
         Else
         End If
 
@@ -2330,9 +2687,9 @@ Error_:
         'Else
         'End If
 
-        Dim rs As ADODB.Recordset
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        Dim rs As Recordset
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
 
         Dim unamS As String
@@ -2343,7 +2700,6 @@ Error_:
         With rs
             .MoveFirst()
             Do Until rs.EOF
-
 
 
                 LvKompOtd.Items.Add(.Fields("NET_NAME").Value) 'col no. 1
@@ -2382,25 +2738,31 @@ Error_:
                 End If
 
 
-
-
-
-
                 If chkTeh(2) = True Then LvKompOtd.Items(CInt(intj)).SubItems.Add(.Fields("MB").Value)
-                If chkTeh(3) = True Then LvKompOtd.Items(CInt(intj)).SubItems.Add(.Fields("SVGA_NAME").Value & " " & .Fields("SVGA_OB_RAM").Value)
+                If chkTeh(3) = True Then _
+                    LvKompOtd.Items(CInt(intj)).SubItems.Add(
+                        .Fields("SVGA_NAME").Value & " " & .Fields("SVGA_OB_RAM").Value)
                 If chkTeh(4) = True Then LvKompOtd.Items(CInt(intj)).SubItems.Add(.Fields("SOUND_NAME").Value)
 
 
-                If chkTeh(5) = True Then LvKompOtd.Items(CInt(intj)).SubItems.Add(.Fields("HDD_Name_1").Value & ", " & .Fields("HDD_OB_1").Value)
+                If chkTeh(5) = True Then _
+                    LvKompOtd.Items(CInt(intj)).SubItems.Add(
+                        .Fields("HDD_Name_1").Value & ", " & .Fields("HDD_OB_1").Value)
                 If chkTeh(6) = True Then LvKompOtd.Items(CInt(intj)).SubItems.Add(.Fields("HDD_SN_1").Value)
 
-                If chkTeh(7) = True Then LvKompOtd.Items(CInt(intj)).SubItems.Add(.Fields("HDD_Name_2").Value & ", " & .Fields("HDD_OB_2").Value)
+                If chkTeh(7) = True Then _
+                    LvKompOtd.Items(CInt(intj)).SubItems.Add(
+                        .Fields("HDD_Name_2").Value & ", " & .Fields("HDD_OB_2").Value)
                 If chkTeh(8) = True Then LvKompOtd.Items(CInt(intj)).SubItems.Add(.Fields("HDD_SN_2").Value)
 
-                If chkTeh(9) = True Then LvKompOtd.Items(CInt(intj)).SubItems.Add(.Fields("HDD_Name_3").Value & ", " & .Fields("HDD_OB_3").Value)
+                If chkTeh(9) = True Then _
+                    LvKompOtd.Items(CInt(intj)).SubItems.Add(
+                        .Fields("HDD_Name_3").Value & ", " & .Fields("HDD_OB_3").Value)
                 If chkTeh(10) = True Then LvKompOtd.Items(CInt(intj)).SubItems.Add(.Fields("HDD_SN_3").Value)
 
-                If chkTeh(11) = True Then LvKompOtd.Items(CInt(intj)).SubItems.Add(.Fields("HDD_Name_4").Value & ", " & .Fields("HDD_OB_4").Value)
+                If chkTeh(11) = True Then _
+                    LvKompOtd.Items(CInt(intj)).SubItems.Add(
+                        .Fields("HDD_Name_4").Value & ", " & .Fields("HDD_OB_4").Value)
                 If chkTeh(12) = True Then LvKompOtd.Items(CInt(intj)).SubItems.Add(.Fields("HDD_SN_4").Value)
 
                 'Память
@@ -2410,9 +2772,14 @@ Error_:
                 If chkTeh(16) = True Then LvKompOtd.Items(CInt(intj)).SubItems.Add(.Fields("RAM_4").Value)
 
 
-                If chkTeh(17) = True Then LvKompOtd.Items(CInt(intj)).SubItems.Add(.Fields("CD_NAME").Value & " " & .Fields("CD_SPEED").Value)
-                If chkTeh(18) = True Then LvKompOtd.Items(CInt(intj)).SubItems.Add(.Fields("CDRW_NAME").Value & " " & .Fields("CDRW_SPEED").Value)
-                If chkTeh(19) = True Then LvKompOtd.Items(CInt(intj)).SubItems.Add(.Fields("DVD_NAME").Value & " " & .Fields("DVD_SPEED").Value)
+                If chkTeh(17) = True Then _
+                    LvKompOtd.Items(CInt(intj)).SubItems.Add(.Fields("CD_NAME").Value & " " & .Fields("CD_SPEED").Value)
+                If chkTeh(18) = True Then _
+                    LvKompOtd.Items(CInt(intj)).SubItems.Add(
+                        .Fields("CDRW_NAME").Value & " " & .Fields("CDRW_SPEED").Value)
+                If chkTeh(19) = True Then _
+                    LvKompOtd.Items(CInt(intj)).SubItems.Add(
+                        .Fields("DVD_NAME").Value & " " & .Fields("DVD_SPEED").Value)
 
                 If chkTeh(20) = True Then LvKompOtd.Items(CInt(intj)).SubItems.Add(.Fields("NET_NAME_1").Value)
                 If chkTeh(21) = True Then LvKompOtd.Items(CInt(intj)).SubItems.Add(.Fields("NET_NAME_2").Value)
@@ -2475,7 +2842,9 @@ Error_:
                 If Len(.Fields("filial").Value) = 0 Then
                     If chkTeh(45) = True Then LvKompOtd.Items(CInt(intj)).SubItems.Add(.Fields("mesto").Value)
                 Else
-                    If chkTeh(45) = True Then LvKompOtd.Items(CInt(intj)).SubItems.Add(.Fields("filial").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+                    If chkTeh(45) = True Then _
+                        LvKompOtd.Items(CInt(intj)).SubItems.Add(
+                            .Fields("filial").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
                 End If
 
                 If chkTeh(48) = True Then LvKompOtd.Items(CInt(intj)).SubItems.Add(.Fields("StoimRub").Value)
@@ -2485,10 +2854,11 @@ Error_:
 
                 If chkTeh(50) = True Then
 
-                    Dim rsP As ADODB.Recordset
-                    rsP = New ADODB.Recordset
+                    Dim rsP As Recordset
+                    rsP = New Recordset
 
-                    rsP.Open("SELECT count(*) as t_n FROM Garantia_sis where id_Comp =" & .Fields("id").Value, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                    rsP.Open("SELECT count(*) as t_n FROM Garantia_sis where id_Comp =" & .Fields("id").Value, DB7,
+                             CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                     Dim sUNAME As Integer
                     With rsP
@@ -2499,9 +2869,10 @@ Error_:
 
                     If sUNAME > 0 Then
 
-                        rsP = New ADODB.Recordset
+                        rsP = New Recordset
 
-                        rsP.Open("SELECT postav FROM Garantia_sis where id_Comp =" & .Fields("id").Value, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rsP.Open("SELECT postav FROM Garantia_sis where id_Comp =" & .Fields("id").Value, DB7,
+                                 CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                         With rsP
                             LvKompOtd.Items(CInt(intj)).SubItems.Add(.Fields("postav").Value)
@@ -2523,15 +2894,13 @@ Error_:
                 If chkTeh(51) = True Then LvKompOtd.Items(CInt(intj)).SubItems.Add(.Fields("TIP_COMPA").Value)
 
 
-
-
-
                 If chkTeh(52) = True Then
 
-                    Dim rsP As ADODB.Recordset
-                    rsP = New ADODB.Recordset
+                    Dim rsP As Recordset
+                    rsP = New Recordset
 
-                    rsP.Open("SELECT count(*) as t_n FROM USER_COMP where ID_COMP =" & .Fields("id").Value, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                    rsP.Open("SELECT count(*) as t_n FROM USER_COMP where ID_COMP =" & .Fields("id").Value, DB7,
+                             CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                     Dim sUNAME As Integer
                     With rsP
@@ -2542,9 +2911,10 @@ Error_:
 
                     If sUNAME > 0 Then
 
-                        rsP = New ADODB.Recordset
+                        rsP = New Recordset
 
-                        rsP.Open("SELECT FIO FROM USER_COMP where ID_COMP =" & .Fields("id").Value, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rsP.Open("SELECT FIO FROM USER_COMP where ID_COMP =" & .Fields("id").Value, DB7,
+                                 CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                         With rsP
                             LvKompOtd.Items(CInt(intj)).SubItems.Add(.Fields("FIO").Value)
@@ -2561,9 +2931,6 @@ Error_:
                 End If
 
 
-
-
-
                 'If chkTeh(46) = True Then LvKompOtd.Items(CInt(intj)).SubItems.Add(unamS)
 
                 intj = intj + 1
@@ -2575,10 +2942,8 @@ Error_:
         rs = Nothing
 
 
-
-
         Exit Sub
-Error_:
+        Error_:
         Debug.Print(Err.Description)
         MsgBox(Err.Description)
     End Sub
@@ -2591,14 +2956,12 @@ Error_:
         Dim langIni As New IniFile(sLANGPATH)
 
 
-
         LvKompOtd.Items.Clear()
 
-        Dim rs As ADODB.Recordset
+        Dim rs As Recordset
         Dim sSQL As String
 
         'cmbOthers<>pTEXT(1)
-
 
 
         If cmbOthers.Text = pTEXT(1) Then
@@ -2609,24 +2972,30 @@ Error_:
             End If
 
             If cmbBranche.Text = pTEXT(2) Then
-                sSQL = "SELECT * FROM kompy WHERE mesto = '" & cmbDepartment.Text & "' and tiptehn <> 'PC' ORDER BY mesto, NET_NAME"
+                sSQL = "SELECT * FROM kompy WHERE mesto = '" & cmbDepartment.Text &
+                       "' and tiptehn <> 'PC' ORDER BY mesto, NET_NAME"
             Else
             End If
 
             If cmbBranche.Text <> pTEXT(1) And cmbDepartment.Text <> pTEXT(1) And cmbBranche.Text <> pTEXT(2) Then
-                sSQL = "SELECT * FROM kompy WHERE tiptehn <> 'PC' and filial = '" & cmbBranche.Text & "' AND mesto = '" & cmbDepartment.Text & "' ORDER BY FILIAL, NET_NAME"
+                sSQL = "SELECT * FROM kompy WHERE tiptehn <> 'PC' and filial = '" & cmbBranche.Text & "' AND mesto = '" &
+                       cmbDepartment.Text & "' ORDER BY FILIAL, NET_NAME"
             Else
             End If
 
 
             If cmbBranche.Text <> pTEXT(1) And cmbDepartment.Text = pTEXT(1) And cmbOffice.Text = pTEXT(1) Then
-                sSQL = "SELECT * FROM kompy WHERE tiptehn <> 'PC' and filial = '" & cmbBranche.Text & "' ORDER BY FILIAL, NET_NAME"
+                sSQL = "SELECT * FROM kompy WHERE tiptehn <> 'PC' and filial = '" & cmbBranche.Text &
+                       "' ORDER BY FILIAL, NET_NAME"
             Else
             End If
 
 
-            If cmbBranche.Text <> pTEXT(1) And cmbDepartment.Text <> pTEXT(1) And cmbBranche.Text <> pTEXT(2) And cmbOffice.Text <> pTEXT(1) Then
-                sSQL = "SELECT * FROM kompy WHERE tiptehn <> 'PC' and filial = '" & cmbBranche.Text & "' AND mesto = '" & cmbDepartment.Text & "' AND kabn='" & cmbOffice.Text & "' ORDER BY FILIAL, NET_NAME"
+            If _
+                cmbBranche.Text <> pTEXT(1) And cmbDepartment.Text <> pTEXT(1) And cmbBranche.Text <> pTEXT(2) And
+                cmbOffice.Text <> pTEXT(1) Then
+                sSQL = "SELECT * FROM kompy WHERE tiptehn <> 'PC' and filial = '" & cmbBranche.Text & "' AND mesto = '" &
+                       cmbDepartment.Text & "' AND kabn='" & cmbOffice.Text & "' ORDER BY FILIAL, NET_NAME"
             Else
             End If
 
@@ -2702,9 +3071,7 @@ Error_:
                 Case Else
 
 
-
             End Select
-
 
 
             If cmbBranche.Text = pTEXT(1) Then
@@ -2713,47 +3080,52 @@ Error_:
             End If
 
             If cmbBranche.Text = pTEXT(2) Then
-                sSQL = "SELECT * FROM kompy WHERE mesto = '" & cmbDepartment.Text & "' and tiptehn = '" & sTEXTP & "' ORDER BY mesto, NET_NAME"
+                sSQL = "SELECT * FROM kompy WHERE mesto = '" & cmbDepartment.Text & "' and tiptehn = '" & sTEXTP &
+                       "' ORDER BY mesto, NET_NAME"
             Else
             End If
 
             If cmbBranche.Text <> pTEXT(1) And cmbDepartment.Text <> pTEXT(1) And cmbBranche.Text <> pTEXT(2) Then
-                sSQL = "SELECT * FROM kompy WHERE tiptehn = '" & sTEXTP & "' and filial = '" & cmbBranche.Text & "' AND mesto = '" & cmbDepartment.Text & "' ORDER BY FILIAL, NET_NAME"
+                sSQL = "SELECT * FROM kompy WHERE tiptehn = '" & sTEXTP & "' and filial = '" & cmbBranche.Text &
+                       "' AND mesto = '" & cmbDepartment.Text & "' ORDER BY FILIAL, NET_NAME"
             Else
             End If
 
 
             If cmbBranche.Text <> pTEXT(1) And cmbDepartment.Text = pTEXT(1) And cmbOffice.Text = pTEXT(1) Then
-                sSQL = "SELECT * FROM kompy WHERE tiptehn = '" & sTEXTP & "' and filial = '" & cmbBranche.Text & "' ORDER BY FILIAL, NET_NAME"
+                sSQL = "SELECT * FROM kompy WHERE tiptehn = '" & sTEXTP & "' and filial = '" & cmbBranche.Text &
+                       "' ORDER BY FILIAL, NET_NAME"
             Else
             End If
 
 
-            If cmbBranche.Text <> pTEXT(1) And cmbDepartment.Text <> pTEXT(1) And cmbBranche.Text <> pTEXT(2) And cmbOffice.Text <> pTEXT(1) Then
-                sSQL = "SELECT * FROM kompy WHERE tiptehn = '" & sTEXTP & "' and filial = '" & cmbBranche.Text & "' AND mesto = '" & cmbDepartment.Text & "' AND kabn='" & cmbOffice.Text & "' ORDER BY FILIAL, NET_NAME"
+            If _
+                cmbBranche.Text <> pTEXT(1) And cmbDepartment.Text <> pTEXT(1) And cmbBranche.Text <> pTEXT(2) And
+                cmbOffice.Text <> pTEXT(1) Then
+                sSQL = "SELECT * FROM kompy WHERE tiptehn = '" & sTEXTP & "' and filial = '" & cmbBranche.Text &
+                       "' AND mesto = '" & cmbDepartment.Text & "' AND kabn='" & cmbOffice.Text &
+                       "' ORDER BY FILIAL, NET_NAME"
             Else
             End If
 
         End If
 
 
-
-
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockBatchOptimistic)
-
-
-
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockBatchOptimistic)
 
 
         LvKompOtd.Columns.Clear()
         LvKompOtd.Columns.Add(("№"), 1, HorizontalAlignment.Left)
         LvKompOtd.Columns.Add((langIni.GetString("frmReports", "B(50)", "Наименование")), 100, HorizontalAlignment.Left)
-        LvKompOtd.Columns.Add((langIni.GetString("frmReports", "B(51)", "Место установки")), 100, HorizontalAlignment.Left)
+        LvKompOtd.Columns.Add((langIni.GetString("frmReports", "B(51)", "Место установки")), 100,
+                              HorizontalAlignment.Left)
         LvKompOtd.Columns.Add((langIni.GetString("frmReports", "B(52)", "Ответственный")), 100, HorizontalAlignment.Left)
         LvKompOtd.Columns.Add((langIni.GetString("frmReports", "B(53)", "Тип")), 100, HorizontalAlignment.Left)
-        LvKompOtd.Columns.Add((langIni.GetString("frmReports", "B(54)", "Серийный номер")), 100, HorizontalAlignment.Left)
-        LvKompOtd.Columns.Add((langIni.GetString("frmReports", "B(55)", "Инвентарный номер")), 100, HorizontalAlignment.Left)
+        LvKompOtd.Columns.Add((langIni.GetString("frmReports", "B(54)", "Серийный номер")), 100,
+                              HorizontalAlignment.Left)
+        LvKompOtd.Columns.Add((langIni.GetString("frmReports", "B(55)", "Инвентарный номер")), 100,
+                              HorizontalAlignment.Left)
         LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(70)", "Стоимость"), 100, HorizontalAlignment.Left)
         LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(71)", "Дата ввода"), 100, HorizontalAlignment.Left)
         LvKompOtd.Columns.Add(langIni.GetString("frmReports", "B(72)", "Поставщик"), 100, HorizontalAlignment.Left)
@@ -2771,7 +3143,9 @@ Error_:
             Do Until rs.EOF
 
 
-                If cmbBranche.Text = rs.Fields("mesto").Value Or cmbBranche.Text = pTEXT(1) Or cmbBranche.Text = rs.Fields("filial").Value Then
+                If _
+                    cmbBranche.Text = rs.Fields("mesto").Value Or cmbBranche.Text = pTEXT(1) Or
+                    cmbBranche.Text = rs.Fields("filial").Value Then
 
 
                     LvKompOtd.Items.Add(.Fields("Id").Value)
@@ -2787,16 +3161,20 @@ Error_:
                     End If
 
 
-                    If Len(.Fields("filial").Value) = 0 Then LvKompOtd.Items(CInt(intj)).SubItems.Add(.Fields("mesto").Value) Else LvKompOtd.Items(CInt(intj)).SubItems.Add(.Fields("filial").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+                    If Len(.Fields("filial").Value) = 0 Then _
+                        LvKompOtd.Items(CInt(intj)).SubItems.Add(.Fields("mesto").Value) Else _
+                        LvKompOtd.Items(CInt(intj)).SubItems.Add(
+                            .Fields("filial").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
 
                     '###################################################################
                     'Вычисляем поставщика
                     '###################################################################
 
-                    Dim rsP As ADODB.Recordset
-                    rsP = New ADODB.Recordset
+                    Dim rsP As Recordset
+                    rsP = New Recordset
 
-                    rsP.Open("SELECT count(*) as t_n FROM Garantia_sis where id_Comp =" & .Fields("id").Value, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                    rsP.Open("SELECT count(*) as t_n FROM Garantia_sis where id_Comp =" & .Fields("id").Value, DB7,
+                             CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                     Dim sUNAME As Integer
                     Dim tUNAME As String
@@ -2809,9 +3187,10 @@ Error_:
 
                     If sUNAME > 0 Then
 
-                        rsP = New ADODB.Recordset
+                        rsP = New Recordset
 
-                        rsP.Open("SELECT postav FROM Garantia_sis where id_Comp =" & .Fields("id").Value, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rsP.Open("SELECT postav FROM Garantia_sis where id_Comp =" & .Fields("id").Value, DB7,
+                                 CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                         With rsP
                             tUNAME = .Fields("postav").Value
@@ -2836,7 +3215,8 @@ Error_:
                         Case "PHOTO"
 
                             LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(langIni.GetString("frmReports", "B(56)", "Фотоаппарат"))
+                            LvKompOtd.Items(CInt(intj)).SubItems.Add(langIni.GetString("frmReports", "B(56)",
+                                                                                       "Фотоаппарат"))
                             If Not IsDBNull(.Fields("PRINTER_SN_1").Value) Then
                                 LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("PRINTER_SN_1").Value)
                             Else
@@ -2955,7 +3335,8 @@ Error_:
                         Case "ZIP"
 
                             LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(langIni.GetString("frmReports", "B(60)", "Дисковод ZIP"))
+                            LvKompOtd.Items(CInt(intj)).SubItems.Add(langIni.GetString("frmReports", "B(60)",
+                                                                                       "Дисковод ZIP"))
                             If Not IsDBNull(.Fields("PRINTER_SN_1").Value) Then
                                 LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("PRINTER_SN_1").Value)
                             Else
@@ -3072,7 +3453,6 @@ Error_:
                             LvKompOtd.Items(CInt(intj)).SubItems.Add(tUNAME)
 
 
-
                         Case "MONITOR"
 
                             LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
@@ -3087,7 +3467,8 @@ Error_:
                         Case "NET"
 
                             LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(langIni.GetString("frmReports", "B(62)", "Сетевое оборудование"))
+                            LvKompOtd.Items(CInt(intj)).SubItems.Add(langIni.GetString("frmReports", "B(62)",
+                                                                                       "Сетевое оборудование"))
                             LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("PORT_1").Value)
                             LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("PRINTER_PROIZV_3").Value)
                             LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("StoimRub").Value)
@@ -3243,7 +3624,8 @@ Error_:
                         Case "IBP"
 
                             LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(langIni.GetString("frmReports", "B(68)", "Источник бесперебойного питания"))
+                            LvKompOtd.Items(CInt(intj)).SubItems.Add(langIni.GetString("frmReports", "B(68)",
+                                                                                       "Источник бесперебойного питания"))
                             If Not IsDBNull(.Fields("PRINTER_SN_1").Value) Then
                                 LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("PRINTER_SN_1").Value)
                             Else
@@ -3272,7 +3654,8 @@ Error_:
                         Case "FS"
 
                             LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(langIni.GetString("frmReports", "B(69)", "Сетевой фильтр"))
+                            LvKompOtd.Items(CInt(intj)).SubItems.Add(langIni.GetString("frmReports", "B(69)",
+                                                                                       "Сетевой фильтр"))
                             If Not IsDBNull(.Fields("PRINTER_SN_1").Value) Then
                                 LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("PRINTER_SN_1").Value)
                             Else
@@ -3313,12 +3696,11 @@ Error_:
         End With
 
         Exit Sub
-Error_:
+        Error_:
         Debug.Print(Err.Description)
-
     End Sub
 
-    Private Sub optPC_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles optPC.CheckedChanged
+    Private Sub optPC_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optPC.CheckedChanged
         TIPST = "PC"
         gbSN.Enabled = True
         gbPer.Enabled = True
@@ -3327,7 +3709,7 @@ Error_:
         cmbOthers.Visible = False
     End Sub
 
-    Private Sub optOTH_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles optOTH.CheckedChanged
+    Private Sub optOTH_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optOTH.CheckedChanged
         Dim langIni As New IniFile(sLANGPATH)
 
         TIPST = "OTH"
@@ -3339,11 +3721,9 @@ Error_:
 
         cmbOthers.Visible = True
         cmbOthers.Text = (langIni.GetString("frmReports", "MSG1", "Все"))
-
-
     End Sub
 
-    Private Sub chk_K15_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chk_K15.CheckedChanged
+    Private Sub chk_K15_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chk_K15.CheckedChanged
         Select Case chk_K15.Checked
 
             Case True
@@ -3353,7 +3733,7 @@ Error_:
         End Select
     End Sub
 
-    Private Sub chk_K17_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chk_K17.CheckedChanged
+    Private Sub chk_K17_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chk_K17.CheckedChanged
         Select Case chk_K17.Checked
 
             Case True
@@ -3363,7 +3743,7 @@ Error_:
         End Select
     End Sub
 
-    Private Sub chk_K16_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chk_K16.CheckedChanged
+    Private Sub chk_K16_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chk_K16.CheckedChanged
         Select Case chk_K16.Checked
 
             Case True
@@ -3373,7 +3753,7 @@ Error_:
         End Select
     End Sub
 
-    Private Sub chk_K18_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chk_K18.CheckedChanged
+    Private Sub chk_K18_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chk_K18.CheckedChanged
         Select Case chk_K18.Checked
 
             Case True
@@ -3383,7 +3763,7 @@ Error_:
         End Select
     End Sub
 
-    Private Sub chk_K19_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chk_K19.CheckedChanged
+    Private Sub chk_K19_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chk_K19.CheckedChanged
         Select Case chk_K19.Checked
 
             Case True
@@ -3393,7 +3773,7 @@ Error_:
         End Select
     End Sub
 
-    Private Sub chk_K20_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chk_K20.CheckedChanged
+    Private Sub chk_K20_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chk_K20.CheckedChanged
         Select Case chk_K20.Checked
 
             Case True
@@ -3403,7 +3783,7 @@ Error_:
         End Select
     End Sub
 
-    Private Sub chk_K21_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chk_K21.CheckedChanged
+    Private Sub chk_K21_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chk_K21.CheckedChanged
         Select Case chk_K21.Checked
 
             Case True
@@ -3413,7 +3793,7 @@ Error_:
         End Select
     End Sub
 
-    Private Sub chk_K22_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chk_K22.CheckedChanged
+    Private Sub chk_K22_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chk_K22.CheckedChanged
         Select Case chk_K22.Checked
 
             Case True
@@ -3423,7 +3803,7 @@ Error_:
         End Select
     End Sub
 
-    Private Sub chk_K23_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chk_K23.CheckedChanged
+    Private Sub chk_K23_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chk_K23.CheckedChanged
         Select Case chk_K23.Checked
 
             Case True
@@ -3433,7 +3813,7 @@ Error_:
         End Select
     End Sub
 
-    Private Sub chk_K24_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chk_K24.CheckedChanged
+    Private Sub chk_K24_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chk_K24.CheckedChanged
         Select Case chk_K24.Checked
 
             Case True
@@ -3443,7 +3823,7 @@ Error_:
         End Select
     End Sub
 
-    Private Sub chk_K25_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chk_K25.CheckedChanged
+    Private Sub chk_K25_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chk_K25.CheckedChanged
         Select Case chk_K25.Checked
 
             Case True
@@ -3453,7 +3833,7 @@ Error_:
         End Select
     End Sub
 
-    Private Sub chk_K27_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chk_K27.CheckedChanged
+    Private Sub chk_K27_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chk_K27.CheckedChanged
         Select Case chk_K27.Checked
 
             Case True
@@ -3463,7 +3843,7 @@ Error_:
         End Select
     End Sub
 
-    Private Sub chk_K26_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chk_K26.CheckedChanged
+    Private Sub chk_K26_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chk_K26.CheckedChanged
         Select Case chk_K26.Checked
 
             Case True
@@ -3473,7 +3853,7 @@ Error_:
         End Select
     End Sub
 
-    Private Sub chk_K28_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chk_K28.CheckedChanged
+    Private Sub chk_K28_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chk_K28.CheckedChanged
         Select Case chk_K28.Checked
 
             Case True
@@ -3483,7 +3863,7 @@ Error_:
         End Select
     End Sub
 
-    Private Sub chk_K1_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chk_K1.CheckedChanged
+    Private Sub chk_K1_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chk_K1.CheckedChanged
 
         Select Case chk_K1.Checked
 
@@ -3492,11 +3872,9 @@ Error_:
             Case Else
                 chkTeh(1) = False
         End Select
-
-
     End Sub
 
-    Private Sub chk_K2_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chk_K2.CheckedChanged
+    Private Sub chk_K2_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chk_K2.CheckedChanged
 
         Select Case chk_K2.Checked
 
@@ -3507,7 +3885,7 @@ Error_:
         End Select
     End Sub
 
-    Private Sub chk_K3_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chk_K3.CheckedChanged
+    Private Sub chk_K3_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chk_K3.CheckedChanged
 
         Select Case chk_K3.Checked
 
@@ -3516,10 +3894,9 @@ Error_:
             Case Else
                 chkTeh(3) = False
         End Select
-
     End Sub
 
-    Private Sub chk_K4_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chk_K4.CheckedChanged
+    Private Sub chk_K4_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chk_K4.CheckedChanged
         Select Case chk_K4.Checked
 
             Case True
@@ -3529,7 +3906,7 @@ Error_:
         End Select
     End Sub
 
-    Private Sub chk_K5_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chk_K5.CheckedChanged
+    Private Sub chk_K5_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chk_K5.CheckedChanged
         Select Case chk_K5.Checked
 
             Case True
@@ -3539,7 +3916,7 @@ Error_:
         End Select
     End Sub
 
-    Private Sub chk_K6_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chk_K6.CheckedChanged
+    Private Sub chk_K6_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chk_K6.CheckedChanged
         Select Case chk_K6.Checked
 
             Case True
@@ -3549,7 +3926,7 @@ Error_:
         End Select
     End Sub
 
-    Private Sub chk_K7_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chk_K7.CheckedChanged
+    Private Sub chk_K7_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chk_K7.CheckedChanged
         Select Case chk_K7.Checked
 
             Case True
@@ -3559,7 +3936,7 @@ Error_:
         End Select
     End Sub
 
-    Private Sub chk_K8_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chk_K8.CheckedChanged
+    Private Sub chk_K8_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chk_K8.CheckedChanged
         Select Case chk_K8.Checked
 
             Case True
@@ -3569,7 +3946,7 @@ Error_:
         End Select
     End Sub
 
-    Private Sub chk_K9_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chk_K9.CheckedChanged
+    Private Sub chk_K9_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chk_K9.CheckedChanged
         Select Case chk_K9.Checked
 
             Case True
@@ -3579,7 +3956,7 @@ Error_:
         End Select
     End Sub
 
-    Private Sub chk_K10_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chk_K10.CheckedChanged
+    Private Sub chk_K10_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chk_K10.CheckedChanged
         Select Case chk_K10.Checked
 
             Case True
@@ -3589,7 +3966,7 @@ Error_:
         End Select
     End Sub
 
-    Private Sub chk_K11_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chk_K11.CheckedChanged
+    Private Sub chk_K11_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chk_K11.CheckedChanged
         Select Case chk_K11.Checked
 
             Case True
@@ -3599,7 +3976,7 @@ Error_:
         End Select
     End Sub
 
-    Private Sub chk_K12_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chk_K12.CheckedChanged
+    Private Sub chk_K12_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chk_K12.CheckedChanged
         Select Case chk_K12.Checked
 
             Case True
@@ -3609,7 +3986,7 @@ Error_:
         End Select
     End Sub
 
-    Private Sub chk_K13_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chk_K13.CheckedChanged
+    Private Sub chk_K13_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chk_K13.CheckedChanged
         Select Case chk_K13.Checked
 
             Case True
@@ -3619,7 +3996,7 @@ Error_:
         End Select
     End Sub
 
-    Private Sub chk_K14_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chk_K14.CheckedChanged
+    Private Sub chk_K14_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chk_K14.CheckedChanged
         Select Case chk_K14.Checked
 
             Case True
@@ -3629,7 +4006,8 @@ Error_:
         End Select
     End Sub
 
-    Private Sub cmbDepartment_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbDepartment.SelectedIndexChanged
+    Private Sub cmbDepartment_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbDepartment.SelectedIndexChanged
         '
         Dim langIni As New IniFile(sLANGPATH)
 
@@ -3648,10 +4026,12 @@ Error_:
 
         If Len(cmbOffice.Text) = 0 Then cmbOffice.Text = langIni.GetString("frmReports", "MSG1", "Все")
 
-        Dim rs1 As ADODB.Recordset
+        Dim rs1 As Recordset
 
-        rs1 = New ADODB.Recordset
-        rs1.Open("select count(*) as t_n from SPR_KAB WHERE N_F='" & cmbBranche.Text & "' AND N_M='" & cmbDepartment.Text & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs1 = New Recordset
+        rs1.Open(
+            "select count(*) as t_n from SPR_KAB WHERE N_F='" & cmbBranche.Text & "' AND N_M='" & cmbDepartment.Text &
+            "'", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
         Dim sCNN As Integer
 
         With rs1
@@ -3663,8 +4043,10 @@ Error_:
 
 
         If sCNN > 0 Then
-            rs1 = New ADODB.Recordset
-            rs1.Open("select * from SPR_KAB WHERE N_F='" & cmbBranche.Text & "' AND N_M='" & cmbDepartment.Text & "' ORDER BY Name", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rs1 = New Recordset
+            rs1.Open(
+                "select * from SPR_KAB WHERE N_F='" & cmbBranche.Text & "' AND N_M='" & cmbDepartment.Text &
+                "' ORDER BY Name", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
 
             With rs1
@@ -3688,14 +4070,12 @@ Error_:
         End If
 
 
-
         Exit Sub
-err_:
+        err_:
         'MsgBox(Err.Description, MsgBoxStyle.Information, ProGramName)
-
     End Sub
 
-    Private Sub chk_K29_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chk_K29.CheckedChanged
+    Private Sub chk_K29_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chk_K29.CheckedChanged
         Select Case chk_K29.Checked
 
             Case True
@@ -3705,7 +4085,7 @@ err_:
         End Select
     End Sub
 
-    Private Sub chk_K30_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chk_K30.CheckedChanged
+    Private Sub chk_K30_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chk_K30.CheckedChanged
         Select Case chk_K30.Checked
 
             Case True
@@ -3715,7 +4095,7 @@ err_:
         End Select
     End Sub
 
-    Private Sub chk_K31_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chk_K31.CheckedChanged
+    Private Sub chk_K31_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chk_K31.CheckedChanged
         Select Case chk_K31.Checked
 
             Case True
@@ -3725,7 +4105,7 @@ err_:
         End Select
     End Sub
 
-    Private Sub chk_K32_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chk_K32.CheckedChanged
+    Private Sub chk_K32_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chk_K32.CheckedChanged
         Select Case chk_K32.Checked
 
             Case True
@@ -3735,7 +4115,7 @@ err_:
         End Select
     End Sub
 
-    Private Sub chk_K33_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chk_K33.CheckedChanged
+    Private Sub chk_K33_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chk_K33.CheckedChanged
         Select Case chk_K33.Checked
 
             Case True
@@ -3745,7 +4125,7 @@ err_:
         End Select
     End Sub
 
-    Private Sub chk_K34_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chk_K34.CheckedChanged
+    Private Sub chk_K34_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chk_K34.CheckedChanged
         Select Case chk_K34.Checked
 
             Case True
@@ -3755,7 +4135,7 @@ err_:
         End Select
     End Sub
 
-    Private Sub chk_K36_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chk_K36.CheckedChanged
+    Private Sub chk_K36_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chk_K36.CheckedChanged
         Select Case chk_K36.Checked
 
             Case True
@@ -3765,7 +4145,7 @@ err_:
         End Select
     End Sub
 
-    Private Sub chk_K35_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chk_K35.CheckedChanged
+    Private Sub chk_K35_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chk_K35.CheckedChanged
         Select Case chk_K35.Checked
 
             Case True
@@ -3775,7 +4155,7 @@ err_:
         End Select
     End Sub
 
-    Private Sub chk_K37_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chk_K37.CheckedChanged
+    Private Sub chk_K37_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chk_K37.CheckedChanged
         Select Case chk_K37.Checked
 
             Case True
@@ -3785,7 +4165,7 @@ err_:
         End Select
     End Sub
 
-    Private Sub chk_K38_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chk_K38.CheckedChanged
+    Private Sub chk_K38_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chk_K38.CheckedChanged
         Select Case chk_K38.Checked
 
             Case True
@@ -3795,7 +4175,7 @@ err_:
         End Select
     End Sub
 
-    Private Sub chk_K39_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chk_K39.CheckedChanged
+    Private Sub chk_K39_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chk_K39.CheckedChanged
         Select Case chk_K39.Checked
 
             Case True
@@ -3805,7 +4185,7 @@ err_:
         End Select
     End Sub
 
-    Private Sub chk_K40_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chk_K40.CheckedChanged
+    Private Sub chk_K40_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chk_K40.CheckedChanged
         Select Case chk_K40.Checked
 
             Case True
@@ -3815,7 +4195,7 @@ err_:
         End Select
     End Sub
 
-    Private Sub chk_K41_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chk_K41.CheckedChanged
+    Private Sub chk_K41_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chk_K41.CheckedChanged
         Select Case chk_K41.Checked
 
             Case True
@@ -3825,7 +4205,7 @@ err_:
         End Select
     End Sub
 
-    Private Sub chk_K42_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chk_K42.CheckedChanged
+    Private Sub chk_K42_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chk_K42.CheckedChanged
         Select Case chk_K42.Checked
 
             Case True
@@ -3835,7 +4215,7 @@ err_:
         End Select
     End Sub
 
-    Private Sub chk_K43_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chk_K43.CheckedChanged
+    Private Sub chk_K43_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chk_K43.CheckedChanged
         Select Case chk_K43.Checked
 
             Case True
@@ -3845,7 +4225,7 @@ err_:
         End Select
     End Sub
 
-    Private Sub chk_K44_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chk_K44.CheckedChanged
+    Private Sub chk_K44_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chk_K44.CheckedChanged
         Select Case chk_K44.Checked
 
             Case True
@@ -3855,7 +4235,7 @@ err_:
         End Select
     End Sub
 
-    Private Sub chk_K45_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chk_K45.CheckedChanged
+    Private Sub chk_K45_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chk_K45.CheckedChanged
         Select Case chk_K45.Checked
 
             Case True
@@ -3865,10 +4245,11 @@ err_:
         End Select
     End Sub
 
-    Private Sub LvKompOtd_ColumnClick(ByVal sender As Object, ByVal e As System.Windows.Forms.ColumnClickEventArgs) Handles LvKompOtd.ColumnClick
-        Dim new_sorting_column As ColumnHeader = _
-     LvKompOtd.Columns(e.Column)
-        Dim sort_order As System.Windows.Forms.SortOrder
+    Private Sub LvKompOtd_ColumnClick(ByVal sender As Object, ByVal e As ColumnClickEventArgs) _
+        Handles LvKompOtd.ColumnClick
+        Dim new_sorting_column As ColumnHeader =
+                LvKompOtd.Columns(e.Column)
+        Dim sort_order As SortOrder
         If m_SortingColumn Is Nothing Then
             sort_order = SortOrder.Ascending
         Else
@@ -3897,21 +4278,19 @@ err_:
         LvKompOtd.Sort()
     End Sub
 
-    Private Sub cmbGar_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbGar.SelectedIndexChanged
+    Private Sub cmbGar_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbGar.SelectedIndexChanged
 
         'Dim newThread1 As New Thread(AddressOf GaRanT_Load_t)
         'newThread1.Start()
         ''newThread1.Priority = 4
 
         Me.BeginInvoke(New MethodInvoker(AddressOf GaRanT_Load_t))
-
-
     End Sub
 
     Private Sub GaRanT_Load_t()
 
         Me.BeginInvoke(New MethodInvoker(AddressOf GaRanT_Load))
-
     End Sub
 
 
@@ -3933,26 +4312,26 @@ err_:
 
         Dim d, m, g, dat As String
 
-        Dim rs As ADODB.Recordset 'Объявляем рекордсет
+        Dim rs As Recordset 'Объявляем рекордсет
         Dim sSQL As String 'Переменная, где будет размещён SQL запрос
-        Dim rs2 As ADODB.Recordset 'Объявляем рекордсет
+        Dim rs2 As Recordset 'Объявляем рекордсет
         Dim sSQL2 As String 'Переменная, где будет размещён SQL запрос
-        Dim rs3 As ADODB.Recordset 'Объявляем рекордсет
+        Dim rs3 As Recordset 'Объявляем рекордсет
         Dim sSQL3 As String 'Переменная, где будет размещён SQL запрос
 
 
-
         sSQL2 = "SELECT * FROM Garantia_sis"
-        rs2 = New ADODB.Recordset
-        rs2.Open(sSQL2, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs2 = New Recordset
+        rs2.Open(sSQL2, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         sSQL3 = "SELECT * FROM garant_comp"
-        rs3 = New ADODB.Recordset
-        rs3.Open(sSQL3, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs3 = New Recordset
+        rs3.Open(sSQL3, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-        Dim rscount As ADODB.Recordset 'Объявляем рекордсет
-        rscount = New ADODB.Recordset
-        rscount.Open("SELECT COUNT(*) AS total_number FROM Garantia_sis", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        Dim rscount As Recordset 'Объявляем рекордсет
+        rscount = New Recordset
+        rscount.Open("SELECT COUNT(*) AS total_number FROM Garantia_sis", DB7, CursorTypeEnum.adOpenDynamic,
+                     LockTypeEnum.adLockOptimistic)
 
         Dim SERT As String
         With rscount
@@ -3982,8 +4361,8 @@ err_:
                         Case langIni.GetString("frmReports", "MSG4", "Видео карты")
 
                             sSQL = "SELECT * FROM kompy where id=" & nom
-                            rs = New ADODB.Recordset
-                            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                            rs = New Recordset
+                            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                             With rs
                                 .MoveFirst()
@@ -4001,8 +4380,8 @@ err_:
                         Case langIni.GetString("frmReports", "MSG5", "Жесткие диски")
 
                             sSQL = "SELECT * FROM kompy where id=" & nom
-                            rs = New ADODB.Recordset
-                            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                            rs = New Recordset
+                            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                             With rs
                                 .MoveFirst()
                                 Do While Not .EOF
@@ -4020,8 +4399,8 @@ err_:
                         Case langIni.GetString("frmReports", "MSG6", "Звуковая карта")
 
                             sSQL = "SELECT * FROM kompy where id=" & nom
-                            rs = New ADODB.Recordset
-                            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                            rs = New Recordset
+                            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                             With rs
                                 .MoveFirst()
                                 Do While Not .EOF
@@ -4038,8 +4417,8 @@ err_:
                         Case langIni.GetString("frmReports", "MSG7", "Материнские платы")
 
                             sSQL = "SELECT * FROM kompy where id=" & nom
-                            rs = New ADODB.Recordset
-                            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                            rs = New Recordset
+                            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                             With rs
                                 .MoveFirst()
                                 Do While Not .EOF
@@ -4056,8 +4435,8 @@ err_:
                         Case langIni.GetString("frmReports", "MSG8", "Модем")
 
                             sSQL = "SELECT * FROM kompy where id=" & nom
-                            rs = New ADODB.Recordset
-                            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                            rs = New Recordset
+                            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                             With rs
                                 .MoveFirst()
                                 Do While Not .EOF
@@ -4073,8 +4452,8 @@ err_:
 
                         Case langIni.GetString("frmReports", "MSG9", "Монитор")
                             sSQL = "SELECT * FROM kompy where id=" & nom
-                            rs = New ADODB.Recordset
-                            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                            rs = New Recordset
+                            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                             With rs
                                 .MoveFirst()
                                 Do While Not .EOF
@@ -4090,8 +4469,8 @@ err_:
 
                         Case langIni.GetString("frmReports", "MSG10", "Память ОЗУ")
                             sSQL = "SELECT * FROM kompy where id=" & nom
-                            rs = New ADODB.Recordset
-                            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                            rs = New Recordset
+                            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                             With rs
                                 .MoveFirst()
@@ -4110,8 +4489,8 @@ err_:
                         Case langIni.GetString("frmReports", "MSG13", "Процессоры")
 
                             sSQL = "SELECT * FROM kompy where id=" & nom
-                            rs = New ADODB.Recordset
-                            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                            rs = New Recordset
+                            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                             With rs
                                 .MoveFirst()
                                 Do While Not .EOF
@@ -4128,13 +4507,15 @@ err_:
                     End Select
 
                     sSQL = "SELECT * FROM kompy where id=" & nom
-                    rs = New ADODB.Recordset
-                    rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                    rs = New Recordset
+                    rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                     With rs
                         .MoveFirst()
                         Do While Not .EOF
 
-                            Nam = langIni.GetString("frmReports", "MSG26", "Компьютер") & ": " & .Fields("NET_NAME").Value & " " & langIni.GetString("frmReports", "MSG27", "Место") & ": " & .Fields("MESTO").Value & "/" & .Fields("FILIAL").Value
+                            Nam = langIni.GetString("frmReports", "MSG26", "Компьютер") & ": " &
+                                  .Fields("NET_NAME").Value & " " & langIni.GetString("frmReports", "MSG27", "Место") &
+                                  ": " & .Fields("MESTO").Value & "/" & .Fields("FILIAL").Value
 
                             .MoveNext()
                             'DoEvents
@@ -4150,7 +4531,7 @@ err_:
 
                     dat$ = d & "." & m & "." & g
                     If dat$ = "0.0.0" Or dat$ = ".." Then
-                        dat$ = Date.Today.AddDays(-1)
+                        dat$ = Date.Today.AddDays(- 1)
                     End If
 
                     Today = Date.Today
@@ -4171,12 +4552,15 @@ err_:
                     End If
 
 
-                    If Len(NameKomp) = 0 Or NameKomp = langIni.GetString("frmReports", "MSG28", "Отсутствует") Or NameKomp = langIni.GetString("frmReports", "MSG29", "Нет") Then
+                    If _
+                        Len(NameKomp) = 0 Or NameKomp = langIni.GetString("frmReports", "MSG28", "Отсутствует") Or
+                        NameKomp = langIni.GetString("frmReports", "MSG29", "Нет") Then
                     Else
 
                         lvGar.Items.Add(NameKomp)
                         lvGar.Items(CInt(intj)).SubItems.Add(Nam)
-                        lvGar.Items(CInt(intj)).SubItems.Add(.Fields("day_o").Value & "." & .Fields("month_o").Value & "." & .Fields("Year_o").Value)
+                        lvGar.Items(CInt(intj)).SubItems.Add(
+                            .Fields("day_o").Value & "." & .Fields("month_o").Value & "." & .Fields("Year_o").Value)
                         lvGar.Items(CInt(intj)).SubItems.Add(ZakZ)
                         lvGar.Items(CInt(intj)).SubItems.Add("+")
 
@@ -4189,8 +4573,9 @@ err_:
             End If
         End With
 
-        rscount = New ADODB.Recordset
-        rscount.Open("SELECT COUNT(*) AS total_number FROM garant_comp", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rscount = New Recordset
+        rscount.Open("SELECT COUNT(*) AS total_number FROM garant_comp", DB7, CursorTypeEnum.adOpenDynamic,
+                     LockTypeEnum.adLockOptimistic)
 
         With rscount
 
@@ -4219,8 +4604,8 @@ err_:
                         Case langIni.GetString("frmReports", "MSG4", "Видео карты")
 
                             sSQL = "SELECT * FROM kompy where id=" & nom
-                            rs = New ADODB.Recordset
-                            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                            rs = New Recordset
+                            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                             With rs
                                 .MoveFirst()
@@ -4242,8 +4627,8 @@ err_:
 
                         Case langIni.GetString("frmReports", "MSG5", "Жесткие диски")
                             sSQL = "SELECT * FROM kompy where id=" & nom
-                            rs = New ADODB.Recordset
-                            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                            rs = New Recordset
+                            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                             With rs
                                 .MoveFirst()
@@ -4263,8 +4648,8 @@ err_:
 
                         Case langIni.GetString("frmReports", "MSG6", "Звуковая карта")
                             sSQL = "SELECT * FROM kompy where id=" & nom
-                            rs = New ADODB.Recordset
-                            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                            rs = New Recordset
+                            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                             With rs
                                 .MoveFirst()
                                 Do While Not .EOF
@@ -4284,8 +4669,8 @@ err_:
 
                         Case langIni.GetString("frmReports", "MSG7", "Материнские платы")
                             sSQL = "SELECT * FROM kompy where id=" & nom
-                            rs = New ADODB.Recordset
-                            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                            rs = New Recordset
+                            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                             With rs
                                 .MoveFirst()
                                 Do While Not .EOF
@@ -4304,8 +4689,8 @@ err_:
 
                         Case langIni.GetString("frmReports", "MSG8", "Модем")
                             sSQL = "SELECT * FROM kompy where id=" & nom
-                            rs = New ADODB.Recordset
-                            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                            rs = New Recordset
+                            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                             With rs
                                 .MoveFirst()
                                 Do While Not .EOF
@@ -4325,8 +4710,8 @@ err_:
                         Case langIni.GetString("frmReports", "MSG9", "Монитор")
 
                             sSQL = "SELECT * FROM kompy where id=" & nom
-                            rs = New ADODB.Recordset
-                            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                            rs = New Recordset
+                            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                             With rs
                                 .MoveFirst()
                                 Do While Not .EOF
@@ -4346,8 +4731,8 @@ err_:
 
                         Case langIni.GetString("frmReports", "MSG10", "Память ОЗУ")
                             sSQL = "SELECT * FROM kompy where id=" & nom
-                            rs = New ADODB.Recordset
-                            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                            rs = New Recordset
+                            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                             With rs
                                 .MoveFirst()
                                 Do While Not .EOF
@@ -4366,8 +4751,8 @@ err_:
 
                         Case langIni.GetString("frmReports", "MSG13", "Процессоры")
                             sSQL = "SELECT * FROM kompy where id=" & nom
-                            rs = New ADODB.Recordset
-                            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                            rs = New Recordset
+                            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                             With rs
                                 .MoveFirst()
                                 Do While Not .EOF
@@ -4388,13 +4773,16 @@ err_:
                     End Select
 
                     sSQL = "SELECT * FROM kompy where id=" & nom
-                    rs = New ADODB.Recordset
-                    rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                    rs = New Recordset
+                    rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                     With rs
                         .MoveFirst()
                         Do While Not .EOF
                             If .Fields("id").Value = nom Then
-                                Nam = langIni.GetString("frmReports", "MSG26", "Компьютер") & ": " & .Fields("NET_NAME").Value & " " & langIni.GetString("frmReports", "MSG27", "Место") & " : " & .Fields("MESTO").Value & "/" & .Fields("FILIAL").Value
+                                Nam = langIni.GetString("frmReports", "MSG26", "Компьютер") & ": " &
+                                      .Fields("NET_NAME").Value & " " &
+                                      langIni.GetString("frmReports", "MSG27", "Место") & " : " & .Fields("MESTO").Value &
+                                      "/" & .Fields("FILIAL").Value
                             End If
                             .MoveNext()
                             'DoEvents
@@ -4435,8 +4823,9 @@ err_:
                     'End If
 
 
-
-                    If Len(NameKomp) = 0 Or NameKomp = langIni.GetString("frmReports", "MSG28", "Отсутствует") Or NameKomp = langIni.GetString("frmReports", "MSG29", "Нет") Then
+                    If _
+                        Len(NameKomp) = 0 Or NameKomp = langIni.GetString("frmReports", "MSG28", "Отсутствует") Or
+                        NameKomp = langIni.GetString("frmReports", "MSG29", "Нет") Then
                     Else
 
                         lvGar.Items.Add(NameKomp)
@@ -4472,12 +4861,12 @@ err_:
 
         Exit Sub
 
-Error_:
+        Error_:
         ResList(Me.lvGar)
     End Sub
 
 
-    Private Sub btnSendToOffice_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSendToOffice.Click
+    Private Sub btnSendToOffice_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSendToOffice.Click
         On Error GoTo Err_
 
         If LvKompOtd.Items.Count = 0 Then Exit Sub
@@ -4495,11 +4884,11 @@ Error_:
         End Select
 
         Exit Sub
-Err_:
+        Err_:
         MsgBox("Error " & Err.Number & " " & Err.Description)
     End Sub
 
-    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
+    Private Sub Button2_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Button2.Click
         On Error GoTo Err_
 
         If lvReport2Cl.Items.Count = 0 Then Exit Sub
@@ -4518,18 +4907,15 @@ Err_:
         End Select
 
 
-
         Exit Sub
-Err_:
+        Err_:
         MsgBox("Error " & Err.Number & " " & Err.Description)
     End Sub
 
-    Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
+    Private Sub Button3_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Button3.Click
         On Error GoTo Err_
 
         If lvRemont.Items.Count = 0 Then Exit Sub
-
-
 
 
         Select Case sOfficePACK
@@ -4546,22 +4932,24 @@ Err_:
 
 
         Exit Sub
-Err_:
+        Err_:
         MsgBox("Error " & Err.Number & " " & Err.Description)
     End Sub
 
-    Private Sub cmbOTV_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbOTV.SelectedIndexChanged
+    Private Sub cmbOTV_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbOTV.SelectedIndexChanged
         On Error GoTo err_
 
         Me.Cursor = Cursors.WaitCursor
 
-        Dim rs As ADODB.Recordset 'Объявляем рекордсет
+        Dim rs As Recordset 'Объявляем рекордсет
 
         Dim Count As String
         lvOTV.Items.Clear()
 
-        rs = New ADODB.Recordset
-        rs.Open("Select COUNT(*) as tot_num FROM kompy where OTvetstvennyj='" & cmbOTV.Text & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open("Select COUNT(*) as tot_num FROM kompy where OTvetstvennyj='" & cmbOTV.Text & "'", DB7,
+                CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
             Count = .Fields("tot_num").Value
@@ -4576,8 +4964,9 @@ Err_:
         End If
 
 
-        rs = New ADODB.Recordset
-        rs.Open("Select * FROM kompy where OTvetstvennyj='" & cmbOTV.Text & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open("Select * FROM kompy where OTvetstvennyj='" & cmbOTV.Text & "'", DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
         Dim intj As Integer
         Dim langIni As New IniFile(sLANGPATH)
         With rs
@@ -4587,14 +4976,17 @@ Err_:
                 Select Case .Fields("tiptehn").Value
 
                     Case "PC"
-                        lvOTV.Items.Add(langIni.GetString("frmReports", "MSG26", "Компьютер") & " - " & .Fields("NET_NAME").Value)
+                        lvOTV.Items.Add(
+                            langIni.GetString("frmReports", "MSG26", "Компьютер") & " - " & .Fields("NET_NAME").Value)
                         lvOTV.Items(intj).SubItems.Add(.Fields("INV_NO_SYSTEM").Value)
                         lvOTV.Items(intj).SubItems.Add(.Fields("Ser_N_SIS").Value)
-                        lvOTV.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+                        lvOTV.Items(intj).SubItems.Add(
+                            .Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
                         intj = intj + 1
 
                     Case "Printer"
-                        lvOTV.Items.Add(langIni.GetString("frmReports", "MSG30", "Принтер") & " - " & .Fields("NET_NAME").Value)
+                        lvOTV.Items.Add(
+                            langIni.GetString("frmReports", "MSG30", "Принтер") & " - " & .Fields("NET_NAME").Value)
 
                         If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
                             lvOTV.Items(intj).SubItems.Add(.Fields("INV_NO_PRINTER").Value)
@@ -4611,11 +5003,13 @@ Err_:
                         End If
 
 
-                        lvOTV.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+                        lvOTV.Items(intj).SubItems.Add(
+                            .Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
                         intj = intj + 1
 
                     Case "MFU"
-                        lvOTV.Items.Add(langIni.GetString("frmReports", "MSG30", "Принтер") & " - " & .Fields("NET_NAME").Value)
+                        lvOTV.Items.Add(
+                            langIni.GetString("frmReports", "MSG30", "Принтер") & " - " & .Fields("NET_NAME").Value)
 
                         If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
                             lvOTV.Items(intj).SubItems.Add(.Fields("INV_NO_PRINTER").Value)
@@ -4631,7 +5025,8 @@ Err_:
 
                         End If
 
-                        lvOTV.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+                        lvOTV.Items(intj).SubItems.Add(
+                            .Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
                         intj = intj + 1
 
                     Case "OT"
@@ -4641,7 +5036,8 @@ Err_:
 
                         If Len(unameZ) = 0 Then
 
-                            unameZ = langIni.GetString("frmReports", "MSG25", "Другое") & " - (" & .Fields("TIP_COMPA").Value & ") " & .Fields("NET_NAME").Value
+                            unameZ = langIni.GetString("frmReports", "MSG25", "Другое") & " - (" &
+                                     .Fields("TIP_COMPA").Value & ") " & .Fields("NET_NAME").Value
                         Else
 
                             unameZ = .Fields("TIP_COMPA").Value & " - " & .Fields("NET_NAME").Value
@@ -4664,12 +5060,14 @@ Err_:
 
                         End If
 
-                        lvOTV.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+                        lvOTV.Items(intj).SubItems.Add(
+                            .Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
                         intj = intj + 1
 
 
                     Case "KOpir"
-                        lvOTV.Items.Add(langIni.GetString("frmReports", "MSG31", "Копир") & " - " & .Fields("NET_NAME").Value)
+                        lvOTV.Items.Add(
+                            langIni.GetString("frmReports", "MSG31", "Копир") & " - " & .Fields("NET_NAME").Value)
 
                         If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
                             lvOTV.Items(intj).SubItems.Add(.Fields("INV_NO_PRINTER").Value)
@@ -4685,18 +5083,23 @@ Err_:
 
                         End If
 
-                        lvOTV.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+                        lvOTV.Items(intj).SubItems.Add(
+                            .Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
                         intj = intj + 1
 
                     Case "NET"
-                        lvOTV.Items.Add(langIni.GetString("frmReports", "MSG32", "Сетевое оборудование") & " - " & .Fields("NET_NAME").Value)
+                        lvOTV.Items.Add(
+                            langIni.GetString("frmReports", "MSG32", "Сетевое оборудование") & " - " &
+                            .Fields("NET_NAME").Value)
                         lvOTV.Items(intj).SubItems.Add(.Fields("PRINTER_PROIZV_3").Value)
                         lvOTV.Items(intj).SubItems.Add(.Fields("port_1").Value)
-                        lvOTV.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+                        lvOTV.Items(intj).SubItems.Add(
+                            .Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
                         intj = intj + 1
 
                     Case "PHOTO"
-                        lvOTV.Items.Add(langIni.GetString("frmReports", "MSG24", "Фотоаппарат") & " - " & .Fields("NET_NAME").Value)
+                        lvOTV.Items.Add(
+                            langIni.GetString("frmReports", "MSG24", "Фотоаппарат") & " - " & .Fields("NET_NAME").Value)
 
                         If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
                             lvOTV.Items(intj).SubItems.Add(.Fields("INV_NO_PRINTER").Value)
@@ -4712,11 +5115,13 @@ Err_:
 
                         End If
 
-                        lvOTV.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+                        lvOTV.Items(intj).SubItems.Add(
+                            .Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
                         intj = intj + 1
 
                     Case "PHONE"
-                        lvOTV.Items.Add(langIni.GetString("frmReports", "MSG22", "Телефон") & " - " & .Fields("NET_NAME").Value)
+                        lvOTV.Items.Add(
+                            langIni.GetString("frmReports", "MSG22", "Телефон") & " - " & .Fields("NET_NAME").Value)
 
                         If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
                             lvOTV.Items(intj).SubItems.Add(.Fields("INV_NO_PRINTER").Value)
@@ -4732,12 +5137,14 @@ Err_:
 
                         End If
 
-                        lvOTV.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+                        lvOTV.Items(intj).SubItems.Add(
+                            .Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
                         intj = intj + 1
 
                     Case "FAX"
 
-                        lvOTV.Items.Add(langIni.GetString("frmReports", "MSG23", "Факс") & " - " & .Fields("NET_NAME").Value)
+                        lvOTV.Items.Add(
+                            langIni.GetString("frmReports", "MSG23", "Факс") & " - " & .Fields("NET_NAME").Value)
 
                         If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
                             lvOTV.Items(intj).SubItems.Add(.Fields("INV_NO_PRINTER").Value)
@@ -4753,11 +5160,13 @@ Err_:
 
                         End If
 
-                        lvOTV.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+                        lvOTV.Items(intj).SubItems.Add(
+                            .Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
                         intj = intj + 1
 
                     Case "SCANER"
-                        lvOTV.Items.Add(langIni.GetString("frmReports", "MSG33", "Сканер") & " - " & .Fields("NET_NAME").Value)
+                        lvOTV.Items.Add(
+                            langIni.GetString("frmReports", "MSG33", "Сканер") & " - " & .Fields("NET_NAME").Value)
 
                         If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
                             lvOTV.Items(intj).SubItems.Add(.Fields("INV_NO_PRINTER").Value)
@@ -4773,11 +5182,13 @@ Err_:
 
                         End If
 
-                        lvOTV.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+                        lvOTV.Items(intj).SubItems.Add(
+                            .Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
                         intj = intj + 1
 
                     Case "ZIP"
-                        lvOTV.Items.Add(langIni.GetString("frmReports", "MSG34", "Дисковод ZIP") & " - " & .Fields("NET_NAME").Value)
+                        lvOTV.Items.Add(
+                            langIni.GetString("frmReports", "MSG34", "Дисковод ZIP") & " - " & .Fields("NET_NAME").Value)
 
                         If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
                             lvOTV.Items(intj).SubItems.Add(.Fields("INV_NO_PRINTER").Value)
@@ -4793,15 +5204,18 @@ Err_:
 
                         End If
 
-                        lvOTV.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+                        lvOTV.Items(intj).SubItems.Add(
+                            .Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
                         intj = intj + 1
 
 
                     Case "MONITOR"
-                        lvOTV.Items.Add(langIni.GetString("frmReports", "MSG9", "Монитор") & " - " & .Fields("NET_NAME").Value)
+                        lvOTV.Items.Add(
+                            langIni.GetString("frmReports", "MSG9", "Монитор") & " - " & .Fields("NET_NAME").Value)
                         lvOTV.Items(intj).SubItems.Add(.Fields("INV_NO_MONITOR").Value)
                         lvOTV.Items(intj).SubItems.Add(.Fields("MONITOR_SN").Value)
-                        lvOTV.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+                        lvOTV.Items(intj).SubItems.Add(
+                            .Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
                         intj = intj + 1
 
 
@@ -4812,7 +5226,8 @@ Err_:
 
                         If Len(unameZ) = 0 Then
 
-                            unameZ = langIni.GetString("frmReports", "MSG3", "USB") & " - (" & .Fields("TIP_COMPA").Value & ") " & .Fields("NET_NAME").Value
+                            unameZ = langIni.GetString("frmReports", "MSG3", "USB") & " - (" &
+                                     .Fields("TIP_COMPA").Value & ") " & .Fields("NET_NAME").Value
                         Else
 
                             unameZ = .Fields("TIP_COMPA").Value & " - " & .Fields("NET_NAME").Value
@@ -4835,9 +5250,9 @@ Err_:
 
                         End If
 
-                        lvOTV.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+                        lvOTV.Items(intj).SubItems.Add(
+                            .Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
                         intj = intj + 1
-
 
 
                     Case "SOUND"
@@ -4847,7 +5262,8 @@ Err_:
 
                         If Len(unameZ) = 0 Then
 
-                            unameZ = langIni.GetString("frmReports", "MSG35", "Акустика") & " - (" & .Fields("TIP_COMPA").Value & ") " & .Fields("NET_NAME").Value
+                            unameZ = langIni.GetString("frmReports", "MSG35", "Акустика") & " - (" &
+                                     .Fields("TIP_COMPA").Value & ") " & .Fields("NET_NAME").Value
                         Else
 
                             unameZ = .Fields("TIP_COMPA").Value & " - " & .Fields("NET_NAME").Value
@@ -4870,7 +5286,8 @@ Err_:
 
                         End If
 
-                        lvOTV.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+                        lvOTV.Items(intj).SubItems.Add(
+                            .Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
                         intj = intj + 1
 
 
@@ -4881,7 +5298,8 @@ Err_:
 
                         If Len(unameZ) = 0 Then
 
-                            unameZ = langIni.GetString("frmReports", "MSG36", "ИБП") & " - (" & .Fields("TIP_COMPA").Value & ") " & .Fields("NET_NAME").Value
+                            unameZ = langIni.GetString("frmReports", "MSG36", "ИБП") & " - (" &
+                                     .Fields("TIP_COMPA").Value & ") " & .Fields("NET_NAME").Value
                         Else
 
                             unameZ = .Fields("TIP_COMPA").Value & " - " & .Fields("NET_NAME").Value
@@ -4904,7 +5322,8 @@ Err_:
 
                         End If
 
-                        lvOTV.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+                        lvOTV.Items(intj).SubItems.Add(
+                            .Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
                         intj = intj + 1
 
                     Case "FS"
@@ -4914,7 +5333,8 @@ Err_:
 
                         If Len(unameZ) = 0 Then
 
-                            unameZ = langIni.GetString("frmReports", "MSG37", "Сетевой фильтр") & " - (" & .Fields("TIP_COMPA").Value & ") " & .Fields("NET_NAME").Value
+                            unameZ = langIni.GetString("frmReports", "MSG37", "Сетевой фильтр") & " - (" &
+                                     .Fields("TIP_COMPA").Value & ") " & .Fields("NET_NAME").Value
                         Else
 
                             unameZ = .Fields("TIP_COMPA").Value & " - " & .Fields("NET_NAME").Value
@@ -4937,7 +5357,8 @@ Err_:
 
                         End If
 
-                        lvOTV.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+                        lvOTV.Items(intj).SubItems.Add(
+                            .Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
                         intj = intj + 1
 
                 End Select
@@ -4948,7 +5369,6 @@ Err_:
         End With
 
 
-
         rs.Close()
         rs = Nothing
 
@@ -4957,13 +5377,14 @@ Err_:
         Me.Cursor = Cursors.Default
 
         Exit Sub
-err_:
+        err_:
         Me.Cursor = Cursors.Default
         MsgBox(Err.Description)
     End Sub
 
 
-    Private Sub cmbBrancheCashe_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbBrancheCashe.SelectedIndexChanged
+    Private Sub cmbBrancheCashe_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbBrancheCashe.SelectedIndexChanged
         On Error GoTo err
         cmbDepartmentCashe.Items.Clear()
         Dim langIni As New IniFile(sLANGPATH)
@@ -4974,9 +5395,10 @@ err_:
 
         End If
 
-        Dim rs As ADODB.Recordset
-        rs = New ADODB.Recordset
-        rs.Open("SELECT * FROM SPR_OTD_FILIAL WHERE filial ='" & cmbBrancheCashe.Text & "' order by N_Otd", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        Dim rs As Recordset
+        rs = New Recordset
+        rs.Open("SELECT * FROM SPR_OTD_FILIAL WHERE filial ='" & cmbBrancheCashe.Text & "' order by N_Otd", DB7,
+                CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
         With rs
             .MoveFirst()
             Do While Not .EOF
@@ -4992,12 +5414,11 @@ err_:
         rs.Close()
         rs = Nothing
 
-err:
+        err:
     End Sub
 
-    Private Sub btnCashe_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCashe.Click
+    Private Sub btnCashe_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCashe.Click
         On Error GoTo err_
-
 
 
         lvCashe.Items.Clear()
@@ -5013,38 +5434,64 @@ err:
         'On Error Resume Next
         Me.Cursor = Cursors.WaitCursor
 
-        Dim rs As ADODB.Recordset
-        Dim sSQL As String
+        Dim rs As Recordset
+        Dim sSQL, sSQL2 As String
 
-        rs = New ADODB.Recordset
 
-        If cmbBrancheCashe.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbDepartmentCashe.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
+        If _
+            cmbBrancheCashe.Text = langIni.GetString("frmReports", "MSG1", "Все") And
+            cmbDepartmentCashe.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
             sSQL = "SELECT * FROM kompy where DataVVoda like '%" & cmbYearCashe.Text & "%'"
-
+            sSQL2 = ("SELECT count(*) as t_n FROM kompy where DataVVoda like '%" & cmbYearCashe.Text & "%'")
         End If
 
-        If cmbBrancheCashe.Text <> langIni.GetString("frmReports", "MSG1", "Все") And cmbDepartmentCashe.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
+        If _
+            cmbBrancheCashe.Text <> langIni.GetString("frmReports", "MSG1", "Все") And
+            cmbDepartmentCashe.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
-            sSQL = "SELECT * FROM kompy where filial ='" & cmbBrancheCashe.Text & "' AND DataVVoda like '%" & cmbYearCashe.Text & "%'"
-
+            sSQL = "SELECT * FROM kompy where filial ='" & cmbBrancheCashe.Text & "' AND DataVVoda like '%" &
+                   cmbYearCashe.Text & "%'"
+            sSQL2 = "SELECT count(*) as t_n FROM kompy where where filial ='" & cmbBrancheCashe.Text &
+                    "' AND DataVVoda like '%" & cmbYearCashe.Text & "%'"
         End If
 
-        If cmbBrancheCashe.Text <> langIni.GetString("frmReports", "MSG1", "Все") And cmbDepartmentCashe.Text <> langIni.GetString("frmReports", "MSG1", "Все") Then
+        If _
+            cmbBrancheCashe.Text <> langIni.GetString("frmReports", "MSG1", "Все") And
+            cmbDepartmentCashe.Text <> langIni.GetString("frmReports", "MSG1", "Все") Then
 
-            sSQL = "SELECT * FROM kompy where filial ='" & cmbBrancheCashe.Text & "' AND mesto='" & cmbDepartmentCashe.Text & "' AND DataVVoda like '%" & cmbYearCashe.Text & "%'"
-
+            sSQL = "SELECT * FROM kompy where filial ='" & cmbBrancheCashe.Text & "' AND mesto='" &
+                   cmbDepartmentCashe.Text & "' AND DataVVoda like '%" & cmbYearCashe.Text & "%'"
+            sSQL2 = "SELECT count(*) as t_n FROM kompy where filial ='" & cmbBrancheCashe.Text & "' AND mesto='" &
+                    cmbDepartmentCashe.Text & "' AND DataVVoda like '%" & cmbYearCashe.Text & "%'"
         End If
 
-        Dim Uname() As String
+        Dim Uname(10) As String
 
         Dim Uname2 As Integer
         Uname2 = 0
 
         Dim intj As Integer
         intj = 0
+        Dim sCount As String
 
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open(sSQL2, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
+        With rs
+            sCount = .Fields("t_n").Value
+        End With
+        rs.Close()
+        rs = Nothing
+
+        If sCount = 0 Then
+            Me.Cursor = Cursors.Default
+            Exit Sub
+        End If
+
+
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
             .MoveFirst()
@@ -5060,7 +5507,8 @@ err:
 
                     Case "PC"
 
-                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG26", "Компьютер") & " - " & .Fields("NET_NAME").Value)
+                        lvCashe.Items.Add(
+                            langIni.GetString("frmReports", "MSG26", "Компьютер") & " - " & .Fields("NET_NAME").Value)
 
                         If Not IsDBNull(.Fields("CenaRub").Value) Then
                             lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
@@ -5074,13 +5522,15 @@ err:
                             lvCashe.Items(intj).SubItems.Add("")
                         End If
 
-                        lvCashe.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+                        lvCashe.Items(intj).SubItems.Add(
+                            .Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
                         intj = intj + 1
 
                         Uname2 = Uname2 + .Fields("CenaRub").Value
 
                     Case "Printer"
-                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG30", "Принтер") & " - " & .Fields("NET_NAME").Value)
+                        lvCashe.Items.Add(
+                            langIni.GetString("frmReports", "MSG30", "Принтер") & " - " & .Fields("NET_NAME").Value)
 
                         If Not IsDBNull(.Fields("CenaRub").Value) Then
                             lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
@@ -5094,12 +5544,14 @@ err:
                             lvCashe.Items(intj).SubItems.Add("")
                         End If
 
-                        lvCashe.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+                        lvCashe.Items(intj).SubItems.Add(
+                            .Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
                         intj = intj + 1
                         Uname2 = Uname2 + .Fields("CenaRub").Value
 
                     Case "MFU"
-                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG21", "МФУ") & " - " & .Fields("NET_NAME").Value)
+                        lvCashe.Items.Add(
+                            langIni.GetString("frmReports", "MSG21", "МФУ") & " - " & .Fields("NET_NAME").Value)
 
                         If Not IsDBNull(.Fields("CenaRub").Value) Then
                             lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
@@ -5113,7 +5565,8 @@ err:
                             lvCashe.Items(intj).SubItems.Add("")
                         End If
 
-                        lvCashe.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+                        lvCashe.Items(intj).SubItems.Add(
+                            .Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
                         intj = intj + 1
 
                         Uname2 = Uname2 + .Fields("CenaRub").Value
@@ -5123,7 +5576,9 @@ err:
                         If Len(.Fields("TIP_COMPA").Value) = 0 Then
 
 
-                            lvCashe.Items.Add(langIni.GetString("frmReports", "MSG25", "Другое") & " - (" & .Fields("TIP_COMPA").Value & ") " & .Fields("NET_NAME").Value)
+                            lvCashe.Items.Add(
+                                langIni.GetString("frmReports", "MSG25", "Другое") & " - (" & .Fields("TIP_COMPA").Value &
+                                ") " & .Fields("NET_NAME").Value)
 
                         Else
 
@@ -5144,13 +5599,15 @@ err:
                             lvCashe.Items(intj).SubItems.Add("")
                         End If
 
-                        lvCashe.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+                        lvCashe.Items(intj).SubItems.Add(
+                            .Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
                         intj = intj + 1
 
                         Uname2 = Uname2 + .Fields("CenaRub").Value
 
                     Case "KOpir"
-                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG31", "Копир") & " - " & .Fields("NET_NAME").Value)
+                        lvCashe.Items.Add(
+                            langIni.GetString("frmReports", "MSG31", "Копир") & " - " & .Fields("NET_NAME").Value)
 
                         If Not IsDBNull(.Fields("CenaRub").Value) Then
                             lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
@@ -5164,12 +5621,15 @@ err:
                             lvCashe.Items(intj).SubItems.Add("")
                         End If
 
-                        lvCashe.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+                        lvCashe.Items(intj).SubItems.Add(
+                            .Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
                         intj = intj + 1
                         Uname2 = Uname2 + .Fields("CenaRub").Value
 
                     Case "NET"
-                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG32", "Сетевое оборудование") & " - " & .Fields("NET_NAME").Value)
+                        lvCashe.Items.Add(
+                            langIni.GetString("frmReports", "MSG32", "Сетевое оборудование") & " - " &
+                            .Fields("NET_NAME").Value)
 
                         If Not IsDBNull(.Fields("CenaRub").Value) Then
                             lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
@@ -5183,12 +5643,14 @@ err:
                             lvCashe.Items(intj).SubItems.Add("")
                         End If
 
-                        lvCashe.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+                        lvCashe.Items(intj).SubItems.Add(
+                            .Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
                         intj = intj + 1
                         Uname2 = Uname2 + .Fields("CenaRub").Value
 
                     Case "PHOTO"
-                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG24", "Фотоаппарат") & " - " & .Fields("NET_NAME").Value)
+                        lvCashe.Items.Add(
+                            langIni.GetString("frmReports", "MSG24", "Фотоаппарат") & " - " & .Fields("NET_NAME").Value)
 
                         If Not IsDBNull(.Fields("CenaRub").Value) Then
                             lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
@@ -5202,12 +5664,14 @@ err:
                             lvCashe.Items(intj).SubItems.Add("")
                         End If
 
-                        lvCashe.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+                        lvCashe.Items(intj).SubItems.Add(
+                            .Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
                         intj = intj + 1
                         Uname2 = Uname2 + .Fields("CenaRub").Value
 
                     Case "PHONE"
-                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG22", "Телефон") & " - " & .Fields("NET_NAME").Value)
+                        lvCashe.Items.Add(
+                            langIni.GetString("frmReports", "MSG22", "Телефон") & " - " & .Fields("NET_NAME").Value)
 
                         If Not IsDBNull(.Fields("CenaRub").Value) Then
                             lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
@@ -5221,13 +5685,15 @@ err:
                             lvCashe.Items(intj).SubItems.Add("")
                         End If
 
-                        lvCashe.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+                        lvCashe.Items(intj).SubItems.Add(
+                            .Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
                         intj = intj + 1
                         Uname2 = Uname2 + .Fields("CenaRub").Value
 
                     Case "FAX"
 
-                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG23", "Факс") & " - " & .Fields("NET_NAME").Value)
+                        lvCashe.Items.Add(
+                            langIni.GetString("frmReports", "MSG23", "Факс") & " - " & .Fields("NET_NAME").Value)
 
                         If Not IsDBNull(.Fields("CenaRub").Value) Then
                             lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
@@ -5241,12 +5707,14 @@ err:
                             lvCashe.Items(intj).SubItems.Add("")
                         End If
 
-                        lvCashe.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+                        lvCashe.Items(intj).SubItems.Add(
+                            .Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
                         intj = intj + 1
                         Uname2 = Uname2 + .Fields("CenaRub").Value
 
                     Case "SCANER"
-                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG33", "Сканер") & " - " & .Fields("NET_NAME").Value)
+                        lvCashe.Items.Add(
+                            langIni.GetString("frmReports", "MSG33", "Сканер") & " - " & .Fields("NET_NAME").Value)
 
                         If Not IsDBNull(.Fields("CenaRub").Value) Then
                             lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
@@ -5260,12 +5728,14 @@ err:
                             lvCashe.Items(intj).SubItems.Add("")
                         End If
 
-                        lvCashe.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+                        lvCashe.Items(intj).SubItems.Add(
+                            .Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
                         intj = intj + 1
                         Uname2 = Uname2 + .Fields("CenaRub").Value
 
                     Case "ZIP"
-                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG34", "Дисковод ZIP") & " - " & .Fields("NET_NAME").Value)
+                        lvCashe.Items.Add(
+                            langIni.GetString("frmReports", "MSG34", "Дисковод ZIP") & " - " & .Fields("NET_NAME").Value)
 
                         If Not IsDBNull(.Fields("CenaRub").Value) Then
                             lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
@@ -5279,13 +5749,15 @@ err:
                             lvCashe.Items(intj).SubItems.Add("")
                         End If
 
-                        lvCashe.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+                        lvCashe.Items(intj).SubItems.Add(
+                            .Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
                         intj = intj + 1
                         Uname2 = Uname2 + .Fields("CenaRub").Value
 
 
                     Case "MONITOR"
-                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG9", "Монитор") & " - " & .Fields("NET_NAME").Value)
+                        lvCashe.Items.Add(
+                            langIni.GetString("frmReports", "MSG9", "Монитор") & " - " & .Fields("NET_NAME").Value)
 
                         If Not IsDBNull(.Fields("CenaRub").Value) Then
                             lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
@@ -5299,14 +5771,16 @@ err:
                             lvCashe.Items(intj).SubItems.Add("")
                         End If
 
-                        lvCashe.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+                        lvCashe.Items(intj).SubItems.Add(
+                            .Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
                         intj = intj + 1
                         Uname2 = Uname2 + .Fields("CenaRub").Value
 
 
                     Case "USB"
 
-                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG3", "USB") & " - " & .Fields("NET_NAME").Value)
+                        lvCashe.Items.Add(
+                            langIni.GetString("frmReports", "MSG3", "USB") & " - " & .Fields("NET_NAME").Value)
 
                         If Not IsDBNull(.Fields("CenaRub").Value) Then
                             lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
@@ -5320,13 +5794,15 @@ err:
                             lvCashe.Items(intj).SubItems.Add("")
                         End If
 
-                        lvCashe.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+                        lvCashe.Items(intj).SubItems.Add(
+                            .Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
                         intj = intj + 1
                         Uname2 = Uname2 + .Fields("CenaRub").Value
 
                     Case "SOUND"
 
-                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG35", "Акустика") & " - " & .Fields("NET_NAME").Value)
+                        lvCashe.Items.Add(
+                            langIni.GetString("frmReports", "MSG35", "Акустика") & " - " & .Fields("NET_NAME").Value)
 
                         If Not IsDBNull(.Fields("CenaRub").Value) Then
                             lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
@@ -5340,13 +5816,15 @@ err:
                             lvCashe.Items(intj).SubItems.Add("")
                         End If
 
-                        lvCashe.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+                        lvCashe.Items(intj).SubItems.Add(
+                            .Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
                         intj = intj + 1
                         Uname2 = Uname2 + .Fields("CenaRub").Value
 
                     Case "IBP"
 
-                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG36", "ИБП") & " - " & .Fields("NET_NAME").Value)
+                        lvCashe.Items.Add(
+                            langIni.GetString("frmReports", "MSG36", "ИБП") & " - " & .Fields("NET_NAME").Value)
 
                         If Not IsDBNull(.Fields("CenaRub").Value) Then
                             lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
@@ -5360,13 +5838,16 @@ err:
                             lvCashe.Items(intj).SubItems.Add("")
                         End If
 
-                        lvCashe.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+                        lvCashe.Items(intj).SubItems.Add(
+                            .Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
                         intj = intj + 1
                         Uname2 = Uname2 + .Fields("CenaRub").Value
 
                     Case "FS"
 
-                        lvCashe.Items.Add(langIni.GetString("frmReports", "MSG37", "Сетевой фильтр") & " - " & .Fields("NET_NAME").Value)
+                        lvCashe.Items.Add(
+                            langIni.GetString("frmReports", "MSG37", "Сетевой фильтр") & " - " &
+                            .Fields("NET_NAME").Value)
 
                         If Not IsDBNull(.Fields("CenaRub").Value) Then
                             lvCashe.Items(intj).SubItems.Add(.Fields("CenaRub").Value)
@@ -5380,7 +5861,8 @@ err:
                             lvCashe.Items(intj).SubItems.Add("")
                         End If
 
-                        lvCashe.Items(intj).SubItems.Add(.Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+                        lvCashe.Items(intj).SubItems.Add(
+                            .Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
                         intj = intj + 1
                         Uname2 = Uname2 + .Fields("CenaRub").Value
 
@@ -5398,16 +5880,18 @@ err:
         rs = Nothing
 
 
-
-        If cmbBrancheCashe.Text = langIni.GetString("frmReports", "MSG1", "Все") And cmbDepartmentCashe.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
+        If _
+            cmbBrancheCashe.Text = langIni.GetString("frmReports", "MSG1", "Все") And
+            cmbDepartmentCashe.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
 
             'Заправки
             Dim Coun1 As Long
 
-            Dim rscount As ADODB.Recordset 'Объявляем рекордсет
-            rscount = New ADODB.Recordset
-            rscount.Open("SELECT COUNT(*) AS total_number FROM CARTRIDG_Z", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            Dim rscount As Recordset 'Объявляем рекордсет
+            rscount = New Recordset
+            rscount.Open("SELECT COUNT(*) AS total_number FROM CARTRIDG_Z", DB7, CursorTypeEnum.adOpenDynamic,
+                         LockTypeEnum.adLockOptimistic)
 
             With rscount
                 Coun1 = .Fields("total_number").Value
@@ -5418,8 +5902,9 @@ err:
 
 
             If Coun1 > 0 Then
-                rscount = New ADODB.Recordset
-                rscount.Open("SELECT * FROM CARTRIDG_Z", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rscount = New Recordset
+                rscount.Open("SELECT * FROM CARTRIDG_Z", DB7, CursorTypeEnum.adOpenDynamic,
+                             LockTypeEnum.adLockOptimistic)
                 Dim A2, B2, D2 As String
 
                 Dim C2 As Integer
@@ -5437,8 +5922,9 @@ err:
 
                             A2 = .Fields("ID_C").Value
 
-                            rs = New ADODB.Recordset
-                            rs.Open("SELECT model, ustr FROM CARTRIDG WHERE id =" & A2, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                            rs = New Recordset
+                            rs.Open("SELECT model, ustr FROM CARTRIDG WHERE id =" & A2, DB7,
+                                    CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                             With rs
                                 A2 = .Fields("model").Value
                                 C2 = .Fields("ustr").Value
@@ -5447,8 +5933,9 @@ err:
                             rs.Close()
                             rs = Nothing
 
-                            rs = New ADODB.Recordset
-                            rs.Open("SELECT name FROM spr_cart WHERE id =" & A2, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                            rs = New Recordset
+                            rs.Open("SELECT name FROM spr_cart WHERE id =" & A2, DB7, CursorTypeEnum.adOpenDynamic,
+                                    LockTypeEnum.adLockOptimistic)
                             With rs
                                 B2 = .Fields("name").Value
                             End With
@@ -5459,10 +5946,12 @@ err:
                             If C2 = 0 Or Len(C2) = 0 Then
 
                             Else
-                                rs = New ADODB.Recordset
-                                rs.Open("SELECT filial, mesto, kabn, NET_NAME FROM kompy WHERE id =" & C2, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                                rs = New Recordset
+                                rs.Open("SELECT filial, mesto, kabn, NET_NAME FROM kompy WHERE id =" & C2, DB7,
+                                        CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                                 With rs
-                                    D2 = .Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value
+                                    D2 = .Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" &
+                                         .Fields("kabn").Value
                                     B2 = B2 & " (" & .Fields("NET_NAME").Value & ")"
                                 End With
                                 rs.Close()
@@ -5471,7 +5960,8 @@ err:
                             End If
 
 
-                            lvCashe.Items.Add(langIni.GetString("frmReports", "MSG38", "Заправка картриджа") & " - " & B2)
+                            lvCashe.Items.Add(
+                                langIni.GetString("frmReports", "MSG38", "Заправка картриджа") & " - " & B2)
 
 
                             If Not IsDBNull(.Fields("STOIM").Value) Then
@@ -5506,8 +5996,9 @@ err:
 
             Coun1 = 0
 
-            rscount = New ADODB.Recordset
-            rscount.Open("SELECT COUNT(*) AS total_number FROM Sclad", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rscount = New Recordset
+            rscount.Open("SELECT COUNT(*) AS total_number FROM Sclad", DB7, CursorTypeEnum.adOpenDynamic,
+                         LockTypeEnum.adLockOptimistic)
 
             With rscount
                 Coun1 = .Fields("total_number").Value
@@ -5519,8 +6010,8 @@ err:
 
 
             If Coun1 > 0 Then
-                rscount = New ADODB.Recordset
-                rscount.Open("SELECT * FROM Sclad", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rscount = New Recordset
+                rscount.Open("SELECT * FROM Sclad", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 With rscount
                     .MoveFirst()
@@ -5528,12 +6019,15 @@ err:
 
                         Uname(2) = 0
 
-                        If Not IsDBNull(.Fields("DaysAndTimes").Value) Then Uname = Split(.Fields("DaysAndTimes").Value, ".")
+                        If Not IsDBNull(.Fields("DaysAndTimes").Value) Then _
+                            Uname = Split(.Fields("DaysAndTimes").Value, ".")
 
                         If Uname(2) = cmbYearCashe.Text Then
 
 
-                            lvCashe.Items.Add(langIni.GetString("frmReports", "MSG39", "На складе") & " - " & .Fields("ComplectName").Value & "(" & .Fields("Prim").Value & ")")
+                            lvCashe.Items.Add(
+                                langIni.GetString("frmReports", "MSG39", "На складе") & " - " &
+                                .Fields("ComplectName").Value & "(" & .Fields("Prim").Value & ")")
 
 
                             If Not IsDBNull(.Fields("Cena").Value) Then
@@ -5570,8 +6064,9 @@ err:
             'Затраты на ремонт
             Coun1 = 0
 
-            rscount = New ADODB.Recordset
-            rscount.Open("SELECT COUNT(*) AS total_number FROM Remont", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rscount = New Recordset
+            rscount.Open("SELECT COUNT(*) AS total_number FROM Remont", DB7, CursorTypeEnum.adOpenDynamic,
+                         LockTypeEnum.adLockOptimistic)
 
             With rscount
                 Coun1 = .Fields("total_number").Value
@@ -5583,8 +6078,8 @@ err:
 
 
             If Coun1 > 0 Then
-                rscount = New ADODB.Recordset
-                rscount.Open("SELECT * FROM Remont", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rscount = New Recordset
+                rscount.Open("SELECT * FROM Remont", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 With rscount
                     .MoveFirst()
@@ -5602,7 +6097,9 @@ err:
                             Else
 
 
-                                lvCashe.Items.Add(langIni.GetString("frmReports", "MSG40", "Затраты на ремонт") & " - " & .Fields("Comp_Name").Value)
+                                lvCashe.Items.Add(
+                                    langIni.GetString("frmReports", "MSG40", "Затраты на ремонт") & " - " &
+                                    .Fields("Comp_Name").Value)
 
 
                                 If Not IsDBNull(.Fields("Summ").Value) Then
@@ -5653,12 +6150,12 @@ err:
 
 
         Exit Sub
-err_:
+        err_:
         Me.Cursor = Cursors.Default
         MsgBox(Err.Description, MsgBoxStyle.Exclamation, ProGramName)
     End Sub
 
-    Private Sub btnCacheOff_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCacheOff.Click
+    Private Sub btnCacheOff_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCacheOff.Click
         On Error GoTo Err_
 
         If lvCashe.Items.Count = 0 Then Exit Sub
@@ -5679,14 +6176,12 @@ err_:
         End Select
 
 
-
-
         Exit Sub
-Err_:
+        Err_:
         MsgBox("Error " & Err.Number & " " & Err.Description)
     End Sub
 
-    Private Sub btnCRZakSendOff_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCRZakSendOff.Click
+    Private Sub btnCRZakSendOff_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCRZakSendOff.Click
 
 
         Me.Cursor = Cursors.WaitCursor
@@ -5694,16 +6189,17 @@ Err_:
         Call blanks_my_o_ZKP()
 
         Me.Cursor = Cursors.Default
-
     End Sub
 
-    Private Sub lvRemont_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvRemont.SelectedIndexChanged
-
+    Private Sub lvRemont_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles lvRemont.SelectedIndexChanged
     End Sub
 
-    Private Sub lvRemont_ItemMouseHover(ByVal sender As Object, ByVal e As System.Windows.Forms.ListViewItemMouseHoverEventArgs) Handles lvRemont.ItemMouseHover
+    Private Sub lvRemont_ItemMouseHover(ByVal sender As Object, ByVal e As ListViewItemMouseHoverEventArgs) _
+        Handles lvRemont.ItemMouseHover
         Dim stext As String
-        stext = e.Item.SubItems(1).Text & vbCrLf & e.Item.SubItems(2).Text & vbCrLf & vbCrLf & e.Item.SubItems(3).Text & vbCrLf & vbCrLf & e.Item.SubItems(5).Text
+        stext = e.Item.SubItems(1).Text & vbCrLf & e.Item.SubItems(2).Text & vbCrLf & vbCrLf & e.Item.SubItems(3).Text &
+                vbCrLf & vbCrLf & e.Item.SubItems(5).Text
 
         ToolTip1.ToolTipTitle = ProGramName
 
@@ -5737,24 +6233,23 @@ Err_:
             End If
         Next
         Return WordWrap
-
     End Function
 
-    Private Sub lvRemont_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lvRemont.MouseMove
+    Private Sub lvRemont_MouseMove(ByVal sender As Object, ByVal e As MouseEventArgs) Handles lvRemont.MouseMove
         If lvRemont.GetItemAt(e.X, e.Y) Is Nothing Then
             ToolTip1.RemoveAll()
         End If
     End Sub
 
-    Private Sub lvReport2Cl_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvReport2Cl.SelectedIndexChanged
-
+    Private Sub lvReport2Cl_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles lvReport2Cl.SelectedIndexChanged
     End Sub
 
-    Private Sub TableLayoutPanel3_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles TableLayoutPanel3.Paint
-
+    Private Sub TableLayoutPanel3_Paint(ByVal sender As Object, ByVal e As PaintEventArgs) _
+        Handles TableLayoutPanel3.Paint
     End Sub
 
-    Private Sub chk_K47_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chk_K47.CheckedChanged
+    Private Sub chk_K47_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chk_K47.CheckedChanged
         Select Case chk_K47.Checked
 
             Case True
@@ -5765,13 +6260,13 @@ Err_:
     End Sub
 
 
-    Private Sub cmbOffice_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbOffice.SelectedIndexChanged
+    Private Sub cmbOffice_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbOffice.SelectedIndexChanged
 
         'Call Refresh_otdellist()
-
     End Sub
 
-    Private Sub chk_K48_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chk_K48.CheckedChanged
+    Private Sub chk_K48_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chk_K48.CheckedChanged
         Select Case chk_K48.Checked
 
             Case True
@@ -5781,7 +6276,7 @@ Err_:
         End Select
     End Sub
 
-    Private Sub chk_K49_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chk_K49.CheckedChanged
+    Private Sub chk_K49_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chk_K49.CheckedChanged
         Select Case chk_K49.Checked
 
             Case True
@@ -5791,7 +6286,7 @@ Err_:
         End Select
     End Sub
 
-    Private Sub chk_K50_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chk_K50.CheckedChanged
+    Private Sub chk_K50_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chk_K50.CheckedChanged
         Select Case chk_K50.Checked
 
             Case True
@@ -5801,7 +6296,7 @@ Err_:
         End Select
     End Sub
 
-    Private Sub chk_K51_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chk_K51.CheckedChanged
+    Private Sub chk_K51_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chk_K51.CheckedChanged
         Select Case chk_K51.Checked
 
             Case True
@@ -5811,7 +6306,7 @@ Err_:
         End Select
     End Sub
 
-    Private Sub chk_K52_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chk_K52.CheckedChanged
+    Private Sub chk_K52_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chk_K52.CheckedChanged
         Select Case chk_K52.Checked
 
             Case True
@@ -5938,7 +6433,6 @@ Err_:
     '        End With
 
 
-
     '        rs.Close()
     '        rs = Nothing
 
@@ -6005,16 +6499,14 @@ Err_:
     '        End If
 
 
-
     '        Exit Sub
     'err_:
     '    'MsgBox(Err.Description, MsgBoxStyle.Information, ProGramName)
     '    End Sub
 
-    Private Sub lvRemont_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvRemont.DoubleClick
+    Private Sub lvRemont_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles lvRemont.DoubleClick
 
         LoadRepairEdit(lvRemont)
-
     End Sub
 
     Private Sub LoadRepairEdit(ByVal lvList As ListView)
@@ -6039,16 +6531,17 @@ Err_:
 
         frmserviceDesc.rCOUNT = rCOUNT
         Dim sSQL As String
-        Dim rs1 As ADODB.Recordset
-        rs1 = New ADODB.Recordset
+        Dim rs1 As Recordset
+        rs1 = New Recordset
 
         sSQL = "SELECT * FROM Remont WHERE id=" & rCOUNT
 
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
-        frmService_add.Text = LNGIniFile.GetString("frmserviceDesc", "MSG1", "Добавление (редактирование) заявки для") '& " " & lvList.SelectedItems(z).SubItems(5).Text
+        frmService_add.Text = LNGIniFile.GetString("frmserviceDesc", "MSG1", "Добавление (редактирование) заявки для") _
+        '& " " & lvList.SelectedItems(z).SubItems(5).Text
 
-        rs1.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
         Dim sSw As Date
         Dim sSw2 As String
 
@@ -6056,8 +6549,10 @@ Err_:
             .MoveFirst()
             Do While Not .EOF
 
-                If Not IsDBNull(.Fields("istochnik").Value) Then frmService_add.cmbIst.Text = .Fields("istochnik").Value 'Источник
-                If Not IsDBNull(.Fields("Master").Value) Then frmService_add.cmbMast.Text = .Fields("Master").Value 'Мастер
+                If Not IsDBNull(.Fields("istochnik").Value) Then frmService_add.cmbIst.Text = .Fields("istochnik").Value _
+                'Источник
+                If Not IsDBNull(.Fields("Master").Value) Then frmService_add.cmbMast.Text = .Fields("Master").Value _
+                'Мастер
 
 
                 If Not IsDBNull(.Fields("Date").Value) Then sSw = .Fields("Date").Value
@@ -6075,23 +6570,30 @@ Err_:
                 frmService_add.dtIsp.Value = sSw2 'Срок исполнения
 
 
-                If Not IsDBNull(.Fields("phone").Value) Then frmService_add.txtPhone.Text = .Fields("phone").Value 'Телефон
-                If Not IsDBNull(.Fields("name_of_remont").Value) Then frmService_add.txtHead.Text = .Fields("name_of_remont").Value 'Название
-                If Not IsDBNull(.Fields("Remont").Value) Then frmService_add.txtRem.Text = .Fields("Remont").Value 'Сообщение
+                If Not IsDBNull(.Fields("phone").Value) Then frmService_add.txtPhone.Text = .Fields("phone").Value _
+                'Телефон
+                If Not IsDBNull(.Fields("name_of_remont").Value) Then _
+                    frmService_add.txtHead.Text = .Fields("name_of_remont").Value 'Название
+                If Not IsDBNull(.Fields("Remont").Value) Then frmService_add.txtRem.Text = .Fields("Remont").Value _
+                'Сообщение
                 If Not IsDBNull(.Fields("vip").Value) Then frmService_add.cmbStatus.Text = .Fields("vip").Value 'Статус
-                If Not IsDBNull(.Fields("otvetstv").Value) Then frmService_add.cmbOtv.Text = .Fields("otvetstv").Value 'Ответственный
+                If Not IsDBNull(.Fields("otvetstv").Value) Then frmService_add.cmbOtv.Text = .Fields("otvetstv").Value _
+                'Ответственный
 
-                If Not IsDBNull(.Fields("krit_rem").Value) Then frmService_add.cmbTip.Text = .Fields("krit_rem").Value 'Критичность
+                If Not IsDBNull(.Fields("krit_rem").Value) Then frmService_add.cmbTip.Text = .Fields("krit_rem").Value _
+                'Критичность
                 If Not IsDBNull(.Fields("Uroven").Value) Then frmService_add.cmbKrit.Text = .Fields("Uroven").Value 'Тип
 
 
-                If Not IsDBNull(.Fields("MeMo").Value) Then frmService_add.txtComent.Text = .Fields("MeMo").Value 'Комментарий
+                If Not IsDBNull(.Fields("MeMo").Value) Then frmService_add.txtComent.Text = .Fields("MeMo").Value _
+                'Комментарий
 
-                If Not IsDBNull(.Fields("Summ").Value) Then frmService_add.RemCashe.Text = .Fields("Summ").Value 'Комментарий
+                If Not IsDBNull(.Fields("Summ").Value) Then frmService_add.RemCashe.Text = .Fields("Summ").Value _
+                'Комментарий
 
                 '.Fields("Summ").Value = RemCashe.Text 'Сумма
 
-                If .Fields("zakryt").Value = -1 Then
+                If .Fields("zakryt").Value = - 1 Then
                     frmService_add.chkClose.Checked = 1
                 Else
 
@@ -6110,13 +6612,10 @@ Err_:
         rs1 = Nothing
 
         frmService_add.ShowDialog(Me)
-
-
-
     End Sub
 
 
-    Private Sub chk_K46_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chk_K46.CheckedChanged
+    Private Sub chk_K46_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chk_K46.CheckedChanged
 
         Select Case chk_K46.Checked
 
@@ -6150,17 +6649,14 @@ Err_:
                 'gbInf
 
         End Select
-
-
-
     End Sub
 
 
-    Private Sub cmbOthers_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbOthers.SelectedIndexChanged
-
+    Private Sub cmbOthers_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbOthers.SelectedIndexChanged
     End Sub
 
-    Private Sub btnPPR_Update_Click(sender As System.Object, e As System.EventArgs) Handles btnPPR_Update.Click
+    Private Sub btnPPR_Update_Click(sender As Object, e As EventArgs) Handles btnPPR_Update.Click
         'cmbPPR_Year
 
         If Len(cmbPPR_Year.Text) = 0 Then Exit Sub
@@ -6168,13 +6664,13 @@ Err_:
         lstvPPR.Items.Clear()
 
         Dim sSQL, sSQL1 As String
-        Dim rs As ADODB.Recordset
+        Dim rs As Recordset
         Dim Uname As Integer
         Dim Uname1 As String
 
         sSQL = "SELECT count(*) as t_n FROM TBL_PPR WHERE YEAR_TO='" & cmbPPR_Year.Text & "'"
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
             Uname = .Fields("t_n").Value
@@ -6186,8 +6682,8 @@ Err_:
 
         sSQL = "SELECT * FROM TBL_PPR WHERE YEAR_TO='" & cmbPPR_Year.Text & "'"
 
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         Dim intj As Integer
 
@@ -6200,10 +6696,10 @@ Err_:
                 lstvPPR.Items.Add(.Fields("id").Value)
                 Uname = .Fields("id_comp").Value
 
-                Dim rs1 As ADODB.Recordset
+                Dim rs1 As Recordset
                 sSQL1 = "SELECT * FROM kompy WHERE id=" & Uname
-                rs1 = New ADODB.Recordset
-                rs1.Open(sSQL1, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs1 = New Recordset
+                rs1.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
 
                 With rs1
@@ -6292,7 +6788,8 @@ Err_:
 
                     lstvPPR.Items(intj).SubItems.Add(Uname1)
                     lstvPPR.Items(CInt(intj)).SubItems.Add(.Fields("NET_NAME").Value)
-                    lstvPPR.Items(CInt(intj)).SubItems.Add(.Fields("filial").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+                    lstvPPR.Items(CInt(intj)).SubItems.Add(
+                        .Fields("filial").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
 
                 End With
 
@@ -6309,18 +6806,16 @@ Err_:
         End With
 
 
-
-                rs.Close()
-                rs = Nothing
+        rs.Close()
+        rs = Nothing
 
         ResList(lstvPPR)
-
     End Sub
 
-    Private Sub lstvPPR_ColumnClick(sender As Object, e As System.Windows.Forms.ColumnClickEventArgs) Handles lstvPPR.ColumnClick
-        Dim new_sorting_column As ColumnHeader = _
-         lstvPPR.Columns(e.Column)
-        Dim sort_order As System.Windows.Forms.SortOrder
+    Private Sub lstvPPR_ColumnClick(sender As Object, e As ColumnClickEventArgs) Handles lstvPPR.ColumnClick
+        Dim new_sorting_column As ColumnHeader =
+                lstvPPR.Columns(e.Column)
+        Dim sort_order As SortOrder
         If m_SortingColumn Is Nothing Then
             sort_order = SortOrder.Ascending
         Else
@@ -6349,7 +6844,6 @@ Err_:
         lstvPPR.Sort()
     End Sub
 
-    Private Sub lstvPPR_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles lstvPPR.SelectedIndexChanged
-
+    Private Sub lstvPPR_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstvPPR.SelectedIndexChanged
     End Sub
 End Class

@@ -1,26 +1,24 @@
 ﻿Public Class frmCartr_Add_Zap
     Public EDTRCARTZ As Boolean
 
-    Private Sub frmCartr_Add_Zap_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+    Private Sub frmCartr_Add_Zap_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
 
         SendFonts(Me)
 
         FillComboNET(Me.cmbPost, "Name", "SPR_Postav", "", False, True)
-
-
-
     End Sub
 
-    Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
+    Private Sub btnCancel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCancel.Click
         Me.Close()
     End Sub
 
-    Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
+    Private Sub btnAdd_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAdd.Click
         Dim objIniFile As New IniFile(sLANGPATH)
 
 
         If Len(cmbPost.Text) = 0 Then
-            MsgBox(objIniFile.GetString("frmCartr_Add_Zap", "MSG1", "Не выбран сервис центр!"), MsgBoxStyle.Critical, ProGramName)
+            MsgBox(objIniFile.GetString("frmCartr_Add_Zap", "MSG1", "Не выбран сервис центр!"), MsgBoxStyle.Critical,
+                   ProGramName)
             cmbPost.Focus()
             Exit Sub
         End If
@@ -30,13 +28,13 @@
         End If
 
 
-
         Dim uname As String
         uname = cmbPost.Text
 
-        Dim rs As ADODB.Recordset
-        rs = New ADODB.Recordset
-        rs.Open("SELECT * FROM SPR_Postav where Name ='" & cmbPost.Text & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        Dim rs As Recordset
+        rs = New Recordset
+        rs.Open("SELECT * FROM SPR_Postav where Name ='" & cmbPost.Text & "'", DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
 
         With rs
             uname = .Fields("id").Value
@@ -60,9 +58,9 @@
         End If
 
 
-        rs = New ADODB.Recordset
+        rs = New Recordset
 
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
             If EDTRCARTZ = False Then
@@ -89,6 +87,5 @@
 
         Call frmCRT3.Zap_load(frmCRT3.rCOUNT)
         Me.Close()
-
     End Sub
 End Class

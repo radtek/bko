@@ -1,6 +1,4 @@
 ﻿Imports System.Management
-Imports System.Threading
-Imports System.ComponentModel
 
 Module MOD_LOAD_WMI
     Private strComputer As String
@@ -12,11 +10,6 @@ Module MOD_LOAD_WMI
 
     Public Sub LOAD_WMI()
         frm_wmi.ShowDialog(frmMain)
-
-
-        
-        
-
     End Sub
 
     Public Sub LOAD_WMI2()
@@ -61,7 +54,6 @@ Module MOD_LOAD_WMI
             Next
 
 
-
         Else
 
             strComputer = frm_wmi.wmiIP
@@ -78,9 +70,6 @@ Module MOD_LOAD_WMI
             frmComputers.cmbOffice.Text = sOffice
 
         End If
-
-
-
     End Sub
 
     Private Sub LOAD_WMI_3()
@@ -88,21 +77,18 @@ Module MOD_LOAD_WMI
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
 
-
-
         If Len(strComputer) = 0 Or Len(connection.Username) = 0 Or Len(Authority) = 0 Then
-            MsgBox(LNGIniFile.GetString("MOD_LOAD_WMI", "MSG1", "Не заполены обязательные поля") & vbCrLf & LNGIniFile.GetString("MOD_LOAD_WMI", "MSG2", "Дальнейшая загрузка не возможна"), MsgBoxStyle.Exclamation, ProGramName)
+            MsgBox(
+                LNGIniFile.GetString("MOD_LOAD_WMI", "MSG1", "Не заполены обязательные поля") & vbCrLf &
+                LNGIniFile.GetString("MOD_LOAD_WMI", "MSG2", "Дальнейшая загрузка не возможна"), MsgBoxStyle.Exclamation,
+                ProGramName)
             Exit Sub
         End If
-
-
 
 
         'connection.EnablePrivileges = True
 
         frmMain.Cursor = Cursors.WaitCursor
-
-
 
 
         If frmComputers.InvokeRequired Then
@@ -196,7 +182,6 @@ Module MOD_LOAD_WMI
         End If
 
 
-
         If frmComputers.InvokeRequired Then
             frmComputers.Invoke(New MethodInvoker(AddressOf wSYS))
         Else
@@ -208,7 +193,7 @@ Module MOD_LOAD_WMI
         frmMain.Cursor = Cursors.Default
 
         Exit Sub
-err_:
+        err_:
         frmMain.Cursor = Cursors.Default
     End Sub
 
@@ -221,7 +206,9 @@ err_:
         Dim scope As New ManagementScope("\\" & strComputer & "\root\CIMV2", connection)
         scope.Connect()
 
-        Dim query As New ObjectQuery("SELECT Name, CurrentClockSpeed, SocketDesignation, Manufacturer FROM Win32_Processor")
+        Dim _
+            query As _
+                New ObjectQuery("SELECT Name, CurrentClockSpeed, SocketDesignation, Manufacturer FROM Win32_Processor")
 
         Dim searcher As New ManagementObjectSearcher(scope, query)
 
@@ -234,7 +221,7 @@ err_:
 
         Next
 
-err_:
+        err_:
     End Sub
 
     Private Sub wMB()
@@ -242,7 +229,9 @@ err_:
 
         Dim scope As New ManagementScope("\\" & strComputer & "\root\CIMV2", connection)
         scope.Connect()
-        Dim query As New ObjectQuery("SELECT Product, OtherIdentifyingInfo, SerialNumber, Manufacturer FROM Win32_BaseBoard")
+        Dim _
+            query As _
+                New ObjectQuery("SELECT Product, OtherIdentifyingInfo, SerialNumber, Manufacturer FROM Win32_BaseBoard")
 
         Dim searcher As New ManagementObjectSearcher(scope, query)
 
@@ -256,7 +245,7 @@ err_:
         Next
 
 
-err_:
+        err_:
     End Sub
 
     Private Sub wRAM()
@@ -273,15 +262,15 @@ err_:
 
         For Each queryObj As ManagementObject In searcher.Get()
 
-            frmComputers.cmbRAM1.Text = CLng((queryObj("TotalVisibleMemorySize") / 1024) / 1024) & " ГБ"
+            frmComputers.cmbRAM1.Text = CLng((queryObj("TotalVisibleMemorySize")/1024)/1024) & " ГБ"
             'frmComputers.txtRamS1.Text = queryObj("CurrentClockSpeed") & " Мгц."
             'frmComputers.txtRamSN1.Text = queryObj("SocketDesignation")
             'frmComputers.PROizV6.Text = queryObj("Manufacturer")
 
         Next
-       
 
-err_:
+
+        err_:
     End Sub
 
     Private Sub wHDD()
@@ -296,7 +285,6 @@ err_:
         Dim searcher As New ManagementObjectSearcher(scope, query)
 
 
-
         'GetObject("winmgmts:\\" & strComputer & "\ROOT\CIMV2")
         Dim intj As Integer = 1
         For Each queryObj As ManagementObject In searcher.Get()
@@ -306,27 +294,27 @@ err_:
                 Case 1
 
                     frmComputers.cmbHDD1.Text = queryObj("Model") ' / 1024) / 1024) & " ГБ"
-                    frmComputers.txtHDDo1.Text = CLng(((queryObj("size") / 1024) / 1024) / 1024) & " Гб."
+                    frmComputers.txtHDDo1.Text = CLng(((queryObj("size")/1024)/1024)/1024) & " Гб."
                     'frmComputers.txtHDDsN1.Text = queryObj("SocketDesignation")
                     frmComputers.PROizV10.Text = queryObj("Manufacturer")
 
                 Case 2
 
                     frmComputers.cmbHDD2.Text = queryObj("Model") ' / 1024) / 1024) & " ГБ"
-                    frmComputers.txtHDDo2.Text = CLng(((queryObj("size") / 1024) / 1024) / 1024) & " Гб."
+                    frmComputers.txtHDDo2.Text = CLng(((queryObj("size")/1024)/1024)/1024) & " Гб."
                     'frmComputers.txtHDDsN1.Text = queryObj("SocketDesignation")
                     frmComputers.PROizV11.Text = queryObj("Manufacturer")
 
                 Case 3
                     frmComputers.cmbHDD3.Text = queryObj("Model") ' / 1024) / 1024) & " ГБ"
-                    frmComputers.txtHDDo3.Text = CLng(((queryObj("size") / 1024) / 1024) / 1024) & " Гб."
+                    frmComputers.txtHDDo3.Text = CLng(((queryObj("size")/1024)/1024)/1024) & " Гб."
                     'frmComputers.txtHDDsN1.Text = queryObj("SocketDesignation")
                     frmComputers.PROizV12.Text = queryObj("Manufacturer")
 
                 Case 4
 
                     frmComputers.cmbHDD4.Text = queryObj("Model") ' / 1024) / 1024) & " ГБ"
-                    frmComputers.txtHDDo4.Text = CLng(((queryObj("size") / 1024) / 1024) / 1024) & " Гб."
+                    frmComputers.txtHDDo4.Text = CLng(((queryObj("size")/1024)/1024)/1024) & " Гб."
                     'frmComputers.txtHDDsN1.Text = queryObj("SocketDesignation")
                     frmComputers.PROizV13.Text = queryObj("Manufacturer")
 
@@ -337,7 +325,7 @@ err_:
 
         Next
 
-err_:
+        err_:
     End Sub
 
     Private Sub wSVGA()
@@ -356,18 +344,17 @@ err_:
         For Each queryObj As ManagementObject In searcher.Get()
 
             frmComputers.cmbSVGA1.Text = queryObj("Name")
-            frmComputers.txtSVGAr1.Text = CLng((queryObj("AdapterRAM") / 1024) / 1024) & " Мб."
+            frmComputers.txtSVGAr1.Text = CLng((queryObj("AdapterRAM")/1024)/1024) & " Мб."
             'CLng((queryObj("AdapterRAM") / 1024) / 1024) & " Мб."
             'frmComputers.txtSoc1.Text = queryObj("SocketDesignation")
             'frmComputers.PROizV14.Text = queryObj("Manufacturer")
 
         Next
 
-err_:
+        err_:
     End Sub
 
     Private Sub wSOUND()
-
 
 
         On Error GoTo err_
@@ -389,8 +376,7 @@ err_:
 
         Next
 
-err_:
-
+        err_:
     End Sub
 
     Private Sub wNET()
@@ -403,7 +389,6 @@ err_:
         Dim query As New ObjectQuery("SELECT * FROM Win32_NetworkAdapterConfiguration")
 
         Dim searcher As New ManagementObjectSearcher(scope, query)
-
 
 
         For Each queryObj As ManagementObject In searcher.Get()
@@ -428,8 +413,7 @@ err_:
 
         Next
 
-err_:
-
+        err_:
     End Sub
 
     Private Sub wCDROM()
@@ -464,15 +448,13 @@ err_:
                     frmComputers.PROizV19.Text = queryObj("Manufacturer")
 
 
-
             End Select
 
             intj = intj + 1
 
         Next
 
-err_:
-
+        err_:
     End Sub
 
     Private Sub wFDD()
@@ -493,10 +475,8 @@ err_:
             frmComputers.PROizV22.Text = queryObj("Manufacturer")
 
         Next
-       
-err_:
 
-
+        err_:
     End Sub
 
     Private Sub wModem()
@@ -511,7 +491,7 @@ err_:
 
 
         'GetObject("winmgmts:\\" & strComputer & "\ROOT\CIMV2")
-        
+
 
         For Each queryObj As ManagementObject In searcher.Get()
 
@@ -519,7 +499,6 @@ err_:
 
         Next
         err_:
-
     End Sub
 
     Private Sub wKeyboard()
@@ -533,13 +512,12 @@ err_:
         Dim searcher As New ManagementObjectSearcher(scope, query)
 
 
-
         For Each queryObj As ManagementObject In searcher.Get()
 
             frmComputers.cmbKeyb.Text = queryObj("Name")
 
         Next
-           err_:
+        err_:
     End Sub
 
     Private Sub wMouse()
@@ -552,7 +530,6 @@ err_:
 
         Dim searcher As New ManagementObjectSearcher(scope, query)
 
-        
 
         For Each queryObj As ManagementObject In searcher.Get()
 
@@ -562,9 +539,7 @@ err_:
             'txtSNAME
         Next
 
-err_:
-
-
+        err_:
     End Sub
 
     Private Sub wPRN()
@@ -577,7 +552,6 @@ err_:
         Dim query As New ObjectQuery("SELECT Name FROM Win32_Printer")
 
         Dim searcher As New ManagementObjectSearcher(scope, query)
-
 
 
         Dim intj As Integer = 1
@@ -605,9 +579,7 @@ err_:
 
         Next
 
-err_:
-
-
+        err_:
     End Sub
 
     Private Sub wMONITOR()
@@ -620,8 +592,6 @@ err_:
         Dim query As New ObjectQuery("SELECT Name FROM Win32_DesktopMonitor")
 
         Dim searcher As New ManagementObjectSearcher(scope, query)
-
-
 
 
         Dim intj As Integer = 1
@@ -644,9 +614,7 @@ err_:
             intj = intj + 1
 
         Next
-err_:
-
-
+        err_:
     End Sub
 
     Private Sub wSOFT()
@@ -659,7 +627,6 @@ err_:
         Dim query As New ObjectQuery("SELECT Name, Vendor FROM Win32_Product")
 
         Dim searcher As New ManagementObjectSearcher(scope, query)
-
 
 
         Dim intj As Integer = 0
@@ -686,13 +653,8 @@ err_:
         Next
 
 
-
-
-
-
-
         Exit Sub
-err_:
+        err_:
         'MsgBox(Err.Description)
     End Sub
 
@@ -723,9 +685,7 @@ err_:
         Next
 
         Exit Sub
-err_:
+        err_:
         'MsgBox(Err.Description)
-
     End Sub
-
 End Module

@@ -1,8 +1,6 @@
-﻿Imports System
-Imports System.IO
+﻿Imports System.IO
 
 Module MOD_Database
-
     Public unamDB As String
     Public DBserv As String
     Public DBtabl As String
@@ -18,17 +16,16 @@ Module MOD_Database
     Public strPassword As String, Temp As String
     Public SUBD As String
 
-    Public DB7 As ADODB.Connection
+    Public DB7 As Connection
     Public ConNect As String
 
     Public Function GENID() As Long
 
         Randomize()
-        GENID = Int(Rnd() * 1000000000)
+        GENID = Int(Rnd()*1000000000)
 
 
         'Dim numbers As Integer() = Enumerable.Range(1, 1000000000).ToArray()
-
     End Function
 
     Public Sub LoadDatabase(Optional ByRef sFile As String = "")
@@ -52,7 +49,7 @@ Module MOD_Database
             unamDB = "MS Access"
         Else
         End If
-        DB7 = New ADODB.Connection
+        DB7 = New Connection
 
         DB_N = unamDB
 
@@ -66,23 +63,31 @@ Module MOD_Database
 
             Case "MS SQL 2008"
 
-                DB7.Open("Driver={SQL Server Native Client 10.0};Server=" & DBserv & ";Database=" & DBtabl & ";Uid=" & DBuser & ";Pwd=" & DBpass & ";")
+                DB7.Open(
+                    "Driver={SQL Server Native Client 10.0};Server=" & DBserv & ";Database=" & DBtabl & ";Uid=" & DBuser &
+                    ";Pwd=" & DBpass & ";")
 
                 Base_Name = DBserv & "\" & DBtabl
             Case "MS SQL"
 
                 '2000
-                DB7.Open("Driver={SQL Server};Server=" & DBserv & ";Database=" & DBtabl & ";Uid=" & DBuser & ";Pwd=" & DBpass & ";")
+                DB7.Open(
+                    "Driver={SQL Server};Server=" & DBserv & ";Database=" & DBtabl & ";Uid=" & DBuser & ";Pwd=" & DBpass &
+                    ";")
 
                 Base_Name = DBserv & "\" & DBtabl
 
             Case "MS Access"
 
-                DB7.Open("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & BasePath & "\" & sFile & ";Jet OLEDB:Database Password=" & MyShadowPassword & ";")
+                DB7.Open(
+                    "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & BasePath & "\" & sFile &
+                    ";Jet OLEDB:Database Password=" & MyShadowPassword & ";")
 
             Case "MySQL"
 
-                DB7.Open("Driver={MySQL ODBC 3.51 Driver};Server=" & DBserv & ";Port=" & DBport & ";Database=" & DBtabl & ";User=" & DBuser & "; Password=" & DBpass & ";OPTION=2059; -С;")
+                DB7.Open(
+                    "Driver={MySQL ODBC 3.51 Driver};Server=" & DBserv & ";Port=" & DBport & ";Database=" & DBtabl &
+                    ";User=" & DBuser & "; Password=" & DBpass & ";OPTION=2059; -С;")
 
                 'Driver={MySQL ODBC 3.51 Driver};Server=myServerAddress;charset=UTF8;Database=myDataBase;User=myUsername; Password=myPassword;Option=3;
                 'DB7.Open("Driver={MySQL ODBC 5.1 Driver};Server=" & DBserv & ";Port=" & DBport & ";Database=" & DBtabl & ";User=" & DBuser & "; Password=" & DBpass & ";OPTION=2059;")
@@ -92,13 +97,17 @@ Module MOD_Database
 
             Case "MySQL (MyODBC 5.1)"
 
-                DB7.Open("Driver={MySQL ODBC 5.1 Driver};Server=" & DBserv & ";Database=" & DBtabl & ";Port=" & DBport & ";User=" & DBuser & "; Password=" & DBpass & ";Option=2059;-С;")
+                DB7.Open(
+                    "Driver={MySQL ODBC 5.1 Driver};Server=" & DBserv & ";Database=" & DBtabl & ";Port=" & DBport &
+                    ";User=" & DBuser & "; Password=" & DBpass & ";Option=2059;-С;")
 
                 Base_Name = DBserv & "\" & DBtabl
 
             Case "PostgreSQL"
 
-                DB7.Open("DSN=PGS;Server=" & DBserv & ";Port=" & DBport & ";Database=" & DBtabl & ";Uid=" & DBuser & ";Pwd=" & DBpass & ";")
+                DB7.Open(
+                    "DSN=PGS;Server=" & DBserv & ";Port=" & DBport & ";Database=" & DBtabl & ";Uid=" & DBuser & ";Pwd=" &
+                    DBpass & ";")
 
                 'DB7.Open("Driver={PostgreSQL};Server=" & DBserv & ";Port=" & DBport & ";Database=" & DBtabl & ";Uid=" & DBuser & ";Pwd=" & DBpass & ";")
 
@@ -108,18 +117,19 @@ Module MOD_Database
 
             Case "SQLLite"
 
-                DB7.Open("DRIVER=SQLite3 ODBC Driver;Database=" & BasePath & "\" & sFile & ";LongNames=0;Timeout=1000;NoTXN=0;SyncPragma=NORMAL;StepAPI=0;")
+                DB7.Open(
+                    "DRIVER=SQLite3 ODBC Driver;Database=" & BasePath & "\" & sFile &
+                    ";LongNames=0;Timeout=1000;NoTXN=0;SyncPragma=NORMAL;StepAPI=0;")
 
             Case "DSN"
                 DB7.Open("DSN=" & DBserv & ";UID=" & DBuser & ";PWD=" & DBpass & ";")
-
 
 
         End Select
 
 
         Exit Sub
-ERR1:
+        ERR1:
 
         DATAB = False
         MsgBox(Err.Description)
@@ -140,11 +150,6 @@ ERR1:
             MsgBox(Err.Description)
 
         End If
-
-
-
-
-
     End Sub
 
     Public Sub UnLoadDatabase(Optional ByRef sFile As String = "")
@@ -160,8 +165,7 @@ ERR1:
 
         DATAB = False
         Exit Sub
-Err_:
-
+        Err_:
     End Sub
 
 

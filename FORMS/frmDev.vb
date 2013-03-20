@@ -3,19 +3,19 @@
     Public cEDT As Boolean = False
     Public sTIPtehn As String
 
-    Private Sub Button2_Click(sender As System.Object, e As System.EventArgs) Handles Button2.Click
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         cEDT = False
         Me.Close()
     End Sub
 
-    Private Sub Button1_Click(sender As System.Object, e As System.EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
         If Len(ComboBox1.Text) = 0 Then Exit Sub
 
-        Dim rs As ADODB.Recordset
+        Dim rs As Recordset
         Dim sSQL As String
 
-        rs = New ADODB.Recordset
+        rs = New Recordset
 
 
         If cEDT = True Then
@@ -29,7 +29,8 @@
         End If
 
 
-        rs.Open("Select * FROM TBL_DEV_OID WHERE Device='" & sTIPtehn & "' AND Model ='" & ComboBox1.Text & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs.Open("Select * FROM TBL_DEV_OID WHERE Device='" & sTIPtehn & "' AND Model ='" & ComboBox1.Text & "'", DB7,
+                CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
             If cEDT = False Then
@@ -63,7 +64,6 @@
         rs = Nothing
 
 
-
         '################################
         'Очищаем текстовые поля
         '################################
@@ -85,11 +85,9 @@
         TextBox21.Text = ""
 
         Me.Close()
-
-
     End Sub
 
-    Private Sub frmDev_FormClosed(sender As Object, e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
+    Private Sub frmDev_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
         cEDT = False
 
         TextBox6.Text = ""
@@ -106,10 +104,9 @@
         TextBox18.Text = ""
         TextBox19.Text = ""
         TextBox20.Text = ""
-
     End Sub
 
-    Private Sub frmDev_Load(sender As Object, e As System.EventArgs) Handles Me.Load
+    Private Sub frmDev_Load(sender As Object, e As EventArgs) Handles Me.Load
 
         Label20.Text = "Температура"
         Label13.Text = "В работе (UpTime)"
@@ -141,9 +138,10 @@
         TextBox21.Visible = True
 
 
-        Dim rs As ADODB.Recordset
-        rs = New ADODB.Recordset
-        rs.Open("Select Model FROM TBL_DEV_OID WHERE Device='" & sTIPtehn & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        Dim rs As Recordset
+        rs = New Recordset
+        rs.Open("Select Model FROM TBL_DEV_OID WHERE Device='" & sTIPtehn & "'", DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
 
         With rs
             .MoveFirst()
@@ -157,19 +155,15 @@
 
         rs.Close()
         rs = Nothing
-
-
-
-
-
     End Sub
 
-    Private Sub ComboBox1_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles ComboBox1.SelectedIndexChanged
+    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
         On Error GoTo err_
 
-        Dim rs As ADODB.Recordset
-        rs = New ADODB.Recordset
-        rs.Open("Select * FROM TBL_DEV_OID WHERE Device='" & sTIPtehn & "' AND Model ='" & ComboBox1.Text & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        Dim rs As Recordset
+        rs = New Recordset
+        rs.Open("Select * FROM TBL_DEV_OID WHERE Device='" & sTIPtehn & "' AND Model ='" & ComboBox1.Text & "'", DB7,
+                CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
 
@@ -195,6 +189,6 @@
         rs = Nothing
 
         Exit Sub
-err_:
+        err_:
     End Sub
 End Class

@@ -3,20 +3,22 @@
     Private DV As Boolean
     Public MRZD As Boolean = False
 
-    Private Sub SAVE_GARANT(ByVal sID As String, ByVal dPost As ComboBox, ByVal dtp As DateTimePicker, ByVal dto As DateTimePicker)
+    Private Sub SAVE_GARANT(ByVal sID As String, ByVal dPost As ComboBox, ByVal dtp As DateTimePicker,
+                            ByVal dto As DateTimePicker)
 
         Dim sSQL As String
 
-        Dim rs As ADODB.Recordset
-        rs = New ADODB.Recordset
-        rs.Open("Delete FROM Garantia_sis WHERE Id_Comp =" & sID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        Dim rs As Recordset
+        rs = New Recordset
+        rs.Open("Delete FROM Garantia_sis WHERE Id_Comp =" & sID, DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
         rs = Nothing
 
         sSQL = "SELECT * FROM Garantia_sis"
 
 
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         If Not (RSExists("Postav", "name", dPost.Text)) Then
             AddOnePar(dPost.Text, "name", "SPR_Postav", dPost)
@@ -36,8 +38,6 @@
         End With
         rs.Close()
         rs = Nothing
-
-
     End Sub
 
     Public Sub SAVE_MON(Optional ByVal sSID As String = "")
@@ -55,7 +55,9 @@
         End If
 
         If frmComputers.EDT = True Then
-            Call DVIG_TEHN(frmComputers.cmbOTHFil.Text, frmComputers.cmbOTHDepart.Text, frmComputers.cmbOTHOffice.Text, frmComputers.cmbOTH.Text)
+            Call _
+                DVIG_TEHN(frmComputers.cmbOTHFil.Text, frmComputers.cmbOTHDepart.Text, frmComputers.cmbOTHOffice.Text,
+                          frmComputers.cmbOTH.Text)
 
             If DV = True Then
 
@@ -88,17 +90,21 @@
         End If
 
         If Not (RSExists("MONITOR", "name", frmComputers.cmbOTH.Text)) Then
-            AddTreePar(frmComputers.cmbOTH.Text, frmComputers.txtMonDum.Text, frmComputers.PROiZV39.Text, "SPR_MONITOR", frmComputers.cmbOTH)
+            AddTreePar(frmComputers.cmbOTH.Text, frmComputers.txtMonDum.Text, frmComputers.PROiZV39.Text, "SPR_MONITOR",
+                       frmComputers.cmbOTH)
         End If
 
-        Dim rs As ADODB.Recordset
+        Dim rs As Recordset
         Dim unaPCL As String
         If Len(frmComputers.cmbOTHPCL.Text) <> 0 Then
 
             On Error GoTo sAR
 
-            rs = New ADODB.Recordset
-            rs.Open("Select id From kompy where filial='" & frmComputers.cmbOTHFil.Text & "' and mesto='" & frmComputers.cmbOTHDepart.Text & "' and kabn='" & frmComputers.cmbOTHOffice.Text & "' and NET_NAME='" & frmComputers.cmbOTHPCL.Text & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rs = New Recordset
+            rs.Open(
+                "Select id From kompy where filial='" & frmComputers.cmbOTHFil.Text & "' and mesto='" &
+                frmComputers.cmbOTHDepart.Text & "' and kabn='" & frmComputers.cmbOTHOffice.Text & "' and NET_NAME='" &
+                frmComputers.cmbOTHPCL.Text & "'", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
 
             With rs
@@ -110,13 +116,13 @@
             rs = Nothing
         End If
 
-sAR:
+        sAR:
 
         If Len(unaPCL) = 0 Or unaPCL = Nothing Then unaPCL = 0
         'Dim rs As ADODB.Recordset
-        rs = New ADODB.Recordset
+        rs = New Recordset
 
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
 
         With rs
@@ -153,7 +159,6 @@ sAR:
             If Len(frmComputers.txtOTHSumm.Text) = 0 Then frmComputers.txtOTHSumm.Text = 0
 
 
-
             .Fields("SFAktNo").Value = frmComputers.txtOTHSfN.Text
             .Fields("CenaRub").Value = frmComputers.txtOTHcash.Text
             .Fields("StoimRub").Value = frmComputers.txtOTHSumm.Text
@@ -172,12 +177,14 @@ sAR:
         rs = Nothing
 
 
-
         If frmComputers.EDT = False Then
 
-            Dim rsBK As ADODB.Recordset
-            rsBK = New ADODB.Recordset
-            rsBK.Open("SELECT id FROM kompy WHERE NET_NAME='" & frmComputers.cmbOTH.Text & "' and MESTO='" & frmComputers.cmbOTHDepart.Text & "' and FILIAL='" & frmComputers.cmbOTHFil.Text & "'  and kabn='" & frmComputers.cmbOTHOffice.Text & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            Dim rsBK As Recordset
+            rsBK = New Recordset
+            rsBK.Open(
+                "SELECT id FROM kompy WHERE NET_NAME='" & frmComputers.cmbOTH.Text & "' and MESTO='" &
+                frmComputers.cmbOTHDepart.Text & "' and FILIAL='" & frmComputers.cmbOTHFil.Text & "'  and kabn='" &
+                frmComputers.cmbOTHOffice.Text & "'", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
             With rsBK
 
@@ -212,8 +219,7 @@ sAR:
 
 
         Exit Sub
-Err_:
-
+        Err_:
     End Sub
 
     Public Sub Save_OT(Optional ByVal sSID As String = "")
@@ -231,7 +237,9 @@ Err_:
         End If
 
         If frmComputers.EDT = True Then
-            Call DVIG_TEHN(frmComputers.cmbOTHFil.Text, frmComputers.cmbOTHDepart.Text, frmComputers.cmbOTHOffice.Text, frmComputers.cmbOTH.Text)
+            Call _
+                DVIG_TEHN(frmComputers.cmbOTHFil.Text, frmComputers.cmbOTHDepart.Text, frmComputers.cmbOTHOffice.Text,
+                          frmComputers.cmbOTH.Text)
 
             If DV = True Then
 
@@ -342,17 +350,21 @@ Err_:
         End If
 
         If Not RSExists("OTHD", "name", Trim(frmComputers.cmbOTH.Text)) Then
-            AddTreePar(frmComputers.cmbOTH.Text, frmComputers.cmbOTHConnect.Text, frmComputers.PROiZV39.Text, "SPR_OTH_DEV", frmComputers.cmbOTH)
+            AddTreePar(frmComputers.cmbOTH.Text, frmComputers.cmbOTHConnect.Text, frmComputers.PROiZV39.Text,
+                       "SPR_OTH_DEV", frmComputers.cmbOTH)
         End If
 
-        Dim rs As ADODB.Recordset
+        Dim rs As Recordset
         Dim unaPCL As String
         If Len(frmComputers.cmbOTHPCL.Text) <> 0 Then
 
             On Error GoTo sAR
 
-            rs = New ADODB.Recordset
-            rs.Open("Select id From kompy where filial='" & frmComputers.cmbOTHFil.Text & "' and mesto='" & frmComputers.cmbOTHDepart.Text & "' and kabn='" & frmComputers.cmbOTHOffice.Text & "' and NET_NAME='" & frmComputers.cmbOTHPCL.Text & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rs = New Recordset
+            rs.Open(
+                "Select id From kompy where filial='" & frmComputers.cmbOTHFil.Text & "' and mesto='" &
+                frmComputers.cmbOTHDepart.Text & "' and kabn='" & frmComputers.cmbOTHOffice.Text & "' and NET_NAME='" &
+                frmComputers.cmbOTHPCL.Text & "'", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
             With rs
 
@@ -363,13 +375,13 @@ Err_:
             rs = Nothing
         End If
 
-sAR:
+        sAR:
         If Len(unaPCL) = 0 Or unaPCL = Nothing Then unaPCL = 0
 
         'Dim rs As ADODB.Recordset
-        rs = New ADODB.Recordset
+        rs = New Recordset
 
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
 
         With rs
@@ -402,7 +414,6 @@ sAR:
             If Len(frmComputers.txtOTHSumm.Text) = 0 Then frmComputers.txtOTHSumm.Text = 0
 
 
-
             .Fields("SFAktNo").Value = frmComputers.txtOTHSfN.Text
             .Fields("CenaRub").Value = frmComputers.txtOTHcash.Text
             .Fields("StoimRub").Value = frmComputers.txtOTHSumm.Text
@@ -418,7 +429,6 @@ sAR:
             .Fields("SNMP_COMMUNITY").Value = frmComputers.txtSNMP.Text
 
 
-
             .Update()
         End With
         rs.Close()
@@ -427,9 +437,12 @@ sAR:
 
         If frmComputers.EDT = False Then
 
-            Dim rsBK As ADODB.Recordset
-            rsBK = New ADODB.Recordset
-            rsBK.Open("SELECT id FROM kompy WHERE NET_NAME='" & frmComputers.cmbOTH.Text & "' and MESTO='" & frmComputers.cmbOTHDepart.Text & "' and FILIAL='" & frmComputers.cmbOTHFil.Text & "'  and kabn='" & frmComputers.cmbOTHOffice.Text & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            Dim rsBK As Recordset
+            rsBK = New Recordset
+            rsBK.Open(
+                "SELECT id FROM kompy WHERE NET_NAME='" & frmComputers.cmbOTH.Text & "' and MESTO='" &
+                frmComputers.cmbOTHDepart.Text & "' and FILIAL='" & frmComputers.cmbOTHFil.Text & "'  and kabn='" &
+                frmComputers.cmbOTHOffice.Text & "'", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
             With rsBK
 
@@ -464,15 +477,16 @@ sAR:
 
 
         Exit Sub
-Err_:
+        Err_:
     End Sub
 
     Public Sub Save_T(Optional ByVal sSID As String = "")
         On Error GoTo err_
 
 
-
-        If Len(frmComputers.txtSNAME.Text) = 0 Or Len(frmComputers.txtPSEUDONIM.Text) = 0 Or Len(frmComputers.cmbBranch.Text) = 0 Then
+        If _
+            Len(frmComputers.txtSNAME.Text) = 0 Or Len(frmComputers.txtPSEUDONIM.Text) = 0 Or
+            Len(frmComputers.cmbBranch.Text) = 0 Then
 
             MsgBox("Не заполнены обязательные поля", MsgBoxStyle.Information, ProGramName)
 
@@ -520,7 +534,9 @@ Err_:
 
         If frmComputers.EDT = True Then
 
-            Call DVIG_TEHN(frmComputers.cmbBranch.Text, frmComputers.cmbDepartment.Text, frmComputers.cmbOffice.Text, frmComputers.txtSNAME.Text)
+            Call _
+                DVIG_TEHN(frmComputers.cmbBranch.Text, frmComputers.cmbDepartment.Text, frmComputers.cmbOffice.Text,
+                          frmComputers.txtSNAME.Text)
 
             If DV = True Then
 
@@ -543,16 +559,17 @@ Err_:
         End If
 
 
-
-        Dim rs As ADODB.Recordset
+        Dim rs As Recordset
 
         Dim unaPCL As String
         If Len(frmComputers.cmbPCLK.Text) <> 0 Then
             On Error GoTo sAR
 
-            rs = New ADODB.Recordset
-            rs.Open("Select id From kompy where filial='" & frmComputers.cmbBranch.Text & "' and mesto='" & frmComputers.cmbDepartment.Text & "' and kabn='" & frmComputers.cmbOffice.Text & "' and NET_NAME='" & frmComputers.cmbPCLK.Text & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-
+            rs = New Recordset
+            rs.Open(
+                "Select id From kompy where filial='" & frmComputers.cmbBranch.Text & "' and mesto='" &
+                frmComputers.cmbDepartment.Text & "' and kabn='" & frmComputers.cmbOffice.Text & "' and NET_NAME='" &
+                frmComputers.cmbPCLK.Text & "'", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
 
             With rs
@@ -563,14 +580,13 @@ Err_:
 
         End If
 
-sAR:
+        sAR:
         If Len(unaPCL) = 0 Or unaPCL = Nothing Then unaPCL = 0
 
 
+        rs = New Recordset
 
-        rs = New ADODB.Recordset
-
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
 
         With rs
@@ -644,7 +660,6 @@ sAR:
             .Fields("RAM_PROIZV_8").Value = frmComputers.PROizV47.Text
 
             '##########################################################
-
 
 
             .Fields("HDD_Name_1").Value = frmComputers.cmbHDD1.Text
@@ -863,9 +878,12 @@ sAR:
 
         If frmComputers.EDT = False Then
 
-            Dim rsBK As ADODB.Recordset
-            rsBK = New ADODB.Recordset
-            rsBK.Open("SELECT id FROM kompy WHERE NET_NAME='" & frmComputers.txtSNAME.Text & "' and MESTO='" & frmComputers.cmbDepartment.Text & "' and FILIAL='" & frmComputers.cmbBranch.Text & "'  and kabn='" & frmComputers.cmbOffice.Text & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            Dim rsBK As Recordset
+            rsBK = New Recordset
+            rsBK.Open(
+                "SELECT id FROM kompy WHERE NET_NAME='" & frmComputers.txtSNAME.Text & "' and MESTO='" &
+                frmComputers.cmbDepartment.Text & "' and FILIAL='" & frmComputers.cmbBranch.Text & "'  and kabn='" &
+                frmComputers.cmbOffice.Text & "'", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
             With rsBK
 
@@ -882,8 +900,8 @@ sAR:
         Else
 
             sSQL = "SELECT count(*) as t_n FROM kompy where PCL=" & frmComputers.sCOUNT
-            rs = New ADODB.Recordset
-            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rs = New Recordset
+            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
             Dim sCON As String
 
@@ -895,8 +913,12 @@ sAR:
 
             If sCON > 0 Then
 
-                rs = New ADODB.Recordset
-                rs.Open("update kompy set OTvetstvennyj='" & frmComputers.cmbResponsible.Text & "', FILIAL='" & frmComputers.cmbBranch.Text & "', mesto='" & frmComputers.cmbDepartment.Text & "', kabn='" & frmComputers.cmbOffice.Text & "' WHERE PCL=" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open(
+                    "update kompy set OTvetstvennyj='" & frmComputers.cmbResponsible.Text & "', FILIAL='" &
+                    frmComputers.cmbBranch.Text & "', mesto='" & frmComputers.cmbDepartment.Text & "', kabn='" &
+                    frmComputers.cmbOffice.Text & "' WHERE PCL=" & frmComputers.sCOUNT, DB7,
+                    CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 'rs.Close()
                 rs = Nothing
@@ -905,7 +927,6 @@ sAR:
 
 
         End If
-
 
 
         If Len(sSID) = 0 Then
@@ -956,10 +977,8 @@ sAR:
 
 
         Exit Sub
-err_:
+        err_:
         MsgBox(Err.Description)
-
-
     End Sub
 
     'Private Sub S_P_LOAD()
@@ -989,7 +1008,9 @@ err_:
 
         For intj = 0 To lstV.Items.Count - 1
 
-            If lstV.Items(intj).SubItems(6).Text <> "" Or lstV.Items(intj).SubItems(6).Text <> "<N/A>" Or Len(lstV.Items(intj).SubItems(6).Text) <> 0 Then
+            If _
+                lstV.Items(intj).SubItems(6).Text <> "" Or lstV.Items(intj).SubItems(6).Text <> "<N/A>" Or
+                Len(lstV.Items(intj).SubItems(6).Text) <> 0 Then
                 uname34 = lstV.Items(intj).SubItems(6).Text
             Else
                 uname34 = "NoName"
@@ -1000,10 +1021,11 @@ err_:
             End If
         Next
 
-        Dim rsSoft As ADODB.Recordset
+        Dim rsSoft As Recordset
 
-        rsSoft = New ADODB.Recordset
-        rsSoft.Open("SELECT count(*) as t_n FROM SOFT_INSTALL where id_comp=" & sSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rsSoft = New Recordset
+        rsSoft.Open("SELECT count(*) as t_n FROM SOFT_INSTALL where id_comp=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
+                    LockTypeEnum.adLockOptimistic)
 
         With rsSoft
 
@@ -1018,57 +1040,55 @@ err_:
 
         For intj = 0 To lstV.Items.Count - 1
 
-          
 
-                    If Len(lstV.Items(intj).SubItems(1).Text) > 0 Then
-                        lstV.Items(intj).Selected = True
-                        lstV.Items(intj).EnsureVisible()
-                        'lstV.SetFocus()
+            If Len(lstV.Items(intj).SubItems(1).Text) > 0 Then
+                lstV.Items(intj).Selected = True
+                lstV.Items(intj).EnsureVisible()
+                'lstV.SetFocus()
 
-                        lstV.Items(intj).Focused = True
+                lstV.Items(intj).Focused = True
 
-                        If Len(lstV.Items(intj).Text) = 0 Then lstV.Items(intj).Text = 1
+                If Len(lstV.Items(intj).Text) = 0 Then lstV.Items(intj).Text = 1
 
 
-                        H1 = lstV.Items(intj).SubItems(2).Text
+                H1 = lstV.Items(intj).SubItems(2).Text
 
-                        If Len(lstV.Items(intj).SubItems(3).Text) = 0 Then
-                            B1 = ""
-                        Else
-                            B1 = lstV.Items(intj).SubItems(3).Text
-                        End If
+                If Len(lstV.Items(intj).SubItems(3).Text) = 0 Then
+                    B1 = ""
+                Else
+                    B1 = lstV.Items(intj).SubItems(3).Text
+                End If
 
-                        If Len(lstV.Items(intj).SubItems(4).Text) = 0 Then
-                            C1 = ""
-                        Else
-                            C1 = lstV.Items(intj).SubItems(4).Text
-                        End If
+                If Len(lstV.Items(intj).SubItems(4).Text) = 0 Then
+                    C1 = ""
+                Else
+                    C1 = lstV.Items(intj).SubItems(4).Text
+                End If
 
-                        If Len(lstV.Items(intj).SubItems(5).Text) = 0 Then
-                            D1 = Date.Today
-                        Else
-                            D1 = lstV.Items(intj).SubItems(5).Text
-                        End If
+                If Len(lstV.Items(intj).SubItems(5).Text) = 0 Then
+                    D1 = Date.Today
+                Else
+                    D1 = lstV.Items(intj).SubItems(5).Text
+                End If
 
-                        If Len(lstV.Items(intj).SubItems(6).Text) = 0 Then
-                            E1 = Date.Today
-                        Else
-                            E1 = lstV.Items(intj).SubItems(6).Text
-                        End If
+                If Len(lstV.Items(intj).SubItems(6).Text) = 0 Then
+                    E1 = Date.Today
+                Else
+                    E1 = lstV.Items(intj).SubItems(6).Text
+                End If
 
-                        If Len(lstV.Items(intj).SubItems(7).Text) = 0 Then
-                            F1 = ""
-                        Else
-                            F1 = lstV.Items(intj).SubItems(7).Text
-                            If F1 = "<N/A>" Then F1 = ""
-                        End If
+                If Len(lstV.Items(intj).SubItems(7).Text) = 0 Then
+                    F1 = ""
+                Else
+                    F1 = lstV.Items(intj).SubItems(7).Text
+                    If F1 = "<N/A>" Then F1 = ""
+                End If
 
-                        If Len(lstV.Items(intj).SubItems(8).Text) = 0 Then
-                            G1 = ""
-                        Else '
-                            G1 = lstV.Items(intj).SubItems(9).Text
-                        End If
-
+                If Len(lstV.Items(intj).SubItems(8).Text) = 0 Then
+                    G1 = ""
+                Else '
+                    G1 = lstV.Items(intj).SubItems(9).Text
+                End If
 
 
                 I1 = sSID
@@ -1076,8 +1096,9 @@ err_:
                 If Not (RSExistsSoft(sSID, H1)) Then
                     If Len(H1) > 1 Then
 
-                        rsSoft = New ADODB.Recordset
-                        rsSoft.Open("SELECT * FROM SOFT_INSTALL", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rsSoft = New Recordset
+                        rsSoft.Open("SELECT * FROM SOFT_INSTALL", DB7, CursorTypeEnum.adOpenDynamic,
+                                    LockTypeEnum.adLockOptimistic)
 
                         With rsSoft
                             .AddNew()
@@ -1105,19 +1126,18 @@ err_:
         Next
 
         'Костыль для MyODBC 5
-        rsSoft = New ADODB.Recordset
-        rsSoft.Open("UPDATE SOFT_INSTALL SET Id_Comp=" & I1 & " WHERE Id_Comp='0'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rsSoft = New Recordset
+        rsSoft.Open("UPDATE SOFT_INSTALL SET Id_Comp=" & I1 & " WHERE Id_Comp='0'", DB7, CursorTypeEnum.adOpenDynamic,
+                    LockTypeEnum.adLockOptimistic)
         rsSoft.Close()
         rsSoft = Nothing
 
         lstV.Visible = True
-
     End Sub
 
     Public Sub Save_P(Optional ByVal sSID As String = "")
 
         On Error GoTo Err_
-
 
 
         If Len(frmComputers.cmbPRN.Text) = 0 Or Len(frmComputers.cmbPRNFil.Text) = 0 Then
@@ -1132,7 +1152,9 @@ err_:
         End If
 
         If frmComputers.EDT = True Then
-            Call DVIG_TEHN(frmComputers.cmbPRNFil.Text, frmComputers.cmbPRNDepart.Text, frmComputers.cmbPRNOffice.Text, frmComputers.cmbPRN.Text)
+            Call _
+                DVIG_TEHN(frmComputers.cmbPRNFil.Text, frmComputers.cmbPRNDepart.Text, frmComputers.cmbPRNOffice.Text,
+                          frmComputers.cmbPRN.Text)
 
             If DV = True Then
 
@@ -1166,19 +1188,22 @@ err_:
 
             Case "MFU"
                 If Not (RSExists("MFU", "name", frmComputers.cmbPRN.Text)) Then
-                    AddFOwPar(frmComputers.cmbPRN.Text, frmComputers.cmbFormat.Text, frmComputers.cmbModCartr.Text, frmComputers.PROiZV38.Text, "SPR_MFU", frmComputers.cmbPRN)
+                    AddFOwPar(frmComputers.cmbPRN.Text, frmComputers.cmbFormat.Text, frmComputers.cmbModCartr.Text,
+                              frmComputers.PROiZV38.Text, "SPR_MFU", frmComputers.cmbPRN)
                 End If
 
             Case "Printer"
 
                 If Not (RSExists("PRINTERY", "name", frmComputers.cmbPRN.Text)) Then
-                    AddFOwPar(frmComputers.cmbPRN.Text, frmComputers.cmbFormat.Text, frmComputers.cmbModCartr.Text, frmComputers.PROiZV38.Text, "SPR_PRINTER", frmComputers.cmbPRN)
+                    AddFOwPar(frmComputers.cmbPRN.Text, frmComputers.cmbFormat.Text, frmComputers.cmbModCartr.Text,
+                              frmComputers.PROiZV38.Text, "SPR_PRINTER", frmComputers.cmbPRN)
                 End If
 
             Case "KOpir"
 
                 If Not (RSExists("KOPIRY", "name", frmComputers.cmbPRN.Text)) Then
-                    AddFOwPar(frmComputers.cmbPRN.Text, frmComputers.cmbFormat.Text, frmComputers.cmbModCartr.Text, frmComputers.PROiZV38.Text, "SPR_KOPIR", frmComputers.cmbPRN)
+                    AddFOwPar(frmComputers.cmbPRN.Text, frmComputers.cmbFormat.Text, frmComputers.cmbModCartr.Text,
+                              frmComputers.PROiZV38.Text, "SPR_KOPIR", frmComputers.cmbPRN)
                 End If
 
         End Select
@@ -1191,16 +1216,18 @@ err_:
         PRESAVE_TREE(frmComputers.cmbPRNFil, frmComputers.cmbPRNDepart, frmComputers.cmbPRNOffice)
 
 
-
-        Dim rs As ADODB.Recordset
+        Dim rs As Recordset
         Dim unaPCL As String
         If Len(frmComputers.cmbPCL.Text) <> 0 Then
 
             On Error GoTo sAR
 
-            rs = New ADODB.Recordset
+            rs = New Recordset
             'rs.Open("Select id From kompy where filial='" & frmComputers.cmbPRNFil.Text & "' and mesto='" & frmComputers.cmbPRNDepart.Text & "' and kabn='" & frmComputers.cmbPRNOffice.Text & "' and TipTehn='PC' and NET_NAME='" & frmComputers.cmbPCL.Text & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-            rs.Open("Select id From kompy where filial='" & frmComputers.cmbPRNFil.Text & "' and mesto='" & frmComputers.cmbPRNDepart.Text & "' and kabn='" & frmComputers.cmbPRNOffice.Text & "' and NET_NAME='" & frmComputers.cmbPCL.Text & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rs.Open(
+                "Select id From kompy where filial='" & frmComputers.cmbPRNFil.Text & "' and mesto='" &
+                frmComputers.cmbPRNDepart.Text & "' and kabn='" & frmComputers.cmbPRNOffice.Text & "' and NET_NAME='" &
+                frmComputers.cmbPCL.Text & "'", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
             With rs
 
                 unaPCL = .Fields("id").Value
@@ -1210,13 +1237,13 @@ err_:
             rs = Nothing
         End If
 
-sAR:
+        sAR:
         If Len(unaPCL) = 0 Or unaPCL = Nothing Then unaPCL = 0
 
         On Error GoTo Err_
 
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
 
         With rs
@@ -1272,9 +1299,12 @@ sAR:
 
         If frmComputers.EDT = False Then
 
-            Dim rsBK As ADODB.Recordset
-            rsBK = New ADODB.Recordset
-            rsBK.Open("SELECT id FROM kompy WHERE NET_NAME='" & frmComputers.cmbPRN.Text & "' and MESTO='" & frmComputers.cmbPRNDepart.Text & "' and FILIAL='" & frmComputers.cmbPRNFil.Text & "'  and kabn='" & frmComputers.cmbPRNOffice.Text & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            Dim rsBK As Recordset
+            rsBK = New Recordset
+            rsBK.Open(
+                "SELECT id FROM kompy WHERE NET_NAME='" & frmComputers.cmbPRN.Text & "' and MESTO='" &
+                frmComputers.cmbPRNDepart.Text & "' and FILIAL='" & frmComputers.cmbPRNFil.Text & "'  and kabn='" &
+                frmComputers.cmbPRNOffice.Text & "'", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
             With rsBK
 
@@ -1309,7 +1339,7 @@ sAR:
         End If
 
         Exit Sub
-Err_:
+        Err_:
     End Sub
 
     Public Sub Save_NET(Optional ByVal sSID As String = "")
@@ -1328,7 +1358,9 @@ Err_:
         End If
 
         If frmComputers.EDT = True Then
-            Call DVIG_TEHN(frmComputers.cmbNETBranch.Text, frmComputers.cmbNetDepart.Text, frmComputers.cmbNETOffice.Text, frmComputers.cmbDevNet.Text)
+            Call _
+                DVIG_TEHN(frmComputers.cmbNETBranch.Text, frmComputers.cmbNetDepart.Text, frmComputers.cmbNETOffice.Text,
+                          frmComputers.cmbDevNet.Text)
 
             If DV = True Then
 
@@ -1343,15 +1375,17 @@ Err_:
         End If
 
 
-
-        Dim rs As ADODB.Recordset
+        Dim rs As Recordset
 
         Dim unaPCL As String
         If Len(frmComputers.cmbCNTNet.Text) <> 0 Then
             On Error GoTo sAR
 
-            rs = New ADODB.Recordset
-            rs.Open("Select id From kompy where filial='" & frmComputers.cmbNETBranch.Text & "' and mesto='" & frmComputers.cmbNetDepart.Text & "' and kabn='" & frmComputers.cmbNETOffice.Text & "' and NET_NAME='" & frmComputers.cmbCNTNet.Text & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rs = New Recordset
+            rs.Open(
+                "Select id From kompy where filial='" & frmComputers.cmbNETBranch.Text & "' and mesto='" &
+                frmComputers.cmbNetDepart.Text & "' and kabn='" & frmComputers.cmbNETOffice.Text & "' and NET_NAME='" &
+                frmComputers.cmbCNTNet.Text & "'", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
             With rs
                 unaPCL = .Fields("id").Value
@@ -1361,7 +1395,7 @@ Err_:
 
         End If
 
-sAR:
+        sAR:
         If Len(unaPCL) = 0 Or unaPCL = Nothing Then unaPCL = 0
 
 
@@ -1386,14 +1420,15 @@ sAR:
         End If
 
         If Not (RSExists("NDEV", "name", frmComputers.cmbDevNet.Text)) Then
-            AddFOwPar(frmComputers.cmbDevNet.Text, frmComputers.cmbNetDev.Text, frmComputers.txtNetPort.Text, frmComputers.PROiZV40.Text, "SPR_DEV_NET", frmComputers.cmbCPU2)
+            AddFOwPar(frmComputers.cmbDevNet.Text, frmComputers.cmbNetDev.Text, frmComputers.txtNetPort.Text,
+                      frmComputers.PROiZV40.Text, "SPR_DEV_NET", frmComputers.cmbCPU2)
         End If
 
         PRESAVE_TREE(frmComputers.cmbNETBranch, frmComputers.cmbNetDepart, frmComputers.cmbNETOffice)
 
 
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
             If Len(sSID) = 0 Then
@@ -1460,9 +1495,12 @@ sAR:
 
         If frmComputers.EDT = False Then
 
-            Dim rsBK As ADODB.Recordset
-            rsBK = New ADODB.Recordset
-            rsBK.Open("SELECT id FROM kompy WHERE NET_NAME='" & frmComputers.cmbDevNet.Text & "' and MESTO='" & frmComputers.cmbNetDepart.Text & "' and FILIAL='" & frmComputers.cmbNETBranch.Text & "'  and kabn='" & frmComputers.cmbNETOffice.Text & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            Dim rsBK As Recordset
+            rsBK = New Recordset
+            rsBK.Open(
+                "SELECT id FROM kompy WHERE NET_NAME='" & frmComputers.cmbDevNet.Text & "' and MESTO='" &
+                frmComputers.cmbNetDepart.Text & "' and FILIAL='" & frmComputers.cmbNETBranch.Text & "'  and kabn='" &
+                frmComputers.cmbNETOffice.Text & "'", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
             With rsBK
 
                 frmComputers.sCOUNT = .Fields("ID").Value
@@ -1490,18 +1528,17 @@ sAR:
         Else
             RefFilTree(frmComputers.lstGroups)
         End If
-
     End Sub
 
-    Private Sub DVIG_TEHN(ByVal sFIALIAL As String, ByVal sOTDEL As String, ByVal sKABN As String, ByVal sNAMEs As String)
+    Private Sub DVIG_TEHN(ByVal sFIALIAL As String, ByVal sOTDEL As String, ByVal sKABN As String,
+                          ByVal sNAMEs As String)
         On Error GoTo Error_
-        Dim rs As ADODB.Recordset
+        Dim rs As Recordset
         Dim Message, Title, Defaults As String
         Dim strTmp As String
         Dim sTmp As DateTime = DateTime.Now
 
         'sNAMEs - переданное имя 
-
 
 
         Dim iA, iB, iC As String
@@ -1512,10 +1549,11 @@ sAR:
         Else
             If sName <> sNAMEs And frmComputers.EDT = True Then
 
-                rs = New ADODB.Recordset
-                rs.Open("update Remont set Comp_Name ='" & sNAMEs & _
-        "', Mesto_Compa ='" & sBranch & "/" & sDepartment & _
-        "' WHERE Id_Comp=" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open("update Remont set Comp_Name ='" & sNAMEs &
+                        "', Mesto_Compa ='" & sBranch & "/" & sDepartment &
+                        "' WHERE Id_Comp=" & frmComputers.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                        LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
             Else
@@ -1530,8 +1568,9 @@ sAR:
             DV = True
 
 
-            rs = New ADODB.Recordset
-            rs.Open("SELECT * FROM kompy where id =" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rs = New Recordset
+            rs.Open("SELECT * FROM kompy where id =" & frmComputers.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                    LockTypeEnum.adLockOptimistic)
 
             With rs
                 iA = .Fields("filial").Value
@@ -1540,7 +1579,6 @@ sAR:
             End With
             rs.Close()
             rs = Nothing
-
 
 
             If iB <> sOTDEL Or iA <> sFIALIAL Or iC <> sKABN Then
@@ -1564,8 +1602,8 @@ sAR:
                 End If
 
 
-                rs = New ADODB.Recordset
-                rs.Open("SELECT * FROM dvig", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open("SELECT * FROM dvig", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 'sTmp = (DateTime.Now.Hour & ":" & DateTime.Now.Minute & ":" & DateTime.Now.Second)
 
@@ -1591,13 +1629,15 @@ sAR:
                 'Call SaveActivityToLogDB("Перемещение техники " & frmComputers.SelNde.Text & " из " & frmComputers.FilD & "/" & frmComputers.OtdD & " в " & sfilial & "/" & sOTDEL)
 
                 Dim langfile As New IniFile(sLANGPATH)
-                Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG52", "Перемещение техники") & " " & frmComputers.lstGroups.SelectedNode.Text)
+                Call _
+                    SaveActivityToLogDB(
+                        langfile.GetString("frmComputers", "MSG52", "Перемещение техники") & " " &
+                        frmComputers.lstGroups.SelectedNode.Text)
 
 
-
-
-                rs = New ADODB.Recordset
-                rs.Open("SELECT count(*) as t_n FROM kompy where PCL=" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open("SELECT count(*) as t_n FROM kompy where PCL=" & frmComputers.sCOUNT, DB7,
+                        CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 Dim sCN As String
 
@@ -1608,10 +1648,11 @@ sAR:
                 rs = Nothing
 
                 If sCN > 0 Then
-                    rs = New ADODB.Recordset
-                    rs.Open("SELECT * FROM kompy where PCL=" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                    rs = New Recordset
+                    rs.Open("SELECT * FROM kompy where PCL=" & frmComputers.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                            LockTypeEnum.adLockOptimistic)
 
-                    Dim rs1 As ADODB.Recordset
+                    Dim rs1 As Recordset
 
                     With rs
                         .MoveFirst()
@@ -1619,8 +1660,9 @@ sAR:
                             sCN = .Fields("id").Value
 
 
-                            rs1 = New ADODB.Recordset
-                            rs1.Open("SELECT * FROM dvig", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                            rs1 = New Recordset
+                            rs1.Open("SELECT * FROM dvig", DB7, CursorTypeEnum.adOpenDynamic,
+                                     LockTypeEnum.adLockOptimistic)
                             With rs1
                                 .AddNew()
                                 .Fields("id_comp").Value = sCN
@@ -1635,8 +1677,6 @@ sAR:
                             rs1 = Nothing
 
 
-
-
                             .MoveNext()
                         Loop
                     End With
@@ -1645,7 +1685,6 @@ sAR:
 
 
                 End If
-
 
 
             Else
@@ -1658,7 +1697,7 @@ sAR:
 
 
         Exit Sub
-Error_:
+        Error_:
         MsgBox(Err.Description, vbInformation, ProGramName)
     End Sub
 
@@ -1668,51 +1707,63 @@ Error_:
 
 
         If Not (RSExists("CPUS", "name", frmComputers.cmbCPU1.Text)) Then
-            AddFOwPar(frmComputers.cmbCPU1.Text, frmComputers.txtMHZ1.Text, frmComputers.txtSoc1.Text, frmComputers.PROizV1.Text, "SPR_CPU", frmComputers.cmbCPU1)
+            AddFOwPar(frmComputers.cmbCPU1.Text, frmComputers.txtMHZ1.Text, frmComputers.txtSoc1.Text,
+                      frmComputers.PROizV1.Text, "SPR_CPU", frmComputers.cmbCPU1)
         End If
 
         If Not (RSExists("CPUS", "name", frmComputers.cmbCPU2.Text)) Then
-            AddFOwPar(frmComputers.cmbCPU2.Text, frmComputers.txtMHZ2.Text, frmComputers.txtSoc2.Text, frmComputers.PROizV2.Text, "SPR_CPU", frmComputers.cmbCPU2)
+            AddFOwPar(frmComputers.cmbCPU2.Text, frmComputers.txtMHZ2.Text, frmComputers.txtSoc2.Text,
+                      frmComputers.PROizV2.Text, "SPR_CPU", frmComputers.cmbCPU2)
         End If
 
         If Not (RSExists("MB", "name", frmComputers.cmbMB.Text)) Then
-            AddTreePar(frmComputers.cmbMB.Text, frmComputers.txtChip.Text, frmComputers.PROizV5.Text, "SPR_MB", frmComputers.cmbMB)
+            AddTreePar(frmComputers.cmbMB.Text, frmComputers.txtChip.Text, frmComputers.PROizV5.Text, "SPR_MB",
+                       frmComputers.cmbMB)
         End If
 
         If Not (RSExists("RAM", "name", frmComputers.cmbRAM1.Text)) Then
-            AddTreePar(frmComputers.cmbRAM1.Text, frmComputers.txtRamS1.Text, frmComputers.PROizV6.Text, "SPR_RAM", frmComputers.cmbRAM1)
+            AddTreePar(frmComputers.cmbRAM1.Text, frmComputers.txtRamS1.Text, frmComputers.PROizV6.Text, "SPR_RAM",
+                       frmComputers.cmbRAM1)
         End If
 
         If Not (RSExists("RAM", "name", frmComputers.cmbRAM2.Text)) Then
-            AddTreePar(frmComputers.cmbRAM2.Text, frmComputers.txtRamS2.Text, frmComputers.PROizV7.Text, "SPR_RAM", frmComputers.cmbRAM2)
+            AddTreePar(frmComputers.cmbRAM2.Text, frmComputers.txtRamS2.Text, frmComputers.PROizV7.Text, "SPR_RAM",
+                       frmComputers.cmbRAM2)
         End If
 
         If Not (RSExists("RAM", "name", frmComputers.cmbRAM3.Text)) Then
-            AddTreePar(frmComputers.cmbRAM3.Text, frmComputers.txtRamS3.Text, frmComputers.PROizV8.Text, "SPR_RAM", frmComputers.cmbRAM3)
+            AddTreePar(frmComputers.cmbRAM3.Text, frmComputers.txtRamS3.Text, frmComputers.PROizV8.Text, "SPR_RAM",
+                       frmComputers.cmbRAM3)
         End If
 
         If Not (RSExists("RAM", "name", frmComputers.cmbRAM4.Text)) Then
-            AddTreePar(frmComputers.cmbRAM4.Text, frmComputers.txtRamS4.Text, frmComputers.PROizV9.Text, "SPR_RAM", frmComputers.cmbRAM4)
+            AddTreePar(frmComputers.cmbRAM4.Text, frmComputers.txtRamS4.Text, frmComputers.PROizV9.Text, "SPR_RAM",
+                       frmComputers.cmbRAM4)
         End If
 
         If Not (RSExists("HDDS", "name", frmComputers.cmbHDD1.Text)) Then
-            AddTreePar(frmComputers.cmbHDD1.Text, frmComputers.txtHDDo1.Text, frmComputers.PROizV10.Text, "SPR_HDD", frmComputers.cmbHDD1)
+            AddTreePar(frmComputers.cmbHDD1.Text, frmComputers.txtHDDo1.Text, frmComputers.PROizV10.Text, "SPR_HDD",
+                       frmComputers.cmbHDD1)
         End If
 
         If Not (RSExists("HDDS", "name", frmComputers.cmbHDD2.Text)) Then
-            AddTreePar(frmComputers.cmbHDD2.Text, frmComputers.txtHDDo2.Text, frmComputers.PROizV11.Text, "SPR_HDD", frmComputers.cmbHDD2)
+            AddTreePar(frmComputers.cmbHDD2.Text, frmComputers.txtHDDo2.Text, frmComputers.PROizV11.Text, "SPR_HDD",
+                       frmComputers.cmbHDD2)
         End If
 
         If Not (RSExists("HDDS", "name", frmComputers.cmbHDD3.Text)) Then
-            AddTreePar(frmComputers.cmbHDD3.Text, frmComputers.txtHDDo3.Text, frmComputers.PROizV12.Text, "SPR_HDD", frmComputers.cmbHDD3)
+            AddTreePar(frmComputers.cmbHDD3.Text, frmComputers.txtHDDo3.Text, frmComputers.PROizV12.Text, "SPR_HDD",
+                       frmComputers.cmbHDD3)
         End If
 
         If Not (RSExists("HDDS", "name", frmComputers.cmbHDD4.Text)) Then
-            AddTreePar(frmComputers.cmbHDD4.Text, frmComputers.txtHDDo4.Text, frmComputers.PROizV13.Text, "SPR_HDD", frmComputers.cmbHDD4)
+            AddTreePar(frmComputers.cmbHDD4.Text, frmComputers.txtHDDo4.Text, frmComputers.PROizV13.Text, "SPR_HDD",
+                       frmComputers.cmbHDD4)
         End If
 
         If Not (RSExists("SVGA", "name", frmComputers.cmbSVGA1.Text)) Then
-            AddTreePar(frmComputers.cmbSVGA1.Text, frmComputers.txtSVGAr1.Text, frmComputers.PROizV14.Text, "SPR_SVGA", frmComputers.cmbSVGA1)
+            AddTreePar(frmComputers.cmbSVGA1.Text, frmComputers.txtSVGAr1.Text, frmComputers.PROizV14.Text, "SPR_SVGA",
+                       frmComputers.cmbSVGA1)
         End If
 
         If Not (RSExists("SOUND", "name", frmComputers.cmbSound.Text)) Then
@@ -1720,15 +1771,18 @@ Error_:
         End If
 
         If Not (RSExists("CDROMS", "name", frmComputers.cmbOPTIC1.Text)) Then
-            AddTreePar(frmComputers.cmbOPTIC1.Text, frmComputers.txtOPTICs1.Text, frmComputers.PROizV17.Text, "SPR_OPTICAL", frmComputers.cmbOPTIC1)
+            AddTreePar(frmComputers.cmbOPTIC1.Text, frmComputers.txtOPTICs1.Text, frmComputers.PROizV17.Text,
+                       "SPR_OPTICAL", frmComputers.cmbOPTIC1)
         End If
 
         If Not (RSExists("CDRWS", "name", frmComputers.cmbOPTIC2.Text)) Then
-            AddTreePar(frmComputers.cmbOPTIC2.Text, frmComputers.txtOPTICs2.Text, frmComputers.PROizV18.Text, "SPR_OPTICAL", frmComputers.cmbOPTIC2)
+            AddTreePar(frmComputers.cmbOPTIC2.Text, frmComputers.txtOPTICs2.Text, frmComputers.PROizV18.Text,
+                       "SPR_OPTICAL", frmComputers.cmbOPTIC2)
         End If
 
         If Not (RSExists("DVDROMS", "name", frmComputers.cmbOPTIC3.Text)) Then
-            AddTreePar(frmComputers.cmbOPTIC3.Text, frmComputers.txtOPTICs3.Text, frmComputers.PROizV19.Text, "SPR_OPTICAL", frmComputers.cmbOPTIC3)
+            AddTreePar(frmComputers.cmbOPTIC3.Text, frmComputers.txtOPTICs3.Text, frmComputers.PROizV19.Text,
+                       "SPR_OPTICAL", frmComputers.cmbOPTIC3)
         End If
 
 
@@ -1767,11 +1821,13 @@ Error_:
         End If
 
         If Not (RSExists("MONITOR", "name", frmComputers.cmbMon1.Text)) Then
-            AddTreePar(frmComputers.cmbMon1.Text, frmComputers.txtMon1Dum.Text, frmComputers.PROizV28.Text, "SPR_MONITOR", frmComputers.cmbMon1)
+            AddTreePar(frmComputers.cmbMon1.Text, frmComputers.txtMon1Dum.Text, frmComputers.PROizV28.Text,
+                       "SPR_MONITOR", frmComputers.cmbMon1)
         End If
 
         If Not (RSExists("MONITOR", "name", frmComputers.cmbMon2.Text)) Then
-            AddTreePar(frmComputers.cmbMon2.Text, frmComputers.txtMon2Dum.Text, frmComputers.PROizV29.Text, "SPR_MONITOR", frmComputers.cmbMon2)
+            AddTreePar(frmComputers.cmbMon2.Text, frmComputers.txtMon2Dum.Text, frmComputers.PROizV29.Text,
+                       "SPR_MONITOR", frmComputers.cmbMon2)
         End If
 
         If Not (RSExists("ASISTEM", "name", frmComputers.cmbAsist.Text)) Then
@@ -1811,8 +1867,6 @@ Error_:
         If Not (RSExists("CREADER", "name", frmComputers.cmbCreader.Text)) Then
             AddTwoPar(frmComputers.cmbCreader.Text, frmComputers.PROizV23.Text, "SPR_CREADER", frmComputers.cmbCreader)
         End If
-
-
     End Sub
 
     Private Sub PRESAVE_TREE(ByVal sBr As ComboBox, ByVal sDp As ComboBox, ByVal sOff As ComboBox)
@@ -1853,10 +1907,11 @@ Error_:
         End Select
 
 
-        Dim rs As ADODB.Recordset
-        rs = New ADODB.Recordset
+        Dim rs As Recordset
+        rs = New Recordset
 
-        rs.Open("Select COUNT(*) AS total_number FROM OTD_O where Id_OTD='" & SerD & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs.Open("Select COUNT(*) AS total_number FROM OTD_O where Id_OTD='" & SerD & "'", DB7,
+                CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
             counter = .Fields("total_number").Value
@@ -1864,8 +1919,6 @@ Error_:
 
         rs.Close()
         rs = Nothing
-
-
 
 
         If counter = 0 Then
@@ -1878,8 +1931,8 @@ Error_:
 
         End If
 
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
             If counter = 0 Then
@@ -1904,8 +1957,9 @@ Error_:
 
         If Len(frmComputers.txtspplo.Text) = 0 Then Exit Sub
 
-        rs = New ADODB.Recordset
-        rs.Open("Select COUNT(*) AS total_number FROM SES_Pass where id_OF='" & SerD & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open("Select COUNT(*) AS total_number FROM SES_Pass where id_OF='" & SerD & "'", DB7,
+                CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
             counter = .Fields("total_number").Value
@@ -1924,8 +1978,8 @@ Error_:
 
         End If
 
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
             If counter = 0 Then
@@ -1952,11 +2006,10 @@ Error_:
 
         rs.Close()
         rs = Nothing
-
-
     End Sub
 
-    Public Sub SAVE_DRAG_DROP(ByVal sID As String, ByVal sBRANCHE As String, ByVal sDEPARTMENT As String, ByVal sOFFICE As String, ByVal sNAME As String)
+    Public Sub SAVE_DRAG_DROP(ByVal sID As String, ByVal sBRANCHE As String, ByVal sDEPARTMENT As String,
+                              ByVal sOFFICE As String, ByVal sNAME As String)
 
         If frmComputers.EDT = True Then
             Call DVIG_TEHN(sBRANCHE, sDEPARTMENT, sOFFICE, sNAME)
@@ -1977,9 +2030,9 @@ Error_:
 
         sSQL = "SELECT * FROM kompy where id=" & sID
 
-        Dim rs As ADODB.Recordset
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        Dim rs As Recordset
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
             .Fields("FILIAL").Value = sBRANCHE
@@ -1994,8 +2047,8 @@ Error_:
 
 
         sSQL = "SELECT count(*) as t_n FROM kompy where PCL=" & sID
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         Dim sCON As String
 
@@ -2007,16 +2060,15 @@ Error_:
 
         If sCON > 0 Then
 
-            rs = New ADODB.Recordset
-            rs.Open("update kompy set FILIAL='" & sBRANCHE & "', mesto='" & sDEPARTMENT & "', kabn='" & sOFFICE & "' WHERE PCL=" & sID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rs = New Recordset
+            rs.Open(
+                "update kompy set FILIAL='" & sBRANCHE & "', mesto='" & sDEPARTMENT & "', kabn='" & sOFFICE &
+                "' WHERE PCL=" & sID, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
             'rs.Close()
             rs = Nothing
 
         End If
-
-
-
     End Sub
 
     Public Sub under_prn(Optional ByVal sSID As Integer = 0)
@@ -2025,15 +2077,16 @@ Error_:
         On Error Resume Next
 
         Dim sCount As Integer
-        Dim rs As ADODB.Recordset
+        Dim rs As Recordset
 
 
         Dim sSQL As String
         Dim tId As Integer
 
 
-        rs = New ADODB.Recordset
-        rs.Open("Select count(*) as t_n from kompy where PCL=" & sSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open("Select count(*) as t_n from kompy where PCL=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
 
         With rs
 
@@ -2045,7 +2098,7 @@ Error_:
 
         If sCount = 0 Then Exit Sub
 
-        Dim rs1 As ADODB.Recordset
+        Dim rs1 As Recordset
 
         Dim objIniFile As New IniFile(PrPath & "base.ini")
 
@@ -2060,8 +2113,8 @@ Error_:
                 'Мониторы
                 sSQL = "SELECT count(*) as t_n FROM kompy where PCL=" & sSID & " and tiptehn = 'MONITOR'"
 
-                rs = New ADODB.Recordset
-                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 With rs
 
@@ -2073,8 +2126,8 @@ Error_:
 
                 sSQL = "SELECT * FROM kompy where PCL=" & sSID & " and tiptehn = 'MONITOR'"
 
-                rs = New ADODB.Recordset
-                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 Dim i As Integer = 1
 
@@ -2084,8 +2137,9 @@ Error_:
 
                         tId = .Fields("id").Value
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("Select * from kompy where id=" & sSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("Select * from kompy where id=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
+                                 LockTypeEnum.adLockOptimistic)
 
                         If sCount = 1 Then
 
@@ -2139,24 +2193,29 @@ Error_:
                         rs1.Close()
                         rs1 = Nothing
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
+                                 CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
+                                 CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("Delete from Garantia_sis where Id_Comp=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("Delete from Garantia_sis where Id_Comp=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
+                                 LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("Delete from dvig where Id_Comp=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("Delete from dvig where Id_Comp=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
+                                 LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("Delete from kompy where id=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("Delete from kompy where id=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
+                                 LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
                         .MoveNext()
@@ -2168,8 +2227,8 @@ Error_:
                 'Принтеры
                 sSQL = "SELECT count(*) as t_n FROM kompy where PCL=" & sSID & " and tiptehn = 'Printer'"
 
-                rs = New ADODB.Recordset
-                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 With rs
 
@@ -2181,8 +2240,8 @@ Error_:
 
                 sSQL = "SELECT * FROM kompy where PCL=" & sSID & " and tiptehn = 'Printer'"
 
-                rs = New ADODB.Recordset
-                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 i = 1
                 Dim pField As String
@@ -2193,8 +2252,9 @@ Error_:
 
                         tId = .Fields("id").Value
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("Select * from kompy where id=" & sSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("Select * from kompy where id=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
+                                 LockTypeEnum.adLockOptimistic)
 
 
                         With rs1
@@ -2224,24 +2284,29 @@ Error_:
                         rs1.Close()
                         rs1 = Nothing
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
+                                 CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
+                                 CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("Delete from Garantia_sis where Id_Comp=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("Delete from Garantia_sis where Id_Comp=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
+                                 LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("Delete from dvig where Id_Comp=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("Delete from dvig where Id_Comp=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
+                                 LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("Delete from kompy where id=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("Delete from kompy where id=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
+                                 LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
 
@@ -2254,8 +2319,8 @@ Error_:
                 'ИБП
                 sSQL = "SELECT * FROM kompy where PCL=" & sSID & " and tiptehn = 'IBP'"
 
-                rs = New ADODB.Recordset
-                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 With rs
                     .MoveFirst()
@@ -2263,8 +2328,9 @@ Error_:
 
                         tId = .Fields("id").Value
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("Select * from kompy where id=" & sSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("Select * from kompy where id=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
+                                 LockTypeEnum.adLockOptimistic)
 
                         With rs1
                             rs1.Fields("IBP_NAME").Value = rs.Fields("PRINTER_NAME_1").Value
@@ -2278,20 +2344,24 @@ Error_:
                         rs1.Close()
                         rs1 = Nothing
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
+                                 CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
+                                 CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("Delete from Garantia_sis where Id_Comp=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("Delete from Garantia_sis where Id_Comp=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
+                                 LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("Delete from kompy where id=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("Delete from kompy where id=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
+                                 LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
 
@@ -2304,8 +2374,8 @@ Error_:
                 'Клавиатуры мыши
                 sSQL = "SELECT * FROM kompy where PCL=" & sSID & " and tiptehn = 'KEYB'"
 
-                rs = New ADODB.Recordset
-                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 With rs
                     .MoveFirst()
@@ -2313,8 +2383,9 @@ Error_:
 
                         tId = .Fields("id").Value
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("Select * from kompy where id=" & sSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("Select * from kompy where id=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
+                                 LockTypeEnum.adLockOptimistic)
 
                         With rs1
                             rs1.Fields("KEYBOARD_NAME").Value = rs.Fields("PRINTER_NAME_1").Value
@@ -2326,20 +2397,24 @@ Error_:
                         rs1.Close()
                         rs1 = Nothing
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
+                                 CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
+                                 CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("Delete from Garantia_sis where Id_Comp=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("Delete from Garantia_sis where Id_Comp=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
+                                 LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("Delete from kompy where id=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("Delete from kompy where id=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
+                                 LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
 
@@ -2352,8 +2427,8 @@ Error_:
 
                 sSQL = "SELECT * FROM kompy where PCL=" & sSID & " and tiptehn = 'MOUSE'"
 
-                rs = New ADODB.Recordset
-                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 With rs
                     .MoveFirst()
@@ -2361,8 +2436,9 @@ Error_:
 
                         tId = .Fields("id").Value
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("Select * from kompy where id=" & sSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("Select * from kompy where id=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
+                                 LockTypeEnum.adLockOptimistic)
 
                         With rs1
                             rs1.Fields("MOUSE_NAME").Value = rs.Fields("PRINTER_NAME_1").Value
@@ -2374,20 +2450,24 @@ Error_:
                         rs1.Close()
                         rs1 = Nothing
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
+                                 CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
+                                 CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("Delete from Garantia_sis where Id_Comp=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("Delete from Garantia_sis where Id_Comp=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
+                                 LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("Delete from kompy where id=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("Delete from kompy where id=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
+                                 LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
                         .MoveNext()
@@ -2400,8 +2480,8 @@ Error_:
 
                 sSQL = "SELECT * FROM kompy where PCL=" & sSID & " and tiptehn = 'FS'"
 
-                rs = New ADODB.Recordset
-                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 With rs
                     .MoveFirst()
@@ -2409,8 +2489,9 @@ Error_:
 
                         tId = .Fields("id").Value
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("Select * from kompy where id=" & sSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("Select * from kompy where id=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
+                                 LockTypeEnum.adLockOptimistic)
 
                         With rs1
                             rs1.Fields("FILTR_NAME").Value = rs.Fields("PRINTER_NAME_1").Value
@@ -2422,20 +2503,24 @@ Error_:
                         rs1.Close()
                         rs1 = Nothing
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
+                                 CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
+                                 CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("Delete from Garantia_sis where Id_Comp=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("Delete from Garantia_sis where Id_Comp=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
+                                 LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("Delete from kompy where id=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("Delete from kompy where id=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
+                                 LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
                         .MoveNext()
@@ -2445,14 +2530,12 @@ Error_:
                 rs = Nothing
 
 
-
-
             Case 1 'Мониторы
 
                 sSQL = "SELECT count(*) as t_n FROM kompy where PCL=" & sSID & " and tiptehn = 'MONITOR'"
 
-                rs = New ADODB.Recordset
-                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 With rs
 
@@ -2464,8 +2547,8 @@ Error_:
 
                 sSQL = "SELECT * FROM kompy where PCL=" & sSID & " and tiptehn = 'MONITOR'"
 
-                rs = New ADODB.Recordset
-                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 Dim i As Integer = 1
 
@@ -2477,8 +2560,9 @@ Error_:
 
                         tId = .Fields("id").Value
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("Select * from kompy where id=" & sSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("Select * from kompy where id=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
+                                 LockTypeEnum.adLockOptimistic)
 
 
                         If sCount = 1 Then
@@ -2528,27 +2612,30 @@ Error_:
 
 
                         i = i + 1
-                       
 
 
-        rs1 = New ADODB.Recordset
-        rs1.Open("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-        rs1 = Nothing
+                        rs1 = New Recordset
+                        rs1.Open("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
+                                 CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        rs1 = Nothing
 
-        rs1 = New ADODB.Recordset
-        rs1.Open("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-        rs1 = Nothing
+                        rs1 = New Recordset
+                        rs1.Open("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
+                                 CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        rs1 = Nothing
 
-        rs1 = New ADODB.Recordset
-        rs1.Open("Delete from Garantia_sis where Id_Comp=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-        rs1 = Nothing
+                        rs1 = New Recordset
+                        rs1.Open("Delete from Garantia_sis where Id_Comp=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
+                                 LockTypeEnum.adLockOptimistic)
+                        rs1 = Nothing
 
-        rs1 = New ADODB.Recordset
-        rs1.Open("Delete from kompy where id=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-        rs1 = Nothing
+                        rs1 = New Recordset
+                        rs1.Open("Delete from kompy where id=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
+                                 LockTypeEnum.adLockOptimistic)
+                        rs1 = Nothing
 
 
-        .MoveNext()
+                        .MoveNext()
                     Loop
                 End With
                 rs.Close()
@@ -2558,8 +2645,8 @@ Error_:
 
                 sSQL = "SELECT count(*) as t_n FROM kompy where PCL=" & sSID & " and tiptehn = 'Printer'"
 
-                rs = New ADODB.Recordset
-                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 With rs
 
@@ -2571,8 +2658,8 @@ Error_:
 
                 sSQL = "SELECT * FROM kompy where PCL=" & sSID & " and tiptehn = 'Printer'"
 
-                rs = New ADODB.Recordset
-                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
 
                 Dim i As Integer = 1
@@ -2586,8 +2673,9 @@ Error_:
 
                         tId = .Fields("id").Value
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("Select * from kompy where id=" & sSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("Select * from kompy where id=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
+                                 LockTypeEnum.adLockOptimistic)
 
 
                         With rs1
@@ -2616,20 +2704,24 @@ Error_:
                         rs1.Close()
                         rs1 = Nothing
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
+                                 CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
+                                 CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("Delete from Garantia_sis where Id_Comp=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("Delete from Garantia_sis where Id_Comp=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
+                                 LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("Delete from kompy where id=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("Delete from kompy where id=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
+                                 LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
 
@@ -2640,14 +2732,13 @@ Error_:
                 rs = Nothing
 
 
-
             Case 3 'ИБП
 
 
                 sSQL = "SELECT * FROM kompy where PCL=" & sSID & " and tiptehn = 'IBP'"
 
-                rs = New ADODB.Recordset
-                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 With rs
                     .MoveFirst()
@@ -2655,8 +2746,9 @@ Error_:
 
                         tId = .Fields("id").Value
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("Select * from kompy where id=" & sSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("Select * from kompy where id=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
+                                 LockTypeEnum.adLockOptimistic)
 
                         With rs1
                             rs1.Fields("IBP_NAME").Value = rs.Fields("PRINTER_NAME_1").Value
@@ -2670,20 +2762,24 @@ Error_:
                         rs1.Close()
                         rs1 = Nothing
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
+                                 CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
+                                 CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("Delete from Garantia_sis where Id_Comp=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("Delete from Garantia_sis where Id_Comp=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
+                                 LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("Delete from kompy where id=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("Delete from kompy where id=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
+                                 LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
 
@@ -2696,8 +2792,8 @@ Error_:
 
                 sSQL = "SELECT * FROM kompy where PCL=" & sSID & " and tiptehn = 'KEYB'"
 
-                rs = New ADODB.Recordset
-                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 With rs
                     .MoveFirst()
@@ -2705,8 +2801,9 @@ Error_:
 
                         tId = .Fields("id").Value
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("Select * from kompy where id=" & sSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("Select * from kompy where id=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
+                                 LockTypeEnum.adLockOptimistic)
 
                         With rs1
                             rs1.Fields("KEYBOARD_NAME").Value = rs.Fields("PRINTER_NAME_1").Value
@@ -2718,20 +2815,24 @@ Error_:
                         rs1.Close()
                         rs1 = Nothing
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
+                                 CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
+                                 CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("Delete from Garantia_sis where Id_Comp=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("Delete from Garantia_sis where Id_Comp=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
+                                 LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("Delete from kompy where id=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("Delete from kompy where id=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
+                                 LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
 
@@ -2744,8 +2845,8 @@ Error_:
 
                 sSQL = "SELECT * FROM kompy where PCL=" & sSID & " and tiptehn = 'MOUSE'"
 
-                rs = New ADODB.Recordset
-                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 With rs
                     .MoveFirst()
@@ -2753,8 +2854,9 @@ Error_:
 
                         tId = .Fields("id").Value
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("Select * from kompy where id=" & sSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("Select * from kompy where id=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
+                                 LockTypeEnum.adLockOptimistic)
 
                         With rs1
                             rs1.Fields("MOUSE_NAME").Value = rs.Fields("PRINTER_NAME_1").Value
@@ -2766,20 +2868,24 @@ Error_:
                         rs1.Close()
                         rs1 = Nothing
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
+                                 CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
+                                 CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("Delete from Garantia_sis where Id_Comp=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("Delete from Garantia_sis where Id_Comp=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
+                                 LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("Delete from kompy where id=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("Delete from kompy where id=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
+                                 LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
                         .MoveNext()
@@ -2793,8 +2899,8 @@ Error_:
 
                 sSQL = "SELECT * FROM kompy where PCL=" & sSID & " and tiptehn = 'FS'"
 
-                rs = New ADODB.Recordset
-                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 With rs
                     .MoveFirst()
@@ -2802,8 +2908,9 @@ Error_:
 
                         tId = .Fields("id").Value
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("Select * from kompy where id=" & sSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("Select * from kompy where id=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
+                                 LockTypeEnum.adLockOptimistic)
 
                         With rs1
                             rs1.Fields("FILTR_NAME").Value = rs.Fields("PRINTER_NAME_1").Value
@@ -2815,20 +2922,24 @@ Error_:
                         rs1.Close()
                         rs1 = Nothing
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
+                                 CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
+                                 CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("Delete from Garantia_sis where Id_Comp=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("Delete from Garantia_sis where Id_Comp=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
+                                 LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
-                        rs1 = New ADODB.Recordset
-                        rs1.Open("Delete from kompy where id=" & tId, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("Delete from kompy where id=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
+                                 LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
                         .MoveNext()
@@ -2843,7 +2954,6 @@ Error_:
         If MRZD = True Then Exit Sub
 
         RefFilTree(frmComputers.lstGroups)
-
     End Sub
 
 
@@ -2852,9 +2962,10 @@ Error_:
         Dim sADD As Boolean
 
         If sSID = 0 Then sSID = frmComputers.sCOUNT
-        Dim rsdb As ADODB.Recordset
-        rsdb = New ADODB.Recordset
-        rsdb.Open("Select * from kompy where id=" & sSID & " and tiptehn ='PC'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        Dim rsdb As Recordset
+        rsdb = New Recordset
+        rsdb.Open("Select * from kompy where id=" & sSID & " and tiptehn ='PC'", DB7, CursorTypeEnum.adOpenDynamic,
+                  LockTypeEnum.adLockOptimistic)
 
 
         With rsdb
@@ -2874,20 +2985,23 @@ Error_:
 
                 sADD = False
 
-                If Left(sTEMP0, 2) <> "\\" And Left(sTEMP1, 2) <> "IP" And Len(sTEMP0) <> 0 And sTEMP0 <> "Microsoft Office Document Image Writer" And sTEMP0 <> "Microsoft XPS Document Writer" And sTEMP0 <> "Microsoft XPS Document Writer" And sTEMP0 <> "Fax" Then
+                If _
+                    Left(sTEMP0, 2) <> "\\" And Left(sTEMP1, 2) <> "IP" And Len(sTEMP0) <> 0 And
+                    sTEMP0 <> "Microsoft Office Document Image Writer" And sTEMP0 <> "Microsoft XPS Document Writer" And
+                    sTEMP0 <> "Microsoft XPS Document Writer" And sTEMP0 <> "Fax" Then
 
 
                     If Not RSPRNExt(sTEMP0, sSID) Then
                         sADD = True
                         Call SaveActivityToLogDB("Добавление принтера в результате разделения " & sTEMP0)
 
-                        Dim rs As ADODB.Recordset
+                        Dim rs As Recordset
                         Dim sSQL As String
 
                         sSQL = "SELECT * FROM kompy"
 
-                        rs = New ADODB.Recordset
-                        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs = New Recordset
+                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                         With rs
                             .AddNew()
@@ -2895,18 +3009,24 @@ Error_:
                             .Fields("date").Value = Date.Today
                             .Fields("TIPtehn").Value = "Printer"
 
-                            If Not IsDBNull(rsdb.Fields("PRINTER_NAME_1").Value) Then .Fields("PRINTER_NAME_1").Value = rsdb.Fields("PRINTER_NAME_1").Value
-                            If Not IsDBNull(rsdb.Fields("PRINTER_SN_1").Value) Then .Fields("PRINTER_SN_1").Value = rsdb.Fields("PRINTER_SN_1").Value
-                            If Not IsDBNull(rsdb.Fields("PRINTER_PROIZV_1").Value) Then .Fields("PRINTER_PROIZV_1").Value = rsdb.Fields("PRINTER_PROIZV_1").Value
-                            If Not IsDBNull(rsdb.Fields("INV_NO_PRINTER").Value) Then .Fields("INV_NO_PRINTER").Value = rsdb.Fields("INV_NO_PRINTER").Value
+                            If Not IsDBNull(rsdb.Fields("PRINTER_NAME_1").Value) Then _
+                                .Fields("PRINTER_NAME_1").Value = rsdb.Fields("PRINTER_NAME_1").Value
+                            If Not IsDBNull(rsdb.Fields("PRINTER_SN_1").Value) Then _
+                                .Fields("PRINTER_SN_1").Value = rsdb.Fields("PRINTER_SN_1").Value
+                            If Not IsDBNull(rsdb.Fields("PRINTER_PROIZV_1").Value) Then _
+                                .Fields("PRINTER_PROIZV_1").Value = rsdb.Fields("PRINTER_PROIZV_1").Value
+                            If Not IsDBNull(rsdb.Fields("INV_NO_PRINTER").Value) Then _
+                                .Fields("INV_NO_PRINTER").Value = rsdb.Fields("INV_NO_PRINTER").Value
 
 
                             .Fields("port_1").Value = ""
                             .Fields("FILIAL").Value = sBranch
                             .Fields("mesto").Value = sDepartment
                             .Fields("kabn").Value = sOffice
-                            If Not IsDBNull(rsdb.Fields("OTvetstvennyj").Value) Then .Fields("OTvetstvennyj").Value = rsdb.Fields("OTvetstvennyj").Value
-                            If Not IsDBNull(rsdb.Fields("TELEPHONE").Value) Then .Fields("TELEPHONE").Value = rsdb.Fields("TELEPHONE").Value
+                            If Not IsDBNull(rsdb.Fields("OTvetstvennyj").Value) Then _
+                                .Fields("OTvetstvennyj").Value = rsdb.Fields("OTvetstvennyj").Value
+                            If Not IsDBNull(rsdb.Fields("TELEPHONE").Value) Then _
+                                .Fields("TELEPHONE").Value = rsdb.Fields("TELEPHONE").Value
                             .Fields("NET_IP_1").Value = ""
                             .Fields("NET_MAC_1").Value = ""
                             .Fields("OS").Value = ""
@@ -2933,8 +3053,8 @@ Error_:
 
                         sSQL = "SELECT * FROM kompy where id=" & sSID
 
-                        rs = New ADODB.Recordset
-                        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs = New Recordset
+                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                         With rs
                             .Fields("PRINTER_NAME_1").Value = ""
@@ -2949,10 +3069,12 @@ Error_:
                         rs = Nothing
 
 
-
-                        Dim rsBK As ADODB.Recordset
-                        rsBK = New ADODB.Recordset
-                        rsBK.Open("SELECT id FROM kompy WHERE NET_NAME='" & sTEMP0 & "' and MESTO='" & sDepartment & "' and FILIAL='" & sBranch & "'  and kabn='" & sOffice & "' and PCL=" & sSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        Dim rsBK As Recordset
+                        rsBK = New Recordset
+                        rsBK.Open(
+                            "SELECT id FROM kompy WHERE NET_NAME='" & sTEMP0 & "' and MESTO='" & sDepartment &
+                            "' and FILIAL='" & sBranch & "'  and kabn='" & sOffice & "' and PCL=" & sSID, DB7,
+                            CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                         Dim sPRN As String
                         With rsBK
@@ -2974,7 +3096,9 @@ Error_:
                 sTEMP1 = rsdb.Fields("PORT_2").Value
 
 
-                If Left(sTEMP0, 2) <> "\\" And Left(sTEMP1, 2) <> "IP" And Len(sTEMP0) <> 0 And sTEMP0 <> "Microsoft Office Document Image Writer" Then
+                If _
+                    Left(sTEMP0, 2) <> "\\" And Left(sTEMP1, 2) <> "IP" And Len(sTEMP0) <> 0 And
+                    sTEMP0 <> "Microsoft Office Document Image Writer" Then
 
 
                     If Not RSPRNExt(sTEMP0, sSID) Then
@@ -2982,13 +3106,13 @@ Error_:
                         sADD = True
                         Call SaveActivityToLogDB("Добавление принтера в результате разделения " & sTEMP0)
 
-                        Dim rs As ADODB.Recordset
+                        Dim rs As Recordset
                         Dim sSQL As String
 
                         sSQL = "SELECT * FROM kompy"
 
-                        rs = New ADODB.Recordset
-                        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs = New Recordset
+                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
 
                         With rs
@@ -2997,18 +3121,24 @@ Error_:
                             .Fields("date").Value = Date.Today
                             .Fields("TIPtehn").Value = "Printer"
 
-                            If Not IsDBNull(rsdb.Fields("PRINTER_NAME_2").Value) Then .Fields("PRINTER_NAME_1").Value = rsdb.Fields("PRINTER_NAME_2").Value
-                            If Not IsDBNull(rsdb.Fields("PRINTER_SN_2").Value) Then .Fields("PRINTER_SN_1").Value = rsdb.Fields("PRINTER_SN_2").Value
-                            If Not IsDBNull(rsdb.Fields("PRINTER_PROIZV_2").Value) Then .Fields("PRINTER_PROIZV_1").Value = rsdb.Fields("PRINTER_PROIZV_2").Value
-                            If Not IsDBNull(rsdb.Fields("INV_NO_PRINTER").Value) Then .Fields("INV_NO_PRINTER").Value = rsdb.Fields("INV_NO_PRINTER").Value
+                            If Not IsDBNull(rsdb.Fields("PRINTER_NAME_2").Value) Then _
+                                .Fields("PRINTER_NAME_1").Value = rsdb.Fields("PRINTER_NAME_2").Value
+                            If Not IsDBNull(rsdb.Fields("PRINTER_SN_2").Value) Then _
+                                .Fields("PRINTER_SN_1").Value = rsdb.Fields("PRINTER_SN_2").Value
+                            If Not IsDBNull(rsdb.Fields("PRINTER_PROIZV_2").Value) Then _
+                                .Fields("PRINTER_PROIZV_1").Value = rsdb.Fields("PRINTER_PROIZV_2").Value
+                            If Not IsDBNull(rsdb.Fields("INV_NO_PRINTER").Value) Then _
+                                .Fields("INV_NO_PRINTER").Value = rsdb.Fields("INV_NO_PRINTER").Value
 
 
                             .Fields("port_1").Value = ""
                             .Fields("FILIAL").Value = sBranch
                             .Fields("mesto").Value = sDepartment
                             .Fields("kabn").Value = sOffice
-                            If Not IsDBNull(rsdb.Fields("OTvetstvennyj").Value) Then .Fields("OTvetstvennyj").Value = rsdb.Fields("OTvetstvennyj").Value
-                            If Not IsDBNull(rsdb.Fields("TELEPHONE").Value) Then .Fields("TELEPHONE").Value = rsdb.Fields("TELEPHONE").Value
+                            If Not IsDBNull(rsdb.Fields("OTvetstvennyj").Value) Then _
+                                .Fields("OTvetstvennyj").Value = rsdb.Fields("OTvetstvennyj").Value
+                            If Not IsDBNull(rsdb.Fields("TELEPHONE").Value) Then _
+                                .Fields("TELEPHONE").Value = rsdb.Fields("TELEPHONE").Value
                             .Fields("NET_IP_1").Value = ""
                             .Fields("NET_MAC_1").Value = ""
                             .Fields("OS").Value = ""
@@ -3040,8 +3170,8 @@ Error_:
 
                         sSQL = "SELECT * FROM kompy where id=" & sSID
 
-                        rs = New ADODB.Recordset
-                        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs = New Recordset
+                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                         With rs
                             .Fields("PRINTER_NAME_2").Value = ""
@@ -3055,9 +3185,12 @@ Error_:
                         rs.Close()
                         rs = Nothing
 
-                        Dim rsBK As ADODB.Recordset
-                        rsBK = New ADODB.Recordset
-                        rsBK.Open("SELECT id FROM kompy WHERE NET_NAME='" & sTEMP0 & "' and MESTO='" & sDepartment & "' and FILIAL='" & sBranch & "'  and kabn='" & sOffice & "' and PCL=" & sSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        Dim rsBK As Recordset
+                        rsBK = New Recordset
+                        rsBK.Open(
+                            "SELECT id FROM kompy WHERE NET_NAME='" & sTEMP0 & "' and MESTO='" & sDepartment &
+                            "' and FILIAL='" & sBranch & "'  and kabn='" & sOffice & "' and PCL=" & sSID, DB7,
+                            CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                         Dim sPRN As String
                         With rsBK
@@ -3080,20 +3213,22 @@ Error_:
                 sTEMP1 = rsdb.Fields("PORT_3").Value
 
 
-                If Left(sTEMP0, 2) <> "\\" And Left(sTEMP1, 2) <> "IP" And Len(sTEMP0) <> 0 And sTEMP0 <> "Microsoft Office Document Image Writer" Then
+                If _
+                    Left(sTEMP0, 2) <> "\\" And Left(sTEMP1, 2) <> "IP" And Len(sTEMP0) <> 0 And
+                    sTEMP0 <> "Microsoft Office Document Image Writer" Then
 
                     If Not RSPRNExt(sTEMP0, sSID) Then
                         sADD = True
 
                         Call SaveActivityToLogDB("Добавление принтера в результате разделения " & sTEMP0)
 
-                        Dim rs As ADODB.Recordset
+                        Dim rs As Recordset
                         Dim sSQL As String
 
                         sSQL = "SELECT * FROM kompy"
 
-                        rs = New ADODB.Recordset
-                        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs = New Recordset
+                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
 
                         With rs
@@ -3102,18 +3237,24 @@ Error_:
                             .Fields("date").Value = Date.Today
                             .Fields("TIPtehn").Value = "Printer"
 
-                            If Not IsDBNull(rsdb.Fields("PRINTER_NAME_3").Value) Then .Fields("PRINTER_NAME_1").Value = rsdb.Fields("PRINTER_NAME_3").Value
-                            If Not IsDBNull(rsdb.Fields("PRINTER_SN_3").Value) Then .Fields("PRINTER_SN_1").Value = rsdb.Fields("PRINTER_SN_3").Value
-                            If Not IsDBNull(rsdb.Fields("PRINTER_PROIZV_3").Value) Then .Fields("PRINTER_PROIZV_1").Value = rsdb.Fields("PRINTER_PROIZV_3").Value
-                            If Not IsDBNull(rsdb.Fields("INV_NO_PRINTER").Value) Then .Fields("INV_NO_PRINTER").Value = rsdb.Fields("INV_NO_PRINTER").Value
+                            If Not IsDBNull(rsdb.Fields("PRINTER_NAME_3").Value) Then _
+                                .Fields("PRINTER_NAME_1").Value = rsdb.Fields("PRINTER_NAME_3").Value
+                            If Not IsDBNull(rsdb.Fields("PRINTER_SN_3").Value) Then _
+                                .Fields("PRINTER_SN_1").Value = rsdb.Fields("PRINTER_SN_3").Value
+                            If Not IsDBNull(rsdb.Fields("PRINTER_PROIZV_3").Value) Then _
+                                .Fields("PRINTER_PROIZV_1").Value = rsdb.Fields("PRINTER_PROIZV_3").Value
+                            If Not IsDBNull(rsdb.Fields("INV_NO_PRINTER").Value) Then _
+                                .Fields("INV_NO_PRINTER").Value = rsdb.Fields("INV_NO_PRINTER").Value
 
                             .Fields("port_1").Value = ""
                             .Fields("FILIAL").Value = sBranch
                             .Fields("mesto").Value = sDepartment
                             .Fields("kabn").Value = sOffice
 
-                            If Not IsDBNull(rsdb.Fields("OTvetstvennyj").Value) Then .Fields("OTvetstvennyj").Value = rsdb.Fields("OTvetstvennyj").Value
-                            If Not IsDBNull(rsdb.Fields("TELEPHONE").Value) Then .Fields("TELEPHONE").Value = rsdb.Fields("TELEPHONE").Value
+                            If Not IsDBNull(rsdb.Fields("OTvetstvennyj").Value) Then _
+                                .Fields("OTvetstvennyj").Value = rsdb.Fields("OTvetstvennyj").Value
+                            If Not IsDBNull(rsdb.Fields("TELEPHONE").Value) Then _
+                                .Fields("TELEPHONE").Value = rsdb.Fields("TELEPHONE").Value
 
                             .Fields("NET_IP_1").Value = ""
                             .Fields("NET_MAC_1").Value = ""
@@ -3146,8 +3287,8 @@ Error_:
 
                         sSQL = "SELECT * FROM kompy where id=" & sSID
 
-                        rs = New ADODB.Recordset
-                        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs = New Recordset
+                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                         With rs
                             .Fields("PRINTER_NAME_3").Value = ""
@@ -3162,9 +3303,12 @@ Error_:
                         rs = Nothing
 
 
-                        Dim rsBK As ADODB.Recordset
-                        rsBK = New ADODB.Recordset
-                        rsBK.Open("SELECT id FROM kompy WHERE NET_NAME='" & sTEMP0 & "' and MESTO='" & sDepartment & "' and FILIAL='" & sBranch & "'  and kabn='" & sOffice & "' and PCL=" & sSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        Dim rsBK As Recordset
+                        rsBK = New Recordset
+                        rsBK.Open(
+                            "SELECT id FROM kompy WHERE NET_NAME='" & sTEMP0 & "' and MESTO='" & sDepartment &
+                            "' and FILIAL='" & sBranch & "'  and kabn='" & sOffice & "' and PCL=" & sSID, DB7,
+                            CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                         Dim sPRN As String
                         With rsBK
@@ -3193,13 +3337,13 @@ Error_:
                     If Not RSPRNExt(sTEMP0, sSID) Then
                         sADD = True
                         Call SaveActivityToLogDB("Добавление монитора в результате разделения " & sTEMP0)
-                        Dim rs As ADODB.Recordset
+                        Dim rs As Recordset
                         Dim sSQL As String
 
                         sSQL = "SELECT * FROM kompy"
 
-                        rs = New ADODB.Recordset
-                        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs = New Recordset
+                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
 
                         With rs
@@ -3214,15 +3358,18 @@ Error_:
                             .Fields("port_1").Value = ""
 
 
+                            If Not IsDBNull(rsdb.Fields("INV_NO_MONITOR").Value) Then _
+                                .Fields("INV_NO_MONITOR").Value = rsdb.Fields("INV_NO_MONITOR").Value
 
-                            If Not IsDBNull(rsdb.Fields("INV_NO_MONITOR").Value) Then .Fields("INV_NO_MONITOR").Value = rsdb.Fields("INV_NO_MONITOR").Value
+                            If Not IsDBNull(rsdb.Fields("OTvetstvennyj").Value) Then _
+                                .Fields("OTvetstvennyj").Value = rsdb.Fields("OTvetstvennyj").Value
+                            If Not IsDBNull(rsdb.Fields("TELEPHONE").Value) Then _
+                                .Fields("TELEPHONE").Value = rsdb.Fields("TELEPHONE").Value
 
-                            If Not IsDBNull(rsdb.Fields("OTvetstvennyj").Value) Then .Fields("OTvetstvennyj").Value = rsdb.Fields("OTvetstvennyj").Value
-                            If Not IsDBNull(rsdb.Fields("TELEPHONE").Value) Then .Fields("TELEPHONE").Value = rsdb.Fields("TELEPHONE").Value
-
-                            If Not IsDBNull(rsdb.Fields("MONITOR_NAME").Value) Then .Fields("NET_NAME").Value = rsdb.Fields("MONITOR_NAME").Value
-                            If Not IsDBNull(rsdb.Fields("MONITOR_NAME").Value) Then .Fields("PSEVDONIM").Value = rsdb.Fields("MONITOR_NAME").Value
-
+                            If Not IsDBNull(rsdb.Fields("MONITOR_NAME").Value) Then _
+                                .Fields("NET_NAME").Value = rsdb.Fields("MONITOR_NAME").Value
+                            If Not IsDBNull(rsdb.Fields("MONITOR_NAME").Value) Then _
+                                .Fields("PSEVDONIM").Value = rsdb.Fields("MONITOR_NAME").Value
 
 
                             .Fields("PCL").Value = sSID
@@ -3254,8 +3401,8 @@ Error_:
 
                         sSQL = "SELECT * FROM kompy where id=" & sSID
 
-                        rs = New ADODB.Recordset
-                        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs = New Recordset
+                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                         With rs
                             .Fields("MONITOR_NAME").Value = ""
@@ -3271,9 +3418,12 @@ Error_:
 
                         On Error Resume Next
 
-                        Dim rsBK As ADODB.Recordset
-                        rsBK = New ADODB.Recordset
-                        rsBK.Open("SELECT id FROM kompy WHERE MONITOR_NAME='" & sTEMP0 & "' and MESTO='" & sDepartment & "' and FILIAL='" & sBranch & "' and kabn='" & sOffice & "' and PCL=" & sSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        Dim rsBK As Recordset
+                        rsBK = New Recordset
+                        rsBK.Open(
+                            "SELECT id FROM kompy WHERE MONITOR_NAME='" & sTEMP0 & "' and MESTO='" & sDepartment &
+                            "' and FILIAL='" & sBranch & "' and kabn='" & sOffice & "' and PCL=" & sSID, DB7,
+                            CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                         Dim sPRN As String
                         With rsBK
@@ -3304,7 +3454,7 @@ Error_:
 
                         sADD = True
                         Call SaveActivityToLogDB("Добавление ИБП в результате разделения " & sTEMP0)
-                        Dim rs As ADODB.Recordset
+                        Dim rs As Recordset
                         Dim sSQL As String
 
 
@@ -3315,8 +3465,8 @@ Error_:
 
                         sSQL = "SELECT * FROM kompy"
 
-                        rs = New ADODB.Recordset
-                        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs = New Recordset
+                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
 
                         With rs
@@ -3325,13 +3475,17 @@ Error_:
 
                             .Fields("PRINTER_NAME_1").Value = sTEMP0
 
-                            If Not IsDBNull(rsdb.Fields("IBP_SN").Value) Then .Fields("PRINTER_SN_1").Value = rsdb.Fields("IBP_SN").Value
-                            If Not IsDBNull(rsdb.Fields("PRINTER_PROIZV_1").Value) Then .Fields("IBP_PROIZV").Value = rsdb.Fields("PRINTER_PROIZV_1").Value
+                            If Not IsDBNull(rsdb.Fields("IBP_SN").Value) Then _
+                                .Fields("PRINTER_SN_1").Value = rsdb.Fields("IBP_SN").Value
+                            If Not IsDBNull(rsdb.Fields("PRINTER_PROIZV_1").Value) Then _
+                                .Fields("IBP_PROIZV").Value = rsdb.Fields("PRINTER_PROIZV_1").Value
 
                             .Fields("port_1").Value = ""
 
-                            If Not IsDBNull(rsdb.Fields("OTvetstvennyj").Value) Then .Fields("OTvetstvennyj").Value = rsdb.Fields("OTvetstvennyj").Value
-                            If Not IsDBNull(rsdb.Fields("TELEPHONE").Value) Then .Fields("TELEPHONE").Value = rsdb.Fields("TELEPHONE").Value
+                            If Not IsDBNull(rsdb.Fields("OTvetstvennyj").Value) Then _
+                                .Fields("OTvetstvennyj").Value = rsdb.Fields("OTvetstvennyj").Value
+                            If Not IsDBNull(rsdb.Fields("TELEPHONE").Value) Then _
+                                .Fields("TELEPHONE").Value = rsdb.Fields("TELEPHONE").Value
 
 
                             .Fields("NET_NAME").Value = sTEMP0
@@ -3367,8 +3521,8 @@ Error_:
 
                         sSQL = "SELECT * FROM kompy where id=" & sSID
 
-                        rs = New ADODB.Recordset
-                        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs = New Recordset
+                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                         With rs
                             .Fields("IBP_NAME").Value = ""
@@ -3382,9 +3536,12 @@ Error_:
                         rs = Nothing
 
 
-                        Dim rsBK As ADODB.Recordset
-                        rsBK = New ADODB.Recordset
-                        rsBK.Open("SELECT id FROM kompy WHERE PRINTER_NAME_1='" & sTEMP0 & "' and MESTO='" & sDepartment & "' and FILIAL='" & sBranch & "'  and kabn='" & sOffice & "' and PCL=" & sSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        Dim rsBK As Recordset
+                        rsBK = New Recordset
+                        rsBK.Open(
+                            "SELECT id FROM kompy WHERE PRINTER_NAME_1='" & sTEMP0 & "' and MESTO='" & sDepartment &
+                            "' and FILIAL='" & sBranch & "'  and kabn='" & sOffice & "' and PCL=" & sSID, DB7,
+                            CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                         Dim sPRN As String
                         With rsBK
@@ -3416,7 +3573,7 @@ Error_:
 
                         sADD = True
                         Call SaveActivityToLogDB("Добавление Клавиатуры в результате разделения " & sTEMP0)
-                        Dim rs As ADODB.Recordset
+                        Dim rs As Recordset
                         Dim sSQL As String
 
 
@@ -3427,8 +3584,8 @@ Error_:
 
                         sSQL = "SELECT * FROM kompy"
 
-                        rs = New ADODB.Recordset
-                        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs = New Recordset
+                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
 
                         With rs
@@ -3438,13 +3595,17 @@ Error_:
 
                             .Fields("PRINTER_NAME_1").Value = sTEMP0
 
-                            If Not IsDBNull(rsdb.Fields("KEYBOARD_SN").Value) Then .Fields("PRINTER_SN_1").Value = rsdb.Fields("KEYBOARD_SN").Value
-                            If Not IsDBNull(rsdb.Fields("PRINTER_PROIZV_1").Value) Then .Fields("PRINTER_PROIZV_1").Value = rsdb.Fields("KEYBOARD_PROIZV").Value
+                            If Not IsDBNull(rsdb.Fields("KEYBOARD_SN").Value) Then _
+                                .Fields("PRINTER_SN_1").Value = rsdb.Fields("KEYBOARD_SN").Value
+                            If Not IsDBNull(rsdb.Fields("PRINTER_PROIZV_1").Value) Then _
+                                .Fields("PRINTER_PROIZV_1").Value = rsdb.Fields("KEYBOARD_PROIZV").Value
 
                             .Fields("port_1").Value = ""
 
-                            If Not IsDBNull(rsdb.Fields("OTvetstvennyj").Value) Then .Fields("OTvetstvennyj").Value = rsdb.Fields("OTvetstvennyj").Value
-                            If Not IsDBNull(rsdb.Fields("TELEPHONE").Value) Then .Fields("TELEPHONE").Value = rsdb.Fields("TELEPHONE").Value
+                            If Not IsDBNull(rsdb.Fields("OTvetstvennyj").Value) Then _
+                                .Fields("OTvetstvennyj").Value = rsdb.Fields("OTvetstvennyj").Value
+                            If Not IsDBNull(rsdb.Fields("TELEPHONE").Value) Then _
+                                .Fields("TELEPHONE").Value = rsdb.Fields("TELEPHONE").Value
 
                             .Fields("NET_NAME").Value = sTEMP0
                             .Fields("PSEVDONIM").Value = sTEMP0
@@ -3478,8 +3639,8 @@ Error_:
 
                         sSQL = "SELECT * FROM kompy where id=" & sSID
 
-                        rs = New ADODB.Recordset
-                        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs = New Recordset
+                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                         With rs
                             .Fields("KEYBOARD_NAME").Value = ""
@@ -3492,9 +3653,12 @@ Error_:
                         rs = Nothing
 
 
-                        Dim rsBK As ADODB.Recordset
-                        rsBK = New ADODB.Recordset
-                        rsBK.Open("SELECT id FROM kompy WHERE PRINTER_NAME_1='" & sTEMP0 & "' and MESTO='" & sDepartment & "' and FILIAL='" & sBranch & "'  and kabn='" & sOffice & "' and PCL=" & sSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        Dim rsBK As Recordset
+                        rsBK = New Recordset
+                        rsBK.Open(
+                            "SELECT id FROM kompy WHERE PRINTER_NAME_1='" & sTEMP0 & "' and MESTO='" & sDepartment &
+                            "' and FILIAL='" & sBranch & "'  and kabn='" & sOffice & "' and PCL=" & sSID, DB7,
+                            CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                         Dim sPRN As String
                         With rsBK
@@ -3521,7 +3685,7 @@ Error_:
 
                         sADD = True
                         Call SaveActivityToLogDB("Добавление Мыши в результате разделения " & sTEMP0)
-                        Dim rs As ADODB.Recordset
+                        Dim rs As Recordset
                         Dim sSQL As String
 
                         If Not RSExists("MOUSE", "name", Trim(sTEMP0)) Then
@@ -3531,8 +3695,8 @@ Error_:
 
                         sSQL = "SELECT * FROM kompy"
 
-                        rs = New ADODB.Recordset
-                        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs = New Recordset
+                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
 
                         With rs
@@ -3578,8 +3742,8 @@ Error_:
 
                         sSQL = "SELECT * FROM kompy where id=" & sSID
 
-                        rs = New ADODB.Recordset
-                        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs = New Recordset
+                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                         With rs
                             .Fields("MOUSE_NAME").Value = ""
@@ -3592,9 +3756,12 @@ Error_:
                         rs = Nothing
 
 
-                        Dim rsBK As ADODB.Recordset
-                        rsBK = New ADODB.Recordset
-                        rsBK.Open("SELECT id FROM kompy WHERE PRINTER_NAME_1='" & sTEMP0 & "' and MESTO='" & sDepartment & "' and FILIAL='" & sBranch & "'  and kabn='" & sOffice & "' and PCL=" & sSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        Dim rsBK As Recordset
+                        rsBK = New Recordset
+                        rsBK.Open(
+                            "SELECT id FROM kompy WHERE PRINTER_NAME_1='" & sTEMP0 & "' and MESTO='" & sDepartment &
+                            "' and FILIAL='" & sBranch & "'  and kabn='" & sOffice & "' and PCL=" & sSID, DB7,
+                            CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                         Dim sPRN As String
                         With rsBK
@@ -3628,15 +3795,16 @@ Error_:
 
                         sADD = True
                         Call SaveActivityToLogDB("Добавление Сетевого фильтра в результате разделения " & sTEMP0)
-                        Dim rs As ADODB.Recordset
+                        Dim rs As Recordset
                         Dim sSQL As String
 
 
                         If Not RSExists("OTHER", "name", Trim("Сетевой фильтр")) Then
 
-                            Dim rsOTH As ADODB.Recordset
-                            rsOTH = New ADODB.Recordset
-                            rsOTH.Open("Select * from spr_other", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                            Dim rsOTH As Recordset
+                            rsOTH = New Recordset
+                            rsOTH.Open("Select * from spr_other", DB7, CursorTypeEnum.adOpenDynamic,
+                                       LockTypeEnum.adLockOptimistic)
 
                             With rsOTH
                                 .AddNew()
@@ -3650,14 +3818,15 @@ Error_:
                         End If
 
                         If Not RSExists("OTHD", "name", Trim(sTEMP0)) Then
-                            AddTreePar(sTEMP0, "Сетевой фильтр", rsdb.Fields("FILTR_PROIZV").Value, "SPR_OTH_DEV", frmComputers.cmbOTH)
+                            AddTreePar(sTEMP0, "Сетевой фильтр", rsdb.Fields("FILTR_PROIZV").Value, "SPR_OTH_DEV",
+                                       frmComputers.cmbOTH)
                         End If
 
 
                         sSQL = "SELECT * FROM kompy"
 
-                        rs = New ADODB.Recordset
-                        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs = New Recordset
+                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
 
                         With rs
@@ -3703,8 +3872,8 @@ Error_:
 
                         sSQL = "SELECT * FROM kompy where id=" & sSID
 
-                        rs = New ADODB.Recordset
-                        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        rs = New Recordset
+                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                         With rs
                             .Fields("FILTR_NAME").Value = ""
@@ -3717,9 +3886,12 @@ Error_:
                         rs = Nothing
 
 
-                        Dim rsBK As ADODB.Recordset
-                        rsBK = New ADODB.Recordset
-                        rsBK.Open("SELECT id FROM kompy WHERE PRINTER_NAME_1='" & sTEMP0 & "' and MESTO='" & sDepartment & "' and FILIAL='" & sBranch & "'  and kabn='" & sOffice & "' and PCL=" & sSID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                        Dim rsBK As Recordset
+                        rsBK = New Recordset
+                        rsBK.Open(
+                            "SELECT id FROM kompy WHERE PRINTER_NAME_1='" & sTEMP0 & "' and MESTO='" & sDepartment &
+                            "' and FILIAL='" & sBranch & "'  and kabn='" & sOffice & "' and PCL=" & sSID, DB7,
+                            CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                         Dim sPRN As String
                         With rsBK
@@ -3740,14 +3912,10 @@ Error_:
             End If
 
 
-
-
-
         End With
 
         rsdb.Close()
         rsdb = Nothing
-
 
 
         If MRZD = True Then Exit Sub
@@ -3760,7 +3928,7 @@ Error_:
 
         Exit Sub
 
-err_:
+        err_:
         'MsgBox(Err.Description)
 
         If MRZD = True Then Exit Sub
@@ -3769,20 +3937,19 @@ err_:
             RefFilTree(frmComputers.lstGroups)
 
         End If
-
     End Sub
 
     Private Function RSPRNExt(ByVal sPRN As String, ByVal sPCL As String)
 
         RSPRNExt = False
 
-        Dim rs As ADODB.Recordset
+        Dim rs As Recordset
         Dim sSQL As String
 
         sSQL = "SELECT count(*) as t_n FROM kompy where NET_NAME ='" & sPRN & "' and PCL=" & sPCL
 
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
 
         With rs
@@ -3802,12 +3969,13 @@ err_:
         RSPRNExt = False
 
         Exit Function
-Error_:
+        Error_:
         RSPRNExt = False
-
     End Function
 
-    Public Sub NotesEditAdd(ByVal btAdd As ToolStripButton, ByVal lvsNotes As ListView, ByVal NotesMaster As ComboBox, ByVal textNotes As TextBox, ByVal DateNotes As DateTimePicker, ByVal txtSNAME As String, ByVal Branch As ComboBox, ByVal Department As ComboBox, ByVal Office As ComboBox)
+    Public Sub NotesEditAdd(ByVal btAdd As ToolStripButton, ByVal lvsNotes As ListView, ByVal NotesMaster As ComboBox,
+                            ByVal textNotes As TextBox, ByVal DateNotes As DateTimePicker, ByVal txtSNAME As String,
+                            ByVal Branch As ComboBox, ByVal Department As ComboBox, ByVal Office As ComboBox)
 
         On Error Resume Next
 
@@ -3818,15 +3986,20 @@ Error_:
 
 
         If btAdd.Text = langfile.GetString("frmComputers", "MSG30", "Добавить") Then
-            Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG45", "Добавление заметки для") & " " & frmComputers.lstGroups.SelectedNode.Text)
+            Call _
+                SaveActivityToLogDB(
+                    langfile.GetString("frmComputers", "MSG45", "Добавление заметки для") & " " &
+                    frmComputers.lstGroups.SelectedNode.Text)
             sSQL = "Select * from Zametki"
 
         Else
-            Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG46", "Редактирование заметки для") & " " & frmComputers.lstGroups.SelectedNode.Text)
+            Call _
+                SaveActivityToLogDB(
+                    langfile.GetString("frmComputers", "MSG46", "Редактирование заметки для") & " " &
+                    frmComputers.lstGroups.SelectedNode.Text)
             sSQL = "Select * from Zametki WHERE id =" & frmComputers.zCOUNT
 
         End If
-
 
 
         Dim uname As String
@@ -3841,9 +4014,9 @@ Error_:
             uname = uname & "/" & Office.Text
         End If
 
-        Dim rs As ADODB.Recordset
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        Dim rs As Recordset
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
 
@@ -3875,7 +4048,6 @@ Error_:
         textNotes.Text = ""
 
         Call LOAD_NOTES(frmComputers.sCOUNT, lvsNotes)
-
     End Sub
 
     Public Sub NET_PORT_ED(Optional ByVal sSID As String = "")
@@ -3884,17 +4056,19 @@ Error_:
         Dim langfile As New IniFile(sLANGPATH)
 
 
-
         If frmComputers.portEDT = True Then
         Else
             If frmComputers.lvNetPort.Items.Count >= frmComputers.txtNetPort.Text Then
-                MsgBox(langfile.GetString("frmComputers", "MSG47", "Количество портов достигло допустимого предела для этого устройства"), MsgBoxStyle.Information, ProGramName)
+                MsgBox(
+                    langfile.GetString("frmComputers", "MSG47",
+                                       "Количество портов достигло допустимого предела для этого устройства"),
+                    MsgBoxStyle.Information, ProGramName)
                 Exit Sub
             End If
         End If
 
-        Dim rs As ADODB.Recordset
-        rs = New ADODB.Recordset
+        Dim rs As Recordset
+        rs = New Recordset
         Dim sSQL As String
 
         If frmComputers.portEDT = True Then
@@ -3903,7 +4077,7 @@ Error_:
             sSQL = "SELECT * FROM net_port"
         End If
 
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
             If frmComputers.portEDT = True Then
@@ -3926,13 +4100,11 @@ Error_:
         frmComputers.txtNetPortMac.Text = ""
 
         LOAD_NET_PORT(frmComputers.sCOUNT)
-
     End Sub
 
     Public Sub User_Comp_ADD()
         On Error Resume Next
         Dim langfile As New IniFile(sLANGPATH)
-
 
 
         If frmComputers.sCOUNT = 0 Then Exit Sub
@@ -3941,9 +4113,10 @@ Error_:
 
         If frmComputers.cmdUserAdd.Text = langfile.GetString("frmComputers", "MSG42", "Сохранить") Then
 
-            Dim USERCOMP As ADODB.Recordset
-            USERCOMP = New ADODB.Recordset
-            USERCOMP.Open("SELECT * FROM USER_COMP WHERE id=" & frmComputers.uCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            Dim USERCOMP As Recordset
+            USERCOMP = New Recordset
+            USERCOMP.Open("SELECT * FROM USER_COMP WHERE id=" & frmComputers.uCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                          LockTypeEnum.adLockOptimistic)
 
             With USERCOMP
                 If Not IsDBNull(.Fields("PASSWORD")) Then Us1 = .Fields("PASSWORD").Value
@@ -3956,18 +4129,24 @@ Error_:
         End If
 
         Dim sSQL As String
-        Dim rs As ADODB.Recordset
-        rs = New ADODB.Recordset
+        Dim rs As Recordset
+        rs = New Recordset
 
         If frmComputers.cmdUserAdd.Text = langfile.GetString("frmComputers", "MSG30", "Добавить") Then
-            Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG48", "Добавление пользователя на компьютере") & " " & frmComputers.lstGroups.SelectedNode.Text)
+            Call _
+                SaveActivityToLogDB(
+                    langfile.GetString("frmComputers", "MSG48", "Добавление пользователя на компьютере") & " " &
+                    frmComputers.lstGroups.SelectedNode.Text)
             sSQL = "Select * from USER_COMP"
         Else
-            Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG49", "Редактирование пользователя на компьютере") & " " & frmComputers.lstGroups.SelectedNode.Text)
+            Call _
+                SaveActivityToLogDB(
+                    langfile.GetString("frmComputers", "MSG49", "Редактирование пользователя на компьютере") & " " &
+                    frmComputers.lstGroups.SelectedNode.Text)
             sSQL = "Select * from USER_COMP WHERE id =" & frmComputers.uCOUNT
         End If
 
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
 
@@ -4035,9 +4214,9 @@ Error_:
         If Not RSExists("USER", "name", Trim(frmComputers.txtUserName.Text)) Then
 
 
-            rs = New ADODB.Recordset
+            rs = New Recordset
 
-            rs.Open("Select * from SPR_USER ", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rs.Open("Select * from SPR_USER ", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
             With rs
                 .AddNew()
@@ -4051,14 +4230,6 @@ Error_:
             frmComputers.txtUserName.Items.Add(frmComputers.txtUserName.Text)
 
         End If
-
-
-
-
-
-
-
-
 
 
         frmComputers.cmdUserAdd.Text = langfile.GetString("frmComputers", "MSG30", "Добавить")
@@ -4083,7 +4254,7 @@ Error_:
         Dim langfile As New IniFile(sLANGPATH)
 
 
-        Dim rs As ADODB.Recordset
+        Dim rs As Recordset
 
 
         Select Case frmComputers.sPREF
@@ -4110,11 +4281,12 @@ Error_:
                 frmComputers.zCOUNT = (frmComputers.lvNotesBR.SelectedItems(z).Text)
             Next
 
-            rs = New ADODB.Recordset
-            rs.Open("SELECT * FROM ZAM_OTD WHERE id =" & frmComputers.zCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rs = New Recordset
+            rs.Open("SELECT * FROM ZAM_OTD WHERE id =" & frmComputers.zCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                    LockTypeEnum.adLockOptimistic)
         Else
-            rs = New ADODB.Recordset
-            rs.Open("SELECT * FROM ZAM_OTD", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rs = New Recordset
+            rs.Open("SELECT * FROM ZAM_OTD", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
         End If
 
         With rs
@@ -4139,7 +4311,7 @@ Error_:
         rs = Nothing
 
         LOAD_INF_BRANCHE(frmComputers.sCOUNT)
-        Notes_Clear(frmComputers.btnBRNotesAdd, frmComputers.Notesbrdate, frmComputers.cmbBRMaster, frmComputers.Notesbrtxt)
-
+        Notes_Clear(frmComputers.btnBRNotesAdd, frmComputers.Notesbrdate, frmComputers.cmbBRMaster,
+                    frmComputers.Notesbrtxt)
     End Sub
 End Module

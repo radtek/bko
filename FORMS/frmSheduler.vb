@@ -1,12 +1,12 @@
 ﻿Public Class frmSheduler
     Private uCOUNT As Integer
 
-    Private Sub frmSheduler_Activated(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Activated
+    Private Sub frmSheduler_Activated(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Activated
         frmMain.SaveInfTehButton.Enabled = False
         frmMain.ToolStripDropDownButton1.Enabled = False
     End Sub
 
-    Private Sub frmSheduler_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+    Private Sub frmSheduler_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
 
         SendFonts(Me)
 
@@ -14,47 +14,56 @@
 
         Call SHEDULER_LOAD()
 
+
+        If uLevelTehAdd = False And uLevel <> "Admin" Then
+            btnAdd.Enabled = False
+            btnDel.Enabled = False
+
+        Else
+
+            btnAdd.Enabled = True
+            btnDel.Enabled = True
+
+        End If
+
+
         FillComboNET(cmbUser, "Name", "T_User", "", False, True)
-        DTSHED.Value = Date.Today.AddDays(+1)
+        DTSHED.Value = Date.Today.AddDays(+ 1)
         txtShed.Text = ""
         cmbUser.Text = ""
-
     End Sub
 
-    Private Sub frmSheduler_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Resize
+    Private Sub frmSheduler_Resize(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Resize
+
 
         'lstShed.Width = Me.Width - 10
         'lstShed.Height = Me.Height - 200
-
-
-
     End Sub
 
-    Private Sub btnClear_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClear.Click
+    Private Sub btnClear_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnClear.Click
         Call CLR()
     End Sub
 
     Private Sub CLR()
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
-        DTSHED.Value = Date.Today.AddDays(+1)
+        DTSHED.Value = Date.Today.AddDays(+ 1)
         txtShed.Text = ""
         cmbUser.Text = ""
         btnAdd.Text = LNGIniFile.GetString("frmSheduler", "MSG1", "Добавить")
-
     End Sub
 
     Private Sub SHEDULER_LOAD()
         On Error GoTo Error_
 
-        Dim rs As ADODB.Recordset 'Объявляем рекордсет
+        Dim rs As Recordset 'Объявляем рекордсет
         Dim sSQL As String 'Переменная, где будет размещён SQL запрос
 
         lstShed.Items.Clear()
         sSQL = "SELECT id, DATA, OPIS, foruser FROM Sheduler order by DATA DESC"
 
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         'UserNames
         Dim intj As Long
@@ -64,7 +73,9 @@
             .MoveFirst()
             Do While Not .EOF
 
-                If .Fields(1).Value <= Date.Today.AddDays(-2) Or .Fields(1).Value >= Date.Today.AddDays(+2) And .Fields(3).Value <> UserNames Then
+                If _
+                    .Fields(1).Value <= Date.Today.AddDays(- 2) Or
+                    .Fields(1).Value >= Date.Today.AddDays(+ 2) And .Fields(3).Value <> UserNames Then
 
                 Else
 
@@ -103,21 +114,20 @@
         ResList(Me.lstShed)
 
         Exit Sub
-Error_:
-
+        Error_:
     End Sub
 
-    Private Sub btnAll_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAll.Click
+    Private Sub btnAll_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAll.Click
         On Error GoTo Error_
 
-        Dim rs As ADODB.Recordset 'Объявляем рекордсет
+        Dim rs As Recordset 'Объявляем рекордсет
         Dim sSQL As String 'Переменная, где будет размещён SQL запрос
 
         lstShed.Items.Clear()
         sSQL = "SELECT id, DATA, OPIS, foruser FROM Sheduler order by DATA DESC"
 
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         'UserNames
         Dim intj As Long
@@ -158,10 +168,10 @@ Error_:
         ResList(Me.lstShed)
 
         Exit Sub
-Error_:
+        Error_:
     End Sub
 
-    Private Sub lstShed_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstShed.DoubleClick
+    Private Sub lstShed_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles lstShed.DoubleClick
         If lstShed.Items.Count = 0 Then Exit Sub
 
         Dim z As Integer
@@ -170,10 +180,11 @@ Error_:
             uCOUNT = (lstShed.SelectedItems(z).Text)
         Next
 
-        Dim rs As ADODB.Recordset
-        rs = New ADODB.Recordset
+        Dim rs As Recordset
+        rs = New Recordset
 
-        rs.Open("SELECT * FROM Sheduler WHERE id=" & uCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs.Open("SELECT * FROM Sheduler WHERE id=" & uCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
 
         With rs
 
@@ -189,18 +200,15 @@ Error_:
         rs = Nothing
         Dim LNGIniFile As New IniFile(sLANGPATH)
         btnAdd.Text = LNGIniFile.GetString("frmSheduler", "MSG2", "Сохранить")
-
-
-
     End Sub
 
-    Private Sub lstShed_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lstShed.SelectedIndexChanged
-
+    Private Sub lstShed_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles lstShed.SelectedIndexChanged
     End Sub
 
-    Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
+    Private Sub btnAdd_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAdd.Click
         On Error GoTo Error_
-        Dim rs As ADODB.Recordset 'Объявляем рекордсет
+        Dim rs As Recordset 'Объявляем рекордсет
         Dim sSQL As String 'Переменная, где будет размещён SQL запрос
 
         Dim LNGIniFile As New IniFile(sLANGPATH)
@@ -214,8 +222,8 @@ Error_:
 
         End If
 
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
             If btnAdd.Text = LNGIniFile.GetString("frmSheduler", "MSG2", "Сохранить") Then
@@ -236,17 +244,15 @@ Error_:
         rs = Nothing
 
 
-
         Call CLR()
         Call SHEDULER_LOAD()
         Call SHED_CHECK()
 
         Exit Sub
-Error_:
-
+        Error_:
     End Sub
 
-    Private Sub btnDel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDel.Click
+    Private Sub btnDel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnDel.Click
         If lstShed.Items.Count = 0 Then Exit Sub
 
         Dim z As Integer
@@ -255,16 +261,16 @@ Error_:
             uCOUNT = (lstShed.SelectedItems(z).Text)
         Next
 
-        Dim rs As ADODB.Recordset
-        rs = New ADODB.Recordset
+        Dim rs As Recordset
+        rs = New Recordset
 
-        rs.Open("Delete FROM Sheduler WHERE id=" & uCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs.Open("Delete FROM Sheduler WHERE id=" & uCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
         rs = Nothing
 
 
         Call CLR()
         Call SHEDULER_LOAD()
         Call SHED_CHECK()
-
     End Sub
 End Class

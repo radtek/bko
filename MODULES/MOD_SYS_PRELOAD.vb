@@ -1,7 +1,5 @@
-﻿Imports System
-Imports System.IO
-Imports System.Security
-Imports System.Security.Principal.WindowsIdentity 
+﻿Imports System.IO
+Imports System.Security.Principal
 
 Module MOD_SYS_PRELOAD
     Public new_prov As Boolean
@@ -13,8 +11,8 @@ Module MOD_SYS_PRELOAD
     Public fontS As Double
     Public FontC As String
     Public FontB As Boolean
-    Public FontSt As System.Drawing.FontStyle
-    Public FontD As System.Drawing.GraphicsUnit
+    Public FontSt As FontStyle
+    Public FontD As GraphicsUnit
     Public FontI As Integer
     Public RAZDEL As String
 
@@ -63,7 +61,6 @@ Module MOD_SYS_PRELOAD
     Public sVERSIA As String
 
 
-
     Public Sub Tree_Icons_Feel(ByVal ills As ImageList, ByVal sFRM As String, ByVal sPATH As String)
 
         On Error Resume Next
@@ -71,17 +68,16 @@ Module MOD_SYS_PRELOAD
         ills.Images.Clear()
 
 
-
         Select Case sICONS
 
 
             Case "32*32"
 
-                frmComputers.ilsCommands.ImageSize = New System.Drawing.Size(32, 32)
+                frmComputers.ilsCommands.ImageSize = New Size(32, 32)
 
             Case Else
 
-                frmComputers.ilsCommands.ImageSize = New System.Drawing.Size(24, 24)
+                frmComputers.ilsCommands.ImageSize = New Size(24, 24)
 
         End Select
 
@@ -172,7 +168,6 @@ Module MOD_SYS_PRELOAD
         End If
 
 
-
         'ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-branche.png"))
         'ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-department.png"))
         'ills.Images.Add(Image.FromFile(PrPath & sPATH & "bko-office.png"))
@@ -259,22 +254,17 @@ Module MOD_SYS_PRELOAD
         'End If
 
 
-
         Dim allowedExtensions() As String = {".png"}
-        Dim dirFiles() As String = IO.Directory.GetFiles(PrPath & "pic\")
+        Dim dirFiles() As String = Directory.GetFiles(PrPath & "pic\")
 
 
         For Each dirFile As String In dirFiles
             For Each extension As String In allowedExtensions
-                If extension = IO.Path.GetExtension(dirFile) Then
+                If extension = Path.GetExtension(dirFile) Then
                     ills.Images.Add(Image.FromFile(dirFile))
                 End If
             Next
         Next
-
-
-
-
     End Sub
 
     Public Sub frmservills_load()
@@ -286,7 +276,6 @@ Module MOD_SYS_PRELOAD
             frmserviceDesc.ilsCMD.Images.Add(Image.FromFile(PrPath & "pic\iface\pcupdate.png"))
 
         End If
-
     End Sub
 
     Public Sub PreLoad()
@@ -331,14 +320,8 @@ Module MOD_SYS_PRELOAD
         End Select
 
 
-
         Call UNAME_GET()
         Call iface_preload()
-
-
-
-
-
     End Sub
 
     Public Sub iface_preload()
@@ -353,8 +336,6 @@ Module MOD_SYS_PRELOAD
         FontD = objIniFile.GetString("general", "FontUnit", "3")
 
         If fontS > 10 Then fontS = 10
-
-
     End Sub
 
     Public Sub UNAME_GET()
@@ -363,11 +344,9 @@ Module MOD_SYS_PRELOAD
         Dim fName As String = rName.Substring(lSlash + 1)
 
         uPCNAME = fName
-        uUSERNAME = GetCurrent.Name
+        uUSERNAME = WindowsIdentity.GetCurrent.Name
 
         's = GetCurrent.User.Value
-
-
     End Sub
 
     Public Sub ALTER_DB()
@@ -387,7 +366,6 @@ Module MOD_SYS_PRELOAD
             Case "1.7.3.5.1"
 
         End Select
-
     End Sub
 
     Public Sub VisibleForm(ByVal ControlContainer As Object)
@@ -422,7 +400,6 @@ Module MOD_SYS_PRELOAD
         frmComputers.bNetPlus.Visible = False
         frmComputers.bMonitorPlus.Visible = False
         frmComputers.bPrinterPlus.Visible = False
-
     End Sub
 
     Public Sub ClearForm(ByVal ControlContainer As Object)
@@ -475,7 +452,6 @@ Module MOD_SYS_PRELOAD
         'End If
 
 
-
         'frmComputers.Label94.Text = "---"
         'frmComputers.Label95.Text = "---"
         'frmComputers.Label96.Text = "---"
@@ -492,8 +468,6 @@ Module MOD_SYS_PRELOAD
         'frmComputers.txtOTHMAC.Text = "---"
 
         frmComputers.treebranche.Text = A1
-
-
     End Sub
 
     Public Sub COLOR_Form_For_Computer(ByVal ControlContainer As Object)
@@ -512,15 +486,15 @@ Module MOD_SYS_PRELOAD
                 MsgBox(ex.Message)
             End Try
         Next
-
-
     End Sub
 
     Public Sub SendFonts(ByVal ControlContainer As Object)
 
         If FontI = 0 Then Exit Sub
 
-        If FontN = "Microsoft Sans Serif" And fontS = "8,25" And FontC = "Black" And FontB = False And FontSt = 0 And FontD = 3 Then Exit Sub
+        If _
+            FontN = "Microsoft Sans Serif" And fontS = "8,25" And FontC = "Black" And FontB = False And FontSt = 0 And
+            FontD = 3 Then Exit Sub
 
         For Each Ctl As Object In ControlContainer.Controls
             Try
@@ -563,7 +537,6 @@ Module MOD_SYS_PRELOAD
         Next
 
         COLOR_LOAD(ControlContainer)
-
     End Sub
 
     Private Sub COLOR_LOAD(ByVal ControlContainer As Object)
@@ -572,23 +545,22 @@ Module MOD_SYS_PRELOAD
             Try
                 If Not C.Controls Is Nothing Then
                     COLOR_LOAD(C)
-                    If TypeOf C Is Form Then C.ForeColor = Drawing.Color.FromName(FontC)
+                    If TypeOf C Is Form Then C.ForeColor = Color.FromName(FontC)
                     'If TypeOf C Is TabControl Then C.TabPage.ForeColor = Drawing.Color.FromName(FontC)
-                    If TypeOf C Is TableLayoutPanel Then C.ForeColor = Drawing.Color.FromName(FontC)
-                    If TypeOf C Is GroupBox Then C.ForeColor = Drawing.Color.FromName(FontC)
-                    If TypeOf C Is Label Then C.ForeColor = Drawing.Color.FromName(FontC)
-                    If TypeOf C Is CheckBox Then C.ForeColor = Drawing.Color.FromName(FontC)
-                    If TypeOf C Is RadioButton Then C.ForeColor = Drawing.Color.FromName(FontC)
-                    If TypeOf C Is TextBox Then C.ForeColor = Drawing.Color.FromName(FontC)
-                    If TypeOf C Is ComboBox Then C.ForeColor = Drawing.Color.FromName(FontC)
-                    If TypeOf C Is ListView Then C.ForeColor = Drawing.Color.FromName(FontC)
+                    If TypeOf C Is TableLayoutPanel Then C.ForeColor = Color.FromName(FontC)
+                    If TypeOf C Is GroupBox Then C.ForeColor = Color.FromName(FontC)
+                    If TypeOf C Is Label Then C.ForeColor = Color.FromName(FontC)
+                    If TypeOf C Is CheckBox Then C.ForeColor = Color.FromName(FontC)
+                    If TypeOf C Is RadioButton Then C.ForeColor = Color.FromName(FontC)
+                    If TypeOf C Is TextBox Then C.ForeColor = Color.FromName(FontC)
+                    If TypeOf C Is ComboBox Then C.ForeColor = Color.FromName(FontC)
+                    If TypeOf C Is ListView Then C.ForeColor = Color.FromName(FontC)
                 End If
 
             Catch ex As Exception
                 MsgBox(ex.Message)
             End Try
         Next
-
     End Sub
 
     Public Sub ClearCMB(ByVal ControlContainer As Object)
@@ -626,9 +598,9 @@ Module MOD_SYS_PRELOAD
     'End Sub
 
     Public Sub LOAD_COMBO_SPR()
-        Dim oRS As ADODB.Recordset
+        Dim oRS As Recordset
 
-        oRS = DB7.OpenSchema(ADODB.SchemaEnum.adSchemaTables, New Object() {Nothing, Nothing, Nothing, "TABLE"})
+        oRS = DB7.OpenSchema(SchemaEnum.adSchemaTables, New Object() {Nothing, Nothing, Nothing, "TABLE"})
 
         If Not (oRS.EOF) Then
             Do Until oRS.EOF
@@ -650,6 +622,5 @@ Module MOD_SYS_PRELOAD
         oRS.Close()
         oRS = Nothing
     End Sub
-
 End Module
 

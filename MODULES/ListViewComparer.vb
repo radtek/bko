@@ -10,12 +10,12 @@
     End Sub
 
     Public Function Compare(ByVal x As Object, ByVal y As _
-        Object) As Integer Implements _
-        System.Collections.IComparer.Compare
-        Dim item_x As ListViewItem = DirectCast(x,  _
-            ListViewItem)
-        Dim item_y As ListViewItem = DirectCast(y,  _
-            ListViewItem)
+                               Object) As Integer Implements _
+                                                      IComparer.Compare
+        Dim item_x As ListViewItem = DirectCast(x,
+                                                ListViewItem)
+        Dim item_y As ListViewItem = DirectCast(y,
+                                                ListViewItem)
 
         ' Get the sub-item values.
         Dim string_x As String
@@ -55,8 +55,4 @@
             End If
         End If
     End Function
-
-
-
-
 End Class

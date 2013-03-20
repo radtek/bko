@@ -1,8 +1,6 @@
-﻿Imports System.Collections
-Imports SnmpSharpNet
+﻿Imports SnmpSharpNet
 
 Module MOD_SNMP
-
     Public result_ As Boolean
     Public Name_DEV As String
     Public TEMP_DEV As String
@@ -10,7 +8,8 @@ Module MOD_SNMP
     Public COMM_DEV_A As String
     Public STATUS_BATTERY As String
 
-    Public Function REQUEST2(ByVal IP_ As String, ByVal COMMUNITY_ As String, ByVal OID1 As String, ByVal Develop As String) As String
+    Public Function REQUEST2(ByVal IP_ As String, ByVal COMMUNITY_ As String, ByVal OID1 As String,
+                             ByVal Develop As String) As String
 
         On Error GoTo Err_
 
@@ -43,8 +42,6 @@ Module MOD_SNMP
                 Select Case Develop
 
                     Case "APC"
-
-
 
 
                         Select Case OID1
@@ -164,7 +161,7 @@ Module MOD_SNMP
                             Case "1.3.6.1.4.1.705.1.5.1.0"
                                 ' 1.3.6.1.4.1.705.1.5.1.0
 
-                                uname = kvp.Value.ToString / 60
+                                uname = kvp.Value.ToString/60
 
                                 REQUEST2 = uname & " минут"
 
@@ -231,7 +228,7 @@ Module MOD_SNMP
                                 '1.3.6.1.4.1.705.1.7.3.0
                             Case "1.3.6.1.4.1.705.1.7.2.1.3.1"
 
-                                uname = kvp.Value.ToString / 10
+                                uname = kvp.Value.ToString/10
 
                                 REQUEST2 = uname '& " Hz"
 
@@ -248,17 +245,17 @@ Module MOD_SNMP
                 End Select
 
 
-
             Next
 
         End If
 
         Exit Function
-Err_:
+        Err_:
     End Function
 
 
-    Public Sub REQUEST_OID_IBP_DB(ByVal IPDEV As String, ByVal COMMDEV As String, ByVal MODEL As String, ByVal Develop As String)
+    Public Sub REQUEST_OID_IBP_DB(ByVal IPDEV As String, ByVal COMMDEV As String, ByVal MODEL As String,
+                                  ByVal Develop As String)
 
         If My.Computer.Network.Ping(IPDEV) Then
             frmComputers.lblSNMP_Ping.Visible = False
@@ -273,7 +270,6 @@ Err_:
         End If
 
 
-
         Dim uname As String
 
         uname = (REQUEST2(IPDEV, COMMDEV, "1.3.6.1.2.1.1.6.0", Develop))
@@ -285,10 +281,11 @@ Err_:
         End If
 
 
-        Dim rs1 As ADODB.Recordset
-        rs1 = New ADODB.Recordset
+        Dim rs1 As Recordset
+        rs1 = New Recordset
 
-        rs1.Open("SELECT * FROM TBL_DEV_OID where MODEL='" & MODEL & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs1.Open("SELECT * FROM TBL_DEV_OID where MODEL='" & MODEL & "'", DB7, CursorTypeEnum.adOpenDynamic,
+                 LockTypeEnum.adLockOptimistic)
 
 
         With rs1
@@ -317,10 +314,5 @@ Err_:
 
         rs1.Close()
         rs1 = Nothing
-
-
-
     End Sub
-
-
 End Module

@@ -1,5 +1,4 @@
-﻿Imports System
-Imports System.IO
+﻿
 
 Public Class frmSetup
     Private sFILEBD As String
@@ -17,7 +16,7 @@ Public Class frmSetup
 
         'New System.Windows.Forms.FontDialog
 
-        If DialogResult = System.Windows.Forms.DialogResult.OK Then
+        If DialogResult = DialogResult.OK Then
 
             Return FontWindow.Font
 
@@ -27,15 +26,14 @@ Public Class frmSetup
 
         End If
         'textbox1.font=changefont(wndfont)
-
     End Function
 
     Private Sub USER_LIST()
         lvPrUsers.Items.Clear()
         Dim intCount As Decimal = 0
-        Dim rs As ADODB.Recordset
-        rs = New ADODB.Recordset
-        rs.Open("SELECT * FROM T_User", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        Dim rs As Recordset
+        rs = New Recordset
+        rs.Open("SELECT * FROM T_User", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
             .MoveFirst()
@@ -70,7 +68,6 @@ Public Class frmSetup
 
         rs.Close()
         rs = Nothing
-
     End Sub
 
     Private Sub RESIZER()
@@ -79,11 +76,9 @@ Public Class frmSetup
         lvPrUsers.Height = SplitContainer1.Panel1.Height - 10
         gbUserLevel.Width = SplitContainer1.Panel2.Width - 20
         gbUserLevel.Height = SplitContainer1.Panel2.Height - 10
-
-
     End Sub
 
-    Private Sub btnEverest_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEverest.Click
+    Private Sub btnEverest_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnEverest.Click
         Dim DirectoryBrowser As New FolderBrowserDialog
 
         ' Then use the following code to create the Dialog window
@@ -113,11 +108,9 @@ Public Class frmSetup
 
         Dim objIniFile As New IniFile(PrPath & "base.ini")
         objIniFile.WriteString("general", "aida", txtEverestDir.Text)
-
-
     End Sub
 
-    Private Sub btnSUBD_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSUBD.Click
+    Private Sub btnSUBD_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSUBD.Click
         Dim DirectoryBrowser As New FolderBrowserDialog
 
         ' Then use the following code to create the Dialog window
@@ -147,17 +140,15 @@ Public Class frmSetup
 
         Dim objIniFile As New IniFile(PrPath & "base.ini")
         objIniFile.WriteString("general", "BasePath", txtSUBD.Text)
-
     End Sub
 
-    Private Sub frmSetup_Activated(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Activated
+    Private Sub frmSetup_Activated(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Activated
 
         frmMain.SaveInfTehButton.Enabled = False
         frmMain.ToolStripDropDownButton1.Enabled = False
-
     End Sub
 
-    Private Sub frmSetup_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+    Private Sub frmSetup_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
 
         SendFonts(Me)
 
@@ -211,9 +202,6 @@ Public Class frmSetup
                 ComboBox1.Text = "24*24"
                 sICONS = "24*24"
         End Select
-
-
-
 
 
         uname = objIniFile.GetString("MYBLANK", "VSU", "0")
@@ -291,8 +279,6 @@ Public Class frmSetup
         End Select
 
 
-
-
         'chkArhiv2exit
 
         uname = objIniFile.GetString("General", "ARHIVATOR", "0")
@@ -309,7 +295,6 @@ Public Class frmSetup
 
 
         End Select
-
 
 
         uname = objIniFile.GetString("General", "RAZDEL", "0")
@@ -342,9 +327,6 @@ Public Class frmSetup
 
 
         End Select
-
-
-
 
 
         uname = objIniFile.GetString("General", "SYS", "0")
@@ -432,7 +414,6 @@ Public Class frmSetup
         End Select
 
 
-
         uname = objIniFile.GetString("General", "chkFonts", "0")
 
         Select Case uname
@@ -468,7 +449,6 @@ Public Class frmSetup
 
         ComboBox2.Text = objIniFile.GetString("General", "TechINF", "AIDA64(Everest)")
         sTechINF = ComboBox2.Text
-
 
 
         'If DB_N <> "MS Access" Then
@@ -511,10 +491,11 @@ Public Class frmSetup
         'End If
 
 
-        Dim rs As ADODB.Recordset
-        rs = New ADODB.Recordset
+        Dim rs As Recordset
+        rs = New Recordset
 
-        rs.Open("Select count(*) as t_n from CONFIGURE", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs.Open("Select count(*) as t_n from CONFIGURE", DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
 
         Dim us As String
         With rs
@@ -524,8 +505,8 @@ Public Class frmSetup
         rs = Nothing
 
         If us > 0 Then
-            rs = New ADODB.Recordset
-            rs.Open("Select * from CONFIGURE", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rs = New Recordset
+            rs.Open("Select * from CONFIGURE", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
             With rs
 
                 If Not IsDBNull(.Fields("SISADM").Value) Then txtSA.Text = .Fields("SISADM").Value
@@ -549,7 +530,7 @@ Public Class frmSetup
         'lvFindDB
     End Sub
 
-    Private Sub chkSNPro_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkSNPro.CheckedChanged
+    Private Sub chkSNPro_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chkSNPro.CheckedChanged
 
         Dim objIniFile As New IniFile(PrPath & "base.ini")
 
@@ -566,7 +547,8 @@ Public Class frmSetup
         End Select
     End Sub
 
-    Private Sub chkSheduler_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkSheduler.CheckedChanged
+    Private Sub chkSheduler_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles chkSheduler.CheckedChanged
 
         Dim objIniFile As New IniFile(PrPath & "base.ini")
 
@@ -583,10 +565,10 @@ Public Class frmSetup
         End Select
 
         Call SHED_CHECK()
-
     End Sub
 
-    Private Sub chkMenuServices_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkMenuServices.CheckedChanged
+    Private Sub chkMenuServices_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles chkMenuServices.CheckedChanged
 
         Dim objIniFile As New IniFile(PrPath & "base.ini")
 
@@ -609,33 +591,36 @@ Public Class frmSetup
         End Select
     End Sub
 
-    Private Sub RadioButton1_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton1.CheckedChanged
+    Private Sub RadioButton1_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles RadioButton1.CheckedChanged
 
         Dim objIniFile As New IniFile(PrPath & "base.ini")
         objIniFile.WriteString("General", "NETNAME", "1")
-
     End Sub
 
-    Private Sub RadioButton2_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton2.CheckedChanged
+    Private Sub RadioButton2_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles RadioButton2.CheckedChanged
         Dim objIniFile As New IniFile(PrPath & "base.ini")
         objIniFile.WriteString("General", "NETNAME", "2")
     End Sub
 
-    Private Sub RadioButton3_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton3.CheckedChanged
+    Private Sub RadioButton3_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles RadioButton3.CheckedChanged
         Dim objIniFile As New IniFile(PrPath & "base.ini")
         objIniFile.WriteString("General", "NETNAME", "0")
     End Sub
 
-    Private Sub cmbOffice_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbOffice.SelectedIndexChanged
+    Private Sub cmbOffice_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbOffice.SelectedIndexChanged
 
         Dim objIniFile As New IniFile(PrPath & "base.ini")
         objIniFile.WriteString("General", "Office", cmbOffice.Text)
 
         sOfficePACK = cmbOffice.Text
-
     End Sub
 
-    Private Sub cmbSortTree_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbSortTree.SelectedIndexChanged
+    Private Sub cmbSortTree_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbSortTree.SelectedIndexChanged
         Dim objIniFile As New IniFile(PrPath & "base.ini")
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
@@ -645,24 +630,22 @@ Public Class frmSetup
         If cmbSortTree.Text = LNGIniFile.GetString("frmSetup", "MSG2", "По типу техники") Then sText = 1
 
         objIniFile.WriteString("general", "Tree_S", sText)
-
     End Sub
 
-    Private Sub frmSetup_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Resize
+    Private Sub frmSetup_Resize(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Resize
         'lvFindDB
 
         SStab1.Width = Me.Width
         SStab1.Height = Me.Height
         ' lvFindDB.Width = SStab1.Width - 5
         gbUsers.Width = SStab1.Width - 5
-
     End Sub
 
     'Private Sub lvFindDB_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvFindDB.Click
     '    sFILEBD = lvFindDB.Items.Item(lvFindDB.FocusedItem.Index).SubItems(1).Text
     'End Sub
 
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub Button1_Click(ByVal sender As Object, ByVal e As EventArgs)
 
         'lvFindDB
 
@@ -683,10 +666,10 @@ Public Class frmSetup
         Call SHED_CHECK()
         Call REM_CHECK()
 
-        Dim rsG As ADODB.Recordset
-        rsG = New ADODB.Recordset
+        Dim rsG As Recordset
+        rsG = New Recordset
 
-        rsG.Open("SELECT * FROM CONFIGURE", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rsG.Open("SELECT * FROM CONFIGURE", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rsG
             If Not IsDBNull(.Fields("Name_Prog").Value) Then ProGramName = .Fields("Name_Prog").Value
@@ -695,28 +678,25 @@ Public Class frmSetup
         rsG = Nothing
 
         Dim LNGIniFile As New IniFile(sLANGPATH)
-        If Len(ProGramName) = 0 Or ProGramName = Nothing Then ProGramName = LNGIniFile.GetString("frmSetup", "MSG7", "БКО") '"БКО"
+        If Len(ProGramName) = 0 Or ProGramName = Nothing Then _
+            ProGramName = LNGIniFile.GetString("frmSetup", "MSG7", "БКО") '"БКО"
 
-        frmMain.Text = ProGramName & " " & My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor & "." & My.Application.Info.Version.Build & "." & My.Application.Info.Version.Revision
-
-
+        frmMain.Text = ProGramName & " " & My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor &
+                       "." & My.Application.Info.Version.Build & "." & My.Application.Info.Version.Revision
 
 
         Me.Cursor = Cursors.Default
         Me.Close()
-
     End Sub
 
-    Private Sub lvPrUsers_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvPrUsers.Click
+    Private Sub lvPrUsers_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lvPrUsers.Click
 
         Call USER_CLICK_LOAD()
-
     End Sub
 
-    Private Sub lvPrUsers_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvPrUsers.DoubleClick
+    Private Sub lvPrUsers_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles lvPrUsers.DoubleClick
 
         Call USER_CLICK_LOAD()
-
     End Sub
 
     Private Sub USER_CLICK_LOAD()
@@ -731,13 +711,13 @@ Public Class frmSetup
         Next
 
         Dim sSQL As String
-        Dim rs1 As ADODB.Recordset
-        rs1 = New ADODB.Recordset
+        Dim rs1 As Recordset
+        rs1 = New Recordset
 
         uEDT = True
 
         sSQL = "SELECT * FROM T_User WHERE id=" & uCOUNTs
-        rs1.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
 
         With rs1
@@ -831,26 +811,27 @@ Public Class frmSetup
             End If
 
 
-
         End With
 
         rs1.Close()
         rs1 = Nothing
     End Sub
 
-    Private Sub SplitContainer1_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles SplitContainer1.Resize
+    Private Sub SplitContainer1_Resize(ByVal sender As Object, ByVal e As EventArgs) Handles SplitContainer1.Resize
         Call RESIZER()
     End Sub
 
-    Private Sub SplitContainer1_SplitterMoved(ByVal sender As System.Object, ByVal e As System.Windows.Forms.SplitterEventArgs) Handles SplitContainer1.SplitterMoved
+    Private Sub SplitContainer1_SplitterMoved(ByVal sender As Object, ByVal e As SplitterEventArgs) _
+        Handles SplitContainer1.SplitterMoved
         Call RESIZER()
     End Sub
 
-    Private Sub SplitContainer1_SplitterMoving(ByVal sender As Object, ByVal e As System.Windows.Forms.SplitterCancelEventArgs) Handles SplitContainer1.SplitterMoving
+    Private Sub SplitContainer1_SplitterMoving(ByVal sender As Object, ByVal e As SplitterCancelEventArgs) _
+        Handles SplitContainer1.SplitterMoving
         Call RESIZER()
     End Sub
 
-    Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
+    Private Sub btnCancel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCancel.Click
         Call sUSER_CLEAR()
     End Sub
 
@@ -880,7 +861,8 @@ Public Class frmSetup
         txtRetipePassword.PasswordChar = "*"
     End Sub
 
-    Private Sub cmbLevel_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbLevel.SelectedIndexChanged
+    Private Sub cmbLevel_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbLevel.SelectedIndexChanged
 
         If cmbLevel.Text = "User" Then
             gbUserLevel.Visible = True
@@ -889,12 +871,9 @@ Public Class frmSetup
             gbUserLevel.Visible = False
             SplitContainer1.Panel2Collapsed = True
         End If
-
-
-
     End Sub
 
-    Private Sub btnEnc_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEnc.Click
+    Private Sub btnEnc_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnEnc.Click
         txtPassword.PasswordChar = ""
         txtRetipePassword.PasswordChar = ""
 
@@ -908,14 +887,15 @@ Public Class frmSetup
         txtRetipePassword.Text = Temp$
     End Sub
 
-    Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
+    Private Sub btnAdd_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAdd.Click
 
         Dim LNGIniFile As New IniFile(sLANGPATH)
         'If Len(ProGramName) = 0 Or ProGramName = Nothing Then ProGramName = LNGIniFile.GetString("frmSetup", "MSG7", "БКО") '"БКО"
 
 
         If txtRetipePassword.Text <> txtPassword.Text Then
-            MsgBox(LNGIniFile.GetString("frmSetup", "MSG8", "Не соответсвие паролей"), MsgBoxStyle.Exclamation, ProGramName)
+            MsgBox(LNGIniFile.GetString("frmSetup", "MSG8", "Не соответсвие паролей"), MsgBoxStyle.Exclamation,
+                   ProGramName)
             txtPassword.Focus()
             Exit Sub
         End If
@@ -925,9 +905,10 @@ Public Class frmSetup
 
         If uEDT = True Then
 
-            Dim USERCOMP As ADODB.Recordset
-            USERCOMP = New ADODB.Recordset
-            USERCOMP.Open("SELECT * FROM T_User WHERE id =" & uCOUNTs, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            Dim USERCOMP As Recordset
+            USERCOMP = New Recordset
+            USERCOMP.Open("SELECT * FROM T_User WHERE id =" & uCOUNTs, DB7, CursorTypeEnum.adOpenDynamic,
+                          LockTypeEnum.adLockOptimistic)
 
             With USERCOMP
                 If Not IsDBNull(.Fields("PASSWORD")) Then Us1 = .Fields("PASSWORD").Value
@@ -938,8 +919,8 @@ Public Class frmSetup
         End If
 
 
-        Dim rs As ADODB.Recordset
-        rs = New ADODB.Recordset
+        Dim rs As Recordset
+        rs = New Recordset
         Dim sSQL As String
 
         If uEDT = True Then
@@ -949,7 +930,7 @@ Public Class frmSetup
             sSQL = "SELECT * FROM T_User"
         End If
 
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
             If uEDT = True Then
@@ -1005,19 +986,21 @@ Public Class frmSetup
         Call USER_LIST()
     End Sub
 
-    Private Sub btnDel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDel.Click
+    Private Sub btnDel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnDel.Click
 
         If uCOUNTs = 0 Then Exit Sub
 
-        Dim rs1 As ADODB.Recordset
-        rs1 = New ADODB.Recordset
-        rs1.Open("Delete FROM T_User WHERE id=" & uCOUNTs, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        Dim rs1 As Recordset
+        rs1 = New Recordset
+        rs1.Open("Delete FROM T_User WHERE id=" & uCOUNTs, DB7, CursorTypeEnum.adOpenDynamic,
+                 LockTypeEnum.adLockOptimistic)
         rs1 = Nothing
         Call USER_LIST()
         Call sUSER_CLEAR()
     End Sub
 
-    Private Sub cmbDefaultModul_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbDefaultModul.SelectedIndexChanged
+    Private Sub cmbDefaultModul_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbDefaultModul.SelectedIndexChanged
         Dim objIniFile As New IniFile(PrPath & "base.ini")
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
@@ -1029,18 +1012,17 @@ Public Class frmSetup
         If cmbDefaultModul.Text = LNGIniFile.GetString("frmSetup", "MSG6", "Учёт картриджей") Then sText = 3
 
         objIniFile.WriteString("general", "MOD", sText)
-
-
     End Sub
 
-    Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
+    Private Sub btnSave_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSave.Click
 
         On Error GoTo err_
 
-        Dim rs As ADODB.Recordset
-        rs = New ADODB.Recordset
+        Dim rs As Recordset
+        rs = New Recordset
 
-        rs.Open("Select count(*) as t_n from CONFIGURE", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs.Open("Select count(*) as t_n from CONFIGURE", DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
 
         Dim us As String
         With rs
@@ -1049,8 +1031,8 @@ Public Class frmSetup
         rs.Close()
         rs = Nothing
 
-        rs = New ADODB.Recordset
-        rs.Open("Select * from CONFIGURE", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open("Select * from CONFIGURE", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
         With rs
             If us > 0 Then
 
@@ -1072,16 +1054,15 @@ Public Class frmSetup
 
 
         Exit Sub
-err_:
+        err_:
         MsgBox(Err.Description)
-
     End Sub
 
-    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
+    Private Sub Button2_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Button2.Click
 
 
-        Dim dlgFont As System.Windows.Forms.FontDialog
-        dlgFont = New System.Windows.Forms.FontDialog
+        Dim dlgFont As FontDialog
+        dlgFont = New FontDialog
 
 
         Label9.Font = changeFont(dlgFont, Label9)
@@ -1110,11 +1091,10 @@ err_:
         'End If
 
         'Call SendFonts(Me)
-
-
     End Sub
 
-    Private Sub RadioButton6_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton6.CheckedChanged
+    Private Sub RadioButton6_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles RadioButton6.CheckedChanged
 
         If RadioButton6.Checked = True Then RAZDEL = 0
 
@@ -1123,12 +1103,14 @@ err_:
         objIniFile.WriteString("general", "RAZDEL", RAZDEL)
 
         Dim LNGIniFile As New IniFile(sLANGPATH)
-        frmComputers.ОтделитьПринтерыИМониторыToolStripMenuItem.Text = LNGIniFile.GetString("frmSetup", "MSG9", "Отделить периферию")
-        frmComputers.ВернутьПерефериюToolStripMenuItem.Text = LNGIniFile.GetString("frmSetup", "MSG9.1", "Присоеденить периферию")
-
+        frmComputers.ОтделитьПринтерыИМониторыToolStripMenuItem.Text = LNGIniFile.GetString("frmSetup", "MSG9",
+                                                                                            "Отделить периферию")
+        frmComputers.ВернутьПерефериюToolStripMenuItem.Text = LNGIniFile.GetString("frmSetup", "MSG9.1",
+                                                                                   "Присоеденить периферию")
     End Sub
 
-    Private Sub RadioButton5_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton5.CheckedChanged
+    Private Sub RadioButton5_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles RadioButton5.CheckedChanged
         If RadioButton5.Checked = True Then RAZDEL = 1
 
 
@@ -1137,11 +1119,15 @@ err_:
 
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
-        frmComputers.ОтделитьПринтерыИМониторыToolStripMenuItem.Text = LNGIniFile.GetString("frmSetup", "MSG10", "Отделить Мониторы") '"Отделить Мониторы"
-        frmComputers.ВернутьПерефериюToolStripMenuItem.Text = LNGIniFile.GetString("frmSetup", "MSG10.1", "Присоеденить Мониторы")
+        frmComputers.ОтделитьПринтерыИМониторыToolStripMenuItem.Text = LNGIniFile.GetString("frmSetup", "MSG10",
+                                                                                            "Отделить Мониторы") _
+        '"Отделить Мониторы"
+        frmComputers.ВернутьПерефериюToolStripMenuItem.Text = LNGIniFile.GetString("frmSetup", "MSG10.1",
+                                                                                   "Присоеденить Мониторы")
     End Sub
 
-    Private Sub RadioButton4_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton4.CheckedChanged
+    Private Sub RadioButton4_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles RadioButton4.CheckedChanged
 
         If RadioButton4.Checked = True Then RAZDEL = 2
 
@@ -1151,23 +1137,28 @@ err_:
 
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
-        frmComputers.ОтделитьПринтерыИМониторыToolStripMenuItem.Text = LNGIniFile.GetString("frmSetup", "MSG11", "Отделить принтеры")
-        frmComputers.ВернутьПерефериюToolStripMenuItem.Text = LNGIniFile.GetString("frmSetup", "MSG11.1", "Присоеденить принтеры")
-
+        frmComputers.ОтделитьПринтерыИМониторыToolStripMenuItem.Text = LNGIniFile.GetString("frmSetup", "MSG11",
+                                                                                            "Отделить принтеры")
+        frmComputers.ВернутьПерефериюToolStripMenuItem.Text = LNGIniFile.GetString("frmSetup", "MSG11.1",
+                                                                                   "Присоеденить принтеры")
     End Sub
 
-    Private Sub RadioButton7_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton7.CheckedChanged
+    Private Sub RadioButton7_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles RadioButton7.CheckedChanged
         If RadioButton7.Checked = True Then RAZDEL = 3
 
         Dim objIniFile As New IniFile(PrPath & "base.ini")
         objIniFile.WriteString("general", "RAZDEL", RAZDEL)
 
         Dim LNGIniFile As New IniFile(sLANGPATH)
-        frmComputers.ОтделитьПринтерыИМониторыToolStripMenuItem.Text = LNGIniFile.GetString("frmSetup", "MSG12", "Отделить ИБП")
-        frmComputers.ВернутьПерефериюToolStripMenuItem.Text = LNGIniFile.GetString("frmSetup", "MSG12.1", "Присоеденить ИБП")
+        frmComputers.ОтделитьПринтерыИМониторыToolStripMenuItem.Text = LNGIniFile.GetString("frmSetup", "MSG12",
+                                                                                            "Отделить ИБП")
+        frmComputers.ВернутьПерефериюToolStripMenuItem.Text = LNGIniFile.GetString("frmSetup", "MSG12.1",
+                                                                                   "Присоеденить ИБП")
     End Sub
 
-    Private Sub RadioButton8_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton8.CheckedChanged
+    Private Sub RadioButton8_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles RadioButton8.CheckedChanged
         If RadioButton8.Checked = True Then RAZDEL = 4
 
         Dim objIniFile As New IniFile(PrPath & "base.ini")
@@ -1176,11 +1167,14 @@ err_:
 
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
-        frmComputers.ОтделитьПринтерыИМониторыToolStripMenuItem.Text = LNGIniFile.GetString("frmSetup", "MSG13", "Отделить Клавиатуры и мыши")
-        frmComputers.ВернутьПерефериюToolStripMenuItem.Text = LNGIniFile.GetString("frmSetup", "MSG13.1", "Присоеденить Клавиатуры и мыши")
+        frmComputers.ОтделитьПринтерыИМониторыToolStripMenuItem.Text = LNGIniFile.GetString("frmSetup", "MSG13",
+                                                                                            "Отделить Клавиатуры и мыши")
+        frmComputers.ВернутьПерефериюToolStripMenuItem.Text = LNGIniFile.GetString("frmSetup", "MSG13.1",
+                                                                                   "Присоеденить Клавиатуры и мыши")
     End Sub
 
-    Private Sub RadioButton9_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton9.CheckedChanged
+    Private Sub RadioButton9_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles RadioButton9.CheckedChanged
         If RadioButton9.Checked = True Then RAZDEL = 5
 
         Dim objIniFile As New IniFile(PrPath & "base.ini")
@@ -1189,11 +1183,14 @@ err_:
 
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
-        frmComputers.ОтделитьПринтерыИМониторыToolStripMenuItem.Text = LNGIniFile.GetString("frmSetup", "MSG14", "Отделить сетевые фильтры")
-        frmComputers.ВернутьПерефериюToolStripMenuItem.Text = LNGIniFile.GetString("frmSetup", "MSG14.1", "Присоеденить сетевые фильтры")
+        frmComputers.ОтделитьПринтерыИМониторыToolStripMenuItem.Text = LNGIniFile.GetString("frmSetup", "MSG14",
+                                                                                            "Отделить сетевые фильтры")
+        frmComputers.ВернутьПерефериюToolStripMenuItem.Text = LNGIniFile.GetString("frmSetup", "MSG14.1",
+                                                                                   "Присоеденить сетевые фильтры")
     End Sub
 
-    Private Sub chkArhiv2exit_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkArhiv2exit.CheckedChanged
+    Private Sub chkArhiv2exit_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles chkArhiv2exit.CheckedChanged
         Dim objIniFile As New IniFile(PrPath & "base.ini")
 
         Select Case chkArhiv2exit.Checked
@@ -1208,11 +1205,10 @@ err_:
                 objIniFile.WriteString("General", "ARHIVATOR", "1")
 
 
-
         End Select
     End Sub
 
-    Private Sub chkVSUst_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkVSUst.CheckedChanged
+    Private Sub chkVSUst_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chkVSUst.CheckedChanged
         Dim objIniFile As New IniFile(PrPath & "base.ini")
 
         Select Case chkVSUst.Checked
@@ -1225,11 +1221,9 @@ err_:
 
                 objIniFile.WriteString("MYBLANK", "VSU", "1")
         End Select
-
-
     End Sub
 
-    Private Sub chkPOu_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkPOu.CheckedChanged
+    Private Sub chkPOu_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chkPOu.CheckedChanged
 
         Dim objIniFile As New IniFile(PrPath & "base.ini")
 
@@ -1243,10 +1237,9 @@ err_:
 
                 objIniFile.WriteString("MYBLANK", "POu", "1")
         End Select
-
     End Sub
 
-    Private Sub chkREMONT_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkREMONT.CheckedChanged
+    Private Sub chkREMONT_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chkREMONT.CheckedChanged
 
         Dim objIniFile As New IniFile(PrPath & "base.ini")
 
@@ -1260,11 +1253,9 @@ err_:
 
                 objIniFile.WriteString("MYBLANK", "REMONT", "1")
         End Select
-
-
     End Sub
 
-    Private Sub chkDVIG_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkDVIG.CheckedChanged
+    Private Sub chkDVIG_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chkDVIG.CheckedChanged
 
         Dim objIniFile As New IniFile(PrPath & "base.ini")
 
@@ -1278,11 +1269,10 @@ err_:
 
                 objIniFile.WriteString("MYBLANK", "DVIG", "1")
         End Select
-
-
     End Sub
 
-    Private Sub chk_no_log_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chk_no_log.CheckedChanged
+    Private Sub chk_no_log_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles chk_no_log.CheckedChanged
 
         Dim objIniFile As New IniFile(PrPath & "base.ini")
 
@@ -1297,13 +1287,12 @@ err_:
                 objIniFile.WriteString("General", "LOG", "1")
 
         End Select
-
     End Sub
 
-    Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
+    Private Sub Button3_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Button3.Click
 
-        Dim dlgColor As System.Windows.Forms.ColorDialog
-        dlgColor = New System.Windows.Forms.ColorDialog
+        Dim dlgColor As ColorDialog
+        dlgColor = New ColorDialog
         Label9.ForeColor = changeColor(dlgColor, Label9)
 
         FontC = Label9.ForeColor.Name
@@ -1313,7 +1302,6 @@ err_:
         objIniFile.WriteString("general", "FontColor", FontC)
 
         Call FONT_LOAD(Me)
-
     End Sub
 
     Public Function changeColor(ByVal FontWindow As ColorDialog, ByVal str As Control)
@@ -1324,15 +1312,13 @@ err_:
 
         DialogResult = FontWindow.ShowDialog
 
-        If DialogResult = System.Windows.Forms.DialogResult.OK Then
+        If DialogResult = DialogResult.OK Then
             Return FontWindow.Color
 
         Else
             Return PrevisiusColor
 
         End If
-
-
     End Function
 
     Private Sub FONT_LOAD(ByVal ControlContainer As Object)
@@ -1377,7 +1363,6 @@ err_:
         Next
 
 
-
         Call COLOR_LOAD(Me)
     End Sub
 
@@ -1389,50 +1374,41 @@ err_:
         'lvPrUsers.ForeColor = Drawing.Color.FromName(FontC)
 
 
-
-
-
-
         For Each C As Object In ControlContainer.Controls
             Try
                 If Not C.Controls Is Nothing Then
                     COLOR_LOAD(C)
-                    If TypeOf C Is Form Then C.ForeColor = Drawing.Color.FromName(FontC)
+                    If TypeOf C Is Form Then C.ForeColor = Color.FromName(FontC)
                     'If TypeOf C Is TabControl Then C.TabPage.ForeColor = Drawing.Color.FromName(FontC)
-                    If TypeOf C Is TableLayoutPanel Then C.ForeColor = Drawing.Color.FromName(FontC)
-                    If TypeOf C Is GroupBox Then C.ForeColor = Drawing.Color.FromName(FontC)
-                    If TypeOf C Is Label Then C.ForeColor = Drawing.Color.FromName(FontC)
-                    If TypeOf C Is CheckBox Then C.ForeColor = Drawing.Color.FromName(FontC)
-                    If TypeOf C Is RadioButton Then C.ForeColor = Drawing.Color.FromName(FontC)
-                    If TypeOf C Is TextBox Then C.ForeColor = Drawing.Color.FromName(FontC)
-                    If TypeOf C Is ComboBox Then C.ForeColor = Drawing.Color.FromName(FontC)
-                    If TypeOf C Is ListView Then C.ForeColor = Drawing.Color.FromName(FontC)
+                    If TypeOf C Is TableLayoutPanel Then C.ForeColor = Color.FromName(FontC)
+                    If TypeOf C Is GroupBox Then C.ForeColor = Color.FromName(FontC)
+                    If TypeOf C Is Label Then C.ForeColor = Color.FromName(FontC)
+                    If TypeOf C Is CheckBox Then C.ForeColor = Color.FromName(FontC)
+                    If TypeOf C Is RadioButton Then C.ForeColor = Color.FromName(FontC)
+                    If TypeOf C Is TextBox Then C.ForeColor = Color.FromName(FontC)
+                    If TypeOf C Is ComboBox Then C.ForeColor = Color.FromName(FontC)
+                    If TypeOf C Is ListView Then C.ForeColor = Color.FromName(FontC)
                 End If
 
             Catch ex As Exception
                 MsgBox(ex.Message)
             End Try
         Next
-
-
-
-
-
     End Sub
 
 
-    Private Sub ComboBox1_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ComboBox1.SelectedIndexChanged
+    Private Sub ComboBox1_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles ComboBox1.SelectedIndexChanged
 
 
         Dim objIniFile As New IniFile(PrPath & "base.ini")
         objIniFile.WriteString("general", "ICONs", ComboBox1.Text)
 
         sICONS = ComboBox1.Text
-
-
     End Sub
 
-    Private Sub chkFullScreen_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkFullScreen.CheckedChanged
+    Private Sub chkFullScreen_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles chkFullScreen.CheckedChanged
         Dim objIniFile As New IniFile(PrPath & "base.ini")
 
         Select Case chkFullScreen.Checked
@@ -1448,17 +1424,17 @@ err_:
         End Select
     End Sub
 
-    Private Sub Button4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button4.Click
+    Private Sub Button4_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Button4.Click
         Me.Cursor = Cursors.WaitCursor
         add_kabn_if_nothing()
         Me.Cursor = Cursors.Default
     End Sub
 
-    Private Sub TableLayoutPanel4_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles TableLayoutPanel4.Paint
-
+    Private Sub TableLayoutPanel4_Paint(ByVal sender As Object, ByVal e As PaintEventArgs) _
+        Handles TableLayoutPanel4.Paint
     End Sub
 
-    Private Sub chkFonts_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkFonts.CheckedChanged
+    Private Sub chkFonts_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chkFonts.CheckedChanged
         Dim objIniFile As New IniFile(PrPath & "base.ini")
 
         Select Case chkFonts.Checked
@@ -1478,7 +1454,7 @@ err_:
         End Select
     End Sub
 
-    Private Sub ComboBox2_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles ComboBox2.SelectedIndexChanged
+    Private Sub ComboBox2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox2.SelectedIndexChanged
 
         Dim objIniFile As New IniFile(PrPath & "base.ini")
         objIniFile.WriteString("General", "TechINF", ComboBox2.Text)
@@ -1486,7 +1462,6 @@ err_:
         sTechINF = ComboBox2.Text
     End Sub
 
-    Private Sub chkUpdate_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles chkUpdate.CheckedChanged
-
+    Private Sub chkUpdate_CheckedChanged(sender As Object, e As EventArgs) Handles chkUpdate.CheckedChanged
     End Sub
 End Class

@@ -1,5 +1,4 @@
 ﻿Module MOD_EVEREST_LOAD
-
     Public Sub Everest_Load()
         On Error Resume Next
 
@@ -41,28 +40,38 @@
 
         '################
         'Материнка
-        frmComputers.cmbMB.Text = everIniFile.GetString("Системная плата", "Свойства системной платы|Системная плата", "")
-        frmComputers.txtChip.Text = everIniFile.GetString("Чипсет", "Свойства набора микросхем (чипсета)|Чипсет системной платы", "")
+        frmComputers.cmbMB.Text = everIniFile.GetString("Системная плата", "Свойства системной платы|Системная плата",
+                                                        "")
+        frmComputers.txtChip.Text = everIniFile.GetString("Чипсет",
+                                                          "Свойства набора микросхем (чипсета)|Чипсет системной платы",
+                                                          "")
         If Len(frmComputers.txtChip.Text) = 0 Then
-            frmComputers.txtChip.Text = everIniFile.GetString("Суммарная информация", "Системная плата|Чипсет системной платы", "")
+            frmComputers.txtChip.Text = everIniFile.GetString("Суммарная информация",
+                                                              "Системная плата|Чипсет системной платы", "")
         End If
 
-        frmComputers.txtSN_MB.Text = everIniFile.GetString("Суммарная информация", "DMI|DMI серийный номер системной платы", "")
+        frmComputers.txtSN_MB.Text = everIniFile.GetString("Суммарная информация",
+                                                           "DMI|DMI серийный номер системной платы", "")
 
         If Len(frmComputers.txtSN_MB.Text) = 0 Then
-            frmComputers.txtSN_MB.Text = everIniFile.GetString("DMI", "Системная плата|Свойства системной платы|Серийный номер", "")
+            frmComputers.txtSN_MB.Text = everIniFile.GetString("DMI",
+                                                               "Системная плата|Свойства системной платы|Серийный номер",
+                                                               "")
         Else
         End If
 
         frmComputers.PROizV5.Text = everIniFile.GetString("Системная плата", "Производитель системной платы|Фирма", "")
 
         If Len(frmComputers.PROizV5.Text) = 0 Then
-            frmComputers.PROizV5.Text = everIniFile.GetString("DMI", "Системная плата|Свойства системной платы|Производитель", "")
+            frmComputers.PROizV5.Text = everIniFile.GetString("DMI",
+                                                              "Системная плата|Свойства системной платы|Производитель",
+                                                              "")
         Else
         End If
 
         If Len(frmComputers.cmbMB.Text) = 0 Then
-            frmComputers.cmbMB.Text = everIniFile.GetString("Суммарная информация", "Системная плата|Системная плата", "")
+            frmComputers.cmbMB.Text = everIniFile.GetString("Суммарная информация", "Системная плата|Системная плата",
+                                                            "")
         Else
         End If
 
@@ -152,11 +161,9 @@
 
 
         If Len(frmComputers.cmbRAM1.Text) = 0 Then
-            frmComputers.cmbRAM1.Text = everIniFile.GetString("Суммарная информация", "Системная плата|Системная память", "")
+            frmComputers.cmbRAM1.Text = everIniFile.GetString("Суммарная информация", "Системная плата|Системная память",
+                                                              "")
         End If
-
-
-
 
 
         'Устройства памяти1|Свойства устройства памяти|Размер
@@ -166,12 +173,14 @@
         Dim uname, nom_pos1, nom_pos2, ob_lenght, ob1, ob_rez As String
 
         frmComputers.cmbHDD1.Text = everIniFile.GetString("ATA", "ATA1|Свойства устройства ATA|ID модели", "")
-        frmComputers.txtHDDo1.Text = everIniFile.GetString("ATA", "ATA1|Физические данные устройства ATA|Форматированная ёмкость", "")
+        frmComputers.txtHDDo1.Text = everIniFile.GetString("ATA",
+                                                           "ATA1|Физические данные устройства ATA|Форматированная ёмкость",
+                                                           "")
         If Len(frmComputers.txtHDDo1.Text) = 0 Then
             uname = everIniFile.GetString("ATA", "ATA1|Свойства устройства ATA|Неформатированная ёмкость", "")
 
             uname = Left(uname, Len(uname) - 3)
-            uname = CInt(uname / 1024) & " Gb"
+            uname = CInt(uname/1024) & " Gb"
             frmComputers.txtHDDo1.Text = uname
         End If
 
@@ -180,47 +189,65 @@
 
         '2
         frmComputers.cmbHDD2.Text = everIniFile.GetString("ATA", "ATA2|Свойства устройства ATA|ID модели", "")
-        frmComputers.txtHDDo2.Text = everIniFile.GetString("ATA", "ATA2|Физические данные устройства ATA|Форматированная ёмкость", "")
+        frmComputers.txtHDDo2.Text = everIniFile.GetString("ATA",
+                                                           "ATA2|Физические данные устройства ATA|Форматированная ёмкость",
+                                                           "")
         frmComputers.txtHDDsN2.Text = everIniFile.GetString("ATA", "ATA2|Свойства устройства ATA|Серийный номер", "")
         frmComputers.PROizV11.Text = everIniFile.GetString("ATA", "ATA2|Производитель ATA-устройства|Фирма", "")
 
         '3
         frmComputers.cmbHDD3.Text = everIniFile.GetString("ATA", "ATA3|Свойства устройства ATA|ID модели", "")
-        frmComputers.txtHDDsN3.Text = everIniFile.GetString("ATA", "ATA3|Физические данные устройства ATA|Форматированная ёмкость", "")
+        frmComputers.txtHDDsN3.Text = everIniFile.GetString("ATA",
+                                                            "ATA3|Физические данные устройства ATA|Форматированная ёмкость",
+                                                            "")
         frmComputers.txtHDDsN3.Text = everIniFile.GetString("ATA", "ATA3|Свойства устройства ATA|Серийный номер", "")
         frmComputers.PROizV12.Text = everIniFile.GetString("ATA", "ATA3|Производитель ATA-устройства|Фирма", "")
 
         '4
         frmComputers.cmbHDD4.Text = everIniFile.GetString("ATA", "ATA4|Свойства устройства ATA|ID модели", "")
-        frmComputers.txtHDDo4.Text = everIniFile.GetString("ATA", "ATA4|Физические данные устройства ATA|Форматированная ёмкость", "")
+        frmComputers.txtHDDo4.Text = everIniFile.GetString("ATA",
+                                                           "ATA4|Физические данные устройства ATA|Форматированная ёмкость",
+                                                           "")
         frmComputers.txtHDDsN4.Text = everIniFile.GetString("ATA", "ATA4|Свойства устройства ATA|Серийный номер", "")
         frmComputers.PROizV13.Text = everIniFile.GetString("ATA", "ATA4|Производитель ATA-устройства|Фирма", "")
 
         frmComputers.cmbHDD5.Text = everIniFile.GetString("ATA", "ATA5|Свойства устройства ATA|ID модели", "")
-        frmComputers.txtHDDo5.Text = everIniFile.GetString("ATA", "ATA5|Физические данные устройства ATA|Форматированная ёмкость", "")
+        frmComputers.txtHDDo5.Text = everIniFile.GetString("ATA",
+                                                           "ATA5|Физические данные устройства ATA|Форматированная ёмкость",
+                                                           "")
         frmComputers.txtHDDsN5.Text = everIniFile.GetString("ATA", "ATA5|Свойства устройства ATA|Серийный номер", "")
         frmComputers.PROizV48.Text = everIniFile.GetString("ATA", "ATA5|Производитель ATA-устройства|Фирма", "")
 
         frmComputers.cmbHDD6.Text = everIniFile.GetString("ATA", "ATA6|Свойства устройства ATA|ID модели", "")
-        frmComputers.txtHDDo6.Text = everIniFile.GetString("ATA", "ATA6|Физические данные устройства ATA|Форматированная ёмкость", "")
+        frmComputers.txtHDDo6.Text = everIniFile.GetString("ATA",
+                                                           "ATA6|Физические данные устройства ATA|Форматированная ёмкость",
+                                                           "")
         frmComputers.txtHDDsN6.Text = everIniFile.GetString("ATA", "ATA6|Свойства устройства ATA|Серийный номер", "")
         frmComputers.PROizV49.Text = everIniFile.GetString("ATA", "ATA6|Производитель ATA-устройства|Фирма", "")
 
         frmComputers.cmbHDD7.Text = everIniFile.GetString("ATA", "ATA7|Свойства устройства ATA|ID модели", "")
-        frmComputers.txtHDDo7.Text = everIniFile.GetString("ATA", "ATA7|Физические данные устройства ATA|Форматированная ёмкость", "")
+        frmComputers.txtHDDo7.Text = everIniFile.GetString("ATA",
+                                                           "ATA7|Физические данные устройства ATA|Форматированная ёмкость",
+                                                           "")
         frmComputers.txtHDDsN7.Text = everIniFile.GetString("ATA", "ATA7|Свойства устройства ATA|Серийный номер", "")
         frmComputers.PROizV50.Text = everIniFile.GetString("ATA", "ATA7|Производитель ATA-устройства|Фирма", "")
 
         frmComputers.cmbHDD8.Text = everIniFile.GetString("ATA", "ATA8|Свойства устройства ATA|ID модели", "")
-        frmComputers.txtHDDo8.Text = everIniFile.GetString("ATA", "ATA8|Физические данные устройства ATA|Форматированная ёмкость", "")
+        frmComputers.txtHDDo8.Text = everIniFile.GetString("ATA",
+                                                           "ATA8|Физические данные устройства ATA|Форматированная ёмкость",
+                                                           "")
         frmComputers.txtHDDsN8.Text = everIniFile.GetString("ATA", "ATA8|Свойства устройства ATA|Серийный номер", "")
         frmComputers.PROizV51.Text = everIniFile.GetString("ATA", "ATA8|Производитель ATA-устройства|Фирма", "")
 
         '------------------
         If Len(frmComputers.cmbHDD1.Text) = 0 Or frmComputers.cmbHDD1.Text = "IOMEGA ZIP 100" Then
 
-            frmComputers.cmbHDD1.Text = everIniFile.GetString("EIDE", "EIDE1|Физические данные устройства EIDE|Название жёсткого диска", "")
-            frmComputers.txtHDDo1.Text = everIniFile.GetString("EIDE", "EIDE1|Физические данные устройства EIDE|Форматированная ёмкость", "")
+            frmComputers.cmbHDD1.Text = everIniFile.GetString("EIDE",
+                                                              "EIDE1|Физические данные устройства EIDE|Название жёсткого диска",
+                                                              "")
+            frmComputers.txtHDDo1.Text = everIniFile.GetString("EIDE",
+                                                               "EIDE1|Физические данные устройства EIDE|Форматированная ёмкость",
+                                                               "")
             frmComputers.PROizV10.Text = everIniFile.GetString("EIDE", "EIDE1|Производитель EIDE-устройства|Фирма", "")
 
         End If
@@ -228,19 +255,30 @@
 
         If Len(frmComputers.cmbHDD1.Text) = 0 Or frmComputers.cmbHDD1.Text = "IOMEGA ZIP 100" Then
             'Винт
-            frmComputers.cmbHDD1.Text = everIniFile.GetString("Хранение данных Windows", "Хранение данных Windows2|Физические данные дискового накопителя|Название жёсткого диска", "")
-            frmComputers.txtHDDo1.Text = everIniFile.GetString("Хранение данных Windows", "Хранение данных Windows2|Физические данные дискового накопителя|Форматированная ёмкость", "")
-            frmComputers.PROizV10.Text = everIniFile.GetString("Хранение данных Windows", "Хранение данных Windows2|Производитель устройства|Фирма", "")
+            frmComputers.cmbHDD1.Text = everIniFile.GetString("Хранение данных Windows",
+                                                              "Хранение данных Windows2|Физические данные дискового накопителя|Название жёсткого диска",
+                                                              "")
+            frmComputers.txtHDDo1.Text = everIniFile.GetString("Хранение данных Windows",
+                                                               "Хранение данных Windows2|Физические данные дискового накопителя|Форматированная ёмкость",
+                                                               "")
+            frmComputers.PROizV10.Text = everIniFile.GetString("Хранение данных Windows",
+                                                               "Хранение данных Windows2|Производитель устройства|Фирма",
+                                                               "")
 
         End If
 
 
         If Len(frmComputers.cmbHDD1.Text) = 0 Or frmComputers.cmbHDD1.Text = "IOMEGA ZIP 100" Then
-            frmComputers.cmbHDD1.Text = everIniFile.GetString("Хранение данных Windows", "Хранение данных Windows1|Физические данные дискового накопителя|Название жёсткого диска", "")
-            frmComputers.txtHDDo1.Text = everIniFile.GetString("Хранение данных Windows", "Хранение данных Windows1|Физические данные дискового накопителя|Форматированная ёмкость", "")
-            frmComputers.PROizV10.Text = everIniFile.GetString("Хранение данных Windows", "Хранение данных Windows1|Производитель устройства|Фирма", "")
+            frmComputers.cmbHDD1.Text = everIniFile.GetString("Хранение данных Windows",
+                                                              "Хранение данных Windows1|Физические данные дискового накопителя|Название жёсткого диска",
+                                                              "")
+            frmComputers.txtHDDo1.Text = everIniFile.GetString("Хранение данных Windows",
+                                                               "Хранение данных Windows1|Физические данные дискового накопителя|Форматированная ёмкость",
+                                                               "")
+            frmComputers.PROizV10.Text = everIniFile.GetString("Хранение данных Windows",
+                                                               "Хранение данных Windows1|Производитель устройства|Фирма",
+                                                               "")
         End If
-
 
 
         'If Len(frmComputers.cmbHDD1.Text) = 0 Or frmComputers.cmbHDD1.Text = "IOMEGA ZIP 100" Then
@@ -250,9 +288,10 @@
         'End If
 
 
-
         If Len(frmComputers.PROizV10.Text) = 0 Then
-            frmComputers.PROizV10.Text = everIniFile.GetString("Хранение данных Windows", "Хранение данных Windows1|Производитель устройства|Фирма", "")
+            frmComputers.PROizV10.Text = everIniFile.GetString("Хранение данных Windows",
+                                                               "Хранение данных Windows1|Производитель устройства|Фирма",
+                                                               "")
         End If
 
 
@@ -267,12 +306,14 @@
             If Right(uname, 4) = "USB)" Then
 
             Else
-                frmComputers.cmbHDD1.Text = everIniFile.GetString("Суммарная информация", "Хранение данных|Дисковый накопитель1", "")
+                frmComputers.cmbHDD1.Text = everIniFile.GetString("Суммарная информация",
+                                                                  "Хранение данных|Дисковый накопитель1", "")
 
                 uname = everIniFile.GetString("Суммарная информация", "Разделы|Раздел1", "")
 
                 If Len(frmComputers.cmbHDD1.Text) = 0 Then
-                    frmComputers.cmbHDD1.Text = everIniFile.GetString("Суммарная информация", "Хранение данных|Дисковый накопитель", "")
+                    frmComputers.cmbHDD1.Text = everIniFile.GetString("Суммарная информация",
+                                                                      "Хранение данных|Дисковый накопитель", "")
 
                     uname = everIniFile.GetString("Суммарная информация", "Разделы|C: (FAT32)", "")
 
@@ -322,7 +363,7 @@
                 ob_rez = ob1 + ob2 + ob3
             Else
             End If
-            ob_Gb = CStr(ob_rez / 1000) & " Гб"
+            ob_Gb = CStr(ob_rez/1000) & " Гб"
             frmComputers.txtHDDo1.Text = ob_Gb
 
             uname = everIniFile.GetString("Суммарная информация", "Разделы|Общий объем", "")
@@ -332,7 +373,7 @@
                 ASqw = Left$(uname, 6)
             End If
 
-            ob_Gb = CStr(ASqw / 1000) & " Гб"
+            ob_Gb = CStr(ASqw/1000) & " Гб"
 
             If frmComputers.txtHDDo1.Text <> ob_Gb Then
                 frmComputers.txtHDDo1.Text = ob_Gb
@@ -344,16 +385,24 @@
 
         '##########################################################
         If Len(frmComputers.txtHDDo1.Text) = 0 Then
-            frmComputers.txtHDDo1.Text = everIniFile.GetString("ATA", "ATA1|Свойства устройства ATA|Неформатированная ёмкость", "")
+            frmComputers.txtHDDo1.Text = everIniFile.GetString("ATA",
+                                                               "ATA1|Свойства устройства ATA|Неформатированная ёмкость",
+                                                               "")
         End If
         If Len(frmComputers.txtHDDo2.Text) = 0 Then
-            frmComputers.txtHDDo2.Text = everIniFile.GetString("ATA", "ATA2|Свойства устройства ATA|Неформатированная ёмкость", "")
+            frmComputers.txtHDDo2.Text = everIniFile.GetString("ATA",
+                                                               "ATA2|Свойства устройства ATA|Неформатированная ёмкость",
+                                                               "")
         End If
         If Len(frmComputers.txtHDDsN3.Text) = 0 Then
-            frmComputers.txtHDDsN3.Text = everIniFile.GetString("ATA", "ATA3|Свойства устройства ATA|Неформатированная ёмкость", "")
+            frmComputers.txtHDDsN3.Text = everIniFile.GetString("ATA",
+                                                                "ATA3|Свойства устройства ATA|Неформатированная ёмкость",
+                                                                "")
         End If
         If Len(frmComputers.txtHDDsN4.Text) = 0 Then
-            frmComputers.txtHDDsN4.Text = everIniFile.GetString("ATA", "ATA4|Свойства устройства ATA|Неформатированная ёмкость", "")
+            frmComputers.txtHDDsN4.Text = everIniFile.GetString("ATA",
+                                                                "ATA4|Свойства устройства ATA|Неформатированная ёмкость",
+                                                                "")
         End If
 
         If Len(frmComputers.cmbHDD1.Text) = 0 Then
@@ -364,7 +413,8 @@
             Else
 
                 If Len(frmComputers.cmbHDD1.Text) = 0 Then
-                    frmComputers.cmbHDD1.Text = everIniFile.GetString("Суммарная информация", "Хранение данных|Дисковый накопитель1", "")
+                    frmComputers.cmbHDD1.Text = everIniFile.GetString("Суммарная информация",
+                                                                      "Хранение данных|Дисковый накопитель1", "")
                     'frmComputers.txtHDDo1.Text = everIniFile.GetString("Суммарная информация", "ATA1|Физические данные устройства ATA|Форматированная ёмкость", "")
                     'frmComputers.txtHDDsN1.Text = everIniFile.GetString("Суммарная информация", "ATA1|Свойства устройства ATA|Серийный номер", "")
                     'frmComputers.PROizV10.Text = everIniFile.GetString("Суммарная информация", "ATA1|Производитель ATA-устройства|Фирма", "")
@@ -372,48 +422,64 @@
             End If
 
             If Len(frmComputers.cmbHDD1.Text) = 0 Then
-                frmComputers.cmbHDD1.Text = everIniFile.GetString("Суммарная информация", "Хранение данных|Дисковый накопитель2", "")
-                frmComputers.cmbHDD2.Text = everIniFile.GetString("Суммарная информация", "Хранение данных|Дисковый накопитель3", "")
+                frmComputers.cmbHDD1.Text = everIniFile.GetString("Суммарная информация",
+                                                                  "Хранение данных|Дисковый накопитель2", "")
+                frmComputers.cmbHDD2.Text = everIniFile.GetString("Суммарная информация",
+                                                                  "Хранение данных|Дисковый накопитель3", "")
 
             End If
         End If
 
 
-
         If Len(frmComputers.txtHDDo1.Text) = 0 Or frmComputers.txtHDDo1.Text = "0 Гб" Then
-            frmComputers.cmbHDD1.Text = everIniFile.GetString("Хранение данных Windows", "Хранение данных Windows1|Физические данные дискового накопителя|Название жёсткого диска", "")
-            frmComputers.txtHDDo1.Text = everIniFile.GetString("Хранение данных Windows", "Хранение данных Windows1|Физические данные дискового накопителя|Форматированная ёмкость", "")
-            frmComputers.PROizV10.Text = everIniFile.GetString("Хранение данных Windows", "Хранение данных Windows1|Производитель устройства|Фирма", "")
+            frmComputers.cmbHDD1.Text = everIniFile.GetString("Хранение данных Windows",
+                                                              "Хранение данных Windows1|Физические данные дискового накопителя|Название жёсткого диска",
+                                                              "")
+            frmComputers.txtHDDo1.Text = everIniFile.GetString("Хранение данных Windows",
+                                                               "Хранение данных Windows1|Физические данные дискового накопителя|Форматированная ёмкость",
+                                                               "")
+            frmComputers.PROizV10.Text = everIniFile.GetString("Хранение данных Windows",
+                                                               "Хранение данных Windows1|Производитель устройства|Фирма",
+                                                               "")
         End If
 
 
         '################
         'SVGA
 
-        frmComputers.cmbSVGA1.Text = everIniFile.GetString("Видео Windows", "Видео Windows1|Свойства видеоадаптера|Описание устройства", "")
-        frmComputers.txtSVGAr1.Text = everIniFile.GetString("Видео Windows", "Видео Windows1|Свойства видеоадаптера|Объем видеоОЗУ", "")
+        frmComputers.cmbSVGA1.Text = everIniFile.GetString("Видео Windows",
+                                                           "Видео Windows1|Свойства видеоадаптера|Описание устройства",
+                                                           "")
+        frmComputers.txtSVGAr1.Text = everIniFile.GetString("Видео Windows",
+                                                            "Видео Windows1|Свойства видеоадаптера|Объем видеоОЗУ", "")
         'frmComputers.txtSVGAs1.Text = everIniFile.GetString("Видео Windows", "Номер видео карты", "")
-        frmComputers.PROizV14.Text = everIniFile.GetString("Видео Windows", "Видео Windows1|Производитель видеоадаптера|Фирма", "")
+        frmComputers.PROizV14.Text = everIniFile.GetString("Видео Windows",
+                                                           "Видео Windows1|Производитель видеоадаптера|Фирма", "")
 
         If Len(frmComputers.cmbSVGA1.Text) = 0 Then
             frmComputers.cmbSVGA1.Text = everIniFile.GetString("Суммарная информация", "Дисплей|Видеоадаптер1", "")
         End If
 
         If Len(frmComputers.cmbSVGA1.Text) = 0 Then
-            frmComputers.cmbSVGA1.Text = everIniFile.GetString("Графический процессор", "Свойства графического процессора|Видеоадаптер", "")
+            frmComputers.cmbSVGA1.Text = everIniFile.GetString("Графический процессор",
+                                                               "Свойства графического процессора|Видеоадаптер", "")
         End If
 
         If Len(frmComputers.PROizV14.Text) = 0 Then
-            frmComputers.PROizV14.Text = everIniFile.GetString("Графический процессор", "Производитель графического процессора|Фирма", "")
+            frmComputers.PROizV14.Text = everIniFile.GetString("Графический процессор",
+                                                               "Производитель графического процессора|Фирма", "")
         End If
 
         If Len(frmComputers.txtSVGAr1.Text) = 0 Then
-            frmComputers.txtSVGAr1.Text = everIniFile.GetString("Графический процессор", "Свойства графического процессора|Объем видеоОЗУ", "")
+            frmComputers.txtSVGAr1.Text = everIniFile.GetString("Графический процессор",
+                                                                "Свойства графического процессора|Объем видеоОЗУ", "")
         End If
 
         If Len(frmComputers.cmbSVGA1.Text) = 0 Then
             frmComputers.PROizV14.Text = " "
-            frmComputers.cmbSVGA1.Text = everIniFile.GetString("Устройства Windows", "Видеоадаптеры1|Свойства устройства|Описание драйвера", "")
+            frmComputers.cmbSVGA1.Text = everIniFile.GetString("Устройства Windows",
+                                                               "Видеоадаптеры1|Свойства устройства|Описание драйвера",
+                                                               "")
             frmComputers.txtSVGAr1.Text = " "
         End If
 
@@ -424,9 +490,9 @@
         'frmComputers.cmbSound.Text = Replace(frmComputers.cmbSound.Text, "'", " ", "")
 
 
-
         If Len(frmComputers.cmbSound.Text) = 0 Then
-            frmComputers.cmbSound.Text = everIniFile.GetString("Суммарная информация", "Мультимедиа|Звуковой адаптер1", "")
+            frmComputers.cmbSound.Text = everIniFile.GetString("Суммарная информация", "Мультимедиа|Звуковой адаптер1",
+                                                               "")
             'frmComputers.cmbSound.Text = Replace(frmComputers.cmbSound.Text, "'", " ", "")
         End If
 
@@ -452,7 +518,9 @@
             A = everIniFile.GetString("Оптические накопители", c, "")
             B = everIniFile.GetString("Оптические накопители", c & "|Свойства оптического накопителя|Тип устройства", "")
 
-            uname = everIniFile.GetString("Оптические накопители", "Оптические накопители1" & "|Свойства оптического накопителя|Описание устройства", "")
+            uname = everIniFile.GetString("Оптические накопители",
+                                          "Оптические накопители1" &
+                                          "|Свойства оптического накопителя|Описание устройства", "")
 
             If uname <> "Generic STEALTH DVD SCSI CdRom Device" Then
                 If uname <> "NERO IMAGEDRIVE2 SCSI CdRom Device" Then
@@ -460,8 +528,13 @@
                         If uname <> "RW8314B IMV135U SCSI CdRom Device" Then
 
                             frmComputers.cmbOPTIC1.Text = uname
-                            frmComputers.PROizV17.Text = everIniFile.GetString("Оптические накопители", "Оптические накопители1" & "|Производитель устройства|Фирма", "")
-                            frmComputers.txtOPTICs1.Text = everIniFile.GetString("Оптические накопители", "Оптические накопители1" & "|Свойства оптического накопителя|Скорость", "")
+                            frmComputers.PROizV17.Text = everIniFile.GetString("Оптические накопители",
+                                                                               "Оптические накопители1" &
+                                                                               "|Производитель устройства|Фирма", "")
+                            frmComputers.txtOPTICs1.Text = everIniFile.GetString("Оптические накопители",
+                                                                                 "Оптические накопители1" &
+                                                                                 "|Свойства оптического накопителя|Скорость",
+                                                                                 "")
                         Else
                             frmComputers.cmbOPTIC1.Text = ""
                             frmComputers.PROizV17.Text = ""
@@ -470,14 +543,21 @@
                     End If
                 End If
 
-                uname = everIniFile.GetString("Оптические накопители", "Оптические накопители2" & "|Свойства оптического накопителя|Описание устройства", "")
+                uname = everIniFile.GetString("Оптические накопители",
+                                              "Оптические накопители2" &
+                                              "|Свойства оптического накопителя|Описание устройства", "")
                 If uname <> "Generic STEALTH DVD SCSI CdRom Device" Then
                     If uname <> "NERO IMAGEDRIVE2 SCSI CdRom Device" Then
                         If uname <> "Generic DVD-ROM SCSI CdRom Device" Then
                             If uname <> "RW8314B IMV135U SCSI CdRom Device" Then
                                 frmComputers.cmbOPTIC2.Text = uname
-                                frmComputers.PROizV18.Text = everIniFile.GetString("Оптические накопители", "Оптические накопители2" & "|Производитель устройства|Фирма", "")
-                                frmComputers.txtOPTICs2.Text = everIniFile.GetString("Оптические накопители", "Оптические накопители2" & "|Свойства оптического накопителя|Скорость", "")
+                                frmComputers.PROizV18.Text = everIniFile.GetString("Оптические накопители",
+                                                                                   "Оптические накопители2" &
+                                                                                   "|Производитель устройства|Фирма", "")
+                                frmComputers.txtOPTICs2.Text = everIniFile.GetString("Оптические накопители",
+                                                                                     "Оптические накопители2" &
+                                                                                     "|Свойства оптического накопителя|Скорость",
+                                                                                     "")
                             Else
                                 frmComputers.cmbOPTIC2.Text = ""
                                 frmComputers.PROizV18.Text = ""
@@ -486,7 +566,9 @@
                         End If
                     End If
                 End If
-                uname = everIniFile.GetString("Оптические накопители", "Оптические накопители3" & "|Свойства оптического накопителя|Описание устройства", "")
+                uname = everIniFile.GetString("Оптические накопители",
+                                              "Оптические накопители3" &
+                                              "|Свойства оптического накопителя|Описание устройства", "")
                 If uname <> "Generic STEALTH DVD SCSI CdRom Device" Then
                     If uname <> "NERO IMAGEDRIVE2 SCSI CdRom Device" Then
                         If uname <> "Generic DVD-ROM SCSI CdRom Device" Then
@@ -496,8 +578,13 @@
 
 
                                 frmComputers.cmbOPTIC3.Text = uname
-                                frmComputers.PROizV19.Text = everIniFile.GetString("Оптические накопители", "Оптические накопители3" & "|Производитель устройства|Фирма", "")
-                                frmComputers.txtOPTICs3.Text = everIniFile.GetString("Оптические накопители", "Оптические накопители3" & "|Свойства оптического накопителя|Скорость", "")
+                                frmComputers.PROizV19.Text = everIniFile.GetString("Оптические накопители",
+                                                                                   "Оптические накопители3" &
+                                                                                   "|Производитель устройства|Фирма", "")
+                                frmComputers.txtOPTICs3.Text = everIniFile.GetString("Оптические накопители",
+                                                                                     "Оптические накопители3" &
+                                                                                     "|Свойства оптического накопителя|Скорость",
+                                                                                     "")
 
                             Else
                                 frmComputers.cmbOPTIC3.Text = ""
@@ -511,7 +598,9 @@
         Next
 
 
-        If Len(frmComputers.cmbOPTIC1.Text) = 0 And Len(frmComputers.cmbOPTIC2.Text) = 0 And Len(frmComputers.cmbOPTIC3.Text) = 0 Then
+        If _
+            Len(frmComputers.cmbOPTIC1.Text) = 0 And Len(frmComputers.cmbOPTIC2.Text) = 0 And
+            Len(frmComputers.cmbOPTIC3.Text) = 0 Then
 
             For intj = 1 To 2
                 c = "Оптические накопители"
@@ -543,13 +632,13 @@
             Next
         End If
 
-        If Len(frmComputers.cmbOPTIC2.Text) = 0 And Len(frmComputers.cmbOPTIC1.Text) = 0 And Len(frmComputers.cmbOPTIC3.Text) = 0 Then
+        If _
+            Len(frmComputers.cmbOPTIC2.Text) = 0 And Len(frmComputers.cmbOPTIC1.Text) = 0 And
+            Len(frmComputers.cmbOPTIC3.Text) = 0 Then
             A = everIniFile.GetString("Суммарная информация", "Хранение данных|Оптический накопитель1", "")
             frmComputers.cmbOPTIC2.Text = A
 
         End If
-
-
 
 
         '################
@@ -561,7 +650,6 @@
             cn = "Сеть Windows"
             cn = cn & intj
             If cn = "Сеть Windows1" Then
-
 
 
                 setik = everIniFile.GetString("Сеть Windows", cn & "|Свойства сетевого адаптера|Сетевой адаптер", "")
@@ -580,7 +668,8 @@
                     frmComputers.txtNETip1.Text = asa$
                     frmComputers.txtNETmac1.Text = asb$
 
-                    frmComputers.PROizV20.Text = everIniFile.GetString("Сеть Windows", cn & "|Производитель сетевого адаптера|Фирма", "")
+                    frmComputers.PROizV20.Text = everIniFile.GetString("Сеть Windows",
+                                                                       cn & "|Производитель сетевого адаптера|Фирма", "")
 
                 End If
 
@@ -595,7 +684,9 @@
                         frmComputers.cmbNET2.Text = setik
                     End If
 
-                    frmComputers.cmbNET2.Text = everIniFile.GetString("Сеть Windows", cn & "|Свойства сетевого адаптера|Сетевой адаптер", "")
+                    frmComputers.cmbNET2.Text = everIniFile.GetString("Сеть Windows",
+                                                                      cn & "|Свойства сетевого адаптера|Сетевой адаптер",
+                                                                      "")
                     asa$ = everIniFile.GetString("Сеть Windows", cn & "|Адреса сетевого адаптера|Маска IP / Подсети", "")
                     asb$ = everIniFile.GetString("Сеть Windows", cn & "|Свойства сетевого адаптера|Аппаратный адрес", "")
                     If Len(asa$) = 0 Then
@@ -603,13 +694,16 @@
                         frmComputers.txtNETip2.Text = asa$
                         frmComputers.txtNETmac2.Text = asb$
 
-                        frmComputers.PROizV21.Text = everIniFile.GetString("Сеть Windows", cn & "|Производитель сетевого адаптера|Фирма", "")
+                        frmComputers.PROizV21.Text = everIniFile.GetString("Сеть Windows",
+                                                                           cn & "|Производитель сетевого адаптера|Фирма",
+                                                                           "")
                     End If
                 Else
 
                     If Len(frmComputers.cmbNET1.Text) = 0 Then
 
-                        setik = everIniFile.GetString("Сеть Windows", cn & "|Свойства сетевого адаптера|Сетевой адаптер", "")
+                        setik = everIniFile.GetString("Сеть Windows", cn & "|Свойства сетевого адаптера|Сетевой адаптер",
+                                                      "")
                         If setik = "PPP Adapter." Or setik = "PPP Adapter" Or Len(setik) = 0 Then
                             GoTo nextA
                         Else
@@ -617,19 +711,24 @@
                         End If
 
                         'frmComputers.cmbNET1.Text = everIniFile.GetString("Сеть Windows", cn & "|Свойства сетевого адаптера|Сетевой адаптер", "")
-                        asa$ = everIniFile.GetString("Сеть Windows", cn & "|Адреса сетевого адаптера|Маска IP / Подсети", "")
-                        asb$ = everIniFile.GetString("Сеть Windows", cn & "|Свойства сетевого адаптера|Аппаратный адрес", "")
+                        asa$ = everIniFile.GetString("Сеть Windows", cn & "|Адреса сетевого адаптера|Маска IP / Подсети",
+                                                     "")
+                        asb$ = everIniFile.GetString("Сеть Windows", cn & "|Свойства сетевого адаптера|Аппаратный адрес",
+                                                     "")
                         If Len(asa$) = 0 Then
                         Else
                             frmComputers.txtNETip1.Text = asa$
                             frmComputers.txtNETmac1.Text = asb$
-                            frmComputers.PROizV20.Text = everIniFile.GetString("Сеть Windows", cn & "|Производитель сетевого адаптера|Фирма", "")
+                            frmComputers.PROizV20.Text = everIniFile.GetString("Сеть Windows",
+                                                                               cn &
+                                                                               "|Производитель сетевого адаптера|Фирма",
+                                                                               "")
                         End If
                     End If
                 End If
 
             End If
-nextA:
+            nextA:
         Next
 
 
@@ -662,8 +761,9 @@ nextA:
         End If
 
 
-
-        If Left(frmComputers.cmbNET1.Text, 4) = "NDIS" Or Left(frmComputers.cmbNET1.Text, 4) = "Nove" Or Len(frmComputers.cmbNET1.Text) = 0 Then
+        If _
+            Left(frmComputers.cmbNET1.Text, 4) = "NDIS" Or Left(frmComputers.cmbNET1.Text, 4) = "Nove" Or
+            Len(frmComputers.cmbNET1.Text) = 0 Then
             frmComputers.cmbNET1.Text = everIniFile.GetString("Сеть PCI / PNP", "Сеть PCI / PNP1", "")
         End If
 
@@ -706,51 +806,60 @@ nextA:
         If Len(frmComputers.cmbMon1.Text) = 0 Then
             frmComputers.PROizV28.Text = everIniFile.GetString("Монитор", "Монитор2|Производитель монитора|Фирма", "")
             frmComputers.cmbMon1.Text = everIniFile.GetString("Монитор", "Монитор2|Свойства монитора|Имя монитора", "")
-            frmComputers.txtMon1Dum.Text = everIniFile.GetString("Монитор", "Монитор2|Свойства монитора|Тип монитора", "")
-            frmComputers.txtMon1SN.Text = everIniFile.GetString("Монитор", "Монитор2|Свойства монитора|Серийный номер", "")
+            frmComputers.txtMon1Dum.Text = everIniFile.GetString("Монитор", "Монитор2|Свойства монитора|Тип монитора",
+                                                                 "")
+            frmComputers.txtMon1SN.Text = everIniFile.GetString("Монитор", "Монитор2|Свойства монитора|Серийный номер",
+                                                                "")
         End If
 
         If Len(frmComputers.cmbMon1.Text) = 0 Then
             frmComputers.PROizV28.Text = everIniFile.GetString("Монитор", "Монитор3|Производитель монитора|Фирма", "")
             frmComputers.cmbMon1.Text = everIniFile.GetString("Монитор", "Монитор3|Свойства монитора|Имя монитора", "")
-            frmComputers.txtMon1Dum.Text = everIniFile.GetString("Монитор", "Монитор3|Свойства монитора|Тип монитора", "")
-            frmComputers.txtMon1SN.Text = everIniFile.GetString("Монитор", "Монитор3|Свойства монитора|Серийный номер", "")
+            frmComputers.txtMon1Dum.Text = everIniFile.GetString("Монитор", "Монитор3|Свойства монитора|Тип монитора",
+                                                                 "")
+            frmComputers.txtMon1SN.Text = everIniFile.GetString("Монитор", "Монитор3|Свойства монитора|Серийный номер",
+                                                                "")
         End If
 
         If Len(frmComputers.cmbMon1.Text) = 0 Then
             frmComputers.PROizV28.Text = everIniFile.GetString("Монитор", "Монитор4|Производитель монитора|Фирма", "")
             frmComputers.cmbMon1.Text = everIniFile.GetString("Монитор", "Монитор4|Свойства монитора|Имя монитора", "")
-            frmComputers.txtMon1Dum.Text = everIniFile.GetString("Монитор", "Монитор4|Свойства монитора|Тип монитора", "")
-            frmComputers.txtMon1SN.Text = everIniFile.GetString("Монитор", "Монитор4|Свойства монитора|Серийный номер", "")
+            frmComputers.txtMon1Dum.Text = everIniFile.GetString("Монитор", "Монитор4|Свойства монитора|Тип монитора",
+                                                                 "")
+            frmComputers.txtMon1SN.Text = everIniFile.GetString("Монитор", "Монитор4|Свойства монитора|Серийный номер",
+                                                                "")
         End If
 
         If Len(frmComputers.cmbMon1.Text) = 0 Then
             frmComputers.PROizV28.Text = everIniFile.GetString("Монитор", "Монитор5|Производитель монитора|Фирма", "")
             frmComputers.cmbMon1.Text = everIniFile.GetString("Монитор", "Монитор5|Свойства монитора|Имя монитора", "")
-            frmComputers.txtMon1Dum.Text = everIniFile.GetString("Монитор", "Монитор5|Свойства монитора|Тип монитора", "")
-            frmComputers.txtMon1SN.Text = everIniFile.GetString("Монитор", "Монитор5|Свойства монитора|Серийный номер", "")
+            frmComputers.txtMon1Dum.Text = everIniFile.GetString("Монитор", "Монитор5|Свойства монитора|Тип монитора",
+                                                                 "")
+            frmComputers.txtMon1SN.Text = everIniFile.GetString("Монитор", "Монитор5|Свойства монитора|Серийный номер",
+                                                                "")
         End If
-
 
 
         If Len(frmComputers.cmbMon1.Text) = 0 Then
             frmComputers.PROizV28.Text = ""
-            frmComputers.cmbMon1.Text = everIniFile.GetString("Устройства Windows", "Мониторы1|Свойства устройства|Описание драйвера", "")
-            frmComputers.txtMon1SN.Text = ""
-        End If
-
-
-
-        If Len(frmComputers.cmbMon1.Text) = 0 Then
-            frmComputers.PROizV28.Text = ""
-            frmComputers.cmbMon1.Text = everIniFile.GetString("Устройства Windows", "Monitors1|Свойства устройства|Описание драйвера", "")
+            frmComputers.cmbMon1.Text = everIniFile.GetString("Устройства Windows",
+                                                              "Мониторы1|Свойства устройства|Описание драйвера", "")
             frmComputers.txtMon1SN.Text = ""
         End If
 
 
         If Len(frmComputers.cmbMon1.Text) = 0 Then
             frmComputers.PROizV28.Text = ""
-            frmComputers.cmbMon1.Text = everIniFile.GetString("Устройства Windows", "Monitor1|Свойства устройства|Описание драйвера", "")
+            frmComputers.cmbMon1.Text = everIniFile.GetString("Устройства Windows",
+                                                              "Monitors1|Свойства устройства|Описание драйвера", "")
+            frmComputers.txtMon1SN.Text = ""
+        End If
+
+
+        If Len(frmComputers.cmbMon1.Text) = 0 Then
+            frmComputers.PROizV28.Text = ""
+            frmComputers.cmbMon1.Text = everIniFile.GetString("Устройства Windows",
+                                                              "Monitor1|Свойства устройства|Описание драйвера", "")
             frmComputers.txtMon1SN.Text = ""
         End If
 
@@ -786,7 +895,8 @@ nextA:
         frmComputers.cmbFDD.Text = everIniFile.GetString("Суммарная информация", "Хранение данных|Флоппи-накопитель", "")
 
         If Len(frmComputers.cmbFDD.Text) = 0 Then
-            frmComputers.cmbFDD.Text = everIniFile.GetString("Суммарная информация", "Хранение данных|Флоппи-накопитель1", "")
+            frmComputers.cmbFDD.Text = everIniFile.GetString("Суммарная информация",
+                                                             "Хранение данных|Флоппи-накопитель1", "")
         End If
 
         '################
@@ -817,7 +927,9 @@ nextA:
         'Имя компа
         frmComputers.txtSNAME.Text = everIniFile.GetString("Имя компьютера", "Имя NetBIOS|Имя компьютера", "")
 
-        If Len(frmComputers.txtSNAME.Text) = 0 Then frmComputers.txtSNAME.Text = everIniFile.GetString("Суммарная информация", "Компьютер|Имя компьютера", "NoName")
+        If Len(frmComputers.txtSNAME.Text) = 0 Then _
+            frmComputers.txtSNAME.Text = everIniFile.GetString("Суммарная информация", "Компьютер|Имя компьютера",
+                                                               "NoName")
 
         frmComputers.txtPSEUDONIM.Text = frmComputers.txtSNAME.Text
 
@@ -836,7 +948,8 @@ nextA:
         Else
             frmComputers.cmbPrinters1.Text = uname
             frmComputers.PROizV34.Text = everIniFile.GetString("Принтеры", "Принтеры1|Производитель принтера|Фирма", "")
-            frmComputers.txtPrint1Port.Text = everIniFile.GetString("Принтеры", "Принтеры1|Свойства принтера|Порт принтера", "")
+            frmComputers.txtPrint1Port.Text = everIniFile.GetString("Принтеры",
+                                                                    "Принтеры1|Свойства принтера|Порт принтера", "")
         End If
 
 
@@ -852,7 +965,8 @@ nextA:
         Else
             frmComputers.cmbPrinters2.Text = uname
             frmComputers.PROizV35.Text = everIniFile.GetString("Принтеры", "Принтеры2|Производитель принтера|Фирма", "")
-            frmComputers.txtPrint2Port.Text = everIniFile.GetString("Принтеры", "Принтеры2|Свойства принтера|Порт принтера", "")
+            frmComputers.txtPrint2Port.Text = everIniFile.GetString("Принтеры",
+                                                                    "Принтеры2|Свойства принтера|Порт принтера", "")
         End If
 
         uname = everIniFile.GetString("Принтеры", "Принтеры1|Свойства принтера|Имя принтера", "")
@@ -867,15 +981,13 @@ nextA:
         Else
             frmComputers.cmbPrinters3.Text = uname
             frmComputers.PROizV36.Text = everIniFile.GetString("Принтеры", "Принтеры3|Производитель принтера|Фирма", "")
-            frmComputers.txtPrint3Port.Text = everIniFile.GetString("Принтеры", "Принтеры3|Свойства принтера|Порт принтера", "")
+            frmComputers.txtPrint3Port.Text = everIniFile.GetString("Принтеры",
+                                                                    "Принтеры3|Свойства принтера|Порт принтера", "")
         End If
-
-       
 
 
         'Установленное програмное обеспечение
         textpo()
-
     End Sub
 
     Public Sub textpo()
@@ -952,14 +1064,15 @@ nextA:
 
         Next
 
-ASE:
+        ASE:
         'Лицензионный номер Операционной системы
 
         Dim OS_OS, SAGAZOD, B As String
 
         OS_OS$ = everIniFile.GetString("Операционная система", "Свойства операционной системы|Название ОС", "")
         SAGAZOD$ = everIniFile.GetString("Операционная система", "Лицензионная информация|Ключ продукта", "")
-        OS_OS$ = OS_OS$ & " " & everIniFile.GetString("Операционная система", "Свойства операционной системы|Пакет обновления ОС", "")
+        OS_OS$ = OS_OS$ & " " &
+                 everIniFile.GetString("Операционная система", "Свойства операционной системы|Пакет обновления ОС", "")
         frmComputers.lstSoftware.Items.Add(frmComputers.lstSoftware.Items.Count + 1)
         frmComputers.lstSoftware.Items(intcount).SubItems.Add(frmComputers.lstSoftware.Items.Count)
         frmComputers.lstSoftware.Items(intcount).SubItems.Add(OS_OS$)
@@ -990,7 +1103,7 @@ ASE:
         intcount = intcount + 1
 
         Exit Sub
-Err_handler:
+        Err_handler:
         MsgBox(Err.Description)
     End Sub
 
@@ -1013,14 +1126,21 @@ Err_handler:
 
         Else
 
-            If MsgBox("Проверять правильность имени компьютера?", vbExclamation + vbYesNo, "Обновление информации") = vbNo Then
+            If _
+                MsgBox("Проверять правильность имени компьютера?", vbExclamation + vbYesNo, "Обновление информации") =
+                vbNo Then
 
             Else
-                If frmComputers.txtSNAME.Text <> everIniFile.GetString("Суммарная информация", "Компьютер|Имя компьютера", "") Then
+                If _
+                    frmComputers.txtSNAME.Text <>
+                    everIniFile.GetString("Суммарная информация", "Компьютер|Имя компьютера", "") Then
 
-                    If frmComputers.txtSNAME.Text <> everIniFile.GetString("Имя компьютера", "Имя NetBIOS|Имя компьютера", "") Then
+                    If _
+                        frmComputers.txtSNAME.Text <>
+                        everIniFile.GetString("Имя компьютера", "Имя NetBIOS|Имя компьютера", "") Then
 
-                        MsgBox("Имя компьютера не соответствует выбранному файлу." & vbCrLf & "Выберите другой файл.", MsgBoxStyle.Critical, ProGramName)
+                        MsgBox("Имя компьютера не соответствует выбранному файлу." & vbCrLf & "Выберите другой файл.",
+                               MsgBoxStyle.Critical, ProGramName)
                         Exit Sub
 
                     End If
@@ -1150,18 +1270,23 @@ Err_handler:
             SaveUpdateLogDB(frmComputers.cmbMB.Text, uname)
             frmComputers.cmbMB.Text = uname
             frmComputers.cmbMB.BackColor = Color.Green
-            frmComputers.txtChip.Text = everIniFile.GetString("Чипсет", "Свойства набора микросхем (чипсета)|Чипсет системной платы", "")
+            frmComputers.txtChip.Text = everIniFile.GetString("Чипсет",
+                                                              "Свойства набора микросхем (чипсета)|Чипсет системной платы",
+                                                              "")
             frmComputers.txtChip.BackColor = Color.Green
-            frmComputers.txtSN_MB.Text = everIniFile.GetString("Системная плата", "Свойства системной платы|ID системной платы", "")
+            frmComputers.txtSN_MB.Text = everIniFile.GetString("Системная плата",
+                                                               "Свойства системной платы|ID системной платы", "")
             frmComputers.txtSN_MB.BackColor = Color.Green
-            frmComputers.PROizV5.Text = everIniFile.GetString("Системная плата", "Производитель системной платы|Фирма", "")
+            frmComputers.PROizV5.Text = everIniFile.GetString("Системная плата", "Производитель системной платы|Фирма",
+                                                              "")
             frmComputers.PROizV5.BackColor = Color.Green
         End If
 
         '@@@@@@@@@@@@@@@@@@@@
 
         If Len(frmComputers.cmbMB.Text) = 0 Then
-            frmComputers.cmbMB.Text = everIniFile.GetString("Суммарная информация", "Системная плата|Системная плата", "")
+            frmComputers.cmbMB.Text = everIniFile.GetString("Суммарная информация", "Системная плата|Системная плата",
+                                                            "")
         Else
         End If
 
@@ -1187,7 +1312,6 @@ Err_handler:
             frmComputers.txtRamS1.Text = everIniFile.GetString("SPD", "SPD1|Свойства модуля памяти|Скорость памяти", "")
 
         End If
-
 
 
         uname = everIniFile.GetString("SPD", "SPD2|Свойства модуля памяти|Размер модуля", "")
@@ -1235,9 +1359,15 @@ Err_handler:
             Else
                 SaveUpdateLogDB(frmComputers.cmbRAM1.Text, uname)
                 frmComputers.cmbRAM1.Text = uname
-                frmComputers.txtRamS1.Text = everIniFile.GetString("DMI", "Устройства памяти1|Свойства устройства памяти|Скорость", "")
-                frmComputers.txtRamSN1.Text = everIniFile.GetString("DMI", "Устройства памяти1|Свойства устройства памяти|Серийный номер", "")
-                frmComputers.PROizV6.Text = everIniFile.GetString("DMI", "Устройства памяти1|Свойства устройства памяти|Производитель", "")
+                frmComputers.txtRamS1.Text = everIniFile.GetString("DMI",
+                                                                   "Устройства памяти1|Свойства устройства памяти|Скорость",
+                                                                   "")
+                frmComputers.txtRamSN1.Text = everIniFile.GetString("DMI",
+                                                                    "Устройства памяти1|Свойства устройства памяти|Серийный номер",
+                                                                    "")
+                frmComputers.PROizV6.Text = everIniFile.GetString("DMI",
+                                                                  "Устройства памяти1|Свойства устройства памяти|Производитель",
+                                                                  "")
                 'frmComputers.cmbRAM1.BackColor = Color.Green
                 frmComputers.cmbRAM1.BackColor = Color.White
             End If
@@ -1250,9 +1380,15 @@ Err_handler:
             Else
                 SaveUpdateLogDB(frmComputers.cmbRAM2.Text, uname)
                 frmComputers.cmbRAM2.Text = uname
-                frmComputers.txtRamS2.Text = everIniFile.GetString("DMI", "Устройства памяти2|Свойства устройства памяти|Скорость", "")
-                frmComputers.txtRamSN2.Text = everIniFile.GetString("DMI", "Устройства памяти2|Свойства устройства памяти|Серийный номер", "")
-                frmComputers.PROizV7.Text = everIniFile.GetString("DMI", "Устройства памяти2|Свойства устройства памяти|Производитель", "")
+                frmComputers.txtRamS2.Text = everIniFile.GetString("DMI",
+                                                                   "Устройства памяти2|Свойства устройства памяти|Скорость",
+                                                                   "")
+                frmComputers.txtRamSN2.Text = everIniFile.GetString("DMI",
+                                                                    "Устройства памяти2|Свойства устройства памяти|Серийный номер",
+                                                                    "")
+                frmComputers.PROizV7.Text = everIniFile.GetString("DMI",
+                                                                  "Устройства памяти2|Свойства устройства памяти|Производитель",
+                                                                  "")
                 frmComputers.cmbRAM2.BackColor = Color.White
             End If
         End If
@@ -1264,9 +1400,15 @@ Err_handler:
             Else
                 SaveUpdateLogDB(frmComputers.cmbRAM3.Text, uname)
                 frmComputers.cmbRAM3.Text = uname
-                frmComputers.txtRamS3.Text = everIniFile.GetString("DMI", "Устройства памяти3|Свойства устройства памяти|Скорость", "")
-                frmComputers.txtRamSN3.Text = everIniFile.GetString("DMI", "Устройства памяти3|Свойства устройства памяти|Серийный номер", "")
-                frmComputers.PROizV8.Text = everIniFile.GetString("DMI", "Устройства памяти3|Свойства устройства памяти|Производитель", "")
+                frmComputers.txtRamS3.Text = everIniFile.GetString("DMI",
+                                                                   "Устройства памяти3|Свойства устройства памяти|Скорость",
+                                                                   "")
+                frmComputers.txtRamSN3.Text = everIniFile.GetString("DMI",
+                                                                    "Устройства памяти3|Свойства устройства памяти|Серийный номер",
+                                                                    "")
+                frmComputers.PROizV8.Text = everIniFile.GetString("DMI",
+                                                                  "Устройства памяти3|Свойства устройства памяти|Производитель",
+                                                                  "")
                 frmComputers.cmbRAM3.BackColor = Color.White
             End If
         End If
@@ -1278,9 +1420,15 @@ Err_handler:
             Else
                 SaveUpdateLogDB(frmComputers.cmbRAM4.Text, uname)
                 frmComputers.cmbRAM4.Text = uname
-                frmComputers.txtRamS4.Text = everIniFile.GetString("DMI", "Устройства памяти4|Свойства устройства памяти|Скорость", "")
-                frmComputers.txtRamSN4.Text = everIniFile.GetString("DMI", "Устройства памяти4|Свойства устройства памяти|Серийный номер", "")
-                frmComputers.PROizV9.Text = everIniFile.GetString("DMI", "Устройства памяти4|Свойства устройства памяти|Производитель", "")
+                frmComputers.txtRamS4.Text = everIniFile.GetString("DMI",
+                                                                   "Устройства памяти4|Свойства устройства памяти|Скорость",
+                                                                   "")
+                frmComputers.txtRamSN4.Text = everIniFile.GetString("DMI",
+                                                                    "Устройства памяти4|Свойства устройства памяти|Серийный номер",
+                                                                    "")
+                frmComputers.PROizV9.Text = everIniFile.GetString("DMI",
+                                                                  "Устройства памяти4|Свойства устройства памяти|Производитель",
+                                                                  "")
                 frmComputers.cmbRAM4.BackColor = Color.White
             End If
         End If
@@ -1299,7 +1447,6 @@ Err_handler:
         End If
 
 
-
         '################
         'Жесткий диск
         '1
@@ -1309,7 +1456,9 @@ Err_handler:
             SaveUpdateLogDB(frmComputers.cmbHDD1.Text, uname)
             frmComputers.cmbHDD1.Text = uname
             frmComputers.cmbHDD1.BackColor = Color.Green
-            frmComputers.txtHDDo1.Text = everIniFile.GetString("ATA", "ATA1|Физические данные устройства ATA|Форматированная ёмкость", "")
+            frmComputers.txtHDDo1.Text = everIniFile.GetString("ATA",
+                                                               "ATA1|Физические данные устройства ATA|Форматированная ёмкость",
+                                                               "")
             frmComputers.txtHDDsN1.Text = everIniFile.GetString("ATA", "ATA1|Свойства устройства ATA|Серийный номер", "")
             frmComputers.PROizV10.Text = everIniFile.GetString("ATA", "ATA1|Производитель ATA-устройства|Фирма", "")
 
@@ -1323,7 +1472,9 @@ Err_handler:
 
             frmComputers.cmbHDD2.Text = uname
             frmComputers.cmbHDD2.BackColor = Color.Green
-            frmComputers.txtHDDo2.Text = everIniFile.GetString("ATA", "ATA2|Физические данные устройства ATA|Форматированная ёмкость", "")
+            frmComputers.txtHDDo2.Text = everIniFile.GetString("ATA",
+                                                               "ATA2|Физические данные устройства ATA|Форматированная ёмкость",
+                                                               "")
             frmComputers.txtHDDsN2.Text = everIniFile.GetString("ATA", "ATA2|Свойства устройства ATA|Серийный номер", "")
             frmComputers.PROizV11.Text = everIniFile.GetString("ATA", "ATA2|Производитель ATA-устройства|Фирма", "")
         End If
@@ -1335,7 +1486,9 @@ Err_handler:
             SaveUpdateLogDB(frmComputers.cmbHDD3.Text, uname)
             frmComputers.cmbHDD3.Text = uname
             frmComputers.cmbHDD3.BackColor = Color.Green
-            frmComputers.txtHDDo3.Text = everIniFile.GetString("ATA", "ATA3|Физические данные устройства ATA|Форматированная ёмкость", "")
+            frmComputers.txtHDDo3.Text = everIniFile.GetString("ATA",
+                                                               "ATA3|Физические данные устройства ATA|Форматированная ёмкость",
+                                                               "")
             frmComputers.txtHDDsN3.Text = everIniFile.GetString("ATA", "ATA3|Свойства устройства ATA|Серийный номер", "")
             frmComputers.PROizV12.Text = everIniFile.GetString("ATA", "ATA3|Производитель ATA-устройства|Фирма", "")
         End If
@@ -1347,26 +1500,32 @@ Err_handler:
             SaveUpdateLogDB(frmComputers.cmbHDD4.Text, uname)
             frmComputers.cmbHDD4.Text = uname
             frmComputers.cmbHDD4.BackColor = Color.Green
-            frmComputers.txtHDDo4.Text = everIniFile.GetString("ATA", "ATA4|Физические данные устройства ATA|Форматированная ёмкость", "")
+            frmComputers.txtHDDo4.Text = everIniFile.GetString("ATA",
+                                                               "ATA4|Физические данные устройства ATA|Форматированная ёмкость",
+                                                               "")
             frmComputers.txtHDDsN4.Text = everIniFile.GetString("ATA", "ATA4|Свойства устройства ATA|Серийный номер", "")
             frmComputers.PROizV13.Text = everIniFile.GetString("ATA", "ATA4|Производитель ATA-устройства|Фирма", "")
         End If
 
 
         If Len(frmComputers.cmbHDD1.Text) = 0 Then
-            uname = everIniFile.GetString("Хранение данных Windows", "Хранение данных Windows1|Физические данные дискового накопителя|Название жёсткого диска", "")
+            uname = everIniFile.GetString("Хранение данных Windows",
+                                          "Хранение данных Windows1|Физические данные дискового накопителя|Название жёсткого диска",
+                                          "")
             If frmComputers.cmbHDD1.Text = uname Then
             Else
                 SaveUpdateLogDB(frmComputers.cmbHDD1.Text, uname)
 
                 frmComputers.cmbHDD1.Text = uname
                 frmComputers.cmbHDD1.BackColor = Color.Green
-                frmComputers.txtHDDo1.Text = everIniFile.GetString("Хранение данных Windows", "Хранение данных Windows1|Физические данные дискового накопителя|Форматированная ёмкость", "")
-                frmComputers.PROizV10.Text = everIniFile.GetString("Хранение данных Windows", "Хранение данных Windows1|Производитель устройства|Фирма", "")
+                frmComputers.txtHDDo1.Text = everIniFile.GetString("Хранение данных Windows",
+                                                                   "Хранение данных Windows1|Физические данные дискового накопителя|Форматированная ёмкость",
+                                                                   "")
+                frmComputers.PROizV10.Text = everIniFile.GetString("Хранение данных Windows",
+                                                                   "Хранение данных Windows1|Производитель устройства|Фирма",
+                                                                   "")
             End If
         End If
-
-
 
 
         '------------------
@@ -1379,17 +1538,19 @@ Err_handler:
 
                 frmComputers.cmbHDD1.Text = uname
                 frmComputers.cmbHDD1.BackColor = Color.Green
-                frmComputers.txtHDDo1.Text = everIniFile.GetString("EIDE", "EIDE1|Физические данные устройства EIDE|Форматированная ёмкость", "")
-                frmComputers.PROizV10.Text = everIniFile.GetString("EIDE", "EIDE1|Производитель EIDE-устройства|Фирма", "")
+                frmComputers.txtHDDo1.Text = everIniFile.GetString("EIDE",
+                                                                   "EIDE1|Физические данные устройства EIDE|Форматированная ёмкость",
+                                                                   "")
+                frmComputers.PROizV10.Text = everIniFile.GetString("EIDE", "EIDE1|Производитель EIDE-устройства|Фирма",
+                                                                   "")
             End If
         End If
 
 
-
-
-
         If Len(frmComputers.PROizV10.Text) = 0 Then
-            frmComputers.PROizV10.Text = everIniFile.GetString("Хранение данных Windows", "Хранение данных Windows1|Производитель устройства|Фирма", "")
+            frmComputers.PROizV10.Text = everIniFile.GetString("Хранение данных Windows",
+                                                               "Хранение данных Windows1|Производитель устройства|Фирма",
+                                                               "")
         End If
 
         'Код прислал Славик (aka vindpi)
@@ -1399,7 +1560,8 @@ Err_handler:
             End If
 
 
-            frmComputers.cmbHDD1.Text = everIniFile.GetString("Суммарная информация", "Хранение данных|Дисковый накопитель1", "")
+            frmComputers.cmbHDD1.Text = everIniFile.GetString("Суммарная информация",
+                                                              "Хранение данных|Дисковый накопитель1", "")
 
             Dim nom_pos1, nom_pos2, ob_lenght, ob1, ob_rez As String
             Dim ob_Gb, ob2, ob3, ASqw As String
@@ -1436,11 +1598,9 @@ Err_handler:
                 ob_rez = ob1 + ob2 + ob3
             Else
             End If
-            ob_Gb = CStr(ob_rez / 1000) & " Гб"
+            ob_Gb = CStr(ob_rez/1000) & " Гб"
             frmComputers.txtHDDo1.Text = ob_Gb
         End If
-
-
 
 
         '################
@@ -1453,9 +1613,12 @@ Err_handler:
 
             frmComputers.cmbSVGA1.Text = uname
             frmComputers.cmbSVGA1.BackColor = Color.Green
-            frmComputers.txtSVGAr1.Text = everIniFile.GetString("Видео Windows", "Видео Windows1|Свойства видеоадаптера|Объем видеоОЗУ", "")
+            frmComputers.txtSVGAr1.Text = everIniFile.GetString("Видео Windows",
+                                                                "Видео Windows1|Свойства видеоадаптера|Объем видеоОЗУ",
+                                                                "")
             'frmComputers.txtSVGAr1.Text = everIniFile.GetString("Видео Windows", "Номер видео карты","")
-            frmComputers.PROizV14.Text = everIniFile.GetString("Видео Windows", "Видео Windows1|Производитель видеоадаптера|Фирма", "")
+            frmComputers.PROizV14.Text = everIniFile.GetString("Видео Windows",
+                                                               "Видео Windows1|Производитель видеоадаптера|Фирма", "")
         End If
 
         If Len(frmComputers.cmbSVGA1.Text) = 0 Then
@@ -1487,8 +1650,8 @@ Err_handler:
         End If
 
         If Len(frmComputers.txtSVGAr1.Text) = 0 Then
-            frmComputers.txtSVGAr1.Text = everIniFile.GetString("Графический процессор", "Свойства графического процессора|Объем видеоОЗУ", "")
-
+            frmComputers.txtSVGAr1.Text = everIniFile.GetString("Графический процессор",
+                                                                "Свойства графического процессора|Объем видеоОЗУ", "")
 
 
         End If
@@ -1496,7 +1659,9 @@ Err_handler:
 
         If Len(frmComputers.txtSVGAr1.Text) = 0 Then
             frmComputers.PROizV14.Text = " "
-            frmComputers.cmbSVGA1.Text = everIniFile.GetString("Устройства Windows", "Видеоадаптеры1|Свойства устройства|Описание драйвера", "")
+            frmComputers.cmbSVGA1.Text = everIniFile.GetString("Устройства Windows",
+                                                               "Видеоадаптеры1|Свойства устройства|Описание драйвера",
+                                                               "")
             frmComputers.txtSVGAr1.Text = ""
         End If
 
@@ -1514,7 +1679,7 @@ Err_handler:
             frmComputers.cmbSound.BackColor = Color.Green
 
         Else
-           
+
         End If
 
         If Len(uname) = 0 Or Len(frmComputers.cmbSound.Text) = 0 Then
@@ -1564,7 +1729,9 @@ Err_handler:
             B = everIniFile.GetString("Оптические накопители", c & "|Свойства оптического накопителя|Тип устройства", "")
 
 
-            uname = everIniFile.GetString("Оптические накопители", "Оптические накопители2" & "|Свойства оптического накопителя|Описание устройства", "")
+            uname = everIniFile.GetString("Оптические накопители",
+                                          "Оптические накопители2" &
+                                          "|Свойства оптического накопителя|Описание устройства", "")
 
             If uname <> "Generic STEALTH DVD SCSI CdRom Device" Then
                 If uname <> "NERO IMAGEDRIVE2 SCSI CdRom Device" Then
@@ -1574,15 +1741,22 @@ Err_handler:
                             If frmComputers.cmbOPTIC2.Text <> uname Then
                                 frmComputers.cmbOPTIC2.Text = uname
                                 frmComputers.cmbOPTIC2.BackColor = Color.Green
-                                frmComputers.PROizV18.Text = everIniFile.GetString("Оптические накопители", "Оптические накопители2" & "|Производитель устройства|Фирма", "")
-                                frmComputers.txtOPTICs2.Text = everIniFile.GetString("Оптические накопители", "Оптические накопители2" & "|Свойства оптического накопителя|Скорость", "")
+                                frmComputers.PROizV18.Text = everIniFile.GetString("Оптические накопители",
+                                                                                   "Оптические накопители2" &
+                                                                                   "|Производитель устройства|Фирма", "")
+                                frmComputers.txtOPTICs2.Text = everIniFile.GetString("Оптические накопители",
+                                                                                     "Оптические накопители2" &
+                                                                                     "|Свойства оптического накопителя|Скорость",
+                                                                                     "")
                             End If
                         End If
                     End If
                 End If
             End If
 
-            uname = everIniFile.GetString("Оптические накопители", "Оптические накопители1" & "|Свойства оптического накопителя|Описание устройства", "")
+            uname = everIniFile.GetString("Оптические накопители",
+                                          "Оптические накопители1" &
+                                          "|Свойства оптического накопителя|Описание устройства", "")
             If uname <> "Generic STEALTH DVD SCSI CdRom Device" Then
                 If uname <> "NERO IMAGEDRIVE2 SCSI CdRom Device" Then
                     If uname <> "Generic DVD-ROM SCSI CdRom Device" Then
@@ -1590,20 +1764,29 @@ Err_handler:
                             If frmComputers.cmbOPTIC1.Text <> uname Then
                                 frmComputers.cmbOPTIC1.Text = uname
                                 frmComputers.cmbOPTIC1.BackColor = Color.Green
-                                frmComputers.PROizV17.Text = everIniFile.GetString("Оптические накопители", "Оптические накопители1" & "|Производитель устройства|Фирма", "")
-                                frmComputers.txtOPTICs1.Text = everIniFile.GetString("Оптические накопители", "Оптические накопители1" & "|Свойства оптического накопителя|Скорость", "")
+                                frmComputers.PROizV17.Text = everIniFile.GetString("Оптические накопители",
+                                                                                   "Оптические накопители1" &
+                                                                                   "|Производитель устройства|Фирма", "")
+                                frmComputers.txtOPTICs1.Text = everIniFile.GetString("Оптические накопители",
+                                                                                     "Оптические накопители1" &
+                                                                                     "|Свойства оптического накопителя|Скорость",
+                                                                                     "")
                             End If
                         End If
                     End If
                 End If
             End If
-            If Len(frmComputers.cmbOPTIC1.Text) = 0 And Len(frmComputers.cmbOPTIC1.Text) = 0 And Len(frmComputers.cmbOPTIC3.Text) = 0 Then
+            If _
+                Len(frmComputers.cmbOPTIC1.Text) = 0 And Len(frmComputers.cmbOPTIC1.Text) = 0 And
+                Len(frmComputers.cmbOPTIC3.Text) = 0 Then
                 A = everIniFile.GetString("Суммарная информация", "Хранение данных|Оптический накопитель1", "")
                 frmComputers.cmbOPTIC1.Text = A
             End If
 
 
-            uname = everIniFile.GetString("Оптические накопители", "Оптические накопители3" & "|Свойства оптического накопителя|Описание устройства", "")
+            uname = everIniFile.GetString("Оптические накопители",
+                                          "Оптические накопители3" &
+                                          "|Свойства оптического накопителя|Описание устройства", "")
             If uname <> "Generic STEALTH DVD SCSI CdRom Device" Then
                 If uname <> "NERO IMAGEDRIVE2 SCSI CdRom Device" Then
                     If uname <> "Generic DVD-ROM SCSI CdRom Device" Then
@@ -1612,8 +1795,13 @@ Err_handler:
                             If frmComputers.cmbOPTIC3.Text <> uname Then
                                 frmComputers.cmbOPTIC3.Text = uname
                                 frmComputers.cmbOPTIC1.BackColor = Color.Green
-                                frmComputers.PROizV19.Text = everIniFile.GetString("Оптические накопители", "Оптические накопители3" & "|Производитель устройства|Фирма", "")
-                                frmComputers.txtOPTICs3.Text = everIniFile.GetString("Оптические накопители", "Оптические накопители3" & "|Свойства оптического накопителя|Скорость", "")
+                                frmComputers.PROizV19.Text = everIniFile.GetString("Оптические накопители",
+                                                                                   "Оптические накопители3" &
+                                                                                   "|Производитель устройства|Фирма", "")
+                                frmComputers.txtOPTICs3.Text = everIniFile.GetString("Оптические накопители",
+                                                                                     "Оптические накопители3" &
+                                                                                     "|Свойства оптического накопителя|Скорость",
+                                                                                     "")
                             End If
                         End If
                     End If
@@ -1653,32 +1841,38 @@ Err_handler:
 
                 'frmComputers.txtNETip1.Text = everIniFile.GetString("Сеть Windows", cn & "|Адреса сетевого адаптера|Маска IP / Подсети","")
 
-                frmComputers.PROizV20.Text = everIniFile.GetString("Сеть Windows", cn & "|Производитель сетевого адаптера|Фирма", "")
+                frmComputers.PROizV20.Text = everIniFile.GetString("Сеть Windows",
+                                                                   cn & "|Производитель сетевого адаптера|Фирма", "")
 
             Else
 
                 If cn = "Сеть Windows2" Then
 
-                    sNETset = everIniFile.GetString("Сеть Windows", cn & "|Свойства сетевого адаптера|Сетевой адаптер", "")
+                    sNETset = everIniFile.GetString("Сеть Windows", cn & "|Свойства сетевого адаптера|Сетевой адаптер",
+                                                    "")
                     If sNETset = "PPP Adapter." Or sNETset = "PPP Adapter" Then
                         GoTo nextA
                     Else
                         frmComputers.cmbNET2.Text = sNETset
                     End If
 
-                    frmComputers.cmbNET2.Text = everIniFile.GetString("Сеть Windows", cn & "|Свойства сетевого адаптера|Сетевой адаптер", "")
+                    frmComputers.cmbNET2.Text = everIniFile.GetString("Сеть Windows",
+                                                                      cn & "|Свойства сетевого адаптера|Сетевой адаптер",
+                                                                      "")
                     asa$ = everIniFile.GetString("Сеть Windows", cn & "|Адреса сетевого адаптера|Маска IP / Подсети", "")
                     asb$ = everIniFile.GetString("Сеть Windows", cn & "|Свойства сетевого адаптера|Аппаратный адрес", "")
                     frmComputers.txtNETip2.Text = asa$
                     frmComputers.txtNETmac1.Text = asb$
 
-                    frmComputers.PROizV21.Text = everIniFile.GetString("Сеть Windows", cn & "|Производитель сетевого адаптера|Фирма", "")
+                    frmComputers.PROizV21.Text = everIniFile.GetString("Сеть Windows",
+                                                                       cn & "|Производитель сетевого адаптера|Фирма", "")
 
                 Else
 
                     If Len(frmComputers.cmbNET1.Text) = 0 Then
 
-                        sNETset = everIniFile.GetString("Сеть Windows", cn & "|Свойства сетевого адаптера|Сетевой адаптер", "")
+                        sNETset = everIniFile.GetString("Сеть Windows",
+                                                        cn & "|Свойства сетевого адаптера|Сетевой адаптер", "")
                         If sNETset = "PPP Adapter." Or sNETset = "PPP Adapter" Then
                             GoTo nextA
                         Else
@@ -1686,17 +1880,21 @@ Err_handler:
                         End If
 
                         'frmComputers.cmbNET1.Text = everIniFile.GetString("Сеть Windows", cn & "|Свойства сетевого адаптера|Сетевой адаптер","")
-                        asa$ = everIniFile.GetString("Сеть Windows", cn & "|Адреса сетевого адаптера|Маска IP / Подсети", "")
-                        asb$ = everIniFile.GetString("Сеть Windows", cn & "|Свойства сетевого адаптера|Аппаратный адрес", "")
+                        asa$ = everIniFile.GetString("Сеть Windows", cn & "|Адреса сетевого адаптера|Маска IP / Подсети",
+                                                     "")
+                        asb$ = everIniFile.GetString("Сеть Windows", cn & "|Свойства сетевого адаптера|Аппаратный адрес",
+                                                     "")
                         frmComputers.txtNETip1.Text = asa$
                         frmComputers.txtNETmac1.Text = asb$
 
-                        frmComputers.PROizV20.Text = everIniFile.GetString("Сеть Windows", cn & "|Производитель сетевого адаптера|Фирма", "")
+                        frmComputers.PROizV20.Text = everIniFile.GetString("Сеть Windows",
+                                                                           cn & "|Производитель сетевого адаптера|Фирма",
+                                                                           "")
                     End If
                 End If
 
             End If
-nextA:
+            nextA:
         Next
 
 
@@ -1708,7 +1906,9 @@ nextA:
             frmComputers.cmbNET1.Text = everIniFile.GetString("Суммарная информация", "Сеть|Сетевой адаптер2", "")
         End If
 
-        If Left(frmComputers.cmbNET1.Text, 4) = "NDIS" Or Left(frmComputers.cmbNET1.Text, 4) = "Nove" Or Len(frmComputers.cmbNET1.Text) = 0 Then
+        If _
+            Left(frmComputers.cmbNET1.Text, 4) = "NDIS" Or Left(frmComputers.cmbNET1.Text, 4) = "Nove" Or
+            Len(frmComputers.cmbNET1.Text) = 0 Then
             frmComputers.cmbNET1.Text = everIniFile.GetString("Сеть PCI / PNP", "Сеть PCI / PNP1", "")
         End If
 
@@ -1732,7 +1932,6 @@ nextA:
         End If
 
 
-
         '################
         'Монитор
         frmComputers.cmbMon1.Text = everIniFile.GetString("Монитор", "Монитор1|Свойства монитора|Имя монитора", "")
@@ -1744,44 +1943,51 @@ nextA:
         If Len(frmComputers.cmbMon1.Text) = 0 Then
             frmComputers.PROizV28.Text = everIniFile.GetString("Монитор", "Монитор2|Производитель монитора|Фирма", "")
             frmComputers.cmbMon1.Text = everIniFile.GetString("Монитор", "Монитор2|Свойства монитора|Имя монитора", "")
-            frmComputers.txtMon1Dum.Text = everIniFile.GetString("Монитор", "Монитор2|Свойства монитора|Тип монитора", "")
-            frmComputers.txtMon1SN.Text = everIniFile.GetString("Монитор", "Монитор2|Свойства монитора|Серийный номер", "")
+            frmComputers.txtMon1Dum.Text = everIniFile.GetString("Монитор", "Монитор2|Свойства монитора|Тип монитора",
+                                                                 "")
+            frmComputers.txtMon1SN.Text = everIniFile.GetString("Монитор", "Монитор2|Свойства монитора|Серийный номер",
+                                                                "")
         End If
 
         If Len(frmComputers.cmbMon1.Text) = 0 Then
             frmComputers.PROizV28.Text = everIniFile.GetString("Монитор", "Монитор3|Производитель монитора|Фирма", "")
             frmComputers.cmbMon1.Text = everIniFile.GetString("Монитор", "Монитор3|Свойства монитора|Имя монитора", "")
-            frmComputers.txtMon1Dum.Text = everIniFile.GetString("Монитор", "Монитор3|Свойства монитора|Тип монитора", "")
-            frmComputers.txtMon1SN.Text = everIniFile.GetString("Монитор", "Монитор3|Свойства монитора|Серийный номер", "")
+            frmComputers.txtMon1Dum.Text = everIniFile.GetString("Монитор", "Монитор3|Свойства монитора|Тип монитора",
+                                                                 "")
+            frmComputers.txtMon1SN.Text = everIniFile.GetString("Монитор", "Монитор3|Свойства монитора|Серийный номер",
+                                                                "")
         End If
 
         If Len(frmComputers.cmbMon1.Text) = 0 Then
             frmComputers.PROizV28.Text = everIniFile.GetString("Монитор", "Монитор4|Производитель монитора|Фирма", "")
             frmComputers.cmbMon1.Text = everIniFile.GetString("Монитор", "Монитор4|Свойства монитора|Имя монитора", "")
-            frmComputers.txtMon1Dum.Text = everIniFile.GetString("Монитор", "Монитор4|Свойства монитора|Тип монитора", "")
-            frmComputers.txtMon1SN.Text = everIniFile.GetString("Монитор", "Монитор4|Свойства монитора|Серийный номер", "")
+            frmComputers.txtMon1Dum.Text = everIniFile.GetString("Монитор", "Монитор4|Свойства монитора|Тип монитора",
+                                                                 "")
+            frmComputers.txtMon1SN.Text = everIniFile.GetString("Монитор", "Монитор4|Свойства монитора|Серийный номер",
+                                                                "")
         End If
-
 
 
         If Len(frmComputers.cmbMon1.Text) = 0 Then
             frmComputers.PROizV28.Text = ""
-            frmComputers.cmbMon1.Text = everIniFile.GetString("Устройства Windows", "Мониторы1|Свойства устройства|Описание драйвера", "")
-            frmComputers.txtMon1SN.Text = ""
-        End If
-
-
-
-        If Len(frmComputers.cmbMon1.Text) = 0 Then
-            frmComputers.PROizV28.Text = ""
-            frmComputers.cmbMon1.Text = everIniFile.GetString("Устройства Windows", "Monitors1|Свойства устройства|Описание драйвера", "")
+            frmComputers.cmbMon1.Text = everIniFile.GetString("Устройства Windows",
+                                                              "Мониторы1|Свойства устройства|Описание драйвера", "")
             frmComputers.txtMon1SN.Text = ""
         End If
 
 
         If Len(frmComputers.cmbMon1.Text) = 0 Then
             frmComputers.PROizV28.Text = ""
-            frmComputers.cmbMon1.Text = everIniFile.GetString("Устройства Windows", "Monitor1|Свойства устройства|Описание драйвера", "")
+            frmComputers.cmbMon1.Text = everIniFile.GetString("Устройства Windows",
+                                                              "Monitors1|Свойства устройства|Описание драйвера", "")
+            frmComputers.txtMon1SN.Text = ""
+        End If
+
+
+        If Len(frmComputers.cmbMon1.Text) = 0 Then
+            frmComputers.PROizV28.Text = ""
+            frmComputers.cmbMon1.Text = everIniFile.GetString("Устройства Windows",
+                                                              "Monitor1|Свойства устройства|Описание драйвера", "")
             frmComputers.txtMon1SN.Text = ""
         End If
 
@@ -1812,14 +2018,14 @@ nextA:
         End If
 
 
-
         '################
         'Дисковод
 
         frmComputers.cmbFDD.Text = everIniFile.GetString("Суммарная информация", "Хранение данных|Флоппи-накопитель", "")
 
         If Len(frmComputers.cmbFDD.Text) = 0 Then
-            frmComputers.cmbFDD.Text = everIniFile.GetString("Суммарная информация", "Хранение данных|Флоппи-накопитель1", "")
+            frmComputers.cmbFDD.Text = everIniFile.GetString("Суммарная информация",
+                                                             "Хранение данных|Флоппи-накопитель1", "")
         End If
 
         '################
@@ -1863,38 +2069,49 @@ nextA:
         'Имя компа
         frmComputers.txtSNAME.Text = everIniFile.GetString("Имя компьютера", "Имя NetBIOS|Имя компьютера", "")
         'frmComputers.ps.Text = everIniFile.GetString("Имя компьютера", "Имя NetBIOS|Имя компьютера","")
-        If Len(frmComputers.txtSNAME.Text) = 0 Then frmComputers.txtSNAME.Text = everIniFile.GetString("Суммарная информация", "Компьютер|Имя компьютера", "NoName")
+        If Len(frmComputers.txtSNAME.Text) = 0 Then _
+            frmComputers.txtSNAME.Text = everIniFile.GetString("Суммарная информация", "Компьютер|Имя компьютера",
+                                                               "NoName")
 
         '################
         'Принтеры
 
-        frmComputers.cmbPrinters1.Text = everIniFile.GetString("Принтеры", "Принтеры1|Свойства принтера|Имя принтера", "")
+        frmComputers.cmbPrinters1.Text = everIniFile.GetString("Принтеры", "Принтеры1|Свойства принтера|Имя принтера",
+                                                               "")
         frmComputers.PROizV34.Text = everIniFile.GetString("Принтеры", "Принтеры1|Производитель принтера|Фирма", "")
-        frmComputers.txtPrint1Port.Text = everIniFile.GetString("Принтеры", "Принтеры1|Свойства принтера|Порт принтера", "")
+        frmComputers.txtPrint1Port.Text = everIniFile.GetString("Принтеры", "Принтеры1|Свойства принтера|Порт принтера",
+                                                                "")
 
 
         If Len(frmComputers.cmbPrinters1.Text) = 0 Then
-            frmComputers.cmbPrinters1.Text = everIniFile.GetString("Суммарная информация", "Периферийные устройства|Принтер1", "")
+            frmComputers.cmbPrinters1.Text = everIniFile.GetString("Суммарная информация",
+                                                                   "Периферийные устройства|Принтер1", "")
         End If
 
         '2
 
-        frmComputers.cmbPrinters2.Text = everIniFile.GetString("Принтеры", "Принтеры2|Свойства принтера|Имя принтера", "")
+        frmComputers.cmbPrinters2.Text = everIniFile.GetString("Принтеры", "Принтеры2|Свойства принтера|Имя принтера",
+                                                               "")
         frmComputers.PROizV35.Text = everIniFile.GetString("Принтеры", "Принтеры2|Производитель принтера|Фирма", "")
-        frmComputers.txtPrint2Port.Text = everIniFile.GetString("Принтеры", "Принтеры2|Свойства принтера|Порт принтера", "")
+        frmComputers.txtPrint2Port.Text = everIniFile.GetString("Принтеры", "Принтеры2|Свойства принтера|Порт принтера",
+                                                                "")
 
 
         If Len(frmComputers.cmbPrinters2.Text) = 0 Then
-            frmComputers.cmbPrinters2.Text = everIniFile.GetString("Суммарная информация", "Периферийные устройства|Принтер", "")
+            frmComputers.cmbPrinters2.Text = everIniFile.GetString("Суммарная информация",
+                                                                   "Периферийные устройства|Принтер", "")
         End If
 
         '3
-        frmComputers.cmbPrinters3.Text = everIniFile.GetString("Принтеры", "Принтеры3|Свойства принтера|Имя принтера", "")
+        frmComputers.cmbPrinters3.Text = everIniFile.GetString("Принтеры", "Принтеры3|Свойства принтера|Имя принтера",
+                                                               "")
         frmComputers.PROizV36.Text = everIniFile.GetString("Принтеры", "Принтеры3|Производитель принтера|Фирма", "")
-        frmComputers.txtPrint3Port.Text = everIniFile.GetString("Принтеры", "Принтеры3|Свойства принтера|Порт принтера", "")
+        frmComputers.txtPrint3Port.Text = everIniFile.GetString("Принтеры", "Принтеры3|Свойства принтера|Порт принтера",
+                                                                "")
 
         If Len(frmComputers.cmbPrinters3.Text) = 0 Then
-            frmComputers.cmbPrinters3.Text = everIniFile.GetString("Суммарная информация", "Периферийные устройства|Принтер3", "")
+            frmComputers.cmbPrinters3.Text = everIniFile.GetString("Суммарная информация",
+                                                                   "Периферийные устройства|Принтер3", "")
         End If
 
 
@@ -1904,7 +2121,7 @@ nextA:
 
 
         Exit Sub
-Err_handler:
+        Err_handler:
         'cdat
     End Sub
 
@@ -1921,7 +2138,6 @@ Err_handler:
         On Error GoTo Err_handler
         A = "Установленные программы"
         'lstV.ListItems.Clear
-
 
 
         For intj = 1 To 400
@@ -1972,9 +2188,12 @@ Err_handler:
                 Else
 
                     Dim OS_OS, SAGAZOD, B As String
-                    OS_OS = everIniFile.GetString("Операционная система", "Свойства операционной системы|Название ОС", "")
+                    OS_OS = everIniFile.GetString("Операционная система", "Свойства операционной системы|Название ОС",
+                                                  "")
                     SAGAZOD = everIniFile.GetString("Операционная система", "Лицензионная информация|Ключ продукта", "")
-                    OS_OS = OS_OS & " " & everIniFile.GetString("Операционная система", "Свойства операционной системы|Пакет обновления ОС", "")
+                    OS_OS = OS_OS & " " &
+                            everIniFile.GetString("Операционная система",
+                                                  "Свойства операционной системы|Пакет обновления ОС", "")
 
                     If Not (RSExistsSoft(frmComputers.sCOUNT, OS_OS)) Then
                         lstV.Items.Add(lstV.Items.Count + 1)
@@ -2022,17 +2241,12 @@ Err_handler:
 
             End If
 
-A2:
+            A2:
 
         Next
 
 
-
-
-
         Exit Sub
-Err_handler:
+        Err_handler:
     End Sub
-
-
 End Module

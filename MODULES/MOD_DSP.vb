@@ -20,7 +20,6 @@
         '    Next
 
         'End If
-
     End Sub
 
     'Function fillImlWithFilesFromDir(ByRef dirPath As String) As ImageList
@@ -58,7 +57,8 @@
         frmGarCPL.PROizV4.Text = ""
     End Sub
 
-    Public Sub Notes_Clear(ByVal btnNotes As ToolStripButton, ByVal dt As DateTimePicker, ByVal cmaster As ComboBox, ByVal tNotes As TextBox)
+    Public Sub Notes_Clear(ByVal btnNotes As ToolStripButton, ByVal dt As DateTimePicker, ByVal cmaster As ComboBox,
+                           ByVal tNotes As TextBox)
 
         'MSG19 
         Dim objIniFile As New IniFile(sLANGPATH)
@@ -84,7 +84,6 @@
         'frmComputers.lblsIDOTH.Text = ""
         'frmComputers.lblsID.Text = ""
         ''TableLayoutPanel47
-
 
 
         'For Each C In frmComputers.TableLayoutPanel47.Controls
@@ -307,7 +306,6 @@
 
 
         'C = Nothing
-
 
 
         ''frmComputers.txtUserName.Text = ""
@@ -632,7 +630,6 @@
     '    C = Nothing
 
 
-
     '    'frmComputers.txtUserName.BackColor = Color.White
     '    'frmComputers.txtUserPass.BackColor = Color.White
     '    'frmComputers.txtUserEmail.BackColor = Color.White
@@ -722,7 +719,6 @@
     '    frmComputers.txtPRNZay.BackColor = Color.White
 
 
-
     '    frmComputers.txtNETSfN.BackColor = Color.White
     '    frmComputers.txtNETcash.BackColor = Color.White
     '    frmComputers.txtNETSumm.BackColor = Color.White
@@ -761,10 +757,10 @@
             strTime = Format(TimeOfDay, "hh:mm")
         End With
 
-        Dim uLOG As ADODB.Recordset
-        uLOG = New ADODB.Recordset
+        Dim uLOG As Recordset
+        uLOG = New Recordset
 
-        uLOG.Open("SELECT * FROM Update_Log", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        uLOG.Open("SELECT * FROM Update_Log", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
         With uLOG
             .AddNew()
 
@@ -782,10 +778,8 @@
         'uLOG.Open "INSERT INTO Update_Log (Id_Comp, Komcl_old, Kompl_new, Date,Time) VALUES ('" & frmMain.nomerPCAbs & "', '" & A & "', '" & A2 & "', '" & strDate & "', '" & strTime & "')", DB7, adOpenDynamic, adLockOptimistic
 
 
-
-
         Exit Function
-Error_:
+        Error_:
         MsgBox(Err.Description, vbCritical, "Error!!!")
     End Function
 
@@ -851,7 +845,6 @@ Error_:
             End If
 
         End If
-
     End Sub
 
     Public Sub SaveActivityToLogDB(ByVal Aktivitas As String)
@@ -862,17 +855,15 @@ Error_:
         If uname = 1 Then Exit Sub
 
 
-
-
         Dim strTime As String
         Dim strDate As string
 
         strDate = Date.Today
         strTime = (DateTime.Now.Hour & ":" & DateTime.Now.Minute & ":" & DateTime.Now.Second)
 
-        Dim rs As ADODB.Recordset
-        rs = New ADODB.Recordset
-        rs.Open("SELECT * FROM T_Log", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        Dim rs As Recordset
+        rs = New Recordset
+        rs.Open("SELECT * FROM T_Log", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
             .AddNew()
@@ -884,8 +875,6 @@ Error_:
         End With
         rs.Close()
         rs = Nothing
-
-
     End Sub
 
     Public Sub COUNT_FIELDS(ByVal sID As String)
@@ -894,12 +883,12 @@ Error_:
 
         If Len(sID) = 0 Then Exit Sub
 
-        Dim rs As ADODB.Recordset 'Объявляем рекордсет
+        Dim rs As Recordset 'Объявляем рекордсет
         Dim sSQL As String 'Переменная, где будет размещён SQL запрос
 
         sSQL = "SELECT * FROM kompy WHERE id =" & sID
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
         Dim icounter As Decimal = 0
 
         With rs
@@ -1018,8 +1007,6 @@ Error_:
 
         rs.Close()
         rs = Nothing
-
-
     End Sub
 
     Public Sub LOAD_PCL(ByVal sFIL As String, ByVal sDEP As String, ByVal sOFF As String, ByVal sCMB As ComboBox)
@@ -1033,15 +1020,14 @@ Error_:
         sCMB.Enabled = True
 
 
-
         'If TipTehn <> "Printer" Then Exit Sub
         'If Len(sBranch) = 0 Then Exit Sub
-        Dim rs As ADODB.Recordset
+        Dim rs As Recordset
         Dim sSQL As String
 
         sSQL = "SELECT count(*) as t_n from spr_other where C='1'"
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         Dim A1 As String
         With rs
@@ -1051,12 +1037,10 @@ Error_:
         rs = Nothing
 
 
-
-
         sCMB.Items.Clear()
 
 
-        rs = New ADODB.Recordset
+        rs = New Recordset
 
 
         Select Case TipTehn
@@ -1069,10 +1053,13 @@ Error_:
                     'sSQL = "Select NET_NAME From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "' and TipTehn='PC'"
                 Else
 
-                    sSQL = "Select NET_NAME From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "' and TipTehn='CNT'"
+                    sSQL = "Select NET_NAME From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" &
+                           sOFF & "' and TipTehn='CNT'"
                 End If
 
-                rs.Open("Select count(*) as t_n From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "' and TipTehn='CNT'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs.Open(
+                    "Select count(*) as t_n From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" &
+                    sOFF & "' and TipTehn='CNT'", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 'Dim a1 As String
                 With rs
@@ -1088,10 +1075,16 @@ Error_:
 
                     'sSQL = "Select NET_NAME From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "' and TipTehn='PC'"
                 Else
-                    sSQL = "Select NET_NAME From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "' and tipTehn<>'Printer' And tipTehn<>'MFU' And tipTehn<>'KOpir' And tipTehn<>'OT' And tipTehn<>'PHOTO' And tipTehn<>'FAX' And tipTehn<>'PHONE' And tipTehn<>'ZIP' And tipTehn<>'SCANER' And tipTehn<>'MONITOR' And tipTehn<>'NET' And tipTehn<>'USB' And tipTehn<>'SOUND' And tipTehn<>'IBP' And tipTehn<>'FS' And tipTehn<>'KEYB' And tipTehn<>'MOUSE' and tiptehn <>'PC'"
+                    sSQL = "Select NET_NAME From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" &
+                           sOFF &
+                           "' and tipTehn<>'Printer' And tipTehn<>'MFU' And tipTehn<>'KOpir' And tipTehn<>'OT' And tipTehn<>'PHOTO' And tipTehn<>'FAX' And tipTehn<>'PHONE' And tipTehn<>'ZIP' And tipTehn<>'SCANER' And tipTehn<>'MONITOR' And tipTehn<>'NET' And tipTehn<>'USB' And tipTehn<>'SOUND' And tipTehn<>'IBP' And tipTehn<>'FS' And tipTehn<>'KEYB' And tipTehn<>'MOUSE' and tiptehn <>'PC'"
                 End If
 
-                rs.Open("Select count(*) as t_n From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "' and tipTehn<>'Printer' And tipTehn<>'MFU' And tipTehn<>'KOpir' And tipTehn<>'OT' And tipTehn<>'PHOTO' And tipTehn<>'FAX' And tipTehn<>'PHONE' And tipTehn<>'ZIP' And tipTehn<>'SCANER' And tipTehn<>'MONITOR' And tipTehn<>'NET' And tipTehn<>'USB' And tipTehn<>'SOUND' And tipTehn<>'IBP' And tipTehn<>'FS' And tipTehn<>'KEYB' And tipTehn<>'MOUSE' and tiptehn <>'PC'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs.Open(
+                    "Select count(*) as t_n From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" &
+                    sOFF &
+                    "' and tipTehn<>'Printer' And tipTehn<>'MFU' And tipTehn<>'KOpir' And tipTehn<>'OT' And tipTehn<>'PHOTO' And tipTehn<>'FAX' And tipTehn<>'PHONE' And tipTehn<>'ZIP' And tipTehn<>'SCANER' And tipTehn<>'MONITOR' And tipTehn<>'NET' And tipTehn<>'USB' And tipTehn<>'SOUND' And tipTehn<>'IBP' And tipTehn<>'FS' And tipTehn<>'KEYB' And tipTehn<>'MOUSE' and tiptehn <>'PC'",
+                    DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 'Dim a1 As String
                 With rs
@@ -1104,12 +1097,20 @@ Error_:
             Case Else
 
                 If A1 = 0 Then
-                    sSQL = "Select NET_NAME From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "' and tipTehn<>'Printer' And tipTehn<>'MFU' And tipTehn<>'KOpir' And tipTehn<>'OT' And tipTehn<>'PHOTO' And tipTehn<>'FAX' And tipTehn<>'PHONE' And tipTehn<>'ZIP' And tipTehn<>'SCANER' And tipTehn<>'MONITOR' And tipTehn<>'NET' And tipTehn<>'USB' And tipTehn<>'SOUND' And tipTehn<>'IBP' And tipTehn<>'FS' And tipTehn<>'KEYB' And tipTehn<>'MOUSE'"
+                    sSQL = "Select NET_NAME From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" &
+                           sOFF &
+                           "' and tipTehn<>'Printer' And tipTehn<>'MFU' And tipTehn<>'KOpir' And tipTehn<>'OT' And tipTehn<>'PHOTO' And tipTehn<>'FAX' And tipTehn<>'PHONE' And tipTehn<>'ZIP' And tipTehn<>'SCANER' And tipTehn<>'MONITOR' And tipTehn<>'NET' And tipTehn<>'USB' And tipTehn<>'SOUND' And tipTehn<>'IBP' And tipTehn<>'FS' And tipTehn<>'KEYB' And tipTehn<>'MOUSE'"
                 Else
-                    sSQL = "Select NET_NAME From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "' and tipTehn<>'Printer' And tipTehn<>'MFU' And tipTehn<>'KOpir' And tipTehn<>'OT' And tipTehn<>'PHOTO' And tipTehn<>'FAX' And tipTehn<>'PHONE' And tipTehn<>'ZIP' And tipTehn<>'SCANER' And tipTehn<>'MONITOR' And tipTehn<>'NET' And tipTehn<>'USB' And tipTehn<>'SOUND' And tipTehn<>'IBP' And tipTehn<>'FS' And tipTehn<>'KEYB' And tipTehn<>'MOUSE'"
+                    sSQL = "Select NET_NAME From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" &
+                           sOFF &
+                           "' and tipTehn<>'Printer' And tipTehn<>'MFU' And tipTehn<>'KOpir' And tipTehn<>'OT' And tipTehn<>'PHOTO' And tipTehn<>'FAX' And tipTehn<>'PHONE' And tipTehn<>'ZIP' And tipTehn<>'SCANER' And tipTehn<>'MONITOR' And tipTehn<>'NET' And tipTehn<>'USB' And tipTehn<>'SOUND' And tipTehn<>'IBP' And tipTehn<>'FS' And tipTehn<>'KEYB' And tipTehn<>'MOUSE'"
                 End If
 
-                rs.Open("Select count(*) as t_n From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "'  and tipTehn<>'Printer' And tipTehn<>'MFU' And tipTehn<>'KOpir' And tipTehn<>'OT' And tipTehn<>'PHOTO' And tipTehn<>'FAX' And tipTehn<>'PHONE' And tipTehn<>'ZIP' And tipTehn<>'SCANER' And tipTehn<>'MONITOR' And tipTehn<>'NET' And tipTehn<>'USB' And tipTehn<>'SOUND' And tipTehn<>'IBP' And tipTehn<>'FS' And tipTehn<>'KEYB' And tipTehn<>'MOUSE'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs.Open(
+                    "Select count(*) as t_n From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" &
+                    sOFF &
+                    "'  and tipTehn<>'Printer' And tipTehn<>'MFU' And tipTehn<>'KOpir' And tipTehn<>'OT' And tipTehn<>'PHOTO' And tipTehn<>'FAX' And tipTehn<>'PHONE' And tipTehn<>'ZIP' And tipTehn<>'SCANER' And tipTehn<>'MONITOR' And tipTehn<>'NET' And tipTehn<>'USB' And tipTehn<>'SOUND' And tipTehn<>'IBP' And tipTehn<>'FS' And tipTehn<>'KEYB' And tipTehn<>'MOUSE'",
+                    DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 'Dim a1 As String
                 With rs
@@ -1128,8 +1129,8 @@ Error_:
         End If
 
 
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
             .MoveFirst()
@@ -1144,21 +1145,20 @@ Error_:
         rs = Nothing
 
 
-
         Exit Sub
-err_:
+        err_:
         MsgBox(Err.Description)
     End Sub
 
     Public Sub add_kabn_if_nothing()
 
-        Dim rs As ADODB.Recordset
+        Dim rs As Recordset
         Dim sSQL As String
 
         sSQL = "select filial, mesto, kabn from kompy"
 
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
             .MoveFirst()
@@ -1189,12 +1189,5 @@ err_:
 
         rs.Close()
         rs = Nothing
-
-
-
-
     End Sub
-
-
-
 End Module

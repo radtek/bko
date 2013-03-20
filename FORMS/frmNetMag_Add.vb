@@ -6,23 +6,23 @@
         InitializeComponent()
     End Sub 'New
 
-    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
+    Private Sub Button2_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Button2.Click
         Me.Close()
     End Sub
 
-    Private Sub ToolStripButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton1.Click
+    Private Sub ToolStripButton1_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ToolStripButton1.Click
 
         frmNetMagazin.sBDO_SVT_Pref = "PC"
         frmNetMag_selectSVT.ShowDialog(Me)
     End Sub
 
-    Private Sub ToolStripButton3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton3.Click
+    Private Sub ToolStripButton3_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ToolStripButton3.Click
 
         frmNetMagazin.sBDO_SVT_Pref = "NET"
         frmNetMag_selectSVT.ShowDialog(Me)
     End Sub
 
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Button1.Click
 
         If Len(txtLineRoz.Text) = 0 Then
 
@@ -33,18 +33,16 @@
 
 
         Dim sSQL As String
-        Dim rs As ADODB.Recordset
+        Dim rs As Recordset
         Dim A1, A2, A3, A4 As String
-
-
 
 
         If frmNetMagazin.sBDO_Pref = "ROOT" And frmNetMagazin.sBDO_SVT_count <> 0 Then
 
             sSQL = "Select * from kompy where id=" & frmNetMagazin.sBDO_SVT_count
 
-            rs = New ADODB.Recordset
-            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rs = New Recordset
+            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
             With rs
                 A1 = .Fields("filial").Value
@@ -69,18 +67,19 @@
 
                 Case "O"
 
-                    sSQL = "SELECT id, Filial as one_par, N_Otd as two_par FROM SPR_OTD_FILIAL WHERE Filial='" & A1 & "' AND N_Otd='" & A2 & "'"
+                    sSQL = "SELECT id, Filial as one_par, N_Otd as two_par FROM SPR_OTD_FILIAL WHERE Filial='" & A1 &
+                           "' AND N_Otd='" & A2 & "'"
 
                 Case "K"
 
-                    sSQL = "SELECT id, Name as tree_par, N_F as one_par, N_M as two_par FROM SPR_KAB where N_F='" & A1 & "' AND N_M='" & A2 & "' AND Name='" & A3 & "'"
-
+                    sSQL = "SELECT id, Name as tree_par, N_F as one_par, N_M as two_par FROM SPR_KAB where N_F='" & A1 &
+                           "' AND N_M='" & A2 & "' AND Name='" & A3 & "'"
 
 
             End Select
 
-            rs = New ADODB.Recordset
-            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rs = New Recordset
+            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
 
             With rs
@@ -96,9 +95,6 @@
         End If
 
 
-
-
-
         If sEDT = True Then
 
             sSQL = "SELECT * FROM TBL_NET_MAG where id=" & sID
@@ -108,8 +104,8 @@
         End If
 
 
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         Dim uname As String = frmNetMagazin.sBDO_SVT_count
         Dim uname1 As String = frmNetMagazin.sBDO_NET_count
@@ -144,10 +140,8 @@
             .Fields("COMMUTATOR_MEMO").Value = txtComMemo.Text
 
 
-
             .Fields("PREF").Value = frmNetMagazin.sBDO_Pref
             .Fields("sID").Value = frmNetMagazin.sBDO_count
-
 
 
             .Update()
@@ -158,21 +152,20 @@
         Call frmNetMagazin.NET_MAG_LOAD()
 
         Me.Close()
-
     End Sub
 
-    Private Sub frmNetMag_Add_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+    Private Sub frmNetMag_Add_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
 
 
         SendFonts(Me)
 
 
         'btnSearch.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\search.png")
-        ToolStripButton1.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\add.png")
-        ToolStripButton2.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\remove.png")
+        ToolStripButton1.Image = New Bitmap(PrPath & "pic\iface\add.png")
+        ToolStripButton2.Image = New Bitmap(PrPath & "pic\iface\remove.png")
 
-        ToolStripButton3.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\add.png")
-        ToolStripButton4.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\remove.png")
+        ToolStripButton3.Image = New Bitmap(PrPath & "pic\iface\add.png")
+        ToolStripButton4.Image = New Bitmap(PrPath & "pic\iface\remove.png")
 
 
         Call frmNetMag_Add_LANG()
@@ -196,22 +189,18 @@
 
 
         End If
-
-
     End Sub
 
-    Private Sub ToolStripButton2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton2.Click
+    Private Sub ToolStripButton2_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ToolStripButton2.Click
         'frmNetMagazin.sBDO_NET_count = 0
         frmNetMagazin.sBDO_SVT_count = 0
         txtSVT.Text = ""
-
     End Sub
 
-    Private Sub ToolStripButton4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton4.Click
+    Private Sub ToolStripButton4_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ToolStripButton4.Click
 
         frmNetMagazin.sBDO_NET_count = 0
         'frmNetMagazin.sBDO_SVT_count = 0
         txtKom.Text = ""
-
     End Sub
 End Class

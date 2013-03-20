@@ -555,6 +555,8 @@ error_Renamed:
     End Sub
 
     Private Sub FrmComputersMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles FrmComputersMenuItem.Click
+        If DATAB = False Then Exit Sub
+
         frmComputers.MdiParent = Me
         frmComputers.Show()
         frmComputers.Focus()
@@ -567,6 +569,9 @@ error_Renamed:
     End Sub
 
     Private Sub СправочникиОборудованияToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles СправочникиОборудованияToolStripMenuItem.Click
+
+        If DATAB = False Then Exit Sub
+
         frmDirectory.MdiParent = Me
         frmDirectory.Show()
         frmDirectory.Focus()
@@ -635,6 +640,7 @@ error_Renamed:
     End Sub
 
     Private Sub УчётЗаявокремонтовToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles УчётЗаявокремонтовToolStripMenuItem.Click
+        If DATAB = False Then Exit Sub
 
         frmserviceDesc.MdiParent = Me
         frmserviceDesc.Show()
@@ -646,6 +652,7 @@ error_Renamed:
     End Sub
 
     Private Sub УчётПрограммногоОбеспеченияToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles УчётПрограммногоОбеспеченияToolStripMenuItem.Click
+        If DATAB = False Then Exit Sub
         frmSoftware.MdiParent = Me
         frmSoftware.Show()
         frmSoftware.Focus()
@@ -656,6 +663,8 @@ error_Renamed:
     End Sub
 
     Private Sub CleerDBToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CleerDBToolStripMenuItem.Click
+
+        If DATAB = False Then Exit Sub
 
         Dim rs As ADODB.Recordset
         rs = New ADODB.Recordset
@@ -800,6 +809,9 @@ Error_:
     End Sub
 
     Private Sub CompareDBToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CompareDBToolStripMenuItem.Click
+
+        If DATAB = False Then Exit Sub
+
         Call COMPARE_DB()
     End Sub
 
@@ -830,6 +842,7 @@ err_:
     End Sub
 
     Private Sub УчётКартриджейToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles УчётКартриджейToolStripMenuItem.Click
+        If DATAB = False Then Exit Sub
 
         Dim Counter As Decimal
         Dim rs As ADODB.Recordset
@@ -883,6 +896,7 @@ err_:
     End Sub
 
     Private Sub СкладToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles СкладToolStripMenuItem.Click
+        If DATAB = False Then Exit Sub
 
         frmSclad.MdiParent = Me
         frmSclad.Show()
@@ -890,6 +904,9 @@ err_:
     End Sub
 
     Private Sub ЖурналыПрограммыToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ЖурналыПрограммыToolStripMenuItem.Click
+
+        If DATAB = False Then Exit Sub
+
         frmLOG.MdiParent = Me
         frmLOG.Show()
         frmLOG.Focus()
@@ -975,6 +992,8 @@ err_:
 
     Private Sub АктытребованияToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles АктытребованияToolStripMenuItem.Click
 
+        If DATAB = False Then Exit Sub
+
         Select Case frmComputers.sPREF
 
             Case "C"
@@ -995,6 +1014,9 @@ err_:
     End Sub
 
     Private Sub OptionsToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OptionsToolStripMenuItem.Click
+        If DATAB = False Then Exit Sub
+
+
         frmSheduler.MdiParent = Me
         frmSheduler.Show()
         frmSheduler.Focus()
@@ -1013,12 +1035,16 @@ err_:
     End Sub
 
     Private Sub ЗапросыToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ЗапросыToolStripMenuItem.Click
+
+        If DATAB = False Then Exit Sub
+
         frmSQL.MdiParent = Me
         frmSQL.Show()
         frmSQL.Focus()
     End Sub
 
     Private Sub ОрганизацияToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ОрганизацияToolStripMenuItem.Click
+        If DATAB = False Then Exit Sub
 
         frmSetup.SStab1.SelectedTab = frmSetup.SStab1.TabPages("TabPage3")
         frmSetup.MdiParent = Me
@@ -2328,6 +2354,9 @@ ADD:
     End Sub
 
     Private Sub РемонтыToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles РемонтыToolStripMenuItem.Click
+
+        If DATAB = False Then Exit Sub
+
         frmReports.MdiParent = Me
         frmReports.Show()
         frmReports.sSTAB1.SelectedTab = frmReports.sSTAB1.TabPages("TabPage3")
@@ -2418,6 +2447,8 @@ err_:
     End Sub
 
     Private Sub КабельныеЖурналыToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles netMagmnu.Click
+        If DATAB = False Then Exit Sub
+
         frmNetMagazin.MdiParent = Me
         frmNetMagazin.Show()
         frmNetMagazin.Focus()
@@ -2426,9 +2457,9 @@ err_:
     Private Sub TimerEventHandler(ByVal obj As Object, ByVal ergs As EventArgs)
         On Error Resume Next
 
+        If DATAB = False Then Exit Sub
 
         If TimeOfDay.Minute = 0 And TimeOfDay.Second = 0 Then
-
 
             Dim LNGIniFile As New IniFile(sLANGPATH)
 
@@ -2505,6 +2536,8 @@ err_:
     End Sub
 
     Private Sub ПерегрузкаСрправочниковToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ПерегрузкаСрправочниковToolStripMenuItem.Click
+        If DATAB = False Then Exit Sub
+
         'Dim newThread2 As New Thread(AddressOf LoadSPR_1)
         'newThread2.Start()
 
@@ -2513,6 +2546,8 @@ err_:
     End Sub
 
     Private Sub ПроверитьФилиалыОтделыToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ПроверитьФилиалыОтделыToolStripMenuItem.Click
+
+        If DATAB = False Then Exit Sub
 
         'Dim newThread1 As New Thread(AddressOf add_kabn_if_nothing)
         'newThread1.Start()
@@ -2527,8 +2562,6 @@ err_:
         Call SaveInfTeh()
     End Sub
 
- 
-   
     Private Sub ReloginToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ReloginToolStripMenuItem.Click
 
         Call RELOGIN()
@@ -2540,6 +2573,7 @@ err_:
         sRelogin = True
 
         UnLoadDatabase()
+
 
         ' Call Clear_Form_For_Computer()
 
@@ -2573,6 +2607,20 @@ err_:
         frmSoftware.Close()
         frmSQL.Close()
         frmTreb_Act_treb.Close()
+
+        uLevel = ""
+        uSERID = ""
+        UserNames = ""
+
+        NewToolStripMenuItem.Enabled = False
+        УчётToolStripMenuItem.Enabled = False
+        СправочникиToolStripMenuItem.Enabled = False
+        ОтчётыToolStripMenuItem.Enabled = False
+        ToolsMenu.Enabled = False
+        ViewMenu.Enabled = False
+        WindowsMenu.Enabled = False
+        ToolStripButton1.Enabled = False
+        NewToolStripButton.Enabled = False
 
         frmLogin.txtPassword.Text = ""
         frmLogin.ShowDialog(Me)

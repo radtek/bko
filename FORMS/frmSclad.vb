@@ -8,35 +8,30 @@
     Public MOD2 As String
     Public KOL As String
 
-    Private Sub frmSclad_Activated(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Activated
+    Private Sub frmSclad_Activated(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Activated
 
         frmMain.SaveInfTehButton.Enabled = False
         frmMain.ToolStripDropDownButton1.Enabled = False
-
     End Sub
 
-    Private Sub frmSclad_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+    Private Sub frmSclad_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
 
         SendFonts(Me)
-
 
 
         Call frmSclad_Lang()
 
         Call Load_SCLAD3()
-
-
-
     End Sub
 
     Public Sub Load_SCLAD3()
-        Dim rs As ADODB.Recordset 'Объявляем рекордсет
+        Dim rs As Recordset 'Объявляем рекордсет
         Dim sSQL As String 'Переменная, где будет размещён SQL запрос
         Dim iCount As Decimal = 0
 
         sSQL = "SELECT count(*) as t_n FROM Sclad"
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
 
@@ -48,9 +43,10 @@
 
         If iCount = 0 Then Exit Sub
 
-        sSQL = "SELECT number, ComplectName, Kolvo, Ostalos, Firma, DaysAndTimes, Prim, Chet, Garant, Cena, NumberTreb, Platejka, NDS, Otdel FROM Sclad"
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        sSQL =
+            "SELECT number, ComplectName, Kolvo, Ostalos, Firma, DaysAndTimes, Prim, Chet, Garant, Cena, NumberTreb, Platejka, NDS, Otdel FROM Sclad"
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         Dim intCount As Decimal = 0
         lvSclad.Items.Clear()
@@ -149,10 +145,9 @@
         rs = Nothing
 
         ResList(Me.lvSclad)
-
     End Sub
 
-    Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
+    Private Sub btnAdd_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAdd.Click
 
         frmSclad_ADD.EDTR = False
 
@@ -172,21 +167,16 @@
         frmSclad_ADD.v_otdel.Text = ""
 
         frmSclad_ADD.ShowDialog(Me)
-
     End Sub
 
-    Private Sub lvSclad_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvSclad.Click
+    Private Sub lvSclad_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lvSclad.Click
         Dim z As Integer
         For z = 0 To lvSclad.SelectedItems.Count - 1
             scCOUNT = (lvSclad.SelectedItems(z).Text)
         Next
-
-
-
-
     End Sub
 
-    Private Sub lvSclad_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvSclad.DoubleClick
+    Private Sub lvSclad_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles lvSclad.DoubleClick
 
 
         Dim z As Integer
@@ -195,10 +185,11 @@
             scCOUNT = (lvSclad.SelectedItems(z).Text)
         Next
         frmSclad_ADD.EDTR = True
-        Dim rs As ADODB.Recordset
+        Dim rs As Recordset
 
-        rs = New ADODB.Recordset
-        rs.Open("SELECT * FROM Sclad WHERE number=" & scCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open("SELECT * FROM Sclad WHERE number=" & scCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
 
 
         frmSclad_ADD.nazvan.Text = ""
@@ -239,14 +230,13 @@
         rs = Nothing
 
         frmSclad_ADD.ShowDialog(Me)
-
     End Sub
 
-    Private Sub lvSclad_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvSclad.SelectedIndexChanged
-
+    Private Sub lvSclad_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles lvSclad.SelectedIndexChanged
     End Sub
 
-    Private Sub btnTREB_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnTREB.Click
+    Private Sub btnTREB_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnTREB.Click
         cf1 = ""
         nam1 = ""
         otd1 = ""
@@ -276,10 +266,10 @@
         frmSclad_treb.ShowDialog(Me)
     End Sub
 
-    Private Sub btnOffice_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOffice.Click
+    Private Sub btnOffice_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnOffice.Click
 
 
-         Select sOfficePACK
+        Select sOfficePACK
 
             Case "OpenOffice.org"
 
@@ -291,12 +281,9 @@
 
 
         End Select
-
-
-
     End Sub
 
-    Private Sub btnDel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDel.Click
+    Private Sub btnDel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnDel.Click
         On Error GoTo err_
         If lvSclad.Items.Count = 0 Then Exit Sub
 
@@ -306,17 +293,18 @@
         '    scCOUNT = (lvSclad.SelectedItems(z).Text)
         'Next
 
-        Dim rs1 As ADODB.Recordset
-        rs1 = New ADODB.Recordset
+        Dim rs1 As Recordset
+        rs1 = New Recordset
 
-        rs1.Open("Delete FROM Sclad WHERE number=" & scCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs1.Open("Delete FROM Sclad WHERE number=" & scCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                 LockTypeEnum.adLockOptimistic)
 
         rs1 = Nothing
 
         Call Load_SCLAD3()
 
         Exit Sub
-err_:
+        err_:
         MsgBox(Err.Description)
     End Sub
 End Class

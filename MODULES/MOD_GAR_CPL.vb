@@ -3,9 +3,10 @@
 
     Public Sub GAR_ED()
         Call CLEAR_CPL()
-        Dim garant_comp As ADODB.Recordset
-        garant_comp = New ADODB.Recordset
-        garant_comp.Open("SELECT count(*) as t_n FROM garant_comp WHERE Id_Comp =" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        Dim garant_comp As Recordset
+        garant_comp = New Recordset
+        garant_comp.Open("SELECT count(*) as t_n FROM garant_comp WHERE Id_Comp =" & frmComputers.sCOUNT, DB7,
+                         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         Dim un As String
 
@@ -26,17 +27,16 @@
             EditGarant = False
 
         End If
-
-
     End Sub
 
     Public Sub GCHTIO()
 
         On Error Resume Next
-        Dim BASECOMP As ADODB.Recordset
+        Dim BASECOMP As Recordset
 
-        BASECOMP = New ADODB.Recordset
-        BASECOMP.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        BASECOMP = New Recordset
+        BASECOMP.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                      LockTypeEnum.adLockOptimistic)
 
         With BASECOMP
 
@@ -61,19 +61,21 @@
             frmGarCPL.PROizV4.Text = .Fields("CPUProizv4").Value
 
 
-
         End With
 
-        Dim garant_comp As ADODB.Recordset
+        Dim garant_comp As Recordset
 
 
-        garant_comp = New ADODB.Recordset
-        garant_comp.Open("SELECT * FROM garant_comp WHERE Id_Comp =" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        garant_comp = New Recordset
+        garant_comp.Open("SELECT * FROM garant_comp WHERE Id_Comp =" & frmComputers.sCOUNT, DB7,
+                         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With garant_comp
 
-            frmGarCPL.DNG.Value = .Fields("CPU_DP").Value & "." & .Fields("CPU_MP").Value & "." & .Fields("CPU_GP").Value
-            frmGarCPL.DOG.Value = .Fields("CPU_DPo").Value & "." & .Fields("CPU_MPo").Value & "." & .Fields("CPU_GPo").Value
+            frmGarCPL.DNG.Value = .Fields("CPU_DP").Value & "." & .Fields("CPU_MP").Value & "." &
+                                  .Fields("CPU_GP").Value
+            frmGarCPL.DOG.Value = .Fields("CPU_DPo").Value & "." & .Fields("CPU_MPo").Value & "." &
+                                  .Fields("CPU_GPo").Value
 
             frmGarCPL.cmbPostav.Text = .Fields("CPU_POST").Value
             'EDTID 'frmMain.nomerPCAbs '.Fields("Id_Comp").value
@@ -83,16 +85,16 @@
         garant_comp.Close()
         garant_comp = Nothing
         BASECOMP = Nothing
-
     End Sub
 
     Public Sub PAMIAT()
         On Error Resume Next
-        Dim garant_comp As ADODB.Recordset
-        Dim BASECOMP As ADODB.Recordset
+        Dim garant_comp As Recordset
+        Dim BASECOMP As Recordset
 
-        BASECOMP = New ADODB.Recordset
-        BASECOMP.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        BASECOMP = New Recordset
+        BASECOMP.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                      LockTypeEnum.adLockOptimistic)
 
 
         With BASECOMP
@@ -118,17 +120,19 @@
             frmGarCPL.PROizV4.Text = .Fields("RAM_PROIZV_4").Value
 
 
-
         End With
 
-        garant_comp = New ADODB.Recordset
-        garant_comp.Open("SELECT * FROM garant_comp WHERE Id_Comp =" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        garant_comp = New Recordset
+        garant_comp.Open("SELECT * FROM garant_comp WHERE Id_Comp =" & frmComputers.sCOUNT, DB7,
+                         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
 
         With garant_comp
 
-            frmGarCPL.DNG.Value = .Fields("RAM_DP").Value & "." & .Fields("RAM_MP").Value & "." & .Fields("RAM_GP").Value
-            frmGarCPL.DOG.Value = .Fields("RAM_DPo").Value & "." & .Fields("RAM_MPo").Value & "." & .Fields("RAM_GPo").Value
+            frmGarCPL.DNG.Value = .Fields("RAM_DP").Value & "." & .Fields("RAM_MP").Value & "." &
+                                  .Fields("RAM_GP").Value
+            frmGarCPL.DOG.Value = .Fields("RAM_DPo").Value & "." & .Fields("RAM_MPo").Value & "." &
+                                  .Fields("RAM_GPo").Value
 
             frmGarCPL.cmbPostav.Text = .Fields("RAM_POST").Value
 
@@ -138,19 +142,20 @@
         garant_comp.Close()
         garant_comp = Nothing
         BASECOMP = Nothing
-
     End Sub
 
     Public Sub HARDY()
         On Error Resume Next
-        Dim garant_comp As ADODB.Recordset
-        Dim BASECOMP As ADODB.Recordset
+        Dim garant_comp As Recordset
+        Dim BASECOMP As Recordset
 
-        garant_comp = New ADODB.Recordset
-        garant_comp.Open("SELECT * FROM garant_comp WHERE Id_Comp =" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        garant_comp = New Recordset
+        garant_comp.Open("SELECT * FROM garant_comp WHERE Id_Comp =" & frmComputers.sCOUNT, DB7,
+                         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-        BASECOMP = New ADODB.Recordset
-        BASECOMP.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        BASECOMP = New Recordset
+        BASECOMP.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                      LockTypeEnum.adLockOptimistic)
         With BASECOMP
 
             frmGarCPL.cmbCPU1.Text = .Fields("HDD_Name_1").Value
@@ -174,14 +179,15 @@
             frmGarCPL.PROizV4.Text = .Fields("HDD_PROIZV_4").Value
 
 
-
         End With
 
 
         With garant_comp
 
-            frmGarCPL.DNG.Value = .Fields("HDD_DP").Value & "." & .Fields("HDD_MP").Value & "." & .Fields("HDD_GP").Value
-            frmGarCPL.DOG.Value = .Fields("HDD_DPo").Value & "." & .Fields("HDD_MPo").Value & "." & .Fields("HDD_GPo").Value
+            frmGarCPL.DNG.Value = .Fields("HDD_DP").Value & "." & .Fields("HDD_MP").Value & "." &
+                                  .Fields("HDD_GP").Value
+            frmGarCPL.DOG.Value = .Fields("HDD_DPo").Value & "." & .Fields("HDD_MPo").Value & "." &
+                                  .Fields("HDD_GPo").Value
 
             frmGarCPL.cmbPostav.Text = .Fields("HDD_POST").Value
 
@@ -195,14 +201,16 @@
 
     Public Sub VideoCard()
         On Error Resume Next
-        Dim garant_comp As ADODB.Recordset
-        Dim BASECOMP As ADODB.Recordset
+        Dim garant_comp As Recordset
+        Dim BASECOMP As Recordset
 
-        garant_comp = New ADODB.Recordset
-        garant_comp.Open("SELECT * FROM garant_comp WHERE Id_Comp =" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        garant_comp = New Recordset
+        garant_comp.Open("SELECT * FROM garant_comp WHERE Id_Comp =" & frmComputers.sCOUNT, DB7,
+                         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-        BASECOMP = New ADODB.Recordset
-        BASECOMP.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        BASECOMP = New Recordset
+        BASECOMP.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                      LockTypeEnum.adLockOptimistic)
         With BASECOMP
 
             frmGarCPL.cmbCPU1.Text = .Fields("SVGA_NAME").Value
@@ -216,8 +224,10 @@
 
         With garant_comp
 
-            frmGarCPL.DNG.Value = .Fields("SVGA_DP").Value & "." & .Fields("SVGA_MP").Value & "." & .Fields("SVGA_GP").Value
-            frmGarCPL.DOG.Value = .Fields("SVGA_DPo").Value & "." & .Fields("SVGA_MPo").Value & "." & .Fields("SVGA_GPo").Value
+            frmGarCPL.DNG.Value = .Fields("SVGA_DP").Value & "." & .Fields("SVGA_MP").Value & "." &
+                                  .Fields("SVGA_GP").Value
+            frmGarCPL.DOG.Value = .Fields("SVGA_DPo").Value & "." & .Fields("SVGA_MPo").Value & "." &
+                                  .Fields("SVGA_GPo").Value
 
             frmGarCPL.cmbPostav.Text = .Fields("SVGA_POST").Value
 
@@ -227,20 +237,20 @@
         garant_comp.Close()
         garant_comp = Nothing
         BASECOMP = Nothing
-
-
     End Sub
 
     Public Sub SoundCard()
         On Error Resume Next
-        Dim garant_comp As ADODB.Recordset
-        Dim BASECOMP As ADODB.Recordset
+        Dim garant_comp As Recordset
+        Dim BASECOMP As Recordset
 
-        garant_comp = New ADODB.Recordset
-        garant_comp.Open("SELECT * FROM garant_comp WHERE Id_Comp =" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        garant_comp = New Recordset
+        garant_comp.Open("SELECT * FROM garant_comp WHERE Id_Comp =" & frmComputers.sCOUNT, DB7,
+                         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-        BASECOMP = New ADODB.Recordset
-        BASECOMP.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        BASECOMP = New Recordset
+        BASECOMP.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                      LockTypeEnum.adLockOptimistic)
         With BASECOMP
 
             frmGarCPL.cmbCPU1.Text = .Fields("SOUND_NAME").Value
@@ -254,8 +264,10 @@
 
         With garant_comp
 
-            frmGarCPL.DNG.Value = .Fields("SOUND_DP").Value & "." & .Fields("SOUND_MP").Value & "." & .Fields("SOUND_GP").Value
-            frmGarCPL.DOG.Value = .Fields("SOUND_DPo").Value & "." & .Fields("SOUND_MPo").Value & "." & .Fields("SOUND_GPo").Value
+            frmGarCPL.DNG.Value = .Fields("SOUND_DP").Value & "." & .Fields("SOUND_MP").Value & "." &
+                                  .Fields("SOUND_GP").Value
+            frmGarCPL.DOG.Value = .Fields("SOUND_DPo").Value & "." & .Fields("SOUND_MPo").Value & "." &
+                                  .Fields("SOUND_GPo").Value
 
             frmGarCPL.cmbPostav.Text = .Fields("SOUND_POST").Value
 
@@ -266,19 +278,20 @@
         garant_comp.Close()
         garant_comp = Nothing
         BASECOMP = Nothing
-
     End Sub
 
     Public Sub GCHTIm()
         On Error Resume Next
-        Dim garant_comp As ADODB.Recordset
-        Dim BASECOMP As ADODB.Recordset
+        Dim garant_comp As Recordset
+        Dim BASECOMP As Recordset
 
-        garant_comp = New ADODB.Recordset
-        garant_comp.Open("SELECT * FROM garant_comp WHERE Id_Comp =" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        garant_comp = New Recordset
+        garant_comp.Open("SELECT * FROM garant_comp WHERE Id_Comp =" & frmComputers.sCOUNT, DB7,
+                         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-        BASECOMP = New ADODB.Recordset
-        BASECOMP.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        BASECOMP = New Recordset
+        BASECOMP.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                      LockTypeEnum.adLockOptimistic)
         With BASECOMP
 
             frmGarCPL.cmbCPU1.Text = .Fields("Mb").Value
@@ -292,7 +305,8 @@
         With garant_comp
 
             frmGarCPL.DNG.Value = .Fields("mb_DP").Value & "." & .Fields("mb_MP").Value & "." & .Fields("mb_GP").Value
-            frmGarCPL.DOG.Value = .Fields("mb_DPo").Value & "." & .Fields("mb_MPo").Value & "." & .Fields("mb_GPo").Value
+            frmGarCPL.DOG.Value = .Fields("mb_DPo").Value & "." & .Fields("mb_MPo").Value & "." &
+                                  .Fields("mb_GPo").Value
 
             frmGarCPL.cmbPostav.Text = .Fields("mb_POST").Value
 
@@ -304,13 +318,11 @@
         garant_comp.Close()
         garant_comp = Nothing
         BASECOMP = Nothing
-
-
     End Sub
 
     Public Sub CdrF()
-        Dim garant_comp As ADODB.Recordset
-        Dim BASECOMP As ADODB.Recordset
+        Dim garant_comp As Recordset
+        Dim BASECOMP As Recordset
 
 
         On Error GoTo Error_
@@ -319,11 +331,13 @@
 
         On Error Resume Next
 
-        garant_comp = New ADODB.Recordset
-        garant_comp.Open("SELECT * FROM garant_comp WHERE Id_Comp =" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        garant_comp = New Recordset
+        garant_comp.Open("SELECT * FROM garant_comp WHERE Id_Comp =" & frmComputers.sCOUNT, DB7,
+                         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-        BASECOMP = New ADODB.Recordset
-        BASECOMP.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        BASECOMP = New Recordset
+        BASECOMP.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                      LockTypeEnum.adLockOptimistic)
         With BASECOMP
 
             frmGarCPL.cmbCPU1.Text = .Fields("CD_NAME").Value
@@ -343,14 +357,15 @@
             frmGarCPL.PROizV3.Text = .Fields("dvd_PROIZV").Value
 
 
-
         End With
 
 
         With garant_comp
 
-            frmGarCPL.DNG.Value = .Fields("CDROM_DP").Value & "." & .Fields("CDROM_MP").Value & "." & .Fields("CDROM_GP").Value
-            frmGarCPL.DOG.Value = .Fields("CDROM_DPo").Value & "." & .Fields("CDROM_MPo").Value & "." & .Fields("CDROM_GPo").Value
+            frmGarCPL.DNG.Value = .Fields("CDROM_DP").Value & "." & .Fields("CDROM_MP").Value & "." &
+                                  .Fields("CDROM_GP").Value
+            frmGarCPL.DOG.Value = .Fields("CDROM_DPo").Value & "." & .Fields("CDROM_MPo").Value & "." &
+                                  .Fields("CDROM_GPo").Value
 
             frmGarCPL.cmbPostav.Text = .Fields("CDROM_POST").Value
 
@@ -364,7 +379,7 @@
         BASECOMP = Nothing
 
         Exit Sub
-Error_:
+        Error_:
 #If islog Then
 WriteLog Err.Description
 #End If
@@ -373,17 +388,17 @@ WriteLog Err.Description
     Public Sub NEtr()
         '"Информация о Сети"
 
-        Dim garant_comp As ADODB.Recordset
-        Dim BASECOMP As ADODB.Recordset
+        Dim garant_comp As Recordset
+        Dim BASECOMP As Recordset
 
 
+        garant_comp = New Recordset
+        garant_comp.Open("SELECT * FROM garant_comp WHERE Id_Comp =" & frmComputers.sCOUNT, DB7,
+                         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-
-        garant_comp = New ADODB.Recordset
-        garant_comp.Open("SELECT * FROM garant_comp WHERE Id_Comp =" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-
-        BASECOMP = New ADODB.Recordset
-        BASECOMP.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        BASECOMP = New Recordset
+        BASECOMP.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                      LockTypeEnum.adLockOptimistic)
         On Error GoTo Error_
         'Процессор
         With BASECOMP
@@ -402,8 +417,10 @@ WriteLog Err.Description
 
         With garant_comp
 
-            frmGarCPL.DNG.Value = .Fields("NET_DP").Value & "." & .Fields("NET_MP").Value & "." & .Fields("NET_GP").Value
-            frmGarCPL.DOG.Value = .Fields("NET_DPo").Value & "." & .Fields("NET_MPo").Value & "." & .Fields("NET_GPo").Value
+            frmGarCPL.DNG.Value = .Fields("NET_DP").Value & "." & .Fields("NET_MP").Value & "." &
+                                  .Fields("NET_GP").Value
+            frmGarCPL.DOG.Value = .Fields("NET_DPo").Value & "." & .Fields("NET_MPo").Value & "." &
+                                  .Fields("NET_GPo").Value
 
             frmGarCPL.cmbPostav.Text = .Fields("NET_POST").Value
 
@@ -415,7 +432,7 @@ WriteLog Err.Description
         garant_comp = Nothing
         BASECOMP = Nothing
         Exit Sub
-Error_:
+        Error_:
 #If islog Then
 WriteLog Err.Description
 #End If
@@ -424,16 +441,18 @@ WriteLog Err.Description
     Public Sub FDDsS()
         '"Информация о Сети"
 
-        Dim garant_comp As ADODB.Recordset
-        Dim BASECOMP As ADODB.Recordset
+        Dim garant_comp As Recordset
+        Dim BASECOMP As Recordset
 
         On Error GoTo Error_
         'Процессор
-        garant_comp = New ADODB.Recordset
-        garant_comp.Open("SELECT * FROM garant_comp WHERE Id_Comp =" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        garant_comp = New Recordset
+        garant_comp.Open("SELECT * FROM garant_comp WHERE Id_Comp =" & frmComputers.sCOUNT, DB7,
+                         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-        BASECOMP = New ADODB.Recordset
-        BASECOMP.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        BASECOMP = New Recordset
+        BASECOMP.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                      LockTypeEnum.adLockOptimistic)
         With BASECOMP
             frmGarCPL.cmbCPU1.Text = .Fields("FDD_NAME").Value
             frmGarCPL.txtMHZ1.Text = .Fields("FDD_SN").Value
@@ -444,8 +463,10 @@ WriteLog Err.Description
 
         With garant_comp
 
-            frmGarCPL.DNG.Value = .Fields("FDD_DP").Value & "." & .Fields("FDD_MP").Value & "." & .Fields("FDD_GP").Value
-            frmGarCPL.DOG.Value = .Fields("FDD_DPo").Value & "." & .Fields("FDD_MPo").Value & "." & .Fields("FDD_GPo").Value
+            frmGarCPL.DNG.Value = .Fields("FDD_DP").Value & "." & .Fields("FDD_MP").Value & "." &
+                                  .Fields("FDD_GP").Value
+            frmGarCPL.DOG.Value = .Fields("FDD_DPo").Value & "." & .Fields("FDD_MPo").Value & "." &
+                                  .Fields("FDD_GPo").Value
 
             frmGarCPL.cmbPostav.Text = .Fields("FDD_POST").Value
 
@@ -457,7 +478,7 @@ WriteLog Err.Description
         garant_comp = Nothing
         BASECOMP = Nothing
         Exit Sub
-Error_:
+        Error_:
 #If islog Then
 WriteLog Err.Description
 #End If
@@ -465,17 +486,17 @@ WriteLog Err.Description
 
     Public Sub MODEMs()
         '"Информация о Сети"
-        Dim garant_comp As ADODB.Recordset
-        Dim BASECOMP As ADODB.Recordset
+        Dim garant_comp As Recordset
+        Dim BASECOMP As Recordset
 
 
+        garant_comp = New Recordset
+        garant_comp.Open("SELECT * FROM garant_comp WHERE Id_Comp =" & frmComputers.sCOUNT, DB7,
+                         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-
-        garant_comp = New ADODB.Recordset
-        garant_comp.Open("SELECT * FROM garant_comp WHERE Id_Comp =" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-
-        BASECOMP = New ADODB.Recordset
-        BASECOMP.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        BASECOMP = New Recordset
+        BASECOMP.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                      LockTypeEnum.adLockOptimistic)
         On Error GoTo Error_
         'Процессор
         With BASECOMP
@@ -488,8 +509,10 @@ WriteLog Err.Description
 
         With garant_comp
 
-            frmGarCPL.DNG.Value = .Fields("MODEM_DP").Value & "." & .Fields("MODEM_MP").Value & "." & .Fields("MODEM_GP").Value
-            frmGarCPL.DOG.Value = .Fields("MODEM_DPo").Value & "." & .Fields("MODEM_MPo").Value & "." & .Fields("MODEM_GPo").Value
+            frmGarCPL.DNG.Value = .Fields("MODEM_DP").Value & "." & .Fields("MODEM_MP").Value & "." &
+                                  .Fields("MODEM_GP").Value
+            frmGarCPL.DOG.Value = .Fields("MODEM_DPo").Value & "." & .Fields("MODEM_MPo").Value & "." &
+                                  .Fields("MODEM_GPo").Value
 
             frmGarCPL.cmbPostav.Text = .Fields("MODEM_POST").Value
 
@@ -503,7 +526,7 @@ WriteLog Err.Description
         BASECOMP = Nothing
 
         Exit Sub
-Error_:
+        Error_:
 #If islog Then
 WriteLog Err.Description
 #End If
@@ -512,17 +535,17 @@ WriteLog Err.Description
     Public Sub KEYBOARDs()
         '"Информация о Сети"
 
-        Dim garant_comp As ADODB.Recordset
-        Dim BASECOMP As ADODB.Recordset
+        Dim garant_comp As Recordset
+        Dim BASECOMP As Recordset
 
 
+        garant_comp = New Recordset
+        garant_comp.Open("SELECT * FROM garant_comp WHERE Id_Comp =" & frmComputers.sCOUNT, DB7,
+                         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-
-        garant_comp = New ADODB.Recordset
-        garant_comp.Open("SELECT * FROM garant_comp WHERE Id_Comp =" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-
-        BASECOMP = New ADODB.Recordset
-        BASECOMP.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        BASECOMP = New Recordset
+        BASECOMP.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                      LockTypeEnum.adLockOptimistic)
 
         On Error GoTo Error_
         'Процессор
@@ -536,8 +559,10 @@ WriteLog Err.Description
 
         With garant_comp
 
-            frmGarCPL.DNG.Value = .Fields("KEYBOARD_DP").Value & "." & .Fields("KEYBOARD_MP").Value & "." & .Fields("KEYBOARD_GP").Value
-            frmGarCPL.DOG.Value = .Fields("KEYBOARD_DPo").Value & "." & .Fields("KEYBOARD_MPo").Value & "." & .Fields("KEYBOARD_GPo").Value
+            frmGarCPL.DNG.Value = .Fields("KEYBOARD_DP").Value & "." & .Fields("KEYBOARD_MP").Value & "." &
+                                  .Fields("KEYBOARD_GP").Value
+            frmGarCPL.DOG.Value = .Fields("KEYBOARD_DPo").Value & "." & .Fields("KEYBOARD_MPo").Value & "." &
+                                  .Fields("KEYBOARD_GPo").Value
 
             frmGarCPL.cmbPostav.Text = .Fields("KEYBOARD_POST").Value
 
@@ -551,7 +576,7 @@ WriteLog Err.Description
         BASECOMP = Nothing
 
         Exit Sub
-Error_:
+        Error_:
 #If islog Then
 WriteLog Err.Description
 #End If
@@ -559,17 +584,17 @@ WriteLog Err.Description
 
     Public Sub MOUSEs()
         '"Информация о Сети"
-        Dim garant_comp As ADODB.Recordset
-        Dim BASECOMP As ADODB.Recordset
+        Dim garant_comp As Recordset
+        Dim BASECOMP As Recordset
 
 
+        garant_comp = New Recordset
+        garant_comp.Open("SELECT * FROM garant_comp WHERE Id_Comp =" & frmComputers.sCOUNT, DB7,
+                         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-
-        garant_comp = New ADODB.Recordset
-        garant_comp.Open("SELECT * FROM garant_comp WHERE Id_Comp =" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-
-        BASECOMP = New ADODB.Recordset
-        BASECOMP.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        BASECOMP = New Recordset
+        BASECOMP.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                      LockTypeEnum.adLockOptimistic)
 
         On Error GoTo Error_
         'Процессор
@@ -583,8 +608,10 @@ WriteLog Err.Description
 
         With garant_comp
 
-            frmGarCPL.DNG.Value = .Fields("MOUSE_DP").Value & "." & .Fields("MOUSE_MP").Value & "." & .Fields("MOUSE_GP").Value
-            frmGarCPL.DOG.Value = .Fields("MOUSE_DPo").Value & "." & .Fields("MOUSE_MPo").Value & "." & .Fields("MOUSE_GPo").Value
+            frmGarCPL.DNG.Value = .Fields("MOUSE_DP").Value & "." & .Fields("MOUSE_MP").Value & "." &
+                                  .Fields("MOUSE_GP").Value
+            frmGarCPL.DOG.Value = .Fields("MOUSE_DPo").Value & "." & .Fields("MOUSE_MPo").Value & "." &
+                                  .Fields("MOUSE_GPo").Value
 
             frmGarCPL.cmbPostav.Text = .Fields("MOUSE_POST").Value
 
@@ -596,7 +623,7 @@ WriteLog Err.Description
         garant_comp = Nothing
         BASECOMP = Nothing
         Exit Sub
-Error_:
+        Error_:
 #If islog Then
 WriteLog Err.Description
 #End If
@@ -605,20 +632,19 @@ WriteLog Err.Description
     Public Sub USBs()
         '"Информация о Сети"
 
-        Dim garant_comp As ADODB.Recordset
-        Dim BASECOMP As ADODB.Recordset
-
-
-
+        Dim garant_comp As Recordset
+        Dim BASECOMP As Recordset
 
 
         On Error GoTo Error_
         'Процессор
-        garant_comp = New ADODB.Recordset
-        garant_comp.Open("SELECT * FROM garant_comp WHERE Id_Comp =" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        garant_comp = New Recordset
+        garant_comp.Open("SELECT * FROM garant_comp WHERE Id_Comp =" & frmComputers.sCOUNT, DB7,
+                         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-        BASECOMP = New ADODB.Recordset
-        BASECOMP.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        BASECOMP = New Recordset
+        BASECOMP.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                      LockTypeEnum.adLockOptimistic)
 
         With BASECOMP
             frmGarCPL.cmbCPU1.Text = .Fields("USB_NAME").Value
@@ -630,8 +656,10 @@ WriteLog Err.Description
 
         With garant_comp
 
-            frmGarCPL.DNG.Value = .Fields("USB_DP").Value & "." & .Fields("USB_MP").Value & "." & .Fields("USB_GP").Value
-            frmGarCPL.DOG.Value = .Fields("USB_DPo").Value & "." & .Fields("USB_MPo").Value & "." & .Fields("USB_GPo").Value
+            frmGarCPL.DNG.Value = .Fields("USB_DP").Value & "." & .Fields("USB_MP").Value & "." &
+                                  .Fields("USB_GP").Value
+            frmGarCPL.DOG.Value = .Fields("USB_DPo").Value & "." & .Fields("USB_MPo").Value & "." &
+                                  .Fields("USB_GPo").Value
 
             frmGarCPL.cmbPostav.Text = .Fields("USB_POST").Value
 
@@ -643,7 +671,7 @@ WriteLog Err.Description
         garant_comp = Nothing
         BASECOMP = Nothing
         Exit Sub
-Error_:
+        Error_:
 #If islog Then
 WriteLog Err.Description
 #End If
@@ -651,16 +679,18 @@ WriteLog Err.Description
 
     Public Sub PCIsS()
         '"Информация о Сети"
-        Dim garant_comp As ADODB.Recordset
-        Dim BASECOMP As ADODB.Recordset
+        Dim garant_comp As Recordset
+        Dim BASECOMP As Recordset
 
         On Error GoTo Error_
         'Процессор
-        garant_comp = New ADODB.Recordset
-        garant_comp.Open("SELECT * FROM garant_comp WHERE Id_Comp =" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        garant_comp = New Recordset
+        garant_comp.Open("SELECT * FROM garant_comp WHERE Id_Comp =" & frmComputers.sCOUNT, DB7,
+                         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-        BASECOMP = New ADODB.Recordset
-        BASECOMP.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        BASECOMP = New Recordset
+        BASECOMP.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                      LockTypeEnum.adLockOptimistic)
 
         'pciinfo.lop.ListItems.Clear()
         ' With PCIuS
@@ -688,7 +718,7 @@ WriteLog Err.Description
         garant_comp = Nothing
         BASECOMP = Nothing
         Exit Sub
-Error_:
+        Error_:
 #If islog Then
 WriteLog Err.Description
 #End If
@@ -696,17 +726,18 @@ WriteLog Err.Description
 
     Public Sub MonitorS()
 
-        Dim garant_comp As ADODB.Recordset
-        Dim BASECOMP As ADODB.Recordset
-
+        Dim garant_comp As Recordset
+        Dim BASECOMP As Recordset
 
 
         On Error GoTo Error_
-        garant_comp = New ADODB.Recordset
-        garant_comp.Open("SELECT * FROM garant_comp WHERE Id_Comp =" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        garant_comp = New Recordset
+        garant_comp.Open("SELECT * FROM garant_comp WHERE Id_Comp =" & frmComputers.sCOUNT, DB7,
+                         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-        BASECOMP = New ADODB.Recordset
-        BASECOMP.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        BASECOMP = New Recordset
+        BASECOMP.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                      LockTypeEnum.adLockOptimistic)
 
         'Процессор
         With BASECOMP
@@ -725,8 +756,10 @@ WriteLog Err.Description
 
         With garant_comp
 
-            frmGarCPL.DNG.Value = .Fields("MONITOR_DP").Value & "." & .Fields("MONITOR_MP").Value & "." & .Fields("MONITOR_GP").Value
-            frmGarCPL.DOG.Value = .Fields("MONITOR_DPo").Value & "." & .Fields("MONITOR_MPo").Value & "." & .Fields("MONITOR_GPo").Value
+            frmGarCPL.DNG.Value = .Fields("MONITOR_DP").Value & "." & .Fields("MONITOR_MP").Value & "." &
+                                  .Fields("MONITOR_GP").Value
+            frmGarCPL.DOG.Value = .Fields("MONITOR_DPo").Value & "." & .Fields("MONITOR_MPo").Value & "." &
+                                  .Fields("MONITOR_GPo").Value
 
 
             frmGarCPL.cmbPostav.Text = .Fields("MONITOR_POST").Value
@@ -739,7 +772,7 @@ WriteLog Err.Description
         garant_comp = Nothing
         BASECOMP = Nothing
         Exit Sub
-Error_:
+        Error_:
 #If islog Then
 WriteLog Err.Description
 #End If
@@ -747,17 +780,17 @@ WriteLog Err.Description
 
     Public Sub IBPsS()
         '"Информация о Сети"
-        Dim garant_comp As ADODB.Recordset
-        Dim BASECOMP As ADODB.Recordset
+        Dim garant_comp As Recordset
+        Dim BASECOMP As Recordset
 
 
+        garant_comp = New Recordset
+        garant_comp.Open("SELECT * FROM garant_comp WHERE Id_Comp =" & frmComputers.sCOUNT, DB7,
+                         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-
-        garant_comp = New ADODB.Recordset
-        garant_comp.Open("SELECT * FROM garant_comp WHERE Id_Comp =" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-
-        BASECOMP = New ADODB.Recordset
-        BASECOMP.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        BASECOMP = New Recordset
+        BASECOMP.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                      LockTypeEnum.adLockOptimistic)
 
 
         On Error GoTo Error_
@@ -786,7 +819,7 @@ WriteLog Err.Description
         garant_comp = Nothing
         BASECOMP = Nothing
         Exit Sub
-Error_:
+        Error_:
 #If islog Then
 WriteLog Err.Description
 #End If
@@ -794,14 +827,16 @@ WriteLog Err.Description
 
     Public Sub FILTRsS()
         '"Информация о Сети"
-        Dim garant_comp As ADODB.Recordset
-        Dim BASECOMP As ADODB.Recordset
+        Dim garant_comp As Recordset
+        Dim BASECOMP As Recordset
 
-        garant_comp = New ADODB.Recordset
-        garant_comp.Open("SELECT * FROM garant_comp WHERE Id_Comp =" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        garant_comp = New Recordset
+        garant_comp.Open("SELECT * FROM garant_comp WHERE Id_Comp =" & frmComputers.sCOUNT, DB7,
+                         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-        BASECOMP = New ADODB.Recordset
-        BASECOMP.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        BASECOMP = New Recordset
+        BASECOMP.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                      LockTypeEnum.adLockOptimistic)
 
         On Error GoTo Error_
         'Процессор
@@ -816,7 +851,8 @@ WriteLog Err.Description
         With garant_comp
 
             frmGarCPL.DNG.Value = .Fields("FS_DP").Value & "." & .Fields("FS_MP").Value & "." & .Fields("FS_GP").Value
-            frmGarCPL.DOG.Value = .Fields("FS_DPo").Value & "." & .Fields("FS_MPo").Value & "." & .Fields("FS_GPo").Value
+            frmGarCPL.DOG.Value = .Fields("FS_DPo").Value & "." & .Fields("FS_MPo").Value & "." &
+                                  .Fields("FS_GPo").Value
 
             frmGarCPL.cmbPostav.Text = .Fields("FS_POST").Value
 
@@ -829,7 +865,7 @@ WriteLog Err.Description
         BASECOMP = Nothing
 
         Exit Sub
-Error_:
+        Error_:
 #If islog Then
 WriteLog Err.Description
 #End If
@@ -837,17 +873,17 @@ WriteLog Err.Description
 
     Public Sub ScanersS()
         '"Информация о Сети"
-        Dim garant_comp As ADODB.Recordset
-        Dim BASECOMP As ADODB.Recordset
+        Dim garant_comp As Recordset
+        Dim BASECOMP As Recordset
 
 
+        garant_comp = New Recordset
+        garant_comp.Open("SELECT * FROM garant_comp WHERE Id_Comp =" & frmComputers.sCOUNT, DB7,
+                         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-
-        garant_comp = New ADODB.Recordset
-        garant_comp.Open("SELECT * FROM garant_comp WHERE Id_Comp =" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-
-        BASECOMP = New ADODB.Recordset
-        BASECOMP.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        BASECOMP = New Recordset
+        BASECOMP.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                      LockTypeEnum.adLockOptimistic)
 
         On Error GoTo Error_
         'Процессор
@@ -875,11 +911,9 @@ WriteLog Err.Description
         BASECOMP = Nothing
 
         Exit Sub
-Error_:
+        Error_:
 #If islog Then
 WriteLog Err.Description
 #End If
     End Sub
-
-
 End Module

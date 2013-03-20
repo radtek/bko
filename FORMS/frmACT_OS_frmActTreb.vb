@@ -2,18 +2,19 @@
     Public EDTR As Boolean
     Public EDTRs As Long
 
-    Private Sub akt_add_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles akt_add.Click
+    Private Sub akt_add_Click(ByVal sender As Object, ByVal e As EventArgs) Handles akt_add.Click
         On Error GoTo Error_
 
 
-        Dim rs As ADODB.Recordset
+        Dim rs As Recordset
 
         If EDTR = True Then
-            rs = New ADODB.Recordset
-            rs.Open("SELECT * FROM ActOS WHERE nomer ='" & EDTRs & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rs = New Recordset
+            rs.Open("SELECT * FROM ActOS WHERE nomer ='" & EDTRs & "'", DB7, CursorTypeEnum.adOpenDynamic,
+                    LockTypeEnum.adLockOptimistic)
         Else
-            rs = New ADODB.Recordset
-            rs.Open("SELECT * FROM ActOS", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rs = New Recordset
+            rs.Open("SELECT * FROM ActOS", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
         End If
 
 
@@ -57,7 +58,7 @@
 
         Me.Close()
         Exit Sub
-Error_:
+        Error_:
 
 
         Select Case Err.Number
@@ -71,7 +72,7 @@ Error_:
         Me.Close()
     End Sub
 
-    Private Sub frmACT_OS_Act_treb_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+    Private Sub frmACT_OS_Act_treb_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
 
         SendFonts(Me)
 
@@ -79,10 +80,9 @@ Error_:
         FillComboNET(Me.txt_akt_postavshik, "Name", "SPR_Postav", "", False, True)
 
         Call LANG_frmACT_OS_Act_treb()
-
     End Sub
 
-    Private Sub akt_cancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles akt_cancel.Click
+    Private Sub akt_cancel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles akt_cancel.Click
         Me.Close()
     End Sub
 End Class

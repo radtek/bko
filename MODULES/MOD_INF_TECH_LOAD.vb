@@ -1,6 +1,7 @@
 ﻿'Imports System.Data.SqlClient
 Imports System.Net.Mail
-Imports System.Threading
+Imports System.Net
+Imports System.Text
 
 Module MOD_INF_TECH_LOAD
     Private zID As String
@@ -10,19 +11,22 @@ Module MOD_INF_TECH_LOAD
         On Error Resume Next
         Dim unaPCL As String
 
-        Dim rs As ADODB.Recordset 'Объявляем рекордсет
+        Dim rs As Recordset 'Объявляем рекордсет
         Dim sSQL As String 'Переменная, где будет размещён SQL запрос
 
         sSQL = "SELECT * FROM kompy WHERE id =" & sID
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
 
             frmComputers.lblSidNET.Text = .Fields("id").Value
-            If Not IsDBNull(.Fields("PRINTER_NAME_1").Value) Then frmComputers.cmbNetDev.Text = .Fields("PRINTER_NAME_1").Value
-            If Not IsDBNull(.Fields("PRINTER_SN_1").Value) Then frmComputers.cmbDevNet.Text = .Fields("PRINTER_SN_1").Value
-            If Not IsDBNull(.Fields("PRINTER_PROIZV_1").Value) Then frmComputers.PROiZV40.Text = .Fields("PRINTER_PROIZV_1").Value
+            If Not IsDBNull(.Fields("PRINTER_NAME_1").Value) Then _
+                frmComputers.cmbNetDev.Text = .Fields("PRINTER_NAME_1").Value
+            If Not IsDBNull(.Fields("PRINTER_SN_1").Value) Then _
+                frmComputers.cmbDevNet.Text = .Fields("PRINTER_SN_1").Value
+            If Not IsDBNull(.Fields("PRINTER_PROIZV_1").Value) Then _
+                frmComputers.PROiZV40.Text = .Fields("PRINTER_PROIZV_1").Value
 
             If Not IsDBNull(.Fields("NET_IP_1").Value) Then frmComputers.txtNetIP.Text = .Fields("NET_IP_1").Value
             If Not IsDBNull(.Fields("NET_MAC_1").Value) Then frmComputers.txtNetMac.Text = .Fields("NET_MAC_1").Value
@@ -30,26 +34,35 @@ Module MOD_INF_TECH_LOAD
 
             If Len(frmComputers.txtNetIP.Text) = 0 Then
 
-                If Not IsDBNull(.Fields("PRINTER_NAME_2").Value) Then frmComputers.txtNetIP.Text = .Fields("PRINTER_NAME_2").Value
-                If Not IsDBNull(.Fields("PRINTER_PROIZV_2").Value) Then frmComputers.txtNetMac.Text = .Fields("PRINTER_PROIZV_2").Value
+                If Not IsDBNull(.Fields("PRINTER_NAME_2").Value) Then _
+                    frmComputers.txtNetIP.Text = .Fields("PRINTER_NAME_2").Value
+                If Not IsDBNull(.Fields("PRINTER_PROIZV_2").Value) Then _
+                    frmComputers.txtNetMac.Text = .Fields("PRINTER_PROIZV_2").Value
 
             End If
 
 
-            If Not IsDBNull(.Fields("PRINTER_SN_2").Value) Then frmComputers.txtNetPort.Text = .Fields("PRINTER_SN_2").Value
+            If Not IsDBNull(.Fields("PRINTER_SN_2").Value) Then _
+                frmComputers.txtNetPort.Text = .Fields("PRINTER_SN_2").Value
 
-            If Not IsDBNull(.Fields("PRINTER_PROIZV_3").Value) Then frmComputers.txtNetINN.Text = .Fields("PRINTER_PROIZV_3").Value
-            If Not IsDBNull(.Fields("PRINTER_SN_3").Value) Then frmComputers.txtNetIsp.Text = .Fields("PRINTER_SN_3").Value
+            If Not IsDBNull(.Fields("PRINTER_PROIZV_3").Value) Then _
+                frmComputers.txtNetINN.Text = .Fields("PRINTER_PROIZV_3").Value
+            If Not IsDBNull(.Fields("PRINTER_SN_3").Value) Then _
+                frmComputers.txtNetIsp.Text = .Fields("PRINTER_SN_3").Value
 
-            If Not IsDBNull(.Fields("PRINTER_NAME_4").Value) Then frmComputers.cmbNetVkl.Text = .Fields("PRINTER_NAME_4").Value
-            If Not IsDBNull(.Fields("PRINTER_PROIZV_4").Value) Then frmComputers.cmbNetCable.Text = .Fields("PRINTER_PROIZV_4").Value
-            If Not IsDBNull(.Fields("PRINTER_SN_4").Value) Then frmComputers.txtNetCableCat.Text = .Fields("PRINTER_SN_4").Value
+            If Not IsDBNull(.Fields("PRINTER_NAME_4").Value) Then _
+                frmComputers.cmbNetVkl.Text = .Fields("PRINTER_NAME_4").Value
+            If Not IsDBNull(.Fields("PRINTER_PROIZV_4").Value) Then _
+                frmComputers.cmbNetCable.Text = .Fields("PRINTER_PROIZV_4").Value
+            If Not IsDBNull(.Fields("PRINTER_SN_4").Value) Then _
+                frmComputers.txtNetCableCat.Text = .Fields("PRINTER_SN_4").Value
 
             'If Not IsDBNull(.Fields("OTvetstvennyj").Value) Then frmComputers.txtNetNumberPorts.Text = .Fields("OTvetstvennyj").Value
             'If Not IsDBNull(.Fields("telephone").Value) Then frmComputers.cmbNETotv.Text = .Fields("telephone").Value
 
 
-            If Not IsDBNull(.Fields("OTvetstvennyj").Value) Then frmComputers.cmbNETotv.Text = .Fields("OTvetstvennyj").Value
+            If Not IsDBNull(.Fields("OTvetstvennyj").Value) Then _
+                frmComputers.cmbNETotv.Text = .Fields("OTvetstvennyj").Value
             If Not IsDBNull(.Fields("telephone").Value) Then frmComputers.txtNETphone.Text = .Fields("telephone").Value
             If Not IsDBNull(.Fields("port_2").Value) Then frmComputers.txtNetNumberPorts.Text = .Fields("port_2").Value
 
@@ -63,7 +76,8 @@ Module MOD_INF_TECH_LOAD
             If Not IsDBNull(.Fields("StoimRub").Value) Then frmComputers.txtNETSumm.Text = .Fields("StoimRub").Value
             If Not IsDBNull(.Fields("Zaiavk").Value) Then frmComputers.txtNETZay.Text = .Fields("Zaiavk").Value
 
-            If Not IsDBNull(.Fields("DataVVoda").Value) Then frmComputers.dtNETdataVvoda.Value = .Fields("DataVVoda").Value
+            If Not IsDBNull(.Fields("DataVVoda").Value) Then _
+                frmComputers.dtNETdataVvoda.Value = .Fields("DataVVoda").Value
             If Not IsDBNull(.Fields("dataSF").Value) Then frmComputers.dtNETSFdate.Value = .Fields("dataSF").Value
 
             If Not IsDBNull(.Fields("Spisan").Value) Then frmComputers.chkNETspis.Checked = .Fields("Spisan").Value
@@ -85,8 +99,9 @@ Module MOD_INF_TECH_LOAD
 
         If Len(unaPCL) <> 0 Then
 
-            rs = New ADODB.Recordset
-            rs.Open("Select NET_NAME From kompy where id=" & unaPCL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rs = New Recordset
+            rs.Open("Select NET_NAME From kompy where id=" & unaPCL, DB7, CursorTypeEnum.adOpenDynamic,
+                    LockTypeEnum.adLockOptimistic)
 
             With rs
 
@@ -103,8 +118,8 @@ Module MOD_INF_TECH_LOAD
         '#############################################
 
         sSQL = "SELECT count(*) as t_n from spr_other where C='1'"
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         Dim A1 As String
         With rs
@@ -123,7 +138,9 @@ Module MOD_INF_TECH_LOAD
                 frmComputers.cmbCNTNet.Visible = True
                 frmComputers.lblPCLNET.Visible = True
 
-                Call LOAD_PCL(frmComputers.cmbNETBranch.Text, frmComputers.cmbNetDepart.Text, frmComputers.cmbNETOffice.Text, frmComputers.cmbCNTNet)
+                Call _
+                    LOAD_PCL(frmComputers.cmbNETBranch.Text, frmComputers.cmbNetDepart.Text,
+                             frmComputers.cmbNETOffice.Text, frmComputers.cmbCNTNet)
                 'Call LOAD_PCL(frmComputers.cmbBranch.Text, frmComputers.cmbDepartment.Text, frmComputers.cmbOffice.Text, frmComputers.cmbPCLK)
         End Select
 
@@ -138,13 +155,12 @@ Module MOD_INF_TECH_LOAD
         Call LOAD_NOTES(sID, frmComputers.lvNotesNET)
         Call LOAD_REPAIR(sID, frmComputers.lvRepairNET)
         Call LOAD_DVIG_TEHN(sID, frmComputers.lvMovementNET)
-
     End Sub
 
     Public Sub LOAD_NET_PORT(ByVal sID As String)
-        Dim rs1 As ADODB.Recordset
-        rs1 = New ADODB.Recordset
-        rs1.Open("SELECT count(*) as t_n FROM net_port WHERE id_net=" & sID, DB7, ADODB.CursorTypeEnum.adOpenKeyset)
+        Dim rs1 As Recordset
+        rs1 = New Recordset
+        rs1.Open("SELECT count(*) as t_n FROM net_port WHERE id_net=" & sID, DB7, CursorTypeEnum.adOpenKeyset)
 
         frmComputers.lvNetPort.Sorting = SortOrder.None
         frmComputers.lvNetPort.ListViewItemSorter = Nothing
@@ -161,8 +177,9 @@ Module MOD_INF_TECH_LOAD
 
         If UCount > 0 Then
 
-            rs1 = New ADODB.Recordset
-            rs1.Open("SELECT * FROM net_port WHERE id_net=" & sID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rs1 = New Recordset
+            rs1.Open("SELECT * FROM net_port WHERE id_net=" & sID, DB7, CursorTypeEnum.adOpenDynamic,
+                     LockTypeEnum.adLockOptimistic)
 
             Dim intCount As Decimal = 0
 
@@ -205,16 +222,16 @@ Module MOD_INF_TECH_LOAD
         End If
 
         ResList(frmComputers.lvNetPort)
-
     End Sub
 
     Public Sub LOAD_NET_PORT2(ByVal sID As Integer)
         On Error GoTo err_
 
 
-        Dim rs1 As ADODB.Recordset
-        rs1 = New ADODB.Recordset
-        rs1.Open("SELECT count(*) as t_n FROM TBL_NET_MAG WHERE COMMUTATOR=" & sID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        Dim rs1 As Recordset
+        rs1 = New Recordset
+        rs1.Open("SELECT count(*) as t_n FROM TBL_NET_MAG WHERE COMMUTATOR=" & sID, DB7, CursorTypeEnum.adOpenDynamic,
+                 LockTypeEnum.adLockOptimistic)
 
         frmComputers.lvNetPort.Sorting = SortOrder.None
         frmComputers.lvNetPort.ListViewItemSorter = Nothing
@@ -240,8 +257,9 @@ Module MOD_INF_TECH_LOAD
             frmComputers.btnNetPortAdd.Visible = False
 
 
-            rs1 = New ADODB.Recordset
-            rs1.Open("SELECT * FROM TBL_NET_MAG WHERE COMMUTATOR=" & sID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rs1 = New Recordset
+            rs1.Open("SELECT * FROM TBL_NET_MAG WHERE COMMUTATOR=" & sID, DB7, CursorTypeEnum.adOpenDynamic,
+                     LockTypeEnum.adLockOptimistic)
 
             Dim intCount As Decimal = 0
 
@@ -260,9 +278,10 @@ Module MOD_INF_TECH_LOAD
                     End If
 
 
-                    Dim rs As ADODB.Recordset
-                    rs = New ADODB.Recordset
-                    rs.Open("SELECT count(*) as t_n FROM kompy WHERE id=" & .Fields("SVT").Value, DB7, ADODB.CursorTypeEnum.adOpenKeyset)
+                    Dim rs As Recordset
+                    rs = New Recordset
+                    rs.Open("SELECT count(*) as t_n FROM kompy WHERE id=" & .Fields("SVT").Value, DB7,
+                            CursorTypeEnum.adOpenKeyset)
 
 
                     With rs
@@ -273,8 +292,9 @@ Module MOD_INF_TECH_LOAD
 
                     If UCount > 0 Then
 
-                        rs = New ADODB.Recordset
-                        rs.Open("SELECT net_name,NET_MAC_1 FROM kompy WHERE id=" & .Fields("SVT").Value, DB7, ADODB.CursorTypeEnum.adOpenKeyset)
+                        rs = New Recordset
+                        rs.Open("SELECT net_name,NET_MAC_1 FROM kompy WHERE id=" & .Fields("SVT").Value, DB7,
+                                CursorTypeEnum.adOpenKeyset)
 
                         With rs
                             If Not IsDBNull(.Fields("net_name").Value) Then
@@ -292,7 +312,6 @@ Module MOD_INF_TECH_LOAD
                         End With
                         rs.Close()
                         rs = Nothing
-
 
 
                     End If
@@ -324,37 +343,37 @@ Module MOD_INF_TECH_LOAD
         ResList(frmComputers.lvNetPort)
 
 
-
         Exit Sub
-err_:
+        err_:
         MsgBox(Err.Description)
-
-
-
-
     End Sub
 
     Public Sub LOADot(ByVal sID As String)
         On Error Resume Next
         Dim unaPCL As String
 
-        Dim rs As ADODB.Recordset 'Объявляем рекордсет
+        Dim rs As Recordset 'Объявляем рекордсет
         Dim sSQL As String 'Переменная, где будет размещён SQL запрос
 
         sSQL = "SELECT * FROM kompy WHERE id =" & sID
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
 
             frmComputers.lblsIDOTH.Text = .Fields("id").Value
 
-            If Not IsDBNull(.Fields("PRINTER_NAME_1").Value) Then frmComputers.cmbOTH.Text = .Fields("PRINTER_NAME_1").Value
-            If Not IsDBNull(.Fields("PRINTER_SN_1").Value) Then frmComputers.txtOTHSN.Text = .Fields("PRINTER_SN_1").Value
-            If Not IsDBNull(.Fields("PRINTER_PROIZV_1").Value) Then frmComputers.PROiZV39.Text = .Fields("PRINTER_PROIZV_1").Value
+            If Not IsDBNull(.Fields("PRINTER_NAME_1").Value) Then _
+                frmComputers.cmbOTH.Text = .Fields("PRINTER_NAME_1").Value
+            If Not IsDBNull(.Fields("PRINTER_SN_1").Value) Then _
+                frmComputers.txtOTHSN.Text = .Fields("PRINTER_SN_1").Value
+            If Not IsDBNull(.Fields("PRINTER_PROIZV_1").Value) Then _
+                frmComputers.PROiZV39.Text = .Fields("PRINTER_PROIZV_1").Value
             If Not IsDBNull(.Fields("port_1").Value) Then frmComputers.txtOTHmemo.Text = .Fields("port_1").Value
-            If Not IsDBNull(.Fields("OTvetstvennyj").Value) Then frmComputers.cmbOTHotv.Text = .Fields("OTvetstvennyj").Value
-            If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then frmComputers.txtOTHinnumber.Text = .Fields("INV_NO_PRINTER").Value
+            If Not IsDBNull(.Fields("OTvetstvennyj").Value) Then _
+                frmComputers.cmbOTHotv.Text = .Fields("OTvetstvennyj").Value
+            If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then _
+                frmComputers.txtOTHinnumber.Text = .Fields("INV_NO_PRINTER").Value
 
             If Not IsDBNull(.Fields("FILIAL").Value) Then frmComputers.cmbOTHFil.Text = .Fields("FILIAL").Value
             If Not IsDBNull(.Fields("MESTO").Value) Then frmComputers.cmbOTHDepart.Text = .Fields("MESTO").Value
@@ -364,7 +383,8 @@ err_:
 
             If Not IsDBNull(.Fields("NET_IP_1").Value) Then frmComputers.txtOTHIP.Text = .Fields("NET_IP_1").Value
             If Not IsDBNull(.Fields("NET_MAC_1").Value) Then frmComputers.txtOTHMAC.Text = .Fields("NET_MAC_1").Value
-            If Not IsDBNull(.Fields("TIP_COMPA").Value) Then frmComputers.cmbOTHConnect.Text = .Fields("TIP_COMPA").Value
+            If Not IsDBNull(.Fields("TIP_COMPA").Value) Then _
+                frmComputers.cmbOTHConnect.Text = .Fields("TIP_COMPA").Value
 
 
             If Len(.Fields("NET_IP_1").Value) > 4 And TipTehn = "IBP" Then
@@ -394,10 +414,11 @@ err_:
                     frmComputers.gbSNMP.Visible = True
 
 
-                    Dim rsSNMP As ADODB.Recordset
+                    Dim rsSNMP As Recordset
                     Dim sTXT As String
-                    rsSNMP = New ADODB.Recordset
-                    rsSNMP.Open("SELECT B FROM SPR_IBP WHERE Name='" & .Fields("PRINTER_NAME_1").Value & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                    rsSNMP = New Recordset
+                    rsSNMP.Open("SELECT B FROM SPR_IBP WHERE Name='" & .Fields("PRINTER_NAME_1").Value & "'", DB7,
+                                CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                     With rsSNMP
 
@@ -409,7 +430,10 @@ err_:
 
                     'lblSNMP_Ping
 
-                    If frmComputers.chkSNMP.Checked = True Then Call REQUEST_OID_IBP_DB(.Fields("NET_IP_1").Value, .Fields("SNMP_COMMUNITY").Value, sTXT, .Fields("PRINTER_PROIZV_1").Value)
+                    If frmComputers.chkSNMP.Checked = True Then _
+                        Call _
+                            REQUEST_OID_IBP_DB(.Fields("NET_IP_1").Value, .Fields("SNMP_COMMUNITY").Value, sTXT,
+                                               .Fields("PRINTER_PROIZV_1").Value)
 
                 End If
 
@@ -429,7 +453,8 @@ err_:
             If Not IsDBNull(.Fields("StoimRub").Value) Then frmComputers.txtOTHSumm.Text = .Fields("StoimRub").Value
             If Not IsDBNull(.Fields("Zaiavk").Value) Then frmComputers.txtOTHZay.Text = .Fields("Zaiavk").Value
 
-            If Not IsDBNull(.Fields("DataVVoda").Value) Then frmComputers.dtOTHdataVvoda.Value = .Fields("DataVVoda").Value
+            If Not IsDBNull(.Fields("DataVVoda").Value) Then _
+                frmComputers.dtOTHdataVvoda.Value = .Fields("DataVVoda").Value
             If Not IsDBNull(.Fields("dataSF").Value) Then frmComputers.dtOTHSFdate.Value = .Fields("dataSF").Value
 
             If Not IsDBNull(.Fields("Spisan").Value) Then frmComputers.chkOTHspis.Checked = .Fields("Spisan").Value
@@ -455,8 +480,9 @@ err_:
 
         If Len(unaPCL) <> 0 Then
 
-            rs = New ADODB.Recordset
-            rs.Open("Select NET_NAME From kompy where id=" & unaPCL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rs = New Recordset
+            rs.Open("Select NET_NAME From kompy where id=" & unaPCL, DB7, CursorTypeEnum.adOpenDynamic,
+                    LockTypeEnum.adLockOptimistic)
 
             With rs
 
@@ -468,12 +494,10 @@ err_:
         End If
 
 
-
         Call LOAD_GARs(sID, frmComputers.cmbOTHPostav, frmComputers.dtGOTHPr, frmComputers.dtGOTHok)
         'Call LOAD_NOTES(sID, frmComputers.lvNotesOTH)
         'Call LOAD_REPAIR(sID, frmComputers.lvRepairOTH)
         'Call LOAD_DVIG_TEHN(sID, frmComputers.lvMovementOTH)
-
     End Sub
 
     Public Sub LOADp(ByVal sID As String)
@@ -481,16 +505,16 @@ err_:
 
         Dim kol As Long
         Dim uname As String
-        Dim rs1 As ADODB.Recordset 'Объявляем рекордсет
+        Dim rs1 As Recordset 'Объявляем рекордсет
         Dim sSQL1 As String 'Переменная, где будет размещён SQL запрос
         Dim unaPCL As String
 
-        Dim rs As ADODB.Recordset 'Объявляем рекордсет
+        Dim rs As Recordset 'Объявляем рекордсет
         Dim sSQL As String 'Переменная, где будет размещён SQL запрос
 
         sSQL = "SELECT * FROM kompy WHERE id =" & sID
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
 
@@ -503,8 +527,10 @@ err_:
             End If
 
             If Not IsDBNull(.Fields("PRINTER_SN_1")) Then frmComputers.txtPRNSN.Text = .Fields("PRINTER_SN_1").Value
-            If Not IsDBNull(.Fields("PRINTER_PROIZV_1")) Then frmComputers.PROiZV38.Text = .Fields("PRINTER_PROIZV_1").Value
-            If Not IsDBNull(.Fields("INV_NO_PRINTER")) Then frmComputers.txtPRNinnumber.Text = .Fields("INV_NO_PRINTER").Value
+            If Not IsDBNull(.Fields("PRINTER_PROIZV_1")) Then _
+                frmComputers.PROiZV38.Text = .Fields("PRINTER_PROIZV_1").Value
+            If Not IsDBNull(.Fields("INV_NO_PRINTER")) Then _
+                frmComputers.txtPRNinnumber.Text = .Fields("INV_NO_PRINTER").Value
             If Not IsDBNull(.Fields("port_1")) Then frmComputers.cmbFormat.Text = .Fields("port_1").Value
 
             If Not IsDBNull(.Fields("FILIAL")) Then frmComputers.cmbPRNFil.Text = .Fields("FILIAL").Value
@@ -521,7 +547,8 @@ err_:
             If Not IsDBNull(.Fields("StoimRub").Value) Then frmComputers.txtPRNSumm.Text = .Fields("StoimRub").Value
             If Not IsDBNull(.Fields("Zaiavk").Value) Then frmComputers.txtPRNZay.Text = .Fields("Zaiavk").Value
 
-            If Not IsDBNull(.Fields("DataVVoda").Value) Then frmComputers.dtPRNdataVvoda.Value = .Fields("DataVVoda").Value
+            If Not IsDBNull(.Fields("DataVVoda").Value) Then _
+                frmComputers.dtPRNdataVvoda.Value = .Fields("DataVVoda").Value
             If Not IsDBNull(.Fields("dataSF").Value) Then frmComputers.dtPRNSFdate.Value = .Fields("dataSF").Value
 
             If Not IsDBNull(.Fields("Spisan").Value) Then frmComputers.chkPRNspis.Checked = .Fields("Spisan").Value
@@ -545,8 +572,8 @@ err_:
 
 
                 sSQL1 = "SELECT * FROM spr_cart WHERE name='" & frmComputers.cmbTIPCartridg.Text & "'"
-                rs1 = New ADODB.Recordset
-                rs1.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs1 = New Recordset
+                rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 With rs1
                     frmComputers.cmbTIPCartridg.Text = .Fields("A").Value
@@ -562,8 +589,9 @@ err_:
 
         If Len(unaPCL) <> 0 Then
 
-            rs = New ADODB.Recordset
-            rs.Open("Select NET_NAME From kompy where id=" & unaPCL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rs = New Recordset
+            rs.Open("Select NET_NAME From kompy where id=" & unaPCL, DB7, CursorTypeEnum.adOpenDynamic,
+                    LockTypeEnum.adLockOptimistic)
 
             With rs
 
@@ -582,7 +610,6 @@ err_:
         'Call LOAD_NOTES(sID, frmComputers.lvNotesPRN)
         'Call LOAD_REPAIR(sID, frmComputers.lvRepairPRN)
         'Call LOAD_DVIG_TEHN(sID, frmComputers.lvMovementPRN)
-
     End Sub
 
     Public Sub LOAD_CRT(ByVal sID As String)
@@ -593,12 +620,12 @@ err_:
 
         Dim kol As Long
         Dim uname As String
-        Dim rs1 As ADODB.Recordset
+        Dim rs1 As Recordset
         Dim sSQL1 As String
 
         sSQL1 = "SELECT COUNT(*) AS t_number FROM CARTRIDG WHERE USTR=" & sID
-        rs1 = New ADODB.Recordset
-        rs1.Open(sSQL1, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs1 = New Recordset
+        rs1.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs1
 
@@ -620,8 +647,8 @@ err_:
             'Dim sSQL1 As String 'Переменная, где будет размещён SQL запрос
 
             sSQL1 = "SELECT * FROM CARTRIDG WHERE USTR=" & sID
-            rs1 = New ADODB.Recordset
-            rs1.Open(sSQL1, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rs1 = New Recordset
+            rs1.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
 
             With rs1
@@ -633,29 +660,31 @@ err_:
                     scid = .Fields("id").Value
 
 
-                    Dim rs2 As ADODB.Recordset 'Объявляем рекордсет
+                    Dim rs2 As Recordset 'Объявляем рекордсет
                     Dim sSQL2 As String 'Переменная, где будет размещён SQL запрос
 
                     sSQL2 = "SELECT * FROM spr_cart where ID =" & uname
-                    rs2 = New ADODB.Recordset
-                    rs2.Open(sSQL2, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                    rs2 = New Recordset
+                    rs2.Open(sSQL2, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                     With rs2
-                        If Not IsDBNull(.Fields("name").Value) Then frmComputers.lvPRNCartr.Items(CInt(intCount)).SubItems.Add(.Fields("name").Value)
+                        If Not IsDBNull(.Fields("name").Value) Then _
+                            frmComputers.lvPRNCartr.Items(CInt(intCount)).SubItems.Add(.Fields("name").Value)
                     End With
                     rs2.Close()
                     rs2 = Nothing
 
 
-                    If Not IsDBNull(.Fields("SN")) Then frmComputers.lvPRNCartr.Items(CInt(intCount)).SubItems.Add(.Fields("SN").Value)
+                    If Not IsDBNull(.Fields("SN")) Then _
+                        frmComputers.lvPRNCartr.Items(CInt(intCount)).SubItems.Add(.Fields("SN").Value)
 
 
                     Dim uname1 As Decimal = 0
                     Dim uname2 As Decimal = 0
 
                     sSQL2 = "SELECT Paper, STOIM FROM CARTRIDG_Z where ID_C =" & scid
-                    rs2 = New ADODB.Recordset
-                    rs2.Open(sSQL2, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                    rs2 = New Recordset
+                    rs2.Open(sSQL2, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                     With rs2
                         .MoveFirst()
@@ -671,24 +700,22 @@ err_:
                     rs2 = Nothing
 
 
-
                     frmComputers.lblPRNPage.Text = uname1
 
 
                     sSQL2 = "SELECT COUNT(*) as total_num FROM CARTRIDG_Z where ID_C =" & scid
-                    rs2 = New ADODB.Recordset
-                    rs2.Open(sSQL2, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                    rs2 = New Recordset
+                    rs2.Open(sSQL2, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                     With rs2
 
-                        If Not IsDBNull(.Fields("total_num").Value) Then frmComputers.lvPRNCartr.Items(CInt(intCount)).SubItems.Add(.Fields("total_num").Value)
+                        If Not IsDBNull(.Fields("total_num").Value) Then _
+                            frmComputers.lvPRNCartr.Items(CInt(intCount)).SubItems.Add(.Fields("total_num").Value)
 
                     End With
 
                     rs2.Close()
                     rs2 = Nothing
-
-
 
 
                     frmComputers.lvPRNCartr.Items(CInt(intCount)).SubItems.Add(uname2)
@@ -700,12 +727,7 @@ err_:
             End With
 
 
-
         End If
-
-
-
-
 
 
         ResList(frmComputers.lvPRNCartr)
@@ -717,12 +739,12 @@ err_:
 
         Dim unaPCL As String
 
-        Dim rs As ADODB.Recordset 'Объявляем рекордсет
+        Dim rs As Recordset 'Объявляем рекордсет
         Dim sSQL As String 'Переменная, где будет размещён SQL запрос
 
         sSQL = "SELECT * FROM kompy WHERE id =" & sID
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         frmComputers.bCPUPlus.Visible = True
         frmComputers.bRamPlus.Visible = True
@@ -752,8 +774,10 @@ err_:
                 frmComputers.txtSoc2.Visible = True
                 frmComputers.PROizV2.Visible = True
                 If Not IsDBNull(.Fields("CPUmhz2").Value) Then frmComputers.txtMHZ2.Text = .Fields("CPUmhz2").Value
-                If Not IsDBNull(.Fields("CPUSocket2").Value) Then frmComputers.txtSoc2.Text = .Fields("CPUSocket2").Value
-                If Not IsDBNull(.Fields("CPUProizv2").Value) Then frmComputers.PROizV2.Text = .Fields("CPUProizv2").Value
+                If Not IsDBNull(.Fields("CPUSocket2").Value) Then _
+                    frmComputers.txtSoc2.Text = .Fields("CPUSocket2").Value
+                If Not IsDBNull(.Fields("CPUProizv2").Value) Then _
+                    frmComputers.PROizV2.Text = .Fields("CPUProizv2").Value
             Else
                 frmComputers.cmbCPU2.Visible = False
                 frmComputers.txtMHZ2.Visible = False
@@ -770,8 +794,10 @@ err_:
                 frmComputers.txtSoc3.Visible = True
                 frmComputers.PROizV3.Visible = True
                 If Not IsDBNull(.Fields("CPUmhz3").Value) Then frmComputers.txtMHZ3.Text = .Fields("CPUmhz3").Value
-                If Not IsDBNull(.Fields("CPUSocket3").Value) Then frmComputers.txtSoc3.Text = .Fields("CPUSocket3").Value
-                If Not IsDBNull(.Fields("CPUProizv3").Value) Then frmComputers.PROizV3.Text = .Fields("CPUProizv3").Value
+                If Not IsDBNull(.Fields("CPUSocket3").Value) Then _
+                    frmComputers.txtSoc3.Text = .Fields("CPUSocket3").Value
+                If Not IsDBNull(.Fields("CPUProizv3").Value) Then _
+                    frmComputers.PROizV3.Text = .Fields("CPUProizv3").Value
             Else
                 frmComputers.cmbCPU3.Visible = False
                 frmComputers.txtMHZ3.Visible = False
@@ -792,8 +818,10 @@ err_:
                 frmComputers.txtSoc4.Visible = True
                 frmComputers.PROizV4.Visible = True
                 If Not IsDBNull(.Fields("CPUmhz4").Value) Then frmComputers.txtMHZ4.Text = .Fields("CPUmhz4").Value
-                If Not IsDBNull(.Fields("CPUSocket4").Value) Then frmComputers.txtSoc4.Text = .Fields("CPUSocket4").Value
-                If Not IsDBNull(.Fields("CPUProizv4").Value) Then frmComputers.PROizV4.Text = .Fields("CPUProizv4").Value
+                If Not IsDBNull(.Fields("CPUSocket4").Value) Then _
+                    frmComputers.txtSoc4.Text = .Fields("CPUSocket4").Value
+                If Not IsDBNull(.Fields("CPUProizv4").Value) Then _
+                    frmComputers.PROizV4.Text = .Fields("CPUProizv4").Value
             Else
                 frmComputers.cmbCPU4.Visible = False
                 frmComputers.txtMHZ4.Visible = False
@@ -802,7 +830,6 @@ err_:
 
             End If
 
-           
 
             'Материнская плата
             If Not IsDBNull(.Fields("Mb").Value) Then frmComputers.cmbMB.Text = .Fields("Mb").Value
@@ -815,7 +842,8 @@ err_:
             If Not IsDBNull(.Fields("RAM_1").Value) Then frmComputers.cmbRAM1.Text = .Fields("RAM_1").Value
             If Not IsDBNull(.Fields("RAM_SN_1").Value) Then frmComputers.txtRamSN1.Text = .Fields("RAM_SN_1").Value
             If Not IsDBNull(.Fields("RAM_speed_1").Value) Then frmComputers.txtRamS1.Text = .Fields("RAM_speed_1").Value
-            If Not IsDBNull(.Fields("RAM_PROIZV_1").Value) Then frmComputers.PROizV6.Text = .Fields("RAM_PROIZV_1").Value
+            If Not IsDBNull(.Fields("RAM_PROIZV_1").Value) Then _
+                frmComputers.PROizV6.Text = .Fields("RAM_PROIZV_1").Value
 
             'If Not IsDBNull(.Fields("RAM_2").Value) Then frmComputers.cmbRAM2.Text = .Fields("RAM_2").Value
             frmComputers.sRAM = 1
@@ -827,9 +855,11 @@ err_:
                 frmComputers.txtRamSN2.Visible = True
                 frmComputers.txtRamS2.Visible = True
                 frmComputers.PROizV7.Visible = True
-                If Not IsDBNull(.Fields("RAM_speed_2").Value) Then frmComputers.txtRamS2.Text = .Fields("RAM_speed_2").Value
+                If Not IsDBNull(.Fields("RAM_speed_2").Value) Then _
+                    frmComputers.txtRamS2.Text = .Fields("RAM_speed_2").Value
                 If Not IsDBNull(.Fields("RAM_SN_2").Value) Then frmComputers.txtRamSN2.Text = .Fields("RAM_SN_2").Value
-                If Not IsDBNull(.Fields("RAM_PROIZV_2").Value) Then frmComputers.PROizV7.Text = .Fields("RAM_PROIZV_2").Value
+                If Not IsDBNull(.Fields("RAM_PROIZV_2").Value) Then _
+                    frmComputers.PROizV7.Text = .Fields("RAM_PROIZV_2").Value
             Else
                 frmComputers.cmbRAM2.Visible = False
                 frmComputers.txtRamSN2.Visible = False
@@ -851,9 +881,11 @@ err_:
                 frmComputers.txtRamSN3.Visible = True
                 frmComputers.txtRamS3.Visible = True
                 frmComputers.PROizV8.Visible = True
-                If Not IsDBNull(.Fields("RAM_speed_3").Value) Then frmComputers.txtRamS3.Text = .Fields("RAM_speed_3").Value
+                If Not IsDBNull(.Fields("RAM_speed_3").Value) Then _
+                    frmComputers.txtRamS3.Text = .Fields("RAM_speed_3").Value
                 If Not IsDBNull(.Fields("RAM_SN_3").Value) Then frmComputers.txtRamSN3.Text = .Fields("RAM_SN_3").Value
-                If Not IsDBNull(.Fields("RAM_PROIZV_3").Value) Then frmComputers.PROizV8.Text = .Fields("RAM_PROIZV_3").Value
+                If Not IsDBNull(.Fields("RAM_PROIZV_3").Value) Then _
+                    frmComputers.PROizV8.Text = .Fields("RAM_PROIZV_3").Value
             Else
                 frmComputers.cmbRAM3.Visible = False
                 frmComputers.txtRamSN3.Visible = False
@@ -880,9 +912,11 @@ err_:
                 frmComputers.txtRamSN4.Visible = True
                 frmComputers.txtRamS4.Visible = True
                 frmComputers.PROizV9.Visible = True
-                If Not IsDBNull(.Fields("RAM_speed_4").Value) Then frmComputers.txtRamS4.Text = .Fields("RAM_speed_4").Value
+                If Not IsDBNull(.Fields("RAM_speed_4").Value) Then _
+                    frmComputers.txtRamS4.Text = .Fields("RAM_speed_4").Value
                 If Not IsDBNull(.Fields("RAM_SN_4").Value) Then frmComputers.txtRamSN4.Text = .Fields("RAM_SN_4").Value
-                If Not IsDBNull(.Fields("RAM_PROIZV_4").Value) Then frmComputers.PROizV9.Text = .Fields("RAM_PROIZV_4").Value
+                If Not IsDBNull(.Fields("RAM_PROIZV_4").Value) Then _
+                    frmComputers.PROizV9.Text = .Fields("RAM_PROIZV_4").Value
             Else
                 frmComputers.cmbRAM4.Visible = False
                 frmComputers.txtRamSN4.Visible = False
@@ -912,9 +946,11 @@ err_:
                 frmComputers.txtRamSN5.Visible = True
                 frmComputers.txtRamS5.Visible = True
                 frmComputers.PROizV44.Visible = True
-                If Not IsDBNull(.Fields("RAM_speed_5").Value) Then frmComputers.txtRamS5.Text = .Fields("RAM_speed_5").Value
+                If Not IsDBNull(.Fields("RAM_speed_5").Value) Then _
+                    frmComputers.txtRamS5.Text = .Fields("RAM_speed_5").Value
                 If Not IsDBNull(.Fields("RAM_SN_5").Value) Then frmComputers.txtRamSN5.Text = .Fields("RAM_SN_5").Value
-                If Not IsDBNull(.Fields("RAM_PROIZV_5").Value) Then frmComputers.PROizV44.Text = .Fields("RAM_PROIZV_5").Value
+                If Not IsDBNull(.Fields("RAM_PROIZV_5").Value) Then _
+                    frmComputers.PROizV44.Text = .Fields("RAM_PROIZV_5").Value
             Else
                 frmComputers.cmbRAM5.Visible = False
                 frmComputers.txtRamSN5.Visible = False
@@ -947,9 +983,11 @@ err_:
                 frmComputers.txtRamSN6.Visible = True
                 frmComputers.txtRamS6.Visible = True
                 frmComputers.PROizV45.Visible = True
-                If Not IsDBNull(.Fields("RAM_speed_6").Value) Then frmComputers.txtRamS6.Text = .Fields("RAM_speed_6").Value
+                If Not IsDBNull(.Fields("RAM_speed_6").Value) Then _
+                    frmComputers.txtRamS6.Text = .Fields("RAM_speed_6").Value
                 If Not IsDBNull(.Fields("RAM_SN_6").Value) Then frmComputers.txtRamSN6.Text = .Fields("RAM_SN_6").Value
-                If Not IsDBNull(.Fields("RAM_PROIZV_6").Value) Then frmComputers.PROizV45.Text = .Fields("RAM_PROIZV_6").Value
+                If Not IsDBNull(.Fields("RAM_PROIZV_6").Value) Then _
+                    frmComputers.PROizV45.Text = .Fields("RAM_PROIZV_6").Value
             Else
                 frmComputers.cmbRAM6.Visible = False
                 frmComputers.txtRamSN6.Visible = False
@@ -986,9 +1024,11 @@ err_:
                 frmComputers.txtRamSN6.Visible = True
                 frmComputers.txtRamS6.Visible = True
                 frmComputers.PROizV45.Visible = True
-                If Not IsDBNull(.Fields("RAM_speed_7").Value) Then frmComputers.txtRamS7.Text = .Fields("RAM_speed_7").Value
+                If Not IsDBNull(.Fields("RAM_speed_7").Value) Then _
+                    frmComputers.txtRamS7.Text = .Fields("RAM_speed_7").Value
                 If Not IsDBNull(.Fields("RAM_SN_7").Value) Then frmComputers.txtRamSN7.Text = .Fields("RAM_SN_7").Value
-                If Not IsDBNull(.Fields("RAM_PROIZV_7").Value) Then frmComputers.PROizV46.Text = .Fields("RAM_PROIZV_7").Value
+                If Not IsDBNull(.Fields("RAM_PROIZV_7").Value) Then _
+                    frmComputers.PROizV46.Text = .Fields("RAM_PROIZV_7").Value
             Else
                 frmComputers.cmbRAM7.Visible = False
                 frmComputers.txtRamSN7.Visible = False
@@ -1029,9 +1069,11 @@ err_:
                 frmComputers.txtRamSN7.Visible = True
                 frmComputers.txtRamS7.Visible = True
                 frmComputers.PROizV46.Visible = True
-                If Not IsDBNull(.Fields("RAM_speed_8").Value) Then frmComputers.txtRamS8.Text = .Fields("RAM_speed_8").Value
+                If Not IsDBNull(.Fields("RAM_speed_8").Value) Then _
+                    frmComputers.txtRamS8.Text = .Fields("RAM_speed_8").Value
                 If Not IsDBNull(.Fields("RAM_SN_8").Value) Then frmComputers.txtRamSN8.Text = .Fields("RAM_SN_8").Value
-                If Not IsDBNull(.Fields("RAM_PROIZV_8").Value) Then frmComputers.PROizV47.Text = .Fields("RAM_PROIZV_8").Value
+                If Not IsDBNull(.Fields("RAM_PROIZV_8").Value) Then _
+                    frmComputers.PROizV47.Text = .Fields("RAM_PROIZV_8").Value
             Else
                 frmComputers.cmbRAM8.Visible = False
                 frmComputers.txtRamSN8.Visible = False
@@ -1046,7 +1088,8 @@ err_:
             If Not IsDBNull(.Fields("HDD_Name_1").Value) Then frmComputers.cmbHDD1.Text = .Fields("HDD_Name_1").Value
             If Not IsDBNull(.Fields("HDD_OB_1").Value) Then frmComputers.txtHDDo1.Text = .Fields("HDD_OB_1").Value
             If Not IsDBNull(.Fields("HDD_SN_1").Value) Then frmComputers.txtHDDsN1.Text = .Fields("HDD_SN_1").Value
-            If Not IsDBNull(.Fields("HDD_PROIZV_1").Value) Then frmComputers.PROizV10.Text = .Fields("HDD_PROIZV_1").Value
+            If Not IsDBNull(.Fields("HDD_PROIZV_1").Value) Then _
+                frmComputers.PROizV10.Text = .Fields("HDD_PROIZV_1").Value
             frmComputers.sHDD = 1
 
             If Not IsDBNull(.Fields("HDD_Name_2").Value) And Len(.Fields("HDD_Name_2").Value) > 1 Then
@@ -1059,7 +1102,8 @@ err_:
 
                 If Not IsDBNull(.Fields("HDD_OB_2").Value) Then frmComputers.txtHDDo2.Text = .Fields("HDD_OB_2").Value
                 If Not IsDBNull(.Fields("HDD_SN_2").Value) Then frmComputers.txtHDDsN2.Text = .Fields("HDD_SN_2").Value
-                If Not IsDBNull(.Fields("HDD_PROIZV_2").Value) Then frmComputers.PROizV11.Text = .Fields("HDD_PROIZV_2").Value
+                If Not IsDBNull(.Fields("HDD_PROIZV_2").Value) Then _
+                    frmComputers.PROizV11.Text = .Fields("HDD_PROIZV_2").Value
 
             Else
                 frmComputers.cmbHDD2.Visible = False
@@ -1080,7 +1124,8 @@ err_:
 
                 If Not IsDBNull(.Fields("HDD_OB_3").Value) Then frmComputers.txtHDDo3.Text = .Fields("HDD_OB_3").Value
                 If Not IsDBNull(.Fields("HDD_SN_3").Value) Then frmComputers.txtHDDsN3.Text = .Fields("HDD_SN_3").Value
-                If Not IsDBNull(.Fields("HDD_PROIZV_3").Value) Then frmComputers.PROizV12.Text = .Fields("HDD_PROIZV_3").Value
+                If Not IsDBNull(.Fields("HDD_PROIZV_3").Value) Then _
+                    frmComputers.PROizV12.Text = .Fields("HDD_PROIZV_3").Value
 
             Else
                 frmComputers.cmbHDD3.Visible = False
@@ -1102,7 +1147,8 @@ err_:
 
                 If Not IsDBNull(.Fields("HDD_OB_4").Value) Then frmComputers.txtHDDo4.Text = .Fields("HDD_OB_4").Value
                 If Not IsDBNull(.Fields("HDD_SN_4").Value) Then frmComputers.txtHDDsN4.Text = .Fields("HDD_SN_4").Value
-                If Not IsDBNull(.Fields("HDD_PROIZV_4").Value) Then frmComputers.PROizV13.Text = .Fields("HDD_PROIZV_4").Value
+                If Not IsDBNull(.Fields("HDD_PROIZV_4").Value) Then _
+                    frmComputers.PROizV13.Text = .Fields("HDD_PROIZV_4").Value
 
             Else
                 frmComputers.cmbHDD4.Visible = False
@@ -1123,7 +1169,8 @@ err_:
 
                 If Not IsDBNull(.Fields("HDD_OB_5").Value) Then frmComputers.txtHDDo5.Text = .Fields("HDD_OB_5").Value
                 If Not IsDBNull(.Fields("HDD_SN_5").Value) Then frmComputers.txtHDDsN5.Text = .Fields("HDD_SN_5").Value
-                If Not IsDBNull(.Fields("HDD_PROIZV_5").Value) Then frmComputers.PROizV48.Text = .Fields("HDD_PROIZV_5").Value
+                If Not IsDBNull(.Fields("HDD_PROIZV_5").Value) Then _
+                    frmComputers.PROizV48.Text = .Fields("HDD_PROIZV_5").Value
 
             Else
                 frmComputers.cmbHDD5.Visible = False
@@ -1132,7 +1179,7 @@ err_:
                 frmComputers.PROizV48.Visible = False
 
             End If
-            
+
             If Not IsDBNull(.Fields("HDD_Name_6").Value) And Len(.Fields("HDD_Name_6").Value) > 1 Then
                 frmComputers.cmbHDD6.Text = .Fields("HDD_Name_6").Value
                 frmComputers.sHDD = frmComputers.sHDD + 1
@@ -1144,7 +1191,8 @@ err_:
 
                 If Not IsDBNull(.Fields("HDD_OB_6").Value) Then frmComputers.txtHDDo6.Text = .Fields("HDD_OB_6").Value
                 If Not IsDBNull(.Fields("HDD_SN_6").Value) Then frmComputers.txtHDDsN6.Text = .Fields("HDD_SN_6").Value
-                If Not IsDBNull(.Fields("HDD_PROIZV_6").Value) Then frmComputers.PROizV49.Text = .Fields("HDD_PROIZV_6").Value
+                If Not IsDBNull(.Fields("HDD_PROIZV_6").Value) Then _
+                    frmComputers.PROizV49.Text = .Fields("HDD_PROIZV_6").Value
 
             Else
                 frmComputers.cmbHDD6.Visible = False
@@ -1165,7 +1213,8 @@ err_:
 
                 If Not IsDBNull(.Fields("HDD_OB_7").Value) Then frmComputers.txtHDDo7.Text = .Fields("HDD_OB_7").Value
                 If Not IsDBNull(.Fields("HDD_SN_7").Value) Then frmComputers.txtHDDsN7.Text = .Fields("HDD_SN_7").Value
-                If Not IsDBNull(.Fields("HDD_PROIZV_7").Value) Then frmComputers.PROizV49.Text = .Fields("HDD_PROIZV_7").Value
+                If Not IsDBNull(.Fields("HDD_PROIZV_7").Value) Then _
+                    frmComputers.PROizV49.Text = .Fields("HDD_PROIZV_7").Value
 
             Else
                 frmComputers.cmbHDD7.Visible = False
@@ -1186,7 +1235,8 @@ err_:
 
                 If Not IsDBNull(.Fields("HDD_OB_8").Value) Then frmComputers.txtHDDo8.Text = .Fields("HDD_OB_8").Value
                 If Not IsDBNull(.Fields("HDD_SN_8").Value) Then frmComputers.txtHDDsN8.Text = .Fields("HDD_SN_8").Value
-                If Not IsDBNull(.Fields("HDD_PROIZV_8").Value) Then frmComputers.PROizV49.Text = .Fields("HDD_PROIZV_8").Value
+                If Not IsDBNull(.Fields("HDD_PROIZV_8").Value) Then _
+                    frmComputers.PROizV49.Text = .Fields("HDD_PROIZV_8").Value
 
             Else
                 frmComputers.cmbHDD8.Visible = False
@@ -1199,7 +1249,8 @@ err_:
 
             'Видео карта
             If Not IsDBNull(.Fields("SVGA_NAME").Value) Then frmComputers.cmbSVGA1.Text = .Fields("SVGA_NAME").Value
-            If Not IsDBNull(.Fields("SVGA_OB_RAM").Value) Then frmComputers.txtSVGAr1.Text = .Fields("SVGA_OB_RAM").Value
+            If Not IsDBNull(.Fields("SVGA_OB_RAM").Value) Then _
+                frmComputers.txtSVGAr1.Text = .Fields("SVGA_OB_RAM").Value
             If Not IsDBNull(.Fields("SVGA_SN").Value) Then frmComputers.txtSVGAs1.Text = .Fields("SVGA_SN").Value
             If Not IsDBNull(.Fields("SVGA_PROIZV").Value) Then frmComputers.PROizV14.Text = .Fields("SVGA_PROIZV").Value
 
@@ -1213,9 +1264,11 @@ err_:
                 frmComputers.txtSVGAr2.Visible = True
                 frmComputers.PROizV15.Visible = True
 
-                If Not IsDBNull(.Fields("SVGA2_OB_RAM").Value) Then frmComputers.txtSVGAr2.Text = .Fields("SVGA2_OB_RAM").Value
+                If Not IsDBNull(.Fields("SVGA2_OB_RAM").Value) Then _
+                    frmComputers.txtSVGAr2.Text = .Fields("SVGA2_OB_RAM").Value
                 If Not IsDBNull(.Fields("SVGA2_SN").Value) Then frmComputers.txtSVGAs2.Text = .Fields("SVGA2_SN").Value
-                If Not IsDBNull(.Fields("SVGA2_PROIZV").Value) Then frmComputers.PROizV15.Text = .Fields("SVGA2_PROIZV").Value
+                If Not IsDBNull(.Fields("SVGA2_PROIZV").Value) Then _
+                    frmComputers.PROizV15.Text = .Fields("SVGA2_PROIZV").Value
             Else
                 frmComputers.cmbSVGA2.Visible = False
                 frmComputers.txtSVGAr2.Visible = False
@@ -1225,13 +1278,13 @@ err_:
             End If
 
 
-
             'Звуковая карта
 
             If Not IsDBNull(.Fields("SOUND_NAME").Value) Then frmComputers.cmbSound.Text = .Fields("SOUND_NAME").Value
             'If Not IsDBNull(.fields("SVGA_OB_RAM").value) Then frmComputers.txtSoundB.Text = .fields("SVGA_OB_RAM").value
             If Not IsDBNull(.Fields("SOUND_SN").Value) Then frmComputers.txtSoundS.Text = .Fields("SOUND_SN").Value
-            If Not IsDBNull(.Fields("SOUND_PROIZV").Value) Then frmComputers.PROizV16.Text = .Fields("SOUND_PROIZV").Value
+            If Not IsDBNull(.Fields("SOUND_PROIZV").Value) Then _
+                frmComputers.PROizV16.Text = .Fields("SOUND_PROIZV").Value
 
             'Оптические накопители
 
@@ -1249,9 +1302,11 @@ err_:
                 frmComputers.txtOPTICsn2.Visible = True
                 frmComputers.PROizV18.Visible = True
 
-                If Not IsDBNull(.Fields("CDRW_SPEED").Value) Then frmComputers.txtOPTICs2.Text = .Fields("CDRW_SPEED").Value
+                If Not IsDBNull(.Fields("CDRW_SPEED").Value) Then _
+                    frmComputers.txtOPTICs2.Text = .Fields("CDRW_SPEED").Value
                 If Not IsDBNull(.Fields("CDRW_SN").Value) Then frmComputers.txtOPTICsn2.Text = .Fields("CDRW_SN").Value
-                If Not IsDBNull(.Fields("CDRW_PROIZV").Value) Then frmComputers.PROizV18.Text = .Fields("CDRW_PROIZV").Value
+                If Not IsDBNull(.Fields("CDRW_PROIZV").Value) Then _
+                    frmComputers.PROizV18.Text = .Fields("CDRW_PROIZV").Value
             Else
                 frmComputers.cmbOPTIC2.Visible = False
                 frmComputers.txtOPTICs2.Visible = False
@@ -1270,9 +1325,11 @@ err_:
                 frmComputers.txtOPTICsn3.Visible = True
                 frmComputers.PROizV19.Visible = True
 
-                If Not IsDBNull(.Fields("DVD_SPEED").Value) Then frmComputers.txtOPTICs3.Text = .Fields("DVD_SPEED").Value
+                If Not IsDBNull(.Fields("DVD_SPEED").Value) Then _
+                    frmComputers.txtOPTICs3.Text = .Fields("DVD_SPEED").Value
                 If Not IsDBNull(.Fields("DVD_SN").Value) Then frmComputers.txtOPTICsn3.Text = .Fields("DVD_SN").Value
-                If Not IsDBNull(.Fields("DVD_PROIZV").Value) Then frmComputers.PROizV19.Text = .Fields("DVD_PROIZV").Value
+                If Not IsDBNull(.Fields("DVD_PROIZV").Value) Then _
+                    frmComputers.PROizV19.Text = .Fields("DVD_PROIZV").Value
             Else
                 frmComputers.cmbOPTIC3.Visible = False
                 frmComputers.txtOPTICs3.Visible = False
@@ -1286,7 +1343,8 @@ err_:
             If Not IsDBNull(.Fields("NET_NAME_1").Value) Then frmComputers.cmbNET1.Text = .Fields("NET_NAME_1").Value
             If Not IsDBNull(.Fields("NET_IP_1").Value) Then frmComputers.txtNETip1.Text = .Fields("NET_IP_1").Value
             If Not IsDBNull(.Fields("NET_MAC_1").Value) Then frmComputers.txtNETmac1.Text = .Fields("NET_MAC_1").Value
-            If Not IsDBNull(.Fields("NET_PROIZV_1").Value) Then frmComputers.PROizV20.Text = .Fields("NET_PROIZV_1").Value
+            If Not IsDBNull(.Fields("NET_PROIZV_1").Value) Then _
+                frmComputers.PROizV20.Text = .Fields("NET_PROIZV_1").Value
             frmComputers.sNET = 1
 
             If Not IsDBNull(.Fields("NET_NAME_2").Value) And Len(.Fields("NET_NAME_2").Value) > 1 Then
@@ -1299,8 +1357,10 @@ err_:
                 frmComputers.PROizV21.Visible = True
 
                 If Not IsDBNull(.Fields("NET_IP_2").Value) Then frmComputers.txtNETip2.Text = .Fields("NET_IP_2").Value
-                If Not IsDBNull(.Fields("NET_MAC_2").Value) Then frmComputers.txtNETmac2.Text = .Fields("NET_MAC_2").Value
-                If Not IsDBNull(.Fields("NET_PROIZV_2").Value) Then frmComputers.PROizV21.Text = .Fields("NET_PROIZV_2").Value
+                If Not IsDBNull(.Fields("NET_MAC_2").Value) Then _
+                    frmComputers.txtNETmac2.Text = .Fields("NET_MAC_2").Value
+                If Not IsDBNull(.Fields("NET_PROIZV_2").Value) Then _
+                    frmComputers.PROizV21.Text = .Fields("NET_PROIZV_2").Value
             Else
                 frmComputers.cmbNET2.Visible = False
                 frmComputers.txtNETip2.Visible = False
@@ -1317,15 +1377,19 @@ err_:
             If Not IsDBNull(.Fields("FDD_PROIZV").Value) Then frmComputers.PROizV22.Text = .Fields("FDD_PROIZV").Value
 
             'Кардридер
-            If Not IsDBNull(.Fields("CREADER_NAME").Value) Then frmComputers.cmbCreader.Text = .Fields("CREADER_NAME").Value
-            If Not IsDBNull(.Fields("CREADER_SN").Value) Then frmComputers.txtCreader1.Text = .Fields("CREADER_SN").Value
-            If Not IsDBNull(.Fields("CREADER_PROIZV").Value) Then frmComputers.PROizV23.Text = .Fields("CREADER_PROIZV").Value
+            If Not IsDBNull(.Fields("CREADER_NAME").Value) Then _
+                frmComputers.cmbCreader.Text = .Fields("CREADER_NAME").Value
+            If Not IsDBNull(.Fields("CREADER_SN").Value) Then _
+                frmComputers.txtCreader1.Text = .Fields("CREADER_SN").Value
+            If Not IsDBNull(.Fields("CREADER_PROIZV").Value) Then _
+                frmComputers.PROizV23.Text = .Fields("CREADER_PROIZV").Value
 
             'Модем
             If Not IsDBNull(.Fields("MODEM_NAME").Value) Then frmComputers.cmbModem.Text = .Fields("MODEM_NAME").Value
             If Not IsDBNull(.Fields("MODEM_SN").Value) Then frmComputers.txtModemSN.Text = .Fields("MODEM_SN").Value
             'If Not IsDBNull(.fields("txtFDD_").value) Then frmComputers.txtModem2.Text = .fields("txtFDD_").value
-            If Not IsDBNull(.Fields("MODEM_PROIZV").Value) Then frmComputers.PROizV24.Text = .Fields("MODEM_PROIZV").Value
+            If Not IsDBNull(.Fields("MODEM_PROIZV").Value) Then _
+                frmComputers.PROizV24.Text = .Fields("MODEM_PROIZV").Value
 
             'Корпус
             If Not IsDBNull(.Fields("CASE_NAME").Value) Then frmComputers.cmbCase.Text = .Fields("CASE_NAME").Value
@@ -1336,7 +1400,8 @@ err_:
             If Not IsDBNull(.Fields("BLOCK").Value) Then frmComputers.cmbBP.Text = .Fields("BLOCK").Value
             If Not IsDBNull(.Fields("SN_BLOCK").Value) Then frmComputers.txtBP1.Text = .Fields("SN_BLOCK").Value
             'If Not IsDBNull(.fields("txtFDD_").value) Then frmComputers.txtBP2.Text = .fields("txtFDD_").value
-            If Not IsDBNull(.Fields("PROIZV_BLOCK").Value) Then frmComputers.PROizV26.Text = .Fields("PROIZV_BLOCK").Value
+            If Not IsDBNull(.Fields("PROIZV_BLOCK").Value) Then _
+                frmComputers.PROizV26.Text = .Fields("PROIZV_BLOCK").Value
 
             'Производитель системного блока
             If Not IsDBNull(.Fields("SYS_PR").Value) Then frmComputers.PROizV27.Text = .Fields("SYS_PR").Value
@@ -1358,14 +1423,15 @@ err_:
             If Not IsDBNull(.Fields("PCI_PROIZV").Value) Then frmComputers.PROizV42.Text = .Fields("PCI_PROIZV").Value
 
 
-
-
             'Монитор
             '1
-            If Not IsDBNull(.Fields("MONITOR_NAME").Value) Then frmComputers.cmbMon1.Text = .Fields("MONITOR_NAME").Value
-            If Not IsDBNull(.Fields("MONITOR_DUM").Value) Then frmComputers.txtMon1Dum.Text = .Fields("MONITOR_DUM").Value
+            If Not IsDBNull(.Fields("MONITOR_NAME").Value) Then _
+                frmComputers.cmbMon1.Text = .Fields("MONITOR_NAME").Value
+            If Not IsDBNull(.Fields("MONITOR_DUM").Value) Then _
+                frmComputers.txtMon1Dum.Text = .Fields("MONITOR_DUM").Value
             If Not IsDBNull(.Fields("MONITOR_SN").Value) Then frmComputers.txtMon1SN.Text = .Fields("MONITOR_SN").Value
-            If Not IsDBNull(.Fields("MONITOR_PROIZV").Value) Then frmComputers.PROizV28.Text = .Fields("MONITOR_PROIZV").Value
+            If Not IsDBNull(.Fields("MONITOR_PROIZV").Value) Then _
+                frmComputers.PROizV28.Text = .Fields("MONITOR_PROIZV").Value
 
             '2
             frmComputers.sMonitor = 1
@@ -1377,9 +1443,12 @@ err_:
                 frmComputers.txtMon2Dum.Visible = True
                 frmComputers.txtMon2SN.Visible = True
                 frmComputers.PROizV29.Visible = True
-                If Not IsDBNull(.Fields("MONITOR_DUM2").Value) Then frmComputers.txtMon2Dum.Text = .Fields("MONITOR_DUM2").Value
-                If Not IsDBNull(.Fields("MONITOR_SN2").Value) Then frmComputers.txtMon2SN.Text = .Fields("MONITOR_SN2").Value
-                If Not IsDBNull(.Fields("MONITOR_PROIZV2").Value) Then frmComputers.PROizV29.Text = .Fields("MONITOR_PROIZV2").Value
+                If Not IsDBNull(.Fields("MONITOR_DUM2").Value) Then _
+                    frmComputers.txtMon2Dum.Text = .Fields("MONITOR_DUM2").Value
+                If Not IsDBNull(.Fields("MONITOR_SN2").Value) Then _
+                    frmComputers.txtMon2SN.Text = .Fields("MONITOR_SN2").Value
+                If Not IsDBNull(.Fields("MONITOR_PROIZV2").Value) Then _
+                    frmComputers.PROizV29.Text = .Fields("MONITOR_PROIZV2").Value
             Else
                 frmComputers.cmbMon2.Visible = False
                 frmComputers.txtMon2Dum.Visible = False
@@ -1390,14 +1459,18 @@ err_:
 
 
             'Клавиатура
-            If Not IsDBNull(.Fields("KEYBOARD_NAME").Value) Then frmComputers.cmbKeyb.Text = .Fields("KEYBOARD_NAME").Value
-            If Not IsDBNull(.Fields("KEYBOARD_SN").Value) Then frmComputers.txtKeybSN.Text = .Fields("KEYBOARD_SN").Value
-            If Not IsDBNull(.Fields("KEYBOARD_PROIZV").Value) Then frmComputers.PROizV30.Text = .Fields("KEYBOARD_PROIZV").Value
+            If Not IsDBNull(.Fields("KEYBOARD_NAME").Value) Then _
+                frmComputers.cmbKeyb.Text = .Fields("KEYBOARD_NAME").Value
+            If Not IsDBNull(.Fields("KEYBOARD_SN").Value) Then _
+                frmComputers.txtKeybSN.Text = .Fields("KEYBOARD_SN").Value
+            If Not IsDBNull(.Fields("KEYBOARD_PROIZV").Value) Then _
+                frmComputers.PROizV30.Text = .Fields("KEYBOARD_PROIZV").Value
 
             'Мышь
             If Not IsDBNull(.Fields("MOUSE_NAME").Value) Then frmComputers.cmbMouse.Text = .Fields("MOUSE_NAME").Value
             If Not IsDBNull(.Fields("MOUSE_SN").Value) Then frmComputers.txtMouseSN.Text = .Fields("MOUSE_SN").Value
-            If Not IsDBNull(.Fields("MOUSE_PROIZV").Value) Then frmComputers.PROizV31.Text = .Fields("MOUSE_PROIZV").Value
+            If Not IsDBNull(.Fields("MOUSE_PROIZV").Value) Then _
+                frmComputers.PROizV31.Text = .Fields("MOUSE_PROIZV").Value
 
             'Колонки
 
@@ -1408,7 +1481,8 @@ err_:
             'Сетевой фильтр
             If Not IsDBNull(.Fields("FILTR_NAME").Value) Then frmComputers.cmbFilter.Text = .Fields("FILTR_NAME").Value
             If Not IsDBNull(.Fields("FILTR_SN").Value) Then frmComputers.txtFilterSN.Text = .Fields("FILTR_SN").Value
-            If Not IsDBNull(.Fields("FILTR_PROIZV").Value) Then frmComputers.PROizV33.Text = .Fields("FILTR_PROIZV").Value
+            If Not IsDBNull(.Fields("FILTR_PROIZV").Value) Then _
+                frmComputers.PROizV33.Text = .Fields("FILTR_PROIZV").Value
 
             'ИБП
             If Not IsDBNull(.Fields("IBP_NAME").Value) Then frmComputers.cmbIBP.Text = .Fields("IBP_NAME").Value
@@ -1416,10 +1490,13 @@ err_:
             If Not IsDBNull(.Fields("IBP_PROIZV").Value) Then frmComputers.PROizV43.Text = .Fields("IBP_PROIZV").Value
 
             'Подключенные принтеры
-            If Not IsDBNull(.Fields("PRINTER_NAME_1").Value) Then frmComputers.cmbPrinters1.Text = .Fields("PRINTER_NAME_1").Value
-            If Not IsDBNull(.Fields("PRINTER_SN_1").Value) Then frmComputers.txtPrint1SN.Text = .Fields("PRINTER_SN_1").Value
+            If Not IsDBNull(.Fields("PRINTER_NAME_1").Value) Then _
+                frmComputers.cmbPrinters1.Text = .Fields("PRINTER_NAME_1").Value
+            If Not IsDBNull(.Fields("PRINTER_SN_1").Value) Then _
+                frmComputers.txtPrint1SN.Text = .Fields("PRINTER_SN_1").Value
             If Not IsDBNull(.Fields("PORT_1").Value) Then frmComputers.txtPrint1Port.Text = .Fields("PORT_1").Value
-            If Not IsDBNull(.Fields("PRINTER_PROIZV_1").Value) Then frmComputers.PROizV34.Text = .Fields("PRINTER_PROIZV_1").Value
+            If Not IsDBNull(.Fields("PRINTER_PROIZV_1").Value) Then _
+                frmComputers.PROizV34.Text = .Fields("PRINTER_PROIZV_1").Value
             frmComputers.sPrinter = 1
 
 
@@ -1430,9 +1507,11 @@ err_:
                 frmComputers.txtPrint2SN.Visible = True
                 frmComputers.txtPrint2Port.Visible = True
                 frmComputers.PROizV35.Visible = True
-                If Not IsDBNull(.Fields("PRINTER_SN_2").Value) Then frmComputers.txtPrint2SN.Text = .Fields("PRINTER_SN_2").Value
+                If Not IsDBNull(.Fields("PRINTER_SN_2").Value) Then _
+                    frmComputers.txtPrint2SN.Text = .Fields("PRINTER_SN_2").Value
                 If Not IsDBNull(.Fields("PORT_2").Value) Then frmComputers.txtPrint2Port.Text = .Fields("PORT_2").Value
-                If Not IsDBNull(.Fields("PRINTER_PROIZV_2").Value) Then frmComputers.PROizV35.Text = .Fields("PRINTER_PROIZV_2").Value
+                If Not IsDBNull(.Fields("PRINTER_PROIZV_2").Value) Then _
+                    frmComputers.PROizV35.Text = .Fields("PRINTER_PROIZV_2").Value
             Else
                 frmComputers.cmbPrinters2.Visible = False
                 frmComputers.txtPrint2SN.Visible = False
@@ -1450,9 +1529,11 @@ err_:
                 frmComputers.txtPrint3SN.Visible = True
                 frmComputers.txtPrint3Port.Visible = True
                 frmComputers.PROizV36.Visible = True
-                If Not IsDBNull(.Fields("PRINTER_SN_3").Value) Then frmComputers.txtPrint3SN.Text = .Fields("PRINTER_SN_3").Value
+                If Not IsDBNull(.Fields("PRINTER_SN_3").Value) Then _
+                    frmComputers.txtPrint3SN.Text = .Fields("PRINTER_SN_3").Value
                 If Not IsDBNull(.Fields("PORT_3").Value) Then frmComputers.txtPrint3Port.Text = .Fields("PORT_3").Value
-                If Not IsDBNull(.Fields("PRINTER_PROIZV_3").Value) Then frmComputers.PROizV36.Text = .Fields("PRINTER_PROIZV_3").Value
+                If Not IsDBNull(.Fields("PRINTER_PROIZV_3").Value) Then _
+                    frmComputers.PROizV36.Text = .Fields("PRINTER_PROIZV_3").Value
             Else
                 frmComputers.cmbPrinters3.Visible = False
                 frmComputers.txtPrint3SN.Visible = False
@@ -1460,7 +1541,7 @@ err_:
                 frmComputers.PROizV36.Visible = False
 
             End If
-           
+
 
             If Not IsDBNull(.Fields("NET_NAME").Value) Then frmComputers.txtSNAME.Text = .Fields("NET_NAME").Value
             If Not IsDBNull(.Fields("PSEVDONIM").Value) Then frmComputers.txtPSEUDONIM.Text = .Fields("PSEVDONIM").Value
@@ -1474,22 +1555,25 @@ err_:
             'sOffice = .Fields("kabn").Value
             sName = .Fields("NET_NAME").Value
 
-            If Not IsDBNull(.Fields("OTvetstvennyj").Value) Then frmComputers.cmbResponsible.Text = .Fields("OTvetstvennyj").Value
+            If Not IsDBNull(.Fields("OTvetstvennyj").Value) Then _
+                frmComputers.cmbResponsible.Text = .Fields("OTvetstvennyj").Value
             If Not IsDBNull(.Fields("TELEPHONE").Value) Then frmComputers.txtPHONE.Text = .Fields("TELEPHONE").Value
-            If Not IsDBNull(.Fields("TIP_COMPA").Value) Then frmComputers.cmbAppointment.Text = .Fields("TIP_COMPA").Value
+            If Not IsDBNull(.Fields("TIP_COMPA").Value) Then _
+                frmComputers.cmbAppointment.Text = .Fields("TIP_COMPA").Value
 
-            If Not IsDBNull(.Fields("INV_NO_SYSTEM").Value) Then frmComputers.txtSBSN.Text = .Fields("INV_NO_SYSTEM").Value
-            If Not IsDBNull(.Fields("INV_NO_MONITOR").Value) Then frmComputers.txtMSN.Text = .Fields("INV_NO_MONITOR").Value
+            If Not IsDBNull(.Fields("INV_NO_SYSTEM").Value) Then _
+                frmComputers.txtSBSN.Text = .Fields("INV_NO_SYSTEM").Value
+            If Not IsDBNull(.Fields("INV_NO_MONITOR").Value) Then _
+                frmComputers.txtMSN.Text = .Fields("INV_NO_MONITOR").Value
             If Not IsDBNull(.Fields("INV_NO_IBP").Value) Then frmComputers.IN_IBP.Text = .Fields("INV_NO_IBP").Value
-            If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then frmComputers.IN_PRN.Text = .Fields("INV_NO_PRINTER").Value
+            If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then _
+                frmComputers.IN_PRN.Text = .Fields("INV_NO_PRINTER").Value
 
             If .Fields("TIP_COMPA").Value = "Сервер" Then
                 frmComputers.ChkPDC.Visible = True
             Else
                 frmComputers.ChkPDC.Visible = False
             End If
-
-
 
 
             Dim Gar As Boolean
@@ -1531,7 +1615,8 @@ err_:
             If Not IsDBNull(.Fields("StoimRub").Value) Then frmComputers.txtPCSumm.Text = .Fields("StoimRub").Value
             If Not IsDBNull(.Fields("Zaiavk").Value) Then frmComputers.txtPCZay.Text = .Fields("Zaiavk").Value
 
-            If Not IsDBNull(.Fields("DataVVoda").Value) Then frmComputers.dtPCdataVvoda.Value = .Fields("DataVVoda").Value
+            If Not IsDBNull(.Fields("DataVVoda").Value) Then _
+                frmComputers.dtPCdataVvoda.Value = .Fields("DataVVoda").Value
             If Not IsDBNull(.Fields("dataSF").Value) Then frmComputers.dtPCSFdate.Value = .Fields("dataSF").Value
 
             If Not IsDBNull(.Fields("Spisan").Value) Then frmComputers.chkPCspis.Checked = .Fields("Spisan").Value
@@ -1541,9 +1626,10 @@ err_:
 
             'Получаем номер розетки если он есть
 
-            Dim rs1 As ADODB.Recordset
-            rs1 = New ADODB.Recordset
-            rs1.Open("SELECT count(*) as t_n FROM TBL_NET_MAG WHERE SVT=" & .Fields("id").Value, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            Dim rs1 As Recordset
+            rs1 = New Recordset
+            rs1.Open("SELECT count(*) as t_n FROM TBL_NET_MAG WHERE SVT=" & .Fields("id").Value, DB7,
+                     CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
             Dim UCount As Integer
 
@@ -1561,8 +1647,9 @@ err_:
                 frmComputers.Label89.Visible = True
                 frmComputers.lblNumberNET.Visible = True
 
-                rs1 = New ADODB.Recordset
-                rs1.Open("SELECT id_line FROM TBL_NET_MAG WHERE SVT=" & .Fields("id").Value, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs1 = New Recordset
+                rs1.Open("SELECT id_line FROM TBL_NET_MAG WHERE SVT=" & .Fields("id").Value, DB7,
+                         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 With rs1
                     frmComputers.lblNumberNET.Text = .Fields("id_line").Value
@@ -1573,10 +1660,6 @@ err_:
             End If
 
 
-
-
-
-
         End With
 
         rs.Close()
@@ -1584,8 +1667,9 @@ err_:
 
         If Len(unaPCL) <> 0 Then
 
-            rs = New ADODB.Recordset
-            rs.Open("Select NET_NAME From kompy where id=" & unaPCL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rs = New Recordset
+            rs.Open("Select NET_NAME From kompy where id=" & unaPCL, DB7, CursorTypeEnum.adOpenDynamic,
+                    LockTypeEnum.adLockOptimistic)
 
             With rs
 
@@ -1601,8 +1685,8 @@ err_:
         '#############################################
 
         sSQL = "SELECT count(*) as t_n from spr_other where C='1'"
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         Dim A1 As String
         With rs
@@ -1620,13 +1704,14 @@ err_:
                 frmComputers.cmbPCLK.Visible = True
                 frmComputers.Label88.Visible = True
 
-                Call LOAD_PCL(frmComputers.cmbBranch.Text, frmComputers.cmbDepartment.Text, frmComputers.cmbOffice.Text, frmComputers.cmbPCLK)
+                Call _
+                    LOAD_PCL(frmComputers.cmbBranch.Text, frmComputers.cmbDepartment.Text, frmComputers.cmbOffice.Text,
+                             frmComputers.cmbPCLK)
         End Select
 
         '#############################################
         '#############################################
         '#############################################
-
 
 
         'Call LOAD_SOFT(sID, frmComputers.lstSoftware)
@@ -1637,28 +1722,31 @@ err_:
 
 
         'frmComputers.IN_PRN.Text = frmComputers.IN_PRN.Font.Size & "," & frmComputers.IN_PRN.Font.Style
-
     End Sub
 
     Public Sub LOADmon(ByVal sID As String)
         On Error Resume Next
         Dim unaPCL As String
-        Dim rs As ADODB.Recordset 'Объявляем рекордсет
+        Dim rs As Recordset 'Объявляем рекордсет
         Dim sSQL As String 'Переменная, где будет размещён SQL запрос
 
         sSQL = "SELECT * FROM kompy WHERE id =" & sID
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
             frmComputers.lblsIDOTH.Text = .Fields("id").Value
 
             If Not IsDBNull(.Fields("MONITOR_NAME").Value) Then frmComputers.cmbOTH.Text = .Fields("MONITOR_NAME").Value
-            If Not IsDBNull(.Fields("MONITOR_DUM").Value) Then frmComputers.txtMonDum.Text = .Fields("MONITOR_DUM").Value
+            If Not IsDBNull(.Fields("MONITOR_DUM").Value) Then _
+                frmComputers.txtMonDum.Text = .Fields("MONITOR_DUM").Value
             If Not IsDBNull(.Fields("MONITOR_SN").Value) Then frmComputers.txtOTHSN.Text = .Fields("MONITOR_SN").Value
-            If Not IsDBNull(.Fields("MONITOR_PROIZV").Value) Then frmComputers.PROiZV39.Text = .Fields("MONITOR_PROIZV").Value
-            If Not IsDBNull(.Fields("OTvetstvennyj").Value) Then frmComputers.cmbOTHotv.Text = .Fields("OTvetstvennyj").Value
-            If Not IsDBNull(.Fields("INV_NO_MONITOR").Value) Then frmComputers.txtOTHinnumber.Text = .Fields("INV_NO_MONITOR").Value
+            If Not IsDBNull(.Fields("MONITOR_PROIZV").Value) Then _
+                frmComputers.PROiZV39.Text = .Fields("MONITOR_PROIZV").Value
+            If Not IsDBNull(.Fields("OTvetstvennyj").Value) Then _
+                frmComputers.cmbOTHotv.Text = .Fields("OTvetstvennyj").Value
+            If Not IsDBNull(.Fields("INV_NO_MONITOR").Value) Then _
+                frmComputers.txtOTHinnumber.Text = .Fields("INV_NO_MONITOR").Value
             If Not IsDBNull(.Fields("port_1").Value) Then frmComputers.txtOTHmemo.Text = .Fields("port_1").Value
             'txtOTHmemo
 
@@ -1675,14 +1763,13 @@ err_:
             frmComputers.txtOTHphone.Text = .Fields("TELEPHONE").Value
 
 
-
-
             If Not IsDBNull(.Fields("SFAktNo").Value) Then frmComputers.txtOTHSfN.Text = .Fields("SFAktNo").Value
             If Not IsDBNull(.Fields("CenaRub").Value) Then frmComputers.txtOTHcash.Text = .Fields("CenaRub").Value
             If Not IsDBNull(.Fields("StoimRub").Value) Then frmComputers.txtOTHSumm.Text = .Fields("StoimRub").Value
             If Not IsDBNull(.Fields("Zaiavk").Value) Then frmComputers.txtOTHZay.Text = .Fields("Zaiavk").Value
 
-            If Not IsDBNull(.Fields("DataVVoda").Value) Then frmComputers.dtOTHdataVvoda.Value = .Fields("DataVVoda").Value
+            If Not IsDBNull(.Fields("DataVVoda").Value) Then _
+                frmComputers.dtOTHdataVvoda.Value = .Fields("DataVVoda").Value
             If Not IsDBNull(.Fields("dataSF").Value) Then frmComputers.dtOTHSFdate.Value = .Fields("dataSF").Value
 
             If Not IsDBNull(.Fields("Spisan").Value) Then frmComputers.chkOTHspis.Checked = .Fields("Spisan").Value
@@ -1697,8 +1784,9 @@ err_:
 
         If Len(unaPCL) <> 0 Then
 
-            rs = New ADODB.Recordset
-            rs.Open("Select NET_NAME From kompy where id=" & unaPCL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rs = New Recordset
+            rs.Open("Select NET_NAME From kompy where id=" & unaPCL, DB7, CursorTypeEnum.adOpenDynamic,
+                    LockTypeEnum.adLockOptimistic)
 
             With rs
 
@@ -1708,8 +1796,6 @@ err_:
             rs.Close()
             rs = Nothing
         End If
-
-
 
 
         'Call LOAD_GARs(sID, frmComputers.cmbOTHPostav, frmComputers.dtGOTHPr, frmComputers.dtGOTHok)
@@ -1726,12 +1812,13 @@ err_:
         lstSoftware.ListViewItemSorter = Nothing
 
 
-        Dim rs As ADODB.Recordset 'Объявляем рекордсет
+        Dim rs As Recordset 'Объявляем рекордсет
         Dim sSQL As String 'Переменная, где будет размещён SQL запрос
 
-        sSQL = "SELECT * FROM SOFT_INSTALL WHERE Id_Comp =" & sID & " and Soft not like '%update%' and Soft not like '%Обновление%' ORDER BY Soft, NomerSoftKomp"
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        sSQL = "SELECT * FROM SOFT_INSTALL WHERE Id_Comp =" & sID &
+               " and Soft not like '%update%' and Soft not like '%Обновление%' ORDER BY Soft, NomerSoftKomp"
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         Dim intCount As Decimal = 0
 
@@ -1743,9 +1830,11 @@ err_:
                 lstSoftware.Items.Add(.Fields("id").Value) 'col no. 1
 
 
-                If Not IsDBNull(.Fields("NomerSoftKomp").Value) Then lstSoftware.Items(CInt(intCount)).SubItems.Add(.Fields("NomerSoftKomp").Value)
+                If Not IsDBNull(.Fields("NomerSoftKomp").Value) Then _
+                    lstSoftware.Items(CInt(intCount)).SubItems.Add(.Fields("NomerSoftKomp").Value)
 
-                If Not IsDBNull(.Fields("Soft").Value) Then lstSoftware.Items(CInt(intCount)).SubItems.Add(.Fields("Soft").Value)
+                If Not IsDBNull(.Fields("Soft").Value) Then _
+                    lstSoftware.Items(CInt(intCount)).SubItems.Add(.Fields("Soft").Value)
 
                 If Not IsDBNull(.Fields("L_key").Value) Then
                     lstSoftware.Items(CInt(intCount)).SubItems.Add(.Fields("L_key").Value)
@@ -1798,12 +1887,12 @@ err_:
         frmComputers.lstUsers.Items.Clear()
 
 
-        Dim rs As ADODB.Recordset 'Объявляем рекордсет
+        Dim rs As Recordset 'Объявляем рекордсет
         Dim sSQL As String 'Переменная, где будет размещён SQL запрос
 
         sSQL = "SELECT * FROM USER_COMP WHERE Id_Comp =" & sID & " ORDER BY USERNAME"
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         Dim intCount As Decimal = 0
 
@@ -1852,18 +1941,17 @@ err_:
         rs = Nothing
 
         ResList(frmComputers.lstUsers)
-
     End Sub
 
     Public Sub LOAD_NOTES(ByVal sID As String, ByVal lstGroups As ListView)
         On Error Resume Next
         lstGroups.Items.Clear()
 
-        Dim rs As ADODB.Recordset 'Объявляем рекордсет
+        Dim rs As Recordset 'Объявляем рекордсет
         Dim sSQL As String 'Переменная, где будет размещён SQL запрос
         sSQL = "SELECT * FROM Zametki WHERE Id_Comp =" & sID & " ORDER BY date DESC, id DESC"
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         Dim intCount As Decimal = 0
 
@@ -1913,7 +2001,6 @@ err_:
         If frmserviceDesc.ilsCMD.Images.Count = 0 Then
 
 
-
             Call frmservills_load()
 
 
@@ -1923,14 +2010,14 @@ err_:
         lstGroups.ListViewItemSorter = Nothing
 
 
-        Dim rs As ADODB.Recordset 'Объявляем рекордсет
+        Dim rs As Recordset 'Объявляем рекордсет
         Dim sSQL As String 'Переменная, где будет размещён SQL запрос
         Dim uname As Integer
 
 
-        rs = New ADODB.Recordset
+        rs = New Recordset
         sSQL = "SELECT COUNT(*) AS t_number FROM Remont WHERE id_comp=" & sID & " AND PREF='" & frmComputers.sPREF & "'"
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
             uname = .Fields("t_number").Value
@@ -1943,14 +2030,14 @@ err_:
         If uname = 0 Then Exit Sub
 
 
-
         Dim tID As Long
 
         'Dim rs As ADODB.Recordset 'Объявляем рекордсет
         'Dim sSQL As String 'Переменная, где будет размещён SQL запрос
-        sSQL = "SELECT * FROM Remont WHERE id_comp=" & sID & " and PREF='" & frmComputers.sPREF & "' ORDER BY date DESC, id DESC"
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        sSQL = "SELECT * FROM Remont WHERE id_comp=" & sID & " and PREF='" & frmComputers.sPREF &
+               "' ORDER BY date DESC, id DESC"
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         Dim intCount As Decimal = 0
 
@@ -2009,7 +2096,6 @@ err_:
                 End If
 
 
-
                 If Not IsDBNull(.Fields("Uroven").Value) Then
                     lstGroups.Items(CInt(intCount)).SubItems.Add(.Fields("Uroven").Value)
                 Else
@@ -2040,11 +2126,11 @@ err_:
                     lstGroups.Items(CInt(intCount)).SubItems.Add("")
                 End If
 
-                Dim rs1 As ADODB.Recordset 'Объявляем рекордсет
+                Dim rs1 As Recordset 'Объявляем рекордсет
                 Dim sSQL1 As String 'Переменная, где будет размещён SQL запрос
                 sSQL1 = "SELECT COUNT(*) as t_n FROM remonty_plus WHERE id_rem =" & tID
-                rs1 = New ADODB.Recordset
-                rs1.Open(sSQL1, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs1 = New Recordset
+                rs1.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 With rs1
                     If Not IsDBNull(.Fields("t_n").Value) Then
@@ -2067,7 +2153,6 @@ err_:
         rs = Nothing
 
         ResList(lstGroups)
-
     End Sub
 
     Public Sub LOAD_DVIG_TEHN(ByVal sID As String, ByVal lstGroup As ListView)
@@ -2075,9 +2160,10 @@ err_:
         Dim sNom As Integer
         lstGroup.Items.Clear()
 
-        Dim rscount As ADODB.Recordset 'Объявляем рекордсет
-        rscount = New ADODB.Recordset
-        rscount.Open("SELECT COUNT(*) AS total_number FROM dvig where id_comp=" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        Dim rscount As Recordset 'Объявляем рекордсет
+        rscount = New Recordset
+        rscount.Open("SELECT COUNT(*) AS total_number FROM dvig where id_comp=" & frmComputers.sCOUNT, DB7,
+                     CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rscount
 
@@ -2092,12 +2178,13 @@ err_:
 
         If sNom > 0 Then
 
-            Dim rs As ADODB.Recordset 'Объявляем рекордсет
+            Dim rs As Recordset 'Объявляем рекордсет
             Dim sSQL As String 'Переменная, где будет размещён SQL запрос
 
-            sSQL = "SELECT ID_comp, data, id, oldmesto, newmesto, prich, time FROM dvig where id_comp=" & frmComputers.sCOUNT
-            rs = New ADODB.Recordset
-            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            sSQL = "SELECT ID_comp, data, id, oldmesto, newmesto, prich, time FROM dvig where id_comp=" &
+                   frmComputers.sCOUNT
+            rs = New Recordset
+            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
             Dim intCount As Decimal = 0
             With rs
@@ -2149,19 +2236,18 @@ err_:
             ResList(lstGroup)
 
         End If
-
-
-
     End Sub
 
-    Private Sub LOAD_GARs(ByVal sID As String, ByVal dPost As ComboBox, ByVal dtp As DateTimePicker, ByVal dto As DateTimePicker)
+    Private Sub LOAD_GARs(ByVal sID As String, ByVal dPost As ComboBox, ByVal dtp As DateTimePicker,
+                          ByVal dto As DateTimePicker)
 
-        Dim rsGa As ADODB.Recordset
+        Dim rsGa As Recordset
         Dim A, B, C As String
         Dim dDate As Date
-        rsGa = New ADODB.Recordset
+        rsGa = New Recordset
 
-        rsGa.Open("SELECT * FROM Garantia_sis WHERE id_Comp=" & sID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rsGa.Open("SELECT * FROM Garantia_sis WHERE id_Comp=" & sID, DB7, CursorTypeEnum.adOpenDynamic,
+                  LockTypeEnum.adLockOptimistic)
 
         With rsGa
 
@@ -2184,8 +2270,6 @@ err_:
         End With
         rsGa.Close()
         rsGa = Nothing
-
-
     End Sub
 
     Public Sub LOAD_INF_BRANCHE(ByVal sID As String)
@@ -2196,7 +2280,7 @@ err_:
         TipTehn = ""
 
         Dim SerD As String
-        Dim rs As ADODB.Recordset
+        Dim rs As Recordset
 
 
         Select Case frmComputers.sPREF
@@ -2226,11 +2310,10 @@ err_:
         sSQL2 = "Select * FROM OTD_O where Id_OTD='" & SerD & "'"
 
 
-
         sSQL = "Select count(*) as t_n FROM SES_Pass where id_OF='" & SerD & "'"
 
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
             sCN = .Fields("t_n").Value
@@ -2241,8 +2324,8 @@ err_:
 
         If sCN > 0 Then
 
-            rs = New ADODB.Recordset
-            rs.Open(sSQL1, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rs = New Recordset
+            rs.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
             With rs
                 frmComputers.txtspplo.Text = .Fields("Ploshad").Value
@@ -2264,8 +2347,8 @@ err_:
 
 
         sSQL = "Select count(*) as t_n FROM OTD_O where Id_OTD='" & SerD & "'"
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
             sCN = .Fields("t_n").Value
@@ -2276,8 +2359,8 @@ err_:
         If sCN > 0 Then
 
 
-            rs = New ADODB.Recordset
-            rs.Open(sSQL2, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rs = New Recordset
+            rs.Open(sSQL2, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
             With rs
                 frmComputers.txtBRAddress.Text = .Fields("ADRESS").Value
@@ -2298,8 +2381,8 @@ err_:
 
 
         sSQL = "Select count(*) as t_n FROM ZAM_OTD where ID_OTD='" & SerD & "'"
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
             sCN = .Fields("t_n").Value
@@ -2311,8 +2394,8 @@ err_:
 
             sSQL3 = "Select * FROM ZAM_OTD where ID_OTD='" & SerD & "' ORDER BY date DESC, id DESC"
 
-            rs = New ADODB.Recordset
-            rs.Open(sSQL3, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rs = New Recordset
+            rs.Open(sSQL3, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
             Dim intCount As Decimal = 0
 
@@ -2358,8 +2441,7 @@ err_:
 
 
         Exit Sub
-err_:
-
+        err_:
     End Sub
 
     Public Sub SHED_CHECK()
@@ -2388,8 +2470,7 @@ err_:
         End If
 
 
-
-        Dim rs As ADODB.Recordset
+        Dim rs As Recordset
 
         Dim sSQL, SERT, SERT2 As String
         Dim LNGIniFile As New IniFile(sLANGPATH)
@@ -2397,8 +2478,8 @@ err_:
 
         sSQL = "SELECT COUNT(*) AS total_number FROM Sheduler"
 
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
             SERT = .Fields("total_number").Value
@@ -2419,12 +2500,13 @@ err_:
 
             'frmMain lblShed
             'LNGIniFile.GetString("frmMain", "lblShed", "Напоминания")
-            frmMain.lblShed.Text = LNGIniFile.GetString("frmMain", "lblShed", "Напоминания") & " " & "(" & "0" & "/" & SERT$ & ")"
+            frmMain.lblShed.Text = LNGIniFile.GetString("frmMain", "lblShed", "Напоминания") & " " & "(" & "0" & "/" &
+                                   SERT$ & ")"
 
             sSQL = "SELECT COUNT(*) AS total_number FROM Sheduler Where foruser='" & UserNames & "'"
 
-            rs = New ADODB.Recordset
-            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rs = New Recordset
+            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
             With rs
                 SERT2 = .Fields("total_number").Value
@@ -2436,22 +2518,24 @@ err_:
 
                 sSQL = "SELECT DATA, FORUSER, OPIS FROM Sheduler Where foruser='" & UserNames & "'"
 
-                rs = New ADODB.Recordset
-                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                 Dim intj As Integer
                 intj = 0
                 With rs
                     .MoveFirst()
                     Do While Not .EOF
 
-                        If .Fields(0).Value <= Date.Today.AddDays(-3) Or .Fields(0).Value >= Date.Today.AddDays(+3) Then
+                        If .Fields(0).Value <= Date.Today.AddDays(- 3) Or .Fields(0).Value >= Date.Today.AddDays(+ 3) _
+                            Then
 
                         Else
 
                             If .Fields(1).Value = UserNames Then
                                 intj = intj + 1
 
-                                frmMain.lblShed.Text = LNGIniFile.GetString("frmMain", "lblShed", "Напоминания") & " " & "(" & intj & "/" & SERT$ & ")"
+                                frmMain.lblShed.Text = LNGIniFile.GetString("frmMain", "lblShed", "Напоминания") & " " &
+                                                       "(" & intj & "/" & SERT$ & ")"
                                 frmMain.lblShed.ForeColor = Color.Red
 
                             Else
@@ -2468,7 +2552,8 @@ err_:
 
             Else
 
-                frmMain.lblShed.Text = LNGIniFile.GetString("frmMain", "lblShed", "Напоминания") & " " & "(" & "0" & "/" & SERT$ & ")"
+                frmMain.lblShed.Text = LNGIniFile.GetString("frmMain", "lblShed", "Напоминания") & " " & "(" & "0" & "/" &
+                                       SERT$ & ")"
                 frmMain.lblShed.ForeColor = Color.Black
 
             End If
@@ -2488,8 +2573,6 @@ err_:
         End If
 
         'frmMain.lblShed.Text = "Напоминания "
-
-
     End Sub
 
     Public Sub REM_CHECK()
@@ -2497,15 +2580,15 @@ err_:
 
         On Error Resume Next
 
-        Dim rs As ADODB.Recordset
+        Dim rs As Recordset
 
         Dim sSQL, SERT, SERT2, uname, SERT3 As String
 
 
         sSQL = "SELECT COUNT(*) AS total_number FROM Remont"
 
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
             SERT = .Fields("total_number").Value
@@ -2525,8 +2608,9 @@ err_:
             End If
 
 
-            rs = New ADODB.Recordset
-            rs.Open("SELECT * FROM SPR_Master WHERE A='" & UserNames & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rs = New Recordset
+            rs.Open("SELECT * FROM SPR_Master WHERE A='" & UserNames & "'", DB7, CursorTypeEnum.adOpenDynamic,
+                    LockTypeEnum.adLockOptimistic)
 
 
             With rs
@@ -2540,8 +2624,8 @@ err_:
 
             sSQL = "SELECT COUNT(*) AS total_number FROM Remont WHERE otvetstv='" & uname & "'"
 
-            rs = New ADODB.Recordset
-            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rs = New Recordset
+            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
             With rs
                 SERT2 = .Fields("total_number").Value
@@ -2549,14 +2633,15 @@ err_:
             rs.Close()
             rs = Nothing
             'LNGIniFile.GetString("frmMain", "lblRem", "Заявки") & " " & 
-            frmMain.lblRem.Text = LNGIniFile.GetString("frmMain", "lblRem", "Заявки") & " " & "(" & "0" & "/" & SERT & ")"
+            frmMain.lblRem.Text = LNGIniFile.GetString("frmMain", "lblRem", "Заявки") & " " & "(" & "0" & "/" & SERT &
+                                  ")"
 
             If SERT2 > 0 Then
 
                 sSQL = "SELECT COUNT(*) AS total_number FROM Remont Where otvetstv='" & uname & "' and zakryt = 0"
 
-                rs = New ADODB.Recordset
-                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 With rs
                     SERT3 = .Fields("total_number").Value
@@ -2566,20 +2651,23 @@ err_:
 
                 If SERT3 > 0 Then
 
-                    frmMain.lblRem.Text = LNGIniFile.GetString("frmMain", "lblRem", "Заявки") & " " & "(" & SERT3 & "/" & SERT & ")"
+                    frmMain.lblRem.Text = LNGIniFile.GetString("frmMain", "lblRem", "Заявки") & " " & "(" & SERT3 & "/" &
+                                          SERT & ")"
                     frmMain.lblRem.ForeColor = Color.Red
 
 
                 Else
 
-                    frmMain.lblRem.Text = LNGIniFile.GetString("frmMain", "lblRem", "Заявки") & " " & "(" & "0" & "/" & SERT & ")"
+                    frmMain.lblRem.Text = LNGIniFile.GetString("frmMain", "lblRem", "Заявки") & " " & "(" & "0" & "/" &
+                                          SERT & ")"
                     frmMain.lblRem.ForeColor = Color.Black
 
                 End If
 
             Else
 
-                frmMain.lblRem.Text = LNGIniFile.GetString("frmMain", "lblRem", "Заявки") & " " & "(" & "0" & "/" & SERT & ")"
+                frmMain.lblRem.Text = LNGIniFile.GetString("frmMain", "lblRem", "Заявки") & " " & "(" & "0" & "/" & SERT &
+                                      ")"
 
             End If
 
@@ -2596,32 +2684,30 @@ err_:
             End If
 
         End If
-
-
-
     End Sub
 
-    Public Sub ExLoadParFow(ByVal sCombo1 As String, ByVal sText1 As TextBox, ByVal sText2 As TextBox, ByVal sCombo2 As ComboBox, ByVal sTABLE As String)
+    Public Sub ExLoadParFow(ByVal sCombo1 As String, ByVal sText1 As TextBox, ByVal sText2 As TextBox,
+                            ByVal sCombo2 As ComboBox, ByVal sTABLE As String)
 
         On Error Resume Next
-        Dim rs As ADODB.Recordset
+        Dim rs As Recordset
         Dim sSQL As String
         Dim uNI As String
-        rs = New ADODB.Recordset
-
+        rs = New Recordset
 
 
         sSQL = "SELECT * FROM " & sTABLE & " WHERE Name = '" & sCombo1 & "'"
 
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
 
             If Not IsDBNull(.Fields("proizv").Value) Then uNI = .Fields("proizv").Value
 
-            Dim PROYZV As ADODB.Recordset
-            PROYZV = New ADODB.Recordset
-            PROYZV.Open("SELECT * FROM SPR_PROIZV WHERE iD=" & uNI, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            Dim PROYZV As Recordset
+            PROYZV = New Recordset
+            PROYZV.Open("SELECT * FROM SPR_PROIZV WHERE iD=" & uNI, DB7, CursorTypeEnum.adOpenDynamic,
+                        LockTypeEnum.adLockOptimistic)
 
             With PROYZV
                 sCombo2.Text = .Fields("proizv").Value
@@ -2635,31 +2721,30 @@ err_:
 
         rs.Close()
         rs = Nothing
-
-
     End Sub
 
-    Public Sub ExLoadParTree(ByVal sCombo1 As String, ByVal sText1 As TextBox, ByVal sCombo2 As ComboBox, ByVal sTABLE As String)
+    Public Sub ExLoadParTree(ByVal sCombo1 As String, ByVal sText1 As TextBox, ByVal sCombo2 As ComboBox,
+                             ByVal sTABLE As String)
 
         On Error Resume Next
-        Dim rs As ADODB.Recordset
+        Dim rs As Recordset
         Dim sSQL As String
         Dim uNI As String
-        rs = New ADODB.Recordset
-
+        rs = New Recordset
 
 
         sSQL = "SELECT * FROM " & sTABLE & " WHERE Name = '" & sCombo1 & "'"
 
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
 
             If Not IsDBNull(.Fields("proizv").Value) Then uNI = .Fields("proizv").Value
 
-            Dim PROYZV As ADODB.Recordset
-            PROYZV = New ADODB.Recordset
-            PROYZV.Open("SELECT * FROM SPR_PROIZV WHERE iD=" & uNI, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            Dim PROYZV As Recordset
+            PROYZV = New Recordset
+            PROYZV.Open("SELECT * FROM SPR_PROIZV WHERE iD=" & uNI, DB7, CursorTypeEnum.adOpenDynamic,
+                        LockTypeEnum.adLockOptimistic)
 
             With PROYZV
                 sCombo2.Text = .Fields("proizv").Value
@@ -2673,31 +2758,29 @@ err_:
 
         rs.Close()
         rs = Nothing
-
-
     End Sub
 
     Public Sub ExLoadParTwo(ByVal sCombo1 As String, ByVal sCombo2 As ComboBox, ByVal sTABLE As String)
 
         On Error Resume Next
-        Dim rs As ADODB.Recordset
+        Dim rs As Recordset
         Dim sSQL As String
         Dim uNI As String
-        rs = New ADODB.Recordset
-
+        rs = New Recordset
 
 
         sSQL = "SELECT * FROM " & sTABLE & " WHERE Name = '" & sCombo1 & "'"
 
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
 
             If Not IsDBNull(.Fields("proizv").Value) Then uNI = .Fields("proizv").Value
 
-            Dim PROYZV As ADODB.Recordset
-            PROYZV = New ADODB.Recordset
-            PROYZV.Open("SELECT * FROM SPR_PROIZV WHERE iD=" & uNI, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            Dim PROYZV As Recordset
+            PROYZV = New Recordset
+            PROYZV.Open("SELECT * FROM SPR_PROIZV WHERE iD=" & uNI, DB7, CursorTypeEnum.adOpenDynamic,
+                        LockTypeEnum.adLockOptimistic)
 
             With PROYZV
                 sCombo2.Text = .Fields("proizv").Value
@@ -2709,8 +2792,6 @@ err_:
 
         rs.Close()
         rs = Nothing
-
-
     End Sub
 
     Public Sub REMONT_SEND_MASTER(ByVal sID As String)
@@ -2719,9 +2800,9 @@ err_:
 
         sSQL = "SELECT * FROM Remont where id =" & sID
 
-        Dim rs As ADODB.Recordset
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        Dim rs As Recordset
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
             a1 = .Fields("Date").Value
@@ -2739,8 +2820,8 @@ err_:
         rs = Nothing
 
         sSQL1 = "SELECT * FROM SPR_Master where Name ='" & d1 & "'"
-        rs = New ADODB.Recordset
-        rs.Open(sSQL1, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
             m1 = .Fields("B").Value
@@ -2750,8 +2831,8 @@ err_:
         rs = Nothing
 
         sSQL1 = "SELECT * FROM CONFIGURE"
-        rs = New ADODB.Recordset
-        rs.Open(sSQL1, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
             frm = .Fields("nr").Value
@@ -2762,8 +2843,8 @@ err_:
         If PREFs = "C" Then
 
             sSQL1 = "SELECT * FROM kompy where id =" & b1
-            rs = New ADODB.Recordset
-            rs.Open(sSQL1, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rs = New Recordset
+            rs.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
             With rs
                 h1 = .Fields("NET_NAME").Value
                 i1 = .Fields("FILIAL").Value
@@ -2781,8 +2862,8 @@ err_:
 
 
                     sSQL1 = "SELECT * FROM SPR_FILIAL where id =" & b1
-                    rs = New ADODB.Recordset
-                    rs.Open(sSQL1, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                    rs = New Recordset
+                    rs.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                     With rs
                         i1 = .Fields("FILIAL").Value
 
@@ -2793,8 +2874,8 @@ err_:
                 Case "O"
 
                     sSQL1 = "SELECT * FROM SPR_OTD_FILIAL where id =" & b1
-                    rs = New ADODB.Recordset
-                    rs.Open(sSQL1, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                    rs = New Recordset
+                    rs.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                     With rs
                         i1 = .Fields("FILIAL").Value
                         j1 = .Fields("N_Otd").Value
@@ -2807,8 +2888,8 @@ err_:
                 Case "K"
 
                     sSQL1 = "SELECT * FROM SPR_KAB where id =" & b1
-                    rs = New ADODB.Recordset
-                    rs.Open(sSQL1, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                    rs = New Recordset
+                    rs.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                     With rs
                         i1 = .Fields("N_F").Value
                         j1 = .Fields("N_M").Value
@@ -2847,7 +2928,6 @@ err_:
         End If
 
 
-
         If Len(l1) = 0 Then l1 = "Источник не известен. "
 
 
@@ -2868,13 +2948,13 @@ err_:
         sTEXT = New TextBox
         sTEXT.Multiline = True
         sTEXT.Text = "Здравствуйте " & d1 & ", " _
- + vbNewLine + "получено сообщение от " & l1 & ": " _
- & vbNewLine & c1 _
- & vbNewLine & "Срок исполнения: " & srok _
- & vbNewLine & h1 _
- & vbNewLine & i1 _
- & vbNewLine & j1 _
- & vbNewLine & k1
+                                            + vbNewLine + "получено сообщение от " & l1 & ": " _
+                     & vbNewLine & c1 _
+                     & vbNewLine & "Срок исполнения: " & srok _
+                     & vbNewLine & h1 _
+                     & vbNewLine & i1 _
+                     & vbNewLine & j1 _
+                     & vbNewLine & k1
 
         Subject = "БКО::Ремонт " & g1
         sParams = m1
@@ -2883,16 +2963,16 @@ err_:
 
         Dim client As New SmtpClient(smtp)
         client.EnableSsl = True
-        client.Credentials = New Net.NetworkCredential("ldragon24@gmail.com", "lfplhf1vf!")
+        client.Credentials = New NetworkCredential("ldragon24@gmail.com", "lfplhf1vf!")
 
-        Dim fromAdr As MailAddress = New MailAddress(frm, ProGramName, System.Text.Encoding.UTF8)
+        Dim fromAdr As MailAddress = New MailAddress(frm, ProGramName, Encoding.UTF8)
         Dim toAdr As MailAddress = New MailAddress(m1)
         Dim message As MailMessage = New MailMessage(fromAdr, toAdr)
         message.Subject = Subject
-        message.SubjectEncoding = System.Text.Encoding.UTF8
+        message.SubjectEncoding = Encoding.UTF8
 
         message.Body = sTEXT.Text
-        message.BodyEncoding = System.Text.Encoding.UTF8
+        message.BodyEncoding = Encoding.UTF8
         'Dim attach As New Attachment("c:\1.txt")
         'message.Attachments.Add(attach)
 
@@ -2904,9 +2984,7 @@ err_:
 
         MsgBox("Сообщение отправлено", MsgBoxStyle.Information, ProGramName)
         Exit Sub
-err_:
+        err_:
         MsgBox(Err.Description)
-
     End Sub
-
 End Module

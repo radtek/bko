@@ -3,20 +3,20 @@
     Public sIDTR As Long
 
 
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdAdd.Click
+    Private Sub Button1_Click(ByVal sender As Object, ByVal e As EventArgs) Handles cmdAdd.Click
         On Error GoTo Error_
 
 
-
-        Dim rs As ADODB.Recordset
-        rs = New ADODB.Recordset
+        Dim rs As Recordset
+        rs = New Recordset
 
         If Me.EDTR = True Then
 
-            rs.Open("SELECT * FROM TrebOvanie WHERE id =" & sIDTR, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rs.Open("SELECT * FROM TrebOvanie WHERE id =" & sIDTR, DB7, CursorTypeEnum.adOpenDynamic,
+                    LockTypeEnum.adLockOptimistic)
         Else
 
-            rs.Open("SELECT * FROM TrebOvanie", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rs.Open("SELECT * FROM TrebOvanie", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
         End If
 
 
@@ -52,7 +52,7 @@
 
         Exit Sub
 
-Error_:
+        Error_:
 
 
         Select Case Err.Number
@@ -65,7 +65,7 @@ Error_:
         Me.Close()
     End Sub
 
-    Private Sub frmTreb_Act_treb_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+    Private Sub frmTreb_Act_treb_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
 
         SendFonts(Me)
 
@@ -74,7 +74,5 @@ Error_:
         FillComboNET(Me.cmbLich2, "Name", "SPR_OTV", "", False, True)
         FillComboNET(Me.cmbLich, "Name", "SPR_OTV", "", False, True)
         FillComboNET(Me.cmbTip, "Name", "SPR_Complect", "", False, True)
-
-
     End Sub
 End Class

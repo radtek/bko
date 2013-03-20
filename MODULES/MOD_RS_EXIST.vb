@@ -1,5 +1,4 @@
 ﻿Module MOD_RS_EXIST
-
     Public Function RSExistsSoft(ByVal sSID As String, ByVal sGroupName As String) As Boolean
         On Error GoTo Error_
         RSExistsSoft = False
@@ -8,13 +7,14 @@
         sGroupName = Replace(sGroupName, "'", " ")
         If Len(sGroupName) = 0 Then Exit Function
 
-        sSQL2 = "SELECT COUNT(*) AS total_number FROM SOFT_INSTALL WHERE Id_Comp= " & sSID & " AND Soft='" & sGroupName & "'"
+        sSQL2 = "SELECT COUNT(*) AS total_number FROM SOFT_INSTALL WHERE Id_Comp= " & sSID & " AND Soft='" & sGroupName &
+                "'"
 
-        Dim rs As ADODB.Recordset
-        rs = New ADODB.Recordset
+        Dim rs As Recordset
+        rs = New Recordset
 
         If Len(sGroupName) = 0 Then Exit Function
-        rs.Open(sSQL2, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs.Open(sSQL2, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
             If .Fields("total_number").Value = 0 Then
@@ -34,7 +34,7 @@
         RSExistsSoft = False
 
         Exit Function
-Error_:
+        Error_:
         RSExistsSoft = False
     End Function
 
@@ -262,11 +262,11 @@ Error_:
         End Select
 
 
-        Dim rs As ADODB.Recordset
-        rs = New ADODB.Recordset
+        Dim rs As Recordset
+        rs = New Recordset
 
         If Len(sGroupName) = 0 Then Exit Function
-        rs.Open(sSQL2, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs.Open(sSQL2, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
             If .Fields("total_number").Value = 0 Then
@@ -287,7 +287,7 @@ Error_:
         RSExists = False
 
         Exit Function
-Error_:
+        Error_:
         RSExists = False
         'MsgBox(Err.Description)
     End Function
@@ -303,11 +303,11 @@ Error_:
 
         sSQL2 = "SELECT COUNT(*) AS total_number FROM SPR_OTD_FILIAL WHERE N_OTD='" & sDP & "' AND FILIAL='" & sBR & "'"
 
-        Dim rs As ADODB.Recordset
-        rs = New ADODB.Recordset
+        Dim rs As Recordset
+        rs = New Recordset
 
         If Len(sBR) = 0 Then Exit Function
-        rs.Open(sSQL2, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs.Open(sSQL2, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
             If .Fields("total_number").Value = 0 Then
@@ -327,7 +327,7 @@ Error_:
         RSExistsDB = False
 
         Exit Function
-Error_:
+        Error_:
         RSExistsDB = False
     End Function
 
@@ -340,13 +340,14 @@ Error_:
         If Len(sBR) = 0 Then Exit Function
         If Len(sDP) = 0 Then Exit Function
 
-        sSQL2 = "SELECT COUNT(*) AS total_number FROM SPR_KAB WHERE N_M='" & sDP & "' AND N_F='" & sBR & "' AND Name='" & sOFF & "'"
+        sSQL2 = "SELECT COUNT(*) AS total_number FROM SPR_KAB WHERE N_M='" & sDP & "' AND N_F='" & sBR & "' AND Name='" &
+                sOFF & "'"
 
-        Dim rs As ADODB.Recordset
-        rs = New ADODB.Recordset
+        Dim rs As Recordset
+        rs = New Recordset
 
         If Len(sBR) = 0 Then Exit Function
-        rs.Open(sSQL2, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs.Open(sSQL2, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
             If .Fields("total_number").Value = 0 Then
@@ -366,7 +367,7 @@ Error_:
         RSExistsDBO = False
 
         Exit Function
-Error_:
+        Error_:
         RSExistsDBO = False
     End Function
 End Module

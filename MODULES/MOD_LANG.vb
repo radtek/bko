@@ -5,8 +5,6 @@
 'Imports System.Xml.XPath
 
 Module modLang
-
-
     Public Sub frmNetMag_selectSVT_LANG()
 
         frmNetMag_selectSVT.lvNetMagazin.Columns.Clear()
@@ -14,14 +12,22 @@ Module modLang
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
         'lvNetMagazin
-        frmNetMag_selectSVT.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMag_selectSVT", "lvNetMagazin1", "id"), 1, HorizontalAlignment.Left)
-        frmNetMag_selectSVT.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMag_selectSVT", "lvNetMagazin2", "Тип"), 50, HorizontalAlignment.Left)
-        frmNetMag_selectSVT.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMag_selectSVT", "lvNetMagazin3", "Инв. №"), 50, HorizontalAlignment.Left)
-        frmNetMag_selectSVT.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMag_selectSVT", "lvNetMagazin4", "Имя в сети"), 50, HorizontalAlignment.Left)
-        frmNetMag_selectSVT.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMag_selectSVT", "lvNetMagazin5", "Ответственный"), 50, HorizontalAlignment.Left)
-        frmNetMag_selectSVT.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMag_selectSVT", "lvNetMagazin6", "Филиал"), 30, HorizontalAlignment.Left)
-        frmNetMag_selectSVT.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMag_selectSVT", "lvNetMagazin7", "Отдел"), 100, HorizontalAlignment.Left)
-        frmNetMag_selectSVT.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMag_selectSVT", "lvNetMagazin8", "Кабинет"), 100, HorizontalAlignment.Left)
+        frmNetMag_selectSVT.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMag_selectSVT", "lvNetMagazin1", "id"),
+                                                     1, HorizontalAlignment.Left)
+        frmNetMag_selectSVT.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMag_selectSVT", "lvNetMagazin2", "Тип"),
+                                                     50, HorizontalAlignment.Left)
+        frmNetMag_selectSVT.lvNetMagazin.Columns.Add(
+            LNGIniFile.GetString("frmNetMag_selectSVT", "lvNetMagazin3", "Инв. №"), 50, HorizontalAlignment.Left)
+        frmNetMag_selectSVT.lvNetMagazin.Columns.Add(
+            LNGIniFile.GetString("frmNetMag_selectSVT", "lvNetMagazin4", "Имя в сети"), 50, HorizontalAlignment.Left)
+        frmNetMag_selectSVT.lvNetMagazin.Columns.Add(
+            LNGIniFile.GetString("frmNetMag_selectSVT", "lvNetMagazin5", "Ответственный"), 50, HorizontalAlignment.Left)
+        frmNetMag_selectSVT.lvNetMagazin.Columns.Add(
+            LNGIniFile.GetString("frmNetMag_selectSVT", "lvNetMagazin6", "Филиал"), 30, HorizontalAlignment.Left)
+        frmNetMag_selectSVT.lvNetMagazin.Columns.Add(
+            LNGIniFile.GetString("frmNetMag_selectSVT", "lvNetMagazin7", "Отдел"), 100, HorizontalAlignment.Left)
+        frmNetMag_selectSVT.lvNetMagazin.Columns.Add(
+            LNGIniFile.GetString("frmNetMag_selectSVT", "lvNetMagazin8", "Кабинет"), 100, HorizontalAlignment.Left)
 
 
         ResList(frmNetMag_selectSVT.lvNetMagazin)
@@ -29,8 +35,6 @@ Module modLang
         frmNetMag_selectSVT.Text = LNGIniFile.GetString("frmNetMag_selectSVT", "frmNetMag_selectSVT ", "Выбор СВТ")
         frmNetMag_selectSVT.Button1.Text = LNGIniFile.GetString("frmNetMag_selectSVT", "Button1", "Ок")
         frmNetMag_selectSVT.Button2.Text = LNGIniFile.GetString("frmNetMag_selectSVT", "Button2", "Отмена")
-
-
     End Sub
 
     Public Sub frmNetMag_Add_LANG()
@@ -51,16 +55,14 @@ Module modLang
         frmNetMag_Add.Label10.Text = LNGIniFile.GetString("frmNetMag_Add", "Label10 ", "Коммутатор")
         frmNetMag_Add.Label11.Text = LNGIniFile.GetString("frmNetMag_Add", "Label11 ", "Сетевой порт коммутатора")
         frmNetMag_Add.Label13.Text = LNGIniFile.GetString("frmNetMag_Add", "Label13 ", "Примечание")
-        frmNetMag_Add.Label14.Text = LNGIniFile.GetString("frmNetMag_Add", "Label14 ", "(в формате Fa 0/xx, Gi 1/0/xx и т.д.)")
+        frmNetMag_Add.Label14.Text = LNGIniFile.GetString("frmNetMag_Add", "Label14 ",
+                                                          "(в формате Fa 0/xx, Gi 1/0/xx и т.д.)")
 
         frmNetMag_Add.GroupBox1.Text = LNGIniFile.GetString("frmNetMag_Add", "GroupBox1", "Рабочее место")
         frmNetMag_Add.GroupBox2.Text = LNGIniFile.GetString("frmNetMag_Add", "GroupBox2 ", "Коммуникационный шкаф")
 
         frmNetMag_Add.Button1.Text = LNGIniFile.GetString("frmNetMag_Add", "Button1 ", "Добавить")
         frmNetMag_Add.Button2.Text = LNGIniFile.GetString("frmNetMag_Add", "Button2 ", "Отмена")
-
-
-
     End Sub
 
 
@@ -71,20 +73,32 @@ Module modLang
 
 
         'lvNetMagazin
-        frmNetMagazin.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMagazin", "lvNetMagazin1", "id"), 1, HorizontalAlignment.Left)
-        frmNetMagazin.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMagazin", "lvNetMagazin2", "Маркировка"), 50, HorizontalAlignment.Left)
-        frmNetMagazin.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMagazin", "lvNetMagazin3", "Тип кабеля"), 50, HorizontalAlignment.Left)
-        frmNetMagazin.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMagazin", "lvNetMagazin4", "Длина,м"), 50, HorizontalAlignment.Left)
-        frmNetMagazin.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMagazin", "lvNetMagazin5", "Тип линии"), 50, HorizontalAlignment.Left)
-        frmNetMagazin.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMagazin", "lvNetMagazin6", "Телефон"), 30, HorizontalAlignment.Left)
-        frmNetMagazin.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMagazin", "lvNetMagazin7", "Ответственный"), 100, HorizontalAlignment.Left)
-        frmNetMagazin.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMagazin", "lvNetMagazin8", "СВТ"), 100, HorizontalAlignment.Left)
+        frmNetMagazin.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMagazin", "lvNetMagazin1", "id"), 1,
+                                               HorizontalAlignment.Left)
+        frmNetMagazin.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMagazin", "lvNetMagazin2", "Маркировка"), 50,
+                                               HorizontalAlignment.Left)
+        frmNetMagazin.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMagazin", "lvNetMagazin3", "Тип кабеля"), 50,
+                                               HorizontalAlignment.Left)
+        frmNetMagazin.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMagazin", "lvNetMagazin4", "Длина,м"), 50,
+                                               HorizontalAlignment.Left)
+        frmNetMagazin.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMagazin", "lvNetMagazin5", "Тип линии"), 50,
+                                               HorizontalAlignment.Left)
+        frmNetMagazin.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMagazin", "lvNetMagazin6", "Телефон"), 30,
+                                               HorizontalAlignment.Left)
+        frmNetMagazin.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMagazin", "lvNetMagazin7", "Ответственный"),
+                                               100, HorizontalAlignment.Left)
+        frmNetMagazin.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMagazin", "lvNetMagazin8", "СВТ"), 100,
+                                               HorizontalAlignment.Left)
 
-        frmNetMagazin.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMagazin", "lvNetMagazin12", "Место установки"), 100, HorizontalAlignment.Left)
+        frmNetMagazin.lvNetMagazin.Columns.Add(
+            LNGIniFile.GetString("frmNetMagazin", "lvNetMagazin12", "Место установки"), 100, HorizontalAlignment.Left)
 
-        frmNetMagazin.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMagazin", "lvNetMagazin9", "Коммутатор"), 100, HorizontalAlignment.Left)
-        frmNetMagazin.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMagazin", "lvNetMagazin10", "Порт"), 100, HorizontalAlignment.Left)
-        frmNetMagazin.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMagazin", "lvNetMagazin11", "Примечание"), 100, HorizontalAlignment.Left)
+        frmNetMagazin.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMagazin", "lvNetMagazin9", "Коммутатор"), 100,
+                                               HorizontalAlignment.Left)
+        frmNetMagazin.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMagazin", "lvNetMagazin10", "Порт"), 100,
+                                               HorizontalAlignment.Left)
+        frmNetMagazin.lvNetMagazin.Columns.Add(LNGIniFile.GetString("frmNetMagazin", "lvNetMagazin11", "Примечание"),
+                                               100, HorizontalAlignment.Left)
 
         ResList(frmNetMagazin.lvNetMagazin)
 
@@ -97,8 +111,6 @@ Module modLang
         frmNetMagazin.Label1.Text = LNGIniFile.GetString("frmNetMagazin", "Label1", "Всего портов:")
         frmNetMagazin.Label2.Text = LNGIniFile.GetString("frmNetMagazin", "Label2", "Из них занято:")
         frmNetMagazin.Label3.Text = LNGIniFile.GetString("frmNetMagazin", "Label3", "Длинна КЛС:")
-
-
     End Sub
 
 
@@ -107,18 +119,28 @@ Module modLang
 
 
         frmCRT3.lvCartZAP.Columns.Add(objIniFile.GetString("frmCRT3", "lvCartZAP1", "id"), 20, HorizontalAlignment.Left)
-        frmCRT3.lvCartZAP.Columns.Add(objIniFile.GetString("frmCRT3", "lvCartZAP2", "Номер"), 50, HorizontalAlignment.Left)
-        frmCRT3.lvCartZAP.Columns.Add(objIniFile.GetString("frmCRT3", "lvCartZAP3", "Дата"), 70, HorizontalAlignment.Left)
-        frmCRT3.lvCartZAP.Columns.Add(objIniFile.GetString("frmCRT3", "lvCartZAP4", "Операция"), 100, HorizontalAlignment.Left)
-        frmCRT3.lvCartZAP.Columns.Add(objIniFile.GetString("frmCRT3", "lvCartZAP5", "Цена"), 60, HorizontalAlignment.Left)
-        frmCRT3.lvCartZAP.Columns.Add(objIniFile.GetString("frmCRT3", "lvCartZAP6", "Фирма"), 100, HorizontalAlignment.Left)
+        frmCRT3.lvCartZAP.Columns.Add(objIniFile.GetString("frmCRT3", "lvCartZAP2", "Номер"), 50,
+                                      HorizontalAlignment.Left)
+        frmCRT3.lvCartZAP.Columns.Add(objIniFile.GetString("frmCRT3", "lvCartZAP3", "Дата"), 70,
+                                      HorizontalAlignment.Left)
+        frmCRT3.lvCartZAP.Columns.Add(objIniFile.GetString("frmCRT3", "lvCartZAP4", "Операция"), 100,
+                                      HorizontalAlignment.Left)
+        frmCRT3.lvCartZAP.Columns.Add(objIniFile.GetString("frmCRT3", "lvCartZAP5", "Цена"), 60,
+                                      HorizontalAlignment.Left)
+        frmCRT3.lvCartZAP.Columns.Add(objIniFile.GetString("frmCRT3", "lvCartZAP6", "Фирма"), 100,
+                                      HorizontalAlignment.Left)
 
         frmCRT3.lvCRTMove.Columns.Add(objIniFile.GetString("frmCRT3", "lvCRTMove1", "id"), 20, HorizontalAlignment.Left)
-        frmCRT3.lvCRTMove.Columns.Add(objIniFile.GetString("frmCRT3", "lvCRTMove2", "От куда"), 100, HorizontalAlignment.Left)
-        frmCRT3.lvCRTMove.Columns.Add(objIniFile.GetString("frmCRT3", "lvCRTMove3", "Куда"), 100, HorizontalAlignment.Left)
-        frmCRT3.lvCRTMove.Columns.Add(objIniFile.GetString("frmCRT3", "lvCRTMove4", "Причина"), 300, HorizontalAlignment.Left)
-        frmCRT3.lvCRTMove.Columns.Add(objIniFile.GetString("frmCRT3", "lvCRTMove5", "Дата"), 50, HorizontalAlignment.Left)
-        frmCRT3.lvCRTMove.Columns.Add(objIniFile.GetString("frmCRT3", "lvCRTMove6", "Время"), 50, HorizontalAlignment.Left)
+        frmCRT3.lvCRTMove.Columns.Add(objIniFile.GetString("frmCRT3", "lvCRTMove2", "От куда"), 100,
+                                      HorizontalAlignment.Left)
+        frmCRT3.lvCRTMove.Columns.Add(objIniFile.GetString("frmCRT3", "lvCRTMove3", "Куда"), 100,
+                                      HorizontalAlignment.Left)
+        frmCRT3.lvCRTMove.Columns.Add(objIniFile.GetString("frmCRT3", "lvCRTMove4", "Причина"), 300,
+                                      HorizontalAlignment.Left)
+        frmCRT3.lvCRTMove.Columns.Add(objIniFile.GetString("frmCRT3", "lvCRTMove5", "Дата"), 50,
+                                      HorizontalAlignment.Left)
+        frmCRT3.lvCRTMove.Columns.Add(objIniFile.GetString("frmCRT3", "lvCRTMove6", "Время"), 50,
+                                      HorizontalAlignment.Left)
 
         frmCRT3.Text = objIniFile.GetString("frmCRT3", "frmCRT3", "Учёт картриджей")
         frmCRT3.gbTree.Text = objIniFile.GetString("frmCRT3", "gbTree", "Печатающие устройства")
@@ -134,9 +156,12 @@ Module modLang
         frmCRT3.Label10.Text = objIniFile.GetString("frmCRT3", "Label10", "Цена:")
         frmCRT3.Label11.Text = objIniFile.GetString("frmCRT3", "Label11", "Дата приобретения:")
 
-        frmCRT3.TabControl1.TabPages("TabPage1").Text = objIniFile.GetString("frmCRT3", "TabControl1.TabPage1", "Картридж")
-        frmCRT3.TabControl1.TabPages("TabPage2").Text = objIniFile.GetString("frmCRT3", "TabControl1.TabPage2", "Заправки")
-        frmCRT3.TabControl1.TabPages("TabPage3").Text = objIniFile.GetString("frmCRT3", "TabControl1.TabPage3", "Перемещения")
+        frmCRT3.TabControl1.TabPages("TabPage1").Text = objIniFile.GetString("frmCRT3", "TabControl1.TabPage1",
+                                                                             "Картридж")
+        frmCRT3.TabControl1.TabPages("TabPage2").Text = objIniFile.GetString("frmCRT3", "TabControl1.TabPage2",
+                                                                             "Заправки")
+        frmCRT3.TabControl1.TabPages("TabPage3").Text = objIniFile.GetString("frmCRT3", "TabControl1.TabPage3",
+                                                                             "Перемещения")
 
         frmCRT3.chkIznos.Text = objIniFile.GetString("frmCRT3", "chkIznos", "Изношен")
         frmCRT3.chkSPS.Text = objIniFile.GetString("frmCRT3", "chkSPS", "Списан")
@@ -152,20 +177,18 @@ Module modLang
         frmCRT3.btnZapReport.Text = objIniFile.GetString("frmCRT3", "btnZapReport", "Отчёт по заправкам")
 
 
-
-
         'ResList(frmCRT3.lvCartZAP)
         'ResList(frmCRT3.lvCRTMove)
         ''ResList(frmCartr2.LVCart)
         'lvCartZAP
-
     End Sub
 
     Public Sub LANG_frmCartr_ADD_ZAp()
         Dim objIniFile As New IniFile(sLANGPATH)
 
 
-        frmCartr_Add_Zap.Text = objIniFile.GetString("frmCartr_Add_Zap", "frmCartr_Add_Zap", "Добавление (редактирование) заправки")
+        frmCartr_Add_Zap.Text = objIniFile.GetString("frmCartr_Add_Zap", "frmCartr_Add_Zap",
+                                                     "Добавление (редактирование) заправки")
 
         frmCartr_Add_Zap.Label1.Text = objIniFile.GetString("frmCartr_Add_Zap", "Label1", "Заправка №")
         frmCartr_Add_Zap.Label2.Text = objIniFile.GetString("frmCartr_Add_Zap", "Label2", "Сервис центр")
@@ -178,7 +201,6 @@ Module modLang
         frmCartr_Add_Zap.chkRef.Text = objIniFile.GetString("frmCartr_Add_Zap", "chkRef", "Восстановлен")
         frmCartr_Add_Zap.btnAdd.Text = objIniFile.GetString("frmCartr_Add_Zap", "btnAdd", "Добавить")
         frmCartr_Add_Zap.btnCancel.Text = objIniFile.GetString("frmCartr_Add_Zap", "btnCancel", "Отмена")
-
     End Sub
 
     Public Sub LANG_frmCartr_ADD()
@@ -206,29 +228,41 @@ Module modLang
         frmCartr_ADD.btnAdd.Text = objIniFile.GetString("frmCartr_ADD", "btnAdd", "Добавить")
         'frmCartr_ADD.btnAdd2.Text = objIniFile.GetString("frmCartr_ADD", "btnAdd2", "")
         frmCartr_ADD.btnCancel.Text = objIniFile.GetString("frmCartr_ADD", "btnCancel", "Отмена")
-
     End Sub
 
     Public Sub LANG_frmserviceDesk()
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
         frmserviceDesc.lvRem.Columns.Clear()
-        frmserviceDesc.lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem1", "id"), 20, HorizontalAlignment.Left)
-        frmserviceDesc.lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem3", "№"), 30, HorizontalAlignment.Left)
-        frmserviceDesc.lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem4", "Дата"), 90, HorizontalAlignment.Left)
-        frmserviceDesc.lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem5", "Описание"), 300, HorizontalAlignment.Left)
-        frmserviceDesc.lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem6", "Уровень"), 100, HorizontalAlignment.Left)
-        frmserviceDesc.lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem7", "Мастер"), 100, HorizontalAlignment.Left)
-        frmserviceDesc.lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem8", "Выполнение"), 100, HorizontalAlignment.Left)
-        frmserviceDesc.lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem9", "Срок выполнения"), 90, HorizontalAlignment.Left)
-        frmserviceDesc.lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem10", "Пользователь"), 100, HorizontalAlignment.Left)
+        frmserviceDesc.lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem1", "id"), 20,
+                                         HorizontalAlignment.Left)
+        frmserviceDesc.lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem3", "№"), 30,
+                                         HorizontalAlignment.Left)
+        frmserviceDesc.lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem4", "Дата"), 90,
+                                         HorizontalAlignment.Left)
+        frmserviceDesc.lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem5", "Описание"), 300,
+                                         HorizontalAlignment.Left)
+        frmserviceDesc.lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem6", "Уровень"), 100,
+                                         HorizontalAlignment.Left)
+        frmserviceDesc.lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem7", "Мастер"), 100,
+                                         HorizontalAlignment.Left)
+        frmserviceDesc.lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem8", "Выполнение"), 100,
+                                         HorizontalAlignment.Left)
+        frmserviceDesc.lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem9", "Срок выполнения"), 90,
+                                         HorizontalAlignment.Left)
+        frmserviceDesc.lvRem.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem10", "Пользователь"), 100,
+                                         HorizontalAlignment.Left)
 
 
         frmserviceDesc.lvRem2.Columns.Clear()
-        frmserviceDesc.lvRem2.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem2_1", "id"), 20, HorizontalAlignment.Left)
-        frmserviceDesc.lvRem2.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem2_2", "Дата"), 90, HorizontalAlignment.Left)
-        frmserviceDesc.lvRem2.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem2_3", "Мастер"), 100, HorizontalAlignment.Left)
-        frmserviceDesc.lvRem2.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem2_4", "Описание"), 300, HorizontalAlignment.Left)
+        frmserviceDesc.lvRem2.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem2_1", "id"), 20,
+                                          HorizontalAlignment.Left)
+        frmserviceDesc.lvRem2.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem2_2", "Дата"), 90,
+                                          HorizontalAlignment.Left)
+        frmserviceDesc.lvRem2.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem2_3", "Мастер"), 100,
+                                          HorizontalAlignment.Left)
+        frmserviceDesc.lvRem2.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem2_4", "Описание"), 300,
+                                          HorizontalAlignment.Left)
 
         'ResList(frmserviceDesc.lvRem)
         'ResList(frmserviceDesc.lvRem2)
@@ -246,9 +280,11 @@ Module modLang
         frmserviceDesc.btnSendEmail.Text = LNGIniFile.GetString("frmserviceDesc", "btnSendEmail", "Отправить мастеру")
         frmserviceDesc.Button1.Text = LNGIniFile.GetString("frmserviceDesc", "Button1", "Расписка")
         frmserviceDesc.gbRem2.Text = LNGIniFile.GetString("frmserviceDesc", "gbRem2", "Выполненные работы:")
-        frmserviceDesc.ToolStripDropDownButton1.Text = LNGIniFile.GetString("frmserviceDesc", "ToolStripDropDownButton1", "Печать")
+        frmserviceDesc.ToolStripDropDownButton1.Text = LNGIniFile.GetString("frmserviceDesc", "ToolStripDropDownButton1",
+                                                                            "Печать")
         frmserviceDesc.btn_N_to_Office.Text = LNGIniFile.GetString("frmserviceDesc", "btn_N_to_Office", "Наряд")
-        frmserviceDesc.btn_MAT_to_Office.Text = LNGIniFile.GetString("frmserviceDesc", "btn_MAT_to_Office", "Материальный пропуск")
+        frmserviceDesc.btn_MAT_to_Office.Text = LNGIniFile.GetString("frmserviceDesc", "btn_MAT_to_Office",
+                                                                     "Материальный пропуск")
 
         frmserviceDesc.CheckBox1.Text = LNGIniFile.GetString("frmSoftware", "CheckBox2", "Массовое удаление")
 
@@ -260,15 +296,25 @@ Module modLang
         Dim objIniFile As New IniFile(sLANGPATH)
 
 
-        frmSearch.lstSearch.Columns.Add(objIniFile.GetString("frmSearch", "lstSearch1", "id"), 20, HorizontalAlignment.Left)
-        frmSearch.lstSearch.Columns.Add(objIniFile.GetString("frmSearch", "lstSearch2", "Процессор"), 100, HorizontalAlignment.Left)
-        frmSearch.lstSearch.Columns.Add(objIniFile.GetString("frmSearch", "lstSearch3", "Материнская плата, память и Жесткий диск"), 100, HorizontalAlignment.Left)
-        frmSearch.lstSearch.Columns.Add(objIniFile.GetString("frmSearch", "lstSearch4", "Видео карта"), 100, HorizontalAlignment.Left)
-        frmSearch.lstSearch.Columns.Add(objIniFile.GetString("frmSearch", "lstSearch5", "Звуковая карта"), 100, HorizontalAlignment.Left)
-        frmSearch.lstSearch.Columns.Add(objIniFile.GetString("frmSearch", "lstSearch6", "Оптический диск"), 100, HorizontalAlignment.Left)
-        frmSearch.lstSearch.Columns.Add(objIniFile.GetString("frmSearch", "lstSearch7", "Место установки"), 100, HorizontalAlignment.Left)
-        frmSearch.lstSearch.Columns.Add(objIniFile.GetString("frmSearch", "lstSearch8", "Имя компьютера"), 100, HorizontalAlignment.Left)
-        frmSearch.lstSearch.Columns.Add(objIniFile.GetString("frmSearch", "lstSearch9", "Найденное"), 100, HorizontalAlignment.Left)
+        frmSearch.lstSearch.Columns.Add(objIniFile.GetString("frmSearch", "lstSearch1", "id"), 20,
+                                        HorizontalAlignment.Left)
+        frmSearch.lstSearch.Columns.Add(objIniFile.GetString("frmSearch", "lstSearch2", "Процессор"), 100,
+                                        HorizontalAlignment.Left)
+        frmSearch.lstSearch.Columns.Add(
+            objIniFile.GetString("frmSearch", "lstSearch3", "Материнская плата, память и Жесткий диск"), 100,
+            HorizontalAlignment.Left)
+        frmSearch.lstSearch.Columns.Add(objIniFile.GetString("frmSearch", "lstSearch4", "Видео карта"), 100,
+                                        HorizontalAlignment.Left)
+        frmSearch.lstSearch.Columns.Add(objIniFile.GetString("frmSearch", "lstSearch5", "Звуковая карта"), 100,
+                                        HorizontalAlignment.Left)
+        frmSearch.lstSearch.Columns.Add(objIniFile.GetString("frmSearch", "lstSearch6", "Оптический диск"), 100,
+                                        HorizontalAlignment.Left)
+        frmSearch.lstSearch.Columns.Add(objIniFile.GetString("frmSearch", "lstSearch7", "Место установки"), 100,
+                                        HorizontalAlignment.Left)
+        frmSearch.lstSearch.Columns.Add(objIniFile.GetString("frmSearch", "lstSearch8", "Имя компьютера"), 100,
+                                        HorizontalAlignment.Left)
+        frmSearch.lstSearch.Columns.Add(objIniFile.GetString("frmSearch", "lstSearch9", "Найденное"), 100,
+                                        HorizontalAlignment.Left)
 
         'ResList(frmSearch.lstSearch)
 
@@ -280,13 +326,12 @@ Module modLang
         frmSearch.CheckBox2.Text = objIniFile.GetString("frmSearch", "CheckBox2", "Учитывать регистр")
         frmSearch.Button1.Text = objIniFile.GetString("frmSearch", "Button1", "Искать")
         frmSearch.btnOfSend.Text = objIniFile.GetString("frmSearch", "btnOfSend", "В офис")
-
-
     End Sub
 
     Public Sub frmService_add_Lang()
         Dim objIniFile As New IniFile(sLANGPATH)
-        frmService_add.Text = objIniFile.GetString("frmService_add", "frmService_add", "Добавление (редактирование) заявки")
+        frmService_add.Text = objIniFile.GetString("frmService_add", "frmService_add",
+                                                   "Добавление (редактирование) заявки")
         frmService_add.Label1.Text = objIniFile.GetString("frmService_add", "Label1", "Источник:")
         frmService_add.Label2.Text = objIniFile.GetString("frmService_add", "Label2", "Мастер:")
         frmService_add.Label3.Text = objIniFile.GetString("frmService_add", "Label3", "Дата регистрации:")
@@ -298,21 +343,22 @@ Module modLang
         frmService_add.Label9.Text = objIniFile.GetString("frmService_add", "Label9", "Статус:")
         frmService_add.Label10.Text = objIniFile.GetString("frmService_add", "Label10", "Тип:")
         frmService_add.Label11.Text = objIniFile.GetString("frmService_add", "Label11", "Критичность:")
-        frmService_add.Label12.Text = objIniFile.GetString("frmService_add", "Label12", "Действительный характер неисправности:")
+        frmService_add.Label12.Text = objIniFile.GetString("frmService_add", "Label12",
+                                                           "Действительный характер неисправности:")
         frmService_add.Label13.Text = objIniFile.GetString("frmService_add", "Label13", "Затраты:")
 
         frmService_add.chkClose.Text = objIniFile.GetString("frmService_add", "chkClose", "Заявка закрыта")
         frmService_add.cmbAdd.Text = objIniFile.GetString("frmService_add", "cmbAdd", "Добавить")
         frmService_add.cmbCancel.Text = objIniFile.GetString("frmService_add", "cmbCancel", "Отмена")
-
-
     End Sub
 
     Public Sub frmservice_add_otvets_Lang()
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
-        frmservice_add_otvets.Text = LNGIniFile.GetString("frmservice_add_otvets", "frmservice_add_otvets", "Выполненные работы")
-        frmservice_add_otvets.GroupBox1.Text = LNGIniFile.GetString("frmservice_add_otvets", "GroupBox1", "Выполненные работы")
+        frmservice_add_otvets.Text = LNGIniFile.GetString("frmservice_add_otvets", "frmservice_add_otvets",
+                                                          "Выполненные работы")
+        frmservice_add_otvets.GroupBox1.Text = LNGIniFile.GetString("frmservice_add_otvets", "GroupBox1",
+                                                                    "Выполненные работы")
 
         frmservice_add_otvets.Label1.Text = LNGIniFile.GetString("frmservice_add_otvets", "Label1", "Дата")
         frmservice_add_otvets.Label2.Text = LNGIniFile.GetString("frmservice_add_otvets", "Label2", "Мастер")
@@ -325,18 +371,18 @@ Module modLang
         frmservice_add_otvets.Label7.Text = LNGIniFile.GetString("frmservice_add_otvets", "Label7", "Объект:")
         frmservice_add_otvets.cmdAdd.Text = LNGIniFile.GetString("frmservice_add_otvets", "cmdAdd", "Добавить")
         frmservice_add_otvets.cmdCancel.Text = LNGIniFile.GetString("frmservice_add_otvets", "cmdCancel", "Отменить")
-
-
-
     End Sub
 
     Public Sub frmDirectory_Lang()
         Dim objIniFile As New IniFile(sLANGPATH)
 
 
-        frmDirectory.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", "id"), 20, HorizontalAlignment.Left)
-        frmDirectory.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory2", "Наименование"), 300, HorizontalAlignment.Left)
-        frmDirectory.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory3", "Производитель"), 300, HorizontalAlignment.Left)
+        frmDirectory.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", "id"), 20,
+                                             HorizontalAlignment.Left)
+        frmDirectory.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory2", "Наименование"), 300,
+                                             HorizontalAlignment.Left)
+        frmDirectory.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory3", "Производитель"), 300,
+                                             HorizontalAlignment.Left)
 
         'ResList(frmDirectory.lvDirectory)
 
@@ -357,7 +403,6 @@ Module modLang
         frmDirectory.btnCancell.Text = objIniFile.GetString("frmDirectory", "btnCancell", "Отмена")
         frmDirectory.Button3.Text = objIniFile.GetString("frmDirectory", "Button3", "Выход")
         frmDirectory.CheckBox2.Text = objIniFile.GetString("frmSoftware", "CheckBox2", "Массовое удаление")
-
     End Sub
 
     Public Sub frmSclad_Lang()
@@ -365,19 +410,31 @@ Module modLang
 
 
         frmSclad.lvSclad.Columns.Add(objIniFile.GetString("frmSclad", "lvSclad1", "id"), 20, HorizontalAlignment.Left)
-        frmSclad.lvSclad.Columns.Add(objIniFile.GetString("frmSclad", "lvSclad2", "Наименование"), 150, HorizontalAlignment.Left)
-        frmSclad.lvSclad.Columns.Add(objIniFile.GetString("frmSclad", "lvSclad3", "Поступило"), 50, HorizontalAlignment.Left)
-        frmSclad.lvSclad.Columns.Add(objIniFile.GetString("frmSclad", "lvSclad4", "Осталось"), 50, HorizontalAlignment.Left)
-        frmSclad.lvSclad.Columns.Add(objIniFile.GetString("frmSclad", "lvSclad5", "Поставщик"), 100, HorizontalAlignment.Left)
-        frmSclad.lvSclad.Columns.Add(objIniFile.GetString("frmSclad", "lvSclad6", "Дата получения"), 65, HorizontalAlignment.Left)
-        frmSclad.lvSclad.Columns.Add(objIniFile.GetString("frmSclad", "lvSclad7", "Примечание"), 120, HorizontalAlignment.Left)
-        frmSclad.lvSclad.Columns.Add(objIniFile.GetString("frmSclad", "lvSclad8", "Номер счёта"), 50, HorizontalAlignment.Left)
-        frmSclad.lvSclad.Columns.Add(objIniFile.GetString("frmSclad", "lvSclad9", "Гарантия"), 67, HorizontalAlignment.Left)
-        frmSclad.lvSclad.Columns.Add(objIniFile.GetString("frmSclad", "lvSclad10", "Стоимость с НДС"), 67, HorizontalAlignment.Left)
-        frmSclad.lvSclad.Columns.Add(objIniFile.GetString("frmSclad", "lvSclad11", "Требование"), 67, HorizontalAlignment.Left)
-        frmSclad.lvSclad.Columns.Add(objIniFile.GetString("frmSclad", "lvSclad12", "Номер платежного поручения"), 67, HorizontalAlignment.Left)
+        frmSclad.lvSclad.Columns.Add(objIniFile.GetString("frmSclad", "lvSclad2", "Наименование"), 150,
+                                     HorizontalAlignment.Left)
+        frmSclad.lvSclad.Columns.Add(objIniFile.GetString("frmSclad", "lvSclad3", "Поступило"), 50,
+                                     HorizontalAlignment.Left)
+        frmSclad.lvSclad.Columns.Add(objIniFile.GetString("frmSclad", "lvSclad4", "Осталось"), 50,
+                                     HorizontalAlignment.Left)
+        frmSclad.lvSclad.Columns.Add(objIniFile.GetString("frmSclad", "lvSclad5", "Поставщик"), 100,
+                                     HorizontalAlignment.Left)
+        frmSclad.lvSclad.Columns.Add(objIniFile.GetString("frmSclad", "lvSclad6", "Дата получения"), 65,
+                                     HorizontalAlignment.Left)
+        frmSclad.lvSclad.Columns.Add(objIniFile.GetString("frmSclad", "lvSclad7", "Примечание"), 120,
+                                     HorizontalAlignment.Left)
+        frmSclad.lvSclad.Columns.Add(objIniFile.GetString("frmSclad", "lvSclad8", "Номер счёта"), 50,
+                                     HorizontalAlignment.Left)
+        frmSclad.lvSclad.Columns.Add(objIniFile.GetString("frmSclad", "lvSclad9", "Гарантия"), 67,
+                                     HorizontalAlignment.Left)
+        frmSclad.lvSclad.Columns.Add(objIniFile.GetString("frmSclad", "lvSclad10", "Стоимость с НДС"), 67,
+                                     HorizontalAlignment.Left)
+        frmSclad.lvSclad.Columns.Add(objIniFile.GetString("frmSclad", "lvSclad11", "Требование"), 67,
+                                     HorizontalAlignment.Left)
+        frmSclad.lvSclad.Columns.Add(objIniFile.GetString("frmSclad", "lvSclad12", "Номер платежного поручения"), 67,
+                                     HorizontalAlignment.Left)
         frmSclad.lvSclad.Columns.Add(objIniFile.GetString("frmSclad", "lvSclad13", "Цена"), 67, HorizontalAlignment.Left)
-        frmSclad.lvSclad.Columns.Add(objIniFile.GetString("frmSclad", "lvSclad14", "Приписано к..."), 67, HorizontalAlignment.Left)
+        frmSclad.lvSclad.Columns.Add(objIniFile.GetString("frmSclad", "lvSclad14", "Приписано к..."), 67,
+                                     HorizontalAlignment.Left)
 
         'ResList(frmSclad.lvSclad)
 
@@ -388,8 +445,6 @@ Module modLang
         frmSclad.btnDel.Text = objIniFile.GetString("frmSclad", "btnDel", "Удалить")
         frmSclad.btnTREB.Text = objIniFile.GetString("frmSclad", "btnTREB", "Выписать требование")
         frmSclad.btnOffice.Text = objIniFile.GetString("frmSclad", "btnOffice", "В Офис")
-
-
     End Sub
 
     Public Sub LANG_frmSclad_ADD()
@@ -412,10 +467,6 @@ Module modLang
 
         frmSclad_ADD.add.Text = objIniFile.GetString("frmSclad_ADD", "add", "Добавить")
         frmSclad_ADD.cancel.Text = objIniFile.GetString("frmSclad_ADD", "cancel", "Отмена")
-
-
-
-
     End Sub
 
     Public Sub LANG_frmSclad_treb()
@@ -435,8 +486,6 @@ Module modLang
         frmSclad_treb.Text = objIniFile.GetString("frmSclad_treb", "frmSclad_treb", "")
         frmSclad_treb.btnVipiska.Text = objIniFile.GetString("frmSclad_treb", "btnVipiska", "Выписать")
         frmSclad_treb.btnCancel.Text = objIniFile.GetString("frmSclad_treb", "btnCancel", "Отмена")
-
-
     End Sub
 
     Public Sub frmSetup_Lang()
@@ -447,24 +496,30 @@ Module modLang
         'frmSetup.lvFindDB.Columns.Add(LNGIniFile.GetString("frmSetup", "lvFindDB3", "Подключен"), 70, HorizontalAlignment.Left)
 
         'lvPrUsers
-        frmSetup.lvPrUsers.Columns.Add(LNGIniFile.GetString("frmSetup", "lvPrUsers1", "id"), 20, HorizontalAlignment.Left)
-        frmSetup.lvPrUsers.Columns.Add(LNGIniFile.GetString("frmSetup", "lvPrUsers2", "Идентификатор"), 100, HorizontalAlignment.Left)
-        frmSetup.lvPrUsers.Columns.Add(LNGIniFile.GetString("frmSetup", "lvPrUsers3", "Имя пользователя"), 200, HorizontalAlignment.Left)
-        frmSetup.lvPrUsers.Columns.Add(LNGIniFile.GetString("frmSetup", "lvPrUsers4", "Уровень"), 70, HorizontalAlignment.Left)
+        frmSetup.lvPrUsers.Columns.Add(LNGIniFile.GetString("frmSetup", "lvPrUsers1", "id"), 20,
+                                       HorizontalAlignment.Left)
+        frmSetup.lvPrUsers.Columns.Add(LNGIniFile.GetString("frmSetup", "lvPrUsers2", "Идентификатор"), 100,
+                                       HorizontalAlignment.Left)
+        frmSetup.lvPrUsers.Columns.Add(LNGIniFile.GetString("frmSetup", "lvPrUsers3", "Имя пользователя"), 200,
+                                       HorizontalAlignment.Left)
+        frmSetup.lvPrUsers.Columns.Add(LNGIniFile.GetString("frmSetup", "lvPrUsers4", "Уровень"), 70,
+                                       HorizontalAlignment.Left)
 
         ''ResList(frmSetup.lvPrUsers)
 
         frmSetup.Text = LNGIniFile.GetString("frmSetup", "frmSetup", "Настройки программы БКО")
 
         frmSetup.SStab1.TabPages("TabPage1").Text = LNGIniFile.GetString("frmSetup", "SStab1_1", "Настройки программы")
-        frmSetup.SStab1.TabPages("TabPage3").Text = LNGIniFile.GetString("frmSetup", "SStab1_2", "Организация и системный администратор")
+        frmSetup.SStab1.TabPages("TabPage3").Text = LNGIniFile.GetString("frmSetup", "SStab1_2",
+                                                                         "Организация и системный администратор")
         ' frmSetup.SStab1.TabPages("TabPage4").Text = LNGIniFile.GetString("frmSetup", "SStab1_3", "Найденные базы")
         frmSetup.SStab1.TabPages("TabPage5").Text = LNGIniFile.GetString("frmSetup", "SStab1_4", "Пользователи")
 
         frmSetup.gbSetup.Text = LNGIniFile.GetString("frmSetup", "gbSetup", "Пользователи")
 
         frmSetup.chkUpdate.Text = LNGIniFile.GetString("frmSetup", "chkUpdate", "Проверять обновление при старте")
-        frmSetup.chkSNPro.Text = LNGIniFile.GetString("frmSetup", "chkSNPro", "Проверять серийные номера при внесении нового оборудования")
+        frmSetup.chkSNPro.Text = LNGIniFile.GetString("frmSetup", "chkSNPro",
+                                                      "Проверять серийные номера при внесении нового оборудования")
         frmSetup.chkSheduler.Text = LNGIniFile.GetString("frmSetup", "chkSheduler", "Использовать напоминания")
         frmSetup.chkMenuServices.Text = LNGIniFile.GetString("frmSetup", "chkMenuServices", "Показывать меню служебные")
 
@@ -534,8 +589,6 @@ Module modLang
         frmSetup.chkFullScreen.Text = LNGIniFile.GetString("frmSetup", "chkFullScreen", "На весь экран")
         frmSetup.GroupBox3.Text = LNGIniFile.GetString("frmSetup", "GroupBox3", "Размер иконок в дереве")
         frmSetup.chkFonts.Text = LNGIniFile.GetString("frmSetup", "chkFonts", "Использовать изменение шрифта")
-
-
     End Sub
 
     Public Sub frmARHIV_Lang()
@@ -548,7 +601,6 @@ Module modLang
         frmARHIV.btnZipUp.Text = objIniFile.GetString("frmARHIV", "btnZipUp", "Упаковать")
         frmARHIV.btnUnZip.Text = objIniFile.GetString("frmARHIV", "btnUnZip", "Распаковать")
         frmARHIV.btnUnZip.Visible = False
-
     End Sub
 
     Public Sub frmComputers_Lang()
@@ -557,34 +609,57 @@ Module modLang
         Dim objIniFile As New IniFile(sLANGPATH)
 
 
+        frmComputers.addRemToolStripMenuItem.Text = objIniFile.GetString("frmComputers", "addRemToolStripMenuItem",
+                                                                         "Добавить Заявку")
+        frmComputers.CartrAddToolStripMenuItem.Text = objIniFile.GetString("frmComputers", "CartrAddToolStripMenuItem",
+                                                                           "Добавить картридж")
+        frmComputers.CopyToolStripMenuItem.Text = objIniFile.GetString("frmComputers", "CopyToolStripMenuItem",
+                                                                       "Скопировать")
+        frmComputers.UpdateToolStripMenuItem.Text = objIniFile.GetString("frmComputers", "UpdateToolStripMenuItem",
+                                                                         "Обновить")
+        frmComputers.DeleteToolStripMenuItem.Text = objIniFile.GetString("frmComputers", "DeleteToolStripMenuItem",
+                                                                         "Удалить")
+        frmComputers.ОтделитьПринтерыИМониторыToolStripMenuItem.Text = objIniFile.GetString("frmComputers",
+                                                                                            "ОтделитьПринтерыИМониторыToolStripMenuItem",
+                                                                                            "Отделить принтеры и мониторы")
+        frmComputers.ВернутьПерефериюToolStripMenuItem.Text = objIniFile.GetString("frmComputers",
+                                                                                   "ВернутьПерефериюToolStripMenuItem",
+                                                                                   "Присоеденить принтеры и мониторы")
 
-        frmComputers.addRemToolStripMenuItem.Text = objIniFile.GetString("frmComputers", "addRemToolStripMenuItem", "Добавить Заявку")
-        frmComputers.CartrAddToolStripMenuItem.Text = objIniFile.GetString("frmComputers", "CartrAddToolStripMenuItem", "Добавить картридж")
-        frmComputers.CopyToolStripMenuItem.Text = objIniFile.GetString("frmComputers", "CopyToolStripMenuItem", "Скопировать")
-        frmComputers.UpdateToolStripMenuItem.Text = objIniFile.GetString("frmComputers", "UpdateToolStripMenuItem", "Обновить")
-        frmComputers.DeleteToolStripMenuItem.Text = objIniFile.GetString("frmComputers", "DeleteToolStripMenuItem", "Удалить")
-        frmComputers.ОтделитьПринтерыИМониторыToolStripMenuItem.Text = objIniFile.GetString("frmComputers", "ОтделитьПринтерыИМониторыToolStripMenuItem", "Отделить принтеры и мониторы")
-        frmComputers.ВернутьПерефериюToolStripMenuItem.Text = objIniFile.GetString("frmComputers", "ВернутьПерефериюToolStripMenuItem", "Присоеденить принтеры и мониторы")
-
-        frmComputers.MassRazdelPerf.Text = objIniFile.GetString("frmComputers", "ОтделитьПринтерыИМониторыToolStripMenuItem", "Отделить принтеры и мониторы")
-        frmComputers.MassObedPerf.Text = objIniFile.GetString("frmComputers", "ВернутьПерефериюToolStripMenuItem", "Присоеденить принтеры и мониторы")
+        frmComputers.MassRazdelPerf.Text = objIniFile.GetString("frmComputers",
+                                                                "ОтделитьПринтерыИМониторыToolStripMenuItem",
+                                                                "Отделить принтеры и мониторы")
+        frmComputers.MassObedPerf.Text = objIniFile.GetString("frmComputers", "ВернутьПерефериюToolStripMenuItem",
+                                                              "Присоеденить принтеры и мониторы")
         'MassObedPerf
         'MassRazdelPerf
 
 
         frmComputers.mnuDeltoBranch.Text = objIniFile.GetString("frmComputers", "mnuDeltoBranch", "Удалить из...")
-        frmComputers.addFoldertoBranch.Text = objIniFile.GetString("frmComputers", "addFoldertoBranch", " Добавить папку в... (ini)")
+        frmComputers.addFoldertoBranch.Text = objIniFile.GetString("frmComputers", "addFoldertoBranch",
+                                                                   " Добавить папку в... (ini)")
         frmComputers.DeleteBranche.Text = objIniFile.GetString("frmComputers", "DeleteBranche", "Удалить")
-        frmComputers.RepAddBrToolStripMenuItem.Text = objIniFile.GetString("frmComputers", "RepAddBrToolStripMenuItem", "Добавить заявку")
-        frmComputers.SoftInstallToolStripMenuItem.Text = objIniFile.GetString("frmComputers", "SoftInstallToolStripMenuItem", "Установленное П.О.")
-        frmComputers.ПаспортКомпьютераToolStripMenuItem.Text = objIniFile.GetString("frmComputers", "ПаспортКомпьютераToolStripMenuItem", "Паспорт компьютера")
+        frmComputers.RepAddBrToolStripMenuItem.Text = objIniFile.GetString("frmComputers", "RepAddBrToolStripMenuItem",
+                                                                           "Добавить заявку")
+        frmComputers.SoftInstallToolStripMenuItem.Text = objIniFile.GetString("frmComputers",
+                                                                              "SoftInstallToolStripMenuItem",
+                                                                              "Установленное П.О.")
+        frmComputers.ПаспортКомпьютераToolStripMenuItem.Text = objIniFile.GetString("frmComputers",
+                                                                                    "ПаспортКомпьютераToolStripMenuItem",
+                                                                                    "Паспорт компьютера")
 
-        frmComputers.lstUsers.Columns.Add(objIniFile.GetString("frmComputers", "lstUsers1", "id"), 20, HorizontalAlignment.Left)
-        frmComputers.lstUsers.Columns.Add(objIniFile.GetString("frmComputers", "lstUsers2", "ФИО"), 300, HorizontalAlignment.Left)
-        frmComputers.lstUsers.Columns.Add(objIniFile.GetString("frmComputers", "lstUsers3", "Имя пользователя"), 100, HorizontalAlignment.Left)
-        frmComputers.lstUsers.Columns.Add(objIniFile.GetString("frmComputers", "lstUsers4", "E-mail"), 100, HorizontalAlignment.Left)
-        frmComputers.lstUsers.Columns.Add(objIniFile.GetString("frmComputers", "lstUsers5", "#ICQ"), 75, HorizontalAlignment.Left)
-        frmComputers.lstUsers.Columns.Add(objIniFile.GetString("frmComputers", "lstUsers6", "Jabber"), 75, HorizontalAlignment.Left)
+        frmComputers.lstUsers.Columns.Add(objIniFile.GetString("frmComputers", "lstUsers1", "id"), 20,
+                                          HorizontalAlignment.Left)
+        frmComputers.lstUsers.Columns.Add(objIniFile.GetString("frmComputers", "lstUsers2", "ФИО"), 300,
+                                          HorizontalAlignment.Left)
+        frmComputers.lstUsers.Columns.Add(objIniFile.GetString("frmComputers", "lstUsers3", "Имя пользователя"), 100,
+                                          HorizontalAlignment.Left)
+        frmComputers.lstUsers.Columns.Add(objIniFile.GetString("frmComputers", "lstUsers4", "E-mail"), 100,
+                                          HorizontalAlignment.Left)
+        frmComputers.lstUsers.Columns.Add(objIniFile.GetString("frmComputers", "lstUsers5", "#ICQ"), 75,
+                                          HorizontalAlignment.Left)
+        frmComputers.lstUsers.Columns.Add(objIniFile.GetString("frmComputers", "lstUsers6", "Jabber"), 75,
+                                          HorizontalAlignment.Left)
 
 
         LANG_REPAIR(frmComputers.lvRepairPRN)
@@ -608,16 +683,25 @@ Module modLang
         LANG_MOVEMENT(frmComputers.lvMovementNET)
 
 
-        frmComputers.lvNetPort.Columns.Add(objIniFile.GetString("frmComputers", "lvNetPort1", "id"), 20, HorizontalAlignment.Left)
-        frmComputers.lvNetPort.Columns.Add(objIniFile.GetString("frmComputers", "lvNetPort2", "Номер порта"), 50, HorizontalAlignment.Left)
-        frmComputers.lvNetPort.Columns.Add(objIniFile.GetString("frmComputers", "lvNetPort3", "Направление"), 300, HorizontalAlignment.Left)
-        frmComputers.lvNetPort.Columns.Add(objIniFile.GetString("frmComputers", "lvNetPort4", "MAC"), 100, HorizontalAlignment.Left)
+        frmComputers.lvNetPort.Columns.Add(objIniFile.GetString("frmComputers", "lvNetPort1", "id"), 20,
+                                           HorizontalAlignment.Left)
+        frmComputers.lvNetPort.Columns.Add(objIniFile.GetString("frmComputers", "lvNetPort2", "Номер порта"), 50,
+                                           HorizontalAlignment.Left)
+        frmComputers.lvNetPort.Columns.Add(objIniFile.GetString("frmComputers", "lvNetPort3", "Направление"), 300,
+                                           HorizontalAlignment.Left)
+        frmComputers.lvNetPort.Columns.Add(objIniFile.GetString("frmComputers", "lvNetPort4", "MAC"), 100,
+                                           HorizontalAlignment.Left)
 
-        frmComputers.lvPRNCartr.Columns.Add(objIniFile.GetString("frmComputers", "lvPRNCartr1", "id"), 20, HorizontalAlignment.Left)
-        frmComputers.lvPRNCartr.Columns.Add(objIniFile.GetString("frmComputers", "lvPRNCartr2", "Модель"), 300, HorizontalAlignment.Left)
-        frmComputers.lvPRNCartr.Columns.Add(objIniFile.GetString("frmComputers", "lvPRNCartr3", "Серийный номер"), 100, HorizontalAlignment.Left)
-        frmComputers.lvPRNCartr.Columns.Add(objIniFile.GetString("frmComputers", "lvPRNCartr4", "Заправок"), 100, HorizontalAlignment.Left)
-        frmComputers.lvPRNCartr.Columns.Add(objIniFile.GetString("frmComputers", "lvPRNCartr5", "Затраты"), 75, HorizontalAlignment.Left)
+        frmComputers.lvPRNCartr.Columns.Add(objIniFile.GetString("frmComputers", "lvPRNCartr1", "id"), 20,
+                                            HorizontalAlignment.Left)
+        frmComputers.lvPRNCartr.Columns.Add(objIniFile.GetString("frmComputers", "lvPRNCartr2", "Модель"), 300,
+                                            HorizontalAlignment.Left)
+        frmComputers.lvPRNCartr.Columns.Add(objIniFile.GetString("frmComputers", "lvPRNCartr3", "Серийный номер"), 100,
+                                            HorizontalAlignment.Left)
+        frmComputers.lvPRNCartr.Columns.Add(objIniFile.GetString("frmComputers", "lvPRNCartr4", "Заправок"), 100,
+                                            HorizontalAlignment.Left)
+        frmComputers.lvPRNCartr.Columns.Add(objIniFile.GetString("frmComputers", "lvPRNCartr5", "Затраты"), 75,
+                                            HorizontalAlignment.Left)
 
         frmComputers.Text = objIniFile.GetString("frmComputers", "frmComputers", "Учёт оргтехники")
         frmComputers.gbTree.Text = objIniFile.GetString("frmComputers", "gbTree", "Дерево")
@@ -625,16 +709,25 @@ Module modLang
         ' frmComputers.gbStat.Text = objIniFile.GetString("frmComputers", "gbStat", "")
         ' frmComputers.lblT_All_T.Text = objIniFile.GetString("frmComputers", "lblT_All_T", "")
         ' frmComputers.lblT_O_T.Text = objIniFile.GetString("frmComputers", "lblT_O_T", "")
-        frmComputers.sSTAB1.TabPages("TabPage6").Text = objIniFile.GetString("frmComputers", "sSTAB1.TabPages(6)", "Информация")
-        frmComputers.sSTAB1.TabPages("TabPage1").Text = objIniFile.GetString("frmComputers", "sSTAB1.TabPages(1)", "Системный блок")
+        frmComputers.sSTAB1.TabPages("TabPage6").Text = objIniFile.GetString("frmComputers", "sSTAB1.TabPages(6)",
+                                                                             "Информация")
+        frmComputers.sSTAB1.TabPages("TabPage1").Text = objIniFile.GetString("frmComputers", "sSTAB1.TabPages(1)",
+                                                                             "Системный блок")
         'frmComputers.sSTAB1.TabPages("TabPage2").Text = objIniFile.GetString("frmComputers", "sSTAB1.TabPages(2)", "")
-        frmComputers.sSTAB1.TabPages("TabPage3").Text = objIniFile.GetString("frmComputers", "sSTAB1.TabPages(3)", "Периферия")
-        frmComputers.sSTAB1.TabPages("TabPage4").Text = objIniFile.GetString("frmComputers", "sSTAB1.TabPages(4)", "Программное обеспечение")
-        frmComputers.sSTAB1.TabPages("TabPage5").Text = objIniFile.GetString("frmComputers", "sSTAB1.TabPages(5)", "Пользователи")
-        frmComputers.sSTAB1.TabPages("TabPage7").Text = objIniFile.GetString("frmComputers", "sSTAB1.TabPages(7)", "Сервис")
-        frmComputers.sSTAB1.TabPages("TabPage8").Text = objIniFile.GetString("frmComputers", "sSTAB1.TabPages(8)", "Гарантия")
+        frmComputers.sSTAB1.TabPages("TabPage3").Text = objIniFile.GetString("frmComputers", "sSTAB1.TabPages(3)",
+                                                                             "Периферия")
+        frmComputers.sSTAB1.TabPages("TabPage4").Text = objIniFile.GetString("frmComputers", "sSTAB1.TabPages(4)",
+                                                                             "Программное обеспечение")
+        frmComputers.sSTAB1.TabPages("TabPage5").Text = objIniFile.GetString("frmComputers", "sSTAB1.TabPages(5)",
+                                                                             "Пользователи")
+        frmComputers.sSTAB1.TabPages("TabPage7").Text = objIniFile.GetString("frmComputers", "sSTAB1.TabPages(7)",
+                                                                             "Сервис")
+        frmComputers.sSTAB1.TabPages("TabPage8").Text = objIniFile.GetString("frmComputers", "sSTAB1.TabPages(8)",
+                                                                             "Гарантия")
 
-        Call INFO_P_LANG(frmComputers.lblBranch, frmComputers.lblDepartment, frmComputers.lblOffice, frmComputers.lblResponsible, frmComputers.lblPhone, frmComputers.Label84)
+        Call _
+            INFO_P_LANG(frmComputers.lblBranch, frmComputers.lblDepartment, frmComputers.lblOffice,
+                        frmComputers.lblResponsible, frmComputers.lblPhone, frmComputers.Label84)
 
         frmComputers.lblNetName.Text = objIniFile.GetString("frmComputers", "lblNetName", "Имя в сети")
         frmComputers.lblPseudonym.Text = objIniFile.GetString("frmComputers", "lblPseudonym", "Псевдоним")
@@ -664,7 +757,8 @@ Module modLang
         frmComputers.gbBP.Text = objIniFile.GetString("frmComputers", "gbBP", "Блок питания")
         frmComputers.gbUSB.Text = objIniFile.GetString("frmComputers", "gbUSB", "USB Устройства")
         frmComputers.gbPCI.Text = objIniFile.GetString("frmComputers", "gbPCI", "PCI Устройства")
-        frmComputers.gbSBP.Text = objIniFile.GetString("frmComputers", "gbSBP", "Модель, серийный номер, производитель системного блока")
+        frmComputers.gbSBP.Text = objIniFile.GetString("frmComputers", "gbSBP",
+                                                       "Модель, серийный номер, производитель системного блока")
         frmComputers.gbMonitor.Text = objIniFile.GetString("frmComputers", "gbMonitor", "Монитор")
         frmComputers.gbKeyboard.Text = objIniFile.GetString("frmComputers", "gbKeyboard", "Клавиатура")
         frmComputers.gbMouse.Text = objIniFile.GetString("frmComputers", "gbMouse", "Мышь")
@@ -687,7 +781,9 @@ Module modLang
         frmComputers.cmdUserPassEncript.Text = objIniFile.GetString("frmComputers", "cmdUserPassEncript", "Расшифровать")
         frmComputers.btnUserCancel.Text = objIniFile.GetString("frmComputers", "btnUserCancel", "Отмена")
 
-        Call NOTES_P_LANG(frmComputers.gbNotes, frmComputers.btnNotesAdd, frmComputers.btnNotesDel, frmComputers.btnNotesCancel)
+        Call _
+            NOTES_P_LANG(frmComputers.gbNotes, frmComputers.btnNotesAdd, frmComputers.btnNotesDel,
+                         frmComputers.btnNotesCancel)
 
         frmComputers.gbRepair.Text = objIniFile.GetString("frmComputers", "gbRepair", "Ремонты")
 
@@ -697,12 +793,18 @@ Module modLang
 
         Call GARANT_P_LANG(frmComputers.gbSeller, frmComputers.Label20, frmComputers.Label22, frmComputers.Label21)
 
-        Call SALE_P_LANG(frmComputers.gbSale, frmComputers.Label43, frmComputers.Label44, frmComputers.Label45, frmComputers.chkPCspis, frmComputers.Label46, frmComputers.Label47, frmComputers.Label48, frmComputers.chkPCNNb)
+        Call _
+            SALE_P_LANG(frmComputers.gbSale, frmComputers.Label43, frmComputers.Label44, frmComputers.Label45,
+                        frmComputers.chkPCspis, frmComputers.Label46, frmComputers.Label47, frmComputers.Label48,
+                        frmComputers.chkPCNNb)
 
         'Отделы
-        frmComputers.sSTAB5.TabPages("TabPage19").Text = objIniFile.GetString("frmComputers", "sSTAB5.TabPages(19)", "Информация")
-        frmComputers.sSTAB5.TabPages("TabPage20").Text = objIniFile.GetString("frmComputers", "sSTAB5.TabPages(20)", "Сервис")
-        frmComputers.sSTAB5.TabPages("TabPage21").Text = objIniFile.GetString("frmComputers", "sSTAB5.TabPages(21)", "Санитарный паспорт")
+        frmComputers.sSTAB5.TabPages("TabPage19").Text = objIniFile.GetString("frmComputers", "sSTAB5.TabPages(19)",
+                                                                              "Информация")
+        frmComputers.sSTAB5.TabPages("TabPage20").Text = objIniFile.GetString("frmComputers", "sSTAB5.TabPages(20)",
+                                                                              "Сервис")
+        frmComputers.sSTAB5.TabPages("TabPage21").Text = objIniFile.GetString("frmComputers", "sSTAB5.TabPages(21)",
+                                                                              "Санитарный паспорт")
 
         frmComputers.Label70.Text = objIniFile.GetString("frmComputers", "Label70", "Адрес:")
         frmComputers.Label69.Text = objIniFile.GetString("frmComputers", "Label69", "Ответственный (Начальник):")
@@ -712,57 +814,82 @@ Module modLang
         frmComputers.gbBRRemont.Text = objIniFile.GetString("frmComputers", "gbBRRemont", "Ремонты")
         frmComputers.Label82.Text = objIniFile.GetString("frmComputers", "Label82", "Площадь помещения:")
         frmComputers.Label81.Text = objIniFile.GetString("frmComputers", "Label81", "Высота:")
-        frmComputers.Label80.Text = objIniFile.GetString("frmComputers", "Label80", "Площадь на одно рабочее место ПЭВМ:")
+        frmComputers.Label80.Text = objIniFile.GetString("frmComputers", "Label80",
+                                                         "Площадь на одно рабочее место ПЭВМ:")
         frmComputers.Label79.Text = objIniFile.GetString("frmComputers", "Label79", "Объем на одно рабочее место ПЭВМ:")
-        frmComputers.Label78.Text = objIniFile.GetString("frmComputers", "Label78", "Наличие помещений для ремонта ПЭВМ:")
-        frmComputers.Label77.Text = objIniFile.GetString("frmComputers", "Label77", "Санитарно-техническое оборудование помещения:")
+        frmComputers.Label78.Text = objIniFile.GetString("frmComputers", "Label78",
+                                                         "Наличие помещений для ремонта ПЭВМ:")
+        frmComputers.Label77.Text = objIniFile.GetString("frmComputers", "Label77",
+                                                         "Санитарно-техническое оборудование помещения:")
         frmComputers.Label76.Text = objIniFile.GetString("frmComputers", "Label76", "Вентиляция:")
         frmComputers.Label75.Text = objIniFile.GetString("frmComputers", "Label75", "Водоснабжение:")
         frmComputers.Label74.Text = objIniFile.GetString("frmComputers", "Label74", "Теплоснабжение:")
         frmComputers.Label73.Text = objIniFile.GetString("frmComputers", "Label73", "Канализация:")
-        frmComputers.Label72.Text = objIniFile.GetString("frmComputers", "Label72", "Внутренняя отделка помещений (стен, потолков, пола):")
-        frmComputers.Label71.Text = objIniFile.GetString("frmComputers", "Label71", "Оборудование рабочих мест мебелью соответствующей (не соответствующей) требованиям САНПиН:")
+        frmComputers.Label72.Text = objIniFile.GetString("frmComputers", "Label72",
+                                                         "Внутренняя отделка помещений (стен, потолков, пола):")
+        frmComputers.Label71.Text = objIniFile.GetString("frmComputers", "Label71",
+                                                         "Оборудование рабочих мест мебелью соответствующей (не соответствующей) требованиям САНПиН:")
         frmComputers.btnOfficeSend.Text = objIniFile.GetString("frmComputers", "btnOfficeSend", "В Офис")
 
-        Call NOTES_P_LANG(frmComputers.gbBRNotes, frmComputers.btnBRNotesAdd, frmComputers.btnBRNotesDel, frmComputers.btnBRNotesCancel)
+        Call _
+            NOTES_P_LANG(frmComputers.gbBRNotes, frmComputers.btnBRNotesAdd, frmComputers.btnBRNotesDel,
+                         frmComputers.btnBRNotesCancel)
 
         'Вкладка принтеры
 
-        frmComputers.sSTAB2.TabPages("TabPage9").Text = objIniFile.GetString("frmComputers", "sSTAB2.TabPages(9)", "Информация")
-        frmComputers.sSTAB2.TabPages("TabPage23").Text = objIniFile.GetString("frmComputers", "sSTAB2.TabPages(23)", "Движение")
-        frmComputers.sSTAB2.TabPages("TabPage10").Text = objIniFile.GetString("frmComputers", "sSTAB2.TabPages(10)", "Сервис")
-        frmComputers.sSTAB2.TabPages("TabPage16").Text = objIniFile.GetString("frmComputers", "sSTAB2.TabPages(16)", "Гарантия")
+        frmComputers.sSTAB2.TabPages("TabPage9").Text = objIniFile.GetString("frmComputers", "sSTAB2.TabPages(9)",
+                                                                             "Информация")
+        frmComputers.sSTAB2.TabPages("TabPage23").Text = objIniFile.GetString("frmComputers", "sSTAB2.TabPages(23)",
+                                                                              "Движение")
+        frmComputers.sSTAB2.TabPages("TabPage10").Text = objIniFile.GetString("frmComputers", "sSTAB2.TabPages(10)",
+                                                                              "Сервис")
+        frmComputers.sSTAB2.TabPages("TabPage16").Text = objIniFile.GetString("frmComputers", "sSTAB2.TabPages(16)",
+                                                                              "Гарантия")
         frmComputers.gbPRN.Text = objIniFile.GetString("frmComputers", "gbPRN", "Информация")
         frmComputers.lblFormat.Text = objIniFile.GetString("frmComputers", "lblFormat", "Формат:")
 
-        Call INFO_P_LANG(frmComputers.lblPRNFil, frmComputers.lblPRNDepart, frmComputers.lblPRNOffice, frmComputers.lblPRNotv, frmComputers.lblPRNphone, frmComputers.Label85)
+        Call _
+            INFO_P_LANG(frmComputers.lblPRNFil, frmComputers.lblPRNDepart, frmComputers.lblPRNOffice,
+                        frmComputers.lblPRNotv, frmComputers.lblPRNphone, frmComputers.Label85)
 
         frmComputers.lblPRNConnect.Text = objIniFile.GetString("frmComputers", "lblPRNConnect", "Подключение:")
         frmComputers.lblInNumber.Text = objIniFile.GetString("frmComputers", "lblInNumber", "Инвентарный номер")
         frmComputers.lblTIPCartridg.Text = objIniFile.GetString("frmComputers", "lblTIPCartridg", "Тип картриджа:")
         frmComputers.lblModCartr.Text = objIniFile.GetString("frmComputers", "lblModCartr", "Модель картриджа")
-        frmComputers.lblPRNprintPage.Text = objIniFile.GetString("frmComputers", "lblPRNprintPage", "Отпечатано страниц:")
+        frmComputers.lblPRNprintPage.Text = objIniFile.GetString("frmComputers", "lblPRNprintPage",
+                                                                 "Отпечатано страниц:")
         frmComputers.lblPrnIP.Text = objIniFile.GetString("frmComputers", "lblPrnIP", "IP:")
         frmComputers.lblPrnMAC.Text = objIniFile.GetString("frmComputers", "lblPrnMAC", "MAC:")
         frmComputers.Label83.Text = objIniFile.GetString("frmComputers", "Label83", "В составе устройства:")
         frmComputers.gbPRNCartr.Text = objIniFile.GetString("frmComputers", "gbPRNCartr", "Обнаруженные картриджи")
 
-        Call NOTES_P_LANG(frmComputers.gbPRNNotes, frmComputers.btnPRNNotesAdd, frmComputers.btnPRNNotesDel, frmComputers.btnPRNNotesCancel)
+        Call _
+            NOTES_P_LANG(frmComputers.gbPRNNotes, frmComputers.btnPRNNotesAdd, frmComputers.btnPRNNotesDel,
+                         frmComputers.btnPRNNotesCancel)
 
         frmComputers.gbPRNRemont.Text = objIniFile.GetString("frmComputers", "gbRepair", "Ремонты")
 
         Call GARANT_P_LANG(frmComputers.gbPostPRN, frmComputers.Label4, frmComputers.Label2, frmComputers.Label1)
-        Call SALE_P_LANG(frmComputers.gbSalePRN, frmComputers.Label54, frmComputers.Label53, frmComputers.Label52, frmComputers.chkPRNspis, frmComputers.Label51, frmComputers.Label50, frmComputers.Label49, frmComputers.chkPRNNNb)
+        Call _
+            SALE_P_LANG(frmComputers.gbSalePRN, frmComputers.Label54, frmComputers.Label53, frmComputers.Label52,
+                        frmComputers.chkPRNspis, frmComputers.Label51, frmComputers.Label50, frmComputers.Label49,
+                        frmComputers.chkPRNNNb)
 
         'Вкладка сетевое оборудование
 
-        frmComputers.sSTAB4.TabPages("TabPage13").Text = objIniFile.GetString("frmComputers", "sSTAB4.TabPages(13)", "Информация")
-        frmComputers.sSTAB4.TabPages("TabPage14").Text = objIniFile.GetString("frmComputers", "sSTAB4.TabPages(14)", "Порты")
-        frmComputers.sSTAB4.TabPages("TabPage24").Text = objIniFile.GetString("frmComputers", "sSTAB4.TabPages(24)", "Движение")
-        frmComputers.sSTAB4.TabPages("TabPage15").Text = objIniFile.GetString("frmComputers", "sSTAB4.TabPages(15)", "Сервис")
-        frmComputers.sSTAB4.TabPages("TabPage17").Text = objIniFile.GetString("frmComputers", "sSTAB4.TabPages(17)", "Гарантия")
+        frmComputers.sSTAB4.TabPages("TabPage13").Text = objIniFile.GetString("frmComputers", "sSTAB4.TabPages(13)",
+                                                                              "Информация")
+        frmComputers.sSTAB4.TabPages("TabPage14").Text = objIniFile.GetString("frmComputers", "sSTAB4.TabPages(14)",
+                                                                              "Порты")
+        frmComputers.sSTAB4.TabPages("TabPage24").Text = objIniFile.GetString("frmComputers", "sSTAB4.TabPages(24)",
+                                                                              "Движение")
+        frmComputers.sSTAB4.TabPages("TabPage15").Text = objIniFile.GetString("frmComputers", "sSTAB4.TabPages(15)",
+                                                                              "Сервис")
+        frmComputers.sSTAB4.TabPages("TabPage17").Text = objIniFile.GetString("frmComputers", "sSTAB4.TabPages(17)",
+                                                                              "Гарантия")
 
-        frmComputers.gbNet.Text = objIniFile.GetString("frmComputers", "gbNet", "Тип сетевого оборудования, наименование, производитель")
+        frmComputers.gbNet.Text = objIniFile.GetString("frmComputers", "gbNet",
+                                                       "Тип сетевого оборудования, наименование, производитель")
         frmComputers.gbExNet.Text = objIniFile.GetString("frmComputers", "gbExNet", "Расширенная информация")
         frmComputers.Label27.Text = objIniFile.GetString("frmComputers", "Label27", "IP:")
         frmComputers.Label23.Text = objIniFile.GetString("frmComputers", "Label23", "Инвентарный номер:")
@@ -775,7 +902,9 @@ Module modLang
         frmComputers.Label24.Text = objIniFile.GetString("frmComputers", "Label24", "Исполнение:")
         frmComputers.Label14.Text = objIniFile.GetString("frmComputers", "Label14", "Тип кабеля:")
 
-        Call INFO_P_LANG(frmComputers.Label32, frmComputers.Label31, frmComputers.Label30, frmComputers.Label29, frmComputers.Label28, frmComputers.Label86)
+        Call _
+            INFO_P_LANG(frmComputers.Label32, frmComputers.Label31, frmComputers.Label30, frmComputers.Label29,
+                        frmComputers.Label28, frmComputers.Label86)
 
         frmComputers.gbNetPortMapping.Text = objIniFile.GetString("frmComputers", "gbNetPortMapping", "")
         frmComputers.Label35.Text = objIniFile.GetString("frmComputers", "Label35", "Номер порта:")
@@ -783,24 +912,35 @@ Module modLang
         frmComputers.Label33.Text = objIniFile.GetString("frmComputers", "Label33", "MAC:")
 
 
-        Call NOTES_P_LANG(frmComputers.gbNETNotes, frmComputers.btnNETAdd, frmComputers.btnNETNotesDel, frmComputers.btnNETNotesCancel)
+        Call _
+            NOTES_P_LANG(frmComputers.gbNETNotes, frmComputers.btnNETAdd, frmComputers.btnNETNotesDel,
+                         frmComputers.btnNETNotesCancel)
         frmComputers.gbNETRemont.Text = objIniFile.GetString("frmComputers", "gbRepair", "Ремонты")
 
         Call GARANT_P_LANG(frmComputers.gbPostNET, frmComputers.Label39, frmComputers.Label38, frmComputers.Label37)
-        Call SALE_P_LANG(frmComputers.gbSaleNet, frmComputers.Label60, frmComputers.Label59, frmComputers.Label58, frmComputers.chkNETspis, frmComputers.Label57, frmComputers.Label56, frmComputers.Label55, frmComputers.chkNETNNb)
+        Call _
+            SALE_P_LANG(frmComputers.gbSaleNet, frmComputers.Label60, frmComputers.Label59, frmComputers.Label58,
+                        frmComputers.chkNETspis, frmComputers.Label57, frmComputers.Label56, frmComputers.Label55,
+                        frmComputers.chkNETNNb)
 
 
         'Другое оборудование
 
-        frmComputers.sSTAB3.TabPages("TabPage11").Text = objIniFile.GetString("frmComputers", "sSTAB3.TabPages(11)", "Информация")
-        frmComputers.sSTAB3.TabPages("TabPage22").Text = objIniFile.GetString("frmComputers", "sSTAB3.TabPages(22)", "Движение")
-        frmComputers.sSTAB3.TabPages("TabPage12").Text = objIniFile.GetString("frmComputers", "sSTAB3.TabPages(12)", "Сервис")
-        frmComputers.sSTAB3.TabPages("TabPage18").Text = objIniFile.GetString("frmComputers", "sSTAB3.TabPages(18)", "Гарантия")
+        frmComputers.sSTAB3.TabPages("TabPage11").Text = objIniFile.GetString("frmComputers", "sSTAB3.TabPages(11)",
+                                                                              "Информация")
+        frmComputers.sSTAB3.TabPages("TabPage22").Text = objIniFile.GetString("frmComputers", "sSTAB3.TabPages(22)",
+                                                                              "Движение")
+        frmComputers.sSTAB3.TabPages("TabPage12").Text = objIniFile.GetString("frmComputers", "sSTAB3.TabPages(12)",
+                                                                              "Сервис")
+        frmComputers.sSTAB3.TabPages("TabPage18").Text = objIniFile.GetString("frmComputers", "sSTAB3.TabPages(18)",
+                                                                              "Гарантия")
 
         frmComputers.gbOTh.Text = objIniFile.GetString("frmComputers", "gbOTh", "Информация")
         frmComputers.Label3.Text = objIniFile.GetString("frmComputers", "Label3", "Краткое описание:")
 
-        Call INFO_P_LANG(frmComputers.Label9, frmComputers.Label8, frmComputers.Label7, frmComputers.Label6, frmComputers.Label5, frmComputers.Label87)
+        Call _
+            INFO_P_LANG(frmComputers.Label9, frmComputers.Label8, frmComputers.Label7, frmComputers.Label6,
+                        frmComputers.Label5, frmComputers.Label87)
 
         frmComputers.lblTipOther.Text = objIniFile.GetString("frmComputers", "lblTipOther", "Тип устройства:")
         frmComputers.Label10.Text = objIniFile.GetString("frmComputers", "Label10", "Инвентарный номер")
@@ -808,11 +948,16 @@ Module modLang
         frmComputers.lblOtIp.Text = objIniFile.GetString("frmComputers", "lblOtIp", "IP:")
         frmComputers.lblOTMac.Text = objIniFile.GetString("frmComputers", "lblOTMac", "MAC:")
 
-        Call NOTES_P_LANG(frmComputers.gbOTHNotes, frmComputers.btnOTHAdd, frmComputers.btnOTHNotesDel, frmComputers.btnOTHNotesCancel)
+        Call _
+            NOTES_P_LANG(frmComputers.gbOTHNotes, frmComputers.btnOTHAdd, frmComputers.btnOTHNotesDel,
+                         frmComputers.btnOTHNotesCancel)
         frmComputers.gbOTHRemont.Text = objIniFile.GetString("frmComputers", "gbRepair", "Ремонты")
 
         Call GARANT_P_LANG(frmComputers.gbPostOTH, frmComputers.Label42, frmComputers.Label41, frmComputers.Label40)
-        Call SALE_P_LANG(frmComputers.gbSaleOTH, frmComputers.Label66, frmComputers.Label65, frmComputers.Label64, frmComputers.chkOTHspis, frmComputers.Label63, frmComputers.Label62, frmComputers.Label61, frmComputers.chkOTHNNb)
+        Call _
+            SALE_P_LANG(frmComputers.gbSaleOTH, frmComputers.Label66, frmComputers.Label65, frmComputers.Label64,
+                        frmComputers.chkOTHspis, frmComputers.Label63, frmComputers.Label62, frmComputers.Label61,
+                        frmComputers.chkOTHNNb)
 
         frmComputers.Label88.Text = objIniFile.GetString("frmComputers", "Label83", "В составе устройства:")
         frmComputers.lblPCLNET.Text = objIniFile.GetString("frmComputers", "Label83", "В составе устройства:")
@@ -833,7 +978,7 @@ Module modLang
 
         Exit Sub
 
-err_:
+        err_:
         MsgBox(Err.Description)
     End Sub
 
@@ -844,7 +989,8 @@ err_:
         lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstNOTES1", "id"), 20, HorizontalAlignment.Left)
         lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstNOTES2", "№"), 30, HorizontalAlignment.Left)
         lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstNOTES3", "Дата"), 75, HorizontalAlignment.Left)
-        lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstNOTES4", "Описание"), 300, HorizontalAlignment.Left)
+        lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstNOTES4", "Описание"), 300,
+                              HorizontalAlignment.Left)
         lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstNOTES5", "Мастер"), 100, HorizontalAlignment.Left)
 
         'ResList(lstGroups)
@@ -855,12 +1001,13 @@ err_:
 
 
         lstGroup.Columns.Add(objIniFile.GetString("frmComputers", "lstMOVEMENT1", "id"), 20, HorizontalAlignment.Left)
-        lstGroup.Columns.Add(objIniFile.GetString("frmComputers", "lstMOVEMENT2", "От куда"), 100, HorizontalAlignment.Left)
+        lstGroup.Columns.Add(objIniFile.GetString("frmComputers", "lstMOVEMENT2", "От куда"), 100,
+                             HorizontalAlignment.Left)
         lstGroup.Columns.Add(objIniFile.GetString("frmComputers", "lstMOVEMENT3", "Куда"), 100, HorizontalAlignment.Left)
-        lstGroup.Columns.Add(objIniFile.GetString("frmComputers", "lstMOVEMENT4", "Причина"), 300, HorizontalAlignment.Left)
+        lstGroup.Columns.Add(objIniFile.GetString("frmComputers", "lstMOVEMENT4", "Причина"), 300,
+                             HorizontalAlignment.Left)
         lstGroup.Columns.Add(objIniFile.GetString("frmComputers", "lstMOVEMENT5", "Дата"), 50, HorizontalAlignment.Left)
         lstGroup.Columns.Add(objIniFile.GetString("frmComputers", "lstMOVEMENT6", "Время"), 50, HorizontalAlignment.Left)
-
     End Sub
 
     Public Sub LANG_REPAIR(ByVal lstGroups As ListView)
@@ -870,16 +1017,22 @@ err_:
         lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstRemont1", "id"), 20, HorizontalAlignment.Left)
         lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstRemont2", "№"), 30, HorizontalAlignment.Left)
         lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstRemont3", "Дата"), 90, HorizontalAlignment.Left)
-        lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstRemont4", "Описание"), 300, HorizontalAlignment.Left)
-        lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstRemont5", "Уровень"), 100, HorizontalAlignment.Left)
-        lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstRemont6", "Мастер"), 100, HorizontalAlignment.Left)
-        lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstRemont7", "Выполнение"), 100, HorizontalAlignment.Left)
-        lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstRemont8", "Срок выполнения"), 90, HorizontalAlignment.Left)
-        lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstRemont9", "Пользователь"), 100, HorizontalAlignment.Left)
-        lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstRemont10", "События"), 30, HorizontalAlignment.Left)
+        lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstRemont4", "Описание"), 300,
+                              HorizontalAlignment.Left)
+        lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstRemont5", "Уровень"), 100,
+                              HorizontalAlignment.Left)
+        lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstRemont6", "Мастер"), 100,
+                              HorizontalAlignment.Left)
+        lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstRemont7", "Выполнение"), 100,
+                              HorizontalAlignment.Left)
+        lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstRemont8", "Срок выполнения"), 90,
+                              HorizontalAlignment.Left)
+        lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstRemont9", "Пользователь"), 100,
+                              HorizontalAlignment.Left)
+        lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstRemont10", "События"), 30,
+                              HorizontalAlignment.Left)
 
         'ResList(lstGroups)
-
     End Sub
 
     Public Sub LANG_SOFT(ByVal lstGroups As ListView)
@@ -889,26 +1042,32 @@ err_:
 
         lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstSOFT9", "Номер ПО"), 20, HorizontalAlignment.Left)
 
-        lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstSOFT2", "Программное обеспечение"), 300, HorizontalAlignment.Left)
-        lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstSOFT3", "Лицензионный ключ"), 100, HorizontalAlignment.Left)
-        lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstSOFT4", "Лицензия"), 100, HorizontalAlignment.Left)
-        lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstSOFT5", "Дата установки"), 60, HorizontalAlignment.Left)
-        lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstSOFT6", "Дата окончания"), 60, HorizontalAlignment.Left)
-        lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstSOFT7", "Производитель"), 200, HorizontalAlignment.Left)
-        lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstSOFT8", "Тип программного обеспечения"), 100, HorizontalAlignment.Left)
+        lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstSOFT2", "Программное обеспечение"), 300,
+                              HorizontalAlignment.Left)
+        lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstSOFT3", "Лицензионный ключ"), 100,
+                              HorizontalAlignment.Left)
+        lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstSOFT4", "Лицензия"), 100,
+                              HorizontalAlignment.Left)
+        lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstSOFT5", "Дата установки"), 60,
+                              HorizontalAlignment.Left)
+        lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstSOFT6", "Дата окончания"), 60,
+                              HorizontalAlignment.Left)
+        lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstSOFT7", "Производитель"), 200,
+                              HorizontalAlignment.Left)
+        lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstSOFT8", "Тип программного обеспечения"), 100,
+                              HorizontalAlignment.Left)
 
         'ResList(lstGroups)
-
     End Sub
 
-    Private Sub NOTES_P_LANG(ByVal gb As GroupBox, ByVal badd As ToolStripButton, ByVal bdel As ToolStripButton, ByVal bcancel As ToolStripButton)
+    Private Sub NOTES_P_LANG(ByVal gb As GroupBox, ByVal badd As ToolStripButton, ByVal bdel As ToolStripButton,
+                             ByVal bcancel As ToolStripButton)
         Dim objIniFile As New IniFile(sLANGPATH)
 
         gb.Text = objIniFile.GetString("frmComputers", "gbNotes", "Заметки")
         badd.Text = objIniFile.GetString("frmComputers", "btnNotesAdd", "Добавить")
         bdel.Text = objIniFile.GetString("frmComputers", "btnNotesDel", "Удалить")
         bcancel.Text = objIniFile.GetString("frmComputers", "btnNotesCancel", "Отмена")
-
     End Sub
 
     Private Sub GARANT_P_LANG(ByVal gbS As GroupBox, ByVal lb1 As Label, ByVal lb2 As Label, ByVal lb3 As Label)
@@ -920,7 +1079,9 @@ err_:
         lb3.Text = objIniFile.GetString("frmComputers", "Label21", "Окончание:")
     End Sub
 
-    Private Sub SALE_P_LANG(ByVal gbS As GroupBox, ByVal lb1 As Label, ByVal lb2 As Label, ByVal lb3 As Label, ByVal chkS As CheckBox, ByVal lb4 As Label, ByVal lb5 As Label, ByVal lb6 As Label, ByVal chkN As CheckBox)
+    Private Sub SALE_P_LANG(ByVal gbS As GroupBox, ByVal lb1 As Label, ByVal lb2 As Label, ByVal lb3 As Label,
+                            ByVal chkS As CheckBox, ByVal lb4 As Label, ByVal lb5 As Label, ByVal lb6 As Label,
+                            ByVal chkN As CheckBox)
         Dim objIniFile As New IniFile(sLANGPATH)
 
         gbS.Text = objIniFile.GetString("frmComputers", "gbSale", "Данные о приобретении")
@@ -932,10 +1093,10 @@ err_:
         lb5.Text = objIniFile.GetString("frmComputers", "Label47", "Заявка")
         lb6.Text = objIniFile.GetString("frmComputers", "Label48", "Дата ввода")
         chkN.Text = objIniFile.GetString("frmComputers", "chkPCNNb", "Не на балансе")
-
     End Sub
 
-    Private Sub INFO_P_LANG(ByVal lb1 As Label, ByVal lb2 As Label, ByVal lb3 As Label, ByVal lb4 As Label, ByVal lb5 As Label, ByVal lb6 As Label)
+    Private Sub INFO_P_LANG(ByVal lb1 As Label, ByVal lb2 As Label, ByVal lb3 As Label, ByVal lb4 As Label,
+                            ByVal lb5 As Label, ByVal lb6 As Label)
         Dim objIniFile As New IniFile(sLANGPATH)
 
         lb1.Text = objIniFile.GetString("frmComputers", "lblBranch", "Филиал")
@@ -944,8 +1105,6 @@ err_:
         lb4.Text = objIniFile.GetString("frmComputers", "lblResponsible", "Ответственный")
         lb5.Text = objIniFile.GetString("frmComputers", "lblPhone", "Телефон")
         lb6.Text = objIniFile.GetString("frmComputers", "Label84", "№ в базе")
-
-
     End Sub
 
     Public Sub frmLogin_Lang()
@@ -956,7 +1115,6 @@ err_:
         'frmLogin.lblBase.Text = langini.GetString("forms", "l1002", "")
         'frmLogin.lblUser.Text = langini.GetString("forms", "l1003", "")
         'frmLogin.lblPassword.Text = langini.GetString("forms", "l1004", "")
-
     End Sub
 
     Public Sub frmSoftware_Lang()
@@ -969,7 +1127,8 @@ err_:
 
         frmSoftware.gbTree.Text = LNGIniFile.GetString("frmSoftware", "gbTree", "Дерево")
 
-        frmSoftware.gbSoftware.Text = LNGIniFile.GetString("frmSoftware", "gbSoftware", "Установленное программное обеспечение")
+        frmSoftware.gbSoftware.Text = LNGIniFile.GetString("frmSoftware", "gbSoftware",
+                                                           "Установленное программное обеспечение")
         frmSoftware.Label1.Text = LNGIniFile.GetString("frmSoftware", "Label1", "Программное обеспечение")
         frmSoftware.Label2.Text = LNGIniFile.GetString("frmSoftware", "Label2", "Тип лицензии:")
         frmSoftware.Label4.Text = LNGIniFile.GetString("frmSoftware", "Label4", "Лицензионный номер:")
@@ -985,7 +1144,6 @@ err_:
 
         frmSoftware.CheckBox2.Text = LNGIniFile.GetString("frmSoftware", "CheckBox2", "Массовое удаление")
         'CheckBox2
-
     End Sub
 
     Public Sub LANG_frmSQL()
@@ -999,8 +1157,6 @@ err_:
         frmSQL.btnResSend.Text = LNGIniFile.GetString("frmSQL", "btnResSend", "В офис")
         frmSQL.btnSave.Text = LNGIniFile.GetString("frmSQL", "btnSave", "Сохранить")
         frmSQL.btnDelete.Text = LNGIniFile.GetString("frmSQL", "btnDelete", "Удалить")
-
-
     End Sub
 
     Public Sub LANG_frmTreb_Act_treb()
@@ -1020,9 +1176,6 @@ err_:
 
         frmTreb_Act_treb.cmdAdd.Text = LNGIniFile.GetString("frmTreb_Act_treb", "cmdAdd", "Добавить")
         frmTreb_Act_treb.cmdCancel.Text = LNGIniFile.GetString("frmTreb_Act_treb", "cmdCancel", "Отмена")
-
-
-
     End Sub
 
 
@@ -1030,57 +1183,83 @@ err_:
         Dim langIni As New IniFile(sLANGPATH)
 
 
-        frmReports.lvReport2Cl.Columns.Add((langIni.GetString("frmReports", "lvReport2Cl1", "Наименование")), 300, HorizontalAlignment.Left)
+        frmReports.lvReport2Cl.Columns.Add((langIni.GetString("frmReports", "lvReport2Cl1", "Наименование")), 300,
+                                           HorizontalAlignment.Left)
         ' frmReports.lvReport2Cl.Columns.Add(("Производитель"), 300, HorizontalAlignment.Left)
-        frmReports.lvReport2Cl.Columns.Add((langIni.GetString("frmReports", "lvReport2Cl2", "Количество")), 100, HorizontalAlignment.Left)
+        frmReports.lvReport2Cl.Columns.Add((langIni.GetString("frmReports", "lvReport2Cl2", "Количество")), 100,
+                                           HorizontalAlignment.Left)
 
         'ResList(frmReports.lvReport2Cl)
 
         'lvRemont
         frmReports.lvRemont.Columns.Add(langIni.GetString("frmReports", "lvRemont1", "id"), 15, HorizontalAlignment.Left)
-        frmReports.lvRemont.Columns.Add(langIni.GetString("frmReports", "lvRemont2", "Дата"), 70, HorizontalAlignment.Left)
-        frmReports.lvRemont.Columns.Add(langIni.GetString("frmReports", "lvRemont3", "Описание ремонта"), 300, HorizontalAlignment.Left)
-        frmReports.lvRemont.Columns.Add(langIni.GetString("frmReports", "lvRemont4", "Уровень"), 70, HorizontalAlignment.Left)
-        frmReports.lvRemont.Columns.Add(langIni.GetString("frmReports", "lvRemont5", "Мастер"), 70, HorizontalAlignment.Left)
-        frmReports.lvRemont.Columns.Add(langIni.GetString("frmReports", "lvRemont6", "Имя устройства"), 70, HorizontalAlignment.Left)
-        frmReports.lvRemont.Columns.Add(langIni.GetString("frmReports", "lvRemont7", "Место установки"), 70, HorizontalAlignment.Left)
-        frmReports.lvRemont.Columns.Add(langIni.GetString("frmReports", "lvRemont8", "Выполнение"), 70, HorizontalAlignment.Left)
-        frmReports.lvRemont.Columns.Add(langIni.GetString("frmReports", "lvRemont9", "Пользователь"), 30, HorizontalAlignment.Left)
-        frmReports.lvRemont.Columns.Add(langIni.GetString("frmReports", "lvRemont10", "Затраченное время"), 30, HorizontalAlignment.Left)
-        frmReports.lvRemont.Columns.Add(langIni.GetString("frmReports", "lvRemont11", "SN"), 30, HorizontalAlignment.Left)
+        frmReports.lvRemont.Columns.Add(langIni.GetString("frmReports", "lvRemont2", "Дата"), 70,
+                                        HorizontalAlignment.Left)
+        frmReports.lvRemont.Columns.Add(langIni.GetString("frmReports", "lvRemont3", "Описание ремонта"), 300,
+                                        HorizontalAlignment.Left)
+        frmReports.lvRemont.Columns.Add(langIni.GetString("frmReports", "lvRemont4", "Уровень"), 70,
+                                        HorizontalAlignment.Left)
+        frmReports.lvRemont.Columns.Add(langIni.GetString("frmReports", "lvRemont5", "Мастер"), 70,
+                                        HorizontalAlignment.Left)
+        frmReports.lvRemont.Columns.Add(langIni.GetString("frmReports", "lvRemont6", "Имя устройства"), 70,
+                                        HorizontalAlignment.Left)
+        frmReports.lvRemont.Columns.Add(langIni.GetString("frmReports", "lvRemont7", "Место установки"), 70,
+                                        HorizontalAlignment.Left)
+        frmReports.lvRemont.Columns.Add(langIni.GetString("frmReports", "lvRemont8", "Выполнение"), 70,
+                                        HorizontalAlignment.Left)
+        frmReports.lvRemont.Columns.Add(langIni.GetString("frmReports", "lvRemont9", "Пользователь"), 30,
+                                        HorizontalAlignment.Left)
+        frmReports.lvRemont.Columns.Add(langIni.GetString("frmReports", "lvRemont10", "Затраченное время"), 30,
+                                        HorizontalAlignment.Left)
+        frmReports.lvRemont.Columns.Add(langIni.GetString("frmReports", "lvRemont11", "SN"), 30,
+                                        HorizontalAlignment.Left)
         'ResList(frmReports.lvRemont)
 
-        frmReports.lvGar.Columns.Add(langIni.GetString("frmReports", "lvGar1", "Наименование"), 100, HorizontalAlignment.Left)
-        frmReports.lvGar.Columns.Add(langIni.GetString("frmReports", "lvGar2", "Место установки"), 100, HorizontalAlignment.Left)
-        frmReports.lvGar.Columns.Add(langIni.GetString("frmReports", "lvGar3", "Дата окончания"), 75, HorizontalAlignment.Left)
-        frmReports.lvGar.Columns.Add(langIni.GetString("frmReports", "lvGar4", "Дней до конца"), 70, HorizontalAlignment.Left)
-        frmReports.lvGar.Columns.Add(langIni.GetString("frmReports", "lvGar5", "В сборе..."), 70, HorizontalAlignment.Left)
+        frmReports.lvGar.Columns.Add(langIni.GetString("frmReports", "lvGar1", "Наименование"), 100,
+                                     HorizontalAlignment.Left)
+        frmReports.lvGar.Columns.Add(langIni.GetString("frmReports", "lvGar2", "Место установки"), 100,
+                                     HorizontalAlignment.Left)
+        frmReports.lvGar.Columns.Add(langIni.GetString("frmReports", "lvGar3", "Дата окончания"), 75,
+                                     HorizontalAlignment.Left)
+        frmReports.lvGar.Columns.Add(langIni.GetString("frmReports", "lvGar4", "Дней до конца"), 70,
+                                     HorizontalAlignment.Left)
+        frmReports.lvGar.Columns.Add(langIni.GetString("frmReports", "lvGar5", "В сборе..."), 70,
+                                     HorizontalAlignment.Left)
 
         'ResList(frmReports.lvGar)
 
-        frmReports.lvOTV.Columns.Add(langIni.GetString("frmReports", "lvOTV1", "Тип техники"), 250, HorizontalAlignment.Left)
-        frmReports.lvOTV.Columns.Add(langIni.GetString("frmReports", "lvOTV2", "Инвентарный номер"), 100, HorizontalAlignment.Left)
-        frmReports.lvOTV.Columns.Add(langIni.GetString("frmReports", "lvOTV3", "Серийный номер"), 100, HorizontalAlignment.Left)
-        frmReports.lvOTV.Columns.Add(langIni.GetString("frmReports", "lvOTV4", "Место установки"), 200, HorizontalAlignment.Left)
+        frmReports.lvOTV.Columns.Add(langIni.GetString("frmReports", "lvOTV1", "Тип техники"), 250,
+                                     HorizontalAlignment.Left)
+        frmReports.lvOTV.Columns.Add(langIni.GetString("frmReports", "lvOTV2", "Инвентарный номер"), 100,
+                                     HorizontalAlignment.Left)
+        frmReports.lvOTV.Columns.Add(langIni.GetString("frmReports", "lvOTV3", "Серийный номер"), 100,
+                                     HorizontalAlignment.Left)
+        frmReports.lvOTV.Columns.Add(langIni.GetString("frmReports", "lvOTV4", "Место установки"), 200,
+                                     HorizontalAlignment.Left)
 
         'ResList(frmReports.lvOTV)
 
-        frmReports.lvCashe.Columns.Add(langIni.GetString("frmReports", "lvCashe1", "Тип техники"), 350, HorizontalAlignment.Left)
-        frmReports.lvCashe.Columns.Add(langIni.GetString("frmReports", "lvCashe2", "Затраты"), 150, HorizontalAlignment.Left)
-        frmReports.lvCashe.Columns.Add(langIni.GetString("frmReports", "lvCashe3", "Дата приобретения"), 75, HorizontalAlignment.Left)
-        frmReports.lvCashe.Columns.Add(langIni.GetString("frmReports", "lvCashe4", "Место установки"), 200, HorizontalAlignment.Left)
+        frmReports.lvCashe.Columns.Add(langIni.GetString("frmReports", "lvCashe1", "Тип техники"), 350,
+                                       HorizontalAlignment.Left)
+        frmReports.lvCashe.Columns.Add(langIni.GetString("frmReports", "lvCashe2", "Затраты"), 150,
+                                       HorizontalAlignment.Left)
+        frmReports.lvCashe.Columns.Add(langIni.GetString("frmReports", "lvCashe3", "Дата приобретения"), 75,
+                                       HorizontalAlignment.Left)
+        frmReports.lvCashe.Columns.Add(langIni.GetString("frmReports", "lvCashe4", "Место установки"), 200,
+                                       HorizontalAlignment.Left)
 
         'ResList(frmReports.lvCashe)
 
 
-
         frmReports.Text = langIni.GetString("frmReports", "frmReports", "Статистические отчеты")
 
-        frmReports.sSTAB1.TabPages("TabPage1").Text = langIni.GetString("frmReports", "TabPage1", "Комплектующие по отделам")
+        frmReports.sSTAB1.TabPages("TabPage1").Text = langIni.GetString("frmReports", "TabPage1",
+                                                                        "Комплектующие по отделам")
         frmReports.sSTAB1.TabPages("TabPage2").Text = langIni.GetString("frmReports", "TabPage2", "Комплектующие")
         frmReports.sSTAB1.TabPages("TabPage3").Text = langIni.GetString("frmReports", "TabPage3", "Ремонты")
         frmReports.sSTAB1.TabPages("TabPage4").Text = langIni.GetString("frmReports", "TabPage4", "Гарантия")
-        frmReports.sSTAB1.TabPages("TabPage5").Text = langIni.GetString("frmReports", "TabPage5", "Выборка по ответственным")
+        frmReports.sSTAB1.TabPages("TabPage5").Text = langIni.GetString("frmReports", "TabPage5",
+                                                                        "Выборка по ответственным")
         frmReports.sSTAB1.TabPages("TabPage6").Text = langIni.GetString("frmReports", "TabPage6", "Затраты")
 
         frmReports.Label6.Text = langIni.GetString("frmReports", "Label6", "Филиал")
@@ -1156,7 +1335,8 @@ err_:
         frmReports.Label2.Text = langIni.GetString("frmReports", "Label2", "Отдел")
         frmReports.Button1.Text = langIni.GetString("frmReports", "Button1", "Выход")
         frmReports.Button2.Text = langIni.GetString("frmReports", "Button2", "В офис")
-        frmReports.chkReport2Prn.Text = langIni.GetString("frmReports", "chkReport2Prn", "Показывать принтеры описанные в конфигурации компьютера")
+        frmReports.chkReport2Prn.Text = langIni.GetString("frmReports", "chkReport2Prn",
+                                                          "Показывать принтеры описанные в конфигурации компьютера")
 
         frmReports.Label3.Text = langIni.GetString("frmReports", "Label3", "Мастер")
         frmReports.btnRefresh.Text = langIni.GetString("frmReports", "btnRefresh", "Выбрать")
@@ -1181,7 +1361,6 @@ err_:
         frmReports.btnCacheOff.Text = langIni.GetString("frmReports", "btnCacheOff", "В офис")
 
 
-
         'frmReports.lvCRT.Columns.Add("Модель", 100, HorizontalAlignment.Left)
         'frmReports.lvCRT.Columns.Add("Установлен\Не установлен", 70, HorizontalAlignment.Left)
         'frmReports.lvCRT.Columns.Add("Заправок", 70, HorizontalAlignment.Left)
@@ -1191,52 +1370,77 @@ err_:
         'ResList(frmReports.lvCRT)
 
 
-
         frmReports.lstvPPR.Columns.Add(langIni.GetString("frmReports", "lstvPPR1", "id"), 1, HorizontalAlignment.Left)
-        frmReports.lstvPPR.Columns.Add(langIni.GetString("frmReports", "lstvPPR2", "Тип техники"), 100, HorizontalAlignment.Left)
-        frmReports.lstvPPR.Columns.Add(langIni.GetString("frmReports", "lstvPPR3", "Наименование"), 100, HorizontalAlignment.Left)
-        frmReports.lstvPPR.Columns.Add(langIni.GetString("frmReports", "lstvPPR4", "Место установки"), 100, HorizontalAlignment.Left)
-        frmReports.lstvPPR.Columns.Add(langIni.GetString("frmReports", "lstvPPR5", "Вид ТО"), 100, HorizontalAlignment.Left)
-        frmReports.lstvPPR.Columns.Add(langIni.GetString("frmReports", "lstvPPR6", "Период"), 100, HorizontalAlignment.Left)
-
-
-
+        frmReports.lstvPPR.Columns.Add(langIni.GetString("frmReports", "lstvPPR2", "Тип техники"), 100,
+                                       HorizontalAlignment.Left)
+        frmReports.lstvPPR.Columns.Add(langIni.GetString("frmReports", "lstvPPR3", "Наименование"), 100,
+                                       HorizontalAlignment.Left)
+        frmReports.lstvPPR.Columns.Add(langIni.GetString("frmReports", "lstvPPR4", "Место установки"), 100,
+                                       HorizontalAlignment.Left)
+        frmReports.lstvPPR.Columns.Add(langIni.GetString("frmReports", "lstvPPR5", "Вид ТО"), 100,
+                                       HorizontalAlignment.Left)
+        frmReports.lstvPPR.Columns.Add(langIni.GetString("frmReports", "lstvPPR6", "Период"), 100,
+                                       HorizontalAlignment.Left)
     End Sub
 
     Public Sub frmAct_treb_LANG()
         Dim objIniFile As New IniFile(sLANGPATH)
 
 
-        frmAct_Treb.lvACTSP.Columns.Add(objIniFile.GetString("frmAct_Treb", "lvACTSP1", "id"), 20, HorizontalAlignment.Left)
-        frmAct_Treb.lvACTSP.Columns.Add((objIniFile.GetString("frmAct_Treb", "lvACTSP2", "Номер")), 70, HorizontalAlignment.Left)
-        frmAct_Treb.lvACTSP.Columns.Add((objIniFile.GetString("frmAct_Treb", "lvACTSP3", "Дата выписки")), 75, HorizontalAlignment.Left)
-        frmAct_Treb.lvACTSP.Columns.Add((objIniFile.GetString("frmAct_Treb", "lvACTSP4", "Комплектующая тип")), 100, HorizontalAlignment.Left)
-        frmAct_Treb.lvACTSP.Columns.Add((objIniFile.GetString("frmAct_Treb", "lvACTSP5", "Модель")), 100, HorizontalAlignment.Left)
-        frmAct_Treb.lvACTSP.Columns.Add((objIniFile.GetString("frmAct_Treb", "lvACTSP6", "Год производства")), 75, HorizontalAlignment.Left)
-        frmAct_Treb.lvACTSP.Columns.Add((objIniFile.GetString("frmAct_Treb", "lvACTSP7", "Дата постановки")), 75, HorizontalAlignment.Left)
-        frmAct_Treb.lvACTSP.Columns.Add((objIniFile.GetString("frmAct_Treb", "lvACTSP8", "Балансовая стоимость")), 75, HorizontalAlignment.Left)
-        frmAct_Treb.lvACTSP.Columns.Add((objIniFile.GetString("frmAct_Treb", "lvACTSP9", "Дата последнего кап.ремонта")), 75, HorizontalAlignment.Left)
+        frmAct_Treb.lvACTSP.Columns.Add(objIniFile.GetString("frmAct_Treb", "lvACTSP1", "id"), 20,
+                                        HorizontalAlignment.Left)
+        frmAct_Treb.lvACTSP.Columns.Add((objIniFile.GetString("frmAct_Treb", "lvACTSP2", "Номер")), 70,
+                                        HorizontalAlignment.Left)
+        frmAct_Treb.lvACTSP.Columns.Add((objIniFile.GetString("frmAct_Treb", "lvACTSP3", "Дата выписки")), 75,
+                                        HorizontalAlignment.Left)
+        frmAct_Treb.lvACTSP.Columns.Add((objIniFile.GetString("frmAct_Treb", "lvACTSP4", "Комплектующая тип")), 100,
+                                        HorizontalAlignment.Left)
+        frmAct_Treb.lvACTSP.Columns.Add((objIniFile.GetString("frmAct_Treb", "lvACTSP5", "Модель")), 100,
+                                        HorizontalAlignment.Left)
+        frmAct_Treb.lvACTSP.Columns.Add((objIniFile.GetString("frmAct_Treb", "lvACTSP6", "Год производства")), 75,
+                                        HorizontalAlignment.Left)
+        frmAct_Treb.lvACTSP.Columns.Add((objIniFile.GetString("frmAct_Treb", "lvACTSP7", "Дата постановки")), 75,
+                                        HorizontalAlignment.Left)
+        frmAct_Treb.lvACTSP.Columns.Add((objIniFile.GetString("frmAct_Treb", "lvACTSP8", "Балансовая стоимость")), 75,
+                                        HorizontalAlignment.Left)
+        frmAct_Treb.lvACTSP.Columns.Add((objIniFile.GetString("frmAct_Treb", "lvACTSP9", "Дата последнего кап.ремонта")),
+                                        75, HorizontalAlignment.Left)
 
 
-        frmAct_Treb.lvACTVV.Columns.Add(objIniFile.GetString("frmAct_Treb", "lvACTVV1", "id"), 20, HorizontalAlignment.Left)
-        frmAct_Treb.lvACTVV.Columns.Add(objIniFile.GetString("frmAct_Treb", "lvACTVV2", "Номер акта"), 70, HorizontalAlignment.Left)
-        frmAct_Treb.lvACTVV.Columns.Add(objIniFile.GetString("frmAct_Treb", "lvACTVV3", "Модель"), 70, HorizontalAlignment.Left)
-        frmAct_Treb.lvACTVV.Columns.Add(objIniFile.GetString("frmAct_Treb", "lvACTVV4", "Цена"), 75, HorizontalAlignment.Left)
-        frmAct_Treb.lvACTVV.Columns.Add(objIniFile.GetString("frmAct_Treb", "lvACTVV5", "Дата составления"), 100, HorizontalAlignment.Left)
-        frmAct_Treb.lvACTVV.Columns.Add(objIniFile.GetString("frmAct_Treb", "lvACTVV6", "Тип О.С."), 100, HorizontalAlignment.Left)
+        frmAct_Treb.lvACTVV.Columns.Add(objIniFile.GetString("frmAct_Treb", "lvACTVV1", "id"), 20,
+                                        HorizontalAlignment.Left)
+        frmAct_Treb.lvACTVV.Columns.Add(objIniFile.GetString("frmAct_Treb", "lvACTVV2", "Номер акта"), 70,
+                                        HorizontalAlignment.Left)
+        frmAct_Treb.lvACTVV.Columns.Add(objIniFile.GetString("frmAct_Treb", "lvACTVV3", "Модель"), 70,
+                                        HorizontalAlignment.Left)
+        frmAct_Treb.lvACTVV.Columns.Add(objIniFile.GetString("frmAct_Treb", "lvACTVV4", "Цена"), 75,
+                                        HorizontalAlignment.Left)
+        frmAct_Treb.lvACTVV.Columns.Add(objIniFile.GetString("frmAct_Treb", "lvACTVV5", "Дата составления"), 100,
+                                        HorizontalAlignment.Left)
+        frmAct_Treb.lvACTVV.Columns.Add(objIniFile.GetString("frmAct_Treb", "lvACTVV6", "Тип О.С."), 100,
+                                        HorizontalAlignment.Left)
 
 
-        frmAct_Treb.lvTREB.Columns.Add(objIniFile.GetString("frmAct_Treb", "lvTREB1", "id"), 20, HorizontalAlignment.Left)
-        frmAct_Treb.lvTREB.Columns.Add(objIniFile.GetString("frmAct_Treb", "lvTREB2", "Номер требования"), 70, HorizontalAlignment.Left)
-        frmAct_Treb.lvTREB.Columns.Add(objIniFile.GetString("frmAct_Treb", "lvTREB3", "Модель"), 70, HorizontalAlignment.Left)
-        frmAct_Treb.lvTREB.Columns.Add(objIniFile.GetString("frmAct_Treb", "lvTREB4", "Цена"), 75, HorizontalAlignment.Left)
-        frmAct_Treb.lvTREB.Columns.Add(objIniFile.GetString("frmAct_Treb", "lvTREB5", "Дата составления"), 100, HorizontalAlignment.Left)
-        frmAct_Treb.lvTREB.Columns.Add(objIniFile.GetString("frmAct_Treb", "lvTREB6", "Тип"), 100, HorizontalAlignment.Left)
+        frmAct_Treb.lvTREB.Columns.Add(objIniFile.GetString("frmAct_Treb", "lvTREB1", "id"), 20,
+                                       HorizontalAlignment.Left)
+        frmAct_Treb.lvTREB.Columns.Add(objIniFile.GetString("frmAct_Treb", "lvTREB2", "Номер требования"), 70,
+                                       HorizontalAlignment.Left)
+        frmAct_Treb.lvTREB.Columns.Add(objIniFile.GetString("frmAct_Treb", "lvTREB3", "Модель"), 70,
+                                       HorizontalAlignment.Left)
+        frmAct_Treb.lvTREB.Columns.Add(objIniFile.GetString("frmAct_Treb", "lvTREB4", "Цена"), 75,
+                                       HorizontalAlignment.Left)
+        frmAct_Treb.lvTREB.Columns.Add(objIniFile.GetString("frmAct_Treb", "lvTREB5", "Дата составления"), 100,
+                                       HorizontalAlignment.Left)
+        frmAct_Treb.lvTREB.Columns.Add(objIniFile.GetString("frmAct_Treb", "lvTREB6", "Тип"), 100,
+                                       HorizontalAlignment.Left)
 
         frmAct_Treb.Text = objIniFile.GetString("frmAct_Treb", "frmAct_Treb", "Акты-Требования")
-        frmAct_Treb.TabControl1.TabPages("TabPage1").Text = objIniFile.GetString("frmAct_Treb", "TabPage1", "Акт ввода основных средств")
-        frmAct_Treb.TabControl1.TabPages("TabPage2").Text = objIniFile.GetString("frmAct_Treb", "TabPage2", "Акт на списание")
-        frmAct_Treb.TabControl1.TabPages("TabPage3").Text = objIniFile.GetString("frmAct_Treb", "TabPage3", "Требования-накладные")
+        frmAct_Treb.TabControl1.TabPages("TabPage1").Text = objIniFile.GetString("frmAct_Treb", "TabPage1",
+                                                                                 "Акт ввода основных средств")
+        frmAct_Treb.TabControl1.TabPages("TabPage2").Text = objIniFile.GetString("frmAct_Treb", "TabPage2",
+                                                                                 "Акт на списание")
+        frmAct_Treb.TabControl1.TabPages("TabPage3").Text = objIniFile.GetString("frmAct_Treb", "TabPage3",
+                                                                                 "Требования-накладные")
 
         frmAct_Treb.btnAVOSadd.Text = objIniFile.GetString("frmAct_Treb", "btnAVOSadd", "Добавить")
         frmAct_Treb.btnAVOSdel.Text = objIniFile.GetString("frmAct_Treb", "btnAVOSdel", "Удалить")
@@ -1252,7 +1456,6 @@ err_:
         frmAct_Treb.btnASPofsend.Text = objIniFile.GetString("frmAct_Treb", "btnASPofsend", "В офис")
 
         'frmAct_Treb
-
     End Sub
 
     Public Sub frmSheduler_LANG()
@@ -1261,12 +1464,14 @@ err_:
         frmSheduler.Text = LNGIniFile.GetString("frmSheduler", "frmSheduler", "Напоминания")
 
 
-
-        frmSheduler.lstShed.Columns.Add(LNGIniFile.GetString("frmSheduler", "lstShed1", "id"), 15, HorizontalAlignment.Left)
-        frmSheduler.lstShed.Columns.Add(LNGIniFile.GetString("frmSheduler", "lstShed2", "Дата"), 70, HorizontalAlignment.Left)
-        frmSheduler.lstShed.Columns.Add(LNGIniFile.GetString("frmSheduler", "lstShed3", "Напоминание"), 300, HorizontalAlignment.Left)
-        frmSheduler.lstShed.Columns.Add(LNGIniFile.GetString("frmSheduler", "lstShed4", "Для пользователя"), 70, HorizontalAlignment.Left)
-
+        frmSheduler.lstShed.Columns.Add(LNGIniFile.GetString("frmSheduler", "lstShed1", "id"), 15,
+                                        HorizontalAlignment.Left)
+        frmSheduler.lstShed.Columns.Add(LNGIniFile.GetString("frmSheduler", "lstShed2", "Дата"), 70,
+                                        HorizontalAlignment.Left)
+        frmSheduler.lstShed.Columns.Add(LNGIniFile.GetString("frmSheduler", "lstShed3", "Напоминание"), 300,
+                                        HorizontalAlignment.Left)
+        frmSheduler.lstShed.Columns.Add(LNGIniFile.GetString("frmSheduler", "lstShed4", "Для пользователя"), 70,
+                                        HorizontalAlignment.Left)
 
 
         frmSheduler.Label1.Text = LNGIniFile.GetString("frmSheduler", "Label1", "Дата:")
@@ -1275,8 +1480,6 @@ err_:
         frmSheduler.btnDel.Text = LNGIniFile.GetString("frmSheduler", "btnDel", "Удалить")
         frmSheduler.btnClear.Text = LNGIniFile.GetString("frmSheduler", "btnClear", "Очистить")
         frmSheduler.btnAll.Text = LNGIniFile.GetString("frmSheduler", "btnAll", "Показать все")
-
-
     End Sub
 
     Public Sub LANG_frm_os3()
@@ -1296,11 +1499,6 @@ err_:
         frm_os3.Button1.Text = objIniFile.GetString("frm_os3", "Button1", "Списать")
         frm_os3.Button2.Text = objIniFile.GetString("frm_os3", "Button2", "Отмена")
         frm_os3.Text = objIniFile.GetString("frm_os3", "frm_os3", "Данные для списания") 'frm_os3
-
-
-
-
-
     End Sub
 
     Public Sub LANG_frm_wmi()
@@ -1315,13 +1513,13 @@ err_:
         frm_wmi.Button1.Text = objIniFile.GetString("frm_wmi", "Button1", "Получить")
         frm_wmi.Button2.Text = objIniFile.GetString("frm_wmi", "Button2", "Отмена")
         frm_wmi.Text = objIniFile.GetString("frm_wmi", "frm_wmi", "Данные для загрузки")
-
     End Sub
 
     Public Sub LANG_frmACT_OS_Act_treb()
         Dim objIniFile As New IniFile(sLANGPATH)
 
-        frmACT_OS_Act_treb.Text = objIniFile.GetString("frmACT_OS_Act_treb", "frmACT_OS_Act_treb", "Данные для Акта ввода ОС")
+        frmACT_OS_Act_treb.Text = objIniFile.GetString("frmACT_OS_Act_treb", "frmACT_OS_Act_treb",
+                                                       "Данные для Акта ввода ОС")
         frmACT_OS_Act_treb.Label1.Text = objIniFile.GetString("frmACT_OS_Act_treb", "Label1", "Номер акта")
         frmACT_OS_Act_treb.Label2.Text = objIniFile.GetString("frmACT_OS_Act_treb", "Label2", "Тип основных средств")
         frmACT_OS_Act_treb.Label3.Text = objIniFile.GetString("frmACT_OS_Act_treb", "Label3", "Модель комплектующей")
@@ -1334,8 +1532,6 @@ err_:
 
         frmACT_OS_Act_treb.akt_add.Text = objIniFile.GetString("frmACT_OS_Act_treb", "akt_add", "Добавить")
         frmACT_OS_Act_treb.akt_cancel.Text = objIniFile.GetString("frmACT_OS_Act_treb", "akt_cancel", "Отмена")
-
-
     End Sub
 
     Public Sub LANG_frmGAR_CPL()
@@ -1349,8 +1545,6 @@ err_:
         frmGarCPL.Label1.Text = LNGIniFile.GetString("frmGarCPL", "Label1", "Окончание:")
         frmGarCPL.btnAdd.Text = LNGIniFile.GetString("frmGarCPL", "btnAdd", "Сохранить")
         frmGarCPL.btnCancel.Text = LNGIniFile.GetString("frmGarCPL", "btnCancel", "Отмена")
-
-
     End Sub
 
     Public Sub LANG_frmLOG()
@@ -1363,7 +1557,6 @@ err_:
         frmLOG.Label1.Text = LNGIniFile.GetString("frmLOG", "Label1", "с")
         frmLOG.Label2.Text = LNGIniFile.GetString("frmLOG", "Label2", "по")
         frmLOG.btnUpdate.Text = LNGIniFile.GetString("frmLOG", "btnUpdate", "Обновить")
-
     End Sub
 
     Public Sub LANG_frmLogin()
@@ -1387,9 +1580,6 @@ err_:
 
         frmLogin.btnLogin.Text = LNGIniFile.GetString("frmLogin", "btnLogin", "Вход")
         frmLogin.btnCancel.Text = LNGIniFile.GetString("frmLogin", "btnCancel", "Отмена")
-
-
-
     End Sub
 
     Public Sub LANG_frmMain()
@@ -1403,7 +1593,8 @@ err_:
         frmMain.ПроверитьОбновлениеToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "1", "Проверить обновление")
         frmMain.MailToAuthors.Text = LNGIniFile.GetString("frmMain", "MailToAuthors", "Письмо авторам")
         frmMain.ФорумToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "2", "Форум")
-        frmMain.BugTrackerToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "BugTrackerToolStripMenuItem", "Сообщить об ошибке")
+        frmMain.BugTrackerToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "BugTrackerToolStripMenuItem",
+                                                                        "Сообщить об ошибке")
 
         'frmMain.BugMaiSend.Text = LNGIniFile.GetString("frmMain", "BugTrackerToolStripMenuItem", "")
         'BugMaiSend
@@ -1414,16 +1605,19 @@ err_:
         frmMain.FrmComputersMenuItem.Text = LNGIniFile.GetString("frmMain", "FrmComputersMenuItem", "Учёт оргтехники")
         frmMain.УчётЗаявокремонтовToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "4", "Учёт заявок (ремонтов)")
         frmMain.УчётКартриджейToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "5", "Учёт картриджей")
-        frmMain.УчётПрограммногоОбеспеченияToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "6", "Учёт программного обеспечения")
+        frmMain.УчётПрограммногоОбеспеченияToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "6",
+                                                                                         "Учёт программного обеспечения")
         frmMain.СкладToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "7", "Склад")
         frmMain.СправочникиToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "8", "Справочники")
-        frmMain.СправочникиОборудованияToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "9", "Справочники оборудования")
+        frmMain.СправочникиОборудованияToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "9",
+                                                                                     "Справочники оборудования")
         frmMain.ОрганизацияToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "10", "Организация")
         frmMain.ОтчётыToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "11", "Отчёты")
         frmMain.БланкиToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "12", "Бланки")
         frmMain.ПаспортКомпьютераToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "13", "Паспорт компьютера")
         frmMain.ПаспортМФУToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "14", "Паспорт МФУ")
-        frmMain.ПаспортСетевогоОборудованияToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "15", "Паспорт Сетевого оборудования")
+        frmMain.ПаспортСетевогоОборудованияToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "15",
+                                                                                         "Паспорт Сетевого оборудования")
         frmMain.ПаспортПринтераToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "16", "Паспорт Принтера")
         frmMain.ПаспортКопираToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "17", "Паспорт Копира")
         frmMain.ПаспортСканераToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "18", "Паспорт сканера")
@@ -1431,29 +1625,42 @@ err_:
         frmMain.ЖурналыПрограммыToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "20", "Журналы программы")
         frmMain.АктытребованияToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "21", "Акты-требования")
         frmMain.ToolsMenu.Text = LNGIniFile.GetString("frmMain", "ToolsMenu", "Сервис")
-        frmMain.OptionsToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "OptionsToolStripMenuItem", "Напоминания")
+        frmMain.OptionsToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "OptionsToolStripMenuItem",
+                                                                     "Напоминания")
         frmMain.ОбслуживаниеБДToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "22", "Обслуживание БД")
-        frmMain.CompareDBToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "CompareDBToolStripMenuItem", "Сжатие БД")
+        frmMain.CompareDBToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "CompareDBToolStripMenuItem",
+                                                                       "Сжатие БД")
         frmMain.ЗапросыToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "23", "Запросы")
         frmMain.CleerDBToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "CleerDBToolStripMenuItem", "Очистка БД")
-        frmMain.QRCodeTestingToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "QRCodeTestingToolStripMenuItem", "QR Code Testing")
+        frmMain.QRCodeTestingToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "QRCodeTestingToolStripMenuItem",
+                                                                           "QR Code Testing")
         frmMain.ViewMenu.Text = LNGIniFile.GetString("frmMain", "ViewMenu", "Вид")
-        frmMain.ToolBarToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "ToolBarToolStripMenuItem", "Панель инструментов")
-        frmMain.StatusBarToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "StatusBarToolStripMenuItem", "Строка состояния")
-        frmMain.LabelPanelToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "LabelPanelToolStripMenuItem", "Надписи на панели")
+        frmMain.ToolBarToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "ToolBarToolStripMenuItem",
+                                                                     "Панель инструментов")
+        frmMain.StatusBarToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "StatusBarToolStripMenuItem",
+                                                                       "Строка состояния")
+        frmMain.LabelPanelToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "LabelPanelToolStripMenuItem",
+                                                                        "Надписи на панели")
         frmMain.WindowsMenu.Text = LNGIniFile.GetString("frmMain", "WindowsMenu", "Окна")
         frmMain.CascadeToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "CascadeToolStripMenuItem", "Каскадом")
-        frmMain.TileVerticalToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "TileVerticalToolStripMenuItem", "Слева направо")
-        frmMain.TileHorizontalToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "TileHorizontalToolStripMenuItem", "Сверху вниз")
-        frmMain.CloseAllToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "CloseAllToolStripMenuItem", "Закрыть все")
-        frmMain.ArrangeIconsToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "ArrangeIconsToolStripMenuItem", "Упорядочить значки")
+        frmMain.TileVerticalToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "TileVerticalToolStripMenuItem",
+                                                                          "Слева направо")
+        frmMain.TileHorizontalToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "TileHorizontalToolStripMenuItem",
+                                                                            "Сверху вниз")
+        frmMain.CloseAllToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "CloseAllToolStripMenuItem",
+                                                                      "Закрыть все")
+        frmMain.ArrangeIconsToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "ArrangeIconsToolStripMenuItem",
+                                                                          "Упорядочить значки")
         frmMain.HelpMenu.Text = LNGIniFile.GetString("frmMain", "HelpMenu", "О программе")
         frmMain.ToolStripDropDownButton1.Text = LNGIniFile.GetString("frmMain", "ToolStripDropDownButton1", "Новый...")
-        frmMain.ЗагрузитьИзEverestiniToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "24", "Загрузить из AIDA64 (ini)")
+        frmMain.ЗагрузитьИзEverestiniToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "24",
+                                                                                   "Загрузить из AIDA64 (ini)")
         frmMain.ЗагрузитьИзASTRA32ToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "25", "Загрузить из ASTRA32")
         frmMain.ЗагрузитьЧерезWMIToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "26", "Загрузить через WMI")
-        frmMain.ЗагрузитьИзCSVEverestToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "27", "Загрузить из CSV Everest")
-        frmMain.HANDINSERTToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "HANDINSERTToolStripMenuItem", "Ручной ввод")
+        frmMain.ЗагрузитьИзCSVEverestToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "27",
+                                                                                   "Загрузить из CSV Everest")
+        frmMain.HANDINSERTToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "HANDINSERTToolStripMenuItem",
+                                                                        "Ручной ввод")
         frmMain.КопирToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "28", "Копир")
         frmMain.ПринтерToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "29", "Принтер")
         frmMain.МФУToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "30", "МФУ")
@@ -1473,23 +1680,24 @@ err_:
         frmMain.lblRem.Text = LNGIniFile.GetString("frmMain", "lblRem", "Заявки")
 
         frmMain.USBУстройстваToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "39", "USB Устройства")
-        frmMain.АккустическиеСистемыToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "40", "Акустические Системы")
+        frmMain.АккустическиеСистемыToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "40",
+                                                                                  "Акустические Системы")
         frmMain.БесперебойникиToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "41", "Бесперебойники")
-        frmMain.ПерефирийныеУстройстваToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "42", "Периферийные устройства")
+        frmMain.ПерефирийныеУстройстваToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "42",
+                                                                                    "Периферийные устройства")
 
-        frmMain.ИнвентаризацияToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "43", "Количество устройств (инвентаризация)")
+        frmMain.ИнвентаризацияToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "43",
+                                                                            "Количество устройств (инвентаризация)")
 
 
         frmMain.КлавиатураToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "44", "Клавиатура")
         frmMain.МышьToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "45", "Мышь")
         frmMain.СетевыеФильтрыToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "46", "Сетевой фильтр")
-        frmMain.СтатистическиеОтчетыToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "47", "Статистические отчеты")
+        frmMain.СтатистическиеОтчетыToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "47",
+                                                                                  "Статистические отчеты")
 
         frmMain.netMagmnu.Text = LNGIniFile.GetString("frmMain", "netMagmnu", "Кабельный журнал")
 
         frmMain.LBL_STAT_2.Text = LNGIniFile.GetString("frmMain", "LBL_STAT_2", "Техники в:")
-
-       
-
     End Sub
 End Module

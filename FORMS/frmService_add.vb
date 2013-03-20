@@ -3,38 +3,48 @@
     Public REMFU As Boolean
     Public REMED As Boolean
 
-    Private Sub cmbAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbAdd.Click
+    Private Sub cmbAdd_Click(ByVal sender As Object, ByVal e As EventArgs) Handles cmbAdd.Click
         On Error Resume Next
         On Error GoTo err_
         Dim objIniFile As New IniFile(sLANGPATH)
 
         If Len(cmbIst.Text) = 0 Then
 
-            MsgBox(objIniFile.GetString("frmService_add", "MSG2", "Не указан") & " " & objIniFile.GetString("frmService_add", "MSG3", "источник"), MsgBoxStyle.Information, ProGramName)
+            MsgBox(
+                objIniFile.GetString("frmService_add", "MSG2", "Не указан") & " " &
+                objIniFile.GetString("frmService_add", "MSG3", "источник"), MsgBoxStyle.Information, ProGramName)
             Exit Sub
         End If
 
         If Len(cmbMast.Text) = 0 Then
 
-            MsgBox(objIniFile.GetString("frmService_add", "MSG2", "Не указан") & " " & objIniFile.GetString("frmService_add", "MSG4", "Мастер"), MsgBoxStyle.Information, ProGramName)
+            MsgBox(
+                objIniFile.GetString("frmService_add", "MSG2", "Не указан") & " " &
+                objIniFile.GetString("frmService_add", "MSG4", "Мастер"), MsgBoxStyle.Information, ProGramName)
             Exit Sub
         End If
 
         If Len(txtRem.Text) = 0 Then
 
-            MsgBox(objIniFile.GetString("frmService_add", "MSG2", "Не указан") & " " & objIniFile.GetString("frmService_add", "MSG5", "ремонт"), MsgBoxStyle.Information, ProGramName)
+            MsgBox(
+                objIniFile.GetString("frmService_add", "MSG2", "Не указан") & " " &
+                objIniFile.GetString("frmService_add", "MSG5", "ремонт"), MsgBoxStyle.Information, ProGramName)
             Exit Sub
         End If
 
         If Len(cmbStatus.Text) = 0 Then
 
-            MsgBox(objIniFile.GetString("frmService_add", "MSG2", "Не указан") & " " & objIniFile.GetString("frmService_add", "MSG6", "статус заявки"), MsgBoxStyle.Information, ProGramName)
+            MsgBox(
+                objIniFile.GetString("frmService_add", "MSG2", "Не указан") & " " &
+                objIniFile.GetString("frmService_add", "MSG6", "статус заявки"), MsgBoxStyle.Information, ProGramName)
             Exit Sub
         End If
 
         If Len(cmbOtv.Text) = 0 Then
 
-            MsgBox(objIniFile.GetString("frmService_add", "MSG2", "Не указан") & " " & objIniFile.GetString("frmService_add", "MSG7", "ответственный"), MsgBoxStyle.Information, ProGramName)
+            MsgBox(
+                objIniFile.GetString("frmService_add", "MSG2", "Не указан") & " " &
+                objIniFile.GetString("frmService_add", "MSG7", "ответственный"), MsgBoxStyle.Information, ProGramName)
             Exit Sub
         End If
 
@@ -42,7 +52,7 @@
         Dim unamZ As String
         Dim sCOUNTER As String
 
-        Dim rs As ADODB.Recordset
+        Dim rs As Recordset
 
         If Not (RSExists("otv", "name", Trim(cmbIst.Text))) Then
             AddOnePar(cmbIst.Text, "NAME", "SPR_OTV", cmbIst)
@@ -52,9 +62,9 @@
 
             Case "C"
 
-                rs = New ADODB.Recordset
+                rs = New Recordset
                 sSQL = "SELECT filial, mesto, net_name,kabn FROM kompy WHERE id=" & frmComputers.sCOUNT
-                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 With rs
 
@@ -80,9 +90,10 @@
 
         End Select
 
-        rs = New ADODB.Recordset
-        sSQL = "SELECT count(*) as t_n FROM Remont WHERE Id_Comp=" & frmComputers.sCOUNT & " AND PREF='" & frmComputers.sPREF & "'"
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        sSQL = "SELECT count(*) as t_n FROM Remont WHERE Id_Comp=" & frmComputers.sCOUNT & " AND PREF='" &
+               frmComputers.sPREF & "'"
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
             sCOUNTER = .Fields("t_n").Value
@@ -101,8 +112,8 @@
             sSQL = "SELECT * FROM Remont"
         End If
 
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         Dim strTime As String
         strTime = TimeString
@@ -231,27 +242,25 @@
         Me.Close()
 
         Exit Sub
-err_:
+        err_:
         MsgBox(Err.Description)
     End Sub
 
-    Private Sub cmbCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbCancel.Click
+    Private Sub cmbCancel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles cmbCancel.Click
 
         Me.Close()
-
     End Sub
 
-    Private Sub frmService_add_Activated(sender As Object, e As System.EventArgs) Handles Me.Activated
+    Private Sub frmService_add_Activated(sender As Object, e As EventArgs) Handles Me.Activated
 
         If gbS.Visible = False Then
             Me.Height = 535
         Else
             Me.Height = 683
         End If
-
     End Sub
 
-    Private Sub frmService_add_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+    Private Sub frmService_add_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
 
         SendFonts(Me)
 
@@ -275,7 +284,6 @@ err_:
         FillComboNET(Me.cmbStatus, "name", "spr_vip", "", False, True)
         FillComboNET(Me.cmbKrit, "Uroven", "SPR_Uroven", "", False, True)
         FillComboNET(Me.cmbTip, "name", "spr_tip_z", "", False, True)
-
 
 
         If cmbAdd.Text = objIniFile.GetString("frmService_add", "MSG1", "Сохранить") Then
@@ -332,10 +340,9 @@ err_:
         lvRem2.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem2_2", "Дата"), 90, HorizontalAlignment.Left)
         lvRem2.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem2_3", "Мастер"), 100, HorizontalAlignment.Left)
         lvRem2.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem2_4", "Описание"), 300, HorizontalAlignment.Left)
-
     End Sub
 
-    Private Sub chkClose_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkClose.CheckedChanged
+    Private Sub chkClose_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chkClose.CheckedChanged
 
         If chkClose.Checked = True And REMED = True Then
 
@@ -376,7 +383,5 @@ err_:
             'cmbAdd.Enabled = True
 
         End If
-
     End Sub
-
 End Class

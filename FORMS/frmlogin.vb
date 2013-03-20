@@ -1,10 +1,10 @@
-﻿Imports System
-Imports System.IO
+﻿Imports System.IO
+
 Public Class frmLogin
     Private sLoad As Boolean
 
 
-    Private Sub frmLogin_Activated(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Activated
+    Private Sub frmLogin_Activated(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Activated
         PrPath = Directory.GetParent(Application.ExecutablePath).ToString & "\"
         txtPassword.Focus()
         txtPassword.SelectAll()
@@ -29,8 +29,6 @@ Public Class frmLogin
         Catch e1 As Exception
             'Console.WriteLine("The process failed: {0}", e1.ToString())
         End Try
-
-
     End Sub
 
     Private Sub Find_DB()
@@ -53,7 +51,6 @@ Public Class frmLogin
         End Try
 
         'ITEM_DB_COUNT = cmbBD.Items.Count
-
     End Sub
 
     Private Sub User_fill()
@@ -68,14 +65,14 @@ Public Class frmLogin
 
         cmbUser.Items.Clear()
 
-        Dim rs As ADODB.Recordset
+        Dim rs As Recordset
 
         Dim zcn As Integer
         Dim sSQL As String
 
         sSQL = "select count(*) as t_n from T_User"
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
             zcn = .Fields("t_n").Value
@@ -86,8 +83,8 @@ Public Class frmLogin
 
         If zcn = 0 Then
             sSQL = "select * from T_User"
-            rs = New ADODB.Recordset
-            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rs = New Recordset
+            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
             With rs
                 .AddNew()
@@ -104,10 +101,10 @@ Public Class frmLogin
         End If
 
 
-        rs = New ADODB.Recordset
+        rs = New Recordset
         sSQL = "select * from T_User WHERE Name <> ' '  ORDER BY Name"
 
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
             .MoveFirst()
@@ -123,37 +120,35 @@ Public Class frmLogin
         rs = Nothing
 
 
-        rs = New ADODB.Recordset
-        rs.Open("UPDATE spr_other SET C='0' WHERE C=''", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open("UPDATE spr_other SET C='0' WHERE C=''", DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
         'rs.Close()
         rs = Nothing
 
 
         Exit Sub
 
-err_:
+        err_:
 
         MsgBox(Err.Description)
     End Sub
 
-    Private Sub btnLogin_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLogin.Click
+    Private Sub btnLogin_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnLogin.Click
 
 
         If Len(txtPassword.Text) = 0 Then Exit Sub
-        
+
         Me.Enabled = False
+
         Call User_Pro()
-        
+
 
         Me.Enabled = True
-
-        'Call User_Pro()
-
-
     End Sub
 
     Private Sub User_Pro()
-START:
+        START:
 
         Dim objIniFile As New IniFile(PrPath & "base.ini")
         objIniFile.WriteString("general", "DefaultUser", cmbUser.Text)
@@ -180,10 +175,11 @@ START:
 
         End If
 
-        Dim rscount As ADODB.Recordset
+        Dim rscount As Recordset
         Dim QWERT As Long
-        rscount = New ADODB.Recordset
-        rscount.Open("SELECT COUNT(*) AS total_number FROM CONFIGURE", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rscount = New Recordset
+        rscount.Open("SELECT COUNT(*) AS total_number FROM CONFIGURE", DB7, CursorTypeEnum.adOpenDynamic,
+                     LockTypeEnum.adLockOptimistic)
 
         With rscount
             QWERT = .Fields("total_number").Value
@@ -194,9 +190,9 @@ START:
 
         If QWERT <= 0 Then
 
-            Dim rs25 As ADODB.Recordset
-            rs25 = New ADODB.Recordset
-            rs25.Open("SELECT * FROM CONFIGURE", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            Dim rs25 As Recordset
+            rs25 = New Recordset
+            rs25.Open("SELECT * FROM CONFIGURE", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
             With rs25
                 .AddNew()
@@ -212,16 +208,16 @@ START:
 
         End If
 
-        Dim rs As ADODB.Recordset
-        rs = New ADODB.Recordset
+        Dim rs As Recordset
+        rs = New Recordset
 
         Dim tVER As String
         Dim sPass1 As String = ""
 
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
-        rs = New ADODB.Recordset
-        rs.Open("select * from CONFIGURE", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open("select * from CONFIGURE", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
 
@@ -231,15 +227,20 @@ START:
         rs.Close()
         rs = Nothing
 
-        tVER = My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor & "." & My.Application.Info.Version.Build
+        tVER = My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor & "." &
+               My.Application.Info.Version.Build
 
         If sVERSIA >= "1.7.3.5.1" Then
 
 
         Else
 
-            MsgBox(LNGIniFile.GetString("frmLogin", "MSG1", "Версия базы данных не является эталонной") & vbCrLf & LNGIniFile.GetString("frmLogin", "MSG2", "воспользуйтесь конвертором"), MsgBoxStyle.Information, "BKO.NET - " & tVER)
-            MsgBox("Пробуем внести изменения в базу, в случае не удачи пользуйтесь конвертором", MsgBoxStyle.Information, "BKO.NET - " & tVER)
+            MsgBox(
+                LNGIniFile.GetString("frmLogin", "MSG1", "Версия базы данных не является эталонной") & vbCrLf &
+                LNGIniFile.GetString("frmLogin", "MSG2", "воспользуйтесь конвертором"), MsgBoxStyle.Information,
+                "BKO.NET - " & tVER)
+            MsgBox("Пробуем внести изменения в базу, в случае не удачи пользуйтесь конвертором", MsgBoxStyle.Information,
+                   "BKO.NET - " & tVER)
 
             _DBALTER = True
 
@@ -268,10 +269,11 @@ START:
         txtPassword.Text = Temp
 
         Dim sCOUNT As Integer
-        Dim T_User As ADODB.Recordset
+        Dim T_User As Recordset
 
-        T_User = New ADODB.Recordset
-        T_User.Open("SELECT count(*) as t_n FROM T_User where Name ='" & cmbUser.Text & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        T_User = New Recordset
+        T_User.Open("SELECT count(*) as t_n FROM T_User where Name ='" & cmbUser.Text & "'", DB7,
+                    CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With T_User
             sCOUNT = .Fields("t_n").Value
@@ -284,8 +286,9 @@ START:
             Exit Sub
         End If
 
-        T_User = New ADODB.Recordset
-        T_User.Open("SELECT * FROM T_User where Name ='" & cmbUser.Text & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        T_User = New Recordset
+        T_User.Open("SELECT * FROM T_User where Name ='" & cmbUser.Text & "'", DB7, CursorTypeEnum.adOpenDynamic,
+                    LockTypeEnum.adLockOptimistic)
 
         With T_User
             '   .MoveFirst()
@@ -300,6 +303,7 @@ START:
                     UserNames = .Fields("Name").Value
 
                     If uLevel = "Admin" Then
+
 
                     Else
 
@@ -379,6 +383,16 @@ START:
                     Me.Hide()
 
                     If sRelogin = True Then
+
+                        frmMain.УчётToolStripMenuItem.Enabled = True
+                        frmMain.СправочникиToolStripMenuItem.Enabled = True
+                        frmMain.ОтчётыToolStripMenuItem.Enabled = True
+                        frmMain.ToolsMenu.Enabled = True
+                        frmMain.ViewMenu.Enabled = True
+                        frmMain.WindowsMenu.Enabled = True
+                        frmMain.ToolStripButton1.Enabled = True
+                        frmMain.NewToolStripButton.Enabled = True
+
                         sRelogin = False
                         'Какой модуль запускать
                         Dim sText As String
@@ -433,7 +447,7 @@ START:
 
                     Call SaveActivityToLogDB(LNGIniFile.GetString("frmLogin", "MSG4", "Ввод не верного пароля"))
 
-                    System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.Default
+                    Cursor.Current = Cursors.Default
                     Me.Enabled = True
                     MsgBox("This Password is not valid", MsgBoxStyle.Critical, "Error!!!")
                     txtPassword.Text = ""
@@ -451,13 +465,13 @@ START:
         T_User = Nothing
 
         Exit Sub
-err_:
+        err_:
         txtPassword.Text = ""
         txtPassword.Focus()
         Me.Enabled = True
     End Sub
 
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Button1.Click
 
         DBserv = TextBox1.Text
         DBtabl = TextBox3.Text
@@ -476,10 +490,9 @@ err_:
         End If
 
         Call User_fill()
-
     End Sub
 
-    Private Sub txtPassword_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtPassword.KeyDown
+    Private Sub txtPassword_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtPassword.KeyDown
 
         If Len(txtPassword.Text) = 0 Then Exit Sub
 
@@ -490,10 +503,9 @@ err_:
                 Call User_Pro()
 
         End Select
-
     End Sub
 
-    Private Sub frmLogin_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+    Private Sub frmLogin_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
 
         'SendFonts(Me)
 
@@ -515,16 +527,11 @@ err_:
         'gbsql.Top = 205
 
 
-
-
-
         Call sSUBD()
         Call User_fill()
 
         Me.Focus()
         txtPassword.Focus()
-
-
     End Sub
 
     Private Sub sSUBD()
@@ -632,12 +639,11 @@ err_:
         End Select
 
 
-
         Call User_fill()
-
     End Sub
 
-    Private Sub cmbSUBD_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbSUBD.SelectedIndexChanged
+    Private Sub cmbSUBD_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbSUBD.SelectedIndexChanged
 
         If sLoad = False Then Exit Sub
 
@@ -645,10 +651,10 @@ err_:
         objIniFile.WriteString("DB", "DB", cmbSUBD.Text)
 
         Call sSUBD()
-
     End Sub
 
-    Private Sub cmbBD_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbBD.SelectedIndexChanged
+    Private Sub cmbBD_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbBD.SelectedIndexChanged
 
         If Len(BasePath) = 0 Then
             BasePath = Directory.GetParent(Application.ExecutablePath).ToString & "\database\"
@@ -670,7 +676,7 @@ err_:
         Call User_fill()
     End Sub
 
-    Private Sub btnDBDir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDBDir.Click
+    Private Sub btnDBDir_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnDBDir.Click
         Dim DirectoryBrowser As New FolderBrowserDialog
 
         ' Then use the following code to create the Dialog window
@@ -704,11 +710,12 @@ err_:
         Call Find_DB()
     End Sub
 
-    Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
+    Private Sub btnCancel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCancel.Click
         End
     End Sub
 
-    Private Sub cmbLang_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbLang.SelectedIndexChanged
+    Private Sub cmbLang_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbLang.SelectedIndexChanged
 
 
         Dim objIniFile As New IniFile(PrPath & "base.ini")
@@ -718,10 +725,8 @@ err_:
         sLANGPATH = PrPath & "lang\" & cmbLang.Text
 
         Call LANG_frmLogin()
-
     End Sub
 
-    Private Sub txtPassword_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtPassword.TextChanged
-
+    Private Sub txtPassword_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles txtPassword.TextChanged
     End Sub
 End Class

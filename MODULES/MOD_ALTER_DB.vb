@@ -1,12 +1,11 @@
 ﻿Module MOD_ALTER_DB
-
     Public Sub ALTER_DB17351()
 
         On Error GoTo err_
 
         If _DBALTER = False Then Exit Sub
 
-        Dim rs As ADODB.Recordset
+        Dim rs As Recordset
         Dim sSQL17351, sSQL1734, sSQLver As String
 
         sSQL17351 = "ALTER TABLE Remont ADD GARANT Date"
@@ -19,30 +18,30 @@
 
                 sSQL17351 = "ALTER TABLE " & DBtabl & ".dbo.Remont ADD GARANT datetime"
 
-                rs = New ADODB.Recordset
-                rs.Open(sSQL17351, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open(sSQL17351, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
             Case "MS SQL"
 
                 sSQL17351 = "ALTER TABLE " & DBtabl & ".dbo.Remont ADD GARANT datetime"
 
-                rs = New ADODB.Recordset
-                rs.Open(sSQL17351, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open(sSQL17351, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
             Case "MS Access"
 
-                rs = New ADODB.Recordset
-                rs.Open(sSQL17351, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open(sSQL17351, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
             Case "MySQL"
 
                 sSQL17351 = "ALTER TABLE Remont ADD COLUMN GARANT Date"
 
-                rs = New ADODB.Recordset
-                rs.Open(sSQL17351, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open(sSQL17351, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
 
@@ -50,15 +49,15 @@
 
                 sSQL17351 = "ALTER TABLE Remont ADD COLUMN GARANT Date"
 
-                rs = New ADODB.Recordset
-                rs.Open(sSQL17351, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open(sSQL17351, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
 
             Case "PostgreSQL"
 
-                rs = New ADODB.Recordset
-                rs.Open(sSQL17351, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open(sSQL17351, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
             Case "SQLLite"
@@ -66,21 +65,21 @@
 
             Case "DSN"
 
-                rs = New ADODB.Recordset
-                rs.Open(sSQL17351, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open(sSQL17351, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
         End Select
 
-        rs = New ADODB.Recordset
-        rs.Open(sSQLver, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open(sSQLver, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
         rs = Nothing
 
         _DBALTER = False
 
 
         Exit Sub
-err_:
+        err_:
         ' MsgBox(Err.Description)
         rs = Nothing
         _DBALTER = True
@@ -166,5 +165,4 @@ err_:
     '        _DBALTER = True
 
     '    End Sub
-
 End Module

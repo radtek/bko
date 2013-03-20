@@ -5,10 +5,8 @@
     Public wmiPasword As String
     Public wmiDomen As String
 
-    
 
-
-    Private Sub frm_wmi_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+    Private Sub frm_wmi_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
         SendFonts(Me)
 
         Call LANG_frm_wmi()
@@ -28,18 +26,13 @@
         txtPassword.Text = wmiPasword
         wmiDomen = sTmp(0)
         txtDomen.Text = wmiDomen
-        
-
-
-
-
     End Sub
 
-    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
+    Private Sub Button2_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Button2.Click
         Me.Close()
     End Sub
 
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Button1.Click
 
         On Error GoTo err_
         wmiIP = txtIP.Text
@@ -49,12 +42,10 @@
         wmiDomen = txtDomen.Text
 
 
-
-
         Call LOAD_WMI2()
         Me.Close()
 
         Exit Sub
-err_:
+        err_:
     End Sub
 End Class

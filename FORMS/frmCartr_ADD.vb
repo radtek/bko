@@ -3,7 +3,7 @@
     Public EDTIDTr As Decimal
     Public CRTFU As Boolean
 
-    Private Sub frmCartr_ADD_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+    Private Sub frmCartr_ADD_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
 
         SendFonts(Me)
 
@@ -40,13 +40,12 @@
         End If
 
 
-
         Dim sSQL As String
         Dim Counter As Decimal
-        Dim rs As ADODB.Recordset
+        Dim rs As Recordset
         sSQL = "SELECT COUNT(*) AS total_number FROM kompy"
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
             Counter = .Fields("total_number").Value
@@ -57,14 +56,18 @@
 
         If Counter > 0 Then
             cmbSostUstr.Items.Clear()
-            rs = New ADODB.Recordset
-            rs.Open("SELECT * FROM kompy", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rs = New Recordset
+            rs.Open("SELECT * FROM kompy", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
             With rs
                 .MoveFirst()
                 Do While Not .EOF
-                    If .Fields("TipTehn").Value = "Printer" Or .Fields("TipTehn").Value = "KOpir" Or .Fields("TipTehn").Value = "MFU" Then
-                        cmbSostUstr.Items.Add(.Fields("PRINTER_NAME_1").Value & " (" & .Fields("filial").Value & "/" & .Fields("mesto").Value & ")" & " № " & .Fields("id").Value)
+                    If _
+                        .Fields("TipTehn").Value = "Printer" Or .Fields("TipTehn").Value = "KOpir" Or
+                        .Fields("TipTehn").Value = "MFU" Then
+                        cmbSostUstr.Items.Add(
+                            .Fields("PRINTER_NAME_1").Value & " (" & .Fields("filial").Value & "/" &
+                            .Fields("mesto").Value & ")" & " № " & .Fields("id").Value)
                     Else
                     End If
                     .MoveNext()
@@ -77,12 +80,12 @@
         End If
 
 
-
         'If Not IsDBNull(.Fields("os")) Then frmComputers.cmbModCartr.Text = .Fields("os").Value
         If EDTRCART = False Then
 
-            rs = New ADODB.Recordset
-            rs.Open("SELECT os FROM kompy where id=" & frmCRT3.cCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rs = New Recordset
+            rs.Open("SELECT os FROM kompy where id=" & frmCRT3.cCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                    LockTypeEnum.adLockOptimistic)
 
             With rs
 
@@ -95,14 +98,10 @@
         End If
 
 
-
-
         Exit Sub
-
-
     End Sub
 
-    Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
+    Private Sub btnAdd_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAdd.Click
 
         Dim uname As String
         Dim uname2 As String
@@ -125,9 +124,10 @@
 
         End If
 
-        Dim PROYZV As ADODB.Recordset
-        PROYZV = New ADODB.Recordset
-        PROYZV.Open("SELECT * FROM SPR_PROIZV WHERE Proizv='" & uname & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        Dim PROYZV As Recordset
+        PROYZV = New Recordset
+        PROYZV.Open("SELECT * FROM SPR_PROIZV WHERE Proizv='" & uname & "'", DB7, CursorTypeEnum.adOpenDynamic,
+                    LockTypeEnum.adLockOptimistic)
 
         With PROYZV
             uname = .Fields("Id").Value
@@ -141,9 +141,10 @@
             'AddCARTR(Combo2.Text, Combo4.Text, Combo3.Text)
         End If
 
-        Dim CARTR As ADODB.Recordset
-        CARTR = New ADODB.Recordset
-        CARTR.Open("SELECT * FROM spr_cart WHERE name='" & uname2 & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        Dim CARTR As Recordset
+        CARTR = New Recordset
+        CARTR.Open("SELECT * FROM spr_cart WHERE name='" & uname2 & "'", DB7, CursorTypeEnum.adOpenDynamic,
+                   LockTypeEnum.adLockOptimistic)
 
         With CARTR
             uname2 = .Fields("id").Value
@@ -156,9 +157,9 @@
 
             uname3 = cmbSostUstr.Text
 
-            Dim BASECOMP As ADODB.Recordset
-            BASECOMP = New ADODB.Recordset
-            BASECOMP.Open("SELECT * FROM kompy", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            Dim BASECOMP As Recordset
+            BASECOMP = New Recordset
+            BASECOMP.Open("SELECT * FROM kompy", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
             With BASECOMP
 
                 If Len(cmbSostUstr.Text) = 0 Then
@@ -166,7 +167,10 @@
                 Else
                     .MoveFirst()
                     Do While Not .EOF
-                        If uname3 = .Fields("PRINTER_NAME_1").Value & " (" & .Fields("filial").Value & "/" & .Fields("mesto").Value & ")" & " № " & .Fields("id").Value Then
+                        If _
+                            uname3 =
+                            .Fields("PRINTER_NAME_1").Value & " (" & .Fields("filial").Value & "/" &
+                            .Fields("mesto").Value & ")" & " № " & .Fields("id").Value Then
                             uname3 = .Fields("id").Value
                         End If
                         .MoveNext()
@@ -186,8 +190,6 @@
         End If
 
 
-
-
         uname4 = cmbSaler.Text
 
 
@@ -201,9 +203,10 @@
                 ' AddPost(cmbSaler.Text)
             End If
 
-            Dim Postav As ADODB.Recordset
-            Postav = New ADODB.Recordset
-            Postav.Open("SELECT * FROM SPR_Postav WHERE Name='" & uname4 & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            Dim Postav As Recordset
+            Postav = New Recordset
+            Postav.Open("SELECT * FROM SPR_Postav WHERE Name='" & uname4 & "'", DB7, CursorTypeEnum.adOpenDynamic,
+                        LockTypeEnum.adLockOptimistic)
 
             With Postav
                 uname4 = .Fields("id").Value
@@ -212,8 +215,6 @@
             Postav = Nothing
 
         End If
-
-
 
 
         Dim sSQL As String
@@ -225,9 +226,9 @@
 
         End If
 
-        Dim rs1 As ADODB.Recordset
-        rs1 = New ADODB.Recordset
-        rs1.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        Dim rs1 As Recordset
+        rs1 = New Recordset
+        rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         If Len(txtSerNumb.Text) = 0 Then txtSerNumb.Text = "Б\Н"
         If Len(txtSaleNumb.Text) = 0 Then txtSaleNumb.Text = 0
@@ -263,8 +264,6 @@
         rs1 = Nothing
 
 
-
-
         If CRTFU = True Then
 
             Call LOAD_CRT(frmComputers.sCOUNT)
@@ -283,31 +282,32 @@
         Exit Sub
     End Sub
 
-    Private Sub cmbSostUstr_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbSostUstr.SelectedIndexChanged
-
+    Private Sub cmbSostUstr_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbSostUstr.SelectedIndexChanged
     End Sub
 
-    Private Sub cmbModC_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbModC.SelectedIndexChanged
+    Private Sub cmbModC_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbModC.SelectedIndexChanged
 
         On Error Resume Next
-        Dim rs As ADODB.Recordset
+        Dim rs As Recordset
         Dim sSQL As String
         Dim uNI As String
-        rs = New ADODB.Recordset
-
+        rs = New Recordset
 
 
         sSQL = "SELECT * FROM spr_cart WHERE Name = '" & cmbModC.Text & "'"
 
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
 
             If Not IsDBNull(.Fields("proizv").Value) Then uNI = .Fields("proizv").Value
 
-            Dim PROYZV As ADODB.Recordset
-            PROYZV = New ADODB.Recordset
-            PROYZV.Open("SELECT * FROM SPR_PROIZV WHERE iD=" & uNI, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            Dim PROYZV As Recordset
+            PROYZV = New Recordset
+            PROYZV.Open("SELECT * FROM SPR_PROIZV WHERE iD=" & uNI, DB7, CursorTypeEnum.adOpenDynamic,
+                        LockTypeEnum.adLockOptimistic)
 
             With PROYZV
                 cmbProizv.Text = .Fields("proizv").Value
@@ -321,10 +321,9 @@
 
         rs.Close()
         rs = Nothing
-
     End Sub
 
-    Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
+    Private Sub btnCancel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCancel.Click
         Me.Close()
     End Sub
 End Class

@@ -1,18 +1,18 @@
 ﻿Public Class frmSQL
     Private m_SortingColumn As ColumnHeader
 
-    Private Sub frmSQL_Activated(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Activated
+    Private Sub frmSQL_Activated(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Activated
         frmMain.SaveInfTehButton.Enabled = False
         frmMain.ToolStripDropDownButton1.Enabled = False
     End Sub
 
-    Private Sub frmSQL_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+    Private Sub frmSQL_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
         SendFonts(Me)
         Call LANG_frmSQL()
 
-        Dim oRS As ADODB.Recordset
+        Dim oRS As Recordset
 
-        oRS = DB7.OpenSchema(ADODB.SchemaEnum.adSchemaTables, New Object() {Nothing, Nothing, Nothing, "TABLE"})
+        oRS = DB7.OpenSchema(SchemaEnum.adSchemaTables, New Object() {Nothing, Nothing, Nothing, "TABLE"})
 
 
         If Not (oRS.EOF) Then
@@ -29,19 +29,18 @@
 
         FillComboNET(cmbSaveQ, "Name", "T_Que", "", False, True)
         'cmbSaveQ
-
-
     End Sub
 
-    Private Sub cmbSaveQ_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbSaveQ.SelectedIndexChanged
+    Private Sub cmbSaveQ_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbSaveQ.SelectedIndexChanged
         On Error GoTo Error_
-        Dim rs As ADODB.Recordset 'Объявляем рекордсет
+        Dim rs As Recordset 'Объявляем рекордсет
         Dim sSQL As String 'Переменная, где будет размещён SQL запрос
 
         sSQL = "SELECT * FROM T_Que where name='" & cmbSaveQ.Text & "'"
 
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
 
         With rs
@@ -56,7 +55,7 @@
 
 
         Exit Sub
-Error_:
+        Error_:
     End Sub
 
     Private Sub LOAD_Q()
@@ -65,7 +64,7 @@ Error_:
         Me.Cursor = Cursors.WaitCursor
 
         Dim sSQL As String 'Переменная, где будет размещён SQL запрос
-        Dim rs As ADODB.Recordset 'Объявляем рекордсет
+        Dim rs As Recordset 'Объявляем рекордсет
         Dim arrAnimals(), uname As String
         Dim iCounter As Integer
 
@@ -89,15 +88,18 @@ Error_:
 
 
         If uname = "DELETE" Then
-            If MsgBox(LNGIniFile.GetString("frmSQL", "MSG1", "Данный запрос приведет к удалению информации продолжить?"), vbExclamation + vbYesNo, "Запрос на удаление") = vbNo Then Exit Sub
-            rs = New ADODB.Recordset
-            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            If _
+                MsgBox(
+                    LNGIniFile.GetString("frmSQL", "MSG1", "Данный запрос приведет к удалению информации продолжить?"),
+                    vbExclamation + vbYesNo, "Запрос на удаление") = vbNo Then Exit Sub
+            rs = New Recordset
+            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
             rs = Nothing
             Me.Cursor = Cursors.Default
             Exit Sub
         Else
-            rs = New ADODB.Recordset
-            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rs = New Recordset
+            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         End If
 
@@ -153,26 +155,25 @@ Error_:
         Me.Cursor = Cursors.Default
 
         Exit Sub
-Err_:
+        Err_:
         Me.Cursor = Cursors.Default
         MsgBox(Err.Description)
     End Sub
 
 
-    Private Sub lstTable_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lstTable.SelectedIndexChanged
+    Private Sub lstTable_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles lstTable.SelectedIndexChanged
         txtQ.Text = "SELECT * FROM " & lstTable.Text
 
         'Call LOAD_Q()
         Me.Invoke(New MethodInvoker(AddressOf LOAD_Q))
-
-
     End Sub
 
-    Private Sub btnClear_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClear.Click
+    Private Sub btnClear_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnClear.Click
         txtQ.Text = ""
     End Sub
 
-    Private Sub btnResSend_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnResSend.Click
+    Private Sub btnResSend_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnResSend.Click
         On Error GoTo Err_
 
         If LvQ.Items.Count = 0 Then Exit Sub
@@ -193,18 +194,18 @@ Err_:
 
 
         Exit Sub
-Err_:
+        Err_:
         MsgBox("Error " & Err.Number & " " & Err.Description)
     End Sub
 
-    Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
+    Private Sub btnSave_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSave.Click
         On Error GoTo Error_
         Dim strTmp As String
         Dim sTmp As String
 
-        Dim T_Que As ADODB.Recordset
-        T_Que = New ADODB.Recordset
-        T_Que.Open("SELECT * FROM T_Que", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        Dim T_Que As Recordset
+        T_Que = New Recordset
+        T_Que.Open("SELECT * FROM T_Que", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         If Len(txtQ.Text) = 0 Then Exit Sub
 
@@ -220,7 +221,6 @@ Err_:
             If Len(strTmp) = 0 Then Exit Sub
 
 
-
             With T_Que
                 .AddNew()
                 .Fields("name").Value = strTmp
@@ -233,15 +233,13 @@ Err_:
         End If
 
 
-
-
         T_Que.Close()
         T_Que = Nothing
         Exit Sub
-Error_:
+        Error_:
     End Sub
 
-    Private Sub btnExecute_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExecute.Click
+    Private Sub btnExecute_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnExecute.Click
         'Call LOAD_Q()
         LvQ.Sorting = SortOrder.None
         LvQ.ListViewItemSorter = Nothing
@@ -249,24 +247,24 @@ Error_:
         Me.Invoke(New MethodInvoker(AddressOf LOAD_Q))
     End Sub
 
-    Private Sub btnDelete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDelete.Click
+    Private Sub btnDelete_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnDelete.Click
 
         If Len(cmbSaveQ.Text) = 0 Then Exit Sub
 
-        Dim T_Que As ADODB.Recordset
-        T_Que = New ADODB.Recordset
-        T_Que.Open("DELETE FROM T_Que Where name ='" & cmbSaveQ.Text & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        Dim T_Que As Recordset
+        T_Que = New Recordset
+        T_Que.Open("DELETE FROM T_Que Where name ='" & cmbSaveQ.Text & "'", DB7, CursorTypeEnum.adOpenDynamic,
+                   LockTypeEnum.adLockOptimistic)
         T_Que = Nothing
         cmbSaveQ.Text = ""
         FillComboNET(Me.cmbSaveQ, "name", "T_Que", "", False, False)
-
     End Sub
 
-    Private Sub LvQ_ColumnClick(ByVal sender As Object, ByVal e As System.Windows.Forms.ColumnClickEventArgs) Handles LvQ.ColumnClick
-        Dim new_sorting_column As ColumnHeader = _
- LvQ.Columns(e.Column)
+    Private Sub LvQ_ColumnClick(ByVal sender As Object, ByVal e As ColumnClickEventArgs) Handles LvQ.ColumnClick
+        Dim new_sorting_column As ColumnHeader =
+                LvQ.Columns(e.Column)
 
-        Dim sort_order As System.Windows.Forms.SortOrder
+        Dim sort_order As SortOrder
         If m_SortingColumn Is Nothing Then
             sort_order = SortOrder.Ascending
         Else
@@ -294,7 +292,6 @@ Error_:
         LvQ.Sort()
     End Sub
 
-    Private Sub LvQ_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LvQ.SelectedIndexChanged
-
+    Private Sub LvQ_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles LvQ.SelectedIndexChanged
     End Sub
 End Class

@@ -1,5 +1,8 @@
-﻿Imports System
-Imports System.IO
+﻿Imports System.IO
+Imports Microsoft.Office.Interop.Word
+Imports XlBorderWeight = Microsoft.Office.Interop.Excel.XlBorderWeight
+Imports XlColorIndex = Microsoft.Office.Interop.Excel.XlColorIndex
+Imports XlLineStyle = Microsoft.Office.Interop.Excel.XlLineStyle
 
 Module MOD_OPENOFFICE
     Public oSheet As Object
@@ -17,8 +20,8 @@ Module MOD_OPENOFFICE
         On Error Resume Next
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
-        Dim rs As ADODB.Recordset
-        Dim rs1 As ADODB.Recordset
+        Dim rs As Recordset
+        Dim rs1 As Recordset
         Dim sSQL, sSQL1, scN, cOTV As String
 
         Dim iA As String
@@ -32,12 +35,12 @@ Module MOD_OPENOFFICE
         sSQL = "SELECT * FROM kompy WHERE TipTehn='PC' AND id=" & sID
 
 
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         Dim oSM As Object                 'Root object for accessing OpenOffice FROM VB
         Dim oDesk, oDoc As Object 'First objects FROM the API
-        Dim arg(-1) As Object                 'Ignore it for the moment !
+        Dim arg(- 1) As Object                 'Ignore it for the moment !
         Dim mmerge As Object
         Dim objCoreReflection As Object ' objects from OOo API 
 
@@ -63,7 +66,7 @@ Module MOD_OPENOFFICE
         ' replace all
         Dim oSrch As Object
 
-        Dim CONFIGURE As ADODB.Recordset
+        Dim CONFIGURE As Recordset
 
         Dim tiptehCP, uname, QWERT As String
         Dim GIST As Decimal = 0
@@ -79,7 +82,9 @@ Module MOD_OPENOFFICE
                 objCursor.setPropertyValue("CharColor", 255)
                 objCursor.setPropertyValue("CharShadowed", True)
 
-                objText.insertString(objCursor, LNGIniFile.GetString("MOD_OPENOFFICE", "MSG1", "Паспорт компьютера №") & ": " & sID & vbLf, False)
+                objText.insertString(objCursor,
+                                     LNGIniFile.GetString("MOD_OPENOFFICE", "MSG1", "Паспорт компьютера №") & ": " & sID &
+                                     vbLf, False)
                 objText.insertControlCharacter(objCursor, 0, False)
 
                 objTable = oDoc.createInstance("com.sun.star.text.TextTable")
@@ -111,8 +116,8 @@ Module MOD_OPENOFFICE
                 insertIntoCell("A7", LNGIniFile.GetString("MOD_OPENOFFICE", "MSG8", "Инвентарный номер"), objTable)
 
 
-                CONFIGURE = New ADODB.Recordset
-                CONFIGURE.Open("SELECT * FROM CONFIGURE", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockReadOnly)
+                CONFIGURE = New Recordset
+                CONFIGURE.Open("SELECT * FROM CONFIGURE", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockReadOnly)
                 With CONFIGURE
                     If Not IsDBNull(.Fields("ORG").Value) Then uname = .Fields("ORG").Value
                 End With
@@ -122,7 +127,9 @@ Module MOD_OPENOFFICE
                 cOTV = .Fields("OTvetstvennyj").Value
 
                 insertIntoCell("B1", uname, objTable)
-                insertIntoCell("B2", .Fields("filial").Value & "\" & .Fields("mesto").Value & "\" & .Fields("kabn").Value, objTable)
+                insertIntoCell("B2",
+                               .Fields("filial").Value & "\" & .Fields("mesto").Value & "\" & .Fields("kabn").Value,
+                               objTable)
                 insertIntoCell("B3", .Fields("TIP_COMPA").Value, objTable)
                 insertIntoCell("B4", .Fields("OTvetstvennyj").Value, objTable)
 
@@ -258,7 +265,9 @@ Module MOD_OPENOFFICE
                 If Len(.Fields("HDD_Name_1").Value) = 0 Then
                 Else
                     insertIntoCell(iA, LNGIniFile.GetString("MOD_OPENOFFICE", "MSG15", "Жесткий диск"), objTable)
-                    insertIntoCell(iB, .Fields("HDD_Name_1").Value & ", " & .Fields("HDD_OB_1").Value & ", SN: " & .Fields("HDD_SN_1").Value, objTable)
+                    insertIntoCell(iB,
+                                   .Fields("HDD_Name_1").Value & ", " & .Fields("HDD_OB_1").Value & ", SN: " &
+                                   .Fields("HDD_SN_1").Value, objTable)
                     insertIntoCell(iC, .Fields("HDD_PROIZV_1").Value, objTable)
 
                     intj = intj + 1
@@ -270,7 +279,9 @@ Module MOD_OPENOFFICE
                 If Len(.Fields("HDD_Name_2").Value) = 0 Then
                 Else
                     insertIntoCell(iA, LNGIniFile.GetString("MOD_OPENOFFICE", "MSG15", "Жесткий диск"), objTable)
-                    insertIntoCell(iB, .Fields("HDD_Name_2").Value & ", " & .Fields("HDD_OB_2").Value & ", SN: " & .Fields("HDD_SN_2").Value, objTable)
+                    insertIntoCell(iB,
+                                   .Fields("HDD_Name_2").Value & ", " & .Fields("HDD_OB_2").Value & ", SN: " &
+                                   .Fields("HDD_SN_2").Value, objTable)
                     insertIntoCell(iC, .Fields("HDD_PROIZV_2").Value, objTable)
 
                     intj = intj + 1
@@ -282,7 +293,9 @@ Module MOD_OPENOFFICE
                 If Len(.Fields("HDD_Name_3").Value) = 0 Then
                 Else
                     insertIntoCell(iA, LNGIniFile.GetString("MOD_OPENOFFICE", "MSG15", "Жесткий диск"), objTable)
-                    insertIntoCell(iB, .Fields("HDD_Name_3").Value & ", " & .Fields("HDD_OB_3").Value & ", SN: " & .Fields("HDD_SN_3").Value, objTable)
+                    insertIntoCell(iB,
+                                   .Fields("HDD_Name_3").Value & ", " & .Fields("HDD_OB_3").Value & ", SN: " &
+                                   .Fields("HDD_SN_3").Value, objTable)
                     insertIntoCell(iC, .Fields("HDD_PROIZV_3").Value, objTable)
 
                     intj = intj + 1
@@ -294,7 +307,9 @@ Module MOD_OPENOFFICE
                 If Len(.Fields("HDD_Name_4").Value) = 0 Then
                 Else
                     insertIntoCell(iA, LNGIniFile.GetString("MOD_OPENOFFICE", "MSG15", "Жесткий диск"), objTable)
-                    insertIntoCell(iB, .Fields("HDD_Name_4").Value & ", " & .Fields("HDD_OB_4").Value & ", SN: " & .Fields("HDD_SN_4").Value, objTable)
+                    insertIntoCell(iB,
+                                   .Fields("HDD_Name_4").Value & ", " & .Fields("HDD_OB_4").Value & ", SN: " &
+                                   .Fields("HDD_SN_4").Value, objTable)
                     insertIntoCell(iC, .Fields("HDD_PROIZV_4").Value, objTable)
 
                     intj = intj + 1
@@ -414,7 +429,8 @@ Module MOD_OPENOFFICE
                 If Len(.Fields("KEYBOARD_NAME").Value) = 0 Then
                 Else
                     insertIntoCell(iA, LNGIniFile.GetString("MOD_OPENOFFICE", "MSG22", "Клавиатура"), objTable)
-                    insertIntoCell(iB, .Fields("KEYBOARD_NAME").Value & ", SN: " & .Fields("KEYBOARD_SN").Value, objTable)
+                    insertIntoCell(iB, .Fields("KEYBOARD_NAME").Value & ", SN: " & .Fields("KEYBOARD_SN").Value,
+                                   objTable)
                     insertIntoCell(iC, .Fields("KEYBOARD_PROIZV").Value, objTable)
 
                     intj = intj + 1
@@ -450,7 +466,8 @@ Module MOD_OPENOFFICE
                 If Len(.Fields("MONITOR_NAME2").Value) = 0 Then
                 Else
                     insertIntoCell(iA, LNGIniFile.GetString("MOD_OPENOFFICE", "MSG24", "Монитор"), objTable)
-                    insertIntoCell(iB, .Fields("MONITOR_NAME2").Value & ", SN: " & .Fields("MONITOR_SN2").Value, objTable)
+                    insertIntoCell(iB, .Fields("MONITOR_NAME2").Value & ", SN: " & .Fields("MONITOR_SN2").Value,
+                                   objTable)
                     insertIntoCell(iC, .Fields("MONITOR_PROIZV2").Value, objTable)
 
                     intj = intj + 1
@@ -485,11 +502,11 @@ Module MOD_OPENOFFICE
                 End If
 
 
-
                 If Len(.Fields("PRINTER_NAME_1").Value) = 0 Then
                 Else
                     insertIntoCell(iA, LNGIniFile.GetString("MOD_OPENOFFICE", "MSG27", "Принтер"), objTable)
-                    insertIntoCell(iB, .Fields("PRINTER_NAME_1").Value & ", SN: " & .Fields("PRINTER_SN_1").Value, objTable)
+                    insertIntoCell(iB, .Fields("PRINTER_NAME_1").Value & ", SN: " & .Fields("PRINTER_SN_1").Value,
+                                   objTable)
                     insertIntoCell(iC, .Fields("PRINTER_PROIZV_1").Value, objTable)
 
                     intj = intj + 1
@@ -501,7 +518,8 @@ Module MOD_OPENOFFICE
                 If Len(.Fields("PRINTER_NAME_2").Value) = 0 Then
                 Else
                     insertIntoCell(iA, LNGIniFile.GetString("MOD_OPENOFFICE", "MSG27", "Принтер"), objTable)
-                    insertIntoCell(iB, .Fields("PRINTER_NAME_2").Value & ", SN: " & .Fields("PRINTER_SN_2").Value, objTable)
+                    insertIntoCell(iB, .Fields("PRINTER_NAME_2").Value & ", SN: " & .Fields("PRINTER_SN_2").Value,
+                                   objTable)
                     insertIntoCell(iC, .Fields("PRINTER_PROIZV_2").Value, objTable)
 
                     intj = intj + 1
@@ -513,7 +531,8 @@ Module MOD_OPENOFFICE
                 If Len(.Fields("PRINTER_NAME_3").Value) = 0 Then
                 Else
                     insertIntoCell(iA, LNGIniFile.GetString("MOD_OPENOFFICE", "MSG27", "Принтер"), objTable)
-                    insertIntoCell(iB, .Fields("PRINTER_NAME_3").Value & ", SN: " & .Fields("PRINTER_SN_3").Value, objTable)
+                    insertIntoCell(iB, .Fields("PRINTER_NAME_3").Value & ", SN: " & .Fields("PRINTER_SN_3").Value,
+                                   objTable)
                     insertIntoCell(iC, .Fields("PRINTER_PROIZV_3").Value, objTable)
 
                     intj = intj + 1
@@ -521,10 +540,6 @@ Module MOD_OPENOFFICE
                     iB = "B" & intj
                     iC = "C" & intj
                 End If
-
-
-
-
 
 
                 objText.insertControlCharacter(objCursor, 0, False)
@@ -543,8 +558,8 @@ Module MOD_OPENOFFICE
 
         sSQL1 = "SELECT count(*) as t_n FROM kompy WHERE PCL=" & sID
 
-        rs1 = New ADODB.Recordset
-        rs1.Open(sSQL1, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs1 = New Recordset
+        rs1.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs1
 
@@ -561,7 +576,8 @@ Module MOD_OPENOFFICE
 
             objText.insertControlCharacter(objCursor, 0, False)
 
-            objText.insertString(objCursor, LNGIniFile.GetString("MOD_OPENOFFICE", "MSG28", "В составе устройства") & vbLf, False)
+            objText.insertString(objCursor,
+                                 LNGIniFile.GetString("MOD_OPENOFFICE", "MSG28", "В составе устройства") & vbLf, False)
 
             objTable = oDoc.createInstance("com.sun.star.text.TextTable")
             objTable.Initialize(GIST + 1, 3)
@@ -585,8 +601,8 @@ Module MOD_OPENOFFICE
 
 
             sSQL1 = "SELECT * FROM kompy WHERE PCL=" & sID
-            rs1 = New ADODB.Recordset
-            rs1.Open(sSQL1, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rs1 = New Recordset
+            rs1.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
             intj = 2
             With rs1
@@ -632,26 +648,32 @@ Module MOD_OPENOFFICE
 
                             Case "FS"
 
-                                insertIntoCell(iA, LNGIniFile.GetString("MOD_OPENOFFICE", "MSG26", "Сетевой фильтр"), objTable)
+                                insertIntoCell(iA, LNGIniFile.GetString("MOD_OPENOFFICE", "MSG26", "Сетевой фильтр"),
+                                               objTable)
                                 insertIntoCell(iB, .Fields("NET_NAME").Value, objTable)
                                 insertIntoCell(iC, .Fields("PRINTER_SN_1").Value, objTable)
 
 
                             Case "IBP"
 
-                                insertIntoCell(iA, LNGIniFile.GetString("MOD_OPENOFFICE", "MSG35", "Источник бесперебойного питания"), objTable)
+                                insertIntoCell(iA,
+                                               LNGIniFile.GetString("MOD_OPENOFFICE", "MSG35",
+                                                                    "Источник бесперебойного питания"), objTable)
                                 insertIntoCell(iB, .Fields("NET_NAME").Value, objTable)
                                 insertIntoCell(iC, .Fields("PRINTER_SN_1").Value, objTable)
 
                             Case "SOUND"
 
-                                insertIntoCell(iA, LNGIniFile.GetString("MOD_OPENOFFICE", "MSG25", "Акустическая система"), objTable)
+                                insertIntoCell(iA,
+                                               LNGIniFile.GetString("MOD_OPENOFFICE", "MSG25", "Акустическая система"),
+                                               objTable)
                                 insertIntoCell(iB, .Fields("NET_NAME").Value, objTable)
                                 insertIntoCell(iC, .Fields("PRINTER_SN_1").Value, objTable)
 
                             Case "USB"
 
-                                insertIntoCell(iA, LNGIniFile.GetString("MOD_OPENOFFICE", "MSG37", "USB Устройство"), objTable)
+                                insertIntoCell(iA, LNGIniFile.GetString("MOD_OPENOFFICE", "MSG37", "USB Устройство"),
+                                               objTable)
                                 insertIntoCell(iB, .Fields("NET_NAME").Value, objTable)
                                 insertIntoCell(iC, .Fields("PRINTER_SN_1").Value, objTable)
 
@@ -664,14 +686,14 @@ Module MOD_OPENOFFICE
 
                             Case "KEYB"
 
-                                insertIntoCell(iA, LNGIniFile.GetString("MOD_OPENOFFICE", "MSG22", "Клавиатура"), objTable)
+                                insertIntoCell(iA, LNGIniFile.GetString("MOD_OPENOFFICE", "MSG22", "Клавиатура"),
+                                               objTable)
                                 insertIntoCell(iB, .Fields("NET_NAME").Value, objTable)
                                 insertIntoCell(iC, .Fields("PRINTER_SN_1").Value, objTable)
 
                                 'insertIntoCell(iD, .Fields("INV_NO_PRINTER").Value, objTable)
 
                         End Select
-
 
 
                         intj = intj + 1
@@ -689,14 +711,12 @@ Module MOD_OPENOFFICE
         End If
 
 
-
-
         'Установленное ПО
 
         sSQL1 = "SELECT count(*) as t_n FROM SOFT_INSTALL WHERE id_comp=" & sID
 
-        rs1 = New ADODB.Recordset
-        rs1.Open(sSQL1, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs1 = New Recordset
+        rs1.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs1
 
@@ -723,11 +743,13 @@ Module MOD_OPENOFFICE
 
 
             intj = 1
-            insertIntoCell("A1", LNGIniFile.GetString("MOD_OPENOFFICE", "MSG38", "Установленное Программное обеспечение"), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
+            insertIntoCell("A1",
+                           LNGIniFile.GetString("MOD_OPENOFFICE", "MSG38", "Установленное Программное обеспечение"),
+                           objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
 
             sSQL1 = "SELECT * FROM SOFT_INSTALL WHERE id_comp=" & sID
-            rs1 = New ADODB.Recordset
-            rs1.Open(sSQL1, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rs1 = New Recordset
+            rs1.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
             With rs1
                 If .RecordCount <> 0 Then
                     .MoveFirst()
@@ -754,9 +776,10 @@ Module MOD_OPENOFFICE
         'ПЕРЕМЕЩЕНИЕ ТЕХНИКИ
 
 
-        Dim rscount As ADODB.Recordset 'Объявляем рекордсет
-        rscount = New ADODB.Recordset
-        rscount.Open("SELECT COUNT(*) AS total_number FROM dvig WHERE id_comp=" & sID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        Dim rscount As Recordset 'Объявляем рекордсет
+        rscount = New Recordset
+        rscount.Open("SELECT COUNT(*) AS total_number FROM dvig WHERE id_comp=" & sID, DB7, CursorTypeEnum.adOpenDynamic,
+                     LockTypeEnum.adLockOptimistic)
 
         With rscount
             GIST = .Fields("total_number").Value
@@ -770,7 +793,8 @@ Module MOD_OPENOFFICE
 
             objText.insertControlCharacter(objCursor, 0, False)
 
-            objText.insertString(objCursor, LNGIniFile.GetString("MOD_OPENOFFICE", "MSG39", "Перемещение техники") & vbLf, False)
+            objText.insertString(objCursor,
+                                 LNGIniFile.GetString("MOD_OPENOFFICE", "MSG39", "Перемещение техники") & vbLf, False)
 
             objTable = oDoc.createInstance("com.sun.star.text.TextTable")
             objTable.Initialize(GIST + 1, 4)
@@ -793,8 +817,9 @@ Module MOD_OPENOFFICE
             insertIntoCell("C1", LNGIniFile.GetString("MOD_OPENOFFICE", "MSG42", "Причина"), objTable)
             insertIntoCell("D1", LNGIniFile.GetString("MOD_OPENOFFICE", "MSG43", "Дата"), objTable)
 
-            rscount = New ADODB.Recordset
-            rscount.Open("SELECT * FROM dvig WHERE id_comp=" & sID & " ORDER by data", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rscount = New Recordset
+            rscount.Open("SELECT * FROM dvig WHERE id_comp=" & sID & " ORDER by data", DB7, CursorTypeEnum.adOpenDynamic,
+                         LockTypeEnum.adLockOptimistic)
 
             intj = 2
             With rscount
@@ -825,8 +850,9 @@ Module MOD_OPENOFFICE
         '#####################################################################################
         'РЕМОНТЫ
 
-        rscount = New ADODB.Recordset
-        rscount.Open("SELECT COUNT(*) AS total_number FROM Remont WHERE id_comp=" & sID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rscount = New Recordset
+        rscount.Open("SELECT COUNT(*) AS total_number FROM Remont WHERE id_comp=" & sID, DB7,
+                     CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rscount
             GIST = .Fields("total_number").Value
@@ -865,8 +891,9 @@ Module MOD_OPENOFFICE
             insertIntoCell("D1", LNGIniFile.GetString("MOD_OPENOFFICE", "MSG48", "Уровень"), objTable)
             insertIntoCell("E1", LNGIniFile.GetString("MOD_OPENOFFICE", "MSG49", "Выполнение"), objTable)
 
-            rscount = New ADODB.Recordset
-            rscount.Open("SELECT * FROM Remont WHERE id_comp=" & sID & " ORDER by Date", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rscount = New Recordset
+            rscount.Open("SELECT * FROM Remont WHERE id_comp=" & sID & " ORDER by Date", DB7,
+                         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
             'Dim A As String
 
@@ -898,7 +925,6 @@ Module MOD_OPENOFFICE
         End If
 
 
-
         objText.insertString(objCursor, LNGIniFile.GetString("MOD_OPENOFFICE", "MSG50", "Подписи") & vbLf, False)
 
 
@@ -921,8 +947,8 @@ Module MOD_OPENOFFICE
         'objRow.setPropertyValue "BackColor", vbWhite
 
 
-        CONFIGURE = New ADODB.Recordset
-        CONFIGURE.Open("SELECT * FROM CONFIGURE", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        CONFIGURE = New Recordset
+        CONFIGURE.Open("SELECT * FROM CONFIGURE", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
         With CONFIGURE
             If .RecordCount <> 0 Then
                 If Not IsDBNull(.Fields("SISADM")) Then uname = .Fields("SISADM").Value
@@ -934,19 +960,12 @@ Module MOD_OPENOFFICE
         CONFIGURE = Nothing
 
 
-
         'Формируем заголовок
         insertIntoCell("A1", LNGIniFile.GetString("MOD_OPENOFFICE", "MSG51", "Системный администратор"), objTable)
         insertIntoCell("B1", LNGIniFile.GetString("MOD_OPENOFFICE", "MSG52", "Подписи ответственных лиц"), objTable)
 
         insertIntoCell("A2", uname, objTable)
         insertIntoCell("B2", cOTV, objTable)
-
-
-
-
-
-
     End Sub
 
     Public Sub blanks_my_o(ByVal tipot As String)
@@ -959,14 +978,13 @@ Module MOD_OPENOFFICE
         'tipot = frmMain.lbl_path 'App.Path & "\blanks\blanks_my.dot"
 
 
-
         If Len(tipot) = 0 Then Exit Sub
         On Error Resume Next
 
-        Dim rs1 As ADODB.Recordset
+        Dim rs1 As Recordset
         sSQL1 = "SELECT * FROM CONFIGURE"
-        rs1 = New ADODB.Recordset
-        rs1.Open(sSQL1, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs1 = New Recordset
+        rs1.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs1
             Organ = .Fields("org").Value
@@ -976,10 +994,10 @@ Module MOD_OPENOFFICE
         rs1 = Nothing
 
 
-        Dim rs As ADODB.Recordset
+        Dim rs As Recordset
         sSQL = "SELECT * FROM kompy WHERE id = " & frmComputers.sCOUNT
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         Dim intj As String
         Dim A, B, C, D, E As String
@@ -987,7 +1005,7 @@ Module MOD_OPENOFFICE
 
         Dim oSM As Object            'Root object for accessing OpenOffice FROM VB
         Dim oDesk, oDoc As Object 'First objects FROM the API
-        Dim arg(-1) As Object             'Ignore it for the moment !
+        Dim arg(- 1) As Object             'Ignore it for the moment !
         Dim mmerge As Object
         'Instanciate OOo : this line is mandatory with VB for OOo API
 
@@ -1796,9 +1814,10 @@ Module MOD_OPENOFFICE
                 Debug.Print(oDoc.replaceAll(oSrch))
 
 
-                Dim rs2 As ADODB.Recordset
-                rs2 = New ADODB.Recordset
-                rs2.Open("Select Postav FROM Garantia_sis WHERE Id_Comp=" & .Fields("id").Value, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                Dim rs2 As Recordset
+                rs2 = New Recordset
+                rs2.Open("Select Postav FROM Garantia_sis WHERE Id_Comp=" & .Fields("id").Value, DB7,
+                         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
 
                 With rs2
@@ -1824,7 +1843,6 @@ Module MOD_OPENOFFICE
         rs = Nothing
 
 
-
         Dim objIniFile As New IniFile(PrPath & "base.ini")
 
         uname = objIniFile.GetString("MYBLANK", "VSU", "0")
@@ -1836,8 +1854,8 @@ Module MOD_OPENOFFICE
             sSQL1 = "SELECT count(*) as t_n FROM kompy WHERE PCL=" & frmComputers.sCOUNT
             Dim GIST As String
 
-            rs1 = New ADODB.Recordset
-            rs1.Open(sSQL1, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rs1 = New Recordset
+            rs1.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
             With rs1
 
@@ -1854,7 +1872,9 @@ Module MOD_OPENOFFICE
                 Dim iA, iB, iC, iD As String
 
                 objText.insertControlCharacter(objCursor, 0, False)
-                objText.insertString(objCursor, LNGIniFile.GetString("MOD_OPENOFFICE", "MSG28", "В составе устройства") & vbLf, False)
+                objText.insertString(objCursor,
+                                     LNGIniFile.GetString("MOD_OPENOFFICE", "MSG28", "В составе устройства") & vbLf,
+                                     False)
 
 
                 objTable = oDoc.createInstance("com.sun.star.text.TextTable")
@@ -1871,17 +1891,19 @@ Module MOD_OPENOFFICE
                 intj = 1
 
 
-                insertIntoCell("A1", LNGIniFile.GetString("MOD_OPENOFFICE", "MSG28", "В составе устройства"), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
-                insertIntoCell("B1", LNGIniFile.GetString("MOD_OPENOFFICE", "MSG10", "Модель"), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
-                insertIntoCell("C1", LNGIniFile.GetString("MOD_OPENOFFICE", "MSG31", "Серийный номер"), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
-                insertIntoCell("D1", LNGIniFile.GetString("MOD_OPENOFFICE", "MSG8", "Инвентарный номер"), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
-
-
+                insertIntoCell("A1", LNGIniFile.GetString("MOD_OPENOFFICE", "MSG28", "В составе устройства"), objTable) _
+                'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                insertIntoCell("B1", LNGIniFile.GetString("MOD_OPENOFFICE", "MSG10", "Модель"), objTable) _
+                'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                insertIntoCell("C1", LNGIniFile.GetString("MOD_OPENOFFICE", "MSG31", "Серийный номер"), objTable) _
+                'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                insertIntoCell("D1", LNGIniFile.GetString("MOD_OPENOFFICE", "MSG8", "Инвентарный номер"), objTable) _
+                'lv_teh_fil_otd.SELECTedItem.Text, objTable
 
 
                 sSQL1 = "SELECT * FROM kompy WHERE PCL=" & frmComputers.sCOUNT
-                rs1 = New ADODB.Recordset
-                rs1.Open(sSQL1, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs1 = New Recordset
+                rs1.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                 With rs1
                     If .RecordCount <> 0 Then
                         .MoveFirst()
@@ -1895,7 +1917,8 @@ Module MOD_OPENOFFICE
 
                                 Case "Printer"
 
-                                    insertIntoCell(iA, LNGIniFile.GetString("MOD_OPENOFFICE", "MSG27", "Принтер"), objTable)
+                                    insertIntoCell(iA, LNGIniFile.GetString("MOD_OPENOFFICE", "MSG27", "Принтер"),
+                                                   objTable)
                                     insertIntoCell(iB, .Fields("NET_NAME").Value, objTable)
                                     insertIntoCell(iC, .Fields("PRINTER_SN_1").Value, objTable)
                                     insertIntoCell(iD, .Fields("INV_NO_PRINTER").Value, objTable)
@@ -1909,7 +1932,8 @@ Module MOD_OPENOFFICE
 
                                 Case "MONITOR"
 
-                                    insertIntoCell(iA, LNGIniFile.GetString("MOD_OPENOFFICE", "MSG24", "Монитор"), objTable)
+                                    insertIntoCell(iA, LNGIniFile.GetString("MOD_OPENOFFICE", "MSG24", "Монитор"),
+                                                   objTable)
                                     insertIntoCell(iB, .Fields("NET_NAME").Value, objTable)
                                     insertIntoCell(iC, .Fields("MONITOR_SN").Value, objTable)
                                     insertIntoCell(iD, .Fields("INV_NO_MONITOR").Value, objTable)
@@ -1923,14 +1947,16 @@ Module MOD_OPENOFFICE
 
                                 Case "SCANER"
 
-                                    insertIntoCell(iA, LNGIniFile.GetString("MOD_OPENOFFICE", "MSG34", "Сканер"), objTable)
+                                    insertIntoCell(iA, LNGIniFile.GetString("MOD_OPENOFFICE", "MSG34", "Сканер"),
+                                                   objTable)
                                     insertIntoCell(iB, .Fields("NET_NAME").Value, objTable)
                                     insertIntoCell(iC, .Fields("PRINTER_SN_1").Value, objTable)
                                     insertIntoCell(iD, .Fields("INV_NO_PRINTER").Value, objTable)
 
                                 Case "FS"
 
-                                    insertIntoCell(iA, LNGIniFile.GetString("MOD_OPENOFFICE", "MSG26", "Сетевой фильтр"), objTable)
+                                    insertIntoCell(iA, LNGIniFile.GetString("MOD_OPENOFFICE", "MSG26", "Сетевой фильтр"),
+                                                   objTable)
                                     insertIntoCell(iB, .Fields("NET_NAME").Value, objTable)
                                     insertIntoCell(iC, .Fields("PRINTER_SN_1").Value, objTable)
                                     insertIntoCell(iD, .Fields("INV_NO_PRINTER").Value, objTable)
@@ -1938,21 +1964,26 @@ Module MOD_OPENOFFICE
 
                                 Case "IBP"
 
-                                    insertIntoCell(iA, LNGIniFile.GetString("MOD_OPENOFFICE", "MSG35", "Источник бесперебойного питания"), objTable)
+                                    insertIntoCell(iA,
+                                                   LNGIniFile.GetString("MOD_OPENOFFICE", "MSG35",
+                                                                        "Источник бесперебойного питания"), objTable)
                                     insertIntoCell(iB, .Fields("NET_NAME").Value, objTable)
                                     insertIntoCell(iC, .Fields("PRINTER_SN_1").Value, objTable)
                                     insertIntoCell(iD, .Fields("INV_NO_PRINTER").Value, objTable)
 
                                 Case "SOUND"
 
-                                    insertIntoCell(iA, LNGIniFile.GetString("MOD_OPENOFFICE", "MSG25", "Акустическая система"), objTable)
+                                    insertIntoCell(iA,
+                                                   LNGIniFile.GetString("MOD_OPENOFFICE", "MSG25",
+                                                                        "Акустическая система"), objTable)
                                     insertIntoCell(iB, .Fields("NET_NAME").Value, objTable)
                                     insertIntoCell(iC, .Fields("PRINTER_SN_1").Value, objTable)
                                     insertIntoCell(iD, .Fields("INV_NO_PRINTER").Value, objTable)
 
                                 Case "USB"
 
-                                    insertIntoCell(iA, LNGIniFile.GetString("MOD_OPENOFFICE", "MSG37", "USB Устройство"), objTable)
+                                    insertIntoCell(iA, LNGIniFile.GetString("MOD_OPENOFFICE", "MSG37", "USB Устройство"),
+                                                   objTable)
                                     insertIntoCell(iB, .Fields("NET_NAME").Value, objTable)
                                     insertIntoCell(iC, .Fields("PRINTER_SN_1").Value, objTable)
                                     insertIntoCell(iD, .Fields("INV_NO_PRINTER").Value, objTable)
@@ -1960,10 +1991,7 @@ Module MOD_OPENOFFICE
                             End Select
 
 
-
                             intj = intj + 1
-
-
 
 
                             .MoveNext()
@@ -1979,7 +2007,7 @@ Module MOD_OPENOFFICE
             End If
         End If
 
-        Dim rscount As ADODB.Recordset 'Объявляем рекордсет
+        Dim rscount As Recordset 'Объявляем рекордсет
         Dim Coun1 As Long
 
 
@@ -1990,8 +2018,9 @@ Module MOD_OPENOFFICE
             '#####################################################################################
             'Установленное ПО
 
-            rscount = New ADODB.Recordset
-            rscount.Open("SELECT COUNT(*) AS total_number FROM SOFT_INSTALL WHERE id_comp=" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rscount = New Recordset
+            rscount.Open("SELECT COUNT(*) AS total_number FROM SOFT_INSTALL WHERE id_comp=" & frmComputers.sCOUNT, DB7,
+                         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
             With rscount
                 Coun1 = .Fields("total_number").Value
@@ -2004,7 +2033,9 @@ Module MOD_OPENOFFICE
             If Coun1 > 0 Then
 
                 objText.insertControlCharacter(objCursor, 0, False)
-                objText.insertString(objCursor, LNGIniFile.GetString("MOD_OPENOFFICE", "MSG38", "Установленное Программное обеспечение") & vbLf, False)
+                objText.insertString(objCursor,
+                                     LNGIniFile.GetString("MOD_OPENOFFICE", "MSG38",
+                                                          "Установленное Программное обеспечение") & vbLf, False)
 
 
                 objTable = oDoc.createInstance("com.sun.star.text.TextTable")
@@ -2028,10 +2059,13 @@ Module MOD_OPENOFFICE
 
                 'frmContacts.SoftClick()
                 'Формируем заголовок
-                insertIntoCell("A1", LNGIniFile.GetString("MOD_OPENOFFICE", "MSG38", "Установленное Программное обеспечение"), objTable)
+                insertIntoCell("A1",
+                               LNGIniFile.GetString("MOD_OPENOFFICE", "MSG38", "Установленное Программное обеспечение"),
+                               objTable)
 
-                rscount = New ADODB.Recordset
-                rscount.Open("SELECT * FROM SOFT_INSTALL WHERE id_comp=" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rscount = New Recordset
+                rscount.Open("SELECT * FROM SOFT_INSTALL WHERE id_comp=" & frmComputers.sCOUNT, DB7,
+                             CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 'Dim A As String
 
@@ -2070,8 +2104,9 @@ Module MOD_OPENOFFICE
 
 
             'Dim rscount As ADODB.Recordset 'Объявляем рекордсет
-            rscount = New ADODB.Recordset
-            rscount.Open("SELECT COUNT(*) AS total_number FROM dvig WHERE id_comp=" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rscount = New Recordset
+            rscount.Open("SELECT COUNT(*) AS total_number FROM dvig WHERE id_comp=" & frmComputers.sCOUNT, DB7,
+                         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
             With rscount
                 Coun1 = .Fields("total_number").Value
@@ -2086,7 +2121,9 @@ Module MOD_OPENOFFICE
 
                 objText.insertControlCharacter(objCursor, 0, False)
 
-                objText.insertString(objCursor, LNGIniFile.GetString("MOD_OPENOFFICE", "MSG39", "Перемещение техники") & vbLf, False)
+                objText.insertString(objCursor,
+                                     LNGIniFile.GetString("MOD_OPENOFFICE", "MSG39", "Перемещение техники") & vbLf,
+                                     False)
 
                 objTable = oDoc.createInstance("com.sun.star.text.TextTable")
                 objTable.Initialize(Coun1 + 1, 4)
@@ -2113,8 +2150,9 @@ Module MOD_OPENOFFICE
                 insertIntoCell("C1", LNGIniFile.GetString("MOD_OPENOFFICE", "MSG42", "Причина"), objTable)
                 insertIntoCell("D1", LNGIniFile.GetString("MOD_OPENOFFICE", "MSG43", "Дата"), objTable)
 
-                rscount = New ADODB.Recordset
-                rscount.Open("SELECT * FROM dvig WHERE id_comp=" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rscount = New Recordset
+                rscount.Open("SELECT * FROM dvig WHERE id_comp=" & frmComputers.sCOUNT, DB7,
+                             CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
 
                 intj = 2
@@ -2153,8 +2191,9 @@ Module MOD_OPENOFFICE
 
         If uname = 1 Then
 
-            rscount = New ADODB.Recordset
-            rscount.Open("SELECT COUNT(*) AS total_number FROM Remont WHERE id_comp=" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rscount = New Recordset
+            rscount.Open("SELECT COUNT(*) AS total_number FROM Remont WHERE id_comp=" & frmComputers.sCOUNT, DB7,
+                         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
             With rscount
                 Coun1 = .Fields("total_number").Value
@@ -2193,8 +2232,9 @@ Module MOD_OPENOFFICE
                 insertIntoCell("D1", LNGIniFile.GetString("MOD_OPENOFFICE", "MSG48", "Уровень"), objTable)
                 insertIntoCell("E1", LNGIniFile.GetString("MOD_OPENOFFICE", "MSG49", "Выполнение"), objTable)
 
-                rscount = New ADODB.Recordset
-                rscount.Open("SELECT * FROM Remont WHERE id_comp=" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rscount = New Recordset
+                rscount.Open("SELECT * FROM Remont WHERE id_comp=" & frmComputers.sCOUNT, DB7,
+                             CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 intj = 2
                 With rscount
@@ -2223,37 +2263,36 @@ Module MOD_OPENOFFICE
 
             End If
         End If
-
-
     End Sub
 
     Public Sub PASSWORD_MFU(ByVal sSID As String, ByVal sTEH As String)
 
         Dim tipot, SIS, sSQL As String
 
-        Dim CONFIGURE As ADODB.Recordset
+        Dim CONFIGURE As Recordset
 
 
         Select Case sTEH
 
             Case "Printer"
 
-                tipot = Directory.GetParent(Application.ExecutablePath).ToString & "\blanks\pswgl4.dot"
+                tipot = Directory.GetParent(System.Windows.Forms.Application.ExecutablePath).ToString &
+                        "\blanks\pswgl4.dot"
 
             Case "MFU"
 
-                tipot = Directory.GetParent(Application.ExecutablePath).ToString & "\blanks\pswgl5.dot"
+                tipot = Directory.GetParent(System.Windows.Forms.Application.ExecutablePath).ToString &
+                        "\blanks\pswgl5.dot"
 
             Case "KOpir"
-                tipot = Directory.GetParent(Application.ExecutablePath).ToString & "\blanks\pswgl3.dot"
+                tipot = Directory.GetParent(System.Windows.Forms.Application.ExecutablePath).ToString &
+                        "\blanks\pswgl3.dot"
 
         End Select
 
 
-
-
-        CONFIGURE = New ADODB.Recordset
-        CONFIGURE.Open("SELECT * FROM CONFIGURE", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        CONFIGURE = New Recordset
+        CONFIGURE.Open("SELECT * FROM CONFIGURE", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
         With CONFIGURE
             SIS = .Fields("sisadm").Value
         End With
@@ -2266,7 +2305,7 @@ Module MOD_OPENOFFICE
             Case "OpenOffice.org"
                 Dim oSM As Object            'Root object for accessing OpenOffice FROM VB
                 Dim oDesk, oDoc As Object 'First objects FROM the API
-                Dim arg(-1) As Object             'Ignore it for the moment !
+                Dim arg(- 1) As Object             'Ignore it for the moment !
 
                 oSM = CreateObject("com.sun.star.ServiceManager")
 
@@ -2283,10 +2322,10 @@ Module MOD_OPENOFFICE
                 ' replace all
                 Dim oSrch As Object
 
-                Dim rs As ADODB.Recordset
+                Dim rs As Recordset
                 sSQL = "SELECT * FROM kompy WHERE id = " & sSID
-                rs = New ADODB.Recordset
-                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
 
                 With rs
@@ -2297,7 +2336,8 @@ Module MOD_OPENOFFICE
                     Debug.Print(oDoc.replaceAll(oSrch))
 
                     oSrch.setSearchString("kab otd")
-                    oSrch.setReplaceString(.Fields("FILIAL").Value & "\" & .Fields("mesto").Value & "\" & .Fields("kabn").Value)
+                    oSrch.setReplaceString(
+                        .Fields("FILIAL").Value & "\" & .Fields("mesto").Value & "\" & .Fields("kabn").Value)
                     Debug.Print(oDoc.replaceAll(oSrch))
 
                     oSrch.setSearchString("otvet")
@@ -2329,9 +2369,9 @@ Module MOD_OPENOFFICE
 
             Case Else
 
-                Dim Wrd As Word.Application
+                Dim Wrd As Application
                 Dim WrdDc As Object
-                Wrd = New Word.Application
+                Wrd = New Application
 
                 WrdDc = Wrd.Documents.Open(tipot, , False)  'Application.
                 WrdDc.Application.Visible = True
@@ -2340,10 +2380,10 @@ Module MOD_OPENOFFICE
                 Wrd.Selection.Find.Replacement.ClearFormatting()
                 'Номер
 
-                Dim rs As ADODB.Recordset
+                Dim rs As Recordset
                 sSQL = "SELECT * FROM kompy WHERE id = " & sSID
-                rs = New ADODB.Recordset
-                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 Dim a1, a2, a3, a4, a5, a6, a7 As String
                 With rs
@@ -2366,7 +2406,7 @@ Module MOD_OPENOFFICE
                     .Text = "naimenovan"
                     .Replacement.Text = a1
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -2374,13 +2414,13 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "kab otd"
                     .Replacement.Text = a2
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -2388,13 +2428,13 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "otvet"
                     .Replacement.Text = a3
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -2402,13 +2442,13 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "tel"
                     .Replacement.Text = a4
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -2416,13 +2456,13 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "serial"
                     .Replacement.Text = a5
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -2430,13 +2470,13 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "invent"
                     .Replacement.Text = a6
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -2444,13 +2484,13 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "Format"
                     .Replacement.Text = a7
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -2458,30 +2498,27 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
                 WrdDc = Nothing
                 Wrd = Nothing
         End Select
-
-
-
     End Sub
 
     Public Sub PASSWORD_NET(ByVal sSID As String)
 
         Dim tipot, SIS, sSQL As String
 
-        Dim CONFIGURE As ADODB.Recordset
+        Dim CONFIGURE As Recordset
 
-        CONFIGURE = New ADODB.Recordset
-        CONFIGURE.Open("SELECT * FROM CONFIGURE", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        CONFIGURE = New Recordset
+        CONFIGURE.Open("SELECT * FROM CONFIGURE", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
         With CONFIGURE
             SIS = .Fields("sisadm").Value
         End With
         CONFIGURE.Close()
         CONFIGURE = Nothing
 
-        tipot = Directory.GetParent(Application.ExecutablePath).ToString & "\blanks\pswgl6.dot"
+        tipot = Directory.GetParent(System.Windows.Forms.Application.ExecutablePath).ToString & "\blanks\pswgl6.dot"
 
 
         Select Case sOfficePACK
@@ -2490,7 +2527,7 @@ Module MOD_OPENOFFICE
 
                 Dim oSM As Object            'Root object for accessing OpenOffice FROM VB
                 Dim oDesk, oDoc As Object 'First objects FROM the API
-                Dim arg(-1) As Object             'Ignore it for the moment !
+                Dim arg(- 1) As Object             'Ignore it for the moment !
 
                 oSM = CreateObject("com.sun.star.ServiceManager")
 
@@ -2507,10 +2544,10 @@ Module MOD_OPENOFFICE
                 ' replace all
                 Dim oSrch As Object
 
-                Dim rs As ADODB.Recordset
+                Dim rs As Recordset
                 sSQL = "SELECT * FROM kompy WHERE id = " & sSID
-                rs = New ADODB.Recordset
-                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
 
                 With rs
@@ -2542,7 +2579,8 @@ Module MOD_OPENOFFICE
 
                     'proizv
                     oSrch.setSearchString("_kab\otd")
-                    oSrch.setReplaceString(.Fields("FILIAL").Value & "\" & .Fields("mesto").Value & "\" & .Fields("kabn").Value)
+                    oSrch.setReplaceString(
+                        .Fields("FILIAL").Value & "\" & .Fields("mesto").Value & "\" & .Fields("kabn").Value)
                     Debug.Print(oDoc.replaceAll(oSrch))
 
                     oSrch.setSearchString("otvet")
@@ -2564,9 +2602,9 @@ Module MOD_OPENOFFICE
 
             Case Else
 
-                Dim Wrd As Word.Application
+                Dim Wrd As Application
                 Dim WrdDc As Object
-                Wrd = New Word.Application
+                Wrd = New Application
 
                 WrdDc = Wrd.Documents.Open(tipot, , False)  'Application.
                 WrdDc.Application.Visible = True
@@ -2575,10 +2613,10 @@ Module MOD_OPENOFFICE
                 Wrd.Selection.Find.Replacement.ClearFormatting()
                 'Номер
 
-                Dim rs As ADODB.Recordset
+                Dim rs As Recordset
                 sSQL = "SELECT * FROM kompy WHERE id = " & sSID
-                rs = New ADODB.Recordset
-                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 Dim a1, a2, a3, a4, a5, a6, a7, a8, a9 As String
                 With rs
@@ -2604,7 +2642,7 @@ Module MOD_OPENOFFICE
                     .Text = "naimenovan"
                     .Replacement.Text = a1
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -2612,13 +2650,13 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "_kab\otd"
                     .Replacement.Text = a2
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -2626,13 +2664,13 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "proizv"
                     .Replacement.Text = a3
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -2640,13 +2678,13 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "tel"
                     .Replacement.Text = ""
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -2654,13 +2692,13 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "serial"
                     .Replacement.Text = a7
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -2668,13 +2706,13 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "porti"
                     .Replacement.Text = a4
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -2682,13 +2720,13 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "ipaddr"
                     .Replacement.Text = a5
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -2696,13 +2734,13 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "tip"
                     .Replacement.Text = a6
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -2710,13 +2748,13 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "otvet"
                     .Replacement.Text = a8
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -2724,14 +2762,14 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
 
                 With Wrd.Selection.Find
                     .Text = "invent"
                     .Replacement.Text = a9
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -2739,29 +2777,27 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
 
                 WrdDc = Nothing
                 Wrd = Nothing
 
         End Select
-
-
-
     End Sub
 
     Public Sub PASSWORD_OTH(ByVal sSID As String, ByVal sTEH As String)
         Dim tipot, SIS, sSQL As String
 
-        Dim CONFIGURE As ADODB.Recordset
+        Dim CONFIGURE As Recordset
 
 
         Select Case sTEH
 
             Case "SCANER"
 
-                tipot = Directory.GetParent(Application.ExecutablePath).ToString & "\blanks\pswgl2.dot"
+                tipot = Directory.GetParent(System.Windows.Forms.Application.ExecutablePath).ToString &
+                        "\blanks\pswgl2.dot"
 
             Case Else
 
@@ -2770,9 +2806,8 @@ Module MOD_OPENOFFICE
         End Select
 
 
-
-        CONFIGURE = New ADODB.Recordset
-        CONFIGURE.Open("SELECT * FROM CONFIGURE", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        CONFIGURE = New Recordset
+        CONFIGURE.Open("SELECT * FROM CONFIGURE", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
         With CONFIGURE
             SIS = .Fields("sisadm").Value
         End With
@@ -2785,7 +2820,7 @@ Module MOD_OPENOFFICE
 
                 Dim oSM As Object            'Root object for accessing OpenOffice FROM VB
                 Dim oDesk, oDoc As Object 'First objects FROM the API
-                Dim arg(-1) As Object             'Ignore it for the moment !
+                Dim arg(- 1) As Object             'Ignore it for the moment !
 
                 oSM = CreateObject("com.sun.star.ServiceManager")
 
@@ -2802,10 +2837,10 @@ Module MOD_OPENOFFICE
                 ' replace all
                 Dim oSrch As Object
 
-                Dim rs As ADODB.Recordset
+                Dim rs As Recordset
                 sSQL = "SELECT * FROM kompy WHERE id = " & sSID
-                rs = New ADODB.Recordset
-                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
 
                 With rs
@@ -2816,7 +2851,8 @@ Module MOD_OPENOFFICE
                     Debug.Print(oDoc.replaceAll(oSrch))
 
                     oSrch.setSearchString("kab_otd")
-                    oSrch.setReplaceString(.Fields("FILIAL").Value & "\" & .Fields("mesto").Value & "\" & .Fields("kabn").Value)
+                    oSrch.setReplaceString(
+                        .Fields("FILIAL").Value & "\" & .Fields("mesto").Value & "\" & .Fields("kabn").Value)
                     Debug.Print(oDoc.replaceAll(oSrch))
 
                     oSrch.setSearchString("otvet")
@@ -2843,9 +2879,9 @@ Module MOD_OPENOFFICE
 
             Case Else
 
-                Dim Wrd As Word.Application
+                Dim Wrd As Application
                 Dim WrdDc As Object
-                Wrd = New Word.Application
+                Wrd = New Application
 
                 WrdDc = Wrd.Documents.Open(tipot, , False)  'Application.
                 WrdDc.Application.Visible = True
@@ -2854,10 +2890,10 @@ Module MOD_OPENOFFICE
                 Wrd.Selection.Find.Replacement.ClearFormatting()
                 'Номер
 
-                Dim rs As ADODB.Recordset
+                Dim rs As Recordset
                 sSQL = "SELECT * FROM kompy WHERE id = " & sSID
-                rs = New ADODB.Recordset
-                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 Dim a1, a2, a3, a4, a5, a6 As String
                 With rs
@@ -2880,7 +2916,7 @@ Module MOD_OPENOFFICE
                     .Text = "naimenovan"
                     .Replacement.Text = a1
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -2888,13 +2924,13 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "kab_otd"
                     .Replacement.Text = a2
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -2902,13 +2938,13 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "otvet"
                     .Replacement.Text = a3
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -2916,13 +2952,13 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "tel"
                     .Replacement.Text = a4
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -2930,13 +2966,13 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "ser"
                     .Replacement.Text = a5
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -2944,13 +2980,13 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "INN"
                     .Replacement.Text = a6
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -2958,13 +2994,12 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 WrdDc = Nothing
                 Wrd = Nothing
 
         End Select
-
     End Sub
 
     Public Sub blanks_my_o_ZKP()
@@ -2975,7 +3010,7 @@ Module MOD_OPENOFFICE
 
         Dim sSQL, sSQL1, SISADM, Organ As String
 
-        tipot = Directory.GetParent(Application.ExecutablePath).ToString & "\blanks\cr_zak.doc"
+        tipot = Directory.GetParent(System.Windows.Forms.Application.ExecutablePath).ToString & "\blanks\cr_zak.doc"
 
         If Len(tipot) = 0 Then Exit Sub
         On Error Resume Next
@@ -2984,11 +3019,12 @@ Module MOD_OPENOFFICE
         Dim intj As Integer
 
 
-        Dim rs As ADODB.Recordset 'Объявляем рекордсет
+        Dim rs As Recordset 'Объявляем рекордсет
         Dim Count As String
 
-        rs = New ADODB.Recordset
-        rs.Open("Select COUNT(*) as tot_num FROM kompy where OTvetstvennyj='" & frmReports.cmbOTV.Text & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open("Select COUNT(*) as tot_num FROM kompy where OTvetstvennyj='" & frmReports.cmbOTV.Text & "'", DB7,
+                CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
             Count = .Fields("tot_num").Value
@@ -3001,10 +3037,10 @@ Module MOD_OPENOFFICE
         Dim iA, iB, iC, iD, iE As String
 
 
-        Dim rs1 As ADODB.Recordset
+        Dim rs1 As Recordset
         sSQL1 = "SELECT * FROM CONFIGURE"
-        rs1 = New ADODB.Recordset
-        rs1.Open(sSQL1, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs1 = New Recordset
+        rs1.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs1
             Organ = .Fields("org").Value
@@ -3021,7 +3057,7 @@ Module MOD_OPENOFFICE
 
                 Dim oSM As Object            'Root object for accessing OpenOffice FROM VB
                 Dim oDesk, oDoc As Object 'First objects FROM the API
-                Dim arg(-1) As Object             'Ignore it for the moment !
+                Dim arg(- 1) As Object             'Ignore it for the moment !
                 Dim mmerge As Object
                 'Instanciate OOo : this line is mandatory with VB for OOo API
 
@@ -3057,8 +3093,9 @@ Module MOD_OPENOFFICE
                 Debug.Print(oDoc.replaceAll(oSrch))
 
 
-                rs = New ADODB.Recordset
-                rs.Open("Select * FROM kompy where OTvetstvennyj='" & frmReports.cmbOTV.Text & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open("Select * FROM kompy where OTvetstvennyj='" & frmReports.cmbOTV.Text & "'", DB7,
+                        CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 With rs
                     iA = .Fields("FILIAL").Value
@@ -3085,9 +3122,9 @@ Module MOD_OPENOFFICE
                 Debug.Print(oDoc.replaceAll(oSrch))
 
 
-                rs = New ADODB.Recordset
-                rs.Open("Select * FROM kompy where OTvetstvennyj='" & frmReports.cmbOTV.Text & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-
+                rs = New Recordset
+                rs.Open("Select * FROM kompy where OTvetstvennyj='" & frmReports.cmbOTV.Text & "'", DB7,
+                        CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
 
                 oSrch = oDoc.createReplaceDescriptor
@@ -3141,7 +3178,9 @@ Module MOD_OPENOFFICE
                             Case "PC"
 
                                 insertIntoCell(iA, intj, objTable)
-                                insertIntoCell(iB, LNGIniFile.GetString("MOD_OPENOFFICE", "MSG58", "Компьютер") & " - " & .Fields("NET_NAME").Value, objTable)
+                                insertIntoCell(iB,
+                                               LNGIniFile.GetString("MOD_OPENOFFICE", "MSG58", "Компьютер") & " - " &
+                                               .Fields("NET_NAME").Value, objTable)
                                 insertIntoCell(iC, .Fields("INV_NO_SYSTEM").Value, objTable)
                                 insertIntoCell(iD, .Fields("Ser_N_SIS").Value, objTable)
                                 insertIntoCell(iE, .Fields("DataVVoda").Value, objTable)
@@ -3151,11 +3190,12 @@ Module MOD_OPENOFFICE
                             Case "Printer"
 
                                 insertIntoCell(iA, intj, objTable)
-                                insertIntoCell(iB, LNGIniFile.GetString("MOD_OPENOFFICE", "MSG27", "Принтер") & " - " & .Fields("NET_NAME").Value, objTable)
+                                insertIntoCell(iB,
+                                               LNGIniFile.GetString("MOD_OPENOFFICE", "MSG27", "Принтер") & " - " &
+                                               .Fields("NET_NAME").Value, objTable)
                                 insertIntoCell(iC, .Fields("INV_NO_PRINTER").Value, objTable)
                                 insertIntoCell(iD, .Fields("PRINTER_SN_1").Value, objTable)
                                 insertIntoCell(iE, .Fields("DataVVoda").Value, objTable)
-
 
 
                                 intj = intj + 1
@@ -3163,7 +3203,9 @@ Module MOD_OPENOFFICE
                             Case "MFU"
 
                                 insertIntoCell(iA, intj, objTable)
-                                insertIntoCell(iB, LNGIniFile.GetString("MOD_OPENOFFICE", "MSG32", "МФУ") & " - " & .Fields("NET_NAME").Value, objTable)
+                                insertIntoCell(iB,
+                                               LNGIniFile.GetString("MOD_OPENOFFICE", "MSG32", "МФУ") & " - " &
+                                               .Fields("NET_NAME").Value, objTable)
                                 insertIntoCell(iC, .Fields("INV_NO_PRINTER").Value, objTable)
                                 insertIntoCell(iD, .Fields("PRINTER_SN_1").Value, objTable)
                                 insertIntoCell(iE, .Fields("DataVVoda").Value, objTable)
@@ -3176,11 +3218,15 @@ Module MOD_OPENOFFICE
 
                                 If Len(.Fields("TIP_COMPA").Value) = 0 Then
 
-                                    insertIntoCell(iB, LNGIniFile.GetString("MOD_OPENOFFICE", "MSG59", "Другое") & " - (" & .Fields("TIP_COMPA").Value & ") " & .Fields("NET_NAME").Value, objTable)
+                                    insertIntoCell(iB,
+                                                   LNGIniFile.GetString("MOD_OPENOFFICE", "MSG59", "Другое") & " - (" &
+                                                   .Fields("TIP_COMPA").Value & ") " & .Fields("NET_NAME").Value,
+                                                   objTable)
 
                                 Else
 
-                                    insertIntoCell(iB, .Fields("TIP_COMPA").Value & " - " & .Fields("NET_NAME").Value, objTable)
+                                    insertIntoCell(iB, .Fields("TIP_COMPA").Value & " - " & .Fields("NET_NAME").Value,
+                                                   objTable)
 
                                 End If
 
@@ -3195,7 +3241,9 @@ Module MOD_OPENOFFICE
                             Case "KOpir"
 
                                 insertIntoCell(iA, intj, objTable)
-                                insertIntoCell(iB, LNGIniFile.GetString("MOD_OPENOFFICE", "MSG60", "Копир") & " - " & .Fields("NET_NAME").Value, objTable)
+                                insertIntoCell(iB,
+                                               LNGIniFile.GetString("MOD_OPENOFFICE", "MSG60", "Копир") & " - " &
+                                               .Fields("NET_NAME").Value, objTable)
                                 insertIntoCell(iC, .Fields("INV_NO_PRINTER").Value, objTable)
                                 insertIntoCell(iD, .Fields("PRINTER_SN_1").Value, objTable)
                                 insertIntoCell(iE, .Fields("DataVVoda").Value, objTable)
@@ -3204,7 +3252,9 @@ Module MOD_OPENOFFICE
                             Case "NET"
 
                                 insertIntoCell(iA, intj, objTable)
-                                insertIntoCell(iB, LNGIniFile.GetString("MOD_OPENOFFICE", "MSG61", "Сетевое оборудование") & " - " & .Fields("NET_NAME").Value, objTable)
+                                insertIntoCell(iB,
+                                               LNGIniFile.GetString("MOD_OPENOFFICE", "MSG61", "Сетевое оборудование") &
+                                               " - " & .Fields("NET_NAME").Value, objTable)
                                 insertIntoCell(iC, .Fields("PRINTER_PROIZV_3").Value, objTable)
                                 insertIntoCell(iD, .Fields("port_1").Value, objTable)
                                 insertIntoCell(iE, .Fields("DataVVoda").Value, objTable)
@@ -3214,7 +3264,9 @@ Module MOD_OPENOFFICE
                             Case "PHOTO"
 
                                 insertIntoCell(iA, intj, objTable)
-                                insertIntoCell(iB, LNGIniFile.GetString("MOD_OPENOFFICE", "MSG62", "Фотоаппарат") & " - " & .Fields("NET_NAME").Value, objTable)
+                                insertIntoCell(iB,
+                                               LNGIniFile.GetString("MOD_OPENOFFICE", "MSG62", "Фотоаппарат") & " - " &
+                                               .Fields("NET_NAME").Value, objTable)
                                 insertIntoCell(iC, .Fields("INV_NO_PRINTER").Value, objTable)
                                 insertIntoCell(iD, .Fields("PRINTER_SN_1").Value, objTable)
                                 insertIntoCell(iE, .Fields("DataVVoda").Value, objTable)
@@ -3224,7 +3276,9 @@ Module MOD_OPENOFFICE
                             Case "PHONE"
 
                                 insertIntoCell(iA, intj, objTable)
-                                insertIntoCell(iB, LNGIniFile.GetString("MOD_OPENOFFICE", "MSG63", "Телефон") & " - " & .Fields("NET_NAME").Value, objTable)
+                                insertIntoCell(iB,
+                                               LNGIniFile.GetString("MOD_OPENOFFICE", "MSG63", "Телефон") & " - " &
+                                               .Fields("NET_NAME").Value, objTable)
                                 insertIntoCell(iC, .Fields("INV_NO_PRINTER").Value, objTable)
                                 insertIntoCell(iD, .Fields("PRINTER_SN_1").Value, objTable)
                                 insertIntoCell(iE, .Fields("DataVVoda").Value, objTable)
@@ -3233,7 +3287,9 @@ Module MOD_OPENOFFICE
 
                             Case "FAX"
                                 insertIntoCell(iA, intj, objTable)
-                                insertIntoCell(iB, LNGIniFile.GetString("MOD_OPENOFFICE", "MSG64", "Факс") & " - " & .Fields("NET_NAME").Value, objTable)
+                                insertIntoCell(iB,
+                                               LNGIniFile.GetString("MOD_OPENOFFICE", "MSG64", "Факс") & " - " &
+                                               .Fields("NET_NAME").Value, objTable)
                                 insertIntoCell(iC, .Fields("INV_NO_PRINTER").Value, objTable)
                                 insertIntoCell(iD, .Fields("PRINTER_SN_1").Value, objTable)
                                 insertIntoCell(iE, .Fields("DataVVoda").Value, objTable)
@@ -3242,7 +3298,9 @@ Module MOD_OPENOFFICE
 
                             Case "SCANER"
                                 insertIntoCell(iA, intj, objTable)
-                                insertIntoCell(iB, LNGIniFile.GetString("MOD_OPENOFFICE", "MSG34", "Сканер") & " - " & .Fields("NET_NAME").Value, objTable)
+                                insertIntoCell(iB,
+                                               LNGIniFile.GetString("MOD_OPENOFFICE", "MSG34", "Сканер") & " - " &
+                                               .Fields("NET_NAME").Value, objTable)
                                 insertIntoCell(iC, .Fields("INV_NO_PRINTER").Value, objTable)
                                 insertIntoCell(iD, .Fields("PRINTER_SN_1").Value, objTable)
                                 insertIntoCell(iE, .Fields("DataVVoda").Value, objTable)
@@ -3253,7 +3311,9 @@ Module MOD_OPENOFFICE
                             Case "ZIP"
 
                                 insertIntoCell(iA, intj, objTable)
-                                insertIntoCell(iB, LNGIniFile.GetString("MOD_OPENOFFICE", "MSG65", "Дисковод ZIP") & " - " & .Fields("NET_NAME").Value, objTable)
+                                insertIntoCell(iB,
+                                               LNGIniFile.GetString("MOD_OPENOFFICE", "MSG65", "Дисковод ZIP") & " - " &
+                                               .Fields("NET_NAME").Value, objTable)
                                 insertIntoCell(iC, .Fields("INV_NO_PRINTER").Value, objTable)
                                 insertIntoCell(iD, .Fields("PRINTER_SN_1").Value, objTable)
                                 insertIntoCell(iE, .Fields("DataVVoda").Value, objTable)
@@ -3264,7 +3324,9 @@ Module MOD_OPENOFFICE
                             Case "MONITOR"
 
                                 insertIntoCell(iA, intj, objTable)
-                                insertIntoCell(iB, LNGIniFile.GetString("MOD_OPENOFFICE", "MSG24", "Монитор") & " - " & .Fields("NET_NAME").Value, objTable)
+                                insertIntoCell(iB,
+                                               LNGIniFile.GetString("MOD_OPENOFFICE", "MSG24", "Монитор") & " - " &
+                                               .Fields("NET_NAME").Value, objTable)
                                 insertIntoCell(iC, .Fields("INV_NO_MONITOR").Value, objTable)
                                 insertIntoCell(iD, .Fields("MONITOR_SN").Value, objTable)
                                 insertIntoCell(iE, .Fields("DataVVoda").Value, objTable)
@@ -3276,7 +3338,9 @@ Module MOD_OPENOFFICE
                             Case "USB"
 
                                 insertIntoCell(iA, intj, objTable)
-                                insertIntoCell(iB, LNGIniFile.GetString("MOD_OPENOFFICE", "MSG37", "USB Устройство") & " - " & .Fields("NET_NAME").Value, objTable)
+                                insertIntoCell(iB,
+                                               LNGIniFile.GetString("MOD_OPENOFFICE", "MSG37", "USB Устройство") & " - " &
+                                               .Fields("NET_NAME").Value, objTable)
                                 insertIntoCell(iC, .Fields("INV_NO_MONITOR").Value, objTable)
                                 insertIntoCell(iD, .Fields("MONITOR_SN").Value, objTable)
                                 insertIntoCell(iE, .Fields("DataVVoda").Value, objTable)
@@ -3287,7 +3351,9 @@ Module MOD_OPENOFFICE
                             Case "SOUND"
 
                                 insertIntoCell(iA, intj, objTable)
-                                insertIntoCell(iB, LNGIniFile.GetString("MOD_OPENOFFICE", "MSG25", "Акустическая система") & " - " & .Fields("NET_NAME").Value, objTable)
+                                insertIntoCell(iB,
+                                               LNGIniFile.GetString("MOD_OPENOFFICE", "MSG25", "Акустическая система") &
+                                               " - " & .Fields("NET_NAME").Value, objTable)
                                 insertIntoCell(iC, .Fields("INV_NO_MONITOR").Value, objTable)
                                 insertIntoCell(iD, .Fields("MONITOR_SN").Value, objTable)
                                 insertIntoCell(iE, .Fields("DataVVoda").Value, objTable)
@@ -3298,7 +3364,10 @@ Module MOD_OPENOFFICE
                             Case "IBP"
 
                                 insertIntoCell(iA, intj, objTable)
-                                insertIntoCell(iB, LNGIniFile.GetString("MOD_OPENOFFICE", "MSG35", "Источник бесперебойного питания") & " - " & .Fields("NET_NAME").Value, objTable)
+                                insertIntoCell(iB,
+                                               LNGIniFile.GetString("MOD_OPENOFFICE", "MSG35",
+                                                                    "Источник бесперебойного питания") & " - " &
+                                               .Fields("NET_NAME").Value, objTable)
                                 insertIntoCell(iC, .Fields("INV_NO_MONITOR").Value, objTable)
                                 insertIntoCell(iD, .Fields("MONITOR_SN").Value, objTable)
                                 insertIntoCell(iE, .Fields("DataVVoda").Value, objTable)
@@ -3309,7 +3378,9 @@ Module MOD_OPENOFFICE
                             Case ("FS")
 
                                 insertIntoCell(iA, intj, objTable)
-                                insertIntoCell(iB, LNGIniFile.GetString("MOD_OPENOFFICE", "MSG26", "Сетевой фильтр") & " - " & .Fields("NET_NAME").Value, objTable)
+                                insertIntoCell(iB,
+                                               LNGIniFile.GetString("MOD_OPENOFFICE", "MSG26", "Сетевой фильтр") & " - " &
+                                               .Fields("NET_NAME").Value, objTable)
                                 insertIntoCell(iC, .Fields("INV_NO_MONITOR").Value, objTable)
                                 insertIntoCell(iD, .Fields("MONITOR_SN").Value, objTable)
                                 insertIntoCell(iE, .Fields("DataVVoda").Value, objTable)
@@ -3333,16 +3404,16 @@ Module MOD_OPENOFFICE
 
             Case Else
 
-                Dim Wrd As Word.Application
-                Dim WrdDc As Word.Document
-                Wrd = New Word.Application
+                Dim Wrd As Application
+                Dim WrdDc As Document
+                Wrd = New Application
 
-                Dim oDoc As Word.Document
-                Dim oTable As Word.Table
-                Dim oPara1 As Word.Paragraph, oPara2 As Word.Paragraph
-                Dim oPara3 As Word.Paragraph, oPara4 As Word.Paragraph
-                Dim oRng As Word.Range
-                Dim oShape As Word.InlineShape
+                Dim oDoc As Document
+                Dim oTable As Table
+                Dim oPara1 As Paragraph, oPara2 As Paragraph
+                Dim oPara3 As Paragraph, oPara4 As Paragraph
+                Dim oRng As Range
+                Dim oShape As InlineShape
                 Dim oChart As Object
                 Dim Pos As Double
 
@@ -3356,8 +3427,9 @@ Module MOD_OPENOFFICE
                 Wrd.Selection.Find.Replacement.ClearFormatting()
 
 
-                rs = New ADODB.Recordset
-                rs.Open("Select * FROM kompy where OTvetstvennyj='" & frmReports.cmbOTV.Text & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open("Select * FROM kompy where OTvetstvennyj='" & frmReports.cmbOTV.Text & "'", DB7,
+                        CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 With rs
                     iA = .Fields("FILIAL").Value
@@ -3372,7 +3444,7 @@ Module MOD_OPENOFFICE
                     .Text = "Организация"
                     .Replacement.Text = Organ
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -3380,13 +3452,13 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "Ответственный"
                     .Replacement.Text = frmReports.cmbOTV.Text
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -3394,14 +3466,14 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
 
                 With Wrd.Selection.Find
                     .Text = "Branch"
                     .Replacement.Text = iA
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -3409,13 +3481,13 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "Department"
                     .Replacement.Text = iB
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -3423,13 +3495,13 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "Office"
                     .Replacement.Text = iC
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -3437,7 +3509,7 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 'rs = New ADODB.Recordset
                 'rs.Open("Select * FROM kompy where OTvetstvennyj='" & frmReports.cmbOTV.Text & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
@@ -3446,7 +3518,7 @@ Module MOD_OPENOFFICE
                     .Text = "TABLE"
                     .Replacement.Text = ""
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -3454,9 +3526,7 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
-
-
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
 
                 oTable = WrdDc.Tables.Add(WrdDc.Bookmarks.Item("TABLE1").Range, Count + 1, 5)
@@ -3471,8 +3541,9 @@ Module MOD_OPENOFFICE
 
                 intj = 2
 
-                rs = New ADODB.Recordset
-                rs.Open("Select * FROM kompy where OTvetstvennyj='" & frmReports.cmbOTV.Text & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open("Select * FROM kompy where OTvetstvennyj='" & frmReports.cmbOTV.Text & "'", DB7,
+                        CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 With rs
                     .MoveFirst()
@@ -3482,11 +3553,12 @@ Module MOD_OPENOFFICE
                         Select Case .Fields("tiptehn").Value
 
 
-
                             Case "PC"
 
                                 oTable.Cell(intj, 1).Range.Text = intj - 1
-                                oTable.Cell(intj, 2).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG58", "Компьютер") & " - " & .Fields("NET_NAME").Value
+                                oTable.Cell(intj, 2).Range.Text =
+                                    LNGIniFile.GetString("MOD_OPENOFFICE", "MSG58", "Компьютер") & " - " &
+                                    .Fields("NET_NAME").Value
                                 oTable.Cell(intj, 3).Range.Text = .Fields("INV_NO_SYSTEM").Value
                                 oTable.Cell(intj, 4).Range.Text = .Fields("Ser_N_SIS").Value
                                 oTable.Cell(intj, 5).Range.Text = .Fields("DataVVoda").Value
@@ -3496,11 +3568,12 @@ Module MOD_OPENOFFICE
                             Case "Printer"
 
                                 oTable.Cell(intj, 1).Range.Text = intj - 1
-                                oTable.Cell(intj, 2).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG27", "Принтер") & " - " & .Fields("NET_NAME").Value
+                                oTable.Cell(intj, 2).Range.Text =
+                                    LNGIniFile.GetString("MOD_OPENOFFICE", "MSG27", "Принтер") & " - " &
+                                    .Fields("NET_NAME").Value
                                 oTable.Cell(intj, 3).Range.Text = .Fields("INV_NO_PRINTER").Value
                                 oTable.Cell(intj, 4).Range.Text = .Fields("PRINTER_SN_1").Value
                                 oTable.Cell(intj, 5).Range.Text = .Fields("DataVVoda").Value
-
 
 
                                 intj = intj + 1
@@ -3508,7 +3581,9 @@ Module MOD_OPENOFFICE
                             Case "MFU"
 
                                 oTable.Cell(intj, 1).Range.Text = intj - 1
-                                oTable.Cell(intj, 2).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG32", "МФУ") & " - " & .Fields("NET_NAME").Value
+                                oTable.Cell(intj, 2).Range.Text =
+                                    LNGIniFile.GetString("MOD_OPENOFFICE", "MSG32", "МФУ") & " - " &
+                                    .Fields("NET_NAME").Value
                                 oTable.Cell(intj, 3).Range.Text = .Fields("INV_NO_PRINTER").Value
                                 oTable.Cell(intj, 4).Range.Text = .Fields("PRINTER_SN_1").Value
                                 oTable.Cell(intj, 5).Range.Text = .Fields("DataVVoda").Value
@@ -3520,9 +3595,12 @@ Module MOD_OPENOFFICE
 
                                 If Len(.Fields("TIP_COMPA").Value) = 0 Then
 
-                                    oTable.Cell(intj, 2).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG59", "Другое") & " - (" & .Fields("TIP_COMPA").Value & ") " & .Fields("NET_NAME").Value
+                                    oTable.Cell(intj, 2).Range.Text =
+                                        LNGIniFile.GetString("MOD_OPENOFFICE", "MSG59", "Другое") & " - (" &
+                                        .Fields("TIP_COMPA").Value & ") " & .Fields("NET_NAME").Value
                                 Else
-                                    oTable.Cell(intj, 2).Range.Text = .Fields("TIP_COMPA").Value & " - " & .Fields("NET_NAME").Value
+                                    oTable.Cell(intj, 2).Range.Text = .Fields("TIP_COMPA").Value & " - " &
+                                                                      .Fields("NET_NAME").Value
 
                                 End If
 
@@ -3537,7 +3615,9 @@ Module MOD_OPENOFFICE
                             Case "KOpir"
 
                                 oTable.Cell(intj, 1).Range.Text = intj - 1
-                                oTable.Cell(intj, 2).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG60", "Копир") & " - " & .Fields("NET_NAME").Value
+                                oTable.Cell(intj, 2).Range.Text =
+                                    LNGIniFile.GetString("MOD_OPENOFFICE", "MSG60", "Копир") & " - " &
+                                    .Fields("NET_NAME").Value
                                 oTable.Cell(intj, 3).Range.Text = .Fields("INV_NO_PRINTER").Value
                                 oTable.Cell(intj, 4).Range.Text = .Fields("PRINTER_SN_1").Value
                                 oTable.Cell(intj, 5).Range.Text = .Fields("DataVVoda").Value
@@ -3546,7 +3626,9 @@ Module MOD_OPENOFFICE
                             Case "NET"
 
                                 oTable.Cell(intj, 1).Range.Text = intj - 1
-                                oTable.Cell(intj, 2).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG61", "Сетевое оборудование") & " - " & .Fields("NET_NAME").Value
+                                oTable.Cell(intj, 2).Range.Text =
+                                    LNGIniFile.GetString("MOD_OPENOFFICE", "MSG61", "Сетевое оборудование") & " - " &
+                                    .Fields("NET_NAME").Value
                                 oTable.Cell(intj, 3).Range.Text = .Fields("PRINTER_PROIZV_3").Value
                                 oTable.Cell(intj, 4).Range.Text = .Fields("port_1").Value
                                 oTable.Cell(intj, 5).Range.Text = .Fields("DataVVoda").Value
@@ -3556,7 +3638,9 @@ Module MOD_OPENOFFICE
                             Case "PHOTO"
 
                                 oTable.Cell(intj, 1).Range.Text = intj - 1
-                                oTable.Cell(intj, 2).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG62", "Фотоаппарат") & " - " & .Fields("NET_NAME").Value
+                                oTable.Cell(intj, 2).Range.Text =
+                                    LNGIniFile.GetString("MOD_OPENOFFICE", "MSG62", "Фотоаппарат") & " - " &
+                                    .Fields("NET_NAME").Value
                                 oTable.Cell(intj, 3).Range.Text = .Fields("INV_NO_PRINTER").Value
                                 oTable.Cell(intj, 4).Range.Text = .Fields("PRINTER_SN_1").Value
                                 oTable.Cell(intj, 5).Range.Text = .Fields("DataVVoda").Value
@@ -3566,7 +3650,9 @@ Module MOD_OPENOFFICE
                             Case "PHONE"
 
                                 oTable.Cell(intj, 1).Range.Text = intj - 1
-                                oTable.Cell(intj, 2).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG63", "Телефон") & " - " & .Fields("NET_NAME").Value
+                                oTable.Cell(intj, 2).Range.Text =
+                                    LNGIniFile.GetString("MOD_OPENOFFICE", "MSG63", "Телефон") & " - " &
+                                    .Fields("NET_NAME").Value
                                 oTable.Cell(intj, 3).Range.Text = .Fields("INV_NO_PRINTER").Value
                                 oTable.Cell(intj, 4).Range.Text = .Fields("PRINTER_SN_1").Value
                                 oTable.Cell(intj, 5).Range.Text = .Fields("DataVVoda").Value
@@ -3575,7 +3661,9 @@ Module MOD_OPENOFFICE
 
                             Case "FAX"
                                 oTable.Cell(intj, 1).Range.Text = intj - 1
-                                oTable.Cell(intj, 2).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG64", "Факс") & " - " & .Fields("NET_NAME").Value
+                                oTable.Cell(intj, 2).Range.Text =
+                                    LNGIniFile.GetString("MOD_OPENOFFICE", "MSG64", "Факс") & " - " &
+                                    .Fields("NET_NAME").Value
                                 oTable.Cell(intj, 3).Range.Text = .Fields("INV_NO_PRINTER").Value
                                 oTable.Cell(intj, 4).Range.Text = .Fields("PRINTER_SN_1").Value
                                 oTable.Cell(intj, 5).Range.Text = .Fields("DataVVoda").Value
@@ -3584,7 +3672,9 @@ Module MOD_OPENOFFICE
 
                             Case "SCANER"
                                 oTable.Cell(intj, 1).Range.Text = intj - 1
-                                oTable.Cell(intj, 2).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG34", "Сканер") & " - " & .Fields("NET_NAME").Value
+                                oTable.Cell(intj, 2).Range.Text =
+                                    LNGIniFile.GetString("MOD_OPENOFFICE", "MSG34", "Сканер") & " - " &
+                                    .Fields("NET_NAME").Value
                                 oTable.Cell(intj, 3).Range.Text = .Fields("INV_NO_PRINTER").Value
                                 oTable.Cell(intj, 4).Range.Text = .Fields("PRINTER_SN_1").Value
                                 oTable.Cell(intj, 5).Range.Text = .Fields("DataVVoda").Value
@@ -3595,7 +3685,9 @@ Module MOD_OPENOFFICE
                             Case "ZIP"
 
                                 oTable.Cell(intj, 1).Range.Text = intj - 1
-                                oTable.Cell(intj, 2).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG65", "Дисковод ZIP") & " - " & .Fields("NET_NAME").Value
+                                oTable.Cell(intj, 2).Range.Text =
+                                    LNGIniFile.GetString("MOD_OPENOFFICE", "MSG65", "Дисковод ZIP") & " - " &
+                                    .Fields("NET_NAME").Value
                                 oTable.Cell(intj, 3).Range.Text = .Fields("INV_NO_PRINTER").Value
                                 oTable.Cell(intj, 4).Range.Text = .Fields("PRINTER_SN_1").Value
                                 oTable.Cell(intj, 5).Range.Text = .Fields("DataVVoda").Value
@@ -3606,7 +3698,9 @@ Module MOD_OPENOFFICE
                             Case "MONITOR"
 
                                 oTable.Cell(intj, 1).Range.Text = intj - 1
-                                oTable.Cell(intj, 2).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG24", "Монитор") & " - " & .Fields("NET_NAME").Value
+                                oTable.Cell(intj, 2).Range.Text =
+                                    LNGIniFile.GetString("MOD_OPENOFFICE", "MSG24", "Монитор") & " - " &
+                                    .Fields("NET_NAME").Value
                                 oTable.Cell(intj, 3).Range.Text = .Fields("INV_NO_MONITOR").Value
                                 oTable.Cell(intj, 4).Range.Text = .Fields("MONITOR_SN").Value
                                 oTable.Cell(intj, 5).Range.Text = .Fields("DataVVoda").Value
@@ -3617,7 +3711,9 @@ Module MOD_OPENOFFICE
                             Case "FS"
 
                                 oTable.Cell(intj, 1).Range.Text = intj - 1
-                                oTable.Cell(intj, 2).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG26", "Сетевой фильтр") & " - " & .Fields("NET_NAME").Value
+                                oTable.Cell(intj, 2).Range.Text =
+                                    LNGIniFile.GetString("MOD_OPENOFFICE", "MSG26", "Сетевой фильтр") & " - " &
+                                    .Fields("NET_NAME").Value
                                 oTable.Cell(intj, 3).Range.Text = .Fields("INV_NO_MONITOR").Value
                                 oTable.Cell(intj, 4).Range.Text = .Fields("MONITOR_SN").Value
                                 oTable.Cell(intj, 5).Range.Text = .Fields("DataVVoda").Value
@@ -3628,7 +3724,9 @@ Module MOD_OPENOFFICE
                             Case "IBP"
 
                                 oTable.Cell(intj, 1).Range.Text = intj - 1
-                                oTable.Cell(intj, 2).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG35", "Источник бесперебойного питания") & " - " & .Fields("NET_NAME").Value
+                                oTable.Cell(intj, 2).Range.Text =
+                                    LNGIniFile.GetString("MOD_OPENOFFICE", "MSG35", "Источник бесперебойного питания") &
+                                    " - " & .Fields("NET_NAME").Value
                                 oTable.Cell(intj, 3).Range.Text = .Fields("INV_NO_MONITOR").Value
                                 oTable.Cell(intj, 4).Range.Text = .Fields("MONITOR_SN").Value
                                 oTable.Cell(intj, 5).Range.Text = .Fields("DataVVoda").Value
@@ -3639,7 +3737,9 @@ Module MOD_OPENOFFICE
                             Case "SOUND"
 
                                 oTable.Cell(intj, 1).Range.Text = intj - 1
-                                oTable.Cell(intj, 2).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG25", "Акустическая система") & " - " & .Fields("NET_NAME").Value
+                                oTable.Cell(intj, 2).Range.Text =
+                                    LNGIniFile.GetString("MOD_OPENOFFICE", "MSG25", "Акустическая система") & " - " &
+                                    .Fields("NET_NAME").Value
                                 oTable.Cell(intj, 3).Range.Text = .Fields("INV_NO_MONITOR").Value
                                 oTable.Cell(intj, 4).Range.Text = .Fields("MONITOR_SN").Value
                                 oTable.Cell(intj, 5).Range.Text = .Fields("DataVVoda").Value
@@ -3650,7 +3750,9 @@ Module MOD_OPENOFFICE
                             Case "USB"
 
                                 oTable.Cell(intj, 1).Range.Text = intj - 1
-                                oTable.Cell(intj, 2).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG37", "USB Устройство") & " - " & .Fields("NET_NAME").Value
+                                oTable.Cell(intj, 2).Range.Text =
+                                    LNGIniFile.GetString("MOD_OPENOFFICE", "MSG37", "USB Устройство") & " - " &
+                                    .Fields("NET_NAME").Value
                                 oTable.Cell(intj, 3).Range.Text = .Fields("INV_NO_MONITOR").Value
                                 oTable.Cell(intj, 4).Range.Text = .Fields("MONITOR_SN").Value
                                 oTable.Cell(intj, 5).Range.Text = .Fields("DataVVoda").Value
@@ -3675,9 +3777,8 @@ Module MOD_OPENOFFICE
         End Select
 
 
-
         Exit Sub
-err_:
+        err_:
 
         MsgBox(Err.Description)
     End Sub
@@ -3686,8 +3787,8 @@ err_:
         On Error Resume Next
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
-        Dim rs As ADODB.Recordset
-        Dim rs1 As ADODB.Recordset
+        Dim rs As Recordset
+        Dim rs1 As Recordset
         Dim sSQL, sSQL1, scN, cOTV As String
 
         Dim iA As String
@@ -3697,25 +3798,24 @@ err_:
         Dim iE As String
         Dim uname As String
 
-        Dim oWord As Word.Application
-        Dim oDoc As Word.Document
-        Dim oTable As Word.Table
-        Dim oPara1 As Word.Paragraph, oPara2 As Word.Paragraph
-        Dim oPara3 As Word.Paragraph, oPara4 As Word.Paragraph
-        Dim oRng As Word.Range
-        Dim oShape As Word.InlineShape
+        Dim oWord As Application
+        Dim oDoc As Document
+        Dim oTable As Table
+        Dim oPara1 As Paragraph, oPara2 As Paragraph
+        Dim oPara3 As Paragraph, oPara4 As Paragraph
+        Dim oRng As Range
+        Dim oShape As InlineShape
         Dim oChart As Object
         Dim Pos As Double
-
 
 
         Call COUNT_FIELDS(sID)
 
         sSQL = "SELECT * FROM kompy WHERE TipTehn='PC' AND id=" & sID
 
-        Dim CONFIGURE As ADODB.Recordset
-        CONFIGURE = New ADODB.Recordset
-        CONFIGURE.Open("SELECT * FROM CONFIGURE", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockReadOnly)
+        Dim CONFIGURE As Recordset
+        CONFIGURE = New Recordset
+        CONFIGURE.Open("SELECT * FROM CONFIGURE", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockReadOnly)
 
         With CONFIGURE
             If Not IsDBNull(.Fields("ORG").Value) Then uname = .Fields("ORG").Value
@@ -3724,9 +3824,8 @@ err_:
         CONFIGURE = Nothing
 
 
-
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
         Dim intj As Integer
 
         With rs
@@ -3757,7 +3856,8 @@ err_:
             oTable.Cell(7, 1).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG8", "Инвентарный номер")
 
             oTable.Cell(1, 2).Range.Text = uname
-            oTable.Cell(2, 2).Range.Text = .Fields("filial").Value & "\" & .Fields("mesto").Value & "\" & .Fields("kabn").Value
+            oTable.Cell(2, 2).Range.Text = .Fields("filial").Value & "\" & .Fields("mesto").Value & "\" &
+                                           .Fields("kabn").Value
             oTable.Cell(3, 2).Range.Text = .Fields("TIP_COMPA").Value
             oTable.Cell(4, 2).Range.Text = .Fields("OTvetstvennyj").Value
             oTable.Cell(5, 2).Range.Text = .Fields("NET_NAME").Value
@@ -3871,7 +3971,8 @@ err_:
             If Len(.Fields("HDD_Name_1").Value) = 0 Then
             Else
                 oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG15", "Жесткий диск")
-                oTable.Cell(intj, 2).Range.Text = .Fields("HDD_Name_1").Value & ", " & .Fields("HDD_OB_1").Value & ", SN: " & .Fields("HDD_SN_1").Value
+                oTable.Cell(intj, 2).Range.Text = .Fields("HDD_Name_1").Value & ", " & .Fields("HDD_OB_1").Value &
+                                                  ", SN: " & .Fields("HDD_SN_1").Value
                 oTable.Cell(intj, 3).Range.Text = .Fields("HDD_PROIZV_1").Value
 
                 intj = intj + 1
@@ -3881,7 +3982,8 @@ err_:
             If Len(.Fields("HDD_Name_2").Value) = 0 Then
             Else
                 oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG15", "Жесткий диск")
-                oTable.Cell(intj, 2).Range.Text = .Fields("HDD_Name_2").Value & ", " & .Fields("HDD_OB_2").Value & ", SN: " & .Fields("HDD_SN_2").Value
+                oTable.Cell(intj, 2).Range.Text = .Fields("HDD_Name_2").Value & ", " & .Fields("HDD_OB_2").Value &
+                                                  ", SN: " & .Fields("HDD_SN_2").Value
                 oTable.Cell(intj, 3).Range.Text = .Fields("HDD_PROIZV_2").Value
 
                 intj = intj + 1
@@ -3891,7 +3993,8 @@ err_:
             If Len(.Fields("HDD_Name_3").Value) = 0 Then
             Else
                 oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG15", "Жесткий диск")
-                oTable.Cell(intj, 2).Range.Text = .Fields("HDD_Name_3").Value & ", " & .Fields("HDD_OB_3").Value & ", SN: " & .Fields("HDD_SN_3").Value
+                oTable.Cell(intj, 2).Range.Text = .Fields("HDD_Name_3").Value & ", " & .Fields("HDD_OB_3").Value &
+                                                  ", SN: " & .Fields("HDD_SN_3").Value
                 oTable.Cell(intj, 3).Range.Text = .Fields("HDD_PROIZV_3").Value
 
                 intj = intj + 1
@@ -3901,7 +4004,8 @@ err_:
             If Len(.Fields("HDD_Name_4").Value) = 0 Then
             Else
                 oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG15", "Жесткий диск")
-                oTable.Cell(intj, 2).Range.Text = .Fields("HDD_Name_4").Value & ", " & .Fields("HDD_OB_4").Value & ", SN: " & .Fields("HDD_SN_4").Value
+                oTable.Cell(intj, 2).Range.Text = .Fields("HDD_Name_4").Value & ", " & .Fields("HDD_OB_4").Value &
+                                                  ", SN: " & .Fields("HDD_SN_4").Value
                 oTable.Cell(intj, 3).Range.Text = .Fields("HDD_PROIZV_4").Value
 
                 intj = intj + 1
@@ -4001,7 +4105,8 @@ err_:
             If Len(.Fields("KEYBOARD_NAME").Value) = 0 Then
             Else
                 oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG22", "Клавиатура")
-                oTable.Cell(intj, 2).Range.Text = .Fields("KEYBOARD_NAME").Value & ", SN: " & .Fields("KEYBOARD_SN").Value
+                oTable.Cell(intj, 2).Range.Text = .Fields("KEYBOARD_NAME").Value & ", SN: " &
+                                                  .Fields("KEYBOARD_SN").Value
                 oTable.Cell(intj, 3).Range.Text = .Fields("KEYBOARD_PROIZV").Value
 
                 intj = intj + 1
@@ -4031,7 +4136,8 @@ err_:
             If Len(.Fields("MONITOR_NAME2").Value) = 0 Then
             Else
                 oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG24", "Монитор")
-                oTable.Cell(intj, 2).Range.Text = .Fields("MONITOR_NAME2").Value & ", SN: " & .Fields("MONITOR_SN2").Value
+                oTable.Cell(intj, 2).Range.Text = .Fields("MONITOR_NAME2").Value & ", SN: " &
+                                                  .Fields("MONITOR_SN2").Value
                 oTable.Cell(intj, 3).Range.Text = .Fields("MONITOR_PROIZV2").Value
 
                 intj = intj + 1
@@ -4060,11 +4166,11 @@ err_:
             End If
 
 
-
             If Len(.Fields("PRINTER_NAME_1").Value) = 0 Then
             Else
                 oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG27", "Принтер")
-                oTable.Cell(intj, 2).Range.Text = .Fields("PRINTER_NAME_1").Value & ", SN: " & .Fields("PRINTER_SN_1").Value
+                oTable.Cell(intj, 2).Range.Text = .Fields("PRINTER_NAME_1").Value & ", SN: " &
+                                                  .Fields("PRINTER_SN_1").Value
                 oTable.Cell(intj, 3).Range.Text = .Fields("PRINTER_PROIZV_1").Value
 
                 intj = intj + 1
@@ -4074,7 +4180,8 @@ err_:
             If Len(.Fields("PRINTER_NAME_2").Value) = 0 Then
             Else
                 oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG27", "Принтер")
-                oTable.Cell(intj, 2).Range.Text = .Fields("PRINTER_NAME_2").Value & ", SN: " & .Fields("PRINTER_SN_2").Value
+                oTable.Cell(intj, 2).Range.Text = .Fields("PRINTER_NAME_2").Value & ", SN: " &
+                                                  .Fields("PRINTER_SN_2").Value
                 oTable.Cell(intj, 3).Range.Text = .Fields("PRINTER_PROIZV_2").Value
 
                 intj = intj + 1
@@ -4084,7 +4191,8 @@ err_:
             If Len(.Fields("PRINTER_NAME_3").Value) = 0 Then
             Else
                 oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG27", "Принтер")
-                oTable.Cell(intj, 2).Range.Text = .Fields("PRINTER_NAME_3").Value & ", SN: " & .Fields("PRINTER_SN_3").Value
+                oTable.Cell(intj, 2).Range.Text = .Fields("PRINTER_NAME_3").Value & ", SN: " &
+                                                  .Fields("PRINTER_SN_3").Value
                 oTable.Cell(intj, 3).Range.Text = .Fields("PRINTER_PROIZV_3").Value
 
                 intj = intj + 1
@@ -4102,8 +4210,8 @@ err_:
 
         sSQL1 = "SELECT count(*) as t_n FROM kompy WHERE PCL=" & sID
 
-        rs1 = New ADODB.Recordset
-        rs1.Open(sSQL1, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs1 = New Recordset
+        rs1.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         Dim GIST As String
 
@@ -4141,8 +4249,8 @@ err_:
             oTable.Cell(1, 3).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG31", "Серийный номер")
 
             sSQL1 = "SELECT * FROM kompy WHERE PCL=" & sID
-            rs1 = New ADODB.Recordset
-            rs1.Open(sSQL1, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rs1 = New Recordset
+            rs1.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
             intj = 2
 
@@ -4155,7 +4263,8 @@ err_:
                         Select Case .Fields("tiptehn").Value
 
                             Case "Printer"
-                                oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG27", "Принтер")
+                                oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG27",
+                                                                                       "Принтер")
                                 oTable.Cell(intj, 2).Range.Text = .Fields("NET_NAME").Value
                                 oTable.Cell(intj, 3).Range.Text = .Fields("PRINTER_SN_1").Value
 
@@ -4165,7 +4274,8 @@ err_:
                                 oTable.Cell(intj, 3).Range.Text = .Fields("PRINTER_SN_1").Value
 
                             Case "MONITOR"
-                                oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG24", "Монитор")
+                                oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG24",
+                                                                                       "Монитор")
                                 oTable.Cell(intj, 2).Range.Text = .Fields("NET_NAME").Value
                                 oTable.Cell(intj, 3).Range.Text = .Fields("MONITOR_SN").Value
 
@@ -4176,27 +4286,32 @@ err_:
 
 
                             Case "SCANER"
-                                oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG34", "Сканер")
+                                oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG34",
+                                                                                       "Сканер")
                                 oTable.Cell(intj, 2).Range.Text = .Fields("NET_NAME").Value
                                 oTable.Cell(intj, 3).Range.Text = .Fields("PRINTER_SN_1").Value
 
                             Case "USB"
-                                oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG37", "USB Устройство")
+                                oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG37",
+                                                                                       "USB Устройство")
                                 oTable.Cell(intj, 2).Range.Text = .Fields("NET_NAME").Value
                                 oTable.Cell(intj, 3).Range.Text = .Fields("PRINTER_SN_1").Value
 
                             Case "IBP"
-                                oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG35", "Источник бесперебойного питания")
+                                oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG35",
+                                                                                       "Источник бесперебойного питания")
                                 oTable.Cell(intj, 2).Range.Text = .Fields("NET_NAME").Value
                                 oTable.Cell(intj, 3).Range.Text = .Fields("PRINTER_SN_1").Value
 
                             Case "FS"
-                                oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG26", "Сетевой фильтр")
+                                oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG26",
+                                                                                       "Сетевой фильтр")
                                 oTable.Cell(intj, 2).Range.Text = .Fields("NET_NAME").Value
                                 oTable.Cell(intj, 3).Range.Text = .Fields("PRINTER_SN_1").Value
 
                             Case "SOUND"
-                                oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG25", "Акустическая система")
+                                oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG25",
+                                                                                       "Акустическая система")
                                 oTable.Cell(intj, 2).Range.Text = .Fields("NET_NAME").Value
                                 oTable.Cell(intj, 3).Range.Text = .Fields("PRINTER_SN_1").Value
 
@@ -4209,13 +4324,13 @@ err_:
 
                             Case "KEYB"
 
-                                oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG22", "Клавиатура")
+                                oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG22",
+                                                                                       "Клавиатура")
                                 oTable.Cell(intj, 2).Range.Text = .Fields("NET_NAME").Value
                                 oTable.Cell(intj, 3).Range.Text = .Fields("PRINTER_SN_1").Value
 
 
                         End Select
-
 
 
                         intj = intj + 1
@@ -4233,8 +4348,8 @@ err_:
 
         sSQL1 = "SELECT count(*) as t_n FROM SOFT_INSTALL WHERE id_comp=" & sID
 
-        rs1 = New ADODB.Recordset
-        rs1.Open(sSQL1, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs1 = New Recordset
+        rs1.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs1
 
@@ -4266,13 +4381,14 @@ err_:
             oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, GIST + 1, 1)
             oTable.Range.ParagraphFormat.SpaceAfter = 6
 
-            oTable.Cell(1, 1).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG38", "Установленное Программное обеспечение")
+            oTable.Cell(1, 1).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG38",
+                                                                "Установленное Программное обеспечение")
 
             intj = 2
 
             sSQL1 = "SELECT * FROM SOFT_INSTALL WHERE id_comp=" & sID
-            rs1 = New ADODB.Recordset
-            rs1.Open(sSQL1, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rs1 = New Recordset
+            rs1.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
             With rs1
                 If .RecordCount <> 0 Then
                     .MoveFirst()
@@ -4296,9 +4412,10 @@ err_:
         'ПЕРЕМЕЩЕНИЕ ТЕХНИКИ
 
 
-        Dim rscount As ADODB.Recordset 'Объявляем рекордсет
-        rscount = New ADODB.Recordset
-        rscount.Open("SELECT COUNT(*) AS total_number FROM dvig WHERE id_comp=" & sID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        Dim rscount As Recordset 'Объявляем рекордсет
+        rscount = New Recordset
+        rscount.Open("SELECT COUNT(*) AS total_number FROM dvig WHERE id_comp=" & sID, DB7, CursorTypeEnum.adOpenDynamic,
+                     LockTypeEnum.adLockOptimistic)
 
         With rscount
             GIST = .Fields("total_number").Value
@@ -4331,8 +4448,9 @@ err_:
             oTable.Cell(1, 4).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG43", "Дата")
 
             intj = 2
-            rscount = New ADODB.Recordset
-            rscount.Open("SELECT * FROM dvig WHERE id_comp=" & sID & " ORDER by Data", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rscount = New Recordset
+            rscount.Open("SELECT * FROM dvig WHERE id_comp=" & sID & " ORDER by Data", DB7, CursorTypeEnum.adOpenDynamic,
+                         LockTypeEnum.adLockOptimistic)
 
             intj = 2
             With rscount
@@ -4358,8 +4476,9 @@ err_:
         '#####################################################################################
         'РЕМОНТЫ
 
-        rscount = New ADODB.Recordset
-        rscount.Open("SELECT COUNT(*) AS total_number FROM Remont WHERE id_comp=" & sID, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rscount = New Recordset
+        rscount.Open("SELECT COUNT(*) AS total_number FROM Remont WHERE id_comp=" & sID, DB7,
+                     CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rscount
             GIST = .Fields("total_number").Value
@@ -4392,8 +4511,9 @@ err_:
             oTable.Cell(1, 4).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG48", "Уровень")
             oTable.Cell(1, 5).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG49", "Выполнение")
 
-            rscount = New ADODB.Recordset
-            rscount.Open("SELECT * FROM Remont WHERE id_comp=" & sID & " ORDER by Date", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rscount = New Recordset
+            rscount.Open("SELECT * FROM Remont WHERE id_comp=" & sID & " ORDER by Date", DB7,
+                         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
             'Dim A As String
 
@@ -4418,7 +4538,6 @@ err_:
             rscount = Nothing
 
 
-
         End If
 
 
@@ -4440,8 +4559,8 @@ err_:
         oTable.Cell(1, 1).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG51", "Системный администратор")
         oTable.Cell(1, 2).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG52", "Подписи ответственных лиц")
 
-        CONFIGURE = New ADODB.Recordset
-        CONFIGURE.Open("SELECT * FROM CONFIGURE", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        CONFIGURE = New Recordset
+        CONFIGURE.Open("SELECT * FROM CONFIGURE", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
         With CONFIGURE
             If .RecordCount <> 0 Then
                 If Not IsDBNull(.Fields("SISADM")) Then uname = .Fields("SISADM").Value
@@ -4454,7 +4573,6 @@ err_:
 
         oTable.Cell(2, 1).Range.Text = uname
         oTable.Cell(2, 2).Range.Text = cOTV
-
     End Sub
 
     Public Sub blanks_my_wrd(ByVal tipot As String)
@@ -4463,14 +4581,13 @@ err_:
         Dim uname As String
 
 
-
         If Len(tipot) = 0 Then Exit Sub
         On Error Resume Next
 
-        Dim rs1 As ADODB.Recordset
+        Dim rs1 As Recordset
         sSQL1 = "SELECT * FROM CONFIGURE"
-        rs1 = New ADODB.Recordset
-        rs1.Open(sSQL1, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs1 = New Recordset
+        rs1.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs1
             Organ = .Fields("org").Value
@@ -4480,24 +4597,24 @@ err_:
         rs1 = Nothing
 
 
-        Dim rs As ADODB.Recordset
+        Dim rs As Recordset
         sSQL = "SELECT * FROM kompy WHERE id = " & frmComputers.sCOUNT
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         Dim intj As String
         Dim A, B, C, D, E As String
 
-        Dim Wrd As Word.Application
-        Dim WrdDc As Word.Document
-        Wrd = New Word.Application
+        Dim Wrd As Application
+        Dim WrdDc As Document
+        Wrd = New Application
 
-        Dim oDoc As Word.Document
-        Dim oTable As Word.Table
-        Dim oPara1 As Word.Paragraph, oPara2 As Word.Paragraph
-        Dim oPara3 As Word.Paragraph, oPara4 As Word.Paragraph
-        Dim oRng As Word.Range
-        Dim oShape As Word.InlineShape
+        Dim oDoc As Document
+        Dim oTable As Table
+        Dim oPara1 As Paragraph, oPara2 As Paragraph
+        Dim oPara3 As Paragraph, oPara4 As Paragraph
+        Dim oRng As Range
+        Dim oShape As InlineShape
         Dim oChart As Object
         Dim Pos As Double
 
@@ -4515,7 +4632,7 @@ err_:
                     .Text = "Организация"
                     .Replacement.Text = Organ
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -4523,13 +4640,13 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "Сисадмин"
                     .Replacement.Text = SISADM
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -4537,7 +4654,7 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("Ser_N_SIS").Value
 
@@ -4545,7 +4662,7 @@ err_:
                     .Text = "Ser_N_SIS"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -4553,7 +4670,7 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("ID").Value
 
@@ -4561,7 +4678,7 @@ err_:
                     .Text = "ID"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -4569,7 +4686,7 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
 
                 uname = .Fields("nomerPC").Value
@@ -4578,7 +4695,7 @@ err_:
                     .Text = "nomerPC"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -4586,7 +4703,7 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("CPU1").Value
 
@@ -4594,7 +4711,7 @@ err_:
                     .Text = "CPU1"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -4602,7 +4719,7 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("CPUmhz1").Value
 
@@ -4610,7 +4727,7 @@ err_:
                     .Text = "CPUmhz1"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -4618,7 +4735,7 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("CPUSocket1").Value
 
@@ -4626,7 +4743,7 @@ err_:
                     .Text = "CPUSocket1"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -4634,7 +4751,7 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("CPUProizv1").Value
 
@@ -4642,7 +4759,7 @@ err_:
                     .Text = "CPUProizv1"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -4650,7 +4767,7 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("CPU2").Value
 
@@ -4658,7 +4775,7 @@ err_:
                     .Text = "CPU2"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -4666,7 +4783,7 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("CPUmhz2").Value
 
@@ -4674,7 +4791,7 @@ err_:
                     .Text = "CPUmhz2"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -4682,7 +4799,7 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("CPUSocket2").Value
 
@@ -4690,7 +4807,7 @@ err_:
                     .Text = "CPUSocket2"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -4698,7 +4815,7 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("CPUProizv2").Value
 
@@ -4706,7 +4823,7 @@ err_:
                     .Text = "CPUProizv2"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -4714,7 +4831,7 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("CPU3").Value
 
@@ -4722,7 +4839,7 @@ err_:
                     .Text = "CPU3"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -4730,7 +4847,7 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("CPUmhz3").Value
 
@@ -4738,7 +4855,7 @@ err_:
                     .Text = "CPUmhz3"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -4746,7 +4863,7 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("CPUSocket3").Value
 
@@ -4754,7 +4871,7 @@ err_:
                     .Text = "CPUSocket3"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -4762,7 +4879,7 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("CPUProizv3").Value
 
@@ -4770,7 +4887,7 @@ err_:
                     .Text = "CPUProizv3"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -4778,7 +4895,7 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("CPU4").Value
 
@@ -4786,7 +4903,7 @@ err_:
                     .Text = "CPU4"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -4794,7 +4911,7 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("CPUmhz4").Value
 
@@ -4802,7 +4919,7 @@ err_:
                     .Text = "CPUmhz4"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -4810,7 +4927,7 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("CPUSocket4").Value
 
@@ -4818,7 +4935,7 @@ err_:
                     .Text = "CPUSocket4"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -4826,7 +4943,7 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("CPUProizv4").Value
 
@@ -4834,7 +4951,7 @@ err_:
                     .Text = "CPUProizv4"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -4842,7 +4959,7 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("Mb").Value
 
@@ -4850,7 +4967,7 @@ err_:
                     .Text = "Mb1"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -4858,7 +4975,7 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("Mb_Chip").Value
 
@@ -4866,7 +4983,7 @@ err_:
                     .Text = "Mb_Chip"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -4874,7 +4991,7 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("Mb_Id").Value
 
@@ -4882,7 +4999,7 @@ err_:
                     .Text = "Mb_Iz"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -4890,7 +5007,7 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("Mb_Proizvod").Value
 
@@ -4898,7 +5015,7 @@ err_:
                     .Text = "Mb_Proizvod"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -4906,14 +5023,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("RAM_1").Value
                 With Wrd.Selection.Find
                     .Text = "RAM_1"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -4921,14 +5038,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("RAM_SN_1").Value
                 With Wrd.Selection.Find
                     .Text = "RAM_SN_1"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -4936,14 +5053,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("RAM_speed_1").Value
                 With Wrd.Selection.Find
                     .Text = "RAM_speed_1"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -4951,14 +5068,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("RAM_PROIZV_1").Value
                 With Wrd.Selection.Find
                     .Text = "RAM_PROIZV_1"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -4966,7 +5083,7 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
 
                 uname = .Fields("RAM_2").Value
@@ -4974,7 +5091,7 @@ err_:
                     .Text = "RAM_2"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -4982,14 +5099,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("RAM_SN_2").Value
                 With Wrd.Selection.Find
                     .Text = "RAM_SN_2"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -4997,14 +5114,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("RAM_speed_2").Value
                 With Wrd.Selection.Find
                     .Text = "RAM_speed_2"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5012,14 +5129,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("RAM_PROIZV_2").Value
                 With Wrd.Selection.Find
                     .Text = "RAM_PROIZV_2"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5027,14 +5144,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("RAM_3").Value
                 With Wrd.Selection.Find
                     .Text = "RAM_3"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5042,14 +5159,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("RAM_SN_3").Value
                 With Wrd.Selection.Find
                     .Text = "RAM_SN_3"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5057,14 +5174,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("RAM_speed_3").Value
                 With Wrd.Selection.Find
                     .Text = "RAM_speed_3"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5072,14 +5189,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("RAM_PROIZV_3").Value
                 With Wrd.Selection.Find
                     .Text = "RAM_PROIZV_3"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5087,14 +5204,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("RAM_4").Value
                 With Wrd.Selection.Find
                     .Text = "RAM_4"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5102,14 +5219,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("RAM_SN_4").Value
                 With Wrd.Selection.Find
                     .Text = "RAM_SN_4"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5117,14 +5234,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("RAM_speed_4").Value
                 With Wrd.Selection.Find
                     .Text = "RAM_speed_4"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5132,14 +5249,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("RAM_PROIZV_4").Value
                 With Wrd.Selection.Find
                     .Text = "RAM_PROIZV_4"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5147,14 +5264,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("HDD_Name_1").Value
                 With Wrd.Selection.Find
                     .Text = "HDD_Name_1"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5162,14 +5279,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("HDD_OB_1").Value
                 With Wrd.Selection.Find
                     .Text = "HDD_OB_1"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5177,14 +5294,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("HDD_SN_1").Value
                 With Wrd.Selection.Find
                     .Text = "HDD_SN_1"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5192,14 +5309,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("HDD_PROIZV_1").Value
                 With Wrd.Selection.Find
                     .Text = "HDD_PROIZV_1"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5207,14 +5324,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("HDD_Name_2").Value
                 With Wrd.Selection.Find
                     .Text = "HDD_Name_2"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5222,14 +5339,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("HDD_OB_2").Value
                 With Wrd.Selection.Find
                     .Text = "HDD_OB_2"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5237,14 +5354,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("HDD_SN_2").Value
                 With Wrd.Selection.Find
                     .Text = "HDD_SN_2"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5252,14 +5369,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("HDD_PROIZV_2").Value
                 With Wrd.Selection.Find
                     .Text = "HDD_PROIZV_2"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5267,7 +5384,7 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
 
                 uname = .Fields("HDD_Name_3").Value
@@ -5275,7 +5392,7 @@ err_:
                     .Text = "HDD_Name_3"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5283,14 +5400,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("HDD_OB_3").Value
                 With Wrd.Selection.Find
                     .Text = "HDD_OB_3"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5298,14 +5415,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("HDD_SN_3").Value
                 With Wrd.Selection.Find
                     .Text = "HDD_SN_3"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5313,14 +5430,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("HDD_PROIZV_3").Value
                 With Wrd.Selection.Find
                     .Text = "HDD_PROIZV_3"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5328,7 +5445,7 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
 
                 uname = .Fields("HDD_Name_4").Value
@@ -5336,7 +5453,7 @@ err_:
                     .Text = "HDD_Name_4"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5344,14 +5461,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("HDD_OB_4").Value
                 With Wrd.Selection.Find
                     .Text = "HDD_OB_4"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5359,14 +5476,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("HDD_SN_4").Value
                 With Wrd.Selection.Find
                     .Text = "HDD_SN_4"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5374,14 +5491,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("HDD_PROIZV_4").Value
                 With Wrd.Selection.Find
                     .Text = "HDD_PROIZV_4"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5389,14 +5506,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("SVGA_NAME").Value
                 With Wrd.Selection.Find
                     .Text = "SVGA_NAME"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5404,14 +5521,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("SVGA_OB_RAM").Value
                 With Wrd.Selection.Find
                     .Text = "SVGA_OB_RAM"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5419,14 +5536,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("SVGA_SN").Value
                 With Wrd.Selection.Find
                     .Text = "SVGA_SN"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5434,14 +5551,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("SVGA_PROIZV").Value
                 With Wrd.Selection.Find
                     .Text = "SVGA_PROIZV"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5449,14 +5566,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("SOUND_NAME").Value
                 With Wrd.Selection.Find
                     .Text = "SOUND_NAME"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5464,14 +5581,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("SOUND_SN").Value
                 With Wrd.Selection.Find
                     .Text = "SOUND_SN"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5479,14 +5596,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("SOUND_PROIZV").Value
                 With Wrd.Selection.Find
                     .Text = "SOUND_PROIZV"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5494,14 +5611,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("CD_NAME").Value
                 With Wrd.Selection.Find
                     .Text = "CD_NAME"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5509,14 +5626,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("CD_SPEED").Value
                 With Wrd.Selection.Find
                     .Text = "CD_SPEED"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5524,14 +5641,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("CD_SN").Value
                 With Wrd.Selection.Find
                     .Text = "CD_SN"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5539,14 +5656,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("CD_PROIZV").Value
                 With Wrd.Selection.Find
                     .Text = "CD_PROIZV"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5554,14 +5671,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("CDRW_NAME").Value
                 With Wrd.Selection.Find
                     .Text = "CDRW_NAME"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5569,14 +5686,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("CDRW_SPEED").Value
                 With Wrd.Selection.Find
                     .Text = "CDRW_SPEED"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5584,14 +5701,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("CDRW_SN").Value
                 With Wrd.Selection.Find
                     .Text = "CDRW_SN"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5599,14 +5716,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("CDRW_PROIZV").Value
                 With Wrd.Selection.Find
                     .Text = "CDRW_PROIZV"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5614,14 +5731,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("DVD_NAME").Value
                 With Wrd.Selection.Find
                     .Text = "DVD_NAME"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5629,14 +5746,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("DVD_SPEED").Value
                 With Wrd.Selection.Find
                     .Text = "DVD_SPEED"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5644,14 +5761,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("DVD_SN").Value
                 With Wrd.Selection.Find
                     .Text = "DVD_SN"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5659,14 +5776,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("DVD_PROIZV").Value
                 With Wrd.Selection.Find
                     .Text = "DVD_PROIZV"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5674,14 +5791,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("NET_NAME_1").Value
                 With Wrd.Selection.Find
                     .Text = "NET_NAME_1"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5689,14 +5806,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("NET_IP_1").Value
                 With Wrd.Selection.Find
                     .Text = "NET_IP_1"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5704,14 +5821,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("NET_MAC_1").Value
                 With Wrd.Selection.Find
                     .Text = "NET_MAC_1"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5719,14 +5836,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("NET_PROIZV_1").Value
                 With Wrd.Selection.Find
                     .Text = "NET_PROIZV_1"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5734,7 +5851,7 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
 
                 uname = .Fields("NET_NAME_2").Value
@@ -5742,7 +5859,7 @@ err_:
                     .Text = "NET_NAME_2"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5750,14 +5867,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("NET_IP_2").Value
                 With Wrd.Selection.Find
                     .Text = "NET_IP_2"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5765,14 +5882,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("NET_MAC_2").Value
                 With Wrd.Selection.Find
                     .Text = "NET_MAC_2"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5780,14 +5897,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("NET_PROIZV_2").Value
                 With Wrd.Selection.Find
                     .Text = "NET_PROIZV_2"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5795,14 +5912,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("FDD_NAME").Value
                 With Wrd.Selection.Find
                     .Text = "FDD_NAME"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5810,14 +5927,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("FDD_SN").Value
                 With Wrd.Selection.Find
                     .Text = "FDD_SN"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5825,14 +5942,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("FDD_PROIZV").Value
                 With Wrd.Selection.Find
                     .Text = "FDD_PROIZV"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5840,14 +5957,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("MODEM_NAME").Value
                 With Wrd.Selection.Find
                     .Text = "MODEM_NAME"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5855,14 +5972,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("MODEM_SN").Value
                 With Wrd.Selection.Find
                     .Text = "MODEM_SN"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5870,14 +5987,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("MODEM_PROIZV").Value
                 With Wrd.Selection.Find
                     .Text = "MODEM_PROIZV"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5885,14 +6002,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("KEYBOARD_NAME").Value
                 With Wrd.Selection.Find
                     .Text = "KEYBOARD_NAME"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5900,14 +6017,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("KEYBOARD_SN").Value
                 With Wrd.Selection.Find
                     .Text = "KEYBOARD_SN"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5915,14 +6032,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("KEYBOARD_PROIZV").Value
                 With Wrd.Selection.Find
                     .Text = "KEYBOARD_PROIZV"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5930,14 +6047,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("MOUSE_NAME").Value
                 With Wrd.Selection.Find
                     .Text = "MOUSE_NAME"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5945,14 +6062,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("MOUSE_SN").Value
                 With Wrd.Selection.Find
                     .Text = "MOUSE_SN"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5960,14 +6077,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("MOUSE_PROIZV").Value
                 With Wrd.Selection.Find
                     .Text = "MOUSE_PROIZV"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5975,14 +6092,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("USB_NAME").Value
                 With Wrd.Selection.Find
                     .Text = "USB_NAME"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -5990,14 +6107,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("USB_SN").Value
                 With Wrd.Selection.Find
                     .Text = "USB_SN"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6005,14 +6122,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("USB_PROIZV").Value
                 With Wrd.Selection.Find
                     .Text = "USB_PROIZV"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6020,14 +6137,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("PCI_NAME").Value
                 With Wrd.Selection.Find
                     .Text = "PCI_NAME"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6035,14 +6152,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("PCI_SN").Value
                 With Wrd.Selection.Find
                     .Text = "PCI_SN"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6050,14 +6167,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("PCI_PROIZV").Value
                 With Wrd.Selection.Find
                     .Text = "PCI_PROIZV"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6065,14 +6182,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("MONITOR_NAME").Value
                 With Wrd.Selection.Find
                     .Text = "MONITOR_NAME"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6080,14 +6197,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("MONITOR_DUM").Value
                 With Wrd.Selection.Find
                     .Text = "MONITOR_DUM"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6095,14 +6212,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("MONITOR_SN").Value
                 With Wrd.Selection.Find
                     .Text = "MONITOR_SN"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6110,14 +6227,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("MONITOR_PROIZV").Value
                 With Wrd.Selection.Find
                     .Text = "MONITOR_PROIZV"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6125,14 +6242,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("MONITOR_PROIZV").Value
                 With Wrd.Selection.Find
                     .Text = "MONITOR_PROIZV"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6140,14 +6257,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("MONITOR_NAME2").Value
                 With Wrd.Selection.Find
                     .Text = "MONITOR_NAME2"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6155,14 +6272,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("MONITOR_DUM2").Value
                 With Wrd.Selection.Find
                     .Text = "MONITOR_DUM2"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6170,14 +6287,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("MONITOR_SN2").Value
                 With Wrd.Selection.Find
                     .Text = "MONITOR_SN2"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6185,14 +6302,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("MONITOR_PROIZV2").Value
                 With Wrd.Selection.Find
                     .Text = "MONITOR_PROIZV2"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6200,14 +6317,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("AS_NAME").Value
                 With Wrd.Selection.Find
                     .Text = "AS_NAME"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6215,14 +6332,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("AS_SN").Value
                 With Wrd.Selection.Find
                     .Text = "AS_SN"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6230,14 +6347,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("AS_PROIZV").Value
                 With Wrd.Selection.Find
                     .Text = "AS_PROIZV"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6245,14 +6362,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("IBP_NAME").Value
                 With Wrd.Selection.Find
                     .Text = "IBP_NAME"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6260,14 +6377,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("IBP_SN").Value
                 With Wrd.Selection.Find
                     .Text = "IBP_SN"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6275,14 +6392,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("IBP_PROIZV").Value
                 With Wrd.Selection.Find
                     .Text = "IBP_PROIZV"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6290,14 +6407,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("FILTR_NAME").Value
                 With Wrd.Selection.Find
                     .Text = "FILTR_NAME"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6305,14 +6422,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("FILTR_SN").Value
                 With Wrd.Selection.Find
                     .Text = "FILTR_SN"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6320,14 +6437,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("FILTR_PROIZV").Value
                 With Wrd.Selection.Find
                     .Text = "FILTR_PROIZV"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6335,14 +6452,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("PRINTER_NAME_1").Value
                 With Wrd.Selection.Find
                     .Text = "PRINTER_NAME_1"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6350,14 +6467,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("PRINTER_SN_1").Value
                 With Wrd.Selection.Find
                     .Text = "PRINTER_SN_1"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6365,14 +6482,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("PORT_1").Value
                 With Wrd.Selection.Find
                     .Text = "PORT_1"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6380,14 +6497,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("PRINTER_PROIZV_1").Value
                 With Wrd.Selection.Find
                     .Text = "PRINTER_PROIZV_1"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6395,7 +6512,7 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
 
                 uname = .Fields("PRINTER_NAME_2").Value
@@ -6403,7 +6520,7 @@ err_:
                     .Text = "PRINTER_NAME_2"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6411,14 +6528,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("PRINTER_SN_2").Value
                 With Wrd.Selection.Find
                     .Text = "PRINTER_SN_2"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6426,14 +6543,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("PORT_2").Value
                 With Wrd.Selection.Find
                     .Text = "PORT_2"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6441,14 +6558,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("PRINTER_PROIZV_2").Value
                 With Wrd.Selection.Find
                     .Text = "PRINTER_PROIZV_2"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6456,14 +6573,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("PRINTER_NAME_3").Value
                 With Wrd.Selection.Find
                     .Text = "PRINTER_NAME_3"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6471,14 +6588,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("PRINTER_SN_3").Value
                 With Wrd.Selection.Find
                     .Text = "PRINTER_SN_3"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6486,14 +6603,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("PORT_3").Value
                 With Wrd.Selection.Find
                     .Text = "PORT_3"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6501,14 +6618,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("PRINTER_PROIZV_3").Value
                 With Wrd.Selection.Find
                     .Text = "PRINTER_PROIZV_3"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6516,14 +6633,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("SCANER_NAME").Value
                 With Wrd.Selection.Find
                     .Text = "SCANER_NAME"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6531,14 +6648,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("SCANER_SN").Value
                 With Wrd.Selection.Find
                     .Text = "SCANER_SN"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6546,14 +6663,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("SCANER_PROIZV").Value
                 With Wrd.Selection.Find
                     .Text = "SCANER_PROIZV"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6561,14 +6678,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("NET_NAME").Value
                 With Wrd.Selection.Find
                     .Text = "NET_NAME"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6576,14 +6693,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("PSEVDONIM").Value
                 With Wrd.Selection.Find
                     .Text = "PSEVDONIM"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6591,14 +6708,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("NET_NAME").Value
                 With Wrd.Selection.Find
                     .Text = "#NETNAME"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6606,14 +6723,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("MESTO").Value
                 With Wrd.Selection.Find
                     .Text = "Department"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6621,14 +6738,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("kabn").Value
                 With Wrd.Selection.Find
                     .Text = "Office"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6636,14 +6753,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("TIP_COMPA").Value
                 With Wrd.Selection.Find
                     .Text = "TIP_COMPA"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6651,14 +6768,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("FILIAL").Value
                 With Wrd.Selection.Find
                     .Text = "Branch"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6666,14 +6783,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("TELEPHONE").Value
                 With Wrd.Selection.Find
                     .Text = "TELEPHONE"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6681,14 +6798,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("INV_NO_SYSTEM").Value
                 With Wrd.Selection.Find
                     .Text = "INV_NO_SYSTEM"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6696,14 +6813,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("INV_NO_PRINTER").Value
                 With Wrd.Selection.Find
                     .Text = "INV_NO_PRINTER"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6711,14 +6828,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("INV_NO_MODEM").Value
                 With Wrd.Selection.Find
                     .Text = "INV_NO_MODEM"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6726,14 +6843,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("INV_NO_SCANER").Value
                 With Wrd.Selection.Find
                     .Text = "INV_NO_SCANER"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6741,14 +6858,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("INV_NO_MONITOR").Value
                 With Wrd.Selection.Find
                     .Text = "INV_NO_MONITOR"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6756,14 +6873,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("INV_NO_IBP").Value
                 With Wrd.Selection.Find
                     .Text = "INV_NO_IBP"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6771,14 +6888,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("OTvetstvennyj").Value
                 With Wrd.Selection.Find
                     .Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG5", "Ответственный")
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6786,14 +6903,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("BLOCK").Value
                 With Wrd.Selection.Find
                     .Text = "BLOCK"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6801,14 +6918,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("SN_BLOCK").Value
                 With Wrd.Selection.Find
                     .Text = "SN_BLOCK"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6816,14 +6933,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("PROIZV_BLOCK").Value
                 With Wrd.Selection.Find
                     .Text = "PROIZV_BLOCK"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6831,14 +6948,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 uname = .Fields("SYS_PR").Value
                 With Wrd.Selection.Find
                     .Text = "SYS_PR"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6846,7 +6963,7 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
 
                 uname = .Fields("StoimRub").Value
@@ -6854,7 +6971,7 @@ err_:
                     .Text = "StoimRub"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6862,7 +6979,7 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
 
                 uname = .Fields("DataVVoda").Value
@@ -6870,7 +6987,7 @@ err_:
                     .Text = "DataVVoda"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6878,13 +6995,13 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
 
-
-                Dim rs2 As ADODB.Recordset
-                rs2 = New ADODB.Recordset
-                rs2.Open("Select Postav FROM Garantia_sis WHERE Id_Comp=" & .Fields("id").Value, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                Dim rs2 As Recordset
+                rs2 = New Recordset
+                rs2.Open("Select Postav FROM Garantia_sis WHERE Id_Comp=" & .Fields("id").Value, DB7,
+                         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 With rs2
                     uname = .Fields("Postav").Value
@@ -6897,7 +7014,7 @@ err_:
                     .Text = "Postav"
                     .Replacement.Text = uname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -6905,7 +7022,7 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 oPara1 = oDoc.Content.Paragraphs.Add
                 oPara1.Range.Text = ""
@@ -6924,7 +7041,6 @@ err_:
         '#####################################################################################
 
 
-
         Dim GIST As String
 
 
@@ -6934,11 +7050,10 @@ err_:
         If uname = 1 Then
 
 
-
             sSQL1 = "SELECT count(*) as t_n FROM kompy WHERE PCL=" & frmComputers.sCOUNT
 
-            rs1 = New ADODB.Recordset
-            rs1.Open(sSQL1, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rs1 = New Recordset
+            rs1.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
             With rs1
 
@@ -6978,8 +7093,8 @@ err_:
                 oTable.Cell(1, 4).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG8", "Инвентарный номер")
 
                 sSQL1 = "SELECT * FROM kompy WHERE PCL=" & frmComputers.sCOUNT
-                rs1 = New ADODB.Recordset
-                rs1.Open(sSQL1, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs1 = New Recordset
+                rs1.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 intj = 2
 
@@ -6990,7 +7105,8 @@ err_:
                         Select Case .Fields("tiptehn").Value
 
                             Case "Printer"
-                                oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG27", "Принтер")
+                                oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG27",
+                                                                                       "Принтер")
                                 oTable.Cell(intj, 2).Range.Text = .Fields("NET_NAME").Value
                                 oTable.Cell(intj, 3).Range.Text = .Fields("PRINTER_SN_1").Value
                                 oTable.Cell(intj, 4).Range.Text = .Fields("INV_NO_PRINTER").Value
@@ -7002,7 +7118,8 @@ err_:
                                 oTable.Cell(intj, 4).Range.Text = .Fields("INV_NO_PRINTER").Value
 
                             Case "MONITOR"
-                                oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG24", "Монитор")
+                                oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG24",
+                                                                                       "Монитор")
                                 oTable.Cell(intj, 2).Range.Text = .Fields("NET_NAME").Value
                                 oTable.Cell(intj, 3).Range.Text = .Fields("MONITOR_SN").Value
                                 oTable.Cell(intj, 4).Range.Text = .Fields("INV_NO_MONITOR").Value
@@ -7014,32 +7131,37 @@ err_:
                                 oTable.Cell(intj, 4).Range.Text = .Fields("INV_NO_PRINTER").Value
 
                             Case "SCANER"
-                                oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG34", "Сканер")
+                                oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG34",
+                                                                                       "Сканер")
                                 oTable.Cell(intj, 2).Range.Text = .Fields("NET_NAME").Value
                                 oTable.Cell(intj, 3).Range.Text = .Fields("PRINTER_SN_1").Value
                                 oTable.Cell(intj, 4).Range.Text = .Fields("INV_NO_PRINTER").Value
 
 
                             Case "USB"
-                                oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG37", "USB Устройство")
+                                oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG37",
+                                                                                       "USB Устройство")
                                 oTable.Cell(intj, 2).Range.Text = .Fields("NET_NAME").Value
                                 oTable.Cell(intj, 3).Range.Text = .Fields("PRINTER_SN_1").Value
                                 oTable.Cell(intj, 4).Range.Text = .Fields("INV_NO_PRINTER").Value
 
                             Case "IBP"
-                                oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG35", "Источник бесперебойного питания")
+                                oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG35",
+                                                                                       "Источник бесперебойного питания")
                                 oTable.Cell(intj, 2).Range.Text = .Fields("NET_NAME").Value
                                 oTable.Cell(intj, 3).Range.Text = .Fields("PRINTER_SN_1").Value
                                 oTable.Cell(intj, 4).Range.Text = .Fields("INV_NO_PRINTER").Value
 
                             Case "FS"
-                                oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG26", "Сетевой фильтр")
+                                oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG26",
+                                                                                       "Сетевой фильтр")
                                 oTable.Cell(intj, 2).Range.Text = .Fields("NET_NAME").Value
                                 oTable.Cell(intj, 3).Range.Text = .Fields("PRINTER_SN_1").Value
                                 oTable.Cell(intj, 4).Range.Text = .Fields("INV_NO_PRINTER").Value
 
                             Case "SOUND"
-                                oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG25", "Акустическая система")
+                                oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG25",
+                                                                                       "Акустическая система")
                                 oTable.Cell(intj, 2).Range.Text = .Fields("NET_NAME").Value
                                 oTable.Cell(intj, 3).Range.Text = .Fields("PRINTER_SN_1").Value
                                 oTable.Cell(intj, 4).Range.Text = .Fields("INV_NO_PRINTER").Value
@@ -7068,8 +7190,8 @@ err_:
 
             sSQL1 = "SELECT count(*) as t_n FROM SOFT_INSTALL WHERE id_comp=" & frmComputers.sCOUNT
 
-            rs1 = New ADODB.Recordset
-            rs1.Open(sSQL1, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rs1 = New Recordset
+            rs1.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
             With rs1
 
@@ -7090,7 +7212,8 @@ err_:
                 oPara1.Range.InsertParagraphAfter()
 
                 oPara1 = WrdDc.Content.Paragraphs.Add
-                oPara1.Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG38", "Установленное Программное обеспечение")
+                oPara1.Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG38",
+                                                         "Установленное Программное обеспечение")
                 oPara1.Range.Font.Bold = True
                 oPara1.Format.SpaceAfter = 24    '24 pt spacing after paragraph.
                 oPara1.Range.InsertParagraphAfter()
@@ -7101,13 +7224,14 @@ err_:
                 oTable = WrdDc.Tables.Add(WrdDc.Bookmarks.Item("\endofdoc").Range, GIST + 1, 1)
                 oTable.Range.ParagraphFormat.SpaceAfter = 6
 
-                oTable.Cell(1, 1).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG38", "Установленное Программное обеспечение")
+                oTable.Cell(1, 1).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG38",
+                                                                    "Установленное Программное обеспечение")
 
                 intj = 2
 
                 sSQL1 = "SELECT * FROM SOFT_INSTALL WHERE id_comp=" & frmComputers.sCOUNT
-                rs1 = New ADODB.Recordset
-                rs1.Open(sSQL1, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs1 = New Recordset
+                rs1.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                 With rs1
                     If .RecordCount <> 0 Then
                         .MoveFirst()
@@ -7130,19 +7254,17 @@ err_:
         End If
 
 
-
-
-
         '#####################################################################################
         'ПЕРЕМЕЩЕНИЕ ТЕХНИКИ
-        Dim rscount As ADODB.Recordset 'Объявляем рекордсет
+        Dim rscount As Recordset 'Объявляем рекордсет
 
         uname = objIniFile.GetString("MYBLANK", "DVIG", "0")
 
         If uname = 1 Then
 
-            rscount = New ADODB.Recordset
-            rscount.Open("SELECT COUNT(*) AS total_number FROM dvig WHERE id_comp=" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rscount = New Recordset
+            rscount.Open("SELECT COUNT(*) AS total_number FROM dvig WHERE id_comp=" & frmComputers.sCOUNT, DB7,
+                         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
             With rscount
                 GIST = .Fields("total_number").Value
@@ -7175,8 +7297,9 @@ err_:
                 oTable.Cell(1, 4).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG43", "Дата")
 
                 intj = 2
-                rscount = New ADODB.Recordset
-                rscount.Open("SELECT * FROM dvig WHERE id_comp=" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rscount = New Recordset
+                rscount.Open("SELECT * FROM dvig WHERE id_comp=" & frmComputers.sCOUNT, DB7,
+                             CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 intj = 2
                 With rscount
@@ -7208,8 +7331,9 @@ err_:
 
         If uname = 1 Then
 
-            rscount = New ADODB.Recordset
-            rscount.Open("SELECT COUNT(*) AS total_number FROM Remont WHERE id_comp=" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rscount = New Recordset
+            rscount.Open("SELECT COUNT(*) AS total_number FROM Remont WHERE id_comp=" & frmComputers.sCOUNT, DB7,
+                         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
             With rscount
                 GIST = .Fields("total_number").Value
@@ -7242,8 +7366,9 @@ err_:
                 oTable.Cell(1, 4).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG48", "Уровень")
                 oTable.Cell(1, 5).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG49", "Выполнение")
 
-                rscount = New ADODB.Recordset
-                rscount.Open("SELECT * FROM Remont WHERE id_comp=" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rscount = New Recordset
+                rscount.Open("SELECT * FROM Remont WHERE id_comp=" & frmComputers.sCOUNT, DB7,
+                             CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 'Dim A As String
 
@@ -7268,11 +7393,8 @@ err_:
                 rscount = Nothing
 
 
-
             End If
         End If
-
-
     End Sub
 
     'Public Function ExportListViewToExcel(ByVal MyListView As ListView, ByVal sTXT As String)
@@ -7526,9 +7648,6 @@ err_:
     '    ExcelReport.Cells.Range("A1").Select()
 
 
-
-
-
     'End Function
 
     Public Sub ExportListViewToCalc(ByVal listV As ListView, ByVal sTXT As String)
@@ -7548,7 +7667,7 @@ err_:
         objDesktop = objServiceManager.createInstance("com.sun.star.frame.Desktop")
 
 
-        Dim args(-1) As Object
+        Dim args(- 1) As Object
 
         '%$$$$$$$$$$$$
         objServiceManager = CreateObject("com.sun.star.ServiceManager")
@@ -7570,7 +7689,6 @@ err_:
         'oRange = oSheet.getCellRangeByName("A1:E1")
         'oRange.Merge(True)
         'oRange.ParaAdjust = intParaAdjust
-
 
 
         intj = 1
@@ -7613,15 +7731,12 @@ err_:
             Next
 
 
-
         Next
 
         'replacer = oSheet.getByIndex().createReplaceDescriptor
         'replacer.setSearchString(".*")
         'replacer.setReplaceString("&")
         'Debug.Print(oDoc.replaceAll(replacer))
-
-
     End Sub
 
 
@@ -7634,13 +7749,13 @@ err_:
 
         Dim tipot, sSQL As String
 
-        tipot = Directory.GetParent(Application.ExecutablePath).ToString & "\blanks\SRASP.doc"
+        tipot = Directory.GetParent(System.Windows.Forms.Application.ExecutablePath).ToString & "\blanks\SRASP.doc"
 
-        Dim rs As ADODB.Recordset
+        Dim rs As Recordset
         sSQL = "SELECT * FROM Remont WHERE id = " & sSID
 
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
 
         Dim sTEXT, sMASTER, sISTOCHNIK, sDATE, sMODEL, sSERNUMBER, sTIP, sTIP2, sOBJECT As String
@@ -7659,8 +7774,8 @@ err_:
         rs = Nothing
 
         sSQL = "SELECT * FROM kompy WHERE id = " & sIDCMP
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
             sTIP = .Fields("TipTehn").Value
@@ -7674,23 +7789,28 @@ err_:
                 Case "Printer"
 
                     sSERNUMBER = .Fields("PRINTER_SN_1").Value
-                    sOBJECT = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG27", "Принтер") & " " & .Fields("NET_NAME").Value
+                    sOBJECT = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG27", "Принтер") & " " &
+                              .Fields("NET_NAME").Value
                 Case "KOpir"
 
                     sSERNUMBER = .Fields("PRINTER_SN_1").Value
                     sOBJECT = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG60", "Копир") & " " & .Fields("NET_NAME").Value
                 Case "MONITOR"
                     sSERNUMBER = .Fields("MONITOR_SN").Value
-                    sOBJECT = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG24", "Монитор") & " " & .Fields("NET_NAME").Value
+                    sOBJECT = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG24", "Монитор") & " " &
+                              .Fields("NET_NAME").Value
                 Case "SCANER"
                     sSERNUMBER = .Fields("PRINTER_SN_1").Value
-                    sOBJECT = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG34", "Сканер") & " " & .Fields("NET_NAME").Value
+                    sOBJECT = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG34", "Сканер") & " " &
+                              .Fields("NET_NAME").Value
                 Case "NET"
                     sSERNUMBER = .Fields("port_1").Value
-                    sOBJECT = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG61", "Сетевое оборудование") & " " & .Fields("NET_NAME").Value
+                    sOBJECT = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG61", "Сетевое оборудование") & " " &
+                              .Fields("NET_NAME").Value
                 Case "PHOTO"
                     sSERNUMBER = .Fields("PRINTER_SN_1").Value
-                    sOBJECT = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG62", "Фотоаппарат") & " " & .Fields("NET_NAME").Value
+                    sOBJECT = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG62", "Фотоаппарат") & " " &
+                              .Fields("NET_NAME").Value
                 Case "OT"
                     sSERNUMBER = .Fields("PRINTER_SN_1").Value
                     sMODEL = .Fields("NET_NAME").Value
@@ -7699,10 +7819,12 @@ err_:
                     sOBJECT = sOBJECT & " " & sTIP2
                 Case "ZIP"
                     sSERNUMBER = .Fields("PRINTER_SN_1").Value
-                    sOBJECT = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG65", "Дисковод ZIP") & " " & .Fields("NET_NAME").Value
+                    sOBJECT = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG65", "Дисковод ZIP") & " " &
+                              .Fields("NET_NAME").Value
                 Case "PHONE"
                     sSERNUMBER = .Fields("PRINTER_SN_1").Value
-                    sOBJECT = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG63", "Телефон") & " " & .Fields("NET_NAME").Value
+                    sOBJECT = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG63", "Телефон") & " " &
+                              .Fields("NET_NAME").Value
                 Case "MFU"
                     sSERNUMBER = .Fields("PRINTER_SN_1").Value
                     sOBJECT = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG32", "МФУ") & " " & .Fields("NET_NAME").Value
@@ -7713,18 +7835,22 @@ err_:
                 Case "USB"
 
                     sSERNUMBER = .Fields("PRINTER_SN_1").Value
-                    sOBJECT = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG37", "USB Устройство") & " " & .Fields("NET_NAME").Value
+                    sOBJECT = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG37", "USB Устройство") & " " &
+                              .Fields("NET_NAME").Value
                 Case "IBP"
 
                     sSERNUMBER = .Fields("PRINTER_SN_1").Value
-                    sOBJECT = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG35", "Источник бесперебойного питания") & " " & .Fields("NET_NAME").Value
+                    sOBJECT = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG35", "Источник бесперебойного питания") & " " &
+                              .Fields("NET_NAME").Value
                 Case "FS"
                     sSERNUMBER = .Fields("PRINTER_SN_1").Value
-                    sOBJECT = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG26", "Сетевой фильтр") & " " & .Fields("NET_NAME").Value
+                    sOBJECT = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG26", "Сетевой фильтр") & " " &
+                              .Fields("NET_NAME").Value
 
                 Case "SOUND"
                     sSERNUMBER = .Fields("PRINTER_SN_1").Value
-                    sOBJECT = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG25", "Акустическая система") & " " & .Fields("NET_NAME").Value
+                    sOBJECT = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG25", "Акустическая система") & " " &
+                              .Fields("NET_NAME").Value
 
 
             End Select
@@ -7735,14 +7861,12 @@ err_:
         rs = Nothing
 
 
-
-
         Select Case sOfficePACK
 
             Case "OpenOffice.org"
                 Dim oSM As Object            'Root object for accessing OpenOffice FROM VB
                 Dim oDesk, oDoc As Object 'First objects FROM the API
-                Dim arg(-1) As Object             'Ignore it for the moment !
+                Dim arg(- 1) As Object             'Ignore it for the moment !
 
                 oSM = CreateObject("com.sun.star.ServiceManager")
 
@@ -7786,9 +7910,9 @@ err_:
 
             Case Else
 
-                Dim Wrd As Word.Application
+                Dim Wrd As Application
                 Dim WrdDc As Object
-                Wrd = New Word.Application
+                Wrd = New Application
 
                 WrdDc = Wrd.Documents.Open(tipot, , False)  'Application.
                 WrdDc.Application.Visible = True
@@ -7798,12 +7922,11 @@ err_:
                 'Номер
 
 
-
                 With Wrd.Selection.Find
                     .Text = "источник"
                     .Replacement.Text = sISTOCHNIK
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -7811,13 +7934,13 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "Объект"
                     .Replacement.Text = sOBJECT
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -7825,13 +7948,13 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "Модель"
                     .Replacement.Text = sMODEL
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -7839,13 +7962,13 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "Дефект"
                     .Replacement.Text = sTEXT
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -7853,13 +7976,13 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "Мастер"
                     .Replacement.Text = sMASTER
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -7867,13 +7990,13 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "Число"
                     .Replacement.Text = sDATE
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -7881,14 +8004,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
                 WrdDc = Nothing
                 Wrd = Nothing
 
         End Select
 
         Exit Sub
-err_:
+        err_:
         MsgBox(Err.Description, MsgBoxStyle.Critical, ProGramName)
     End Sub
 
@@ -7900,18 +8023,35 @@ err_:
 
         If sSID = 0 Then Exit Sub
 
-        Dim rs As ADODB.Recordset
+        Dim rs As Recordset
         Dim tipot, sSQL, uname As String
 
         tipot = doc
 
 
-        Dim sTEXT, sMASTER, sISTOCHNIK, sDATE, sTIP, Sorganization, sMEMO, stTIME, stDATE, spTIME, spDATE, sRAB, sSERNUM, spCena, sTIPteh, sBIGBOSS, sGAR As String
+        Dim _
+            sTEXT,
+            sMASTER,
+            sISTOCHNIK,
+            sDATE,
+            sTIP,
+            Sorganization,
+            sMEMO,
+            stTIME,
+            stDATE,
+            spTIME,
+            spDATE,
+            sRAB,
+            sSERNUM,
+            spCena,
+            sTIPteh,
+            sBIGBOSS,
+            sGAR As String
         Dim sIDCMP As Integer
 
         sSQL = "SELECT * FROM CONFIGURE"
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
 
@@ -7923,8 +8063,8 @@ err_:
 
 
         sSQL = "SELECT * FROM Remont WHERE id = " & sSID
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
         With rs
             If Not IsDBNull(.Fields("Remont").Value) Then sTEXT = .Fields("Remont").Value
             If Not IsDBNull(.Fields("Master").Value) Then sMASTER = .Fields("Master").Value
@@ -7949,8 +8089,8 @@ err_:
 
         sSQL = "SELECT count(*) as t_n FROM remonty_plus WHERE id_rem = " & sSID
         Dim rCOUNTer As Integer
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
         With rs
             .MoveFirst()
             Do While Not .EOF
@@ -7967,8 +8107,8 @@ err_:
         If rCOUNTer > 0 Then
 
             sSQL = "SELECT * FROM remonty_plus WHERE id_rem = " & sSID
-            rs = New ADODB.Recordset
-            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rs = New Recordset
+            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
             With rs
                 .MoveFirst()
                 Do While Not .EOF
@@ -7976,7 +8116,8 @@ err_:
                     If Len(sRAB) = 0 Then
                         If Not IsDBNull(.Fields("otzyv").Value) Then sRAB = .Fields("otzyv").Value
                     Else
-                        If Not IsDBNull(.Fields("otzyv").Value) Then sRAB = sRAB & vbNewLine & vbNewLine & .Fields("otzyv").Value
+                        If Not IsDBNull(.Fields("otzyv").Value) Then _
+                            sRAB = sRAB & vbNewLine & vbNewLine & .Fields("otzyv").Value
                     End If
 
                     .MoveNext()
@@ -7988,9 +8129,9 @@ err_:
         End If
 
 
-
-        rs = New ADODB.Recordset
-        rs.Open("select * from kompy where id=" & sIDCMP, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open("select * from kompy where id=" & sIDCMP, DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
 
         Dim sINN, sBR, sDEP, sKab, Snname As String
         With rs
@@ -8116,15 +8257,13 @@ err_:
             End Select
 
 
-
-
         End With
         rs.Close()
         rs = Nothing
 
-        Dim rs1 As ADODB.Recordset
-        rs1 = New ADODB.Recordset
-        rs1.Open("SELECT * FROM CONFIGURE", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        Dim rs1 As Recordset
+        rs1 = New Recordset
+        rs1.Open("SELECT * FROM CONFIGURE", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs1
             If Not IsDBNull(.Fields("org").Value) Then Sorganization = .Fields("org").Value
@@ -8133,13 +8272,12 @@ err_:
         rs1 = Nothing
 
 
-
         Select Case sOfficePACK
 
             Case "OpenOffice.org"
                 Dim oSM As Object            'Root object for accessing OpenOffice FROM VB
                 Dim oDesk, oDoc As Object 'First objects FROM the API
-                Dim arg(-1) As Object             'Ignore it for the moment !
+                Dim arg(- 1) As Object             'Ignore it for the moment !
 
                 oSM = CreateObject("com.sun.star.ServiceManager")
 
@@ -8277,9 +8415,9 @@ err_:
 
             Case Else
 
-                Dim Wrd As Word.Application
+                Dim Wrd As Application
                 Dim WrdDc As Object
-                Wrd = New Word.Application
+                Wrd = New Application
 
                 WrdDc = Wrd.Documents.Open(tipot, , False)  'Application.
                 WrdDc.Application.Visible = True
@@ -8292,7 +8430,7 @@ err_:
                     .Text = "#boss"
                     .Replacement.Text = sBIGBOSS
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -8300,7 +8438,7 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 Dim d() As String
                 d = Split(sMASTER, " ")
@@ -8309,7 +8447,7 @@ err_:
                     .Text = "#Fmaster"
                     .Replacement.Text = d(0)
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -8317,13 +8455,13 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "#Imaster"
                     .Replacement.Text = d(1)
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -8331,14 +8469,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
 
                 With Wrd.Selection.Find
                     .Text = "#Omaster"
                     .Replacement.Text = d(2)
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -8346,14 +8484,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
 
                 With Wrd.Selection.Find
                     .Text = "#tiptehn"
                     .Replacement.Text = sTIPteh
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -8361,7 +8499,7 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
 
                 '#number
@@ -8369,7 +8507,7 @@ err_:
                     .Text = "#number"
                     .Replacement.Text = sSID
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -8377,14 +8515,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
 
                 With Wrd.Selection.Find
                     .Text = "#organization"
                     .Replacement.Text = Sorganization
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -8392,13 +8530,13 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "#branche"
                     .Replacement.Text = sBR & "/" & sDEP & "/" & sKab
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -8406,13 +8544,13 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "#tehn_name"
                     .Replacement.Text = sTIPteh & "::" & Snname
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -8420,13 +8558,13 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "#invnumber"
                     .Replacement.Text = sINN
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -8434,14 +8572,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
 
                 With Wrd.Selection.Find
                     .Text = "#sernumber"
                     .Replacement.Text = sSERNUM
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -8449,14 +8587,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
 
                 With Wrd.Selection.Find
                     .Text = "#textzaiavki"
                     .Replacement.Text = sTEXT
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -8464,13 +8602,13 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "#tip"
                     .Replacement.Text = sTIP
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -8478,13 +8616,13 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "#istochnik"
                     .Replacement.Text = sISTOCHNIK
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -8492,13 +8630,13 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "#dateisp"
                     .Replacement.Text = sDATE
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -8506,14 +8644,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
 
                 With Wrd.Selection.Find
                     .Text = "#koment"
                     .Replacement.Text = sMEMO
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -8521,13 +8659,13 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "#raboty"
                     .Replacement.Text = sRAB
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -8535,13 +8673,13 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "#stoim_Rab"
                     .Replacement.Text = spCena
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -8549,13 +8687,13 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "#master"
                     .Replacement.Text = sMASTER
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -8563,13 +8701,13 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "#starttime"
                     .Replacement.Text = stTIME
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -8577,13 +8715,13 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "#stopdate"
                     .Replacement.Text = spDATE
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -8591,13 +8729,13 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "#stoptime"
                     .Replacement.Text = spTIME
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -8605,13 +8743,13 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "#startdate"
                     .Replacement.Text = stDATE
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -8619,13 +8757,13 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "#date"
                     .Replacement.Text = Date.Today
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -8633,13 +8771,13 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "#time"
                     .Replacement.Text = DateTime.Now.Hour & ":" & DateTime.Now.Minute
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -8647,13 +8785,13 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "#garant_Rem"
                     .Replacement.Text = sGAR
                     .Forward = True
-                    .Wrap = Word.WdFindWrap.wdFindContinue
+                    .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
                     .MatchCase = True
                     .MatchWholeWord = False
@@ -8661,7 +8799,7 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
 
 
                 ' '#garant_Rem
@@ -8672,7 +8810,7 @@ err_:
         End Select
 
         Exit Sub
-err_:
+        err_:
         MsgBox(Err.Description, MsgBoxStyle.Critical, ProGramName)
     End Sub
 
@@ -8686,7 +8824,7 @@ err_:
 
         Dim i As Integer
 
-        Dim New_Item As Windows.Forms.ListViewItem
+        Dim New_Item As ListViewItem
 
         Dim TempColum As Int16
 
@@ -8770,7 +8908,8 @@ err_:
 
             chartRange = ExcelReport.Range(ColumLetter & 3)
 
-            chartRange.BorderAround(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlMedium, Excel.XlColorIndex.xlColorIndexAutomatic, Excel.XlColorIndex.xlColorIndexAutomatic)
+            chartRange.BorderAround(XlLineStyle.xlContinuous, XlBorderWeight.xlMedium,
+                                    XlColorIndex.xlColorIndexAutomatic, XlColorIndex.xlColorIndexAutomatic)
 
             i += 1
 
@@ -8857,7 +8996,8 @@ err_:
 
                 chartRange = ExcelReport.Range(ColumLetter & TempRow)
 
-                chartRange.BorderAround(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlMedium, Excel.XlColorIndex.xlColorIndexAutomatic, Excel.XlColorIndex.xlColorIndexAutomatic)
+                chartRange.BorderAround(XlLineStyle.xlContinuous, XlBorderWeight.xlMedium,
+                                        XlColorIndex.xlColorIndexAutomatic, XlColorIndex.xlColorIndexAutomatic)
 
                 'AddNewFrontColour = False
 
@@ -8925,11 +9065,5 @@ err_:
         ExcelReport.Cells.EntireColumn.AutoFit()
 
         ExcelReport.Cells.Range("A1").Select()
-
-
-
-
-
     End Function
-
 End Module

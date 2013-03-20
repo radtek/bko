@@ -1,20 +1,18 @@
 ﻿Public Class frmGarCPL
     Public sTEXT As String
 
-    Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
+    Private Sub btnCancel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCancel.Click
 
         Me.Close()
-
     End Sub
 
-    Private Sub frmGarCPL_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+    Private Sub frmGarCPL_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
 
         SendFonts(Me)
 
         Call LANG_frmGAR_CPL()
 
         Dim objIniFile As New IniFile(sLANGPATH)
-
 
 
         FillComboNET(Me.cmbPostav, "Name", "SPR_Postav", "", False, True)
@@ -50,7 +48,6 @@
 
         txtMHZ2.Left = txtMHZ1.Left
         txtMHZ2.Width = txtMHZ1.Width
-
 
 
         Select Case sTEXT
@@ -375,19 +372,13 @@
                 FillComboNET(Me.cmbCPU1, "Name", "SPR_USB", "", False, True)
 
 
-
-
-
             Case Else
 
 
         End Select
-
-
-
     End Sub
 
-    Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
+    Private Sub btnAdd_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAdd.Click
         On Error GoTo err_
 
 
@@ -403,9 +394,10 @@
 
             Case "CPU"
 
-                Dim rs As ADODB.Recordset
-                rs = New ADODB.Recordset
-                rs.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                Dim rs As Recordset
+                rs = New Recordset
+                rs.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                        LockTypeEnum.adLockOptimistic)
 
                 With rs
                     .Fields("CPU1").Value = Me.cmbCPU1.Text
@@ -434,16 +426,14 @@
                 LOADt(frmComputers.sCOUNT)
 
 
-
-
                 If EditGarant = True Then
                     sSQL = "SELECT * FROM garant_comp WHERE Id_Comp =" & frmComputers.sCOUNT
                 Else
                     sSQL = "SELECT * FROM garant_comp"
                 End If
 
-                rs = New ADODB.Recordset
-                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 With rs
                     If EditGarant = False Then
@@ -467,9 +457,10 @@
 
             Case "RAM"
 
-                Dim rs As ADODB.Recordset
-                rs = New ADODB.Recordset
-                rs.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                Dim rs As Recordset
+                rs = New Recordset
+                rs.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                        LockTypeEnum.adLockOptimistic)
                 With rs
 
                     .Fields("RAM_1").Value = Me.cmbCPU1.Text
@@ -504,8 +495,8 @@
                     sSQL = "SELECT * FROM garant_comp"
                 End If
 
-                rs = New ADODB.Recordset
-                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 With rs
                     If EditGarant = False Then
@@ -530,9 +521,10 @@
             Case "HDD"
 
 
-                Dim rs As ADODB.Recordset
-                rs = New ADODB.Recordset
-                rs.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                Dim rs As Recordset
+                rs = New Recordset
+                rs.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                        LockTypeEnum.adLockOptimistic)
                 With rs
 
                     .Fields("HDD_Name_1").Value = Me.cmbCPU1.Text
@@ -567,8 +559,8 @@
                     sSQL = "SELECT * FROM garant_comp"
                 End If
 
-                rs = New ADODB.Recordset
-                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 With rs
                     If EditGarant = False Then
@@ -593,9 +585,10 @@
 
             Case "SVGA"
 
-                Dim rs As ADODB.Recordset
-                rs = New ADODB.Recordset
-                rs.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                Dim rs As Recordset
+                rs = New Recordset
+                rs.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                        LockTypeEnum.adLockOptimistic)
                 With rs
 
                     .Fields("SVGA_NAME").Value = Me.cmbCPU1.Text
@@ -615,8 +608,8 @@
                     sSQL = "SELECT * FROM garant_comp"
                 End If
 
-                rs = New ADODB.Recordset
-                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 With rs
                     If EditGarant = False Then
@@ -640,9 +633,10 @@
 
             Case "SOUND"
 
-                Dim rs As ADODB.Recordset
-                rs = New ADODB.Recordset
-                rs.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                Dim rs As Recordset
+                rs = New Recordset
+                rs.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                        LockTypeEnum.adLockOptimistic)
                 With rs
 
                     .Fields("SOUND_NAME").Value = Me.cmbCPU1.Text
@@ -661,8 +655,8 @@
                     sSQL = "SELECT * FROM garant_comp"
                 End If
 
-                rs = New ADODB.Recordset
-                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 With rs
                     If EditGarant = False Then
@@ -686,9 +680,10 @@
 
             Case "MB"
 
-                Dim rs As ADODB.Recordset
-                rs = New ADODB.Recordset
-                rs.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                Dim rs As Recordset
+                rs = New Recordset
+                rs.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                        LockTypeEnum.adLockOptimistic)
                 With rs
 
                     .Fields("Mb").Value = Me.cmbCPU1.Text
@@ -708,8 +703,8 @@
                     sSQL = "SELECT * FROM garant_comp"
                 End If
 
-                rs = New ADODB.Recordset
-                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 With rs
                     If EditGarant = False Then
@@ -734,9 +729,10 @@
 
             Case "OPTICAL"
 
-                Dim rs As ADODB.Recordset
-                rs = New ADODB.Recordset
-                rs.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                Dim rs As Recordset
+                rs = New Recordset
+                rs.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                        LockTypeEnum.adLockOptimistic)
 
                 With rs
 
@@ -767,8 +763,8 @@
                     sSQL = "SELECT * FROM garant_comp"
                 End If
 
-                rs = New ADODB.Recordset
-                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 With rs
                     If EditGarant = False Then
@@ -793,9 +789,10 @@
 
             Case "NET"
 
-                Dim rs As ADODB.Recordset
-                rs = New ADODB.Recordset
-                rs.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                Dim rs As Recordset
+                rs = New Recordset
+                rs.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                        LockTypeEnum.adLockOptimistic)
                 With rs
 
                     .Fields("NET_NAME_1").Value = Me.cmbCPU1.Text
@@ -821,8 +818,8 @@
                     sSQL = "SELECT * FROM garant_comp"
                 End If
 
-                rs = New ADODB.Recordset
-                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 With rs
                     If EditGarant = False Then
@@ -847,9 +844,10 @@
 
             Case "FDD"
 
-                Dim rs As ADODB.Recordset
-                rs = New ADODB.Recordset
-                rs.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                Dim rs As Recordset
+                rs = New Recordset
+                rs.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                        LockTypeEnum.adLockOptimistic)
                 With rs
 
                     .Fields("FDD_NAME").Value = Me.cmbCPU1.Text
@@ -868,8 +866,8 @@
                     sSQL = "SELECT * FROM garant_comp"
                 End If
 
-                rs = New ADODB.Recordset
-                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 With rs
                     If EditGarant = False Then
@@ -893,9 +891,10 @@
 
             Case "MODEM"
 
-                Dim rs As ADODB.Recordset
-                rs = New ADODB.Recordset
-                rs.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                Dim rs As Recordset
+                rs = New Recordset
+                rs.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                        LockTypeEnum.adLockOptimistic)
                 With rs
 
                     .Fields("MODEM_NAME").Value = Me.cmbCPU1.Text
@@ -914,8 +913,8 @@
                     sSQL = "SELECT * FROM garant_comp"
                 End If
 
-                rs = New ADODB.Recordset
-                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 With rs
                     If EditGarant = False Then
@@ -940,9 +939,10 @@
 
             Case "MONITOR"
 
-                Dim rs As ADODB.Recordset
-                rs = New ADODB.Recordset
-                rs.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                Dim rs As Recordset
+                rs = New Recordset
+                rs.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                        LockTypeEnum.adLockOptimistic)
                 With rs
 
                     .Fields("MONITOR_NAME").Value = Me.cmbCPU1.Text
@@ -968,8 +968,8 @@
                     sSQL = "SELECT * FROM garant_comp"
                 End If
 
-                rs = New ADODB.Recordset
-                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 With rs
                     If EditGarant = False Then
@@ -994,9 +994,10 @@
 
             Case "KEYBOARD"
 
-                Dim rs As ADODB.Recordset
-                rs = New ADODB.Recordset
-                rs.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                Dim rs As Recordset
+                rs = New Recordset
+                rs.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                        LockTypeEnum.adLockOptimistic)
                 With rs
 
                     .Fields("KEYBOARD_NAME").Value = Me.cmbCPU1.Text
@@ -1015,8 +1016,8 @@
                     sSQL = "SELECT * FROM garant_comp"
                 End If
 
-                rs = New ADODB.Recordset
-                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 With rs
                     If EditGarant = False Then
@@ -1040,9 +1041,10 @@
 
             Case "MOUSE"
 
-                Dim rs As ADODB.Recordset
-                rs = New ADODB.Recordset
-                rs.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                Dim rs As Recordset
+                rs = New Recordset
+                rs.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                        LockTypeEnum.adLockOptimistic)
                 With rs
 
                     .Fields("MOUSE_NAME").Value = Me.cmbCPU1.Text
@@ -1061,8 +1063,8 @@
                     sSQL = "SELECT * FROM garant_comp"
                 End If
 
-                rs = New ADODB.Recordset
-                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 With rs
                     If EditGarant = False Then
@@ -1087,9 +1089,10 @@
 
             Case "FS"
 
-                Dim rs As ADODB.Recordset
-                rs = New ADODB.Recordset
-                rs.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                Dim rs As Recordset
+                rs = New Recordset
+                rs.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                        LockTypeEnum.adLockOptimistic)
                 With rs
 
                     .Fields("FILTR_NAME").Value = Me.cmbCPU1.Text
@@ -1108,8 +1111,8 @@
                     sSQL = "SELECT * FROM garant_comp"
                 End If
 
-                rs = New ADODB.Recordset
-                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 With rs
                     If EditGarant = False Then
@@ -1134,9 +1137,10 @@
 
             Case "USB"
 
-                Dim rs As ADODB.Recordset
-                rs = New ADODB.Recordset
-                rs.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                Dim rs As Recordset
+                rs = New Recordset
+                rs.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                        LockTypeEnum.adLockOptimistic)
                 With rs
 
                     .Fields("USB_NAME").Value = Me.cmbCPU1.Text
@@ -1155,8 +1159,8 @@
                     sSQL = "SELECT * FROM garant_comp"
                 End If
 
-                rs = New ADODB.Recordset
-                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 With rs
                     If EditGarant = False Then
@@ -1180,17 +1184,17 @@
         End Select
 
 
-
         Me.Close()
 
         Exit Sub
-err_:
+        err_:
         MsgBox(Err.Description)
     End Sub
 
-    Private Sub cmbCPU1_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbCPU1.SelectedIndexChanged
+    Private Sub cmbCPU1_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbCPU1.SelectedIndexChanged
 
-         Select sTEXT
+        Select sTEXT
 
             Case "CPU"
                 ExLoadParFow(cmbCPU1.Text, txtMHZ1, txtSoc1, PROizV1, "SPR_CPU")
@@ -1249,33 +1253,31 @@ err_:
                 ExLoadParTwo(cmbCPU1.Text, PROizV1, "SPR_USB")
 
         End Select
-
-
     End Sub
 
 
-
-    Private Sub ExLoadParFow(ByVal sCombo1 As String, ByVal sText1 As TextBox, ByVal sText2 As TextBox, ByVal sCombo2 As ComboBox, ByVal sTABLE As String)
+    Private Sub ExLoadParFow(ByVal sCombo1 As String, ByVal sText1 As TextBox, ByVal sText2 As TextBox,
+                             ByVal sCombo2 As ComboBox, ByVal sTABLE As String)
 
         On Error Resume Next
-        Dim rs As ADODB.Recordset
+        Dim rs As Recordset
         Dim sSQL As String
         Dim uNI As String
-        rs = New ADODB.Recordset
-
+        rs = New Recordset
 
 
         sSQL = "SELECT * FROM " & sTABLE & " WHERE Name = '" & sCombo1 & "'"
 
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
 
             If Not IsDBNull(.Fields("proizv").Value) Then uNI = .Fields("proizv").Value
 
-            Dim PROYZV As ADODB.Recordset
-            PROYZV = New ADODB.Recordset
-            PROYZV.Open("SELECT * FROM SPR_PROIZV WHERE iD=" & uNI, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            Dim PROYZV As Recordset
+            PROYZV = New Recordset
+            PROYZV.Open("SELECT * FROM SPR_PROIZV WHERE iD=" & uNI, DB7, CursorTypeEnum.adOpenDynamic,
+                        LockTypeEnum.adLockOptimistic)
 
             With PROYZV
                 sCombo2.Text = .Fields("proizv").Value
@@ -1289,31 +1291,30 @@ err_:
 
         rs.Close()
         rs = Nothing
-
-
     End Sub
 
-    Private Sub ExLoadParTree(ByVal sCombo1 As String, ByVal sText1 As TextBox, ByVal sCombo2 As ComboBox, ByVal sTABLE As String)
+    Private Sub ExLoadParTree(ByVal sCombo1 As String, ByVal sText1 As TextBox, ByVal sCombo2 As ComboBox,
+                              ByVal sTABLE As String)
 
         On Error Resume Next
-        Dim rs As ADODB.Recordset
+        Dim rs As Recordset
         Dim sSQL As String
         Dim uNI As String
-        rs = New ADODB.Recordset
-
+        rs = New Recordset
 
 
         sSQL = "SELECT * FROM " & sTABLE & " WHERE Name = '" & sCombo1 & "'"
 
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
 
             If Not IsDBNull(.Fields("proizv").Value) Then uNI = .Fields("proizv").Value
 
-            Dim PROYZV As ADODB.Recordset
-            PROYZV = New ADODB.Recordset
-            PROYZV.Open("SELECT * FROM SPR_PROIZV WHERE iD=" & uNI, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            Dim PROYZV As Recordset
+            PROYZV = New Recordset
+            PROYZV.Open("SELECT * FROM SPR_PROIZV WHERE iD=" & uNI, DB7, CursorTypeEnum.adOpenDynamic,
+                        LockTypeEnum.adLockOptimistic)
 
             With PROYZV
                 sCombo2.Text = .Fields("proizv").Value
@@ -1327,31 +1328,29 @@ err_:
 
         rs.Close()
         rs = Nothing
-
-
     End Sub
 
     Private Sub ExLoadParTwo(ByVal sCombo1 As String, ByVal sCombo2 As ComboBox, ByVal sTABLE As String)
 
         On Error Resume Next
-        Dim rs As ADODB.Recordset
+        Dim rs As Recordset
         Dim sSQL As String
         Dim uNI As String
-        rs = New ADODB.Recordset
-
+        rs = New Recordset
 
 
         sSQL = "SELECT * FROM " & sTABLE & " WHERE Name = '" & sCombo1 & "'"
 
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
 
             If Not IsDBNull(.Fields("proizv").Value) Then uNI = .Fields("proizv").Value
 
-            Dim PROYZV As ADODB.Recordset
-            PROYZV = New ADODB.Recordset
-            PROYZV.Open("SELECT * FROM SPR_PROIZV WHERE iD=" & uNI, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            Dim PROYZV As Recordset
+            PROYZV = New Recordset
+            PROYZV.Open("SELECT * FROM SPR_PROIZV WHERE iD=" & uNI, DB7, CursorTypeEnum.adOpenDynamic,
+                        LockTypeEnum.adLockOptimistic)
 
             With PROYZV
                 sCombo2.Text = .Fields("proizv").Value
@@ -1363,11 +1362,10 @@ err_:
 
         rs.Close()
         rs = Nothing
-
-
     End Sub
 
-    Private Sub cmbCPU2_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbCPU2.SelectedIndexChanged
+    Private Sub cmbCPU2_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbCPU2.SelectedIndexChanged
         Select Case sTEXT
 
             Case "CPU"
@@ -1397,7 +1395,8 @@ err_:
         End Select
     End Sub
 
-    Private Sub cmbCPU3_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbCPU3.SelectedIndexChanged
+    Private Sub cmbCPU3_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbCPU3.SelectedIndexChanged
         Select Case sTEXT
 
             Case "CPU"
@@ -1417,7 +1416,8 @@ err_:
         End Select
     End Sub
 
-    Private Sub cmbCPU4_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbCPU4.SelectedIndexChanged
+    Private Sub cmbCPU4_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbCPU4.SelectedIndexChanged
         Select Case sTEXT
 
             Case "CPU"
@@ -1429,7 +1429,6 @@ err_:
             Case "HDD"
 
                 ExLoadParTree(cmbCPU4.Text, txtMHZ4, PROizV4, "SPR_HDD")
-
 
 
         End Select

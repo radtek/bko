@@ -2,8 +2,7 @@
     Public EDTR As Boolean
 
 
-
-    Private Sub frmSclad_ADD_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+    Private Sub frmSclad_ADD_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
 
         SendFonts(Me)
 
@@ -21,11 +20,11 @@
         End If
     End Sub
 
-    Private Sub cancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cancel.Click
+    Private Sub cancel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles cancel.Click
         Me.Close()
     End Sub
 
-    Private Sub add_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles add.Click
+    Private Sub add_Click(ByVal sender As Object, ByVal e As EventArgs) Handles add.Click
 
         On Error GoTo Error_
         Dim sSQL As String
@@ -38,9 +37,9 @@
 
         End If
 
-        Dim rs As ADODB.Recordset
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        Dim rs As Recordset
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
             If EDTR = True Then
@@ -75,7 +74,7 @@
 
         Me.Close()
         Exit Sub
-Error_:
+        Error_:
         MsgBox(Err.Description, MsgBoxStyle.Information, ProGramName)
     End Sub
 End Class

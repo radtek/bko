@@ -1,7 +1,5 @@
-﻿Imports System.Threading
-Imports System
-Imports System.IO
-Imports System.ComponentModel
+﻿Imports System.IO
+Imports Microsoft.Office.Interop.Word
 
 
 Public Class frmComputers
@@ -37,7 +35,7 @@ Public Class frmComputers
     '    InitializeComponent()
     'End Sub 'New
 
-    Private Sub frmComputers_Activated(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Activated
+    Private Sub frmComputers_Activated(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Activated
 
 
         If uLevelTehAdd = False And uLevel <> "Admin" Then
@@ -53,17 +51,16 @@ Public Class frmComputers
             Me.addFoldertoBranch.Enabled = False
             Me.UpdateToolStripMenuItem.Enabled = False
         End If
-
     End Sub
 
-    Private Sub frmComputers_FormClosed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
+    Private Sub frmComputers_FormClosed(ByVal sender As Object, ByVal e As FormClosedEventArgs) Handles Me.FormClosed
 
         frmMain.SaveInfTehButton.Enabled = False
         frmMain.ToolStripDropDownButton1.Enabled = False
-
     End Sub
 
-    Private Sub chkVisibleSTR_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkVisibleSTR.CheckedChanged
+    Private Sub chkVisibleSTR_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles chkVisibleSTR.CheckedChanged
 
         Me.Cursor = Cursors.WaitCursor
 
@@ -95,10 +92,6 @@ Public Class frmComputers
         'Else
 
         'End If
-
-
-
-
     End Sub
 
     Private Sub PRELOAD_FORM()
@@ -152,30 +145,41 @@ Public Class frmComputers
 
             Case "0"
 
-                ОтделитьПринтерыИМониторыToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG1", "Отделить периферию")
-                ВернутьПерефериюToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG1.1", "Присоеденить периферию")
+                ОтделитьПринтерыИМониторыToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG1",
+                                                                                     "Отделить периферию")
+                ВернутьПерефериюToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG1.1",
+                                                                            "Присоеденить периферию")
 
             Case "1"
 
-                ОтделитьПринтерыИМониторыToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG2", "Отделить мониторы")
-                ВернутьПерефериюToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG2.1", "Присоеденить мониторы")
+                ОтделитьПринтерыИМониторыToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG2",
+                                                                                     "Отделить мониторы")
+                ВернутьПерефериюToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG2.1",
+                                                                            "Присоеденить мониторы")
             Case "2"
 
-                ОтделитьПринтерыИМониторыToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG3", "Отделить принтеры")
-                ВернутьПерефериюToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG3.1", "Присоеденить принтеры")
+                ОтделитьПринтерыИМониторыToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG3",
+                                                                                     "Отделить принтеры")
+                ВернутьПерефериюToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG3.1",
+                                                                            "Присоеденить принтеры")
             Case "3"
 
-                ОтделитьПринтерыИМониторыToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG4", "Отделить ИБП")
+                ОтделитьПринтерыИМониторыToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG4",
+                                                                                     "Отделить ИБП")
                 ВернутьПерефериюToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG4.1", "Присоеденить ИБП")
 
             Case "4"
 
-                ОтделитьПринтерыИМониторыToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG5", "Отделить клавиатуры и мыши")
-                ВернутьПерефериюToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG5.1", "Присоеденить клавиатуры и мыши")
+                ОтделитьПринтерыИМониторыToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG5",
+                                                                                     "Отделить клавиатуры и мыши")
+                ВернутьПерефериюToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG5.1",
+                                                                            "Присоеденить клавиатуры и мыши")
             Case "5"
 
-                ОтделитьПринтерыИМониторыToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG6", " Отделить сетевые фильтры")
-                ВернутьПерефериюToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG6.1", "Присоеденить сетевые фильтры")
+                ОтделитьПринтерыИМониторыToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG6",
+                                                                                     " Отделить сетевые фильтры")
+                ВернутьПерефериюToolStripMenuItem.Text = langfile.GetString("frmComputers", "MSG6.1",
+                                                                            "Присоеденить сетевые фильтры")
         End Select
 
         MassRazdelPerf.Text = ОтделитьПринтерыИМониторыToolStripMenuItem.Text
@@ -197,30 +201,35 @@ Public Class frmComputers
 
         If Len(DCKey) <> 0 And DCKey <> "0" Then sSTAB5.Visible = True
 
+
+        If DATAB = False Then Exit Sub
+
         If KCKey <> 0 Then
             Dim VisibleSSTAB As String
-            Dim sCOUNT As Integer
-            Dim rs As ADODB.Recordset
-            rs = New ADODB.Recordset
+            Dim ssCOUNT As Integer
+            Dim rs As Recordset
+            rs = New Recordset
 
-            rs.Open("SELECT count(*) as t_n from kompy where id=" & KCKey, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rs.Open("SELECT count(*) as t_n from kompy where id=" & KCKey, DB7, CursorTypeEnum.adOpenDynamic,
+                    LockTypeEnum.adLockOptimistic)
 
             With rs
 
-                sCOUNT = .Fields("t_n").Value
+                ssCOUNT = .Fields("t_n").Value
 
             End With
 
             rs.Close()
             rs = Nothing
 
-            If sCOUNT = 0 Then
+            If ssCOUNT = 0 Then
                 sSTAB1.Visible = True
                 Exit Sub
             End If
 
-            rs = New ADODB.Recordset
-            rs.Open("SELECT tiptehn from kompy where id=" & KCKey, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rs = New Recordset
+            rs.Open("SELECT tiptehn from kompy where id=" & KCKey, DB7, CursorTypeEnum.adOpenDynamic,
+                    LockTypeEnum.adLockOptimistic)
             With rs
 
                 VisibleSSTAB = .Fields("tiptehn").Value
@@ -252,47 +261,44 @@ Public Class frmComputers
             End Select
 
         End If
-
     End Sub
 
     Private Sub Load_ICONS()
 
         On Error Resume Next
 
-        mnuDeltoBranch.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\delete.png")
-        DeleteBranche.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\delete.png")
-        addFoldertoBranch.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\fadd.png")
-        RepAddBrToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\service.png")
-        SoftInstallToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\soft.png")
-        ПаспортКомпьютераToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\pasport.png")
-        MassRazdelPerf.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\remove.png")
-        MassObedPerf.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\add.png")
-        MassUpdatetoINI.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\updatefolder.png")
-        DELTEdVIGToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\delete.png")
+        mnuDeltoBranch.Image = New Bitmap(PrPath & "pic\iface\delete.png")
+        DeleteBranche.Image = New Bitmap(PrPath & "pic\iface\delete.png")
+        addFoldertoBranch.Image = New Bitmap(PrPath & "pic\iface\fadd.png")
+        RepAddBrToolStripMenuItem.Image = New Bitmap(PrPath & "pic\iface\service.png")
+        SoftInstallToolStripMenuItem.Image = New Bitmap(PrPath & "pic\iface\soft.png")
+        ПаспортКомпьютераToolStripMenuItem.Image = New Bitmap(PrPath & "pic\iface\pasport.png")
+        MassRazdelPerf.Image = New Bitmap(PrPath & "pic\iface\remove.png")
+        MassObedPerf.Image = New Bitmap(PrPath & "pic\iface\add.png")
+        MassUpdatetoINI.Image = New Bitmap(PrPath & "pic\iface\updatefolder.png")
+        DELTEdVIGToolStripMenuItem.Image = New Bitmap(PrPath & "pic\iface\delete.png")
 
-        EditService.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\editservice.png")
-        DeleteService.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\delete.png")
-        MnuSendEmail.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\sendmail.png")
-        mnu_Z_to_Office.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\serviceprint.png")
-        mnu_z_rasp.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\servicerasp.png")
-        addRemToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\service.png")
+        EditService.Image = New Bitmap(PrPath & "pic\iface\editservice.png")
+        DeleteService.Image = New Bitmap(PrPath & "pic\iface\delete.png")
+        MnuSendEmail.Image = New Bitmap(PrPath & "pic\iface\sendmail.png")
+        mnu_Z_to_Office.Image = New Bitmap(PrPath & "pic\iface\serviceprint.png")
+        mnu_z_rasp.Image = New Bitmap(PrPath & "pic\iface\servicerasp.png")
+        addRemToolStripMenuItem.Image = New Bitmap(PrPath & "pic\iface\service.png")
 
-        CopyToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\copy.png")
-        UpdateToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\pcupdate.png")
-        DeleteToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\delete.png")
-        ОтделитьПринтерыИМониторыToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\remove.png")
-        ВернутьПерефериюToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\add.png")
-        btnSearch.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\search.png")
-        addServiseWork.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\add.png")
-        ППРToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\setup.png")
-        bCPUPlus.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\add.png")
-        bRamPlus.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\add.png")
-        bHddPlus.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\add.png")
-        bSVGAPlus.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\add.png")
-        bOpticalPlus.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\add.png")
-        bNetPlus.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\add.png")
-
-
+        CopyToolStripMenuItem.Image = New Bitmap(PrPath & "pic\iface\copy.png")
+        UpdateToolStripMenuItem.Image = New Bitmap(PrPath & "pic\iface\pcupdate.png")
+        DeleteToolStripMenuItem.Image = New Bitmap(PrPath & "pic\iface\delete.png")
+        ОтделитьПринтерыИМониторыToolStripMenuItem.Image = New Bitmap(PrPath & "pic\iface\remove.png")
+        ВернутьПерефериюToolStripMenuItem.Image = New Bitmap(PrPath & "pic\iface\add.png")
+        btnSearch.Image = New Bitmap(PrPath & "pic\iface\search.png")
+        addServiseWork.Image = New Bitmap(PrPath & "pic\iface\add.png")
+        ППРToolStripMenuItem.Image = New Bitmap(PrPath & "pic\iface\setup.png")
+        bCPUPlus.Image = New Bitmap(PrPath & "pic\iface\add.png")
+        bRamPlus.Image = New Bitmap(PrPath & "pic\iface\add.png")
+        bHddPlus.Image = New Bitmap(PrPath & "pic\iface\add.png")
+        bSVGAPlus.Image = New Bitmap(PrPath & "pic\iface\add.png")
+        bOpticalPlus.Image = New Bitmap(PrPath & "pic\iface\add.png")
+        bNetPlus.Image = New Bitmap(PrPath & "pic\iface\add.png")
     End Sub
 
     Private Sub Tool_Tips_Forms()
@@ -459,19 +465,20 @@ Public Class frmComputers
         ToolTip1.SetToolTip(txtSNIBP, LNGIniFile.GetString("frmComputers", "ToolTips6", "Cерийный номер"))
         ToolTip1.SetToolTip(txtPRNSN, LNGIniFile.GetString("frmComputers", "ToolTips6", "Cерийный номер"))
         ToolTip1.SetToolTip(txtOTHSN, LNGIniFile.GetString("frmComputers", "ToolTips6", "Cерийный номер"))
-
-
     End Sub
 
-    Private Sub frmComputers_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+    Private Sub frmComputers_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
 
         ' Me.BeginInvoke(New MethodInvoker(AddressOf PRELOAD_FORM))
 
         Call PRELOAD_FORM()
 
-        Application.DoEvents()
+        System.Windows.Forms.Application.DoEvents()
 
         Me.BeginInvoke(New MethodInvoker(AddressOf Tool_Tips_Forms))
+
+
+        If DATAB = False Then Exit Sub
 
         'Статистика
         Me.BeginInvoke(New MethodInvoker(AddressOf STAT_INF))
@@ -480,13 +487,13 @@ Public Class frmComputers
 
         Me.Cursor = Cursors.WaitCursor
 
-        Application.DoEvents()
+        System.Windows.Forms.Application.DoEvents()
 
         Me.BeginInvoke(New MethodInvoker(AddressOf R_T_LOAD))
 
         Me.Cursor = Cursors.Default
 
-        Application.DoEvents()
+        System.Windows.Forms.Application.DoEvents()
 
 
         '   If OneStart = 0 Then OneStart = 1
@@ -517,19 +524,16 @@ Public Class frmComputers
         'update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = 'CNT'
 
 
-
-
         Exit Sub
-err_:
+        err_:
     End Sub
 
-    Private Sub frmComputers_Resize(ByVal eventSender As System.Object, ByVal eventArgs As System.EventArgs) Handles MyBase.Resize
+    Private Sub frmComputers_Resize(ByVal eventSender As Object, ByVal eventArgs As EventArgs) Handles MyBase.Resize
 
         Call RESIZER()
-
     End Sub
 
-    Private Sub spCont_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles spCont.Resize
+    Private Sub spCont_Resize(ByVal sender As Object, ByVal e As EventArgs) Handles spCont.Resize
         Call RESIZER()
     End Sub
 
@@ -541,13 +545,9 @@ err_:
         If spCont.SplitterDistance > 450 Then spCont.SplitterDistance = 450
         If spCont.SplitterDistance < 250 Then spCont.SplitterDistance = 250
         PROiZV39.Width = gbOTh.Width - 475
-
-
-
-
     End Sub
 
-    Private Sub spCont_SplitterMoved(ByVal sender As Object, ByVal e As System.Windows.Forms.SplitterEventArgs) Handles spCont.SplitterMoved
+    Private Sub spCont_SplitterMoved(ByVal sender As Object, ByVal e As SplitterEventArgs) Handles spCont.SplitterMoved
         Call RESIZER()
     End Sub
 
@@ -563,8 +563,8 @@ err_:
         Dim d() As String
         d = Split(lstGroups.SelectedNode.Tag, "|")
 
-        Dim rs2 As ADODB.Recordset
-        rs2 = New ADODB.Recordset
+        Dim rs2 As Recordset
+        rs2 = New Recordset
 
 
         sOffice = ""
@@ -577,7 +577,8 @@ err_:
 
             Case "C"
 
-                rs2.Open("SELECT * FROM kompy where Id = " & d(1), DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockBatchOptimistic)
+                rs2.Open("SELECT * FROM kompy where Id = " & d(1), DB7, CursorTypeEnum.adOpenDynamic,
+                         LockTypeEnum.adLockBatchOptimistic)
 
                 With rs2
                     sOffice = .Fields("kabn").Value
@@ -591,26 +592,30 @@ err_:
 
                 '#########################################################################################################################
 
-                If Len(sBranch) <> 0 Then frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "MSG15", "Техники в филиале:")
-                If Len(sDepartment) <> 0 Then frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "MSG16", "Техники в отделе:")
-                If Len(sOffice) <> 0 Then frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "MSG17", "Техники в кабинете:")
+                If Len(sBranch) <> 0 Then _
+                    frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "MSG15", "Техники в филиале:")
+                If Len(sDepartment) <> 0 Then _
+                    frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "MSG16", "Техники в отделе:")
+                If Len(sOffice) <> 0 Then _
+                    frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "MSG17", "Техники в кабинете:")
 
 
-
-                Dim rs As ADODB.Recordset 'Объявляем рекордсет
+                Dim rs As Recordset 'Объявляем рекордсет
                 Dim sSQL As String 'Переменная, где будет размещён SQL запрос
 
 
-                sSQL = "SELECT COUNT(*) as t_n FROM kompy WHERE filial ='" & sBranch & "' and mesto='" & sDepartment & "' and kabn='" & sOffice & "'"
-                rs = New ADODB.Recordset
-                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                sSQL = "SELECT COUNT(*) as t_n FROM kompy WHERE filial ='" & sBranch & "' and mesto='" & sDepartment &
+                       "' and kabn='" & sOffice & "'"
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
 
                 With rs
                     'lblT_O.Text = .Fields("t_n").Value & " " & langfile.GetString("frmComputers", "MSG13", "") '& langIni.GetString("messages", "l4", "")
 
                     frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "lblT_O_T", "Техники в:")
-                    frmMain.LBL_STAT_3.Text = .Fields("t_n").Value & " " & langfile.GetString("frmComputers", "MSG13", "шт.")
+                    frmMain.LBL_STAT_3.Text = .Fields("t_n").Value & " " &
+                                              langfile.GetString("frmComputers", "MSG13", "шт.")
 
                 End With
 
@@ -618,10 +623,10 @@ err_:
                 rs = Nothing
 
 
-
             Case "G"
 
-                rs2.Open("SELECT * FROM SPR_FILIAL where Id = " & d(1), DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockBatchOptimistic)
+                rs2.Open("SELECT * FROM SPR_FILIAL where Id = " & d(1), DB7, CursorTypeEnum.adOpenDynamic,
+                         LockTypeEnum.adLockBatchOptimistic)
 
                 With rs2
                     sBranch = .Fields("FILIAL").Value
@@ -631,13 +636,14 @@ err_:
                 rs2.Close()
                 rs2 = Nothing
 
-                If Len(sBranch) <> 0 Then frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "MSG15", "Техники в филиале:")
-
+                If Len(sBranch) <> 0 Then _
+                    frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "MSG15", "Техники в филиале:")
 
 
             Case "O"
 
-                rs2.Open("SELECT * FROM SPR_OTD_FILIAL where Id = " & d(1), DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockBatchOptimistic)
+                rs2.Open("SELECT * FROM SPR_OTD_FILIAL where Id = " & d(1), DB7, CursorTypeEnum.adOpenDynamic,
+                         LockTypeEnum.adLockBatchOptimistic)
 
                 With rs2
                     sBranch = .Fields("FILIAL").Value
@@ -648,14 +654,15 @@ err_:
                 rs2 = Nothing
 
                 'If Len(sBranch) <> 0 Then frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "MSG15", "")
-                If Len(sDepartment) <> 0 Then frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "MSG16", "Техники в отделе:")
+                If Len(sDepartment) <> 0 Then _
+                    frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "MSG16", "Техники в отделе:")
                 'If Len(sOffice) <> 0 Then frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "MSG17", "")
 
             Case "OT"
 
 
-
-                rs2.Open("SELECT * FROM SPR_MESTO where mestoId = " & d(1), DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockBatchOptimistic)
+                rs2.Open("SELECT * FROM SPR_MESTO where mestoId = " & d(1), DB7, CursorTypeEnum.adOpenDynamic,
+                         LockTypeEnum.adLockBatchOptimistic)
 
                 With rs2
                     sBranch = ""
@@ -666,12 +673,14 @@ err_:
                 rs2 = Nothing
 
                 ' If Len(sBranch) <> 0 Then frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "MSG15", "")
-                If Len(sDepartment) <> 0 Then frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "MSG16", "Техники в отделе:")
+                If Len(sDepartment) <> 0 Then _
+                    frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "MSG16", "Техники в отделе:")
                 ' If Len(sOffice) <> 0 Then frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "MSG17", "")
 
             Case "K"
 
-                rs2.Open("SELECT * FROM SPR_KAB where Id = " & d(1), DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockBatchOptimistic)
+                rs2.Open("SELECT * FROM SPR_KAB where Id = " & d(1), DB7, CursorTypeEnum.adOpenDynamic,
+                         LockTypeEnum.adLockBatchOptimistic)
 
                 With rs2
                     sOffice = .Fields("Name").Value
@@ -684,17 +693,19 @@ err_:
 
                 'If Len(sBranch) <> 0 Then frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "MSG15", "")
                 ' If Len(sDepartment) <> 0 Then frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "MSG16", "")
-                If Len(sOffice) <> 0 Then frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "MSG17", "Техники в кабинете:")
+                If Len(sOffice) <> 0 Then _
+                    frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "MSG17", "Техники в кабинете:")
 
                 Exit Sub
-Error_:
+                Error_:
                 'MsgBox Err.Description
 
 
         End Select
     End Sub
 
-    Private Sub lstGroups_AfterSelect(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TreeViewEventArgs) Handles lstGroups.AfterSelect
+    Private Sub lstGroups_AfterSelect(ByVal sender As Object, ByVal e As TreeViewEventArgs) _
+        Handles lstGroups.AfterSelect
         'ClearBackColor()
         Me.Cursor = Cursors.WaitCursor
         Me.txtSNAME.BackColor = Me.txtSBSN.BackColor
@@ -711,7 +722,7 @@ Error_:
         Me.BeginInvoke(New MethodInvoker(AddressOf LOAD_LIST))
         Me.BeginInvoke(New MethodInvoker(AddressOf selectTECMesto))
 
-        Application.DoEvents()
+        System.Windows.Forms.Application.DoEvents()
 
         Me.Cursor = Cursors.Default
     End Sub
@@ -744,7 +755,6 @@ Error_:
 
         Call Clear_Form_For_Computer()
         ' Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG14", "") & " " & Me.lstGroups.SelectedNode.Text)
-
 
 
         Select Case d(0)
@@ -786,11 +796,11 @@ Error_:
                 sPREF = d(0)
                 sCOUNT = d(1)
 
-                Dim rs As ADODB.Recordset 'Объявляем рекордсет
+                Dim rs As Recordset 'Объявляем рекордсет
                 Dim sSQL As String 'Переменная, где будет размещён SQL запрос
                 sSQL = "SELECT tiptehn FROM kompy WHERE id =" & d(1)
-                rs = New ADODB.Recordset
-                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 ОтделитьПринтерыИМониторыToolStripMenuItem.Visible = False
                 ВернутьПерефериюToolStripMenuItem.Visible = False
@@ -803,11 +813,11 @@ Error_:
                         Case "PC"
                             ОтделитьПринтерыИМониторыToolStripMenuItem.Visible = True
 
-                            Dim rs1 As ADODB.Recordset
+                            Dim rs1 As Recordset
                             Dim sSQL1 As String 'Переменная, где будет размещён SQL запрос
                             sSQL1 = "SELECT count(*) as t_n FROM kompy WHERE PCL =" & d(1)
-                            rs1 = New ADODB.Recordset
-                            rs1.Open(sSQL1, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                            rs1 = New Recordset
+                            rs1.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                             Dim sCNTr As Integer
 
                             With rs1
@@ -858,7 +868,6 @@ Error_:
 
                             'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
                             'newThread6.Start()
-
 
 
                             Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbPCLK)
@@ -912,8 +921,6 @@ Error_:
                             cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG94", "Барабан"))
                             cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG95", "Термо Пленка"))
                             cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG96", "Фотокондуктор"))
-
-
 
 
                             Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbPCL)
@@ -1061,8 +1068,6 @@ Error_:
 
 
                             Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL)
-
-
 
 
                         Case "PHOTO"
@@ -1667,18 +1672,19 @@ Error_:
                 ' lblT_O_T.Text = langfile.GetString("frmComputers", "MSG15", "") 'langini.GetString("messages", "l1", "")
                 'langini.GetString("language", "l1001", "")
 
-                Dim rs As ADODB.Recordset 'Объявляем рекордсет
+                Dim rs As Recordset 'Объявляем рекордсет
                 Dim sSQL As String 'Переменная, где будет размещён SQL запрос
                 sSQL = "SELECT COUNT(*) as t_n FROM kompy WHERE filial ='" & lstGroups.SelectedNode.Text & "' "
-                rs = New ADODB.Recordset
-                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
 
                 With rs
                     '  lblT_O.Text = .Fields("t_n").Value & " " & langfile.GetString("frmComputers", "MSG13", "") '& langIni.GetString("messages", "l4", "")
 
                     frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "lblT_O_T", "Техники в:")
-                    frmMain.LBL_STAT_3.Text = .Fields("t_n").Value & " " & langfile.GetString("frmComputers", "MSG13", "шт")
+                    frmMain.LBL_STAT_3.Text = .Fields("t_n").Value & " " &
+                                              langfile.GetString("frmComputers", "MSG13", "шт")
 
                 End With
 
@@ -1701,13 +1707,13 @@ Error_:
 
                 ' lblT_O_T.Text = langfile.GetString("frmComputers", "MSG16", "") 'langini.GetString("messages", "l2", "")
 
-                Dim rs As ADODB.Recordset 'Объявляем рекордсет
+                Dim rs As Recordset 'Объявляем рекордсет
                 Dim sSQL As String 'Переменная, где будет размещён SQL запрос
                 Dim sFIL As String
 
                 sSQL = "SELECT filial FROM SPR_OTD_FILIAL WHERE id =" & d(1)
-                rs = New ADODB.Recordset
-                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 With rs
                     sFIL = .Fields("filial").Value
@@ -1717,16 +1723,18 @@ Error_:
                 rs = Nothing
 
 
-                sSQL = "SELECT COUNT(*) as t_n FROM kompy WHERE filial ='" & sFIL & "' and mesto='" & lstGroups.SelectedNode.Text & "'"
-                rs = New ADODB.Recordset
-                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                sSQL = "SELECT COUNT(*) as t_n FROM kompy WHERE filial ='" & sFIL & "' and mesto='" &
+                       lstGroups.SelectedNode.Text & "'"
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
 
                 With rs
                     'lblT_O.Text = .Fields("t_n").Value & " " & langfile.GetString("frmComputers", "MSG13", "") '& langIni.GetString("messages", "l4", "")
 
                     frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "lblT_O_T", "Техники в: ")
-                    frmMain.LBL_STAT_3.Text = .Fields("t_n").Value & " " & langfile.GetString("frmComputers", "MSG13", "шт")
+                    frmMain.LBL_STAT_3.Text = .Fields("t_n").Value & " " &
+                                              langfile.GetString("frmComputers", "MSG13", "шт")
 
                 End With
 
@@ -1755,14 +1763,14 @@ Error_:
 
 
                 '###################################################################################
-                Dim rs As ADODB.Recordset 'Объявляем рекордсет
+                Dim rs As Recordset 'Объявляем рекордсет
                 Dim sSQL As String 'Переменная, где будет размещён SQL запрос
                 Dim sFIL As String
                 Dim sOT As String
 
                 sSQL = "SELECT N_F, N_M FROM SPR_KAB WHERE id =" & d(1)
-                rs = New ADODB.Recordset
-                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 With rs
                     sFIL = .Fields("N_F").Value
@@ -1774,16 +1782,18 @@ Error_:
                 rs = Nothing
 
 
-                sSQL = "SELECT COUNT(*) as t_n FROM kompy WHERE filial ='" & sFIL & "' and mesto='" & sOT & "' and kabn='" & lstGroups.SelectedNode.Text & "'"
-                rs = New ADODB.Recordset
-                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                sSQL = "SELECT COUNT(*) as t_n FROM kompy WHERE filial ='" & sFIL & "' and mesto='" & sOT &
+                       "' and kabn='" & lstGroups.SelectedNode.Text & "'"
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
 
                 With rs
                     ' lblT_O.Text = .Fields("t_n").Value & " " & langfile.GetString("frmComputers", "MSG13", "") '& langIni.GetString("messages", "l4", "")
 
                     frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "lblT_O_T", "Техники в: ")
-                    frmMain.LBL_STAT_3.Text = .Fields("t_n").Value & " " & langfile.GetString("frmComputers", "MSG13", "шт.")
+                    frmMain.LBL_STAT_3.Text = .Fields("t_n").Value & " " &
+                                              langfile.GetString("frmComputers", "MSG13", "шт.")
 
                 End With
 
@@ -1806,19 +1816,16 @@ Error_:
 
 
         ' If OneStart = 0 Then OneStart = 1
-
     End Sub
 
     Private Sub S_P_LOAD_t()
 
         Call LOAD_SOFT(sCOUNT, Me.lstSoftware)
-
     End Sub
 
     Private Sub U_P_LOAD_t()
 
         Call LOAD_USER(sCOUNT)
-
     End Sub
 
     Private Sub T_LOAD_T_1()
@@ -1849,7 +1856,6 @@ Error_:
                 Call LOADot(sCOUNT)
 
         End Select
-
     End Sub
 
     Private Sub N_P_LOAD_t()
@@ -1928,7 +1934,6 @@ Error_:
     Public Sub R_T_LOAD()
 
         Call RefFilTree(Me.lstGroups)
-
     End Sub
 
     Public Sub STAT_INF()
@@ -1938,11 +1943,11 @@ Error_:
         Dim sALL, sSP, sBal As String
 
 
-        Dim rs As ADODB.Recordset 'Объявляем рекордсет
+        Dim rs As Recordset 'Объявляем рекордсет
         Dim sSQL As String 'Переменная, где будет размещён SQL запрос
         sSQL = "select COUNT(*) as T_N from kompy"
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
             ' lblT_All.Text = (.Fields("T_N").Value) & " " & langfile.GetString("frmComputers", "MSG13", "")
@@ -1954,12 +1959,11 @@ Error_:
         rs = Nothing
 
 
-
         If DB_N = "MS Access" Then
 
             sSQL = "SELECT count(*) as t_n FROM kompy where Balans=true"
-            rs = New ADODB.Recordset
-            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rs = New Recordset
+            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
             With rs
                 ' lblT_All.Text = (.Fields("T_N").Value) & " " & langfile.GetString("frmComputers", "MSG13", "")
@@ -1973,8 +1977,8 @@ Error_:
             sALL = sALL & "/ Не на балансе: " & sBal
 
             sSQL = "SELECT count(*) as t_n FROM kompy where Spisan=true"
-            rs = New ADODB.Recordset
-            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rs = New Recordset
+            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
             With rs
                 ' lblT_All.Text = (.Fields("T_N").Value) & " " & langfile.GetString("frmComputers", "MSG13", "")
@@ -1995,10 +1999,10 @@ Error_:
 
 
         Exit Sub
-err_:
+        err_:
     End Sub
 
-    Private Sub txtSearch_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSearch.KeyDown
+    Private Sub txtSearch_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtSearch.KeyDown
 
         Select Case e.KeyCode
 
@@ -2010,15 +2014,12 @@ err_:
                 'newThread1.Priority = 3
 
         End Select
-
-
     End Sub
 
     Private Sub S2_LOAD_t()
         'Call Search2(txtSearch.Text)
 
         Call Search(txtSearch.Text, lstGroups, gbTree, "COMP")
-
     End Sub
 
     Private Sub BrainchLoad(ByVal fCombo As ComboBox, ByVal dCombo As ComboBox)
@@ -2027,10 +2028,11 @@ err_:
 
         dCombo.Items.Clear()
 
-        Dim rs1 As ADODB.Recordset
-        rs1 = New ADODB.Recordset
+        Dim rs1 As Recordset
+        rs1 = New Recordset
 
-        rs1.Open("select * from SPR_OTD_FILIAL WHERE Filial='" & fCombo.Text & "' ORDER BY N_Otd", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs1.Open("select * from SPR_OTD_FILIAL WHERE Filial='" & fCombo.Text & "' ORDER BY N_Otd", DB7,
+                 CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
 
         cmbDepartment.Items.Clear()
@@ -2049,9 +2051,8 @@ err_:
         rs1 = Nothing
 
         Exit Sub
-err_:
+        err_:
         ' MsgBox(Err.Description, MsgBoxStyle.Information, ProGramName)
-
     End Sub
 
     Private Sub DepartmentLoad(ByVal fCombo As ComboBox, ByVal dCombo As ComboBox, ByVal oCombo As ComboBox)
@@ -2060,10 +2061,11 @@ err_:
 
         oCombo.Items.Clear()
 
-        Dim rs1 As ADODB.Recordset
-        rs1 = New ADODB.Recordset
+        Dim rs1 As Recordset
+        rs1 = New Recordset
 
-        rs1.Open("select * from SPR_KAB WHERE N_F='" & fCombo.Text & "' AND N_M='" & dCombo.Text & "' ORDER BY Name", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs1.Open("select * from SPR_KAB WHERE N_F='" & fCombo.Text & "' AND N_M='" & dCombo.Text & "' ORDER BY Name",
+                 DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
 
         cmbOffice.Items.Clear()
@@ -2080,14 +2082,14 @@ err_:
         rs1 = Nothing
 
         Exit Sub
-err_:
-
+        err_:
     End Sub
 
-    Private Sub lstSoftware_ColumnClick(ByVal sender As Object, ByVal e As System.Windows.Forms.ColumnClickEventArgs) Handles lstSoftware.ColumnClick
-        Dim new_sorting_column As ColumnHeader = _
-         lstSoftware.Columns(e.Column)
-        Dim sort_order As System.Windows.Forms.SortOrder
+    Private Sub lstSoftware_ColumnClick(ByVal sender As Object, ByVal e As ColumnClickEventArgs) _
+        Handles lstSoftware.ColumnClick
+        Dim new_sorting_column As ColumnHeader =
+                lstSoftware.Columns(e.Column)
+        Dim sort_order As SortOrder
         If m_SortingColumn Is Nothing Then
             sort_order = SortOrder.Ascending
         Else
@@ -2115,7 +2117,7 @@ err_:
         lstSoftware.Sort()
     End Sub
 
-    Private Sub lstSoftware_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstSoftware.DoubleClick
+    Private Sub lstSoftware_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles lstSoftware.DoubleClick
         Dim rCOUNT As Integer
 
         If lstSoftware.Items.Count = 0 Then Exit Sub
@@ -2132,7 +2134,6 @@ err_:
         frmSoftware.Show()
 
         Call frmSoftware.Soft_Click(rCOUNT)
-
     End Sub
 
     Private Sub zCOUNT_LOAD(ByVal lvNote As ListView)
@@ -2143,7 +2144,9 @@ err_:
         Next
     End Sub
 
-    Private Sub NotesLoaded(ByVal lvNotes As ListView, ByVal dtdatenotes As DateTimePicker, ByVal cmbNotesMaster As ComboBox, ByVal txtNotes As TextBox, ByVal btnNotes As ToolStripButton)
+    Private Sub NotesLoaded(ByVal lvNotes As ListView, ByVal dtdatenotes As DateTimePicker,
+                            ByVal cmbNotesMaster As ComboBox, ByVal txtNotes As TextBox,
+                            ByVal btnNotes As ToolStripButton)
 
         If lvNotes.Items.Count = 0 Then Exit Sub
 
@@ -2153,10 +2156,11 @@ err_:
             zCOUNT = (lvNotes.SelectedItems(z).Text)
         Next
 
-        Dim rs As ADODB.Recordset
-        rs = New ADODB.Recordset
+        Dim rs As Recordset
+        rs = New Recordset
 
-        rs.Open("SELECT * FROM Zametki WHERE id=" & zCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs.Open("SELECT * FROM Zametki WHERE id=" & zCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
 
         With rs
 
@@ -2183,24 +2187,28 @@ err_:
         Dim langfile As New IniFile(sLANGPATH)
 
 
-        Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG20", "Удаление заметки для") & " " & Me.lstGroups.SelectedNode.Text)
+        Call _
+            SaveActivityToLogDB(
+                langfile.GetString("frmComputers", "MSG20", "Удаление заметки для") & " " &
+                Me.lstGroups.SelectedNode.Text)
 
-        Dim rs As ADODB.Recordset
-        rs = New ADODB.Recordset
+        Dim rs As Recordset
+        rs = New Recordset
 
-        rs.Open("DELETE FROM Zametki WHERE id=" & zCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs.Open("DELETE FROM Zametki WHERE id=" & zCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
 
         rs = Nothing
 
         Call LOAD_NOTES(sCOUNT, lvNote)
-
-
     End Sub
 
-    Private Sub addRemToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles addRemToolStripMenuItem.Click
+    Private Sub addRemToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles addRemToolStripMenuItem.Click
         Dim langfile As New IniFile(sLANGPATH)
 
-        frmService_add.Text = langfile.GetString("frmComputers", "MSG21", "Добавление (редактирование) заявки для ") & " " & lstGroups.SelectedNode.Text
+        frmService_add.Text = langfile.GetString("frmComputers", "MSG21", "Добавление (редактирование) заявки для ") &
+                              " " & lstGroups.SelectedNode.Text
 
         'serviceDesc.MdiParent = frmMain
         'serviceDesc.Show()
@@ -2224,17 +2232,26 @@ err_:
 
         frmService_add.ShowDialog(frmserviceDesc)
 
-        Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG22", "Добавление заявки для ") & " " & lstGroups.SelectedNode.Text)
+        Call _
+            SaveActivityToLogDB(
+                langfile.GetString("frmComputers", "MSG22", "Добавление заявки для ") & " " &
+                lstGroups.SelectedNode.Text)
     End Sub
 
-    Private Sub DeleteToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DeleteToolStripMenuItem.Click
+    Private Sub DeleteToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles DeleteToolStripMenuItem.Click
         Dim langfile As New IniFile(sLANGPATH)
 
 
-        If MsgBox(langfile.GetString("frmComputers", "MSG23", "Вы уверены что хотите удалить") & " " & lstGroups.SelectedNode.Text, MsgBoxStyle.YesNo, ProGramName) = MsgBoxResult.Yes Then
+        If _
+            MsgBox(
+                langfile.GetString("frmComputers", "MSG23", "Вы уверены что хотите удалить") & " " &
+                lstGroups.SelectedNode.Text, MsgBoxStyle.YesNo, ProGramName) = MsgBoxResult.Yes Then
 
 
-            Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG24", "Удаление техники") & " " & lstGroups.SelectedNode.Text)
+            Call _
+                SaveActivityToLogDB(
+                    langfile.GetString("frmComputers", "MSG24", "Удаление техники") & " " & lstGroups.SelectedNode.Text)
 
             Dim d() As String
             d = Split(lstGroups.SelectedNode.Tag, "|")
@@ -2251,7 +2268,6 @@ err_:
         Else
 
         End If
-
     End Sub
 
     Private Sub LoadRepairEdit(ByVal lvList As ListView)
@@ -2279,16 +2295,17 @@ err_:
 
         frmserviceDesc.rCOUNT = rCOUNT
         Dim sSQL As String
-        Dim rs1 As ADODB.Recordset
-        rs1 = New ADODB.Recordset
+        Dim rs1 As Recordset
+        rs1 = New Recordset
 
         sSQL = "SELECT * FROM Remont WHERE id=" & rCOUNT
 
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
-        frmService_add.Text = LNGIniFile.GetString("frmserviceDesc", "MSG1", "Добавление (редактирование) заявки для") & " " & lstGroups.SelectedNode.Text
+        frmService_add.Text = LNGIniFile.GetString("frmserviceDesc", "MSG1", "Добавление (редактирование) заявки для") &
+                              " " & lstGroups.SelectedNode.Text
 
-        rs1.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
         Dim sSw As Date
         Dim sSw2 As String
 
@@ -2296,8 +2313,10 @@ err_:
             .MoveFirst()
             Do While Not .EOF
 
-                If Not IsDBNull(.Fields("istochnik").Value) Then frmService_add.cmbIst.Text = .Fields("istochnik").Value 'Источник
-                If Not IsDBNull(.Fields("Master").Value) Then frmService_add.cmbMast.Text = .Fields("Master").Value 'Мастер
+                If Not IsDBNull(.Fields("istochnik").Value) Then frmService_add.cmbIst.Text = .Fields("istochnik").Value _
+                'Источник
+                If Not IsDBNull(.Fields("Master").Value) Then frmService_add.cmbMast.Text = .Fields("Master").Value _
+                'Мастер
 
 
                 If Not IsDBNull(.Fields("Date").Value) Then sSw = .Fields("Date").Value
@@ -2315,23 +2334,30 @@ err_:
                 frmService_add.dtIsp.Value = sSw2 'Срок исполнения
 
 
-                If Not IsDBNull(.Fields("phone").Value) Then frmService_add.txtPhone.Text = .Fields("phone").Value 'Телефон
-                If Not IsDBNull(.Fields("name_of_remont").Value) Then frmService_add.txtHead.Text = .Fields("name_of_remont").Value 'Название
-                If Not IsDBNull(.Fields("Remont").Value) Then frmService_add.txtRem.Text = .Fields("Remont").Value 'Сообщение
+                If Not IsDBNull(.Fields("phone").Value) Then frmService_add.txtPhone.Text = .Fields("phone").Value _
+                'Телефон
+                If Not IsDBNull(.Fields("name_of_remont").Value) Then _
+                    frmService_add.txtHead.Text = .Fields("name_of_remont").Value 'Название
+                If Not IsDBNull(.Fields("Remont").Value) Then frmService_add.txtRem.Text = .Fields("Remont").Value _
+                'Сообщение
                 If Not IsDBNull(.Fields("vip").Value) Then frmService_add.cmbStatus.Text = .Fields("vip").Value 'Статус
-                If Not IsDBNull(.Fields("otvetstv").Value) Then frmService_add.cmbOtv.Text = .Fields("otvetstv").Value 'Ответственный
+                If Not IsDBNull(.Fields("otvetstv").Value) Then frmService_add.cmbOtv.Text = .Fields("otvetstv").Value _
+                'Ответственный
 
-                If Not IsDBNull(.Fields("krit_rem").Value) Then frmService_add.cmbTip.Text = .Fields("krit_rem").Value 'Критичность
+                If Not IsDBNull(.Fields("krit_rem").Value) Then frmService_add.cmbTip.Text = .Fields("krit_rem").Value _
+                'Критичность
                 If Not IsDBNull(.Fields("Uroven").Value) Then frmService_add.cmbKrit.Text = .Fields("Uroven").Value 'Тип
 
 
-                If Not IsDBNull(.Fields("MeMo").Value) Then frmService_add.txtComent.Text = .Fields("MeMo").Value 'Комментарий
+                If Not IsDBNull(.Fields("MeMo").Value) Then frmService_add.txtComent.Text = .Fields("MeMo").Value _
+                'Комментарий
 
-                If Not IsDBNull(.Fields("Summ").Value) Then frmService_add.RemCashe.Text = .Fields("Summ").Value 'Комментарий
+                If Not IsDBNull(.Fields("Summ").Value) Then frmService_add.RemCashe.Text = .Fields("Summ").Value _
+                'Комментарий
 
                 '.Fields("Summ").Value = RemCashe.Text 'Сумма
 
-                If .Fields("zakryt").Value = -1 Then
+                If .Fields("zakryt").Value = - 1 Then
                     frmService_add.chkClose.Checked = 1
                 Else
 
@@ -2348,8 +2374,8 @@ err_:
 
         Dim unam As String
         sSQL = "SELECT COUNT(*) AS t_number FROM remonty_plus WHERE id_rem=" & rCOUNT
-        rs1 = New ADODB.Recordset
-        rs1.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs1 = New Recordset
+        rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs1
             unam = .Fields("t_number").Value
@@ -2375,12 +2401,10 @@ err_:
         End If
 
         frmService_add.ShowDialog(Me)
-
-
-
     End Sub
 
-    Private Sub CopyToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CopyToolStripMenuItem.Click
+    Private Sub CopyToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles CopyToolStripMenuItem.Click
 
         EDT = False
         sCOUNT = 0
@@ -2473,11 +2497,12 @@ err_:
 
         Dim langfile As New IniFile(sLANGPATH)
 
-        Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG25", "Копирование техники") & " " & lstGroups.SelectedNode.Text)
-
+        Call _
+            SaveActivityToLogDB(
+                langfile.GetString("frmComputers", "MSG25", "Копирование техники") & " " & lstGroups.SelectedNode.Text)
     End Sub
 
-    Private Sub mnuDeltoBranch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuDeltoBranch.Click
+    Private Sub mnuDeltoBranch_Click(ByVal sender As Object, ByVal e As EventArgs) Handles mnuDeltoBranch.Click
         Dim langfile As New IniFile(sLANGPATH)
 
         Me.Cursor = Cursors.WaitCursor
@@ -2507,26 +2532,36 @@ err_:
 
                 sSQL = "SELECT id,net_name,psevdonim FROM kompy where filial ='" & sBranch & "' and mesto=''"
 
-                Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG26", "Массовое удаление техники из") & " " & sBranch)
+                Call _
+                    SaveActivityToLogDB(
+                        langfile.GetString("frmComputers", "MSG26", "Массовое удаление техники из") & " " & sBranch)
 
             Case "O"
 
-                sSQL = "SELECT id,net_name,psevdonim FROM kompy where filial ='" & sBranch & "' and mesto='" & sDepartment & "' and kabn=''"
+                sSQL = "SELECT id,net_name,psevdonim FROM kompy where filial ='" & sBranch & "' and mesto='" &
+                       sDepartment & "' and kabn=''"
 
-                Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG26", "Массовое удаление техники из") & " " & sBranch & "/" & sDepartment)
+                Call _
+                    SaveActivityToLogDB(
+                        langfile.GetString("frmComputers", "MSG26", "Массовое удаление техники из") & " " & sBranch &
+                        "/" & sDepartment)
 
             Case "K"
 
-                sSQL = "SELECT id,net_name,psevdonim FROM kompy where filial ='" & sBranch & "' and mesto='" & sDepartment & "' AND kabn ='" & sOffice & "'"
+                sSQL = "SELECT id,net_name,psevdonim FROM kompy where filial ='" & sBranch & "' and mesto='" &
+                       sDepartment & "' AND kabn ='" & sOffice & "'"
 
-                Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG26", "Массовое удаление техники из") & " " & sBranch & "/" & sDepartment & "/" & sOffice)
+                Call _
+                    SaveActivityToLogDB(
+                        langfile.GetString("frmComputers", "MSG26", "Массовое удаление техники из") & " " & sBranch &
+                        "/" & sDepartment & "/" & sOffice)
 
         End Select
 
-        Dim rs As ADODB.Recordset
-        rs = New ADODB.Recordset
+        Dim rs As Recordset
+        rs = New Recordset
 
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
             .MoveFirst()
@@ -2593,11 +2628,11 @@ err_:
 
         Me.Cursor = Cursors.Default
         Exit Sub
-err_:
+        err_:
         Me.Cursor = Cursors.Default
     End Sub
 
-    Private Sub addFoldertoBranch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles addFoldertoBranch.Click
+    Private Sub addFoldertoBranch_Click(ByVal sender As Object, ByVal e As EventArgs) Handles addFoldertoBranch.Click
         'On Error GoTo Err_
 
 
@@ -2673,8 +2708,6 @@ err_:
                         End Select
 
 
-
-
                         cmbBranch.Text = sBranch
                         cmbDepartment.Text = sDepartment
                         cmbOffice.Text = sOffice
@@ -2711,12 +2744,12 @@ err_:
 
         Me.Cursor = Cursors.Default
         Exit Sub
-err_:
+        err_:
         MsgBox(Err.Description)
-
     End Sub
 
-    Private Sub UpdateToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles UpdateToolStripMenuItem.Click
+    Private Sub UpdateToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles UpdateToolStripMenuItem.Click
         If TipTehn <> "PC" Then Exit Sub
 
         Dim ePatch As String
@@ -2744,17 +2777,19 @@ err_:
         Dim langfile As New IniFile(sLANGPATH)
 
 
-        Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG28", "Обновление компьютера") & " " & lstGroups.SelectedNode.Text)
+        Call _
+            SaveActivityToLogDB(
+                langfile.GetString("frmComputers", "MSG28", "Обновление компьютера") & " " & lstGroups.SelectedNode.Text)
         Me.Cursor = Cursors.Default
-
-
     End Sub
 
-    Private Sub ДобавитьЗаявкуToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RepAddBrToolStripMenuItem.Click
+    Private Sub ДобавитьЗаявкуToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles RepAddBrToolStripMenuItem.Click
 
         Dim langfile As New IniFile(sLANGPATH)
 
-        frmService_add.Text = langfile.GetString("frmComputers", "MSG21", "Добавление (редактирование) заявки для ") & " " & lstGroups.SelectedNode.Text
+        frmService_add.Text = langfile.GetString("frmComputers", "MSG21", "Добавление (редактирование) заявки для ") &
+                              " " & lstGroups.SelectedNode.Text
         'serviceDesc.MdiParent = frmMain
         'serviceDesc.Show()
         frmService_add.REMFU = True
@@ -2777,12 +2812,15 @@ err_:
         frmService_add.ShowDialog(frmserviceDesc)
     End Sub
 
-    Private Sub DeleteBranche_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DeleteBranche.Click
+    Private Sub DeleteBranche_Click(ByVal sender As Object, ByVal e As EventArgs) Handles DeleteBranche.Click
 
         Dim langfile As New IniFile(sLANGPATH)
 
 
-        If MsgBox(langfile.GetString("frmComputers", "MSG23", "Вы уверены что хотите удалить") & " " & lstGroups.SelectedNode.Text, MsgBoxStyle.YesNo, ProGramName) = MsgBoxResult.Yes Then
+        If _
+            MsgBox(
+                langfile.GetString("frmComputers", "MSG23", "Вы уверены что хотите удалить") & " " &
+                lstGroups.SelectedNode.Text, MsgBoxStyle.YesNo, ProGramName) = MsgBoxResult.Yes Then
 
             Me.Cursor = Cursors.WaitCursor
             On Error GoTo err_
@@ -2794,8 +2832,6 @@ err_:
             d = Split(lstGroups.SelectedNode.Tag, "|")
 
 
-
-
             Select Case d(0)
 
                 Case "C"
@@ -2803,17 +2839,25 @@ err_:
                 Case "G"
 
                     RemoveBrainch(lstGroups.SelectedNode.Text)
-                    Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG31", "Удаление филиала") & " " & sBranch)
+                    Call _
+                        SaveActivityToLogDB(
+                            langfile.GetString("frmComputers", "MSG31", "Удаление филиала") & " " & sBranch)
 
                 Case "O"
 
                     RemoveDepartment(d(1))
-                    Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG32", "Удаление отдела") & " " & sBranch & "/" & sDepartment)
+                    Call _
+                        SaveActivityToLogDB(
+                            langfile.GetString("frmComputers", "MSG32", "Удаление отдела") & " " & sBranch & "/" &
+                            sDepartment)
 
                 Case "K"
 
                     RemoveOffice(d(1))
-                    Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG33", "Удаление кабинета") & " " & sBranch & "/" & sDepartment & "/" & sOffice)
+                    Call _
+                        SaveActivityToLogDB(
+                            langfile.GetString("frmComputers", "MSG33", "Удаление кабинета") & " " & sBranch & "/" &
+                            sDepartment & "/" & sOffice)
 
             End Select
 
@@ -2825,12 +2869,11 @@ err_:
         End If
 
         Exit Sub
-err_:
+        err_:
         Me.Cursor = Cursors.Default
-
     End Sub
 
-    Private Sub lstGroups_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lstGroups.MouseDown
+    Private Sub lstGroups_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs) Handles lstGroups.MouseDown
         Select Case e.Button
             Case MouseButtons.Left
                 BTN = 1
@@ -2841,7 +2884,7 @@ err_:
         End Select
     End Sub
 
-    Private Sub lstGroups_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lstGroups.MouseUp
+    Private Sub lstGroups_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles lstGroups.MouseUp
 
 
         'BTN = Button
@@ -2859,7 +2902,7 @@ err_:
 
             Case "C" 'Техника
 
-                If e.Button = Windows.Forms.MouseButtons.Right Then
+                If e.Button = MouseButtons.Right Then
 
                     cmMENU.Show(CType(sender, Control), e.Location)
 
@@ -2867,7 +2910,7 @@ err_:
 
             Case "G"
 
-                If e.Button = Windows.Forms.MouseButtons.Right Then
+                If e.Button = MouseButtons.Right Then
                     mnuDeltoBranch.Text = langfile.GetString("frmComputers", "MSG34", "Удалить из филиала")
 
                     cmBmenu.Show(CType(sender, Control), e.Location)
@@ -2876,7 +2919,7 @@ err_:
 
             Case "K"
 
-                If e.Button = Windows.Forms.MouseButtons.Right Then
+                If e.Button = MouseButtons.Right Then
                     mnuDeltoBranch.Text = langfile.GetString("frmComputers", "MSG35", "Удалить из кабинета")
 
                     cmBmenu.Show(CType(sender, Control), e.Location)
@@ -2885,7 +2928,7 @@ err_:
 
             Case "O"
 
-                If e.Button = Windows.Forms.MouseButtons.Right Then
+                If e.Button = MouseButtons.Right Then
                     mnuDeltoBranch.Text = langfile.GetString("frmComputers", "MSG36", "Удалить из отдела")
 
                     cmBmenu.Show(CType(sender, Control), e.Location)
@@ -2894,7 +2937,7 @@ err_:
 
             Case "OT"
 
-                If e.Button = Windows.Forms.MouseButtons.Right Then
+                If e.Button = MouseButtons.Right Then
                     mnuDeltoBranch.Text = langfile.GetString("frmComputers", "MSG36", "Удалить из отдела")
 
                     cmBmenu.Show(CType(sender, Control), e.Location)
@@ -2903,7 +2946,7 @@ err_:
 
             Case "CNT"
 
-                If e.Button = Windows.Forms.MouseButtons.Right Then
+                If e.Button = MouseButtons.Right Then
                     mnuDeltoBranch.Text = langfile.GetString("frmComputers", "MSG36", "Удалить из отдела")
 
                     cmBmenu.Show(CType(sender, Control), e.Location)
@@ -2914,21 +2957,20 @@ err_:
 
 
         Exit Sub
-err_:
-
+        err_:
     End Sub
 
-    Private Sub btnOfficeSend_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOfficeSend.Click
+    Private Sub btnOfficeSend_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnOfficeSend.Click
 
         Me.selectTECMesto()
 
 
         Dim tipot As String
-        tipot = Directory.GetParent(Application.ExecutablePath).ToString & "/blanks/ses.dot"
+        tipot = Directory.GetParent(System.Windows.Forms.Application.ExecutablePath).ToString & "/blanks/ses.dot"
 
-        Dim rsG As ADODB.Recordset
-        rsG = New ADODB.Recordset
-        rsG.Open("SELECT * FROM CONFIGURE", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        Dim rsG As Recordset
+        rsG = New Recordset
+        rsG.Open("SELECT * FROM CONFIGURE", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
         Dim aaaa As String
 
         With rsG
@@ -2942,7 +2984,7 @@ err_:
 
         Dim oSM As Object                 'Root object for accessing OpenOffice FROM VB
         Dim oDesk, oDoc As Object 'First objects FROM the API
-        Dim arg(-1) As Object                 'Ignore it for the moment !
+        Dim arg(- 1) As Object                 'Ignore it for the moment !
         'Dim mmerge As Object
         Dim objCoreReflection As Object ' objects from OOo API 
 
@@ -3024,16 +3066,14 @@ err_:
         oSrch.setSearchString("KOLKOM")
         oSrch.setReplaceString(frmMain.LBL_STAT_2.Text)
         Debug.Print(oDoc.replaceAll(oSrch))
-
-
-
     End Sub
 
-    Private Sub lvRepairBR_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs)
+    Private Sub lvRepairBR_DoubleClick(ByVal sender As Object, ByVal e As EventArgs)
         LoadRepairEdit(lvRepairBR)
     End Sub
 
-    Private Sub SoftInstallToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SoftInstallToolStripMenuItem.Click
+    Private Sub SoftInstallToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles SoftInstallToolStripMenuItem.Click
 
         Dim sSQL, sSQL1, A, scN As String
         Dim langfile As New IniFile(sLANGPATH)
@@ -3047,18 +3087,20 @@ err_:
                 sSQL = "SELECT count(*) as t_n FROM kompy WHERE FILIAL='" & sBranch & "' And TipTehn='PC'"
             Case "O"
                 'sDepartment
-                sSQL = "SELECT count(*) as t_n FROM kompy WHERE FILIAL='" & sBranch & "' And MESTO='" & sDepartment & "' And TipTehn='PC'"
+                sSQL = "SELECT count(*) as t_n FROM kompy WHERE FILIAL='" & sBranch & "' And MESTO='" & sDepartment &
+                       "' And TipTehn='PC'"
 
             Case "K"
                 'sOffice 
 
-                sSQL = "SELECT count(*) as t_n FROM kompy WHERE FILIAL='" & sBranch & "' And MESTO='" & sDepartment & "' AND kabn ='" & sOffice & "' And TipTehn='PC'"
+                sSQL = "SELECT count(*) as t_n FROM kompy WHERE FILIAL='" & sBranch & "' And MESTO='" & sDepartment &
+                       "' AND kabn ='" & sOffice & "' And TipTehn='PC'"
         End Select
 
-        Dim rs As ADODB.Recordset
-        Dim rs1 As ADODB.Recordset
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        Dim rs As Recordset
+        Dim rs1 As Recordset
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
 
@@ -3078,12 +3120,14 @@ err_:
                 sSQL = "SELECT * FROM kompy WHERE FILIAL='" & sBranch & "' And TipTehn='PC'"
             Case "O"
                 'sDepartment
-                sSQL = "SELECT * FROM kompy WHERE FILIAL='" & sBranch & "' And MESTO='" & sDepartment & "' And TipTehn='PC'"
+                sSQL = "SELECT * FROM kompy WHERE FILIAL='" & sBranch & "' And MESTO='" & sDepartment &
+                       "' And TipTehn='PC'"
 
             Case "K"
                 'sOffice 
 
-                sSQL = "SELECT * FROM kompy WHERE FILIAL='" & sBranch & "' And MESTO='" & sDepartment & "' AND kabn ='" & sOffice & "' And TipTehn='PC'"
+                sSQL = "SELECT * FROM kompy WHERE FILIAL='" & sBranch & "' And MESTO='" & sDepartment & "' AND kabn ='" &
+                       sOffice & "' And TipTehn='PC'"
         End Select
 
         Select Case sOfficePACK
@@ -3091,12 +3135,12 @@ err_:
             Case "OpenOffice.org"
 
 
-                rs = New ADODB.Recordset
-                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 Dim oSM As Object                 'Root object for accessing OpenOffice FROM VB
                 Dim oDesk, oDoc As Object 'First objects FROM the API
-                Dim arg(-1) As Object                 'Ignore it for the moment !
+                Dim arg(- 1) As Object                 'Ignore it for the moment !
                 'Dim mmerge As Object
                 Dim objCoreReflection As Object ' objects from OOo API 
 
@@ -3123,8 +3167,6 @@ err_:
                 'Dim oSrch As Object
 
 
-
-
                 Dim tiptehCP, uname, QWERT As String
                 Dim GIST As Decimal = 0
                 Dim intj As Decimal = 0
@@ -3137,8 +3179,13 @@ err_:
                         If tiptehCP = "PC" Then
                             objText.insertString(objCursor, " " & vbLf, False)
 
-                            objText.insertString(objCursor, langfile.GetString("frmComputers", "MSG37", "Имя компьютера:") & " " & .Fields("PSEVDONIM").Value & vbLf, False)
-                            objText.insertString(objCursor, langfile.GetString("frmComputers", "MSG38", "Место установки:") & " " & .Fields("FILIAL").Value & "/" & .Fields("MESTO").Value & "/" & .Fields("kabn").Value & vbLf, False)
+                            objText.insertString(objCursor,
+                                                 langfile.GetString("frmComputers", "MSG37", "Имя компьютера:") & " " &
+                                                 .Fields("PSEVDONIM").Value & vbLf, False)
+                            objText.insertString(objCursor,
+                                                 langfile.GetString("frmComputers", "MSG38", "Место установки:") & " " &
+                                                 .Fields("FILIAL").Value & "/" & .Fields("MESTO").Value & "/" &
+                                                 .Fields("kabn").Value & vbLf, False)
                             'objText.insertString(objCursor, "Операционная система : " & .Fields("OS").Value & vbLf, False)
 
                             objText.insertString(objCursor, " " & vbLf, False)
@@ -3147,14 +3194,14 @@ err_:
                             'Установленное ПО
                             sSQL1 = "SELECT count(*) as t_n FROM SOFT_INSTALL WHERE id_comp=" & uname
 
-                            rs1 = New ADODB.Recordset
-                            rs1.Open(sSQL1, DB7, ADODB.CursorTypeEnum.adOpenKeyset)
+                            rs1 = New Recordset
+                            rs1.Open(sSQL1, DB7, CursorTypeEnum.adOpenKeyset)
                             QWERT = rs1.RecordCount
                             rs1.Close()
                             rs1 = Nothing
 
-                            rs1 = New ADODB.Recordset
-                            rs1.Open(sSQL1, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                            rs1 = New Recordset
+                            rs1.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                             With rs1
 
@@ -3180,18 +3227,20 @@ err_:
 
 
                                 intj = 1
-                                insertIntoCell("A1", langfile.GetString("frmComputers", "MSG39", "Установленное П.О."), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                                insertIntoCell("A1", langfile.GetString("frmComputers", "MSG39", "Установленное П.О."),
+                                               objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
 
                                 sSQL1 = "SELECT * FROM SOFT_INSTALL WHERE id_comp=" & uname
-                                rs1 = New ADODB.Recordset
-                                rs1.Open(sSQL1, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                                rs1 = New Recordset
+                                rs1.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                                 With rs1
                                     If .RecordCount <> 0 Then
                                         .MoveFirst()
                                         Do While Not .EOF
                                             A = "A" & intj + 1
 
-                                            insertIntoCell(A, .Fields("Soft"), objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                                            insertIntoCell(A, .Fields("Soft"), objTable) _
+                                            'lv_teh_fil_otd.SELECTedItem.Text, objTable
                                             intj = intj + 1
 
                                             .MoveNext()
@@ -3213,13 +3262,13 @@ err_:
 
             Case Else
 
-                rs = New ADODB.Recordset
-                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-                Dim oWord As Word.Application
-                Dim oDoc As Word.Document
-                Dim oTable As Word.Table
-                Dim oPara1 As Word.Paragraph, oPara2 As Word.Paragraph
+                Dim oWord As Application
+                Dim oDoc As Document
+                Dim oTable As Table
+                Dim oPara1 As Paragraph, oPara2 As Paragraph
                 'Dim oPara3 As Word.Paragraph, oPara4 As Word.Paragraph
                 'Dim oRng As Word.Range
                 ' Dim oShape As Word.InlineShape
@@ -3245,13 +3294,16 @@ err_:
                         If tiptehCP = "PC" Then
 
                             oPara1 = oDoc.Content.Paragraphs.Add
-                            oPara1.Range.Text = langfile.GetString("frmComputers", "MSG37", "Имя компьютера:") & " " & .Fields("PSEVDONIM").Value
+                            oPara1.Range.Text = langfile.GetString("frmComputers", "MSG37", "Имя компьютера:") & " " &
+                                                .Fields("PSEVDONIM").Value
                             oPara1.Range.Font.Bold = True
                             oPara1.Format.SpaceAfter = 6
                             oPara1.Range.InsertParagraphAfter()
 
                             oPara1 = oDoc.Content.Paragraphs.Add
-                            oPara1.Range.Text = langfile.GetString("frmComputers", "MSG38", "Место установки:") & " " & .Fields("FILIAL").Value & "/" & .Fields("MESTO").Value & "/" & .Fields("kabn").Value
+                            oPara1.Range.Text = langfile.GetString("frmComputers", "MSG38", "Место установки:") & " " &
+                                                .Fields("FILIAL").Value & "/" & .Fields("MESTO").Value & "/" &
+                                                .Fields("kabn").Value
                             oPara1.Range.Font.Bold = True
                             oPara1.Format.SpaceAfter = 24
                             oPara1.Range.InsertParagraphAfter()
@@ -3259,14 +3311,14 @@ err_:
 
                             sSQL1 = "SELECT count(*) as t_n FROM SOFT_INSTALL WHERE id_comp=" & uname
 
-                            rs1 = New ADODB.Recordset
-                            rs1.Open(sSQL1, DB7, ADODB.CursorTypeEnum.adOpenKeyset)
+                            rs1 = New Recordset
+                            rs1.Open(sSQL1, DB7, CursorTypeEnum.adOpenKeyset)
                             QWERT = rs1.RecordCount
                             rs1.Close()
                             rs1 = Nothing
 
-                            rs1 = New ADODB.Recordset
-                            rs1.Open(sSQL1, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                            rs1 = New Recordset
+                            rs1.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                             With rs1
                                 GIST = .Fields("t_n").Value
@@ -3280,11 +3332,12 @@ err_:
 
                                 oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, GIST + 1, 1)
                                 oTable.Range.ParagraphFormat.SpaceAfter = 6
-                                oTable.Cell(1, 1).Range.Text = langfile.GetString("frmComputers", "MSG39", "Установленное П.О.")
+                                oTable.Cell(1, 1).Range.Text = langfile.GetString("frmComputers", "MSG39",
+                                                                                  "Установленное П.О.")
 
                                 sSQL1 = "SELECT * FROM SOFT_INSTALL WHERE id_comp=" & uname
-                                rs1 = New ADODB.Recordset
-                                rs1.Open(sSQL1, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                                rs1 = New Recordset
+                                rs1.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                                 intj = 2
                                 With rs1
                                     If .RecordCount <> 0 Then
@@ -3318,14 +3371,11 @@ err_:
                 rs = Nothing
 
 
-
         End Select
-
-
-
     End Sub
 
-    Private Sub ПаспортКомпьютераToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ПаспортКомпьютераToolStripMenuItem.Click
+    Private Sub ПаспортКомпьютераToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles ПаспортКомпьютераToolStripMenuItem.Click
         Dim sSQL, scN As String
 
         Me.selectTECMesto()
@@ -3337,17 +3387,19 @@ err_:
                 sSQL = "SELECT count(*) as t_n FROM kompy WHERE FILIAL='" & sBranch & "' And TipTehn='PC'"
             Case "O"
                 'sDepartment
-                sSQL = "SELECT count(*) as t_n FROM kompy WHERE FILIAL='" & sBranch & "' And MESTO='" & sDepartment & "' And TipTehn='PC'"
+                sSQL = "SELECT count(*) as t_n FROM kompy WHERE FILIAL='" & sBranch & "' And MESTO='" & sDepartment &
+                       "' And TipTehn='PC'"
 
             Case "K"
                 'sOffice 
 
-                sSQL = "SELECT count(*) as t_n FROM kompy WHERE FILIAL='" & sBranch & "' And MESTO='" & sDepartment & "' AND kabn ='" & sOffice & "' And TipTehn='PC'"
+                sSQL = "SELECT count(*) as t_n FROM kompy WHERE FILIAL='" & sBranch & "' And MESTO='" & sDepartment &
+                       "' AND kabn ='" & sOffice & "' And TipTehn='PC'"
         End Select
 
-        Dim rs As ADODB.Recordset
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        Dim rs As Recordset
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
 
@@ -3367,18 +3419,19 @@ err_:
                 sSQL = "SELECT * FROM kompy WHERE FILIAL='" & sBranch & "' And TipTehn='PC'"
             Case "O"
                 'sDepartment
-                sSQL = "SELECT * FROM kompy WHERE FILIAL='" & sBranch & "' And MESTO='" & sDepartment & "' And TipTehn='PC'"
+                sSQL = "SELECT * FROM kompy WHERE FILIAL='" & sBranch & "' And MESTO='" & sDepartment &
+                       "' And TipTehn='PC'"
 
             Case "K"
                 'sOffice 
 
-                sSQL = "SELECT * FROM kompy WHERE FILIAL='" & sBranch & "' And MESTO='" & sDepartment & "' AND kabn ='" & sOffice & "' And TipTehn='PC'"
+                sSQL = "SELECT * FROM kompy WHERE FILIAL='" & sBranch & "' And MESTO='" & sDepartment & "' AND kabn ='" &
+                       sOffice & "' And TipTehn='PC'"
         End Select
 
 
-
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
 
         With rs
@@ -3402,11 +3455,9 @@ err_:
         End With
         rs.Close()
         rs = Nothing
-
-
     End Sub
 
-    Private Sub gbcpu_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles gbcpu.DoubleClick
+    Private Sub gbcpu_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles gbcpu.DoubleClick
 
         If rbSist.Checked = True Then Exit Sub
 
@@ -3420,11 +3471,9 @@ err_:
         Call GCHTIO()
         frmGarCPL.sTEXT = "CPU"
         frmGarCPL.ShowDialog(Me)
-
-
     End Sub
 
-    Private Sub gbRAM_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles gbRAM.DoubleClick
+    Private Sub gbRAM_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles gbRAM.DoubleClick
 
         If rbSist.Checked = True Then Exit Sub
 
@@ -3438,10 +3487,9 @@ err_:
         Call PAMIAT()
         frmGarCPL.sTEXT = "RAM"
         frmGarCPL.ShowDialog(Me)
-
     End Sub
 
-    Private Sub gbHDD_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles gbHDD.DoubleClick
+    Private Sub gbHDD_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles gbHDD.DoubleClick
         If rbSist.Checked = True Then Exit Sub
 
         If Len(cmbHDD1.Text) = 0 Then
@@ -3456,7 +3504,7 @@ err_:
         frmGarCPL.ShowDialog(Me)
     End Sub
 
-    Private Sub gbSVGA_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles gbSVGA.DoubleClick
+    Private Sub gbSVGA_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles gbSVGA.DoubleClick
         If rbSist.Checked = True Then Exit Sub
 
         If Len(cmbSVGA1.Text) = 0 Then
@@ -3469,10 +3517,9 @@ err_:
         Call VideoCard()
         frmGarCPL.sTEXT = "SVGA"
         frmGarCPL.ShowDialog(Me)
-
     End Sub
 
-    Private Sub gbSOUND_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles gbSOUND.DoubleClick
+    Private Sub gbSOUND_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles gbSOUND.DoubleClick
         If rbSist.Checked = True Then Exit Sub
 
         If Len(cmbSound.Text) = 0 Then
@@ -3487,7 +3534,7 @@ err_:
         frmGarCPL.ShowDialog(Me)
     End Sub
 
-    Private Sub gbMB_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles gbMB.DoubleClick
+    Private Sub gbMB_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles gbMB.DoubleClick
         If rbSist.Checked = True Then Exit Sub
 
         If Len(cmbMB.Text) = 0 Then
@@ -3502,7 +3549,7 @@ err_:
         frmGarCPL.ShowDialog(Me)
     End Sub
 
-    Private Sub gbOptical_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles gbOptical.DoubleClick
+    Private Sub gbOptical_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles gbOptical.DoubleClick
         If rbSist.Checked = True Then Exit Sub
 
         If Len(gbRAM.Text) = 0 Then
@@ -3517,7 +3564,7 @@ err_:
         frmGarCPL.ShowDialog(Me)
     End Sub
 
-    Public Sub lstGroups_ItemDrag(ByVal sender As System.Object, ByVal e As System.Windows.Forms.ItemDragEventArgs) Handles lstGroups.ItemDrag
+    Public Sub lstGroups_ItemDrag(ByVal sender As Object, ByVal e As ItemDragEventArgs) Handles lstGroups.ItemDrag
         On Error Resume Next
 
         If uLevelTehAdd = False And uLevel <> "Admin" Then Exit Sub
@@ -3538,12 +3585,9 @@ err_:
                 pDRAG = False
 
         End Select
-
-
-
     End Sub
 
-    Public Sub lstGroups_DragEnter(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles lstGroups.DragEnter
+    Public Sub lstGroups_DragEnter(ByVal sender As Object, ByVal e As DragEventArgs) Handles lstGroups.DragEnter
         On Error Resume Next
 
         If uLevelTehAdd = False And uLevel <> "Admin" Then Exit Sub
@@ -3571,10 +3615,9 @@ err_:
             pDRAG = False
             e.Effect = DragDropEffects.None
         End If
-
     End Sub
 
-    Public Sub lstGroups_DragOver(ByVal sender As System.Object, ByVal e As DragEventArgs) Handles lstGroups.DragOver
+    Public Sub lstGroups_DragOver(ByVal sender As Object, ByVal e As DragEventArgs) Handles lstGroups.DragOver
         On Error Resume Next
 
         If uLevelTehAdd = False And uLevel <> "Admin" Then Exit Sub
@@ -3587,7 +3630,7 @@ err_:
 
         'As the mouse moves over nodes, provide feedback to the user
         'by highlighting the node that is the current drop target
-        Dim pt As Point = CType(sender, TreeView).PointToClient(New Point(e.X, e.Y))
+        Dim pt As Drawing.Point = CType(sender, TreeView).PointToClient(New Drawing.Point(e.X, e.Y))
         Dim targetNode As TreeNode = selectedTreeview.GetNodeAt(pt)
 
         'See if the targetNode is currently selected, if so no need to validate again
@@ -3626,16 +3669,14 @@ err_:
                 End Select
 
 
-
             Loop
         End If
 
         'Currently selected node is a suitable target, allow the move
         e.Effect = DragDropEffects.Move
-
     End Sub
 
-    Public Sub lstGroups_DragDrop(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles lstGroups.DragDrop
+    Public Sub lstGroups_DragDrop(ByVal sender As Object, ByVal e As DragEventArgs) Handles lstGroups.DragDrop
         On Error Resume Next
 
         Dim sBranch_, sDepartment_, sOffice_ As String
@@ -3673,7 +3714,6 @@ err_:
             targetNode.Nodes.Add(dropNode)
 
             Call selectTECMesto()
-
 
 
             sBranch_ = sBranch
@@ -3968,10 +4008,9 @@ err_:
 
         pDRAG = False
         Me.Cursor = Cursors.Default
-
     End Sub
 
-    Private Sub gbNetwork_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles gbNetwork.DoubleClick
+    Private Sub gbNetwork_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles gbNetwork.DoubleClick
         If rbSist.Checked = True Then Exit Sub
 
         If Len(gbNetwork.Text) = 0 Then
@@ -3986,7 +4025,7 @@ err_:
         frmGarCPL.ShowDialog(Me)
     End Sub
 
-    Private Sub gbFDD_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles gbFDD.DoubleClick
+    Private Sub gbFDD_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles gbFDD.DoubleClick
         If rbSist.Checked = True Then Exit Sub
 
         If Len(gbNetwork.Text) = 0 Then
@@ -4001,7 +4040,7 @@ err_:
         frmGarCPL.ShowDialog(Me)
     End Sub
 
-    Private Sub gbModem_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles gbModem.DoubleClick
+    Private Sub gbModem_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles gbModem.DoubleClick
         If rbSist.Checked = True Then Exit Sub
 
         If Len(gbNetwork.Text) = 0 Then
@@ -4016,7 +4055,7 @@ err_:
         frmGarCPL.ShowDialog(Me)
     End Sub
 
-    Private Sub gbMonitor_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles gbMonitor.DoubleClick
+    Private Sub gbMonitor_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles gbMonitor.DoubleClick
         If rbSist.Checked = True Then Exit Sub
 
         If Len(gbNetwork.Text) = 0 Then
@@ -4031,7 +4070,7 @@ err_:
         frmGarCPL.ShowDialog(Me)
     End Sub
 
-    Private Sub gbKeyboard_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles gbKeyboard.DoubleClick
+    Private Sub gbKeyboard_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles gbKeyboard.DoubleClick
         If rbSist.Checked = True Then Exit Sub
 
         If Len(gbNetwork.Text) = 0 Then
@@ -4046,7 +4085,7 @@ err_:
         frmGarCPL.ShowDialog(Me)
     End Sub
 
-    Private Sub gbMouse_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles gbMouse.DoubleClick
+    Private Sub gbMouse_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles gbMouse.DoubleClick
         If rbSist.Checked = True Then Exit Sub
 
         If Len(gbNetwork.Text) = 0 Then
@@ -4061,7 +4100,7 @@ err_:
         frmGarCPL.ShowDialog(Me)
     End Sub
 
-    Private Sub gbFilter_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles gbFilter.DoubleClick
+    Private Sub gbFilter_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles gbFilter.DoubleClick
         If rbSist.Checked = True Then Exit Sub
 
         If Len(gbNetwork.Text) = 0 Then
@@ -4076,7 +4115,7 @@ err_:
         frmGarCPL.ShowDialog(Me)
     End Sub
 
-    Private Sub gbUSB_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles gbUSB.DoubleClick
+    Private Sub gbUSB_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles gbUSB.DoubleClick
         If rbSist.Checked = True Then Exit Sub
 
         If Len(gbNetwork.Text) = 0 Then
@@ -4091,14 +4130,16 @@ err_:
         frmGarCPL.ShowDialog(Me)
     End Sub
 
-    Private Sub ОтделитьПринтерыИМониторыToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ОтделитьПринтерыИМониторыToolStripMenuItem.Click
+    Private Sub ОтделитьПринтерыИМониторыToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles ОтделитьПринтерыИМониторыToolStripMenuItem.Click
         Dim langfile As New IniFile(sLANGPATH)
-
 
 
         If TipTehn <> "PC" Then Exit Sub
 
-        Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG40", "Разделение техники") & " " & Me.lstGroups.SelectedNode.Text)
+        Call _
+            SaveActivityToLogDB(
+                langfile.GetString("frmComputers", "MSG40", "Разделение техники") & " " & Me.lstGroups.SelectedNode.Text)
 
         Call selectTECMesto()
 
@@ -4107,17 +4148,14 @@ err_:
         'Dim newThread1 As New Thread(AddressOf STAT_INF_1)
         'newThread1.Start()
         Me.BeginInvoke(New MethodInvoker(AddressOf STAT_INF))
-
-
     End Sub
 
-    Private Sub cmdUserAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdUserAdd.Click
+    Private Sub cmdUserAdd_Click(ByVal sender As Object, ByVal e As EventArgs) Handles cmdUserAdd.Click
 
         Call User_Comp_ADD()
-
     End Sub
 
-    Private Sub cmdUserDel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdUserDel.Click
+    Private Sub cmdUserDel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles cmdUserDel.Click
         If lstUsers.Items.Count = 0 Then Exit Sub
 
         Dim z As Integer
@@ -4125,18 +4163,22 @@ err_:
             uCOUNT = (lstUsers.SelectedItems(z).Text)
         Next
 
-        Dim rs1 As ADODB.Recordset
-        rs1 = New ADODB.Recordset
-        rs1.Open("Delete FROM USER_COMP WHERE id=" & uCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        Dim rs1 As Recordset
+        rs1 = New Recordset
+        rs1.Open("Delete FROM USER_COMP WHERE id=" & uCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                 LockTypeEnum.adLockOptimistic)
         rs1 = Nothing
         LOAD_USER(sCOUNT)
     End Sub
 
-    Private Sub cmdUserPassEncript_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdUserPassEncript.Click
+    Private Sub cmdUserPassEncript_Click(ByVal sender As Object, ByVal e As EventArgs) Handles cmdUserPassEncript.Click
         Dim langfile As New IniFile(sLANGPATH)
 
 
-        Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG41", "Расшифровка пароля пользователя на компьютере") & " " & Me.lstGroups.SelectedNode.Text)
+        Call _
+            SaveActivityToLogDB(
+                langfile.GetString("frmComputers", "MSG41", "Расшифровка пароля пользователя на компьютере") & " " &
+                Me.lstGroups.SelectedNode.Text)
 
         txtUserPass.PasswordChar = ""
         txtUserEmailPwd.PasswordChar = ""
@@ -4152,11 +4194,12 @@ err_:
         txtUserEmailPwd.Text = Temp$
     End Sub
 
-    Private Sub lstUsers_ColumnClick(ByVal sender As Object, ByVal e As System.Windows.Forms.ColumnClickEventArgs) Handles lstUsers.ColumnClick
+    Private Sub lstUsers_ColumnClick(ByVal sender As Object, ByVal e As ColumnClickEventArgs) _
+        Handles lstUsers.ColumnClick
 
         Dim new_sorting_column As ColumnHeader = lstUsers.Columns(e.Column)
 
-        Dim sort_order As System.Windows.Forms.SortOrder
+        Dim sort_order As SortOrder
         If m_SortingColumn Is Nothing Then
             sort_order = SortOrder.Ascending
         Else
@@ -4184,7 +4227,7 @@ err_:
         lstUsers.Sort()
     End Sub
 
-    Private Sub lstUsers_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstUsers.DoubleClick
+    Private Sub lstUsers_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles lstUsers.DoubleClick
 
         If lstUsers.Items.Count = 0 Then Exit Sub
 
@@ -4201,10 +4244,11 @@ err_:
             uCOUNT = (lstUsers.SelectedItems(z).Text)
         Next
 
-        Dim rs As ADODB.Recordset
-        rs = New ADODB.Recordset
+        Dim rs As Recordset
+        rs = New Recordset
 
-        rs.Open("SELECT * FROM USER_COMP WHERE id=" & uCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs.Open("SELECT * FROM USER_COMP WHERE id=" & uCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
 
         With rs
 
@@ -4226,7 +4270,6 @@ err_:
             End If
 
 
-
         End With
         Dim langfile As New IniFile(sLANGPATH)
 
@@ -4237,11 +4280,12 @@ err_:
         rs = Nothing
     End Sub
 
-    Private Sub lvRepair_ColumnClick(ByVal sender As Object, ByVal e As System.Windows.Forms.ColumnClickEventArgs) Handles lvRepair.ColumnClick
+    Private Sub lvRepair_ColumnClick(ByVal sender As Object, ByVal e As ColumnClickEventArgs) _
+        Handles lvRepair.ColumnClick
 
         Dim new_sorting_column As ColumnHeader = lvRepair.Columns(e.Column)
 
-        Dim sort_order As System.Windows.Forms.SortOrder
+        Dim sort_order As SortOrder
         If m_SortingColumn Is Nothing Then
             sort_order = SortOrder.Ascending
         Else
@@ -4269,19 +4313,19 @@ err_:
         lvRepair.Sort()
     End Sub
 
-    Private Sub lvRepair_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvRepair.DoubleClick
+    Private Sub lvRepair_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles lvRepair.DoubleClick
         LoadRepairEdit(lvRepair)
     End Sub
 
-    Private Sub lvNotes_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvNotes.Click
+    Private Sub lvNotes_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lvNotes.Click
         zCOUNT_LOAD(lvNotes)
     End Sub
 
-    Private Sub lvNotes_ColumnClick(ByVal sender As Object, ByVal e As System.Windows.Forms.ColumnClickEventArgs) Handles lvNotes.ColumnClick
-        Dim new_sorting_column As ColumnHeader = _
-lvNotes.Columns(e.Column)
+    Private Sub lvNotes_ColumnClick(ByVal sender As Object, ByVal e As ColumnClickEventArgs) Handles lvNotes.ColumnClick
+        Dim new_sorting_column As ColumnHeader =
+                lvNotes.Columns(e.Column)
 
-        Dim sort_order As System.Windows.Forms.SortOrder
+        Dim sort_order As SortOrder
         If m_SortingColumn Is Nothing Then
             sort_order = SortOrder.Ascending
         Else
@@ -4309,11 +4353,11 @@ lvNotes.Columns(e.Column)
         lvNotes.Sort()
     End Sub
 
-    Private Sub lvNotes_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvNotes.DoubleClick
+    Private Sub lvNotes_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles lvNotes.DoubleClick
         NotesLoaded(lvNotes, dtDateNotes, cmbNotesMaster, txtNotes, btnNotesAdd)
     End Sub
 
-    Private Sub lvNotesBR_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvNotesBR.DoubleClick
+    Private Sub lvNotesBR_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles lvNotesBR.DoubleClick
         If lvNotesBR.Items.Count = 0 Then Exit Sub
 
         Dim z As Integer
@@ -4322,10 +4366,11 @@ lvNotes.Columns(e.Column)
             zCOUNT = (lvNotesBR.SelectedItems(z).Text)
         Next
 
-        Dim rs As ADODB.Recordset
-        rs = New ADODB.Recordset
+        Dim rs As Recordset
+        rs = New Recordset
 
-        rs.Open("SELECT * FROM ZAM_OTD WHERE id=" & zCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs.Open("SELECT * FROM ZAM_OTD WHERE id=" & zCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
 
         With rs
 
@@ -4337,8 +4382,6 @@ lvNotes.Columns(e.Column)
         End With
 
 
-
-
         Dim langfile As New IniFile(sLANGPATH)
 
         btnBRNotesAdd.Text = langfile.GetString("frmComputers", "MSG42", "Сохранить")
@@ -4347,15 +4390,16 @@ lvNotes.Columns(e.Column)
         rs = Nothing
     End Sub
 
-    Private Sub lvNotesPRN_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvNotesPRN.Click
+    Private Sub lvNotesPRN_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lvNotesPRN.Click
         zCOUNT_LOAD(lvNotesPRN)
     End Sub
 
-    Private Sub lvNotesPRN_ColumnClick(ByVal sender As Object, ByVal e As System.Windows.Forms.ColumnClickEventArgs) Handles lvNotesPRN.ColumnClick
-        Dim new_sorting_column As ColumnHeader = _
- lvNotesPRN.Columns(e.Column)
+    Private Sub lvNotesPRN_ColumnClick(ByVal sender As Object, ByVal e As ColumnClickEventArgs) _
+        Handles lvNotesPRN.ColumnClick
+        Dim new_sorting_column As ColumnHeader =
+                lvNotesPRN.Columns(e.Column)
 
-        Dim sort_order As System.Windows.Forms.SortOrder
+        Dim sort_order As SortOrder
         If m_SortingColumn Is Nothing Then
             sort_order = SortOrder.Ascending
         Else
@@ -4383,15 +4427,16 @@ lvNotes.Columns(e.Column)
         lvNotesPRN.Sort()
     End Sub
 
-    Private Sub lvNotesPRN_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvNotesPRN.DoubleClick
+    Private Sub lvNotesPRN_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles lvNotesPRN.DoubleClick
         NotesLoaded(lvNotesPRN, NotesPRNdate, cmbNotesPRNMaster, NotesPRNtxt, btnPRNNotesAdd)
     End Sub
 
-    Private Sub lvRepairPRN_ColumnClick(ByVal sender As Object, ByVal e As System.Windows.Forms.ColumnClickEventArgs) Handles lvRepairPRN.ColumnClick
-        Dim new_sorting_column As ColumnHeader = _
- lvRepairPRN.Columns(e.Column)
+    Private Sub lvRepairPRN_ColumnClick(ByVal sender As Object, ByVal e As ColumnClickEventArgs) _
+        Handles lvRepairPRN.ColumnClick
+        Dim new_sorting_column As ColumnHeader =
+                lvRepairPRN.Columns(e.Column)
 
-        Dim sort_order As System.Windows.Forms.SortOrder
+        Dim sort_order As SortOrder
         If m_SortingColumn Is Nothing Then
             sort_order = SortOrder.Ascending
         Else
@@ -4419,23 +4464,24 @@ lvNotes.Columns(e.Column)
         lvRepairPRN.Sort()
     End Sub
 
-    Private Sub lvRepairPRN_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvRepairPRN.DoubleClick
+    Private Sub lvRepairPRN_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles lvRepairPRN.DoubleClick
         LoadRepairEdit(lvRepairPRN)
     End Sub
 
-    Private Sub lvRepairBR_DoubleClick1(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvRepairBR.DoubleClick
+    Private Sub lvRepairBR_DoubleClick1(ByVal sender As Object, ByVal e As EventArgs) Handles lvRepairBR.DoubleClick
         LoadRepairEdit(lvRepairBR)
     End Sub
 
-    Private Sub lvNotesNET_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvNotesNET.Click
+    Private Sub lvNotesNET_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lvNotesNET.Click
         zCOUNT_LOAD(lvNotesNET)
     End Sub
 
-    Private Sub lvNotesNET_ColumnClick(ByVal sender As Object, ByVal e As System.Windows.Forms.ColumnClickEventArgs) Handles lvNotesNET.ColumnClick
-        Dim new_sorting_column As ColumnHeader = _
- lvNotesNET.Columns(e.Column)
+    Private Sub lvNotesNET_ColumnClick(ByVal sender As Object, ByVal e As ColumnClickEventArgs) _
+        Handles lvNotesNET.ColumnClick
+        Dim new_sorting_column As ColumnHeader =
+                lvNotesNET.Columns(e.Column)
 
-        Dim sort_order As System.Windows.Forms.SortOrder
+        Dim sort_order As SortOrder
         If m_SortingColumn Is Nothing Then
             sort_order = SortOrder.Ascending
         Else
@@ -4463,15 +4509,16 @@ lvNotes.Columns(e.Column)
         lvNotesNET.Sort()
     End Sub
 
-    Private Sub lvNotesNET_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvNotesNET.DoubleClick
+    Private Sub lvNotesNET_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles lvNotesNET.DoubleClick
         NotesLoaded(lvNotesNET, NotesNETdate, cmbNotesNETMaster, NotesNETtxt, btnNETAdd)
     End Sub
 
-    Private Sub lvRepairNET_ColumnClick(ByVal sender As Object, ByVal e As System.Windows.Forms.ColumnClickEventArgs) Handles lvRepairNET.ColumnClick
-        Dim new_sorting_column As ColumnHeader = _
- lvRepairNET.Columns(e.Column)
+    Private Sub lvRepairNET_ColumnClick(ByVal sender As Object, ByVal e As ColumnClickEventArgs) _
+        Handles lvRepairNET.ColumnClick
+        Dim new_sorting_column As ColumnHeader =
+                lvRepairNET.Columns(e.Column)
 
-        Dim sort_order As System.Windows.Forms.SortOrder
+        Dim sort_order As SortOrder
         If m_SortingColumn Is Nothing Then
             sort_order = SortOrder.Ascending
         Else
@@ -4499,15 +4546,16 @@ lvNotes.Columns(e.Column)
         lvRepairNET.Sort()
     End Sub
 
-    Private Sub lvRepairNET_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvRepairNET.DoubleClick
+    Private Sub lvRepairNET_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles lvRepairNET.DoubleClick
         LoadRepairEdit(lvRepairNET)
     End Sub
 
-    Private Sub lvRepairOTH_ColumnClick(ByVal sender As Object, ByVal e As System.Windows.Forms.ColumnClickEventArgs) Handles lvRepairOTH.ColumnClick
-        Dim new_sorting_column As ColumnHeader = _
-lvRepairOTH.Columns(e.Column)
+    Private Sub lvRepairOTH_ColumnClick(ByVal sender As Object, ByVal e As ColumnClickEventArgs) _
+        Handles lvRepairOTH.ColumnClick
+        Dim new_sorting_column As ColumnHeader =
+                lvRepairOTH.Columns(e.Column)
 
-        Dim sort_order As System.Windows.Forms.SortOrder
+        Dim sort_order As SortOrder
         If m_SortingColumn Is Nothing Then
             sort_order = SortOrder.Ascending
         Else
@@ -4535,19 +4583,20 @@ lvRepairOTH.Columns(e.Column)
         lvRepairOTH.Sort()
     End Sub
 
-    Private Sub lvRepairOTH_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvRepairOTH.DoubleClick
+    Private Sub lvRepairOTH_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles lvRepairOTH.DoubleClick
         LoadRepairEdit(lvRepairOTH)
     End Sub
 
-    Private Sub lvNotesOTH_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvNotesOTH.Click
+    Private Sub lvNotesOTH_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lvNotesOTH.Click
         zCOUNT_LOAD(lvNotesOTH)
     End Sub
 
-    Private Sub lvNotesOTH_ColumnClick(ByVal sender As Object, ByVal e As System.Windows.Forms.ColumnClickEventArgs) Handles lvNotesOTH.ColumnClick
-        Dim new_sorting_column As ColumnHeader = _
-lvNotesOTH.Columns(e.Column)
+    Private Sub lvNotesOTH_ColumnClick(ByVal sender As Object, ByVal e As ColumnClickEventArgs) _
+        Handles lvNotesOTH.ColumnClick
+        Dim new_sorting_column As ColumnHeader =
+                lvNotesOTH.Columns(e.Column)
 
-        Dim sort_order As System.Windows.Forms.SortOrder
+        Dim sort_order As SortOrder
         If m_SortingColumn Is Nothing Then
             sort_order = SortOrder.Ascending
         Else
@@ -4575,18 +4624,20 @@ lvNotesOTH.Columns(e.Column)
         lvNotesOTH.Sort()
     End Sub
 
-    Private Sub lvNotesOTH_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvNotesOTH.DoubleClick
+    Private Sub lvNotesOTH_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles lvNotesOTH.DoubleClick
         NotesLoaded(lvNotesOTH, NotesOTHdate, cmbNotesOTHMaster, txtNotesOTH, btnOTHAdd)
     End Sub
 
-    Private Sub CartrAddToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CartrAddToolStripMenuItem.Click
+    Private Sub CartrAddToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles CartrAddToolStripMenuItem.Click
 
         'frmCartr_ADD()
 
 
         Dim langfile As New IniFile(sLANGPATH)
 
-        frmCartr_ADD.Text = langfile.GetString("frmComputers", "MSG43", "Добавление (редактирование) картриджа для") & " " & lstGroups.SelectedNode.Text
+        frmCartr_ADD.Text = langfile.GetString("frmComputers", "MSG43", "Добавление (редактирование) картриджа для") &
+                            " " & lstGroups.SelectedNode.Text
 
         'serviceDesc.MdiParent = frmMain
         'serviceDesc.Show()
@@ -4614,52 +4665,60 @@ lvNotesOTH.Columns(e.Column)
         frmCRT3.cCOUNT = Me.sCOUNT
         frmCartr_ADD.ShowDialog(Me)
 
-        Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG44", "Добавление картриджа для") & " " & lstGroups.SelectedNode.Text)
+        Call _
+            SaveActivityToLogDB(
+                langfile.GetString("frmComputers", "MSG44", "Добавление картриджа для") & " " &
+                lstGroups.SelectedNode.Text)
     End Sub
 
-    Private Sub cmbBranch_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbBranch.SelectedIndexChanged
+    Private Sub cmbBranch_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbBranch.SelectedIndexChanged
         On Error GoTo err_
 
         BrainchLoad(cmbBranch, cmbDepartment)
 
         Exit Sub
-err_:
+        err_:
         MsgBox(Err.Description, MsgBoxStyle.Information, ProGramName)
     End Sub
 
-    Private Sub cmbDepartment_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbDepartment.SelectedIndexChanged
+    Private Sub cmbDepartment_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbDepartment.SelectedIndexChanged
         On Error GoTo err_
 
         DepartmentLoad(cmbBranch, cmbDepartment, cmbOffice)
 
         Exit Sub
-err_:
+        err_:
     End Sub
 
-    Private Sub cmbPRNFil_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbPRNFil.SelectedIndexChanged
+    Private Sub cmbPRNFil_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbPRNFil.SelectedIndexChanged
         On Error GoTo err_
 
         BrainchLoad(cmbPRNFil, cmbPRNDepart)
 
         Exit Sub
-err_:
+        err_:
         MsgBox(Err.Description, MsgBoxStyle.Information, ProGramName)
     End Sub
 
-    Private Sub cmbPRNDepart_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbPRNDepart.SelectedIndexChanged
+    Private Sub cmbPRNDepart_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbPRNDepart.SelectedIndexChanged
         On Error GoTo err_
 
         DepartmentLoad(cmbPRNFil, cmbPRNDepart, cmbPRNOffice)
 
         Exit Sub
-err_:
+        err_:
     End Sub
 
-    Private Sub lvPRNCartr_ColumnClick(ByVal sender As Object, ByVal e As System.Windows.Forms.ColumnClickEventArgs) Handles lvPRNCartr.ColumnClick
-        Dim new_sorting_column As ColumnHeader = _
- lvPRNCartr.Columns(e.Column)
+    Private Sub lvPRNCartr_ColumnClick(ByVal sender As Object, ByVal e As ColumnClickEventArgs) _
+        Handles lvPRNCartr.ColumnClick
+        Dim new_sorting_column As ColumnHeader =
+                lvPRNCartr.Columns(e.Column)
 
-        Dim sort_order As System.Windows.Forms.SortOrder
+        Dim sort_order As SortOrder
         If m_SortingColumn Is Nothing Then
             sort_order = SortOrder.Ascending
         Else
@@ -4687,7 +4746,7 @@ err_:
         lvPRNCartr.Sort()
     End Sub
 
-    Private Sub lvPRNCartr_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvPRNCartr.DoubleClick
+    Private Sub lvPRNCartr_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles lvPRNCartr.DoubleClick
         Dim z As Integer
         'Dim rCOUNT As Integer
 
@@ -4706,7 +4765,8 @@ err_:
         'frmCRT3.LOAD_CRR(frmCRT3.rCOUNT)
     End Sub
 
-    Private Sub cmbOTH_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbOTH.SelectedIndexChanged
+    Private Sub cmbOTH_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbOTH.SelectedIndexChanged
         Select Case TipTehn
 
             Case "MONITOR"
@@ -4735,13 +4795,13 @@ err_:
             Case "OT"
                 'ExLoadParTwo(cmbOTH.Text, PROiZV39, .Fields("A").Value)
 
-                Dim rs As ADODB.Recordset 'Объявляем рекордсет
+                Dim rs As Recordset 'Объявляем рекордсет
                 Dim sSQL As String 'Переменная, где будет размещён SQL запрос
 
 
                 sSQL = "SELECT B FROM spr_other WHERE name ='" & cmbOTHConnect.Text & "'"
-                rs = New ADODB.Recordset
-                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
 
                 With rs
@@ -4752,9 +4812,6 @@ err_:
 
                 rs.Close()
                 rs = Nothing
-
-
-
 
 
                 'Dim rs As ADODB.Recordset
@@ -4814,244 +4871,294 @@ err_:
         End Select
     End Sub
 
-    Private Sub cmbOTHFil_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbOTHFil.SelectedIndexChanged
+    Private Sub cmbOTHFil_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbOTHFil.SelectedIndexChanged
         BrainchLoad(cmbOTHFil, cmbOTHDepart)
 
         Exit Sub
-err_:
+        err_:
         MsgBox(Err.Description, MsgBoxStyle.Information, ProGramName)
     End Sub
 
-    Private Sub cmbOTHDepart_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbOTHDepart.SelectedIndexChanged
+    Private Sub cmbOTHDepart_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbOTHDepart.SelectedIndexChanged
 
 
         DepartmentLoad(cmbOTHFil, cmbOTHDepart, cmbOTHOffice)
 
 
         Exit Sub
-err_:
+        err_:
     End Sub
 
-    Private Sub cmbCPU1_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbCPU1.SelectedIndexChanged
+    Private Sub cmbCPU1_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbCPU1.SelectedIndexChanged
         ExLoadParFow(cmbCPU1.Text, txtMHZ1, txtSoc1, PROizV1, "SPR_CPU")
     End Sub
 
-    Private Sub cmbCPU2_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbCPU2.SelectedIndexChanged
+    Private Sub cmbCPU2_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbCPU2.SelectedIndexChanged
         ExLoadParFow(cmbCPU2.Text, txtMHZ2, txtSoc2, PROizV2, "SPR_CPU")
     End Sub
 
-    Private Sub cmbCPU3_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbCPU3.SelectedIndexChanged
+    Private Sub cmbCPU3_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbCPU3.SelectedIndexChanged
         ExLoadParFow(cmbCPU3.Text, txtMHZ3, txtSoc3, PROizV3, "SPR_CPU")
     End Sub
 
-    Private Sub cmbCPU4_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbCPU4.SelectedIndexChanged
+    Private Sub cmbCPU4_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbCPU4.SelectedIndexChanged
         ExLoadParFow(cmbCPU4.Text, txtMHZ4, txtSoc4, PROizV4, "SPR_CPU")
     End Sub
 
-    Private Sub cmbRAM1_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbRAM1.SelectedIndexChanged
+    Private Sub cmbRAM1_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbRAM1.SelectedIndexChanged
         ExLoadParTree(cmbRAM1.Text, txtRamS1, PROizV6, "SPR_RAM")
     End Sub
 
-    Private Sub cmbRAM2_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbRAM2.SelectedIndexChanged
+    Private Sub cmbRAM2_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbRAM2.SelectedIndexChanged
         ExLoadParTree(cmbRAM2.Text, txtRamS2, PROizV7, "SPR_RAM")
     End Sub
 
-    Private Sub cmbRAM3_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbRAM3.SelectedIndexChanged
+    Private Sub cmbRAM3_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbRAM3.SelectedIndexChanged
         ExLoadParTree(cmbRAM3.Text, txtRamS3, PROizV8, "SPR_RAM")
     End Sub
 
-    Private Sub cmbRAM4_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbRAM4.SelectedIndexChanged
+    Private Sub cmbRAM4_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbRAM4.SelectedIndexChanged
         ExLoadParTree(cmbRAM4.Text, txtRamS4, PROizV9, "SPR_RAM")
     End Sub
 
-    Private Sub cmbRAM5_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbRAM5.SelectedIndexChanged
+    Private Sub cmbRAM5_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbRAM5.SelectedIndexChanged
         ExLoadParTree(cmbRAM5.Text, txtRamS5, PROizV44, "SPR_RAM")
     End Sub
 
-    Private Sub cmbRAM6_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbRAM6.SelectedIndexChanged
+    Private Sub cmbRAM6_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbRAM6.SelectedIndexChanged
         ExLoadParTree(cmbRAM6.Text, txtRamS6, PROizV45, "SPR_RAM")
     End Sub
 
-    Private Sub cmbRAM7_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbRAM7.SelectedIndexChanged
+    Private Sub cmbRAM7_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbRAM7.SelectedIndexChanged
         ExLoadParTree(cmbRAM7.Text, txtRamS7, PROizV46, "SPR_RAM")
     End Sub
 
-    Private Sub cmbRAM8_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbRAM8.SelectedIndexChanged
+    Private Sub cmbRAM8_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbRAM8.SelectedIndexChanged
         ExLoadParTree(cmbRAM8.Text, txtRamS8, PROizV47, "SPR_RAM")
     End Sub
 
 
-
-    Private Sub cmbHDD1_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbHDD1.SelectedIndexChanged
+    Private Sub cmbHDD1_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbHDD1.SelectedIndexChanged
         ExLoadParTree(cmbHDD1.Text, txtHDDo1, PROizV10, "SPR_HDD")
     End Sub
 
-    Private Sub cmbHDD2_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbHDD2.SelectedIndexChanged
+    Private Sub cmbHDD2_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbHDD2.SelectedIndexChanged
         ExLoadParTree(cmbHDD2.Text, txtHDDo2, PROizV11, "SPR_HDD")
     End Sub
 
-    Private Sub cmbHDD3_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbHDD3.SelectedIndexChanged
+    Private Sub cmbHDD3_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbHDD3.SelectedIndexChanged
         ExLoadParTree(cmbHDD3.Text, txtHDDo3, PROizV12, "SPR_HDD")
     End Sub
 
-    Private Sub cmbHDD4_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbHDD4.SelectedIndexChanged
+    Private Sub cmbHDD4_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbHDD4.SelectedIndexChanged
         ExLoadParTree(cmbHDD4.Text, txtHDDo4, PROizV13, "SPR_HDD")
     End Sub
 
-    Private Sub cmbHDD5_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbHDD5.SelectedIndexChanged
+    Private Sub cmbHDD5_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbHDD5.SelectedIndexChanged
         ExLoadParTree(cmbHDD5.Text, txtHDDo5, PROizV48, "SPR_HDD")
     End Sub
 
-    Private Sub cmbHDD6_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbHDD6.SelectedIndexChanged
+    Private Sub cmbHDD6_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbHDD6.SelectedIndexChanged
         ExLoadParTree(cmbHDD6.Text, txtHDDo6, PROizV49, "SPR_HDD")
     End Sub
 
-    Private Sub cmbHDD7_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbHDD7.SelectedIndexChanged
+    Private Sub cmbHDD7_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbHDD7.SelectedIndexChanged
         ExLoadParTree(cmbHDD7.Text, txtHDDo7, PROizV50, "SPR_HDD")
     End Sub
 
-    Private Sub cmbHDD8_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbHDD8.SelectedIndexChanged
+    Private Sub cmbHDD8_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbHDD8.SelectedIndexChanged
         ExLoadParTree(cmbHDD8.Text, txtHDDo8, PROizV51, "SPR_HDD")
     End Sub
 
 
-
-    Private Sub cmbSVGA1_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbSVGA1.SelectedIndexChanged
+    Private Sub cmbSVGA1_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbSVGA1.SelectedIndexChanged
         ExLoadParTree(cmbSVGA1.Text, txtSVGAr1, PROizV14, "SPR_SVGA")
     End Sub
 
-    Private Sub cmbSVGA2_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbSVGA2.SelectedIndexChanged
+    Private Sub cmbSVGA2_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbSVGA2.SelectedIndexChanged
         ExLoadParTree(cmbSVGA2.Text, txtSVGAr2, PROizV15, "SPR_SVGA")
     End Sub
 
-    Private Sub cmbSound_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbSound.SelectedIndexChanged
+    Private Sub cmbSound_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbSound.SelectedIndexChanged
         ExLoadParTree(cmbSound.Text, txtSoundB, PROizV16, "SPR_SOUND")
     End Sub
 
-    Private Sub cmbMB_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbMB.SelectedIndexChanged
+    Private Sub cmbMB_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbMB.SelectedIndexChanged
         ExLoadParTree(cmbMB.Text, txtChip, PROizV5, "SPR_MB")
     End Sub
 
-    Private Sub cmbOPTIC1_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbOPTIC1.SelectedIndexChanged
+    Private Sub cmbOPTIC1_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbOPTIC1.SelectedIndexChanged
         ExLoadParTree(cmbOPTIC1.Text, txtOPTICs1, PROizV17, "SPR_OPTICAL")
     End Sub
 
-    Private Sub cmbOPTIC2_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbOPTIC2.SelectedIndexChanged
+    Private Sub cmbOPTIC2_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbOPTIC2.SelectedIndexChanged
         ExLoadParTree(cmbOPTIC2.Text, txtOPTICs2, PROizV18, "SPR_OPTICAL")
     End Sub
 
-    Private Sub cmbOPTIC3_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbOPTIC3.SelectedIndexChanged
+    Private Sub cmbOPTIC3_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbOPTIC3.SelectedIndexChanged
         ExLoadParTree(cmbOPTIC3.Text, txtOPTICs3, PROizV19, "SPR_OPTICAL")
     End Sub
 
-    Private Sub cmbNET1_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbNET1.SelectedIndexChanged
+    Private Sub cmbNET1_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbNET1.SelectedIndexChanged
         ExLoadParTwo(cmbNET1.Text, PROizV20, "SPR_NET")
     End Sub
 
-    Private Sub cmbNET2_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbNET2.SelectedIndexChanged
+    Private Sub cmbNET2_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbNET2.SelectedIndexChanged
         ExLoadParTwo(cmbNET2.Text, PROizV21, "SPR_NET")
     End Sub
 
-    Private Sub cmbFDD_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbFDD.SelectedIndexChanged
+    Private Sub cmbFDD_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbFDD.SelectedIndexChanged
         ExLoadParTwo(cmbFDD.Text, PROizV22, "SPR_FDD")
     End Sub
 
-    Private Sub cmbCreader_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbCreader.SelectedIndexChanged
+    Private Sub cmbCreader_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbCreader.SelectedIndexChanged
         ExLoadParTwo(cmbCreader.Text, PROizV23, "SPR_CREADER")
     End Sub
 
-    Private Sub cmbModem_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbModem.SelectedIndexChanged
+    Private Sub cmbModem_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbModem.SelectedIndexChanged
         ExLoadParTwo(cmbModem.Text, PROizV24, "SPR_MODEM")
     End Sub
 
-    Private Sub cmbCase_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbCase.SelectedIndexChanged
+    Private Sub cmbCase_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbCase.SelectedIndexChanged
         ExLoadParTwo(cmbCase.Text, PROizV25, "SPR_CASE")
     End Sub
 
-    Private Sub cmbBP_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbBP.SelectedIndexChanged
+    Private Sub cmbBP_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbBP.SelectedIndexChanged
         ExLoadParTwo(cmbBP.Text, PROizV26, "SPR_BP")
     End Sub
 
-    Private Sub cmbUSB_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbUSB.SelectedIndexChanged
+    Private Sub cmbUSB_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbUSB.SelectedIndexChanged
         ExLoadParTwo(cmbUSB.Text, PROizV41, "SPR_USB")
     End Sub
 
-    Private Sub cmbPCI_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbPCI.SelectedIndexChanged
+    Private Sub cmbPCI_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbPCI.SelectedIndexChanged
         ExLoadParTwo(cmbPCI.Text, PROizV42, "SPR_PCI")
     End Sub
 
-    Private Sub cmbMon1_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbMon1.SelectedIndexChanged
+    Private Sub cmbMon1_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbMon1.SelectedIndexChanged
         ExLoadParTree(cmbMon1.Text, txtMon1Dum, PROizV28, "SPR_MONITOR")
     End Sub
 
-    Private Sub cmbMon2_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbMon2.SelectedIndexChanged
+    Private Sub cmbMon2_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbMon2.SelectedIndexChanged
         ExLoadParTree(cmbMon2.Text, txtMon2Dum, PROizV29, "SPR_MONITOR")
     End Sub
 
-    Private Sub cmbPrinters1_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbPrinters1.SelectedIndexChanged
+    Private Sub cmbPrinters1_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbPrinters1.SelectedIndexChanged
         ExLoadParTwo(cmbPrinters1.Text, PROizV34, "SPR_PRINTER")
     End Sub
 
-    Private Sub cmbPrinters2_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbPrinters2.SelectedIndexChanged
+    Private Sub cmbPrinters2_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbPrinters2.SelectedIndexChanged
         ExLoadParTwo(cmbPrinters2.Text, PROizV35, "SPR_PRINTER")
     End Sub
 
-    Private Sub cmbPrinters3_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbPrinters3.SelectedIndexChanged
+    Private Sub cmbPrinters3_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbPrinters3.SelectedIndexChanged
         ExLoadParTwo(cmbPrinters3.Text, PROizV36, "SPR_PRINTER")
     End Sub
 
-    Private Sub cmbKeyb_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbKeyb.SelectedIndexChanged
+    Private Sub cmbKeyb_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbKeyb.SelectedIndexChanged
         ExLoadParTwo(cmbKeyb.Text, PROizV30, "SPR_KEYBOARD")
     End Sub
 
-    Private Sub cmbMouse_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbMouse.SelectedIndexChanged
+    Private Sub cmbMouse_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbMouse.SelectedIndexChanged
         ExLoadParTwo(cmbMouse.Text, PROizV31, "SPR_MOUSE")
     End Sub
 
-    Private Sub cmbAsist_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbAsist.SelectedIndexChanged
+    Private Sub cmbAsist_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbAsist.SelectedIndexChanged
         ExLoadParTwo(cmbAsist.Text, PROizV32, "SPR_ASISTEM")
     End Sub
 
-    Private Sub cmbFilter_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbFilter.SelectedIndexChanged
+    Private Sub cmbFilter_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbFilter.SelectedIndexChanged
         ExLoadParTwo(cmbFilter.Text, PROizV33, "SPR_FS")
     End Sub
 
-    Private Sub cmbIBP_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbIBP.SelectedIndexChanged
+    Private Sub cmbIBP_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbIBP.SelectedIndexChanged
         ExLoadParTwo(cmbIBP.Text, PROizV43, "SPR_IBP")
     End Sub
 
-    Private Sub cmbNETBranch_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbNETBranch.SelectedIndexChanged
+    Private Sub cmbNETBranch_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbNETBranch.SelectedIndexChanged
         On Error GoTo err_
 
         BrainchLoad(cmbNETBranch, cmbNetDepart)
 
         Exit Sub
-err_:
+        err_:
         MsgBox(Err.Description, MsgBoxStyle.Information, ProGramName)
     End Sub
 
-    Private Sub cmbNetDepart_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbNetDepart.SelectedIndexChanged
+    Private Sub cmbNetDepart_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbNetDepart.SelectedIndexChanged
         On Error GoTo err_
 
         DepartmentLoad(cmbNETBranch, cmbNetDepart, cmbNETOffice)
 
 
         Exit Sub
-err_:
+        err_:
     End Sub
 
-    Private Sub cmbDevNet_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbDevNet.SelectedIndexChanged
+    Private Sub cmbDevNet_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbDevNet.SelectedIndexChanged
         Dim unI As Long
         Dim uname As String
         unI = 0
 
-        Dim PROYZV As ADODB.Recordset
-        PROYZV = New ADODB.Recordset
-        PROYZV.Open("SELECT * FROM SPR_PROIZV", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        Dim PROYZV As Recordset
+        PROYZV = New Recordset
+        PROYZV.Open("SELECT * FROM SPR_PROIZV", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-        Dim SPR_DEV As ADODB.Recordset
-        SPR_DEV = New ADODB.Recordset
-        SPR_DEV.Open("SELECT * FROM SPR_DEV_NET where name ='" & cmbDevNet.Text & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        Dim SPR_DEV As Recordset
+        SPR_DEV = New Recordset
+        SPR_DEV.Open("SELECT * FROM SPR_DEV_NET where name ='" & cmbDevNet.Text & "'", DB7, CursorTypeEnum.adOpenDynamic,
+                     LockTypeEnum.adLockOptimistic)
 
         On Error GoTo Error_
 
@@ -5090,10 +5197,11 @@ err_:
         SPR_DEV = Nothing
 
         Exit Sub
-Error_:
+        Error_:
     End Sub
 
-    Private Sub cmbPRN_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbPRN.SelectedIndexChanged
+    Private Sub cmbPRN_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbPRN.SelectedIndexChanged
         Dim sSQL As String
         cmbTIPCartridg.Text = ""
         Select Case TipTehn
@@ -5111,19 +5219,20 @@ Error_:
 
 
         On Error Resume Next
-        Dim rs As ADODB.Recordset
+        Dim rs As Recordset
         Dim uNI As String
-        rs = New ADODB.Recordset
+        rs = New Recordset
 
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
 
             If Not IsDBNull(.Fields("proizv").Value) Then uNI = .Fields("proizv").Value
 
-            Dim PROYZV As ADODB.Recordset
-            PROYZV = New ADODB.Recordset
-            PROYZV.Open("SELECT * FROM SPR_PROIZV WHERE iD=" & uNI, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            Dim PROYZV As Recordset
+            PROYZV = New Recordset
+            PROYZV.Open("SELECT * FROM SPR_PROIZV WHERE iD=" & uNI, DB7, CursorTypeEnum.adOpenDynamic,
+                        LockTypeEnum.adLockOptimistic)
 
             With PROYZV
                 PROiZV38.Text = .Fields("proizv").Value
@@ -5139,20 +5248,19 @@ Error_:
         rs = Nothing
     End Sub
 
-    Private Sub RadioButton2_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbSist.CheckedChanged
+    Private Sub RadioButton2_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles rbSist.CheckedChanged
 
         'Call SaveActivityToLogDB("Изменение типа гарантии для " & Me.lstGroups.SelectedNode.Text)
 
         gbSeller.Visible = True
-
     End Sub
 
-    Private Sub RadioButton1_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbKompl.CheckedChanged
+    Private Sub RadioButton1_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles rbKompl.CheckedChanged
         gbSeller.Visible = False
         'Call SaveActivityToLogDB("Изменение типа гарантии для " & Me.lstGroups.SelectedNode.Text)
     End Sub
 
-    Private Sub btnNetPortAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNetPortAdd.Click
+    Private Sub btnNetPortAdd_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnNetPortAdd.Click
         If portEDT = True Then
             NET_PORT_ED(npCOUNT)
         Else
@@ -5160,11 +5268,12 @@ Error_:
         End If
     End Sub
 
-    Private Sub lvNetPort_ColumnClick(ByVal sender As Object, ByVal e As System.Windows.Forms.ColumnClickEventArgs) Handles lvNetPort.ColumnClick
-        Dim new_sorting_column As ColumnHeader = _
- lvNetPort.Columns(e.Column)
+    Private Sub lvNetPort_ColumnClick(ByVal sender As Object, ByVal e As ColumnClickEventArgs) _
+        Handles lvNetPort.ColumnClick
+        Dim new_sorting_column As ColumnHeader =
+                lvNetPort.Columns(e.Column)
 
-        Dim sort_order As System.Windows.Forms.SortOrder
+        Dim sort_order As SortOrder
         If m_SortingColumn Is Nothing Then
             sort_order = SortOrder.Ascending
         Else
@@ -5192,23 +5301,23 @@ Error_:
         lvNetPort.Sort()
     End Sub
 
-    Private Sub lvNetPort_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvNetPort.DoubleClick
+    Private Sub lvNetPort_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles lvNetPort.DoubleClick
         If lvNetPort.Items.Count = 0 Then Exit Sub
 
-        Dim rs1 As ADODB.Recordset
-        rs1 = New ADODB.Recordset
-        rs1.Open("SELECT count(*) as t_n FROM TBL_NET_MAG WHERE COMMUTATOR=" & sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenKeyset)
+        Dim rs1 As Recordset
+        rs1 = New Recordset
+        rs1.Open("SELECT count(*) as t_n FROM TBL_NET_MAG WHERE COMMUTATOR=" & sCOUNT, DB7, CursorTypeEnum.adOpenKeyset)
 
-        Dim UCount As Integer
+        Dim sUCount As Integer
 
         With rs1
-            UCount = .Fields("t_n").Value
+            sUCount = .Fields("t_n").Value
         End With
         rs1.Close()
         rs1 = Nothing
 
 
-        If UCount > 0 Then
+        If sUCount > 0 Then
 
             If uLevel <> "Admin" Then Exit Sub
 
@@ -5217,7 +5326,6 @@ Error_:
             Dim z As Integer
             Dim z1 As Integer
             Dim LNGIniFile As New IniFile(sLANGPATH)
-
 
 
             For z = 0 To lvNetPort.SelectedItems.Count - 1
@@ -5236,9 +5344,9 @@ Error_:
 
             sSQL = "SELECT * FROM TBL_NET_MAG where id=" & frmNetMag_Add.sID
 
-            Dim rs As ADODB.Recordset
-            rs = New ADODB.Recordset
-            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            Dim rs As Recordset
+            rs = New Recordset
+            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
 
             With rs
@@ -5262,8 +5370,9 @@ Error_:
 
                     Dim sTXT As String
 
-                    rs1 = New ADODB.Recordset
-                    rs1.Open("SELECT * FROM kompy where id=" & z1, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                    rs1 = New Recordset
+                    rs1.Open("SELECT * FROM kompy where id=" & z1, DB7, CursorTypeEnum.adOpenDynamic,
+                             LockTypeEnum.adLockOptimistic)
 
 
                     With rs1
@@ -5331,11 +5440,15 @@ Error_:
 
                             Case "PC"
 
-                                frmNetMag_Add.txtSVT.Text = sTXT & ": " & .Fields("NET_NAME").Value & " , (" & LNGIniFile.GetString("frmNetMagazin", "MSG19", "Отв.:") & " " & .Fields("OTvetstvennyj").Value & ")"
+                                frmNetMag_Add.txtSVT.Text = sTXT & ": " & .Fields("NET_NAME").Value & " , (" &
+                                                            LNGIniFile.GetString("frmNetMagazin", "MSG19", "Отв.:") &
+                                                            " " & .Fields("OTvetstvennyj").Value & ")"
                                 'Me.sBDO_SVT_count = .Fields("SVT").Value
                             Case Else
 
-                                frmNetMag_Add.txtKom.Text = sTXT & ": " & .Fields("NET_NAME").Value & " , (" & LNGIniFile.GetString("frmNetMagazin", "MSG19", "Отв.:") & " " & .Fields("OTvetstvennyj").Value & ")"
+                                frmNetMag_Add.txtKom.Text = sTXT & ": " & .Fields("NET_NAME").Value & " , (" &
+                                                            LNGIniFile.GetString("frmNetMagazin", "MSG19", "Отв.:") &
+                                                            " " & .Fields("OTvetstvennyj").Value & ")"
 
                         End Select
 
@@ -5345,8 +5458,6 @@ Error_:
                     rs1 = Nothing
 
                 End If
-
-
 
 
                 frmNetMag_Add.txtNetPortSVT.Text = .Fields("NET_PORT_SVT").Value
@@ -5364,12 +5475,16 @@ Error_:
                 Else
 
 
-                    rs1 = New ADODB.Recordset
-                    rs1.Open("SELECT * FROM kompy where id=" & z1, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                    rs1 = New Recordset
+                    rs1.Open("SELECT * FROM kompy where id=" & z1, DB7, CursorTypeEnum.adOpenDynamic,
+                             LockTypeEnum.adLockOptimistic)
 
                     With rs1
 
-                        frmNetMag_Add.txtKom.Text = LNGIniFile.GetString("frmNetMagazin", "MSG14", "Акустическая система") & ": " & .Fields("NET_NAME").Value & " , (" & LNGIniFile.GetString("frmNetMagazin", "MSG19", "Отв.:") & " " & .Fields("OTvetstvennyj").Value & ")"
+                        frmNetMag_Add.txtKom.Text =
+                            LNGIniFile.GetString("frmNetMagazin", "MSG14", "Акустическая система") & ": " &
+                            .Fields("NET_NAME").Value & " , (" & LNGIniFile.GetString("frmNetMagazin", "MSG19", "Отв.:") &
+                            " " & .Fields("OTvetstvennyj").Value & ")"
 
                     End With
                     rs1.Close()
@@ -5379,7 +5494,6 @@ Error_:
 
                 frmNetMag_Add.txtPortCom.Text = .Fields("NET_PORT_COMMUTATOR").Value
                 frmNetMag_Add.txtComMemo.Text = .Fields("COMMUTATOR_MEMO").Value
-
 
 
                 frmNetMagazin.sBDO_Pref = .Fields("PREF").Value
@@ -5401,11 +5515,11 @@ Error_:
             For z = 0 To lvNetPort.SelectedItems.Count - 1
                 npCOUNT = (lvNetPort.SelectedItems(z).Text)
             Next
-            Dim rs As ADODB.Recordset
-            rs = New ADODB.Recordset
+            Dim rs As Recordset
+            rs = New Recordset
             Dim sSQL As String
             sSQL = "SELECT * FROM net_port WHERE id=" & npCOUNT
-            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
             With rs
 
@@ -5419,14 +5533,10 @@ Error_:
 
 
         End If
-
-
-
-
-
     End Sub
 
-    Private Sub cmbModCartr_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbModCartr.SelectedIndexChanged
+    Private Sub cmbModCartr_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles cmbModCartr.SelectedIndexChanged
         Call Tip_Model_CARTR()
     End Sub
 
@@ -5438,12 +5548,12 @@ Error_:
 
 
         On Error Resume Next
-        Dim rs As ADODB.Recordset
+        Dim rs As Recordset
         Dim uNI As String
-        rs = New ADODB.Recordset
+        rs = New Recordset
 
 
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
             If Not IsDBNull(.Fields("A").Value) Then cmbTIPCartridg.Text = .Fields("A").Value
@@ -5453,10 +5563,11 @@ Error_:
         rs = Nothing
     End Sub
 
-    Private Sub lvMovement_ColumnClick(ByVal sender As Object, ByVal e As System.Windows.Forms.ColumnClickEventArgs) Handles lvMovement.ColumnClick
-        Dim new_sorting_column As ColumnHeader = _
-         lvMovement.Columns(e.Column)
-        Dim sort_order As System.Windows.Forms.SortOrder
+    Private Sub lvMovement_ColumnClick(ByVal sender As Object, ByVal e As ColumnClickEventArgs) _
+        Handles lvMovement.ColumnClick
+        Dim new_sorting_column As ColumnHeader =
+                lvMovement.Columns(e.Column)
+        Dim sort_order As SortOrder
         If m_SortingColumn Is Nothing Then
             sort_order = SortOrder.Ascending
         Else
@@ -5485,22 +5596,21 @@ Error_:
         lvMovement.Sort()
     End Sub
 
-    Private Sub lvMovement_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lvMovement.MouseUp
+    Private Sub lvMovement_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles lvMovement.MouseUp
 
         If lvMovement.Items.Count = 0 Then Exit Sub
 
-        If e.Button = Windows.Forms.MouseButtons.Right Then
+        If e.Button = MouseButtons.Right Then
             cmDvig.Show(CType(sender, Control), e.Location)
 
 
         Else
 
         End If
-
-
     End Sub
 
-    Private Sub lvMovement_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvMovement.SelectedIndexChanged
+    Private Sub lvMovement_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles lvMovement.SelectedIndexChanged
 
         If lvMovement.Items.Count = 0 Then Exit Sub
         Dim z As Integer
@@ -5508,15 +5618,14 @@ Error_:
         For z = 0 To lvMovement.SelectedItems.Count - 1
             dvCOUNT = (lvMovement.SelectedItems(z).Text)
         Next
-
-
     End Sub
 
-    Private Sub lvMovementPRN_ColumnClick(ByVal sender As Object, ByVal e As System.Windows.Forms.ColumnClickEventArgs) Handles lvMovementPRN.ColumnClick
-        Dim new_sorting_column As ColumnHeader = _
- lvMovementPRN.Columns(e.Column)
+    Private Sub lvMovementPRN_ColumnClick(ByVal sender As Object, ByVal e As ColumnClickEventArgs) _
+        Handles lvMovementPRN.ColumnClick
+        Dim new_sorting_column As ColumnHeader =
+                lvMovementPRN.Columns(e.Column)
 
-        Dim sort_order As System.Windows.Forms.SortOrder
+        Dim sort_order As SortOrder
         If m_SortingColumn Is Nothing Then
             sort_order = SortOrder.Ascending
         Else
@@ -5544,22 +5653,21 @@ Error_:
         lvMovementPRN.Sort()
     End Sub
 
-    Private Sub lvMovementPRN_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lvMovementPRN.MouseUp
+    Private Sub lvMovementPRN_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles lvMovementPRN.MouseUp
 
         If lvMovementPRN.Items.Count = 0 Then Exit Sub
 
-        If e.Button = Windows.Forms.MouseButtons.Right Then
+        If e.Button = MouseButtons.Right Then
             cmDvig.Show(CType(sender, Control), e.Location)
 
 
         Else
 
         End If
-
-
     End Sub
 
-    Private Sub lvMovementPRN_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvMovementPRN.SelectedIndexChanged
+    Private Sub lvMovementPRN_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles lvMovementPRN.SelectedIndexChanged
 
         If lvMovementPRN.Items.Count = 0 Then Exit Sub
 
@@ -5568,16 +5676,16 @@ Error_:
         For z = 0 To lvMovementPRN.SelectedItems.Count - 1
             dvCOUNT = (lvMovementPRN.SelectedItems(z).Text)
         Next
-
-
     End Sub
 
-    Private Sub DELTEdVIGToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DELTEdVIGToolStripMenuItem.Click
+    Private Sub DELTEdVIGToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles DELTEdVIGToolStripMenuItem.Click
 
-        Dim dvig As ADODB.Recordset
-        dvig = New ADODB.Recordset
+        Dim dvig As Recordset
+        dvig = New Recordset
 
-        dvig.Open("DELETE FROM dvig WHERE Id=" & dvCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        dvig.Open("DELETE FROM dvig WHERE Id=" & dvCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                  LockTypeEnum.adLockOptimistic)
 
         dvig = Nothing
 
@@ -5605,20 +5713,14 @@ Error_:
                 Call LOAD_DVIG_TEHN(sCOUNT, Me.lvMovementOTH)
 
         End Select
-
-
-
-
-
-
-
     End Sub
 
-    Private Sub lvMovementNET_ColumnClick(ByVal sender As Object, ByVal e As System.Windows.Forms.ColumnClickEventArgs) Handles lvMovementNET.ColumnClick
+    Private Sub lvMovementNET_ColumnClick(ByVal sender As Object, ByVal e As ColumnClickEventArgs) _
+        Handles lvMovementNET.ColumnClick
 
         Dim new_sorting_column As ColumnHeader = lvMovementNET.Columns(e.Column)
 
-        Dim sort_order As System.Windows.Forms.SortOrder
+        Dim sort_order As SortOrder
         If m_SortingColumn Is Nothing Then
             sort_order = SortOrder.Ascending
         Else
@@ -5646,23 +5748,22 @@ Error_:
         lvMovementNET.Sort()
     End Sub
 
-    Private Sub lvMovementNET_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lvMovementNET.MouseUp
+    Private Sub lvMovementNET_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles lvMovementNET.MouseUp
 
 
         If lvMovementNET.Items.Count = 0 Then Exit Sub
 
-        If e.Button = Windows.Forms.MouseButtons.Right Then
+        If e.Button = MouseButtons.Right Then
             cmDvig.Show(CType(sender, Control), e.Location)
 
 
         Else
 
         End If
-
-
     End Sub
 
-    Private Sub lvMovementNET_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvMovementNET.SelectedIndexChanged
+    Private Sub lvMovementNET_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles lvMovementNET.SelectedIndexChanged
 
         If lvMovementNET.Items.Count = 0 Then Exit Sub
         Dim z As Integer
@@ -5670,15 +5771,14 @@ Error_:
         For z = 0 To lvMovementNET.SelectedItems.Count - 1
             dvCOUNT = (lvMovementNET.SelectedItems(z).Text)
         Next
-
-
     End Sub
 
-    Private Sub lvMovementOTH_ColumnClick(ByVal sender As Object, ByVal e As System.Windows.Forms.ColumnClickEventArgs) Handles lvMovementOTH.ColumnClick
-        Dim new_sorting_column As ColumnHeader = _
-lvMovementOTH.Columns(e.Column)
+    Private Sub lvMovementOTH_ColumnClick(ByVal sender As Object, ByVal e As ColumnClickEventArgs) _
+        Handles lvMovementOTH.ColumnClick
+        Dim new_sorting_column As ColumnHeader =
+                lvMovementOTH.Columns(e.Column)
 
-        Dim sort_order As System.Windows.Forms.SortOrder
+        Dim sort_order As SortOrder
         If m_SortingColumn Is Nothing Then
             sort_order = SortOrder.Ascending
         Else
@@ -5706,23 +5806,22 @@ lvMovementOTH.Columns(e.Column)
         lvMovementOTH.Sort()
     End Sub
 
-    Private Sub lvMovementOTH_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lvMovementOTH.MouseUp
+    Private Sub lvMovementOTH_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles lvMovementOTH.MouseUp
 
 
         If lvMovementOTH.Items.Count = 0 Then Exit Sub
 
-        If e.Button = Windows.Forms.MouseButtons.Right Then
+        If e.Button = MouseButtons.Right Then
             cmDvig.Show(CType(sender, Control), e.Location)
 
 
         Else
 
         End If
-
-
     End Sub
 
-    Private Sub lvMovementOTH_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvMovementOTH.SelectedIndexChanged
+    Private Sub lvMovementOTH_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles lvMovementOTH.SelectedIndexChanged
 
         If lvMovementOTH.Items.Count = 0 Then Exit Sub
 
@@ -5731,23 +5830,21 @@ lvMovementOTH.Columns(e.Column)
         For z = 0 To lvMovementOTH.SelectedItems.Count - 1
             dvCOUNT = (lvMovementOTH.SelectedItems(z).Text)
         Next
-
-
     End Sub
 
-    Private Sub lstGroups_NodeMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.TreeNodeMouseClickEventArgs) Handles lstGroups.NodeMouseClick
+    Private Sub lstGroups_NodeMouseClick(ByVal sender As Object, ByVal e As TreeNodeMouseClickEventArgs) _
+        Handles lstGroups.NodeMouseClick
 
         '#############################################
         'Выделение по правому клику мышкой
         '#############################################
 
-        If e.Button = Windows.Forms.MouseButtons.Right Then
+        If e.Button = MouseButtons.Right Then
             Me.lstGroups.SelectedNode = e.Node
         End If
-
     End Sub
 
-    Private Sub MassRazdelPerf_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MassRazdelPerf.Click
+    Private Sub MassRazdelPerf_Click(ByVal sender As Object, ByVal e As EventArgs) Handles MassRazdelPerf.Click
 
         Dim sSQL As String
         Dim zCtn As String
@@ -5755,8 +5852,6 @@ lvMovementOTH.Columns(e.Column)
         Call selectTECMesto()
         Dim d() As String
         d = Split(lstGroups.SelectedNode.Tag, "|")
-
-
 
 
         Select Case d(0)
@@ -5768,19 +5863,21 @@ lvMovementOTH.Columns(e.Column)
 
             Case "O"
 
-                sSQL = "SELECT count(*) as t_n FROM kompy where filial ='" & sBranch & "' and mesto='" & sDepartment & "' and TipTehn='PC'"
+                sSQL = "SELECT count(*) as t_n FROM kompy where filial ='" & sBranch & "' and mesto='" & sDepartment &
+                       "' and TipTehn='PC'"
 
 
             Case "K"
 
-                sSQL = "SELECT count(*) as t_n FROM kompy where filial ='" & sBranch & "' and mesto='" & sDepartment & "' AND kabn ='" & sOffice & "' and TipTehn='PC'"
+                sSQL = "SELECT count(*) as t_n FROM kompy where filial ='" & sBranch & "' and mesto='" & sDepartment &
+                       "' AND kabn ='" & sOffice & "' and TipTehn='PC'"
 
 
         End Select
 
-        Dim rs As ADODB.Recordset
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        Dim rs As Recordset
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
             zCtn = .Fields("t_n").Value
@@ -5799,20 +5896,22 @@ lvMovementOTH.Columns(e.Column)
 
             Case "O"
 
-                sSQL = "SELECT * FROM kompy where filial ='" & sBranch & "' and mesto='" & sDepartment & "' and tiptehn='PC'"
+                sSQL = "SELECT * FROM kompy where filial ='" & sBranch & "' and mesto='" & sDepartment &
+                       "' and tiptehn='PC'"
 
 
             Case "K"
 
-                sSQL = "SELECT id FROM kompy where filial ='" & sBranch & "' and mesto='" & sDepartment & "' AND kabn ='" & sOffice & "' and tiptehn='PC'"
+                sSQL = "SELECT id FROM kompy where filial ='" & sBranch & "' and mesto='" & sDepartment &
+                       "' AND kabn ='" & sOffice & "' and tiptehn='PC'"
 
 
         End Select
 
 
-        rs = New ADODB.Recordset
+        rs = New Recordset
 
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         Dim intj As Integer = 1
         MRZD = True
@@ -5837,43 +5936,40 @@ lvMovementOTH.Columns(e.Column)
         End With
         rs.Close()
         rs = Nothing
-
-
-
     End Sub
 
-    Private Sub txtUserName_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtUserName.SelectedIndexChanged
+    Private Sub txtUserName_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles txtUserName.SelectedIndexChanged
 
-        Dim rs As ADODB.Recordset
-        rs = New ADODB.Recordset
+        Dim rs As Recordset
+        rs = New Recordset
 
-        rs.Open("Select A from SPR_USER where name='" & txtUserName.Text & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs.Open("Select A from SPR_USER where name='" & txtUserName.Text & "'", DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
 
         With rs
             txtUserFIO.Text = .Fields("A").Value
         End With
         rs.Close()
         rs = Nothing
-
-
-
     End Sub
 
-    Private Sub txtUserFIO_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtUserFIO.SelectedIndexChanged
-        Dim rs As ADODB.Recordset
-        rs = New ADODB.Recordset
+    Private Sub txtUserFIO_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles txtUserFIO.SelectedIndexChanged
+        Dim rs As Recordset
+        rs = New Recordset
 
-        rs.Open("Select Name from SPR_USER where A='" & txtUserFIO.Text & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs.Open("Select Name from SPR_USER where A='" & txtUserFIO.Text & "'", DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
 
         With rs
             txtUserName.Text = .Fields("Name").Value
         End With
         rs.Close()
         rs = Nothing
-
     End Sub
 
-    Private Sub MassUpdatetoINI_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MassUpdatetoINI.Click
+    Private Sub MassUpdatetoINI_Click(ByVal sender As Object, ByVal e As EventArgs) Handles MassUpdatetoINI.Click
 
         Dim DirectoryBrowser As New FolderBrowserDialog
         Dim sTXTDIR As String
@@ -5923,12 +6019,10 @@ lvMovementOTH.Columns(e.Column)
                         FINDtoUPDATEM(EverestFilePatch)
 
 
-
                     Next
                 Catch e1 As Exception
                     MsgBox(Err.Description)
                 End Try
-
 
 
             End If
@@ -5941,7 +6035,7 @@ lvMovementOTH.Columns(e.Column)
 
 
         Exit Sub
-err_:
+        err_:
         MsgBox(Err.Description)
     End Sub
 
@@ -5955,9 +6049,6 @@ err_:
 
 
         Call massUpdate(sstring, A1)
-
-
-
     End Sub
 
     Private Sub massUpdate(ByVal EverPath As String, ByVal KNAME As String)
@@ -5973,7 +6064,6 @@ err_:
         Call Clear_Form_For_Computer()
 
 
-
         Dim d() As String
         d = Split(lstGroups.SelectedNode.Tag, "|")
 
@@ -5982,24 +6072,27 @@ err_:
 
             Case "G"
 
-                sSQL = "SELECT count(*) as t_n FROM kompy where filial ='" & sBranch & "' and TipTehn='PC' and net_name='" & KNAME & "'"
+                sSQL = "SELECT count(*) as t_n FROM kompy where filial ='" & sBranch &
+                       "' and TipTehn='PC' and net_name='" & KNAME & "'"
 
 
             Case "O"
 
-                sSQL = "SELECT count(*) as t_n FROM kompy where filial ='" & sBranch & "' and mesto='" & sDepartment & "' and TipTehn='PC' and net_name='" & KNAME & "'"
+                sSQL = "SELECT count(*) as t_n FROM kompy where filial ='" & sBranch & "' and mesto='" & sDepartment &
+                       "' and TipTehn='PC' and net_name='" & KNAME & "'"
 
 
             Case "K"
 
-                sSQL = "SELECT count(*) as t_n FROM kompy where filial ='" & sBranch & "' and mesto='" & sDepartment & "' AND kabn ='" & sOffice & "' and TipTehn='PC' and net_name='" & KNAME & "'"
+                sSQL = "SELECT count(*) as t_n FROM kompy where filial ='" & sBranch & "' and mesto='" & sDepartment &
+                       "' AND kabn ='" & sOffice & "' and TipTehn='PC' and net_name='" & KNAME & "'"
 
 
         End Select
 
-        Dim rs As ADODB.Recordset
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        Dim rs As Recordset
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
             zCtn = .Fields("t_n").Value
@@ -6013,25 +6106,28 @@ err_:
 
             Case "G"
 
-                sSQL = "SELECT id FROM kompy where filial ='" & sBranch & "' and tiptehn='PC' and net_name='" & KNAME & "'"
+                sSQL = "SELECT id FROM kompy where filial ='" & sBranch & "' and tiptehn='PC' and net_name='" & KNAME &
+                       "'"
 
 
             Case "O"
 
-                sSQL = "SELECT id FROM kompy where filial ='" & sBranch & "' and mesto='" & sDepartment & "' and tiptehn='PC' and net_name='" & KNAME & "'"
+                sSQL = "SELECT id FROM kompy where filial ='" & sBranch & "' and mesto='" & sDepartment &
+                       "' and tiptehn='PC' and net_name='" & KNAME & "'"
 
 
             Case "K"
 
-                sSQL = "SELECT id FROM kompy where filial ='" & sBranch & "' and mesto='" & sDepartment & "' AND kabn ='" & sOffice & "' and tiptehn='PC' and net_name='" & KNAME & "'"
+                sSQL = "SELECT id FROM kompy where filial ='" & sBranch & "' and mesto='" & sDepartment &
+                       "' AND kabn ='" & sOffice & "' and tiptehn='PC' and net_name='" & KNAME & "'"
 
 
         End Select
 
 
-        rs = New ADODB.Recordset
+        rs = New Recordset
 
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         Dim intj As Integer = 1
         MRZD = True
@@ -6041,7 +6137,7 @@ err_:
             TipTehn = "PC"
             Me.EDT = True
             LOADt(.Fields("id").Value)
-            Application.DoEvents()
+            System.Windows.Forms.Application.DoEvents()
         End With
 
         Dim objIniFile As New IniFile(PrPath & "base.ini")
@@ -6050,7 +6146,7 @@ err_:
 
         EverestFilePatch = EverPath
         EVEREST_UPDATE()
-        Application.DoEvents()
+        System.Windows.Forms.Application.DoEvents()
 
         Save_T(sCOUNT)
 
@@ -6058,23 +6154,21 @@ err_:
         rs = Nothing
     End Sub
 
-    Private Sub DeleteService_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DeleteService.Click
-
+    Private Sub DeleteService_Click(ByVal sender As Object, ByVal e As EventArgs) Handles DeleteService.Click
 
 
         Dim langfile As New IniFile(sLANGPATH)
 
 
-        If MsgBox(langfile.GetString("frmserviceDesc", "MSG9 ", "Удаление ремонта, продолжить?"), MsgBoxStyle.YesNo, ProGramName) = MsgBoxResult.Yes Then
+        If _
+            MsgBox(langfile.GetString("frmserviceDesc", "MSG9 ", "Удаление ремонта, продолжить?"), MsgBoxStyle.YesNo,
+                   ProGramName) = MsgBoxResult.Yes Then
 
             DELETE_SERVICE(lvServices)
 
         Else
 
         End If
-
-
-
     End Sub
 
     Private Sub DELETE_SERVICE(ByVal lvList As ListView)
@@ -6093,9 +6187,10 @@ err_:
 
         If Me.sPREF = "C" Then
 
-            Dim rs2 As ADODB.Recordset
-            rs2 = New ADODB.Recordset
-            rs2.Open("SELECT * FROM kompy WHERE id=" & Me.sCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+            Dim rs2 As Recordset
+            rs2 = New Recordset
+            rs2.Open("SELECT * FROM kompy WHERE id=" & Me.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                     LockTypeEnum.adLockOptimistic)
 
             With rs2
                 unamZ = .Fields("filial").Value & "/" & .Fields("mesto").Value
@@ -6106,45 +6201,48 @@ err_:
         End If
 
         Dim LNGIniFile As New IniFile(sLANGPATH)
-        Dim rs1 As ADODB.Recordset
+        Dim rs1 As Recordset
 
-        rs1 = New ADODB.Recordset
+        rs1 = New Recordset
 
-        rs1.Open("Delete FROM remonty_plus WHERE id_rem=" & rCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-
-        rs1 = Nothing
-
-        rs1 = New ADODB.Recordset
-
-        rs1.Open("Delete FROM Remont WHERE id=" & rCOUNT, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs1.Open("Delete FROM remonty_plus WHERE id_rem=" & rCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                 LockTypeEnum.adLockOptimistic)
 
         rs1 = Nothing
 
-        Call SaveActivityToLogDB(LNGIniFile.GetString("frmserviceDesc", "MSG7", "Удаление ремонта - объект - ") & " " & lstGroups.SelectedNode.Text & " " & LNGIniFile.GetString("frmserviceDesc", "MSG8", "установлен") & unamZ)
+        rs1 = New Recordset
+
+        rs1.Open("Delete FROM Remont WHERE id=" & rCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                 LockTypeEnum.adLockOptimistic)
+
+        rs1 = Nothing
+
+        Call _
+            SaveActivityToLogDB(
+                LNGIniFile.GetString("frmserviceDesc", "MSG7", "Удаление ремонта - объект - ") & " " &
+                lstGroups.SelectedNode.Text & " " & LNGIniFile.GetString("frmserviceDesc", "MSG8", "установлен") & unamZ)
 
         Call LOAD_REPAIR(Me.sCOUNT, lvServices)
         Call REM_CHECK()
-
     End Sub
 
-    Private Sub lvRepairNET_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lvRepairNET.MouseUp
+    Private Sub lvRepairNET_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles lvRepairNET.MouseUp
 
         If lvRepairNET.Items.Count = 0 Then Exit Sub
 
-        If e.Button = Windows.Forms.MouseButtons.Right Then
+        If e.Button = MouseButtons.Right Then
             CMServices.Show(CType(sender, Control), e.Location)
             lvServices = lvRepairNET
             Call MNU_SERVICES_BUTTON(lvServices)
         Else
 
         End If
-
     End Sub
 
-    Private Sub lvRepairOTH_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lvRepairOTH.MouseUp
+    Private Sub lvRepairOTH_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles lvRepairOTH.MouseUp
         If lvRepairOTH.Items.Count = 0 Then Exit Sub
 
-        If e.Button = Windows.Forms.MouseButtons.Right Then
+        If e.Button = MouseButtons.Right Then
             CMServices.Show(CType(sender, Control), e.Location)
             lvServices = lvRepairOTH
             Call MNU_SERVICES_BUTTON(lvServices)
@@ -6164,12 +6262,12 @@ err_:
         If rCOUNT = 0 Then Exit Sub
 
         Dim unam As String
-        Dim rs As ADODB.Recordset 'Объявляем рекордсет
+        Dim rs As Recordset 'Объявляем рекордсет
         Dim sSQL As String 'Переменная, где будет размещён SQL запрос
 
         sSQL = "SELECT zakryt FROM Remont WHERE id=" & rCOUNT
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
             unam = .Fields("zakryt").Value
@@ -6189,7 +6287,7 @@ err_:
         End If
     End Sub
 
-    Private Sub lvRepair_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lvRepair.MouseUp
+    Private Sub lvRepair_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles lvRepair.MouseUp
 
         If lvRepair.Items.Count = 0 Then Exit Sub
 
@@ -6201,7 +6299,7 @@ err_:
         Next
         If rCOUNT = 0 Then Exit Sub
 
-        If e.Button = Windows.Forms.MouseButtons.Right Then
+        If e.Button = MouseButtons.Right Then
             CMServices.Show(CType(sender, Control), e.Location)
             lvServices = lvRepair
             Call MNU_SERVICES_BUTTON(lvServices)
@@ -6210,10 +6308,10 @@ err_:
         End If
     End Sub
 
-    Private Sub lvRepairbr_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lvRepairBR.MouseUp
+    Private Sub lvRepairbr_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles lvRepairBR.MouseUp
         If lvRepairBR.Items.Count = 0 Then Exit Sub
 
-        If e.Button = Windows.Forms.MouseButtons.Right Then
+        If e.Button = MouseButtons.Right Then
             CMServices.Show(CType(sender, Control), e.Location)
             lvServices = lvRepairBR
             Call MNU_SERVICES_BUTTON(lvServices)
@@ -6222,10 +6320,10 @@ err_:
         End If
     End Sub
 
-    Private Sub lvRepairprn_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lvRepairPRN.MouseUp
+    Private Sub lvRepairprn_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles lvRepairPRN.MouseUp
         If lvRepairPRN.Items.Count = 0 Then Exit Sub
 
-        If e.Button = Windows.Forms.MouseButtons.Right Then
+        If e.Button = MouseButtons.Right Then
             CMServices.Show(CType(sender, Control), e.Location)
             lvServices = lvRepairPRN
             Call MNU_SERVICES_BUTTON(lvServices)
@@ -6234,7 +6332,7 @@ err_:
         End If
     End Sub
 
-    Private Sub EditService_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles EditService.Click
+    Private Sub EditService_Click(ByVal sender As Object, ByVal e As EventArgs) Handles EditService.Click
 
         LoadRepairEdit(lvServices)
     End Sub
@@ -6242,10 +6340,9 @@ err_:
     Private Sub Font_Form_For_Computer()
 
         SendFonts(Me)
-
     End Sub
 
-    Private Sub bCPUPlus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bCPUPlus.Click
+    Private Sub bCPUPlus_Click(ByVal sender As Object, ByVal e As EventArgs) Handles bCPUPlus.Click
 
         Select Case sCPU
 
@@ -6277,14 +6374,9 @@ err_:
 
                 sCPU = sCPU
         End Select
-
-
-
-
-
     End Sub
 
-    Private Sub bRamPlus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bRamPlus.Click
+    Private Sub bRamPlus_Click(ByVal sender As Object, ByVal e As EventArgs) Handles bRamPlus.Click
 
         Select Case sRAM
 
@@ -6354,10 +6446,9 @@ err_:
                 sRAM = sRAM
 
         End Select
-
     End Sub
 
-    Private Sub bHddPlus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bHddPlus.Click
+    Private Sub bHddPlus_Click(ByVal sender As Object, ByVal e As EventArgs) Handles bHddPlus.Click
         Select Case sHDD
 
             Case 1
@@ -6423,12 +6514,9 @@ err_:
 
                 sHDD = sHDD
         End Select
-
-
-
     End Sub
 
-    Private Sub bSVGAPlus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bSVGAPlus.Click
+    Private Sub bSVGAPlus_Click(ByVal sender As Object, ByVal e As EventArgs) Handles bSVGAPlus.Click
 
         Select Case sVGA
 
@@ -6447,7 +6535,7 @@ err_:
         End Select
     End Sub
 
-    Private Sub bOpticalPlus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bOpticalPlus.Click
+    Private Sub bOpticalPlus_Click(ByVal sender As Object, ByVal e As EventArgs) Handles bOpticalPlus.Click
         Select Case sOPTICAL
 
             Case 1
@@ -6471,7 +6559,7 @@ err_:
         End Select
     End Sub
 
-    Private Sub bNETPlus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bNetPlus.Click
+    Private Sub bNETPlus_Click(ByVal sender As Object, ByVal e As EventArgs) Handles bNetPlus.Click
 
 
         Select Case sNET
@@ -6488,10 +6576,9 @@ err_:
 
                 sNET = sNET
         End Select
-
     End Sub
 
-    Private Sub bMonitorPlus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bMonitorPlus.Click
+    Private Sub bMonitorPlus_Click(ByVal sender As Object, ByVal e As EventArgs) Handles bMonitorPlus.Click
         Select Case sMonitor
 
             Case 1
@@ -6508,7 +6595,7 @@ err_:
         End Select
     End Sub
 
-    Private Sub bPrinterPlus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bPrinterPlus.Click
+    Private Sub bPrinterPlus_Click(ByVal sender As Object, ByVal e As EventArgs) Handles bPrinterPlus.Click
         Select Case sPrinter
 
             Case 1
@@ -6533,14 +6620,14 @@ err_:
         End Select
     End Sub
 
-    Private Sub ВернутьПерефериюToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ВернутьПерефериюToolStripMenuItem.Click
+    Private Sub ВернутьПерефериюToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles ВернутьПерефериюToolStripMenuItem.Click
 
         Call under_prn()
-
-
     End Sub
 
-    Private Sub ПрисоеденитьПерефериюToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MassObedPerf.Click
+    Private Sub ПрисоеденитьПерефериюToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles MassObedPerf.Click
         Dim sSQL As String
         Dim zCtn As String
 
@@ -6558,19 +6645,21 @@ err_:
 
             Case "O"
 
-                sSQL = "SELECT count(*) as t_n FROM kompy where filial ='" & sBranch & "' and mesto='" & sDepartment & "' and TipTehn='PC'"
+                sSQL = "SELECT count(*) as t_n FROM kompy where filial ='" & sBranch & "' and mesto='" & sDepartment &
+                       "' and TipTehn='PC'"
 
 
             Case "K"
 
-                sSQL = "SELECT count(*) as t_n FROM kompy where filial ='" & sBranch & "' and mesto='" & sDepartment & "' AND kabn ='" & sOffice & "' and TipTehn='PC'"
+                sSQL = "SELECT count(*) as t_n FROM kompy where filial ='" & sBranch & "' and mesto='" & sDepartment &
+                       "' AND kabn ='" & sOffice & "' and TipTehn='PC'"
 
 
         End Select
 
-        Dim rs As ADODB.Recordset
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        Dim rs As Recordset
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
             zCtn = .Fields("t_n").Value
@@ -6589,20 +6678,22 @@ err_:
 
             Case "O"
 
-                sSQL = "SELECT * FROM kompy where filial ='" & sBranch & "' and mesto='" & sDepartment & "' and tiptehn='PC'"
+                sSQL = "SELECT * FROM kompy where filial ='" & sBranch & "' and mesto='" & sDepartment &
+                       "' and tiptehn='PC'"
 
 
             Case "K"
 
-                sSQL = "SELECT id FROM kompy where filial ='" & sBranch & "' and mesto='" & sDepartment & "' AND kabn ='" & sOffice & "' and tiptehn='PC'"
+                sSQL = "SELECT id FROM kompy where filial ='" & sBranch & "' and mesto='" & sDepartment &
+                       "' AND kabn ='" & sOffice & "' and tiptehn='PC'"
 
 
         End Select
 
 
-        rs = New ADODB.Recordset
+        rs = New Recordset
 
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         Dim intj As Integer = 1
         MRZD = True
@@ -6634,10 +6725,9 @@ err_:
 
         'Dim newThread1 As New Thread(AddressOf STAT_INF_1)
         'newThread1.Start()
-
     End Sub
 
-    Private Sub MnuSendEmail_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MnuSendEmail.Click
+    Private Sub MnuSendEmail_Click(ByVal sender As Object, ByVal e As EventArgs) Handles MnuSendEmail.Click
         If lvServices.Items.Count = 0 Then Exit Sub
         Dim z As Integer
         Dim rCOUNT As Integer
@@ -6648,10 +6738,9 @@ err_:
 
         If rCOUNT = 0 Then Exit Sub
         Call REMONT_SEND_MASTER(rCOUNT)
-
     End Sub
 
-    Private Sub mnu_z_rasp_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnu_z_rasp.Click
+    Private Sub mnu_z_rasp_Click(ByVal sender As Object, ByVal e As EventArgs) Handles mnu_z_rasp.Click
 
         If lvServices.Items.Count = 0 Then Exit Sub
 
@@ -6668,7 +6757,7 @@ err_:
         Call SRASP(rCOUNT)
     End Sub
 
-    Private Sub mnu_Z_to_Office_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnu_Z_to_Office.Click
+    Private Sub mnu_Z_to_Office_Click(ByVal sender As Object, ByVal e As EventArgs) Handles mnu_Z_to_Office.Click
         If lvServices.Items.Count = 0 Then Exit Sub
 
         Dim z As Integer
@@ -6680,12 +6769,13 @@ err_:
 
         If rCOUNT = 0 Then Exit Sub
 
-        Call SRASP2(rCOUNT, Directory.GetParent(Application.ExecutablePath).ToString & "\blanks\akt_z.dot")
+        Call _
+            SRASP2(rCOUNT,
+                   Directory.GetParent(System.Windows.Forms.Application.ExecutablePath).ToString & "\blanks\akt_z.dot")
         ' Call SRASP2(rCOUNT, "\blanks\akt_z.dot")
-
     End Sub
 
-    Private Sub addServiseWork_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles addServiseWork.Click
+    Private Sub addServiseWork_Click(ByVal sender As Object, ByVal e As EventArgs) Handles addServiseWork.Click
         On Error GoTo err_1
         frmservice_add_otvets.REMFU = True
 
@@ -6727,44 +6817,43 @@ err_:
         frmservice_add_otvets.ShowDialog(Me)
 
         Exit Sub
-err_1:
+        err_1:
         MsgBox(Err.Description, MsgBoxStyle.Information, ProGramName)
     End Sub
 
-    Private Sub ТО1ToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ТО1ToolStripMenuItem.Click
+    Private Sub ТО1ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ТО1ToolStripMenuItem.Click
 
         TIP_TO = "TO1"
 
         frmPPR.ShowDialog(Me)
-
     End Sub
 
-    Private Sub ТО2ToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ТО2ToolStripMenuItem.Click
+    Private Sub ТО2ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ТО2ToolStripMenuItem.Click
         TIP_TO = "TO2"
         frmPPR.ShowDialog(Me)
     End Sub
 
-    Private Sub ТО3ToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ТО3ToolStripMenuItem.Click
+    Private Sub ТО3ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ТО3ToolStripMenuItem.Click
         TIP_TO = "TO3"
         frmPPR.ShowDialog(Me)
     End Sub
 
-    Private Sub ТО4ToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ТО4ToolStripMenuItem.Click
+    Private Sub ТО4ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ТО4ToolStripMenuItem.Click
         TIP_TO = "TO4"
         frmPPR.ShowDialog(Me)
     End Sub
 
-    Private Sub ТО5ToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ТО5ToolStripMenuItem.Click
+    Private Sub ТО5ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ТО5ToolStripMenuItem.Click
         TIP_TO = "TO5"
         frmPPR.ShowDialog(Me)
     End Sub
 
-    Private Sub ТО6ToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ТО6ToolStripMenuItem.Click
+    Private Sub ТО6ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ТО6ToolStripMenuItem.Click
         TIP_TO = "TO6"
         frmPPR.ShowDialog(Me)
     End Sub
 
-    Private Sub btnUserCancel_Click(sender As System.Object, e As System.EventArgs) Handles btnUserCancel.Click
+    Private Sub btnUserCancel_Click(sender As Object, e As EventArgs) Handles btnUserCancel.Click
         Dim langfile As New IniFile(sLANGPATH)
 
         Me.cmdUserAdd.Text = langfile.GetString("frmComputers", "MSG30", "Добавить")
@@ -6777,86 +6866,86 @@ err_1:
         Me.txtUserIcq.Text = ""
         Me.txtUMEMO.Text = ""
         Me.txtUserJab.Text = ""
-
     End Sub
 
-    Private Sub btnNotesAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNotesAdd.Click
+    Private Sub btnNotesAdd_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnNotesAdd.Click
         Dim sStr As String = txtSNAME.Text
 
-        NotesEditAdd(btnNotesAdd, lvNotes, cmbNotesMaster, txtNotes, dtDateNotes, sStr, cmbBranch, cmbDepartment, cmbOffice)
-
+        NotesEditAdd(btnNotesAdd, lvNotes, cmbNotesMaster, txtNotes, dtDateNotes, sStr, cmbBranch, cmbDepartment,
+                     cmbOffice)
     End Sub
 
-    Private Sub btnNotesDel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNotesDel.Click
+    Private Sub btnNotesDel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnNotesDel.Click
         RemoVe_Notes(lvNotes)
         Notes_Clear(btnNotesAdd, dtDateNotes, cmbNotesMaster, txtNotes)
     End Sub
 
-    Private Sub btnNotesCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNotesCancel.Click
+    Private Sub btnNotesCancel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnNotesCancel.Click
         Notes_Clear(btnNotesAdd, dtDateNotes, cmbNotesMaster, txtNotes)
     End Sub
 
-    Private Sub btnBRNotesAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBRNotesAdd.Click
+    Private Sub btnBRNotesAdd_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnBRNotesAdd.Click
 
         Call BR_NOTES_ADD()
-
     End Sub
 
-    Private Sub btnBRNotesCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBRNotesCancel.Click
+    Private Sub btnBRNotesCancel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnBRNotesCancel.Click
         Notes_Clear(btnBRNotesAdd, Notesbrdate, cmbBRMaster, Notesbrtxt)
     End Sub
 
-    Private Sub btnBRNotesDel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBRNotesDel.Click
+    Private Sub btnBRNotesDel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnBRNotesDel.Click
         RemoVe_Notes(lvNotesBR)
         Notes_Clear(btnBRNotesAdd, Notesbrdate, cmbBRMaster, Notesbrtxt)
     End Sub
 
-    Private Sub btnPRNNotesAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPRNNotesAdd.Click
+    Private Sub btnPRNNotesAdd_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnPRNNotesAdd.Click
         Dim sStr As String = cmbPRN.Text
-        NotesEditAdd(btnPRNNotesAdd, lvNotesPRN, cmbNotesPRNMaster, NotesPRNtxt, NotesPRNdate, sStr, cmbPRNFil, cmbPRNDepart, cmbPRNOffice)
+        NotesEditAdd(btnPRNNotesAdd, lvNotesPRN, cmbNotesPRNMaster, NotesPRNtxt, NotesPRNdate, sStr, cmbPRNFil,
+                     cmbPRNDepart, cmbPRNOffice)
     End Sub
 
-    Private Sub btnPRNNotesDel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPRNNotesDel.Click
+    Private Sub btnPRNNotesDel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnPRNNotesDel.Click
         RemoVe_Notes(lvNotesPRN)
         Notes_Clear(btnPRNNotesAdd, NotesPRNdate, cmbNotesPRNMaster, NotesPRNtxt)
     End Sub
 
-    Private Sub btnPRNNotesCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPRNNotesCancel.Click
+    Private Sub btnPRNNotesCancel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnPRNNotesCancel.Click
         Notes_Clear(btnPRNNotesAdd, NotesPRNdate, cmbNotesPRNMaster, NotesPRNtxt)
     End Sub
 
-    Private Sub btnNETAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNETAdd.Click
+    Private Sub btnNETAdd_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnNETAdd.Click
         Dim sStr As String = cmbDevNet.Text
 
-        NotesEditAdd(btnNETAdd, lvNotesNET, cmbNotesNETMaster, NotesNETtxt, NotesNETdate, sStr, cmbNETBranch, cmbNetDepart, cmbNETOffice)
+        NotesEditAdd(btnNETAdd, lvNotesNET, cmbNotesNETMaster, NotesNETtxt, NotesNETdate, sStr, cmbNETBranch,
+                     cmbNetDepart, cmbNETOffice)
     End Sub
 
-    Private Sub btnNETNotesDel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNETNotesDel.Click
+    Private Sub btnNETNotesDel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnNETNotesDel.Click
         RemoVe_Notes(lvNotesNET)
         Notes_Clear(btnNETAdd, NotesNETdate, cmbNotesNETMaster, NotesNETtxt)
     End Sub
 
-    Private Sub btnNETNotesCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNETNotesCancel.Click
+    Private Sub btnNETNotesCancel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnNETNotesCancel.Click
         Notes_Clear(btnNETAdd, NotesNETdate, cmbNotesNETMaster, NotesNETtxt)
     End Sub
 
-    Private Sub btnOTHAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOTHAdd.Click
+    Private Sub btnOTHAdd_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnOTHAdd.Click
         Dim sStr As String = cmbOTH.Text
 
-        NotesEditAdd(btnOTHAdd, lvNotesOTH, cmbNotesOTHMaster, txtNotesOTH, NotesOTHdate, sStr, cmbOTHFil, cmbOTHDepart, cmbOTHOffice)
-
+        NotesEditAdd(btnOTHAdd, lvNotesOTH, cmbNotesOTHMaster, txtNotesOTH, NotesOTHdate, sStr, cmbOTHFil, cmbOTHDepart,
+                     cmbOTHOffice)
     End Sub
 
-    Private Sub btnOTHNotesDel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOTHNotesDel.Click
+    Private Sub btnOTHNotesDel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnOTHNotesDel.Click
         RemoVe_Notes(lvNotesOTH)
         Notes_Clear(btnOTHAdd, NotesOTHdate, cmbNotesOTHMaster, txtNotesOTH)
     End Sub
 
-    Private Sub btnOTHNotesCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOTHNotesCancel.Click
+    Private Sub btnOTHNotesCancel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnOTHNotesCancel.Click
         Notes_Clear(btnOTHAdd, NotesOTHdate, cmbNotesOTHMaster, txtNotesOTH)
     End Sub
 
-    Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
+    Private Sub btnSearch_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSearch.Click
         OneStart = 0
 
         txtSearch.Text = ""
@@ -6881,7 +6970,7 @@ err_1:
         Me.Cursor = Cursors.Default
     End Sub
 
-    Private Sub chkSNMP_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkSNMP.CheckedChanged
+    Private Sub chkSNMP_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chkSNMP.CheckedChanged
 
         If chkSNMP.Checked = True And TipTehn = "IBP" Then
 
@@ -6896,11 +6985,10 @@ err_1:
             gbSNMP.Visible = False
 
         End If
-
     End Sub
 
-    Private Sub treebranche_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles treebranche.SelectedIndexChanged
-
+    Private Sub treebranche_SelectedIndexChanged(sender As Object, e As EventArgs) _
+        Handles treebranche.SelectedIndexChanged
     End Sub
 
 
@@ -6915,32 +7003,32 @@ err_1:
         Me.BeginInvoke(New MethodInvoker(AddressOf R_T_LOAD))
 
         lstGroups.ExpandAll()
-
     End Sub
 
-    Private Sub treebranche_SelectedValueChanged(sender As Object, e As System.EventArgs) Handles treebranche.SelectedValueChanged
+    Private Sub treebranche_SelectedValueChanged(sender As Object, e As EventArgs) _
+        Handles treebranche.SelectedValueChanged
 
         Me.BeginInvoke(New MethodInvoker(AddressOf TreeBrancheDU))
-
     End Sub
 
-    Private Sub cmbOTHConnect_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles cmbOTHConnect.SelectedIndexChanged
+    Private Sub cmbOTHConnect_SelectedIndexChanged(sender As Object, e As EventArgs) _
+        Handles cmbOTHConnect.SelectedIndexChanged
         On Error GoTo err_
 
 
-        Dim rs As ADODB.Recordset 'Объявляем рекордсет
+        Dim rs As Recordset 'Объявляем рекордсет
         Dim sSQL As String 'Переменная, где будет размещён SQL запрос
 
 
         sSQL = "SELECT B  FROM spr_other WHERE name ='" & cmbOTHConnect.Text & "'"
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
 
         With rs
 
-            If Not IsDBNull(.Fields("B").Value) And Len(.Fields("B").Value) > 5 Then FillComboNET(cmbOTH, "name", .Fields("B").Value, "", False, True)
+            If Not IsDBNull(.Fields("B").Value) And Len(.Fields("B").Value) > 5 Then _
+                FillComboNET(cmbOTH, "name", .Fields("B").Value, "", False, True)
 
         End With
 
@@ -6948,12 +7036,12 @@ err_1:
         rs = Nothing
 
 
-err_:
-
+        err_:
     End Sub
 
-  
-    Private Sub PingToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PingToolStripMenuItem.Click
+
+    Private Sub PingToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles PingToolStripMenuItem.Click
         On Error GoTo Err_
 
         Dim d() As String
@@ -6970,11 +7058,11 @@ err_:
 
         End Select
 
-        Dim rs As ADODB.Recordset 'Объявляем рекордсет
+        Dim rs As Recordset 'Объявляем рекордсет
         Dim sSQL As String 'Переменная, где будет размещён SQL запрос
         sSQL = "SELECT NET_IP_1 FROM kompy WHERE id =" & d(1)
-        rs = New ADODB.Recordset
-        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         Dim sPING As String
 
@@ -7000,18 +7088,17 @@ err_:
 
 
         Exit Sub
-Err_:
+        Err_:
         MsgBox("no reply", MsgBoxStyle.Exclamation, ProGramName)
-
     End Sub
 
-    Private Sub ToolStrip10_ItemClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.ToolStripItemClickedEventArgs) Handles ToolStrip10.ItemClicked
-
+    Private Sub ToolStrip10_ItemClicked(ByVal sender As Object, ByVal e As ToolStripItemClickedEventArgs) _
+        Handles ToolStrip10.ItemClicked
     End Sub
 
-    
-    Private Sub lstUsers_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lstUsers.SelectedIndexChanged
 
+    Private Sub lstUsers_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
+        Handles lstUsers.SelectedIndexChanged
     End Sub
 End Class
 

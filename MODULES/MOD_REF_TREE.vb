@@ -1,5 +1,5 @@
 ﻿
-Imports System.Threading
+
 
 Module MOD_REF_TREE
     Private lbl_M_F As String
@@ -10,7 +10,7 @@ Module MOD_REF_TREE
     Private BrancheNode1 As TreeNode
     Private DepatrmentNode1 As TreeNode
     Private OfficeNode1 As TreeNode
-    Private FontStyl As System.Drawing.FontStyle
+    Private FontStyl As FontStyle
     Private iA1, iA2, iA3, iA4, iA5, iA6, iA7, iA8, iID As String
 
     Private Sub FILING_FILIAL()
@@ -34,17 +34,23 @@ Module MOD_REF_TREE
 
             Case 0
 
-                sSQL4 = "SELECT id, mesto, filial, tip_compa, tiptehn, PSEVDONIM, NET_NAME, kabn, Spisan, OS, PRINTER_NAME_4,balans FROM kompy WHERE filial ='" & FILIAL1 & "' AND mesto ='" & OTDEL1 & "' AND kabn ='" & KABINET1 & "'  AND PCL =0 ORDER BY PSEVDONIM, tiptehn"
+                sSQL4 =
+                    "SELECT id, mesto, filial, tip_compa, tiptehn, PSEVDONIM, NET_NAME, kabn, Spisan, OS, PRINTER_NAME_4,balans FROM kompy WHERE filial ='" &
+                    FILIAL1 & "' AND mesto ='" & OTDEL1 & "' AND kabn ='" & KABINET1 &
+                    "'  AND PCL =0 ORDER BY PSEVDONIM, tiptehn"
 
             Case 1
 
-                sSQL4 = "SELECT id, mesto, filial, tip_compa, tiptehn, PSEVDONIM, NET_NAME, kabn, Spisan, OS, PRINTER_NAME_4,balans FROM kompy WHERE filial ='" & FILIAL1 & "' AND mesto ='" & OTDEL1 & "' AND kabn ='" & KABINET1 & "' AND PCL =0 ORDER BY tiptehn, PSEVDONIM"
+                sSQL4 =
+                    "SELECT id, mesto, filial, tip_compa, tiptehn, PSEVDONIM, NET_NAME, kabn, Spisan, OS, PRINTER_NAME_4,balans FROM kompy WHERE filial ='" &
+                    FILIAL1 & "' AND mesto ='" & OTDEL1 & "' AND kabn ='" & KABINET1 &
+                    "' AND PCL =0 ORDER BY tiptehn, PSEVDONIM"
 
         End Select
 
-        Dim rs3 As ADODB.Recordset
-        rs3 = New ADODB.Recordset
-        rs3.Open(sSQL4, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        Dim rs3 As Recordset
+        rs3 = New Recordset
+        rs3.Open(sSQL4, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
 
         With rs3
@@ -72,8 +78,6 @@ Module MOD_REF_TREE
         End With
         rs3.Close()
         rs3 = Nothing
-
-
     End Sub
 
     ' Private Sub S_P_LOAD_t_1()
@@ -131,28 +135,29 @@ Module MOD_REF_TREE
 
                 sICONS = sICONS
 
-                frmComputers.ilsCommands.ImageSize = New System.Drawing.Size(32, 32)
+                frmComputers.ilsCommands.ImageSize = New Size(32, 32)
                 Tree_Icons_Feel(frmComputers.ilsCommands, "sCMP", "pic\tree\")
             Case Else
 
                 sICONS = "24*24"
-                frmComputers.ilsCommands.ImageSize = New System.Drawing.Size(24, 24)
+                frmComputers.ilsCommands.ImageSize = New Size(24, 24)
                 Tree_Icons_Feel(frmComputers.ilsCommands, "sCMP", "pic\tree\")
         End Select
 
 
         lstgroups.ImageList = frmComputers.ilsCommands
 
-        Dim rs As ADODB.Recordset
-        Dim rs2 As ADODB.Recordset
-        Dim rs3 As ADODB.Recordset
-        Dim rs4 As ADODB.Recordset
+        Dim rs As Recordset
+        Dim rs2 As Recordset
+        Dim rs3 As Recordset
+        Dim rs4 As Recordset
 
         Dim strItemText As String
         Dim unamS2, unamS As Integer
 
-        rs = New ADODB.Recordset
-        rs.Open("SELECT count(*) as t_nim FROM SPR_KAB", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open("SELECT count(*) as t_nim FROM SPR_KAB", DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
 
         With rs
             unamS2 = .Fields("t_nim").Value
@@ -175,15 +180,15 @@ Module MOD_REF_TREE
 
         'Компы
 
-        rs = New ADODB.Recordset
-        rs.Open("SELECT count(*) as t_n FROM SPR_MESTO", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open("SELECT count(*) as t_n FROM SPR_MESTO", DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
 
         With rs
             unamS = .Fields("t_n").Value
         End With
         rs.Close()
         rs = Nothing
-
 
 
         Dim unameS As String
@@ -193,8 +198,8 @@ Module MOD_REF_TREE
 
         'Верхний нулевой уровень - вставляем название организации
 
-        rs = New ADODB.Recordset
-        rs.Open("SELECT ORG FROM CONFIGURE", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open("SELECT ORG FROM CONFIGURE", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
         Dim ORG As String
 
         With rs
@@ -231,8 +236,8 @@ Module MOD_REF_TREE
         End If
 
 
-        rs = New ADODB.Recordset
-        rs.Open(sSQL1, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New Recordset
+        rs.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
             .MoveFirst()
@@ -265,8 +270,8 @@ Module MOD_REF_TREE
                 'Вставляем технику если есть
                 Dim cFil As String
                 sSQL4 = "SELECT count(*) as t_n FROM kompy WHERE filial ='" & unameS & "' AND mesto =''"
-                rs4 = New ADODB.Recordset
-                rs4.Open(sSQL4, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs4 = New Recordset
+                rs4.Open(sSQL4, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                 With rs4
                     cFil = .Fields("t_n").Value
                 End With
@@ -284,12 +289,14 @@ Module MOD_REF_TREE
                 'Отделы в филиалах Второй уровень дерева
 
                 If sVISIBLE = 1 Then
-                    sSQL2 = "SELECT id, Filial, N_Otd FROM SPR_OTD_FILIAL WHERE filial='" & unameS & "' ORDER BY Filial, N_Otd"
+                    sSQL2 = "SELECT id, Filial, N_Otd FROM SPR_OTD_FILIAL WHERE filial='" & unameS &
+                            "' ORDER BY Filial, N_Otd"
                 Else
-                    sSQL2 = "SELECT id, Filial, N_Otd FROM SPR_OTD_FILIAL where filial='" & unameS & "' AND Arhiv=0 ORDER BY Filial, N_Otd"
+                    sSQL2 = "SELECT id, Filial, N_Otd FROM SPR_OTD_FILIAL where filial='" & unameS &
+                            "' AND Arhiv=0 ORDER BY Filial, N_Otd"
                 End If
-                rs2 = New ADODB.Recordset
-                rs2.Open(sSQL2, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                rs2 = New Recordset
+                rs2.Open(sSQL2, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 With rs2
                     .MoveFirst()
@@ -320,9 +327,10 @@ Module MOD_REF_TREE
                             'DepatrmentNode.NodeFont = New Font(DepatrmentNode.NodeFont, FontStyle.Italic)
 
 
-                            sSQL4 = "SELECT count(*) as t_n FROM kompy WHERE filial ='" & unameS & "' AND mesto ='" & unameS2 & "' AND kabn=''"
-                            rs4 = New ADODB.Recordset
-                            rs4.Open(sSQL4, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                            sSQL4 = "SELECT count(*) as t_n FROM kompy WHERE filial ='" & unameS & "' AND mesto ='" &
+                                    unameS2 & "' AND kabn=''"
+                            rs4 = New Recordset
+                            rs4.Open(sSQL4, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                             With rs4
                                 cFil = .Fields("t_n").Value
                             End With
@@ -343,13 +351,15 @@ Module MOD_REF_TREE
                             If unamS2 > 0 Then
 
                                 If sVISIBLE = 1 Then
-                                    sSQL5 = "SELECT id, Name, N_F, N_M FROM SPR_KAB WHERE N_F='" & unameS & "' AND N_M ='" & unameS2 & "' ORDER BY N_F, N_M, Name"
+                                    sSQL5 = "SELECT id, Name, N_F, N_M FROM SPR_KAB WHERE N_F='" & unameS &
+                                            "' AND N_M ='" & unameS2 & "' ORDER BY N_F, N_M, Name"
                                 Else
-                                    sSQL5 = "SELECT id, Name, N_F, N_M FROM SPR_KAB where N_F='" & unameS & "' AND N_M ='" & unameS2 & "' AND Arhiv=0 ORDER BY N_F, N_M, Name"
+                                    sSQL5 = "SELECT id, Name, N_F, N_M FROM SPR_KAB where N_F='" & unameS &
+                                            "' AND N_M ='" & unameS2 & "' AND Arhiv=0 ORDER BY N_F, N_M, Name"
                                 End If
 
-                                rs3 = New ADODB.Recordset
-                                rs3.Open(sSQL5, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                                rs3 = New Recordset
+                                rs3.Open(sSQL5, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                                 With rs3
                                     .MoveFirst()
@@ -377,9 +387,10 @@ Module MOD_REF_TREE
                                         OfficeNode.ForeColor = Color.DarkGoldenrod
 
 
-                                        sSQL4 = "SELECT count(*) as t_n FROM kompy WHERE filial ='" & unameS & "' AND mesto ='" & unameS2 & "' AND kabn='" & unameS3 & "'"
-                                        rs4 = New ADODB.Recordset
-                                        rs4.Open(sSQL4, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                                        sSQL4 = "SELECT count(*) as t_n FROM kompy WHERE filial ='" & unameS &
+                                                "' AND mesto ='" & unameS2 & "' AND kabn='" & unameS3 & "'"
+                                        rs4 = New Recordset
+                                        rs4.Open(sSQL4, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                                         With rs4
                                             cFil = .Fields("t_n").Value
                                         End With
@@ -429,9 +440,9 @@ Module MOD_REF_TREE
         End If
 
         'lstgroups.visible = True
-exitsub:
+        exitsub:
         Exit Sub
-ERR1:
+        ERR1:
         'lstgroups.visible = True
         'MsgBox Err.Description
 
@@ -451,11 +462,12 @@ ERR1:
         End Select
 
         ' lstgroups.SelectedNode.ExpandAll()
-
-
     End Sub
 
-    Private Sub FILING_TREE(ByVal lstgroups As TreeView, ByVal iTipTehn As String, ByVal TipPC As String, ByVal NET_NAME As String, ByVal PSEVDONIM As String, ByVal iD As String, ByVal Spisan As String, ByVal DepNode As TreeNode, ByVal OS As String, ByVal n_set As String, ByVal balans As String)
+    Private Sub FILING_TREE(ByVal lstgroups As TreeView, ByVal iTipTehn As String, ByVal TipPC As String,
+                            ByVal NET_NAME As String, ByVal PSEVDONIM As String, ByVal iD As String,
+                            ByVal Spisan As String, ByVal DepNode As TreeNode, ByVal OS As String, ByVal n_set As String,
+                            ByVal balans As String)
 
         Dim iC As String
         Dim iA As String
@@ -593,9 +605,10 @@ ERR1:
 
                 Else
 
-                    Dim rsOT As ADODB.Recordset
-                    rsOT = New ADODB.Recordset
-                    rsOT.Open("SELECT A FROM spr_other where Name ='" & NET_NAME & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                    Dim rsOT As Recordset
+                    rsOT = New Recordset
+                    rsOT.Open("SELECT A FROM spr_other where Name ='" & NET_NAME & "'", DB7,
+                              CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                     With rsOT
                         If Not IsDBNull(.Fields("A").Value) Then uname = .Fields("A").Value
@@ -645,9 +658,9 @@ ERR1:
 
                 sSQL4 = "SELECT count(*) as t_n FROM kompy WHERE PCL =" & iD
 
-                Dim rs3 As ADODB.Recordset
-                rs3 = New ADODB.Recordset
-                rs3.Open(sSQL4, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                Dim rs3 As Recordset
+                rs3 = New Recordset
+                rs3.Open(sSQL4, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 Dim sCount As String
                 With rs3
@@ -663,17 +676,21 @@ ERR1:
 
                         Case 0
 
-                            sSQL4 = "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa,PRINTER_NAME_4,balans FROM kompy WHERE PCL =" & iD & " ORDER BY PSEVDONIM, tiptehn"
+                            sSQL4 =
+                                "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa,PRINTER_NAME_4,balans FROM kompy WHERE PCL =" &
+                                iD & " ORDER BY PSEVDONIM, tiptehn"
 
                         Case 1
 
-                            sSQL4 = "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa,PRINTER_NAME_4,balans FROM kompy WHERE PCL =" & iD & " ORDER BY tiptehn, PSEVDONIM"
+                            sSQL4 =
+                                "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa,PRINTER_NAME_4,balans FROM kompy WHERE PCL =" &
+                                iD & " ORDER BY tiptehn, PSEVDONIM"
 
                     End Select
 
 
-                    rs3 = New ADODB.Recordset
-                    rs3.Open(sSQL4, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                    rs3 = New Recordset
+                    rs3.Open(sSQL4, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                     With rs3
                         .MoveFirst()
@@ -762,7 +779,6 @@ ERR1:
                                     End If
 
 
-
                                     If KCKey <> 0 Then
                                         If KCKey = iD Then
                                             lstgroups.SelectedNode = TEHNodePC
@@ -784,7 +800,9 @@ ERR1:
                                         iC = "КПК"
                                     End If
 
-                                    If iC = "Сервер" Or iC = "Server" Or iC = "Сервер для тонких клиентов" Or iC = "Сервер видео наблюдения" Then
+                                    If _
+                                        iC = "Сервер" Or iC = "Server" Or iC = "Сервер для тонких клиентов" Or
+                                        iC = "Сервер видео наблюдения" Then
                                         iC = "Сервер"
                                     End If
 
@@ -857,8 +875,8 @@ ERR1:
                                     sSQL4 = "SELECT count(*) as t_n FROM kompy WHERE PCL =" & iD
 
                                     'Dim rs3 As ADODB.Recordset
-                                    rs3 = New ADODB.Recordset
-                                    rs3.Open(sSQL4, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                                    rs3 = New Recordset
+                                    rs3.Open(sSQL4, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                                     ' Dim sCount As String
                                     With rs3
@@ -871,22 +889,25 @@ ERR1:
                                     If sCount > 0 Then
 
 
-
                                         Select Case sText
 
                                             Case 0
 
-                                                sSQL4 = "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa,balans FROM kompy WHERE PCL =" & iD & " ORDER BY PSEVDONIM, tiptehn"
+                                                sSQL4 =
+                                                    "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa,balans FROM kompy WHERE PCL =" &
+                                                    iD & " ORDER BY PSEVDONIM, tiptehn"
 
                                             Case 1
 
-                                                sSQL4 = "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa,balans FROM kompy WHERE PCL =" & iD & " ORDER BY tiptehn, PSEVDONIM"
+                                                sSQL4 =
+                                                    "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa,balans FROM kompy WHERE PCL =" &
+                                                    iD & " ORDER BY tiptehn, PSEVDONIM"
 
                                         End Select
 
 
-                                        rs3 = New ADODB.Recordset
-                                        rs3.Open(sSQL4, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                                        rs3 = New Recordset
+                                        rs3.Open(sSQL4, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                                         With rs3
                                             .MoveFirst()
@@ -945,26 +966,31 @@ ERR1:
 
                                                     Case "Printer"
 
-                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 7)
+                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC,
+                                                                          Spisan, balans, L_NAME, 7)
 
 
                                                     Case "MFU"
 
-                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 8)
+                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC,
+                                                                          Spisan, balans, L_NAME, 8)
 
 
                                                     Case "SCANER"
 
-                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 14)
+                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC,
+                                                                          Spisan, balans, L_NAME, 14)
 
                                                     Case "ZIP"
 
-                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 15)
+                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC,
+                                                                          Spisan, balans, L_NAME, 15)
 
 
                                                     Case "PHONE"
 
-                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 12)
+                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC,
+                                                                          Spisan, balans, L_NAME, 12)
 
 
                                                     Case "OT"
@@ -979,15 +1005,20 @@ ERR1:
                                                             uname = ""
                                                         Else
 
-                                                            Dim rsOT As ADODB.Recordset
-                                                            rsOT = New ADODB.Recordset
-                                                            rsOT.Open("SELECT A FROM spr_other where Name ='" & .Fields("tip_compa").Value & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                                                            Dim rsOT As Recordset
+                                                            rsOT = New Recordset
+                                                            rsOT.Open(
+                                                                "SELECT A FROM spr_other where Name ='" &
+                                                                .Fields("tip_compa").Value & "'", DB7,
+                                                                CursorTypeEnum.adOpenDynamic,
+                                                                LockTypeEnum.adLockOptimistic)
 
                                                             With rsOT
                                                                 '.MoveFirst()
                                                                 'Do While Not .EOF
 
-                                                                If Not IsDBNull(.Fields("A").Value) Then uname = .Fields("A").Value
+                                                                If Not IsDBNull(.Fields("A").Value) Then _
+                                                                    uname = .Fields("A").Value
 
                                                                 '.MoveNext()
                                                                 'Loop
@@ -1001,47 +1032,56 @@ ERR1:
                                                         End If
 
 
-                                                        If Len(uname) = 0 Or uname = " " Or uname = " 0" Or uname = "" Then
+                                                        If Len(uname) = 0 Or uname = " " Or uname = " 0" Or uname = "" _
+                                                            Then
                                                             iA = 16
                                                         Else
                                                             iA = uname
                                                         End If
 
-                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, iA)
+                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC,
+                                                                          Spisan, balans, L_NAME, iA)
 
 
                                                     Case "MONITOR"
 
-                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 17)
+                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC,
+                                                                          Spisan, balans, L_NAME, 17)
 
 
                                                         '--------------VIP_Graff Добавление новой перефирии Начало-----------------
                                                     Case "USB"
 
-                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 18)
+                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC,
+                                                                          Spisan, balans, L_NAME, 18)
 
 
                                                     Case "SOUND"
 
-                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 44)
+                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC,
+                                                                          Spisan, balans, L_NAME, 44)
 
                                                     Case "IBP"
 
-                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 41)
+                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC,
+                                                                          Spisan, balans, L_NAME, 41)
 
 
                                                     Case "FS"
 
-                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 61)
+                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC,
+                                                                          Spisan, balans, L_NAME, 61)
 
 
                                                     Case "KEYB"
 
-                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 46)
+                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC,
+                                                                          Spisan, balans, L_NAME, 46)
 
                                                     Case "MOUSE"
 
-                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 47)
+                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC,
+                                                                          Spisan, balans, L_NAME, 47)
 
                                                         '--------------VIP_Graff Добавление новой перефирии Конец------------------
 
@@ -1067,26 +1107,31 @@ ERR1:
 
                                 Case "Printer"
 
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME, 7)
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME,
+                                                      7)
 
 
                                 Case "MFU"
 
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME, 8)
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME,
+                                                      8)
 
 
                                 Case "SCANER"
 
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME, 14)
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME,
+                                                      14)
 
 
                                 Case "ZIP"
 
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME, 15)
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME,
+                                                      15)
 
                                 Case "PHONE"
 
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME, 12)
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME,
+                                                      12)
 
 
                                 Case "OT"
@@ -1101,9 +1146,11 @@ ERR1:
                                         uname = ""
                                     Else
 
-                                        Dim rsOT As ADODB.Recordset
-                                        rsOT = New ADODB.Recordset
-                                        rsOT.Open("SELECT A FROM spr_other where Name ='" & .Fields("tip_compa").Value & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                                        Dim rsOT As Recordset
+                                        rsOT = New Recordset
+                                        rsOT.Open(
+                                            "SELECT A FROM spr_other where Name ='" & .Fields("tip_compa").Value & "'",
+                                            DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                                         With rsOT
 
@@ -1126,40 +1173,48 @@ ERR1:
                                     End If
 
 
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME, iA)
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME,
+                                                      iA)
 
                                 Case "MONITOR"
 
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME, 17)
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME,
+                                                      17)
 
 
                                     '--------------VIP_Graff Добавление новой перефирии Начало-----------------
                                 Case "USB"
 
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME, 18)
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME,
+                                                      18)
 
                                 Case "SOUND"
 
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME, 44)
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME,
+                                                      44)
 
                                 Case "IBP"
 
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME, 41)
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME,
+                                                      41)
 
 
                                 Case "FS"
 
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME, 61)
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME,
+                                                      61)
 
 
                                 Case "KEYB"
 
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME, 46)
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME,
+                                                      46)
 
 
                                 Case "MOUSE"
 
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME, 47)
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME,
+                                                      47)
 
                                     '--------------VIP_Graff Добавление новой перефирии Конец------------------
 
@@ -1209,7 +1264,6 @@ ERR1:
                 End If
 
 
-
                 If KCKey <> 0 Then
                     If KCKey = iD Then
                         lstgroups.SelectedNode = TEHNodePC
@@ -1228,9 +1282,9 @@ ERR1:
 
                 sSQL4 = "SELECT count(*) as t_n FROM kompy WHERE PCL =" & iD
 
-                Dim rs3 As ADODB.Recordset
-                rs3 = New ADODB.Recordset
-                rs3.Open(sSQL4, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                Dim rs3 As Recordset
+                rs3 = New Recordset
+                rs3.Open(sSQL4, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 Dim sCount As String
                 With rs3
@@ -1243,22 +1297,25 @@ ERR1:
                 If sCount > 0 Then
 
 
-
                     Select Case sText
 
                         Case 0
 
-                            sSQL4 = "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa,PRINTER_NAME_4,balans FROM kompy WHERE PCL =" & iD & " ORDER BY PSEVDONIM, tiptehn"
+                            sSQL4 =
+                                "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa,PRINTER_NAME_4,balans FROM kompy WHERE PCL =" &
+                                iD & " ORDER BY PSEVDONIM, tiptehn"
 
                         Case 1
 
-                            sSQL4 = "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa,PRINTER_NAME_4,balans FROM kompy WHERE PCL =" & iD & " ORDER BY tiptehn, PSEVDONIM"
+                            sSQL4 =
+                                "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa,PRINTER_NAME_4,balans FROM kompy WHERE PCL =" &
+                                iD & " ORDER BY tiptehn, PSEVDONIM"
 
                     End Select
 
 
-                    rs3 = New ADODB.Recordset
-                    rs3.Open(sSQL4, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                    rs3 = New Recordset
+                    rs3.Open(sSQL4, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                     With rs3
                         .MoveFirst()
@@ -1317,25 +1374,30 @@ ERR1:
 
                                 Case "Printer"
 
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 7)
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME,
+                                                      7)
 
                                 Case "MFU"
 
 
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 8)
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME,
+                                                      8)
 
 
                                 Case "SCANER"
 
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 14)
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME,
+                                                      14)
 
                                 Case "ZIP"
 
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 15)
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME,
+                                                      15)
 
                                 Case "PHONE"
 
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 12)
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME,
+                                                      12)
 
 
                                 Case "OT"
@@ -1350,9 +1412,11 @@ ERR1:
                                         uname = ""
                                     Else
 
-                                        Dim rsOT As ADODB.Recordset
-                                        rsOT = New ADODB.Recordset
-                                        rsOT.Open("SELECT A FROM spr_other where Name ='" & .Fields("tip_compa").Value & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                                        Dim rsOT As Recordset
+                                        rsOT = New Recordset
+                                        rsOT.Open(
+                                            "SELECT A FROM spr_other where Name ='" & .Fields("tip_compa").Value & "'",
+                                            DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                                         With rsOT
 
@@ -1374,40 +1438,48 @@ ERR1:
                                         iA = uname
                                     End If
 
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, iA)
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME,
+                                                      iA)
 
                                 Case "MONITOR"
 
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 17)
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME,
+                                                      17)
 
 
                                     '--------------VIP_Graff Добавление новой перефирии Начало-----------------
                                 Case "USB"
 
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 18)
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME,
+                                                      18)
 
                                 Case "SOUND"
 
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 44)
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME,
+                                                      44)
 
 
                                 Case "IBP"
 
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 41)
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME,
+                                                      41)
 
 
                                 Case "FS"
 
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 61)
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME,
+                                                      61)
 
 
                                 Case "KEYB"
 
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 46)
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME,
+                                                      46)
 
                                 Case "MOUSE"
 
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME, 47)
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans, L_NAME,
+                                                      47)
 
                                     '--------------VIP_Graff Добавление новой перефирии Конец------------------
 
@@ -1459,7 +1531,6 @@ ERR1:
                         TEHNode.ForeColor = Color.Green
 
                 End Select
-
 
 
                 If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
@@ -1519,9 +1590,10 @@ ERR1:
                     uname = ""
                 Else
 
-                    Dim rsOT As ADODB.Recordset
-                    rsOT = New ADODB.Recordset
-                    rsOT.Open("SELECT A FROM spr_other where Name ='" & TipPC & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                    Dim rsOT As Recordset
+                    rsOT = New Recordset
+                    rsOT.Open("SELECT A FROM spr_other where Name ='" & TipPC & "'", DB7, CursorTypeEnum.adOpenDynamic,
+                              LockTypeEnum.adLockOptimistic)
 
                     With rsOT
 
@@ -1532,7 +1604,6 @@ ERR1:
 
                     rsOT.Close()
                     rsOT = Nothing
-
 
 
                 End If
@@ -1588,15 +1659,11 @@ ERR1:
             Case Else
 
         End Select
-
-
-
-
-
-
     End Sub
 
-    Public Sub Filling_TREE_DATA(ByVal lstgroups As TreeView, ByVal sID As Integer, ByVal TEHNodePCL As TreeNode, ByVal Spisan As String, ByVal balans As String, ByVal L_NAME As String, ByVal sNUM As Decimal)
+    Public Sub Filling_TREE_DATA(ByVal lstgroups As TreeView, ByVal sID As Integer, ByVal TEHNodePCL As TreeNode,
+                                 ByVal Spisan As String, ByVal balans As String, ByVal L_NAME As String,
+                                 ByVal sNUM As Decimal)
 
         Dim TEHNodeCNT As New TreeNode(L_NAME, sNUM, sNUM)
         TEHNodeCNT.Tag = "C|" & sID
@@ -1624,9 +1691,5 @@ ERR1:
 
             End If
         End If
-
-
     End Sub
-
-
 End Module

@@ -1,11 +1,10 @@
-﻿Imports System
+﻿Imports System.ComponentModel
 Imports System.IO
 Imports Ionic.Zip
-Imports System.Threading
-Imports System.ComponentModel
 
 Public Class frmARHIV
-    Private _backgroundWorker1 As System.ComponentModel.BackgroundWorker
+
+    Private _backgroundWorker1 As BackgroundWorker
     Private _saveCanceled As Boolean
     Private _totalBytesAfterCompress As Long
     Private _totalBytesBeforeCompress As Long
@@ -17,17 +16,16 @@ Public Class frmARHIV
     Private sFIleName As String
 
     Private Delegate Sub SaveEntryProgress(ByVal e As SaveProgressEventArgs)
+
     Private Delegate Sub ButtonClick(ByVal sender As Object, ByVal e As EventArgs)
 
-    Private Sub frmARHIV_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+    Private Sub frmARHIV_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
 
         SendFonts(Me)
 
         Call frmARHIV_Lang()
 
         Me.find_file()
-
-
     End Sub
 
     Private Sub find_file()
@@ -49,12 +47,9 @@ Public Class frmARHIV
         Catch e1 As Exception
             'Console.WriteLine("The process failed: {0}", e1.ToString())
         End Try
-
-
-
     End Sub
 
-    Private Sub btnZIP_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnZipUp.Click
+    Private Sub btnZIP_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnZipUp.Click
         UnLoadDatabase()
 
         Me.KickoffZipup()
@@ -63,17 +58,24 @@ Public Class frmARHIV
     Private Sub KickoffZipup()
         Dim dirs As String
         dirs = BasePath
-        sFIleName = PrPath & "arhiv\" & GENID() & "_" & Date.Today & "_" & My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor & "." & My.Application.Info.Version.Build & "." & My.Application.Info.Version.Revision & ".zip"
+        sFIleName = PrPath & "arhiv\" & GENID() & "_" & Date.Today & "_" & My.Application.Info.Version.Major & "." &
+                    My.Application.Info.Version.Minor & "." & My.Application.Info.Version.Build & "." &
+                    My.Application.Info.Version.Revision & ".zip"
 
 
         Dim folderName As String = dirs
 
-        If (((Not folderName Is Nothing) AndAlso (folderName <> "")) AndAlso ((Not sFIleName Is Nothing) AndAlso (sFIleName <> ""))) Then
+        If _
+            (((Not folderName Is Nothing) AndAlso (folderName <> "")) AndAlso
+             ((Not sFIleName Is Nothing) AndAlso (sFIleName <> ""))) Then
 
             If File.Exists(sFIleName) Then
-                If (MessageBox.Show(String.Format("The file you have specified ({0}) already exists.  Do you want to overwrite this file?", _
-                                                  sFIleName), "Confirmation is Required", _
-                                                  MessageBoxButtons.YesNo, MessageBoxIcon.Question) <> DialogResult.Yes) Then
+                If _
+                    (MessageBox.Show(
+                        String.Format(
+                            "The file you have specified ({0}) already exists.  Do you want to overwrite this file?",
+                            sFIleName), "Confirmation is Required",
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Question) <> DialogResult.Yes) Then
                     Return
                 End If
                 File.Delete(sFIleName)
@@ -93,7 +95,7 @@ Public Class frmARHIV
             options.ZipName = sFIleName
             options.Folder = folderName
 
-            _backgroundWorker1 = New System.ComponentModel.BackgroundWorker()
+            _backgroundWorker1 = New BackgroundWorker()
             _backgroundWorker1.WorkerSupportsCancellation = False
             _backgroundWorker1.WorkerReportsProgress = False
 
@@ -101,8 +103,6 @@ Public Class frmARHIV
             _backgroundWorker1.RunWorkerAsync(options)
 
         End If
-
-
     End Sub
 
     Private Sub DoSave(ByVal sender As Object, ByVal e As DoWorkEventArgs)
@@ -163,7 +163,9 @@ Public Class frmARHIV
             Me.lblStatus.Invoke(New MethodInvoker(AddressOf SaveCompleted))
             'Me.lblStatus.Invoke(New MethodInvoker(Me, DirectCast(Me.SaveCompleted, IntPtr)))
         Else
-            Me.lblStatus.Text = String.Format("Выполнено, заархивировано {0} файлов, {1:N0}% от оригинала", Me._nFilesCompleted, ((100 * Me._totalBytesAfterCompress) / CDbl(Me._totalBytesBeforeCompress)))
+            Me.lblStatus.Text = String.Format("Выполнено, заархивировано {0} файлов, {1:N0}% от оригинала",
+                                              Me._nFilesCompleted,
+                                              ((100 * Me._totalBytesAfterCompress) / CDbl(Me._totalBytesBeforeCompress)))
             Me.ResetState()
             Me.find_file()
 
@@ -187,7 +189,8 @@ Public Class frmARHIV
                     entryMax = (entryMax * -1)
                 End If
                 Me.ProgressBar2.Maximum = CInt(entryMax)
-                Me.lblStatus.Text = String.Format("{0} из {1} файлов...({2})", (Me._nFilesCompleted + 1), Me._entriesToZip, e.CurrentEntry.FileName)
+                Me.lblStatus.Text = String.Format("{0} из {1} файлов...({2})", (Me._nFilesCompleted + 1),
+                                                  Me._entriesToZip, e.CurrentEntry.FileName)
             End If
             Dim xferred As Integer = CInt((e.BytesTransferred >> Me._progress2MaxFactor))
             Me.ProgressBar2.Value = IIf((xferred >= Me.ProgressBar2.Maximum), Me.ProgressBar2.Maximum, xferred)
@@ -232,6 +235,4 @@ Public Class frmARHIV
         'Public ZipFlavor As Integer
         Public ZipName As String
     End Class
-
-
 End Class
