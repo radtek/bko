@@ -8814,7 +8814,7 @@ Module MOD_OPENOFFICE
         MsgBox(Err.Description, MsgBoxStyle.Critical, ProGramName)
     End Sub
 
-    Public Function ExportListViewToExcel(ByVal MyListView As ListView, ByVal sTXT As String)
+    Public Sub ExportListViewToExcel(ByVal MyListView As ListView, ByVal sTXT As String)
 
         'Dim ExcelReport As Excel.ApplicationClass
 
@@ -9065,5 +9065,7 @@ Module MOD_OPENOFFICE
         ExcelReport.Cells.EntireColumn.AutoFit()
 
         ExcelReport.Cells.Range("A1").Select()
-    End Function
+
+    End Sub
+
 End Module

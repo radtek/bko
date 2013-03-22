@@ -99,7 +99,6 @@
         g = Split(cmbObt.Text, "_")
         frmserviceDesc.EDTID = g(1)
 
-
         Dim rs As Recordset
         Dim sSQL, sSQL1, uname As String
         rs = New Recordset
@@ -117,7 +116,6 @@
 
         rs.Close()
         rs = Nothing
-
 
         rs = New Recordset
         sSQL = "SELECT * FROM Remont WHERE id=" & frmserviceDesc.r1COUNT
@@ -338,6 +336,10 @@
 
     Private Sub cmdAdd_Click(ByVal sender As Object, ByVal e As EventArgs) Handles cmdAdd.Click
 
+        If Not (RSExists("MASTER", "name", Trim(cmbMaster.Text))) Then
+            AddOnePar(cmbMaster.Text, "NAME", "SPR_Master", cmbMaster)
+        End If
+
         Select Case cmbTip.Text
 
             Case "Base"
@@ -350,11 +352,9 @@
 
         End Select
 
-
         If REMFU = True Or REMED = True Then
 
             'Call LOAD_REPAIR(frmComputers.sCOUNT, frmComputers.lvRepair)
-
 
             Select Case frmComputers.sPREF
 
@@ -388,17 +388,16 @@
 
                     End Select
 
-
                 Case Else
 
                     Call LOAD_REPAIR(frmComputers.sCOUNT, frmComputers.lvRepairBR)
 
             End Select
 
-
         Else
 
             Call frmserviceDesc.load_rplus(frmserviceDesc.r1COUNT, frmserviceDesc.lvRem2)
+            Call frmserviceDesc.load_rplus(frmserviceDesc.r1COUNT, frmService_add.lvRem2)
 
         End If
 
@@ -473,5 +472,9 @@
 
 
         dtPic.Value = Date.Today
+    End Sub
+
+    Private Sub cmdCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdCancel.Click
+        Me.Close()
     End Sub
 End Class

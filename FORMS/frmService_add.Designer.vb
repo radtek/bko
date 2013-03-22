@@ -22,6 +22,7 @@ Partial Class frmService_add
     'Не изменяйте ее в редакторе исходного кода.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.cmbCancel = New System.Windows.Forms.Button()
         Me.cmbAdd = New System.Windows.Forms.Button()
         Me.txtComent = New System.Windows.Forms.TextBox()
@@ -56,9 +57,12 @@ Partial Class frmService_add
         Me.lvRem2 = New System.Windows.Forms.ListView()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.dtGarRem = New System.Windows.Forms.DateTimePicker()
+        Me.CMServices = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.DeleteService = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.RemCashe, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.gbS.SuspendLayout()
+        Me.CMServices.SuspendLayout()
         Me.SuspendLayout()
         '
         'cmbCancel
@@ -457,6 +461,18 @@ Partial Class frmService_add
         Me.dtGarRem.TabIndex = 60
         Me.dtGarRem.Value = New Date(2013, 3, 5, 0, 0, 0, 0)
         '
+        'CMServices
+        '
+        Me.CMServices.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DeleteService})
+        Me.CMServices.Name = "CMServices"
+        Me.CMServices.Size = New System.Drawing.Size(119, 26)
+        '
+        'DeleteService
+        '
+        Me.DeleteService.Name = "DeleteService"
+        Me.DeleteService.Size = New System.Drawing.Size(152, 22)
+        Me.DeleteService.Text = "Удалить"
+        '
         'frmService_add
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -472,6 +488,7 @@ Partial Class frmService_add
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.TableLayoutPanel1.PerformLayout()
         Me.gbS.ResumeLayout(False)
+        Me.CMServices.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -510,4 +527,6 @@ Partial Class frmService_add
     Friend WithEvents gbS As System.Windows.Forms.GroupBox
     Friend WithEvents Label14 As System.Windows.Forms.Label
     Friend WithEvents dtGarRem As System.Windows.Forms.DateTimePicker
+    Friend WithEvents CMServices As System.Windows.Forms.ContextMenuStrip
+    Friend WithEvents DeleteService As System.Windows.Forms.ToolStripMenuItem
 End Class

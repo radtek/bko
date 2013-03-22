@@ -773,9 +773,13 @@ Partial Class frmComputers
         Me.EditService = New System.Windows.Forms.ToolStripMenuItem()
         Me.DeleteService = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuSendEmail = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnu_Z_to_Office = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnu_z_rasp = New System.Windows.Forms.ToolStripMenuItem()
         Me.addServiseWork = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ПечатьToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnu_Z_to_Office = New System.Windows.Forms.ToolStripMenuItem()
+        Me.РаспискаToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.НарядToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.МатериальныйПропускToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.БланкToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ilsCommands = New System.Windows.Forms.ImageList(Me.components)
         Me.spCont.Panel1.SuspendLayout
         Me.spCont.Panel2.SuspendLayout
@@ -4175,7 +4179,7 @@ Partial Class frmComputers
         'txtMouseSN
         '
         Me.TableLayoutPanel43.SetColumnSpan(Me.txtMouseSN, 2)
-        Me.txtMouseSN.Location = New System.Drawing.Point(3, 3)
+        Me.txtMouseSN.Location = New System.Drawing.Point(316, 3)
         Me.txtMouseSN.Name = "txtMouseSN"
         Me.txtMouseSN.Size = New System.Drawing.Size(194, 20)
         Me.txtMouseSN.TabIndex = 5
@@ -4186,7 +4190,7 @@ Partial Class frmComputers
         Me.cmbMouse.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cmbMouse.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cmbMouse.FormattingEnabled = true
-        Me.cmbMouse.Location = New System.Drawing.Point(274, 3)
+        Me.cmbMouse.Location = New System.Drawing.Point(3, 3)
         Me.cmbMouse.Name = "cmbMouse"
         Me.cmbMouse.Size = New System.Drawing.Size(307, 21)
         Me.cmbMouse.TabIndex = 4
@@ -4197,9 +4201,9 @@ Partial Class frmComputers
         Me.PROizV31.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.PROizV31.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PROizV31.FormattingEnabled = true
-        Me.PROizV31.Location = New System.Drawing.Point(587, 3)
+        Me.PROizV31.Location = New System.Drawing.Point(516, 3)
         Me.PROizV31.Name = "PROizV31"
-        Me.PROizV31.Size = New System.Drawing.Size(80, 21)
+        Me.PROizV31.Size = New System.Drawing.Size(151, 21)
         Me.PROizV31.TabIndex = 6
         '
         'gbFilter
@@ -9330,9 +9334,9 @@ Partial Class frmComputers
         '
         'CMServices
         '
-        Me.CMServices.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EditService, Me.DeleteService, Me.MnuSendEmail, Me.mnu_Z_to_Office, Me.mnu_z_rasp, Me.addServiseWork})
+        Me.CMServices.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EditService, Me.DeleteService, Me.MnuSendEmail, Me.addServiseWork, Me.ПечатьToolStripMenuItem})
         Me.CMServices.Name = "CMServices"
-        Me.CMServices.Size = New System.Drawing.Size(175, 136)
+        Me.CMServices.Size = New System.Drawing.Size(175, 114)
         '
         'EditService
         '
@@ -9352,23 +9356,48 @@ Partial Class frmComputers
         Me.MnuSendEmail.Size = New System.Drawing.Size(174, 22)
         Me.MnuSendEmail.Text = "Отправить матеру"
         '
-        'mnu_Z_to_Office
-        '
-        Me.mnu_Z_to_Office.Name = "mnu_Z_to_Office"
-        Me.mnu_Z_to_Office.Size = New System.Drawing.Size(174, 22)
-        Me.mnu_Z_to_Office.Text = "Распечатать"
-        '
-        'mnu_z_rasp
-        '
-        Me.mnu_z_rasp.Name = "mnu_z_rasp"
-        Me.mnu_z_rasp.Size = New System.Drawing.Size(174, 22)
-        Me.mnu_z_rasp.Text = "Расписка"
-        '
         'addServiseWork
         '
         Me.addServiseWork.Name = "addServiseWork"
         Me.addServiseWork.Size = New System.Drawing.Size(174, 22)
         Me.addServiseWork.Text = "Добавить работы"
+        '
+        'ПечатьToolStripMenuItem
+        '
+        Me.ПечатьToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnu_Z_to_Office, Me.РаспискаToolStripMenuItem, Me.НарядToolStripMenuItem, Me.МатериальныйПропускToolStripMenuItem, Me.БланкToolStripMenuItem})
+        Me.ПечатьToolStripMenuItem.Name = "ПечатьToolStripMenuItem"
+        Me.ПечатьToolStripMenuItem.Size = New System.Drawing.Size(174, 22)
+        Me.ПечатьToolStripMenuItem.Text = "Печать"
+        '
+        'mnu_Z_to_Office
+        '
+        Me.mnu_Z_to_Office.Name = "mnu_Z_to_Office"
+        Me.mnu_Z_to_Office.Size = New System.Drawing.Size(207, 22)
+        Me.mnu_Z_to_Office.Text = "Акт-Заявка"
+        '
+        'РаспискаToolStripMenuItem
+        '
+        Me.РаспискаToolStripMenuItem.Name = "РаспискаToolStripMenuItem"
+        Me.РаспискаToolStripMenuItem.Size = New System.Drawing.Size(207, 22)
+        Me.РаспискаToolStripMenuItem.Text = "Расписка"
+        '
+        'НарядToolStripMenuItem
+        '
+        Me.НарядToolStripMenuItem.Name = "НарядToolStripMenuItem"
+        Me.НарядToolStripMenuItem.Size = New System.Drawing.Size(207, 22)
+        Me.НарядToolStripMenuItem.Text = "Наряд"
+        '
+        'МатериальныйПропускToolStripMenuItem
+        '
+        Me.МатериальныйПропускToolStripMenuItem.Name = "МатериальныйПропускToolStripMenuItem"
+        Me.МатериальныйПропускToolStripMenuItem.Size = New System.Drawing.Size(207, 22)
+        Me.МатериальныйПропускToolStripMenuItem.Text = "Материальный пропуск"
+        '
+        'БланкToolStripMenuItem
+        '
+        Me.БланкToolStripMenuItem.Name = "БланкToolStripMenuItem"
+        Me.БланкToolStripMenuItem.Size = New System.Drawing.Size(207, 22)
+        Me.БланкToolStripMenuItem.Text = "Бланк"
         '
         'ilsCommands
         '
@@ -9988,8 +10017,6 @@ End Sub
     Friend WithEvents chkVisibleSTR As System.Windows.Forms.CheckBox
     Friend WithEvents ВернутьПерефериюToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MnuSendEmail As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents mnu_Z_to_Office As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents mnu_z_rasp As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ilsCommands As System.Windows.Forms.ImageList
     Friend WithEvents MassObedPerf As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents addServiseWork As System.Windows.Forms.ToolStripMenuItem
@@ -10418,5 +10445,11 @@ End Sub
     Friend WithEvents txtHDDsN7 As System.Windows.Forms.TextBox
     Friend WithEvents txtHDDo8 As System.Windows.Forms.TextBox
     Friend WithEvents txtHDDsN8 As System.Windows.Forms.TextBox
+    Friend WithEvents ПечатьToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mnu_Z_to_Office As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents РаспискаToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents НарядToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents МатериальныйПропускToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents БланкToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

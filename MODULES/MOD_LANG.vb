@@ -267,10 +267,8 @@ Module modLang
         'ResList(frmserviceDesc.lvRem)
         'ResList(frmserviceDesc.lvRem2)
 
-
         frmserviceDesc.Text = LNGIniFile.GetString("frmserviceDesc", "frmserviceDesc", "Учёт заявок")
         frmserviceDesc.gbTree.Text = LNGIniFile.GetString("frmserviceDesc", "gbTree", "Дерево")
-        frmserviceDesc.btn_Z_to_Office.Text = LNGIniFile.GetString("frmserviceDesc", "btn_Z_to_Office", "Акт-заявка")
         frmserviceDesc.gbRem.Text = LNGIniFile.GetString("frmserviceDesc", "gbRem", "Заявки:")
         frmserviceDesc.btnRemAdd.Text = LNGIniFile.GetString("frmserviceDesc", "btnRemAdd", "Регистрация новой")
         frmserviceDesc.btnSBTAdd.Text = LNGIniFile.GetString("frmserviceDesc", "btnSBTAdd", "Добавить событие")
@@ -278,17 +276,17 @@ Module modLang
         frmserviceDesc.chkNZ.Text = LNGIniFile.GetString("frmserviceDesc", "chkNZ", "Не завершенные")
         frmserviceDesc.CheckBox2.Text = LNGIniFile.GetString("frmserviceDesc", "CheckBox2", "Все не завершенные")
         frmserviceDesc.btnSendEmail.Text = LNGIniFile.GetString("frmserviceDesc", "btnSendEmail", "Отправить мастеру")
-        frmserviceDesc.Button1.Text = LNGIniFile.GetString("frmserviceDesc", "Button1", "Расписка")
         frmserviceDesc.gbRem2.Text = LNGIniFile.GetString("frmserviceDesc", "gbRem2", "Выполненные работы:")
-        frmserviceDesc.ToolStripDropDownButton1.Text = LNGIniFile.GetString("frmserviceDesc", "ToolStripDropDownButton1",
-                                                                            "Печать")
-        frmserviceDesc.btn_N_to_Office.Text = LNGIniFile.GetString("frmserviceDesc", "btn_N_to_Office", "Наряд")
-        frmserviceDesc.btn_MAT_to_Office.Text = LNGIniFile.GetString("frmserviceDesc", "btn_MAT_to_Office",
-                                                                     "Материальный пропуск")
-
         frmserviceDesc.CheckBox1.Text = LNGIniFile.GetString("frmSoftware", "CheckBox2", "Массовое удаление")
 
+        frmserviceDesc.ToolStripDropDownButton1.Text = LNGIniFile.GetString("frmserviceDesc", "ToolStripDropDownButton1", "Печать")
+        frmserviceDesc.btn_Z_to_Office.Text = LNGIniFile.GetString("frmserviceDesc", "btn_Z_to_Office", "Акт-заявка")
+        frmserviceDesc.btn_N_to_Office.Text = LNGIniFile.GetString("frmserviceDesc", "btn_N_to_Office", "Наряд")
+        frmserviceDesc.btn_MAT_to_Office.Text = LNGIniFile.GetString("frmserviceDesc", "btn_MAT_to_Office", "Материальный пропуск")
+        frmserviceDesc.Button1.Text = LNGIniFile.GetString("frmserviceDesc", "Button1", "Расписка")
         frmserviceDesc.MnuBlank.Text = LNGIniFile.GetString("frmMain", "19", "Бланк")
+
+
         'MnuBlank
     End Sub
 
@@ -969,12 +967,17 @@ Module modLang
 
         frmComputers.EditService.Text = objIniFile.GetString("frmComputers", "EditService", "Редактировать")
         frmComputers.DeleteService.Text = objIniFile.GetString("frmComputers", "DeleteService", "Удалить")
-
         frmComputers.MnuSendEmail.Text = objIniFile.GetString("frmComputers", "MnuSendEmail", "Отправить мастеру")
-        frmComputers.mnu_Z_to_Office.Text = objIniFile.GetString("frmComputers", "mnu_Z_to_Office", "Акт-заявка")
-        frmComputers.mnu_z_rasp.Text = objIniFile.GetString("frmComputers", "mnu_z_rasp", "Расписка")
-
         frmComputers.addServiseWork.Text = objIniFile.GetString("frmserviceDesc", "btnSBTAdd", "Добавить событие")
+
+        frmComputers.ПечатьToolStripMenuItem.Text = objIniFile.GetString("frmserviceDesc", "ToolStripDropDownButton1", "Печать")
+        frmComputers.mnu_Z_to_Office.Text = objIniFile.GetString("frmserviceDesc", "btn_Z_to_Office", "Акт-заявка")
+        frmComputers.НарядToolStripMenuItem.Text = objIniFile.GetString("frmserviceDesc", "btn_N_to_Office", "Наряд")
+        frmComputers.МатериальныйПропускToolStripMenuItem.Text = objIniFile.GetString("frmserviceDesc", "btn_MAT_to_Office", "Материальный пропуск")
+        frmComputers.РаспискаToolStripMenuItem.Text = objIniFile.GetString("frmserviceDesc", "Button1", "Расписка")
+        frmComputers.БланкToolStripMenuItem.Text = objIniFile.GetString("frmMain", "19", "Бланк")
+
+
 
         Exit Sub
 

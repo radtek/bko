@@ -214,12 +214,12 @@
         If frmComputers.pDRAG = True Then
 
         Else
-            RefFilTree(frmComputers.lstGroups)
+            If frmComputers.EDT = True Then  Else RefFilTree(frmComputers.lstGroups)
         End If
 
 
         Exit Sub
-        Err_:
+Err_:
     End Sub
 
     Public Sub Save_OT(Optional ByVal sSID As String = "")
@@ -375,7 +375,7 @@
             rs = Nothing
         End If
 
-        sAR:
+sAR:
         If Len(unaPCL) = 0 Or unaPCL = Nothing Then unaPCL = 0
 
         'Dim rs As ADODB.Recordset
@@ -472,12 +472,12 @@
         If frmComputers.pDRAG = True Then
 
         Else
-            RefFilTree(frmComputers.lstGroups)
+            If frmComputers.EDT = True Then  Else RefFilTree(frmComputers.lstGroups)
         End If
 
 
         Exit Sub
-        Err_:
+Err_:
     End Sub
 
     Public Sub Save_T(Optional ByVal sSID As String = "")
@@ -546,7 +546,7 @@
 
                     If frmComputers.pDRAG = True Then
 
-                        RefFilTree(frmComputers.lstGroups)
+                        If frmComputers.EDT = True Then  Else RefFilTree(frmComputers.lstGroups)
 
                     End If
 
@@ -580,7 +580,7 @@
 
         End If
 
-        sAR:
+sAR:
         If Len(unaPCL) = 0 Or unaPCL = Nothing Then unaPCL = 0
 
 
@@ -969,7 +969,10 @@
             If frmComputers.pDRAG = True Then
 
             Else
-                RefFilTree(frmComputers.lstGroups)
+
+                If frmComputers.EDT = True Then  Else RefFilTree(frmComputers.lstGroups)
+
+
             End If
 
 
@@ -977,7 +980,7 @@
 
 
         Exit Sub
-        err_:
+err_:
         MsgBox(Err.Description)
     End Sub
 
@@ -1237,7 +1240,7 @@
             rs = Nothing
         End If
 
-        sAR:
+sAR:
         If Len(unaPCL) = 0 Or unaPCL = Nothing Then unaPCL = 0
 
         On Error GoTo Err_
@@ -1335,11 +1338,11 @@
         If frmComputers.pDRAG = True Then
 
         Else
-            RefFilTree(frmComputers.lstGroups)
+            If frmComputers.EDT = True Then  Else RefFilTree(frmComputers.lstGroups)
         End If
 
         Exit Sub
-        Err_:
+Err_:
     End Sub
 
     Public Sub Save_NET(Optional ByVal sSID As String = "")
@@ -1395,7 +1398,7 @@
 
         End If
 
-        sAR:
+sAR:
         If Len(unaPCL) = 0 Or unaPCL = Nothing Then unaPCL = 0
 
 
@@ -1526,7 +1529,7 @@
         If frmComputers.pDRAG = True Then
 
         Else
-            RefFilTree(frmComputers.lstGroups)
+            If frmComputers.EDT = True Then  Else RefFilTree(frmComputers.lstGroups)
         End If
     End Sub
 
@@ -1697,7 +1700,7 @@
 
 
         Exit Sub
-        Error_:
+Error_:
         MsgBox(Err.Description, vbInformation, ProGramName)
     End Sub
 
@@ -2953,7 +2956,7 @@
 
         If MRZD = True Then Exit Sub
 
-        RefFilTree(frmComputers.lstGroups)
+        If frmComputers.EDT = True Then  Else RefFilTree(frmComputers.lstGroups)
     End Sub
 
 
@@ -3921,20 +3924,20 @@
         If MRZD = True Then Exit Sub
 
         If sADD = True Then
-            RefFilTree(frmComputers.lstGroups)
+            If frmComputers.EDT = True Then  Else RefFilTree(frmComputers.lstGroups)
 
         End If
 
 
         Exit Sub
 
-        err_:
+err_:
         'MsgBox(Err.Description)
 
         If MRZD = True Then Exit Sub
 
         If sADD = True Then
-            RefFilTree(frmComputers.lstGroups)
+            If frmComputers.EDT = True Then  Else RefFilTree(frmComputers.lstGroups)
 
         End If
     End Sub

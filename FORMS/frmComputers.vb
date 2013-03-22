@@ -59,8 +59,7 @@ Public Class frmComputers
         frmMain.ToolStripDropDownButton1.Enabled = False
     End Sub
 
-    Private Sub chkVisibleSTR_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) _
-        Handles chkVisibleSTR.CheckedChanged
+    Private Sub chkVisibleSTR_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chkVisibleSTR.CheckedChanged
 
         Me.Cursor = Cursors.WaitCursor
 
@@ -281,8 +280,12 @@ Public Class frmComputers
         EditService.Image = New Bitmap(PrPath & "pic\iface\editservice.png")
         DeleteService.Image = New Bitmap(PrPath & "pic\iface\delete.png")
         MnuSendEmail.Image = New Bitmap(PrPath & "pic\iface\sendmail.png")
+
+
+        ПечатьToolStripMenuItem.Image = New Bitmap(PrPath & "pic\iface\serviceprint.png")
         mnu_Z_to_Office.Image = New Bitmap(PrPath & "pic\iface\serviceprint.png")
-        mnu_z_rasp.Image = New Bitmap(PrPath & "pic\iface\servicerasp.png")
+        РаспискаToolStripMenuItem.Image = New Bitmap(PrPath & "pic\iface\servicerasp.png")
+
         addRemToolStripMenuItem.Image = New Bitmap(PrPath & "pic\iface\service.png")
 
         CopyToolStripMenuItem.Image = New Bitmap(PrPath & "pic\iface\copy.png")
@@ -489,39 +492,24 @@ Public Class frmComputers
 
         System.Windows.Forms.Application.DoEvents()
 
-        Me.BeginInvoke(New MethodInvoker(AddressOf R_T_LOAD))
+        ' Me.BeginInvoke(New MethodInvoker(AddressOf R_T_LOAD))
+
+
+        Call R_T_LOAD()
 
         Me.Cursor = Cursors.Default
 
         System.Windows.Forms.Application.DoEvents()
 
 
-        '   If OneStart = 0 Then OneStart = 1
+
+        If OneStart = 0 Then OneStart = 1
+
 
         On Error GoTo err_
 
 
         'Добавить в конвертор...
-
-        'UPDATE kompy SET NET_IP_1=PRINTER_NAME_2 WHERE TipTehn = 'NET' And PRINTER_NAME_2 <>'' And NET_IP_1 <>''
-        'UPDATE kompy SET PRINTER_NAME_2='' WHERE TipTehn = 'NET' And PRINTER_NAME_2 <>'' And NET_IP_1 <>''
-        'update kompy set Ser_N_SIS=MONITOR_SN Where tiptehn = 'MONITOR'
-        'update kompy set Ser_N_SIS=port_1 Where tiptehn = 'NET'
-        'update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = 'Printer'
-        'update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = 'KOpir'
-        'update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = 'MFU'
-        'update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = 'PHONE'
-        'update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = 'PHOTO'
-        'update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = 'FAX'
-        'update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = 'ZIP'
-        'update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = 'OT'
-        'update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = 'USB'
-        'update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = 'SOUND'
-        'update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = 'IBP'
-        'update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = 'FS'
-        'update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = 'KEYB'
-        'update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = 'MOUSE'
-        'update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = 'CNT'
 
 
         Exit Sub
@@ -869,7 +857,6 @@ Public Class frmComputers
                             'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
                             'newThread6.Start()
 
-
                             Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbPCLK)
 
                         Case "Printer"
@@ -886,9 +873,7 @@ Public Class frmComputers
                             Label83.Visible = True
                             cmbPCL.Visible = True
 
-
                             'Call LOADp(d(1))
-
 
                             Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
                             Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
@@ -1934,6 +1919,7 @@ Public Class frmComputers
     Public Sub R_T_LOAD()
 
         Call RefFilTree(Me.lstGroups)
+
     End Sub
 
     Public Sub STAT_INF()
@@ -2401,6 +2387,7 @@ Public Class frmComputers
         End If
 
         frmService_add.ShowDialog(Me)
+
     End Sub
 
     Private Sub CopyToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) _
@@ -6156,12 +6143,10 @@ Public Class frmComputers
 
     Private Sub DeleteService_Click(ByVal sender As Object, ByVal e As EventArgs) Handles DeleteService.Click
 
-
         Dim langfile As New IniFile(sLANGPATH)
 
-
         If _
-            MsgBox(langfile.GetString("frmserviceDesc", "MSG9 ", "Удаление ремонта, продолжить?"), MsgBoxStyle.YesNo,
+            MsgBox(langfile.GetString("frmComputers", "MSG23", "Вы уверены что хотите удалить?"), MsgBoxStyle.YesNo,
                    ProGramName) = MsgBoxResult.Yes Then
 
             DELETE_SERVICE(lvServices)
@@ -6169,6 +6154,7 @@ Public Class frmComputers
         Else
 
         End If
+
     End Sub
 
     Private Sub DELETE_SERVICE(ByVal lvList As ListView)
@@ -6277,11 +6263,13 @@ Public Class frmComputers
 
         If unam = "1" Or unam = True Then
 
-            mnu_z_rasp.Enabled = False
+            РаспискаToolStripMenuItem.Enabled = False
             MnuSendEmail.Enabled = False
             addServiseWork.Enabled = False
+
         Else
-            mnu_z_rasp.Enabled = True
+
+            РаспискаToolStripMenuItem.Enabled = True
             MnuSendEmail.Enabled = True
             addServiseWork.Enabled = True
         End If
@@ -6335,11 +6323,13 @@ Public Class frmComputers
     Private Sub EditService_Click(ByVal sender As Object, ByVal e As EventArgs) Handles EditService.Click
 
         LoadRepairEdit(lvServices)
+
     End Sub
 
     Private Sub Font_Form_For_Computer()
 
         SendFonts(Me)
+
     End Sub
 
     Private Sub bCPUPlus_Click(ByVal sender As Object, ByVal e As EventArgs) Handles bCPUPlus.Click
@@ -6740,47 +6730,11 @@ Public Class frmComputers
         Call REMONT_SEND_MASTER(rCOUNT)
     End Sub
 
-    Private Sub mnu_z_rasp_Click(ByVal sender As Object, ByVal e As EventArgs) Handles mnu_z_rasp.Click
-
-        If lvServices.Items.Count = 0 Then Exit Sub
-
-        Dim z As Integer
-        Dim rCOUNT As Integer
-
-
-        For z = 0 To lvServices.SelectedItems.Count - 1
-            rCOUNT = (lvServices.SelectedItems(z).Text)
-        Next
-
-        If rCOUNT = 0 Then Exit Sub
-
-        Call SRASP(rCOUNT)
-    End Sub
-
-    Private Sub mnu_Z_to_Office_Click(ByVal sender As Object, ByVal e As EventArgs) Handles mnu_Z_to_Office.Click
-        If lvServices.Items.Count = 0 Then Exit Sub
-
-        Dim z As Integer
-        Dim rCOUNT As Integer
-
-        For z = 0 To lvServices.SelectedItems.Count - 1
-            rCOUNT = (lvServices.SelectedItems(z).Text)
-        Next
-
-        If rCOUNT = 0 Then Exit Sub
-
-        Call _
-            SRASP2(rCOUNT,
-                   Directory.GetParent(System.Windows.Forms.Application.ExecutablePath).ToString & "\blanks\akt_z.dot")
-        ' Call SRASP2(rCOUNT, "\blanks\akt_z.dot")
-    End Sub
-
     Private Sub addServiseWork_Click(ByVal sender As Object, ByVal e As EventArgs) Handles addServiseWork.Click
         On Error GoTo err_1
         frmservice_add_otvets.REMFU = True
 
-        If lvRepair.Items.Count = 0 Then Exit Sub
-
+        If lvServices.Items.Count = 0 Then Exit Sub
 
         Dim rCOUNT As Integer
 
@@ -6817,7 +6771,7 @@ Public Class frmComputers
         frmservice_add_otvets.ShowDialog(Me)
 
         Exit Sub
-        err_1:
+err_1:
         MsgBox(Err.Description, MsgBoxStyle.Information, ProGramName)
     End Sub
 
@@ -6987,8 +6941,17 @@ Public Class frmComputers
         End If
     End Sub
 
-    Private Sub treebranche_SelectedIndexChanged(sender As Object, e As EventArgs) _
-        Handles treebranche.SelectedIndexChanged
+    Private Sub treebranche_SelectedIndexChanged(sender As Object, e As EventArgs) Handles treebranche.SelectedIndexChanged
+
+        Me.BeginInvoke(New MethodInvoker(AddressOf TreeBrancheDU))
+
+    End Sub
+
+    Private Sub treebranche_SelectedValueChanged(sender As Object, e As EventArgs) _
+      Handles treebranche.SelectedValueChanged
+
+        Me.BeginInvoke(New MethodInvoker(AddressOf TreeBrancheDU))
+
     End Sub
 
 
@@ -7005,11 +6968,7 @@ Public Class frmComputers
         lstGroups.ExpandAll()
     End Sub
 
-    Private Sub treebranche_SelectedValueChanged(sender As Object, e As EventArgs) _
-        Handles treebranche.SelectedValueChanged
-
-        Me.BeginInvoke(New MethodInvoker(AddressOf TreeBrancheDU))
-    End Sub
+  
 
     Private Sub cmbOTHConnect_SelectedIndexChanged(sender As Object, e As EventArgs) _
         Handles cmbOTHConnect.SelectedIndexChanged
@@ -7099,6 +7058,118 @@ Public Class frmComputers
 
     Private Sub lstUsers_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
         Handles lstUsers.SelectedIndexChanged
+    End Sub
+
+    Private Sub mnu_Z_to_Office_Click(sender As System.Object, e As System.EventArgs) Handles mnu_Z_to_Office.Click
+        If lvServices.Items.Count = 0 Then Exit Sub
+
+        Dim z As Integer
+        Dim rCOUNT As Integer
+
+        For z = 0 To lvServices.SelectedItems.Count - 1
+            rCOUNT = (lvServices.SelectedItems(z).Text)
+        Next
+
+        If rCOUNT = 0 Then Exit Sub
+
+        Call _
+            SRASP2(rCOUNT,
+                   Directory.GetParent(System.Windows.Forms.Application.ExecutablePath).ToString & "\blanks\akt_z.dot")
+        ' Call SRASP2(rCOUNT, "\blanks\akt_z.dot")
+    End Sub
+
+    Private Sub РаспискаToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles РаспискаToolStripMenuItem.Click
+        If lvServices.Items.Count = 0 Then Exit Sub
+
+        Dim z As Integer
+
+        Dim r1COUNT As Integer
+
+        For z = 0 To lvServices.SelectedItems.Count - 1
+            r1COUNT = (lvServices.SelectedItems(z).Text)
+        Next
+
+        If r1COUNT = 0 Then Exit Sub
+
+        Call SRASP(r1COUNT)
+    End Sub
+
+    Private Sub НарядToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles НарядToolStripMenuItem.Click
+        If lvServices.Items.Count = 0 Then Exit Sub
+
+        Dim z As Integer
+        Dim r1COUNT As Integer
+
+        For z = 0 To lvServices.SelectedItems.Count - 1
+            r1COUNT = (lvServices.SelectedItems(z).Text)
+        Next
+
+        If r1COUNT = 0 Then Exit Sub
+
+        Call SRASP2(r1COUNT, PrPath & "blanks\nariad.doc")
+
+    End Sub
+
+    Private Sub МатериальныйПропускToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles МатериальныйПропускToolStripMenuItem.Click
+        If lvServices.Items.Count = 0 Then Exit Sub
+
+        Dim z As Integer
+        Dim r1COUNT As Integer
+
+        For z = 0 To lvServices.SelectedItems.Count - 1
+            r1COUNT = (lvServices.SelectedItems(z).Text)
+        Next
+
+        If r1COUNT = 0 Then Exit Sub
+
+        Call SRASP2(r1COUNT, PrPath & "blanks\mp.doc")
+    End Sub
+
+    Private Sub БланкToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles БланкToolStripMenuItem.Click
+        If lvServices.Items.Count = 0 Then Exit Sub
+
+        Dim z As Integer
+        Dim r1COUNT As Integer
+
+        For z = 0 To lvServices.SelectedItems.Count - 1
+            r1COUNT = (lvServices.SelectedItems(z).Text)
+        Next
+
+        If r1COUNT = 0 Then Exit Sub
+
+        Dim sTMP As String
+        Dim ePatch As String
+
+        ePatch = PrPath & "blanks"
+
+        Dim fdlg As OpenFileDialog = New OpenFileDialog()
+        Dim LNGIniFile As New IniFile(sLANGPATH)
+
+        fdlg.Title = LNGIniFile.GetString("frmMain", "MSG9", "Шаблоны бланков")
+        fdlg.InitialDirectory = ePatch
+        fdlg.Filter = "Документы MS Word(*.doc)|*.doc|Шаблоны документов MS Word(*.dot)|*.dot"
+
+        'fdlg.Filter = "All files (*.*)|*.*|Access Database(*.mdb) files (*.mdb)|*.mdb" ;
+        '"Шаблоны Microsoft Word (*.doc)|*.doc"
+        fdlg.FilterIndex = 2
+
+        fdlg.RestoreDirectory = True
+
+        If fdlg.ShowDialog() = DialogResult.OK Then
+            Me.Cursor = Cursors.WaitCursor
+
+            sTMP = fdlg.FileName
+
+        End If
+
+        Call SRASP2(r1COUNT, fdlg.FileName)
+
+        Me.Cursor = Cursors.Default
+
+    End Sub
+
+    Private Sub lvRepair_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles lvRepair.SelectedIndexChanged
+
     End Sub
 End Class
 

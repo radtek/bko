@@ -1750,16 +1750,17 @@ Public Class frmserviceDesc
 
     Private Sub lvRem2_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles lvRem2.DoubleClick
 
-        Call LOAD_REM_PLUS_ED()
+        Call LOAD_REM_PLUS_ED(lvRem2)
+
     End Sub
 
-    Private Sub LOAD_REM_PLUS_ED()
-        If lvRem2.Items.Count = 0 Then Exit Sub
+    Public Sub LOAD_REM_PLUS_ED(ByVal lvs As ListView)
+        If lvs.Items.Count = 0 Then Exit Sub
 
         Dim z As Integer
 
-        For z = 0 To lvRem2.SelectedItems.Count - 1
-            rCOUNT = (lvRem2.SelectedItems(z).Text)
+        For z = 0 To lvs.SelectedItems.Count - 1
+            rCOUNT = (lvs.SelectedItems(z).Text)
         Next
 
         ZaiavkR = True
@@ -2174,7 +2175,7 @@ Public Class frmserviceDesc
 
         If r1COUNT = 0 Then Exit Sub
 
-        Call SRASP2(r1COUNT, Directory.GetParent(Application.ExecutablePath).ToString & "\blanks\akt_z.dot")
+        Call SRASP2(r1COUNT, PrPath & "blanks\akt_z.dot")
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
@@ -2367,7 +2368,7 @@ Public Class frmserviceDesc
 
             Case Else
 
-                Call LOAD_REM_PLUS_ED()
+                Call LOAD_REM_PLUS_ED(lvRem2)
 
         End Select
     End Sub
@@ -2423,26 +2424,46 @@ Public Class frmserviceDesc
 
         If uLevelRepDel = False And uLevel <> "Admin" Then Exit Sub
 
+        Dim langfile As New IniFile(sLANGPATH)
+
         Select Case _sTMP
 
             Case "lvRem"
 
-                Call DELETE_Z()
+
+                If _
+           MsgBox(langfile.GetString("frmComputers", "MSG23", "Вы уверены что хотите удалить?"), MsgBoxStyle.YesNo,
+                  ProGramName) = MsgBoxResult.Yes Then
+
+                    Call DELETE_Z()
+
+                Else
+
+                End If
 
             Case "lvRem2"
-                If lvRem2.Items.Count = 0 Then Exit Sub
 
-                For z = 0 To lvRem2.SelectedItems.Count - 1
-                    rCOUNT = (lvRem2.SelectedItems(z).Text)
-                Next
+                If _
+          MsgBox(langfile.GetString("frmComputers", "MSG23", "Вы уверены что хотите удалить?"), MsgBoxStyle.YesNo,
+                 ProGramName) = MsgBoxResult.Yes Then
 
-                Dim rs1 As Recordset
-                rs1 = New Recordset
-                rs1.Open("Delete FROM remonty_plus WHERE id=" & rCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
-                         LockTypeEnum.adLockOptimistic)
-                rs1 = Nothing
+                    If lvRem2.Items.Count = 0 Then Exit Sub
 
-                Call load_rplus(r1COUNT, lvRem2)
+                    For z = 0 To lvRem2.SelectedItems.Count - 1
+                        rCOUNT = (lvRem2.SelectedItems(z).Text)
+                    Next
+
+                    Dim rs1 As Recordset
+                    rs1 = New Recordset
+                    rs1.Open("Delete FROM remonty_plus WHERE id=" & rCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                             LockTypeEnum.adLockOptimistic)
+                    rs1 = Nothing
+
+                    Call load_rplus(r1COUNT, lvRem2)
+
+                Else
+
+                End If
 
         End Select
     End Sub

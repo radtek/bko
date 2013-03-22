@@ -1105,6 +1105,11 @@ Module MOD_REF_TREE
                                     '#####################################################################
                                     '#####################################################################
 
+                                Case "PHOTO"
+
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME, 11)
+
+
                                 Case "Printer"
 
                                     Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME,

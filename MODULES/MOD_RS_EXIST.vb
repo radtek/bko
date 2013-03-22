@@ -199,7 +199,6 @@
                 'sSQL2 = "SELECT * FROM SPR_Postav"
                 sSQL2 = "SELECT COUNT(*) AS total_number FROM SPR_Postav WHERE " & fs & "='" & sGroupName & "'"
 
-
             Case "PDC"
                 'sSQL2 = "SELECT * FROM spr_pdc"
                 sSQL2 = "SELECT COUNT(*) AS total_number FROM spr_pdc WHERE " & fs & "='" & sGroupName & "'"
@@ -252,11 +251,26 @@
                 'sSQL2 = "SELECT * FROM T_Que"
                 sSQL2 = "SELECT COUNT(*) AS total_number FROM SPR_USER WHERE " & fs & "='" & sGroupName & "'"
 
-
             Case "COMPL"
 
-
                 sSQL2 = "SELECT COUNT(*) AS total_number FROM SPR_Complect WHERE " & fs & "='" & sGroupName & "'"
+
+            Case "MASTER"
+
+                sSQL2 = "SELECT COUNT(*) AS total_number FROM SPR_Master WHERE " & fs & "='" & sGroupName & "'"
+
+            Case "SPR_Uroven"
+
+                sSQL2 = "SELECT COUNT(*) AS total_number FROM SPR_Uroven WHERE " & fs & "='" & sGroupName & "'"
+
+            Case "spr_vip"
+
+                sSQL2 = "SELECT COUNT(*) AS total_number FROM spr_vip WHERE " & fs & "='" & sGroupName & "'"
+               
+            Case "spr_tip_z"
+
+                sSQL2 = "SELECT COUNT(*) AS total_number FROM spr_tip_z WHERE " & fs & "='" & sGroupName & "'"
+
 
 
         End Select

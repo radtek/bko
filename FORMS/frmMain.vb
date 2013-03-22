@@ -449,18 +449,22 @@ err_:
         Call LoadSPR()
 
 
-        Dim rsG As ADODB.Recordset
-        rsG = New ADODB.Recordset
+        Dim rs As ADODB.Recordset
 
-        rsG.Open("SELECT * FROM CONFIGURE", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+        rs = New ADODB.Recordset
 
-        With rsG
+        rs.Open("SELECT * FROM CONFIGURE", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+        With rs
             If Not IsDBNull(.Fields("Name_Prog").Value) Then ProGramName = .Fields("Name_Prog").Value
         End With
-        rsG.Close()
-        rsG = Nothing
+
+        rs.Close()
+        rs = Nothing
+
 
         Dim LNGIniFile As New IniFile(sLANGPATH)
+
         If Len(ProGramName) = 0 Or ProGramName = Nothing Then ProGramName = LNGIniFile.GetString("frmSetup", "MSG7", "БКО") '"БКО"
 
         Me.Text = ProGramName & " " & My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor & "." & My.Application.Info.Version.Build & "." & My.Application.Info.Version.Revision
@@ -813,9 +817,10 @@ Error_:
         If DATAB = False Then Exit Sub
 
         Call COMPARE_DB()
+
     End Sub
 
-    Private Sub COMPARE_DB()
+    Public Sub COMPARE_DB()
         On Error GoTo err_
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
@@ -830,7 +835,8 @@ Error_:
             Kill(BasePath & Base_Name)
             Rename(BasePath & sBname, BasePath & Base_Name)
             LoadDatabase()
-            MsgBox(LNGIniFile.GetString("frmMain", "MSG5", "Сжатие базы завершено успешно!"), MsgBoxStyle.Information, ProGramName)
+
+            'MsgBox(LNGIniFile.GetString("frmMain", "MSG5", "Сжатие базы завершено успешно!"), MsgBoxStyle.Information, ProGramName)
 
         End If
 
@@ -960,7 +966,6 @@ err_:
 
     Private Sub ПаспортКомпьютераToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ПаспортКомпьютераToolStripMenuItem.Click
 
-
         If TipTehn <> "PC" Then Exit Sub
 
         Select Case frmComputers.sPREF
@@ -978,15 +983,11 @@ err_:
                         Call WRD_SEND_PK(frmComputers.sCOUNT)
                 End Select
 
-
-
-
             Case Else
 
                 Exit Sub
 
         End Select
-
 
     End Sub
 
@@ -998,7 +999,6 @@ err_:
 
             Case "C"
 
-
                 frmAct_Treb.MdiParent = Me
                 frmAct_Treb.Show()
                 frmAct_Treb.Focus()
@@ -1009,13 +1009,10 @@ err_:
 
         End Select
 
-
-
     End Sub
 
     Private Sub OptionsToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OptionsToolStripMenuItem.Click
         If DATAB = False Then Exit Sub
-
 
         frmSheduler.MdiParent = Me
         frmSheduler.Show()
@@ -1143,7 +1140,6 @@ err_:
 
             sTMP = fdlg.FileName
 
-            
         End If
 
          Select sOfficePACK
@@ -1226,9 +1222,6 @@ err_:
 
         End Select
 
-
-
-
     End Sub
 
     Private Sub QRCodeTestingToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles QRCodeTestingToolStripMenuItem.Click
@@ -1249,7 +1242,6 @@ err_:
         frmComputers.lblOtIp.Visible = False
         frmComputers.txtOTHIP.Visible = False
         frmComputers.txtOTHMAC.Visible = False
-
 
         frmComputers.sSTAB3.Visible = True
         frmComputers.sSTAB1.Visible = False
@@ -1283,7 +1275,6 @@ err_:
         frmComputers.lblOtIp.Visible = False
         frmComputers.txtOTHIP.Visible = False
         frmComputers.txtOTHMAC.Visible = False
-
 
         frmComputers.sSTAB3.Visible = True
         frmComputers.sSTAB1.Visible = False
@@ -1321,7 +1312,6 @@ err_:
         frmComputers.txtOTHIP.Visible = True
         frmComputers.txtOTHMAC.Visible = True
 
-
         frmComputers.sSTAB3.Visible = True
         frmComputers.sSTAB1.Visible = False
         frmComputers.sSTAB2.Visible = False
@@ -1329,7 +1319,6 @@ err_:
         frmComputers.sSTAB5.Visible = False
         TipTehn = "PHONE"
         frmComputers.EDT = False
-
 
         frmComputers.selectTECMesto()
         frmComputers.cmbOTHFil.Text = sBranch
@@ -1417,7 +1406,6 @@ err_:
 
         FillComboNET(frmComputers.cmbOTH, "name", "SPR_OTH_DEV", "", False, True)
         FillComboNET(frmComputers.cmbOTHConnect, "name", "spr_other", "", False, True)
-
 
         frmComputers.lblTipOther.Visible = True
         frmComputers.cmbOTHConnect.Visible = True
@@ -1514,7 +1502,6 @@ err_:
 
             EverestFilePatch = fdlg.FileName
 
-
         End If
         frmComputers.selectTECMesto()
         Call Clear_Form_For_Computer()
@@ -1528,7 +1515,6 @@ err_:
         frmComputers.sSTAB5.Visible = False
 
         'If Len(EverestFilePatch) > 3 Then Call ReadFromFile(EverestFilePatch)
-
 
         frmComputers.cmbBranch.Text = sBranch
         frmComputers.cmbDepartment.Text = sDepartment
@@ -1579,7 +1565,6 @@ err_:
 
             EverestFilePatch = fdlg.FileName
 
-
         End If
         frmComputers.selectTECMesto()
         Call Clear_Form_For_Computer()
@@ -1593,7 +1578,6 @@ err_:
         frmComputers.sSTAB5.Visible = False
 
         If Len(EverestFilePatch) > 3 Then Call ASTRA_Load()
-
 
         frmComputers.cmbBranch.Text = sBranch
         frmComputers.cmbDepartment.Text = sDepartment
@@ -1620,7 +1604,6 @@ err_:
         frmComputers.cmbNetDepart.Text = sDepartment
         frmComputers.cmbNETOffice.Text = sOffice
 
-
     End Sub
 
     Private Sub КопирToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles КопирToolStripMenuItem.Click
@@ -1643,7 +1626,6 @@ err_:
         'Call LOAD_PCL(frmComputers.cmbPRNFil.Text, frmComputers.cmbPRNDepart.Text, frmComputers.cmbPRNOffice.Text, frmComputers.cmbPCL)
         TipTehn = "KOpir"
 
-
         frmComputers.cmbFormat.Items.Clear()
 
         Dim langfile As New IniFile(sLANGPATH)
@@ -1664,7 +1646,6 @@ err_:
 
     Private Sub ПринтерToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ПринтерToolStripMenuItem.Click
         Call Clear_Form_For_Computer()
-
 
         frmComputers.EDT = False
         FillComboNET(frmComputers.cmbPRN, "name", "SPR_PRINTER", "", False, True)
@@ -1696,8 +1677,6 @@ err_:
         frmComputers.cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG95", "Термо Пленка"))
         frmComputers.cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG96", "Фотокондуктор"))
 
-
-
         TipTehn = "Printer"
         Call LOAD_PCL(frmComputers.cmbPRNFil.Text, frmComputers.cmbPRNDepart.Text, frmComputers.cmbPRNOffice.Text, frmComputers.cmbPCL)
 
@@ -1705,7 +1684,6 @@ err_:
 
     Private Sub МФУToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles МФУToolStripMenuItem.Click
         Call Clear_Form_For_Computer()
-
 
         frmComputers.EDT = False
         FillComboNET(frmComputers.cmbPRN, "name", "SPR_MFU", "", False, True)
@@ -1738,7 +1716,6 @@ err_:
         frmComputers.cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG94", "Барабан"))
         frmComputers.cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG95", "Термо Пленка"))
         frmComputers.cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG96", "Фотокондуктор"))
-
 
         Call LOAD_PCL(frmComputers.cmbPRNFil.Text, frmComputers.cmbPRNDepart.Text, frmComputers.cmbPRNOffice.Text, frmComputers.cmbPCL)
 
@@ -1779,7 +1756,6 @@ err_:
 
         If Len(EverestFilePatch) > 3 Then Call Everest_Load()
 
-
         frmComputers.cmbBranch.Text = sBranch
         frmComputers.cmbDepartment.Text = sDepartment
         frmComputers.cmbOffice.Text = sOffice
@@ -1798,9 +1774,7 @@ err_:
         Me.Cursor = Cursors.WaitCursor
         On Error Resume Next
 
-
         Dim LNGIniFile As New IniFile(sLANGPATH)
-
 
         If frmComputers.EDT = True Then
             Call SaveActivityToLogDB(LNGIniFile.GetString("frmMain", "MSG1", "Сохранение техники") & " " & frmComputers.lstGroups.SelectedNode.Text)
@@ -1869,8 +1843,8 @@ ADD:
 
                 Else
 
-                    Call Save_P()
-
+                    'Call Save_P()
+                    Me.Invoke(New MethodInvoker(AddressOf Save_P))
                 End If
             Case "MFU"
                 If frmComputers.EDT = True Then
@@ -1879,8 +1853,8 @@ ADD:
 
                 Else
 
-                    Call Save_P()
-
+                    '  Call Save_P()
+                    Me.Invoke(New MethodInvoker(AddressOf Save_P))
                 End If
 
             Case "KOpir"
@@ -1890,8 +1864,8 @@ ADD:
 
                 Else
 
-                    Call Save_P()
-
+                    ' Call Save_P()
+                    Me.Invoke(New MethodInvoker(AddressOf Save_P))
                 End If
 
             Case "OT"
@@ -1902,8 +1876,8 @@ ADD:
 
                 Else
 
-                    Call Save_OT()
-
+                    ' Call Save_OT()
+                    Me.Invoke(New MethodInvoker(AddressOf Save_OT))
                 End If
 
             Case "CNT"
@@ -1914,8 +1888,8 @@ ADD:
 
                 Else
 
-                    Call Save_OT()
-
+                    ' Call Save_OT()
+                    Me.Invoke(New MethodInvoker(AddressOf Save_OT))
                 End If
 
 
@@ -1927,8 +1901,8 @@ ADD:
 
                 Else
 
-                    Call Save_OT()
-
+                    ' Call Save_OT()
+                    Me.Invoke(New MethodInvoker(AddressOf Save_OT))
                 End If
 
             Case "FAX"
@@ -1939,8 +1913,8 @@ ADD:
 
                 Else
 
-                    Call Save_OT()
-
+                    ' Call Save_OT()
+                    Me.Invoke(New MethodInvoker(AddressOf Save_OT))
                 End If
 
             Case "PHONE"
@@ -1951,8 +1925,8 @@ ADD:
 
                 Else
 
-                    Call Save_OT()
-
+                    'Call Save_OT()
+                    Me.Invoke(New MethodInvoker(AddressOf Save_OT))
                 End If
 
             Case "ZIP"
@@ -1963,8 +1937,8 @@ ADD:
 
                 Else
 
-                    Call Save_OT()
-
+                    'Call Save_OT()
+                    Me.Invoke(New MethodInvoker(AddressOf Save_OT))
                 End If
 
             Case "SCANER"
@@ -1974,13 +1948,11 @@ ADD:
 
                 Else
 
-                    Call Save_OT()
-
+                    ' Call Save_OT()
+                    Me.Invoke(New MethodInvoker(AddressOf Save_OT))
                 End If
 
             Case "NET"
-
-                'Save_NET
 
                 If frmComputers.EDT = True Then
 
@@ -1988,14 +1960,12 @@ ADD:
 
                 Else
 
-                    Call Save_NET()
-
+                    ' Call Save_NET()
+                    Me.Invoke(New MethodInvoker(AddressOf Save_NET))
                 End If
 
 
             Case "MONITOR"
-
-                'Save_NET
 
                 If frmComputers.EDT = True Then
 
@@ -2003,8 +1973,8 @@ ADD:
 
                 Else
 
-                    Call SAVE_MON()
-
+                    ' Call SAVE_MON()
+                    Me.Invoke(New MethodInvoker(AddressOf SAVE_MON))
                 End If
 
                 '--------------VIP_Graff Добавление новой перефирии Начало-----------------
@@ -2012,45 +1982,51 @@ ADD:
                 If frmComputers.EDT = True Then
                     Call Save_OT(frmComputers.sCOUNT)
                 Else
-                    Call Save_OT()
+                    ' Call Save_OT()
+                    Me.Invoke(New MethodInvoker(AddressOf Save_OT))
                 End If
 
             Case "SOUND"
                 If frmComputers.EDT = True Then
                     Call Save_OT(frmComputers.sCOUNT)
                 Else
-                    Call Save_OT()
+                    ' Call Save_OT()
+                    Me.Invoke(New MethodInvoker(AddressOf Save_OT))
                 End If
 
             Case "IBP"
                 If frmComputers.EDT = True Then
                     Call Save_OT(frmComputers.sCOUNT)
                 Else
-                    Call Save_OT()
+                    ' Call Save_OT()
+                    Me.Invoke(New MethodInvoker(AddressOf Save_OT))
                 End If
 
             Case "FS"
                 If frmComputers.EDT = True Then
                     Call Save_OT(frmComputers.sCOUNT)
                 Else
-                    Call Save_OT()
+                    ' Call Save_OT()
+                    Me.Invoke(New MethodInvoker(AddressOf Save_OT))
                 End If
 
             Case "KEYB"
                 If frmComputers.EDT = True Then
                     Call Save_OT(frmComputers.sCOUNT)
                 Else
-                    Call Save_OT()
+                    ' Call Save_OT()
+                    Me.Invoke(New MethodInvoker(AddressOf Save_OT))
                 End If
 
             Case "MOUSE"
                 If frmComputers.EDT = True Then
                     Call Save_OT(frmComputers.sCOUNT)
                 Else
-                    Call Save_OT()
+                    ' Call Save_OT()
+                    Me.Invoke(New MethodInvoker(AddressOf Save_OT))
                 End If
-                '--------------VIP_Graff Добавление новой перефирии Конец------------------
 
+                '--------------VIP_Graff Добавление новой перефирии Конец------------------
 
             Case Else
 
@@ -2068,15 +2044,8 @@ ADD:
 
         End If
 
-
-
-
         'Call COLOR_Form_For_Computer()
         Call frmComputers.STAT_INF()
-
-
-
-
 
         Me.Cursor = Cursors.Default
 
@@ -2344,14 +2313,12 @@ ADD:
     End Sub
 
     Private Sub ИнвентаризацияToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ИнвентаризацияToolStripMenuItem.Click
-        Call INVENT()
 
+        'Call INVENT()
+        frmComputers.BeginInvoke(New MethodInvoker(AddressOf INVENT))
     End Sub
 
-    Private Sub СтатистическиеОтчетыToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles СтатистическиеОтчетыToolStripMenuItem.Click
-
-
-    End Sub
+ 
 
     Private Sub РемонтыToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles РемонтыToolStripMenuItem.Click
 
@@ -2361,7 +2328,6 @@ ADD:
         frmReports.Show()
         frmReports.sSTAB1.SelectedTab = frmReports.sSTAB1.TabPages("TabPage3")
         frmReports.Focus()
-
 
     End Sub
 
@@ -2377,7 +2343,6 @@ ADD:
         On Error GoTo err_
         frmComputers.cmbOTH.Items.Clear()
 
-
         Dim rs As ADODB.Recordset
 
         rs = New ADODB.Recordset
@@ -2390,7 +2355,6 @@ ADD:
         End With
         rs.Close()
         rs = Nothing
-
 
         If COUnT > 0 Then
 
@@ -2411,7 +2375,6 @@ ADD:
             rs = Nothing
 
         End If
-
 
         frmComputers.lblTipOther.Visible = True
         frmComputers.cmbOTHConnect.Visible = True
@@ -2439,10 +2402,6 @@ ADD:
         Exit Sub
 err_:
         MsgBox(Err.Description, MsgBoxStyle.Information, ProGramName)
-
-       
-
-        'Call LOAD_PCL(frmComputers.cmbOTHFil.Text, frmComputers.cmbOTHDepart.Text, frmComputers.cmbOTHOffice.Text, frmComputers.cmbOTHPCL)
 
     End Sub
 
@@ -2532,7 +2491,6 @@ err_:
 
         End If
 
-
     End Sub
 
     Private Sub ПерегрузкаСрправочниковToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ПерегрузкаСрправочниковToolStripMenuItem.Click
@@ -2541,7 +2499,7 @@ err_:
         'Dim newThread2 As New Thread(AddressOf LoadSPR_1)
         'newThread2.Start()
 
-        Me.BeginInvoke(New MethodInvoker(AddressOf LoadSPR))
+        frmComputers.BeginInvoke(New MethodInvoker(AddressOf LoadSPR))
 
     End Sub
 
@@ -2552,19 +2510,22 @@ err_:
         'Dim newThread1 As New Thread(AddressOf add_kabn_if_nothing)
         'newThread1.Start()
         'newThread1.Priority = 4
-        Me.BeginInvoke(New MethodInvoker(AddressOf add_kabn_if_nothing))
+        frmComputers.BeginInvoke(New MethodInvoker(AddressOf add_kabn_if_nothing))
 
     End Sub
 
     Private Sub SaveToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SaveToolStripMenuItem.Click
         If SaveInfTehButton.Enabled = False Then Exit Sub
 
-        Call SaveInfTeh()
+        '  Call SaveInfTeh()
+        Me.BeginInvoke(New MethodInvoker(AddressOf SaveInfTeh))
+
     End Sub
 
     Private Sub ReloginToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ReloginToolStripMenuItem.Click
 
-        Call RELOGIN()
+        ' Call RELOGIN()
+        Me.BeginInvoke(New MethodInvoker(AddressOf RELOGIN))
 
     End Sub
 
@@ -2573,7 +2534,6 @@ err_:
         sRelogin = True
 
         UnLoadDatabase()
-
 
         ' Call Clear_Form_For_Computer()
 

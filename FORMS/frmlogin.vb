@@ -200,7 +200,7 @@ Public Class frmLogin
                 .Fields("SISADM").Value = "SISADM"
                 .Fields("Name_Prog").Value = "BKO.NET"
                 .Fields("Nr").Value = "Yes"
-                .Fields("access").Value = "1.7.3.5.1"
+                .Fields("access").Value = "1.7.3.6"
                 .Update()
             End With
             rs25.Close()
@@ -228,20 +228,16 @@ Public Class frmLogin
         rs = Nothing
 
         tVER = My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor & "." &
-               My.Application.Info.Version.Build
+               My.Application.Info.Version.Build & "." & My.Application.Info.Version.Revision
 
-        If sVERSIA >= "1.7.3.5.1" Then
+        '######################################
+        'ПРОВЕРКА ВЕРСИИ БД
+        '######################################
 
+        If sVERSIA < "1.7.3.6" Or sVERSIA = "1.7.4" Then
 
-        Else
-
-            MsgBox(
-                LNGIniFile.GetString("frmLogin", "MSG1", "Версия базы данных не является эталонной") & vbCrLf &
-                LNGIniFile.GetString("frmLogin", "MSG2", "воспользуйтесь конвертором"), MsgBoxStyle.Information,
-                "BKO.NET - " & tVER)
-            MsgBox("Пробуем внести изменения в базу, в случае не удачи пользуйтесь конвертором", MsgBoxStyle.Information,
-                   "BKO.NET - " & tVER)
-
+            MsgBox(LNGIniFile.GetString("frmLogin", "MSG1", "Версия базы данных не является эталонной") & vbCrLf & "Вносим изменения в базу...", MsgBoxStyle.Information, "BKO.NET - " & tVER)
+           
             _DBALTER = True
 
             'Вносим изменения в базу
@@ -249,7 +245,7 @@ Public Class frmLogin
 
             If _DBALTER = True Then
 
-                MsgBox("Внесение изменений провалилось", MsgBoxStyle.Critical, "BKO.NET - " & tVER)
+                MsgBox("Внесение изменений закончилось неудачей, воспользуйтесь конвертором или скриптами", MsgBoxStyle.Critical, "BKO.NET - " & tVER)
 
                 End
 
@@ -259,8 +255,12 @@ Public Class frmLogin
 
             End If
 
+        Else
 
         End If
+        '######################################
+        'ЗАВЕРШЕНИЕ ПРОВЕРКИ ВЕРСИИ БД
+        '######################################
 
         If Len(txtPassword.Text) = 0 Then Exit Sub
 
@@ -473,12 +473,13 @@ Public Class frmLogin
 
     Private Sub Button1_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Button1.Click
 
+        On Error GoTo err_
+
         DBserv = TextBox1.Text
         DBtabl = TextBox3.Text
         DBuser = TextBox4.Text
         DBpass = TextBox5.Text
         DBport = TextBox2.Text
-
 
         If DATAB = True Then
 
@@ -490,6 +491,12 @@ Public Class frmLogin
         End If
 
         Call User_fill()
+
+        If DATAB = True Then MsgBox("Test Ok!", MsgBoxStyle.Information, "#BKO.NET")
+        If DATAB = False Then MsgBox("Test No!", MsgBoxStyle.Critical, "#BKO.NET")
+err_:
+        Exit Sub
+        MsgBox("Test No!", MsgBoxStyle.Critical, "#BKO.NET")
     End Sub
 
     Private Sub txtPassword_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtPassword.KeyDown

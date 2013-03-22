@@ -60,7 +60,6 @@ Module MOD_SYS_PRELOAD
     Public _DBALTER As Boolean = False
     Public sVERSIA As String
 
-
     Public Sub Tree_Icons_Feel(ByVal ills As ImageList, ByVal sFRM As String, ByVal sPATH As String)
 
         On Error Resume Next
@@ -347,25 +346,6 @@ Module MOD_SYS_PRELOAD
         uUSERNAME = WindowsIdentity.GetCurrent.Name
 
         's = GetCurrent.User.Value
-    End Sub
-
-    Public Sub ALTER_DB()
-
-        Select Case sVERSIA
-
-            Case "1.7.3"
-
-            Case "1.7.4"
-
-            Case "1.7.3.4.1"
-
-            Case "1.7.3.5"
-
-                frmLogin.Invoke(New MethodInvoker(AddressOf ALTER_DB17351))
-
-            Case "1.7.3.5.1"
-
-        End Select
     End Sub
 
     Public Sub VisibleForm(ByVal ControlContainer As Object)

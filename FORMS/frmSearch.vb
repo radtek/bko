@@ -73,6 +73,7 @@ Public Class frmSearch
                sFindText & "%' or CREADER_NAME like '%" & sFindText & "%' or CASE_NAME like '%" & sFindText &
                "%' or CASE_SN like '%" & sFindText & "%' or CASE_PROIZV like '%" & sFindText & "%' or SYS_PR like '%" &
                sFindText & "%'"
+        
         rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         Dim sCOUNT As String
@@ -377,24 +378,14 @@ Public Class frmSearch
             b = 0
         End If
 
-        _backgroundWorker1 = New BackgroundWorker()
-        _backgroundWorker1.WorkerSupportsCancellation = False
-        _backgroundWorker1.WorkerReportsProgress = False
+   Me.BeginInvoke(New MethodInvoker(AddressOf RT_SEARCHE))
 
-        AddHandler Me._backgroundWorker1.DoWork, New DoWorkEventHandler(AddressOf RT_SEARCHE)
-        _backgroundWorker1.RunWorkerAsync()
-
-        'Dim newThread4 As New Thread(AddressOf RT_SEARCHE)
-        'newThread4.Start()
     End Sub
 
     Private Sub RT_SEARCHE()
-        lstGroups.BeginInvoke(New MethodInvoker(AddressOf RT_SEARCHE_1))
-    End Sub
-
-    Private Sub RT_SEARCHE_1()
         Search(lstGroups.Text, txtSearch.Text, a, b)
     End Sub
+
 
 
     Private Sub btnOfSend_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnOfSend.Click

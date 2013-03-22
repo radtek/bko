@@ -133,7 +133,7 @@
         rs1 = Nothing
 
         Exit Sub
-        Error_:
+Error_:
     End Sub
 
     Public Function RemoveProyzv(ByVal sMestoName As String)
@@ -143,7 +143,7 @@
         Dim UC As Long
         Dim asert As String
         If Trim(sMestoName) = "" Or sMestoName = 0 Then
-            Exit Function
+            GoTo ERR1
         End If
 
 
@@ -399,7 +399,7 @@
                     LNGIniFile.GetString("MOD_REMOVE", "MSG1", "Найдено") & " " & UC & " " &
                     LNGIniFile.GetString("MOD_REMOVE", "MSG2",
                                          "производителей в справочниках, Ваше действие может привести к потере данных, желаете продолжить удаление?"),
-                    MsgBoxStyle.Exclamation + vbYesNo, ProGramName) = vbNo Then Exit Function
+                    MsgBoxStyle.Exclamation + vbYesNo, ProGramName) = vbNo Then GoTo ERR1
 
         Else
 
@@ -415,11 +415,11 @@
 
         Exit Function
 
-        RemoveProyzv = - 1
+        RemoveProyzv = -1
 
 
         Exit Function
-        ERR1:
+ERR1:
 
         MsgBox("Database error: " & vbNewLine & vbNewLine & Err.Description, vbCritical, "Database Error!")
     End Function
@@ -456,7 +456,8 @@
                     LNGIniFile.GetString("MOD_REMOVE", "MSG6",
                                          "ри удалении структуры техника не удаляется. Будьте внимательны."),
                     vbExclamation + vbYesNo, ProGramName) = vbNo Then
-                Exit Function
+                ' Exit Function
+                GoTo ERR1
             End If
 
 
@@ -477,13 +478,13 @@
         Exit Function
 
 
-        RemoveBrainch = - 1
+        RemoveBrainch = -1
 
         'MsgBox("Не найдено филиала " & sGroupName, vbExclamation + vbApplicationModal, "Error!")
 
 
         Exit Function
-        ERR1:
+ERR1:
     End Function
 
     Public Function RemoveDepartment(ByVal sKab As Long)
@@ -494,12 +495,12 @@
         Dim sFilName, sGroupName As String
 
         If Trim(sKab) = "" Then
-            Exit Function
+            GoTo ERR1
         End If
 
 
-        If sKab = 0 Then Exit Function
-        If Len(sKab) = 0 Then Exit Function
+        If sKab = 0 Then GoTo ERR1
+        If Len(sKab) = 0 Then GoTo ERR1
 
         Dim rs As Recordset
         rs = New Recordset
@@ -538,7 +539,7 @@
                     LNGIniFile.GetString("MOD_REMOVE", "MSG6",
                                          "При удалении структуры техника не удаляется. Будьте внимательны."),
                     vbExclamation + vbYesNo, ProGramName) = vbNo Then
-                Exit Function
+                GoTo ERR1
             End If
 
         Else
@@ -557,12 +558,12 @@
 
         Exit Function
 
-        RemoveDepartment = - 1
+        RemoveDepartment = -1
         MsgBox("Не найден отдел" & " " & sGroupName & "'", vbExclamation + vbApplicationModal, "Error!")
 
 
         Exit Function
-        ERR1:
+ERR1:
     End Function
 
     Public Function RemoveOffice(ByVal sKab As Long)
@@ -572,9 +573,9 @@
 
         Dim sBran, sDepart, sOffice As String
 
-        If Trim(sKab) = "" Then Exit Function
-        If sKab = 0 Then Exit Function
-        If Len(sKab) = 0 Then Exit Function
+        If Trim(sKab) = "" Then GoTo ERR1
+        If sKab = 0 Then GoTo ERR1
+        If Len(sKab) = 0 Then GoTo ERR1
 
         Dim rs As Recordset
         rs = New Recordset
@@ -614,7 +615,7 @@
                     LNGIniFile.GetString("MOD_REMOVE", "MSG6",
                                          "При удалении структуры техника не удаляется. Будьте внимательны."),
                     vbExclamation + vbYesNo, ProGramName) = vbNo Then
-                Exit Function
+                GoTo ERR1
             End If
 
 
@@ -632,12 +633,12 @@
 
         Exit Function
 
-        RemoveOffice = - 1
+        RemoveOffice = -1
         MsgBox(LNGIniFile.GetString("MOD_REMOVE", "MSG7", "Не найден кабинет") & " " & sOffice & "'",
                vbExclamation + vbApplicationModal, "Error!")
 
 
         Exit Function
-        ERR1:
+ERR1:
     End Function
 End Module

@@ -419,7 +419,7 @@ Partial Class frmserviceDesc
         '
         Me.CMServices.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EditService, Me.DeleteService, Me.MnuSendEmail, Me.mnu_Z_to_Office, Me.mnu_z_rasp, Me.addServiseWork})
         Me.CMServices.Name = "CMServices"
-        Me.CMServices.Size = New System.Drawing.Size(175, 136)
+        Me.CMServices.Size = New System.Drawing.Size(175, 158)
         '
         'EditService
         '

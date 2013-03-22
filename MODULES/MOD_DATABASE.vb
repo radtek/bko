@@ -64,8 +64,7 @@ Module MOD_Database
             Case "MS SQL 2008"
 
                 DB7.Open(
-                    "Driver={SQL Server Native Client 10.0};Server=" & DBserv & ";Database=" & DBtabl & ";Uid=" & DBuser &
-                    ";Pwd=" & DBpass & ";")
+                    "Driver={SQL Server Native Client 10.0};Server=" & DBserv & ";Database=" & DBtabl & ";Uid=" & DBuser & ";Pwd=" & DBpass & ";")
 
                 Base_Name = DBserv & "\" & DBtabl
             Case "MS SQL"

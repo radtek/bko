@@ -22,7 +22,7 @@ Module MOD_SNMP
         Dim snmp As SimpleSnmp = New SimpleSnmp(host, community)
 
         If Not snmp.Valid Then
-            Exit Function
+            GoTo Err_
         End If
 
         result = snmp.Get(SnmpVersion.Ver1, requestOid)

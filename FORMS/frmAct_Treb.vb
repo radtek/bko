@@ -686,7 +686,7 @@ Public Class frmAct_Treb
 
 
         Dim ORG As String
-        Dim u, l, k, t, c, dvv, u1, u2, u3 As String
+        Dim u, l, k, t, c, dvv, u1, u2 As String
 
 
         Dim tipot As String

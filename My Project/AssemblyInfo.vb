@@ -1,5 +1,4 @@
-﻿Imports System
-Imports System.Reflection
+﻿Imports System.Reflection
 Imports System.Runtime.InteropServices
 
 ' Общие сведения об этой сборке предоставляются следующим набором 
@@ -8,17 +7,17 @@ Imports System.Runtime.InteropServices
 
 ' Проверьте значения атрибутов сборки
 
-<Assembly: AssemblyTitle("База Компьютеров Организации")> 
-<Assembly: AssemblyDescription("Программа учёта оргтехники")> 
-<Assembly: AssemblyCompany("Squee&Dragon")> 
-<Assembly: AssemblyProduct("База Компьютеров Организации")> 
-<Assembly: AssemblyCopyright("Copyright © Alex Plotnikov 2013")> 
-<Assembly: AssemblyTrademark("Squee&Dragon")> 
+<Assembly: AssemblyTitle("База Компьютеров Организации")>
+<Assembly: AssemblyDescription("Программа учёта оргтехники")>
+<Assembly: AssemblyCompany("Squee&Dragon")>
+<Assembly: AssemblyProduct("База Компьютеров Организации")>
+<Assembly: AssemblyCopyright("Copyright © Alex Plotnikov 2013")>
+<Assembly: AssemblyTrademark("Squee&Dragon")>
 
-<Assembly: ComVisible(True)> 
+<Assembly: ComVisible(True)>
 
 'Следующий GUID служит для идентификации библиотеки типов, если этот проект будет видимым для COM
-<Assembly: Guid("9b10b4f3-a6b1-431e-887b-c1095cbcb7c5")> 
+<Assembly: Guid("9b10b4f3-a6b1-431e-887b-c1095cbcb7c5")>
 
 ' Сведения о версии сборки состоят из следующих четырех значений:
 '
@@ -31,5 +30,5 @@ Imports System.Runtime.InteropServices
 ' используя "*", как показано ниже:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("1.7.3.5")> 
-<Assembly: AssemblyFileVersion("1.7.3.78")> 
+<Assembly: AssemblyVersion("1.7.3.6")> 
+<Assembly: AssemblyFileVersion("1.7.3.84")> 

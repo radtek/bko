@@ -726,7 +726,6 @@ Module MOD_INF_TECH_LOAD
                 Loop
             End With
 
-
         End If
 
 

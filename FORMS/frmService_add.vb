@@ -118,6 +118,30 @@
         Dim strTime As String
         strTime = TimeString
 
+        'cmbMast
+
+        If Not (RSExists("MASTER", "name", Trim(cmbMast.Text))) Then
+            AddOnePar(cmbMast.Text, "NAME", "SPR_Master", cmbMast)
+            FillComboNET(Me.cmbMast, "Name", "SPR_Master", "", False, True)
+        End If
+
+        If Not (RSExists("otv", "name", Trim(cmbIst.Text))) Then
+            AddOnePar(cmbIst.Text, "NAME", "SPR_OTV", cmbIst)
+        End If
+
+        If Not (RSExists("SPR_Uroven", "Uroven", Trim(cmbKrit.Text))) Then
+            AddOnePar(cmbKrit.Text, "Uroven", "SPR_Uroven", cmbKrit)
+        End If
+
+        If Not (RSExists("spr_vip", "name", Trim(cmbStatus.Text))) Then
+            AddOnePar(cmbStatus.Text, "NAME", "spr_vip", cmbStatus)
+        End If
+
+        If Not (RSExists("spr_tip_z", "name", Trim(cmbTip.Text))) Then
+            AddOnePar(cmbTip.Text, "NAME", "spr_tip_z", cmbTip)
+        End If
+
+
         With rs
             If cmbAdd.Text = objIniFile.GetString("frmService_add", "MSG1", "Сохранить") Then
 
@@ -249,6 +273,7 @@
     Private Sub cmbCancel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles cmbCancel.Click
 
         Me.Close()
+
     End Sub
 
     Private Sub frmService_add_Activated(sender As Object, e As EventArgs) Handles Me.Activated
@@ -261,6 +286,8 @@
     End Sub
 
     Private Sub frmService_add_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
+
+        DeleteService.Image = New Bitmap(PrPath & "pic\iface\delete.png")
 
         SendFonts(Me)
 
@@ -340,6 +367,7 @@
         lvRem2.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem2_2", "Дата"), 90, HorizontalAlignment.Left)
         lvRem2.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem2_3", "Мастер"), 100, HorizontalAlignment.Left)
         lvRem2.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem2_4", "Описание"), 300, HorizontalAlignment.Left)
+
     End Sub
 
     Private Sub chkClose_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chkClose.CheckedChanged
@@ -384,4 +412,53 @@
 
         End If
     End Sub
+
+    Private Sub lvRem2_DoubleClick(sender As Object, e As System.EventArgs) Handles lvRem2.DoubleClick
+
+        Call frmserviceDesc.LOAD_REM_PLUS_ED(lvRem2)
+
+
+    End Sub
+
+    Private Sub DeleteService_Click(sender As System.Object, e As System.EventArgs) Handles DeleteService.Click
+        Dim langfile As New IniFile(sLANGPATH)
+
+        If _
+         MsgBox(langfile.GetString("frmComputers", "MSG23", "Вы уверены что хотите удалить?"), MsgBoxStyle.YesNo,
+                ProGramName) = MsgBoxResult.Yes Then
+
+            If lvRem2.Items.Count = 0 Then Exit Sub
+            Dim tCOUNT As Integer
+
+            For z = 0 To lvRem2.SelectedItems.Count - 1
+                tCOUNT = (lvRem2.SelectedItems(z).Text)
+            Next
+
+            Dim rs1 As Recordset
+            rs1 = New Recordset
+            rs1.Open("Delete FROM remonty_plus WHERE id=" & tCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                     LockTypeEnum.adLockOptimistic)
+            rs1 = Nothing
+
+            Call frmserviceDesc.load_rplus(frmserviceDesc.rCOUNT, Me.lvRem2)
+
+        Else
+
+        End If
+    End Sub
+
+    Private Sub lvRem2_MouseUp(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles lvRem2.MouseUp
+
+        If lvRem2.Items.Count = 0 Then Exit Sub
+
+        If e.Button = MouseButtons.Right Then
+
+            CMServices.Show(CType(sender, Control), e.Location)
+
+        Else
+
+        End If
+
+    End Sub
+
 End Class

@@ -1,6 +1,5 @@
-﻿
+﻿Public Class frmSetup
 
-Public Class frmSetup
     Private sFILEBD As String
     Private uCOUNTs As String
     Private uEDT As Boolean
@@ -1054,7 +1053,7 @@ Public Class frmSetup
 
 
         Exit Sub
-        err_:
+err_:
         MsgBox(Err.Description)
     End Sub
 
