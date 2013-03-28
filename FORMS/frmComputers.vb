@@ -492,16 +492,14 @@ Public Class frmComputers
 
         System.Windows.Forms.Application.DoEvents()
 
-        ' Me.BeginInvoke(New MethodInvoker(AddressOf R_T_LOAD))
+        Me.BeginInvoke(New MethodInvoker(AddressOf R_T_LOAD))
 
 
-        Call R_T_LOAD()
+        ' Call R_T_LOAD()
 
         Me.Cursor = Cursors.Default
 
         System.Windows.Forms.Application.DoEvents()
-
-
 
         If OneStart = 0 Then OneStart = 1
 
@@ -513,7 +511,10 @@ Public Class frmComputers
 
 
         Exit Sub
-        err_:
+err_:
+
+        If OneStart = 0 Then OneStart = 1
+
     End Sub
 
     Private Sub frmComputers_Resize(ByVal eventSender As Object, ByVal eventArgs As EventArgs) Handles MyBase.Resize
@@ -706,6 +707,8 @@ Public Class frmComputers
 
         ' Call LOAD_LIST()
         ' Call selectTECMesto()
+
+        If OneStart = 0 Then OneStart = 1
 
         Me.BeginInvoke(New MethodInvoker(AddressOf LOAD_LIST))
         Me.BeginInvoke(New MethodInvoker(AddressOf selectTECMesto))
@@ -4782,23 +4785,33 @@ Public Class frmComputers
             Case "OT"
                 'ExLoadParTwo(cmbOTH.Text, PROiZV39, .Fields("A").Value)
 
-                Dim rs As Recordset 'Объявляем рекордсет
-                Dim sSQL As String 'Переменная, где будет размещён SQL запрос
+                If Len(cmbOTHConnect.Text) = 0 Then
 
 
-                sSQL = "SELECT B FROM spr_other WHERE name ='" & cmbOTHConnect.Text & "'"
-                rs = New Recordset
-                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                    Dim rs As Recordset 'Объявляем рекордсет
+                    Dim sSQL As String 'Переменная, где будет размещён SQL запрос
 
 
-                With rs
+                    sSQL = "SELECT B FROM spr_other WHERE name ='" & cmbOTHConnect.Text & "'"
+                    rs = New Recordset
+                    rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-                    If Not IsDBNull(.Fields("B").Value) Then ExLoadParTwo(cmbOTH.Text, PROiZV39, .Fields("B").Value)
 
-                End With
+                    With rs
 
-                rs.Close()
-                rs = Nothing
+                        If Not IsDBNull(.Fields("B").Value) Or Len(.Fields("B").Value) <> 0 Then
+
+                            ExLoadParTwo(cmbOTH.Text, PROiZV39, .Fields("B").Value)
+
+                        End If
+
+
+                    End With
+
+                    rs.Close()
+                    rs = Nothing
+
+                End If
 
 
                 'Dim rs As ADODB.Recordset
@@ -7169,6 +7182,10 @@ err_1:
     End Sub
 
     Private Sub lvRepair_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles lvRepair.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub txtSearch_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtSearch.TextChanged
 
     End Sub
 End Class

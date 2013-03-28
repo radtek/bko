@@ -440,13 +440,21 @@ Module MOD_REF_TREE
         End If
 
         'lstgroups.visible = True
-        exitsub:
+
+
+        If frmComputers.OneStart = 0 Then frmComputers.OneStart = 1
+
+exitsub:
+
         Exit Sub
+
         ERR1:
         'lstgroups.visible = True
         'MsgBox Err.Description
 
-        'If frmComputers.OneStart = 0 Then
+
+        If frmComputers.OneStart = 0 Then frmComputers.OneStart = 1
+
         '    frmComputers.OneStart = 1
         'End If
 
@@ -1561,7 +1569,197 @@ Module MOD_REF_TREE
 
             Case "PHOTO"
 
-                Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 11)
+                iA = 11
+                iB = 11
+
+                Dim TEHNodePHOTO As New TreeNode(L_NAME, iA, iB)
+
+                TEHNodePHOTO.Tag = "C|" & iD
+                iPSid = iD
+
+                DepNode.Nodes.Add(TEHNodePHOTO)
+
+                'TEHNode.ForeColor = Color.Blue
+                If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
+                    TEHNodePHOTO.ForeColor = Color.DimGray
+                    TEHNodePHOTO.NodeFont = New Font(lstgroups.Font, 8)
+                End If
+
+                If balans = "1" Or balans = "True" Or balans = "-1" Then
+
+                    If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
+                        TEHNodePHOTO.NodeFont = New Font(lstgroups.Font, 10)
+                    Else
+                        TEHNodePHOTO.NodeFont = New Font(lstgroups.Font, 2)
+                    End If
+                End If
+
+
+                If KCKey <> 0 Then
+                    If KCKey = iD Then
+                        lstgroups.SelectedNode = TEHNodePHOTO
+                        lstgroups.SelectedNode.Expand()
+                    End If
+                End If
+
+               ' Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 11)
+
+
+                Dim sText As String = objIniFile.GetString("general", "Tree_S", 0)
+                Dim sSQL4 As String
+
+
+                sSQL4 = "SELECT count(*) as t_n FROM kompy WHERE PCL =" & iD
+
+                Dim rs3 As Recordset
+                rs3 = New Recordset
+                rs3.Open(sSQL4, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
+                Dim sCount As String
+                With rs3
+                    sCount = .Fields("t_n").Value
+                End With
+
+                rs3.Close()
+                rs3 = Nothing
+
+                If sCount > 0 Then
+
+
+                    Select Case sText
+
+                        Case 0
+
+                            sSQL4 =
+                                "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa,PRINTER_NAME_4,balans FROM kompy WHERE PCL =" &
+                                iD & " ORDER BY PSEVDONIM, tiptehn"
+
+                        Case 1
+
+                            sSQL4 =
+                                "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa,PRINTER_NAME_4,balans FROM kompy WHERE PCL =" &
+                                iD & " ORDER BY tiptehn, PSEVDONIM"
+
+                    End Select
+
+
+                    rs3 = New Recordset
+                    rs3.Open(sSQL4, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
+                    With rs3
+                        .MoveFirst()
+
+                        Do While Not .EOF
+
+                            Spisan = .Fields("Spisan").Value
+                            balans = .Fields("balans").Value
+
+                            Select Case sTREENAME
+
+                                Case 0
+                                    N_NAME = .Fields("NET_NAME").Value
+                                    P_NAME = .Fields("PSEVDONIM").Value
+
+                                    If Len(N_NAME) = 0 Then
+                                        N_NAME = "NoName"
+                                    End If
+
+                                    If Len(P_NAME) = 0 Then
+                                        P_NAME = "NoName"
+                                    End If
+
+                                    If N_NAME = P_NAME Then
+
+                                        L_NAME = N_NAME
+
+                                    Else
+
+                                        L_NAME = N_NAME & " (" & P_NAME & ")"
+
+                                    End If
+
+                                Case 2
+                                    P_NAME = .Fields("PSEVDONIM").Value
+
+                                    If Len(P_NAME) = 0 Then
+                                        P_NAME = "NoName"
+                                    End If
+                                    L_NAME = P_NAME
+
+                                Case 1
+
+                                    N_NAME = .Fields("NET_NAME").Value
+                                    If Len(N_NAME) = 0 Then
+                                        N_NAME = "NoName"
+                                    End If
+
+                                    L_NAME = N_NAME
+
+                            End Select
+
+
+                            Select Case .Fields("tiptehn").Value
+
+
+                                Case "OT"
+
+                                    Dim uname As String
+
+                                    On Error Resume Next
+
+
+                                    If Len(.Fields("tip_compa").Value) = 0 Then
+
+                                        uname = ""
+                                    Else
+
+                                        Dim rsOT As Recordset
+                                        rsOT = New Recordset
+                                        rsOT.Open(
+                                            "SELECT A FROM spr_other where Name ='" & .Fields("tip_compa").Value & "'",
+                                            DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
+                                        With rsOT
+
+                                            If Not IsDBNull(.Fields("A").Value) Then uname = .Fields("A").Value
+
+                                        End With
+
+
+                                        rsOT.Close()
+                                        rsOT = Nothing
+
+
+                                    End If
+
+
+                                    If Len(uname) = 0 Or uname = " " Or uname = " 0" Or uname = "" Then
+                                        iA = 16
+                                    Else
+                                        iA = uname
+                                    End If
+
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePHOTO, Spisan, balans, L_NAME,
+                                                      iA)
+
+                                Case "USB"
+
+                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePHOTO, Spisan, balans, L_NAME,
+                                                      18)
+
+                                Case Else
+
+
+                            End Select
+
+
+                            .MoveNext()
+                        Loop
+                    End With
+                    rs3.Close()
+                    rs3 = Nothing
+
+                End If
 
             Case "PHONE"
 

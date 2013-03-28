@@ -1209,7 +1209,7 @@ Error_:
 
         If DB_N <> "MS Access" Then uname = 2 Else uname = 1
 
-
+        On Error Resume Next
         For lngCounter = 0 To rs.Fields.Count - uname
 
             If rs.Fields(lngCounter).Name = "id" Or rs.Fields(lngCounter).Name = "ID" Then

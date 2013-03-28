@@ -2421,6 +2421,7 @@ Public Class frmDirectory
         sPRIM = txtMemo.Text
         sPAR1 = cmb1.Text
         sPAR2 = cmb2.Text
+        sPAR3 = ""
 
         Dim rs As Recordset
 

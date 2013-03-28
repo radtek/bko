@@ -95,47 +95,8 @@ Public Class frmSearch
         'sSQL = "SELECT * FROM kompy where ID like '%" & sFindText & "%'  or CPU1 like '%" & sFindText & "%'  or CPUmhz1 like '%" & sFindText & "%'  or CPU2 like '%" & sFindText & "%'  or CPUmhz2 like '%" & sFindText & "%'  or CPU3 like '%" & sFindText & "%'  or CPUmhz3 like '%" & sFindText & "%'  or CPU4 like '%" & sFindText & "%'  or CPUmhz4 like '%" & sFindText & "%'  or Mb like '%" & sFindText & "%'  or Mb_Chip like '%" & sFindText & "%'  or Mb_Proizvod like '%" & sFindText & "%'  or RAM_1 like '%" & sFindText & "%'  or RAM_2 like '%" & sFindText & "%'  or RAM_3 like '%" & sFindText & "%'  or RAM_4 like '%" & sFindText & "%'  or HDD_Name_1 like '%" & sFindText & "%'  or HDD_OB_1 like '%" & sFindText & "%'  or HDD_SN_1 like '%" & sFindText & "%'  or HDD_Name_2 like '%" & sFindText & "%'  or HDD_OB_2 like '%" & sFindText & "%'  or HDD_SN_2 like '%" & sFindText & "%'  or HDD_Name_3 like '%" & sFindText & "%'  or HDD_OB_3 like '%" & sFindText & "%'  or HDD_SN_3 like '%" & sFindText & "%'  or HDD_Name_4 like '%" & sFindText & "%'  or HDD_OB_4 like '%" & sFindText & "%'  or HDD_SN_4 like '%" & sFindText & "%'  or SVGA_NAME like '%" & sFindText & "%'  or SVGA_SN like '%" & sFindText & "%'  or SOUND_NAME like '%" & sFindText & "%'  or CD_NAME like '%" & sFindText & "%'  or CD_SPEED like '%" & sFindText & "%'  or CD_SN like '%" & sFindText & "%'  or CDRW_NAME like '%" & sFindText & "%'  or CDRW_SPEED like '%" & sFindText & "%'  or CDRW_SN like '%" & sFindText & "%'  or DVD_NAME like '%" & sFindText & "%'  or DVD_SPEED like '%" & sFindText & "%'  or DVD_SN like '%" & sFindText & "%'  or NET_NAME_1 like '%" & sFindText & "%'  or NET_IP_1 like '%" & sFindText & "%'  or NET_NAME_2 like '%" & sFindText & "%'  or NET_IP_2 like '%" & sFindText & "%'  or NET_MAC_2 like '%" & sFindText & "%'  or MODEM_NAME like '%" & sFindText & "%'  or MODEM_SN like '%" & sFindText & "%'  or MONITor_NAME like '%" & sFindText & "%'  or MONITor_NAME2 like '%" & sFindText & "%'  or AS_NAME like '%" & sFindText & "%'  or AS_PROIZV like '%" & sFindText & "%'  or IBP_NAME like '%" & sFindText & "%'  or FILTR_NAME like '%" & sFindText & "%'  or PRINTER_NAME_1 like '%" & sFindText & "%'  or PRINTER_NAME_2 like '%" & sFindText & "%'  or PRINTER_NAME_3 like '%" & sFindText & "%'  or SCANER_NAME like '%" & sFindText & "%'  or NET_NAME like '%" & sFindText & "%'  or PSEVDONIM like '%" & sFindText & "%'  or MESTO like '%" & sFindText & "%'  or kabn like '%" & sFindText & "%'  or FILIAL like '%" & sFindText & "%'  or TELEPHONE like '%" & sFindText & "%'  or INV_NO_SYSTEM like '%" & sFindText & "%'  or INV_NO_PRINTER like '%" & sFindText & "%'  or INV_NO_MODEM like '%" & sFindText & "%'  or INV_NO_SCANER like '%" & sFindText & "%'  or INV_NO_MONITOR like '%" & sFindText & "%'  or INV_NO_IBP like '%" & sFindText & "%'  or OTvetstvennyj like '%" & sFindText & "%'  or Ser_N_SIS like '%" & sFindText & "%'  or BLOCK like '%" & sFindText & "%'  or SN_BLOCK like '%" & sFindText & "%'  or CREADER_NAME like '%" & sFindText & "%'  or CASE_NAME like '%" & sFindText & "%'  or CASE_SN like '%" & sFindText & "%'  or CASE_PROIZV like '%" & sFindText & "%'  or SYS_PR like '%" & sFindText & "%'"
         'sSQL = "SELECT * FROM kompy where ID like '%" & sFindText & "%'  or CPU1 like '%" & sFindText & "%'  or CPUmhz1 like '%" & sFindText & "%'  or CPU2 like '%" & sFindText & "%'  or CPUmhz2 like '%" & sFindText & "%'  or CPU3 like '%" & sFindText & "%'  or CPUmhz3 like '%" & sFindText & "%'  or CPU4 like '%" & sFindText & "%'  or CPUmhz4 like '%" & sFindText & "%'  or Mb like '%" & sFindText & "%'  or Mb_Chip like '%" & sFindText & "%'  or Mb_Proizvod like '%" & sFindText & "%'  or RAM_1 like '%" & sFindText & "%'  or RAM_2 like '%" & sFindText & "%'  or RAM_3 like '%" & sFindText & "%'  or RAM_4 like '%" & sFindText & "%'  or HDD_Name_1 like '%" & sFindText & "%'  or HDD_OB_1 like '%" & sFindText & "%'  or HDD_SN_1 like '%" & sFindText & "%'  or HDD_Name_2 like '%" & sFindText & "%'  or HDD_OB_2 like '%" & sFindText & "%'  or HDD_SN_2 like '%" & sFindText & "%'  or HDD_Name_3 like '%" & sFindText & "%'  or HDD_OB_3 like '%" & sFindText & "%'  or HDD_SN_3 like '%" & sFindText & "%'  or HDD_Name_4 like '%" & sFindText & "%'  or HDD_OB_4 like '%" & sFindText & "%'  or HDD_SN_4 like '%" & sFindText & "%'  or SVGA_NAME like '%" & sFindText & "%'  or SVGA_SN like '%" & sFindText & "%'  or SOUND_NAME like '%" & sFindText & "%'  or CD_NAME like '%" & sFindText & "%'  or CD_SPEED like '%" & sFindText & "%'  or CD_SN like '%" & sFindText & "%'  or CDRW_NAME like '%" & sFindText & "%'  or CDRW_SPEED like '%" & sFindText & "%'  or CDRW_SN like '%" & sFindText & "%'  or DVD_NAME like '%" & sFindText & "%'  or DVD_SPEED like '%" & sFindText & "%'  or DVD_SN like '%" & sFindText & "%'  or NET_NAME_1 like '%" & sFindText & "%'  or NET_IP_1 like '%" & sFindText & "%'  or NET_NAME_2 like '%" & sFindText & "%'  or NET_IP_2 like '%" & sFindText & "%'  or NET_MAC_2 like '%" & sFindText & "%'  or MODEM_NAME like '%" & sFindText & "%'  or MODEM_SN like '%" & sFindText & "%'  or MONITor_NAME like '%" & sFindText & "%'  or MONITor_NAME2 like '%" & sFindText & "%'  or AS_NAME like '%" & sFindText & "%'  or AS_PROIZV like '%" & sFindText & "%'  or IBP_NAME like '%" & sFindText & "%'  or FILTR_NAME like '%" & sFindText & "%'  or PRINTER_NAME_1 like '%" & sFindText & "%'  or PRINTER_NAME_2 like '%" & sFindText & "%'  or PRINTER_NAME_3 like '%" & sFindText & "%'  or SCANER_NAME like '%" & sFindText & "%'  or NET_NAME like '%" & sFindText & "%'  or PSEVDONIM like '%" & sFindText & "%'  or MESTO like '%" & sFindText & "%'  or kabn like '%" & sFindText & "%'  or FILIAL like '%" & sFindText & "%'  or TELEPHONE like '%" & sFindText & "%'  or INV_NO_SYSTEM like '%" & sFindText & "%'  or INV_NO_PRINTER like '%" & sFindText & "%'  or INV_NO_MODEM like '%" & sFindText & "%'  or INV_NO_SCANER like '%" & sFindText & "%'  or INV_NO_MONITOR like '%" & sFindText & "%'  or INV_NO_IBP like '%" & sFindText & "%'  or OTvetstvennyj like '%" & sFindText & "%'  or Ser_N_SIS like '%" & sFindText & "%'  or BLOCK like '%" & sFindText & "%'  or SN_BLOCK like '%" & sFindText & "%'  or CREADER_NAME like '%" & sFindText & "%'  or CASE_NAME like '%" & sFindText & "%'  or CASE_SN like '%" & sFindText & "%'  or CASE_PROIZV like '%" & sFindText & "%'  or SYS_PR like '%" & sFindText & "%' order by PSEVDONIM, filial"
 
-        sSQL = "SELECT * FROM kompy where ID like '%" & sFindText & "%' or CPU1 like '%" & sFindText &
-               "%' or CPUmhz1 like '%" & sFindText & "%' or CPU2 like '%" & sFindText & "%' or CPUmhz2 like '%" &
-               sFindText & "%' or CPU3 like '%" & sFindText & "%' or CPUmhz3 like '%" & sFindText & "%' or CPU4 like '%" &
-               sFindText & "%' or CPUmhz4 like '%" & sFindText & "%' or Mb like '%" & sFindText &
-               "%' or Mb_Chip like '%" & sFindText & "%' or Mb_Proizvod like '%" & sFindText & "%' or RAM_1 like '%" &
-               sFindText & "%' or RAM_2 like '%" & sFindText & "%' or RAM_3 like '%" & sFindText & "%' or RAM_4 like '%" &
-               sFindText & "%' or HDD_Name_1 like '%" & sFindText & "%' or HDD_OB_1 like '%" & sFindText &
-               "%' or HDD_SN_1 like '%" & sFindText & "%' or HDD_Name_2 like '%" & sFindText & "%' or HDD_OB_2 like '%" &
-               sFindText & "%' or HDD_SN_2 like '%" & sFindText & "%' or HDD_Name_3 like '%" & sFindText &
-               "%' or HDD_OB_3 like '%" & sFindText & "%' or HDD_SN_3 like '%" & sFindText & "%' or HDD_Name_4 like '%" &
-               sFindText & "%' or HDD_OB_4 like '%" & sFindText & "%' or HDD_SN_4 like '%" & sFindText &
-               "%' or SVGA_NAME like '%" & sFindText & "%' or SVGA_SN like '%" & sFindText & "%' or SOUND_NAME like '%" &
-               sFindText & "%' or CD_NAME like '%" & sFindText & "%' or CD_SPEED like '%" & sFindText &
-               "%' or CD_SN like '%" & sFindText & "%' or CDRW_NAME like '%" & sFindText & "%' or CDRW_SPEED like '%" &
-               sFindText & "%' or CDRW_SN like '%" & sFindText & "%' or DVD_NAME like '%" & sFindText &
-               "%' or DVD_SPEED like '%" & sFindText & "%' or DVD_SN like '%" & sFindText & "%' or NET_NAME_1 like '%" &
-               sFindText & "%' or NET_IP_1 like '%" & sFindText & "%' or NET_MAC_1 like '%" & sFindText &
-               "%' or NET_NAME_2 like '%" & sFindText & "%' or NET_IP_2 like '%" & sFindText & "%' or NET_MAC_2 like '%" &
-               sFindText & "%' or MODEM_NAME like '%" & sFindText & "%' or MODEM_SN like '%" & sFindText &
-               "%' or MONITOR_NAME like '%" & sFindText & "%' or MONITOR_NAME2 like '%" & sFindText &
-               "%' or MONITOR_SN like '%" & sFindText & "%' or MONITOR_SN2 like '%" & sFindText & "%'or AS_NAME like '%" &
-               sFindText & "%' or AS_PROIZV like '%" & sFindText & "%' or IBP_NAME like '%" & sFindText &
-               "%' or FILTR_NAME like '%" & sFindText & "%' or PRINTER_NAME_1 like '%" & sFindText &
-               "%' or PRINTER_SN_1 like '%" & sFindText & "%' or PORT_1 like '%" & sFindText &
-               "%' or PRINTER_PROIZV_1 like '%" & sFindText & "%' or PRINTER_NAME_2 like '%" & sFindText &
-               "%' or PORT_2 like '%" & sFindText & "%' or PRINTER_SN_2 like '%" & sFindText &
-               "%' or PRINTER_PROIZV_2 like '%" & sFindText & "%' or PRINTER_NAME_3 like '%" & sFindText &
-               "%' or PORT_3 like '%" & sFindText & "%' or PRINTER_SN_3 like '%" & sFindText &
-               "%' or PRINTER_PROIZV_3 like '%" & sFindText & "%' or PORT_4 like '%" & sFindText &
-               "%' or PRINTER_NAME_4 like '%" & sFindText & "%' or PRINTER_SN_4 like '%" & sFindText &
-               "%' or PRINTER_PROIZV_4 like '%" & sFindText & "%' or SCANER_NAME like '%" & sFindText &
-               "%' or NET_NAME like '%" & sFindText & "%' or PSEVDONIM like '%" & sFindText & "%' or MESTO like '%" &
-               sFindText & "%' or kabn like '%" & sFindText & "%' or FILIAL like '%" & sFindText &
-               "%' or TELEPHONE like '%" & sFindText & "%' or INV_NO_SYSTEM like '%" & sFindText &
-               "%' or INV_NO_PRINTER like '%" & sFindText & "%' or INV_NO_MODEM like '%" & sFindText &
-               "%' or INV_NO_SCANER like '%" & sFindText & "%' or INV_NO_MONITOR like '%" & sFindText &
-               "%' or INV_NO_IBP like '%" & sFindText & "%' or OTvetstvennyj like '%" & sFindText &
-               "%' or Ser_N_SIS like '%" & sFindText & "%' or BLOCK like '%" & sFindText & "%' or SN_BLOCK like '%" &
-               sFindText & "%' or CREADER_NAME like '%" & sFindText & "%' or CASE_NAME like '%" & sFindText &
-               "%' or CASE_SN like '%" & sFindText & "%' or CASE_PROIZV like '%" & sFindText & "%' or SYS_PR like '%" &
-               sFindText & "%'order by PSEVDONIM, filial"
+        sSQL = "SELECT * FROM kompy where ID like '%" & sFindText & "%' or CPU1 like '%" & sFindText & "%' or CPUmhz1 like '%" & sFindText & "%' or CPU2 like '%" & sFindText & "%' or CPUmhz2 like '%" & sFindText & "%' or CPU3 like '%" & sFindText & "%' or CPUmhz3 like '%" & sFindText & "%' or CPU4 like '%" & sFindText & "%' or CPUmhz4 like '%" & sFindText & "%' or Mb like '%" & sFindText & "%' or Mb_Chip like '%" & sFindText & "%' or Mb_Proizvod like '%" & sFindText & "%' or RAM_1 like '%" & sFindText & "%' or RAM_2 like '%" & sFindText & "%' or RAM_3 like '%" & sFindText & "%' or RAM_4 like '%" & sFindText & "%' or HDD_Name_1 like '%" & sFindText & "%' or HDD_OB_1 like '%" & sFindText & "%' or HDD_SN_1 like '%" & sFindText & "%' or HDD_Name_2 like '%" & sFindText & "%' or HDD_OB_2 like '%" & sFindText & "%' or HDD_SN_2 like '%" & sFindText & "%' or HDD_Name_3 like '%" & sFindText & "%' or HDD_OB_3 like '%" & sFindText & "%' or HDD_SN_3 like '%" & sFindText & "%' or HDD_Name_4 like '%" & sFindText & "%' or HDD_OB_4 like '%" & sFindText & "%' or HDD_SN_4 like '%" & sFindText & "%' or SVGA_NAME like '%" & sFindText & "%' or SVGA_SN like '%" & sFindText & "%' or SOUND_NAME like '%" & sFindText & "%' or CD_NAME like '%" & sFindText & "%' or CD_SPEED like '%" & sFindText & "%' or CD_SN like '%" & sFindText & "%' or CDRW_NAME like '%" & sFindText & "%' or CDRW_SPEED like '%" & sFindText & "%' or CDRW_SN like '%" & sFindText & "%' or DVD_NAME like '%" & sFindText & "%' or DVD_SPEED like '%" & sFindText & "%' or DVD_SN like '%" & sFindText & "%' or NET_NAME_1 like '%" & sFindText & "%' or NET_IP_1 like '%" & sFindText & "%' or NET_MAC_1 like '%" & sFindText & "%' or NET_NAME_2 like '%" & sFindText & "%' or NET_IP_2 like '%" & sFindText & "%' or NET_MAC_2 like '%" & sFindText & "%' or MODEM_NAME like '%" & sFindText & "%' or MODEM_SN like '%" & sFindText & "%' or MONITOR_NAME like '%" & sFindText & "%' or MONITOR_NAME2 like '%" & sFindText & "%' or MONITOR_SN like '%" & sFindText & "%' or MONITOR_SN2 like '%" & sFindText & "%'or AS_NAME like '%" & sFindText & "%' or AS_PROIZV like '%" & sFindText & "%' or IBP_NAME like '%" & sFindText & "%' or FILTR_NAME like '%" & sFindText & "%' or PRINTER_NAME_1 like '%" & sFindText & "%' or PRINTER_SN_1 like '%" & sFindText & "%' or PORT_1 like '%" & sFindText & "%' or PRINTER_PROIZV_1 like '%" & sFindText & "%' or PRINTER_NAME_2 like '%" & sFindText & "%' or PORT_2 like '%" & sFindText & "%' or PRINTER_SN_2 like '%" & sFindText & "%' or PRINTER_PROIZV_2 like '%" & sFindText & "%' or PRINTER_NAME_3 like '%" & sFindText & "%' or PORT_3 like '%" & sFindText & "%' or PRINTER_SN_3 like '%" & sFindText & "%' or PRINTER_PROIZV_3 like '%" & sFindText & "%' or PORT_4 like '%" & sFindText & "%' or PRINTER_NAME_4 like '%" & sFindText & "%' or PRINTER_SN_4 like '%" & sFindText & "%' or PRINTER_PROIZV_4 like '%" & sFindText & "%' or SCANER_NAME like '%" & sFindText & "%' or NET_NAME like '%" & sFindText & "%' or PSEVDONIM like '%" & sFindText & "%' or MESTO like '%" & sFindText & "%' or kabn like '%" & sFindText & "%' or FILIAL like '%" & sFindText & "%' or TELEPHONE like '%" & sFindText & "%' or INV_NO_SYSTEM like '%" & sFindText & "%' or INV_NO_PRINTER like '%" & sFindText & "%' or INV_NO_MODEM like '%" & sFindText & "%' or INV_NO_SCANER like '%" & sFindText & "%' or INV_NO_MONITOR like '%" & sFindText & "%' or INV_NO_IBP like '%" & sFindText & "%' or OTvetstvennyj like '%" & sFindText & "%' or Ser_N_SIS like '%" & sFindText & "%' or BLOCK like '%" & sFindText & "%' or SN_BLOCK like '%" & sFindText & "%' or CREADER_NAME like '%" & sFindText & "%' or CASE_NAME like '%" & sFindText & "%' or CASE_SN like '%" & sFindText & "%' or CASE_PROIZV like '%" & sFindText & "%' or SYS_PR like '%" & sFindText & "%'order by PSEVDONIM, filial"
+
         rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         If Trim(sGroupName) = LNGIniFile.GetString("frmSearch", "MSG13", "Все") Then
@@ -174,7 +135,7 @@ Public Class frmSearch
 
                 FirstColumn = True
 
-                For lngCounter = 0 To 184
+                For lngCounter = 0 To rs.Fields.Count - 2
 
                     If FirstColumn Then
 
@@ -194,10 +155,7 @@ Public Class frmSearch
 
                 lstSearch.Items.Add(.Fields("id").Value) 'col no. 1
 
-                If .Fields("Tiptehn").Value <> "PC" Then
-
-                    'LNGIniFile.GetString("frmSearch", "MSG1", "")
-                    Select Case .Fields("Tiptehn").Value
+             Select Case .Fields("Tiptehn").Value
 
                         Case "MFU"
                             lstSearch.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmSearch", "MSG2", "МФУ"))
@@ -286,25 +244,23 @@ Public Class frmSearch
                             lstSearch.Items(CInt(intCount)).SubItems.Add("")
 
 
+                        Case "PC"
+
+                            lstSearch.Items(CInt(intCount)).SubItems.Add(.Fields("CPU1").Value)
+                            lstSearch.Items(CInt(intCount)).SubItems.Add(
+                                IIf(.Fields("MB").Value <> "", "MB: " & .Fields("MB").Value, "") &
+                                IIf(.Fields("Mb_Chip").Value <> "", " Чипсет: " & .Fields("Mb_Chip").Value, "") &
+                                IIf(.Fields("RAM_1").Value <> "", " Память: " & .Fields("RAM_1").Value, "") &
+                                IIf(.Fields("HDD_Name_1").Value <> "", " Жесткий диск: " & .Fields("HDD_Name_1").Value, ""))
+
+                            lstSearch.Items(CInt(intCount)).SubItems.Add(.Fields("SVGA_NAME").Value)
+                            lstSearch.Items(CInt(intCount)).SubItems.Add(.Fields("SOUND_NAME").Value)
+                            lstSearch.Items(CInt(intCount)).SubItems.Add(.Fields("CD_NAME").Value)
+
+
                     End Select
 
-
-                Else
-
-                    lstSearch.Items(CInt(intCount)).SubItems.Add(.Fields("CPU1").Value)
-                    lstSearch.Items(CInt(intCount)).SubItems.Add(
-                        IIf(.Fields("MB").Value <> "", "MB: " & .Fields("MB").Value, "") &
-                        IIf(.Fields("Mb_Chip").Value <> "", " Чипсет: " & .Fields("Mb_Chip").Value, "") &
-                        IIf(.Fields("RAM_1").Value <> "", " Память: " & .Fields("RAM_1").Value, "") &
-                        IIf(.Fields("HDD_Name_1").Value <> "", " Жесткий диск: " & .Fields("HDD_Name_1").Value, ""))
-
-                    lstSearch.Items(CInt(intCount)).SubItems.Add(.Fields("SVGA_NAME").Value)
-                    lstSearch.Items(CInt(intCount)).SubItems.Add(.Fields("SOUND_NAME").Value)
-                    lstSearch.Items(CInt(intCount)).SubItems.Add(.Fields("CD_NAME").Value)
-
-
-                End If
-
+                
                 lstSearch.Items(CInt(intCount)).SubItems.Add(.Fields("mesto").Value & "/" & .Fields("filial").Value)
 
                 SfilS = .Fields("filial").Value
@@ -378,7 +334,9 @@ Public Class frmSearch
             b = 0
         End If
 
-   Me.BeginInvoke(New MethodInvoker(AddressOf RT_SEARCHE))
+        Me.BeginInvoke(New MethodInvoker(AddressOf RT_SEARCHE))
+
+        ' Search(lstGroups.Text, txtSearch.Text, a, b)
 
     End Sub
 
@@ -453,12 +411,15 @@ Public Class frmSearch
                 'Dim newThread4 As New Thread(AddressOf RT_SEARCHE)
                 'newThread4.Start()
 
-                _backgroundWorker1 = New BackgroundWorker()
-                _backgroundWorker1.WorkerSupportsCancellation = False
-                _backgroundWorker1.WorkerReportsProgress = False
+                '_backgroundWorker1 = New BackgroundWorker()
+                '_backgroundWorker1.WorkerSupportsCancellation = False
+                '_backgroundWorker1.WorkerReportsProgress = False
 
-                AddHandler Me._backgroundWorker1.DoWork, New DoWorkEventHandler(AddressOf RT_SEARCHE)
-                _backgroundWorker1.RunWorkerAsync()
+                'AddHandler Me._backgroundWorker1.DoWork, New DoWorkEventHandler(AddressOf RT_SEARCHE)
+                '_backgroundWorker1.RunWorkerAsync()
+
+
+                Me.BeginInvoke(New MethodInvoker(AddressOf RT_SEARCHE))
 
         End Select
     End Sub
