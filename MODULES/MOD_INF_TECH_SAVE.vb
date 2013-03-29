@@ -214,7 +214,7 @@
         If frmComputers.pDRAG = True Then
 
         Else
-            If frmComputers.EDT = True Then  Else RefFilTree(frmComputers.lstGroups)
+            If TREE_UPDATE = 0 Then RefFilTree(frmComputers.lstGroups)
         End If
 
 
@@ -472,7 +472,7 @@ sAR:
         If frmComputers.pDRAG = True Then
 
         Else
-            If frmComputers.EDT = True Then  Else RefFilTree(frmComputers.lstGroups)
+            If TREE_UPDATE = 0 Then RefFilTree(frmComputers.lstGroups)
         End If
 
 
@@ -546,7 +546,7 @@ Err_:
 
                     If frmComputers.pDRAG = True Then
 
-                        If frmComputers.EDT = True Then  Else RefFilTree(frmComputers.lstGroups)
+                        If TREE_UPDATE = 0 Then RefFilTree(frmComputers.lstGroups)
 
                     End If
 
@@ -970,7 +970,7 @@ sAR:
 
             Else
 
-                If frmComputers.EDT = True Then  Else RefFilTree(frmComputers.lstGroups)
+                If TREE_UPDATE = 0 Then RefFilTree(frmComputers.lstGroups)
 
 
             End If
@@ -1338,7 +1338,7 @@ sAR:
         If frmComputers.pDRAG = True Then
 
         Else
-            If frmComputers.EDT = True Then  Else RefFilTree(frmComputers.lstGroups)
+            If TREE_UPDATE = 0 Then RefFilTree(frmComputers.lstGroups)
         End If
 
         Exit Sub
@@ -1529,7 +1529,7 @@ sAR:
         If frmComputers.pDRAG = True Then
 
         Else
-            If frmComputers.EDT = True Then  Else RefFilTree(frmComputers.lstGroups)
+            If TREE_UPDATE = 0 Then RefFilTree(frmComputers.lstGroups)
         End If
     End Sub
 
@@ -2956,7 +2956,7 @@ Error_:
 
         If MRZD = True Then Exit Sub
 
-        If frmComputers.EDT = True Then  Else RefFilTree(frmComputers.lstGroups)
+        If TREE_UPDATE = 0 Then RefFilTree(frmComputers.lstGroups)
     End Sub
 
 
@@ -3924,7 +3924,7 @@ Error_:
         If MRZD = True Then Exit Sub
 
         If sADD = True Then
-            If frmComputers.EDT = True Then  Else RefFilTree(frmComputers.lstGroups)
+            If TREE_UPDATE = 0 Then RefFilTree(frmComputers.lstGroups)
 
         End If
 
@@ -3937,7 +3937,7 @@ err_:
         If MRZD = True Then Exit Sub
 
         If sADD = True Then
-            If frmComputers.EDT = True Then  Else RefFilTree(frmComputers.lstGroups)
+            If TREE_UPDATE = 0 Then RefFilTree(frmComputers.lstGroups)
 
         End If
     End Sub

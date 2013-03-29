@@ -123,6 +123,12 @@ Public Class frmComputers
 
         End Select
 
+        'Справочники
+        Me.BeginInvoke(New MethodInvoker(AddressOf LoadSPR))
+
+        System.Windows.Forms.Application.DoEvents()
+
+
         'Загружаем иконки
         Me.BeginInvoke(New MethodInvoker(AddressOf Load_ICONS))
 
@@ -132,9 +138,7 @@ Public Class frmComputers
         'Подгружаем язык
         Me.BeginInvoke(New MethodInvoker(AddressOf frmComputers_Lang))
 
-        'Справочники
 
-        Me.BeginInvoke(New MethodInvoker(AddressOf LoadSPR))
 
 
         uname = objIniFile.GetString("General", "RAZDEL", "0")
@@ -196,7 +200,6 @@ Public Class frmComputers
 
         KCKey = objIniFile.GetString("general", "DK", 0)
         DCKey = objIniFile.GetString("general", "Default", 0)
-
 
         If Len(DCKey) <> 0 And DCKey <> "0" Then sSTAB5.Visible = True
 
@@ -471,44 +474,31 @@ Public Class frmComputers
     End Sub
 
     Private Sub frmComputers_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
+        On Error GoTo err_
+        Me.Cursor = Cursors.WaitCursor
 
-        ' Me.BeginInvoke(New MethodInvoker(AddressOf PRELOAD_FORM))
+        'Подгружаем конки, язык, справочники...
+        Me.BeginInvoke(New MethodInvoker(AddressOf PRELOAD_FORM))
 
-        Call PRELOAD_FORM()
-
-        System.Windows.Forms.Application.DoEvents()
-
+        'Подсказки
         Me.BeginInvoke(New MethodInvoker(AddressOf Tool_Tips_Forms))
-
-
-        If DATAB = False Then Exit Sub
 
         'Статистика
         Me.BeginInvoke(New MethodInvoker(AddressOf STAT_INF))
 
-        Me.WindowState = FormWindowState.Maximized
-
-        Me.Cursor = Cursors.WaitCursor
-
         System.Windows.Forms.Application.DoEvents()
+
+        If DATAB = False Then Exit Sub
+
+        Me.WindowState = FormWindowState.Maximized
 
         Me.BeginInvoke(New MethodInvoker(AddressOf R_T_LOAD))
 
-
-        ' Call R_T_LOAD()
+        System.Windows.Forms.Application.DoEvents()
 
         Me.Cursor = Cursors.Default
 
-        System.Windows.Forms.Application.DoEvents()
-
         If OneStart = 0 Then OneStart = 1
-
-
-        On Error GoTo err_
-
-
-        'Добавить в конвертор...
-
 
         Exit Sub
 err_:
@@ -520,6 +510,7 @@ err_:
     Private Sub frmComputers_Resize(ByVal eventSender As Object, ByVal eventArgs As EventArgs) Handles MyBase.Resize
 
         Call RESIZER()
+
     End Sub
 
     Private Sub spCont_Resize(ByVal sender As Object, ByVal e As EventArgs) Handles spCont.Resize
@@ -703,12 +694,10 @@ err_:
 
         pDRAG = False
 
-        COLOR_Form_For_Computer(Me)
+        Call COLOR_Form_For_Computer(Me)
 
         ' Call LOAD_LIST()
         ' Call selectTECMesto()
-
-        If OneStart = 0 Then OneStart = 1
 
         Me.BeginInvoke(New MethodInvoker(AddressOf LOAD_LIST))
         Me.BeginInvoke(New MethodInvoker(AddressOf selectTECMesto))

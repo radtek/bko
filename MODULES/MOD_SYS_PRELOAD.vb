@@ -14,7 +14,9 @@ Module MOD_SYS_PRELOAD
     Public FontSt As FontStyle
     Public FontD As GraphicsUnit
     Public FontI As Integer
-    Public RAZDEL As String
+
+    Public RAZDEL As Integer
+    Public TREE_UPDATE As Integer = 0
 
     Public KCKey As Integer
     Public DCKey As String
@@ -306,6 +308,9 @@ Module MOD_SYS_PRELOAD
 
         FontI = objIniFile.GetString("General", "chkFonts", "0")
 
+        TREE_UPDATE = objIniFile.GetString("General", "TREE_UPDATE", "0")
+
+
         Select Case sICONS
 
             Case "32*32"
@@ -384,6 +389,8 @@ Module MOD_SYS_PRELOAD
 
     Public Sub ClearForm(ByVal ControlContainer As Object)
 
+        If frmComputers.OneStart = 1 Then frmComputers.OneStart = 0
+
 
         Dim A1 As String
         A1 = frmComputers.treebranche.Text
@@ -432,22 +439,13 @@ Module MOD_SYS_PRELOAD
         'End If
 
 
-        'frmComputers.Label94.Text = "---"
-        'frmComputers.Label95.Text = "---"
-        'frmComputers.Label96.Text = "---"
-        'frmComputers.Label97.Text = "---"
-        'frmComputers.Label110.Text = "---"
-        'frmComputers.Label111.Text = "---"
-        'frmComputers.Label112.Text = "---"
-        'frmComputers.Label113.Text = "---"
-        'frmComputers.Label102.Text = "---"
-        'frmComputers.Label103.Text = "---"
-        'frmComputers.Label104.Text = "---"
-        'frmComputers.Label105.Text = "---"
-        'frmComputers.txtOTHSN.Text = "---"
-        'frmComputers.txtOTHMAC.Text = "---"
-
         frmComputers.treebranche.Text = A1
+
+
+        System.Windows.Forms.Application.DoEvents()
+
+        If frmComputers.OneStart = 0 Then frmComputers.OneStart = 1
+
     End Sub
 
     Public Sub COLOR_Form_For_Computer(ByVal ControlContainer As Object)

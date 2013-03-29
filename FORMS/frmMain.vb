@@ -2044,8 +2044,13 @@ ADD:
 
         End If
 
-        'Call COLOR_Form_For_Computer()
-        Call frmComputers.STAT_INF()
+
+        frmComputers.Invoke(New MethodInvoker(AddressOf frmComputers.STAT_INF))
+
+        System.Windows.Forms.Application.DoEvents()
+
+        'Me.BeginInvoke(New MethodInvoker(AddressOf frmComputers.R_T_LOAD))
+
 
         Me.Cursor = Cursors.Default
 

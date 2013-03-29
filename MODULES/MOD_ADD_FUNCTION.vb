@@ -1,11 +1,21 @@
 ﻿Module MOD_ADD_FUNCTION
     Public Function AddPr(ByVal sGroupName As String) As Long
         On Error GoTo ERR1
+
+        Dim uname, sMonth As String
+
+        sMonth = Date.Today.Month
+        If Len(sMonth) = 1 Then sMonth = "0" & sMonth
+
+        uname = Date.Today.Day & "." & sMonth & "." & Date.Today.Year
+
         If Len(sGroupName) = 0 Then Exit Function
         If sGroupName = "<N/A>" Then Exit Function
-
+        If sGroupName = uname Then Exit Function
 
         If Len(sGroupName) = 0 Or sGroupName = " " Or Len(sGroupName) < 3 Then Exit Function
+
+
 
         Dim rs As Recordset
         rs = New Recordset
@@ -27,8 +37,8 @@
         AddPr = 1
 
         Exit Function
-        ERR1:
-        AddPr = - 1
+ERR1:
+        AddPr = -1
     End Function
 
     Public Function AddOnePar(ByVal sGroupName As String, ByVal sColumns As String, ByVal sTABLE As String,
@@ -37,7 +47,7 @@
         On Error GoTo ERR1
         If Len(sGroupName) = 0 Then Exit Function
 
-        Dim rs As Recordset
+       Dim rs As Recordset
         rs = New Recordset
         rs.Open("SELECT * FROM " & sTABLE, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 

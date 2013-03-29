@@ -384,6 +384,7 @@ Public Class frmLogin
 
                     If sRelogin = True Then
 
+                        frmMain.NewToolStripMenuItem.Enabled = True
                         frmMain.УчётToolStripMenuItem.Enabled = True
                         frmMain.СправочникиToolStripMenuItem.Enabled = True
                         frmMain.ОтчётыToolStripMenuItem.Enabled = True
@@ -392,6 +393,7 @@ Public Class frmLogin
                         frmMain.WindowsMenu.Enabled = True
                         frmMain.ToolStripButton1.Enabled = True
                         frmMain.NewToolStripButton.Enabled = True
+
 
                         sRelogin = False
                         'Какой модуль запускать

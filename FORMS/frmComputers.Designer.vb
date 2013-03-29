@@ -969,11 +969,11 @@ Me.spCont.Panel1.Controls.Add(Me.TableLayoutPanel65)
 '
 'spCont.Panel2
 '
-Me.spCont.Panel2.Controls.Add(Me.sSTAB4)
 Me.spCont.Panel2.Controls.Add(Me.sSTAB3)
 Me.spCont.Panel2.Controls.Add(Me.sSTAB1)
 Me.spCont.Panel2.Controls.Add(Me.sSTAB5)
 Me.spCont.Panel2.Controls.Add(Me.sSTAB2)
+Me.spCont.Panel2.Controls.Add(Me.sSTAB4)
 Me.spCont.Size = New System.Drawing.Size(992, 646)
 Me.spCont.SplitterDistance = 298
 Me.spCont.TabIndex = 0
@@ -2593,6 +2593,7 @@ Me.chkSNMP.Size = New System.Drawing.Size(122, 17)
 Me.chkSNMP.TabIndex = 77
 Me.chkSNMP.Text = "SNMP"
 Me.chkSNMP.UseVisualStyleBackColor = true
+Me.chkSNMP.Visible = false
 '
 'Label3
 '

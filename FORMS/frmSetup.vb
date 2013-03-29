@@ -427,6 +427,24 @@
 
         End Select
 
+
+        uname = objIniFile.GetString("General", "TREE_UPDATE", "0")
+
+        Select Case uname
+
+            Case "1"
+
+                RadioButton10.Checked = False
+                RadioButton11.Checked = True
+
+            Case "0"
+
+                RadioButton11.Checked = False
+                RadioButton10.Checked = True
+
+        End Select
+
+
         sText = objIniFile.GetString("general", "Tree_S", 0)
 
         Select Case sText
@@ -1423,12 +1441,6 @@ err_:
         End Select
     End Sub
 
-    Private Sub Button4_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Button4.Click
-        Me.Cursor = Cursors.WaitCursor
-        add_kabn_if_nothing()
-        Me.Cursor = Cursors.Default
-    End Sub
-
     Private Sub TableLayoutPanel4_Paint(ByVal sender As Object, ByVal e As PaintEventArgs) _
         Handles TableLayoutPanel4.Paint
     End Sub
@@ -1462,5 +1474,26 @@ err_:
     End Sub
 
     Private Sub chkUpdate_CheckedChanged(sender As Object, e As EventArgs) Handles chkUpdate.CheckedChanged
+    End Sub
+
+    Private Sub TableLayoutPanel1_Paint(sender As System.Object, e As System.Windows.Forms.PaintEventArgs) Handles TableLayoutPanel1.Paint
+
+    End Sub
+
+    Private Sub RadioButton10_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles RadioButton10.CheckedChanged
+
+        If RadioButton10.Checked = True Then TREE_UPDATE = 0
+
+        Dim objIniFile As New IniFile(PrPath & "base.ini")
+        objIniFile.WriteString("general", "TREE_UPDATE", TREE_UPDATE)
+
+
+    End Sub
+
+    Private Sub RadioButton11_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles RadioButton11.CheckedChanged
+        If RadioButton11.Checked = True Then TREE_UPDATE = 1
+
+        Dim objIniFile As New IniFile(PrPath & "base.ini")
+        objIniFile.WriteString("general", "TREE_UPDATE", TREE_UPDATE)
     End Sub
 End Class

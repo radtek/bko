@@ -442,7 +442,7 @@ Module MOD_REF_TREE
         'lstgroups.visible = True
 
 
-        If frmComputers.OneStart = 0 Then frmComputers.OneStart = 1
+        '  If frmComputers.OneStart = 0 Then frmComputers.OneStart = 1
 
 exitsub:
 
@@ -453,7 +453,7 @@ exitsub:
         'MsgBox Err.Description
 
 
-        If frmComputers.OneStart = 0 Then frmComputers.OneStart = 1
+        ' If frmComputers.OneStart = 0 Then frmComputers.OneStart = 1
 
         '    frmComputers.OneStart = 1
         'End If
