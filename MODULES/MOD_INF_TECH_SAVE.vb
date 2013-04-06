@@ -214,7 +214,7 @@
         If frmComputers.pDRAG = True Then
 
         Else
-            If TREE_UPDATE = 0 Then RefFilTree(frmComputers.lstGroups)
+            If TREE_UPDATE = 0 Then RefFilTree(frmComputers.lstGroups) Else frmComputers.LOAD_LIST()
         End If
 
 
@@ -343,17 +343,20 @@ Err_:
                     AddOnePar(frmComputers.cmbOTH.Text, "NAME", "spr_other", frmComputers.cmbOTH)
                 End If
 
+            Case Else
+
+                If Not RSExists("OTHD", "name", Trim(frmComputers.cmbOTH.Text)) Then
+                    AddTreePar(frmComputers.cmbOTH.Text, frmComputers.cmbOTHConnect.Text, frmComputers.PROiZV39.Text,
+                               "SPR_OTH_DEV", frmComputers.cmbOTH)
+                End If
+
         End Select
 
         If Not RSExists("otv", "name", Trim(frmComputers.cmbOTHotv.Text)) Then
             AddOnePar(frmComputers.cmbOTHotv.Text, "NAME", "SPR_OTV", frmComputers.cmbOTHotv)
         End If
 
-        If Not RSExists("OTHD", "name", Trim(frmComputers.cmbOTH.Text)) Then
-            AddTreePar(frmComputers.cmbOTH.Text, frmComputers.cmbOTHConnect.Text, frmComputers.PROiZV39.Text,
-                       "SPR_OTH_DEV", frmComputers.cmbOTH)
-        End If
-
+        
         Dim rs As Recordset
         Dim unaPCL As String
         If Len(frmComputers.cmbOTHPCL.Text) <> 0 Then
@@ -472,7 +475,7 @@ sAR:
         If frmComputers.pDRAG = True Then
 
         Else
-            If TREE_UPDATE = 0 Then RefFilTree(frmComputers.lstGroups)
+            If TREE_UPDATE = 0 Then RefFilTree(frmComputers.lstGroups) Else frmComputers.LOAD_LIST()
         End If
 
 
@@ -546,7 +549,7 @@ Err_:
 
                     If frmComputers.pDRAG = True Then
 
-                        If TREE_UPDATE = 0 Then RefFilTree(frmComputers.lstGroups)
+                        If TREE_UPDATE = 0 Then RefFilTree(frmComputers.lstGroups) Else frmComputers.LOAD_LIST()
 
                     End If
 
@@ -970,7 +973,7 @@ sAR:
 
             Else
 
-                If TREE_UPDATE = 0 Then RefFilTree(frmComputers.lstGroups)
+                If TREE_UPDATE = 0 Then RefFilTree(frmComputers.lstGroups) Else frmComputers.LOAD_LIST()
 
 
             End If
@@ -1338,7 +1341,7 @@ sAR:
         If frmComputers.pDRAG = True Then
 
         Else
-            If TREE_UPDATE = 0 Then RefFilTree(frmComputers.lstGroups)
+            If TREE_UPDATE = 0 Then RefFilTree(frmComputers.lstGroups) Else frmComputers.LOAD_LIST()
         End If
 
         Exit Sub
@@ -1529,7 +1532,7 @@ sAR:
         If frmComputers.pDRAG = True Then
 
         Else
-            If TREE_UPDATE = 0 Then RefFilTree(frmComputers.lstGroups)
+            If TREE_UPDATE = 0 Then RefFilTree(frmComputers.lstGroups) Else frmComputers.LOAD_LIST()
         End If
     End Sub
 
@@ -2956,7 +2959,7 @@ Error_:
 
         If MRZD = True Then Exit Sub
 
-        If TREE_UPDATE = 0 Then RefFilTree(frmComputers.lstGroups)
+        If TREE_UPDATE = 0 Then RefFilTree(frmComputers.lstGroups) Else frmComputers.LOAD_LIST()
     End Sub
 
 
@@ -3924,7 +3927,7 @@ Error_:
         If MRZD = True Then Exit Sub
 
         If sADD = True Then
-            If TREE_UPDATE = 0 Then RefFilTree(frmComputers.lstGroups)
+            If TREE_UPDATE = 0 Then RefFilTree(frmComputers.lstGroups) Else frmComputers.LOAD_LIST()
 
         End If
 
@@ -3937,7 +3940,7 @@ err_:
         If MRZD = True Then Exit Sub
 
         If sADD = True Then
-            If TREE_UPDATE = 0 Then RefFilTree(frmComputers.lstGroups)
+            If TREE_UPDATE = 0 Then RefFilTree(frmComputers.lstGroups) Else frmComputers.LOAD_LIST()
 
         End If
     End Sub

@@ -47,9 +47,15 @@ Module MOD_LOAD_WMI
                 frmComputers.cmbDepartment.Text = sDepartment
                 frmComputers.cmbOffice.Text = sOffice
 
-                Call LOAD_WMI_3()
+                If My.Computer.Network.Ping(strComputer) Then
 
-                Call frmMain.SaveInfTeh()
+                    Call LOAD_WMI_3()
+
+                    Call frmMain.SaveInfTeh()
+
+                Else
+
+                End If
 
             Next
 
@@ -62,8 +68,13 @@ Module MOD_LOAD_WMI
             Authority = frm_wmi.wmiDomen
             connection.Authority = "ntlmdomain:" & Authority
 
+            If My.Computer.Network.Ping(strComputer) Then
 
-            Call LOAD_WMI_3()
+                Call LOAD_WMI_3()
+
+            Else
+
+            End If
 
             frmComputers.cmbBranch.Text = sBranch
             frmComputers.cmbDepartment.Text = sDepartment

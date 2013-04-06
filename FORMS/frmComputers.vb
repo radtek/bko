@@ -707,10 +707,12 @@ err_:
         Me.Cursor = Cursors.Default
     End Sub
 
-    Private Sub LOAD_LIST()
+    Public Sub LOAD_LIST()
         Dim langfile As New IniFile(sLANGPATH)
 
         Call selectTECMesto()
+
+        chkSNMP.Checked = False
 
         Me.Cursor = Cursors.WaitCursor
 
@@ -6906,6 +6908,9 @@ err_1:
 
         txtSearch.Text = ""
 
+        gbTree.ForeColor = gbSNMP.ForeColor
+
+
         Me.Cursor = Cursors.WaitCursor
 
 
@@ -7175,6 +7180,10 @@ err_1:
     End Sub
 
     Private Sub txtSearch_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtSearch.TextChanged
+
+    End Sub
+
+    Private Sub ToolStripButton1_Click(sender As System.Object, e As System.EventArgs)
 
     End Sub
 End Class

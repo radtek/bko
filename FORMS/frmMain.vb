@@ -414,7 +414,7 @@ Public Class frmMain
 
         '  Exit Sub
 
-        Call SendMail()
+        'Call SendMail()
 
         Exit Sub
 err_:
@@ -424,7 +424,7 @@ err_:
 
     End Sub
 
-    Public Sub DBButtonsClick(ByVal sender As [Object], ByVal e As EventArgs)
+    Public Sub DbButtonsClick(ByVal sender As [Object], ByVal e As EventArgs)
 
         Dim senderButton As ToolStripButton = CType(sender, ToolStripButton)
 
@@ -441,38 +441,38 @@ err_:
 
         Exit Sub
 
-        LoadDatabase()
+        'LoadDatabase()
 
-        frmComputers.STAT_INF()
-        Call SHED_CHECK()
-        Call REM_CHECK()
-        Call LoadSPR()
-
-
-        Dim rs As ADODB.Recordset
-
-        rs = New ADODB.Recordset
-
-        rs.Open("SELECT * FROM CONFIGURE", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-
-        With rs
-            If Not IsDBNull(.Fields("Name_Prog").Value) Then ProGramName = .Fields("Name_Prog").Value
-        End With
-
-        rs.Close()
-        rs = Nothing
+        'frmComputers.STAT_INF()
+        'Call SHED_CHECK()
+        'Call REM_CHECK()
+        'Call LoadSPR()
 
 
-        Dim LNGIniFile As New IniFile(sLANGPATH)
+        'Dim rs As ADODB.Recordset
 
-        If Len(ProGramName) = 0 Or ProGramName = Nothing Then ProGramName = LNGIniFile.GetString("frmSetup", "MSG7", "БКО") '"БКО"
+        'rs = New ADODB.Recordset
 
-        Me.Text = ProGramName & " " & My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor & "." & My.Application.Info.Version.Build & "." & My.Application.Info.Version.Revision
+        'rs.Open("SELECT * FROM CONFIGURE", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+        'With rs
+        '    If Not IsDBNull(.Fields("Name_Prog").Value) Then ProGramName = .Fields("Name_Prog").Value
+        'End With
+
+        'rs.Close()
+        'rs = Nothing
 
 
-        RefFilTree(frmComputers.lstGroups)
+        'Dim LNGIniFile As New IniFile(sLANGPATH)
 
-        Me.Cursor = Cursors.Default
+        'If Len(ProGramName) = 0 Or ProGramName = Nothing Then ProGramName = LNGIniFile.GetString("frmSetup", "MSG7", "БКО") '"БКО"
+
+        'Me.Text = ProGramName & " " & My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor & "." & My.Application.Info.Version.Build & "." & My.Application.Info.Version.Revision
+
+
+        'RefFilTree(frmComputers.lstGroups)
+
+        'Me.Cursor = Cursors.Default
 
 
 

@@ -1019,11 +1019,13 @@
             uname = everIniFile.GetString("Установленные программы", A, "")
             uname1 = everIniFile.GetString("Установленные программы", uname & "|Publisher", "")
             uname2 = everIniFile.GetString("Установленные программы", uname & "|Дата", "")
-            
-            'If Not RSExists("PROYZV", "PROiZV", uname1) Then
-            '    AddPr(uname1)
-            'End If
-            
+
+
+            If Not RSExists("PROYZV", "PROiZV", uname1) Then
+                AddPr(uname1)
+            End If
+
+
             If uname2 = "<N/A>" Then uname2 = Date.Today
             If Len(uname) = 0 Then uname2 = Date.Today
 
@@ -2153,9 +2155,9 @@
             uname1 = everIniFile.GetString("Установленные программы", uname & "|Publisher", "")
             uname2 = everIniFile.GetString("Установленные программы", uname & "|Дата", "")
 
-            'If Not RSExists("PROYZV", "PROiZV", uname1) Then
-            '    AddPr(uname1)
-            'End If
+            If Not RSExists("PROYZV", "PROiZV", uname1) Then
+                AddPr(uname1)
+            End If
 
             If Len(uname) = 0 Then
 

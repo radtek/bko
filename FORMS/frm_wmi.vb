@@ -42,10 +42,12 @@
         wmiDomen = txtDomen.Text
 
 
-        Call LOAD_WMI2()
-        Me.Close()
 
-        Exit Sub
-        err_:
+       
+            Call LOAD_WMI2()
+            Me.Close()
+
+            Exit Sub
+err_:
     End Sub
 End Class
