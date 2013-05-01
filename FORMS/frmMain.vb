@@ -485,7 +485,7 @@ err_:
         Dim senderButton As ToolStripButton = CType(sender, ToolStripButton)
         'Me.ForeColor = senderButton.ForeColor
 
-        Call Clear_Form_For_Computer()
+        Call ClearForm(frmComputers)
 
         frmComputers.cmbOTH.Items.Clear()
 
@@ -926,7 +926,7 @@ err_:
     End Sub
 
     Private Sub BugTrackerToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BugTrackerToolStripMenuItem.Click
-        System.Diagnostics.Process.Start("http://code.google.com/p/bko/issued/list")
+        System.Diagnostics.Process.Start("http://code.google.com/p/bko/issues/list")
     End Sub
 
     Private Sub MailToAuthors_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MailToAuthors.Click
@@ -1115,7 +1115,7 @@ err_:
     End Sub
 
     Private Sub МойБланкToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles МойБланкToolStripMenuItem.Click
-        
+
         Dim sTMP As String
         Dim ePatch As String
 
@@ -1142,7 +1142,7 @@ err_:
 
         End If
 
-         Select sOfficePACK
+        Select Case sOfficePACK
 
             Case "OpenOffice.org"
 
@@ -1249,7 +1249,7 @@ err_:
         frmComputers.sSTAB4.Visible = False
         frmComputers.sSTAB5.Visible = False
         TipTehn = "PHOTO"
-        Call Clear_Form_For_Computer()
+        Call ClearForm(frmComputers)
 
         frmComputers.EDT = False
 
@@ -1282,7 +1282,7 @@ err_:
         frmComputers.sSTAB4.Visible = False
         frmComputers.sSTAB5.Visible = False
         TipTehn = "FAX"
-        Call Clear_Form_For_Computer()
+        Call ClearForm(frmComputers)
 
         frmComputers.EDT = False
 
@@ -1301,7 +1301,7 @@ err_:
         frmComputers.txtOTHSN.Left = "249"
         frmComputers.txtOTHSN.Width = "214"
 
-        Call Clear_Form_For_Computer()
+        Call ClearForm(frmComputers)
 
         FillComboNET(frmComputers.cmbOTH, "name", "spr_phone", "", False, True)
         frmComputers.lblTipOther.Visible = False
@@ -1335,7 +1335,7 @@ err_:
         frmComputers.txtOTHSN.Left = "249"
         frmComputers.txtOTHSN.Width = "214"
 
-        Call Clear_Form_For_Computer()
+        Call ClearForm(frmComputers)
 
         FillComboNET(frmComputers.cmbOTH, "name", "spr_zip", "", False, True)
         frmComputers.lblTipOther.Visible = False
@@ -1368,7 +1368,7 @@ err_:
         frmComputers.txtOTHSN.Left = "249"
         frmComputers.txtOTHSN.Width = "214"
 
-        Call Clear_Form_For_Computer()
+        Call ClearForm(frmComputers)
 
         FillComboNET(frmComputers.cmbOTH, "name", "SPR_SCANER", "", False, True)
         frmComputers.lblTipOther.Visible = False
@@ -1400,7 +1400,7 @@ err_:
 
     Private Sub ДругоеОборудованиеToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ДругоеОборудованиеToolStripMenuItem.Click
 
-        Call Clear_Form_For_Computer()
+        Call ClearForm(frmComputers)
 
         frmComputers.cmbOTH.Items.Clear()
 
@@ -1436,7 +1436,7 @@ err_:
     End Sub
 
     Private Sub МониторToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles МониторToolStripMenuItem.Click
-        Call Clear_Form_For_Computer()
+        Call ClearForm(frmComputers)
 
         FillComboNET(frmComputers.cmbOTH, "name", "SPR_MONITOR", "", False, True)
         frmComputers.lblTipOther.Visible = False
@@ -1504,7 +1504,7 @@ err_:
 
         End If
         frmComputers.selectTECMesto()
-        Call Clear_Form_For_Computer()
+        Call ClearForm(frmComputers)
         frmComputers.EDT = False
         TipTehn = "PC"
 
@@ -1531,7 +1531,7 @@ err_:
         Me.Cursor = Cursors.WaitCursor
 
         frmComputers.selectTECMesto()
-        Call Clear_Form_For_Computer()
+        Call ClearForm(frmComputers)
         frmComputers.EDT = False
         TipTehn = "PC"
 
@@ -1567,7 +1567,7 @@ err_:
 
         End If
         frmComputers.selectTECMesto()
-        Call Clear_Form_For_Computer()
+        Call ClearForm(frmComputers)
         frmComputers.EDT = False
         TipTehn = "PC"
 
@@ -1595,7 +1595,7 @@ err_:
         frmComputers.sSTAB4.Visible = True
         frmComputers.sSTAB5.Visible = False
         TipTehn = "NET"
-        Call Clear_Form_For_Computer()
+        Call ClearForm(frmComputers)
 
         frmComputers.EDT = False
 
@@ -1607,7 +1607,7 @@ err_:
     End Sub
 
     Private Sub КопирToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles КопирToolStripMenuItem.Click
-        Call Clear_Form_For_Computer()
+        Call ClearForm(frmComputers)
 
         frmComputers.EDT = False
         FillComboNET(frmComputers.cmbPRN, "name", "SPR_KOPIR", "", False, True)
@@ -1645,7 +1645,7 @@ err_:
     End Sub
 
     Private Sub ПринтерToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ПринтерToolStripMenuItem.Click
-        Call Clear_Form_For_Computer()
+        Call ClearForm(frmComputers)
 
         frmComputers.EDT = False
         FillComboNET(frmComputers.cmbPRN, "name", "SPR_PRINTER", "", False, True)
@@ -1683,7 +1683,7 @@ err_:
     End Sub
 
     Private Sub МФУToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles МФУToolStripMenuItem.Click
-        Call Clear_Form_For_Computer()
+        Call ClearForm(frmComputers)
 
         frmComputers.EDT = False
         FillComboNET(frmComputers.cmbPRN, "name", "SPR_MFU", "", False, True)
@@ -1744,7 +1744,7 @@ err_:
 
         End If
         frmComputers.selectTECMesto()
-        Call Clear_Form_For_Computer()
+        Call ClearForm(frmComputers)
         frmComputers.EDT = False
         TipTehn = "PC"
 
@@ -2071,7 +2071,7 @@ ADD:
         frmComputers.sSTAB3.Visible = False
         frmComputers.sSTAB4.Visible = False
         frmComputers.sSTAB5.Visible = False
-        Call Clear_Form_For_Computer()
+        Call ClearForm(frmComputers)
 
         Call frmComputers.selectTECMesto()
 
@@ -2108,7 +2108,7 @@ ADD:
         frmComputers.txtOTHSN.Left = "249"
         frmComputers.txtOTHSN.Width = "214"
 
-        Call Clear_Form_For_Computer()
+        Call ClearForm(frmComputers)
         FillComboNET(frmComputers.cmbOTH, "name", "SPR_FS", "", False, True)
         frmComputers.lblTipOther.Visible = False
         frmComputers.cmbOTHConnect.Visible = False
@@ -2142,7 +2142,7 @@ ADD:
         frmComputers.txtOTHSN.Left = "249"
         frmComputers.txtOTHSN.Width = "214"
 
-        Call Clear_Form_For_Computer()
+        Call ClearForm(frmComputers)
 
 
         FillComboNET(frmComputers.cmbOTH, "name", "SPR_IBP", "", False, True)
@@ -2178,7 +2178,7 @@ ADD:
         frmComputers.txtOTHSN.Left = "249"
         frmComputers.txtOTHSN.Width = "214"
 
-        Call Clear_Form_For_Computer()
+        Call ClearForm(frmComputers)
 
         FillComboNET(frmComputers.cmbOTH, "name", "SPR_ASISTEM", "", False, True)
         frmComputers.lblTipOther.Visible = False
@@ -2214,7 +2214,7 @@ ADD:
         frmComputers.txtOTHSN.Left = "249"
         frmComputers.txtOTHSN.Width = "214"
 
-        Call Clear_Form_For_Computer()
+        Call ClearForm(frmComputers)
 
         FillComboNET(frmComputers.cmbOTH, "name", "SPR_USB", "", False, True)
         frmComputers.lblTipOther.Visible = False
@@ -2250,7 +2250,7 @@ ADD:
         frmComputers.txtOTHSN.Left = "249"
         frmComputers.txtOTHSN.Width = "214"
 
-        Call Clear_Form_For_Computer()
+        Call ClearForm(frmComputers)
 
         FillComboNET(frmComputers.cmbOTH, "name", "SPR_KEYBOARD", "", False, True)
         frmComputers.lblTipOther.Visible = False
@@ -2286,7 +2286,7 @@ ADD:
         frmComputers.txtOTHSN.Left = "249"
         frmComputers.txtOTHSN.Width = "214"
 
-        Call Clear_Form_For_Computer()
+        Call ClearForm(frmComputers)
 
         FillComboNET(frmComputers.cmbOTH, "name", "SPR_MOUSE", "", False, True)
         frmComputers.lblTipOther.Visible = False
@@ -2323,7 +2323,7 @@ ADD:
         frmComputers.BeginInvoke(New MethodInvoker(AddressOf INVENT))
     End Sub
 
- 
+
 
     Private Sub РемонтыToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles РемонтыToolStripMenuItem.Click
 
@@ -2337,7 +2337,7 @@ ADD:
     End Sub
 
     Private Sub CNTToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CNTToolStripMenuItem.Click
-        Call Clear_Form_For_Computer()
+        Call ClearForm(frmComputers)
 
         frmComputers.cmbOTH.Items.Clear()
 
@@ -2527,7 +2527,7 @@ err_:
 
     End Sub
 
-    Private Sub ReloginToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ReloginToolStripMenuItem.Click
+    Private Sub ReloginToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ReloginToolStripMenuItem.Click
 
         ' Call RELOGIN()
         Me.BeginInvoke(New MethodInvoker(AddressOf RELOGIN))
@@ -2540,7 +2540,7 @@ err_:
 
         UnLoadDatabase()
 
-        ' Call Clear_Form_For_Computer()
+        ' Call ClearForm(frmComputers)
 
         frm_os3.Close()
         frm_wmi.Close()

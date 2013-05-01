@@ -93,7 +93,7 @@ Module MOD_ALTER_DB
 
             Case "MySQL"
 
-                sSQL = "ALTER TABLE Remont ADD COLUMN GARANT datetime"
+                sSQL = "ALTER TABLE 'Remont' ADD COLUMN 'GARANT' datetime"
 
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -102,7 +102,7 @@ Module MOD_ALTER_DB
 
             Case "MySQL (MyODBC 5.1)"
 
-                sSQL = "ALTER TABLE Remont ADD COLUMN GARANT datetime"
+                sSQL = "ALTER TABLE 'Remont' ADD COLUMN 'GARANT' datetime"
 
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -179,7 +179,7 @@ err_:
 
             Case "MySQL"
 
-                sSQL = "ALTER TABLE kompy ADD COLUMN SNMP_COMMUNITY varchar(50) , COLUMN SNMP tinyint(4) DEFAULT '0'"
+                sSQL = "ALTER TABLE 'kompy' ADD COLUMN 'SNMP_COMMUNITY' VARCHAR(45) AFTER 'PCL', ADD COLUMN 'SNMP' TINYINT AFTER 'SNMP_COMMUNITY';"
 
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -188,7 +188,7 @@ err_:
 
             Case "MySQL (MyODBC 5.1)"
 
-                sSQL = "ALTER TABLE kompy ADD COLUMN SNMP_COMMUNITY varchar(50) , COLUMN SNMP tinyint(4) DEFAULT '0'"
+                sSQL = "ALTER TABLE 'kompy' ADD COLUMN 'SNMP_COMMUNITY' VARCHAR(45) AFTER 'PCL', ADD COLUMN 'SNMP' TINYINT AFTER 'SNMP_COMMUNITY';"
 
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -246,7 +246,7 @@ err_:
 
             Case "MySQL"
 
-                sSQL = "CREATE TABLE TBL_DEV_OID (id int(4) NOT NULL AUTO_INCREMENT, Device varchar(50) ,Developer varchar(50) ,Model varchar(50) ,LOCATION_OID varchar(50) ,NETNAME_OID varchar(50) ,CONTACT_OID varchar(50) ,MODEL_OID varchar(50) ,SER_NUM_OID varchar(50) ,TIME_BATTERY_OID varchar(50) ,ZARIAD_BATTARY_OID varchar(50) ,SOST_BATTARY_OID varchar(50) ,ZAMENA_BATTARY_OID varchar(50) ,UPTIME_OID varchar(50) ,MAC_OID varchar(50) ,IN_TOK_OID varchar(50) ,OUT_TOK_OID varchar(50) ,OUTPUT_FREQ_OID varchar(50) ,OUTPUT_LOAD_OID varchar(50) ,OUTPUT_STATUS_OID varchar(50) ,SELFTEST_OID varchar(50) ,SELFTEST_DAY_OID varchar(50) ,TEMPERATURE_OID varchar(50) ,TEMPERATURE2_OID VARCHAR(50))"
+                sSQL = "CREATE TABLE 'TBL_DEV_OID' ('id' int NOT NULL AUTO_INCREMENT, 'Device' varchar(50) ,'Developer' varchar(50) ,'Model' varchar(50) ,'LOCATION_OID' varchar(50) ,'NETNAME_OID' varchar(50) ,'CONTACT_OID' varchar(50) ,'MODEL_OID' varchar(50) ,'SER_NUM_OID' varchar(50) ,'TIME_BATTERY_OID' varchar(50) ,'ZARIAD_BATTARY_OID' varchar(50) ,'SOST_BATTARY_OID' varchar(50) ,'ZAMENA_BATTARY_OID' varchar(50) ,'UPTIME_OID' varchar(50) ,MAC_OID varchar(50) ,'IN_TOK_OID' varchar(50) ,'OUT_TOK_OID' varchar(50) ,'OUTPUT_FREQ_OID' varchar(50) ,'OUTPUT_LOAD_OID' varchar(50) ,'OUTPUT_STATUS_OID' varchar(50) ,'SELFTEST_OID' varchar(50) ,'SELFTEST_DAY_OID' varchar(50) ,'TEMPERATURE_OID' varchar(50) ,'TEMPERATURE2_OID' VARCHAR(50))"
 
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -255,7 +255,7 @@ err_:
 
             Case "MySQL (MyODBC 5.1)"
 
-                sSQL = "CREATE TABLE TBL_DEV_OID (id int(4) NOT NULL AUTO_INCREMENT, Device varchar(50) ,Developer varchar(50) ,Model varchar(50) ,LOCATION_OID varchar(50) ,NETNAME_OID varchar(50) ,CONTACT_OID varchar(50) ,MODEL_OID varchar(50) ,SER_NUM_OID varchar(50) ,TIME_BATTERY_OID varchar(50) ,ZARIAD_BATTARY_OID varchar(50) ,SOST_BATTARY_OID varchar(50) ,ZAMENA_BATTARY_OID varchar(50) ,UPTIME_OID varchar(50) ,MAC_OID varchar(50) ,IN_TOK_OID varchar(50) ,OUT_TOK_OID varchar(50) ,OUTPUT_FREQ_OID varchar(50) ,OUTPUT_LOAD_OID varchar(50) ,OUTPUT_STATUS_OID varchar(50) ,SELFTEST_OID varchar(50) ,SELFTEST_DAY_OID varchar(50) ,TEMPERATURE_OID varchar(50) ,TEMPERATURE2_OID VARCHAR(50))"
+                sSQL = "CREATE TABLE 'TBL_DEV_OID' ('id' int NOT NULL AUTO_INCREMENT, 'Device' varchar(50) ,'Developer' varchar(50) ,'Model' varchar(50) ,'LOCATION_OID' varchar(50) ,'NETNAME_OID' varchar(50) ,'CONTACT_OID' varchar(50) ,'MODEL_OID' varchar(50) ,'SER_NUM_OID' varchar(50) ,'TIME_BATTERY_OID' varchar(50) ,'ZARIAD_BATTARY_OID' varchar(50) ,'SOST_BATTARY_OID' varchar(50) ,'ZAMENA_BATTARY_OID' varchar(50) ,'UPTIME_OID' varchar(50) ,MAC_OID varchar(50) ,'IN_TOK_OID' varchar(50) ,'OUT_TOK_OID' varchar(50) ,'OUTPUT_FREQ_OID' varchar(50) ,'OUTPUT_LOAD_OID' varchar(50) ,'OUTPUT_STATUS_OID' varchar(50) ,'SELFTEST_OID' varchar(50) ,'SELFTEST_DAY_OID' varchar(50) ,'TEMPERATURE_OID' varchar(50) ,'TEMPERATURE2_OID' VARCHAR(50))"
 
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -313,7 +313,7 @@ err_:
 
             Case "MySQL"
 
-                sSQL = "ALTER TABLE USER_COMP ADD COLUMN jabber varchar(255)"
+                sSQL = "ALTER TABLE USER_COMP ADD COLUMN 'jabber' varchar(255)"
 
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -322,7 +322,7 @@ err_:
 
             Case "MySQL (MyODBC 5.1)"
 
-                sSQL = "ALTER TABLE USER_COMP ADD COLUMN jabber varchar(255)"
+                sSQL = "ALTER TABLE USER_COMP ADD COLUMN 'jabber' varchar(255)"
 
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -400,7 +400,7 @@ err_:
 
             Case "MySQL"
 
-                sSQL = "alter table kompy ADD COLUMN RAM_5 varchar(255) , RAM_SN_5 varchar(50) , RAM_speed_5 varchar(50) , RAM_PROIZV_5 varchar(50) , RAM_6 varchar(255) , RAM_SN_6 varchar(50) , RAM_speed_6 varchar(50) , RAM_PROIZV_6 varchar(50) , RAM_7 varchar(255) , RAM_SN_7 varchar(50) , RAM_speed_7 varchar(50) , RAM_PROIZV_7 varchar(50) , RAM_8 varchar(255) , RAM_SN_8 varchar(50) , RAM_speed_8 varchar(50) , RAM_PROIZV_8 varchar(50) , HDD_Name_5 varchar(255) , HDD_OB_5 varchar(50) ,HDD_SN_5 varchar(50) ,HDD_PROIZV_5 varchar(50) , HDD_Name_6 varchar(255) , HDD_OB_6 varchar(50) ,HDD_SN_6 varchar(50) ,HDD_PROIZV_6 varchar(50) , HDD_Name_7 varchar(255) , HDD_OB_7 varchar(50) ,HDD_SN_7 varchar(50) ,HDD_PROIZV_7 varchar(50) , HDD_Name_8 varchar(255) , HDD_OB_8 varchar(50) ,HDD_SN_8 varchar(50) ,HDD_PROIZV_8 varchar(50)"
+                sSQL = "ALTER TABLE `kompy` ADD COLUMN `ram_5` text,`ram_sn_5` VARCHAR(255),`ram_speed_5` VARCHAR(255),`ram_proizv_5` VARCHAR(255),`ram_6` text,`ram_speed_6` VARCHAR(255),`ram_sn_6` VARCHAR(255),`ram_proizv_6` VARCHAR(255),`ram_7` text,`ram_speed_7` VARCHAR(255),`ram_sn_7` VARCHAR(255),`ram_proizv_7` VARCHAR(255),`ram_8` text,`ram_sn_8` VARCHAR(255),`ram_speed_8` VARCHAR(255),`ram_proizv_8` VARCHAR(255), `hdd_name_5` text,`hdd_ob_5` VARCHAR(255),`hdd_sn_5` VARCHAR(255),`hdd_proizv_5` VARCHAR(255),`hdd_name_6` text,`hdd_ob_6` VARCHAR(255),`hdd_sn_6` VARCHAR(255),`hdd_proizv_6` VARCHAR(255),`hdd_name_7` text,`hdd_ob_7` VARCHAR(255),`hdd_sn_7` VARCHAR(255),`hdd_proizv_7` VARCHAR(255),`hdd_name_8` text,`hdd_ob_8` VARCHAR(255),`hdd_sn_8` VARCHAR(255),`hdd_proizv_8` VARCHAR(255);"
 
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -409,7 +409,9 @@ err_:
 
             Case "MySQL (MyODBC 5.1)"
 
-                sSQL = "alter table kompy ADD COLUMN RAM_5 varchar(255) , RAM_SN_5 varchar(50) , RAM_speed_5 varchar(50) , RAM_PROIZV_5 varchar(50) , RAM_6 varchar(255) , RAM_SN_6 varchar(50) , RAM_speed_6 varchar(50) , RAM_PROIZV_6 varchar(50) , RAM_7 varchar(255) , RAM_SN_7 varchar(50) , RAM_speed_7 varchar(50) , RAM_PROIZV_7 varchar(50) , RAM_8 varchar(255) , RAM_SN_8 varchar(50) , RAM_speed_8 varchar(50) , RAM_PROIZV_8 varchar(50) , HDD_Name_5 varchar(255) , HDD_OB_5 varchar(50) ,HDD_SN_5 varchar(50) ,HDD_PROIZV_5 varchar(50) , HDD_Name_6 varchar(255) , HDD_OB_6 varchar(50) ,HDD_SN_6 varchar(50) ,HDD_PROIZV_6 varchar(50) , HDD_Name_7 varchar(255) , HDD_OB_7 varchar(50) ,HDD_SN_7 varchar(50) ,HDD_PROIZV_7 varchar(50) , HDD_Name_8 varchar(255) , HDD_OB_8 varchar(50) ,HDD_SN_8 varchar(50) ,HDD_PROIZV_8 varchar(50)"
+                'sSQL = "alter table kompy ADD COLUMN 'RAM_5' varchar(255) , 'RAM_SN_5' varchar(50) , 'RAM_speed_5' varchar(50) , 'RAM_PROIZV_5' varchar(50) , RAM_6 varchar(255) , RAM_SN_6 varchar(50) , RAM_speed_6 varchar(50) , RAM_PROIZV_6 varchar(50) , RAM_7 varchar(255) , RAM_SN_7 varchar(50) , RAM_speed_7 varchar(50) , RAM_PROIZV_7 varchar(50) , RAM_8 varchar(255) , RAM_SN_8 varchar(50) , RAM_speed_8 varchar(50) , RAM_PROIZV_8 varchar(50) , HDD_Name_5 varchar(255) , HDD_OB_5 varchar(50) ,HDD_SN_5 varchar(50) ,HDD_PROIZV_5 varchar(50) , HDD_Name_6 varchar(255) , HDD_OB_6 varchar(50) ,HDD_SN_6 varchar(50) ,HDD_PROIZV_6 varchar(50) , HDD_Name_7 varchar(255) , HDD_OB_7 varchar(50) ,HDD_SN_7 varchar(50) ,HDD_PROIZV_7 varchar(50) , HDD_Name_8 varchar(255) , HDD_OB_8 varchar(50) ,HDD_SN_8 varchar(50) ,HDD_PROIZV_8 varchar(50)"
+                sSQL = "ALTER TABLE `kompy` ADD COLUMN `ram_5` text,`ram_sn_5` VARCHAR(255),`ram_speed_5` VARCHAR(255),`ram_proizv_5` VARCHAR(255),`ram_6` text,`ram_speed_6` VARCHAR(255),`ram_sn_6` VARCHAR(255),`ram_proizv_6` VARCHAR(255),`ram_7` text,`ram_speed_7` VARCHAR(255),`ram_sn_7` VARCHAR(255),`ram_proizv_7` VARCHAR(255),`ram_8` text,`ram_sn_8` VARCHAR(255),`ram_speed_8` VARCHAR(255),`ram_proizv_8` VARCHAR(255), `hdd_name_5` text,`hdd_ob_5` VARCHAR(255),`hdd_sn_5` VARCHAR(255),`hdd_proizv_5` VARCHAR(255),`hdd_name_6` text,`hdd_ob_6` VARCHAR(255),`hdd_sn_6` VARCHAR(255),`hdd_proizv_6` VARCHAR(255),`hdd_name_7` text,`hdd_ob_7` VARCHAR(255),`hdd_sn_7` VARCHAR(255),`hdd_proizv_7` VARCHAR(255),`hdd_name_8` text,`hdd_ob_8` VARCHAR(255),`hdd_sn_8` VARCHAR(255),`hdd_proizv_8` VARCHAR(255);"
+
 
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -710,7 +712,7 @@ err_:
 
             Case "MySQL"
 
-                sSQL = "CREATE TABLE TBL_PPR (id int(11) NOT NULL AUTO_INCREMENT, ID_COMP int,TIP_TO varchar(50) ,KVARTAL_TO varchar(50) ,YEAR_TO varchar(50))"
+                sSQL = "CREATE TABLE 'TBL_PPR' ('id' integer NOT NULL AUTO_INCREMENT, 'ID_COMP' integer,'TIP_TO' varchar(50) ,'KVARTAL_TO' varchar(50) ,'YEAR_TO' varchar(50))"
 
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -718,7 +720,7 @@ err_:
 
             Case "MySQL (MyODBC 5.1)"
 
-                sSQL = "CREATE TABLE TBL_PPR (id int(11) NOT NULL AUTO_INCREMENT, ID_COMP int,TIP_TO varchar(50) ,KVARTAL_TO varchar(50) ,YEAR_TO varchar(50))"
+                sSQL = "CREATE TABLE 'TBL_PPR' ('id' integer NOT NULL AUTO_INCREMENT, 'ID_COMP' integer,'TIP_TO' varchar(50) ,'KVARTAL_TO' varchar(50) ,'YEAR_TO' varchar(50))"
 
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -800,7 +802,9 @@ err_:
 
             Case "MySQL"
 
-                sSQL = "CREATE TABLE tbl_net_mag(id int(11) NOT NULL AUTO_INCREMENT,id_line varchar(255) ,tip_cab varchar(255) ,dlin_cab integer DEFAULT 0,tip_cab_line varchar(255) ,svt integer DEFAULT 0,net_port_svt varchar(255) ,phone varchar(255) ,svt_memo TEXT ,commutator integer DEFAULT 0,net_port_commutator varchar(255) ,commutator_memo TEXT ,pref varchar(255) ,sid integer DEFAULT 0)"
+                ' sSQL = "CREATE TABLE tbl_net_mag(id int(11) NOT NULL AUTO_INCREMENT,id_line varchar(255) ,tip_cab varchar(255) ,dlin_cab integer DEFAULT 0,tip_cab_line varchar(255) ,svt integer DEFAULT 0,net_port_svt varchar(255) ,phone varchar(255) ,svt_memo TEXT ,commutator integer DEFAULT 0,net_port_commutator varchar(255) ,commutator_memo TEXT ,pref varchar(255) ,sid integer DEFAULT 0)"
+                sSQL = "CREATE TABLE 'tbl_net_mag' ('id' INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,'id_line' VARCHAR(45),'tip_cab' VARCHAR(45),'dlin_cab' INTEGER UNSIGNED,'tip_cab_line' VARCHAR(45),'svt' VARCHAR(45),'net_port_svt' VARCHAR(45),'phone' VARCHAR(45),'svt_memo' TEXT,'commutator' INTEGER UNSIGNED,'net_port_commutator' VARCHAR(45),'commutator_memo' TEXT,pref VARCHAR(45),'sid' INTEGER UNSIGNED"
+
 
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -808,7 +812,7 @@ err_:
 
             Case "MySQL (MyODBC 5.1)"
 
-                sSQL = "CREATE TABLE tbl_net_mag(id int(11) NOT NULL AUTO_INCREMENT,id_line varchar(255) ,tip_cab varchar(255) ,dlin_cab integer DEFAULT 0,tip_cab_line varchar(255) ,svt integer DEFAULT 0,net_port_svt varchar(255) ,phone varchar(255) ,svt_memo TEXT ,commutator integer DEFAULT 0,net_port_commutator varchar(255) ,commutator_memo TEXT ,pref varchar(255) ,sid integer DEFAULT 0)"
+                sSQL = "CREATE TABLE 'tbl_net_mag' ('id' INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,'id_line' VARCHAR(45),'tip_cab' VARCHAR(45),'dlin_cab' INTEGER UNSIGNED,'tip_cab_line' VARCHAR(45),'svt' VARCHAR(45),'net_port_svt' VARCHAR(45),'phone' VARCHAR(45),'svt_memo' TEXT,'commutator' INTEGER UNSIGNED,'net_port_commutator' VARCHAR(45),'commutator_memo' TEXT,pref VARCHAR(45),'sid' INTEGER UNSIGNED"
 
 
                 rs = New Recordset
@@ -818,8 +822,7 @@ err_:
             Case "PostgreSQL"
 
                 sSQL = "CREATE TABLE tbl_net_mag(id serial NOT NULL,id_line varchar(255) ,tip_cab varchar(255) ,dlin_cab integer DEFAULT 0,tip_cab_line varchar(255) ,svt integer DEFAULT 0,net_port_svt varchar(255) ,phone varchar(255) ,svt_memo TEXT ,commutator integer DEFAULT 0,net_port_commutator varchar(255) ,commutator_memo TEXT ,pref varchar(255) ,sid integer DEFAULT 0)"
-
-
+                
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                 rs = Nothing
@@ -902,13 +905,13 @@ err_:
 
             Case "MySQL"
 
-                sSQL = "alter table Remont ADD startdate datetime, starttime datetime, stopdate datetime, stoptime datetime"
+                sSQL = "alter table 'Remont' ADD 'startdate' datetime, 'starttime' datetime, 'stopdate' datetime, 'stoptime' datetime"
 
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
-                sSQL = "CREATE TABLE SPR_USER(id int(11) NOT NULL AUTO_INCREMENT, Name varchar(50) , Proizv int, Prim TEXT ,  A varchar(50) ,  B varchar(50) ,  C varchar(50))"
+                sSQL = "CREATE TABLE 'SPR_USER'('id' integer NOT NULL AUTO_INCREMENT, 'Name' varchar(50) , 'Proizv' integer, 'Prim' TEXT ,  'A' varchar(50) ,  'B' varchar(50) , 'C' varchar(50))"
 
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -918,7 +921,7 @@ err_:
 
             Case "MySQL (MyODBC 5.1)"
 
-                sSQL = "alter table Remont ADD startdate datetime, starttime datetime, stopdate datetime, stoptime datetime"
+                sSQL = "CREATE TABLE 'SPR_USER'('id' integer NOT NULL AUTO_INCREMENT, 'Name' varchar(50) , 'Proizv' integer, 'Prim' TEXT ,  'A' varchar(50) ,  'B' varchar(50) , 'C' varchar(50))"
 
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -1019,7 +1022,7 @@ err_:
 
             Case "MySQL"
 
-                sSQL = "alter table kompy ADD COLUMN SVGA2_NAME varchar(255) , SVGA2_OB_RAM varchar(50) , SVGA2_SN varchar(50) , SVGA2_PROIZV varchar(50) default NULL"
+                sSQL = "alter table 'kompy' ADD COLUMN 'SVGA2_NAME' varchar(255) , 'SVGA2_OB_RAM' varchar(50) , 'SVGA2_SN' varchar(50) , 'SVGA2_PROIZV' varchar(50)"
 
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -1028,7 +1031,7 @@ err_:
 
             Case "MySQL (MyODBC 5.1)"
 
-                sSQL = "alter table kompy ADD COLUMN SVGA2_NAME varchar(255) , SVGA2_OB_RAM varchar(50) , SVGA2_SN varchar(50) , SVGA2_PROIZV varchar(50) default NULL"
+                sSQL = "alter table 'kompy' ADD COLUMN 'SVGA2_NAME' varchar(255) , 'SVGA2_OB_RAM' varchar(50) , 'SVGA2_SN' varchar(50) , 'SVGA2_PROIZV' varchar(50)"
 
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)

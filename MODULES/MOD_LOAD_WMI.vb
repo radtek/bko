@@ -30,7 +30,7 @@ Module MOD_LOAD_WMI
             For intj = A1 To A2
 
                 Call VisibleForm(frmComputers)
-                Call Clear_Form_For_Computer()
+                Call ClearForm(frmComputers)
                 'frmComputers.selectTECMesto()
                 frmComputers.EDT = False
                 TipTehn = "PC"

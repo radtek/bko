@@ -2444,6 +2444,7 @@ Module MOD_INF_TECH_LOAD
     End Sub
 
     Public Sub SHED_CHECK()
+        On Error GoTo err_
 
         Dim objIniFile As New IniFile(PrPath & "base.ini")
 
@@ -2572,6 +2573,9 @@ Module MOD_INF_TECH_LOAD
         End If
 
         'frmMain.lblShed.Text = "Напоминания "
+
+err_:
+
     End Sub
 
     Public Sub REM_CHECK()

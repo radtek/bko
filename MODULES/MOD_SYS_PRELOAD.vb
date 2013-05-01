@@ -387,67 +387,6 @@ Module MOD_SYS_PRELOAD
         frmComputers.bPrinterPlus.Visible = False
     End Sub
 
-    Public Sub ClearForm(ByVal ControlContainer As Object)
-
-        If frmComputers.OneStart = 1 Then frmComputers.OneStart = 0
-
-
-        Dim A1 As String
-        A1 = frmComputers.treebranche.Text
-
-        For Each Ctl As Object In ControlContainer.Controls
-            Try
-                If Not Ctl.Controls Is Nothing Then
-
-                    ClearForm(Ctl)
-
-                    If TypeOf Ctl Is TextBox Then Ctl.ResetText()
-                    If TypeOf Ctl Is ComboBox Then Ctl.ResetText()
-                    If TypeOf Ctl Is ListView Then Ctl.items.clear()
-                    'If TypeOf Ctl Is CheckBox Then Ctl.checked = False
-                    If TypeOf Ctl Is RadioButton Then Ctl.checked = False
-
-
-                    ' If TypeOf Ctl Is ToolStrip Then Ctl.rendermode = ToolStripRenderMode.System
-
-                End If
-
-            Catch ex As Exception
-                MsgBox(ex.Message)
-            End Try
-        Next
-
-        frmComputers.chkPCspis.Checked = False
-        frmComputers.chkPCNNb.Checked = False
-        frmComputers.chkPRNspis.Checked = False
-        frmComputers.chkPRNNNb.Checked = False
-        frmComputers.chkNETspis.Checked = False
-        frmComputers.chkNETNNb.Checked = False
-        frmComputers.chkOTHNNb.Checked = False
-        frmComputers.chkOTHspis.Checked = False
-
-        'frmComputers.chkSNMP.Checked = False
-
-        'If TipTehn = "IBP" Then
-
-        '    frmComputers.chkSNMP.Visible = True
-
-        'Else
-
-        '   frmComputers.chkSNMP.Visible = False
-
-        'End If
-
-
-        frmComputers.treebranche.Text = A1
-
-
-        System.Windows.Forms.Application.DoEvents()
-
-        If frmComputers.OneStart = 0 Then frmComputers.OneStart = 1
-
-    End Sub
-
     Public Sub COLOR_Form_For_Computer(ByVal ControlContainer As Object)
 
         For Each Ctl As Object In ControlContainer.Controls

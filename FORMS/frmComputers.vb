@@ -735,7 +735,7 @@ err_:
         Dim d() As String
         d = Split(lstGroups.SelectedNode.Tag, "|")
 
-        Call Clear_Form_For_Computer()
+        Call ClearForm(Me)
         ' Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG14", "") & " " & Me.lstGroups.SelectedNode.Text)
 
 
@@ -2672,7 +2672,7 @@ err_:
 
                         EverestFilePatch = sTXTDIR & d(d.Length - 1)
 
-                        Call Clear_Form_For_Computer()
+                        Call ClearForm(Me)
 
                         'Me.BeginInvoke(New MethodInvoker(AddressOf Everest_Load))
 
@@ -2725,7 +2725,7 @@ err_:
 
         Me.Cursor = Cursors.Default
         Exit Sub
-        err_:
+err_:
         MsgBox(Err.Description)
     End Sub
 
@@ -2850,7 +2850,7 @@ err_:
         End If
 
         Exit Sub
-        err_:
+err_:
         Me.Cursor = Cursors.Default
     End Sub
 
@@ -2938,7 +2938,7 @@ err_:
 
 
         Exit Sub
-        err_:
+err_:
     End Sub
 
     Private Sub btnOfficeSend_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnOfficeSend.Click
@@ -2965,7 +2965,7 @@ err_:
 
         Dim oSM As Object                 'Root object for accessing OpenOffice FROM VB
         Dim oDesk, oDoc As Object 'First objects FROM the API
-        Dim arg(- 1) As Object                 'Ignore it for the moment !
+        Dim arg(-1) As Object                 'Ignore it for the moment !
         'Dim mmerge As Object
         Dim objCoreReflection As Object ' objects from OOo API 
 
@@ -3121,7 +3121,7 @@ err_:
 
                 Dim oSM As Object                 'Root object for accessing OpenOffice FROM VB
                 Dim oDesk, oDoc As Object 'First objects FROM the API
-                Dim arg(- 1) As Object                 'Ignore it for the moment !
+                Dim arg(-1) As Object                 'Ignore it for the moment !
                 'Dim mmerge As Object
                 Dim objCoreReflection As Object ' objects from OOo API 
 
@@ -4659,7 +4659,7 @@ err_:
         BrainchLoad(cmbBranch, cmbDepartment)
 
         Exit Sub
-        err_:
+err_:
         MsgBox(Err.Description, MsgBoxStyle.Information, ProGramName)
     End Sub
 
@@ -4670,7 +4670,7 @@ err_:
         DepartmentLoad(cmbBranch, cmbDepartment, cmbOffice)
 
         Exit Sub
-        err_:
+err_:
     End Sub
 
     Private Sub cmbPRNFil_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
@@ -4680,7 +4680,7 @@ err_:
         BrainchLoad(cmbPRNFil, cmbPRNDepart)
 
         Exit Sub
-        err_:
+err_:
         MsgBox(Err.Description, MsgBoxStyle.Information, ProGramName)
     End Sub
 
@@ -4691,7 +4691,7 @@ err_:
         DepartmentLoad(cmbPRNFil, cmbPRNDepart, cmbPRNOffice)
 
         Exit Sub
-        err_:
+err_:
     End Sub
 
     Private Sub lvPRNCartr_ColumnClick(ByVal sender As Object, ByVal e As ColumnClickEventArgs) _
@@ -4867,7 +4867,7 @@ err_:
         BrainchLoad(cmbOTHFil, cmbOTHDepart)
 
         Exit Sub
-        err_:
+err_:
         MsgBox(Err.Description, MsgBoxStyle.Information, ProGramName)
     End Sub
 
@@ -4879,7 +4879,7 @@ err_:
 
 
         Exit Sub
-        err_:
+err_:
     End Sub
 
     Private Sub cmbCPU1_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
@@ -5121,7 +5121,7 @@ err_:
         BrainchLoad(cmbNETBranch, cmbNetDepart)
 
         Exit Sub
-        err_:
+err_:
         MsgBox(Err.Description, MsgBoxStyle.Information, ProGramName)
     End Sub
 
@@ -5133,7 +5133,7 @@ err_:
 
 
         Exit Sub
-        err_:
+err_:
     End Sub
 
     Private Sub cmbDevNet_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
@@ -5188,7 +5188,7 @@ err_:
         SPR_DEV = Nothing
 
         Exit Sub
-        Error_:
+Error_:
     End Sub
 
     Private Sub cmbPRN_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
@@ -6026,7 +6026,7 @@ err_:
 
 
         Exit Sub
-        err_:
+err_:
         MsgBox(Err.Description)
     End Sub
 
@@ -6052,7 +6052,7 @@ err_:
         Me.sSTAB3.Visible = False
         Me.sSTAB4.Visible = False
         Me.sSTAB5.Visible = False
-        Call Clear_Form_For_Computer()
+        Call ClearForm(Me)
 
 
         Dim d() As String
