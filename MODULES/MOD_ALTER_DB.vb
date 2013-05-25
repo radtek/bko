@@ -44,6 +44,14 @@ Module MOD_ALTER_DB
 
             Case "1.7.3.6"
 
+                frmLogin.Invoke(New MethodInvoker(AddressOf ALTER_DB_1738))
+
+            Case "1.7.3.7"
+
+
+            Case "1.7.3.8"
+
+
 
             Case Else
 
@@ -621,50 +629,10 @@ err_:
 
         Dim rs As Recordset
 
-        rs = New Recordset
-        rs.Open("Update CONFIGURE SET access='1.7.3.6' WHERE access<>'1.7.3.6'", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-        rs = Nothing
+       
+        Call ALTER_DB_1738()
 
-        _DBALTER = False
-
-
-        '####################################################################
-        '####################################################################
-        '####################################################################
-        'Убираем поля с NULL
-
-        On Error Resume Next
-
-        rs = New Recordset
-        rs.Open("select * from kompy", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
-        Dim rs_ As ADODB.Recordset
-
-        Dim uname As Integer
-
-        If DB_N <> "MS Access" Then uname = 2 Else uname = 1
-
-        For lngCounter = 0 To rs.Fields.Count - uname
-
-            If rs.Fields(lngCounter).Name = "id" Or rs.Fields(lngCounter).Name = "ID" Then
-
-            Else
-
-                rs_ = New Recordset
-                rs_.Open("UPDATE kompy SET " & rs.Fields(lngCounter).Name & "='' WHERE " & rs.Fields(lngCounter).Name & " IS NULL", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                rs_ = Nothing
-
-            End If
-        Next
-
-        rs.Close()
-        rs = Nothing
-
-        '####################################################################
-        '####################################################################
-        '####################################################################
-
-        Exit Sub
+      Exit Sub
 err_:
         MsgBox(Err.Description)
         rs = Nothing
@@ -1076,5 +1044,216 @@ err_:
         _DBALTER = True
 
     End Sub
+
+
+    Public Sub ALTER_DB_1738()
+
+        On Error GoTo err_
+
+        If _DBALTER = False Then Exit Sub
+        Dim rs As Recordset
+        Dim sSQL As String
+
+        Select Case DB_N
+
+            Case "MS SQL 2008"
+
+                sSQL = "ALTER TABLE " & DBtabl & ".dbo.kompy ADD COLUMN MB_NAME ntext"
+
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+                sSQL = "UPDATE TABLE " & DBtabl & ".dbo.kompy SET MB_NAME=Mb"
+
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+                sSQL = "ALTER TABLE " & DBtabl & ".dbo.kompy DROP COLUMN Mb"
+
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+
+            Case "MS SQL"
+
+                sSQL = "ALTER TABLE " & DBtabl & ".dbo.kompy ADD COLUMN MB_NAME ntext"
+
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+                sSQL = "UPDATE TABLE " & DBtabl & ".dbo.kompy SET MB_NAME=Mb"
+
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+                sSQL = "ALTER TABLE " & DBtabl & ".dbo.kompy DROP COLUMN Mb"
+
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+            Case "MS Access"
+
+                sSQL = "ALTER TABLE kompy ADD COLUMN MB_NAME Memo"
+
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+                sSQL = "UPDATE kompy SET MB_NAME=Mb"
+
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+                sSQL = "ALTER TABLE kompy DROP COLUMN Mb"
+
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+
+                'ALTER TABLE Test ADD COLUMN NewName INTEGER
+                'UPDATE TABLE Test SET NewName=OldName
+                'ALTER TABLE Test DROP COLUMN OldName
+
+
+                Call frmMain.COMPARE_DB()
+
+            Case "MySQL"
+
+                sSQL = "ALTER TABLE kompy ADD COLUMN 'MB_NAME' TEXT AFTER 'Mb'"
+
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+                sSQL = "UPDATE TABLE kompy SET MB_NAME=Mb"
+
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+                sSQL = "ALTER TABLE kompy DROP COLUMN Mb"
+
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+
+            Case "MySQL (MyODBC 5.1)"
+
+                sSQL = "ALTER TABLE kompy ADD COLUMN 'MB_NAME' TEXT AFTER 'Mb'"
+
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+                sSQL = "UPDATE TABLE kompy SET MB_NAME=Mb"
+
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+                sSQL = "ALTER TABLE kompy DROP COLUMN Mb"
+
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
+            Case "PostgreSQL"
+
+                sSQL = "ALTER TABLE kompy ADD COLUMN MB_NAME varchar(255) Mb"
+
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+                sSQL = "UPDATE TABLE kompy SET MB_NAME=Mb"
+
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+                sSQL = "ALTER TABLE kompy DROP COLUMN Mb"
+
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
+            Case "SQLLite"
+
+            Case "DSN"
+
+                sSQL = "ALTER TABLE kompy ADD COLUMN MB_NAME varchar(255) Mb"
+
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+                sSQL = "UPDATE TABLE kompy SET MB_NAME=Mb"
+
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+                sSQL = "ALTER TABLE kompy DROP COLUMN Mb"
+
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
+        End Select
+        
+        rs = New Recordset
+        rs.Open("Update CONFIGURE SET access='1.7.3.8' WHERE access<>'1.7.3.8'", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+        rs = Nothing
+
+        _DBALTER = False
+
+        '####################################################################
+        '####################################################################
+        '####################################################################
+        'Убираем поля с NULL
+
+        On Error Resume Next
+
+        rs = New Recordset
+        rs.Open("select * from kompy", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
+       Dim uname As Integer
+
+        If DB_N <> "MS Access" Then uname = 2 Else uname = 1
+
+        For lngCounter = 0 To rs.Fields.Count - uname
+
+            If rs.Fields(lngCounter).Name = "id" Or rs.Fields(lngCounter).Name = "ID" Then
+
+            Else
+
+                Dim rs_ As ADODB.Recordset
+                rs_ = New Recordset
+                rs_.Open("UPDATE kompy SET " & rs.Fields(lngCounter).Name & "='' WHERE " & rs.Fields(lngCounter).Name & " IS NULL", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                rs_ = Nothing
+
+            End If
+        Next
+
+        rs.Close()
+        rs = Nothing
+
+        '####################################################################
+        '####################################################################
+        '####################################################################
+
+        Exit Sub
+err_:
+        MsgBox(Err.Description)
+        rs = Nothing
+        _DBALTER = True
+    End Sub
+
 
 End Module

@@ -166,7 +166,7 @@ Module MOD_OPENOFFICE
                 insertIntoCell("C1", LNGIniFile.GetString("MOD_OPENOFFICE", "MSG11", "Производитель"), objTable)
                 'Mb
                 insertIntoCell("A2", LNGIniFile.GetString("MOD_OPENOFFICE", "MSG12", "Системная плата"), objTable)
-                insertIntoCell("B2", .Fields("Mb").Value & ", " & "SN: " & .Fields("Mb_Id").Value, objTable)
+                insertIntoCell("B2", .Fields("MB_NAME").Value & ", " & "SN: " & .Fields("Mb_Id").Value, objTable)
                 insertIntoCell("C2", .Fields("Mb_Proizvod").Value, objTable)
 
                 insertIntoCell("A3", LNGIniFile.GetString("MOD_OPENOFFICE", "MSG13", "Процессор"), objTable)
@@ -1005,7 +1005,7 @@ Module MOD_OPENOFFICE
 
         Dim oSM As Object            'Root object for accessing OpenOffice FROM VB
         Dim oDesk, oDoc As Object 'First objects FROM the API
-        Dim arg(- 1) As Object             'Ignore it for the moment !
+        Dim arg(-1) As Object             'Ignore it for the moment !
         Dim mmerge As Object
         'Instanciate OOo : this line is mandatory with VB for OOo API
 
@@ -1027,820 +1027,80 @@ Module MOD_OPENOFFICE
         objText = oDoc.GetText
         objCursor = objText.createTextCursor
 
-        ' replace all
+
+
         Dim oSrch As Object
-        With rs
-            .MoveFirst()
-            Do While Not .EOF = True
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("Организация")
-                oSrch.setReplaceString(Organ)
-                Debug.Print(oDoc.replaceAll(oSrch))
+        Dim lngCounter As Integer
+        Dim FirstColumn As Boolean
 
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("Сисадмин")
-                oSrch.setReplaceString(SISADM$)
-                Debug.Print(oDoc.replaceAll(oSrch))
+        oSrch = oDoc.createReplaceDescriptor
+        oSrch.setSearchString("Организация")
+        oSrch.setReplaceString(Organ)
+        Debug.Print(oDoc.replaceAll(oSrch))
 
-                'Ser_N_SIS
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("Ser_N_SIS")
-                oSrch.setReplaceString(.Fields("Ser_N_SIS"))
-                Debug.Print(oDoc.replaceAll(oSrch))
+        oSrch = oDoc.createReplaceDescriptor
+        oSrch.setSearchString("Сисадмин")
+        oSrch.setReplaceString(SISADM$)
+        Debug.Print(oDoc.replaceAll(oSrch))
 
 
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("ID")
-                oSrch.setReplaceString(.Fields("ID"))
-                Debug.Print(oDoc.replaceAll(oSrch))
+        Do Until rs.EOF
+            FirstColumn = True      'FIRST COLUMN IS A LISTITEM, REST ARE LISTSUBITEMS
 
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("nomerPC")
-                oSrch.setReplaceString(.Fields("nomerPC"))
-                Debug.Print(oDoc.replaceAll(oSrch))
 
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("CPU1")
-                oSrch.setReplaceString(.Fields("CPU1"))
-                Debug.Print(oDoc.replaceAll(oSrch))
+            If DB_N <> "MS Access" Then uname = 2 Else uname = 1
 
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("CPUmhz1")
-                oSrch.setReplaceString(.Fields("CPUmhz1"))
-                Debug.Print(oDoc.replaceAll(oSrch))
+            For lngCounter = 0 To rs.Fields.Count - uname
 
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("CPUSocket1")
-                oSrch.setReplaceString(.Fields("CPUSocket1"))
-                Debug.Print(oDoc.replaceAll(oSrch))
+                If FirstColumn Then
+                    If Not IsDBNull(rs.Fields(lngCounter).Value) Then
 
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("CPUProizv1")
-                oSrch.setReplaceString(.Fields("CPUProizv1"))
-                Debug.Print(oDoc.replaceAll(oSrch))
 
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("CPU2")
-                oSrch.setReplaceString(.Fields("CPU2"))
-                Debug.Print(oDoc.replaceAll(oSrch))
+                        oSrch = oDoc.createReplaceDescriptor
+                        oSrch.setSearchString(rs.Fields(lngCounter).Name)
+                        oSrch.setReplaceString(rs.Fields(lngCounter).Value)
+                        Debug.Print(oDoc.replaceAll(oSrch))
 
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("CPUmhz2")
-                oSrch.setReplaceString(.Fields("CPUmhz2"))
-                Debug.Print(oDoc.replaceAll(oSrch))
 
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("CPUSocket2")
-                oSrch.setReplaceString(.Fields("CPUSocket2"))
-                Debug.Print(oDoc.replaceAll(oSrch))
+                    Else
 
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("CPUProizv2")
-                oSrch.setReplaceString(.Fields("CPUProizv2"))
-                Debug.Print(oDoc.replaceAll(oSrch))
+                    End If                  'TO KEEP DATA FROM SHIFTING LEFT
+                    FirstColumn = False
+                Else
+                    If Not IsDBNull(rs.Fields(lngCounter).Value) Then
 
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("CPU3")
-                oSrch.setReplaceString(.Fields("CPU3"))
-                Debug.Print(oDoc.replaceAll(oSrch))
+                        oSrch = oDoc.createReplaceDescriptor
+                        oSrch.setSearchString(rs.Fields(lngCounter).Name)
+                        oSrch.setReplaceString(rs.Fields(lngCounter).Value)
+                        Debug.Print(oDoc.replaceAll(oSrch))
 
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("CPUmhz3")
-                oSrch.setReplaceString(.Fields("CPUmhz3"))
-                Debug.Print(oDoc.replaceAll(oSrch))
+                    Else
 
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("CPUSocket3")
-                oSrch.setReplaceString(.Fields("CPUSocket3"))
-                Debug.Print(oDoc.replaceAll(oSrch))
+                    End If
+                End If
+            Next
+            rs.MoveNext()
+        Loop
 
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("CPUProizv3")
-                oSrch.setReplaceString(.Fields("CPUProizv3"))
-                Debug.Print(oDoc.replaceAll(oSrch))
+        rs.Close()
+        rs = Nothing
 
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("CPU4")
-                oSrch.setReplaceString(.Fields("CPU4"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("CPUmhz4")
-                oSrch.setReplaceString(.Fields("CPUmhz4"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("CPUSocket4")
-                oSrch.setReplaceString(.Fields("CPUSocket4"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("CPUProizv4")
-                oSrch.setReplaceString(.Fields("CPUProizv4"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("Mb1")
-                oSrch.setReplaceString(.Fields("Mb"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("Mb_Chip")
-                oSrch.setReplaceString(.Fields("Mb_Chip"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("Mb_Iz")
-                oSrch.setReplaceString(.Fields("Mb_Id"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("Mb_Proizvod")
-                oSrch.setReplaceString(.Fields("Mb_Proizvod"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("RAM_1")
-                oSrch.setReplaceString(.Fields("RAM_1"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("RAM_SN_1")
-                oSrch.setReplaceString(.Fields("RAM_SN_1"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("RAM_speed_1")
-                oSrch.setReplaceString(.Fields("RAM_speed_1"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("RAM_PROIZV_1")
-                oSrch.setReplaceString(.Fields("RAM_PROIZV_1"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("RAM_2")
-                oSrch.setReplaceString(.Fields("RAM_2"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("RAM_SN_2")
-                oSrch.setReplaceString(.Fields("RAM_SN_2"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("RAM_speed_2")
-                oSrch.setReplaceString(.Fields("RAM_speed_2"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("RAM_PROIZV_2")
-                oSrch.setReplaceString(.Fields("RAM_PROIZV_2"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("RAM_3")
-                oSrch.setReplaceString(.Fields("RAM_3"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("RAM_SN_3")
-                oSrch.setReplaceString(.Fields("RAM_SN_3"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("RAM_speed_3")
-                oSrch.setReplaceString(.Fields("RAM_speed_3"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("RAM_PROIZV_3")
-                oSrch.setReplaceString(.Fields("RAM_PROIZV_3"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("RAM_4")
-                oSrch.setReplaceString(.Fields("RAM_4"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("RAM_SN_4")
-                oSrch.setReplaceString(.Fields("RAM_SN_4"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("RAM_speed_4")
-                oSrch.setReplaceString(.Fields("RAM_speed_4"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("RAM_PROIZV_4")
-                oSrch.setReplaceString(.Fields("RAM_PROIZV_4"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("HDD_Name_1")
-                oSrch.setReplaceString(.Fields("HDD_Name_1"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("HDD_OB_1")
-                oSrch.setReplaceString(.Fields("HDD_OB_1"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("HDD_SN_1")
-                oSrch.setReplaceString(.Fields("HDD_SN_1"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("HDD_PROIZV_1")
-                oSrch.setReplaceString(.Fields("HDD_PROIZV_1"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("HDD_Name_2")
-                oSrch.setReplaceString(.Fields("HDD_Name_2"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("HDD_OB_2")
-                oSrch.setReplaceString(.Fields("HDD_OB_2"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("HDD_SN_2")
-                oSrch.setReplaceString(.Fields("HDD_SN_2"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("HDD_PROIZV_2")
-                oSrch.setReplaceString(.Fields("HDD_PROIZV_2"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("HDD_Name_3")
-                oSrch.setReplaceString(.Fields("HDD_Name_3"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("HDD_OB_3")
-                oSrch.setReplaceString(.Fields("HDD_OB_3"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("HDD_SN_3")
-                oSrch.setReplaceString(.Fields("HDD_SN_3"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("HDD_PROIZV_3")
-                oSrch.setReplaceString(.Fields("HDD_PROIZV_3"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("HDD_Name_4")
-                oSrch.setReplaceString(.Fields("HDD_Name_4"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("HDD_OB_4")
-                oSrch.setReplaceString(.Fields("HDD_OB_4"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("HDD_SN_4")
-                oSrch.setReplaceString(.Fields("HDD_SN_4"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("HDD_PROIZV_4")
-                oSrch.setReplaceString(.Fields("HDD_PROIZV_4"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("SVGA_NAME")
-                oSrch.setReplaceString(.Fields("SVGA_NAME"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("SVGA_OB_RAM")
-                oSrch.setReplaceString(.Fields("SVGA_OB_RAM"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("SVGA_SN")
-                oSrch.setReplaceString(.Fields("SVGA_SN"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("SVGA_PROIZV")
-                oSrch.setReplaceString(.Fields("SVGA_PROIZV"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("SOUND_NAME")
-                oSrch.setReplaceString(.Fields("SOUND_NAME"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("SOUND_SN")
-                oSrch.setReplaceString(.Fields("SOUND_SN"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("SOUND_PROIZV")
-                oSrch.setReplaceString(.Fields("SOUND_PROIZV"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("CD_NAME")
-                oSrch.setReplaceString(.Fields("CD_NAME"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("CD_SPEED")
-                oSrch.setReplaceString(.Fields("CD_SPEED"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("CD_SN")
-                oSrch.setReplaceString(.Fields("CD_SN"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("CD_PROIZV")
-                oSrch.setReplaceString(.Fields("CD_PROIZV"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("CDRW_NAME")
-                oSrch.setReplaceString(.Fields("CDRW_NAME"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("CDRW_SPEED")
-                oSrch.setReplaceString(.Fields("CDRW_SPEED"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("CDRW_SN")
-                oSrch.setReplaceString(.Fields("CDRW_SN"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("CDRW_PROIZV")
-                oSrch.setReplaceString(.Fields("CDRW_PROIZV"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("DVD_NAME")
-                oSrch.setReplaceString(.Fields("DVD_NAME"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("DVD_SPEED")
-                oSrch.setReplaceString(.Fields("DVD_SPEED"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("DVD_SN")
-                oSrch.setReplaceString(.Fields("DVD_SN"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("DVD_PROIZV")
-                oSrch.setReplaceString(.Fields("DVD_PROIZV"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("NET_NAME_1")
-                oSrch.setReplaceString(.Fields("NET_NAME_1"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("NET_IP_1")
-                oSrch.setReplaceString(.Fields("NET_IP_1"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("NET_MAC_1")
-                oSrch.setReplaceString(.Fields("NET_MAC_1"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("NET_PROIZV_1")
-                oSrch.setReplaceString(.Fields("NET_PROIZV_1"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("NET_NAME_2")
-                oSrch.setReplaceString(.Fields("NET_NAME_2"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("NET_IP_2")
-                oSrch.setReplaceString(.Fields("NET_IP_2"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("NET_MAC_2")
-                oSrch.setReplaceString(.Fields("NET_MAC_2"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("NET_PROIZV_2")
-                oSrch.setReplaceString(.Fields("NET_PROIZV_2"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("FDD_NAME")
-                oSrch.setReplaceString(.Fields("FDD_NAME"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("FDD_SN")
-                oSrch.setReplaceString(.Fields("FDD_SN"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("FDD_PROIZV")
-                oSrch.setReplaceString(.Fields("FDD_PROIZV"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("MODEM_NAME")
-                oSrch.setReplaceString(.Fields("MODEM_NAME"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("MODEM_SN")
-                oSrch.setReplaceString(.Fields("MODEM_SN"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("MODEM_PROIZV")
-                oSrch.setReplaceString(.Fields("MODEM_PROIZV"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("KEYBOARD_NAME")
-                oSrch.setReplaceString(.Fields("KEYBOARD_NAME"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("KEYBOARD_SN")
-                oSrch.setReplaceString(.Fields("KEYBOARD_SN"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("KEYBOARD_PROIZV")
-                oSrch.setReplaceString(.Fields("KEYBOARD_PROIZV"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("MOUSE_NAME")
-                oSrch.setReplaceString(.Fields("MOUSE_NAME"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("MOUSE_SN")
-                oSrch.setReplaceString(.Fields("MOUSE_SN"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("MOUSE_PROIZV")
-                oSrch.setReplaceString(.Fields("MOUSE_PROIZV"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("USB_NAME")
-                oSrch.setReplaceString(.Fields("USB_NAME"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("USB_SN")
-                oSrch.setReplaceString(.Fields("USB_SN"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("USB_PROIZV")
-                oSrch.setReplaceString(.Fields("USB_PROIZV"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("PCI_NAME")
-                oSrch.setReplaceString(.Fields("PCI_NAME"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("PCI_SN")
-                oSrch.setReplaceString(.Fields("PCI_SN"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("PCI_SN")
-                oSrch.setReplaceString(.Fields("PCI_SN"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("PCI_PROIZV")
-                oSrch.setReplaceString(.Fields("PCI_PROIZV"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("MONITOR_NAME")
-                oSrch.setReplaceString(.Fields("MONITOR_NAME"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("MONITOR_DUM")
-                oSrch.setReplaceString(.Fields("MONITOR_DUM"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("MONITOR_SN")
-                oSrch.setReplaceString(.Fields("MONITOR_SN"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("MONITOR_PROIZV")
-                oSrch.setReplaceString(.Fields("MONITOR_PROIZV"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("MONITOR_NAME2")
-                oSrch.setReplaceString(.Fields("MONITOR_NAME2"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("MONITOR_DUM2")
-                oSrch.setReplaceString(.Fields("MONITOR_DUM2"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("MONITOR_SN2")
-                oSrch.setReplaceString(.Fields("MONITOR_SN2"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("MONITOR_PROIZV2")
-                oSrch.setReplaceString(.Fields("MONITOR_PROIZV2"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("AS_NAME")
-                oSrch.setReplaceString(.Fields("AS_NAME"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("AS_SN")
-                oSrch.setReplaceString(.Fields("AS_SN"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("AS_PROIZV")
-                oSrch.setReplaceString(.Fields("AS_PROIZV"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("IBP_NAME")
-                oSrch.setReplaceString(.Fields("IBP_NAME"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("IBP_SN")
-                oSrch.setReplaceString(.Fields("IBP_SN"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("IBP_PROIZV")
-                oSrch.setReplaceString(.Fields("IBP_PROIZV"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("FILTR_NAME")
-                oSrch.setReplaceString(.Fields("FILTR_NAME"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("FILTR_SN")
-                oSrch.setReplaceString(.Fields("FILTR_SN"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("FILTR_PROIZV")
-                oSrch.setReplaceString(.Fields("FILTR_PROIZV"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("PRINTER_NAME_1")
-                oSrch.setReplaceString(.Fields("PRINTER_NAME_1"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("PRINTER_SN_1")
-                oSrch.setReplaceString(.Fields("PRINTER_SN_1"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("PORT_1")
-                oSrch.setReplaceString(.Fields("PORT_1"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("PRINTER_PROIZV_1")
-                oSrch.setReplaceString(.Fields("PRINTER_PROIZV_1"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                '#########
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("PRINTER_NAME_2")
-                oSrch.setReplaceString(.Fields("PRINTER_NAME_2"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("PRINTER_SN_2")
-                oSrch.setReplaceString(.Fields("PRINTER_SN_2"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("PORT_2")
-                oSrch.setReplaceString(.Fields("PORT_2"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("PRINTER_PROIZV_2")
-                oSrch.setReplaceString(.Fields("PRINTER_PROIZV_2"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("PRINTER_NAME_3")
-                oSrch.setReplaceString(.Fields("PRINTER_NAME_3"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("PRINTER_SN_3")
-                oSrch.setReplaceString(.Fields("PRINTER_SN_3"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("PORT_3")
-                oSrch.setReplaceString(.Fields("PORT_3"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("PRINTER_PROIZV_3")
-                oSrch.setReplaceString(.Fields("PRINTER_PROIZV_3"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                '#########
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("SCANER_NAME")
-                oSrch.setReplaceString(.Fields("SCANER_NAME"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("SCANER_SN")
-                oSrch.setReplaceString(.Fields("SCANER_SN"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("SCANER_PROIZV")
-                oSrch.setReplaceString(.Fields("SCANER_PROIZV"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("NET_NAME")
-                oSrch.setReplaceString(.Fields("NET_NAME"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("PSEVDONIM")
-                oSrch.setReplaceString(.Fields("PSEVDONIM"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("Department")
-                oSrch.setReplaceString(.Fields("MESTO"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("Office")
-                oSrch.setReplaceString(.Fields("kabn"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("TIP_COMPA")
-                oSrch.setReplaceString(.Fields("TIP_COMPA"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("Branch")
-                oSrch.setReplaceString(.Fields("FILIAL"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("TELEPHONE")
-                oSrch.setReplaceString(.Fields("TELEPHONE"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("INV_NO_SYSTEM")
-                oSrch.setReplaceString(.Fields("INV_NO_SYSTEM"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("INV_NO_PRINTER")
-                oSrch.setReplaceString(.Fields("INV_NO_PRINTER"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("INV_NO_MODEM")
-                oSrch.setReplaceString(.Fields("INV_NO_MODEM"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("INV_NO_SCANER")
-                oSrch.setReplaceString(.Fields("INV_NO_SCANER"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("INV_NO_MONITOR")
-                oSrch.setReplaceString(.Fields("INV_NO_MONITOR"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("INV_NO_IBP")
-                oSrch.setReplaceString(.Fields("INV_NO_IBP"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString(LNGIniFile.GetString("MOD_OPENOFFICE", "MSG5", "Ответственный"))
-                oSrch.setReplaceString(.Fields("OTvetstvennyj"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("BLOCK")
-                oSrch.setReplaceString(.Fields("BLOCK"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("SN_BLOCK")
-                oSrch.setReplaceString(.Fields("SN_BLOCK"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("PROIZV_BLOCK")
-                oSrch.setReplaceString(.Fields("PROIZV_BLOCK"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("SYS_PR")
-                oSrch.setReplaceString(.Fields("SYS_PR"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("StoimRub")
-                oSrch.setReplaceString(.Fields("StoimRub"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("DataVVoda")
-                oSrch.setReplaceString(.Fields("DataVVoda"))
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-
-                Dim rs2 As Recordset
-                rs2 = New Recordset
-                rs2.Open("Select Postav FROM Garantia_sis WHERE Id_Comp=" & .Fields("id").Value, DB7,
+        Dim rs2 As Recordset
+        rs2 = New Recordset
+        rs2.Open("Select Postav FROM Garantia_sis WHERE Id_Comp=" & frmComputers.sCOUNT, DB7,
                          CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
 
-                With rs2
-                    uname = .Fields("Postav").Value
-                End With
-                rs2.Close()
-                rs2 = Nothing
-
-                oSrch = oDoc.createReplaceDescriptor
-                oSrch.setSearchString("Postav")
-                oSrch.setReplaceString(uname)
-                Debug.Print(oDoc.replaceAll(oSrch))
-
-
-                objText.insertControlCharacter(objCursor, 0, False)
-
-
-                .MoveNext()
-                'DoEvents
-            Loop
+        With rs2
+            uname = .Fields("Postav").Value
         End With
-        rs.Close()
-        rs = Nothing
+        rs2.Close()
+        rs2 = Nothing
+
+        oSrch = oDoc.createReplaceDescriptor
+        oSrch.setSearchString("Postav")
+        oSrch.setReplaceString(uname)
+        Debug.Print(oDoc.replaceAll(oSrch))
 
 
         Dim objIniFile As New IniFile(PrPath & "base.ini")
@@ -2305,7 +1565,7 @@ Module MOD_OPENOFFICE
             Case "OpenOffice.org"
                 Dim oSM As Object            'Root object for accessing OpenOffice FROM VB
                 Dim oDesk, oDoc As Object 'First objects FROM the API
-                Dim arg(- 1) As Object             'Ignore it for the moment !
+                Dim arg(-1) As Object             'Ignore it for the moment !
 
                 oSM = CreateObject("com.sun.star.ServiceManager")
 
@@ -2414,7 +1674,7 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "kab otd"
@@ -2428,7 +1688,7 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "otvet"
@@ -2442,7 +1702,7 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "tel"
@@ -2456,7 +1716,7 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "serial"
@@ -2470,7 +1730,7 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "invent"
@@ -2484,7 +1744,7 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "Format"
@@ -2498,7 +1758,7 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
                 WrdDc = Nothing
                 Wrd = Nothing
         End Select
@@ -2527,7 +1787,7 @@ Module MOD_OPENOFFICE
 
                 Dim oSM As Object            'Root object for accessing OpenOffice FROM VB
                 Dim oDesk, oDoc As Object 'First objects FROM the API
-                Dim arg(- 1) As Object             'Ignore it for the moment !
+                Dim arg(-1) As Object             'Ignore it for the moment !
 
                 oSM = CreateObject("com.sun.star.ServiceManager")
 
@@ -2650,7 +1910,7 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "_kab\otd"
@@ -2664,7 +1924,7 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "proizv"
@@ -2678,7 +1938,7 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "tel"
@@ -2692,7 +1952,7 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "serial"
@@ -2706,7 +1966,7 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "porti"
@@ -2720,7 +1980,7 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "ipaddr"
@@ -2734,7 +1994,7 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "tip"
@@ -2748,7 +2008,7 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "otvet"
@@ -2762,7 +2022,7 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
 
 
                 With Wrd.Selection.Find
@@ -2777,7 +2037,7 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
 
 
                 WrdDc = Nothing
@@ -2820,7 +2080,7 @@ Module MOD_OPENOFFICE
 
                 Dim oSM As Object            'Root object for accessing OpenOffice FROM VB
                 Dim oDesk, oDoc As Object 'First objects FROM the API
-                Dim arg(- 1) As Object             'Ignore it for the moment !
+                Dim arg(-1) As Object             'Ignore it for the moment !
 
                 oSM = CreateObject("com.sun.star.ServiceManager")
 
@@ -2924,7 +2184,7 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "kab_otd"
@@ -2938,7 +2198,7 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "otvet"
@@ -2952,7 +2212,7 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "tel"
@@ -2966,7 +2226,7 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "ser"
@@ -2980,7 +2240,7 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "INN"
@@ -2994,7 +2254,7 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
 
                 WrdDc = Nothing
                 Wrd = Nothing
@@ -3057,7 +2317,7 @@ Module MOD_OPENOFFICE
 
                 Dim oSM As Object            'Root object for accessing OpenOffice FROM VB
                 Dim oDesk, oDoc As Object 'First objects FROM the API
-                Dim arg(- 1) As Object             'Ignore it for the moment !
+                Dim arg(-1) As Object             'Ignore it for the moment !
                 Dim mmerge As Object
                 'Instanciate OOo : this line is mandatory with VB for OOo API
 
@@ -3452,7 +2712,7 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "Ответственный"
@@ -3466,7 +2726,7 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
 
 
                 With Wrd.Selection.Find
@@ -3481,7 +2741,7 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "Department"
@@ -3495,7 +2755,7 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "Office"
@@ -3509,7 +2769,7 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
 
                 'rs = New ADODB.Recordset
                 'rs.Open("Select * FROM kompy where OTvetstvennyj='" & frmReports.cmbOTV.Text & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
@@ -3526,7 +2786,7 @@ Module MOD_OPENOFFICE
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
 
 
                 oTable = WrdDc.Tables.Add(WrdDc.Bookmarks.Item("TABLE1").Range, Count + 1, 5)
@@ -3778,7 +3038,7 @@ Module MOD_OPENOFFICE
 
 
         Exit Sub
-        err_:
+err_:
 
         MsgBox(Err.Description)
     End Sub
@@ -3884,7 +3144,7 @@ Module MOD_OPENOFFICE
             oTable.Cell(1, 3).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG11", "Производитель")
 
             oTable.Cell(2, 1).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG12", "Системная плата")
-            oTable.Cell(2, 2).Range.Text = .Fields("Mb").Value & ", " & "SN: " & .Fields("Mb_Id").Value
+            oTable.Cell(2, 2).Range.Text = .Fields("MB_NAME").Value & ", " & "SN: " & .Fields("Mb_Id").Value
             oTable.Cell(2, 3).Range.Text = .Fields("Mb_Proizvod").Value
 
             oTable.Cell(3, 1).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG13", "Процессор")
@@ -4624,2418 +3884,125 @@ Module MOD_OPENOFFICE
         Wrd.Selection.Find.ClearFormatting()
         Wrd.Selection.Find.Replacement.ClearFormatting()
 
-        With rs
-            .MoveFirst()
-            Do While Not .EOF = True
-
-                With Wrd.Selection.Find
-                    .Text = "Организация"
-                    .Replacement.Text = Organ
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                With Wrd.Selection.Find
-                    .Text = "Сисадмин"
-                    .Replacement.Text = SISADM
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("Ser_N_SIS").Value
-
-                With Wrd.Selection.Find
-                    .Text = "Ser_N_SIS"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("ID").Value
-
-                With Wrd.Selection.Find
-                    .Text = "ID"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-
-                uname = .Fields("nomerPC").Value
-
-                With Wrd.Selection.Find
-                    .Text = "nomerPC"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("CPU1").Value
-
-                With Wrd.Selection.Find
-                    .Text = "CPU1"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("CPUmhz1").Value
-
-                With Wrd.Selection.Find
-                    .Text = "CPUmhz1"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("CPUSocket1").Value
-
-                With Wrd.Selection.Find
-                    .Text = "CPUSocket1"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("CPUProizv1").Value
-
-                With Wrd.Selection.Find
-                    .Text = "CPUProizv1"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("CPU2").Value
-
-                With Wrd.Selection.Find
-                    .Text = "CPU2"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("CPUmhz2").Value
-
-                With Wrd.Selection.Find
-                    .Text = "CPUmhz2"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("CPUSocket2").Value
-
-                With Wrd.Selection.Find
-                    .Text = "CPUSocket2"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("CPUProizv2").Value
-
-                With Wrd.Selection.Find
-                    .Text = "CPUProizv2"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("CPU3").Value
-
-                With Wrd.Selection.Find
-                    .Text = "CPU3"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("CPUmhz3").Value
-
-                With Wrd.Selection.Find
-                    .Text = "CPUmhz3"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("CPUSocket3").Value
-
-                With Wrd.Selection.Find
-                    .Text = "CPUSocket3"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("CPUProizv3").Value
-
-                With Wrd.Selection.Find
-                    .Text = "CPUProizv3"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("CPU4").Value
-
-                With Wrd.Selection.Find
-                    .Text = "CPU4"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("CPUmhz4").Value
-
-                With Wrd.Selection.Find
-                    .Text = "CPUmhz4"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("CPUSocket4").Value
-
-                With Wrd.Selection.Find
-                    .Text = "CPUSocket4"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("CPUProizv4").Value
-
-                With Wrd.Selection.Find
-                    .Text = "CPUProizv4"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("Mb").Value
-
-                With Wrd.Selection.Find
-                    .Text = "Mb1"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("Mb_Chip").Value
-
-                With Wrd.Selection.Find
-                    .Text = "Mb_Chip"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("Mb_Id").Value
-
-                With Wrd.Selection.Find
-                    .Text = "Mb_Iz"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("Mb_Proizvod").Value
-
-                With Wrd.Selection.Find
-                    .Text = "Mb_Proizvod"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("RAM_1").Value
-                With Wrd.Selection.Find
-                    .Text = "RAM_1"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("RAM_SN_1").Value
-                With Wrd.Selection.Find
-                    .Text = "RAM_SN_1"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("RAM_speed_1").Value
-                With Wrd.Selection.Find
-                    .Text = "RAM_speed_1"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("RAM_PROIZV_1").Value
-                With Wrd.Selection.Find
-                    .Text = "RAM_PROIZV_1"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-
-                uname = .Fields("RAM_2").Value
-                With Wrd.Selection.Find
-                    .Text = "RAM_2"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("RAM_SN_2").Value
-                With Wrd.Selection.Find
-                    .Text = "RAM_SN_2"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("RAM_speed_2").Value
-                With Wrd.Selection.Find
-                    .Text = "RAM_speed_2"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("RAM_PROIZV_2").Value
-                With Wrd.Selection.Find
-                    .Text = "RAM_PROIZV_2"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("RAM_3").Value
-                With Wrd.Selection.Find
-                    .Text = "RAM_3"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("RAM_SN_3").Value
-                With Wrd.Selection.Find
-                    .Text = "RAM_SN_3"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("RAM_speed_3").Value
-                With Wrd.Selection.Find
-                    .Text = "RAM_speed_3"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("RAM_PROIZV_3").Value
-                With Wrd.Selection.Find
-                    .Text = "RAM_PROIZV_3"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("RAM_4").Value
-                With Wrd.Selection.Find
-                    .Text = "RAM_4"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("RAM_SN_4").Value
-                With Wrd.Selection.Find
-                    .Text = "RAM_SN_4"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("RAM_speed_4").Value
-                With Wrd.Selection.Find
-                    .Text = "RAM_speed_4"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("RAM_PROIZV_4").Value
-                With Wrd.Selection.Find
-                    .Text = "RAM_PROIZV_4"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("HDD_Name_1").Value
-                With Wrd.Selection.Find
-                    .Text = "HDD_Name_1"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("HDD_OB_1").Value
-                With Wrd.Selection.Find
-                    .Text = "HDD_OB_1"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("HDD_SN_1").Value
-                With Wrd.Selection.Find
-                    .Text = "HDD_SN_1"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("HDD_PROIZV_1").Value
-                With Wrd.Selection.Find
-                    .Text = "HDD_PROIZV_1"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("HDD_Name_2").Value
-                With Wrd.Selection.Find
-                    .Text = "HDD_Name_2"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("HDD_OB_2").Value
-                With Wrd.Selection.Find
-                    .Text = "HDD_OB_2"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("HDD_SN_2").Value
-                With Wrd.Selection.Find
-                    .Text = "HDD_SN_2"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("HDD_PROIZV_2").Value
-                With Wrd.Selection.Find
-                    .Text = "HDD_PROIZV_2"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-
-                uname = .Fields("HDD_Name_3").Value
-                With Wrd.Selection.Find
-                    .Text = "HDD_Name_3"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("HDD_OB_3").Value
-                With Wrd.Selection.Find
-                    .Text = "HDD_OB_3"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("HDD_SN_3").Value
-                With Wrd.Selection.Find
-                    .Text = "HDD_SN_3"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("HDD_PROIZV_3").Value
-                With Wrd.Selection.Find
-                    .Text = "HDD_PROIZV_3"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-
-                uname = .Fields("HDD_Name_4").Value
-                With Wrd.Selection.Find
-                    .Text = "HDD_Name_4"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("HDD_OB_4").Value
-                With Wrd.Selection.Find
-                    .Text = "HDD_OB_4"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("HDD_SN_4").Value
-                With Wrd.Selection.Find
-                    .Text = "HDD_SN_4"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("HDD_PROIZV_4").Value
-                With Wrd.Selection.Find
-                    .Text = "HDD_PROIZV_4"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("SVGA_NAME").Value
-                With Wrd.Selection.Find
-                    .Text = "SVGA_NAME"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("SVGA_OB_RAM").Value
-                With Wrd.Selection.Find
-                    .Text = "SVGA_OB_RAM"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("SVGA_SN").Value
-                With Wrd.Selection.Find
-                    .Text = "SVGA_SN"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("SVGA_PROIZV").Value
-                With Wrd.Selection.Find
-                    .Text = "SVGA_PROIZV"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("SOUND_NAME").Value
-                With Wrd.Selection.Find
-                    .Text = "SOUND_NAME"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("SOUND_SN").Value
-                With Wrd.Selection.Find
-                    .Text = "SOUND_SN"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("SOUND_PROIZV").Value
-                With Wrd.Selection.Find
-                    .Text = "SOUND_PROIZV"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("CD_NAME").Value
-                With Wrd.Selection.Find
-                    .Text = "CD_NAME"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("CD_SPEED").Value
-                With Wrd.Selection.Find
-                    .Text = "CD_SPEED"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("CD_SN").Value
-                With Wrd.Selection.Find
-                    .Text = "CD_SN"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("CD_PROIZV").Value
-                With Wrd.Selection.Find
-                    .Text = "CD_PROIZV"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("CDRW_NAME").Value
-                With Wrd.Selection.Find
-                    .Text = "CDRW_NAME"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("CDRW_SPEED").Value
-                With Wrd.Selection.Find
-                    .Text = "CDRW_SPEED"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("CDRW_SN").Value
-                With Wrd.Selection.Find
-                    .Text = "CDRW_SN"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("CDRW_PROIZV").Value
-                With Wrd.Selection.Find
-                    .Text = "CDRW_PROIZV"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("DVD_NAME").Value
-                With Wrd.Selection.Find
-                    .Text = "DVD_NAME"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("DVD_SPEED").Value
-                With Wrd.Selection.Find
-                    .Text = "DVD_SPEED"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("DVD_SN").Value
-                With Wrd.Selection.Find
-                    .Text = "DVD_SN"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("DVD_PROIZV").Value
-                With Wrd.Selection.Find
-                    .Text = "DVD_PROIZV"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("NET_NAME_1").Value
-                With Wrd.Selection.Find
-                    .Text = "NET_NAME_1"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("NET_IP_1").Value
-                With Wrd.Selection.Find
-                    .Text = "NET_IP_1"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("NET_MAC_1").Value
-                With Wrd.Selection.Find
-                    .Text = "NET_MAC_1"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("NET_PROIZV_1").Value
-                With Wrd.Selection.Find
-                    .Text = "NET_PROIZV_1"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-
-                uname = .Fields("NET_NAME_2").Value
-                With Wrd.Selection.Find
-                    .Text = "NET_NAME_2"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("NET_IP_2").Value
-                With Wrd.Selection.Find
-                    .Text = "NET_IP_2"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("NET_MAC_2").Value
-                With Wrd.Selection.Find
-                    .Text = "NET_MAC_2"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("NET_PROIZV_2").Value
-                With Wrd.Selection.Find
-                    .Text = "NET_PROIZV_2"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("FDD_NAME").Value
-                With Wrd.Selection.Find
-                    .Text = "FDD_NAME"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("FDD_SN").Value
-                With Wrd.Selection.Find
-                    .Text = "FDD_SN"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("FDD_PROIZV").Value
-                With Wrd.Selection.Find
-                    .Text = "FDD_PROIZV"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("MODEM_NAME").Value
-                With Wrd.Selection.Find
-                    .Text = "MODEM_NAME"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("MODEM_SN").Value
-                With Wrd.Selection.Find
-                    .Text = "MODEM_SN"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("MODEM_PROIZV").Value
-                With Wrd.Selection.Find
-                    .Text = "MODEM_PROIZV"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("KEYBOARD_NAME").Value
-                With Wrd.Selection.Find
-                    .Text = "KEYBOARD_NAME"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("KEYBOARD_SN").Value
-                With Wrd.Selection.Find
-                    .Text = "KEYBOARD_SN"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("KEYBOARD_PROIZV").Value
-                With Wrd.Selection.Find
-                    .Text = "KEYBOARD_PROIZV"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("MOUSE_NAME").Value
-                With Wrd.Selection.Find
-                    .Text = "MOUSE_NAME"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("MOUSE_SN").Value
-                With Wrd.Selection.Find
-                    .Text = "MOUSE_SN"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("MOUSE_PROIZV").Value
-                With Wrd.Selection.Find
-                    .Text = "MOUSE_PROIZV"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("USB_NAME").Value
-                With Wrd.Selection.Find
-                    .Text = "USB_NAME"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("USB_SN").Value
-                With Wrd.Selection.Find
-                    .Text = "USB_SN"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("USB_PROIZV").Value
-                With Wrd.Selection.Find
-                    .Text = "USB_PROIZV"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("PCI_NAME").Value
-                With Wrd.Selection.Find
-                    .Text = "PCI_NAME"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("PCI_SN").Value
-                With Wrd.Selection.Find
-                    .Text = "PCI_SN"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("PCI_PROIZV").Value
-                With Wrd.Selection.Find
-                    .Text = "PCI_PROIZV"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("MONITOR_NAME").Value
-                With Wrd.Selection.Find
-                    .Text = "MONITOR_NAME"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("MONITOR_DUM").Value
-                With Wrd.Selection.Find
-                    .Text = "MONITOR_DUM"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("MONITOR_SN").Value
-                With Wrd.Selection.Find
-                    .Text = "MONITOR_SN"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("MONITOR_PROIZV").Value
-                With Wrd.Selection.Find
-                    .Text = "MONITOR_PROIZV"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("MONITOR_PROIZV").Value
-                With Wrd.Selection.Find
-                    .Text = "MONITOR_PROIZV"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("MONITOR_NAME2").Value
-                With Wrd.Selection.Find
-                    .Text = "MONITOR_NAME2"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("MONITOR_DUM2").Value
-                With Wrd.Selection.Find
-                    .Text = "MONITOR_DUM2"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("MONITOR_SN2").Value
-                With Wrd.Selection.Find
-                    .Text = "MONITOR_SN2"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("MONITOR_PROIZV2").Value
-                With Wrd.Selection.Find
-                    .Text = "MONITOR_PROIZV2"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("AS_NAME").Value
-                With Wrd.Selection.Find
-                    .Text = "AS_NAME"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("AS_SN").Value
-                With Wrd.Selection.Find
-                    .Text = "AS_SN"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("AS_PROIZV").Value
-                With Wrd.Selection.Find
-                    .Text = "AS_PROIZV"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("IBP_NAME").Value
-                With Wrd.Selection.Find
-                    .Text = "IBP_NAME"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("IBP_SN").Value
-                With Wrd.Selection.Find
-                    .Text = "IBP_SN"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("IBP_PROIZV").Value
-                With Wrd.Selection.Find
-                    .Text = "IBP_PROIZV"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("FILTR_NAME").Value
-                With Wrd.Selection.Find
-                    .Text = "FILTR_NAME"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("FILTR_SN").Value
-                With Wrd.Selection.Find
-                    .Text = "FILTR_SN"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("FILTR_PROIZV").Value
-                With Wrd.Selection.Find
-                    .Text = "FILTR_PROIZV"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("PRINTER_NAME_1").Value
-                With Wrd.Selection.Find
-                    .Text = "PRINTER_NAME_1"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("PRINTER_SN_1").Value
-                With Wrd.Selection.Find
-                    .Text = "PRINTER_SN_1"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("PORT_1").Value
-                With Wrd.Selection.Find
-                    .Text = "PORT_1"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("PRINTER_PROIZV_1").Value
-                With Wrd.Selection.Find
-                    .Text = "PRINTER_PROIZV_1"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-
-                uname = .Fields("PRINTER_NAME_2").Value
-                With Wrd.Selection.Find
-                    .Text = "PRINTER_NAME_2"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("PRINTER_SN_2").Value
-                With Wrd.Selection.Find
-                    .Text = "PRINTER_SN_2"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("PORT_2").Value
-                With Wrd.Selection.Find
-                    .Text = "PORT_2"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("PRINTER_PROIZV_2").Value
-                With Wrd.Selection.Find
-                    .Text = "PRINTER_PROIZV_2"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("PRINTER_NAME_3").Value
-                With Wrd.Selection.Find
-                    .Text = "PRINTER_NAME_3"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("PRINTER_SN_3").Value
-                With Wrd.Selection.Find
-                    .Text = "PRINTER_SN_3"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("PORT_3").Value
-                With Wrd.Selection.Find
-                    .Text = "PORT_3"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("PRINTER_PROIZV_3").Value
-                With Wrd.Selection.Find
-                    .Text = "PRINTER_PROIZV_3"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("SCANER_NAME").Value
-                With Wrd.Selection.Find
-                    .Text = "SCANER_NAME"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("SCANER_SN").Value
-                With Wrd.Selection.Find
-                    .Text = "SCANER_SN"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("SCANER_PROIZV").Value
-                With Wrd.Selection.Find
-                    .Text = "SCANER_PROIZV"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("NET_NAME").Value
-                With Wrd.Selection.Find
-                    .Text = "NET_NAME"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("PSEVDONIM").Value
-                With Wrd.Selection.Find
-                    .Text = "PSEVDONIM"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("NET_NAME").Value
-                With Wrd.Selection.Find
-                    .Text = "#NETNAME"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("MESTO").Value
-                With Wrd.Selection.Find
-                    .Text = "Department"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("kabn").Value
-                With Wrd.Selection.Find
-                    .Text = "Office"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("TIP_COMPA").Value
-                With Wrd.Selection.Find
-                    .Text = "TIP_COMPA"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("FILIAL").Value
-                With Wrd.Selection.Find
-                    .Text = "Branch"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("TELEPHONE").Value
-                With Wrd.Selection.Find
-                    .Text = "TELEPHONE"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("INV_NO_SYSTEM").Value
-                With Wrd.Selection.Find
-                    .Text = "INV_NO_SYSTEM"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("INV_NO_PRINTER").Value
-                With Wrd.Selection.Find
-                    .Text = "INV_NO_PRINTER"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("INV_NO_MODEM").Value
-                With Wrd.Selection.Find
-                    .Text = "INV_NO_MODEM"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("INV_NO_SCANER").Value
-                With Wrd.Selection.Find
-                    .Text = "INV_NO_SCANER"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("INV_NO_MONITOR").Value
-                With Wrd.Selection.Find
-                    .Text = "INV_NO_MONITOR"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("INV_NO_IBP").Value
-                With Wrd.Selection.Find
-                    .Text = "INV_NO_IBP"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("OTvetstvennyj").Value
-                With Wrd.Selection.Find
-                    .Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG5", "Ответственный")
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("BLOCK").Value
-                With Wrd.Selection.Find
-                    .Text = "BLOCK"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("SN_BLOCK").Value
-                With Wrd.Selection.Find
-                    .Text = "SN_BLOCK"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("PROIZV_BLOCK").Value
-                With Wrd.Selection.Find
-                    .Text = "PROIZV_BLOCK"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                uname = .Fields("SYS_PR").Value
-                With Wrd.Selection.Find
-                    .Text = "SYS_PR"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-
-                uname = .Fields("StoimRub").Value
-                With Wrd.Selection.Find
-                    .Text = "StoimRub"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-
-                uname = .Fields("DataVVoda").Value
-                With Wrd.Selection.Find
-                    .Text = "DataVVoda"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-
-                Dim rs2 As Recordset
-                rs2 = New Recordset
-                rs2.Open("Select Postav FROM Garantia_sis WHERE Id_Comp=" & .Fields("id").Value, DB7,
-                         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
-                With rs2
-                    uname = .Fields("Postav").Value
-                End With
-                rs2.Close()
-                rs2 = Nothing
-
-
-                With Wrd.Selection.Find
-                    .Text = "Postav"
-                    .Replacement.Text = uname
-                    .Forward = True
-                    .Wrap = WdFindWrap.wdFindContinue
-                    .Format = False
-                    .MatchCase = True
-                    .MatchWholeWord = False
-                    .MatchWildcards = False
-                    ' .MatchSoundsLike = False
-                    .MatchAllWordForms = False
-                End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
-
-                oPara1 = oDoc.Content.Paragraphs.Add
-                oPara1.Range.Text = ""
-                oPara1.Range.Font.Bold = True
-                oPara1.Format.SpaceAfter = 24    '24 pt spacing after paragraph.
-                oPara1.Range.InsertParagraphAfter()
-
-                .MoveNext()
-                'DoEvents
-            Loop
+        With Wrd.Selection.Find
+            .Text = "Организация"
+            .Replacement.Text = Organ
+            .Forward = True
+            .Wrap = WdFindWrap.wdFindContinue
+            .Format = False
+            .MatchCase = True
+            .MatchWholeWord = False
+            .MatchWildcards = False
+            ' .MatchSoundsLike = False
+            .MatchAllWordForms = False
         End With
+        Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
+
+        With Wrd.Selection.Find
+            .Text = "Сисадмин"
+            .Replacement.Text = SISADM
+            .Forward = True
+            .Wrap = WdFindWrap.wdFindContinue
+            .Format = False
+            .MatchCase = True
+            .MatchWholeWord = False
+            .MatchWildcards = False
+            ' .MatchSoundsLike = False
+            .MatchAllWordForms = False
+        End With
+        Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
+
+
+        Dim lngCounter As Integer
+        Dim FirstColumn As Boolean
+
+        Do Until rs.EOF
+            FirstColumn = True      'FIRST COLUMN IS A LISTITEM, REST ARE LISTSUBITEMS
+
+
+            If DB_N <> "MS Access" Then uname = 2 Else uname = 1
+
+            For lngCounter = 0 To rs.Fields.Count - uname
+
+                If FirstColumn Then
+                    If Not IsDBNull(rs.Fields(lngCounter).Value) Then
+                       
+                        With Wrd.Selection.Find
+                            .Text = rs.Fields(lngCounter).Name
+                            .Replacement.Text = rs.Fields(lngCounter).Value
+                            .Forward = True
+                            .Wrap = WdFindWrap.wdFindContinue
+                            .Format = False
+                            .MatchCase = True
+                            .MatchWholeWord = False
+                            .MatchWildcards = False
+                            ' .MatchSoundsLike = False
+                            .MatchAllWordForms = False
+                        End With
+                        Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
+
+                    Else
+
+                    End If                  'TO KEEP DATA FROM SHIFTING LEFT
+                    FirstColumn = False
+                Else
+                    If Not IsDBNull(rs.Fields(lngCounter).Value) Then
+                        With Wrd.Selection.Find
+                            .Text = rs.Fields(lngCounter).Name
+                            .Replacement.Text = rs.Fields(lngCounter).Value
+                            .Forward = True
+                            .Wrap = WdFindWrap.wdFindContinue
+                            .Format = False
+                            .MatchCase = True
+                            .MatchWholeWord = False
+                            .MatchWildcards = False
+                            ' .MatchSoundsLike = False
+                            .MatchAllWordForms = False
+                        End With
+                        Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
+                    Else
+
+                    End If
+                End If
+            Next
+            rs.MoveNext()
+        Loop
+
         rs.Close()
         rs = Nothing
+
+
+        Dim rs2 As Recordset
+        rs2 = New Recordset
+        rs2.Open("Select Postav FROM Garantia_sis WHERE Id_Comp=" & frmComputers.sCOUNT, DB7,
+                         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
+
+        With rs2
+            uname = .Fields("Postav").Value
+        End With
+        rs2.Close()
+        rs2 = Nothing
+
+        With Wrd.Selection.Find
+            .Text = "Postav"
+            .Replacement.Text = uname
+            .Forward = True
+            .Wrap = WdFindWrap.wdFindContinue
+            .Format = False
+            .MatchCase = True
+            .MatchWholeWord = False
+            .MatchWildcards = False
+            ' .MatchSoundsLike = False
+            .MatchAllWordForms = False
+        End With
+        Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
+
+        oPara1 = oDoc.Content.Paragraphs.Add
+        oPara1.Range.Text = ""
+        oPara1.Range.Font.Bold = True
+        oPara1.Format.SpaceAfter = 24    '24 pt spacing after paragraph.
+        oPara1.Range.InsertParagraphAfter()
 
         'В составе устройства
         '#####################################################################################

@@ -831,7 +831,7 @@ Module MOD_INF_TECH_LOAD
 
 
             'Материнская плата
-            If Not IsDBNull(.Fields("Mb").Value) Then frmComputers.cmbMB.Text = .Fields("Mb").Value
+            If Not IsDBNull(.Fields("MB_NAME").Value) Then frmComputers.cmbMB.Text = .Fields("MB_NAME").Value
             If Not IsDBNull(.Fields("Mb_Chip").Value) Then frmComputers.txtChip.Text = .Fields("Mb_Chip").Value
             If Not IsDBNull(.Fields("Mb_Proizvod").Value) Then frmComputers.PROizV5.Text = .Fields("Mb_Proizvod").Value
             If Not IsDBNull(.Fields("Mb_Id").Value) Then frmComputers.txtSN_MB.Text = .Fields("Mb_Id").Value

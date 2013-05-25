@@ -294,7 +294,7 @@
                       LockTypeEnum.adLockOptimistic)
         With BASECOMP
 
-            frmGarCPL.cmbCPU1.Text = .Fields("Mb").Value
+            frmGarCPL.cmbCPU1.Text = .Fields("MB_NAME").Value
             frmGarCPL.txtMHZ1.Text = .Fields("Mb_Chip").Value
             frmGarCPL.PROizV1.Text = .Fields("Mb_Proizvod").Value
             frmGarCPL.txtMHZ2.Text = .Fields("Mb_Id").Value

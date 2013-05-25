@@ -2738,7 +2738,7 @@ Public Class frmReports
                 End If
 
 
-                If chkTeh(2) = True Then LvKompOtd.Items(CInt(intj)).SubItems.Add(.Fields("MB").Value)
+                If chkTeh(2) = True Then LvKompOtd.Items(CInt(intj)).SubItems.Add(.Fields("MB_NAME").Value)
                 If chkTeh(3) = True Then _
                     LvKompOtd.Items(CInt(intj)).SubItems.Add(
                         .Fields("SVGA_NAME").Value & " " & .Fields("SVGA_OB_RAM").Value)
@@ -2943,7 +2943,7 @@ Public Class frmReports
 
 
         Exit Sub
-        Error_:
+Error_:
         Debug.Print(Err.Description)
         MsgBox(Err.Description)
     End Sub
@@ -3696,7 +3696,7 @@ Public Class frmReports
         End With
 
         Exit Sub
-        Error_:
+Error_:
         Debug.Print(Err.Description)
     End Sub
 
@@ -4071,7 +4071,7 @@ Public Class frmReports
 
 
         Exit Sub
-        err_:
+err_:
         'MsgBox(Err.Description, MsgBoxStyle.Information, ProGramName)
     End Sub
 
@@ -4423,7 +4423,7 @@ Public Class frmReports
                                 .MoveFirst()
                                 Do While Not .EOF
                                     If .Fields("id").Value = nom Then
-                                        NameKomp = .Fields("Mb").Value
+                                        NameKomp = .Fields("MB_NAME").Value
                                     End If
                                     .MoveNext()
                                     'DoEvents
@@ -4531,7 +4531,7 @@ Public Class frmReports
 
                     dat$ = d & "." & m & "." & g
                     If dat$ = "0.0.0" Or dat$ = ".." Then
-                        dat$ = Date.Today.AddDays(- 1)
+                        dat$ = Date.Today.AddDays(-1)
                     End If
 
                     Today = Date.Today
@@ -4675,7 +4675,7 @@ Public Class frmReports
                                 .MoveFirst()
                                 Do While Not .EOF
                                     If .Fields("id").Value = nom Then
-                                        NameKomp = .Fields("Mb").Value
+                                        NameKomp = .Fields("MB_NAME").Value
                                     End If
                                     .MoveNext()
                                     'DoEvents
@@ -4861,7 +4861,7 @@ Public Class frmReports
 
         Exit Sub
 
-        Error_:
+Error_:
         ResList(Me.lvGar)
     End Sub
 

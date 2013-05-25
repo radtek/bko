@@ -687,7 +687,7 @@ err_:
     Private Sub lstGroups_AfterSelect(ByVal sender As Object, ByVal e As TreeViewEventArgs) _
         Handles lstGroups.AfterSelect
         'ClearBackColor()
-        Me.Cursor = Cursors.WaitCursor
+        'Me.Cursor = Cursors.WaitCursor
         Me.txtSNAME.BackColor = Me.txtSBSN.BackColor
         Me.txtPSEUDONIM.BackColor = Me.txtSBSN.BackColor
         Me.cmbBranch.BackColor = Me.txtSBSN.BackColor
@@ -6909,11 +6909,9 @@ err_1:
         txtSearch.Text = ""
 
         gbTree.ForeColor = gbSNMP.ForeColor
-
-
+        
         Me.Cursor = Cursors.WaitCursor
-
-
+        
         'Dim newThread2 As New Thread(AddressOf LoadSPR_1)
         'newThread2.Start()
 

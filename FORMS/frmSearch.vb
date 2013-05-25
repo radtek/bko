@@ -247,11 +247,11 @@ Public Class frmSearch
                         Case "PC"
 
                             lstSearch.Items(CInt(intCount)).SubItems.Add(.Fields("CPU1").Value)
-                            lstSearch.Items(CInt(intCount)).SubItems.Add(
-                                IIf(.Fields("MB").Value <> "", "MB: " & .Fields("MB").Value, "") &
-                                IIf(.Fields("Mb_Chip").Value <> "", " Чипсет: " & .Fields("Mb_Chip").Value, "") &
-                                IIf(.Fields("RAM_1").Value <> "", " Память: " & .Fields("RAM_1").Value, "") &
-                                IIf(.Fields("HDD_Name_1").Value <> "", " Жесткий диск: " & .Fields("HDD_Name_1").Value, ""))
+                        lstSearch.Items(CInt(intCount)).SubItems.Add(
+                            IIf(.Fields("MB_NAME").Value <> "", "MB: " & .Fields("MB_NAME").Value, "") &
+                            IIf(.Fields("Mb_Chip").Value <> "", " Чипсет: " & .Fields("Mb_Chip").Value, "") &
+                            IIf(.Fields("RAM_1").Value <> "", " Память: " & .Fields("RAM_1").Value, "") &
+                            IIf(.Fields("HDD_Name_1").Value <> "", " Жесткий диск: " & .Fields("HDD_Name_1").Value, ""))
 
                             lstSearch.Items(CInt(intCount)).SubItems.Add(.Fields("SVGA_NAME").Value)
                             lstSearch.Items(CInt(intCount)).SubItems.Add(.Fields("SOUND_NAME").Value)

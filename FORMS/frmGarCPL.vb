@@ -686,7 +686,7 @@
                         LockTypeEnum.adLockOptimistic)
                 With rs
 
-                    .Fields("Mb").Value = Me.cmbCPU1.Text
+                    .Fields("MB_NAME").Value = Me.cmbCPU1.Text
                     .Fields("Mb_Chip").Value = Me.txtMHZ1.Text
                     .Fields("Mb_Proizvod").Value = Me.PROizV1.Text
                     .Fields("Mb_Id").Value = Me.txtMHZ2.Text

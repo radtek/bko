@@ -616,7 +616,7 @@ sAR:
             .Fields("CPUSocket4").Value = frmComputers.txtSoc4.Text
             .Fields("CPUProizv4").Value = frmComputers.PROizV4.Text
 
-            .Fields("Mb").Value = frmComputers.cmbMB.Text
+            .Fields("MB_NAME").Value = frmComputers.cmbMB.Text
             .Fields("Mb_Chip").Value = frmComputers.txtChip.Text
             .Fields("Mb_Proizvod").Value = frmComputers.PROizV5.Text
             .Fields("Mb_Id").Value = frmComputers.txtSN_MB.Text

@@ -957,7 +957,7 @@ Error_:
             End If
 
             'Материнская плата
-            If Len(.Fields("Mb").Value) <> 0 Then icounter = icounter + 1
+            If Len(.Fields("MB_NAME").Value) <> 0 Then icounter = icounter + 1
 
             'Модули памяти
 

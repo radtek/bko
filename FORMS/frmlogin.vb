@@ -200,7 +200,7 @@ Public Class frmLogin
                 .Fields("SISADM").Value = "SISADM"
                 .Fields("Name_Prog").Value = "BKO.NET"
                 .Fields("Nr").Value = "Yes"
-                .Fields("access").Value = "1.7.3.6"
+                .Fields("access").Value = "1.7.3.8"
                 .Update()
             End With
             rs25.Close()
@@ -234,10 +234,10 @@ Public Class frmLogin
         'ПРОВЕРКА ВЕРСИИ БД
         '######################################
 
-        If sVERSIA < "1.7.3.6" Or sVERSIA = "1.7.4" Then
+        If sVERSIA < "1.7.3.8" Or sVERSIA = "1.7.4" Then
 
             MsgBox(LNGIniFile.GetString("frmLogin", "MSG1", "Версия базы данных не является эталонной") & vbCrLf & "Вносим изменения в базу...", MsgBoxStyle.Information, "BKO.NET - " & tVER)
-           
+
             _DBALTER = True
 
             'Вносим изменения в базу

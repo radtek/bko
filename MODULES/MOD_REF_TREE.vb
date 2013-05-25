@@ -12,7 +12,7 @@ Module MOD_REF_TREE
     Private OfficeNode1 As TreeNode
     Private FontStyl As FontStyle
     Private iA1, iA2, iA3, iA4, iA5, iA6, iA7, iA8, iID As String
-
+    
     Private Sub FILING_FILIAL()
         On Error Resume Next
 
@@ -72,7 +72,8 @@ Module MOD_REF_TREE
                 FILING_TREE(lstgroups1, iA5, iA1, iA2, iA3, iID, iA4, BrancheNode1, iA6, iA7, iA8)
                 'lstgroups1.BeginInvoke(New MethodInvoker(AddressOf S_P_LOAD_t_1))
 
-
+                'iA4+iA8
+                
                 .MoveNext()
             Loop
         End With
@@ -93,8 +94,7 @@ Module MOD_REF_TREE
         'lstgroups.visible = False
         'lstgroups.HideSelection = False
         ' lstgroups.ShowRootLines = False
-
-
+        
         Dim sTEN As String
         Dim sVISIBLE As String
         Dim sSQL1 As String
@@ -104,8 +104,7 @@ Module MOD_REF_TREE
         Dim sSQL5 As String
 
         Dim iA1, iA2, iA3, iA4, iA5, iA6 As String
-
-
+        
         Dim objIniFile As New IniFile(PrPath & "base.ini")
         sVISIBLE = objIniFile.GetString("general", "VisibleALL", "")
         KCKey = objIniFile.GetString("general", "DK", 0)
@@ -121,14 +120,11 @@ Module MOD_REF_TREE
             zBranche = "0"
 
         Else
-
-
+            
         End If
-
-
+        
         lstgroups.Nodes.Clear()
-
-
+        
         Select Case sICONS
 
             Case "32*32"
@@ -164,21 +160,8 @@ Module MOD_REF_TREE
         End With
         rs.Close()
         rs = Nothing
-
-
-        If unamS2 = 0 Then
-
-        Else
-            If sVISIBLE = 1 Then
-                sSQL5 = "SELECT id, Name, N_F, N_M FROM SPR_KAB ORDER BY N_F, N_M, Name"
-            Else
-                sSQL5 = "SELECT id, Name, N_F, N_M FROM SPR_KAB where Arhiv=0 ORDER BY N_F, N_M, Name"
-            End If
-
-        End If
-
-
-        'Компы
+        
+     'Компы
 
         rs = New Recordset
         rs.Open("SELECT count(*) as t_n FROM SPR_MESTO", DB7, CursorTypeEnum.adOpenDynamic,
@@ -194,7 +177,7 @@ Module MOD_REF_TREE
         Dim unameS As String
         Dim unameS2 As String
         Dim unameS3 As String
-        Dim unameS4 As String
+        ' Dim unameS4 As String
 
         'Верхний нулевой уровень - вставляем название организации
 
@@ -212,30 +195,35 @@ Module MOD_REF_TREE
         Dim nodeRoot As New TreeNode(ORG, 69, 69)
         nodeRoot.Tag = "ROOT" & GENID()
         lstgroups.Nodes.Add(nodeRoot)
-
-
+        
         'Филиалы Первый уровень дерева
         'Проверяем все показывать или только активные
 
-        If zBranche = "0" Then
+        Select Case zBranche
 
-            If sVISIBLE = 1 Then
-                sSQL1 = "SELECT id, Filial FROM SPR_FILIAL ORDER BY Filial"
-            Else
-                sSQL1 = "SELECT id, Filial FROM SPR_FILIAL where Arhiv=0 ORDER BY Filial"
-            End If
+            Case "0"
+                Select Case sVISIBLE
 
-        Else
+                    Case 1
+                        sSQL1 = "SELECT id, Filial FROM SPR_FILIAL ORDER BY Filial"
+                    Case Else
+                        sSQL1 = "SELECT id, Filial FROM SPR_FILIAL where Arhiv=0 ORDER BY Filial"
 
-            If sVISIBLE = 1 Then
-                sSQL1 = "SELECT id, Filial FROM SPR_FILIAL where filial ='" & zBranche & "' ORDER BY Filial"
-            Else
-                sSQL1 = "SELECT id, Filial FROM SPR_FILIAL where Arhiv=0 and filial ='" & zBranche & "' ORDER BY Filial"
-            End If
+                End Select
 
-        End If
+            Case Else
 
+                Select Case sVISIBLE
 
+                    Case 1
+                        sSQL1 = "SELECT id, Filial FROM SPR_FILIAL where filial ='" & zBranche & "' ORDER BY Filial"
+                    Case Else
+                        sSQL1 = "SELECT id, Filial FROM SPR_FILIAL where Arhiv=0 and filial ='" & zBranche & "' ORDER BY Filial"
+
+                End Select
+
+        End Select
+        
         rs = New Recordset
         rs.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
@@ -254,7 +242,6 @@ Module MOD_REF_TREE
                 BrancheNode1 = BrancheNode
                 lstgroups1 = lstgroups
 
-
                 unameS = .Fields("filial").Value
 
                 If KCKey = 0 And Len(DCKey) <> 0 Then
@@ -265,7 +252,7 @@ Module MOD_REF_TREE
                     End If
                 End If
 
-                BrancheNode.ForeColor = Color.DarkBlue
+                ' BrancheNode.ForeColor = Color.DarkBlue
 
                 'Вставляем технику если есть
                 Dim cFil As String
@@ -278,23 +265,30 @@ Module MOD_REF_TREE
                 rs4.Close()
                 rs4 = Nothing
 
+                Select Case cFil
 
-                If cFil <> 0 Then
+                    Case 0
 
-                    'lstgroups.BeginInvoke(New MethodInvoker(AddressOf FILING_FILIAL))
-                    Call FILING_FILIAL()
+                    Case Else
 
-                End If
+                        Call FILING_FILIAL()
+
+                End Select
+                
 
                 'Отделы в филиалах Второй уровень дерева
 
-                If sVISIBLE = 1 Then
-                    sSQL2 = "SELECT id, Filial, N_Otd FROM SPR_OTD_FILIAL WHERE filial='" & unameS &
+                Select Case sVISIBLE
+
+                    Case 1
+                        sSQL2 = "SELECT id, Filial, N_Otd FROM SPR_OTD_FILIAL WHERE filial='" & unameS &
                             "' ORDER BY Filial, N_Otd"
-                Else
-                    sSQL2 = "SELECT id, Filial, N_Otd FROM SPR_OTD_FILIAL where filial='" & unameS &
-                            "' AND Arhiv=0 ORDER BY Filial, N_Otd"
-                End If
+                    Case Else
+                        sSQL2 = "SELECT id, Filial, N_Otd FROM SPR_OTD_FILIAL where filial='" & unameS &
+                                                    "' AND Arhiv=0 ORDER BY Filial, N_Otd"
+
+                End Select
+
                 rs2 = New Recordset
                 rs2.Open(sSQL2, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
@@ -323,9 +317,7 @@ Module MOD_REF_TREE
                                 End If
                             End If
 
-                            DepatrmentNode.ForeColor = Color.DarkGreen
-                            'DepatrmentNode.NodeFont = New Font(DepatrmentNode.NodeFont, FontStyle.Italic)
-
+                            ' DepatrmentNode.ForeColor = Color.DarkGreen
 
                             sSQL4 = "SELECT count(*) as t_n FROM kompy WHERE filial ='" & unameS & "' AND mesto ='" &
                                     unameS2 & "' AND kabn=''"
@@ -337,14 +329,15 @@ Module MOD_REF_TREE
                             rs4.Close()
                             rs4 = Nothing
 
-                            If cFil <> 0 Then
+                            Select Case cFil
 
-                                'lstgroups.BeginInvoke(New MethodInvoker(AddressOf FILING_FILIAL))
-                                Call FILING_FILIAL()
+                                Case 0
 
+                                Case Else
 
-                            End If
+                                    Call FILING_FILIAL()
 
+                            End Select
 
                             'Кабинеты Третий уровень дерева
 
@@ -384,9 +377,6 @@ Module MOD_REF_TREE
                                             End If
                                         End If
 
-                                        OfficeNode.ForeColor = Color.DarkGoldenrod
-
-
                                         sSQL4 = "SELECT count(*) as t_n FROM kompy WHERE filial ='" & unameS &
                                                 "' AND mesto ='" & unameS2 & "' AND kabn='" & unameS3 & "'"
                                         rs4 = New Recordset
@@ -398,12 +388,15 @@ Module MOD_REF_TREE
                                         rs4 = Nothing
 
 
-                                        If cFil <> 0 Then
+                                        Select Case cFil
 
-                                            'lstgroups.BeginInvoke(New MethodInvoker(AddressOf FILING_FILIAL))
-                                            Call FILING_FILIAL()
+                                            Case 0
 
-                                        End If
+                                            Case Else
+
+                                                Call FILING_FILIAL()
+
+                                        End Select
 
                                         .MoveNext()
                                     Loop
@@ -415,7 +408,6 @@ Module MOD_REF_TREE
                             'Конец кабинетов
 
                         End If
-
 
                         .MoveNext()
                     Loop
@@ -429,7 +421,6 @@ Module MOD_REF_TREE
         rs.Close()
         rs = Nothing
 
-
         If KCKey = 0 And Len(DCKey) = 0 Then
 
             lstgroups.SelectedNode = nodeRoot
@@ -439,25 +430,11 @@ Module MOD_REF_TREE
 
         End If
 
-        'lstgroups.visible = True
-
-
-        '  If frmComputers.OneStart = 0 Then frmComputers.OneStart = 1
-
 exitsub:
 
         Exit Sub
 
-        ERR1:
-        'lstgroups.visible = True
-        'MsgBox Err.Description
-
-
-        ' If frmComputers.OneStart = 0 Then frmComputers.OneStart = 1
-
-        '    frmComputers.OneStart = 1
-        'End If
-
+ERR1:
 
         Select Case Err.Number
             Case 3021 'ignore, no entries in list
@@ -469,7 +446,6 @@ exitsub:
 
         End Select
 
-        ' lstgroups.SelectedNode.ExpandAll()
     End Sub
 
     Private Sub FILING_TREE(ByVal lstgroups As TreeView, ByVal iTipTehn As String, ByVal TipPC As String,
@@ -536,20 +512,38 @@ exitsub:
                 iA = 4
                 iB = 4
 
-
         End Select
 
+
+        If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
+            Spisan = 1
+        Else
+            Spisan = 0
+        End If
+
+        If balans = "1" Or balans = "True" Or balans = "-1" Then
+            If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
+                balans = 1
+            Else
+                balans = 0
+            End If
+        End If
+        
 
         'Определяем подчиненное оборудование (в составе)
         Dim d() As String
 
-        If iTipTehn = "MONITOR" Then
+        Select Case iTipTehn
 
-            If Len(OS) > 0 Then
-                d = Split(OS, "№")
-            End If
+            Case "MONITOR"
 
-        End If
+                If Len(OS) > 0 Then
+                    d = Split(OS, "№")
+                End If
+
+
+        End Select
+        
 
         'Dim TEHNodePS As TreeNode
 
@@ -607,53 +601,51 @@ exitsub:
                 On Error Resume Next
 
 
-                If Len(NET_NAME) = 0 Then
-
-                    uname = ""
-
-                Else
-
-                    Dim rsOT As Recordset
-                    rsOT = New Recordset
-                    rsOT.Open("SELECT A FROM spr_other where Name ='" & NET_NAME & "'", DB7,
-                              CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
-                    With rsOT
-                        If Not IsDBNull(.Fields("A").Value) Then uname = .Fields("A").Value
-                    End With
-
-                    rsOT.Close()
-                    rsOT = Nothing
-
-                End If
+                Select Case Len(NET_NAME)
 
 
+                    Case 0
+                        uname = ""
+
+                    Case Else
+                        Dim rsOT As Recordset
+                        rsOT = New Recordset
+                        rsOT.Open("SELECT A FROM spr_other where Name ='" & NET_NAME & "'", DB7,
+                                  CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
+                        With rsOT
+                            If Not IsDBNull(.Fields("A").Value) Then uname = .Fields("A").Value
+                        End With
+
+                        rsOT.Close()
+                        rsOT = Nothing
+
+                End Select
+                
                 Dim TEHNodeCNT As New TreeNode(L_NAME, uname, uname)
                 TEHNodeCNT.Tag = "C|" & iD
                 DepNode.Nodes.Add(TEHNodeCNT)
 
-                If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                    TEHNodeCNT.ForeColor = Color.DimGray
-                    TEHNodeCNT.NodeFont = New Font(lstgroups.Font, 8)
-                End If
+               
+                Select Case Spisan
+                    Case "1"
+                        TEHNodeCNT.ForeColor = Color.DimGray
+                        TEHNodeCNT.NodeFont = New Font(lstgroups.Font, 8)
+                    Case Else
+                End Select
 
-                If balans = "1" Or balans = "True" Or balans = "-1" Then
-
-                    If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
+                Select Case balans
+                    Case "1"
                         TEHNodeCNT.NodeFont = New Font(lstgroups.Font, 10)
-                    Else
+                    Case Else
                         TEHNodeCNT.NodeFont = New Font(lstgroups.Font, 2)
-                    End If
+                End Select
 
-                End If
-
-
-                If KCKey <> 0 Then
-                    If KCKey = iD Then
+                Select Case KCKey
+                    Case iD
                         lstgroups.SelectedNode = TEHNodeCNT
                         lstgroups.SelectedNode.Expand()
-                    End If
-                End If
+                End Select
 
                 '#####################################################################
                 '#####################################################################
@@ -678,573 +670,598 @@ exitsub:
                 rs3.Close()
                 rs3 = Nothing
 
-                If sCount > 0 Then
 
-                    Select Case sText
+                Select Case sCount
 
-                        Case 0
+                    Case 0
 
-                            sSQL4 =
-                                "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa,PRINTER_NAME_4,balans FROM kompy WHERE PCL =" &
-                                iD & " ORDER BY PSEVDONIM, tiptehn"
+                    Case Else
 
-                        Case 1
+                        Select Case sText
 
-                            sSQL4 =
-                                "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa,PRINTER_NAME_4,balans FROM kompy WHERE PCL =" &
-                                iD & " ORDER BY tiptehn, PSEVDONIM"
+                            Case 0
 
-                    End Select
+                                sSQL4 =
+                                    "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa,PRINTER_NAME_4,balans FROM kompy WHERE PCL =" &
+                                    iD & " ORDER BY PSEVDONIM, tiptehn"
 
+                            Case 1
 
-                    rs3 = New Recordset
-                    rs3.Open(sSQL4, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                                sSQL4 =
+                                    "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa,PRINTER_NAME_4,balans FROM kompy WHERE PCL =" &
+                                    iD & " ORDER BY tiptehn, PSEVDONIM"
 
-                    With rs3
-                        .MoveFirst()
+                        End Select
+                        
+                        rs3 = New Recordset
+                        rs3.Open(sSQL4, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-                        Do While Not .EOF
-                            Spisan = .Fields("Spisan").Value
-                            balans = .Fields("balans").Value
+                        With rs3
+                            .MoveFirst()
 
+                            Do While Not .EOF
+                                Spisan = .Fields("Spisan").Value
+                                balans = .Fields("balans").Value
 
-                            Select Case sTREENAME
+                                If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
+                                    Spisan = 1
+                                Else
+                                    Spisan = 0
+                                End If
 
-
-                                Case 0
-                                    N_NAME = .Fields("NET_NAME").Value
-                                    P_NAME = .Fields("PSEVDONIM").Value
-
-                                    If Len(N_NAME) = 0 Then
-                                        N_NAME = "NoName"
-                                    End If
-
-                                    If Len(P_NAME) = 0 Then
-                                        P_NAME = "NoName"
-                                    End If
-                                    L_NAME = N_NAME & " (" & P_NAME & ")"
-
-                                Case 2
-                                    P_NAME = .Fields("PSEVDONIM").Value
-
-                                    If Len(P_NAME) = 0 Then
-                                        P_NAME = "NoName"
-                                    End If
-                                    L_NAME = P_NAME
-
-                                Case 1
-
-                                    N_NAME = .Fields("NET_NAME").Value
-                                    If Len(N_NAME) = 0 Then
-                                        N_NAME = "NoName"
-                                    End If
-
-                                    L_NAME = N_NAME
-
-                            End Select
-
-
-                            Select Case .Fields("tiptehn").Value
-
-                                Case "NET"
-
-
-                                    Dim TEHNodePC As New TreeNode(L_NAME, 10, 10)
-                                    TEHNodePC.Tag = "C|" & .Fields("id").Value
-                                    TEHNodeCNT.Nodes.Add(TEHNodePC)
-                                    iD = .Fields("id").Value
-
-
-                                    Select Case n_set
-
-                                        Case "Off"
-                                            TEHNodePC.ForeColor = Color.Red
-
-                                        Case "Defective"
-
-                                            TEHNodePC.ForeColor = Color.Blue
-
-                                        Case Else
-
-
-                                            TEHNodePC.ForeColor = Color.Green
-
-                                    End Select
-
+                                If balans = "1" Or balans = "True" Or balans = "-1" Then
                                     If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                        TEHNodePC.ForeColor = Color.DimGray
-                                        TEHNodePC.NodeFont = New Font(lstgroups.Font, 8)
+                                        balans = 1
+                                    Else
+                                        balans = 0
                                     End If
+                                End If
 
-                                    If balans = "1" Or balans = "True" Or balans = "-1" Then
+                                Select Case sTREENAME
 
-                                        If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                            TEHNodePC.NodeFont = New Font(lstgroups.Font, 10)
-                                        Else
-                                            TEHNodePC.NodeFont = New Font(lstgroups.Font, 2)
+                                    Case 0
+                                        N_NAME = .Fields("NET_NAME").Value
+                                        P_NAME = .Fields("PSEVDONIM").Value
+
+                                        If Len(N_NAME) = 0 Then
+                                            N_NAME = "NoName"
                                         End If
 
-                                    End If
-
-
-                                    If KCKey <> 0 Then
-                                        If KCKey = iD Then
-                                            lstgroups.SelectedNode = TEHNodePC
-                                            lstgroups.SelectedNode.Expand()
+                                        If Len(P_NAME) = 0 Then
+                                            P_NAME = "NoName"
                                         End If
-                                    End If
+                                        L_NAME = N_NAME & " (" & P_NAME & ")"
 
+                                    Case 2
+                                        P_NAME = .Fields("PSEVDONIM").Value
 
-                                Case "PC"
+                                        If Len(P_NAME) = 0 Then
+                                            P_NAME = "NoName"
+                                        End If
+                                        L_NAME = P_NAME
 
-                                    iC = .Fields("TIP_COMPA").Value
+                                    Case 1
 
-
-                                    If iC = "Ноутбук" Or iC = "notebook" Or iC = "Notebook" Or iC = "NoteBook" Then
-                                        iC = "Ноутбук"
-                                    End If
-
-                                    If iC = "КПК" Or iC = "Pocket PC" Or iC = "Pocket" Or iC = "Palm" Then
-                                        iC = "КПК"
-                                    End If
-
-                                    If _
-                                        iC = "Сервер" Or iC = "Server" Or iC = "Сервер для тонких клиентов" Or
-                                        iC = "Сервер видео наблюдения" Then
-                                        iC = "Сервер"
-                                    End If
-
-                                    'Pocket PC
-
-                                    Select Case iC
-
-                                        Case "Рабочая станция"
-                                            iA = 4
-
-
-                                        Case "Сервер"
-
-                                            iA = 3
-
-                                        Case "КПК"
-                                            iA = 31
-
-                                        Case "Ноутбук"
-                                            iA = 5
-
-                                        Case Else
-                                            iA = 4
-
-                                    End Select
-
-
-                                    Dim TEHNodePC As New TreeNode(L_NAME, iA, iA)
-                                    iD = .Fields("id").Value
-                                    TEHNodePC.Tag = "C|" & .Fields("id").Value
-                                    iPSid = .Fields("id").Value
-
-                                    TEHNodeCNT.Nodes.Add(TEHNodePC)
-
-                                    'TEHNode.ForeColor = Color.Blue
-
-                                    If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                        TEHNodePC.ForeColor = Color.DimGray
-                                        TEHNodePC.NodeFont = New Font(lstgroups.Font, 8)
-                                    End If
-
-                                    If balans = "1" Or balans = "True" Or balans = "-1" Then
-
-                                        If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                                            TEHNodePC.NodeFont = New Font(lstgroups.Font, 10)
-                                        Else
-                                            TEHNodePC.NodeFont = New Font(lstgroups.Font, 2)
+                                        N_NAME = .Fields("NET_NAME").Value
+                                        If Len(N_NAME) = 0 Then
+                                            N_NAME = "NoName"
                                         End If
 
-                                    End If
+                                        L_NAME = N_NAME
 
-                                    If KCKey <> 0 Then
-                                        If KCKey = .Fields("id").Value Then
-                                            lstgroups.SelectedNode = TEHNodePC
-                                            lstgroups.SelectedNode.Expand()
-                                        End If
-                                    End If
+                                End Select
 
 
-                                    '#####################################################################
-                                    '#####################################################################
-                                    '#                          Компьютер в контейнере
-                                    '#####################################################################
-                                    '#####################################################################
+                                Select Case .Fields("tiptehn").Value
 
-                                    ' Dim sText As String = objIniFile.GetString("general", "Tree_S", 0)
-                                    ' Dim sSQL4 As String
+                                    Case "NET"
 
 
-                                    sSQL4 = "SELECT count(*) as t_n FROM kompy WHERE PCL =" & iD
-
-                                    'Dim rs3 As ADODB.Recordset
-                                    rs3 = New Recordset
-                                    rs3.Open(sSQL4, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
-                                    ' Dim sCount As String
-                                    With rs3
-                                        sCount = .Fields("t_n").Value
-                                    End With
-
-                                    rs3.Close()
-                                    rs3 = Nothing
-
-                                    If sCount > 0 Then
+                                        Dim TEHNodePC As New TreeNode(L_NAME, 10, 10)
+                                        TEHNodePC.Tag = "C|" & .Fields("id").Value
+                                        TEHNodeCNT.Nodes.Add(TEHNodePC)
+                                        iD = .Fields("id").Value
 
 
-                                        Select Case sText
+                                        Select Case n_set
 
-                                            Case 0
+                                            Case "Off"
+                                                TEHNodePC.ForeColor = Color.Red
 
-                                                sSQL4 =
-                                                    "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa,balans FROM kompy WHERE PCL =" &
-                                                    iD & " ORDER BY PSEVDONIM, tiptehn"
+                                            Case "Defective"
 
-                                            Case 1
+                                                TEHNodePC.ForeColor = Color.Blue
 
-                                                sSQL4 =
-                                                    "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa,balans FROM kompy WHERE PCL =" &
-                                                    iD & " ORDER BY tiptehn, PSEVDONIM"
+                                            Case Else
+
+
+                                                TEHNodePC.ForeColor = Color.Green
 
                                         End Select
 
 
+                                        Select Case Spisan
+                                            Case "1"
+                                                TEHNodePC.ForeColor = Color.DimGray
+                                                TEHNodePC.NodeFont = New Font(lstgroups.Font, 8)
+                                            Case Else
+                                        End Select
+
+                                        Select Case balans
+                                            Case "1"
+                                                TEHNodePC.NodeFont = New Font(lstgroups.Font, 10)
+                                            Case Else
+                                                TEHNodePC.NodeFont = New Font(lstgroups.Font, 2)
+                                        End Select
+
+                                        Select Case KCKey
+                                            Case iD
+                                                lstgroups.SelectedNode = TEHNodePC
+                                                lstgroups.SelectedNode.Expand()
+                                        End Select
+
+                                    Case "PC"
+
+                                        iC = .Fields("TIP_COMPA").Value
+
+
+                                        If iC = "Ноутбук" Or iC = "notebook" Or iC = "Notebook" Or iC = "NoteBook" Then
+                                            iC = "Ноутбук"
+                                        End If
+
+                                        If iC = "КПК" Or iC = "Pocket PC" Or iC = "Pocket" Or iC = "Palm" Then
+                                            iC = "КПК"
+                                        End If
+
+                                        If _
+                                            iC = "Сервер" Or iC = "Server" Or iC = "Сервер для тонких клиентов" Or
+                                            iC = "Сервер видео наблюдения" Then
+                                            iC = "Сервер"
+                                        End If
+
+                                        'Pocket PC
+
+                                        Select Case iC
+
+                                            Case "Рабочая станция"
+                                                iA = 4
+
+
+                                            Case "Сервер"
+
+                                                iA = 3
+
+                                            Case "КПК"
+                                                iA = 31
+
+                                            Case "Ноутбук"
+                                                iA = 5
+
+                                            Case Else
+                                                iA = 4
+
+                                        End Select
+
+
+                                        Dim TEHNodePC As New TreeNode(L_NAME, iA, iA)
+                                        iD = .Fields("id").Value
+                                        TEHNodePC.Tag = "C|" & .Fields("id").Value
+                                        iPSid = .Fields("id").Value
+
+                                        TEHNodeCNT.Nodes.Add(TEHNodePC)
+
+                                        'TEHNode.ForeColor = Color.Blue
+
+                                        Select Case Spisan
+                                            Case "1"
+                                                TEHNodePC.ForeColor = Color.DimGray
+                                                TEHNodePC.NodeFont = New Font(lstgroups.Font, 8)
+                                            Case Else
+                                        End Select
+
+                                        Select Case balans
+                                            Case "1"
+                                                TEHNodePC.NodeFont = New Font(lstgroups.Font, 10)
+                                            Case Else
+                                                TEHNodePC.NodeFont = New Font(lstgroups.Font, 2)
+                                        End Select
+
+                                       Select Case KCKey
+                                            Case .Fields("id").Value
+                                                lstgroups.SelectedNode = TEHNodePC
+                                                lstgroups.SelectedNode.Expand()
+                                        End Select
+
+                                        '#####################################################################
+                                        '#####################################################################
+                                        '#                          Компьютер в контейнере
+                                        '#####################################################################
+                                        '#####################################################################
+
+                                        ' Dim sText As String = objIniFile.GetString("general", "Tree_S", 0)
+                                        ' Dim sSQL4 As String
+
+
+                                        sSQL4 = "SELECT count(*) as t_n FROM kompy WHERE PCL =" & iD
+
+                                        'Dim rs3 As ADODB.Recordset
                                         rs3 = New Recordset
                                         rs3.Open(sSQL4, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
+                                        ' Dim sCount As String
                                         With rs3
-                                            .MoveFirst()
-
-                                            Do While Not .EOF
-
-                                                Spisan = .Fields("Spisan").Value
-                                                balans = .Fields("balans").Value
-
-                                                Select Case sTREENAME
-
-                                                    Case 0
-                                                        N_NAME = .Fields("NET_NAME").Value
-                                                        P_NAME = .Fields("PSEVDONIM").Value
-
-                                                        If Len(N_NAME) = 0 Then
-                                                            N_NAME = "NoName"
-                                                        End If
-
-                                                        If Len(P_NAME) = 0 Then
-                                                            P_NAME = "NoName"
-                                                        End If
-
-                                                        If N_NAME = P_NAME Then
-
-                                                            L_NAME = N_NAME
-
-                                                        Else
-
-                                                            L_NAME = N_NAME & " (" & P_NAME & ")"
-
-                                                        End If
-
-                                                    Case 2
-                                                        P_NAME = .Fields("PSEVDONIM").Value
-
-                                                        If Len(P_NAME) = 0 Then
-                                                            P_NAME = "NoName"
-                                                        End If
-                                                        L_NAME = P_NAME
-
-                                                    Case 1
-
-                                                        N_NAME = .Fields("NET_NAME").Value
-                                                        If Len(N_NAME) = 0 Then
-                                                            N_NAME = "NoName"
-                                                        End If
-
-                                                        L_NAME = N_NAME
-
-                                                End Select
-
-
-                                                Select Case .Fields("tiptehn").Value
-
-
-                                                    Case "Printer"
-
-                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC,
-                                                                          Spisan, balans, L_NAME, 7)
-
-
-                                                    Case "MFU"
-
-                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC,
-                                                                          Spisan, balans, L_NAME, 8)
-
-
-                                                    Case "SCANER"
-
-                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC,
-                                                                          Spisan, balans, L_NAME, 14)
-
-                                                    Case "ZIP"
-
-                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC,
-                                                                          Spisan, balans, L_NAME, 15)
-
-
-                                                    Case "PHONE"
-
-                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC,
-                                                                          Spisan, balans, L_NAME, 12)
-
-
-                                                    Case "OT"
-
-                                                        ' Dim uname As String
-
-                                                        On Error Resume Next
-
-
-                                                        If Len(.Fields("tip_compa").Value) = 0 Then
-
-                                                            uname = ""
-                                                        Else
-
-                                                            Dim rsOT As Recordset
-                                                            rsOT = New Recordset
-                                                            rsOT.Open(
-                                                                "SELECT A FROM spr_other where Name ='" &
-                                                                .Fields("tip_compa").Value & "'", DB7,
-                                                                CursorTypeEnum.adOpenDynamic,
-                                                                LockTypeEnum.adLockOptimistic)
-
-                                                            With rsOT
-                                                                '.MoveFirst()
-                                                                'Do While Not .EOF
-
-                                                                If Not IsDBNull(.Fields("A").Value) Then _
-                                                                    uname = .Fields("A").Value
-
-                                                                '.MoveNext()
-                                                                'Loop
-                                                            End With
-
-
-                                                            rsOT.Close()
-                                                            rsOT = Nothing
-
-
-                                                        End If
-
-
-                                                        If Len(uname) = 0 Or uname = " " Or uname = " 0" Or uname = "" _
-                                                            Then
-                                                            iA = 16
-                                                        Else
-                                                            iA = uname
-                                                        End If
-
-                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC,
-                                                                          Spisan, balans, L_NAME, iA)
-
-
-                                                    Case "MONITOR"
-
-                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC,
-                                                                          Spisan, balans, L_NAME, 17)
-
-
-                                                        '--------------VIP_Graff Добавление новой перефирии Начало-----------------
-                                                    Case "USB"
-
-                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC,
-                                                                          Spisan, balans, L_NAME, 18)
-
-
-                                                    Case "SOUND"
-
-                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC,
-                                                                          Spisan, balans, L_NAME, 44)
-
-                                                    Case "IBP"
-
-                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC,
-                                                                          Spisan, balans, L_NAME, 41)
-
-
-                                                    Case "FS"
-
-                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC,
-                                                                          Spisan, balans, L_NAME, 61)
-
-
-                                                    Case "KEYB"
-
-                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC,
-                                                                          Spisan, balans, L_NAME, 46)
-
-                                                    Case "MOUSE"
-
-                                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC,
-                                                                          Spisan, balans, L_NAME, 47)
-
-                                                        '--------------VIP_Graff Добавление новой перефирии Конец------------------
-
-                                                    Case Else
-
-
-                                                End Select
-
-
-                                                .MoveNext()
-                                            Loop
+                                            sCount = .Fields("t_n").Value
                                         End With
+
                                         rs3.Close()
                                         rs3 = Nothing
 
-                                    End If
-
-                                    '#####################################################################
-                                    '#####################################################################
-                                    '#                          Техника в контейнере
-                                    '#####################################################################
-                                    '#####################################################################
-
-                                Case "PHOTO"
-
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME, 11)
+                                        If sCount > 0 Then
 
 
-                                Case "Printer"
+                                            Select Case sText
 
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME,
-                                                      7)
+                                                Case 0
 
+                                                    sSQL4 =
+                                                        "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa,balans FROM kompy WHERE PCL =" &
+                                                        iD & " ORDER BY PSEVDONIM, tiptehn"
 
-                                Case "MFU"
+                                                Case 1
 
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME,
-                                                      8)
+                                                    sSQL4 =
+                                                        "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa,balans FROM kompy WHERE PCL =" &
+                                                        iD & " ORDER BY tiptehn, PSEVDONIM"
 
-
-                                Case "SCANER"
-
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME,
-                                                      14)
-
-
-                                Case "ZIP"
-
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME,
-                                                      15)
-
-                                Case "PHONE"
-
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME,
-                                                      12)
+                                            End Select
 
 
-                                Case "OT"
+                                            rs3 = New Recordset
+                                            rs3.Open(sSQL4, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-                                    'Dim uname As String
+                                            With rs3
+                                                .MoveFirst()
 
-                                    On Error Resume Next
+                                                Do While Not .EOF
 
+                                                    Spisan = .Fields("Spisan").Value
+                                                    balans = .Fields("balans").Value
+                                                    If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
+                                                        Spisan = 1
+                                                    Else
+                                                        Spisan = 0
+                                                    End If
 
-                                    If Len(.Fields("tip_compa").Value) = 0 Then
-
-                                        uname = ""
-                                    Else
-
-                                        Dim rsOT As Recordset
-                                        rsOT = New Recordset
-                                        rsOT.Open(
-                                            "SELECT A FROM spr_other where Name ='" & .Fields("tip_compa").Value & "'",
-                                            DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
-                                        With rsOT
-
-                                            If Not IsDBNull(.Fields("A").Value) Then uname = .Fields("A").Value
-
-                                        End With
-
-
-                                        rsOT.Close()
-                                        rsOT = Nothing
+                                                    If balans = "1" Or balans = "True" Or balans = "-1" Then
+                                                        If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
+                                                            balans = 1
+                                                        Else
+                                                            balans = 0
+                                                        End If
+                                                    End If
 
 
-                                    End If
+                                                    Select Case sTREENAME
+
+                                                        Case 0
+                                                            N_NAME = .Fields("NET_NAME").Value
+                                                            P_NAME = .Fields("PSEVDONIM").Value
+
+                                                            If Len(N_NAME) = 0 Then
+                                                                N_NAME = "NoName"
+                                                            End If
+
+                                                            If Len(P_NAME) = 0 Then
+                                                                P_NAME = "NoName"
+                                                            End If
+
+                                                            If N_NAME = P_NAME Then
+
+                                                                L_NAME = N_NAME
+
+                                                            Else
+
+                                                                L_NAME = N_NAME & " (" & P_NAME & ")"
+
+                                                            End If
+
+                                                        Case 2
+                                                            P_NAME = .Fields("PSEVDONIM").Value
+
+                                                            If Len(P_NAME) = 0 Then
+                                                                P_NAME = "NoName"
+                                                            End If
+                                                            L_NAME = P_NAME
+
+                                                        Case 1
+
+                                                            N_NAME = .Fields("NET_NAME").Value
+                                                            If Len(N_NAME) = 0 Then
+                                                                N_NAME = "NoName"
+                                                            End If
+
+                                                            L_NAME = N_NAME
+
+                                                    End Select
 
 
-                                    If Len(uname) = 0 Or uname = " " Or uname = " 0" Or uname = "" Then
-                                        iA = 16
-                                    Else
-                                        iA = uname
-                                    End If
+                                                    Select Case .Fields("tiptehn").Value
 
 
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME,
-                                                      iA)
+                                                        Case "Printer"
 
-                                Case "MONITOR"
-
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME,
-                                                      17)
+                                                            Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC,
+                                                                              Spisan, balans, L_NAME, 7)
 
 
-                                    '--------------VIP_Graff Добавление новой перефирии Начало-----------------
-                                Case "USB"
+                                                        Case "MFU"
 
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME,
-                                                      18)
-
-                                Case "SOUND"
-
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME,
-                                                      44)
-
-                                Case "IBP"
-
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME,
-                                                      41)
+                                                            Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC,
+                                                                              Spisan, balans, L_NAME, 8)
 
 
-                                Case "FS"
+                                                        Case "SCANER"
 
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME,
-                                                      61)
+                                                            Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC,
+                                                                              Spisan, balans, L_NAME, 14)
 
+                                                        Case "ZIP"
 
-                                Case "KEYB"
-
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME,
-                                                      46)
-
-
-                                Case "MOUSE"
-
-                                    Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME,
-                                                      47)
-
-                                    '--------------VIP_Graff Добавление новой перефирии Конец------------------
-
-                                Case Else
+                                                            Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC,
+                                                                              Spisan, balans, L_NAME, 15)
 
 
-                            End Select
+                                                        Case "PHONE"
+
+                                                            Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC,
+                                                                              Spisan, balans, L_NAME, 12)
 
 
-                            .MoveNext()
-                        Loop
-                    End With
-                    rs3.Close()
-                    rs3 = Nothing
+                                                        Case "OT"
 
-                End If
+                                                            ' Dim uname As String
 
+                                                            On Error Resume Next
+
+
+                                                            If Len(.Fields("tip_compa").Value) = 0 Then
+
+                                                                uname = ""
+                                                            Else
+
+                                                                Dim rsOT As Recordset
+                                                                rsOT = New Recordset
+                                                                rsOT.Open(
+                                                                    "SELECT A FROM spr_other where Name ='" &
+                                                                    .Fields("tip_compa").Value & "'", DB7,
+                                                                    CursorTypeEnum.adOpenDynamic,
+                                                                    LockTypeEnum.adLockOptimistic)
+
+                                                                With rsOT
+                                                                    '.MoveFirst()
+                                                                    'Do While Not .EOF
+
+                                                                    If Not IsDBNull(.Fields("A").Value) Then _
+                                                                        uname = .Fields("A").Value
+
+                                                                    '.MoveNext()
+                                                                    'Loop
+                                                                End With
+
+
+                                                                rsOT.Close()
+                                                                rsOT = Nothing
+
+
+                                                            End If
+
+
+                                                            If Len(uname) = 0 Or uname = " " Or uname = " 0" Or uname = "" _
+                                                                Then
+                                                                iA = 16
+                                                            Else
+                                                                iA = uname
+                                                            End If
+
+                                                            Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC,
+                                                                              Spisan, balans, L_NAME, iA)
+
+
+                                                        Case "MONITOR"
+
+                                                            Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC,
+                                                                              Spisan, balans, L_NAME, 17)
+
+
+                                                            '--------------VIP_Graff Добавление новой перефирии Начало-----------------
+                                                        Case "USB"
+
+                                                            Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC,
+                                                                              Spisan, balans, L_NAME, 18)
+
+
+                                                        Case "SOUND"
+
+                                                            Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC,
+                                                                              Spisan, balans, L_NAME, 44)
+
+                                                        Case "IBP"
+
+                                                            Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC,
+                                                                              Spisan, balans, L_NAME, 41)
+
+
+                                                        Case "FS"
+
+                                                            Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC,
+                                                                              Spisan, balans, L_NAME, 61)
+
+
+                                                        Case "KEYB"
+
+                                                            Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC,
+                                                                              Spisan, balans, L_NAME, 46)
+
+                                                        Case "MOUSE"
+
+                                                            Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodePC,
+                                                                              Spisan, balans, L_NAME, 47)
+
+                                                            '--------------VIP_Graff Добавление новой перефирии Конец------------------
+
+                                                        Case Else
+
+
+                                                    End Select
+
+
+                                                    .MoveNext()
+                                                Loop
+                                            End With
+                                            rs3.Close()
+                                            rs3 = Nothing
+
+                                        End If
+
+                                        '#####################################################################
+                                        '#####################################################################
+                                        '#                          Техника в контейнере
+                                        '#####################################################################
+                                        '#####################################################################
+
+                                    Case "PHOTO"
+
+                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME, 11)
+
+
+                                    Case "Printer"
+
+                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME,
+                                                          7)
+
+
+                                    Case "MFU"
+
+                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME,
+                                                          8)
+
+
+                                    Case "SCANER"
+
+                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME,
+                                                          14)
+
+
+                                    Case "ZIP"
+
+                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME,
+                                                          15)
+
+                                    Case "PHONE"
+
+                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME,
+                                                          12)
+
+
+                                    Case "OT"
+
+                                        'Dim uname As String
+
+                                        On Error Resume Next
+
+
+                                        If Len(.Fields("tip_compa").Value) = 0 Then
+
+                                            uname = ""
+                                        Else
+
+                                            Dim rsOT As Recordset
+                                            rsOT = New Recordset
+                                            rsOT.Open(
+                                                "SELECT A FROM spr_other where Name ='" & .Fields("tip_compa").Value & "'",
+                                                DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
+                                            With rsOT
+
+                                                If Not IsDBNull(.Fields("A").Value) Then uname = .Fields("A").Value
+
+                                            End With
+
+
+                                            rsOT.Close()
+                                            rsOT = Nothing
+
+
+                                        End If
+
+
+                                        If Len(uname) = 0 Or uname = " " Or uname = " 0" Or uname = "" Then
+                                            iA = 16
+                                        Else
+                                            iA = uname
+                                        End If
+
+
+                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME,
+                                                          iA)
+
+                                    Case "MONITOR"
+
+                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME,
+                                                          17)
+
+
+                                        '--------------VIP_Graff Добавление новой перефирии Начало-----------------
+                                    Case "USB"
+
+                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME,
+                                                          18)
+
+                                    Case "SOUND"
+
+                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME,
+                                                          44)
+
+                                    Case "IBP"
+
+                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME,
+                                                          41)
+
+
+                                    Case "FS"
+
+                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME,
+                                                          61)
+
+
+                                    Case "KEYB"
+
+                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME,
+                                                          46)
+
+
+                                    Case "MOUSE"
+
+                                        Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME,
+                                                          47)
+
+                                        '--------------VIP_Graff Добавление новой перефирии Конец------------------
+
+                                    Case Else
+
+
+                                End Select
+
+
+                                .MoveNext()
+                            Loop
+                        End With
+                        rs3.Close()
+                        rs3 = Nothing
+
+
+                End Select
+                
 
                 '#####################################################################
                 '#####################################################################
@@ -1262,29 +1279,26 @@ exitsub:
                 DepNode.Nodes.Add(TEHNodePC)
 
                 'TEHNode.ForeColor = Color.Blue
-                If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                    TEHNodePC.ForeColor = Color.DimGray
-                    TEHNodePC.NodeFont = New Font(lstgroups.Font, 8)
-                End If
+                Select Case Spisan
+                    Case "1"
+                        TEHNodePC.ForeColor = Color.DimGray
+                        TEHNodePC.NodeFont = New Font(lstgroups.Font, 8)
+                    Case Else
+                End Select
 
-                If balans = "1" Or balans = "True" Or balans = "-1" Then
-
-                    If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
+                Select Case balans
+                    Case "1"
                         TEHNodePC.NodeFont = New Font(lstgroups.Font, 10)
-                    Else
+                    Case Else
                         TEHNodePC.NodeFont = New Font(lstgroups.Font, 2)
-                    End If
-                End If
+                End Select
 
-
-                If KCKey <> 0 Then
-                    If KCKey = iD Then
+                Select Case KCKey
+                    Case iD
                         lstgroups.SelectedNode = TEHNodePC
                         lstgroups.SelectedNode.Expand()
-                    End If
-                End If
-
-
+                End Select
+                
                 '########################################################################
                 '########################################################################
                 '########################################################################
@@ -1337,6 +1351,20 @@ exitsub:
 
                             Spisan = .Fields("Spisan").Value
                             balans = .Fields("balans").Value
+
+                            If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
+                                Spisan = 1
+                            Else
+                                Spisan = 0
+                            End If
+
+                            If balans = "1" Or balans = "True" Or balans = "-1" Then
+                                If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
+                                    balans = 1
+                                Else
+                                    balans = 0
+                                End If
+                            End If
 
                             Select Case sTREENAME
 
@@ -1546,26 +1574,25 @@ exitsub:
                 End Select
 
 
-                If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                    TEHNode.ForeColor = Color.DimGray
-                    TEHNode.NodeFont = New Font(lstgroups.Font, 8)
-                End If
+                Select Case Spisan
+                    Case "1"
+                        TEHNode.ForeColor = Color.DimGray
+                        TEHNode.NodeFont = New Font(lstgroups.Font, 8)
+                    Case Else
+                End Select
 
-                If balans = "1" Or balans = "True" Or balans = "-1" Then
-
-                    If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
+                Select Case balans
+                    Case "1"
                         TEHNode.NodeFont = New Font(lstgroups.Font, 10)
-                    Else
+                    Case Else
                         TEHNode.NodeFont = New Font(lstgroups.Font, 2)
-                    End If
-                End If
+                End Select
 
-                If KCKey <> 0 Then
-                    If KCKey = iD Then
+                Select Case KCKey
+                    Case iD
                         lstgroups.SelectedNode = TEHNode
                         lstgroups.SelectedNode.Expand()
-                    End If
-                End If
+                End Select
 
             Case "PHOTO"
 
@@ -1580,29 +1607,27 @@ exitsub:
                 DepNode.Nodes.Add(TEHNodePHOTO)
 
                 'TEHNode.ForeColor = Color.Blue
-                If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                    TEHNodePHOTO.ForeColor = Color.DimGray
-                    TEHNodePHOTO.NodeFont = New Font(lstgroups.Font, 8)
-                End If
+                Select Case Spisan
+                    Case "1"
+                        TEHNodePHOTO.ForeColor = Color.DimGray
+                        TEHNodePHOTO.NodeFont = New Font(lstgroups.Font, 8)
+                    Case Else
+                End Select
 
-                If balans = "1" Or balans = "True" Or balans = "-1" Then
-
-                    If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
+                Select Case balans
+                    Case "1"
                         TEHNodePHOTO.NodeFont = New Font(lstgroups.Font, 10)
-                    Else
+                    Case Else
                         TEHNodePHOTO.NodeFont = New Font(lstgroups.Font, 2)
-                    End If
-                End If
+                End Select
 
-
-                If KCKey <> 0 Then
-                    If KCKey = iD Then
+              Select Case KCKey
+                    Case iD
                         lstgroups.SelectedNode = TEHNodePHOTO
                         lstgroups.SelectedNode.Expand()
-                    End If
-                End If
+                End Select
 
-               ' Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 11)
+                ' Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 11)
 
 
                 Dim sText As String = objIniFile.GetString("general", "Tree_S", 0)
@@ -1654,6 +1679,21 @@ exitsub:
                             Spisan = .Fields("Spisan").Value
                             balans = .Fields("balans").Value
 
+                            If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
+                                Spisan = 1
+                            Else
+                                Spisan = 0
+                            End If
+
+                            If balans = "1" Or balans = "True" Or balans = "-1" Then
+                                If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
+                                    balans = 1
+                                Else
+                                    balans = 0
+                                End If
+                            End If
+
+
                             Select Case sTREENAME
 
                                 Case 0
@@ -1699,7 +1739,6 @@ exitsub:
 
 
                             Select Case .Fields("tiptehn").Value
-
 
                                 Case "OT"
 
@@ -1872,27 +1911,26 @@ exitsub:
         TEHNodeCNT.Tag = "C|" & sID
         TEHNodePCL.Nodes.Add(TEHNodeCNT)
 
-        If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-            TEHNodeCNT.ForeColor = Color.DimGray
-            TEHNodeCNT.NodeFont = New Font(lstgroups.Font, 8)
-        End If
+        Select Case Spisan
+            Case "1"
+                TEHNodePCL.ForeColor = Color.DimGray
+                TEHNodePCL.NodeFont = New Font(lstgroups.Font, 8)
+            Case Else
+        End Select
 
-        If balans = "1" Or balans = "True" Or balans = "-1" Then
+        Select Case balans
+            Case "1"
+                TEHNodePCL.NodeFont = New Font(lstgroups.Font, 10)
+            Case Else
+                TEHNodePCL.NodeFont = New Font(lstgroups.Font, 2)
+        End Select
 
-            If Spisan = "1" Or Spisan = "True" Or Spisan = "-1" Then
-                TEHNodeCNT.NodeFont = New Font(lstgroups.Font, 10)
-            Else
-                TEHNodeCNT.NodeFont = New Font(lstgroups.Font, 2)
-            End If
-
-        End If
-
-        If KCKey <> 0 Then
-            If KCKey = sID Then
+        Select Case KCKey
+            Case sID
                 lstgroups.SelectedNode = TEHNodeCNT
                 lstgroups.SelectedNode.Expand()
+        End Select
 
-            End If
-        End If
+
     End Sub
 End Module

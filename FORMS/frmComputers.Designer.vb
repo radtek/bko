@@ -781,6 +781,7 @@ Me.НарядToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 Me.МатериальныйПропускToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 Me.БланкToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 Me.ilsCommands = New System.Windows.Forms.ImageList(Me.components)
+CType(Me.spCont,System.ComponentModel.ISupportInitialize).BeginInit
 Me.spCont.Panel1.SuspendLayout
 Me.spCont.Panel2.SuspendLayout
 Me.spCont.SuspendLayout
@@ -9418,6 +9419,7 @@ Me.Text = "Учёт оргтехники"
 Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
 Me.spCont.Panel1.ResumeLayout(false)
 Me.spCont.Panel2.ResumeLayout(false)
+CType(Me.spCont,System.ComponentModel.ISupportInitialize).EndInit
 Me.spCont.ResumeLayout(false)
 Me.TableLayoutPanel65.ResumeLayout(false)
 Me.gbTree.ResumeLayout(false)
