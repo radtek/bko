@@ -564,7 +564,7 @@ WriteLog Err.Description
             frmGarCPL.DOG.Value = .Fields("KEYBOARD_DPo").Value & "." & .Fields("KEYBOARD_MPo").Value & "." &
                                   .Fields("KEYBOARD_GPo").Value
 
-            frmGarCPL.cmbPostav.Text = .Fields("KEYBOARD_POST").Value
+            frmGarCPL.cmbPostav.Text = .Fields("KEYBOARD_POST").Value 'nomerPC
 
             'EDTID 'frmMain.nomerPCAbs '.Fields("Id_Comp").value
 

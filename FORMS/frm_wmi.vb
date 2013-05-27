@@ -41,8 +41,6 @@
         wmiPasword = txtPassword.Text
         wmiDomen = txtDomen.Text
 
-
-
        
             Call LOAD_WMI2()
             Me.Close()

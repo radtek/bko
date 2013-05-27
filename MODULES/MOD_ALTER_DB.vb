@@ -1070,7 +1070,7 @@ err_:
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
-                sSQL = "ALTER TABLE " & DBtabl & ".dbo.kompy DROP COLUMN Mb"
+                sSQL = "ALTER TABLE " & DBtabl & ".dbo.kompy DROP COLUMN Mb, nomerPC, TEXT_RED, EXCELL_RED, ACCESS_RED, VG, IG"
 
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -1091,13 +1091,15 @@ err_:
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
-                sSQL = "ALTER TABLE " & DBtabl & ".dbo.kompy DROP COLUMN Mb"
+                sSQL = "ALTER TABLE " & DBtabl & ".dbo.kompy DROP COLUMN Mb, nomerPC, TEXT_RED, EXCELL_RED, ACCESS_RED, VG, IG"
 
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
             Case "MS Access"
+
+                Call frmMain.COMPARE_DB()
 
                 sSQL = "ALTER TABLE kompy ADD COLUMN MB_NAME Memo"
 
@@ -1111,20 +1113,14 @@ err_:
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
-                sSQL = "ALTER TABLE kompy DROP COLUMN Mb"
+                sSQL = "ALTER TABLE kompy DROP COLUMN Mb, nomerPC, TEXT_RED, EXCELL_RED, ACCESS_RED, VG, IG"
 
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
-
-                'ALTER TABLE Test ADD COLUMN NewName INTEGER
-                'UPDATE TABLE Test SET NewName=OldName
-                'ALTER TABLE Test DROP COLUMN OldName
-
-
                 Call frmMain.COMPARE_DB()
-
+            
             Case "MySQL"
 
                 sSQL = "ALTER TABLE kompy ADD COLUMN 'MB_NAME' TEXT AFTER 'Mb'"
@@ -1139,14 +1135,13 @@ err_:
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
-                sSQL = "ALTER TABLE kompy DROP COLUMN Mb"
+                sSQL = "ALTER TABLE kompy DROP COLUMN Mb, nomerPC, TEXT_RED, EXCELL_RED, ACCESS_RED, VG, IG"
 
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
-
-            Case "MySQL (MyODBC 5.1)"
+              Case "MySQL (MyODBC 5.1)"
 
                 sSQL = "ALTER TABLE kompy ADD COLUMN 'MB_NAME' TEXT AFTER 'Mb'"
 
@@ -1160,12 +1155,13 @@ err_:
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
-                sSQL = "ALTER TABLE kompy DROP COLUMN Mb"
+                sSQL = "ALTER TABLE kompy DROP COLUMN Mb, nomerPC, TEXT_RED, EXCELL_RED, ACCESS_RED, VG, IG"
 
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                rs = Nothing
 
-            Case "PostgreSQL"
+              Case "PostgreSQL"
 
                 sSQL = "ALTER TABLE kompy ADD COLUMN MB_NAME varchar(255) Mb"
 
@@ -1179,10 +1175,11 @@ err_:
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
-                sSQL = "ALTER TABLE kompy DROP COLUMN Mb"
+                sSQL = "ALTER TABLE kompy DROP COLUMN Mb, nomerPC, TEXT_RED, EXCELL_RED, ACCESS_RED, VG, IG"
 
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                rs = Nothing
 
             Case "SQLLite"
 
@@ -1200,10 +1197,11 @@ err_:
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
-                sSQL = "ALTER TABLE kompy DROP COLUMN Mb"
+                sSQL = "ALTER TABLE kompy DROP COLUMN Mb, nomerPC, TEXT_RED, EXCELL_RED, ACCESS_RED, VG, IG"
 
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                rs = Nothing
 
         End Select
         

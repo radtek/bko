@@ -901,7 +901,7 @@ Public Class frmserviceDesc
         sSQL3 = "SELECT * FROM kompy where ID like '%" & sFindText & "%' or CPU1 like '%" & sFindText &
                 "%' or CPUmhz1 like '%" & sFindText & "%' or CPU2 like '%" & sFindText & "%' or CPUmhz2 like '%" &
                 sFindText & "%' or CPU3 like '%" & sFindText & "%' or CPUmhz3 like '%" & sFindText &
-                "%' or CPU4 like '%" & sFindText & "%' or CPUmhz4 like '%" & sFindText & "%' or Mb like '%" & sFindText &
+                "%' or CPU4 like '%" & sFindText & "%' or CPUmhz4 like '%" & sFindText & "%' or Mb_Name like '%" & sFindText &
                 "%' or Mb_Chip like '%" & sFindText & "%' or Mb_Proizvod like '%" & sFindText & "%' or RAM_1 like '%" &
                 sFindText & "%' or RAM_2 like '%" & sFindText & "%' or RAM_3 like '%" & sFindText &
                 "%' or RAM_4 like '%" & sFindText & "%' or HDD_Name_1 like '%" & sFindText & "%' or HDD_OB_1 like '%" &

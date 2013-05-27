@@ -9,7 +9,9 @@ Module MOD_LOAD_WMI
     Dim connection As New ConnectionOptions
 
     Public Sub LOAD_WMI()
+
         frm_wmi.ShowDialog(frmMain)
+
     End Sub
 
     Public Sub LOAD_WMI2()
@@ -96,108 +98,138 @@ Module MOD_LOAD_WMI
             Exit Sub
         End If
 
-
         'connection.EnablePrivileges = True
 
         frmMain.Cursor = Cursors.WaitCursor
 
+        frmComputers.BeginInvoke(New MethodInvoker(AddressOf wSOFT))
 
-        If frmComputers.InvokeRequired Then
-            frmComputers.Invoke(New MethodInvoker(AddressOf wSOFT))
-        Else
-            Call wSOFT()
-        End If
+        frmComputers.BeginInvoke(New MethodInvoker(AddressOf wCPU))
 
-        If frmComputers.InvokeRequired Then
-            frmComputers.Invoke(New MethodInvoker(AddressOf wCPU))
-        Else
-            Call wCPU()
-        End If
+        frmComputers.BeginInvoke(New MethodInvoker(AddressOf wMB))
 
-        If frmComputers.InvokeRequired Then
-            frmComputers.Invoke(New MethodInvoker(AddressOf wMB))
-        Else
-            Call wMB()
-        End If
+        frmComputers.BeginInvoke(New MethodInvoker(AddressOf wRAM))
 
-        If frmComputers.InvokeRequired Then
-            frmComputers.Invoke(New MethodInvoker(AddressOf wRAM))
-        Else
-            Call wRAM()
-        End If
+        frmComputers.BeginInvoke(New MethodInvoker(AddressOf wHDD))
 
-        If frmComputers.InvokeRequired Then
-            frmComputers.Invoke(New MethodInvoker(AddressOf wHDD))
-        Else
-            Call wHDD()
-        End If
+        frmComputers.BeginInvoke(New MethodInvoker(AddressOf wSVGA))
 
-        If frmComputers.InvokeRequired Then
-            frmComputers.Invoke(New MethodInvoker(AddressOf wSVGA))
-        Else
-            Call wSVGA()
-        End If
+        frmComputers.BeginInvoke(New MethodInvoker(AddressOf wSOUND))
 
-        If frmComputers.InvokeRequired Then
-            frmComputers.Invoke(New MethodInvoker(AddressOf wSOUND))
-        Else
-            Call wSOUND()
-        End If
+        frmComputers.BeginInvoke(New MethodInvoker(AddressOf wCDROM))
 
-        If frmComputers.InvokeRequired Then
-            frmComputers.Invoke(New MethodInvoker(AddressOf wCDROM))
-        Else
-            Call wCDROM()
-        End If
+        frmComputers.BeginInvoke(New MethodInvoker(AddressOf wNET))
 
-        If frmComputers.InvokeRequired Then
-            frmComputers.Invoke(New MethodInvoker(AddressOf wNET))
-        Else
-            Call wNET()
-        End If
+        frmComputers.BeginInvoke(New MethodInvoker(AddressOf wFDD))
 
-        If frmComputers.InvokeRequired Then
-            frmComputers.Invoke(New MethodInvoker(AddressOf wFDD))
-        Else
-            Call wFDD()
-        End If
+        frmComputers.BeginInvoke(New MethodInvoker(AddressOf wKeyboard))
 
-        If frmComputers.InvokeRequired Then
-            frmComputers.Invoke(New MethodInvoker(AddressOf wKeyboard))
-        Else
-            Call wKeyboard()
-        End If
+        frmComputers.BeginInvoke(New MethodInvoker(AddressOf wModem))
 
-        If frmComputers.InvokeRequired Then
-            frmComputers.Invoke(New MethodInvoker(AddressOf wModem))
-        Else
-            Call wModem()
-        End If
+        frmComputers.BeginInvoke(New MethodInvoker(AddressOf wMouse))
 
-        If frmComputers.InvokeRequired Then
-            frmComputers.Invoke(New MethodInvoker(AddressOf wMouse))
-        Else
-            Call wMouse()
-        End If
+        frmComputers.BeginInvoke(New MethodInvoker(AddressOf wPRN))
 
-        If frmComputers.InvokeRequired Then
-            frmComputers.Invoke(New MethodInvoker(AddressOf wPRN))
-        Else
-            Call wPRN()
-        End If
+        frmComputers.BeginInvoke(New MethodInvoker(AddressOf wMONITOR))
 
-        If frmComputers.InvokeRequired Then
-            frmComputers.Invoke(New MethodInvoker(AddressOf wMONITOR))
-        Else
-            Call wMONITOR()
-        End If
+        frmComputers.BeginInvoke(New MethodInvoker(AddressOf wSYS))
+
+        'If frmComputers.InvokeRequired Then
+        '    frmComputers.Invoke(New MethodInvoker(AddressOf wSOFT))
+        'Else
+        '    Call wSOFT()
+        'End If
+
+        'If frmComputers.InvokeRequired Then
+        '    frmComputers.Invoke(New MethodInvoker(AddressOf wCPU))
+        'Else
+        '    Call wCPU()
+        'End If
+
+        'If frmComputers.InvokeRequired Then
+        '    frmComputers.Invoke(New MethodInvoker(AddressOf wMB))
+        'Else
+        '    Call wMB()
+        'End If
+
+        'If frmComputers.InvokeRequired Then
+        '    frmComputers.Invoke(New MethodInvoker(AddressOf wRAM))
+        'Else
+        '    Call wRAM()
+        'End If
+
+        'If frmComputers.InvokeRequired Then
+        '    frmComputers.Invoke(New MethodInvoker(AddressOf wHDD))
+        'Else
+        '    Call wHDD()
+        'End If
+
+        'If frmComputers.InvokeRequired Then
+        '    frmComputers.Invoke(New MethodInvoker(AddressOf wSVGA))
+        'Else
+        '    Call wSVGA()
+        'End If
+
+        'If frmComputers.InvokeRequired Then
+        '    frmComputers.Invoke(New MethodInvoker(AddressOf wSOUND))
+        'Else
+        '    Call wSOUND()
+        'End If
+
+        'If frmComputers.InvokeRequired Then
+        '    frmComputers.Invoke(New MethodInvoker(AddressOf wCDROM))
+        'Else
+        '    Call wCDROM()
+        'End If
+
+        'If frmComputers.InvokeRequired Then
+        '    frmComputers.Invoke(New MethodInvoker(AddressOf wNET))
+        'Else
+        '    Call wNET()
+        'End If
+
+        'If frmComputers.InvokeRequired Then
+        '    frmComputers.Invoke(New MethodInvoker(AddressOf wFDD))
+        'Else
+        '    Call wFDD()
+        'End If
+
+        'If frmComputers.InvokeRequired Then
+        '    frmComputers.Invoke(New MethodInvoker(AddressOf wKeyboard))
+        'Else
+        '    Call wKeyboard()
+        'End If
+
+        'If frmComputers.InvokeRequired Then
+        '    frmComputers.Invoke(New MethodInvoker(AddressOf wModem))
+        'Else
+        '    Call wModem()
+        'End If
+
+        'If frmComputers.InvokeRequired Then
+        '    frmComputers.Invoke(New MethodInvoker(AddressOf wMouse))
+        'Else
+        '    Call wMouse()
+        'End If
+
+        'If frmComputers.InvokeRequired Then
+        '    frmComputers.Invoke(New MethodInvoker(AddressOf wPRN))
+        'Else
+        '    Call wPRN()
+        'End If
+
+        'If frmComputers.InvokeRequired Then
+        '    frmComputers.Invoke(New MethodInvoker(AddressOf wMONITOR))
+        'Else
+        '    Call wMONITOR()
+        'End If
 
 
-        If frmComputers.InvokeRequired Then
-            frmComputers.Invoke(New MethodInvoker(AddressOf wSYS))
-        Else
-            Call wSYS()
-        End If
+        'If frmComputers.InvokeRequired Then
+        '    frmComputers.Invoke(New MethodInvoker(AddressOf wSYS))
+        'Else
+        '    Call wSYS()
+        'End If
 
 
         Application.DoEvents()

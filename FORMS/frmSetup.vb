@@ -444,6 +444,49 @@
 
         End Select
 
+        uname = objIniFile.GetString("TREE", "REM", "0")
+
+        Select Case uname
+
+            Case "1"
+
+                chkRemVisible.Checked = True
+
+            Case "0"
+
+                chkRemVisible.Checked = False
+
+        End Select
+
+        uname = objIniFile.GetString("TREE", "NB", "1")
+
+        Select Case uname
+
+            Case "1"
+
+                chkNB.Checked = True
+                NBVisible = True
+            Case "0"
+
+                chkNB.Checked = False
+                NBVisible = False
+        End Select
+
+        uname = objIniFile.GetString("TREE", "SP", "1")
+
+        Select Case uname
+
+            Case "1"
+
+                chkSP.Checked = True
+                SPVisible = True
+            Case "0"
+
+                chkSP.Checked = False
+                SPVisible = False
+        End Select
+
+
 
         sText = objIniFile.GetString("general", "Tree_S", 0)
 
@@ -466,46 +509,6 @@
 
         ComboBox2.Text = objIniFile.GetString("General", "TechINF", "AIDA64(Everest)")
         sTechINF = ComboBox2.Text
-
-
-        'If DB_N <> "MS Access" Then
-
-        '    lvFindDB.Items.Add(1) 'col no. 1
-        '    lvFindDB.Items(CInt(0)).SubItems.Add(DB_N)
-        '    lvFindDB.Items(CInt(0)).SubItems.Add("X")
-        '    Button1.Enabled = False
-        'Else
-
-        '    uname = objIniFile.GetString("General", "file", "basekomp.mdb")
-
-        '    Dim intCount As Decimal = 0
-        '    Try
-        '        ' Only get files that begin with the letter "c."
-        '        Dim dirs As String() = Directory.GetFiles(BasePath, "*.mdb")
-        '        ' Console.WriteLine("The number of files starting with c is {0}.", dirs.Length)
-        '        Dim dir As String
-
-        '        For Each dir In dirs
-        '            Dim d() As String
-        '            d = Split(dir, "\")
-
-        '            lvFindDB.Items.Add(lvFindDB.Items.Count + 1) 'col no. 1
-        '            lvFindDB.Items(CInt(intCount)).SubItems.Add(d(d.Length - 1))
-
-        '            If uname = d(d.Length - 1) Then
-        '                lvFindDB.Items(CInt(intCount)).SubItems.Add("X")
-        '            Else
-
-        '                lvFindDB.Items(CInt(intCount)).SubItems.Add("")
-        '            End If
-
-        '            intCount = intCount + 1
-        '        Next
-        '    Catch e1 As Exception
-
-        '    End Try
-
-        'End If
 
 
         Dim rs As Recordset
@@ -1483,6 +1486,7 @@ err_:
     Private Sub RadioButton10_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles RadioButton10.CheckedChanged
 
         If RadioButton10.Checked = True Then TREE_UPDATE = 0
+        If RadioButton10.Checked = False Then TREE_UPDATE = 1
 
         Dim objIniFile As New IniFile(PrPath & "base.ini")
         objIniFile.WriteString("general", "TREE_UPDATE", TREE_UPDATE)
@@ -1492,8 +1496,64 @@ err_:
 
     Private Sub RadioButton11_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles RadioButton11.CheckedChanged
         If RadioButton11.Checked = True Then TREE_UPDATE = 1
+        If RadioButton11.Checked = False Then TREE_UPDATE = 0
 
         Dim objIniFile As New IniFile(PrPath & "base.ini")
         objIniFile.WriteString("general", "TREE_UPDATE", TREE_UPDATE)
+    End Sub
+
+    Private Sub chkRemVisible_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles chkRemVisible.CheckedChanged
+        Dim objIniFile As New IniFile(PrPath & "base.ini")
+
+        Select Case chkRemVisible.Checked
+
+            Case False
+
+                objIniFile.WriteString("TREE", "REM", "0")
+                remVisible = False
+
+            Case True
+
+                objIniFile.WriteString("TREE", "REM", "1")
+                remVisible = True
+
+        End Select
+    End Sub
+
+    Private Sub chkNB_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles chkNB.CheckedChanged
+
+        Dim objIniFile As New IniFile(PrPath & "base.ini")
+
+        Select Case chkNB.Checked
+
+            Case False
+
+                objIniFile.WriteString("TREE", "NB", "0")
+                NBVisible = False
+
+            Case True
+
+                objIniFile.WriteString("TREE", "NB", "1")
+                NBVisible = True
+
+        End Select
+    End Sub
+
+    Private Sub chkSP_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles chkSP.CheckedChanged
+        Dim objIniFile As New IniFile(PrPath & "base.ini")
+
+        Select Case chkSP.Checked
+
+            Case False
+
+                objIniFile.WriteString("TREE", "SP", "0")
+                SPVisible = False
+
+            Case True
+
+                objIniFile.WriteString("TREE", "SP", "1")
+                SPVisible = True
+
+        End Select
     End Sub
 End Class

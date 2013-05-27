@@ -500,12 +500,87 @@ Public Class frmComputers
 
         If OneStart = 0 Then OneStart = 1
 
+
+        'For Each node As TreeNode In lstGroups.Nodes
+
+        '    If node.Nodes.Count > 0 Then
+
+        '        Dim d() As String
+        '        d = Split(lstGroups.SelectedNode.Tag, "|")
+
+        '        Dim rs2 As Recordset
+        '        rs2 = New Recordset
+        '        Dim tmpCount As Integer = 0
+
+        '        rs2.Open("Select count(*) as t_n FROM Remont Where id_comp=" & d(1) & " and zakryt = false", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
+        '        With rs2
+
+        '            tmpCount = .Fields("t_n").Value
+
+        '        End With
+        '        rs2.Close()
+        '        rs2 = Nothing
+
+        '        Select Case tmpCount
+
+        '            Case 0
+
+        '            Case Else
+
+
+        '        End Select
+
+        '        'node.ImageIndex = node.ImageIndex
+        '        'node.SelectedImageIndex = node.ImageIndex + 1
+        '        checkchild(node)
+
+        '    End If
+
+        'Next
+
         Exit Sub
 err_:
 
         If OneStart = 0 Then OneStart = 1
 
     End Sub
+
+    'Private Sub checkchild(ByVal nod As TreeNode)
+
+    '    For Each node As TreeNode In nod.Nodes
+
+    '        Dim d() As String
+    '        d = Split(lstGroups.SelectedNode.Tag, "|")
+
+    '        Dim rs2 As Recordset
+    '        rs2 = New Recordset
+    '        Dim tmpCount As Integer = 0
+
+    '        rs2.Open("Select count(*) as t_n FROM Remont Where id_comp=" & d(1) & " and zakryt = false", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
+    '        With rs2
+
+    '            tmpCount = .Fields("t_n").Value
+
+    '        End With
+    '        rs2.Close()
+    '        rs2 = Nothing
+    '        Select Case tmpCount
+
+    '            Case 0
+
+    '            Case Else
+
+    '                node.BackColor = Color.Brown
+
+    '        End Select
+    '        checkchild(node)
+
+    '    Next
+
+    'End Sub
+
 
     Private Sub frmComputers_Resize(ByVal eventSender As Object, ByVal eventArgs As EventArgs) Handles MyBase.Resize
 
@@ -677,7 +752,7 @@ err_:
                     frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "MSG17", "Техники в кабинете:")
 
                 Exit Sub
-                Error_:
+Error_:
                 'MsgBox Err.Description
 
 
@@ -1979,7 +2054,7 @@ err_:
 
 
         Exit Sub
-        err_:
+err_:
     End Sub
 
     Private Sub txtSearch_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtSearch.KeyDown
@@ -2031,7 +2106,7 @@ err_:
         rs1 = Nothing
 
         Exit Sub
-        err_:
+err_:
         ' MsgBox(Err.Description, MsgBoxStyle.Information, ProGramName)
     End Sub
 
@@ -2062,7 +2137,7 @@ err_:
         rs1 = Nothing
 
         Exit Sub
-        err_:
+err_:
     End Sub
 
     Private Sub lstSoftware_ColumnClick(ByVal sender As Object, ByVal e As ColumnClickEventArgs) _
@@ -2337,7 +2412,7 @@ err_:
 
                 '.Fields("Summ").Value = RemCashe.Text 'Сумма
 
-                If .Fields("zakryt").Value = - 1 Then
+                If .Fields("zakryt").Value = -1 Then
                     frmService_add.chkClose.Checked = 1
                 Else
 
@@ -2609,7 +2684,7 @@ err_:
 
         Me.Cursor = Cursors.Default
         Exit Sub
-        err_:
+err_:
         Me.Cursor = Cursors.Default
     End Sub
 
@@ -5833,6 +5908,28 @@ Error_:
         If e.Button = MouseButtons.Right Then
             Me.lstGroups.SelectedNode = e.Node
         End If
+
+        'Dim x = e.Node.Bounds.X
+        'Dim y = e.Node.Bounds.Y
+        'Dim h = e.Node.Bounds.Y + e.Node.Bounds.Height
+
+        'If e.X > x - 18 And e.X < x - 3 Then
+
+        '    If e.Y > y And e.Y < h Then
+
+
+        '    End If
+
+        'ElseIf e.X > x - 35 And e.X < x - 18 Then
+
+        '    If e.Y > y And e.Y < h Then
+
+
+        '    End If
+
+        'End If
+
+
     End Sub
 
     Private Sub MassRazdelPerf_Click(ByVal sender As Object, ByVal e As EventArgs) Handles MassRazdelPerf.Click
@@ -6909,9 +7006,9 @@ err_1:
         txtSearch.Text = ""
 
         gbTree.ForeColor = gbSNMP.ForeColor
-        
+
         Me.Cursor = Cursors.WaitCursor
-        
+
         'Dim newThread2 As New Thread(AddressOf LoadSPR_1)
         'newThread2.Start()
 
@@ -6973,7 +7070,7 @@ err_1:
         lstGroups.ExpandAll()
     End Sub
 
-  
+
 
     Private Sub cmbOTHConnect_SelectedIndexChanged(sender As Object, e As EventArgs) _
         Handles cmbOTHConnect.SelectedIndexChanged
@@ -7000,7 +7097,7 @@ err_1:
         rs = Nothing
 
 
-        err_:
+err_:
     End Sub
 
 
@@ -7052,7 +7149,7 @@ err_1:
 
 
         Exit Sub
-        Err_:
+Err_:
         MsgBox("no reply", MsgBoxStyle.Exclamation, ProGramName)
     End Sub
 

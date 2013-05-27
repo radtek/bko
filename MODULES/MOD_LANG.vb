@@ -587,6 +587,30 @@ Module modLang
         frmSetup.chkFullScreen.Text = LNGIniFile.GetString("frmSetup", "chkFullScreen", "На весь экран")
         frmSetup.GroupBox3.Text = LNGIniFile.GetString("frmSetup", "GroupBox3", "Размер иконок в дереве")
         frmSetup.chkFonts.Text = LNGIniFile.GetString("frmSetup", "chkFonts", "Использовать изменение шрифта")
+
+        frmSetup.GroupBox4.Text = LNGIniFile.GetString("frmSetup", "GroupBox4", "Дерево:")
+        frmSetup.RadioButton10.Text = LNGIniFile.GetString("frmSetup", "RadioButton10", "Обновлять после каждого сохранения")
+        frmSetup.RadioButton11.Text = LNGIniFile.GetString("frmSetup", "RadioButton11", "Обновлять по запросу")
+        frmSetup.chkRemVisible.Text = LNGIniFile.GetString("frmSetup", "chkRemVisible", "Отмечать технику в ремонте")
+        frmSetup.chkNB.Text = LNGIniFile.GetString("frmSetup", "chkNB", "Отмечать технику не на балансе")
+        frmSetup.chkSP.Text = LNGIniFile.GetString("frmSetup", "chkSP", "Отмечать списанную технику")
+
+
+
+        '        GroupBox4 = Дерево
+        'RadioButton10 = Обновлять после каждого сохранения
+        'RadioButton11 = Обновлять по запросу
+        'chkRemVisible = Отмечать технику в ремонте
+        'chkNB = Отмечать технику не на балансе
+        'chkSP = Отмечать списанную технику
+
+
+
+
+
+
+
+
     End Sub
 
     Public Sub frmARHIV_Lang()

@@ -61,6 +61,10 @@ Module MOD_SYS_PRELOAD
 
     Public _DBALTER As Boolean = False
     Public sVERSIA As String
+    Public remVisible As Boolean
+    Public SPVisible As Boolean
+    Public NBVisible As Boolean
+
 
     Public Sub Tree_Icons_Feel(ByVal ills As ImageList, ByVal sFRM As String, ByVal sPATH As String)
 
@@ -309,6 +313,10 @@ Module MOD_SYS_PRELOAD
         FontI = objIniFile.GetString("General", "chkFonts", "0")
 
         TREE_UPDATE = objIniFile.GetString("General", "TREE_UPDATE", "0")
+
+        remVisible = objIniFile.GetString("TREE", "REM", "0")
+        NBVisible = objIniFile.GetString("TREE", "NB", "1")
+        SPVisible = objIniFile.GetString("TREE", "SP", "1")
 
 
         Select Case sICONS

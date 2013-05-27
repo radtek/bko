@@ -211,11 +211,23 @@
         frmComputers.cmbOTH.BackColor = frmComputers.cmbOTH.BackColor
         frmComputers.cmbOTHFil.BackColor = frmComputers.cmbOTHFil.BackColor
 
-        If frmComputers.pDRAG = True Then
+        Select Case frmComputers.pDRAG
 
-        Else
-            If TREE_UPDATE = 0 Then RefFilTree(frmComputers.lstGroups) Else frmComputers.LOAD_LIST()
-        End If
+            Case False
+
+                Select Case TREE_UPDATE
+
+                    Case 0
+
+                        RefFilTree(frmComputers.lstGroups)
+
+                    Case 1
+
+                        frmComputers.LOAD_LIST()
+
+                End Select
+
+        End Select
 
 
         Exit Sub
@@ -472,11 +484,26 @@ sAR:
         frmComputers.cmbOTH.BackColor = frmComputers.cmbOTH.BackColor
         frmComputers.cmbOTHFil.BackColor = frmComputers.cmbOTHFil.BackColor
 
-        If frmComputers.pDRAG = True Then
+        Select Case frmComputers.pDRAG
 
-        Else
-            If TREE_UPDATE = 0 Then RefFilTree(frmComputers.lstGroups) Else frmComputers.LOAD_LIST()
-        End If
+            Case False
+
+                Select Case TREE_UPDATE
+
+                    Case 0
+
+                        RefFilTree(frmComputers.lstGroups)
+
+                    Case 1
+
+                        frmComputers.LOAD_LIST()
+
+                End Select
+
+        End Select
+
+
+
 
 
         Exit Sub
@@ -547,11 +574,23 @@ Err_:
                 If Sav = False Then
                     MsgBox("Отмена перемещения", MsgBoxStyle.Exclamation, ProGramName)
 
-                    If frmComputers.pDRAG = True Then
+                    Select Case frmComputers.pDRAG
 
-                        If TREE_UPDATE = 0 Then RefFilTree(frmComputers.lstGroups) Else frmComputers.LOAD_LIST()
+                        Case False
 
-                    End If
+                            Select Case TREE_UPDATE
+
+                                Case 0
+
+                                    RefFilTree(frmComputers.lstGroups)
+
+                                Case 1
+
+                                    frmComputers.LOAD_LIST()
+
+                            End Select
+
+                    End Select
 
                     Exit Sub
                 End If
@@ -969,14 +1008,23 @@ sAR:
             frmComputers.txtPSEUDONIM.BackColor = frmComputers.txtSBSN.BackColor
             frmComputers.cmbBranch.BackColor = frmComputers.txtSBSN.BackColor
 
-            If frmComputers.pDRAG = True Then
+            Select Case frmComputers.pDRAG
 
-            Else
+                Case False
 
-                If TREE_UPDATE = 0 Then RefFilTree(frmComputers.lstGroups) Else frmComputers.LOAD_LIST()
+                    Select Case TREE_UPDATE
 
+                        Case 0
 
-            End If
+                            RefFilTree(frmComputers.lstGroups)
+
+                        Case 1
+
+                            frmComputers.LOAD_LIST()
+
+                    End Select
+
+            End Select
 
 
         End If
@@ -1338,11 +1386,23 @@ sAR:
         frmComputers.cmbPRN.BackColor = frmComputers.cmbPRN.BackColor
         frmComputers.cmbPRNFil.BackColor = frmComputers.cmbPRNFil.BackColor
 
-        If frmComputers.pDRAG = True Then
+        Select Case frmComputers.pDRAG
 
-        Else
-            If TREE_UPDATE = 0 Then RefFilTree(frmComputers.lstGroups) Else frmComputers.LOAD_LIST()
-        End If
+            Case False
+
+                Select Case TREE_UPDATE
+
+                    Case 0
+
+                        RefFilTree(frmComputers.lstGroups)
+
+                    Case 1
+
+                        frmComputers.LOAD_LIST()
+
+                End Select
+
+        End Select
 
         Exit Sub
 Err_:
@@ -1529,11 +1589,24 @@ sAR:
         frmComputers.cmbDevNet.BackColor = frmComputers.txtSBSN.BackColor
         frmComputers.cmbNETBranch.BackColor = frmComputers.txtSBSN.BackColor
 
-        If frmComputers.pDRAG = True Then
+        Select Case frmComputers.pDRAG
 
-        Else
-            If TREE_UPDATE = 0 Then RefFilTree(frmComputers.lstGroups) Else frmComputers.LOAD_LIST()
-        End If
+            Case False
+
+                Select Case TREE_UPDATE
+
+                    Case 0
+
+                        RefFilTree(frmComputers.lstGroups)
+
+                    Case 1
+
+                        frmComputers.LOAD_LIST()
+
+                End Select
+
+        End Select
+
     End Sub
 
     Private Sub DVIG_TEHN(ByVal sFIALIAL As String, ByVal sOTDEL As String, ByVal sKABN As String,

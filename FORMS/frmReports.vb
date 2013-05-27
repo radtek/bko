@@ -79,26 +79,28 @@ Public Class frmReports
         rs.Close()
         rs = Nothing
 
+        Select Case sCOUNT
 
-        If sCOUNT > 0 Then
+            Case 0
 
-            rs = New Recordset
-            rs.Open("Select name from SPR_TIP_PO", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+            Case Else
 
-            With rs
-                .MoveFirst()
-                Do While Not .EOF
+                rs = New Recordset
+                rs.Open("Select name from SPR_TIP_PO", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-                    cmnReport2Compl.Items.Add(.Fields("name").Value)
+                With rs
+                    .MoveFirst()
+                    Do While Not .EOF
 
-                    .MoveNext()
-                Loop
-            End With
-            rs.Close()
-            rs = Nothing
+                        cmnReport2Compl.Items.Add(.Fields("name").Value)
 
-        End If
+                        .MoveNext()
+                    Loop
+                End With
+                rs.Close()
+                rs = Nothing
 
+        End Select
 
         cmbGar.Items.Add(langIni.GetString("frmReports", "MSG4", "Видео карты"))
         cmbGar.Items.Add(langIni.GetString("frmReports", "MSG5", "Жесткие диски"))
@@ -147,7 +149,6 @@ Public Class frmReports
 
         cmbYearCashe.Text = Date.Today.Year
 
-
         cmbPPR_Year.Items.Clear()
 
         Dim z As Integer
@@ -159,6 +160,7 @@ Public Class frmReports
     End Sub
 
     Public Sub Rem_clk()
+
         On Error GoTo Error_
         On Error Resume Next
         Dim poPs As String
@@ -171,11 +173,14 @@ Public Class frmReports
 
         lvRemont.Items.Clear()
 
-        If frmserviceDesc.ilsCMD.Images.Count = 0 Then
+        Select Case frmserviceDesc.ilsCMD.Images.Count
 
-            Call frmservills_load()
+            Case 0
+                Call frmservills_load()
 
-        End If
+            Case Else
+
+        End Select
 
         lvRemont.SmallImageList = frmserviceDesc.ilsCMD
 
@@ -190,12 +195,12 @@ Public Class frmReports
 
         rs.Close()
         rs = Nothing
+
         If Count1 = 0 Then Exit Sub
 
         Dim langIni As New IniFile(sLANGPATH)
 
         poPs = langIni.GetString("frmReports", "MSG1", "Все")
-
 
         'SELECT Remont.Id, Remont.Date, Remont.Id_Comp, Remont.Remont, Remont.Uroven, Remont.Master, Remont.NomerRemKomp, Remont.Comp_Name, Remont.Mesto_Compa, Remont.vip, Remont.UserName, Remont.istochnik, Remont.phone, Remont.srok, Remont.name_of_remont, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE master='" & CmbRemont.Text & "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt;
 
@@ -369,7 +374,7 @@ Public Class frmReports
         rs = Nothing
 
         Exit Sub
-        ADR:
+ADR:
 
         'ListViewLoad master_otch.lvRemont, rs
         Dim intCount As Decimal = 0
@@ -381,7 +386,6 @@ Public Class frmReports
                 Select Case chkNZ.Checked
 
                     Case False
-
 
                         'lvRemont.Items.Add(.Fields("id").Value)
 
@@ -449,7 +453,7 @@ Public Class frmReports
                             age = DateDiff(DateInterval.Day, .Fields("startdate").Value, .Fields("stopdate").Value)
                             A1 = DateDiff(DateInterval.Minute, .Fields("starttime").Value, .Fields("stoptime").Value)
 
-                            A2 = (A1\60)
+                            A2 = (A1 \ 60)
                             A1 = (A1 Mod 60)
 
                             A3 = age & " " & langIni.GetString("frmReports", "MSG42", "дн.") & " " & A2 & ":" & A1 & " " &
@@ -539,7 +543,7 @@ Public Class frmReports
                                 age = DateDiff(DateInterval.Day, .Fields("startdate").Value, .Fields("stopdate").Value)
                                 A1 = DateDiff(DateInterval.Minute, .Fields("starttime").Value, .Fields("stoptime").Value)
 
-                                A2 = (A1\60)
+                                A2 = (A1 \ 60)
                                 A1 = (A1 Mod 60)
 
                                 A3 = age & " " & langIni.GetString("frmReports", "MSG42", "дн.") & " " & A2 & ":" & A1 &
@@ -578,7 +582,7 @@ Public Class frmReports
 
 
         Exit Sub
-        ADR2:
+ADR2:
 
         intCount = 0
 
@@ -660,7 +664,7 @@ Public Class frmReports
                                     A1 = DateDiff(DateInterval.Minute, .Fields("starttime").Value,
                                                   .Fields("stoptime").Value)
 
-                                    A2 = (A1\60)
+                                    A2 = (A1 \ 60)
                                     A1 = (A1 Mod 60)
 
                                     A3 = age & " " & langIni.GetString("frmReports", "MSG42", "дн.") & " " & A2 & ":" &
@@ -761,7 +765,7 @@ Public Class frmReports
                                             A1 = DateDiff(DateInterval.Minute, .Fields("starttime").Value,
                                                           .Fields("stoptime").Value)
 
-                                            A2 = (A1\60)
+                                            A2 = (A1 \ 60)
                                             A1 = (A1 Mod 60)
 
                                             A3 = age & " " & langIni.GetString("frmReports", "MSG42", "дн.") & " " & A2 &
@@ -803,7 +807,7 @@ Public Class frmReports
 
 
         Exit Sub
-        Error_:
+Error_:
         MsgBox(Err.Description)
     End Sub
 
@@ -813,11 +817,14 @@ Public Class frmReports
         cmbReport2Department.Items.Clear()
         Dim langIni As New IniFile(sLANGPATH)
 
-        If cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
-            cmbReport2Department.Items.Add(langIni.GetString("frmReports", "MSG1", "Все"))
-            Exit Sub
 
-        End If
+        Select Case cmbReport2fil.Text
+
+            Case langIni.GetString("frmReports", "MSG1", "Все")
+                cmbReport2Department.Items.Add(langIni.GetString("frmReports", "MSG1", "Все"))
+                Exit Sub
+
+        End Select
 
         Dim rs As Recordset
         rs = New Recordset
@@ -838,7 +845,7 @@ Public Class frmReports
         rs.Close()
         rs = Nothing
 
-        err:
+err:
     End Sub
 
     Private Sub cmbReport2Department_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
