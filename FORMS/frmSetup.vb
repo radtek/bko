@@ -1,8 +1,11 @@
-﻿Public Class frmSetup
+﻿
+
+Public Class frmSetup
 
     Private sFILEBD As String
     Private uCOUNTs As String
     Private uEDT As Boolean
+
 
     Public Function changeFont(ByVal FontWindow As FontDialog, ByVal str As Control)
         ' Dim wndFont As FontDialog
@@ -486,7 +489,19 @@
                 SPVisible = False
         End Select
 
+        txtSMTP.Text = objIniFile.GetString("SMTP", "Server", "")
 
+        txtPort.Text = objIniFile.GetString("SMTP", "Port", "")
+        txtMUser.Text = objIniFile.GetString("SMTP", "User", "")
+        '  txtPassword.Text = DecryptBytes(objIniFile.GetString("SMTP", "Password", ""))
+
+
+        Dim decr As String = DecryptBytes(objIniFile.GetString("SMTP", "Password", ""))
+        txtMPassword.Text = decr
+
+      
+
+        chkTLS.Checked = objIniFile.GetString("SMTP", "TLS", "")
 
         sText = objIniFile.GetString("general", "Tree_S", 0)
 
@@ -502,7 +517,7 @@
 
         End Select
 
-
+        
         txtSUBD.Text = objIniFile.GetString("General", "BasePath", BasePath)
         txtEverestDir.Text = objIniFile.GetString("General", "aida", PrPath)
 
@@ -1468,7 +1483,7 @@ err_:
         End Select
     End Sub
 
-    Private Sub ComboBox2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox2.SelectedIndexChanged
+    Private Sub ComboBox2_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles ComboBox2.SelectedIndexChanged
 
         Dim objIniFile As New IniFile(PrPath & "base.ini")
         objIniFile.WriteString("General", "TechINF", ComboBox2.Text)
@@ -1476,14 +1491,14 @@ err_:
         sTechINF = ComboBox2.Text
     End Sub
 
-    Private Sub chkUpdate_CheckedChanged(sender As Object, e As EventArgs) Handles chkUpdate.CheckedChanged
+    Private Sub chkUpdate_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chkUpdate.CheckedChanged
     End Sub
 
-    Private Sub TableLayoutPanel1_Paint(sender As System.Object, e As System.Windows.Forms.PaintEventArgs) Handles TableLayoutPanel1.Paint
+    Private Sub TableLayoutPanel1_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles TableLayoutPanel1.Paint
 
     End Sub
 
-    Private Sub RadioButton10_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles RadioButton10.CheckedChanged
+    Private Sub RadioButton10_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton10.CheckedChanged
 
         If RadioButton10.Checked = True Then TREE_UPDATE = 0
         If RadioButton10.Checked = False Then TREE_UPDATE = 1
@@ -1494,7 +1509,7 @@ err_:
 
     End Sub
 
-    Private Sub RadioButton11_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles RadioButton11.CheckedChanged
+    Private Sub RadioButton11_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton11.CheckedChanged
         If RadioButton11.Checked = True Then TREE_UPDATE = 1
         If RadioButton11.Checked = False Then TREE_UPDATE = 0
 
@@ -1502,7 +1517,7 @@ err_:
         objIniFile.WriteString("general", "TREE_UPDATE", TREE_UPDATE)
     End Sub
 
-    Private Sub chkRemVisible_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles chkRemVisible.CheckedChanged
+    Private Sub chkRemVisible_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkRemVisible.CheckedChanged
         Dim objIniFile As New IniFile(PrPath & "base.ini")
 
         Select Case chkRemVisible.Checked
@@ -1520,7 +1535,7 @@ err_:
         End Select
     End Sub
 
-    Private Sub chkNB_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles chkNB.CheckedChanged
+    Private Sub chkNB_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkNB.CheckedChanged
 
         Dim objIniFile As New IniFile(PrPath & "base.ini")
 
@@ -1539,7 +1554,7 @@ err_:
         End Select
     End Sub
 
-    Private Sub chkSP_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles chkSP.CheckedChanged
+    Private Sub chkSP_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkSP.CheckedChanged
         Dim objIniFile As New IniFile(PrPath & "base.ini")
 
         Select Case chkSP.Checked
@@ -1556,4 +1571,23 @@ err_:
 
         End Select
     End Sub
+
+
+    Private Sub Button1_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+        Dim objIniFile As New IniFile(PrPath & "base.ini")
+
+        objIniFile.WriteString("SMTP", "Server", txtSMTP.Text)
+        objIniFile.WriteString("SMTP", "Port", txtPort.Text)
+        objIniFile.WriteString("SMTP", "User", txtMUser.Text)
+
+        Dim Code As String = EncryptString(txtMPassword.Text)
+        
+        objIniFile.WriteString("SMTP", "Password", Code)
+
+        objIniFile.WriteString("SMTP", "TLS", chkTLS.Checked)
+
+        End Sub
+
+   
+
 End Class

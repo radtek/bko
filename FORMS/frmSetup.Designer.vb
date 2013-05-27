@@ -68,6 +68,19 @@ Partial Class frmSetup
         Me.Label11 = New System.Windows.Forms.Label()
         Me.txtBigBoss = New System.Windows.Forms.TextBox()
         Me.btnSave = New System.Windows.Forms.Button()
+        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.TableLayoutPanel8 = New System.Windows.Forms.TableLayoutPanel()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.txtSMTP = New System.Windows.Forms.TextBox()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.chkTLS = New System.Windows.Forms.CheckBox()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Button4 = New System.Windows.Forms.Button()
+        Me.txtPort = New System.Windows.Forms.TextBox()
+        Me.txtMUser = New System.Windows.Forms.TextBox()
+        Me.txtMPassword = New System.Windows.Forms.TextBox()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.gbSetup = New System.Windows.Forms.GroupBox()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
@@ -89,14 +102,6 @@ Partial Class frmSetup
         Me.txtSUBD = New System.Windows.Forms.TextBox()
         Me.chkArhiv2exit = New System.Windows.Forms.CheckBox()
         Me.chk_no_log = New System.Windows.Forms.CheckBox()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.TableLayoutPanel7 = New System.Windows.Forms.TableLayoutPanel()
-        Me.RadioButton6 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton8 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton9 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton7 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton4 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton5 = New System.Windows.Forms.RadioButton()
         Me.gbTree_o = New System.Windows.Forms.GroupBox()
         Me.TableLayoutPanel6 = New System.Windows.Forms.TableLayoutPanel()
         Me.RadioButton3 = New System.Windows.Forms.RadioButton()
@@ -117,15 +122,23 @@ Partial Class frmSetup
         Me.chkFullScreen = New System.Windows.Forms.CheckBox()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.ComboBox2 = New System.Windows.Forms.ComboBox()
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.chkSP = New System.Windows.Forms.CheckBox()
+        Me.chkNB = New System.Windows.Forms.CheckBox()
+        Me.chkRemVisible = New System.Windows.Forms.CheckBox()
         Me.RadioButton11 = New System.Windows.Forms.RadioButton()
         Me.RadioButton10 = New System.Windows.Forms.RadioButton()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.TableLayoutPanel7 = New System.Windows.Forms.TableLayoutPanel()
+        Me.RadioButton6 = New System.Windows.Forms.RadioButton()
+        Me.RadioButton8 = New System.Windows.Forms.RadioButton()
+        Me.RadioButton9 = New System.Windows.Forms.RadioButton()
+        Me.RadioButton7 = New System.Windows.Forms.RadioButton()
+        Me.RadioButton4 = New System.Windows.Forms.RadioButton()
+        Me.RadioButton5 = New System.Windows.Forms.RadioButton()
         Me.SStab1 = New System.Windows.Forms.TabControl()
-        Me.chkRemVisible = New System.Windows.Forms.CheckBox()
-        Me.chkNB = New System.Windows.Forms.CheckBox()
-        Me.chkSP = New System.Windows.Forms.CheckBox()
         Me.TabPage5.SuspendLayout()
         Me.TableLayoutPanel3.SuspendLayout()
         Me.gbUsers.SuspendLayout()
@@ -136,19 +149,21 @@ Partial Class frmSetup
         Me.gbUserLevel.SuspendLayout()
         Me.TabPage3.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
+        Me.GroupBox5.SuspendLayout()
+        Me.TableLayoutPanel8.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.gbSetup.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
-        Me.TableLayoutPanel7.SuspendLayout()
         Me.gbTree_o.SuspendLayout()
         Me.TableLayoutPanel6.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.TableLayoutPanel4.SuspendLayout()
         Me.gbMyBlank.SuspendLayout()
         Me.TableLayoutPanel5.SuspendLayout()
-        Me.GroupBox3.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
+        Me.GroupBox3.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
+        Me.TableLayoutPanel7.SuspendLayout()
         Me.SStab1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -157,7 +172,7 @@ Partial Class frmSetup
         Me.TabPage5.Controls.Add(Me.TableLayoutPanel3)
         Me.TabPage5.Location = New System.Drawing.Point(4, 22)
         Me.TabPage5.Name = "TabPage5"
-        Me.TabPage5.Size = New System.Drawing.Size(973, 578)
+        Me.TabPage5.Size = New System.Drawing.Size(973, 554)
         Me.TabPage5.TabIndex = 4
         Me.TabPage5.Text = "Пользователи"
         Me.TabPage5.UseVisualStyleBackColor = True
@@ -196,7 +211,7 @@ Partial Class frmSetup
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel3.Size = New System.Drawing.Size(973, 578)
+        Me.TableLayoutPanel3.Size = New System.Drawing.Size(973, 554)
         Me.TableLayoutPanel3.TabIndex = 15
         '
         'Label1
@@ -216,7 +231,7 @@ Partial Class frmSetup
         Me.gbUsers.Dock = System.Windows.Forms.DockStyle.Fill
         Me.gbUsers.Location = New System.Drawing.Point(3, 166)
         Me.gbUsers.Name = "gbUsers"
-        Me.gbUsers.Size = New System.Drawing.Size(970, 409)
+        Me.gbUsers.Size = New System.Drawing.Size(970, 385)
         Me.gbUsers.TabIndex = 11
         Me.gbUsers.TabStop = False
         Me.gbUsers.Text = "Пользователи"
@@ -234,7 +249,7 @@ Partial Class frmSetup
         'SplitContainer1.Panel2
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.gbUserLevel)
-        Me.SplitContainer1.Size = New System.Drawing.Size(964, 390)
+        Me.SplitContainer1.Size = New System.Drawing.Size(964, 366)
         Me.SplitContainer1.SplitterDistance = 696
         Me.SplitContainer1.TabIndex = 0
         '
@@ -247,7 +262,7 @@ Partial Class frmSetup
         Me.lvPrUsers.MultiSelect = False
         Me.lvPrUsers.Name = "lvPrUsers"
         Me.lvPrUsers.ShowItemToolTips = True
-        Me.lvPrUsers.Size = New System.Drawing.Size(696, 390)
+        Me.lvPrUsers.Size = New System.Drawing.Size(696, 366)
         Me.lvPrUsers.TabIndex = 18
         Me.lvPrUsers.UseCompatibleStateImageBehavior = False
         Me.lvPrUsers.View = System.Windows.Forms.View.Details
@@ -270,7 +285,7 @@ Partial Class frmSetup
         Me.gbUserLevel.Dock = System.Windows.Forms.DockStyle.Fill
         Me.gbUserLevel.Location = New System.Drawing.Point(0, 0)
         Me.gbUserLevel.Name = "gbUserLevel"
-        Me.gbUserLevel.Size = New System.Drawing.Size(264, 390)
+        Me.gbUserLevel.Size = New System.Drawing.Size(264, 366)
         Me.gbUserLevel.TabIndex = 0
         Me.gbUserLevel.TabStop = False
         Me.gbUserLevel.Text = "Разрешения"
@@ -533,7 +548,7 @@ Partial Class frmSetup
         Me.TabPage3.Controls.Add(Me.TableLayoutPanel2)
         Me.TabPage3.Location = New System.Drawing.Point(4, 22)
         Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.Size = New System.Drawing.Size(973, 578)
+        Me.TabPage3.Size = New System.Drawing.Size(973, 554)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "Организация и сисадмин"
         Me.TabPage3.UseVisualStyleBackColor = True
@@ -554,6 +569,7 @@ Partial Class frmSetup
         Me.TableLayoutPanel2.Controls.Add(Me.Label11, 0, 4)
         Me.TableLayoutPanel2.Controls.Add(Me.txtBigBoss, 1, 4)
         Me.TableLayoutPanel2.Controls.Add(Me.btnSave, 0, 6)
+        Me.TableLayoutPanel2.Controls.Add(Me.GroupBox5, 1, 7)
         Me.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel2.Location = New System.Drawing.Point(0, 0)
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
@@ -566,7 +582,7 @@ Partial Class frmSetup
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 15.0!))
-        Me.TableLayoutPanel2.Size = New System.Drawing.Size(973, 578)
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(973, 554)
         Me.TableLayoutPanel2.TabIndex = 8
         '
         'Label6
@@ -667,6 +683,146 @@ Partial Class frmSetup
         Me.btnSave.TabIndex = 7
         Me.btnSave.Text = "Сохранить"
         Me.btnSave.UseVisualStyleBackColor = True
+        '
+        'GroupBox5
+        '
+        Me.GroupBox5.Controls.Add(Me.TableLayoutPanel8)
+        Me.GroupBox5.Location = New System.Drawing.Point(162, 163)
+        Me.GroupBox5.Name = "GroupBox5"
+        Me.GroupBox5.Size = New System.Drawing.Size(510, 199)
+        Me.GroupBox5.TabIndex = 10
+        Me.GroupBox5.TabStop = False
+        Me.GroupBox5.Text = "Настройки SMTP"
+        '
+        'TableLayoutPanel8
+        '
+        Me.TableLayoutPanel8.ColumnCount = 2
+        Me.TableLayoutPanel8.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel8.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel8.Controls.Add(Me.Label13, 0, 0)
+        Me.TableLayoutPanel8.Controls.Add(Me.txtSMTP, 1, 0)
+        Me.TableLayoutPanel8.Controls.Add(Me.Label14, 0, 1)
+        Me.TableLayoutPanel8.Controls.Add(Me.chkTLS, 0, 4)
+        Me.TableLayoutPanel8.Controls.Add(Me.Label15, 0, 2)
+        Me.TableLayoutPanel8.Controls.Add(Me.Label16, 0, 3)
+        Me.TableLayoutPanel8.Controls.Add(Me.Button1, 0, 5)
+        Me.TableLayoutPanel8.Controls.Add(Me.Button4, 1, 5)
+        Me.TableLayoutPanel8.Controls.Add(Me.txtPort, 1, 1)
+        Me.TableLayoutPanel8.Controls.Add(Me.txtMUser, 1, 2)
+        Me.TableLayoutPanel8.Controls.Add(Me.txtMPassword, 1, 3)
+        Me.TableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel8.Location = New System.Drawing.Point(3, 16)
+        Me.TableLayoutPanel8.Name = "TableLayoutPanel8"
+        Me.TableLayoutPanel8.RowCount = 6
+        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel8.Size = New System.Drawing.Size(504, 180)
+        Me.TableLayoutPanel8.TabIndex = 6
+        '
+        'Label13
+        '
+        Me.Label13.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label13.AutoSize = True
+        Me.Label13.Location = New System.Drawing.Point(3, 6)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(246, 13)
+        Me.Label13.TabIndex = 0
+        Me.Label13.Text = "Сервер:"
+        '
+        'txtSMTP
+        '
+        Me.txtSMTP.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtSMTP.Location = New System.Drawing.Point(255, 3)
+        Me.txtSMTP.Name = "txtSMTP"
+        Me.txtSMTP.Size = New System.Drawing.Size(246, 20)
+        Me.txtSMTP.TabIndex = 5
+        '
+        'Label14
+        '
+        Me.Label14.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label14.AutoSize = True
+        Me.Label14.Location = New System.Drawing.Point(3, 32)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(246, 13)
+        Me.Label14.TabIndex = 1
+        Me.Label14.Text = "Порт:"
+        '
+        'chkTLS
+        '
+        Me.chkTLS.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.chkTLS.AutoSize = True
+        Me.chkTLS.Location = New System.Drawing.Point(3, 107)
+        Me.chkTLS.Name = "chkTLS"
+        Me.chkTLS.Size = New System.Drawing.Size(246, 17)
+        Me.chkTLS.TabIndex = 4
+        Me.chkTLS.Text = "Использовать TLS\SSL"
+        Me.chkTLS.UseVisualStyleBackColor = True
+        '
+        'Label15
+        '
+        Me.Label15.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label15.AutoSize = True
+        Me.Label15.Location = New System.Drawing.Point(3, 58)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(246, 13)
+        Me.Label15.TabIndex = 2
+        Me.Label15.Text = "Имя пользователя:"
+        '
+        'Label16
+        '
+        Me.Label16.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label16.AutoSize = True
+        Me.Label16.Location = New System.Drawing.Point(3, 84)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(246, 13)
+        Me.Label16.TabIndex = 3
+        Me.Label16.Text = "Пароль:"
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(3, 130)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.TabIndex = 6
+        Me.Button1.Text = "Сохранить"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'Button4
+        '
+        Me.Button4.Location = New System.Drawing.Point(255, 130)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(75, 23)
+        Me.Button4.TabIndex = 7
+        Me.Button4.Text = "Очистить"
+        Me.Button4.UseVisualStyleBackColor = True
+        '
+        'txtPort
+        '
+        Me.txtPort.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtPort.Location = New System.Drawing.Point(255, 29)
+        Me.txtPort.Name = "txtPort"
+        Me.txtPort.Size = New System.Drawing.Size(246, 20)
+        Me.txtPort.TabIndex = 8
+        '
+        'txtMUser
+        '
+        Me.txtMUser.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtMUser.Location = New System.Drawing.Point(255, 55)
+        Me.txtMUser.Name = "txtMUser"
+        Me.txtMUser.Size = New System.Drawing.Size(246, 20)
+        Me.txtMUser.TabIndex = 9
+        '
+        'txtMPassword
+        '
+        Me.txtMPassword.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtMPassword.Location = New System.Drawing.Point(255, 81)
+        Me.txtMPassword.Name = "txtMPassword"
+        Me.txtMPassword.Size = New System.Drawing.Size(246, 20)
+        Me.txtMPassword.TabIndex = 10
         '
         'TabPage1
         '
@@ -932,103 +1088,6 @@ Partial Class frmSetup
         Me.chk_no_log.Text = "Не вести лог"
         Me.chk_no_log.UseVisualStyleBackColor = True
         '
-        'GroupBox2
-        '
-        Me.GroupBox2.Controls.Add(Me.TableLayoutPanel7)
-        Me.GroupBox2.Location = New System.Drawing.Point(3, 413)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(370, 104)
-        Me.GroupBox2.TabIndex = 19
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Отделять (При нажатии разделить):"
-        '
-        'TableLayoutPanel7
-        '
-        Me.TableLayoutPanel7.ColumnCount = 2
-        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel7.Controls.Add(Me.RadioButton6, 1, 2)
-        Me.TableLayoutPanel7.Controls.Add(Me.RadioButton8, 1, 1)
-        Me.TableLayoutPanel7.Controls.Add(Me.RadioButton9, 0, 2)
-        Me.TableLayoutPanel7.Controls.Add(Me.RadioButton7, 1, 0)
-        Me.TableLayoutPanel7.Controls.Add(Me.RadioButton4, 0, 0)
-        Me.TableLayoutPanel7.Controls.Add(Me.RadioButton5, 0, 1)
-        Me.TableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel7.Location = New System.Drawing.Point(3, 16)
-        Me.TableLayoutPanel7.Name = "TableLayoutPanel7"
-        Me.TableLayoutPanel7.RowCount = 3
-        Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel7.Size = New System.Drawing.Size(364, 85)
-        Me.TableLayoutPanel7.TabIndex = 23
-        '
-        'RadioButton6
-        '
-        Me.RadioButton6.AutoSize = True
-        Me.RadioButton6.Location = New System.Drawing.Point(185, 49)
-        Me.RadioButton6.Name = "RadioButton6"
-        Me.RadioButton6.Size = New System.Drawing.Size(124, 17)
-        Me.RadioButton6.TabIndex = 2
-        Me.RadioButton6.TabStop = True
-        Me.RadioButton6.Text = "Все перечисленное"
-        Me.RadioButton6.UseVisualStyleBackColor = True
-        '
-        'RadioButton8
-        '
-        Me.RadioButton8.AutoSize = True
-        Me.RadioButton8.Location = New System.Drawing.Point(185, 26)
-        Me.RadioButton8.Name = "RadioButton8"
-        Me.RadioButton8.Size = New System.Drawing.Size(123, 17)
-        Me.RadioButton8.TabIndex = 4
-        Me.RadioButton8.TabStop = True
-        Me.RadioButton8.Text = "Клавиатуры+Мыши"
-        Me.RadioButton8.UseVisualStyleBackColor = True
-        '
-        'RadioButton9
-        '
-        Me.RadioButton9.AutoSize = True
-        Me.RadioButton9.Location = New System.Drawing.Point(3, 49)
-        Me.RadioButton9.Name = "RadioButton9"
-        Me.RadioButton9.Size = New System.Drawing.Size(117, 17)
-        Me.RadioButton9.TabIndex = 5
-        Me.RadioButton9.TabStop = True
-        Me.RadioButton9.Text = "Сетевые фильтры"
-        Me.RadioButton9.UseVisualStyleBackColor = True
-        '
-        'RadioButton7
-        '
-        Me.RadioButton7.AutoSize = True
-        Me.RadioButton7.Location = New System.Drawing.Point(185, 3)
-        Me.RadioButton7.Name = "RadioButton7"
-        Me.RadioButton7.Size = New System.Drawing.Size(48, 17)
-        Me.RadioButton7.TabIndex = 3
-        Me.RadioButton7.TabStop = True
-        Me.RadioButton7.Text = "ИБП"
-        Me.RadioButton7.UseVisualStyleBackColor = True
-        '
-        'RadioButton4
-        '
-        Me.RadioButton4.AutoSize = True
-        Me.RadioButton4.Location = New System.Drawing.Point(3, 3)
-        Me.RadioButton4.Name = "RadioButton4"
-        Me.RadioButton4.Size = New System.Drawing.Size(76, 17)
-        Me.RadioButton4.TabIndex = 0
-        Me.RadioButton4.TabStop = True
-        Me.RadioButton4.Text = "Принтеры"
-        Me.RadioButton4.UseVisualStyleBackColor = True
-        '
-        'RadioButton5
-        '
-        Me.RadioButton5.AutoSize = True
-        Me.RadioButton5.Location = New System.Drawing.Point(3, 26)
-        Me.RadioButton5.Name = "RadioButton5"
-        Me.RadioButton5.Size = New System.Drawing.Size(77, 17)
-        Me.RadioButton5.TabIndex = 1
-        Me.RadioButton5.TabStop = True
-        Me.RadioButton5.Text = "Мониторы"
-        Me.RadioButton5.UseVisualStyleBackColor = True
-        '
         'gbTree_o
         '
         Me.gbTree_o.Controls.Add(Me.TableLayoutPanel6)
@@ -1265,26 +1324,6 @@ Partial Class frmSetup
         Me.ComboBox2.TabIndex = 27
         Me.ComboBox2.Text = "AIDA64 (Everest)"
         '
-        'GroupBox3
-        '
-        Me.GroupBox3.Controls.Add(Me.ComboBox1)
-        Me.GroupBox3.Location = New System.Drawing.Point(7, 136)
-        Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(177, 47)
-        Me.GroupBox3.TabIndex = 23
-        Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "Размер иконок в дереве"
-        '
-        'ComboBox1
-        '
-        Me.ComboBox1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Items.AddRange(New Object() {"24*24", "32*32"})
-        Me.ComboBox1.Location = New System.Drawing.Point(3, 16)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(171, 21)
-        Me.ComboBox1.TabIndex = 0
-        '
         'GroupBox4
         '
         Me.GroupBox4.Controls.Add(Me.chkSP)
@@ -1301,6 +1340,40 @@ Partial Class frmSetup
         Me.GroupBox4.TabIndex = 28
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Дерево:"
+        '
+        'chkSP
+        '
+        Me.chkSP.AutoSize = True
+        Me.chkSP.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.chkSP.Location = New System.Drawing.Point(7, 112)
+        Me.chkSP.Name = "chkSP"
+        Me.chkSP.Size = New System.Drawing.Size(175, 17)
+        Me.chkSP.TabIndex = 4
+        Me.chkSP.Text = "Отмечать списанную технику"
+        Me.chkSP.UseVisualStyleBackColor = True
+        '
+        'chkNB
+        '
+        Me.chkNB.AutoSize = True
+        Me.chkNB.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.chkNB.Location = New System.Drawing.Point(7, 89)
+        Me.chkNB.Name = "chkNB"
+        Me.chkNB.Size = New System.Drawing.Size(192, 17)
+        Me.chkNB.TabIndex = 3
+        Me.chkNB.Text = "Отмечать технику не на балансе"
+        Me.chkNB.UseVisualStyleBackColor = True
+        '
+        'chkRemVisible
+        '
+        Me.chkRemVisible.AutoSize = True
+        Me.chkRemVisible.BackColor = System.Drawing.Color.Red
+        Me.chkRemVisible.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.chkRemVisible.Location = New System.Drawing.Point(7, 65)
+        Me.chkRemVisible.Name = "chkRemVisible"
+        Me.chkRemVisible.Size = New System.Drawing.Size(172, 17)
+        Me.chkRemVisible.TabIndex = 2
+        Me.chkRemVisible.Text = "Отмечать технику в ремонте"
+        Me.chkRemVisible.UseVisualStyleBackColor = False
         '
         'RadioButton11
         '
@@ -1326,6 +1399,123 @@ Partial Class frmSetup
         Me.RadioButton10.Text = "Обновлять после каждого сохранения"
         Me.RadioButton10.UseVisualStyleBackColor = True
         '
+        'GroupBox3
+        '
+        Me.GroupBox3.Controls.Add(Me.ComboBox1)
+        Me.GroupBox3.Location = New System.Drawing.Point(7, 136)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(177, 47)
+        Me.GroupBox3.TabIndex = 23
+        Me.GroupBox3.TabStop = False
+        Me.GroupBox3.Text = "Размер иконок в дереве"
+        '
+        'ComboBox1
+        '
+        Me.ComboBox1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Items.AddRange(New Object() {"24*24", "32*32"})
+        Me.ComboBox1.Location = New System.Drawing.Point(3, 16)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(171, 21)
+        Me.ComboBox1.TabIndex = 0
+        '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.TableLayoutPanel7)
+        Me.GroupBox2.Location = New System.Drawing.Point(3, 413)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(370, 104)
+        Me.GroupBox2.TabIndex = 19
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "Отделять (При нажатии разделить):"
+        '
+        'TableLayoutPanel7
+        '
+        Me.TableLayoutPanel7.ColumnCount = 2
+        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel7.Controls.Add(Me.RadioButton6, 1, 2)
+        Me.TableLayoutPanel7.Controls.Add(Me.RadioButton8, 1, 1)
+        Me.TableLayoutPanel7.Controls.Add(Me.RadioButton9, 0, 2)
+        Me.TableLayoutPanel7.Controls.Add(Me.RadioButton7, 1, 0)
+        Me.TableLayoutPanel7.Controls.Add(Me.RadioButton4, 0, 0)
+        Me.TableLayoutPanel7.Controls.Add(Me.RadioButton5, 0, 1)
+        Me.TableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel7.Location = New System.Drawing.Point(3, 16)
+        Me.TableLayoutPanel7.Name = "TableLayoutPanel7"
+        Me.TableLayoutPanel7.RowCount = 3
+        Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel7.Size = New System.Drawing.Size(364, 85)
+        Me.TableLayoutPanel7.TabIndex = 23
+        '
+        'RadioButton6
+        '
+        Me.RadioButton6.AutoSize = True
+        Me.RadioButton6.Location = New System.Drawing.Point(185, 49)
+        Me.RadioButton6.Name = "RadioButton6"
+        Me.RadioButton6.Size = New System.Drawing.Size(124, 17)
+        Me.RadioButton6.TabIndex = 2
+        Me.RadioButton6.TabStop = True
+        Me.RadioButton6.Text = "Все перечисленное"
+        Me.RadioButton6.UseVisualStyleBackColor = True
+        '
+        'RadioButton8
+        '
+        Me.RadioButton8.AutoSize = True
+        Me.RadioButton8.Location = New System.Drawing.Point(185, 26)
+        Me.RadioButton8.Name = "RadioButton8"
+        Me.RadioButton8.Size = New System.Drawing.Size(123, 17)
+        Me.RadioButton8.TabIndex = 4
+        Me.RadioButton8.TabStop = True
+        Me.RadioButton8.Text = "Клавиатуры+Мыши"
+        Me.RadioButton8.UseVisualStyleBackColor = True
+        '
+        'RadioButton9
+        '
+        Me.RadioButton9.AutoSize = True
+        Me.RadioButton9.Location = New System.Drawing.Point(3, 49)
+        Me.RadioButton9.Name = "RadioButton9"
+        Me.RadioButton9.Size = New System.Drawing.Size(117, 17)
+        Me.RadioButton9.TabIndex = 5
+        Me.RadioButton9.TabStop = True
+        Me.RadioButton9.Text = "Сетевые фильтры"
+        Me.RadioButton9.UseVisualStyleBackColor = True
+        '
+        'RadioButton7
+        '
+        Me.RadioButton7.AutoSize = True
+        Me.RadioButton7.Location = New System.Drawing.Point(185, 3)
+        Me.RadioButton7.Name = "RadioButton7"
+        Me.RadioButton7.Size = New System.Drawing.Size(48, 17)
+        Me.RadioButton7.TabIndex = 3
+        Me.RadioButton7.TabStop = True
+        Me.RadioButton7.Text = "ИБП"
+        Me.RadioButton7.UseVisualStyleBackColor = True
+        '
+        'RadioButton4
+        '
+        Me.RadioButton4.AutoSize = True
+        Me.RadioButton4.Location = New System.Drawing.Point(3, 3)
+        Me.RadioButton4.Name = "RadioButton4"
+        Me.RadioButton4.Size = New System.Drawing.Size(76, 17)
+        Me.RadioButton4.TabIndex = 0
+        Me.RadioButton4.TabStop = True
+        Me.RadioButton4.Text = "Принтеры"
+        Me.RadioButton4.UseVisualStyleBackColor = True
+        '
+        'RadioButton5
+        '
+        Me.RadioButton5.AutoSize = True
+        Me.RadioButton5.Location = New System.Drawing.Point(3, 26)
+        Me.RadioButton5.Name = "RadioButton5"
+        Me.RadioButton5.Size = New System.Drawing.Size(77, 17)
+        Me.RadioButton5.TabIndex = 1
+        Me.RadioButton5.TabStop = True
+        Me.RadioButton5.Text = "Мониторы"
+        Me.RadioButton5.UseVisualStyleBackColor = True
+        '
         'SStab1
         '
         Me.SStab1.Controls.Add(Me.TabPage1)
@@ -1338,40 +1528,6 @@ Partial Class frmSetup
         Me.SStab1.SelectedIndex = 0
         Me.SStab1.Size = New System.Drawing.Size(981, 580)
         Me.SStab1.TabIndex = 0
-        '
-        'chkRemVisible
-        '
-        Me.chkRemVisible.AutoSize = True
-        Me.chkRemVisible.BackColor = System.Drawing.Color.Red
-        Me.chkRemVisible.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.chkRemVisible.Location = New System.Drawing.Point(7, 65)
-        Me.chkRemVisible.Name = "chkRemVisible"
-        Me.chkRemVisible.Size = New System.Drawing.Size(172, 17)
-        Me.chkRemVisible.TabIndex = 2
-        Me.chkRemVisible.Text = "Отмечать технику в ремонте"
-        Me.chkRemVisible.UseVisualStyleBackColor = False
-        '
-        'chkNB
-        '
-        Me.chkNB.AutoSize = True
-        Me.chkNB.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.chkNB.Location = New System.Drawing.Point(7, 89)
-        Me.chkNB.Name = "chkNB"
-        Me.chkNB.Size = New System.Drawing.Size(192, 17)
-        Me.chkNB.TabIndex = 3
-        Me.chkNB.Text = "Отмечать технику не на балансе"
-        Me.chkNB.UseVisualStyleBackColor = True
-        '
-        'chkSP
-        '
-        Me.chkSP.AutoSize = True
-        Me.chkSP.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.chkSP.Location = New System.Drawing.Point(7, 112)
-        Me.chkSP.Name = "chkSP"
-        Me.chkSP.Size = New System.Drawing.Size(175, 17)
-        Me.chkSP.TabIndex = 4
-        Me.chkSP.Text = "Отмечать списанную технику"
-        Me.chkSP.UseVisualStyleBackColor = True
         '
         'frmSetup
         '
@@ -1396,13 +1552,13 @@ Partial Class frmSetup
         Me.TabPage3.ResumeLayout(False)
         Me.TableLayoutPanel2.ResumeLayout(False)
         Me.TableLayoutPanel2.PerformLayout()
+        Me.GroupBox5.ResumeLayout(False)
+        Me.TableLayoutPanel8.ResumeLayout(False)
+        Me.TableLayoutPanel8.PerformLayout()
         Me.TabPage1.ResumeLayout(False)
         Me.gbSetup.ResumeLayout(False)
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.TableLayoutPanel1.PerformLayout()
-        Me.GroupBox2.ResumeLayout(False)
-        Me.TableLayoutPanel7.ResumeLayout(False)
-        Me.TableLayoutPanel7.PerformLayout()
         Me.gbTree_o.ResumeLayout(False)
         Me.gbTree_o.PerformLayout()
         Me.TableLayoutPanel6.ResumeLayout(False)
@@ -1413,9 +1569,12 @@ Partial Class frmSetup
         Me.gbMyBlank.ResumeLayout(False)
         Me.TableLayoutPanel5.ResumeLayout(False)
         Me.TableLayoutPanel5.PerformLayout()
-        Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox4.PerformLayout()
+        Me.GroupBox3.ResumeLayout(False)
+        Me.GroupBox2.ResumeLayout(False)
+        Me.TableLayoutPanel7.ResumeLayout(False)
+        Me.TableLayoutPanel7.PerformLayout()
         Me.SStab1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
@@ -1524,4 +1683,17 @@ Partial Class frmSetup
     Friend WithEvents chkRemVisible As System.Windows.Forms.CheckBox
     Friend WithEvents chkSP As System.Windows.Forms.CheckBox
     Friend WithEvents chkNB As System.Windows.Forms.CheckBox
+    Friend WithEvents GroupBox5 As System.Windows.Forms.GroupBox
+    Friend WithEvents TableLayoutPanel8 As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents txtSMTP As System.Windows.Forms.TextBox
+    Friend WithEvents chkTLS As System.Windows.Forms.CheckBox
+    Friend WithEvents Label16 As System.Windows.Forms.Label
+    Friend WithEvents Label15 As System.Windows.Forms.Label
+    Friend WithEvents Label14 As System.Windows.Forms.Label
+    Friend WithEvents Label13 As System.Windows.Forms.Label
+    Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents Button4 As System.Windows.Forms.Button
+    Friend WithEvents txtPort As System.Windows.Forms.TextBox
+    Friend WithEvents txtMUser As System.Windows.Forms.TextBox
+    Friend WithEvents txtMPassword As System.Windows.Forms.TextBox
 End Class

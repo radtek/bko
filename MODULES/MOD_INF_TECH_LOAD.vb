@@ -2799,7 +2799,7 @@ err_:
 
     Public Sub REMONT_SEND_MASTER(ByVal sID As String)
 
-        Dim sSQL, sSQL1, a1, b1, c1, d1, e1, g1, h1, i1, j1, k1, l1, PREFs, m1, smtp, frm, srok As String
+        Dim sSQL, sSQL1, a1, b1, c1, d1, e1, g1, h1, i1, j1, k1, l1, PREFs, m1, frm, srok As String
 
         sSQL = "SELECT * FROM Remont where id =" & sID
 
@@ -2828,7 +2828,7 @@ err_:
 
         With rs
             m1 = .Fields("B").Value
-            smtp = .Fields("C").Value
+            ' smtp = .Fields("C").Value
         End With
         rs.Close()
         rs = Nothing
@@ -2914,16 +2914,7 @@ err_:
             Exit Sub
         End If
 
-        If Len(smtp) <> 0 Then
-
-        Else
-
-            MsgBox("Не указан сервер SMTP", MsgBoxStyle.Information, ProGramName)
-            Exit Sub
-        End If
-
-
-        If Len(frm) = 0 Then
+     If Len(frm) = 0 Then
 
             MsgBox("Не заполнен адрес для ответа", MsgBoxStyle.Information, ProGramName)
             Exit Sub
@@ -2964,25 +2955,38 @@ err_:
 
         On Error GoTo err_
 
-        Dim client As New SmtpClient(smtp)
-        client.EnableSsl = True
-        client.Credentials = New NetworkCredential("ldragon24@gmail.com", "lfplhf1vf!")
+  
+        Dim objIniFile As New IniFile(PrPath & "base.ini")
+        Dim sORG As String
 
-        Dim fromAdr As MailAddress = New MailAddress(frm, ProGramName, Encoding.UTF8)
-        Dim toAdr As MailAddress = New MailAddress(m1)
+        Dim decr As String = DecryptBytes(objIniFile.GetString("SMTP", "Password", ""))
+
+        Dim client As New SmtpClient
+        client.Port = objIniFile.GetString("SMTP", "Port", "")
+        client.Host = objIniFile.GetString("SMTP", "Server", "")
+        client.EnableSsl = objIniFile.GetString("SMTP", "TLS", "False")
+
+        client.Credentials = New NetworkCredential(objIniFile.GetString("SMTP", "User", ""), decr)
+
+        Dim fromAdr As MailAddress = New MailAddress(frm, sORG, Encoding.UTF8)
+        Dim toAdr As MailAddress = New MailAddress(objIniFile.GetString("SMTP", "User", ""))
         Dim message As MailMessage = New MailMessage(fromAdr, toAdr)
         message.Subject = Subject
         message.SubjectEncoding = Encoding.UTF8
-
         message.Body = sTEXT.Text
         message.BodyEncoding = Encoding.UTF8
-        'Dim attach As New Attachment("c:\1.txt")
-        'message.Attachments.Add(attach)
+
 
         client.Send(message)
         message.Dispose()
-
         sTEXT = Nothing
+
+
+
+
+
+
+
 
 
         MsgBox("Сообщение отправлено", MsgBoxStyle.Information, ProGramName)

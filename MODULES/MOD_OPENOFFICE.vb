@@ -4607,7 +4607,7 @@ err_:
                 Debug.Print(oDoc.replaceAll(oSrch))
 
                 oSrch.setSearchString("Модель")
-                oSrch.setReplaceString(sMODEL)
+                oSrch.setReplaceString(sMODEL & " SN::" & sSERNUMBER)
                 Debug.Print(oDoc.replaceAll(oSrch))
 
                 oSrch.setSearchString("Дефект")
@@ -4666,7 +4666,7 @@ err_:
 
                 With Wrd.Selection.Find
                     .Text = "Модель"
-                    .Replacement.Text = sMODEL
+                    .Replacement.Text = sMODEL & " SN::" & sSERNUMBER
                     .Forward = True
                     .Wrap = WdFindWrap.wdFindContinue
                     .Format = False
