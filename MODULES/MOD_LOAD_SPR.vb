@@ -239,13 +239,14 @@ Module Mod_Load_SPR
 
         pCombo.Items.Clear()
 
-
         Dim rs As Recordset
 
         rs = New Recordset
         rs.Open("SELECT count(*) as t_n FROM " & pTable & " WHERE " & pField & "<>''", DB7, CursorTypeEnum.adOpenDynamic,
                 LockTypeEnum.adLockReadOnly)
+
         Dim COUnT As String
+
         With rs
 
             COUnT = .Fields("t_n").Value
@@ -254,32 +255,33 @@ Module Mod_Load_SPR
         rs.Close()
         rs = Nothing
 
+        Select Case COUnT
 
-        If COUnT > 0 Then
+            Case 0
 
-            rs = New Recordset
-            rs.Open("SELECT " & pField & " FROM " & pTable & " WHERE " & pField & "<>'' ORDER BY " & pField, DB7,
-                    CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockReadOnly)
+            Case Else
 
-            With rs
-                .MoveFirst()
-                Do While Not .EOF
+                rs = New Recordset
+                rs.Open("SELECT " & pField & " FROM " & pTable & " WHERE " & pField & "<>'' ORDER BY " & pField, DB7,
+                        CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockReadOnly)
 
-                    If Not IsDBNull(.Fields(pField).Value) Then pCombo.Items.Add(.Fields(pField).Value)
+                With rs
+                    .MoveFirst()
+                    Do While Not .EOF
 
+                        If Not IsDBNull(.Fields(pField).Value) Then pCombo.Items.Add(.Fields(pField).Value)
 
-                    .MoveNext()
-                Loop
-            End With
+                        .MoveNext()
+                    Loop
+                End With
 
-            rs.Close()
-            rs = Nothing
+                rs.Close()
+                rs = Nothing
 
-        End If
-
+        End Select
 
         Exit Sub
-        err_:
+err_:
         MsgBox(Err.Description, MsgBoxStyle.Information, ProGramName)
     End Sub
 End Module

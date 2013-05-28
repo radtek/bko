@@ -257,6 +257,22 @@ Module MOD_SNMP
     Public Sub REQUEST_OID_IBP_DB(ByVal IPDEV As String, ByVal COMMDEV As String, ByVal MODEL As String,
                                   ByVal Develop As String)
 
+        frmComputers.Label94.Text = ""
+        frmComputers.Label95.Text = ""
+        frmComputers.Label96.Text = ""
+        frmComputers.Label97.Text = ""
+        frmComputers.Label110.Text = ""
+        frmComputers.Label111.Text = ""
+        frmComputers.Label112.Text = ""
+        frmComputers.Label113.Text = ""
+        frmComputers.Label102.Text = ""
+        frmComputers.Label103.Text = ""
+        frmComputers.Label104.Text = ""
+        frmComputers.Label105.Text = ""
+        frmComputers.txtOTHSN.Text = ""
+
+
+
         If My.Computer.Network.Ping(IPDEV) Then
             frmComputers.lblSNMP_Ping.Visible = False
         Else

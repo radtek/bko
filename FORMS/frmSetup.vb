@@ -112,38 +112,6 @@ Public Class frmSetup
         objIniFile.WriteString("general", "aida", txtEverestDir.Text)
     End Sub
 
-    Private Sub btnSUBD_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSUBD.Click
-        Dim DirectoryBrowser As New FolderBrowserDialog
-
-        ' Then use the following code to create the Dialog window
-        ' Change the .SelectedPath property to the default location
-        With DirectoryBrowser
-            ' Desktop is the root folder in the dialog.
-
-            .RootFolder = Environment.SpecialFolder.Desktop
-
-
-            If Len(txtSUBD.Text) = 0 Then
-                ' Select the C:\Windows directory on entry.
-                .SelectedPath = PrPath
-            Else
-                .SelectedPath = txtSUBD.Text
-            End If
-
-            ' Prompt the user with a custom message.
-            .Description = "Select the source directory"
-
-            If .ShowDialog = DialogResult.OK Then
-                ' Display the selected folder if the user clicked on the OK button.
-                txtSUBD.Text = .SelectedPath
-            End If
-
-        End With
-
-        Dim objIniFile As New IniFile(PrPath & "base.ini")
-        objIniFile.WriteString("general", "BasePath", txtSUBD.Text)
-    End Sub
-
     Private Sub frmSetup_Activated(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Activated
 
         frmMain.SaveInfTehButton.Enabled = False
@@ -155,7 +123,9 @@ Public Class frmSetup
         SendFonts(Me)
 
         Call frmSetup_Lang()
-        Call USER_LIST()
+
+        Me.BeginInvoke(New MethodInvoker(AddressOf USER_LIST))
+
 
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
@@ -499,9 +469,7 @@ Public Class frmSetup
         Dim decr As String = DecryptBytes(objIniFile.GetString("SMTP", "Password", ""))
         txtMPassword.Text = decr
 
-      
-
-        chkTLS.Checked = objIniFile.GetString("SMTP", "TLS", "")
+        chkTLS.Checked = objIniFile.GetString("SMTP", "TLS", "false")
 
         sText = objIniFile.GetString("general", "Tree_S", 0)
 

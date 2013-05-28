@@ -409,11 +409,6 @@ Module MOD_INF_TECH_LOAD
 
                     frmComputers.txtSNMP.Text = .Fields("SNMP_COMMUNITY").Value
 
-                    frmComputers.lblSNMP.Visible = True
-                    frmComputers.txtSNMP.Visible = True
-                    frmComputers.gbSNMP.Visible = True
-
-
                     Dim rsSNMP As Recordset
                     Dim sTXT As String
                     rsSNMP = New Recordset
@@ -461,17 +456,17 @@ Module MOD_INF_TECH_LOAD
             If Not IsDBNull(.Fields("Balans").Value) Then frmComputers.chkOTHNNb.Checked = .Fields("Balans").Value
             If Not IsDBNull(.Fields("PCL").Value) Then unaPCL = .Fields("PCL").Value
 
-            If frmComputers.chkSNMP.Checked = True Or 0 Then
-                'frmComputers.chkSNMP.Visible = True
-                frmComputers.lblSNMP.Visible = True
-                frmComputers.txtSNMP.Visible = True
-                frmComputers.gbSNMP.Visible = True
-            Else
-                'frmComputers.chkSNMP.Visible = False
-                frmComputers.lblSNMP.Visible = False
-                frmComputers.txtSNMP.Visible = False
-                frmComputers.gbSNMP.Visible = False
-            End If
+            'If frmComputers.chkSNMP.Checked = True Or 0 Then
+            '    'frmComputers.chkSNMP.Visible = True
+            '    frmComputers.lblSNMP.Visible = True
+            '    frmComputers.txtSNMP.Visible = True
+            '    frmComputers.gbSNMP.Visible = True
+            'Else
+            '    'frmComputers.chkSNMP.Visible = False
+            '    frmComputers.lblSNMP.Visible = False
+            '    frmComputers.txtSNMP.Visible = False
+            '    frmComputers.gbSNMP.Visible = False
+            'End If
 
         End With
 

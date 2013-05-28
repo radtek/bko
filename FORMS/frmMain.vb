@@ -22,16 +22,13 @@ Public Class frmMain
 
         If unamDB <> "MS Access" Then ArhToolZipbutton.Enabled = False
 
-
         Call SECUR_LEVEL()
-
 
     End Sub
 
     Private Sub frmMain_FormClosed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
 
         UnLoadDatabase()
-
 
         If DB_N <> "MS Access" Then Exit Sub
 
@@ -40,24 +37,25 @@ Public Class frmMain
         Dim uname As String
         uname = objIniFile.GetString("general", "ARHIVATOR", 0)
 
-        If uname = "1" Then
+        Select Case uname
 
-            Dim dirs As String
-            Dim sFIleName As String
-            dirs = BasePath
-            sFIleName = PrPath & "arhiv\" & GENID() & "_" & Date.Today & "_" & My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor & "." & My.Application.Info.Version.Build & "." & My.Application.Info.Version.Revision & ".zip"
+            Case "1"
 
-            Try
-                Using zip1 As ZipFile = New ZipFile
-                    zip1.AddDirectory(dirs)
-                    zip1.Save(sFIleName)
-                End Using
-            Catch exc1 As Exception
-                MessageBox.Show(String.Format("Исключение при сжатии: {0}", exc1.Message))
-            End Try
+                Dim dirs As String
+                Dim sFIleName As String
+                dirs = BasePath
+                sFIleName = PrPath & "arhiv\" & GENID() & "_" & Date.Today & "_" & My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor & "." & My.Application.Info.Version.Build & "." & My.Application.Info.Version.Revision & ".zip"
 
+                Try
+                    Using zip1 As ZipFile = New ZipFile
+                        zip1.AddDirectory(dirs)
+                        zip1.Save(sFIleName)
+                    End Using
+                Catch exc1 As Exception
+                    MessageBox.Show(String.Format("Исключение при сжатии: {0}", exc1.Message))
+                End Try
 
-        End If
+        End Select
 
     End Sub
 
@@ -113,54 +111,52 @@ Public Class frmMain
 
     Private Sub frmMain_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
+        Select Case DB_N
 
-        If DB_N = "MS Access" Then
+            Case "MS Access"
 
-            DB_USE.Text = Base_Name
-            LBL_SUBD.Visible = False
+                DB_USE.Text = Base_Name
+                LBL_SUBD.Visible = False
 
+                DB_USE.DropDown.Items.Clear()
 
-            DB_USE.DropDown.Items.Clear()
+                ' Only get files that begin with the letter "c."
+                Dim dirs As String() = Directory.GetFiles(BasePath, "*.mdb")
+                ' Console.WriteLine("The number of files starting with c is {0}.", dirs.Length)
+                Dim dir As String
 
-            ' Only get files that begin with the letter "c."
-            Dim dirs As String() = Directory.GetFiles(BasePath, "*.mdb")
-            ' Console.WriteLine("The number of files starting with c is {0}.", dirs.Length)
-            Dim dir As String
+                Dim B1 As New ToolStripButton
+                Dim i As Integer = 0
+                Dim sNameS(500) As String
 
-            Dim B1 As New ToolStripButton
-            Dim i As Integer = 0
-            Dim sNameS(500) As String
+                For Each dir In dirs
 
+                    Dim d() As String
+                    d = Split(dir, "\")
+                    'd(d.Length - 1
+                    sNameS(i) = d(d.Length - 1)
 
-            For Each dir In dirs
+                    i = i + 1
+                Next
 
-                Dim d() As String
-                d = Split(dir, "\")
-                'd(d.Length - 1
-                sNameS(i) = d(d.Length - 1)
+                For i1 As Integer = 0 To i
+                    Dim B As New ToolStripButton
 
-                i = i + 1
-            Next
+                    B.ForeColor = Color.Blue
+                    B.Text = sNameS(i1)
+                    Btn(i1) = B
 
+                    AddHandler Btn(i1).Click, AddressOf DbButtonsClick
+                    DB_USE.DropDown.Items.AddRange(New ToolStripItem() {Btn(i1)})
+                Next
 
-            For i1 As Integer = 0 To i
-                Dim B As New ToolStripButton
+                DB_USE.Text = Base_Name
 
-                B.ForeColor = Color.Blue
-                B.Text = sNameS(i1)
-                Btn(i1) = B
+            Case Else
+                LBL_SUBD.Visible = True
+                DB_USE.Visible = False
 
-                AddHandler Btn(i1).Click, AddressOf DBButtonsClick
-                DB_USE.DropDown.Items.AddRange(New ToolStripItem() {Btn(i1)})
-            Next
-
-            DB_USE.Text = Base_Name
-
-        Else
-            LBL_SUBD.Visible = True
-            DB_USE.Visible = False
-
-        End If
+        End Select
 
         ''Меняем шрифт
         Call SendFonts(Me)
@@ -215,11 +211,9 @@ Public Class frmMain
 
         End Select
 
-
         sText = objIniFile.GetString("general", "IMAGE_TEXT", 1)
 
-
-         Select sText
+        Select Case sText
 
             Case 0
 
@@ -239,10 +233,9 @@ Public Class frmMain
                 ToolStripButton1.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText
         End Select
 
-
         sText = objIniFile.GetString("general", "StatusStrip", 1)
 
-          Select sText
+        Select Case sText
 
             Case 0
 
@@ -254,7 +247,6 @@ Public Class frmMain
 
         End Select
         Me.StatusStrip.Visible = Me.StatusBarToolStripMenuItem.Checked
-
 
         sText = objIniFile.GetString("general", "ToolStrip", 1)
 
@@ -293,7 +285,6 @@ Public Class frmMain
 
         Me.BeginInvoke(New MethodInvoker(AddressOf SHED_CHECK_1))
 
-
         'Ремонты есть или нет
         'Dim newThread5 As New Thread(AddressOf REM_CHECK_1)
         'newThread5.Start()
@@ -314,43 +305,46 @@ Public Class frmMain
         rsG.Close()
         rsG = Nothing
 
+        Select Case sCountOTH
+
+            Case 0
+
+            Case Else
+
+                Dim rs As ADODB.Recordset 'Объявляем рекордсет
+                Dim sSQL As String 'Переменная, где будет размещён SQL запрос
+                sSQL = "SELECT * FROM spr_other"
+
+                Dim sNameZ(sCountOTH) As String
+
+                rs = New ADODB.Recordset
+                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                Dim iz As Integer = 0
+
+                With rs
+                    .MoveFirst()
+                    Do While Not .EOF
+                        sNameZ(iz) = .Fields("name").Value
+                        iz = iz + 1
+                        .MoveNext()
+                    Loop
+                End With
+                rs.Close()
+                rs = Nothing
 
 
-        If sCountOTH > 0 Then
-            Dim rs As ADODB.Recordset 'Объявляем рекордсет
-            Dim sSQL As String 'Переменная, где будет размещён SQL запрос
-            sSQL = "SELECT * FROM spr_other"
+                For i As Integer = 0 To sCountOTH
+                    Dim B As New ToolStripButton
 
-            Dim sNameZ(sCountOTH) As String
+                    B.ForeColor = Color.Blue
+                    B.Text = sNameZ(i)
+                    Btn(i) = B
 
-            rs = New ADODB.Recordset
-            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-            Dim iz As Integer = 0
+                    AddHandler Btn(i).Click, AddressOf colorButtonsClick
+                    ДругоеОборудованиеToolStripMenuItem.DropDown.Items.AddRange(New ToolStripItem() {Btn(i)})
+                Next
 
-            With rs
-                .MoveFirst()
-                Do While Not .EOF
-                    sNameZ(iz) = .Fields("name").Value
-                    iz = iz + 1
-                    .MoveNext()
-                Loop
-            End With
-            rs.Close()
-            rs = Nothing
-
-
-            For i As Integer = 0 To sCountOTH
-                Dim B As New ToolStripButton
-
-                B.ForeColor = Color.Blue
-                B.Text = sNameZ(i)
-                Btn(i) = B
-
-                AddHandler Btn(i).Click, AddressOf colorButtonsClick
-                ДругоеОборудованиеToolStripMenuItem.DropDown.Items.AddRange(New ToolStripItem() {Btn(i)})
-            Next
-
-        End If
+        End Select
 
         'Какой модуль запускать
         sText = objIniFile.GetString("general", "MOD", 0)
@@ -393,19 +387,19 @@ Public Class frmMain
         t.Enabled = True
         AddHandler t.Tick, AddressOf TimerEventHandler
 
+        Select Case lblShed.Visible
 
-        If lblShed.Visible = False Then
+            Case False
+                lblSplet.Visible = False
 
-            lblSplet.Visible = False
+        End Select
 
-        End If
+        Select Case lblRem.Visible
 
-        If lblRem.Visible = False Then
+            Case False
+                ToolStripStatusLabel4.Visible = False
 
-            ToolStripStatusLabel4.Visible = False
-
-        End If
-
+        End Select
 
         LBL_SUBD.Text = unamDB & " - " & Base_Name
         LBL_USER.Text = UserNames & "/" & uLevel
@@ -413,8 +407,6 @@ Public Class frmMain
         '###################################################################3
 
         '  Exit Sub
-
-        'Call SendMail()
 
         Exit Sub
 err_:
@@ -476,10 +468,7 @@ err_:
 
 
 
-
-
     End Sub
-
 
     Public Sub colorButtonsClick(ByVal sender As [Object], ByVal e As EventArgs)
         Dim senderButton As ToolStripButton = CType(sender, ToolStripButton)
@@ -525,14 +514,11 @@ err_:
 
         On Error GoTo error_Renamed
 
-
         'If frmMain.Height < 8500 + 300 Then frmMain.Height = 8500 + 300
         'If frmMain.Width < 12620 Then frmMain.Width = 12620
 
         If (Me.Height) < 750 Then Me.Height = 750
         If (Me.Width) < 1024 Then Me.Width = 1024
-
-
 
         Exit Sub
 error_Renamed:
@@ -564,7 +550,6 @@ error_Renamed:
         frmComputers.MdiParent = Me
         frmComputers.Show()
         frmComputers.Focus()
-
 
     End Sub
 
@@ -598,12 +583,10 @@ error_Renamed:
 
         End Select
 
-
     End Sub
 
     Private Sub StatusBarToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles StatusBarToolStripMenuItem.Click
         Dim objIniFile As New IniFile(PrPath & "base.ini")
-
 
         Me.StatusStrip.Visible = Me.StatusBarToolStripMenuItem.Checked
 
@@ -618,9 +601,6 @@ error_Renamed:
                 objIniFile.WriteString("General", "StatusStrip", 0)
 
         End Select
-
-
-
 
     End Sub
 
@@ -676,7 +656,6 @@ error_Renamed:
         'On Error GoTo error
         On Error Resume Next
 
-
         rs.Open("DELETE FROM T_Log", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
         rs = Nothing
         rs = New ADODB.Recordset
@@ -688,7 +667,6 @@ error_Renamed:
         rs = New ADODB.Recordset
         rs.Open("DELETE FROM SPR_Master", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
         rs = Nothing
-
 
         rs = New ADODB.Recordset
         rs.Open("DELETE FROM remonty_plus", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
@@ -712,7 +690,6 @@ error_Renamed:
         rs = New ADODB.Recordset
         rs.Open("DELETE FROM tbl_bios", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
         rs = Nothing
-
 
         rs = New ADODB.Recordset
         rs.Open("DELETE FROM CARTRIDG_Z", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
@@ -748,7 +725,6 @@ error_Renamed:
         rs.Open("DELETE FROM SPR_OTV", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
         rs = Nothing
 
-
         rs = New ADODB.Recordset
         rs.Open("DELETE FROM SPR_KAB", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
         rs = Nothing
@@ -761,7 +737,6 @@ error_Renamed:
         rs = New ADODB.Recordset
         rs.Open("DELETE FROM SPR_FILIAL", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
         rs = Nothing
-
 
         rs = New ADODB.Recordset
         rs.Open("DELETE FROM Sclad", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
@@ -798,13 +773,10 @@ error_Renamed:
 
         RefFilTree(frmComputers.lstGroups)
 
-
         Dim LNGIniFile As New IniFile(sLANGPATH)
-
 
         MsgBox(LNGIniFile.GetString("frmMain", "MSG4", "Очистка базы завершено успешно!"), MsgBoxStyle.Information)
         'Exit Sub
-
 
         Exit Sub
 Error_:
@@ -824,26 +796,32 @@ Error_:
         On Error GoTo err_
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
-        If DB_N = "MS Access" Then
-            UnLoadDatabase()
-            Dim sBname As String
-            sBname = "temp_" & Base_Name
 
-            Dim JRO As JRO.JetEngine
-            JRO = New JRO.JetEngine
-            JRO.CompactDatabase("Provider=Microsoft.Jet.OLEDB.4.0;" & "Data Source=" & BasePath & Base_Name, "Provider=Microsoft.Jet.OLEDB.4.0;" & "Data Source=" & BasePath & sBname & ";Jet OLEDB:Engine Type=5")
-            Kill(BasePath & Base_Name)
-            Rename(BasePath & sBname, BasePath & Base_Name)
-            LoadDatabase()
+        Select Case DB_N
 
-            'MsgBox(LNGIniFile.GetString("frmMain", "MSG5", "Сжатие базы завершено успешно!"), MsgBoxStyle.Information, ProGramName)
+            Case "MS Access"
 
-        End If
+                UnLoadDatabase()
+                Dim sBname As String
+                sBname = "temp_" & Base_Name
 
-        Exit Sub
+                Dim JRO As JRO.JetEngine
+                JRO = New JRO.JetEngine
+                JRO.CompactDatabase("Provider=Microsoft.Jet.OLEDB.4.0;" & "Data Source=" & BasePath & Base_Name, "Provider=Microsoft.Jet.OLEDB.4.0;" & "Data Source=" & BasePath & sBname & ";Jet OLEDB:Engine Type=5")
+                Kill(BasePath & Base_Name)
+                Rename(BasePath & sBname, BasePath & Base_Name)
+                LoadDatabase()
+
+                'MsgBox(LNGIniFile.GetString("frmMain", "MSG5", "Сжатие базы завершено успешно!"), MsgBoxStyle.Information, ProGramName)
+
+            Case Else
+
+        End Select
+
+                Exit Sub
 err_:
-        MsgBox(Err.Description, MsgBoxStyle.Information, ProGramName)
-        LoadDatabase()
+                MsgBox(Err.Description, MsgBoxStyle.Information, ProGramName)
+                LoadDatabase()
 
     End Sub
 
@@ -894,8 +872,6 @@ err_:
             Exit Sub
         End If
 
-
-
         frmCRT3.MdiParent = Me
         frmCRT3.Show()
         frmCRT3.Focus()
@@ -921,7 +897,6 @@ err_:
     Private Sub ФорумToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ФорумToolStripMenuItem.Click
 
         System.Diagnostics.Process.Start("http://bko.shatki.info/forum/")
-
 
     End Sub
 
@@ -950,7 +925,6 @@ err_:
             sParams = sParams & IIf(Subject = "", "?", "&")
             sParams = sParams & "body=" & Body
         End If
-
 
         Try
 
@@ -1783,7 +1757,6 @@ err_:
             Call SaveActivityToLogDB(LNGIniFile.GetString("frmMain", "MSG2", "Создание новой техники"))
         End If
 
-
         If Len(TipTehn) <> 0 Then
 
             GoTo ADD
@@ -2079,10 +2052,8 @@ ADD:
         frmComputers.cmbDepartment.Text = sDepartment
         frmComputers.cmbOffice.Text = sOffice
 
-
         frmComputers.EDT = False
         TipTehn = "PC"
-
 
     End Sub
 
@@ -2143,7 +2114,6 @@ ADD:
         frmComputers.txtOTHSN.Width = "214"
 
         Call ClearForm(frmComputers)
-
 
         FillComboNET(frmComputers.cmbOTH, "name", "SPR_IBP", "", False, True)
         frmComputers.lblTipOther.Visible = False
@@ -2323,8 +2293,6 @@ ADD:
         frmComputers.BeginInvoke(New MethodInvoker(AddressOf INVENT))
     End Sub
 
-
-
     Private Sub РемонтыToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles РемонтыToolStripMenuItem.Click
 
         If DATAB = False Then Exit Sub
@@ -2337,6 +2305,7 @@ ADD:
     End Sub
 
     Private Sub CNTToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CNTToolStripMenuItem.Click
+
         Call ClearForm(frmComputers)
 
         frmComputers.cmbOTH.Items.Clear()
@@ -2361,25 +2330,29 @@ ADD:
         rs.Close()
         rs = Nothing
 
-        If COUnT > 0 Then
+        Select Case COUnT
 
-            rs = New ADODB.Recordset
-            rs.Open("SELECT name FROM spr_other WHERE name <> '' and C='1' ORDER BY name", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockReadOnly)
+            Case 0
 
-            With rs
-                .MoveFirst()
-                Do While Not .EOF
+            Case Else
 
-                    frmComputers.cmbOTH.Items.Add(.Fields("name").Value)
+                rs = New ADODB.Recordset
+                rs.Open("SELECT name FROM spr_other WHERE name <> '' and C='1' ORDER BY name", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockReadOnly)
 
-                    .MoveNext()
-                Loop
-            End With
+                With rs
+                    .MoveFirst()
+                    Do While Not .EOF
 
-            rs.Close()
-            rs = Nothing
+                        frmComputers.cmbOTH.Items.Add(.Fields("name").Value)
 
-        End If
+                        .MoveNext()
+                    Loop
+                End With
+
+                rs.Close()
+                rs = Nothing
+
+        End Select
 
         frmComputers.lblTipOther.Visible = True
         frmComputers.cmbOTHConnect.Visible = True
@@ -2592,8 +2565,4 @@ err_:
 
     End Sub
 
-
-    Private Sub DB_USE_Click(sender As System.Object, e As System.EventArgs) Handles DB_USE.Click
-
-    End Sub
 End Class

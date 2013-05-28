@@ -2,6 +2,7 @@
     Public Sub proverka_sn()
         On Error Resume Next
         ' On Error GoTo err_
+
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
         If IdentifierMAC = 0 Then
@@ -22,7 +23,7 @@
 
         Dim rs As Recordset
 
-        sSQL = "SELECT count(*) as t_n FROM kompy"
+        sSQL = "SELECT count(*) as t_n FROM kompy WHERE tiptehn = 'PC'"
         rs = New Recordset
         rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
         With rs
@@ -58,9 +59,6 @@
                     End If
                 End If
 
-
-
-
                 If Len(Trim(frmComputers.txtMSN.Text)) > 0 Then
                     If .Fields("INV_NO_MONITOR").Value = frmComputers.txtMSN.Text Then
                         sTEXTmSG = sTEXTmSG & vbCrLf &
@@ -76,7 +74,6 @@
                 End If
 
 
-
                 If Len(Trim(frmComputers.IN_IBP.Text)) > 0 Then
                     If .Fields("INV_NO_IBP").Value = frmComputers.IN_IBP.Text Then
                         sTEXTmSG = sTEXTmSG & vbCrLf &
@@ -90,7 +87,6 @@
                         intj = intj + 1
                     End If
                 End If
-
 
 
                 If Len(Trim(frmComputers.txtNETmac1.Text)) > 0 Then
@@ -123,7 +119,7 @@
         'intj = 0
 
         sSQL =
-            "SELECT Mb_Id, RAM_SN_1, RAM_SN_2, RAM_SN_3, RAM_SN_4, HDD_SN_1, HDD_SN_2, HDD_SN_3, HDD_SN_4, SVGA_SN, SOUND_SN, CD_SN, CDRW_SN, DVD_SN, FDD_SN, MODEM_SN, KEYBOARD_SN, MOUSE_SN, USB_SN, PCI_SN, MONITOR_SN, MONITOR_SN2, AS_SN, IBP_SN, FILTR_SN, PRINTER_SN_1, PRINTER_SN_2, PRINTER_SN_3, PRINTER_SN_4, SCANER_SN, Mb, NET_NAME, FILIAL, MESTO FROM kompy WHERE tiptehn = 'PC'"
+            "SELECT Mb_Id, RAM_SN_1, RAM_SN_2, RAM_SN_3, RAM_SN_4, HDD_SN_1, HDD_SN_2, HDD_SN_3, HDD_SN_4, SVGA_SN, SOUND_SN, CD_SN, CDRW_SN, DVD_SN, FDD_SN, MODEM_SN, KEYBOARD_SN, MOUSE_SN, USB_SN, PCI_SN, MONITOR_SN, MONITOR_SN2, AS_SN, IBP_SN, FILTR_SN, PRINTER_SN_1, PRINTER_SN_2, PRINTER_SN_3, PRINTER_SN_4, SCANER_SN, Mb_name, NET_NAME, FILIAL, MESTO FROM kompy WHERE tiptehn = 'PC'"
         rs = New Recordset
         rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
         intj = 0

@@ -1180,19 +1180,19 @@ err:
                     cmbReport2fil.Text = langIni.GetString("frmReports", "MSG1", "Все") And
                     cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
-                    sSQL = "SELECT mb, COUNT(tiptehn) as tot_num FROM kompy WHERE tiptehn = 'PC' group by mb"
+                    sSQL = "SELECT Mb_name, COUNT(tiptehn) as tot_num FROM kompy WHERE tiptehn = 'PC' group by mb"
 
                 Else
 
                     If cmbReport2Department.Text = langIni.GetString("frmReports", "MSG1", "Все") Then
 
 
-                        sSQL = "SELECT mb, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" &
+                        sSQL = "SELECT Mb_name, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" &
                                cmbReport2fil.Text & "' AND tiptehn = 'PC' group by mb"
 
                     Else
 
-                        sSQL = "SELECT mb, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" &
+                        sSQL = "SELECT Mb_name, COUNT(tiptehn) as tot_num FROM kompy WHERE kompy.FILIAL='" &
                                cmbReport2fil.Text & "' and kompy.MESTO='" & cmbReport2Department.Text &
                                "' AND tiptehn = 'PC' group by mb"
 

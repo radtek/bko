@@ -821,6 +821,7 @@ Partial Class frmSetup
         Me.txtMPassword.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtMPassword.Location = New System.Drawing.Point(255, 81)
         Me.txtMPassword.Name = "txtMPassword"
+        Me.txtMPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtMPassword.Size = New System.Drawing.Size(246, 20)
         Me.txtMPassword.TabIndex = 10
         '
@@ -905,6 +906,7 @@ Partial Class frmSetup
         'chkUpdate
         '
         Me.chkUpdate.AutoSize = True
+        Me.chkUpdate.Enabled = False
         Me.chkUpdate.Location = New System.Drawing.Point(3, 3)
         Me.chkUpdate.Name = "chkUpdate"
         Me.chkUpdate.Size = New System.Drawing.Size(202, 17)

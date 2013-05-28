@@ -203,66 +203,72 @@ Public Class frmComputers
 
         If Len(DCKey) <> 0 And DCKey <> "0" Then sSTAB5.Visible = True
 
-
         If DATAB = False Then Exit Sub
 
-        If KCKey <> 0 Then
-            Dim VisibleSSTAB As String
-            Dim ssCOUNT As Integer
-            Dim rs As Recordset
-            rs = New Recordset
+        Select Case KCKey
 
-            rs.Open("SELECT count(*) as t_n from kompy where id=" & KCKey, DB7, CursorTypeEnum.adOpenDynamic,
-                    LockTypeEnum.adLockOptimistic)
+            Case 0
 
-            With rs
+            Case Else
 
-                ssCOUNT = .Fields("t_n").Value
+                Dim VisibleSSTAB As String
+                Dim ssCOUNT As Integer
+                Dim rs As Recordset
+                rs = New Recordset
 
-            End With
+                rs.Open("SELECT count(*) as t_n from kompy where id=" & KCKey, DB7, CursorTypeEnum.adOpenDynamic,
+                        LockTypeEnum.adLockOptimistic)
 
-            rs.Close()
-            rs = Nothing
+                With rs
 
-            If ssCOUNT = 0 Then
-                sSTAB1.Visible = True
-                Exit Sub
-            End If
+                    ssCOUNT = .Fields("t_n").Value
 
-            rs = New Recordset
-            rs.Open("SELECT tiptehn from kompy where id=" & KCKey, DB7, CursorTypeEnum.adOpenDynamic,
-                    LockTypeEnum.adLockOptimistic)
-            With rs
+                End With
 
-                VisibleSSTAB = .Fields("tiptehn").Value
+                rs.Close()
+                rs = Nothing
 
-            End With
-
-            rs.Close()
-            rs = Nothing
-
-            Select Case VisibleSSTAB
-
-                Case "PC"
+                If ssCOUNT = 0 Then
                     sSTAB1.Visible = True
+                    Exit Sub
+                End If
 
-                Case "Printer"
-                    sSTAB2.Visible = True
+                rs = New Recordset
+                rs.Open("SELECT tiptehn from kompy where id=" & KCKey, DB7, CursorTypeEnum.adOpenDynamic,
+                        LockTypeEnum.adLockOptimistic)
+                With rs
 
-                Case "KOpir"
-                    sSTAB2.Visible = True
+                    VisibleSSTAB = .Fields("tiptehn").Value
 
-                Case "MFU"
-                    sSTAB2.Visible = True
+                End With
 
-                Case "NET"
-                    sSTAB4.Visible = True
-                Case Else
-                    sSTAB3.Visible = True
+                rs.Close()
+                rs = Nothing
 
-            End Select
+                Select Case VisibleSSTAB
 
-        End If
+                    Case "PC"
+                        sSTAB1.Visible = True
+
+                    Case "Printer"
+                        sSTAB2.Visible = True
+
+                    Case "KOpir"
+                        sSTAB2.Visible = True
+
+                    Case "MFU"
+                        sSTAB2.Visible = True
+
+                    Case "NET"
+                        sSTAB4.Visible = True
+                    Case Else
+                        sSTAB3.Visible = True
+
+                End Select
+
+
+        End Select
+
     End Sub
 
     Private Sub Load_ICONS()
@@ -283,7 +289,6 @@ Public Class frmComputers
         EditService.Image = New Bitmap(PrPath & "pic\iface\editservice.png")
         DeleteService.Image = New Bitmap(PrPath & "pic\iface\delete.png")
         MnuSendEmail.Image = New Bitmap(PrPath & "pic\iface\sendmail.png")
-
 
         ПечатьToolStripMenuItem.Image = New Bitmap(PrPath & "pic\iface\serviceprint.png")
         mnu_Z_to_Office.Image = New Bitmap(PrPath & "pic\iface\serviceprint.png")
@@ -500,87 +505,12 @@ Public Class frmComputers
 
         If OneStart = 0 Then OneStart = 1
 
-
-        'For Each node As TreeNode In lstGroups.Nodes
-
-        '    If node.Nodes.Count > 0 Then
-
-        '        Dim d() As String
-        '        d = Split(lstGroups.SelectedNode.Tag, "|")
-
-        '        Dim rs2 As Recordset
-        '        rs2 = New Recordset
-        '        Dim tmpCount As Integer = 0
-
-        '        rs2.Open("Select count(*) as t_n FROM Remont Where id_comp=" & d(1) & " and zakryt = false", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
-        '        With rs2
-
-        '            tmpCount = .Fields("t_n").Value
-
-        '        End With
-        '        rs2.Close()
-        '        rs2 = Nothing
-
-        '        Select Case tmpCount
-
-        '            Case 0
-
-        '            Case Else
-
-
-        '        End Select
-
-        '        'node.ImageIndex = node.ImageIndex
-        '        'node.SelectedImageIndex = node.ImageIndex + 1
-        '        checkchild(node)
-
-        '    End If
-
-        'Next
-
         Exit Sub
 err_:
 
         If OneStart = 0 Then OneStart = 1
 
     End Sub
-
-    'Private Sub checkchild(ByVal nod As TreeNode)
-
-    '    For Each node As TreeNode In nod.Nodes
-
-    '        Dim d() As String
-    '        d = Split(lstGroups.SelectedNode.Tag, "|")
-
-    '        Dim rs2 As Recordset
-    '        rs2 = New Recordset
-    '        Dim tmpCount As Integer = 0
-
-    '        rs2.Open("Select count(*) as t_n FROM Remont Where id_comp=" & d(1) & " and zakryt = false", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
-    '        With rs2
-
-    '            tmpCount = .Fields("t_n").Value
-
-    '        End With
-    '        rs2.Close()
-    '        rs2 = Nothing
-    '        Select Case tmpCount
-
-    '            Case 0
-
-    '            Case Else
-
-    '                node.BackColor = Color.Brown
-
-    '        End Select
-    '        checkchild(node)
-
-    '    Next
-
-    'End Sub
-
 
     Private Sub frmComputers_Resize(ByVal eventSender As Object, ByVal eventArgs As EventArgs) Handles MyBase.Resize
 
@@ -593,9 +523,6 @@ err_:
     End Sub
 
     Private Sub RESIZER()
-        'Cursor.Current = System.Windows.Forms.Cursors.Default
-
-        'If spCont.SplitterDistance > 200 Then Exit Sub
 
         If spCont.SplitterDistance > 450 Then spCont.SplitterDistance = 450
         If spCont.SplitterDistance < 250 Then spCont.SplitterDistance = 250
@@ -609,18 +536,13 @@ err_:
     Public Sub selectTECMesto()
         On Error GoTo Error_
 
-        'If EDT = False Then Exit Sub
-
         If MASSLOAD = True Then Exit Sub
-
-        'MASSLOAD = False
 
         Dim d() As String
         d = Split(lstGroups.SelectedNode.Tag, "|")
 
         Dim rs2 As Recordset
         rs2 = New Recordset
-
 
         sOffice = ""
         sBranch = ""
@@ -761,8 +683,7 @@ Error_:
 
     Private Sub lstGroups_AfterSelect(ByVal sender As Object, ByVal e As TreeViewEventArgs) _
         Handles lstGroups.AfterSelect
-        'ClearBackColor()
-        'Me.Cursor = Cursors.WaitCursor
+      
         Me.txtSNAME.BackColor = Me.txtSBSN.BackColor
         Me.txtPSEUDONIM.BackColor = Me.txtSBSN.BackColor
         Me.cmbBranch.BackColor = Me.txtSBSN.BackColor
@@ -770,9 +691,6 @@ Error_:
         pDRAG = False
 
         Call COLOR_Form_For_Computer(Me)
-
-        ' Call LOAD_LIST()
-        ' Call selectTECMesto()
 
         Me.BeginInvoke(New MethodInvoker(AddressOf LOAD_LIST))
         Me.BeginInvoke(New MethodInvoker(AddressOf selectTECMesto))
@@ -791,21 +709,11 @@ Error_:
 
         Me.Cursor = Cursors.WaitCursor
 
-        'If pDRAG = True Then
-
-        'Else
-        '    TipTehn = ""
-        'End If
-
-
         frmMain.SaveInfTehButton.Enabled = True
 
         Me.ChkPDC.Checked = False
 
-        'Me.BeginInvoke(New MethodInvoker(AddressOf SECUR_LEVEL))
-
         Call SECUR_LEVEL()
-
 
         Dim d() As String
         d = Split(lstGroups.SelectedNode.Tag, "|")
@@ -887,7 +795,6 @@ Error_:
 
                             If sCNTr > 0 Then ВернутьПерефериюToolStripMenuItem.Visible = True
 
-
                             CartrAddToolStripMenuItem.Visible = False
                             sSTAB2.Visible = False
                             sSTAB1.Visible = True
@@ -903,28 +810,6 @@ Error_:
                             Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
-
-
-                            'Dim newThread1 As New Thread(AddressOf T_LOAD_T_1)
-                            'newThread1.Start()
-                            ''newThread1.Priority = 4
-
-                            'Dim newThread2 As New Thread(AddressOf S_P_LOAD_t)
-                            'newThread2.Start()
-
-
-                            'Dim newThread3 As New Thread(AddressOf U_P_LOAD_t)
-                            'newThread3.Start()
-
-
-                            'Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
-                            'newThread4.Start()
-
-                            'Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
-                            'newThread5.Start()
-
-                            'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
-                            'newThread6.Start()
 
                             Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbPCLK)
 
@@ -949,19 +834,6 @@ Error_:
                             Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
-                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T_1)
-                            'newThread3.Start()
-                            ''newThread3.Priority = 4
-
-                            'Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
-                            'newThread4.Start()
-
-                            'Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
-                            'newThread5.Start()
-
-                            'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
-                            'newThread6.Start()
-
                             cmbFormat.Items.Clear()
 
                             For intj = 1 To 5
@@ -975,7 +847,6 @@ Error_:
                             cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG94", "Барабан"))
                             cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG95", "Термо Пленка"))
                             cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG96", "Фотокондуктор"))
-
 
                             Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbPCL)
                             'me.cmbPCL
@@ -997,19 +868,6 @@ Error_:
                             Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
-
-                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T_1)
-                            'newThread3.Start()
-                            ''newThread3.Priority = 4
-
-                            'Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
-                            'newThread4.Start()
-
-                            'Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
-                            'newThread5.Start()
-
-                            'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
-                            'newThread6.Start()
 
                             cmbFormat.Items.Clear()
 
@@ -1041,12 +899,10 @@ Error_:
                             Label83.Visible = False
                             cmbPCL.Visible = False
 
-
                             Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
                             Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
-
 
                             cmbFormat.Items.Clear()
 
@@ -1062,23 +918,7 @@ Error_:
                             cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG95", "Термо Пленка"))
                             cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG96", "Фотокондуктор"))
 
-
-                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T_1)
-                            'newThread3.Start()
-                            ''newThread3.Priority = 4
-
-                            'Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
-                            'newThread4.Start()
-
-                            'Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
-                            'newThread5.Start()
-
-                            'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
-                            'newThread6.Start()
-
-                            'Call LOAD_PCL()
                         Case "OT"
-
 
                             CartrAddToolStripMenuItem.Visible = False
                             FillComboNET(Me.cmbOTH, "name", "SPR_OTH_DEV", "", False, True)
@@ -1106,23 +946,7 @@ Error_:
                             Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
-
-                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T_1)
-                            'newThread3.Start()
-                            ''newThread3.Priority = 4
-
-                            'Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
-                            'newThread4.Start()
-
-                            'Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
-                            'newThread5.Start()
-
-                            'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
-                            'newThread6.Start()
-
-
                             Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL)
-
 
                         Case "PHOTO"
                             CartrAddToolStripMenuItem.Visible = False
@@ -1146,25 +970,10 @@ Error_:
                             lblOTPCL.Visible = False
                             cmbOTHPCL.Visible = False
 
-
                             Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
                             Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
-
-
-                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T_1)
-                            'newThread3.Start()
-                            ''newThread3.Priority = 4
-
-                            'Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
-                            'newThread4.Start()
-
-                            'Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
-                            'newThread5.Start()
-
-                            'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
-                            'newThread6.Start()
 
                         Case "FAX"
                             CartrAddToolStripMenuItem.Visible = False
@@ -1188,25 +997,10 @@ Error_:
                             lblOTPCL.Visible = False
                             cmbOTHPCL.Visible = False
 
-
                             Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
                             Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
-
-
-                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T_1)
-                            'newThread3.Start()
-                            ''newThread3.Priority = 4
-
-                            'Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
-                            'newThread4.Start()
-
-                            'Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
-                            'newThread5.Start()
-
-                            'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
-                            'newThread6.Start()
 
                         Case "PHONE"
                             CartrAddToolStripMenuItem.Visible = False
@@ -1230,25 +1024,10 @@ Error_:
 
                             lblOTPCL.Visible = True
 
-
                             Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
                             Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
-
-
-                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T_1)
-                            'newThread3.Start()
-                            ''newThread3.Priority = 4
-
-                            'Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
-                            'newThread4.Start()
-
-                            'Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
-                            'newThread5.Start()
-
-                            'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
-                            'newThread6.Start()
 
                         Case "ZIP"
                             CartrAddToolStripMenuItem.Visible = False
@@ -1271,24 +1050,10 @@ Error_:
                             lblOTPCL.Visible = True
                             cmbOTHPCL.Visible = True
 
-
                             Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
                             Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
-
-                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T_1)
-                            'newThread3.Start()
-                            ''newThread3.Priority = 4
-
-                            'Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
-                            'newThread4.Start()
-
-                            'Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
-                            'newThread5.Start()
-
-                            'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
-                            'newThread6.Start()
 
                             Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL)
 
@@ -1302,7 +1067,6 @@ Error_:
                             txtOTHIP.Visible = False
                             txtOTHMAC.Visible = False
 
-
                             'CopyToolStripMenuItem.Enabled = False
                             UpdateToolStripMenuItem.Enabled = False
                             sSTAB3.Visible = True
@@ -1313,28 +1077,15 @@ Error_:
                             lblOTPCL.Visible = True
                             cmbOTHPCL.Visible = True
 
-
                             Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
                             Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
-                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T_1)
-                            'newThread3.Start()
-                            ''newThread3.Priority = 4
-
-                            'Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
-                            'newThread4.Start()
-
-                            'Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
-                            'newThread5.Start()
-
-                            'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
-                            'newThread6.Start()
-
-
                             Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL)
+
                         Case "MONITOR"
+
                             CartrAddToolStripMenuItem.Visible = False
                             FillComboNET(Me.cmbOTH, "Name", "SPR_MONITOR", "", False, True)
 
@@ -1366,22 +1117,7 @@ Error_:
                             Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
-
-                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T_1)
-                            'newThread3.Start()
-                            ''newThread3.Priority = 4
-
-                            'Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
-                            'newThread4.Start()
-
-                            'Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
-                            'newThread5.Start()
-
-                            'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
-                            'newThread6.Start()
-
                             Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL)
-
 
                         Case "NET"
                             CartrAddToolStripMenuItem.Visible = False
@@ -1394,7 +1130,6 @@ Error_:
                             sSTAB4.Visible = True
 
                             Call LOADnet(d(1))
-
 
                             '--------------VIP_Graff Добавление новой перефирии Начало-----------------
                         Case "USB"
@@ -1417,25 +1152,10 @@ Error_:
                             lblOTPCL.Visible = True
                             cmbOTHPCL.Visible = True
 
-
                             Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
                             Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
-
-
-                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T_1)
-                            'newThread3.Start()
-                            ''newThread3.Priority = 4
-
-                            'Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
-                            'newThread4.Start()
-
-                            'Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
-                            'newThread5.Start()
-
-                            'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
-                            'newThread6.Start()
 
                             Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL)
 
@@ -1465,19 +1185,6 @@ Error_:
                             Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
-                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T_1)
-                            'newThread3.Start()
-                            ''newThread3.Priority = 4
-
-                            'Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
-                            'newThread4.Start()
-
-                            'Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
-                            'newThread5.Start()
-
-                            'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
-                            'newThread6.Start()
-
                             Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL)
 
                         Case "IBP"
@@ -1504,19 +1211,6 @@ Error_:
                             Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
-
-                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T_1)
-                            'newThread3.Start()
-                            ''newThread3.Priority = 4
-
-                            'Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
-                            'newThread4.Start()
-
-                            'Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
-                            'newThread5.Start()
-
-                            'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
-                            'newThread6.Start()
 
                             If chkSNMP.Checked = True Then
                                 ' chkSNMP.Visible = True
@@ -1552,24 +1246,10 @@ Error_:
                             lblOTPCL.Visible = True
                             cmbOTHPCL.Visible = True
 
-
                             Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
                             Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
-
-                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T_1)
-                            'newThread3.Start()
-                            ''newThread3.Priority = 4
-
-                            'Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
-                            'newThread4.Start()
-
-                            'Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
-                            'newThread5.Start()
-
-                            'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
-                            'newThread6.Start()
 
                             Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL)
 
@@ -1598,20 +1278,6 @@ Error_:
                             Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
-
-                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T_1)
-                            'newThread3.Start()
-                            ''newThread3.Priority = 4
-
-                            'Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
-                            'newThread4.Start()
-
-                            'Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
-                            'newThread5.Start()
-
-                            'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
-                            'newThread6.Start()
-
                             Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL)
 
                         Case "MOUSE"
@@ -1639,25 +1305,10 @@ Error_:
                             Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
-
-                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T_1)
-                            'newThread3.Start()
-                            ''newThread3.Priority = 4
-
-                            'Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
-                            'newThread4.Start()
-
-                            'Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
-                            'newThread5.Start()
-
-                            'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
-                            'newThread6.Start()
-
                             Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL)
                             '--------------VIP_Graff Добавление новой перефирии Конец------------------
 
                         Case "CNT"
-
 
                             CartrAddToolStripMenuItem.Visible = False
                             FillComboNET(Me.cmbOTH, "name", "SPR_other", "", False, True)
@@ -1685,22 +1336,6 @@ Error_:
                             Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
-
-                            'Dim newThread3 As New Thread(AddressOf T_LOAD_T_1)
-                            'newThread3.Start()
-                            ''newThread3.Priority = 4
-
-                            'Dim newThread4 As New Thread(AddressOf N_P_LOAD_t)
-                            'newThread4.Start()
-
-                            'Dim newThread5 As New Thread(AddressOf R_P_LOAD_t)
-                            'newThread5.Start()
-
-                            'Dim newThread6 As New Thread(AddressOf D_P_LOAD_t)
-                            'newThread6.Start()
-
-                            ' Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL)
-
                     End Select
 
                 End With
@@ -1712,8 +1347,6 @@ Error_:
             Case "G"
                 Me.EDT = False
 
-                'frmMain.SaveInfTehButton.Enabled = False
-
                 sSTAB3.Visible = False
                 sSTAB1.Visible = False
                 sSTAB2.Visible = False
@@ -1723,15 +1356,11 @@ Error_:
                 sPREF = d(0)
                 sCOUNT = d(1)
 
-                ' lblT_O_T.Text = langfile.GetString("frmComputers", "MSG15", "") 'langini.GetString("messages", "l1", "")
-                'langini.GetString("language", "l1001", "")
-
                 Dim rs As Recordset 'Объявляем рекордсет
                 Dim sSQL As String 'Переменная, где будет размещён SQL запрос
                 sSQL = "SELECT COUNT(*) as t_n FROM kompy WHERE filial ='" & lstGroups.SelectedNode.Text & "' "
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
 
                 With rs
                     '  lblT_O.Text = .Fields("t_n").Value & " " & langfile.GetString("frmComputers", "MSG13", "") '& langIni.GetString("messages", "l4", "")
@@ -1750,16 +1379,10 @@ Error_:
 
             Case "O"
 
-
-                'frmMain.SaveInfTehButton.Enabled = False
-
                 Me.EDT = False
-
 
                 sPREF = d(0)
                 sCOUNT = d(1)
-
-                ' lblT_O_T.Text = langfile.GetString("frmComputers", "MSG16", "") 'langini.GetString("messages", "l2", "")
 
                 Dim rs As Recordset 'Объявляем рекордсет
                 Dim sSQL As String 'Переменная, где будет размещён SQL запрос
@@ -1776,7 +1399,6 @@ Error_:
                 rs.Close()
                 rs = Nothing
 
-
                 sSQL = "SELECT COUNT(*) as t_n FROM kompy WHERE filial ='" & sFIL & "' and mesto='" &
                        lstGroups.SelectedNode.Text & "'"
                 rs = New Recordset
@@ -1784,7 +1406,6 @@ Error_:
 
 
                 With rs
-                    'lblT_O.Text = .Fields("t_n").Value & " " & langfile.GetString("frmComputers", "MSG13", "") '& langIni.GetString("messages", "l4", "")
 
                     frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "lblT_O_T", "Техники в: ")
                     frmMain.LBL_STAT_3.Text = .Fields("t_n").Value & " " &
@@ -1804,17 +1425,11 @@ Error_:
                 Call LOAD_REPAIR(d(1), Me.lvRepairBR)
 
             Case "K"
-                'TipTehn = ""
-
-                'frmMain.SaveInfTehButton.Enabled = False
 
                 Me.EDT = False
 
                 sPREF = d(0)
                 sCOUNT = d(1)
-
-                ' lblT_O_T.Text = langfile.GetString("frmComputers", "MSG17", "") 'langini.GetString("messages", "l3", "")
-
 
                 '###################################################################################
                 Dim rs As Recordset 'Объявляем рекордсет
@@ -1834,7 +1449,6 @@ Error_:
 
                 rs.Close()
                 rs = Nothing
-
 
                 sSQL = "SELECT COUNT(*) as t_n FROM kompy WHERE filial ='" & sFIL & "' and mesto='" & sOT &
                        "' and kabn='" & lstGroups.SelectedNode.Text & "'"
@@ -1862,24 +1476,22 @@ Error_:
                 LOAD_INF_BRANCHE(d(1))
                 Call LOAD_REPAIR(d(1), Me.lvRepairBR)
 
-
         End Select
-
 
         Me.Cursor = Cursors.Default
 
-
-        ' If OneStart = 0 Then OneStart = 1
     End Sub
 
     Private Sub S_P_LOAD_t()
 
         Call LOAD_SOFT(sCOUNT, Me.lstSoftware)
+
     End Sub
 
     Private Sub U_P_LOAD_t()
 
         Call LOAD_USER(sCOUNT)
+
     End Sub
 
     Private Sub T_LOAD_T_1()
@@ -1997,7 +1609,6 @@ Error_:
 
         Dim sALL, sSP, sBal As String
 
-
         Dim rs As Recordset 'Объявляем рекордсет
         Dim sSQL As String 'Переменная, где будет размещён SQL запрос
         sSQL = "select COUNT(*) as T_N from kompy"
@@ -2013,42 +1624,41 @@ Error_:
         rs.Close()
         rs = Nothing
 
+        Select Case DB_N
 
-        If DB_N = "MS Access" Then
+            Case "MS Access"
 
-            sSQL = "SELECT count(*) as t_n FROM kompy where Balans=true"
-            rs = New Recordset
-            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                sSQL = "SELECT count(*) as t_n FROM kompy where Balans=true"
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-            With rs
-                ' lblT_All.Text = (.Fields("T_N").Value) & " " & langfile.GetString("frmComputers", "MSG13", "")
+                With rs
 
-                sBal = (.Fields("T_N").Value) & " " & langfile.GetString("frmComputers", "MSG13", "шт.")
+                    sBal = (.Fields("T_N").Value) & " " & langfile.GetString("frmComputers", "MSG13", "шт.")
 
-            End With
-            rs.Close()
-            rs = Nothing
+                End With
+                rs.Close()
+                rs = Nothing
 
-            sALL = sALL & "/ Не на балансе: " & sBal
+                sALL = sALL & "/ Не на балансе: " & sBal
 
-            sSQL = "SELECT count(*) as t_n FROM kompy where Spisan=true"
-            rs = New Recordset
-            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                sSQL = "SELECT count(*) as t_n FROM kompy where Spisan=true"
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-            With rs
-                ' lblT_All.Text = (.Fields("T_N").Value) & " " & langfile.GetString("frmComputers", "MSG13", "")
+                With rs
 
-                sSP = (.Fields("T_N").Value) & " " & langfile.GetString("frmComputers", "MSG13", "шт.")
+                    sSP = (.Fields("T_N").Value) & " " & langfile.GetString("frmComputers", "MSG13", "шт.")
 
-            End With
-            rs.Close()
-            rs = Nothing
+                End With
+                rs.Close()
+                rs = Nothing
 
-            sALL = sALL & "/ Списано: " & sSP
+                sALL = sALL & "/ Списано: " & sSP
 
-        Else
+            Case Else
 
-        End If
+        End Select
 
         frmMain.LBL_STAT_1.Text = langfile.GetString("frmComputers", "lblT_All_T", "Техники всего:") & ": " & sALL
 
@@ -2088,7 +1698,6 @@ err_:
 
         rs1.Open("select * from SPR_OTD_FILIAL WHERE Filial='" & fCombo.Text & "' ORDER BY N_Otd", DB7,
                  CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
 
         cmbDepartment.Items.Clear()
 
@@ -2227,7 +1836,6 @@ err_:
 
         Dim langfile As New IniFile(sLANGPATH)
 
-
         btnNotes.Text = langfile.GetString("frmComputers", "MSG19", "Сохранить")
 
         rs.Close()
@@ -2240,7 +1848,6 @@ err_:
         If zCOUNT = 0 Then Exit Sub
 
         Dim langfile As New IniFile(sLANGPATH)
-
 
         Call _
             SaveActivityToLogDB(
@@ -2256,6 +1863,7 @@ err_:
         rs = Nothing
 
         Call LOAD_NOTES(sCOUNT, lvNote)
+
     End Sub
 
     Private Sub addRemToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) _
@@ -2283,7 +1891,6 @@ err_:
         frmService_add.txtComent.Text = ""
         frmService_add.RemCashe.Text = 0
         frmService_add.chkClose.Checked = False
-
 
         frmService_add.ShowDialog(frmserviceDesc)
 
@@ -2314,10 +1921,6 @@ err_:
             REMOVE_TEHN(d(1))
             Me.lstGroups.Nodes.Remove(Me.lstGroups.SelectedNode)
 
-            'Dim newThread1 As New Thread(AddressOf STAT_INF_1)
-            'newThread1.Start()
-
-
             Me.BeginInvoke(New MethodInvoker(AddressOf STAT_INF))
 
         Else
@@ -2341,10 +1944,6 @@ err_:
         If rCOUNT = 0 Then Exit Sub
 
         frmService_add.REMED = True
-
-        'frmserviceDesc.MdiParent = frmMain
-        'frmserviceDesc.Show()
-        'Call frmserviceDesc.Load_Z_Form(rCOUNT)
 
         '#################################################################
 
@@ -2467,7 +2066,6 @@ err_:
 
         Select Case TipTehn
 
-
             Case "PC"
 
                 Me.txtSNAME.Text = ""
@@ -2565,13 +2163,6 @@ err_:
         'On Error GoTo err_
 
         Dim d() As String
-        'Dim uname As String
-        'Dim N_NAME As String
-        'Dim P_NAME As String
-        'Dim L_NAME As String
-
-        'Dim objIniFile As New IniFile(PrPath & "base.ini")
-        'uname = objIniFile.GetString("general", "NETNAME", "1")
 
         d = Split(lstGroups.SelectedNode.Tag, "|")
 
@@ -2623,45 +2214,7 @@ err_:
             .MoveFirst()
             Do While Not .EOF
 
-
-                'Select Case uname
-
-                '    Case 0
-                '        N_NAME = .Fields("net_name").Value
-                '        P_NAME = .Fields("psevdonim").Value
-
-                '        If Len(N_NAME) = 0 Then
-                '            N_NAME = "NoName"
-                '        End If
-
-                '        If Len(P_NAME) = 0 Then
-                '            P_NAME = "NoName"
-                '        End If
-                '        L_NAME = N_NAME & " (" & P_NAME & ")"
-
-                '    Case 2
-                '        P_NAME = .Fields("psevdonim").Value
-
-                '        If Len(P_NAME) = 0 Then
-                '            P_NAME = "NoName"
-                '        End If
-                '        L_NAME = P_NAME
-
-                '    Case 1
-
-                '        N_NAME = .Fields("net_name").Value
-                '        If Len(N_NAME) = 0 Then
-                '            N_NAME = "NoName"
-                '        End If
-
-                '        L_NAME = N_NAME
-                'End Select
-
                 REMOVE_TEHN(.Fields("id").Value)
-
-                'Dim TEHNodeCNT As New TreeNode(L_NAME)
-                'Me.lstGroups.Nodes.Remove(TEHNodeCNT)
-
 
                 .MoveNext()
             Loop
@@ -2669,18 +2222,8 @@ err_:
         rs.Close()
         rs = Nothing
 
-
-        'Dim newThread1 As New Thread(AddressOf R_T_LOAD)
-        'newThread1.Start()
-
-
         Me.BeginInvoke(New MethodInvoker(AddressOf R_T_LOAD))
         Me.BeginInvoke(New MethodInvoker(AddressOf STAT_INF))
-
-        'RefFilTree(Me.lstGroups)
-
-        'Dim newThread2 As New Thread(AddressOf STAT_INF_1)
-        'newThread2.Start()
 
         Me.Cursor = Cursors.Default
         Exit Sub
@@ -2690,7 +2233,6 @@ err_:
 
     Private Sub addFoldertoBranch_Click(ByVal sender As Object, ByVal e As EventArgs) Handles addFoldertoBranch.Click
         'On Error GoTo Err_
-
 
         Call selectTECMesto()
 
@@ -2777,9 +2319,6 @@ err_:
 
                 MASSLOAD = False
 
-                'Dim newThread1 As New Thread(AddressOf STAT_INF_1)
-                'newThread1.Start()
-
                 Call STAT_INF()
 
                 Dim langfile As New IniFile(sLANGPATH)
@@ -2788,11 +2327,6 @@ err_:
                 Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG27", "Массовое добавление техники"))
 
                 RefFilTree(Me.lstGroups)
-                'Dim newThread As New Thread(AddressOf R_T_LOAD)
-                'newThread.Start()
-
-                'Dim newThread1 As New Thread(AddressOf STAT_INF)
-                'newThread1.Start()
 
             End If
 
@@ -2942,7 +2476,6 @@ err_:
 
     Private Sub lstGroups_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles lstGroups.MouseUp
 
-
         'BTN = Button
         On Error GoTo err_
 
@@ -3019,7 +2552,6 @@ err_:
     Private Sub btnOfficeSend_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnOfficeSend.Click
 
         Me.selectTECMesto()
-
 
         Dim tipot As String
         tipot = Directory.GetParent(System.Windows.Forms.Application.ExecutablePath).ToString & "/blanks/ses.dot"
@@ -4689,7 +4221,6 @@ err_:
 
         'frmCartr_ADD()
 
-
         Dim langfile As New IniFile(sLANGPATH)
 
         frmCartr_ADD.Text = langfile.GetString("frmComputers", "MSG43", "Добавление (редактирование) картриджа для") &
@@ -4853,15 +4384,12 @@ err_:
 
                 If Len(cmbOTHConnect.Text) = 0 Then
 
-
                     Dim rs As Recordset 'Объявляем рекордсет
                     Dim sSQL As String 'Переменная, где будет размещён SQL запрос
-
 
                     sSQL = "SELECT B FROM spr_other WHERE name ='" & cmbOTHConnect.Text & "'"
                     rs = New Recordset
                     rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
 
                     With rs
 
@@ -4878,37 +4406,6 @@ err_:
                     rs = Nothing
 
                 End If
-
-
-                'Dim rs As ADODB.Recordset
-                'Dim sSQL As String
-                'Dim uNI As String
-                'rs = New ADODB.Recordset
-
-                'sSQL = "SELECT * FROM SPR_OTH_DEV WHERE Name = '" & cmbOTH.Text & "'"
-
-                'rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-
-                'With rs
-
-                '    If Not IsDBNull(.Fields("proizv").Value) Then uNI = .Fields("proizv").Value
-
-                '    Dim PROYZV As ADODB.Recordset
-                '    PROYZV = New ADODB.Recordset
-                '    PROYZV.Open("SELECT * FROM SPR_PROIZV WHERE iD=" & uNI, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-
-                '    With PROYZV
-                '        PROiZV39.Text = .Fields("proizv").Value
-                '    End With
-                '    PROYZV.Close()
-                '    PROYZV = Nothing
-
-                '    If Not IsDBNull(.Fields("A").Value) Then cmbOTHConnect.Text = .Fields("A").Value
-
-                'End With
-
-                'rs.Close()
-                'rs = Nothing
 
                 '--------------VIP_Graff Добавление новой перефирии Начало-----------------
             Case "USB"
@@ -4949,9 +4446,7 @@ err_:
     Private Sub cmbOTHDepart_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
         Handles cmbOTHDepart.SelectedIndexChanged
 
-
         DepartmentLoad(cmbOTHFil, cmbOTHDepart, cmbOTHOffice)
-
 
         Exit Sub
 err_:
@@ -5206,7 +4701,6 @@ err_:
 
         DepartmentLoad(cmbNETBranch, cmbNetDepart, cmbNETOffice)
 
-
         Exit Sub
 err_:
     End Sub
@@ -5231,7 +4725,6 @@ err_:
         With SPR_DEV
             .MoveFirst()
             Do While Not .EOF
-
 
                 If Not IsDBNull(.Fields("proizv").Value) Then unI = .Fields("proizv").Value
 
@@ -5282,7 +4775,6 @@ Error_:
                 sSQL = "SELECT * FROM SPR_KOPIR WHERE Name = '" & cmbPRN.Text & "'"
 
         End Select
-
 
         On Error Resume Next
         Dim rs As Recordset
@@ -5381,7 +4873,6 @@ Error_:
         End With
         rs1.Close()
         rs1 = Nothing
-
 
         If sUCount > 0 Then
 
@@ -5816,12 +5307,10 @@ Error_:
 
     Private Sub lvMovementNET_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles lvMovementNET.MouseUp
 
-
         If lvMovementNET.Items.Count = 0 Then Exit Sub
 
         If e.Button = MouseButtons.Right Then
             cmDvig.Show(CType(sender, Control), e.Location)
-
 
         Else
 
@@ -5874,12 +5363,10 @@ Error_:
 
     Private Sub lvMovementOTH_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles lvMovementOTH.MouseUp
 
-
         If lvMovementOTH.Items.Count = 0 Then Exit Sub
 
         If e.Button = MouseButtons.Right Then
             cmDvig.Show(CType(sender, Control), e.Location)
-
 
         Else
 
@@ -5908,27 +5395,6 @@ Error_:
         If e.Button = MouseButtons.Right Then
             Me.lstGroups.SelectedNode = e.Node
         End If
-
-        'Dim x = e.Node.Bounds.X
-        'Dim y = e.Node.Bounds.Y
-        'Dim h = e.Node.Bounds.Y + e.Node.Bounds.Height
-
-        'If e.X > x - 18 And e.X < x - 3 Then
-
-        '    If e.Y > y And e.Y < h Then
-
-
-        '    End If
-
-        'ElseIf e.X > x - 35 And e.X < x - 18 Then
-
-        '    If e.Y > y And e.Y < h Then
-
-
-        '    End If
-
-        'End If
-
 
     End Sub
 
@@ -5993,9 +5459,7 @@ Error_:
                 sSQL = "SELECT id FROM kompy where filial ='" & sBranch & "' and mesto='" & sDepartment &
                        "' AND kabn ='" & sOffice & "' and tiptehn='PC'"
 
-
         End Select
-
 
         rs = New Recordset
 
@@ -6024,6 +5488,7 @@ Error_:
         End With
         rs.Close()
         rs = Nothing
+
     End Sub
 
     Private Sub txtUserName_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
@@ -6121,7 +5586,6 @@ Error_:
 
         Me.Cursor = Cursors.Default
 
-
         Exit Sub
 err_:
         MsgBox(Err.Description)
@@ -6130,7 +5594,6 @@ err_:
     Private Sub FINDtoUPDATEM(ByVal sstring As String)
         Dim everIniFile As New IniFile(sstring)
         Dim A1 As String
-
 
         A1 = everIniFile.GetString("Имя компьютера", "Имя NetBIOS|Имя компьютера", "NoName")
         If Len(A1) = 0 Then A1 = everIniFile.GetString("Суммарная информация", "Компьютер|Имя компьютера", "NoName")
@@ -6151,10 +5614,8 @@ err_:
         Me.sSTAB5.Visible = False
         Call ClearForm(Me)
 
-
         Dim d() As String
         d = Split(lstGroups.SelectedNode.Tag, "|")
-
 
         Select Case d(0)
 
@@ -6197,21 +5658,17 @@ err_:
                 sSQL = "SELECT id FROM kompy where filial ='" & sBranch & "' and tiptehn='PC' and net_name='" & KNAME &
                        "'"
 
-
             Case "O"
 
                 sSQL = "SELECT id FROM kompy where filial ='" & sBranch & "' and mesto='" & sDepartment &
                        "' and tiptehn='PC' and net_name='" & KNAME & "'"
-
 
             Case "K"
 
                 sSQL = "SELECT id FROM kompy where filial ='" & sBranch & "' and mesto='" & sDepartment &
                        "' AND kabn ='" & sOffice & "' and tiptehn='PC' and net_name='" & KNAME & "'"
 
-
         End Select
-
 
         rs = New Recordset
 
@@ -6726,7 +6183,6 @@ err_:
         Dim d() As String
         d = Split(lstGroups.SelectedNode.Tag, "|")
 
-
         Select Case d(0)
 
             Case "G"
@@ -6781,7 +6237,6 @@ err_:
 
         End Select
 
-
         rs = New Recordset
 
         rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -6811,11 +6266,6 @@ err_:
         Me.BeginInvoke(New MethodInvoker(AddressOf R_T_LOAD))
         Me.BeginInvoke(New MethodInvoker(AddressOf STAT_INF))
 
-        'Dim newThread5 As New Thread(AddressOf R_T_LOAD)
-        'newThread5.Start()
-
-        'Dim newThread1 As New Thread(AddressOf STAT_INF_1)
-        'newThread1.Start()
     End Sub
 
     Private Sub MnuSendEmail_Click(ByVal sender As Object, ByVal e As EventArgs) Handles MnuSendEmail.Click
@@ -6857,7 +6307,6 @@ err_:
 
         If Len(Me.sCOUNT) = 0 Then Exit Sub
 
-
         frmservice_add_otvets.cmbMaster.Text = ""
         frmservice_add_otvets.txtOtzyv.Text = ""
         frmservice_add_otvets.cmbMaster.Text = ""
@@ -6867,7 +6316,6 @@ err_:
         frmservice_add_otvets.cmbKrit.Text = ""
         frmservice_add_otvets.cmbMaster.Text = ""
         frmservice_add_otvets.cmbTip.Text = "Base"
-
 
         frmservice_add_otvets.ShowDialog(Me)
 
@@ -7009,19 +6457,7 @@ err_1:
 
         Me.Cursor = Cursors.WaitCursor
 
-        'Dim newThread2 As New Thread(AddressOf LoadSPR_1)
-        'newThread2.Start()
-
-        'Dim newThread1 As New Thread(AddressOf R_T_LOAD)
-        'newThread1.Start()
-
         Me.BeginInvoke(New MethodInvoker(AddressOf R_T_LOAD))
-
-        'newThread1.Priority = 4
-
-        'Call LoadSPR()
-        'Call RefFilTree(lstGroups)
-
 
         Me.Cursor = Cursors.Default
     End Sub
@@ -7070,21 +6506,16 @@ err_1:
         lstGroups.ExpandAll()
     End Sub
 
-
-
     Private Sub cmbOTHConnect_SelectedIndexChanged(sender As Object, e As EventArgs) _
         Handles cmbOTHConnect.SelectedIndexChanged
         On Error GoTo err_
 
-
         Dim rs As Recordset 'Объявляем рекордсет
         Dim sSQL As String 'Переменная, где будет размещён SQL запрос
-
 
         sSQL = "SELECT B  FROM spr_other WHERE name ='" & cmbOTHConnect.Text & "'"
         rs = New Recordset
         rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
 
         With rs
 
@@ -7096,10 +6527,8 @@ err_1:
         rs.Close()
         rs = Nothing
 
-
 err_:
     End Sub
-
 
     Private Sub PingToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) _
         Handles PingToolStripMenuItem.Click
@@ -7111,8 +6540,6 @@ err_:
         Select Case d(0)
 
             Case "C"
-
-                'Call SAVE_INF_CONF(d(1))
 
             Case Else
 
@@ -7135,18 +6562,19 @@ err_:
         rs.Close()
         rs = Nothing
 
+        Select Case sPING
 
-        If Len(sPING) <> 0 Then
+            Case 0
 
+            Case Else
 
-            If My.Computer.Network.Ping(sPING) Then
-                MsgBox("success", MsgBoxStyle.Exclamation, ProGramName)
-            Else
-                MsgBox("no reply", MsgBoxStyle.Exclamation, ProGramName)
-            End If
+                If My.Computer.Network.Ping(sPING) Then
+                    MsgBox("success", MsgBoxStyle.Exclamation, ProGramName)
+                Else
+                    MsgBox("no reply", MsgBoxStyle.Exclamation, ProGramName)
+                End If
 
-        End If
-
+        End Select
 
         Exit Sub
 Err_:
@@ -7156,7 +6584,6 @@ Err_:
     Private Sub ToolStrip10_ItemClicked(ByVal sender As Object, ByVal e As ToolStripItemClickedEventArgs) _
         Handles ToolStrip10.ItemClicked
     End Sub
-
 
     Private Sub lstUsers_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
         Handles lstUsers.SelectedIndexChanged
@@ -7270,16 +6697,31 @@ Err_:
 
     End Sub
 
-    Private Sub lvRepair_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles lvRepair.SelectedIndexChanged
+    'Private Sub mnuSostOn_Click(sender As System.Object, e As System.EventArgs) Handles mnuSostOn.Click
 
-    End Sub
+    '    Dim rs As Recordset 'Объявляем рекордсет
+    '    rs = New Recordset
+    '    rs.Open(
+    '        "update kompy set PRINTER_NAME_4='On' WHERE id=" & sCOUNT, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-    Private Sub txtSearch_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtSearch.TextChanged
+    '    rs = Nothing
 
-    End Sub
+    '    lstGroups.SelectedNode.ForeColor = Color.Black
 
-    Private Sub ToolStripButton1_Click(sender As System.Object, e As System.EventArgs)
+    'End Sub
 
-    End Sub
+    'Private Sub mnuSostOff_Click(sender As System.Object, e As System.EventArgs) Handles mnuSostOff.Click
+
+    '    Dim rs As Recordset 'Объявляем рекордсет
+    '    rs = New Recordset
+    '    rs.Open(
+    '        "update kompy set PRINTER_NAME_4='Off' WHERE id=" & sCOUNT, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
+    '    rs = Nothing
+
+    '    lstGroups.SelectedNode.ForeColor = Color.Red
+
+    'End Sub
+
 End Class
 
