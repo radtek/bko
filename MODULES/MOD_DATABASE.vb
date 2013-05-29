@@ -155,6 +155,7 @@ Module MOD_Database
 
         On Error GoTo err_
 
+
         If Len(unamDB) = 0 Or unamDB = Nothing Then Exit Sub
         'If unamDB = "MS Access" And Len(sFile) = 0 Then Exit Sub
         If DATAB = False Then Exit Sub

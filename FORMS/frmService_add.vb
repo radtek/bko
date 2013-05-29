@@ -302,6 +302,9 @@
             gbS.Visible = False
             Me.Height = 535
 
+            'UserNames
+            cmbIst.Text = UserNames
+
         End If
 
 

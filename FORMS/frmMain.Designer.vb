@@ -29,6 +29,7 @@ Partial Class frmMain
         Me.MenuStrip = New System.Windows.Forms.MenuStrip()
         Me.FileMenu = New System.Windows.Forms.ToolStripMenuItem()
         Me.NewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ReloginToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
         Me.ПроверитьОбновлениеToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MailToAuthors = New System.Windows.Forms.ToolStripMenuItem()
@@ -61,6 +62,7 @@ Partial Class frmMain
         Me.ИнвентаризацияToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.СтатистическиеОтчетыToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.РемонтыToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Services_ADD = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolsMenu = New System.Windows.Forms.ToolStripMenuItem()
         Me.OptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ОбслуживаниеБДToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -145,7 +147,6 @@ Partial Class frmMain
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.ArhToolZipbutton = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
-        Me.ReloginToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip.SuspendLayout()
         Me.StatusStrip.SuspendLayout()
         Me.ToolStrip.SuspendLayout()
@@ -176,6 +177,12 @@ Partial Class frmMain
         Me.NewToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.N), System.Windows.Forms.Keys)
         Me.NewToolStripMenuItem.Size = New System.Drawing.Size(246, 22)
         Me.NewToolStripMenuItem.Text = "&Настройки"
+        '
+        'ReloginToolStripMenuItem
+        '
+        Me.ReloginToolStripMenuItem.Name = "ReloginToolStripMenuItem"
+        Me.ReloginToolStripMenuItem.Size = New System.Drawing.Size(246, 22)
+        Me.ReloginToolStripMenuItem.Text = "Relogin"
         '
         'ToolStripSeparator5
         '
@@ -378,7 +385,7 @@ Partial Class frmMain
         '
         'СтатистическиеОтчетыToolStripMenuItem
         '
-        Me.СтатистическиеОтчетыToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.РемонтыToolStripMenuItem})
+        Me.СтатистическиеОтчетыToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.РемонтыToolStripMenuItem, Me.Services_ADD})
         Me.СтатистическиеОтчетыToolStripMenuItem.Name = "СтатистическиеОтчетыToolStripMenuItem"
         Me.СтатистическиеОтчетыToolStripMenuItem.Size = New System.Drawing.Size(232, 22)
         Me.СтатистическиеОтчетыToolStripMenuItem.Text = "Статистические отчеты"
@@ -388,8 +395,15 @@ Partial Class frmMain
         '
         Me.РемонтыToolStripMenuItem.Name = "РемонтыToolStripMenuItem"
         Me.РемонтыToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F11
-        Me.РемонтыToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.РемонтыToolStripMenuItem.Size = New System.Drawing.Size(201, 22)
         Me.РемонтыToolStripMenuItem.Text = "Ремонты"
+        '
+        'Services_ADD
+        '
+        Me.Services_ADD.Name = "Services_ADD"
+        Me.Services_ADD.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.Z), System.Windows.Forms.Keys)
+        Me.Services_ADD.Size = New System.Drawing.Size(201, 22)
+        Me.Services_ADD.Text = "Добавить заявку"
         '
         'ToolsMenu
         '
@@ -963,12 +977,6 @@ Partial Class frmMain
         Me.ToolStripButton1.Size = New System.Drawing.Size(52, 22)
         Me.ToolStripButton1.Text = "Отчеты"
         '
-        'ReloginToolStripMenuItem
-        '
-        Me.ReloginToolStripMenuItem.Name = "ReloginToolStripMenuItem"
-        Me.ReloginToolStripMenuItem.Size = New System.Drawing.Size(246, 22)
-        Me.ReloginToolStripMenuItem.Text = "Relogin"
-        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1116,5 +1124,6 @@ Partial Class frmMain
     Friend WithEvents ToolStripStatusLabel5 As System.Windows.Forms.ToolStripStatusLabel
     Friend WithEvents DB_USE As System.Windows.Forms.ToolStripDropDownButton
     Friend WithEvents ReloginToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents Services_ADD As System.Windows.Forms.ToolStripMenuItem
 
 End Class

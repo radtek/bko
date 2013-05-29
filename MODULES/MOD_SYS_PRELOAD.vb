@@ -178,22 +178,31 @@ Module MOD_SYS_PRELOAD
 
         For Each dirFile As String In dirFiles
             For Each extension As String In allowedExtensions
-                If extension = Path.GetExtension(dirFile) Then
-                    ills.Images.Add(Image.FromFile(dirFile))
-                End If
+
+                Select Case extension
+
+                    Case Path.GetExtension(dirFile)
+
+                        ills.Images.Add(Image.FromFile(dirFile))
+
+                End Select
+
             Next
         Next
     End Sub
 
     Public Sub frmservills_load()
 
-        If frmserviceDesc.ilsCMD.Images.Count = 0 Then
+        Select Case frmserviceDesc.ilsCMD.Images.Count
 
-            frmserviceDesc.ilsCMD.Images.Add(Image.FromFile(PrPath & "pic\iface\ok.png"))
-            frmserviceDesc.ilsCMD.Images.Add(Image.FromFile(PrPath & "pic\iface\servnz.png"))
-            frmserviceDesc.ilsCMD.Images.Add(Image.FromFile(PrPath & "pic\iface\pcupdate.png"))
+            Case 0
 
-        End If
+                frmserviceDesc.ilsCMD.Images.Add(Image.FromFile(PrPath & "pic\iface\ok.png"))
+                frmserviceDesc.ilsCMD.Images.Add(Image.FromFile(PrPath & "pic\iface\servnz.png"))
+                frmserviceDesc.ilsCMD.Images.Add(Image.FromFile(PrPath & "pic\iface\pcupdate.png"))
+
+        End Select
+
     End Sub
 
     Public Sub PreLoad()
@@ -207,11 +216,21 @@ Module MOD_SYS_PRELOAD
 
         BasePath = BasePath & "\"
 
-        If BasePath = Nothing Or Len(BasePath) < 3 Then
+        'If BasePath = Nothing Or Len(BasePath) < 3 Then
 
-            BasePath = Directory.GetParent(Application.ExecutablePath).ToString & "\database\"
-            objIniFile.WriteString("general", "BasePath", BasePath)
-        End If
+        '    BasePath = Directory.GetParent(Application.ExecutablePath).ToString & "\database\"
+        '    objIniFile.WriteString("general", "BasePath", BasePath)
+        'End If
+
+        Select Case BasePath
+
+            Case Nothing
+
+                BasePath = Directory.GetParent(Application.ExecutablePath).ToString & "\database\"
+                objIniFile.WriteString("general", "BasePath", BasePath)
+
+        End Select
+
 
         Base_Name = objIniFile.GetString("general", "file", "basekomp.mdb")
 
@@ -442,8 +461,8 @@ Module MOD_SYS_PRELOAD
 
         If Not (oRS.EOF) Then
             Do Until oRS.EOF
-                If UCase(oRS.Fields.Item("TABLE_TYPE").Value) = "TABLE" Then
 
+                If UCase(oRS.Fields.Item("TABLE_TYPE").Value) = "TABLE" Then
 
                     If Left(oRS.Fields.Item("TABLE_NAME").Value, 3) = "SPR" Then
 

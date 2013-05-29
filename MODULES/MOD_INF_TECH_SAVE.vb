@@ -880,6 +880,9 @@ sAR:
 
             .Fields("OTvetstvennyj").Value = frmComputers.cmbResponsible.Text
             .Fields("TELEPHONE").Value = frmComputers.txtPHONE.Text
+
+            If Len(frmComputers.cmbAppointment.Text) = 0 Then frmComputers.cmbAppointment.Text = "Рабочая станция"
+
             .Fields("TIP_COMPA").Value = frmComputers.cmbAppointment.Text
 
             .Fields("INV_NO_SYSTEM").Value = frmComputers.txtSBSN.Text
@@ -1648,7 +1651,7 @@ sAR:
 
 
             rs = New Recordset
-            rs.Open("SELECT * FROM kompy where id =" & frmComputers.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+            rs.Open("SELECT filial,mesto,kabn FROM kompy where id =" & frmComputers.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
                     LockTypeEnum.adLockOptimistic)
 
             With rs
@@ -1728,7 +1731,7 @@ sAR:
 
                 If sCN > 0 Then
                     rs = New Recordset
-                    rs.Open("SELECT * FROM kompy where PCL=" & frmComputers.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                    rs.Open("SELECT id FROM kompy where PCL=" & frmComputers.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
                             LockTypeEnum.adLockOptimistic)
 
                     Dim rs1 As Recordset
@@ -2107,7 +2110,7 @@ Error_:
 
         Dim sSQL As String
 
-        sSQL = "SELECT * FROM kompy where id=" & sID
+        sSQL = "SELECT FILIAL,mesto,kabn,PCL FROM kompy where id=" & sID
 
         Dim rs As Recordset
         rs = New Recordset
@@ -2203,7 +2206,7 @@ Error_:
                 rs.Close()
                 rs = Nothing
 
-                sSQL = "SELECT * FROM kompy where PCL=" & sSID & " and tiptehn = 'MONITOR'"
+                sSQL = "SELECT id,MONITOR_NAME,MONITOR_DUM,MONITOR_SN,MONITOR_PROIZV,INV_NO_MONITOR FROM kompy where PCL=" & sSID & " and tiptehn = 'MONITOR'"
 
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -2217,38 +2220,12 @@ Error_:
                         tId = .Fields("id").Value
 
                         rs1 = New Recordset
-                        rs1.Open("Select * from kompy where id=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
+                        rs1.Open("Select MONITOR_NAME,MONITOR_DUM,MONITOR_SN,MONITOR_PROIZV,INV_NO_MONITOR from kompy where id=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
                                  LockTypeEnum.adLockOptimistic)
 
-                        If sCount = 1 Then
+                        Select Case sCount
 
-                            With rs1
-                                rs1.Fields("MONITOR_NAME").Value = rs.Fields("MONITOR_NAME").Value
-                                rs1.Fields("MONITOR_DUM").Value = rs.Fields("MONITOR_DUM").Value
-                                rs1.Fields("MONITOR_SN").Value = rs.Fields("MONITOR_SN").Value
-                                rs1.Fields("MONITOR_PROIZV").Value = rs.Fields("MONITOR_PROIZV").Value
-                                rs1.Fields("INV_NO_MONITOR").Value = rs.Fields("INV_NO_MONITOR").Value
-                                .Update()
-                            End With
-                            rs1.Close()
-                            rs1 = Nothing
-
-                        Else
-
-                            If i = 2 Then
-
-                                With rs1
-                                    rs1.Fields("MONITOR_NAME2").Value = rs.Fields("MONITOR_NAME").Value
-                                    rs1.Fields("MONITOR_DUM2").Value = rs.Fields("MONITOR_DUM").Value
-                                    rs1.Fields("MONITOR_SN2").Value = rs.Fields("MONITOR_SN").Value
-                                    rs1.Fields("MONITOR_PROIZV2").Value = rs.Fields("MONITOR_PROIZV").Value
-                                    rs1.Fields("INV_NO_MONITOR").Value = rs.Fields("INV_NO_MONITOR").Value
-                                    .Update()
-                                End With
-                                rs1.Close()
-                                rs1 = Nothing
-
-                            Else
+                            Case 1
 
                                 With rs1
                                     rs1.Fields("MONITOR_NAME").Value = rs.Fields("MONITOR_NAME").Value
@@ -2261,10 +2238,41 @@ Error_:
                                 rs1.Close()
                                 rs1 = Nothing
 
-                            End If
 
-                        End If
+                            Case Else
 
+                                Select Case i
+
+                                    Case 2
+
+                                        With rs1
+                                            rs1.Fields("MONITOR_NAME2").Value = rs.Fields("MONITOR_NAME").Value
+                                            rs1.Fields("MONITOR_DUM2").Value = rs.Fields("MONITOR_DUM").Value
+                                            rs1.Fields("MONITOR_SN2").Value = rs.Fields("MONITOR_SN").Value
+                                            rs1.Fields("MONITOR_PROIZV2").Value = rs.Fields("MONITOR_PROIZV").Value
+                                            rs1.Fields("INV_NO_MONITOR").Value = rs.Fields("INV_NO_MONITOR").Value
+                                            .Update()
+                                        End With
+                                        rs1.Close()
+                                        rs1 = Nothing
+
+                                    Case Else
+
+                                        With rs1
+                                            rs1.Fields("MONITOR_NAME").Value = rs.Fields("MONITOR_NAME").Value
+                                            rs1.Fields("MONITOR_DUM").Value = rs.Fields("MONITOR_DUM").Value
+                                            rs1.Fields("MONITOR_SN").Value = rs.Fields("MONITOR_SN").Value
+                                            rs1.Fields("MONITOR_PROIZV").Value = rs.Fields("MONITOR_PROIZV").Value
+                                            rs1.Fields("INV_NO_MONITOR").Value = rs.Fields("INV_NO_MONITOR").Value
+                                            .Update()
+                                        End With
+                                        rs1.Close()
+                                        rs1 = Nothing
+
+                                End Select
+
+
+                        End Select
 
                         i = i + 1
 
@@ -2317,7 +2325,7 @@ Error_:
                 rs.Close()
                 rs = Nothing
 
-                sSQL = "SELECT * FROM kompy where PCL=" & sSID & " and tiptehn = 'Printer'"
+                sSQL = "SELECT id,PRINTER_NAME_1,PRINTER_SN_1,PRINTER_PROIZV_1,port_1,INV_NO_PRINTER FROM kompy where PCL=" & sSID & " and tiptehn = 'Printer'"
 
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -2352,13 +2360,11 @@ Error_:
 
                             pField = "port_" & i
 
-                            rs1.Fields(pField).Value = rs.Fields("port_2").Value
+                            rs1.Fields(pField).Value = rs.Fields("port_1").Value
                             .Update()
                         End With
 
-
                         i = i + 1
-
 
                         rs1.Close()
                         rs1 = Nothing
@@ -2388,7 +2394,6 @@ Error_:
                                  LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
-
                         .MoveNext()
                     Loop
                 End With
@@ -2396,7 +2401,7 @@ Error_:
                 rs = Nothing
 
                 'ИБП
-                sSQL = "SELECT * FROM kompy where PCL=" & sSID & " and tiptehn = 'IBP'"
+                sSQL = "SELECT id,PRINTER_NAME_1,PRINTER_SN_1,PRINTER_PROIZV_1,port_1,INV_NO_PRINTER FROM kompy where PCL=" & sSID & " and tiptehn = 'IBP'"
 
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -2408,7 +2413,7 @@ Error_:
                         tId = .Fields("id").Value
 
                         rs1 = New Recordset
-                        rs1.Open("Select * from kompy where id=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
+                        rs1.Open("Select IBP_NAME,IBP_SN,IBP_PROIZV,INV_NO_IBP from kompy where id=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
                                  LockTypeEnum.adLockOptimistic)
 
                         With rs1
@@ -2451,7 +2456,7 @@ Error_:
                 rs = Nothing
 
                 'Клавиатуры мыши
-                sSQL = "SELECT * FROM kompy where PCL=" & sSID & " and tiptehn = 'KEYB'"
+                sSQL = "SELECT id,PRINTER_NAME_1,PRINTER_SN_1,PRINTER_PROIZV_1,port_1 FROM kompy where PCL=" & sSID & " and tiptehn = 'KEYB'"
 
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -2463,7 +2468,7 @@ Error_:
                         tId = .Fields("id").Value
 
                         rs1 = New Recordset
-                        rs1.Open("Select * from kompy where id=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
+                        rs1.Open("Select KEYBOARD_NAME,KEYBOARD_SN,KEYBOARD_PROIZV from kompy where id=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
                                  LockTypeEnum.adLockOptimistic)
 
                         With rs1
@@ -2504,7 +2509,7 @@ Error_:
                 rs = Nothing
 
 
-                sSQL = "SELECT * FROM kompy where PCL=" & sSID & " and tiptehn = 'MOUSE'"
+                sSQL = "SELECT id,PRINTER_NAME_1,PRINTER_SN_1,PRINTER_PROIZV_1 FROM kompy where PCL=" & sSID & " and tiptehn = 'MOUSE'"
 
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -2516,7 +2521,7 @@ Error_:
                         tId = .Fields("id").Value
 
                         rs1 = New Recordset
-                        rs1.Open("Select * from kompy where id=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
+                        rs1.Open("Select MOUSE_NAME,MOUSE_SN,MOUSE_PROIZV from kompy where id=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
                                  LockTypeEnum.adLockOptimistic)
 
                         With rs1
@@ -2557,7 +2562,7 @@ Error_:
 
                 'Сетевые фильтры
 
-                sSQL = "SELECT * FROM kompy where PCL=" & sSID & " and tiptehn = 'FS'"
+                sSQL = "SELECT id,PRINTER_NAME_1,PRINTER_SN_1,PRINTER_PROIZV_1 FROM kompy where PCL=" & sSID & " and tiptehn = 'FS'"
 
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -2569,7 +2574,7 @@ Error_:
                         tId = .Fields("id").Value
 
                         rs1 = New Recordset
-                        rs1.Open("Select * from kompy where id=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
+                        rs1.Open("Select FILTR_NAME,FILTR_SN,FILTR_PROIZV from kompy where id=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
                                  LockTypeEnum.adLockOptimistic)
 
                         With rs1
@@ -2624,7 +2629,7 @@ Error_:
                 rs.Close()
                 rs = Nothing
 
-                sSQL = "SELECT * FROM kompy where PCL=" & sSID & " and tiptehn = 'MONITOR'"
+                sSQL = "SELECT id,MONITOR_NAME,MONITOR_DUM,MONITOR_SN,MONITOR_PROIZV,INV_NO_MONITOR FROM kompy where PCL=" & sSID & " and tiptehn = 'MONITOR'"
 
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -2640,7 +2645,7 @@ Error_:
                         tId = .Fields("id").Value
 
                         rs1 = New Recordset
-                        rs1.Open("Select * from kompy where id=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
+                        rs1.Open("Select id,MONITOR_NAME,MONITOR_DUM,MONITOR_SN,MONITOR_PROIZV,INV_NO_MONITOR,MONITOR_NAME2,MONITOR_DUM2,MONITOR_SN2,MONITOR_PROIZV2 from kompy where id=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
                                  LockTypeEnum.adLockOptimistic)
 
 
@@ -2814,7 +2819,7 @@ Error_:
             Case 3 'ИБП
 
 
-                sSQL = "SELECT * FROM kompy where PCL=" & sSID & " and tiptehn = 'IBP'"
+                sSQL = "SELECT id,PRINTER_NAME_1,PRINTER_SN_1,PRINTER_PROIZV_1,INV_NO_PRINTER FROM kompy where PCL=" & sSID & " and tiptehn = 'IBP'"
 
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -2826,7 +2831,7 @@ Error_:
                         tId = .Fields("id").Value
 
                         rs1 = New Recordset
-                        rs1.Open("Select * from kompy where id=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
+                        rs1.Open("Select IBP_NAME,IBP_SN,IBP_PROIZV,INV_NO_IBP from kompy where id=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
                                  LockTypeEnum.adLockOptimistic)
 
                         With rs1
@@ -2869,7 +2874,7 @@ Error_:
                 rs = Nothing
             Case 4 'Клавиатуры мыши
 
-                sSQL = "SELECT * FROM kompy where PCL=" & sSID & " and tiptehn = 'KEYB'"
+                sSQL = "SELECT id,PRINTER_NAME_1,PRINTER_SN_1,PRINTER_PROIZV_1,INV_NO_PRINTER FROM kompy where PCL=" & sSID & " and tiptehn = 'KEYB'"
 
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -2881,7 +2886,7 @@ Error_:
                         tId = .Fields("id").Value
 
                         rs1 = New Recordset
-                        rs1.Open("Select * from kompy where id=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
+                        rs1.Open("Select KEYBOARD_NAME,KEYBOARD_SN,KEYBOARD_PROIZV from kompy where id=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
                                  LockTypeEnum.adLockOptimistic)
 
                         With rs1
@@ -2922,7 +2927,7 @@ Error_:
                 rs = Nothing
 
 
-                sSQL = "SELECT * FROM kompy where PCL=" & sSID & " and tiptehn = 'MOUSE'"
+                sSQL = "SELECT id,PRINTER_NAME_1,PRINTER_SN_1,PRINTER_PROIZV_1,INV_NO_PRINTER FROM kompy where PCL=" & sSID & " and tiptehn = 'MOUSE'"
 
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -2934,7 +2939,7 @@ Error_:
                         tId = .Fields("id").Value
 
                         rs1 = New Recordset
-                        rs1.Open("Select * from kompy where id=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
+                        rs1.Open("Select MOUSE_NAME,MOUSE_SN,MOUSE_PROIZV from kompy where id=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
                                  LockTypeEnum.adLockOptimistic)
 
                         With rs1
@@ -2976,7 +2981,7 @@ Error_:
 
             Case 5 'Сетевые фильтры
 
-                sSQL = "SELECT * FROM kompy where PCL=" & sSID & " and tiptehn = 'FS'"
+                sSQL = "SELECT id,PRINTER_NAME_1,PRINTER_SN_1,PRINTER_PROIZV_1,INV_NO_PRINTER FROM kompy where PCL=" & sSID & " and tiptehn = 'FS'"
 
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -2988,7 +2993,7 @@ Error_:
                         tId = .Fields("id").Value
 
                         rs1 = New Recordset
-                        rs1.Open("Select * from kompy where id=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
+                        rs1.Open("Select FILTR_NAME,FILTR_SN,FILTR_PROIZV from kompy where id=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
                                  LockTypeEnum.adLockOptimistic)
 
                         With rs1
@@ -3130,7 +3135,7 @@ Error_:
                         rs = Nothing
 
 
-                        sSQL = "SELECT * FROM kompy where id=" & sSID
+                        sSQL = "SELECT PRINTER_NAME_1,PRINTER_SN_1,PRINTER_PROIZV_1,port_1,INV_NO_PRINTER FROM kompy where id=" & sSID
 
                         rs = New Recordset
                         rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -3247,7 +3252,7 @@ Error_:
                         rs = Nothing
 
 
-                        sSQL = "SELECT * FROM kompy where id=" & sSID
+                        sSQL = "SELECT PRINTER_NAME_2,PRINTER_SN_2,PRINTER_PROIZV_2,Iport_2,NV_NO_PRINTER FROM kompy where id=" & sSID
 
                         rs = New Recordset
                         rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -3364,7 +3369,7 @@ Error_:
                         rs = Nothing
 
 
-                        sSQL = "SELECT * FROM kompy where id=" & sSID
+                        sSQL = "SELECT PRINTER_NAME_3,PRINTER_SN_3,PRINTER_PROIZV_3,Iport_3,NV_NO_PRINTER FROM kompy where id=" & sSID
 
                         rs = New Recordset
                         rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -3478,7 +3483,7 @@ Error_:
                         rs = Nothing
 
 
-                        sSQL = "SELECT * FROM kompy where id=" & sSID
+                        sSQL = "SELECT MONITOR_NAME,MONITOR_DUM,MONITOR_SN,MONITOR_PROIZV,INV_NO_MONITOR FROM kompy where id=" & sSID
 
                         rs = New Recordset
                         rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -3598,7 +3603,7 @@ Error_:
                         rs = Nothing
 
 
-                        sSQL = "SELECT * FROM kompy where id=" & sSID
+                        sSQL = "SELECT IBP_NAME,IBP_SN,IBP_PROIZV,INV_NO_IBP FROM kompy where id=" & sSID
 
                         rs = New Recordset
                         rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -3716,7 +3721,7 @@ Error_:
                         rs = Nothing
 
 
-                        sSQL = "SELECT * FROM kompy where id=" & sSID
+                        sSQL = "SELECT KEYBOARD_NAME,KEYBOARD_SN,KEYBOARD_PROIZV FROM kompy where id=" & sSID
 
                         rs = New Recordset
                         rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -3819,7 +3824,7 @@ Error_:
                         rs = Nothing
 
 
-                        sSQL = "SELECT * FROM kompy where id=" & sSID
+                        sSQL = "SELECT MOUSE_NAME,MOUSE_SN,MOUSE_PROIZV FROM kompy where id=" & sSID
 
                         rs = New Recordset
                         rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -3923,7 +3928,7 @@ Error_:
                             .Fields("PSEVDONIM").Value = sTEMP0
                             .Fields("TIP_COMPA").Value = "Сетевой фильтр"
                             .Fields("PCL").Value = sSID
-                            .Fields("TIPtehn").Value = "OT"
+                            .Fields("TIPtehn").Value = "FS"
 
                             .Fields("FILIAL").Value = sBranch
                             .Fields("mesto").Value = sDepartment
@@ -3949,7 +3954,7 @@ Error_:
                         rs = Nothing
 
 
-                        sSQL = "SELECT * FROM kompy where id=" & sSID
+                        sSQL = "SELECT FILTR_NAME,FILTR_SN,FILTR_PROIZV FROM kompy where id=" & sSID
 
                         rs = New Recordset
                         rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)

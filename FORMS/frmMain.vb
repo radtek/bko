@@ -109,7 +109,23 @@ Public Class frmMain
         ОбслуживаниеБДToolStripMenuItem.Image = New System.Drawing.Bitmap(PrPath & "pic\iface\database.png")
     End Sub
 
-    Private Sub frmMain_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+    Public Sub LOAD_COMPONENT()
+
+        LBL_STAT_1.Text = ""
+        LBL_STAT_3.Text = ""
+        lblShed.Text = ""
+        lblRem.Text = ""
+        LBL_SUBD.Text = ""
+        DB_USE.Text = ""
+        LBL_USER.Text = ""
+
+        LBL_STAT_1.ForeColor = OptionsToolStripMenuItem.ForeColor
+        LBL_STAT_3.ForeColor = OptionsToolStripMenuItem.ForeColor
+        lblShed.ForeColor = OptionsToolStripMenuItem.ForeColor
+        lblRem.ForeColor = OptionsToolStripMenuItem.ForeColor
+        LBL_SUBD.ForeColor = OptionsToolStripMenuItem.ForeColor
+        DB_USE.ForeColor = OptionsToolStripMenuItem.ForeColor
+        LBL_USER.ForeColor = OptionsToolStripMenuItem.ForeColor
 
         Select Case DB_N
 
@@ -160,23 +176,107 @@ Public Class frmMain
 
         ''Меняем шрифт
         Call SendFonts(Me)
+        Me.BeginInvoke(New MethodInvoker(AddressOf load_ICONS))
+        Call Tree_Icons_Feel(frmComputers.ilsCommands, "sCMP", "pic\tree\")
 
-        Call load_ICONS()
+        'Наименование программы 
+        Dim rsG As ADODB.Recordset
+        rsG = New ADODB.Recordset
 
-        'Dim newThread3 As New Thread(AddressOf LANG_frmMain_1)
-        'newThread3.Start()
+        rsG.Open("SELECT Name_Prog FROM CONFIGURE", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+        With rsG
+            If Not IsDBNull(.Fields("Name_Prog").Value) Then ProGramName = .Fields("Name_Prog").Value
+        End With
+        rsG.Close()
+        rsG = Nothing
+
+        If Len(ProGramName) = 0 Or ProGramName = Nothing Then ProGramName = "BKO.NET"
+
+        Me.Text = ProGramName & " " & My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor & "." & My.Application.Info.Version.Build & "." & My.Application.Info.Version.Revision
+
+        'Напоминания есть или нет
+        'Dim newThread4 As New Thread(AddressOf SHED_CHECK_1)
+        'newThread4.Start()
+
+        Me.BeginInvoke(New MethodInvoker(AddressOf SHED_CHECK_1))
+
+        'Ремонты есть или нет
+        'Dim newThread5 As New Thread(AddressOf REM_CHECK_1)
+        'newThread5.Start()
+
+        Me.BeginInvoke(New MethodInvoker(AddressOf REM_CHECK_1))
+
+        '###########################################################
+
+        'Добавляем в меню добавления техники другое оборудование
+
+        Dim sCountOTH As Integer
+        rsG = New ADODB.Recordset
+        rsG.Open("SELECT count(*) as T_N FROM spr_other", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+        With rsG
+            sCountOTH = .Fields("T_N").Value
+        End With
+        rsG.Close()
+        rsG = Nothing
+
+        Select Case sCountOTH
+
+            Case 0
+
+            Case Else
+
+                Dim rs As ADODB.Recordset 'Объявляем рекордсет
+                Dim sSQL As String 'Переменная, где будет размещён SQL запрос
+                sSQL = "SELECT name FROM spr_other"
+
+                Dim sNameZ(sCountOTH) As String
+
+                rs = New ADODB.Recordset
+                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                Dim iz As Integer = 0
+
+                With rs
+                    .MoveFirst()
+                    Do While Not .EOF
+                        sNameZ(iz) = .Fields("name").Value
+                        iz = iz + 1
+                        .MoveNext()
+                    Loop
+                End With
+                rs.Close()
+                rs = Nothing
+
+                For i As Integer = 0 To sCountOTH
+                    Dim B As New ToolStripButton
+
+                    B.ForeColor = Color.Blue
+                    B.Text = sNameZ(i)
+                    Btn(i) = B
+
+                    AddHandler Btn(i).Click, AddressOf colorButtonsClick
+                    ДругоеОборудованиеToolStripMenuItem.DropDown.Items.AddRange(New ToolStripItem() {Btn(i)})
+                Next
+
+        End Select
+
+        LBL_SUBD.Text = unamDB & " - " & Base_Name
+        LBL_USER.Text = UserNames & "/" & uLevel
+
+    End Sub
+
+
+    Private Sub frmMain_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+
+        Me.BeginInvoke(New MethodInvoker(AddressOf LOAD_COMPONENT))
 
         Me.BeginInvoke(New MethodInvoker(AddressOf LANG_frmMain_1))
-
-        Call Tree_Icons_Feel(frmComputers.ilsCommands, "sCMP", "pic\tree\")
-        ' Call Tree_Icons_Feel(frmComputers.ImageList11, "sCMP", "pic\tree\")
-
 
         Dim sText As String
 
         'Определяем путь до файла настроек
         Dim objIniFile As New IniFile(PrPath & "base.ini")
-
 
         'На полный экран или нет
         sText = objIniFile.GetString("General", "FullScreen", "0")
@@ -192,7 +292,6 @@ Public Class frmMain
                 Me.WindowState = 0
 
         End Select
-
 
         'Показывать меню системные или нет
         sText = objIniFile.GetString("general", "SYS", 0)
@@ -263,89 +362,6 @@ Public Class frmMain
         End Select
         Me.ToolStrip.Visible = Me.ToolBarToolStripMenuItem.Checked
 
-        'Наименование программы 
-        Dim rsG As ADODB.Recordset
-        rsG = New ADODB.Recordset
-
-        rsG.Open("SELECT * FROM CONFIGURE", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-
-        With rsG
-            If Not IsDBNull(.Fields("Name_Prog").Value) Then ProGramName = .Fields("Name_Prog").Value
-        End With
-        rsG.Close()
-        rsG = Nothing
-
-        If Len(ProGramName) = 0 Or ProGramName = Nothing Then ProGramName = "BKO.NET"
-
-        Me.Text = ProGramName & " " & My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor & "." & My.Application.Info.Version.Build & "." & My.Application.Info.Version.Revision
-
-        'Напоминания есть или нет
-        'Dim newThread4 As New Thread(AddressOf SHED_CHECK_1)
-        'newThread4.Start()
-
-        Me.BeginInvoke(New MethodInvoker(AddressOf SHED_CHECK_1))
-
-        'Ремонты есть или нет
-        'Dim newThread5 As New Thread(AddressOf REM_CHECK_1)
-        'newThread5.Start()
-
-        Me.BeginInvoke(New MethodInvoker(AddressOf REM_CHECK_1))
-
-        '###########################################################
-
-        'Добавляем в меню добавления техники другое оборудование
-
-        Dim sCountOTH As Integer
-        rsG = New ADODB.Recordset
-        rsG.Open("SELECT count(*) as T_N FROM spr_other", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-
-        With rsG
-            sCountOTH = .Fields("T_N").Value
-        End With
-        rsG.Close()
-        rsG = Nothing
-
-        Select Case sCountOTH
-
-            Case 0
-
-            Case Else
-
-                Dim rs As ADODB.Recordset 'Объявляем рекордсет
-                Dim sSQL As String 'Переменная, где будет размещён SQL запрос
-                sSQL = "SELECT * FROM spr_other"
-
-                Dim sNameZ(sCountOTH) As String
-
-                rs = New ADODB.Recordset
-                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-                Dim iz As Integer = 0
-
-                With rs
-                    .MoveFirst()
-                    Do While Not .EOF
-                        sNameZ(iz) = .Fields("name").Value
-                        iz = iz + 1
-                        .MoveNext()
-                    Loop
-                End With
-                rs.Close()
-                rs = Nothing
-
-
-                For i As Integer = 0 To sCountOTH
-                    Dim B As New ToolStripButton
-
-                    B.ForeColor = Color.Blue
-                    B.Text = sNameZ(i)
-                    Btn(i) = B
-
-                    AddHandler Btn(i).Click, AddressOf colorButtonsClick
-                    ДругоеОборудованиеToolStripMenuItem.DropDown.Items.AddRange(New ToolStripItem() {Btn(i)})
-                Next
-
-        End Select
-
         'Какой модуль запускать
         sText = objIniFile.GetString("general", "MOD", 0)
 
@@ -401,12 +417,8 @@ Public Class frmMain
 
         End Select
 
-        LBL_SUBD.Text = unamDB & " - " & Base_Name
-        LBL_USER.Text = UserNames & "/" & uLevel
-
         '###################################################################3
 
-        '  Exit Sub
 
         Exit Sub
 err_:
@@ -415,6 +427,8 @@ err_:
         '###################################################################3
 
     End Sub
+
+
 
     Public Sub DbButtonsClick(ByVal sender As [Object], ByVal e As EventArgs)
 
@@ -545,6 +559,8 @@ error_Renamed:
     End Sub
 
     Private Sub FrmComputersMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles FrmComputersMenuItem.Click
+        If sRelogin = True Then Exit Sub
+
         If DATAB = False Then Exit Sub
 
         frmComputers.MdiParent = Me
@@ -558,7 +574,7 @@ error_Renamed:
     End Sub
 
     Private Sub СправочникиОборудованияToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles СправочникиОборудованияToolStripMenuItem.Click
-
+        If sRelogin = True Then Exit Sub
         If DATAB = False Then Exit Sub
 
         frmDirectory.MdiParent = Me
@@ -624,6 +640,8 @@ error_Renamed:
     End Sub
 
     Private Sub УчётЗаявокремонтовToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles УчётЗаявокремонтовToolStripMenuItem.Click
+        If sRelogin = True Then Exit Sub
+
         If DATAB = False Then Exit Sub
 
         frmserviceDesc.MdiParent = Me
@@ -636,6 +654,8 @@ error_Renamed:
     End Sub
 
     Private Sub УчётПрограммногоОбеспеченияToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles УчётПрограммногоОбеспеченияToolStripMenuItem.Click
+        If sRelogin = True Then Exit Sub
+
         If DATAB = False Then Exit Sub
         frmSoftware.MdiParent = Me
         frmSoftware.Show()
@@ -826,6 +846,8 @@ err_:
     End Sub
 
     Private Sub УчётКартриджейToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles УчётКартриджейToolStripMenuItem.Click
+        If sRelogin = True Then Exit Sub
+
         If DATAB = False Then Exit Sub
 
         Dim Counter As Decimal
@@ -878,6 +900,9 @@ err_:
     End Sub
 
     Private Sub СкладToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles СкладToolStripMenuItem.Click
+
+        If sRelogin = True Then Exit Sub
+
         If DATAB = False Then Exit Sub
 
         frmSclad.MdiParent = Me
@@ -887,6 +912,7 @@ err_:
 
     Private Sub ЖурналыПрограммыToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ЖурналыПрограммыToolStripMenuItem.Click
 
+        If sRelogin = True Then Exit Sub
         If DATAB = False Then Exit Sub
 
         frmLOG.MdiParent = Me
@@ -966,7 +992,7 @@ err_:
     End Sub
 
     Private Sub АктытребованияToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles АктытребованияToolStripMenuItem.Click
-
+        If sRelogin = True Then Exit Sub
         If DATAB = False Then Exit Sub
 
         Select Case frmComputers.sPREF
@@ -986,6 +1012,8 @@ err_:
     End Sub
 
     Private Sub OptionsToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OptionsToolStripMenuItem.Click
+
+        If sRelogin = True Then Exit Sub
         If DATAB = False Then Exit Sub
 
         frmSheduler.MdiParent = Me
@@ -994,12 +1022,18 @@ err_:
     End Sub
 
     Private Sub lblShed_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lblShed.DoubleClick
+
+        If sRelogin = True Then Exit Sub
+
         frmSheduler.MdiParent = Me
         frmSheduler.Show()
         frmSheduler.Focus()
     End Sub
 
     Private Sub lblRem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lblRem.Click
+
+        If sRelogin = True Then Exit Sub
+
         frmserviceDesc.MdiParent = Me
         frmserviceDesc.Show()
         frmserviceDesc.Focus()
@@ -1015,6 +1049,7 @@ err_:
     End Sub
 
     Private Sub ОрганизацияToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ОрганизацияToolStripMenuItem.Click
+        If sRelogin = True Then Exit Sub
         If DATAB = False Then Exit Sub
 
         frmSetup.SStab1.SelectedTab = frmSetup.SStab1.TabPages("TabPage3")
@@ -2294,7 +2329,7 @@ ADD:
     End Sub
 
     Private Sub РемонтыToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles РемонтыToolStripMenuItem.Click
-
+        If sRelogin = True Then Exit Sub
         If DATAB = False Then Exit Sub
 
         frmReports.MdiParent = Me
@@ -2384,6 +2419,8 @@ err_:
     End Sub
 
     Private Sub КабельныеЖурналыToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles netMagmnu.Click
+
+        If sRelogin = True Then Exit Sub
         If DATAB = False Then Exit Sub
 
         frmNetMagazin.MdiParent = Me
@@ -2416,62 +2453,74 @@ err_:
             rs.Close()
             rs = Nothing
 
+            Select Case SERT
 
-            If SERT > 0 Then
+                Case 0
 
+                Case Else
+                    rs = New ADODB.Recordset
+                    rs.Open("SELECT name FROM SPR_Master WHERE A='" & UserNames & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
-                rs = New ADODB.Recordset
-                rs.Open("SELECT * FROM SPR_Master WHERE A='" & UserNames & "'", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+                    With rs
+                        uname = .Fields("name").Value
+                    End With
 
-                With rs
-                    uname = .Fields("name").Value
-                End With
+                    rs.Close()
+                    rs = Nothing
 
-                rs.Close()
-                rs = Nothing
+                    If uname = Nothing Then uname = "ADMINISTRATOR"
 
-                If uname = Nothing Then uname = "ADMINISTRATOR"
-
-                sSQL = "SELECT COUNT(*) AS total_number FROM Remont WHERE otvetstv='" & uname & "'"
-
-                rs = New ADODB.Recordset
-                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-
-                With rs
-                    SERT2 = .Fields("total_number").Value
-                End With
-                rs.Close()
-                rs = Nothing
-
-                If SERT2 > 0 Then
-
-                    sSQL = "SELECT COUNT(*) AS total_number FROM Remont Where otvetstv='" & uname & "' and zakryt = 0"
+                    sSQL = "SELECT COUNT(*) AS total_number FROM Remont WHERE otvetstv='" & uname & "'"
 
                     rs = New ADODB.Recordset
                     rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
                     With rs
-                        SERT3 = .Fields("total_number").Value
+                        SERT2 = .Fields("total_number").Value
                     End With
                     rs.Close()
                     rs = Nothing
 
-                    If SERT3 > 0 Then
+                    Select Case SERT2
 
-                        MsgBox(LNGIniFile.GetString("frmMain", "MSG10", "Имеются не завершенные ремонты в количестве:") & " " & SERT3 & " " & LNGIniFile.GetString("frmMain", "MSG11", "шт."), MsgBoxStyle.Information, ProGramName)
+                        Case 0
 
-                    End If
+                        Case Else
 
-                End If
+                            sSQL = "SELECT COUNT(*) AS total_number FROM Remont Where otvetstv='" & uname & "' and zakryt = 0"
+
+                            rs = New ADODB.Recordset
+                            rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+                            With rs
+                                SERT3 = .Fields("total_number").Value
+                            End With
+                            rs.Close()
+                            rs = Nothing
+
+                            Select Case SERT3
+
+                                Case 0
+
+                                Case Else
+
+                                    MsgBox(LNGIniFile.GetString("frmMain", "MSG10", "Имеются не завершенные ремонты в количестве:") & " " & SERT3 & " " & LNGIniFile.GetString("frmMain", "MSG11", "шт."), MsgBoxStyle.Information, ProGramName)
+
+                            End Select
 
 
-            End If
+                    End Select
+
+            End Select
+
 
         End If
 
     End Sub
 
     Private Sub ПерегрузкаСрправочниковToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ПерегрузкаСрправочниковToolStripMenuItem.Click
+
+        If sRelogin = True Then Exit Sub
         If DATAB = False Then Exit Sub
 
         'Dim newThread2 As New Thread(AddressOf LoadSPR_1)
@@ -2564,5 +2613,41 @@ err_:
         frmLogin.ShowDialog(Me)
 
     End Sub
+
+    Private Sub Services_ADD_Click(sender As System.Object, e As System.EventArgs) Handles Services_ADD.Click
+        If sRelogin = True Then Exit Sub
+
+        Dim langfile As New IniFile(sLANGPATH)
+
+        frmService_add.Text = langfile.GetString("frmComputers", "MSG21", "Добавление (редактирование) заявки для ") &
+                              " " & frmComputers.lstGroups.SelectedNode.Text
+
+        'serviceDesc.MdiParent = frmMain
+        'serviceDesc.Show()
+        frmService_add.REMFU = True
+        frmService_add.REMED = False
+        frmService_add.cmbIst.Text = ""
+        frmService_add.cmbMast.Text = ""
+        frmService_add.txtPhone.Text = ""
+        frmService_add.dtReg.Value = Date.Today
+        frmService_add.dtIsp.Value = Date.Today
+        frmService_add.txtHead.Text = ""
+        frmService_add.txtRem.Text = ""
+        frmService_add.cmbStatus.Text = ""
+        frmService_add.cmbOtv.Text = ""
+        frmService_add.cmbKrit.Text = ""
+        frmService_add.cmbTip.Text = ""
+        frmService_add.txtComent.Text = ""
+        frmService_add.RemCashe.Text = 0
+        frmService_add.chkClose.Checked = False
+
+        frmService_add.ShowDialog(frmserviceDesc)
+
+        Call _
+            SaveActivityToLogDB(
+                langfile.GetString("frmComputers", "MSG22", "Добавление заявки для ") & " " &
+                frmComputers.lstGroups.SelectedNode.Text)
+    End Sub
+
 
 End Class

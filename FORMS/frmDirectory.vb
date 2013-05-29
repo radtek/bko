@@ -889,7 +889,7 @@ Public Class frmDirectory
                         "SELECT SPR_MB.Id, SPR_MB.Name, SPR_PROIZV.PROIZV FROM SPR_PROIZV INNER JOIN SPR_MB ON (SPR_PROIZV.id = SPR_MB.Proizv) AND (SPR_PROIZV.iD = SPR_MB.Proizv) WHERE ((SPR_MB.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
                 Else
                     sSQL =
-                        "SELECT SPR_MB.Id, SPR_MB.Name, SPR_PROIZV.PROIZV, (Select count(*) FROM kompy where kompy.mb=SPR_MB.Name) as temp FROM SPR_PROIZV INNER JOIN SPR_MB ON (SPR_PROIZV.id = SPR_MB.Proizv) AND (SPR_PROIZV.iD = SPR_MB.Proizv) WHERE ((SPR_MB.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
+                        "SELECT SPR_MB.Id, SPR_MB.Name, SPR_PROIZV.PROIZV, (Select count(*) FROM kompy where kompy.mb_name=SPR_MB.Name) as temp FROM SPR_PROIZV INNER JOIN SPR_MB ON (SPR_PROIZV.id = SPR_MB.Proizv) AND (SPR_PROIZV.iD = SPR_MB.Proizv) WHERE ((SPR_MB.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
                 End If
 
 
@@ -2132,13 +2132,11 @@ Public Class frmDirectory
                         LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
-
             Case objIniFile.GetString("frmDirectory", "MSG25", "Материнские платы")
                 rs = New Recordset
                 rs.Open("Delete FROM SPR_MB WHERE id =" & dSID, DB7, CursorTypeEnum.adOpenDynamic,
                         LockTypeEnum.adLockOptimistic)
                 rs = Nothing
-
 
             Case objIniFile.GetString("frmDirectory", "MSG26", "Модули памяти")
                 rs = New Recordset
@@ -2146,13 +2144,11 @@ Public Class frmDirectory
                         LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
-
             Case objIniFile.GetString("frmDirectory", "MSG28", "Процессор")
                 rs = New Recordset
                 rs.Open("Delete FROM SPR_CPU WHERE id =" & dSID, DB7, CursorTypeEnum.adOpenDynamic,
                         LockTypeEnum.adLockOptimistic)
                 rs = Nothing
-
 
             Case objIniFile.GetString("frmDirectory", "MSG29", "Сетевые карты")
                 rs = New Recordset
@@ -2160,20 +2156,17 @@ Public Class frmDirectory
                         LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
-
             Case objIniFile.GetString("frmDirectory", "MSG30", "Устройства PCI")
                 rs = New Recordset
                 rs.Open("Delete FROM SPR_PCI WHERE id =" & dSID, DB7, CursorTypeEnum.adOpenDynamic,
                         LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
-
             Case objIniFile.GetString("frmDirectory", "MSG37", "Ответственный")
                 rs = New Recordset
                 rs.Open("Delete FROM SPR_OTV WHERE id =" & dSID, DB7, CursorTypeEnum.adOpenDynamic,
                         LockTypeEnum.adLockOptimistic)
                 rs = Nothing
-
 
             Case objIniFile.GetString("frmDirectory", "MSG39", "Филиал")
 
@@ -2193,13 +2186,11 @@ Public Class frmDirectory
                         LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
-
             Case objIniFile.GetString("frmDirectory", "MSG44", "Уровень выполнения")
                 rs = New Recordset
                 rs.Open("Delete FROM spr_vip WHERE id =" & dSID, DB7, CursorTypeEnum.adOpenDynamic,
                         LockTypeEnum.adLockOptimistic)
                 rs = Nothing
-
 
             Case objIniFile.GetString("frmDirectory", "MSG45", "Тип заявки")
                 rs = New Recordset
@@ -2207,13 +2198,11 @@ Public Class frmDirectory
                         LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
-
             Case objIniFile.GetString("frmDirectory", "MSG47", "Поставщики")
                 rs = New Recordset
                 rs.Open("Delete FROM SPR_Postav WHERE id =" & dSID, DB7, CursorTypeEnum.adOpenDynamic,
                         LockTypeEnum.adLockOptimistic)
                 rs = Nothing
-
 
             Case objIniFile.GetString("frmDirectory", "MSG48", "Производители")
 
@@ -2225,13 +2214,11 @@ Public Class frmDirectory
                         LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
-
             Case objIniFile.GetString("frmDirectory", "MSG50", "Модель картриджа")
                 rs = New Recordset
                 rs.Open("Delete FROM spr_cart WHERE id =" & dSID, DB7, CursorTypeEnum.adOpenDynamic,
                         LockTypeEnum.adLockOptimistic)
                 rs = Nothing
-
 
             Case objIniFile.GetString("frmDirectory", "MSG51", "Оборудование (Другое-тип)")
                 rs = New Recordset
@@ -2251,20 +2238,17 @@ Public Class frmDirectory
                         LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
-
             Case objIniFile.GetString("frmDirectory", "MSG54", "Тип программного обеспечения")
                 rs = New Recordset
                 rs.Open("Delete FROM SPR_TIP_PO WHERE id =" & dSID, DB7, CursorTypeEnum.adOpenDynamic,
                         LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
-
             Case objIniFile.GetString("frmDirectory", "MSG55", "Комплектующие")
                 rs = New Recordset
                 rs.Open("Delete FROM SPR_Complect WHERE id =" & dSID, DB7, CursorTypeEnum.adOpenDynamic,
                         LockTypeEnum.adLockOptimistic)
                 rs = Nothing
-
 
             Case objIniFile.GetString("frmDirectory", "MSG56", "Программное обеспечение")
                 rs = New Recordset
@@ -2295,7 +2279,6 @@ Public Class frmDirectory
                 rs.Open("Delete FROM SPR_Master WHERE id =" & dSID, DB7, CursorTypeEnum.adOpenDynamic,
                         LockTypeEnum.adLockOptimistic)
                 rs = Nothing
-
 
         End Select
 

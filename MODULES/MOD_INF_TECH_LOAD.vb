@@ -387,6 +387,8 @@ Module MOD_INF_TECH_LOAD
                 frmComputers.cmbOTHConnect.Text = .Fields("TIP_COMPA").Value
 
 
+            If Len(frmComputers.cmbOTH.Text) = 0 Then frmComputers.cmbOTH.Text = .Fields("net_name").Value
+
             If Len(.Fields("NET_IP_1").Value) > 4 And TipTehn = "IBP" Then
 
                 frmComputers.chkSNMP.Checked = .Fields("SNMP").Value
@@ -1076,7 +1078,6 @@ Module MOD_INF_TECH_LOAD
 
             End If
 
-
             'Жесткие диски
 
             If Not IsDBNull(.Fields("HDD_Name_1").Value) Then frmComputers.cmbHDD1.Text = .Fields("HDD_Name_1").Value
@@ -1128,7 +1129,6 @@ Module MOD_INF_TECH_LOAD
                 frmComputers.PROizV12.Visible = False
 
             End If
-
 
             If Not IsDBNull(.Fields("HDD_Name_4").Value) And Len(.Fields("HDD_Name_4").Value) > 1 Then
                 frmComputers.cmbHDD4.Text = .Fields("HDD_Name_4").Value
@@ -1240,7 +1240,6 @@ Module MOD_INF_TECH_LOAD
 
             End If
 
-
             'Видео карта
             If Not IsDBNull(.Fields("SVGA_NAME").Value) Then frmComputers.cmbSVGA1.Text = .Fields("SVGA_NAME").Value
             If Not IsDBNull(.Fields("SVGA_OB_RAM").Value) Then _
@@ -1309,7 +1308,6 @@ Module MOD_INF_TECH_LOAD
 
             End If
 
-
             If Not IsDBNull(.Fields("DVD_NAME").Value) And Len(.Fields("DVD_NAME").Value) > 1 Then
                 frmComputers.cmbOPTIC3.Text = .Fields("DVD_NAME").Value
                 frmComputers.sOPTICAL = 2
@@ -1331,7 +1329,6 @@ Module MOD_INF_TECH_LOAD
                 frmComputers.PROizV19.Visible = False
 
             End If
-
 
             'Сетевые карты
             If Not IsDBNull(.Fields("NET_NAME_1").Value) Then frmComputers.cmbNET1.Text = .Fields("NET_NAME_1").Value
@@ -1574,35 +1571,37 @@ Module MOD_INF_TECH_LOAD
 
             If Not IsDBNull(.Fields("Garantia_Sist").Value) Then Gar = .Fields("Garantia_Sist").Value
 
-            If Gar = False Then
-                frmComputers.rbKompl.Checked = True
-                For Each C In frmComputers.sSTAB1.TabPages(0).Controls
-                    If TypeOf C Is GroupBox Then C.Cursor = Cursors.Hand
-                Next C
-                For Each C In frmComputers.sSTAB1.TabPages(1).Controls
-                    If TypeOf C Is GroupBox Then C.Cursor = Cursors.Hand
-                Next C
-                For Each C In frmComputers.sSTAB1.TabPages(2).Controls
-                    If TypeOf C Is GroupBox Then C.Cursor = Cursors.Hand
-                Next C
-            Else
+            Select Case Gar
 
-                frmComputers.rbSist.Checked = True
-                For Each C In frmComputers.sSTAB1.TabPages(0).Controls
-                    If TypeOf C Is GroupBox Then C.Cursor = Cursors.Default
-                Next C
-                For Each C In frmComputers.sSTAB1.TabPages(1).Controls
-                    If TypeOf C Is GroupBox Then C.Cursor = Cursors.Default
-                Next C
+                Case False
+                    frmComputers.rbKompl.Checked = True
+                    For Each C In frmComputers.sSTAB1.TabPages(0).Controls
+                        If TypeOf C Is GroupBox Then C.Cursor = Cursors.Hand
+                    Next C
+                    For Each C In frmComputers.sSTAB1.TabPages(1).Controls
+                        If TypeOf C Is GroupBox Then C.Cursor = Cursors.Hand
+                    Next C
+                    For Each C In frmComputers.sSTAB1.TabPages(2).Controls
+                        If TypeOf C Is GroupBox Then C.Cursor = Cursors.Hand
+                    Next C
 
-                For Each C In frmComputers.sSTAB1.TabPages(2).Controls
-                    If TypeOf C Is GroupBox Then C.Cursor = Cursors.Default
-                Next C
+                Case Else
 
-                Call LOAD_GARs(sID, frmComputers.cmbPostav, frmComputers.dtGPr, frmComputers.dtGok)
+                    frmComputers.rbSist.Checked = True
+                    For Each C In frmComputers.sSTAB1.TabPages(0).Controls
+                        If TypeOf C Is GroupBox Then C.Cursor = Cursors.Default
+                    Next C
+                    For Each C In frmComputers.sSTAB1.TabPages(1).Controls
+                        If TypeOf C Is GroupBox Then C.Cursor = Cursors.Default
+                    Next C
 
-            End If
+                    For Each C In frmComputers.sSTAB1.TabPages(2).Controls
+                        If TypeOf C Is GroupBox Then C.Cursor = Cursors.Default
+                    Next C
 
+                    Call LOAD_GARs(sID, frmComputers.cmbPostav, frmComputers.dtGPr, frmComputers.dtGok)
+
+            End Select
 
             If Not IsDBNull(.Fields("SFAktNo").Value) Then frmComputers.txtPCSfN.Text = .Fields("SFAktNo").Value
             If Not IsDBNull(.Fields("CenaRub").Value) Then frmComputers.txtPCcash.Text = .Fields("CenaRub").Value
@@ -1616,7 +1615,6 @@ Module MOD_INF_TECH_LOAD
             If Not IsDBNull(.Fields("Spisan").Value) Then frmComputers.chkPCspis.Checked = .Fields("Spisan").Value
             If Not IsDBNull(.Fields("Balans").Value) Then frmComputers.chkPCNNb.Checked = .Fields("Balans").Value
             If Not IsDBNull(.Fields("PCL").Value) Then unaPCL = .Fields("PCL").Value
-
 
             'Получаем номер розетки если он есть
 
@@ -1633,25 +1631,27 @@ Module MOD_INF_TECH_LOAD
             rs1.Close()
             rs1 = Nothing
 
-            If UCount = 0 Then
-                frmComputers.Label89.Visible = False
-                frmComputers.lblNumberNET.Visible = False
-            Else
+            Select Case UCount
 
-                frmComputers.Label89.Visible = True
-                frmComputers.lblNumberNET.Visible = True
+                Case 0
+                    frmComputers.Label89.Visible = False
+                    frmComputers.lblNumberNET.Visible = False
+                Case Else
 
-                rs1 = New Recordset
-                rs1.Open("SELECT id_line FROM TBL_NET_MAG WHERE SVT=" & .Fields("id").Value, DB7,
-                         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                    frmComputers.Label89.Visible = True
+                    frmComputers.lblNumberNET.Visible = True
 
-                With rs1
-                    frmComputers.lblNumberNET.Text = .Fields("id_line").Value
-                End With
-                rs1.Close()
-                rs1 = Nothing
+                    rs1 = New Recordset
+                    rs1.Open("SELECT id_line FROM TBL_NET_MAG WHERE SVT=" & .Fields("id").Value, DB7,
+                             CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-            End If
+                    With rs1
+                        frmComputers.lblNumberNET.Text = .Fields("id_line").Value
+                    End With
+                    rs1.Close()
+                    rs1 = Nothing
+
+            End Select
 
 
         End With
@@ -1820,9 +1820,7 @@ Module MOD_INF_TECH_LOAD
             .MoveFirst()
             Do While Not .EOF
 
-
                 lstSoftware.Items.Add(.Fields("id").Value) 'col no. 1
-
 
                 If Not IsDBNull(.Fields("NomerSoftKomp").Value) Then _
                     lstSoftware.Items(CInt(intCount)).SubItems.Add(.Fields("NomerSoftKomp").Value)
@@ -1864,7 +1862,6 @@ Module MOD_INF_TECH_LOAD
                     lstSoftware.Items(CInt(intCount)).SubItems.Add("")
                 End If
 
-
                 intCount = intCount + 1
                 .MoveNext()
             Loop
@@ -1879,7 +1876,6 @@ Module MOD_INF_TECH_LOAD
     Public Sub LOAD_USER(ByVal sID As String)
         On Error Resume Next
         frmComputers.lstUsers.Items.Clear()
-
 
         Dim rs As Recordset 'Объявляем рекордсет
         Dim sSQL As String 'Переменная, где будет размещён SQL запрос
@@ -1924,7 +1920,6 @@ Module MOD_INF_TECH_LOAD
                 Else
                     frmComputers.lstUsers.Items(CInt(intCount)).SubItems.Add("")
                 End If
-
 
                 intCount = intCount + 1
                 .MoveNext()
@@ -1994,20 +1989,16 @@ Module MOD_INF_TECH_LOAD
 
         If frmserviceDesc.ilsCMD.Images.Count = 0 Then
 
-
             Call frmservills_load()
-
 
         End If
 
         lstGroups.Sorting = SortOrder.None
         lstGroups.ListViewItemSorter = Nothing
 
-
         Dim rs As Recordset 'Объявляем рекордсет
         Dim sSQL As String 'Переменная, где будет размещён SQL запрос
         Dim uname As Integer
-
 
         rs = New Recordset
         sSQL = "SELECT COUNT(*) AS t_number FROM Remont WHERE id_comp=" & sID & " AND PREF='" & frmComputers.sPREF & "'"
@@ -2023,7 +2014,6 @@ Module MOD_INF_TECH_LOAD
 
         If uname = 0 Then Exit Sub
 
-
         Dim tID As Long
 
         'Dim rs As ADODB.Recordset 'Объявляем рекордсет
@@ -2034,7 +2024,6 @@ Module MOD_INF_TECH_LOAD
         rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         Dim intCount As Decimal = 0
-
 
         'intCount = 0
         'intCount = 0
@@ -2047,7 +2036,6 @@ Module MOD_INF_TECH_LOAD
             .MoveFirst()
             Do While Not .EOF
 
-
                 If .Fields("zakryt").Value = 1 Or .Fields("zakryt").Value = True Then
 
                     uname = 0
@@ -2058,7 +2046,6 @@ Module MOD_INF_TECH_LOAD
 
                 Dim item As ListViewItem = lstGroups.Items.Add(.Fields(0).Value)
                 item.ImageIndex = uname
-
 
                 'lstGroups.Items.Add(.Fields("id").Value) 'col no. 1
 
@@ -2137,7 +2124,6 @@ Module MOD_INF_TECH_LOAD
                 rs1.Close()
                 rs1 = Nothing
 
-
                 intCount = intCount + 1
                 .MoveNext()
             Loop
@@ -2170,66 +2156,71 @@ Module MOD_INF_TECH_LOAD
 
         ResList(lstGroup)
 
-        If sNom > 0 Then
 
-            Dim rs As Recordset 'Объявляем рекордсет
-            Dim sSQL As String 'Переменная, где будет размещён SQL запрос
+        Select Case sNom
+            Case 0
 
-            sSQL = "SELECT ID_comp, data, id, oldmesto, newmesto, prich, time FROM dvig where id_comp=" &
-                   frmComputers.sCOUNT
-            rs = New Recordset
-            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-            Dim intCount As Decimal = 0
-            With rs
-                .MoveFirst()
-                Do While Not .EOF
-                    'NomR = .Fields(0)
-                    lstGroup.Items.Add(.Fields("id").Value) 'col no. 1
+            Case Else
+                Dim rs As Recordset 'Объявляем рекордсет
+                Dim sSQL As String 'Переменная, где будет размещён SQL запрос
 
-                    If Not IsDBNull(.Fields("oldmesto").Value) Then
-                        lstGroup.Items(CInt(intCount)).SubItems.Add(.Fields("oldmesto").Value)
-                    Else
-                        lstGroup.Items(CInt(intCount)).SubItems.Add("")
-                    End If
+                sSQL = "SELECT ID_comp, data, id, oldmesto, newmesto, prich, time FROM dvig where id_comp=" &
+                       frmComputers.sCOUNT
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-                    If Not IsDBNull(.Fields("newmesto").Value) Then
-                        lstGroup.Items(CInt(intCount)).SubItems.Add(.Fields("newmesto").Value)
-                    Else
-                        lstGroup.Items(CInt(intCount)).SubItems.Add("")
-                    End If
+                Dim intCount As Decimal = 0
+                With rs
+                    .MoveFirst()
+                    Do While Not .EOF
+                        'NomR = .Fields(0)
+                        lstGroup.Items.Add(.Fields("id").Value) 'col no. 1
 
-                    If Not IsDBNull(.Fields("prich").Value) Then
-                        lstGroup.Items(CInt(intCount)).SubItems.Add(.Fields("prich").Value)
-                    Else
-                        lstGroup.Items(CInt(intCount)).SubItems.Add("")
-                    End If
+                        If Not IsDBNull(.Fields("oldmesto").Value) Then
+                            lstGroup.Items(CInt(intCount)).SubItems.Add(.Fields("oldmesto").Value)
+                        Else
+                            lstGroup.Items(CInt(intCount)).SubItems.Add("")
+                        End If
 
-                    If Not IsDBNull(.Fields("data").Value) Then
-                        lstGroup.Items(CInt(intCount)).SubItems.Add(.Fields("data").Value)
-                    Else
-                        lstGroup.Items(CInt(intCount)).SubItems.Add("")
-                    End If
+                        If Not IsDBNull(.Fields("newmesto").Value) Then
+                            lstGroup.Items(CInt(intCount)).SubItems.Add(.Fields("newmesto").Value)
+                        Else
+                            lstGroup.Items(CInt(intCount)).SubItems.Add("")
+                        End If
 
-                    If Not IsDBNull(.Fields("time").Value) Then
-                        lstGroup.Items(CInt(intCount)).SubItems.Add(.Fields("time").Value)
-                    Else
-                        lstGroup.Items(CInt(intCount)).SubItems.Add("")
-                    End If
+                        If Not IsDBNull(.Fields("prich").Value) Then
+                            lstGroup.Items(CInt(intCount)).SubItems.Add(.Fields("prich").Value)
+                        Else
+                            lstGroup.Items(CInt(intCount)).SubItems.Add("")
+                        End If
 
-                    intCount = intCount + 1
+                        If Not IsDBNull(.Fields("data").Value) Then
+                            lstGroup.Items(CInt(intCount)).SubItems.Add(.Fields("data").Value)
+                        Else
+                            lstGroup.Items(CInt(intCount)).SubItems.Add("")
+                        End If
 
-                    .MoveNext()
-                    'DoEvents
-                Loop
-            End With
+                        If Not IsDBNull(.Fields("time").Value) Then
+                            lstGroup.Items(CInt(intCount)).SubItems.Add(.Fields("time").Value)
+                        Else
+                            lstGroup.Items(CInt(intCount)).SubItems.Add("")
+                        End If
 
-            rs.Close()
-            rs = Nothing
+                        intCount = intCount + 1
 
-            ResList(lstGroup)
+                        .MoveNext()
+                        'DoEvents
+                    Loop
+                End With
 
-        End If
+                rs.Close()
+                rs = Nothing
+
+                ResList(lstGroup)
+
+        End Select
+
     End Sub
 
     Private Sub LOAD_GARs(ByVal sID As String, ByVal dPost As ComboBox, ByVal dtp As DateTimePicker,
@@ -2315,29 +2306,33 @@ Module MOD_INF_TECH_LOAD
         rs.Close()
         rs = Nothing
 
+        Select Case sCN
 
-        If sCN > 0 Then
+            Case 0
 
-            rs = New Recordset
-            rs.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+            Case Else
 
-            With rs
-                frmComputers.txtspplo.Text = .Fields("Ploshad").Value
-                frmComputers.txtspvis.Text = .Fields("visota").Value
-                frmComputers.txtspPloOneEVM.Text = .Fields("Pl1Pk").Value
-                frmComputers.txtspObOneEVM.Text = .Fields("ob1Pk").Value
-                frmComputers.cmbSpRemEVM.Text = .Fields("nalpom").Value
-                frmComputers.cmbSpVent.Text = .Fields("vent").Value
-                frmComputers.cmbSpWater.Text = .Fields("voda").Value
-                frmComputers.cmbSpTeplo.Text = .Fields("kanal").Value
-                frmComputers.cmbSpKanal.Text = .Fields("teplo").Value
-                frmComputers.txtSpWall.Text = .Fields("otdelka").Value
-                frmComputers.txtSpMebel.Text = .Fields("mebel").Value
-            End With
+                rs = New Recordset
+                rs.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-            rs.Close()
-            rs = Nothing
-        End If
+                With rs
+                    frmComputers.txtspplo.Text = .Fields("Ploshad").Value
+                    frmComputers.txtspvis.Text = .Fields("visota").Value
+                    frmComputers.txtspPloOneEVM.Text = .Fields("Pl1Pk").Value
+                    frmComputers.txtspObOneEVM.Text = .Fields("ob1Pk").Value
+                    frmComputers.cmbSpRemEVM.Text = .Fields("nalpom").Value
+                    frmComputers.cmbSpVent.Text = .Fields("vent").Value
+                    frmComputers.cmbSpWater.Text = .Fields("voda").Value
+                    frmComputers.cmbSpTeplo.Text = .Fields("kanal").Value
+                    frmComputers.cmbSpKanal.Text = .Fields("teplo").Value
+                    frmComputers.txtSpWall.Text = .Fields("otdelka").Value
+                    frmComputers.txtSpMebel.Text = .Fields("mebel").Value
+                End With
+
+                rs.Close()
+                rs = Nothing
+
+        End Select
 
 
         sSQL = "Select count(*) as t_n FROM OTD_O where Id_OTD='" & SerD & "'"
@@ -2350,29 +2345,32 @@ Module MOD_INF_TECH_LOAD
         rs.Close()
         rs = Nothing
 
-        If sCN > 0 Then
+          Select sCN
 
+            Case 0
 
-            rs = New Recordset
-            rs.Open(sSQL2, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+            Case Else
 
-            With rs
-                frmComputers.txtBRAddress.Text = .Fields("ADRESS").Value
-                frmComputers.txtBRBoss.Text = .Fields("OTV").Value
-                frmComputers.txtBRPhone.Text = .Fields("Phone").Value
+                rs = New Recordset
+                rs.Open(sSQL2, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-                If Not IsDBNull(.Fields("Prim").Value) Then
-                    frmComputers.txtBRMemo.Text = .Fields("Prim").Value
-                Else
-                    frmComputers.txtBRMemo.Text = ""
-                End If
+                With rs
+                    frmComputers.txtBRAddress.Text = .Fields("ADRESS").Value
+                    frmComputers.txtBRBoss.Text = .Fields("OTV").Value
+                    frmComputers.txtBRPhone.Text = .Fields("Phone").Value
 
-            End With
+                    If Not IsDBNull(.Fields("Prim").Value) Then
+                        frmComputers.txtBRMemo.Text = .Fields("Prim").Value
+                    Else
+                        frmComputers.txtBRMemo.Text = ""
+                    End If
 
-            rs.Close()
-            rs = Nothing
-        End If
+                End With
 
+                rs.Close()
+                rs = Nothing
+
+        End Select
 
         sSQL = "Select count(*) as t_n FROM ZAM_OTD where ID_OTD='" & SerD & "'"
         rs = New Recordset
@@ -2384,58 +2382,60 @@ Module MOD_INF_TECH_LOAD
         rs.Close()
         rs = Nothing
 
-        If sCN > 0 Then
+        Select sCN
 
-            sSQL3 = "Select * FROM ZAM_OTD where ID_OTD='" & SerD & "' ORDER BY date DESC, id DESC"
+            Case 0
 
-            rs = New Recordset
-            rs.Open(sSQL3, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+            Case Else
+                sSQL3 = "Select * FROM ZAM_OTD where ID_OTD='" & SerD & "' ORDER BY date DESC, id DESC"
 
-            Dim intCount As Decimal = 0
+                rs = New Recordset
+                rs.Open(sSQL3, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-            With rs
-                .MoveFirst()
-                Do While Not .EOF
-                    frmComputers.lvNotesBR.Items.Add(.Fields("id").Value) 'col no. 1
+                Dim intCount As Decimal = 0
 
-                    If Not IsDBNull(.Fields("ID_ZAM").Value) Then
-                        frmComputers.lvNotesBR.Items(CInt(intCount)).SubItems.Add(.Fields("ID_ZAM").Value)
-                    Else
-                        frmComputers.lvNotesBR.Items(CInt(intCount)).SubItems.Add("")
-                    End If
+                With rs
+                    .MoveFirst()
+                    Do While Not .EOF
+                        frmComputers.lvNotesBR.Items.Add(.Fields("id").Value) 'col no. 1
 
-                    If Not IsDBNull(.Fields("Date").Value) Then
-                        frmComputers.lvNotesBR.Items(CInt(intCount)).SubItems.Add(.Fields("Date").Value)
-                    Else
-                        frmComputers.lvNotesBR.Items(CInt(intCount)).SubItems.Add("")
-                    End If
+                        If Not IsDBNull(.Fields("ID_ZAM").Value) Then
+                            frmComputers.lvNotesBR.Items(CInt(intCount)).SubItems.Add(.Fields("ID_ZAM").Value)
+                        Else
+                            frmComputers.lvNotesBR.Items(CInt(intCount)).SubItems.Add("")
+                        End If
 
-                    If Not IsDBNull(.Fields("ZAMETKA").Value) Then
-                        frmComputers.lvNotesBR.Items(CInt(intCount)).SubItems.Add(.Fields("ZAMETKA").Value)
-                    Else
-                        frmComputers.lvNotesBR.Items(CInt(intCount)).SubItems.Add("")
-                    End If
+                        If Not IsDBNull(.Fields("Date").Value) Then
+                            frmComputers.lvNotesBR.Items(CInt(intCount)).SubItems.Add(.Fields("Date").Value)
+                        Else
+                            frmComputers.lvNotesBR.Items(CInt(intCount)).SubItems.Add("")
+                        End If
 
-                    If Not IsDBNull(.Fields("Master").Value) Then
-                        frmComputers.lvNotesBR.Items(CInt(intCount)).SubItems.Add(.Fields("Master").Value)
-                    Else
-                        frmComputers.lvNotesBR.Items(CInt(intCount)).SubItems.Add("")
-                    End If
+                        If Not IsDBNull(.Fields("ZAMETKA").Value) Then
+                            frmComputers.lvNotesBR.Items(CInt(intCount)).SubItems.Add(.Fields("ZAMETKA").Value)
+                        Else
+                            frmComputers.lvNotesBR.Items(CInt(intCount)).SubItems.Add("")
+                        End If
 
-                    intCount = intCount + 1
-                    .MoveNext()
-                Loop
-            End With
+                        If Not IsDBNull(.Fields("Master").Value) Then
+                            frmComputers.lvNotesBR.Items(CInt(intCount)).SubItems.Add(.Fields("Master").Value)
+                        Else
+                            frmComputers.lvNotesBR.Items(CInt(intCount)).SubItems.Add("")
+                        End If
 
-            rs.Close()
-            rs = Nothing
-        End If
+                        intCount = intCount + 1
+                        .MoveNext()
+                    Loop
+                End With
+
+                rs.Close()
+                rs = Nothing
+        End Select
 
         ResList(frmComputers.lvNotesBR)
 
-
         Exit Sub
-        err_:
+err_:
     End Sub
 
     Public Sub SHED_CHECK()
@@ -2447,29 +2447,26 @@ Module MOD_INF_TECH_LOAD
 
         uname = objIniFile.GetString("General", "Sheduler", "unChecked")
 
-        If uname = "unChecked" Then
+        Select Case uname
 
-            frmMain.lblShed.Visible = False
+            Case "unChecked"
 
-            If frmMain.lblShed.Visible = False Then
+                frmMain.lblShed.Visible = False
 
-                frmMain.lblSplet.Visible = False
+                Select Case frmMain.lblShed.Visible
 
-            End If
+                    Case False
 
-            Exit Sub
+                        frmMain.lblSplet.Visible = False
 
+                End Select
 
-        Else
-
-        End If
-
+        End Select
 
         Dim rs As Recordset
 
         Dim sSQL, SERT, SERT2 As String
         Dim LNGIniFile As New IniFile(sLANGPATH)
-
 
         sSQL = "SELECT COUNT(*) AS total_number FROM Sheduler"
 
@@ -2483,89 +2480,98 @@ Module MOD_INF_TECH_LOAD
         rs.Close()
         rs = Nothing
 
-        If SERT > 0 Then
-            frmMain.lblShed.Visible = True
+        Select Case SERT
+
+            Case 0
+
+                frmMain.lblShed.Visible = False
+
+                Select Case frmMain.lblShed.Visible
+
+                    Case False
+
+                        frmMain.lblSplet.Visible = False
+
+                End Select
 
 
-            If frmMain.lblShed.Visible = True Then
+            Case Else
 
-                frmMain.lblSplet.Visible = True
+                frmMain.lblShed.Visible = True
 
-            End If
+                Select Case frmMain.lblShed.Visible
 
-            'frmMain lblShed
-            'LNGIniFile.GetString("frmMain", "lblShed", "Напоминания")
-            frmMain.lblShed.Text = LNGIniFile.GetString("frmMain", "lblShed", "Напоминания") & " " & "(" & "0" & "/" &
-                                   SERT$ & ")"
+                    Case True
 
-            sSQL = "SELECT COUNT(*) AS total_number FROM Sheduler Where foruser='" & UserNames & "'"
+                        frmMain.lblSplet.Visible = True
 
-            rs = New Recordset
-            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
-            With rs
-                SERT2 = .Fields("total_number").Value
-            End With
-            rs.Close()
-            rs = Nothing
-
-            If SERT2 > 0 Then
-
-                sSQL = "SELECT DATA, FORUSER, OPIS FROM Sheduler Where foruser='" & UserNames & "'"
-
-                rs = New Recordset
-                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                Dim intj As Integer
-                intj = 0
-                With rs
-                    .MoveFirst()
-                    Do While Not .EOF
-
-                        If .Fields(0).Value <= Date.Today.AddDays(- 3) Or .Fields(0).Value >= Date.Today.AddDays(+ 3) _
-                            Then
-
-                        Else
-
-                            If .Fields(1).Value = UserNames Then
-                                intj = intj + 1
-
-                                frmMain.lblShed.Text = LNGIniFile.GetString("frmMain", "lblShed", "Напоминания") & " " &
-                                                       "(" & intj & "/" & SERT$ & ")"
-                                frmMain.lblShed.ForeColor = Color.Red
-
-                            Else
-                            End If
-                        End If
-
-                        .MoveNext()
-                        'DoEvents
-                    Loop
-                End With
-
-                rs.Close()
-                rs = Nothing
-
-            Else
+                End Select
 
                 frmMain.lblShed.Text = LNGIniFile.GetString("frmMain", "lblShed", "Напоминания") & " " & "(" & "0" & "/" &
                                        SERT$ & ")"
-                frmMain.lblShed.ForeColor = Color.Black
 
-            End If
+                sSQL = "SELECT COUNT(*) AS total_number FROM Sheduler Where foruser='" & UserNames & "'"
 
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-        Else
+                With rs
+                    SERT2 = .Fields("total_number").Value
+                End With
+                rs.Close()
+                rs = Nothing
 
-            frmMain.lblShed.Visible = False
+                Select Case SERT2
 
-            If frmMain.lblShed.Visible = False Then
+                    Case 0
 
-                frmMain.lblSplet.Visible = False
+                        frmMain.lblShed.Text = LNGIniFile.GetString("frmMain", "lblShed", "Напоминания") & " " & "(" & "0" & "/" &
+                                                              SERT$ & ")"
+                        frmMain.lblShed.ForeColor = Color.Black
 
-            End If
+                    Case Else
 
+                        sSQL = "SELECT DATA, FORUSER, OPIS FROM Sheduler Where foruser='" & UserNames & "'"
 
-        End If
+                        rs = New Recordset
+                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        Dim intj As Integer
+                        intj = 0
+                        With rs
+                            .MoveFirst()
+                            Do While Not .EOF
+
+                                If .Fields(0).Value <= Date.Today.AddDays(-3) Or .Fields(0).Value >= Date.Today.AddDays(+3) _
+                                    Then
+
+                                Else
+
+                                    Select Case .Fields(1).Value
+
+                                        Case UserNames
+
+                                            intj = intj + 1
+
+                                            frmMain.lblShed.Text = LNGIniFile.GetString("frmMain", "lblShed", "Напоминания") & " " &
+                                                                   "(" & intj & "/" & SERT$ & ")"
+                                            frmMain.lblShed.ForeColor = Color.Red
+
+                                    End Select
+
+                                End If
+
+                                .MoveNext()
+                                'DoEvents
+                            Loop
+                        End With
+
+                        rs.Close()
+                        rs = Nothing
+
+                End Select
+
+        End Select
+
 
         'frmMain.lblShed.Text = "Напоминания "
 
@@ -2595,93 +2601,97 @@ err_:
         rs.Close()
         rs = Nothing
 
-        If SERT > 0 Then
+        Select Case SERT
 
-            frmMain.lblRem.Visible = True
+            Case 0
 
-            If frmMain.lblRem.Visible = True Then
+                frmMain.lblRem.Visible = False
 
-                frmMain.ToolStripStatusLabel4.Visible = True
+                Select Case frmMain.lblRem.Visible
 
-            End If
+                    Case False
 
+                        frmMain.ToolStripStatusLabel4.Visible = False
+                End Select
 
-            rs = New Recordset
-            rs.Open("SELECT * FROM SPR_Master WHERE A='" & UserNames & "'", DB7, CursorTypeEnum.adOpenDynamic,
-                    LockTypeEnum.adLockOptimistic)
+            Case Else
 
+                frmMain.lblRem.Visible = True
 
-            With rs
-                uname = .Fields("name").Value
-            End With
+                Select Case frmMain.lblRem.Visible
 
-            rs.Close()
-            rs = Nothing
+                    Case True
+                        frmMain.ToolStripStatusLabel4.Visible = True
 
-            If uname = Nothing Then uname = "ADMINISTRATOR"
+                End Select
 
-            sSQL = "SELECT COUNT(*) AS total_number FROM Remont WHERE otvetstv='" & uname & "'"
+                rs = New Recordset
+                rs.Open("SELECT * FROM SPR_Master WHERE A='" & UserNames & "'", DB7, CursorTypeEnum.adOpenDynamic,
+                        LockTypeEnum.adLockOptimistic)
 
-            rs = New Recordset
-            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                With rs
+                    uname = .Fields("name").Value
+                End With
 
-            With rs
-                SERT2 = .Fields("total_number").Value
-            End With
-            rs.Close()
-            rs = Nothing
-            'LNGIniFile.GetString("frmMain", "lblRem", "Заявки") & " " & 
-            frmMain.lblRem.Text = LNGIniFile.GetString("frmMain", "lblRem", "Заявки") & " " & "(" & "0" & "/" & SERT &
-                                  ")"
+                rs.Close()
+                rs = Nothing
 
-            If SERT2 > 0 Then
+                If uname = Nothing Then uname = "ADMINISTRATOR"
 
-                sSQL = "SELECT COUNT(*) AS total_number FROM Remont Where otvetstv='" & uname & "' and zakryt = 0"
+                sSQL = "SELECT COUNT(*) AS total_number FROM Remont WHERE otvetstv='" & uname & "'"
 
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 With rs
-                    SERT3 = .Fields("total_number").Value
+                    SERT2 = .Fields("total_number").Value
                 End With
                 rs.Close()
                 rs = Nothing
-
-                If SERT3 > 0 Then
-
-                    frmMain.lblRem.Text = LNGIniFile.GetString("frmMain", "lblRem", "Заявки") & " " & "(" & SERT3 & "/" &
-                                          SERT & ")"
-                    frmMain.lblRem.ForeColor = Color.Red
-
-
-                Else
-
-                    frmMain.lblRem.Text = LNGIniFile.GetString("frmMain", "lblRem", "Заявки") & " " & "(" & "0" & "/" &
-                                          SERT & ")"
-                    frmMain.lblRem.ForeColor = Color.Black
-
-                End If
-
-            Else
-
+                'LNGIniFile.GetString("frmMain", "lblRem", "Заявки") & " " & 
                 frmMain.lblRem.Text = LNGIniFile.GetString("frmMain", "lblRem", "Заявки") & " " & "(" & "0" & "/" & SERT &
                                       ")"
 
-            End If
+                Select Case SERT2
 
+                    Case 0
 
-        Else
+                        frmMain.lblRem.Text = LNGIniFile.GetString("frmMain", "lblRem", "Заявки") & " " & "(" & "0" & "/" & SERT &
+                                         ")"
 
-            frmMain.lblRem.Visible = False
+                    Case Else
 
+                        sSQL = "SELECT COUNT(*) AS total_number FROM Remont Where otvetstv='" & uname & "' and zakryt = 0"
 
-            If frmMain.lblRem.Visible = False Then
+                        rs = New Recordset
+                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-                frmMain.ToolStripStatusLabel4.Visible = False
+                        With rs
+                            SERT3 = .Fields("total_number").Value
+                        End With
+                        rs.Close()
+                        rs = Nothing
 
-            End If
+                        Select Case SERT3
 
-        End If
+                            Case 0
+
+                                frmMain.lblRem.Text = LNGIniFile.GetString("frmMain", "lblRem", "Заявки") & " " & "(" & "0" & "/" &
+                                            SERT & ")"
+                                frmMain.lblRem.ForeColor = Color.Black
+
+                            Case Else
+
+                                frmMain.lblRem.Text = LNGIniFile.GetString("frmMain", "lblRem", "Заявки") & " " & "(" & SERT3 & "/" &
+                                             SERT & ")"
+                                frmMain.lblRem.ForeColor = Color.Red
+
+                        End Select
+
+                End Select
+
+        End Select
+
     End Sub
 
     Public Sub ExLoadParFow(ByVal sCombo1 As String, ByVal sText1 As TextBox, ByVal sText2 As TextBox,
@@ -2838,68 +2848,63 @@ err_:
         rs.Close()
         rs = Nothing
 
-        If PREFs = "C" Then
+        Select Case PREFs
 
-            sSQL1 = "SELECT * FROM kompy where id =" & b1
-            rs = New Recordset
-            rs.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-            With rs
-                h1 = .Fields("NET_NAME").Value
-                i1 = .Fields("FILIAL").Value
-                j1 = .Fields("MESTO").Value
-                k1 = .Fields("kabn").Value
-            End With
-            rs.Close()
-            rs = Nothing
+            Case "C"
 
-        Else
+                sSQL1 = "SELECT * FROM kompy where id =" & b1
+                rs = New Recordset
+                rs.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                With rs
+                    h1 = .Fields("NET_NAME").Value
+                    i1 = .Fields("FILIAL").Value
+                    j1 = .Fields("MESTO").Value
+                    k1 = .Fields("kabn").Value
+                End With
+                rs.Close()
+                rs = Nothing
 
-            Select Case PREFs
+            Case "G"
 
-                Case "G"
+                sSQL1 = "SELECT * FROM SPR_FILIAL where id =" & b1
+                rs = New Recordset
+                rs.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                With rs
+                    i1 = .Fields("FILIAL").Value
 
+                End With
+                rs.Close()
+                rs = Nothing
 
-                    sSQL1 = "SELECT * FROM SPR_FILIAL where id =" & b1
-                    rs = New Recordset
-                    rs.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                    With rs
-                        i1 = .Fields("FILIAL").Value
+            Case "O"
 
-                    End With
-                    rs.Close()
-                    rs = Nothing
+                sSQL1 = "SELECT * FROM SPR_OTD_FILIAL where id =" & b1
+                rs = New Recordset
+                rs.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                With rs
+                    i1 = .Fields("FILIAL").Value
+                    j1 = .Fields("N_Otd").Value
+                    'k1 = .Fields("MESTO").Value
 
-                Case "O"
+                End With
+                rs.Close()
+                rs = Nothing
 
-                    sSQL1 = "SELECT * FROM SPR_OTD_FILIAL where id =" & b1
-                    rs = New Recordset
-                    rs.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                    With rs
-                        i1 = .Fields("FILIAL").Value
-                        j1 = .Fields("N_Otd").Value
-                        'k1 = .Fields("MESTO").Value
+            Case "K"
 
-                    End With
-                    rs.Close()
-                    rs = Nothing
+                sSQL1 = "SELECT * FROM SPR_KAB where id =" & b1
+                rs = New Recordset
+                rs.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                With rs
+                    i1 = .Fields("N_F").Value
+                    j1 = .Fields("N_M").Value
+                    k1 = .Fields("Name").Value
 
-                Case "K"
+                End With
+                rs.Close()
+                rs = Nothing
 
-                    sSQL1 = "SELECT * FROM SPR_KAB where id =" & b1
-                    rs = New Recordset
-                    rs.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                    With rs
-                        i1 = .Fields("N_F").Value
-                        j1 = .Fields("N_M").Value
-                        k1 = .Fields("Name").Value
-
-                    End With
-                    rs.Close()
-                    rs = Nothing
-
-            End Select
-
-        End If
+        End Select
 
         If Len(m1) <> 0 Then
 
@@ -2916,22 +2921,18 @@ err_:
 
         End If
 
-
         If Len(l1) = 0 Then l1 = "Источник не известен. "
-
 
         i1 = "Филиал - " & i1 & ", "
         j1 = "Отдел - " & j1 & ", "
         k1 = "Кабинет - " & k1 & ". "
         h1 = "Объект - " & h1 & " "
 
-
         Dim Subject As String
         Dim Body As String
 
         Dim bAns As Boolean = True
         Dim sParams As String
-
 
         Dim sTEXT As TextBox
         sTEXT = New TextBox
@@ -2950,18 +2951,19 @@ err_:
 
         On Error GoTo err_
 
-  
         Dim objIniFile As New IniFile(PrPath & "base.ini")
         Dim sORG As String
 
         Dim decr As String = DecryptBytes(objIniFile.GetString("SMTP", "Password", ""))
 
         Dim client As New SmtpClient
-        client.Port = objIniFile.GetString("SMTP", "Port", "")
+        client.Port = objIniFile.GetString("SMTP", "Port", "25")
         client.Host = objIniFile.GetString("SMTP", "Server", "")
         client.EnableSsl = objIniFile.GetString("SMTP", "TLS", "False")
 
         client.Credentials = New NetworkCredential(objIniFile.GetString("SMTP", "User", ""), decr)
+
+        If Len(client.Host) = 0 Then Exit Sub
 
         Dim fromAdr As MailAddress = New MailAddress(frm, sORG, Encoding.UTF8)
         Dim toAdr As MailAddress = New MailAddress(objIniFile.GetString("SMTP", "User", ""))
@@ -2971,22 +2973,14 @@ err_:
         message.Body = sTEXT.Text
         message.BodyEncoding = Encoding.UTF8
 
-
         client.Send(message)
         message.Dispose()
         sTEXT = Nothing
-
-
-
-
-
-
-
-
 
         MsgBox("Сообщение отправлено", MsgBoxStyle.Information, ProGramName)
         Exit Sub
         err_:
         MsgBox(Err.Description)
+
     End Sub
 End Module

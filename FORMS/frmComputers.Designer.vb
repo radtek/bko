@@ -973,11 +973,11 @@ Partial Class frmComputers
         '
         'spCont.Panel2
         '
-        Me.spCont.Panel2.Controls.Add(Me.sSTAB3)
         Me.spCont.Panel2.Controls.Add(Me.sSTAB1)
         Me.spCont.Panel2.Controls.Add(Me.sSTAB5)
         Me.spCont.Panel2.Controls.Add(Me.sSTAB2)
         Me.spCont.Panel2.Controls.Add(Me.sSTAB4)
+        Me.spCont.Panel2.Controls.Add(Me.sSTAB3)
         Me.spCont.Size = New System.Drawing.Size(995, 646)
         Me.spCont.SplitterDistance = 298
         Me.spCont.TabIndex = 0
@@ -1597,7 +1597,7 @@ Partial Class frmComputers
         Me.TableLayoutPanel24.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel24.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel24.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30!))
-        Me.TableLayoutPanel24.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 35!))
+        Me.TableLayoutPanel24.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 37!))
         Me.TableLayoutPanel24.Controls.Add(Me.PROizV4, 3, 3)
         Me.TableLayoutPanel24.Controls.Add(Me.PROizV2, 3, 1)
         Me.TableLayoutPanel24.Controls.Add(Me.PROizV3, 3, 2)
@@ -1634,9 +1634,9 @@ Partial Class frmComputers
         Me.PROizV4.Cursor = System.Windows.Forms.Cursors.Default
         Me.PROizV4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PROizV4.FormattingEnabled = true
-        Me.PROizV4.Location = New System.Drawing.Point(505, 84)
+        Me.PROizV4.Location = New System.Drawing.Point(504, 84)
         Me.PROizV4.Name = "PROizV4"
-        Me.PROizV4.Size = New System.Drawing.Size(159, 21)
+        Me.PROizV4.Size = New System.Drawing.Size(160, 21)
         Me.PROizV4.TabIndex = 16
         '
         'PROizV2
@@ -1648,9 +1648,9 @@ Partial Class frmComputers
         Me.PROizV2.Cursor = System.Windows.Forms.Cursors.Default
         Me.PROizV2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PROizV2.ForeColor = System.Drawing.SystemColors.WindowText
-        Me.PROizV2.Location = New System.Drawing.Point(505, 30)
+        Me.PROizV2.Location = New System.Drawing.Point(504, 30)
         Me.PROizV2.Name = "PROizV2"
-        Me.PROizV2.Size = New System.Drawing.Size(159, 21)
+        Me.PROizV2.Size = New System.Drawing.Size(160, 21)
         Me.PROizV2.Sorted = true
         Me.PROizV2.TabIndex = 8
         '
@@ -1662,9 +1662,9 @@ Partial Class frmComputers
         Me.PROizV3.Cursor = System.Windows.Forms.Cursors.Default
         Me.PROizV3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PROizV3.FormattingEnabled = true
-        Me.PROizV3.Location = New System.Drawing.Point(505, 57)
+        Me.PROizV3.Location = New System.Drawing.Point(504, 57)
         Me.PROizV3.Name = "PROizV3"
-        Me.PROizV3.Size = New System.Drawing.Size(159, 21)
+        Me.PROizV3.Size = New System.Drawing.Size(160, 21)
         Me.PROizV3.TabIndex = 12
         '
         'cmbCPU1
@@ -1676,12 +1676,12 @@ Partial Class frmComputers
         Me.cmbCPU1.FormattingEnabled = true
         Me.cmbCPU1.Location = New System.Drawing.Point(3, 3)
         Me.cmbCPU1.Name = "cmbCPU1"
-        Me.cmbCPU1.Size = New System.Drawing.Size(296, 21)
+        Me.cmbCPU1.Size = New System.Drawing.Size(295, 21)
         Me.cmbCPU1.TabIndex = 1
         '
         'txtSoc4
         '
-        Me.txtSoc4.Location = New System.Drawing.Point(405, 84)
+        Me.txtSoc4.Location = New System.Drawing.Point(404, 84)
         Me.txtSoc4.Name = "txtSoc4"
         Me.txtSoc4.Size = New System.Drawing.Size(94, 20)
         Me.txtSoc4.TabIndex = 15
@@ -1696,7 +1696,7 @@ Partial Class frmComputers
         Me.cmbCPU2.FormattingEnabled = true
         Me.cmbCPU2.Location = New System.Drawing.Point(3, 30)
         Me.cmbCPU2.Name = "cmbCPU2"
-        Me.cmbCPU2.Size = New System.Drawing.Size(296, 21)
+        Me.cmbCPU2.Size = New System.Drawing.Size(295, 21)
         Me.cmbCPU2.TabIndex = 5
         '
         'PROizV1
@@ -1706,7 +1706,7 @@ Partial Class frmComputers
         Me.PROizV1.Cursor = System.Windows.Forms.Cursors.Default
         Me.PROizV1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PROizV1.FormattingEnabled = true
-        Me.PROizV1.Location = New System.Drawing.Point(505, 3)
+        Me.PROizV1.Location = New System.Drawing.Point(504, 3)
         Me.PROizV1.Name = "PROizV1"
         Me.PROizV1.Size = New System.Drawing.Size(123, 21)
         Me.PROizV1.TabIndex = 4
@@ -1720,12 +1720,12 @@ Partial Class frmComputers
         Me.cmbCPU3.FormattingEnabled = true
         Me.cmbCPU3.Location = New System.Drawing.Point(3, 57)
         Me.cmbCPU3.Name = "cmbCPU3"
-        Me.cmbCPU3.Size = New System.Drawing.Size(296, 21)
+        Me.cmbCPU3.Size = New System.Drawing.Size(295, 21)
         Me.cmbCPU3.TabIndex = 9
         '
         'txtSoc3
         '
-        Me.txtSoc3.Location = New System.Drawing.Point(405, 57)
+        Me.txtSoc3.Location = New System.Drawing.Point(404, 57)
         Me.txtSoc3.Name = "txtSoc3"
         Me.txtSoc3.Size = New System.Drawing.Size(94, 20)
         Me.txtSoc3.TabIndex = 11
@@ -1733,7 +1733,7 @@ Partial Class frmComputers
         '
         'txtMHZ4
         '
-        Me.txtMHZ4.Location = New System.Drawing.Point(305, 84)
+        Me.txtMHZ4.Location = New System.Drawing.Point(304, 84)
         Me.txtMHZ4.Name = "txtMHZ4"
         Me.txtMHZ4.Size = New System.Drawing.Size(94, 20)
         Me.txtMHZ4.TabIndex = 14
@@ -1748,12 +1748,12 @@ Partial Class frmComputers
         Me.cmbCPU4.FormattingEnabled = true
         Me.cmbCPU4.Location = New System.Drawing.Point(3, 84)
         Me.cmbCPU4.Name = "cmbCPU4"
-        Me.cmbCPU4.Size = New System.Drawing.Size(296, 21)
+        Me.cmbCPU4.Size = New System.Drawing.Size(295, 21)
         Me.cmbCPU4.TabIndex = 13
         '
         'txtSoc2
         '
-        Me.txtSoc2.Location = New System.Drawing.Point(405, 30)
+        Me.txtSoc2.Location = New System.Drawing.Point(404, 30)
         Me.txtSoc2.Name = "txtSoc2"
         Me.txtSoc2.Size = New System.Drawing.Size(94, 20)
         Me.txtSoc2.TabIndex = 7
@@ -1761,7 +1761,7 @@ Partial Class frmComputers
         '
         'txtMHZ1
         '
-        Me.txtMHZ1.Location = New System.Drawing.Point(305, 3)
+        Me.txtMHZ1.Location = New System.Drawing.Point(304, 3)
         Me.txtMHZ1.Name = "txtMHZ1"
         Me.txtMHZ1.Size = New System.Drawing.Size(94, 20)
         Me.txtMHZ1.TabIndex = 2
@@ -1769,7 +1769,7 @@ Partial Class frmComputers
         '
         'txtSoc1
         '
-        Me.txtSoc1.Location = New System.Drawing.Point(405, 3)
+        Me.txtSoc1.Location = New System.Drawing.Point(404, 3)
         Me.txtSoc1.Name = "txtSoc1"
         Me.txtSoc1.Size = New System.Drawing.Size(94, 20)
         Me.txtSoc1.TabIndex = 3
@@ -1777,7 +1777,7 @@ Partial Class frmComputers
         '
         'txtMHZ2
         '
-        Me.txtMHZ2.Location = New System.Drawing.Point(305, 30)
+        Me.txtMHZ2.Location = New System.Drawing.Point(304, 30)
         Me.txtMHZ2.Name = "txtMHZ2"
         Me.txtMHZ2.Size = New System.Drawing.Size(94, 20)
         Me.txtMHZ2.TabIndex = 6
@@ -1785,7 +1785,7 @@ Partial Class frmComputers
         '
         'txtMHZ3
         '
-        Me.txtMHZ3.Location = New System.Drawing.Point(305, 57)
+        Me.txtMHZ3.Location = New System.Drawing.Point(304, 57)
         Me.txtMHZ3.Name = "txtMHZ3"
         Me.txtMHZ3.Size = New System.Drawing.Size(94, 20)
         Me.txtMHZ3.TabIndex = 10
@@ -1797,7 +1797,7 @@ Partial Class frmComputers
         Me.ToolStrip8.Dock = System.Windows.Forms.DockStyle.None
         Me.ToolStrip8.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
         Me.ToolStrip8.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.bCPUPlus})
-        Me.ToolStrip8.Location = New System.Drawing.Point(631, 0)
+        Me.ToolStrip8.Location = New System.Drawing.Point(630, 0)
         Me.ToolStrip8.Name = "ToolStrip8"
         Me.ToolStrip8.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
         Me.ToolStrip8.Size = New System.Drawing.Size(26, 25)
@@ -1833,7 +1833,7 @@ Partial Class frmComputers
         Me.TableLayoutPanel28.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel28.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel28.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.06993!))
-        Me.TableLayoutPanel28.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 35!))
+        Me.TableLayoutPanel28.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40!))
         Me.TableLayoutPanel28.Controls.Add(Me.PROizV16, 3, 0)
         Me.TableLayoutPanel28.Controls.Add(Me.txtSoundS, 2, 0)
         Me.TableLayoutPanel28.Controls.Add(Me.cmbSound, 0, 0)
@@ -1854,14 +1854,14 @@ Partial Class frmComputers
         Me.PROizV16.Cursor = System.Windows.Forms.Cursors.Default
         Me.PROizV16.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PROizV16.FormattingEnabled = true
-        Me.PROizV16.Location = New System.Drawing.Point(505, 3)
+        Me.PROizV16.Location = New System.Drawing.Point(501, 3)
         Me.PROizV16.Name = "PROizV16"
-        Me.PROizV16.Size = New System.Drawing.Size(159, 21)
+        Me.PROizV16.Size = New System.Drawing.Size(163, 21)
         Me.PROizV16.TabIndex = 7
         '
         'txtSoundS
         '
-        Me.txtSoundS.Location = New System.Drawing.Point(405, 3)
+        Me.txtSoundS.Location = New System.Drawing.Point(401, 3)
         Me.txtSoundS.Name = "txtSoundS"
         Me.txtSoundS.Size = New System.Drawing.Size(94, 20)
         Me.txtSoundS.TabIndex = 6
@@ -1874,12 +1874,12 @@ Partial Class frmComputers
         Me.cmbSound.FormattingEnabled = true
         Me.cmbSound.Location = New System.Drawing.Point(3, 3)
         Me.cmbSound.Name = "cmbSound"
-        Me.cmbSound.Size = New System.Drawing.Size(296, 21)
+        Me.cmbSound.Size = New System.Drawing.Size(292, 21)
         Me.cmbSound.TabIndex = 4
         '
         'txtSoundB
         '
-        Me.txtSoundB.Location = New System.Drawing.Point(305, 3)
+        Me.txtSoundB.Location = New System.Drawing.Point(301, 3)
         Me.txtSoundB.Name = "txtSoundB"
         Me.txtSoundB.Size = New System.Drawing.Size(94, 20)
         Me.txtSoundB.TabIndex = 5
@@ -1905,7 +1905,7 @@ Partial Class frmComputers
         Me.TableLayoutPanel29.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 66.88071!))
         Me.TableLayoutPanel29.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel29.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.11929!))
-        Me.TableLayoutPanel29.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 35!))
+        Me.TableLayoutPanel29.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 39!))
         Me.TableLayoutPanel29.Controls.Add(Me.lblMBsn, 0, 1)
         Me.TableLayoutPanel29.Controls.Add(Me.txtSN_MB, 1, 1)
         Me.TableLayoutPanel29.Controls.Add(Me.txtChip, 2, 0)
@@ -1942,7 +1942,7 @@ Partial Class frmComputers
         'txtChip
         '
         Me.txtChip.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtChip.Location = New System.Drawing.Point(301, 3)
+        Me.txtChip.Location = New System.Drawing.Point(298, 3)
         Me.txtChip.Name = "txtChip"
         Me.txtChip.Size = New System.Drawing.Size(195, 20)
         Me.txtChip.TabIndex = 9
@@ -1955,9 +1955,9 @@ Partial Class frmComputers
         Me.PROizV5.Cursor = System.Windows.Forms.Cursors.Default
         Me.PROizV5.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PROizV5.FormattingEnabled = true
-        Me.PROizV5.Location = New System.Drawing.Point(502, 3)
+        Me.PROizV5.Location = New System.Drawing.Point(499, 3)
         Me.PROizV5.Name = "PROizV5"
-        Me.PROizV5.Size = New System.Drawing.Size(162, 21)
+        Me.PROizV5.Size = New System.Drawing.Size(165, 21)
         Me.PROizV5.TabIndex = 10
         '
         'cmbMB
@@ -1969,7 +1969,7 @@ Partial Class frmComputers
         Me.cmbMB.FormattingEnabled = true
         Me.cmbMB.Location = New System.Drawing.Point(3, 3)
         Me.cmbMB.Name = "cmbMB"
-        Me.cmbMB.Size = New System.Drawing.Size(292, 21)
+        Me.cmbMB.Size = New System.Drawing.Size(289, 21)
         Me.cmbMB.TabIndex = 8
         '
         'gbSVGA
@@ -1993,7 +1993,7 @@ Partial Class frmComputers
         Me.TableLayoutPanel27.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100!))
         Me.TableLayoutPanel27.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100!))
         Me.TableLayoutPanel27.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30!))
-        Me.TableLayoutPanel27.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 35!))
+        Me.TableLayoutPanel27.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 37!))
         Me.TableLayoutPanel27.Controls.Add(Me.PROizV15, 3, 1)
         Me.TableLayoutPanel27.Controls.Add(Me.txtSVGAs2, 2, 1)
         Me.TableLayoutPanel27.Controls.Add(Me.PROizV14, 3, 0)
@@ -2020,14 +2020,14 @@ Partial Class frmComputers
         Me.PROizV15.Cursor = System.Windows.Forms.Cursors.Default
         Me.PROizV15.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PROizV15.FormattingEnabled = true
-        Me.PROizV15.Location = New System.Drawing.Point(505, 30)
+        Me.PROizV15.Location = New System.Drawing.Point(504, 30)
         Me.PROizV15.Name = "PROizV15"
-        Me.PROizV15.Size = New System.Drawing.Size(159, 21)
+        Me.PROizV15.Size = New System.Drawing.Size(160, 21)
         Me.PROizV15.TabIndex = 15
         '
         'txtSVGAs2
         '
-        Me.txtSVGAs2.Location = New System.Drawing.Point(405, 30)
+        Me.txtSVGAs2.Location = New System.Drawing.Point(404, 30)
         Me.txtSVGAs2.Name = "txtSVGAs2"
         Me.txtSVGAs2.Size = New System.Drawing.Size(94, 20)
         Me.txtSVGAs2.TabIndex = 14
@@ -2039,7 +2039,7 @@ Partial Class frmComputers
         Me.PROizV14.Cursor = System.Windows.Forms.Cursors.Default
         Me.PROizV14.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PROizV14.FormattingEnabled = true
-        Me.PROizV14.Location = New System.Drawing.Point(505, 3)
+        Me.PROizV14.Location = New System.Drawing.Point(504, 3)
         Me.PROizV14.Name = "PROizV14"
         Me.PROizV14.Size = New System.Drawing.Size(123, 21)
         Me.PROizV14.TabIndex = 11
@@ -2052,7 +2052,7 @@ Partial Class frmComputers
         Me.cmbSVGA1.FormattingEnabled = true
         Me.cmbSVGA1.Location = New System.Drawing.Point(3, 3)
         Me.cmbSVGA1.Name = "cmbSVGA1"
-        Me.cmbSVGA1.Size = New System.Drawing.Size(296, 21)
+        Me.cmbSVGA1.Size = New System.Drawing.Size(295, 21)
         Me.cmbSVGA1.TabIndex = 8
         '
         'cmbSVGA2
@@ -2063,26 +2063,26 @@ Partial Class frmComputers
         Me.cmbSVGA2.FormattingEnabled = true
         Me.cmbSVGA2.Location = New System.Drawing.Point(3, 30)
         Me.cmbSVGA2.Name = "cmbSVGA2"
-        Me.cmbSVGA2.Size = New System.Drawing.Size(296, 21)
+        Me.cmbSVGA2.Size = New System.Drawing.Size(295, 21)
         Me.cmbSVGA2.TabIndex = 12
         '
         'txtSVGAs1
         '
-        Me.txtSVGAs1.Location = New System.Drawing.Point(405, 3)
+        Me.txtSVGAs1.Location = New System.Drawing.Point(404, 3)
         Me.txtSVGAs1.Name = "txtSVGAs1"
         Me.txtSVGAs1.Size = New System.Drawing.Size(94, 20)
         Me.txtSVGAs1.TabIndex = 10
         '
         'txtSVGAr2
         '
-        Me.txtSVGAr2.Location = New System.Drawing.Point(305, 30)
+        Me.txtSVGAr2.Location = New System.Drawing.Point(304, 30)
         Me.txtSVGAr2.Name = "txtSVGAr2"
         Me.txtSVGAr2.Size = New System.Drawing.Size(94, 20)
         Me.txtSVGAr2.TabIndex = 13
         '
         'txtSVGAr1
         '
-        Me.txtSVGAr1.Location = New System.Drawing.Point(305, 3)
+        Me.txtSVGAr1.Location = New System.Drawing.Point(304, 3)
         Me.txtSVGAr1.Name = "txtSVGAr1"
         Me.txtSVGAr1.Size = New System.Drawing.Size(94, 20)
         Me.txtSVGAr1.TabIndex = 9
@@ -2092,7 +2092,7 @@ Partial Class frmComputers
         Me.ToolStrip11.Dock = System.Windows.Forms.DockStyle.None
         Me.ToolStrip11.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
         Me.ToolStrip11.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.bSVGAPlus})
-        Me.ToolStrip11.Location = New System.Drawing.Point(631, 0)
+        Me.ToolStrip11.Location = New System.Drawing.Point(630, 0)
         Me.ToolStrip11.Name = "ToolStrip11"
         Me.ToolStrip11.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
         Me.ToolStrip11.Size = New System.Drawing.Size(26, 25)
@@ -2129,7 +2129,7 @@ Partial Class frmComputers
         Me.TableLayoutPanel25.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 102!))
         Me.TableLayoutPanel25.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 98!))
         Me.TableLayoutPanel25.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30!))
-        Me.TableLayoutPanel25.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 35!))
+        Me.TableLayoutPanel25.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 37!))
         Me.TableLayoutPanel25.Controls.Add(Me.PROizV9, 3, 3)
         Me.TableLayoutPanel25.Controls.Add(Me.txtRamSN4, 2, 3)
         Me.TableLayoutPanel25.Controls.Add(Me.PROizV8, 3, 2)
@@ -2186,14 +2186,14 @@ Partial Class frmComputers
         Me.PROizV9.Cursor = System.Windows.Forms.Cursors.Default
         Me.PROizV9.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PROizV9.FormattingEnabled = true
-        Me.PROizV9.Location = New System.Drawing.Point(505, 84)
+        Me.PROizV9.Location = New System.Drawing.Point(504, 84)
         Me.PROizV9.Name = "PROizV9"
-        Me.PROizV9.Size = New System.Drawing.Size(159, 21)
+        Me.PROizV9.Size = New System.Drawing.Size(160, 21)
         Me.PROizV9.TabIndex = 31
         '
         'txtRamSN4
         '
-        Me.txtRamSN4.Location = New System.Drawing.Point(407, 84)
+        Me.txtRamSN4.Location = New System.Drawing.Point(406, 84)
         Me.txtRamSN4.Name = "txtRamSN4"
         Me.txtRamSN4.Size = New System.Drawing.Size(92, 20)
         Me.txtRamSN4.TabIndex = 30
@@ -2206,9 +2206,9 @@ Partial Class frmComputers
         Me.PROizV8.Cursor = System.Windows.Forms.Cursors.Default
         Me.PROizV8.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PROizV8.FormattingEnabled = true
-        Me.PROizV8.Location = New System.Drawing.Point(505, 57)
+        Me.PROizV8.Location = New System.Drawing.Point(504, 57)
         Me.PROizV8.Name = "PROizV8"
-        Me.PROizV8.Size = New System.Drawing.Size(159, 21)
+        Me.PROizV8.Size = New System.Drawing.Size(160, 21)
         Me.PROizV8.TabIndex = 27
         '
         'cmbRAM1
@@ -2220,7 +2220,7 @@ Partial Class frmComputers
         Me.cmbRAM1.FormattingEnabled = true
         Me.cmbRAM1.Location = New System.Drawing.Point(3, 3)
         Me.cmbRAM1.Name = "cmbRAM1"
-        Me.cmbRAM1.Size = New System.Drawing.Size(296, 21)
+        Me.cmbRAM1.Size = New System.Drawing.Size(295, 21)
         Me.cmbRAM1.TabIndex = 16
         '
         'PROizV7
@@ -2231,9 +2231,9 @@ Partial Class frmComputers
         Me.PROizV7.Cursor = System.Windows.Forms.Cursors.Default
         Me.PROizV7.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PROizV7.FormattingEnabled = true
-        Me.PROizV7.Location = New System.Drawing.Point(505, 30)
+        Me.PROizV7.Location = New System.Drawing.Point(504, 30)
         Me.PROizV7.Name = "PROizV7"
-        Me.PROizV7.Size = New System.Drawing.Size(159, 21)
+        Me.PROizV7.Size = New System.Drawing.Size(160, 21)
         Me.PROizV7.TabIndex = 23
         '
         'cmbRAM2
@@ -2245,7 +2245,7 @@ Partial Class frmComputers
         Me.cmbRAM2.FormattingEnabled = true
         Me.cmbRAM2.Location = New System.Drawing.Point(3, 30)
         Me.cmbRAM2.Name = "cmbRAM2"
-        Me.cmbRAM2.Size = New System.Drawing.Size(296, 21)
+        Me.cmbRAM2.Size = New System.Drawing.Size(295, 21)
         Me.cmbRAM2.TabIndex = 20
         '
         'PROizV6
@@ -2255,21 +2255,21 @@ Partial Class frmComputers
         Me.PROizV6.Cursor = System.Windows.Forms.Cursors.Default
         Me.PROizV6.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PROizV6.FormattingEnabled = true
-        Me.PROizV6.Location = New System.Drawing.Point(505, 3)
+        Me.PROizV6.Location = New System.Drawing.Point(504, 3)
         Me.PROizV6.Name = "PROizV6"
         Me.PROizV6.Size = New System.Drawing.Size(123, 21)
         Me.PROizV6.TabIndex = 19
         '
         'txtRamSN3
         '
-        Me.txtRamSN3.Location = New System.Drawing.Point(407, 57)
+        Me.txtRamSN3.Location = New System.Drawing.Point(406, 57)
         Me.txtRamSN3.Name = "txtRamSN3"
         Me.txtRamSN3.Size = New System.Drawing.Size(92, 20)
         Me.txtRamSN3.TabIndex = 26
         '
         'txtRamS4
         '
-        Me.txtRamS4.Location = New System.Drawing.Point(305, 84)
+        Me.txtRamS4.Location = New System.Drawing.Point(304, 84)
         Me.txtRamS4.Name = "txtRamS4"
         Me.txtRamS4.Size = New System.Drawing.Size(94, 20)
         Me.txtRamS4.TabIndex = 29
@@ -2283,12 +2283,12 @@ Partial Class frmComputers
         Me.cmbRAM3.FormattingEnabled = true
         Me.cmbRAM3.Location = New System.Drawing.Point(3, 57)
         Me.cmbRAM3.Name = "cmbRAM3"
-        Me.cmbRAM3.Size = New System.Drawing.Size(296, 21)
+        Me.cmbRAM3.Size = New System.Drawing.Size(295, 21)
         Me.cmbRAM3.TabIndex = 24
         '
         'txtRamSN2
         '
-        Me.txtRamSN2.Location = New System.Drawing.Point(407, 30)
+        Me.txtRamSN2.Location = New System.Drawing.Point(406, 30)
         Me.txtRamSN2.Name = "txtRamSN2"
         Me.txtRamSN2.Size = New System.Drawing.Size(92, 20)
         Me.txtRamSN2.TabIndex = 22
@@ -2302,33 +2302,33 @@ Partial Class frmComputers
         Me.cmbRAM4.FormattingEnabled = true
         Me.cmbRAM4.Location = New System.Drawing.Point(3, 84)
         Me.cmbRAM4.Name = "cmbRAM4"
-        Me.cmbRAM4.Size = New System.Drawing.Size(296, 21)
+        Me.cmbRAM4.Size = New System.Drawing.Size(295, 21)
         Me.cmbRAM4.TabIndex = 28
         '
         'txtRamS1
         '
-        Me.txtRamS1.Location = New System.Drawing.Point(305, 3)
+        Me.txtRamS1.Location = New System.Drawing.Point(304, 3)
         Me.txtRamS1.Name = "txtRamS1"
         Me.txtRamS1.Size = New System.Drawing.Size(94, 20)
         Me.txtRamS1.TabIndex = 17
         '
         'txtRamSN1
         '
-        Me.txtRamSN1.Location = New System.Drawing.Point(407, 3)
+        Me.txtRamSN1.Location = New System.Drawing.Point(406, 3)
         Me.txtRamSN1.Name = "txtRamSN1"
         Me.txtRamSN1.Size = New System.Drawing.Size(92, 20)
         Me.txtRamSN1.TabIndex = 18
         '
         'txtRamS3
         '
-        Me.txtRamS3.Location = New System.Drawing.Point(305, 57)
+        Me.txtRamS3.Location = New System.Drawing.Point(304, 57)
         Me.txtRamS3.Name = "txtRamS3"
         Me.txtRamS3.Size = New System.Drawing.Size(94, 20)
         Me.txtRamS3.TabIndex = 25
         '
         'txtRamS2
         '
-        Me.txtRamS2.Location = New System.Drawing.Point(305, 30)
+        Me.txtRamS2.Location = New System.Drawing.Point(304, 30)
         Me.txtRamS2.Name = "txtRamS2"
         Me.txtRamS2.Size = New System.Drawing.Size(94, 20)
         Me.txtRamS2.TabIndex = 21
@@ -2338,7 +2338,7 @@ Partial Class frmComputers
         Me.ToolStrip9.Dock = System.Windows.Forms.DockStyle.None
         Me.ToolStrip9.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
         Me.ToolStrip9.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.bRamPlus})
-        Me.ToolStrip9.Location = New System.Drawing.Point(631, 0)
+        Me.ToolStrip9.Location = New System.Drawing.Point(630, 0)
         Me.ToolStrip9.Name = "ToolStrip9"
         Me.ToolStrip9.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
         Me.ToolStrip9.Size = New System.Drawing.Size(26, 25)
@@ -2361,7 +2361,7 @@ Partial Class frmComputers
         Me.cmbRAM5.FormattingEnabled = true
         Me.cmbRAM5.Location = New System.Drawing.Point(3, 111)
         Me.cmbRAM5.Name = "cmbRAM5"
-        Me.cmbRAM5.Size = New System.Drawing.Size(296, 21)
+        Me.cmbRAM5.Size = New System.Drawing.Size(295, 21)
         Me.cmbRAM5.TabIndex = 33
         '
         'cmbRAM6
@@ -2372,13 +2372,13 @@ Partial Class frmComputers
         Me.cmbRAM6.FormattingEnabled = true
         Me.cmbRAM6.Location = New System.Drawing.Point(3, 138)
         Me.cmbRAM6.Name = "cmbRAM6"
-        Me.cmbRAM6.Size = New System.Drawing.Size(296, 21)
+        Me.cmbRAM6.Size = New System.Drawing.Size(295, 21)
         Me.cmbRAM6.TabIndex = 34
         '
         'txtRamS5
         '
         Me.txtRamS5.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtRamS5.Location = New System.Drawing.Point(305, 111)
+        Me.txtRamS5.Location = New System.Drawing.Point(304, 111)
         Me.txtRamS5.Name = "txtRamS5"
         Me.txtRamS5.Size = New System.Drawing.Size(96, 20)
         Me.txtRamS5.TabIndex = 35
@@ -2386,7 +2386,7 @@ Partial Class frmComputers
         'txtRamS6
         '
         Me.txtRamS6.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtRamS6.Location = New System.Drawing.Point(305, 138)
+        Me.txtRamS6.Location = New System.Drawing.Point(304, 138)
         Me.txtRamS6.Name = "txtRamS6"
         Me.txtRamS6.Size = New System.Drawing.Size(96, 20)
         Me.txtRamS6.TabIndex = 36
@@ -2394,7 +2394,7 @@ Partial Class frmComputers
         'txtRamSN5
         '
         Me.txtRamSN5.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtRamSN5.Location = New System.Drawing.Point(407, 111)
+        Me.txtRamSN5.Location = New System.Drawing.Point(406, 111)
         Me.txtRamSN5.Name = "txtRamSN5"
         Me.txtRamSN5.Size = New System.Drawing.Size(92, 20)
         Me.txtRamSN5.TabIndex = 37
@@ -2402,7 +2402,7 @@ Partial Class frmComputers
         'txtRamSN6
         '
         Me.txtRamSN6.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtRamSN6.Location = New System.Drawing.Point(407, 138)
+        Me.txtRamSN6.Location = New System.Drawing.Point(406, 138)
         Me.txtRamSN6.Name = "txtRamSN6"
         Me.txtRamSN6.Size = New System.Drawing.Size(92, 20)
         Me.txtRamSN6.TabIndex = 38
@@ -2414,9 +2414,9 @@ Partial Class frmComputers
         Me.TableLayoutPanel25.SetColumnSpan(Me.PROizV44, 2)
         Me.PROizV44.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PROizV44.FormattingEnabled = true
-        Me.PROizV44.Location = New System.Drawing.Point(505, 111)
+        Me.PROizV44.Location = New System.Drawing.Point(504, 111)
         Me.PROizV44.Name = "PROizV44"
-        Me.PROizV44.Size = New System.Drawing.Size(159, 21)
+        Me.PROizV44.Size = New System.Drawing.Size(160, 21)
         Me.PROizV44.TabIndex = 39
         '
         'PROizV45
@@ -2426,9 +2426,9 @@ Partial Class frmComputers
         Me.TableLayoutPanel25.SetColumnSpan(Me.PROizV45, 2)
         Me.PROizV45.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PROizV45.FormattingEnabled = true
-        Me.PROizV45.Location = New System.Drawing.Point(505, 138)
+        Me.PROizV45.Location = New System.Drawing.Point(504, 138)
         Me.PROizV45.Name = "PROizV45"
-        Me.PROizV45.Size = New System.Drawing.Size(159, 21)
+        Me.PROizV45.Size = New System.Drawing.Size(160, 21)
         Me.PROizV45.TabIndex = 40
         '
         'cmbRAM7
@@ -2439,7 +2439,7 @@ Partial Class frmComputers
         Me.cmbRAM7.FormattingEnabled = true
         Me.cmbRAM7.Location = New System.Drawing.Point(3, 165)
         Me.cmbRAM7.Name = "cmbRAM7"
-        Me.cmbRAM7.Size = New System.Drawing.Size(296, 21)
+        Me.cmbRAM7.Size = New System.Drawing.Size(295, 21)
         Me.cmbRAM7.TabIndex = 41
         '
         'cmbRAM8
@@ -2450,13 +2450,13 @@ Partial Class frmComputers
         Me.cmbRAM8.FormattingEnabled = true
         Me.cmbRAM8.Location = New System.Drawing.Point(3, 192)
         Me.cmbRAM8.Name = "cmbRAM8"
-        Me.cmbRAM8.Size = New System.Drawing.Size(296, 21)
+        Me.cmbRAM8.Size = New System.Drawing.Size(295, 21)
         Me.cmbRAM8.TabIndex = 42
         '
         'txtRamS7
         '
         Me.txtRamS7.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtRamS7.Location = New System.Drawing.Point(305, 165)
+        Me.txtRamS7.Location = New System.Drawing.Point(304, 165)
         Me.txtRamS7.Name = "txtRamS7"
         Me.txtRamS7.Size = New System.Drawing.Size(96, 20)
         Me.txtRamS7.TabIndex = 43
@@ -2464,7 +2464,7 @@ Partial Class frmComputers
         'txtRamS8
         '
         Me.txtRamS8.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtRamS8.Location = New System.Drawing.Point(305, 192)
+        Me.txtRamS8.Location = New System.Drawing.Point(304, 192)
         Me.txtRamS8.Name = "txtRamS8"
         Me.txtRamS8.Size = New System.Drawing.Size(96, 20)
         Me.txtRamS8.TabIndex = 44
@@ -2472,7 +2472,7 @@ Partial Class frmComputers
         'txtRamSN7
         '
         Me.txtRamSN7.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtRamSN7.Location = New System.Drawing.Point(407, 165)
+        Me.txtRamSN7.Location = New System.Drawing.Point(406, 165)
         Me.txtRamSN7.Name = "txtRamSN7"
         Me.txtRamSN7.Size = New System.Drawing.Size(92, 20)
         Me.txtRamSN7.TabIndex = 45
@@ -2480,7 +2480,7 @@ Partial Class frmComputers
         'txtRamSN8
         '
         Me.txtRamSN8.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtRamSN8.Location = New System.Drawing.Point(407, 192)
+        Me.txtRamSN8.Location = New System.Drawing.Point(406, 192)
         Me.txtRamSN8.Name = "txtRamSN8"
         Me.txtRamSN8.Size = New System.Drawing.Size(92, 20)
         Me.txtRamSN8.TabIndex = 46
@@ -2492,9 +2492,9 @@ Partial Class frmComputers
         Me.TableLayoutPanel25.SetColumnSpan(Me.PROizV46, 2)
         Me.PROizV46.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PROizV46.FormattingEnabled = true
-        Me.PROizV46.Location = New System.Drawing.Point(505, 165)
+        Me.PROizV46.Location = New System.Drawing.Point(504, 165)
         Me.PROizV46.Name = "PROizV46"
-        Me.PROizV46.Size = New System.Drawing.Size(159, 21)
+        Me.PROizV46.Size = New System.Drawing.Size(160, 21)
         Me.PROizV46.TabIndex = 47
         '
         'PROizV47
@@ -2504,9 +2504,9 @@ Partial Class frmComputers
         Me.TableLayoutPanel25.SetColumnSpan(Me.PROizV47, 2)
         Me.PROizV47.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PROizV47.FormattingEnabled = true
-        Me.PROizV47.Location = New System.Drawing.Point(505, 192)
+        Me.PROizV47.Location = New System.Drawing.Point(504, 192)
         Me.PROizV47.Name = "PROizV47"
-        Me.PROizV47.Size = New System.Drawing.Size(159, 21)
+        Me.PROizV47.Size = New System.Drawing.Size(160, 21)
         Me.PROizV47.TabIndex = 48
         '
         'gbHDD
@@ -2530,7 +2530,7 @@ Partial Class frmComputers
         Me.TableLayoutPanel26.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100!))
         Me.TableLayoutPanel26.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100!))
         Me.TableLayoutPanel26.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30!))
-        Me.TableLayoutPanel26.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 35!))
+        Me.TableLayoutPanel26.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 37!))
         Me.TableLayoutPanel26.Controls.Add(Me.PROizV13, 3, 3)
         Me.TableLayoutPanel26.Controls.Add(Me.txtHDDsN4, 2, 3)
         Me.TableLayoutPanel26.Controls.Add(Me.PROizV12, 3, 2)
@@ -2587,14 +2587,14 @@ Partial Class frmComputers
         Me.PROizV13.Cursor = System.Windows.Forms.Cursors.Default
         Me.PROizV13.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PROizV13.FormattingEnabled = true
-        Me.PROizV13.Location = New System.Drawing.Point(505, 84)
+        Me.PROizV13.Location = New System.Drawing.Point(504, 84)
         Me.PROizV13.Name = "PROizV13"
-        Me.PROizV13.Size = New System.Drawing.Size(159, 21)
+        Me.PROizV13.Size = New System.Drawing.Size(160, 21)
         Me.PROizV13.TabIndex = 31
         '
         'txtHDDsN4
         '
-        Me.txtHDDsN4.Location = New System.Drawing.Point(405, 84)
+        Me.txtHDDsN4.Location = New System.Drawing.Point(404, 84)
         Me.txtHDDsN4.Name = "txtHDDsN4"
         Me.txtHDDsN4.Size = New System.Drawing.Size(94, 20)
         Me.txtHDDsN4.TabIndex = 30
@@ -2607,9 +2607,9 @@ Partial Class frmComputers
         Me.PROizV12.Cursor = System.Windows.Forms.Cursors.Default
         Me.PROizV12.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PROizV12.FormattingEnabled = true
-        Me.PROizV12.Location = New System.Drawing.Point(505, 57)
+        Me.PROizV12.Location = New System.Drawing.Point(504, 57)
         Me.PROizV12.Name = "PROizV12"
-        Me.PROizV12.Size = New System.Drawing.Size(159, 21)
+        Me.PROizV12.Size = New System.Drawing.Size(160, 21)
         Me.PROizV12.TabIndex = 27
         '
         'cmbHDD1
@@ -2621,7 +2621,7 @@ Partial Class frmComputers
         Me.cmbHDD1.FormattingEnabled = true
         Me.cmbHDD1.Location = New System.Drawing.Point(3, 3)
         Me.cmbHDD1.Name = "cmbHDD1"
-        Me.cmbHDD1.Size = New System.Drawing.Size(296, 21)
+        Me.cmbHDD1.Size = New System.Drawing.Size(295, 21)
         Me.cmbHDD1.TabIndex = 16
         '
         'PROizV11
@@ -2632,9 +2632,9 @@ Partial Class frmComputers
         Me.PROizV11.Cursor = System.Windows.Forms.Cursors.Default
         Me.PROizV11.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PROizV11.FormattingEnabled = true
-        Me.PROizV11.Location = New System.Drawing.Point(505, 30)
+        Me.PROizV11.Location = New System.Drawing.Point(504, 30)
         Me.PROizV11.Name = "PROizV11"
-        Me.PROizV11.Size = New System.Drawing.Size(159, 21)
+        Me.PROizV11.Size = New System.Drawing.Size(160, 21)
         Me.PROizV11.TabIndex = 23
         '
         'cmbHDD2
@@ -2646,7 +2646,7 @@ Partial Class frmComputers
         Me.cmbHDD2.FormattingEnabled = true
         Me.cmbHDD2.Location = New System.Drawing.Point(3, 30)
         Me.cmbHDD2.Name = "cmbHDD2"
-        Me.cmbHDD2.Size = New System.Drawing.Size(296, 21)
+        Me.cmbHDD2.Size = New System.Drawing.Size(295, 21)
         Me.cmbHDD2.TabIndex = 20
         '
         'PROizV10
@@ -2656,21 +2656,21 @@ Partial Class frmComputers
         Me.PROizV10.Cursor = System.Windows.Forms.Cursors.Default
         Me.PROizV10.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PROizV10.FormattingEnabled = true
-        Me.PROizV10.Location = New System.Drawing.Point(505, 3)
+        Me.PROizV10.Location = New System.Drawing.Point(504, 3)
         Me.PROizV10.Name = "PROizV10"
         Me.PROizV10.Size = New System.Drawing.Size(123, 21)
         Me.PROizV10.TabIndex = 19
         '
         'txtHDDsN3
         '
-        Me.txtHDDsN3.Location = New System.Drawing.Point(405, 57)
+        Me.txtHDDsN3.Location = New System.Drawing.Point(404, 57)
         Me.txtHDDsN3.Name = "txtHDDsN3"
         Me.txtHDDsN3.Size = New System.Drawing.Size(94, 20)
         Me.txtHDDsN3.TabIndex = 26
         '
         'txtHDDo4
         '
-        Me.txtHDDo4.Location = New System.Drawing.Point(305, 84)
+        Me.txtHDDo4.Location = New System.Drawing.Point(304, 84)
         Me.txtHDDo4.Name = "txtHDDo4"
         Me.txtHDDo4.Size = New System.Drawing.Size(94, 20)
         Me.txtHDDo4.TabIndex = 29
@@ -2684,7 +2684,7 @@ Partial Class frmComputers
         Me.cmbHDD3.FormattingEnabled = true
         Me.cmbHDD3.Location = New System.Drawing.Point(3, 57)
         Me.cmbHDD3.Name = "cmbHDD3"
-        Me.cmbHDD3.Size = New System.Drawing.Size(296, 21)
+        Me.cmbHDD3.Size = New System.Drawing.Size(295, 21)
         Me.cmbHDD3.TabIndex = 24
         '
         'cmbHDD4
@@ -2696,40 +2696,40 @@ Partial Class frmComputers
         Me.cmbHDD4.FormattingEnabled = true
         Me.cmbHDD4.Location = New System.Drawing.Point(3, 84)
         Me.cmbHDD4.Name = "cmbHDD4"
-        Me.cmbHDD4.Size = New System.Drawing.Size(296, 21)
+        Me.cmbHDD4.Size = New System.Drawing.Size(295, 21)
         Me.cmbHDD4.TabIndex = 28
         '
         'txtHDDo1
         '
-        Me.txtHDDo1.Location = New System.Drawing.Point(305, 3)
+        Me.txtHDDo1.Location = New System.Drawing.Point(304, 3)
         Me.txtHDDo1.Name = "txtHDDo1"
         Me.txtHDDo1.Size = New System.Drawing.Size(94, 20)
         Me.txtHDDo1.TabIndex = 17
         '
         'txtHDDsN1
         '
-        Me.txtHDDsN1.Location = New System.Drawing.Point(405, 3)
+        Me.txtHDDsN1.Location = New System.Drawing.Point(404, 3)
         Me.txtHDDsN1.Name = "txtHDDsN1"
         Me.txtHDDsN1.Size = New System.Drawing.Size(94, 20)
         Me.txtHDDsN1.TabIndex = 18
         '
         'txtHDDo3
         '
-        Me.txtHDDo3.Location = New System.Drawing.Point(305, 57)
+        Me.txtHDDo3.Location = New System.Drawing.Point(304, 57)
         Me.txtHDDo3.Name = "txtHDDo3"
         Me.txtHDDo3.Size = New System.Drawing.Size(94, 20)
         Me.txtHDDo3.TabIndex = 25
         '
         'txtHDDo2
         '
-        Me.txtHDDo2.Location = New System.Drawing.Point(305, 30)
+        Me.txtHDDo2.Location = New System.Drawing.Point(304, 30)
         Me.txtHDDo2.Name = "txtHDDo2"
         Me.txtHDDo2.Size = New System.Drawing.Size(94, 20)
         Me.txtHDDo2.TabIndex = 21
         '
         'txtHDDsN2
         '
-        Me.txtHDDsN2.Location = New System.Drawing.Point(405, 30)
+        Me.txtHDDsN2.Location = New System.Drawing.Point(404, 30)
         Me.txtHDDsN2.Name = "txtHDDsN2"
         Me.txtHDDsN2.Size = New System.Drawing.Size(94, 20)
         Me.txtHDDsN2.TabIndex = 22
@@ -2738,10 +2738,10 @@ Partial Class frmComputers
         '
         Me.ToolStrip10.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
         Me.ToolStrip10.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.bHddPlus})
-        Me.ToolStrip10.Location = New System.Drawing.Point(631, 0)
+        Me.ToolStrip10.Location = New System.Drawing.Point(630, 0)
         Me.ToolStrip10.Name = "ToolStrip10"
         Me.ToolStrip10.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
-        Me.ToolStrip10.Size = New System.Drawing.Size(36, 25)
+        Me.ToolStrip10.Size = New System.Drawing.Size(37, 25)
         Me.ToolStrip10.TabIndex = 32
         Me.ToolStrip10.Text = "ToolStrip10"
         '
@@ -2761,7 +2761,7 @@ Partial Class frmComputers
         Me.cmbHDD5.FormattingEnabled = true
         Me.cmbHDD5.Location = New System.Drawing.Point(3, 111)
         Me.cmbHDD5.Name = "cmbHDD5"
-        Me.cmbHDD5.Size = New System.Drawing.Size(296, 21)
+        Me.cmbHDD5.Size = New System.Drawing.Size(295, 21)
         Me.cmbHDD5.TabIndex = 33
         '
         'cmbHDD6
@@ -2772,7 +2772,7 @@ Partial Class frmComputers
         Me.cmbHDD6.FormattingEnabled = true
         Me.cmbHDD6.Location = New System.Drawing.Point(3, 138)
         Me.cmbHDD6.Name = "cmbHDD6"
-        Me.cmbHDD6.Size = New System.Drawing.Size(296, 21)
+        Me.cmbHDD6.Size = New System.Drawing.Size(295, 21)
         Me.cmbHDD6.TabIndex = 34
         '
         'cmbHDD7
@@ -2783,7 +2783,7 @@ Partial Class frmComputers
         Me.cmbHDD7.FormattingEnabled = true
         Me.cmbHDD7.Location = New System.Drawing.Point(3, 165)
         Me.cmbHDD7.Name = "cmbHDD7"
-        Me.cmbHDD7.Size = New System.Drawing.Size(296, 21)
+        Me.cmbHDD7.Size = New System.Drawing.Size(295, 21)
         Me.cmbHDD7.TabIndex = 35
         '
         'cmbHDD8
@@ -2794,7 +2794,7 @@ Partial Class frmComputers
         Me.cmbHDD8.FormattingEnabled = true
         Me.cmbHDD8.Location = New System.Drawing.Point(3, 192)
         Me.cmbHDD8.Name = "cmbHDD8"
-        Me.cmbHDD8.Size = New System.Drawing.Size(296, 21)
+        Me.cmbHDD8.Size = New System.Drawing.Size(295, 21)
         Me.cmbHDD8.TabIndex = 36
         '
         'PROizV48
@@ -2804,9 +2804,9 @@ Partial Class frmComputers
         Me.TableLayoutPanel26.SetColumnSpan(Me.PROizV48, 2)
         Me.PROizV48.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PROizV48.FormattingEnabled = true
-        Me.PROizV48.Location = New System.Drawing.Point(505, 111)
+        Me.PROizV48.Location = New System.Drawing.Point(504, 111)
         Me.PROizV48.Name = "PROizV48"
-        Me.PROizV48.Size = New System.Drawing.Size(159, 21)
+        Me.PROizV48.Size = New System.Drawing.Size(160, 21)
         Me.PROizV48.TabIndex = 37
         '
         'PROizV49
@@ -2816,9 +2816,9 @@ Partial Class frmComputers
         Me.TableLayoutPanel26.SetColumnSpan(Me.PROizV49, 2)
         Me.PROizV49.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PROizV49.FormattingEnabled = true
-        Me.PROizV49.Location = New System.Drawing.Point(505, 138)
+        Me.PROizV49.Location = New System.Drawing.Point(504, 138)
         Me.PROizV49.Name = "PROizV49"
-        Me.PROizV49.Size = New System.Drawing.Size(159, 21)
+        Me.PROizV49.Size = New System.Drawing.Size(160, 21)
         Me.PROizV49.TabIndex = 38
         '
         'PROizV50
@@ -2828,9 +2828,9 @@ Partial Class frmComputers
         Me.TableLayoutPanel26.SetColumnSpan(Me.PROizV50, 2)
         Me.PROizV50.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PROizV50.FormattingEnabled = true
-        Me.PROizV50.Location = New System.Drawing.Point(505, 165)
+        Me.PROizV50.Location = New System.Drawing.Point(504, 165)
         Me.PROizV50.Name = "PROizV50"
-        Me.PROizV50.Size = New System.Drawing.Size(159, 21)
+        Me.PROizV50.Size = New System.Drawing.Size(160, 21)
         Me.PROizV50.TabIndex = 39
         '
         'PROizV51
@@ -2840,15 +2840,15 @@ Partial Class frmComputers
         Me.TableLayoutPanel26.SetColumnSpan(Me.PROizV51, 2)
         Me.PROizV51.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PROizV51.FormattingEnabled = true
-        Me.PROizV51.Location = New System.Drawing.Point(505, 192)
+        Me.PROizV51.Location = New System.Drawing.Point(504, 192)
         Me.PROizV51.Name = "PROizV51"
-        Me.PROizV51.Size = New System.Drawing.Size(159, 21)
+        Me.PROizV51.Size = New System.Drawing.Size(160, 21)
         Me.PROizV51.TabIndex = 40
         '
         'txtHDDo5
         '
         Me.txtHDDo5.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtHDDo5.Location = New System.Drawing.Point(305, 111)
+        Me.txtHDDo5.Location = New System.Drawing.Point(304, 111)
         Me.txtHDDo5.Name = "txtHDDo5"
         Me.txtHDDo5.Size = New System.Drawing.Size(94, 20)
         Me.txtHDDo5.TabIndex = 41
@@ -2856,7 +2856,7 @@ Partial Class frmComputers
         'txtHDDsN5
         '
         Me.txtHDDsN5.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtHDDsN5.Location = New System.Drawing.Point(405, 111)
+        Me.txtHDDsN5.Location = New System.Drawing.Point(404, 111)
         Me.txtHDDsN5.Name = "txtHDDsN5"
         Me.txtHDDsN5.Size = New System.Drawing.Size(94, 20)
         Me.txtHDDsN5.TabIndex = 42
@@ -2864,7 +2864,7 @@ Partial Class frmComputers
         'txtHDDo6
         '
         Me.txtHDDo6.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtHDDo6.Location = New System.Drawing.Point(305, 138)
+        Me.txtHDDo6.Location = New System.Drawing.Point(304, 138)
         Me.txtHDDo6.Name = "txtHDDo6"
         Me.txtHDDo6.Size = New System.Drawing.Size(94, 20)
         Me.txtHDDo6.TabIndex = 43
@@ -2872,7 +2872,7 @@ Partial Class frmComputers
         'txtHDDsN6
         '
         Me.txtHDDsN6.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtHDDsN6.Location = New System.Drawing.Point(405, 138)
+        Me.txtHDDsN6.Location = New System.Drawing.Point(404, 138)
         Me.txtHDDsN6.Name = "txtHDDsN6"
         Me.txtHDDsN6.Size = New System.Drawing.Size(94, 20)
         Me.txtHDDsN6.TabIndex = 44
@@ -2880,7 +2880,7 @@ Partial Class frmComputers
         'txtHDDo7
         '
         Me.txtHDDo7.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtHDDo7.Location = New System.Drawing.Point(305, 165)
+        Me.txtHDDo7.Location = New System.Drawing.Point(304, 165)
         Me.txtHDDo7.Name = "txtHDDo7"
         Me.txtHDDo7.Size = New System.Drawing.Size(94, 20)
         Me.txtHDDo7.TabIndex = 45
@@ -2888,7 +2888,7 @@ Partial Class frmComputers
         'txtHDDsN7
         '
         Me.txtHDDsN7.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtHDDsN7.Location = New System.Drawing.Point(405, 165)
+        Me.txtHDDsN7.Location = New System.Drawing.Point(404, 165)
         Me.txtHDDsN7.Name = "txtHDDsN7"
         Me.txtHDDsN7.Size = New System.Drawing.Size(94, 20)
         Me.txtHDDsN7.TabIndex = 46
@@ -2896,7 +2896,7 @@ Partial Class frmComputers
         'txtHDDo8
         '
         Me.txtHDDo8.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtHDDo8.Location = New System.Drawing.Point(305, 192)
+        Me.txtHDDo8.Location = New System.Drawing.Point(304, 192)
         Me.txtHDDo8.Name = "txtHDDo8"
         Me.txtHDDo8.Size = New System.Drawing.Size(94, 20)
         Me.txtHDDo8.TabIndex = 47
@@ -2904,7 +2904,7 @@ Partial Class frmComputers
         'txtHDDsN8
         '
         Me.txtHDDsN8.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtHDDsN8.Location = New System.Drawing.Point(405, 192)
+        Me.txtHDDsN8.Location = New System.Drawing.Point(404, 192)
         Me.txtHDDsN8.Name = "txtHDDsN8"
         Me.txtHDDsN8.Size = New System.Drawing.Size(94, 20)
         Me.txtHDDsN8.TabIndex = 48
@@ -2930,7 +2930,7 @@ Partial Class frmComputers
         Me.TableLayoutPanel30.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100!))
         Me.TableLayoutPanel30.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100!))
         Me.TableLayoutPanel30.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30!))
-        Me.TableLayoutPanel30.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 35!))
+        Me.TableLayoutPanel30.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 37!))
         Me.TableLayoutPanel30.Controls.Add(Me.PROizV19, 3, 2)
         Me.TableLayoutPanel30.Controls.Add(Me.txtOPTICsn3, 2, 2)
         Me.TableLayoutPanel30.Controls.Add(Me.PROizV18, 3, 1)
@@ -2961,14 +2961,14 @@ Partial Class frmComputers
         Me.TableLayoutPanel30.SetColumnSpan(Me.PROizV19, 2)
         Me.PROizV19.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PROizV19.FormattingEnabled = true
-        Me.PROizV19.Location = New System.Drawing.Point(505, 57)
+        Me.PROizV19.Location = New System.Drawing.Point(504, 57)
         Me.PROizV19.Name = "PROizV19"
-        Me.PROizV19.Size = New System.Drawing.Size(159, 21)
+        Me.PROizV19.Size = New System.Drawing.Size(160, 21)
         Me.PROizV19.TabIndex = 23
         '
         'txtOPTICsn3
         '
-        Me.txtOPTICsn3.Location = New System.Drawing.Point(405, 57)
+        Me.txtOPTICsn3.Location = New System.Drawing.Point(404, 57)
         Me.txtOPTICsn3.Name = "txtOPTICsn3"
         Me.txtOPTICsn3.Size = New System.Drawing.Size(94, 20)
         Me.txtOPTICsn3.TabIndex = 22
@@ -2980,9 +2980,9 @@ Partial Class frmComputers
         Me.TableLayoutPanel30.SetColumnSpan(Me.PROizV18, 2)
         Me.PROizV18.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PROizV18.FormattingEnabled = true
-        Me.PROizV18.Location = New System.Drawing.Point(505, 30)
+        Me.PROizV18.Location = New System.Drawing.Point(504, 30)
         Me.PROizV18.Name = "PROizV18"
-        Me.PROizV18.Size = New System.Drawing.Size(159, 21)
+        Me.PROizV18.Size = New System.Drawing.Size(160, 21)
         Me.PROizV18.TabIndex = 19
         '
         'cmbOPTIC1
@@ -2993,7 +2993,7 @@ Partial Class frmComputers
         Me.cmbOPTIC1.FormattingEnabled = true
         Me.cmbOPTIC1.Location = New System.Drawing.Point(3, 3)
         Me.cmbOPTIC1.Name = "cmbOPTIC1"
-        Me.cmbOPTIC1.Size = New System.Drawing.Size(296, 21)
+        Me.cmbOPTIC1.Size = New System.Drawing.Size(295, 21)
         Me.cmbOPTIC1.TabIndex = 12
         '
         'PROizV17
@@ -3002,7 +3002,7 @@ Partial Class frmComputers
         Me.PROizV17.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.PROizV17.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PROizV17.FormattingEnabled = true
-        Me.PROizV17.Location = New System.Drawing.Point(505, 3)
+        Me.PROizV17.Location = New System.Drawing.Point(504, 3)
         Me.PROizV17.Name = "PROizV17"
         Me.PROizV17.Size = New System.Drawing.Size(123, 21)
         Me.PROizV17.TabIndex = 15
@@ -3015,19 +3015,19 @@ Partial Class frmComputers
         Me.cmbOPTIC2.FormattingEnabled = true
         Me.cmbOPTIC2.Location = New System.Drawing.Point(3, 30)
         Me.cmbOPTIC2.Name = "cmbOPTIC2"
-        Me.cmbOPTIC2.Size = New System.Drawing.Size(296, 21)
+        Me.cmbOPTIC2.Size = New System.Drawing.Size(295, 21)
         Me.cmbOPTIC2.TabIndex = 16
         '
         'txtOPTICsn2
         '
-        Me.txtOPTICsn2.Location = New System.Drawing.Point(405, 30)
+        Me.txtOPTICsn2.Location = New System.Drawing.Point(404, 30)
         Me.txtOPTICsn2.Name = "txtOPTICsn2"
         Me.txtOPTICsn2.Size = New System.Drawing.Size(94, 20)
         Me.txtOPTICsn2.TabIndex = 18
         '
         'txtOPTICs3
         '
-        Me.txtOPTICs3.Location = New System.Drawing.Point(305, 57)
+        Me.txtOPTICs3.Location = New System.Drawing.Point(304, 57)
         Me.txtOPTICs3.Name = "txtOPTICs3"
         Me.txtOPTICs3.Size = New System.Drawing.Size(94, 20)
         Me.txtOPTICs3.TabIndex = 21
@@ -3040,26 +3040,26 @@ Partial Class frmComputers
         Me.cmbOPTIC3.FormattingEnabled = true
         Me.cmbOPTIC3.Location = New System.Drawing.Point(3, 57)
         Me.cmbOPTIC3.Name = "cmbOPTIC3"
-        Me.cmbOPTIC3.Size = New System.Drawing.Size(296, 21)
+        Me.cmbOPTIC3.Size = New System.Drawing.Size(295, 21)
         Me.cmbOPTIC3.TabIndex = 20
         '
         'txtOPTICsn1
         '
-        Me.txtOPTICsn1.Location = New System.Drawing.Point(405, 3)
+        Me.txtOPTICsn1.Location = New System.Drawing.Point(404, 3)
         Me.txtOPTICsn1.Name = "txtOPTICsn1"
         Me.txtOPTICsn1.Size = New System.Drawing.Size(94, 20)
         Me.txtOPTICsn1.TabIndex = 14
         '
         'txtOPTICs1
         '
-        Me.txtOPTICs1.Location = New System.Drawing.Point(305, 3)
+        Me.txtOPTICs1.Location = New System.Drawing.Point(304, 3)
         Me.txtOPTICs1.Name = "txtOPTICs1"
         Me.txtOPTICs1.Size = New System.Drawing.Size(94, 20)
         Me.txtOPTICs1.TabIndex = 13
         '
         'txtOPTICs2
         '
-        Me.txtOPTICs2.Location = New System.Drawing.Point(305, 30)
+        Me.txtOPTICs2.Location = New System.Drawing.Point(304, 30)
         Me.txtOPTICs2.Name = "txtOPTICs2"
         Me.txtOPTICs2.Size = New System.Drawing.Size(94, 20)
         Me.txtOPTICs2.TabIndex = 17
@@ -3069,7 +3069,7 @@ Partial Class frmComputers
         Me.ToolStrip12.Dock = System.Windows.Forms.DockStyle.None
         Me.ToolStrip12.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
         Me.ToolStrip12.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.bOpticalPlus})
-        Me.ToolStrip12.Location = New System.Drawing.Point(631, 0)
+        Me.ToolStrip12.Location = New System.Drawing.Point(630, 0)
         Me.ToolStrip12.Name = "ToolStrip12"
         Me.ToolStrip12.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
         Me.ToolStrip12.Size = New System.Drawing.Size(26, 25)
@@ -3106,7 +3106,7 @@ Partial Class frmComputers
         Me.TableLayoutPanel31.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100!))
         Me.TableLayoutPanel31.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100!))
         Me.TableLayoutPanel31.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30!))
-        Me.TableLayoutPanel31.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 35!))
+        Me.TableLayoutPanel31.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 37!))
         Me.TableLayoutPanel31.Controls.Add(Me.PROizV21, 3, 1)
         Me.TableLayoutPanel31.Controls.Add(Me.txtNETmac2, 2, 1)
         Me.TableLayoutPanel31.Controls.Add(Me.PROizV20, 3, 0)
@@ -3132,14 +3132,14 @@ Partial Class frmComputers
         Me.TableLayoutPanel31.SetColumnSpan(Me.PROizV21, 2)
         Me.PROizV21.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PROizV21.FormattingEnabled = true
-        Me.PROizV21.Location = New System.Drawing.Point(505, 30)
+        Me.PROizV21.Location = New System.Drawing.Point(504, 30)
         Me.PROizV21.Name = "PROizV21"
-        Me.PROizV21.Size = New System.Drawing.Size(159, 21)
+        Me.PROizV21.Size = New System.Drawing.Size(160, 21)
         Me.PROizV21.TabIndex = 15
         '
         'txtNETmac2
         '
-        Me.txtNETmac2.Location = New System.Drawing.Point(405, 30)
+        Me.txtNETmac2.Location = New System.Drawing.Point(404, 30)
         Me.txtNETmac2.Name = "txtNETmac2"
         Me.txtNETmac2.Size = New System.Drawing.Size(94, 20)
         Me.txtNETmac2.TabIndex = 14
@@ -3150,7 +3150,7 @@ Partial Class frmComputers
         Me.PROizV20.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.PROizV20.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PROizV20.FormattingEnabled = true
-        Me.PROizV20.Location = New System.Drawing.Point(505, 3)
+        Me.PROizV20.Location = New System.Drawing.Point(504, 3)
         Me.PROizV20.Name = "PROizV20"
         Me.PROizV20.Size = New System.Drawing.Size(123, 21)
         Me.PROizV20.TabIndex = 11
@@ -3163,7 +3163,7 @@ Partial Class frmComputers
         Me.cmbNET1.FormattingEnabled = true
         Me.cmbNET1.Location = New System.Drawing.Point(3, 3)
         Me.cmbNET1.Name = "cmbNET1"
-        Me.cmbNET1.Size = New System.Drawing.Size(296, 21)
+        Me.cmbNET1.Size = New System.Drawing.Size(295, 21)
         Me.cmbNET1.TabIndex = 8
         '
         'cmbNET2
@@ -3174,26 +3174,26 @@ Partial Class frmComputers
         Me.cmbNET2.FormattingEnabled = true
         Me.cmbNET2.Location = New System.Drawing.Point(3, 30)
         Me.cmbNET2.Name = "cmbNET2"
-        Me.cmbNET2.Size = New System.Drawing.Size(296, 21)
+        Me.cmbNET2.Size = New System.Drawing.Size(295, 21)
         Me.cmbNET2.TabIndex = 12
         '
         'txtNETmac1
         '
-        Me.txtNETmac1.Location = New System.Drawing.Point(405, 3)
+        Me.txtNETmac1.Location = New System.Drawing.Point(404, 3)
         Me.txtNETmac1.Name = "txtNETmac1"
         Me.txtNETmac1.Size = New System.Drawing.Size(94, 20)
         Me.txtNETmac1.TabIndex = 10
         '
         'txtNETip2
         '
-        Me.txtNETip2.Location = New System.Drawing.Point(305, 30)
+        Me.txtNETip2.Location = New System.Drawing.Point(304, 30)
         Me.txtNETip2.Name = "txtNETip2"
         Me.txtNETip2.Size = New System.Drawing.Size(94, 20)
         Me.txtNETip2.TabIndex = 13
         '
         'txtNETip1
         '
-        Me.txtNETip1.Location = New System.Drawing.Point(305, 3)
+        Me.txtNETip1.Location = New System.Drawing.Point(304, 3)
         Me.txtNETip1.Name = "txtNETip1"
         Me.txtNETip1.Size = New System.Drawing.Size(94, 20)
         Me.txtNETip1.TabIndex = 9
@@ -3203,7 +3203,7 @@ Partial Class frmComputers
         Me.ToolStrip13.Dock = System.Windows.Forms.DockStyle.None
         Me.ToolStrip13.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
         Me.ToolStrip13.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.bNetPlus})
-        Me.ToolStrip13.Location = New System.Drawing.Point(631, 0)
+        Me.ToolStrip13.Location = New System.Drawing.Point(630, 0)
         Me.ToolStrip13.Name = "ToolStrip13"
         Me.ToolStrip13.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
         Me.ToolStrip13.Size = New System.Drawing.Size(26, 25)
@@ -3240,7 +3240,7 @@ Partial Class frmComputers
         Me.TableLayoutPanel32.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel32.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel32.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.83683!))
-        Me.TableLayoutPanel32.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 35!))
+        Me.TableLayoutPanel32.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 39!))
         Me.TableLayoutPanel32.Controls.Add(Me.PROizV22, 3, 0)
         Me.TableLayoutPanel32.Controls.Add(Me.cmbFDD, 0, 0)
         Me.TableLayoutPanel32.Controls.Add(Me.txtSN, 1, 0)
@@ -3259,9 +3259,9 @@ Partial Class frmComputers
         Me.TableLayoutPanel32.SetColumnSpan(Me.PROizV22, 2)
         Me.PROizV22.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PROizV22.FormattingEnabled = true
-        Me.PROizV22.Location = New System.Drawing.Point(506, 3)
+        Me.PROizV22.Location = New System.Drawing.Point(503, 3)
         Me.PROizV22.Name = "PROizV22"
-        Me.PROizV22.Size = New System.Drawing.Size(158, 21)
+        Me.PROizV22.Size = New System.Drawing.Size(161, 21)
         Me.PROizV22.TabIndex = 6
         '
         'cmbFDD
@@ -3272,13 +3272,13 @@ Partial Class frmComputers
         Me.cmbFDD.FormattingEnabled = true
         Me.cmbFDD.Location = New System.Drawing.Point(3, 3)
         Me.cmbFDD.Name = "cmbFDD"
-        Me.cmbFDD.Size = New System.Drawing.Size(297, 21)
+        Me.cmbFDD.Size = New System.Drawing.Size(294, 21)
         Me.cmbFDD.TabIndex = 4
         '
         'txtSN
         '
         Me.TableLayoutPanel32.SetColumnSpan(Me.txtSN, 2)
-        Me.txtSN.Location = New System.Drawing.Point(306, 3)
+        Me.txtSN.Location = New System.Drawing.Point(303, 3)
         Me.txtSN.Name = "txtSN"
         Me.txtSN.Size = New System.Drawing.Size(194, 20)
         Me.txtSN.TabIndex = 5
@@ -3304,7 +3304,7 @@ Partial Class frmComputers
         Me.TableLayoutPanel33.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel33.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel33.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.83683!))
-        Me.TableLayoutPanel33.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 35!))
+        Me.TableLayoutPanel33.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 39!))
         Me.TableLayoutPanel33.Controls.Add(Me.PROizV23, 3, 0)
         Me.TableLayoutPanel33.Controls.Add(Me.cmbCreader, 0, 0)
         Me.TableLayoutPanel33.Controls.Add(Me.txtCreader1, 1, 0)
@@ -3323,9 +3323,9 @@ Partial Class frmComputers
         Me.TableLayoutPanel33.SetColumnSpan(Me.PROizV23, 2)
         Me.PROizV23.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PROizV23.FormattingEnabled = true
-        Me.PROizV23.Location = New System.Drawing.Point(506, 3)
+        Me.PROizV23.Location = New System.Drawing.Point(503, 3)
         Me.PROizV23.Name = "PROizV23"
-        Me.PROizV23.Size = New System.Drawing.Size(158, 21)
+        Me.PROizV23.Size = New System.Drawing.Size(161, 21)
         Me.PROizV23.TabIndex = 6
         '
         'cmbCreader
@@ -3336,13 +3336,13 @@ Partial Class frmComputers
         Me.cmbCreader.FormattingEnabled = true
         Me.cmbCreader.Location = New System.Drawing.Point(3, 3)
         Me.cmbCreader.Name = "cmbCreader"
-        Me.cmbCreader.Size = New System.Drawing.Size(297, 21)
+        Me.cmbCreader.Size = New System.Drawing.Size(294, 21)
         Me.cmbCreader.TabIndex = 4
         '
         'txtCreader1
         '
         Me.TableLayoutPanel33.SetColumnSpan(Me.txtCreader1, 2)
-        Me.txtCreader1.Location = New System.Drawing.Point(306, 3)
+        Me.txtCreader1.Location = New System.Drawing.Point(303, 3)
         Me.txtCreader1.Name = "txtCreader1"
         Me.txtCreader1.Size = New System.Drawing.Size(194, 20)
         Me.txtCreader1.TabIndex = 5
@@ -3368,7 +3368,7 @@ Partial Class frmComputers
         Me.TableLayoutPanel34.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel34.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel34.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.00095!))
-        Me.TableLayoutPanel34.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 35!))
+        Me.TableLayoutPanel34.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 39!))
         Me.TableLayoutPanel34.Controls.Add(Me.PROizV24, 3, 0)
         Me.TableLayoutPanel34.Controls.Add(Me.cmbModem, 0, 0)
         Me.TableLayoutPanel34.Controls.Add(Me.txtModemSN, 1, 0)
@@ -3387,9 +3387,9 @@ Partial Class frmComputers
         Me.TableLayoutPanel34.SetColumnSpan(Me.PROizV24, 2)
         Me.PROizV24.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PROizV24.FormattingEnabled = true
-        Me.PROizV24.Location = New System.Drawing.Point(505, 3)
+        Me.PROizV24.Location = New System.Drawing.Point(502, 3)
         Me.PROizV24.Name = "PROizV24"
-        Me.PROizV24.Size = New System.Drawing.Size(159, 21)
+        Me.PROizV24.Size = New System.Drawing.Size(162, 21)
         Me.PROizV24.TabIndex = 6
         '
         'cmbModem
@@ -3400,13 +3400,13 @@ Partial Class frmComputers
         Me.cmbModem.FormattingEnabled = true
         Me.cmbModem.Location = New System.Drawing.Point(3, 3)
         Me.cmbModem.Name = "cmbModem"
-        Me.cmbModem.Size = New System.Drawing.Size(296, 21)
+        Me.cmbModem.Size = New System.Drawing.Size(293, 21)
         Me.cmbModem.TabIndex = 4
         '
         'txtModemSN
         '
         Me.TableLayoutPanel34.SetColumnSpan(Me.txtModemSN, 2)
-        Me.txtModemSN.Location = New System.Drawing.Point(305, 3)
+        Me.txtModemSN.Location = New System.Drawing.Point(302, 3)
         Me.txtModemSN.Name = "txtModemSN"
         Me.txtModemSN.Size = New System.Drawing.Size(194, 20)
         Me.txtModemSN.TabIndex = 5
@@ -3432,7 +3432,7 @@ Partial Class frmComputers
         Me.TableLayoutPanel35.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel35.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel35.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.67384!))
-        Me.TableLayoutPanel35.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 35!))
+        Me.TableLayoutPanel35.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 39!))
         Me.TableLayoutPanel35.Controls.Add(Me.cmbCase, 0, 0)
         Me.TableLayoutPanel35.Controls.Add(Me.txtCase1, 1, 0)
         Me.TableLayoutPanel35.Controls.Add(Me.PROizV25, 3, 0)
@@ -3452,13 +3452,13 @@ Partial Class frmComputers
         Me.cmbCase.FormattingEnabled = true
         Me.cmbCase.Location = New System.Drawing.Point(3, 3)
         Me.cmbCase.Name = "cmbCase"
-        Me.cmbCase.Size = New System.Drawing.Size(297, 21)
+        Me.cmbCase.Size = New System.Drawing.Size(294, 21)
         Me.cmbCase.TabIndex = 4
         '
         'txtCase1
         '
         Me.TableLayoutPanel35.SetColumnSpan(Me.txtCase1, 2)
-        Me.txtCase1.Location = New System.Drawing.Point(306, 3)
+        Me.txtCase1.Location = New System.Drawing.Point(303, 3)
         Me.txtCase1.Name = "txtCase1"
         Me.txtCase1.Size = New System.Drawing.Size(194, 20)
         Me.txtCase1.TabIndex = 5
@@ -3470,9 +3470,9 @@ Partial Class frmComputers
         Me.TableLayoutPanel35.SetColumnSpan(Me.PROizV25, 2)
         Me.PROizV25.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PROizV25.FormattingEnabled = true
-        Me.PROizV25.Location = New System.Drawing.Point(506, 3)
+        Me.PROizV25.Location = New System.Drawing.Point(503, 3)
         Me.PROizV25.Name = "PROizV25"
-        Me.PROizV25.Size = New System.Drawing.Size(158, 21)
+        Me.PROizV25.Size = New System.Drawing.Size(161, 21)
         Me.PROizV25.TabIndex = 6
         '
         'gbBP
@@ -3496,7 +3496,7 @@ Partial Class frmComputers
         Me.TableLayoutPanel36.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel36.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel36.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.83683!))
-        Me.TableLayoutPanel36.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 35!))
+        Me.TableLayoutPanel36.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 39!))
         Me.TableLayoutPanel36.Controls.Add(Me.cmbBP, 0, 0)
         Me.TableLayoutPanel36.Controls.Add(Me.txtBP1, 1, 0)
         Me.TableLayoutPanel36.Controls.Add(Me.PROizV26, 3, 0)
@@ -3516,13 +3516,13 @@ Partial Class frmComputers
         Me.cmbBP.FormattingEnabled = true
         Me.cmbBP.Location = New System.Drawing.Point(3, 3)
         Me.cmbBP.Name = "cmbBP"
-        Me.cmbBP.Size = New System.Drawing.Size(297, 21)
+        Me.cmbBP.Size = New System.Drawing.Size(294, 21)
         Me.cmbBP.TabIndex = 4
         '
         'txtBP1
         '
         Me.TableLayoutPanel36.SetColumnSpan(Me.txtBP1, 2)
-        Me.txtBP1.Location = New System.Drawing.Point(306, 3)
+        Me.txtBP1.Location = New System.Drawing.Point(303, 3)
         Me.txtBP1.Name = "txtBP1"
         Me.txtBP1.Size = New System.Drawing.Size(194, 20)
         Me.txtBP1.TabIndex = 5
@@ -3534,9 +3534,9 @@ Partial Class frmComputers
         Me.TableLayoutPanel36.SetColumnSpan(Me.PROizV26, 2)
         Me.PROizV26.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PROizV26.FormattingEnabled = true
-        Me.PROizV26.Location = New System.Drawing.Point(506, 3)
+        Me.PROizV26.Location = New System.Drawing.Point(503, 3)
         Me.PROizV26.Name = "PROizV26"
-        Me.PROizV26.Size = New System.Drawing.Size(158, 21)
+        Me.PROizV26.Size = New System.Drawing.Size(161, 21)
         Me.PROizV26.TabIndex = 6
         '
         'gbUSB
@@ -3559,7 +3559,7 @@ Partial Class frmComputers
         Me.TableLayoutPanel37.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel37.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel37.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.83683!))
-        Me.TableLayoutPanel37.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 35!))
+        Me.TableLayoutPanel37.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 39!))
         Me.TableLayoutPanel37.Controls.Add(Me.cmbUSB, 0, 0)
         Me.TableLayoutPanel37.Controls.Add(Me.txtUSBSN, 1, 0)
         Me.TableLayoutPanel37.Controls.Add(Me.PROizV41, 3, 0)
@@ -3579,13 +3579,13 @@ Partial Class frmComputers
         Me.cmbUSB.FormattingEnabled = true
         Me.cmbUSB.Location = New System.Drawing.Point(3, 3)
         Me.cmbUSB.Name = "cmbUSB"
-        Me.cmbUSB.Size = New System.Drawing.Size(297, 21)
+        Me.cmbUSB.Size = New System.Drawing.Size(294, 21)
         Me.cmbUSB.TabIndex = 3
         '
         'txtUSBSN
         '
         Me.TableLayoutPanel37.SetColumnSpan(Me.txtUSBSN, 2)
-        Me.txtUSBSN.Location = New System.Drawing.Point(306, 3)
+        Me.txtUSBSN.Location = New System.Drawing.Point(303, 3)
         Me.txtUSBSN.Name = "txtUSBSN"
         Me.txtUSBSN.Size = New System.Drawing.Size(194, 20)
         Me.txtUSBSN.TabIndex = 4
@@ -3597,9 +3597,9 @@ Partial Class frmComputers
         Me.TableLayoutPanel37.SetColumnSpan(Me.PROizV41, 2)
         Me.PROizV41.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PROizV41.FormattingEnabled = true
-        Me.PROizV41.Location = New System.Drawing.Point(506, 3)
+        Me.PROizV41.Location = New System.Drawing.Point(503, 3)
         Me.PROizV41.Name = "PROizV41"
-        Me.PROizV41.Size = New System.Drawing.Size(158, 21)
+        Me.PROizV41.Size = New System.Drawing.Size(161, 21)
         Me.PROizV41.TabIndex = 5
         '
         'gbPCI
@@ -3623,7 +3623,7 @@ Partial Class frmComputers
         Me.TableLayoutPanel38.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel38.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel38.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.00095!))
-        Me.TableLayoutPanel38.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 35!))
+        Me.TableLayoutPanel38.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 39!))
         Me.TableLayoutPanel38.Controls.Add(Me.cmbPCI, 0, 0)
         Me.TableLayoutPanel38.Controls.Add(Me.txtSNPCI, 1, 0)
         Me.TableLayoutPanel38.Controls.Add(Me.PROizV42, 3, 0)
@@ -3643,13 +3643,13 @@ Partial Class frmComputers
         Me.cmbPCI.FormattingEnabled = true
         Me.cmbPCI.Location = New System.Drawing.Point(3, 3)
         Me.cmbPCI.Name = "cmbPCI"
-        Me.cmbPCI.Size = New System.Drawing.Size(296, 21)
+        Me.cmbPCI.Size = New System.Drawing.Size(293, 21)
         Me.cmbPCI.TabIndex = 3
         '
         'txtSNPCI
         '
         Me.TableLayoutPanel38.SetColumnSpan(Me.txtSNPCI, 2)
-        Me.txtSNPCI.Location = New System.Drawing.Point(305, 3)
+        Me.txtSNPCI.Location = New System.Drawing.Point(302, 3)
         Me.txtSNPCI.Name = "txtSNPCI"
         Me.txtSNPCI.Size = New System.Drawing.Size(194, 20)
         Me.txtSNPCI.TabIndex = 4
@@ -3661,9 +3661,9 @@ Partial Class frmComputers
         Me.TableLayoutPanel38.SetColumnSpan(Me.PROizV42, 2)
         Me.PROizV42.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PROizV42.FormattingEnabled = true
-        Me.PROizV42.Location = New System.Drawing.Point(505, 3)
+        Me.PROizV42.Location = New System.Drawing.Point(502, 3)
         Me.PROizV42.Name = "PROizV42"
-        Me.PROizV42.Size = New System.Drawing.Size(159, 21)
+        Me.PROizV42.Size = New System.Drawing.Size(162, 21)
         Me.PROizV42.TabIndex = 5
         '
         'gbSBP
@@ -3686,7 +3686,7 @@ Partial Class frmComputers
         Me.TableLayoutPanel39.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel39.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel39.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.16336!))
-        Me.TableLayoutPanel39.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 35!))
+        Me.TableLayoutPanel39.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 39!))
         Me.TableLayoutPanel39.Controls.Add(Me.txtModSB, 0, 0)
         Me.TableLayoutPanel39.Controls.Add(Me.txtSNSB, 1, 0)
         Me.TableLayoutPanel39.Controls.Add(Me.PROizV27, 3, 0)
@@ -3703,13 +3703,13 @@ Partial Class frmComputers
         Me.txtModSB.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtModSB.Location = New System.Drawing.Point(3, 3)
         Me.txtModSB.Name = "txtModSB"
-        Me.txtModSB.Size = New System.Drawing.Size(295, 20)
+        Me.txtModSB.Size = New System.Drawing.Size(292, 20)
         Me.txtModSB.TabIndex = 3
         '
         'txtSNSB
         '
         Me.TableLayoutPanel39.SetColumnSpan(Me.txtSNSB, 2)
-        Me.txtSNSB.Location = New System.Drawing.Point(304, 3)
+        Me.txtSNSB.Location = New System.Drawing.Point(301, 3)
         Me.txtSNSB.Name = "txtSNSB"
         Me.txtSNSB.Size = New System.Drawing.Size(194, 20)
         Me.txtSNSB.TabIndex = 4
@@ -3721,9 +3721,9 @@ Partial Class frmComputers
         Me.TableLayoutPanel39.SetColumnSpan(Me.PROizV27, 2)
         Me.PROizV27.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PROizV27.FormattingEnabled = true
-        Me.PROizV27.Location = New System.Drawing.Point(504, 3)
+        Me.PROizV27.Location = New System.Drawing.Point(501, 3)
         Me.PROizV27.Name = "PROizV27"
-        Me.PROizV27.Size = New System.Drawing.Size(160, 21)
+        Me.PROizV27.Size = New System.Drawing.Size(163, 21)
         Me.PROizV27.TabIndex = 5
         '
         'TabPage3

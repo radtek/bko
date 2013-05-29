@@ -81,44 +81,29 @@ Public Class frmLogin
         rs.Close()
         rs = Nothing
 
-        If zcn = 0 Then
-            sSQL = "select * from T_User"
-            rs = New Recordset
-            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+        Select Case zcn
 
-            With rs
-                .AddNew()
-                .Fields("User_ID").Value = "ADMINISTRATOR"
-                .Fields("Password").Value = "SWY\X"
-                .Fields("Name").Value = "ADMINISTRATOR"
-                .Fields("Level").Value = "Admin"
+            Case 0
 
-                .Update()
-            End With
-            rs.Close()
-            rs = Nothing
+                sSQL = "select User_ID,Password,Name,Level from T_User"
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-        End If
+                With rs
+                    .AddNew()
+                    .Fields("User_ID").Value = "ADMINISTRATOR"
+                    .Fields("Password").Value = "SWY\X"
+                    .Fields("Name").Value = "ADMINISTRATOR"
+                    .Fields("Level").Value = "Admin"
 
+                    .Update()
+                End With
+                rs.Close()
+                rs = Nothing
 
-        rs = New Recordset
-        sSQL = "select * from T_User WHERE Name <> ' '  ORDER BY Name"
+        End Select
 
-        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
-        With rs
-            .MoveFirst()
-            Do While Not .EOF
-
-                cmbUser.Items.Add(.Fields("Name").Value)
-
-                .MoveNext()
-                'DoEvents
-            Loop
-        End With
-        rs.Close()
-        rs = Nothing
-
+        FillComboNET(cmbUser, "Name", "T_User", "", False, True)
 
         rs = New Recordset
         rs.Open("UPDATE spr_other SET C='0' WHERE C=''", DB7, CursorTypeEnum.adOpenDynamic,
@@ -188,25 +173,28 @@ Public Class frmLogin
         rscount.Close()
         rscount = Nothing
 
-        If QWERT <= 0 Then
+        Select Case QWERT
 
-            Dim rs25 As Recordset
-            rs25 = New Recordset
-            rs25.Open("SELECT * FROM CONFIGURE", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+            Case 0
 
-            With rs25
-                .AddNew()
-                .Fields("ORG").Value = "BKO.SHATKI.INFO"
-                .Fields("SISADM").Value = "SISADM"
-                .Fields("Name_Prog").Value = "BKO.NET"
-                .Fields("Nr").Value = "Yes"
-                .Fields("access").Value = "1.7.3.8"
-                .Update()
-            End With
-            rs25.Close()
-            rs25 = Nothing
+                Dim rs25 As Recordset
+                rs25 = New Recordset
+                rs25.Open("SELECT * FROM CONFIGURE", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-        End If
+                With rs25
+                    .AddNew()
+                    .Fields("ORG").Value = "BKO.SHATKI.INFO"
+                    .Fields("SISADM").Value = "SISADM"
+                    .Fields("Name_Prog").Value = "BKO.NET"
+                    .Fields("Nr").Value = "Yes"
+                    .Fields("access").Value = "1.7.3.8"
+                    .Update()
+                End With
+                rs25.Close()
+                rs25 = Nothing
+
+        End Select
+
 
         Dim rs As Recordset
         rs = New Recordset
@@ -217,7 +205,7 @@ Public Class frmLogin
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
         rs = New Recordset
-        rs.Open("select * from CONFIGURE", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+        rs.Open("select access from CONFIGURE", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
 
@@ -234,30 +222,38 @@ Public Class frmLogin
         'ПРОВЕРКА ВЕРСИИ БД
         '######################################
 
-        If sVERSIA < "1.7.3.8" Or sVERSIA = "1.7.4" Then
 
-            MsgBox(LNGIniFile.GetString("frmLogin", "MSG1", "Версия базы данных не является эталонной") & vbCrLf & "Вносим изменения в базу...", MsgBoxStyle.Information, "BKO.NET - " & tVER)
+        Select Case sVERSIA
 
-            _DBALTER = True
+            Case "1.7.3.8"
 
-            'Вносим изменения в базу
-            Call ALTER_DB()
 
-            If _DBALTER = True Then
+            Case Else
 
-                MsgBox("Внесение изменений закончилось неудачей, воспользуйтесь конвертором или скриптами", MsgBoxStyle.Critical, "BKO.NET - " & tVER)
+                MsgBox(LNGIniFile.GetString("frmLogin", "MSG1", "Версия базы данных не является эталонной") & vbCrLf & "Вносим изменения в базу...", MsgBoxStyle.Information, "BKO.NET - " & tVER)
 
-                End
+                _DBALTER = True
 
-            Else
+                'Вносим изменения в базу
+                Call ALTER_DB()
 
-                GoTo START
+                Select Case _DBALTER
 
-            End If
+                    Case True
 
-        Else
+                        MsgBox("Внесение изменений закончилось неудачей, воспользуйтесь конвертором или скриптами", MsgBoxStyle.Critical, "BKO.NET - " & tVER)
 
-        End If
+                        End
+
+                    Case Else
+
+                        GoTo START
+
+                End Select
+
+
+        End Select
+
         '######################################
         'ЗАВЕРШЕНИЕ ПРОВЕРКИ ВЕРСИИ БД
         '######################################
@@ -281,10 +277,13 @@ Public Class frmLogin
         T_User.Close()
         T_User = Nothing
 
-        If sCOUNT = 0 Then
-            MsgBox("This User is not valid", MsgBoxStyle.Critical, "Error!!!")
-            Exit Sub
-        End If
+        Select Case sCOUNT
+            Case 0
+                MsgBox("This User is not valid", MsgBoxStyle.Critical, "Error!!!")
+                Exit Sub
+
+        End Select
+
 
         T_User = New Recordset
         T_User.Open("SELECT * FROM T_User where Name ='" & cmbUser.Text & "'", DB7, CursorTypeEnum.adOpenDynamic,
@@ -394,6 +393,7 @@ Public Class frmLogin
                         frmMain.ToolStripButton1.Enabled = True
                         frmMain.NewToolStripButton.Enabled = True
 
+                        Me.BeginInvoke(New MethodInvoker(AddressOf frmMain.LOAD_COMPONENT))
 
                         sRelogin = False
                         'Какой модуль запускать
@@ -443,6 +443,9 @@ Public Class frmLogin
 
                     '  T_User.Close()
                     '  T_User = Nothing
+
+
+
                     Me.Close()
 
                 Else

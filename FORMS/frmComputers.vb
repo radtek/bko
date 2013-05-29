@@ -4,7 +4,6 @@ Imports Microsoft.Office.Interop.Word
 
 Public Class frmComputers
     Private m_SortingColumn As ColumnHeader
-
     Private BTN As Decimal
     Public sPREF As String
     Public sCOUNT As Decimal
@@ -25,10 +24,7 @@ Public Class frmComputers
     Public sNET As Integer = 1
     Public sMonitor As Integer = 1
     Public sPrinter As Integer = 1
-
     Public TIP_TO As String
-
-
     Public OneStart As Decimal = 0
 
     'Public Sub New()
@@ -37,20 +33,16 @@ Public Class frmComputers
 
     Private Sub frmComputers_Activated(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Activated
 
-
-        If uLevelTehAdd = False And uLevel <> "Admin" Then
-
-        Else
-            frmMain.SaveInfTehButton.Enabled = True
-            frmMain.ToolStripDropDownButton1.Enabled = True
-        End If
-
         If uLevelTehAdd = False And uLevel <> "Admin" Then
             frmMain.ToolStripDropDownButton1.Enabled = False
             Me.CopyToolStripMenuItem.Enabled = False
             Me.addFoldertoBranch.Enabled = False
             Me.UpdateToolStripMenuItem.Enabled = False
+        Else
+            frmMain.SaveInfTehButton.Enabled = True
+            frmMain.ToolStripDropDownButton1.Enabled = True
         End If
+
     End Sub
 
     Private Sub frmComputers_FormClosed(ByVal sender As Object, ByVal e As FormClosedEventArgs) Handles Me.FormClosed
@@ -101,7 +93,6 @@ Public Class frmComputers
         uname = objIniFile.GetString("General", "branche", "")
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
-
         'Выбираем филиал если он выбран, если нет то "Все"
         If Len(uname) = 0 Then
             treebranche.Text = LNGIniFile.GetString("frmComputers", "MSG53", "Все")
@@ -126,8 +117,7 @@ Public Class frmComputers
         'Справочники
         Me.BeginInvoke(New MethodInvoker(AddressOf LoadSPR))
 
-        System.Windows.Forms.Application.DoEvents()
-
+        ' System.Windows.Forms.Application.DoEvents()
 
         'Загружаем иконки
         Me.BeginInvoke(New MethodInvoker(AddressOf Load_ICONS))
@@ -138,12 +128,10 @@ Public Class frmComputers
         'Подгружаем язык
         Me.BeginInvoke(New MethodInvoker(AddressOf frmComputers_Lang))
 
-
-
-
         uname = objIniFile.GetString("General", "RAZDEL", "0")
 
         Dim langfile As New IniFile(sLANGPATH)
+
         Select Case uname
 
             Case "0"
@@ -265,7 +253,6 @@ Public Class frmComputers
                         sSTAB3.Visible = True
 
                 End Select
-
 
         End Select
 
@@ -482,6 +469,13 @@ Public Class frmComputers
         On Error GoTo err_
         Me.Cursor = Cursors.WaitCursor
 
+        If DATAB = False Then Exit Sub
+
+        Me.WindowState = FormWindowState.Maximized
+        Call RESIZER()
+        System.Windows.Forms.Application.DoEvents()
+
+
         'Подгружаем конки, язык, справочники...
         Me.BeginInvoke(New MethodInvoker(AddressOf PRELOAD_FORM))
 
@@ -491,15 +485,13 @@ Public Class frmComputers
         'Статистика
         Me.BeginInvoke(New MethodInvoker(AddressOf STAT_INF))
 
+        'Дерево
+
         System.Windows.Forms.Application.DoEvents()
-
-        If DATAB = False Then Exit Sub
-
-        Me.WindowState = FormWindowState.Maximized
 
         Me.BeginInvoke(New MethodInvoker(AddressOf R_T_LOAD))
 
-        System.Windows.Forms.Application.DoEvents()
+        'System.Windows.Forms.Application.DoEvents()
 
         Me.Cursor = Cursors.Default
 
@@ -554,7 +546,7 @@ err_:
 
             Case "C"
 
-                rs2.Open("SELECT * FROM kompy where Id = " & d(1), DB7, CursorTypeEnum.adOpenDynamic,
+                rs2.Open("SELECT kabn,filial,mesto FROM kompy where Id = " & d(1), DB7, CursorTypeEnum.adOpenDynamic,
                          LockTypeEnum.adLockBatchOptimistic)
 
                 With rs2
@@ -602,7 +594,7 @@ err_:
 
             Case "G"
 
-                rs2.Open("SELECT * FROM SPR_FILIAL where Id = " & d(1), DB7, CursorTypeEnum.adOpenDynamic,
+                rs2.Open("SELECT FILIAL FROM SPR_FILIAL where Id = " & d(1), DB7, CursorTypeEnum.adOpenDynamic,
                          LockTypeEnum.adLockBatchOptimistic)
 
                 With rs2
@@ -619,7 +611,7 @@ err_:
 
             Case "O"
 
-                rs2.Open("SELECT * FROM SPR_OTD_FILIAL where Id = " & d(1), DB7, CursorTypeEnum.adOpenDynamic,
+                rs2.Open("SELECT FILIAL,N_Otd FROM SPR_OTD_FILIAL where Id = " & d(1), DB7, CursorTypeEnum.adOpenDynamic,
                          LockTypeEnum.adLockBatchOptimistic)
 
                 With rs2
@@ -638,7 +630,7 @@ err_:
             Case "OT"
 
 
-                rs2.Open("SELECT * FROM SPR_MESTO where mestoId = " & d(1), DB7, CursorTypeEnum.adOpenDynamic,
+                rs2.Open("SELECT MESTO FROM SPR_MESTO where mestoId = " & d(1), DB7, CursorTypeEnum.adOpenDynamic,
                          LockTypeEnum.adLockBatchOptimistic)
 
                 With rs2
@@ -656,7 +648,7 @@ err_:
 
             Case "K"
 
-                rs2.Open("SELECT * FROM SPR_KAB where Id = " & d(1), DB7, CursorTypeEnum.adOpenDynamic,
+                rs2.Open("SELECT Name,N_F,N_M FROM SPR_KAB where Id = " & d(1), DB7, CursorTypeEnum.adOpenDynamic,
                          LockTypeEnum.adLockBatchOptimistic)
 
                 With rs2
@@ -1696,7 +1688,7 @@ err_:
         Dim rs1 As Recordset
         rs1 = New Recordset
 
-        rs1.Open("select * from SPR_OTD_FILIAL WHERE Filial='" & fCombo.Text & "' ORDER BY N_Otd", DB7,
+        rs1.Open("select N_Otd from SPR_OTD_FILIAL WHERE Filial='" & fCombo.Text & "' ORDER BY N_Otd", DB7,
                  CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         cmbDepartment.Items.Clear()
@@ -1728,7 +1720,7 @@ err_:
         Dim rs1 As Recordset
         rs1 = New Recordset
 
-        rs1.Open("select * from SPR_KAB WHERE N_F='" & fCombo.Text & "' AND N_M='" & dCombo.Text & "' ORDER BY Name",
+        rs1.Open("select Name from SPR_KAB WHERE N_F='" & fCombo.Text & "' AND N_M='" & dCombo.Text & "' ORDER BY Name",
                  DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
 
@@ -1823,7 +1815,7 @@ err_:
         Dim rs As Recordset
         rs = New Recordset
 
-        rs.Open("SELECT * FROM Zametki WHERE id=" & zCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+        rs.Open("SELECT Date,Master,Zametki FROM Zametki WHERE id=" & zCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
                 LockTypeEnum.adLockOptimistic)
 
         With rs
@@ -1967,7 +1959,9 @@ err_:
             .MoveFirst()
             Do While Not .EOF
 
-                If Not IsDBNull(.Fields("istochnik").Value) Then frmService_add.cmbIst.Text = .Fields("istochnik").Value _
+                If Not IsDBNull(.Fields("istochnik").Value) Then frmService_add.cmbIst.Text = .Fields("istochnik").Value
+
+                If Len(frmService_add.cmbIst.Text) = 0 Then frmService_add.cmbIst.Text = ""
                 'Источник
                 If Not IsDBNull(.Fields("Master").Value) Then frmService_add.cmbMast.Text = .Fields("Master").Value _
                 'Мастер
@@ -2038,21 +2032,24 @@ err_:
         rs1 = Nothing
 
 
-        If unam = 0 Then
-            frmService_add.Height = 535
+        Select Case unam
 
-            frmService_add.gbS.Visible = False
-            frmService_add.Height = 535
-        Else
-            Call frmserviceDesc.load_rplus(rCOUNT, frmService_add.lvRem2)
+            Case 0
+                frmService_add.Height = 535
 
-            frmService_add.gbS.Visible = True
-            frmService_add.Height = 686
+                frmService_add.gbS.Visible = False
+                frmService_add.Height = 535
 
-            frmService_add.cmbAdd.Text = LNGIniFile.GetString("frmserviceDesc", "MSG2", "Сохранить")
+            Case Else
 
+                Call frmserviceDesc.load_rplus(rCOUNT, frmService_add.lvRem2)
 
-        End If
+                frmService_add.gbS.Visible = True
+                frmService_add.Height = 686
+
+                frmService_add.cmbAdd.Text = LNGIniFile.GetString("frmserviceDesc", "MSG2", "Сохранить")
+
+        End Select
 
         frmService_add.ShowDialog(Me)
 
@@ -2162,68 +2159,75 @@ err_:
         Me.Cursor = Cursors.WaitCursor
         'On Error GoTo err_
 
-        Dim d() As String
+        If MsgBox(
+                langfile.GetString("frmComputers", "MSG23", "Вы уверены что хотите удалить") & " " &
+                lstGroups.SelectedNode.Text, MsgBoxStyle.YesNo, ProGramName) = MsgBoxResult.Yes Then
 
-        d = Split(lstGroups.SelectedNode.Tag, "|")
+            Dim d() As String
+            d = Split(lstGroups.SelectedNode.Tag, "|")
 
-        Dim sSQL As String
+            Dim sSQL As String
+            Call selectTECMesto()
 
-        Call selectTECMesto()
+            Select Case d(0)
+
+                Case "C"
+
+                Case "G"
+
+                    sSQL = "SELECT id,net_name,psevdonim FROM kompy where filial ='" & sBranch & "' and mesto=''"
+
+                    Call _
+                        SaveActivityToLogDB(
+                            langfile.GetString("frmComputers", "MSG26", "Массовое удаление техники из") & " " & sBranch)
+
+                Case "O"
+
+                    sSQL = "SELECT id,net_name,psevdonim FROM kompy where filial ='" & sBranch & "' and mesto='" &
+                           sDepartment & "' and kabn=''"
+
+                    Call _
+                        SaveActivityToLogDB(
+                            langfile.GetString("frmComputers", "MSG26", "Массовое удаление техники из") & " " & sBranch &
+                            "/" & sDepartment)
+
+                Case "K"
+
+                    sSQL = "SELECT id,net_name,psevdonim FROM kompy where filial ='" & sBranch & "' and mesto='" &
+                           sDepartment & "' AND kabn ='" & sOffice & "'"
+
+                    Call _
+                        SaveActivityToLogDB(
+                            langfile.GetString("frmComputers", "MSG26", "Массовое удаление техники из") & " " & sBranch &
+                            "/" & sDepartment & "/" & sOffice)
+
+            End Select
+
+            Dim rs As Recordset
+            rs = New Recordset
+
+            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
+            With rs
+                .MoveFirst()
+                Do While Not .EOF
+
+                    REMOVE_TEHN(.Fields("id").Value)
+
+                    .MoveNext()
+                Loop
+            End With
+            rs.Close()
+            rs = Nothing
+
+            Me.BeginInvoke(New MethodInvoker(AddressOf R_T_LOAD))
+            Me.BeginInvoke(New MethodInvoker(AddressOf STAT_INF))
+
+        Else
 
 
-        Select Case d(0)
+        End If
 
-            Case "C"
-
-            Case "G"
-
-                sSQL = "SELECT id,net_name,psevdonim FROM kompy where filial ='" & sBranch & "' and mesto=''"
-
-                Call _
-                    SaveActivityToLogDB(
-                        langfile.GetString("frmComputers", "MSG26", "Массовое удаление техники из") & " " & sBranch)
-
-            Case "O"
-
-                sSQL = "SELECT id,net_name,psevdonim FROM kompy where filial ='" & sBranch & "' and mesto='" &
-                       sDepartment & "' and kabn=''"
-
-                Call _
-                    SaveActivityToLogDB(
-                        langfile.GetString("frmComputers", "MSG26", "Массовое удаление техники из") & " " & sBranch &
-                        "/" & sDepartment)
-
-            Case "K"
-
-                sSQL = "SELECT id,net_name,psevdonim FROM kompy where filial ='" & sBranch & "' and mesto='" &
-                       sDepartment & "' AND kabn ='" & sOffice & "'"
-
-                Call _
-                    SaveActivityToLogDB(
-                        langfile.GetString("frmComputers", "MSG26", "Массовое удаление техники из") & " " & sBranch &
-                        "/" & sDepartment & "/" & sOffice)
-
-        End Select
-
-        Dim rs As Recordset
-        rs = New Recordset
-
-        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
-        With rs
-            .MoveFirst()
-            Do While Not .EOF
-
-                REMOVE_TEHN(.Fields("id").Value)
-
-                .MoveNext()
-            Loop
-        End With
-        rs.Close()
-        rs = Nothing
-
-        Me.BeginInvoke(New MethodInvoker(AddressOf R_T_LOAD))
-        Me.BeginInvoke(New MethodInvoker(AddressOf STAT_INF))
 
         Me.Cursor = Cursors.Default
         Exit Sub
@@ -2558,7 +2562,7 @@ err_:
 
         Dim rsG As Recordset
         rsG = New Recordset
-        rsG.Open("SELECT * FROM CONFIGURE", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+        rsG.Open("SELECT ORG FROM CONFIGURE", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
         Dim aaaa As String
 
         With rsG
@@ -2705,16 +2709,16 @@ err_:
 
             Case "G"
                 'sBranch 
-                sSQL = "SELECT * FROM kompy WHERE FILIAL='" & sBranch & "' And TipTehn='PC'"
+                sSQL = "SELECT TipTehn,id,PSEVDONIM,FILIAL,MESTO,kabn FROM kompy WHERE FILIAL='" & sBranch & "' And TipTehn='PC'"
             Case "O"
                 'sDepartment
-                sSQL = "SELECT * FROM kompy WHERE FILIAL='" & sBranch & "' And MESTO='" & sDepartment &
+                sSQL = "SELECT TipTehn,id,PSEVDONIM,FILIAL,MESTO,kabn FROM kompy WHERE FILIAL='" & sBranch & "' And MESTO='" & sDepartment &
                        "' And TipTehn='PC'"
 
             Case "K"
                 'sOffice 
 
-                sSQL = "SELECT * FROM kompy WHERE FILIAL='" & sBranch & "' And MESTO='" & sDepartment & "' AND kabn ='" &
+                sSQL = "SELECT TipTehn,id,PSEVDONIM,FILIAL,MESTO,kabn FROM kompy WHERE FILIAL='" & sBranch & "' And MESTO='" & sDepartment & "' AND kabn ='" &
                        sOffice & "' And TipTehn='PC'"
         End Select
 
@@ -2754,7 +2758,7 @@ err_:
                 ' replace all
                 'Dim oSrch As Object
 
-
+                '
                 Dim tiptehCP, uname, QWERT As String
                 Dim GIST As Decimal = 0
                 Dim intj As Decimal = 0
@@ -2818,7 +2822,7 @@ err_:
                                 insertIntoCell("A1", langfile.GetString("frmComputers", "MSG39", "Установленное П.О."),
                                                objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
 
-                                sSQL1 = "SELECT * FROM SOFT_INSTALL WHERE id_comp=" & uname
+                                sSQL1 = "SELECT Soft FROM SOFT_INSTALL WHERE id_comp=" & uname
                                 rs1 = New Recordset
                                 rs1.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                                 With rs1
@@ -2923,7 +2927,7 @@ err_:
                                 oTable.Cell(1, 1).Range.Text = langfile.GetString("frmComputers", "MSG39",
                                                                                   "Установленное П.О.")
 
-                                sSQL1 = "SELECT * FROM SOFT_INSTALL WHERE id_comp=" & uname
+                                sSQL1 = "SELECT Soft FROM SOFT_INSTALL WHERE id_comp=" & uname
                                 rs1 = New Recordset
                                 rs1.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                                 intj = 2
@@ -3004,16 +3008,16 @@ err_:
 
             Case "G"
                 'sBranch 
-                sSQL = "SELECT * FROM kompy WHERE FILIAL='" & sBranch & "' And TipTehn='PC'"
+                sSQL = "SELECT id FROM kompy WHERE FILIAL='" & sBranch & "' And TipTehn='PC'"
             Case "O"
                 'sDepartment
-                sSQL = "SELECT * FROM kompy WHERE FILIAL='" & sBranch & "' And MESTO='" & sDepartment &
+                sSQL = "SELECT id FROM kompy WHERE FILIAL='" & sBranch & "' And MESTO='" & sDepartment &
                        "' And TipTehn='PC'"
 
             Case "K"
                 'sOffice 
 
-                sSQL = "SELECT * FROM kompy WHERE FILIAL='" & sBranch & "' And MESTO='" & sDepartment & "' AND kabn ='" &
+                sSQL = "SELECT id FROM kompy WHERE FILIAL='" & sBranch & "' And MESTO='" & sDepartment & "' AND kabn ='" &
                        sOffice & "' And TipTehn='PC'"
         End Select
 
@@ -3957,7 +3961,7 @@ err_:
         Dim rs As Recordset
         rs = New Recordset
 
-        rs.Open("SELECT * FROM ZAM_OTD WHERE id=" & zCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+        rs.Open("SELECT Date,Master,ZAMETKA FROM ZAM_OTD WHERE id=" & zCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
                 LockTypeEnum.adLockOptimistic)
 
         With rs
@@ -4712,12 +4716,9 @@ err_:
         unI = 0
 
         Dim PROYZV As Recordset
-        PROYZV = New Recordset
-        PROYZV.Open("SELECT * FROM SPR_PROIZV", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
         Dim SPR_DEV As Recordset
         SPR_DEV = New Recordset
-        SPR_DEV.Open("SELECT * FROM SPR_DEV_NET where name ='" & cmbDevNet.Text & "'", DB7, CursorTypeEnum.adOpenDynamic,
+        SPR_DEV.Open("SELECT proizv,A,B FROM SPR_DEV_NET where name ='" & cmbDevNet.Text & "'", DB7, CursorTypeEnum.adOpenDynamic,
                      LockTypeEnum.adLockOptimistic)
 
         On Error GoTo Error_
@@ -4728,17 +4729,13 @@ err_:
 
                 If Not IsDBNull(.Fields("proizv").Value) Then unI = .Fields("proizv").Value
 
+                PROYZV = New Recordset
+                PROYZV.Open("SELECT ID, proizv FROM SPR_PROIZV where id=" & unI, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
                 With PROYZV
-                    .MoveFirst()
-                    Do While Not .EOF
-                        If unI = .Fields("ID").Value Then
-                            uname = .Fields("proizv").Value
-                        Else
-                            'PROizV(0).Text = ""
-                        End If
-                        .MoveNext()
-                        'DoEvents
-                    Loop
+
+                    uname = .Fields("proizv").Value
+                        
                 End With
 
                 PROiZV40.Text = uname
@@ -4766,13 +4763,13 @@ Error_:
         Select Case TipTehn
 
             Case "Printer"
-                sSQL = "SELECT * FROM SPR_PRINTER WHERE Name = '" & cmbPRN.Text & "'"
+                sSQL = "SELECT proizv,A,B FROM SPR_PRINTER WHERE Name = '" & cmbPRN.Text & "'"
 
             Case "MFU"
-                sSQL = "SELECT * FROM SPR_MFU WHERE Name = '" & cmbPRN.Text & "'"
+                sSQL = "SELECT proizv,A,B FROM SPR_MFU WHERE Name = '" & cmbPRN.Text & "'"
 
             Case "KOpir"
-                sSQL = "SELECT * FROM SPR_KOPIR WHERE Name = '" & cmbPRN.Text & "'"
+                sSQL = "SELECT proizv,A,B FROM SPR_KOPIR WHERE Name = '" & cmbPRN.Text & "'"
 
         End Select
 
@@ -4789,7 +4786,7 @@ Error_:
 
             Dim PROYZV As Recordset
             PROYZV = New Recordset
-            PROYZV.Open("SELECT * FROM SPR_PROIZV WHERE iD=" & uNI, DB7, CursorTypeEnum.adOpenDynamic,
+            PROYZV.Open("SELECT proizv FROM SPR_PROIZV WHERE iD=" & uNI, DB7, CursorTypeEnum.adOpenDynamic,
                         LockTypeEnum.adLockOptimistic)
 
             With PROYZV
@@ -4874,222 +4871,215 @@ Error_:
         rs1.Close()
         rs1 = Nothing
 
-        If sUCount > 0 Then
+        Select Case sUCount
 
-            If uLevel <> "Admin" Then Exit Sub
+            Case 0
 
-            frmNetMagazin.sBDO_SVT_Pref = "PC"
+                portEDT = True
 
-            Dim z As Integer
-            Dim z1 As Integer
-            Dim LNGIniFile As New IniFile(sLANGPATH)
+                Dim z As Integer
+                For z = 0 To lvNetPort.SelectedItems.Count - 1
+                    npCOUNT = (lvNetPort.SelectedItems(z).Text)
+                Next
+                Dim rs As Recordset
+                rs = New Recordset
+                Dim sSQL As String
+                sSQL = "SELECT port,net_n,mac FROM net_port WHERE id=" & npCOUNT
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
+                With rs
 
-            For z = 0 To lvNetPort.SelectedItems.Count - 1
-                frmNetMag_Add.sID = (lvNetPort.SelectedItems(z).Text)
-            Next
+                    txtNetnumberPort.Text = .Fields("port").Value
+                    txtNetPortMapping.Text = .Fields("net_n").Value
+                    txtNetPortMac.Text = .Fields("mac").Value
 
-            Dim sSQL As String
+                End With
+                rs.Close()
+                rs = Nothing
 
-            frmNetMag_Add.sEDT = True
+            Case Else
 
-            frmNetMagazin.sBDO_Pref = ""
-            frmNetMagazin.sBDO_count = 0
-            frmNetMagazin.sBDO_SVT_count = 0
-            frmNetMagazin.sBDO_NET_count = 0
+                If uLevel <> "Admin" Then Exit Sub
 
+                frmNetMagazin.sBDO_SVT_Pref = "PC"
 
-            sSQL = "SELECT * FROM TBL_NET_MAG where id=" & frmNetMag_Add.sID
+                Dim z As Integer
+                Dim z1 As Integer
+                Dim LNGIniFile As New IniFile(sLANGPATH)
 
-            Dim rs As Recordset
-            rs = New Recordset
-            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
+                For z = 0 To lvNetPort.SelectedItems.Count - 1
+                    frmNetMag_Add.sID = (lvNetPort.SelectedItems(z).Text)
+                Next
 
-            With rs
+                Dim sSQL As String
 
-                frmNetMag_Add.txtLineRoz.Text = .Fields("id_line").Value
-                frmNetMag_Add.cmbTipCab.Text = .Fields("tip_cab").Value
-                frmNetMag_Add.txtDlina.Text = .Fields("dlin_cab").Value
-                frmNetMag_Add.cmbTipKabLine.Text = .Fields("tip_cab_line").Value
+                frmNetMag_Add.sEDT = True
 
-                z1 = .Fields("SVT").Value
-                frmNetMagazin.sBDO_SVT_count = z1
+                frmNetMagazin.sBDO_Pref = ""
+                frmNetMagazin.sBDO_count = 0
+                frmNetMagazin.sBDO_SVT_count = 0
+                frmNetMagazin.sBDO_NET_count = 0
 
+                sSQL = "SELECT * FROM TBL_NET_MAG where id=" & frmNetMag_Add.sID
 
-                If z1 = 0 Or Len(z1) = 0 Then
+                Dim rs As Recordset
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-                    frmNetMag_Add.txtSVT.Text = ""
-                    frmNetMag_Add.txtKom.Text = ""
+                With rs
 
-                Else
+                    frmNetMag_Add.txtLineRoz.Text = .Fields("id_line").Value
+                    frmNetMag_Add.cmbTipCab.Text = .Fields("tip_cab").Value
+                    frmNetMag_Add.txtDlina.Text = .Fields("dlin_cab").Value
+                    frmNetMag_Add.cmbTipKabLine.Text = .Fields("tip_cab_line").Value
 
+                    z1 = .Fields("SVT").Value
+                    frmNetMagazin.sBDO_SVT_count = z1
 
-                    Dim sTXT As String
+                    If z1 = 0 Or Len(z1) = 0 Then
 
-                    rs1 = New Recordset
-                    rs1.Open("SELECT * FROM kompy where id=" & z1, DB7, CursorTypeEnum.adOpenDynamic,
-                             LockTypeEnum.adLockOptimistic)
+                        frmNetMag_Add.txtSVT.Text = ""
+                        frmNetMag_Add.txtKom.Text = ""
 
+                    Else
 
-                    With rs1
+                        Dim sTXT As String
 
-                        Select Case .Fields("tiptehn").Value
+                        rs1 = New Recordset
+                        rs1.Open("SELECT id,NET_NAME,OTvetstvennyj,tiptehn FROM kompy where id=" & z1, DB7, CursorTypeEnum.adOpenDynamic,
+                                 LockTypeEnum.adLockOptimistic)
 
-                            Case "PC"
+                        With rs1
 
-                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG11", "Компьютер")
-                            Case "Printer"
+                            Select Case .Fields("tiptehn").Value
 
-                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG6", "Принтер")
-                            Case "KOpir"
+                                Case "PC"
 
-                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG13", "Копир")
-                            Case "MONITOR"
-                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG3", "Монитор")
-                            Case "SCANER"
+                                    sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG11", "Компьютер")
+                                Case "Printer"
 
-                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG8", "Сканер")
-                            Case "NET"
+                                    sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG6", "Принтер")
+                                Case "KOpir"
 
-                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG14", "Сетевое оборудование")
-                            Case "PHOTO"
+                                    sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG13", "Копир")
+                                Case "MONITOR"
+                                    sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG3", "Монитор")
+                                Case "SCANER"
 
-                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG15", "Фотоаппарат")
+                                    sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG8", "Сканер")
+                                Case "NET"
 
-                            Case "OT"
+                                    sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG14", "Сетевое оборудование")
+                                Case "PHOTO"
 
-                                sTXT = .Fields("NET_NAME").Value & " " & .Fields("TIP_COMPA").Value
-                            Case "ZIP"
+                                    sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG15", "Фотоаппарат")
 
-                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG18", "Дисковод ZIP")
-                            Case "PHONE"
+                                Case "OT"
 
-                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG16", "Телефон")
-                            Case "MFU"
+                                    sTXT = .Fields("NET_NAME").Value & " " & .Fields("TIP_COMPA").Value
+                                Case "ZIP"
 
-                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG7", "МФУ")
-                            Case "FAX"
+                                    sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG18", "Дисковод ZIP")
+                                Case "PHONE"
 
-                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG17", "Факс")
+                                    sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG16", "Телефон")
+                                Case "MFU"
 
-                            Case "USB"
+                                    sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG7", "МФУ")
+                                Case "FAX"
 
+                                    sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG17", "Факс")
 
-                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG10", "USB Устройство")
-                            Case "IBP"
+                                Case "USB"
 
 
-                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG9", "Источник бесперебойного питания")
-                            Case "FS"
+                                    sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG10", "USB Устройство")
+                                Case "IBP"
 
-                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG5", "Сетевой фильтр")
 
-                            Case "SOUND"
+                                    sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG9", "Источник бесперебойного питания")
+                                Case "FS"
 
-                                sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG4", "Акустическая система")
+                                    sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG5", "Сетевой фильтр")
 
+                                Case "SOUND"
 
-                        End Select
+                                    sTXT = LNGIniFile.GetString("frmNetMagazin", "MSG4", "Акустическая система")
 
 
-                        Select Case frmNetMagazin.sBDO_SVT_Pref
+                            End Select
 
-                            Case "PC"
 
-                                frmNetMag_Add.txtSVT.Text = sTXT & ": " & .Fields("NET_NAME").Value & " , (" &
-                                                            LNGIniFile.GetString("frmNetMagazin", "MSG19", "Отв.:") &
-                                                            " " & .Fields("OTvetstvennyj").Value & ")"
-                                'Me.sBDO_SVT_count = .Fields("SVT").Value
-                            Case Else
+                            Select Case frmNetMagazin.sBDO_SVT_Pref
 
-                                frmNetMag_Add.txtKom.Text = sTXT & ": " & .Fields("NET_NAME").Value & " , (" &
-                                                            LNGIniFile.GetString("frmNetMagazin", "MSG19", "Отв.:") &
-                                                            " " & .Fields("OTvetstvennyj").Value & ")"
+                                Case "PC"
 
-                        End Select
+                                    frmNetMag_Add.txtSVT.Text = sTXT & ": " & .Fields("NET_NAME").Value & " , (" &
+                                                                LNGIniFile.GetString("frmNetMagazin", "MSG19", "Отв.:") &
+                                                                " " & .Fields("OTvetstvennyj").Value & ")"
+                                    'Me.sBDO_SVT_count = .Fields("SVT").Value
+                                Case Else
 
-                    End With
+                                    frmNetMag_Add.txtKom.Text = sTXT & ": " & .Fields("NET_NAME").Value & " , (" &
+                                                                LNGIniFile.GetString("frmNetMagazin", "MSG19", "Отв.:") &
+                                                                " " & .Fields("OTvetstvennyj").Value & ")"
 
-                    rs1.Close()
-                    rs1 = Nothing
+                            End Select
 
-                End If
+                        End With
 
+                        rs1.Close()
+                        rs1 = Nothing
 
-                frmNetMag_Add.txtNetPortSVT.Text = .Fields("NET_PORT_SVT").Value
-                frmNetMag_Add.cmbPhone.Text = .Fields("PHONE").Value
-                frmNetMag_Add.txtSVT_MEMO.Text = .Fields("SVT_MEMO").Value
+                    End If
 
-                z1 = .Fields("COMMUTATOR").Value
+                    frmNetMag_Add.txtNetPortSVT.Text = .Fields("NET_PORT_SVT").Value
+                    frmNetMag_Add.cmbPhone.Text = .Fields("PHONE").Value
+                    frmNetMag_Add.txtSVT_MEMO.Text = .Fields("SVT_MEMO").Value
 
-                frmNetMagazin.sBDO_NET_count = z1
+                    z1 = .Fields("COMMUTATOR").Value
 
-                If z1 = 0 Or Len(z1) = 0 Then
+                    frmNetMagazin.sBDO_NET_count = z1
 
-                    frmNetMag_Add.txtKom.Text = ""
+                    If z1 = 0 Or Len(z1) = 0 Then
 
-                Else
+                        frmNetMag_Add.txtKom.Text = ""
 
+                    Else
 
-                    rs1 = New Recordset
-                    rs1.Open("SELECT * FROM kompy where id=" & z1, DB7, CursorTypeEnum.adOpenDynamic,
-                             LockTypeEnum.adLockOptimistic)
+                        rs1 = New Recordset
+                        rs1.Open("SELECT NET_NAME, OTvetstvennyj FROM kompy where id=" & z1, DB7, CursorTypeEnum.adOpenDynamic,
+                                 LockTypeEnum.adLockOptimistic)
 
-                    With rs1
+                        With rs1
 
-                        frmNetMag_Add.txtKom.Text =
-                            LNGIniFile.GetString("frmNetMagazin", "MSG14", "Акустическая система") & ": " &
-                            .Fields("NET_NAME").Value & " , (" & LNGIniFile.GetString("frmNetMagazin", "MSG19", "Отв.:") &
-                            " " & .Fields("OTvetstvennyj").Value & ")"
+                            frmNetMag_Add.txtKom.Text =
+                                LNGIniFile.GetString("frmNetMagazin", "MSG14", "Акустическая система") & ": " &
+                                .Fields("NET_NAME").Value & " , (" & LNGIniFile.GetString("frmNetMagazin", "MSG19", "Отв.:") &
+                                " " & .Fields("OTvetstvennyj").Value & ")"
 
-                    End With
-                    rs1.Close()
-                    rs1 = Nothing
+                        End With
+                        rs1.Close()
+                        rs1 = Nothing
 
-                End If
+                    End If
 
-                frmNetMag_Add.txtPortCom.Text = .Fields("NET_PORT_COMMUTATOR").Value
-                frmNetMag_Add.txtComMemo.Text = .Fields("COMMUTATOR_MEMO").Value
+                    frmNetMag_Add.txtPortCom.Text = .Fields("NET_PORT_COMMUTATOR").Value
+                    frmNetMag_Add.txtComMemo.Text = .Fields("COMMUTATOR_MEMO").Value
 
+                    frmNetMagazin.sBDO_Pref = .Fields("PREF").Value
+                    frmNetMagazin.sBDO_count = .Fields("sID").Value
 
-                frmNetMagazin.sBDO_Pref = .Fields("PREF").Value
-                frmNetMagazin.sBDO_count = .Fields("sID").Value
+                End With
+                rs.Close()
+                rs = Nothing
 
-            End With
-            rs.Close()
-            rs = Nothing
+                frmNetMag_Add.ShowDialog(Me)
 
-            frmNetMag_Add.ShowDialog(Me)
 
+        End Select
 
-        Else
-
-
-            portEDT = True
-
-            Dim z As Integer
-            For z = 0 To lvNetPort.SelectedItems.Count - 1
-                npCOUNT = (lvNetPort.SelectedItems(z).Text)
-            Next
-            Dim rs As Recordset
-            rs = New Recordset
-            Dim sSQL As String
-            sSQL = "SELECT * FROM net_port WHERE id=" & npCOUNT
-            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
-            With rs
-
-                txtNetnumberPort.Text = .Fields("port").Value
-                txtNetPortMapping.Text = .Fields("net_n").Value
-                txtNetPortMac.Text = .Fields("mac").Value
-
-            End With
-            rs.Close()
-            rs = Nothing
-
-
-        End If
     End Sub
 
     Private Sub cmbModCartr_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
@@ -5101,8 +5091,7 @@ Error_:
         Dim sSQL As String
         cmbTIPCartridg.Text = ""
 
-        sSQL = "SELECT * FROM spr_cart WHERE Name = '" & cmbModCartr.Text & "'"
-
+        sSQL = "SELECT A FROM spr_cart WHERE Name = '" & cmbModCartr.Text & "'"
 
         On Error Resume Next
         Dim rs As Recordset
@@ -5160,7 +5149,6 @@ Error_:
         If e.Button = MouseButtons.Right Then
             cmDvig.Show(CType(sender, Control), e.Location)
 
-
         Else
 
         End If
@@ -5216,7 +5204,6 @@ Error_:
 
         If e.Button = MouseButtons.Right Then
             cmDvig.Show(CType(sender, Control), e.Location)
-
 
         Else
 
@@ -5445,12 +5432,12 @@ Error_:
 
             Case "G"
 
-                sSQL = "SELECT * FROM kompy where filial ='" & sBranch & "' and tiptehn='PC'"
+                sSQL = "SELECT id FROM kompy where filial ='" & sBranch & "' and tiptehn='PC'"
 
 
             Case "O"
 
-                sSQL = "SELECT * FROM kompy where filial ='" & sBranch & "' and mesto='" & sDepartment &
+                sSQL = "SELECT id FROM kompy where filial ='" & sBranch & "' and mesto='" & sDepartment &
                        "' and tiptehn='PC'"
 
 
@@ -5729,20 +5716,23 @@ err_:
 
         Dim unamZ As String
 
-        If Me.sPREF = "C" Then
 
-            Dim rs2 As Recordset
-            rs2 = New Recordset
-            rs2.Open("SELECT * FROM kompy WHERE id=" & Me.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
-                     LockTypeEnum.adLockOptimistic)
+        Select Case Me.sPREF
 
-            With rs2
-                unamZ = .Fields("filial").Value & "/" & .Fields("mesto").Value
-            End With
-            rs2.Close()
-            rs2 = Nothing
+            Case "C"
 
-        End If
+                Dim rs2 As Recordset
+                rs2 = New Recordset
+                rs2.Open("SELECT filial, mesto FROM kompy WHERE id=" & Me.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                         LockTypeEnum.adLockOptimistic)
+
+                With rs2
+                    unamZ = .Fields("filial").Value & "/" & .Fields("mesto").Value
+                End With
+                rs2.Close()
+                rs2 = Nothing
+
+        End Select
 
         Dim LNGIniFile As New IniFile(sLANGPATH)
         Dim rs1 As Recordset
@@ -6220,20 +6210,17 @@ err_:
 
             Case "G"
 
-                sSQL = "SELECT * FROM kompy where filial ='" & sBranch & "' and tiptehn='PC'"
-
+                sSQL = "SELECT id FROM kompy where filial ='" & sBranch & "' and tiptehn='PC'"
 
             Case "O"
 
-                sSQL = "SELECT * FROM kompy where filial ='" & sBranch & "' and mesto='" & sDepartment &
+                sSQL = "SELECT id FROM kompy where filial ='" & sBranch & "' and mesto='" & sDepartment &
                        "' and tiptehn='PC'"
-
 
             Case "K"
 
                 sSQL = "SELECT id FROM kompy where filial ='" & sBranch & "' and mesto='" & sDepartment &
                        "' AND kabn ='" & sOffice & "' and tiptehn='PC'"
-
 
         End Select
 
@@ -6723,5 +6710,8 @@ Err_:
 
     'End Sub
 
+    Private Sub lvRepair_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles lvRepair.SelectedIndexChanged
+
+    End Sub
 End Class
 

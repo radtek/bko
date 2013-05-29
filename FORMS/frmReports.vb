@@ -14,12 +14,12 @@ Public Class frmReports
 
         frmMain.SaveInfTehButton.Enabled = False
         frmMain.ToolStripDropDownButton1.Enabled = False
+
     End Sub
 
     Private Sub frmReports_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
 
         SendFonts(Me)
-
 
         Call frmReports_LANG()
         Dim langIni As New IniFile(sLANGPATH)
@@ -49,7 +49,6 @@ Public Class frmReports
         cmnReport2Compl.Items.Add(langIni.GetString("frmReports", "MSG24", "Фотоаппарат"))
         cmnReport2Compl.Items.Add(langIni.GetString("frmReports", "MSG25", "Другое"))
 
-
         cmbOthers.Items.Add(langIni.GetString("frmMain", "28", "Копир"))
         cmbOthers.Items.Add(langIni.GetString("frmMain", "29", "Принтер"))
         cmbOthers.Items.Add(langIni.GetString("frmMain", "30", "МФУ"))
@@ -65,7 +64,6 @@ Public Class frmReports
         cmbOthers.Items.Add(langIni.GetString("frmMain", "40", "Акустические Системы"))
         cmbOthers.Items.Add(langIni.GetString("frmMain", "41", "Бесперебойники"))
         cmbOthers.Items.Add(langIni.GetString("frmReports", "MSG1", "Все"))
-
 
         Dim rs As Recordset
 
@@ -110,7 +108,6 @@ Public Class frmReports
         cmbGar.Items.Add(langIni.GetString("frmReports", "MSG9", "Монитор"))
         cmbGar.Items.Add(langIni.GetString("frmReports", "MSG10", "Память ОЗУ"))
         cmbGar.Items.Add(langIni.GetString("frmReports", "MSG13", "Процессоры"))
-
 
         FillComboNET(Me.cmbReport2fil, "FILIAL", "SPR_FILIAL", "", False, True)
         FillComboNET(Me.cmbBrancheCashe, "FILIAL", "SPR_FILIAL", "", False, True)
