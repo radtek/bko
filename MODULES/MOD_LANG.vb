@@ -328,8 +328,16 @@ Module modLang
 
     Public Sub frmService_add_Lang()
         Dim objIniFile As New IniFile(sLANGPATH)
-        frmService_add.Text = objIniFile.GetString("frmService_add", "frmService_add",
-                                                   "Добавление (редактирование) заявки")
+
+
+        'If frmService_add.REMED = True Then
+
+        'Else
+        '    frmService_add.Text = objIniFile.GetString("frmService_add", "frmService_add",
+        '                                                      "Добавление (редактирование) заявки")
+
+        'End If
+
         frmService_add.Label1.Text = objIniFile.GetString("frmService_add", "Label1", "Источник:")
         frmService_add.Label2.Text = objIniFile.GetString("frmService_add", "Label2", "Мастер:")
         frmService_add.Label3.Text = objIniFile.GetString("frmService_add", "Label3", "Дата регистрации:")

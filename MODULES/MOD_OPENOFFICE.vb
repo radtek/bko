@@ -929,7 +929,7 @@ Module MOD_OPENOFFICE
 
 
         objTable = oDoc.createInstance("com.sun.star.text.TextTable")
-        objTable.Initialize(2, 2)
+        objTable.Initialize(3, 2)
 
         'Insert the table
         objText.insertTextContent(objCursor, objTable, False)
@@ -966,6 +966,10 @@ Module MOD_OPENOFFICE
 
         insertIntoCell("A2", uname, objTable)
         insertIntoCell("B2", cOTV, objTable)
+        insertIntoCell("A3", DateAndTime.Today, objTable)
+        insertIntoCell("B3", DateAndTime.Today, objTable)
+
+        'DateAndTime.Today
     End Sub
 
     Public Sub blanks_my_o(ByVal tipot As String)
@@ -3813,11 +3817,12 @@ err_:
         oPara1.Format.SpaceAfter = 12    '24 pt spacing after paragraph.
         oPara1.Range.InsertParagraphAfter()
 
-        oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 2, 2)
+        oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 3, 2)
         oTable.Range.ParagraphFormat.SpaceAfter = 6
 
         oTable.Cell(1, 1).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG51", "Системный администратор")
         oTable.Cell(1, 2).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG52", "Подписи ответственных лиц")
+
 
         CONFIGURE = New Recordset
         CONFIGURE.Open("SELECT * FROM CONFIGURE", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -3833,6 +3838,8 @@ err_:
 
         oTable.Cell(2, 1).Range.Text = uname
         oTable.Cell(2, 2).Range.Text = cOTV
+        oTable.Cell(3, 1).Range.Text = DateAndTime.Today
+        oTable.Cell(3, 2).Range.Text = DateAndTime.Today
     End Sub
 
     Public Sub blanks_my_wrd(ByVal tipot As String)

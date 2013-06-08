@@ -724,6 +724,8 @@ Public Class frmserviceDesc
     End Sub
 
     Private Sub frmserviceDesc_Activated(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Activated
+        TreeORGANIZACIA = lstGroups
+
         ''My.Application.DoEvents()
         frmMain.SaveInfTehButton.Enabled = False
         frmMain.ToolStripDropDownButton1.Enabled = False

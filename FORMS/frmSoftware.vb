@@ -419,6 +419,8 @@ Public Class frmSoftware
 
     Private Sub frmSoftware_Activated(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Activated
 
+        TreeORGANIZACIA = lstGroups
+
         frmMain.SaveInfTehButton.Enabled = False
         frmMain.ToolStripDropDownButton1.Enabled = False
     End Sub

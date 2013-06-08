@@ -212,8 +212,24 @@ Module MOD_INVENT
         rs.Close()
         rs = Nothing
 
+
+
+        Dim sSQL As String
+
+        Select Case DB_N
+
+            Case "MS Access"
+                sSQL = "SELECT count(*) as t_n FROM kompy where Balans=true"
+
+            Case Else
+
+                sSQL = "SELECT count(*) as t_n FROM kompy where Balans=1"
+
+        End Select
+
+
         rs = New Recordset
-        rs.Open("SELECT count(*) as t_n FROM kompy where Balans=1", DB7, CursorTypeEnum.adOpenDynamic,
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic,
                 LockTypeEnum.adLockOptimistic)
 
         With rs
@@ -222,8 +238,21 @@ Module MOD_INVENT
         rs.Close()
         rs = Nothing
 
+
+        Select Case DB_N
+
+            Case "MS Access"
+                sSQL = "SELECT count(*) as t_n FROM kompy where Spisan=true"
+
+            Case Else
+
+                sSQL = "SELECT count(*) as t_n FROM kompy where Spisan=1"
+
+        End Select
+
+
         rs = New Recordset
-        rs.Open("SELECT count(*) as t_n FROM kompy where Spisan=1", DB7, CursorTypeEnum.adOpenDynamic,
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic,
                 LockTypeEnum.adLockOptimistic)
 
         With rs
@@ -251,7 +280,6 @@ Module MOD_INVENT
         End With
         rs.Close()
         rs = Nothing
-
 
         Select sOfficePACK
 
@@ -687,6 +715,56 @@ Module MOD_INVENT
                         rs1.Close()
                         rs1 = Nothing
 
+                        Select Case DB_N
+
+                            Case "MS Access"
+                                sSQL = "SELECT count(*) as t_n FROM kompy where Balans=true and filial ='" & .Fields("filial").Value & "'"
+
+                            Case Else
+
+                                sSQL = "SELECT count(*) as t_n FROM kompy where Balans=1 and filial ='" & .Fields("filial").Value & "'"
+
+                        End Select
+
+                        rs1 = New Recordset
+                        rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
+                        With rs1
+                            TEH19 = .Fields("t_n").Value
+                            If .Fields("t_n").Value <> 0 Then
+                                zint = zint + 1
+                            End If
+                        End With
+                        rs1.Close()
+                        rs1 = Nothing
+
+
+                        Select Case DB_N
+
+                            Case "MS Access"
+                                sSQL = "SELECT count(*) as t_n FROM kompy where Spisan=true and filial ='" & .Fields("filial").Value &
+                            "'"
+
+                            Case Else
+
+                                sSQL = "SELECT count(*) as t_n FROM kompy where Spisan=1 and filial ='" & .Fields("filial").Value &
+                            "'"
+
+                        End Select
+
+                        rs1 = New Recordset
+                        rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic,
+                                LockTypeEnum.adLockOptimistic)
+
+                        With rs1
+                            TEH20 = .Fields("t_n").Value
+                            If .Fields("t_n").Value <> 0 Then
+                                zint = zint + 1
+                            End If
+                        End With
+                        rs1.Close()
+                        rs1 = Nothing
+
 
                         objText.insertString(objCursor,
                                              LNGIniFile.GetString("MOD_INVENT", "MSG24", "Филиал (отдел):") & " " &
@@ -849,6 +927,21 @@ Module MOD_INVENT
                             insertIntoCell("B" & intj, TEH18, objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             intj = intj + 1
                         End If
+
+                        If TEH19 <> 0 Then
+                            insertIntoCell("A" & intj, "Не на балансе", objTable) _
+                            'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                            insertIntoCell("B" & intj, TEH18, objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                            intj = intj + 1
+                        End If
+
+                        If TEH20 <> 0 Then
+                            insertIntoCell("A" & intj, "Списано", objTable) _
+                            'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                            insertIntoCell("B" & intj, TEH18, objTable) 'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                            intj = intj + 1
+                        End If
+
 
                         objText.insertString(objCursor, " " & vbLf, False)
                         .MoveNext()
@@ -1263,6 +1356,59 @@ Module MOD_INVENT
                         rs1 = Nothing
 
 
+                        Select Case DB_N
+
+                            Case "MS Access"
+                                sSQL = "SELECT count(*) as t_n FROM kompy where balans=true and filial ='" & .Fields("filial").Value &
+                            "'"
+
+                            Case Else
+
+                                sSQL = "SELECT count(*) as t_n FROM kompy where balans=1 and filial ='" & .Fields("filial").Value &
+                            "'"
+
+                        End Select
+
+                        rs1 = New Recordset
+                        rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic,
+                                LockTypeEnum.adLockOptimistic)
+
+                        With rs1
+                            TEH19 = .Fields("t_n").Value
+                            If .Fields("t_n").Value <> 0 Then
+                                zint = zint + 1
+                            End If
+                        End With
+                        rs1.Close()
+                        rs1 = Nothing
+
+
+                        Select Case DB_N
+
+                            Case "MS Access"
+                                sSQL = "SELECT count(*) as t_n FROM kompy where Spisan=true and filial ='" & .Fields("filial").Value &
+                            "'"
+
+                            Case Else
+
+                                sSQL = "SELECT count(*) as t_n FROM kompy where Spisan=1 and filial ='" & .Fields("filial").Value &
+                            "'"
+
+                        End Select
+
+                        rs1 = New Recordset
+                        rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic,
+                                LockTypeEnum.adLockOptimistic)
+
+                        With rs1
+                            TEH20 = .Fields("t_n").Value
+                            If .Fields("t_n").Value <> 0 Then
+                                zint = zint + 1
+                            End If
+                        End With
+                        rs1.Close()
+                        rs1 = Nothing
+
                         oPara1 = oDoc.Content.Paragraphs.Add
                         oPara1.Range.Text = ""
                         oPara1.Range.Font.Bold = True
@@ -1280,7 +1426,6 @@ Module MOD_INVENT
 
                         oTable.Cell(1, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG3", "Тип техники")
                         oTable.Cell(1, 2).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG4", "Кол-во")
-
 
                         intj = 2
 
@@ -1412,6 +1557,21 @@ Module MOD_INVENT
                             oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG22", "Мышей") _
                             'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             oTable.Cell(intj, 2).Range.Text = TEH18 'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                            intj = intj + 1
+                        End If
+
+
+                        If TEH19 <> 0 Then
+                            oTable.Cell(intj, 1).Range.Text = "Не на балансе" _
+                            'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                            oTable.Cell(intj, 2).Range.Text = TEH19 'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                            intj = intj + 1
+                        End If
+
+                        If TEH20 <> 0 Then
+                            oTable.Cell(intj, 1).Range.Text = "Списано" _
+                            'lv_teh_fil_otd.SELECTedItem.Text, objTable
+                            oTable.Cell(intj, 2).Range.Text = TEH20 'lv_teh_fil_otd.SELECTedItem.Text, objTable
                             intj = intj + 1
                         End If
 

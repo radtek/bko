@@ -1792,7 +1792,7 @@ Module MOD_INF_TECH_LOAD
         End If
 
 
-        'Call LOAD_GARs(sID, frmComputers.cmbOTHPostav, frmComputers.dtGOTHPr, frmComputers.dtGOTHok)
+        Call LOAD_GARs(sID, frmComputers.cmbOTHPostav, frmComputers.dtGOTHPr, frmComputers.dtGOTHok)
         'Call LOAD_NOTES(sID, frmComputers.lvNotesOTH)
         'Call LOAD_REPAIR(sID, frmComputers.lvRepairOTH)
         'Call LOAD_DVIG_TEHN(sID, frmComputers.lvMovementOTH)

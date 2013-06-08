@@ -5365,6 +5365,78 @@ Error_:
                             .Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
                         intj = intj + 1
 
+
+                    Case "KEYB"
+                        Dim unameZ As String
+
+                        If Not IsDBNull(.Fields("TIP_COMPA").Value) Then unameZ = .Fields("TIP_COMPA").Value
+
+                        If Len(unameZ) = 0 Then
+
+                            unameZ = langIni.GetString("frmReports", "MSG44", "Клавиатура") & " - (" &
+                                     .Fields("TIP_COMPA").Value & ") " & .Fields("NET_NAME").Value
+                        Else
+
+                            unameZ = .Fields("TIP_COMPA").Value & " - " & .Fields("NET_NAME").Value
+                        End If
+
+
+                        lvOTV.Items.Add(unameZ)
+
+                        If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
+                            lvOTV.Items(intj).SubItems.Add(.Fields("INV_NO_PRINTER").Value)
+                        Else
+                            lvOTV.Items(intj).SubItems.Add("")
+
+                        End If
+
+                        If Not IsDBNull(.Fields("PRINTER_SN_1").Value) Then
+                            lvOTV.Items(intj).SubItems.Add(.Fields("PRINTER_SN_1").Value)
+                        Else
+                            lvOTV.Items(intj).SubItems.Add("")
+
+                        End If
+
+                        lvOTV.Items(intj).SubItems.Add(
+                            .Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+                        intj = intj + 1
+
+
+                    Case "MOUSE"
+                        Dim unameZ As String
+
+                        If Not IsDBNull(.Fields("TIP_COMPA").Value) Then unameZ = .Fields("TIP_COMPA").Value
+
+                        If Len(unameZ) = 0 Then
+
+                            unameZ = langIni.GetString("frmReports", "MSG45", "Мышь") & " - (" &
+                                     .Fields("TIP_COMPA").Value & ") " & .Fields("NET_NAME").Value
+                        Else
+
+                            unameZ = .Fields("TIP_COMPA").Value & " - " & .Fields("NET_NAME").Value
+                        End If
+
+
+                        lvOTV.Items.Add(unameZ)
+
+                        If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
+                            lvOTV.Items(intj).SubItems.Add(.Fields("INV_NO_PRINTER").Value)
+                        Else
+                            lvOTV.Items(intj).SubItems.Add("")
+
+                        End If
+
+                        If Not IsDBNull(.Fields("PRINTER_SN_1").Value) Then
+                            lvOTV.Items(intj).SubItems.Add(.Fields("PRINTER_SN_1").Value)
+                        Else
+                            lvOTV.Items(intj).SubItems.Add("")
+
+                        End If
+
+                        lvOTV.Items(intj).SubItems.Add(
+                            .Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+                        intj = intj + 1
+
                 End Select
 
                 .MoveNext()

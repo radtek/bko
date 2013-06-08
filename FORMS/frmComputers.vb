@@ -33,6 +33,8 @@ Public Class frmComputers
 
     Private Sub frmComputers_Activated(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Activated
 
+        TreeORGANIZACIA = lstGroups
+
         If uLevelTehAdd = False And uLevel <> "Admin" Then
             frmMain.ToolStripDropDownButton1.Enabled = False
             Me.CopyToolStripMenuItem.Enabled = False

@@ -64,7 +64,7 @@ Module MOD_SYS_PRELOAD
     Public remVisible As Boolean
     Public SPVisible As Boolean
     Public NBVisible As Boolean
-
+    Public TreeORGANIZACIA As TreeView
 
     Public Sub Tree_Icons_Feel(ByVal ills As ImageList, ByVal sFRM As String, ByVal sPATH As String)
 

@@ -3,6 +3,79 @@
     Private DV As Boolean
     Public MRZD As Boolean = False
 
+    Public Sub PreSaveOtv(ByVal sFIALIAL As String, ByVal sOTDEL As String, ByVal sKABN As String)
+
+        Dim sSQL As String
+        Dim tmpTXT As String
+        Dim tmpTXT2 As String
+        Dim sTmp As DateTime = DateTime.Now
+
+
+        sSQL = "Select OTvetstvennyj from kompy where id=" & frmComputers.sCOUNT
+
+        Dim rs As ADODB.Recordset
+        rs = New ADODB.Recordset
+        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+        With rs
+            tmpTXT = .Fields("OTvetstvennyj").Value
+        End With
+        rs.Close()
+        rs = Nothing
+
+
+        Select Case TipTehn
+
+            Case "PC"
+                tmpTXT2 = frmComputers.cmbResponsible.Text
+
+                'cmbResponsible
+            Case "Printer"
+                tmpTXT2 = frmComputers.cmbPRNotv.Text
+                'cmbPRNotv
+            Case "MFU"
+                tmpTXT2 = frmComputers.cmbPRNotv.Text
+                'cmbPRNotv
+            Case "KOpir"
+                tmpTXT2 = frmComputers.cmbPRNotv.Text
+                'cmbPRNotv
+
+            Case "NET"
+                tmpTXT2 = frmComputers.cmbNETotv.Text
+                'cmbNETotv
+            Case Else
+                tmpTXT2 = frmComputers.cmbOTHotv.Text
+                'cmbOTHotv
+
+        End Select
+
+        If tmpTXT = tmpTXT2 Then Exit Sub
+
+        rs = New Recordset
+        rs.Open("SELECT * FROM Zametki", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
+        'sTmp = (DateTime.Now.Hour & ":" & DateTime.Now.Minute & ":" & DateTime.Now.Second)
+
+        If Len(sOTDEL) <> 0 Then sFIALIAL = sFIALIAL & "/" & sOTDEL
+        If Len(sKABN) <> 0 Then sFIALIAL = sFIALIAL & "/" & sKABN
+
+        With rs
+            .AddNew()
+            .Fields("Master").Value = UserNames
+            .Fields("Zametki").Value = "Смена ответственного c " & tmpTXT & " на " & tmpTXT2
+            .Fields("Date").Value = DateAndTime.Today
+            .Fields("Id_Comp").Value = frmComputers.sCOUNT
+            .Fields("Comp_name").Value = ""
+            .Fields("Mesto_Compa").Value = sFIALIAL
+            .Update()
+        End With
+        rs.Close()
+        rs = Nothing
+
+    End Sub
+
+
+
     Private Sub SAVE_GARANT(ByVal sID As String, ByVal dPost As ComboBox, ByVal dtp As DateTimePicker,
                             ByVal dto As DateTimePicker)
 
@@ -182,10 +255,10 @@
             Dim rsBK As Recordset
             rsBK = New Recordset
             rsBK.Open(
-                "SELECT id FROM kompy WHERE NET_NAME='" & frmComputers.cmbOTH.Text & "' and MESTO='" &
+                "SELECT top 1 id FROM kompy WHERE NET_NAME='" & frmComputers.cmbOTH.Text & "' and MESTO='" &
                 frmComputers.cmbOTHDepart.Text & "' and FILIAL='" & frmComputers.cmbOTHFil.Text & "'  and kabn='" &
                 frmComputers.cmbOTHOffice.Text & "'", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
+            'Select top 1 id from kompy order by id desc
             With rsBK
 
                 frmComputers.sCOUNT = .Fields("ID").Value
@@ -207,6 +280,7 @@
         End If
 
         SAVE_GARANT(sSID, frmComputers.cmbOTHPostav, frmComputers.dtGOTHPr, frmComputers.dtGOTHok)
+
 
         frmComputers.cmbOTH.BackColor = frmComputers.cmbOTH.BackColor
         frmComputers.cmbOTHFil.BackColor = frmComputers.cmbOTHFil.BackColor
@@ -455,9 +529,9 @@ sAR:
             Dim rsBK As Recordset
             rsBK = New Recordset
             rsBK.Open(
-                "SELECT id FROM kompy WHERE NET_NAME='" & frmComputers.cmbOTH.Text & "' and MESTO='" &
+                "SELECT top 1 id FROM kompy WHERE NET_NAME='" & frmComputers.cmbOTH.Text & "' and MESTO='" &
                 frmComputers.cmbOTHDepart.Text & "' and FILIAL='" & frmComputers.cmbOTHFil.Text & "'  and kabn='" &
-                frmComputers.cmbOTHOffice.Text & "'", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                frmComputers.cmbOTHOffice.Text & "' order by id desc", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
             With rsBK
 
@@ -926,9 +1000,10 @@ sAR:
             Dim rsBK As Recordset
             rsBK = New Recordset
             rsBK.Open(
-                "SELECT id FROM kompy WHERE NET_NAME='" & frmComputers.txtSNAME.Text & "' and MESTO='" &
+                "SELECT top 1 id FROM kompy WHERE NET_NAME='" & frmComputers.txtSNAME.Text & "' and MESTO='" &
                 frmComputers.cmbDepartment.Text & "' and FILIAL='" & frmComputers.cmbBranch.Text & "'  and kabn='" &
-                frmComputers.cmbOffice.Text & "'", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                frmComputers.cmbOffice.Text & "' order by id desc", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
 
             With rsBK
 
@@ -1359,9 +1434,9 @@ sAR:
             Dim rsBK As Recordset
             rsBK = New Recordset
             rsBK.Open(
-                "SELECT id FROM kompy WHERE NET_NAME='" & frmComputers.cmbPRN.Text & "' and MESTO='" &
+                "SELECT top 1 id FROM kompy WHERE NET_NAME='" & frmComputers.cmbPRN.Text & "' and MESTO='" &
                 frmComputers.cmbPRNDepart.Text & "' and FILIAL='" & frmComputers.cmbPRNFil.Text & "'  and kabn='" &
-                frmComputers.cmbPRNOffice.Text & "'", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                frmComputers.cmbPRNOffice.Text & "' order by id desc", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
             With rsBK
 
@@ -1567,9 +1642,10 @@ sAR:
             Dim rsBK As Recordset
             rsBK = New Recordset
             rsBK.Open(
-                "SELECT id FROM kompy WHERE NET_NAME='" & frmComputers.cmbDevNet.Text & "' and MESTO='" &
+                "SELECT top 1 id FROM kompy WHERE NET_NAME='" & frmComputers.cmbDevNet.Text & "' and MESTO='" &
                 frmComputers.cmbNetDepart.Text & "' and FILIAL='" & frmComputers.cmbNETBranch.Text & "'  and kabn='" &
-                frmComputers.cmbNETOffice.Text & "'", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                frmComputers.cmbNETOffice.Text & "' order by id desc", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
             With rsBK
 
                 frmComputers.sCOUNT = .Fields("ID").Value

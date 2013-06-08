@@ -1518,6 +1518,7 @@ Public Class frmCRT3
 
     Private Sub frmCRT3_Activated(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Activated
 
+        TreeORGANIZACIA = lstGroups
 
         frmMain.SaveInfTehButton.Enabled = False
         frmMain.ToolStripDropDownButton1.Enabled = False

@@ -1827,7 +1827,15 @@ err_:
         Exit Sub
 
 ADD:
+        If frmComputers.EDT = True Then
+
+            PreSaveOtv(sBranch, sDepartment, sOffice)
+
+        End If
+
         Dim langfile As New IniFile(sLANGPATH)
+
+
         Select Case TipTehn
 
             Case "PC"
@@ -2615,14 +2623,13 @@ err_:
     End Sub
 
     Private Sub Services_ADD_Click(sender As System.Object, e As System.EventArgs) Handles Services_ADD.Click
+
         If sRelogin = True Then Exit Sub
 
         Dim langfile As New IniFile(sLANGPATH)
 
-        frmService_add.Text = langfile.GetString("frmComputers", "MSG21", "Добавление (редактирование) заявки для ") &
-                              " " & frmComputers.lstGroups.SelectedNode.Text
+        frmService_add.Text = langfile.GetString("frmComputers", "MSG21", "Добавление (редактирование) заявки для ") & " " & TreeORGANIZACIA.SelectedNode.Text      'serviceDesc.MdiParent = frmMain
 
-        'serviceDesc.MdiParent = frmMain
         'serviceDesc.Show()
         frmService_add.REMFU = True
         frmService_add.REMED = False
@@ -2646,8 +2653,7 @@ err_:
         Call _
             SaveActivityToLogDB(
                 langfile.GetString("frmComputers", "MSG22", "Добавление заявки для ") & " " &
-                frmComputers.lstGroups.SelectedNode.Text)
+                TreeORGANIZACIA.SelectedNode.Text)
     End Sub
-
 
 End Class
