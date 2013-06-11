@@ -1,7 +1,9 @@
 ﻿Module MOD_INF_TECH_SAVE
     Private Sav As Boolean
     Private DV As Boolean
+    Private DV2 As Boolean
     Public MRZD As Boolean = False
+    Public sNetName As Boolean = False
 
     Public Sub PreSaveOtv(ByVal sFIALIAL As String, ByVal sOTDEL As String, ByVal sKABN As String)
 
@@ -9,7 +11,6 @@
         Dim tmpTXT As String
         Dim tmpTXT2 As String
         Dim sTmp As DateTime = DateTime.Now
-
 
         sSQL = "Select OTvetstvennyj from kompy where id=" & frmComputers.sCOUNT
 
@@ -22,7 +23,6 @@
         End With
         rs.Close()
         rs = Nothing
-
 
         Select Case TipTehn
 
@@ -72,9 +72,88 @@
         rs.Close()
         rs = Nothing
 
+        '######################################################################
+        'Меняем ответственного у всего контейнера если есть контейнер
+        '######################################################################
+
+        Dim sNUM As Decimal
+
+        rs = New Recordset
+        rs.Open("SELECT COUNT(*) AS total_number FROM kompy where PCL =" & frmComputers.sCOUNT,
+                     DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
+        With rs
+            sNUM = .Fields("total_number").Value
+        End With
+        rs.Close()
+        rs = Nothing
+
+        Select Case sNUM
+
+            Case 0
+
+            Case Else
+
+                rs = New Recordset
+                rs.Open(
+                    "UPDATE kompy SET OTvetstvennyj='" & tmpTXT2 & "' WHERE PCL=" & frmComputers.sCOUNT,
+                    DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+        End Select
+
     End Sub
 
+    Public Sub PreSaveName(ByVal sID As Integer)
 
+        Dim sSQL As String
+        Dim tmpTXT As String
+        Dim tmpTXT2 As String
+
+        sSQL = "Select NET_NAME from kompy where id=" & frmComputers.sCOUNT
+
+        Dim rs As ADODB.Recordset
+        rs = New ADODB.Recordset
+        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+        With rs
+            tmpTXT = .Fields("NET_NAME").Value
+        End With
+        rs.Close()
+        rs = Nothing
+
+        Select Case TipTehn
+
+            Case "PC"
+                tmpTXT2 = frmComputers.txtSNAME.Text
+
+                'cmbResponsible
+            Case "Printer"
+                tmpTXT2 = frmComputers.cmbPRN.Text
+                'cmbPRNotv
+            Case "MFU"
+                tmpTXT2 = frmComputers.cmbPRN.Text
+                'cmbPRNotv
+            Case "KOpir"
+                tmpTXT2 = frmComputers.cmbPRN.Text
+                'cmbPRNotv
+
+            Case "NET"
+                tmpTXT2 = frmComputers.cmbDevNet.Text
+                'cmbNETotv
+            Case Else
+                tmpTXT2 = frmComputers.cmbOTH.Text
+                'cmbOTHotv
+
+        End Select
+
+        If tmpTXT = tmpTXT2 Then Exit Sub
+
+        sNetName = True
+
+
+
+    End Sub
 
     Private Sub SAVE_GARANT(ByVal sID As String, ByVal dPost As ComboBox, ByVal dtp As DateTimePicker,
                             ByVal dto As DateTimePicker)
@@ -127,22 +206,35 @@
             Exit Sub
         End If
 
-        If frmComputers.EDT = True Then
-            Call _
+
+        Select Case frmComputers.EDT
+
+            Case True
+
+                Call _
                 DVIG_TEHN(frmComputers.cmbOTHFil.Text, frmComputers.cmbOTHDepart.Text, frmComputers.cmbOTHOffice.Text,
                           frmComputers.cmbOTH.Text)
 
-            If DV = True Then
+                Select Case DV
 
-            Else
-                If Sav = False Then
-                    MsgBox("Отмена перемещения", MsgBoxStyle.Exclamation, ProGramName)
-                    Exit Sub
-                End If
+                    Case True
 
-            End If
+                    Case False
 
-        End If
+                        Select Case Sav
+
+                            Case False
+                                MsgBox("Отмена перемещения", MsgBoxStyle.Exclamation, ProGramName)
+                                Exit Sub
+
+                        End Select
+
+                End Select
+
+
+        End Select
+
+
 
         PRESAVE_TREE(frmComputers.cmbOTHFil, frmComputers.cmbOTHDepart, frmComputers.cmbOTHOffice)
 
@@ -189,7 +281,7 @@
             rs = Nothing
         End If
 
-        sAR:
+sAR:
 
         If Len(unaPCL) = 0 Or unaPCL = Nothing Then unaPCL = 0
         'Dim rs As ADODB.Recordset
@@ -293,16 +385,37 @@
 
                     Case 0
 
-                        RefFilTree(frmComputers.lstGroups)
+                        If frmComputers.EDT = False Then RefFilTree(frmComputers.lstGroups)
+                        If sNetName = True Then frmComputers.lstGroups.SelectedNode.Text = frmComputers.cmbOTH.Text
+                        If frmComputers.EDT = True Then frmComputers.LOAD_LIST()
+
+                        Select Case DV2
+
+                            Case True
+
+                                RefFilTree(frmComputers.lstGroups)
+
+                        End Select
 
                     Case 1
 
-                        frmComputers.LOAD_LIST()
+                        '  If frmComputers.EDT = False Then RefFilTree(frmComputers.lstGroups)
+                        If sNetName = True Then frmComputers.lstGroups.SelectedNode.Text = frmComputers.cmbOTH.Text
+                        If frmComputers.EDT = True Then frmComputers.LOAD_LIST()
+
+                        Select Case DV2
+
+                            Case True
+
+                                RefFilTree(frmComputers.lstGroups)
+
+                        End Select
 
                 End Select
 
         End Select
 
+        DV2 = False
 
         Exit Sub
 Err_:
@@ -566,19 +679,31 @@ sAR:
 
                     Case 0
 
-                        RefFilTree(frmComputers.lstGroups)
+                        If frmComputers.EDT = False Then RefFilTree(frmComputers.lstGroups)
+                        If sNetName = True Then frmComputers.lstGroups.SelectedNode.Text = frmComputers.cmbOTH.Text
+                        If frmComputers.EDT = True Then frmComputers.LOAD_LIST()
+
+                        Select Case DV2
+                            Case True
+                                RefFilTree(frmComputers.lstGroups)
+                        End Select
 
                     Case 1
 
-                        frmComputers.LOAD_LIST()
+                        '  If frmComputers.EDT = False Then RefFilTree(frmComputers.lstGroups)
+                        If sNetName = True Then frmComputers.lstGroups.SelectedNode.Text = frmComputers.cmbOTH.Text
+                        If frmComputers.EDT = True Then frmComputers.LOAD_LIST()
+
+                        Select Case DV2
+                            Case True
+                                RefFilTree(frmComputers.lstGroups)
+                        End Select
 
                 End Select
 
         End Select
 
-
-
-
+        DV2 = False
 
         Exit Sub
 Err_:
@@ -586,7 +711,6 @@ Err_:
 
     Public Sub Save_T(Optional ByVal sSID As String = "")
         On Error GoTo err_
-
 
         If _
             Len(frmComputers.txtSNAME.Text) = 0 Or Len(frmComputers.txtPSEUDONIM.Text) = 0 Or
@@ -607,21 +731,21 @@ Err_:
 
         new_prov = False
 
-        If frmComputers.EDT = False Then
+        Select Case frmComputers.EDT
 
-            Call proverka_sn()
+            Case False
+                Call proverka_sn()
 
-        End If
+        End Select
 
-        If new_prov = True Then
+        Select Case new_prov
 
-            Exit Sub
+            Case True
+                Exit Sub
 
-        End If
-
+        End Select
 
         Call addEXISTTEH_()
-
 
         Dim sSQL As String
 
@@ -635,45 +759,55 @@ Err_:
 
         End If
 
+        Select Case frmComputers.EDT
 
-        If frmComputers.EDT = True Then
+            Case True
 
-            Call _
-                DVIG_TEHN(frmComputers.cmbBranch.Text, frmComputers.cmbDepartment.Text, frmComputers.cmbOffice.Text,
-                          frmComputers.txtSNAME.Text)
+                Call _
+                    DVIG_TEHN(frmComputers.cmbBranch.Text, frmComputers.cmbDepartment.Text, frmComputers.cmbOffice.Text,
+                              frmComputers.txtSNAME.Text)
 
-            If DV = True Then
+                Select Case DV
 
-            Else
-                If Sav = False Then
-                    MsgBox("Отмена перемещения", MsgBoxStyle.Exclamation, ProGramName)
+                    Case True
 
-                    Select Case frmComputers.pDRAG
+                    Case False
 
-                        Case False
+                        Select Case Sav
 
-                            Select Case TREE_UPDATE
+                            Case False
 
-                                Case 0
+                                MsgBox("Отмена перемещения", MsgBoxStyle.Exclamation, ProGramName)
 
-                                    RefFilTree(frmComputers.lstGroups)
+                                Select Case frmComputers.pDRAG
 
-                                Case 1
+                                    Case False
 
-                                    frmComputers.LOAD_LIST()
+                                        Select Case TREE_UPDATE
 
-                            End Select
+                                            Case 0
 
-                    End Select
+                                                If frmComputers.EDT = False Then RefFilTree(frmComputers.lstGroups)
+                                                If sNetName = True Then frmComputers.lstGroups.SelectedNode.Text = frmComputers.cmbOTH.Text
+                                                If frmComputers.EDT = True Then frmComputers.LOAD_LIST()
 
-                    Exit Sub
-                End If
+                                            Case 1
 
-            End If
+                                                '  If frmComputers.EDT = False Then RefFilTree(frmComputers.lstGroups)
+                                                If sNetName = True Then frmComputers.lstGroups.SelectedNode.Text = frmComputers.cmbOTH.Text
+                                                If frmComputers.EDT = True Then frmComputers.LOAD_LIST()
 
+                                        End Select
 
-        End If
+                                End Select
 
+                                Exit Sub
+
+                        End Select
+
+                End Select
+
+        End Select
 
         Dim rs As Recordset
 
@@ -686,7 +820,6 @@ Err_:
                 "Select id From kompy where filial='" & frmComputers.cmbBranch.Text & "' and mesto='" &
                 frmComputers.cmbDepartment.Text & "' and kabn='" & frmComputers.cmbOffice.Text & "' and NET_NAME='" &
                 frmComputers.cmbPCLK.Text & "'", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
 
             With rs
                 unaPCL = .Fields("id").Value
@@ -995,117 +1128,143 @@ sAR:
         rs = Nothing
 
 
-        If frmComputers.EDT = False Then
+        Select Case frmComputers.EDT
 
-            Dim rsBK As Recordset
-            rsBK = New Recordset
-            rsBK.Open(
-                "SELECT top 1 id FROM kompy WHERE NET_NAME='" & frmComputers.txtSNAME.Text & "' and MESTO='" &
-                frmComputers.cmbDepartment.Text & "' and FILIAL='" & frmComputers.cmbBranch.Text & "'  and kabn='" &
-                frmComputers.cmbOffice.Text & "' order by id desc", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+            Case False
 
+                Dim rsBK As Recordset
+                rsBK = New Recordset
+                rsBK.Open(
+                    "SELECT top 1 id FROM kompy WHERE NET_NAME='" & frmComputers.txtSNAME.Text & "' and MESTO='" &
+                    frmComputers.cmbDepartment.Text & "' and FILIAL='" & frmComputers.cmbBranch.Text & "'  and kabn='" &
+                    frmComputers.cmbOffice.Text & "' order by id desc", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-            With rsBK
+                With rsBK
 
-                frmComputers.sCOUNT = .Fields("ID").Value
+                    frmComputers.sCOUNT = .Fields("ID").Value
 
-            End With
-            rsBK.Close()
-            rsBK = Nothing
+                End With
+                rsBK.Close()
+                rsBK = Nothing
 
-            Dim objIniFile As New IniFile(PrPath & "base.ini")
-            objIniFile.WriteString("general", "DK", frmComputers.sCOUNT)
-            objIniFile.WriteString("general", "Default", 0)
+                Dim objIniFile As New IniFile(PrPath & "base.ini")
+                objIniFile.WriteString("general", "DK", frmComputers.sCOUNT)
+                objIniFile.WriteString("general", "Default", 0)
 
-        Else
+            Case True
 
-            sSQL = "SELECT count(*) as t_n FROM kompy where PCL=" & frmComputers.sCOUNT
-            rs = New Recordset
-            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
-            Dim sCON As String
-
-            With rs
-                sCON = .Fields("t_n").Value
-            End With
-            rs.Close()
-            rs = Nothing
-
-            If sCON > 0 Then
-
+                sSQL = "SELECT count(*) as t_n FROM kompy where PCL=" & frmComputers.sCOUNT
                 rs = New Recordset
-                rs.Open(
-                    "update kompy set OTvetstvennyj='" & frmComputers.cmbResponsible.Text & "', FILIAL='" &
-                    frmComputers.cmbBranch.Text & "', mesto='" & frmComputers.cmbDepartment.Text & "', kabn='" &
-                    frmComputers.cmbOffice.Text & "' WHERE PCL=" & frmComputers.sCOUNT, DB7,
-                    CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-                'rs.Close()
+                Dim sCON As String
+
+                With rs
+                    sCON = .Fields("t_n").Value
+                End With
+                rs.Close()
                 rs = Nothing
 
-            End If
+                Select Case sCON
+
+                    Case 0
+
+                    Case Else
+
+                        rs = New Recordset
+                        rs.Open(
+                            "update kompy set OTvetstvennyj='" & frmComputers.cmbResponsible.Text & "', FILIAL='" &
+                            frmComputers.cmbBranch.Text & "', mesto='" & frmComputers.cmbDepartment.Text & "', kabn='" &
+                            frmComputers.cmbOffice.Text & "' WHERE PCL=" & frmComputers.sCOUNT, DB7,
+                            CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
+                        'rs.Close()
+                        rs = Nothing
+
+                End Select
 
 
-        End If
+        End Select
+
+        Select Case sSID
+
+            Case ""
+                sSID = frmComputers.sCOUNT
+            Case 0
+                sSID = frmComputers.sCOUNT
+            Case Else
+
+        End Select
 
 
-        If Len(sSID) = 0 Then
-            sSID = frmComputers.sCOUNT
-        End If
+        Select Case frmComputers.rbSist.Checked
 
-        If frmComputers.rbSist.Checked = True Then
+            Case True
 
-            SAVE_GARANT(sSID, frmComputers.cmbPostav, frmComputers.dtGPr, frmComputers.dtGok)
+                SAVE_GARANT(sSID, frmComputers.cmbPostav, frmComputers.dtGPr, frmComputers.dtGok)
 
-        Else
+        End Select
 
+        'Сохраняем софт 
+        Call SAVE_SOFT(frmComputers.lstSoftware, frmComputers.sCOUNT)
 
-        End If
+        'Решаем что делать с деревом
+        'Если массовое добавление то ничего
+        Select Case frmComputers.MASSLOAD
 
+            Case True
 
-        'frmComputers.Invoke(New MethodInvoker(AddressOf S_P_LOAD))
+            Case False
 
+                frmComputers.txtSNAME.BackColor = frmComputers.txtSBSN.BackColor
+                frmComputers.txtPSEUDONIM.BackColor = frmComputers.txtSBSN.BackColor
+                frmComputers.cmbBranch.BackColor = frmComputers.txtSBSN.BackColor
 
-        If frmComputers.EDT = False Then
+                'Если использовали драг-н-дроп то ничего не делаем
+                Select Case frmComputers.pDRAG
 
-            Call SAVE_SOFT(frmComputers.lstSoftware, frmComputers.sCOUNT)
+                    Case False
 
-        Else
+                        'считываем из настроек
+                        Select Case TREE_UPDATE
 
-            Call SAVE_SOFT(frmComputers.lstSoftware, frmComputers.sCOUNT)
+                            Case 0
+                                'обновлять всегда при сохранении конечно кучеряво но иногда оно не надо
+                                'если добавлен новый то обновляем
+                                If frmComputers.EDT = False Then RefFilTree(frmComputers.lstGroups)
+                                'Если изменили имя, то меняем в дереве имя
+                                If sNetName = True Then frmComputers.lstGroups.SelectedNode.Text = frmComputers.txtSNAME.Text
+                                'Если редактировали то перегружаем информацию
+                                If frmComputers.EDT = True Then frmComputers.LOAD_LIST()
 
-        End If
+                                'если изменилось место положение то обновляем дерево
+                                Select Case DV2
+                                    Case True
+                                        RefFilTree(frmComputers.lstGroups)
+                                End Select
 
+                            Case 1
+                                'Обновлять по запросу, иногда оно надо и без запроса...
+                                '  If frmComputers.EDT = False Then RefFilTree(frmComputers.lstGroups)
+                                'Если изменили имя, то меняем в дереве имя
+                                If sNetName = True Then frmComputers.lstGroups.SelectedNode.Text = frmComputers.txtSNAME.Text
+                                'Если редактировали то перегружаем информацию
+                                If frmComputers.EDT = True Then frmComputers.LOAD_LIST()
 
-        If frmComputers.MASSLOAD = True Then
+                                'если изменилось место положение то обновляем дерево
+                                Select Case DV2
+                                    Case True
+                                        RefFilTree(frmComputers.lstGroups)
+                                End Select
 
+                        End Select
 
-        Else
+                End Select
 
-            frmComputers.txtSNAME.BackColor = frmComputers.txtSBSN.BackColor
-            frmComputers.txtPSEUDONIM.BackColor = frmComputers.txtSBSN.BackColor
-            frmComputers.cmbBranch.BackColor = frmComputers.txtSBSN.BackColor
+                DV2 = False
 
-            Select Case frmComputers.pDRAG
+        End Select
 
-                Case False
-
-                    Select Case TREE_UPDATE
-
-                        Case 0
-
-                            RefFilTree(frmComputers.lstGroups)
-
-                        Case 1
-
-                            frmComputers.LOAD_LIST()
-
-                    End Select
-
-            End Select
-
-
-        End If
 
 
         Exit Sub
@@ -1250,10 +1409,25 @@ err_:
                         rsSoft.Close()
                         rsSoft = Nothing
 
-                        A1 = A1 - 1
+                        'esq A1 = A1 - 1 
 
                     End If
+                     'esq ************************
+                Else
+                    Dim sSQL2 As String
+                    sSQL2 = "SELECT * FROM SOFT_INSTALL WHERE Id_Comp= " & sSID & " AND Soft='" & H1 & "'"
+
+                    Dim rs As Recordset
+                    rs = New Recordset
+                    rs.Open(sSQL2, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                    rs.Fields("NomerSoftKomp").Value = A1
+                    rs.Update()
+                    rs.Close()
+                    rs = Nothing
+                    'esq ************************
                 End If
+                A1 = A1 + 1 'esq
+
             End If
         Next
 
@@ -1472,15 +1646,31 @@ sAR:
 
                     Case 0
 
-                        RefFilTree(frmComputers.lstGroups)
+                        If frmComputers.EDT = False Then RefFilTree(frmComputers.lstGroups)
+                        If sNetName = True Then frmComputers.lstGroups.SelectedNode.Text = frmComputers.cmbPRN.Text
+                        If frmComputers.EDT = True Then frmComputers.LOAD_LIST()
+
+                        Select Case DV2
+                            Case True
+                                RefFilTree(frmComputers.lstGroups)
+                        End Select
 
                     Case 1
 
-                        frmComputers.LOAD_LIST()
+                        '  If frmComputers.EDT = False Then RefFilTree(frmComputers.lstGroups)
+                        If sNetName = True Then frmComputers.lstGroups.SelectedNode.Text = frmComputers.cmbPRN.Text
+                        If frmComputers.EDT = True Then frmComputers.LOAD_LIST()
+
+                        Select Case DV2
+                            Case True
+                                RefFilTree(frmComputers.lstGroups)
+                        End Select
 
                 End Select
 
         End Select
+
+        DV2 = False
 
         Exit Sub
 Err_:
@@ -1676,15 +1866,31 @@ sAR:
 
                     Case 0
 
-                        RefFilTree(frmComputers.lstGroups)
+                        If frmComputers.EDT = False Then RefFilTree(frmComputers.lstGroups)
+                        If sNetName = True Then frmComputers.lstGroups.SelectedNode.Text = frmComputers.cmbDevNet.Text
+                        If frmComputers.EDT = True Then frmComputers.LOAD_LIST()
+
+                        Select Case DV2
+                            Case True
+                                RefFilTree(frmComputers.lstGroups)
+                        End Select
 
                     Case 1
 
-                        frmComputers.LOAD_LIST()
+                        '  If frmComputers.EDT = False Then RefFilTree(frmComputers.lstGroups)
+                        If sNetName = True Then frmComputers.lstGroups.SelectedNode.Text = frmComputers.cmbDevNet.Text
+                        If frmComputers.EDT = True Then frmComputers.LOAD_LIST()
+
+                        Select Case DV2
+                            Case True
+                                RefFilTree(frmComputers.lstGroups)
+                        End Select
 
                 End Select
 
         End Select
+
+        DV2 = False
 
     End Sub
 
@@ -1698,9 +1904,7 @@ sAR:
 
         'sNAMEs - переданное имя 
 
-
         Dim iA, iB, iC As String
-
 
         If Len(sName) = 0 Then
 
@@ -1720,11 +1924,11 @@ sAR:
 
         End If
 
+        Select Case frmComputers.EDT
 
-        If frmComputers.EDT = True Then
+            Case True
 
-            DV = True
-
+                DV = True
 
             rs = New Recordset
             rs.Open("SELECT filial,mesto,kabn FROM kompy where id =" & frmComputers.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
@@ -1748,17 +1952,16 @@ sAR:
                 Defaults = "Причина"
                 strTmp = InputBox(Message, Title, Defaults)
 
+                Select Case strTmp
 
-                If strTmp = "" Then
+                    Case ""
+                        Sav = False
 
-                    Sav = False
+                        Exit Sub
+                    Case Else
+                        Sav = True
 
-                    Exit Sub
-                Else
-                    Sav = True
-                    'Do something with the input
-                End If
-
+                End Select
 
                 rs = New Recordset
                 rs.Open("SELECT * FROM dvig", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -1797,7 +2000,7 @@ sAR:
                 rs.Open("SELECT count(*) as t_n FROM kompy where PCL=" & frmComputers.sCOUNT, DB7,
                         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-                Dim sCN As String
+                    Dim sCN As String
 
                 With rs
                     sCN = .Fields("t_n").Value
@@ -1805,53 +2008,58 @@ sAR:
                 rs.Close()
                 rs = Nothing
 
-                If sCN > 0 Then
-                    rs = New Recordset
-                    rs.Open("SELECT id FROM kompy where PCL=" & frmComputers.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
-                            LockTypeEnum.adLockOptimistic)
-
-                    Dim rs1 As Recordset
-
-                    With rs
-                        .MoveFirst()
-                        Do While Not .EOF
-                            sCN = .Fields("id").Value
+                    DV2 = True
 
 
-                            rs1 = New Recordset
-                            rs1.Open("SELECT * FROM dvig", DB7, CursorTypeEnum.adOpenDynamic,
-                                     LockTypeEnum.adLockOptimistic)
-                            With rs1
-                                .AddNew()
-                                .Fields("id_comp").Value = sCN
-                                .Fields("oldMesto").Value = iA
-                                .Fields("NewMesto").Value = sFIALIAL
-                                .Fields("prich").Value = strTmp
-                                .Fields("data").Value = Date.Today
-                                .Fields("time").Value = sTmp.ToLongTimeString
-                                .Update()
+                    Select Case sCN
+
+                        Case 0
+
+                        Case Else
+
+                            rs = New Recordset
+                            rs.Open("SELECT id FROM kompy where PCL=" & frmComputers.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                                    LockTypeEnum.adLockOptimistic)
+
+                            Dim rs1 As Recordset
+
+                            With rs
+                                .MoveFirst()
+                                Do While Not .EOF
+                                    sCN = .Fields("id").Value
+
+                                    rs1 = New Recordset
+                                    rs1.Open("SELECT * FROM dvig", DB7, CursorTypeEnum.adOpenDynamic,
+                                             LockTypeEnum.adLockOptimistic)
+                                    With rs1
+                                        .AddNew()
+                                        .Fields("id_comp").Value = sCN
+                                        .Fields("oldMesto").Value = iA
+                                        .Fields("NewMesto").Value = sFIALIAL
+                                        .Fields("prich").Value = strTmp
+                                        .Fields("data").Value = Date.Today
+                                        .Fields("time").Value = sTmp.ToLongTimeString
+                                        .Update()
+                                    End With
+                                    rs1.Close()
+                                    rs1 = Nothing
+
+
+                                    .MoveNext()
+                                Loop
                             End With
-                            rs1.Close()
-                            rs1 = Nothing
+                            rs.Close()
+                            rs = Nothing
 
 
-                            .MoveNext()
-                        Loop
-                    End With
-                    rs.Close()
-                    rs = Nothing
+                    End Select
 
+
+                Else
 
                 End If
 
-
-            Else
-
-            End If
-
-        Else
-
-        End If
+        End Select
 
 
         Exit Sub

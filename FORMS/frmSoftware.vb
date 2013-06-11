@@ -1034,7 +1034,7 @@ Public Class frmSoftware
 
         End If
 
-        Call textp_Upd(Me.lstSoftware)
+        Call textp_Upd(Me.lstSoftware, sCOUNT) 'esq
 
         Dim langfile As New IniFile(sLANGPATH)
 

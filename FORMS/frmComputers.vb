@@ -299,6 +299,10 @@ Public Class frmComputers
         bSVGAPlus.Image = New Bitmap(PrPath & "pic\iface\add.png")
         bOpticalPlus.Image = New Bitmap(PrPath & "pic\iface\add.png")
         bNetPlus.Image = New Bitmap(PrPath & "pic\iface\add.png")
+        bMonitorPlus.Image = New Bitmap(PrPath & "pic\iface\add.png")
+        bPrinterPlus.Image = New Bitmap(PrPath & "pic\iface\add.png")
+
+
     End Sub
 
     Private Sub Tool_Tips_Forms()
@@ -518,7 +522,7 @@ err_:
 
     Private Sub RESIZER()
 
-        If spCont.SplitterDistance > 450 Then spCont.SplitterDistance = 450
+        If spCont.SplitterDistance > 650 Then spCont.SplitterDistance = 650
         If spCont.SplitterDistance < 250 Then spCont.SplitterDistance = 250
         PROiZV39.Width = gbOTh.Width - 475
     End Sub

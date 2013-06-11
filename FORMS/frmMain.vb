@@ -1812,11 +1812,7 @@ err_:
 
                     Call SAVE_INF_BRANCHE()
 
-
-
                 Case "C"
-
-
 
             End Select
 
@@ -1830,6 +1826,7 @@ ADD:
         If frmComputers.EDT = True Then
 
             PreSaveOtv(sBranch, sDepartment, sOffice)
+            PreSaveName(frmComputers.sCOUNT)
 
         End If
 

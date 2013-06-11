@@ -1115,7 +1115,7 @@
 
         On Error Resume Next
 
-        Call textp_Upd(frmComputers.lstSoftware)
+        Call textp_Upd(frmComputers.lstSoftware, frmComputers.sCOUNT) 'esq
 
         '################
         'Процессор
@@ -1598,7 +1598,7 @@
                 ob_rez = ob1 + ob2 + ob3
             Else
             End If
-            ob_Gb = CStr(ob_rez/1000) & " Гб"
+            ob_Gb = CStr(ob_rez / 1000) & " Гб"
             frmComputers.txtHDDo1.Text = ob_Gb
         End If
 
@@ -1894,7 +1894,7 @@
                 End If
 
             End If
-            nextA:
+nextA:
         Next
 
 
@@ -2121,17 +2121,17 @@
 
 
         Exit Sub
-        Err_handler:
+Err_handler:
         'cdat
     End Sub
 
-    Public Sub textp_Upd(ByVal lstV As ListView)
+    Public Sub textp_Upd(ByVal lstV As ListView, ByVal sSID As Integer)
         Dim uname As String
         Dim uname1 As String
         Dim uname2 As String
         Dim uname3 As String
         Dim A As String
-        Dim intj As Integer
+        Dim intj, intjk, beg, po_count As Integer 'esq
 
         'If MsgBox("Обновление программного обеспечения может привести к потере" & vbNewLine & " ваших старых данных о ПО" & vbNewLine & "Желаете продолжить?", vbExclamation + vbYesNo, "Обновление ПО","") = vbNo Then Exit Sub
 
@@ -2139,13 +2139,50 @@
         A = "Установленные программы"
         'lstV.ListItems.Clear
 
+        'esq *****************************
+
+        Dim EverAll_PO As String
+        Dim everFile As New IniFile(EverestFilePatch)
+        EverAll_PO = "/"
+        For intj = 1 To 400
+            A = "Установленные программы" & intj
+            uname = Trim(everFile.GetString("Установленные программы", A, ""))
+            EverAll_PO = EverAll_PO & uname & "/"
+        Next
+        Dim sSQL, sSQL2 As String
+        sSQL = "SELECT * FROM SOFT_INSTALL WHERE Id_Comp =" & sSID ' & " and Soft not like '%update%' and Soft not like '%Обновление%'" ORDER BY Soft, NomerSoftKomp"
+        sSQL2 = "SELECT COUNT(*) as po_count FROM SOFT_INSTALL WHERE Id_Comp =" & sSID
+
+        Dim rs As Recordset
+        rs = New Recordset
+        rs.Open(sSQL2, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+        po_count = rs.Fields("po_count").Value
+        rs.Close()
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+        If po_count > 0 Then
+            rs.MoveFirst()
+            Do While Not rs.EOF
+                If InStr(EverAll_PO, "/" & Trim(rs.Fields("Soft").Value) & "/") = 0 Then
+                    rs.Delete()
+                Else
+                    beg = InStr(EverAll_PO, "/" & Trim(rs.Fields("Soft").Value) & "/")
+                    EverAll_PO = Left(EverAll_PO, beg) & Right(EverAll_PO, Len(EverAll_PO) - beg - Len(Trim(rs.Fields("Soft").Value)) - 1)
+                End If
+                rs.MoveNext()
+            Loop
+        End If
+        rs.Close()
+        rs = Nothing
+        Call LOAD_SOFT(sSID, lstV)
+
+        Dim everIniFile As New IniFile(EverestFilePatch)
+        'esq *****************************
 
         For intj = 1 To 400
 
             A = "Установленные программы" & intj
 
 
-            Dim everIniFile As New IniFile(EverestFilePatch)
             uname = everIniFile.GetString("Установленные программы", A, "")
 
             If uname Like "Update" Then GoTo A2
@@ -2167,86 +2204,86 @@
                     uname1 = everIniFile.GetString("Установленные программы", uname & "|Publisher", "")
                     uname2 = everIniFile.GetString("Установленные программы", uname & "|Дата", "")
 
-
-                    If Not (RSExistsSoft(frmComputers.sCOUNT, uname)) Then
+                    If Not (RSExistsSoft(sSID, uname)) Then 'esq frmComputers.sCOUNT
 
                         If uname2 = "<N/A>" Then uname2 = Date.Today
                         If Len(uname2) = 0 Then uname2 = Date.Today
 
                         lstV.Items.Add(lstV.Items.Count + 1)
-                        lstV.Items(intj).SubItems.Add(lstV.Items.Count)
-                        lstV.Items(intj).SubItems.Add(uname)
-                        lstV.Items(intj).SubItems.Add("")
-                        lstV.Items(intj).SubItems.Add("")
-                        lstV.Items(intj).SubItems.Add(uname2)
-                        lstV.Items(intj).SubItems.Add(Date.Today)
-                        lstV.Items(intj).SubItems.Add(uname1)
-                        lstV.Items(intj).SubItems.Add("")
-                        lstV.Items(intj).EnsureVisible()
+                        'esq *****************************
+                        intjk = lstV.Items.Count - 1
+
+                        lstV.Items(intjk).SubItems.Add(lstV.Items.Count + 1)
+                        lstV.Items(intjk).SubItems.Add(uname)
+                        lstV.Items(intjk).SubItems.Add("")
+                        lstV.Items(intjk).SubItems.Add("")
+                        lstV.Items(intjk).SubItems.Add(uname2)
+                        lstV.Items(intjk).SubItems.Add(Date.Today)
+                        lstV.Items(intjk).SubItems.Add(uname1)
+                        lstV.Items(intjk).SubItems.Add("")
+                        'lstV.Items(intjk).EnsureVisible()
+                        'esq *****************************
                     End If
 
                 Else
-
-                    Dim OS_OS, SAGAZOD, B As String
-                    OS_OS = everIniFile.GetString("Операционная система", "Свойства операционной системы|Название ОС",
-                                                  "")
-                    SAGAZOD = everIniFile.GetString("Операционная система", "Лицензионная информация|Ключ продукта", "")
-                    OS_OS = OS_OS & " " &
-                            everIniFile.GetString("Операционная система",
-                                                  "Свойства операционной системы|Пакет обновления ОС", "")
-
-                    If Not (RSExistsSoft(frmComputers.sCOUNT, OS_OS)) Then
-                        lstV.Items.Add(lstV.Items.Count + 1)
-                        lstV.Items(intj).SubItems.Add(lstV.Items.Count)
-                        lstV.Items(intj).SubItems.Add(OS_OS)
-                        lstV.Items(intj).SubItems.Add(SAGAZOD)
-                        lstV.Items(intj).SubItems.Add("")
-                        lstV.Items(intj).SubItems.Add(Date.Today)
-                        lstV.Items(intj).SubItems.Add(Date.Today)
-                        lstV.Items(intj).SubItems.Add("Microsoft Corporation")
-                        lstV.Items(intj).SubItems.Add("Операционная система")
-
-                        Exit Sub
-                    End If
-
+                    'esq *****************************
+                    'Exit Sub 
+                    'esq *****************************
                 End If
-
             Else
-
-
                 Dim zagu As String
                 zagu = InStr(uname, "для Windows XP")
                 If zagu = "0" Then
 
-                    If Not (RSExistsSoft(frmComputers.sCOUNT, uname)) Then
+                    If Not (RSExistsSoft(sSID, uname)) Then 'esq frmComputers.sCOUNT
                         'If SERT$ = 0 Then
                         If uname2 = "<N/A>" Then uname2 = Date.Today
                         If Len(uname2) = 0 Then uname2 = Date.Today
 
                         lstV.Items.Add(lstV.Items.Count + 1)
-                        lstV.Items(intj).SubItems.Add(lstV.Items.Count)
-                        lstV.Items(intj).SubItems.Add(uname)
-                        lstV.Items(intj).SubItems.Add("")
-                        lstV.Items(intj).SubItems.Add("")
-                        lstV.Items(intj).SubItems.Add(uname2)
-                        lstV.Items(intj).SubItems.Add(Date.Today)
-                        lstV.Items(intj).SubItems.Add(uname1)
-                        lstV.Items(intj).SubItems.Add("")
-                        'lstV.ListItems(intj).SubItems(7) = uname2
-                        lstV.Items(intj).EnsureVisible()
-                    End If
+                        'esq *****************************
+                        intjk = lstV.Items.Count - 1
 
+                        lstV.Items(intjk).SubItems.Add(lstV.Items.Count + 1)
+                        lstV.Items(intjk).SubItems.Add(uname)
+                        lstV.Items(intjk).SubItems.Add("")
+                        lstV.Items(intjk).SubItems.Add("")
+                        lstV.Items(intjk).SubItems.Add(uname2)
+                        lstV.Items(intjk).SubItems.Add(Date.Today)
+                        lstV.Items(intjk).SubItems.Add(uname1)
+                        lstV.Items(intjk).SubItems.Add("")
+                        'lstV.ListItems(intj).SubItems(7) = uname2              
+                        'lstV.Items(intjk).EnsureVisible()                      
+                        'esq *****************************
+                    End If
                 Else
                 End If
-
             End If
-
-            A2:
-
+A2:
         Next
 
+        'esq *****************************
+        Dim OS_OS, SAGAZOD, B As String
+        OS_OS = everIniFile.GetString("Операционная система", "Свойства операционной системы|Название ОС", "")
+        SAGAZOD = everIniFile.GetString("Операционная система", "Лицензионная информация|Ключ продукта", "")
+        OS_OS = OS_OS & " " & everIniFile.GetString("Операционная система", "Свойства операционной системы|Пакет обновления ОС", "")
+
+        If Not (RSExistsSoft(sSID, OS_OS)) Then
+            lstV.Items.Add(lstV.Items.Count + 1)
+            intjk = lstV.Items.Count - 1
+
+            lstV.Items(intjk).SubItems.Add(lstV.Items.Count + 1)
+            lstV.Items(intjk).SubItems.Add(OS_OS)
+            lstV.Items(intjk).SubItems.Add(SAGAZOD)
+            lstV.Items(intjk).SubItems.Add("")
+            lstV.Items(intjk).SubItems.Add(Date.Today)
+            lstV.Items(intjk).SubItems.Add(Date.Today)
+            lstV.Items(intjk).SubItems.Add("Microsoft Corporation")
+            lstV.Items(intjk).SubItems.Add("Операционная система")
+        End If
+        'esq *****************************
 
         Exit Sub
-        Err_handler:
+Err_handler:
     End Sub
 End Module
