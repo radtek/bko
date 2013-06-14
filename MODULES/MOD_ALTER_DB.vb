@@ -1058,7 +1058,7 @@ err_:
 
             Case "MS SQL 2008"
 
-                sSQL = "ALTER TABLE " & DBtabl & ".dbo.kompy ADD COLUMN MB_NAME ntext"
+                sSQL = "ALTER TABLE " & DBtabl & ".dbo.kompy ADD MB_NAME ntext"
 
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -1070,7 +1070,7 @@ err_:
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
-                sSQL = "ALTER TABLE " & DBtabl & ".dbo.kompy DROP COLUMN Mb, nomerPC, TEXT_RED, EXCELL_RED, ACCESS_RED, VG, IG"
+                sSQL = "ALTER TABLE " & DBtabl & ".dbo.kompy DROP Mb, nomerPC, TEXT_RED, EXCELL_RED, ACCESS_RED, VG, IG"
 
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -1079,7 +1079,7 @@ err_:
 
             Case "MS SQL"
 
-                sSQL = "ALTER TABLE " & DBtabl & ".dbo.kompy ADD COLUMN MB_NAME ntext"
+                sSQL = "ALTER TABLE " & DBtabl & ".dbo.kompy ADD MB_NAME ntext"
 
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -1091,7 +1091,7 @@ err_:
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
-                sSQL = "ALTER TABLE " & DBtabl & ".dbo.kompy DROP COLUMN Mb, nomerPC, TEXT_RED, EXCELL_RED, ACCESS_RED, VG, IG"
+                sSQL = "ALTER TABLE " & DBtabl & ".dbo.kompy DROP Mb, nomerPC, TEXT_RED, EXCELL_RED, ACCESS_RED, VG, IG"
 
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)

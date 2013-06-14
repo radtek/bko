@@ -373,49 +373,10 @@ sAR:
 
         SAVE_GARANT(sSID, frmComputers.cmbOTHPostav, frmComputers.dtGOTHPr, frmComputers.dtGOTHok)
 
-
         frmComputers.cmbOTH.BackColor = frmComputers.cmbOTH.BackColor
         frmComputers.cmbOTHFil.BackColor = frmComputers.cmbOTHFil.BackColor
 
-        Select Case frmComputers.pDRAG
-
-            Case False
-
-                Select Case TREE_UPDATE
-
-                    Case 0
-
-                        If frmComputers.EDT = False Then RefFilTree(frmComputers.lstGroups)
-                        If sNetName = True Then frmComputers.lstGroups.SelectedNode.Text = frmComputers.cmbOTH.Text
-                        If frmComputers.EDT = True Then frmComputers.LOAD_LIST()
-
-                        Select Case DV2
-
-                            Case True
-
-                                RefFilTree(frmComputers.lstGroups)
-
-                        End Select
-
-                    Case 1
-
-                        '  If frmComputers.EDT = False Then RefFilTree(frmComputers.lstGroups)
-                        If sNetName = True Then frmComputers.lstGroups.SelectedNode.Text = frmComputers.cmbOTH.Text
-                        If frmComputers.EDT = True Then frmComputers.LOAD_LIST()
-
-                        Select Case DV2
-
-                            Case True
-
-                                RefFilTree(frmComputers.lstGroups)
-
-                        End Select
-
-                End Select
-
-        End Select
-
-        DV2 = False
+        Call UpdateTree(frmComputers.cmbOTH.Text)
 
         Exit Sub
 Err_:
@@ -671,39 +632,7 @@ sAR:
         frmComputers.cmbOTH.BackColor = frmComputers.cmbOTH.BackColor
         frmComputers.cmbOTHFil.BackColor = frmComputers.cmbOTHFil.BackColor
 
-        Select Case frmComputers.pDRAG
-
-            Case False
-
-                Select Case TREE_UPDATE
-
-                    Case 0
-
-                        If frmComputers.EDT = False Then RefFilTree(frmComputers.lstGroups)
-                        If sNetName = True Then frmComputers.lstGroups.SelectedNode.Text = frmComputers.cmbOTH.Text
-                        If frmComputers.EDT = True Then frmComputers.LOAD_LIST()
-
-                        Select Case DV2
-                            Case True
-                                RefFilTree(frmComputers.lstGroups)
-                        End Select
-
-                    Case 1
-
-                        '  If frmComputers.EDT = False Then RefFilTree(frmComputers.lstGroups)
-                        If sNetName = True Then frmComputers.lstGroups.SelectedNode.Text = frmComputers.cmbOTH.Text
-                        If frmComputers.EDT = True Then frmComputers.LOAD_LIST()
-
-                        Select Case DV2
-                            Case True
-                                RefFilTree(frmComputers.lstGroups)
-                        End Select
-
-                End Select
-
-        End Select
-
-        DV2 = False
+       Call UpdateTree(frmComputers.cmbOTH.Text)
 
         Exit Sub
 Err_:
@@ -1221,47 +1150,8 @@ sAR:
                 frmComputers.cmbBranch.BackColor = frmComputers.txtSBSN.BackColor
 
                 'Если использовали драг-н-дроп то ничего не делаем
-                Select Case frmComputers.pDRAG
 
-                    Case False
-
-                        'считываем из настроек
-                        Select Case TREE_UPDATE
-
-                            Case 0
-                                'обновлять всегда при сохранении конечно кучеряво но иногда оно не надо
-                                'если добавлен новый то обновляем
-                                If frmComputers.EDT = False Then RefFilTree(frmComputers.lstGroups)
-                                'Если изменили имя, то меняем в дереве имя
-                                If sNetName = True Then frmComputers.lstGroups.SelectedNode.Text = frmComputers.txtSNAME.Text
-                                'Если редактировали то перегружаем информацию
-                                If frmComputers.EDT = True Then frmComputers.LOAD_LIST()
-
-                                'если изменилось место положение то обновляем дерево
-                                Select Case DV2
-                                    Case True
-                                        RefFilTree(frmComputers.lstGroups)
-                                End Select
-
-                            Case 1
-                                'Обновлять по запросу, иногда оно надо и без запроса...
-                                '  If frmComputers.EDT = False Then RefFilTree(frmComputers.lstGroups)
-                                'Если изменили имя, то меняем в дереве имя
-                                If sNetName = True Then frmComputers.lstGroups.SelectedNode.Text = frmComputers.txtSNAME.Text
-                                'Если редактировали то перегружаем информацию
-                                If frmComputers.EDT = True Then frmComputers.LOAD_LIST()
-
-                                'если изменилось место положение то обновляем дерево
-                                Select Case DV2
-                                    Case True
-                                        RefFilTree(frmComputers.lstGroups)
-                                End Select
-
-                        End Select
-
-                End Select
-
-                DV2 = False
+                Call UpdateTree(frmComputers.txtSNAME.Text)
 
         End Select
 
@@ -1271,17 +1161,6 @@ sAR:
 err_:
         MsgBox(Err.Description)
     End Sub
-
-    'Private Sub S_P_LOAD()
-
-    '    If frmComputers.InvokeRequired Then
-    '        frmComputers.Invoke(New MethodInvoker(AddressOf S_P_LOAD))
-
-    '    Else
-    '        Call SAVE_SOFT(frmComputers.sCOUNT)
-    '    End If
-    'End Sub
-
 
     Public Sub SAVE_SOFT(ByVal lstV As ListView, Optional ByVal sSID As Integer = 0)
         On Error Resume Next
@@ -1412,7 +1291,7 @@ err_:
                         'esq A1 = A1 - 1 
 
                     End If
-                     'esq ************************
+                    'esq ************************
                 Else
                     Dim sSQL2 As String
                     sSQL2 = "SELECT * FROM SOFT_INSTALL WHERE Id_Comp= " & sSID & " AND Soft='" & H1 & "'"
@@ -1633,44 +1512,11 @@ sAR:
         End If
 
         SAVE_GARANT(sSID, frmComputers.cmbPRNPostav, frmComputers.dtGPRNPr, frmComputers.dtGPRNok)
-
-
+        
         frmComputers.cmbPRN.BackColor = frmComputers.cmbPRN.BackColor
         frmComputers.cmbPRNFil.BackColor = frmComputers.cmbPRNFil.BackColor
 
-        Select Case frmComputers.pDRAG
-
-            Case False
-
-                Select Case TREE_UPDATE
-
-                    Case 0
-
-                        If frmComputers.EDT = False Then RefFilTree(frmComputers.lstGroups)
-                        If sNetName = True Then frmComputers.lstGroups.SelectedNode.Text = frmComputers.cmbPRN.Text
-                        If frmComputers.EDT = True Then frmComputers.LOAD_LIST()
-
-                        Select Case DV2
-                            Case True
-                                RefFilTree(frmComputers.lstGroups)
-                        End Select
-
-                    Case 1
-
-                        '  If frmComputers.EDT = False Then RefFilTree(frmComputers.lstGroups)
-                        If sNetName = True Then frmComputers.lstGroups.SelectedNode.Text = frmComputers.cmbPRN.Text
-                        If frmComputers.EDT = True Then frmComputers.LOAD_LIST()
-
-                        Select Case DV2
-                            Case True
-                                RefFilTree(frmComputers.lstGroups)
-                        End Select
-
-                End Select
-
-        End Select
-
-        DV2 = False
+       Call UpdateTree(frmComputers.cmbPRN.Text)
 
         Exit Sub
 Err_:
@@ -1858,6 +1704,14 @@ sAR:
         frmComputers.cmbDevNet.BackColor = frmComputers.txtSBSN.BackColor
         frmComputers.cmbNETBranch.BackColor = frmComputers.txtSBSN.BackColor
 
+
+        Call UpdateTree(frmComputers.cmbDevNet.Text)
+
+        
+    End Sub
+
+    Private Sub UpdateTree(ByVal sTXT As String)
+
         Select Case frmComputers.pDRAG
 
             Case False
@@ -1867,7 +1721,7 @@ sAR:
                     Case 0
 
                         If frmComputers.EDT = False Then RefFilTree(frmComputers.lstGroups)
-                        If sNetName = True Then frmComputers.lstGroups.SelectedNode.Text = frmComputers.cmbDevNet.Text
+                        If sNetName = True Then frmComputers.lstGroups.SelectedNode.Text = sTXT
                         If frmComputers.EDT = True Then frmComputers.LOAD_LIST()
 
                         Select Case DV2
@@ -1878,7 +1732,7 @@ sAR:
                     Case 1
 
                         '  If frmComputers.EDT = False Then RefFilTree(frmComputers.lstGroups)
-                        If sNetName = True Then frmComputers.lstGroups.SelectedNode.Text = frmComputers.cmbDevNet.Text
+                        If sNetName = True Then frmComputers.lstGroups.SelectedNode.Text = sTXT
                         If frmComputers.EDT = True Then frmComputers.LOAD_LIST()
 
                         Select Case DV2
@@ -1893,6 +1747,7 @@ sAR:
         DV2 = False
 
     End Sub
+
 
     Private Sub DVIG_TEHN(ByVal sFIALIAL As String, ByVal sOTDEL As String, ByVal sKABN As String,
                           ByVal sNAMEs As String)
@@ -2490,12 +2345,16 @@ Error_:
                 rs.Close()
                 rs = Nothing
 
+
+
                 sSQL = "SELECT id,MONITOR_NAME,MONITOR_DUM,MONITOR_SN,MONITOR_PROIZV,INV_NO_MONITOR FROM kompy where PCL=" & sSID & " and tiptehn = 'MONITOR'"
 
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 Dim i As Integer = 1
+
+                Dim sTMP0 As String
 
                 With rs
                     .MoveFirst()
@@ -2512,6 +2371,7 @@ Error_:
                             Case 1
 
                                 With rs1
+                                    sTMP0 = rs.Fields("MONITOR_NAME").Value
                                     rs1.Fields("MONITOR_NAME").Value = rs.Fields("MONITOR_NAME").Value
                                     rs1.Fields("MONITOR_DUM").Value = rs.Fields("MONITOR_DUM").Value
                                     rs1.Fields("MONITOR_SN").Value = rs.Fields("MONITOR_SN").Value
@@ -2530,6 +2390,7 @@ Error_:
                                     Case 2
 
                                         With rs1
+                                            sTMP0 = rs.Fields("MONITOR_NAME").Value
                                             rs1.Fields("MONITOR_NAME2").Value = rs.Fields("MONITOR_NAME").Value
                                             rs1.Fields("MONITOR_DUM2").Value = rs.Fields("MONITOR_DUM").Value
                                             rs1.Fields("MONITOR_SN2").Value = rs.Fields("MONITOR_SN").Value
@@ -2543,6 +2404,7 @@ Error_:
                                     Case Else
 
                                         With rs1
+                                            sTMP0 = rs.Fields("MONITOR_NAME").Value
                                             rs1.Fields("MONITOR_NAME").Value = rs.Fields("MONITOR_NAME").Value
                                             rs1.Fields("MONITOR_DUM").Value = rs.Fields("MONITOR_DUM").Value
                                             rs1.Fields("MONITOR_SN").Value = rs.Fields("MONITOR_SN").Value
@@ -2594,6 +2456,23 @@ Error_:
                 End With
                 rs.Close()
                 rs = Nothing
+
+                'Dim obj As New TreeNode()
+
+                'Dim text As String = String.Empty
+                'Dim tag As String = String.Empty
+
+                'text = sTMP0
+
+                'tag = "C|" & tId
+                'If text <> String.Empty AndAlso tag <> String.Empty Then
+                '    obj.Text = text
+                '    obj.Tag = tag
+                '    frmComputers.lstGroups.Nodes.RemoveAt(0)
+                '    MessageBox.Show("Node Dleted" & frmComputers.lstGroups.Nodes.Count.ToString())
+                'Else
+                '    MessageBox.Show("add all values")
+                'End If
 
                 'Принтеры
                 sSQL = "SELECT count(*) as t_n FROM kompy where PCL=" & sSID & " and tiptehn = 'Printer'"
@@ -3323,8 +3202,7 @@ Error_:
 
         If TREE_UPDATE = 0 Then RefFilTree(frmComputers.lstGroups) Else frmComputers.LOAD_LIST()
     End Sub
-
-
+    
     Public Sub Re_PRN(Optional ByVal sSID As Integer = 0)
         On Error GoTo err_
         Dim sADD As Boolean
@@ -3386,7 +3264,6 @@ Error_:
                             If Not IsDBNull(rsdb.Fields("INV_NO_PRINTER").Value) Then _
                                 .Fields("INV_NO_PRINTER").Value = rsdb.Fields("INV_NO_PRINTER").Value
 
-
                             .Fields("port_1").Value = ""
                             .Fields("FILIAL").Value = sBranch
                             .Fields("mesto").Value = sDepartment
@@ -3412,12 +3289,13 @@ Error_:
                             .Fields("Spisan").Value = 0
                             .Fields("Balans").Value = 0
 
-                            .Update()
+                          .Update()
                         End With
 
                         rs.Close()
                         rs = Nothing
 
+                       
 
                         sSQL = "SELECT PRINTER_NAME_1,PRINTER_SN_1,PRINTER_PROIZV_1,port_1,INV_NO_PRINTER FROM kompy where id=" & sSID
 
@@ -3455,6 +3333,8 @@ Error_:
 
                         objIniFile.WriteString("general", "DK", sPRN)
                         objIniFile.WriteString("general", "Default", 0)
+
+                        Filling_TREE_DATA(frmComputers.lstGroups, sPRN, frmComputers.lstGroups.SelectedNode, 0, 0, sTEMP0, 7)
 
                     End If
 
@@ -3528,8 +3408,7 @@ Error_:
                             .Fields("Spisan").Value = 0
                             .Fields("Balans").Value = 0
 
-
-                            .Update()
+                           .Update()
                         End With
 
                         rs.Close()
@@ -3572,7 +3451,7 @@ Error_:
 
                         objIniFile.WriteString("general", "DK", sPRN)
                         objIniFile.WriteString("general", "Default", 0)
-
+                        Filling_TREE_DATA(frmComputers.lstGroups, sPRN, frmComputers.lstGroups.SelectedNode, 0, 0, sTEMP0, 7)
                     End If
                 End If
 
@@ -3645,8 +3524,7 @@ Error_:
                             .Fields("Spisan").Value = 0
                             .Fields("Balans").Value = 0
 
-
-                            .Update()
+                           .Update()
                         End With
 
                         rs.Close()
@@ -3689,7 +3567,7 @@ Error_:
 
                         objIniFile.WriteString("general", "DK", sPRN)
                         objIniFile.WriteString("general", "Default", 0)
-
+                        Filling_TREE_DATA(frmComputers.lstGroups, sPRN, frmComputers.lstGroups.SelectedNode, 0, 0, sTEMP0, 7)
                     End If
                 End If
 
@@ -3805,7 +3683,7 @@ Error_:
 
                         objIniFile.WriteString("general", "DK", sPRN)
                         objIniFile.WriteString("general", "Default", 0)
-
+                        Filling_TREE_DATA(frmComputers.lstGroups, sPRN, frmComputers.lstGroups.SelectedNode, 0, 0, sTEMP0, 17)
                     End If
                 End If
 
@@ -3880,7 +3758,7 @@ Error_:
                             .Fields("Spisan").Value = 0
                             .Fields("Balans").Value = 0
 
-                            .Update()
+                           .Update()
                         End With
 
                         rs.Close()
@@ -3922,7 +3800,7 @@ Error_:
 
                         objIniFile.WriteString("general", "DK", sPRN)
                         objIniFile.WriteString("general", "Default", 0)
-
+                        Filling_TREE_DATA(frmComputers.lstGroups, sPRN, frmComputers.lstGroups.SelectedNode, 0, 0, sTEMP0, 41)
                     End If
                 End If
 
@@ -3998,7 +3876,7 @@ Error_:
                             .Fields("Spisan").Value = 0
                             .Fields("Balans").Value = 0
 
-                            .Update()
+                           .Update()
                         End With
 
                         rs.Close()
@@ -4039,7 +3917,7 @@ Error_:
 
                         objIniFile.WriteString("general", "DK", sPRN)
                         objIniFile.WriteString("general", "Default", 0)
-
+                        Filling_TREE_DATA(frmComputers.lstGroups, sPRN, frmComputers.lstGroups.SelectedNode, 0, 0, sTEMP0, 46)
                     End If
                 End If
 
@@ -4142,7 +4020,7 @@ Error_:
 
                         objIniFile.WriteString("general", "DK", sPRN)
                         objIniFile.WriteString("general", "Default", 0)
-
+                        Filling_TREE_DATA(frmComputers.lstGroups, sPRN, frmComputers.lstGroups.SelectedNode, 0, 0, sTEMP0, 47)
                     End If
                 End If
 
@@ -4265,7 +4143,7 @@ Error_:
                         With rsBK
 
                             sPRN = .Fields("ID").Value
-
+                            Filling_TREE_DATA(frmComputers.lstGroups, sSID, frmComputers.lstGroups.SelectedNode, 0, 0, sTEMP0, 61)
                         End With
                         rsBK.Close()
                         rsBK = Nothing
@@ -4289,6 +4167,7 @@ Error_:
         If MRZD = True Then Exit Sub
 
         If sADD = True Then
+
             If TREE_UPDATE = 0 Then RefFilTree(frmComputers.lstGroups) Else frmComputers.LOAD_LIST()
 
         End If

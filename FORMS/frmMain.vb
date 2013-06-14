@@ -1241,8 +1241,8 @@ err_:
     '#################################################################################################
     Private Sub ФотоаппаратToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ФотоаппаратToolStripMenuItem.Click
         frmComputers.txtMonDum.Visible = False
-        frmComputers.txtOTHSN.Left = "249"
-        frmComputers.txtOTHSN.Width = "214"
+        frmComputers.txtOTHSN.Left = "249" 'esq 130612"249"
+        frmComputers.txtOTHSN.Width = "214" 'esq 130612 "214"
 
         FillComboNET(frmComputers.cmbOTH, "name", "spr_photo", "", False, True)
         frmComputers.lblTipOther.Visible = False
@@ -1274,8 +1274,8 @@ err_:
 
     Private Sub ФаксToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ФаксToolStripMenuItem.Click
         frmComputers.txtMonDum.Visible = False
-        frmComputers.txtOTHSN.Left = "249"
-        frmComputers.txtOTHSN.Width = "214"
+        frmComputers.txtOTHSN.Left = "331" 'esq 130612 "249"
+        frmComputers.txtOTHSN.Width = "284" 'esq 130612"214"
 
         FillComboNET(frmComputers.cmbOTH, "name", "spr_fax", "", False, True)
         frmComputers.lblTipOther.Visible = False
@@ -1307,8 +1307,8 @@ err_:
 
     Private Sub ТелефонToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ТелефонToolStripMenuItem.Click
         frmComputers.txtMonDum.Visible = False
-        frmComputers.txtOTHSN.Left = "249"
-        frmComputers.txtOTHSN.Width = "214"
+        frmComputers.txtOTHSN.Left = "249" 'esq 130612"249"
+        frmComputers.txtOTHSN.Width = "214" 'esq 130612 "214"
 
         Call ClearForm(frmComputers)
 
@@ -1341,8 +1341,8 @@ err_:
 
     Private Sub ДисководZIPToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ДисководZIPToolStripMenuItem.Click
         frmComputers.txtMonDum.Visible = False
-        frmComputers.txtOTHSN.Left = "249"
-        frmComputers.txtOTHSN.Width = "214"
+        frmComputers.txtOTHSN.Left = "249" 'esq 130612"249"
+        frmComputers.txtOTHSN.Width = "214" 'esq 130612 "214"
 
         Call ClearForm(frmComputers)
 
@@ -1374,8 +1374,8 @@ err_:
 
     Private Sub СканерToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles СканерToolStripMenuItem.Click
         frmComputers.txtMonDum.Visible = False
-        frmComputers.txtOTHSN.Left = "249"
-        frmComputers.txtOTHSN.Width = "214"
+        frmComputers.txtOTHSN.Left = "249" 'esq 130612"249"
+        frmComputers.txtOTHSN.Width = "214" 'esq 130612 "214"
 
         Call ClearForm(frmComputers)
 
@@ -1471,8 +1471,8 @@ err_:
         frmComputers.cmbOTHOffice.Text = sOffice
 
         frmComputers.txtMonDum.Visible = True
-        frmComputers.txtOTHSN.Left = "355"
-        frmComputers.txtOTHSN.Width = "108"
+        frmComputers.txtOTHSN.Left = "471" 'esq 130612"355"
+        frmComputers.txtOTHSN.Width = "146" 'esq 130612"108"
 
         frmComputers.lblTipOther.Visible = False
         frmComputers.cmbOTHConnect.Visible = False
@@ -1776,6 +1776,7 @@ err_:
     Private Sub SaveInfTehButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SaveInfTehButton.Click
 
         Call SaveInfTeh()
+        RefFilTree(frmComputers.lstGroups) 'esq 130612
 
     End Sub
 
@@ -2116,8 +2117,8 @@ ADD:
 
     Private Sub СетевыеФильтрыToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles СетевыеФильтрыToolStripMenuItem.Click
         frmComputers.txtMonDum.Visible = False
-        frmComputers.txtOTHSN.Left = "249"
-        frmComputers.txtOTHSN.Width = "214"
+        frmComputers.txtOTHSN.Left = "249" 'esq 130612"249"
+        frmComputers.txtOTHSN.Width = "214" 'esq 130612 "214"
 
         Call ClearForm(frmComputers)
         FillComboNET(frmComputers.cmbOTH, "name", "SPR_FS", "", False, True)
@@ -2150,8 +2151,8 @@ ADD:
 
     Private Sub БесперебойникиToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles БесперебойникиToolStripMenuItem.Click
         frmComputers.txtMonDum.Visible = False
-        frmComputers.txtOTHSN.Left = "249"
-        frmComputers.txtOTHSN.Width = "214"
+        frmComputers.txtOTHSN.Left = "249" 'esq 130612"249"
+        frmComputers.txtOTHSN.Width = "214" 'esq 130612 "214"
 
         Call ClearForm(frmComputers)
 
@@ -2185,8 +2186,8 @@ ADD:
 
     Private Sub АккустическиеСистемыToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles АккустическиеСистемыToolStripMenuItem.Click
         frmComputers.txtMonDum.Visible = False
-        frmComputers.txtOTHSN.Left = "249"
-        frmComputers.txtOTHSN.Width = "214"
+        frmComputers.txtOTHSN.Left = "249" 'esq 130612"249"
+        frmComputers.txtOTHSN.Width = "214" 'esq 130612 "214"
 
         Call ClearForm(frmComputers)
 
@@ -2221,8 +2222,8 @@ ADD:
 
     Private Sub USBУстройстваToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles USBУстройстваToolStripMenuItem.Click
         frmComputers.txtMonDum.Visible = False
-        frmComputers.txtOTHSN.Left = "249"
-        frmComputers.txtOTHSN.Width = "214"
+        frmComputers.txtOTHSN.Left = "249" 'esq 130612"249"
+        frmComputers.txtOTHSN.Width = "214" 'esq 130612 "214"
 
         Call ClearForm(frmComputers)
 
@@ -2257,8 +2258,8 @@ ADD:
 
     Private Sub КлавиатураToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles КлавиатураToolStripMenuItem.Click
         frmComputers.txtMonDum.Visible = False
-        frmComputers.txtOTHSN.Left = "249"
-        frmComputers.txtOTHSN.Width = "214"
+        frmComputers.txtOTHSN.Left = "249" 'esq 130612"249"
+        frmComputers.txtOTHSN.Width = "214" 'esq 130612 "214"
 
         Call ClearForm(frmComputers)
 
@@ -2293,8 +2294,8 @@ ADD:
 
     Private Sub МышьToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles МышьToolStripMenuItem.Click
         frmComputers.txtMonDum.Visible = False
-        frmComputers.txtOTHSN.Left = "249"
-        frmComputers.txtOTHSN.Width = "214"
+        frmComputers.txtOTHSN.Left = "249" 'esq 130612"249"
+        frmComputers.txtOTHSN.Width = "214" 'esq 130612 "214"
 
         Call ClearForm(frmComputers)
 

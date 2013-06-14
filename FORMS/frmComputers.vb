@@ -744,8 +744,11 @@ Error_:
 
 
         Me.txtMonDum.Visible = False
+        'Me.txtOTHSN.Left = "331" 'esq 130612 
+        'Me.txtOTHSN.Width = "284" 'esq 130612 
         Me.txtOTHSN.Left = "249"
         Me.txtOTHSN.Width = "214"
+
 
         Me.cmbOTH.Items.Clear()
 
@@ -1088,8 +1091,12 @@ Error_:
                             FillComboNET(Me.cmbOTH, "Name", "SPR_MONITOR", "", False, True)
 
                             Me.txtMonDum.Visible = True
+                            'Me.txtOTHSN.Left = "471" 'esq 130612 
+                            'Me.txtOTHSN.Width = "146" 'esq 130612 
                             Me.txtOTHSN.Left = "355"
                             Me.txtOTHSN.Width = "108"
+
+
 
                             lblTipOther.Visible = False
                             cmbOTHConnect.Visible = False
@@ -1671,8 +1678,8 @@ err_:
 
             Case Keys.Enter
 
-                'Search2(txtSearch.Text)
                 lstGroups.Nodes.Clear()
+                
                 Me.BeginInvoke(New MethodInvoker(AddressOf S2_LOAD_t))
                 'newThread1.Priority = 3
 
@@ -6717,6 +6724,10 @@ Err_:
     'End Sub
 
     Private Sub lvRepair_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles lvRepair.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub txtSearch_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtSearch.TextChanged
 
     End Sub
 End Class
