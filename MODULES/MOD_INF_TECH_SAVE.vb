@@ -155,6 +155,235 @@
 
     End Sub
 
+    Private Sub RefTreeSaveTech(ByVal sID As Integer, ByVal sNames As String, ByVal sTIPTEHN As String, ByVal sFIALIAL As String, ByVal sOTDEL As String, ByVal sKABN As String)
+        On Error GoTo err_
+
+        If Len(sBranch) = 0 Then Exit Sub
+
+        '  Call frmComputers.selectTECMesto()
+
+        Dim sSQL, PrefM, sNODENAME As String
+        ' Dim sSID, sICO As Integer
+        Dim rs As ADODB.Recordset
+
+        If Len(sKABN) <> 0 Then
+
+            sSQL = "SELECT id, Name as NAME,N_F as FILIAL, N_M as OTDEL FROM SPR_KAB WHERE N_F='" & sFIALIAL & "' AND N_M='" & sOTDEL & "' AND Name='" & sKABN & "'"
+            ' PrefM = "K"
+            'sICO = 2
+        End If
+
+        If Len(sOTDEL) <> 0 And Len(sKABN) = 0 Then
+
+            sSQL = "SELECT id, N_Otd as NAME, Filial as FILIAL FROM SPR_OTD_FILIAL WHERE filial='" & sFIALIAL & "' AND n_otd='" & sOTDEL & "'"
+            ' PrefM = "O"
+            'sICO = 1
+        End If
+
+        If Len(sFIALIAL) <> 0 And Len(sOTDEL) = 0 Then
+
+            sSQL = "SELECT id, FILIAL as NAME FROM SPR_FILIAL WHERE filial='" & sFIALIAL & "'"
+            'PrefM = "G"
+            'sICO = 0
+        End If
+
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
+        With rs
+            'sSID = .Fields("id").Value
+            sNODENAME = .Fields("NAME").Value
+        End With
+
+        rs.Close()
+        rs = Nothing
+
+        '###########################
+        'Ищем место
+        '###########################
+        Call FIND_TREE(sNODENAME)
+
+        'Получаем информацию о технике
+        Dim iA1, iA2, iA3, iA4, iA5, iA6, iA7, iA8, iID As String
+
+        Dim tmpCount As Integer
+
+
+        sSQL = "SELECT count(*) as T_N FROM kompy WHERE id =" & sID & " AND PCL =0"
+
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
+        With rs
+            tmpCount = .Fields("T_N").Value
+
+        End With
+
+        rs.Close()
+        rs = Nothing
+
+        Dim objIniFile As New IniFile(PrPath & "base.ini")
+        objIniFile.WriteString("general", "DK", sID)
+        objIniFile.WriteString("general", "Default", 0)
+
+
+        If tmpCount = 0 Then GoTo err_
+
+        sSQL = "SELECT id, mesto, filial, tip_compa, tiptehn, PSEVDONIM, NET_NAME, kabn, Spisan, OS, PRINTER_NAME_4,balans FROM kompy WHERE id =" & sID '& " AND PCL =0"
+
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
+        With rs
+
+            If Not IsDBNull(.Fields("tip_compa").Value) Then iA1 = .Fields("tip_compa").Value
+            If Not IsDBNull(.Fields("NET_NAME").Value) Then iA2 = .Fields("NET_NAME").Value
+            If Not IsDBNull(.Fields("PSEVDONIM").Value) Then iA3 = .Fields("PSEVDONIM").Value
+            If Not IsDBNull(.Fields("Spisan").Value) Then iA4 = .Fields("Spisan").Value
+            If Not IsDBNull(.Fields("tiptehn").Value) Then iA5 = .Fields("tiptehn").Value
+            If Not IsDBNull(.Fields("OS").Value) Then iA6 = .Fields("OS").Value
+            If Not IsDBNull(.Fields("PRINTER_NAME_4").Value) Then iA7 = .Fields("PRINTER_NAME_4").Value
+            If Not IsDBNull(.Fields("Balans").Value) Then iA8 = .Fields("Balans").Value
+
+        End With
+
+
+        rs.Close()
+        rs = Nothing
+
+        'Добавляем технику в дерево
+
+        'Dim PCNODES As New TreeNode(sNames, sICO, sICO)
+        'PCNODES.Tag = "C|" & sID
+        'PCNODES.Name = L_NAME
+        'PCNODES.Text = L_NAME
+        'frmComputers.lstGroups.SelectedNode.Nodes.Add(PCNODES)
+
+        'FILING_TREE(frmComputers.lstGroups, sTIPTEHN, "PC", N_NAME, P_NAME, sID, Spisan, frmComputers.lstGroups.SelectedNode, "", "", balans)
+
+        FILING_TREE(frmComputers.lstGroups, iA5, iA1, iA2, iA3, sID, iA4, frmComputers.lstGroups.SelectedNode, iA6, iA7, iA8)
+
+        'FILING_TREE( lstgroups As TreeView, iTipTehn As String,  TipPC As String,  NET_NAME As String,  PSEVDONIM As String,  iD As String,  Spisan As String,  DepNode As TreeNode,  OS As String,  n_set As String,  balans As String)
+
+        ' Call checkRemont(sID, PCNODES)
+        'Call checkOther(frmComputers.lstGroups, sID, PCNODES, Spisan, balans)
+
+        '###########################
+        'Ищем технику
+        '###########################
+
+        Call FIND_TREE(iA2)
+
+
+        Exit Sub
+err_:
+        ' MsgBox(Err.Description)
+        RefFilTree(frmComputers.lstGroups)
+
+    End Sub
+
+    Private Sub FIND_TREE(ByVal sNODENAME As String)
+
+        Dim arr As TreeNode() = frmComputers.lstGroups.Nodes(0).Nodes(0).Nodes.Find(sNODENAME, True)
+
+        'Филиалы
+
+
+        Dim str As Integer = frmComputers.lstGroups.Nodes.Count
+
+        For i = 0 To str
+
+            arr = frmComputers.lstGroups.Nodes.Find(sNODENAME, True)
+
+        Next
+
+        str = frmComputers.lstGroups.Nodes(0).Nodes.Count
+
+        If arr.Length = 0 Then
+            For i = 0 To str
+
+                arr = frmComputers.lstGroups.Nodes(0).Nodes.Find(sNODENAME, True)
+
+            Next
+
+        End If
+        'Отделы
+        str = frmComputers.lstGroups.Nodes(0).Nodes(0).Nodes.Count
+
+        If arr.Length = 0 Then
+
+            For i = 0 To str
+
+                arr = frmComputers.lstGroups.Nodes(0).Nodes(0).Nodes.Find(sNODENAME, True)
+
+            Next
+
+        End If
+
+        'Кабинеты
+        str = frmComputers.lstGroups.Nodes(0).Nodes(0).Nodes(0).Nodes.Count
+
+        If arr.Length = 0 Then
+
+            For i = 0 To str
+
+                arr = frmComputers.lstGroups.Nodes(0).Nodes(0).Nodes(0).Nodes.Find(sNODENAME, True)
+
+            Next
+
+        End If
+
+        'Если объект найден встаем на него
+
+        For i = 0 To arr.Length - 1
+
+            frmComputers.lstGroups.SelectedNode = arr(i)
+
+        Next
+    End Sub
+
+
+    Private Sub UpdateTree(ByVal sTXT As String, ByVal sTIPTEHN As String, ByVal sID As Integer, ByVal sFIALIAL As String, ByVal sOTDEL As String, ByVal sKABN As String)
+
+        Select Case frmComputers.pDRAG
+
+            Case False
+
+                Select Case TREE_UPDATE
+
+                    Case 0
+
+                        ' If frmComputers.EDT = True Then frmComputers.lstGroups.Nodes.Remove(frmComputers.lstGroups.SelectedNode)
+
+                        If frmComputers.EDT = False Then RefFilTree(frmComputers.lstGroups)
+                        If sNetName = True Then frmComputers.lstGroups.SelectedNode.Text = sTXT
+                        If frmComputers.EDT = True Then frmComputers.LOAD_LIST()
+
+                        Select Case DV2
+                            Case True
+                                RefFilTree(frmComputers.lstGroups)
+                        End Select
+
+                    Case 1
+
+                        If frmComputers.EDT = True Then frmComputers.LOAD_LIST()
+                        ' If frmComputers.EDT = False Then RefTreeSaveTech(sID, sTXT, sTIPTEHN, sFIALIAL, sOTDEL, sKABN)
+                        If sNetName = True Then frmComputers.lstGroups.SelectedNode.Text = sTXT
+
+                        'Select Case DV2
+                        '    Case True
+                        If frmComputers.EDT = True Then frmComputers.lstGroups.Nodes.Remove(frmComputers.lstGroups.SelectedNode)
+                        RefTreeSaveTech(sID, sTXT, sTIPTEHN, sFIALIAL, sOTDEL, sKABN)
+                        'End Select
+
+                End Select
+
+        End Select
+
+        DV2 = False
+
+    End Sub
+
     Private Sub SAVE_GARANT(ByVal sID As String, ByVal dPost As ComboBox, ByVal dtp As DateTimePicker,
                             ByVal dto As DateTimePicker)
 
@@ -341,7 +570,6 @@ sAR:
         rs.Close()
         rs = Nothing
 
-
         If frmComputers.EDT = False Then
 
             Dim rsBK As Recordset
@@ -376,7 +604,7 @@ sAR:
         frmComputers.cmbOTH.BackColor = frmComputers.cmbOTH.BackColor
         frmComputers.cmbOTHFil.BackColor = frmComputers.cmbOTHFil.BackColor
 
-        Call UpdateTree(frmComputers.cmbOTH.Text)
+        Call UpdateTree(frmComputers.cmbOTH.Text, TipTehn, frmComputers.sCOUNT, frmComputers.cmbOTHFil.Text, frmComputers.cmbOTHDepart.Text, frmComputers.cmbOTHOffice.Text)
 
         Exit Sub
 Err_:
@@ -632,7 +860,8 @@ sAR:
         frmComputers.cmbOTH.BackColor = frmComputers.cmbOTH.BackColor
         frmComputers.cmbOTHFil.BackColor = frmComputers.cmbOTHFil.BackColor
 
-       Call UpdateTree(frmComputers.cmbOTH.Text)
+        Call UpdateTree(frmComputers.cmbOTH.Text, TipTehn, frmComputers.sCOUNT, frmComputers.cmbOTHFil.Text, frmComputers.cmbOTHDepart.Text, frmComputers.cmbOTHOffice.Text)
+
 
         Exit Sub
 Err_:
@@ -1151,8 +1380,7 @@ sAR:
 
                 'Если использовали драг-н-дроп то ничего не делаем
 
-                Call UpdateTree(frmComputers.txtSNAME.Text)
-
+                Call UpdateTree(frmComputers.txtSNAME.Text, TipTehn, frmComputers.sCOUNT, frmComputers.cmbBranch.Text, frmComputers.cmbDepartment.Text, frmComputers.cmbOffice.Text)
         End Select
 
 
@@ -1490,7 +1718,9 @@ sAR:
                 "SELECT top 1 id FROM kompy WHERE NET_NAME='" & frmComputers.cmbPRN.Text & "' and MESTO='" &
                 frmComputers.cmbPRNDepart.Text & "' and FILIAL='" & frmComputers.cmbPRNFil.Text & "'  and kabn='" &
                 frmComputers.cmbPRNOffice.Text & "' order by id desc", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
+            'cmbPRNFil
+            'cmbPRNDepart
+            'cmbPRNOffice
             With rsBK
 
                 frmComputers.sCOUNT = .Fields("ID").Value
@@ -1516,7 +1746,8 @@ sAR:
         frmComputers.cmbPRN.BackColor = frmComputers.cmbPRN.BackColor
         frmComputers.cmbPRNFil.BackColor = frmComputers.cmbPRNFil.BackColor
 
-       Call UpdateTree(frmComputers.cmbPRN.Text)
+        Call UpdateTree(frmComputers.cmbPRN.Text, TipTehn, frmComputers.sCOUNT, frmComputers.cmbPRNFil.Text, frmComputers.cmbPRNDepart.Text, frmComputers.cmbPRNOffice.Text)
+
 
         Exit Sub
 Err_:
@@ -1704,52 +1935,11 @@ sAR:
         frmComputers.cmbDevNet.BackColor = frmComputers.txtSBSN.BackColor
         frmComputers.cmbNETBranch.BackColor = frmComputers.txtSBSN.BackColor
 
-
-        Call UpdateTree(frmComputers.cmbDevNet.Text)
-
+        Call UpdateTree(frmComputers.cmbDevNet.Text, TipTehn, frmComputers.sCOUNT, frmComputers.cmbNETBranch.Text, frmComputers.cmbNetDepart.Text, frmComputers.cmbNETOffice.Text)
         
     End Sub
 
-    Private Sub UpdateTree(ByVal sTXT As String)
-
-        Select Case frmComputers.pDRAG
-
-            Case False
-
-                Select Case TREE_UPDATE
-
-                    Case 0
-
-                        If frmComputers.EDT = False Then RefFilTree(frmComputers.lstGroups)
-                        If sNetName = True Then frmComputers.lstGroups.SelectedNode.Text = sTXT
-                        If frmComputers.EDT = True Then frmComputers.LOAD_LIST()
-
-                        Select Case DV2
-                            Case True
-                                RefFilTree(frmComputers.lstGroups)
-                        End Select
-
-                    Case 1
-
-                        '  If frmComputers.EDT = False Then RefFilTree(frmComputers.lstGroups)
-                        If sNetName = True Then frmComputers.lstGroups.SelectedNode.Text = sTXT
-                        If frmComputers.EDT = True Then frmComputers.LOAD_LIST()
-
-                        Select Case DV2
-                            Case True
-                                RefFilTree(frmComputers.lstGroups)
-                        End Select
-
-                End Select
-
-        End Select
-
-        DV2 = False
-
-    End Sub
-
-
-    Private Sub DVIG_TEHN(ByVal sFIALIAL As String, ByVal sOTDEL As String, ByVal sKABN As String,
+   Private Sub DVIG_TEHN(ByVal sFIALIAL As String, ByVal sOTDEL As String, ByVal sKABN As String,
                           ByVal sNAMEs As String)
         On Error GoTo Error_
         Dim rs As Recordset

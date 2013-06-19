@@ -174,6 +174,8 @@ Module MOD_REF_TREE
 
         Dim nodeRoot As New TreeNode(ORG, 69, 69)
         nodeRoot.Tag = "ROOT" & GENID()
+        nodeRoot.Name = ORG
+        nodeRoot.Text = ORG
         lstgroups.Nodes.Add(nodeRoot)
 
         'Филиалы Первый уровень дерева
@@ -213,6 +215,8 @@ Module MOD_REF_TREE
                 'My.Application.DoEvents()
                 Dim BrancheNode As New TreeNode(.Fields("filial").Value, 0, 0)
                 BrancheNode.Tag = "G|" & .Fields("id").Value
+                BrancheNode.Name = .Fields("filial").Value
+                BrancheNode.Text = .Fields("filial").Value
                 sTEN = "G|" & .Fields("id").Value
                 nodeRoot.Nodes.Add(BrancheNode)
 
@@ -282,6 +286,8 @@ Module MOD_REF_TREE
 
                                 Dim DepatrmentNode As New TreeNode(.Fields("N_Otd").Value, 1, 1)
                                 DepatrmentNode.Tag = "O|" & .Fields("id").Value
+                                DepatrmentNode.Name = .Fields("N_Otd").Value
+                                DepatrmentNode.Text = .Fields("N_Otd").Value
                                 sTEN = "O|" & .Fields("id").Value
                                 BrancheNode.Nodes.Add(DepatrmentNode)
                                 unameS2 = .Fields("N_Otd").Value
@@ -350,6 +356,8 @@ Module MOD_REF_TREE
 
                                                 Dim OfficeNode As New TreeNode(.Fields("name").Value, 2, 2)
                                                 OfficeNode.Tag = "K|" & .Fields("id").Value
+                                                OfficeNode.Name = .Fields("name").Value
+                                                OfficeNode.Text = .Fields("name").Value
                                                 sTEN = "K|" & .Fields("id").Value
                                                 DepatrmentNode.Nodes.Add(OfficeNode)
 
@@ -440,7 +448,7 @@ ERR1:
 
     End Sub
 
-    Private Sub FILING_TREE(ByVal lstgroups As TreeView, ByVal iTipTehn As String, ByVal TipPC As String,
+    Public Sub FILING_TREE(ByVal lstgroups As TreeView, ByVal iTipTehn As String, ByVal TipPC As String,
                             ByVal NET_NAME As String, ByVal PSEVDONIM As String, ByVal iD As String,
                             ByVal Spisan As String, ByVal DepNode As TreeNode, ByVal OS As String, ByVal n_set As String,
                             ByVal balans As String)
@@ -505,7 +513,6 @@ ERR1:
                 iB = 4
 
         End Select
-
 
         'Определяем подчиненное оборудование (в составе)
         Dim d() As String
@@ -696,6 +703,8 @@ ERR1:
 
                                         Dim TEHNodePC As New TreeNode(L_NAME, 10, 10)
                                         TEHNodePC.Tag = "C|" & .Fields("id").Value
+                                        TEHNodePC.Text = L_NAME
+                                        TEHNodePC.Name = L_NAME
                                         TEHNodeCNT.Nodes.Add(TEHNodePC)
                                         iD = .Fields("id").Value
 
@@ -762,6 +771,8 @@ ERR1:
                                         Dim TEHNodePC As New TreeNode(L_NAME, iA, iA)
                                         iD = .Fields("id").Value
                                         TEHNodePC.Tag = "C|" & .Fields("id").Value
+                                        TEHNodePC.Text = L_NAME
+                                        TEHNodePC.Name = L_NAME
                                         iPSid = .Fields("id").Value
 
                                         TEHNodeCNT.Nodes.Add(TEHNodePC)
@@ -1136,6 +1147,9 @@ ERR1:
                 Dim TEHNodePC As New TreeNode(L_NAME, iA, iB)
 
                 TEHNodePC.Tag = "C|" & iD
+                TEHNodePC.Text = L_NAME
+                TEHNodePC.Name = L_NAME
+
                 iPSid = iD
 
                 DepNode.Nodes.Add(TEHNodePC)
@@ -1384,6 +1398,8 @@ ERR1:
 
                 Dim TEHNode As New TreeNode(L_NAME, 10, 10)
                 TEHNode.Tag = "C|" & iD
+                TEHNode.Text = L_NAME
+                TEHNode.Name = L_NAME
                 DepNode.Nodes.Add(TEHNode)
 
                 Call checkRemont(iD, TEHNode)
@@ -1413,6 +1429,8 @@ ERR1:
                 Dim TEHNodePHOTO As New TreeNode(L_NAME, iA, iB)
 
                 TEHNodePHOTO.Tag = "C|" & iD
+                TEHNodePHOTO.Text = L_NAME
+                TEHNodePHOTO.Name = L_NAME
                 iPSid = iD
 
                 DepNode.Nodes.Add(TEHNodePHOTO)
@@ -1680,6 +1698,8 @@ ERR1:
 
         Dim TEHNodeCNT As New TreeNode(L_NAME, sNUM, sNUM)
         TEHNodeCNT.Tag = "C|" & sID
+        TEHNodeCNT.Text = L_NAME
+        TEHNodeCNT.Name = L_NAME
         TEHNodePCL.Nodes.Add(TEHNodeCNT)
 
         Call checkRemont(sID, TEHNodeCNT)
@@ -1688,7 +1708,7 @@ ERR1:
 
     End Sub
 
-    Private Sub checkRemont(ByVal sID As Integer, ByVal TEHNodePCL As TreeNode)
+    Public Sub checkRemont(ByVal sID As Integer, ByVal TEHNodePCL As TreeNode)
 
         Select Case remVisible
 
@@ -1724,7 +1744,7 @@ ERR1:
 
     End Sub
 
-    Private Sub checkOther(ByVal lstgroups As TreeView, ByVal sID As Integer, ByVal TEHNodeCNT As TreeNode,
+    Public Sub checkOther(ByVal lstgroups As TreeView, ByVal sID As Integer, ByVal TEHNodeCNT As TreeNode,
                                  ByVal Spisan As String, ByVal balans As String)
 
 

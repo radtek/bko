@@ -1468,21 +1468,41 @@ err_:
 
     Private Sub RadioButton10_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton10.CheckedChanged
 
-        If RadioButton10.Checked = True Then TREE_UPDATE = 0
-        If RadioButton10.Checked = False Then TREE_UPDATE = 1
-
         Dim objIniFile As New IniFile(PrPath & "base.ini")
-        objIniFile.WriteString("general", "TREE_UPDATE", TREE_UPDATE)
+
+        Select Case RadioButton10.Checked
+
+            Case True
+
+                objIniFile.WriteString("general", "TREE_UPDATE", 0)
+
+            Case Else
+
+
+        End Select
+
 
 
     End Sub
 
     Private Sub RadioButton11_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton11.CheckedChanged
-        If RadioButton11.Checked = True Then TREE_UPDATE = 1
-        If RadioButton11.Checked = False Then TREE_UPDATE = 0
 
         Dim objIniFile As New IniFile(PrPath & "base.ini")
-        objIniFile.WriteString("general", "TREE_UPDATE", TREE_UPDATE)
+
+        Select Case RadioButton11.Checked
+
+            Case True
+
+                objIniFile.WriteString("general", "TREE_UPDATE", 1)
+
+            Case Else
+
+
+        End Select
+
+
+
+
     End Sub
 
     Private Sub chkRemVisible_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkRemVisible.CheckedChanged

@@ -1391,13 +1391,11 @@ Partial Class frmSetup
         'RadioButton10
         '
         Me.RadioButton10.AutoSize = True
-        Me.RadioButton10.Checked = True
         Me.RadioButton10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
         Me.RadioButton10.Location = New System.Drawing.Point(7, 19)
         Me.RadioButton10.Name = "RadioButton10"
         Me.RadioButton10.Size = New System.Drawing.Size(221, 17)
         Me.RadioButton10.TabIndex = 0
-        Me.RadioButton10.TabStop = True
         Me.RadioButton10.Text = "Обновлять после каждого сохранения"
         Me.RadioButton10.UseVisualStyleBackColor = True
         '

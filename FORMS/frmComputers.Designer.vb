@@ -28,12 +28,12 @@ Me.spCont = New System.Windows.Forms.SplitContainer()
 Me.TableLayoutPanel65 = New System.Windows.Forms.TableLayoutPanel()
 Me.gbTree = New System.Windows.Forms.GroupBox()
 Me.TableLayoutPanel64 = New System.Windows.Forms.TableLayoutPanel()
+Me.lstGroups = New System.Windows.Forms.TreeView()
 Me.txtSearch = New System.Windows.Forms.TextBox()
 Me.treebranche = New System.Windows.Forms.ComboBox()
 Me.chkVisibleSTR = New System.Windows.Forms.CheckBox()
 Me.ToolStrip7 = New System.Windows.Forms.ToolStrip()
 Me.btnSearch = New System.Windows.Forms.ToolStripButton()
-Me.lstGroups = New System.Windows.Forms.TreeView()
 Me.sSTAB3 = New System.Windows.Forms.TabControl()
 Me.TabPage11 = New System.Windows.Forms.TabPage()
 Me.TableLayoutPanel22 = New System.Windows.Forms.TableLayoutPanel()
@@ -96,6 +96,7 @@ Me.Label111 = New System.Windows.Forms.Label()
 Me.Label112 = New System.Windows.Forms.Label()
 Me.Label113 = New System.Windows.Forms.Label()
 Me.lblSNMP_Ping = New System.Windows.Forms.Label()
+Me.Label114 = New System.Windows.Forms.Label()
 Me.TabPage22 = New System.Windows.Forms.TabPage()
 Me.lvMovementOTH = New System.Windows.Forms.ListView()
 Me.TabPage12 = New System.Windows.Forms.TabPage()
@@ -982,8 +983,8 @@ Me.spCont.Panel2.Controls.Add(Me.sSTAB1)
 Me.spCont.Panel2.Controls.Add(Me.sSTAB5)
 Me.spCont.Panel2.Controls.Add(Me.sSTAB2)
 Me.spCont.Panel2.Controls.Add(Me.sSTAB4)
-Me.spCont.Size = New System.Drawing.Size(963, 646)
-Me.spCont.SplitterDistance = 288
+Me.spCont.Size = New System.Drawing.Size(995, 646)
+Me.spCont.SplitterDistance = 298
 Me.spCont.TabIndex = 0
 '
 'TableLayoutPanel65
@@ -997,7 +998,7 @@ Me.TableLayoutPanel65.Name = "TableLayoutPanel65"
 Me.TableLayoutPanel65.RowCount = 2
 Me.TableLayoutPanel65.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100!))
 Me.TableLayoutPanel65.RowStyles.Add(New System.Windows.Forms.RowStyle())
-Me.TableLayoutPanel65.Size = New System.Drawing.Size(288, 646)
+Me.TableLayoutPanel65.Size = New System.Drawing.Size(298, 646)
 Me.TableLayoutPanel65.TabIndex = 9
 '
 'gbTree
@@ -1006,7 +1007,7 @@ Me.gbTree.Controls.Add(Me.TableLayoutPanel64)
 Me.gbTree.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbTree.Location = New System.Drawing.Point(3, 3)
 Me.gbTree.Name = "gbTree"
-Me.gbTree.Size = New System.Drawing.Size(282, 640)
+Me.gbTree.Size = New System.Drawing.Size(292, 640)
 Me.gbTree.TabIndex = 7
 Me.gbTree.TabStop = false
 Me.gbTree.Text = "Дерево"
@@ -1016,11 +1017,11 @@ Me.gbTree.Text = "Дерево"
 Me.TableLayoutPanel64.ColumnCount = 2
 Me.TableLayoutPanel64.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100!))
 Me.TableLayoutPanel64.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+Me.TableLayoutPanel64.Controls.Add(Me.lstGroups, 0, 3)
 Me.TableLayoutPanel64.Controls.Add(Me.txtSearch, 0, 0)
 Me.TableLayoutPanel64.Controls.Add(Me.treebranche, 0, 2)
 Me.TableLayoutPanel64.Controls.Add(Me.chkVisibleSTR, 0, 1)
 Me.TableLayoutPanel64.Controls.Add(Me.ToolStrip7, 1, 0)
-Me.TableLayoutPanel64.Controls.Add(Me.lstGroups, 0, 3)
 Me.TableLayoutPanel64.Dock = System.Windows.Forms.DockStyle.Fill
 Me.TableLayoutPanel64.Location = New System.Drawing.Point(3, 16)
 Me.TableLayoutPanel64.Name = "TableLayoutPanel64"
@@ -1029,15 +1030,28 @@ Me.TableLayoutPanel64.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel64.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel64.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel64.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100!))
-Me.TableLayoutPanel64.Size = New System.Drawing.Size(276, 621)
+Me.TableLayoutPanel64.Size = New System.Drawing.Size(286, 621)
 Me.TableLayoutPanel64.TabIndex = 5
+'
+'lstGroups
+'
+Me.lstGroups.AllowDrop = true
+Me.TableLayoutPanel64.SetColumnSpan(Me.lstGroups, 2)
+Me.lstGroups.Dock = System.Windows.Forms.DockStyle.Fill
+Me.lstGroups.FullRowSelect = true
+Me.lstGroups.HotTracking = true
+Me.lstGroups.Location = New System.Drawing.Point(3, 79)
+Me.lstGroups.Name = "lstGroups"
+Me.lstGroups.ShowNodeToolTips = true
+Me.lstGroups.Size = New System.Drawing.Size(280, 539)
+Me.lstGroups.TabIndex = 9
 '
 'txtSearch
 '
 Me.txtSearch.Dock = System.Windows.Forms.DockStyle.Fill
 Me.txtSearch.Location = New System.Drawing.Point(3, 3)
 Me.txtSearch.Name = "txtSearch"
-Me.txtSearch.Size = New System.Drawing.Size(244, 20)
+Me.txtSearch.Size = New System.Drawing.Size(254, 20)
 Me.txtSearch.TabIndex = 0
 '
 'treebranche
@@ -1047,7 +1061,7 @@ Me.treebranche.Dock = System.Windows.Forms.DockStyle.Fill
 Me.treebranche.FormattingEnabled = true
 Me.treebranche.Location = New System.Drawing.Point(3, 52)
 Me.treebranche.Name = "treebranche"
-Me.treebranche.Size = New System.Drawing.Size(270, 21)
+Me.treebranche.Size = New System.Drawing.Size(280, 21)
 Me.treebranche.TabIndex = 5
 '
 'chkVisibleSTR
@@ -1064,7 +1078,7 @@ Me.chkVisibleSTR.UseVisualStyleBackColor = true
 '
 Me.ToolStrip7.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
 Me.ToolStrip7.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnSearch})
-Me.ToolStrip7.Location = New System.Drawing.Point(250, 0)
+Me.ToolStrip7.Location = New System.Drawing.Point(260, 0)
 Me.ToolStrip7.Name = "ToolStrip7"
 Me.ToolStrip7.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
 Me.ToolStrip7.Size = New System.Drawing.Size(26, 25)
@@ -1080,18 +1094,6 @@ Me.btnSearch.Name = "btnSearch"
 Me.btnSearch.Size = New System.Drawing.Size(23, 22)
 Me.btnSearch.Text = "Обновить дерево, удалить результат поиска"
 '
-'lstGroups
-'
-Me.lstGroups.AllowDrop = true
-Me.TableLayoutPanel64.SetColumnSpan(Me.lstGroups, 2)
-Me.lstGroups.Dock = System.Windows.Forms.DockStyle.Fill
-Me.lstGroups.FullRowSelect = true
-Me.lstGroups.HideSelection = false
-Me.lstGroups.Location = New System.Drawing.Point(3, 79)
-Me.lstGroups.Name = "lstGroups"
-Me.lstGroups.Size = New System.Drawing.Size(270, 539)
-Me.lstGroups.TabIndex = 9
-'
 'sSTAB3
 '
 Me.sSTAB3.Controls.Add(Me.TabPage11)
@@ -1102,7 +1104,7 @@ Me.sSTAB3.Dock = System.Windows.Forms.DockStyle.Fill
 Me.sSTAB3.Location = New System.Drawing.Point(0, 0)
 Me.sSTAB3.Name = "sSTAB3"
 Me.sSTAB3.SelectedIndex = 0
-Me.sSTAB3.Size = New System.Drawing.Size(671, 646)
+Me.sSTAB3.Size = New System.Drawing.Size(693, 646)
 Me.sSTAB3.TabIndex = 9
 Me.sSTAB3.Visible = false
 '
@@ -1112,7 +1114,7 @@ Me.TabPage11.Controls.Add(Me.TableLayoutPanel22)
 Me.TabPage11.Location = New System.Drawing.Point(4, 22)
 Me.TabPage11.Name = "TabPage11"
 Me.TabPage11.Padding = New System.Windows.Forms.Padding(3)
-Me.TabPage11.Size = New System.Drawing.Size(663, 620)
+Me.TabPage11.Size = New System.Drawing.Size(685, 620)
 Me.TabPage11.TabIndex = 0
 Me.TabPage11.Text = "Информация"
 Me.TabPage11.UseVisualStyleBackColor = true
@@ -1154,6 +1156,7 @@ Me.TableLayoutPanel22.Controls.Add(Me.txtSNMP, 3, 9)
 Me.TableLayoutPanel22.Controls.Add(Me.lblSNMP, 2, 9)
 Me.TableLayoutPanel22.Controls.Add(Me.gbSNMP, 0, 10)
 Me.TableLayoutPanel22.Controls.Add(Me.lblSNMP_Ping, 1, 9)
+Me.TableLayoutPanel22.Controls.Add(Me.Label114, 0, 9)
 Me.TableLayoutPanel22.Dock = System.Windows.Forms.DockStyle.Fill
 Me.TableLayoutPanel22.Location = New System.Drawing.Point(3, 3)
 Me.TableLayoutPanel22.Name = "TableLayoutPanel22"
@@ -1169,7 +1172,7 @@ Me.TableLayoutPanel22.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel22.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel22.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel22.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20!))
-Me.TableLayoutPanel22.Size = New System.Drawing.Size(657, 614)
+Me.TableLayoutPanel22.Size = New System.Drawing.Size(679, 614)
 Me.TableLayoutPanel22.TabIndex = 45
 '
 'txtOTHmemo
@@ -1181,7 +1184,7 @@ Me.txtOTHmemo.Multiline = true
 Me.txtOTHmemo.Name = "txtOTHmemo"
 Me.TableLayoutPanel22.SetRowSpan(Me.txtOTHmemo, 2)
 Me.txtOTHmemo.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-Me.txtOTHmemo.Size = New System.Drawing.Size(523, 165)
+Me.txtOTHmemo.Size = New System.Drawing.Size(545, 165)
 Me.txtOTHmemo.TabIndex = 54
 '
 'gbOTh
@@ -1195,14 +1198,14 @@ Me.gbOTh.Controls.Add(Me.cmbOTH)
 Me.gbOTh.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbOTh.Location = New System.Drawing.Point(3, 3)
 Me.gbOTh.Name = "gbOTh"
-Me.gbOTh.Size = New System.Drawing.Size(651, 55)
+Me.gbOTh.Size = New System.Drawing.Size(673, 55)
 Me.gbOTh.TabIndex = 35
 Me.gbOTh.TabStop = false
 Me.gbOTh.Text = "Информация"
 '
 'txtMonDum
 '
-Me.txtMonDum.Location = New System.Drawing.Point(248, 15)
+Me.txtMonDum.Location = New System.Drawing.Point(249, 14)
 Me.txtMonDum.Name = "txtMonDum"
 Me.txtMonDum.Size = New System.Drawing.Size(100, 20)
 Me.txtMonDum.TabIndex = 1
@@ -1220,7 +1223,7 @@ Me.PROiZV39.TabIndex = 3
 '
 'txtOTHSN
 '
-Me.txtOTHSN.Location = New System.Drawing.Point(248, 15)
+Me.txtOTHSN.Location = New System.Drawing.Point(249, 14)
 Me.txtOTHSN.Name = "txtOTHSN"
 Me.txtOTHSN.Size = New System.Drawing.Size(214, 20)
 Me.txtOTHSN.TabIndex = 2
@@ -1253,7 +1256,7 @@ Me.cmbOTHFil.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbOTHFil.FormattingEnabled = true
 Me.cmbOTHFil.Location = New System.Drawing.Point(131, 235)
 Me.cmbOTHFil.Name = "cmbOTHFil"
-Me.cmbOTHFil.Size = New System.Drawing.Size(194, 21)
+Me.cmbOTHFil.Size = New System.Drawing.Size(205, 21)
 Me.cmbOTHFil.TabIndex = 56
 '
 'Label8
@@ -1274,7 +1277,7 @@ Me.cmbOTHDepart.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbOTHDepart.FormattingEnabled = true
 Me.cmbOTHDepart.Location = New System.Drawing.Point(131, 262)
 Me.cmbOTHDepart.Name = "cmbOTHDepart"
-Me.cmbOTHDepart.Size = New System.Drawing.Size(194, 21)
+Me.cmbOTHDepart.Size = New System.Drawing.Size(205, 21)
 Me.cmbOTHDepart.TabIndex = 58
 '
 'Label7
@@ -1295,7 +1298,7 @@ Me.cmbOTHOffice.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbOTHOffice.FormattingEnabled = true
 Me.cmbOTHOffice.Location = New System.Drawing.Point(131, 289)
 Me.cmbOTHOffice.Name = "cmbOTHOffice"
-Me.cmbOTHOffice.Size = New System.Drawing.Size(194, 21)
+Me.cmbOTHOffice.Size = New System.Drawing.Size(205, 21)
 Me.cmbOTHOffice.TabIndex = 60
 '
 'Label6
@@ -1316,7 +1319,7 @@ Me.cmbOTHotv.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbOTHotv.FormattingEnabled = true
 Me.cmbOTHotv.Location = New System.Drawing.Point(131, 316)
 Me.cmbOTHotv.Name = "cmbOTHotv"
-Me.cmbOTHotv.Size = New System.Drawing.Size(194, 21)
+Me.cmbOTHotv.Size = New System.Drawing.Size(205, 21)
 Me.cmbOTHotv.TabIndex = 62
 '
 'Label5
@@ -1334,7 +1337,7 @@ Me.Label5.Text = "Телефон:"
 Me.txtOTHphone.Dock = System.Windows.Forms.DockStyle.Fill
 Me.txtOTHphone.Location = New System.Drawing.Point(131, 343)
 Me.txtOTHphone.Name = "txtOTHphone"
-Me.txtOTHphone.Size = New System.Drawing.Size(194, 20)
+Me.txtOTHphone.Size = New System.Drawing.Size(205, 20)
 Me.txtOTHphone.TabIndex = 64
 '
 'lblTipOther
@@ -1355,14 +1358,14 @@ Me.cmbOTHConnect.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbOTHConnect.FormattingEnabled = true
 Me.cmbOTHConnect.Location = New System.Drawing.Point(131, 369)
 Me.cmbOTHConnect.Name = "cmbOTHConnect"
-Me.cmbOTHConnect.Size = New System.Drawing.Size(194, 21)
+Me.cmbOTHConnect.Size = New System.Drawing.Size(205, 21)
 Me.cmbOTHConnect.TabIndex = 66
 '
 'Label10
 '
 Me.Label10.Anchor = System.Windows.Forms.AnchorStyles.Left
 Me.Label10.AutoSize = true
-Me.Label10.Location = New System.Drawing.Point(331, 239)
+Me.Label10.Location = New System.Drawing.Point(342, 239)
 Me.Label10.Name = "Label10"
 Me.Label10.Size = New System.Drawing.Size(111, 13)
 Me.Label10.TabIndex = 67
@@ -1371,16 +1374,16 @@ Me.Label10.Text = "Инвентарный номер"
 'txtOTHinnumber
 '
 Me.txtOTHinnumber.Dock = System.Windows.Forms.DockStyle.Fill
-Me.txtOTHinnumber.Location = New System.Drawing.Point(459, 235)
+Me.txtOTHinnumber.Location = New System.Drawing.Point(470, 235)
 Me.txtOTHinnumber.Name = "txtOTHinnumber"
-Me.txtOTHinnumber.Size = New System.Drawing.Size(195, 20)
+Me.txtOTHinnumber.Size = New System.Drawing.Size(206, 20)
 Me.txtOTHinnumber.TabIndex = 68
 '
 'lblOTPCL
 '
 Me.lblOTPCL.Anchor = System.Windows.Forms.AnchorStyles.Left
 Me.lblOTPCL.AutoSize = true
-Me.lblOTPCL.Location = New System.Drawing.Point(331, 266)
+Me.lblOTPCL.Location = New System.Drawing.Point(342, 266)
 Me.lblOTPCL.Name = "lblOTPCL"
 Me.lblOTPCL.Size = New System.Drawing.Size(121, 13)
 Me.lblOTPCL.TabIndex = 69
@@ -1392,16 +1395,16 @@ Me.cmbOTHPCL.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.cmbOTHPCL.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
 Me.cmbOTHPCL.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbOTHPCL.FormattingEnabled = true
-Me.cmbOTHPCL.Location = New System.Drawing.Point(459, 262)
+Me.cmbOTHPCL.Location = New System.Drawing.Point(470, 262)
 Me.cmbOTHPCL.Name = "cmbOTHPCL"
-Me.cmbOTHPCL.Size = New System.Drawing.Size(195, 21)
+Me.cmbOTHPCL.Size = New System.Drawing.Size(206, 21)
 Me.cmbOTHPCL.TabIndex = 70
 '
 'lblOtIp
 '
 Me.lblOtIp.Anchor = System.Windows.Forms.AnchorStyles.Left
 Me.lblOtIp.AutoSize = true
-Me.lblOtIp.Location = New System.Drawing.Point(331, 293)
+Me.lblOtIp.Location = New System.Drawing.Point(342, 293)
 Me.lblOtIp.Name = "lblOtIp"
 Me.lblOtIp.Size = New System.Drawing.Size(20, 13)
 Me.lblOtIp.TabIndex = 71
@@ -1411,7 +1414,7 @@ Me.lblOtIp.Text = "IP:"
 '
 Me.lblOTMac.Anchor = System.Windows.Forms.AnchorStyles.Left
 Me.lblOTMac.AutoSize = true
-Me.lblOTMac.Location = New System.Drawing.Point(331, 320)
+Me.lblOTMac.Location = New System.Drawing.Point(342, 320)
 Me.lblOTMac.Name = "lblOTMac"
 Me.lblOTMac.Size = New System.Drawing.Size(33, 13)
 Me.lblOTMac.TabIndex = 72
@@ -1420,24 +1423,24 @@ Me.lblOTMac.Text = "MAC:"
 'txtOTHIP
 '
 Me.txtOTHIP.Dock = System.Windows.Forms.DockStyle.Fill
-Me.txtOTHIP.Location = New System.Drawing.Point(459, 289)
+Me.txtOTHIP.Location = New System.Drawing.Point(470, 289)
 Me.txtOTHIP.Name = "txtOTHIP"
-Me.txtOTHIP.Size = New System.Drawing.Size(195, 20)
+Me.txtOTHIP.Size = New System.Drawing.Size(206, 20)
 Me.txtOTHIP.TabIndex = 73
 '
 'txtOTHMAC
 '
 Me.txtOTHMAC.Dock = System.Windows.Forms.DockStyle.Fill
-Me.txtOTHMAC.Location = New System.Drawing.Point(459, 316)
+Me.txtOTHMAC.Location = New System.Drawing.Point(470, 316)
 Me.txtOTHMAC.Name = "txtOTHMAC"
-Me.txtOTHMAC.Size = New System.Drawing.Size(195, 20)
+Me.txtOTHMAC.Size = New System.Drawing.Size(206, 20)
 Me.txtOTHMAC.TabIndex = 74
 '
 'Label87
 '
 Me.Label87.Anchor = System.Windows.Forms.AnchorStyles.Left
 Me.Label87.AutoSize = true
-Me.Label87.Location = New System.Drawing.Point(331, 346)
+Me.Label87.Location = New System.Drawing.Point(342, 346)
 Me.Label87.Name = "Label87"
 Me.Label87.Size = New System.Drawing.Size(54, 13)
 Me.Label87.TabIndex = 75
@@ -1448,16 +1451,16 @@ Me.Label87.Text = "№ в базе"
 Me.lblsIDOTH.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
 Me.lblsIDOTH.AutoSize = true
 Me.lblsIDOTH.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204,Byte))
-Me.lblsIDOTH.Location = New System.Drawing.Point(459, 345)
+Me.lblsIDOTH.Location = New System.Drawing.Point(470, 345)
 Me.lblsIDOTH.Name = "lblsIDOTH"
-Me.lblsIDOTH.Size = New System.Drawing.Size(195, 16)
+Me.lblsIDOTH.Size = New System.Drawing.Size(206, 16)
 Me.lblsIDOTH.TabIndex = 76
 '
 'chkSNMP
 '
 Me.chkSNMP.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
 Me.chkSNMP.AutoSize = true
-Me.chkSNMP.Location = New System.Drawing.Point(331, 371)
+Me.chkSNMP.Location = New System.Drawing.Point(342, 371)
 Me.chkSNMP.Name = "chkSNMP"
 Me.chkSNMP.Size = New System.Drawing.Size(122, 17)
 Me.chkSNMP.TabIndex = 77
@@ -1477,9 +1480,9 @@ Me.Label3.Text = "Краткое описание:"
 'txtSNMP
 '
 Me.txtSNMP.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-Me.txtSNMP.Location = New System.Drawing.Point(459, 396)
+Me.txtSNMP.Location = New System.Drawing.Point(470, 396)
 Me.txtSNMP.Name = "txtSNMP"
-Me.txtSNMP.Size = New System.Drawing.Size(195, 20)
+Me.txtSNMP.Size = New System.Drawing.Size(206, 20)
 Me.txtSNMP.TabIndex = 79
 Me.txtSNMP.Visible = false
 '
@@ -1487,7 +1490,7 @@ Me.txtSNMP.Visible = false
 '
 Me.lblSNMP.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
 Me.lblSNMP.AutoSize = true
-Me.lblSNMP.Location = New System.Drawing.Point(331, 399)
+Me.lblSNMP.Location = New System.Drawing.Point(342, 399)
 Me.lblSNMP.Name = "lblSNMP"
 Me.lblSNMP.Size = New System.Drawing.Size(122, 13)
 Me.lblSNMP.TabIndex = 78
@@ -1502,7 +1505,7 @@ Me.gbSNMP.Controls.Add(Me.TableLayoutPanel3)
 Me.gbSNMP.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbSNMP.Location = New System.Drawing.Point(3, 422)
 Me.gbSNMP.Name = "gbSNMP"
-Me.gbSNMP.Size = New System.Drawing.Size(651, 189)
+Me.gbSNMP.Size = New System.Drawing.Size(673, 189)
 Me.gbSNMP.TabIndex = 80
 Me.gbSNMP.TabStop = false
 Me.gbSNMP.Text = "SNMP "
@@ -1551,7 +1554,7 @@ Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Wind
 Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20!))
 Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20!))
 Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20!))
-Me.TableLayoutPanel3.Size = New System.Drawing.Size(645, 170)
+Me.TableLayoutPanel3.Size = New System.Drawing.Size(667, 170)
 Me.TableLayoutPanel3.TabIndex = 0
 '
 'Label90
@@ -1593,7 +1596,7 @@ Me.Label93.Text = "Температура в помещении:"
 'Label94
 '
 Me.Label94.AutoSize = true
-Me.Label94.Location = New System.Drawing.Point(164, 0)
+Me.Label94.Location = New System.Drawing.Point(169, 0)
 Me.Label94.Name = "Label94"
 Me.Label94.Size = New System.Drawing.Size(10, 13)
 Me.Label94.TabIndex = 4
@@ -1602,7 +1605,7 @@ Me.Label94.Text = "-"
 'Label95
 '
 Me.Label95.AutoSize = true
-Me.Label95.Location = New System.Drawing.Point(164, 20)
+Me.Label95.Location = New System.Drawing.Point(169, 20)
 Me.Label95.Name = "Label95"
 Me.Label95.Size = New System.Drawing.Size(10, 13)
 Me.Label95.TabIndex = 5
@@ -1611,7 +1614,7 @@ Me.Label95.Text = "-"
 'Label96
 '
 Me.Label96.AutoSize = true
-Me.Label96.Location = New System.Drawing.Point(164, 40)
+Me.Label96.Location = New System.Drawing.Point(169, 40)
 Me.Label96.Name = "Label96"
 Me.Label96.Size = New System.Drawing.Size(10, 13)
 Me.Label96.TabIndex = 6
@@ -1620,7 +1623,7 @@ Me.Label96.Text = "-"
 'Label97
 '
 Me.Label97.AutoSize = true
-Me.Label97.Location = New System.Drawing.Point(164, 60)
+Me.Label97.Location = New System.Drawing.Point(169, 60)
 Me.Label97.Name = "Label97"
 Me.Label97.Size = New System.Drawing.Size(10, 13)
 Me.Label97.TabIndex = 7
@@ -1629,7 +1632,7 @@ Me.Label97.Text = "-"
 'Label98
 '
 Me.Label98.AutoSize = true
-Me.Label98.Location = New System.Drawing.Point(325, 0)
+Me.Label98.Location = New System.Drawing.Point(335, 0)
 Me.Label98.Name = "Label98"
 Me.Label98.Size = New System.Drawing.Size(141, 13)
 Me.Label98.TabIndex = 8
@@ -1638,7 +1641,7 @@ Me.Label98.Text = "Время работы от батареи:"
 'Label99
 '
 Me.Label99.AutoSize = true
-Me.Label99.Location = New System.Drawing.Point(325, 20)
+Me.Label99.Location = New System.Drawing.Point(335, 20)
 Me.Label99.Name = "Label99"
 Me.Label99.Size = New System.Drawing.Size(85, 13)
 Me.Label99.TabIndex = 9
@@ -1647,7 +1650,7 @@ Me.Label99.Text = "Заряд батареи:"
 'Label100
 '
 Me.Label100.AutoSize = true
-Me.Label100.Location = New System.Drawing.Point(325, 40)
+Me.Label100.Location = New System.Drawing.Point(335, 40)
 Me.Label100.Name = "Label100"
 Me.Label100.Size = New System.Drawing.Size(93, 13)
 Me.Label100.TabIndex = 10
@@ -1656,7 +1659,7 @@ Me.Label100.Text = "Замена батареи:"
 'Label101
 '
 Me.Label101.AutoSize = true
-Me.Label101.Location = New System.Drawing.Point(325, 60)
+Me.Label101.Location = New System.Drawing.Point(335, 60)
 Me.Label101.Name = "Label101"
 Me.Label101.Size = New System.Drawing.Size(55, 13)
 Me.Label101.TabIndex = 11
@@ -1665,7 +1668,7 @@ Me.Label101.Text = "В работе:"
 'Label102
 '
 Me.Label102.AutoSize = true
-Me.Label102.Location = New System.Drawing.Point(486, 0)
+Me.Label102.Location = New System.Drawing.Point(501, 0)
 Me.Label102.Name = "Label102"
 Me.Label102.Size = New System.Drawing.Size(10, 13)
 Me.Label102.TabIndex = 12
@@ -1674,7 +1677,7 @@ Me.Label102.Text = "-"
 'Label103
 '
 Me.Label103.AutoSize = true
-Me.Label103.Location = New System.Drawing.Point(486, 20)
+Me.Label103.Location = New System.Drawing.Point(501, 20)
 Me.Label103.Name = "Label103"
 Me.Label103.Size = New System.Drawing.Size(10, 13)
 Me.Label103.TabIndex = 13
@@ -1683,7 +1686,7 @@ Me.Label103.Text = "-"
 'Label104
 '
 Me.Label104.AutoSize = true
-Me.Label104.Location = New System.Drawing.Point(486, 40)
+Me.Label104.Location = New System.Drawing.Point(501, 40)
 Me.Label104.Name = "Label104"
 Me.Label104.Size = New System.Drawing.Size(10, 13)
 Me.Label104.TabIndex = 14
@@ -1692,7 +1695,7 @@ Me.Label104.Text = "-"
 'Label105
 '
 Me.Label105.AutoSize = true
-Me.Label105.Location = New System.Drawing.Point(486, 60)
+Me.Label105.Location = New System.Drawing.Point(501, 60)
 Me.Label105.Name = "Label105"
 Me.Label105.Size = New System.Drawing.Size(10, 13)
 Me.Label105.TabIndex = 15
@@ -1737,7 +1740,7 @@ Me.Label109.Text = "Статус:"
 'Label110
 '
 Me.Label110.AutoSize = true
-Me.Label110.Location = New System.Drawing.Point(164, 80)
+Me.Label110.Location = New System.Drawing.Point(169, 80)
 Me.Label110.Name = "Label110"
 Me.Label110.Size = New System.Drawing.Size(10, 13)
 Me.Label110.TabIndex = 20
@@ -1746,7 +1749,7 @@ Me.Label110.Text = "-"
 'Label111
 '
 Me.Label111.AutoSize = true
-Me.Label111.Location = New System.Drawing.Point(164, 100)
+Me.Label111.Location = New System.Drawing.Point(169, 100)
 Me.Label111.Name = "Label111"
 Me.Label111.Size = New System.Drawing.Size(10, 13)
 Me.Label111.TabIndex = 21
@@ -1755,7 +1758,7 @@ Me.Label111.Text = "-"
 'Label112
 '
 Me.Label112.AutoSize = true
-Me.Label112.Location = New System.Drawing.Point(164, 120)
+Me.Label112.Location = New System.Drawing.Point(169, 120)
 Me.Label112.Name = "Label112"
 Me.Label112.Size = New System.Drawing.Size(10, 13)
 Me.Label112.TabIndex = 22
@@ -1764,7 +1767,7 @@ Me.Label112.Text = "-"
 'Label113
 '
 Me.Label113.AutoSize = true
-Me.Label113.Location = New System.Drawing.Point(164, 140)
+Me.Label113.Location = New System.Drawing.Point(169, 140)
 Me.Label113.Name = "Label113"
 Me.Label113.Size = New System.Drawing.Size(10, 13)
 Me.Label113.TabIndex = 23
@@ -1777,17 +1780,26 @@ Me.lblSNMP_Ping.AutoSize = true
 Me.lblSNMP_Ping.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204,Byte))
 Me.lblSNMP_Ping.Location = New System.Drawing.Point(131, 398)
 Me.lblSNMP_Ping.Name = "lblSNMP_Ping"
-Me.lblSNMP_Ping.Size = New System.Drawing.Size(194, 16)
+Me.lblSNMP_Ping.Size = New System.Drawing.Size(205, 16)
 Me.lblSNMP_Ping.TabIndex = 81
 Me.lblSNMP_Ping.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
 Me.lblSNMP_Ping.Visible = false
+'
+'Label114
+'
+Me.Label114.AutoSize = true
+Me.Label114.Location = New System.Drawing.Point(3, 393)
+Me.Label114.Name = "Label114"
+Me.Label114.Size = New System.Drawing.Size(51, 13)
+Me.Label114.TabIndex = 82
+Me.Label114.Text = "Label114"
 '
 'TabPage22
 '
 Me.TabPage22.Controls.Add(Me.lvMovementOTH)
 Me.TabPage22.Location = New System.Drawing.Point(4, 22)
 Me.TabPage22.Name = "TabPage22"
-Me.TabPage22.Size = New System.Drawing.Size(663, 620)
+Me.TabPage22.Size = New System.Drawing.Size(685, 620)
 Me.TabPage22.TabIndex = 3
 Me.TabPage22.Text = "Движение"
 Me.TabPage22.UseVisualStyleBackColor = true
@@ -1800,7 +1812,7 @@ Me.lvMovementOTH.GridLines = true
 Me.lvMovementOTH.Location = New System.Drawing.Point(0, 0)
 Me.lvMovementOTH.MultiSelect = false
 Me.lvMovementOTH.Name = "lvMovementOTH"
-Me.lvMovementOTH.Size = New System.Drawing.Size(663, 620)
+Me.lvMovementOTH.Size = New System.Drawing.Size(685, 620)
 Me.lvMovementOTH.TabIndex = 1
 Me.lvMovementOTH.UseCompatibleStateImageBehavior = false
 Me.lvMovementOTH.View = System.Windows.Forms.View.Details
@@ -1811,7 +1823,7 @@ Me.TabPage12.Controls.Add(Me.TableLayoutPanel17)
 Me.TabPage12.Location = New System.Drawing.Point(4, 22)
 Me.TabPage12.Name = "TabPage12"
 Me.TabPage12.Padding = New System.Windows.Forms.Padding(3)
-Me.TabPage12.Size = New System.Drawing.Size(663, 620)
+Me.TabPage12.Size = New System.Drawing.Size(685, 620)
 Me.TabPage12.TabIndex = 1
 Me.TabPage12.Text = "Сервис"
 Me.TabPage12.UseVisualStyleBackColor = true
@@ -1828,7 +1840,7 @@ Me.TableLayoutPanel17.Name = "TableLayoutPanel17"
 Me.TableLayoutPanel17.RowCount = 2
 Me.TableLayoutPanel17.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40!))
 Me.TableLayoutPanel17.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60!))
-Me.TableLayoutPanel17.Size = New System.Drawing.Size(657, 614)
+Me.TableLayoutPanel17.Size = New System.Drawing.Size(679, 614)
 Me.TableLayoutPanel17.TabIndex = 7
 '
 'gbOTHRemont
@@ -1838,7 +1850,7 @@ Me.gbOTHRemont.Controls.Add(Me.lvRepairOTH)
 Me.gbOTHRemont.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbOTHRemont.Location = New System.Drawing.Point(3, 248)
 Me.gbOTHRemont.Name = "gbOTHRemont"
-Me.gbOTHRemont.Size = New System.Drawing.Size(651, 363)
+Me.gbOTHRemont.Size = New System.Drawing.Size(673, 363)
 Me.gbOTHRemont.TabIndex = 4
 Me.gbOTHRemont.TabStop = false
 Me.gbOTHRemont.Text = "Ремонты"
@@ -1852,7 +1864,7 @@ Me.lvRepairOTH.Location = New System.Drawing.Point(3, 16)
 Me.lvRepairOTH.MultiSelect = false
 Me.lvRepairOTH.Name = "lvRepairOTH"
 Me.lvRepairOTH.ShowItemToolTips = true
-Me.lvRepairOTH.Size = New System.Drawing.Size(645, 344)
+Me.lvRepairOTH.Size = New System.Drawing.Size(667, 344)
 Me.lvRepairOTH.TabIndex = 4
 Me.lvRepairOTH.UseCompatibleStateImageBehavior = false
 Me.lvRepairOTH.View = System.Windows.Forms.View.Details
@@ -1863,7 +1875,7 @@ Me.gbOTHNotes.Controls.Add(Me.TableLayoutPanel18)
 Me.gbOTHNotes.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbOTHNotes.Location = New System.Drawing.Point(3, 3)
 Me.gbOTHNotes.Name = "gbOTHNotes"
-Me.gbOTHNotes.Size = New System.Drawing.Size(651, 239)
+Me.gbOTHNotes.Size = New System.Drawing.Size(673, 239)
 Me.gbOTHNotes.TabIndex = 3
 Me.gbOTHNotes.TabStop = false
 Me.gbOTHNotes.Text = "Заметки"
@@ -1887,7 +1899,7 @@ Me.TableLayoutPanel18.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel18.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel18.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel18.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20!))
-Me.TableLayoutPanel18.Size = New System.Drawing.Size(645, 220)
+Me.TableLayoutPanel18.Size = New System.Drawing.Size(667, 220)
 Me.TableLayoutPanel18.TabIndex = 1
 '
 'ToolStrip6
@@ -1896,7 +1908,7 @@ Me.ToolStrip6.Dock = System.Windows.Forms.DockStyle.Fill
 Me.ToolStrip6.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
 Me.ToolStrip6.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnOTHAdd, Me.ToolStripSeparator17, Me.btnOTHNotesDel, Me.ToolStripSeparator18, Me.btnOTHNotesCancel, Me.ToolStripSeparator19})
 Me.ToolStrip6.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow
-Me.ToolStrip6.Location = New System.Drawing.Point(525, 0)
+Me.ToolStrip6.Location = New System.Drawing.Point(547, 0)
 Me.ToolStrip6.Name = "ToolStrip6"
 Me.TableLayoutPanel18.SetRowSpan(Me.ToolStrip6, 2)
 Me.ToolStrip6.Size = New System.Drawing.Size(120, 107)
@@ -1953,7 +1965,7 @@ Me.lvNotesOTH.FullRowSelect = true
 Me.lvNotesOTH.GridLines = true
 Me.lvNotesOTH.Location = New System.Drawing.Point(3, 110)
 Me.lvNotesOTH.Name = "lvNotesOTH"
-Me.lvNotesOTH.Size = New System.Drawing.Size(639, 114)
+Me.lvNotesOTH.Size = New System.Drawing.Size(661, 107)
 Me.lvNotesOTH.TabIndex = 4
 Me.lvNotesOTH.UseCompatibleStateImageBehavior = false
 Me.lvNotesOTH.View = System.Windows.Forms.View.Details
@@ -1966,7 +1978,7 @@ Me.txtNotesOTH.Location = New System.Drawing.Point(3, 30)
 Me.txtNotesOTH.Multiline = true
 Me.txtNotesOTH.Name = "txtNotesOTH"
 Me.txtNotesOTH.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-Me.txtNotesOTH.Size = New System.Drawing.Size(519, 74)
+Me.txtNotesOTH.Size = New System.Drawing.Size(541, 74)
 Me.txtNotesOTH.TabIndex = 3
 '
 'cmbNotesOTHMaster
@@ -1977,7 +1989,7 @@ Me.cmbNotesOTHMaster.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbNotesOTHMaster.FormattingEnabled = true
 Me.cmbNotesOTHMaster.Location = New System.Drawing.Point(129, 3)
 Me.cmbNotesOTHMaster.Name = "cmbNotesOTHMaster"
-Me.cmbNotesOTHMaster.Size = New System.Drawing.Size(393, 21)
+Me.cmbNotesOTHMaster.Size = New System.Drawing.Size(415, 21)
 Me.cmbNotesOTHMaster.TabIndex = 2
 '
 'NotesOTHdate
@@ -1994,7 +2006,7 @@ Me.NotesOTHdate.Value = New Date(2011, 6, 23, 0, 0, 0, 0)
 Me.TabPage18.Controls.Add(Me.TableLayoutPanel70)
 Me.TabPage18.Location = New System.Drawing.Point(4, 22)
 Me.TabPage18.Name = "TabPage18"
-Me.TabPage18.Size = New System.Drawing.Size(663, 620)
+Me.TabPage18.Size = New System.Drawing.Size(685, 620)
 Me.TabPage18.TabIndex = 2
 Me.TabPage18.Text = "Гарантия"
 Me.TabPage18.UseVisualStyleBackColor = true
@@ -2012,7 +2024,7 @@ Me.TableLayoutPanel70.RowCount = 3
 Me.TableLayoutPanel70.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel70.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel70.RowStyles.Add(New System.Windows.Forms.RowStyle())
-Me.TableLayoutPanel70.Size = New System.Drawing.Size(663, 620)
+Me.TableLayoutPanel70.Size = New System.Drawing.Size(685, 620)
 Me.TableLayoutPanel70.TabIndex = 6
 '
 'gbPostOTH
@@ -2021,7 +2033,7 @@ Me.gbPostOTH.Controls.Add(Me.TableLayoutPanel56)
 Me.gbPostOTH.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbPostOTH.Location = New System.Drawing.Point(3, 3)
 Me.gbPostOTH.Name = "gbPostOTH"
-Me.gbPostOTH.Size = New System.Drawing.Size(657, 91)
+Me.gbPostOTH.Size = New System.Drawing.Size(679, 91)
 Me.gbPostOTH.TabIndex = 4
 Me.gbPostOTH.TabStop = false
 Me.gbPostOTH.Text = "Поставщик"
@@ -2045,13 +2057,13 @@ Me.TableLayoutPanel56.Name = "TableLayoutPanel56"
 Me.TableLayoutPanel56.RowCount = 2
 Me.TableLayoutPanel56.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel56.RowStyles.Add(New System.Windows.Forms.RowStyle())
-Me.TableLayoutPanel56.Size = New System.Drawing.Size(651, 72)
+Me.TableLayoutPanel56.Size = New System.Drawing.Size(673, 72)
 Me.TableLayoutPanel56.TabIndex = 3
 '
 'dtGOTHok
 '
 Me.dtGOTHok.Anchor = System.Windows.Forms.AnchorStyles.Left
-Me.dtGOTHok.Location = New System.Drawing.Point(422, 39)
+Me.dtGOTHok.Location = New System.Drawing.Point(433, 39)
 Me.dtGOTHok.Name = "dtGOTHok"
 Me.dtGOTHok.Size = New System.Drawing.Size(134, 20)
 Me.dtGOTHok.TabIndex = 9
@@ -2070,7 +2082,7 @@ Me.Label42.Text = "Продавец"
 '
 Me.Label40.Anchor = System.Windows.Forms.AnchorStyles.Left
 Me.Label40.AutoSize = true
-Me.Label40.Location = New System.Drawing.Point(332, 43)
+Me.Label40.Location = New System.Drawing.Point(343, 43)
 Me.Label40.Name = "Label40"
 Me.Label40.Size = New System.Drawing.Size(65, 13)
 Me.Label40.TabIndex = 10
@@ -2085,7 +2097,7 @@ Me.cmbOTHPostav.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbOTHPostav.FormattingEnabled = true
 Me.cmbOTHPostav.Location = New System.Drawing.Point(100, 3)
 Me.cmbOTHPostav.Name = "cmbOTHPostav"
-Me.cmbOTHPostav.Size = New System.Drawing.Size(548, 21)
+Me.cmbOTHPostav.Size = New System.Drawing.Size(570, 21)
 Me.cmbOTHPostav.TabIndex = 6
 '
 'dtGOTHPr
@@ -2113,7 +2125,7 @@ Me.gbSaleOTH.Controls.Add(Me.TableLayoutPanel54)
 Me.gbSaleOTH.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbSaleOTH.Location = New System.Drawing.Point(3, 100)
 Me.gbSaleOTH.Name = "gbSaleOTH"
-Me.gbSaleOTH.Size = New System.Drawing.Size(657, 120)
+Me.gbSaleOTH.Size = New System.Drawing.Size(679, 120)
 Me.gbSaleOTH.TabIndex = 5
 Me.gbSaleOTH.TabStop = false
 Me.gbSaleOTH.Text = "Данные о приобретении"
@@ -2148,14 +2160,14 @@ Me.TableLayoutPanel54.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel54.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel54.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel54.RowStyles.Add(New System.Windows.Forms.RowStyle())
-Me.TableLayoutPanel54.Size = New System.Drawing.Size(651, 101)
+Me.TableLayoutPanel54.Size = New System.Drawing.Size(673, 101)
 Me.TableLayoutPanel54.TabIndex = 3
 '
 'chkOTHNNb
 '
 Me.chkOTHNNb.Anchor = System.Windows.Forms.AnchorStyles.Left
 Me.chkOTHNNb.AutoSize = true
-Me.chkOTHNNb.Location = New System.Drawing.Point(418, 81)
+Me.chkOTHNNb.Location = New System.Drawing.Point(429, 81)
 Me.chkOTHNNb.Name = "chkOTHNNb"
 Me.chkOTHNNb.Size = New System.Drawing.Size(100, 17)
 Me.chkOTHNNb.TabIndex = 23
@@ -2168,15 +2180,15 @@ Me.txtOTHSumm.Dock = System.Windows.Forms.DockStyle.Fill
 Me.txtOTHSumm.Location = New System.Drawing.Point(103, 55)
 Me.txtOTHSumm.Maximum = New Decimal(New Integer() {1000000, 0, 0, 0})
 Me.txtOTHSumm.Name = "txtOTHSumm"
-Me.txtOTHSumm.Size = New System.Drawing.Size(229, 20)
+Me.txtOTHSumm.Size = New System.Drawing.Size(240, 20)
 Me.txtOTHSumm.TabIndex = 21
 '
 'dtOTHdataVvoda
 '
 Me.dtOTHdataVvoda.Dock = System.Windows.Forms.DockStyle.Fill
-Me.dtOTHdataVvoda.Location = New System.Drawing.Point(418, 55)
+Me.dtOTHdataVvoda.Location = New System.Drawing.Point(429, 55)
 Me.dtOTHdataVvoda.Name = "dtOTHdataVvoda"
-Me.dtOTHdataVvoda.Size = New System.Drawing.Size(230, 20)
+Me.dtOTHdataVvoda.Size = New System.Drawing.Size(241, 20)
 Me.dtOTHdataVvoda.TabIndex = 19
 '
 'Label66
@@ -2192,16 +2204,16 @@ Me.Label66.Text = "Счёт фактура №"
 'txtOTHZay
 '
 Me.txtOTHZay.Dock = System.Windows.Forms.DockStyle.Fill
-Me.txtOTHZay.Location = New System.Drawing.Point(418, 29)
+Me.txtOTHZay.Location = New System.Drawing.Point(429, 29)
 Me.txtOTHZay.Name = "txtOTHZay"
-Me.txtOTHZay.Size = New System.Drawing.Size(230, 20)
+Me.txtOTHZay.Size = New System.Drawing.Size(241, 20)
 Me.txtOTHZay.TabIndex = 17
 '
 'Label61
 '
 Me.Label61.Anchor = System.Windows.Forms.AnchorStyles.Left
 Me.Label61.AutoSize = true
-Me.Label61.Location = New System.Drawing.Point(338, 58)
+Me.Label61.Location = New System.Drawing.Point(349, 58)
 Me.Label61.Name = "Label61"
 Me.Label61.Size = New System.Drawing.Size(66, 13)
 Me.Label61.TabIndex = 25
@@ -2210,9 +2222,9 @@ Me.Label61.Text = "Дата ввода"
 'dtOTHSFdate
 '
 Me.dtOTHSFdate.Dock = System.Windows.Forms.DockStyle.Fill
-Me.dtOTHSFdate.Location = New System.Drawing.Point(418, 3)
+Me.dtOTHSFdate.Location = New System.Drawing.Point(429, 3)
 Me.dtOTHSFdate.Name = "dtOTHSFdate"
-Me.dtOTHSFdate.Size = New System.Drawing.Size(230, 20)
+Me.dtOTHSFdate.Size = New System.Drawing.Size(241, 20)
 Me.dtOTHSFdate.TabIndex = 16
 '
 'Label65
@@ -2231,14 +2243,14 @@ Me.txtOTHcash.Dock = System.Windows.Forms.DockStyle.Fill
 Me.txtOTHcash.Location = New System.Drawing.Point(103, 29)
 Me.txtOTHcash.Maximum = New Decimal(New Integer() {1000000, 0, 0, 0})
 Me.txtOTHcash.Name = "txtOTHcash"
-Me.txtOTHcash.Size = New System.Drawing.Size(229, 20)
+Me.txtOTHcash.Size = New System.Drawing.Size(240, 20)
 Me.txtOTHcash.TabIndex = 18
 '
 'Label62
 '
 Me.Label62.Anchor = System.Windows.Forms.AnchorStyles.Left
 Me.Label62.AutoSize = true
-Me.Label62.Location = New System.Drawing.Point(338, 32)
+Me.Label62.Location = New System.Drawing.Point(349, 32)
 Me.Label62.Name = "Label62"
 Me.Label62.Size = New System.Drawing.Size(44, 13)
 Me.Label62.TabIndex = 24
@@ -2259,14 +2271,14 @@ Me.Label64.Text = "Сумма"
 Me.txtOTHSfN.Dock = System.Windows.Forms.DockStyle.Fill
 Me.txtOTHSfN.Location = New System.Drawing.Point(103, 3)
 Me.txtOTHSfN.Name = "txtOTHSfN"
-Me.txtOTHSfN.Size = New System.Drawing.Size(229, 20)
+Me.txtOTHSfN.Size = New System.Drawing.Size(240, 20)
 Me.txtOTHSfN.TabIndex = 13
 '
 'Label63
 '
 Me.Label63.Anchor = System.Windows.Forms.AnchorStyles.Left
 Me.Label63.AutoSize = true
-Me.Label63.Location = New System.Drawing.Point(338, 6)
+Me.Label63.Location = New System.Drawing.Point(349, 6)
 Me.Label63.Name = "Label63"
 Me.Label63.Size = New System.Drawing.Size(18, 13)
 Me.Label63.TabIndex = 22
@@ -2297,7 +2309,7 @@ Me.sSTAB1.Location = New System.Drawing.Point(0, 0)
 Me.sSTAB1.Multiline = true
 Me.sSTAB1.Name = "sSTAB1"
 Me.sSTAB1.SelectedIndex = 0
-Me.sSTAB1.Size = New System.Drawing.Size(671, 646)
+Me.sSTAB1.Size = New System.Drawing.Size(693, 646)
 Me.sSTAB1.TabIndex = 8
 Me.sSTAB1.Visible = false
 '
@@ -2306,7 +2318,7 @@ Me.sSTAB1.Visible = false
 Me.TabPage6.Controls.Add(Me.TableLayoutPanel20)
 Me.TabPage6.Location = New System.Drawing.Point(4, 22)
 Me.TabPage6.Name = "TabPage6"
-Me.TabPage6.Size = New System.Drawing.Size(663, 620)
+Me.TabPage6.Size = New System.Drawing.Size(685, 620)
 Me.TabPage6.TabIndex = 5
 Me.TabPage6.Text = "Информация"
 Me.TabPage6.UseVisualStyleBackColor = true
@@ -2351,7 +2363,7 @@ Me.TableLayoutPanel20.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel20.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel20.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel20.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100!))
-Me.TableLayoutPanel20.Size = New System.Drawing.Size(663, 620)
+Me.TableLayoutPanel20.Size = New System.Drawing.Size(685, 620)
 Me.TableLayoutPanel20.TabIndex = 45
 '
 'gbMovement
@@ -2362,7 +2374,7 @@ Me.gbMovement.Controls.Add(Me.lvMovement)
 Me.gbMovement.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbMovement.Location = New System.Drawing.Point(3, 286)
 Me.gbMovement.Name = "gbMovement"
-Me.gbMovement.Size = New System.Drawing.Size(657, 331)
+Me.gbMovement.Size = New System.Drawing.Size(679, 331)
 Me.gbMovement.TabIndex = 45
 Me.gbMovement.TabStop = false
 Me.gbMovement.Text = "Движение"
@@ -2375,7 +2387,7 @@ Me.lvMovement.GridLines = true
 Me.lvMovement.Location = New System.Drawing.Point(3, 16)
 Me.lvMovement.MultiSelect = false
 Me.lvMovement.Name = "lvMovement"
-Me.lvMovement.Size = New System.Drawing.Size(651, 312)
+Me.lvMovement.Size = New System.Drawing.Size(673, 312)
 Me.lvMovement.TabIndex = 0
 Me.lvMovement.UseCompatibleStateImageBehavior = false
 Me.lvMovement.View = System.Windows.Forms.View.Details
@@ -2384,7 +2396,7 @@ Me.lvMovement.View = System.Windows.Forms.View.Details
 '
 Me.lblPseudonym.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
 Me.lblPseudonym.AutoSize = true
-Me.lblPseudonym.Location = New System.Drawing.Point(322, 6)
+Me.lblPseudonym.Location = New System.Drawing.Point(333, 6)
 Me.lblPseudonym.Name = "lblPseudonym"
 Me.lblPseudonym.Size = New System.Drawing.Size(104, 13)
 Me.lblPseudonym.TabIndex = 26
@@ -2395,7 +2407,7 @@ Me.lblPseudonym.Text = "Псевдоним"
 Me.txtSNAME.Dock = System.Windows.Forms.DockStyle.Fill
 Me.txtSNAME.Location = New System.Drawing.Point(88, 3)
 Me.txtSNAME.Name = "txtSNAME"
-Me.txtSNAME.Size = New System.Drawing.Size(228, 20)
+Me.txtSNAME.Size = New System.Drawing.Size(239, 20)
 Me.txtSNAME.TabIndex = 24
 '
 'lblNetName
@@ -2411,9 +2423,9 @@ Me.lblNetName.Text = "Имя в сети"
 'txtPSEUDONIM
 '
 Me.txtPSEUDONIM.Dock = System.Windows.Forms.DockStyle.Fill
-Me.txtPSEUDONIM.Location = New System.Drawing.Point(432, 3)
+Me.txtPSEUDONIM.Location = New System.Drawing.Point(443, 3)
 Me.txtPSEUDONIM.Name = "txtPSEUDONIM"
-Me.txtPSEUDONIM.Size = New System.Drawing.Size(228, 20)
+Me.txtPSEUDONIM.Size = New System.Drawing.Size(239, 20)
 Me.txtPSEUDONIM.TabIndex = 27
 '
 'lblBranch
@@ -2434,14 +2446,14 @@ Me.cmbBranch.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbBranch.FormattingEnabled = true
 Me.cmbBranch.Location = New System.Drawing.Point(88, 29)
 Me.cmbBranch.Name = "cmbBranch"
-Me.cmbBranch.Size = New System.Drawing.Size(228, 21)
+Me.cmbBranch.Size = New System.Drawing.Size(239, 21)
 Me.cmbBranch.TabIndex = 31
 '
 'lblResponsible
 '
 Me.lblResponsible.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
 Me.lblResponsible.AutoSize = true
-Me.lblResponsible.Location = New System.Drawing.Point(322, 33)
+Me.lblResponsible.Location = New System.Drawing.Point(333, 33)
 Me.lblResponsible.Name = "lblResponsible"
 Me.lblResponsible.Size = New System.Drawing.Size(104, 13)
 Me.lblResponsible.TabIndex = 34
@@ -2453,9 +2465,9 @@ Me.cmbResponsible.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Appen
 Me.cmbResponsible.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
 Me.cmbResponsible.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbResponsible.FormattingEnabled = true
-Me.cmbResponsible.Location = New System.Drawing.Point(432, 29)
+Me.cmbResponsible.Location = New System.Drawing.Point(443, 29)
 Me.cmbResponsible.Name = "cmbResponsible"
-Me.cmbResponsible.Size = New System.Drawing.Size(228, 21)
+Me.cmbResponsible.Size = New System.Drawing.Size(239, 21)
 Me.cmbResponsible.TabIndex = 35
 '
 'lblDepartment
@@ -2476,14 +2488,14 @@ Me.cmbDepartment.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbDepartment.FormattingEnabled = true
 Me.cmbDepartment.Location = New System.Drawing.Point(88, 56)
 Me.cmbDepartment.Name = "cmbDepartment"
-Me.cmbDepartment.Size = New System.Drawing.Size(228, 21)
+Me.cmbDepartment.Size = New System.Drawing.Size(239, 21)
 Me.cmbDepartment.TabIndex = 37
 '
 'lblPhone
 '
 Me.lblPhone.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
 Me.lblPhone.AutoSize = true
-Me.lblPhone.Location = New System.Drawing.Point(322, 60)
+Me.lblPhone.Location = New System.Drawing.Point(333, 60)
 Me.lblPhone.Name = "lblPhone"
 Me.lblPhone.Size = New System.Drawing.Size(104, 13)
 Me.lblPhone.TabIndex = 38
@@ -2492,9 +2504,9 @@ Me.lblPhone.Text = "Телефон"
 'txtPHONE
 '
 Me.txtPHONE.Dock = System.Windows.Forms.DockStyle.Fill
-Me.txtPHONE.Location = New System.Drawing.Point(432, 56)
+Me.txtPHONE.Location = New System.Drawing.Point(443, 56)
 Me.txtPHONE.Name = "txtPHONE"
-Me.txtPHONE.Size = New System.Drawing.Size(228, 20)
+Me.txtPHONE.Size = New System.Drawing.Size(239, 20)
 Me.txtPHONE.TabIndex = 39
 '
 'lblOffice
@@ -2515,14 +2527,14 @@ Me.cmbOffice.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbOffice.FormattingEnabled = true
 Me.cmbOffice.Location = New System.Drawing.Point(88, 83)
 Me.cmbOffice.Name = "cmbOffice"
-Me.cmbOffice.Size = New System.Drawing.Size(228, 21)
+Me.cmbOffice.Size = New System.Drawing.Size(239, 21)
 Me.cmbOffice.TabIndex = 41
 '
 'lblAppointment
 '
 Me.lblAppointment.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
 Me.lblAppointment.AutoSize = true
-Me.lblAppointment.Location = New System.Drawing.Point(322, 87)
+Me.lblAppointment.Location = New System.Drawing.Point(333, 87)
 Me.lblAppointment.Name = "lblAppointment"
 Me.lblAppointment.Size = New System.Drawing.Size(104, 13)
 Me.lblAppointment.TabIndex = 42
@@ -2534,9 +2546,9 @@ Me.cmbAppointment.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Appen
 Me.cmbAppointment.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
 Me.cmbAppointment.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbAppointment.FormattingEnabled = true
-Me.cmbAppointment.Location = New System.Drawing.Point(432, 83)
+Me.cmbAppointment.Location = New System.Drawing.Point(443, 83)
 Me.cmbAppointment.Name = "cmbAppointment"
-Me.cmbAppointment.Size = New System.Drawing.Size(228, 21)
+Me.cmbAppointment.Size = New System.Drawing.Size(239, 21)
 Me.cmbAppointment.TabIndex = 43
 '
 'gbInNumber
@@ -2547,7 +2559,7 @@ Me.gbInNumber.Controls.Add(Me.TableLayoutPanel47)
 Me.gbInNumber.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbInNumber.Location = New System.Drawing.Point(3, 110)
 Me.gbInNumber.Name = "gbInNumber"
-Me.gbInNumber.Size = New System.Drawing.Size(657, 143)
+Me.gbInNumber.Size = New System.Drawing.Size(679, 143)
 Me.gbInNumber.TabIndex = 44
 Me.gbInNumber.TabStop = false
 Me.gbInNumber.Text = "Инвентарные номера"
@@ -2577,7 +2589,7 @@ Me.TableLayoutPanel47.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel47.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel47.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel47.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20!))
-Me.TableLayoutPanel47.Size = New System.Drawing.Size(651, 124)
+Me.TableLayoutPanel47.Size = New System.Drawing.Size(673, 124)
 Me.TableLayoutPanel47.TabIndex = 3
 '
 'IN_PRN
@@ -2585,7 +2597,7 @@ Me.TableLayoutPanel47.TabIndex = 3
 Me.IN_PRN.Dock = System.Windows.Forms.DockStyle.Fill
 Me.IN_PRN.Location = New System.Drawing.Point(218, 81)
 Me.IN_PRN.Name = "IN_PRN"
-Me.IN_PRN.Size = New System.Drawing.Size(430, 20)
+Me.IN_PRN.Size = New System.Drawing.Size(452, 20)
 Me.IN_PRN.TabIndex = 14
 '
 'Label16
@@ -2603,7 +2615,7 @@ Me.Label16.Text = "Инвентарный номер системного бло
 Me.IN_IBP.Dock = System.Windows.Forms.DockStyle.Fill
 Me.IN_IBP.Location = New System.Drawing.Point(218, 55)
 Me.IN_IBP.Name = "IN_IBP"
-Me.IN_IBP.Size = New System.Drawing.Size(430, 20)
+Me.IN_IBP.Size = New System.Drawing.Size(452, 20)
 Me.IN_IBP.TabIndex = 13
 '
 'Label19
@@ -2621,7 +2633,7 @@ Me.Label19.Text = "Инвентарный номер принтера"
 Me.txtMSN.Dock = System.Windows.Forms.DockStyle.Fill
 Me.txtMSN.Location = New System.Drawing.Point(218, 29)
 Me.txtMSN.Name = "txtMSN"
-Me.txtMSN.Size = New System.Drawing.Size(430, 20)
+Me.txtMSN.Size = New System.Drawing.Size(452, 20)
 Me.txtMSN.TabIndex = 12
 '
 'Label17
@@ -2639,7 +2651,7 @@ Me.Label17.Text = "Инвентарный номер монитора"
 Me.txtSBSN.Dock = System.Windows.Forms.DockStyle.Fill
 Me.txtSBSN.Location = New System.Drawing.Point(218, 3)
 Me.txtSBSN.Name = "txtSBSN"
-Me.txtSBSN.Size = New System.Drawing.Size(430, 20)
+Me.txtSBSN.Size = New System.Drawing.Size(452, 20)
 Me.txtSBSN.TabIndex = 11
 '
 'Label18
@@ -2668,7 +2680,7 @@ Me.lblNumberNET.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System
 Me.lblNumberNET.AutoSize = true
 Me.lblNumberNET.Location = New System.Drawing.Point(218, 107)
 Me.lblNumberNET.Name = "lblNumberNET"
-Me.lblNumberNET.Size = New System.Drawing.Size(430, 13)
+Me.lblNumberNET.Size = New System.Drawing.Size(452, 13)
 Me.lblNumberNET.TabIndex = 20
 Me.lblNumberNET.Text = "#"
 '
@@ -2689,14 +2701,14 @@ Me.lblsID.AutoSize = true
 Me.lblsID.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204,Byte))
 Me.lblsID.Location = New System.Drawing.Point(88, 261)
 Me.lblsID.Name = "lblsID"
-Me.lblsID.Size = New System.Drawing.Size(228, 16)
+Me.lblsID.Size = New System.Drawing.Size(239, 16)
 Me.lblsID.TabIndex = 47
 '
 'Label88
 '
 Me.Label88.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
 Me.Label88.AutoSize = true
-Me.Label88.Location = New System.Drawing.Point(322, 263)
+Me.Label88.Location = New System.Drawing.Point(333, 263)
 Me.Label88.Name = "Label88"
 Me.Label88.Size = New System.Drawing.Size(104, 13)
 Me.Label88.TabIndex = 48
@@ -2708,9 +2720,9 @@ Me.Label88.Visible = false
 '
 Me.cmbPCLK.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
 Me.cmbPCLK.FormattingEnabled = true
-Me.cmbPCLK.Location = New System.Drawing.Point(432, 259)
+Me.cmbPCLK.Location = New System.Drawing.Point(443, 259)
 Me.cmbPCLK.Name = "cmbPCLK"
-Me.cmbPCLK.Size = New System.Drawing.Size(228, 21)
+Me.cmbPCLK.Size = New System.Drawing.Size(239, 21)
 Me.cmbPCLK.TabIndex = 49
 Me.cmbPCLK.Visible = false
 '
@@ -2722,7 +2734,7 @@ Me.TabPage1.Controls.Add(Me.TableLayoutPanel63)
 Me.TabPage1.Location = New System.Drawing.Point(4, 22)
 Me.TabPage1.Name = "TabPage1"
 Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-Me.TabPage1.Size = New System.Drawing.Size(663, 620)
+Me.TabPage1.Size = New System.Drawing.Size(685, 620)
 Me.TabPage1.TabIndex = 0
 Me.TabPage1.Text = "Системный блок"
 '
@@ -2769,7 +2781,7 @@ Me.TableLayoutPanel63.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel63.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel63.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20!))
 Me.TableLayoutPanel63.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20!))
-Me.TableLayoutPanel63.Size = New System.Drawing.Size(657, 614)
+Me.TableLayoutPanel63.Size = New System.Drawing.Size(679, 614)
 Me.TableLayoutPanel63.TabIndex = 6
 '
 'gbcpu
@@ -2780,7 +2792,7 @@ Me.gbcpu.Cursor = System.Windows.Forms.Cursors.Hand
 Me.gbcpu.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbcpu.Location = New System.Drawing.Point(3, 3)
 Me.gbcpu.Name = "gbcpu"
-Me.gbcpu.Size = New System.Drawing.Size(674, 127)
+Me.gbcpu.Size = New System.Drawing.Size(673, 127)
 Me.gbcpu.TabIndex = 0
 Me.gbcpu.TabStop = false
 Me.gbcpu.Text = "Процессор"
@@ -2793,7 +2805,7 @@ Me.TableLayoutPanel24.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(Syst
 Me.TableLayoutPanel24.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 Me.TableLayoutPanel24.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 Me.TableLayoutPanel24.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30!))
-Me.TableLayoutPanel24.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 38!))
+Me.TableLayoutPanel24.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 37!))
 Me.TableLayoutPanel24.Controls.Add(Me.PROizV4, 3, 3)
 Me.TableLayoutPanel24.Controls.Add(Me.PROizV2, 3, 1)
 Me.TableLayoutPanel24.Controls.Add(Me.PROizV3, 3, 2)
@@ -2819,7 +2831,7 @@ Me.TableLayoutPanel24.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel24.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel24.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel24.RowStyles.Add(New System.Windows.Forms.RowStyle())
-Me.TableLayoutPanel24.Size = New System.Drawing.Size(668, 108)
+Me.TableLayoutPanel24.Size = New System.Drawing.Size(667, 108)
 Me.TableLayoutPanel24.TabIndex = 1
 '
 'PROizV4
@@ -2832,7 +2844,7 @@ Me.PROizV4.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV4.FormattingEnabled = true
 Me.PROizV4.Location = New System.Drawing.Point(504, 84)
 Me.PROizV4.Name = "PROizV4"
-Me.PROizV4.Size = New System.Drawing.Size(161, 21)
+Me.PROizV4.Size = New System.Drawing.Size(160, 21)
 Me.PROizV4.TabIndex = 16
 '
 'PROizV2
@@ -2846,7 +2858,7 @@ Me.PROizV2.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV2.ForeColor = System.Drawing.SystemColors.WindowText
 Me.PROizV2.Location = New System.Drawing.Point(504, 30)
 Me.PROizV2.Name = "PROizV2"
-Me.PROizV2.Size = New System.Drawing.Size(161, 21)
+Me.PROizV2.Size = New System.Drawing.Size(160, 21)
 Me.PROizV2.Sorted = true
 Me.PROizV2.TabIndex = 8
 '
@@ -2860,7 +2872,7 @@ Me.PROizV3.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV3.FormattingEnabled = true
 Me.PROizV3.Location = New System.Drawing.Point(504, 57)
 Me.PROizV3.Name = "PROizV3"
-Me.PROizV3.Size = New System.Drawing.Size(161, 21)
+Me.PROizV3.Size = New System.Drawing.Size(160, 21)
 Me.PROizV3.TabIndex = 12
 '
 'cmbCPU1
@@ -3016,7 +3028,7 @@ Me.gbSOUND.Cursor = System.Windows.Forms.Cursors.Hand
 Me.gbSOUND.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbSOUND.Location = New System.Drawing.Point(3, 775)
 Me.gbSOUND.Name = "gbSOUND"
-Me.gbSOUND.Size = New System.Drawing.Size(674, 46)
+Me.gbSOUND.Size = New System.Drawing.Size(673, 46)
 Me.gbSOUND.TabIndex = 5
 Me.gbSOUND.TabStop = false
 Me.gbSOUND.Text = "Звуковая карта"
@@ -3029,7 +3041,7 @@ Me.TableLayoutPanel28.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(Syst
 Me.TableLayoutPanel28.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 Me.TableLayoutPanel28.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 Me.TableLayoutPanel28.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.06993!))
-Me.TableLayoutPanel28.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50!))
+Me.TableLayoutPanel28.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 49!))
 Me.TableLayoutPanel28.Controls.Add(Me.PROizV16, 3, 0)
 Me.TableLayoutPanel28.Controls.Add(Me.txtSoundS, 2, 0)
 Me.TableLayoutPanel28.Controls.Add(Me.cmbSound, 0, 0)
@@ -3039,7 +3051,7 @@ Me.TableLayoutPanel28.Location = New System.Drawing.Point(3, 16)
 Me.TableLayoutPanel28.Name = "TableLayoutPanel28"
 Me.TableLayoutPanel28.RowCount = 1
 Me.TableLayoutPanel28.RowStyles.Add(New System.Windows.Forms.RowStyle())
-Me.TableLayoutPanel28.Size = New System.Drawing.Size(668, 27)
+Me.TableLayoutPanel28.Size = New System.Drawing.Size(667, 27)
 Me.TableLayoutPanel28.TabIndex = 1
 '
 'PROizV16
@@ -3052,7 +3064,7 @@ Me.PROizV16.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV16.FormattingEnabled = true
 Me.PROizV16.Location = New System.Drawing.Point(495, 3)
 Me.PROizV16.Name = "PROizV16"
-Me.PROizV16.Size = New System.Drawing.Size(170, 21)
+Me.PROizV16.Size = New System.Drawing.Size(169, 21)
 Me.PROizV16.TabIndex = 7
 '
 'txtSoundS
@@ -3088,7 +3100,7 @@ Me.gbMB.Cursor = System.Windows.Forms.Cursors.Hand
 Me.gbMB.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbMB.Location = New System.Drawing.Point(3, 136)
 Me.gbMB.Name = "gbMB"
-Me.gbMB.Size = New System.Drawing.Size(674, 72)
+Me.gbMB.Size = New System.Drawing.Size(673, 72)
 Me.gbMB.TabIndex = 1
 Me.gbMB.TabStop = false
 Me.gbMB.Text = "Материнская плата"
@@ -3101,7 +3113,7 @@ Me.TableLayoutPanel29.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 Me.TableLayoutPanel29.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 66.88071!))
 Me.TableLayoutPanel29.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 Me.TableLayoutPanel29.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.11929!))
-Me.TableLayoutPanel29.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 49!))
+Me.TableLayoutPanel29.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 48!))
 Me.TableLayoutPanel29.Controls.Add(Me.lblMBsn, 0, 1)
 Me.TableLayoutPanel29.Controls.Add(Me.txtSN_MB, 1, 1)
 Me.TableLayoutPanel29.Controls.Add(Me.txtChip, 2, 0)
@@ -3113,7 +3125,7 @@ Me.TableLayoutPanel29.Name = "TableLayoutPanel29"
 Me.TableLayoutPanel29.RowCount = 2
 Me.TableLayoutPanel29.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel29.RowStyles.Add(New System.Windows.Forms.RowStyle())
-Me.TableLayoutPanel29.Size = New System.Drawing.Size(668, 53)
+Me.TableLayoutPanel29.Size = New System.Drawing.Size(667, 53)
 Me.TableLayoutPanel29.TabIndex = 1
 '
 'lblMBsn
@@ -3132,7 +3144,7 @@ Me.TableLayoutPanel29.SetColumnSpan(Me.txtSN_MB, 4)
 Me.txtSN_MB.Dock = System.Windows.Forms.DockStyle.Fill
 Me.txtSN_MB.Location = New System.Drawing.Point(34, 30)
 Me.txtSN_MB.Name = "txtSN_MB"
-Me.txtSN_MB.Size = New System.Drawing.Size(631, 20)
+Me.txtSN_MB.Size = New System.Drawing.Size(630, 20)
 Me.txtSN_MB.TabIndex = 11
 '
 'txtChip
@@ -3153,7 +3165,7 @@ Me.PROizV5.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV5.FormattingEnabled = true
 Me.PROizV5.Location = New System.Drawing.Point(493, 3)
 Me.PROizV5.Name = "PROizV5"
-Me.PROizV5.Size = New System.Drawing.Size(172, 21)
+Me.PROizV5.Size = New System.Drawing.Size(171, 21)
 Me.PROizV5.TabIndex = 10
 '
 'cmbMB
@@ -3176,7 +3188,7 @@ Me.gbSVGA.Cursor = System.Windows.Forms.Cursors.Hand
 Me.gbSVGA.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbSVGA.Location = New System.Drawing.Point(3, 696)
 Me.gbSVGA.Name = "gbSVGA"
-Me.gbSVGA.Size = New System.Drawing.Size(674, 73)
+Me.gbSVGA.Size = New System.Drawing.Size(673, 73)
 Me.gbSVGA.TabIndex = 4
 Me.gbSVGA.TabStop = false
 Me.gbSVGA.Text = "Видеокарта"
@@ -3189,7 +3201,7 @@ Me.TableLayoutPanel27.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(Syst
 Me.TableLayoutPanel27.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100!))
 Me.TableLayoutPanel27.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100!))
 Me.TableLayoutPanel27.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30!))
-Me.TableLayoutPanel27.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 41!))
+Me.TableLayoutPanel27.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 37!))
 Me.TableLayoutPanel27.Controls.Add(Me.PROizV15, 3, 1)
 Me.TableLayoutPanel27.Controls.Add(Me.txtSVGAs2, 2, 1)
 Me.TableLayoutPanel27.Controls.Add(Me.PROizV14, 3, 0)
@@ -3205,7 +3217,7 @@ Me.TableLayoutPanel27.Name = "TableLayoutPanel27"
 Me.TableLayoutPanel27.RowCount = 2
 Me.TableLayoutPanel27.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel27.RowStyles.Add(New System.Windows.Forms.RowStyle())
-Me.TableLayoutPanel27.Size = New System.Drawing.Size(668, 54)
+Me.TableLayoutPanel27.Size = New System.Drawing.Size(667, 54)
 Me.TableLayoutPanel27.TabIndex = 1
 '
 'PROizV15
@@ -3216,14 +3228,14 @@ Me.TableLayoutPanel27.SetColumnSpan(Me.PROizV15, 2)
 Me.PROizV15.Cursor = System.Windows.Forms.Cursors.Default
 Me.PROizV15.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV15.FormattingEnabled = true
-Me.PROizV15.Location = New System.Drawing.Point(501, 30)
+Me.PROizV15.Location = New System.Drawing.Point(504, 30)
 Me.PROizV15.Name = "PROizV15"
-Me.PROizV15.Size = New System.Drawing.Size(164, 21)
+Me.PROizV15.Size = New System.Drawing.Size(160, 21)
 Me.PROizV15.TabIndex = 15
 '
 'txtSVGAs2
 '
-Me.txtSVGAs2.Location = New System.Drawing.Point(401, 30)
+Me.txtSVGAs2.Location = New System.Drawing.Point(404, 30)
 Me.txtSVGAs2.Name = "txtSVGAs2"
 Me.txtSVGAs2.Size = New System.Drawing.Size(94, 20)
 Me.txtSVGAs2.TabIndex = 14
@@ -3235,9 +3247,9 @@ Me.PROizV14.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListIte
 Me.PROizV14.Cursor = System.Windows.Forms.Cursors.Default
 Me.PROizV14.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV14.FormattingEnabled = true
-Me.PROizV14.Location = New System.Drawing.Point(501, 3)
+Me.PROizV14.Location = New System.Drawing.Point(504, 3)
 Me.PROizV14.Name = "PROizV14"
-Me.PROizV14.Size = New System.Drawing.Size(122, 21)
+Me.PROizV14.Size = New System.Drawing.Size(123, 21)
 Me.PROizV14.TabIndex = 11
 '
 'cmbSVGA1
@@ -3248,7 +3260,7 @@ Me.cmbSVGA1.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbSVGA1.FormattingEnabled = true
 Me.cmbSVGA1.Location = New System.Drawing.Point(3, 3)
 Me.cmbSVGA1.Name = "cmbSVGA1"
-Me.cmbSVGA1.Size = New System.Drawing.Size(292, 21)
+Me.cmbSVGA1.Size = New System.Drawing.Size(295, 21)
 Me.cmbSVGA1.TabIndex = 8
 '
 'cmbSVGA2
@@ -3259,26 +3271,26 @@ Me.cmbSVGA2.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbSVGA2.FormattingEnabled = true
 Me.cmbSVGA2.Location = New System.Drawing.Point(3, 30)
 Me.cmbSVGA2.Name = "cmbSVGA2"
-Me.cmbSVGA2.Size = New System.Drawing.Size(292, 21)
+Me.cmbSVGA2.Size = New System.Drawing.Size(295, 21)
 Me.cmbSVGA2.TabIndex = 12
 '
 'txtSVGAs1
 '
-Me.txtSVGAs1.Location = New System.Drawing.Point(401, 3)
+Me.txtSVGAs1.Location = New System.Drawing.Point(404, 3)
 Me.txtSVGAs1.Name = "txtSVGAs1"
 Me.txtSVGAs1.Size = New System.Drawing.Size(94, 20)
 Me.txtSVGAs1.TabIndex = 10
 '
 'txtSVGAr2
 '
-Me.txtSVGAr2.Location = New System.Drawing.Point(301, 30)
+Me.txtSVGAr2.Location = New System.Drawing.Point(304, 30)
 Me.txtSVGAr2.Name = "txtSVGAr2"
 Me.txtSVGAr2.Size = New System.Drawing.Size(94, 20)
 Me.txtSVGAr2.TabIndex = 13
 '
 'txtSVGAr1
 '
-Me.txtSVGAr1.Location = New System.Drawing.Point(301, 3)
+Me.txtSVGAr1.Location = New System.Drawing.Point(304, 3)
 Me.txtSVGAr1.Name = "txtSVGAr1"
 Me.txtSVGAr1.Size = New System.Drawing.Size(94, 20)
 Me.txtSVGAr1.TabIndex = 9
@@ -3288,7 +3300,7 @@ Me.txtSVGAr1.TabIndex = 9
 Me.ToolStrip11.Dock = System.Windows.Forms.DockStyle.None
 Me.ToolStrip11.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
 Me.ToolStrip11.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.bSVGAPlus})
-Me.ToolStrip11.Location = New System.Drawing.Point(626, 0)
+Me.ToolStrip11.Location = New System.Drawing.Point(630, 0)
 Me.ToolStrip11.Name = "ToolStrip11"
 Me.ToolStrip11.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
 Me.ToolStrip11.Size = New System.Drawing.Size(26, 25)
@@ -3312,7 +3324,7 @@ Me.gbRAM.Cursor = System.Windows.Forms.Cursors.Hand
 Me.gbRAM.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbRAM.Location = New System.Drawing.Point(3, 214)
 Me.gbRAM.Name = "gbRAM"
-Me.gbRAM.Size = New System.Drawing.Size(674, 235)
+Me.gbRAM.Size = New System.Drawing.Size(673, 235)
 Me.gbRAM.TabIndex = 2
 Me.gbRAM.TabStop = false
 Me.gbRAM.Text = "Память"
@@ -3325,7 +3337,7 @@ Me.TableLayoutPanel25.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(Syst
 Me.TableLayoutPanel25.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 102!))
 Me.TableLayoutPanel25.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 98!))
 Me.TableLayoutPanel25.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30!))
-Me.TableLayoutPanel25.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 41!))
+Me.TableLayoutPanel25.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 37!))
 Me.TableLayoutPanel25.Controls.Add(Me.PROizV9, 3, 3)
 Me.TableLayoutPanel25.Controls.Add(Me.txtRamSN4, 2, 3)
 Me.TableLayoutPanel25.Controls.Add(Me.PROizV8, 3, 2)
@@ -3371,7 +3383,7 @@ Me.TableLayoutPanel25.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel25.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel25.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel25.RowStyles.Add(New System.Windows.Forms.RowStyle())
-Me.TableLayoutPanel25.Size = New System.Drawing.Size(668, 216)
+Me.TableLayoutPanel25.Size = New System.Drawing.Size(667, 216)
 Me.TableLayoutPanel25.TabIndex = 1
 '
 'PROizV9
@@ -3382,14 +3394,14 @@ Me.TableLayoutPanel25.SetColumnSpan(Me.PROizV9, 2)
 Me.PROizV9.Cursor = System.Windows.Forms.Cursors.Default
 Me.PROizV9.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV9.FormattingEnabled = true
-Me.PROizV9.Location = New System.Drawing.Point(501, 84)
+Me.PROizV9.Location = New System.Drawing.Point(504, 84)
 Me.PROizV9.Name = "PROizV9"
-Me.PROizV9.Size = New System.Drawing.Size(164, 21)
+Me.PROizV9.Size = New System.Drawing.Size(160, 21)
 Me.PROizV9.TabIndex = 31
 '
 'txtRamSN4
 '
-Me.txtRamSN4.Location = New System.Drawing.Point(403, 84)
+Me.txtRamSN4.Location = New System.Drawing.Point(406, 84)
 Me.txtRamSN4.Name = "txtRamSN4"
 Me.txtRamSN4.Size = New System.Drawing.Size(92, 20)
 Me.txtRamSN4.TabIndex = 30
@@ -3402,9 +3414,9 @@ Me.TableLayoutPanel25.SetColumnSpan(Me.PROizV8, 2)
 Me.PROizV8.Cursor = System.Windows.Forms.Cursors.Default
 Me.PROizV8.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV8.FormattingEnabled = true
-Me.PROizV8.Location = New System.Drawing.Point(501, 57)
+Me.PROizV8.Location = New System.Drawing.Point(504, 57)
 Me.PROizV8.Name = "PROizV8"
-Me.PROizV8.Size = New System.Drawing.Size(164, 21)
+Me.PROizV8.Size = New System.Drawing.Size(160, 21)
 Me.PROizV8.TabIndex = 27
 '
 'cmbRAM1
@@ -3416,7 +3428,7 @@ Me.cmbRAM1.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbRAM1.FormattingEnabled = true
 Me.cmbRAM1.Location = New System.Drawing.Point(3, 3)
 Me.cmbRAM1.Name = "cmbRAM1"
-Me.cmbRAM1.Size = New System.Drawing.Size(292, 21)
+Me.cmbRAM1.Size = New System.Drawing.Size(295, 21)
 Me.cmbRAM1.TabIndex = 16
 '
 'PROizV7
@@ -3427,9 +3439,9 @@ Me.TableLayoutPanel25.SetColumnSpan(Me.PROizV7, 2)
 Me.PROizV7.Cursor = System.Windows.Forms.Cursors.Default
 Me.PROizV7.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV7.FormattingEnabled = true
-Me.PROizV7.Location = New System.Drawing.Point(501, 30)
+Me.PROizV7.Location = New System.Drawing.Point(504, 30)
 Me.PROizV7.Name = "PROizV7"
-Me.PROizV7.Size = New System.Drawing.Size(164, 21)
+Me.PROizV7.Size = New System.Drawing.Size(160, 21)
 Me.PROizV7.TabIndex = 23
 '
 'cmbRAM2
@@ -3441,7 +3453,7 @@ Me.cmbRAM2.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbRAM2.FormattingEnabled = true
 Me.cmbRAM2.Location = New System.Drawing.Point(3, 30)
 Me.cmbRAM2.Name = "cmbRAM2"
-Me.cmbRAM2.Size = New System.Drawing.Size(292, 21)
+Me.cmbRAM2.Size = New System.Drawing.Size(295, 21)
 Me.cmbRAM2.TabIndex = 20
 '
 'PROizV6
@@ -3451,21 +3463,21 @@ Me.PROizV6.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItem
 Me.PROizV6.Cursor = System.Windows.Forms.Cursors.Default
 Me.PROizV6.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV6.FormattingEnabled = true
-Me.PROizV6.Location = New System.Drawing.Point(501, 3)
+Me.PROizV6.Location = New System.Drawing.Point(504, 3)
 Me.PROizV6.Name = "PROizV6"
-Me.PROizV6.Size = New System.Drawing.Size(122, 21)
+Me.PROizV6.Size = New System.Drawing.Size(123, 21)
 Me.PROizV6.TabIndex = 19
 '
 'txtRamSN3
 '
-Me.txtRamSN3.Location = New System.Drawing.Point(403, 57)
+Me.txtRamSN3.Location = New System.Drawing.Point(406, 57)
 Me.txtRamSN3.Name = "txtRamSN3"
 Me.txtRamSN3.Size = New System.Drawing.Size(92, 20)
 Me.txtRamSN3.TabIndex = 26
 '
 'txtRamS4
 '
-Me.txtRamS4.Location = New System.Drawing.Point(301, 84)
+Me.txtRamS4.Location = New System.Drawing.Point(304, 84)
 Me.txtRamS4.Name = "txtRamS4"
 Me.txtRamS4.Size = New System.Drawing.Size(94, 20)
 Me.txtRamS4.TabIndex = 29
@@ -3479,12 +3491,12 @@ Me.cmbRAM3.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbRAM3.FormattingEnabled = true
 Me.cmbRAM3.Location = New System.Drawing.Point(3, 57)
 Me.cmbRAM3.Name = "cmbRAM3"
-Me.cmbRAM3.Size = New System.Drawing.Size(292, 21)
+Me.cmbRAM3.Size = New System.Drawing.Size(295, 21)
 Me.cmbRAM3.TabIndex = 24
 '
 'txtRamSN2
 '
-Me.txtRamSN2.Location = New System.Drawing.Point(403, 30)
+Me.txtRamSN2.Location = New System.Drawing.Point(406, 30)
 Me.txtRamSN2.Name = "txtRamSN2"
 Me.txtRamSN2.Size = New System.Drawing.Size(92, 20)
 Me.txtRamSN2.TabIndex = 22
@@ -3498,33 +3510,33 @@ Me.cmbRAM4.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbRAM4.FormattingEnabled = true
 Me.cmbRAM4.Location = New System.Drawing.Point(3, 84)
 Me.cmbRAM4.Name = "cmbRAM4"
-Me.cmbRAM4.Size = New System.Drawing.Size(292, 21)
+Me.cmbRAM4.Size = New System.Drawing.Size(295, 21)
 Me.cmbRAM4.TabIndex = 28
 '
 'txtRamS1
 '
-Me.txtRamS1.Location = New System.Drawing.Point(301, 3)
+Me.txtRamS1.Location = New System.Drawing.Point(304, 3)
 Me.txtRamS1.Name = "txtRamS1"
 Me.txtRamS1.Size = New System.Drawing.Size(94, 20)
 Me.txtRamS1.TabIndex = 17
 '
 'txtRamSN1
 '
-Me.txtRamSN1.Location = New System.Drawing.Point(403, 3)
+Me.txtRamSN1.Location = New System.Drawing.Point(406, 3)
 Me.txtRamSN1.Name = "txtRamSN1"
 Me.txtRamSN1.Size = New System.Drawing.Size(92, 20)
 Me.txtRamSN1.TabIndex = 18
 '
 'txtRamS3
 '
-Me.txtRamS3.Location = New System.Drawing.Point(301, 57)
+Me.txtRamS3.Location = New System.Drawing.Point(304, 57)
 Me.txtRamS3.Name = "txtRamS3"
 Me.txtRamS3.Size = New System.Drawing.Size(94, 20)
 Me.txtRamS3.TabIndex = 25
 '
 'txtRamS2
 '
-Me.txtRamS2.Location = New System.Drawing.Point(301, 30)
+Me.txtRamS2.Location = New System.Drawing.Point(304, 30)
 Me.txtRamS2.Name = "txtRamS2"
 Me.txtRamS2.Size = New System.Drawing.Size(94, 20)
 Me.txtRamS2.TabIndex = 21
@@ -3534,7 +3546,7 @@ Me.txtRamS2.TabIndex = 21
 Me.ToolStrip9.Dock = System.Windows.Forms.DockStyle.None
 Me.ToolStrip9.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
 Me.ToolStrip9.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.bRamPlus})
-Me.ToolStrip9.Location = New System.Drawing.Point(626, 0)
+Me.ToolStrip9.Location = New System.Drawing.Point(630, 0)
 Me.ToolStrip9.Name = "ToolStrip9"
 Me.ToolStrip9.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
 Me.ToolStrip9.Size = New System.Drawing.Size(26, 25)
@@ -3557,7 +3569,7 @@ Me.cmbRAM5.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbRAM5.FormattingEnabled = true
 Me.cmbRAM5.Location = New System.Drawing.Point(3, 111)
 Me.cmbRAM5.Name = "cmbRAM5"
-Me.cmbRAM5.Size = New System.Drawing.Size(292, 21)
+Me.cmbRAM5.Size = New System.Drawing.Size(295, 21)
 Me.cmbRAM5.TabIndex = 33
 '
 'cmbRAM6
@@ -3568,13 +3580,13 @@ Me.cmbRAM6.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbRAM6.FormattingEnabled = true
 Me.cmbRAM6.Location = New System.Drawing.Point(3, 138)
 Me.cmbRAM6.Name = "cmbRAM6"
-Me.cmbRAM6.Size = New System.Drawing.Size(292, 21)
+Me.cmbRAM6.Size = New System.Drawing.Size(295, 21)
 Me.cmbRAM6.TabIndex = 34
 '
 'txtRamS5
 '
 Me.txtRamS5.Dock = System.Windows.Forms.DockStyle.Fill
-Me.txtRamS5.Location = New System.Drawing.Point(301, 111)
+Me.txtRamS5.Location = New System.Drawing.Point(304, 111)
 Me.txtRamS5.Name = "txtRamS5"
 Me.txtRamS5.Size = New System.Drawing.Size(96, 20)
 Me.txtRamS5.TabIndex = 35
@@ -3582,7 +3594,7 @@ Me.txtRamS5.TabIndex = 35
 'txtRamS6
 '
 Me.txtRamS6.Dock = System.Windows.Forms.DockStyle.Fill
-Me.txtRamS6.Location = New System.Drawing.Point(301, 138)
+Me.txtRamS6.Location = New System.Drawing.Point(304, 138)
 Me.txtRamS6.Name = "txtRamS6"
 Me.txtRamS6.Size = New System.Drawing.Size(96, 20)
 Me.txtRamS6.TabIndex = 36
@@ -3590,7 +3602,7 @@ Me.txtRamS6.TabIndex = 36
 'txtRamSN5
 '
 Me.txtRamSN5.Dock = System.Windows.Forms.DockStyle.Fill
-Me.txtRamSN5.Location = New System.Drawing.Point(403, 111)
+Me.txtRamSN5.Location = New System.Drawing.Point(406, 111)
 Me.txtRamSN5.Name = "txtRamSN5"
 Me.txtRamSN5.Size = New System.Drawing.Size(92, 20)
 Me.txtRamSN5.TabIndex = 37
@@ -3598,7 +3610,7 @@ Me.txtRamSN5.TabIndex = 37
 'txtRamSN6
 '
 Me.txtRamSN6.Dock = System.Windows.Forms.DockStyle.Fill
-Me.txtRamSN6.Location = New System.Drawing.Point(403, 138)
+Me.txtRamSN6.Location = New System.Drawing.Point(406, 138)
 Me.txtRamSN6.Name = "txtRamSN6"
 Me.txtRamSN6.Size = New System.Drawing.Size(92, 20)
 Me.txtRamSN6.TabIndex = 38
@@ -3610,9 +3622,9 @@ Me.PROizV44.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListIte
 Me.TableLayoutPanel25.SetColumnSpan(Me.PROizV44, 2)
 Me.PROizV44.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV44.FormattingEnabled = true
-Me.PROizV44.Location = New System.Drawing.Point(501, 111)
+Me.PROizV44.Location = New System.Drawing.Point(504, 111)
 Me.PROizV44.Name = "PROizV44"
-Me.PROizV44.Size = New System.Drawing.Size(164, 21)
+Me.PROizV44.Size = New System.Drawing.Size(160, 21)
 Me.PROizV44.TabIndex = 39
 '
 'PROizV45
@@ -3622,9 +3634,9 @@ Me.PROizV45.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListIte
 Me.TableLayoutPanel25.SetColumnSpan(Me.PROizV45, 2)
 Me.PROizV45.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV45.FormattingEnabled = true
-Me.PROizV45.Location = New System.Drawing.Point(501, 138)
+Me.PROizV45.Location = New System.Drawing.Point(504, 138)
 Me.PROizV45.Name = "PROizV45"
-Me.PROizV45.Size = New System.Drawing.Size(164, 21)
+Me.PROizV45.Size = New System.Drawing.Size(160, 21)
 Me.PROizV45.TabIndex = 40
 '
 'cmbRAM7
@@ -3635,7 +3647,7 @@ Me.cmbRAM7.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbRAM7.FormattingEnabled = true
 Me.cmbRAM7.Location = New System.Drawing.Point(3, 165)
 Me.cmbRAM7.Name = "cmbRAM7"
-Me.cmbRAM7.Size = New System.Drawing.Size(292, 21)
+Me.cmbRAM7.Size = New System.Drawing.Size(295, 21)
 Me.cmbRAM7.TabIndex = 41
 '
 'cmbRAM8
@@ -3646,13 +3658,13 @@ Me.cmbRAM8.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbRAM8.FormattingEnabled = true
 Me.cmbRAM8.Location = New System.Drawing.Point(3, 192)
 Me.cmbRAM8.Name = "cmbRAM8"
-Me.cmbRAM8.Size = New System.Drawing.Size(292, 21)
+Me.cmbRAM8.Size = New System.Drawing.Size(295, 21)
 Me.cmbRAM8.TabIndex = 42
 '
 'txtRamS7
 '
 Me.txtRamS7.Dock = System.Windows.Forms.DockStyle.Fill
-Me.txtRamS7.Location = New System.Drawing.Point(301, 165)
+Me.txtRamS7.Location = New System.Drawing.Point(304, 165)
 Me.txtRamS7.Name = "txtRamS7"
 Me.txtRamS7.Size = New System.Drawing.Size(96, 20)
 Me.txtRamS7.TabIndex = 43
@@ -3660,7 +3672,7 @@ Me.txtRamS7.TabIndex = 43
 'txtRamS8
 '
 Me.txtRamS8.Dock = System.Windows.Forms.DockStyle.Fill
-Me.txtRamS8.Location = New System.Drawing.Point(301, 192)
+Me.txtRamS8.Location = New System.Drawing.Point(304, 192)
 Me.txtRamS8.Name = "txtRamS8"
 Me.txtRamS8.Size = New System.Drawing.Size(96, 20)
 Me.txtRamS8.TabIndex = 44
@@ -3668,7 +3680,7 @@ Me.txtRamS8.TabIndex = 44
 'txtRamSN7
 '
 Me.txtRamSN7.Dock = System.Windows.Forms.DockStyle.Fill
-Me.txtRamSN7.Location = New System.Drawing.Point(403, 165)
+Me.txtRamSN7.Location = New System.Drawing.Point(406, 165)
 Me.txtRamSN7.Name = "txtRamSN7"
 Me.txtRamSN7.Size = New System.Drawing.Size(92, 20)
 Me.txtRamSN7.TabIndex = 45
@@ -3676,7 +3688,7 @@ Me.txtRamSN7.TabIndex = 45
 'txtRamSN8
 '
 Me.txtRamSN8.Dock = System.Windows.Forms.DockStyle.Fill
-Me.txtRamSN8.Location = New System.Drawing.Point(403, 192)
+Me.txtRamSN8.Location = New System.Drawing.Point(406, 192)
 Me.txtRamSN8.Name = "txtRamSN8"
 Me.txtRamSN8.Size = New System.Drawing.Size(92, 20)
 Me.txtRamSN8.TabIndex = 46
@@ -3688,9 +3700,9 @@ Me.PROizV46.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListIte
 Me.TableLayoutPanel25.SetColumnSpan(Me.PROizV46, 2)
 Me.PROizV46.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV46.FormattingEnabled = true
-Me.PROizV46.Location = New System.Drawing.Point(501, 165)
+Me.PROizV46.Location = New System.Drawing.Point(504, 165)
 Me.PROizV46.Name = "PROizV46"
-Me.PROizV46.Size = New System.Drawing.Size(164, 21)
+Me.PROizV46.Size = New System.Drawing.Size(160, 21)
 Me.PROizV46.TabIndex = 47
 '
 'PROizV47
@@ -3700,9 +3712,9 @@ Me.PROizV47.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListIte
 Me.TableLayoutPanel25.SetColumnSpan(Me.PROizV47, 2)
 Me.PROizV47.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV47.FormattingEnabled = true
-Me.PROizV47.Location = New System.Drawing.Point(501, 192)
+Me.PROizV47.Location = New System.Drawing.Point(504, 192)
 Me.PROizV47.Name = "PROizV47"
-Me.PROizV47.Size = New System.Drawing.Size(164, 21)
+Me.PROizV47.Size = New System.Drawing.Size(160, 21)
 Me.PROizV47.TabIndex = 48
 '
 'gbHDD
@@ -3713,7 +3725,7 @@ Me.gbHDD.Cursor = System.Windows.Forms.Cursors.Hand
 Me.gbHDD.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbHDD.Location = New System.Drawing.Point(3, 455)
 Me.gbHDD.Name = "gbHDD"
-Me.gbHDD.Size = New System.Drawing.Size(674, 235)
+Me.gbHDD.Size = New System.Drawing.Size(673, 235)
 Me.gbHDD.TabIndex = 3
 Me.gbHDD.TabStop = false
 Me.gbHDD.Text = "Жесткий диск"
@@ -3726,7 +3738,7 @@ Me.TableLayoutPanel26.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(Syst
 Me.TableLayoutPanel26.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100!))
 Me.TableLayoutPanel26.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100!))
 Me.TableLayoutPanel26.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30!))
-Me.TableLayoutPanel26.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 41!))
+Me.TableLayoutPanel26.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 37!))
 Me.TableLayoutPanel26.Controls.Add(Me.PROizV13, 3, 3)
 Me.TableLayoutPanel26.Controls.Add(Me.txtHDDsN4, 2, 3)
 Me.TableLayoutPanel26.Controls.Add(Me.PROizV12, 3, 2)
@@ -3772,7 +3784,7 @@ Me.TableLayoutPanel26.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel26.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel26.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel26.RowStyles.Add(New System.Windows.Forms.RowStyle())
-Me.TableLayoutPanel26.Size = New System.Drawing.Size(668, 216)
+Me.TableLayoutPanel26.Size = New System.Drawing.Size(667, 216)
 Me.TableLayoutPanel26.TabIndex = 1
 '
 'PROizV13
@@ -3783,14 +3795,14 @@ Me.TableLayoutPanel26.SetColumnSpan(Me.PROizV13, 2)
 Me.PROizV13.Cursor = System.Windows.Forms.Cursors.Default
 Me.PROizV13.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV13.FormattingEnabled = true
-Me.PROizV13.Location = New System.Drawing.Point(501, 84)
+Me.PROizV13.Location = New System.Drawing.Point(504, 84)
 Me.PROizV13.Name = "PROizV13"
-Me.PROizV13.Size = New System.Drawing.Size(164, 21)
+Me.PROizV13.Size = New System.Drawing.Size(160, 21)
 Me.PROizV13.TabIndex = 31
 '
 'txtHDDsN4
 '
-Me.txtHDDsN4.Location = New System.Drawing.Point(401, 84)
+Me.txtHDDsN4.Location = New System.Drawing.Point(404, 84)
 Me.txtHDDsN4.Name = "txtHDDsN4"
 Me.txtHDDsN4.Size = New System.Drawing.Size(94, 20)
 Me.txtHDDsN4.TabIndex = 30
@@ -3803,9 +3815,9 @@ Me.TableLayoutPanel26.SetColumnSpan(Me.PROizV12, 2)
 Me.PROizV12.Cursor = System.Windows.Forms.Cursors.Default
 Me.PROizV12.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV12.FormattingEnabled = true
-Me.PROizV12.Location = New System.Drawing.Point(501, 57)
+Me.PROizV12.Location = New System.Drawing.Point(504, 57)
 Me.PROizV12.Name = "PROizV12"
-Me.PROizV12.Size = New System.Drawing.Size(164, 21)
+Me.PROizV12.Size = New System.Drawing.Size(160, 21)
 Me.PROizV12.TabIndex = 27
 '
 'cmbHDD1
@@ -3817,7 +3829,7 @@ Me.cmbHDD1.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbHDD1.FormattingEnabled = true
 Me.cmbHDD1.Location = New System.Drawing.Point(3, 3)
 Me.cmbHDD1.Name = "cmbHDD1"
-Me.cmbHDD1.Size = New System.Drawing.Size(292, 21)
+Me.cmbHDD1.Size = New System.Drawing.Size(295, 21)
 Me.cmbHDD1.TabIndex = 16
 '
 'PROizV11
@@ -3828,9 +3840,9 @@ Me.TableLayoutPanel26.SetColumnSpan(Me.PROizV11, 2)
 Me.PROizV11.Cursor = System.Windows.Forms.Cursors.Default
 Me.PROizV11.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV11.FormattingEnabled = true
-Me.PROizV11.Location = New System.Drawing.Point(501, 30)
+Me.PROizV11.Location = New System.Drawing.Point(504, 30)
 Me.PROizV11.Name = "PROizV11"
-Me.PROizV11.Size = New System.Drawing.Size(164, 21)
+Me.PROizV11.Size = New System.Drawing.Size(160, 21)
 Me.PROizV11.TabIndex = 23
 '
 'cmbHDD2
@@ -3842,7 +3854,7 @@ Me.cmbHDD2.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbHDD2.FormattingEnabled = true
 Me.cmbHDD2.Location = New System.Drawing.Point(3, 30)
 Me.cmbHDD2.Name = "cmbHDD2"
-Me.cmbHDD2.Size = New System.Drawing.Size(292, 21)
+Me.cmbHDD2.Size = New System.Drawing.Size(295, 21)
 Me.cmbHDD2.TabIndex = 20
 '
 'PROizV10
@@ -3852,21 +3864,21 @@ Me.PROizV10.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListIte
 Me.PROizV10.Cursor = System.Windows.Forms.Cursors.Default
 Me.PROizV10.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV10.FormattingEnabled = true
-Me.PROizV10.Location = New System.Drawing.Point(501, 3)
+Me.PROizV10.Location = New System.Drawing.Point(504, 3)
 Me.PROizV10.Name = "PROizV10"
-Me.PROizV10.Size = New System.Drawing.Size(122, 21)
+Me.PROizV10.Size = New System.Drawing.Size(123, 21)
 Me.PROizV10.TabIndex = 19
 '
 'txtHDDsN3
 '
-Me.txtHDDsN3.Location = New System.Drawing.Point(401, 57)
+Me.txtHDDsN3.Location = New System.Drawing.Point(404, 57)
 Me.txtHDDsN3.Name = "txtHDDsN3"
 Me.txtHDDsN3.Size = New System.Drawing.Size(94, 20)
 Me.txtHDDsN3.TabIndex = 26
 '
 'txtHDDo4
 '
-Me.txtHDDo4.Location = New System.Drawing.Point(301, 84)
+Me.txtHDDo4.Location = New System.Drawing.Point(304, 84)
 Me.txtHDDo4.Name = "txtHDDo4"
 Me.txtHDDo4.Size = New System.Drawing.Size(94, 20)
 Me.txtHDDo4.TabIndex = 29
@@ -3880,7 +3892,7 @@ Me.cmbHDD3.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbHDD3.FormattingEnabled = true
 Me.cmbHDD3.Location = New System.Drawing.Point(3, 57)
 Me.cmbHDD3.Name = "cmbHDD3"
-Me.cmbHDD3.Size = New System.Drawing.Size(292, 21)
+Me.cmbHDD3.Size = New System.Drawing.Size(295, 21)
 Me.cmbHDD3.TabIndex = 24
 '
 'cmbHDD4
@@ -3892,40 +3904,40 @@ Me.cmbHDD4.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbHDD4.FormattingEnabled = true
 Me.cmbHDD4.Location = New System.Drawing.Point(3, 84)
 Me.cmbHDD4.Name = "cmbHDD4"
-Me.cmbHDD4.Size = New System.Drawing.Size(292, 21)
+Me.cmbHDD4.Size = New System.Drawing.Size(295, 21)
 Me.cmbHDD4.TabIndex = 28
 '
 'txtHDDo1
 '
-Me.txtHDDo1.Location = New System.Drawing.Point(301, 3)
+Me.txtHDDo1.Location = New System.Drawing.Point(304, 3)
 Me.txtHDDo1.Name = "txtHDDo1"
 Me.txtHDDo1.Size = New System.Drawing.Size(94, 20)
 Me.txtHDDo1.TabIndex = 17
 '
 'txtHDDsN1
 '
-Me.txtHDDsN1.Location = New System.Drawing.Point(401, 3)
+Me.txtHDDsN1.Location = New System.Drawing.Point(404, 3)
 Me.txtHDDsN1.Name = "txtHDDsN1"
 Me.txtHDDsN1.Size = New System.Drawing.Size(94, 20)
 Me.txtHDDsN1.TabIndex = 18
 '
 'txtHDDo3
 '
-Me.txtHDDo3.Location = New System.Drawing.Point(301, 57)
+Me.txtHDDo3.Location = New System.Drawing.Point(304, 57)
 Me.txtHDDo3.Name = "txtHDDo3"
 Me.txtHDDo3.Size = New System.Drawing.Size(94, 20)
 Me.txtHDDo3.TabIndex = 25
 '
 'txtHDDo2
 '
-Me.txtHDDo2.Location = New System.Drawing.Point(301, 30)
+Me.txtHDDo2.Location = New System.Drawing.Point(304, 30)
 Me.txtHDDo2.Name = "txtHDDo2"
 Me.txtHDDo2.Size = New System.Drawing.Size(94, 20)
 Me.txtHDDo2.TabIndex = 21
 '
 'txtHDDsN2
 '
-Me.txtHDDsN2.Location = New System.Drawing.Point(401, 30)
+Me.txtHDDsN2.Location = New System.Drawing.Point(404, 30)
 Me.txtHDDsN2.Name = "txtHDDsN2"
 Me.txtHDDsN2.Size = New System.Drawing.Size(94, 20)
 Me.txtHDDsN2.TabIndex = 22
@@ -3934,10 +3946,10 @@ Me.txtHDDsN2.TabIndex = 22
 '
 Me.ToolStrip10.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
 Me.ToolStrip10.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.bHddPlus})
-Me.ToolStrip10.Location = New System.Drawing.Point(626, 0)
+Me.ToolStrip10.Location = New System.Drawing.Point(630, 0)
 Me.ToolStrip10.Name = "ToolStrip10"
 Me.ToolStrip10.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
-Me.ToolStrip10.Size = New System.Drawing.Size(42, 25)
+Me.ToolStrip10.Size = New System.Drawing.Size(37, 25)
 Me.ToolStrip10.TabIndex = 32
 Me.ToolStrip10.Text = "ToolStrip10"
 '
@@ -3957,7 +3969,7 @@ Me.cmbHDD5.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbHDD5.FormattingEnabled = true
 Me.cmbHDD5.Location = New System.Drawing.Point(3, 111)
 Me.cmbHDD5.Name = "cmbHDD5"
-Me.cmbHDD5.Size = New System.Drawing.Size(292, 21)
+Me.cmbHDD5.Size = New System.Drawing.Size(295, 21)
 Me.cmbHDD5.TabIndex = 33
 '
 'cmbHDD6
@@ -3968,7 +3980,7 @@ Me.cmbHDD6.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbHDD6.FormattingEnabled = true
 Me.cmbHDD6.Location = New System.Drawing.Point(3, 138)
 Me.cmbHDD6.Name = "cmbHDD6"
-Me.cmbHDD6.Size = New System.Drawing.Size(292, 21)
+Me.cmbHDD6.Size = New System.Drawing.Size(295, 21)
 Me.cmbHDD6.TabIndex = 34
 '
 'cmbHDD7
@@ -3979,7 +3991,7 @@ Me.cmbHDD7.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbHDD7.FormattingEnabled = true
 Me.cmbHDD7.Location = New System.Drawing.Point(3, 165)
 Me.cmbHDD7.Name = "cmbHDD7"
-Me.cmbHDD7.Size = New System.Drawing.Size(292, 21)
+Me.cmbHDD7.Size = New System.Drawing.Size(295, 21)
 Me.cmbHDD7.TabIndex = 35
 '
 'cmbHDD8
@@ -3990,7 +4002,7 @@ Me.cmbHDD8.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbHDD8.FormattingEnabled = true
 Me.cmbHDD8.Location = New System.Drawing.Point(3, 192)
 Me.cmbHDD8.Name = "cmbHDD8"
-Me.cmbHDD8.Size = New System.Drawing.Size(292, 21)
+Me.cmbHDD8.Size = New System.Drawing.Size(295, 21)
 Me.cmbHDD8.TabIndex = 36
 '
 'PROizV48
@@ -4000,9 +4012,9 @@ Me.PROizV48.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListIte
 Me.TableLayoutPanel26.SetColumnSpan(Me.PROizV48, 2)
 Me.PROizV48.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV48.FormattingEnabled = true
-Me.PROizV48.Location = New System.Drawing.Point(501, 111)
+Me.PROizV48.Location = New System.Drawing.Point(504, 111)
 Me.PROizV48.Name = "PROizV48"
-Me.PROizV48.Size = New System.Drawing.Size(164, 21)
+Me.PROizV48.Size = New System.Drawing.Size(160, 21)
 Me.PROizV48.TabIndex = 37
 '
 'PROizV49
@@ -4012,9 +4024,9 @@ Me.PROizV49.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListIte
 Me.TableLayoutPanel26.SetColumnSpan(Me.PROizV49, 2)
 Me.PROizV49.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV49.FormattingEnabled = true
-Me.PROizV49.Location = New System.Drawing.Point(501, 138)
+Me.PROizV49.Location = New System.Drawing.Point(504, 138)
 Me.PROizV49.Name = "PROizV49"
-Me.PROizV49.Size = New System.Drawing.Size(164, 21)
+Me.PROizV49.Size = New System.Drawing.Size(160, 21)
 Me.PROizV49.TabIndex = 38
 '
 'PROizV50
@@ -4024,9 +4036,9 @@ Me.PROizV50.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListIte
 Me.TableLayoutPanel26.SetColumnSpan(Me.PROizV50, 2)
 Me.PROizV50.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV50.FormattingEnabled = true
-Me.PROizV50.Location = New System.Drawing.Point(501, 165)
+Me.PROizV50.Location = New System.Drawing.Point(504, 165)
 Me.PROizV50.Name = "PROizV50"
-Me.PROizV50.Size = New System.Drawing.Size(164, 21)
+Me.PROizV50.Size = New System.Drawing.Size(160, 21)
 Me.PROizV50.TabIndex = 39
 '
 'PROizV51
@@ -4036,15 +4048,15 @@ Me.PROizV51.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListIte
 Me.TableLayoutPanel26.SetColumnSpan(Me.PROizV51, 2)
 Me.PROizV51.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV51.FormattingEnabled = true
-Me.PROizV51.Location = New System.Drawing.Point(501, 192)
+Me.PROizV51.Location = New System.Drawing.Point(504, 192)
 Me.PROizV51.Name = "PROizV51"
-Me.PROizV51.Size = New System.Drawing.Size(164, 21)
+Me.PROizV51.Size = New System.Drawing.Size(160, 21)
 Me.PROizV51.TabIndex = 40
 '
 'txtHDDo5
 '
 Me.txtHDDo5.Dock = System.Windows.Forms.DockStyle.Fill
-Me.txtHDDo5.Location = New System.Drawing.Point(301, 111)
+Me.txtHDDo5.Location = New System.Drawing.Point(304, 111)
 Me.txtHDDo5.Name = "txtHDDo5"
 Me.txtHDDo5.Size = New System.Drawing.Size(94, 20)
 Me.txtHDDo5.TabIndex = 41
@@ -4052,7 +4064,7 @@ Me.txtHDDo5.TabIndex = 41
 'txtHDDsN5
 '
 Me.txtHDDsN5.Dock = System.Windows.Forms.DockStyle.Fill
-Me.txtHDDsN5.Location = New System.Drawing.Point(401, 111)
+Me.txtHDDsN5.Location = New System.Drawing.Point(404, 111)
 Me.txtHDDsN5.Name = "txtHDDsN5"
 Me.txtHDDsN5.Size = New System.Drawing.Size(94, 20)
 Me.txtHDDsN5.TabIndex = 42
@@ -4060,7 +4072,7 @@ Me.txtHDDsN5.TabIndex = 42
 'txtHDDo6
 '
 Me.txtHDDo6.Dock = System.Windows.Forms.DockStyle.Fill
-Me.txtHDDo6.Location = New System.Drawing.Point(301, 138)
+Me.txtHDDo6.Location = New System.Drawing.Point(304, 138)
 Me.txtHDDo6.Name = "txtHDDo6"
 Me.txtHDDo6.Size = New System.Drawing.Size(94, 20)
 Me.txtHDDo6.TabIndex = 43
@@ -4068,7 +4080,7 @@ Me.txtHDDo6.TabIndex = 43
 'txtHDDsN6
 '
 Me.txtHDDsN6.Dock = System.Windows.Forms.DockStyle.Fill
-Me.txtHDDsN6.Location = New System.Drawing.Point(401, 138)
+Me.txtHDDsN6.Location = New System.Drawing.Point(404, 138)
 Me.txtHDDsN6.Name = "txtHDDsN6"
 Me.txtHDDsN6.Size = New System.Drawing.Size(94, 20)
 Me.txtHDDsN6.TabIndex = 44
@@ -4076,7 +4088,7 @@ Me.txtHDDsN6.TabIndex = 44
 'txtHDDo7
 '
 Me.txtHDDo7.Dock = System.Windows.Forms.DockStyle.Fill
-Me.txtHDDo7.Location = New System.Drawing.Point(301, 165)
+Me.txtHDDo7.Location = New System.Drawing.Point(304, 165)
 Me.txtHDDo7.Name = "txtHDDo7"
 Me.txtHDDo7.Size = New System.Drawing.Size(94, 20)
 Me.txtHDDo7.TabIndex = 45
@@ -4084,7 +4096,7 @@ Me.txtHDDo7.TabIndex = 45
 'txtHDDsN7
 '
 Me.txtHDDsN7.Dock = System.Windows.Forms.DockStyle.Fill
-Me.txtHDDsN7.Location = New System.Drawing.Point(401, 165)
+Me.txtHDDsN7.Location = New System.Drawing.Point(404, 165)
 Me.txtHDDsN7.Name = "txtHDDsN7"
 Me.txtHDDsN7.Size = New System.Drawing.Size(94, 20)
 Me.txtHDDsN7.TabIndex = 46
@@ -4092,7 +4104,7 @@ Me.txtHDDsN7.TabIndex = 46
 'txtHDDo8
 '
 Me.txtHDDo8.Dock = System.Windows.Forms.DockStyle.Fill
-Me.txtHDDo8.Location = New System.Drawing.Point(301, 192)
+Me.txtHDDo8.Location = New System.Drawing.Point(304, 192)
 Me.txtHDDo8.Name = "txtHDDo8"
 Me.txtHDDo8.Size = New System.Drawing.Size(94, 20)
 Me.txtHDDo8.TabIndex = 47
@@ -4100,7 +4112,7 @@ Me.txtHDDo8.TabIndex = 47
 'txtHDDsN8
 '
 Me.txtHDDsN8.Dock = System.Windows.Forms.DockStyle.Fill
-Me.txtHDDsN8.Location = New System.Drawing.Point(401, 192)
+Me.txtHDDsN8.Location = New System.Drawing.Point(404, 192)
 Me.txtHDDsN8.Name = "txtHDDsN8"
 Me.txtHDDsN8.Size = New System.Drawing.Size(94, 20)
 Me.txtHDDsN8.TabIndex = 48
@@ -4113,7 +4125,7 @@ Me.gbOptical.Cursor = System.Windows.Forms.Cursors.Hand
 Me.gbOptical.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbOptical.Location = New System.Drawing.Point(3, 827)
 Me.gbOptical.Name = "gbOptical"
-Me.gbOptical.Size = New System.Drawing.Size(674, 100)
+Me.gbOptical.Size = New System.Drawing.Size(673, 100)
 Me.gbOptical.TabIndex = 6
 Me.gbOptical.TabStop = false
 Me.gbOptical.Text = "Оптические накопители"
@@ -4126,7 +4138,7 @@ Me.TableLayoutPanel30.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(Syst
 Me.TableLayoutPanel30.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100!))
 Me.TableLayoutPanel30.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100!))
 Me.TableLayoutPanel30.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30!))
-Me.TableLayoutPanel30.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 41!))
+Me.TableLayoutPanel30.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 37!))
 Me.TableLayoutPanel30.Controls.Add(Me.PROizV19, 3, 2)
 Me.TableLayoutPanel30.Controls.Add(Me.txtOPTICsn3, 2, 2)
 Me.TableLayoutPanel30.Controls.Add(Me.PROizV18, 3, 1)
@@ -4147,7 +4159,7 @@ Me.TableLayoutPanel30.RowCount = 3
 Me.TableLayoutPanel30.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel30.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel30.RowStyles.Add(New System.Windows.Forms.RowStyle())
-Me.TableLayoutPanel30.Size = New System.Drawing.Size(668, 81)
+Me.TableLayoutPanel30.Size = New System.Drawing.Size(667, 81)
 Me.TableLayoutPanel30.TabIndex = 3
 '
 'PROizV19
@@ -4157,14 +4169,14 @@ Me.PROizV19.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListIte
 Me.TableLayoutPanel30.SetColumnSpan(Me.PROizV19, 2)
 Me.PROizV19.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV19.FormattingEnabled = true
-Me.PROizV19.Location = New System.Drawing.Point(501, 57)
+Me.PROizV19.Location = New System.Drawing.Point(504, 57)
 Me.PROizV19.Name = "PROizV19"
-Me.PROizV19.Size = New System.Drawing.Size(164, 21)
+Me.PROizV19.Size = New System.Drawing.Size(160, 21)
 Me.PROizV19.TabIndex = 23
 '
 'txtOPTICsn3
 '
-Me.txtOPTICsn3.Location = New System.Drawing.Point(401, 57)
+Me.txtOPTICsn3.Location = New System.Drawing.Point(404, 57)
 Me.txtOPTICsn3.Name = "txtOPTICsn3"
 Me.txtOPTICsn3.Size = New System.Drawing.Size(94, 20)
 Me.txtOPTICsn3.TabIndex = 22
@@ -4176,9 +4188,9 @@ Me.PROizV18.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListIte
 Me.TableLayoutPanel30.SetColumnSpan(Me.PROizV18, 2)
 Me.PROizV18.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV18.FormattingEnabled = true
-Me.PROizV18.Location = New System.Drawing.Point(501, 30)
+Me.PROizV18.Location = New System.Drawing.Point(504, 30)
 Me.PROizV18.Name = "PROizV18"
-Me.PROizV18.Size = New System.Drawing.Size(164, 21)
+Me.PROizV18.Size = New System.Drawing.Size(160, 21)
 Me.PROizV18.TabIndex = 19
 '
 'cmbOPTIC1
@@ -4189,7 +4201,7 @@ Me.cmbOPTIC1.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbOPTIC1.FormattingEnabled = true
 Me.cmbOPTIC1.Location = New System.Drawing.Point(3, 3)
 Me.cmbOPTIC1.Name = "cmbOPTIC1"
-Me.cmbOPTIC1.Size = New System.Drawing.Size(292, 21)
+Me.cmbOPTIC1.Size = New System.Drawing.Size(295, 21)
 Me.cmbOPTIC1.TabIndex = 12
 '
 'PROizV17
@@ -4198,9 +4210,9 @@ Me.PROizV17.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.PROizV17.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
 Me.PROizV17.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV17.FormattingEnabled = true
-Me.PROizV17.Location = New System.Drawing.Point(501, 3)
+Me.PROizV17.Location = New System.Drawing.Point(504, 3)
 Me.PROizV17.Name = "PROizV17"
-Me.PROizV17.Size = New System.Drawing.Size(122, 21)
+Me.PROizV17.Size = New System.Drawing.Size(123, 21)
 Me.PROizV17.TabIndex = 15
 '
 'cmbOPTIC2
@@ -4211,19 +4223,19 @@ Me.cmbOPTIC2.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbOPTIC2.FormattingEnabled = true
 Me.cmbOPTIC2.Location = New System.Drawing.Point(3, 30)
 Me.cmbOPTIC2.Name = "cmbOPTIC2"
-Me.cmbOPTIC2.Size = New System.Drawing.Size(292, 21)
+Me.cmbOPTIC2.Size = New System.Drawing.Size(295, 21)
 Me.cmbOPTIC2.TabIndex = 16
 '
 'txtOPTICsn2
 '
-Me.txtOPTICsn2.Location = New System.Drawing.Point(401, 30)
+Me.txtOPTICsn2.Location = New System.Drawing.Point(404, 30)
 Me.txtOPTICsn2.Name = "txtOPTICsn2"
 Me.txtOPTICsn2.Size = New System.Drawing.Size(94, 20)
 Me.txtOPTICsn2.TabIndex = 18
 '
 'txtOPTICs3
 '
-Me.txtOPTICs3.Location = New System.Drawing.Point(301, 57)
+Me.txtOPTICs3.Location = New System.Drawing.Point(304, 57)
 Me.txtOPTICs3.Name = "txtOPTICs3"
 Me.txtOPTICs3.Size = New System.Drawing.Size(94, 20)
 Me.txtOPTICs3.TabIndex = 21
@@ -4236,26 +4248,26 @@ Me.cmbOPTIC3.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbOPTIC3.FormattingEnabled = true
 Me.cmbOPTIC3.Location = New System.Drawing.Point(3, 57)
 Me.cmbOPTIC3.Name = "cmbOPTIC3"
-Me.cmbOPTIC3.Size = New System.Drawing.Size(292, 21)
+Me.cmbOPTIC3.Size = New System.Drawing.Size(295, 21)
 Me.cmbOPTIC3.TabIndex = 20
 '
 'txtOPTICsn1
 '
-Me.txtOPTICsn1.Location = New System.Drawing.Point(401, 3)
+Me.txtOPTICsn1.Location = New System.Drawing.Point(404, 3)
 Me.txtOPTICsn1.Name = "txtOPTICsn1"
 Me.txtOPTICsn1.Size = New System.Drawing.Size(94, 20)
 Me.txtOPTICsn1.TabIndex = 14
 '
 'txtOPTICs1
 '
-Me.txtOPTICs1.Location = New System.Drawing.Point(301, 3)
+Me.txtOPTICs1.Location = New System.Drawing.Point(304, 3)
 Me.txtOPTICs1.Name = "txtOPTICs1"
 Me.txtOPTICs1.Size = New System.Drawing.Size(94, 20)
 Me.txtOPTICs1.TabIndex = 13
 '
 'txtOPTICs2
 '
-Me.txtOPTICs2.Location = New System.Drawing.Point(301, 30)
+Me.txtOPTICs2.Location = New System.Drawing.Point(304, 30)
 Me.txtOPTICs2.Name = "txtOPTICs2"
 Me.txtOPTICs2.Size = New System.Drawing.Size(94, 20)
 Me.txtOPTICs2.TabIndex = 17
@@ -4265,7 +4277,7 @@ Me.txtOPTICs2.TabIndex = 17
 Me.ToolStrip12.Dock = System.Windows.Forms.DockStyle.None
 Me.ToolStrip12.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
 Me.ToolStrip12.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.bOpticalPlus})
-Me.ToolStrip12.Location = New System.Drawing.Point(626, 0)
+Me.ToolStrip12.Location = New System.Drawing.Point(630, 0)
 Me.ToolStrip12.Name = "ToolStrip12"
 Me.ToolStrip12.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
 Me.ToolStrip12.Size = New System.Drawing.Size(26, 25)
@@ -4289,7 +4301,7 @@ Me.gbNetwork.Cursor = System.Windows.Forms.Cursors.Hand
 Me.gbNetwork.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbNetwork.Location = New System.Drawing.Point(3, 933)
 Me.gbNetwork.Name = "gbNetwork"
-Me.gbNetwork.Size = New System.Drawing.Size(674, 73)
+Me.gbNetwork.Size = New System.Drawing.Size(673, 73)
 Me.gbNetwork.TabIndex = 7
 Me.gbNetwork.TabStop = false
 Me.gbNetwork.Text = "Сетевые карты"
@@ -4302,7 +4314,7 @@ Me.TableLayoutPanel31.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(Syst
 Me.TableLayoutPanel31.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100!))
 Me.TableLayoutPanel31.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100!))
 Me.TableLayoutPanel31.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30!))
-Me.TableLayoutPanel31.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 41!))
+Me.TableLayoutPanel31.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 37!))
 Me.TableLayoutPanel31.Controls.Add(Me.PROizV21, 3, 1)
 Me.TableLayoutPanel31.Controls.Add(Me.txtNETmac2, 2, 1)
 Me.TableLayoutPanel31.Controls.Add(Me.PROizV20, 3, 0)
@@ -4318,7 +4330,7 @@ Me.TableLayoutPanel31.Name = "TableLayoutPanel31"
 Me.TableLayoutPanel31.RowCount = 2
 Me.TableLayoutPanel31.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel31.RowStyles.Add(New System.Windows.Forms.RowStyle())
-Me.TableLayoutPanel31.Size = New System.Drawing.Size(668, 54)
+Me.TableLayoutPanel31.Size = New System.Drawing.Size(667, 54)
 Me.TableLayoutPanel31.TabIndex = 3
 '
 'PROizV21
@@ -4328,14 +4340,14 @@ Me.PROizV21.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListIte
 Me.TableLayoutPanel31.SetColumnSpan(Me.PROizV21, 2)
 Me.PROizV21.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV21.FormattingEnabled = true
-Me.PROizV21.Location = New System.Drawing.Point(501, 30)
+Me.PROizV21.Location = New System.Drawing.Point(504, 30)
 Me.PROizV21.Name = "PROizV21"
-Me.PROizV21.Size = New System.Drawing.Size(164, 21)
+Me.PROizV21.Size = New System.Drawing.Size(160, 21)
 Me.PROizV21.TabIndex = 15
 '
 'txtNETmac2
 '
-Me.txtNETmac2.Location = New System.Drawing.Point(401, 30)
+Me.txtNETmac2.Location = New System.Drawing.Point(404, 30)
 Me.txtNETmac2.Name = "txtNETmac2"
 Me.txtNETmac2.Size = New System.Drawing.Size(94, 20)
 Me.txtNETmac2.TabIndex = 14
@@ -4346,9 +4358,9 @@ Me.PROizV20.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.PROizV20.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
 Me.PROizV20.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV20.FormattingEnabled = true
-Me.PROizV20.Location = New System.Drawing.Point(501, 3)
+Me.PROizV20.Location = New System.Drawing.Point(504, 3)
 Me.PROizV20.Name = "PROizV20"
-Me.PROizV20.Size = New System.Drawing.Size(122, 21)
+Me.PROizV20.Size = New System.Drawing.Size(123, 21)
 Me.PROizV20.TabIndex = 11
 '
 'cmbNET1
@@ -4359,7 +4371,7 @@ Me.cmbNET1.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbNET1.FormattingEnabled = true
 Me.cmbNET1.Location = New System.Drawing.Point(3, 3)
 Me.cmbNET1.Name = "cmbNET1"
-Me.cmbNET1.Size = New System.Drawing.Size(292, 21)
+Me.cmbNET1.Size = New System.Drawing.Size(295, 21)
 Me.cmbNET1.TabIndex = 8
 '
 'cmbNET2
@@ -4370,26 +4382,26 @@ Me.cmbNET2.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbNET2.FormattingEnabled = true
 Me.cmbNET2.Location = New System.Drawing.Point(3, 30)
 Me.cmbNET2.Name = "cmbNET2"
-Me.cmbNET2.Size = New System.Drawing.Size(292, 21)
+Me.cmbNET2.Size = New System.Drawing.Size(295, 21)
 Me.cmbNET2.TabIndex = 12
 '
 'txtNETmac1
 '
-Me.txtNETmac1.Location = New System.Drawing.Point(401, 3)
+Me.txtNETmac1.Location = New System.Drawing.Point(404, 3)
 Me.txtNETmac1.Name = "txtNETmac1"
 Me.txtNETmac1.Size = New System.Drawing.Size(94, 20)
 Me.txtNETmac1.TabIndex = 10
 '
 'txtNETip2
 '
-Me.txtNETip2.Location = New System.Drawing.Point(301, 30)
+Me.txtNETip2.Location = New System.Drawing.Point(304, 30)
 Me.txtNETip2.Name = "txtNETip2"
 Me.txtNETip2.Size = New System.Drawing.Size(94, 20)
 Me.txtNETip2.TabIndex = 13
 '
 'txtNETip1
 '
-Me.txtNETip1.Location = New System.Drawing.Point(301, 3)
+Me.txtNETip1.Location = New System.Drawing.Point(304, 3)
 Me.txtNETip1.Name = "txtNETip1"
 Me.txtNETip1.Size = New System.Drawing.Size(94, 20)
 Me.txtNETip1.TabIndex = 9
@@ -4399,7 +4411,7 @@ Me.txtNETip1.TabIndex = 9
 Me.ToolStrip13.Dock = System.Windows.Forms.DockStyle.None
 Me.ToolStrip13.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
 Me.ToolStrip13.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.bNetPlus})
-Me.ToolStrip13.Location = New System.Drawing.Point(626, 0)
+Me.ToolStrip13.Location = New System.Drawing.Point(630, 0)
 Me.ToolStrip13.Name = "ToolStrip13"
 Me.ToolStrip13.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
 Me.ToolStrip13.Size = New System.Drawing.Size(26, 25)
@@ -4423,7 +4435,7 @@ Me.gbFDD.Cursor = System.Windows.Forms.Cursors.Hand
 Me.gbFDD.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbFDD.Location = New System.Drawing.Point(3, 1012)
 Me.gbFDD.Name = "gbFDD"
-Me.gbFDD.Size = New System.Drawing.Size(674, 46)
+Me.gbFDD.Size = New System.Drawing.Size(673, 46)
 Me.gbFDD.TabIndex = 8
 Me.gbFDD.TabStop = false
 Me.gbFDD.Text = "Дисковод"
@@ -4436,7 +4448,7 @@ Me.TableLayoutPanel32.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(Syst
 Me.TableLayoutPanel32.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 Me.TableLayoutPanel32.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 Me.TableLayoutPanel32.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.83683!))
-Me.TableLayoutPanel32.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 49!))
+Me.TableLayoutPanel32.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 48!))
 Me.TableLayoutPanel32.Controls.Add(Me.PROizV22, 3, 0)
 Me.TableLayoutPanel32.Controls.Add(Me.cmbFDD, 0, 0)
 Me.TableLayoutPanel32.Controls.Add(Me.txtSN, 1, 0)
@@ -4445,7 +4457,7 @@ Me.TableLayoutPanel32.Location = New System.Drawing.Point(3, 16)
 Me.TableLayoutPanel32.Name = "TableLayoutPanel32"
 Me.TableLayoutPanel32.RowCount = 1
 Me.TableLayoutPanel32.RowStyles.Add(New System.Windows.Forms.RowStyle())
-Me.TableLayoutPanel32.Size = New System.Drawing.Size(668, 27)
+Me.TableLayoutPanel32.Size = New System.Drawing.Size(667, 27)
 Me.TableLayoutPanel32.TabIndex = 3
 '
 'PROizV22
@@ -4457,7 +4469,7 @@ Me.PROizV22.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV22.FormattingEnabled = true
 Me.PROizV22.Location = New System.Drawing.Point(496, 3)
 Me.PROizV22.Name = "PROizV22"
-Me.PROizV22.Size = New System.Drawing.Size(169, 21)
+Me.PROizV22.Size = New System.Drawing.Size(168, 21)
 Me.PROizV22.TabIndex = 6
 '
 'cmbFDD
@@ -4487,7 +4499,7 @@ Me.gbCreader.Cursor = System.Windows.Forms.Cursors.Hand
 Me.gbCreader.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbCreader.Location = New System.Drawing.Point(3, 1064)
 Me.gbCreader.Name = "gbCreader"
-Me.gbCreader.Size = New System.Drawing.Size(674, 46)
+Me.gbCreader.Size = New System.Drawing.Size(673, 46)
 Me.gbCreader.TabIndex = 9
 Me.gbCreader.TabStop = false
 Me.gbCreader.Text = "КардРидер"
@@ -4500,7 +4512,7 @@ Me.TableLayoutPanel33.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(Syst
 Me.TableLayoutPanel33.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 Me.TableLayoutPanel33.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 Me.TableLayoutPanel33.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.83683!))
-Me.TableLayoutPanel33.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 49!))
+Me.TableLayoutPanel33.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 48!))
 Me.TableLayoutPanel33.Controls.Add(Me.PROizV23, 3, 0)
 Me.TableLayoutPanel33.Controls.Add(Me.cmbCreader, 0, 0)
 Me.TableLayoutPanel33.Controls.Add(Me.txtCreader1, 1, 0)
@@ -4509,7 +4521,7 @@ Me.TableLayoutPanel33.Location = New System.Drawing.Point(3, 16)
 Me.TableLayoutPanel33.Name = "TableLayoutPanel33"
 Me.TableLayoutPanel33.RowCount = 1
 Me.TableLayoutPanel33.RowStyles.Add(New System.Windows.Forms.RowStyle())
-Me.TableLayoutPanel33.Size = New System.Drawing.Size(668, 27)
+Me.TableLayoutPanel33.Size = New System.Drawing.Size(667, 27)
 Me.TableLayoutPanel33.TabIndex = 3
 '
 'PROizV23
@@ -4521,7 +4533,7 @@ Me.PROizV23.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV23.FormattingEnabled = true
 Me.PROizV23.Location = New System.Drawing.Point(496, 3)
 Me.PROizV23.Name = "PROizV23"
-Me.PROizV23.Size = New System.Drawing.Size(169, 21)
+Me.PROizV23.Size = New System.Drawing.Size(168, 21)
 Me.PROizV23.TabIndex = 6
 '
 'cmbCreader
@@ -4551,7 +4563,7 @@ Me.gbModem.Cursor = System.Windows.Forms.Cursors.Hand
 Me.gbModem.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbModem.Location = New System.Drawing.Point(3, 1116)
 Me.gbModem.Name = "gbModem"
-Me.gbModem.Size = New System.Drawing.Size(674, 46)
+Me.gbModem.Size = New System.Drawing.Size(673, 46)
 Me.gbModem.TabIndex = 10
 Me.gbModem.TabStop = false
 Me.gbModem.Text = "Модем"
@@ -4564,7 +4576,7 @@ Me.TableLayoutPanel34.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(Syst
 Me.TableLayoutPanel34.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 Me.TableLayoutPanel34.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 Me.TableLayoutPanel34.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.00095!))
-Me.TableLayoutPanel34.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 49!))
+Me.TableLayoutPanel34.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 48!))
 Me.TableLayoutPanel34.Controls.Add(Me.PROizV24, 3, 0)
 Me.TableLayoutPanel34.Controls.Add(Me.cmbModem, 0, 0)
 Me.TableLayoutPanel34.Controls.Add(Me.txtModemSN, 1, 0)
@@ -4573,7 +4585,7 @@ Me.TableLayoutPanel34.Location = New System.Drawing.Point(3, 16)
 Me.TableLayoutPanel34.Name = "TableLayoutPanel34"
 Me.TableLayoutPanel34.RowCount = 1
 Me.TableLayoutPanel34.RowStyles.Add(New System.Windows.Forms.RowStyle())
-Me.TableLayoutPanel34.Size = New System.Drawing.Size(668, 27)
+Me.TableLayoutPanel34.Size = New System.Drawing.Size(667, 27)
 Me.TableLayoutPanel34.TabIndex = 3
 '
 'PROizV24
@@ -4585,7 +4597,7 @@ Me.PROizV24.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV24.FormattingEnabled = true
 Me.PROizV24.Location = New System.Drawing.Point(496, 3)
 Me.PROizV24.Name = "PROizV24"
-Me.PROizV24.Size = New System.Drawing.Size(169, 21)
+Me.PROizV24.Size = New System.Drawing.Size(168, 21)
 Me.PROizV24.TabIndex = 6
 '
 'cmbModem
@@ -4615,7 +4627,7 @@ Me.gbCase.Cursor = System.Windows.Forms.Cursors.Hand
 Me.gbCase.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbCase.Location = New System.Drawing.Point(3, 1168)
 Me.gbCase.Name = "gbCase"
-Me.gbCase.Size = New System.Drawing.Size(674, 46)
+Me.gbCase.Size = New System.Drawing.Size(673, 46)
 Me.gbCase.TabIndex = 11
 Me.gbCase.TabStop = false
 Me.gbCase.Text = "Корпус"
@@ -4628,7 +4640,7 @@ Me.TableLayoutPanel35.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(Syst
 Me.TableLayoutPanel35.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 Me.TableLayoutPanel35.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 Me.TableLayoutPanel35.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.67384!))
-Me.TableLayoutPanel35.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 49!))
+Me.TableLayoutPanel35.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 48!))
 Me.TableLayoutPanel35.Controls.Add(Me.cmbCase, 0, 0)
 Me.TableLayoutPanel35.Controls.Add(Me.txtCase1, 1, 0)
 Me.TableLayoutPanel35.Controls.Add(Me.PROizV25, 3, 0)
@@ -4637,7 +4649,7 @@ Me.TableLayoutPanel35.Location = New System.Drawing.Point(3, 16)
 Me.TableLayoutPanel35.Name = "TableLayoutPanel35"
 Me.TableLayoutPanel35.RowCount = 1
 Me.TableLayoutPanel35.RowStyles.Add(New System.Windows.Forms.RowStyle())
-Me.TableLayoutPanel35.Size = New System.Drawing.Size(668, 27)
+Me.TableLayoutPanel35.Size = New System.Drawing.Size(667, 27)
 Me.TableLayoutPanel35.TabIndex = 3
 '
 'cmbCase
@@ -4668,7 +4680,7 @@ Me.PROizV25.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV25.FormattingEnabled = true
 Me.PROizV25.Location = New System.Drawing.Point(497, 3)
 Me.PROizV25.Name = "PROizV25"
-Me.PROizV25.Size = New System.Drawing.Size(168, 21)
+Me.PROizV25.Size = New System.Drawing.Size(167, 21)
 Me.PROizV25.TabIndex = 6
 '
 'gbBP
@@ -4679,7 +4691,7 @@ Me.gbBP.Cursor = System.Windows.Forms.Cursors.Hand
 Me.gbBP.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbBP.Location = New System.Drawing.Point(3, 1220)
 Me.gbBP.Name = "gbBP"
-Me.gbBP.Size = New System.Drawing.Size(674, 46)
+Me.gbBP.Size = New System.Drawing.Size(673, 46)
 Me.gbBP.TabIndex = 12
 Me.gbBP.TabStop = false
 Me.gbBP.Text = "Блок питания"
@@ -4692,7 +4704,7 @@ Me.TableLayoutPanel36.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(Syst
 Me.TableLayoutPanel36.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 Me.TableLayoutPanel36.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 Me.TableLayoutPanel36.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.83683!))
-Me.TableLayoutPanel36.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 49!))
+Me.TableLayoutPanel36.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 48!))
 Me.TableLayoutPanel36.Controls.Add(Me.cmbBP, 0, 0)
 Me.TableLayoutPanel36.Controls.Add(Me.txtBP1, 1, 0)
 Me.TableLayoutPanel36.Controls.Add(Me.PROizV26, 3, 0)
@@ -4701,7 +4713,7 @@ Me.TableLayoutPanel36.Location = New System.Drawing.Point(3, 16)
 Me.TableLayoutPanel36.Name = "TableLayoutPanel36"
 Me.TableLayoutPanel36.RowCount = 1
 Me.TableLayoutPanel36.RowStyles.Add(New System.Windows.Forms.RowStyle())
-Me.TableLayoutPanel36.Size = New System.Drawing.Size(668, 27)
+Me.TableLayoutPanel36.Size = New System.Drawing.Size(667, 27)
 Me.TableLayoutPanel36.TabIndex = 3
 '
 'cmbBP
@@ -4732,7 +4744,7 @@ Me.PROizV26.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV26.FormattingEnabled = true
 Me.PROizV26.Location = New System.Drawing.Point(496, 3)
 Me.PROizV26.Name = "PROizV26"
-Me.PROizV26.Size = New System.Drawing.Size(169, 21)
+Me.PROizV26.Size = New System.Drawing.Size(168, 21)
 Me.PROizV26.TabIndex = 6
 '
 'gbUSB
@@ -4742,7 +4754,7 @@ Me.gbUSB.Controls.Add(Me.TableLayoutPanel37)
 Me.gbUSB.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbUSB.Location = New System.Drawing.Point(3, 1272)
 Me.gbUSB.Name = "gbUSB"
-Me.gbUSB.Size = New System.Drawing.Size(674, 46)
+Me.gbUSB.Size = New System.Drawing.Size(673, 46)
 Me.gbUSB.TabIndex = 13
 Me.gbUSB.TabStop = false
 Me.gbUSB.Text = "USB Устройства"
@@ -4755,7 +4767,7 @@ Me.TableLayoutPanel37.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(Syst
 Me.TableLayoutPanel37.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 Me.TableLayoutPanel37.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 Me.TableLayoutPanel37.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.83683!))
-Me.TableLayoutPanel37.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 49!))
+Me.TableLayoutPanel37.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 48!))
 Me.TableLayoutPanel37.Controls.Add(Me.cmbUSB, 0, 0)
 Me.TableLayoutPanel37.Controls.Add(Me.txtUSBSN, 1, 0)
 Me.TableLayoutPanel37.Controls.Add(Me.PROizV41, 3, 0)
@@ -4764,7 +4776,7 @@ Me.TableLayoutPanel37.Location = New System.Drawing.Point(3, 16)
 Me.TableLayoutPanel37.Name = "TableLayoutPanel37"
 Me.TableLayoutPanel37.RowCount = 1
 Me.TableLayoutPanel37.RowStyles.Add(New System.Windows.Forms.RowStyle())
-Me.TableLayoutPanel37.Size = New System.Drawing.Size(668, 27)
+Me.TableLayoutPanel37.Size = New System.Drawing.Size(667, 27)
 Me.TableLayoutPanel37.TabIndex = 3
 '
 'cmbUSB
@@ -4795,7 +4807,7 @@ Me.PROizV41.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV41.FormattingEnabled = true
 Me.PROizV41.Location = New System.Drawing.Point(496, 3)
 Me.PROizV41.Name = "PROizV41"
-Me.PROizV41.Size = New System.Drawing.Size(169, 21)
+Me.PROizV41.Size = New System.Drawing.Size(168, 21)
 Me.PROizV41.TabIndex = 5
 '
 'gbPCI
@@ -4806,7 +4818,7 @@ Me.gbPCI.Cursor = System.Windows.Forms.Cursors.Hand
 Me.gbPCI.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbPCI.Location = New System.Drawing.Point(3, 1324)
 Me.gbPCI.Name = "gbPCI"
-Me.gbPCI.Size = New System.Drawing.Size(674, 46)
+Me.gbPCI.Size = New System.Drawing.Size(673, 46)
 Me.gbPCI.TabIndex = 14
 Me.gbPCI.TabStop = false
 Me.gbPCI.Text = "PCI Устройства"
@@ -4819,7 +4831,7 @@ Me.TableLayoutPanel38.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(Syst
 Me.TableLayoutPanel38.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 Me.TableLayoutPanel38.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 Me.TableLayoutPanel38.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.00095!))
-Me.TableLayoutPanel38.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 49!))
+Me.TableLayoutPanel38.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 48!))
 Me.TableLayoutPanel38.Controls.Add(Me.cmbPCI, 0, 0)
 Me.TableLayoutPanel38.Controls.Add(Me.txtSNPCI, 1, 0)
 Me.TableLayoutPanel38.Controls.Add(Me.PROizV42, 3, 0)
@@ -4828,7 +4840,7 @@ Me.TableLayoutPanel38.Location = New System.Drawing.Point(3, 16)
 Me.TableLayoutPanel38.Name = "TableLayoutPanel38"
 Me.TableLayoutPanel38.RowCount = 1
 Me.TableLayoutPanel38.RowStyles.Add(New System.Windows.Forms.RowStyle())
-Me.TableLayoutPanel38.Size = New System.Drawing.Size(668, 27)
+Me.TableLayoutPanel38.Size = New System.Drawing.Size(667, 27)
 Me.TableLayoutPanel38.TabIndex = 3
 '
 'cmbPCI
@@ -4859,7 +4871,7 @@ Me.PROizV42.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV42.FormattingEnabled = true
 Me.PROizV42.Location = New System.Drawing.Point(496, 3)
 Me.PROizV42.Name = "PROizV42"
-Me.PROizV42.Size = New System.Drawing.Size(169, 21)
+Me.PROizV42.Size = New System.Drawing.Size(168, 21)
 Me.PROizV42.TabIndex = 5
 '
 'gbSBP
@@ -4869,7 +4881,7 @@ Me.gbSBP.Controls.Add(Me.TableLayoutPanel39)
 Me.gbSBP.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbSBP.Location = New System.Drawing.Point(3, 1376)
 Me.gbSBP.Name = "gbSBP"
-Me.gbSBP.Size = New System.Drawing.Size(674, 46)
+Me.gbSBP.Size = New System.Drawing.Size(673, 46)
 Me.gbSBP.TabIndex = 15
 Me.gbSBP.TabStop = false
 Me.gbSBP.Text = "Модель, серийный номер, производитель системного блока"
@@ -4882,7 +4894,7 @@ Me.TableLayoutPanel39.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(Syst
 Me.TableLayoutPanel39.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 Me.TableLayoutPanel39.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 Me.TableLayoutPanel39.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.16336!))
-Me.TableLayoutPanel39.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 49!))
+Me.TableLayoutPanel39.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 48!))
 Me.TableLayoutPanel39.Controls.Add(Me.txtModSB, 0, 0)
 Me.TableLayoutPanel39.Controls.Add(Me.txtSNSB, 1, 0)
 Me.TableLayoutPanel39.Controls.Add(Me.PROizV27, 3, 0)
@@ -4891,7 +4903,7 @@ Me.TableLayoutPanel39.Location = New System.Drawing.Point(3, 16)
 Me.TableLayoutPanel39.Name = "TableLayoutPanel39"
 Me.TableLayoutPanel39.RowCount = 1
 Me.TableLayoutPanel39.RowStyles.Add(New System.Windows.Forms.RowStyle())
-Me.TableLayoutPanel39.Size = New System.Drawing.Size(668, 27)
+Me.TableLayoutPanel39.Size = New System.Drawing.Size(667, 27)
 Me.TableLayoutPanel39.TabIndex = 3
 '
 'txtModSB
@@ -4919,7 +4931,7 @@ Me.PROizV27.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV27.FormattingEnabled = true
 Me.PROizV27.Location = New System.Drawing.Point(495, 3)
 Me.PROizV27.Name = "PROizV27"
-Me.PROizV27.Size = New System.Drawing.Size(170, 21)
+Me.PROizV27.Size = New System.Drawing.Size(169, 21)
 Me.PROizV27.TabIndex = 5
 '
 'TabPage3
@@ -4929,7 +4941,7 @@ Me.TabPage3.Controls.Add(Me.TableLayoutPanel61)
 Me.TabPage3.Location = New System.Drawing.Point(4, 22)
 Me.TabPage3.Name = "TabPage3"
 Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
-Me.TabPage3.Size = New System.Drawing.Size(663, 620)
+Me.TabPage3.Size = New System.Drawing.Size(685, 620)
 Me.TabPage3.TabIndex = 2
 Me.TabPage3.Text = "Периферия"
 '
@@ -4956,7 +4968,7 @@ Me.TableLayoutPanel61.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel61.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel61.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel61.RowStyles.Add(New System.Windows.Forms.RowStyle())
-Me.TableLayoutPanel61.Size = New System.Drawing.Size(657, 614)
+Me.TableLayoutPanel61.Size = New System.Drawing.Size(679, 614)
 Me.TableLayoutPanel61.TabIndex = 7
 '
 'gbMonitor
@@ -4966,7 +4978,7 @@ Me.gbMonitor.Controls.Add(Me.TableLayoutPanel40)
 Me.gbMonitor.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbMonitor.Location = New System.Drawing.Point(3, 3)
 Me.gbMonitor.Name = "gbMonitor"
-Me.gbMonitor.Size = New System.Drawing.Size(651, 73)
+Me.gbMonitor.Size = New System.Drawing.Size(673, 73)
 Me.gbMonitor.TabIndex = 0
 Me.gbMonitor.TabStop = false
 Me.gbMonitor.Text = "Монитор"
@@ -4979,7 +4991,7 @@ Me.TableLayoutPanel40.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(Syst
 Me.TableLayoutPanel40.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100!))
 Me.TableLayoutPanel40.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100!))
 Me.TableLayoutPanel40.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30!))
-Me.TableLayoutPanel40.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 36!))
+Me.TableLayoutPanel40.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 37!))
 Me.TableLayoutPanel40.Controls.Add(Me.PROizV29, 3, 1)
 Me.TableLayoutPanel40.Controls.Add(Me.txtMon2SN, 2, 1)
 Me.TableLayoutPanel40.Controls.Add(Me.PROizV28, 3, 0)
@@ -4995,7 +5007,7 @@ Me.TableLayoutPanel40.Name = "TableLayoutPanel40"
 Me.TableLayoutPanel40.RowCount = 2
 Me.TableLayoutPanel40.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel40.RowStyles.Add(New System.Windows.Forms.RowStyle())
-Me.TableLayoutPanel40.Size = New System.Drawing.Size(645, 54)
+Me.TableLayoutPanel40.Size = New System.Drawing.Size(667, 54)
 Me.TableLayoutPanel40.TabIndex = 3
 '
 'PROizV29
@@ -5005,14 +5017,14 @@ Me.PROizV29.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListIte
 Me.TableLayoutPanel40.SetColumnSpan(Me.PROizV29, 2)
 Me.PROizV29.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV29.FormattingEnabled = true
-Me.PROizV29.Location = New System.Drawing.Point(489, 30)
+Me.PROizV29.Location = New System.Drawing.Point(504, 30)
 Me.PROizV29.Name = "PROizV29"
-Me.PROizV29.Size = New System.Drawing.Size(153, 21)
+Me.PROizV29.Size = New System.Drawing.Size(160, 21)
 Me.PROizV29.TabIndex = 15
 '
 'txtMon2SN
 '
-Me.txtMon2SN.Location = New System.Drawing.Point(389, 30)
+Me.txtMon2SN.Location = New System.Drawing.Point(404, 30)
 Me.txtMon2SN.Name = "txtMon2SN"
 Me.txtMon2SN.Size = New System.Drawing.Size(94, 20)
 Me.txtMon2SN.TabIndex = 14
@@ -5023,9 +5035,9 @@ Me.PROizV28.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.PROizV28.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
 Me.PROizV28.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV28.FormattingEnabled = true
-Me.PROizV28.Location = New System.Drawing.Point(489, 3)
+Me.PROizV28.Location = New System.Drawing.Point(504, 3)
 Me.PROizV28.Name = "PROizV28"
-Me.PROizV28.Size = New System.Drawing.Size(116, 21)
+Me.PROizV28.Size = New System.Drawing.Size(123, 21)
 Me.PROizV28.TabIndex = 11
 '
 'cmbMon1
@@ -5036,7 +5048,7 @@ Me.cmbMon1.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbMon1.FormattingEnabled = true
 Me.cmbMon1.Location = New System.Drawing.Point(3, 3)
 Me.cmbMon1.Name = "cmbMon1"
-Me.cmbMon1.Size = New System.Drawing.Size(280, 21)
+Me.cmbMon1.Size = New System.Drawing.Size(295, 21)
 Me.cmbMon1.TabIndex = 8
 '
 'cmbMon2
@@ -5047,26 +5059,26 @@ Me.cmbMon2.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbMon2.FormattingEnabled = true
 Me.cmbMon2.Location = New System.Drawing.Point(3, 30)
 Me.cmbMon2.Name = "cmbMon2"
-Me.cmbMon2.Size = New System.Drawing.Size(280, 21)
+Me.cmbMon2.Size = New System.Drawing.Size(295, 21)
 Me.cmbMon2.TabIndex = 12
 '
 'txtMon1SN
 '
-Me.txtMon1SN.Location = New System.Drawing.Point(389, 3)
+Me.txtMon1SN.Location = New System.Drawing.Point(404, 3)
 Me.txtMon1SN.Name = "txtMon1SN"
 Me.txtMon1SN.Size = New System.Drawing.Size(94, 20)
 Me.txtMon1SN.TabIndex = 10
 '
 'txtMon2Dum
 '
-Me.txtMon2Dum.Location = New System.Drawing.Point(289, 30)
+Me.txtMon2Dum.Location = New System.Drawing.Point(304, 30)
 Me.txtMon2Dum.Name = "txtMon2Dum"
 Me.txtMon2Dum.Size = New System.Drawing.Size(94, 20)
 Me.txtMon2Dum.TabIndex = 13
 '
 'txtMon1Dum
 '
-Me.txtMon1Dum.Location = New System.Drawing.Point(289, 3)
+Me.txtMon1Dum.Location = New System.Drawing.Point(304, 3)
 Me.txtMon1Dum.Name = "txtMon1Dum"
 Me.txtMon1Dum.Size = New System.Drawing.Size(94, 20)
 Me.txtMon1Dum.TabIndex = 9
@@ -5075,7 +5087,7 @@ Me.txtMon1Dum.TabIndex = 9
 '
 Me.ToolStrip14.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
 Me.ToolStrip14.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.bMonitorPlus})
-Me.ToolStrip14.Location = New System.Drawing.Point(608, 0)
+Me.ToolStrip14.Location = New System.Drawing.Point(630, 0)
 Me.ToolStrip14.Name = "ToolStrip14"
 Me.ToolStrip14.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
 Me.ToolStrip14.Size = New System.Drawing.Size(37, 25)
@@ -5098,7 +5110,7 @@ Me.gbPrinters.Controls.Add(Me.TableLayoutPanel41)
 Me.gbPrinters.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbPrinters.Location = New System.Drawing.Point(3, 342)
 Me.gbPrinters.Name = "gbPrinters"
-Me.gbPrinters.Size = New System.Drawing.Size(651, 100)
+Me.gbPrinters.Size = New System.Drawing.Size(673, 100)
 Me.gbPrinters.TabIndex = 6
 Me.gbPrinters.TabStop = false
 Me.gbPrinters.Text = "Подключенные принтеры"
@@ -5111,7 +5123,7 @@ Me.TableLayoutPanel41.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(Syst
 Me.TableLayoutPanel41.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100!))
 Me.TableLayoutPanel41.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100!))
 Me.TableLayoutPanel41.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30!))
-Me.TableLayoutPanel41.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 36!))
+Me.TableLayoutPanel41.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 37!))
 Me.TableLayoutPanel41.Controls.Add(Me.cmbPrinters1, 0, 0)
 Me.TableLayoutPanel41.Controls.Add(Me.PROizV36, 3, 2)
 Me.TableLayoutPanel41.Controls.Add(Me.txtPrint3Port, 2, 2)
@@ -5132,7 +5144,7 @@ Me.TableLayoutPanel41.RowCount = 3
 Me.TableLayoutPanel41.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel41.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel41.RowStyles.Add(New System.Windows.Forms.RowStyle())
-Me.TableLayoutPanel41.Size = New System.Drawing.Size(645, 81)
+Me.TableLayoutPanel41.Size = New System.Drawing.Size(667, 81)
 Me.TableLayoutPanel41.TabIndex = 3
 '
 'cmbPrinters1
@@ -5143,7 +5155,7 @@ Me.cmbPrinters1.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbPrinters1.FormattingEnabled = true
 Me.cmbPrinters1.Location = New System.Drawing.Point(3, 3)
 Me.cmbPrinters1.Name = "cmbPrinters1"
-Me.cmbPrinters1.Size = New System.Drawing.Size(280, 21)
+Me.cmbPrinters1.Size = New System.Drawing.Size(295, 21)
 Me.cmbPrinters1.TabIndex = 12
 '
 'PROizV36
@@ -5153,14 +5165,14 @@ Me.PROizV36.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListIte
 Me.TableLayoutPanel41.SetColumnSpan(Me.PROizV36, 2)
 Me.PROizV36.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV36.FormattingEnabled = true
-Me.PROizV36.Location = New System.Drawing.Point(489, 57)
+Me.PROizV36.Location = New System.Drawing.Point(504, 57)
 Me.PROizV36.Name = "PROizV36"
-Me.PROizV36.Size = New System.Drawing.Size(153, 21)
+Me.PROizV36.Size = New System.Drawing.Size(160, 21)
 Me.PROizV36.TabIndex = 23
 '
 'txtPrint3Port
 '
-Me.txtPrint3Port.Location = New System.Drawing.Point(389, 57)
+Me.txtPrint3Port.Location = New System.Drawing.Point(404, 57)
 Me.txtPrint3Port.Name = "txtPrint3Port"
 Me.txtPrint3Port.Size = New System.Drawing.Size(94, 20)
 Me.txtPrint3Port.TabIndex = 22
@@ -5172,9 +5184,9 @@ Me.PROizV35.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListIte
 Me.TableLayoutPanel41.SetColumnSpan(Me.PROizV35, 2)
 Me.PROizV35.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV35.FormattingEnabled = true
-Me.PROizV35.Location = New System.Drawing.Point(489, 30)
+Me.PROizV35.Location = New System.Drawing.Point(504, 30)
 Me.PROizV35.Name = "PROizV35"
-Me.PROizV35.Size = New System.Drawing.Size(153, 21)
+Me.PROizV35.Size = New System.Drawing.Size(160, 21)
 Me.PROizV35.TabIndex = 19
 '
 'cmbPrinters2
@@ -5185,7 +5197,7 @@ Me.cmbPrinters2.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbPrinters2.FormattingEnabled = true
 Me.cmbPrinters2.Location = New System.Drawing.Point(3, 30)
 Me.cmbPrinters2.Name = "cmbPrinters2"
-Me.cmbPrinters2.Size = New System.Drawing.Size(280, 21)
+Me.cmbPrinters2.Size = New System.Drawing.Size(295, 21)
 Me.cmbPrinters2.TabIndex = 16
 '
 'PROizV34
@@ -5194,9 +5206,9 @@ Me.PROizV34.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.PROizV34.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
 Me.PROizV34.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV34.FormattingEnabled = true
-Me.PROizV34.Location = New System.Drawing.Point(489, 3)
+Me.PROizV34.Location = New System.Drawing.Point(504, 3)
 Me.PROizV34.Name = "PROizV34"
-Me.PROizV34.Size = New System.Drawing.Size(116, 21)
+Me.PROizV34.Size = New System.Drawing.Size(123, 21)
 Me.PROizV34.TabIndex = 15
 '
 'cmbPrinters3
@@ -5207,40 +5219,40 @@ Me.cmbPrinters3.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbPrinters3.FormattingEnabled = true
 Me.cmbPrinters3.Location = New System.Drawing.Point(3, 57)
 Me.cmbPrinters3.Name = "cmbPrinters3"
-Me.cmbPrinters3.Size = New System.Drawing.Size(280, 21)
+Me.cmbPrinters3.Size = New System.Drawing.Size(295, 21)
 Me.cmbPrinters3.TabIndex = 20
 '
 'txtPrint2Port
 '
-Me.txtPrint2Port.Location = New System.Drawing.Point(389, 30)
+Me.txtPrint2Port.Location = New System.Drawing.Point(404, 30)
 Me.txtPrint2Port.Name = "txtPrint2Port"
 Me.txtPrint2Port.Size = New System.Drawing.Size(94, 20)
 Me.txtPrint2Port.TabIndex = 18
 '
 'txtPrint3SN
 '
-Me.txtPrint3SN.Location = New System.Drawing.Point(289, 57)
+Me.txtPrint3SN.Location = New System.Drawing.Point(304, 57)
 Me.txtPrint3SN.Name = "txtPrint3SN"
 Me.txtPrint3SN.Size = New System.Drawing.Size(94, 20)
 Me.txtPrint3SN.TabIndex = 21
 '
 'txtPrint1SN
 '
-Me.txtPrint1SN.Location = New System.Drawing.Point(289, 3)
+Me.txtPrint1SN.Location = New System.Drawing.Point(304, 3)
 Me.txtPrint1SN.Name = "txtPrint1SN"
 Me.txtPrint1SN.Size = New System.Drawing.Size(94, 20)
 Me.txtPrint1SN.TabIndex = 13
 '
 'txtPrint1Port
 '
-Me.txtPrint1Port.Location = New System.Drawing.Point(389, 3)
+Me.txtPrint1Port.Location = New System.Drawing.Point(404, 3)
 Me.txtPrint1Port.Name = "txtPrint1Port"
 Me.txtPrint1Port.Size = New System.Drawing.Size(94, 20)
 Me.txtPrint1Port.TabIndex = 14
 '
 'txtPrint2SN
 '
-Me.txtPrint2SN.Location = New System.Drawing.Point(289, 30)
+Me.txtPrint2SN.Location = New System.Drawing.Point(304, 30)
 Me.txtPrint2SN.Name = "txtPrint2SN"
 Me.txtPrint2SN.Size = New System.Drawing.Size(94, 20)
 Me.txtPrint2SN.TabIndex = 17
@@ -5249,7 +5261,7 @@ Me.txtPrint2SN.TabIndex = 17
 '
 Me.ToolStrip15.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
 Me.ToolStrip15.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.bPrinterPlus})
-Me.ToolStrip15.Location = New System.Drawing.Point(608, 0)
+Me.ToolStrip15.Location = New System.Drawing.Point(630, 0)
 Me.ToolStrip15.Name = "ToolStrip15"
 Me.ToolStrip15.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
 Me.ToolStrip15.Size = New System.Drawing.Size(37, 25)
@@ -5272,7 +5284,7 @@ Me.gbIBP.Controls.Add(Me.TableLayoutPanel46)
 Me.gbIBP.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbIBP.Location = New System.Drawing.Point(3, 290)
 Me.gbIBP.Name = "gbIBP"
-Me.gbIBP.Size = New System.Drawing.Size(651, 46)
+Me.gbIBP.Size = New System.Drawing.Size(673, 46)
 Me.gbIBP.TabIndex = 5
 Me.gbIBP.TabStop = false
 Me.gbIBP.Text = "Источник бесперебойного питания"
@@ -5281,10 +5293,10 @@ Me.gbIBP.Text = "Источник бесперебойного питания"
 '
 Me.TableLayoutPanel46.AutoSize = true
 Me.TableLayoutPanel46.ColumnCount = 4
-Me.TableLayoutPanel46.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 64.96815!))
+Me.TableLayoutPanel46.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 66.17021!))
 Me.TableLayoutPanel46.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 Me.TableLayoutPanel46.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-Me.TableLayoutPanel46.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35.03185!))
+Me.TableLayoutPanel46.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.82979!))
 Me.TableLayoutPanel46.Controls.Add(Me.PROizV43, 3, 0)
 Me.TableLayoutPanel46.Controls.Add(Me.cmbIBP, 0, 0)
 Me.TableLayoutPanel46.Controls.Add(Me.txtSNIBP, 1, 0)
@@ -5293,7 +5305,7 @@ Me.TableLayoutPanel46.Location = New System.Drawing.Point(3, 16)
 Me.TableLayoutPanel46.Name = "TableLayoutPanel46"
 Me.TableLayoutPanel46.RowCount = 1
 Me.TableLayoutPanel46.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100!))
-Me.TableLayoutPanel46.Size = New System.Drawing.Size(645, 27)
+Me.TableLayoutPanel46.Size = New System.Drawing.Size(667, 27)
 Me.TableLayoutPanel46.TabIndex = 3
 '
 'PROizV43
@@ -5302,9 +5314,9 @@ Me.PROizV43.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.PROizV43.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
 Me.PROizV43.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV43.FormattingEnabled = true
-Me.PROizV43.Location = New System.Drawing.Point(492, 3)
+Me.PROizV43.Location = New System.Drawing.Point(512, 3)
 Me.PROizV43.Name = "PROizV43"
-Me.PROizV43.Size = New System.Drawing.Size(150, 21)
+Me.PROizV43.Size = New System.Drawing.Size(152, 21)
 Me.PROizV43.TabIndex = 6
 '
 'cmbIBP
@@ -5315,13 +5327,13 @@ Me.cmbIBP.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbIBP.FormattingEnabled = true
 Me.cmbIBP.Location = New System.Drawing.Point(3, 3)
 Me.cmbIBP.Name = "cmbIBP"
-Me.cmbIBP.Size = New System.Drawing.Size(283, 21)
+Me.cmbIBP.Size = New System.Drawing.Size(303, 21)
 Me.cmbIBP.TabIndex = 4
 '
 'txtSNIBP
 '
 Me.TableLayoutPanel46.SetColumnSpan(Me.txtSNIBP, 2)
-Me.txtSNIBP.Location = New System.Drawing.Point(292, 3)
+Me.txtSNIBP.Location = New System.Drawing.Point(312, 3)
 Me.txtSNIBP.Name = "txtSNIBP"
 Me.txtSNIBP.Size = New System.Drawing.Size(194, 20)
 Me.txtSNIBP.TabIndex = 5
@@ -5333,7 +5345,7 @@ Me.gbKeyboard.Controls.Add(Me.TableLayoutPanel42)
 Me.gbKeyboard.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbKeyboard.Location = New System.Drawing.Point(3, 82)
 Me.gbKeyboard.Name = "gbKeyboard"
-Me.gbKeyboard.Size = New System.Drawing.Size(651, 46)
+Me.gbKeyboard.Size = New System.Drawing.Size(673, 46)
 Me.gbKeyboard.TabIndex = 1
 Me.gbKeyboard.TabStop = false
 Me.gbKeyboard.Text = "Клавиатура"
@@ -5342,10 +5354,10 @@ Me.gbKeyboard.Text = "Клавиатура"
 '
 Me.TableLayoutPanel42.AutoSize = true
 Me.TableLayoutPanel42.ColumnCount = 4
-Me.TableLayoutPanel42.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 65.12739!))
+Me.TableLayoutPanel42.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 66.80851!))
 Me.TableLayoutPanel42.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 Me.TableLayoutPanel42.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-Me.TableLayoutPanel42.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 34.87261!))
+Me.TableLayoutPanel42.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.19149!))
 Me.TableLayoutPanel42.Controls.Add(Me.PROizV30, 3, 0)
 Me.TableLayoutPanel42.Controls.Add(Me.cmbKeyb, 0, 0)
 Me.TableLayoutPanel42.Controls.Add(Me.txtKeybSN, 1, 0)
@@ -5354,7 +5366,7 @@ Me.TableLayoutPanel42.Location = New System.Drawing.Point(3, 16)
 Me.TableLayoutPanel42.Name = "TableLayoutPanel42"
 Me.TableLayoutPanel42.RowCount = 1
 Me.TableLayoutPanel42.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100!))
-Me.TableLayoutPanel42.Size = New System.Drawing.Size(645, 27)
+Me.TableLayoutPanel42.Size = New System.Drawing.Size(667, 27)
 Me.TableLayoutPanel42.TabIndex = 3
 '
 'PROizV30
@@ -5363,7 +5375,7 @@ Me.PROizV30.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.PROizV30.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
 Me.PROizV30.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV30.FormattingEnabled = true
-Me.PROizV30.Location = New System.Drawing.Point(492, 3)
+Me.PROizV30.Location = New System.Drawing.Point(514, 3)
 Me.PROizV30.Name = "PROizV30"
 Me.PROizV30.Size = New System.Drawing.Size(150, 21)
 Me.PROizV30.TabIndex = 6
@@ -5376,13 +5388,13 @@ Me.cmbKeyb.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbKeyb.FormattingEnabled = true
 Me.cmbKeyb.Location = New System.Drawing.Point(3, 3)
 Me.cmbKeyb.Name = "cmbKeyb"
-Me.cmbKeyb.Size = New System.Drawing.Size(283, 21)
+Me.cmbKeyb.Size = New System.Drawing.Size(305, 21)
 Me.cmbKeyb.TabIndex = 4
 '
 'txtKeybSN
 '
 Me.TableLayoutPanel42.SetColumnSpan(Me.txtKeybSN, 2)
-Me.txtKeybSN.Location = New System.Drawing.Point(292, 3)
+Me.txtKeybSN.Location = New System.Drawing.Point(314, 3)
 Me.txtKeybSN.Name = "txtKeybSN"
 Me.txtKeybSN.Size = New System.Drawing.Size(194, 20)
 Me.txtKeybSN.TabIndex = 5
@@ -5394,7 +5406,7 @@ Me.gbMouse.Controls.Add(Me.TableLayoutPanel43)
 Me.gbMouse.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbMouse.Location = New System.Drawing.Point(3, 134)
 Me.gbMouse.Name = "gbMouse"
-Me.gbMouse.Size = New System.Drawing.Size(651, 46)
+Me.gbMouse.Size = New System.Drawing.Size(673, 46)
 Me.gbMouse.TabIndex = 2
 Me.gbMouse.TabStop = false
 Me.gbMouse.Text = "Мышь"
@@ -5403,10 +5415,10 @@ Me.gbMouse.Text = "Мышь"
 '
 Me.TableLayoutPanel43.AutoSize = true
 Me.TableLayoutPanel43.ColumnCount = 4
-Me.TableLayoutPanel43.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 64.96815!))
+Me.TableLayoutPanel43.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 66.59574!))
 Me.TableLayoutPanel43.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 Me.TableLayoutPanel43.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-Me.TableLayoutPanel43.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35.03185!))
+Me.TableLayoutPanel43.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.40425!))
 Me.TableLayoutPanel43.Controls.Add(Me.txtMouseSN, 0, 0)
 Me.TableLayoutPanel43.Controls.Add(Me.cmbMouse, 0, 0)
 Me.TableLayoutPanel43.Controls.Add(Me.PROizV31, 3, 0)
@@ -5415,7 +5427,7 @@ Me.TableLayoutPanel43.Location = New System.Drawing.Point(3, 16)
 Me.TableLayoutPanel43.Name = "TableLayoutPanel43"
 Me.TableLayoutPanel43.RowCount = 1
 Me.TableLayoutPanel43.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100!))
-Me.TableLayoutPanel43.Size = New System.Drawing.Size(645, 27)
+Me.TableLayoutPanel43.Size = New System.Drawing.Size(667, 27)
 Me.TableLayoutPanel43.TabIndex = 3
 '
 'txtMouseSN
@@ -5432,9 +5444,9 @@ Me.cmbMouse.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.cmbMouse.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
 Me.cmbMouse.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbMouse.FormattingEnabled = true
-Me.cmbMouse.Location = New System.Drawing.Point(258, 3)
+Me.cmbMouse.Location = New System.Drawing.Point(273, 3)
 Me.cmbMouse.Name = "cmbMouse"
-Me.cmbMouse.Size = New System.Drawing.Size(300, 21)
+Me.cmbMouse.Size = New System.Drawing.Size(305, 21)
 Me.cmbMouse.TabIndex = 4
 '
 'PROizV31
@@ -5443,9 +5455,9 @@ Me.PROizV31.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.PROizV31.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
 Me.PROizV31.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV31.FormattingEnabled = true
-Me.PROizV31.Location = New System.Drawing.Point(564, 3)
+Me.PROizV31.Location = New System.Drawing.Point(584, 3)
 Me.PROizV31.Name = "PROizV31"
-Me.PROizV31.Size = New System.Drawing.Size(78, 21)
+Me.PROizV31.Size = New System.Drawing.Size(80, 21)
 Me.PROizV31.TabIndex = 6
 '
 'gbFilter
@@ -5455,7 +5467,7 @@ Me.gbFilter.Controls.Add(Me.TableLayoutPanel45)
 Me.gbFilter.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbFilter.Location = New System.Drawing.Point(3, 238)
 Me.gbFilter.Name = "gbFilter"
-Me.gbFilter.Size = New System.Drawing.Size(651, 46)
+Me.gbFilter.Size = New System.Drawing.Size(673, 46)
 Me.gbFilter.TabIndex = 4
 Me.gbFilter.TabStop = false
 Me.gbFilter.Text = "Сетевой фильтр"
@@ -5464,10 +5476,10 @@ Me.gbFilter.Text = "Сетевой фильтр"
 '
 Me.TableLayoutPanel45.AutoSize = true
 Me.TableLayoutPanel45.ColumnCount = 4
-Me.TableLayoutPanel45.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 64.80891!))
+Me.TableLayoutPanel45.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 66.59574!))
 Me.TableLayoutPanel45.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 Me.TableLayoutPanel45.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-Me.TableLayoutPanel45.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35.19108!))
+Me.TableLayoutPanel45.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.40425!))
 Me.TableLayoutPanel45.Controls.Add(Me.PROizV33, 3, 0)
 Me.TableLayoutPanel45.Controls.Add(Me.cmbFilter, 0, 0)
 Me.TableLayoutPanel45.Controls.Add(Me.txtFilterSN, 1, 0)
@@ -5476,7 +5488,7 @@ Me.TableLayoutPanel45.Location = New System.Drawing.Point(3, 16)
 Me.TableLayoutPanel45.Name = "TableLayoutPanel45"
 Me.TableLayoutPanel45.RowCount = 1
 Me.TableLayoutPanel45.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100!))
-Me.TableLayoutPanel45.Size = New System.Drawing.Size(645, 27)
+Me.TableLayoutPanel45.Size = New System.Drawing.Size(667, 27)
 Me.TableLayoutPanel45.TabIndex = 3
 '
 'PROizV33
@@ -5485,9 +5497,9 @@ Me.PROizV33.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.PROizV33.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
 Me.PROizV33.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV33.FormattingEnabled = true
-Me.PROizV33.Location = New System.Drawing.Point(491, 3)
+Me.PROizV33.Location = New System.Drawing.Point(514, 3)
 Me.PROizV33.Name = "PROizV33"
-Me.PROizV33.Size = New System.Drawing.Size(151, 21)
+Me.PROizV33.Size = New System.Drawing.Size(150, 21)
 Me.PROizV33.TabIndex = 6
 '
 'cmbFilter
@@ -5498,13 +5510,13 @@ Me.cmbFilter.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbFilter.FormattingEnabled = true
 Me.cmbFilter.Location = New System.Drawing.Point(3, 3)
 Me.cmbFilter.Name = "cmbFilter"
-Me.cmbFilter.Size = New System.Drawing.Size(282, 21)
+Me.cmbFilter.Size = New System.Drawing.Size(305, 21)
 Me.cmbFilter.TabIndex = 4
 '
 'txtFilterSN
 '
 Me.TableLayoutPanel45.SetColumnSpan(Me.txtFilterSN, 2)
-Me.txtFilterSN.Location = New System.Drawing.Point(291, 3)
+Me.txtFilterSN.Location = New System.Drawing.Point(314, 3)
 Me.txtFilterSN.Name = "txtFilterSN"
 Me.txtFilterSN.Size = New System.Drawing.Size(194, 20)
 Me.txtFilterSN.TabIndex = 5
@@ -5516,7 +5528,7 @@ Me.gbAsystem.Controls.Add(Me.TableLayoutPanel44)
 Me.gbAsystem.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbAsystem.Location = New System.Drawing.Point(3, 186)
 Me.gbAsystem.Name = "gbAsystem"
-Me.gbAsystem.Size = New System.Drawing.Size(651, 46)
+Me.gbAsystem.Size = New System.Drawing.Size(673, 46)
 Me.gbAsystem.TabIndex = 3
 Me.gbAsystem.TabStop = false
 Me.gbAsystem.Text = "Аккустические системы"
@@ -5525,10 +5537,10 @@ Me.gbAsystem.Text = "Аккустические системы"
 '
 Me.TableLayoutPanel44.AutoSize = true
 Me.TableLayoutPanel44.ColumnCount = 4
-Me.TableLayoutPanel44.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 64.96815!))
+Me.TableLayoutPanel44.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 66.59574!))
 Me.TableLayoutPanel44.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
 Me.TableLayoutPanel44.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-Me.TableLayoutPanel44.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35.03185!))
+Me.TableLayoutPanel44.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.40425!))
 Me.TableLayoutPanel44.Controls.Add(Me.PROizV32, 3, 0)
 Me.TableLayoutPanel44.Controls.Add(Me.cmbAsist, 0, 0)
 Me.TableLayoutPanel44.Controls.Add(Me.txtAsistSN, 1, 0)
@@ -5537,7 +5549,7 @@ Me.TableLayoutPanel44.Location = New System.Drawing.Point(3, 16)
 Me.TableLayoutPanel44.Name = "TableLayoutPanel44"
 Me.TableLayoutPanel44.RowCount = 1
 Me.TableLayoutPanel44.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100!))
-Me.TableLayoutPanel44.Size = New System.Drawing.Size(645, 27)
+Me.TableLayoutPanel44.Size = New System.Drawing.Size(667, 27)
 Me.TableLayoutPanel44.TabIndex = 3
 '
 'PROizV32
@@ -5546,7 +5558,7 @@ Me.PROizV32.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.PROizV32.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
 Me.PROizV32.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV32.FormattingEnabled = true
-Me.PROizV32.Location = New System.Drawing.Point(492, 3)
+Me.PROizV32.Location = New System.Drawing.Point(514, 3)
 Me.PROizV32.Name = "PROizV32"
 Me.PROizV32.Size = New System.Drawing.Size(150, 21)
 Me.PROizV32.TabIndex = 7
@@ -5559,14 +5571,14 @@ Me.cmbAsist.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbAsist.FormattingEnabled = true
 Me.cmbAsist.Location = New System.Drawing.Point(3, 3)
 Me.cmbAsist.Name = "cmbAsist"
-Me.cmbAsist.Size = New System.Drawing.Size(283, 21)
+Me.cmbAsist.Size = New System.Drawing.Size(305, 21)
 Me.cmbAsist.TabIndex = 4
 '
 'txtAsistSN
 '
 Me.TableLayoutPanel44.SetColumnSpan(Me.txtAsistSN, 2)
 Me.txtAsistSN.Dock = System.Windows.Forms.DockStyle.Fill
-Me.txtAsistSN.Location = New System.Drawing.Point(292, 3)
+Me.txtAsistSN.Location = New System.Drawing.Point(314, 3)
 Me.txtAsistSN.Name = "txtAsistSN"
 Me.txtAsistSN.Size = New System.Drawing.Size(194, 20)
 Me.txtAsistSN.TabIndex = 5
@@ -5576,7 +5588,7 @@ Me.txtAsistSN.TabIndex = 5
 Me.TabPage4.Controls.Add(Me.lstSoftware)
 Me.TabPage4.Location = New System.Drawing.Point(4, 22)
 Me.TabPage4.Name = "TabPage4"
-Me.TabPage4.Size = New System.Drawing.Size(663, 620)
+Me.TabPage4.Size = New System.Drawing.Size(685, 620)
 Me.TabPage4.TabIndex = 3
 Me.TabPage4.Text = "Програмное обеспечение"
 Me.TabPage4.UseVisualStyleBackColor = true
@@ -5590,7 +5602,7 @@ Me.lstSoftware.HideSelection = false
 Me.lstSoftware.Location = New System.Drawing.Point(0, 0)
 Me.lstSoftware.MultiSelect = false
 Me.lstSoftware.Name = "lstSoftware"
-Me.lstSoftware.Size = New System.Drawing.Size(663, 620)
+Me.lstSoftware.Size = New System.Drawing.Size(685, 620)
 Me.lstSoftware.TabIndex = 0
 Me.lstSoftware.UseCompatibleStateImageBehavior = false
 Me.lstSoftware.View = System.Windows.Forms.View.Details
@@ -5600,7 +5612,7 @@ Me.lstSoftware.View = System.Windows.Forms.View.Details
 Me.TabPage5.Controls.Add(Me.TableLayoutPanel1)
 Me.TabPage5.Location = New System.Drawing.Point(4, 22)
 Me.TabPage5.Name = "TabPage5"
-Me.TabPage5.Size = New System.Drawing.Size(663, 620)
+Me.TabPage5.Size = New System.Drawing.Size(685, 620)
 Me.TabPage5.TabIndex = 4
 Me.TabPage5.Text = "Пользователи"
 Me.TabPage5.UseVisualStyleBackColor = true
@@ -5617,7 +5629,7 @@ Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
 Me.TableLayoutPanel1.RowCount = 2
 Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100!))
-Me.TableLayoutPanel1.Size = New System.Drawing.Size(663, 620)
+Me.TableLayoutPanel1.Size = New System.Drawing.Size(685, 620)
 Me.TableLayoutPanel1.TabIndex = 0
 '
 'TableLayoutPanel4
@@ -5657,7 +5669,7 @@ Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Wind
 Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25!))
 Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25!))
 Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100!))
-Me.TableLayoutPanel4.Size = New System.Drawing.Size(657, 274)
+Me.TableLayoutPanel4.Size = New System.Drawing.Size(679, 274)
 Me.TableLayoutPanel4.TabIndex = 43
 '
 'ToolStrip1
@@ -5666,7 +5678,7 @@ Me.ToolStrip1.Dock = System.Windows.Forms.DockStyle.Fill
 Me.ToolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
 Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cmdUserAdd, Me.ToolStripSeparator1, Me.cmdUserDel, Me.ToolStripSeparator2, Me.cmdUserPassEncript, Me.ToolStripSeparator3, Me.btnUserCancel, Me.ToolStripSeparator4})
 Me.ToolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow
-Me.ToolStrip1.Location = New System.Drawing.Point(561, 0)
+Me.ToolStrip1.Location = New System.Drawing.Point(583, 0)
 Me.ToolStrip1.Name = "ToolStrip1"
 Me.TableLayoutPanel4.SetRowSpan(Me.ToolStrip1, 5)
 Me.ToolStrip1.Size = New System.Drawing.Size(96, 125)
@@ -5737,7 +5749,7 @@ Me.txtUMEMO.Location = New System.Drawing.Point(3, 128)
 Me.txtUMEMO.Multiline = true
 Me.txtUMEMO.Name = "txtUMEMO"
 Me.txtUMEMO.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-Me.txtUMEMO.Size = New System.Drawing.Size(651, 143)
+Me.txtUMEMO.Size = New System.Drawing.Size(673, 143)
 Me.txtUMEMO.TabIndex = 46
 '
 'Label36
@@ -5753,17 +5765,17 @@ Me.Label36.Text = "Примечание:"
 'txtUserEmailPwd
 '
 Me.txtUserEmailPwd.Dock = System.Windows.Forms.DockStyle.Fill
-Me.txtUserEmailPwd.Location = New System.Drawing.Point(414, 78)
+Me.txtUserEmailPwd.Location = New System.Drawing.Point(425, 78)
 Me.txtUserEmailPwd.Name = "txtUserEmailPwd"
 Me.txtUserEmailPwd.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
-Me.txtUserEmailPwd.Size = New System.Drawing.Size(144, 20)
+Me.txtUserEmailPwd.Size = New System.Drawing.Size(155, 20)
 Me.txtUserEmailPwd.TabIndex = 44
 '
 'lblEmailPass
 '
 Me.lblEmailPass.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
 Me.lblEmailPass.AutoSize = true
-Me.lblEmailPass.Location = New System.Drawing.Point(262, 81)
+Me.lblEmailPass.Location = New System.Drawing.Point(273, 81)
 Me.lblEmailPass.Name = "lblEmailPass"
 Me.lblEmailPass.Size = New System.Drawing.Size(146, 13)
 Me.lblEmailPass.TabIndex = 43
@@ -5774,7 +5786,7 @@ Me.lblEmailPass.Text = "Пароль электронной почты"
 Me.txtUserEmail.Dock = System.Windows.Forms.DockStyle.Fill
 Me.txtUserEmail.Location = New System.Drawing.Point(112, 78)
 Me.txtUserEmail.Name = "txtUserEmail"
-Me.txtUserEmail.Size = New System.Drawing.Size(144, 20)
+Me.txtUserEmail.Size = New System.Drawing.Size(155, 20)
 Me.txtUserEmail.TabIndex = 42
 '
 'lblEMAIL
@@ -5790,16 +5802,16 @@ Me.lblEMAIL.Text = "Email"
 'txtUserJab
 '
 Me.txtUserJab.Dock = System.Windows.Forms.DockStyle.Fill
-Me.txtUserJab.Location = New System.Drawing.Point(414, 53)
+Me.txtUserJab.Location = New System.Drawing.Point(425, 53)
 Me.txtUserJab.Name = "txtUserJab"
-Me.txtUserJab.Size = New System.Drawing.Size(144, 20)
+Me.txtUserJab.Size = New System.Drawing.Size(155, 20)
 Me.txtUserJab.TabIndex = 40
 '
 'lblJabber
 '
 Me.lblJabber.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
 Me.lblJabber.AutoSize = true
-Me.lblJabber.Location = New System.Drawing.Point(262, 56)
+Me.lblJabber.Location = New System.Drawing.Point(273, 56)
 Me.lblJabber.Name = "lblJabber"
 Me.lblJabber.Size = New System.Drawing.Size(146, 13)
 Me.lblJabber.TabIndex = 39
@@ -5810,7 +5822,7 @@ Me.lblJabber.Text = "Jabber"
 Me.txtUserIcq.Dock = System.Windows.Forms.DockStyle.Fill
 Me.txtUserIcq.Location = New System.Drawing.Point(112, 53)
 Me.txtUserIcq.Name = "txtUserIcq"
-Me.txtUserIcq.Size = New System.Drawing.Size(144, 20)
+Me.txtUserIcq.Size = New System.Drawing.Size(155, 20)
 Me.txtUserIcq.TabIndex = 31
 '
 'lblICQ
@@ -5836,17 +5848,17 @@ Me.lblSurname.Text = "ФИО"
 'txtUserPass
 '
 Me.txtUserPass.Dock = System.Windows.Forms.DockStyle.Fill
-Me.txtUserPass.Location = New System.Drawing.Point(414, 3)
+Me.txtUserPass.Location = New System.Drawing.Point(425, 3)
 Me.txtUserPass.Name = "txtUserPass"
 Me.txtUserPass.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
-Me.txtUserPass.Size = New System.Drawing.Size(144, 20)
+Me.txtUserPass.Size = New System.Drawing.Size(155, 20)
 Me.txtUserPass.TabIndex = 25
 '
 'lbluserPassword
 '
 Me.lbluserPassword.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
 Me.lbluserPassword.AutoSize = true
-Me.lbluserPassword.Location = New System.Drawing.Point(262, 6)
+Me.lbluserPassword.Location = New System.Drawing.Point(273, 6)
 Me.lbluserPassword.Name = "lbluserPassword"
 Me.lbluserPassword.Size = New System.Drawing.Size(146, 13)
 Me.lbluserPassword.TabIndex = 24
@@ -5865,7 +5877,7 @@ Me.lblUsername.Text = "Имя пользователя"
 'ChkPDC
 '
 Me.ChkPDC.AutoSize = true
-Me.ChkPDC.Location = New System.Drawing.Point(414, 103)
+Me.ChkPDC.Location = New System.Drawing.Point(425, 103)
 Me.ChkPDC.Name = "ChkPDC"
 Me.ChkPDC.Size = New System.Drawing.Size(142, 17)
 Me.ChkPDC.TabIndex = 47
@@ -5878,7 +5890,7 @@ Me.txtUserName.Dock = System.Windows.Forms.DockStyle.Fill
 Me.txtUserName.FormattingEnabled = true
 Me.txtUserName.Location = New System.Drawing.Point(112, 3)
 Me.txtUserName.Name = "txtUserName"
-Me.txtUserName.Size = New System.Drawing.Size(144, 21)
+Me.txtUserName.Size = New System.Drawing.Size(155, 21)
 Me.txtUserName.TabIndex = 48
 '
 'txtUserFIO
@@ -5888,7 +5900,7 @@ Me.txtUserFIO.Dock = System.Windows.Forms.DockStyle.Fill
 Me.txtUserFIO.FormattingEnabled = true
 Me.txtUserFIO.Location = New System.Drawing.Point(112, 28)
 Me.txtUserFIO.Name = "txtUserFIO"
-Me.txtUserFIO.Size = New System.Drawing.Size(446, 21)
+Me.txtUserFIO.Size = New System.Drawing.Size(468, 21)
 Me.txtUserFIO.TabIndex = 49
 '
 'lstUsers
@@ -5900,7 +5912,7 @@ Me.lstUsers.Location = New System.Drawing.Point(3, 283)
 Me.lstUsers.MultiSelect = false
 Me.lstUsers.Name = "lstUsers"
 Me.lstUsers.ShowItemToolTips = true
-Me.lstUsers.Size = New System.Drawing.Size(657, 334)
+Me.lstUsers.Size = New System.Drawing.Size(679, 334)
 Me.lstUsers.TabIndex = 38
 Me.lstUsers.UseCompatibleStateImageBehavior = false
 Me.lstUsers.View = System.Windows.Forms.View.Details
@@ -5910,7 +5922,7 @@ Me.lstUsers.View = System.Windows.Forms.View.Details
 Me.TabPage7.Controls.Add(Me.TableLayoutPanel5)
 Me.TabPage7.Location = New System.Drawing.Point(4, 22)
 Me.TabPage7.Name = "TabPage7"
-Me.TabPage7.Size = New System.Drawing.Size(663, 620)
+Me.TabPage7.Size = New System.Drawing.Size(685, 620)
 Me.TabPage7.TabIndex = 6
 Me.TabPage7.Text = "Сервис"
 Me.TabPage7.UseVisualStyleBackColor = true
@@ -5928,7 +5940,7 @@ Me.TableLayoutPanel5.Name = "TableLayoutPanel5"
 Me.TableLayoutPanel5.RowCount = 2
 Me.TableLayoutPanel5.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 39.35484!))
 Me.TableLayoutPanel5.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60.64516!))
-Me.TableLayoutPanel5.Size = New System.Drawing.Size(663, 620)
+Me.TableLayoutPanel5.Size = New System.Drawing.Size(685, 620)
 Me.TableLayoutPanel5.TabIndex = 5
 '
 'gbRepair
@@ -5938,7 +5950,7 @@ Me.gbRepair.Controls.Add(Me.lvRepair)
 Me.gbRepair.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbRepair.Location = New System.Drawing.Point(3, 247)
 Me.gbRepair.Name = "gbRepair"
-Me.gbRepair.Size = New System.Drawing.Size(657, 370)
+Me.gbRepair.Size = New System.Drawing.Size(679, 370)
 Me.gbRepair.TabIndex = 4
 Me.gbRepair.TabStop = false
 Me.gbRepair.Text = "Ремонты"
@@ -5952,7 +5964,7 @@ Me.lvRepair.Location = New System.Drawing.Point(3, 16)
 Me.lvRepair.MultiSelect = false
 Me.lvRepair.Name = "lvRepair"
 Me.lvRepair.ShowItemToolTips = true
-Me.lvRepair.Size = New System.Drawing.Size(651, 351)
+Me.lvRepair.Size = New System.Drawing.Size(673, 351)
 Me.lvRepair.TabIndex = 4
 Me.lvRepair.UseCompatibleStateImageBehavior = false
 Me.lvRepair.View = System.Windows.Forms.View.Details
@@ -5963,7 +5975,7 @@ Me.gbNotes.Controls.Add(Me.TableLayoutPanel6)
 Me.gbNotes.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbNotes.Location = New System.Drawing.Point(3, 3)
 Me.gbNotes.Name = "gbNotes"
-Me.gbNotes.Size = New System.Drawing.Size(657, 238)
+Me.gbNotes.Size = New System.Drawing.Size(679, 238)
 Me.gbNotes.TabIndex = 3
 Me.gbNotes.TabStop = false
 Me.gbNotes.Text = "Заметки"
@@ -5988,7 +6000,7 @@ Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Wind
 Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80!))
 Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20!))
-Me.TableLayoutPanel6.Size = New System.Drawing.Size(651, 219)
+Me.TableLayoutPanel6.Size = New System.Drawing.Size(673, 219)
 Me.TableLayoutPanel6.TabIndex = 1
 '
 'ToolStrip2
@@ -5997,7 +6009,7 @@ Me.ToolStrip2.Dock = System.Windows.Forms.DockStyle.Fill
 Me.ToolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
 Me.ToolStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnNotesAdd, Me.ToolStripSeparator5, Me.btnNotesDel, Me.ToolStripSeparator6, Me.btnNotesCancel, Me.ToolStripSeparator7})
 Me.ToolStrip2.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow
-Me.ToolStrip2.Location = New System.Drawing.Point(531, 0)
+Me.ToolStrip2.Location = New System.Drawing.Point(553, 0)
 Me.ToolStrip2.Name = "ToolStrip2"
 Me.TableLayoutPanel6.SetRowSpan(Me.ToolStrip2, 2)
 Me.ToolStrip2.Size = New System.Drawing.Size(120, 105)
@@ -6054,7 +6066,7 @@ Me.lvNotes.FullRowSelect = true
 Me.lvNotes.GridLines = true
 Me.lvNotes.Location = New System.Drawing.Point(3, 108)
 Me.lvNotes.Name = "lvNotes"
-Me.lvNotes.Size = New System.Drawing.Size(645, 110)
+Me.lvNotes.Size = New System.Drawing.Size(667, 108)
 Me.lvNotes.TabIndex = 4
 Me.lvNotes.UseCompatibleStateImageBehavior = false
 Me.lvNotes.View = System.Windows.Forms.View.Details
@@ -6067,7 +6079,7 @@ Me.txtNotes.Location = New System.Drawing.Point(3, 28)
 Me.txtNotes.Multiline = true
 Me.txtNotes.Name = "txtNotes"
 Me.txtNotes.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-Me.txtNotes.Size = New System.Drawing.Size(525, 74)
+Me.txtNotes.Size = New System.Drawing.Size(547, 74)
 Me.txtNotes.TabIndex = 3
 '
 'cmbNotesMaster
@@ -6078,7 +6090,7 @@ Me.cmbNotesMaster.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbNotesMaster.FormattingEnabled = true
 Me.cmbNotesMaster.Location = New System.Drawing.Point(129, 3)
 Me.cmbNotesMaster.Name = "cmbNotesMaster"
-Me.cmbNotesMaster.Size = New System.Drawing.Size(399, 21)
+Me.cmbNotesMaster.Size = New System.Drawing.Size(421, 21)
 Me.cmbNotesMaster.TabIndex = 2
 '
 'dtDateNotes
@@ -6094,7 +6106,7 @@ Me.dtDateNotes.TabIndex = 1
 Me.TabPage8.Controls.Add(Me.TableLayoutPanel66)
 Me.TabPage8.Location = New System.Drawing.Point(4, 22)
 Me.TabPage8.Name = "TabPage8"
-Me.TabPage8.Size = New System.Drawing.Size(663, 620)
+Me.TabPage8.Size = New System.Drawing.Size(685, 620)
 Me.TabPage8.TabIndex = 7
 Me.TabPage8.Text = "Гарантия"
 Me.TabPage8.UseVisualStyleBackColor = true
@@ -6113,7 +6125,7 @@ Me.TableLayoutPanel66.RowCount = 3
 Me.TableLayoutPanel66.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel66.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel66.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100!))
-Me.TableLayoutPanel66.Size = New System.Drawing.Size(663, 620)
+Me.TableLayoutPanel66.Size = New System.Drawing.Size(685, 620)
 Me.TableLayoutPanel66.TabIndex = 3
 '
 'gbGuarantee
@@ -6122,7 +6134,7 @@ Me.gbGuarantee.Controls.Add(Me.TableLayoutPanel59)
 Me.gbGuarantee.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbGuarantee.Location = New System.Drawing.Point(3, 3)
 Me.gbGuarantee.Name = "gbGuarantee"
-Me.gbGuarantee.Size = New System.Drawing.Size(657, 107)
+Me.gbGuarantee.Size = New System.Drawing.Size(679, 107)
 Me.gbGuarantee.TabIndex = 0
 Me.gbGuarantee.TabStop = false
 Me.gbGuarantee.Text = "Гарантия"
@@ -6142,7 +6154,7 @@ Me.TableLayoutPanel59.Name = "TableLayoutPanel59"
 Me.TableLayoutPanel59.RowCount = 2
 Me.TableLayoutPanel59.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel59.RowStyles.Add(New System.Windows.Forms.RowStyle())
-Me.TableLayoutPanel59.Size = New System.Drawing.Size(651, 88)
+Me.TableLayoutPanel59.Size = New System.Drawing.Size(673, 88)
 Me.TableLayoutPanel59.TabIndex = 3
 '
 'gbSeller
@@ -6152,7 +6164,7 @@ Me.gbSeller.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbSeller.Location = New System.Drawing.Point(177, 3)
 Me.gbSeller.Name = "gbSeller"
 Me.TableLayoutPanel59.SetRowSpan(Me.gbSeller, 2)
-Me.gbSeller.Size = New System.Drawing.Size(471, 84)
+Me.gbSeller.Size = New System.Drawing.Size(493, 82)
 Me.gbSeller.TabIndex = 4
 Me.gbSeller.TabStop = false
 Me.gbSeller.Text = "Поставщик"
@@ -6176,15 +6188,15 @@ Me.TableLayoutPanel60.Name = "TableLayoutPanel60"
 Me.TableLayoutPanel60.RowCount = 2
 Me.TableLayoutPanel60.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel60.RowStyles.Add(New System.Windows.Forms.RowStyle())
-Me.TableLayoutPanel60.Size = New System.Drawing.Size(465, 65)
+Me.TableLayoutPanel60.Size = New System.Drawing.Size(487, 63)
 Me.TableLayoutPanel60.TabIndex = 3
 '
 'dtGok
 '
 Me.dtGok.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-Me.dtGok.Location = New System.Drawing.Point(312, 36)
+Me.dtGok.Location = New System.Drawing.Point(323, 35)
 Me.dtGok.Name = "dtGok"
-Me.dtGok.Size = New System.Drawing.Size(150, 20)
+Me.dtGok.Size = New System.Drawing.Size(161, 20)
 Me.dtGok.TabIndex = 8
 '
 'Label20
@@ -6201,7 +6213,7 @@ Me.Label20.Text = "Продавец"
 '
 Me.Label21.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
 Me.Label21.AutoSize = true
-Me.Label21.Location = New System.Drawing.Point(241, 39)
+Me.Label21.Location = New System.Drawing.Point(252, 38)
 Me.Label21.Name = "Label21"
 Me.Label21.Size = New System.Drawing.Size(65, 13)
 Me.Label21.TabIndex = 10
@@ -6211,7 +6223,7 @@ Me.Label21.Text = "Окончание:"
 '
 Me.Label22.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
 Me.Label22.AutoSize = true
-Me.Label22.Location = New System.Drawing.Point(3, 39)
+Me.Label22.Location = New System.Drawing.Point(3, 38)
 Me.Label22.Name = "Label22"
 Me.Label22.Size = New System.Drawing.Size(77, 13)
 Me.Label22.TabIndex = 9
@@ -6226,15 +6238,15 @@ Me.cmbPostav.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbPostav.FormattingEnabled = true
 Me.cmbPostav.Location = New System.Drawing.Point(86, 3)
 Me.cmbPostav.Name = "cmbPostav"
-Me.cmbPostav.Size = New System.Drawing.Size(376, 21)
+Me.cmbPostav.Size = New System.Drawing.Size(398, 21)
 Me.cmbPostav.TabIndex = 5
 '
 'dtGPr
 '
 Me.dtGPr.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-Me.dtGPr.Location = New System.Drawing.Point(86, 36)
+Me.dtGPr.Location = New System.Drawing.Point(86, 35)
 Me.dtGPr.Name = "dtGPr"
-Me.dtGPr.Size = New System.Drawing.Size(149, 20)
+Me.dtGPr.Size = New System.Drawing.Size(160, 20)
 Me.dtGPr.TabIndex = 7
 '
 'rbKompl
@@ -6253,7 +6265,7 @@ Me.rbKompl.UseVisualStyleBackColor = true
 '
 Me.rbSist.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
 Me.rbSist.AutoSize = true
-Me.rbSist.Location = New System.Drawing.Point(3, 48)
+Me.rbSist.Location = New System.Drawing.Point(3, 47)
 Me.rbSist.Name = "rbSist"
 Me.rbSist.Size = New System.Drawing.Size(168, 17)
 Me.rbSist.TabIndex = 5
@@ -6268,7 +6280,7 @@ Me.gbSale.Controls.Add(Me.TableLayoutPanel23)
 Me.gbSale.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbSale.Location = New System.Drawing.Point(3, 116)
 Me.gbSale.Name = "gbSale"
-Me.gbSale.Size = New System.Drawing.Size(657, 120)
+Me.gbSale.Size = New System.Drawing.Size(679, 120)
 Me.gbSale.TabIndex = 2
 Me.gbSale.TabStop = false
 Me.gbSale.Text = "Данные о приобретении"
@@ -6303,16 +6315,16 @@ Me.TableLayoutPanel23.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel23.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel23.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel23.RowStyles.Add(New System.Windows.Forms.RowStyle())
-Me.TableLayoutPanel23.Size = New System.Drawing.Size(651, 101)
+Me.TableLayoutPanel23.Size = New System.Drawing.Size(673, 101)
 Me.TableLayoutPanel23.TabIndex = 1
 '
 'chkPCNNb
 '
 Me.chkPCNNb.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
 Me.chkPCNNb.AutoSize = true
-Me.chkPCNNb.Location = New System.Drawing.Point(412, 81)
+Me.chkPCNNb.Location = New System.Drawing.Point(423, 81)
 Me.chkPCNNb.Name = "chkPCNNb"
-Me.chkPCNNb.Size = New System.Drawing.Size(236, 17)
+Me.chkPCNNb.Size = New System.Drawing.Size(247, 17)
 Me.chkPCNNb.TabIndex = 23
 Me.chkPCNNb.Text = "Не на балансе"
 Me.chkPCNNb.UseVisualStyleBackColor = true
@@ -6323,7 +6335,7 @@ Me.txtPCSumm.Dock = System.Windows.Forms.DockStyle.Fill
 Me.txtPCSumm.Location = New System.Drawing.Point(98, 55)
 Me.txtPCSumm.Maximum = New Decimal(New Integer() {1000000, 0, 0, 0})
 Me.txtPCSumm.Name = "txtPCSumm"
-Me.txtPCSumm.Size = New System.Drawing.Size(236, 20)
+Me.txtPCSumm.Size = New System.Drawing.Size(247, 20)
 Me.txtPCSumm.TabIndex = 18
 '
 'chkPCspis
@@ -6332,7 +6344,7 @@ Me.chkPCspis.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Wi
 Me.chkPCspis.AutoSize = true
 Me.chkPCspis.Location = New System.Drawing.Point(98, 81)
 Me.chkPCspis.Name = "chkPCspis"
-Me.chkPCspis.Size = New System.Drawing.Size(236, 17)
+Me.chkPCspis.Size = New System.Drawing.Size(247, 17)
 Me.chkPCspis.TabIndex = 21
 Me.chkPCspis.Text = "Списано"
 Me.chkPCspis.UseVisualStyleBackColor = true
@@ -6340,9 +6352,9 @@ Me.chkPCspis.UseVisualStyleBackColor = true
 'dtPCdataVvoda
 '
 Me.dtPCdataVvoda.Dock = System.Windows.Forms.DockStyle.Fill
-Me.dtPCdataVvoda.Location = New System.Drawing.Point(412, 55)
+Me.dtPCdataVvoda.Location = New System.Drawing.Point(423, 55)
 Me.dtPCdataVvoda.Name = "dtPCdataVvoda"
-Me.dtPCdataVvoda.Size = New System.Drawing.Size(236, 20)
+Me.dtPCdataVvoda.Size = New System.Drawing.Size(247, 20)
 Me.dtPCdataVvoda.TabIndex = 20
 '
 'Label43
@@ -6359,7 +6371,7 @@ Me.Label43.Text = "Счёт фактура №"
 '
 Me.Label48.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
 Me.Label48.AutoSize = true
-Me.Label48.Location = New System.Drawing.Point(340, 58)
+Me.Label48.Location = New System.Drawing.Point(351, 58)
 Me.Label48.Name = "Label48"
 Me.Label48.Size = New System.Drawing.Size(66, 13)
 Me.Label48.TabIndex = 25
@@ -6370,7 +6382,7 @@ Me.Label48.Text = "Дата ввода"
 Me.txtPCSfN.Dock = System.Windows.Forms.DockStyle.Fill
 Me.txtPCSfN.Location = New System.Drawing.Point(98, 3)
 Me.txtPCSfN.Name = "txtPCSfN"
-Me.txtPCSfN.Size = New System.Drawing.Size(236, 20)
+Me.txtPCSfN.Size = New System.Drawing.Size(247, 20)
 Me.txtPCSfN.TabIndex = 12
 '
 'txtPCcash
@@ -6379,14 +6391,14 @@ Me.txtPCcash.Dock = System.Windows.Forms.DockStyle.Fill
 Me.txtPCcash.Location = New System.Drawing.Point(98, 29)
 Me.txtPCcash.Maximum = New Decimal(New Integer() {1000000, 0, 0, 0})
 Me.txtPCcash.Name = "txtPCcash"
-Me.txtPCcash.Size = New System.Drawing.Size(236, 20)
+Me.txtPCcash.Size = New System.Drawing.Size(247, 20)
 Me.txtPCcash.TabIndex = 17
 '
 'Label46
 '
 Me.Label46.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
 Me.Label46.AutoSize = true
-Me.Label46.Location = New System.Drawing.Point(340, 6)
+Me.Label46.Location = New System.Drawing.Point(351, 6)
 Me.Label46.Name = "Label46"
 Me.Label46.Size = New System.Drawing.Size(66, 13)
 Me.Label46.TabIndex = 22
@@ -6395,9 +6407,9 @@ Me.Label46.Text = "от"
 'txtPCZay
 '
 Me.txtPCZay.Dock = System.Windows.Forms.DockStyle.Fill
-Me.txtPCZay.Location = New System.Drawing.Point(412, 29)
+Me.txtPCZay.Location = New System.Drawing.Point(423, 29)
 Me.txtPCZay.Name = "txtPCZay"
-Me.txtPCZay.Size = New System.Drawing.Size(236, 20)
+Me.txtPCZay.Size = New System.Drawing.Size(247, 20)
 Me.txtPCZay.TabIndex = 19
 '
 'Label45
@@ -6413,16 +6425,16 @@ Me.Label45.Text = "Сумма"
 'dtPCSFdate
 '
 Me.dtPCSFdate.Dock = System.Windows.Forms.DockStyle.Fill
-Me.dtPCSFdate.Location = New System.Drawing.Point(412, 3)
+Me.dtPCSFdate.Location = New System.Drawing.Point(423, 3)
 Me.dtPCSFdate.Name = "dtPCSFdate"
-Me.dtPCSFdate.Size = New System.Drawing.Size(236, 20)
+Me.dtPCSFdate.Size = New System.Drawing.Size(247, 20)
 Me.dtPCSFdate.TabIndex = 16
 '
 'Label47
 '
 Me.Label47.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
 Me.Label47.AutoSize = true
-Me.Label47.Location = New System.Drawing.Point(340, 32)
+Me.Label47.Location = New System.Drawing.Point(351, 32)
 Me.Label47.Name = "Label47"
 Me.Label47.Size = New System.Drawing.Size(66, 13)
 Me.Label47.TabIndex = 24
@@ -6447,7 +6459,7 @@ Me.sSTAB5.Dock = System.Windows.Forms.DockStyle.Fill
 Me.sSTAB5.Location = New System.Drawing.Point(0, 0)
 Me.sSTAB5.Name = "sSTAB5"
 Me.sSTAB5.SelectedIndex = 0
-Me.sSTAB5.Size = New System.Drawing.Size(671, 646)
+Me.sSTAB5.Size = New System.Drawing.Size(693, 646)
 Me.sSTAB5.TabIndex = 11
 Me.sSTAB5.Visible = false
 '
@@ -6457,7 +6469,7 @@ Me.TabPage19.Controls.Add(Me.TableLayoutPanel71)
 Me.TabPage19.Location = New System.Drawing.Point(4, 22)
 Me.TabPage19.Name = "TabPage19"
 Me.TabPage19.Padding = New System.Windows.Forms.Padding(3)
-Me.TabPage19.Size = New System.Drawing.Size(663, 620)
+Me.TabPage19.Size = New System.Drawing.Size(685, 620)
 Me.TabPage19.TabIndex = 0
 Me.TabPage19.Text = "Информация"
 Me.TabPage19.UseVisualStyleBackColor = true
@@ -6485,7 +6497,7 @@ Me.TableLayoutPanel71.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Win
 Me.TableLayoutPanel71.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25!))
 Me.TableLayoutPanel71.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 94!))
 Me.TableLayoutPanel71.RowStyles.Add(New System.Windows.Forms.RowStyle())
-Me.TableLayoutPanel71.Size = New System.Drawing.Size(657, 614)
+Me.TableLayoutPanel71.Size = New System.Drawing.Size(679, 614)
 Me.TableLayoutPanel71.TabIndex = 8
 '
 'Label70
@@ -6506,7 +6518,7 @@ Me.txtBRMemo.Location = New System.Drawing.Point(162, 245)
 Me.txtBRMemo.Multiline = true
 Me.txtBRMemo.Name = "txtBRMemo"
 Me.txtBRMemo.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-Me.txtBRMemo.Size = New System.Drawing.Size(492, 88)
+Me.txtBRMemo.Size = New System.Drawing.Size(514, 88)
 Me.txtBRMemo.TabIndex = 4
 '
 'txtBRAddress
@@ -6517,7 +6529,7 @@ Me.txtBRAddress.Location = New System.Drawing.Point(162, 3)
 Me.txtBRAddress.Multiline = true
 Me.txtBRAddress.Name = "txtBRAddress"
 Me.txtBRAddress.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-Me.txtBRAddress.Size = New System.Drawing.Size(492, 185)
+Me.txtBRAddress.Size = New System.Drawing.Size(514, 185)
 Me.txtBRAddress.TabIndex = 1
 '
 'Label67
@@ -6546,7 +6558,7 @@ Me.TableLayoutPanel71.SetColumnSpan(Me.txtBRPhone, 2)
 Me.txtBRPhone.Dock = System.Windows.Forms.DockStyle.Fill
 Me.txtBRPhone.Location = New System.Drawing.Point(162, 220)
 Me.txtBRPhone.Name = "txtBRPhone"
-Me.txtBRPhone.Size = New System.Drawing.Size(492, 20)
+Me.txtBRPhone.Size = New System.Drawing.Size(514, 20)
 Me.txtBRPhone.TabIndex = 3
 '
 'txtBRBoss
@@ -6555,7 +6567,7 @@ Me.TableLayoutPanel71.SetColumnSpan(Me.txtBRBoss, 2)
 Me.txtBRBoss.Dock = System.Windows.Forms.DockStyle.Fill
 Me.txtBRBoss.Location = New System.Drawing.Point(162, 194)
 Me.txtBRBoss.Name = "txtBRBoss"
-Me.txtBRBoss.Size = New System.Drawing.Size(492, 20)
+Me.txtBRBoss.Size = New System.Drawing.Size(514, 20)
 Me.txtBRBoss.TabIndex = 2
 '
 'Label68
@@ -6574,7 +6586,7 @@ Me.TabPage20.Controls.Add(Me.TableLayoutPanel8)
 Me.TabPage20.Location = New System.Drawing.Point(4, 22)
 Me.TabPage20.Name = "TabPage20"
 Me.TabPage20.Padding = New System.Windows.Forms.Padding(3)
-Me.TabPage20.Size = New System.Drawing.Size(663, 620)
+Me.TabPage20.Size = New System.Drawing.Size(685, 620)
 Me.TabPage20.TabIndex = 1
 Me.TabPage20.Text = "Сервис"
 Me.TabPage20.UseVisualStyleBackColor = true
@@ -6591,7 +6603,7 @@ Me.TableLayoutPanel8.Name = "TableLayoutPanel8"
 Me.TableLayoutPanel8.RowCount = 2
 Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40!))
 Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60!))
-Me.TableLayoutPanel8.Size = New System.Drawing.Size(657, 614)
+Me.TableLayoutPanel8.Size = New System.Drawing.Size(679, 614)
 Me.TableLayoutPanel8.TabIndex = 7
 '
 'gbBRRemont
@@ -6600,7 +6612,7 @@ Me.gbBRRemont.Controls.Add(Me.lvRepairBR)
 Me.gbBRRemont.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbBRRemont.Location = New System.Drawing.Point(3, 248)
 Me.gbBRRemont.Name = "gbBRRemont"
-Me.gbBRRemont.Size = New System.Drawing.Size(651, 363)
+Me.gbBRRemont.Size = New System.Drawing.Size(673, 363)
 Me.gbBRRemont.TabIndex = 4
 Me.gbBRRemont.TabStop = false
 Me.gbBRRemont.Text = "Ремонты"
@@ -6614,7 +6626,7 @@ Me.lvRepairBR.Location = New System.Drawing.Point(3, 16)
 Me.lvRepairBR.MultiSelect = false
 Me.lvRepairBR.Name = "lvRepairBR"
 Me.lvRepairBR.ShowItemToolTips = true
-Me.lvRepairBR.Size = New System.Drawing.Size(645, 344)
+Me.lvRepairBR.Size = New System.Drawing.Size(667, 344)
 Me.lvRepairBR.TabIndex = 4
 Me.lvRepairBR.UseCompatibleStateImageBehavior = false
 Me.lvRepairBR.View = System.Windows.Forms.View.Details
@@ -6625,7 +6637,7 @@ Me.gbBRNotes.Controls.Add(Me.TableLayoutPanel9)
 Me.gbBRNotes.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbBRNotes.Location = New System.Drawing.Point(3, 3)
 Me.gbBRNotes.Name = "gbBRNotes"
-Me.gbBRNotes.Size = New System.Drawing.Size(651, 239)
+Me.gbBRNotes.Size = New System.Drawing.Size(673, 239)
 Me.gbBRNotes.TabIndex = 3
 Me.gbBRNotes.TabStop = false
 Me.gbBRNotes.Text = "Заметки"
@@ -6649,7 +6661,7 @@ Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Wind
 Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80!))
 Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20!))
-Me.TableLayoutPanel9.Size = New System.Drawing.Size(645, 220)
+Me.TableLayoutPanel9.Size = New System.Drawing.Size(667, 220)
 Me.TableLayoutPanel9.TabIndex = 1
 '
 'ToolStrip3
@@ -6658,7 +6670,7 @@ Me.ToolStrip3.Dock = System.Windows.Forms.DockStyle.Fill
 Me.ToolStrip3.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
 Me.ToolStrip3.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnBRNotesAdd, Me.ToolStripSeparator8, Me.btnBRNotesDel, Me.ToolStripSeparator9, Me.btnBRNotesCancel, Me.ToolStripSeparator10})
 Me.ToolStrip3.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow
-Me.ToolStrip3.Location = New System.Drawing.Point(525, 0)
+Me.ToolStrip3.Location = New System.Drawing.Point(547, 0)
 Me.ToolStrip3.Name = "ToolStrip3"
 Me.TableLayoutPanel9.SetRowSpan(Me.ToolStrip3, 2)
 Me.ToolStrip3.Size = New System.Drawing.Size(120, 105)
@@ -6715,7 +6727,7 @@ Me.lvNotesBR.FullRowSelect = true
 Me.lvNotesBR.GridLines = true
 Me.lvNotesBR.Location = New System.Drawing.Point(3, 108)
 Me.lvNotesBR.Name = "lvNotesBR"
-Me.lvNotesBR.Size = New System.Drawing.Size(639, 112)
+Me.lvNotesBR.Size = New System.Drawing.Size(661, 109)
 Me.lvNotesBR.TabIndex = 4
 Me.lvNotesBR.UseCompatibleStateImageBehavior = false
 Me.lvNotesBR.View = System.Windows.Forms.View.Details
@@ -6728,7 +6740,7 @@ Me.Notesbrtxt.Location = New System.Drawing.Point(3, 28)
 Me.Notesbrtxt.Multiline = true
 Me.Notesbrtxt.Name = "Notesbrtxt"
 Me.Notesbrtxt.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-Me.Notesbrtxt.Size = New System.Drawing.Size(519, 74)
+Me.Notesbrtxt.Size = New System.Drawing.Size(541, 74)
 Me.Notesbrtxt.TabIndex = 3
 '
 'cmbBRMaster
@@ -6739,7 +6751,7 @@ Me.cmbBRMaster.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbBRMaster.FormattingEnabled = true
 Me.cmbBRMaster.Location = New System.Drawing.Point(129, 3)
 Me.cmbBRMaster.Name = "cmbBRMaster"
-Me.cmbBRMaster.Size = New System.Drawing.Size(393, 21)
+Me.cmbBRMaster.Size = New System.Drawing.Size(415, 21)
 Me.cmbBRMaster.TabIndex = 2
 '
 'Notesbrdate
@@ -6755,7 +6767,7 @@ Me.Notesbrdate.TabIndex = 1
 Me.TabPage21.Controls.Add(Me.TableLayoutPanel73)
 Me.TabPage21.Location = New System.Drawing.Point(4, 22)
 Me.TabPage21.Name = "TabPage21"
-Me.TabPage21.Size = New System.Drawing.Size(663, 620)
+Me.TabPage21.Size = New System.Drawing.Size(685, 620)
 Me.TabPage21.TabIndex = 2
 Me.TabPage21.Text = "Санитарный паспорт"
 Me.TabPage21.UseVisualStyleBackColor = true
@@ -6808,7 +6820,7 @@ Me.TableLayoutPanel73.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel73.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100!))
 Me.TableLayoutPanel73.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel73.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100!))
-Me.TableLayoutPanel73.Size = New System.Drawing.Size(663, 620)
+Me.TableLayoutPanel73.Size = New System.Drawing.Size(685, 620)
 Me.TableLayoutPanel73.TabIndex = 22
 '
 'Label82
@@ -6835,7 +6847,7 @@ Me.btnOfficeSend.UseVisualStyleBackColor = true
 Me.txtspplo.Dock = System.Windows.Forms.DockStyle.Fill
 Me.txtspplo.Location = New System.Drawing.Point(128, 3)
 Me.txtspplo.Name = "txtspplo"
-Me.txtspplo.Size = New System.Drawing.Size(281, 20)
+Me.txtspplo.Size = New System.Drawing.Size(216, 20)
 Me.txtspplo.TabIndex = 1
 '
 'txtSpMebel
@@ -6846,16 +6858,16 @@ Me.txtSpMebel.Location = New System.Drawing.Point(3, 301)
 Me.txtSpMebel.Multiline = true
 Me.txtSpMebel.Name = "txtSpMebel"
 Me.txtSpMebel.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-Me.txtSpMebel.Size = New System.Drawing.Size(831, 94)
+Me.txtSpMebel.Size = New System.Drawing.Size(679, 94)
 Me.txtSpMebel.TabIndex = 11
 '
 'Label81
 '
 Me.Label81.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
 Me.Label81.AutoSize = true
-Me.Label81.Location = New System.Drawing.Point(415, 6)
+Me.Label81.Location = New System.Drawing.Point(350, 6)
 Me.Label81.Name = "Label81"
-Me.Label81.Size = New System.Drawing.Size(125, 13)
+Me.Label81.Size = New System.Drawing.Size(100, 13)
 Me.Label81.TabIndex = 2
 Me.Label81.Text = "Высота:"
 '
@@ -6873,9 +6885,9 @@ Me.Label71.Text = "Оборудование рабочих мест мебель
 'txtspvis
 '
 Me.txtspvis.Dock = System.Windows.Forms.DockStyle.Fill
-Me.txtspvis.Location = New System.Drawing.Point(546, 3)
+Me.txtspvis.Location = New System.Drawing.Point(456, 3)
 Me.txtspvis.Name = "txtspvis"
-Me.txtspvis.Size = New System.Drawing.Size(288, 20)
+Me.txtspvis.Size = New System.Drawing.Size(226, 20)
 Me.txtspvis.TabIndex = 2
 '
 'txtSpWall
@@ -6886,7 +6898,7 @@ Me.txtSpWall.Location = New System.Drawing.Point(3, 188)
 Me.txtSpWall.Multiline = true
 Me.txtSpWall.Name = "txtSpWall"
 Me.txtSpWall.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-Me.txtSpWall.Size = New System.Drawing.Size(831, 94)
+Me.txtSpWall.Size = New System.Drawing.Size(679, 94)
 Me.txtSpWall.TabIndex = 10
 '
 'Label80
@@ -6896,7 +6908,7 @@ Me.Label80.AutoEllipsis = true
 Me.Label80.AutoSize = true
 Me.Label80.Location = New System.Drawing.Point(128, 32)
 Me.Label80.Name = "Label80"
-Me.Label80.Size = New System.Drawing.Size(281, 13)
+Me.Label80.Size = New System.Drawing.Size(216, 13)
 Me.Label80.TabIndex = 4
 Me.Label80.Text = "Площадь на одно рабочее место ПЭВМ:"
 '
@@ -6913,9 +6925,9 @@ Me.Label72.Text = "Внутренняя отделка помещений (ст�
 'txtspPloOneEVM
 '
 Me.txtspPloOneEVM.Dock = System.Windows.Forms.DockStyle.Fill
-Me.txtspPloOneEVM.Location = New System.Drawing.Point(415, 29)
+Me.txtspPloOneEVM.Location = New System.Drawing.Point(350, 29)
 Me.txtspPloOneEVM.Name = "txtspPloOneEVM"
-Me.txtspPloOneEVM.Size = New System.Drawing.Size(125, 20)
+Me.txtspPloOneEVM.Size = New System.Drawing.Size(100, 20)
 Me.txtspPloOneEVM.TabIndex = 3
 '
 'cmbSpKanal
@@ -6925,9 +6937,9 @@ Me.cmbSpKanal.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListI
 Me.cmbSpKanal.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbSpKanal.FormattingEnabled = true
 Me.cmbSpKanal.Items.AddRange(New Object() {"Да", "Нет"})
-Me.cmbSpKanal.Location = New System.Drawing.Point(546, 148)
+Me.cmbSpKanal.Location = New System.Drawing.Point(456, 148)
 Me.cmbSpKanal.Name = "cmbSpKanal"
-Me.cmbSpKanal.Size = New System.Drawing.Size(288, 21)
+Me.cmbSpKanal.Size = New System.Drawing.Size(226, 21)
 Me.cmbSpKanal.TabIndex = 9
 '
 'Label79
@@ -6937,7 +6949,7 @@ Me.Label79.AutoEllipsis = true
 Me.Label79.AutoSize = true
 Me.Label79.Location = New System.Drawing.Point(128, 58)
 Me.Label79.Name = "Label79"
-Me.Label79.Size = New System.Drawing.Size(281, 13)
+Me.Label79.Size = New System.Drawing.Size(216, 13)
 Me.Label79.TabIndex = 6
 Me.Label79.Text = "Объем на одно рабочее место ПЭВМ:"
 '
@@ -6945,18 +6957,18 @@ Me.Label79.Text = "Объем на одно рабочее место ПЭВМ:"
 '
 Me.Label73.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
 Me.Label73.AutoSize = true
-Me.Label73.Location = New System.Drawing.Point(415, 152)
+Me.Label73.Location = New System.Drawing.Point(350, 152)
 Me.Label73.Name = "Label73"
-Me.Label73.Size = New System.Drawing.Size(125, 13)
+Me.Label73.Size = New System.Drawing.Size(100, 13)
 Me.Label73.TabIndex = 17
 Me.Label73.Text = "Канализация:"
 '
 'txtspObOneEVM
 '
 Me.txtspObOneEVM.Dock = System.Windows.Forms.DockStyle.Fill
-Me.txtspObOneEVM.Location = New System.Drawing.Point(415, 55)
+Me.txtspObOneEVM.Location = New System.Drawing.Point(350, 55)
 Me.txtspObOneEVM.Name = "txtspObOneEVM"
-Me.txtspObOneEVM.Size = New System.Drawing.Size(125, 20)
+Me.txtspObOneEVM.Size = New System.Drawing.Size(100, 20)
 Me.txtspObOneEVM.TabIndex = 4
 '
 'cmbSpWater
@@ -6968,7 +6980,7 @@ Me.cmbSpWater.FormattingEnabled = true
 Me.cmbSpWater.Items.AddRange(New Object() {"Да", "Нет"})
 Me.cmbSpWater.Location = New System.Drawing.Point(128, 148)
 Me.cmbSpWater.Name = "cmbSpWater"
-Me.cmbSpWater.Size = New System.Drawing.Size(281, 21)
+Me.cmbSpWater.Size = New System.Drawing.Size(216, 21)
 Me.cmbSpWater.TabIndex = 7
 '
 'cmbSpTeplo
@@ -6978,9 +6990,9 @@ Me.cmbSpTeplo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListI
 Me.cmbSpTeplo.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbSpTeplo.FormattingEnabled = true
 Me.cmbSpTeplo.Items.AddRange(New Object() {"Да", "Нет"})
-Me.cmbSpTeplo.Location = New System.Drawing.Point(546, 121)
+Me.cmbSpTeplo.Location = New System.Drawing.Point(456, 121)
 Me.cmbSpTeplo.Name = "cmbSpTeplo"
-Me.cmbSpTeplo.Size = New System.Drawing.Size(288, 21)
+Me.cmbSpTeplo.Size = New System.Drawing.Size(226, 21)
 Me.cmbSpTeplo.TabIndex = 8
 '
 'Label75
@@ -7000,7 +7012,7 @@ Me.Label78.AutoEllipsis = true
 Me.Label78.AutoSize = true
 Me.Label78.Location = New System.Drawing.Point(128, 85)
 Me.Label78.Name = "Label78"
-Me.Label78.Size = New System.Drawing.Size(281, 13)
+Me.Label78.Size = New System.Drawing.Size(216, 13)
 Me.Label78.TabIndex = 8
 Me.Label78.Text = "Наличие помещений для ремонта ПЭВМ:"
 '
@@ -7008,9 +7020,9 @@ Me.Label78.Text = "Наличие помещений для ремонта ПЭ�
 '
 Me.Label74.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
 Me.Label74.AutoSize = true
-Me.Label74.Location = New System.Drawing.Point(415, 125)
+Me.Label74.Location = New System.Drawing.Point(350, 125)
 Me.Label74.Name = "Label74"
-Me.Label74.Size = New System.Drawing.Size(125, 13)
+Me.Label74.Size = New System.Drawing.Size(100, 13)
 Me.Label74.TabIndex = 15
 Me.Label74.Text = "Теплоснабжение:"
 '
@@ -7021,9 +7033,9 @@ Me.cmbSpRemEVM.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.List
 Me.cmbSpRemEVM.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbSpRemEVM.FormattingEnabled = true
 Me.cmbSpRemEVM.Items.AddRange(New Object() {"Да", "Нет"})
-Me.cmbSpRemEVM.Location = New System.Drawing.Point(415, 81)
+Me.cmbSpRemEVM.Location = New System.Drawing.Point(350, 81)
 Me.cmbSpRemEVM.Name = "cmbSpRemEVM"
-Me.cmbSpRemEVM.Size = New System.Drawing.Size(125, 21)
+Me.cmbSpRemEVM.Size = New System.Drawing.Size(100, 21)
 Me.cmbSpRemEVM.TabIndex = 5
 '
 'Label77
@@ -7056,7 +7068,7 @@ Me.cmbSpVent.FormattingEnabled = true
 Me.cmbSpVent.Items.AddRange(New Object() {"Да", "Нет"})
 Me.cmbSpVent.Location = New System.Drawing.Point(128, 121)
 Me.cmbSpVent.Name = "cmbSpVent"
-Me.cmbSpVent.Size = New System.Drawing.Size(281, 21)
+Me.cmbSpVent.Size = New System.Drawing.Size(216, 21)
 Me.cmbSpVent.TabIndex = 6
 '
 'sSTAB2
@@ -7069,7 +7081,7 @@ Me.sSTAB2.Dock = System.Windows.Forms.DockStyle.Fill
 Me.sSTAB2.Location = New System.Drawing.Point(0, 0)
 Me.sSTAB2.Name = "sSTAB2"
 Me.sSTAB2.SelectedIndex = 0
-Me.sSTAB2.Size = New System.Drawing.Size(671, 646)
+Me.sSTAB2.Size = New System.Drawing.Size(693, 646)
 Me.sSTAB2.TabIndex = 7
 Me.sSTAB2.Visible = false
 '
@@ -7079,7 +7091,7 @@ Me.TabPage9.Controls.Add(Me.TableLayoutPanel21)
 Me.TabPage9.Location = New System.Drawing.Point(4, 22)
 Me.TabPage9.Name = "TabPage9"
 Me.TabPage9.Padding = New System.Windows.Forms.Padding(3)
-Me.TabPage9.Size = New System.Drawing.Size(663, 620)
+Me.TabPage9.Size = New System.Drawing.Size(685, 620)
 Me.TabPage9.TabIndex = 0
 Me.TabPage9.Text = "Информация"
 Me.TabPage9.UseVisualStyleBackColor = true
@@ -7139,7 +7151,7 @@ Me.TableLayoutPanel21.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Win
 Me.TableLayoutPanel21.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100!))
 Me.TableLayoutPanel21.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20!))
 Me.TableLayoutPanel21.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20!))
-Me.TableLayoutPanel21.Size = New System.Drawing.Size(657, 614)
+Me.TableLayoutPanel21.Size = New System.Drawing.Size(679, 614)
 Me.TableLayoutPanel21.TabIndex = 45
 '
 'gbPRNCartr
@@ -7149,7 +7161,7 @@ Me.gbPRNCartr.Controls.Add(Me.lvPRNCartr)
 Me.gbPRNCartr.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbPRNCartr.Location = New System.Drawing.Point(3, 261)
 Me.gbPRNCartr.Name = "gbPRNCartr"
-Me.gbPRNCartr.Size = New System.Drawing.Size(651, 350)
+Me.gbPRNCartr.Size = New System.Drawing.Size(673, 350)
 Me.gbPRNCartr.TabIndex = 72
 Me.gbPRNCartr.TabStop = false
 Me.gbPRNCartr.Text = "Обнаруженные картриджи"
@@ -7163,7 +7175,7 @@ Me.lvPRNCartr.HideSelection = false
 Me.lvPRNCartr.Location = New System.Drawing.Point(3, 16)
 Me.lvPRNCartr.MultiSelect = false
 Me.lvPRNCartr.Name = "lvPRNCartr"
-Me.lvPRNCartr.Size = New System.Drawing.Size(645, 331)
+Me.lvPRNCartr.Size = New System.Drawing.Size(667, 331)
 Me.lvPRNCartr.TabIndex = 0
 Me.lvPRNCartr.UseCompatibleStateImageBehavior = false
 Me.lvPRNCartr.View = System.Windows.Forms.View.Details
@@ -7171,16 +7183,16 @@ Me.lvPRNCartr.View = System.Windows.Forms.View.Details
 'txtPrnIP
 '
 Me.txtPrnIP.Dock = System.Windows.Forms.DockStyle.Fill
-Me.txtPrnIP.Location = New System.Drawing.Point(459, 157)
+Me.txtPrnIP.Location = New System.Drawing.Point(470, 157)
 Me.txtPrnIP.Name = "txtPrnIP"
-Me.txtPrnIP.Size = New System.Drawing.Size(195, 20)
+Me.txtPrnIP.Size = New System.Drawing.Size(206, 20)
 Me.txtPrnIP.TabIndex = 63
 '
 'lblPrnIP
 '
 Me.lblPrnIP.Anchor = System.Windows.Forms.AnchorStyles.Left
 Me.lblPrnIP.AutoSize = true
-Me.lblPrnIP.Location = New System.Drawing.Point(331, 160)
+Me.lblPrnIP.Location = New System.Drawing.Point(342, 160)
 Me.lblPrnIP.Name = "lblPrnIP"
 Me.lblPrnIP.Size = New System.Drawing.Size(20, 13)
 Me.lblPrnIP.TabIndex = 62
@@ -7194,7 +7206,7 @@ Me.cmbPRNotv.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbPRNotv.FormattingEnabled = true
 Me.cmbPRNotv.Location = New System.Drawing.Point(131, 157)
 Me.cmbPRNotv.Name = "cmbPRNotv"
-Me.cmbPRNotv.Size = New System.Drawing.Size(194, 21)
+Me.cmbPRNotv.Size = New System.Drawing.Size(205, 21)
 Me.cmbPRNotv.TabIndex = 61
 '
 'lblPRNotv
@@ -7211,16 +7223,16 @@ Me.lblPRNotv.Text = "Ответственный:"
 '
 Me.lblPRNPage.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
 Me.lblPRNPage.Dock = System.Windows.Forms.DockStyle.Fill
-Me.lblPRNPage.Location = New System.Drawing.Point(459, 128)
+Me.lblPRNPage.Location = New System.Drawing.Point(470, 128)
 Me.lblPRNPage.Name = "lblPRNPage"
-Me.lblPRNPage.Size = New System.Drawing.Size(195, 26)
+Me.lblPRNPage.Size = New System.Drawing.Size(206, 26)
 Me.lblPRNPage.TabIndex = 59
 '
 'lblPRNprintPage
 '
 Me.lblPRNprintPage.Anchor = System.Windows.Forms.AnchorStyles.Left
 Me.lblPRNprintPage.AutoSize = true
-Me.lblPRNprintPage.Location = New System.Drawing.Point(331, 134)
+Me.lblPRNprintPage.Location = New System.Drawing.Point(342, 134)
 Me.lblPRNprintPage.Name = "lblPRNprintPage"
 Me.lblPRNprintPage.Size = New System.Drawing.Size(113, 13)
 Me.lblPRNprintPage.TabIndex = 58
@@ -7234,7 +7246,7 @@ Me.cmbPRNOffice.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbPRNOffice.FormattingEnabled = true
 Me.cmbPRNOffice.Location = New System.Drawing.Point(131, 131)
 Me.cmbPRNOffice.Name = "cmbPRNOffice"
-Me.cmbPRNOffice.Size = New System.Drawing.Size(194, 21)
+Me.cmbPRNOffice.Size = New System.Drawing.Size(205, 21)
 Me.cmbPRNOffice.TabIndex = 57
 '
 'lblPRNOffice
@@ -7253,16 +7265,16 @@ Me.cmbModCartr.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.cmbModCartr.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
 Me.cmbModCartr.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbModCartr.FormattingEnabled = true
-Me.cmbModCartr.Location = New System.Drawing.Point(459, 105)
+Me.cmbModCartr.Location = New System.Drawing.Point(470, 105)
 Me.cmbModCartr.Name = "cmbModCartr"
-Me.cmbModCartr.Size = New System.Drawing.Size(195, 21)
+Me.cmbModCartr.Size = New System.Drawing.Size(206, 21)
 Me.cmbModCartr.TabIndex = 55
 '
 'lblModCartr
 '
 Me.lblModCartr.Anchor = System.Windows.Forms.AnchorStyles.Left
 Me.lblModCartr.AutoSize = true
-Me.lblModCartr.Location = New System.Drawing.Point(331, 108)
+Me.lblModCartr.Location = New System.Drawing.Point(342, 108)
 Me.lblModCartr.Name = "lblModCartr"
 Me.lblModCartr.Size = New System.Drawing.Size(104, 13)
 Me.lblModCartr.TabIndex = 54
@@ -7276,7 +7288,7 @@ Me.cmbPRNDepart.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbPRNDepart.FormattingEnabled = true
 Me.cmbPRNDepart.Location = New System.Drawing.Point(131, 105)
 Me.cmbPRNDepart.Name = "cmbPRNDepart"
-Me.cmbPRNDepart.Size = New System.Drawing.Size(194, 21)
+Me.cmbPRNDepart.Size = New System.Drawing.Size(205, 21)
 Me.cmbPRNDepart.TabIndex = 53
 '
 'lblPRNDepart
@@ -7295,16 +7307,16 @@ Me.cmbTIPCartridg.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Appen
 Me.cmbTIPCartridg.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
 Me.cmbTIPCartridg.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbTIPCartridg.FormattingEnabled = true
-Me.cmbTIPCartridg.Location = New System.Drawing.Point(459, 79)
+Me.cmbTIPCartridg.Location = New System.Drawing.Point(470, 79)
 Me.cmbTIPCartridg.Name = "cmbTIPCartridg"
-Me.cmbTIPCartridg.Size = New System.Drawing.Size(195, 21)
+Me.cmbTIPCartridg.Size = New System.Drawing.Size(206, 21)
 Me.cmbTIPCartridg.TabIndex = 51
 '
 'lblTIPCartridg
 '
 Me.lblTIPCartridg.Anchor = System.Windows.Forms.AnchorStyles.Left
 Me.lblTIPCartridg.AutoSize = true
-Me.lblTIPCartridg.Location = New System.Drawing.Point(331, 82)
+Me.lblTIPCartridg.Location = New System.Drawing.Point(342, 82)
 Me.lblTIPCartridg.Name = "lblTIPCartridg"
 Me.lblTIPCartridg.Size = New System.Drawing.Size(87, 13)
 Me.lblTIPCartridg.TabIndex = 50
@@ -7318,7 +7330,7 @@ Me.cmbPRNFil.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbPRNFil.FormattingEnabled = true
 Me.cmbPRNFil.Location = New System.Drawing.Point(131, 79)
 Me.cmbPRNFil.Name = "cmbPRNFil"
-Me.cmbPRNFil.Size = New System.Drawing.Size(194, 21)
+Me.cmbPRNFil.Size = New System.Drawing.Size(205, 21)
 Me.cmbPRNFil.TabIndex = 49
 '
 'lblPRNFil
@@ -7334,16 +7346,16 @@ Me.lblPRNFil.Text = "Филилал:"
 'txtPRNinnumber
 '
 Me.txtPRNinnumber.Dock = System.Windows.Forms.DockStyle.Fill
-Me.txtPRNinnumber.Location = New System.Drawing.Point(459, 53)
+Me.txtPRNinnumber.Location = New System.Drawing.Point(470, 53)
 Me.txtPRNinnumber.Name = "txtPRNinnumber"
-Me.txtPRNinnumber.Size = New System.Drawing.Size(195, 20)
+Me.txtPRNinnumber.Size = New System.Drawing.Size(206, 20)
 Me.txtPRNinnumber.TabIndex = 47
 '
 'lblInNumber
 '
 Me.lblInNumber.Anchor = System.Windows.Forms.AnchorStyles.Left
 Me.lblInNumber.AutoSize = true
-Me.lblInNumber.Location = New System.Drawing.Point(331, 56)
+Me.lblInNumber.Location = New System.Drawing.Point(342, 56)
 Me.lblInNumber.Name = "lblInNumber"
 Me.lblInNumber.Size = New System.Drawing.Size(111, 13)
 Me.lblInNumber.TabIndex = 46
@@ -7358,7 +7370,7 @@ Me.cmbFormat.FormattingEnabled = true
 Me.cmbFormat.Items.AddRange(New Object() {"A1", "A2", "A3", "A4"})
 Me.cmbFormat.Location = New System.Drawing.Point(131, 53)
 Me.cmbFormat.Name = "cmbFormat"
-Me.cmbFormat.Size = New System.Drawing.Size(194, 21)
+Me.cmbFormat.Size = New System.Drawing.Size(205, 21)
 Me.cmbFormat.TabIndex = 45
 '
 'gbPRN
@@ -7368,7 +7380,7 @@ Me.gbPRN.Controls.Add(Me.TableLayoutPanel55)
 Me.gbPRN.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbPRN.Location = New System.Drawing.Point(3, 3)
 Me.gbPRN.Name = "gbPRN"
-Me.gbPRN.Size = New System.Drawing.Size(651, 44)
+Me.gbPRN.Size = New System.Drawing.Size(673, 44)
 Me.gbPRN.TabIndex = 29
 Me.gbPRN.TabStop = false
 Me.gbPRN.Text = "Информация"
@@ -7389,7 +7401,7 @@ Me.TableLayoutPanel55.Name = "TableLayoutPanel55"
 Me.TableLayoutPanel55.RowCount = 1
 Me.TableLayoutPanel55.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel55.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27!))
-Me.TableLayoutPanel55.Size = New System.Drawing.Size(645, 25)
+Me.TableLayoutPanel55.Size = New System.Drawing.Size(667, 25)
 Me.TableLayoutPanel55.TabIndex = 5
 '
 'PROiZV38
@@ -7398,9 +7410,9 @@ Me.PROiZV38.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.PROiZV38.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
 Me.PROiZV38.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROiZV38.FormattingEnabled = true
-Me.PROiZV38.Location = New System.Drawing.Point(514, 3)
+Me.PROiZV38.Location = New System.Drawing.Point(529, 3)
 Me.PROiZV38.Name = "PROiZV38"
-Me.PROiZV38.Size = New System.Drawing.Size(128, 21)
+Me.PROiZV38.Size = New System.Drawing.Size(135, 21)
 Me.PROiZV38.TabIndex = 7
 '
 'cmbPRN
@@ -7411,14 +7423,14 @@ Me.cmbPRN.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbPRN.FormattingEnabled = true
 Me.cmbPRN.Location = New System.Drawing.Point(3, 3)
 Me.cmbPRN.Name = "cmbPRN"
-Me.cmbPRN.Size = New System.Drawing.Size(305, 21)
+Me.cmbPRN.Size = New System.Drawing.Size(320, 21)
 Me.cmbPRN.TabIndex = 5
 '
 'txtPRNSN
 '
 Me.TableLayoutPanel55.SetColumnSpan(Me.txtPRNSN, 2)
 Me.txtPRNSN.Dock = System.Windows.Forms.DockStyle.Fill
-Me.txtPRNSN.Location = New System.Drawing.Point(314, 3)
+Me.txtPRNSN.Location = New System.Drawing.Point(329, 3)
 Me.txtPRNSN.Name = "txtPRNSN"
 Me.txtPRNSN.Size = New System.Drawing.Size(194, 20)
 Me.txtPRNSN.TabIndex = 6
@@ -7448,14 +7460,14 @@ Me.lblPRNphone.Text = "Телефон:"
 Me.txtPRNphone.Dock = System.Windows.Forms.DockStyle.Fill
 Me.txtPRNphone.Location = New System.Drawing.Point(131, 183)
 Me.txtPRNphone.Name = "txtPRNphone"
-Me.txtPRNphone.Size = New System.Drawing.Size(194, 20)
+Me.txtPRNphone.Size = New System.Drawing.Size(205, 20)
 Me.txtPRNphone.TabIndex = 65
 '
 'lblPrnMAC
 '
 Me.lblPrnMAC.Anchor = System.Windows.Forms.AnchorStyles.Left
 Me.lblPrnMAC.AutoSize = true
-Me.lblPrnMAC.Location = New System.Drawing.Point(331, 186)
+Me.lblPrnMAC.Location = New System.Drawing.Point(342, 186)
 Me.lblPrnMAC.Name = "lblPrnMAC"
 Me.lblPrnMAC.Size = New System.Drawing.Size(33, 13)
 Me.lblPrnMAC.TabIndex = 66
@@ -7464,9 +7476,9 @@ Me.lblPrnMAC.Text = "MAC:"
 'txtPRNMAC
 '
 Me.txtPRNMAC.Dock = System.Windows.Forms.DockStyle.Fill
-Me.txtPRNMAC.Location = New System.Drawing.Point(459, 183)
+Me.txtPRNMAC.Location = New System.Drawing.Point(470, 183)
 Me.txtPRNMAC.Name = "txtPRNMAC"
-Me.txtPRNMAC.Size = New System.Drawing.Size(195, 20)
+Me.txtPRNMAC.Size = New System.Drawing.Size(206, 20)
 Me.txtPRNMAC.TabIndex = 67
 '
 'cmbPRNConnect
@@ -7477,7 +7489,7 @@ Me.cmbPRNConnect.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbPRNConnect.FormattingEnabled = true
 Me.cmbPRNConnect.Location = New System.Drawing.Point(131, 209)
 Me.cmbPRNConnect.Name = "cmbPRNConnect"
-Me.cmbPRNConnect.Size = New System.Drawing.Size(194, 21)
+Me.cmbPRNConnect.Size = New System.Drawing.Size(205, 21)
 Me.cmbPRNConnect.TabIndex = 69
 '
 'lblPRNConnect
@@ -7494,7 +7506,7 @@ Me.lblPRNConnect.Text = "Подключение:"
 '
 Me.Label83.Anchor = System.Windows.Forms.AnchorStyles.Left
 Me.Label83.AutoSize = true
-Me.Label83.Location = New System.Drawing.Point(331, 212)
+Me.Label83.Location = New System.Drawing.Point(342, 212)
 Me.Label83.Name = "Label83"
 Me.Label83.Size = New System.Drawing.Size(121, 13)
 Me.Label83.TabIndex = 70
@@ -7506,9 +7518,9 @@ Me.cmbPCL.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.cmbPCL.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
 Me.cmbPCL.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbPCL.FormattingEnabled = true
-Me.cmbPCL.Location = New System.Drawing.Point(459, 209)
+Me.cmbPCL.Location = New System.Drawing.Point(470, 209)
 Me.cmbPCL.Name = "cmbPCL"
-Me.cmbPCL.Size = New System.Drawing.Size(195, 21)
+Me.cmbPCL.Size = New System.Drawing.Size(206, 21)
 Me.cmbPCL.TabIndex = 71
 '
 'Label85
@@ -7528,7 +7540,7 @@ Me.lblSidPRN.AutoSize = true
 Me.lblSidPRN.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204,Byte))
 Me.lblSidPRN.Location = New System.Drawing.Point(131, 237)
 Me.lblSidPRN.Name = "lblSidPRN"
-Me.lblSidPRN.Size = New System.Drawing.Size(194, 16)
+Me.lblSidPRN.Size = New System.Drawing.Size(205, 16)
 Me.lblSidPRN.TabIndex = 74
 '
 'TabPage23
@@ -7536,7 +7548,7 @@ Me.lblSidPRN.TabIndex = 74
 Me.TabPage23.Controls.Add(Me.lvMovementPRN)
 Me.TabPage23.Location = New System.Drawing.Point(4, 22)
 Me.TabPage23.Name = "TabPage23"
-Me.TabPage23.Size = New System.Drawing.Size(663, 620)
+Me.TabPage23.Size = New System.Drawing.Size(685, 620)
 Me.TabPage23.TabIndex = 3
 Me.TabPage23.Text = "Движение"
 Me.TabPage23.UseVisualStyleBackColor = true
@@ -7549,7 +7561,7 @@ Me.lvMovementPRN.GridLines = true
 Me.lvMovementPRN.Location = New System.Drawing.Point(0, 0)
 Me.lvMovementPRN.MultiSelect = false
 Me.lvMovementPRN.Name = "lvMovementPRN"
-Me.lvMovementPRN.Size = New System.Drawing.Size(663, 620)
+Me.lvMovementPRN.Size = New System.Drawing.Size(685, 620)
 Me.lvMovementPRN.TabIndex = 1
 Me.lvMovementPRN.UseCompatibleStateImageBehavior = false
 Me.lvMovementPRN.View = System.Windows.Forms.View.Details
@@ -7560,7 +7572,7 @@ Me.TabPage10.Controls.Add(Me.TableLayoutPanel11)
 Me.TabPage10.Location = New System.Drawing.Point(4, 22)
 Me.TabPage10.Name = "TabPage10"
 Me.TabPage10.Padding = New System.Windows.Forms.Padding(3)
-Me.TabPage10.Size = New System.Drawing.Size(663, 620)
+Me.TabPage10.Size = New System.Drawing.Size(685, 620)
 Me.TabPage10.TabIndex = 1
 Me.TabPage10.Text = "Сервис"
 Me.TabPage10.UseVisualStyleBackColor = true
@@ -7577,7 +7589,7 @@ Me.TableLayoutPanel11.Name = "TableLayoutPanel11"
 Me.TableLayoutPanel11.RowCount = 2
 Me.TableLayoutPanel11.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40!))
 Me.TableLayoutPanel11.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60!))
-Me.TableLayoutPanel11.Size = New System.Drawing.Size(657, 614)
+Me.TableLayoutPanel11.Size = New System.Drawing.Size(679, 614)
 Me.TableLayoutPanel11.TabIndex = 7
 '
 'gbPRNRemont
@@ -7586,7 +7598,7 @@ Me.gbPRNRemont.Controls.Add(Me.lvRepairPRN)
 Me.gbPRNRemont.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbPRNRemont.Location = New System.Drawing.Point(3, 248)
 Me.gbPRNRemont.Name = "gbPRNRemont"
-Me.gbPRNRemont.Size = New System.Drawing.Size(651, 363)
+Me.gbPRNRemont.Size = New System.Drawing.Size(673, 363)
 Me.gbPRNRemont.TabIndex = 4
 Me.gbPRNRemont.TabStop = false
 Me.gbPRNRemont.Text = "Ремонты"
@@ -7600,7 +7612,7 @@ Me.lvRepairPRN.Location = New System.Drawing.Point(3, 16)
 Me.lvRepairPRN.MultiSelect = false
 Me.lvRepairPRN.Name = "lvRepairPRN"
 Me.lvRepairPRN.ShowItemToolTips = true
-Me.lvRepairPRN.Size = New System.Drawing.Size(645, 344)
+Me.lvRepairPRN.Size = New System.Drawing.Size(667, 344)
 Me.lvRepairPRN.TabIndex = 4
 Me.lvRepairPRN.UseCompatibleStateImageBehavior = false
 Me.lvRepairPRN.View = System.Windows.Forms.View.Details
@@ -7611,7 +7623,7 @@ Me.gbPRNNotes.Controls.Add(Me.TableLayoutPanel12)
 Me.gbPRNNotes.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbPRNNotes.Location = New System.Drawing.Point(3, 3)
 Me.gbPRNNotes.Name = "gbPRNNotes"
-Me.gbPRNNotes.Size = New System.Drawing.Size(651, 239)
+Me.gbPRNNotes.Size = New System.Drawing.Size(673, 239)
 Me.gbPRNNotes.TabIndex = 3
 Me.gbPRNNotes.TabStop = false
 Me.gbPRNNotes.Text = "Заметки"
@@ -7635,7 +7647,7 @@ Me.TableLayoutPanel12.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Win
 Me.TableLayoutPanel12.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80!))
 Me.TableLayoutPanel12.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel12.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20!))
-Me.TableLayoutPanel12.Size = New System.Drawing.Size(645, 220)
+Me.TableLayoutPanel12.Size = New System.Drawing.Size(667, 220)
 Me.TableLayoutPanel12.TabIndex = 1
 '
 'ToolStrip4
@@ -7644,7 +7656,7 @@ Me.ToolStrip4.Dock = System.Windows.Forms.DockStyle.Fill
 Me.ToolStrip4.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
 Me.ToolStrip4.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnPRNNotesAdd, Me.ToolStripSeparator11, Me.btnPRNNotesDel, Me.ToolStripSeparator12, Me.btnPRNNotesCancel, Me.ToolStripSeparator13})
 Me.ToolStrip4.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow
-Me.ToolStrip4.Location = New System.Drawing.Point(525, 0)
+Me.ToolStrip4.Location = New System.Drawing.Point(547, 0)
 Me.ToolStrip4.Name = "ToolStrip4"
 Me.TableLayoutPanel12.SetRowSpan(Me.ToolStrip4, 2)
 Me.ToolStrip4.Size = New System.Drawing.Size(120, 105)
@@ -7701,7 +7713,7 @@ Me.lvNotesPRN.FullRowSelect = true
 Me.lvNotesPRN.GridLines = true
 Me.lvNotesPRN.Location = New System.Drawing.Point(3, 108)
 Me.lvNotesPRN.Name = "lvNotesPRN"
-Me.lvNotesPRN.Size = New System.Drawing.Size(639, 112)
+Me.lvNotesPRN.Size = New System.Drawing.Size(661, 109)
 Me.lvNotesPRN.TabIndex = 4
 Me.lvNotesPRN.UseCompatibleStateImageBehavior = false
 Me.lvNotesPRN.View = System.Windows.Forms.View.Details
@@ -7714,7 +7726,7 @@ Me.NotesPRNtxt.Location = New System.Drawing.Point(3, 28)
 Me.NotesPRNtxt.Multiline = true
 Me.NotesPRNtxt.Name = "NotesPRNtxt"
 Me.NotesPRNtxt.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-Me.NotesPRNtxt.Size = New System.Drawing.Size(519, 74)
+Me.NotesPRNtxt.Size = New System.Drawing.Size(541, 74)
 Me.NotesPRNtxt.TabIndex = 3
 '
 'cmbNotesPRNMaster
@@ -7725,7 +7737,7 @@ Me.cmbNotesPRNMaster.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbNotesPRNMaster.FormattingEnabled = true
 Me.cmbNotesPRNMaster.Location = New System.Drawing.Point(129, 3)
 Me.cmbNotesPRNMaster.Name = "cmbNotesPRNMaster"
-Me.cmbNotesPRNMaster.Size = New System.Drawing.Size(393, 21)
+Me.cmbNotesPRNMaster.Size = New System.Drawing.Size(415, 21)
 Me.cmbNotesPRNMaster.TabIndex = 2
 '
 'NotesPRNdate
@@ -7741,7 +7753,7 @@ Me.NotesPRNdate.TabIndex = 1
 Me.TabPage16.Controls.Add(Me.TableLayoutPanel67)
 Me.TabPage16.Location = New System.Drawing.Point(4, 22)
 Me.TabPage16.Name = "TabPage16"
-Me.TabPage16.Size = New System.Drawing.Size(663, 620)
+Me.TabPage16.Size = New System.Drawing.Size(685, 620)
 Me.TabPage16.TabIndex = 2
 Me.TabPage16.Text = "Гарантия"
 Me.TabPage16.UseVisualStyleBackColor = true
@@ -7759,7 +7771,7 @@ Me.TableLayoutPanel67.RowCount = 3
 Me.TableLayoutPanel67.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel67.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel67.RowStyles.Add(New System.Windows.Forms.RowStyle())
-Me.TableLayoutPanel67.Size = New System.Drawing.Size(663, 620)
+Me.TableLayoutPanel67.Size = New System.Drawing.Size(685, 620)
 Me.TableLayoutPanel67.TabIndex = 2
 '
 'gbPostPRN
@@ -7768,7 +7780,7 @@ Me.gbPostPRN.Controls.Add(Me.TableLayoutPanel57)
 Me.gbPostPRN.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbPostPRN.Location = New System.Drawing.Point(3, 3)
 Me.gbPostPRN.Name = "gbPostPRN"
-Me.gbPostPRN.Size = New System.Drawing.Size(657, 91)
+Me.gbPostPRN.Size = New System.Drawing.Size(679, 91)
 Me.gbPostPRN.TabIndex = 0
 Me.gbPostPRN.TabStop = false
 Me.gbPostPRN.Text = "Поставщик"
@@ -7794,13 +7806,13 @@ Me.TableLayoutPanel57.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Win
 Me.TableLayoutPanel57.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30!))
 Me.TableLayoutPanel57.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20!))
 Me.TableLayoutPanel57.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20!))
-Me.TableLayoutPanel57.Size = New System.Drawing.Size(651, 72)
+Me.TableLayoutPanel57.Size = New System.Drawing.Size(673, 72)
 Me.TableLayoutPanel57.TabIndex = 3
 '
 'dtGPRNok
 '
 Me.dtGPRNok.Anchor = System.Windows.Forms.AnchorStyles.Left
-Me.dtGPRNok.Location = New System.Drawing.Point(418, 41)
+Me.dtGPRNok.Location = New System.Drawing.Point(429, 41)
 Me.dtGPRNok.Name = "dtGPRNok"
 Me.dtGPRNok.Size = New System.Drawing.Size(134, 20)
 Me.dtGPRNok.TabIndex = 8
@@ -7819,7 +7831,7 @@ Me.Label4.Text = "Продавец"
 '
 Me.Label1.Anchor = System.Windows.Forms.AnchorStyles.Left
 Me.Label1.AutoSize = true
-Me.Label1.Location = New System.Drawing.Point(338, 44)
+Me.Label1.Location = New System.Drawing.Point(349, 44)
 Me.Label1.Name = "Label1"
 Me.Label1.Size = New System.Drawing.Size(65, 13)
 Me.Label1.TabIndex = 10
@@ -7853,7 +7865,7 @@ Me.cmbPRNPostav.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbPRNPostav.FormattingEnabled = true
 Me.cmbPRNPostav.Location = New System.Drawing.Point(103, 3)
 Me.cmbPRNPostav.Name = "cmbPRNPostav"
-Me.cmbPRNPostav.Size = New System.Drawing.Size(545, 21)
+Me.cmbPRNPostav.Size = New System.Drawing.Size(567, 21)
 Me.cmbPRNPostav.TabIndex = 5
 '
 'gbSalePRN
@@ -7862,7 +7874,7 @@ Me.gbSalePRN.Controls.Add(Me.TableLayoutPanel52)
 Me.gbSalePRN.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbSalePRN.Location = New System.Drawing.Point(3, 100)
 Me.gbSalePRN.Name = "gbSalePRN"
-Me.gbSalePRN.Size = New System.Drawing.Size(657, 139)
+Me.gbSalePRN.Size = New System.Drawing.Size(679, 139)
 Me.gbSalePRN.TabIndex = 1
 Me.gbSalePRN.TabStop = false
 Me.gbSalePRN.Text = "Данные о приобретении"
@@ -7896,14 +7908,14 @@ Me.TableLayoutPanel52.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Win
 Me.TableLayoutPanel52.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30!))
 Me.TableLayoutPanel52.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30!))
 Me.TableLayoutPanel52.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30!))
-Me.TableLayoutPanel52.Size = New System.Drawing.Size(651, 120)
+Me.TableLayoutPanel52.Size = New System.Drawing.Size(673, 120)
 Me.TableLayoutPanel52.TabIndex = 3
 '
 'chkPRNNNb
 '
 Me.chkPRNNNb.Anchor = System.Windows.Forms.AnchorStyles.Left
 Me.chkPRNNNb.AutoSize = true
-Me.chkPRNNNb.Location = New System.Drawing.Point(418, 96)
+Me.chkPRNNNb.Location = New System.Drawing.Point(429, 96)
 Me.chkPRNNNb.Name = "chkPRNNNb"
 Me.chkPRNNNb.Size = New System.Drawing.Size(100, 17)
 Me.chkPRNNNb.TabIndex = 23
@@ -7916,15 +7928,15 @@ Me.txtPRNSumm.Dock = System.Windows.Forms.DockStyle.Fill
 Me.txtPRNSumm.Location = New System.Drawing.Point(103, 63)
 Me.txtPRNSumm.Maximum = New Decimal(New Integer() {1000000, 0, 0, 0})
 Me.txtPRNSumm.Name = "txtPRNSumm"
-Me.txtPRNSumm.Size = New System.Drawing.Size(229, 20)
+Me.txtPRNSumm.Size = New System.Drawing.Size(240, 20)
 Me.txtPRNSumm.TabIndex = 18
 '
 'dtPRNdataVvoda
 '
 Me.dtPRNdataVvoda.Dock = System.Windows.Forms.DockStyle.Fill
-Me.dtPRNdataVvoda.Location = New System.Drawing.Point(418, 63)
+Me.dtPRNdataVvoda.Location = New System.Drawing.Point(429, 63)
 Me.dtPRNdataVvoda.Name = "dtPRNdataVvoda"
-Me.dtPRNdataVvoda.Size = New System.Drawing.Size(230, 20)
+Me.dtPRNdataVvoda.Size = New System.Drawing.Size(241, 20)
 Me.dtPRNdataVvoda.TabIndex = 20
 Me.dtPRNdataVvoda.Value = New Date(2010, 4, 15, 0, 0, 0, 0)
 '
@@ -7941,16 +7953,16 @@ Me.Label54.Text = "Счёт фактура №"
 'txtPRNZay
 '
 Me.txtPRNZay.Dock = System.Windows.Forms.DockStyle.Fill
-Me.txtPRNZay.Location = New System.Drawing.Point(418, 33)
+Me.txtPRNZay.Location = New System.Drawing.Point(429, 33)
 Me.txtPRNZay.Name = "txtPRNZay"
-Me.txtPRNZay.Size = New System.Drawing.Size(230, 20)
+Me.txtPRNZay.Size = New System.Drawing.Size(241, 20)
 Me.txtPRNZay.TabIndex = 19
 '
 'Label49
 '
 Me.Label49.Anchor = System.Windows.Forms.AnchorStyles.Left
 Me.Label49.AutoSize = true
-Me.Label49.Location = New System.Drawing.Point(338, 68)
+Me.Label49.Location = New System.Drawing.Point(349, 68)
 Me.Label49.Name = "Label49"
 Me.Label49.Size = New System.Drawing.Size(66, 13)
 Me.Label49.TabIndex = 25
@@ -7972,14 +7984,14 @@ Me.txtPRNcash.Dock = System.Windows.Forms.DockStyle.Fill
 Me.txtPRNcash.Location = New System.Drawing.Point(103, 33)
 Me.txtPRNcash.Maximum = New Decimal(New Integer() {1000000, 0, 0, 0})
 Me.txtPRNcash.Name = "txtPRNcash"
-Me.txtPRNcash.Size = New System.Drawing.Size(229, 20)
+Me.txtPRNcash.Size = New System.Drawing.Size(240, 20)
 Me.txtPRNcash.TabIndex = 16
 '
 'Label50
 '
 Me.Label50.Anchor = System.Windows.Forms.AnchorStyles.Left
 Me.Label50.AutoSize = true
-Me.Label50.Location = New System.Drawing.Point(338, 38)
+Me.Label50.Location = New System.Drawing.Point(349, 38)
 Me.Label50.Name = "Label50"
 Me.Label50.Size = New System.Drawing.Size(44, 13)
 Me.Label50.TabIndex = 24
@@ -8000,14 +8012,14 @@ Me.Label52.Text = "Сумма"
 Me.txtPRNSfN.Dock = System.Windows.Forms.DockStyle.Fill
 Me.txtPRNSfN.Location = New System.Drawing.Point(103, 3)
 Me.txtPRNSfN.Name = "txtPRNSfN"
-Me.txtPRNSfN.Size = New System.Drawing.Size(229, 20)
+Me.txtPRNSfN.Size = New System.Drawing.Size(240, 20)
 Me.txtPRNSfN.TabIndex = 12
 '
 'Label51
 '
 Me.Label51.Anchor = System.Windows.Forms.AnchorStyles.Left
 Me.Label51.AutoSize = true
-Me.Label51.Location = New System.Drawing.Point(338, 8)
+Me.Label51.Location = New System.Drawing.Point(349, 8)
 Me.Label51.Name = "Label51"
 Me.Label51.Size = New System.Drawing.Size(18, 13)
 Me.Label51.TabIndex = 22
@@ -8027,9 +8039,9 @@ Me.chkPRNspis.UseVisualStyleBackColor = true
 'dtPRNSFdate
 '
 Me.dtPRNSFdate.Dock = System.Windows.Forms.DockStyle.Fill
-Me.dtPRNSFdate.Location = New System.Drawing.Point(418, 3)
+Me.dtPRNSFdate.Location = New System.Drawing.Point(429, 3)
 Me.dtPRNSFdate.Name = "dtPRNSFdate"
-Me.dtPRNSFdate.Size = New System.Drawing.Size(230, 20)
+Me.dtPRNSFdate.Size = New System.Drawing.Size(241, 20)
 Me.dtPRNSFdate.TabIndex = 17
 Me.dtPRNSFdate.Value = New Date(2010, 4, 15, 0, 0, 0, 0)
 '
@@ -8044,7 +8056,7 @@ Me.sSTAB4.Dock = System.Windows.Forms.DockStyle.Fill
 Me.sSTAB4.Location = New System.Drawing.Point(0, 0)
 Me.sSTAB4.Name = "sSTAB4"
 Me.sSTAB4.SelectedIndex = 0
-Me.sSTAB4.Size = New System.Drawing.Size(671, 646)
+Me.sSTAB4.Size = New System.Drawing.Size(693, 646)
 Me.sSTAB4.TabIndex = 10
 Me.sSTAB4.Visible = false
 '
@@ -8054,7 +8066,7 @@ Me.TabPage13.Controls.Add(Me.TableLayoutPanel69)
 Me.TabPage13.Location = New System.Drawing.Point(4, 22)
 Me.TabPage13.Name = "TabPage13"
 Me.TabPage13.Padding = New System.Windows.Forms.Padding(3)
-Me.TabPage13.Size = New System.Drawing.Size(663, 620)
+Me.TabPage13.Size = New System.Drawing.Size(685, 620)
 Me.TabPage13.TabIndex = 0
 Me.TabPage13.Text = "Информация"
 Me.TabPage13.UseVisualStyleBackColor = true
@@ -8074,7 +8086,7 @@ Me.TableLayoutPanel69.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel69.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel69.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel69.RowStyles.Add(New System.Windows.Forms.RowStyle())
-Me.TableLayoutPanel69.Size = New System.Drawing.Size(657, 614)
+Me.TableLayoutPanel69.Size = New System.Drawing.Size(679, 614)
 Me.TableLayoutPanel69.TabIndex = 5
 '
 'TableLayoutPanel49
@@ -8107,7 +8119,7 @@ Me.TableLayoutPanel49.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel49.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel49.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel49.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20!))
-Me.TableLayoutPanel49.Size = New System.Drawing.Size(651, 473)
+Me.TableLayoutPanel49.Size = New System.Drawing.Size(673, 473)
 Me.TableLayoutPanel49.TabIndex = 6
 '
 'cmbNETotv
@@ -8116,17 +8128,17 @@ Me.cmbNETotv.Anchor = System.Windows.Forms.AnchorStyles.Left
 Me.cmbNETotv.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.cmbNETotv.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
 Me.cmbNETotv.FormattingEnabled = true
-Me.cmbNETotv.Location = New System.Drawing.Point(421, 30)
+Me.cmbNETotv.Location = New System.Drawing.Point(432, 30)
 Me.cmbNETotv.Name = "cmbNETotv"
-Me.cmbNETotv.Size = New System.Drawing.Size(227, 21)
+Me.cmbNETotv.Size = New System.Drawing.Size(237, 21)
 Me.cmbNETotv.TabIndex = 22
 '
 'txtNETphone
 '
 Me.txtNETphone.Anchor = System.Windows.Forms.AnchorStyles.Left
-Me.txtNETphone.Location = New System.Drawing.Point(421, 3)
+Me.txtNETphone.Location = New System.Drawing.Point(432, 3)
 Me.txtNETphone.Name = "txtNETphone"
-Me.txtNETphone.Size = New System.Drawing.Size(227, 20)
+Me.txtNETphone.Size = New System.Drawing.Size(237, 20)
 Me.txtNETphone.TabIndex = 21
 '
 'Label32
@@ -8143,7 +8155,7 @@ Me.Label32.Text = "Филиал:"
 '
 Me.Label28.Anchor = System.Windows.Forms.AnchorStyles.Left
 Me.Label28.AutoSize = true
-Me.Label28.Location = New System.Drawing.Point(318, 7)
+Me.Label28.Location = New System.Drawing.Point(329, 7)
 Me.Label28.Name = "Label28"
 Me.Label28.Size = New System.Drawing.Size(55, 13)
 Me.Label28.TabIndex = 27
@@ -8153,7 +8165,7 @@ Me.Label28.Text = "Телефон:"
 '
 Me.Label29.Anchor = System.Windows.Forms.AnchorStyles.Left
 Me.Label29.AutoSize = true
-Me.Label29.Location = New System.Drawing.Point(318, 34)
+Me.Label29.Location = New System.Drawing.Point(329, 34)
 Me.Label29.Name = "Label29"
 Me.Label29.Size = New System.Drawing.Size(89, 13)
 Me.Label29.TabIndex = 26
@@ -8187,7 +8199,7 @@ Me.cmbNETBranch.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.Lis
 Me.cmbNETBranch.FormattingEnabled = true
 Me.cmbNETBranch.Location = New System.Drawing.Point(85, 3)
 Me.cmbNETBranch.Name = "cmbNETBranch"
-Me.cmbNETBranch.Size = New System.Drawing.Size(227, 21)
+Me.cmbNETBranch.Size = New System.Drawing.Size(236, 21)
 Me.cmbNETBranch.TabIndex = 18
 '
 'cmbNETOffice
@@ -8198,7 +8210,7 @@ Me.cmbNETOffice.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.Lis
 Me.cmbNETOffice.FormattingEnabled = true
 Me.cmbNETOffice.Location = New System.Drawing.Point(85, 57)
 Me.cmbNETOffice.Name = "cmbNETOffice"
-Me.cmbNETOffice.Size = New System.Drawing.Size(227, 21)
+Me.cmbNETOffice.Size = New System.Drawing.Size(236, 21)
 Me.cmbNETOffice.TabIndex = 20
 '
 'cmbNetDepart
@@ -8209,14 +8221,14 @@ Me.cmbNetDepart.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.Lis
 Me.cmbNetDepart.FormattingEnabled = true
 Me.cmbNetDepart.Location = New System.Drawing.Point(85, 30)
 Me.cmbNetDepart.Name = "cmbNetDepart"
-Me.cmbNetDepart.Size = New System.Drawing.Size(227, 21)
+Me.cmbNetDepart.Size = New System.Drawing.Size(236, 21)
 Me.cmbNetDepart.TabIndex = 19
 '
 'Label86
 '
 Me.Label86.Anchor = System.Windows.Forms.AnchorStyles.Left
 Me.Label86.AutoSize = true
-Me.Label86.Location = New System.Drawing.Point(318, 61)
+Me.Label86.Location = New System.Drawing.Point(329, 61)
 Me.Label86.Name = "Label86"
 Me.Label86.Size = New System.Drawing.Size(54, 13)
 Me.Label86.TabIndex = 28
@@ -8227,16 +8239,16 @@ Me.Label86.Text = "№ в базе"
 Me.lblSidNET.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
 Me.lblSidNET.AutoSize = true
 Me.lblSidNET.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204,Byte))
-Me.lblSidNET.Location = New System.Drawing.Point(421, 59)
+Me.lblSidNET.Location = New System.Drawing.Point(432, 59)
 Me.lblSidNET.Name = "lblSidNET"
-Me.lblSidNET.Size = New System.Drawing.Size(227, 16)
+Me.lblSidNET.Size = New System.Drawing.Size(238, 16)
 Me.lblSidNET.TabIndex = 29
 '
 'lblPCLNET
 '
 Me.lblPCLNET.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
 Me.lblPCLNET.AutoSize = true
-Me.lblPCLNET.Location = New System.Drawing.Point(318, 88)
+Me.lblPCLNET.Location = New System.Drawing.Point(329, 88)
 Me.lblPCLNET.Name = "lblPCLNET"
 Me.lblPCLNET.Size = New System.Drawing.Size(97, 13)
 Me.lblPCLNET.TabIndex = 30
@@ -8246,9 +8258,9 @@ Me.lblPCLNET.Text = "В контейнере"
 '
 Me.cmbCNTNet.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbCNTNet.FormattingEnabled = true
-Me.cmbCNTNet.Location = New System.Drawing.Point(421, 84)
+Me.cmbCNTNet.Location = New System.Drawing.Point(432, 84)
 Me.cmbCNTNet.Name = "cmbCNTNet"
-Me.cmbCNTNet.Size = New System.Drawing.Size(227, 21)
+Me.cmbCNTNet.Size = New System.Drawing.Size(238, 21)
 Me.cmbCNTNet.TabIndex = 31
 '
 'gbNet
@@ -8257,7 +8269,7 @@ Me.gbNet.Controls.Add(Me.TableLayoutPanel51)
 Me.gbNet.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbNet.Location = New System.Drawing.Point(3, 3)
 Me.gbNet.Name = "gbNet"
-Me.gbNet.Size = New System.Drawing.Size(651, 46)
+Me.gbNet.Size = New System.Drawing.Size(673, 46)
 Me.gbNet.TabIndex = 0
 Me.gbNet.TabStop = false
 Me.gbNet.Text = "Тип сетевого оборудования, наименование, производитель"
@@ -8276,7 +8288,7 @@ Me.TableLayoutPanel51.Location = New System.Drawing.Point(3, 16)
 Me.TableLayoutPanel51.Name = "TableLayoutPanel51"
 Me.TableLayoutPanel51.RowCount = 1
 Me.TableLayoutPanel51.RowStyles.Add(New System.Windows.Forms.RowStyle())
-Me.TableLayoutPanel51.Size = New System.Drawing.Size(645, 27)
+Me.TableLayoutPanel51.Size = New System.Drawing.Size(667, 27)
 Me.TableLayoutPanel51.TabIndex = 4
 '
 'PROiZV40
@@ -8285,9 +8297,9 @@ Me.PROiZV40.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.PROiZV40.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
 Me.PROiZV40.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROiZV40.FormattingEnabled = true
-Me.PROiZV40.Location = New System.Drawing.Point(505, 3)
+Me.PROiZV40.Location = New System.Drawing.Point(520, 3)
 Me.PROiZV40.Name = "PROiZV40"
-Me.PROiZV40.Size = New System.Drawing.Size(137, 21)
+Me.PROiZV40.Size = New System.Drawing.Size(144, 21)
 Me.PROiZV40.TabIndex = 6
 '
 'cmbDevNet
@@ -8298,7 +8310,7 @@ Me.cmbDevNet.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbDevNet.FormattingEnabled = true
 Me.cmbDevNet.Location = New System.Drawing.Point(183, 3)
 Me.cmbDevNet.Name = "cmbDevNet"
-Me.cmbDevNet.Size = New System.Drawing.Size(316, 21)
+Me.cmbDevNet.Size = New System.Drawing.Size(331, 21)
 Me.cmbDevNet.TabIndex = 5
 '
 'cmbNetDev
@@ -8318,7 +8330,7 @@ Me.gbExNet.Controls.Add(Me.TableLayoutPanel48)
 Me.gbExNet.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbExNet.Location = New System.Drawing.Point(3, 55)
 Me.gbExNet.Name = "gbExNet"
-Me.gbExNet.Size = New System.Drawing.Size(651, 149)
+Me.gbExNet.Size = New System.Drawing.Size(673, 149)
 Me.gbExNet.TabIndex = 1
 Me.gbExNet.TabStop = false
 Me.gbExNet.Text = "Расширенная информация"
@@ -8360,7 +8372,7 @@ Me.TableLayoutPanel48.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel48.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel48.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel48.RowStyles.Add(New System.Windows.Forms.RowStyle())
-Me.TableLayoutPanel48.Size = New System.Drawing.Size(645, 130)
+Me.TableLayoutPanel48.Size = New System.Drawing.Size(667, 130)
 Me.TableLayoutPanel48.TabIndex = 4
 '
 'cmbNetCable
@@ -8369,24 +8381,24 @@ Me.cmbNetCable.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.cmbNetCable.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
 Me.cmbNetCable.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbNetCable.FormattingEnabled = true
-Me.cmbNetCable.Location = New System.Drawing.Point(515, 55)
+Me.cmbNetCable.Location = New System.Drawing.Point(533, 55)
 Me.cmbNetCable.Name = "cmbNetCable"
-Me.cmbNetCable.Size = New System.Drawing.Size(127, 21)
+Me.cmbNetCable.Size = New System.Drawing.Size(131, 21)
 Me.cmbNetCable.TabIndex = 7
 '
 'txtNetSN
 '
 Me.TableLayoutPanel48.SetColumnSpan(Me.txtNetSN, 2)
 Me.txtNetSN.Dock = System.Windows.Forms.DockStyle.Fill
-Me.txtNetSN.Location = New System.Drawing.Point(323, 95)
+Me.txtNetSN.Location = New System.Drawing.Point(335, 95)
 Me.txtNetSN.Name = "txtNetSN"
-Me.txtNetSN.Size = New System.Drawing.Size(319, 20)
+Me.txtNetSN.Size = New System.Drawing.Size(329, 20)
 Me.txtNetSN.TabIndex = 10
 '
 'Label14
 '
 Me.Label14.AutoSize = true
-Me.Label14.Location = New System.Drawing.Point(515, 39)
+Me.Label14.Location = New System.Drawing.Point(533, 39)
 Me.Label14.Name = "Label14"
 Me.Label14.Size = New System.Drawing.Size(68, 13)
 Me.Label14.TabIndex = 44
@@ -8404,15 +8416,15 @@ Me.Label27.Text = "IP:"
 'txtNetIsp
 '
 Me.txtNetIsp.Dock = System.Windows.Forms.DockStyle.Fill
-Me.txtNetIsp.Location = New System.Drawing.Point(515, 16)
+Me.txtNetIsp.Location = New System.Drawing.Point(533, 16)
 Me.txtNetIsp.Name = "txtNetIsp"
-Me.txtNetIsp.Size = New System.Drawing.Size(127, 20)
+Me.txtNetIsp.Size = New System.Drawing.Size(131, 20)
 Me.txtNetIsp.TabIndex = 4
 '
 'Label11
 '
 Me.Label11.AutoSize = true
-Me.Label11.Location = New System.Drawing.Point(323, 79)
+Me.Label11.Location = New System.Drawing.Point(335, 79)
 Me.Label11.Name = "Label11"
 Me.Label11.Size = New System.Drawing.Size(96, 13)
 Me.Label11.TabIndex = 50
@@ -8421,7 +8433,7 @@ Me.Label11.Text = "Серийный номер:"
 'Label24
 '
 Me.Label24.AutoSize = true
-Me.Label24.Location = New System.Drawing.Point(515, 0)
+Me.Label24.Location = New System.Drawing.Point(533, 0)
 Me.Label24.Name = "Label24"
 Me.Label24.Size = New System.Drawing.Size(72, 13)
 Me.Label24.TabIndex = 38
@@ -8432,7 +8444,7 @@ Me.Label24.Text = "Исполнение:"
 Me.txtNetIP.Dock = System.Windows.Forms.DockStyle.Fill
 Me.txtNetIP.Location = New System.Drawing.Point(3, 16)
 Me.txtNetIP.Name = "txtNetIP"
-Me.txtNetIP.Size = New System.Drawing.Size(154, 20)
+Me.txtNetIP.Size = New System.Drawing.Size(160, 20)
 Me.txtNetIP.TabIndex = 1
 '
 'cmbNetVkl
@@ -8442,9 +8454,9 @@ Me.cmbNetVkl.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListIt
 Me.cmbNetVkl.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbNetVkl.FormattingEnabled = true
 Me.cmbNetVkl.Items.AddRange(New Object() {"On", "Off", "Defective"})
-Me.cmbNetVkl.Location = New System.Drawing.Point(163, 95)
+Me.cmbNetVkl.Location = New System.Drawing.Point(169, 95)
 Me.cmbNetVkl.Name = "cmbNetVkl"
-Me.cmbNetVkl.Size = New System.Drawing.Size(154, 21)
+Me.cmbNetVkl.Size = New System.Drawing.Size(160, 21)
 Me.cmbNetVkl.TabIndex = 9
 '
 'Label23
@@ -8459,15 +8471,15 @@ Me.Label23.Text = "Инвентарный номер:"
 'txtNetNumberPorts
 '
 Me.txtNetNumberPorts.Dock = System.Windows.Forms.DockStyle.Fill
-Me.txtNetNumberPorts.Location = New System.Drawing.Point(323, 55)
+Me.txtNetNumberPorts.Location = New System.Drawing.Point(335, 55)
 Me.txtNetNumberPorts.Name = "txtNetNumberPorts"
-Me.txtNetNumberPorts.Size = New System.Drawing.Size(186, 20)
+Me.txtNetNumberPorts.Size = New System.Drawing.Size(192, 20)
 Me.txtNetNumberPorts.TabIndex = 6
 '
 'Label12
 '
 Me.Label12.AutoSize = true
-Me.Label12.Location = New System.Drawing.Point(163, 79)
+Me.Label12.Location = New System.Drawing.Point(169, 79)
 Me.Label12.Name = "Label12"
 Me.Label12.Size = New System.Drawing.Size(64, 13)
 Me.Label12.TabIndex = 48
@@ -8476,7 +8488,7 @@ Me.Label12.Text = "Состояние:"
 'Label15
 '
 Me.Label15.AutoSize = true
-Me.Label15.Location = New System.Drawing.Point(323, 39)
+Me.Label15.Location = New System.Drawing.Point(335, 39)
 Me.Label15.Name = "Label15"
 Me.Label15.Size = New System.Drawing.Size(76, 13)
 Me.Label15.TabIndex = 42
@@ -8488,7 +8500,7 @@ Me.TableLayoutPanel48.SetColumnSpan(Me.txtNetINN, 2)
 Me.txtNetINN.Dock = System.Windows.Forms.DockStyle.Fill
 Me.txtNetINN.Location = New System.Drawing.Point(3, 55)
 Me.txtNetINN.Name = "txtNetINN"
-Me.txtNetINN.Size = New System.Drawing.Size(314, 20)
+Me.txtNetINN.Size = New System.Drawing.Size(326, 20)
 Me.txtNetINN.TabIndex = 5
 '
 'txtNetCableCat
@@ -8496,7 +8508,7 @@ Me.txtNetINN.TabIndex = 5
 Me.txtNetCableCat.Dock = System.Windows.Forms.DockStyle.Fill
 Me.txtNetCableCat.Location = New System.Drawing.Point(3, 95)
 Me.txtNetCableCat.Name = "txtNetCableCat"
-Me.txtNetCableCat.Size = New System.Drawing.Size(154, 20)
+Me.txtNetCableCat.Size = New System.Drawing.Size(160, 20)
 Me.txtNetCableCat.TabIndex = 8
 '
 'Label13
@@ -8511,15 +8523,15 @@ Me.Label13.Text = "Категория кабеля:"
 'txtNetPort
 '
 Me.txtNetPort.Dock = System.Windows.Forms.DockStyle.Fill
-Me.txtNetPort.Location = New System.Drawing.Point(323, 16)
+Me.txtNetPort.Location = New System.Drawing.Point(335, 16)
 Me.txtNetPort.Name = "txtNetPort"
-Me.txtNetPort.Size = New System.Drawing.Size(186, 20)
+Me.txtNetPort.Size = New System.Drawing.Size(192, 20)
 Me.txtNetPort.TabIndex = 3
 '
 'Label26
 '
 Me.Label26.AutoSize = true
-Me.Label26.Location = New System.Drawing.Point(163, 0)
+Me.Label26.Location = New System.Drawing.Point(169, 0)
 Me.Label26.Name = "Label26"
 Me.Label26.Size = New System.Drawing.Size(33, 13)
 Me.Label26.TabIndex = 33
@@ -8528,7 +8540,7 @@ Me.Label26.Text = "MAC:"
 'Label25
 '
 Me.Label25.AutoSize = true
-Me.Label25.Location = New System.Drawing.Point(323, 0)
+Me.Label25.Location = New System.Drawing.Point(335, 0)
 Me.Label25.Name = "Label25"
 Me.Label25.Size = New System.Drawing.Size(113, 13)
 Me.Label25.TabIndex = 36
@@ -8537,9 +8549,9 @@ Me.Label25.Text = "Колличество портов:"
 'txtNetMac
 '
 Me.txtNetMac.Dock = System.Windows.Forms.DockStyle.Fill
-Me.txtNetMac.Location = New System.Drawing.Point(163, 16)
+Me.txtNetMac.Location = New System.Drawing.Point(169, 16)
 Me.txtNetMac.Name = "txtNetMac"
-Me.txtNetMac.Size = New System.Drawing.Size(154, 20)
+Me.txtNetMac.Size = New System.Drawing.Size(160, 20)
 Me.txtNetMac.TabIndex = 2
 '
 'TabPage14
@@ -8547,7 +8559,7 @@ Me.txtNetMac.TabIndex = 2
 Me.TabPage14.Controls.Add(Me.gbNetPortMapping)
 Me.TabPage14.Location = New System.Drawing.Point(4, 22)
 Me.TabPage14.Name = "TabPage14"
-Me.TabPage14.Size = New System.Drawing.Size(663, 620)
+Me.TabPage14.Size = New System.Drawing.Size(685, 620)
 Me.TabPage14.TabIndex = 2
 Me.TabPage14.Text = "Порты"
 Me.TabPage14.UseVisualStyleBackColor = true
@@ -8558,7 +8570,7 @@ Me.gbNetPortMapping.Controls.Add(Me.TableLayoutPanel50)
 Me.gbNetPortMapping.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbNetPortMapping.Location = New System.Drawing.Point(0, 0)
 Me.gbNetPortMapping.Name = "gbNetPortMapping"
-Me.gbNetPortMapping.Size = New System.Drawing.Size(663, 620)
+Me.gbNetPortMapping.Size = New System.Drawing.Size(685, 620)
 Me.gbNetPortMapping.TabIndex = 0
 Me.gbNetPortMapping.TabStop = false
 Me.gbNetPortMapping.Text = "Распределение портов"
@@ -8585,7 +8597,7 @@ Me.TableLayoutPanel50.RowCount = 3
 Me.TableLayoutPanel50.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel50.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel50.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100!))
-Me.TableLayoutPanel50.Size = New System.Drawing.Size(657, 601)
+Me.TableLayoutPanel50.Size = New System.Drawing.Size(679, 601)
 Me.TableLayoutPanel50.TabIndex = 4
 '
 'lvNetPort
@@ -8596,7 +8608,7 @@ Me.lvNetPort.FullRowSelect = true
 Me.lvNetPort.GridLines = true
 Me.lvNetPort.Location = New System.Drawing.Point(3, 45)
 Me.lvNetPort.Name = "lvNetPort"
-Me.lvNetPort.Size = New System.Drawing.Size(651, 553)
+Me.lvNetPort.Size = New System.Drawing.Size(673, 553)
 Me.lvNetPort.TabIndex = 47
 Me.lvNetPort.UseCompatibleStateImageBehavior = false
 Me.lvNetPort.View = System.Windows.Forms.View.Details
@@ -8617,7 +8629,7 @@ Me.Label35.Visible = false
 Me.txtNetPortMapping.Dock = System.Windows.Forms.DockStyle.Fill
 Me.txtNetPortMapping.Location = New System.Drawing.Point(144, 16)
 Me.txtNetPortMapping.Name = "txtNetPortMapping"
-Me.txtNetPortMapping.Size = New System.Drawing.Size(302, 20)
+Me.txtNetPortMapping.Size = New System.Drawing.Size(324, 20)
 Me.txtNetPortMapping.TabIndex = 44
 Me.txtNetPortMapping.Visible = false
 '
@@ -8625,7 +8637,7 @@ Me.txtNetPortMapping.Visible = false
 '
 Me.Label33.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
 Me.Label33.AutoSize = true
-Me.Label33.Location = New System.Drawing.Point(452, 0)
+Me.Label33.Location = New System.Drawing.Point(474, 0)
 Me.Label33.Name = "Label33"
 Me.Label33.Size = New System.Drawing.Size(33, 13)
 Me.Label33.TabIndex = 50
@@ -8655,7 +8667,7 @@ Me.Label34.Visible = false
 'txtNetPortMac
 '
 Me.txtNetPortMac.Dock = System.Windows.Forms.DockStyle.Fill
-Me.txtNetPortMac.Location = New System.Drawing.Point(452, 16)
+Me.txtNetPortMac.Location = New System.Drawing.Point(474, 16)
 Me.txtNetPortMac.Name = "txtNetPortMac"
 Me.txtNetPortMac.Size = New System.Drawing.Size(152, 20)
 Me.txtNetPortMac.TabIndex = 45
@@ -8663,7 +8675,7 @@ Me.txtNetPortMac.Visible = false
 '
 'btnNetPortAdd
 '
-Me.btnNetPortAdd.Location = New System.Drawing.Point(610, 16)
+Me.btnNetPortAdd.Location = New System.Drawing.Point(632, 16)
 Me.btnNetPortAdd.Name = "btnNetPortAdd"
 Me.btnNetPortAdd.Size = New System.Drawing.Size(39, 23)
 Me.btnNetPortAdd.TabIndex = 46
@@ -8676,7 +8688,7 @@ Me.btnNetPortAdd.Visible = false
 Me.TabPage24.Controls.Add(Me.lvMovementNET)
 Me.TabPage24.Location = New System.Drawing.Point(4, 22)
 Me.TabPage24.Name = "TabPage24"
-Me.TabPage24.Size = New System.Drawing.Size(663, 620)
+Me.TabPage24.Size = New System.Drawing.Size(685, 620)
 Me.TabPage24.TabIndex = 4
 Me.TabPage24.Text = "Движение"
 Me.TabPage24.UseVisualStyleBackColor = true
@@ -8689,7 +8701,7 @@ Me.lvMovementNET.GridLines = true
 Me.lvMovementNET.Location = New System.Drawing.Point(0, 0)
 Me.lvMovementNET.MultiSelect = false
 Me.lvMovementNET.Name = "lvMovementNET"
-Me.lvMovementNET.Size = New System.Drawing.Size(663, 620)
+Me.lvMovementNET.Size = New System.Drawing.Size(685, 620)
 Me.lvMovementNET.TabIndex = 1
 Me.lvMovementNET.UseCompatibleStateImageBehavior = false
 Me.lvMovementNET.View = System.Windows.Forms.View.Details
@@ -8700,7 +8712,7 @@ Me.TabPage15.Controls.Add(Me.TableLayoutPanel14)
 Me.TabPage15.Location = New System.Drawing.Point(4, 22)
 Me.TabPage15.Name = "TabPage15"
 Me.TabPage15.Padding = New System.Windows.Forms.Padding(3)
-Me.TabPage15.Size = New System.Drawing.Size(663, 620)
+Me.TabPage15.Size = New System.Drawing.Size(685, 620)
 Me.TabPage15.TabIndex = 1
 Me.TabPage15.Text = "Сервис"
 Me.TabPage15.UseVisualStyleBackColor = true
@@ -8717,7 +8729,7 @@ Me.TableLayoutPanel14.Name = "TableLayoutPanel14"
 Me.TableLayoutPanel14.RowCount = 2
 Me.TableLayoutPanel14.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40!))
 Me.TableLayoutPanel14.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60!))
-Me.TableLayoutPanel14.Size = New System.Drawing.Size(657, 614)
+Me.TableLayoutPanel14.Size = New System.Drawing.Size(679, 614)
 Me.TableLayoutPanel14.TabIndex = 7
 '
 'gbNETRemont
@@ -8726,7 +8738,7 @@ Me.gbNETRemont.Controls.Add(Me.lvRepairNET)
 Me.gbNETRemont.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbNETRemont.Location = New System.Drawing.Point(3, 248)
 Me.gbNETRemont.Name = "gbNETRemont"
-Me.gbNETRemont.Size = New System.Drawing.Size(651, 363)
+Me.gbNETRemont.Size = New System.Drawing.Size(673, 363)
 Me.gbNETRemont.TabIndex = 4
 Me.gbNETRemont.TabStop = false
 Me.gbNETRemont.Text = "Ремонты"
@@ -8740,7 +8752,7 @@ Me.lvRepairNET.Location = New System.Drawing.Point(3, 16)
 Me.lvRepairNET.MultiSelect = false
 Me.lvRepairNET.Name = "lvRepairNET"
 Me.lvRepairNET.ShowItemToolTips = true
-Me.lvRepairNET.Size = New System.Drawing.Size(645, 344)
+Me.lvRepairNET.Size = New System.Drawing.Size(667, 344)
 Me.lvRepairNET.TabIndex = 4
 Me.lvRepairNET.UseCompatibleStateImageBehavior = false
 Me.lvRepairNET.View = System.Windows.Forms.View.Details
@@ -8751,7 +8763,7 @@ Me.gbNETNotes.Controls.Add(Me.TableLayoutPanel15)
 Me.gbNETNotes.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbNETNotes.Location = New System.Drawing.Point(3, 3)
 Me.gbNETNotes.Name = "gbNETNotes"
-Me.gbNETNotes.Size = New System.Drawing.Size(651, 239)
+Me.gbNETNotes.Size = New System.Drawing.Size(673, 239)
 Me.gbNETNotes.TabIndex = 3
 Me.gbNETNotes.TabStop = false
 Me.gbNETNotes.Text = "Заметки"
@@ -8776,7 +8788,7 @@ Me.TableLayoutPanel15.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Win
 Me.TableLayoutPanel15.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel15.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20!))
 Me.TableLayoutPanel15.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20!))
-Me.TableLayoutPanel15.Size = New System.Drawing.Size(645, 220)
+Me.TableLayoutPanel15.Size = New System.Drawing.Size(667, 220)
 Me.TableLayoutPanel15.TabIndex = 1
 '
 'ToolStrip5
@@ -8785,7 +8797,7 @@ Me.ToolStrip5.Dock = System.Windows.Forms.DockStyle.Fill
 Me.ToolStrip5.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
 Me.ToolStrip5.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnNETAdd, Me.ToolStripSeparator14, Me.btnNETNotesDel, Me.ToolStripSeparator15, Me.btnNETNotesCancel, Me.ToolStripSeparator16})
 Me.ToolStrip5.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow
-Me.ToolStrip5.Location = New System.Drawing.Point(525, 0)
+Me.ToolStrip5.Location = New System.Drawing.Point(547, 0)
 Me.ToolStrip5.Name = "ToolStrip5"
 Me.TableLayoutPanel15.SetRowSpan(Me.ToolStrip5, 2)
 Me.ToolStrip5.Size = New System.Drawing.Size(120, 105)
@@ -8842,7 +8854,7 @@ Me.lvNotesNET.FullRowSelect = true
 Me.lvNotesNET.GridLines = true
 Me.lvNotesNET.Location = New System.Drawing.Point(3, 108)
 Me.lvNotesNET.Name = "lvNotesNET"
-Me.lvNotesNET.Size = New System.Drawing.Size(639, 109)
+Me.lvNotesNET.Size = New System.Drawing.Size(661, 109)
 Me.lvNotesNET.TabIndex = 4
 Me.lvNotesNET.UseCompatibleStateImageBehavior = false
 Me.lvNotesNET.View = System.Windows.Forms.View.Details
@@ -8855,7 +8867,7 @@ Me.cmbNotesNETMaster.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbNotesNETMaster.FormattingEnabled = true
 Me.cmbNotesNETMaster.Location = New System.Drawing.Point(129, 3)
 Me.cmbNotesNETMaster.Name = "cmbNotesNETMaster"
-Me.cmbNotesNETMaster.Size = New System.Drawing.Size(393, 21)
+Me.cmbNotesNETMaster.Size = New System.Drawing.Size(415, 21)
 Me.cmbNotesNETMaster.TabIndex = 2
 '
 'NotesNETdate
@@ -8875,7 +8887,7 @@ Me.NotesNETtxt.Multiline = true
 Me.NotesNETtxt.Name = "NotesNETtxt"
 Me.TableLayoutPanel15.SetRowSpan(Me.NotesNETtxt, 2)
 Me.NotesNETtxt.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-Me.NotesNETtxt.Size = New System.Drawing.Size(519, 74)
+Me.NotesNETtxt.Size = New System.Drawing.Size(541, 74)
 Me.NotesNETtxt.TabIndex = 3
 '
 'TabPage17
@@ -8883,7 +8895,7 @@ Me.NotesNETtxt.TabIndex = 3
 Me.TabPage17.Controls.Add(Me.TableLayoutPanel68)
 Me.TabPage17.Location = New System.Drawing.Point(4, 22)
 Me.TabPage17.Name = "TabPage17"
-Me.TabPage17.Size = New System.Drawing.Size(663, 620)
+Me.TabPage17.Size = New System.Drawing.Size(685, 620)
 Me.TabPage17.TabIndex = 3
 Me.TabPage17.Text = "Гарантия"
 Me.TabPage17.UseVisualStyleBackColor = true
@@ -8901,7 +8913,7 @@ Me.TableLayoutPanel68.RowCount = 3
 Me.TableLayoutPanel68.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel68.RowStyles.Add(New System.Windows.Forms.RowStyle())
 Me.TableLayoutPanel68.RowStyles.Add(New System.Windows.Forms.RowStyle())
-Me.TableLayoutPanel68.Size = New System.Drawing.Size(663, 620)
+Me.TableLayoutPanel68.Size = New System.Drawing.Size(685, 620)
 Me.TableLayoutPanel68.TabIndex = 2
 '
 'gbPostNET
@@ -8910,7 +8922,7 @@ Me.gbPostNET.Controls.Add(Me.TableLayoutPanel58)
 Me.gbPostNET.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbPostNET.Location = New System.Drawing.Point(3, 3)
 Me.gbPostNET.Name = "gbPostNET"
-Me.gbPostNET.Size = New System.Drawing.Size(657, 91)
+Me.gbPostNET.Size = New System.Drawing.Size(679, 91)
 Me.gbPostNET.TabIndex = 0
 Me.gbPostNET.TabStop = false
 Me.gbPostNET.Text = "Поставщик"
@@ -8936,13 +8948,13 @@ Me.TableLayoutPanel58.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Win
 Me.TableLayoutPanel58.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30!))
 Me.TableLayoutPanel58.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20!))
 Me.TableLayoutPanel58.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20!))
-Me.TableLayoutPanel58.Size = New System.Drawing.Size(651, 72)
+Me.TableLayoutPanel58.Size = New System.Drawing.Size(673, 72)
 Me.TableLayoutPanel58.TabIndex = 3
 '
 'dtGNETok
 '
 Me.dtGNETok.Anchor = System.Windows.Forms.AnchorStyles.Left
-Me.dtGNETok.Location = New System.Drawing.Point(418, 41)
+Me.dtGNETok.Location = New System.Drawing.Point(429, 41)
 Me.dtGNETok.Name = "dtGNETok"
 Me.dtGNETok.Size = New System.Drawing.Size(134, 20)
 Me.dtGNETok.TabIndex = 9
@@ -8961,7 +8973,7 @@ Me.Label39.Text = "Продавец"
 '
 Me.Label37.Anchor = System.Windows.Forms.AnchorStyles.Left
 Me.Label37.AutoSize = true
-Me.Label37.Location = New System.Drawing.Point(338, 44)
+Me.Label37.Location = New System.Drawing.Point(349, 44)
 Me.Label37.Name = "Label37"
 Me.Label37.Size = New System.Drawing.Size(65, 13)
 Me.Label37.TabIndex = 10
@@ -8976,7 +8988,7 @@ Me.cmbNETPostav.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbNETPostav.FormattingEnabled = true
 Me.cmbNETPostav.Location = New System.Drawing.Point(103, 3)
 Me.cmbNETPostav.Name = "cmbNETPostav"
-Me.cmbNETPostav.Size = New System.Drawing.Size(545, 21)
+Me.cmbNETPostav.Size = New System.Drawing.Size(567, 21)
 Me.cmbNETPostav.TabIndex = 6
 '
 'dtGNETPr
@@ -9003,7 +9015,7 @@ Me.gbSaleNet.Controls.Add(Me.TableLayoutPanel53)
 Me.gbSaleNet.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbSaleNet.Location = New System.Drawing.Point(3, 100)
 Me.gbSaleNet.Name = "gbSaleNet"
-Me.gbSaleNet.Size = New System.Drawing.Size(657, 139)
+Me.gbSaleNet.Size = New System.Drawing.Size(679, 139)
 Me.gbSaleNet.TabIndex = 1
 Me.gbSaleNet.TabStop = false
 Me.gbSaleNet.Text = "Данные о приобретении"
@@ -9037,14 +9049,14 @@ Me.TableLayoutPanel53.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Win
 Me.TableLayoutPanel53.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30!))
 Me.TableLayoutPanel53.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30!))
 Me.TableLayoutPanel53.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30!))
-Me.TableLayoutPanel53.Size = New System.Drawing.Size(651, 120)
+Me.TableLayoutPanel53.Size = New System.Drawing.Size(673, 120)
 Me.TableLayoutPanel53.TabIndex = 3
 '
 'chkNETNNb
 '
 Me.chkNETNNb.Anchor = System.Windows.Forms.AnchorStyles.Left
 Me.chkNETNNb.AutoSize = true
-Me.chkNETNNb.Location = New System.Drawing.Point(418, 96)
+Me.chkNETNNb.Location = New System.Drawing.Point(429, 96)
 Me.chkNETNNb.Name = "chkNETNNb"
 Me.chkNETNNb.Size = New System.Drawing.Size(100, 17)
 Me.chkNETNNb.TabIndex = 23
@@ -9057,15 +9069,15 @@ Me.txtNETSumm.Dock = System.Windows.Forms.DockStyle.Fill
 Me.txtNETSumm.Location = New System.Drawing.Point(103, 63)
 Me.txtNETSumm.Maximum = New Decimal(New Integer() {1000000, 0, 0, 0})
 Me.txtNETSumm.Name = "txtNETSumm"
-Me.txtNETSumm.Size = New System.Drawing.Size(229, 20)
+Me.txtNETSumm.Size = New System.Drawing.Size(240, 20)
 Me.txtNETSumm.TabIndex = 17
 '
 'dtNETdataVvoda
 '
 Me.dtNETdataVvoda.Anchor = System.Windows.Forms.AnchorStyles.Left
-Me.dtNETdataVvoda.Location = New System.Drawing.Point(418, 65)
+Me.dtNETdataVvoda.Location = New System.Drawing.Point(429, 65)
 Me.dtNETdataVvoda.Name = "dtNETdataVvoda"
-Me.dtNETdataVvoda.Size = New System.Drawing.Size(230, 20)
+Me.dtNETdataVvoda.Size = New System.Drawing.Size(239, 20)
 Me.dtNETdataVvoda.TabIndex = 20
 '
 'Label60
@@ -9081,16 +9093,16 @@ Me.Label60.Text = "Счёт фактура №"
 'txtNETZay
 '
 Me.txtNETZay.Anchor = System.Windows.Forms.AnchorStyles.Left
-Me.txtNETZay.Location = New System.Drawing.Point(418, 35)
+Me.txtNETZay.Location = New System.Drawing.Point(429, 35)
 Me.txtNETZay.Name = "txtNETZay"
-Me.txtNETZay.Size = New System.Drawing.Size(230, 20)
+Me.txtNETZay.Size = New System.Drawing.Size(239, 20)
 Me.txtNETZay.TabIndex = 19
 '
 'Label55
 '
 Me.Label55.Anchor = System.Windows.Forms.AnchorStyles.Left
 Me.Label55.AutoSize = true
-Me.Label55.Location = New System.Drawing.Point(338, 68)
+Me.Label55.Location = New System.Drawing.Point(349, 68)
 Me.Label55.Name = "Label55"
 Me.Label55.Size = New System.Drawing.Size(66, 13)
 Me.Label55.TabIndex = 25
@@ -9099,9 +9111,9 @@ Me.Label55.Text = "Дата ввода"
 'dtNETSFdate
 '
 Me.dtNETSFdate.Anchor = System.Windows.Forms.AnchorStyles.Left
-Me.dtNETSFdate.Location = New System.Drawing.Point(418, 5)
+Me.dtNETSFdate.Location = New System.Drawing.Point(429, 5)
 Me.dtNETSFdate.Name = "dtNETSFdate"
-Me.dtNETSFdate.Size = New System.Drawing.Size(230, 20)
+Me.dtNETSFdate.Size = New System.Drawing.Size(239, 20)
 Me.dtNETSFdate.TabIndex = 18
 '
 'Label59
@@ -9120,14 +9132,14 @@ Me.txtNETcash.Dock = System.Windows.Forms.DockStyle.Fill
 Me.txtNETcash.Location = New System.Drawing.Point(103, 33)
 Me.txtNETcash.Maximum = New Decimal(New Integer() {1000000, 0, 0, 0})
 Me.txtNETcash.Name = "txtNETcash"
-Me.txtNETcash.Size = New System.Drawing.Size(229, 20)
+Me.txtNETcash.Size = New System.Drawing.Size(240, 20)
 Me.txtNETcash.TabIndex = 16
 '
 'Label56
 '
 Me.Label56.Anchor = System.Windows.Forms.AnchorStyles.Left
 Me.Label56.AutoSize = true
-Me.Label56.Location = New System.Drawing.Point(338, 38)
+Me.Label56.Location = New System.Drawing.Point(349, 38)
 Me.Label56.Name = "Label56"
 Me.Label56.Size = New System.Drawing.Size(44, 13)
 Me.Label56.TabIndex = 24
@@ -9148,7 +9160,7 @@ Me.Label58.Text = "Сумма"
 Me.txtNETSfN.Dock = System.Windows.Forms.DockStyle.Fill
 Me.txtNETSfN.Location = New System.Drawing.Point(103, 3)
 Me.txtNETSfN.Name = "txtNETSfN"
-Me.txtNETSfN.Size = New System.Drawing.Size(229, 20)
+Me.txtNETSfN.Size = New System.Drawing.Size(240, 20)
 Me.txtNETSfN.TabIndex = 13
 '
 'chkNETspis
@@ -9166,7 +9178,7 @@ Me.chkNETspis.UseVisualStyleBackColor = true
 '
 Me.Label57.Anchor = System.Windows.Forms.AnchorStyles.Left
 Me.Label57.AutoSize = true
-Me.Label57.Location = New System.Drawing.Point(338, 8)
+Me.Label57.Location = New System.Drawing.Point(349, 8)
 Me.Label57.Name = "Label57"
 Me.Label57.Size = New System.Drawing.Size(18, 13)
 Me.Label57.TabIndex = 22
@@ -9480,10 +9492,10 @@ Me.ilsCommands.TransparentColor = System.Drawing.Color.White
 '
 Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
 Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-Me.ClientSize = New System.Drawing.Size(963, 646)
+Me.ClientSize = New System.Drawing.Size(995, 646)
 Me.Controls.Add(Me.spCont)
 Me.Icon = CType(resources.GetObject("$this.Icon"),System.Drawing.Icon)
-Me.MinimumSize = New System.Drawing.Size(902, 601)
+Me.MinimumSize = New System.Drawing.Size(900, 600)
 Me.Name = "frmComputers"
 Me.Text = "Учёт оргтехники"
 Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
@@ -10532,5 +10544,6 @@ End Sub
     Friend WithEvents bMonitorPlus As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStrip15 As System.Windows.Forms.ToolStrip
     Friend WithEvents bPrinterPlus As System.Windows.Forms.ToolStripButton
+    Friend WithEvents Label114 As System.Windows.Forms.Label
 
 End Class

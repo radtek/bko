@@ -1776,7 +1776,7 @@ err_:
     Private Sub SaveInfTehButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SaveInfTehButton.Click
 
         Call SaveInfTeh()
-        RefFilTree(frmComputers.lstGroups) 'esq 130612
+        'RefFilTree(frmComputers.lstGroups) 'esq 130612
 
     End Sub
 
