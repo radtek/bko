@@ -4,6 +4,8 @@ Module MOD_INVENT
     Public Sub INVENT()
 
         Dim uname As String
+        Dim sSQL, bTEH, sTEH As String
+
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
 
@@ -29,6 +31,49 @@ Module MOD_INVENT
         Dim TEH20 As String
         Dim TEH21 As String
 
+        Dim sTEH1 As String
+        Dim sTEH2 As String
+        Dim sTEH3 As String
+        Dim sTEH4 As String
+        Dim sTEH5 As String
+        Dim sTEH6 As String
+        Dim sTEH7 As String
+        Dim sTEH8 As String
+        Dim sTEH9 As String
+        Dim sTEH10 As String
+        Dim sTEH11 As String
+        Dim sTEH12 As String
+        Dim sTEH13 As String
+        Dim sTEH14 As String
+        Dim sTEH15 As String
+        Dim sTEH16 As String
+        Dim sTEH17 As String
+        Dim sTEH18 As String
+        Dim sTEH19 As String
+        Dim sTEH20 As String
+        Dim sTEH21 As String
+
+        Dim bTEH1 As String
+        Dim bTEH2 As String
+        Dim bTEH3 As String
+        Dim bTEH4 As String
+        Dim bTEH5 As String
+        Dim bTEH6 As String
+        Dim bTEH7 As String
+        Dim bTEH8 As String
+        Dim bTEH9 As String
+        Dim bTEH10 As String
+        Dim bTEH11 As String
+        Dim bTEH12 As String
+        Dim bTEH13 As String
+        Dim bTEH14 As String
+        Dim bTEH15 As String
+        Dim bTEH16 As String
+        Dim bTEH17 As String
+        Dim bTEH18 As String
+        Dim bTEH19 As String
+        Dim bTEH20 As String
+        Dim bTEH21 As String
 
         Dim rs As Recordset
         rs = New Recordset
@@ -41,6 +86,56 @@ Module MOD_INVENT
         rs.Close()
         rs = Nothing
 
+        '###############################################################
+        'Сколько не на балансе
+        '###############################################################
+        Select Case DB_N
+
+            Case "MS Access"
+                sSQL = "SELECT count(*) as t_n FROM kompy where Balans=true AND tiptehn='PC'"
+
+            Case Else
+
+                sSQL = "SELECT count(*) as t_n FROM kompy where Balans=1 AND tiptehn='PC'"
+
+        End Select
+
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
+
+        With rs
+            bTEH1 = .Fields("t_n").Value
+        End With
+        rs.Close()
+        rs = Nothing
+
+        '###############################################################
+        'Сколько списано
+        '###############################################################
+        Select Case DB_N
+
+            Case "MS Access"
+                sSQL = "SELECT count(*) as t_n FROM kompy where spisan=true AND tiptehn='PC'"
+
+            Case Else
+
+                sSQL = "SELECT count(*) as t_n FROM kompy where spisan=1 AND tiptehn='PC'"
+
+        End Select
+
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
+
+        With rs
+            sTEH1 = .Fields("t_n").Value
+        End With
+        rs.Close()
+        rs = Nothing
+
+        '###############################################################
+
         rs = New Recordset
         rs.Open("SELECT count(*) as t_n FROM kompy where tiptehn='Printer'", DB7, CursorTypeEnum.adOpenDynamic,
                 LockTypeEnum.adLockOptimistic)
@@ -51,6 +146,55 @@ Module MOD_INVENT
         rs.Close()
         rs = Nothing
 
+        '###############################################################
+        'Сколько не на балансе
+        '###############################################################
+        Select Case DB_N
+
+            Case "MS Access"
+                sSQL = "SELECT count(*) as t_n FROM kompy where Balans=true AND tiptehn='Printer'"
+
+            Case Else
+
+                sSQL = "SELECT count(*) as t_n FROM kompy where Balans=1 AND tiptehn='Printer'"
+
+        End Select
+
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
+
+        With rs
+            bTEH2 = .Fields("t_n").Value
+        End With
+        rs.Close()
+        rs = Nothing
+
+        '###############################################################
+        'Сколько списано
+        '###############################################################
+        Select Case DB_N
+
+            Case "MS Access"
+                sSQL = "SELECT count(*) as t_n FROM kompy where spisan=true AND tiptehn='Printer'"
+
+            Case Else
+
+                sSQL = "SELECT count(*) as t_n FROM kompy where spisan=1 AND tiptehn='Printer'"
+
+        End Select
+
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
+
+        With rs
+            sTEH2 = .Fields("t_n").Value
+        End With
+        rs.Close()
+        rs = Nothing
+        '###############################################################
+
         rs = New Recordset
         rs.Open("SELECT count(*) as t_n FROM kompy where tiptehn='MFU'", DB7, CursorTypeEnum.adOpenDynamic,
                 LockTypeEnum.adLockOptimistic)
@@ -60,6 +204,54 @@ Module MOD_INVENT
         End With
         rs.Close()
         rs = Nothing
+        '###############################################################
+        'Сколько не на балансе
+        '###############################################################
+        Select Case DB_N
+
+            Case "MS Access"
+                sSQL = "SELECT count(*) as t_n FROM kompy where Balans=true AND tiptehn='MFU'"
+
+            Case Else
+
+                sSQL = "SELECT count(*) as t_n FROM kompy where Balans=1 AND tiptehn='MFU'"
+
+        End Select
+
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
+
+        With rs
+            bTEH3 = .Fields("t_n").Value
+        End With
+        rs.Close()
+        rs = Nothing
+
+        '###############################################################
+        'Сколько списано
+        '###############################################################
+        Select Case DB_N
+
+            Case "MS Access"
+                sSQL = "SELECT count(*) as t_n FROM kompy where spisan=true AND tiptehn='MFU'"
+
+            Case Else
+
+                sSQL = "SELECT count(*) as t_n FROM kompy where spisan=1 AND tiptehn='MFU'"
+
+        End Select
+
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
+
+        With rs
+            sTEH3 = .Fields("t_n").Value
+        End With
+        rs.Close()
+        rs = Nothing
+        '###############################################################
 
         rs = New Recordset
         rs.Open("SELECT count(*) as t_n FROM kompy where tiptehn='KOpir'", DB7, CursorTypeEnum.adOpenDynamic,
@@ -70,6 +262,54 @@ Module MOD_INVENT
         End With
         rs.Close()
         rs = Nothing
+        '###############################################################
+        'Сколько не на балансе
+        '###############################################################
+        Select Case DB_N
+
+            Case "MS Access"
+                sSQL = "SELECT count(*) as t_n FROM kompy where Balans=true AND tiptehn='KOpir'"
+
+            Case Else
+
+                sSQL = "SELECT count(*) as t_n FROM kompy where Balans=1 AND tiptehn='KOpir'"
+
+        End Select
+
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
+
+        With rs
+            bTEH4 = .Fields("t_n").Value
+        End With
+        rs.Close()
+        rs = Nothing
+
+        '###############################################################
+        'Сколько списано
+        '###############################################################
+        Select Case DB_N
+
+            Case "MS Access"
+                sSQL = "SELECT count(*) as t_n FROM kompy where spisan=true AND tiptehn='KOpir'"
+
+            Case Else
+
+                sSQL = "SELECT count(*) as t_n FROM kompy where spisan=1 AND tiptehn='KOpir'"
+
+        End Select
+
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
+
+        With rs
+            sTEH4 = .Fields("t_n").Value
+        End With
+        rs.Close()
+        rs = Nothing
+        '###############################################################
 
         rs = New Recordset
         rs.Open("SELECT count(*) as t_n FROM kompy where tiptehn='OT'", DB7, CursorTypeEnum.adOpenDynamic,
@@ -80,6 +320,54 @@ Module MOD_INVENT
         End With
         rs.Close()
         rs = Nothing
+        '###############################################################
+        'Сколько не на балансе
+        '###############################################################
+        Select Case DB_N
+
+            Case "MS Access"
+                sSQL = "SELECT count(*) as t_n FROM kompy where Balans=true AND tiptehn='OT'"
+
+            Case Else
+
+                sSQL = "SELECT count(*) as t_n FROM kompy where Balans=1 AND tiptehn='OT'"
+
+        End Select
+
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
+
+        With rs
+            bTEH5 = .Fields("t_n").Value
+        End With
+        rs.Close()
+        rs = Nothing
+
+        '###############################################################
+        'Сколько списано
+        '###############################################################
+        Select Case DB_N
+
+            Case "MS Access"
+                sSQL = "SELECT count(*) as t_n FROM kompy where spisan=true AND tiptehn='OT'"
+
+            Case Else
+
+                sSQL = "SELECT count(*) as t_n FROM kompy where spisan=1 AND tiptehn='OT'"
+
+        End Select
+
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
+
+        With rs
+            sTEH5 = .Fields("t_n").Value
+        End With
+        rs.Close()
+        rs = Nothing
+        '###############################################################
 
         rs = New Recordset
         rs.Open("SELECT count(*) as t_n FROM kompy where tiptehn='PHOTO'", DB7, CursorTypeEnum.adOpenDynamic,
@@ -90,7 +378,54 @@ Module MOD_INVENT
         End With
         rs.Close()
         rs = Nothing
+        '###############################################################
+        'Сколько не на балансе
+        '###############################################################
+        Select Case DB_N
 
+            Case "MS Access"
+                sSQL = "SELECT count(*) as t_n FROM kompy where Balans=true AND tiptehn='PHOTO'"
+
+            Case Else
+
+                sSQL = "SELECT count(*) as t_n FROM kompy where Balans=1 AND tiptehn='PHOTO'"
+
+        End Select
+
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
+
+        With rs
+            bTEH6 = .Fields("t_n").Value
+        End With
+        rs.Close()
+        rs = Nothing
+
+        '###############################################################
+        'Сколько списано
+        '###############################################################
+        Select Case DB_N
+
+            Case "MS Access"
+                sSQL = "SELECT count(*) as t_n FROM kompy where spisan=true AND tiptehn='PHOTO'"
+
+            Case Else
+
+                sSQL = "SELECT count(*) as t_n FROM kompy where spisan=1 AND tiptehn='PHOTO'"
+
+        End Select
+
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
+
+        With rs
+            sTEH6 = .Fields("t_n").Value
+        End With
+        rs.Close()
+        rs = Nothing
+        '###############################################################
 
         rs = New Recordset
         rs.Open("SELECT count(*) as t_n FROM kompy where tiptehn='FAX'", DB7, CursorTypeEnum.adOpenDynamic,
@@ -101,6 +436,55 @@ Module MOD_INVENT
         End With
         rs.Close()
         rs = Nothing
+        '###############################################################
+        'Сколько не на балансе
+        '###############################################################
+        Select Case DB_N
+
+            Case "MS Access"
+                sSQL = "SELECT count(*) as t_n FROM kompy where Balans=true AND tiptehn='FAX'"
+
+            Case Else
+
+                sSQL = "SELECT count(*) as t_n FROM kompy where Balans=1 AND tiptehn='FAX'"
+
+        End Select
+
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
+
+        With rs
+            bTEH7 = .Fields("t_n").Value
+        End With
+        rs.Close()
+        rs = Nothing
+
+        '###############################################################
+        'Сколько списано
+        '###############################################################
+        Select Case DB_N
+
+            Case "MS Access"
+                sSQL = "SELECT count(*) as t_n FROM kompy where spisan=true AND tiptehn='FAX'"
+
+            Case Else
+
+                sSQL = "SELECT count(*) as t_n FROM kompy where spisan=1 AND tiptehn='FAX'"
+
+        End Select
+
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
+
+        With rs
+            sTEH7 = .Fields("t_n").Value
+        End With
+        rs.Close()
+        rs = Nothing
+        '###############################################################
+
 
         rs = New Recordset
         rs.Open("SELECT count(*) as t_n FROM kompy where tiptehn='PHONE'", DB7, CursorTypeEnum.adOpenDynamic,
@@ -111,6 +495,54 @@ Module MOD_INVENT
         End With
         rs.Close()
         rs = Nothing
+        '###############################################################
+        'Сколько не на балансе
+        '###############################################################
+        Select Case DB_N
+
+            Case "MS Access"
+                sSQL = "SELECT count(*) as t_n FROM kompy where Balans=true AND tiptehn='PHONE'"
+
+            Case Else
+
+                sSQL = "SELECT count(*) as t_n FROM kompy where Balans=1 AND tiptehn='PHONE'"
+
+        End Select
+
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
+
+        With rs
+            bTEH8 = .Fields("t_n").Value
+        End With
+        rs.Close()
+        rs = Nothing
+
+        '###############################################################
+        'Сколько списано
+        '###############################################################
+        Select Case DB_N
+
+            Case "MS Access"
+                sSQL = "SELECT count(*) as t_n FROM kompy where spisan=true AND tiptehn='PHONE'"
+
+            Case Else
+
+                sSQL = "SELECT count(*) as t_n FROM kompy where spisan=1 AND tiptehn='PHONE'"
+
+        End Select
+
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
+
+        With rs
+            sTEH8 = .Fields("t_n").Value
+        End With
+        rs.Close()
+        rs = Nothing
+        '###############################################################
 
         rs = New Recordset
         rs.Open("SELECT count(*) as t_n FROM kompy where tiptehn='ZIP'", DB7, CursorTypeEnum.adOpenDynamic,
@@ -122,6 +554,56 @@ Module MOD_INVENT
         rs.Close()
         rs = Nothing
 
+        '###############################################################
+        'Сколько не на балансе
+        '###############################################################
+        Select Case DB_N
+
+            Case "MS Access"
+                sSQL = "SELECT count(*) as t_n FROM kompy where Balans=true AND tiptehn='ZIP'"
+
+            Case Else
+
+                sSQL = "SELECT count(*) as t_n FROM kompy where Balans=1 AND tiptehn='ZIP'"
+
+        End Select
+
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
+
+        With rs
+            bTEH9 = .Fields("t_n").Value
+        End With
+        rs.Close()
+        rs = Nothing
+
+        '###############################################################
+        'Сколько списано
+        '###############################################################
+        Select Case DB_N
+
+            Case "MS Access"
+                sSQL = "SELECT count(*) as t_n FROM kompy where spisan=true AND tiptehn='ZIP'"
+
+            Case Else
+
+                sSQL = "SELECT count(*) as t_n FROM kompy where spisan=1 AND tiptehn='ZIP'"
+
+        End Select
+
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
+
+        With rs
+            sTEH9 = .Fields("t_n").Value
+        End With
+        rs.Close()
+        rs = Nothing
+        '###############################################################
+
+
         rs = New Recordset
         rs.Open("SELECT count(*) as t_n FROM kompy where tiptehn='SCANER'", DB7, CursorTypeEnum.adOpenDynamic,
                 LockTypeEnum.adLockOptimistic)
@@ -131,6 +613,54 @@ Module MOD_INVENT
         End With
         rs.Close()
         rs = Nothing
+        '###############################################################
+        'Сколько не на балансе
+        '###############################################################
+        Select Case DB_N
+
+            Case "MS Access"
+                sSQL = "SELECT count(*) as t_n FROM kompy where Balans=true AND tiptehn='SCANER'"
+
+            Case Else
+
+                sSQL = "SELECT count(*) as t_n FROM kompy where Balans=1 AND tiptehn='SCANER'"
+
+        End Select
+
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
+
+        With rs
+            bTEH10 = .Fields("t_n").Value
+        End With
+        rs.Close()
+        rs = Nothing
+
+        '###############################################################
+        'Сколько списано
+        '###############################################################
+        Select Case DB_N
+
+            Case "MS Access"
+                sSQL = "SELECT count(*) as t_n FROM kompy where spisan=true AND tiptehn='SCANER'"
+
+            Case Else
+
+                sSQL = "SELECT count(*) as t_n FROM kompy where spisan=1 AND tiptehn='SCANER'"
+
+        End Select
+
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
+
+        With rs
+            sTEH10 = .Fields("t_n").Value
+        End With
+        rs.Close()
+        rs = Nothing
+        '###############################################################
 
         rs = New Recordset
         rs.Open("SELECT count(*) as t_n FROM kompy where tiptehn='NET'", DB7, CursorTypeEnum.adOpenDynamic,
@@ -142,6 +672,55 @@ Module MOD_INVENT
         rs.Close()
         rs = Nothing
 
+        '###############################################################
+        'Сколько не на балансе
+        '###############################################################
+        Select Case DB_N
+
+            Case "MS Access"
+                sSQL = "SELECT count(*) as t_n FROM kompy where Balans=true AND tiptehn='NET'"
+
+            Case Else
+
+                sSQL = "SELECT count(*) as t_n FROM kompy where Balans=1 AND tiptehn='NET'"
+
+        End Select
+
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
+
+        With rs
+            bTEH11 = .Fields("t_n").Value
+        End With
+        rs.Close()
+        rs = Nothing
+
+        '###############################################################
+        'Сколько списано
+        '###############################################################
+        Select Case DB_N
+
+            Case "MS Access"
+                sSQL = "SELECT count(*) as t_n FROM kompy where spisan=true AND tiptehn='NET'"
+
+            Case Else
+
+                sSQL = "SELECT count(*) as t_n FROM kompy where spisan=1 AND tiptehn='NET'"
+
+        End Select
+
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
+
+        With rs
+            sTEH11 = .Fields("t_n").Value
+        End With
+        rs.Close()
+        rs = Nothing
+        '###############################################################
+
         rs = New Recordset
         rs.Open("SELECT count(*) as t_n FROM kompy where tiptehn='MONITOR'", DB7, CursorTypeEnum.adOpenDynamic,
                 LockTypeEnum.adLockOptimistic)
@@ -151,6 +730,54 @@ Module MOD_INVENT
         End With
         rs.Close()
         rs = Nothing
+        '###############################################################
+        'Сколько не на балансе
+        '###############################################################
+        Select Case DB_N
+
+            Case "MS Access"
+                sSQL = "SELECT count(*) as t_n FROM kompy where Balans=true AND tiptehn='MONITOR'"
+
+            Case Else
+
+                sSQL = "SELECT count(*) as t_n FROM kompy where Balans=1 AND tiptehn='MONITOR'"
+
+        End Select
+
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
+
+        With rs
+            bTEH12 = .Fields("t_n").Value
+        End With
+        rs.Close()
+        rs = Nothing
+
+        '###############################################################
+        'Сколько списано
+        '###############################################################
+        Select Case DB_N
+
+            Case "MS Access"
+                sSQL = "SELECT count(*) as t_n FROM kompy where spisan=true AND tiptehn='MONITOR'"
+
+            Case Else
+
+                sSQL = "SELECT count(*) as t_n FROM kompy where spisan=1 AND tiptehn='MONITOR'"
+
+        End Select
+
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
+
+        With rs
+            sTEH12 = .Fields("t_n").Value
+        End With
+        rs.Close()
+        rs = Nothing
+        '###############################################################
 
         rs = New Recordset
         rs.Open("SELECT count(*) as t_n FROM kompy where tiptehn='USB'", DB7, CursorTypeEnum.adOpenDynamic,
@@ -162,6 +789,55 @@ Module MOD_INVENT
         rs.Close()
         rs = Nothing
 
+        '###############################################################
+        'Сколько не на балансе
+        '###############################################################
+        Select Case DB_N
+
+            Case "MS Access"
+                sSQL = "SELECT count(*) as t_n FROM kompy where Balans=true AND tiptehn='USB'"
+
+            Case Else
+
+                sSQL = "SELECT count(*) as t_n FROM kompy where Balans=1 AND tiptehn='USB'"
+
+        End Select
+
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
+
+        With rs
+            bTEH13 = .Fields("t_n").Value
+        End With
+        rs.Close()
+        rs = Nothing
+
+        '###############################################################
+        'Сколько списано
+        '###############################################################
+        Select Case DB_N
+
+            Case "MS Access"
+                sSQL = "SELECT count(*) as t_n FROM kompy where spisan=true AND tiptehn='USB'"
+
+            Case Else
+
+                sSQL = "SELECT count(*) as t_n FROM kompy where spisan=1 AND tiptehn='USB'"
+
+        End Select
+
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
+
+        With rs
+            sTEH13 = .Fields("t_n").Value
+        End With
+        rs.Close()
+        rs = Nothing
+        '###############################################################
+
         rs = New Recordset
         rs.Open("SELECT count(*) as t_n FROM kompy where tiptehn='SOUND'", DB7, CursorTypeEnum.adOpenDynamic,
                 LockTypeEnum.adLockOptimistic)
@@ -172,6 +848,55 @@ Module MOD_INVENT
         rs.Close()
         rs = Nothing
 
+        '###############################################################
+        'Сколько не на балансе
+        '###############################################################
+        Select Case DB_N
+
+            Case "MS Access"
+                sSQL = "SELECT count(*) as t_n FROM kompy where Balans=true AND tiptehn='SOUND'"
+
+            Case Else
+
+                sSQL = "SELECT count(*) as t_n FROM kompy where Balans=1 AND tiptehn='SOUND'"
+
+        End Select
+
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
+
+        With rs
+            bTEH14 = .Fields("t_n").Value
+        End With
+        rs.Close()
+        rs = Nothing
+
+        '###############################################################
+        'Сколько списано
+        '###############################################################
+        Select Case DB_N
+
+            Case "MS Access"
+                sSQL = "SELECT count(*) as t_n FROM kompy where spisan=true AND tiptehn='SOUND'"
+
+            Case Else
+
+                sSQL = "SELECT count(*) as t_n FROM kompy where spisan=1 AND tiptehn='SOUND'"
+
+        End Select
+
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
+
+        With rs
+            sTEH14 = .Fields("t_n").Value
+        End With
+        rs.Close()
+        rs = Nothing
+        '###############################################################
+
         rs = New Recordset
         rs.Open("SELECT count(*) as t_n FROM kompy where tiptehn='IBP'", DB7, CursorTypeEnum.adOpenDynamic,
                 LockTypeEnum.adLockOptimistic)
@@ -181,6 +906,54 @@ Module MOD_INVENT
         End With
         rs.Close()
         rs = Nothing
+        '###############################################################
+        'Сколько не на балансе
+        '###############################################################
+        Select Case DB_N
+
+            Case "MS Access"
+                sSQL = "SELECT count(*) as t_n FROM kompy where Balans=true AND tiptehn='IBP'"
+
+            Case Else
+
+                sSQL = "SELECT count(*) as t_n FROM kompy where Balans=1 AND tiptehn='IBP'"
+
+        End Select
+
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
+
+        With rs
+            bTEH15 = .Fields("t_n").Value
+        End With
+        rs.Close()
+        rs = Nothing
+
+        '###############################################################
+        'Сколько списано
+        '###############################################################
+        Select Case DB_N
+
+            Case "MS Access"
+                sSQL = "SELECT count(*) as t_n FROM kompy where spisan=true AND tiptehn='IBP'"
+
+            Case Else
+
+                sSQL = "SELECT count(*) as t_n FROM kompy where spisan=1 AND tiptehn='IBP'"
+
+        End Select
+
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
+
+        With rs
+            sTEH15 = .Fields("t_n").Value
+        End With
+        rs.Close()
+        rs = Nothing
+        '###############################################################
 
         rs = New Recordset
         rs.Open("SELECT count(*) as t_n FROM kompy where tiptehn='FS'", DB7, CursorTypeEnum.adOpenDynamic,
@@ -191,6 +964,54 @@ Module MOD_INVENT
         End With
         rs.Close()
         rs = Nothing
+        '###############################################################
+        'Сколько не на балансе
+        '###############################################################
+        Select Case DB_N
+
+            Case "MS Access"
+                sSQL = "SELECT count(*) as t_n FROM kompy where Balans=true AND tiptehn='FS'"
+
+            Case Else
+
+                sSQL = "SELECT count(*) as t_n FROM kompy where Balans=1 AND tiptehn='FS'"
+
+        End Select
+
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
+
+        With rs
+            bTEH16 = .Fields("t_n").Value
+        End With
+        rs.Close()
+        rs = Nothing
+
+        '###############################################################
+        'Сколько списано
+        '###############################################################
+        Select Case DB_N
+
+            Case "MS Access"
+                sSQL = "SELECT count(*) as t_n FROM kompy where spisan=true AND tiptehn='FS'"
+
+            Case Else
+
+                sSQL = "SELECT count(*) as t_n FROM kompy where spisan=1 AND tiptehn='FS'"
+
+        End Select
+
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
+
+        With rs
+            sTEH16 = .Fields("t_n").Value
+        End With
+        rs.Close()
+        rs = Nothing
+        '###############################################################
 
         rs = New Recordset
         rs.Open("SELECT count(*) as t_n FROM kompy where tiptehn='KEYB'", DB7, CursorTypeEnum.adOpenDynamic,
@@ -201,6 +1022,54 @@ Module MOD_INVENT
         End With
         rs.Close()
         rs = Nothing
+        '###############################################################
+        'Сколько не на балансе
+        '###############################################################
+        Select Case DB_N
+
+            Case "MS Access"
+                sSQL = "SELECT count(*) as t_n FROM kompy where Balans=true AND tiptehn='KEYB'"
+
+            Case Else
+
+                sSQL = "SELECT count(*) as t_n FROM kompy where Balans=1 AND tiptehn='KEYB'"
+
+        End Select
+
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
+
+        With rs
+            bTEH17 = .Fields("t_n").Value
+        End With
+        rs.Close()
+        rs = Nothing
+
+        '###############################################################
+        'Сколько списано
+        '###############################################################
+        Select Case DB_N
+
+            Case "MS Access"
+                sSQL = "SELECT count(*) as t_n FROM kompy where spisan=true AND tiptehn='KEYB'"
+
+            Case Else
+
+                sSQL = "SELECT count(*) as t_n FROM kompy where spisan=1 AND tiptehn='KEYB'"
+
+        End Select
+
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
+
+        With rs
+            sTEH17 = .Fields("t_n").Value
+        End With
+        rs.Close()
+        rs = Nothing
+        '###############################################################
 
         rs = New Recordset
         rs.Open("SELECT count(*) as t_n FROM kompy where tiptehn='MOUSE'", DB7, CursorTypeEnum.adOpenDynamic,
@@ -211,10 +1080,54 @@ Module MOD_INVENT
         End With
         rs.Close()
         rs = Nothing
+        '###############################################################
+        'Сколько не на балансе
+        '###############################################################
+        Select Case DB_N
 
+            Case "MS Access"
+                sSQL = "SELECT count(*) as t_n FROM kompy where Balans=true AND tiptehn='MOUSE'"
 
+            Case Else
 
-        Dim sSQL As String
+                sSQL = "SELECT count(*) as t_n FROM kompy where Balans=1 AND tiptehn='MOUSE'"
+
+        End Select
+
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
+
+        With rs
+            bTEH18 = .Fields("t_n").Value
+        End With
+        rs.Close()
+        rs = Nothing
+
+        '###############################################################
+        'Сколько списано
+        '###############################################################
+        Select Case DB_N
+
+            Case "MS Access"
+                sSQL = "SELECT count(*) as t_n FROM kompy where spisan=true AND tiptehn='MOUSE'"
+
+            Case Else
+
+                sSQL = "SELECT count(*) as t_n FROM kompy where spisan=1 AND tiptehn='MOUSE'"
+
+        End Select
+
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
+
+        With rs
+            sTEH18 = .Fields("t_n").Value
+        End With
+        rs.Close()
+        rs = Nothing
+        '###############################################################
 
         Select Case DB_N
 
@@ -989,80 +1902,134 @@ Module MOD_INVENT
                 oPara1.Format.SpaceAfter = 24    '24 pt spacing after paragraph.
                 oPara1.Range.InsertParagraphAfter()
 
-
                 oPara1.Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG2", "Организация:") & " " & uname
                 oPara1.Range.Font.Bold = True
                 oPara1.Format.SpaceAfter = 24    '24 pt spacing after paragraph.
                 oPara1.Range.InsertParagraphAfter()
 
-                oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 23, 2)
+                oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 23, 4)
                 oTable.Range.ParagraphFormat.SpaceAfter = 6
+                Dim intj1 As Integer = 2
 
                 oTable.Cell(1, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG3", "Тип техники")
                 oTable.Cell(1, 2).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG4", "Кол-во")
+                oTable.Cell(1, 3).Range.Text = LNGIniFile.GetString("MOD_INVENT", "---", "Не на балансе")
+                oTable.Cell(1, 4).Range.Text = LNGIniFile.GetString("MOD_INVENT", "---", "Списано")
 
                 oTable.Cell(2, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG5", "Компьютеров")
                 oTable.Cell(2, 2).Range.Text = TEH1
+
+                oTable.Cell(intj1, 3).Range.Text = bTEH1
+                oTable.Cell(intj1, 4).Range.Text = sTEH1
+                intj1 = intj1 + 1
+
                 oTable.Cell(3, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG6", "Принтеров")
                 oTable.Cell(3, 2).Range.Text = TEH2
+                oTable.Cell(intj1, 3).Range.Text = bTEH2
+                oTable.Cell(intj1, 4).Range.Text = sTEH2
+                intj1 = intj1 + 1
+
                 oTable.Cell(4, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG7", "МФУ")
                 oTable.Cell(4, 2).Range.Text = TEH3
+                oTable.Cell(intj1, 3).Range.Text = bTEH3
+                oTable.Cell(intj1, 4).Range.Text = sTEH3
+                intj1 = intj1 + 1
 
                 oTable.Cell(5, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG8", "Копиров")
                 oTable.Cell(5, 2).Range.Text = TEH4
+                oTable.Cell(intj1, 3).Range.Text = bTEH4
+                oTable.Cell(intj1, 4).Range.Text = sTEH4
+                intj1 = intj1 + 1
 
                 oTable.Cell(6, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG9", "Другое")
                 oTable.Cell(6, 2).Range.Text = TEH5
+                oTable.Cell(intj1, 3).Range.Text = bTEH5
+                oTable.Cell(intj1, 4).Range.Text = sTEH5
+                intj1 = intj1 + 1
 
                 oTable.Cell(7, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG10", "Фотоаппаратов")
                 oTable.Cell(7, 2).Range.Text = TEH6
+                oTable.Cell(intj1, 3).Range.Text = bTEH6
+                oTable.Cell(intj1, 4).Range.Text = sTEH6
+                intj1 = intj1 + 1
 
                 oTable.Cell(8, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG11", "Факсов")
                 oTable.Cell(8, 2).Range.Text = TEH7
+                oTable.Cell(intj1, 3).Range.Text = bTEH7
+                oTable.Cell(intj1, 4).Range.Text = sTEH7
+                intj1 = intj1 + 1
 
                 oTable.Cell(9, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG12", "Телефонов")
                 oTable.Cell(9, 2).Range.Text = TEH8
+                oTable.Cell(intj1, 3).Range.Text = bTEH8
+                oTable.Cell(intj1, 4).Range.Text = sTEH8
+                intj1 = intj1 + 1
 
                 oTable.Cell(10, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG13", "ZIP")
                 oTable.Cell(10, 2).Range.Text = TEH9
+                oTable.Cell(intj1, 3).Range.Text = bTEH9
+                oTable.Cell(intj1, 4).Range.Text = sTEH9
+                intj1 = intj1 + 1
 
                 oTable.Cell(11, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG14", "Сканеров")
                 oTable.Cell(11, 2).Range.Text = TEH10
+                oTable.Cell(intj1, 3).Range.Text = bTEH10
+                oTable.Cell(intj1, 4).Range.Text = sTEH10
+                intj1 = intj1 + 1
 
                 oTable.Cell(12, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG15", "Сетевого оборудования")
                 oTable.Cell(12, 2).Range.Text = TEH11
+                oTable.Cell(intj1, 3).Range.Text = bTEH11
+                oTable.Cell(intj1, 4).Range.Text = sTEH11
+                intj1 = intj1 + 1
 
                 oTable.Cell(13, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG16", "Мониторов")
                 oTable.Cell(13, 2).Range.Text = TEH12
+                oTable.Cell(intj1, 3).Range.Text = bTEH12
+                oTable.Cell(intj1, 4).Range.Text = sTEH12
+                intj1 = intj1 + 1
 
                 oTable.Cell(14, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG17", "USB устройств")
                 oTable.Cell(14, 2).Range.Text = TEH13
+                oTable.Cell(intj1, 3).Range.Text = bTEH13
+                oTable.Cell(intj1, 4).Range.Text = sTEH13
+                intj1 = intj1 + 1
 
                 oTable.Cell(15, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG18", "Акустики")
                 oTable.Cell(15, 2).Range.Text = TEH14
+                oTable.Cell(intj1, 3).Range.Text = bTEH14
+                oTable.Cell(intj1, 4).Range.Text = sTEH14
+                intj1 = intj1 + 1
 
                 oTable.Cell(16, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG19",
                                                                      "Источников бесперебойного питания")
                 oTable.Cell(16, 2).Range.Text = TEH15
+                oTable.Cell(intj1, 3).Range.Text = bTEH15
+                oTable.Cell(intj1, 4).Range.Text = sTEH15
+                intj1 = intj1 + 1
 
                 oTable.Cell(17, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG20", "Сетевых фильтров")
                 oTable.Cell(17, 2).Range.Text = TEH16
+                oTable.Cell(intj1, 3).Range.Text = bTEH16
+                oTable.Cell(intj1, 4).Range.Text = sTEH16
+                intj1 = intj1 + 1
 
                 oTable.Cell(18, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG21", "Клавиатур")
                 oTable.Cell(18, 2).Range.Text = TEH17
+                oTable.Cell(intj1, 3).Range.Text = bTEH17
+                oTable.Cell(intj1, 4).Range.Text = sTEH17
+                intj1 = intj1 + 1
 
                 oTable.Cell(19, 1).Range.Text = LNGIniFile.GetString("MOD_INVENT", "MSG22", "Мышей")
                 oTable.Cell(19, 2).Range.Text = TEH18
-
+                oTable.Cell(intj1, 3).Range.Text = bTEH18
+                oTable.Cell(intj1, 4).Range.Text = sTEH18
+                intj1 = intj1 + 1
 
                 oTable.Cell(20, 1).Range.Text = "Всего"
                 oTable.Cell(20, 2).Range.Text = TEH21
-
-                oTable.Cell(21, 1).Range.Text = "Не на балансе"
-                oTable.Cell(21, 2).Range.Text = TEH19
-
-                oTable.Cell(22, 1).Range.Text = "Списано"
-                oTable.Cell(22, 2).Range.Text = TEH20
+                oTable.Cell(intj1, 3).Range.Text = TEH19
+                oTable.Cell(intj1, 4).Range.Text = TEH20
 
 
                 oTable.Rows.Item(1).Range.Font.Bold = True

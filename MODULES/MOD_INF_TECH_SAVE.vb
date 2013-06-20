@@ -4,6 +4,10 @@
     Private DV2 As Boolean
     Public MRZD As Boolean = False
     Public sNetName As Boolean = False
+    Private N_NAME As String = ""
+    Private P_NAME As String = ""
+    Private L_NAME As String = ""
+
 
     Public Sub PreSaveOtv(ByVal sFIALIAL As String, ByVal sOTDEL As String, ByVal sKABN As String)
 
@@ -109,15 +113,19 @@
         Dim sSQL As String
         Dim tmpTXT As String
         Dim tmpTXT2 As String
+        ' Dim Spisan, balans As String
 
         sSQL = "Select NET_NAME from kompy where id=" & frmComputers.sCOUNT
-
+        ', balans, spisan
         Dim rs As ADODB.Recordset
         rs = New ADODB.Recordset
         rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
 
         With rs
+
             tmpTXT = .Fields("NET_NAME").Value
+            ' Spisan = .Fields("Spisan").Value
+            ' balans = .Fields("balans").Value
         End With
         rs.Close()
         rs = Nothing
@@ -126,27 +134,65 @@
 
             Case "PC"
                 tmpTXT2 = frmComputers.txtSNAME.Text
-
-                'cmbResponsible
+                'SPVisible = frmComputers.chkPCspis.Checked
+                'NBVisible = frmComputers.chkPCNNb.Checked
             Case "Printer"
                 tmpTXT2 = frmComputers.cmbPRN.Text
-                'cmbPRNotv
+
+                'SPVisible = frmComputers.chkPRNspis.Checked
+                'NBVisible = frmComputers.chkPRNNNb.Checked
             Case "MFU"
                 tmpTXT2 = frmComputers.cmbPRN.Text
-                'cmbPRNotv
+
+                'SPVisible = frmComputers.chkPRNspis.Checked
+                'NBVisible = frmComputers.chkPRNNNb.Checked
             Case "KOpir"
                 tmpTXT2 = frmComputers.cmbPRN.Text
-                'cmbPRNotv
-
+                
+                'SPVisible = frmComputers.chkPRNspis.Checked
+                'NBVisible = frmComputers.chkPRNNNb.Checked
             Case "NET"
                 tmpTXT2 = frmComputers.cmbDevNet.Text
-                'cmbNETotv
+                
+                'SPVisible = frmComputers.chkNETspis.Checked
+                'NBVisible = frmComputers.chkNETNNb.Checked
             Case Else
                 tmpTXT2 = frmComputers.cmbOTH.Text
-                'cmbOTHotv
+                'SPVisible = frmComputers.chkOTHspis.Checked
+                'NBVisible = frmComputers.chkOTHNNb.Checked
 
         End Select
 
+        'Select Case Spisan
+
+        '    Case "1"
+        '        Spisan = True
+        '    Case "True"
+        '        Spisan = True
+        '    Case "-1"
+        '        Spisan = True
+        '    Case Else
+        '        Spisan = False
+        'End Select
+
+
+        'Select Case balans
+
+        '    Case "1"
+        '        balans = True
+        '    Case "True"
+        '        balans = True
+        '    Case "-1"
+        '        balans = True
+        '    Case Else
+        '        balans = False
+        'End Select
+
+
+        'checkOther(frmComputers.lstGroups, frmComputers.sCOUNT, frmComputers.lstGroups.SelectedNode, Spisan, balans)
+
+        'If balans <> NBVisible Then sNetName = True
+        'If SPVisible <> Spisan Then sNetName = True
         If tmpTXT = tmpTXT2 Then Exit Sub
 
         sNetName = True
@@ -155,8 +201,71 @@
 
     End Sub
 
+    Private Sub FIND_NAME(ByVal sID As Integer)
+        Dim sSQL As String
+        Dim rs As ADODB.Recordset
+        Dim sTREENAME As String
+
+        Dim objIniFile As New IniFile(PrPath & "base.ini")
+        sTREENAME = objIniFile.GetString("general", "NETNAME", "1")
+
+        sSQL = "Select NET_NAME, PSEVDONIM from kompy where id=" & sID
+
+        rs = New ADODB.Recordset
+        rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+        With rs
+            N_NAME = .Fields("NET_NAME").Value
+            P_NAME = .Fields("PSEVDONIM").Value
+        End With
+        rs.Close()
+        rs = Nothing
+
+        Select Case sTREENAME
+
+            Case 0
+
+                If Len(N_NAME) = 0 Then
+                    N_NAME = "NoName"
+                End If
+
+                If Len(P_NAME) = 0 Then
+                    P_NAME = "NoName"
+                End If
+
+                Select Case N_NAME
+
+                    Case P_NAME
+
+                        L_NAME = N_NAME
+                    Case Else
+
+                        L_NAME = N_NAME & " (" & P_NAME & ")"
+
+                End Select
+
+            Case 2
+
+                If Len(P_NAME) = 0 Then
+                    P_NAME = "NoName"
+                End If
+                L_NAME = P_NAME
+
+            Case 1
+
+                If Len(N_NAME) = 0 Then
+                    N_NAME = "NoName"
+                End If
+
+                L_NAME = N_NAME
+
+        End Select
+    End Sub
+
     Private Sub RefTreeSaveTech(ByVal sID As Integer, ByVal sNames As String, ByVal sTIPTEHN As String, ByVal sFIALIAL As String, ByVal sOTDEL As String, ByVal sKABN As String)
         On Error GoTo err_
+        Dim objIniFile As New IniFile(PrPath & "base.ini")
+
 
         If Len(sBranch) = 0 Then Exit Sub
 
@@ -208,6 +317,77 @@
 
         Dim tmpCount As Integer
 
+        sSQL = "SELECT count(*) as T_N FROM kompy WHERE id =" & sID & " AND PCL <> 0"
+
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
+        With rs
+            tmpCount = .Fields("T_N").Value
+
+        End With
+
+        rs.Close()
+        rs = Nothing
+
+        Select Case tmpCount
+
+            Case 0
+
+            Case Else
+
+                Dim tmpPCL As Integer
+
+                sSQL = "Select PCL from kompy where id=" & sID
+
+                rs = New ADODB.Recordset
+                rs.Open(sSQL, DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
+
+                With rs
+                    tmpPCL = .Fields("PCL").Value
+                End With
+                rs.Close()
+                rs = Nothing
+
+                Call FIND_NAME(tmpPCL)
+
+                Call FIND_TREE(L_NAME)
+
+                frmComputers.lstGroups.Nodes.Remove(frmComputers.lstGroups.SelectedNode)
+
+                sSQL = "SELECT id, mesto, filial, tip_compa, tiptehn, PSEVDONIM, NET_NAME, kabn, Spisan, OS, PRINTER_NAME_4,balans FROM kompy WHERE id =" & tmpPCL '& " AND PCL =0"
+
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
+                With rs
+
+                    If Not IsDBNull(.Fields("tip_compa").Value) Then iA1 = .Fields("tip_compa").Value
+                    If Not IsDBNull(.Fields("NET_NAME").Value) Then iA2 = .Fields("NET_NAME").Value
+                    If Not IsDBNull(.Fields("PSEVDONIM").Value) Then iA3 = .Fields("PSEVDONIM").Value
+                    If Not IsDBNull(.Fields("Spisan").Value) Then iA4 = .Fields("Spisan").Value
+                    If Not IsDBNull(.Fields("tiptehn").Value) Then iA5 = .Fields("tiptehn").Value
+                    If Not IsDBNull(.Fields("OS").Value) Then iA6 = .Fields("OS").Value
+                    If Not IsDBNull(.Fields("PRINTER_NAME_4").Value) Then iA7 = .Fields("PRINTER_NAME_4").Value
+                    If Not IsDBNull(.Fields("Balans").Value) Then iA8 = .Fields("Balans").Value
+
+                End With
+
+                rs.Close()
+                rs = Nothing
+
+                objIniFile.WriteString("general", "DK", sID)
+                objIniFile.WriteString("general", "Default", 0)
+
+                Call FIND_TREE(sNODENAME)
+
+                Call FILING_TREE(frmComputers.lstGroups, iA5, iA1, iA2, iA3, tmpPCL, iA4, frmComputers.lstGroups.SelectedNode, iA6, iA7, iA8)
+
+                ' Call FIND_NAME(sID)
+
+                'Call FIND_TREE(L_NAME)
+
+        End Select
 
         sSQL = "SELECT count(*) as T_N FROM kompy WHERE id =" & sID & " AND PCL =0"
 
@@ -222,12 +402,10 @@
         rs.Close()
         rs = Nothing
 
-        Dim objIniFile As New IniFile(PrPath & "base.ini")
+        If tmpCount = 0 Then Exit Sub
+
         objIniFile.WriteString("general", "DK", sID)
         objIniFile.WriteString("general", "Default", 0)
-
-
-        If tmpCount = 0 Then GoTo err_
 
         sSQL = "SELECT id, mesto, filial, tip_compa, tiptehn, PSEVDONIM, NET_NAME, kabn, Spisan, OS, PRINTER_NAME_4,balans FROM kompy WHERE id =" & sID '& " AND PCL =0"
 
@@ -251,22 +429,8 @@
         rs.Close()
         rs = Nothing
 
-        'Добавляем технику в дерево
-
-        'Dim PCNODES As New TreeNode(sNames, sICO, sICO)
-        'PCNODES.Tag = "C|" & sID
-        'PCNODES.Name = L_NAME
-        'PCNODES.Text = L_NAME
-        'frmComputers.lstGroups.SelectedNode.Nodes.Add(PCNODES)
-
-        'FILING_TREE(frmComputers.lstGroups, sTIPTEHN, "PC", N_NAME, P_NAME, sID, Spisan, frmComputers.lstGroups.SelectedNode, "", "", balans)
-
         FILING_TREE(frmComputers.lstGroups, iA5, iA1, iA2, iA3, sID, iA4, frmComputers.lstGroups.SelectedNode, iA6, iA7, iA8)
 
-        'FILING_TREE( lstgroups As TreeView, iTipTehn As String,  TipPC As String,  NET_NAME As String,  PSEVDONIM As String,  iD As String,  Spisan As String,  DepNode As TreeNode,  OS As String,  n_set As String,  balans As String)
-
-        ' Call checkRemont(sID, PCNODES)
-        'Call checkOther(frmComputers.lstGroups, sID, PCNODES, Spisan, balans)
 
         '###########################
         'Ищем технику
@@ -342,7 +506,6 @@ err_:
         Next
     End Sub
 
-
     Private Sub UpdateTree(ByVal sTXT As String, ByVal sTIPTEHN As String, ByVal sID As Integer, ByVal sFIALIAL As String, ByVal sOTDEL As String, ByVal sKABN As String)
 
         Select Case frmComputers.pDRAG
@@ -353,10 +516,16 @@ err_:
 
                     Case 0
 
-                        ' If frmComputers.EDT = True Then frmComputers.lstGroups.Nodes.Remove(frmComputers.lstGroups.SelectedNode)
-
                         If frmComputers.EDT = False Then RefFilTree(frmComputers.lstGroups)
-                        If sNetName = True Then frmComputers.lstGroups.SelectedNode.Text = sTXT
+
+                        If sNetName = True Then
+
+                            Call FIND_NAME(frmComputers.sCOUNT)
+
+                            frmComputers.lstGroups.SelectedNode.Text = L_NAME
+
+                        End If
+
                         If frmComputers.EDT = True Then frmComputers.LOAD_LIST()
 
                         Select Case DV2
@@ -367,20 +536,27 @@ err_:
                     Case 1
 
                         If frmComputers.EDT = True Then frmComputers.LOAD_LIST()
-                        ' If frmComputers.EDT = False Then RefTreeSaveTech(sID, sTXT, sTIPTEHN, sFIALIAL, sOTDEL, sKABN)
-                        If sNetName = True Then frmComputers.lstGroups.SelectedNode.Text = sTXT
+                        If frmComputers.EDT = False Then RefTreeSaveTech(sID, sTXT, sTIPTEHN, sFIALIAL, sOTDEL, sKABN)
 
-                        'Select Case DV2
-                        '    Case True
-                        If frmComputers.EDT = True Then frmComputers.lstGroups.Nodes.Remove(frmComputers.lstGroups.SelectedNode)
-                        RefTreeSaveTech(sID, sTXT, sTIPTEHN, sFIALIAL, sOTDEL, sKABN)
-                        'End Select
+                        If sNetName = True Then
+
+                            Call FIND_NAME(frmComputers.sCOUNT)
+
+                            frmComputers.lstGroups.SelectedNode.Text = L_NAME
+
+                        End If
+
+                        Select Case DV2
+                            Case True
+                                If frmComputers.EDT = True Then frmComputers.lstGroups.Nodes.Remove(frmComputers.lstGroups.SelectedNode)
+                                RefTreeSaveTech(sID, sTXT, sTIPTEHN, sFIALIAL, sOTDEL, sKABN)
+                        End Select
 
                 End Select
 
         End Select
 
-        DV2 = False
+                DV2 = False
 
     End Sub
 
