@@ -746,9 +746,9 @@ Error_:
         Me.txtMonDum.Visible = False
         'Me.txtOTHSN.Left = "331" 'esq 130612 
         'Me.txtOTHSN.Width = "284" 'esq 130612 
-        Me.txtOTHSN.Left = "249"
-        Me.txtOTHSN.Width = "214"
-
+        Me.txtOTHSN.Left = cmbOTH.Width + 10
+        Me.txtOTHSN.Width = PROiZV39.Left - (cmbOTH.Width + 20) '"214"
+        'PROiZV39.left - (cmbOTH.Width +10)
 
         Me.cmbOTH.Items.Clear()
 
@@ -1093,9 +1093,11 @@ Error_:
                             Me.txtMonDum.Visible = True
                             'Me.txtOTHSN.Left = "471" 'esq 130612 
                             'Me.txtOTHSN.Width = "146" 'esq 130612 
-                            Me.txtOTHSN.Left = "355"
-                            Me.txtOTHSN.Width = "108"
+                            ' Me.txtOTHSN.Left = "355"
+                            ' Me.txtOTHSN.Width = "108"
 
+                            Me.txtOTHSN.Left = cmbOTH.Width + txtMonDum.Width + 10
+                            Me.txtOTHSN.Width = PROiZV39.Left - (cmbOTH.Width + txtMonDum.Width + 15) '"214"
 
 
                             lblTipOther.Visible = False

@@ -560,16 +560,16 @@ Partial Class frmSetup
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel2.Controls.Add(Me.Label6, 0, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.txtMail, 1, 2)
-        Me.TableLayoutPanel2.Controls.Add(Me.txtPRG, 1, 3)
         Me.TableLayoutPanel2.Controls.Add(Me.Label7, 0, 1)
         Me.TableLayoutPanel2.Controls.Add(Me.Label10, 0, 2)
-        Me.TableLayoutPanel2.Controls.Add(Me.Label8, 0, 3)
         Me.TableLayoutPanel2.Controls.Add(Me.txtSA, 1, 1)
         Me.TableLayoutPanel2.Controls.Add(Me.txtORG, 1, 0)
-        Me.TableLayoutPanel2.Controls.Add(Me.Label11, 0, 4)
-        Me.TableLayoutPanel2.Controls.Add(Me.txtBigBoss, 1, 4)
         Me.TableLayoutPanel2.Controls.Add(Me.btnSave, 0, 6)
         Me.TableLayoutPanel2.Controls.Add(Me.GroupBox5, 1, 7)
+        Me.TableLayoutPanel2.Controls.Add(Me.Label8, 0, 4)
+        Me.TableLayoutPanel2.Controls.Add(Me.Label11, 0, 3)
+        Me.TableLayoutPanel2.Controls.Add(Me.txtPRG, 1, 4)
+        Me.TableLayoutPanel2.Controls.Add(Me.txtBigBoss, 1, 3)
         Me.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel2.Location = New System.Drawing.Point(0, 0)
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
@@ -605,8 +605,7 @@ Partial Class frmSetup
         '
         'txtPRG
         '
-        Me.txtPRG.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtPRG.Location = New System.Drawing.Point(162, 81)
+        Me.txtPRG.Location = New System.Drawing.Point(162, 107)
         Me.txtPRG.Name = "txtPRG"
         Me.txtPRG.Size = New System.Drawing.Size(808, 20)
         Me.txtPRG.TabIndex = 6
@@ -635,7 +634,7 @@ Partial Class frmSetup
         '
         Me.Label8.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(3, 84)
+        Me.Label8.Location = New System.Drawing.Point(3, 110)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(153, 13)
         Me.Label8.TabIndex = 2
@@ -661,7 +660,7 @@ Partial Class frmSetup
         '
         Me.Label11.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(3, 110)
+        Me.Label11.Location = New System.Drawing.Point(3, 84)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(153, 13)
         Me.Label11.TabIndex = 8
@@ -669,8 +668,7 @@ Partial Class frmSetup
         '
         'txtBigBoss
         '
-        Me.txtBigBoss.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtBigBoss.Location = New System.Drawing.Point(162, 107)
+        Me.txtBigBoss.Location = New System.Drawing.Point(162, 81)
         Me.txtBigBoss.Name = "txtBigBoss"
         Me.txtBigBoss.Size = New System.Drawing.Size(808, 20)
         Me.txtBigBoss.TabIndex = 9
@@ -686,16 +684,18 @@ Partial Class frmSetup
         '
         'GroupBox5
         '
+        Me.GroupBox5.AutoSize = True
         Me.GroupBox5.Controls.Add(Me.TableLayoutPanel8)
         Me.GroupBox5.Location = New System.Drawing.Point(162, 163)
         Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(510, 199)
+        Me.GroupBox5.Size = New System.Drawing.Size(510, 175)
         Me.GroupBox5.TabIndex = 10
         Me.GroupBox5.TabStop = False
         Me.GroupBox5.Text = "Настройки SMTP"
         '
         'TableLayoutPanel8
         '
+        Me.TableLayoutPanel8.AutoSize = True
         Me.TableLayoutPanel8.ColumnCount = 2
         Me.TableLayoutPanel8.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel8.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
@@ -720,7 +720,7 @@ Partial Class frmSetup
         Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel8.Size = New System.Drawing.Size(504, 180)
+        Me.TableLayoutPanel8.Size = New System.Drawing.Size(504, 156)
         Me.TableLayoutPanel8.TabIndex = 6
         '
         'Label13
@@ -873,14 +873,13 @@ Partial Class frmSetup
         Me.TableLayoutPanel1.Controls.Add(Me.txtSUBD, 2, 4)
         Me.TableLayoutPanel1.Controls.Add(Me.chkArhiv2exit, 0, 4)
         Me.TableLayoutPanel1.Controls.Add(Me.chk_no_log, 0, 6)
-        Me.TableLayoutPanel1.Controls.Add(Me.gbTree_o, 0, 9)
         Me.TableLayoutPanel1.Controls.Add(Me.GroupBox1, 0, 8)
         Me.TableLayoutPanel1.Controls.Add(Me.gbMyBlank, 2, 8)
         Me.TableLayoutPanel1.Controls.Add(Me.chkFullScreen, 0, 7)
         Me.TableLayoutPanel1.Controls.Add(Me.Label12, 1, 6)
         Me.TableLayoutPanel1.Controls.Add(Me.ComboBox2, 2, 6)
-        Me.TableLayoutPanel1.Controls.Add(Me.GroupBox4, 2, 9)
-        Me.TableLayoutPanel1.Controls.Add(Me.GroupBox2, 0, 12)
+        Me.TableLayoutPanel1.Controls.Add(Me.GroupBox2, 2, 9)
+        Me.TableLayoutPanel1.Controls.Add(Me.GroupBox4, 0, 9)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(3, 16)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
@@ -954,7 +953,7 @@ Partial Class frmSetup
         Me.cmbOffice.Items.AddRange(New Object() {"MS Office", "OpenOffice.org"})
         Me.cmbOffice.Location = New System.Drawing.Point(562, 57)
         Me.cmbOffice.Name = "cmbOffice"
-        Me.cmbOffice.Size = New System.Drawing.Size(399, 21)
+        Me.cmbOffice.Size = New System.Drawing.Size(403, 21)
         Me.cmbOffice.TabIndex = 10
         '
         'cmbSortTree
@@ -967,7 +966,7 @@ Partial Class frmSetup
         Me.cmbSortTree.Items.AddRange(New Object() {"По имени техники", "По типу техники"})
         Me.cmbSortTree.Location = New System.Drawing.Point(562, 30)
         Me.cmbSortTree.Name = "cmbSortTree"
-        Me.cmbSortTree.Size = New System.Drawing.Size(399, 21)
+        Me.cmbSortTree.Size = New System.Drawing.Size(403, 21)
         Me.cmbSortTree.TabIndex = 8
         '
         'cmbDefaultModul
@@ -980,7 +979,7 @@ Partial Class frmSetup
         Me.cmbDefaultModul.Items.AddRange(New Object() {"Учёт оргтехники", "Учёт заявок", "Учёт П.О.", "Учёт картриджей"})
         Me.cmbDefaultModul.Location = New System.Drawing.Point(562, 3)
         Me.cmbDefaultModul.Name = "cmbDefaultModul"
-        Me.cmbDefaultModul.Size = New System.Drawing.Size(399, 21)
+        Me.cmbDefaultModul.Size = New System.Drawing.Size(403, 21)
         Me.cmbDefaultModul.TabIndex = 3
         '
         'lblDefaultModul
@@ -1039,13 +1038,13 @@ Partial Class frmSetup
         Me.txtEverestDir.Enabled = False
         Me.txtEverestDir.Location = New System.Drawing.Point(562, 84)
         Me.txtEverestDir.Name = "txtEverestDir"
-        Me.txtEverestDir.Size = New System.Drawing.Size(366, 20)
+        Me.txtEverestDir.Size = New System.Drawing.Size(370, 20)
         Me.txtEverestDir.TabIndex = 13
         Me.txtEverestDir.Text = "D:\"
         '
         'btnEverest
         '
-        Me.btnEverest.Location = New System.Drawing.Point(934, 84)
+        Me.btnEverest.Location = New System.Drawing.Point(938, 84)
         Me.btnEverest.Name = "btnEverest"
         Me.btnEverest.Size = New System.Drawing.Size(27, 23)
         Me.btnEverest.TabIndex = 15
@@ -1054,7 +1053,7 @@ Partial Class frmSetup
         '
         'btnSUBD
         '
-        Me.btnSUBD.Location = New System.Drawing.Point(934, 113)
+        Me.btnSUBD.Location = New System.Drawing.Point(938, 113)
         Me.btnSUBD.Name = "btnSUBD"
         Me.btnSUBD.Size = New System.Drawing.Size(27, 23)
         Me.btnSUBD.TabIndex = 16
@@ -1067,7 +1066,7 @@ Partial Class frmSetup
         Me.txtSUBD.Enabled = False
         Me.txtSUBD.Location = New System.Drawing.Point(562, 113)
         Me.txtSUBD.Name = "txtSUBD"
-        Me.txtSUBD.Size = New System.Drawing.Size(366, 20)
+        Me.txtSUBD.Size = New System.Drawing.Size(370, 20)
         Me.txtSUBD.TabIndex = 14
         '
         'chkArhiv2exit
@@ -1093,10 +1092,9 @@ Partial Class frmSetup
         'gbTree_o
         '
         Me.gbTree_o.Controls.Add(Me.TableLayoutPanel6)
-        Me.gbTree_o.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.gbTree_o.Location = New System.Drawing.Point(3, 307)
+        Me.gbTree_o.Location = New System.Drawing.Point(250, 16)
         Me.gbTree_o.Name = "gbTree_o"
-        Me.gbTree_o.Size = New System.Drawing.Size(370, 100)
+        Me.gbTree_o.Size = New System.Drawing.Size(293, 90)
         Me.gbTree_o.TabIndex = 17
         Me.gbTree_o.TabStop = False
         Me.gbTree_o.Text = "Отображение в дереве"
@@ -1116,7 +1114,7 @@ Partial Class frmSetup
         Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel6.Size = New System.Drawing.Size(364, 81)
+        Me.TableLayoutPanel6.Size = New System.Drawing.Size(287, 71)
         Me.TableLayoutPanel6.TabIndex = 23
         '
         'RadioButton3
@@ -1124,7 +1122,7 @@ Partial Class frmSetup
         Me.RadioButton3.AutoSize = True
         Me.RadioButton3.Location = New System.Drawing.Point(3, 49)
         Me.RadioButton3.Name = "RadioButton3"
-        Me.RadioButton3.Size = New System.Drawing.Size(180, 17)
+        Me.RadioButton3.Size = New System.Drawing.Size(206, 17)
         Me.RadioButton3.TabIndex = 2
         Me.RadioButton3.TabStop = True
         Me.RadioButton3.Text = "Имя компьютера (Псевдоним)"
@@ -1135,7 +1133,7 @@ Partial Class frmSetup
         Me.RadioButton1.AutoSize = True
         Me.RadioButton1.Location = New System.Drawing.Point(3, 3)
         Me.RadioButton1.Name = "RadioButton1"
-        Me.RadioButton1.Size = New System.Drawing.Size(113, 17)
+        Me.RadioButton1.Size = New System.Drawing.Size(127, 17)
         Me.RadioButton1.TabIndex = 0
         Me.RadioButton1.TabStop = True
         Me.RadioButton1.Text = "Имя компьютера"
@@ -1146,7 +1144,7 @@ Partial Class frmSetup
         Me.RadioButton2.AutoSize = True
         Me.RadioButton2.Location = New System.Drawing.Point(3, 26)
         Me.RadioButton2.Name = "RadioButton2"
-        Me.RadioButton2.Size = New System.Drawing.Size(149, 17)
+        Me.RadioButton2.Size = New System.Drawing.Size(169, 17)
         Me.RadioButton2.TabIndex = 1
         Me.RadioButton2.TabStop = True
         Me.RadioButton2.Text = "Псевдоним компьютера"
@@ -1229,7 +1227,7 @@ Partial Class frmSetup
         Me.gbMyBlank.Dock = System.Windows.Forms.DockStyle.Fill
         Me.gbMyBlank.Location = New System.Drawing.Point(562, 192)
         Me.gbMyBlank.Name = "gbMyBlank"
-        Me.gbMyBlank.Size = New System.Drawing.Size(399, 109)
+        Me.gbMyBlank.Size = New System.Drawing.Size(403, 109)
         Me.gbMyBlank.TabIndex = 21
         Me.gbMyBlank.TabStop = False
         Me.gbMyBlank.Text = "Мой бланк"
@@ -1250,7 +1248,7 @@ Partial Class frmSetup
         Me.TableLayoutPanel5.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel5.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel5.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel5.Size = New System.Drawing.Size(393, 90)
+        Me.TableLayoutPanel5.Size = New System.Drawing.Size(397, 90)
         Me.TableLayoutPanel5.TabIndex = 4
         '
         'chkDVIG
@@ -1322,23 +1320,25 @@ Partial Class frmSetup
         Me.ComboBox2.Items.AddRange(New Object() {"ASTRA32", "AIDA64 (Everest)"})
         Me.ComboBox2.Location = New System.Drawing.Point(562, 142)
         Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(366, 21)
+        Me.ComboBox2.Size = New System.Drawing.Size(370, 21)
         Me.ComboBox2.TabIndex = 27
         Me.ComboBox2.Text = "AIDA64 (Everest)"
         '
         'GroupBox4
         '
+        Me.TableLayoutPanel1.SetColumnSpan(Me.GroupBox4, 2)
         Me.GroupBox4.Controls.Add(Me.chkSP)
         Me.GroupBox4.Controls.Add(Me.chkNB)
         Me.GroupBox4.Controls.Add(Me.chkRemVisible)
         Me.GroupBox4.Controls.Add(Me.RadioButton11)
         Me.GroupBox4.Controls.Add(Me.RadioButton10)
         Me.GroupBox4.Controls.Add(Me.GroupBox3)
+        Me.GroupBox4.Controls.Add(Me.gbTree_o)
         Me.GroupBox4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.GroupBox4.Location = New System.Drawing.Point(562, 307)
+        Me.GroupBox4.Location = New System.Drawing.Point(3, 307)
         Me.GroupBox4.Name = "GroupBox4"
         Me.TableLayoutPanel1.SetRowSpan(Me.GroupBox4, 4)
-        Me.GroupBox4.Size = New System.Drawing.Size(366, 186)
+        Me.GroupBox4.Size = New System.Drawing.Size(549, 167)
         Me.GroupBox4.TabIndex = 28
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Дерево:"
@@ -1402,7 +1402,7 @@ Partial Class frmSetup
         'GroupBox3
         '
         Me.GroupBox3.Controls.Add(Me.ComboBox1)
-        Me.GroupBox3.Location = New System.Drawing.Point(7, 136)
+        Me.GroupBox3.Location = New System.Drawing.Point(250, 112)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(177, 47)
         Me.GroupBox3.TabIndex = 23
@@ -1422,7 +1422,7 @@ Partial Class frmSetup
         'GroupBox2
         '
         Me.GroupBox2.Controls.Add(Me.TableLayoutPanel7)
-        Me.GroupBox2.Location = New System.Drawing.Point(3, 413)
+        Me.GroupBox2.Location = New System.Drawing.Point(562, 307)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(370, 104)
         Me.GroupBox2.TabIndex = 19
@@ -1553,6 +1553,7 @@ Partial Class frmSetup
         Me.TableLayoutPanel2.ResumeLayout(False)
         Me.TableLayoutPanel2.PerformLayout()
         Me.GroupBox5.ResumeLayout(False)
+        Me.GroupBox5.PerformLayout()
         Me.TableLayoutPanel8.ResumeLayout(False)
         Me.TableLayoutPanel8.PerformLayout()
         Me.TabPage1.ResumeLayout(False)

@@ -7,8 +7,8 @@ Imports System.Security.Cryptography
 
 Module MOD_SENDMAIL
 
-    Private sCRTKey As String = "ДАздРа1Ма!ДазДра2ма!Миру"
-
+    Private sCRTKey As String = "HfcibahjdrfCjj,otybz0981"
+    'HfcibahjdrfCjj,otybz0981"
 
  Public Function EncryptString(ByVal sTEXTBLOC As String) As String
 

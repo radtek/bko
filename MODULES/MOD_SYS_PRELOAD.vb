@@ -84,6 +84,91 @@ Module MOD_SYS_PRELOAD
 
         End Select
 
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "Branche.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "Department.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "Office.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "Server.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "PC.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "Notebook.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "KPK.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "Printer.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "MFU.png"))
+
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "Copir.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "NET.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "Photo.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "Phone.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "Fax.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "Scanner.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "ZIP.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "Other.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "Monitor1.png"))
+
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "USB_FLASH.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "Calc.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "headphones.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "Microphon.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "Cam.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "Gamepad.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "Graph.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "SD_CARD1.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "SD_CARD2.png"))
+
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "SD_CARD3.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "Tape.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "iPod.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "Antenn.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "M_Phones1.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "M_Phones2.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "Monitor2.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "Proector.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "Monitor3.png"))
+
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "G_Key.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "USB1.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "DVD.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "HDD.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "M_PHOTO.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "IBP.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "Accustic1.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "People1.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "Accustic2.png"))
+
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "USB2.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "Keyboard.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "Mouse.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "Socket.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "Cartridg.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "Jack.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "Portf.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "Battary.png"))
+        'ills.Images.Add(Image.FromFile(PrPath & sPATH & "List.png"))
+
+        'Select Case sFRM
+
+        '    Case "DIR"
+
+        '    Case Else
+        '        ills.Images.Add(Image.FromFile(PrPath & sPATH & "PCMCI1.png"))
+        '        ills.Images.Add(Image.FromFile(PrPath & sPATH & "devices1.png"))
+        '        ills.Images.Add(Image.FromFile(PrPath & sPATH & "devices2.png"))
+        '        ills.Images.Add(Image.FromFile(PrPath & sPATH & "devices3.png"))
+        '        ills.Images.Add(Image.FromFile(PrPath & sPATH & "HID.png"))
+        '        ills.Images.Add(Image.FromFile(PrPath & sPATH & "PCMCI2.png"))
+        '        ills.Images.Add(Image.FromFile(PrPath & sPATH & "Label.png"))
+        '        ills.Images.Add(Image.FromFile(PrPath & sPATH & "Filter.png"))
+        '        ills.Images.Add(Image.FromFile(PrPath & sPATH & "SIM.png"))
+
+        '        ills.Images.Add(Image.FromFile(PrPath & sPATH & "Soft.png"))
+        '        ills.Images.Add(Image.FromFile(PrPath & sPATH & "Hand_scanner.png"))
+        '        ills.Images.Add(Image.FromFile(PrPath & sPATH & "chair.png"))
+        '        ills.Images.Add(Image.FromFile(PrPath & sPATH & "Guitar.png"))
+        '        ills.Images.Add(Image.FromFile(PrPath & sPATH & "BlueTouch.png"))
+
+        '        ills.Images.Add(Image.FromFile(PrPath & sPATH & "Case.png"))
+        '        ills.Images.Add(Image.FromFile(PrPath & sPATH & "Root.png"))
+        '        ills.Images.Add(Image.FromFile(PrPath & sPATH & "BigCase.png"))
+
         ills.Images.Add(Image.FromFile(PrPath & sPATH & "A1.png"))
         ills.Images.Add(Image.FromFile(PrPath & sPATH & "A2.png"))
         ills.Images.Add(Image.FromFile(PrPath & sPATH & "A3.png"))
@@ -169,6 +254,7 @@ Module MOD_SYS_PRELOAD
                 ills.Images.Add(Image.FromFile(PrPath & sPATH & "I1.png"))
                 ills.Images.Add(Image.FromFile(PrPath & sPATH & "A0.png"))
                 ills.Images.Add(Image.FromFile(PrPath & sPATH & "I2.png"))
+
 
         End Select
 
