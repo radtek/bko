@@ -1168,7 +1168,7 @@ err_:
         rsSoft.Close()
         rsSoft = Nothing
 
-        A1 = lstV.Items.Count
+        A1 = 1 'esq 130622 нумерация 1++
 
 
         For intj = 0 To lstV.Items.Count - 1
