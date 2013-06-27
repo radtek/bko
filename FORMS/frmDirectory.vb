@@ -2790,6 +2790,7 @@ Public Class frmDirectory
 
                     If Not (RSExists("FILIAL", "FILIAL", cmbName.Text)) Then
                         AddOnePar(Me.cmbName.Text, "FILIAL", "SPR_FILIAL", Me.cmbName)
+                       
                     End If
 
                 Else
@@ -2842,9 +2843,14 @@ Public Class frmDirectory
 
                 Call LOAD_LIST_SPR()
 
-                Call RefFilTree(frmComputers.lstGroups)
+                Select Case TREE_UPDATE
+                    Case 0
+                        Call RefFilTree(frmComputers.lstGroups)
+                    Case 1
+                        Add_FILIAL_TREE(cmbName.Text)
+                End Select
 
-                btnDirAdd.Text = objIniFile.GetString("frmDirectory", "btnDirAdd", "Добавить")
+            btnDirAdd.Text = objIniFile.GetString("frmDirectory", "btnDirAdd", "Добавить")
                 eDTI = False
                 Exit Sub
 
@@ -2908,7 +2914,12 @@ Public Class frmDirectory
                 End If
 
                 Call LOAD_LIST_SPR()
-                Call RefFilTree(frmComputers.lstGroups)
+                Select Case TREE_UPDATE
+                    Case 0
+                        Call RefFilTree(frmComputers.lstGroups)
+                    Case 1
+                        Add_OTDEL_TREE(cmbName.Text, txtName.Text)
+                End Select
                 btnDirAdd.Text = objIniFile.GetString("frmDirectory", "btnDirAdd", "Добавить")
                 eDTI = False
                 Exit Sub
@@ -2968,7 +2979,12 @@ Public Class frmDirectory
 
 
                 Call LOAD_LIST_SPR()
-                Call RefFilTree(frmComputers.lstGroups)
+                Select Case TREE_UPDATE
+                    Case 0
+                        Call RefFilTree(frmComputers.lstGroups)
+                    Case 1
+                        Add_KABINET_TREE(cmbName.Text, cmbName2.Text, txtName.Text)
+                End Select
 
                 btnDirAdd.Text = objIniFile.GetString("frmDirectory", "btnDirAdd", "Добавить")
                 eDTI = False
