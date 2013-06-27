@@ -383,9 +383,6 @@ Public Class frmComputers
         ToolTip1.SetToolTip(cmbMon2, LNGIniFile.GetString("frmComputers", "ToolTips20", "Монитор, модель"))
         ToolTip1.SetToolTip(txtMon2Dum, LNGIniFile.GetString("frmComputers", "ToolTips21", "Диагональ"))
 
-        ToolTip1.SetToolTip(cmbOTH, LNGIniFile.GetString("frmComputers", "ToolTips25", "Модель")) 'esq 130622
-        ToolTip1.SetToolTip(txtMonDum, LNGIniFile.GetString("frmComputers", "ToolTips21", "Диагональ")) 'esq 130622
-
         ToolTip1.SetToolTip(cmbPrinters1, LNGIniFile.GetString("frmComputers", "ToolTips22", "Принтер, модель"))
         ToolTip1.SetToolTip(txtPrint1Port, LNGIniFile.GetString("frmComputers", "ToolTips23", "Порт подключения"))
 
@@ -527,16 +524,7 @@ err_:
 
         If spCont.SplitterDistance > 650 Then spCont.SplitterDistance = 650
         If spCont.SplitterDistance < 250 Then spCont.SplitterDistance = 250
-        'esq 130622 
-        If txtMonDum.Visible = False Then
-            TableLayoutPanel7.SetColumn(txtOTHSN, 1)
-            TableLayoutPanel7.SetColumnSpan(txtOTHSN, 2)
-        Else
-            TableLayoutPanel7.SetColumn(txtOTHSN, 2)
-            TableLayoutPanel7.SetColumnSpan(txtOTHSN, 1)
-        End If
-        'esq 130622 
-
+        PROiZV39.Width = gbOTh.Width - 475
     End Sub
 
     Private Sub spCont_SplitterMoved(ByVal sender As Object, ByVal e As SplitterEventArgs) Handles spCont.SplitterMoved
@@ -756,8 +744,11 @@ Error_:
 
 
         Me.txtMonDum.Visible = False
-        Me.TableLayoutPanel7.SetColumn(Me.txtOTHSN, 1) 'esq 130622
-        Me.TableLayoutPanel7.SetColumnSpan(Me.txtOTHSN, 2) 'esq 130622
+        'Me.txtOTHSN.Left = "331" 'esq 130612 
+        'Me.txtOTHSN.Width = "284" 'esq 130612 
+        Me.txtOTHSN.Left = cmbOTH.Width + 10
+        Me.txtOTHSN.Width = PROiZV39.Left - (cmbOTH.Width + 20) '"214"
+        'PROiZV39.left - (cmbOTH.Width +10)
 
         Me.cmbOTH.Items.Clear()
 
@@ -1100,9 +1091,13 @@ Error_:
                             FillComboNET(Me.cmbOTH, "Name", "SPR_MONITOR", "", False, True)
 
                             Me.txtMonDum.Visible = True
+                            'Me.txtOTHSN.Left = "471" 'esq 130612 
+                            'Me.txtOTHSN.Width = "146" 'esq 130612 
+                            ' Me.txtOTHSN.Left = "355"
+                            ' Me.txtOTHSN.Width = "108"
 
-                            Me.TableLayoutPanel7.SetColumn(Me.txtOTHSN, 2) 'esq 130622
-                            Me.TableLayoutPanel7.SetColumnSpan(Me.txtOTHSN, 1) 'esq 130622
+                            Me.txtOTHSN.Left = cmbOTH.Width + txtMonDum.Width + 10
+                            Me.txtOTHSN.Width = PROiZV39.Left - (cmbOTH.Width + txtMonDum.Width + 15) '"214"
 
 
                             lblTipOther.Visible = False
@@ -6730,5 +6725,12 @@ Err_:
 
     'End Sub
 
+    Private Sub lvRepair_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles lvRepair.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub txtSearch_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtSearch.TextChanged
+
+    End Sub
 End Class
 

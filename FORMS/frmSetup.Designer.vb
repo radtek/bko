@@ -59,14 +59,10 @@ Partial Class frmSetup
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.txtMail = New System.Windows.Forms.TextBox()
-        Me.txtPRG = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
-        Me.Label8 = New System.Windows.Forms.Label()
         Me.txtSA = New System.Windows.Forms.TextBox()
         Me.txtORG = New System.Windows.Forms.TextBox()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.txtBigBoss = New System.Windows.Forms.TextBox()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.TableLayoutPanel8 = New System.Windows.Forms.TableLayoutPanel()
@@ -81,6 +77,10 @@ Partial Class frmSetup
         Me.txtPort = New System.Windows.Forms.TextBox()
         Me.txtMUser = New System.Windows.Forms.TextBox()
         Me.txtMPassword = New System.Windows.Forms.TextBox()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.txtPRG = New System.Windows.Forms.TextBox()
+        Me.txtBigBoss = New System.Windows.Forms.TextBox()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.gbSetup = New System.Windows.Forms.GroupBox()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
@@ -102,11 +102,6 @@ Partial Class frmSetup
         Me.txtSUBD = New System.Windows.Forms.TextBox()
         Me.chkArhiv2exit = New System.Windows.Forms.CheckBox()
         Me.chk_no_log = New System.Windows.Forms.CheckBox()
-        Me.gbTree_o = New System.Windows.Forms.GroupBox()
-        Me.TableLayoutPanel6 = New System.Windows.Forms.TableLayoutPanel()
-        Me.RadioButton3 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton1 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton2 = New System.Windows.Forms.RadioButton()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.TableLayoutPanel4 = New System.Windows.Forms.TableLayoutPanel()
         Me.Button3 = New System.Windows.Forms.Button()
@@ -122,14 +117,6 @@ Partial Class frmSetup
         Me.chkFullScreen = New System.Windows.Forms.CheckBox()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.ComboBox2 = New System.Windows.Forms.ComboBox()
-        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
-        Me.chkSP = New System.Windows.Forms.CheckBox()
-        Me.chkNB = New System.Windows.Forms.CheckBox()
-        Me.chkRemVisible = New System.Windows.Forms.CheckBox()
-        Me.RadioButton11 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton10 = New System.Windows.Forms.RadioButton()
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.TableLayoutPanel7 = New System.Windows.Forms.TableLayoutPanel()
         Me.RadioButton6 = New System.Windows.Forms.RadioButton()
@@ -138,6 +125,19 @@ Partial Class frmSetup
         Me.RadioButton7 = New System.Windows.Forms.RadioButton()
         Me.RadioButton4 = New System.Windows.Forms.RadioButton()
         Me.RadioButton5 = New System.Windows.Forms.RadioButton()
+        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.chkSP = New System.Windows.Forms.CheckBox()
+        Me.chkNB = New System.Windows.Forms.CheckBox()
+        Me.chkRemVisible = New System.Windows.Forms.CheckBox()
+        Me.RadioButton11 = New System.Windows.Forms.RadioButton()
+        Me.RadioButton10 = New System.Windows.Forms.RadioButton()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.gbTree_o = New System.Windows.Forms.GroupBox()
+        Me.TableLayoutPanel6 = New System.Windows.Forms.TableLayoutPanel()
+        Me.RadioButton3 = New System.Windows.Forms.RadioButton()
+        Me.RadioButton1 = New System.Windows.Forms.RadioButton()
+        Me.RadioButton2 = New System.Windows.Forms.RadioButton()
         Me.SStab1 = New System.Windows.Forms.TabControl()
         Me.TabPage5.SuspendLayout()
         Me.TableLayoutPanel3.SuspendLayout()
@@ -154,16 +154,16 @@ Partial Class frmSetup
         Me.TabPage1.SuspendLayout()
         Me.gbSetup.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
-        Me.gbTree_o.SuspendLayout()
-        Me.TableLayoutPanel6.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.TableLayoutPanel4.SuspendLayout()
         Me.gbMyBlank.SuspendLayout()
         Me.TableLayoutPanel5.SuspendLayout()
-        Me.GroupBox4.SuspendLayout()
-        Me.GroupBox3.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.TableLayoutPanel7.SuspendLayout()
+        Me.GroupBox4.SuspendLayout()
+        Me.GroupBox3.SuspendLayout()
+        Me.gbTree_o.SuspendLayout()
+        Me.TableLayoutPanel6.SuspendLayout()
         Me.SStab1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -603,13 +603,6 @@ Partial Class frmSetup
         Me.txtMail.Size = New System.Drawing.Size(808, 20)
         Me.txtMail.TabIndex = 5
         '
-        'txtPRG
-        '
-        Me.txtPRG.Location = New System.Drawing.Point(162, 107)
-        Me.txtPRG.Name = "txtPRG"
-        Me.txtPRG.Size = New System.Drawing.Size(808, 20)
-        Me.txtPRG.TabIndex = 6
-        '
         'Label7
         '
         Me.Label7.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -630,16 +623,6 @@ Partial Class frmSetup
         Me.Label10.TabIndex = 7
         Me.Label10.Text = "E-mail администратора:"
         '
-        'Label8
-        '
-        Me.Label8.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(3, 110)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(153, 13)
-        Me.Label8.TabIndex = 2
-        Me.Label8.Text = "Заголовок окна программы:"
-        '
         'txtSA
         '
         Me.txtSA.Dock = System.Windows.Forms.DockStyle.Fill
@@ -655,23 +638,6 @@ Partial Class frmSetup
         Me.txtORG.Name = "txtORG"
         Me.txtORG.Size = New System.Drawing.Size(808, 20)
         Me.txtORG.TabIndex = 3
-        '
-        'Label11
-        '
-        Me.Label11.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(3, 84)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(153, 13)
-        Me.Label11.TabIndex = 8
-        Me.Label11.Text = "Начальник службы"
-        '
-        'txtBigBoss
-        '
-        Me.txtBigBoss.Location = New System.Drawing.Point(162, 81)
-        Me.txtBigBoss.Name = "txtBigBoss"
-        Me.txtBigBoss.Size = New System.Drawing.Size(808, 20)
-        Me.txtBigBoss.TabIndex = 9
         '
         'btnSave
         '
@@ -824,6 +790,40 @@ Partial Class frmSetup
         Me.txtMPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtMPassword.Size = New System.Drawing.Size(246, 20)
         Me.txtMPassword.TabIndex = 10
+        '
+        'Label8
+        '
+        Me.Label8.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(3, 110)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(153, 13)
+        Me.Label8.TabIndex = 2
+        Me.Label8.Text = "Заголовок окна программы:"
+        '
+        'Label11
+        '
+        Me.Label11.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(3, 84)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(153, 13)
+        Me.Label11.TabIndex = 8
+        Me.Label11.Text = "Начальник службы"
+        '
+        'txtPRG
+        '
+        Me.txtPRG.Location = New System.Drawing.Point(162, 107)
+        Me.txtPRG.Name = "txtPRG"
+        Me.txtPRG.Size = New System.Drawing.Size(808, 20)
+        Me.txtPRG.TabIndex = 6
+        '
+        'txtBigBoss
+        '
+        Me.txtBigBoss.Location = New System.Drawing.Point(162, 81)
+        Me.txtBigBoss.Name = "txtBigBoss"
+        Me.txtBigBoss.Size = New System.Drawing.Size(808, 20)
+        Me.txtBigBoss.TabIndex = 9
         '
         'TabPage1
         '
@@ -1089,67 +1089,6 @@ Partial Class frmSetup
         Me.chk_no_log.Text = "Не вести лог"
         Me.chk_no_log.UseVisualStyleBackColor = True
         '
-        'gbTree_o
-        '
-        Me.gbTree_o.Controls.Add(Me.TableLayoutPanel6)
-        Me.gbTree_o.Location = New System.Drawing.Point(250, 16)
-        Me.gbTree_o.Name = "gbTree_o"
-        Me.gbTree_o.Size = New System.Drawing.Size(293, 90)
-        Me.gbTree_o.TabIndex = 17
-        Me.gbTree_o.TabStop = False
-        Me.gbTree_o.Text = "Отображение в дереве"
-        '
-        'TableLayoutPanel6
-        '
-        Me.TableLayoutPanel6.AutoSize = True
-        Me.TableLayoutPanel6.ColumnCount = 1
-        Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel6.Controls.Add(Me.RadioButton3, 0, 2)
-        Me.TableLayoutPanel6.Controls.Add(Me.RadioButton1, 0, 0)
-        Me.TableLayoutPanel6.Controls.Add(Me.RadioButton2, 0, 1)
-        Me.TableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel6.Location = New System.Drawing.Point(3, 16)
-        Me.TableLayoutPanel6.Name = "TableLayoutPanel6"
-        Me.TableLayoutPanel6.RowCount = 3
-        Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel6.Size = New System.Drawing.Size(287, 71)
-        Me.TableLayoutPanel6.TabIndex = 23
-        '
-        'RadioButton3
-        '
-        Me.RadioButton3.AutoSize = True
-        Me.RadioButton3.Location = New System.Drawing.Point(3, 49)
-        Me.RadioButton3.Name = "RadioButton3"
-        Me.RadioButton3.Size = New System.Drawing.Size(206, 17)
-        Me.RadioButton3.TabIndex = 2
-        Me.RadioButton3.TabStop = True
-        Me.RadioButton3.Text = "Имя компьютера (Псевдоним)"
-        Me.RadioButton3.UseVisualStyleBackColor = True
-        '
-        'RadioButton1
-        '
-        Me.RadioButton1.AutoSize = True
-        Me.RadioButton1.Location = New System.Drawing.Point(3, 3)
-        Me.RadioButton1.Name = "RadioButton1"
-        Me.RadioButton1.Size = New System.Drawing.Size(127, 17)
-        Me.RadioButton1.TabIndex = 0
-        Me.RadioButton1.TabStop = True
-        Me.RadioButton1.Text = "Имя компьютера"
-        Me.RadioButton1.UseVisualStyleBackColor = True
-        '
-        'RadioButton2
-        '
-        Me.RadioButton2.AutoSize = True
-        Me.RadioButton2.Location = New System.Drawing.Point(3, 26)
-        Me.RadioButton2.Name = "RadioButton2"
-        Me.RadioButton2.Size = New System.Drawing.Size(169, 17)
-        Me.RadioButton2.TabIndex = 1
-        Me.RadioButton2.TabStop = True
-        Me.RadioButton2.Text = "Псевдоним компьютера"
-        Me.RadioButton2.UseVisualStyleBackColor = True
-        '
         'GroupBox1
         '
         Me.GroupBox1.Controls.Add(Me.TableLayoutPanel4)
@@ -1324,101 +1263,6 @@ Partial Class frmSetup
         Me.ComboBox2.TabIndex = 27
         Me.ComboBox2.Text = "AIDA64 (Everest)"
         '
-        'GroupBox4
-        '
-        Me.TableLayoutPanel1.SetColumnSpan(Me.GroupBox4, 2)
-        Me.GroupBox4.Controls.Add(Me.chkSP)
-        Me.GroupBox4.Controls.Add(Me.chkNB)
-        Me.GroupBox4.Controls.Add(Me.chkRemVisible)
-        Me.GroupBox4.Controls.Add(Me.RadioButton11)
-        Me.GroupBox4.Controls.Add(Me.RadioButton10)
-        Me.GroupBox4.Controls.Add(Me.GroupBox3)
-        Me.GroupBox4.Controls.Add(Me.gbTree_o)
-        Me.GroupBox4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.GroupBox4.Location = New System.Drawing.Point(3, 307)
-        Me.GroupBox4.Name = "GroupBox4"
-        Me.TableLayoutPanel1.SetRowSpan(Me.GroupBox4, 4)
-        Me.GroupBox4.Size = New System.Drawing.Size(549, 167)
-        Me.GroupBox4.TabIndex = 28
-        Me.GroupBox4.TabStop = False
-        Me.GroupBox4.Text = "Дерево:"
-        '
-        'chkSP
-        '
-        Me.chkSP.AutoSize = True
-        Me.chkSP.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.chkSP.Location = New System.Drawing.Point(7, 112)
-        Me.chkSP.Name = "chkSP"
-        Me.chkSP.Size = New System.Drawing.Size(175, 17)
-        Me.chkSP.TabIndex = 4
-        Me.chkSP.Text = "Отмечать списанную технику"
-        Me.chkSP.UseVisualStyleBackColor = True
-        '
-        'chkNB
-        '
-        Me.chkNB.AutoSize = True
-        Me.chkNB.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.chkNB.Location = New System.Drawing.Point(7, 89)
-        Me.chkNB.Name = "chkNB"
-        Me.chkNB.Size = New System.Drawing.Size(192, 17)
-        Me.chkNB.TabIndex = 3
-        Me.chkNB.Text = "Отмечать технику не на балансе"
-        Me.chkNB.UseVisualStyleBackColor = True
-        '
-        'chkRemVisible
-        '
-        Me.chkRemVisible.AutoSize = True
-        Me.chkRemVisible.BackColor = System.Drawing.Color.Red
-        Me.chkRemVisible.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.chkRemVisible.Location = New System.Drawing.Point(7, 65)
-        Me.chkRemVisible.Name = "chkRemVisible"
-        Me.chkRemVisible.Size = New System.Drawing.Size(172, 17)
-        Me.chkRemVisible.TabIndex = 2
-        Me.chkRemVisible.Text = "Отмечать технику в ремонте"
-        Me.chkRemVisible.UseVisualStyleBackColor = False
-        '
-        'RadioButton11
-        '
-        Me.RadioButton11.AutoSize = True
-        Me.RadioButton11.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.RadioButton11.Location = New System.Drawing.Point(7, 43)
-        Me.RadioButton11.Name = "RadioButton11"
-        Me.RadioButton11.Size = New System.Drawing.Size(139, 17)
-        Me.RadioButton11.TabIndex = 1
-        Me.RadioButton11.Text = "Обновлять по запросу"
-        Me.RadioButton11.UseVisualStyleBackColor = True
-        '
-        'RadioButton10
-        '
-        Me.RadioButton10.AutoSize = True
-        Me.RadioButton10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.RadioButton10.Location = New System.Drawing.Point(7, 19)
-        Me.RadioButton10.Name = "RadioButton10"
-        Me.RadioButton10.Size = New System.Drawing.Size(221, 17)
-        Me.RadioButton10.TabIndex = 0
-        Me.RadioButton10.Text = "Обновлять после каждого сохранения"
-        Me.RadioButton10.UseVisualStyleBackColor = True
-        '
-        'GroupBox3
-        '
-        Me.GroupBox3.Controls.Add(Me.ComboBox1)
-        Me.GroupBox3.Location = New System.Drawing.Point(250, 112)
-        Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(177, 47)
-        Me.GroupBox3.TabIndex = 23
-        Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "Размер иконок в дереве"
-        '
-        'ComboBox1
-        '
-        Me.ComboBox1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Items.AddRange(New Object() {"24*24", "32*32"})
-        Me.ComboBox1.Location = New System.Drawing.Point(3, 16)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(171, 21)
-        Me.ComboBox1.TabIndex = 0
-        '
         'GroupBox2
         '
         Me.GroupBox2.Controls.Add(Me.TableLayoutPanel7)
@@ -1516,6 +1360,162 @@ Partial Class frmSetup
         Me.RadioButton5.Text = "Мониторы"
         Me.RadioButton5.UseVisualStyleBackColor = True
         '
+        'GroupBox4
+        '
+        Me.TableLayoutPanel1.SetColumnSpan(Me.GroupBox4, 2)
+        Me.GroupBox4.Controls.Add(Me.chkSP)
+        Me.GroupBox4.Controls.Add(Me.chkNB)
+        Me.GroupBox4.Controls.Add(Me.chkRemVisible)
+        Me.GroupBox4.Controls.Add(Me.RadioButton11)
+        Me.GroupBox4.Controls.Add(Me.RadioButton10)
+        Me.GroupBox4.Controls.Add(Me.GroupBox3)
+        Me.GroupBox4.Controls.Add(Me.gbTree_o)
+        Me.GroupBox4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.GroupBox4.Location = New System.Drawing.Point(3, 307)
+        Me.GroupBox4.Name = "GroupBox4"
+        Me.TableLayoutPanel1.SetRowSpan(Me.GroupBox4, 4)
+        Me.GroupBox4.Size = New System.Drawing.Size(549, 167)
+        Me.GroupBox4.TabIndex = 28
+        Me.GroupBox4.TabStop = False
+        Me.GroupBox4.Text = "Дерево:"
+        '
+        'chkSP
+        '
+        Me.chkSP.AutoSize = True
+        Me.chkSP.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.chkSP.Location = New System.Drawing.Point(7, 112)
+        Me.chkSP.Name = "chkSP"
+        Me.chkSP.Size = New System.Drawing.Size(175, 17)
+        Me.chkSP.TabIndex = 4
+        Me.chkSP.Text = "Отмечать списанную технику"
+        Me.chkSP.UseVisualStyleBackColor = True
+        '
+        'chkNB
+        '
+        Me.chkNB.AutoSize = True
+        Me.chkNB.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.chkNB.Location = New System.Drawing.Point(7, 89)
+        Me.chkNB.Name = "chkNB"
+        Me.chkNB.Size = New System.Drawing.Size(192, 17)
+        Me.chkNB.TabIndex = 3
+        Me.chkNB.Text = "Отмечать технику не на балансе"
+        Me.chkNB.UseVisualStyleBackColor = True
+        '
+        'chkRemVisible
+        '
+        Me.chkRemVisible.AutoSize = True
+        Me.chkRemVisible.BackColor = System.Drawing.Color.Olive
+        Me.chkRemVisible.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.chkRemVisible.Location = New System.Drawing.Point(7, 65)
+        Me.chkRemVisible.Name = "chkRemVisible"
+        Me.chkRemVisible.Size = New System.Drawing.Size(172, 17)
+        Me.chkRemVisible.TabIndex = 2
+        Me.chkRemVisible.Text = "Отмечать технику в ремонте"
+        Me.chkRemVisible.UseVisualStyleBackColor = False
+        '
+        'RadioButton11
+        '
+        Me.RadioButton11.AutoSize = True
+        Me.RadioButton11.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.RadioButton11.Location = New System.Drawing.Point(7, 43)
+        Me.RadioButton11.Name = "RadioButton11"
+        Me.RadioButton11.Size = New System.Drawing.Size(139, 17)
+        Me.RadioButton11.TabIndex = 1
+        Me.RadioButton11.Text = "Обновлять по запросу"
+        Me.RadioButton11.UseVisualStyleBackColor = True
+        '
+        'RadioButton10
+        '
+        Me.RadioButton10.AutoSize = True
+        Me.RadioButton10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.RadioButton10.Location = New System.Drawing.Point(7, 19)
+        Me.RadioButton10.Name = "RadioButton10"
+        Me.RadioButton10.Size = New System.Drawing.Size(221, 17)
+        Me.RadioButton10.TabIndex = 0
+        Me.RadioButton10.Text = "Обновлять после каждого сохранения"
+        Me.RadioButton10.UseVisualStyleBackColor = True
+        '
+        'GroupBox3
+        '
+        Me.GroupBox3.Controls.Add(Me.ComboBox1)
+        Me.GroupBox3.Location = New System.Drawing.Point(250, 112)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(177, 47)
+        Me.GroupBox3.TabIndex = 23
+        Me.GroupBox3.TabStop = False
+        Me.GroupBox3.Text = "Размер иконок в дереве"
+        '
+        'ComboBox1
+        '
+        Me.ComboBox1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Items.AddRange(New Object() {"24*24", "32*32"})
+        Me.ComboBox1.Location = New System.Drawing.Point(3, 16)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(171, 21)
+        Me.ComboBox1.TabIndex = 0
+        '
+        'gbTree_o
+        '
+        Me.gbTree_o.Controls.Add(Me.TableLayoutPanel6)
+        Me.gbTree_o.Location = New System.Drawing.Point(250, 16)
+        Me.gbTree_o.Name = "gbTree_o"
+        Me.gbTree_o.Size = New System.Drawing.Size(293, 90)
+        Me.gbTree_o.TabIndex = 17
+        Me.gbTree_o.TabStop = False
+        Me.gbTree_o.Text = "Отображение в дереве"
+        '
+        'TableLayoutPanel6
+        '
+        Me.TableLayoutPanel6.AutoSize = True
+        Me.TableLayoutPanel6.ColumnCount = 1
+        Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel6.Controls.Add(Me.RadioButton3, 0, 2)
+        Me.TableLayoutPanel6.Controls.Add(Me.RadioButton1, 0, 0)
+        Me.TableLayoutPanel6.Controls.Add(Me.RadioButton2, 0, 1)
+        Me.TableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel6.Location = New System.Drawing.Point(3, 16)
+        Me.TableLayoutPanel6.Name = "TableLayoutPanel6"
+        Me.TableLayoutPanel6.RowCount = 3
+        Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel6.Size = New System.Drawing.Size(287, 71)
+        Me.TableLayoutPanel6.TabIndex = 23
+        '
+        'RadioButton3
+        '
+        Me.RadioButton3.AutoSize = True
+        Me.RadioButton3.Location = New System.Drawing.Point(3, 49)
+        Me.RadioButton3.Name = "RadioButton3"
+        Me.RadioButton3.Size = New System.Drawing.Size(206, 17)
+        Me.RadioButton3.TabIndex = 2
+        Me.RadioButton3.TabStop = True
+        Me.RadioButton3.Text = "Имя компьютера (Псевдоним)"
+        Me.RadioButton3.UseVisualStyleBackColor = True
+        '
+        'RadioButton1
+        '
+        Me.RadioButton1.AutoSize = True
+        Me.RadioButton1.Location = New System.Drawing.Point(3, 3)
+        Me.RadioButton1.Name = "RadioButton1"
+        Me.RadioButton1.Size = New System.Drawing.Size(127, 17)
+        Me.RadioButton1.TabIndex = 0
+        Me.RadioButton1.TabStop = True
+        Me.RadioButton1.Text = "Имя компьютера"
+        Me.RadioButton1.UseVisualStyleBackColor = True
+        '
+        'RadioButton2
+        '
+        Me.RadioButton2.AutoSize = True
+        Me.RadioButton2.Location = New System.Drawing.Point(3, 26)
+        Me.RadioButton2.Name = "RadioButton2"
+        Me.RadioButton2.Size = New System.Drawing.Size(169, 17)
+        Me.RadioButton2.TabIndex = 1
+        Me.RadioButton2.TabStop = True
+        Me.RadioButton2.Text = "Псевдоним компьютера"
+        Me.RadioButton2.UseVisualStyleBackColor = True
+        '
         'SStab1
         '
         Me.SStab1.Controls.Add(Me.TabPage1)
@@ -1560,22 +1560,22 @@ Partial Class frmSetup
         Me.gbSetup.ResumeLayout(False)
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.TableLayoutPanel1.PerformLayout()
-        Me.gbTree_o.ResumeLayout(False)
-        Me.gbTree_o.PerformLayout()
-        Me.TableLayoutPanel6.ResumeLayout(False)
-        Me.TableLayoutPanel6.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
         Me.TableLayoutPanel4.ResumeLayout(False)
         Me.TableLayoutPanel4.PerformLayout()
         Me.gbMyBlank.ResumeLayout(False)
         Me.TableLayoutPanel5.ResumeLayout(False)
         Me.TableLayoutPanel5.PerformLayout()
-        Me.GroupBox4.ResumeLayout(False)
-        Me.GroupBox4.PerformLayout()
-        Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
         Me.TableLayoutPanel7.ResumeLayout(False)
         Me.TableLayoutPanel7.PerformLayout()
+        Me.GroupBox4.ResumeLayout(False)
+        Me.GroupBox4.PerformLayout()
+        Me.GroupBox3.ResumeLayout(False)
+        Me.gbTree_o.ResumeLayout(False)
+        Me.gbTree_o.PerformLayout()
+        Me.TableLayoutPanel6.ResumeLayout(False)
+        Me.TableLayoutPanel6.PerformLayout()
         Me.SStab1.ResumeLayout(False)
         Me.ResumeLayout(False)
 

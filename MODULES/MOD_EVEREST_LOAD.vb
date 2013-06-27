@@ -2153,17 +2153,6 @@ Err_handler:
 
         'esq *****************************
 
-        Dim FSO As Object
-        Dim tINI As String
-        Dim l As Integer
-
-        FSO = CreateObject("Scripting.FileSystemObject")
-        l = Len(EverestFilePatch)
-        tINI = Left(EverestFilePatch, l - 4) & "-soft.ini"
-        If FSO.FileExists(tINI) Then
-            EverestFilePatch = tINI
-        End If
-
         Dim EverAll_PO As String
         Dim everFile As New IniFile(EverestFilePatch)
         EverAll_PO = "/"
@@ -2249,14 +2238,16 @@ Err_handler:
                     End If
 
                 Else
-                    'esq Exit Sub 
+                    'esq *****************************
+                    'Exit Sub 
+                    'esq *****************************
                 End If
             Else
                 Dim zagu As String
                 zagu = InStr(uname, "для Windows XP")
                 If zagu = "0" Then
 
-                    If Not (RSExistsSoft(sSID, uname)) Then 'esq 
+                    If Not (RSExistsSoft(sSID, uname)) Then 'esq frmComputers.sCOUNT
                         'If SERT$ = 0 Then
                         If uname2 = "<N/A>" Then uname2 = Date.Today
                         If Len(uname2) = 0 Then uname2 = Date.Today

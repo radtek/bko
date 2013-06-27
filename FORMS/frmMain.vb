@@ -1241,8 +1241,8 @@ err_:
     '#################################################################################################
     Private Sub ФотоаппаратToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ФотоаппаратToolStripMenuItem.Click
         frmComputers.txtMonDum.Visible = False
-        frmComputers.TableLayoutPanel7.SetColumn(frmComputers.txtOTHSN, 1) 'esq 130622 
-        frmComputers.TableLayoutPanel7.SetColumnSpan(frmComputers.txtOTHSN, 2) 'esq 130622
+        'frmComputers.txtOTHSN.Left = "249" 'esq 130612"249"
+        'frmComputers.txtOTHSN.Width = "214" 'esq 130612 "214"
 
         FillComboNET(frmComputers.cmbOTH, "name", "spr_photo", "", False, True)
         frmComputers.lblTipOther.Visible = False
@@ -1274,8 +1274,8 @@ err_:
 
     Private Sub ФаксToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ФаксToolStripMenuItem.Click
         frmComputers.txtMonDum.Visible = False
-        frmComputers.TableLayoutPanel7.SetColumn(frmComputers.txtOTHSN, 1) 'esq 130622
-        frmComputers.TableLayoutPanel7.SetColumnSpan(frmComputers.txtOTHSN, 2) 'esq 130622
+        'frmComputers.txtOTHSN.Left = "331" 'esq 130612 "249"
+        'frmComputers.txtOTHSN.Width = "284" 'esq 130612"214"
 
         FillComboNET(frmComputers.cmbOTH, "name", "spr_fax", "", False, True)
         frmComputers.lblTipOther.Visible = False
@@ -1307,8 +1307,8 @@ err_:
 
     Private Sub ТелефонToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ТелефонToolStripMenuItem.Click
         frmComputers.txtMonDum.Visible = False
-        frmComputers.TableLayoutPanel7.SetColumn(frmComputers.txtOTHSN, 1) 'esq 130622
-        frmComputers.TableLayoutPanel7.SetColumnSpan(frmComputers.txtOTHSN, 2) 'esq 130622
+        'frmComputers.txtOTHSN.Left = "249" 'esq 130612"249"
+        'frmComputers.txtOTHSN.Width = "214" 'esq 130612 "214"
 
         Call ClearForm(frmComputers)
 
@@ -1341,8 +1341,8 @@ err_:
 
     Private Sub ДисководZIPToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ДисководZIPToolStripMenuItem.Click
         frmComputers.txtMonDum.Visible = False
-        frmComputers.TableLayoutPanel7.SetColumn(frmComputers.txtOTHSN, 1) 'esq 130622
-        frmComputers.TableLayoutPanel7.SetColumnSpan(frmComputers.txtOTHSN, 2) 'esq 130622
+        'frmComputers.txtOTHSN.Left = "249" 'esq 130612"249"
+        'frmComputers.txtOTHSN.Width = "214" 'esq 130612 "214"
 
         Call ClearForm(frmComputers)
 
@@ -1374,8 +1374,8 @@ err_:
 
     Private Sub СканерToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles СканерToolStripMenuItem.Click
         frmComputers.txtMonDum.Visible = False
-        frmComputers.TableLayoutPanel7.SetColumn(frmComputers.txtOTHSN, 1) 'esq 130622
-        frmComputers.TableLayoutPanel7.SetColumnSpan(frmComputers.txtOTHSN, 2) 'esq 130622
+        'frmComputers.txtOTHSN.Left = "249" 'esq 130612"249"
+        'frmComputers.txtOTHSN.Width = "214" 'esq 130612 "214"
 
         Call ClearForm(frmComputers)
 
@@ -1471,8 +1471,8 @@ err_:
         frmComputers.cmbOTHOffice.Text = sOffice
 
         frmComputers.txtMonDum.Visible = True
-        frmComputers.TableLayoutPanel7.SetColumn(frmComputers.txtOTHSN, 2) 'esq 130622
-        frmComputers.TableLayoutPanel7.SetColumnSpan(frmComputers.txtOTHSN, 1) 'esq 130622
+        'frmComputers.txtOTHSN.Left = "471" 'esq 130612"355"
+        'frmComputers.txtOTHSN.Width = "146" 'esq 130612"108"
 
         frmComputers.lblTipOther.Visible = False
         frmComputers.cmbOTHConnect.Visible = False
@@ -1776,6 +1776,7 @@ err_:
     Private Sub SaveInfTehButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SaveInfTehButton.Click
 
         Call SaveInfTeh()
+        'RefFilTree(frmComputers.lstGroups) 'esq 130612
 
     End Sub
 
@@ -1784,13 +1785,6 @@ err_:
         On Error Resume Next
 
         Dim LNGIniFile As New IniFile(sLANGPATH)
-
-        If frmComputers.EDT = True Then
-            Call SaveActivityToLogDB(LNGIniFile.GetString("frmMain", "MSG1", "Сохранение техники") & " " & frmComputers.lstGroups.SelectedNode.Text)
-
-        Else
-            Call SaveActivityToLogDB(LNGIniFile.GetString("frmMain", "MSG2", "Создание новой техники"))
-        End If
 
         If Len(TipTehn) <> 0 Then
 
@@ -1823,12 +1817,16 @@ err_:
         Exit Sub
 
 ADD:
-        If frmComputers.EDT = True Then
+        Select Case frmComputers.EDT
 
-            PreSaveOtv(sBranch, sDepartment, sOffice)
-            PreSaveName(frmComputers.sCOUNT)
+            Case True
+                PreSaveOtv(sBranch, sDepartment, sOffice)
+                PreSaveName(frmComputers.sCOUNT)
 
-        End If
+            Case False
+
+        End Select
+
 
         Dim langfile As New IniFile(sLANGPATH)
 
@@ -1837,207 +1835,188 @@ ADD:
 
             Case "PC"
 
-                If frmComputers.EDT = True Then
+                Select Case frmComputers.EDT
 
-                    Call Save_T(frmComputers.sCOUNT)
+                    Case True
+                        Call Save_T(frmComputers.sCOUNT)
+                    Case False
+                        Me.Invoke(New MethodInvoker(AddressOf Save_T))
+                End Select
 
-                Else
-
-                    'Call Save_T()
-                    Me.Invoke(New MethodInvoker(AddressOf Save_T))
-
-                End If
 
             Case "Printer"
                 'Save_P
-                If frmComputers.EDT = True Then
+                Select Case frmComputers.EDT
 
-                    Call Save_P(frmComputers.sCOUNT)
+                    Case True
+                        Call Save_P(frmComputers.sCOUNT)
+                    Case False
+                        Me.Invoke(New MethodInvoker(AddressOf Save_P))
+                End Select
 
-                Else
-
-                    'Call Save_P()
-                    Me.Invoke(New MethodInvoker(AddressOf Save_P))
-                End If
             Case "MFU"
-                If frmComputers.EDT = True Then
+                Select Case frmComputers.EDT
 
-                    Call Save_P(frmComputers.sCOUNT)
-
-                Else
-
-                    '  Call Save_P()
-                    Me.Invoke(New MethodInvoker(AddressOf Save_P))
-                End If
+                    Case True
+                        Call Save_P(frmComputers.sCOUNT)
+                    Case False
+                        Me.Invoke(New MethodInvoker(AddressOf Save_P))
+                End Select
 
             Case "KOpir"
-                If frmComputers.EDT = True Then
+                Select Case frmComputers.EDT
 
-                    Call Save_P(frmComputers.sCOUNT)
-
-                Else
-
-                    ' Call Save_P()
-                    Me.Invoke(New MethodInvoker(AddressOf Save_P))
-                End If
+                    Case True
+                        Call Save_P(frmComputers.sCOUNT)
+                    Case False
+                        Me.Invoke(New MethodInvoker(AddressOf Save_P))
+                End Select
 
             Case "OT"
 
-                If frmComputers.EDT = True Then
+                Select Case frmComputers.EDT
 
-                    Call Save_OT(frmComputers.sCOUNT)
+                    Case True
+                        Call Save_OT(frmComputers.sCOUNT)
+                    Case False
+                        Me.Invoke(New MethodInvoker(AddressOf Save_OT))
+                End Select
 
-                Else
-
-                    ' Call Save_OT()
-                    Me.Invoke(New MethodInvoker(AddressOf Save_OT))
-                End If
 
             Case "CNT"
 
-                If frmComputers.EDT = True Then
+                Select Case frmComputers.EDT
 
-                    Call Save_OT(frmComputers.sCOUNT)
-
-                Else
-
-                    ' Call Save_OT()
-                    Me.Invoke(New MethodInvoker(AddressOf Save_OT))
-                End If
+                    Case True
+                        Call Save_OT(frmComputers.sCOUNT)
+                    Case False
+                        Me.Invoke(New MethodInvoker(AddressOf Save_OT))
+                End Select
 
 
             Case "PHOTO"
 
-                If frmComputers.EDT = True Then
+                Select Case frmComputers.EDT
 
-                    Call Save_OT(frmComputers.sCOUNT)
-
-                Else
-
-                    ' Call Save_OT()
-                    Me.Invoke(New MethodInvoker(AddressOf Save_OT))
-                End If
+                    Case True
+                        Call Save_OT(frmComputers.sCOUNT)
+                    Case False
+                        Me.Invoke(New MethodInvoker(AddressOf Save_OT))
+                End Select
 
             Case "FAX"
 
-                If frmComputers.EDT = True Then
+                Select Case frmComputers.EDT
 
-                    Call Save_OT(frmComputers.sCOUNT)
-
-                Else
-
-                    ' Call Save_OT()
-                    Me.Invoke(New MethodInvoker(AddressOf Save_OT))
-                End If
+                    Case True
+                        Call Save_OT(frmComputers.sCOUNT)
+                    Case False
+                        Me.Invoke(New MethodInvoker(AddressOf Save_OT))
+                End Select
 
             Case "PHONE"
 
-                If frmComputers.EDT = True Then
+                Select Case frmComputers.EDT
 
-                    Call Save_OT(frmComputers.sCOUNT)
-
-                Else
-
-                    'Call Save_OT()
-                    Me.Invoke(New MethodInvoker(AddressOf Save_OT))
-                End If
+                    Case True
+                        Call Save_OT(frmComputers.sCOUNT)
+                    Case False
+                        Me.Invoke(New MethodInvoker(AddressOf Save_OT))
+                End Select
 
             Case "ZIP"
 
-                If frmComputers.EDT = True Then
+                Select Case frmComputers.EDT
 
-                    Call Save_OT(frmComputers.sCOUNT)
-
-                Else
-
-                    'Call Save_OT()
-                    Me.Invoke(New MethodInvoker(AddressOf Save_OT))
-                End If
+                    Case True
+                        Call Save_OT(frmComputers.sCOUNT)
+                    Case False
+                        Me.Invoke(New MethodInvoker(AddressOf Save_OT))
+                End Select
 
             Case "SCANER"
-                If frmComputers.EDT = True Then
+                Select Case frmComputers.EDT
 
-                    Call Save_OT(frmComputers.sCOUNT)
-
-                Else
-
-                    ' Call Save_OT()
-                    Me.Invoke(New MethodInvoker(AddressOf Save_OT))
-                End If
+                    Case True
+                        Call Save_OT(frmComputers.sCOUNT)
+                    Case False
+                        Me.Invoke(New MethodInvoker(AddressOf Save_OT))
+                End Select
 
             Case "NET"
 
-                If frmComputers.EDT = True Then
+                Select Case frmComputers.EDT
 
-                    Call Save_NET(frmComputers.sCOUNT)
-
-                Else
-
-                    ' Call Save_NET()
-                    Me.Invoke(New MethodInvoker(AddressOf Save_NET))
-                End If
-
+                    Case True
+                        Call Save_NET(frmComputers.sCOUNT)
+                    Case False
+                        Me.Invoke(New MethodInvoker(AddressOf Save_NET))
+                End Select
 
             Case "MONITOR"
 
-                If frmComputers.EDT = True Then
+                Select Case frmComputers.EDT
 
-                    Call SAVE_MON(frmComputers.sCOUNT)
-
-                Else
-
-                    ' Call SAVE_MON()
-                    Me.Invoke(New MethodInvoker(AddressOf SAVE_MON))
-                End If
+                    Case True
+                        Call Save_OT(frmComputers.sCOUNT)
+                    Case False
+                        Me.Invoke(New MethodInvoker(AddressOf Save_OT))
+                End Select
 
                 '--------------VIP_Graff Добавление новой перефирии Начало-----------------
             Case "USB"
-                If frmComputers.EDT = True Then
-                    Call Save_OT(frmComputers.sCOUNT)
-                Else
-                    ' Call Save_OT()
-                    Me.Invoke(New MethodInvoker(AddressOf Save_OT))
-                End If
+                Select Case frmComputers.EDT
+
+                    Case True
+                        Call Save_OT(frmComputers.sCOUNT)
+                    Case False
+                        Me.Invoke(New MethodInvoker(AddressOf Save_OT))
+                End Select
 
             Case "SOUND"
-                If frmComputers.EDT = True Then
-                    Call Save_OT(frmComputers.sCOUNT)
-                Else
-                    ' Call Save_OT()
-                    Me.Invoke(New MethodInvoker(AddressOf Save_OT))
-                End If
+                Select Case frmComputers.EDT
+
+                    Case True
+                        Call Save_OT(frmComputers.sCOUNT)
+                    Case False
+                        Me.Invoke(New MethodInvoker(AddressOf Save_OT))
+                End Select
 
             Case "IBP"
-                If frmComputers.EDT = True Then
-                    Call Save_OT(frmComputers.sCOUNT)
-                Else
-                    ' Call Save_OT()
-                    Me.Invoke(New MethodInvoker(AddressOf Save_OT))
-                End If
+                Select Case frmComputers.EDT
+
+                    Case True
+                        Call Save_OT(frmComputers.sCOUNT)
+                    Case False
+                        Me.Invoke(New MethodInvoker(AddressOf Save_OT))
+                End Select
 
             Case "FS"
-                If frmComputers.EDT = True Then
-                    Call Save_OT(frmComputers.sCOUNT)
-                Else
-                    ' Call Save_OT()
-                    Me.Invoke(New MethodInvoker(AddressOf Save_OT))
-                End If
+                Select Case frmComputers.EDT
+
+                    Case True
+                        Call Save_OT(frmComputers.sCOUNT)
+                    Case False
+                        Me.Invoke(New MethodInvoker(AddressOf Save_OT))
+                End Select
 
             Case "KEYB"
-                If frmComputers.EDT = True Then
-                    Call Save_OT(frmComputers.sCOUNT)
-                Else
-                    ' Call Save_OT()
-                    Me.Invoke(New MethodInvoker(AddressOf Save_OT))
-                End If
+                Select Case frmComputers.EDT
+
+                    Case True
+                        Call Save_OT(frmComputers.sCOUNT)
+                    Case False
+                        Me.Invoke(New MethodInvoker(AddressOf Save_OT))
+                End Select
 
             Case "MOUSE"
-                If frmComputers.EDT = True Then
-                    Call Save_OT(frmComputers.sCOUNT)
-                Else
-                    ' Call Save_OT()
-                    Me.Invoke(New MethodInvoker(AddressOf Save_OT))
-                End If
+                Select Case frmComputers.EDT
+
+                    Case True
+                        Call Save_OT(frmComputers.sCOUNT)
+                    Case False
+                        Me.Invoke(New MethodInvoker(AddressOf Save_OT))
+                End Select
 
                 '--------------VIP_Graff Добавление новой перефирии Конец------------------
 
@@ -2047,16 +2026,12 @@ ADD:
 
         On Error Resume Next
 
-        If frmComputers.EDT = True Then
-
-            Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG51", "Редактирование техники") & " " & frmComputers.lstGroups.SelectedNode.Text)
-
-        Else
-
-            Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG50", "Добавление новой техники в") & " /" & sBranch & "/" & sDepartment & "/" & sOffice)
-
-        End If
-
+        Select Case frmComputers.EDT
+            Case True
+                Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG51", "Редактирование техники") & " " & frmComputers.lstGroups.SelectedNode.Text)
+            Case False
+                Call SaveActivityToLogDB(langfile.GetString("frmComputers", "MSG50", "Добавление новой техники в") & " /" & sBranch & "/" & sDepartment & "/" & sOffice)
+        End Select
 
         frmComputers.Invoke(New MethodInvoker(AddressOf frmComputers.STAT_INF))
 
@@ -2116,8 +2091,8 @@ ADD:
 
     Private Sub СетевыеФильтрыToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles СетевыеФильтрыToolStripMenuItem.Click
         frmComputers.txtMonDum.Visible = False
-        frmComputers.TableLayoutPanel7.SetColumn(frmComputers.txtOTHSN, 1) 'esq 130622
-        frmComputers.TableLayoutPanel7.SetColumnSpan(frmComputers.txtOTHSN, 2) 'esq 130622
+        'frmComputers.txtOTHSN.Left = "249" 'esq 130612"249"
+        'frmComputers.txtOTHSN.Width = "214" 'esq 130612 "214"
 
         Call ClearForm(frmComputers)
         FillComboNET(frmComputers.cmbOTH, "name", "SPR_FS", "", False, True)
@@ -2150,8 +2125,8 @@ ADD:
 
     Private Sub БесперебойникиToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles БесперебойникиToolStripMenuItem.Click
         frmComputers.txtMonDum.Visible = False
-        frmComputers.TableLayoutPanel7.SetColumn(frmComputers.txtOTHSN, 1) 'esq 130622
-        frmComputers.TableLayoutPanel7.SetColumnSpan(frmComputers.txtOTHSN, 2) 'esq 130622
+        'frmComputers.txtOTHSN.Left = "249" 'esq 130612"249"
+        'frmComputers.txtOTHSN.Width = "214" 'esq 130612 "214"
 
         Call ClearForm(frmComputers)
 
@@ -2185,8 +2160,8 @@ ADD:
 
     Private Sub АккустическиеСистемыToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles АккустическиеСистемыToolStripMenuItem.Click
         frmComputers.txtMonDum.Visible = False
-        frmComputers.TableLayoutPanel7.SetColumn(frmComputers.txtOTHSN, 1) 'esq 130622
-        frmComputers.TableLayoutPanel7.SetColumnSpan(frmComputers.txtOTHSN, 2) 'esq 130622
+        'frmComputers.txtOTHSN.Left = "249" 'esq 130612"249"
+        'frmComputers.txtOTHSN.Width = "214" 'esq 130612 "214"
 
         Call ClearForm(frmComputers)
 
@@ -2221,8 +2196,8 @@ ADD:
 
     Private Sub USBУстройстваToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles USBУстройстваToolStripMenuItem.Click
         frmComputers.txtMonDum.Visible = False
-        frmComputers.TableLayoutPanel7.SetColumn(frmComputers.txtOTHSN, 1) 'esq 130622
-        frmComputers.TableLayoutPanel7.SetColumnSpan(frmComputers.txtOTHSN, 2) 'esq 130622
+        'frmComputers.txtOTHSN.Left = "249" 'esq 130612"249"
+        'frmComputers.txtOTHSN.Width = "214" 'esq 130612 "214"
 
         Call ClearForm(frmComputers)
 
@@ -2257,8 +2232,8 @@ ADD:
 
     Private Sub КлавиатураToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles КлавиатураToolStripMenuItem.Click
         frmComputers.txtMonDum.Visible = False
-        frmComputers.TableLayoutPanel7.SetColumn(frmComputers.txtOTHSN, 1) 'esq 130622
-        frmComputers.TableLayoutPanel7.SetColumnSpan(frmComputers.txtOTHSN, 2) 'esq 130622
+        'frmComputers.txtOTHSN.Left = "249" 'esq 130612"249"
+        'frmComputers.txtOTHSN.Width = "214" 'esq 130612 "214"
 
         Call ClearForm(frmComputers)
 
@@ -2293,8 +2268,8 @@ ADD:
 
     Private Sub МышьToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles МышьToolStripMenuItem.Click
         frmComputers.txtMonDum.Visible = False
-        frmComputers.TableLayoutPanel7.SetColumn(frmComputers.txtOTHSN, 1) 'esq 130622
-        frmComputers.TableLayoutPanel7.SetColumnSpan(frmComputers.txtOTHSN, 2) 'esq 130622
+        'frmComputers.txtOTHSN.Left = "249" 'esq 130612"249"
+        'frmComputers.txtOTHSN.Width = "214" 'esq 130612 "214"
 
         Call ClearForm(frmComputers)
 

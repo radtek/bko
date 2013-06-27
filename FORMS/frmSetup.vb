@@ -1468,9 +1468,9 @@ err_:
 
     Private Sub RadioButton10_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton10.CheckedChanged
 
-
         Dim objIniFile As New IniFile(PrPath & "base.ini")
         objIniFile.WriteString("General", "TREE_UPDATE", "0")
+        TREE_UPDATE = 0
 
     End Sub
 
@@ -1478,6 +1478,7 @@ err_:
 
          Dim objIniFile As New IniFile(PrPath & "base.ini")
         objIniFile.WriteString("General", "TREE_UPDATE", "1")
+        TREE_UPDATE = 1
 
     End Sub
 

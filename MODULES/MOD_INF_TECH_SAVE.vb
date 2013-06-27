@@ -5,6 +5,7 @@
     Public MRZD As Boolean = False
     Public sNetName As Boolean = False
 
+
     Public Sub PreSaveOtv(ByVal sFIALIAL As String, ByVal sOTDEL As String, ByVal sKABN As String)
 
         Dim sSQL As String
@@ -179,8 +180,6 @@
 
         End Select
 
-        PRESAVE_TREE(frmComputers.cmbOTHFil, frmComputers.cmbOTHDepart, frmComputers.cmbOTHOffice)
-
         Dim sSQL As String
 
         Select Case frmComputers.EDT
@@ -323,7 +322,17 @@ sAR:
         frmComputers.cmbOTH.BackColor = frmComputers.cmbOTH.BackColor
         frmComputers.cmbOTHFil.BackColor = frmComputers.cmbOTHFil.BackColor
 
-        Call UpdateTree(frmComputers.cmbOTH.Text, TipTehn, frmComputers.sCOUNT, frmComputers.cmbOTHFil.Text, frmComputers.cmbOTHDepart.Text, frmComputers.cmbOTHOffice.Text)
+        Dim tmpName, tmpFil, tmpDep, tmpOff, tmpID, tmpTip As String
+        tmpName = frmComputers.cmbOTH.Text
+        tmpFil = frmComputers.cmbOTHFil.Text
+        tmpDep = frmComputers.cmbOTHDepart.Text
+        tmpOff = frmComputers.cmbOTHOffice.Text
+        tmpID = frmComputers.sCOUNT
+        tmpTip = TipTehn
+
+        PRESAVE_TREE(frmComputers.cmbOTHFil, frmComputers.cmbOTHDepart, frmComputers.cmbOTHOffice)
+
+        Call UpdateTree(tmpName, tmpTip, tmpID, tmpFil, tmpDep, tmpOff)
 
         Exit Sub
 Err_:
@@ -366,8 +375,6 @@ Err_:
                 End Select
 
         End Select
-
-        PRESAVE_TREE(frmComputers.cmbOTHFil, frmComputers.cmbOTHDepart, frmComputers.cmbOTHOffice)
 
         Dim sSQL As String
 
@@ -590,7 +597,17 @@ sAR:
         frmComputers.cmbOTH.BackColor = frmComputers.cmbOTH.BackColor
         frmComputers.cmbOTHFil.BackColor = frmComputers.cmbOTHFil.BackColor
 
-        Call UpdateTree(frmComputers.cmbOTH.Text, TipTehn, frmComputers.sCOUNT, frmComputers.cmbOTHFil.Text, frmComputers.cmbOTHDepart.Text, frmComputers.cmbOTHOffice.Text)
+        Dim tmpName, tmpFil, tmpDep, tmpOff, tmpID, tmpTip As String
+        tmpName = frmComputers.cmbOTH.Text
+        tmpFil = frmComputers.cmbOTHFil.Text
+        tmpDep = frmComputers.cmbOTHDepart.Text
+        tmpOff = frmComputers.cmbOTHOffice.Text
+        tmpID = frmComputers.sCOUNT
+        tmpTip = TipTehn
+
+        PRESAVE_TREE(frmComputers.cmbOTHFil, frmComputers.cmbOTHDepart, frmComputers.cmbOTHOffice)
+
+        Call UpdateTree(tmpName, tmpTip, tmpID, tmpFil, tmpDep, tmpOff)
 
 
         Exit Sub
@@ -613,9 +630,6 @@ Err_:
             Exit Sub
 
         End If
-
-        PRESAVE_TREE(frmComputers.cmbBranch, frmComputers.cmbDepartment, frmComputers.cmbOffice)
-
 
         new_prov = False
 
@@ -650,7 +664,6 @@ Err_:
                 sSQL = "SELECT * FROM kompy WHERE id =" & sSID
 
         End Select
-
 
         Select Case frmComputers.EDT
 
@@ -688,7 +701,6 @@ Err_:
 
                                             Case 1
 
-                                                '  If frmComputers.EDT = False Then RefFilTree(frmComputers.lstGroups)
                                                 If sNetName = True Then frmComputers.lstGroups.SelectedNode.Text = frmComputers.cmbOTH.Text
                                                 If frmComputers.EDT = True Then frmComputers.LOAD_LIST()
 
@@ -853,7 +865,6 @@ sAR:
             .Fields("SVGA_OB_RAM").Value = frmComputers.txtSVGAr1.Text
             .Fields("SVGA_SN").Value = frmComputers.txtSVGAs1.Text
             .Fields("SVGA_PROIZV").Value = frmComputers.PROizV14.Text
-
 
             .Fields("SVGA2_NAME").Value = frmComputers.cmbSVGA2.Text
             .Fields("SVGA2_OB_RAM").Value = frmComputers.txtSVGAr2.Text
@@ -1116,8 +1127,17 @@ sAR:
                 frmComputers.cmbBranch.BackColor = frmComputers.txtSBSN.BackColor
 
                 'Если использовали драг-н-дроп то ничего не делаем
+                Dim tmpName, tmpFil, tmpDep, tmpOff, tmpID As String
+                tmpName = frmComputers.txtSNAME.Text
+                tmpFil = frmComputers.cmbBranch.Text
+                tmpDep = frmComputers.cmbDepartment.Text
+                tmpOff = frmComputers.cmbOffice.Text
+                tmpID = frmComputers.sCOUNT
 
-                Call UpdateTree(frmComputers.txtSNAME.Text, TipTehn, frmComputers.sCOUNT, frmComputers.cmbBranch.Text, frmComputers.cmbDepartment.Text, frmComputers.cmbOffice.Text)
+                PRESAVE_TREE(frmComputers.cmbBranch, frmComputers.cmbDepartment, frmComputers.cmbOffice)
+
+                Call UpdateTree(tmpName, "PC", tmpID, tmpFil, tmpDep, tmpOff)
+
         End Select
 
         Exit Sub
@@ -1156,20 +1176,21 @@ err_:
 
         Dim rsSoft As Recordset
 
-        rsSoft = New Recordset
-        rsSoft.Open("SELECT count(*) as t_n FROM SOFT_INSTALL where id_comp=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
-                    LockTypeEnum.adLockOptimistic)
+        'rsSoft = New Recordset
+        'rsSoft.Open("SELECT count(*) as t_n FROM SOFT_INSTALL where id_comp=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
+        '            LockTypeEnum.adLockOptimistic)
 
-        With rsSoft
+        'With rsSoft
 
-            A1 = .Fields("t_n").Value
+        '    A1 = .Fields("t_n").Value
 
-        End With
-        rsSoft.Close()
-        rsSoft = Nothing
+        'End With
+        'rsSoft.Close()
+        'rsSoft = Nothing
 
-        A1 = 1 'esq 130622 нумерация 1++
+        'A1 = lstV.Items.Count
 
+        A1 = 1 'esq 130622 нумерация 1+
 
         For intj = 0 To lstV.Items.Count - 1
 
@@ -1324,7 +1345,6 @@ err_:
 
         End Select
 
-
         Dim sSQL As String
 
         Select Case frmComputers.EDT
@@ -1370,10 +1390,6 @@ err_:
         If Not (RSExists("otv", "name", Trim(frmComputers.cmbPRNotv.Text))) Then
             AddOnePar(frmComputers.cmbPRNotv.Text, "NAME", "SPR_OTV", frmComputers.cmbPRNotv)
         End If
-
-
-        PRESAVE_TREE(frmComputers.cmbPRNFil, frmComputers.cmbPRNDepart, frmComputers.cmbPRNOffice)
-
 
         Dim rs As Recordset
         Dim unaPCL As String
@@ -1492,8 +1508,17 @@ sAR:
         frmComputers.cmbPRN.BackColor = frmComputers.cmbPRN.BackColor
         frmComputers.cmbPRNFil.BackColor = frmComputers.cmbPRNFil.BackColor
 
-        Call UpdateTree(frmComputers.cmbPRN.Text, TipTehn, frmComputers.sCOUNT, frmComputers.cmbPRNFil.Text, frmComputers.cmbPRNDepart.Text, frmComputers.cmbPRNOffice.Text)
+        Dim tmpName, tmpFil, tmpDep, tmpOff, tmpID, tmpTip As String
+        tmpName = frmComputers.cmbPRN.Text
+        tmpFil = frmComputers.cmbPRNFil.Text
+        tmpDep = frmComputers.cmbPRNDepart.Text
+        tmpOff = frmComputers.cmbPRNOffice.Text
+        tmpID = frmComputers.sCOUNT
+        tmpTip = TipTehn
 
+        PRESAVE_TREE(frmComputers.cmbPRNFil, frmComputers.cmbPRNDepart, frmComputers.cmbPRNOffice)
+
+        Call UpdateTree(tmpName, tmpTip, tmpID, tmpFil, tmpDep, tmpOff)
 
         Exit Sub
 Err_:
@@ -1587,8 +1612,6 @@ sAR:
             AddFOwPar(frmComputers.cmbDevNet.Text, frmComputers.cmbNetDev.Text, frmComputers.txtNetPort.Text,
                       frmComputers.PROiZV40.Text, "SPR_DEV_NET", frmComputers.cmbCPU2)
         End If
-
-        PRESAVE_TREE(frmComputers.cmbNETBranch, frmComputers.cmbNetDepart, frmComputers.cmbNETOffice)
 
         rs = New Recordset
         rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -1690,7 +1713,17 @@ sAR:
         frmComputers.cmbDevNet.BackColor = frmComputers.txtSBSN.BackColor
         frmComputers.cmbNETBranch.BackColor = frmComputers.txtSBSN.BackColor
 
-        Call UpdateTree(frmComputers.cmbDevNet.Text, TipTehn, frmComputers.sCOUNT, frmComputers.cmbNETBranch.Text, frmComputers.cmbNetDepart.Text, frmComputers.cmbNETOffice.Text)
+        Dim tmpName, tmpFil, tmpDep, tmpOff, tmpID, tmpTip As String
+        tmpName = frmComputers.cmbDevNet.Text
+        tmpFil = frmComputers.cmbNETBranch.Text
+        tmpDep = frmComputers.cmbNetDepart.Text
+        tmpOff = frmComputers.cmbNETOffice.Text
+        tmpID = frmComputers.sCOUNT
+        tmpTip = TipTehn
+
+        PRESAVE_TREE(frmComputers.cmbNETBranch, frmComputers.cmbNetDepart, frmComputers.cmbNETOffice)
+
+        Call UpdateTree(tmpName, tmpTip, tmpID, tmpFil, tmpDep, tmpOff)
 
     End Sub
 
@@ -2031,17 +2064,42 @@ Error_:
     End Sub
 
     Private Sub PRESAVE_TREE(ByVal sBr As ComboBox, ByVal sDp As ComboBox, ByVal sOff As ComboBox)
+        Dim sFIL, sDEP, sOf As String
+        sFIL = sBr.Text
+        sDEP = sDp.Text
+        sOf = sOff.Text
 
         If Not (RSExists("FILIAL", "FILIAL", sBr.Text)) Then
-            AddOnePar(sBr.Text, "FILIAL", "SPR_FILIAL", sBr)
+            AddOnePar(sFIL, "FILIAL", "SPR_FILIAL", sBr)
+
+            Select Case TREE_UPDATE
+                Case 0
+                Case 1
+                    Add_FILIAL_TREE(sFIL)
+            End Select
+
         End If
 
-        If Not (RSExistsDB(sBr.Text, sDp.Text)) Then
-            AddDepartment(sBr.Text, sDp.Text)
+        If Len(sDEP) = 0 Then Exit Sub
+
+        If Not (RSExistsDB(sFIL, sDEP)) Then
+            AddDepartment(sFIL, sDEP)
+            Select Case TREE_UPDATE
+                Case 0
+                Case 1
+                    Add_OTDEL_TREE(sFIL, sDEP)
+            End Select
         End If
 
-        If Not (RSExistsDBO(sBr.Text, sDp.Text, sOff.Text)) Then
-            AddOffice(sBr.Text, sDp.Text, sOff.Text)
+        If Len(sOf) = 0 Then Exit Sub
+
+        If Not (RSExistsDBO(sFIL, sDEP, sOf)) Then
+            AddOffice(sFIL, sDEP, sOf)
+            Select Case TREE_UPDATE
+                Case 0
+                Case 1
+                    Add_KABINET_TREE(sFIL, sDEP, sOf)
+            End Select
         End If
     End Sub
 
@@ -3142,7 +3200,7 @@ Error_:
 
         If TREE_UPDATE = 0 Then RefFilTree(frmComputers.lstGroups) Else frmComputers.LOAD_LIST()
     End Sub
-    
+
     Public Sub Re_PRN(Optional ByVal sSID As Integer = 0)
         On Error GoTo err_
         Dim sADD As Boolean
@@ -3229,13 +3287,13 @@ Error_:
                             .Fields("Spisan").Value = 0
                             .Fields("Balans").Value = 0
 
-                          .Update()
+                            .Update()
                         End With
 
                         rs.Close()
                         rs = Nothing
 
-                       
+
 
                         sSQL = "SELECT PRINTER_NAME_1,PRINTER_SN_1,PRINTER_PROIZV_1,port_1,INV_NO_PRINTER FROM kompy where id=" & sSID
 
@@ -3348,7 +3406,7 @@ Error_:
                             .Fields("Spisan").Value = 0
                             .Fields("Balans").Value = 0
 
-                           .Update()
+                            .Update()
                         End With
 
                         rs.Close()
@@ -3464,7 +3522,7 @@ Error_:
                             .Fields("Spisan").Value = 0
                             .Fields("Balans").Value = 0
 
-                           .Update()
+                            .Update()
                         End With
 
                         rs.Close()
@@ -3698,7 +3756,7 @@ Error_:
                             .Fields("Spisan").Value = 0
                             .Fields("Balans").Value = 0
 
-                           .Update()
+                            .Update()
                         End With
 
                         rs.Close()
@@ -3816,7 +3874,7 @@ Error_:
                             .Fields("Spisan").Value = 0
                             .Fields("Balans").Value = 0
 
-                           .Update()
+                            .Update()
                         End With
 
                         rs.Close()
@@ -4156,7 +4214,7 @@ err_:
         RSPRNExt = False
 
         Exit Function
-        Error_:
+Error_:
         RSPRNExt = False
     End Function
 

@@ -32,7 +32,8 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>3.5</OldToolsVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <PublishUrl>d:\bkon\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
@@ -544,16 +545,6 @@
       <Isolated>False</Isolated>
       <Private>True</Private>
     </COMReference>
-    <COMReference Include="Excel">
-      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>5</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-      <Private>True</Private>
-    </COMReference>
     <COMReference Include="JRO">
       <Guid>{AC3B8B4C-B6CA-11D1-9F31-00C04FC29D52}</Guid>
       <VersionMajor>2</VersionMajor>
@@ -561,16 +552,6 @@
       <Lcid>0</Lcid>
       <WrapperTool>tlbimp</WrapperTool>
       <Isolated>False</Isolated>
-    </COMReference>
-    <COMReference Include="Word">
-      <Guid>{00020905-0000-0000-C000-000000000046}</Guid>
-      <VersionMajor>8</VersionMajor>
-      <VersionMinor>3</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-      <Private>True</Private>
     </COMReference>
   </ItemGroup>
   <ItemGroup>

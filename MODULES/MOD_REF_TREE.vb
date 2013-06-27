@@ -608,7 +608,6 @@ ERR1:
                 DepNode.Nodes.Add(TEHNodeCNT)
 
                 Call checkOther(lstgroups, iD, TEHNodeCNT, Spisan, balans)
-
                 Call checkRemont(iD, TEHNodeCNT)
 
                 '#####################################################################
@@ -711,9 +710,7 @@ ERR1:
                                         TEHNodeCNT.Nodes.Add(TEHNodePC)
                                         iD = .Fields("id").Value
 
-                                        Call checkRemont(.Fields("id").Value, TEHNodePC)
-
-                                        Select Case n_set
+                                       Select Case n_set
 
                                             Case "Off"
                                                 TEHNodePC.ForeColor = Color.Red
@@ -729,6 +726,8 @@ ERR1:
                                         End Select
 
                                         Call checkOther(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans)
+                                        Call checkRemont(.Fields("id").Value, TEHNodePC)
+
 
                                     Case "PC"
 
@@ -780,9 +779,10 @@ ERR1:
 
                                         TEHNodeCNT.Nodes.Add(TEHNodePC)
 
+                                        Call checkOther(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans)
                                         Call checkRemont(.Fields("id").Value, TEHNodePC)
 
-                                        Call checkOther(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans)
+
 
                                         '#####################################################################
                                         '#####################################################################
@@ -1156,9 +1156,9 @@ ERR1:
                 iPSid = iD
 
                 DepNode.Nodes.Add(TEHNodePC)
-
-                Call checkRemont(iD, TEHNodePC)
+                
                 Call checkOther(lstgroups, iD, TEHNodePC, Spisan, balans)
+                Call checkRemont(iD, TEHNodePC)
 
                 '########################################################################
                 '########################################################################
@@ -1405,9 +1405,7 @@ ERR1:
                 TEHNode.Name = L_NAME
                 DepNode.Nodes.Add(TEHNode)
 
-                Call checkRemont(iD, TEHNode)
-
-                Select Case n_set
+               Select Case n_set
 
                     Case "Off"
                         TEHNode.ForeColor = Color.Red
@@ -1423,6 +1421,7 @@ ERR1:
                 End Select
 
                 Call checkOther(lstgroups, iD, TEHNode, Spisan, balans)
+                Call checkRemont(iD, TEHNode)
 
             Case "PHOTO"
 
@@ -1438,9 +1437,8 @@ ERR1:
 
                 DepNode.Nodes.Add(TEHNodePHOTO)
 
+               Call checkOther(lstgroups, iD, TEHNodePHOTO, Spisan, balans)
                 Call checkRemont(iD, TEHNodePHOTO)
-
-                Call checkOther(lstgroups, iD, TEHNodePHOTO, Spisan, balans)
 
                 Dim sText As String = objIniFile.GetString("general", "Tree_S", 0)
                 Dim sSQL4 As String
@@ -1705,9 +1703,8 @@ ERR1:
         TEHNodeCNT.Name = L_NAME
         TEHNodePCL.Nodes.Add(TEHNodeCNT)
 
+       Call checkOther(lstgroups, sID, TEHNodeCNT, Spisan, balans)
         Call checkRemont(sID, TEHNodeCNT)
-
-        Call checkOther(lstgroups, sID, TEHNodeCNT, Spisan, balans)
 
     End Sub
 
@@ -1737,9 +1734,9 @@ ERR1:
                     Case 0
 
                     Case Else
-
-                        TEHNodePCL.BackColor = Color.Red
-
+                        TEHNodePCL.ForeColor = Color.Black
+                        TEHNodePCL.BackColor = Color.Olive
+                        
                 End Select
 
         End Select
@@ -2132,7 +2129,7 @@ err_:
     End Sub
 
     'Ищем в дереве необхадимый объект и выделяем его
-    Private Sub FIND_TREE(ByVal sNODENAME As String)
+    Public Sub FIND_TREE(ByVal sNODENAME As String)
 
         Dim arr As TreeNode() = frmComputers.lstGroups.Nodes(0).Nodes(0).Nodes.Find(sNODENAME, True)
 
@@ -2239,7 +2236,110 @@ err_:
 
     End Sub
 
+    '##########################################################################################################
 
+    Public Sub Add_FILIAL_TREE(ByVal sBr As String)
+
+        Dim rs As Recordset
+        rs = New Recordset
+
+        rs.Open("Select count(*) as t_n from CONFIGURE", DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
+
+        Dim us As String
+        With rs
+            us = .Fields("t_n").Value
+        End With
+        rs.Close()
+        rs = Nothing
+
+        Select Case us
+
+            Case 0
+
+
+            Case Else
+                Dim sID As Integer
+                rs = New Recordset
+                rs.Open("Select * from CONFIGURE", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
+                With rs
+
+                    If Not IsDBNull(.Fields("ORG").Value) Then Call FIND_TREE(.Fields("ORG").Value)
+
+                End With
+                rs.Close()
+                rs = Nothing
+
+                rs = New Recordset
+                rs.Open("SELECT top 1 id FROM SPR_FILIAL WHERE FILIAL='" & sBr & "' order by id desc", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
+                With rs
+                    sID = .Fields("ID").Value
+                End With
+                rs.Close()
+                rs = Nothing
+
+                Dim BrancheNode As New TreeNode(sBr, 0, 0)
+                BrancheNode.Tag = "G|" & sID
+                BrancheNode.Name = sBr
+                BrancheNode.Text = sBr
+                frmComputers.lstGroups.SelectedNode.Nodes.Add(BrancheNode)
+
+        End Select
+
+    End Sub
+
+    Public Sub Add_OTDEL_TREE(ByVal sBr As String, ByVal sDp As String)
+
+        Dim rs As Recordset
+        rs = New Recordset
+
+        FIND_TREE(sBr)
+
+        Dim sID As Integer
+        rs.Open("SELECT top 1 id FROM SPR_OTD_FILIAL WHERE FILIAL='" & sBr & "' AND N_Otd='" & sDp & "' order by id desc", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
+        With rs
+            sID = .Fields("ID").Value
+        End With
+        rs.Close()
+        rs = Nothing
+
+        Dim BrancheNode As New TreeNode(sDp, 1, 1)
+        BrancheNode.Tag = "O|" & sID
+        BrancheNode.Name = sDp
+        BrancheNode.Text = sDp
+        frmComputers.lstGroups.SelectedNode.Nodes.Add(BrancheNode)
+
+    End Sub
+
+    Public Sub Add_KABINET_TREE(ByVal sBr As String, ByVal sDp As String, ByVal sOff As String)
+
+        Dim rs As Recordset
+
+        FIND_TREE(sDp)
+
+        Dim sID As Integer
+        rs = New Recordset
+        rs.Open("SELECT top 1 id FROM SPR_KAB WHERE N_F='" & sBr & "' AND N_M='" & sDp & "' AND Name='" & sOff & "' order by id desc", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
+        With rs
+            sID = .Fields("ID").Value
+        End With
+        rs.Close()
+        rs = Nothing
+
+        Dim BrancheNode As New TreeNode(sOff, 2, 2)
+        BrancheNode.Tag = "K|" & sID
+        BrancheNode.Name = sOff
+        BrancheNode.Text = sOff
+        frmComputers.lstGroups.SelectedNode.Nodes.Add(BrancheNode)
+
+
+    End Sub
+
+    '##########################################################################################################
 
 
 End Module

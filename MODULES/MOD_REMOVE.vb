@@ -472,7 +472,10 @@ ERR1:
 
         RemoveBrainch = 1
 
-        Call RefFilTree(frmComputers.lstGroups)
+        frmComputers.lstGroups.SelectedNode.Remove()
+
+        'Call RefFilTree(frmComputers.lstGroups)
+
         Call LoadSPR()
 
         Exit Function
@@ -553,8 +556,8 @@ ERR1:
         rs = Nothing
         RemoveDepartment = 1
 
-        Call RefFilTree(frmComputers.lstGroups)
-
+        ' Call RefFilTree(frmComputers.lstGroups)
+        frmComputers.lstGroups.SelectedNode.Remove()
 
         Exit Function
 
@@ -628,8 +631,8 @@ ERR1:
         rs = Nothing
         RemoveOffice = 1
 
-        Call RefFilTree(frmComputers.lstGroups)
-
+        ' Call RefFilTree(frmComputers.lstGroups)
+        frmComputers.lstGroups.SelectedNode.Remove()
 
         Exit Function
 
