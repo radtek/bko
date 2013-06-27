@@ -2790,7 +2790,12 @@ Public Class frmDirectory
 
                     If Not (RSExists("FILIAL", "FILIAL", cmbName.Text)) Then
                         AddOnePar(Me.cmbName.Text, "FILIAL", "SPR_FILIAL", Me.cmbName)
-                       
+                        Select Case TREE_UPDATE
+                            Case 0
+                                Call RefFilTree(frmComputers.lstGroups)
+                            Case 1
+                                Add_FILIAL_TREE(cmbName.Text)
+                        End Select
                     End If
 
                 Else
@@ -2843,13 +2848,7 @@ Public Class frmDirectory
 
                 Call LOAD_LIST_SPR()
 
-                Select Case TREE_UPDATE
-                    Case 0
-                        Call RefFilTree(frmComputers.lstGroups)
-                    Case 1
-                        Add_FILIAL_TREE(cmbName.Text)
-                End Select
-
+               
             btnDirAdd.Text = objIniFile.GetString("frmDirectory", "btnDirAdd", "Добавить")
                 eDTI = False
                 Exit Sub
@@ -2860,6 +2859,12 @@ Public Class frmDirectory
 
                     If Not (RSExistsDB(cmbName.Text, txtName.Text)) Then
                         AddDepartment(cmbName.Text, txtName.Text)
+                        Select Case TREE_UPDATE
+                            Case 0
+                                Call RefFilTree(frmComputers.lstGroups)
+                            Case 1
+                                Add_OTDEL_TREE(cmbName.Text, txtName.Text)
+                        End Select
                     End If
 
                 Else
@@ -2914,12 +2919,7 @@ Public Class frmDirectory
                 End If
 
                 Call LOAD_LIST_SPR()
-                Select Case TREE_UPDATE
-                    Case 0
-                        Call RefFilTree(frmComputers.lstGroups)
-                    Case 1
-                        Add_OTDEL_TREE(cmbName.Text, txtName.Text)
-                End Select
+              
                 btnDirAdd.Text = objIniFile.GetString("frmDirectory", "btnDirAdd", "Добавить")
                 eDTI = False
                 Exit Sub
@@ -2930,6 +2930,12 @@ Public Class frmDirectory
 
                     If Not (RSExistsDBO(cmbName.Text, cmbName2.Text, txtName.Text)) Then
                         AddOffice(cmbName.Text, cmbName2.Text, txtName.Text)
+                        Select Case TREE_UPDATE
+                            Case 0
+                                Call RefFilTree(frmComputers.lstGroups)
+                            Case 1
+                                Add_KABINET_TREE(cmbName.Text, cmbName2.Text, txtName.Text)
+                        End Select
                     End If
 
                 Else
@@ -2979,13 +2985,7 @@ Public Class frmDirectory
 
 
                 Call LOAD_LIST_SPR()
-                Select Case TREE_UPDATE
-                    Case 0
-                        Call RefFilTree(frmComputers.lstGroups)
-                    Case 1
-                        Add_KABINET_TREE(cmbName.Text, cmbName2.Text, txtName.Text)
-                End Select
-
+                
                 btnDirAdd.Text = objIniFile.GetString("frmDirectory", "btnDirAdd", "Добавить")
                 eDTI = False
 

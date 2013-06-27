@@ -472,9 +472,13 @@ ERR1:
 
         RemoveBrainch = 1
 
-        frmComputers.lstGroups.SelectedNode.Remove()
-
-        'Call RefFilTree(frmComputers.lstGroups)
+        Select Case TREE_UPDATE
+            Case 0
+                Call RefFilTree(frmComputers.lstGroups)
+            Case 1
+                FIND_TREE(sGroupName)
+                frmComputers.lstGroups.SelectedNode.Remove()
+        End Select
 
         Call LoadSPR()
 
@@ -556,8 +560,13 @@ ERR1:
         rs = Nothing
         RemoveDepartment = 1
 
-        ' Call RefFilTree(frmComputers.lstGroups)
-        frmComputers.lstGroups.SelectedNode.Remove()
+        Select Case TREE_UPDATE
+            Case 0
+                Call RefFilTree(frmComputers.lstGroups)
+            Case 1
+                FIND_TREE(sGroupName)
+                frmComputers.lstGroups.SelectedNode.Remove()
+        End Select
 
         Exit Function
 
@@ -632,7 +641,13 @@ ERR1:
         RemoveOffice = 1
 
         ' Call RefFilTree(frmComputers.lstGroups)
-        frmComputers.lstGroups.SelectedNode.Remove()
+        Select Case TREE_UPDATE
+            Case 0
+                Call RefFilTree(frmComputers.lstGroups)
+            Case 1
+                FIND_TREE(sOffice)
+                frmComputers.lstGroups.SelectedNode.Remove()
+        End Select
 
         Exit Function
 
