@@ -43,6 +43,7 @@ Partial Class frmNetMagazin
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
+        CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
@@ -59,6 +60,7 @@ Partial Class frmNetMagazin
         '
         Me.SplitContainer1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SplitContainer1.Location = New System.Drawing.Point(0, 0)
+        Me.SplitContainer1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.SplitContainer1.Name = "SplitContainer1"
         '
         'SplitContainer1.Panel1
@@ -68,8 +70,9 @@ Partial Class frmNetMagazin
         'SplitContainer1.Panel2
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.TableLayoutPanel1)
-        Me.SplitContainer1.Size = New System.Drawing.Size(749, 549)
-        Me.SplitContainer1.SplitterDistance = 237
+        Me.SplitContainer1.Size = New System.Drawing.Size(999, 676)
+        Me.SplitContainer1.SplitterDistance = 316
+        Me.SplitContainer1.SplitterWidth = 5
         Me.SplitContainer1.TabIndex = 2
         '
         'gbTree
@@ -77,8 +80,10 @@ Partial Class frmNetMagazin
         Me.gbTree.Controls.Add(Me.TableLayoutPanel3)
         Me.gbTree.Dock = System.Windows.Forms.DockStyle.Fill
         Me.gbTree.Location = New System.Drawing.Point(0, 0)
+        Me.gbTree.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.gbTree.Name = "gbTree"
-        Me.gbTree.Size = New System.Drawing.Size(237, 549)
+        Me.gbTree.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.gbTree.Size = New System.Drawing.Size(316, 676)
         Me.gbTree.TabIndex = 0
         Me.gbTree.TabStop = False
         Me.gbTree.Text = "Дерево"
@@ -87,17 +92,18 @@ Partial Class frmNetMagazin
         '
         Me.TableLayoutPanel3.ColumnCount = 2
         Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 35.0!))
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 47.0!))
         Me.TableLayoutPanel3.Controls.Add(Me.treebranche, 0, 0)
         Me.TableLayoutPanel3.Controls.Add(Me.lstGroups, 0, 1)
         Me.TableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel3.Location = New System.Drawing.Point(3, 16)
+        Me.TableLayoutPanel3.Location = New System.Drawing.Point(4, 19)
+        Me.TableLayoutPanel3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
         Me.TableLayoutPanel3.RowCount = 3
-        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
-        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26.0!))
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 37.0!))
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32.0!))
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel3.Size = New System.Drawing.Size(231, 530)
+        Me.TableLayoutPanel3.Size = New System.Drawing.Size(308, 653)
         Me.TableLayoutPanel3.TabIndex = 4
         '
         'treebranche
@@ -105,9 +111,10 @@ Partial Class frmNetMagazin
         Me.TableLayoutPanel3.SetColumnSpan(Me.treebranche, 2)
         Me.treebranche.Dock = System.Windows.Forms.DockStyle.Fill
         Me.treebranche.FormattingEnabled = True
-        Me.treebranche.Location = New System.Drawing.Point(3, 3)
+        Me.treebranche.Location = New System.Drawing.Point(4, 4)
+        Me.treebranche.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.treebranche.Name = "treebranche"
-        Me.treebranche.Size = New System.Drawing.Size(225, 21)
+        Me.treebranche.Size = New System.Drawing.Size(300, 24)
         Me.treebranche.TabIndex = 7
         '
         'lstGroups
@@ -115,10 +122,12 @@ Partial Class frmNetMagazin
         Me.TableLayoutPanel3.SetColumnSpan(Me.lstGroups, 2)
         Me.lstGroups.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lstGroups.FullRowSelect = True
-        Me.lstGroups.Location = New System.Drawing.Point(3, 33)
+        Me.lstGroups.HideSelection = False
+        Me.lstGroups.Location = New System.Drawing.Point(4, 41)
+        Me.lstGroups.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.lstGroups.Name = "lstGroups"
         Me.TableLayoutPanel3.SetRowSpan(Me.lstGroups, 2)
-        Me.lstGroups.Size = New System.Drawing.Size(225, 494)
+        Me.lstGroups.Size = New System.Drawing.Size(300, 608)
         Me.lstGroups.TabIndex = 0
         '
         'TableLayoutPanel1
@@ -130,21 +139,24 @@ Partial Class frmNetMagazin
         Me.TableLayoutPanel1.Controls.Add(Me.GroupBox1, 0, 2)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 3
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(508, 549)
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 123.0!))
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(678, 676)
         Me.TableLayoutPanel1.TabIndex = 3
         '
         'gbRem
         '
         Me.gbRem.Controls.Add(Me.lvNetMagazin)
         Me.gbRem.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.gbRem.Location = New System.Drawing.Point(3, 3)
+        Me.gbRem.Location = New System.Drawing.Point(4, 4)
+        Me.gbRem.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.gbRem.Name = "gbRem"
-        Me.gbRem.Size = New System.Drawing.Size(502, 418)
+        Me.gbRem.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.gbRem.Size = New System.Drawing.Size(670, 518)
         Me.gbRem.TabIndex = 0
         Me.gbRem.TabStop = False
         '
@@ -153,10 +165,11 @@ Partial Class frmNetMagazin
         Me.lvNetMagazin.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lvNetMagazin.FullRowSelect = True
         Me.lvNetMagazin.GridLines = True
-        Me.lvNetMagazin.Location = New System.Drawing.Point(3, 16)
+        Me.lvNetMagazin.Location = New System.Drawing.Point(4, 19)
+        Me.lvNetMagazin.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.lvNetMagazin.MultiSelect = False
         Me.lvNetMagazin.Name = "lvNetMagazin"
-        Me.lvNetMagazin.Size = New System.Drawing.Size(496, 399)
+        Me.lvNetMagazin.Size = New System.Drawing.Size(662, 495)
         Me.lvNetMagazin.TabIndex = 6
         Me.lvNetMagazin.UseCompatibleStateImageBehavior = False
         Me.lvNetMagazin.View = System.Windows.Forms.View.Details
@@ -168,10 +181,10 @@ Partial Class frmNetMagazin
         Me.tsPanNetMag.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
         Me.tsPanNetMag.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbAdd, Me.tsbDel, Me.tsbExcell})
         Me.tsPanNetMag.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
-        Me.tsPanNetMag.Location = New System.Drawing.Point(0, 424)
+        Me.tsPanNetMag.Location = New System.Drawing.Point(0, 526)
         Me.tsPanNetMag.Name = "tsPanNetMag"
         Me.tsPanNetMag.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
-        Me.tsPanNetMag.Size = New System.Drawing.Size(508, 25)
+        Me.tsPanNetMag.Size = New System.Drawing.Size(678, 27)
         Me.tsPanNetMag.TabIndex = 1
         Me.tsPanNetMag.Text = "ToolStrip1"
         '
@@ -180,7 +193,7 @@ Partial Class frmNetMagazin
         Me.tsbAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.tsbAdd.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbAdd.Name = "tsbAdd"
-        Me.tsbAdd.Size = New System.Drawing.Size(23, 22)
+        Me.tsbAdd.Size = New System.Drawing.Size(23, 24)
         Me.tsbAdd.Text = "+"
         Me.tsbAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage
         '
@@ -189,7 +202,7 @@ Partial Class frmNetMagazin
         Me.tsbDel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.tsbDel.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbDel.Name = "tsbDel"
-        Me.tsbDel.Size = New System.Drawing.Size(23, 22)
+        Me.tsbDel.Size = New System.Drawing.Size(23, 24)
         Me.tsbDel.Text = "-"
         Me.tsbDel.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage
         '
@@ -199,16 +212,18 @@ Partial Class frmNetMagazin
         Me.tsbExcell.Image = CType(resources.GetObject("tsbExcell.Image"), System.Drawing.Image)
         Me.tsbExcell.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbExcell.Name = "tsbExcell"
-        Me.tsbExcell.Size = New System.Drawing.Size(66, 22)
+        Me.tsbExcell.Size = New System.Drawing.Size(84, 24)
         Me.tsbExcell.Text = "В Офис"
         Me.tsbExcell.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage
         '
         'GroupBox1
         '
         Me.GroupBox1.Controls.Add(Me.TableLayoutPanel2)
-        Me.GroupBox1.Location = New System.Drawing.Point(3, 452)
+        Me.GroupBox1.Location = New System.Drawing.Point(4, 557)
+        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(493, 94)
+        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox1.Size = New System.Drawing.Size(657, 115)
         Me.GroupBox1.TabIndex = 2
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "КЛС"
@@ -225,13 +240,14 @@ Partial Class frmNetMagazin
         Me.TableLayoutPanel2.Controls.Add(Me.Label5, 1, 1)
         Me.TableLayoutPanel2.Controls.Add(Me.Label6, 1, 2)
         Me.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel2.Location = New System.Drawing.Point(3, 16)
+        Me.TableLayoutPanel2.Location = New System.Drawing.Point(4, 19)
+        Me.TableLayoutPanel2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
         Me.TableLayoutPanel2.RowCount = 3
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanel2.Size = New System.Drawing.Size(487, 75)
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25.0!))
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(649, 92)
         Me.TableLayoutPanel2.TabIndex = 0
         '
         'Label1
@@ -239,9 +255,10 @@ Partial Class frmNetMagazin
         Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.Label1.Location = New System.Drawing.Point(3, 7)
+        Me.Label1.Location = New System.Drawing.Point(4, 8)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(237, 13)
+        Me.Label1.Size = New System.Drawing.Size(316, 17)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Всего портов:"
         '
@@ -250,9 +267,10 @@ Partial Class frmNetMagazin
         Me.Label2.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.Label2.Location = New System.Drawing.Point(3, 34)
+        Me.Label2.Location = New System.Drawing.Point(4, 41)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(237, 13)
+        Me.Label2.Size = New System.Drawing.Size(316, 17)
         Me.Label2.TabIndex = 1
         Me.Label2.Text = "Из них занято:"
         '
@@ -261,9 +279,10 @@ Partial Class frmNetMagazin
         Me.Label3.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.Label3.Location = New System.Drawing.Point(3, 58)
+        Me.Label3.Location = New System.Drawing.Point(4, 70)
+        Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(237, 13)
+        Me.Label3.Size = New System.Drawing.Size(316, 17)
         Me.Label3.TabIndex = 2
         Me.Label3.Text = "Длинна КЛС:"
         '
@@ -271,9 +290,10 @@ Partial Class frmNetMagazin
         '
         Me.Label4.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(246, 7)
+        Me.Label4.Location = New System.Drawing.Point(328, 8)
+        Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(238, 13)
+        Me.Label4.Size = New System.Drawing.Size(317, 17)
         Me.Label4.TabIndex = 3
         Me.Label4.Text = "-"
         '
@@ -281,9 +301,10 @@ Partial Class frmNetMagazin
         '
         Me.Label5.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(246, 34)
+        Me.Label5.Location = New System.Drawing.Point(328, 41)
+        Me.Label5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(238, 13)
+        Me.Label5.Size = New System.Drawing.Size(317, 17)
         Me.Label5.TabIndex = 4
         Me.Label5.Text = "-"
         '
@@ -291,22 +312,25 @@ Partial Class frmNetMagazin
         '
         Me.Label6.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(246, 58)
+        Me.Label6.Location = New System.Drawing.Point(328, 70)
+        Me.Label6.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(238, 13)
+        Me.Label6.Size = New System.Drawing.Size(317, 17)
         Me.Label6.TabIndex = 5
         Me.Label6.Text = "-"
         '
         'frmNetMagazin
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(749, 549)
+        Me.ClientSize = New System.Drawing.Size(999, 676)
         Me.Controls.Add(Me.SplitContainer1)
+        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Name = "frmNetMagazin"
         Me.Text = "Кабельные журналы"
         Me.SplitContainer1.Panel1.ResumeLayout(False)
         Me.SplitContainer1.Panel2.ResumeLayout(False)
+        CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer1.ResumeLayout(False)
         Me.gbTree.ResumeLayout(False)
         Me.TableLayoutPanel3.ResumeLayout(False)
