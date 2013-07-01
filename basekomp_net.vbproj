@@ -430,6 +430,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FORMS\frmComputers.resx">
       <DependentUpon>frmComputers.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="FORMS\frmCRT3.resx">
       <DependentUpon>frmCRT3.vb</DependentUpon>
@@ -493,6 +494,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FORMS\frmserviceDesc.resx">
       <DependentUpon>frmserviceDesc.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="FORMS\frmService_add.resx">
       <DependentUpon>frmService_add.vb</DependentUpon>

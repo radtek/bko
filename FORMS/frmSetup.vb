@@ -525,11 +525,18 @@ Public Class frmSetup
         End If
 
 
-        'Label9.Font = New Font(objIniFile.GetString("general", "Font", "Tahoma"), objIniFile.GetString("general", "FontSize", "10"))
+        'Цвет текста в дереве
+        btnServiceColor.ForeColor = Color.FromName(ServiceColor)
+        chkRemVisible.ForeColor = btnServiceColor.ForeColor
+
+        btnSpisanColor.ForeColor = Color.FromName(SpisanColor)
+        chkSP.ForeColor = btnSpisanColor.ForeColor
+
+
+        btnNbColor.ForeColor = Color.FromName(NbColor)
+        chkNB.ForeColor = btnNbColor.ForeColor
 
         'Call FONT_LOAD(Me)
-
-
         'lvFindDB
     End Sub
 
@@ -1476,7 +1483,7 @@ err_:
 
     Private Sub RadioButton11_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton11.CheckedChanged
 
-         Dim objIniFile As New IniFile(PrPath & "base.ini")
+        Dim objIniFile As New IniFile(PrPath & "base.ini")
         objIniFile.WriteString("General", "TREE_UPDATE", "1")
         TREE_UPDATE = 1
 
@@ -1546,13 +1553,65 @@ err_:
         objIniFile.WriteString("SMTP", "User", txtMUser.Text)
 
         Dim Code As String = EncryptString(txtMPassword.Text)
-        
+
         objIniFile.WriteString("SMTP", "Password", Code)
 
         objIniFile.WriteString("SMTP", "TLS", chkTLS.Checked)
 
-        End Sub
+    End Sub
 
-   
 
+
+    Private Sub Button5_Click(sender As System.Object, e As System.EventArgs) Handles btnServiceColor.Click
+
+        Dim dlgColor As ColorDialog
+        dlgColor = New ColorDialog
+
+        btnServiceColor.ForeColor = changeColor(dlgColor, btnServiceColor)
+
+        ' FontC = Button5.ForeColor.Name
+
+        Dim objIniFile As New IniFile(PrPath & "base.ini")
+
+        objIniFile.WriteString("Tree", "ServiceColor", btnServiceColor.ForeColor.Name)
+
+        chkRemVisible.ForeColor = btnServiceColor.ForeColor
+        ServiceColor = btnServiceColor.ForeColor.Name
+
+    End Sub
+
+    Private Sub btnSpisanColor_Click(sender As System.Object, e As System.EventArgs) Handles btnSpisanColor.Click
+        Dim dlgColor As ColorDialog
+        dlgColor = New ColorDialog
+
+        btnSpisanColor.ForeColor = changeColor(dlgColor, btnSpisanColor)
+
+        ' FontC = Button6.ForeColor.Name
+
+        Dim objIniFile As New IniFile(PrPath & "base.ini")
+
+        objIniFile.WriteString("Tree", "SpisanColor", btnSpisanColor.ForeColor.Name)
+
+        chkSP.ForeColor = btnSpisanColor.ForeColor
+        SpisanColor = btnSpisanColor.ForeColor.Name
+
+    End Sub
+
+    Private Sub btnNbColor_Click(sender As System.Object, e As System.EventArgs) Handles btnNbColor.Click
+        Dim dlgColor As ColorDialog
+        dlgColor = New ColorDialog
+
+        btnNbColor.ForeColor = changeColor(dlgColor, btnNbColor)
+
+        ' FontC = Button7.ForeColor.Name
+
+        Dim objIniFile As New IniFile(PrPath & "base.ini")
+
+        objIniFile.WriteString("Tree", "NbColor", btnNbColor.ForeColor.Name)
+
+        chkNB.ForeColor = btnNbColor.ForeColor
+
+        NbColor = btnNbColor.ForeColor.Name
+
+    End Sub
 End Class

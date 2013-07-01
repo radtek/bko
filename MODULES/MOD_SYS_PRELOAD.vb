@@ -66,6 +66,10 @@ Module MOD_SYS_PRELOAD
     Public NBVisible As Boolean
     Public TreeORGANIZACIA As TreeView
 
+    Public NbColor As String
+    Public SpisanColor As String
+    Public ServiceColor As String
+
     Public Sub Tree_Icons_Feel(ByVal ills As ImageList, ByVal sFRM As String, ByVal sPATH As String)
 
         On Error Resume Next
@@ -353,6 +357,13 @@ Module MOD_SYS_PRELOAD
 
         Call UNAME_GET()
         Call iface_preload()
+
+
+        NbColor = objIniFile.GetString("Tree", "NbColor", "Black")
+        SpisanColor = objIniFile.GetString("Tree", "SpisanColor", "Black")
+        ServiceColor = objIniFile.GetString("Tree", "ServiceColor", "Yellow")
+
+
     End Sub
 
     Public Sub iface_preload()

@@ -126,6 +126,9 @@ Partial Class frmSetup
         Me.RadioButton4 = New System.Windows.Forms.RadioButton()
         Me.RadioButton5 = New System.Windows.Forms.RadioButton()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.btnNbColor = New System.Windows.Forms.Button()
+        Me.btnSpisanColor = New System.Windows.Forms.Button()
+        Me.btnServiceColor = New System.Windows.Forms.Button()
         Me.chkSP = New System.Windows.Forms.CheckBox()
         Me.chkNB = New System.Windows.Forms.CheckBox()
         Me.chkRemVisible = New System.Windows.Forms.CheckBox()
@@ -1363,6 +1366,9 @@ Partial Class frmSetup
         'GroupBox4
         '
         Me.TableLayoutPanel1.SetColumnSpan(Me.GroupBox4, 2)
+        Me.GroupBox4.Controls.Add(Me.btnNbColor)
+        Me.GroupBox4.Controls.Add(Me.btnSpisanColor)
+        Me.GroupBox4.Controls.Add(Me.btnServiceColor)
         Me.GroupBox4.Controls.Add(Me.chkSP)
         Me.GroupBox4.Controls.Add(Me.chkNB)
         Me.GroupBox4.Controls.Add(Me.chkRemVisible)
@@ -1370,14 +1376,48 @@ Partial Class frmSetup
         Me.GroupBox4.Controls.Add(Me.RadioButton10)
         Me.GroupBox4.Controls.Add(Me.GroupBox3)
         Me.GroupBox4.Controls.Add(Me.gbTree_o)
-        Me.GroupBox4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.GroupBox4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
         Me.GroupBox4.Location = New System.Drawing.Point(3, 307)
         Me.GroupBox4.Name = "GroupBox4"
         Me.TableLayoutPanel1.SetRowSpan(Me.GroupBox4, 4)
-        Me.GroupBox4.Size = New System.Drawing.Size(549, 167)
+        Me.GroupBox4.Size = New System.Drawing.Size(549, 219)
         Me.GroupBox4.TabIndex = 28
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Дерево:"
+        '
+        'btnNbColor
+        '
+        Me.btnNbColor.AutoSize = True
+        Me.btnNbColor.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.btnNbColor.Location = New System.Drawing.Point(198, 85)
+        Me.btnNbColor.Name = "btnNbColor"
+        Me.btnNbColor.Size = New System.Drawing.Size(104, 25)
+        Me.btnNbColor.TabIndex = 26
+        Me.btnNbColor.Text = "Не на балансе"
+        Me.btnNbColor.UseVisualStyleBackColor = False
+        '
+        'btnSpisanColor
+        '
+        Me.btnSpisanColor.AutoSize = True
+        Me.btnSpisanColor.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.btnSpisanColor.Location = New System.Drawing.Point(198, 110)
+        Me.btnSpisanColor.Name = "btnSpisanColor"
+        Me.btnSpisanColor.Size = New System.Drawing.Size(75, 25)
+        Me.btnSpisanColor.TabIndex = 25
+        Me.btnSpisanColor.Text = "Списан"
+        Me.btnSpisanColor.UseVisualStyleBackColor = False
+        '
+        'btnServiceColor
+        '
+        Me.btnServiceColor.AutoSize = True
+        Me.btnServiceColor.BackColor = System.Drawing.Color.Olive
+        Me.btnServiceColor.ForeColor = System.Drawing.Color.Yellow
+        Me.btnServiceColor.Location = New System.Drawing.Point(198, 60)
+        Me.btnServiceColor.Name = "btnServiceColor"
+        Me.btnServiceColor.Size = New System.Drawing.Size(85, 25)
+        Me.btnServiceColor.TabIndex = 24
+        Me.btnServiceColor.Text = "В ремонте"
+        Me.btnServiceColor.UseVisualStyleBackColor = False
         '
         'chkSP
         '
@@ -1406,6 +1446,7 @@ Partial Class frmSetup
         Me.chkRemVisible.AutoSize = True
         Me.chkRemVisible.BackColor = System.Drawing.Color.Olive
         Me.chkRemVisible.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.chkRemVisible.ForeColor = System.Drawing.Color.Yellow
         Me.chkRemVisible.Location = New System.Drawing.Point(7, 65)
         Me.chkRemVisible.Name = "chkRemVisible"
         Me.chkRemVisible.Size = New System.Drawing.Size(172, 17)
@@ -1438,7 +1479,7 @@ Partial Class frmSetup
         'GroupBox3
         '
         Me.GroupBox3.Controls.Add(Me.ComboBox1)
-        Me.GroupBox3.Location = New System.Drawing.Point(250, 112)
+        Me.GroupBox3.Location = New System.Drawing.Point(328, 109)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(177, 47)
         Me.GroupBox3.TabIndex = 23
@@ -1458,9 +1499,9 @@ Partial Class frmSetup
         'gbTree_o
         '
         Me.gbTree_o.Controls.Add(Me.TableLayoutPanel6)
-        Me.gbTree_o.Location = New System.Drawing.Point(250, 16)
+        Me.gbTree_o.Location = New System.Drawing.Point(325, 16)
         Me.gbTree_o.Name = "gbTree_o"
-        Me.gbTree_o.Size = New System.Drawing.Size(293, 90)
+        Me.gbTree_o.Size = New System.Drawing.Size(218, 90)
         Me.gbTree_o.TabIndex = 17
         Me.gbTree_o.TabStop = False
         Me.gbTree_o.Text = "Отображение в дереве"
@@ -1480,7 +1521,7 @@ Partial Class frmSetup
         Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel6.Size = New System.Drawing.Size(287, 71)
+        Me.TableLayoutPanel6.Size = New System.Drawing.Size(212, 71)
         Me.TableLayoutPanel6.TabIndex = 23
         '
         'RadioButton3
@@ -1488,7 +1529,7 @@ Partial Class frmSetup
         Me.RadioButton3.AutoSize = True
         Me.RadioButton3.Location = New System.Drawing.Point(3, 49)
         Me.RadioButton3.Name = "RadioButton3"
-        Me.RadioButton3.Size = New System.Drawing.Size(206, 17)
+        Me.RadioButton3.Size = New System.Drawing.Size(180, 17)
         Me.RadioButton3.TabIndex = 2
         Me.RadioButton3.TabStop = True
         Me.RadioButton3.Text = "Имя компьютера (Псевдоним)"
@@ -1499,7 +1540,7 @@ Partial Class frmSetup
         Me.RadioButton1.AutoSize = True
         Me.RadioButton1.Location = New System.Drawing.Point(3, 3)
         Me.RadioButton1.Name = "RadioButton1"
-        Me.RadioButton1.Size = New System.Drawing.Size(127, 17)
+        Me.RadioButton1.Size = New System.Drawing.Size(113, 17)
         Me.RadioButton1.TabIndex = 0
         Me.RadioButton1.TabStop = True
         Me.RadioButton1.Text = "Имя компьютера"
@@ -1510,7 +1551,7 @@ Partial Class frmSetup
         Me.RadioButton2.AutoSize = True
         Me.RadioButton2.Location = New System.Drawing.Point(3, 26)
         Me.RadioButton2.Name = "RadioButton2"
-        Me.RadioButton2.Size = New System.Drawing.Size(169, 17)
+        Me.RadioButton2.Size = New System.Drawing.Size(149, 17)
         Me.RadioButton2.TabIndex = 1
         Me.RadioButton2.TabStop = True
         Me.RadioButton2.Text = "Псевдоним компьютера"
@@ -1697,4 +1738,7 @@ Partial Class frmSetup
     Friend WithEvents txtPort As System.Windows.Forms.TextBox
     Friend WithEvents txtMUser As System.Windows.Forms.TextBox
     Friend WithEvents txtMPassword As System.Windows.Forms.TextBox
+    Friend WithEvents btnNbColor As System.Windows.Forms.Button
+    Friend WithEvents btnSpisanColor As System.Windows.Forms.Button
+    Friend WithEvents btnServiceColor As System.Windows.Forms.Button
 End Class

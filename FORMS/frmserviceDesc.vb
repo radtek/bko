@@ -212,6 +212,17 @@ Public Class frmserviceDesc
                 Dim item As ListViewItem = lstGroups.Items.Add(.Fields(0).Value)
                 item.ImageIndex = uname
 
+                Select Case uname
+
+                    Case 0
+
+                    Case 1
+
+                        lstGroups.Items(CInt(intCount)).ForeColor = Color.FromName(ServiceColor)
+                        lstGroups.Items(CInt(intCount)).BackColor = Color.Olive
+
+                End Select
+
 
                 'lstGroups.Items.Add(.Fields(0).Value, uname) 'col no. 1
 
@@ -2486,5 +2497,9 @@ Public Class frmserviceDesc
 
 
     Private Sub lvRem2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lvRem2.SelectedIndexChanged
+    End Sub
+
+    Private Sub lvRem_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles lvRem.SelectedIndexChanged
+
     End Sub
 End Class

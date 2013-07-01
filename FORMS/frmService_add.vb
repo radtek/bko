@@ -210,12 +210,12 @@
         rs.Close()
         rs = Nothing
 
-        If REMFU = True Or REMED = True Then
+        If REMFU = True And REMED = True Then
 
             'Call LOAD_REPAIR(frmComputers.sCOUNT, frmComputers.lvRepair)
 
 
-            Select frmComputers.sPREF
+            Select Case frmComputers.sPREF
 
                 Case "C"
 

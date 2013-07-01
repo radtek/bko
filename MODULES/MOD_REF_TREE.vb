@@ -13,6 +13,10 @@ Module MOD_REF_TREE
     Private N_NAME As String = ""
     Private P_NAME As String = ""
     Private L_NAME As String = ""
+    Private stmREMONT As Integer = 0
+
+
+
 
     Private Sub FILING_FILIAL()
         On Error Resume Next
@@ -29,17 +33,18 @@ Module MOD_REF_TREE
 
             Case 0
 
-                sSQL4 =
-                    "SELECT id, mesto, filial, tip_compa, tiptehn, PSEVDONIM, NET_NAME, kabn, Spisan, OS, PRINTER_NAME_4,balans FROM kompy WHERE filial ='" &
-                    FILIAL1 & "' AND mesto ='" & OTDEL1 & "' AND kabn ='" & KABINET1 &
-                    "'  AND PCL =0 ORDER BY PSEVDONIM, tiptehn"
-
+                ' sSQL4 =
+                '    "SELECT id, mesto, filial, tip_compa, tiptehn, PSEVDONIM, NET_NAME, kabn, Spisan, OS, PRINTER_NAME_4,balans FROM kompy WHERE filial ='" &
+                '    FILIAL1 & "' AND mesto ='" & OTDEL1 & "' AND kabn ='" & KABINET1 &
+                '    "'  AND PCL =0 ORDER BY PSEVDONIM, tiptehn"
+                sSQL4 = "SELECT id, mesto, filial, tip_compa, tiptehn, PSEVDONIM, NET_NAME, kabn, Spisan, OS, PRINTER_NAME_4,balans, (Select count(*) as t_n FROM Remont Where id_comp=kompy.id and zakryt = 0) as rem FROM kompy WHERE filial ='" & FILIAL1 & "' AND mesto ='" & OTDEL1 & "' AND kabn ='" & KABINET1 & "'  AND PCL =0 ORDER BY PSEVDONIM, tiptehn"
             Case 1
 
-                sSQL4 =
-                    "SELECT id, mesto, filial, tip_compa, tiptehn, PSEVDONIM, NET_NAME, kabn, Spisan, OS, PRINTER_NAME_4,balans FROM kompy WHERE filial ='" &
-                    FILIAL1 & "' AND mesto ='" & OTDEL1 & "' AND kabn ='" & KABINET1 &
-                    "' AND PCL =0 ORDER BY tiptehn, PSEVDONIM"
+                'sSQL4 =
+                '    "SELECT id, mesto, filial, tip_compa, tiptehn, PSEVDONIM, NET_NAME, kabn, Spisan, OS, PRINTER_NAME_4,balans FROM kompy WHERE filial ='" &
+                '    FILIAL1 & "' AND mesto ='" & OTDEL1 & "' AND kabn ='" & KABINET1 &
+                '    "' AND PCL =0 ORDER BY tiptehn, PSEVDONIM"
+                sSQL4 = "SELECT id, mesto, filial, tip_compa, tiptehn, PSEVDONIM, NET_NAME, kabn, Spisan, OS, PRINTER_NAME_4,balans, (Select count(*) as t_n FROM Remont Where id_comp=kompy.id and zakryt = 0) as rem FROM kompy WHERE filial ='" & FILIAL1 & "' AND mesto ='" & OTDEL1 & "' AND kabn ='" & KABINET1 & "'  AND PCL =0 ORDER BY tiptehn, PSEVDONIM"
 
         End Select
 
@@ -47,6 +52,7 @@ Module MOD_REF_TREE
         rs3 = New Recordset
         rs3.Open(sSQL4, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
+        Dim tmpRemont As Integer = 0
         With rs3
             .MoveFirst()
 
@@ -60,10 +66,10 @@ Module MOD_REF_TREE
                 If Not IsDBNull(.Fields("OS").Value) Then iA6 = .Fields("OS").Value
                 If Not IsDBNull(.Fields("PRINTER_NAME_4").Value) Then iA7 = .Fields("PRINTER_NAME_4").Value
                 If Not IsDBNull(.Fields("Balans").Value) Then iA8 = .Fields("Balans").Value
-
+                tmpRemont = .Fields("rem").Value
                 iID = .Fields("id").Value
 
-                FILING_TREE(lstgroups1, iA5, iA1, iA2, iA3, iID, iA4, BrancheNode1, iA6, iA7, iA8)
+                FILING_TREE(lstgroups1, iA5, iA1, iA2, iA3, iID, iA4, BrancheNode1, iA6, iA7, iA8, tmpRemont)
 
 
                 .MoveNext()
@@ -109,6 +115,7 @@ Module MOD_REF_TREE
         End Select
 
         lstgroups.Nodes.Clear()
+        lstgroups.HideSelection = False
 
         Select Case sICONS
 
@@ -454,7 +461,7 @@ ERR1:
     Public Sub FILING_TREE(ByVal lstgroups As TreeView, ByVal iTipTehn As String, ByVal TipPC As String,
                             ByVal NET_NAME As String, ByVal PSEVDONIM As String, ByVal iD As String,
                             ByVal Spisan As String, ByVal DepNode As TreeNode, ByVal OS As String, ByVal n_set As String,
-                            ByVal balans As String)
+                            ByVal balans As String, ByVal REMONT As Integer)
 
         Dim iC As String
         Dim iA As String
@@ -608,7 +615,7 @@ ERR1:
                 DepNode.Nodes.Add(TEHNodeCNT)
 
                 Call checkOther(lstgroups, iD, TEHNodeCNT, Spisan, balans)
-                Call checkRemont(iD, TEHNodeCNT)
+                Call checkRemont(iD, TEHNodeCNT, REMONT)
 
                 '#####################################################################
                 '#####################################################################
@@ -644,19 +651,20 @@ ERR1:
                             Case 0
 
                                 sSQL4 =
-                                    "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa,PRINTER_NAME_4,balans FROM kompy WHERE PCL =" &
+                                    "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa,PRINTER_NAME_4,balans, (Select count(*) as t_n FROM Remont Where id_comp=kompy.id and zakryt = 0) as rem FROM kompy WHERE PCL =" &
                                     iD & " ORDER BY PSEVDONIM, tiptehn"
 
                             Case 1
 
                                 sSQL4 =
-                                    "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa,PRINTER_NAME_4,balans FROM kompy WHERE PCL =" &
+                                    "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa,PRINTER_NAME_4,balans, (Select count(*) as t_n FROM Remont Where id_comp=kompy.id and zakryt = 0) as rem FROM kompy WHERE PCL =" &
                                     iD & " ORDER BY tiptehn, PSEVDONIM"
 
                         End Select
 
                         rs3 = New Recordset
                         rs3.Open(sSQL4, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        stmREMONT = 0
 
                         With rs3
                             .MoveFirst()
@@ -664,6 +672,7 @@ ERR1:
                             Do While Not .EOF
                                 Spisan = .Fields("Spisan").Value
                                 balans = .Fields("balans").Value
+                                stmREMONT = .Fields("rem").Value
 
                                 Select Case sTREENAME
 
@@ -710,7 +719,7 @@ ERR1:
                                         TEHNodeCNT.Nodes.Add(TEHNodePC)
                                         iD = .Fields("id").Value
 
-                                       Select Case n_set
+                                        Select Case n_set
 
                                             Case "Off"
                                                 TEHNodePC.ForeColor = Color.Red
@@ -726,8 +735,7 @@ ERR1:
                                         End Select
 
                                         Call checkOther(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans)
-                                        Call checkRemont(.Fields("id").Value, TEHNodePC)
-
+                                        Call checkRemont(.Fields("id").Value, TEHNodePC, .Fields("rem").Value)
 
                                     Case "PC"
 
@@ -754,7 +762,6 @@ ERR1:
                                             Case "Рабочая станция"
                                                 iA = 4
 
-
                                             Case "Сервер"
 
                                                 iA = 3
@@ -780,9 +787,7 @@ ERR1:
                                         TEHNodeCNT.Nodes.Add(TEHNodePC)
 
                                         Call checkOther(lstgroups, .Fields("id").Value, TEHNodePC, Spisan, balans)
-                                        Call checkRemont(.Fields("id").Value, TEHNodePC)
-
-
+                                        Call checkRemont(.Fields("id").Value, TEHNodePC, .Fields("rem").Value)
 
                                         '#####################################################################
                                         '#####################################################################
@@ -813,16 +818,17 @@ ERR1:
                                                     Case 0
 
                                                         sSQL4 =
-                                                            "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa,balans FROM kompy WHERE PCL =" &
+                                                            "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa,balans, (Select count(*) as t_n FROM Remont Where id_comp=kompy.id and zakryt = 0) as rem FROM kompy WHERE PCL =" &
                                                             iD & " ORDER BY PSEVDONIM, tiptehn"
 
                                                     Case 1
 
                                                         sSQL4 =
-                                                            "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa,balans FROM kompy WHERE PCL =" &
+                                                            "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa,balans, (Select count(*) as t_n FROM Remont Where id_comp=kompy.id and zakryt = 0) as rem FROM kompy WHERE PCL =" &
                                                             iD & " ORDER BY tiptehn, PSEVDONIM"
 
                                                 End Select
+                                                stmREMONT = 0
 
                                                 rs3 = New Recordset
                                                 rs3.Open(sSQL4, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -834,6 +840,7 @@ ERR1:
 
                                                         Spisan = .Fields("Spisan").Value
                                                         balans = .Fields("balans").Value
+                                                        stmREMONT = .Fields("rem").Value
 
                                                         Select Case sTREENAME
 
@@ -880,7 +887,7 @@ ERR1:
 
                                                         End Select
 
-                                                        Select Case .Fields("tiptehn").Value
+                                                       Select Case .Fields("tiptehn").Value
 
                                                             Case "Printer"
 
@@ -1012,24 +1019,21 @@ ERR1:
                                         '#####################################################################
 
                                     Case "PHOTO"
-
+                                        
                                         Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME, 11)
-
-
+                                        
                                     Case "Printer"
 
                                         Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME,
                                                           7)
-
-
+                                        
                                     Case "MFU"
 
                                         Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME,
                                                           8)
 
-
                                     Case "SCANER"
-
+                                        
                                         Filling_TREE_DATA(lstgroups, .Fields("id").Value, TEHNodeCNT, Spisan, balans, L_NAME,
                                                           14)
 
@@ -1156,9 +1160,9 @@ ERR1:
                 iPSid = iD
 
                 DepNode.Nodes.Add(TEHNodePC)
-                
+
                 Call checkOther(lstgroups, iD, TEHNodePC, Spisan, balans)
-                Call checkRemont(iD, TEHNodePC)
+                Call checkRemont(iD, TEHNodePC, REMONT)
 
                 '########################################################################
                 '########################################################################
@@ -1205,6 +1209,7 @@ ERR1:
 
                         rs3 = New Recordset
                         rs3.Open(sSQL4, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        stmREMONT = 0
 
                         With rs3
                             .MoveFirst()
@@ -1213,6 +1218,7 @@ ERR1:
 
                                 Spisan = .Fields("Spisan").Value
                                 balans = .Fields("balans").Value
+                                stmREMONT = .Fields("rem").Value
 
                                 Select Case sTREENAME
 
@@ -1257,7 +1263,7 @@ ERR1:
                                         L_NAME = N_NAME
 
                                 End Select
-
+                                
                                 Select Case .Fields("tiptehn").Value
 
                                     Case "Printer"
@@ -1385,27 +1391,29 @@ ERR1:
 
                 End Select
 
-            Case "Printer"
+                stmREMONT = REMONT
 
+            Case "Printer"
+                stmREMONT = REMONT
                 Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 7)
 
             Case "MFU"
-
+                stmREMONT = REMONT
                 Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 8)
 
             Case "KOpir"
-
+                stmREMONT = REMONT
                 Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 9)
 
             Case "NET"
-
+                stmREMONT = REMONT
                 Dim TEHNode As New TreeNode(L_NAME, 10, 10)
                 TEHNode.Tag = "C|" & iD
                 TEHNode.Text = L_NAME
                 TEHNode.Name = L_NAME
                 DepNode.Nodes.Add(TEHNode)
 
-               Select Case n_set
+                Select Case n_set
 
                     Case "Off"
                         TEHNode.ForeColor = Color.Red
@@ -1421,10 +1429,10 @@ ERR1:
                 End Select
 
                 Call checkOther(lstgroups, iD, TEHNode, Spisan, balans)
-                Call checkRemont(iD, TEHNode)
-
+                Call checkRemont(iD, TEHNode, REMONT)
+                
             Case "PHOTO"
-
+                stmREMONT = REMONT
                 iA = 11
                 iB = 11
 
@@ -1437,8 +1445,9 @@ ERR1:
 
                 DepNode.Nodes.Add(TEHNodePHOTO)
 
-               Call checkOther(lstgroups, iD, TEHNodePHOTO, Spisan, balans)
-                Call checkRemont(iD, TEHNodePHOTO)
+                Call checkOther(lstgroups, iD, TEHNodePHOTO, Spisan, balans)
+                Call checkRemont(iD, TEHNodePHOTO, REMONT)
+
 
                 Dim sText As String = objIniFile.GetString("general", "Tree_S", 0)
                 Dim sSQL4 As String
@@ -1469,19 +1478,20 @@ ERR1:
                             Case 0
 
                                 sSQL4 =
-                                    "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa,PRINTER_NAME_4,balans FROM kompy WHERE PCL =" &
+                                    "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa,PRINTER_NAME_4,balans, (Select count(*) as t_n FROM Remont Where id_comp=kompy.id and zakryt = 0) as rem FROM kompy WHERE PCL =" &
                                     iD & " ORDER BY PSEVDONIM, tiptehn"
 
                             Case 1
 
                                 sSQL4 =
-                                    "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa,PRINTER_NAME_4,balans FROM kompy WHERE PCL =" &
+                                    "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa,PRINTER_NAME_4,balans, (Select count(*) as t_n FROM Remont Where id_comp=kompy.id and zakryt = 0) as rem FROM kompy WHERE PCL =" &
                                     iD & " ORDER BY tiptehn, PSEVDONIM"
 
                         End Select
 
                         rs3 = New Recordset
                         rs3.Open(sSQL4, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        stmREMONT = 0
 
                         With rs3
                             .MoveFirst()
@@ -1490,6 +1500,7 @@ ERR1:
 
                                 Spisan = .Fields("Spisan").Value
                                 balans = .Fields("balans").Value
+                                stmREMONT = .Fields("rem").Value
 
                                 Select Case sTREENAME
 
@@ -1599,23 +1610,23 @@ ERR1:
                 End Select
 
             Case "PHONE"
-
+                stmREMONT = REMONT
                 Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 12)
 
             Case "FAX"
-
+                stmREMONT = REMONT
                 Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 13)
 
             Case "SCANER"
-
+                stmREMONT = REMONT
                 Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 14)
 
             Case "ZIP"
-
+                stmREMONT = REMONT
                 Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 15)
 
             Case "OT"
-
+                stmREMONT = REMONT
                 Dim uname As String
 
                 On Error Resume Next
@@ -1658,32 +1669,32 @@ ERR1:
                 Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, iA)
 
             Case "MONITOR"
-
+                stmREMONT = REMONT
                 Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 17)
 
                 '--------------VIP_Graff Добавление новой перефирии Начало-----------------
             Case "USB"
-
+                stmREMONT = REMONT
                 Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 18)
 
             Case "SOUND"
-
+                stmREMONT = REMONT
                 Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 44)
 
             Case "IBP"
-
+                stmREMONT = REMONT
                 Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 41)
 
             Case "FS"
-
+                stmREMONT = REMONT
                 Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 61)
-
+                stmREMONT = REMONT
             Case "KEYB"
-
+                stmREMONT = REMONT
                 Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 46)
 
             Case "MOUSE"
-
+                stmREMONT = REMONT
                 Filling_TREE_DATA(lstgroups, iD, DepNode, Spisan, balans, L_NAME, 47)
 
                 '--------------VIP_Graff Добавление новой перефирии Конец------------------
@@ -1703,40 +1714,25 @@ ERR1:
         TEHNodeCNT.Name = L_NAME
         TEHNodePCL.Nodes.Add(TEHNodeCNT)
 
-       Call checkOther(lstgroups, sID, TEHNodeCNT, Spisan, balans)
-        Call checkRemont(sID, TEHNodeCNT)
+        Call checkOther(lstgroups, sID, TEHNodeCNT, Spisan, balans)
+        Call checkRemont(sID, TEHNodeCNT, stmREMONT)
 
     End Sub
 
-    Public Sub checkRemont(ByVal sID As Integer, ByVal TEHNodePCL As TreeNode)
-
+    Public Sub checkRemont(ByVal sID As Integer, ByVal TEHNodePCL As TreeNode, ByVal remont As Integer)
+        
         Select Case remVisible
 
             Case True
 
-                Dim rs As Recordset
-                rs = New Recordset
-                Dim sSQL As String
-
-                sSQL = "Select count(*) as t_n FROM Remont Where id_comp=" & sID & " and zakryt = 0"
-
-                Dim tmpCount As Integer = 0
-
-                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
-                tmpCount = rs.Fields("t_n").Value
-
-                rs.Close()
-                rs = Nothing
-
-                Select Case tmpCount
+                Select Case remont
 
                     Case 0
 
                     Case Else
-                        TEHNodePCL.ForeColor = Color.Black
+                        TEHNodePCL.ForeColor = Color.FromName(ServiceColor)
                         TEHNodePCL.BackColor = Color.Olive
-                        
+
                 End Select
 
         End Select
@@ -1747,7 +1743,6 @@ ERR1:
     Public Sub checkOther(ByVal lstgroups As TreeView, ByVal sID As Integer, ByVal TEHNodeCNT As TreeNode,
                                  ByVal Spisan As String, ByVal balans As String)
 
-
         Select Case SPVisible
 
             Case True
@@ -1755,13 +1750,13 @@ ERR1:
                 Select Case Spisan
 
                     Case "1"
-                        TEHNodeCNT.ForeColor = Color.DimGray
+                        TEHNodeCNT.ForeColor = Color.FromName(SpisanColor)
                         TEHNodeCNT.NodeFont = New Font(lstgroups.Font, 8)
                     Case "True"
-                        TEHNodeCNT.ForeColor = Color.DimGray
+                        TEHNodeCNT.ForeColor = Color.FromName(SpisanColor)
                         TEHNodeCNT.NodeFont = New Font(lstgroups.Font, 8)
                     Case "-1"
-                        TEHNodeCNT.ForeColor = Color.DimGray
+                        TEHNodeCNT.ForeColor = Color.FromName(SpisanColor)
                         TEHNodeCNT.NodeFont = New Font(lstgroups.Font, 8)
                 End Select
 
@@ -1773,17 +1768,48 @@ ERR1:
 
                 If balans = "1" Or balans = "True" Or balans = "-1" Then
 
+                    'NbColor
+                    'SpisanColor
+                    'ServiceColor
+
                     Select Case Spisan
 
                         Case "1"
+
+                            If NbColor = SpisanColor Then
+                                TEHNodeCNT.ForeColor = Color.Yellow
+                                TEHNodeCNT.BackColor = Color.Blue
+                            Else
+                                TEHNodeCNT.ForeColor = Color.FromName(NbColor)
+                                TEHNodeCNT.BackColor = Color.FromName(SpisanColor)
+
+                            End If
+
+
                             TEHNodeCNT.NodeFont = New Font(lstgroups.Font, 10)
                         Case "True"
+                            If NbColor = SpisanColor Then
+                                TEHNodeCNT.ForeColor = Color.Yellow
+                                TEHNodeCNT.BackColor = Color.Blue
+                            Else
+                                TEHNodeCNT.ForeColor = Color.FromName(NbColor)
+                                TEHNodeCNT.BackColor = Color.FromName(SpisanColor)
+
+                            End If
                             TEHNodeCNT.NodeFont = New Font(lstgroups.Font, 10)
                         Case "-1"
+                            If NbColor = SpisanColor Then
+                                TEHNodeCNT.ForeColor = Color.Yellow
+                                TEHNodeCNT.BackColor = Color.Blue
+                            Else
+                                TEHNodeCNT.ForeColor = Color.FromName(NbColor)
+                                TEHNodeCNT.BackColor = Color.FromName(SpisanColor)
+
+                            End If
                             TEHNodeCNT.NodeFont = New Font(lstgroups.Font, 10)
 
                         Case Else
-
+                            TEHNodeCNT.ForeColor = Color.FromName(NbColor)
                             TEHNodeCNT.NodeFont = New Font(lstgroups.Font, 2)
 
                     End Select
@@ -1791,17 +1817,6 @@ ERR1:
                 End If
 
         End Select
-
-        'Select Case nset
-
-        '    Case "Off"
-
-        '        lstgroups.SelectedNode.ForeColor = Color.Red
-
-        '    Case Else
-
-
-        'End Select
 
         Select Case KCKey
             Case sID
@@ -2038,10 +2053,13 @@ ERR1:
                         objIniFile.WriteString("general", "DK", sID)
                         objIniFile.WriteString("general", "Default", 0)
 
-                        sSQL = "SELECT id, mesto, filial, tip_compa, tiptehn, PSEVDONIM, NET_NAME, kabn, Spisan, OS, PRINTER_NAME_4,balans FROM kompy WHERE id =" & sID '& " AND PCL =0"
+                        ' sSQL = "SELECT id, mesto, filial, tip_compa, tiptehn, PSEVDONIM, NET_NAME, kabn, Spisan, OS, PRINTER_NAME_4,balans FROM kompy WHERE id =" & sID '& " AND PCL =0"
+                        sSQL = "SELECT id, mesto, filial, tip_compa, tiptehn, PSEVDONIM, NET_NAME, kabn, Spisan, OS, PRINTER_NAME_4,balans, (Select count(*) as t_n FROM Remont Where id_comp=" & sID & " and zakryt = 0) as rem FROM kompy WHERE id =" & sID
 
                         rs = New Recordset
                         rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
+                        Dim tmpRemont As Integer = 0
 
                         With rs
 
@@ -2053,14 +2071,14 @@ ERR1:
                             If Not IsDBNull(.Fields("OS").Value) Then iA6 = .Fields("OS").Value
                             If Not IsDBNull(.Fields("PRINTER_NAME_4").Value) Then iA7 = .Fields("PRINTER_NAME_4").Value
                             If Not IsDBNull(.Fields("Balans").Value) Then iA8 = .Fields("Balans").Value
-
+                            tmpRemont = .Fields("rem").Value
                         End With
 
                         rs.Close()
                         rs = Nothing
 
                         'Добавляем объект в дерево
-                        FILING_TREE(frmComputers.lstGroups, iA5, iA1, iA2, iA3, sID, iA4, frmComputers.lstGroups.SelectedNode, iA6, iA7, iA8)
+                        FILING_TREE(frmComputers.lstGroups, iA5, iA1, iA2, iA3, sID, iA4, frmComputers.lstGroups.SelectedNode, iA6, iA7, iA8, tmpRemont)
 
                         '###########################
                         'Ищем технику
@@ -2092,11 +2110,12 @@ ERR1:
                 'ищем в дереве объект контейнер
                 Call FIND_TREE(L_NAME)
 
-                sSQL = "SELECT id, mesto, filial, tip_compa, tiptehn, PSEVDONIM, NET_NAME, kabn, Spisan, OS, PRINTER_NAME_4,balans FROM kompy WHERE id =" & sID '& " AND PCL =0"
+                sSQL = "SELECT id, mesto, filial, tip_compa, tiptehn, PSEVDONIM, NET_NAME, kabn, Spisan, OS, PRINTER_NAME_4,balans, (Select count(*) as t_n FROM Remont Where id_comp=kompy.id and zakryt = 0) as rem FROM kompy WHERE id =" & sID '& " AND PCL =0"
 
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
+                Dim tmpRemont As Integer = 0
                 With rs
 
                     If Not IsDBNull(.Fields("tip_compa").Value) Then iA1 = .Fields("tip_compa").Value
@@ -2107,7 +2126,7 @@ ERR1:
                     If Not IsDBNull(.Fields("OS").Value) Then iA6 = .Fields("OS").Value
                     If Not IsDBNull(.Fields("PRINTER_NAME_4").Value) Then iA7 = .Fields("PRINTER_NAME_4").Value
                     If Not IsDBNull(.Fields("Balans").Value) Then iA8 = .Fields("Balans").Value
-
+                    tmpRemont = .Fields("rem").Value
                 End With
 
                 rs.Close()
@@ -2117,7 +2136,7 @@ ERR1:
                 objIniFile.WriteString("general", "Default", 0)
 
                 'Добавляем объект в контейнер в дереве
-                Call FILING_TREE(frmComputers.lstGroups, iA5, iA1, iA2, iA3, sID, iA4, frmComputers.lstGroups.SelectedNode, iA6, iA7, iA8)
+                Call FILING_TREE(frmComputers.lstGroups, iA5, iA1, iA2, iA3, sID, iA4, frmComputers.lstGroups.SelectedNode, iA6, iA7, iA8, tmpRemont)
 
         End Select
 

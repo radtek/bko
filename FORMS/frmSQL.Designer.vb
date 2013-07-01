@@ -43,7 +43,7 @@ Partial Class frmSQL
         Me.TableLayoutPanel1.ColumnCount = 2
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-        Me.TableLayoutPanel1.Controls.Add(Me.TableLayoutPanel2, 0, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.TableLayoutPanel2, 1, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.txtQ, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.cmbSaveQ, 0, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.LvQ, 0, 2)
@@ -62,6 +62,7 @@ Partial Class frmSQL
         '
         Me.TableLayoutPanel2.ColumnCount = 1
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.TableLayoutPanel2.Controls.Add(Me.btnDelete, 0, 4)
         Me.TableLayoutPanel2.Controls.Add(Me.btnExecute, 0, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.btnClear, 0, 1)

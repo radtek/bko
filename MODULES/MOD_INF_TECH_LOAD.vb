@@ -2044,8 +2044,19 @@ Module MOD_INF_TECH_LOAD
 
                 End If
 
-                Dim item As ListViewItem = lstGroups.Items.Add(.Fields(0).Value)
+                Dim item As ListViewItem = lstGroups.Items.Add(.Fields("id").Value)
                 item.ImageIndex = uname
+
+                Select Case uname
+
+                    Case 0
+
+                    Case 1
+
+                        lstGroups.Items(CInt(intCount)).ForeColor = Color.FromName(ServiceColor)
+                        lstGroups.Items(CInt(intCount)).BackColor = Color.Olive
+
+                End Select
 
                 'lstGroups.Items.Add(.Fields("id").Value) 'col no. 1
 

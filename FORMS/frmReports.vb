@@ -395,6 +395,16 @@ ADR:
                         Dim item As ListViewItem = lvRemont.Items.Add(.Fields("id").Value)
                         item.ImageIndex = uname
 
+                        Select Case uname
+
+                            Case 0
+
+                            Case 1
+
+                                lvRemont.Items(CInt(intCount)).ForeColor = Color.FromName(ServiceColor)
+                                lvRemont.Items(CInt(intCount)).BackColor = Color.Olive
+
+                        End Select
 
                         lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("Date").Value)
                         lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("Remont").Value)
@@ -486,6 +496,18 @@ ADR:
 
                             Dim item As ListViewItem = lvRemont.Items.Add(.Fields("id").Value)
                             item.ImageIndex = uname
+
+
+                            Select Case uname
+
+                                Case 0
+
+                                Case 1
+
+                                    lvRemont.Items(CInt(intCount)).ForeColor = Color.FromName(ServiceColor)
+                                    lvRemont.Items(CInt(intCount)).BackColor = Color.Olive
+
+                            End Select
 
                             lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("Date").Value)
                             lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("Remont").Value)
@@ -606,6 +628,16 @@ ADR2:
                                 Dim item As ListViewItem = lvRemont.Items.Add(.Fields("id").Value)
                                 item.ImageIndex = uname
 
+                                Select Case uname
+
+                                    Case 0
+
+                                    Case 1
+
+                                        lvRemont.Items(CInt(intCount)).ForeColor = Color.FromName(ServiceColor)
+                                        lvRemont.Items(CInt(intCount)).BackColor = Color.Olive
+
+                                End Select
 
                                 lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("Date").Value)
                                 lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("Remont").Value)
@@ -705,8 +737,20 @@ ADR2:
                                             uname = 1
                                         End If
 
+
                                         Dim item As ListViewItem = lvRemont.Items.Add(.Fields("id").Value)
                                         item.ImageIndex = uname
+
+                                        Select Case uname
+
+                                            Case 0
+
+                                            Case 1
+
+                                                lvRemont.Items(CInt(intCount)).ForeColor = Color.FromName(ServiceColor)
+                                                lvRemont.Items(CInt(intCount)).BackColor = Color.Olive
+
+                                        End Select
 
                                         lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("Date").Value)
                                         lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("Remont").Value)
@@ -790,14 +834,11 @@ ADR2:
                             End If
                         End If
 
-
                 End Select
-
 
                 .MoveNext()
             Loop
         End With
-
 
         rs.Close()
         rs = Nothing
