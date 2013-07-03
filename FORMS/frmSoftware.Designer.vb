@@ -36,6 +36,7 @@ Partial Class frmSoftware
         Me.cmbSoftware = New System.Windows.Forms.ComboBox()
         Me.lstSoftware = New System.Windows.Forms.ListView()
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+        Me.Label2 = New System.Windows.Forms.Label()
         Me.cmbTipLicense = New System.Windows.Forms.ComboBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.cmbTipPo = New System.Windows.Forms.ComboBox()
@@ -58,7 +59,6 @@ Partial Class frmSoftware
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.CheckBox2 = New System.Windows.Forms.CheckBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
         Me.gbTree.SuspendLayout()
         Me.TableLayoutPanel3.SuspendLayout()
         Me.ToolStrip2.SuspendLayout()
@@ -77,7 +77,7 @@ Partial Class frmSoftware
         Me.gbTree.Dock = System.Windows.Forms.DockStyle.Fill
         Me.gbTree.Location = New System.Drawing.Point(0, 0)
         Me.gbTree.Name = "gbTree"
-        Me.gbTree.Size = New System.Drawing.Size(294, 527)
+        Me.gbTree.Size = New System.Drawing.Size(306, 521)
         Me.gbTree.TabIndex = 0
         Me.gbTree.TabStop = False
         Me.gbTree.Text = "Дерево"
@@ -98,7 +98,7 @@ Partial Class frmSoftware
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel3.Size = New System.Drawing.Size(288, 508)
+        Me.TableLayoutPanel3.Size = New System.Drawing.Size(300, 502)
         Me.TableLayoutPanel3.TabIndex = 5
         '
         'treebranche
@@ -108,7 +108,7 @@ Partial Class frmSoftware
         Me.treebranche.FormattingEnabled = True
         Me.treebranche.Location = New System.Drawing.Point(3, 33)
         Me.treebranche.Name = "treebranche"
-        Me.treebranche.Size = New System.Drawing.Size(282, 21)
+        Me.treebranche.Size = New System.Drawing.Size(294, 21)
         Me.treebranche.TabIndex = 6
         '
         'txtSearch
@@ -116,7 +116,7 @@ Partial Class frmSoftware
         Me.txtSearch.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtSearch.Location = New System.Drawing.Point(3, 3)
         Me.txtSearch.Name = "txtSearch"
-        Me.txtSearch.Size = New System.Drawing.Size(247, 20)
+        Me.txtSearch.Size = New System.Drawing.Size(259, 20)
         Me.txtSearch.TabIndex = 2
         '
         'lstGroups
@@ -124,10 +124,9 @@ Partial Class frmSoftware
         Me.TableLayoutPanel3.SetColumnSpan(Me.lstGroups, 2)
         Me.lstGroups.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lstGroups.FullRowSelect = True
-        Me.lstGroups.HideSelection = False
         Me.lstGroups.Location = New System.Drawing.Point(3, 63)
         Me.lstGroups.Name = "lstGroups"
-        Me.lstGroups.Size = New System.Drawing.Size(282, 442)
+        Me.lstGroups.Size = New System.Drawing.Size(294, 436)
         Me.lstGroups.TabIndex = 0
         '
         'ToolStrip2
@@ -135,7 +134,7 @@ Partial Class frmSoftware
         Me.ToolStrip2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ToolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
         Me.ToolStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnSearch})
-        Me.ToolStrip2.Location = New System.Drawing.Point(253, 0)
+        Me.ToolStrip2.Location = New System.Drawing.Point(265, 0)
         Me.ToolStrip2.Name = "ToolStrip2"
         Me.ToolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
         Me.ToolStrip2.Size = New System.Drawing.Size(35, 30)
@@ -163,8 +162,8 @@ Partial Class frmSoftware
         'SplitContainer1.Panel2
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.gbSoftware)
-        Me.SplitContainer1.Size = New System.Drawing.Size(963, 527)
-        Me.SplitContainer1.SplitterDistance = 294
+        Me.SplitContainer1.Size = New System.Drawing.Size(997, 521)
+        Me.SplitContainer1.SplitterDistance = 306
         Me.SplitContainer1.TabIndex = 2
         '
         'gbSoftware
@@ -174,7 +173,7 @@ Partial Class frmSoftware
         Me.gbSoftware.Dock = System.Windows.Forms.DockStyle.Fill
         Me.gbSoftware.Location = New System.Drawing.Point(0, 0)
         Me.gbSoftware.Name = "gbSoftware"
-        Me.gbSoftware.Size = New System.Drawing.Size(665, 527)
+        Me.gbSoftware.Size = New System.Drawing.Size(687, 521)
         Me.gbSoftware.TabIndex = 0
         Me.gbSoftware.TabStop = False
         Me.gbSoftware.Text = "Установленное программное обеспечение"
@@ -182,14 +181,14 @@ Partial Class frmSoftware
         'TableLayoutPanel1
         '
         Me.TableLayoutPanel1.ColumnCount = 4
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel1.Controls.Add(Me.cmbSoftware, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.lstSoftware, 0, 7)
-        Me.TableLayoutPanel1.Controls.Add(Me.Label2, 0, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.CheckBox1, 3, 5)
+        Me.TableLayoutPanel1.Controls.Add(Me.Label2, 0, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.cmbTipLicense, 1, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.Label3, 2, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.cmbTipPo, 3, 1)
@@ -215,7 +214,7 @@ Partial Class frmSoftware
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(659, 508)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(681, 502)
         Me.TableLayoutPanel1.TabIndex = 19
         '
         'cmbSoftware
@@ -227,7 +226,7 @@ Partial Class frmSoftware
         Me.cmbSoftware.FormattingEnabled = True
         Me.cmbSoftware.Location = New System.Drawing.Point(3, 3)
         Me.cmbSoftware.Name = "cmbSoftware"
-        Me.cmbSoftware.Size = New System.Drawing.Size(653, 21)
+        Me.cmbSoftware.Size = New System.Drawing.Size(675, 21)
         Me.cmbSoftware.TabIndex = 1
         '
         'lstSoftware
@@ -240,7 +239,7 @@ Partial Class frmSoftware
         Me.lstSoftware.Location = New System.Drawing.Point(3, 161)
         Me.lstSoftware.MultiSelect = False
         Me.lstSoftware.Name = "lstSoftware"
-        Me.lstSoftware.Size = New System.Drawing.Size(653, 370)
+        Me.lstSoftware.Size = New System.Drawing.Size(675, 338)
         Me.lstSoftware.TabIndex = 17
         Me.lstSoftware.UseCompatibleStateImageBehavior = False
         Me.lstSoftware.View = System.Windows.Forms.View.Details
@@ -249,12 +248,22 @@ Partial Class frmSoftware
         '
         Me.CheckBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Location = New System.Drawing.Point(469, 111)
+        Me.CheckBox1.Location = New System.Drawing.Point(545, 111)
         Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(187, 17)
+        Me.CheckBox1.Size = New System.Drawing.Size(133, 17)
         Me.CheckBox1.TabIndex = 18
         Me.CheckBox1.Text = "Беcсрочно"
         Me.CheckBox1.UseVisualStyleBackColor = True
+        '
+        'Label2
+        '
+        Me.Label2.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(3, 34)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(171, 13)
+        Me.Label2.TabIndex = 2
+        Me.Label2.Text = "Тип лицензии:"
         '
         'cmbTipLicense
         '
@@ -262,18 +271,18 @@ Partial Class frmSoftware
         Me.cmbTipLicense.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cmbTipLicense.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cmbTipLicense.FormattingEnabled = True
-        Me.cmbTipLicense.Location = New System.Drawing.Point(163, 30)
+        Me.cmbTipLicense.Location = New System.Drawing.Point(180, 30)
         Me.cmbTipLicense.Name = "cmbTipLicense"
-        Me.cmbTipLicense.Size = New System.Drawing.Size(154, 21)
+        Me.cmbTipLicense.Size = New System.Drawing.Size(210, 21)
         Me.cmbTipLicense.TabIndex = 3
         '
         'Label3
         '
         Me.Label3.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(323, 34)
+        Me.Label3.Location = New System.Drawing.Point(396, 34)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(140, 13)
+        Me.Label3.Size = New System.Drawing.Size(143, 13)
         Me.Label3.TabIndex = 4
         Me.Label3.Text = "Тип П.О.:"
         '
@@ -283,9 +292,9 @@ Partial Class frmSoftware
         Me.cmbTipPo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cmbTipPo.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cmbTipPo.FormattingEnabled = True
-        Me.cmbTipPo.Location = New System.Drawing.Point(469, 30)
+        Me.cmbTipPo.Location = New System.Drawing.Point(545, 30)
         Me.cmbTipPo.Name = "cmbTipPo"
-        Me.cmbTipPo.Size = New System.Drawing.Size(187, 21)
+        Me.cmbTipPo.Size = New System.Drawing.Size(133, 21)
         Me.cmbTipPo.TabIndex = 5
         '
         'Label4
@@ -294,13 +303,13 @@ Partial Class frmSoftware
         Me.Label4.AutoSize = True
         Me.Label4.Location = New System.Drawing.Point(3, 54)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(154, 13)
+        Me.Label4.Size = New System.Drawing.Size(171, 13)
         Me.Label4.TabIndex = 6
         Me.Label4.Text = "Лицензионный номер:"
         '
         'dtGok
         '
-        Me.dtGok.Location = New System.Drawing.Point(323, 110)
+        Me.dtGok.Location = New System.Drawing.Point(396, 110)
         Me.dtGok.Name = "dtGok"
         Me.dtGok.Size = New System.Drawing.Size(140, 20)
         Me.dtGok.TabIndex = 13
@@ -311,23 +320,23 @@ Partial Class frmSoftware
         Me.txtLicKey.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtLicKey.Location = New System.Drawing.Point(3, 70)
         Me.txtLicKey.Name = "txtLicKey"
-        Me.txtLicKey.Size = New System.Drawing.Size(314, 20)
+        Me.txtLicKey.Size = New System.Drawing.Size(387, 20)
         Me.txtLicKey.TabIndex = 7
         '
         'DTInstall
         '
         Me.DTInstall.Location = New System.Drawing.Point(3, 110)
         Me.DTInstall.Name = "DTInstall"
-        Me.DTInstall.Size = New System.Drawing.Size(154, 20)
+        Me.DTInstall.Size = New System.Drawing.Size(168, 20)
         Me.DTInstall.TabIndex = 12
         '
         'Label5
         '
         Me.Label5.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(323, 54)
+        Me.Label5.Location = New System.Drawing.Point(396, 54)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(140, 13)
+        Me.Label5.Size = New System.Drawing.Size(143, 13)
         Me.Label5.TabIndex = 8
         Me.Label5.Text = "Производитель:"
         '
@@ -335,10 +344,9 @@ Partial Class frmSoftware
         '
         Me.Label6.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label6.AutoSize = True
-        Me.TableLayoutPanel1.SetColumnSpan(Me.Label6, 2)
-        Me.Label6.Location = New System.Drawing.Point(323, 94)
+        Me.Label6.Location = New System.Drawing.Point(396, 94)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(333, 13)
+        Me.Label6.Size = New System.Drawing.Size(143, 13)
         Me.Label6.TabIndex = 11
         Me.Label6.Text = "Дата окончания лицензии:"
         '
@@ -349,19 +357,18 @@ Partial Class frmSoftware
         Me.TableLayoutPanel1.SetColumnSpan(Me.cmbSoftPr, 2)
         Me.cmbSoftPr.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cmbSoftPr.FormattingEnabled = True
-        Me.cmbSoftPr.Location = New System.Drawing.Point(323, 70)
+        Me.cmbSoftPr.Location = New System.Drawing.Point(396, 70)
         Me.cmbSoftPr.Name = "cmbSoftPr"
-        Me.cmbSoftPr.Size = New System.Drawing.Size(333, 21)
+        Me.cmbSoftPr.Size = New System.Drawing.Size(282, 21)
         Me.cmbSoftPr.TabIndex = 9
         '
         'Label7
         '
         Me.Label7.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label7.AutoSize = True
-        Me.TableLayoutPanel1.SetColumnSpan(Me.Label7, 2)
         Me.Label7.Location = New System.Drawing.Point(3, 94)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(314, 13)
+        Me.Label7.Size = New System.Drawing.Size(171, 13)
         Me.Label7.TabIndex = 10
         Me.Label7.Text = "Дата приобретения (установки):"
         '
@@ -374,7 +381,7 @@ Partial Class frmSoftware
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 133)
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
-        Me.ToolStrip1.Size = New System.Drawing.Size(320, 25)
+        Me.ToolStrip1.Size = New System.Drawing.Size(393, 25)
         Me.ToolStrip1.TabIndex = 20
         Me.ToolStrip1.Text = "ToolStrip1"
         '
@@ -437,7 +444,7 @@ Partial Class frmSoftware
         'CheckBox2
         '
         Me.CheckBox2.AutoSize = True
-        Me.CheckBox2.Location = New System.Drawing.Point(323, 136)
+        Me.CheckBox2.Location = New System.Drawing.Point(396, 136)
         Me.CheckBox2.Name = "CheckBox2"
         Me.CheckBox2.Size = New System.Drawing.Size(127, 17)
         Me.CheckBox2.TabIndex = 19
@@ -447,29 +454,19 @@ Partial Class frmSoftware
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(307, 0)
+        Me.Label1.Location = New System.Drawing.Point(7, 13)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(146, 13)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Программное обеспечение"
         '
-        'Label2
-        '
-        Me.Label2.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(3, 34)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(154, 13)
-        Me.Label2.TabIndex = 2
-        Me.Label2.Text = "Тип лицензии:"
-        '
         'frmSoftware
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(963, 527)
+        Me.ClientSize = New System.Drawing.Size(997, 521)
         Me.Controls.Add(Me.SplitContainer1)
-        Me.MinimumSize = New System.Drawing.Size(962, 560)
+        Me.MinimumSize = New System.Drawing.Size(1012, 559)
         Me.Name = "frmSoftware"
         Me.Text = "Учет программного обеспечения"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized

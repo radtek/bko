@@ -187,7 +187,7 @@ Public Class frmLogin
                     .Fields("SISADM").Value = "SISADM"
                     .Fields("Name_Prog").Value = "BKO.NET"
                     .Fields("Nr").Value = "Yes"
-                    .Fields("access").Value = "1.7.3.8"
+                    .Fields("access").Value = "1.7.3.9"
                     .Update()
                 End With
                 rs25.Close()
@@ -225,7 +225,7 @@ Public Class frmLogin
 
         Select Case sVERSIA
 
-            Case "1.7.3.8"
+            Case "1.7.3.9"
 
 
             Case Else

@@ -5,7 +5,6 @@
     Public MRZD As Boolean = False
     Public sNetName As Boolean = False
 
-
     Public Sub PreSaveOtv(ByVal sFIALIAL As String, ByVal sOTDEL As String, ByVal sKABN As String)
 
         Dim sSQL As String
@@ -279,6 +278,11 @@ sAR:
             .Fields("Spisan").Value = frmComputers.chkOTHspis.Checked
             .Fields("Balans").Value = frmComputers.chkOTHNNb.Checked
 
+            If frmComputers.chkOTHspis.Checked = True Then
+
+                .Fields("data_sp").Value = frmComputers.dtOTHSpisanie.Value
+
+            End If
 
             .Update()
         End With
@@ -550,6 +554,13 @@ sAR:
 
             .Fields("Spisan").Value = frmComputers.chkOTHspis.Checked
             .Fields("Balans").Value = frmComputers.chkOTHNNb.Checked
+
+            If frmComputers.chkOTHspis.Checked = True Then
+
+                .Fields("data_sp").Value = frmComputers.dtOTHSpisanie.Value
+
+            End If
+
 
             .Fields("SNMP").Value = frmComputers.chkSNMP.Checked
             .Fields("SNMP_COMMUNITY").Value = frmComputers.txtSNMP.Text
@@ -1006,7 +1017,6 @@ sAR:
 
             .Fields("TIPtehn").Value = TipTehn
 
-
             If Len(frmComputers.txtPCcash.Text) = 0 Then frmComputers.txtPCcash.Text = 0
             If Len(frmComputers.txtPCSumm.Text) = 0 Then frmComputers.txtPCSumm.Text = 0
             If Len(frmComputers.txtPCSfN.Text) = 0 Then frmComputers.txtPCSfN.Text = 0
@@ -1023,6 +1033,12 @@ sAR:
 
             .Fields("Spisan").Value = frmComputers.chkPCspis.Checked
             .Fields("Balans").Value = frmComputers.chkPCNNb.Checked
+
+            If frmComputers.chkPCspis.Checked = True Then
+
+                .Fields("data_sp").Value = frmComputers.dtSpisanie.Value
+
+            End If
 
             .Fields("Garantia_Sist").Value = frmComputers.rbSist.Checked
 
@@ -1176,21 +1192,20 @@ err_:
 
         Dim rsSoft As Recordset
 
-        'rsSoft = New Recordset
-        'rsSoft.Open("SELECT count(*) as t_n FROM SOFT_INSTALL where id_comp=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
-        '            LockTypeEnum.adLockOptimistic)
+        rsSoft = New Recordset
+        rsSoft.Open("SELECT count(*) as t_n FROM SOFT_INSTALL where id_comp=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
+                    LockTypeEnum.adLockOptimistic)
 
-        'With rsSoft
+        With rsSoft
 
-        '    A1 = .Fields("t_n").Value
+            A1 = .Fields("t_n").Value
 
-        'End With
-        'rsSoft.Close()
-        'rsSoft = Nothing
+        End With
+        rsSoft.Close()
+        rsSoft = Nothing
 
-        'A1 = lstV.Items.Count
+        A1 = 1
 
-        A1 = 1 'esq 130622 нумерация 1+
 
         For intj = 0 To lstV.Items.Count - 1
 
@@ -1448,8 +1463,6 @@ sAR:
             .Fields("PCL").Value = unaPCL
 
             .Fields("port_2").Value = frmComputers.cmbPRNConnect.Text
-            'cmbPRNConnect
-            'unaPCL
             If Len(frmComputers.txtPRNSfN.Text) = 0 Then frmComputers.txtPRNSfN.Text = 0
             If Len(frmComputers.txtPRNcash.Text) = 0 Then frmComputers.txtPRNcash.Text = 0
             If Len(frmComputers.txtPRNSumm.Text) = 0 Then frmComputers.txtPRNSumm.Text = 0
@@ -1465,6 +1478,12 @@ sAR:
 
             .Fields("Spisan").Value = frmComputers.chkPRNspis.Checked
             .Fields("Balans").Value = frmComputers.chkPRNNNb.Checked
+
+            If frmComputers.chkPRNspis.Checked = True Then
+
+                .Fields("data_sp").Value = frmComputers.dtPRNSpisanie.Value
+
+            End If
 
             .Update()
         End With
@@ -1673,6 +1692,12 @@ sAR:
 
             .Fields("Spisan").Value = frmComputers.chkNETspis.Checked
             .Fields("Balans").Value = frmComputers.chkNETNNb.Checked
+
+            If frmComputers.chkNETspis.Checked = True Then
+
+                .Fields("data_sp").Value = frmComputers.dtNETSpisanie.Value
+
+            End If
 
             .Update()
         End With

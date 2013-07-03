@@ -579,17 +579,13 @@ Public Class frmSoftware
 
         On Error GoTo err_
 
-
         If lstSoftware.Items.Count = 0 Then Exit Sub
-
 
         If sSid <> 0 Then
 
             rCOUNT = sSid
 
         Else
-
-
             Dim z As Integer
 
             For z = 0 To lstSoftware.SelectedItems.Count - 1
@@ -721,7 +717,6 @@ Public Class frmSoftware
 
         If ssid = 0 Then
 
-
             For z = 0 To lstSoftware.SelectedItems.Count - 1
                 rCOUNT = (lstSoftware.SelectedItems(z).Text)
             Next
@@ -820,7 +815,6 @@ Public Class frmSoftware
     Private Sub btnAdd_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAdd.Click
 
         On Error GoTo err_
-
 
         If Len(cmbSoftware.Text) = 0 Then Exit Sub
 
@@ -1053,9 +1047,7 @@ Public Class frmSoftware
         Me.lstSoftware.Visible = True
     End Sub
 
-    Private Sub Label1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Label1.Click
+    Private Sub CheckBox1_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CheckBox1.CheckedChanged
 
     End Sub
-
-
 End Class

@@ -6,7 +6,6 @@ Imports System.Text
 Module MOD_INF_TECH_LOAD
     Private zID As String
 
-
     Public Sub LOADnet(ByVal sID As String)
         On Error Resume Next
         Dim unaPCL As String
@@ -83,9 +82,15 @@ Module MOD_INF_TECH_LOAD
             If Not IsDBNull(.Fields("Spisan").Value) Then frmComputers.chkNETspis.Checked = .Fields("Spisan").Value
             If Not IsDBNull(.Fields("Balans").Value) Then frmComputers.chkNETNNb.Checked = .Fields("Balans").Value
 
-            'sBranch = .Fields("FILIAL").Value
-            'sDepartment = .Fields("MESTO").Value
-            'sOffice = .Fields("kabn").Value
+            Select Case frmComputers.chkNETspis.Checked
+
+                Case True
+                    frmComputers.dtNETSpisanie.Visible = True
+                    If Not IsDBNull(.Fields("data_sp").Value) Then frmComputers.dtNETSpisanie.Value = .Fields("data_sp").Value Else frmComputers.dtNETSpisanie.Value = Date.Today
+                Case False
+                    frmComputers.dtNETSpisanie.Visible = False
+            End Select
+
             sName = frmComputers.cmbDevNet.Text
 
             If Not IsDBNull(.Fields("port_1").Value) Then frmComputers.txtNetSN.Text = .Fields("port_1").Value
@@ -458,6 +463,16 @@ Module MOD_INF_TECH_LOAD
             If Not IsDBNull(.Fields("Balans").Value) Then frmComputers.chkOTHNNb.Checked = .Fields("Balans").Value
             If Not IsDBNull(.Fields("PCL").Value) Then unaPCL = .Fields("PCL").Value
 
+            Select Case frmComputers.chkOTHspis.Checked
+
+                Case True
+                    frmComputers.dtOTHSpisanie.Visible = True
+                    If Not IsDBNull(.Fields("data_sp").Value) Then frmComputers.dtOTHSpisanie.Value = .Fields("data_sp").Value Else frmComputers.dtOTHSpisanie.Value = Date.Today
+                Case False
+                    frmComputers.dtOTHSpisanie.Visible = False
+            End Select
+
+
             'If frmComputers.chkSNMP.Checked = True Or 0 Then
             '    'frmComputers.chkSNMP.Visible = True
             '    frmComputers.lblSNMP.Visible = True
@@ -551,17 +566,20 @@ Module MOD_INF_TECH_LOAD
             If Not IsDBNull(.Fields("Spisan").Value) Then frmComputers.chkPRNspis.Checked = .Fields("Spisan").Value
             If Not IsDBNull(.Fields("Balans").Value) Then frmComputers.chkPRNNNb.Checked = .Fields("Balans").Value
 
+            Select Case frmComputers.chkPRNspis.Checked
+
+                Case True
+                    frmComputers.dtPRNSpisanie.Visible = True
+                    If Not IsDBNull(.Fields("data_sp").Value) Then frmComputers.dtPRNSpisanie.Value = .Fields("data_sp").Value Else frmComputers.dtPRNSpisanie.Value = Date.Today
+                Case False
+                    frmComputers.dtPRNSpisanie.Visible = False
+            End Select
+
             If Not IsDBNull(.Fields("PCL").Value) Then unaPCL = .Fields("PCL").Value
 
             If Not IsDBNull(.Fields("port_2").Value) Then frmComputers.cmbPRNConnect.Text = .Fields("port_2").Value
 
-
-            'unaPCL
-            'sBranch = .Fields("FILIAL").Value
-            'sDepartment = .Fields("MESTO").Value
-            'sOffice = .Fields("kabn").Value
             sName = .Fields("PRINTER_NAME_1").Value
-            'txtPrnIP
 
             If Len(frmComputers.cmbModCartr.Text) = 0 Then
 
@@ -895,7 +913,7 @@ Module MOD_INF_TECH_LOAD
             If Not IsDBNull(.Fields("RAM_4").Value) And Len(.Fields("RAM_4").Value) > 1 Then
                 frmComputers.cmbRAM4.Text = .Fields("RAM_4").Value
                 frmComputers.sRAM = frmComputers.sRAM + 1
-                frmComputers.bRamPlus.Visible = False
+                ' frmComputers.bRamPlus.Visible = False
                 frmComputers.cmbRAM2.Visible = True
                 frmComputers.txtRamSN2.Visible = True
                 frmComputers.txtRamS2.Visible = True
@@ -925,7 +943,7 @@ Module MOD_INF_TECH_LOAD
             If Not IsDBNull(.Fields("RAM_5").Value) And Len(.Fields("RAM_5").Value) > 1 Then
                 frmComputers.cmbRAM5.Text = .Fields("RAM_5").Value
                 frmComputers.sRAM = frmComputers.sRAM + 1
-                frmComputers.bRamPlus.Visible = False
+                ' frmComputers.bRamPlus.Visible = False
                 frmComputers.cmbRAM2.Visible = True
                 frmComputers.txtRamSN2.Visible = True
                 frmComputers.txtRamS2.Visible = True
@@ -958,7 +976,7 @@ Module MOD_INF_TECH_LOAD
             If Not IsDBNull(.Fields("RAM_6").Value) And Len(.Fields("RAM_6").Value) > 1 Then
                 frmComputers.cmbRAM6.Text = .Fields("RAM_6").Value
                 frmComputers.sRAM = frmComputers.sRAM + 1
-                frmComputers.bRamPlus.Visible = False
+                ' frmComputers.bRamPlus.Visible = False
                 frmComputers.cmbRAM2.Visible = True
                 frmComputers.txtRamSN2.Visible = True
                 frmComputers.txtRamS2.Visible = True
@@ -995,7 +1013,7 @@ Module MOD_INF_TECH_LOAD
             If Not IsDBNull(.Fields("RAM_7").Value) And Len(.Fields("RAM_7").Value) > 1 Then
                 frmComputers.cmbRAM7.Text = .Fields("RAM_7").Value
                 frmComputers.sRAM = frmComputers.sRAM + 1
-                frmComputers.bRamPlus.Visible = False
+                'frmComputers.bRamPlus.Visible = False
                 frmComputers.cmbRAM2.Visible = True
                 frmComputers.txtRamSN2.Visible = True
                 frmComputers.txtRamS2.Visible = True
@@ -1613,6 +1631,17 @@ Module MOD_INF_TECH_LOAD
             If Not IsDBNull(.Fields("dataSF").Value) Then frmComputers.dtPCSFdate.Value = .Fields("dataSF").Value
 
             If Not IsDBNull(.Fields("Spisan").Value) Then frmComputers.chkPCspis.Checked = .Fields("Spisan").Value
+
+            Select Case frmComputers.chkPCspis.Checked
+
+                Case True
+                    frmComputers.dtSpisanie.Visible = True
+                    If Not IsDBNull(.Fields("data_sp").Value) Then frmComputers.dtSpisanie.Value = .Fields("data_sp").Value Else frmComputers.dtSpisanie.Value = Date.Today
+                Case False
+                    frmComputers.dtSpisanie.Visible = False
+            End Select
+
+
             If Not IsDBNull(.Fields("Balans").Value) Then frmComputers.chkPCNNb.Checked = .Fields("Balans").Value
             If Not IsDBNull(.Fields("PCL").Value) Then unaPCL = .Fields("PCL").Value
 
@@ -1769,6 +1798,15 @@ Module MOD_INF_TECH_LOAD
             If Not IsDBNull(.Fields("Spisan").Value) Then frmComputers.chkOTHspis.Checked = .Fields("Spisan").Value
             If Not IsDBNull(.Fields("Balans").Value) Then frmComputers.chkOTHNNb.Checked = .Fields("Balans").Value
             If Not IsDBNull(.Fields("PCL").Value) Then unaPCL = .Fields("PCL").Value
+
+            Select Case frmComputers.chkOTHspis.Checked
+
+                Case True
+                    frmComputers.dtOTHSpisanie.Visible = True
+                    If Not IsDBNull(.Fields("data_sp").Value) Then frmComputers.dtOTHSpisanie.Value = .Fields("data_sp").Value Else frmComputers.dtOTHSpisanie.Value = Date.Today
+                Case False
+                    frmComputers.dtOTHSpisanie.Visible = False
+            End Select
 
         End With
 

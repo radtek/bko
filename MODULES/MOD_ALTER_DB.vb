@@ -51,7 +51,7 @@ Module MOD_ALTER_DB
 
             Case "1.7.3.8"
 
-
+                frmLogin.Invoke(New MethodInvoker(AddressOf ALTER_DB_1739))
 
             Case Else
 
@@ -71,7 +71,6 @@ Module MOD_ALTER_DB
         Dim sSQL As String
 
         sSQL = "ALTER TABLE Remont ADD GARANT Date"
-
 
         Select Case DB_N
 
@@ -1045,7 +1044,6 @@ err_:
 
     End Sub
 
-
     Public Sub ALTER_DB_1738()
 
         On Error GoTo err_
@@ -1205,8 +1203,97 @@ err_:
 
         End Select
         
+        
+        Call ALTER_DB_1739()
+        '####################################################################
+        '####################################################################
+        '####################################################################
+
+        Exit Sub
+err_:
+        MsgBox(Err.Description)
+        rs = Nothing
+        _DBALTER = True
+    End Sub
+
+    Public Sub ALTER_DB_1739()
+
+        On Error GoTo err_
+
+        If _DBALTER = False Then Exit Sub
+
+        Dim rs As Recordset
+        Dim sSQL As String
+
+        sSQL = "ALTER TABLE kompy ADD data_sp Date, data_nb Date"
+
+        Select Case DB_N
+
+            Case "MS SQL 2008"
+
+                sSQL = "ALTER TABLE " & DBtabl & ".dbo.kompy ADD data_sp datetime"
+
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+            Case "MS SQL"
+
+                sSQL = "ALTER TABLE " & DBtabl & ".dbo.kompy ADD data_sp datetime"
+
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+            Case "MS Access"
+
+                Call frmMain.COMPARE_DB()
+
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+            Case "MySQL"
+
+                sSQL = "ALTER TABLE 'kompy' ADD COLUMN 'data_sp' datetime"
+
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+
+            Case "MySQL (MyODBC 5.1)"
+
+                sSQL = "ALTER TABLE 'kompy' ADD COLUMN 'data_sp' datetime"
+
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+
+            Case "PostgreSQL"
+
+                sSQL = "ALTER TABLE kompy ADD COLUMN ADD COLUMN data_sp Date"
+
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+            Case "SQLLite"
+
+
+            Case "DSN"
+
+                sSQL = "ALTER TABLE kompy ADD COLUMN ADD COLUMN data_sp Date"
+
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+        End Select
+
         rs = New Recordset
-        rs.Open("Update CONFIGURE SET access='1.7.3.8' WHERE access<>'1.7.3.8'", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+        rs.Open("Update CONFIGURE SET access='1.7.3.9' WHERE access<>'1.7.3.9'", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
         rs = Nothing
 
         _DBALTER = False
@@ -1221,7 +1308,7 @@ err_:
         rs = New Recordset
         rs.Open("select * from kompy", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-       Dim uname As Integer
+        Dim uname As Integer
 
         If DB_N <> "MS Access" Then uname = 2 Else uname = 1
 
@@ -1242,16 +1329,12 @@ err_:
         rs.Close()
         rs = Nothing
 
-        '####################################################################
-        '####################################################################
-        '####################################################################
 
         Exit Sub
 err_:
-        MsgBox(Err.Description)
+        ' MsgBox(Err.Description)
         rs = Nothing
         _DBALTER = True
     End Sub
-
 
 End Module
