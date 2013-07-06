@@ -1776,7 +1776,20 @@ err_:
     Private Sub SaveInfTehButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SaveInfTehButton.Click
 
         Call SaveInfTeh()
-        'RefFilTree(frmComputers.lstGroups) 'esq 130612
+        'esq 130706 может ещё как-нибудь правильней обновлять? не разобрался
+        'RefFilTree(frmComputers.lstGroups) 
+        Dim tmpName, tmpFil, tmpDep, tmpOff, tmpID, tmpTip As String
+        tmpName = frmComputers.cmbOTH.Text
+        tmpFil = frmComputers.cmbOTHFil.Text
+        tmpDep = frmComputers.cmbOTHDepart.Text
+        tmpOff = frmComputers.cmbOTHOffice.Text
+        tmpID = frmComputers.sCOUNT
+        tmpTip = TipTehn
+
+        PRESAVE_TREE(frmComputers.cmbOTHFil, frmComputers.cmbOTHDepart, frmComputers.cmbOTHOffice)
+
+        Call UpdateTree(tmpName, tmpTip, tmpID, tmpFil, tmpDep, tmpOff)
+        'esq 130706 
 
     End Sub
 

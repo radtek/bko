@@ -6795,15 +6795,7 @@ Err_:
 
     'End Sub
 
-    Private Sub lvRepair_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles lvRepair.SelectedIndexChanged
-
-    End Sub
-
-    Private Sub txtSearch_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtSearch.TextChanged
-
-    End Sub
-
-    Private Sub chkOTHspis_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles chkOTHspis.CheckedChanged
+    Private Sub chkOTHspis_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkOTHspis.CheckedChanged
 
         If chkOTHspis.Checked = True Then dtOTHSpisanie.Visible = True Else dtOTHSpisanie.Visible = False
 
@@ -7095,6 +7087,38 @@ err_:
             lstSoftware.CheckBoxes = False
             lstSoftware.MultiSelect = False
         End If
+    End Sub
+
+    Private Sub chkOTHNNb_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles chkOTHNNb.Click
+        DV2 = True 'esq 130706 для обновления дерева при сохранении
+    End Sub
+
+    Private Sub chkOTHspis_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles chkOTHspis.Click
+        DV2 = True 'esq 130706 для обновления дерева при сохранении
+    End Sub
+
+    Private Sub chkPCNNb_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkPCNNb.Click
+        DV2 = True 'esq 130706 для обновления дерева при сохранении
+    End Sub
+
+    Private Sub chkPCspis_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkPCspis.Click
+        DV2 = True 'esq 130706 для обновления дерева при сохранении
+    End Sub
+
+    Private Sub chkPRNNNb_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkPRNNNb.Click
+        DV2 = True 'esq 130706 для обновления дерева при сохранении
+    End Sub
+
+    Private Sub chkPRNspis_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkPRNspis.Click
+        DV2 = True 'esq 130706 для обновления дерева при сохранении
+    End Sub
+
+    Private Sub chkNETspis_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkNETspis.Click
+        DV2 = True 'esq 130706 для обновления дерева при сохранении
+    End Sub
+
+    Private Sub chkNETNNb_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkNETNNb.Click
+        DV2 = True 'esq 130706 для обновления дерева при сохранении
     End Sub
 End Class
 

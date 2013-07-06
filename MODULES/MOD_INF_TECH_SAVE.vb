@@ -2088,7 +2088,9 @@ Error_:
         End If
     End Sub
 
-    Private Sub PRESAVE_TREE(ByVal sBr As ComboBox, ByVal sDp As ComboBox, ByVal sOff As ComboBox)
+    Public Sub PRESAVE_TREE(ByVal sBr As ComboBox, ByVal sDp As ComboBox, ByVal sOff As ComboBox) 'esq 130706 Public для обновления из SaveInfTehButton_Click
+        'esq на чекбоксы Списано и Не на балансе повесил DV2 = True
+
         Dim sFIL, sDEP, sOf As String
         sFIL = sBr.Text
         sDEP = sDp.Text
