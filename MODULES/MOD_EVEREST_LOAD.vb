@@ -985,10 +985,44 @@
                                                                     "Принтеры3|Свойства принтера|Порт принтера", "")
         End If
 
-
         'Установленное програмное обеспечение
+        usersload() 'esq 130713
         textpo()
     End Sub
+
+    'esq 130713 импорт юзеров
+    Public Sub usersload()
+        Dim everIniFile As New IniFile(EverestFilePatch)
+        Dim intcount As Integer
+        Dim A, uname1, uname2 As String
+        On Error Resume Next
+        'A = "Пользователи"
+        frmComputers.lstUsers.Items.Clear()
+        intcount = 0
+
+        For intj = 1 To 20
+            uname1 = ""
+            uname2 = ""
+
+            A = "Пользователи" & intj
+
+            uname1 = everIniFile.GetString("Пользователи", A & "|Свойства пользователя|Имя пользователя", "")
+            uname2 = everIniFile.GetString("Пользователи", A & "|Свойства пользователя|Полное имя", "")
+            If uname1 = Nothing And uname2 = Nothing Then GoTo fin
+            'frmComputers.lstUsers.Items.Add(frmComputers.lstSoftware.Items.Count + 1)
+            frmComputers.lstUsers.Items.Add(0)
+            'frmComputers.lstUsers.Items(intcount).SubItems.Add(uname1) ' вместо ФИО? 
+            frmComputers.lstUsers.Items(intcount).SubItems.Add("")     'пожалуй, нет
+            frmComputers.lstUsers.Items(intcount).SubItems.Add(uname2)
+            frmComputers.lstUsers.Items(intcount).SubItems.Add("")
+            frmComputers.lstUsers.Items(intcount).SubItems.Add("")
+            frmComputers.lstUsers.Items(intcount).SubItems.Add("")
+
+            intcount = intcount + 1
+        Next
+fin:
+    End Sub
+    'esq 130713
 
     Public Sub textpo()
 

@@ -3841,6 +3841,14 @@ err_:
             uCOUNT = (lstUsers.SelectedItems(z).Text)
         Next
 
+        'esq 130713 импорт юзеров
+        Dim langfile As New IniFile(sLANGPATH)
+        If cmdUserAdd.Text = langfile.GetString("frmComputers", "MSG54", "Изменить") Then
+            Exit Sub
+        End If 'esq 130713 импорт юзеров
+        FillComboNET(txtUserName, "Name", "SPR_USER", "", False, True) 'esq 130713
+        FillComboNET(txtUserFIO, "A", "SPR_USER", "", False, True) 'esq 130713
+
         Dim rs1 As Recordset
         rs1 = New Recordset
         rs1.Open("Delete FROM USER_COMP WHERE id=" & uCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
@@ -3922,40 +3930,44 @@ err_:
             uCOUNT = (lstUsers.SelectedItems(z).Text)
         Next
 
-        Dim rs As Recordset
-        rs = New Recordset
+        If uCOUNT <> 0 Then 'esq 130713 /импорт юзеров/
+            Dim rs As Recordset
+            rs = New Recordset
+            rs.Open("SELECT * FROM USER_COMP WHERE id=" & uCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                    LockTypeEnum.adLockOptimistic)
+            With rs
 
-        rs.Open("SELECT * FROM USER_COMP WHERE id=" & uCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
-                LockTypeEnum.adLockOptimistic)
+                If Not IsDBNull(.Fields("USERNAME").Value) Then txtUserName.Text = .Fields("USERNAME").Value
+                If Not IsDBNull(.Fields("PASSWORD").Value) Then txtUserPass.Text = .Fields("PASSWORD").Value
+                If Not IsDBNull(.Fields("EMAIL").Value) Then txtUserEmail.Text = .Fields("EMAIL").Value
+                If Not IsDBNull(.Fields("EPASS").Value) Then txtUserEmailPwd.Text = .Fields("EPASS").Value
+                If Not IsDBNull(.Fields("FIO").Value) Then txtUserFIO.Text = .Fields("FIO").Value
+                If Not IsDBNull(.Fields("icq").Value) Then txtUserIcq.Text = .Fields("icq").Value
+                If Not IsDBNull(.Fields("MEMO").Value) Then txtUMEMO.Text = .Fields("MEMO").Value
+                If Not IsDBNull(.Fields("jabber").Value) Then txtUserJab.Text = .Fields("jabber").Value
 
-        With rs
+                If .Fields("PDC").Value = True Then
+                    Me.ChkPDC.Checked = True
+                Else
+                    Me.ChkPDC.Checked = False
+                End If
 
-            If Not IsDBNull(.Fields("USERNAME").Value) Then txtUserName.Text = .Fields("USERNAME").Value
-            If Not IsDBNull(.Fields("PASSWORD").Value) Then txtUserPass.Text = .Fields("PASSWORD").Value
-            If Not IsDBNull(.Fields("EMAIL").Value) Then txtUserEmail.Text = .Fields("EMAIL").Value
-            If Not IsDBNull(.Fields("EPASS").Value) Then txtUserEmailPwd.Text = .Fields("EPASS").Value
-            If Not IsDBNull(.Fields("FIO").Value) Then txtUserFIO.Text = .Fields("FIO").Value
-            If Not IsDBNull(.Fields("icq").Value) Then txtUserIcq.Text = .Fields("icq").Value
-            If Not IsDBNull(.Fields("MEMO").Value) Then txtUMEMO.Text = .Fields("MEMO").Value
-            If Not IsDBNull(.Fields("jabber").Value) Then txtUserJab.Text = .Fields("jabber").Value
+            End With
+            Dim langfile As New IniFile(sLANGPATH)
+            cmdUserAdd.Text = langfile.GetString("frmComputers", "MSG42", "Сохранить")
 
+            rs.Close()
+            rs = Nothing
 
-            If .Fields("PDC").Value = True Then
-
-                Me.ChkPDC.Checked = True
-            Else
-                Me.ChkPDC.Checked = False
-            End If
-
-
-        End With
-        Dim langfile As New IniFile(sLANGPATH)
+        Else 'esq 130713 //импорт юзеров
+            txtUserName.Text = lstUsers.SelectedItems(0).SubItems(2).Text
+            txtUserFIO.Text = lstUsers.SelectedItems(0).SubItems(1).Text
+            Dim langfile As New IniFile(sLANGPATH)
+            cmdUserAdd.Text = langfile.GetString("frmComputers", "MSG54", "Изменить")
+        End If
+        'esq 130713 импорт юзеров//
 
 
-        cmdUserAdd.Text = langfile.GetString("frmComputers", "MSG42", "Сохранить")
-
-        rs.Close()
-        rs = Nothing
     End Sub
 
     Private Sub lvRepair_ColumnClick(ByVal sender As Object, ByVal e As ColumnClickEventArgs) _
@@ -5574,7 +5586,19 @@ Error_:
                 LockTypeEnum.adLockOptimistic)
 
         With rs
-            txtUserFIO.Text = .Fields("A").Value
+            'esq 130713          
+            If txtUserFIO.Text = "" Then
+                txtUserFIO.Items.Clear()
+                .MoveFirst()
+                Do Until .EOF
+                    txtUserFIO.Items.Add(.Fields("A").Value)
+                    .MoveNext()
+                Loop
+            End If
+            'esq 130713
+            ' или лучше выводить весь список FIO?
+
+            'txtUserFIO.Text = .Fields("A").Value
         End With
         rs.Close()
         rs = Nothing
@@ -5585,11 +5609,29 @@ Error_:
         Dim rs As Recordset
         rs = New Recordset
 
+        'esq 130713 импорт юзеров
+        Dim langfile As New IniFile(sLANGPATH)
+        If cmdUserAdd.Text = langfile.GetString("frmComputers", "MSG54", "Изменить") Then
+            Exit Sub
+        End If 'esq 130713 импорт юзеров
+
         rs.Open("Select Name from SPR_USER where A='" & txtUserFIO.Text & "'", DB7, CursorTypeEnum.adOpenDynamic,
                 LockTypeEnum.adLockOptimistic)
 
         With rs
-            txtUserName.Text = .Fields("Name").Value
+            'esq 130713          
+            If txtUserName.Text = "" Then
+                txtUserName.Items.Clear()
+                .MoveFirst()
+                Do Until .EOF
+                    txtUserName.Items.Add(.Fields("Name").Value)
+                    .MoveNext()
+                Loop
+            End If
+            'esq 130713
+            ' или лучше выводить весь список Name?
+
+            'txtUserName.Text = .Fields("Name").Value
         End With
         rs.Close()
         rs = Nothing
@@ -6431,7 +6473,14 @@ err_1:
     Private Sub btnUserCancel_Click(sender As Object, e As EventArgs) Handles btnUserCancel.Click
         Dim langfile As New IniFile(sLANGPATH)
 
-        Me.cmdUserAdd.Text = langfile.GetString("frmComputers", "MSG30", "Добавить")
+        'esq 130713 импорт юзеров
+        If cmdUserAdd.Text <> langfile.GetString("frmComputers", "MSG54", "Изменить") Then
+
+            Me.cmdUserAdd.Text = langfile.GetString("frmComputers", "MSG30", "Добавить")
+
+        End If 'esq 130713 импорт юзеров
+        FillComboNET(txtUserName, "Name", "SPR_USER", "", False, True) 'esq 130713
+        FillComboNET(txtUserFIO, "A", "SPR_USER", "", False, True) 'esq 130713
 
         Me.txtUserName.Text = ""
         Me.txtUserPass.Text = ""

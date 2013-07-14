@@ -90,7 +90,8 @@
 
 
                 If Len(Trim(frmComputers.txtNETmac1.Text)) > 0 Then
-                    If .Fields("NET_MAC_1").Value = frmComputers.txtNETmac1.Text Then
+                    If (.Fields("NET_MAC_1").Value = frmComputers.txtNETmac1.Text) _
+                        And (.Fields("NET_MAC_1").Value <> "00-00-00-00-00-00") Then 'esq 130707 игнорировать тупые сетевухи
                         sTEXTmSG = sTEXTmSG & vbCrLf &
                             "MAC адрес и имя компьютера " &
                             LNGIniFile.GetString("MOD_PROV_SN", "MSG2", "присутствует в базе,") & vbCrLf & " " &

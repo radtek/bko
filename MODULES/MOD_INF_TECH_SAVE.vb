@@ -1129,6 +1129,7 @@ sAR:
 
         'Сохраняем софт 
         Call SAVE_SOFT(frmComputers.lstSoftware, frmComputers.sCOUNT)
+        Call SAVE_USERS(frmComputers.lstUsers, frmComputers.sCOUNT) 'esq 130713
 
         'Решаем что делать с деревом
         'Если массовое добавление то ничего
@@ -1167,7 +1168,6 @@ err_:
         If sSID = 0 Then Exit Sub
         lstV.Visible = False
 
-
         Dim A1, B1, C1, F1, G1, H1 As String
         Dim D1, E1 As Date
         Dim I1 As String
@@ -1192,23 +1192,9 @@ err_:
 
         Dim rsSoft As Recordset
 
-        rsSoft = New Recordset
-        rsSoft.Open("SELECT count(*) as t_n FROM SOFT_INSTALL where id_comp=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
-                    LockTypeEnum.adLockOptimistic)
-
-        With rsSoft
-
-            A1 = .Fields("t_n").Value
-
-        End With
-        rsSoft.Close()
-        rsSoft = Nothing
-
         A1 = 1
 
-
         For intj = 0 To lstV.Items.Count - 1
-
 
             If Len(lstV.Items(intj).SubItems(1).Text) > 0 Then
                 lstV.Items(intj).Selected = True
@@ -1318,6 +1304,104 @@ err_:
 
         lstV.Visible = True
     End Sub
+
+    'esq 130713 сохраним пользователей
+    Public Sub SAVE_USERS(ByVal lstV As ListView, Optional ByVal sSID As Integer = 0)
+        On Error Resume Next
+
+        If EverestFilePatch <> "" Then ' только при импорте из эвереста
+
+            If sSID = 0 Then Exit Sub
+            lstV.Visible = False
+
+            Dim B1, C1, I1, H1 As String
+            Dim intj As Integer
+            Dim rsUser As Recordset
+
+            For intj = 0 To lstV.Items.Count - 1
+
+                If Len(lstV.Items(intj).SubItems(2).Text) > 0 Then
+                    lstV.Items(intj).Selected = True
+                    lstV.Items(intj).EnsureVisible()
+
+                    lstV.Items(intj).Focused = True
+
+                    H1 = lstV.Items(intj).SubItems(0).Text
+
+                    If Len(lstV.Items(intj).Text) = 0 Then lstV.Items(intj).Text = 1
+
+                    If Len(lstV.Items(intj).SubItems(1).Text) = 0 Then
+                        B1 = ""
+                    Else
+                        B1 = lstV.Items(intj).SubItems(1).Text
+                    End If
+
+                    ' user
+                    If Len(lstV.Items(intj).SubItems(2).Text) = 0 Then
+                        C1 = ""
+                    Else
+                        C1 = lstV.Items(intj).SubItems(2).Text
+                    End If
+
+                    I1 = sSID
+
+                    If Len(C1) > 0 Then
+                        rsUser = New Recordset
+                        rsUser.Open("SELECT * FROM USER_COMP", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        With rsUser
+                            .AddNew()
+                            .Fields("ID_COMP").Value = I1
+                            .Fields("USERNAME").Value = C1
+                            .Fields("PASSWORD").Value = ""
+                            .Fields("EMAIL").Value = ""
+                            .Fields("EPASS").Value = ""
+                            .Fields("FIO").Value = B1
+                            .Fields("icq").Value = ""
+                            .Fields("PDC").Value = False
+                            .Fields("MEMO").Value = ""
+                            .Fields("jabber").Value = ""
+                            .Update()
+                        End With
+                        rsUser.Close()
+                        rsUser = Nothing
+
+                        Dim sSQL As String
+                        Dim UserExist As Boolean
+                        sSQL = "SELECT COUNT(*) AS total_number FROM SPR_USER WHERE name='" & C1 & "' AND A='" & B1 & "'"
+                        rsUser = New Recordset
+                        rsUser.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        If rsUser.Fields("total_number").Value = 0 Then
+                            UserExist = False
+                        Else
+                            UserExist = True
+                        End If
+                        rsUser.Close()
+                        rsUser = Nothing
+
+                        If UserExist = False Then
+                            rsUser = New Recordset
+                            rsUser.Open("Select * from SPR_USER ", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                            With rsUser
+                                .AddNew()
+                                .Fields("name").Value = C1
+                                .Fields("A").Value = B1
+                                .Update()
+                            End With
+                            rsUser.Close()
+                            rsUser = Nothing
+                            frmComputers.txtUserName.Items.Add(C1)
+                            If B1 <> "" Then frmComputers.txtUserFIO.Items.Add(B1)
+                        End If
+                    End If
+                End If
+            Next
+            lstV.Visible = True
+            Dim langfile As New IniFile(sLANGPATH)
+            frmComputers.cmdUserAdd.Text = langfile.GetString("frmComputers", "MSG30", "Добавить")
+            LOAD_USER(frmComputers.sCOUNT)
+        End If
+        EverestFilePatch = "" ' чтобы не повторять
+    End Sub 'esq 130713 сохраним пользователей
 
     Public Sub Save_P(Optional ByVal sSID As String = "")
 
@@ -4382,6 +4466,19 @@ Error_:
         Dim Us1 As String
         Dim Us2 As String
 
+        'esq 130713 импорт юзеров
+        If frmComputers.cmdUserAdd.Text = langfile.GetString("frmComputers", "MSG54", "Изменить") Then
+            frmComputers.lstUsers.SelectedItems(0).SubItems(2).Text = frmComputers.txtUserName.Text
+            frmComputers.lstUsers.SelectedItems(0).SubItems(1).Text = frmComputers.txtUserFIO.Text
+            If frmComputers.txtUserName.FindString(frmComputers.txtUserName.Text) < 0 Then
+                frmComputers.txtUserName.Items.Add(frmComputers.txtUserName.Text)
+            End If
+            If frmComputers.txtUserFIO.FindString(frmComputers.txtUserFIO.Text) < 0 Then
+                frmComputers.txtUserFIO.Items.Add(frmComputers.txtUserFIO.Text)
+            End If
+            Exit Sub
+        End If 'esq 130713 импорт юзеров
+
         If frmComputers.cmdUserAdd.Text = langfile.GetString("frmComputers", "MSG42", "Сохранить") Then
 
             Dim USERCOMP As Recordset
@@ -4502,6 +4599,9 @@ Error_:
 
         End If
 
+
+        FillComboNET(frmComputers.txtUserName, "Name", "SPR_USER", "", False, True) 'esq 130713
+        FillComboNET(frmComputers.txtUserFIO, "A", "SPR_USER", "", False, True) 'esq 130713
 
         frmComputers.cmdUserAdd.Text = langfile.GetString("frmComputers", "MSG30", "Добавить")
 
