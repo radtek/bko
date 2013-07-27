@@ -1310,7 +1310,7 @@ err_:
     Public Sub SAVE_USERS(ByVal lstV As ListView, Optional ByVal sSID As Integer = 0)
         On Error Resume Next
 
-        If EverestFilePatch <> "" Then ' только при импорте из эвереста
+        If (EverestFilePatch <> "") And (Upd_flag = 0) Then ' только при импорте из эвереста
 
             If sSID = 0 Then Exit Sub
             lstV.Visible = False
@@ -1402,6 +1402,7 @@ err_:
             LOAD_USER(frmComputers.sCOUNT)
         End If
         EverestFilePatch = "" ' чтобы не повторять
+        Upd_flag = 0
     End Sub 'esq 130713 сохраним пользователей
 
     Public Sub Save_P(Optional ByVal sSID As String = "")

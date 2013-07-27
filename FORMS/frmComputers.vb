@@ -2434,6 +2434,8 @@ err_:
         Handles UpdateToolStripMenuItem.Click
         If TipTehn <> "PC" Then Exit Sub
 
+        Upd_flag = 1 'esq 130728
+
         Dim ePatch As String
         Dim objIniFile As New IniFile(PrPath & "base.ini")
         ePatch = objIniFile.GetString("General", "aida", PrPath)

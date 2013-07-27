@@ -180,7 +180,7 @@
             uname = everIniFile.GetString("ATA", "ATA1|Свойства устройства ATA|Неформатированная ёмкость", "")
 
             uname = Left(uname, Len(uname) - 3)
-            uname = CInt(uname/1024) & " Gb"
+            uname = CInt(uname / 1024) & " Gb"
             frmComputers.txtHDDo1.Text = uname
         End If
 
@@ -363,7 +363,7 @@
                 ob_rez = ob1 + ob2 + ob3
             Else
             End If
-            ob_Gb = CStr(ob_rez/1000) & " Гб"
+            ob_Gb = CStr(ob_rez / 1000) & " Гб"
             frmComputers.txtHDDo1.Text = ob_Gb
 
             uname = everIniFile.GetString("Суммарная информация", "Разделы|Общий объем", "")
@@ -373,7 +373,7 @@
                 ASqw = Left$(uname, 6)
             End If
 
-            ob_Gb = CStr(ASqw/1000) & " Гб"
+            ob_Gb = CStr(ASqw / 1000) & " Гб"
 
             If frmComputers.txtHDDo1.Text <> ob_Gb Then
                 frmComputers.txtHDDo1.Text = ob_Gb
@@ -728,7 +728,7 @@
                 End If
 
             End If
-            nextA:
+nextA:
         Next
 
 
@@ -1110,7 +1110,7 @@ fin:
 
         Next
 
-        ASE:
+ASE:
         'Лицензионный номер Операционной системы
 
         Dim OS_OS, SAGAZOD, B As String
@@ -1149,7 +1149,7 @@ fin:
         intcount = intcount + 1
 
         Exit Sub
-        Err_handler:
+Err_handler:
         MsgBox(Err.Description)
     End Sub
 
@@ -1160,8 +1160,6 @@ fin:
         On Error GoTo Err_handler
 
         On Error Resume Next
-
-        Call textp_Upd(frmComputers.lstSoftware, frmComputers.sCOUNT) 'esq
 
         '################
         'Процессор
@@ -2165,6 +2163,7 @@ nextA:
         frmComputers.txtSNSB.Text = everIniFile.GetString("DMI", "Система|Свойства системы|Серийный номер", "")
         frmComputers.PROizV27.Text = everIniFile.GetString("Суммарная информация", "DMI|DMI производитель системы", "")
 
+        Call textp_Upd(frmComputers.lstSoftware, frmComputers.sCOUNT) 'esq
 
         Exit Sub
 Err_handler:
@@ -2186,6 +2185,16 @@ Err_handler:
         'lstV.ListItems.Clear
 
         'esq *****************************
+        Dim FSO As Object
+        Dim tINI As String
+        Dim l As Integer
+
+        FSO = CreateObject("Scripting.FileSystemObject")
+        l = Len(EverestFilePatch)
+        tINI = Left(EverestFilePatch, l - 4) & "-soft.ini"
+        If FSO.FileExists(tINI) Then
+            EverestFilePatch = tINI
+        End If
 
         Dim EverAll_PO As String
         Dim everFile As New IniFile(EverestFilePatch)
