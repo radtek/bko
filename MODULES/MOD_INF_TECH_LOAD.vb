@@ -1760,17 +1760,17 @@ Module MOD_INF_TECH_LOAD
         With rs
             frmComputers.lblsIDOTH.Text = .Fields("id").Value
 
-            If Not IsDBNull(.Fields("MONITOR_NAME").Value) Then frmComputers.cmbOTH.Text = .Fields("MONITOR_NAME").Value
-            If Not IsDBNull(.Fields("MONITOR_DUM").Value) Then _
-                frmComputers.txtMonDum.Text = .Fields("MONITOR_DUM").Value
+            ' If Not IsDBNull(.Fields("MONITOR_NAME").Value) Then frmComputers.cmbOTH.Text = .Fields("MONITOR_NAME").Value
+
+            If Not IsDBNull(.Fields("NET_NAME").Value) Then frmComputers.cmbOTH.Text = .Fields("NET_NAME").Value
+           
+            If Not IsDBNull(.Fields("MONITOR_DUM").Value) Then frmComputers.txtMonDum.Text = .Fields("MONITOR_DUM").Value
             If Not IsDBNull(.Fields("MONITOR_SN").Value) Then frmComputers.txtOTHSN.Text = .Fields("MONITOR_SN").Value
-            If Not IsDBNull(.Fields("MONITOR_PROIZV").Value) Then _
-                frmComputers.PROiZV39.Text = .Fields("MONITOR_PROIZV").Value
-            If Not IsDBNull(.Fields("OTvetstvennyj").Value) Then _
-                frmComputers.cmbOTHotv.Text = .Fields("OTvetstvennyj").Value
-            If Not IsDBNull(.Fields("INV_NO_MONITOR").Value) Then _
-                frmComputers.txtOTHinnumber.Text = .Fields("INV_NO_MONITOR").Value
+            If Not IsDBNull(.Fields("MONITOR_PROIZV").Value) Then frmComputers.PROiZV39.Text = .Fields("MONITOR_PROIZV").Value
+            If Not IsDBNull(.Fields("OTvetstvennyj").Value) Then frmComputers.cmbOTHotv.Text = .Fields("OTvetstvennyj").Value
+            If Not IsDBNull(.Fields("INV_NO_MONITOR").Value) Then frmComputers.txtOTHinnumber.Text = .Fields("INV_NO_MONITOR").Value
             If Not IsDBNull(.Fields("port_1").Value) Then frmComputers.txtOTHmemo.Text = .Fields("port_1").Value
+
             'txtOTHmemo
 
             If Not IsDBNull(.Fields("FILIAL").Value) Then frmComputers.cmbOTHFil.Text = .Fields("FILIAL").Value

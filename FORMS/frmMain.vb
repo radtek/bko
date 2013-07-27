@@ -1957,9 +1957,9 @@ ADD:
                 Select Case frmComputers.EDT
 
                     Case True
-                        Call Save_OT(frmComputers.sCOUNT)
+                        Call SAVE_MON(frmComputers.sCOUNT)
                     Case False
-                        Me.Invoke(New MethodInvoker(AddressOf Save_OT))
+                        Me.Invoke(New MethodInvoker(AddressOf SAVE_MON))
                 End Select
 
                 '--------------VIP_Graff Добавление новой перефирии Начало-----------------

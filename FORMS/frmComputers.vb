@@ -1107,8 +1107,7 @@ Error_:
 
                             '   Me.txtOTHSN.Left = cmbOTH.Width + txtMonDum.Width + 10
                             '  Me.txtOTHSN.Width = PROiZV39.Left - (cmbOTH.Width + txtMonDum.Width + 15) '"214"
-
-
+                            
                             lblTipOther.Visible = False
                             cmbOTHConnect.Visible = False
                             lblOTMac.Visible = False
@@ -1520,16 +1519,19 @@ Error_:
             Case "Printer"
 
                 Call LOADp(sCOUNT)
+
             Case "KOpir"
+
                 Call LOADp(sCOUNT)
 
             Case "MFU"
+
                 Call LOADp(sCOUNT)
 
 
             Case "MONITOR"
 
-                LOADmon(sCOUNT)
+                Call LOADmon(sCOUNT)
 
             Case "NET"
 

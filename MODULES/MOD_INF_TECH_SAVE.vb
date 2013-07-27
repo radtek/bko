@@ -238,11 +238,11 @@ sAR:
                 .AddNew()
             End If
 
-
             .Fields("MONITOR_NAME").Value = frmComputers.cmbOTH.Text
             .Fields("MONITOR_DUM").Value = frmComputers.txtMonDum.Text
             .Fields("MONITOR_SN").Value = frmComputers.txtOTHSN.Text
             .Fields("Ser_N_SIS").Value = frmComputers.txtOTHSN.Text
+
             .Fields("MONITOR_PROIZV").Value = frmComputers.PROiZV39.Text
 
             .Fields("port_1").Value = frmComputers.txtOTHmemo.Text
@@ -259,6 +259,7 @@ sAR:
 
             .Fields("NET_NAME").Value = frmComputers.cmbOTH.Text
             .Fields("PSEVDONIM").Value = frmComputers.cmbOTH.Text
+
             .Fields("PCL").Value = unaPCL
 
 
