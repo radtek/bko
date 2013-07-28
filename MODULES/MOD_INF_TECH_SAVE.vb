@@ -1310,7 +1310,7 @@ err_:
     Public Sub SAVE_USERS(ByVal lstV As ListView, Optional ByVal sSID As Integer = 0)
         On Error Resume Next
 
-        If (EverestFilePatch <> "") And (Upd_flag = 0) Then ' только при импорте из эвереста
+        If (EverestFilePatch <> "") Then ' только при импорте из эвереста
 
             If sSID = 0 Then Exit Sub
             lstV.Visible = False
@@ -1346,7 +1346,7 @@ err_:
 
                     I1 = sSID
 
-                    If Len(C1) > 0 Then
+                    If (Len(C1) > 0) And (H1 = 0) Then
                         rsUser = New Recordset
                         rsUser.Open("SELECT * FROM USER_COMP", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                         With rsUser

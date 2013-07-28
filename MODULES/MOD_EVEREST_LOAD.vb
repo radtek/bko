@@ -997,8 +997,13 @@ nextA:
         Dim A, uname1, uname2 As String
         On Error Resume Next
         'A = "Пользователи"
-        frmComputers.lstUsers.Items.Clear()
-        intcount = 0
+        If Upd_flag = 0 Then ' при импорте
+            frmComputers.lstUsers.Items.Clear()
+            intcount = 0
+        Else ' при обновлении
+            intcount = frmComputers.lstUsers.Items.Count()
+        End If
+
 
         For intj = 1 To 20
             uname1 = ""
@@ -1008,19 +1013,39 @@ nextA:
 
             uname1 = everIniFile.GetString("Пользователи", A & "|Свойства пользователя|Имя пользователя", "")
             uname2 = everIniFile.GetString("Пользователи", A & "|Свойства пользователя|Полное имя", "")
-            If uname1 = Nothing And uname2 = Nothing Then GoTo fin
-            'frmComputers.lstUsers.Items.Add(frmComputers.lstSoftware.Items.Count + 1)
-            frmComputers.lstUsers.Items.Add(0)
-            'frmComputers.lstUsers.Items(intcount).SubItems.Add(uname1) ' вместо ФИО? 
-            frmComputers.lstUsers.Items(intcount).SubItems.Add("")     'пожалуй, нет
-            frmComputers.lstUsers.Items(intcount).SubItems.Add(uname2)
-            frmComputers.lstUsers.Items(intcount).SubItems.Add("")
-            frmComputers.lstUsers.Items(intcount).SubItems.Add("")
-            frmComputers.lstUsers.Items(intcount).SubItems.Add("")
+            If uname1 = Nothing And uname2 = Nothing Then Exit Sub
 
-            intcount = intcount + 1
+            Dim sSQL As String
+            Dim UserExist As Boolean
+            Dim rsUser As Recordset
+
+            Dim count As Integer
+            count = frmComputers.sCOUNT
+
+            sSQL = "SELECT COUNT(*) AS total_number FROM USER_COMP WHERE ID_COMP=" & frmComputers.sCOUNT & " AND USERNAME='" & uname2 & "'"
+            rsUser = New Recordset
+            rsUser.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+            If rsUser.Fields("total_number").Value = 0 Then
+                UserExist = False
+            Else
+                UserExist = True
+            End If
+            rsUser.Close()
+            rsUser = Nothing
+
+            If UserExist = False Then
+                'frmComputers.lstUsers.Items.Add(frmComputers.lstSoftware.Items.Count + 1)
+                frmComputers.lstUsers.Items.Add(0)
+                'frmComputers.lstUsers.Items(intcount).SubItems.Add(uname1) ' вместо ФИО? 
+                frmComputers.lstUsers.Items(intcount).SubItems.Add("")     'пожалуй, нет
+                frmComputers.lstUsers.Items(intcount).SubItems.Add(uname2)
+                frmComputers.lstUsers.Items(intcount).SubItems.Add("")
+                frmComputers.lstUsers.Items(intcount).SubItems.Add("")
+                frmComputers.lstUsers.Items(intcount).SubItems.Add("")
+                intcount = intcount + 1
+            End If
         Next
-fin:
+        Exit Sub
     End Sub
     'esq 130713
 
@@ -2163,6 +2188,7 @@ nextA:
         frmComputers.txtSNSB.Text = everIniFile.GetString("DMI", "Система|Свойства системы|Серийный номер", "")
         frmComputers.PROizV27.Text = everIniFile.GetString("Суммарная информация", "DMI|DMI производитель системы", "")
 
+        Call usersload() 'esq 130728
         Call textp_Upd(frmComputers.lstSoftware, frmComputers.sCOUNT) 'esq
 
         Exit Sub
@@ -2279,11 +2305,6 @@ Err_handler:
                         'lstV.Items(intjk).EnsureVisible()
                         'esq *****************************
                     End If
-
-                Else
-                    'esq *****************************
-                    'Exit Sub 
-                    'esq *****************************
                 End If
             Else
                 Dim zagu As String
