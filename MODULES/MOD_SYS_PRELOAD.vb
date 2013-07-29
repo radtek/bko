@@ -27,7 +27,6 @@ Module MOD_SYS_PRELOAD
     Public CS As String
     Public SUBD As String
     Public BaseName As String
-    Public Upd_flag As Integer = 0 'esq 130728
 
     'Структура для перемещения
     Public sBranch As String

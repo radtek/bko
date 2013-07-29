@@ -997,12 +997,8 @@ nextA:
         Dim A, uname1, uname2 As String
         On Error Resume Next
         'A = "Пользователи"
-        If Upd_flag = 0 Then ' при импорте
-            frmComputers.lstUsers.Items.Clear()
-            intcount = 0
-        Else ' при обновлении
-            intcount = frmComputers.lstUsers.Items.Count()
-        End If
+        frmComputers.lstUsers.Items.Clear()
+        intcount = 0
 
 
         For intj = 1 To 20
@@ -1016,34 +1012,27 @@ nextA:
             If uname1 = Nothing And uname2 = Nothing Then Exit Sub
 
             Dim sSQL As String
-            Dim UserExist As Boolean
             Dim rsUser As Recordset
 
-            Dim count As Integer
-            count = frmComputers.sCOUNT
-
-            sSQL = "SELECT COUNT(*) AS total_number FROM USER_COMP WHERE ID_COMP=" & frmComputers.sCOUNT & " AND USERNAME='" & uname2 & "'"
+            sSQL = "SELECT ID, FIO FROM USER_COMP WHERE ID_COMP=" & frmComputers.sCOUNT & " AND USERNAME='" & uname2 & "'"
             rsUser = New Recordset
             rsUser.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-            If rsUser.Fields("total_number").Value = 0 Then
-                UserExist = False
-            Else
-                UserExist = True
-            End If
-            rsUser.Close()
-            rsUser = Nothing
-
-            If UserExist = False Then
-                'frmComputers.lstUsers.Items.Add(frmComputers.lstSoftware.Items.Count + 1)
+            If rsUser.EOF = True Then
                 frmComputers.lstUsers.Items.Add(0)
                 'frmComputers.lstUsers.Items(intcount).SubItems.Add(uname1) ' вместо ФИО? 
                 frmComputers.lstUsers.Items(intcount).SubItems.Add("")     'пожалуй, нет
                 frmComputers.lstUsers.Items(intcount).SubItems.Add(uname2)
-                frmComputers.lstUsers.Items(intcount).SubItems.Add("")
-                frmComputers.lstUsers.Items(intcount).SubItems.Add("")
-                frmComputers.lstUsers.Items(intcount).SubItems.Add("")
-                intcount = intcount + 1
+            Else
+                frmComputers.lstUsers.Items.Add(rsUser.Fields("ID").Value)
+                frmComputers.lstUsers.Items(intcount).SubItems.Add(rsUser.Fields("FIO").Value)
+                frmComputers.lstUsers.Items(intcount).SubItems.Add(uname2)
             End If
+            frmComputers.lstUsers.Items(intcount).SubItems.Add("")
+            frmComputers.lstUsers.Items(intcount).SubItems.Add("")
+            frmComputers.lstUsers.Items(intcount).SubItems.Add("")
+            intcount = intcount + 1
+            rsUser.Close()
+            rsUser = Nothing
         Next
         Exit Sub
     End Sub

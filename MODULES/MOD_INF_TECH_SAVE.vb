@@ -1315,10 +1315,12 @@ err_:
             If sSID = 0 Then Exit Sub
             lstV.Visible = False
 
-            Dim B1, C1, I1, H1 As String
+            Dim B1, C1, I1, H1, spis As String
             Dim intj As Integer
             Dim rsUser As Recordset
+            Dim sSQL As String
 
+            spis = "\"
             For intj = 0 To lstV.Items.Count - 1
 
                 If Len(lstV.Items(intj).SubItems(2).Text) > 0 Then
@@ -1346,6 +1348,8 @@ err_:
 
                     I1 = sSID
 
+                    spis = spis + C1 + "\"
+
                     If (Len(C1) > 0) And (H1 = 0) Then
                         rsUser = New Recordset
                         rsUser.Open("SELECT * FROM USER_COMP", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -1366,7 +1370,6 @@ err_:
                         rsUser.Close()
                         rsUser = Nothing
 
-                        Dim sSQL As String
                         Dim UserExist As Boolean
                         sSQL = "SELECT COUNT(*) AS total_number FROM SPR_USER WHERE name='" & C1 & "' AND A='" & B1 & "'"
                         rsUser = New Recordset
@@ -1396,13 +1399,26 @@ err_:
                     End If
                 End If
             Next
+
+            sSQL = "SELECT * FROM USER_COMP WHERE ID_COMP=" & sSID
+            rsUser = New Recordset
+            rsUser.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+            rsUser.MoveFirst()
+            Do While Not rsUser.EOF
+                If InStr(spis, "\" & Trim(rsUser.Fields("USERNAME").Value) & "\") = 0 Then
+                    rsUser.Delete()
+                End If
+                rsUser.MoveNext()
+            Loop
+            rsUser.Close()
+            rsUser = Nothing
+
             lstV.Visible = True
             Dim langfile As New IniFile(sLANGPATH)
             frmComputers.cmdUserAdd.Text = langfile.GetString("frmComputers", "MSG30", "Добавить")
             LOAD_USER(frmComputers.sCOUNT)
         End If
         EverestFilePatch = "" ' чтобы не повторять
-        Upd_flag = 0
     End Sub 'esq 130713 сохраним пользователей
 
     Public Sub Save_P(Optional ByVal sSID As String = "")
