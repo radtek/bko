@@ -2415,6 +2415,29 @@ Error_:
             'rs.Close()
             rs = Nothing
 
+
+            Dim rs1 As Recordset
+            sSQL = "SELECT * FROM kompy where PCL=" & sID
+            rs = New Recordset
+            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
+            With rs
+                .MoveFirst()
+                Do While Not .EOF
+
+                    rs1 = New Recordset
+
+                    rs1.Open("update kompy set FILIAL='" & sBRANCHE & "', mesto='" & sDEPARTMENT & "', kabn='" & sOFFICE & "' WHERE PCL=" & rs.Fields("id").Value, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
+                    rs1 = Nothing
+
+                    .MoveNext()
+                Loop
+            End With
+            rs.Close()
+            rs = Nothing
+
+
         End If
     End Sub
 
@@ -3326,7 +3349,46 @@ Error_:
 
         If MRZD = True Then Exit Sub
 
-        If TREE_UPDATE = 0 Then RefFilTree(frmComputers.lstGroups) Else frmComputers.LOAD_LIST()
+        If TREE_UPDATE = 0 Then
+
+            RefFilTree(frmComputers.lstGroups)
+            
+        Else
+
+            rs1 = New Recordset
+            rs1.Open("Select NET_NAME, FILIAL,MESTO,kabn from kompy where id=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
+                     LockTypeEnum.adLockOptimistic)
+            Dim tmpName, tmpFil, tmpDep, tmpOff, tmpID As String
+
+            With rs1
+                tmpFil = .Fields("FILIAL").Value
+                tmpDep = .Fields("MESTO").Value
+                tmpOff = .Fields("kabn").Value
+                tmpName = .Fields("NET_NAME").Value
+            End With
+
+            rs1.Close()
+            rs1 = Nothing
+
+            tmpID = sSID
+
+            FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & sSID)
+
+            frmComputers.lstGroups.SelectedNode.Remove()
+            DV2 = True
+            
+            Call UpdateTree(tmpName, "PC", tmpID, tmpFil, tmpDep, tmpOff)
+
+
+            'frmComputers.LOAD_LIST()
+
+        End If
+
+
+
+        
+        
+
     End Sub
 
     Public Sub Re_PRN(Optional ByVal sSID As Integer = 0)

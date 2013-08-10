@@ -14,6 +14,7 @@ Module MOD_REF_TREE
     Private P_NAME As String = ""
     Private L_NAME As String = ""
     Private stmREMONT As Integer = 0
+    Private tmpTAGkey As String = ""
 
     Private Sub FILING_FILIAL()
         On Error Resume Next
@@ -180,7 +181,7 @@ Module MOD_REF_TREE
         rs = Nothing
 
         Dim nodeRoot As New TreeNode(ORG, 69, 69)
-        nodeRoot.Tag = "ROOT" & GENID()
+        nodeRoot.Tag = "ROOT|001" ' & GENID()
         nodeRoot.Name = ORG
         nodeRoot.Text = ORG
         lstgroups.Nodes.Add(nodeRoot)
@@ -609,6 +610,9 @@ ERR1:
 
                 Dim TEHNodeCNT As New TreeNode(L_NAME, uname, uname)
                 TEHNodeCNT.Tag = "C|" & iD
+                TEHNodeCNT.Text = L_NAME
+                TEHNodeCNT.Name = L_NAME
+
                 DepNode.Nodes.Add(TEHNodeCNT)
 
                 Call checkOther(lstgroups, iD, TEHNodeCNT, Spisan, balans)
@@ -682,7 +686,19 @@ ERR1:
                                         If Len(P_NAME) = 0 Then
                                             P_NAME = "NoName"
                                         End If
-                                        L_NAME = N_NAME & " (" & P_NAME & ")"
+
+                                        Select Case N_NAME
+
+                                            Case P_NAME
+
+                                                L_NAME = N_NAME
+                                            Case Else
+
+                                                L_NAME = N_NAME & " (" & P_NAME & ")"
+
+                                        End Select
+
+
 
                                     Case 2
                                         P_NAME = .Fields("PSEVDONIM").Value
@@ -1958,27 +1974,27 @@ ERR1:
         '  Call frmComputers.selectTECMesto()
 
         Dim sSQL, PrefM, sNODENAME As String
-        ' Dim sSID, sICO As Integer
+        Dim sSID As Integer
         Dim rs As ADODB.Recordset
 
         If Len(sKABN) <> 0 Then
 
             sSQL = "SELECT id, Name as NAME,N_F as FILIAL, N_M as OTDEL FROM SPR_KAB WHERE N_F='" & sFIALIAL & "' AND N_M='" & sOTDEL & "' AND Name='" & sKABN & "'"
-            ' PrefM = "K"
+            PrefM = "K"
             'sICO = 2
         End If
 
         If Len(sOTDEL) <> 0 And Len(sKABN) = 0 Then
 
             sSQL = "SELECT id, N_Otd as NAME, Filial as FILIAL FROM SPR_OTD_FILIAL WHERE filial='" & sFIALIAL & "' AND n_otd='" & sOTDEL & "'"
-            ' PrefM = "O"
+            PrefM = "O"
             'sICO = 1
         End If
 
         If Len(sFIALIAL) <> 0 And Len(sOTDEL) = 0 Then
 
             sSQL = "SELECT id, FILIAL as NAME FROM SPR_FILIAL WHERE filial='" & sFIALIAL & "'"
-            'PrefM = "G"
+            PrefM = "G"
             'sICO = 0
         End If
 
@@ -1986,7 +2002,7 @@ ERR1:
         rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
-            'sSID = .Fields("id").Value
+            sSID = .Fields("id").Value
             sNODENAME = .Fields("NAME").Value
         End With
 
@@ -1997,7 +2013,8 @@ ERR1:
         'Ищем место
         '###########################
 
-        Call FIND_TREE(sNODENAME)
+        '  Call FIND_TREE(sNODENAME)
+        FIND_TREE_TAG(frmComputers.lstGroups.Nodes, PrefM & "|" & sSID)
 
         'Получаем информацию о технике
 
@@ -2075,7 +2092,10 @@ ERR1:
                         'Ищем технику
                         '###########################
 
-                        Call FIND_TREE(iA2)
+                        ' Call FIND_TREE(iA2)
+
+                        Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & sID)
+
 
                 End Select
 
@@ -2096,10 +2116,12 @@ ERR1:
                 rs = Nothing
 
                 'ищем имя объекта контейнера
-                Call FIND_NAME(tmpPCL)
+                '  Call FIND_NAME(tmpPCL)
 
                 'ищем в дереве объект контейнер
-                Call FIND_TREE(L_NAME)
+                ' Call FIND_TREE(L_NAME)
+
+                FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & tmpPCL)
 
                 sSQL = "SELECT id, mesto, filial, tip_compa, tiptehn, PSEVDONIM, NET_NAME, kabn, Spisan, OS, PRINTER_NAME_4,balans, (Select count(*) as t_n FROM Remont Where id_comp=kompy.id and zakryt = 0) as rem FROM kompy WHERE id =" & sID '& " AND PCL =0"
 
@@ -2138,32 +2160,57 @@ err_:
 
     End Sub
 
-    'Ищем в дереве необхадимый объект и выделяем его
-    Public Sub FIND_TREE(ByVal sNODENAME As String)
+    'Ищем в дереве (По имени объекта) необходимый объект и выделяем его
 
-        Dim arr As TreeNode() = frmComputers.lstGroups.Nodes(0).Nodes(0).Nodes.Find(sNODENAME, True)
+    'Public Sub FIND_TREE(ByVal sNODENAME As String)
 
-        Dim str As Integer = frmComputers.lstGroups.Nodes.Count
+    '    On Error Resume Next
 
-        For i = 0 To str
+    '    Dim arr As TreeNode() = frmComputers.lstGroups.Nodes(0).Nodes(0).Nodes(0).Nodes.Find(sNODENAME, True)
 
-            arr = frmComputers.lstGroups.Nodes.Find(sNODENAME, True)
+    '    Dim str As Integer = frmComputers.lstGroups.Nodes.Count
+
+    '    For i = 0 To str
+
+    '        arr = frmComputers.lstGroups.Nodes.Find(sNODENAME, True)
+
+    '    Next
+
+    '    If arr.Length > 1 Then RefFilTree(frmComputers.lstGroups)
+
+    '    For i = 0 To arr.Length - 1
+
+    '        frmComputers.lstGroups.SelectedNode = arr(i)
+
+    '    Next
+
+    'End Sub
+
+    'Ищем в дереве (По тэгу объекта, исключается ошибочный выбор объекта) необходимый объект и выделяем его
+
+    Public Function FIND_TREE_TAG(ByVal nodes As TreeNodeCollection, sTXT As String)
+
+        For Each node As TreeNode In nodes
+
+            If node.Tag.ToString = sTXT Then
+                ' Return node
+                frmComputers.lstGroups.SelectedNode = node
+
+            Else
+                FIND_TREE_TAG(node.Nodes, sTXT)
+
+            End If
 
         Next
 
-        If arr.Length > 1 Then RefFilTree(frmComputers.lstGroups)
+        Return FIND_TREE_TAG
 
-        For i = 0 To arr.Length - 1
-
-            frmComputers.lstGroups.SelectedNode = arr(i)
-
-        Next
-
-    End Sub
+    End Function
 
     'Процедура перестроения дерева
-    'Определяем необхадимость перестроения
+    'Определяем необходимость перестроения
     Public Sub UpdateTree(ByVal sTXT As String, ByVal sTIPTEHN As String, ByVal sID As Integer, ByVal sFIALIAL As String, ByVal sOTDEL As String, ByVal sKABN As String)
+        On Error Resume Next
 
         Select Case frmComputers.pDRAG
 
@@ -2248,6 +2295,7 @@ err_:
     '##########################################################################################################
 
     Public Sub Add_FILIAL_TREE(ByVal sBr As String)
+        On Error Resume Next
 
         Dim rs As Recordset
         rs = New Recordset
@@ -2274,7 +2322,7 @@ err_:
 
                 With rs
 
-                    If Not IsDBNull(.Fields("ORG").Value) Then Call FIND_TREE(.Fields("ORG").Value)
+                    If Not IsDBNull(.Fields("ORG").Value) Then Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "ROOT|001") 'FIND_TREE(.Fields("ORG").Value)
 
                 End With
                 rs.Close()
@@ -2300,13 +2348,25 @@ err_:
     End Sub
 
     Public Sub Add_OTDEL_TREE(ByVal sBr As String, ByVal sDp As String)
-
-        Dim rs As Recordset
-        rs = New Recordset
-
-        FIND_TREE(sBr)
-
+        On Error Resume Next
         Dim sID As Integer
+        Dim rs As Recordset
+
+        '##################################
+        rs = New Recordset
+        rs.Open("SELECT top 1 id FROM SPR_FILIAL WHERE FILIAL='" & sBr & "' order by id desc", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
+        With rs
+            sID = .Fields("ID").Value
+        End With
+        rs.Close()
+        rs = Nothing
+
+        Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "G|" & sID)
+        '##################################
+
+        '  FIND_TREE(sBr)
+        rs = New Recordset
         rs.Open("SELECT top 1 id FROM SPR_OTD_FILIAL WHERE FILIAL='" & sBr & "' AND N_Otd='" & sDp & "' order by id desc", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
@@ -2324,12 +2384,29 @@ err_:
     End Sub
 
     Public Sub Add_KABINET_TREE(ByVal sBr As String, ByVal sDp As String, ByVal sOff As String)
+        On Error Resume Next
 
         Dim rs As Recordset
-
-        FIND_TREE(sDp)
-
         Dim sID As Integer
+
+
+        '#############################
+        rs = New Recordset
+        rs.Open("SELECT top 1 id FROM SPR_OTD_FILIAL WHERE FILIAL='" & sBr & "' AND N_Otd='" & sDp & "' order by id desc", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
+        With rs
+            sID = .Fields("ID").Value
+        End With
+        rs.Close()
+        rs = Nothing
+
+        Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "O|" & sID)
+
+        '#############################
+
+        '  FIND_TREE(sDp)
+
+
         rs = New Recordset
         rs.Open("SELECT top 1 id FROM SPR_KAB WHERE N_F='" & sBr & "' AND N_M='" & sDp & "' AND Name='" & sOff & "' order by id desc", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 

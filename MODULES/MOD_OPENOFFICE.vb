@@ -1252,6 +1252,23 @@ Module MOD_OPENOFFICE
                                     insertIntoCell(iC, .Fields("PRINTER_SN_1").Value, objTable)
                                     insertIntoCell(iD, .Fields("INV_NO_PRINTER").Value, objTable)
 
+
+                                Case "MOUSE"
+
+                                    insertIntoCell(iA, LNGIniFile.GetString("MOD_OPENOFFICE", "MSG23", "Мышь"),
+                                                   objTable)
+                                    insertIntoCell(iB, .Fields("NET_NAME").Value, objTable)
+                                    insertIntoCell(iC, .Fields("PRINTER_SN_1").Value, objTable)
+                                    insertIntoCell(iD, .Fields("INV_NO_PRINTER").Value, objTable)
+
+                                Case "KEYB"
+
+                                    insertIntoCell(iA, LNGIniFile.GetString("MOD_OPENOFFICE", "MSG22", "Клавиатура"),
+                                                   objTable)
+                                    insertIntoCell(iB, .Fields("NET_NAME").Value, objTable)
+                                    insertIntoCell(iC, .Fields("PRINTER_SN_1").Value, objTable)
+                                    insertIntoCell(iD, .Fields("INV_NO_PRINTER").Value, objTable)
+
                             End Select
 
 
@@ -2279,9 +2296,7 @@ Module MOD_OPENOFFICE
         If Len(tipot) = 0 Then Exit Sub
         On Error Resume Next
 
-
         Dim intj As Integer
-
 
         Dim rs As Recordset 'Объявляем рекордсет
         Dim Count As String
@@ -2300,7 +2315,6 @@ Module MOD_OPENOFFICE
 
         Dim iA, iB, iC, iD, iE As String
 
-
         Dim rs1 As Recordset
         sSQL1 = "SELECT * FROM CONFIGURE"
         rs1 = New Recordset
@@ -2313,11 +2327,9 @@ Module MOD_OPENOFFICE
         rs1.Close()
         rs1 = Nothing
 
-
         Select Case sOfficePACK
 
             Case "OpenOffice.org"
-
 
                 Dim oSM As Object            'Root object for accessing OpenOffice FROM VB
                 Dim oDesk, oDoc As Object 'First objects FROM the API
@@ -2387,7 +2399,7 @@ Module MOD_OPENOFFICE
 
 
                 rs = New Recordset
-                rs.Open("Select * FROM kompy where OTvetstvennyj='" & frmReports.cmbOTV.Text & "'", DB7,
+                rs.Open("Select * FROM kompy where OTvetstvennyj='" & frmReports.cmbOTV.Text & "' ORDER BY tiptehn", DB7,
                         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
 
@@ -2605,8 +2617,8 @@ Module MOD_OPENOFFICE
                                 insertIntoCell(iB,
                                                LNGIniFile.GetString("MOD_OPENOFFICE", "MSG37", "USB Устройство") & " - " &
                                                .Fields("NET_NAME").Value, objTable)
-                                insertIntoCell(iC, .Fields("INV_NO_MONITOR").Value, objTable)
-                                insertIntoCell(iD, .Fields("MONITOR_SN").Value, objTable)
+                                insertIntoCell(iC, .Fields("INV_NO_PRINTER").Value, objTable)
+                                insertIntoCell(iD, .Fields("PRINTER_SN_1").Value, objTable)
                                 insertIntoCell(iE, .Fields("DataVVoda").Value, objTable)
 
                                 'DataVVoda
@@ -2618,7 +2630,7 @@ Module MOD_OPENOFFICE
                                 insertIntoCell(iB,
                                                LNGIniFile.GetString("MOD_OPENOFFICE", "MSG25", "Акустическая система") &
                                                " - " & .Fields("NET_NAME").Value, objTable)
-                                insertIntoCell(iC, .Fields("INV_NO_MONITOR").Value, objTable)
+                                insertIntoCell(iC, .Fields("INV_NO_PRINTER").Value, objTable)
                                 insertIntoCell(iD, .Fields("MONITOR_SN").Value, objTable)
                                 insertIntoCell(iE, .Fields("DataVVoda").Value, objTable)
 
@@ -2632,8 +2644,8 @@ Module MOD_OPENOFFICE
                                                LNGIniFile.GetString("MOD_OPENOFFICE", "MSG35",
                                                                     "Источник бесперебойного питания") & " - " &
                                                .Fields("NET_NAME").Value, objTable)
-                                insertIntoCell(iC, .Fields("INV_NO_MONITOR").Value, objTable)
-                                insertIntoCell(iD, .Fields("MONITOR_SN").Value, objTable)
+                                insertIntoCell(iC, .Fields("INV_NO_PRINTER").Value, objTable)
+                                insertIntoCell(iD, .Fields("PRINTER_SN_1").Value, objTable)
                                 insertIntoCell(iE, .Fields("DataVVoda").Value, objTable)
 
                                 'DataVVoda
@@ -2645,11 +2657,36 @@ Module MOD_OPENOFFICE
                                 insertIntoCell(iB,
                                                LNGIniFile.GetString("MOD_OPENOFFICE", "MSG26", "Сетевой фильтр") & " - " &
                                                .Fields("NET_NAME").Value, objTable)
-                                insertIntoCell(iC, .Fields("INV_NO_MONITOR").Value, objTable)
-                                insertIntoCell(iD, .Fields("MONITOR_SN").Value, objTable)
+                                insertIntoCell(iC, .Fields("INV_NO_PRINTER").Value, objTable)
+                                insertIntoCell(iD, .Fields("PRINTER_SN_1").Value, objTable)
                                 insertIntoCell(iE, .Fields("DataVVoda").Value, objTable)
 
                                 'DataVVoda
+                                intj = intj + 1
+
+
+                            Case "KEYB"
+
+                                insertIntoCell(iA, intj, objTable)
+                                insertIntoCell(iB,
+                                               LNGIniFile.GetString("MOD_OPENOFFICE", "MSG22", "Клавиатура") & " - " &
+                                               .Fields("NET_NAME").Value, objTable)
+                                insertIntoCell(iC, .Fields("INV_NO_PRINTER").Value, objTable)
+                                insertIntoCell(iD, .Fields("PRINTER_SN_1").Value, objTable)
+                                insertIntoCell(iE, .Fields("DataVVoda").Value, objTable)
+
+                                intj = intj + 1
+
+                            Case "MOUSE"
+
+                                insertIntoCell(iA, intj, objTable)
+                                insertIntoCell(iB,
+                                               LNGIniFile.GetString("MOD_OPENOFFICE", "MSG23", "Мышь") & " - " &
+                                               .Fields("NET_NAME").Value, objTable)
+                                insertIntoCell(iC, .Fields("INV_NO_PRINTER").Value, objTable)
+                                insertIntoCell(iD, .Fields("PRINTER_SN_1").Value, objTable)
+                                insertIntoCell(iE, .Fields("DataVVoda").Value, objTable)
+
                                 intj = intj + 1
 
                         End Select
@@ -2806,7 +2843,7 @@ Module MOD_OPENOFFICE
                 intj = 2
 
                 rs = New Recordset
-                rs.Open("Select * FROM kompy where OTvetstvennyj='" & frmReports.cmbOTV.Text & "'", DB7,
+                rs.Open("Select * FROM kompy where OTvetstvennyj='" & frmReports.cmbOTV.Text & "' ORDER BY tiptehn", DB7,
                         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 With rs
@@ -2978,8 +3015,8 @@ Module MOD_OPENOFFICE
                                 oTable.Cell(intj, 2).Range.Text =
                                     LNGIniFile.GetString("MOD_OPENOFFICE", "MSG26", "Сетевой фильтр") & " - " &
                                     .Fields("NET_NAME").Value
-                                oTable.Cell(intj, 3).Range.Text = .Fields("INV_NO_MONITOR").Value
-                                oTable.Cell(intj, 4).Range.Text = .Fields("MONITOR_SN").Value
+                                oTable.Cell(intj, 3).Range.Text = .Fields("INV_NO_PRINTER").Value
+                                oTable.Cell(intj, 4).Range.Text = .Fields("PRINTER_SN_1").Value
                                 oTable.Cell(intj, 5).Range.Text = .Fields("DataVVoda").Value
 
                                 'DataVVoda
@@ -2991,8 +3028,8 @@ Module MOD_OPENOFFICE
                                 oTable.Cell(intj, 2).Range.Text =
                                     LNGIniFile.GetString("MOD_OPENOFFICE", "MSG35", "Источник бесперебойного питания") &
                                     " - " & .Fields("NET_NAME").Value
-                                oTable.Cell(intj, 3).Range.Text = .Fields("INV_NO_MONITOR").Value
-                                oTable.Cell(intj, 4).Range.Text = .Fields("MONITOR_SN").Value
+                                oTable.Cell(intj, 3).Range.Text = .Fields("INV_NO_PRINTER").Value
+                                oTable.Cell(intj, 4).Range.Text = .Fields("PRINTER_SN_1").Value
                                 oTable.Cell(intj, 5).Range.Text = .Fields("DataVVoda").Value
 
                                 'DataVVoda
@@ -3004,8 +3041,8 @@ Module MOD_OPENOFFICE
                                 oTable.Cell(intj, 2).Range.Text =
                                     LNGIniFile.GetString("MOD_OPENOFFICE", "MSG25", "Акустическая система") & " - " &
                                     .Fields("NET_NAME").Value
-                                oTable.Cell(intj, 3).Range.Text = .Fields("INV_NO_MONITOR").Value
-                                oTable.Cell(intj, 4).Range.Text = .Fields("MONITOR_SN").Value
+                                oTable.Cell(intj, 3).Range.Text = .Fields("INV_NO_PRINTER").Value
+                                oTable.Cell(intj, 4).Range.Text = .Fields("PRINTER_SN_1").Value
                                 oTable.Cell(intj, 5).Range.Text = .Fields("DataVVoda").Value
 
                                 'DataVVoda
@@ -3017,11 +3054,36 @@ Module MOD_OPENOFFICE
                                 oTable.Cell(intj, 2).Range.Text =
                                     LNGIniFile.GetString("MOD_OPENOFFICE", "MSG37", "USB Устройство") & " - " &
                                     .Fields("NET_NAME").Value
-                                oTable.Cell(intj, 3).Range.Text = .Fields("INV_NO_MONITOR").Value
-                                oTable.Cell(intj, 4).Range.Text = .Fields("MONITOR_SN").Value
+                                oTable.Cell(intj, 3).Range.Text = .Fields("INV_NO_PRINTER").Value
+                                oTable.Cell(intj, 4).Range.Text = .Fields("PRINTER_SN_1").Value
                                 oTable.Cell(intj, 5).Range.Text = .Fields("DataVVoda").Value
 
                                 'DataVVoda
+                                intj = intj + 1
+
+
+                            Case "KEYB"
+
+                                oTable.Cell(intj, 1).Range.Text = intj - 1
+                                oTable.Cell(intj, 2).Range.Text =
+                                    LNGIniFile.GetString("MOD_OPENOFFICE", "MSG22", "Клавиатура") & " - " &
+                                    .Fields("NET_NAME").Value
+                                oTable.Cell(intj, 3).Range.Text = .Fields("INV_NO_PRINTER").Value
+                                oTable.Cell(intj, 4).Range.Text = .Fields("PRINTER_SN_1").Value
+                                oTable.Cell(intj, 5).Range.Text = .Fields("DataVVoda").Value
+
+                                intj = intj + 1
+
+                            Case "MOUSE"
+
+                                oTable.Cell(intj, 1).Range.Text = intj - 1
+                                oTable.Cell(intj, 2).Range.Text =
+                                    LNGIniFile.GetString("MOD_OPENOFFICE", "MSG23", "Мышь") & " - " &
+                                    .Fields("NET_NAME").Value
+                                oTable.Cell(intj, 3).Range.Text = .Fields("INV_NO_PRINTER").Value
+                                oTable.Cell(intj, 4).Range.Text = .Fields("PRINTER_SN_1").Value
+                                oTable.Cell(intj, 5).Range.Text = .Fields("DataVVoda").Value
+
                                 intj = intj + 1
 
                         End Select
@@ -3108,6 +3170,7 @@ err_:
 
             oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 7, 2)
             oTable.Range.ParagraphFormat.SpaceAfter = 6
+            oTable.Borders.Enable = True
 
             cOTV = .Fields("OTvetstvennyj").Value
 
@@ -3142,6 +3205,7 @@ err_:
 
             oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, iCOUNTFIELLDS + 1, 3)
             oTable.Range.ParagraphFormat.SpaceAfter = 6
+            oTable.Borders.Enable = True
 
             oTable.Cell(1, 1).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG9", "Комплектующие")
             oTable.Cell(1, 2).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG10", "Модель")
@@ -3507,6 +3571,7 @@ err_:
 
             oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, GIST + 1, 3)
             oTable.Range.ParagraphFormat.SpaceAfter = 6
+            oTable.Borders.Enable = True
 
             oTable.Cell(1, 1).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG29", "Устройство")
             oTable.Cell(1, 2).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG10", "Модель")
@@ -3644,6 +3709,7 @@ err_:
 
             oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, GIST + 1, 1)
             oTable.Range.ParagraphFormat.SpaceAfter = 6
+            oTable.Borders.Enable = True
 
             oTable.Cell(1, 1).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG38",
                                                                 "Установленное Программное обеспечение")
@@ -3705,6 +3771,7 @@ err_:
 
             oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, GIST + 1, 4)
             oTable.Range.ParagraphFormat.SpaceAfter = 6
+            oTable.Borders.Enable = True
 
             oTable.Cell(1, 1).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG40", "Старое место")
             oTable.Cell(1, 2).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG41", "Новое место")
@@ -3768,6 +3835,7 @@ err_:
 
             oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, GIST + 1, 5)
             oTable.Range.ParagraphFormat.SpaceAfter = 6
+            oTable.Borders.Enable = True
 
             oTable.Cell(1, 1).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG43", "Дата")
             oTable.Cell(1, 2).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG46", "Ремонт")
@@ -3819,6 +3887,7 @@ err_:
 
         oTable = oDoc.Tables.Add(oDoc.Bookmarks.Item("\endofdoc").Range, 3, 2)
         oTable.Range.ParagraphFormat.SpaceAfter = 6
+        oTable.Borders.Enable = True
 
         oTable.Cell(1, 1).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG51", "Системный администратор")
         oTable.Cell(1, 2).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG52", "Подписи ответственных лиц")
@@ -4139,6 +4208,24 @@ err_:
                                 oTable.Cell(intj, 2).Range.Text = .Fields("NET_NAME").Value
                                 oTable.Cell(intj, 3).Range.Text = .Fields("PRINTER_SN_1").Value
                                 oTable.Cell(intj, 4).Range.Text = .Fields("INV_NO_PRINTER").Value
+
+
+                            Case "MOUSE"
+                                oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG23",
+                                                                                     "Мышь")
+                                oTable.Cell(intj, 2).Range.Text = .Fields("NET_NAME").Value
+                                oTable.Cell(intj, 3).Range.Text = .Fields("PRINTER_SN_1").Value
+                                oTable.Cell(intj, 4).Range.Text = .Fields("INV_NO_PRINTER").Value
+
+                            Case "KEYB"
+
+                                oTable.Cell(intj, 1).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG22",
+                                                                                     "Клавиатура")
+                                oTable.Cell(intj, 2).Range.Text = .Fields("NET_NAME").Value
+                                oTable.Cell(intj, 3).Range.Text = .Fields("PRINTER_SN_1").Value
+                                oTable.Cell(intj, 4).Range.Text = .Fields("INV_NO_PRINTER").Value
+
+
 
                         End Select
 

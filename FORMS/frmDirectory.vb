@@ -2170,7 +2170,7 @@ Public Class frmDirectory
 
             Case objIniFile.GetString("frmDirectory", "MSG39", "Филиал")
 
-                RemoveBrainch(lvDirectory.Items.Item(lvDirectory.FocusedItem.Index).SubItems(1).Text)
+                RemoveBrainch(dSID, lvDirectory.Items.Item(lvDirectory.FocusedItem.Index).SubItems(1).Text)
 
             Case objIniFile.GetString("frmDirectory", "MSG40", "Отдел")
 

@@ -424,7 +424,7 @@ ERR1:
         MsgBox("Database error: " & vbNewLine & vbNewLine & Err.Description, vbCritical, "Database Error!")
     End Function
 
-    Public Function RemoveBrainch(ByVal sGroupName As String)
+    Public Function RemoveBrainch(ByVal sGroupName As Long, ByVal stxt As String)
         On Error GoTo ERR1
         Dim UC As Long
         Dim LNGIniFile As New IniFile(sLANGPATH)
@@ -434,7 +434,7 @@ ERR1:
         Dim rs As Recordset
 
         rs = New Recordset
-        rs.Open("SELECT COUNT(*) AS total_number FROM kompy WHERE FILIAL='" & sGroupName & "'", DB7,
+        rs.Open("SELECT COUNT(*) AS total_number FROM kompy WHERE FILIAL='" & stxt & "'", DB7,
                 CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
@@ -452,7 +452,7 @@ ERR1:
                     LNGIniFile.GetString("MOD_REMOVE", "MSG1", "Найдено") & " " & UC & " " &
                     LNGIniFile.GetString("MOD_REMOVE", "MSG3",
                                          "единиц техники в филиале, Ваше действие может привести к потере данных, желаете продолжить удаление -") &
-                    " " & sGroupName & " ?" & vbCrLf &
+                    " " & stxt & " ?" & vbCrLf &
                     LNGIniFile.GetString("MOD_REMOVE", "MSG6",
                                          "ри удалении структуры техника не удаляется. Будьте внимательны."),
                     vbExclamation + vbYesNo, ProGramName) = vbNo Then
@@ -466,7 +466,7 @@ ERR1:
         End If
 
         rs = New Recordset
-        rs.Open("DELETE FROM SPR_FILIAL WHERE FILIAL='" & sGroupName & "'", DB7, CursorTypeEnum.adOpenDynamic,
+        rs.Open("DELETE FROM SPR_FILIAL WHERE id=" & sGroupName, DB7, CursorTypeEnum.adOpenDynamic,
                 LockTypeEnum.adLockOptimistic)
         rs = Nothing
 
@@ -476,7 +476,10 @@ ERR1:
             Case 0
                 Call RefFilTree(frmComputers.lstGroups)
             Case 1
-                FIND_TREE(sGroupName)
+                '    FIND_TREE(sGroupName)
+
+                Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "G|" & sGroupName)
+
                 frmComputers.lstGroups.SelectedNode.Remove()
         End Select
 
@@ -564,7 +567,9 @@ ERR1:
             Case 0
                 Call RefFilTree(frmComputers.lstGroups)
             Case 1
-                FIND_TREE(sGroupName)
+                '  FIND_TREE(sGroupName)
+                Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "O|" & sKab)
+
                 frmComputers.lstGroups.SelectedNode.Remove()
         End Select
 
@@ -645,7 +650,9 @@ ERR1:
             Case 0
                 Call RefFilTree(frmComputers.lstGroups)
             Case 1
-                FIND_TREE(sOffice)
+                ' FIND_TREE(sOffice)
+                Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "K|" & sKab)
+
                 frmComputers.lstGroups.SelectedNode.Remove()
         End Select
 

@@ -2434,7 +2434,7 @@ err_:
         Handles UpdateToolStripMenuItem.Click
         If TipTehn <> "PC" Then Exit Sub
 
-        Upd_flag = 1 'esq 130728
+        ' Upd_flag = 1 'esq 130728
 
         Dim ePatch As String
         Dim objIniFile As New IniFile(PrPath & "base.ini")
@@ -2522,7 +2522,7 @@ err_:
 
                 Case "G"
 
-                    RemoveBrainch(lstGroups.SelectedNode.Text)
+                    RemoveBrainch(d(1), lstGroups.SelectedNode.Text)
                     Call _
                         SaveActivityToLogDB(
                             langfile.GetString("frmComputers", "MSG31", "Удаление филиала") & " " & sBranch)

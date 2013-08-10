@@ -3254,12 +3254,18 @@ Error_:
                     '###################################################################
 
 
-                    Select Case .Fields("tiptehn").Value
+                    If Not IsDBNull(.Fields("PRINTER_SN_1").Value) Then
+                        LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
+                    Else
+                        LvKompOtd.Items(CInt(intj)).SubItems.Add("")
+                    End If
 
+                    Select Case .Fields("tiptehn").Value
 
                         Case "PHOTO"
 
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
+                            ' LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
+
                             LvKompOtd.Items(CInt(intj)).SubItems.Add(langIni.GetString("frmReports", "B(56)",
                                                                                        "Фотоаппарат"))
                             If Not IsDBNull(.Fields("PRINTER_SN_1").Value) Then
@@ -3274,25 +3280,12 @@ Error_:
                                 LvKompOtd.Items(CInt(intj)).SubItems.Add("")
                             End If
 
-                            If Not IsDBNull(.Fields("StoimRub").Value) Then
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("StoimRub").Value)
-                            Else
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add("")
-                            End If
-
-                            If Not IsDBNull(.Fields("DataVVoda").Value) Then
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("DataVVoda").Value)
-                            Else
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add("")
-                            End If
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(tUNAME)
-
                             'If chkTeh(49) = True Then LvKompOtd.Items(CInt(intj)).SubItems.Add(.Fields("DataVVoda").Value)
                             'If chkTeh(50) = True Then LvKompOtd.Items(CInt(intj)).SubItems.Add(.Fields("SYS_PR").Value)
 
                         Case "PHONE"
 
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
+                            ' LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
                             LvKompOtd.Items(CInt(intj)).SubItems.Add(langIni.GetString("frmReports", "B(57)", "Телефон"))
                             If Not IsDBNull(.Fields("PRINTER_SN_1").Value) Then
                                 LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("PRINTER_SN_1").Value)
@@ -3306,22 +3299,11 @@ Error_:
                                 LvKompOtd.Items(CInt(intj)).SubItems.Add("")
                             End If
 
-                            If Not IsDBNull(.Fields("StoimRub").Value) Then
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("StoimRub").Value)
-                            Else
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add("")
-                            End If
-
-                            If Not IsDBNull(.Fields("DataVVoda").Value) Then
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("DataVVoda").Value)
-                            Else
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add("")
-                            End If
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(tUNAME)
+                            ' LvKompOtd.Items(CInt(intj)).SubItems.Add(tUNAME)
 
                         Case "FAX"
 
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
+                            ' LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
                             LvKompOtd.Items(CInt(intj)).SubItems.Add(langIni.GetString("frmReports", "B(58)", "Факс"))
                             If Not IsDBNull(.Fields("PRINTER_SN_1").Value) Then
                                 LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("PRINTER_SN_1").Value)
@@ -3335,22 +3317,11 @@ Error_:
                                 LvKompOtd.Items(CInt(intj)).SubItems.Add("")
                             End If
 
-                            If Not IsDBNull(.Fields("StoimRub").Value) Then
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("StoimRub").Value)
-                            Else
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add("")
-                            End If
-
-                            If Not IsDBNull(.Fields("DataVVoda").Value) Then
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("DataVVoda").Value)
-                            Else
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add("")
-                            End If
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(tUNAME)
+                            ' LvKompOtd.Items(CInt(intj)).SubItems.Add(tUNAME)
 
                         Case "SCANER"
 
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
+                            ' LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
                             LvKompOtd.Items(CInt(intj)).SubItems.Add(langIni.GetString("frmReports", "B(59)", "Сканер"))
                             If Not IsDBNull(.Fields("PRINTER_SN_1").Value) Then
                                 LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("PRINTER_SN_1").Value)
@@ -3364,22 +3335,11 @@ Error_:
                                 LvKompOtd.Items(CInt(intj)).SubItems.Add("")
                             End If
 
-                            If Not IsDBNull(.Fields("StoimRub").Value) Then
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("StoimRub").Value)
-                            Else
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add("")
-                            End If
-
-                            If Not IsDBNull(.Fields("DataVVoda").Value) Then
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("DataVVoda").Value)
-                            Else
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add("")
-                            End If
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(tUNAME)
+                            ' LvKompOtd.Items(CInt(intj)).SubItems.Add(tUNAME)
 
                         Case "ZIP"
 
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
+                            ' LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
                             LvKompOtd.Items(CInt(intj)).SubItems.Add(langIni.GetString("frmReports", "B(60)",
                                                                                        "Дисковод ZIP"))
                             If Not IsDBNull(.Fields("PRINTER_SN_1").Value) Then
@@ -3394,22 +3354,11 @@ Error_:
                                 LvKompOtd.Items(CInt(intj)).SubItems.Add("")
                             End If
 
-                            If Not IsDBNull(.Fields("StoimRub").Value) Then
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("StoimRub").Value)
-                            Else
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add("")
-                            End If
-
-                            If Not IsDBNull(.Fields("DataVVoda").Value) Then
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("DataVVoda").Value)
-                            Else
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add("")
-                            End If
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(tUNAME)
+                            ' LvKompOtd.Items(CInt(intj)).SubItems.Add(tUNAME)
 
                         Case "OT"
 
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
+                            ' LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
                             LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("TIP_COMPA").Value)
                             If Not IsDBNull(.Fields("PRINTER_SN_1").Value) Then
                                 LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("PRINTER_SN_1").Value)
@@ -3423,22 +3372,11 @@ Error_:
                                 LvKompOtd.Items(CInt(intj)).SubItems.Add("")
                             End If
 
-                            If Not IsDBNull(.Fields("StoimRub").Value) Then
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("StoimRub").Value)
-                            Else
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add("")
-                            End If
-
-                            If Not IsDBNull(.Fields("DataVVoda").Value) Then
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("DataVVoda").Value)
-                            Else
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add("")
-                            End If
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(tUNAME)
+                            ' LvKompOtd.Items(CInt(intj)).SubItems.Add(tUNAME)
 
                         Case "KEYB"
 
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
+                            ' LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
                             LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("TIP_COMPA").Value)
 
                             If Not IsDBNull(.Fields("PRINTER_SN_1").Value) Then
@@ -3453,24 +3391,12 @@ Error_:
                                 LvKompOtd.Items(CInt(intj)).SubItems.Add("")
                             End If
 
-                            If Not IsDBNull(.Fields("StoimRub").Value) Then
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("StoimRub").Value)
-                            Else
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add("")
-                            End If
 
-                            If Not IsDBNull(.Fields("DataVVoda").Value) Then
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("DataVVoda").Value)
-                            Else
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add("")
-                            End If
-
-
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(tUNAME)
+                            ' LvKompOtd.Items(CInt(intj)).SubItems.Add(tUNAME)
 
                         Case "MOUSE"
 
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
+                            ' LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
                             LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("TIP_COMPA").Value)
                             If Not IsDBNull(.Fields("PRINTER_SN_1").Value) Then
                                 LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("PRINTER_SN_1").Value)
@@ -3484,46 +3410,40 @@ Error_:
                                 LvKompOtd.Items(CInt(intj)).SubItems.Add("")
                             End If
 
-                            If Not IsDBNull(.Fields("StoimRub").Value) Then
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("StoimRub").Value)
-                            Else
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add("")
-                            End If
-
-                            If Not IsDBNull(.Fields("DataVVoda").Value) Then
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("DataVVoda").Value)
-                            Else
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add("")
-                            End If
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(tUNAME)
-
+                            ' LvKompOtd.Items(CInt(intj)).SubItems.Add(tUNAME)
 
                         Case "MONITOR"
 
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
+                            ' LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
                             LvKompOtd.Items(CInt(intj)).SubItems.Add(langIni.GetString("frmReports", "B(61)", "Монитор"))
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("MONITOR_SN").Value)
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("INV_NO_MONITOR").Value)
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("StoimRub").Value)
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("DataVVoda").Value)
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(tUNAME)
+
+                            If Not IsDBNull(.Fields("MONITOR_SN").Value) Then
+                                LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("MONITOR_SN").Value)
+                            Else
+                                LvKompOtd.Items(CInt(intj)).SubItems.Add("")
+                            End If
+
+                            If Not IsDBNull(.Fields("INV_NO_MONITOR").Value) Then
+                                LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("INV_NO_MONITOR").Value)
+                            Else
+                                LvKompOtd.Items(CInt(intj)).SubItems.Add("")
+                            End If
 
                             'INV_NO_MONITOR
                         Case "NET"
 
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
+                            ' LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
                             LvKompOtd.Items(CInt(intj)).SubItems.Add(langIni.GetString("frmReports", "B(62)",
                                                                                        "Сетевое оборудование"))
                             LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("PORT_1").Value)
                             LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("PRINTER_PROIZV_3").Value)
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("StoimRub").Value)
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("DataVVoda").Value)
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(tUNAME)
+
+                            ' LvKompOtd.Items(CInt(intj)).SubItems.Add(tUNAME)
 
                         Case "Printer"
 
 
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
+                            ' LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
                             LvKompOtd.Items(CInt(intj)).SubItems.Add(langIni.GetString("frmReports", "B(63)", "Принтер"))
                             If Not IsDBNull(.Fields("PRINTER_SN_1").Value) Then
                                 LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("PRINTER_SN_1").Value)
@@ -3537,22 +3457,11 @@ Error_:
                                 LvKompOtd.Items(CInt(intj)).SubItems.Add("")
                             End If
 
-                            If Not IsDBNull(.Fields("StoimRub").Value) Then
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("StoimRub").Value)
-                            Else
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add("")
-                            End If
-
-                            If Not IsDBNull(.Fields("DataVVoda").Value) Then
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("DataVVoda").Value)
-                            Else
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add("")
-                            End If
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(tUNAME)
+                            ' LvKompOtd.Items(CInt(intj)).SubItems.Add(tUNAME)
 
                         Case "KOpir"
 
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
+                            ' LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
                             LvKompOtd.Items(CInt(intj)).SubItems.Add(langIni.GetString("frmReports", "B(64)", "Копир"))
                             If Not IsDBNull(.Fields("PRINTER_SN_1").Value) Then
                                 LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("PRINTER_SN_1").Value)
@@ -3566,22 +3475,11 @@ Error_:
                                 LvKompOtd.Items(CInt(intj)).SubItems.Add("")
                             End If
 
-                            If Not IsDBNull(.Fields("StoimRub").Value) Then
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("StoimRub").Value)
-                            Else
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add("")
-                            End If
-
-                            If Not IsDBNull(.Fields("DataVVoda").Value) Then
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("DataVVoda").Value)
-                            Else
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add("")
-                            End If
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(tUNAME)
+                            ' LvKompOtd.Items(CInt(intj)).SubItems.Add(tUNAME)
 
                         Case "MFU"
 
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
+                            ' LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
                             LvKompOtd.Items(CInt(intj)).SubItems.Add(langIni.GetString("frmReports", "B(65)", "МФУ"))
                             If Not IsDBNull(.Fields("PRINTER_SN_1").Value) Then
                                 LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("PRINTER_SN_1").Value)
@@ -3595,22 +3493,12 @@ Error_:
                                 LvKompOtd.Items(CInt(intj)).SubItems.Add("")
                             End If
 
-                            If Not IsDBNull(.Fields("StoimRub").Value) Then
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("StoimRub").Value)
-                            Else
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add("")
-                            End If
 
-                            If Not IsDBNull(.Fields("DataVVoda").Value) Then
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("DataVVoda").Value)
-                            Else
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add("")
-                            End If
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(tUNAME)
+                            ' LvKompOtd.Items(CInt(intj)).SubItems.Add(tUNAME)
 
                         Case "USB"
 
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
+                            ' LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
                             LvKompOtd.Items(CInt(intj)).SubItems.Add(langIni.GetString("frmReports", "B(66)", "USB"))
                             If Not IsDBNull(.Fields("PRINTER_SN_1").Value) Then
                                 LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("PRINTER_SN_1").Value)
@@ -3624,22 +3512,12 @@ Error_:
                                 LvKompOtd.Items(CInt(intj)).SubItems.Add("")
                             End If
 
-                            If Not IsDBNull(.Fields("StoimRub").Value) Then
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("StoimRub").Value)
-                            Else
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add("")
-                            End If
 
-                            If Not IsDBNull(.Fields("DataVVoda").Value) Then
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("DataVVoda").Value)
-                            Else
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add("")
-                            End If
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(tUNAME)
+                            ' LvKompOtd.Items(CInt(intj)).SubItems.Add(tUNAME)
 
                         Case "SOUND"
 
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
+                            ' LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
                             LvKompOtd.Items(CInt(intj)).SubItems.Add(langIni.GetString("frmReports", "B(67)", "Акустика"))
                             If Not IsDBNull(.Fields("PRINTER_SN_1").Value) Then
                                 LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("PRINTER_SN_1").Value)
@@ -3653,22 +3531,12 @@ Error_:
                                 LvKompOtd.Items(CInt(intj)).SubItems.Add("")
                             End If
 
-                            If Not IsDBNull(.Fields("StoimRub").Value) Then
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("StoimRub").Value)
-                            Else
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add("")
-                            End If
 
-                            If Not IsDBNull(.Fields("DataVVoda").Value) Then
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("DataVVoda").Value)
-                            Else
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add("")
-                            End If
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(tUNAME)
+                            ' LvKompOtd.Items(CInt(intj)).SubItems.Add(tUNAME)
 
                         Case "IBP"
 
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
+                            ' LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
                             LvKompOtd.Items(CInt(intj)).SubItems.Add(langIni.GetString("frmReports", "B(68)",
                                                                                        "Источник бесперебойного питания"))
                             If Not IsDBNull(.Fields("PRINTER_SN_1").Value) Then
@@ -3683,22 +3551,12 @@ Error_:
                                 LvKompOtd.Items(CInt(intj)).SubItems.Add("")
                             End If
 
-                            If Not IsDBNull(.Fields("StoimRub").Value) Then
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("StoimRub").Value)
-                            Else
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add("")
-                            End If
 
-                            If Not IsDBNull(.Fields("DataVVoda").Value) Then
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("DataVVoda").Value)
-                            Else
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add("")
-                            End If
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(tUNAME)
+                            ' LvKompOtd.Items(CInt(intj)).SubItems.Add(tUNAME)
 
                         Case "FS"
 
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
+                            ' LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
                             LvKompOtd.Items(CInt(intj)).SubItems.Add(langIni.GetString("frmReports", "B(69)",
                                                                                        "Сетевой фильтр"))
                             If Not IsDBNull(.Fields("PRINTER_SN_1").Value) Then
@@ -3713,26 +3571,57 @@ Error_:
                                 LvKompOtd.Items(CInt(intj)).SubItems.Add("")
                             End If
 
-                            If Not IsDBNull(.Fields("StoimRub").Value) Then
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("StoimRub").Value)
+
+                            ' LvKompOtd.Items(CInt(intj)).SubItems.Add(tUNAME)
+
+                        Case "CNT"
+
+                            ' LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
+                            LvKompOtd.Items(CInt(intj)).SubItems.Add("Контейнер")
+                            If Not IsDBNull(.Fields("PRINTER_SN_1").Value) Then
+                                LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("PRINTER_SN_1").Value)
                             Else
                                 LvKompOtd.Items(CInt(intj)).SubItems.Add("")
                             End If
 
-                            If Not IsDBNull(.Fields("DataVVoda").Value) Then
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("DataVVoda").Value)
+                            If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
+                                LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("INV_NO_PRINTER").Value)
                             Else
                                 LvKompOtd.Items(CInt(intj)).SubItems.Add("")
                             End If
+
+
+                            ' LvKompOtd.Items(CInt(intj)).SubItems.Add(tUNAME)
 
                     End Select
 
+                    If Not IsDBNull(.Fields("StoimRub").Value) Then
+                        LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("StoimRub").Value)
+                    Else
+                        LvKompOtd.Items(CInt(intj)).SubItems.Add("")
+                    End If
 
-                    LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("NET_IP_1").Value)
-                    LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("NET_MAC_1").Value)
+                    If Not IsDBNull(.Fields("DataVVoda").Value) Then
+                        LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("DataVVoda").Value)
+                    Else
+                        LvKompOtd.Items(CInt(intj)).SubItems.Add("")
+                    End If
+
+                    LvKompOtd.Items(CInt(intj)).SubItems.Add(tUNAME)
+
+                    If Not IsDBNull(.Fields("NET_IP_1").Value) Then
+                        LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("NET_IP_1").Value)
+                    Else
+                        LvKompOtd.Items(CInt(intj)).SubItems.Add("")
+                    End If
+
+                    If Not IsDBNull(.Fields("NET_MAC_1").Value) Then
+                        LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("NET_MAC_1").Value)
+                    Else
+                        LvKompOtd.Items(CInt(intj)).SubItems.Add("")
+                    End If
 
                     intj = intj + 1
-
 
                 Else
                 End If
@@ -5010,7 +4899,7 @@ Error_:
 
 
         rs = New Recordset
-        rs.Open("Select * FROM kompy where OTvetstvennyj='" & cmbOTV.Text & "'", DB7, CursorTypeEnum.adOpenDynamic,
+        rs.Open("Select * FROM kompy where OTvetstvennyj='" & cmbOTV.Text & "' ORDER BY tiptehn", DB7, CursorTypeEnum.adOpenDynamic,
                 LockTypeEnum.adLockOptimistic)
         Dim intj As Integer
         Dim langIni As New IniFile(sLANGPATH)
@@ -5484,7 +5373,6 @@ Error_:
                 'DoEvents
             Loop
         End With
-
 
         rs.Close()
         rs = Nothing
