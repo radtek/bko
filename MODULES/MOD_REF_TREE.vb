@@ -2027,7 +2027,6 @@ ERR1:
 
         With rs
             tmpCount = .Fields("T_N").Value
-
         End With
 
         rs.Close()
@@ -2269,7 +2268,13 @@ err_:
 
                                     Case True
 
-                                        If frmComputers.EDT = True Then frmComputers.lstGroups.Nodes.Remove(frmComputers.lstGroups.SelectedNode)
+                                        If frmComputers.EDT = True Then
+
+                                            Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & sID)
+                                            frmComputers.lstGroups.Nodes.Remove(frmComputers.lstGroups.SelectedNode)
+
+                                        End If
+
                                         RefTreeSaveTech(sID, sTXT, sTIPTEHN, sFIALIAL, sOTDEL, sKABN)
 
                                     Case False

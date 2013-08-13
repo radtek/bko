@@ -1208,6 +1208,14 @@ Error_:
         Dim rs As Recordset
         Dim sSQL As String
 
+
+
+        sSQL = "UPDATE kompy SET kabn='' WHERE MESTO='' AND kabn <> ''"
+
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+        rs = Nothing
+
         sSQL = "select filial, mesto, kabn from kompy"
 
         rs = New Recordset

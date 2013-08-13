@@ -287,6 +287,15 @@ Module modLang
         frmserviceDesc.MnuBlank.Text = LNGIniFile.GetString("frmMain", "19", "Бланк")
 
 
+        frmserviceDesc.EditService.Text = LNGIniFile.GetString("frmComputers", "EditService", "Редактировать")
+        frmserviceDesc.DeleteService.Text = LNGIniFile.GetString("frmComputers", "DeleteService", "Удалить")
+        frmserviceDesc.MnuSendEmail.Text = LNGIniFile.GetString("frmComputers", "MnuSendEmail", "Отправить мастеру")
+        frmserviceDesc.addServiseWork.Text = LNGIniFile.GetString("frmserviceDesc", "btnSBTAdd", "Добавить событие")
+        frmserviceDesc.mnu_Z_to_Office.Text = LNGIniFile.GetString("frmserviceDesc", "ToolStripDropDownButton1", "Печать")
+        frmserviceDesc.mnu_z_rasp.Text = LNGIniFile.GetString("frmserviceDesc", "Button1", "Расписка")
+
+
+
         'MnuBlank
     End Sub
 
@@ -356,6 +365,9 @@ Module modLang
         frmService_add.chkClose.Text = objIniFile.GetString("frmService_add", "chkClose", "Заявка закрыта")
         frmService_add.cmbAdd.Text = objIniFile.GetString("frmService_add", "cmbAdd", "Добавить")
         frmService_add.cmbCancel.Text = objIniFile.GetString("frmService_add", "cmbCancel", "Отмена")
+        frmService_add.lblWarant.Text = objIniFile.GetString("frmService_add", "lblWarant", "Гарантия:")
+
+
     End Sub
 
     Public Sub frmservice_add_otvets_Lang()
@@ -605,6 +617,22 @@ Module modLang
 
 
 
+        frmSetup.btnServiceColor.Text = LNGIniFile.GetString("frmSetup", "btnServiceColor", "В ремонте")
+        frmSetup.btnNbColor.Text = LNGIniFile.GetString("frmSetup", "btnNbColor", "Не на балансе")
+        frmSetup.btnSpisanColor.Text = LNGIniFile.GetString("frmSetup", "btnSpisanColor", "Списан")
+
+
+        frmSetup.gbSMTP.Text = LNGIniFile.GetString("frmSetup", "gbSMTP", "Настройки SMTP:")
+        frmSetup.lblServ.Text = LNGIniFile.GetString("frmSetup", "lblServ", "Сервер:")
+        frmSetup.lblPort.Text = LNGIniFile.GetString("frmSetup", "lblPort", "Порт:")
+        frmSetup.lblUserName.Text = LNGIniFile.GetString("frmSetup", "lblUserName", "Имя пользователя:")
+        frmSetup.lblPassword.Text = LNGIniFile.GetString("frmSetup", "lblPassword", "Пароль:")
+        frmSetup.chkTLS.Text = LNGIniFile.GetString("frmSetup", "chkTLS", "Использовать TLS\SSL")
+        frmSetup.btnSMTP_Save.Text = LNGIniFile.GetString("frmSetup", "btnSMTP_Save", "Сохранить")
+        frmSetup.btnSMTP_Clear.Text = LNGIniFile.GetString("frmSetup", "btnSMTP_Clear", "Очистить")
+
+
+
         '        GroupBox4 = Дерево
         'RadioButton10 = Обновлять после каждого сохранения
         'RadioButton11 = Обновлять по запросу
@@ -732,6 +760,17 @@ Module modLang
                                             HorizontalAlignment.Left)
         frmComputers.lvPRNCartr.Columns.Add(objIniFile.GetString("frmComputers", "lvPRNCartr5", "Затраты"), 75,
                                             HorizontalAlignment.Left)
+
+        '#########################################
+        '12.08.2013
+        frmComputers.lvUSTR_PRINT.Columns.Add(objIniFile.GetString("frmComputers", "lvPRNCartr1", "id"), 20, HorizontalAlignment.Left)
+        frmComputers.lvUSTR_PRINT.Columns.Add(objIniFile.GetString("frmComputers", "lblNetName", "Имя техники"), 300, HorizontalAlignment.Left)
+        frmComputers.lvUSTR_PRINT.Columns.Add(objIniFile.GetString("frmComputers", "lblBranch", "Филиал"), 300, HorizontalAlignment.Left)
+        frmComputers.lvUSTR_PRINT.Columns.Add(objIniFile.GetString("frmComputers", "lblDepartment", "Отдел"), 300, HorizontalAlignment.Left)
+        frmComputers.lvUSTR_PRINT.Columns.Add(objIniFile.GetString("frmComputers", "lblOffice", "Кабинет"), 300, HorizontalAlignment.Left)
+        frmComputers.gbPRN_USTR.Text = objIniFile.GetString("frmComputers", "gbPRN_USTR", "Устройства использующие принтер")
+        '12.08.2013
+        '#########################################
 
         frmComputers.Text = objIniFile.GetString("frmComputers", "frmComputers", "Учёт оргтехники")
         frmComputers.gbTree.Text = objIniFile.GetString("frmComputers", "gbTree", "Дерево")
@@ -1690,6 +1729,9 @@ Module modLang
         frmMain.ToolStripDropDownButton1.Text = LNGIniFile.GetString("frmMain", "ToolStripDropDownButton1", "Новый...")
         frmMain.ЗагрузитьИзEverestiniToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "24",
                                                                                    "Загрузить из AIDA64 (ini)")
+        frmMain.CNTToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "CNTToolStripMenuItem",
+                                                                                  "Контейнер")
+
         frmMain.ЗагрузитьИзASTRA32ToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "25", "Загрузить из ASTRA32")
         frmMain.ЗагрузитьЧерезWMIToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "26", "Загрузить через WMI")
         frmMain.ЗагрузитьИзCSVEverestToolStripMenuItem.Text = LNGIniFile.GetString("frmMain", "27",

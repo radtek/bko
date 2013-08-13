@@ -55,7 +55,7 @@ Partial Class frmService_add
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.gbS = New System.Windows.Forms.GroupBox()
         Me.lvRem2 = New System.Windows.Forms.ListView()
-        Me.Label14 = New System.Windows.Forms.Label()
+        Me.lblWarant = New System.Windows.Forms.Label()
         Me.dtGarRem = New System.Windows.Forms.DateTimePicker()
         Me.CMServices = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.DeleteService = New System.Windows.Forms.ToolStripMenuItem()
@@ -388,7 +388,7 @@ Partial Class frmService_add
         Me.TableLayoutPanel1.Controls.Add(Me.cmbCancel, 1, 16)
         Me.TableLayoutPanel1.Controls.Add(Me.gbS, 0, 15)
         Me.TableLayoutPanel1.Controls.Add(Me.chkClose, 3, 16)
-        Me.TableLayoutPanel1.Controls.Add(Me.Label14, 0, 11)
+        Me.TableLayoutPanel1.Controls.Add(Me.lblWarant, 0, 11)
         Me.TableLayoutPanel1.Controls.Add(Me.dtGarRem, 1, 11)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
@@ -441,15 +441,15 @@ Partial Class frmService_add
         Me.lvRem2.UseCompatibleStateImageBehavior = False
         Me.lvRem2.View = System.Windows.Forms.View.Details
         '
-        'Label14
+        'lblWarant
         '
-        Me.Label14.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(3, 387)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(144, 13)
-        Me.Label14.TabIndex = 59
-        Me.Label14.Text = "Гарантия:"
+        Me.lblWarant.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblWarant.AutoSize = True
+        Me.lblWarant.Location = New System.Drawing.Point(3, 387)
+        Me.lblWarant.Name = "lblWarant"
+        Me.lblWarant.Size = New System.Drawing.Size(144, 13)
+        Me.lblWarant.TabIndex = 59
+        Me.lblWarant.Text = "Гарантия:"
         '
         'dtGarRem
         '
@@ -470,7 +470,7 @@ Partial Class frmService_add
         'DeleteService
         '
         Me.DeleteService.Name = "DeleteService"
-        Me.DeleteService.Size = New System.Drawing.Size(152, 22)
+        Me.DeleteService.Size = New System.Drawing.Size(118, 22)
         Me.DeleteService.Text = "Удалить"
         '
         'frmService_add
@@ -525,7 +525,7 @@ Partial Class frmService_add
     Friend WithEvents TableLayoutPanel1 As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents lvRem2 As System.Windows.Forms.ListView
     Friend WithEvents gbS As System.Windows.Forms.GroupBox
-    Friend WithEvents Label14 As System.Windows.Forms.Label
+    Friend WithEvents lblWarant As System.Windows.Forms.Label
     Friend WithEvents dtGarRem As System.Windows.Forms.DateTimePicker
     Friend WithEvents CMServices As System.Windows.Forms.ContextMenuStrip
     Friend WithEvents DeleteService As System.Windows.Forms.ToolStripMenuItem

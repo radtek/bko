@@ -144,6 +144,24 @@
     Public Sub SAVE_MON(Optional ByVal sSID As String = "")
         On Error GoTo Err_
 
+        Select Case Len(frmComputers.cmbOTHDepart.Text)
+
+            Case 0
+
+                Select Case Len(frmComputers.cmbOTHOffice.Text)
+
+                    Case 0
+
+                    Case Else
+                        MsgBox("Заполните поле 'Отдел' или удалите значение поля 'Кабинет' ", MsgBoxStyle.Exclamation, ProGramName)
+                        Exit Sub
+
+                End Select
+
+            Case Else
+
+        End Select
+
         If Len(frmComputers.cmbOTH.Text) = 0 Or Len(frmComputers.cmbOTHFil.Text) = 0 Then
 
             MsgBox("Не заполнены обязательные поля", MsgBoxStyle.Information, ProGramName)
@@ -345,6 +363,24 @@ Err_:
 
     Public Sub Save_OT(Optional ByVal sSID As String = "")
         On Error GoTo Err_
+
+        Select Case Len(frmComputers.cmbOTHDepart.Text)
+
+            Case 0
+
+                Select Case Len(frmComputers.cmbOTHOffice.Text)
+
+                    Case 0
+
+                    Case Else
+                        MsgBox("Заполните поле 'Отдел' или удалите значение поля 'Кабинет' ", MsgBoxStyle.Exclamation, ProGramName)
+                        Exit Sub
+
+                End Select
+
+            Case Else
+
+        End Select
 
         If Len(frmComputers.cmbOTH.Text) = 0 Or Len(frmComputers.cmbOTHFil.Text) = 0 Then
 
@@ -628,6 +664,24 @@ Err_:
 
     Public Sub Save_T(Optional ByVal sSID As String = "")
         On Error GoTo err_
+
+        Select Case Len(frmComputers.cmbDepartment.Text)
+
+            Case 0
+
+                Select Case Len(frmComputers.cmbOffice.Text)
+
+                    Case 0
+
+                    Case Else
+                        MsgBox("Заполните поле 'Отдел' или удалите значение поля 'Кабинет' ", MsgBoxStyle.Exclamation, ProGramName)
+                        Exit Sub
+
+                End Select
+
+            Case Else
+
+        End Select
 
         If _
             Len(frmComputers.txtSNAME.Text) = 0 Or Len(frmComputers.txtPSEUDONIM.Text) = 0 Or
@@ -1425,6 +1479,23 @@ err_:
 
         On Error GoTo Err_
 
+        Select Case Len(frmComputers.cmbPRNDepart.Text)
+
+            Case 0
+
+                Select Case Len(frmComputers.cmbPRNOffice.Text)
+
+                    Case 0
+
+                    Case Else
+                        MsgBox("Заполните поле 'Отдел' или удалите значение поля 'Кабинет' ", MsgBoxStyle.Exclamation, ProGramName)
+                        Exit Sub
+
+                End Select
+
+            Case Else
+
+        End Select
 
         If Len(frmComputers.cmbPRN.Text) = 0 Or Len(frmComputers.cmbPRNFil.Text) = 0 Then
 
@@ -1648,6 +1719,26 @@ Err_:
     Public Sub Save_NET(Optional ByVal sSID As String = "")
 
         On Error Resume Next
+
+        Select Case Len(frmComputers.cmbNetDepart.Text)
+
+            Case 0
+
+                Select Case Len(frmComputers.cmbNETOffice.Text)
+
+                    Case 0
+
+                    Case Else
+                        MsgBox("Заполните поле 'Отдел' или удалите значение поля 'Кабинет' ", MsgBoxStyle.Exclamation, ProGramName)
+                        Exit Sub
+
+                End Select
+
+            Case Else
+
+        End Select
+
+
 
         If Len(frmComputers.cmbDevNet.Text) = 0 Or Len(frmComputers.cmbNETBranch.Text) = 0 Then
 
@@ -2494,8 +2585,6 @@ Error_:
                 rs.Close()
                 rs = Nothing
 
-
-
                 sSQL = "SELECT id,MONITOR_NAME,MONITOR_DUM,MONITOR_SN,MONITOR_PROIZV,INV_NO_MONITOR FROM kompy where PCL=" & sSID & " and tiptehn = 'MONITOR'"
 
                 rs = New Recordset
@@ -2566,11 +2655,9 @@ Error_:
 
                                 End Select
 
-
                         End Select
 
                         i = i + 1
-
 
                         rs1.Close()
                         rs1 = Nothing
@@ -2599,6 +2686,9 @@ Error_:
                         rs1.Open("Delete from kompy where id=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
                                  LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
+
+                        ' Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & tId)
+                        ' frmComputers.lstGroups.SelectedNode.Remove()
 
                         .MoveNext()
                     Loop
@@ -2706,6 +2796,10 @@ Error_:
                                  LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
+                        ' Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & tId)
+                        ' frmComputers.lstGroups.SelectedNode.Remove()
+
+
                         .MoveNext()
                     Loop
                 End With
@@ -2760,6 +2854,8 @@ Error_:
                                  LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
+                        ' Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & tId)
+                        ' frmComputers.lstGroups.SelectedNode.Remove()
 
                         .MoveNext()
                     Loop
@@ -2813,6 +2909,8 @@ Error_:
                                  LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
+                        ' Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & tId)
+                        ' frmComputers.lstGroups.SelectedNode.Remove()
 
                         .MoveNext()
                     Loop
@@ -2866,6 +2964,9 @@ Error_:
                                  LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
+                        ' Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & tId)
+                        ' frmComputers.lstGroups.SelectedNode.Remove()
+
                         .MoveNext()
                     Loop
                 End With
@@ -2918,6 +3019,9 @@ Error_:
                         rs1.Open("Delete from kompy where id=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
                                  LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
+
+                        ' Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & tId)
+                        ' frmComputers.lstGroups.SelectedNode.Remove()
 
                         .MoveNext()
                     Loop
@@ -3030,6 +3134,8 @@ Error_:
                                  LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
+                        ' Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & tId)
+                        ' frmComputers.lstGroups.SelectedNode.Remove()
 
                         .MoveNext()
                     Loop
@@ -3120,6 +3226,8 @@ Error_:
                                  LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
+                        ' Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & tId)
+                        ' frmComputers.lstGroups.SelectedNode.Remove()
 
                         .MoveNext()
                     Loop
@@ -3178,7 +3286,8 @@ Error_:
                                  LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
-
+                        ' Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & tId)
+                        ' frmComputers.lstGroups.SelectedNode.Remove()
                         .MoveNext()
                     Loop
                 End With
@@ -3231,6 +3340,8 @@ Error_:
                                  LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
+                        ' Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & tId)
+                        ' frmComputers.lstGroups.SelectedNode.Remove()
 
                         .MoveNext()
                     Loop
@@ -3283,6 +3394,9 @@ Error_:
                         rs1.Open("Delete from kompy where id=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
                                  LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
+
+                        ' Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & tId)
+                        ' frmComputers.lstGroups.SelectedNode.Remove()
 
                         .MoveNext()
                     Loop
@@ -3338,6 +3452,10 @@ Error_:
                                  LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
+                        ' Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & tId)
+                        ' frmComputers.lstGroups.SelectedNode.Remove()
+
+
                         .MoveNext()
                     Loop
                 End With
@@ -3346,48 +3464,48 @@ Error_:
 
         End Select
 
+        rs1 = New Recordset
+        rs1.Open("Select net_NAME, filial, mesto, kabn from kompy where id=" & sSID, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-        If MRZD = True Then Exit Sub
+        Dim tmpname, tmpfil, tmpdep, tmpoff, tmpid As String
+
+        With rs1
+            tmpname = .Fields("net_NAME").Value
+            tmpfil = .Fields("FILIAL").Value
+            tmpdep = .Fields("mesto").Value
+            tmpoff = .Fields("kabn").Value
+        End With
+
+        rs1.Close()
+        rs1 = Nothing
+
+
+        If MRZD = True Then
+
+            FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & sSID)
+
+            DV2 = True
+            Call UpdateTree(tmpname, "PC", sSID, tmpfil, tmpdep, tmpoff)
+
+            Exit Sub
+        End If
 
         If TREE_UPDATE = 0 Then
 
             RefFilTree(frmComputers.lstGroups)
-            
+
         Else
 
-            rs1 = New Recordset
-            rs1.Open("Select NET_NAME, FILIAL,MESTO,kabn from kompy where id=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
-                     LockTypeEnum.adLockOptimistic)
-            Dim tmpName, tmpFil, tmpDep, tmpOff, tmpID As String
-
-            With rs1
-                tmpFil = .Fields("FILIAL").Value
-                tmpDep = .Fields("MESTO").Value
-                tmpOff = .Fields("kabn").Value
-                tmpName = .Fields("NET_NAME").Value
-            End With
-
-            rs1.Close()
-            rs1 = Nothing
-
-            tmpID = sSID
-
-            FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & sSID)
-
-            frmComputers.lstGroups.SelectedNode.Remove()
+            ' FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & sSID)
+            '  frmComputers.lstGroups.SelectedNode.Remove()
             DV2 = True
-            
-            Call UpdateTree(tmpName, "PC", tmpID, tmpFil, tmpDep, tmpOff)
 
+            Call UpdateTree(tmpname, "PC", sSID, tmpfil, tmpdep, tmpoff)
 
             'frmComputers.LOAD_LIST()
-
         End If
 
 
-
-        
-        
 
     End Sub
 
@@ -3401,7 +3519,6 @@ Error_:
         rsdb.Open("Select * from kompy where id=" & sSID & " and tiptehn ='PC'", DB7, CursorTypeEnum.adOpenDynamic,
                   LockTypeEnum.adLockOptimistic)
 
-
         With rsdb
 
             Dim sTEMP0, sTEMP1, sTEMP3 As String
@@ -3410,7 +3527,6 @@ Error_:
             Dim objIniFile As New IniFile(PrPath & "base.ini")
 
             sTEMP3 = objIniFile.GetString("General", "RAZDEL", "0")
-
 
             If sTEMP3 = 0 Or sTEMP3 = 2 Then
 
@@ -3483,8 +3599,6 @@ Error_:
                         rs.Close()
                         rs = Nothing
 
-
-
                         sSQL = "SELECT PRINTER_NAME_1,PRINTER_SN_1,PRINTER_PROIZV_1,port_1,INV_NO_PRINTER FROM kompy where id=" & sSID
 
                         rs = New Recordset
@@ -3501,7 +3615,6 @@ Error_:
 
                         rs.Close()
                         rs = Nothing
-
 
                         Dim rsBK As Recordset
                         rsBK = New Recordset
@@ -3521,6 +3634,8 @@ Error_:
 
                         objIniFile.WriteString("general", "DK", sPRN)
                         objIniFile.WriteString("general", "Default", 0)
+
+                        Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & sSID)
 
                         Filling_TREE_DATA(frmComputers.lstGroups, sPRN, frmComputers.lstGroups.SelectedNode, 0, 0, sTEMP0, 7)
 
@@ -3639,6 +3754,9 @@ Error_:
 
                         objIniFile.WriteString("general", "DK", sPRN)
                         objIniFile.WriteString("general", "Default", 0)
+
+                        Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & sSID)
+
                         Filling_TREE_DATA(frmComputers.lstGroups, sPRN, frmComputers.lstGroups.SelectedNode, 0, 0, sTEMP0, 7)
                     End If
                 End If
@@ -3755,6 +3873,9 @@ Error_:
 
                         objIniFile.WriteString("general", "DK", sPRN)
                         objIniFile.WriteString("general", "Default", 0)
+
+                        Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & sSID)
+
                         Filling_TREE_DATA(frmComputers.lstGroups, sPRN, frmComputers.lstGroups.SelectedNode, 0, 0, sTEMP0, 7)
                     End If
                 End If
@@ -3871,6 +3992,9 @@ Error_:
 
                         objIniFile.WriteString("general", "DK", sPRN)
                         objIniFile.WriteString("general", "Default", 0)
+
+                        Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & sSID)
+
                         Filling_TREE_DATA(frmComputers.lstGroups, sPRN, frmComputers.lstGroups.SelectedNode, 0, 0, sTEMP0, 17)
                     End If
                 End If
@@ -3988,6 +4112,9 @@ Error_:
 
                         objIniFile.WriteString("general", "DK", sPRN)
                         objIniFile.WriteString("general", "Default", 0)
+
+                        Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & sSID)
+
                         Filling_TREE_DATA(frmComputers.lstGroups, sPRN, frmComputers.lstGroups.SelectedNode, 0, 0, sTEMP0, 41)
                     End If
                 End If
@@ -4105,6 +4232,9 @@ Error_:
 
                         objIniFile.WriteString("general", "DK", sPRN)
                         objIniFile.WriteString("general", "Default", 0)
+
+                        Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & sSID)
+
                         Filling_TREE_DATA(frmComputers.lstGroups, sPRN, frmComputers.lstGroups.SelectedNode, 0, 0, sTEMP0, 46)
                     End If
                 End If
@@ -4208,6 +4338,9 @@ Error_:
 
                         objIniFile.WriteString("general", "DK", sPRN)
                         objIniFile.WriteString("general", "Default", 0)
+
+                        Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & sSID)
+
                         Filling_TREE_DATA(frmComputers.lstGroups, sPRN, frmComputers.lstGroups.SelectedNode, 0, 0, sTEMP0, 47)
                     End If
                 End If
@@ -4331,6 +4464,9 @@ Error_:
                         With rsBK
 
                             sPRN = .Fields("ID").Value
+
+                            Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & sSID)
+
                             Filling_TREE_DATA(frmComputers.lstGroups, sSID, frmComputers.lstGroups.SelectedNode, 0, 0, sTEMP0, 61)
                         End With
                         rsBK.Close()

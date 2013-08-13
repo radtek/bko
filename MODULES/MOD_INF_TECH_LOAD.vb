@@ -552,6 +552,73 @@ Module MOD_INF_TECH_LOAD
             If Not IsDBNull(.Fields("OTvetstvennyj")) Then frmComputers.cmbPRNotv.Text = .Fields("OTvetstvennyj").Value
             If Not IsDBNull(.Fields("TELEPHONE")) Then frmComputers.txtPRNphone.Text = .Fields("TELEPHONE").Value
             If Not IsDBNull(.Fields("NET_IP_1")) Then frmComputers.txtPrnIP.Text = .Fields("NET_IP_1").Value
+
+
+            '###################################################################################
+            'Ищем устройства использующие принтер
+            '###################################################################################
+
+            Select Case Len(frmComputers.txtPrnIP.Text)
+
+                Case 0
+
+                    frmComputers.gbPRN_USTR.Visible = False
+
+                Case Else
+
+                    sSQL1 = "SELECT count(*) as t_n FROM kompy WHERE PORT_1 like'IP_" & frmComputers.txtPrnIP.Text & "' or PORT_2 like 'IP_" & frmComputers.txtPrnIP.Text & "' or PORT_3 like 'IP_" & frmComputers.txtPrnIP.Text & "' "
+                    rs1 = New Recordset
+                    rs1.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
+                    Dim tmpCount As Integer
+
+                    With rs1
+                        tmpCount = .Fields("t_n").Value
+                    End With
+
+                    rs1.Close()
+                    rs1 = Nothing
+
+                    Select Case tmpCount
+
+                        Case 0
+
+                        Case Else
+
+                            frmComputers.gbPRN_USTR.Visible = True
+
+                            sSQL1 = "SELECT id, net_name, filial, mesto,kabn FROM kompy WHERE PORT_1 like'IP_" & frmComputers.txtPrnIP.Text & "' or PORT_2 like 'IP_" & frmComputers.txtPrnIP.Text & "' or PORT_3 like 'IP_" & frmComputers.txtPrnIP.Text & "' "
+                            rs1 = New Recordset
+                            rs1.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
+                            Dim intCount As Integer = 0
+
+                            With rs1
+                                .MoveFirst()
+                                Do While Not .EOF
+                                    frmComputers.lvUSTR_PRINT.Items.Add(.Fields("id").Value)
+                                    frmComputers.lvUSTR_PRINT.Items(CInt(intCount)).SubItems.Add(.Fields("net_name").Value)
+                                    frmComputers.lvUSTR_PRINT.Items(CInt(intCount)).SubItems.Add(.Fields("filial").Value)
+                                    frmComputers.lvUSTR_PRINT.Items(CInt(intCount)).SubItems.Add(.Fields("mesto").Value)
+                                    frmComputers.lvUSTR_PRINT.Items(CInt(intCount)).SubItems.Add(.Fields("kabn").Value)
+                                    intCount = intCount + 1
+                                    .MoveNext()
+                                Loop
+                            End With
+
+                            rs1.Close()
+                            rs1 = Nothing
+                            ResList(frmComputers.lvUSTR_PRINT)
+
+                    End Select
+
+            End Select
+
+            '###################################################################################
+            '###################################################################################
+            '###################################################################################
+
+
             If Not IsDBNull(.Fields("NET_MAC_1")) Then frmComputers.txtPRNMAC.Text = .Fields("NET_MAC_1").Value
 
             If Not IsDBNull(.Fields("SFAktNo").Value) Then frmComputers.txtPRNSfN.Text = .Fields("SFAktNo").Value
@@ -577,6 +644,88 @@ Module MOD_INF_TECH_LOAD
 
             If Not IsDBNull(.Fields("PCL").Value) Then unaPCL = .Fields("PCL").Value
 
+            '###################################################################################
+            'Ищем устройства использующие принтер
+            '###################################################################################
+            Select Case Len(unaPCL)
+
+                Case 0
+
+                    Select Case frmComputers.gbPRN_USTR.Visible
+
+                        Case True
+
+                        Case False
+
+                            frmComputers.gbPRN_USTR.Visible = False
+
+                    End Select
+
+                Case Else
+
+                    sSQL1 = "SELECT net_name FROM kompy WHERE id =" & unaPCL
+                    rs1 = New Recordset
+                    rs1.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
+                    Dim tmpName As String
+
+                    With rs1
+                        tmpName = .Fields("net_name").Value
+                    End With
+                    rs1.Close()
+                    rs1 = Nothing
+
+                    sSQL1 = "SELECT count(*) as t_n FROM kompy WHERE PRINTER_NAME_1 like '\\" & tmpName & "\" & frmComputers.cmbPRN.Text & "' or  PRINTER_NAME_2 like '\\" & tmpName & "\" & frmComputers.cmbPRN.Text & "' or  PRINTER_NAME_3 like '\\" & tmpName & "\" & frmComputers.cmbPRN.Text & "'"
+                    rs1 = New Recordset
+                    rs1.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
+                    Dim tmpCount As Integer
+
+                    With rs1
+                        tmpCount = .Fields("t_n").Value
+                    End With
+
+                    rs1.Close()
+                    rs1 = Nothing
+
+                    Select Case tmpCount
+
+                        Case 0
+
+                        Case Else
+
+                            frmComputers.gbPRN_USTR.Visible = True
+
+                            sSQL1 = "SELECT id, net_name, filial, mesto,kabn FROM kompy WHERE PRINTER_NAME_1 like'\\" & tmpName & "\" & frmComputers.cmbPRN.Text & "' or  PRINTER_NAME_2 like'\\" & tmpName & "\" & frmComputers.cmbPRN.Text & "' or PRINTER_NAME_3 like'\\" & tmpName & "\" & frmComputers.cmbPRN.Text & "'"
+                            rs1 = New Recordset
+                            rs1.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
+                            Dim intCount As Integer = 0
+
+                            With rs1
+                                .MoveFirst()
+                                Do While Not .EOF
+                                    frmComputers.lvUSTR_PRINT.Items.Add(.Fields("id").Value)
+                                    frmComputers.lvUSTR_PRINT.Items(CInt(intCount)).SubItems.Add(.Fields("net_name").Value)
+                                    frmComputers.lvUSTR_PRINT.Items(CInt(intCount)).SubItems.Add(.Fields("filial").Value)
+                                    frmComputers.lvUSTR_PRINT.Items(CInt(intCount)).SubItems.Add(.Fields("mesto").Value)
+                                    frmComputers.lvUSTR_PRINT.Items(CInt(intCount)).SubItems.Add(.Fields("kabn").Value)
+                                    intCount = intCount + 1
+                                    .MoveNext()
+                                Loop
+                            End With
+
+                            rs1.Close()
+                            rs1 = Nothing
+                            ResList(frmComputers.lvUSTR_PRINT)
+                    End Select
+
+            End Select
+
+            '###################################################################################
+            '###################################################################################
+            '###################################################################################
+
             If Not IsDBNull(.Fields("port_2").Value) Then frmComputers.cmbPRNConnect.Text = .Fields("port_2").Value
 
             sName = .Fields("PRINTER_NAME_1").Value
@@ -585,10 +734,9 @@ Module MOD_INF_TECH_LOAD
 
             Else
 
-
                 sSQL1 = "SELECT * FROM spr_cart WHERE name='" & frmComputers.cmbTIPCartridg.Text & "'"
                 rs1 = New Recordset
-                rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                rs1.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 With rs1
                     frmComputers.cmbTIPCartridg.Text = .Fields("A").Value

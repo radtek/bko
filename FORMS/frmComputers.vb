@@ -595,7 +595,7 @@ err_:
                 With rs
                     'lblT_O.Text = .Fields("t_n").Value & " " & langfile.GetString("frmComputers", "MSG13", "") '& langIni.GetString("messages", "l4", "")
 
-                    frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "lblT_O_T", "Техники в:")
+                    'frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "lblT_O_T", "Техники в:")
                     frmMain.LBL_STAT_3.Text = .Fields("t_n").Value & " " &
                                               langfile.GetString("frmComputers", "MSG13", "шт.")
 
@@ -7173,5 +7173,22 @@ err_:
     Private Sub chkNETNNb_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkNETNNb.Click
         DV2 = True 'esq 130706 для обновления дерева при сохранении
     End Sub
+
+    Private Sub lvUSTR_PRINT_DoubleClick(sender As Object, e As System.EventArgs) Handles lvUSTR_PRINT.DoubleClick
+
+        If lvUSTR_PRINT.Items.Count = 0 Then Exit Sub
+
+        Dim z As Integer
+
+        For z = 0 To lvUSTR_PRINT.SelectedItems.Count - 1
+            zCOUNT = (lvUSTR_PRINT.SelectedItems(z).Text)
+        Next
+
+        FIND_TREE_TAG(lstGroups.Nodes, "C|" & zCOUNT)
+
+
+    End Sub
+
+
 End Class
 

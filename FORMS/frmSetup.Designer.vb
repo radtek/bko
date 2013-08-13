@@ -64,16 +64,16 @@ Partial Class frmSetup
         Me.txtSA = New System.Windows.Forms.TextBox()
         Me.txtORG = New System.Windows.Forms.TextBox()
         Me.btnSave = New System.Windows.Forms.Button()
-        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.gbSMTP = New System.Windows.Forms.GroupBox()
         Me.TableLayoutPanel8 = New System.Windows.Forms.TableLayoutPanel()
-        Me.Label13 = New System.Windows.Forms.Label()
+        Me.lblServ = New System.Windows.Forms.Label()
         Me.txtSMTP = New System.Windows.Forms.TextBox()
-        Me.Label14 = New System.Windows.Forms.Label()
+        Me.lblPort = New System.Windows.Forms.Label()
         Me.chkTLS = New System.Windows.Forms.CheckBox()
-        Me.Label15 = New System.Windows.Forms.Label()
-        Me.Label16 = New System.Windows.Forms.Label()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Button4 = New System.Windows.Forms.Button()
+        Me.lblUserName = New System.Windows.Forms.Label()
+        Me.lblPassword = New System.Windows.Forms.Label()
+        Me.btnSMTP_Save = New System.Windows.Forms.Button()
+        Me.btnSMTP_Clear = New System.Windows.Forms.Button()
         Me.txtPort = New System.Windows.Forms.TextBox()
         Me.txtMUser = New System.Windows.Forms.TextBox()
         Me.txtMPassword = New System.Windows.Forms.TextBox()
@@ -152,7 +152,7 @@ Partial Class frmSetup
         Me.gbUserLevel.SuspendLayout()
         Me.TabPage3.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
-        Me.GroupBox5.SuspendLayout()
+        Me.gbSMTP.SuspendLayout()
         Me.TableLayoutPanel8.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.gbSetup.SuspendLayout()
@@ -568,7 +568,7 @@ Partial Class frmSetup
         Me.TableLayoutPanel2.Controls.Add(Me.txtSA, 1, 1)
         Me.TableLayoutPanel2.Controls.Add(Me.txtORG, 1, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.btnSave, 0, 6)
-        Me.TableLayoutPanel2.Controls.Add(Me.GroupBox5, 1, 7)
+        Me.TableLayoutPanel2.Controls.Add(Me.gbSMTP, 1, 7)
         Me.TableLayoutPanel2.Controls.Add(Me.Label8, 0, 4)
         Me.TableLayoutPanel2.Controls.Add(Me.Label11, 0, 3)
         Me.TableLayoutPanel2.Controls.Add(Me.txtPRG, 1, 4)
@@ -651,16 +651,16 @@ Partial Class frmSetup
         Me.btnSave.Text = "Сохранить"
         Me.btnSave.UseVisualStyleBackColor = True
         '
-        'GroupBox5
+        'gbSMTP
         '
-        Me.GroupBox5.AutoSize = True
-        Me.GroupBox5.Controls.Add(Me.TableLayoutPanel8)
-        Me.GroupBox5.Location = New System.Drawing.Point(162, 163)
-        Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(510, 175)
-        Me.GroupBox5.TabIndex = 10
-        Me.GroupBox5.TabStop = False
-        Me.GroupBox5.Text = "Настройки SMTP"
+        Me.gbSMTP.AutoSize = True
+        Me.gbSMTP.Controls.Add(Me.TableLayoutPanel8)
+        Me.gbSMTP.Location = New System.Drawing.Point(162, 163)
+        Me.gbSMTP.Name = "gbSMTP"
+        Me.gbSMTP.Size = New System.Drawing.Size(510, 175)
+        Me.gbSMTP.TabIndex = 10
+        Me.gbSMTP.TabStop = False
+        Me.gbSMTP.Text = "Настройки SMTP"
         '
         'TableLayoutPanel8
         '
@@ -668,14 +668,14 @@ Partial Class frmSetup
         Me.TableLayoutPanel8.ColumnCount = 2
         Me.TableLayoutPanel8.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel8.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel8.Controls.Add(Me.Label13, 0, 0)
+        Me.TableLayoutPanel8.Controls.Add(Me.lblServ, 0, 0)
         Me.TableLayoutPanel8.Controls.Add(Me.txtSMTP, 1, 0)
-        Me.TableLayoutPanel8.Controls.Add(Me.Label14, 0, 1)
+        Me.TableLayoutPanel8.Controls.Add(Me.lblPort, 0, 1)
         Me.TableLayoutPanel8.Controls.Add(Me.chkTLS, 0, 4)
-        Me.TableLayoutPanel8.Controls.Add(Me.Label15, 0, 2)
-        Me.TableLayoutPanel8.Controls.Add(Me.Label16, 0, 3)
-        Me.TableLayoutPanel8.Controls.Add(Me.Button1, 0, 5)
-        Me.TableLayoutPanel8.Controls.Add(Me.Button4, 1, 5)
+        Me.TableLayoutPanel8.Controls.Add(Me.lblUserName, 0, 2)
+        Me.TableLayoutPanel8.Controls.Add(Me.lblPassword, 0, 3)
+        Me.TableLayoutPanel8.Controls.Add(Me.btnSMTP_Save, 0, 5)
+        Me.TableLayoutPanel8.Controls.Add(Me.btnSMTP_Clear, 1, 5)
         Me.TableLayoutPanel8.Controls.Add(Me.txtPort, 1, 1)
         Me.TableLayoutPanel8.Controls.Add(Me.txtMUser, 1, 2)
         Me.TableLayoutPanel8.Controls.Add(Me.txtMPassword, 1, 3)
@@ -692,15 +692,15 @@ Partial Class frmSetup
         Me.TableLayoutPanel8.Size = New System.Drawing.Size(504, 156)
         Me.TableLayoutPanel8.TabIndex = 6
         '
-        'Label13
+        'lblServ
         '
-        Me.Label13.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(3, 6)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(246, 13)
-        Me.Label13.TabIndex = 0
-        Me.Label13.Text = "Сервер:"
+        Me.lblServ.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblServ.AutoSize = True
+        Me.lblServ.Location = New System.Drawing.Point(3, 6)
+        Me.lblServ.Name = "lblServ"
+        Me.lblServ.Size = New System.Drawing.Size(246, 13)
+        Me.lblServ.TabIndex = 0
+        Me.lblServ.Text = "Сервер:"
         '
         'txtSMTP
         '
@@ -710,15 +710,15 @@ Partial Class frmSetup
         Me.txtSMTP.Size = New System.Drawing.Size(246, 20)
         Me.txtSMTP.TabIndex = 5
         '
-        'Label14
+        'lblPort
         '
-        Me.Label14.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(3, 32)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(246, 13)
-        Me.Label14.TabIndex = 1
-        Me.Label14.Text = "Порт:"
+        Me.lblPort.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblPort.AutoSize = True
+        Me.lblPort.Location = New System.Drawing.Point(3, 32)
+        Me.lblPort.Name = "lblPort"
+        Me.lblPort.Size = New System.Drawing.Size(246, 13)
+        Me.lblPort.TabIndex = 1
+        Me.lblPort.Text = "Порт:"
         '
         'chkTLS
         '
@@ -731,43 +731,43 @@ Partial Class frmSetup
         Me.chkTLS.Text = "Использовать TLS\SSL"
         Me.chkTLS.UseVisualStyleBackColor = True
         '
-        'Label15
+        'lblUserName
         '
-        Me.Label15.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(3, 58)
-        Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(246, 13)
-        Me.Label15.TabIndex = 2
-        Me.Label15.Text = "Имя пользователя:"
+        Me.lblUserName.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblUserName.AutoSize = True
+        Me.lblUserName.Location = New System.Drawing.Point(3, 58)
+        Me.lblUserName.Name = "lblUserName"
+        Me.lblUserName.Size = New System.Drawing.Size(246, 13)
+        Me.lblUserName.TabIndex = 2
+        Me.lblUserName.Text = "Имя пользователя:"
         '
-        'Label16
+        'lblPassword
         '
-        Me.Label16.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label16.AutoSize = True
-        Me.Label16.Location = New System.Drawing.Point(3, 84)
-        Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(246, 13)
-        Me.Label16.TabIndex = 3
-        Me.Label16.Text = "Пароль:"
+        Me.lblPassword.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblPassword.AutoSize = True
+        Me.lblPassword.Location = New System.Drawing.Point(3, 84)
+        Me.lblPassword.Name = "lblPassword"
+        Me.lblPassword.Size = New System.Drawing.Size(246, 13)
+        Me.lblPassword.TabIndex = 3
+        Me.lblPassword.Text = "Пароль:"
         '
-        'Button1
+        'btnSMTP_Save
         '
-        Me.Button1.Location = New System.Drawing.Point(3, 130)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 6
-        Me.Button1.Text = "Сохранить"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.btnSMTP_Save.Location = New System.Drawing.Point(3, 130)
+        Me.btnSMTP_Save.Name = "btnSMTP_Save"
+        Me.btnSMTP_Save.Size = New System.Drawing.Size(75, 23)
+        Me.btnSMTP_Save.TabIndex = 6
+        Me.btnSMTP_Save.Text = "Сохранить"
+        Me.btnSMTP_Save.UseVisualStyleBackColor = True
         '
-        'Button4
+        'btnSMTP_Clear
         '
-        Me.Button4.Location = New System.Drawing.Point(255, 130)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(75, 23)
-        Me.Button4.TabIndex = 7
-        Me.Button4.Text = "Очистить"
-        Me.Button4.UseVisualStyleBackColor = True
+        Me.btnSMTP_Clear.Location = New System.Drawing.Point(255, 130)
+        Me.btnSMTP_Clear.Name = "btnSMTP_Clear"
+        Me.btnSMTP_Clear.Size = New System.Drawing.Size(75, 23)
+        Me.btnSMTP_Clear.TabIndex = 7
+        Me.btnSMTP_Clear.Text = "Очистить"
+        Me.btnSMTP_Clear.UseVisualStyleBackColor = True
         '
         'txtPort
         '
@@ -1593,8 +1593,8 @@ Partial Class frmSetup
         Me.TabPage3.ResumeLayout(False)
         Me.TableLayoutPanel2.ResumeLayout(False)
         Me.TableLayoutPanel2.PerformLayout()
-        Me.GroupBox5.ResumeLayout(False)
-        Me.GroupBox5.PerformLayout()
+        Me.gbSMTP.ResumeLayout(False)
+        Me.gbSMTP.PerformLayout()
         Me.TableLayoutPanel8.ResumeLayout(False)
         Me.TableLayoutPanel8.PerformLayout()
         Me.TabPage1.ResumeLayout(False)
@@ -1725,16 +1725,16 @@ Partial Class frmSetup
     Friend WithEvents chkRemVisible As System.Windows.Forms.CheckBox
     Friend WithEvents chkSP As System.Windows.Forms.CheckBox
     Friend WithEvents chkNB As System.Windows.Forms.CheckBox
-    Friend WithEvents GroupBox5 As System.Windows.Forms.GroupBox
+    Friend WithEvents gbSMTP As System.Windows.Forms.GroupBox
     Friend WithEvents TableLayoutPanel8 As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents txtSMTP As System.Windows.Forms.TextBox
     Friend WithEvents chkTLS As System.Windows.Forms.CheckBox
-    Friend WithEvents Label16 As System.Windows.Forms.Label
-    Friend WithEvents Label15 As System.Windows.Forms.Label
-    Friend WithEvents Label14 As System.Windows.Forms.Label
-    Friend WithEvents Label13 As System.Windows.Forms.Label
-    Friend WithEvents Button1 As System.Windows.Forms.Button
-    Friend WithEvents Button4 As System.Windows.Forms.Button
+    Friend WithEvents lblPassword As System.Windows.Forms.Label
+    Friend WithEvents lblUserName As System.Windows.Forms.Label
+    Friend WithEvents lblPort As System.Windows.Forms.Label
+    Friend WithEvents lblServ As System.Windows.Forms.Label
+    Friend WithEvents btnSMTP_Save As System.Windows.Forms.Button
+    Friend WithEvents btnSMTP_Clear As System.Windows.Forms.Button
     Friend WithEvents txtPort As System.Windows.Forms.TextBox
     Friend WithEvents txtMUser As System.Windows.Forms.TextBox
     Friend WithEvents txtMPassword As System.Windows.Forms.TextBox
