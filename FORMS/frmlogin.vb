@@ -394,6 +394,8 @@ Public Class frmLogin
                         frmMain.NewToolStripButton.Enabled = True
 
                         Me.BeginInvoke(New MethodInvoker(AddressOf frmMain.LOAD_COMPONENT))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf SECUR_LEVEL))
+
 
                         sRelogin = False
                         'Какой модуль запускать

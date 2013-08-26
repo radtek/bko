@@ -1,5 +1,6 @@
 ﻿Imports System.IO
 Imports Microsoft.Office.Interop.Word
+Imports System.Drawing
 
 
 Public Class frmComputers
@@ -821,7 +822,8 @@ Error_:
                             Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
-                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbPCLK)
+                            My.Application.DoEvents()
+                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbPCLK, cmbResponsible.Text)
 
                         Case "Printer"
 
@@ -858,7 +860,8 @@ Error_:
                             cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG95", "Термо Пленка"))
                             cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG96", "Фотокондуктор"))
 
-                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbPCL)
+                            My.Application.DoEvents()
+                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbPCL, cmbPRNotv.Text)
                             'me.cmbPCL
 
                         Case "MFU"
@@ -893,7 +896,8 @@ Error_:
                             cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG95", "Термо Пленка"))
                             cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG96", "Фотокондуктор"))
 
-                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbPCL)
+                            My.Application.DoEvents()
+                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbPCL, cmbPRNotv.Text)
 
                         Case "KOpir"
                             CartrAddToolStripMenuItem.Visible = True
@@ -956,7 +960,8 @@ Error_:
                             Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
-                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL)
+                            My.Application.DoEvents()
+                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbOTHotv.Text)
 
                         Case "PHOTO"
                             CartrAddToolStripMenuItem.Visible = False
@@ -1039,6 +1044,9 @@ Error_:
                             Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
+                            My.Application.DoEvents()
+                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbOTHotv.Text)
+
                         Case "ZIP"
                             CartrAddToolStripMenuItem.Visible = False
                             FillComboNET(Me.cmbOTH, "name", "spr_zip", "", False, True)
@@ -1065,7 +1073,8 @@ Error_:
                             Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
-                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL)
+                            My.Application.DoEvents()
+                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbOTHotv.Text)
 
                         Case "SCANER"
                             CartrAddToolStripMenuItem.Visible = False
@@ -1092,7 +1101,8 @@ Error_:
                             Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
-                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL)
+                            My.Application.DoEvents()
+                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbOTHotv.Text)
 
                         Case "MONITOR"
 
@@ -1132,7 +1142,8 @@ Error_:
                             Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
-                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL)
+                            My.Application.DoEvents()
+                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbOTHotv.Text)
 
                         Case "NET"
                             CartrAddToolStripMenuItem.Visible = False
@@ -1145,6 +1156,7 @@ Error_:
                             sSTAB4.Visible = True
 
                             Call LOADnet(d(1))
+                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbNETotv.Text)
 
                             '--------------VIP_Graff Добавление новой перефирии Начало-----------------
                         Case "USB"
@@ -1172,7 +1184,8 @@ Error_:
                             Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
-                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL)
+                            My.Application.DoEvents()
+                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbOTHotv.Text)
 
                         Case "SOUND"
                             CartrAddToolStripMenuItem.Visible = False
@@ -1200,7 +1213,8 @@ Error_:
                             Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
-                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL)
+                            My.Application.DoEvents()
+                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbOTHotv.Text)
 
                         Case "IBP"
                             CartrAddToolStripMenuItem.Visible = False
@@ -1239,7 +1253,8 @@ Error_:
                                 gbSNMP.Visible = False
                             End If
 
-                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL)
+                            My.Application.DoEvents()
+                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbOTHotv.Text)
 
                         Case "FS"
                             CartrAddToolStripMenuItem.Visible = False
@@ -1266,7 +1281,8 @@ Error_:
                             Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
-                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL)
+                            My.Application.DoEvents()
+                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbOTHotv.Text)
 
                         Case "KEYB"
                             CartrAddToolStripMenuItem.Visible = False
@@ -1293,7 +1309,8 @@ Error_:
                             Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
-                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL)
+                            My.Application.DoEvents()
+                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbOTHotv.Text)
 
                         Case "MOUSE"
                             CartrAddToolStripMenuItem.Visible = False
@@ -1320,7 +1337,8 @@ Error_:
                             Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
-                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL)
+                            My.Application.DoEvents()
+                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL,cmbOTHotv.text)
                             '--------------VIP_Graff Добавление новой перефирии Конец------------------
 
                         Case "CNT"
@@ -1380,7 +1398,7 @@ Error_:
                 With rs
                     '  lblT_O.Text = .Fields("t_n").Value & " " & langfile.GetString("frmComputers", "MSG13", "") '& langIni.GetString("messages", "l4", "")
 
-                    frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "lblT_O_T", "Техники в:")
+                    ' frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "lblT_O_T", "Техники в:")
                     frmMain.LBL_STAT_3.Text = .Fields("t_n").Value & " " &
                                               langfile.GetString("frmComputers", "MSG13", "шт")
 
@@ -1422,7 +1440,7 @@ Error_:
 
                 With rs
 
-                    frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "lblT_O_T", "Техники в: ")
+                    ' frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "lblT_O_T", "Техники в: ")
                     frmMain.LBL_STAT_3.Text = .Fields("t_n").Value & " " &
                                               langfile.GetString("frmComputers", "MSG13", "шт")
 
@@ -1474,7 +1492,7 @@ Error_:
                 With rs
                     ' lblT_O.Text = .Fields("t_n").Value & " " & langfile.GetString("frmComputers", "MSG13", "") '& langIni.GetString("messages", "l4", "")
 
-                    frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "lblT_O_T", "Техники в: ")
+                    'frmMain.LBL_STAT_2.Text = langfile.GetString("frmComputers", "lblT_O_T", "Техники в: ")
                     frmMain.LBL_STAT_3.Text = .Fields("t_n").Value & " " &
                                               langfile.GetString("frmComputers", "MSG13", "шт.")
 
@@ -1805,6 +1823,8 @@ err_:
 
         If lstSoftware.Items.Count = 0 Then Exit Sub
 
+        If uLevelPO = False Then Exit Sub
+
         FillComboNET(Me.cmbTipLicense, "name", "SPR_LIC", "", False, True)
         FillComboNET(Me.cmbSoftPr, "PROIZV", "SPR_PROIZV", "", False, True)
         FillComboNET(Me.cmbTipPo, "Name", "SPR_TIP_PO", "", False, True)
@@ -1812,11 +1832,11 @@ err_:
 
         gbSoftEd.Visible = True
 
-            Dim z As Integer
+        Dim z As Integer
 
-            For z = 0 To lstSoftware.SelectedItems.Count - 1
+        For z = 0 To lstSoftware.SelectedItems.Count - 1
             SoftCOUNT = (lstSoftware.SelectedItems(z).Text)
-            Next
+        Next
 
 
         Dim LNGIniFile As New IniFile(sLANGPATH)
@@ -2308,7 +2328,14 @@ A:
             rs.Close()
             rs = Nothing
 
-            Me.BeginInvoke(New MethodInvoker(AddressOf R_T_LOAD))
+            Select Case TREE_UPDATE
+
+                Case 0
+                    Me.BeginInvoke(New MethodInvoker(AddressOf R_T_LOAD))
+                Case 1
+
+            End Select
+
             Me.BeginInvoke(New MethodInvoker(AddressOf STAT_INF))
 
         Else
@@ -5556,6 +5583,7 @@ Error_:
 
         Dim intj As Integer = 1
         MRZD = True
+
         With rs
             .MoveFirst()
             Do While Not .EOF
@@ -5565,9 +5593,15 @@ Error_:
                 If zCtn = intj Then
                     MRZD = False
 
-                    'Dim newThread1 As New Thread(AddressOf STAT_INF_1)
-                    'newThread1.Start()
+                    Select Case TREE_UPDATE
+
+                        Case 0
+                            Me.BeginInvoke(New MethodInvoker(AddressOf R_T_LOAD))
+
+                    End Select
+
                     Me.BeginInvoke(New MethodInvoker(AddressOf STAT_INF))
+
                 End If
 
                 intj = intj + 1
@@ -6367,10 +6401,19 @@ err_:
 
                 under_prn(.Fields("id").Value)
 
-
                 If zCtn = intj Then
                     MRZD = False
-                    'Call R_T_LOAD()
+
+                    Select Case TREE_UPDATE
+
+                        Case 0
+                            Me.BeginInvoke(New MethodInvoker(AddressOf R_T_LOAD))
+                        Case 1
+
+                    End Select
+
+                    Me.BeginInvoke(New MethodInvoker(AddressOf STAT_INF))
+
                 End If
 
                 intj = intj + 1
@@ -6381,9 +6424,7 @@ err_:
         rs.Close()
         rs = Nothing
 
-        Me.BeginInvoke(New MethodInvoker(AddressOf R_T_LOAD))
-        Me.BeginInvoke(New MethodInvoker(AddressOf STAT_INF))
-
+        
     End Sub
 
     Private Sub MnuSendEmail_Click(ByVal sender As Object, ByVal e As EventArgs) Handles MnuSendEmail.Click
@@ -7185,10 +7226,9 @@ err_:
         Next
 
         FIND_TREE_TAG(lstGroups.Nodes, "C|" & zCOUNT)
-
-
     End Sub
 
 
+    
 End Class
 

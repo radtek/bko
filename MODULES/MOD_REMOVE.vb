@@ -132,6 +132,10 @@
         rs1.Close()
         rs1 = Nothing
 
+        Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & sSID)
+        frmComputers.lstGroups.SelectedNode.Remove()
+
+
         Exit Sub
 Error_:
     End Sub

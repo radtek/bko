@@ -520,7 +520,7 @@ err_:
         frmComputers.lblOTPCL.Visible = True
         frmComputers.cmbOTHPCL.Visible = True
 
-        Call LOAD_PCL(frmComputers.cmbOTHFil.Text, frmComputers.cmbOTHDepart.Text, frmComputers.cmbOTHOffice.Text, frmComputers.cmbOTHPCL)
+        Call LOAD_PCL(frmComputers.cmbOTHFil.Text, frmComputers.cmbOTHDepart.Text, frmComputers.cmbOTHOffice.Text, frmComputers.cmbOTHPCL, frmComputers.cmbOTHotv.text)
 
     End Sub
 
@@ -1336,7 +1336,7 @@ err_:
 
         frmComputers.lblOTPCL.Visible = True
         frmComputers.cmbOTHPCL.Visible = True
-        Call LOAD_PCL(frmComputers.cmbOTHFil.Text, frmComputers.cmbOTHDepart.Text, frmComputers.cmbOTHOffice.Text, frmComputers.cmbOTHPCL)
+        Call LOAD_PCL(frmComputers.cmbOTHFil.Text, frmComputers.cmbOTHDepart.Text, frmComputers.cmbOTHOffice.Text, frmComputers.cmbOTHPCL, frmComputers.cmbOTHotv.Text)
     End Sub
 
     Private Sub ДисководZIPToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ДисководZIPToolStripMenuItem.Click
@@ -1369,7 +1369,7 @@ err_:
         frmComputers.lblOTPCL.Visible = True
         frmComputers.cmbOTHPCL.Visible = True
 
-        Call LOAD_PCL(frmComputers.cmbOTHFil.Text, frmComputers.cmbOTHDepart.Text, frmComputers.cmbOTHOffice.Text, frmComputers.cmbOTHPCL)
+        Call LOAD_PCL(frmComputers.cmbOTHFil.Text, frmComputers.cmbOTHDepart.Text, frmComputers.cmbOTHOffice.Text, frmComputers.cmbOTHPCL, frmComputers.cmbOTHotv.Text)
     End Sub
 
     Private Sub СканерToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles СканерToolStripMenuItem.Click
@@ -1404,7 +1404,7 @@ err_:
         frmComputers.lblOTPCL.Visible = True
         frmComputers.cmbOTHPCL.Visible = True
 
-        Call LOAD_PCL(frmComputers.cmbOTHFil.Text, frmComputers.cmbOTHDepart.Text, frmComputers.cmbOTHOffice.Text, frmComputers.cmbOTHPCL)
+        Call LOAD_PCL(frmComputers.cmbOTHFil.Text, frmComputers.cmbOTHDepart.Text, frmComputers.cmbOTHOffice.Text, frmComputers.cmbOTHPCL, frmComputers.cmbOTHotv.Text)
     End Sub
 
     Private Sub ДругоеОборудованиеToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ДругоеОборудованиеToolStripMenuItem.Click
@@ -1440,7 +1440,7 @@ err_:
         frmComputers.lblOTPCL.Visible = True
         frmComputers.cmbOTHPCL.Visible = True
 
-        Call LOAD_PCL(frmComputers.cmbOTHFil.Text, frmComputers.cmbOTHDepart.Text, frmComputers.cmbOTHOffice.Text, frmComputers.cmbOTHPCL)
+        Call LOAD_PCL(frmComputers.cmbOTHFil.Text, frmComputers.cmbOTHDepart.Text, frmComputers.cmbOTHOffice.Text, frmComputers.cmbOTHPCL, frmComputers.cmbOTHotv.Text)
 
     End Sub
 
@@ -1484,7 +1484,7 @@ err_:
         frmComputers.lblOTPCL.Visible = True
         frmComputers.cmbOTHPCL.Visible = True
 
-        Call LOAD_PCL(frmComputers.cmbOTHFil.Text, frmComputers.cmbOTHDepart.Text, frmComputers.cmbOTHOffice.Text, frmComputers.cmbOTHPCL)
+        Call LOAD_PCL(frmComputers.cmbOTHFil.Text, frmComputers.cmbOTHDepart.Text, frmComputers.cmbOTHOffice.Text, frmComputers.cmbOTHPCL, frmComputers.cmbOTHotv.text)
 
     End Sub
 
@@ -1687,7 +1687,7 @@ err_:
         frmComputers.cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG96", "Фотокондуктор"))
 
         TipTehn = "Printer"
-        Call LOAD_PCL(frmComputers.cmbPRNFil.Text, frmComputers.cmbPRNDepart.Text, frmComputers.cmbPRNOffice.Text, frmComputers.cmbPCL)
+        Call LOAD_PCL(frmComputers.cmbPRNFil.Text, frmComputers.cmbPRNDepart.Text, frmComputers.cmbPRNOffice.Text, frmComputers.cmbPCL, frmComputers.cmbPRNotv.Text)
 
     End Sub
 
@@ -1726,7 +1726,7 @@ err_:
         frmComputers.cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG95", "Термо Пленка"))
         frmComputers.cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG96", "Фотокондуктор"))
 
-        Call LOAD_PCL(frmComputers.cmbPRNFil.Text, frmComputers.cmbPRNDepart.Text, frmComputers.cmbPRNOffice.Text, frmComputers.cmbPCL)
+        Call LOAD_PCL(frmComputers.cmbPRNFil.Text, frmComputers.cmbPRNDepart.Text, frmComputers.cmbPRNOffice.Text, frmComputers.cmbPCL, frmComputers.cmbPRNotv.Text)
 
     End Sub
 
@@ -2119,7 +2119,7 @@ ADD:
         frmComputers.lblOTPCL.Visible = True
         frmComputers.cmbOTHPCL.Visible = True
 
-        Call LOAD_PCL(frmComputers.cmbOTHFil.Text, frmComputers.cmbOTHDepart.Text, frmComputers.cmbOTHOffice.Text, frmComputers.cmbOTHPCL)
+        Call LOAD_PCL(frmComputers.cmbOTHFil.Text, frmComputers.cmbOTHDepart.Text, frmComputers.cmbOTHOffice.Text, frmComputers.cmbOTHPCL, frmComputers.cmbOTHotv.Text)
     End Sub
 
     Private Sub БесперебойникиToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles БесперебойникиToolStripMenuItem.Click
@@ -2154,7 +2154,7 @@ ADD:
         frmComputers.lblOTPCL.Visible = True
         frmComputers.cmbOTHPCL.Visible = True
 
-        Call LOAD_PCL(frmComputers.cmbOTHFil.Text, frmComputers.cmbOTHDepart.Text, frmComputers.cmbOTHOffice.Text, frmComputers.cmbOTHPCL)
+        Call LOAD_PCL(frmComputers.cmbOTHFil.Text, frmComputers.cmbOTHDepart.Text, frmComputers.cmbOTHOffice.Text, frmComputers.cmbOTHPCL, frmComputers.cmbOTHotv.Text)
     End Sub
 
     Private Sub АккустическиеСистемыToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles АккустическиеСистемыToolStripMenuItem.Click
@@ -2189,7 +2189,7 @@ ADD:
         frmComputers.lblOTPCL.Visible = True
         frmComputers.cmbOTHPCL.Visible = True
 
-        Call LOAD_PCL(frmComputers.cmbOTHFil.Text, frmComputers.cmbOTHDepart.Text, frmComputers.cmbOTHOffice.Text, frmComputers.cmbOTHPCL)
+        Call LOAD_PCL(frmComputers.cmbOTHFil.Text, frmComputers.cmbOTHDepart.Text, frmComputers.cmbOTHOffice.Text, frmComputers.cmbOTHPCL, frmComputers.cmbOTHotv.Text)
 
     End Sub
 
@@ -2225,7 +2225,7 @@ ADD:
         frmComputers.lblOTPCL.Visible = True
         frmComputers.cmbOTHPCL.Visible = True
 
-        Call LOAD_PCL(frmComputers.cmbOTHFil.Text, frmComputers.cmbOTHDepart.Text, frmComputers.cmbOTHOffice.Text, frmComputers.cmbOTHPCL)
+        Call LOAD_PCL(frmComputers.cmbOTHFil.Text, frmComputers.cmbOTHDepart.Text, frmComputers.cmbOTHOffice.Text, frmComputers.cmbOTHPCL, frmComputers.cmbOTHotv.Text)
 
     End Sub
 
@@ -2261,7 +2261,7 @@ ADD:
         frmComputers.lblOTPCL.Visible = True
         frmComputers.cmbOTHPCL.Visible = True
 
-        Call LOAD_PCL(frmComputers.cmbOTHFil.Text, frmComputers.cmbOTHDepart.Text, frmComputers.cmbOTHOffice.Text, frmComputers.cmbOTHPCL)
+        Call LOAD_PCL(frmComputers.cmbOTHFil.Text, frmComputers.cmbOTHDepart.Text, frmComputers.cmbOTHOffice.Text, frmComputers.cmbOTHPCL, frmComputers.cmbOTHotv.Text)
 
     End Sub
 
@@ -2297,7 +2297,7 @@ ADD:
         frmComputers.lblOTPCL.Visible = True
         frmComputers.cmbOTHPCL.Visible = True
 
-        Call LOAD_PCL(frmComputers.cmbOTHFil.Text, frmComputers.cmbOTHDepart.Text, frmComputers.cmbOTHOffice.Text, frmComputers.cmbOTHPCL)
+        Call LOAD_PCL(frmComputers.cmbOTHFil.Text, frmComputers.cmbOTHDepart.Text, frmComputers.cmbOTHOffice.Text, frmComputers.cmbOTHPCL, frmComputers.cmbOTHotv.Text)
 
     End Sub
 

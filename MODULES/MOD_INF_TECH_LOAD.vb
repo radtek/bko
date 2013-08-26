@@ -145,7 +145,7 @@ Module MOD_INF_TECH_LOAD
 
                 Call _
                     LOAD_PCL(frmComputers.cmbNETBranch.Text, frmComputers.cmbNetDepart.Text,
-                             frmComputers.cmbNETOffice.Text, frmComputers.cmbCNTNet)
+                             frmComputers.cmbNETOffice.Text, frmComputers.cmbCNTNet, frmComputers.cmbNETotv.Text)
                 'Call LOAD_PCL(frmComputers.cmbBranch.Text, frmComputers.cmbDepartment.Text, frmComputers.cmbOffice.Text, frmComputers.cmbPCLK)
         End Select
 
@@ -1877,7 +1877,7 @@ Module MOD_INF_TECH_LOAD
 
                 Call _
                     LOAD_PCL(frmComputers.cmbBranch.Text, frmComputers.cmbDepartment.Text, frmComputers.cmbOffice.Text,
-                             frmComputers.cmbPCLK)
+                             frmComputers.cmbPCLK, frmComputers.cmbResponsible.Text)
         End Select
 
         '#############################################

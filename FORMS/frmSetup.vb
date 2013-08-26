@@ -1614,4 +1614,6 @@ err_:
         NbColor = btnNbColor.ForeColor.Name
 
     End Sub
+
+  
 End Class

@@ -3479,33 +3479,31 @@ Error_:
         rs1.Close()
         rs1 = Nothing
 
+        Select Case TREE_UPDATE
 
-        If MRZD = True Then
+            Case 0
 
-            FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & sSID)
+            Case 1
 
-            DV2 = True
-            Call UpdateTree(tmpname, "PC", sSID, tmpfil, tmpdep, tmpoff)
+                Select Case MRZD
 
-            Exit Sub
-        End If
+                    Case True
 
-        If TREE_UPDATE = 0 Then
+                        FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & sSID)
 
-            RefFilTree(frmComputers.lstGroups)
-
-        Else
-
-            ' FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & sSID)
-            '  frmComputers.lstGroups.SelectedNode.Remove()
-            DV2 = True
-
-            Call UpdateTree(tmpname, "PC", sSID, tmpfil, tmpdep, tmpoff)
-
-            'frmComputers.LOAD_LIST()
-        End If
+                        DV2 = True
+                        Call UpdateTree(tmpname, "PC", sSID, tmpfil, tmpdep, tmpoff)
 
 
+                    Case Else
+
+                        DV2 = True
+
+                        Call UpdateTree(tmpname, "PC", sSID, tmpfil, tmpdep, tmpoff)
+
+                End Select
+
+        End Select
 
     End Sub
 
@@ -3755,9 +3753,18 @@ Error_:
                         objIniFile.WriteString("general", "DK", sPRN)
                         objIniFile.WriteString("general", "Default", 0)
 
-                        Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & sSID)
+                        Select Case TREE_UPDATE
 
-                        Filling_TREE_DATA(frmComputers.lstGroups, sPRN, frmComputers.lstGroups.SelectedNode, 0, 0, sTEMP0, 7)
+                            Case 0
+
+                            Case 1
+
+                                Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & sSID)
+                                Filling_TREE_DATA(frmComputers.lstGroups, sPRN, frmComputers.lstGroups.SelectedNode, 0, 0, sTEMP0, 7)
+
+                        End Select
+
+
                     End If
                 End If
 
@@ -3874,9 +3881,17 @@ Error_:
                         objIniFile.WriteString("general", "DK", sPRN)
                         objIniFile.WriteString("general", "Default", 0)
 
-                        Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & sSID)
+                        Select Case TREE_UPDATE
 
-                        Filling_TREE_DATA(frmComputers.lstGroups, sPRN, frmComputers.lstGroups.SelectedNode, 0, 0, sTEMP0, 7)
+                            Case 0
+
+                            Case 1
+
+                                Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & sSID)
+                                Filling_TREE_DATA(frmComputers.lstGroups, sPRN, frmComputers.lstGroups.SelectedNode, 0, 0, sTEMP0, 7)
+
+                        End Select
+
                     End If
                 End If
 
@@ -3993,9 +4008,17 @@ Error_:
                         objIniFile.WriteString("general", "DK", sPRN)
                         objIniFile.WriteString("general", "Default", 0)
 
-                        Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & sSID)
+                        Select Case TREE_UPDATE
 
-                        Filling_TREE_DATA(frmComputers.lstGroups, sPRN, frmComputers.lstGroups.SelectedNode, 0, 0, sTEMP0, 17)
+                            Case 0
+
+                            Case 1
+
+                                Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & sSID)
+                                Filling_TREE_DATA(frmComputers.lstGroups, sPRN, frmComputers.lstGroups.SelectedNode, 0, 0, sTEMP0, 17)
+
+                        End Select
+
                     End If
                 End If
 
@@ -4113,9 +4136,17 @@ Error_:
                         objIniFile.WriteString("general", "DK", sPRN)
                         objIniFile.WriteString("general", "Default", 0)
 
-                        Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & sSID)
+                        Select Case TREE_UPDATE
 
-                        Filling_TREE_DATA(frmComputers.lstGroups, sPRN, frmComputers.lstGroups.SelectedNode, 0, 0, sTEMP0, 41)
+                            Case 0
+
+                            Case 1
+
+                                Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & sSID)
+                                Filling_TREE_DATA(frmComputers.lstGroups, sPRN, frmComputers.lstGroups.SelectedNode, 0, 0, sTEMP0, 41)
+
+                        End Select
+
                     End If
                 End If
 
@@ -4233,9 +4264,17 @@ Error_:
                         objIniFile.WriteString("general", "DK", sPRN)
                         objIniFile.WriteString("general", "Default", 0)
 
-                        Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & sSID)
+                        Select Case TREE_UPDATE
 
-                        Filling_TREE_DATA(frmComputers.lstGroups, sPRN, frmComputers.lstGroups.SelectedNode, 0, 0, sTEMP0, 46)
+                            Case 0
+
+                            Case 1
+
+                                Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & sSID)
+                                Filling_TREE_DATA(frmComputers.lstGroups, sPRN, frmComputers.lstGroups.SelectedNode, 0, 0, sTEMP0, 46)
+
+                        End Select
+
                     End If
                 End If
 
@@ -4339,9 +4378,17 @@ Error_:
                         objIniFile.WriteString("general", "DK", sPRN)
                         objIniFile.WriteString("general", "Default", 0)
 
-                        Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & sSID)
+                        Select Case TREE_UPDATE
 
-                        Filling_TREE_DATA(frmComputers.lstGroups, sPRN, frmComputers.lstGroups.SelectedNode, 0, 0, sTEMP0, 47)
+                            Case 0
+
+                            Case 1
+
+                                Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & sSID)
+                                Filling_TREE_DATA(frmComputers.lstGroups, sPRN, frmComputers.lstGroups.SelectedNode, 0, 0, sTEMP0, 47)
+
+                        End Select
+
                     End If
                 End If
 
@@ -4465,9 +4512,17 @@ Error_:
 
                             sPRN = .Fields("ID").Value
 
-                            Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & sSID)
+                            Select Case TREE_UPDATE
 
-                            Filling_TREE_DATA(frmComputers.lstGroups, sSID, frmComputers.lstGroups.SelectedNode, 0, 0, sTEMP0, 61)
+                                Case 0
+
+                                Case 1
+
+                                    Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & sSID)
+                                    Filling_TREE_DATA(frmComputers.lstGroups, sSID, frmComputers.lstGroups.SelectedNode, 0, 0, sTEMP0, 61)
+
+                            End Select
+
                         End With
                         rsBK.Close()
                         rsBK = Nothing
@@ -4492,7 +4547,16 @@ Error_:
 
         If sADD = True Then
 
-            If TREE_UPDATE = 0 Then RefFilTree(frmComputers.lstGroups) Else frmComputers.LOAD_LIST()
+            '  If TREE_UPDATE = 0 Then RefFilTree(frmComputers.lstGroups) Else frmComputers.LOAD_LIST()
+
+            Select Case TREE_UPDATE
+
+                Case 0
+                    RefFilTree(frmComputers.lstGroups)
+                Case 1
+
+            End Select
+
 
         End If
 
@@ -4505,7 +4569,14 @@ err_:
         If MRZD = True Then Exit Sub
 
         If sADD = True Then
-            If TREE_UPDATE = 0 Then RefFilTree(frmComputers.lstGroups) Else frmComputers.LOAD_LIST()
+
+            Select Case TREE_UPDATE
+
+                Case 0
+                    RefFilTree(frmComputers.lstGroups)
+                Case 1
+
+            End Select
 
         End If
     End Sub
