@@ -1133,8 +1133,7 @@ err_:
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
-                sSQL = "ALTER TABLE kompy DROP COLUMN Mb, nomerPC, TEXT_RED, EXCELL_RED, ACCESS_RED, VG, IG"
-
+sSQL ="ALTER TABLE kompy DROP COLUMN Mb,DROP COLUMN nomerPC,DROP COLUMN TEXT_RED,DROP COLUMN EXCELL_RED,DROP COLUMN ACCESS_RED,DROP COLUMN VG,DROP COLUMN IG"
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                 rs = Nothing
@@ -1153,7 +1152,7 @@ err_:
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
-                sSQL = "ALTER TABLE kompy DROP COLUMN Mb, nomerPC, TEXT_RED, EXCELL_RED, ACCESS_RED, VG, IG"
+               sSQL ="ALTER TABLE kompy DROP COLUMN Mb,DROP COLUMN nomerPC,DROP COLUMN TEXT_RED,DROP COLUMN EXCELL_RED,DROP COLUMN ACCESS_RED,DROP COLUMN VG,DROP COLUMN IG"
 
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -1231,7 +1230,7 @@ err_:
 
             Case "MS SQL 2008"
 
-                sSQL = "ALTER TABLE " & DBtabl & ".dbo.kompy ADD data_sp datetime"
+                sSQL = "ALTER TABLE " & DBtabl & ".dbo.kompy ADD data_sp datetime, data_nb datetime"
 
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -1239,7 +1238,7 @@ err_:
 
             Case "MS SQL"
 
-                sSQL = "ALTER TABLE " & DBtabl & ".dbo.kompy ADD data_sp datetime"
+                sSQL = "ALTER TABLE " & DBtabl & ".dbo.kompy ADD data_sp datetime, data_nb datetime"
 
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -1255,7 +1254,7 @@ err_:
 
             Case "MySQL"
 
-                sSQL = "ALTER TABLE 'kompy' ADD COLUMN 'data_sp' datetime"
+                sSQL = "ALTER TABLE 'kompy' ADD COLUMN 'data_sp' datetime, data_nb datetime"
 
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -1264,7 +1263,7 @@ err_:
 
             Case "MySQL (MyODBC 5.1)"
 
-                sSQL = "ALTER TABLE 'kompy' ADD COLUMN 'data_sp' datetime"
+                sSQL = "ALTER TABLE 'kompy' ADD COLUMN 'data_sp' datetime, data_nb datetime"
 
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -1273,7 +1272,7 @@ err_:
 
             Case "PostgreSQL"
 
-                sSQL = "ALTER TABLE kompy ADD COLUMN ADD COLUMN data_sp Date"
+                sSQL = "ALTER TABLE kompy ADD COLUMN ADD COLUMN data_sp Date, data_nb Date"
 
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -1284,7 +1283,7 @@ err_:
 
             Case "DSN"
 
-                sSQL = "ALTER TABLE kompy ADD COLUMN ADD COLUMN data_sp Date"
+                sSQL = "ALTER TABLE kompy ADD COLUMN ADD COLUMN data_sp Date, data_nb Date"
 
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)

@@ -271,8 +271,6 @@
 
                 sSQL2 = "SELECT COUNT(*) AS total_number FROM spr_tip_z WHERE " & fs & "='" & sGroupName & "'"
 
-
-
         End Select
 
 
@@ -283,15 +281,19 @@
         rs.Open(sSQL2, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
-            If .Fields("total_number").Value = 0 Then
 
-            Else
-                RSExists = True
-                rs.Close()
-                rs = Nothing
-                Exit Function
+            Select Case .Fields("total_number").Value
 
-            End If
+                Case 0
+
+                Case Else
+                    RSExists = True
+                    rs.Close()
+                    rs = Nothing
+                    Exit Function
+
+            End Select
+
         End With
 
         rs.Close()
@@ -324,15 +326,17 @@
         rs.Open(sSQL2, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
-            If .Fields("total_number").Value = 0 Then
+            Select Case .Fields("total_number").Value
 
-            Else
-                RSExistsDB = True
-                rs.Close()
-                rs = Nothing
-                Exit Function
+                Case 0
 
-            End If
+                Case Else
+                    RSExistsDB = True
+                    rs.Close()
+                    rs = Nothing
+                    Exit Function
+
+            End Select
         End With
 
         rs.Close()
@@ -364,15 +368,17 @@
         rs.Open(sSQL2, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
-            If .Fields("total_number").Value = 0 Then
+            Select Case .Fields("total_number").Value
 
-            Else
-                RSExistsDBO = True
-                rs.Close()
-                rs = Nothing
-                Exit Function
+                Case 0
 
-            End If
+                Case Else
+                    RSExistsDBO = True
+                    rs.Close()
+                    rs = Nothing
+                    Exit Function
+
+            End Select
         End With
 
         rs.Close()

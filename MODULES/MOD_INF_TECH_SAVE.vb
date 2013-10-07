@@ -6,6 +6,7 @@
     Public sNetName As Boolean = False
 
     Public Sub PreSaveOtv(ByVal sFIALIAL As String, ByVal sOTDEL As String, ByVal sKABN As String)
+        On Error GoTo err_
 
         Dim sSQL As String
         Dim tmpTXT As String
@@ -29,54 +30,33 @@
             Case "PC"
                 tmpTXT2 = frmComputers.cmbResponsible.Text
 
-                'cmbResponsible
             Case "Printer"
                 tmpTXT2 = frmComputers.cmbPRNotv.Text
-                'cmbPRNotv
+
             Case "MFU"
                 tmpTXT2 = frmComputers.cmbPRNotv.Text
-                'cmbPRNotv
+
             Case "KOpir"
                 tmpTXT2 = frmComputers.cmbPRNotv.Text
-                'cmbPRNotv
 
             Case "NET"
                 tmpTXT2 = frmComputers.cmbNETotv.Text
-                'cmbNETotv
+
             Case Else
                 tmpTXT2 = frmComputers.cmbOTHotv.Text
-                'cmbOTHotv
 
         End Select
 
         If tmpTXT = tmpTXT2 Then Exit Sub
 
-        rs = New Recordset
-        rs.Open("SELECT * FROM Zametki", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
-        'sTmp = (DateTime.Now.Hour & ":" & DateTime.Now.Minute & ":" & DateTime.Now.Second)
-
         If Len(sOTDEL) <> 0 Then sFIALIAL = sFIALIAL & "/" & sOTDEL
         If Len(sKABN) <> 0 Then sFIALIAL = sFIALIAL & "/" & sKABN
-
-        With rs
-            .AddNew()
-            .Fields("Master").Value = UserNames
-            .Fields("Zametki").Value = "Смена ответственного c " & tmpTXT & " на " & tmpTXT2
-            .Fields("Date").Value = DateAndTime.Today
-            .Fields("Id_Comp").Value = frmComputers.sCOUNT
-            .Fields("Comp_name").Value = ""
-            .Fields("Mesto_Compa").Value = sFIALIAL
-            .Update()
-        End With
-        rs.Close()
-        rs = Nothing
 
         '######################################################################
         'Меняем ответственного у всего контейнера если есть контейнер
         '######################################################################
 
-        Dim sNUM As Decimal
+        Dim sNUM As Integer
 
         rs = New Recordset
         rs.Open("SELECT COUNT(*) AS total_number FROM kompy where PCL =" & frmComputers.sCOUNT,
@@ -100,12 +80,42 @@
                     DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
+                rs = New Recordset
+                rs.Open("SELECT id FROM kompy where PCL =" & frmComputers.sCOUNT,
+                             DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
+
+                Dim rs1 As ADODB.Recordset
+
+                With rs
+                    .MoveFirst()
+                    Do While Not .EOF
+
+                        rs1 = New Recordset
+                        sSQL = "INSERT INTO Zametki (Master,Zametki,[Date],Id_Comp,Comp_name,Mesto_Compa) VALUES ('" & UserNames & "','" & "Смена ответственного c " & tmpTXT & " на " & tmpTXT2 & "','" & DateAndTime.Today & "'," & rs.Fields("id").Value & "," & "''" & ",'" & sFIALIAL & "')"
+
+                        rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        rs1 = Nothing
+
+                        .MoveNext()
+                    Loop
+                End With
+                rs.Close()
+                rs = Nothing
+
         End Select
+
+        Exit Sub
+err_:
+        MsgBox(Err.Description)
+
 
     End Sub
 
     Private Sub SAVE_GARANT(ByVal sID As String, ByVal dPost As ComboBox, ByVal dtp As DateTimePicker,
                             ByVal dto As DateTimePicker)
+
+        On Error GoTo err_
 
         Dim sSQL As String
 
@@ -115,30 +125,25 @@
                 LockTypeEnum.adLockOptimistic)
         rs = Nothing
 
-        sSQL = "SELECT * FROM Garantia_sis"
 
-
-        rs = New Recordset
-        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+        ' sSQL = "SELECT * FROM Garantia_sis"
+        ' rs = New Recordset
+        ' rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         If Not (RSExists("Postav", "name", dPost.Text)) Then
             AddOnePar(dPost.Text, "name", "SPR_Postav", dPost)
         End If
 
-        With rs
-            .AddNew()
-            .Fields("Id_Comp").Value = sID
-            .Fields("Postav").Value = dPost.Text
-            .Fields("day").Value = dtp.Value.Day
-            .Fields("month").Value = dtp.Value.Month
-            .Fields("Year").Value = dtp.Value.Year
-            .Fields("day_o").Value = dto.Value.Day
-            .Fields("month_o").Value = dto.Value.Month
-            .Fields("Year_o").Value = dto.Value.Year
-            .Update()
-        End With
-        rs.Close()
+        rs = New Recordset
+        sSQL = "INSERT INTO Garantia_sis (Id_Comp,Postav,[day],[month],[Year],day_o,month_o,Year_o) VALUES (" & sID & ",'" & dPost.Text & "','" & dtp.Value.Day & "','" & dtp.Value.Month & "','" & dtp.Value.Year & "','" & dto.Value.Day & "','" & dto.Value.Month & "','" & dto.Value.Year & "')"
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
         rs = Nothing
+
+
+
+        Exit Sub
+err_:
+        MsgBox(Err.Description & vbNewLine & "Не возможно сохранить гарантию")
     End Sub
 
     Public Sub SAVE_MON(Optional ByVal sSID As String = "")
@@ -197,20 +202,6 @@
 
         End Select
 
-        Dim sSQL As String
-
-        Select Case frmComputers.EDT
-
-            Case False
-
-                sSQL = "SELECT * FROM kompy"
-
-            Case True
-
-                sSQL = "SELECT * FROM kompy WHERE id =" & sSID
-
-        End Select
-
         If Not (RSExists("otv", "name", Trim(frmComputers.cmbOTHotv.Text))) Then
             AddOnePar(frmComputers.cmbOTHotv.Text, "NAME", "SPR_OTV", frmComputers.cmbOTHotv)
         End If
@@ -245,87 +236,56 @@
 sAR:
 
         If Len(unaPCL) = 0 Or unaPCL = Nothing Then unaPCL = 0
-        'Dim rs As ADODB.Recordset
-        rs = New Recordset
 
-        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
-
-        With rs
-            If Len(sSID) = 0 Then
-                .AddNew()
-            End If
-
-            .Fields("MONITOR_NAME").Value = frmComputers.cmbOTH.Text
-            .Fields("MONITOR_DUM").Value = frmComputers.txtMonDum.Text
-            .Fields("MONITOR_SN").Value = frmComputers.txtOTHSN.Text
-            .Fields("Ser_N_SIS").Value = frmComputers.txtOTHSN.Text
-
-            .Fields("MONITOR_PROIZV").Value = frmComputers.PROiZV39.Text
-
-            .Fields("port_1").Value = frmComputers.txtOTHmemo.Text
-
-            .Fields("OTvetstvennyj").Value = frmComputers.cmbOTHotv.Text
-            .Fields("INV_NO_MONITOR").Value = frmComputers.txtOTHinnumber.Text
-
-            .Fields("FILIAL").Value = frmComputers.cmbOTHFil.Text
-            .Fields("MESTO").Value = frmComputers.cmbOTHDepart.Text
-            .Fields("kabn").Value = frmComputers.cmbOTHOffice.Text
-
-            .Fields("TELEPHONE").Value = frmComputers.txtOTHphone.Text
-            .Fields("TIPtehn").Value = TipTehn
-
-            .Fields("NET_NAME").Value = frmComputers.cmbOTH.Text
-            .Fields("PSEVDONIM").Value = frmComputers.cmbOTH.Text
-
-            .Fields("PCL").Value = unaPCL
+        Dim _chkOTHspis As Integer
+        Dim _chkOTHNNb As Integer
+        If Len(frmComputers.txtOTHSfN.Text) = 0 Then frmComputers.txtOTHSfN.Text = 0
+        If Len(frmComputers.txtOTHcash.Text) = 0 Then frmComputers.txtOTHcash.Text = 0
+        If Len(frmComputers.txtOTHSumm.Text) = 0 Then frmComputers.txtOTHSumm.Text = 0
+        If frmComputers.chkOTHspis.Checked = False Then _chkOTHspis = 0 Else _chkOTHspis = 1
+        If frmComputers.chkOTHNNb.Checked = False Then _chkOTHNNb = 0 Else _chkOTHNNb = 1
 
 
-            If Len(frmComputers.txtOTHSfN.Text) = 0 Then frmComputers.txtOTHSfN.Text = 0
-            If Len(frmComputers.txtOTHcash.Text) = 0 Then frmComputers.txtOTHcash.Text = 0
-            If Len(frmComputers.txtOTHSumm.Text) = 0 Then frmComputers.txtOTHSumm.Text = 0
-
-
-            .Fields("SFAktNo").Value = frmComputers.txtOTHSfN.Text
-            .Fields("CenaRub").Value = frmComputers.txtOTHcash.Text
-            .Fields("StoimRub").Value = frmComputers.txtOTHSumm.Text
-            .Fields("Zaiavk").Value = frmComputers.txtOTHZay.Text
-
-            .Fields("DataVVoda").Value = frmComputers.dtOTHdataVvoda.Value
-            .Fields("dataSF").Value = frmComputers.dtOTHSFdate.Value
-
-            .Fields("Spisan").Value = frmComputers.chkOTHspis.Checked
-            .Fields("Balans").Value = frmComputers.chkOTHNNb.Checked
-
-            If frmComputers.chkOTHspis.Checked = True Then
-
-                .Fields("data_sp").Value = frmComputers.dtOTHSpisanie.Value
-
-            End If
-
-            .Update()
-        End With
-        rs.Close()
-        rs = Nothing
+        Dim sSQL As String
 
         Select Case frmComputers.EDT
 
             Case False
 
-                Dim rsBK As Recordset
-                rsBK = New Recordset
-                rsBK.Open(
-                    "SELECT top 1 id FROM kompy WHERE NET_NAME='" & frmComputers.cmbOTH.Text & "' and MESTO='" &
-                    frmComputers.cmbOTHDepart.Text & "' and FILIAL='" & frmComputers.cmbOTHFil.Text & "'  and kabn='" &
-                    frmComputers.cmbOTHOffice.Text & "'", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                'Select top 1 id from kompy order by id desc
-                With rsBK
+                sSQL = "INSERT INTO kompy (MONITOR_NAME,MONITOR_DUM,MONITOR_SN,Ser_N_SIS,MONITOR_PROIZV,port_1,OTvetstvennyj,INV_NO_MONITOR,FILIAL,MESTO,kabn,TELEPHONE,TIPtehn,NET_NAME,PSEVDONIM,PCL,SFAktNo,CenaRub,StoimRub,Zaiavk,DataVVoda,dataSF,Spisan,Balans,data_sp) VALUES ('" & frmComputers.cmbOTH.Text & "','" & frmComputers.txtMonDum.Text & "','" & frmComputers.txtOTHSN.Text & "','" & frmComputers.txtOTHSN.Text & "','" & frmComputers.PROiZV39.Text & "','" & frmComputers.txtOTHmemo.Text & "','" & frmComputers.cmbOTHotv.Text & "','" & frmComputers.txtOTHinnumber.Text & "','" & frmComputers.cmbOTHFil.Text & "','" & frmComputers.cmbOTHDepart.Text & "','" & frmComputers.cmbOTHOffice.Text & "','" & frmComputers.txtOTHphone.Text & "','" & TipTehn & "','" & frmComputers.cmbOTH.Text & "','" & frmComputers.cmbOTH.Text & "'," & unaPCL & ",'" & frmComputers.txtOTHSfN.Text & "','" & frmComputers.txtOTHcash.Text & "','" & frmComputers.txtOTHSumm.Text & "','" & frmComputers.txtOTHZay.Text & "','" & frmComputers.dtOTHdataVvoda.Value & "','" & frmComputers.dtOTHSFdate.Value & "'," & _chkOTHspis & "," & _chkOTHNNb & ",'" & frmComputers.dtOTHSpisanie.Value & "')"
 
-                    frmComputers.sCOUNT = .Fields("ID").Value
+            Case True
 
-                End With
-                rsBK.Close()
-                rsBK = Nothing
+                sSQL = "UPDATE kompy SET MONITOR_NAME='" & frmComputers.cmbOTH.Text & "', MONITOR_DUM='" & frmComputers.txtMonDum.Text & "', MONITOR_SN='" & frmComputers.txtOTHSN.Text & "', Ser_N_SIS='" & frmComputers.txtOTHSN.Text & "', MONITOR_PROIZV='" & frmComputers.PROiZV39.Text & "', port_1='" & frmComputers.txtOTHmemo.Text & "', OTvetstvennyj='" & frmComputers.cmbOTHotv.Text & "', INV_NO_MONITOR='" & frmComputers.txtOTHinnumber.Text & "', FILIAL='" & frmComputers.cmbOTHFil.Text & "', MESTO='" & frmComputers.cmbOTHDepart.Text & "', kabn='" & frmComputers.cmbOTHOffice.Text & "', TELEPHONE='" & frmComputers.txtOTHphone.Text & "', TIPtehn='" & TipTehn & "', NET_NAME='" & frmComputers.cmbOTH.Text & "', PSEVDONIM='" & frmComputers.cmbOTH.Text & "', PCL=" & unaPCL & ", SFAktNo='" & frmComputers.txtOTHSfN.Text & "', CenaRub='" & frmComputers.txtOTHcash.Text & "', StoimRub='" & frmComputers.txtOTHSumm.Text & "', Zaiavk='" & frmComputers.txtOTHZay.Text & "', DataVVoda='" & frmComputers.dtOTHdataVvoda.Value & "', dataSF='" & frmComputers.dtOTHSFdate.Value & "', Spisan=" & _chkOTHspis & ", Balans=" & _chkOTHNNb & ", data_sp='" & frmComputers.dtOTHSpisanie.Value & "' WHERE id =" & sSID
+
+        End Select
+
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+        rs = Nothing
+
+        Select Case frmComputers.EDT
+
+            Case False
+                
+                Select Case DB_N
+
+                    Case "MySQL"
+
+                        sSQL = "Select id from kompy ORDER BY id DESC LIMIT 1"
+
+                    Case Else
+
+                        sSQL = "Select top 1 id from kompy ORDER BY id DESC"
+
+                End Select
+
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                frmComputers.sCOUNT = rs.Fields("ID").Value
+                rs.Close()
+                rs = Nothing
+
 
                 Dim objIniFile As New IniFile(PrPath & "base.ini")
                 objIniFile.WriteString("general", "DK", frmComputers.sCOUNT)
@@ -359,6 +319,7 @@ sAR:
 
         Exit Sub
 Err_:
+        MsgBox(Err.Description)
     End Sub
 
     Public Sub Save_OT(Optional ByVal sSID As String = "")
@@ -414,20 +375,6 @@ Err_:
                         End Select
 
                 End Select
-
-        End Select
-
-        Dim sSQL As String
-
-        Select Case frmComputers.EDT
-
-            Case False
-
-                sSQL = "SELECT * FROM kompy"
-
-            Case True
-
-                sSQL = "SELECT * FROM kompy WHERE id =" & sSID
 
         End Select
 
@@ -545,87 +492,54 @@ Err_:
 sAR:
         If Len(unaPCL) = 0 Or unaPCL = Nothing Then unaPCL = 0
 
-        'Dim rs As ADODB.Recordset
+        Dim _chkOTHspis As Integer
+        Dim _chkOTHNNb As Integer
+        If Len(frmComputers.txtOTHSfN.Text) = 0 Then frmComputers.txtOTHSfN.Text = 0
+        If Len(frmComputers.txtOTHcash.Text) = 0 Then frmComputers.txtOTHcash.Text = 0
+        If Len(frmComputers.txtOTHSumm.Text) = 0 Then frmComputers.txtOTHSumm.Text = 0
+        If frmComputers.chkOTHspis.Checked = False Then _chkOTHspis = 0 Else _chkOTHspis = 1
+        If frmComputers.chkOTHNNb.Checked = False Then _chkOTHNNb = 0 Else _chkOTHNNb = 1
+
+        Dim sSQL As String
+
+        Select Case frmComputers.EDT
+
+            Case False
+
+                sSQL = "INSERT INTO kompy (PRINTER_NAME_1,PRINTER_SN_1,Ser_N_SIS,PRINTER_PROIZV_1,port_1,OTvetstvennyj,INV_NO_PRINTER,FILIAL,MESTO,kabn,TELEPHONE,TIPtehn,NET_NAME,PSEVDONIM,PCL,SFAktNo,CenaRub,StoimRub,Zaiavk,DataVVoda,dataSF,Spisan,Balans,data_sp) VALUES ('" & frmComputers.cmbOTH.Text & "','" & frmComputers.txtOTHSN.Text & "','" & frmComputers.txtOTHSN.Text & "','" & frmComputers.PROiZV39.Text & "','" & frmComputers.txtOTHmemo.Text & "','" & frmComputers.cmbOTHotv.Text & "','" & frmComputers.txtOTHinnumber.Text & "','" & frmComputers.cmbOTHFil.Text & "','" & frmComputers.cmbOTHDepart.Text & "','" & frmComputers.cmbOTHOffice.Text & "','" & frmComputers.txtOTHphone.Text & "','" & TipTehn & "','" & frmComputers.cmbOTH.Text & "','" & frmComputers.cmbOTH.Text & "'," & unaPCL & ",'" & frmComputers.txtOTHSfN.Text & "','" & frmComputers.txtOTHcash.Text & "','" & frmComputers.txtOTHSumm.Text & "','" & frmComputers.txtOTHZay.Text & "','" & frmComputers.dtOTHdataVvoda.Value & "','" & frmComputers.dtOTHSFdate.Value & "'," & _chkOTHspis & "," & _chkOTHNNb & ",'" & frmComputers.dtOTHSpisanie.Value & "')"
+
+            Case True
+
+                sSQL = "UPDATE kompy SET PRINTER_NAME_1='" & frmComputers.cmbOTH.Text & "', PRINTER_SN_1='" & frmComputers.txtOTHSN.Text & "', Ser_N_SIS='" & frmComputers.txtOTHSN.Text & "', PRINTER_PROIZV_1='" & frmComputers.PROiZV39.Text & "', port_1='" & frmComputers.txtOTHmemo.Text & "', OTvetstvennyj='" & frmComputers.cmbOTHotv.Text & "', INV_NO_PRINTER='" & frmComputers.txtOTHinnumber.Text & "', FILIAL='" & frmComputers.cmbOTHFil.Text & "', MESTO='" & frmComputers.cmbOTHDepart.Text & "', kabn='" & frmComputers.cmbOTHOffice.Text & "', TELEPHONE='" & frmComputers.txtOTHphone.Text & "', TIPtehn='" & TipTehn & "', NET_NAME='" & frmComputers.cmbOTH.Text & "', PSEVDONIM='" & frmComputers.cmbOTH.Text & "', PCL=" & unaPCL & ", SFAktNo='" & frmComputers.txtOTHSfN.Text & "', CenaRub='" & frmComputers.txtOTHcash.Text & "', StoimRub='" & frmComputers.txtOTHSumm.Text & "', Zaiavk='" & frmComputers.txtOTHZay.Text & "', DataVVoda='" & frmComputers.dtOTHdataVvoda.Value & "', dataSF='" & frmComputers.dtOTHSFdate.Value & "', Spisan=" & _chkOTHspis & ", Balans=" & _chkOTHNNb & ", data_sp='" & frmComputers.dtOTHSpisanie.Value & "' WHERE id =" & sSID
+
+        End Select
+
         rs = New Recordset
-
         rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
-
-        With rs
-            If Len(sSID) = 0 Then
-                .AddNew()
-            End If
-
-            .Fields("PRINTER_NAME_1").Value = frmComputers.cmbOTH.Text
-            'sName = .Fields("PRINTER_NAME_1").Value
-            .Fields("PRINTER_SN_1").Value = frmComputers.txtOTHSN.Text
-            .Fields("Ser_N_SIS").Value = frmComputers.txtOTHSN.Text
-            .Fields("PRINTER_PROIZV_1").Value = frmComputers.PROiZV39.Text
-            .Fields("port_1").Value = frmComputers.txtOTHmemo.Text
-            .Fields("OTvetstvennyj").Value = frmComputers.cmbOTHotv.Text
-            .Fields("INV_NO_PRINTER").Value = frmComputers.txtOTHinnumber.Text
-            .Fields("FILIAL").Value = frmComputers.cmbOTHFil.Text
-            .Fields("MESTO").Value = frmComputers.cmbOTHDepart.Text
-            .Fields("kabn").Value = frmComputers.cmbOTHOffice.Text
-            .Fields("NET_IP_1").Value = frmComputers.txtOTHIP.Text
-            .Fields("NET_MAC_1").Value = frmComputers.txtOTHMAC.Text
-            .Fields("TIP_COMPA").Value = frmComputers.cmbOTHConnect.Text
-            .Fields("TELEPHONE").Value = frmComputers.txtOTHphone.Text
-            .Fields("TIPtehn").Value = TipTehn
-            .Fields("NET_NAME").Value = frmComputers.cmbOTH.Text
-            .Fields("PSEVDONIM").Value = frmComputers.cmbOTH.Text
-            .Fields("PCL").Value = unaPCL
-
-            If Len(frmComputers.txtOTHSfN.Text) = 0 Then frmComputers.txtOTHSfN.Text = 0
-            If Len(frmComputers.txtOTHcash.Text) = 0 Then frmComputers.txtOTHcash.Text = 0
-            If Len(frmComputers.txtOTHSumm.Text) = 0 Then frmComputers.txtOTHSumm.Text = 0
-
-
-            .Fields("SFAktNo").Value = frmComputers.txtOTHSfN.Text
-            .Fields("CenaRub").Value = frmComputers.txtOTHcash.Text
-            .Fields("StoimRub").Value = frmComputers.txtOTHSumm.Text
-            .Fields("Zaiavk").Value = frmComputers.txtOTHZay.Text
-
-            .Fields("DataVVoda").Value = frmComputers.dtOTHdataVvoda.Value
-            .Fields("dataSF").Value = frmComputers.dtOTHSFdate.Value
-
-            .Fields("Spisan").Value = frmComputers.chkOTHspis.Checked
-            .Fields("Balans").Value = frmComputers.chkOTHNNb.Checked
-
-            If frmComputers.chkOTHspis.Checked = True Then
-
-                .Fields("data_sp").Value = frmComputers.dtOTHSpisanie.Value
-
-            End If
-
-
-            .Fields("SNMP").Value = frmComputers.chkSNMP.Checked
-            .Fields("SNMP_COMMUNITY").Value = frmComputers.txtSNMP.Text
-
-
-            .Update()
-        End With
-        rs.Close()
         rs = Nothing
 
         Select Case frmComputers.EDT
 
             Case False
 
-                Dim rsBK As Recordset
-                rsBK = New Recordset
-                rsBK.Open(
-                    "SELECT top 1 id FROM kompy WHERE NET_NAME='" & frmComputers.cmbOTH.Text & "' and MESTO='" &
-                    frmComputers.cmbOTHDepart.Text & "' and FILIAL='" & frmComputers.cmbOTHFil.Text & "'  and kabn='" &
-                    frmComputers.cmbOTHOffice.Text & "' order by id desc", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                Select Case DB_N
 
-                With rsBK
+                    Case "MySQL"
 
-                    frmComputers.sCOUNT = .Fields("ID").Value
+                        sSQL = "Select id from kompy ORDER BY id DESC LIMIT 1"
 
-                End With
-                rsBK.Close()
-                rsBK = Nothing
+                    Case Else
+
+                        sSQL = "Select top 1 id from kompy ORDER BY id DESC"
+
+                End Select
+
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                frmComputers.sCOUNT = rs.Fields("ID").Value
+                rs.Close()
+                rs = Nothing
+
 
                 Dim objIniFile As New IniFile(PrPath & "base.ini")
                 objIniFile.WriteString("general", "DK", frmComputers.sCOUNT)
@@ -634,7 +548,6 @@ sAR:
             Case True
 
         End Select
-
 
         If Len(sSID) = 0 Then
             sSID = frmComputers.sCOUNT
@@ -657,12 +570,12 @@ sAR:
 
         Call UpdateTree(tmpName, tmpTip, tmpID, tmpFil, tmpDep, tmpOff)
 
-
         Exit Sub
 Err_:
     End Sub
 
     Public Sub Save_T(Optional ByVal sSID As String = "")
+
         On Error GoTo err_
 
         Select Case Len(frmComputers.cmbDepartment.Text)
@@ -716,20 +629,6 @@ Err_:
         End Select
 
         Call addEXISTTEH_()
-
-        Dim sSQL As String
-
-        Select Case frmComputers.EDT
-
-            Case False
-
-                sSQL = "SELECT * FROM kompy"
-
-            Case True
-
-                sSQL = "SELECT * FROM kompy WHERE id =" & sSID
-
-        End Select
 
         Select Case frmComputers.EDT
 
@@ -805,11 +704,32 @@ Err_:
 sAR:
         If Len(unaPCL) = 0 Or unaPCL = Nothing Then unaPCL = 0
 
+        If Len(frmComputers.cmbAppointment.Text) = 0 Then frmComputers.cmbAppointment.Text = "Рабочая станция"
+        If Len(frmComputers.txtPCcash.Text) = 0 Then frmComputers.txtPCcash.Text = 0
+        If Len(frmComputers.txtPCSumm.Text) = 0 Then frmComputers.txtPCSumm.Text = 0
+        If Len(frmComputers.txtPCSfN.Text) = 0 Then frmComputers.txtPCSfN.Text = 0
+
+        Dim _chkPRNspis As Integer
+        Dim _chkPRNNNb As Integer
+        If frmComputers.chkPCspis.Checked = False Then _chkPRNspis = 0 Else _chkPRNspis = 1
+        If frmComputers.chkPCNNb.Checked = False Then _chkPRNNNb = 0 Else _chkPRNNNb = 1
+       
+        Dim sSQL As String
+
+        Select Case frmComputers.EDT
+
+            Case False
+
+                sSQL = "SELECT * FROM kompy"
+
+            Case True
+
+                sSQL = "SELECT * FROM kompy WHERE id =" & sSID
+
+        End Select
 
         rs = New Recordset
-
         rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
 
         With rs
             If Len(sSID) = 0 Then
@@ -882,7 +802,6 @@ sAR:
             .Fields("RAM_PROIZV_8").Value = frmComputers.PROizV47.Text
 
             '##########################################################
-
 
             .Fields("HDD_Name_1").Value = frmComputers.cmbHDD1.Text
             .Fields("HDD_OB_1").Value = frmComputers.txtHDDo1.Text
@@ -1004,7 +923,6 @@ sAR:
             .Fields("PCI_SN").Value = frmComputers.txtSNPCI.Text
             .Fields("PCI_PROIZV").Value = frmComputers.PROizV42.Text
 
-
             .Fields("MONITOR_NAME").Value = frmComputers.cmbMon1.Text
             .Fields("MONITOR_DUM").Value = frmComputers.txtMon1Dum.Text
             .Fields("MONITOR_SN").Value = frmComputers.txtMon1SN.Text
@@ -1060,8 +978,6 @@ sAR:
             .Fields("OTvetstvennyj").Value = frmComputers.cmbResponsible.Text
             .Fields("TELEPHONE").Value = frmComputers.txtPHONE.Text
 
-            If Len(frmComputers.cmbAppointment.Text) = 0 Then frmComputers.cmbAppointment.Text = "Рабочая станция"
-
             .Fields("TIP_COMPA").Value = frmComputers.cmbAppointment.Text
 
             .Fields("INV_NO_SYSTEM").Value = frmComputers.txtSBSN.Text
@@ -1071,10 +987,6 @@ sAR:
             .Fields("PCL").Value = unaPCL
 
             .Fields("TIPtehn").Value = TipTehn
-
-            If Len(frmComputers.txtPCcash.Text) = 0 Then frmComputers.txtPCcash.Text = 0
-            If Len(frmComputers.txtPCSumm.Text) = 0 Then frmComputers.txtPCSumm.Text = 0
-            If Len(frmComputers.txtPCSfN.Text) = 0 Then frmComputers.txtPCSfN.Text = 0
 
             .Fields("SFAktNo").Value = frmComputers.txtPCSfN.Text
             .Fields("CenaRub").Value = frmComputers.txtPCcash.Text
@@ -1086,8 +998,8 @@ sAR:
             .Fields("DataVVoda").Value = frmComputers.dtPCdataVvoda.Value
             .Fields("dataSF").Value = frmComputers.dtPCSFdate.Value
 
-            .Fields("Spisan").Value = frmComputers.chkPCspis.Checked
-            .Fields("Balans").Value = frmComputers.chkPCNNb.Checked
+            .Fields("Spisan").Value = _chkPRNspis
+            .Fields("Balans").Value = _chkPRNNNb
 
             If frmComputers.chkPCspis.Checked = True Then
 
@@ -1096,7 +1008,6 @@ sAR:
             End If
 
             .Fields("Garantia_Sist").Value = frmComputers.rbSist.Checked
-
 
             .Update()
         End With
@@ -1108,21 +1019,24 @@ sAR:
 
             Case False
 
-                Dim rsBK As Recordset
-                rsBK = New Recordset
-                rsBK.Open(
-                    "SELECT top 1 id FROM kompy WHERE NET_NAME='" & frmComputers.txtSNAME.Text & "' and MESTO='" &
-                    frmComputers.cmbDepartment.Text & "' and FILIAL='" & frmComputers.cmbBranch.Text & "'  and kabn='" &
-                    frmComputers.cmbOffice.Text & "' order by id desc", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                Select Case DB_N
 
-                With rsBK
+                    Case "MySQL"
 
-                    frmComputers.sCOUNT = .Fields("ID").Value
+                        sSQL = "Select id from kompy ORDER BY id DESC LIMIT 1"
 
-                End With
-                rsBK.Close()
-                rsBK = Nothing
+                    Case Else
 
+                        sSQL = "Select top 1 id from kompy ORDER BY id DESC"
+
+                End Select
+
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                frmComputers.sCOUNT = rs.Fields("ID").Value
+                rs.Close()
+                rs = Nothing
+                
                 Dim objIniFile As New IniFile(PrPath & "base.ini")
                 objIniFile.WriteString("general", "DK", frmComputers.sCOUNT)
                 objIniFile.WriteString("general", "Default", 0)
@@ -1300,33 +1214,19 @@ err_:
                     G1 = lstV.Items(intj).SubItems(9).Text
                 End If
 
-
                 I1 = sSID
 
                 If Not (RSExistsSoft(sSID, H1)) Then
                     If Len(H1) > 1 Then
 
                         rsSoft = New Recordset
-                        rsSoft.Open("SELECT * FROM SOFT_INSTALL", DB7, CursorTypeEnum.adOpenDynamic,
-                                    LockTypeEnum.adLockOptimistic)
+                        Dim sSQL As String
+                        sSQL = "INSERT INTO SOFT_INSTALL (Soft,NomerSoftKomp,t_lic,L_key,d_p,d_o,Publisher,TIP,Id_Comp) VALUES ('" & H1 & "','" & A1 & "','" & C1 & "','" & B1 & "','" & D1 & "','" & E1 & "','" & F1 & "','" & "" & "'," & I1 & ")"
 
-                        With rsSoft
-                            .AddNew()
-                            .Fields("Soft").Value = H1 '.Text
-                            .Fields("NomerSoftKomp").Value = A1
-                            .Fields("t_lic").Value = C1
-                            .Fields("L_key").Value = B1
-                            .Fields("d_p").Value = D1
-                            .Fields("d_o").Value = E1
-                            .Fields("Publisher").Value = F1
-                            .Fields("TIP").Value = ""
-                            .Fields("Id_Comp").Value = I1
-                            .Update()
-
-                        End With
-
-                        rsSoft.Close()
+                        rsSoft.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic,
+                                   LockTypeEnum.adLockOptimistic)
                         rsSoft = Nothing
+
 
                         'esq A1 = A1 - 1 
 
@@ -1334,14 +1234,16 @@ err_:
                     'esq ************************
                 Else
                     Dim sSQL2 As String
-                    sSQL2 = "SELECT * FROM SOFT_INSTALL WHERE Id_Comp= " & sSID & " AND Soft='" & H1 & "'"
+                    'sSQL2 = "SELECT * FROM SOFT_INSTALL WHERE Id_Comp= " & sSID & " AND Soft='" & H1 & "'"
+                    sSQL2 = "UPDATE SOFT_INSTALL SET NomerSoftKomp='" & A1 & "' WHERE Id_Comp= " & sSID & " AND Soft='" & H1 & "'"
 
                     Dim rs As Recordset
                     rs = New Recordset
                     rs.Open(sSQL2, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                    rs.Fields("NomerSoftKomp").Value = A1
-                    rs.Update()
-                    rs.Close()
+
+                    'rs.Fields("NomerSoftKomp").Value = A1
+                    'rs.Update()
+                    'rs.Close()
                     rs = Nothing
                     'esq ************************
                 End If
@@ -1349,7 +1251,6 @@ err_:
 
             End If
         Next
-
         'Костыль для MyODBC 5
         rsSoft = New Recordset
         rsSoft.Open("UPDATE SOFT_INSTALL SET Id_Comp=" & I1 & " WHERE Id_Comp='0'", DB7, CursorTypeEnum.adOpenDynamic,
@@ -1475,6 +1376,160 @@ err_:
         EverestFilePatch = "" ' чтобы не повторять
     End Sub 'esq 130713 сохраним пользователей
 
+    Public Sub User_Comp_ADD()
+        On Error Resume Next
+        Dim langfile As New IniFile(sLANGPATH)
+
+
+        If frmComputers.sCOUNT = 0 Then Exit Sub
+        Dim Us1 As String
+        Dim Us2 As String
+
+        'esq 130713 импорт юзеров
+        If frmComputers.cmdUserAdd.Text = langfile.GetString("frmComputers", "MSG54", "Изменить") Then
+            frmComputers.lstUsers.SelectedItems(0).SubItems(2).Text = frmComputers.txtUserName.Text
+            frmComputers.lstUsers.SelectedItems(0).SubItems(1).Text = frmComputers.txtUserFIO.Text
+            If frmComputers.txtUserName.FindString(frmComputers.txtUserName.Text) < 0 Then
+                frmComputers.txtUserName.Items.Add(frmComputers.txtUserName.Text)
+            End If
+            If frmComputers.txtUserFIO.FindString(frmComputers.txtUserFIO.Text) < 0 Then
+                frmComputers.txtUserFIO.Items.Add(frmComputers.txtUserFIO.Text)
+            End If
+            Exit Sub
+        End If 'esq 130713 импорт юзеров
+
+        If frmComputers.cmdUserAdd.Text = langfile.GetString("frmComputers", "MSG42", "Сохранить") Then
+
+            Dim USERCOMP As Recordset
+            USERCOMP = New Recordset
+            USERCOMP.Open("SELECT * FROM USER_COMP WHERE id=" & frmComputers.uCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                          LockTypeEnum.adLockOptimistic)
+
+            With USERCOMP
+                If Not IsDBNull(.Fields("PASSWORD")) Then Us1 = .Fields("PASSWORD").Value
+                If Not IsDBNull(.Fields("EPASS")) Then Us2 = .Fields("EPASS").Value
+            End With
+            USERCOMP.Close()
+            USERCOMP = Nothing
+
+        End If
+
+        Dim sSQL As String
+        Dim rs As Recordset
+        rs = New Recordset
+
+        If frmComputers.cmdUserAdd.Text = langfile.GetString("frmComputers", "MSG30", "Добавить") Then
+            Call _
+                SaveActivityToLogDB(
+                    langfile.GetString("frmComputers", "MSG48", "Добавление пользователя на компьютере") & " " &
+                    frmComputers.lstGroups.SelectedNode.Text)
+            sSQL = "Select * from USER_COMP"
+        Else
+            Call _
+                SaveActivityToLogDB(
+                    langfile.GetString("frmComputers", "MSG49", "Редактирование пользователя на компьютере") & " " &
+                    frmComputers.lstGroups.SelectedNode.Text)
+            sSQL = "Select * from USER_COMP WHERE id =" & frmComputers.uCOUNT
+        End If
+
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
+        With rs
+
+            Select Case frmComputers.cmdUserAdd.Text
+
+                Case langfile.GetString("frmComputers", "MSG42", "Сохранить")
+
+                    If Us1 = frmComputers.txtUserPass.Text Or Us1 = Nothing Then
+
+                    Else
+                        strPassword = frmComputers.txtUserPass.Text
+                        EncryptDecrypt(strPassword)
+                        .Fields("PASSWORD").Value = Temp$
+                    End If
+
+                    If Us2 = frmComputers.txtUserEmailPwd.Text Or Us2 = Nothing Then
+
+                    Else
+                        .AddNew()
+                        strPassword = frmComputers.txtUserEmailPwd.Text
+                        EncryptDecrypt(strPassword)
+                        .Fields("EPASS").Value = Temp$
+                    End If
+
+                Case Else
+
+                    strPassword = Trim(frmComputers.txtUserEmailPwd.Text)
+                    Call EncryptDecrypt(strPassword)
+                    frmComputers.txtUserEmailPwd.Text = Temp$
+
+                    strPassword = Trim(frmComputers.txtUserPass.Text)
+                    Call EncryptDecrypt(strPassword)
+                    frmComputers.txtUserPass.Text = Temp$
+
+                    .Fields("PASSWORD").Value = frmComputers.txtUserPass.Text
+                    .Fields("EPASS").Value = frmComputers.txtUserEmailPwd.Text
+
+            End Select
+
+            .Fields("Id_Comp").Value = frmComputers.sCOUNT
+            .Fields("USERNAME").Value = frmComputers.txtUserName.Text
+            .Fields("EMAIL").Value = frmComputers.txtUserEmail.Text
+            .Fields("FIO").Value = frmComputers.txtUserFIO.Text
+            .Fields("icq").Value = frmComputers.txtUserIcq.Text
+            .Fields("jabber").Value = frmComputers.txtUserJab.Text
+            .Fields("MEMO").Value = frmComputers.txtUMEMO.Text
+
+
+            If frmComputers.ChkPDC.Checked = True Then
+                .Fields("PDC").Value = True
+            Else
+                .Fields("PDC").Value = False
+            End If
+
+            .Update()
+        End With
+
+        rs.Close()
+        rs = Nothing
+
+        If Not RSExists("USER", "name", Trim(frmComputers.txtUserName.Text)) Then
+
+
+            rs = New Recordset
+
+            rs.Open("Select * from SPR_USER ", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
+            With rs
+                .AddNew()
+                .Fields("name").Value = frmComputers.txtUserName.Text
+                .Fields("A").Value = frmComputers.txtUserFIO.Text
+                .Update()
+            End With
+            rs.Close()
+            rs = Nothing
+
+            frmComputers.txtUserName.Items.Add(frmComputers.txtUserName.Text)
+
+        End If
+
+
+        FillComboNET(frmComputers.txtUserName, "Name", "SPR_USER", "", False, True) 'esq 130713
+        FillComboNET(frmComputers.txtUserFIO, "A", "SPR_USER", "", False, True) 'esq 130713
+
+        frmComputers.cmdUserAdd.Text = langfile.GetString("frmComputers", "MSG30", "Добавить")
+
+        frmComputers.txtUserName.Text = ""
+        frmComputers.txtUserPass.Text = ""
+        frmComputers.txtUserEmail.Text = ""
+        frmComputers.txtUserEmailPwd.Text = ""
+        frmComputers.txtUserFIO.Text = ""
+        frmComputers.txtUserIcq.Text = ""
+        frmComputers.txtUMEMO.Text = ""
+
+        LOAD_USER(frmComputers.sCOUNT)
+    End Sub
+
     Public Sub Save_P(Optional ByVal sSID As String = "")
 
         On Error GoTo Err_
@@ -1508,7 +1563,6 @@ err_:
             Exit Sub
         End If
 
-
         Select Case frmComputers.EDT
 
             Case True
@@ -1530,20 +1584,6 @@ err_:
                         End Select
 
                 End Select
-
-        End Select
-
-        Dim sSQL As String
-
-        Select Case frmComputers.EDT
-
-            Case False
-
-                sSQL = "SELECT * FROM kompy"
-
-            Case True
-
-                sSQL = "SELECT * FROM kompy WHERE id =" & sSID
 
         End Select
 
@@ -1591,6 +1631,7 @@ err_:
                 "Select id From kompy where filial='" & frmComputers.cmbPRNFil.Text & "' and mesto='" &
                 frmComputers.cmbPRNDepart.Text & "' and kabn='" & frmComputers.cmbPRNOffice.Text & "' and NET_NAME='" &
                 frmComputers.cmbPCL.Text & "'", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
             With rs
 
                 unaPCL = .Fields("id").Value
@@ -1605,83 +1646,54 @@ sAR:
 
         On Error GoTo Err_
 
+        Dim _chkPRNspis As Integer
+        Dim _chkPRNNNb As Integer
+        If Len(frmComputers.txtPRNSfN.Text) = 0 Then frmComputers.txtPRNSfN.Text = 0
+        If Len(frmComputers.txtPRNcash.Text) = 0 Then frmComputers.txtPRNcash.Text = 0
+        If Len(frmComputers.txtPRNSumm.Text) = 0 Then frmComputers.txtPRNSumm.Text = 0
+        If frmComputers.chkPRNspis.Checked = False Then _chkPRNspis = 0 Else _chkPRNspis = 1
+        If frmComputers.chkPRNNNb.Checked = False Then _chkPRNNNb = 0 Else _chkPRNNNb = 1
+
+
+        Dim sSQL As String
+
+        Select Case frmComputers.EDT
+
+            Case False
+
+                sSQL = "INSERT INTO kompy (PRINTER_NAME_1,PRINTER_SN_1,Ser_N_SIS,PRINTER_PROIZV_1,port_1,OTvetstvennyj,INV_NO_PRINTER,FILIAL,MESTO,kabn,TELEPHONE,TIPtehn,NET_NAME,PSEVDONIM,PCL,SFAktNo,CenaRub,StoimRub,Zaiavk,DataVVoda,dataSF,Spisan,Balans,data_sp,[date],os,NET_IP_1,NET_MAC_1,port_2) VALUES ('" & frmComputers.cmbPRN.Text & "','" & frmComputers.txtPRNSN.Text & "','" & frmComputers.txtPRNSN.Text & "','" & frmComputers.PROiZV38.Text & "','" & frmComputers.cmbFormat.Text & "','" & frmComputers.cmbPRNotv.Text & "','" & frmComputers.txtPRNinnumber.Text & "','" & frmComputers.cmbPRNFil.Text & "','" & frmComputers.cmbPRNDepart.Text & "','" & frmComputers.cmbPRNOffice.Text & "','" & frmComputers.txtPRNphone.Text & "','" & TipTehn & "','" & frmComputers.cmbPRN.Text & "','" & frmComputers.cmbPRN.Text & "'," & unaPCL & ",'" & frmComputers.txtPRNSfN.Text & "','" & frmComputers.txtPRNcash.Text & "','" & frmComputers.txtPRNSumm.Text & "','" & frmComputers.txtPRNZay.Text & "','" & frmComputers.dtPRNdataVvoda.Value & "','" & frmComputers.dtPRNSFdate.Value & "'," & _chkPRNspis & "," & _chkPRNNNb & ",'" & frmComputers.dtPRNSpisanie.Value & "','" & Date.Today & "','" & frmComputers.cmbModCartr.Text & "','" & frmComputers.txtPrnIP.Text & "','" & frmComputers.txtPRNMAC.Text & "','" & frmComputers.cmbPRNConnect.Text & "')"
+
+            Case True
+
+                sSQL = "UPDATE kompy SET PRINTER_NAME_1='" & frmComputers.cmbPRN.Text & "', PRINTER_SN_1='" & frmComputers.txtPRNSN.Text & "', Ser_N_SIS='" & frmComputers.txtPRNSN.Text & "', PRINTER_PROIZV_1='" & frmComputers.PROiZV38.Text & "', port_1='" & frmComputers.cmbFormat.Text & "', OTvetstvennyj='" & frmComputers.cmbPRNotv.Text & "', INV_NO_PRINTER='" & frmComputers.txtPRNinnumber.Text & "', FILIAL='" & frmComputers.cmbPRNFil.Text & "', MESTO='" & frmComputers.cmbPRNDepart.Text & "', kabn='" & frmComputers.cmbPRNOffice.Text & "', TELEPHONE='" & frmComputers.txtPRNphone.Text & "', NET_NAME='" & frmComputers.cmbPRN.Text & "', PSEVDONIM='" & frmComputers.cmbPRN.Text & "', PCL=" & unaPCL & ", SFAktNo='" & frmComputers.txtPRNSfN.Text & "', CenaRub='" & frmComputers.txtPRNcash.Text & "', StoimRub='" & frmComputers.txtPRNSumm.Text & "', Zaiavk='" & frmComputers.txtPRNZay.Text & "', DataVVoda='" & frmComputers.dtPRNdataVvoda.Value & "', dataSF='" & frmComputers.dtPRNSFdate.Value & "', Spisan=" & _chkPRNspis & ", Balans=" & _chkPRNNNb & ", data_sp='" & frmComputers.dtPRNSpisanie.Value & "', os='" & frmComputers.cmbModCartr.Text & "', NET_IP_1='" & frmComputers.txtPrnIP.Text & "',NET_MAC_1='" & frmComputers.txtPRNMAC.Text & "',port_2='" & frmComputers.cmbPRNConnect.Text & "' WHERE id =" & sSID
+
+        End Select
+
         rs = New Recordset
         rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
-
-        With rs
-            If Len(sSID) = 0 Then
-                .AddNew()
-                .Fields("date").Value = Date.Today
-                .Fields("TIPtehn").Value = TipTehn
-            End If
-
-            .Fields("PRINTER_NAME_1").Value = frmComputers.cmbPRN.Text
-            .Fields("PRINTER_SN_1").Value = frmComputers.txtPRNSN.Text
-            .Fields("Ser_N_SIS").Value = frmComputers.txtPRNSN.Text
-            .Fields("PRINTER_PROIZV_1").Value = frmComputers.PROiZV38.Text
-            .Fields("INV_NO_PRINTER").Value = frmComputers.txtPRNinnumber.Text
-            .Fields("port_1").Value = frmComputers.cmbFormat.Text
-            .Fields("FILIAL").Value = frmComputers.cmbPRNFil.Text
-            .Fields("mesto").Value = frmComputers.cmbPRNDepart.Text
-            .Fields("kabn").Value = frmComputers.cmbPRNOffice.Text
-            .Fields("os").Value = frmComputers.cmbModCartr.Text
-            .Fields("OTvetstvennyj").Value = frmComputers.cmbPRNotv.Text
-            .Fields("TELEPHONE").Value = frmComputers.txtPRNphone.Text
-            .Fields("NET_IP_1").Value = frmComputers.txtPrnIP.Text
-            .Fields("NET_MAC_1").Value = frmComputers.txtPRNMAC.Text
-            .Fields("OS").Value = frmComputers.cmbModCartr.Text
-            .Fields("NET_NAME").Value = frmComputers.cmbPRN.Text
-            .Fields("PSEVDONIM").Value = frmComputers.cmbPRN.Text
-            .Fields("PCL").Value = unaPCL
-
-            .Fields("port_2").Value = frmComputers.cmbPRNConnect.Text
-            If Len(frmComputers.txtPRNSfN.Text) = 0 Then frmComputers.txtPRNSfN.Text = 0
-            If Len(frmComputers.txtPRNcash.Text) = 0 Then frmComputers.txtPRNcash.Text = 0
-            If Len(frmComputers.txtPRNSumm.Text) = 0 Then frmComputers.txtPRNSumm.Text = 0
-
-            .Fields("SFAktNo").Value = frmComputers.txtPRNSfN.Text
-            .Fields("CenaRub").Value = frmComputers.txtPRNcash.Text
-            .Fields("StoimRub").Value = frmComputers.txtPRNSumm.Text
-
-            .Fields("Zaiavk").Value = frmComputers.txtPRNZay.Text
-
-            .Fields("DataVVoda").Value = frmComputers.dtPRNdataVvoda.Value
-            .Fields("dataSF").Value = frmComputers.dtPRNSFdate.Value
-
-            .Fields("Spisan").Value = frmComputers.chkPRNspis.Checked
-            .Fields("Balans").Value = frmComputers.chkPRNNNb.Checked
-
-            If frmComputers.chkPRNspis.Checked = True Then
-
-                .Fields("data_sp").Value = frmComputers.dtPRNSpisanie.Value
-
-            End If
-
-            .Update()
-        End With
-
-        rs.Close()
         rs = Nothing
 
         Select Case frmComputers.EDT
 
             Case False
 
-                Dim rsBK As Recordset
-                rsBK = New Recordset
-                rsBK.Open(
-                    "SELECT top 1 id FROM kompy WHERE NET_NAME='" & frmComputers.cmbPRN.Text & "' and MESTO='" &
-                    frmComputers.cmbPRNDepart.Text & "' and FILIAL='" & frmComputers.cmbPRNFil.Text & "'  and kabn='" &
-                    frmComputers.cmbPRNOffice.Text & "' order by id desc", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                Select Case DB_N
 
-                With rsBK
+                    Case "MySQL"
 
-                    frmComputers.sCOUNT = .Fields("ID").Value
+                        sSQL = "Select id from kompy ORDER BY id DESC LIMIT 1"
 
-                End With
-                rsBK.Close()
-                rsBK = Nothing
+                    Case Else
+
+                        sSQL = "Select top 1 id from kompy ORDER BY id DESC"
+
+                End Select
+
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                frmComputers.sCOUNT = rs.Fields("ID").Value
+                rs.Close()
+                rs = Nothing
 
                 Dim objIniFile As New IniFile(PrPath & "base.ini")
                 objIniFile.WriteString("general", "DK", frmComputers.sCOUNT)
@@ -1714,6 +1726,7 @@ sAR:
 
         Exit Sub
 Err_:
+        MsgBox(Err.Description)
     End Sub
 
     Public Sub Save_NET(Optional ByVal sSID As String = "")
@@ -1737,8 +1750,6 @@ Err_:
             Case Else
 
         End Select
-
-
 
         If Len(frmComputers.cmbDevNet.Text) = 0 Or Len(frmComputers.cmbNETBranch.Text) = 0 Then
 
@@ -1800,18 +1811,6 @@ sAR:
 
         Dim sSQL As String 'Переменная, где будет размещён SQL запрос
 
-        Select Case frmComputers.EDT
-
-            Case False
-
-                sSQL = "SELECT * FROM kompy"
-
-            Case True
-
-                sSQL = "SELECT * FROM kompy WHERE id =" & sSID
-
-        End Select
-
         If Not (RSExists("otv", "name", Trim(frmComputers.cmbNETotv.Text))) Then
             AddOnePar(frmComputers.cmbNETotv.Text, "NAME", "SPR_OTV", frmComputers.cmbNETotv)
         End If
@@ -1825,95 +1824,80 @@ sAR:
                       frmComputers.PROiZV40.Text, "SPR_DEV_NET", frmComputers.cmbCPU2)
         End If
 
+        If Len(frmComputers.txtNETSfN.Text) = 0 Then frmComputers.txtNETSfN.Text = 0
+        If Len(frmComputers.txtNETcash.Text) = 0 Then frmComputers.txtNETcash.Text = 0
+        If Len(frmComputers.txtNETSumm.Text) = 0 Then frmComputers.txtNETSumm.Text = 0
+
+        Dim _chkPRNspis As Integer
+        Dim _chkPRNNNb As Integer
+      
+        If frmComputers.chkNETspis.Checked = False Then _chkPRNspis = 0 Else _chkPRNspis = 1
+        If frmComputers.chkNETNNb.Checked = False Then _chkPRNNNb = 0 Else _chkPRNNNb = 1
+
+
+
+        Select Case frmComputers.EDT
+
+            Case False
+
+                sSQL = "INSERT INTO kompy (PRINTER_NAME_1,PRINTER_SN_1,PRINTER_PROIZV_1,NET_IP_1,NET_MAC_1,PRINTER_SN_2,PRINTER_PROIZV_3,PRINTER_SN_3,PRINTER_NAME_4,PRINTER_PROIZV_4,PRINTER_SN_4," &
+                        "OTvetstvennyj,telephone,port_2,filial,mesto,kabn,port_1,Ser_N_SIS,TIPtehn,PSEVDONIM,NET_NAME,PCL,SFAktNo,CenaRub,StoimRub,Zaiavk,DataVVoda,dataSF,Spisan,Balans,data_sp) VALUES ('" &
+                        frmComputers.cmbNetDev.Text & "','" & frmComputers.cmbDevNet.Text & "','" & frmComputers.PROiZV40.Text & "','" & frmComputers.txtNetIP.Text & "','" & frmComputers.txtNetMac.Text & "','" &
+                        frmComputers.txtNetPort.Text & "','" & frmComputers.txtNetINN.Text & "','" & frmComputers.txtNetIsp.Text & "','" & frmComputers.cmbNetVkl.Text & "','" & frmComputers.cmbNetCable.Text & "','" &
+                        frmComputers.txtNetCableCat.Text & "','" & frmComputers.cmbNETotv.Text & "','" & frmComputers.txtNETphone.Text & "','" & frmComputers.txtNetNumberPorts.Text & "','" &
+                        frmComputers.cmbNETBranch.Text & "','" & frmComputers.cmbNetDepart.Text & "','" & frmComputers.cmbNETOffice.Text & "','" & frmComputers.txtNetSN.Text & "','" & frmComputers.txtNetSN.Text & "','" &
+                        TipTehn & "','" & frmComputers.cmbNetDev.Text & "','" & frmComputers.cmbDevNet.Text & "'," & unaPCL & ",'" & frmComputers.txtNETSfN.Text & "','" & frmComputers.txtNETcash.Text & "','" &
+                        frmComputers.txtNETSumm.Text & "','" & frmComputers.txtNETZay.Text & "','" & frmComputers.dtNETdataVvoda.Value & "','" & frmComputers.dtNETSFdate.Value & "'," & _chkPRNspis & "," &
+                        _chkPRNNNb & ",'" & frmComputers.dtNETSpisanie.Value & "')"
+
+            Case True
+
+                sSQL = "UPDATE kompy SET " &
+                        "PRINTER_NAME_1='" & frmComputers.cmbNetDev.Text & "'," &
+                        "PRINTER_SN_1='" & frmComputers.cmbDevNet.Text & "'," & "PRINTER_PROIZV_1='" & frmComputers.PROiZV40.Text & "'," &
+                        "NET_IP_1='" & frmComputers.txtNetIP.Text & "'," & "NET_MAC_1='" & frmComputers.txtNetMac.Text & "'," &
+                        "PRINTER_SN_2='" & frmComputers.txtNetPort.Text & "'," & "PRINTER_PROIZV_3='" & frmComputers.txtNetINN.Text & "'," &
+                        "PRINTER_SN_3='" & frmComputers.txtNetIsp.Text & "'," & "PRINTER_NAME_4='" & frmComputers.cmbNetVkl.Text & "'," &
+                        "PRINTER_PROIZV_4='" & frmComputers.cmbNetCable.Text & "'," & "PRINTER_SN_4='" & frmComputers.txtNetCableCat.Text & "'," &
+                        "OTvetstvennyj='" & frmComputers.cmbNETotv.Text & "'," & "telephone='" & frmComputers.txtNETphone.Text & "'," &
+                        "port_2='" & frmComputers.txtNetNumberPorts.Text & "'," & "filial='" & frmComputers.cmbNETBranch.Text & "'," &
+                        "mesto='" & frmComputers.cmbNetDepart.Text & "'," & "kabn='" & frmComputers.cmbNETOffice.Text & "'," &
+                        "port_1='" & frmComputers.txtNetSN.Text & "'," & "Ser_N_SIS='" & frmComputers.txtNetSN.Text & "'," &
+                        "TIPtehn='" & TipTehn & "'," & "PSEVDONIM='" & frmComputers.cmbNetDev.Text & "'," &
+                        "NET_NAME='" & frmComputers.cmbDevNet.Text & "'," & "PCL=" & unaPCL & "," &
+                        "SFAktNo='" & frmComputers.txtNETSfN.Text & "'," & "CenaRub='" & frmComputers.txtNETcash.Text & "'," &
+                        "StoimRub='" & frmComputers.txtNETSumm.Text & "'," & "Zaiavk='" & frmComputers.txtNETZay.Text & "'," &
+                        "DataVVoda='" & frmComputers.dtNETdataVvoda.Value & "'," & "dataSF='" & frmComputers.dtNETSFdate.Value & "'," &
+                        "Spisan=" & _chkPRNspis & "," & "Balans=" & _chkPRNNNb & "," &
+                        "data_sp='" & frmComputers.dtNETSpisanie.Value & "' WHERE id =" & sSID
+
+        End Select
+
         rs = New Recordset
         rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
-        With rs
-            If Len(sSID) = 0 Then
-                .AddNew()
-            End If
-
-            .Fields("PRINTER_NAME_1").Value = frmComputers.cmbNetDev.Text
-            .Fields("PRINTER_SN_1").Value = frmComputers.cmbDevNet.Text
-
-            .Fields("PRINTER_PROIZV_1").Value = frmComputers.PROiZV40.Text
-
-            .Fields("NET_IP_1").Value = frmComputers.txtNetIP.Text
-            .Fields("NET_MAC_1").Value = frmComputers.txtNetMac.Text
-            .Fields("PRINTER_SN_2").Value = frmComputers.txtNetPort.Text
-
-            .Fields("PRINTER_PROIZV_3").Value = frmComputers.txtNetINN.Text
-            .Fields("PRINTER_SN_3").Value = frmComputers.txtNetIsp.Text
-
-            .Fields("PRINTER_NAME_4").Value = frmComputers.cmbNetVkl.Text
-            .Fields("PRINTER_PROIZV_4").Value = frmComputers.cmbNetCable.Text
-            .Fields("PRINTER_SN_4").Value = frmComputers.txtNetCableCat.Text
-
-            '.Fields("OTvetstvennyj").Value = frmComputers.txtNetNumberPorts.Text
-            '.Fields("telephone").Value = frmComputers.cmbNETotv.Text
-
-            .Fields("OTvetstvennyj").Value = frmComputers.cmbNETotv.Text
-            .Fields("telephone").Value = frmComputers.txtNETphone.Text
-            .Fields("port_2").Value = frmComputers.txtNetNumberPorts.Text
-
-            .Fields("filial").Value = frmComputers.cmbNETBranch.Text
-            .Fields("mesto").Value = frmComputers.cmbNetDepart.Text
-            .Fields("kabn").Value = frmComputers.cmbNETOffice.Text
-            'sBranch = .Fields("FILIAL").Value
-            'sDepartment = .Fields("MESTO").Value
-            'sOffice = .Fields("kabn").Value
-            .Fields("port_1").Value = frmComputers.txtNetSN.Text
-            .Fields("Ser_N_SIS").Value = frmComputers.txtNetSN.Text
-            .Fields("TIPtehn").Value = TipTehn
-
-            .Fields("PSEVDONIM").Value = frmComputers.cmbNetDev.Text
-            .Fields("NET_NAME").Value = frmComputers.cmbDevNet.Text
-
-            .Fields("PCL").Value = unaPCL
-
-            If Len(frmComputers.txtNETSfN.Text) = 0 Then frmComputers.txtNETSfN.Text = 0
-            If Len(frmComputers.txtNETcash.Text) = 0 Then frmComputers.txtNETcash.Text = 0
-            If Len(frmComputers.txtNETSumm.Text) = 0 Then frmComputers.txtNETSumm.Text = 0
-
-            .Fields("SFAktNo").Value = frmComputers.txtNETSfN.Text
-            .Fields("CenaRub").Value = frmComputers.txtNETcash.Text
-            .Fields("StoimRub").Value = frmComputers.txtNETSumm.Text
-            .Fields("Zaiavk").Value = frmComputers.txtNETZay.Text
-
-            .Fields("DataVVoda").Value = frmComputers.dtNETdataVvoda.Value
-            .Fields("dataSF").Value = frmComputers.dtNETSFdate.Value
-
-            .Fields("Spisan").Value = frmComputers.chkNETspis.Checked
-            .Fields("Balans").Value = frmComputers.chkNETNNb.Checked
-
-            If frmComputers.chkNETspis.Checked = True Then
-
-                .Fields("data_sp").Value = frmComputers.dtNETSpisanie.Value
-
-            End If
-
-            .Update()
-        End With
-        rs.Close()
         rs = Nothing
 
         Select Case frmComputers.EDT
 
             Case False
 
-                Dim rsBK As Recordset
-                rsBK = New Recordset
-                rsBK.Open(
-                    "SELECT top 1 id FROM kompy WHERE NET_NAME='" & frmComputers.cmbDevNet.Text & "' and MESTO='" &
-                    frmComputers.cmbNetDepart.Text & "' and FILIAL='" & frmComputers.cmbNETBranch.Text & "'  and kabn='" &
-                    frmComputers.cmbNETOffice.Text & "' order by id desc", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                Select Case DB_N
 
-                With rsBK
+                    Case "MySQL"
 
-                    frmComputers.sCOUNT = .Fields("ID").Value
-                End With
-                rsBK.Close()
-                rsBK = Nothing
+                        sSQL = "Select id from kompy ORDER BY id DESC LIMIT 1"
+
+                    Case Else
+
+                        sSQL = "Select top 1 id from kompy ORDER BY id DESC"
+
+                End Select
+
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                frmComputers.sCOUNT = rs.Fields("ID").Value
+                rs.Close()
+                rs = Nothing
 
                 Dim objIniFile As New IniFile(PrPath & "base.ini")
                 objIniFile.WriteString("general", "DK", frmComputers.sCOUNT)
@@ -2014,10 +1998,7 @@ sAR:
 
                 End Select
 
-                rs = New Recordset
-                rs.Open("SELECT * FROM dvig", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
-                'sTmp = (DateTime.Now.Hour & ":" & DateTime.Now.Minute & ":" & DateTime.Now.Second)
+                    '                    sTmp = (DateTime.Now.Hour & ":" & DateTime.Now.Minute & ":" & DateTime.Now.Second)
 
                 If Len(iB) <> 0 Then iA = iA & "/" & iB
                 If Len(iC) <> 0 Then iA = iA & "/" & iC
@@ -2025,19 +2006,14 @@ sAR:
                 If Len(sOTDEL) <> 0 Then sFIALIAL = sFIALIAL & "/" & sOTDEL
                 If Len(sKABN) <> 0 Then sFIALIAL = sFIALIAL & "/" & sKABN
 
-                With rs
-                    .AddNew()
-                    .Fields("id_comp").Value = frmComputers.sCOUNT
-                    .Fields("oldMesto").Value = iA
-                    .Fields("NewMesto").Value = sFIALIAL
-                    .Fields("prich").Value = strTmp
-                    .Fields("data").Value = Date.Today
-                    .Fields("time").Value = sTmp.ToLongTimeString
-                    .Update()
-                End With
-                rs.Close()
-                rs = Nothing
-                'Call SaveActivityToLogDB("Перемещение техники " & frmComputers.SelNde.Text & " из " & frmComputers.FilD & "/" & frmComputers.OtdD & " в " & sfilial & "/" & sOTDEL)
+
+                    Dim sSQL As String
+                    sSQL = "INSERT INTO dvig (id_comp,oldMesto,NewMesto,prich,[data],[time]) VALUES (" & frmComputers.sCOUNT & ",'" & iA & "','" & sFIALIAL & "','" & strTmp & "','" & Date.Today & "','" & sTmp.ToLongTimeString & "')"
+                    rs = New Recordset
+                    rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                    rs = Nothing
+
+                    'Call SaveActivityToLogDB("Перемещение техники " & frmComputers.SelNde.Text & " из " & frmComputers.FilD & "/" & frmComputers.OtdD & " в " & sfilial & "/" & sOTDEL)
 
                 Dim langfile As New IniFile(sLANGPATH)
                 Call _
@@ -2076,22 +2052,10 @@ sAR:
                                 Do While Not .EOF
                                     sCN = .Fields("id").Value
 
+                                    sSQL = "INSERT INTO dvig (id_comp,oldMesto,NewMesto,prich,[data],[time]) VALUES (" & sCN & ",'" & iA & "','" & sFIALIAL & "','" & strTmp & "','" & Date.Today & "','" & sTmp.ToLongTimeString & "')"
                                     rs1 = New Recordset
-                                    rs1.Open("SELECT * FROM dvig", DB7, CursorTypeEnum.adOpenDynamic,
-                                             LockTypeEnum.adLockOptimistic)
-                                    With rs1
-                                        .AddNew()
-                                        .Fields("id_comp").Value = sCN
-                                        .Fields("oldMesto").Value = iA
-                                        .Fields("NewMesto").Value = sFIALIAL
-                                        .Fields("prich").Value = strTmp
-                                        .Fields("data").Value = Date.Today
-                                        .Fields("time").Value = sTmp.ToLongTimeString
-                                        .Update()
-                                    End With
-                                    rs1.Close()
+                                    rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                                     rs1 = Nothing
-
 
                                     .MoveNext()
                                 Loop
@@ -2361,34 +2325,20 @@ Error_:
 
         If counter = 0 Then
 
-            sSQL = "SELECT * FROM OTD_O"
-
+            sSQL = "INSERT INTO OTD_O (Id_OTD,Phone,OTV,ADRESS,Prim) VALUES ('" & SerD & "','" & frmComputers.txtBRPhone.Text & "','" & frmComputers.txtBRBoss.Text & "','" &
+            frmComputers.txtBRAddress.Text & "','" & frmComputers.txtBRMemo.Text & "')"
         Else
 
-            sSQL = "SELECT * FROM OTD_O WHERE Id_OTD ='" & SerD & "'"
+            sSQL = "UPDATE OTD_O SET " &
+                    "Phone='" & frmComputers.txtBRPhone.Text & "'," &
+                    "OTV='" & frmComputers.txtBRBoss.Text & "'," &
+                    "ADRESS='" & frmComputers.txtBRAddress.Text & "'," &
+                    "Prim='" & frmComputers.txtBRMemo.Text & "' WHERE Id_OTD ='" & SerD & "'"
 
         End If
 
         rs = New Recordset
         rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
-        With rs
-            If counter = 0 Then
-                .AddNew()
-                .Fields("Id_OTD").Value = SerD
-            Else
-
-            End If
-
-            .Fields("Phone").Value = frmComputers.txtBRPhone.Text
-            .Fields("OTV").Value = frmComputers.txtBRBoss.Text
-            .Fields("ADRESS").Value = frmComputers.txtBRAddress.Text
-            .Fields("Prim").Value = frmComputers.txtBRMemo.Text
-
-            .Update()
-        End With
-
-        rs.Close()
         rs = Nothing
 
         'Санитарный паспорт
@@ -2408,42 +2358,41 @@ Error_:
 
         If counter = 0 Then
 
-            sSQL = "SELECT * FROM SES_Pass"
-
+            sSQL = "INSERT INTO SES_Pass (id_OF,Ploshad,visota,Pl1Pk,ob1Pk,nalpom,vent,voda,kanal,teplo,otdelka,mebel) VALUES ('" &
+                            SerD & "','" &
+                            frmComputers.txtspplo.Text & "','" &
+                            frmComputers.txtspvis.Text & "','" &
+                            frmComputers.txtspPloOneEVM.Text & "','" &
+                            frmComputers.txtspObOneEVM.Text & "','" &
+                            frmComputers.cmbSpRemEVM.Text & "','" &
+                            frmComputers.cmbSpVent.Text & "','" &
+                            frmComputers.cmbSpWater.Text & "','" &
+                            frmComputers.cmbSpTeplo.Text & "','" &
+                            frmComputers.cmbSpKanal.Text & "','" &
+                            frmComputers.txtSpWall.Text & "','" &
+                            frmComputers.txtSpMebel.Text & "')"
         Else
 
-            sSQL = "SELECT * FROM SES_Pass WHERE id_OF ='" & SerD & "'"
+            sSQL = "UPDATE SES_Pass SET " &
+                            "Ploshad='" & frmComputers.txtspplo.Text & "'," &
+                            "visota='" & frmComputers.txtspvis.Text & "'," &
+                            "Pl1Pk='" & frmComputers.txtspPloOneEVM.Text & "'," &
+                            "ob1Pk='" & frmComputers.txtspObOneEVM.Text & "'," &
+                            "nalpom='" & frmComputers.cmbSpRemEVM.Text & "'," &
+                            "vent='" & frmComputers.cmbSpVent.Text & "'," &
+                            "voda='" & frmComputers.cmbSpWater.Text & "'," &
+                            "kanal='" & frmComputers.cmbSpTeplo.Text & "'," &
+                            "teplo='" & frmComputers.cmbSpKanal.Text & "'," &
+                            "otdelka='" & frmComputers.txtSpWall.Text & "'," &
+                            "mebel='" & frmComputers.txtSpMebel.Text & "' WHERE id_OF ='" & SerD & "'"
 
         End If
 
         rs = New Recordset
         rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
-        With rs
-            If counter = 0 Then
-                .AddNew()
-                .Fields("id_OF").Value = SerD
-            Else
-
-            End If
-
-            .Fields("Ploshad").Value = frmComputers.txtspplo.Text
-            .Fields("visota").Value = frmComputers.txtspvis.Text
-            .Fields("Pl1Pk").Value = frmComputers.txtspPloOneEVM.Text
-            .Fields("ob1Pk").Value = frmComputers.txtspObOneEVM.Text
-            .Fields("nalpom").Value = frmComputers.cmbSpRemEVM.Text
-            .Fields("vent").Value = frmComputers.cmbSpVent.Text
-            .Fields("voda").Value = frmComputers.cmbSpWater.Text
-            .Fields("kanal").Value = frmComputers.cmbSpTeplo.Text
-            .Fields("teplo").Value = frmComputers.cmbSpKanal.Text
-            .Fields("otdelka").Value = frmComputers.txtSpWall.Text
-            .Fields("mebel").Value = frmComputers.txtSpMebel.Text
-
-            .Update()
-        End With
-
-        rs.Close()
         rs = Nothing
+
+       
     End Sub
 
     Public Sub SAVE_DRAG_DROP(ByVal sID As String, ByVal sBRANCHE As String, ByVal sDEPARTMENT As String,
@@ -2466,21 +2415,11 @@ Error_:
 
         Dim sSQL As String
 
-        sSQL = "SELECT FILIAL,mesto,kabn,PCL FROM kompy where id=" & sID
+        sSQL = "UPDATE kompy SET FILIAL='" & sBRANCHE & "', mesto='" & sDEPARTMENT & "',kabn='" & sOFFICE & "',PCL=0 where id=" & sID
 
         Dim rs As Recordset
         rs = New Recordset
         rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
-        With rs
-            .Fields("FILIAL").Value = sBRANCHE
-            .Fields("mesto").Value = sDEPARTMENT
-            .Fields("kabn").Value = sOFFICE
-            .Fields("PCL").Value = 0
-            .Update()
-        End With
-
-        rs.Close()
         rs = Nothing
 
 
@@ -2503,29 +2442,11 @@ Error_:
                 "update kompy set FILIAL='" & sBRANCHE & "', mesto='" & sDEPARTMENT & "', kabn='" & sOFFICE &
                 "' WHERE PCL=" & sID, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-            'rs.Close()
             rs = Nothing
 
-
-            Dim rs1 As Recordset
-            sSQL = "SELECT * FROM kompy where PCL=" & sID
+            sSQL = "update kompy set FILIAL='" & sBRANCHE & "', mesto='" & sDEPARTMENT & "', kabn='" & sOFFICE & "' WHERE PCL=" & rs.Fields("id").Value
             rs = New Recordset
             rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
-            With rs
-                .MoveFirst()
-                Do While Not .EOF
-
-                    rs1 = New Recordset
-
-                    rs1.Open("update kompy set FILIAL='" & sBRANCHE & "', mesto='" & sDEPARTMENT & "', kabn='" & sOFFICE & "' WHERE PCL=" & rs.Fields("id").Value, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
-                    rs1 = Nothing
-
-                    .MoveNext()
-                Loop
-            End With
-            rs.Close()
             rs = Nothing
 
 
@@ -2570,7 +2491,6 @@ Error_:
 
             Case 0 'все
 
-
                 'Мониторы
                 sSQL = "SELECT count(*) as t_n FROM kompy where PCL=" & sSID & " and tiptehn = 'MONITOR'"
 
@@ -2600,26 +2520,18 @@ Error_:
 
                         tId = .Fields("id").Value
 
-                        rs1 = New Recordset
-                        rs1.Open("Select MONITOR_NAME,MONITOR_DUM,MONITOR_SN,MONITOR_PROIZV,INV_NO_MONITOR from kompy where id=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
-                                 LockTypeEnum.adLockOptimistic)
-
                         Select Case sCount
 
                             Case 1
 
-                                With rs1
-                                    sTMP0 = rs.Fields("MONITOR_NAME").Value
-                                    rs1.Fields("MONITOR_NAME").Value = rs.Fields("MONITOR_NAME").Value
-                                    rs1.Fields("MONITOR_DUM").Value = rs.Fields("MONITOR_DUM").Value
-                                    rs1.Fields("MONITOR_SN").Value = rs.Fields("MONITOR_SN").Value
-                                    rs1.Fields("MONITOR_PROIZV").Value = rs.Fields("MONITOR_PROIZV").Value
-                                    rs1.Fields("INV_NO_MONITOR").Value = rs.Fields("INV_NO_MONITOR").Value
-                                    .Update()
-                                End With
-                                rs1.Close()
+                                sSQL = "UPDATE kompy SET MONITOR_NAME='" & rs.Fields("MONITOR_NAME").Value & "',MONITOR_DUM='" &
+                           rs.Fields("MONITOR_DUM").Value & "',MONITOR_SN='" &
+                           rs.Fields("MONITOR_SN").Value & "',MONITOR_PROIZV='" &
+                           rs.Fields("MONITOR_PROIZV").Value & "',INV_NO_MONITOR='" &
+                           rs.Fields("INV_NO_MONITOR").Value & "' where id=" & sSID
+                                rs1 = New Recordset
+                                rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                                 rs1 = Nothing
-
 
                             Case Else
 
@@ -2627,30 +2539,24 @@ Error_:
 
                                     Case 2
 
-                                        With rs1
-                                            sTMP0 = rs.Fields("MONITOR_NAME").Value
-                                            rs1.Fields("MONITOR_NAME2").Value = rs.Fields("MONITOR_NAME").Value
-                                            rs1.Fields("MONITOR_DUM2").Value = rs.Fields("MONITOR_DUM").Value
-                                            rs1.Fields("MONITOR_SN2").Value = rs.Fields("MONITOR_SN").Value
-                                            rs1.Fields("MONITOR_PROIZV2").Value = rs.Fields("MONITOR_PROIZV").Value
-                                            rs1.Fields("INV_NO_MONITOR").Value = rs.Fields("INV_NO_MONITOR").Value
-                                            .Update()
-                                        End With
-                                        rs1.Close()
+                                        sSQL = "UPDATE kompy SET MONITOR_NAME2='" & rs.Fields("MONITOR_NAME").Value & "',MONITOR_DUM2='" &
+                          rs.Fields("MONITOR_DUM").Value & "',MONITOR_SN2='" &
+                          rs.Fields("MONITOR_SN").Value & "',MONITOR_PROIZV2='" &
+                          rs.Fields("MONITOR_PROIZV").Value & "',INV_NO_MONITOR='" &
+                          rs.Fields("INV_NO_MONITOR").Value & "' where id=" & sSID
+                                        rs1 = New Recordset
+                                        rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                                         rs1 = Nothing
 
                                     Case Else
 
-                                        With rs1
-                                            sTMP0 = rs.Fields("MONITOR_NAME").Value
-                                            rs1.Fields("MONITOR_NAME").Value = rs.Fields("MONITOR_NAME").Value
-                                            rs1.Fields("MONITOR_DUM").Value = rs.Fields("MONITOR_DUM").Value
-                                            rs1.Fields("MONITOR_SN").Value = rs.Fields("MONITOR_SN").Value
-                                            rs1.Fields("MONITOR_PROIZV").Value = rs.Fields("MONITOR_PROIZV").Value
-                                            rs1.Fields("INV_NO_MONITOR").Value = rs.Fields("INV_NO_MONITOR").Value
-                                            .Update()
-                                        End With
-                                        rs1.Close()
+                                        sSQL = "UPDATE kompy SET MONITOR_NAME='" & rs.Fields("MONITOR_NAME").Value & "',MONITOR_DUM='" &
+                          rs.Fields("MONITOR_DUM").Value & "',MONITOR_SN='" &
+                          rs.Fields("MONITOR_SN").Value & "',MONITOR_PROIZV='" &
+                          rs.Fields("MONITOR_PROIZV").Value & "',INV_NO_MONITOR='" &
+                          rs.Fields("INV_NO_MONITOR").Value & "' where id=" & sSID
+                                        rs1 = New Recordset
+                                        rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                                         rs1 = Nothing
 
                                 End Select
@@ -2687,31 +2593,11 @@ Error_:
                                  LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
-                        ' Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & tId)
-                        ' frmComputers.lstGroups.SelectedNode.Remove()
-
                         .MoveNext()
                     Loop
                 End With
                 rs.Close()
                 rs = Nothing
-
-                'Dim obj As New TreeNode()
-
-                'Dim text As String = String.Empty
-                'Dim tag As String = String.Empty
-
-                'text = sTMP0
-
-                'tag = "C|" & tId
-                'If text <> String.Empty AndAlso tag <> String.Empty Then
-                '    obj.Text = text
-                '    obj.Tag = tag
-                '    frmComputers.lstGroups.Nodes.RemoveAt(0)
-                '    MessageBox.Show("Node Dleted" & frmComputers.lstGroups.Nodes.Count.ToString())
-                'Else
-                '    MessageBox.Show("add all values")
-                'End If
 
                 'Принтеры
                 sSQL = "SELECT count(*) as t_n FROM kompy where PCL=" & sSID & " and tiptehn = 'Printer'"
@@ -2727,13 +2613,14 @@ Error_:
                 rs.Close()
                 rs = Nothing
 
-                sSQL = "SELECT id,PRINTER_NAME_1,PRINTER_SN_1,PRINTER_PROIZV_1,port_1,INV_NO_PRINTER FROM kompy where PCL=" & sSID & " and tiptehn = 'Printer'"
+                sSQL = "SELECT id,PRINTER_NAME_1,PRINTER_SN_1,PRINTER_PROIZV_1,port_2,INV_NO_PRINTER FROM kompy where PCL=" & sSID & " and tiptehn = 'Printer'"
 
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 i = 1
-                Dim pField As String
+
+                Dim pField, pField1, pField2, pField3, pField4 As String
 
                 With rs
                     .MoveFirst()
@@ -2741,35 +2628,23 @@ Error_:
 
                         tId = .Fields("id").Value
 
+                        pField1 = "PRINTER_NAME_" & i
+                        pField2 = "PRINTER_SN_" & i
+                        pField3 = "PRINTER_PROIZV_" & i
+                        pField4 = "port_" & i
+
+                        sSQL = "UPDATE kompy SET " & pField1 & "='" & rs.Fields("PRINTER_NAME_1").Value &
+                        "'," & pField2 & "='" & rs.Fields("PRINTER_SN_1").Value &
+                        "'," & pField3 & "='" & rs.Fields("PRINTER_PROIZV_1").Value &
+                        "',INV_NO_PRINTER='" & rs.Fields("INV_NO_PRINTER").Value &
+                        "'," & pField4 & "='" & rs.Fields("port_2").Value &
+                        "' where id=" & sSID
+
                         rs1 = New Recordset
-                        rs1.Open("Select * from kompy where id=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
-                                 LockTypeEnum.adLockOptimistic)
-
-
-                        With rs1
-                            pField = "PRINTER_NAME_" & i
-
-                            rs1.Fields(pField).Value = rs.Fields("PRINTER_NAME_1").Value
-
-                            pField = "PRINTER_SN_" & i
-
-                            rs1.Fields(pField).Value = rs.Fields("PRINTER_SN_1").Value
-
-                            pField = "PRINTER_PROIZV_" & i
-
-                            rs1.Fields(pField).Value = rs.Fields("PRINTER_PROIZV_1").Value
-                            rs1.Fields("INV_NO_PRINTER").Value = rs.Fields("INV_NO_PRINTER").Value
-
-                            pField = "port_" & i
-
-                            rs1.Fields(pField).Value = rs.Fields("port_1").Value
-                            .Update()
-                        End With
+                        rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        rs1 = Nothing
 
                         i = i + 1
-
-                        rs1.Close()
-                        rs1 = Nothing
 
                         rs1 = New Recordset
                         rs1.Open("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
@@ -2796,10 +2671,6 @@ Error_:
                                  LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
-                        ' Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & tId)
-                        ' frmComputers.lstGroups.SelectedNode.Remove()
-
-
                         .MoveNext()
                     Loop
                 End With
@@ -2818,20 +2689,13 @@ Error_:
 
                         tId = .Fields("id").Value
 
+                        sSQL = "UPDATE kompy SET IBP_NAME='" & rs.Fields("PRINTER_NAME_1").Value & "',IBP_SN='" &
+                         rs.Fields("PRINTER_SN_1").Value & "',IBP_PROIZV='" &
+                         rs.Fields("PRINTER_PROIZV_1").Value & "',INV_NO_IBP='" &
+                         rs.Fields("INV_NO_PRINTER").Value & "' where id=" & sSID
+
                         rs1 = New Recordset
-                        rs1.Open("Select IBP_NAME,IBP_SN,IBP_PROIZV,INV_NO_IBP from kompy where id=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
-                                 LockTypeEnum.adLockOptimistic)
-
-                        With rs1
-                            rs1.Fields("IBP_NAME").Value = rs.Fields("PRINTER_NAME_1").Value
-                            rs1.Fields("IBP_SN").Value = rs.Fields("PRINTER_SN_1").Value
-                            rs1.Fields("IBP_PROIZV").Value = rs.Fields("PRINTER_PROIZV_1").Value
-                            rs1.Fields("INV_NO_IBP").Value = rs.Fields("INV_NO_PRINTER").Value
-
-                            .Update()
-                        End With
-
-                        rs1.Close()
+                        rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
                         rs1 = New Recordset
@@ -2875,18 +2739,12 @@ Error_:
 
                         tId = .Fields("id").Value
 
+                        sSQL = "UPDATE kompy SET KEYBOARD_NAME='" & rs.Fields("PRINTER_NAME_1").Value &
+                            "',KEYBOARD_SN='" & rs.Fields("PRINTER_SN_1").Value &
+                            "',KEYBOARD_PROIZV='" & rs.Fields("PRINTER_PROIZV_1").Value & "' where id=" & sSID
+
                         rs1 = New Recordset
-                        rs1.Open("Select KEYBOARD_NAME,KEYBOARD_SN,KEYBOARD_PROIZV from kompy where id=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
-                                 LockTypeEnum.adLockOptimistic)
-
-                        With rs1
-                            rs1.Fields("KEYBOARD_NAME").Value = rs.Fields("PRINTER_NAME_1").Value
-                            rs1.Fields("KEYBOARD_SN").Value = rs.Fields("PRINTER_SN_1").Value
-                            rs1.Fields("KEYBOARD_PROIZV").Value = rs.Fields("PRINTER_PROIZV_1").Value
-                            .Update()
-                        End With
-
-                        rs1.Close()
+                        rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
                         rs1 = New Recordset
@@ -2908,9 +2766,6 @@ Error_:
                         rs1.Open("Delete from kompy where id=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
                                  LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
-
-                        ' Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & tId)
-                        ' frmComputers.lstGroups.SelectedNode.Remove()
 
                         .MoveNext()
                     Loop
@@ -2930,18 +2785,12 @@ Error_:
 
                         tId = .Fields("id").Value
 
+                        sSQL = "UPDATE kompy SET MOUSE_NAME='" & rs.Fields("PRINTER_NAME_1").Value &
+                            "',MOUSE_SN='" & rs.Fields("PRINTER_SN_1").Value &
+                            "',MOUSE_PROIZV='" & rs.Fields("PRINTER_PROIZV_1").Value & "' where id=" & sSID
+
                         rs1 = New Recordset
-                        rs1.Open("Select MOUSE_NAME,MOUSE_SN,MOUSE_PROIZV from kompy where id=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
-                                 LockTypeEnum.adLockOptimistic)
-
-                        With rs1
-                            rs1.Fields("MOUSE_NAME").Value = rs.Fields("PRINTER_NAME_1").Value
-                            rs1.Fields("MOUSE_SN").Value = rs.Fields("PRINTER_SN_1").Value
-                            rs1.Fields("MOUSE_PROIZV").Value = rs.Fields("PRINTER_PROIZV_1").Value
-                            .Update()
-                        End With
-
-                        rs1.Close()
+                        rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
                         rs1 = New Recordset
@@ -2964,9 +2813,6 @@ Error_:
                                  LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
-                        ' Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & tId)
-                        ' frmComputers.lstGroups.SelectedNode.Remove()
-
                         .MoveNext()
                     Loop
                 End With
@@ -2985,6 +2831,15 @@ Error_:
                     Do While Not .EOF
 
                         tId = .Fields("id").Value
+
+                        sSQL = "UPDATE kompy SET FILTR_NAME='" & rs.Fields("PRINTER_NAME_1").Value &
+                            "',FILTR_SN='" & rs.Fields("PRINTER_SN_1").Value &
+                            "',FILTR_PROIZV='" & rs.Fields("PRINTER_PROIZV_1").Value &
+                            "' where id=" & sSID
+
+                        rs1 = New Recordset
+                        rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        rs1 = Nothing
 
                         rs1 = New Recordset
                         rs1.Open("Select FILTR_NAME,FILTR_SN,FILTR_PROIZV from kompy where id=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
@@ -3029,7 +2884,6 @@ Error_:
                 rs.Close()
                 rs = Nothing
 
-
             Case 1 'Мониторы
 
                 sSQL = "SELECT count(*) as t_n FROM kompy where PCL=" & sSID & " and tiptehn = 'MONITOR'"
@@ -3067,52 +2921,47 @@ Error_:
 
                         If sCount = 1 Then
 
-                            With rs1
-                                rs1.Fields("MONITOR_NAME").Value = rs.Fields("MONITOR_NAME").Value
-                                rs1.Fields("MONITOR_DUM").Value = rs.Fields("MONITOR_DUM").Value
-                                rs1.Fields("MONITOR_SN").Value = rs.Fields("MONITOR_SN").Value
-                                rs1.Fields("MONITOR_PROIZV").Value = rs.Fields("MONITOR_PROIZV").Value
-                                rs1.Fields("INV_NO_MONITOR").Value = rs.Fields("INV_NO_MONITOR").Value
-                                .Update()
-                            End With
-                            rs1.Close()
+                            sSQL = "UPDATE kompy SET MONITOR_NAME='" & rs.Fields("MONITOR_NAME").Value &
+                                "',MONITOR_DUM='" & rs.Fields("MONITOR_DUM").Value &
+                                "',MONITOR_SN='" & rs.Fields("MONITOR_SN").Value &
+                                "',MONITOR_PROIZV='" & rs.Fields("MONITOR_PROIZV").Value &
+                                "',INV_NO_MONITOR='" & rs.Fields("INV_NO_MONITOR").Value & "' where id=" & sSID
+
+                            rs1 = New Recordset
+                            rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                             rs1 = Nothing
 
                         Else
 
                             If i = 2 Then
 
-                                With rs1
-                                    rs1.Fields("MONITOR_NAME2").Value = rs.Fields("MONITOR_NAME").Value
-                                    rs1.Fields("MONITOR_DUM2").Value = rs.Fields("MONITOR_DUM").Value
-                                    rs1.Fields("MONITOR_SN2").Value = rs.Fields("MONITOR_SN").Value
-                                    rs1.Fields("MONITOR_PROIZV2").Value = rs.Fields("MONITOR_PROIZV").Value
-                                    rs1.Fields("INV_NO_MONITOR").Value = rs.Fields("INV_NO_MONITOR").Value
-                                    .Update()
-                                End With
-                                rs1.Close()
+                                sSQL = "UPDATE kompy SET MONITOR_NAME2='" & rs.Fields("MONITOR_NAME").Value &
+                                "',MONITOR_DUM2='" & rs.Fields("MONITOR_DUM").Value &
+                                "',MONITOR_SN2='" & rs.Fields("MONITOR_SN").Value &
+                                "',MONITOR_PROIZV2='" & rs.Fields("MONITOR_PROIZV").Value &
+                                "',INV_NO_MONITOR='" & rs.Fields("INV_NO_MONITOR").Value & "' where id=" & sSID
+
+                                rs1 = New Recordset
+                                rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                                 rs1 = Nothing
 
                             Else
 
-                                With rs1
-                                    rs1.Fields("MONITOR_NAME").Value = rs.Fields("MONITOR_NAME").Value
-                                    rs1.Fields("MONITOR_DUM").Value = rs.Fields("MONITOR_DUM").Value
-                                    rs1.Fields("MONITOR_SN").Value = rs.Fields("MONITOR_SN").Value
-                                    rs1.Fields("MONITOR_PROIZV").Value = rs.Fields("MONITOR_PROIZV").Value
-                                    rs1.Fields("INV_NO_MONITOR").Value = rs.Fields("INV_NO_MONITOR").Value
-                                    .Update()
-                                End With
-                                rs1.Close()
+                                sSQL = "UPDATE kompy SET MONITOR_NAME='" & rs.Fields("MONITOR_NAME").Value &
+                                "',MONITOR_DUM='" & rs.Fields("MONITOR_DUM").Value &
+                                "',MONITOR_SN='" & rs.Fields("MONITOR_SN").Value &
+                                "',MONITOR_PROIZV='" & rs.Fields("MONITOR_PROIZV").Value &
+                                "',INV_NO_MONITOR='" & rs.Fields("INV_NO_MONITOR").Value & "' where id=" & sSID
+
+                                rs1 = New Recordset
+                                rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                                 rs1 = Nothing
 
                             End If
 
                         End If
 
-
                         i = i + 1
-
 
                         rs1 = New Recordset
                         rs1.Open("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
@@ -3133,9 +2982,6 @@ Error_:
                         rs1.Open("Delete from kompy where id=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
                                  LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
-
-                        ' Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & tId)
-                        ' frmComputers.lstGroups.SelectedNode.Remove()
 
                         .MoveNext()
                     Loop
@@ -3166,8 +3012,7 @@ Error_:
 
                 Dim i As Integer = 1
 
-                Dim pField As String
-
+                Dim pField, pField1, pField2, pField3, pField4 As String
 
                 With rs
                     .MoveFirst()
@@ -3175,36 +3020,23 @@ Error_:
 
                         tId = .Fields("id").Value
 
+                        pField1 = "PRINTER_NAME_" & i
+                        pField2 = "PRINTER_SN_" & i
+                        pField3 = "PRINTER_PROIZV_" & i
+                        pField4 = "port_" & i
+
+                        sSQL = "UPDATE kompy SET " & pField1 & "='" & rs.Fields("PRINTER_NAME_1").Value &
+                        "'," & pField2 & "='" & rs.Fields("PRINTER_SN_1").Value &
+                        "'," & pField3 & "='" & rs.Fields("PRINTER_PROIZV_1").Value &
+                        "',INV_NO_PRINTER='" & rs.Fields("INV_NO_PRINTER").Value &
+                        "'," & pField4 & "='" & rs.Fields("port_2").Value &
+                        "' where id=" & sSID
+
                         rs1 = New Recordset
-                        rs1.Open("Select * from kompy where id=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
-                                 LockTypeEnum.adLockOptimistic)
-
-
-                        With rs1
-                            pField = "PRINTER_NAME_" & i
-
-                            rs1.Fields(pField).Value = rs.Fields("PRINTER_NAME_1").Value
-
-                            pField = "PRINTER_SN_" & i
-
-                            rs1.Fields(pField).Value = rs.Fields("PRINTER_SN_1").Value
-
-                            pField = "PRINTER_PROIZV_" & i
-
-                            rs1.Fields(pField).Value = rs.Fields("PRINTER_PROIZV_1").Value
-                            rs1.Fields("INV_NO_PRINTER").Value = rs.Fields("INV_NO_PRINTER").Value
-
-                            pField = "port_" & i
-
-                            rs1.Fields(pField).Value = rs.Fields("port_2").Value
-                            .Update()
-                        End With
-
+                        rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        rs1 = Nothing
 
                         i = i + 1
-
-                        rs1.Close()
-                        rs1 = Nothing
 
                         rs1 = New Recordset
                         rs1.Open("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
@@ -3222,12 +3054,14 @@ Error_:
                         rs1 = Nothing
 
                         rs1 = New Recordset
-                        rs1.Open("Delete from kompy where id=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
+                        rs1.Open("Delete from dvig where Id_Comp=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
                                  LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
-                        ' Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & tId)
-                        ' frmComputers.lstGroups.SelectedNode.Remove()
+                        rs1 = New Recordset
+                        rs1.Open("Delete from kompy where id=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
+                                 LockTypeEnum.adLockOptimistic)
+                        rs1 = Nothing
 
                         .MoveNext()
                     Loop
@@ -3235,9 +3069,7 @@ Error_:
                 rs.Close()
                 rs = Nothing
 
-
             Case 3 'ИБП
-
 
                 sSQL = "SELECT id,PRINTER_NAME_1,PRINTER_SN_1,PRINTER_PROIZV_1,INV_NO_PRINTER FROM kompy where PCL=" & sSID & " and tiptehn = 'IBP'"
 
@@ -3250,20 +3082,13 @@ Error_:
 
                         tId = .Fields("id").Value
 
+                        sSQL = "UPDATE kompy SET IBP_NAME='" & rs.Fields("PRINTER_NAME_1").Value &
+                            "',IBP_SN='" & rs.Fields("PRINTER_SN_1").Value &
+                            "',IBP_PROIZV='" & rs.Fields("PRINTER_PROIZV_1").Value &
+                            "',INV_NO_IBP='" & rs.Fields("INV_NO_PRINTER").Value & "' where id=" & sSID
+
                         rs1 = New Recordset
-                        rs1.Open("Select IBP_NAME,IBP_SN,IBP_PROIZV,INV_NO_IBP from kompy where id=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
-                                 LockTypeEnum.adLockOptimistic)
-
-                        With rs1
-                            rs1.Fields("IBP_NAME").Value = rs.Fields("PRINTER_NAME_1").Value
-                            rs1.Fields("IBP_SN").Value = rs.Fields("PRINTER_SN_1").Value
-                            rs1.Fields("IBP_PROIZV").Value = rs.Fields("PRINTER_PROIZV_1").Value
-                            rs1.Fields("INV_NO_IBP").Value = rs.Fields("INV_NO_PRINTER").Value
-
-                            .Update()
-                        End With
-
-                        rs1.Close()
+                        rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
                         rs1 = New Recordset
@@ -3306,18 +3131,13 @@ Error_:
 
                         tId = .Fields("id").Value
 
+                        sSQL = "UPDATE kompy SET KEYBOARD_NAME='" & rs.Fields("PRINTER_NAME_1").Value &
+                           "',KEYBOARD_SN='" & rs.Fields("PRINTER_SN_1").Value &
+                           "',KEYBOARD_PROIZV='" & rs.Fields("PRINTER_PROIZV_1").Value &
+                            "' where id=" & sSID
+
                         rs1 = New Recordset
-                        rs1.Open("Select KEYBOARD_NAME,KEYBOARD_SN,KEYBOARD_PROIZV from kompy where id=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
-                                 LockTypeEnum.adLockOptimistic)
-
-                        With rs1
-                            rs1.Fields("KEYBOARD_NAME").Value = rs.Fields("PRINTER_NAME_1").Value
-                            rs1.Fields("KEYBOARD_SN").Value = rs.Fields("PRINTER_SN_1").Value
-                            rs1.Fields("KEYBOARD_PROIZV").Value = rs.Fields("PRINTER_PROIZV_1").Value
-                            .Update()
-                        End With
-
-                        rs1.Close()
+                        rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
                         rs1 = New Recordset
@@ -3339,9 +3159,6 @@ Error_:
                         rs1.Open("Delete from kompy where id=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
                                  LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
-
-                        ' Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & tId)
-                        ' frmComputers.lstGroups.SelectedNode.Remove()
 
                         .MoveNext()
                     Loop
@@ -3361,18 +3178,13 @@ Error_:
 
                         tId = .Fields("id").Value
 
+                        sSQL = "UPDATE kompy SET MOUSE_NAME='" & rs.Fields("PRINTER_NAME_1").Value &
+                           "',MOUSE_SN='" & rs.Fields("PRINTER_SN_1").Value &
+                           "',MOUSE_PROIZV='" & rs.Fields("PRINTER_PROIZV_1").Value &
+                            "' where id=" & sSID
+
                         rs1 = New Recordset
-                        rs1.Open("Select MOUSE_NAME,MOUSE_SN,MOUSE_PROIZV from kompy where id=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
-                                 LockTypeEnum.adLockOptimistic)
-
-                        With rs1
-                            rs1.Fields("MOUSE_NAME").Value = rs.Fields("PRINTER_NAME_1").Value
-                            rs1.Fields("MOUSE_SN").Value = rs.Fields("PRINTER_SN_1").Value
-                            rs1.Fields("MOUSE_PROIZV").Value = rs.Fields("PRINTER_PROIZV_1").Value
-                            .Update()
-                        End With
-
-                        rs1.Close()
+                        rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
                         rs1 = New Recordset
@@ -3394,9 +3206,6 @@ Error_:
                         rs1.Open("Delete from kompy where id=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
                                  LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
-
-                        ' Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & tId)
-                        ' frmComputers.lstGroups.SelectedNode.Remove()
 
                         .MoveNext()
                     Loop
@@ -3418,18 +3227,13 @@ Error_:
 
                         tId = .Fields("id").Value
 
+                        sSQL = "UPDATE kompy SET FILTR_NAME='" & rs.Fields("PRINTER_NAME_1").Value &
+                           "',FILTR_SN='" & rs.Fields("PRINTER_SN_1").Value &
+                           "',FILTR_PROIZV='" & rs.Fields("PRINTER_PROIZV_1").Value &
+                            "' where id=" & sSID
+
                         rs1 = New Recordset
-                        rs1.Open("Select FILTR_NAME,FILTR_SN,FILTR_PROIZV from kompy where id=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
-                                 LockTypeEnum.adLockOptimistic)
-
-                        With rs1
-                            rs1.Fields("FILTR_NAME").Value = rs.Fields("PRINTER_NAME_1").Value
-                            rs1.Fields("FILTR_SN").Value = rs.Fields("PRINTER_SN_1").Value
-                            rs1.Fields("FILTR_PROIZV").Value = rs.Fields("PRINTER_PROIZV_1").Value
-                            .Update()
-                        End With
-
-                        rs1.Close()
+                        rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
 
                         rs1 = New Recordset
@@ -3451,10 +3255,6 @@ Error_:
                         rs1.Open("Delete from kompy where id=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
                                  LockTypeEnum.adLockOptimistic)
                         rs1 = Nothing
-
-                        ' Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & tId)
-                        ' frmComputers.lstGroups.SelectedNode.Remove()
-
 
                         .MoveNext()
                     Loop
@@ -3546,72 +3346,41 @@ Error_:
                         Dim rs As Recordset
                         Dim sSQL As String
 
-                        sSQL = "SELECT * FROM kompy"
+                        sSQL = "INSERT INTO kompy ([date],TIPtehn,PRINTER_NAME_1,PRINTER_SN_1,PRINTER_PROIZV_1" &
+                               ",INV_NO_PRINTER,port_1,FILIAL,mesto,kabn,OTvetstvennyj,TELEPHONE,NET_IP_1,NET_MAC_1,OS,NET_NAME,PSEVDONIM,PCL,port_2," &
+                               "SFAktNo,CenaRub,StoimRub,Zaiavk,DataVVoda,dataSF,Spisan,Balans) VALUES ('" &
+                               Date.Today &
+                                "', 'Printer', '" &
+                                rsdb.Fields("PRINTER_NAME_1").Value & "','" &
+                                rsdb.Fields("PRINTER_SN_1").Value & "','" &
+                                rsdb.Fields("PRINTER_PROIZV_1").Value & "','" &
+                                rsdb.Fields("INV_NO_PRINTER").Value & "'," &
+                                "'','" &
+                                sBranch & "','" &
+                                sDepartment & "','" &
+                                sOffice & "','" &
+                                rsdb.Fields("OTvetstvennyj").Value & "','" &
+                                rsdb.Fields("TELEPHONE").Value & "'," &
+                                "'', '', '','" &
+                                rsdb.Fields("PRINTER_NAME_1").Value & "','" &
+                                rsdb.Fields("PRINTER_NAME_1").Value & "'," &
+                                sSID & ",'" &
+                                rsdb.Fields("port_1").Value &
+                                "','0','0','0','0','" &
+                                rsdb.Fields("DataVVoda").Value & "','" &
+                                rsdb.Fields("dataSF").Value &
+                                "',0,0)"
 
                         rs = New Recordset
                         rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-                        With rs
-                            .AddNew()
-
-                            .Fields("date").Value = Date.Today
-                            .Fields("TIPtehn").Value = "Printer"
-
-                            If Not IsDBNull(rsdb.Fields("PRINTER_NAME_1").Value) Then _
-                                .Fields("PRINTER_NAME_1").Value = rsdb.Fields("PRINTER_NAME_1").Value
-                            If Not IsDBNull(rsdb.Fields("PRINTER_SN_1").Value) Then _
-                                .Fields("PRINTER_SN_1").Value = rsdb.Fields("PRINTER_SN_1").Value
-                            If Not IsDBNull(rsdb.Fields("PRINTER_PROIZV_1").Value) Then _
-                                .Fields("PRINTER_PROIZV_1").Value = rsdb.Fields("PRINTER_PROIZV_1").Value
-                            If Not IsDBNull(rsdb.Fields("INV_NO_PRINTER").Value) Then _
-                                .Fields("INV_NO_PRINTER").Value = rsdb.Fields("INV_NO_PRINTER").Value
-
-                            .Fields("port_1").Value = ""
-                            .Fields("FILIAL").Value = sBranch
-                            .Fields("mesto").Value = sDepartment
-                            .Fields("kabn").Value = sOffice
-                            If Not IsDBNull(rsdb.Fields("OTvetstvennyj").Value) Then _
-                                .Fields("OTvetstvennyj").Value = rsdb.Fields("OTvetstvennyj").Value
-                            If Not IsDBNull(rsdb.Fields("TELEPHONE").Value) Then _
-                                .Fields("TELEPHONE").Value = rsdb.Fields("TELEPHONE").Value
-                            .Fields("NET_IP_1").Value = ""
-                            .Fields("NET_MAC_1").Value = ""
-                            .Fields("OS").Value = ""
-                            .Fields("NET_NAME").Value = rsdb.Fields("PRINTER_NAME_1").Value
-                            .Fields("PSEVDONIM").Value = rsdb.Fields("PRINTER_NAME_1").Value
-                            .Fields("PCL").Value = sSID
-
-                            .Fields("port_2").Value = rsdb.Fields("port_1").Value
-                            .Fields("SFAktNo").Value = 0
-                            .Fields("CenaRub").Value = 0
-                            .Fields("StoimRub").Value = 0
-                            .Fields("Zaiavk").Value = 0
-                            .Fields("DataVVoda").Value = rsdb.Fields("DataVVoda").Value
-                            .Fields("dataSF").Value = rsdb.Fields("dataSF").Value
-                            .Fields("Spisan").Value = 0
-                            .Fields("Balans").Value = 0
-
-                            .Update()
-                        End With
-
-                        rs.Close()
                         rs = Nothing
 
-                        sSQL = "SELECT PRINTER_NAME_1,PRINTER_SN_1,PRINTER_PROIZV_1,port_1,INV_NO_PRINTER FROM kompy where id=" & sSID
+                        sSQL = "UPDATE kompy SET PRINTER_NAME_1='',PRINTER_SN_1='',PRINTER_PROIZV_1='',INV_NO_PRINTER='',port_1='' where id=" & sSID
 
                         rs = New Recordset
                         rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-                        With rs
-                            .Fields("PRINTER_NAME_1").Value = ""
-                            .Fields("PRINTER_SN_1").Value = ""
-                            .Fields("PRINTER_PROIZV_1").Value = ""
-                            .Fields("INV_NO_PRINTER").Value = ""
-                            .Fields("port_1").Value = ""
-                            .Update()
-                        End With
-
-                        rs.Close()
                         rs = Nothing
 
                         Dim rsBK As Recordset
@@ -3658,79 +3427,39 @@ Error_:
                         Dim rs As Recordset
                         Dim sSQL As String
 
-                        sSQL = "SELECT * FROM kompy"
+                        sSQL = "INSERT INTO kompy ([date],TIPtehn,PRINTER_NAME_1,PRINTER_SN_1,PRINTER_PROIZV_1" &
+                              ",INV_NO_PRINTER,port_1,FILIAL,mesto,kabn,OTvetstvennyj,TELEPHONE,NET_IP_1,NET_MAC_1,OS,NET_NAME,PSEVDONIM,PCL,port_2," &
+                              "SFAktNo,CenaRub,StoimRub,Zaiavk,DataVVoda,dataSF,Spisan,Balans) VALUES ('" &
+                              Date.Today &
+                               "', 'Printer', '" &
+                               rsdb.Fields("PRINTER_NAME_2").Value & "','" &
+                               rsdb.Fields("PRINTER_SN_2").Value & "','" &
+                               rsdb.Fields("PRINTER_PROIZV_2").Value & "','" &
+                               rsdb.Fields("INV_NO_PRINTER").Value & "'," &
+                               "'','" &
+                               sBranch & "','" &
+                               sDepartment & "','" &
+                               sOffice & "','" &
+                               rsdb.Fields("OTvetstvennyj").Value & "','" &
+                               rsdb.Fields("TELEPHONE").Value & "'," &
+                               "'', '', '','" &
+                               rsdb.Fields("PRINTER_NAME_2").Value & "','" &
+                               rsdb.Fields("PRINTER_NAME_2").Value & "'," &
+                               sSID & ",'" &
+                               rsdb.Fields("port_2").Value &
+                               "','0','0','0','0','" &
+                               rsdb.Fields("DataVVoda").Value & "','" &
+                               rsdb.Fields("dataSF").Value &
+                               "',0,0)"
 
                         rs = New Recordset
                         rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
-
-                        With rs
-                            .AddNew()
-
-                            .Fields("date").Value = Date.Today
-                            .Fields("TIPtehn").Value = "Printer"
-
-                            If Not IsDBNull(rsdb.Fields("PRINTER_NAME_2").Value) Then _
-                                .Fields("PRINTER_NAME_1").Value = rsdb.Fields("PRINTER_NAME_2").Value
-                            If Not IsDBNull(rsdb.Fields("PRINTER_SN_2").Value) Then _
-                                .Fields("PRINTER_SN_1").Value = rsdb.Fields("PRINTER_SN_2").Value
-                            If Not IsDBNull(rsdb.Fields("PRINTER_PROIZV_2").Value) Then _
-                                .Fields("PRINTER_PROIZV_1").Value = rsdb.Fields("PRINTER_PROIZV_2").Value
-                            If Not IsDBNull(rsdb.Fields("INV_NO_PRINTER").Value) Then _
-                                .Fields("INV_NO_PRINTER").Value = rsdb.Fields("INV_NO_PRINTER").Value
-
-
-                            .Fields("port_1").Value = ""
-                            .Fields("FILIAL").Value = sBranch
-                            .Fields("mesto").Value = sDepartment
-                            .Fields("kabn").Value = sOffice
-                            If Not IsDBNull(rsdb.Fields("OTvetstvennyj").Value) Then _
-                                .Fields("OTvetstvennyj").Value = rsdb.Fields("OTvetstvennyj").Value
-                            If Not IsDBNull(rsdb.Fields("TELEPHONE").Value) Then _
-                                .Fields("TELEPHONE").Value = rsdb.Fields("TELEPHONE").Value
-                            .Fields("NET_IP_1").Value = ""
-                            .Fields("NET_MAC_1").Value = ""
-                            .Fields("OS").Value = ""
-                            .Fields("NET_NAME").Value = rsdb.Fields("PRINTER_NAME_2").Value
-                            .Fields("PSEVDONIM").Value = rsdb.Fields("PRINTER_NAME_2").Value
-                            .Fields("PCL").Value = sSID
-
-                            .Fields("port_2").Value = rsdb.Fields("port_2").Value
-
-                            .Fields("SFAktNo").Value = 0
-                            .Fields("CenaRub").Value = 0
-                            .Fields("StoimRub").Value = 0
-
-                            .Fields("Zaiavk").Value = 0
-
-                            .Fields("DataVVoda").Value = rsdb.Fields("DataVVoda").Value
-                            .Fields("dataSF").Value = rsdb.Fields("dataSF").Value
-
-                            .Fields("Spisan").Value = 0
-                            .Fields("Balans").Value = 0
-
-                            .Update()
-                        End With
-
-                        rs.Close()
                         rs = Nothing
-
-
-                        sSQL = "SELECT PRINTER_NAME_2,PRINTER_SN_2,PRINTER_PROIZV_2,Iport_2,NV_NO_PRINTER FROM kompy where id=" & sSID
+                       
+                        sSQL = "UPDATE kompy SET PRINTER_NAME_2='',PRINTER_SN_2='',PRINTER_PROIZV_2='',INV_NO_PRINTER='',port_2='' where id=" & sSID
 
                         rs = New Recordset
                         rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
-                        With rs
-                            .Fields("PRINTER_NAME_2").Value = ""
-                            .Fields("PRINTER_SN_2").Value = ""
-                            .Fields("PRINTER_PROIZV_2").Value = ""
-                            .Fields("INV_NO_PRINTER").Value = ""
-                            .Fields("port_2").Value = ""
-                            .Update()
-                        End With
-
-                        rs.Close()
                         rs = Nothing
 
                         Dim rsBK As Recordset
@@ -3785,82 +3514,41 @@ Error_:
                         Dim rs As Recordset
                         Dim sSQL As String
 
-                        sSQL = "SELECT * FROM kompy"
+                        sSQL = "INSERT INTO kompy ([date],TIPtehn,PRINTER_NAME_1,PRINTER_SN_1,PRINTER_PROIZV_1" &
+                              ",INV_NO_PRINTER,port_1,FILIAL,mesto,kabn,OTvetstvennyj,TELEPHONE,NET_IP_1,NET_MAC_1,OS,NET_NAME,PSEVDONIM,PCL,port_2," &
+                              "SFAktNo,CenaRub,StoimRub,Zaiavk,DataVVoda,dataSF,Spisan,Balans) VALUES ('" &
+                              Date.Today &
+                               "', 'Printer', '" &
+                               rsdb.Fields("PRINTER_NAME_3").Value & "','" &
+                               rsdb.Fields("PRINTER_SN_3").Value & "','" &
+                               rsdb.Fields("PRINTER_PROIZV_3").Value & "','" &
+                               rsdb.Fields("INV_NO_PRINTER").Value & "'," &
+                               "'','" &
+                               sBranch & "','" &
+                               sDepartment & "','" &
+                               sOffice & "','" &
+                               rsdb.Fields("OTvetstvennyj").Value & "','" &
+                               rsdb.Fields("TELEPHONE").Value & "'," &
+                               "'', '', '','" &
+                               rsdb.Fields("PRINTER_NAME_3").Value & "','" &
+                               rsdb.Fields("PRINTER_NAME_3").Value & "'," &
+                               sSID & ",'" &
+                               rsdb.Fields("port_3").Value &
+                               "','0','0','0','0','" &
+                               rsdb.Fields("DataVVoda").Value & "','" &
+                               rsdb.Fields("dataSF").Value &
+                               "',0,0)"
+
+                        rs = New Recordset
+                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        rs = Nothing
+
+                        sSQL = "UPDATE kompy SET PRINTER_NAME_3='',PRINTER_SN_3='',PRINTER_PROIZV_3='',INV_NO_PRINTER='',port_3='' where id=" & sSID
 
                         rs = New Recordset
                         rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-
-                        With rs
-
-                            .AddNew()
-                            .Fields("date").Value = Date.Today
-                            .Fields("TIPtehn").Value = "Printer"
-
-                            If Not IsDBNull(rsdb.Fields("PRINTER_NAME_3").Value) Then _
-                                .Fields("PRINTER_NAME_1").Value = rsdb.Fields("PRINTER_NAME_3").Value
-                            If Not IsDBNull(rsdb.Fields("PRINTER_SN_3").Value) Then _
-                                .Fields("PRINTER_SN_1").Value = rsdb.Fields("PRINTER_SN_3").Value
-                            If Not IsDBNull(rsdb.Fields("PRINTER_PROIZV_3").Value) Then _
-                                .Fields("PRINTER_PROIZV_1").Value = rsdb.Fields("PRINTER_PROIZV_3").Value
-                            If Not IsDBNull(rsdb.Fields("INV_NO_PRINTER").Value) Then _
-                                .Fields("INV_NO_PRINTER").Value = rsdb.Fields("INV_NO_PRINTER").Value
-
-                            .Fields("port_1").Value = ""
-                            .Fields("FILIAL").Value = sBranch
-                            .Fields("mesto").Value = sDepartment
-                            .Fields("kabn").Value = sOffice
-
-                            If Not IsDBNull(rsdb.Fields("OTvetstvennyj").Value) Then _
-                                .Fields("OTvetstvennyj").Value = rsdb.Fields("OTvetstvennyj").Value
-                            If Not IsDBNull(rsdb.Fields("TELEPHONE").Value) Then _
-                                .Fields("TELEPHONE").Value = rsdb.Fields("TELEPHONE").Value
-
-                            .Fields("NET_IP_1").Value = ""
-                            .Fields("NET_MAC_1").Value = ""
-                            .Fields("OS").Value = ""
-                            .Fields("NET_NAME").Value = rsdb.Fields("PRINTER_NAME_3").Value
-                            .Fields("PSEVDONIM").Value = rsdb.Fields("PRINTER_NAME_3").Value
-                            .Fields("PCL").Value = sSID
-
-                            .Fields("port_2").Value = rsdb.Fields("port_3").Value
-
-                            .Fields("SFAktNo").Value = 0
-                            .Fields("CenaRub").Value = 0
-                            .Fields("StoimRub").Value = 0
-
-                            .Fields("Zaiavk").Value = 0
-
-                            .Fields("DataVVoda").Value = rsdb.Fields("DataVVoda").Value
-                            .Fields("dataSF").Value = rsdb.Fields("dataSF").Value
-
-                            .Fields("Spisan").Value = 0
-                            .Fields("Balans").Value = 0
-
-                            .Update()
-                        End With
-
-                        rs.Close()
                         rs = Nothing
-
-
-                        sSQL = "SELECT PRINTER_NAME_3,PRINTER_SN_3,PRINTER_PROIZV_3,Iport_3,NV_NO_PRINTER FROM kompy where id=" & sSID
-
-                        rs = New Recordset
-                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
-                        With rs
-                            .Fields("PRINTER_NAME_3").Value = ""
-                            .Fields("PRINTER_SN_3").Value = ""
-                            .Fields("PRINTER_PROIZV_3").Value = ""
-                            .Fields("INV_NO_PRINTER").Value = ""
-                            .Fields("port_3").Value = ""
-                            .Update()
-                        End With
-
-                        rs.Close()
-                        rs = Nothing
-
 
                         Dim rsBK As Recordset
                         rsBK = New Recordset
@@ -3910,80 +3598,23 @@ Error_:
                         Dim rs As Recordset
                         Dim sSQL As String
 
-                        sSQL = "SELECT * FROM kompy"
+                        sSQL = "INSERT INTO kompy (MONITOR_NAME,MONITOR_DUM,MONITOR_SN,MONITOR_PROIZV,port_1,INV_NO_MONITOR,OTvetstvennyj,TELEPHONE,NET_NAME,PSEVDONIM,PCL,[date],TIPtehn,FILIAL,mesto,kabn," &
+                            "SFAktNo,CenaRub,StoimRub,Zaiavk,DataVVoda,dataSF,Spisan,Balans) VALUES ('" &
+                            rsdb.Fields("MONITOR_NAME").Value & "','" & rsdb.Fields("MONITOR_DUM").Value & "','" & rsdb.Fields("MONITOR_SN").Value & "','" &
+                            rsdb.Fields("MONITOR_PROIZV").Value & "','','" & rsdb.Fields("INV_NO_MONITOR").Value & "','" &
+                             rsdb.Fields("OTvetstvennyj").Value & "','" & rsdb.Fields("TELEPHONE").Value & "','" & rsdb.Fields("MONITOR_NAME").Value & "','" &
+                             rsdb.Fields("MONITOR_NAME").Value & "'," & sSID & ",'" & Date.Today & "','" &
+                             "MONITOR" & "','" & sBranch & "','" & sDepartment & "','" & sOffice & "','0','0','0','0','" & rsdb.Fields("DataVVoda").Value & "','" & rsdb.Fields("dataSF").Value & "',0,0)"
 
                         rs = New Recordset
                         rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
-
-                        With rs
-
-                            .AddNew()
-
-                            .Fields("MONITOR_NAME").Value = rsdb.Fields("MONITOR_NAME").Value
-                            .Fields("MONITOR_DUM").Value = rsdb.Fields("MONITOR_DUM").Value
-                            .Fields("MONITOR_SN").Value = rsdb.Fields("MONITOR_SN").Value
-                            .Fields("MONITOR_PROIZV").Value = rsdb.Fields("MONITOR_PROIZV").Value
-
-                            .Fields("port_1").Value = ""
-
-
-                            If Not IsDBNull(rsdb.Fields("INV_NO_MONITOR").Value) Then _
-                                .Fields("INV_NO_MONITOR").Value = rsdb.Fields("INV_NO_MONITOR").Value
-
-                            If Not IsDBNull(rsdb.Fields("OTvetstvennyj").Value) Then _
-                                .Fields("OTvetstvennyj").Value = rsdb.Fields("OTvetstvennyj").Value
-                            If Not IsDBNull(rsdb.Fields("TELEPHONE").Value) Then _
-                                .Fields("TELEPHONE").Value = rsdb.Fields("TELEPHONE").Value
-
-                            If Not IsDBNull(rsdb.Fields("MONITOR_NAME").Value) Then _
-                                .Fields("NET_NAME").Value = rsdb.Fields("MONITOR_NAME").Value
-                            If Not IsDBNull(rsdb.Fields("MONITOR_NAME").Value) Then _
-                                .Fields("PSEVDONIM").Value = rsdb.Fields("MONITOR_NAME").Value
-
-
-                            .Fields("PCL").Value = sSID
-                            .Fields("date").Value = Date.Today
-                            .Fields("TIPtehn").Value = "MONITOR"
-
-                            .Fields("FILIAL").Value = sBranch
-                            .Fields("mesto").Value = sDepartment
-                            .Fields("kabn").Value = sOffice
-
-                            .Fields("SFAktNo").Value = 0
-                            .Fields("CenaRub").Value = 0
-                            .Fields("StoimRub").Value = 0
-
-                            .Fields("Zaiavk").Value = 0
-
-                            .Fields("DataVVoda").Value = rsdb.Fields("DataVVoda").Value
-                            .Fields("dataSF").Value = rsdb.Fields("dataSF").Value
-
-                            .Fields("Spisan").Value = 0
-                            .Fields("Balans").Value = 0
-
-                            .Update()
-                        End With
-
-                        rs.Close()
                         rs = Nothing
 
 
-                        sSQL = "SELECT MONITOR_NAME,MONITOR_DUM,MONITOR_SN,MONITOR_PROIZV,INV_NO_MONITOR FROM kompy where id=" & sSID
-
+                        sSQL = "UPDATE kompy SET MONITOR_NAME='',MONITOR_DUM='',MONITOR_SN='',MONITOR_PROIZV='',INV_NO_MONITOR='' where id=" & sSID
                         rs = New Recordset
                         rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-                        With rs
-                            .Fields("MONITOR_NAME").Value = ""
-                            .Fields("MONITOR_DUM").Value = ""
-                            .Fields("MONITOR_SN").Value = ""
-                            .Fields("MONITOR_PROIZV").Value = ""
-                            .Fields("INV_NO_MONITOR").Value = ""
-                            .Update()
-                        End With
-
-                        rs.Close()
                         rs = Nothing
 
                         On Error Resume Next
@@ -4004,7 +3635,6 @@ Error_:
                         rsBK.Close()
                         rsBK = Nothing
 
-
                         objIniFile.WriteString("general", "DK", sPRN)
                         objIniFile.WriteString("general", "Default", 0)
 
@@ -4024,7 +3654,6 @@ Error_:
 
             End If
 
-
             If sTEMP3 = 0 Or sTEMP3 = 3 Then
                 'ИБП
                 sTEMP0 = rsdb.Fields("IBP_NAME").Value
@@ -4043,77 +3672,20 @@ Error_:
                             AddTwoPar(sTEMP0, rsdb.Fields("IBP_PROIZV").Value, "SPR_IBP", frmComputers.cmbOTH)
                         End If
 
-
-                        sSQL = "SELECT * FROM kompy"
+                        sSQL = "INSERT INTO kompy (PRINTER_NAME_1,PRINTER_SN_1,IBP_PROIZV,OTvetstvennyj,TELEPHONE,NET_NAME,PSEVDONIM,PCL,TIPtehn,INV_NO_PRINTER,FILIAL,mesto,kabn," &
+                            "SFAktNo,CenaRub,StoimRub,Zaiavk,DataVVoda,dataSF,Spisan,Balans) VALUES ('" &
+                                sTEMP0 & "','" & rsdb.Fields("IBP_SN").Value & "','" & rsdb.Fields("IBP_PROIZV").Value & "','" & rsdb.Fields("OTvetstvennyj").Value & "','" & rsdb.Fields("TELEPHONE").Value & "','" &
+                                sTEMP0 & "','" & sTEMP0 & "'," & sSID & ",'" &
+                                "IBP" & "','" & rsdb.Fields("INV_NO_IBP").Value & "','" & sBranch & "','" & sDepartment & "','" & sOffice & "','0','0','0','0','" & rsdb.Fields("DataVVoda").Value & "','" & rsdb.Fields("dataSF").Value & "',0,0)"
 
                         rs = New Recordset
                         rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
-
-                        With rs
-
-                            .AddNew()
-
-                            .Fields("PRINTER_NAME_1").Value = sTEMP0
-
-                            If Not IsDBNull(rsdb.Fields("IBP_SN").Value) Then _
-                                .Fields("PRINTER_SN_1").Value = rsdb.Fields("IBP_SN").Value
-                            If Not IsDBNull(rsdb.Fields("PRINTER_PROIZV_1").Value) Then _
-                                .Fields("IBP_PROIZV").Value = rsdb.Fields("PRINTER_PROIZV_1").Value
-
-                            .Fields("port_1").Value = ""
-
-                            If Not IsDBNull(rsdb.Fields("OTvetstvennyj").Value) Then _
-                                .Fields("OTvetstvennyj").Value = rsdb.Fields("OTvetstvennyj").Value
-                            If Not IsDBNull(rsdb.Fields("TELEPHONE").Value) Then _
-                                .Fields("TELEPHONE").Value = rsdb.Fields("TELEPHONE").Value
-
-
-                            .Fields("NET_NAME").Value = sTEMP0
-                            .Fields("PSEVDONIM").Value = sTEMP0
-                            .Fields("TIP_COMPA").Value = "ИБП"
-                            .Fields("PCL").Value = sSID
-                            .Fields("TIPtehn").Value = "IBP"
-                            .Fields("INV_NO_PRINTER").Value = rsdb.Fields("INV_NO_IBP").Value
-
-                            .Fields("FILIAL").Value = sBranch
-                            .Fields("mesto").Value = sDepartment
-                            .Fields("kabn").Value = sOffice
-
-                            .Fields("date").Value = Date.Today
-                            .Fields("SFAktNo").Value = 0
-                            .Fields("CenaRub").Value = 0
-                            .Fields("StoimRub").Value = 0
-
-                            .Fields("Zaiavk").Value = 0
-
-                            .Fields("DataVVoda").Value = rsdb.Fields("DataVVoda").Value
-                            .Fields("dataSF").Value = rsdb.Fields("dataSF").Value
-
-                            .Fields("Spisan").Value = 0
-                            .Fields("Balans").Value = 0
-
-                            .Update()
-                        End With
-
-                        rs.Close()
                         rs = Nothing
 
-
-                        sSQL = "SELECT IBP_NAME,IBP_SN,IBP_PROIZV,INV_NO_IBP FROM kompy where id=" & sSID
+                        sSQL = "UPDATE kompy SET IBP_NAME='',IBP_SN='',IBP_PROIZV='',INV_NO_IBP='' where id=" & sSID
 
                         rs = New Recordset
                         rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
-                        With rs
-                            .Fields("IBP_NAME").Value = ""
-                            .Fields("IBP_SN").Value = ""
-                            .Fields("IBP_PROIZV").Value = ""
-                            .Fields("INV_NO_IBP").Value = ""
-                            .Update()
-                        End With
-
-                        rs.Close()
                         rs = Nothing
 
 
@@ -4173,77 +3745,24 @@ Error_:
                             AddTwoPar(sTEMP0, rsdb.Fields("KEYBOARD_PROIZV").Value, "SPR_KEYBOARD", frmComputers.cmbOTH)
                         End If
 
-
-                        sSQL = "SELECT * FROM kompy"
-
                         rs = New Recordset
                         rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-
-                        With rs
-
-                            .AddNew()
-
-
-                            .Fields("PRINTER_NAME_1").Value = sTEMP0
-
-                            If Not IsDBNull(rsdb.Fields("KEYBOARD_SN").Value) Then _
-                                .Fields("PRINTER_SN_1").Value = rsdb.Fields("KEYBOARD_SN").Value
-                            If Not IsDBNull(rsdb.Fields("PRINTER_PROIZV_1").Value) Then _
-                                .Fields("PRINTER_PROIZV_1").Value = rsdb.Fields("KEYBOARD_PROIZV").Value
-
-                            .Fields("port_1").Value = ""
-
-                            If Not IsDBNull(rsdb.Fields("OTvetstvennyj").Value) Then _
-                                .Fields("OTvetstvennyj").Value = rsdb.Fields("OTvetstvennyj").Value
-                            If Not IsDBNull(rsdb.Fields("TELEPHONE").Value) Then _
-                                .Fields("TELEPHONE").Value = rsdb.Fields("TELEPHONE").Value
-
-                            .Fields("NET_NAME").Value = sTEMP0
-                            .Fields("PSEVDONIM").Value = sTEMP0
-                            .Fields("TIP_COMPA").Value = "Клавиатура"
-                            .Fields("PCL").Value = sSID
-                            .Fields("TIPtehn").Value = "KEYB"
-
-                            .Fields("FILIAL").Value = sBranch
-                            .Fields("mesto").Value = sDepartment
-                            .Fields("kabn").Value = sOffice
-
-                            .Fields("date").Value = Date.Today
-                            .Fields("SFAktNo").Value = 0
-                            .Fields("CenaRub").Value = 0
-                            .Fields("StoimRub").Value = 0
-
-                            .Fields("Zaiavk").Value = 0
-
-                            .Fields("DataVVoda").Value = rsdb.Fields("DataVVoda").Value
-                            .Fields("dataSF").Value = rsdb.Fields("dataSF").Value
-
-                            .Fields("Spisan").Value = 0
-                            .Fields("Balans").Value = 0
-
-                            .Update()
-                        End With
-
-                        rs.Close()
-                        rs = Nothing
-
-
-                        sSQL = "SELECT KEYBOARD_NAME,KEYBOARD_SN,KEYBOARD_PROIZV FROM kompy where id=" & sSID
+                        sSQL = "INSERT INTO kompy (PRINTER_NAME_1,PRINTER_SN_1,PRINTER_PROIZV_1,OTvetstvennyj,TELEPHONE,NET_NAME,PSEVDONIM,PCL,TIPtehn,INV_NO_PRINTER,FILIAL,mesto,kabn," &
+                           "SFAktNo,CenaRub,StoimRub,Zaiavk,DataVVoda,dataSF,Spisan,Balans) VALUES ('" &
+                               sTEMP0 & "','" & rsdb.Fields("KEYBOARD_SN").Value & "','" & rsdb.Fields("KEYBOARD_PROIZV").Value & "','" & rsdb.Fields("OTvetstvennyj").Value & "','" & rsdb.Fields("TELEPHONE").Value & "','" &
+                               sTEMP0 & "','" & sTEMP0 & "'," & sSID & ",'" &
+                               "KEYB" & "','" & rsdb.Fields("INV_NO_IBP").Value & "','" & sBranch & "','" & sDepartment & "','" & sOffice & "','0','0','0','0','" & rsdb.Fields("DataVVoda").Value & "','" & rsdb.Fields("dataSF").Value & "',0,0)"
 
                         rs = New Recordset
                         rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
-                        With rs
-                            .Fields("KEYBOARD_NAME").Value = ""
-                            .Fields("KEYBOARD_SN").Value = ""
-                            .Fields("KEYBOARD_PROIZV").Value = ""
-                            .Update()
-                        End With
-
-                        rs.Close()
                         rs = Nothing
 
+                        sSQL = "UPDATE kompy SET KEYBOARD_NAME='',KEYBOARD_SN='',KEYBOARD_PROIZV='' where id=" & sSID
+
+                        rs = New Recordset
+                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        rs = Nothing
 
                         Dim rsBK As Recordset
                         rsBK = New Recordset
@@ -4296,68 +3815,22 @@ Error_:
                         End If
 
 
-                        sSQL = "SELECT * FROM kompy"
+                        sSQL = "INSERT INTO kompy (PRINTER_NAME_1,PRINTER_SN_1,PRINTER_PROIZV_1,OTvetstvennyj,TELEPHONE,NET_NAME,PSEVDONIM,PCL,TIPtehn,INV_NO_PRINTER,FILIAL,mesto,kabn," &
+                          "SFAktNo,CenaRub,StoimRub,Zaiavk,DataVVoda,dataSF,Spisan,Balans) VALUES ('" &
+                              sTEMP0 & "','" & rsdb.Fields("MOUSE_SN").Value & "','" & rsdb.Fields("MOUSE_PROIZV").Value & "','" & rsdb.Fields("OTvetstvennyj").Value & "','" & rsdb.Fields("TELEPHONE").Value & "','" &
+                              sTEMP0 & "','" & sTEMP0 & "'," & sSID & ",'" &
+                              "MOUSE" & "','" & rsdb.Fields("INV_NO_IBP").Value & "','" & sBranch & "','" & sDepartment & "','" & sOffice & "','0','0','0','0','" & rsdb.Fields("DataVVoda").Value & "','" & rsdb.Fields("dataSF").Value & "',0,0)"
+
+                        rs = New Recordset
+                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        rs = Nothing
+
+                        sSQL = "UPDATE kompy SET MOUSE_NAME='',MOUSE_SN='',MOUSE_PROIZV='' where id=" & sSID
 
                         rs = New Recordset
                         rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-
-                        With rs
-
-                            .AddNew()
-
-                            .Fields("PRINTER_NAME_1").Value = sTEMP0
-                            .Fields("PRINTER_SN_1").Value = rsdb.Fields("MOUSE_SN").Value
-                            .Fields("PRINTER_PROIZV_1").Value = rsdb.Fields("MOUSE_PROIZV").Value
-                            .Fields("port_1").Value = ""
-
-                            .Fields("OTvetstvennyj").Value = rsdb.Fields("OTvetstvennyj").Value
-                            .Fields("TELEPHONE").Value = rsdb.Fields("TELEPHONE").Value
-                            .Fields("NET_NAME").Value = sTEMP0
-                            .Fields("PSEVDONIM").Value = sTEMP0
-                            .Fields("TIP_COMPA").Value = "Мышь"
-                            .Fields("PCL").Value = sSID
-                            .Fields("TIPtehn").Value = "MOUSE"
-
-                            .Fields("FILIAL").Value = sBranch
-                            .Fields("mesto").Value = sDepartment
-                            .Fields("kabn").Value = sOffice
-
-                            .Fields("date").Value = Date.Today
-                            .Fields("SFAktNo").Value = 0
-                            .Fields("CenaRub").Value = 0
-                            .Fields("StoimRub").Value = 0
-
-                            .Fields("Zaiavk").Value = 0
-
-                            .Fields("DataVVoda").Value = rsdb.Fields("DataVVoda").Value
-                            .Fields("dataSF").Value = rsdb.Fields("dataSF").Value
-
-                            .Fields("Spisan").Value = 0
-                            .Fields("Balans").Value = 0
-
-                            .Update()
-                        End With
-
-                        rs.Close()
                         rs = Nothing
-
-
-                        sSQL = "SELECT MOUSE_NAME,MOUSE_SN,MOUSE_PROIZV FROM kompy where id=" & sSID
-
-                        rs = New Recordset
-                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
-                        With rs
-                            .Fields("MOUSE_NAME").Value = ""
-                            .Fields("MOUSE_SN").Value = ""
-                            .Fields("MOUSE_PROIZV").Value = ""
-                            .Update()
-                        End With
-
-                        rs.Close()
-                        rs = Nothing
-
 
                         Dim rsBK As Recordset
                         rsBK = New Recordset
@@ -4437,68 +3910,22 @@ Error_:
                         End If
 
 
-                        sSQL = "SELECT * FROM kompy"
+                        sSQL = "INSERT INTO kompy (PRINTER_NAME_1,PRINTER_SN_1,PRINTER_PROIZV_1,OTvetstvennyj,TELEPHONE,NET_NAME,PSEVDONIM,PCL,TIPtehn,INV_NO_PRINTER,FILIAL,mesto,kabn," &
+                          "SFAktNo,CenaRub,StoimRub,Zaiavk,DataVVoda,dataSF,Spisan,Balans) VALUES ('" &
+                              sTEMP0 & "','" & rsdb.Fields("FILTR_SN").Value & "','" & rsdb.Fields("FILTR_PROIZV").Value & "','" & rsdb.Fields("OTvetstvennyj").Value & "','" & rsdb.Fields("TELEPHONE").Value & "','" &
+                              sTEMP0 & "','" & sTEMP0 & "'," & sSID & ",'" &
+                              "FS" & "','" & rsdb.Fields("INV_NO_IBP").Value & "','" & sBranch & "','" & sDepartment & "','" & sOffice & "','0','0','0','0','" & rsdb.Fields("DataVVoda").Value & "','" & rsdb.Fields("dataSF").Value & "',0,0)"
+
+                        rs = New Recordset
+                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        rs = Nothing
+
+                        sSQL = "UPDATE kompy SET FILTR_NAME='',FILTR_SN='',FILTR_PROIZV='' where id=" & sSID
 
                         rs = New Recordset
                         rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-
-                        With rs
-
-                            .AddNew()
-
-                            .Fields("PRINTER_NAME_1").Value = sTEMP0
-                            .Fields("PRINTER_SN_1").Value = rsdb.Fields("FILTR_SN").Value
-                            .Fields("PRINTER_PROIZV_1").Value = rsdb.Fields("FILTR_PROIZV").Value
-                            .Fields("port_1").Value = ""
-
-                            .Fields("OTvetstvennyj").Value = rsdb.Fields("OTvetstvennyj").Value
-                            .Fields("TELEPHONE").Value = rsdb.Fields("TELEPHONE").Value
-                            .Fields("NET_NAME").Value = sTEMP0
-                            .Fields("PSEVDONIM").Value = sTEMP0
-                            .Fields("TIP_COMPA").Value = "Сетевой фильтр"
-                            .Fields("PCL").Value = sSID
-                            .Fields("TIPtehn").Value = "FS"
-
-                            .Fields("FILIAL").Value = sBranch
-                            .Fields("mesto").Value = sDepartment
-                            .Fields("kabn").Value = sOffice
-
-                            .Fields("date").Value = Date.Today
-                            .Fields("SFAktNo").Value = 0
-                            .Fields("CenaRub").Value = 0
-                            .Fields("StoimRub").Value = 0
-
-                            .Fields("Zaiavk").Value = 0
-
-                            .Fields("DataVVoda").Value = rsdb.Fields("DataVVoda").Value
-                            .Fields("dataSF").Value = rsdb.Fields("dataSF").Value
-
-                            .Fields("Spisan").Value = 0
-                            .Fields("Balans").Value = 0
-
-                            .Update()
-                        End With
-
-                        rs.Close()
                         rs = Nothing
-
-
-                        sSQL = "SELECT FILTR_NAME,FILTR_SN,FILTR_PROIZV FROM kompy where id=" & sSID
-
-                        rs = New Recordset
-                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
-                        With rs
-                            .Fields("FILTR_NAME").Value = ""
-                            .Fields("FILTR_SN").Value = ""
-                            .Fields("FILTR_PROIZV").Value = ""
-                            .Update()
-                        End With
-
-                        rs.Close()
-                        rs = Nothing
-
 
                         Dim rsBK As Recordset
                         rsBK = New Recordset
@@ -4564,7 +3991,7 @@ Error_:
         Exit Sub
 
 err_:
-        'MsgBox(Err.Description)
+        MsgBox(Err.Description)
 
         If MRZD = True Then Exit Sub
 
@@ -4619,30 +4046,12 @@ Error_:
                             ByVal textNotes As TextBox, ByVal DateNotes As DateTimePicker, ByVal txtSNAME As String,
                             ByVal Branch As ComboBox, ByVal Department As ComboBox, ByVal Office As ComboBox)
 
-        On Error Resume Next
+        On Error GoTo err_
 
         If Len(textNotes.Text) = 0 Then Exit Sub
 
         Dim sSQL As String
         Dim langfile As New IniFile(sLANGPATH)
-
-
-        If btAdd.Text = langfile.GetString("frmComputers", "MSG30", "Добавить") Then
-            Call _
-                SaveActivityToLogDB(
-                    langfile.GetString("frmComputers", "MSG45", "Добавление заметки для") & " " &
-                    frmComputers.lstGroups.SelectedNode.Text)
-            sSQL = "Select * from Zametki"
-
-        Else
-            Call _
-                SaveActivityToLogDB(
-                    langfile.GetString("frmComputers", "MSG46", "Редактирование заметки для") & " " &
-                    frmComputers.lstGroups.SelectedNode.Text)
-            sSQL = "Select * from Zametki WHERE id =" & frmComputers.zCOUNT
-
-        End If
-
 
         Dim uname As String
 
@@ -4657,32 +4066,32 @@ Error_:
         End If
 
         Dim rs As Recordset
-        rs = New Recordset
-        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-        With rs
+        If btAdd.Text = langfile.GetString("frmComputers", "MSG30", "Добавить") Then
 
-            If btAdd.Text = langfile.GetString("frmComputers", "MSG42", "Сохранить") Then
-                '.Edit
-            Else
-                .AddNew()
-                .Fields("NomerZamKomp").Value = lvsNotes.Items.Count + 1
-            End If
+            Call _
+                SaveActivityToLogDB(
+                    langfile.GetString("frmComputers", "MSG45", "Добавление заметки для") & " " &
+                    frmComputers.lstGroups.SelectedNode.Text)
 
-            .Fields("Master").Value = NotesMaster.Text
-            .Fields("Zametki").Value = textNotes.Text
-            .Fields("Date").Value = DateNotes.Value
+            sSQL = "INSERT INTO Zametki (NomerZamKomp,Master,Zametki,[Date],Id_Comp,Comp_name,Mesto_Compa) VALUES (" & lvsNotes.Items.Count + 1 & ",'" & NotesMaster.Text & "','" & textNotes.Text & "','" & DateNotes.Value & "'," & frmComputers.sCOUNT & ",'" & txtSNAME & "','" & uname & "')"
 
-            .Fields("Id_Comp").Value = frmComputers.sCOUNT
+            rs = New Recordset
+            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+            rs = Nothing
 
-            .Fields("Comp_name").Value = txtSNAME
-            .Fields("Mesto_Compa").Value = uname
+        Else
+            Call _
+                SaveActivityToLogDB(
+                    langfile.GetString("frmComputers", "MSG46", "Редактирование заметки для") & " " &
+                    frmComputers.lstGroups.SelectedNode.Text)
 
-            .Update()
-        End With
+            sSQL = "UPDATE Zametki SET Master='" & NotesMaster.Text & "',Zametki='" & textNotes.Text & "',[Date]='" & DateNotes.Value & "' WHERE id =" & frmComputers.zCOUNT
+            rs = New Recordset
+            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+            rs = Nothing
 
-        rs.Close()
-        rs = Nothing
+        End If
 
         btAdd.Text = langfile.GetString("frmComputers", "MSG30", "Добавить")
         DateNotes.Value = Date.Today
@@ -4690,10 +4099,13 @@ Error_:
         textNotes.Text = ""
 
         Call LOAD_NOTES(frmComputers.sCOUNT, lvsNotes)
+
+        Exit Sub
+err_:
+        MsgBox(Err.Description)
     End Sub
 
     Public Sub NET_PORT_ED(Optional ByVal sSID As String = "")
-
 
         Dim langfile As New IniFile(sLANGPATH)
 
@@ -4709,198 +4121,31 @@ Error_:
             End If
         End If
 
-        Dim rs As Recordset
-        rs = New Recordset
         Dim sSQL As String
 
-        If frmComputers.portEDT = True Then
-            sSQL = "SELECT * FROM net_port WHERE id=" & sSID
-        Else
-            sSQL = "SELECT * FROM net_port"
-        End If
+        Select Case frmComputers.portEDT
 
+            Case False
+
+                sSQL = "INSERT INTO net_port (id_net,port,net_n,mac) VALUES (" & frmComputers.sCOUNT & ",'" & frmComputers.txtNetnumberPort.Text & "','" & frmComputers.txtNetPortMapping.Text & "','" & frmComputers.txtNetPortMac.Text & "') "
+
+            Case True
+
+                sSQL = "UPDATE net_port SET id_net=" & frmComputers.sCOUNT & ",port='" & frmComputers.txtNetnumberPort.Text & "',net_n='" & frmComputers.txtNetPortMapping.Text & "',mac='" & frmComputers.txtNetPortMac.Text & "' WHERE id=" & sSID
+
+        End Select
+
+        Dim rs As Recordset
+        rs = New Recordset
         rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
-        With rs
-            If frmComputers.portEDT = True Then
-            Else
-                .AddNew()
-            End If
-
-            .Fields("id_net").Value = frmComputers.sCOUNT
-            .Fields("port").Value = frmComputers.txtNetnumberPort.Text
-            .Fields("net_n").Value = frmComputers.txtNetPortMapping.Text
-            .Fields("mac").Value = frmComputers.txtNetPortMac.Text
-            .Update()
-
-        End With
-        rs.Close()
         rs = Nothing
+
         frmComputers.portEDT = False
         frmComputers.txtNetnumberPort.Text = ""
         frmComputers.txtNetPortMapping.Text = ""
         frmComputers.txtNetPortMac.Text = ""
 
         LOAD_NET_PORT(frmComputers.sCOUNT)
-    End Sub
-
-    Public Sub User_Comp_ADD()
-        On Error Resume Next
-        Dim langfile As New IniFile(sLANGPATH)
-
-
-        If frmComputers.sCOUNT = 0 Then Exit Sub
-        Dim Us1 As String
-        Dim Us2 As String
-
-        'esq 130713 импорт юзеров
-        If frmComputers.cmdUserAdd.Text = langfile.GetString("frmComputers", "MSG54", "Изменить") Then
-            frmComputers.lstUsers.SelectedItems(0).SubItems(2).Text = frmComputers.txtUserName.Text
-            frmComputers.lstUsers.SelectedItems(0).SubItems(1).Text = frmComputers.txtUserFIO.Text
-            If frmComputers.txtUserName.FindString(frmComputers.txtUserName.Text) < 0 Then
-                frmComputers.txtUserName.Items.Add(frmComputers.txtUserName.Text)
-            End If
-            If frmComputers.txtUserFIO.FindString(frmComputers.txtUserFIO.Text) < 0 Then
-                frmComputers.txtUserFIO.Items.Add(frmComputers.txtUserFIO.Text)
-            End If
-            Exit Sub
-        End If 'esq 130713 импорт юзеров
-
-        If frmComputers.cmdUserAdd.Text = langfile.GetString("frmComputers", "MSG42", "Сохранить") Then
-
-            Dim USERCOMP As Recordset
-            USERCOMP = New Recordset
-            USERCOMP.Open("SELECT * FROM USER_COMP WHERE id=" & frmComputers.uCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
-                          LockTypeEnum.adLockOptimistic)
-
-            With USERCOMP
-                If Not IsDBNull(.Fields("PASSWORD")) Then Us1 = .Fields("PASSWORD").Value
-                If Not IsDBNull(.Fields("EPASS")) Then Us2 = .Fields("EPASS").Value
-            End With
-            USERCOMP.Close()
-            USERCOMP = Nothing
-
-
-        End If
-
-        Dim sSQL As String
-        Dim rs As Recordset
-        rs = New Recordset
-
-        If frmComputers.cmdUserAdd.Text = langfile.GetString("frmComputers", "MSG30", "Добавить") Then
-            Call _
-                SaveActivityToLogDB(
-                    langfile.GetString("frmComputers", "MSG48", "Добавление пользователя на компьютере") & " " &
-                    frmComputers.lstGroups.SelectedNode.Text)
-            sSQL = "Select * from USER_COMP"
-        Else
-            Call _
-                SaveActivityToLogDB(
-                    langfile.GetString("frmComputers", "MSG49", "Редактирование пользователя на компьютере") & " " &
-                    frmComputers.lstGroups.SelectedNode.Text)
-            sSQL = "Select * from USER_COMP WHERE id =" & frmComputers.uCOUNT
-        End If
-
-        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
-        With rs
-
-            If frmComputers.cmdUserAdd.Text = langfile.GetString("frmComputers", "MSG42", "Сохранить") Then
-                '.Edit
-            Else
-                .AddNew()
-            End If
-
-            .Fields("Id_Comp").Value = frmComputers.sCOUNT
-            .Fields("USERNAME").Value = frmComputers.txtUserName.Text
-            .Fields("EMAIL").Value = frmComputers.txtUserEmail.Text
-            .Fields("FIO").Value = frmComputers.txtUserFIO.Text
-            .Fields("icq").Value = frmComputers.txtUserIcq.Text
-            .Fields("jabber").Value = frmComputers.txtUserJab.Text
-
-            'txtUserJab
-            If frmComputers.cmdUserAdd.Text = langfile.GetString("frmComputers", "MSG42", "Сохранить") Then
-
-
-                If Us1 = frmComputers.txtUserPass.Text Or Us1 = Nothing Then
-
-                Else
-                    strPassword = frmComputers.txtUserPass.Text
-                    EncryptDecrypt(strPassword)
-                    .Fields("PASSWORD").Value = Temp$
-                End If
-
-                If Us2 = frmComputers.txtUserEmailPwd.Text Or Us2 = Nothing Then
-
-                Else
-                    strPassword = frmComputers.txtUserEmailPwd.Text
-                    EncryptDecrypt(strPassword)
-                    .Fields("EPASS").Value = Temp$
-                End If
-
-            Else
-                strPassword = Trim(frmComputers.txtUserEmailPwd.Text)
-                Call EncryptDecrypt(strPassword)
-                frmComputers.txtUserEmailPwd.Text = Temp$
-
-                strPassword = Trim(frmComputers.txtUserPass.Text)
-                Call EncryptDecrypt(strPassword)
-                frmComputers.txtUserPass.Text = Temp$
-
-                .Fields("PASSWORD").Value = frmComputers.txtUserPass.Text
-                .Fields("EPASS").Value = frmComputers.txtUserEmailPwd.Text
-            End If
-
-            .Fields("MEMO").Value = frmComputers.txtUMEMO.Text
-
-            If frmComputers.ChkPDC.Checked = True Then
-                .Fields("PDC").Value = True
-            Else
-                .Fields("PDC").Value = False
-            End If
-
-
-            .Update()
-        End With
-
-        rs.Close()
-        rs = Nothing
-
-        If Not RSExists("USER", "name", Trim(frmComputers.txtUserName.Text)) Then
-
-
-            rs = New Recordset
-
-            rs.Open("Select * from SPR_USER ", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
-            With rs
-                .AddNew()
-                .Fields("name").Value = frmComputers.txtUserName.Text
-                .Fields("A").Value = frmComputers.txtUserFIO.Text
-                .Update()
-            End With
-            rs.Close()
-            rs = Nothing
-
-            frmComputers.txtUserName.Items.Add(frmComputers.txtUserName.Text)
-
-        End If
-
-
-        FillComboNET(frmComputers.txtUserName, "Name", "SPR_USER", "", False, True) 'esq 130713
-        FillComboNET(frmComputers.txtUserFIO, "A", "SPR_USER", "", False, True) 'esq 130713
-
-        frmComputers.cmdUserAdd.Text = langfile.GetString("frmComputers", "MSG30", "Добавить")
-
-        frmComputers.txtUserName.Text = ""
-        frmComputers.txtUserPass.Text = ""
-        frmComputers.txtUserEmail.Text = ""
-        frmComputers.txtUserEmailPwd.Text = ""
-        frmComputers.txtUserFIO.Text = ""
-        frmComputers.txtUserIcq.Text = ""
-        frmComputers.txtUMEMO.Text = ""
-
-        LOAD_USER(frmComputers.sCOUNT)
     End Sub
 
     Public Sub BR_NOTES_ADD()
@@ -4910,10 +4155,6 @@ Error_:
         Dim StrS As String
 
         Dim langfile As New IniFile(sLANGPATH)
-
-
-        Dim rs As Recordset
-
 
         Select Case frmComputers.sPREF
 
@@ -4930,6 +4171,7 @@ Error_:
 
         End Select
 
+        Dim sSQL As String
 
         If frmComputers.btnBRNotesAdd.Text = langfile.GetString("frmComputers", "MSG42", "Сохранить") Then
 
@@ -4939,33 +4181,17 @@ Error_:
                 frmComputers.zCOUNT = (frmComputers.lvNotesBR.SelectedItems(z).Text)
             Next
 
-            rs = New Recordset
-            rs.Open("SELECT * FROM ZAM_OTD WHERE id =" & frmComputers.zCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
-                    LockTypeEnum.adLockOptimistic)
+            sSQL = "INSERT INTO ZAM_OTD (ID_ZAM,ID_OTD,[DATE],ZAMETKA,Master) VALUES (" & frmComputers.lvNotesBR.Items.Count + 1 & "," & StrS & ",'" & frmComputers.Notesbrdate.Value & "','" & frmComputers.Notesbrtxt.Text & "','" & frmComputers.cmbBRMaster.Text & "') "
+
         Else
-            rs = New Recordset
-            rs.Open("SELECT * FROM ZAM_OTD", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
+            sSQL = "UPDATE ZAM_OTD SET [DATE]='" & frmComputers.Notesbrdate.Value & "',ZAMETKA='" & frmComputers.Notesbrtxt.Text & "',Master='" & frmComputers.cmbBRMaster.Text & "' WHERE id=" & frmComputers.zCOUNT
+
         End If
 
-        With rs
-
-            If frmComputers.btnBRNotesAdd.Text = langfile.GetString("frmComputers", "MSG42", "Сохранить") Then
-                '.Edit
-            Else
-                .AddNew()
-                .Fields("ID_ZAM").Value = frmComputers.lvNotesBR.Items.Count + 1
-                .Fields("ID_OTD").Value = StrS
-            End If
-
-            .Fields("DATE").Value = frmComputers.Notesbrdate.Value
-            .Fields("ZAMETKA").Value = frmComputers.Notesbrtxt.Text
-            .Fields("Master").Value = frmComputers.cmbBRMaster.Text
-            '.Fields("uroven").Value = rem_U.Text
-            '.Fields("Vip".Value) = cmbVip.Text
-            .Update()
-        End With
-
-        rs.Close()
+        Dim rs As Recordset
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
         rs = Nothing
 
         LOAD_INF_BRANCHE(frmComputers.sCOUNT)

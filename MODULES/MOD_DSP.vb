@@ -901,43 +901,8 @@ Error_:
             frmMain.СправочникиОборудованияToolStripMenuItem.Enabled = False
             frmMain.netMagmnu.Enabled = False
 
-        Else
-            frmMain.АктытребованияToolStripMenuItem.Enabled = True
-            frmMain.УчётКартриджейToolStripMenuItem.Enabled = True
-            frmComputers.CartrAddToolStripMenuItem.Enabled = True
-            frmMain.УчётПрограммногоОбеспеченияToolStripMenuItem.Enabled = True
-            frmComputers.btnAdd.Enabled = True
-            frmComputers.ToolStripButton1.Enabled = True
-            frmComputers.btnDelete.Enabled = True
-            frmMain.СкладToolStripMenuItem.Enabled = True
-            frmMain.NewToolStripMenuItem.Enabled = True
-            frmMain.ToolStripDropDownButton1.Enabled = True
-            frmMain.SaveInfTehButton.Enabled = True
-            frmComputers.CopyToolStripMenuItem.Enabled = True
-            frmComputers.addFoldertoBranch.Enabled = True
-            frmComputers.UpdateToolStripMenuItem.Enabled = True
-            frmComputers.mnuDeltoBranch.Enabled = True
-            frmComputers.DeleteToolStripMenuItem.Enabled = True
-            frmComputers.DeleteBranche.Enabled = True
-            frmComputers.addRemToolStripMenuItem.Enabled = True
-            frmMain.УчётЗаявокремонтовToolStripMenuItem.Enabled = True
-            frmserviceDesc.btnRemAdd.Enabled = True
-            frmComputers.RepAddBrToolStripMenuItem.Enabled = True
-            frmserviceDesc.btnRemDel.Enabled = True
-            frmMain.ОбслуживаниеБДToolStripMenuItem.Enabled = True
-            frmMain.ArhToolZipbutton.Enabled = True
-            frmMain.ЖурналыПрограммыToolStripMenuItem.Enabled = True
-            frmMain.ОрганизацияToolStripMenuItem.Enabled = True
-            frmComputers.btnNotesAdd.Enabled = True
-            frmComputers.btnPRNNotesAdd.Enabled = True
-            frmComputers.btnNETAdd.Enabled = True
-            frmComputers.btnOTHAdd.Enabled = True
-            frmComputers.btnNotesDel.Enabled = True
-            frmComputers.btnPRNNotesDel.Enabled = True
-            frmComputers.btnNETNotesDel.Enabled = True
-            frmComputers.btnOTHNotesDel.Enabled = True
-            frmMain.СправочникиОборудованияToolStripMenuItem.Enabled = True
-            frmMain.netMagmnu.Enabled = True
+
+
         End If
     End Sub
 
@@ -1105,21 +1070,15 @@ Error_:
         rs = Nothing
     End Sub
 
-    Public Sub LOAD_PCL(ByVal sFIL As String, ByVal sDEP As String, ByVal sOFF As String, ByVal sCMB As ComboBox, ByVal tmpOTV As String)
-        'cmbPCL
+    Public Sub LOAD_PCL(ByVal sFIL As String, ByVal sDEP As String, ByVal sOFF As String, ByVal sCMB As ComboBox, ByVal tmpOTV As String, ByVal sID As Integer)
 
         If Len(sFIL) = 0 Then Exit Sub
 
-
-        Call LOAD_PCL_otv(sFIL, sDEP, sOFF, sCMB, tmpOTV)
+        Call LOAD_PCL_otv(sFIL, sDEP, sOFF, sCMB, tmpOTV, sID)
 
         On Error GoTo err_
-        'frmComputers.selectTECMesto()
         sCMB.Enabled = True
 
-
-        'If TipTehn <> "Printer" Then Exit Sub
-        'If Len(sBranch) = 0 Then Exit Sub
         Dim rs As Recordset
         Dim sSQL As String
 
@@ -1128,38 +1087,31 @@ Error_:
         rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         Dim A1 As String
+
         With rs
             A1 = .Fields("t_n").Value
         End With
         rs.Close()
         rs = Nothing
 
-
-        ' sCMB.Items.Clear()
-
-        rs = New Recordset
-
-
         Select Case TipTehn
 
             Case "PC"
 
-                If A1 = 0 Then
+                Select Case A1
 
-                    'sSQL = "Select NET_NAME From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "' and TipTehn='PC'"
-                Else
+                    Case 0
 
-                    sSQL = "Select NET_NAME From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" &
-                           sOFF & "' and TipTehn='CNT' and Otvetstvennyj <>'" & tmpOTV & "'"
-                End If
+                    Case Else
 
-                rs.Open(
-                    "Select count(*) as t_n From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" &
-                    sOFF & "' and TipTehn='CNT' and Otvetstvennyj <>'" & tmpOTV & "'", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        sSQL = "Select NET_NAME From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "' and TipTehn='CNT' and Otvetstvennyj<>'" & tmpOTV & "' ORDER BY NET_NAME"
 
-                'Dim a1 As String
+                End Select
+
+                rs = New Recordset
+                rs.Open("Select count(*) as t_n From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "' and TipTehn='CNT' and Otvetstvennyj<>'" & tmpOTV & "'", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
                 With rs
-
                     A1 = .Fields("t_n").Value
                 End With
                 rs.Close()
@@ -1167,24 +1119,20 @@ Error_:
 
             Case "NET"
 
-                If A1 = 0 Then
+                Select Case A1
 
-                    'sSQL = "Select NET_NAME From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "' and TipTehn='PC'"
-                Else
-                    sSQL = "Select NET_NAME From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" &
-                           sOFF &
-                           "' and tipTehn<>'Printer' And tipTehn<>'MFU' And tipTehn<>'KOpir' And tipTehn<>'OT' And tipTehn<>'PHOTO' And tipTehn<>'FAX' And tipTehn<>'PHONE' And tipTehn<>'ZIP' And tipTehn<>'SCANER' And tipTehn<>'MONITOR' And tipTehn<>'USB' And tipTehn<>'SOUND' And tipTehn<>'IBP' And tipTehn<>'FS' And tipTehn<>'KEYB' And tipTehn<>'MOUSE' and tiptehn <>'PC' and Otvetstvennyj <>'" & tmpOTV & "'"
-                End If
+                    Case 0
 
-                rs.Open(
-                    "Select count(*) as t_n From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" &
-                    sOFF &
-                    "' and tipTehn<>'Printer' And tipTehn<>'MFU' And tipTehn<>'KOpir' And tipTehn<>'OT' And tipTehn<>'PHOTO' And tipTehn<>'FAX' And tipTehn<>'PHONE' And tipTehn<>'ZIP' And tipTehn<>'SCANER' And tipTehn<>'MONITOR' And tipTehn<>'USB' And tipTehn<>'SOUND' And tipTehn<>'IBP' And tipTehn<>'FS' And tipTehn<>'KEYB' And tipTehn<>'MOUSE' and tiptehn <>'PC' and Otvetstvennyj <>'" & tmpOTV & "'",
-                    DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                    Case Else
 
-                'Dim a1 As String
+                        sSQL = "Select NET_NAME From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "' and tipTehn<>'Printer' And tipTehn<>'MFU' And tipTehn<>'KOpir' And tipTehn<>'OT' And tipTehn<>'PHOTO' And tipTehn<>'FAX' And tipTehn<>'PHONE' And tipTehn<>'ZIP' And tipTehn<>'SCANER' And tipTehn<>'MONITOR' And tipTehn<>'USB' And tipTehn<>'SOUND' And tipTehn<>'IBP' And tipTehn<>'FS' And tipTehn<>'KEYB' And tipTehn<>'MOUSE' and tiptehn <>'PC' and Otvetstvennyj<>'" & tmpOTV & "' and id<>" & sID & " ORDER BY NET_NAME"
+
+                End Select
+
+                rs = New Recordset
+                rs.Open("Select count(*) as t_n From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "' and tipTehn<>'Printer' And tipTehn<>'MFU' And tipTehn<>'KOpir' And tipTehn<>'OT' And tipTehn<>'PHOTO' And tipTehn<>'FAX' And tipTehn<>'PHONE' And tipTehn<>'ZIP' And tipTehn<>'SCANER' And tipTehn<>'MONITOR' And tipTehn<>'USB' And tipTehn<>'SOUND' And tipTehn<>'IBP' And tipTehn<>'FS' And tipTehn<>'KEYB' And tipTehn<>'MOUSE' and tiptehn <>'PC' and Otvetstvennyj<>'" & tmpOTV & "' and id<>" & sID, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
                 With rs
-
                     A1 = .Fields("t_n").Value
                 End With
                 rs.Close()
@@ -1192,25 +1140,22 @@ Error_:
 
             Case Else
 
-                If A1 = 0 Then
-                    sSQL = "Select NET_NAME From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" &
-                           sOFF &
-                           "' and tipTehn<>'Printer' And tipTehn<>'MFU' And tipTehn<>'KOpir' And tipTehn<>'OT' And tipTehn<>'FAX' And tipTehn<>'PHONE' And tipTehn<>'ZIP' And tipTehn<>'SCANER' And tipTehn<>'MONITOR' And tipTehn<>'NET' And tipTehn<>'USB' And tipTehn<>'SOUND' And tipTehn<>'IBP' And tipTehn<>'FS' And tipTehn<>'KEYB' And tipTehn<>'MOUSE' and Otvetstvennyj <>'" & tmpOTV & "'"
-                Else
-                    sSQL = "Select NET_NAME From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" &
-                           sOFF &
-                           "' and tipTehn<>'Printer' And tipTehn<>'MFU' And tipTehn<>'KOpir' And tipTehn<>'OT' And tipTehn<>'FAX' And tipTehn<>'PHONE' And tipTehn<>'ZIP' And tipTehn<>'SCANER' And tipTehn<>'MONITOR' And tipTehn<>'NET' And tipTehn<>'USB' And tipTehn<>'SOUND' And tipTehn<>'IBP' And tipTehn<>'FS' And tipTehn<>'KEYB' And tipTehn<>'MOUSE' and Otvetstvennyj <>'" & tmpOTV & "'"
-                End If
+                Select Case A1
 
-                rs.Open(
-                    "Select count(*) as t_n From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" &
-                    sOFF &
-                    "'  and tipTehn<>'Printer' And tipTehn<>'MFU' And tipTehn<>'KOpir' And tipTehn<>'OT' And tipTehn<>'FAX' And tipTehn<>'PHONE' And tipTehn<>'ZIP' And tipTehn<>'SCANER' And tipTehn<>'MONITOR' And tipTehn<>'NET' And tipTehn<>'USB' And tipTehn<>'SOUND' And tipTehn<>'IBP' And tipTehn<>'FS' And tipTehn<>'KEYB' And tipTehn<>'MOUSE' and Otvetstvennyj <>'" & tmpOTV & "'",
-                    DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                    Case 0
 
-                'Dim a1 As String
+                        sSQL = "Select NET_NAME From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "' and tipTehn<>'Printer' And tipTehn<>'MFU' And tipTehn<>'KOpir' And tipTehn<>'OT' And tipTehn<>'FAX' And tipTehn<>'PHONE' And tipTehn<>'ZIP' And tipTehn<>'SCANER' And tipTehn<>'MONITOR' And tipTehn<>'NET' And tipTehn<>'USB' And tipTehn<>'SOUND' And tipTehn<>'IBP' And tipTehn<>'FS' And tipTehn<>'KEYB' And tipTehn<>'MOUSE' and Otvetstvennyj<>'" & tmpOTV & "' ORDER BY NET_NAME"
+
+                    Case Else
+
+                        sSQL = "Select NET_NAME From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "' and tipTehn<>'Printer' And tipTehn<>'MFU' And tipTehn<>'KOpir' And tipTehn<>'OT' And tipTehn<>'FAX' And tipTehn<>'PHONE' And tipTehn<>'ZIP' And tipTehn<>'SCANER' And tipTehn<>'MONITOR' And tipTehn<>'NET' And tipTehn<>'USB' And tipTehn<>'SOUND' And tipTehn<>'IBP' And tipTehn<>'FS' And tipTehn<>'KEYB' And tipTehn<>'MOUSE' and Otvetstvennyj<>'" & tmpOTV & "' ORDER BY NET_NAME"
+
+                End Select
+
+                rs = New Recordset
+                rs.Open("Select count(*) as t_n From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "'  and tipTehn<>'Printer' And tipTehn<>'MFU' And tipTehn<>'KOpir' And tipTehn<>'OT' And tipTehn<>'FAX' And tipTehn<>'PHONE' And tipTehn<>'ZIP' And tipTehn<>'SCANER' And tipTehn<>'MONITOR' And tipTehn<>'NET' And tipTehn<>'USB' And tipTehn<>'SOUND' And tipTehn<>'IBP' And tipTehn<>'FS' And tipTehn<>'KEYB' And tipTehn<>'MOUSE' and Otvetstvennyj<>'" & tmpOTV & "'", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
                 With rs
-
                     A1 = .Fields("t_n").Value
                 End With
                 rs.Close()
@@ -1218,28 +1163,30 @@ Error_:
 
         End Select
 
+        Select Case A1
 
-        If A1 = 0 Then
-            sCMB.Enabled = False
-            Exit Sub
-        End If
+            Case 0
 
+            Case Else
 
-        rs = New Recordset
-        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-        With rs
-            .MoveFirst()
-            Do While Not .EOF
+                With rs
+                    .MoveFirst()
+                    Do While Not .EOF
 
-                sCMB.Items.Add(.Fields("NET_NAME").Value)
+                        sCMB.Items.Add(.Fields("NET_NAME").Value)
 
-                .MoveNext()
-            Loop
-        End With
-        rs.Close()
-        rs = Nothing
+                        .MoveNext()
+                    Loop
+                End With
+                rs.Close()
+                rs = Nothing
 
+        End Select
+
+        If sCMB.Items.Count = 0 Then sCMB.Enabled = False
 
         Exit Sub
 err_:
@@ -1247,18 +1194,13 @@ err_:
     End Sub
 
 
-    Public Sub LOAD_PCL_otv(ByVal sFIL As String, ByVal sDEP As String, ByVal sOFF As String, ByVal sCMB As ComboBox, ByVal tmpOTV As String)
-        'cmbPCL
+    Public Sub LOAD_PCL_otv(ByVal sFIL As String, ByVal sDEP As String, ByVal sOFF As String, ByVal sCMB As ComboBox, ByVal tmpOTV As String, ByVal sID As Integer)
 
         If Len(sFIL) = 0 Then Exit Sub
 
         On Error GoTo err_
-        'frmComputers.selectTECMesto()
         sCMB.Enabled = True
 
-
-        'If TipTehn <> "Printer" Then Exit Sub
-        'If Len(sBranch) = 0 Then Exit Sub
         Dim rs As Recordset
         Dim sSQL As String
 
@@ -1267,61 +1209,43 @@ err_:
         rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         Dim A1 As String
+
         With rs
             A1 = .Fields("t_n").Value
         End With
         rs.Close()
         rs = Nothing
 
-
         sCMB.Items.Clear()
-
-        rs = New Recordset
 
         Select Case TipTehn
 
 
             Case "PC"
+                rs = New Recordset
+                rs.Open("Select count(*) as t_n From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "' and TipTehn='CNT' and Otvetstvennyj='" & tmpOTV & "'", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-                If A1 = 0 Then
-
-                    'sSQL = "Select NET_NAME From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "' and TipTehn='PC'"
-                Else
-
-                    sSQL = "Select NET_NAME From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" &
-                           sOFF & "' and TipTehn='CNT' and Otvetstvennyj='" & tmpOTV & "'"
-                End If
-
-                rs.Open(
-                    "Select count(*) as t_n From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" &
-                    sOFF & "' and TipTehn='CNT' and Otvetstvennyj='" & tmpOTV & "'", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
-                'Dim a1 As String
                 With rs
-
                     A1 = .Fields("t_n").Value
                 End With
                 rs.Close()
                 rs = Nothing
+
+                Select Case A1
+
+                    Case 0
+
+                    Case Else
+
+                        sSQL = "Select NET_NAME From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "' and TipTehn='CNT' and Otvetstvennyj='" & tmpOTV & "'"
+
+                End Select
 
             Case "NET"
 
-                If A1 = 0 Then
+                rs = New Recordset
+                rs.Open("Select count(*) as t_n From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "' and tipTehn<>'Printer' And tipTehn<>'MFU' And tipTehn<>'KOpir' And tipTehn<>'OT' And tipTehn<>'PHOTO' And tipTehn<>'FAX' And tipTehn<>'PHONE' And tipTehn<>'ZIP' And tipTehn<>'SCANER' And tipTehn<>'MONITOR' And tipTehn<>'USB' And tipTehn<>'SOUND' And tipTehn<>'IBP' And tipTehn<>'FS' And tipTehn<>'KEYB' And tipTehn<>'MOUSE' and tiptehn <>'PC' and Otvetstvennyj='" & tmpOTV & "' and id<>" & sID, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-                    'sSQL = "Select NET_NAME From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "' and TipTehn='PC'"
-                Else
-                    sSQL = "Select NET_NAME From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" &
-                           sOFF &
-                           "' and tipTehn<>'Printer' And tipTehn<>'MFU' And tipTehn<>'KOpir' And tipTehn<>'OT' And tipTehn<>'PHOTO' And tipTehn<>'FAX' And tipTehn<>'PHONE' And tipTehn<>'ZIP' And tipTehn<>'SCANER' And tipTehn<>'MONITOR' And tipTehn<>'USB' And tipTehn<>'SOUND' And tipTehn<>'IBP' And tipTehn<>'FS' And tipTehn<>'KEYB' And tipTehn<>'MOUSE' and tiptehn <>'PC' and Otvetstvennyj='" & tmpOTV & "'"
-                End If
-
-                rs.Open(
-                    "Select count(*) as t_n From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" &
-                    sOFF &
-                    "' and tipTehn<>'Printer' And tipTehn<>'MFU' And tipTehn<>'KOpir' And tipTehn<>'OT' And tipTehn<>'PHOTO' And tipTehn<>'FAX' And tipTehn<>'PHONE' And tipTehn<>'ZIP' And tipTehn<>'SCANER' And tipTehn<>'MONITOR' And tipTehn<>'USB' And tipTehn<>'SOUND' And tipTehn<>'IBP' And tipTehn<>'FS' And tipTehn<>'KEYB' And tipTehn<>'MOUSE' and tiptehn <>'PC' and Otvetstvennyj='" & tmpOTV & "'",
-                    DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
-                'Dim a1 As String
                 With rs
 
                     A1 = .Fields("t_n").Value
@@ -1329,56 +1253,65 @@ err_:
                 rs.Close()
                 rs = Nothing
 
+                Select Case A1
+
+                    Case 0
+
+                    Case Else
+
+                        sSQL = "Select NET_NAME From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "' and tipTehn<>'Printer' And tipTehn<>'MFU' And tipTehn<>'KOpir' And tipTehn<>'OT' And tipTehn<>'PHOTO' And tipTehn<>'FAX' And tipTehn<>'PHONE' And tipTehn<>'ZIP' And tipTehn<>'SCANER' And tipTehn<>'MONITOR' And tipTehn<>'USB' And tipTehn<>'SOUND' And tipTehn<>'IBP' And tipTehn<>'FS' And tipTehn<>'KEYB' And tipTehn<>'MOUSE' and tiptehn <>'PC' and Otvetstvennyj='" & tmpOTV & "' and id<>" & sID
+
+                End Select
+
             Case Else
 
-                If A1 = 0 Then
-                    sSQL = "Select NET_NAME From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" &
-                           sOFF &
-                           "' and tipTehn<>'Printer' And tipTehn<>'MFU' And tipTehn<>'KOpir' And tipTehn<>'OT' And tipTehn<>'FAX' And tipTehn<>'PHONE' And tipTehn<>'ZIP' And tipTehn<>'SCANER' And tipTehn<>'MONITOR' And tipTehn<>'NET' And tipTehn<>'USB' And tipTehn<>'SOUND' And tipTehn<>'IBP' And tipTehn<>'FS' And tipTehn<>'KEYB' And tipTehn<>'MOUSE' and Otvetstvennyj='" & tmpOTV & "'"
-                Else
-                    sSQL = "Select NET_NAME From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" &
-                           sOFF &
-                           "' and tipTehn<>'Printer' And tipTehn<>'MFU' And tipTehn<>'KOpir' And tipTehn<>'OT' And tipTehn<>'FAX' And tipTehn<>'PHONE' And tipTehn<>'ZIP' And tipTehn<>'SCANER' And tipTehn<>'MONITOR' And tipTehn<>'NET' And tipTehn<>'USB' And tipTehn<>'SOUND' And tipTehn<>'IBP' And tipTehn<>'FS' And tipTehn<>'KEYB' And tipTehn<>'MOUSE' and Otvetstvennyj='" & tmpOTV & "'"
-                End If
+                rs = New Recordset
+                rs.Open("Select count(*) as t_n From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "'  and tipTehn<>'Printer' And tipTehn<>'MFU' And tipTehn<>'KOpir' And tipTehn<>'OT' And tipTehn<>'FAX' And tipTehn<>'PHONE' And tipTehn<>'ZIP' And tipTehn<>'SCANER' And tipTehn<>'MONITOR' And tipTehn<>'NET' And tipTehn<>'USB' And tipTehn<>'SOUND' And tipTehn<>'IBP' And tipTehn<>'FS' And tipTehn<>'KEYB' And tipTehn<>'MOUSE' and Otvetstvennyj='" & tmpOTV & "'", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-                rs.Open(
-                    "Select count(*) as t_n From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" &
-                    sOFF &
-                    "'  and tipTehn<>'Printer' And tipTehn<>'MFU' And tipTehn<>'KOpir' And tipTehn<>'OT' And tipTehn<>'FAX' And tipTehn<>'PHONE' And tipTehn<>'ZIP' And tipTehn<>'SCANER' And tipTehn<>'MONITOR' And tipTehn<>'NET' And tipTehn<>'USB' And tipTehn<>'SOUND' And tipTehn<>'IBP' And tipTehn<>'FS' And tipTehn<>'KEYB' And tipTehn<>'MOUSE' and Otvetstvennyj='" & tmpOTV & "'",
-                    DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
-                'Dim a1 As String
                 With rs
-
                     A1 = .Fields("t_n").Value
+                End With
+                rs.Close()
+                rs = Nothing
+
+                Select Case A1
+
+                    Case 0
+
+                        'sSQL = "Select NET_NAME From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "' and tipTehn<>'Printer' And tipTehn<>'MFU' And tipTehn<>'KOpir' And tipTehn<>'OT' And tipTehn<>'FAX' And tipTehn<>'PHONE' And tipTehn<>'ZIP' And tipTehn<>'SCANER' And tipTehn<>'MONITOR' And tipTehn<>'NET' And tipTehn<>'USB' And tipTehn<>'SOUND' And tipTehn<>'IBP' And tipTehn<>'FS' And tipTehn<>'KEYB' And tipTehn<>'MOUSE' and Otvetstvennyj='" & tmpOTV & "'"
+
+                    Case Else
+
+                        sSQL = "Select NET_NAME From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "' and tipTehn<>'Printer' And tipTehn<>'MFU' And tipTehn<>'KOpir' And tipTehn<>'OT' And tipTehn<>'FAX' And tipTehn<>'PHONE' And tipTehn<>'ZIP' And tipTehn<>'SCANER' And tipTehn<>'MONITOR' And tipTehn<>'NET' And tipTehn<>'USB' And tipTehn<>'SOUND' And tipTehn<>'IBP' And tipTehn<>'FS' And tipTehn<>'KEYB' And tipTehn<>'MOUSE' and Otvetstvennyj='" & tmpOTV & "'"
+
+                End Select
+
+
+        End Select
+
+
+        Select Case A1
+
+            Case 0
+
+            Case Else
+
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
+                With rs
+                    .MoveFirst()
+                    Do While Not .EOF
+
+                        sCMB.Items.Add(.Fields("NET_NAME").Value)
+
+                        .MoveNext()
+                    Loop
                 End With
                 rs.Close()
                 rs = Nothing
 
         End Select
-
-
-        If A1 = 0 Then
-            sCMB.Enabled = False
-            Exit Sub
-        End If
-
-
-        rs = New Recordset
-        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
-        With rs
-            .MoveFirst()
-            Do While Not .EOF
-
-                sCMB.Items.Add(.Fields("NET_NAME").Value)
-
-                .MoveNext()
-            Loop
-        End With
-        rs.Close()
-        rs = Nothing
-
 
         Exit Sub
 err_:

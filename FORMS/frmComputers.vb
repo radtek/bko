@@ -823,7 +823,7 @@ Error_:
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
                             My.Application.DoEvents()
-                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbPCLK, cmbResponsible.Text)
+                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbPCLK, cmbResponsible.Text, d(1))
 
                         Case "Printer"
 
@@ -861,7 +861,7 @@ Error_:
                             cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG96", "Фотокондуктор"))
 
                             My.Application.DoEvents()
-                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbPCL, cmbPRNotv.Text)
+                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbPCL, cmbPRNotv.Text, d(1))
                             'me.cmbPCL
 
                         Case "MFU"
@@ -897,7 +897,7 @@ Error_:
                             cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG96", "Фотокондуктор"))
 
                             My.Application.DoEvents()
-                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbPCL, cmbPRNotv.Text)
+                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbPCL, cmbPRNotv.Text, d(1))
 
                         Case "KOpir"
                             CartrAddToolStripMenuItem.Visible = True
@@ -961,7 +961,7 @@ Error_:
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
                             My.Application.DoEvents()
-                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbOTHotv.Text)
+                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbOTHotv.Text, d(1))
 
                         Case "PHOTO"
                             CartrAddToolStripMenuItem.Visible = False
@@ -1045,7 +1045,7 @@ Error_:
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
                             My.Application.DoEvents()
-                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbOTHotv.Text)
+                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbOTHotv.Text, d(1))
 
                         Case "ZIP"
                             CartrAddToolStripMenuItem.Visible = False
@@ -1074,7 +1074,7 @@ Error_:
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
                             My.Application.DoEvents()
-                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbOTHotv.Text)
+                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbOTHotv.Text, d(1))
 
                         Case "SCANER"
                             CartrAddToolStripMenuItem.Visible = False
@@ -1102,7 +1102,7 @@ Error_:
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
                             My.Application.DoEvents()
-                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbOTHotv.Text)
+                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbOTHotv.Text, d(1))
 
                         Case "MONITOR"
 
@@ -1143,7 +1143,7 @@ Error_:
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
                             My.Application.DoEvents()
-                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbOTHotv.Text)
+                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbOTHotv.Text, d(1))
 
                         Case "NET"
                             CartrAddToolStripMenuItem.Visible = False
@@ -1156,7 +1156,7 @@ Error_:
                             sSTAB4.Visible = True
 
                             Call LOADnet(d(1))
-                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbNETotv.Text)
+                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbNETotv.Text, d(1))
 
                             '--------------VIP_Graff Добавление новой перефирии Начало-----------------
                         Case "USB"
@@ -1185,7 +1185,7 @@ Error_:
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
                             My.Application.DoEvents()
-                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbOTHotv.Text)
+                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbOTHotv.Text, d(1))
 
                         Case "SOUND"
                             CartrAddToolStripMenuItem.Visible = False
@@ -1214,7 +1214,7 @@ Error_:
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
                             My.Application.DoEvents()
-                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbOTHotv.Text)
+                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbOTHotv.Text, d(1))
 
                         Case "IBP"
                             CartrAddToolStripMenuItem.Visible = False
@@ -1254,7 +1254,7 @@ Error_:
                             End If
 
                             My.Application.DoEvents()
-                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbOTHotv.Text)
+                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbOTHotv.Text, d(1))
 
                         Case "FS"
                             CartrAddToolStripMenuItem.Visible = False
@@ -1282,7 +1282,7 @@ Error_:
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
                             My.Application.DoEvents()
-                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbOTHotv.Text)
+                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbOTHotv.Text, d(1))
 
                         Case "KEYB"
                             CartrAddToolStripMenuItem.Visible = False
@@ -1310,7 +1310,7 @@ Error_:
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
                             My.Application.DoEvents()
-                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbOTHotv.Text)
+                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbOTHotv.Text, d(1))
 
                         Case "MOUSE"
                             CartrAddToolStripMenuItem.Visible = False
@@ -1338,7 +1338,7 @@ Error_:
                             Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
 
                             My.Application.DoEvents()
-                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL,cmbOTHotv.text)
+                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbOTHotv.Text, d(1))
                             '--------------VIP_Graff Добавление новой перефирии Конец------------------
 
                         Case "CNT"
@@ -2018,7 +2018,7 @@ A:
             d = Split(lstGroups.SelectedNode.Tag, "|")
 
             REMOVE_TEHN(d(1))
-            Me.lstGroups.Nodes.Remove(Me.lstGroups.SelectedNode)
+            ' Me.lstGroups.Nodes.Remove(Me.lstGroups.SelectedNode)
 
             Me.BeginInvoke(New MethodInvoker(AddressOf STAT_INF))
 
