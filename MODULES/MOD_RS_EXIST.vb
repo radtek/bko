@@ -16,17 +16,16 @@
         If Len(sGroupName) = 0 Then Exit Function
         rs.Open(sSQL2, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-        With rs
-            If .Fields("total_number").Value = 0 Then
+        Select Case rs.Fields("total_number").Value
 
-            Else
+            Case 0
+
+            Case Else
                 RSExistsSoft = True
                 rs.Close()
                 rs = Nothing
                 Exit Function
-
-            End If
-        End With
+        End Select
 
         rs.Close()
         rs = Nothing
@@ -34,7 +33,7 @@
         RSExistsSoft = False
 
         Exit Function
-        Error_:
+Error_:
         RSExistsSoft = False
     End Function
 
@@ -280,25 +279,19 @@
         If Len(sGroupName) = 0 Then Exit Function
         rs.Open(sSQL2, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-        With rs
+         Select Case rs.Fields("total_number").Value
 
-            Select Case .Fields("total_number").Value
+            Case 0
 
-                Case 0
-
-                Case Else
-                    RSExists = True
-                    rs.Close()
-                    rs = Nothing
-                    Exit Function
-
-            End Select
-
-        End With
+            Case Else
+                RSExists = True
+                rs.Close()
+                rs = Nothing
+                Exit Function
+        End Select
 
         rs.Close()
         rs = Nothing
-
 
         RSExists = False
 
@@ -325,19 +318,16 @@
         If Len(sBR) = 0 Then Exit Function
         rs.Open(sSQL2, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-        With rs
-            Select Case .Fields("total_number").Value
+       Select Case rs.Fields("total_number").Value
 
-                Case 0
+            Case 0
 
-                Case Else
-                    RSExistsDB = True
-                    rs.Close()
-                    rs = Nothing
-                    Exit Function
-
-            End Select
-        End With
+            Case Else
+                RSExistsDB = True
+                rs.Close()
+                rs = Nothing
+                Exit Function
+        End Select
 
         rs.Close()
         rs = Nothing
@@ -367,19 +357,16 @@
         If Len(sBR) = 0 Then Exit Function
         rs.Open(sSQL2, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-        With rs
-            Select Case .Fields("total_number").Value
+       Select Case rs.Fields("total_number").Value
 
-                Case 0
+            Case 0
 
-                Case Else
-                    RSExistsDBO = True
-                    rs.Close()
-                    rs = Nothing
-                    Exit Function
-
-            End Select
-        End With
+            Case Else
+                RSExistsDBO = True
+                rs.Close()
+                rs = Nothing
+                Exit Function
+        End Select
 
         rs.Close()
         rs = Nothing

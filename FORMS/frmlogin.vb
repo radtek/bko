@@ -34,23 +34,49 @@ Public Class frmLogin
     Private Sub Find_DB()
         cmbBD.Items.Clear()
 
-        Try
-            ' Only get files that begin with the letter "c."
-            Dim dirs As String() = Directory.GetFiles(BasePath, "*.mdb")
-            ' Console.WriteLine("The number of files starting with c is {0}.", dirs.Length)
-            Dim dir As String
 
-            For Each dir In dirs
-                Dim d() As String
-                d = Split(dir, "\")
+        Select Case cmbSUBD.Text
 
-                cmbBD.Items.Add(d(d.Length - 1))
-            Next
-        Catch e1 As Exception
-            'Console.WriteLine("The process failed: {0}", e1.ToString())
-        End Try
+            Case "MS Access 2007"
 
-        'ITEM_DB_COUNT = cmbBD.Items.Count
+                Try
+                    ' Only get files that begin with the letter "c."
+                    Dim dirs As String() = Directory.GetFiles(BasePath, "*.accdb")
+                    ' Console.WriteLine("The number of files starting with c is {0}.", dirs.Length)
+                    Dim dir As String
+
+                    For Each dir In dirs
+                        Dim d() As String
+                        d = Split(dir, "\")
+
+                        cmbBD.Items.Add(d(d.Length - 1))
+                    Next
+                Catch e1 As Exception
+                    'Console.WriteLine("The process failed: {0}", e1.ToString())
+                End Try
+
+            Case Else
+
+                Try
+                    ' Only get files that begin with the letter "c."
+                    Dim dirs As String() = Directory.GetFiles(BasePath, "*.mdb")
+                    ' Console.WriteLine("The number of files starting with c is {0}.", dirs.Length)
+                    Dim dir As String
+
+                    For Each dir In dirs
+                        Dim d() As String
+                        d = Split(dir, "\")
+
+                        cmbBD.Items.Add(d(d.Length - 1))
+                    Next
+                Catch e1 As Exception
+                    'Console.WriteLine("The process failed: {0}", e1.ToString())
+                End Try
+
+        End Select
+
+
+
     End Sub
 
     Private Sub User_fill()
@@ -85,32 +111,15 @@ Public Class frmLogin
 
             Case 0
 
-                sSQL = "select User_ID,Password,Name,Level from T_User"
-                rs = New Recordset
-                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
-                With rs
-                    .AddNew()
-                    .Fields("User_ID").Value = "ADMINISTRATOR"
-                    .Fields("Password").Value = "SWY\X"
-                    .Fields("Name").Value = "ADMINISTRATOR"
-                    .Fields("Level").Value = "Admin"
-
-                    .Update()
-                End With
-                rs.Close()
-                rs = Nothing
+                sSQL = "INSERT INTO T_User (User_ID,Password,Name,Level) VALUES ('ADMINISTRATOR','SWY\X','ADMINISTRATOR','Admin')"
+                DB7.Execute(sSQL)
+               
 
         End Select
 
         FillComboNET(cmbUser, "Name", "T_User", "", False, True)
 
-        rs = New Recordset
-        rs.Open("UPDATE spr_other SET C='0' WHERE C=''", DB7, CursorTypeEnum.adOpenDynamic,
-                LockTypeEnum.adLockOptimistic)
-        'rs.Close()
-        rs = Nothing
-
+        DB7.Execute("UPDATE spr_other SET C='0' WHERE C=''")
 
         Exit Sub
 
@@ -121,13 +130,11 @@ Public Class frmLogin
 
     Private Sub btnLogin_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnLogin.Click
 
-
         If Len(txtPassword.Text) = 0 Then Exit Sub
 
         Me.Enabled = False
 
         Call User_Pro()
-
 
         Me.Enabled = True
     End Sub
@@ -139,19 +146,25 @@ Public Class frmLogin
         objIniFile.WriteString("general", "DefaultUser", cmbUser.Text)
         objIniFile.WriteString("DB", "DB", unamDB)
 
-        If cmbSUBD.Text <> "MS Access" Then
+        Select Case cmbSUBD.Text
 
-            objIniFile.WriteString("DB", "SERVER", TextBox1.Text)
-            objIniFile.WriteString("DB", "PORT", TextBox2.Text)
-            objIniFile.WriteString("DB", "BD", TextBox3.Text)
-            objIniFile.WriteString("DB", "USER", TextBox4.Text)
-            objIniFile.WriteString("DB", "PASSWORD", TextBox5.Text)
+            Case "MS Access"
+                Base_Name = cmbBD.Text
+                objIniFile.WriteString("general", "file", cmbBD.Text)
 
-        Else
-            Base_Name = cmbBD.Text
-            objIniFile.WriteString("general", "file", cmbBD.Text)
+            Case "MS Access 2007"
+                Base_Name = cmbBD.Text
+                objIniFile.WriteString("general", "file", cmbBD.Text)
 
-        End If
+            Case Else
+
+                objIniFile.WriteString("DB", "SERVER", TextBox1.Text)
+                objIniFile.WriteString("DB", "PORT", TextBox2.Text)
+                objIniFile.WriteString("DB", "BD", TextBox3.Text)
+                objIniFile.WriteString("DB", "USER", TextBox4.Text)
+                objIniFile.WriteString("DB", "PASSWORD", TextBox5.Text)
+
+        End Select
 
         If DATAB = False Then
 
@@ -179,22 +192,12 @@ Public Class frmLogin
 
                 Dim rs25 As Recordset
                 rs25 = New Recordset
-                rs25.Open("SELECT * FROM CONFIGURE", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                Dim sSQL As String
+                sSQL = "INSERT INTO CONFIGURE (ORG,SISADM,Name_Prog,Nr,access) VALUES ('BKO.SHATKI.INFO','SISADM','BKO.NET','Yes','1.7.3.9')"
 
-                With rs25
-                    .AddNew()
-                    .Fields("ORG").Value = "BKO.SHATKI.INFO"
-                    .Fields("SISADM").Value = "SISADM"
-                    .Fields("Name_Prog").Value = "BKO.NET"
-                    .Fields("Nr").Value = "Yes"
-                    .Fields("access").Value = "1.7.3.9"
-                    .Update()
-                End With
-                rs25.Close()
-                rs25 = Nothing
+                DB7.Execute(sSQL)
 
         End Select
-
 
         Dim rs As Recordset
         rs = New Recordset
@@ -290,8 +293,6 @@ Public Class frmLogin
                     LockTypeEnum.adLockOptimistic)
 
         With T_User
-            '   .MoveFirst()
-            '   Do While Not .EOF
 
             If cmbUser.Text = .Fields("Name").Value Then
 
@@ -301,151 +302,157 @@ Public Class frmLogin
                     uSERID = .Fields("User_ID").Value
                     UserNames = .Fields("Name").Value
 
-                    If uLevel = "Admin" Then
+                    Select Case uLevel
 
-
-                    Else
-
-                        If .Fields("SETUP").Value = 1 Or .Fields("SETUP").Value = True Then
+                        Case "Admin"
                             uLevelSetup = True
-                        Else
-                            uLevelSetup = False
-                        End If
-                        If .Fields("PCADD").Value = 1 Or .Fields("PCADD").Value = True Then
                             uLevelTehAdd = True
-                        Else
-                            uLevelTehAdd = False
-                        End If
-                        If .Fields("PCDEL").Value = 1 Or .Fields("PCDEL").Value = True Then
                             uLevelTehDel = True
-                        Else
-                            uLevelTehDel = False
-                        End If
-                        If .Fields("CAPADD").Value = 1 Or .Fields("CAPADD").Value = True Then
                             uLevelNotesAdd = True
-                        Else
-                            uLevelNotesAdd = False
-                        End If
-
-                        If .Fields("CAPDEL").Value = 1 Or .Fields("CAPDEL").Value = True Then
                             uLevelNotesDel = True
-                        Else
-                            uLevelNotesDel = False
-                        End If
-                        If .Fields("REPADD").Value = 1 Or .Fields("REPADD").Value = True Then
                             uLevelRepAdd = True
-                        Else
-                            uLevelRepAdd = False
-                        End If
-
-                        If .Fields("REPDEL").Value = 1 Or .Fields("REPDEL").Value = True Then
                             uLevelRepDel = True
-                        Else
-                            uLevelRepDel = False
-                        End If
-                        If .Fields("REPed").Value = 1 Or .Fields("REPed").Value = True Then
                             uLevelRepEd = True
-                        Else
-                            uLevelRepEd = False
-                        End If
-
-                        If .Fields("POADD").Value = 1 Or .Fields("POADD").Value = True Then
                             uLevelPOAdd = True
-                        Else
-                            uLevelPOAdd = False
-                        End If
-                        If .Fields("PODEL").Value = 1 Or .Fields("PODEL").Value = True Then
                             uLevelPODel = True
-                        Else
-                            uLevelPODel = False
-                        End If
-                        If .Fields("CARTR").Value = 1 Or .Fields("CARTR").Value = True Then
                             uLevelCart = True
-                        Else
-                            uLevelCart = False
-                        End If
-                        If .Fields("PO").Value = 1 Or .Fields("PO").Value = True Then
                             uLevelPO = True
-                        Else
-                            uLevelPO = False
-                        End If
-                        If .Fields("SCLAD").Value = 1 Or .Fields("SCLAD").Value = True Then
                             uLevelWarehause = True
-                        Else
-                            uLevelWarehause = False
-                        End If
+                        Case Else
 
-                    End If
+                            If .Fields("SETUP").Value = 1 Or .Fields("SETUP").Value = True Then
+                                uLevelSetup = True
+                            Else
+                                uLevelSetup = False
+                            End If
+                            If .Fields("PCADD").Value = 1 Or .Fields("PCADD").Value = True Then
+                                uLevelTehAdd = True
+                            Else
+                                uLevelTehAdd = False
+                            End If
+                            If .Fields("PCDEL").Value = 1 Or .Fields("PCDEL").Value = True Then
+                                uLevelTehDel = True
+                            Else
+                                uLevelTehDel = False
+                            End If
+                            If .Fields("CAPADD").Value = 1 Or .Fields("CAPADD").Value = True Then
+                                uLevelNotesAdd = True
+                            Else
+                                uLevelNotesAdd = False
+                            End If
+
+                            If .Fields("CAPDEL").Value = 1 Or .Fields("CAPDEL").Value = True Then
+                                uLevelNotesDel = True
+                            Else
+                                uLevelNotesDel = False
+                            End If
+                            If .Fields("REPADD").Value = 1 Or .Fields("REPADD").Value = True Then
+                                uLevelRepAdd = True
+                            Else
+                                uLevelRepAdd = False
+                            End If
+
+                            If .Fields("REPDEL").Value = 1 Or .Fields("REPDEL").Value = True Then
+                                uLevelRepDel = True
+                            Else
+                                uLevelRepDel = False
+                            End If
+                            If .Fields("REPed").Value = 1 Or .Fields("REPed").Value = True Then
+                                uLevelRepEd = True
+                            Else
+                                uLevelRepEd = False
+                            End If
+
+                            If .Fields("POADD").Value = 1 Or .Fields("POADD").Value = True Then
+                                uLevelPOAdd = True
+                            Else
+                                uLevelPOAdd = False
+                            End If
+                            If .Fields("PODEL").Value = 1 Or .Fields("PODEL").Value = True Then
+                                uLevelPODel = True
+                            Else
+                                uLevelPODel = False
+                            End If
+                            If .Fields("CARTR").Value = 1 Or .Fields("CARTR").Value = True Then
+                                uLevelCart = True
+                            Else
+                                uLevelCart = False
+                            End If
+                            If .Fields("PO").Value = 1 Or .Fields("PO").Value = True Then
+                                uLevelPO = True
+                            Else
+                                uLevelPO = False
+                            End If
+                            If .Fields("SCLAD").Value = 1 Or .Fields("SCLAD").Value = True Then
+                                uLevelWarehause = True
+                            Else
+                                uLevelWarehause = False
+                            End If
+
+                    End Select
 
                     Call SaveActivityToLogDB(LNGIniFile.GetString("frmLogin", "MSG3", "Вход в программу"))
 
                     Me.Hide()
 
-                    If sRelogin = True Then
+                    Select Case sRelogin
 
-                        frmMain.NewToolStripMenuItem.Enabled = True
-                        frmMain.УчётToolStripMenuItem.Enabled = True
-                        frmMain.СправочникиToolStripMenuItem.Enabled = True
-                        frmMain.ОтчётыToolStripMenuItem.Enabled = True
-                        frmMain.ToolsMenu.Enabled = True
-                        frmMain.ViewMenu.Enabled = True
-                        frmMain.WindowsMenu.Enabled = True
-                        frmMain.ToolStripButton1.Enabled = True
-                        frmMain.NewToolStripButton.Enabled = True
+                        Case True
+                            frmMain.NewToolStripMenuItem.Enabled = True
+                            frmMain.УчётToolStripMenuItem.Enabled = True
+                            frmMain.СправочникиToolStripMenuItem.Enabled = True
+                            frmMain.ОтчётыToolStripMenuItem.Enabled = True
+                            frmMain.ToolsMenu.Enabled = True
+                            frmMain.ViewMenu.Enabled = True
+                            frmMain.WindowsMenu.Enabled = True
+                            frmMain.ToolStripButton1.Enabled = True
+                            frmMain.NewToolStripButton.Enabled = True
 
-                        Me.BeginInvoke(New MethodInvoker(AddressOf frmMain.LOAD_COMPONENT))
-                        Me.BeginInvoke(New MethodInvoker(AddressOf SECUR_LEVEL))
-
-
-                        sRelogin = False
-                        'Какой модуль запускать
-                        Dim sText As String
-                        sText = objIniFile.GetString("general", "MOD", 0)
-
-                        If Len(sText) > 2 Then sText = 0
-
-                        Select Case sText
-
-                            Case 0
-
-                                'frmComputers.Visible = False
-                                frmComputers.MdiParent = frmMain
-                                ' My.Application.DoEvents()
-                                frmComputers.Show()
-                                ' My.Application.DoEvents()
-
-                            Case 1
-                                frmserviceDesc.MdiParent = frmMain
-                                ' My.Application.DoEvents()
-                                frmserviceDesc.Show()
-                                ' My.Application.DoEvents()
-                            Case 2
-
-                                frmSoftware.MdiParent = frmMain
-                                '  My.Application.DoEvents()
-                                frmSoftware.Show()
-                                '  My.Application.DoEvents()
-                            Case 3
-
-                                frmCRT3.MdiParent = frmMain
-                                '  My.Application.DoEvents()
-                                frmCRT3.Show()
-                                '   My.Application.DoEvents()
-                        End Select
-
-                        'frmComputers.MdiParent = frmMain
-                        'frmComputers.Show()
-                        'frmComputers.Focus()
-                    Else
-
-                        frmMain.Show()
-
-                    End If
+                            Me.BeginInvoke(New MethodInvoker(AddressOf frmMain.LOAD_COMPONENT))
+                            Me.BeginInvoke(New MethodInvoker(AddressOf SECUR_LEVEL))
 
 
-                    '  T_User.Close()
-                    '  T_User = Nothing
+                            sRelogin = False
+                            'Какой модуль запускать
+                            Dim sText As String
+                            sText = objIniFile.GetString("general", "MOD", 0)
 
+                            If Len(sText) > 2 Then sText = 0
+
+                            Select Case sText
+
+                                Case 0
+
+                                    'frmComputers.Visible = False
+                                    frmComputers.MdiParent = frmMain
+                                    ' My.Application.DoEvents()
+                                    frmComputers.Show()
+                                    ' My.Application.DoEvents()
+
+                                Case 1
+                                    frmserviceDesc.MdiParent = frmMain
+                                    ' My.Application.DoEvents()
+                                    frmserviceDesc.Show()
+                                    ' My.Application.DoEvents()
+                                Case 2
+
+                                    frmSoftware.MdiParent = frmMain
+                                    '  My.Application.DoEvents()
+                                    frmSoftware.Show()
+                                    '  My.Application.DoEvents()
+                                Case 3
+
+                                    frmCRT3.MdiParent = frmMain
+                                    '  My.Application.DoEvents()
+                                    frmCRT3.Show()
+                                    '   My.Application.DoEvents()
+                            End Select
+
+                        Case Else
+
+                            frmMain.Show()
+
+                    End Select
 
 
                     Me.Close()
@@ -464,15 +471,13 @@ Public Class frmLogin
 
             Else
             End If
-            '  .MoveNext()
-            'DoEvents
-            ' Loop
+            
         End With
         T_User.Close()
         T_User = Nothing
 
         Exit Sub
-        err_:
+err_:
         txtPassword.Text = ""
         txtPassword.Focus()
         Me.Enabled = True
@@ -521,9 +526,6 @@ err_:
 
     Private Sub frmLogin_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
 
-        'SendFonts(Me)
-
-
         Call LANG_frmLogin()
 
         Dim objIniFile As New IniFile(PrPath & "base.ini")
@@ -532,14 +534,6 @@ err_:
         Call Find_LANG()
 
         sLoad = True
-
-        'Me.Height = 230
-        'gbData.Top = 54
-        'cmbBD.Enabled = True
-        'btnLogin.Top = 174
-        'btnCancel.Top = btnLogin.Top
-        'gbsql.Top = 205
-
 
         Call sSUBD()
         Call User_fill()
@@ -556,8 +550,7 @@ err_:
         cmbUser.Text = langIni.GetString("general", "DefaultUser", "")
         cmbSUBD.Text = langIni.GetString("DB", "DB", "")
 
-
-        If Len(cmbSUBD.Text) = 0 Then cmbSUBD.Text = "MS Access"
+        If Len(cmbSUBD.Text) = 0 Then cmbSUBD.Text = "MS Access 2007"
 
         If DATAB = False Then
             Call LoadDatabase()
@@ -566,25 +559,15 @@ err_:
             Call LoadDatabase()
         End If
 
-
         Select Case cmbSUBD.Text
 
             Case "MS Access"
 
-
                 gbsql.Visible = False
 
-
                 Me.Height = Me.Height - gbsql.Height
-
-                'Me.Height = 245
-                'gbData.Top = 53
                 cmbBD.Enabled = True
                 btnDBDir.Enabled = True
-                'btnLogin.Top = 194
-                'btnCancel.Top = btnLogin.Top
-                'gbsql.Top = 225
-
                 unamDB = cmbSUBD.Text
 
                 cmbBD.Text = langIni.GetString("general", "file", "")
@@ -595,6 +578,23 @@ err_:
                 Call Find_DB()
 
 
+            Case "MS Access 2007"
+
+                gbsql.Visible = False
+
+                Me.Height = Me.Height - gbsql.Height
+                cmbBD.Enabled = True
+                btnDBDir.Enabled = True
+
+                unamDB = cmbSUBD.Text
+
+                cmbBD.Text = langIni.GetString("general", "file", "")
+
+                langIni.WriteString("DB", "DB", cmbSUBD.Text)
+
+
+                Call Find_DB()
+
             Case "MS SQL 2008-file"
 
                 gbsql.Visible = False
@@ -602,14 +602,8 @@ err_:
 
                 Me.Height = Me.Height - gbsql.Height
 
-                'Me.Height = 245
-                'gbData.Top = 53
                 cmbBD.Enabled = True
                 btnDBDir.Enabled = True
-                'btnLogin.Top = 194
-                'btnCancel.Top = btnLogin.Top
-                'gbsql.Top = 225
-
                 unamDB = cmbSUBD.Text
 
                 cmbBD.Text = langIni.GetString("general", "file", "")
@@ -620,17 +614,8 @@ err_:
             Case Else
 
                 gbsql.Visible = True
-
-                'Me.Height = 408
-                'gbData.Top = 214
-                'gbsql.Top = 50
-
                 cmbBD.Enabled = False
                 btnDBDir.Enabled = False
-                'btnLogin.Top = 355
-                'btnCancel.Top = btnLogin.Top
-                'gbData.Top = 205
-
                 Me.AutoSize = True
 
                 unamDB = cmbSUBD.Text

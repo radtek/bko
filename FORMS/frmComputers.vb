@@ -1664,7 +1664,7 @@ Error_:
 
             Case "MS Access"
 
-                sSQL = "SELECT count(*) as t_n FROM kompy where Balans=true"
+                sSQL = "SELECT count(*) as t_n FROM kompy where Balans=1"
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
@@ -1692,6 +1692,36 @@ Error_:
 
                 sALL = sALL & "/ Списано: " & sSP
 
+
+            Case "MS Access 2007"
+
+                sSQL = "SELECT count(*) as t_n FROM kompy where Balans=true"
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
+                With rs
+
+                    sBal = (.Fields("T_N").Value) & " " & langfile.GetString("frmComputers", "MSG13", "шт.")
+
+                End With
+                rs.Close()
+                rs = Nothing
+
+                sALL = sALL & "/ Не на балансе: " & sBal
+
+                sSQL = "SELECT count(*) as t_n FROM kompy where Spisan=true"
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
+                With rs
+
+                    sSP = (.Fields("T_N").Value) & " " & langfile.GetString("frmComputers", "MSG13", "шт.")
+
+                End With
+                rs.Close()
+                rs = Nothing
+
+                sALL = sALL & "/ Списано: " & sSP
             Case Else
 
         End Select
@@ -1857,8 +1887,6 @@ err_:
         Dim sSw2 As Date
 
         With rs1
-            .MoveFirst()
-            Do While Not .EOF
 
                 If Not IsDBNull(.Fields("Soft").Value) Then cmbSoftware.Text = .Fields("Soft").Value
                 If Not IsDBNull(.Fields("t_lic").Value) Then cmbTipLicense.Text = .Fields("t_lic").Value
@@ -1882,8 +1910,6 @@ err_:
                 DTInstall.Value = sSw 'Дата регистрации
                 dtGok.Value = sSw2 'Срок исполнения
 
-                .MoveNext()
-            Loop
         End With
 
         btnAdd.Text = LNGIniFile.GetString("frmSoftware", "MSG4", "Сохранить")
@@ -6926,7 +6952,7 @@ Err_:
             AddTwoPar(Me.cmbSoftware.Text, Me.cmbSoftPr.Text, "SPR_PO", Me.cmbSoftware)
         End If
 
-        Dim rs2 As Recordset
+        Dim sSQL As String
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
         If btnAdd.Text = LNGIniFile.GetString("frmSoftware", "MSG4", "Сохранить") Then
@@ -6935,48 +6961,28 @@ Err_:
                     LNGIniFile.GetString("frmSoftware", "MSG5", "Редактирование программного обеспечения для") & " " &
                     Me.lstGroups.SelectedNode.Text)
 
-            rs2 = New Recordset
-            rs2.Open("SELECT * FROM SOFT_INSTALL WHERE Id=" & SoftCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
-                     LockTypeEnum.adLockOptimistic)
+            sSQL = "UPDATE SOFT_INSTALL SET " &
+                    "Soft='" & cmbSoftware.Text & "'," &
+                    "t_lic='" & cmbTipLicense.Text & "'," &
+                    "L_key='" & txtLicKey.Text & "'," &
+                    "d_p='" & DTInstall.Value & "'," &
+                    "d_o='" & dtGok.Value & "'," &
+                    "Id_Comp=" & sCOUNT & "," &
+                    "Publisher='" & cmbSoftPr.Text & "'," &
+                    "TIP='" & cmbTipPo.Text & "' " &
+                    "WHERE Id=" & SoftCOUNT
 
-            With rs2
-
-                .Fields("Soft").Value = cmbSoftware.Text
-                .Fields("t_lic").Value = cmbTipLicense.Text
-                .Fields("L_key").Value = txtLicKey.Text
-                .Fields("d_p").Value = DTInstall.Value
-                .Fields("d_o").Value = dtGok.Value
-                .Fields("Id_Comp").Value = sCOUNT
-                .Fields("Publisher").Value = cmbSoftPr.Text
-                .Fields("TIP").Value = cmbTipPo.Text
-                .Update()
-            End With
-            rs2.Close()
-            rs2 = Nothing
+            DB7.Execute(sSQL)
 
         Else
             Call _
                 SaveActivityToLogDB(
                     LNGIniFile.GetString("frmSoftware", "MSG6", "Добавление программного обеспечения для") & " " &
                     Me.lstGroups.SelectedNode.Text)
-            rs2 = New Recordset
-            rs2.Open("SELECT * FROM SOFT_INSTALL", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-            With rs2
-                .AddNew()
-                .Fields("Soft").Value = cmbSoftware.Text
-                .Fields("t_lic").Value = cmbTipLicense.Text
-                .Fields("L_key").Value = txtLicKey.Text
-                .Fields("d_p").Value = DTInstall.Value
-                .Fields("d_o").Value = dtGok.Value
-                .Fields("Id_Comp").Value = sCOUNT
-                .Fields("Publisher").Value = cmbSoftPr.Text
-                .Fields("TIP").Value = cmbTipPo.Text
-                .Update()
-            End With
-            rs2.Close()
-            rs2 = Nothing
-
+            sSQL = "INSERT INTO SOFT_INSTALL (Soft,t_lic,L_key,d_p,d_o,Publisher,TIP,Id_Comp) VALUES ('" & cmbSoftware.Text &
+                 "','" & cmbTipLicense.Text & "','" & txtLicKey.Text & "','" & DTInstall.Value & "','" & dtGok.Value & "','" & cmbSoftPr.Text & "','" & cmbTipPo.Text & "'," & sCOUNT & ")"
+            DB7.Execute(sSQL)
 
         End If
 
@@ -6994,8 +7000,6 @@ Err_:
 err_:
 
         MsgBox(Err.Description)
-
-
 
     End Sub
 

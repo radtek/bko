@@ -1041,26 +1041,42 @@ Public Class frmSetup
         rs.Close()
         rs = Nothing
 
-        rs = New Recordset
-        rs.Open("Select * from CONFIGURE", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-        With rs
-            If us > 0 Then
+        Dim sSQL As String
 
-            Else
-                .AddNew()
-            End If
 
-            .Fields("SISADM").Value = txtSA.Text
-            .Fields("ORG").Value = txtORG.Text
-            .Fields("Name_Prog").Value = txtPRG.Text
-            .Fields("nr").Value = txtMail.Text
-            .Fields("nomer_compa").Value = txtBigBoss.Text
-            '.Fields("asc").Value = 0
+        If us > 0 Then
+            sSQL = "UPDATE CONFIGURE SET " &
+                    "SISADM='" & txtSA.Text & "'," &
+                    "ORG='" & txtORG.Text & "'," &
+                    "Name_Prog='" & txtPRG.Text & "'," &
+                    "nr='" & txtMail.Text & "'," &
+                    "nomer_compa='" & txtBigBoss.Text
+        Else
+            sSQL = "INSERT INTO CONFIGURE (SISADM,ORG,Name_Prog,nr,nomer_compa) VALUES ('" & txtSA.Text & "','" & txtORG.Text & "','" & txtPRG.Text & "','" & txtMail.Text & "','" & txtBigBoss.Text & "')"
+        End If
 
-            .Update()
-        End With
-        rs.Close()
-        rs = Nothing
+        DB7.Execute(sSQL)
+
+        'rs = New Recordset
+        'rs.Open("Select * from CONFIGURE", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+        'With rs
+        '    If us > 0 Then
+
+        '    Else
+        '        .AddNew()
+        '    End If
+
+        '    .Fields("SISADM").Value = txtSA.Text
+        '    .Fields("ORG").Value = txtORG.Text
+        '    .Fields("Name_Prog").Value = txtPRG.Text
+        '    .Fields("nr").Value = txtMail.Text
+        '    .Fields("nomer_compa").Value = txtBigBoss.Text
+        '    '.Fields("asc").Value = 0
+
+        '    .Update()
+        'End With
+        'rs.Close()
+        'rs = Nothing
 
 
         Exit Sub

@@ -20,7 +20,7 @@ Public Class frmMain
         Me.Show()
         ' My.Application.DoEvents()
 
-        If unamDB <> "MS Access" Then ArhToolZipbutton.Enabled = False
+        If unamDB <> "MS Access" Or unamDB <> "MS Access 2007" Then ArhToolZipbutton.Enabled = False
 
         Call SECUR_LEVEL()
 
@@ -30,7 +30,7 @@ Public Class frmMain
 
         UnLoadDatabase()
 
-        If DB_N <> "MS Access" Then Exit Sub
+        If unamDB <> "MS Access" Or unamDB <> "MS Access 2007" Then Exit Sub
 
         Dim objIniFile As New IniFile(PrPath & "base.ini")
 
@@ -138,6 +138,45 @@ Public Class frmMain
 
                 ' Only get files that begin with the letter "c."
                 Dim dirs As String() = Directory.GetFiles(BasePath, "*.mdb")
+                ' Console.WriteLine("The number of files starting with c is {0}.", dirs.Length)
+                Dim dir As String
+
+                Dim B1 As New ToolStripButton
+                Dim i As Integer = 0
+                Dim sNameS(500) As String
+
+                For Each dir In dirs
+
+                    Dim d() As String
+                    d = Split(dir, "\")
+                    'd(d.Length - 1
+                    sNameS(i) = d(d.Length - 1)
+
+                    i = i + 1
+                Next
+
+                For i1 As Integer = 0 To i
+                    Dim B As New ToolStripButton
+
+                    B.ForeColor = Color.Blue
+                    B.Text = sNameS(i1)
+                    Btn(i1) = B
+
+                    AddHandler Btn(i1).Click, AddressOf DbButtonsClick
+                    DB_USE.DropDown.Items.AddRange(New ToolStripItem() {Btn(i1)})
+                Next
+
+                DB_USE.Text = Base_Name
+
+            Case "MS Access 2007"
+
+                DB_USE.Text = Base_Name
+                LBL_SUBD.Visible = False
+
+                DB_USE.DropDown.Items.Clear()
+
+                ' Only get files that begin with the letter "c."
+                Dim dirs As String() = Directory.GetFiles(BasePath, "*.accdb")
                 ' Console.WriteLine("The number of files starting with c is {0}.", dirs.Length)
                 Dim dir As String
 
@@ -831,8 +870,6 @@ Error_:
                 Kill(BasePath & Base_Name)
                 Rename(BasePath & sBname, BasePath & Base_Name)
                 LoadDatabase()
-
-                'MsgBox(LNGIniFile.GetString("frmMain", "MSG5", "Сжатие базы завершено успешно!"), MsgBoxStyle.Information, ProGramName)
 
             Case Else
 

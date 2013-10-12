@@ -98,6 +98,14 @@ Module MOD_ALTER_DB
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
+            Case "MS Access 2007"
+
+                Call frmMain.COMPARE_DB()
+
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
             Case "MySQL"
 
                 sSQL = "ALTER TABLE 'Remont' ADD COLUMN 'GARANT' datetime"
@@ -184,6 +192,13 @@ err_:
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
+            Case "MS Access 2007"
+                Call frmMain.COMPARE_DB()
+
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
             Case "MySQL"
 
                 sSQL = "ALTER TABLE 'kompy' ADD COLUMN 'SNMP_COMMUNITY' VARCHAR(45) AFTER 'PCL', ADD COLUMN 'SNMP' TINYINT AFTER 'SNMP_COMMUNITY';"
@@ -251,6 +266,14 @@ err_:
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
+            Case "MS Access 2007"
+
+                Call frmMain.COMPARE_DB()
+
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
             Case "MySQL"
 
                 sSQL = "CREATE TABLE 'TBL_DEV_OID' ('id' int NOT NULL AUTO_INCREMENT, 'Device' varchar(50) ,'Developer' varchar(50) ,'Model' varchar(50) ,'LOCATION_OID' varchar(50) ,'NETNAME_OID' varchar(50) ,'CONTACT_OID' varchar(50) ,'MODEL_OID' varchar(50) ,'SER_NUM_OID' varchar(50) ,'TIME_BATTERY_OID' varchar(50) ,'ZARIAD_BATTARY_OID' varchar(50) ,'SOST_BATTARY_OID' varchar(50) ,'ZAMENA_BATTARY_OID' varchar(50) ,'UPTIME_OID' varchar(50) ,MAC_OID varchar(50) ,'IN_TOK_OID' varchar(50) ,'OUT_TOK_OID' varchar(50) ,'OUTPUT_FREQ_OID' varchar(50) ,'OUTPUT_LOAD_OID' varchar(50) ,'OUTPUT_STATUS_OID' varchar(50) ,'SELFTEST_OID' varchar(50) ,'SELFTEST_DAY_OID' varchar(50) ,'TEMPERATURE_OID' varchar(50) ,'TEMPERATURE2_OID' VARCHAR(50))"
@@ -311,6 +334,14 @@ err_:
                 rs = Nothing
 
             Case "MS Access"
+
+                Call frmMain.COMPARE_DB()
+
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+            Case "MS Access 2007"
 
                 Call frmMain.COMPARE_DB()
 
@@ -399,6 +430,13 @@ err_:
                 rs = Nothing
 
             Case "MS Access"
+                Call frmMain.COMPARE_DB()
+
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+            Case "MS Access 2007"
                 Call frmMain.COMPARE_DB()
 
                 rs = New Recordset
@@ -614,6 +652,10 @@ err_:
 
                 Call frmMain.COMPARE_DB()
 
+            Case "MS Access 2007"
+
+                Call frmMain.COMPARE_DB()
+
             Case "MySQL"
 
             Case "MySQL (MyODBC 5.1)"
@@ -670,6 +712,14 @@ err_:
 
 
             Case "MS Access"
+
+                Call frmMain.COMPARE_DB()
+
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+            Case "MS Access 2007"
 
                 Call frmMain.COMPARE_DB()
 
@@ -767,6 +817,14 @@ err_:
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
+            Case "MS Access 2007"
+
+                Call frmMain.COMPARE_DB()
+
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
             Case "MySQL"
 
                 ' sSQL = "CREATE TABLE tbl_net_mag(id int(11) NOT NULL AUTO_INCREMENT,id_line varchar(255) ,tip_cab varchar(255) ,dlin_cab integer DEFAULT 0,tip_cab_line varchar(255) ,svt integer DEFAULT 0,net_port_svt varchar(255) ,phone varchar(255) ,svt_memo TEXT ,commutator integer DEFAULT 0,net_port_commutator varchar(255) ,commutator_memo TEXT ,pref varchar(255) ,sid integer DEFAULT 0)"
@@ -857,6 +915,20 @@ err_:
                 rs = Nothing
 
             Case "MS Access"
+                Call frmMain.COMPARE_DB()
+
+
+                sSQL = "alter table Remont ADD startdate Date, starttime Date, stopdate Date, stoptime Date"
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+                sSQL = "CREATE TABLE SPR_USER(id counter, Name TEXT(50), Proizv int, Prim MEMO,  A TEXT(50),  B TEXT(50),  C TEXT(50))"
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+            Case "MS Access 2007"
                 Call frmMain.COMPARE_DB()
 
 
@@ -987,6 +1059,16 @@ err_:
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
+            Case "MS Access 2007"
+                Call frmMain.COMPARE_DB()
+
+
+                sSQL = "alter table kompy ADD SVGA2_NAME TEXT(50) , SVGA2_OB_RAM TEXT(50) , SVGA2_SN TEXT(50) , SVGA2_PROIZV TEXT(50) default NULL"
+
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
             Case "MySQL"
 
                 sSQL = "alter table 'kompy' ADD COLUMN 'SVGA2_NAME' varchar(255) , 'SVGA2_OB_RAM' varchar(50) , 'SVGA2_SN' varchar(50) , 'SVGA2_PROIZV' varchar(50)"
@@ -1096,6 +1178,30 @@ err_:
                 rs = Nothing
 
             Case "MS Access"
+
+                Call frmMain.COMPARE_DB()
+
+                sSQL = "ALTER TABLE kompy ADD COLUMN MB_NAME Memo"
+
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+                sSQL = "UPDATE kompy SET MB_NAME=Mb"
+
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+                sSQL = "ALTER TABLE kompy DROP COLUMN Mb, nomerPC, TEXT_RED, EXCELL_RED, ACCESS_RED, VG, IG"
+
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
+                Call frmMain.COMPARE_DB()
+
+            Case "MS Access 2007"
 
                 Call frmMain.COMPARE_DB()
 
@@ -1252,6 +1358,14 @@ err_:
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                 rs = Nothing
 
+            Case "MS Access 2007"
+
+                Call frmMain.COMPARE_DB()
+
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                rs = Nothing
+
             Case "MySQL"
 
                 sSQL = "ALTER TABLE 'kompy' ADD COLUMN 'data_sp' datetime, data_nb datetime"
@@ -1309,7 +1423,7 @@ err_:
 
         Dim uname As Integer
 
-        If DB_N <> "MS Access" Then uname = 2 Else uname = 1
+        If DB_N <> "MS Access" Or DB_N <> "MS Access 2007" Then uname = 2 Else uname = 1
 
         For lngCounter = 0 To rs.Fields.Count - uname
 

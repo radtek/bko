@@ -381,79 +381,65 @@
     Private Sub btnAdd_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAdd.Click
         On Error GoTo err_
 
-
         Dim sSQL As String
-
 
         If Not (RSExists("Postav", "name", Me.cmbPostav.Text)) Then
             AddOnePar(Me.cmbPostav.Text, "NAME", "SPR_Postav", Me.cmbPostav)
         End If
 
-
         Select Case sTEXT
 
             Case "CPU"
 
-                Dim rs As Recordset
-                rs = New Recordset
-                rs.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
-                        LockTypeEnum.adLockOptimistic)
+                sSQL = "UPDATE kompy SET " &
+                       "CPU1='" & Me.cmbCPU1.Text & "'," &
+                       "CPUmhz1='" & Me.txtMHZ1.Text & "'," &
+                       "CPUSocket1='" & Me.txtSoc1.Text & "'," &
+                       "CPUProizv1='" & Me.PROizV1.Text & "'," &
+                       "CPU2='" & Me.cmbCPU2.Text & "'," &
+                       "CPUmhz2='" & Me.txtMHZ2.Text & "'," &
+                       "CPUSocket2='" & Me.txtSoc2.Text & "'," &
+                       "CPUProizv2='" & Me.PROizV2.Text & "'," &
+                       "CPU3='" & Me.cmbCPU3.Text & "'," &
+                       "CPUmhz3='" & Me.txtMHZ3.Text & "'," &
+                       "CPUSocket3='" & Me.txtSoc3.Text & "'," &
+                       "CPUProizv3='" & Me.PROizV3.Text & "'," &
+                       "CPU4='" & Me.cmbCPU4.Text & "'," &
+                       "CPUmhz4='" & Me.txtMHZ4.Text & "'," &
+                       "CPUSocket4='" & Me.txtSoc4.Text & "'," &
+                       "CPUProizv4='" & Me.PROizV4.Text & "' " &
+                       " WHERE id =" & frmComputers.sCOUNT
 
-                With rs
-                    .Fields("CPU1").Value = Me.cmbCPU1.Text
-                    .Fields("CPUmhz1").Value = Me.txtMHZ1.Text
-                    .Fields("CPUSocket1").Value = Me.txtSoc1.Text
-                    .Fields("CPUProizv1").Value = Me.PROizV1.Text
+                DB7.Execute(sSQL)
 
-                    .Fields("CPU2").Value = Me.cmbCPU2.Text
-                    .Fields("CPUmhz2").Value = Me.txtMHZ2.Text
-                    .Fields("CPUSocket2").Value = Me.txtSoc2.Text
-                    .Fields("CPUProizv2").Value = Me.PROizV2.Text
-
-                    .Fields("CPU3").Value = Me.cmbCPU3.Text
-                    .Fields("CPUmhz3").Value = Me.txtMHZ3.Text
-                    .Fields("CPUSocket3").Value = Me.txtSoc3.Text
-                    .Fields("CPUProizv3").Value = Me.PROizV3.Text
-
-                    .Fields("CPU4").Value = Me.cmbCPU4.Text
-                    .Fields("CPUmhz4").Value = Me.txtMHZ4.Text
-                    .Fields("CPUSocket4").Value = Me.txtSoc4.Text
-                    .Fields("CPUProizv4").Value = Me.PROizV4.Text
-                    .Update()
-                End With
-                rs.Close()
-                rs = Nothing
                 LOADt(frmComputers.sCOUNT)
 
+                Select Case EditGarant
 
-                If EditGarant = True Then
-                    sSQL = "SELECT * FROM garant_comp WHERE Id_Comp =" & frmComputers.sCOUNT
-                Else
-                    sSQL = "SELECT * FROM garant_comp"
-                End If
+                    Case True
 
-                rs = New Recordset
-                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        sSQL = "UPDATE garant_comp SET " &
+                        "CPU_DP='" & Me.DNG.Value.Day & "'," &
+                        "CPU_MP='" & Me.DNG.Value.Month & "'," &
+                        "CPU_GP='" & Me.DNG.Value.Year & "'," &
+                        "CPU_DPo='" & Me.DOG.Value.Day & "'," &
+                        "CPU_MPo='" & Me.DOG.Value.Month & "'," &
+                        "CPU_GPo='" & Me.DOG.Value.Year & "'," &
+                        "CPU_POST='" & Me.cmbPostav.Text & "' WHERE Id_Comp =" & frmComputers.sCOUNT
 
-                With rs
-                    If EditGarant = False Then
-                        .AddNew()
-                        .Fields("Id_Comp").Value = frmComputers.sCOUNT
-                    End If
+                    Case False
 
-                    .Fields("CPU_DP").Value = Me.DNG.Value.Day
-                    .Fields("CPU_MP").Value = Me.DNG.Value.Month
-                    .Fields("CPU_GP").Value = Me.DNG.Value.Year
+                        sSQL = "INSERT INTO garant_comp (Id_Comp,CPU_DP,CPU_MP,CPU_GP,CPU_DPo,CPU_MPo,CPU_GPo,CPU_POST) VALUES (" & frmComputers.sCOUNT & ",'" &
+                                            Me.DNG.Value.Day & "','" &
+                                            Me.DNG.Value.Month & "','" &
+                                            Me.DNG.Value.Year & "','" &
+                                            Me.DOG.Value.Day & "','" &
+                                            Me.DOG.Value.Month & "','" &
+                                            Me.DOG.Value.Year & "','" &
+                                            Me.cmbPostav.Text & "')"
+                End Select
 
-                    .Fields("CPU_DPo").Value = Me.DOG.Value.Day
-                    .Fields("CPU_MPo").Value = Me.DOG.Value.Month
-                    .Fields("CPU_GPo").Value = Me.DOG.Value.Year
-                    .Fields("CPU_POST").Value = Me.cmbPostav.Text
-
-                    .Update()
-                End With
-                rs.Close()
-                rs = Nothing
+                DB7.Execute(sSQL)
 
             Case "RAM"
 

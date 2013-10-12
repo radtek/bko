@@ -48,24 +48,10 @@
 
         End If
 
-        sSQL = "SELECT * FROM TBL_PPR"
+        sSQL = "INSERT INTO TBL_PPR (ID_COMP,TIP_TO,KVARTAL_TO,YEAR_TO) VALUES (" & frmComputers.sCOUNT & ",'" & frmComputers.TIP_TO & "','" & cmbKvartal.Text & "','" & cmbYear.Text & "')"
 
         rs = New Recordset
         rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
-        With rs
-            .AddNew()
-
-            .Fields("ID_COMP").Value = frmComputers.sCOUNT
-            .Fields("TIP_TO").Value = frmComputers.TIP_TO
-
-            .Fields("KVARTAL_TO").Value = cmbKvartal.Text
-            .Fields("YEAR_TO").Value = cmbYear.Text
-
-
-            .Update()
-        End With
-        rs.Close()
         rs = Nothing
 
         Me.Close()

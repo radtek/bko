@@ -21,7 +21,7 @@ Module MOD_REF_TREE
 
         If Len(FILIAL1) = 0 Then Exit Sub
 
-        Dim sSQL4 As String
+        Dim sSQL As String
 
         Dim objIniFile As New IniFile(PrPath & "base.ini")
 
@@ -35,20 +35,20 @@ Module MOD_REF_TREE
                 '    "SELECT id, mesto, filial, tip_compa, tiptehn, PSEVDONIM, NET_NAME, kabn, Spisan, OS, PRINTER_NAME_4,balans FROM kompy WHERE filial ='" &
                 '    FILIAL1 & "' AND mesto ='" & OTDEL1 & "' AND kabn ='" & KABINET1 &
                 '    "'  AND PCL =0 ORDER BY PSEVDONIM, tiptehn"
-                sSQL4 = "SELECT id, mesto, filial, tip_compa, tiptehn, PSEVDONIM, NET_NAME, kabn, Spisan, OS, PRINTER_NAME_4,balans, (Select count(*) as t_n FROM Remont Where id_comp=kompy.id and zakryt = 0) as rem FROM kompy WHERE filial ='" & FILIAL1 & "' AND mesto ='" & OTDEL1 & "' AND kabn ='" & KABINET1 & "'  AND PCL =0 ORDER BY PSEVDONIM, tiptehn"
+                sSQL = "SELECT id, mesto, filial, tip_compa, tiptehn, PSEVDONIM, NET_NAME, kabn, Spisan, OS, PRINTER_NAME_4,balans, (Select count(*) as t_n FROM Remont Where id_comp=kompy.id and zakryt = 0) as rem FROM kompy WHERE filial ='" & FILIAL1 & "' AND mesto ='" & OTDEL1 & "' AND kabn ='" & KABINET1 & "'  AND PCL =0 ORDER BY PSEVDONIM, tiptehn"
             Case 1
 
                 'sSQL4 =
                 '    "SELECT id, mesto, filial, tip_compa, tiptehn, PSEVDONIM, NET_NAME, kabn, Spisan, OS, PRINTER_NAME_4,balans FROM kompy WHERE filial ='" &
                 '    FILIAL1 & "' AND mesto ='" & OTDEL1 & "' AND kabn ='" & KABINET1 &
                 '    "' AND PCL =0 ORDER BY tiptehn, PSEVDONIM"
-                sSQL4 = "SELECT id, mesto, filial, tip_compa, tiptehn, PSEVDONIM, NET_NAME, kabn, Spisan, OS, PRINTER_NAME_4,balans, (Select count(*) as t_n FROM Remont Where id_comp=kompy.id and zakryt = 0) as rem FROM kompy WHERE filial ='" & FILIAL1 & "' AND mesto ='" & OTDEL1 & "' AND kabn ='" & KABINET1 & "'  AND PCL =0 ORDER BY tiptehn, PSEVDONIM"
+                sSQL = "SELECT id, mesto, filial, tip_compa, tiptehn, PSEVDONIM, NET_NAME, kabn, Spisan, OS, PRINTER_NAME_4,balans, (Select count(*) as t_n FROM Remont Where id_comp=kompy.id and zakryt = 0) as rem FROM kompy WHERE filial ='" & FILIAL1 & "' AND mesto ='" & OTDEL1 & "' AND kabn ='" & KABINET1 & "'  AND PCL =0 ORDER BY tiptehn, PSEVDONIM"
 
         End Select
 
         Dim rs3 As Recordset
         rs3 = New Recordset
-        rs3.Open(sSQL4, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+        rs3.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         Dim tmpRemont As Integer
         With rs3
@@ -67,8 +67,7 @@ Module MOD_REF_TREE
                 tmpRemont = .Fields("rem").Value
                 iID = .Fields("id").Value
 
-                FILING_TREE(lstgroups1, iA5, iA1, iA2, iA3, iID, iA4, BrancheNode1, iA6, iA7, iA8, tmpRemont)
-
+                Call FILING_TREE(lstgroups1, iA5, iA1, iA2, iA3, iID, iA4, BrancheNode1, iA6, iA7, iA8, tmpRemont)
 
                 .MoveNext()
             Loop
@@ -477,49 +476,61 @@ ERR1:
         DCKey = objIniFile.GetString("general", "Default", 0)
         sTREENAME = objIniFile.GetString("general", "NETNAME", "1")
 
-        If iTipTehn = "PC" Then
-            iC = TipPC
-        Else
-            iC = "Рабочая станция"
-        End If
+        Select Case iTipTehn
 
-        If iC = "Ноутбук" Or iC = "notebook" Or iC = "Notebook" Or iC = "NoteBook" Then
-            iC = "Ноутбук"
-        End If
+            Case "PC"
+                iC = TipPC
+            Case Else
+                iC = "Рабочая станция"
+        End Select
 
-        If iC = "КПК" Or iC = "Pocket PC" Or iC = "Pocket" Or iC = "Palm" Then
-            iC = "КПК"
-        End If
-
-        If iC = "Сервер" Or iC = "Server" Or iC = "Сервер для тонких клиентов" Or iC = "Сервер видео наблюдения" Then
-            iC = "Сервер"
-        End If
-
-        'Pocket PC
-
+        'Тип техники
         Select Case iC
+            Case "Ноутбук"
+                iC = "Ноутбук"
+            Case "notebook"
+                iC = "Ноутбук"
+            Case "Notebook"
+                iC = "Ноутбук"
+            Case "NoteBook"
+                iC = "Ноутбук"
+            Case "КПК"
+                iC = "КПК"
+            Case "Pocket PC"
+                iC = "КПК"
+            Case "Pocket"
+                iC = "КПК"
+            Case "Palm"
+                iC = "КПК"
+            Case "Планшет"
+                iC = "КПК"
+            Case "Сервер"
+                iC = "Сервер"
+            Case "Server"
+                iC = "Сервер"
+            Case "Сервер для тонких клиентов"
+                iC = "Сервер"
+            Case "Сервер видео наблюдения"
+                iC = "Сервер"
+        End Select
 
+        'Иконки
+        Select Case iC
             Case "Рабочая станция"
                 iA = 4
                 iB = 4
-
             Case "Сервер"
-
                 iA = 3
                 iB = 3
-
             Case "КПК"
                 iA = 31
                 iB = 31
-
             Case "Ноутбук"
                 iA = 5
                 iB = 5
-
             Case Else
                 iA = 4
                 iB = 4
-
         End Select
 
         'Определяем подчиненное оборудование (в составе)
@@ -541,13 +552,15 @@ ERR1:
                 N_NAME = NET_NAME
                 P_NAME = PSEVDONIM
 
-                If Len(N_NAME) = 0 Then
-                    N_NAME = "NoName"
-                End If
+                Select Case Len(N_NAME)
+                    Case 0
+                        N_NAME = "NoName"
+                End Select
 
-                If Len(P_NAME) = 0 Then
-                    P_NAME = "NoName"
-                End If
+                Select Case Len(P_NAME)
+                    Case 0
+                        P_NAME = "NoName"
+                End Select
 
                 Select Case N_NAME
 
@@ -564,17 +577,19 @@ ERR1:
             Case 2
                 P_NAME = PSEVDONIM
 
-                If Len(P_NAME) = 0 Then
-                    P_NAME = "NoName"
-                End If
+                Select Case Len(P_NAME)
+                    Case 0
+                        P_NAME = "NoName"
+                End Select
                 L_NAME = P_NAME
 
             Case 1
 
                 N_NAME = NET_NAME
-                If Len(N_NAME) = 0 Then
-                    N_NAME = "NoName"
-                End If
+                Select Case Len(N_NAME)
+                    Case 0
+                        N_NAME = "NoName"
+                End Select
 
                 L_NAME = N_NAME
 
@@ -588,25 +603,20 @@ ERR1:
 
                 On Error Resume Next
 
-                If Len(NET_NAME) = 0 Then
-
-                    uname = ""
-
-                Else
-
-                    Dim rsOT As Recordset
-                    rsOT = New Recordset
-                    rsOT.Open("SELECT A FROM spr_other where Name ='" & NET_NAME & "'", DB7,
-                              CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
-                    With rsOT
-                        If Not IsDBNull(.Fields("A").Value) Then uname = .Fields("A").Value
-                    End With
-
-                    rsOT.Close()
-                    rsOT = Nothing
-
-                End If
+                Select Case Len(NET_NAME)
+                    Case 0
+                        uname = ""
+                    Case Else
+                        Dim rsOT As Recordset
+                        rsOT = New Recordset
+                        rsOT.Open("SELECT A FROM spr_other where Name ='" & NET_NAME & "'", DB7,
+                                  CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        With rsOT
+                            If Not IsDBNull(.Fields("A").Value) Then uname = .Fields("A").Value
+                        End With
+                        rsOT.Close()
+                        rsOT = Nothing
+                End Select
 
                 Dim TEHNodeCNT As New TreeNode(L_NAME, uname, uname)
                 TEHNodeCNT.Tag = "C|" & iD
@@ -679,13 +689,15 @@ ERR1:
                                         N_NAME = .Fields("NET_NAME").Value
                                         P_NAME = .Fields("PSEVDONIM").Value
 
-                                        If Len(N_NAME) = 0 Then
-                                            N_NAME = "NoName"
-                                        End If
+                                        Select Case Len(N_NAME)
+                                            Case 0
+                                                N_NAME = "NoName"
+                                        End Select
 
-                                        If Len(P_NAME) = 0 Then
-                                            P_NAME = "NoName"
-                                        End If
+                                        Select Case Len(P_NAME)
+                                            Case 0
+                                                P_NAME = "NoName"
+                                        End Select
 
                                         Select Case N_NAME
 
@@ -698,22 +710,23 @@ ERR1:
 
                                         End Select
 
-
-
                                     Case 2
                                         P_NAME = .Fields("PSEVDONIM").Value
 
-                                        If Len(P_NAME) = 0 Then
-                                            P_NAME = "NoName"
-                                        End If
+                                        Select Case Len(P_NAME)
+                                            Case 0
+                                                P_NAME = "NoName"
+                                        End Select
+
                                         L_NAME = P_NAME
 
                                     Case 1
 
                                         N_NAME = .Fields("NET_NAME").Value
-                                        If Len(N_NAME) = 0 Then
-                                            N_NAME = "NoName"
-                                        End If
+                                        Select Case Len(N_NAME)
+                                            Case 0
+                                                N_NAME = "NoName"
+                                        End Select
 
                                         L_NAME = N_NAME
 
@@ -752,40 +765,47 @@ ERR1:
 
                                         iC = .Fields("TIP_COMPA").Value
 
-                                        If iC = "Ноутбук" Or iC = "notebook" Or iC = "Notebook" Or iC = "NoteBook" Then
-                                            iC = "Ноутбук"
-                                        End If
-
-                                        If iC = "КПК" Or iC = "Pocket PC" Or iC = "Pocket" Or iC = "Palm" Then
-                                            iC = "КПК"
-                                        End If
-
-                                        If _
-                                            iC = "Сервер" Or iC = "Server" Or iC = "Сервер для тонких клиентов" Or
-                                            iC = "Сервер видео наблюдения" Then
-                                            iC = "Сервер"
-                                        End If
-
-                                        'Pocket PC
+                                        Select Case iC
+                                            Case "Ноутбук"
+                                                iC = "Ноутбук"
+                                            Case "notebook"
+                                                iC = "Ноутбук"
+                                            Case "Notebook"
+                                                iC = "Ноутбук"
+                                            Case "NoteBook"
+                                                iC = "Ноутбук"
+                                            Case "КПК"
+                                                iC = "КПК"
+                                            Case "Pocket PC"
+                                                iC = "КПК"
+                                            Case "Pocket"
+                                                iC = "КПК"
+                                            Case "Palm"
+                                                iC = "КПК"
+                                            Case "Планшет"
+                                                iC = "КПК"
+                                            Case "Сервер"
+                                                iC = "Сервер"
+                                            Case "Server"
+                                                iC = "Сервер"
+                                            Case "Сервер для тонких клиентов"
+                                                iC = "Сервер"
+                                            Case "Сервер видео наблюдения"
+                                                iC = "Сервер"
+                                        End Select
 
                                         Select Case iC
 
                                             Case "Рабочая станция"
                                                 iA = 4
-
                                             Case "Сервер"
-
                                                 iA = 3
-
                                             Case "КПК"
                                                 iA = 31
-
                                             Case "Ноутбук"
                                                 iA = 5
-
                                             Case Else
                                                 iA = 4
-
                                         End Select
 
                                         Dim TEHNodePC As New TreeNode(L_NAME, iA, iA)
@@ -857,13 +877,15 @@ ERR1:
                                                                 N_NAME = .Fields("NET_NAME").Value
                                                                 P_NAME = .Fields("PSEVDONIM").Value
 
-                                                                If Len(N_NAME) = 0 Then
-                                                                    N_NAME = "NoName"
-                                                                End If
+                                                                Select Case Len(N_NAME)
+                                                                    Case 0
+                                                                        N_NAME = "NoName"
+                                                                End Select
 
-                                                                If Len(P_NAME) = 0 Then
-                                                                    P_NAME = "NoName"
-                                                                End If
+                                                                Select Case Len(P_NAME)
+                                                                    Case 0
+                                                                        P_NAME = "NoName"
+                                                                End Select
 
                                                                 Select Case N_NAME
 
@@ -880,17 +902,19 @@ ERR1:
                                                             Case 2
                                                                 P_NAME = .Fields("PSEVDONIM").Value
 
-                                                                If Len(P_NAME) = 0 Then
-                                                                    P_NAME = "NoName"
-                                                                End If
+                                                                Select Case Len(P_NAME)
+                                                                    Case 0
+                                                                        P_NAME = "NoName"
+                                                                End Select
                                                                 L_NAME = P_NAME
 
                                                             Case 1
 
                                                                 N_NAME = .Fields("NET_NAME").Value
-                                                                If Len(N_NAME) = 0 Then
-                                                                    N_NAME = "NoName"
-                                                                End If
+                                                                Select Case Len(N_NAME)
+                                                                    Case 0
+                                                                        N_NAME = "NoName"
+                                                                End Select
 
                                                                 L_NAME = N_NAME
 
@@ -927,36 +951,31 @@ ERR1:
 
                                                             Case "OT"
 
-                                                                ' Dim uname As String
-
                                                                 On Error Resume Next
 
-                                                                If Len(.Fields("tip_compa").Value) = 0 Then
+                                                                Select Case Len(.Fields("tip_compa").Value)
+                                                                    Case 0
+                                                                        uname = ""
+                                                                    Case Else
+                                                                        Dim rsOT As Recordset
+                                                                        rsOT = New Recordset
+                                                                        rsOT.Open(
+                                                                            "SELECT A FROM spr_other where Name ='" &
+                                                                            .Fields("tip_compa").Value & "'", DB7,
+                                                                            CursorTypeEnum.adOpenDynamic,
+                                                                            LockTypeEnum.adLockOptimistic)
 
-                                                                    uname = ""
+                                                                        uname = ""
+                                                                        With rsOT
 
-                                                                Else
+                                                                            If Not IsDBNull(.Fields("A").Value) Then _
+                                                                                uname = .Fields("A").Value
 
-                                                                    Dim rsOT As Recordset
-                                                                    rsOT = New Recordset
-                                                                    rsOT.Open(
-                                                                        "SELECT A FROM spr_other where Name ='" &
-                                                                        .Fields("tip_compa").Value & "'", DB7,
-                                                                        CursorTypeEnum.adOpenDynamic,
-                                                                        LockTypeEnum.adLockOptimistic)
+                                                                        End With
 
-                                                                    uname = ""
-                                                                    With rsOT
-
-                                                                        If Not IsDBNull(.Fields("A").Value) Then _
-                                                                            uname = .Fields("A").Value
-
-                                                                    End With
-
-                                                                    rsOT.Close()
-                                                                    rsOT = Nothing
-
-                                                                End If
+                                                                        rsOT.Close()
+                                                                        rsOT = Nothing
+                                                                End Select
 
                                                                 Select Case uname
 
@@ -1066,34 +1085,32 @@ ERR1:
 
                                     Case "OT"
 
-                                        'Dim uname As String
-
                                         On Error Resume Next
 
-                                        If Len(.Fields("tip_compa").Value) = 0 Then
+                                        Select Case Len(.Fields("tip_compa").Value)
 
-                                            uname = ""
+                                            Case 0
+                                                uname = ""
+                                            Case Else
 
-                                        Else
+                                                Dim rsOT As Recordset
+                                                rsOT = New Recordset
+                                                rsOT.Open(
+                                                    "SELECT A FROM spr_other where Name ='" & .Fields("tip_compa").Value & "'",
+                                                    DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-                                            Dim rsOT As Recordset
-                                            rsOT = New Recordset
-                                            rsOT.Open(
-                                                "SELECT A FROM spr_other where Name ='" & .Fields("tip_compa").Value & "'",
-                                                DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                                                uname = ""
 
-                                            uname = ""
+                                                With rsOT
 
-                                            With rsOT
+                                                    If Not IsDBNull(.Fields("A").Value) Then uname = .Fields("A").Value
 
-                                                If Not IsDBNull(.Fields("A").Value) Then uname = .Fields("A").Value
+                                                End With
 
-                                            End With
+                                                rsOT.Close()
+                                                rsOT = Nothing
 
-                                            rsOT.Close()
-                                            rsOT = Nothing
-
-                                        End If
+                                        End Select
 
                                         Select Case uname
 
@@ -1241,13 +1258,15 @@ ERR1:
                                         N_NAME = .Fields("NET_NAME").Value
                                         P_NAME = .Fields("PSEVDONIM").Value
 
-                                        If Len(N_NAME) = 0 Then
-                                            N_NAME = "NoName"
-                                        End If
+                                        Select Case Len(N_NAME)
+                                            Case 0
+                                                N_NAME = "NoName"
+                                        End Select
 
-                                        If Len(P_NAME) = 0 Then
-                                            P_NAME = "NoName"
-                                        End If
+                                        Select Case Len(P_NAME)
+                                            Case 0
+                                                P_NAME = "NoName"
+                                        End Select
 
                                         Select Case N_NAME
 
@@ -1263,17 +1282,21 @@ ERR1:
                                     Case 2
                                         P_NAME = .Fields("PSEVDONIM").Value
 
-                                        If Len(P_NAME) = 0 Then
-                                            P_NAME = "NoName"
-                                        End If
+                                        Select Case Len(P_NAME)
+                                            Case 0
+                                                P_NAME = "NoName"
+                                        End Select
+
                                         L_NAME = P_NAME
 
                                     Case 1
 
                                         N_NAME = .Fields("NET_NAME").Value
-                                        If Len(N_NAME) = 0 Then
-                                            N_NAME = "NoName"
-                                        End If
+
+                                        Select Case Len(N_NAME)
+                                            Case 0
+                                                N_NAME = "NoName"
+                                        End Select
 
                                         L_NAME = N_NAME
 
@@ -1317,30 +1340,27 @@ ERR1:
 
                                         On Error Resume Next
 
+                                        Select Case Len(.Fields("tip_compa").Value)
+                                            Case 0
+                                                uname = ""
+                                            Case Else
+                                                Dim rsOT As Recordset
+                                                rsOT = New Recordset
+                                                rsOT.Open(
+                                                    "SELECT A FROM spr_other where Name ='" & .Fields("tip_compa").Value & "'",
+                                                    DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-                                        If Len(.Fields("tip_compa").Value) = 0 Then
+                                                uname = ""
 
-                                            uname = ""
-                                        Else
+                                                With rsOT
 
-                                            Dim rsOT As Recordset
-                                            rsOT = New Recordset
-                                            rsOT.Open(
-                                                "SELECT A FROM spr_other where Name ='" & .Fields("tip_compa").Value & "'",
-                                                DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                                                    If Not IsDBNull(.Fields("A").Value) Then uname = .Fields("A").Value
 
-                                            uname = ""
+                                                End With
 
-                                            With rsOT
-
-                                                If Not IsDBNull(.Fields("A").Value) Then uname = .Fields("A").Value
-
-                                            End With
-
-                                            rsOT.Close()
-                                            rsOT = Nothing
-
-                                        End If
+                                                rsOT.Close()
+                                                rsOT = Nothing
+                                        End Select
 
                                         Select Case uname
 
@@ -1468,17 +1488,13 @@ ERR1:
                 Dim sText As String = objIniFile.GetString("general", "Tree_S", 0)
                 Dim sSQL4 As String
 
-
-                sSQL4 = "SELECT count(*) as t_n FROM kompy WHERE PCL =" & iD
-
                 Dim rs3 As Recordset
                 rs3 = New Recordset
-                rs3.Open(sSQL4, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                rs3.Open("SELECT count(*) as t_n FROM kompy WHERE PCL =" & iD, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 Dim sCount As String
-                With rs3
-                    sCount = .Fields("t_n").Value
-                End With
+
+                sCount = rs3.Fields("t_n").Value
 
                 rs3.Close()
                 rs3 = Nothing
@@ -1523,13 +1539,15 @@ ERR1:
                                         N_NAME = .Fields("NET_NAME").Value
                                         P_NAME = .Fields("PSEVDONIM").Value
 
-                                        If Len(N_NAME) = 0 Then
-                                            N_NAME = "NoName"
-                                        End If
+                                        Select Case Len(N_NAME)
+                                            Case 0
+                                                N_NAME = "NoName"
+                                        End Select
 
-                                        If Len(P_NAME) = 0 Then
-                                            P_NAME = "NoName"
-                                        End If
+                                        Select Case Len(P_NAME)
+                                            Case 0
+                                                P_NAME = "NoName"
+                                        End Select
 
                                         Select Case N_NAME
 
@@ -1545,17 +1563,20 @@ ERR1:
                                     Case 2
                                         P_NAME = .Fields("PSEVDONIM").Value
 
-                                        If Len(P_NAME) = 0 Then
-                                            P_NAME = "NoName"
-                                        End If
+                                        Select Case Len(P_NAME)
+                                            Case 0
+                                                P_NAME = "NoName"
+                                        End Select
+
                                         L_NAME = P_NAME
 
                                     Case 1
 
                                         N_NAME = .Fields("NET_NAME").Value
-                                        If Len(N_NAME) = 0 Then
-                                            N_NAME = "NoName"
-                                        End If
+                                        Select Case Len(N_NAME)
+                                            Case 0
+                                                N_NAME = "NoName"
+                                        End Select
 
                                         L_NAME = N_NAME
 
@@ -1569,28 +1590,29 @@ ERR1:
 
                                         On Error Resume Next
 
-                                        If Len(.Fields("tip_compa").Value) = 0 Then
+                                        Select Case Len(.Fields("tip_compa").Value)
 
-                                            uname = ""
-                                        Else
+                                            Case 0
+                                                uname = ""
+                                            Case Else
 
-                                            Dim rsOT As Recordset
-                                            rsOT = New Recordset
-                                            rsOT.Open(
-                                                "SELECT A FROM spr_other where Name ='" & .Fields("tip_compa").Value & "'",
-                                                DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                                                Dim rsOT As Recordset
+                                                rsOT = New Recordset
+                                                rsOT.Open(
+                                                    "SELECT A FROM spr_other where Name ='" & .Fields("tip_compa").Value & "'",
+                                                    DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-                                            uname = ""
-                                            With rsOT
+                                                uname = ""
+                                                With rsOT
 
-                                                If Not IsDBNull(.Fields("A").Value) Then uname = .Fields("A").Value
+                                                    If Not IsDBNull(.Fields("A").Value) Then uname = .Fields("A").Value
 
-                                            End With
+                                                End With
 
-                                            rsOT.Close()
-                                            rsOT = Nothing
+                                                rsOT.Close()
+                                                rsOT = Nothing
 
-                                        End If
+                                        End Select
 
                                         Select Case uname
 
@@ -1646,28 +1668,30 @@ ERR1:
 
                 On Error Resume Next
 
-                If Len(TipPC) = 0 Then
+                Select Case Len(TipPC)
 
-                    uname = ""
-                Else
+                    Case 0
+                        uname = ""
 
-                    Dim rsOT As Recordset
-                    rsOT = New Recordset
-                    rsOT.Open("SELECT A FROM spr_other where Name ='" & TipPC & "'", DB7, CursorTypeEnum.adOpenDynamic,
-                              LockTypeEnum.adLockOptimistic)
+                    Case Else
 
-                    uname = ""
+                        Dim rsOT As Recordset
+                        rsOT = New Recordset
+                        rsOT.Open("SELECT A FROM spr_other where Name ='" & TipPC & "'", DB7, CursorTypeEnum.adOpenDynamic,
+                                  LockTypeEnum.adLockOptimistic)
 
-                    With rsOT
+                        uname = ""
 
-                        If Not IsDBNull(.Fields("A").Value) Then uname = .Fields("A").Value
+                        With rsOT
 
-                    End With
+                            If Not IsDBNull(.Fields("A").Value) Then uname = .Fields("A").Value
 
-                    rsOT.Close()
-                    rsOT = Nothing
+                        End With
 
-                End If
+                        rsOT.Close()
+                        rsOT = Nothing
+
+                End Select
 
                 Select Case uname
 
@@ -1786,33 +1810,12 @@ ERR1:
 
                         Case "1"
 
-                            ''If NbColor = SpisanColor Then
-                            ''    TEHNodeCNT.ForeColor = Color.Yellow
-                            ''    TEHNodeCNT.BackColor = Color.Blue
-                            ''Else
-                            'TEHNodeCNT.ForeColor = Color.FromName(NbColor)
-                            'TEHNodeCNT.BackColor = Color.FromName(SpisanColor)
-                            ''  End If
-
                             TEHNodeCNT.NodeFont = New Font(lstgroups.Font, 10)
                         Case "True"
-                            ''If NbColor = SpisanColor Then
-                            ''    TEHNodeCNT.ForeColor = Color.Yellow
-                            ''    TEHNodeCNT.BackColor = Color.Blue
-                            ''Else
-                            'TEHNodeCNT.ForeColor = Color.FromName(NbColor)
-                            'TEHNodeCNT.BackColor = Color.FromName(SpisanColor)
-
-                            ' '  End If
+                            
                             TEHNodeCNT.NodeFont = New Font(lstgroups.Font, 10)
                         Case "-1"
-                            ''If NbColor = SpisanColor Then
-                            ''    TEHNodeCNT.ForeColor = Color.Yellow
-                            ''    TEHNodeCNT.BackColor = Color.Blue
-                            ''Else
-                            'TEHNodeCNT.ForeColor = Color.FromName(NbColor)
-                            'TEHNodeCNT.BackColor = Color.FromName(SpisanColor)
-                            '' End If
+                            
                             TEHNodeCNT.NodeFont = New Font(lstgroups.Font, 10)
 
                         Case Else
@@ -1923,13 +1926,15 @@ ERR1:
 
             Case 0
 
-                If Len(N_NAME) = 0 Then
-                    N_NAME = "NoName"
-                End If
+                Select Case Len(N_NAME)
+                    Case 0
+                        N_NAME = "NoName"
+                End Select
 
-                If Len(P_NAME) = 0 Then
-                    P_NAME = "NoName"
-                End If
+                Select Case Len(P_NAME)
+                    Case 0
+                        P_NAME = "NoName"
+                End Select
 
                 Select Case N_NAME
 
@@ -1944,16 +1949,19 @@ ERR1:
 
             Case 2
 
-                If Len(P_NAME) = 0 Then
-                    P_NAME = "NoName"
-                End If
+                Select Case Len(P_NAME)
+                    Case 0
+                        P_NAME = "NoName"
+                End Select
+
                 L_NAME = P_NAME
 
             Case 1
 
-                If Len(N_NAME) = 0 Then
-                    N_NAME = "NoName"
-                End If
+                Select Case Len(N_NAME)
+                    Case 0
+                        N_NAME = "NoName"
+                End Select
 
                 L_NAME = N_NAME
 
@@ -1977,12 +1985,12 @@ ERR1:
         Dim sSID As Integer
         Dim rs As ADODB.Recordset
 
-        If Len(sKABN) <> 0 Then
-
-            sSQL = "SELECT id, Name as NAME,N_F as FILIAL, N_M as OTDEL FROM SPR_KAB WHERE N_F='" & sFIALIAL & "' AND N_M='" & sOTDEL & "' AND Name='" & sKABN & "'"
-            PrefM = "K"
-            'sICO = 2
-        End If
+        Select Case Len(sKABN)
+            Case 0
+            Case Else
+                sSQL = "SELECT id, Name as NAME,N_F as FILIAL, N_M as OTDEL FROM SPR_KAB WHERE N_F='" & sFIALIAL & "' AND N_M='" & sOTDEL & "' AND Name='" & sKABN & "'"
+                PrefM = "K"
+        End Select
 
         If Len(sOTDEL) <> 0 And Len(sKABN) = 0 Then
 
@@ -2191,14 +2199,22 @@ err_:
 
         For Each node As TreeNode In nodes
 
-            If node.Tag.ToString = sTXT Then
-                ' Return node
-                frmComputers.lstGroups.SelectedNode = node
+            Select Case node.Tag.ToString
 
-            Else
-                FIND_TREE_TAG(node.Nodes, sTXT)
+                Case sTXT
+                    frmComputers.lstGroups.SelectedNode = node
+                Case Else
+                    FIND_TREE_TAG(node.Nodes, sTXT)
 
-            End If
+            End Select
+
+            'If node.Tag.ToString = sTXT Then
+            '    ' Return node
+            '       frmComputers.lstGroups.SelectedNode = node
+            'Else
+            '    FIND_TREE_TAG(node.Nodes, sTXT)
+
+            'End If
 
         Next
 
@@ -2268,12 +2284,13 @@ err_:
 
                                     Case True
 
-                                        If frmComputers.EDT = True Then
+                                        Select Case frmComputers.EDT
 
-                                            Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & sID)
-                                            frmComputers.lstGroups.Nodes.Remove(frmComputers.lstGroups.SelectedNode)
+                                            Case True
+                                                Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & sID)
+                                                frmComputers.lstGroups.Nodes.Remove(frmComputers.lstGroups.SelectedNode)
+                                        End Select
 
-                                        End If
 
                                         RefTreeSaveTech(sID, sTXT, sTIPTEHN, sFIALIAL, sOTDEL, sKABN)
 

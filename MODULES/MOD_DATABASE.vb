@@ -78,9 +78,11 @@ Module MOD_Database
 
             Case "MS Access"
 
-                DB7.Open(
-                    "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & BasePath & "\" & sFile &
-                    ";Jet OLEDB:Database Password=" & MyShadowPassword & ";")
+                DB7.Open("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & BasePath & "\" & sFile & ";Jet OLEDB:Database Password=" & MyShadowPassword & ";")
+
+            Case "MS Access 2007"
+
+                DB7.Open("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & BasePath & "\" & sFile & ";Persist Security Info=False" & ";")
 
             Case "MySQL"
 

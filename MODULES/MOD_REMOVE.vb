@@ -1,143 +1,82 @@
 ﻿Module MOD_REMOVE
     Public Sub REMOVE_TEHN(ByVal sSID As String)
-        'On Error GoTo error
-
+        On Error GoTo Error_
         On Error Resume Next
-        'aaa$ = sContactID
 
-        Dim Garant_ia As Recordset
-        Garant_ia = New Recordset
-        Dim garant_comp As Recordset
-        garant_comp = New Recordset
-        Dim Remont As Recordset
-        Remont = New Recordset
-        Dim SOFT_INSTALL As Recordset
-        SOFT_INSTALL = New Recordset
-        Dim Zametki As Recordset
-        Zametki = New Recordset
-        Dim uLOG As Recordset
-        uLOG = New Recordset
-        Dim USERCOMP As Recordset
-        USERCOMP = New Recordset
-        Dim TBLBIOS As Recordset
-        TBLBIOS = New Recordset
-        Dim BASECOMP As Recordset
-        BASECOMP = New Recordset
-        Dim CARTRIDG As Recordset
-        CARTRIDG = New Recordset
-        Dim CARTRIDG_Z As Recordset
-        CARTRIDG_Z = New Recordset
-        Dim AKT_SP_OS3 As Recordset
-        AKT_SP_OS3 = New Recordset
-        Dim ActOS As Recordset
-        ActOS = New Recordset
-        Dim TrebOvanie As Recordset
-        TrebOvanie = New Recordset
-        Dim dvig As Recordset
-        dvig = New Recordset
-        Dim net_port As Recordset
-        net_port = New Recordset
-        Dim tbl_ppr As Recordset
-        tbl_ppr = New Recordset
+        DB7.Execute("DELETE FROM Garantia_sis WHERE Id_Comp=" & sSID)
+        DB7.Execute("DELETE FROM garant_comp WHERE Id_Comp=" & sSID)
+        DB7.Execute("DELETE FROM SOFT_INSTALL WHERE Id_Comp=" & sSID)
+        DB7.Execute("DELETE FROM Update_Log WHERE Id_Comp=" & sSID)
+        DB7.Execute("DELETE FROM USER_COMP WHERE Id_Comp=" & sSID)
+        DB7.Execute("DELETE FROM tbl_bios WHERE Id_Comp=" & sSID)
 
+        Select Case TipTehn
 
-        'frmComputers.RefContactList
-        'With BASECOMP
-        'If MsgBox("Вы желаете удалить объект? " & vbNewLine & vbNewLine & lstGroups.SelectedNode.Text, vbExclamation + vbYesNo, "Удаление техники") = vbNo Then Exit Sub
+            Case "NET"
+                DB7.Execute("DELETE FROM net_port WHERE id_net=" & sSID)
+                DB7.Execute("DELETE FROM net_port WHERE Id_Comp=" & sSID)
 
-        Garant_ia.Open("DELETE FROM Garantia_sis WHERE Id_Comp=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
-                       LockTypeEnum.adLockOptimistic)
-        garant_comp.Open("DELETE FROM garant_comp WHERE Id_Comp=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
-                         LockTypeEnum.adLockOptimistic)
-        SOFT_INSTALL.Open("DELETE FROM SOFT_INSTALL WHERE Id_Comp=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
-                          LockTypeEnum.adLockOptimistic)
-        uLOG.Open("DELETE FROM Update_Log WHERE Id_Comp=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
-                  LockTypeEnum.adLockOptimistic)
-        USERCOMP.Open("DELETE FROM USER_COMP WHERE Id_Comp=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
-                      LockTypeEnum.adLockOptimistic)
-        TBLBIOS.Open("DELETE FROM tbl_bios WHERE Id_Comp=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
-                     LockTypeEnum.adLockOptimistic)
-        CARTRIDG.Open("DELETE FROM CARTRIDG WHERE Id_Comp=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
-                      LockTypeEnum.adLockOptimistic)
-        CARTRIDG_Z.Open("DELETE FROM CARTRIDG_Z WHERE Id_Comp=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
-                        LockTypeEnum.adLockOptimistic)
-        AKT_SP_OS3.Open("DELETE FROM AKT_SP_OS3 WHERE Id_Comp=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
-                        LockTypeEnum.adLockOptimistic)
-        ActOS.Open("DELETE FROM ActOS WHERE Id_Comp=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
-                   LockTypeEnum.adLockOptimistic)
-        TrebOvanie.Open("DELETE FROM TrebOvanie WHERE Id_Comp=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
-                        LockTypeEnum.adLockOptimistic)
-        dvig.Open("DELETE FROM dvig WHERE Id_Comp=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
-                  LockTypeEnum.adLockOptimistic)
+        End Select
+      
+        DB7.Execute("DELETE FROM AKT_SP_OS3 WHERE Id_Comp=" & sSID)
+        DB7.Execute("DELETE FROM ActOS WHERE computer=" & sSID)
+        DB7.Execute("DELETE FROM TrebOvanie WHERE computer='" & sSID & "'")
+        DB7.Execute("DELETE FROM dvig WHERE Id_Comp=" & sSID)
 
-        net_port.Open("DELETE FROM net_port WHERE id_net=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
-                      LockTypeEnum.adLockOptimistic)
-        tbl_ppr.Open("DELETE FROM net_port WHERE Id_Comp=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
-                     LockTypeEnum.adLockOptimistic)
 
         Dim rs As Recordset
+
         rs = New Recordset
-        Dim rs1 As Recordset
-        rs1 = New Recordset
-
-
-        rs.Open("Select id FROM Remont where id_comp = " & sSID, DB7, CursorTypeEnum.adOpenDynamic,
+        rs.Open("Select count(*) as t_n FROM Remont where id_comp = " & sSID, DB7, CursorTypeEnum.adOpenDynamic,
                 LockTypeEnum.adLockOptimistic)
+        Dim sCOUNT As Integer
 
         With rs
-            .MoveFirst()
-            Do While Not .EOF
-                rs1.Open("Delete FROM remonty_plus WHERE id_rem =" & .Fields("id").Value, DB7,
-                         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                .MoveNext()
-            Loop
+            sCOUNT = .Fields("t_n").Value
         End With
         rs.Close()
         rs = Nothing
-        rs1.Close()
-
-        Remont.Open("DELETE FROM Remont WHERE Id_Comp=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
-                    LockTypeEnum.adLockOptimistic)
-        Zametki.Open("DELETE FROM Zametki WHERE Id_Comp=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
-                     LockTypeEnum.adLockOptimistic)
 
 
-        'Call clls()
+        Select Case sCOUNT
 
-        BASECOMP.Open("DELETE FROM kompy WHERE id=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
-                      LockTypeEnum.adLockOptimistic)
+            Case 0
 
-        'frmMain.MNUCOMPARE_DB_Click
 
-        CARTRIDG.Close()
-        CARTRIDG_Z.Close()
-        Remont.Close()
-        SOFT_INSTALL.Close()
-        Zametki.Close()
-        AKT_SP_OS3.Close()
-        ActOS.Close()
-        TrebOvanie.Close()
-        TBLBIOS.Close()
-        USERCOMP.Close()
-        uLOG.Close()
-        dvig.Close()
-        net_port.Close()
-        BASECOMP.Close()
-        tbl_ppr.Close()
+            Case Else
 
-        rs1 = New Recordset
+                rs = New Recordset
+                rs.Open("Select id FROM Remont where id_comp = " & sSID, DB7, CursorTypeEnum.adOpenDynamic,
+                        LockTypeEnum.adLockOptimistic)
 
-        rs1.Open("Update kompy set PCL='0' where PCL = " & sSID, DB7, CursorTypeEnum.adOpenDynamic,
-                 LockTypeEnum.adLockOptimistic)
-        rs1.Close()
-        rs1 = Nothing
+                With rs
+                    .MoveFirst()
+                    Do While Not .EOF
+
+                        DB7.Execute("DELETE FROM remonty_plus WHERE id_rem=" & .Fields("id").Value)
+
+                        .MoveNext()
+                    Loop
+                End With
+                rs.Close()
+                rs = Nothing
+
+        End Select
+
+        DB7.Execute("DELETE FROM Remont WHERE Id_Comp=" & sSID)
+        DB7.Execute("DELETE FROM Zametki WHERE Id_Comp=" & sSID)
+        DB7.Execute("DELETE FROM kompy WHERE id=" & sSID)
+
+        DB7.Execute("UPDATE CARTRIDG SET USTR = 0 WHERE USTR=" & sSID)
+
+        DB7.Execute("UPDATE kompy SET PCL='0' where PCL = " & sSID)
 
         Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & sSID)
         frmComputers.lstGroups.SelectedNode.Remove()
 
-
         Exit Sub
 Error_:
+        MsgBox(Err.Description)
     End Sub
 
     Public Function RemoveProyzv(ByVal sMestoName As String)
@@ -396,6 +335,7 @@ Error_:
 
         Dim LNGIniFile As New IniFile(sLANGPATH)
         'LNGIniFile.GetString("MOD_REMOVE", "MSG1", "Найдено")
+
         If UC > 0 Then
             'users are in this group
             If _
@@ -403,24 +343,25 @@ Error_:
                     LNGIniFile.GetString("MOD_REMOVE", "MSG1", "Найдено") & " " & UC & " " &
                     LNGIniFile.GetString("MOD_REMOVE", "MSG2",
                                          "производителей в справочниках, Ваше действие может привести к потере данных, желаете продолжить удаление?"),
-                    MsgBoxStyle.Exclamation + vbYesNo, ProGramName) = vbNo Then GoTo ERR1
+                    MsgBoxStyle.Exclamation + vbYesNo, ProGramName) = vbNo Then Exit Function
 
         Else
 
 
         End If
 
-        rs = New Recordset
-        rs.Open("delete FROM SPR_PROIZV WHERE id=" & sMestoName, DB7, CursorTypeEnum.adOpenDynamic,
-                LockTypeEnum.adLockOptimistic)
-        rs = Nothing
+        'rs = New Recordset
+        'rs.Open("delete FROM SPR_PROIZV WHERE id=" & sMestoName, DB7, CursorTypeEnum.adOpenDynamic,
+        '        LockTypeEnum.adLockOptimistic)
+        'rs = Nothing
+
+        DB7.Execute("delete FROM SPR_PROIZV WHERE id=" & sMestoName)
 
         RemoveProyzv = 1
 
         Exit Function
 
         RemoveProyzv = -1
-
 
         Exit Function
 ERR1:
@@ -469,10 +410,12 @@ ERR1:
 
         End If
 
-        rs = New Recordset
-        rs.Open("DELETE FROM SPR_FILIAL WHERE id=" & sGroupName, DB7, CursorTypeEnum.adOpenDynamic,
-                LockTypeEnum.adLockOptimistic)
-        rs = Nothing
+        DB7.Execute("DELETE FROM SPR_FILIAL WHERE id=" & sGroupName)
+
+        'rs = New Recordset
+        'rs.Open("DELETE FROM SPR_FILIAL WHERE id=" & sGroupName, DB7, CursorTypeEnum.adOpenDynamic,
+        '        LockTypeEnum.adLockOptimistic)
+        'rs = Nothing
 
         RemoveBrainch = 1
 
@@ -561,10 +504,12 @@ ERR1:
 
         End If
 
-        rs = New Recordset
-        rs.Open("DELETE FROM SPR_OTD_FILIAL WHERE Id=" & sKab, DB7, CursorTypeEnum.adOpenDynamic,
-                LockTypeEnum.adLockOptimistic)
-        rs = Nothing
+        DB7.Execute("DELETE FROM SPR_OTD_FILIAL WHERE Id=" & sKab)
+
+        'rs = New Recordset
+        'rs.Open("DELETE FROM SPR_OTD_FILIAL WHERE Id=" & sKab, DB7, CursorTypeEnum.adOpenDynamic,
+        '        LockTypeEnum.adLockOptimistic)
+        'rs = Nothing
         RemoveDepartment = 1
 
         Select Case TREE_UPDATE
@@ -644,9 +589,11 @@ ERR1:
 
         End If
 
-        rs = New Recordset
-        rs.Open("DELETE FROM SPR_KAB WHERE Id=" & sKab, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-        rs = Nothing
+        DB7.Execute("DELETE FROM SPR_KAB WHERE Id=" & sKab)
+
+        'rs = New Recordset
+        'rs.Open("DELETE FROM SPR_KAB WHERE Id=" & sKab, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+        'rs = Nothing
         RemoveOffice = 1
 
         ' Call RefFilTree(frmComputers.lstGroups)

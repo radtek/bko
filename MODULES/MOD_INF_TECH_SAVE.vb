@@ -74,11 +74,13 @@
 
             Case Else
 
-                rs = New Recordset
-                rs.Open(
-                    "UPDATE kompy SET OTvetstvennyj='" & tmpTXT2 & "' WHERE PCL=" & frmComputers.sCOUNT,
-                    DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                rs = Nothing
+                DB7.Execute("UPDATE kompy SET OTvetstvennyj='" & tmpTXT2 & "' WHERE PCL=" & frmComputers.sCOUNT)
+
+                'rs = New Recordset
+                'rs.Open(
+                '    "UPDATE kompy SET OTvetstvennyj='" & tmpTXT2 & "' WHERE PCL=" & frmComputers.sCOUNT,
+                '    DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                'rs = Nothing
 
                 rs = New Recordset
                 rs.Open("SELECT id FROM kompy where PCL =" & frmComputers.sCOUNT,
@@ -91,11 +93,12 @@
                     .MoveFirst()
                     Do While Not .EOF
 
-                        rs1 = New Recordset
                         sSQL = "INSERT INTO Zametki (Master,Zametki,[Date],Id_Comp,Comp_name,Mesto_Compa) VALUES ('" & UserNames & "','" & "Смена ответственного c " & tmpTXT & " на " & tmpTXT2 & "','" & DateAndTime.Today & "'," & rs.Fields("id").Value & "," & "''" & ",'" & sFIALIAL & "')"
+                        DB7.Execute(sSQL)
 
-                        rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        'rs1 = New Recordset
+                        'rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
 
                         .MoveNext()
                     Loop
@@ -119,12 +122,13 @@ err_:
 
         Dim sSQL As String
 
-        Dim rs As Recordset
-        rs = New Recordset
-        rs.Open("Delete FROM Garantia_sis WHERE Id_Comp =" & sID, DB7, CursorTypeEnum.adOpenDynamic,
-                LockTypeEnum.adLockOptimistic)
-        rs = Nothing
+        'Dim rs As Recordset
+        'rs = New Recordset
+        'rs.Open("Delete FROM Garantia_sis WHERE Id_Comp =" & sID, DB7, CursorTypeEnum.adOpenDynamic,
+        '        LockTypeEnum.adLockOptimistic)
+        'rs = Nothing
 
+        DB7.Execute("Delete FROM Garantia_sis WHERE Id_Comp =" & sID)
 
         ' sSQL = "SELECT * FROM Garantia_sis"
         ' rs = New Recordset
@@ -134,11 +138,11 @@ err_:
             AddOnePar(dPost.Text, "name", "SPR_Postav", dPost)
         End If
 
-        rs = New Recordset
-        sSQL = "INSERT INTO Garantia_sis (Id_Comp,Postav,[day],[month],[Year],day_o,month_o,Year_o) VALUES (" & sID & ",'" & dPost.Text & "','" & dtp.Value.Day & "','" & dtp.Value.Month & "','" & dtp.Value.Year & "','" & dto.Value.Day & "','" & dto.Value.Month & "','" & dto.Value.Year & "')"
-        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-        rs = Nothing
-
+        sSQL = "INSERT INTO Garantia_sis (Id_Comp,Postav,[day],[month],[Year],[day_o],[month_o],[Year_o]) VALUES (" & sID & ",'" & dPost.Text & "','" & dtp.Value.Day & "','" & dtp.Value.Month & "','" & dtp.Value.Year & "','" & dto.Value.Day & "','" & dto.Value.Month & "','" & dto.Value.Year & "')"
+        'rs = New Recordset
+        'rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+        'rs = Nothing
+        DB7.Execute(sSQL)
 
 
         Exit Sub
@@ -260,9 +264,11 @@ sAR:
 
         End Select
 
-        rs = New Recordset
-        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-        rs = Nothing
+        DB7.Execute(sSQL)
+
+        'rs = New Recordset
+        'rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+        'rs = Nothing
 
         Select Case frmComputers.EDT
 
@@ -514,9 +520,7 @@ sAR:
 
         End Select
 
-        rs = New Recordset
-        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-        rs = Nothing
+        DB7.Execute(sSQL)
 
         Select Case frmComputers.EDT
 
@@ -613,19 +617,13 @@ Err_:
         new_prov = False
 
         Select Case frmComputers.EDT
-
             Case False
-
                 Call proverka_sn()
-
         End Select
 
         Select Case new_prov
-
             Case True
-
                 Exit Sub
-
         End Select
 
         Call addEXISTTEH_()
@@ -660,14 +658,30 @@ Err_:
 
                                             Case 0
 
-                                                If frmComputers.EDT = False Then RefFilTree(frmComputers.lstGroups)
-                                                If sNetName = True Then frmComputers.lstGroups.SelectedNode.Text = frmComputers.cmbOTH.Text
-                                                If frmComputers.EDT = True Then frmComputers.LOAD_LIST()
+                                                Select Case frmComputers.EDT
+                                                    Case False
+                                                        RefFilTree(frmComputers.lstGroups)
+                                                    Case True
+                                                        frmComputers.LOAD_LIST()
+                                                End Select
+
+                                                Select Case sNetName
+                                                    Case True
+                                                        frmComputers.lstGroups.SelectedNode.Text = frmComputers.cmbOTH.Text
+                                                End Select
+
 
                                             Case 1
 
-                                                If sNetName = True Then frmComputers.lstGroups.SelectedNode.Text = frmComputers.cmbOTH.Text
-                                                If frmComputers.EDT = True Then frmComputers.LOAD_LIST()
+                                                Select Case sNetName
+                                                    Case True
+                                                        frmComputers.lstGroups.SelectedNode.Text = frmComputers.cmbOTH.Text
+                                                End Select
+
+                                                Select Case frmComputers.EDT
+                                                    Case True
+                                                        frmComputers.LOAD_LIST()
+                                                End Select
 
                                         End Select
 
@@ -684,22 +698,26 @@ Err_:
         Dim rs As Recordset
 
         Dim unaPCL As String
-        If Len(frmComputers.cmbPCLK.Text) <> 0 Then
-            On Error GoTo sAR
 
-            rs = New Recordset
-            rs.Open(
-                "Select id From kompy where filial='" & frmComputers.cmbBranch.Text & "' and mesto='" &
-                frmComputers.cmbDepartment.Text & "' and kabn='" & frmComputers.cmbOffice.Text & "' and NET_NAME='" &
-                frmComputers.cmbPCLK.Text & "'", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+        Select Case Len(frmComputers.cmbPCLK.Text)
 
-            With rs
-                unaPCL = .Fields("id").Value
-            End With
-            rs.Close()
-            rs = Nothing
+            Case 0
 
-        End If
+            Case Else
+                On Error GoTo sAR
+                rs = New Recordset
+                rs.Open(
+                    "Select id From kompy where filial='" & frmComputers.cmbBranch.Text & "' and mesto='" &
+                    frmComputers.cmbDepartment.Text & "' and kabn='" & frmComputers.cmbOffice.Text & "' and NET_NAME='" &
+                    frmComputers.cmbPCLK.Text & "'", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
+                With rs
+                    unaPCL = .Fields("id").Value
+                End With
+                rs.Close()
+                rs = Nothing
+
+        End Select
 
 sAR:
         If Len(unaPCL) = 0 Or unaPCL = Nothing Then unaPCL = 0
@@ -720,304 +738,23 @@ sAR:
 
             Case False
 
-                sSQL = "SELECT * FROM kompy"
-
-            Case True
-
-                sSQL = "SELECT * FROM kompy WHERE id =" & sSID
-
-        End Select
-
-        rs = New Recordset
-        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
-        With rs
-            If Len(sSID) = 0 Then
-                .AddNew()
-            End If
-            .Fields("CPU1").Value = frmComputers.cmbCPU1.Text
-            .Fields("CPUmhz1").Value = frmComputers.txtMHZ1.Text
-            .Fields("CPUSocket1").Value = frmComputers.txtSoc1.Text
-            .Fields("CPUProizv1").Value = frmComputers.PROizV1.Text
-
-            .Fields("CPU2").Value = frmComputers.cmbCPU2.Text
-            .Fields("CPUmhz2").Value = frmComputers.txtMHZ2.Text
-            .Fields("CPUSocket2").Value = frmComputers.txtSoc2.Text
-            .Fields("CPUProizv2").Value = frmComputers.PROizV2.Text
-
-            .Fields("CPU3").Value = frmComputers.cmbCPU3.Text
-            .Fields("CPUmhz3").Value = frmComputers.txtMHZ3.Text
-            .Fields("CPUSocket3").Value = frmComputers.txtSoc3.Text
-            .Fields("CPUProizv3").Value = frmComputers.PROizV3.Text
-
-            .Fields("CPU4").Value = frmComputers.cmbCPU4.Text
-            .Fields("CPUmhz4").Value = frmComputers.txtMHZ4.Text
-            .Fields("CPUSocket4").Value = frmComputers.txtSoc4.Text
-            .Fields("CPUProizv4").Value = frmComputers.PROizV4.Text
-
-            .Fields("MB_NAME").Value = frmComputers.cmbMB.Text
-            .Fields("Mb_Chip").Value = frmComputers.txtChip.Text
-            .Fields("Mb_Proizvod").Value = frmComputers.PROizV5.Text
-            .Fields("Mb_Id").Value = frmComputers.txtSN_MB.Text
-
-            .Fields("RAM_1").Value = frmComputers.cmbRAM1.Text
-            .Fields("RAM_speed_1").Value = frmComputers.txtRamS1.Text
-            .Fields("RAM_SN_1").Value = frmComputers.txtRamSN1.Text
-            .Fields("RAM_PROIZV_1").Value = frmComputers.PROizV6.Text
-
-            .Fields("RAM_2").Value = frmComputers.cmbRAM2.Text
-            .Fields("RAM_speed_2").Value = frmComputers.txtRamS2.Text
-            .Fields("RAM_SN_2").Value = frmComputers.txtRamSN2.Text
-            .Fields("RAM_PROIZV_2").Value = frmComputers.PROizV7.Text
-
-            .Fields("RAM_3").Value = frmComputers.cmbRAM3.Text
-            .Fields("RAM_speed_3").Value = frmComputers.txtRamS3.Text
-            .Fields("RAM_SN_3").Value = frmComputers.txtRamSN3.Text
-            .Fields("RAM_PROIZV_3").Value = frmComputers.PROizV8.Text
-
-            .Fields("RAM_4").Value = frmComputers.cmbRAM4.Text
-            .Fields("RAM_speed_4").Value = frmComputers.txtRamS4.Text
-            .Fields("RAM_SN_4").Value = frmComputers.txtRamSN4.Text
-            .Fields("RAM_PROIZV_4").Value = frmComputers.PROizV9.Text
-
-            '##########################################################
-            .Fields("RAM_5").Value = frmComputers.cmbRAM5.Text
-            .Fields("RAM_speed_5").Value = frmComputers.txtRamS5.Text
-            .Fields("RAM_SN_5").Value = frmComputers.txtRamSN5.Text
-            .Fields("RAM_PROIZV_5").Value = frmComputers.PROizV44.Text
-
-            .Fields("RAM_6").Value = frmComputers.cmbRAM6.Text
-            .Fields("RAM_speed_6").Value = frmComputers.txtRamS6.Text
-            .Fields("RAM_SN_6").Value = frmComputers.txtRamSN6.Text
-            .Fields("RAM_PROIZV_6").Value = frmComputers.PROizV45.Text
-
-            .Fields("RAM_7").Value = frmComputers.cmbRAM7.Text
-            .Fields("RAM_speed_7").Value = frmComputers.txtRamS7.Text
-            .Fields("RAM_SN_7").Value = frmComputers.txtRamSN7.Text
-            .Fields("RAM_PROIZV_7").Value = frmComputers.PROizV46.Text
-
-            .Fields("RAM_8").Value = frmComputers.cmbRAM8.Text
-            .Fields("RAM_speed_8").Value = frmComputers.txtRamS8.Text
-            .Fields("RAM_SN_8").Value = frmComputers.txtRamSN8.Text
-            .Fields("RAM_PROIZV_8").Value = frmComputers.PROizV47.Text
-
-            '##########################################################
-
-            .Fields("HDD_Name_1").Value = frmComputers.cmbHDD1.Text
-            .Fields("HDD_OB_1").Value = frmComputers.txtHDDo1.Text
-            .Fields("HDD_SN_1").Value = frmComputers.txtHDDsN1.Text
-            .Fields("HDD_PROIZV_1").Value = frmComputers.PROizV10.Text
-
-            .Fields("HDD_Name_2").Value = frmComputers.cmbHDD2.Text
-            .Fields("HDD_OB_2").Value = frmComputers.txtHDDo2.Text
-            .Fields("HDD_SN_2").Value = frmComputers.txtHDDsN2.Text
-            .Fields("HDD_PROIZV_2").Value = frmComputers.PROizV11.Text
-
-            .Fields("HDD_Name_3").Value = frmComputers.cmbHDD3.Text
-            .Fields("HDD_OB_3").Value = frmComputers.txtHDDo3.Text
-            .Fields("HDD_SN_3").Value = frmComputers.txtHDDsN3.Text
-            .Fields("HDD_PROIZV_3").Value = frmComputers.PROizV12.Text
-
-            .Fields("HDD_Name_4").Value = frmComputers.cmbHDD4.Text
-            .Fields("HDD_OB_4").Value = frmComputers.txtHDDo4.Text
-            .Fields("HDD_SN_4").Value = frmComputers.txtHDDsN4.Text
-            .Fields("HDD_PROIZV_4").Value = frmComputers.PROizV13.Text
-
-            '##########################################################
-            .Fields("HDD_Name_5").Value = frmComputers.cmbHDD5.Text
-            .Fields("HDD_OB_5").Value = frmComputers.txtHDDo5.Text
-            .Fields("HDD_SN_5").Value = frmComputers.txtHDDsN5.Text
-            .Fields("HDD_PROIZV_5").Value = frmComputers.PROizV48.Text
-
-            .Fields("HDD_Name_6").Value = frmComputers.cmbHDD6.Text
-            .Fields("HDD_OB_6").Value = frmComputers.txtHDDo6.Text
-            .Fields("HDD_SN_6").Value = frmComputers.txtHDDsN6.Text
-            .Fields("HDD_PROIZV_6").Value = frmComputers.PROizV49.Text
-
-            .Fields("HDD_Name_7").Value = frmComputers.cmbHDD7.Text
-            .Fields("HDD_OB_7").Value = frmComputers.txtHDDo7.Text
-            .Fields("HDD_SN_7").Value = frmComputers.txtHDDsN7.Text
-            .Fields("HDD_PROIZV_7").Value = frmComputers.PROizV50.Text
-
-            .Fields("HDD_Name_8").Value = frmComputers.cmbHDD8.Text
-            .Fields("HDD_OB_8").Value = frmComputers.txtHDDo8.Text
-            .Fields("HDD_SN_8").Value = frmComputers.txtHDDsN8.Text
-            .Fields("HDD_PROIZV_8").Value = frmComputers.PROizV51.Text
-
-            '##########################################################
-
-            .Fields("SVGA_NAME").Value = frmComputers.cmbSVGA1.Text
-            .Fields("SVGA_OB_RAM").Value = frmComputers.txtSVGAr1.Text
-            .Fields("SVGA_SN").Value = frmComputers.txtSVGAs1.Text
-            .Fields("SVGA_PROIZV").Value = frmComputers.PROizV14.Text
-
-            .Fields("SVGA2_NAME").Value = frmComputers.cmbSVGA2.Text
-            .Fields("SVGA2_OB_RAM").Value = frmComputers.txtSVGAr2.Text
-            .Fields("SVGA2_SN").Value = frmComputers.txtSVGAs2.Text
-            .Fields("SVGA2_PROIZV").Value = frmComputers.PROizV15.Text
-
-            .Fields("SOUND_NAME").Value = frmComputers.cmbSound.Text
-            .Fields("SOUND_SN").Value = frmComputers.txtSoundS.Text
-            .Fields("SOUND_PROIZV").Value = frmComputers.PROizV16.Text
-
-            .Fields("CD_NAME").Value = frmComputers.cmbOPTIC1.Text
-            .Fields("CD_SPEED").Value = frmComputers.txtOPTICs1.Text
-            .Fields("CD_SN").Value = frmComputers.txtOPTICsn1.Text
-            .Fields("CD_PROIZV").Value = frmComputers.PROizV17.Text
-
-            .Fields("CDRW_NAME").Value = frmComputers.cmbOPTIC2.Text
-            .Fields("CDRW_SPEED").Value = frmComputers.txtOPTICs2.Text
-            .Fields("CDRW_SN").Value = frmComputers.txtOPTICsn2.Text
-            .Fields("CDRW_PROIZV").Value = frmComputers.PROizV18.Text
-
-            .Fields("DVD_NAME").Value = frmComputers.cmbOPTIC3.Text
-            .Fields("DVD_SPEED").Value = frmComputers.txtOPTICs3.Text
-            .Fields("DVD_SN").Value = frmComputers.txtOPTICsn3.Text
-            .Fields("DVD_PROIZV").Value = frmComputers.PROizV19.Text
-
-            .Fields("NET_NAME_1").Value = frmComputers.cmbNET1.Text
-            .Fields("NET_IP_1").Value = frmComputers.txtNETip1.Text
-            .Fields("NET_MAC_1").Value = frmComputers.txtNETmac1.Text
-            .Fields("NET_PROIZV_1").Value = frmComputers.PROizV20.Text
-
-            .Fields("NET_NAME_2").Value = frmComputers.cmbNET2.Text
-            .Fields("NET_IP_2").Value = frmComputers.txtNETip2.Text
-            .Fields("NET_MAC_2").Value = frmComputers.txtNETmac2.Text
-            .Fields("NET_PROIZV_2").Value = frmComputers.PROizV21.Text
-
-            .Fields("FDD_NAME").Value = frmComputers.cmbFDD.Text
-            .Fields("FDD_SN").Value = frmComputers.txtSN.Text
-            '.Fields("txtFDD_").Value = frmComputers.txtFDD_.Text
-            .Fields("FDD_PROIZV").Value = frmComputers.PROizV22.Text
-
-            .Fields("MODEM_NAME").Value = frmComputers.cmbModem.Text
-            .Fields("MODEM_SN").Value = frmComputers.txtModemSN.Text
-            '.Fields("txtFDD_").Value = frmComputers.txtModem2.Text
-            .Fields("MODEM_PROIZV").Value = frmComputers.PROizV24.Text
-
-            .Fields("CASE_NAME").Value = frmComputers.cmbCase.Text
-            .Fields("CASE_SN").Value = frmComputers.txtCase1.Text
-            .Fields("CASE_PROIZV").Value = frmComputers.PROizV25.Text
-
-            .Fields("CREADER_NAME").Value = frmComputers.cmbCreader.Text
-            .Fields("CREADER_SN").Value = frmComputers.txtCreader1.Text
-            .Fields("CREADER_PROIZV").Value = frmComputers.PROizV23.Text
-
-            .Fields("BLOCK").Value = frmComputers.cmbBP.Text
-            .Fields("SN_BLOCK").Value = frmComputers.txtBP1.Text
-            .Fields("PROIZV_BLOCK").Value = frmComputers.PROizV26.Text
-
-            .Fields("SYS_PR").Value = frmComputers.PROizV27.Text
-            .Fields("Ser_N_SIS").Value = frmComputers.txtSNSB.Text
-
-            'Модель системного блока
-            .Fields("PATH").Value = frmComputers.txtModSB.Text
-
-            'USB
-            .Fields("USB_NAME").Value = frmComputers.cmbUSB.Text
-            .Fields("USB_SN").Value = frmComputers.txtUSBSN.Text
-            .Fields("USB_PROIZV").Value = frmComputers.PROizV41.Text
-
-            'PCI
-            .Fields("PCI_NAME").Value = frmComputers.cmbPCI.Text
-            .Fields("PCI_SN").Value = frmComputers.txtSNPCI.Text
-            .Fields("PCI_PROIZV").Value = frmComputers.PROizV42.Text
-
-            .Fields("MONITOR_NAME").Value = frmComputers.cmbMon1.Text
-            .Fields("MONITOR_DUM").Value = frmComputers.txtMon1Dum.Text
-            .Fields("MONITOR_SN").Value = frmComputers.txtMon1SN.Text
-            .Fields("MONITOR_PROIZV").Value = frmComputers.PROizV28.Text
-
-            .Fields("MONITOR_NAME2").Value = frmComputers.cmbMon2.Text
-            .Fields("MONITOR_DUM2").Value = frmComputers.txtMon2Dum.Text
-            .Fields("MONITOR_SN2").Value = frmComputers.txtMon2SN.Text
-            .Fields("MONITOR_PROIZV2").Value = frmComputers.PROizV29.Text
-
-            .Fields("KEYBOARD_NAME").Value = frmComputers.cmbKeyb.Text
-            .Fields("KEYBOARD_SN").Value = frmComputers.txtKeybSN.Text
-            .Fields("KEYBOARD_PROIZV").Value = frmComputers.PROizV30.Text
-
-            .Fields("MOUSE_NAME").Value = frmComputers.cmbMouse.Text
-            .Fields("MOUSE_SN").Value = frmComputers.txtMouseSN.Text
-            .Fields("MOUSE_PROIZV").Value = frmComputers.PROizV31.Text
-
-            .Fields("AS_NAME").Value = frmComputers.cmbAsist.Text
-            .Fields("AS_SN").Value = frmComputers.txtAsistSN.Text
-            .Fields("AS_PROIZV").Value = frmComputers.PROizV32.Text
-
-            .Fields("FILTR_NAME").Value = frmComputers.cmbFilter.Text
-            .Fields("FILTR_SN").Value = frmComputers.txtFilterSN.Text
-            .Fields("FILTR_PROIZV").Value = frmComputers.PROizV33.Text
-
-            .Fields("IBP_NAME").Value = frmComputers.cmbIBP.Text
-            .Fields("IBP_SN").Value = frmComputers.txtSNIBP.Text
-            .Fields("IBP_PROIZV").Value = frmComputers.PROizV43.Text
-
-            .Fields("PRINTER_NAME_1").Value = frmComputers.cmbPrinters1.Text
-            .Fields("PRINTER_SN_1").Value = frmComputers.txtPrint1SN.Text
-            .Fields("PORT_1").Value = frmComputers.txtPrint1Port.Text
-            .Fields("PRINTER_PROIZV_1").Value = frmComputers.PROizV34.Text
-
-            .Fields("PRINTER_NAME_2").Value = frmComputers.cmbPrinters2.Text
-            .Fields("PRINTER_SN_2").Value = frmComputers.txtPrint2SN.Text
-            .Fields("PORT_2").Value = frmComputers.txtPrint2Port.Text
-            .Fields("PRINTER_PROIZV_2").Value = frmComputers.PROizV35.Text
-
-            .Fields("PRINTER_NAME_3").Value = frmComputers.cmbPrinters3.Text
-            .Fields("PRINTER_SN_3").Value = frmComputers.txtPrint3SN.Text
-            .Fields("PORT_3").Value = frmComputers.txtPrint3Port.Text
-            .Fields("PRINTER_PROIZV_3").Value = frmComputers.PROizV36.Text
-
-            .Fields("NET_NAME").Value = frmComputers.txtSNAME.Text
-            .Fields("PSEVDONIM").Value = frmComputers.txtPSEUDONIM.Text
-
-            .Fields("FILIAL").Value = frmComputers.cmbBranch.Text
-            .Fields("MESTO").Value = frmComputers.cmbDepartment.Text
-            .Fields("kabn").Value = frmComputers.cmbOffice.Text
-
-            .Fields("OTvetstvennyj").Value = frmComputers.cmbResponsible.Text
-            .Fields("TELEPHONE").Value = frmComputers.txtPHONE.Text
-
-            .Fields("TIP_COMPA").Value = frmComputers.cmbAppointment.Text
-
-            .Fields("INV_NO_SYSTEM").Value = frmComputers.txtSBSN.Text
-            .Fields("INV_NO_MONITOR").Value = frmComputers.txtMSN.Text
-            .Fields("INV_NO_IBP").Value = frmComputers.IN_IBP.Text
-            .Fields("INV_NO_PRINTER").Value = frmComputers.IN_PRN.Text
-            .Fields("PCL").Value = unaPCL
-
-            .Fields("TIPtehn").Value = TipTehn
-
-            .Fields("SFAktNo").Value = frmComputers.txtPCSfN.Text
-            .Fields("CenaRub").Value = frmComputers.txtPCcash.Text
-
-            .Fields("StoimRub").Value = frmComputers.txtPCSumm.Text
-
-            .Fields("Zaiavk").Value = frmComputers.txtPCZay.Text
-
-            .Fields("DataVVoda").Value = frmComputers.dtPCdataVvoda.Value
-            .Fields("dataSF").Value = frmComputers.dtPCSFdate.Value
-
-            .Fields("Spisan").Value = _chkPRNspis
-            .Fields("Balans").Value = _chkPRNNNb
-
-            If frmComputers.chkPCspis.Checked = True Then
-
-                .Fields("data_sp").Value = frmComputers.dtSpisanie.Value
-
-            End If
-
-            .Fields("Garantia_Sist").Value = frmComputers.rbSist.Checked
-
-            .Update()
-        End With
-
-        rs.Close()
-        rs = Nothing
-
-        Select Case frmComputers.EDT
-
-            Case False
+                sSQL = "INSERT INTO kompy (NET_NAME,PSEVDONIM,FILIAL,MESTO,kabn,OTvetstvennyj,TELEPHONE,TIP_COMPA,INV_NO_SYSTEM,INV_NO_MONITOR,INV_NO_IBP,INV_NO_PRINTER,PCL,TIPtehn) VALUES ('" &
+                       frmComputers.txtSNAME.Text & "','" &
+                       frmComputers.txtPSEUDONIM.Text & "','" &
+                       frmComputers.cmbBranch.Text & "','" &
+                       frmComputers.cmbDepartment.Text & "','" &
+                       frmComputers.cmbOffice.Text & "','" &
+                       frmComputers.cmbResponsible.Text & "','" &
+                       frmComputers.txtPHONE.Text & "','" &
+                       frmComputers.cmbAppointment.Text & "','" &
+                       frmComputers.txtSBSN.Text & "','" &
+                       frmComputers.txtMSN.Text & "','" &
+                       frmComputers.IN_IBP.Text & "','" &
+                       frmComputers.IN_PRN.Text & "'," &
+                       unaPCL & ",'" &
+                       TipTehn & "')"
+
+                DB7.Execute(sSQL)
 
                 Select Case DB_N
 
@@ -1033,10 +770,341 @@ sAR:
 
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                frmComputers.sCOUNT = rs.Fields("ID").Value
+                sSID = rs.Fields("ID").Value
                 rs.Close()
                 rs = Nothing
-                
+
+                frmComputers.sCOUNT = sSID
+
+            Case True
+
+                sSQL = "UPDATE kompy SET " &
+                        "NET_NAME='" & frmComputers.txtSNAME.Text & "'," &
+                        "PSEVDONIM='" & frmComputers.txtPSEUDONIM.Text & "'," &
+                        "FILIAL='" & frmComputers.cmbBranch.Text & "'," &
+                        "MESTO='" & frmComputers.cmbDepartment.Text & "'," &
+                        "kabn='" & frmComputers.cmbOffice.Text & "'," &
+                        "OTvetstvennyj='" & frmComputers.cmbResponsible.Text & "'," &
+                        "TELEPHONE='" & frmComputers.txtPHONE.Text & "'," &
+                        "TIP_COMPA='" & frmComputers.cmbAppointment.Text & "'," &
+                        "INV_NO_SYSTEM='" & frmComputers.txtSBSN.Text & "'," &
+                        "INV_NO_MONITOR='" & frmComputers.txtMSN.Text & "'," &
+                        "INV_NO_IBP='" & frmComputers.IN_IBP.Text & "'," &
+                        "INV_NO_PRINTER='" & frmComputers.IN_PRN.Text & "'," &
+                        "PCL=" & unaPCL & "," &
+                        "TIPtehn='" & TipTehn & "' " & " WHERE id =" & sSID
+
+                DB7.Execute(sSQL)
+
+        End Select
+
+        On Error Resume Next
+
+        sSQL = "UPDATE kompy SET " &
+                       "CPU1='" & frmComputers.cmbCPU1.Text & "'," &
+                       "CPUmhz1='" & frmComputers.txtMHZ1.Text & "'," &
+                       "CPUSocket1='" & frmComputers.txtSoc1.Text & "'," &
+                       "CPUProizv1='" & frmComputers.PROizV1.Text & "'," &
+                       "CPU2='" & frmComputers.cmbCPU2.Text & "'," &
+                       "CPUmhz2='" & frmComputers.txtMHZ2.Text & "'," &
+                       "CPUSocket2='" & frmComputers.txtSoc2.Text & "'," &
+                       "CPUProizv2='" & frmComputers.PROizV2.Text & "'," &
+                       "CPU3='" & frmComputers.cmbCPU3.Text & "'," &
+                       "CPUmhz3='" & frmComputers.txtMHZ3.Text & "'," &
+                       "CPUSocket3='" & frmComputers.txtSoc3.Text & "'," &
+                       "CPUProizv3='" & frmComputers.PROizV3.Text & "'," &
+                       "CPU4='" & frmComputers.cmbCPU4.Text & "'," &
+                       "CPUmhz4='" & frmComputers.txtMHZ4.Text & "'," &
+                       "CPUSocket4='" & frmComputers.txtSoc4.Text & "'," &
+                       "CPUProizv4='" & frmComputers.PROizV4.Text & "' " &
+                       " WHERE id =" & sSID
+
+        DB7.Execute(sSQL)
+
+        sSQL = "UPDATE kompy SET " &
+               "MB_NAME='" & frmComputers.cmbMB.Text & "'," &
+               "Mb_Chip='" & frmComputers.txtChip.Text & "'," &
+               "Mb_Proizvod='" & frmComputers.PROizV5.Text & "'," &
+               "Mb_Id='" & frmComputers.txtSN_MB.Text & "' " &
+                " WHERE id =" & sSID
+
+        DB7.Execute(sSQL)
+
+        sSQL = "UPDATE kompy SET " &
+               "RAM_1='" & frmComputers.cmbRAM1.Text & "'," &
+               "RAM_speed_1='" & frmComputers.txtRamS1.Text & "'," &
+               "RAM_SN_1='" & frmComputers.txtRamSN1.Text & "'," &
+               "RAM_PROIZV_1='" & frmComputers.PROizV6.Text & "'," &
+               "RAM_2='" & frmComputers.cmbRAM2.Text & "'," &
+               "RAM_speed_2='" & frmComputers.txtRamS2.Text & "'," &
+               "RAM_SN_2='" & frmComputers.txtRamSN2.Text & "'," &
+               "RAM_PROIZV_2='" & frmComputers.PROizV7.Text & "'," &
+               "RAM_3='" & frmComputers.cmbRAM3.Text & "'," &
+               "RAM_speed_3='" & frmComputers.txtRamS3.Text & "'," &
+               "RAM_SN_3='" & frmComputers.txtRamSN3.Text & "'," &
+               "RAM_PROIZV_3='" & frmComputers.PROizV8.Text & "'," &
+               "RAM_4='" & frmComputers.cmbRAM4.Text & "'," &
+               "RAM_speed_4='" & frmComputers.txtRamS4.Text & "'," &
+               "RAM_SN_4='" & frmComputers.txtRamSN4.Text & "'," &
+               "RAM_PROIZV_4='" & frmComputers.PROizV9.Text & "'," &
+               "RAM_5='" & frmComputers.cmbRAM5.Text & "'," &
+               "RAM_speed_5='" & frmComputers.txtRamS5.Text & "'," &
+               "RAM_SN_5='" & frmComputers.txtRamSN5.Text & "'," &
+               "RAM_PROIZV_5='" & frmComputers.PROizV44.Text & "'," &
+               "RAM_6='" & frmComputers.cmbRAM6.Text & "'," &
+               "RAM_speed_6='" & frmComputers.txtRamS6.Text & "'," &
+               "RAM_SN_6='" & frmComputers.txtRamSN6.Text & "'," &
+               "RAM_PROIZV_6='" & frmComputers.PROizV45.Text & "'," &
+               "RAM_7='" & frmComputers.cmbRAM7.Text & "'," &
+               "RAM_speed_7='" & frmComputers.txtRamS7.Text & "'," &
+               "RAM_SN_7='" & frmComputers.txtRamSN7.Text & "'," &
+               "RAM_PROIZV_7='" & frmComputers.PROizV46.Text & "'," &
+               "RAM_8='" & frmComputers.cmbRAM8.Text & "'," &
+               "RAM_speed_8='" & frmComputers.txtRamS8.Text & "'," &
+               "RAM_SN_8='" & frmComputers.txtRamSN8.Text & "'," &
+               "RAM_PROIZV_8='" & frmComputers.PROizV47.Text & "' " &
+                " WHERE id =" & sSID
+
+        DB7.Execute(sSQL)
+
+        sSQL = "UPDATE kompy SET " &
+               "HDD_Name_1='" & frmComputers.cmbHDD1.Text & "'," &
+               "HDD_OB_1='" & frmComputers.txtHDDo1.Text & "'," &
+               "HDD_SN_1='" & frmComputers.txtHDDsN1.Text & "'," &
+               "HDD_PROIZV_1='" & frmComputers.PROizV10.Text & "'," &
+               "HDD_Name_2='" & frmComputers.cmbHDD2.Text & "'," &
+               "HDD_OB_2='" & frmComputers.txtHDDo2.Text & "'," &
+               "HDD_SN_2='" & frmComputers.txtHDDsN2.Text & "'," &
+               "HDD_PROIZV_2='" & frmComputers.PROizV11.Text & "'," &
+               "HDD_Name_3='" & frmComputers.cmbHDD3.Text & "'," &
+               "HDD_OB_3='" & frmComputers.txtHDDo3.Text & "'," &
+               "HDD_SN_3='" & frmComputers.txtHDDsN3.Text & "'," &
+               "HDD_PROIZV_3='" & frmComputers.PROizV12.Text & "'," &
+               "HDD_Name_4='" & frmComputers.cmbHDD4.Text & "'," &
+               "HDD_OB_4='" & frmComputers.txtHDDo4.Text & "'," &
+               "HDD_SN_4='" & frmComputers.txtHDDsN4.Text & "'," &
+               "HDD_PROIZV_4='" & frmComputers.PROizV13.Text & "'," &
+               "HDD_Name_5='" & frmComputers.cmbHDD5.Text & "'," &
+               "HDD_OB_5='" & frmComputers.txtHDDo5.Text & "'," &
+               "HDD_SN_5='" & frmComputers.txtHDDsN5.Text & "'," &
+               "HDD_PROIZV_5='" & frmComputers.PROizV48.Text & "'," &
+               "HDD_Name_6='" & frmComputers.cmbHDD6.Text & "'," &
+               "HDD_OB_6='" & frmComputers.txtHDDo6.Text & "'," &
+               "HDD_SN_6='" & frmComputers.txtHDDsN6.Text & "'," &
+               "HDD_PROIZV_6='" & frmComputers.PROizV49.Text & "'," &
+               "HDD_Name_7='" & frmComputers.cmbHDD7.Text & "'," &
+               "HDD_OB_7='" & frmComputers.txtHDDo7.Text & "'," &
+               "HDD_SN_7='" & frmComputers.txtHDDsN7.Text & "'," &
+               "HDD_PROIZV_7='" & frmComputers.PROizV50.Text & "'," &
+               "HDD_Name_8='" & frmComputers.cmbHDD8.Text & "'," &
+               "HDD_OB_8='" & frmComputers.txtHDDo8.Text & "'," &
+               "HDD_SN_8='" & frmComputers.txtHDDsN8.Text & "'," &
+               "HDD_PROIZV_8='" & frmComputers.PROizV51.Text & "' " &
+                " WHERE id =" & sSID
+
+        DB7.Execute(sSQL)
+
+        sSQL = "UPDATE kompy SET " &
+               "SVGA_NAME='" & frmComputers.cmbSVGA1.Text & "'," &
+               "SVGA_OB_RAM='" & frmComputers.txtSVGAr1.Text & "'," &
+               "SVGA_SN='" & frmComputers.txtSVGAs1.Text & "'," &
+               "SVGA_PROIZV='" & frmComputers.PROizV14.Text & "'," &
+               "SVGA2_NAME='" & frmComputers.cmbSVGA2.Text & "'," &
+               "SVGA2_OB_RAM='" & frmComputers.txtSVGAr2.Text & "'," &
+               "SVGA2_SN='" & frmComputers.txtSVGAs2.Text & "'," &
+               "SVGA2_PROIZV='" & frmComputers.PROizV15.Text & "' " &
+                " WHERE id =" & sSID
+
+        DB7.Execute(sSQL)
+
+        sSQL = "UPDATE kompy SET " &
+               "SOUND_NAME='" & frmComputers.cmbSound.Text & "'," &
+               "SOUND_SN='" & frmComputers.txtSoundS.Text & "'," &
+               "SOUND_PROIZV='" & frmComputers.PROizV16.Text & "' " &
+                " WHERE id =" & sSID
+
+        DB7.Execute(sSQL)
+
+        sSQL = "UPDATE kompy SET " &
+               "CD_NAME='" & frmComputers.cmbOPTIC1.Text & "'," &
+               "CD_SPEED='" & frmComputers.txtOPTICs1.Text & "'," &
+               "CD_SN='" & frmComputers.txtOPTICsn1.Text & "'," &
+               "CD_PROIZV='" & frmComputers.PROizV17.Text & "'," &
+               "CDRW_NAME='" & frmComputers.cmbOPTIC2.Text & "'," &
+               "CDRW_SPEED='" & frmComputers.txtOPTICs2.Text & "'," &
+               "CDRW_SN='" & frmComputers.txtOPTICsn2.Text & "'," &
+               "CDRW_PROIZV='" & frmComputers.PROizV18.Text & "'," &
+               "DVD_NAME='" & frmComputers.cmbOPTIC3.Text & "'," &
+               "DVD_SPEED='" & frmComputers.txtOPTICs3.Text & "'," &
+               "DVD_SN='" & frmComputers.txtOPTICsn3.Text & "'," &
+               "DVD_PROIZV='" & frmComputers.PROizV19.Text & "' " &
+                " WHERE id =" & sSID
+
+        DB7.Execute(sSQL)
+
+        sSQL = "UPDATE kompy SET " &
+               "NET_NAME_1='" & frmComputers.cmbNET1.Text & "'," &
+               "NET_IP_1='" & frmComputers.txtNETip1.Text & "'," &
+               "NET_MAC_1='" & frmComputers.txtNETmac1.Text & "'," &
+               "NET_PROIZV_1='" & frmComputers.PROizV20.Text & "'," &
+               "NET_NAME_2='" & frmComputers.cmbNET2.Text & "'," &
+               "NET_IP_2='" & frmComputers.txtNETip2.Text & "'," &
+               "NET_MAC_2='" & frmComputers.txtNETmac2.Text & "'," &
+               "NET_PROIZV_2='" & frmComputers.PROizV21.Text & "' " &
+                " WHERE id =" & sSID
+
+        DB7.Execute(sSQL)
+
+        sSQL = "UPDATE kompy SET " &
+               "FDD_NAME='" & frmComputers.cmbFDD.Text & "'," &
+               "FDD_SN='" & frmComputers.txtSN.Text & "'," &
+               "FDD_PROIZV='" & frmComputers.PROizV22.Text & "' " &
+                " WHERE id =" & sSID
+
+        DB7.Execute(sSQL)
+
+        sSQL = "UPDATE kompy SET " &
+               "MODEM_NAME='" & frmComputers.cmbModem.Text & "'," &
+               "MODEM_SN='" & frmComputers.txtModemSN.Text & "'," &
+               "MODEM_PROIZV='" & frmComputers.PROizV24.Text & "' " &
+               " WHERE id =" & sSID
+
+        DB7.Execute(sSQL)
+
+        sSQL = "UPDATE kompy SET " &
+            "CASE_NAME='" & frmComputers.cmbCase.Text & "'," &
+            "CASE_SN='" & frmComputers.txtCase1.Text & "'," &
+            "CASE_PROIZV='" & frmComputers.PROizV25.Text & "' " &
+             " WHERE id =" & sSID
+
+        DB7.Execute(sSQL)
+
+        sSQL = "UPDATE kompy SET " &
+            "CREADER_NAME='" & frmComputers.cmbCreader.Text & "'," &
+            "CREADER_SN='" & frmComputers.txtCreader1.Text & "'," &
+            "CREADER_PROIZV='" & frmComputers.PROizV23.Text & "' " &
+            " WHERE id =" & sSID
+
+        DB7.Execute(sSQL)
+
+        sSQL = "UPDATE kompy SET " &
+            "BLOCK='" & frmComputers.cmbBP.Text & "'," &
+            "SN_BLOCK='" & frmComputers.txtBP1.Text & "'," &
+            "PROIZV_BLOCK='" & frmComputers.PROizV26.Text & "' " &
+            " WHERE id =" & sSID
+
+        DB7.Execute(sSQL)
+
+        sSQL = "UPDATE kompy SET " &
+            "SYS_PR='" & frmComputers.PROizV27.Text & "'," &
+            "Ser_N_SIS='" & frmComputers.txtSNSB.Text & "'," &
+            "PATH='" & frmComputers.txtModSB.Text & "' " &
+                " WHERE id =" & sSID
+
+        DB7.Execute(sSQL)
+
+        sSQL = "UPDATE kompy SET " &
+            "USB_NAME='" & frmComputers.cmbUSB.Text & "'," &
+            "USB_SN='" & frmComputers.txtUSBSN.Text & "'," &
+            "USB_PROIZV='" & frmComputers.PROizV41.Text & "' " &
+                " WHERE id =" & sSID
+
+        DB7.Execute(sSQL)
+
+        sSQL = "UPDATE kompy SET " &
+            "PCI_NAME='" & frmComputers.cmbPCI.Text & "'," &
+            "PCI_SN='" & frmComputers.txtSNPCI.Text & "'," &
+            "PCI_PROIZV='" & frmComputers.PROizV42.Text & "' " &
+                " WHERE id =" & sSID
+
+        DB7.Execute(sSQL)
+
+        sSQL = "UPDATE kompy SET " &
+            "MONITOR_NAME='" & frmComputers.cmbMon1.Text & "'," &
+            "MONITOR_DUM='" & frmComputers.txtMon1Dum.Text & "'," &
+            "MONITOR_SN='" & frmComputers.txtMon1SN.Text & "'," &
+            "MONITOR_PROIZV='" & frmComputers.PROizV28.Text & "'," &
+            "MONITOR_NAME2='" & frmComputers.cmbMon2.Text & "'," &
+            "MONITOR_DUM2='" & frmComputers.txtMon2Dum.Text & "'," &
+            "MONITOR_SN2='" & frmComputers.txtMon2SN.Text & "'," &
+            "MONITOR_PROIZV2='" & frmComputers.PROizV29.Text & "' " &
+                " WHERE id =" & sSID
+
+        DB7.Execute(sSQL)
+
+        sSQL = "UPDATE kompy SET " &
+            "KEYBOARD_NAME='" & frmComputers.cmbKeyb.Text & "'," &
+            "KEYBOARD_SN='" & frmComputers.txtKeybSN.Text & "'," &
+            "KEYBOARD_PROIZV='" & frmComputers.PROizV30.Text & "' " &
+                " WHERE id =" & sSID
+
+        DB7.Execute(sSQL)
+
+        sSQL = "UPDATE kompy SET " &
+            "MOUSE_NAME='" & frmComputers.cmbMouse.Text & "'," &
+            "MOUSE_SN='" & frmComputers.txtMouseSN.Text & "'," &
+            "MOUSE_PROIZV='" & frmComputers.PROizV31.Text & "' " &
+                " WHERE id =" & sSID
+
+        DB7.Execute(sSQL)
+
+        sSQL = "UPDATE kompy SET " &
+            "AS_NAME='" & frmComputers.cmbAsist.Text & "'," &
+            "AS_SN='" & frmComputers.txtAsistSN.Text & "'," &
+            "AS_PROIZV='" & frmComputers.PROizV32.Text & "' " &
+                " WHERE id =" & sSID
+
+        DB7.Execute(sSQL)
+
+        sSQL = "UPDATE kompy SET " &
+            "FILTR_NAME='" & frmComputers.cmbFilter.Text & "'," &
+            "FILTR_SN='" & frmComputers.txtFilterSN.Text & "'," &
+            "FILTR_PROIZV='" & frmComputers.PROizV33.Text & "' " &
+                " WHERE id =" & sSID
+
+        DB7.Execute(sSQL)
+
+        sSQL = "UPDATE kompy SET " &
+            "IBP_NAME='" & frmComputers.cmbIBP.Text & "'," &
+            "IBP_SN='" & frmComputers.txtSNIBP.Text & "'," &
+            "IBP_PROIZV='" & frmComputers.PROizV43.Text & "' " &
+                " WHERE id =" & sSID
+
+        DB7.Execute(sSQL)
+
+        sSQL = "UPDATE kompy SET " &
+            "PRINTER_NAME_1='" & frmComputers.cmbPrinters1.Text & "'," &
+            "PRINTER_SN_1='" & frmComputers.txtPrint1SN.Text & "'," &
+            "PORT_1='" & frmComputers.txtPrint1Port.Text & "'," &
+            "PRINTER_PROIZV_1='" & frmComputers.PROizV34.Text & "'," &
+            "PRINTER_NAME_2='" & frmComputers.cmbPrinters2.Text & "'," &
+            "PRINTER_SN_2='" & frmComputers.txtPrint2SN.Text & "'," &
+            "PORT_2='" & frmComputers.txtPrint2Port.Text & "'," &
+            "PRINTER_PROIZV_2='" & frmComputers.PROizV35.Text & "'," &
+            "PRINTER_NAME_3='" & frmComputers.cmbPrinters3.Text & "'," &
+            "PRINTER_SN_3='" & frmComputers.txtPrint3SN.Text & "'," &
+            "PORT_3='" & frmComputers.txtPrint3Port.Text & "'," &
+            "PRINTER_PROIZV_3='" & frmComputers.PROizV36.Text & "' " &
+                " WHERE id =" & sSID
+
+        DB7.Execute(sSQL)
+
+        sSQL = "UPDATE kompy SET " &
+            "SFAktNo=" & frmComputers.txtPCSfN.Text & "," &
+            "CenaRub='" & frmComputers.txtPCcash.Text & "'," &
+            "StoimRub='" & frmComputers.txtPCSumm.Text & "'," &
+            "Zaiavk='" & frmComputers.txtPCZay.Text & "'," &
+            "DataVVoda='" & frmComputers.dtPCdataVvoda.Value & "'," &
+            "dataSF='" & frmComputers.dtPCSFdate.Value & "'," &
+            "Spisan=" & _chkPRNspis & "," &
+            "Balans=" & _chkPRNNNb & " WHERE id =" & sSID
+
+        DB7.Execute(sSQL)
+
+        Select Case frmComputers.EDT
+
+            Case False
+
                 Dim objIniFile As New IniFile(PrPath & "base.ini")
                 objIniFile.WriteString("general", "DK", frmComputers.sCOUNT)
                 objIniFile.WriteString("general", "Default", 0)
@@ -1061,15 +1129,9 @@ sAR:
 
                     Case Else
 
-                        rs = New Recordset
-                        rs.Open(
-                            "update kompy set OTvetstvennyj='" & frmComputers.cmbResponsible.Text & "', FILIAL='" &
+                        DB7.Execute("update kompy set OTvetstvennyj='" & frmComputers.cmbResponsible.Text & "', FILIAL='" &
                             frmComputers.cmbBranch.Text & "', mesto='" & frmComputers.cmbDepartment.Text & "', kabn='" &
-                            frmComputers.cmbOffice.Text & "' WHERE PCL=" & frmComputers.sCOUNT, DB7,
-                            CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
-                        'rs.Close()
-                        rs = Nothing
+                            frmComputers.cmbOffice.Text & "' WHERE PCL=" & frmComputers.sCOUNT)
 
                 End Select
 
@@ -1092,7 +1154,7 @@ sAR:
 
             Case True
 
-                SAVE_GARANT(sSID, frmComputers.cmbPostav, frmComputers.dtGPr, frmComputers.dtGok)
+                SAVE_GARANT(frmComputers.sCOUNT, frmComputers.cmbPostav, frmComputers.dtGPr, frmComputers.dtGok)
 
         End Select
 
@@ -1137,126 +1199,111 @@ err_:
         If sSID = 0 Then Exit Sub
         lstV.Visible = False
 
-        Dim A1, B1, C1, F1, G1, H1 As String
+        Dim B1, C1, F1, G1, H1, I1 As String
         Dim D1, E1 As Date
-        Dim I1 As String
+
         Dim intj As Integer
 
-        Dim uname34 As String
+        ' A1 = 1
+        Dim sSQL As String
 
         For intj = 0 To lstV.Items.Count - 1
 
-            If _
-                lstV.Items(intj).SubItems(6).Text <> "" Or lstV.Items(intj).SubItems(6).Text <> "<N/A>" Or
-                Len(lstV.Items(intj).SubItems(6).Text) <> 0 Then
-                uname34 = lstV.Items(intj).SubItems(6).Text
-            Else
-                uname34 = "NoName"
-            End If
+            Select Case Len(lstV.Items(intj).SubItems(1).Text)
 
-            If Not (RSExists("PROYZV", "PROiZV", Trim(uname34))) Then
-                AddPr(Trim(uname34))
-            End If
+                Case 0
+
+                Case Else
+
+                    Select Case Len(lstV.Items(intj).SubItems(2).Text)
+
+                        Case Is > 1
+
+                            lstV.Items(intj).Selected = True
+                            lstV.Items(intj).EnsureVisible()
+
+                            If Len(lstV.Items(intj).Text) = 0 Then lstV.Items(intj).Text = 1
+
+                            H1 = lstV.Items(intj).SubItems(2).Text
+
+                            Select Case Len(lstV.Items(intj).SubItems(3).Text)
+                                Case 0
+                                    B1 = ""
+                                Case Else
+                                    B1 = lstV.Items(intj).SubItems(3).Text
+                            End Select
+
+                            Select Case Len(lstV.Items(intj).SubItems(4).Text)
+                                Case 0
+                                    C1 = ""
+                                Case Else
+                                    C1 = lstV.Items(intj).SubItems(4).Text
+                            End Select
+
+                            Select Case Len(lstV.Items(intj).SubItems(5).Text)
+                                Case 0
+                                    D1 = ""
+                                Case Else
+                                    D1 = lstV.Items(intj).SubItems(5).Text
+                            End Select
+
+                            Select Case Len(lstV.Items(intj).SubItems(6).Text)
+                                Case 0
+                                    E1 = "NoName"
+                                Case Else
+
+                                    E1 = lstV.Items(intj).SubItems(6).Text
+
+                                    If Not (RSExists("PROYZV", "PROiZV", Trim(E1))) Then
+                                        AddPr(Trim(E1))
+                                    End If
+
+                            End Select
+
+                            Select Case Len(lstV.Items(intj).SubItems(7).Text)
+                                Case 0
+                                    F1 = ""
+                                Case Else
+                                    F1 = lstV.Items(intj).SubItems(7).Text
+                            End Select
+
+                            Select Case F1
+                                Case "<N/A>"
+                                    F1 = ""
+                                Case Else
+                            End Select
+
+                            Select Case Len(lstV.Items(intj).SubItems(8).Text)
+                                Case 0
+                                    G1 = ""
+                                Case Else
+                                    G1 = lstV.Items(intj).SubItems(8).Text
+                            End Select
+
+                            If Not (RSExistsSoft(sSID, H1)) Then
+
+                                sSQL = "INSERT INTO SOFT_INSTALL (Soft,NomerSoftKomp,t_lic,L_key,d_p,d_o,Publisher,TIP,Id_Comp) VALUES ('" & H1 & "','" & intj + 1 & "','" & C1 & "','" & B1 & "','" & D1 & "','" & E1 & "','" & F1 & "','" & "" & "'," & sSID & ")"
+                                DB7.Execute(sSQL)
+
+                                'esq ************************
+                            Else
+
+                                sSQL = "UPDATE SOFT_INSTALL SET NomerSoftKomp='" & intj + 1 & "' WHERE Id_Comp= " & sSID & " AND Soft='" & H1 & "'"
+                                DB7.Execute(sSQL)
+
+                                'esq ************************
+                            End If
+
+                        Case Else
+
+                    End Select
+
+            End Select
+
         Next
 
-        Dim rsSoft As Recordset
-
-        A1 = 1
-
-        For intj = 0 To lstV.Items.Count - 1
-
-            If Len(lstV.Items(intj).SubItems(1).Text) > 0 Then
-                lstV.Items(intj).Selected = True
-                lstV.Items(intj).EnsureVisible()
-                'lstV.SetFocus()
-
-                lstV.Items(intj).Focused = True
-
-                If Len(lstV.Items(intj).Text) = 0 Then lstV.Items(intj).Text = 1
-
-
-                H1 = lstV.Items(intj).SubItems(2).Text
-
-                If Len(lstV.Items(intj).SubItems(3).Text) = 0 Then
-                    B1 = ""
-                Else
-                    B1 = lstV.Items(intj).SubItems(3).Text
-                End If
-
-                If Len(lstV.Items(intj).SubItems(4).Text) = 0 Then
-                    C1 = ""
-                Else
-                    C1 = lstV.Items(intj).SubItems(4).Text
-                End If
-
-                If Len(lstV.Items(intj).SubItems(5).Text) = 0 Then
-                    D1 = Date.Today
-                Else
-                    D1 = lstV.Items(intj).SubItems(5).Text
-                End If
-
-                If Len(lstV.Items(intj).SubItems(6).Text) = 0 Then
-                    E1 = Date.Today
-                Else
-                    E1 = lstV.Items(intj).SubItems(6).Text
-                End If
-
-                If Len(lstV.Items(intj).SubItems(7).Text) = 0 Then
-                    F1 = ""
-                Else
-                    F1 = lstV.Items(intj).SubItems(7).Text
-                    If F1 = "<N/A>" Then F1 = ""
-                End If
-
-                If Len(lstV.Items(intj).SubItems(8).Text) = 0 Then
-                    G1 = ""
-                Else '
-                    G1 = lstV.Items(intj).SubItems(9).Text
-                End If
-
-                I1 = sSID
-
-                If Not (RSExistsSoft(sSID, H1)) Then
-                    If Len(H1) > 1 Then
-
-                        rsSoft = New Recordset
-                        Dim sSQL As String
-                        sSQL = "INSERT INTO SOFT_INSTALL (Soft,NomerSoftKomp,t_lic,L_key,d_p,d_o,Publisher,TIP,Id_Comp) VALUES ('" & H1 & "','" & A1 & "','" & C1 & "','" & B1 & "','" & D1 & "','" & E1 & "','" & F1 & "','" & "" & "'," & I1 & ")"
-
-                        rsSoft.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic,
-                                   LockTypeEnum.adLockOptimistic)
-                        rsSoft = Nothing
-
-
-                        'esq A1 = A1 - 1 
-
-                    End If
-                    'esq ************************
-                Else
-                    Dim sSQL2 As String
-                    'sSQL2 = "SELECT * FROM SOFT_INSTALL WHERE Id_Comp= " & sSID & " AND Soft='" & H1 & "'"
-                    sSQL2 = "UPDATE SOFT_INSTALL SET NomerSoftKomp='" & A1 & "' WHERE Id_Comp= " & sSID & " AND Soft='" & H1 & "'"
-
-                    Dim rs As Recordset
-                    rs = New Recordset
-                    rs.Open(sSQL2, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
-                    'rs.Fields("NomerSoftKomp").Value = A1
-                    'rs.Update()
-                    'rs.Close()
-                    rs = Nothing
-                    'esq ************************
-                End If
-                A1 = A1 + 1 'esq
-
-            End If
-        Next
         'Костыль для MyODBC 5
-        rsSoft = New Recordset
-        rsSoft.Open("UPDATE SOFT_INSTALL SET Id_Comp=" & I1 & " WHERE Id_Comp='0'", DB7, CursorTypeEnum.adOpenDynamic,
-                    LockTypeEnum.adLockOptimistic)
-        rsSoft.Close()
-        rsSoft = Nothing
+        DB7.Execute("UPDATE SOFT_INSTALL SET Id_Comp=" & sSID & " WHERE Id_Comp='0'")
 
         lstV.Visible = True
     End Sub
@@ -1282,8 +1329,6 @@ err_:
                     lstV.Items(intj).Selected = True
                     lstV.Items(intj).EnsureVisible()
 
-                    lstV.Items(intj).Focused = True
-
                     H1 = lstV.Items(intj).SubItems(0).Text
 
                     If Len(lstV.Items(intj).Text) = 0 Then lstV.Items(intj).Text = 1
@@ -1306,48 +1351,32 @@ err_:
                     spis = spis + C1 + "\"
 
                     If (Len(C1) > 0) And (H1 = 0) Then
-                        rsUser = New Recordset
-                        rsUser.Open("SELECT * FROM USER_COMP", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                        With rsUser
-                            .AddNew()
-                            .Fields("ID_COMP").Value = I1
-                            .Fields("USERNAME").Value = C1
-                            .Fields("PASSWORD").Value = ""
-                            .Fields("EMAIL").Value = ""
-                            .Fields("EPASS").Value = ""
-                            .Fields("FIO").Value = B1
-                            .Fields("icq").Value = ""
-                            .Fields("PDC").Value = False
-                            .Fields("MEMO").Value = ""
-                            .Fields("jabber").Value = ""
-                            .Update()
-                        End With
-                        rsUser.Close()
-                        rsUser = Nothing
+
+                        sSQL = "INSERT INTO USER_COMP (ID_COMP,USERNAME,FIO) VALUES (" & I1 & ",'" & C1 & "'," & B1 & "')"
+
+                        DB7.Execute(sSQL)
+
 
                         Dim UserExist As Boolean
                         sSQL = "SELECT COUNT(*) AS total_number FROM SPR_USER WHERE name='" & C1 & "' AND A='" & B1 & "'"
                         rsUser = New Recordset
                         rsUser.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
                         If rsUser.Fields("total_number").Value = 0 Then
                             UserExist = False
                         Else
                             UserExist = True
                         End If
+
                         rsUser.Close()
                         rsUser = Nothing
 
                         If UserExist = False Then
-                            rsUser = New Recordset
-                            rsUser.Open("Select * from SPR_USER ", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                            With rsUser
-                                .AddNew()
-                                .Fields("name").Value = C1
-                                .Fields("A").Value = B1
-                                .Update()
-                            End With
-                            rsUser.Close()
-                            rsUser = Nothing
+
+                            sSQL = "INSERT INTO SPR_USER (name,A) VALUES ('" & C1 & "','" & B1 & "')"
+
+                            DB7.Execute(sSQL)
+
                             frmComputers.txtUserName.Items.Add(C1)
                             If B1 <> "" Then frmComputers.txtUserFIO.Items.Add(B1)
                         End If
@@ -1513,7 +1542,6 @@ err_:
 
         End If
 
-
         FillComboNET(frmComputers.txtUserName, "Name", "SPR_USER", "", False, True) 'esq 130713
         FillComboNET(frmComputers.txtUserFIO, "A", "SPR_USER", "", False, True) 'esq 130713
 
@@ -1669,9 +1697,11 @@ sAR:
 
         End Select
 
-        rs = New Recordset
-        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-        rs = Nothing
+        DB7.Execute(sSQL)
+
+        'rs = New Recordset
+        'rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+        'rs = Nothing
 
         Select Case frmComputers.EDT
 
@@ -1873,9 +1903,11 @@ sAR:
 
         End Select
 
-        rs = New Recordset
-        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-        rs = Nothing
+        DB7.Execute(sSQL)
+
+        'rs = New Recordset
+        'rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+        'rs = Nothing
 
         Select Case frmComputers.EDT
 
@@ -1944,14 +1976,20 @@ sAR:
         If Len(sName) = 0 Then
 
         Else
+
             If sName <> sNAMEs And frmComputers.EDT = True Then
 
-                rs = New Recordset
-                rs.Open("update Remont set Comp_Name ='" & sNAMEs &
+
+                DB7.Execute("update Remont set Comp_Name ='" & sNAMEs &
                         "', Mesto_Compa ='" & sBranch & "/" & sDepartment &
-                        "' WHERE Id_Comp=" & frmComputers.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
-                        LockTypeEnum.adLockOptimistic)
-                rs = Nothing
+                        "' WHERE Id_Comp=" & frmComputers.sCOUNT)
+
+                'rs = New Recordset
+                'rs.Open("update Remont set Comp_Name ='" & sNAMEs &
+                '        "', Mesto_Compa ='" & sBranch & "/" & sDepartment &
+                '        "' WHERE Id_Comp=" & frmComputers.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                '        LockTypeEnum.adLockOptimistic)
+                'rs = Nothing
 
             Else
 
@@ -2009,9 +2047,12 @@ sAR:
 
                     Dim sSQL As String
                     sSQL = "INSERT INTO dvig (id_comp,oldMesto,NewMesto,prich,[data],[time]) VALUES (" & frmComputers.sCOUNT & ",'" & iA & "','" & sFIALIAL & "','" & strTmp & "','" & Date.Today & "','" & sTmp.ToLongTimeString & "')"
-                    rs = New Recordset
-                    rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                    rs = Nothing
+
+                    DB7.Execute(sSQL)
+
+                    'rs = New Recordset
+                    'rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                    'rs = Nothing
 
                     'Call SaveActivityToLogDB("Перемещение техники " & frmComputers.SelNde.Text & " из " & frmComputers.FilD & "/" & frmComputers.OtdD & " в " & sfilial & "/" & sOTDEL)
 
@@ -2053,9 +2094,12 @@ sAR:
                                     sCN = .Fields("id").Value
 
                                     sSQL = "INSERT INTO dvig (id_comp,oldMesto,NewMesto,prich,[data],[time]) VALUES (" & sCN & ",'" & iA & "','" & sFIALIAL & "','" & strTmp & "','" & Date.Today & "','" & sTmp.ToLongTimeString & "')"
-                                    rs1 = New Recordset
-                                    rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                                    rs1 = Nothing
+
+                                    DB7.Execute(sSQL)
+
+                                    'rs1 = New Recordset
+                                    'rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                                    'rs1 = Nothing
 
                                     .MoveNext()
                                 Loop
@@ -2337,9 +2381,11 @@ Error_:
 
         End If
 
-        rs = New Recordset
-        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-        rs = Nothing
+        DB7.Execute(sSQL)
+
+        'rs = New Recordset
+        'rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+        'rs = Nothing
 
         'Санитарный паспорт
 
@@ -2388,9 +2434,11 @@ Error_:
 
         End If
 
-        rs = New Recordset
-        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-        rs = Nothing
+        DB7.Execute(sSQL)
+
+        'rs = New Recordset
+        'rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+        'rs = Nothing
 
        
     End Sub
@@ -2417,10 +2465,12 @@ Error_:
 
         sSQL = "UPDATE kompy SET FILIAL='" & sBRANCHE & "', mesto='" & sDEPARTMENT & "',kabn='" & sOFFICE & "',PCL=0 where id=" & sID
 
+        DB7.Execute(sSQL)
+
         Dim rs As Recordset
-        rs = New Recordset
-        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-        rs = Nothing
+        'rs = New Recordset
+        'rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+        'rs = Nothing
 
 
         sSQL = "SELECT count(*) as t_n FROM kompy where PCL=" & sID
@@ -2437,17 +2487,21 @@ Error_:
 
         If sCON > 0 Then
 
-            rs = New Recordset
-            rs.Open(
-                "update kompy set FILIAL='" & sBRANCHE & "', mesto='" & sDEPARTMENT & "', kabn='" & sOFFICE &
-                "' WHERE PCL=" & sID, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+            DB7.Execute("update kompy set FILIAL='" & sBRANCHE & "', mesto='" & sDEPARTMENT & "', kabn='" & sOFFICE & "' WHERE PCL=" & sID)
 
-            rs = Nothing
+            ' DB7.Execute("update kompy set FILIAL='" & sBRANCHE & "', mesto='" & sDEPARTMENT & "', kabn='" & sOFFICE & "' WHERE PCL=" & rs.Fields("id").Value)
 
-            sSQL = "update kompy set FILIAL='" & sBRANCHE & "', mesto='" & sDEPARTMENT & "', kabn='" & sOFFICE & "' WHERE PCL=" & rs.Fields("id").Value
-            rs = New Recordset
-            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-            rs = Nothing
+            'rs = New Recordset
+            'rs.Open(
+            '    "update kompy set FILIAL='" & sBRANCHE & "', mesto='" & sDEPARTMENT & "', kabn='" & sOFFICE &
+            '    "' WHERE PCL=" & sID, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
+            'rs = Nothing
+
+            'sSQL = "update kompy set FILIAL='" & sBRANCHE & "', mesto='" & sDEPARTMENT & "', kabn='" & sOFFICE & "' WHERE PCL=" & rs.Fields("id").Value
+            'rs = New Recordset
+            'rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+            'rs = Nothing
 
 
         End If
@@ -2464,7 +2518,6 @@ Error_:
 
         Dim sSQL As String
         Dim tId As Integer
-
 
         rs = New Recordset
         rs.Open("Select count(*) as t_n from kompy where PCL=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
@@ -2529,9 +2582,11 @@ Error_:
                            rs.Fields("MONITOR_SN").Value & "',MONITOR_PROIZV='" &
                            rs.Fields("MONITOR_PROIZV").Value & "',INV_NO_MONITOR='" &
                            rs.Fields("INV_NO_MONITOR").Value & "' where id=" & sSID
-                                rs1 = New Recordset
-                                rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                                rs1 = Nothing
+                                DB7.Execute(sSQL)
+
+                                'rs1 = New Recordset
+                                'rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                                'rs1 = Nothing
 
                             Case Else
 
@@ -2544,9 +2599,11 @@ Error_:
                           rs.Fields("MONITOR_SN").Value & "',MONITOR_PROIZV2='" &
                           rs.Fields("MONITOR_PROIZV").Value & "',INV_NO_MONITOR='" &
                           rs.Fields("INV_NO_MONITOR").Value & "' where id=" & sSID
-                                        rs1 = New Recordset
-                                        rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                                        rs1 = Nothing
+                                        DB7.Execute(sSQL)
+
+                                        'rs1 = New Recordset
+                                        'rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                                        'rs1 = Nothing
 
                                     Case Else
 
@@ -2555,9 +2612,12 @@ Error_:
                           rs.Fields("MONITOR_SN").Value & "',MONITOR_PROIZV='" &
                           rs.Fields("MONITOR_PROIZV").Value & "',INV_NO_MONITOR='" &
                           rs.Fields("INV_NO_MONITOR").Value & "' where id=" & sSID
-                                        rs1 = New Recordset
-                                        rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                                        rs1 = Nothing
+
+                                        DB7.Execute(sSQL)
+
+                                        'rs1 = New Recordset
+                                        'rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                                        'rs1 = Nothing
 
                                 End Select
 
@@ -2565,33 +2625,37 @@ Error_:
 
                         i = i + 1
 
-                        rs1.Close()
-                        rs1 = Nothing
+                        DB7.Execute("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId)
+                        DB7.Execute("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId)
+                        DB7.Execute("Delete from Garantia_sis where Id_Comp=" & tId)
+                        DB7.Execute("Delete from dvig where Id_Comp=" & tId)
+                        DB7.Execute("Delete from kompy where id=" & tId)
 
-                        rs1 = New Recordset
-                        rs1.Open("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
-                                 CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
 
-                        rs1 = New Recordset
-                        rs1.Open("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
-                                 CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        'rs1 = New Recordset
+                        'rs1.Open("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
+                        '         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
 
-                        rs1 = New Recordset
-                        rs1.Open("Delete from Garantia_sis where Id_Comp=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
-                                 LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        'rs1 = New Recordset
+                        'rs1.Open("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
+                        '         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
 
-                        rs1 = New Recordset
-                        rs1.Open("Delete from dvig where Id_Comp=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
-                                 LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        'rs1 = New Recordset
+                        'rs1.Open("Delete from Garantia_sis where Id_Comp=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
+                        '         LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
 
-                        rs1 = New Recordset
-                        rs1.Open("Delete from kompy where id=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
-                                 LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        'rs1 = New Recordset
+                        'rs1.Open("Delete from dvig where Id_Comp=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
+                        '         LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
+
+                        'rs1 = New Recordset
+                        'rs1.Open("Delete from kompy where id=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
+                        '         LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
 
                         .MoveNext()
                     Loop
@@ -2640,36 +2704,45 @@ Error_:
                         "'," & pField4 & "='" & rs.Fields("port_2").Value &
                         "' where id=" & sSID
 
-                        rs1 = New Recordset
-                        rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        DB7.Execute(sSQL)
+
+                        'rs1 = New Recordset
+                        'rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
 
                         i = i + 1
 
-                        rs1 = New Recordset
-                        rs1.Open("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
-                                 CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        DB7.Execute("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId)
+                        DB7.Execute("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId)
+                        DB7.Execute("Delete from Garantia_sis where Id_Comp=" & tId)
+                        DB7.Execute("Delete from dvig where Id_Comp=" & tId)
+                        DB7.Execute("Delete from kompy where id=" & tId)
 
-                        rs1 = New Recordset
-                        rs1.Open("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
-                                 CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
 
-                        rs1 = New Recordset
-                        rs1.Open("Delete from Garantia_sis where Id_Comp=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
-                                 LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        'rs1 = New Recordset
+                        'rs1.Open("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
+                        '         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
 
-                        rs1 = New Recordset
-                        rs1.Open("Delete from dvig where Id_Comp=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
-                                 LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        'rs1 = New Recordset
+                        'rs1.Open("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
+                        '         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
 
-                        rs1 = New Recordset
-                        rs1.Open("Delete from kompy where id=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
-                                 LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        'rs1 = New Recordset
+                        'rs1.Open("Delete from Garantia_sis where Id_Comp=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
+                        '         LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
+
+                        'rs1 = New Recordset
+                        'rs1.Open("Delete from dvig where Id_Comp=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
+                        '         LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
+
+                        'rs1 = New Recordset
+                        'rs1.Open("Delete from kompy where id=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
+                        '         LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
 
                         .MoveNext()
                     Loop
@@ -2694,29 +2767,38 @@ Error_:
                          rs.Fields("PRINTER_PROIZV_1").Value & "',INV_NO_IBP='" &
                          rs.Fields("INV_NO_PRINTER").Value & "' where id=" & sSID
 
-                        rs1 = New Recordset
-                        rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        DB7.Execute(sSQL)
 
-                        rs1 = New Recordset
-                        rs1.Open("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
-                                 CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        'rs1 = New Recordset
+                        'rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
 
-                        rs1 = New Recordset
-                        rs1.Open("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
-                                 CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        DB7.Execute("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId)
+                        DB7.Execute("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId)
+                        DB7.Execute("Delete from Garantia_sis where Id_Comp=" & tId)
+                        DB7.Execute("Delete from dvig where Id_Comp=" & tId)
+                        DB7.Execute("Delete from kompy where id=" & tId)
 
-                        rs1 = New Recordset
-                        rs1.Open("Delete from Garantia_sis where Id_Comp=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
-                                 LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
 
-                        rs1 = New Recordset
-                        rs1.Open("Delete from kompy where id=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
-                                 LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        'rs1 = New Recordset
+                        'rs1.Open("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
+                        '         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
+
+                        'rs1 = New Recordset
+                        'rs1.Open("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
+                        '         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
+
+                        'rs1 = New Recordset
+                        'rs1.Open("Delete from Garantia_sis where Id_Comp=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
+                        '         LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
+
+                        'rs1 = New Recordset
+                        'rs1.Open("Delete from kompy where id=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
+                        '         LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
 
                         ' Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & tId)
                         ' frmComputers.lstGroups.SelectedNode.Remove()
@@ -2743,29 +2825,37 @@ Error_:
                             "',KEYBOARD_SN='" & rs.Fields("PRINTER_SN_1").Value &
                             "',KEYBOARD_PROIZV='" & rs.Fields("PRINTER_PROIZV_1").Value & "' where id=" & sSID
 
-                        rs1 = New Recordset
-                        rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        DB7.Execute(sSQL)
 
-                        rs1 = New Recordset
-                        rs1.Open("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
-                                 CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        'rs1 = New Recordset
+                        'rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
 
-                        rs1 = New Recordset
-                        rs1.Open("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
-                                 CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        DB7.Execute("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId)
+                        DB7.Execute("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId)
+                        DB7.Execute("Delete from Garantia_sis where Id_Comp=" & tId)
+                        DB7.Execute("Delete from dvig where Id_Comp=" & tId)
+                        DB7.Execute("Delete from kompy where id=" & tId)
 
-                        rs1 = New Recordset
-                        rs1.Open("Delete from Garantia_sis where Id_Comp=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
-                                 LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        'rs1 = New Recordset
+                        'rs1.Open("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
+                        '         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
 
-                        rs1 = New Recordset
-                        rs1.Open("Delete from kompy where id=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
-                                 LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        'rs1 = New Recordset
+                        'rs1.Open("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
+                        '         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
+
+                        'rs1 = New Recordset
+                        'rs1.Open("Delete from Garantia_sis where Id_Comp=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
+                        '         LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
+
+                        'rs1 = New Recordset
+                        'rs1.Open("Delete from kompy where id=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
+                        '         LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
 
                         .MoveNext()
                     Loop
@@ -2789,29 +2879,37 @@ Error_:
                             "',MOUSE_SN='" & rs.Fields("PRINTER_SN_1").Value &
                             "',MOUSE_PROIZV='" & rs.Fields("PRINTER_PROIZV_1").Value & "' where id=" & sSID
 
-                        rs1 = New Recordset
-                        rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        DB7.Execute(sSQL)
 
-                        rs1 = New Recordset
-                        rs1.Open("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
-                                 CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        'rs1 = New Recordset
+                        'rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
 
-                        rs1 = New Recordset
-                        rs1.Open("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
-                                 CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        DB7.Execute("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId)
+                        DB7.Execute("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId)
+                        DB7.Execute("Delete from Garantia_sis where Id_Comp=" & tId)
+                        DB7.Execute("Delete from dvig where Id_Comp=" & tId)
+                        DB7.Execute("Delete from kompy where id=" & tId)
 
-                        rs1 = New Recordset
-                        rs1.Open("Delete from Garantia_sis where Id_Comp=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
-                                 LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        'rs1 = New Recordset
+                        'rs1.Open("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
+                        '         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
 
-                        rs1 = New Recordset
-                        rs1.Open("Delete from kompy where id=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
-                                 LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        'rs1 = New Recordset
+                        'rs1.Open("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
+                        '         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
+
+                        'rs1 = New Recordset
+                        'rs1.Open("Delete from Garantia_sis where Id_Comp=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
+                        '         LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
+
+                        'rs1 = New Recordset
+                        'rs1.Open("Delete from kompy where id=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
+                        '         LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
 
                         .MoveNext()
                     Loop
@@ -2837,9 +2935,11 @@ Error_:
                             "',FILTR_PROIZV='" & rs.Fields("PRINTER_PROIZV_1").Value &
                             "' where id=" & sSID
 
-                        rs1 = New Recordset
-                        rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        DB7.Execute(sSQL)
+
+                        'rs1 = New Recordset
+                        'rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
 
                         rs1 = New Recordset
                         rs1.Open("Select FILTR_NAME,FILTR_SN,FILTR_PROIZV from kompy where id=" & sSID, DB7, CursorTypeEnum.adOpenDynamic,
@@ -2855,25 +2955,31 @@ Error_:
                         rs1.Close()
                         rs1 = Nothing
 
-                        rs1 = New Recordset
-                        rs1.Open("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
-                                 CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        DB7.Execute("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId)
+                        DB7.Execute("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId)
+                        DB7.Execute("Delete from Garantia_sis where Id_Comp=" & tId)
+                        DB7.Execute("Delete from dvig where Id_Comp=" & tId)
+                        DB7.Execute("Delete from kompy where id=" & tId)
 
-                        rs1 = New Recordset
-                        rs1.Open("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
-                                 CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        'rs1 = New Recordset
+                        'rs1.Open("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
+                        '         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
 
-                        rs1 = New Recordset
-                        rs1.Open("Delete from Garantia_sis where Id_Comp=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
-                                 LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        'rs1 = New Recordset
+                        'rs1.Open("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
+                        '         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
 
-                        rs1 = New Recordset
-                        rs1.Open("Delete from kompy where id=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
-                                 LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        'rs1 = New Recordset
+                        'rs1.Open("Delete from Garantia_sis where Id_Comp=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
+                        '         LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
+
+                        'rs1 = New Recordset
+                        'rs1.Open("Delete from kompy where id=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
+                        '         LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
 
                         ' Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & tId)
                         ' frmComputers.lstGroups.SelectedNode.Remove()
@@ -2927,9 +3033,11 @@ Error_:
                                 "',MONITOR_PROIZV='" & rs.Fields("MONITOR_PROIZV").Value &
                                 "',INV_NO_MONITOR='" & rs.Fields("INV_NO_MONITOR").Value & "' where id=" & sSID
 
-                            rs1 = New Recordset
-                            rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                            rs1 = Nothing
+                            DB7.Execute(sSQL)
+
+                            'rs1 = New Recordset
+                            'rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                            'rs1 = Nothing
 
                         Else
 
@@ -2941,9 +3049,11 @@ Error_:
                                 "',MONITOR_PROIZV2='" & rs.Fields("MONITOR_PROIZV").Value &
                                 "',INV_NO_MONITOR='" & rs.Fields("INV_NO_MONITOR").Value & "' where id=" & sSID
 
-                                rs1 = New Recordset
-                                rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                                rs1 = Nothing
+                                DB7.Execute(sSQL)
+
+                                'rs1 = New Recordset
+                                'rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                                'rs1 = Nothing
 
                             Else
 
@@ -2953,9 +3063,11 @@ Error_:
                                 "',MONITOR_PROIZV='" & rs.Fields("MONITOR_PROIZV").Value &
                                 "',INV_NO_MONITOR='" & rs.Fields("INV_NO_MONITOR").Value & "' where id=" & sSID
 
-                                rs1 = New Recordset
-                                rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                                rs1 = Nothing
+                                DB7.Execute(sSQL)
+
+                                'rs1 = New Recordset
+                                'rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                                'rs1 = Nothing
 
                             End If
 
@@ -2963,25 +3075,31 @@ Error_:
 
                         i = i + 1
 
-                        rs1 = New Recordset
-                        rs1.Open("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
-                                 CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        DB7.Execute("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId)
+                        DB7.Execute("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId)
+                        DB7.Execute("Delete from Garantia_sis where Id_Comp=" & tId)
+                        DB7.Execute("Delete from dvig where Id_Comp=" & tId)
+                        DB7.Execute("Delete from kompy where id=" & tId)
 
-                        rs1 = New Recordset
-                        rs1.Open("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
-                                 CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        'rs1 = New Recordset
+                        'rs1.Open("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
+                        '         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
 
-                        rs1 = New Recordset
-                        rs1.Open("Delete from Garantia_sis where Id_Comp=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
-                                 LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        'rs1 = New Recordset
+                        'rs1.Open("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
+                        '         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
 
-                        rs1 = New Recordset
-                        rs1.Open("Delete from kompy where id=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
-                                 LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        'rs1 = New Recordset
+                        'rs1.Open("Delete from Garantia_sis where Id_Comp=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
+                        '         LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
+
+                        'rs1 = New Recordset
+                        'rs1.Open("Delete from kompy where id=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
+                        '         LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
 
                         .MoveNext()
                     Loop
@@ -3032,36 +3150,44 @@ Error_:
                         "'," & pField4 & "='" & rs.Fields("port_2").Value &
                         "' where id=" & sSID
 
-                        rs1 = New Recordset
-                        rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        DB7.Execute(sSQL)
+
+                        'rs1 = New Recordset
+                        'rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
 
                         i = i + 1
 
-                        rs1 = New Recordset
-                        rs1.Open("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
-                                 CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        DB7.Execute("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId)
+                        DB7.Execute("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId)
+                        DB7.Execute("Delete from Garantia_sis where Id_Comp=" & tId)
+                        DB7.Execute("Delete from dvig where Id_Comp=" & tId)
+                        DB7.Execute("Delete from kompy where id=" & tId)
 
-                        rs1 = New Recordset
-                        rs1.Open("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
-                                 CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        'rs1 = New Recordset
+                        'rs1.Open("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
+                        '         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
 
-                        rs1 = New Recordset
-                        rs1.Open("Delete from Garantia_sis where Id_Comp=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
-                                 LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        'rs1 = New Recordset
+                        'rs1.Open("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
+                        '         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
 
-                        rs1 = New Recordset
-                        rs1.Open("Delete from dvig where Id_Comp=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
-                                 LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        'rs1 = New Recordset
+                        'rs1.Open("Delete from Garantia_sis where Id_Comp=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
+                        '         LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
 
-                        rs1 = New Recordset
-                        rs1.Open("Delete from kompy where id=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
-                                 LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        'rs1 = New Recordset
+                        'rs1.Open("Delete from dvig where Id_Comp=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
+                        '         LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
+
+                        'rs1 = New Recordset
+                        'rs1.Open("Delete from kompy where id=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
+                        '         LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
 
                         .MoveNext()
                     Loop
@@ -3087,29 +3213,37 @@ Error_:
                             "',IBP_PROIZV='" & rs.Fields("PRINTER_PROIZV_1").Value &
                             "',INV_NO_IBP='" & rs.Fields("INV_NO_PRINTER").Value & "' where id=" & sSID
 
-                        rs1 = New Recordset
-                        rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        DB7.Execute(sSQL)
 
-                        rs1 = New Recordset
-                        rs1.Open("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
-                                 CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        'rs1 = New Recordset
+                        'rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
 
-                        rs1 = New Recordset
-                        rs1.Open("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
-                                 CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        DB7.Execute("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId)
+                        DB7.Execute("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId)
+                        DB7.Execute("Delete from Garantia_sis where Id_Comp=" & tId)
+                        DB7.Execute("Delete from dvig where Id_Comp=" & tId)
+                        DB7.Execute("Delete from kompy where id=" & tId)
 
-                        rs1 = New Recordset
-                        rs1.Open("Delete from Garantia_sis where Id_Comp=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
-                                 LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        'rs1 = New Recordset
+                        'rs1.Open("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
+                        '         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
 
-                        rs1 = New Recordset
-                        rs1.Open("Delete from kompy where id=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
-                                 LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        'rs1 = New Recordset
+                        'rs1.Open("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
+                        '         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
+
+                        'rs1 = New Recordset
+                        'rs1.Open("Delete from Garantia_sis where Id_Comp=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
+                        '         LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
+
+                        'rs1 = New Recordset
+                        'rs1.Open("Delete from kompy where id=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
+                        '         LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
 
                         ' Call FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & tId)
                         ' frmComputers.lstGroups.SelectedNode.Remove()
@@ -3136,29 +3270,37 @@ Error_:
                            "',KEYBOARD_PROIZV='" & rs.Fields("PRINTER_PROIZV_1").Value &
                             "' where id=" & sSID
 
-                        rs1 = New Recordset
-                        rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        DB7.Execute(sSQL)
 
-                        rs1 = New Recordset
-                        rs1.Open("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
-                                 CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        'rs1 = New Recordset
+                        'rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
 
-                        rs1 = New Recordset
-                        rs1.Open("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
-                                 CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        DB7.Execute("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId)
+                        DB7.Execute("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId)
+                        DB7.Execute("Delete from Garantia_sis where Id_Comp=" & tId)
+                        DB7.Execute("Delete from dvig where Id_Comp=" & tId)
+                        DB7.Execute("Delete from kompy where id=" & tId)
 
-                        rs1 = New Recordset
-                        rs1.Open("Delete from Garantia_sis where Id_Comp=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
-                                 LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        'rs1 = New Recordset
+                        'rs1.Open("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
+                        '         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
 
-                        rs1 = New Recordset
-                        rs1.Open("Delete from kompy where id=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
-                                 LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        'rs1 = New Recordset
+                        'rs1.Open("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
+                        '         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
+
+                        'rs1 = New Recordset
+                        'rs1.Open("Delete from Garantia_sis where Id_Comp=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
+                        '         LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
+
+                        'rs1 = New Recordset
+                        'rs1.Open("Delete from kompy where id=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
+                        '         LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
 
                         .MoveNext()
                     Loop
@@ -3183,29 +3325,37 @@ Error_:
                            "',MOUSE_PROIZV='" & rs.Fields("PRINTER_PROIZV_1").Value &
                             "' where id=" & sSID
 
-                        rs1 = New Recordset
-                        rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        DB7.Execute(sSQL)
 
-                        rs1 = New Recordset
-                        rs1.Open("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
-                                 CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        'rs1 = New Recordset
+                        'rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
 
-                        rs1 = New Recordset
-                        rs1.Open("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
-                                 CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        DB7.Execute("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId)
+                        DB7.Execute("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId)
+                        DB7.Execute("Delete from Garantia_sis where Id_Comp=" & tId)
+                        DB7.Execute("Delete from dvig where Id_Comp=" & tId)
+                        DB7.Execute("Delete from kompy where id=" & tId)
 
-                        rs1 = New Recordset
-                        rs1.Open("Delete from Garantia_sis where Id_Comp=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
-                                 LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        'rs1 = New Recordset
+                        'rs1.Open("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
+                        '         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
 
-                        rs1 = New Recordset
-                        rs1.Open("Delete from kompy where id=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
-                                 LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        'rs1 = New Recordset
+                        'rs1.Open("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
+                        '         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
+
+                        'rs1 = New Recordset
+                        'rs1.Open("Delete from Garantia_sis where Id_Comp=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
+                        '         LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
+
+                        'rs1 = New Recordset
+                        'rs1.Open("Delete from kompy where id=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
+                        '         LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
 
                         .MoveNext()
                     Loop
@@ -3232,29 +3382,37 @@ Error_:
                            "',FILTR_PROIZV='" & rs.Fields("PRINTER_PROIZV_1").Value &
                             "' where id=" & sSID
 
-                        rs1 = New Recordset
-                        rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        DB7.Execute(sSQL)
 
-                        rs1 = New Recordset
-                        rs1.Open("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
-                                 CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        'rs1 = New Recordset
+                        'rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
 
-                        rs1 = New Recordset
-                        rs1.Open("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
-                                 CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        DB7.Execute("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId)
+                        DB7.Execute("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId)
+                        DB7.Execute("Delete from Garantia_sis where Id_Comp=" & tId)
+                        DB7.Execute("Delete from dvig where Id_Comp=" & tId)
+                        DB7.Execute("Delete from kompy where id=" & tId)
 
-                        rs1 = New Recordset
-                        rs1.Open("Delete from Garantia_sis where Id_Comp=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
-                                 LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        'rs1 = New Recordset
+                        'rs1.Open("UPDATE Remont SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
+                        '         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
 
-                        rs1 = New Recordset
-                        rs1.Open("Delete from kompy where id=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
-                                 LockTypeEnum.adLockOptimistic)
-                        rs1 = Nothing
+                        'rs1 = New Recordset
+                        'rs1.Open("UPDATE Zametki SET Id_Comp=" & sSID & " where Id_Comp=" & tId, DB7,
+                        '         CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
+
+                        'rs1 = New Recordset
+                        'rs1.Open("Delete from Garantia_sis where Id_Comp=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
+                        '         LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
+
+                        'rs1 = New Recordset
+                        'rs1.Open("Delete from kompy where id=" & tId, DB7, CursorTypeEnum.adOpenDynamic,
+                        '         LockTypeEnum.adLockOptimistic)
+                        'rs1 = Nothing
 
                         .MoveNext()
                     Loop
@@ -3313,9 +3471,12 @@ Error_:
 
         If sSID = 0 Then sSID = frmComputers.sCOUNT
         Dim rsdb As Recordset
+        Dim rs As Recordset
+
         rsdb = New Recordset
         rsdb.Open("Select * from kompy where id=" & sSID & " and tiptehn ='PC'", DB7, CursorTypeEnum.adOpenDynamic,
                   LockTypeEnum.adLockOptimistic)
+
 
         With rsdb
 
@@ -3343,7 +3504,6 @@ Error_:
                         sADD = True
                         Call SaveActivityToLogDB("Добавление принтера в результате разделения " & sTEMP0)
 
-                        Dim rs As Recordset
                         Dim sSQL As String
 
                         sSQL = "INSERT INTO kompy ([date],TIPtehn,PRINTER_NAME_1,PRINTER_SN_1,PRINTER_PROIZV_1" &
@@ -3371,17 +3531,19 @@ Error_:
                                 rsdb.Fields("dataSF").Value &
                                 "',0,0)"
 
-                        rs = New Recordset
-                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        DB7.Execute(sSQL)
 
-                        rs = Nothing
+                        'rs = New Recordset
+                        'rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        'rs = Nothing
 
                         sSQL = "UPDATE kompy SET PRINTER_NAME_1='',PRINTER_SN_1='',PRINTER_PROIZV_1='',INV_NO_PRINTER='',port_1='' where id=" & sSID
 
-                        rs = New Recordset
-                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        DB7.Execute(sSQL)
 
-                        rs = Nothing
+                        'rs = New Recordset
+                        'rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        'rs = Nothing
 
                         Dim rsBK As Recordset
                         rsBK = New Recordset
@@ -3424,7 +3586,7 @@ Error_:
                         sADD = True
                         Call SaveActivityToLogDB("Добавление принтера в результате разделения " & sTEMP0)
 
-                        Dim rs As Recordset
+
                         Dim sSQL As String
 
                         sSQL = "INSERT INTO kompy ([date],TIPtehn,PRINTER_NAME_1,PRINTER_SN_1,PRINTER_PROIZV_1" &
@@ -3452,15 +3614,19 @@ Error_:
                                rsdb.Fields("dataSF").Value &
                                "',0,0)"
 
-                        rs = New Recordset
-                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                        rs = Nothing
-                       
+                        DB7.Execute(sSQL)
+
+                        'rs = New Recordset
+                        'rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        'rs = Nothing
+
                         sSQL = "UPDATE kompy SET PRINTER_NAME_2='',PRINTER_SN_2='',PRINTER_PROIZV_2='',INV_NO_PRINTER='',port_2='' where id=" & sSID
 
-                        rs = New Recordset
-                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                        rs = Nothing
+                        DB7.Execute(sSQL)
+
+                        'rs = New Recordset
+                        'rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        'rs = Nothing
 
                         Dim rsBK As Recordset
                         rsBK = New Recordset
@@ -3511,7 +3677,7 @@ Error_:
 
                         Call SaveActivityToLogDB("Добавление принтера в результате разделения " & sTEMP0)
 
-                        Dim rs As Recordset
+                        ' Dim rs As Recordset
                         Dim sSQL As String
 
                         sSQL = "INSERT INTO kompy ([date],TIPtehn,PRINTER_NAME_1,PRINTER_SN_1,PRINTER_PROIZV_1" &
@@ -3539,16 +3705,19 @@ Error_:
                                rsdb.Fields("dataSF").Value &
                                "',0,0)"
 
-                        rs = New Recordset
-                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                        rs = Nothing
+                        DB7.Execute(sSQL)
+
+                        'rs = New Recordset
+                        'rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        'rs = Nothing
 
                         sSQL = "UPDATE kompy SET PRINTER_NAME_3='',PRINTER_SN_3='',PRINTER_PROIZV_3='',INV_NO_PRINTER='',port_3='' where id=" & sSID
 
-                        rs = New Recordset
-                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        DB7.Execute(sSQL)
 
-                        rs = Nothing
+                        'rs = New Recordset
+                        'rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        'rs = Nothing
 
                         Dim rsBK As Recordset
                         rsBK = New Recordset
@@ -3595,7 +3764,7 @@ Error_:
                     If Not RSPRNExt(sTEMP0, sSID) Then
                         sADD = True
                         Call SaveActivityToLogDB("Добавление монитора в результате разделения " & sTEMP0)
-                        Dim rs As Recordset
+
                         Dim sSQL As String
 
                         sSQL = "INSERT INTO kompy (MONITOR_NAME,MONITOR_DUM,MONITOR_SN,MONITOR_PROIZV,port_1,INV_NO_MONITOR,OTvetstvennyj,TELEPHONE,NET_NAME,PSEVDONIM,PCL,[date],TIPtehn,FILIAL,mesto,kabn," &
@@ -3606,16 +3775,19 @@ Error_:
                              rsdb.Fields("MONITOR_NAME").Value & "'," & sSID & ",'" & Date.Today & "','" &
                              "MONITOR" & "','" & sBranch & "','" & sDepartment & "','" & sOffice & "','0','0','0','0','" & rsdb.Fields("DataVVoda").Value & "','" & rsdb.Fields("dataSF").Value & "',0,0)"
 
-                        rs = New Recordset
-                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                        rs = Nothing
+                        DB7.Execute(sSQL)
 
+                        'rs = New Recordset
+                        'rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        'rs = Nothing
 
                         sSQL = "UPDATE kompy SET MONITOR_NAME='',MONITOR_DUM='',MONITOR_SN='',MONITOR_PROIZV='',INV_NO_MONITOR='' where id=" & sSID
-                        rs = New Recordset
-                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-                        rs = Nothing
+                        DB7.Execute(sSQL)
+
+                        'rs = New Recordset
+                        'rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        'rs = Nothing
 
                         On Error Resume Next
 
@@ -3664,9 +3836,8 @@ Error_:
 
                         sADD = True
                         Call SaveActivityToLogDB("Добавление ИБП в результате разделения " & sTEMP0)
-                        Dim rs As Recordset
-                        Dim sSQL As String
 
+                        Dim sSQL As String
 
                         If Not RSExists("SPR_IBP", "name", Trim(sTEMP0)) Then
                             AddTwoPar(sTEMP0, rsdb.Fields("IBP_PROIZV").Value, "SPR_IBP", frmComputers.cmbOTH)
@@ -3678,16 +3849,19 @@ Error_:
                                 sTEMP0 & "','" & sTEMP0 & "'," & sSID & ",'" &
                                 "IBP" & "','" & rsdb.Fields("INV_NO_IBP").Value & "','" & sBranch & "','" & sDepartment & "','" & sOffice & "','0','0','0','0','" & rsdb.Fields("DataVVoda").Value & "','" & rsdb.Fields("dataSF").Value & "',0,0)"
 
-                        rs = New Recordset
-                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                        rs = Nothing
+                        DB7.Execute(sSQL)
+
+                        'rs = New Recordset
+                        'rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        'rs = Nothing
 
                         sSQL = "UPDATE kompy SET IBP_NAME='',IBP_SN='',IBP_PROIZV='',INV_NO_IBP='' where id=" & sSID
 
-                        rs = New Recordset
-                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                        rs = Nothing
+                        DB7.Execute(sSQL)
 
+                        'rs = New Recordset
+                        'rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        'rs = Nothing
 
                         Dim rsBK As Recordset
                         rsBK = New Recordset
@@ -3737,7 +3911,7 @@ Error_:
 
                         sADD = True
                         Call SaveActivityToLogDB("Добавление Клавиатуры в результате разделения " & sTEMP0)
-                        Dim rs As Recordset
+
                         Dim sSQL As String
 
 
@@ -3754,15 +3928,19 @@ Error_:
                                sTEMP0 & "','" & sTEMP0 & "'," & sSID & ",'" &
                                "KEYB" & "','" & rsdb.Fields("INV_NO_IBP").Value & "','" & sBranch & "','" & sDepartment & "','" & sOffice & "','0','0','0','0','" & rsdb.Fields("DataVVoda").Value & "','" & rsdb.Fields("dataSF").Value & "',0,0)"
 
-                        rs = New Recordset
-                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                        rs = Nothing
+                        DB7.Execute(sSQL)
+
+                        'rs = New Recordset
+                        'rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        'rs = Nothing
 
                         sSQL = "UPDATE kompy SET KEYBOARD_NAME='',KEYBOARD_SN='',KEYBOARD_PROIZV='' where id=" & sSID
 
-                        rs = New Recordset
-                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                        rs = Nothing
+                        DB7.Execute(sSQL)
+
+                        'rs = New Recordset
+                        'rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        'rs = Nothing
 
                         Dim rsBK As Recordset
                         rsBK = New Recordset
@@ -3807,7 +3985,7 @@ Error_:
 
                         sADD = True
                         Call SaveActivityToLogDB("Добавление Мыши в результате разделения " & sTEMP0)
-                        Dim rs As Recordset
+
                         Dim sSQL As String
 
                         If Not RSExists("MOUSE", "name", Trim(sTEMP0)) Then
@@ -3821,16 +3999,19 @@ Error_:
                               sTEMP0 & "','" & sTEMP0 & "'," & sSID & ",'" &
                               "MOUSE" & "','" & rsdb.Fields("INV_NO_IBP").Value & "','" & sBranch & "','" & sDepartment & "','" & sOffice & "','0','0','0','0','" & rsdb.Fields("DataVVoda").Value & "','" & rsdb.Fields("dataSF").Value & "',0,0)"
 
-                        rs = New Recordset
-                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                        rs = Nothing
+                        DB7.Execute(sSQL)
+
+                        'rs = New Recordset
+                        'rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        'rs = Nothing
 
                         sSQL = "UPDATE kompy SET MOUSE_NAME='',MOUSE_SN='',MOUSE_PROIZV='' where id=" & sSID
 
-                        rs = New Recordset
-                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        DB7.Execute(sSQL)
 
-                        rs = Nothing
+                        'rs = New Recordset
+                        'rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        'rs = Nothing
 
                         Dim rsBK As Recordset
                         rsBK = New Recordset
@@ -3882,25 +4063,14 @@ Error_:
 
                         sADD = True
                         Call SaveActivityToLogDB("Добавление Сетевого фильтра в результате разделения " & sTEMP0)
-                        Dim rs As Recordset
-                        Dim sSQL As String
 
+                        Dim sSQL As String
 
                         If Not RSExists("OTHER", "name", Trim("Сетевой фильтр")) Then
 
-                            Dim rsOTH As Recordset
-                            rsOTH = New Recordset
-                            rsOTH.Open("Select * from spr_other", DB7, CursorTypeEnum.adOpenDynamic,
-                                       LockTypeEnum.adLockOptimistic)
+                            sSQL = "INSERT INTO spr_other (name,A) VALUES ('Сетевой фильтр',48)"
 
-                            With rsOTH
-                                .AddNew()
-                                .Fields("name").Value = "Сетевой фильтр"
-                                .Fields("A").Value = 48
-                                .Update()
-                            End With
-                            rsOTH.Close()
-                            rsOTH = Nothing
+                            DB7.Execute(sSQL)
 
                         End If
 
@@ -3916,16 +4086,19 @@ Error_:
                               sTEMP0 & "','" & sTEMP0 & "'," & sSID & ",'" &
                               "FS" & "','" & rsdb.Fields("INV_NO_IBP").Value & "','" & sBranch & "','" & sDepartment & "','" & sOffice & "','0','0','0','0','" & rsdb.Fields("DataVVoda").Value & "','" & rsdb.Fields("dataSF").Value & "',0,0)"
 
-                        rs = New Recordset
-                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                        rs = Nothing
+                        DB7.Execute(sSQL)
+
+                        'rs = New Recordset
+                        'rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        'rs = Nothing
 
                         sSQL = "UPDATE kompy SET FILTR_NAME='',FILTR_SN='',FILTR_PROIZV='' where id=" & sSID
 
-                        rs = New Recordset
-                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        DB7.Execute(sSQL)
 
-                        rs = Nothing
+                        'rs = New Recordset
+                        'rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        'rs = Nothing
 
                         Dim rsBK As Recordset
                         rsBK = New Recordset
@@ -4075,10 +4248,12 @@ Error_:
                     frmComputers.lstGroups.SelectedNode.Text)
 
             sSQL = "INSERT INTO Zametki (NomerZamKomp,Master,Zametki,[Date],Id_Comp,Comp_name,Mesto_Compa) VALUES (" & lvsNotes.Items.Count + 1 & ",'" & NotesMaster.Text & "','" & textNotes.Text & "','" & DateNotes.Value & "'," & frmComputers.sCOUNT & ",'" & txtSNAME & "','" & uname & "')"
+            DB7.Execute(sSQL)
 
-            rs = New Recordset
-            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-            rs = Nothing
+            'rs = New Recordset
+            'rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+            '' rs.Close()
+            'rs = Nothing
 
         Else
             Call _
@@ -4087,9 +4262,12 @@ Error_:
                     frmComputers.lstGroups.SelectedNode.Text)
 
             sSQL = "UPDATE Zametki SET Master='" & NotesMaster.Text & "',Zametki='" & textNotes.Text & "',[Date]='" & DateNotes.Value & "' WHERE id =" & frmComputers.zCOUNT
-            rs = New Recordset
-            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-            rs = Nothing
+            'rs = New Recordset
+            'rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+            '' rs.Close()
+            'rs = Nothing
+
+            DB7.Execute(sSQL)
 
         End If
 
@@ -4135,10 +4313,12 @@ err_:
 
         End Select
 
-        Dim rs As Recordset
-        rs = New Recordset
-        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-        rs = Nothing
+        DB7.Execute(sSQL)
+
+        'Dim rs As Recordset
+        'rs = New Recordset
+        'rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+        'rs = Nothing
 
         frmComputers.portEDT = False
         frmComputers.txtNetnumberPort.Text = ""
@@ -4189,10 +4369,13 @@ err_:
 
         End If
 
-        Dim rs As Recordset
-        rs = New Recordset
-        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-        rs = Nothing
+        DB7.Execute(sSQL)
+
+
+        'Dim rs As Recordset
+        'rs = New Recordset
+        'rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+        'rs = Nothing
 
         LOAD_INF_BRANCHE(frmComputers.sCOUNT)
         Notes_Clear(frmComputers.btnBRNotesAdd, frmComputers.Notesbrdate, frmComputers.cmbBRMaster,

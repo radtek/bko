@@ -203,9 +203,9 @@
         Dim strTmp As String
         Dim sTmp As String
 
-        Dim T_Que As Recordset
-        T_Que = New Recordset
-        T_Que.Open("SELECT * FROM T_Que", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+        'Dim T_Que As Recordset
+        'T_Que = New Recordset
+        'T_Que.Open("SELECT * FROM T_Que", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         If Len(txtQ.Text) = 0 Then Exit Sub
 
@@ -220,21 +220,24 @@
             strTmp = InputBox(Message, Title, Default1)
             If Len(strTmp) = 0 Then Exit Sub
 
+            Dim sSQL As String
+            sSQL = "INSERT INTO T_Que (name,sqlsq) VALUES ('" & strTmp & "','" & txtQ.Text & "')"
+            DB7.Execute(sSQL)
 
-            With T_Que
-                .AddNew()
-                .Fields("name").Value = strTmp
-                .Fields("sqlsq").Value = txtQ.Text
-                .Update()
-            End With
+            'With T_Que
+            '    .AddNew()
+            '    .Fields("name").Value = strTmp
+            '    .Fields("sqlsq").Value = txtQ.Text
+            '    .Update()
+            'End With
 
             FillComboNET(Me.cmbSaveQ, "name", "T_Que", "", False, False)
 
         End If
 
 
-        T_Que.Close()
-        T_Que = Nothing
+        'T_Que.Close()
+        'T_Que = Nothing
         Exit Sub
         Error_:
     End Sub

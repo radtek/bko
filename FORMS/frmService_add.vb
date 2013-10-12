@@ -98,20 +98,11 @@
         With rs
             sCOUNTER = .Fields("t_n").Value
         End With
-
-        Dim ASRT As String
-        ASRT = frmComputers.sCOUNT
-
         rs.Close()
         rs = Nothing
 
-
-        If cmbAdd.Text = objIniFile.GetString("frmService_add", "MSG1", "Сохранить") Then
-            sSQL = "SELECT * FROM Remont WHERE id=" & frmserviceDesc.rCOUNT
-
-        Else
-            sSQL = "SELECT * FROM Remont"
-        End If
+        Dim ASRT As String
+        ASRT = frmComputers.sCOUNT
 
         Dim strTime As String
         strTime = TimeString
@@ -142,89 +133,86 @@
         Dim _chkZakryt As Integer
         If chkClose.Checked = False Then _chkZakryt = 0 Else _chkZakryt = 1
 
-        'Select Case _chkZakryt
+        Select Case cmbAdd.Text
 
-        '    Case 0
+            Case objIniFile.GetString("frmService_add", "MSG1", "Сохранить")
 
-        '        sSQL = "INSERT INTO Remont (PREF,Id_Comp,NomerRemKomp,starttime,startdate,Comp_name,Mesto_Compa,Master,[Date],Remont,vip,istochnik,phone,srok,name_of_remont,otvetstv,krit_rem,Uroven,MeMo,Summ,GARANT,zakryt,UserName) VALUES ('" &
-        '            frmComputers.sPREF & "'," & frmComputers.sCOUNT & ",'" &
-        '            sCOUNTER + 1 & "','" & strTime & "','" & Date.Today & "','" &
-        '            frmserviceDesc.rtxtC & "','" & unamZ & "','" & cmbMast.Text & "','" & dtReg.Value & "','" &
-        '            txtRem.Text & "','" & cmbStatus.Text & "','" & cmbIst.Text & "','" &
-        '            txtPhone.Text & "','" & dtIsp.Value & "','" & txtHead.Text & "','" & cmbOtv.Text & "','" &
-        '            cmbTip.Text & "','" & cmbKrit.Text & "','" & txtComent.Text & "','" & RemCashe.Text & "','" &
-        '            dtGarRem.Value & "'," & _chkZakryt & ",' ')"
+                Select Case _chkZakryt
 
-        '    Case 1
+                    Case 0
 
-        '        sSQL = "INSERT INTO Remont (PREF,Id_Comp,NomerRemKomp,starttime,startdate,Comp_name,Mesto_Compa,Master,[Date],Remont,vip,istochnik,phone,srok,name_of_remont,otvetstv,krit_rem,Uroven,MeMo,Summ,GARANT,zakryt,stopdate,stoptime,UserName) " &
-        '            "VALUES ('" & frmComputers.sPREF & "'," &
-        '            frmComputers.sCOUNT & ",'" & sCOUNTER + 1 & "','" & strTime & "','" & Date.Today & "','" &
-        '            frmserviceDesc.rtxtC & "','" & unamZ & "','" & cmbMast.Text & "','" & dtReg.Value & "','" &
-        '            txtRem.Text & "','" & cmbStatus.Text & "','" & cmbIst.Text & "','" &
-        '            txtPhone.Text & "','" & dtIsp.Value & "','" & txtHead.Text & "','" & cmbOtv.Text & "','" &
-        '            cmbTip.Text & "','" & cmbKrit.Text & "','" & txtComent.Text & "','" & RemCashe.Text & "','" &
-        '            dtGarRem.Value & "'," & _chkZakryt & ",'" & Date.Today & "','" & strTime & "','" & uUSERNAME & "')"
+                        sSQL = "UPDATE Remont SET " &
+                                "Master='" & cmbMast.Text & "'," &
+                                "[Date]='" & dtReg.Value & "'," &
+                                "Remont='" & txtRem.Text & "'," &
+                                "vip='" & cmbStatus.Text & "'," &
+                                "istochnik='" & cmbIst.Text & "'," &
+                                "phone='" & txtPhone.Text & "'," &
+                                "srok='" & dtIsp.Value & "'," &
+                                "name_of_remont='" & txtHead.Text & "'," &
+                                "otvetstv='" & cmbOtv.Text & "'," &
+                                "krit_rem='" & cmbTip.Text & "'," &
+                                "Uroven='" & cmbKrit.Text & "'," &
+                                "[MeMo]='" & txtComent.Text & "'," &
+                                "[Summ]='" & RemCashe.Text & "'," &
+                                "GARANT='" & dtGarRem.Value & "'," &
+                                "zakryt=" & _chkZakryt & "," &
+                                "[UserName]='" & uUSERNAME & "' WHERE id=" & frmserviceDesc.rCOUNT
 
-        'End Select
+                    Case 1
 
-        rs = New Recordset
-        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-        'rs = Nothing
+                        sSQL = "UPDATE Remont SET " &
+                                "Master='" & cmbMast.Text & "'," &
+                                "[Date]='" & dtReg.Value & "'," &
+                                "Remont='" & txtRem.Text & "'," &
+                                "vip='" & cmbStatus.Text & "'," &
+                                "istochnik='" & cmbIst.Text & "'," &
+                                "phone='" & txtPhone.Text & "'," &
+                                "srok='" & dtIsp.Value & "'," &
+                                "name_of_remont='" & txtHead.Text & "'," &
+                                "otvetstv='" & cmbOtv.Text & "'," &
+                                "krit_rem='" & cmbTip.Text & "'," &
+                                "Uroven='" & cmbKrit.Text & "'," &
+                                "[MeMo]='" & txtComent.Text & "'," &
+                                "[Summ]='" & RemCashe.Text & "'," &
+                                "GARANT='" & dtGarRem.Value & "'," &
+                                "zakryt=" & _chkZakryt & "," &
+                                "stopdate='" & Date.Today & "'," &
+                                "stoptime='" & strTime & "'," &
+                                "[UserName]='" & uUSERNAME & "' WHERE id=" & frmserviceDesc.rCOUNT
 
-        With rs
+                End Select
 
-            Select Case cmbAdd.Text
+            Case Else
 
-                Case objIniFile.GetString("frmService_add", "MSG1", "Сохранить")
+                Select Case _chkZakryt
 
-                Case Else
-                    .AddNew()
+                    Case 0
 
-                    .Fields("PREF").Value = frmComputers.sPREF
-                    .Fields("Id_Comp").Value = frmComputers.sCOUNT
-                    .Fields("NomerRemKomp").Value = sCOUNTER + 1
-                    .Fields("starttime").Value = strTime 'Физическое нажатие начала ремонта
-                    .Fields("startdate").Value = Date.Today 'Физическое нажатие начала ремонта
-                    .Fields("Comp_name").Value = frmserviceDesc.rtxtC 'Имя устройства
-                    .Fields("Mesto_Compa").Value = unamZ 'Место установки устройства
+                        sSQL = "INSERT INTO Remont ([Date],Id_Comp,Remont,Uroven,Master,NomerRemKomp,Comp_Name,Mesto_Compa,vip,[UserName],istochnik,[phone],srok,name_of_remont,otvetstv,krit_rem,[MeMo],zakryt,[PREF],[Summ],starttime,startdate,GARANT) VALUES ('" &
+                                        dtReg.Value & "'," & frmComputers.sCOUNT & ",'" & txtRem.Text & "','" & cmbKrit.Text & "','" &
+                                        cmbMast.Text & "','" & sCOUNTER + 1 & "','" & frmserviceDesc.rtxtC & "','" & unamZ & "','" &
+                                        cmbStatus.Text & "','" & uUSERNAME & "','" & cmbIst.Text & "','" & txtPhone.Text & "','" &
+                                        dtIsp.Value & "','" & txtHead.Text & "','" & cmbOtv.Text & "','" & cmbTip.Text & "','" &
+                                        txtComent.Text & "'," & _chkZakryt & ",'" & frmComputers.sPREF & "','" & RemCashe.Text & "','" &
+                                        strTime & "','" & Date.Today & "','" & dtGarRem.Value & "')"
 
-            End Select
 
-            .Fields("Master").Value = cmbMast.Text 'Мастер
-            .Fields("Date").Value = dtReg.Value 'Дата регистрации
-            .Fields("Remont").Value = txtRem.Text 'Сообщение
-            .Fields("vip").Value = cmbStatus.Text 'Статус
-            .Fields("istochnik").Value = cmbIst.Text 'Источник
-            .Fields("phone").Value = txtPhone.Text 'Телефон
-            .Fields("srok").Value = dtIsp.Value 'Срок исполнения
-            .Fields("name_of_remont").Value = txtHead.Text 'Название
-            .Fields("otvetstv").Value = cmbOtv.Text 'Ответственный
-            .Fields("krit_rem").Value = cmbTip.Text 'Критичность
-            .Fields("Uroven").Value = cmbKrit.Text 'Тип
-            .Fields("MeMo").Value = txtComent.Text 'Комментарий
-            .Fields("Summ").Value = RemCashe.Text 'Сумма
-            .Fields("GARANT").Value = dtGarRem.Value 'Гарантия
+                    Case 1
 
-            Select Case chkClose.Checked
+                        sSQL = "INSERT INTO Remont ([Date],Id_Comp,Remont,Uroven,Master,NomerRemKomp,Comp_Name,Mesto_Compa,vip,[UserName],istochnik,[phone],srok,name_of_remont,otvetstv,krit_rem,[MeMo],zakryt,[PREF],[Summ],starttime,stoptime, startdate,stopdate,GARANT) VALUES ('" &
+                                        dtReg.Value & "'," & frmComputers.sCOUNT & ",'" & txtRem.Text & "','" & cmbKrit.Text & "','" &
+                                        cmbMast.Text & "','" & sCOUNTER + 1 & "','" & frmserviceDesc.rtxtC & "','" & unamZ & "','" &
+                                        cmbStatus.Text & "','" & uUSERNAME & "','" & cmbIst.Text & "','" & txtPhone.Text & "','" &
+                                        dtIsp.Value & "','" & txtHead.Text & "','" & cmbOtv.Text & "','" & cmbTip.Text & "','" &
+                                        txtComent.Text & "'," & _chkZakryt & ",'" & frmComputers.sPREF & "','" & RemCashe.Text & "','" &
+                                        strTime & "','" & strTime & "','" & Date.Today & "','" & Date.Today & "','" & dtGarRem.Value & "')"
 
-                Case True
-                    .Fields("zakryt").Value = _chkZakryt
-                    .Fields("stopdate").Value = Date.Today 'Физическое нажатие закрытие ремонта
-                    .Fields("stoptime").Value = strTime 'Физическое нажатие начала ремонта
+                End Select
 
-                Case False
+        End Select
 
-                    .Fields("zakryt").Value = _chkZakryt
-
-            End Select
-
-            .Fields("UserName").Value = uUSERNAME
-
-            .Update()
-        End With
-        rs.Close()
-        rs = Nothing
+        DB7.Execute(sSQL)
 
         If REMFU = True And REMED = True Then
 
@@ -271,7 +259,6 @@
             Call frmserviceDesc.LOAD_REPAIR(frmComputers.sCOUNT, frmserviceDesc.lvRem)
         End If
 
-
         REMFU = False
         REMED = False
 
@@ -279,7 +266,7 @@
         Me.Close()
 
         Exit Sub
-        err_:
+err_:
         MsgBox(Err.Description)
     End Sub
 
@@ -450,11 +437,13 @@
                 tCOUNT = (lvRem2.SelectedItems(z).Text)
             Next
 
-            Dim rs1 As Recordset
-            rs1 = New Recordset
-            rs1.Open("Delete FROM remonty_plus WHERE id=" & tCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
-                     LockTypeEnum.adLockOptimistic)
-            rs1 = Nothing
+            DB7.Execute("Delete FROM remonty_plus WHERE id=" & tCOUNT)
+
+            'Dim rs1 As Recordset
+            'rs1 = New Recordset
+            'rs1.Open("Delete FROM remonty_plus WHERE id=" & tCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+            '         LockTypeEnum.adLockOptimistic)
+            'rs1 = Nothing
 
             Call frmserviceDesc.load_rplus(frmserviceDesc.rCOUNT, Me.lvRem2)
 

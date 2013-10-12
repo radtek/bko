@@ -296,7 +296,7 @@ Partial Class frmLogin
         Me.cmbSUBD.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.TableLayoutPanel1.SetColumnSpan(Me.cmbSUBD, 2)
         Me.cmbSUBD.FormattingEnabled = True
-        Me.cmbSUBD.Items.AddRange(New Object() {"MS Access", "MS SQL", "MS SQL 2008", "MySQL", "PostgreSQL", "DSN", "MySQL (MyODBC 5.1)"})
+        Me.cmbSUBD.Items.AddRange(New Object() {"MS Access", "MS Access 2007", "MS SQL", "MS SQL 2008", "MySQL", "PostgreSQL", "DSN", "MySQL (MyODBC 5.1)"})
         Me.cmbSUBD.Location = New System.Drawing.Point(3, 16)
         Me.cmbSUBD.Name = "cmbSUBD"
         Me.cmbSUBD.Size = New System.Drawing.Size(322, 21)

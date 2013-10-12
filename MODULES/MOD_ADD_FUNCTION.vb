@@ -4,14 +4,14 @@
         If Len(sGroupName) = 0 Then Exit Function
         If sGroupName = "<N/A>" Then Exit Function
 
-
         If Len(sGroupName) = 0 Or sGroupName = " " Or Len(sGroupName) < 3 Then Exit Function
 
         Dim rs As Recordset
         rs = New Recordset
 
         If Len(sGroupName) > 0 Or sGroupName <> "NoName" Or Len(sGroupName) > 1 Then
-            rs.Open("INSERT INTO SPR_PROIZV (PROIZV) VALUES ('" & sGroupName & "')", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+            'rs.Open("INSERT INTO SPR_PROIZV (PROIZV) VALUES ('" & sGroupName & "')", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+            DB7.Execute("INSERT INTO SPR_PROIZV (PROIZV) VALUES ('" & sGroupName & "')")
         Else
         End If
 
@@ -28,7 +28,7 @@
         'End With
 
         'rs.Close()
-        rs = Nothing
+        'rs = Nothing
 
         AddPr = 1
 
@@ -44,8 +44,8 @@ ERR1:
         On Error GoTo ERR1
         If Len(sGroupName) = 0 Then Exit Function
 
-        Dim rs As Recordset
-        rs = New Recordset
+        'Dim rs As Recordset
+        'rs = New Recordset
         'rs.Open("SELECT * FROM " & sTABLE, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
 
@@ -54,11 +54,12 @@ ERR1:
         Select Case TipTehn
 
             Case "CNT"
-                rs.Open("INSERT INTO  " & sTABLE & " (" & sColumns & ", C) VALUES ('" & sGroupName & "', '1')", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
+                'rs.Open("INSERT INTO  " & sTABLE & " (" & sColumns & ", C) VALUES ('" & sGroupName & "', '1')", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                DB7.Execute("INSERT INTO  " & sTABLE & " (" & sColumns & ", C) VALUES ('" & sGroupName & "', '1')")
             Case Else
 
-                rs.Open("INSERT INTO  " & sTABLE & " (" & sColumns & ") VALUES ('" & sGroupName & "')", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                'rs.Open("INSERT INTO  " & sTABLE & " (" & sColumns & ") VALUES ('" & sGroupName & "')", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                DB7.Execute("INSERT INTO  " & sTABLE & " (" & sColumns & ") VALUES ('" & sGroupName & "')")
         End Select
 
         'With rs
@@ -75,7 +76,7 @@ ERR1:
         'End With
 
         'rs.Close()
-        rs = Nothing
+        ' rs = Nothing
 
         sCOMBO.Items.Add(sGroupName)
 
@@ -112,11 +113,11 @@ ERR1:
         rs.Close()
         rs = Nothing
 
-        rs = New Recordset
+        ' rs = New Recordset
         '  rs.Open("SELECT * FROM " & sTABLE, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-        rs.Open("INSERT INTO " & sTABLE & " (Name,proizv) VALUES ('" & sGroupName & "', " & uname & ")", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
+        '  rs.Open("INSERT INTO " & sTABLE & " (Name,proizv) VALUES ('" & sGroupName & "', " & uname & ")", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+        DB7.Execute("INSERT INTO " & sTABLE & " (Name,proizv) VALUES ('" & sGroupName & "', " & uname & ")")
         'With rs
 
         '    .AddNew()
@@ -165,11 +166,11 @@ ERR1:
         rs.Close()
         rs = Nothing
 
-        rs = New Recordset
+        'rs = New Recordset
         'rs.Open("SELECT * FROM " & sTABLE, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-        rs.Open("INSERT INTO " & sTABLE & " (Name,proizv,A,B) VALUES ('" & sGroupName & "', " & uname & ",'" & sMHZ & "','" & sSoc & "')", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
+        ' rs.Open("INSERT INTO " & sTABLE & " (Name,proizv,A,B) VALUES ('" & sGroupName & "', " & uname & ",'" & sMHZ & "','" & sSoc & "')", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+        DB7.Execute("INSERT INTO " & sTABLE & " (Name,proizv,A,B) VALUES ('" & sGroupName & "', " & uname & ",'" & sMHZ & "','" & sSoc & "')")
         'With rs
 
         '    .AddNew()
@@ -181,7 +182,7 @@ ERR1:
 
         'End With
         'rs.Close()
-        rs = Nothing
+        ' rs = Nothing
 
         sCOMBO.Items.Add(sGroupName)
         'frmContacts.PROizV(0).AddItem(sPR)
@@ -221,11 +222,11 @@ ERR1:
         rs.Close()
         rs = Nothing
 
-        rs = New Recordset
+        'rs = New Recordset
         ' rs.Open("SELECT * FROM " & sTABLE, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-        rs.Open("INSERT INTO " & sTABLE & " (Name,a,proizv) VALUES ('" & sGroupName & "', '" & sMHZ & "'," & uname & ")", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
+        'rs.Open("INSERT INTO " & sTABLE & " (Name,a,proizv) VALUES ('" & sGroupName & "', '" & sMHZ & "'," & uname & ")", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+        DB7.Execute("INSERT INTO " & sTABLE & " (Name,a,proizv) VALUES ('" & sGroupName & "', '" & sMHZ & "'," & uname & ")")
         'With rs
         '    .AddNew()
 
@@ -236,7 +237,7 @@ ERR1:
 
         'End With
         'rs.Close()
-        rs = Nothing
+        'rs = Nothing
 
         sCOMBO.Items.Add(sGroupName)
 
@@ -253,12 +254,12 @@ ERR1:
         If Len(sBR) = 0 Then Exit Function
         If Len(sDP) = 0 Then Exit Function
 
-        Dim rs As Recordset
-        rs = New Recordset
+        ' Dim rs As Recordset
+        ' rs = New Recordset
         ' rs.Open("SELECT * FROM SPR_OTD_FILIAL", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-        rs.Open("INSERT INTO SPR_OTD_FILIAL (N_OTD,FILIAL) VALUES ('" & sDP & "','" & sBR & "')", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
+        ' rs.Open("INSERT INTO SPR_OTD_FILIAL (N_OTD,FILIAL) VALUES ('" & sDP & "','" & sBR & "')", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+        DB7.Execute("INSERT INTO SPR_OTD_FILIAL (N_OTD,FILIAL) VALUES ('" & sDP & "','" & sBR & "')")
         'With rs
 
         '    .AddNew()
@@ -270,7 +271,7 @@ ERR1:
         'End With
 
         'rs.Close()
-        rs = Nothing
+        ' rs = Nothing
 
 
         AddDepartment = 1
@@ -287,12 +288,12 @@ ERR1:
         If Len(sDP) = 0 Then Exit Function
         If Len(sOFF) = 0 Then Exit Function
 
-        Dim rs As Recordset
-        rs = New Recordset
+        ' Dim rs As Recordset
+        ' rs = New Recordset
         'rs.Open("SELECT * FROM SPR_KAB", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-        rs.Open("INSERT INTO SPR_KAB (N_M,N_F,Name) VALUES ('" & sDP & "','" & sBR & "','" & sOFF & "')", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
+        ' rs.Open("INSERT INTO SPR_KAB (N_M,N_F,Name) VALUES ('" & sDP & "','" & sBR & "','" & sOFF & "')", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+        DB7.Execute("INSERT INTO SPR_KAB (N_M,N_F,Name) VALUES ('" & sDP & "','" & sBR & "','" & sOFF & "')")
         'With rs
 
         '    .AddNew()
@@ -304,7 +305,7 @@ ERR1:
         'End With
 
         'rs.Close()
-        rs = Nothing
+        ' rs = Nothing
 
 
         AddOffice = 1
