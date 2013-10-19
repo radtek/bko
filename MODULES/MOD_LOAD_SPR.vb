@@ -271,15 +271,7 @@ Module Mod_Load_SPR
 
                         If Not IsDBNull(.Fields(pField).Value) Then pCombo.Items.Add(.Fields(pField).Value)
 
-                        'If Not IsDBNull(.Fields(pField).Value) Then
-                        '    If pTable = "SPR_USER" Then 'esq 130713 убрать дубли может не только для SPR_USER?
-                        '        If pCombo.FindString(.Fields(pField).Value) < 0 Then
-                        '            pCombo.Items.Add(.Fields(pField).Value)
-                        '        End If
-                        '    End If 'esq 130713
-
-                        ' End If
-                        .MoveNext()
+                       .MoveNext()
                     Loop
                 End With
 

@@ -138,7 +138,7 @@ err_:
             AddOnePar(dPost.Text, "name", "SPR_Postav", dPost)
         End If
 
-        sSQL = "INSERT INTO Garantia_sis (Id_Comp,Postav,[day],[month],[Year],[day_o],[month_o],[Year_o]) VALUES (" & sID & ",'" & dPost.Text & "','" & dtp.Value.Day & "','" & dtp.Value.Month & "','" & dtp.Value.Year & "','" & dto.Value.Day & "','" & dto.Value.Month & "','" & dto.Value.Year & "')"
+        sSQL = "INSERT INTO Garantia_sis (Id_Comp,Postav,day,month,Year,day_o,month_o,Year_o) VALUES (" & sID & ",'" & dPost.Text & "','" & dtp.Value.Day & "','" & dtp.Value.Month & "','" & dtp.Value.Year & "','" & dto.Value.Day & "','" & dto.Value.Month & "','" & dto.Value.Year & "')"
         'rs = New Recordset
         'rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
         'rs = Nothing
@@ -275,6 +275,11 @@ sAR:
             Case False
                 
                 Select Case DB_N
+
+                    Case "DSN"
+                        sSQL = "Select id from kompy ORDER BY id DESC LIMIT 1"
+                    Case "PostgreSQL"
+                        sSQL = "Select id from kompy ORDER BY id DESC LIMIT 1"
 
                     Case "MySQL"
 
@@ -528,6 +533,11 @@ sAR:
 
                 Select Case DB_N
 
+                    Case "DSN"
+                        sSQL = "Select id from kompy ORDER BY id DESC LIMIT 1"
+                    Case "PostgreSQL"
+                        sSQL = "Select id from kompy ORDER BY id DESC LIMIT 1"
+
                     Case "MySQL"
 
                         sSQL = "Select id from kompy ORDER BY id DESC LIMIT 1"
@@ -727,11 +737,27 @@ sAR:
         If Len(frmComputers.txtPCSumm.Text) = 0 Then frmComputers.txtPCSumm.Text = 0
         If Len(frmComputers.txtPCSfN.Text) = 0 Then frmComputers.txtPCSfN.Text = 0
 
-        Dim _chkPRNspis As Integer
-        Dim _chkPRNNNb As Integer
-        If frmComputers.chkPCspis.Checked = False Then _chkPRNspis = 0 Else _chkPRNspis = 1
-        If frmComputers.chkPCNNb.Checked = False Then _chkPRNNNb = 0 Else _chkPRNNNb = 1
-       
+        Dim _chkPRNspis As String
+        Dim _chkPRNNNb As String
+        Dim _chkGarant As String
+        'frmComputers.rbSist.Checked
+        Select Case DB_N
+
+            Case "PostgreSQL"
+                _chkPRNspis = frmComputers.chkPCspis.Checked
+                _chkPRNNNb = frmComputers.chkPCNNb.Checked
+                _chkGarant = frmComputers.rbSist.Checked
+            Case "DSN"
+                _chkPRNspis = frmComputers.chkPCspis.Checked
+                _chkPRNNNb = frmComputers.chkPCNNb.Checked
+                _chkGarant = frmComputers.rbSist.Checked
+            Case Else
+
+                If frmComputers.chkPCspis.Checked = False Then _chkPRNspis = 0 Else _chkPRNspis = 1
+                If frmComputers.chkPCNNb.Checked = False Then _chkPRNNNb = 0 Else _chkPRNNNb = 1
+                If frmComputers.rbSist.Checked = False Then _chkGarant = 0 Else _chkGarant = 1
+        End Select
+        
         Dim sSQL As String
 
         Select Case frmComputers.EDT
@@ -757,6 +783,11 @@ sAR:
                 DB7.Execute(sSQL)
 
                 Select Case DB_N
+
+                    Case "DSN"
+                        sSQL = "Select id from kompy ORDER BY id DESC LIMIT 1"
+                    Case "PostgreSQL"
+                        sSQL = "Select id from kompy ORDER BY id DESC LIMIT 1"
 
                     Case "MySQL"
 
@@ -1089,15 +1120,42 @@ sAR:
 
         DB7.Execute(sSQL)
 
-        sSQL = "UPDATE kompy SET " &
-            "SFAktNo=" & frmComputers.txtPCSfN.Text & "," &
-            "CenaRub='" & frmComputers.txtPCcash.Text & "'," &
-            "StoimRub='" & frmComputers.txtPCSumm.Text & "'," &
-            "Zaiavk='" & frmComputers.txtPCZay.Text & "'," &
-            "DataVVoda='" & frmComputers.dtPCdataVvoda.Value & "'," &
-            "dataSF='" & frmComputers.dtPCSFdate.Value & "'," &
-            "Spisan=" & _chkPRNspis & "," &
-            "Balans=" & _chkPRNNNb & " WHERE id =" & sSID
+        ' .Fields("Garantia_Sist").Value = frmComputers.rbSist.Checked
+
+
+        Select Case _chkPRNspis
+
+            Case 1 Or True
+
+                sSQL = "UPDATE kompy SET " &
+           "SFAktNo=" & frmComputers.txtPCSfN.Text & "," &
+           "CenaRub='" & frmComputers.txtPCcash.Text & "'," &
+           "StoimRub='" & frmComputers.txtPCSumm.Text & "'," &
+           "Zaiavk='" & frmComputers.txtPCZay.Text & "'," &
+           "DataVVoda='" & frmComputers.dtPCdataVvoda.Value & "'," &
+           "Garantia_Sist=" & _chkGarant & "," &
+           "dataSF='" & frmComputers.dtPCSFdate.Value & "'," &
+           "Spisan=" & _chkPRNspis & "," &
+           "data_sp='" & frmComputers.dtSpisanie.Value & "'," &
+           "Balans=" & _chkPRNNNb & " WHERE id =" & sSID
+
+            Case Else
+
+                sSQL = "UPDATE kompy SET " &
+           "SFAktNo=" & frmComputers.txtPCSfN.Text & "," &
+           "CenaRub='" & frmComputers.txtPCcash.Text & "'," &
+           "StoimRub='" & frmComputers.txtPCSumm.Text & "'," &
+           "Zaiavk='" & frmComputers.txtPCZay.Text & "'," &
+           "DataVVoda='" & frmComputers.dtPCdataVvoda.Value & "'," &
+           "Garantia_Sist=" & _chkGarant & "," &
+           "dataSF='" & frmComputers.dtPCSFdate.Value & "'," &
+           "Spisan=" & _chkPRNspis & "," &
+           "Balans=" & _chkPRNNNb & " WHERE id =" & sSID
+
+
+        End Select
+
+
 
         DB7.Execute(sSQL)
 
@@ -1709,6 +1767,11 @@ sAR:
 
                 Select Case DB_N
 
+                    Case "DSN"
+                        sSQL = "Select id from kompy ORDER BY id DESC LIMIT 1"
+                    Case "PostgreSQL"
+                        sSQL = "Select id from kompy ORDER BY id DESC LIMIT 1"
+
                     Case "MySQL"
 
                         sSQL = "Select id from kompy ORDER BY id DESC LIMIT 1"
@@ -1912,8 +1975,12 @@ sAR:
         Select Case frmComputers.EDT
 
             Case False
-
                 Select Case DB_N
+
+                    Case "DSN"
+                        sSQL = "Select id from kompy ORDER BY id DESC LIMIT 1"
+                    Case "PostgreSQL"
+                        sSQL = "Select id from kompy ORDER BY id DESC LIMIT 1"
 
                     Case "MySQL"
 

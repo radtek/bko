@@ -7234,5 +7234,8 @@ err_:
 
 
     
+    Private Sub txtSearch_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtSearch.TextChanged
+
+    End Sub
 End Class
 
