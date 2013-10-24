@@ -1354,29 +1354,32 @@ err_:
 
                     If Len(lstV.Items(intj).Text) = 0 Then lstV.Items(intj).Text = 1
 
+                    If Len(lstV.Items(intj).Text) = 0 Then lstV.Items(intj).Text = 1
+
+                    'FIO
                     If Len(lstV.Items(intj).SubItems(1).Text) = 0 Then
                         B1 = ""
                     Else
                         B1 = lstV.Items(intj).SubItems(1).Text
                     End If
 
-                    ' user
+                    ' USERNAME
                     If Len(lstV.Items(intj).SubItems(2).Text) = 0 Then
                         C1 = ""
                     Else
                         C1 = lstV.Items(intj).SubItems(2).Text
                     End If
 
+                    'ID_COMP
                     I1 = sSID
 
                     spis = spis + C1 + "\"
 
                     If (Len(C1) > 0) And (H1 = 0) Then
 
-                        sSQL = "INSERT INTO USER_COMP (ID_COMP,USERNAME,FIO) VALUES (" & I1 & ",'" & C1 & "'," & B1 & "')"
+                        sSQL = "INSERT INTO USER_COMP (ID_COMP,USERNAME,FIO) VALUES ('" & I1 & "','" & C1 & "','" & B1 & "')"
 
                         DB7.Execute(sSQL)
-
 
                         Dim UserExist As Boolean
                         sSQL = "SELECT COUNT(*) AS total_number FROM SPR_USER WHERE name='" & C1 & "' AND A='" & B1 & "'"
