@@ -4246,551 +4246,511 @@ err_:
 
         Dim d, m, g, dat As String
 
-        Dim rs As Recordset 'Объявляем рекордсет
         Dim sSQL As String 'Переменная, где будет размещён SQL запрос
-        Dim rs2 As Recordset 'Объявляем рекордсет
         Dim sSQL2 As String 'Переменная, где будет размещён SQL запрос
-        Dim rs3 As Recordset 'Объявляем рекордсет
-        Dim sSQL3 As String 'Переменная, где будет размещён SQL запрос
 
 
         sSQL2 = "SELECT * FROM Garantia_sis"
+
+        Dim rs2 As Recordset 'Объявляем рекордсет
+        rs2 = New Recordset
+        rs2.Open("SELECT COUNT(*) AS total_number FROM Garantia_sis", DB7, CursorTypeEnum.adOpenDynamic,
+                     LockTypeEnum.adLockOptimistic)
+
+        Dim SERT As Integer
+        With rs2
+
+            SERT = .Fields("total_number").Value
+
+        End With
+        rs2.Close()
+        rs2 = Nothing
+
+        Dim langIni As New IniFile(sLANGPATH)
+
+        If SERT = 0 Then GoTo GCPC
+
+        Dim rs As Recordset 'Объявляем рекордсет
+
         rs2 = New Recordset
         rs2.Open(sSQL2, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-        sSQL3 = "SELECT * FROM garant_comp"
-        rs3 = New Recordset
-        rs3.Open(sSQL3, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+        On Error Resume Next
+        With rs2
 
-        Dim rscount As Recordset 'Объявляем рекордсет
-        rscount = New Recordset
-        rscount.Open("SELECT COUNT(*) AS total_number FROM Garantia_sis", DB7, CursorTypeEnum.adOpenDynamic,
+            .MoveFirst()
+            Do While Not .EOF
+
+                If Not IsDBNull(.Fields("Id_Comp").Value) Then nom = .Fields("Id_Comp").Value
+
+                Select Case cmbGar.Text
+
+                    Case langIni.GetString("frmReports", "MSG4", "Видео карты")
+
+                        sSQL = "SELECT id,SVGA_NAME FROM kompy where id=" & nom
+                        rs = New Recordset
+                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
+                        With rs
+                            .MoveFirst()
+                            Do While Not .EOF
+
+                                NameKomp = .Fields("SVGA_NAME").Value
+
+                                .MoveNext()
+                                'DoEvents
+                            Loop
+                        End With
+                        rs.Close()
+                        rs = Nothing
+
+                    Case langIni.GetString("frmReports", "MSG5", "Жесткие диски")
+
+                        sSQL = "SELECT id,HDD_Name_1 FROM kompy where id=" & nom
+                        rs = New Recordset
+                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        With rs
+                            .MoveFirst()
+                            Do While Not .EOF
+
+                                NameKomp = .Fields("HDD_Name_1").Value
+
+                                .MoveNext()
+                                'DoEvents
+                            Loop
+                        End With
+                        rs.Close()
+                        rs = Nothing
+
+
+                    Case langIni.GetString("frmReports", "MSG6", "Звуковая карта")
+
+                        sSQL = "SELECT id,SOUND_NAME FROM kompy where id=" & nom
+                        rs = New Recordset
+                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        With rs
+                            .MoveFirst()
+                            Do While Not .EOF
+
+                                NameKomp = .Fields("SOUND_NAME").Value
+
+                                .MoveNext()
+                                'DoEvents
+                            Loop
+                        End With
+                        rs.Close()
+                        rs = Nothing
+
+                    Case langIni.GetString("frmReports", "MSG7", "Материнские платы")
+
+                        sSQL = "SELECT id,MB_NAME FROM kompy where id=" & nom
+                        rs = New Recordset
+                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        With rs
+                            .MoveFirst()
+                            Do While Not .EOF
+
+                                NameKomp = .Fields("MB_NAME").Value
+
+                                .MoveNext()
+                                'DoEvents
+                            Loop
+                        End With
+                        rs.Close()
+                        rs = Nothing
+
+                    Case langIni.GetString("frmReports", "MSG8", "Модем")
+
+                        sSQL = "SELECT id,MODEM_NAME FROM kompy where id=" & nom
+                        rs = New Recordset
+                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        With rs
+                            .MoveFirst()
+                            Do While Not .EOF
+
+                                NameKomp = .Fields("MODEM_NAME").Value
+
+                                .MoveNext()
+                                'DoEvents
+                            Loop
+                        End With
+                        rs.Close()
+                        rs = Nothing
+
+                    Case langIni.GetString("frmReports", "MSG9", "Монитор")
+                        sSQL = "SELECT id,MONITOR_NAME FROM kompy where id=" & nom
+                        rs = New Recordset
+                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        With rs
+                            .MoveFirst()
+                            Do While Not .EOF
+
+                                NameKomp = .Fields("MONITOR_NAME").Value
+
+                                .MoveNext()
+                                'DoEvents
+                            Loop
+                        End With
+                        rs.Close()
+                        rs = Nothing
+
+                    Case langIni.GetString("frmReports", "MSG10", "Память ОЗУ")
+                        sSQL = "SELECT id,RAM_1 FROM kompy where id=" & nom
+                        rs = New Recordset
+                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
+                        With rs
+                            .MoveFirst()
+                            Do While Not .EOF
+
+                                NameKomp = .Fields("RAM_1").Value
+
+                                .MoveNext()
+                                'DoEvents
+                            Loop
+                        End With
+                        rs.Close()
+                        rs = Nothing
+
+
+                    Case langIni.GetString("frmReports", "MSG13", "Процессоры")
+
+                        sSQL = "SELECT id,CPU1 FROM kompy where id=" & nom
+                        rs = New Recordset
+                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        With rs
+                            .MoveFirst()
+                            Do While Not .EOF
+
+                                NameKomp = .Fields("CPU1").Value
+
+                                .MoveNext()
+                                'DoEvents
+                            Loop
+                        End With
+                        rs.Close()
+                        rs = Nothing
+
+                End Select
+
+                sSQL = "SELECT NET_NAME,MESTO,FILIAL FROM kompy where id=" & nom
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                With rs
+                    .MoveFirst()
+                    Do While Not .EOF
+
+                        Nam = langIni.GetString("frmReports", "MSG26", "Компьютер") & ": " &
+                              .Fields("NET_NAME").Value & " " & langIni.GetString("frmReports", "MSG27", "Место") &
+                              ": " & .Fields("MESTO").Value & "/" & .Fields("FILIAL").Value
+
+                        .MoveNext()
+                        'DoEvents
+                    Loop
+                End With
+                rs.Close()
+                rs = Nothing
+
+                'Вычисление окончания гарантии
+                d$ = .Fields("day_o").Value
+                m$ = .Fields("month_o").Value
+                g$ = .Fields("Year_o").Value
+
+                dat$ = d & "." & m & "." & g
+                If dat$ = "0.0.0" Or dat$ = ".." Then
+                    dat$ = Date.Today.AddDays(-1)
+                End If
+
+                Today = Date.Today
+                Millenium = dat$
+                retval = DateDiff("d", Today, Millenium)
+                ZakZ = CStr(retval)
+
+                If ZakZ < 0 Then
+                    ZakZ = "X"
+                End If
+
+                If _
+                    Len(NameKomp) = 0 Or NameKomp = langIni.GetString("frmReports", "MSG28", "Отсутствует") Or
+                    NameKomp = langIni.GetString("frmReports", "MSG29", "Нет") Then
+                Else
+
+                    lvGar.Items.Add(NameKomp)
+                    lvGar.Items(CInt(intj)).SubItems.Add(Nam)
+                    lvGar.Items(CInt(intj)).SubItems.Add(
+                        .Fields("day_o").Value & "." & .Fields("month_o").Value & "." & .Fields("Year_o").Value)
+                    lvGar.Items(CInt(intj)).SubItems.Add(ZakZ)
+                    lvGar.Items(CInt(intj)).SubItems.Add("+")
+
+                    intj = intj + 1
+                End If
+                .MoveNext()
+                'DoEvents
+            Loop
+        End With
+        rs2.Close()
+        rs2 = Nothing
+
+
+GCPC:
+        rs2 = New Recordset
+        rs2.Open("SELECT COUNT(*) AS total_number FROM garant_comp", DB7, CursorTypeEnum.adOpenDynamic,
                      LockTypeEnum.adLockOptimistic)
 
-        Dim SERT As String
-        With rscount
+        With rs2
 
             SERT = .Fields("total_number").Value
 
         End With
 
-        rscount.Close()
-        rscount = Nothing
+        rs2.Close()
+        rs2 = Nothing
 
-        Dim langIni As New IniFile(sLANGPATH)
+        If SERT = 0 Then Exit Sub
 
-        On Error Resume Next
-        With rs2
-
-            If SERT$ > 0 Then
-
-                .MoveFirst()
-                Do While Not .EOF
-
-                    If Not IsDBNull(.Fields("Id_Comp").Value) Then nom = .Fields("Id_Comp").Value
-
-
-                    Select Case cmbGar.Text
-
-                        Case langIni.GetString("frmReports", "MSG4", "Видео карты")
-
-                            sSQL = "SELECT * FROM kompy where id=" & nom
-                            rs = New Recordset
-                            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
-                            With rs
-                                .MoveFirst()
-                                Do While Not .EOF
-                                    If .Fields("id").Value = nom Then
-                                        NameKomp = .Fields("SVGA_NAME").Value
-                                    End If
-                                    .MoveNext()
-                                    'DoEvents
-                                Loop
-                            End With
-                            rs.Close()
-                            rs = Nothing
-
-                        Case langIni.GetString("frmReports", "MSG5", "Жесткие диски")
-
-                            sSQL = "SELECT * FROM kompy where id=" & nom
-                            rs = New Recordset
-                            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                            With rs
-                                .MoveFirst()
-                                Do While Not .EOF
-                                    If .Fields("id").Value = nom Then
-                                        NameKomp = .Fields("HDD_Name_1").Value
-                                    End If
-                                    .MoveNext()
-                                    'DoEvents
-                                Loop
-                            End With
-                            rs.Close()
-                            rs = Nothing
-
-
-                        Case langIni.GetString("frmReports", "MSG6", "Звуковая карта")
-
-                            sSQL = "SELECT * FROM kompy where id=" & nom
-                            rs = New Recordset
-                            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                            With rs
-                                .MoveFirst()
-                                Do While Not .EOF
-                                    If .Fields("id").Value = nom Then
-                                        NameKomp = .Fields("SOUND_NAME").Value
-                                    End If
-                                    .MoveNext()
-                                    'DoEvents
-                                Loop
-                            End With
-                            rs.Close()
-                            rs = Nothing
-
-                        Case langIni.GetString("frmReports", "MSG7", "Материнские платы")
-
-                            sSQL = "SELECT * FROM kompy where id=" & nom
-                            rs = New Recordset
-                            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                            With rs
-                                .MoveFirst()
-                                Do While Not .EOF
-                                    If .Fields("id").Value = nom Then
-                                        NameKomp = .Fields("MB_NAME").Value
-                                    End If
-                                    .MoveNext()
-                                    'DoEvents
-                                Loop
-                            End With
-                            rs.Close()
-                            rs = Nothing
-
-                        Case langIni.GetString("frmReports", "MSG8", "Модем")
-
-                            sSQL = "SELECT * FROM kompy where id=" & nom
-                            rs = New Recordset
-                            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                            With rs
-                                .MoveFirst()
-                                Do While Not .EOF
-                                    If .Fields("id").Value = nom Then
-                                        NameKomp = .Fields("MODEM_NAME").Value
-                                    End If
-                                    .MoveNext()
-                                    'DoEvents
-                                Loop
-                            End With
-                            rs.Close()
-                            rs = Nothing
-
-                        Case langIni.GetString("frmReports", "MSG9", "Монитор")
-                            sSQL = "SELECT * FROM kompy where id=" & nom
-                            rs = New Recordset
-                            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                            With rs
-                                .MoveFirst()
-                                Do While Not .EOF
-                                    If .Fields("id").Value = nom Then
-                                        NameKomp = .Fields("MONITOR_NAME").Value
-                                    End If
-                                    .MoveNext()
-                                    'DoEvents
-                                Loop
-                            End With
-                            rs.Close()
-                            rs = Nothing
-
-                        Case langIni.GetString("frmReports", "MSG10", "Память ОЗУ")
-                            sSQL = "SELECT * FROM kompy where id=" & nom
-                            rs = New Recordset
-                            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
-                            With rs
-                                .MoveFirst()
-                                Do While Not .EOF
-                                    If .Fields("id").Value = nom Then
-                                        NameKomp = .Fields("RAM_1").Value
-                                    End If
-                                    .MoveNext()
-                                    'DoEvents
-                                Loop
-                            End With
-                            rs.Close()
-                            rs = Nothing
-
-
-                        Case langIni.GetString("frmReports", "MSG13", "Процессоры")
-
-                            sSQL = "SELECT * FROM kompy where id=" & nom
-                            rs = New Recordset
-                            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                            With rs
-                                .MoveFirst()
-                                Do While Not .EOF
-                                    If .Fields("id").Value = nom Then
-                                        NameKomp = .Fields("CPU1").Value
-                                    End If
-                                    .MoveNext()
-                                    'DoEvents
-                                Loop
-                            End With
-                            rs.Close()
-                            rs = Nothing
-
-                    End Select
-
-                    sSQL = "SELECT * FROM kompy where id=" & nom
-                    rs = New Recordset
-                    rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                    With rs
-                        .MoveFirst()
-                        Do While Not .EOF
-
-                            Nam = langIni.GetString("frmReports", "MSG26", "Компьютер") & ": " &
-                                  .Fields("NET_NAME").Value & " " & langIni.GetString("frmReports", "MSG27", "Место") &
-                                  ": " & .Fields("MESTO").Value & "/" & .Fields("FILIAL").Value
-
-                            .MoveNext()
-                            'DoEvents
-                        Loop
-                    End With
-                    rs.Close()
-                    rs = Nothing
-
-                    'Вычисление окончания гарантии
-                    d$ = .Fields("day_o").Value
-                    m$ = .Fields("month_o").Value
-                    g$ = .Fields("Year_o").Value
-
-                    dat$ = d & "." & m & "." & g
-                    If dat$ = "0.0.0" Or dat$ = ".." Then
-                        dat$ = Date.Today.AddDays(-1)
-                    End If
-
-                    Today = Date.Today
-                    Millenium = dat$
-                    retval = DateDiff("d", Today, Millenium)
-                    ZakZ = CStr(retval)
-
-
-                    'If Len(dat) = 0 Then
-                    'ZakZ = ""
-                    'Else
-                    'dp = dat
-                    'ZakZ = dp - date
-                    'End If
-
-                    If ZakZ < 0 Then
-                        ZakZ = "X"
-                    End If
-
-
-                    If _
-                        Len(NameKomp) = 0 Or NameKomp = langIni.GetString("frmReports", "MSG28", "Отсутствует") Or
-                        NameKomp = langIni.GetString("frmReports", "MSG29", "Нет") Then
-                    Else
-
-                        lvGar.Items.Add(NameKomp)
-                        lvGar.Items(CInt(intj)).SubItems.Add(Nam)
-                        lvGar.Items(CInt(intj)).SubItems.Add(
-                            .Fields("day_o").Value & "." & .Fields("month_o").Value & "." & .Fields("Year_o").Value)
-                        lvGar.Items(CInt(intj)).SubItems.Add(ZakZ)
-                        lvGar.Items(CInt(intj)).SubItems.Add("+")
-
-                        intj = intj + 1
-                    End If
-                    .MoveNext()
-                    'DoEvents
-
-                Loop
-            End If
-        End With
-
-        rscount = New Recordset
-        rscount.Open("SELECT COUNT(*) AS total_number FROM garant_comp", DB7, CursorTypeEnum.adOpenDynamic,
-                     LockTypeEnum.adLockOptimistic)
-
-        With rscount
-
-            SERT$ = .Fields("total_number").Value
-
-        End With
-
-        rscount.Close()
-        rscount = Nothing
-
+        Dim sSQL3 As String
+        Dim rs3 As Recordset
+        sSQL3 = "SELECT * FROM garant_comp"
+        rs3 = New Recordset
+        rs3.Open(sSQL3, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs3
-            If SERT$ > 0 Then
-                .MoveFirst()
-                Do While Not .EOF
+            .MoveFirst()
+            Do While Not .EOF
 
-                    nom = .Fields("Id_comp").Value
+                nom = .Fields("Id_comp").Value
 
-                    Select Case cmbGar.Text
+                Select Case cmbGar.Text
 
-                        'd$ = "0"
-                        'm$ = "0"
-                        'g$ = "0"
+                    Case langIni.GetString("frmReports", "MSG4", "Видео карты")
 
+                        sSQL = "SELECT SVGA_NAME FROM kompy where id=" & nom
+                        rs = New Recordset
+                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-                        Case langIni.GetString("frmReports", "MSG4", "Видео карты")
+                        With rs
+                            .MoveFirst()
+                            Do While Not .EOF
 
-                            sSQL = "SELECT * FROM kompy where id=" & nom
-                            rs = New Recordset
-                            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                                NameKomp = .Fields("SVGA_NAME").Value
 
-                            With rs
-                                .MoveFirst()
-                                Do While Not .EOF
-                                    If .Fields("id").Value = nom Then
-                                        NameKomp = .Fields("SVGA_NAME").Value
-                                    End If
-                                    .MoveNext()
-                                    'DoEvents
-                                Loop
-                            End With
+                                .MoveNext()
+                                'DoEvents
+                            Loop
+                        End With
 
-                            rs.Close()
-                            rs = Nothing
+                        rs.Close()
+                        rs = Nothing
 
-                            d$ = .Fields("SVGA_DPo").Value
-                            m$ = .Fields("SVGA_MPo").Value
-                            g$ = .Fields("SVGA_GPo").Value
+                        d$ = .Fields("SVGA_DPo").Value
+                        m$ = .Fields("SVGA_MPo").Value
+                        g$ = .Fields("SVGA_GPo").Value
 
-                        Case langIni.GetString("frmReports", "MSG5", "Жесткие диски")
-                            sSQL = "SELECT * FROM kompy where id=" & nom
-                            rs = New Recordset
-                            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                    Case langIni.GetString("frmReports", "MSG5", "Жесткие диски")
+                        sSQL = "SELECT HDD_Name_1 FROM kompy where id=" & nom
+                        rs = New Recordset
+                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-                            With rs
-                                .MoveFirst()
-                                Do While Not .EOF
-                                    If .Fields("id").Value = nom Then
-                                        NameKomp = .Fields("HDD_Name_1").Value
-                                    End If
-                                    .MoveNext()
-                                    'DoEvents
-                                Loop
-                            End With
-                            rs.Close()
-                            rs = Nothing
-                            d$ = .Fields("HDD_DPo").Value
-                            m$ = .Fields("HDD_MPo").Value
-                            g$ = .Fields("HDD_GPo").Value
+                        With rs
+                            .MoveFirst()
+                            Do While Not .EOF
 
-                        Case langIni.GetString("frmReports", "MSG6", "Звуковая карта")
-                            sSQL = "SELECT * FROM kompy where id=" & nom
-                            rs = New Recordset
-                            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                            With rs
-                                .MoveFirst()
-                                Do While Not .EOF
-                                    If .Fields("id").Value = nom Then
-                                        NameKomp = .Fields("SOUND_NAME").Value
-                                    End If
-                                    .MoveNext()
-                                    'DoEvents
-                                Loop
-                            End With
-                            rs.Close()
-                            rs = Nothing
-                            d$ = .Fields("SOUND_DPo").Value
-                            m$ = .Fields("SOUND_MPo").Value
-                            g$ = .Fields("SOUND_GPo").Value
+                                NameKomp = .Fields("HDD_Name_1").Value
+
+                                .MoveNext()
+                                'DoEvents
+                            Loop
+                        End With
+                        rs.Close()
+                        rs = Nothing
+                        d$ = .Fields("HDD_DPo").Value
+                        m$ = .Fields("HDD_MPo").Value
+                        g$ = .Fields("HDD_GPo").Value
+
+                    Case langIni.GetString("frmReports", "MSG6", "Звуковая карта")
+                        sSQL = "SELECT SOUND_NAME FROM kompy where id=" & nom
+                        rs = New Recordset
+                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        With rs
+                            .MoveFirst()
+                            Do While Not .EOF
+
+                                NameKomp = .Fields("SOUND_NAME").Value
+
+                                .MoveNext()
+                                'DoEvents
+                            Loop
+                        End With
+                        rs.Close()
+                        rs = Nothing
+                        d$ = .Fields("SOUND_DPo").Value
+                        m$ = .Fields("SOUND_MPo").Value
+                        g$ = .Fields("SOUND_GPo").Value
 
 
-                        Case langIni.GetString("frmReports", "MSG7", "Материнские платы")
-                            sSQL = "SELECT * FROM kompy where id=" & nom
-                            rs = New Recordset
-                            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                            With rs
-                                .MoveFirst()
-                                Do While Not .EOF
-                                    If .Fields("id").Value = nom Then
-                                        NameKomp = .Fields("MB_NAME").Value
-                                    End If
-                                    .MoveNext()
-                                    'DoEvents
-                                Loop
-                            End With
-                            rs.Close()
-                            rs = Nothing
-                            d$ = .Fields("MB_DPo").Value
-                            m$ = .Fields("MB_MPo").Value
-                            g$ = .Fields("MB_GPo").Value
+                    Case langIni.GetString("frmReports", "MSG7", "Материнские платы")
+                        sSQL = "SELECT MB_NAME FROM kompy where id=" & nom
+                        rs = New Recordset
+                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        With rs
+                            .MoveFirst()
+                            Do While Not .EOF
 
-                        Case langIni.GetString("frmReports", "MSG8", "Модем")
-                            sSQL = "SELECT * FROM kompy where id=" & nom
-                            rs = New Recordset
-                            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                            With rs
-                                .MoveFirst()
-                                Do While Not .EOF
-                                    If .Fields("id").Value = nom Then
-                                        NameKomp = .Fields("MODEM_NAME").Value
-                                    End If
-                                    .MoveNext()
-                                    'DoEvents
-                                Loop
-                            End With
-                            rs.Close()
-                            rs = Nothing
-                            d$ = .Fields("MODEM_DPo").Value
-                            m$ = .Fields("MODEM_MPo").Value
-                            g$ = .Fields("MODEM_GPo").Value
+                                NameKomp = .Fields("MB_NAME").Value
 
-                        Case langIni.GetString("frmReports", "MSG9", "Монитор")
+                                .MoveNext()
+                                'DoEvents
+                            Loop
+                        End With
+                        rs.Close()
+                        rs = Nothing
+                        d$ = .Fields("MB_DPo").Value
+                        m$ = .Fields("MB_MPo").Value
+                        g$ = .Fields("MB_GPo").Value
 
-                            sSQL = "SELECT * FROM kompy where id=" & nom
-                            rs = New Recordset
-                            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                            With rs
-                                .MoveFirst()
-                                Do While Not .EOF
-                                    If .Fields("id").Value = nom Then
-                                        NameKomp = .Fields("MONITOR_NAME").Value
-                                    End If
-                                    .MoveNext()
-                                    'DoEvents
-                                Loop
-                            End With
-                            rs.Close()
-                            rs = Nothing
-                            d$ = .Fields("MONITOR_DPo").Value
-                            m$ = .Fields("MONITOR_MPo").Value
-                            g$ = .Fields("MONITOR_GPo").Value
+                    Case langIni.GetString("frmReports", "MSG8", "Модем")
+                        sSQL = "SELECT MODEM_NAME FROM kompy where id=" & nom
+                        rs = New Recordset
+                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        With rs
+                            .MoveFirst()
+                            Do While Not .EOF
 
+                                NameKomp = .Fields("MODEM_NAME").Value
 
-                        Case langIni.GetString("frmReports", "MSG10", "Память ОЗУ")
-                            sSQL = "SELECT * FROM kompy where id=" & nom
-                            rs = New Recordset
-                            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                            With rs
-                                .MoveFirst()
-                                Do While Not .EOF
-                                    If .Fields("id").Value = nom Then
-                                        NameKomp = .Fields("RAM_1").Value
-                                    End If
-                                    .MoveNext()
-                                    'DoEvents
-                                Loop
-                            End With
-                            rs.Close()
-                            rs = Nothing
-                            d$ = .Fields("RAM_DPo").Value
-                            m$ = .Fields("RAM_MPo").Value
-                            g$ = .Fields("RAM_GPo").Value
+                                .MoveNext()
+                                'DoEvents
+                            Loop
+                        End With
+                        rs.Close()
+                        rs = Nothing
+                        d$ = .Fields("MODEM_DPo").Value
+                        m$ = .Fields("MODEM_MPo").Value
+                        g$ = .Fields("MODEM_GPo").Value
 
-                        Case langIni.GetString("frmReports", "MSG13", "Процессоры")
-                            sSQL = "SELECT * FROM kompy where id=" & nom
-                            rs = New Recordset
-                            rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                            With rs
-                                .MoveFirst()
-                                Do While Not .EOF
-                                    If .Fields("id").Value = nom Then
-                                        NameKomp = .Fields("CPU1").Value
-                                    End If
-                                    .MoveNext()
-                                    'DoEvents
-                                Loop
-                            End With
-                            rs.Close()
-                            rs = Nothing
-                            d$ = .Fields("CPU_DPo").Value
-                            m$ = .Fields("CPU_MPo").Value
-                            g$ = .Fields("CPU_GPo").Value
+                    Case langIni.GetString("frmReports", "MSG9", "Монитор")
+
+                        sSQL = "SELECT MONITOR_NAME FROM kompy where id=" & nom
+                        rs = New Recordset
+                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        With rs
+                            .MoveFirst()
+                            Do While Not .EOF
+
+                                NameKomp = .Fields("MONITOR_NAME").Value
+
+                                .MoveNext()
+                                'DoEvents
+                            Loop
+                        End With
+                        rs.Close()
+                        rs = Nothing
+                        d$ = .Fields("MONITOR_DPo").Value
+                        m$ = .Fields("MONITOR_MPo").Value
+                        g$ = .Fields("MONITOR_GPo").Value
 
 
-                    End Select
+                    Case langIni.GetString("frmReports", "MSG10", "Память ОЗУ")
+                        sSQL = "SELECT RAM_1 FROM kompy where id=" & nom
+                        rs = New Recordset
+                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        With rs
+                            .MoveFirst()
+                            Do While Not .EOF
 
-                    sSQL = "SELECT * FROM kompy where id=" & nom
-                    rs = New Recordset
-                    rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                    With rs
-                        .MoveFirst()
-                        Do While Not .EOF
-                            If .Fields("id").Value = nom Then
-                                Nam = langIni.GetString("frmReports", "MSG26", "Компьютер") & ": " &
-                                      .Fields("NET_NAME").Value & " " &
-                                      langIni.GetString("frmReports", "MSG27", "Место") & " : " & .Fields("MESTO").Value &
-                                      "/" & .Fields("FILIAL").Value
-                            End If
-                            .MoveNext()
-                            'DoEvents
-                        Loop
-                    End With
-                    rs.Close()
-                    rs = Nothing
+                                NameKomp = .Fields("RAM_1").Value
 
-                    dat$ = d & "." & m & "." & g
-                    If dat$ = "0.0.0" Or dat$ = ".." Then
-                        dat$ = Date.Today '- 1
-                    End If
+                                .MoveNext()
+                                'DoEvents
+                            Loop
+                        End With
+                        rs.Close()
+                        rs = Nothing
+                        d$ = .Fields("RAM_DPo").Value
+                        m$ = .Fields("RAM_MPo").Value
+                        g$ = .Fields("RAM_GPo").Value
 
-                    'Dim Today As Date
-                    'Dim Millenium As Date
+                    Case langIni.GetString("frmReports", "MSG13", "Процессоры")
+                        sSQL = "SELECT CPU1 FROM kompy where id=" & nom
+                        rs = New Recordset
+                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        With rs
+                            .MoveFirst()
+                            Do While Not .EOF
 
-                    'im retval
-                    Today = Date.Today
-                    Millenium = dat$
-                    retval = DateDiff("d", Today, Millenium)
-                    ZakZ = CStr(retval)
+                                NameKomp = .Fields("CPU1").Value
 
-                    'If Len(dat) = 0 Then
-                    'ZakZ = ""
-                    'Else
-                    'dp = dat
-                    'ZakZ = dp - date
-                    'End If
-
-                    If ZakZ < 0 Then
-                        ZakZ = "X"
-                    End If
+                                .MoveNext()
+                                'DoEvents
+                            Loop
+                        End With
+                        rs.Close()
+                        rs = Nothing
+                        d$ = .Fields("CPU_DPo").Value
+                        m$ = .Fields("CPU_MPo").Value
+                        g$ = .Fields("CPU_GPo").Value
 
 
-                    'If dat$ = date.today Then
-                    'dat$ = "Не заполнено"
-                    'Else
-                    'End If
+                End Select
+
+                sSQL = "SELECT NET_NAME,FILIAL,MESTO FROM kompy where id=" & nom
+                rs = New Recordset
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                With rs
+                    .MoveFirst()
+                    Do While Not .EOF
+                        If .Fields("id").Value = nom Then
+                            Nam = langIni.GetString("frmReports", "MSG26", "Компьютер") & ": " &
+                                  .Fields("NET_NAME").Value & " " &
+                                  langIni.GetString("frmReports", "MSG27", "Место") & " : " & .Fields("MESTO").Value &
+                                  "/" & .Fields("FILIAL").Value
+                        End If
+                        .MoveNext()
+                    Loop
+                End With
+                rs.Close()
+                rs = Nothing
+
+                dat$ = d & "." & m & "." & g
+                If dat$ = "0.0.0" Or dat$ = ".." Then
+                    dat$ = Date.Today '- 1
+                End If
+
+                Today = Date.Today
+                Millenium = dat$
+                retval = DateDiff("d", Today, Millenium)
+                ZakZ = CStr(retval)
+
+                If ZakZ < 0 Then
+                    ZakZ = "X"
+                End If
 
 
-                    If _
-                        Len(NameKomp) = 0 Or NameKomp = langIni.GetString("frmReports", "MSG28", "Отсутствует") Or
-                        NameKomp = langIni.GetString("frmReports", "MSG29", "Нет") Then
-                    Else
+                If _
+                    Len(NameKomp) = 0 Or NameKomp = langIni.GetString("frmReports", "MSG28", "Отсутствует") Or
+                    NameKomp = langIni.GetString("frmReports", "MSG29", "Нет") Then
+                Else
 
-                        lvGar.Items.Add(NameKomp)
-                        lvGar.Items(CInt(intj)).SubItems.Add(Nam)
-                        lvGar.Items(CInt(intj)).SubItems.Add(dat$)
-                        lvGar.Items(CInt(intj)).SubItems.Add(ZakZ)
-                        lvGar.Items(CInt(intj)).SubItems.Add("-")
+                    lvGar.Items.Add(NameKomp)
+                    lvGar.Items(CInt(intj)).SubItems.Add(Nam)
+                    lvGar.Items(CInt(intj)).SubItems.Add(dat$)
+                    lvGar.Items(CInt(intj)).SubItems.Add(ZakZ)
+                    lvGar.Items(CInt(intj)).SubItems.Add("-")
 
-                        intj = intj + 1
-                    End If
+                    intj = intj + 1
+                End If
 
 
-                    .MoveNext()
-                    'DoEvents
+                .MoveNext()
+                'DoEvents
 
-                Loop
+            Loop
 
-            End If
         End With
 
-        'ListViewRavn(master_otch.lvGar, master_otch)
-
-
-        'rs.Close()
-        rs2.Close()
         rs3.Close()
-        ' rs = Nothing
-        rs2 = Nothing
         rs3 = Nothing
-        'Screen.MousePointer = vbDefault
-
+        
         ResList(Me.lvGar)
 
         Exit Sub
@@ -4935,7 +4895,6 @@ Error_:
                             lvOTV.Items(intj).SubItems.Add("")
 
                         End If
-
 
                         lvOTV.Items(intj).SubItems.Add(
                             .Fields("FILIAL").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)

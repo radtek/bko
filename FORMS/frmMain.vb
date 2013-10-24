@@ -1820,6 +1820,14 @@ err_:
         Me.Cursor = Cursors.WaitCursor
         On Error Resume Next
 
+        Dim Stmp1, Stmp2 As String
+
+        Stmp1 = TimeOfDay
+
+        Call DELETE_SIMBOL(frmComputers)
+
+        Stmp2 = TimeOfDay
+
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
         If Len(TipTehn) <> 0 Then
