@@ -3049,7 +3049,7 @@ err_:
 
             Case "C"
 
-                sSQL1 = "SELECT * FROM kompy where id =" & b1
+                sSQL1 = "SELECT NET_NAME,FILIAL,MESTO,kabn FROM kompy where id =" & b1
                 rs = New Recordset
                 rs.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                 With rs
@@ -3063,7 +3063,7 @@ err_:
 
             Case "G"
 
-                sSQL1 = "SELECT * FROM SPR_FILIAL where id =" & b1
+                sSQL1 = "SELECT FILIAL FROM SPR_FILIAL where id =" & b1
                 rs = New Recordset
                 rs.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                 With rs
@@ -3075,7 +3075,7 @@ err_:
 
             Case "O"
 
-                sSQL1 = "SELECT * FROM SPR_OTD_FILIAL where id =" & b1
+                sSQL1 = "SELECT FILIAL,N_Otd FROM SPR_OTD_FILIAL where id =" & b1
                 rs = New Recordset
                 rs.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                 With rs
@@ -3089,7 +3089,7 @@ err_:
 
             Case "K"
 
-                sSQL1 = "SELECT * FROM SPR_KAB where id =" & b1
+                sSQL1 = "SELECT N_F,N_M,Name FROM SPR_KAB where id =" & b1
                 rs = New Recordset
                 rs.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                 With rs

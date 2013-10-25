@@ -138,13 +138,23 @@ err_:
             AddOnePar(dPost.Text, "name", "SPR_Postav", dPost)
         End If
 
-        sSQL = "INSERT INTO Garantia_sis (Id_Comp,Postav,[day],[month],[Year],day_o,month_o,Year_o) VALUES (" & sID & ",'" & dPost.Text & "','" & dtp.Value.Day & "','" & dtp.Value.Month & "','" & dtp.Value.Year & "','" & dto.Value.Day & "','" & dto.Value.Month & "','" & dto.Value.Year & "')"
-        'rs = New Recordset
-        'rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-        'rs = Nothing
-        DB7.Execute(sSQL)
+        Select Case DB_N
 
+            Case "DSN"
+                sSQL = "INSERT INTO Garantia_sis (Id_Comp,Postav,day,month,Year,day_o,month_o,Year_o) VALUES (" & sID & ",'" & dPost.Text & "','" & dtp.Value.Day & "','" & dtp.Value.Month & "','" & dtp.Value.Year & "','" & dto.Value.Day & "','" & dto.Value.Month & "','" & dto.Value.Year & "')"
+            Case "PostgreSQL"
+                sSQL = "INSERT INTO Garantia_sis (Id_Comp,Postav,day,month,Year,day_o,month_o,Year_o) VALUES (" & sID & ",'" & dPost.Text & "','" & dtp.Value.Day & "','" & dtp.Value.Month & "','" & dtp.Value.Year & "','" & dto.Value.Day & "','" & dto.Value.Month & "','" & dto.Value.Year & "')"
 
+            Case "MySQL"
+                sSQL = "INSERT INTO Garantia_sis (Id_Comp,Postav,day,month,Year,day_o,month_o,Year_o) VALUES (" & sID & ",'" & dPost.Text & "','" & dtp.Value.Day & "','" & dtp.Value.Month & "','" & dtp.Value.Year & "','" & dto.Value.Day & "','" & dto.Value.Month & "','" & dto.Value.Year & "')"
+
+            Case Else
+                sSQL = "INSERT INTO Garantia_sis (Id_Comp,Postav,[day],[month],[Year],day_o,month_o,Year_o) VALUES (" & sID & ",'" & dPost.Text & "','" & dtp.Value.Day & "','" & dtp.Value.Month & "','" & dtp.Value.Year & "','" & dto.Value.Day & "','" & dto.Value.Month & "','" & dto.Value.Year & "')"
+
+        End Select
+        
+      DB7.Execute(sSQL)
+        
         Exit Sub
 err_:
         MsgBox(Err.Description & vbNewLine & "Не возможно сохранить гарантию")
@@ -159,9 +169,17 @@ err_:
         dataSF1 = Split(dataSF, " ")
         data_sp1 = Split(data_sp, " ")
 
-        sSQL = "UPDATE kompy SET SFAktNo='" & SFAktNo & "', CenaRub='" & CenaRub & "', StoimRub='" & StoimRub & "', Zaiavk='" & Zaiavk & "', DataVVoda='" & DataVVoda1(0) & "', dataSF='" & dataSF1(0) & "', Spisan=" & Spisan & ", Balans=" & Balans & ", data_sp='" & data_sp1(0) & "' WHERE id =" & sSID
-
+        sSQL = "UPDATE kompy SET SFAktNo='" & SFAktNo & "', CenaRub='" & CenaRub & "', StoimRub='" & StoimRub & "', Zaiavk='" & Zaiavk & "', Spisan=" & Spisan & ", Balans=" & Balans & "  WHERE id =" & sSID
         DB7.Execute(sSQL)
+
+
+        
+
+        sSQL = "UPDATE kompy SET DataVVoda='" & DataVVoda1(0) & "', dataSF='" & dataSF1(0) & "', data_sp='" & data_sp1(0) & "' WHERE id =" & sSID
+
+        
+        DB7.Execute(sSQL)
+
 
     End Sub
 
@@ -282,7 +300,7 @@ sAR:
 
             Case False
 
-                sSQL = "INSERT INTO kompy (MONITOR_NAME,MONITOR_DUM,MONITOR_SN,Ser_N_SIS,MONITOR_PROIZV,port_1,INV_NO_MONITOR,FILIAL,MESTO,kabn,TELEPHONE,TIPtehn,NET_NAME,PSEVDONIM,PCL) VALUES ('" & frmComputers.cmbOTH.Text & "','" & frmComputers.txtMonDum.Text & "','" & frmComputers.txtOTHSN.Text & "','" & frmComputers.txtOTHSN.Text & "','" & frmComputers.PROiZV39.Text & "','" & frmComputers.txtOTHmemo.Text & "','" & frmComputers.txtOTHinnumber.Text & "','" & frmComputers.cmbOTHFil.Text & "','" & frmComputers.cmbOTHDepart.Text & "','" & frmComputers.cmbOTHOffice.Text & "','" & frmComputers.txtOTHphone.Text & "','" & TipTehn & "','" & frmComputers.cmbOTH.Text & "','" & frmComputers.cmbOTH.Text & "'," & unaPCL & "')"
+                sSQL = "INSERT INTO kompy (MONITOR_NAME,MONITOR_DUM,MONITOR_SN,Ser_N_SIS,MONITOR_PROIZV,port_1,INV_NO_MONITOR,FILIAL,MESTO,kabn,TELEPHONE,TIPtehn,NET_NAME,PSEVDONIM,PCL) VALUES ('" & frmComputers.cmbOTH.Text & "','" & frmComputers.txtMonDum.Text & "','" & frmComputers.txtOTHSN.Text & "','" & frmComputers.txtOTHSN.Text & "','" & frmComputers.PROiZV39.Text & "','" & frmComputers.txtOTHmemo.Text & "','" & frmComputers.txtOTHinnumber.Text & "','" & frmComputers.cmbOTHFil.Text & "','" & frmComputers.cmbOTHDepart.Text & "','" & frmComputers.cmbOTHOffice.Text & "','" & frmComputers.txtOTHphone.Text & "','" & TipTehn & "','" & frmComputers.cmbOTH.Text & "','" & frmComputers.cmbOTH.Text & "'," & unaPCL & ")"
 
             Case True
 
@@ -301,9 +319,8 @@ sAR:
                     Case "DSN"
                         sSQL = "Select id from kompy ORDER BY id DESC LIMIT 1"
                     Case "PostgreSQL"
-
                         sSQL = "Select id from kompy ORDER BY id DESC LIMIT 1"
-                        
+
                     Case "MySQL"
 
                         sSQL = "Select id from kompy ORDER BY id DESC LIMIT 1"
@@ -557,10 +574,12 @@ sAR:
             Case False
 
                 Select Case DB_N
+
                     Case "DSN"
                         sSQL = "Select id from kompy ORDER BY id DESC LIMIT 1"
                     Case "PostgreSQL"
                         sSQL = "Select id from kompy ORDER BY id DESC LIMIT 1"
+
                     Case "MySQL"
 
                         sSQL = "Select id from kompy ORDER BY id DESC LIMIT 1"
@@ -786,10 +805,12 @@ sAR:
                 DB7.Execute(sSQL)
 
                 Select Case DB_N
+
                     Case "DSN"
                         sSQL = "Select id from kompy ORDER BY id DESC LIMIT 1"
                     Case "PostgreSQL"
                         sSQL = "Select id from kompy ORDER BY id DESC LIMIT 1"
+
                     Case "MySQL"
 
                         sSQL = "Select id from kompy ORDER BY id DESC LIMIT 1"
@@ -1354,8 +1375,6 @@ err_:
 
                     If Len(lstV.Items(intj).Text) = 0 Then lstV.Items(intj).Text = 1
 
-                    If Len(lstV.Items(intj).Text) = 0 Then lstV.Items(intj).Text = 1
-
                     'FIO
                     If Len(lstV.Items(intj).SubItems(1).Text) = 0 Then
                         B1 = ""
@@ -1380,6 +1399,7 @@ err_:
                         sSQL = "INSERT INTO USER_COMP (ID_COMP,USERNAME,FIO) VALUES ('" & I1 & "','" & C1 & "','" & B1 & "')"
 
                         DB7.Execute(sSQL)
+
 
                         Dim UserExist As Boolean
                         sSQL = "SELECT COUNT(*) AS total_number FROM SPR_USER WHERE name='" & C1 & "' AND A='" & B1 & "'"
@@ -1432,8 +1452,7 @@ err_:
     Public Sub User_Comp_ADD()
         On Error Resume Next
         Dim langfile As New IniFile(sLANGPATH)
-
-
+        
         If frmComputers.sCOUNT = 0 Then Exit Sub
         Dim Us1 As String
         Dim Us2 As String
@@ -1728,10 +1747,12 @@ sAR:
             Case False
 
                 Select Case DB_N
+
                     Case "DSN"
                         sSQL = "Select id from kompy ORDER BY id DESC LIMIT 1"
                     Case "PostgreSQL"
                         sSQL = "Select id from kompy ORDER BY id DESC LIMIT 1"
+
                     Case "MySQL"
 
                         sSQL = "Select id from kompy ORDER BY id DESC LIMIT 1"
@@ -1928,10 +1949,12 @@ sAR:
             Case False
 
                 Select Case DB_N
+
                     Case "DSN"
                         sSQL = "Select id from kompy ORDER BY id DESC LIMIT 1"
                     Case "PostgreSQL"
                         sSQL = "Select id from kompy ORDER BY id DESC LIMIT 1"
+
                     Case "MySQL"
 
                         sSQL = "Select id from kompy ORDER BY id DESC LIMIT 1"

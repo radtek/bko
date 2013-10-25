@@ -119,7 +119,7 @@
                         rs = Nothing
 
 
-                        sSQL = "SELECT * FROM kompy where tiptehn <> 'PC' AND filial='" & A1 &
+                        sSQL = "SELECT id,tiptehn,INV_NO_SYSTEM,INV_NO_PRINTER,INV_NO_MONITOR,INV_NO_SCANER,PRINTER_PROIZV_3,NET_NAME,TIP_COMPA,INV_NO_IBP,OTvetstvennyj,FILIAL,MESTO,kabn FROM kompy where tiptehn <> 'PC' AND filial='" & A1 &
                                "' ORDER BY filial, mesto, kabn, net_name"
 
                     Case "O"
@@ -135,7 +135,7 @@
                         rs.Close()
                         rs = Nothing
 
-                        sSQL = "SELECT * FROM kompy where tiptehn <> 'PC' AND filial='" & A1 & "' AND mesto='" & A2 &
+                        sSQL = "SELECT id,tiptehn,INV_NO_SYSTEM,INV_NO_PRINTER,INV_NO_MONITOR,INV_NO_SCANER,PRINTER_PROIZV_3,NET_NAME,TIP_COMPA,INV_NO_IBP,OTvetstvennyj,FILIAL,MESTO,kabn FROM kompy where tiptehn <> 'PC' AND filial='" & A1 & "' AND mesto='" & A2 &
                                "' ORDER BY filial, mesto, kabn, net_name"
 
                     Case "K"
@@ -150,7 +150,7 @@
                         rs.Close()
                         rs = Nothing
 
-                        sSQL = "SELECT * FROM kompy where tiptehn <> 'PC' AND filial='" & A1 & "' AND mesto='" & A2 &
+                        sSQL = "SELECT id,tiptehn,INV_NO_SYSTEM,INV_NO_PRINTER,INV_NO_MONITOR,INV_NO_SCANER,PRINTER_PROIZV_3,NET_NAME,TIP_COMPA,INV_NO_IBP,OTvetstvennyj,FILIAL,MESTO,kabn FROM kompy where tiptehn <> 'PC' AND filial='" & A1 & "' AND mesto='" & A2 &
                                "' AND kabn='" & A3 & "' ORDER BY filial, mesto, kabn, net_name"
                         ' and tiptehn='PC' or tiptehn='Printer' or tiptehn='MFU' or tiptehn='FAX' or tiptehn='PHONE' or tiptehn='NET' or tiptehn='IBP'
 
@@ -166,7 +166,7 @@
                         rs = Nothing
 
 
-                        sSQL = "SELECT * FROM kompy where tiptehn <> 'PC' ORDER BY filial, mesto, kabn, net_name"
+                        sSQL = "SELECT id,tiptehn,INV_NO_SYSTEM,INV_NO_PRINTER,INV_NO_MONITOR,INV_NO_SCANER,PRINTER_PROIZV_3,NET_NAME,TIP_COMPA,INV_NO_IBP,OTvetstvennyj,FILIAL,MESTO,kabn FROM kompy where tiptehn <> 'PC' ORDER BY filial, mesto, kabn, net_name"
 
                 End Select
 
@@ -180,7 +180,7 @@
                 End With
                 rs.Close()
                 rs = Nothing
-                sSQL = "SELECT * FROM kompy where tiptehn='NET' ORDER BY filial, mesto, kabn, net_name"
+                sSQL = "SELECT id,tiptehn,INV_NO_SYSTEM,INV_NO_PRINTER,INV_NO_MONITOR,INV_NO_SCANER,PRINTER_PROIZV_3,NET_NAME,TIP_COMPA,INV_NO_IBP,OTvetstvennyj,FILIAL,MESTO,kabn FROM kompy where tiptehn='NET' ORDER BY filial, mesto, kabn, net_name"
 
 
         End Select
@@ -480,7 +480,7 @@
                             rs.Close()
                             rs = Nothing
 
-                            sSQL = "SELECT * FROM kompy where tiptehn = 'PC' AND filial='" & A1 &
+                            sSQL = "SELECT id,tiptehn,INV_NO_SYSTEM,NET_NAME,TIP_COMPA,OTvetstvennyj,FILIAL,MESTO,kabn FROM kompy where tiptehn = 'PC' AND filial='" & A1 &
                                    "' ORDER BY filial, mesto, kabn, net_name"
 
                         Case "O"
@@ -496,7 +496,7 @@
                             rs.Close()
                             rs = Nothing
 
-                            sSQL = "SELECT * FROM kompy where tiptehn = 'PC' AND filial='" & A1 & "' AND mesto='" & A2 &
+                            sSQL = "SELECT id,tiptehn,INV_NO_SYSTEM,NET_NAME,TIP_COMPA,OTvetstvennyj,FILIAL,MESTO,kabn FROM kompy where tiptehn = 'PC' AND filial='" & A1 & "' AND mesto='" & A2 &
                                    "' ORDER BY filial, mesto, kabn, net_name"
 
                         Case "K"
@@ -511,7 +511,7 @@
                             rs.Close()
                             rs = Nothing
 
-                            sSQL = "SELECT * FROM kompy where tiptehn = 'PC' AND filial='" & A1 & "' AND mesto='" & A2 &
+                            sSQL = "SELECT id,tiptehn,INV_NO_SYSTEM,NET_NAME,TIP_COMPA,OTvetstvennyj,FILIAL,MESTO,kabn FROM kompy where tiptehn = 'PC' AND filial='" & A1 & "' AND mesto='" & A2 &
                                    "' AND kabn='" & A3 & "' ORDER BY filial, mesto, kabn, net_name"
                             ' and tiptehn='PC' or tiptehn='Printer' or tiptehn='MFU' or tiptehn='FAX' or tiptehn='PHONE' or tiptehn='NET' or tiptehn='IBP'
 
@@ -526,7 +526,7 @@
                             rs.Close()
                             rs = Nothing
 
-                            sSQL = "SELECT * FROM kompy where tiptehn = 'PC' ORDER BY filial, mesto, kabn, net_name"
+                            sSQL = "SELECT id,tiptehn,INV_NO_SYSTEM,NET_NAME,TIP_COMPA,OTvetstvennyj,FILIAL,MESTO,kabn FROM kompy where tiptehn = 'PC' ORDER BY filial, mesto, kabn, net_name"
 
                     End Select
 
@@ -551,6 +551,7 @@
 
                         lvNetMagazin.Items(CInt(intCount)).SubItems.Add(LNGIniFile.GetString("frmNetMagazin", "MSG11",
                                                                                              "Компьютер"))
+
 
                         If Not IsDBNull(.Fields("INV_NO_SYSTEM").Value) Then
                             lvNetMagazin.Items(CInt(intCount)).SubItems.Add(.Fields("INV_NO_SYSTEM").Value)
@@ -634,7 +635,7 @@
 
         Dim rs As Recordset
         rs = New Recordset
-        rs.Open("SELECT * FROM kompy where id=" & sCNT, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+        rs.Open("SELECT NET_NAME,OTvetstvennyj FROM kompy where id=" & sCNT, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
         Dim sTXT As String
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
@@ -700,7 +701,6 @@
 
 
             Select Case frmNetMagazin.sBDO_SVT_Pref
-
 
                 Case "PC"
 

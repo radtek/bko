@@ -1856,7 +1856,7 @@ Public Class frmserviceDesc
 
             Dim rs2 As Recordset
             rs2 = New Recordset
-            rs2.Open("SELECT * FROM kompy WHERE id=" & frmComputers.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+            rs2.Open("SELECT filial,mesto FROM kompy WHERE id=" & frmComputers.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
                      LockTypeEnum.adLockOptimistic)
 
             With rs2

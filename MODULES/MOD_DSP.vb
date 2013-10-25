@@ -929,17 +929,33 @@ Error_:
         If uname = 1 Then Exit Sub
 
 
-        Dim strDate As String
+        Dim strDate() As String
         Dim strTime As String
 
         strTime = Format(TimeOfDay, "hh:mm:ss")
-
-        strDate = Date.Today
-
+        strDate = Split(Date.Today, " ")
+        
         Dim sSQL As String
-        sSQL = "INSERT INTO T_Log (User_ID,Activity,[Date],[Time]) VALUES ('" & uSERID & "-on-" & uPCNAME & "','" & Aktivitas & "','" & Date.Today & "','" & strTime & "')"
-        DB7.Execute(sSQL)
 
+        Select Case DB_N
+
+            Case "DSN"
+                sSQL = "INSERT INTO T_Log (User_ID,Activity,Date,Time) VALUES ('" & uSERID & "-on-" & uPCNAME & "','" & Aktivitas & "','" & strDate(0) & "','" & strTime & "')"
+            Case "PostgreSQL"
+                sSQL = "INSERT INTO T_Log (User_ID,Activity,Date,Time) VALUES ('" & uSERID & "-on-" & uPCNAME & "','" & Aktivitas & "','" & strDate(0) & "','" & strTime & "')"
+
+            Case "MySQL"
+
+                sSQL = "INSERT INTO T_Log (User_ID,Activity,Date,Time) VALUES ('" & uSERID & "-on-" & uPCNAME & "','" & Aktivitas & "','" & strDate(0) & "','" & strTime & "')"
+
+            Case Else
+
+                sSQL = "INSERT INTO T_Log (User_ID,Activity,[Date],[Time]) VALUES ('" & uSERID & "-on-" & uPCNAME & "','" & Aktivitas & "','" & strDate(0) & "','" & strTime & "')"
+
+        End Select
+        
+        DB7.Execute(sSQL)
+        
         'Dim rs As Recordset
         'rs = New Recordset
         'rs.Open("SELECT * FROM T_Log", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)

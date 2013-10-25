@@ -6998,6 +6998,7 @@ Me.dtGPRNok.Location = New System.Drawing.Point(416, 41)
 Me.dtGPRNok.Name = "dtGPRNok"
 Me.dtGPRNok.Size = New System.Drawing.Size(134, 20)
 Me.dtGPRNok.TabIndex = 8
+Me.dtGPRNok.Value = New Date(2013, 10, 25, 0, 0, 0, 0)
 '
 'Label4
 '
@@ -8150,6 +8151,7 @@ Me.dtGNETok.Location = New System.Drawing.Point(416, 41)
 Me.dtGNETok.Name = "dtGNETok"
 Me.dtGNETok.Size = New System.Drawing.Size(134, 20)
 Me.dtGNETok.TabIndex = 9
+Me.dtGNETok.Value = New Date(2013, 10, 25, 0, 0, 0, 0)
 '
 'Label39
 '
@@ -8190,6 +8192,7 @@ Me.dtGNETPr.Location = New System.Drawing.Point(103, 41)
 Me.dtGNETPr.Name = "dtGNETPr"
 Me.dtGNETPr.Size = New System.Drawing.Size(134, 20)
 Me.dtGNETPr.TabIndex = 8
+Me.dtGNETPr.Value = New Date(2013, 10, 25, 0, 0, 0, 0)
 '
 'Label38
 '
@@ -8272,6 +8275,7 @@ Me.dtNETdataVvoda.Location = New System.Drawing.Point(416, 65)
 Me.dtNETdataVvoda.Name = "dtNETdataVvoda"
 Me.dtNETdataVvoda.Size = New System.Drawing.Size(228, 20)
 Me.dtNETdataVvoda.TabIndex = 20
+Me.dtNETdataVvoda.Value = New Date(2013, 10, 25, 0, 0, 0, 0)
 '
 'Label60
 '
@@ -8308,6 +8312,7 @@ Me.dtNETSFdate.Location = New System.Drawing.Point(416, 5)
 Me.dtNETSFdate.Name = "dtNETSFdate"
 Me.dtNETSFdate.Size = New System.Drawing.Size(228, 20)
 Me.dtNETSFdate.TabIndex = 18
+Me.dtNETSFdate.Value = New Date(2013, 10, 25, 0, 0, 0, 0)
 '
 'Label59
 '
@@ -9370,6 +9375,7 @@ Me.dtGOTHok.Location = New System.Drawing.Point(420, 39)
 Me.dtGOTHok.Name = "dtGOTHok"
 Me.dtGOTHok.Size = New System.Drawing.Size(134, 20)
 Me.dtGOTHok.TabIndex = 9
+Me.dtGOTHok.Value = New Date(2013, 10, 25, 0, 0, 0, 0)
 '
 'Label42
 '
@@ -9410,6 +9416,7 @@ Me.dtGOTHPr.Location = New System.Drawing.Point(100, 39)
 Me.dtGOTHPr.Name = "dtGOTHPr"
 Me.dtGOTHPr.Size = New System.Drawing.Size(134, 20)
 Me.dtGOTHPr.TabIndex = 8
+Me.dtGOTHPr.Value = New Date(2013, 10, 25, 0, 0, 0, 0)
 '
 'Label41
 '
@@ -9494,6 +9501,7 @@ Me.dtOTHdataVvoda.Location = New System.Drawing.Point(416, 55)
 Me.dtOTHdataVvoda.Name = "dtOTHdataVvoda"
 Me.dtOTHdataVvoda.Size = New System.Drawing.Size(228, 20)
 Me.dtOTHdataVvoda.TabIndex = 19
+Me.dtOTHdataVvoda.Value = New Date(2013, 10, 25, 0, 0, 0, 0)
 '
 'Label66
 '
@@ -9530,6 +9538,7 @@ Me.dtOTHSFdate.Location = New System.Drawing.Point(416, 3)
 Me.dtOTHSFdate.Name = "dtOTHSFdate"
 Me.dtOTHSFdate.Size = New System.Drawing.Size(228, 20)
 Me.dtOTHSFdate.TabIndex = 16
+Me.dtOTHSFdate.Value = New Date(2013, 10, 25, 0, 0, 0, 0)
 '
 'Label65
 '

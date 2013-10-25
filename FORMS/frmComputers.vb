@@ -691,7 +691,8 @@ Error_:
         Handles lstGroups.AfterSelect
       
         Me.txtSNAME.BackColor = Me.txtSBSN.BackColor
-        Me.txtPSEUDONIM.BackColor = Me.txtSBSN.BackColor
+
+       Me.txtPSEUDONIM.BackColor = Me.txtSBSN.BackColor
         Me.cmbBranch.BackColor = Me.txtSBSN.BackColor
 
         pDRAG = False

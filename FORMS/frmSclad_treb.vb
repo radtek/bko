@@ -55,7 +55,7 @@ Public Class frmSclad_treb
 
             Dim BASECOMP As Recordset
             BASECOMP = New Recordset
-            BASECOMP.Open("SELECT * FROM kompy", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+            BASECOMP.Open("SELECT NET_NAME,filial,mesto,id FROM kompy", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
 
             With BASECOMP
@@ -416,7 +416,7 @@ Public Class frmSclad_treb
 
         Dim rs As Recordset
         rs = New Recordset
-        rs.Open("SELECT * FROM kompy", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+        rs.Open("SELECT TipTehn,NET_NAME,filial,mesto,id FROM kompy", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         FillComboNET(Me.Combo2, "filial", "SPR_FILIAL", "", False, True)
 
