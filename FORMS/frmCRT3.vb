@@ -1226,7 +1226,7 @@ Public Class frmCRT3
 
                     Dim rs As Recordset
                     rs = New Recordset
-                    rs.Open("SELECT * FROM kompy WHERE id=" & uname, DB7, CursorTypeEnum.adOpenDynamic,
+                    rs.Open("SELECT id,PRINTER_NAME_1,filial,mesto FROM kompy WHERE id=" & uname, DB7, CursorTypeEnum.adOpenDynamic,
                             LockTypeEnum.adLockOptimistic)
 
                     With rs
@@ -1716,30 +1716,6 @@ Public Class frmCRT3
                 uname3 = sTmp(2)
 
             End If
-
-
-            'Dim BASECOMP As ADODB.Recordset
-            'BASECOMP = New ADODB.Recordset
-            'BASECOMP.Open("SELECT * FROM kompy", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-            'With BASECOMP
-
-            '    If Len(cmbSostUstr.Text) = 0 Then
-            '        uname3 = 0
-            '    Else
-            '        .MoveFirst()
-            '        Do While Not .EOF
-            '            If uname3 = " № " & .Fields("id").Value & " " & .Fields("PRINTER_NAME_1").Value & " (" & .Fields("filial").Value & "/" & .Fields("mesto").Value & ")" Then
-            '                uname3 = .Fields("id").Value
-            '            End If
-            '            .MoveNext()
-            '            'DoEvents
-            '        Loop
-
-            '    End If
-            'End With
-            'BASECOMP.Close()
-            'BASECOMP = Nothing
-
 
         Else
 
@@ -2783,7 +2759,7 @@ Public Class frmCRT3
 
             Else
                 rs = New Recordset
-                rs.Open("SELECT * FROM kompy where id =" & cCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                rs.Open("SELECT id,NET_NAME,filial,mesto,kabn FROM kompy where id =" & cCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
                         LockTypeEnum.adLockOptimistic)
 
                 With rs
@@ -2824,7 +2800,7 @@ Public Class frmCRT3
 
 
                     rs = New Recordset
-                    rs.Open("SELECT * FROM kompy where id =" & iA, DB7, CursorTypeEnum.adOpenDynamic,
+                    rs.Open("SELECT id,NET_NAME,filial,mesto,kabn FROM kompy where id =" & iA, DB7, CursorTypeEnum.adOpenDynamic,
                             LockTypeEnum.adLockOptimistic)
 
                     With rs
@@ -3306,7 +3282,7 @@ Public Class frmCRT3
                 Else
 
                     rs = New Recordset
-                    rs.Open("SELECT * FROM kompy where id =" & iUSTR, DB7, CursorTypeEnum.adOpenDynamic,
+                    rs.Open("SELECT id,NET_NAME,filial,mesto,kabn FROM kompy where id =" & iUSTR, DB7, CursorTypeEnum.adOpenDynamic,
                             LockTypeEnum.adLockOptimistic)
 
                     With rs
@@ -3338,7 +3314,7 @@ Public Class frmCRT3
 
                 Dim BASECOMP As Recordset
                 BASECOMP = New Recordset
-                BASECOMP.Open("SELECT * FROM kompy where id=" & sTEXT, DB7, CursorTypeEnum.adOpenDynamic,
+                BASECOMP.Open("SELECT id,PRINTER_NAME_1,filial,mesto,kabn FROM kompy where id=" & sTEXT, DB7, CursorTypeEnum.adOpenDynamic,
                               LockTypeEnum.adLockOptimistic)
 
 

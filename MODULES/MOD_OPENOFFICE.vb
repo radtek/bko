@@ -117,7 +117,7 @@ Module MOD_OPENOFFICE
 
 
                 CONFIGURE = New Recordset
-                CONFIGURE.Open("SELECT * FROM CONFIGURE", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockReadOnly)
+                CONFIGURE.Open("SELECT ORG FROM CONFIGURE", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockReadOnly)
                 With CONFIGURE
                     If Not IsDBNull(.Fields("ORG").Value) Then uname = .Fields("ORG").Value
                 End With
@@ -986,7 +986,7 @@ Module MOD_OPENOFFICE
         On Error Resume Next
 
         Dim rs1 As Recordset
-        sSQL1 = "SELECT * FROM CONFIGURE"
+        sSQL1 = "SELECT org,SISADM FROM CONFIGURE"
         rs1 = New Recordset
         rs1.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
@@ -1345,7 +1345,7 @@ Module MOD_OPENOFFICE
                                objTable)
 
                 rscount = New Recordset
-                rscount.Open("SELECT * FROM SOFT_INSTALL WHERE id_comp=" & frmComputers.sCOUNT, DB7,
+                rscount.Open("SELECT Soft FROM SOFT_INSTALL WHERE id_comp=" & frmComputers.sCOUNT, DB7,
                              CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 'Dim A As String
@@ -1358,7 +1358,6 @@ Module MOD_OPENOFFICE
                         A = "A" & intj
                         insertIntoCell(A, .Fields("Soft"), objTable)
                         intj = intj + 1
-
 
                         .MoveNext()
                         'DoEvents
@@ -1514,7 +1513,7 @@ Module MOD_OPENOFFICE
                 insertIntoCell("E1", LNGIniFile.GetString("MOD_OPENOFFICE", "MSG49", "Выполнение"), objTable)
 
                 rscount = New Recordset
-                rscount.Open("SELECT * FROM Remont WHERE id_comp=" & frmComputers.sCOUNT, DB7,
+                rscount.Open("SELECT Date,Remont,Name,Uroven,vip FROM Remont WHERE id_comp=" & frmComputers.sCOUNT, DB7,
                              CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 intj = 2
@@ -3141,7 +3140,7 @@ err_:
 
         Dim CONFIGURE As Recordset
         CONFIGURE = New Recordset
-        CONFIGURE.Open("SELECT * FROM CONFIGURE", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockReadOnly)
+        CONFIGURE.Open("SELECT ORG FROM CONFIGURE", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockReadOnly)
 
         With CONFIGURE
             If Not IsDBNull(.Fields("ORG").Value) Then uname = .Fields("ORG").Value
@@ -3894,7 +3893,7 @@ err_:
 
 
         CONFIGURE = New Recordset
-        CONFIGURE.Open("SELECT * FROM CONFIGURE", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+        CONFIGURE.Open("SELECT SISADM FROM CONFIGURE", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
         With CONFIGURE
             If .RecordCount <> 0 Then
                 If Not IsDBNull(.Fields("SISADM")) Then uname = .Fields("SISADM").Value
@@ -3921,7 +3920,7 @@ err_:
         On Error Resume Next
 
         Dim rs1 As Recordset
-        sSQL1 = "SELECT * FROM CONFIGURE"
+        sSQL1 = "SELECT org,SISADM FROM CONFIGURE"
         rs1 = New Recordset
         rs1.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
@@ -4857,7 +4856,7 @@ err_:
             sGAR As String
         Dim sIDCMP As Integer
 
-        sSQL = "SELECT * FROM CONFIGURE"
+        sSQL = "SELECT nomer_compa FROM CONFIGURE"
         rs = New Recordset
         rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
@@ -4914,7 +4913,7 @@ err_:
 
         If rCOUNTer > 0 Then
 
-            sSQL = "SELECT * FROM remonty_plus WHERE id_rem = " & sSID
+            sSQL = "SELECT otzyv FROM remonty_plus WHERE id_rem = " & sSID
             rs = New Recordset
             rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
             With rs
@@ -5071,7 +5070,7 @@ err_:
 
         Dim rs1 As Recordset
         rs1 = New Recordset
-        rs1.Open("SELECT * FROM CONFIGURE", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+        rs1.Open("SELECT org FROM CONFIGURE", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs1
             If Not IsDBNull(.Fields("org").Value) Then Sorganization = .Fields("org").Value

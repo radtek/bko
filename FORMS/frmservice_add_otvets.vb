@@ -137,7 +137,7 @@
 
         Dim rs1 As Recordset
         rs1 = New Recordset
-        sSQL = "SELECT * FROM kompy WHERE id=" & frmserviceDesc.EDTID
+        sSQL = "SELECT filial,mesto,net_name FROM kompy WHERE id=" & frmserviceDesc.EDTID
         rs1.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs1
@@ -335,6 +335,8 @@
     End Sub
 
     Private Sub cmdAdd_Click(ByVal sender As Object, ByVal e As EventArgs) Handles cmdAdd.Click
+
+        Call DELETE_SIMBOL(Me)
 
         If Not (RSExists("MASTER", "name", Trim(cmbMaster.Text))) Then
             AddOnePar(cmbMaster.Text, "NAME", "SPR_Master", cmbMaster)

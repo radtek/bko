@@ -18,7 +18,7 @@ Public Class frmMain
     Private Sub frmMain_Activated(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Activated
 
         Me.Show()
-        ' My.Application.DoEvents()
+       ' My.Application.DoEvents()
 
         If unamDB <> "MS Access" Or unamDB <> "MS Access 2007" Then ArhToolZipbutton.Enabled = False
 
@@ -1819,6 +1819,14 @@ err_:
     Public Sub SaveInfTeh()
         Me.Cursor = Cursors.WaitCursor
         On Error Resume Next
+
+        Dim Stmp1, Stmp2 As String
+
+        Stmp1 = TimeOfDay
+
+        Call DELETE_SIMBOL(frmComputers)
+
+        Stmp2 = TimeOfDay
 
         Dim LNGIniFile As New IniFile(sLANGPATH)
 

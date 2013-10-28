@@ -8,6 +8,8 @@
         On Error GoTo err_
         Dim objIniFile As New IniFile(sLANGPATH)
 
+        Call DELETE_SIMBOL(Me)
+
         If Len(cmbIst.Text) = 0 Then
 
             MsgBox(

@@ -138,17 +138,61 @@ err_:
             AddOnePar(dPost.Text, "name", "SPR_Postav", dPost)
         End If
 
-        sSQL = "INSERT INTO Garantia_sis (Id_Comp,Postav,day,month,Year,day_o,month_o,Year_o) VALUES (" & sID & ",'" & dPost.Text & "','" & dtp.Value.Day & "','" & dtp.Value.Month & "','" & dtp.Value.Year & "','" & dto.Value.Day & "','" & dto.Value.Month & "','" & dto.Value.Year & "')"
-        'rs = New Recordset
-        'rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-        'rs = Nothing
-        DB7.Execute(sSQL)
+        Select Case DB_N
 
+            Case "DSN"
+                sSQL = "INSERT INTO Garantia_sis (Id_Comp,Postav,day,month,Year,day_o,month_o,Year_o) VALUES (" & sID & ",'" & dPost.Text & "','" & dtp.Value.Day & "','" & dtp.Value.Month & "','" & dtp.Value.Year & "','" & dto.Value.Day & "','" & dto.Value.Month & "','" & dto.Value.Year & "')"
+            Case "PostgreSQL"
+                sSQL = "INSERT INTO Garantia_sis (Id_Comp,Postav,day,month,Year,day_o,month_o,Year_o) VALUES (" & sID & ",'" & dPost.Text & "','" & dtp.Value.Day & "','" & dtp.Value.Month & "','" & dtp.Value.Year & "','" & dto.Value.Day & "','" & dto.Value.Month & "','" & dto.Value.Year & "')"
 
+            Case "MySQL"
+                sSQL = "INSERT INTO Garantia_sis (Id_Comp,Postav,day,month,Year,day_o,month_o,Year_o) VALUES (" & sID & ",'" & dPost.Text & "','" & dtp.Value.Day & "','" & dtp.Value.Month & "','" & dtp.Value.Year & "','" & dto.Value.Day & "','" & dto.Value.Month & "','" & dto.Value.Year & "')"
+
+            Case Else
+                sSQL = "INSERT INTO Garantia_sis (Id_Comp,Postav,[day],[month],[Year],day_o,month_o,Year_o) VALUES (" & sID & ",'" & dPost.Text & "','" & dtp.Value.Day & "','" & dtp.Value.Month & "','" & dtp.Value.Year & "','" & dto.Value.Day & "','" & dto.Value.Month & "','" & dto.Value.Year & "')"
+
+        End Select
+        
+      DB7.Execute(sSQL)
+        
         Exit Sub
 err_:
         MsgBox(Err.Description & vbNewLine & "Не возможно сохранить гарантию")
     End Sub
+
+    Private Sub UPDATE_OPLATA(ByVal SFAktNo As String, ByVal CenaRub As String, ByVal StoimRub As String, ByVal Zaiavk As String, ByVal DataVVoda As Date, ByVal dataSF As Date, ByVal Spisan As String, ByVal Balans As String, ByVal data_sp As Date, ByVal sSID As Integer)
+
+        Dim sSQL As String
+        Dim DataVVoda1(), dataSF1(), data_sp1() As String
+
+        DataVVoda1 = Split(DataVVoda, " ")
+        dataSF1 = Split(dataSF, " ")
+        data_sp1 = Split(data_sp, " ")
+
+        sSQL = "UPDATE kompy SET SFAktNo='" & SFAktNo & "', CenaRub='" & CenaRub & "', StoimRub='" & StoimRub & "', Zaiavk='" & Zaiavk & "', Spisan=" & Spisan & ", Balans=" & Balans & "  WHERE id =" & sSID
+        DB7.Execute(sSQL)
+
+
+        
+
+        sSQL = "UPDATE kompy SET DataVVoda='" & DataVVoda1(0) & "', dataSF='" & dataSF1(0) & "', data_sp='" & data_sp1(0) & "' WHERE id =" & sSID
+
+        
+        DB7.Execute(sSQL)
+
+
+    End Sub
+
+    Private Sub UPDATE_INFORMARION(ByVal FILIAL As String, ByVal MESTO As String, ByVal kabn As String, ByVal TELEPHONE As String, ByVal NET_NAME As String, ByVal PSEVDONIM As String, ByVal OTvetstvennyj As String, ByVal sSID As Integer)
+
+        Dim sSQL As String
+
+        sSQL = "UPDATE kompy SET FILIAL='" & FILIAL & "', MESTO='" & MESTO & "', kabn='" & kabn & "', TELEPHONE='" & TELEPHONE & "', NET_NAME='" & NET_NAME & "', PSEVDONIM='" & PSEVDONIM & "', OTvetstvennyj='" & OTvetstvennyj & "' WHERE id =" & sSID
+
+        DB7.Execute(sSQL)
+
+    End Sub
+
 
     Public Sub SAVE_MON(Optional ByVal sSID As String = "")
         On Error GoTo Err_
@@ -256,24 +300,20 @@ sAR:
 
             Case False
 
-                sSQL = "INSERT INTO kompy (MONITOR_NAME,MONITOR_DUM,MONITOR_SN,Ser_N_SIS,MONITOR_PROIZV,port_1,OTvetstvennyj,INV_NO_MONITOR,FILIAL,MESTO,kabn,TELEPHONE,TIPtehn,NET_NAME,PSEVDONIM,PCL,SFAktNo,CenaRub,StoimRub,Zaiavk,DataVVoda,dataSF,Spisan,Balans,data_sp) VALUES ('" & frmComputers.cmbOTH.Text & "','" & frmComputers.txtMonDum.Text & "','" & frmComputers.txtOTHSN.Text & "','" & frmComputers.txtOTHSN.Text & "','" & frmComputers.PROiZV39.Text & "','" & frmComputers.txtOTHmemo.Text & "','" & frmComputers.cmbOTHotv.Text & "','" & frmComputers.txtOTHinnumber.Text & "','" & frmComputers.cmbOTHFil.Text & "','" & frmComputers.cmbOTHDepart.Text & "','" & frmComputers.cmbOTHOffice.Text & "','" & frmComputers.txtOTHphone.Text & "','" & TipTehn & "','" & frmComputers.cmbOTH.Text & "','" & frmComputers.cmbOTH.Text & "'," & unaPCL & ",'" & frmComputers.txtOTHSfN.Text & "','" & frmComputers.txtOTHcash.Text & "','" & frmComputers.txtOTHSumm.Text & "','" & frmComputers.txtOTHZay.Text & "','" & frmComputers.dtOTHdataVvoda.Value & "','" & frmComputers.dtOTHSFdate.Value & "'," & _chkOTHspis & "," & _chkOTHNNb & ",'" & frmComputers.dtOTHSpisanie.Value & "')"
+                sSQL = "INSERT INTO kompy (MONITOR_NAME,MONITOR_DUM,MONITOR_SN,Ser_N_SIS,MONITOR_PROIZV,port_1,INV_NO_MONITOR,FILIAL,MESTO,kabn,TELEPHONE,TIPtehn,NET_NAME,PSEVDONIM,PCL) VALUES ('" & frmComputers.cmbOTH.Text & "','" & frmComputers.txtMonDum.Text & "','" & frmComputers.txtOTHSN.Text & "','" & frmComputers.txtOTHSN.Text & "','" & frmComputers.PROiZV39.Text & "','" & frmComputers.txtOTHmemo.Text & "','" & frmComputers.txtOTHinnumber.Text & "','" & frmComputers.cmbOTHFil.Text & "','" & frmComputers.cmbOTHDepart.Text & "','" & frmComputers.cmbOTHOffice.Text & "','" & frmComputers.txtOTHphone.Text & "','" & TipTehn & "','" & frmComputers.cmbOTH.Text & "','" & frmComputers.cmbOTH.Text & "'," & unaPCL & ")"
 
             Case True
 
-                sSQL = "UPDATE kompy SET MONITOR_NAME='" & frmComputers.cmbOTH.Text & "', MONITOR_DUM='" & frmComputers.txtMonDum.Text & "', MONITOR_SN='" & frmComputers.txtOTHSN.Text & "', Ser_N_SIS='" & frmComputers.txtOTHSN.Text & "', MONITOR_PROIZV='" & frmComputers.PROiZV39.Text & "', port_1='" & frmComputers.txtOTHmemo.Text & "', OTvetstvennyj='" & frmComputers.cmbOTHotv.Text & "', INV_NO_MONITOR='" & frmComputers.txtOTHinnumber.Text & "', FILIAL='" & frmComputers.cmbOTHFil.Text & "', MESTO='" & frmComputers.cmbOTHDepart.Text & "', kabn='" & frmComputers.cmbOTHOffice.Text & "', TELEPHONE='" & frmComputers.txtOTHphone.Text & "', TIPtehn='" & TipTehn & "', NET_NAME='" & frmComputers.cmbOTH.Text & "', PSEVDONIM='" & frmComputers.cmbOTH.Text & "', PCL=" & unaPCL & ", SFAktNo='" & frmComputers.txtOTHSfN.Text & "', CenaRub='" & frmComputers.txtOTHcash.Text & "', StoimRub='" & frmComputers.txtOTHSumm.Text & "', Zaiavk='" & frmComputers.txtOTHZay.Text & "', DataVVoda='" & frmComputers.dtOTHdataVvoda.Value & "', dataSF='" & frmComputers.dtOTHSFdate.Value & "', Spisan=" & _chkOTHspis & ", Balans=" & _chkOTHNNb & ", data_sp='" & frmComputers.dtOTHSpisanie.Value & "' WHERE id =" & sSID
+                sSQL = "UPDATE kompy SET MONITOR_NAME='" & frmComputers.cmbOTH.Text & "', MONITOR_DUM='" & frmComputers.txtMonDum.Text & "', MONITOR_SN='" & frmComputers.txtOTHSN.Text & "', Ser_N_SIS='" & frmComputers.txtOTHSN.Text & "', MONITOR_PROIZV='" & frmComputers.PROiZV39.Text & "', port_1='" & frmComputers.txtOTHmemo.Text & "', INV_NO_MONITOR='" & frmComputers.txtOTHinnumber.Text & "', PCL=" & unaPCL & " WHERE id =" & sSID
 
         End Select
 
         DB7.Execute(sSQL)
 
-        'rs = New Recordset
-        'rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-        'rs = Nothing
-
         Select Case frmComputers.EDT
 
             Case False
-                
+
                 Select Case DB_N
 
                     Case "DSN"
@@ -297,13 +337,11 @@ sAR:
                 rs.Close()
                 rs = Nothing
 
-
                 Dim objIniFile As New IniFile(PrPath & "base.ini")
                 objIniFile.WriteString("general", "DK", frmComputers.sCOUNT)
                 objIniFile.WriteString("general", "Default", 0)
 
             Case True
-
 
         End Select
 
@@ -311,7 +349,11 @@ sAR:
             sSID = frmComputers.sCOUNT
         End If
 
-        SAVE_GARANT(sSID, frmComputers.cmbOTHPostav, frmComputers.dtGOTHPr, frmComputers.dtGOTHok)
+        Call UPDATE_INFORMARION(frmComputers.cmbOTHFil.Text, frmComputers.cmbOTHDepart.Text, frmComputers.cmbOTHOffice.Text, frmComputers.txtOTHphone.Text, frmComputers.cmbOTH.Text, frmComputers.cmbOTH.Text, frmComputers.cmbOTHotv.Text, sSID)
+
+        Call UPDATE_OPLATA(frmComputers.txtOTHSfN.Text, frmComputers.txtOTHcash.Text, frmComputers.txtOTHSumm.Text, frmComputers.txtOTHZay.Text, frmComputers.dtOTHdataVvoda.Value, frmComputers.dtOTHSFdate.Value, _chkOTHspis, _chkOTHNNb, frmComputers.dtOTHSpisanie.Value, sSID)
+
+        Call SAVE_GARANT(sSID, frmComputers.cmbOTHPostav, frmComputers.dtGOTHPr, frmComputers.dtGOTHok)
 
         frmComputers.cmbOTH.BackColor = frmComputers.cmbOTH.BackColor
         frmComputers.cmbOTHFil.BackColor = frmComputers.cmbOTHFil.BackColor
@@ -517,11 +559,11 @@ sAR:
 
             Case False
 
-                sSQL = "INSERT INTO kompy (PRINTER_NAME_1,PRINTER_SN_1,Ser_N_SIS,PRINTER_PROIZV_1,port_1,OTvetstvennyj,INV_NO_PRINTER,FILIAL,MESTO,kabn,TELEPHONE,TIPtehn,NET_NAME,PSEVDONIM,PCL,SFAktNo,CenaRub,StoimRub,Zaiavk,DataVVoda,dataSF,Spisan,Balans,data_sp) VALUES ('" & frmComputers.cmbOTH.Text & "','" & frmComputers.txtOTHSN.Text & "','" & frmComputers.txtOTHSN.Text & "','" & frmComputers.PROiZV39.Text & "','" & frmComputers.txtOTHmemo.Text & "','" & frmComputers.cmbOTHotv.Text & "','" & frmComputers.txtOTHinnumber.Text & "','" & frmComputers.cmbOTHFil.Text & "','" & frmComputers.cmbOTHDepart.Text & "','" & frmComputers.cmbOTHOffice.Text & "','" & frmComputers.txtOTHphone.Text & "','" & TipTehn & "','" & frmComputers.cmbOTH.Text & "','" & frmComputers.cmbOTH.Text & "'," & unaPCL & ",'" & frmComputers.txtOTHSfN.Text & "','" & frmComputers.txtOTHcash.Text & "','" & frmComputers.txtOTHSumm.Text & "','" & frmComputers.txtOTHZay.Text & "','" & frmComputers.dtOTHdataVvoda.Value & "','" & frmComputers.dtOTHSFdate.Value & "'," & _chkOTHspis & "," & _chkOTHNNb & ",'" & frmComputers.dtOTHSpisanie.Value & "')"
+                sSQL = "INSERT INTO kompy (PRINTER_NAME_1,PRINTER_SN_1,Ser_N_SIS,PRINTER_PROIZV_1,port_1,INV_NO_PRINTER,TIPtehn,PCL) VALUES ('" & frmComputers.cmbOTH.Text & "','" & frmComputers.txtOTHSN.Text & "','" & frmComputers.txtOTHSN.Text & "','" & frmComputers.PROiZV39.Text & "','" & frmComputers.txtOTHmemo.Text & "','" & frmComputers.txtOTHinnumber.Text & "','" & "','" & TipTehn & "'," & unaPCL & ")"
 
             Case True
 
-                sSQL = "UPDATE kompy SET PRINTER_NAME_1='" & frmComputers.cmbOTH.Text & "', PRINTER_SN_1='" & frmComputers.txtOTHSN.Text & "', Ser_N_SIS='" & frmComputers.txtOTHSN.Text & "', PRINTER_PROIZV_1='" & frmComputers.PROiZV39.Text & "', port_1='" & frmComputers.txtOTHmemo.Text & "', OTvetstvennyj='" & frmComputers.cmbOTHotv.Text & "', INV_NO_PRINTER='" & frmComputers.txtOTHinnumber.Text & "', FILIAL='" & frmComputers.cmbOTHFil.Text & "', MESTO='" & frmComputers.cmbOTHDepart.Text & "', kabn='" & frmComputers.cmbOTHOffice.Text & "', TELEPHONE='" & frmComputers.txtOTHphone.Text & "', TIPtehn='" & TipTehn & "', NET_NAME='" & frmComputers.cmbOTH.Text & "', PSEVDONIM='" & frmComputers.cmbOTH.Text & "', PCL=" & unaPCL & ", SFAktNo='" & frmComputers.txtOTHSfN.Text & "', CenaRub='" & frmComputers.txtOTHcash.Text & "', StoimRub='" & frmComputers.txtOTHSumm.Text & "', Zaiavk='" & frmComputers.txtOTHZay.Text & "', DataVVoda='" & frmComputers.dtOTHdataVvoda.Value & "', dataSF='" & frmComputers.dtOTHSFdate.Value & "', Spisan=" & _chkOTHspis & ", Balans=" & _chkOTHNNb & ", data_sp='" & frmComputers.dtOTHSpisanie.Value & "' WHERE id =" & sSID
+                sSQL = "UPDATE kompy SET PRINTER_NAME_1='" & frmComputers.cmbOTH.Text & "', PRINTER_SN_1='" & frmComputers.txtOTHSN.Text & "', Ser_N_SIS='" & frmComputers.txtOTHSN.Text & "', PRINTER_PROIZV_1='" & frmComputers.PROiZV39.Text & "', port_1='" & frmComputers.txtOTHmemo.Text & "', INV_NO_PRINTER='" & frmComputers.txtOTHinnumber.Text & "', TIPtehn='" & TipTehn & "', PCL=" & unaPCL & " WHERE id =" & sSID
 
         End Select
 
@@ -554,7 +596,6 @@ sAR:
                 rs.Close()
                 rs = Nothing
 
-
                 Dim objIniFile As New IniFile(PrPath & "base.ini")
                 objIniFile.WriteString("general", "DK", frmComputers.sCOUNT)
                 objIniFile.WriteString("general", "Default", 0)
@@ -567,7 +608,11 @@ sAR:
             sSID = frmComputers.sCOUNT
         End If
 
-        SAVE_GARANT(sSID, frmComputers.cmbOTHPostav, frmComputers.dtGOTHPr, frmComputers.dtGOTHok)
+        Call UPDATE_INFORMARION(frmComputers.cmbOTHFil.Text, frmComputers.cmbOTHDepart.Text, frmComputers.cmbOTHOffice.Text, frmComputers.txtOTHphone.Text, frmComputers.cmbOTH.Text, frmComputers.cmbOTH.Text, frmComputers.cmbOTHotv.Text, sSID)
+
+        Call UPDATE_OPLATA(frmComputers.txtOTHSfN.Text, frmComputers.txtOTHcash.Text, frmComputers.txtOTHSumm.Text, frmComputers.txtOTHZay.Text, frmComputers.dtOTHdataVvoda.Value, frmComputers.dtOTHSFdate.Value, _chkOTHspis, _chkOTHNNb, frmComputers.dtOTHSpisanie.Value, sSID)
+
+        Call SAVE_GARANT(sSID, frmComputers.cmbOTHPostav, frmComputers.dtGOTHPr, frmComputers.dtGOTHok)
 
         frmComputers.cmbOTH.BackColor = frmComputers.cmbOTH.BackColor
         frmComputers.cmbOTHFil.BackColor = frmComputers.cmbOTHFil.BackColor
@@ -737,41 +782,18 @@ sAR:
         If Len(frmComputers.txtPCSumm.Text) = 0 Then frmComputers.txtPCSumm.Text = 0
         If Len(frmComputers.txtPCSfN.Text) = 0 Then frmComputers.txtPCSfN.Text = 0
 
-        Dim _chkPRNspis As String
-        Dim _chkPRNNNb As String
-        Dim _chkGarant As String
-        'frmComputers.rbSist.Checked
-        Select Case DB_N
-
-            Case "PostgreSQL"
-                _chkPRNspis = frmComputers.chkPCspis.Checked
-                _chkPRNNNb = frmComputers.chkPCNNb.Checked
-                _chkGarant = frmComputers.rbSist.Checked
-            Case "DSN"
-                _chkPRNspis = frmComputers.chkPCspis.Checked
-                _chkPRNNNb = frmComputers.chkPCNNb.Checked
-                _chkGarant = frmComputers.rbSist.Checked
-            Case Else
-
-                If frmComputers.chkPCspis.Checked = False Then _chkPRNspis = 0 Else _chkPRNspis = 1
-                If frmComputers.chkPCNNb.Checked = False Then _chkPRNNNb = 0 Else _chkPRNNNb = 1
-                If frmComputers.rbSist.Checked = False Then _chkGarant = 0 Else _chkGarant = 1
-        End Select
-        
+        Dim _chkPRNspis As Integer
+        Dim _chkPRNNNb As Integer
+        If frmComputers.chkPCspis.Checked = False Then _chkPRNspis = 0 Else _chkPRNspis = 1
+        If frmComputers.chkPCNNb.Checked = False Then _chkPRNNNb = 0 Else _chkPRNNNb = 1
+       
         Dim sSQL As String
 
         Select Case frmComputers.EDT
 
             Case False
 
-                sSQL = "INSERT INTO kompy (NET_NAME,PSEVDONIM,FILIAL,MESTO,kabn,OTvetstvennyj,TELEPHONE,TIP_COMPA,INV_NO_SYSTEM,INV_NO_MONITOR,INV_NO_IBP,INV_NO_PRINTER,PCL,TIPtehn) VALUES ('" &
-                       frmComputers.txtSNAME.Text & "','" &
-                       frmComputers.txtPSEUDONIM.Text & "','" &
-                       frmComputers.cmbBranch.Text & "','" &
-                       frmComputers.cmbDepartment.Text & "','" &
-                       frmComputers.cmbOffice.Text & "','" &
-                       frmComputers.cmbResponsible.Text & "','" &
-                       frmComputers.txtPHONE.Text & "','" &
+                sSQL = "INSERT INTO kompy (TIP_COMPA,INV_NO_SYSTEM,INV_NO_MONITOR,INV_NO_IBP,INV_NO_PRINTER,PCL,TIPtehn) VALUES ('" &
                        frmComputers.cmbAppointment.Text & "','" &
                        frmComputers.txtSBSN.Text & "','" &
                        frmComputers.txtMSN.Text & "','" &
@@ -810,13 +832,6 @@ sAR:
             Case True
 
                 sSQL = "UPDATE kompy SET " &
-                        "NET_NAME='" & frmComputers.txtSNAME.Text & "'," &
-                        "PSEVDONIM='" & frmComputers.txtPSEUDONIM.Text & "'," &
-                        "FILIAL='" & frmComputers.cmbBranch.Text & "'," &
-                        "MESTO='" & frmComputers.cmbDepartment.Text & "'," &
-                        "kabn='" & frmComputers.cmbOffice.Text & "'," &
-                        "OTvetstvennyj='" & frmComputers.cmbResponsible.Text & "'," &
-                        "TELEPHONE='" & frmComputers.txtPHONE.Text & "'," &
                         "TIP_COMPA='" & frmComputers.cmbAppointment.Text & "'," &
                         "INV_NO_SYSTEM='" & frmComputers.txtSBSN.Text & "'," &
                         "INV_NO_MONITOR='" & frmComputers.txtMSN.Text & "'," &
@@ -830,6 +845,8 @@ sAR:
         End Select
 
         On Error Resume Next
+
+        Call UPDATE_INFORMARION(frmComputers.cmbBranch.Text, frmComputers.cmbDepartment.Text, frmComputers.cmbOffice.Text, frmComputers.txtPHONE.Text, frmComputers.txtSNAME.Text, frmComputers.txtPSEUDONIM.Text, frmComputers.cmbResponsible.Text, sSID)
 
         sSQL = "UPDATE kompy SET " &
                        "CPU1='" & frmComputers.cmbCPU1.Text & "'," &
@@ -1120,44 +1137,7 @@ sAR:
 
         DB7.Execute(sSQL)
 
-        ' .Fields("Garantia_Sist").Value = frmComputers.rbSist.Checked
-
-
-        Select Case _chkPRNspis
-
-            Case 1 Or True
-
-                sSQL = "UPDATE kompy SET " &
-           "SFAktNo=" & frmComputers.txtPCSfN.Text & "," &
-           "CenaRub='" & frmComputers.txtPCcash.Text & "'," &
-           "StoimRub='" & frmComputers.txtPCSumm.Text & "'," &
-           "Zaiavk='" & frmComputers.txtPCZay.Text & "'," &
-           "DataVVoda='" & frmComputers.dtPCdataVvoda.Value & "'," &
-           "Garantia_Sist=" & _chkGarant & "," &
-           "dataSF='" & frmComputers.dtPCSFdate.Value & "'," &
-           "Spisan=" & _chkPRNspis & "," &
-           "data_sp='" & frmComputers.dtSpisanie.Value & "'," &
-           "Balans=" & _chkPRNNNb & " WHERE id =" & sSID
-
-            Case Else
-
-                sSQL = "UPDATE kompy SET " &
-           "SFAktNo=" & frmComputers.txtPCSfN.Text & "," &
-           "CenaRub='" & frmComputers.txtPCcash.Text & "'," &
-           "StoimRub='" & frmComputers.txtPCSumm.Text & "'," &
-           "Zaiavk='" & frmComputers.txtPCZay.Text & "'," &
-           "DataVVoda='" & frmComputers.dtPCdataVvoda.Value & "'," &
-           "Garantia_Sist=" & _chkGarant & "," &
-           "dataSF='" & frmComputers.dtPCSFdate.Value & "'," &
-           "Spisan=" & _chkPRNspis & "," &
-           "Balans=" & _chkPRNNNb & " WHERE id =" & sSID
-
-
-        End Select
-
-
-
-        DB7.Execute(sSQL)
+        Call UPDATE_OPLATA(frmComputers.txtPCSfN.Text, frmComputers.txtPCcash.Text, frmComputers.txtPCSumm.Text, frmComputers.txtPCZay.Text, frmComputers.dtPCdataVvoda.Value, frmComputers.dtPCSFdate.Value, _chkPRNspis, _chkPRNNNb, frmComputers.dtOTHSpisanie.Value, sSID)
 
         Select Case frmComputers.EDT
 
@@ -1338,6 +1318,10 @@ err_:
                                     G1 = lstV.Items(intj).SubItems(8).Text
                             End Select
 
+                            Dim strSimbol1, strSimbol2 As String
+                            strSimbol1 = "'" : strSimbol2 = "."
+                            H1 = Replace(H1, strSimbol1, "")
+
                             If Not (RSExistsSoft(sSID, H1)) Then
 
                                 sSQL = "INSERT INTO SOFT_INSTALL (Soft,NomerSoftKomp,t_lic,L_key,d_p,d_o,Publisher,TIP,Id_Comp) VALUES ('" & H1 & "','" & intj + 1 & "','" & C1 & "','" & B1 & "','" & D1 & "','" & E1 & "','" & F1 & "','" & "" & "'," & sSID & ")"
@@ -1468,8 +1452,7 @@ err_:
     Public Sub User_Comp_ADD()
         On Error Resume Next
         Dim langfile As New IniFile(sLANGPATH)
-
-
+        
         If frmComputers.sCOUNT = 0 Then Exit Sub
         Dim Us1 As String
         Dim Us2 As String
@@ -1749,19 +1732,15 @@ sAR:
 
             Case False
 
-                sSQL = "INSERT INTO kompy (PRINTER_NAME_1,PRINTER_SN_1,Ser_N_SIS,PRINTER_PROIZV_1,port_1,OTvetstvennyj,INV_NO_PRINTER,FILIAL,MESTO,kabn,TELEPHONE,TIPtehn,NET_NAME,PSEVDONIM,PCL,SFAktNo,CenaRub,StoimRub,Zaiavk,DataVVoda,dataSF,Spisan,Balans,data_sp,[date],os,NET_IP_1,NET_MAC_1,port_2) VALUES ('" & frmComputers.cmbPRN.Text & "','" & frmComputers.txtPRNSN.Text & "','" & frmComputers.txtPRNSN.Text & "','" & frmComputers.PROiZV38.Text & "','" & frmComputers.cmbFormat.Text & "','" & frmComputers.cmbPRNotv.Text & "','" & frmComputers.txtPRNinnumber.Text & "','" & frmComputers.cmbPRNFil.Text & "','" & frmComputers.cmbPRNDepart.Text & "','" & frmComputers.cmbPRNOffice.Text & "','" & frmComputers.txtPRNphone.Text & "','" & TipTehn & "','" & frmComputers.cmbPRN.Text & "','" & frmComputers.cmbPRN.Text & "'," & unaPCL & ",'" & frmComputers.txtPRNSfN.Text & "','" & frmComputers.txtPRNcash.Text & "','" & frmComputers.txtPRNSumm.Text & "','" & frmComputers.txtPRNZay.Text & "','" & frmComputers.dtPRNdataVvoda.Value & "','" & frmComputers.dtPRNSFdate.Value & "'," & _chkPRNspis & "," & _chkPRNNNb & ",'" & frmComputers.dtPRNSpisanie.Value & "','" & Date.Today & "','" & frmComputers.cmbModCartr.Text & "','" & frmComputers.txtPrnIP.Text & "','" & frmComputers.txtPRNMAC.Text & "','" & frmComputers.cmbPRNConnect.Text & "')"
+                sSQL = "INSERT INTO kompy (PRINTER_NAME_1,PRINTER_SN_1,Ser_N_SIS,PRINTER_PROIZV_1,port_1,INV_NO_PRINTER,TIPtehn,PCL,[date],os,NET_IP_1,NET_MAC_1,port_2) VALUES ('" & frmComputers.cmbPRN.Text & "','" & frmComputers.txtPRNSN.Text & "','" & frmComputers.txtPRNSN.Text & "','" & frmComputers.PROiZV38.Text & "','" & frmComputers.cmbFormat.Text & "','" & "','" & frmComputers.txtPRNinnumber.Text & "','" & "','" & TipTehn & "','" & "'," & unaPCL & ",'" & Date.Today & "','" & frmComputers.cmbModCartr.Text & "','" & frmComputers.txtPrnIP.Text & "','" & frmComputers.txtPRNMAC.Text & "','" & frmComputers.cmbPRNConnect.Text & "')"
 
             Case True
 
-                sSQL = "UPDATE kompy SET PRINTER_NAME_1='" & frmComputers.cmbPRN.Text & "', PRINTER_SN_1='" & frmComputers.txtPRNSN.Text & "', Ser_N_SIS='" & frmComputers.txtPRNSN.Text & "', PRINTER_PROIZV_1='" & frmComputers.PROiZV38.Text & "', port_1='" & frmComputers.cmbFormat.Text & "', OTvetstvennyj='" & frmComputers.cmbPRNotv.Text & "', INV_NO_PRINTER='" & frmComputers.txtPRNinnumber.Text & "', FILIAL='" & frmComputers.cmbPRNFil.Text & "', MESTO='" & frmComputers.cmbPRNDepart.Text & "', kabn='" & frmComputers.cmbPRNOffice.Text & "', TELEPHONE='" & frmComputers.txtPRNphone.Text & "', NET_NAME='" & frmComputers.cmbPRN.Text & "', PSEVDONIM='" & frmComputers.cmbPRN.Text & "', PCL=" & unaPCL & ", SFAktNo='" & frmComputers.txtPRNSfN.Text & "', CenaRub='" & frmComputers.txtPRNcash.Text & "', StoimRub='" & frmComputers.txtPRNSumm.Text & "', Zaiavk='" & frmComputers.txtPRNZay.Text & "', DataVVoda='" & frmComputers.dtPRNdataVvoda.Value & "', dataSF='" & frmComputers.dtPRNSFdate.Value & "', Spisan=" & _chkPRNspis & ", Balans=" & _chkPRNNNb & ", data_sp='" & frmComputers.dtPRNSpisanie.Value & "', os='" & frmComputers.cmbModCartr.Text & "', NET_IP_1='" & frmComputers.txtPrnIP.Text & "',NET_MAC_1='" & frmComputers.txtPRNMAC.Text & "',port_2='" & frmComputers.cmbPRNConnect.Text & "' WHERE id =" & sSID
+                sSQL = "UPDATE kompy SET PRINTER_NAME_1='" & frmComputers.cmbPRN.Text & "', PRINTER_SN_1='" & frmComputers.txtPRNSN.Text & "', Ser_N_SIS='" & frmComputers.txtPRNSN.Text & "', PRINTER_PROIZV_1='" & frmComputers.PROiZV38.Text & "', port_1='" & frmComputers.cmbFormat.Text & "', INV_NO_PRINTER='" & frmComputers.txtPRNinnumber.Text & "', PCL=" & unaPCL & ", os='" & frmComputers.cmbModCartr.Text & "', NET_IP_1='" & frmComputers.txtPrnIP.Text & "',NET_MAC_1='" & frmComputers.txtPRNMAC.Text & "',port_2='" & frmComputers.cmbPRNConnect.Text & "' WHERE id =" & sSID
 
         End Select
 
         DB7.Execute(sSQL)
-
-        'rs = New Recordset
-        'rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-        'rs = Nothing
 
         Select Case frmComputers.EDT
 
@@ -1802,7 +1781,9 @@ sAR:
             sSID = frmComputers.sCOUNT
         End If
 
-        SAVE_GARANT(sSID, frmComputers.cmbPRNPostav, frmComputers.dtGPRNPr, frmComputers.dtGPRNok)
+        Call UPDATE_INFORMARION(frmComputers.cmbPRNFil.Text, frmComputers.cmbPRNDepart.Text, frmComputers.cmbPRNOffice.Text, frmComputers.txtPRNphone.Text, frmComputers.cmbPRN.Text, frmComputers.cmbPRN.Text, frmComputers.cmbPRNotv.Text, sSID)
+        Call UPDATE_OPLATA(frmComputers.txtPRNSfN.Text, frmComputers.txtPRNcash.Text, frmComputers.txtPRNSumm.Text, frmComputers.txtPRNZay.Text, frmComputers.dtPRNdataVvoda.Value, frmComputers.dtPRNSFdate.Value, _chkPRNspis, _chkPRNNNb, frmComputers.dtPRNSpisanie.Value, sSID)
+        Call SAVE_GARANT(sSID, frmComputers.cmbPRNPostav, frmComputers.dtGPRNPr, frmComputers.dtGPRNok)
 
         frmComputers.cmbPRN.BackColor = frmComputers.cmbPRN.BackColor
         frmComputers.cmbPRNFil.BackColor = frmComputers.cmbPRNFil.BackColor
@@ -1929,21 +1910,22 @@ sAR:
         If frmComputers.chkNETspis.Checked = False Then _chkPRNspis = 0 Else _chkPRNspis = 1
         If frmComputers.chkNETNNb.Checked = False Then _chkPRNNNb = 0 Else _chkPRNNNb = 1
 
+        Dim strSimbol1, strSimbol2 As String
+        strSimbol1 = "'" : strSimbol2 = "."
 
+        frmComputers.txtNetIsp.Text = Replace(frmComputers.txtNetIsp.Text, strSimbol1, "")
 
         Select Case frmComputers.EDT
 
             Case False
 
                 sSQL = "INSERT INTO kompy (PRINTER_NAME_1,PRINTER_SN_1,PRINTER_PROIZV_1,NET_IP_1,NET_MAC_1,PRINTER_SN_2,PRINTER_PROIZV_3,PRINTER_SN_3,PRINTER_NAME_4,PRINTER_PROIZV_4,PRINTER_SN_4," &
-                        "OTvetstvennyj,telephone,port_2,filial,mesto,kabn,port_1,Ser_N_SIS,TIPtehn,PSEVDONIM,NET_NAME,PCL,SFAktNo,CenaRub,StoimRub,Zaiavk,DataVVoda,dataSF,Spisan,Balans,data_sp) VALUES ('" &
+                        "port_2,port_1,Ser_N_SIS,TIPtehn,PCL) VALUES ('" &
                         frmComputers.cmbNetDev.Text & "','" & frmComputers.cmbDevNet.Text & "','" & frmComputers.PROiZV40.Text & "','" & frmComputers.txtNetIP.Text & "','" & frmComputers.txtNetMac.Text & "','" &
                         frmComputers.txtNetPort.Text & "','" & frmComputers.txtNetINN.Text & "','" & frmComputers.txtNetIsp.Text & "','" & frmComputers.cmbNetVkl.Text & "','" & frmComputers.cmbNetCable.Text & "','" &
-                        frmComputers.txtNetCableCat.Text & "','" & frmComputers.cmbNETotv.Text & "','" & frmComputers.txtNETphone.Text & "','" & frmComputers.txtNetNumberPorts.Text & "','" &
-                        frmComputers.cmbNETBranch.Text & "','" & frmComputers.cmbNetDepart.Text & "','" & frmComputers.cmbNETOffice.Text & "','" & frmComputers.txtNetSN.Text & "','" & frmComputers.txtNetSN.Text & "','" &
-                        TipTehn & "','" & frmComputers.cmbNetDev.Text & "','" & frmComputers.cmbDevNet.Text & "'," & unaPCL & ",'" & frmComputers.txtNETSfN.Text & "','" & frmComputers.txtNETcash.Text & "','" &
-                        frmComputers.txtNETSumm.Text & "','" & frmComputers.txtNETZay.Text & "','" & frmComputers.dtNETdataVvoda.Value & "','" & frmComputers.dtNETSFdate.Value & "'," & _chkPRNspis & "," &
-                        _chkPRNNNb & ",'" & frmComputers.dtNETSpisanie.Value & "')"
+                        frmComputers.txtNetCableCat.Text & "','" & "','" & frmComputers.txtNetNumberPorts.Text & "','" &
+                        frmComputers.txtNetSN.Text & "','" & frmComputers.txtNetSN.Text & "','" &
+                        TipTehn & "'," & unaPCL & ")"
 
             Case True
 
@@ -1954,29 +1936,18 @@ sAR:
                         "PRINTER_SN_2='" & frmComputers.txtNetPort.Text & "'," & "PRINTER_PROIZV_3='" & frmComputers.txtNetINN.Text & "'," &
                         "PRINTER_SN_3='" & frmComputers.txtNetIsp.Text & "'," & "PRINTER_NAME_4='" & frmComputers.cmbNetVkl.Text & "'," &
                         "PRINTER_PROIZV_4='" & frmComputers.cmbNetCable.Text & "'," & "PRINTER_SN_4='" & frmComputers.txtNetCableCat.Text & "'," &
-                        "OTvetstvennyj='" & frmComputers.cmbNETotv.Text & "'," & "telephone='" & frmComputers.txtNETphone.Text & "'," &
-                        "port_2='" & frmComputers.txtNetNumberPorts.Text & "'," & "filial='" & frmComputers.cmbNETBranch.Text & "'," &
-                        "mesto='" & frmComputers.cmbNetDepart.Text & "'," & "kabn='" & frmComputers.cmbNETOffice.Text & "'," &
+                        "port_2='" & frmComputers.txtNetNumberPorts.Text & "'," &
                         "port_1='" & frmComputers.txtNetSN.Text & "'," & "Ser_N_SIS='" & frmComputers.txtNetSN.Text & "'," &
-                        "TIPtehn='" & TipTehn & "'," & "PSEVDONIM='" & frmComputers.cmbNetDev.Text & "'," &
-                        "NET_NAME='" & frmComputers.cmbDevNet.Text & "'," & "PCL=" & unaPCL & "," &
-                        "SFAktNo='" & frmComputers.txtNETSfN.Text & "'," & "CenaRub='" & frmComputers.txtNETcash.Text & "'," &
-                        "StoimRub='" & frmComputers.txtNETSumm.Text & "'," & "Zaiavk='" & frmComputers.txtNETZay.Text & "'," &
-                        "DataVVoda='" & frmComputers.dtNETdataVvoda.Value & "'," & "dataSF='" & frmComputers.dtNETSFdate.Value & "'," &
-                        "Spisan=" & _chkPRNspis & "," & "Balans=" & _chkPRNNNb & "," &
-                        "data_sp='" & frmComputers.dtNETSpisanie.Value & "' WHERE id =" & sSID
+                        "TIPtehn='" & TipTehn & "'," & "PCL=" & unaPCL & " WHERE id =" & sSID
 
         End Select
 
         DB7.Execute(sSQL)
 
-        'rs = New Recordset
-        'rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-        'rs = Nothing
-
         Select Case frmComputers.EDT
 
             Case False
+
                 Select Case DB_N
 
                     Case "DSN"
@@ -2011,7 +1982,9 @@ sAR:
             sSID = frmComputers.sCOUNT
         End If
 
-        SAVE_GARANT(sSID, frmComputers.cmbNETPostav, frmComputers.dtGNETPr, frmComputers.dtGNETok)
+        Call UPDATE_INFORMARION(frmComputers.cmbNETBranch.Text, frmComputers.cmbNetDepart.Text, frmComputers.cmbNETOffice.Text, frmComputers.txtNETphone.Text, frmComputers.cmbDevNet.Text, frmComputers.cmbNetDev.Text, frmComputers.cmbNETotv.Text, sSID)
+        Call UPDATE_OPLATA(frmComputers.txtNETSfN.Text, frmComputers.txtNETcash.Text, frmComputers.txtNETSumm.Text, frmComputers.txtNETZay.Text, frmComputers.dtNETdataVvoda.Value, frmComputers.dtNETSFdate.Value, _chkPRNspis, _chkPRNNNb, frmComputers.dtNETSpisanie.Value, sSID)
+        Call SAVE_GARANT(sSID, frmComputers.cmbNETPostav, frmComputers.dtGNETPr, frmComputers.dtGNETok)
 
         frmComputers.cmbDevNet.BackColor = frmComputers.txtSBSN.BackColor
         frmComputers.cmbNETBranch.BackColor = frmComputers.txtSBSN.BackColor
@@ -3191,7 +3164,7 @@ Error_:
                 rs.Close()
                 rs = Nothing
 
-                sSQL = "SELECT * FROM kompy where PCL=" & sSID & " and tiptehn = 'Printer'"
+                sSQL = "SELECT id.PRINTER_NAME_1,PRINTER_SN_1,PRINTER_PROIZV_1,INV_NO_PRINTER,port_2 FROM kompy where PCL=" & sSID & " and tiptehn = 'Printer'"
 
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -4290,6 +4263,12 @@ Error_:
 
         On Error GoTo err_
 
+        Dim strSimbol1, strSimbol2 As String
+        strSimbol1 = "'" : strSimbol2 = "."
+
+        textNotes.Text = Replace(textNotes.Text, strSimbol1, "")
+        NotesMaster.Text = Replace(NotesMaster.Text, strSimbol1, "")
+
         If Len(textNotes.Text) = 0 Then Exit Sub
 
         Dim sSQL As String
@@ -4307,7 +4286,9 @@ Error_:
             uname = uname & "/" & Office.Text
         End If
 
-        Dim rs As Recordset
+        Dim dataSF1() As String
+
+        dataSF1 = Split(DateNotes.Value, " ")
 
         If btAdd.Text = langfile.GetString("frmComputers", "MSG30", "Добавить") Then
 
@@ -4316,13 +4297,9 @@ Error_:
                     langfile.GetString("frmComputers", "MSG45", "Добавление заметки для") & " " &
                     frmComputers.lstGroups.SelectedNode.Text)
 
-            sSQL = "INSERT INTO Zametki (NomerZamKomp,Master,Zametki,[Date],Id_Comp,Comp_name,Mesto_Compa) VALUES (" & lvsNotes.Items.Count + 1 & ",'" & NotesMaster.Text & "','" & textNotes.Text & "','" & DateNotes.Value & "'," & frmComputers.sCOUNT & ",'" & txtSNAME & "','" & uname & "')"
+            sSQL = "INSERT INTO Zametki (NomerZamKomp,Master,Zametki,[Date],Id_Comp,Comp_name,Mesto_Compa) VALUES (" & lvsNotes.Items.Count + 1 & ",'" & NotesMaster.Text & "','" & textNotes.Text & "','" & dataSF1(0) & "'," & frmComputers.sCOUNT & ",'" & txtSNAME & "','" & uname & "')"
             DB7.Execute(sSQL)
 
-            'rs = New Recordset
-            'rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-            '' rs.Close()
-            'rs = Nothing
 
         Else
             Call _
@@ -4330,11 +4307,7 @@ Error_:
                     langfile.GetString("frmComputers", "MSG46", "Редактирование заметки для") & " " &
                     frmComputers.lstGroups.SelectedNode.Text)
 
-            sSQL = "UPDATE Zametki SET Master='" & NotesMaster.Text & "',Zametki='" & textNotes.Text & "',[Date]='" & DateNotes.Value & "' WHERE id =" & frmComputers.zCOUNT
-            'rs = New Recordset
-            'rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-            '' rs.Close()
-            'rs = Nothing
+            sSQL = "UPDATE Zametki SET Master='" & NotesMaster.Text & "',Zametki='" & textNotes.Text & "',[Date]='" & dataSF1(0) & "' WHERE id =" & frmComputers.zCOUNT
 
             DB7.Execute(sSQL)
 
@@ -4421,6 +4394,12 @@ err_:
         End Select
 
         Dim sSQL As String
+
+        Dim strSimbol1, strSimbol2 As String
+        strSimbol1 = "'" : strSimbol2 = "."
+
+        frmComputers.Notesbrtxt.Text = Replace(frmComputers.Notesbrtxt.Text, strSimbol1, "")
+        frmComputers.cmbBRMaster.Text = Replace(frmComputers.cmbBRMaster.Text, strSimbol1, "")
 
         If frmComputers.btnBRNotesAdd.Text = langfile.GetString("frmComputers", "MSG42", "Сохранить") Then
 

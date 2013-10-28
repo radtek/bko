@@ -22,22 +22,6 @@
         'End If
     End Sub
 
-    'Function fillImlWithFilesFromDir(ByRef dirPath As String) As ImageList
-    '    Dim imlTemp As New ImageList
-    '    Dim dirFiles() As String = IO.Directory.GetFiles(dirPath)
-
-    '    For Each dirFile As String In dirFiles
-    '        For Each extension As String In allowedExtensions
-    '            If extension = IO.Path.GetExtension(dirFile) Then
-    '                imlTemp.Images.Add(Image.FromFile(dirFile))
-    '            End If
-    '        Next
-    '    Next
-
-    '    Return imlTemp
-    'End Function
-
-
     Public Sub CLEAR_CPL()
         frmGarCPL.cmbCPU1.Text = ""
         frmGarCPL.cmbCPU2.Text = ""
@@ -67,6 +51,33 @@
         dt.Value = Date.Today
         cmaster.Text = ""
         tNotes.Text = ""
+    End Sub
+
+    Public Sub DELETE_SIMBOL(ByVal ControlContainer As Object)
+
+
+        Dim strSimbol1, strSimbol2 As String
+        strSimbol1 = "'" : strSimbol2 = "."
+
+        Dim A1 As String
+        A1 = frmComputers.treebranche.Text
+
+        For Each Ctl As Object In ControlContainer.Controls
+            Try
+                If Not Ctl.Controls Is Nothing Then
+
+                    DELETE_SIMBOL(Ctl)
+
+                    If TypeOf Ctl Is TextBox Then Ctl.text = Replace(Ctl.text, strSimbol1, "")
+                    If TypeOf Ctl Is ComboBox Then Ctl.text = Replace(Ctl.text, strSimbol1, "")
+
+                End If
+
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
+        Next
+
     End Sub
 
     Public Sub ClearForm(ByVal ControlContainer As Object)
@@ -115,6 +126,682 @@
     End Sub
 
 
+    'Public Sub ClearForm(frmComputers)
+
+    '    ClearForm(frmComputers)
+
+    '    Exit Sub
+
+    '    'Dim C As Control
+    '    ''TableLayoutPanel4
+    '    ''TableLayoutPanel55
+
+    '    'frmComputers.lblSidPRN.Text = ""
+    '    'frmComputers.lblSidNET.Text = ""
+    '    'frmComputers.lblsIDOTH.Text = ""
+    '    'frmComputers.lblsID.Text = ""
+    '    ''TableLayoutPanel47
+
+
+    '    'For Each C In frmComputers.TableLayoutPanel47.Controls
+    '    '    If TypeOf C Is TextBox Then C.Text = ""
+    '    '    If TypeOf C Is ComboBox Then C.Text = ""
+    '    'Next C
+
+    '    'For Each C In frmComputers.TableLayoutPanel55.Controls
+    '    '    If TypeOf C Is TextBox Then C.Text = ""
+    '    '    If TypeOf C Is ComboBox Then C.Text = ""
+    '    'Next C
+
+    '    'For Each C In frmComputers.TableLayoutPanel57.Controls
+    '    '    If TypeOf C Is TextBox Then C.Text = ""
+    '    '    If TypeOf C Is ComboBox Then C.Text = ""
+    '    'Next C
+
+    '    'For Each C In frmComputers.TableLayoutPanel52.Controls
+    '    '    If TypeOf C Is TextBox Then C.Text = ""
+    '    '    If TypeOf C Is ComboBox Then C.Text = ""
+    '    'Next C
+
+    '    'For Each C In frmComputers.TableLayoutPanel21.Controls
+    '    '    If TypeOf C Is TextBox Then C.Text = ""
+    '    '    If TypeOf C Is ComboBox Then C.Text = ""
+    '    'Next C
+
+    '    'For Each C In frmComputers.TableLayoutPanel4.Controls
+    '    '    If TypeOf C Is TextBox Then C.Text = ""
+    '    '    If TypeOf C Is ComboBox Then C.Text = ""
+    '    'Next C
+
+    '    'For Each C In frmComputers.TableLayoutPanel51.Controls
+    '    '    If TypeOf C Is TextBox Then C.Text = ""
+    '    '    If TypeOf C Is ComboBox Then C.Text = ""
+    '    'Next C
+    '    'For Each C In frmComputers.TableLayoutPanel48.Controls
+    '    '    If TypeOf C Is TextBox Then C.Text = ""
+    '    '    If TypeOf C Is ComboBox Then C.Text = ""
+    '    'Next C
+    '    'For Each C In frmComputers.TableLayoutPanel49.Controls
+    '    '    If TypeOf C Is TextBox Then C.Text = ""
+    '    '    If TypeOf C Is ComboBox Then C.Text = ""
+    '    'Next C
+    '    'frmComputers.lblSidNET.Text = ""
+
+
+    '    'For Each C In frmComputers.TableLayoutPanel22.Controls
+    '    '    If TypeOf C Is TextBox Then C.Text = ""
+    '    '    If TypeOf C Is ComboBox Then C.Text = ""
+    '    'Next C
+
+    '    'For Each C In frmComputers.TableLayoutPanel20.Controls
+    '    '    If TypeOf C Is TextBox Then C.Text = ""
+    '    '    If TypeOf C Is ComboBox Then C.Text = ""
+    '    'Next C
+
+    '    ''TableLayoutPanel6
+    '    'For Each C In frmComputers.TableLayoutPanel6.Controls
+    '    '    If TypeOf C Is TextBox Then C.Text = ""
+    '    '    If TypeOf C Is ComboBox Then C.Text = ""
+    '    'Next C
+
+    '    'For Each C In frmComputers.TableLayoutPanel12.Controls
+    '    '    If TypeOf C Is TextBox Then C.Text = ""
+    '    '    If TypeOf C Is ComboBox Then C.Text = ""
+    '    'Next C
+
+    '    'For Each C In frmComputers.TableLayoutPanel18.Controls
+    '    '    If TypeOf C Is TextBox Then C.Text = ""
+    '    '    If TypeOf C Is ComboBox Then C.Text = ""
+    '    'Next C
+
+    '    'For Each C In frmComputers.TableLayoutPanel15.Controls
+    '    '    If TypeOf C Is TextBox Then C.Text = ""
+    '    '    If TypeOf C Is ComboBox Then C.Text = ""
+    '    'Next C
+
+    '    'For Each C In frmComputers.TableLayoutPanel9.Controls
+    '    '    If TypeOf C Is TextBox Then C.Text = ""
+    '    '    If TypeOf C Is ComboBox Then C.Text = ""
+    '    'Next C
+
+    '    'For Each C In frmComputers.TableLayoutPanel24.Controls
+    '    '    If TypeOf C Is TextBox Then C.Text = ""
+    '    '    If TypeOf C Is ComboBox Then C.Text = ""
+    '    'Next C
+
+    '    'For Each C In frmComputers.TableLayoutPanel25.Controls
+    '    '    If TypeOf C Is TextBox Then C.Text = ""
+    '    '    If TypeOf C Is ComboBox Then C.Text = ""
+    '    'Next C
+
+    '    'For Each C In frmComputers.TableLayoutPanel26.Controls
+    '    '    If TypeOf C Is TextBox Then C.Text = ""
+    '    '    If TypeOf C Is ComboBox Then C.Text = ""
+    '    'Next C
+
+    '    'For Each C In frmComputers.TableLayoutPanel27.Controls
+    '    '    If TypeOf C Is TextBox Then C.Text = ""
+    '    '    If TypeOf C Is ComboBox Then C.Text = ""
+    '    'Next C
+
+    '    'For Each C In frmComputers.TableLayoutPanel28.Controls
+    '    '    If TypeOf C Is TextBox Then C.Text = ""
+    '    '    If TypeOf C Is ComboBox Then C.Text = ""
+    '    'Next C
+
+    '    'For Each C In frmComputers.TableLayoutPanel29.Controls
+    '    '    If TypeOf C Is TextBox Then C.Text = ""
+    '    '    If TypeOf C Is ComboBox Then C.Text = ""
+    '    'Next C
+
+    '    'For Each C In frmComputers.TableLayoutPanel30.Controls
+    '    '    If TypeOf C Is TextBox Then C.Text = ""
+    '    '    If TypeOf C Is ComboBox Then C.Text = ""
+    '    'Next C
+
+    '    'For Each C In frmComputers.TableLayoutPanel31.Controls
+    '    '    If TypeOf C Is TextBox Then C.Text = ""
+    '    '    If TypeOf C Is ComboBox Then C.Text = ""
+    '    'Next C
+
+    '    'For Each C In frmComputers.TableLayoutPanel32.Controls
+    '    '    If TypeOf C Is TextBox Then C.Text = ""
+    '    '    If TypeOf C Is ComboBox Then C.Text = ""
+    '    'Next C
+
+    '    'For Each C In frmComputers.TableLayoutPanel33.Controls
+    '    '    If TypeOf C Is TextBox Then C.Text = ""
+    '    '    If TypeOf C Is ComboBox Then C.Text = ""
+    '    'Next C
+
+    '    'For Each C In frmComputers.TableLayoutPanel34.Controls
+    '    '    If TypeOf C Is TextBox Then C.Text = ""
+    '    '    If TypeOf C Is ComboBox Then C.Text = ""
+    '    'Next C
+
+    '    'For Each C In frmComputers.TableLayoutPanel35.Controls
+    '    '    If TypeOf C Is TextBox Then C.Text = ""
+    '    '    If TypeOf C Is ComboBox Then C.Text = ""
+    '    'Next C
+
+    '    'For Each C In frmComputers.TableLayoutPanel36.Controls
+    '    '    If TypeOf C Is TextBox Then C.Text = ""
+    '    '    If TypeOf C Is ComboBox Then C.Text = ""
+    '    'Next C
+
+    '    'For Each C In frmComputers.TableLayoutPanel37.Controls
+    '    '    If TypeOf C Is TextBox Then C.Text = ""
+    '    '    If TypeOf C Is ComboBox Then C.Text = ""
+    '    'Next C
+
+    '    'For Each C In frmComputers.TableLayoutPanel38.Controls
+    '    '    If TypeOf C Is TextBox Then C.Text = ""
+    '    '    If TypeOf C Is ComboBox Then C.Text = ""
+    '    'Next C
+
+    '    'For Each C In frmComputers.TableLayoutPanel39.Controls
+    '    '    If TypeOf C Is TextBox Then C.Text = ""
+    '    '    If TypeOf C Is ComboBox Then C.Text = ""
+    '    'Next C
+
+    '    'For Each C In frmComputers.TableLayoutPanel40.Controls
+    '    '    If TypeOf C Is TextBox Then C.Text = ""
+    '    '    If TypeOf C Is ComboBox Then C.Text = ""
+    '    'Next C
+
+    '    'For Each C In frmComputers.TableLayoutPanel41.Controls
+    '    '    If TypeOf C Is TextBox Then C.Text = ""
+    '    '    If TypeOf C Is ComboBox Then C.Text = ""
+    '    'Next C
+
+    '    'For Each C In frmComputers.TableLayoutPanel42.Controls
+    '    '    If TypeOf C Is TextBox Then C.Text = ""
+    '    '    If TypeOf C Is ComboBox Then C.Text = ""
+    '    'Next C
+
+    '    'For Each C In frmComputers.TableLayoutPanel43.Controls
+    '    '    If TypeOf C Is TextBox Then C.Text = ""
+    '    '    If TypeOf C Is ComboBox Then C.Text = ""
+    '    'Next C
+
+    '    'For Each C In frmComputers.TableLayoutPanel44.Controls
+    '    '    If TypeOf C Is TextBox Then C.Text = ""
+    '    '    If TypeOf C Is ComboBox Then C.Text = ""
+    '    'Next C
+
+    '    'For Each C In frmComputers.TableLayoutPanel45.Controls
+    '    '    If TypeOf C Is TextBox Then C.Text = ""
+    '    '    If TypeOf C Is ComboBox Then C.Text = ""
+    '    'Next C
+
+    '    'For Each C In frmComputers.TableLayoutPanel46.Controls
+    '    '    If TypeOf C Is TextBox Then C.Text = ""
+    '    '    If TypeOf C Is ComboBox Then C.Text = ""
+    '    'Next C
+
+    '    'For Each C In frmComputers.TableLayoutPanel6.Controls
+    '    '    If TypeOf C Is TextBox Then C.Text = ""
+    '    '    If TypeOf C Is ComboBox Then C.Text = ""
+    '    'Next C
+
+    '    'For Each C In frmComputers.TableLayoutPanel6.Controls
+    '    '    If TypeOf C Is TextBox Then C.Text = ""
+    '    '    If TypeOf C Is ComboBox Then C.Text = ""
+    '    'Next C
+
+
+    '    ''Пользователи
+    '    'For Each C In frmComputers.sSTAB1.TabPages(4).Controls
+    '    '    If TypeOf C Is TextBox Then C.Text = ""
+    '    '    If TypeOf C Is ComboBox Then C.Text = ""
+    '    'Next C
+
+    '    'For Each C In frmComputers.sSTAB1.TabPages(5).Controls
+    '    '    If TypeOf C Is TextBox Then C.Text = ""
+    '    '    If TypeOf C Is ComboBox Then C.Text = ""
+    '    'Next C
+
+
+    '    'C = Nothing
+
+
+    '    ''frmComputers.txtUserName.Text = ""
+    '    ''frmComputers.txtUserPass.Text = ""
+    '    ''frmComputers.txtUserEmail.Text = ""
+    '    ''frmComputers.txtUserEmailPwd.Text = ""
+    '    ''frmComputers.txtUserFIO.Text = ""
+    '    ''frmComputers.txtUserIcq.Text = ""
+    '    ''frmComputers.txtUserName.Text = ""
+
+    '    ''frmComputers.txtSNAME.Text = ""
+    '    ''frmComputers.txtPSEUDONIM.Text = ""
+    '    ''frmComputers.cmbBranch.Text = ""
+    '    ''frmComputers.cmbDepartment.Text = ""
+    '    ''frmComputers.cmbOffice.Text = ""
+    '    ''frmComputers.cmbResponsible.Text = ""
+    '    ''frmComputers.txtPHONE.Text = ""
+    '    ''frmComputers.cmbAppointment.Text = ""
+
+    '    'frmComputers.lstSoftware.Items.Clear()
+    '    'frmComputers.lstUsers.Items.Clear()
+    '    'frmComputers.lvMovement.Items.Clear()
+    '    'frmComputers.lvNotes.Items.Clear()
+    '    'frmComputers.lvRepair.Items.Clear()
+
+
+    '    ''Сетевое оборудование
+    '    'For Each C In frmComputers.sSTAB4.TabPages(0).Controls
+    '    '    If TypeOf C Is TextBox Then C.Text = ""
+    '    '    If TypeOf C Is ComboBox Then C.Text = ""
+    '    'Next C
+
+    '    'For Each C In frmComputers.gbNet.Controls
+    '    '    If TypeOf C Is TextBox Then C.Text = ""
+    '    '    If TypeOf C Is ComboBox Then C.Text = ""
+    '    'Next C
+
+    '    'For Each C In frmComputers.TableLayoutPanel48.Controls
+    '    '    If TypeOf C Is TextBox Then C.Text = ""
+    '    '    If TypeOf C Is ComboBox Then C.Text = ""
+    '    'Next C
+
+    '    'For Each C In frmComputers.gbNETNotes.Controls
+    '    '    If TypeOf C Is TextBox Then C.Text = ""
+    '    '    If TypeOf C Is ComboBox Then C.Text = ""
+    '    'Next C
+
+    '    'For Each C In frmComputers.TableLayoutPanel50.Controls
+    '    '    If TypeOf C Is TextBox Then C.Text = ""
+    '    '    If TypeOf C Is ComboBox Then C.Text = ""
+    '    'Next C
+
+    '    'For Each C In frmComputers.sSTAB4.TabPages(1).Controls
+    '    '    If TypeOf C Is TextBox Then C.Text = ""
+    '    '    If TypeOf C Is ComboBox Then C.Text = ""
+    '    'Next C
+
+    '    'For Each C In frmComputers.sSTAB4.TabPages(2).Controls
+    '    '    If TypeOf C Is TextBox Then C.Text = ""
+    '    '    If TypeOf C Is ComboBox Then C.Text = ""
+    '    'Next C
+
+    '    'For Each C In frmComputers.TableLayoutPanel71.Controls
+    '    '    If TypeOf C Is TextBox Then C.Text = ""
+    '    '    If TypeOf C Is ComboBox Then C.Text = ""
+    '    'Next C
+
+    '    'For Each C In frmComputers.sSTAB5.TabPages(2).Controls
+    '    '    If TypeOf C Is TextBox Then C.Text = ""
+    '    '    If TypeOf C Is ComboBox Then C.Text = ""
+    '    'Next C
+
+    '    'frmComputers.lvRepairNET.Items.Clear()
+    '    'frmComputers.lvNotesNET.Items.Clear()
+    '    'frmComputers.lvNetPort.Items.Clear()
+
+    '    ''Принтеры
+    '    'frmComputers.cmbPRN.Text = ""
+    '    'frmComputers.txtPRNSN.Text = ""
+    '    'frmComputers.PROiZV38.Text = ""
+    '    'frmComputers.txtPRNinnumber.Text = ""
+    '    'frmComputers.cmbFormat.Text = ""
+    '    'frmComputers.cmbPRNFil.Text = ""
+    '    'frmComputers.cmbPRNDepart.Text = ""
+    '    'frmComputers.cmbPRNOffice.Text = ""
+    '    'frmComputers.cmbModCartr.Text = ""
+    '    'frmComputers.cmbPRNotv.Text = ""
+    '    'frmComputers.txtPRNphone.Text = ""
+    '    'frmComputers.txtPrnIP.Text = ""
+    '    'frmComputers.txtPRNMAC.Text = ""
+
+
+    '    'frmComputers.txtOTHSfN.Text = ""
+    '    'frmComputers.txtOTHcash.Text = 0
+    '    'frmComputers.txtOTHSumm.Text = 0
+    '    'frmComputers.txtOTHZay.Text = ""
+
+    '    'frmComputers.dtOTHdataVvoda.Value = Date.Today.Date
+    '    'frmComputers.dtOTHSFdate.Value = Date.Today.Date
+
+    '    'frmComputers.chkOTHspis.Checked = 0
+    '    'frmComputers.chkOTHNNb.Checked = 0
+
+    '    'frmComputers.txtPCSfN.Text = ""
+    '    'frmComputers.txtPCcash.Text = 0
+    '    'frmComputers.txtPCSumm.Text = 0
+    '    'frmComputers.txtPCZay.Text = ""
+
+    '    'frmComputers.dtPCdataVvoda.Value = Date.Today.Date
+    '    'frmComputers.dtPCSFdate.Value = Date.Today.Date
+
+    '    'frmComputers.chkPCspis.Checked = 0
+    '    'frmComputers.chkPCNNb.Checked = 0
+
+    '    'frmComputers.txtPRNSfN.Text = ""
+    '    'frmComputers.txtPRNcash.Text = 0
+    '    'frmComputers.txtPRNSumm.Text = 0
+    '    'frmComputers.txtPRNZay.Text = ""
+
+    '    'frmComputers.dtPRNdataVvoda.Value = Date.Today.Date
+    '    'frmComputers.dtPRNSFdate.Value = Date.Today.Date
+
+    '    'frmComputers.chkPRNspis.Checked = 0
+    '    'frmComputers.chkPRNNNb.Checked = 0
+
+    '    'frmComputers.txtNETSfN.Text = ""
+    '    'frmComputers.txtNETcash.Text = 0
+    '    'frmComputers.txtNETSumm.Text = 0
+    '    'frmComputers.txtNETZay.Text = ""
+
+    '    'frmComputers.dtNETdataVvoda.Value = Date.Today.Date
+    '    'frmComputers.dtNETSFdate.Value = Date.Today.Date
+
+    '    'frmComputers.chkNETspis.Checked = 0
+    '    'frmComputers.chkNETNNb.Checked = 0
+
+    '    'frmComputers.cmbPRNPostav.Text = ""
+    '    'frmComputers.dtGPRNPr.Value = Date.Today.Date
+    '    'frmComputers.dtGPRNok.Value = Date.Today.Date
+
+    '    'frmComputers.cmbNETPostav.Text = ""
+    '    'frmComputers.dtGNETPr.Value = Date.Today.Date
+    '    'frmComputers.dtGNETok.Value = Date.Today.Date
+
+    '    'frmComputers.cmbOTHPostav.Text = ""
+    '    'frmComputers.dtGOTHPr.Value = Date.Today.Date
+    '    'frmComputers.dtGOTHok.Value = Date.Today.Date
+
+    '    'frmComputers.cmbOTH.Text = ""
+    '    'frmComputers.txtOTHSN.Text = ""
+    '    'frmComputers.PROiZV39.Text = ""
+    '    'frmComputers.txtOTHmemo.Text = ""
+    '    'frmComputers.cmbOTHFil.Text = ""
+    '    'frmComputers.cmbOTHDepart.Text = ""
+    '    'frmComputers.cmbOTHOffice.Text = ""
+    '    'frmComputers.cmbOTHotv.Text = ""
+    '    'frmComputers.txtOTHphone.Text = ""
+    '    'frmComputers.cmbOTHConnect.Text = ""
+    '    'frmComputers.txtOTHinnumber.Text = ""
+    '    'frmComputers.txtOTHIP.Text = ""
+    '    'frmComputers.txtOTHMAC.Text = ""
+    '    'frmComputers.txtMonDum.Text = ""
+    '    'frmComputers.cmbPCL.Text = ""
+    '    'frmComputers.cmbOTHPCL.Text = ""
+    '    'txtMonDum
+    'End Sub
+
+    'Public Sub COLOR_Form_For_Computer()
+
+
+    '    Dim C As Control
+
+
+    '    For Each C In frmComputers.TableLayoutPanel24.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
+
+    '    For Each C In frmComputers.TableLayoutPanel25.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
+
+    '    For Each C In frmComputers.TableLayoutPanel26.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
+
+    '    For Each C In frmComputers.TableLayoutPanel27.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
+
+    '    For Each C In frmComputers.TableLayoutPanel28.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
+
+    '    For Each C In frmComputers.TableLayoutPanel29.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
+
+    '    For Each C In frmComputers.TableLayoutPanel30.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
+
+    '    For Each C In frmComputers.TableLayoutPanel31.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
+
+    '    For Each C In frmComputers.TableLayoutPanel32.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
+
+    '    For Each C In frmComputers.TableLayoutPanel33.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
+
+    '    For Each C In frmComputers.TableLayoutPanel34.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
+
+    '    For Each C In frmComputers.TableLayoutPanel35.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
+
+    '    For Each C In frmComputers.TableLayoutPanel36.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
+
+    '    For Each C In frmComputers.TableLayoutPanel37.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
+
+    '    For Each C In frmComputers.TableLayoutPanel38.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
+
+    '    For Each C In frmComputers.TableLayoutPanel39.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
+
+    '    For Each C In frmComputers.TableLayoutPanel40.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
+
+    '    For Each C In frmComputers.TableLayoutPanel41.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
+
+    '    For Each C In frmComputers.TableLayoutPanel42.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
+
+    '    For Each C In frmComputers.TableLayoutPanel43.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
+
+    '    For Each C In frmComputers.TableLayoutPanel44.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
+
+    '    For Each C In frmComputers.TableLayoutPanel4.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
+
+    '    For Each C In frmComputers.TableLayoutPanel6.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
+
+
+    '    For Each C In frmComputers.TableLayoutPanel60.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
+
+    '    For Each C In frmComputers.TableLayoutPanel23.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
+
+    '    For Each C In frmComputers.TableLayoutPanel20.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
+
+    '    For Each C In frmComputers.TableLayoutPanel47.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
+
+    '    'Пользователи
+    '    For Each C In frmComputers.sSTAB1.TabPages(4).Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
+
+    '    For Each C In frmComputers.sSTAB1.TabPages(5).Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
+
+
+    '    C = Nothing
+
+
+    '    'frmComputers.txtUserName.BackColor = Color.White
+    '    'frmComputers.txtUserPass.BackColor = Color.White
+    '    'frmComputers.txtUserEmail.BackColor = Color.White
+    '    'frmComputers.txtUserEmailPwd.BackColor = Color.White
+    '    'frmComputers.txtUserFIO.BackColor = Color.White
+    '    'frmComputers.txtUserIcq.BackColor = Color.White
+    '    'frmComputers.txtUserName.BackColor = Color.White
+
+    '    'frmComputers.txtSNAME.BackColor = Color.White
+    '    'frmComputers.txtPSEUDONIM.BackColor = Color.White
+    '    'frmComputers.cmbBranch.BackColor = Color.White
+    '    'frmComputers.cmbDepartment.BackColor = Color.White
+    '    'frmComputers.cmbOffice.BackColor = Color.White
+    '    'frmComputers.cmbResponsible.BackColor = Color.White
+    '    'frmComputers.txtPHONE.BackColor = Color.White
+    '    'frmComputers.cmbAppointment.BackColor = Color.White
+
+
+    '    'Сетевое оборудование
+    '    For Each C In frmComputers.sSTAB4.TabPages(0).Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
+
+    '    For Each C In frmComputers.gbNet.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
+
+    '    For Each C In frmComputers.gbExNet.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
+
+    '    For Each C In frmComputers.gbNETNotes.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
+
+    '    For Each C In frmComputers.gbNetPortMapping.Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
+
+    '    For Each C In frmComputers.sSTAB4.TabPages(1).Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
+
+    '    For Each C In frmComputers.sSTAB4.TabPages(2).Controls
+    '        If TypeOf C Is TextBox Then C.BackColor = Color.White
+    '        If TypeOf C Is ComboBox Then C.BackColor = Color.White
+    '    Next C
+
+
+    '    'Принтеры
+    '    frmComputers.cmbPRN.BackColor = Color.White
+    '    frmComputers.txtPRNSN.BackColor = Color.White
+    '    frmComputers.PROiZV38.BackColor = Color.White
+    '    frmComputers.txtPRNinnumber.BackColor = Color.White
+    '    frmComputers.cmbFormat.BackColor = Color.White
+    '    frmComputers.cmbPRNFil.BackColor = Color.White
+    '    frmComputers.cmbPRNDepart.BackColor = Color.White
+    '    frmComputers.cmbPRNOffice.BackColor = Color.White
+    '    frmComputers.cmbModCartr.BackColor = Color.White
+    '    frmComputers.cmbPRNotv.BackColor = Color.White
+    '    frmComputers.txtPRNphone.BackColor = Color.White
+    '    frmComputers.txtPrnIP.BackColor = Color.White
+    '    frmComputers.txtPRNMAC.BackColor = Color.White
+
+
+    '    frmComputers.txtOTHSfN.BackColor = Color.White
+    '    frmComputers.txtOTHcash.BackColor = Color.White
+    '    frmComputers.txtOTHSumm.BackColor = Color.White
+    '    frmComputers.txtOTHZay.BackColor = Color.White
+
+
+    '    frmComputers.txtPCSfN.BackColor = Color.White
+    '    frmComputers.txtPCcash.BackColor = Color.White
+    '    frmComputers.txtPCSumm.BackColor = Color.White
+    '    frmComputers.txtPCZay.BackColor = Color.White
+
+
+    '    frmComputers.txtPRNSfN.BackColor = Color.White
+    '    frmComputers.txtPRNcash.BackColor = Color.White
+    '    frmComputers.txtPRNSumm.BackColor = Color.White
+    '    frmComputers.txtPRNZay.BackColor = Color.White
+
+
+    '    frmComputers.txtNETSfN.BackColor = Color.White
+    '    frmComputers.txtNETcash.BackColor = Color.White
+    '    frmComputers.txtNETSumm.BackColor = Color.White
+    '    frmComputers.txtNETZay.BackColor = Color.White
+
+    '    frmComputers.cmbPRNPostav.BackColor = Color.White
+
+    '    frmComputers.cmbNETPostav.BackColor = Color.White
+
+    '    frmComputers.cmbOTHPostav.BackColor = Color.White
+    '    frmComputers.cmbOTH.BackColor = Color.White
+    '    frmComputers.txtOTHSN.BackColor = Color.White
+    '    frmComputers.PROiZV39.BackColor = Color.White
+    '    frmComputers.txtOTHmemo.BackColor = Color.White
+    '    frmComputers.cmbOTHFil.BackColor = Color.White
+    '    frmComputers.cmbOTHDepart.BackColor = Color.White
+    '    frmComputers.cmbOTHOffice.BackColor = Color.White
+    '    frmComputers.cmbOTHotv.BackColor = Color.White
+    '    frmComputers.txtOTHphone.BackColor = Color.White
+    '    frmComputers.cmbOTHConnect.BackColor = Color.White
+    '    frmComputers.txtOTHinnumber.BackColor = Color.White
+    '    frmComputers.txtOTHIP.BackColor = Color.White
+    '    frmComputers.txtOTHMAC.BackColor = Color.White
+
+    'End Sub
+
     Public Function SaveUpdateLogDB(ByVal A As String, ByVal A2 As String)
         Dim strTime As String
         Dim strDate As String
@@ -127,23 +814,27 @@
             strTime = Format(TimeOfDay, "hh:mm")
         End With
 
-        Dim rs As Recordset
-        rs = New Recordset
+        Dim sSQL As String
+        sSQL = "INSERT INTO Update_Log (Id_Comp,Komcl_old,Kompl_new,[Date],[Time]) VALUES (" & frmComputers.sCOUNT & ",'" & A & "','" & A2 & "','" & Date.Today & "','" & strTime & "')"
+        DB7.Execute(sSQL)
 
-        rs.Open("SELECT * FROM Update_Log", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-        With rs
-            .AddNew()
 
-            .Fields("Id_Comp").Value = frmComputers.sCOUNT
-            .Fields("Komcl_old").Value = A
-            .Fields("Kompl_new").Value = A2
-            .Fields("Date").Value = Date.Today
-            .Fields("Time").Value = strTime
+        'Dim rs As Recordset
+        'rs = New Recordset
+        'rs.Open("SELECT * FROM Update_Log", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+        'With rs
+        '    .AddNew()
 
-            .Update()
-        End With
-        rs.Close()
-        rs = Nothing
+        '    .Fields("Id_Comp").Value = frmComputers.sCOUNT
+        '    .Fields("Komcl_old").Value = A
+        '    .Fields("Kompl_new").Value = A2
+        '    .Fields("Date").Value = Date.Today
+        '    .Fields("Time").Value = strTime
+
+        '    .Update()
+        'End With
+        'rs.Close()
+        'rs = Nothing
 
         'uLOG.Open "INSERT INTO Update_Log (Id_Comp, Komcl_old, Kompl_new, Date,Time) VALUES ('" & frmMain.nomerPCAbs & "', '" & A & "', '" & A2 & "', '" & strDate & "', '" & strTime & "')", DB7, adOpenDynamic, adLockOptimistic
 
@@ -238,28 +929,48 @@ Error_:
         If uname = 1 Then Exit Sub
 
 
-        Dim strDate As String
+        Dim strDate() As String
         Dim strTime As String
 
         strTime = Format(TimeOfDay, "hh:mm:ss")
+        strDate = Split(Date.Today, " ")
+        
+        Dim sSQL As String
 
-        strDate = Date.Today
+        Select Case DB_N
 
+            Case "DSN"
+                sSQL = "INSERT INTO T_Log (User_ID,Activity,Date,Time) VALUES ('" & uSERID & "-on-" & uPCNAME & "','" & Aktivitas & "','" & strDate(0) & "','" & strTime & "')"
+            Case "PostgreSQL"
+                sSQL = "INSERT INTO T_Log (User_ID,Activity,Date,Time) VALUES ('" & uSERID & "-on-" & uPCNAME & "','" & Aktivitas & "','" & strDate(0) & "','" & strTime & "')"
 
-        Dim rs As Recordset
-        rs = New Recordset
-        rs.Open("SELECT * FROM T_Log", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+            Case "MySQL"
 
-        With rs
-            .AddNew()
-            .Fields("User_ID").Value = uSERID & "-on-" & uPCNAME
-            .Fields("Activity").Value = Aktivitas
-            .Fields("Date").Value = Date.Today
-            .Fields("Time").Value = strTime
-            .Update()
-        End With
-        rs.Close()
-        rs = Nothing
+                sSQL = "INSERT INTO T_Log (User_ID,Activity,Date,Time) VALUES ('" & uSERID & "-on-" & uPCNAME & "','" & Aktivitas & "','" & strDate(0) & "','" & strTime & "')"
+
+            Case Else
+
+                sSQL = "INSERT INTO T_Log (User_ID,Activity,[Date],[Time]) VALUES ('" & uSERID & "-on-" & uPCNAME & "','" & Aktivitas & "','" & strDate(0) & "','" & strTime & "')"
+
+        End Select
+        
+        DB7.Execute(sSQL)
+        
+        'Dim rs As Recordset
+        'rs = New Recordset
+        'rs.Open("SELECT * FROM T_Log", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
+        'With rs
+        '    .AddNew()
+        '    .Fields("User_ID").Value = uSERID & "-on-" & uPCNAME
+        '    .Fields("Activity").Value = Aktivitas
+        '    .Fields("Date").Value = Date.Today
+        '    .Fields("Time").Value = strTime
+        '    .Update()
+        'End With
+        'rs.Close()
+        'rs = Nothing
+
     End Sub
 
     Public Sub COUNT_FIELDS(ByVal sID As String)
@@ -418,6 +1129,8 @@ Error_:
         rs.Close()
         rs = Nothing
 
+        sSQL = "0"
+
         Select Case TipTehn
 
             Case "PC"
@@ -462,6 +1175,7 @@ Error_:
                 rs.Close()
                 rs = Nothing
 
+
             Case Else
 
                 Select Case A1
@@ -493,6 +1207,8 @@ Error_:
 
             Case Else
 
+                If sSQL = "0" Then Exit Sub
+
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
@@ -516,7 +1232,8 @@ Error_:
 err_:
         MsgBox(Err.Description)
     End Sub
-    
+
+
     Public Sub LOAD_PCL_otv(ByVal sFIL As String, ByVal sDEP As String, ByVal sOFF As String, ByVal sCMB As ComboBox, ByVal tmpOTV As String, ByVal sID As Integer)
 
         If Len(sFIL) = 0 Then Exit Sub
@@ -704,7 +1421,7 @@ err_:
 
         Dim uname As Integer
 
-        If DB_N <> "MS Access" Then uname = 2 Else uname = 1
+        If DB_N <> "MS Access" Or DB_N <> "MS Access 2007" Then uname = 2 Else uname = 1
 
         On Error Resume Next
         For lngCounter = 0 To rs.Fields.Count - uname
