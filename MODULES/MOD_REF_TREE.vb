@@ -35,14 +35,14 @@ Module MOD_REF_TREE
                 '    "SELECT id, mesto, filial, tip_compa, tiptehn, PSEVDONIM, NET_NAME, kabn, Spisan, OS, PRINTER_NAME_4,balans FROM kompy WHERE filial ='" &
                 '    FILIAL1 & "' AND mesto ='" & OTDEL1 & "' AND kabn ='" & KABINET1 &
                 '    "'  AND PCL =0 ORDER BY PSEVDONIM, tiptehn"
-                sSQL = "SELECT id, mesto, filial, tip_compa, tiptehn, PSEVDONIM, NET_NAME, kabn, Spisan, OS, PRINTER_NAME_4,balans, (Select count(*) as t_n FROM Remont Where id_comp=kompy.id and zakryt = false) as rem FROM kompy WHERE filial ='" & FILIAL1 & "' AND mesto ='" & OTDEL1 & "' AND kabn ='" & KABINET1 & "'  AND PCL =0 ORDER BY PSEVDONIM, tiptehn"
+                sSQL = "SELECT id, mesto, filial, tip_compa, tiptehn, PSEVDONIM, NET_NAME, kabn, Spisan, OS, PRINTER_NAME_4,balans, (Select count(*) as t_n FROM Remont Where id_comp=kompy.id and zakryt = '0') as rem FROM kompy WHERE filial ='" & FILIAL1 & "' AND mesto ='" & OTDEL1 & "' AND kabn ='" & KABINET1 & "'  AND PCL =0 ORDER BY PSEVDONIM, tiptehn"
             Case 1
 
                 'sSQL4 =
                 '    "SELECT id, mesto, filial, tip_compa, tiptehn, PSEVDONIM, NET_NAME, kabn, Spisan, OS, PRINTER_NAME_4,balans FROM kompy WHERE filial ='" &
                 '    FILIAL1 & "' AND mesto ='" & OTDEL1 & "' AND kabn ='" & KABINET1 &
                 '    "' AND PCL =0 ORDER BY tiptehn, PSEVDONIM"
-                sSQL = "SELECT id, mesto, filial, tip_compa, tiptehn, PSEVDONIM, NET_NAME, kabn, Spisan, OS, PRINTER_NAME_4,balans, (Select count(*) as t_n FROM Remont Where id_comp=kompy.id and zakryt = false) as rem FROM kompy WHERE filial ='" & FILIAL1 & "' AND mesto ='" & OTDEL1 & "' AND kabn ='" & KABINET1 & "'  AND PCL =0 ORDER BY tiptehn, PSEVDONIM"
+                sSQL = "SELECT id, mesto, filial, tip_compa, tiptehn, PSEVDONIM, NET_NAME, kabn, Spisan, OS, PRINTER_NAME_4,balans, (Select count(*) as t_n FROM Remont Where id_comp=kompy.id and zakryt = '0') as rem FROM kompy WHERE filial ='" & FILIAL1 & "' AND mesto ='" & OTDEL1 & "' AND kabn ='" & KABINET1 & "'  AND PCL =0 ORDER BY tiptehn, PSEVDONIM"
 
         End Select
 
@@ -662,13 +662,13 @@ ERR1:
                             Case 0
 
                                 sSQL4 =
-                                    "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa,PRINTER_NAME_4,balans, (Select count(*) as t_n FROM Remont Where id_comp=kompy.id and zakryt = false) as rem FROM kompy WHERE PCL =" &
+                                    "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa,PRINTER_NAME_4,balans, (Select count(*) as t_n FROM Remont Where id_comp=kompy.id and zakryt = 0) as rem FROM kompy WHERE PCL =" &
                                     iD & " ORDER BY PSEVDONIM, tiptehn"
 
                             Case 1
 
                                 sSQL4 =
-                                    "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa,PRINTER_NAME_4,balans, (Select count(*) as t_n FROM Remont Where id_comp=kompy.id and zakryt = false) as rem FROM kompy WHERE PCL =" &
+                                    "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa,PRINTER_NAME_4,balans, (Select count(*) as t_n FROM Remont Where id_comp=kompy.id and zakryt = 0) as rem FROM kompy WHERE PCL =" &
                                     iD & " ORDER BY tiptehn, PSEVDONIM"
 
                         End Select
@@ -849,13 +849,13 @@ ERR1:
                                                     Case 0
 
                                                         sSQL4 =
-                                                            "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa,balans, (Select count(*) as t_n FROM Remont Where id_comp=kompy.id and zakryt = false) as rem FROM kompy WHERE PCL =" &
+                                                            "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa,balans, (Select count(*) as t_n FROM Remont Where id_comp=kompy.id and zakryt = 0) as rem FROM kompy WHERE PCL =" &
                                                             iD & " ORDER BY PSEVDONIM, tiptehn"
 
                                                     Case 1
 
                                                         sSQL4 =
-                                                            "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa,balans, (Select count(*) as t_n FROM Remont Where id_comp=kompy.id and zakryt = false) as rem FROM kompy WHERE PCL =" &
+                                                            "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa,balans, (Select count(*) as t_n FROM Remont Where id_comp=kompy.id and zakryt = 0) as rem FROM kompy WHERE PCL =" &
                                                             iD & " ORDER BY tiptehn, PSEVDONIM"
 
                                                 End Select
@@ -1230,13 +1230,13 @@ ERR1:
                             Case 0
 
                                 sSQL4 =
-                                    "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa,PRINTER_NAME_4,balans, (Select count(*) as t_n FROM Remont Where id_comp=kompy.id and zakryt = false) as rem FROM kompy WHERE PCL =" &
+                                    "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa,PRINTER_NAME_4,balans, (Select count(*) as t_n FROM Remont Where id_comp=kompy.id and zakryt = 0) as rem FROM kompy WHERE PCL =" &
                                     iD & " ORDER BY PSEVDONIM, tiptehn"
 
                             Case 1
 
                                 sSQL4 =
-                                    "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa,PRINTER_NAME_4,balans, (Select count(*) as t_n FROM Remont Where id_comp=kompy.id and zakryt = false) as rem FROM kompy WHERE PCL =" &
+                                    "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa,PRINTER_NAME_4,balans, (Select count(*) as t_n FROM Remont Where id_comp=kompy.id and zakryt = 0) as rem FROM kompy WHERE PCL =" &
                                     iD & " ORDER BY tiptehn, PSEVDONIM"
 
                         End Select
@@ -1510,13 +1510,13 @@ ERR1:
                             Case 0
 
                                 sSQL4 =
-                                    "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa,PRINTER_NAME_4,balans, (Select count(*) as t_n FROM Remont Where id_comp=kompy.id and zakryt = false) as rem FROM kompy WHERE PCL =" &
+                                    "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa,PRINTER_NAME_4,balans, (Select count(*) as t_n FROM Remont Where id_comp=kompy.id and zakryt = 0) as rem FROM kompy WHERE PCL =" &
                                     iD & " ORDER BY PSEVDONIM, tiptehn"
 
                             Case 1
 
                                 sSQL4 =
-                                    "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa,PRINTER_NAME_4,balans, (Select count(*) as t_n FROM Remont Where id_comp=kompy.id and zakryt = false) as rem FROM kompy WHERE PCL =" &
+                                    "SELECT id, tiptehn, PSEVDONIM, NET_NAME, Spisan, tip_compa,PRINTER_NAME_4,balans, (Select count(*) as t_n FROM Remont Where id_comp=kompy.id and zakryt = 0) as rem FROM kompy WHERE PCL =" &
                                     iD & " ORDER BY tiptehn, PSEVDONIM"
 
                         End Select
@@ -1812,10 +1812,10 @@ ERR1:
 
                             TEHNodeCNT.NodeFont = New Font(lstgroups.Font, 10)
                         Case "True"
-
+                            
                             TEHNodeCNT.NodeFont = New Font(lstgroups.Font, 10)
                         Case "-1"
-
+                            
                             TEHNodeCNT.NodeFont = New Font(lstgroups.Font, 10)
 
                         Case Else
@@ -2069,7 +2069,7 @@ ERR1:
                         objIniFile.WriteString("general", "Default", 0)
 
                         ' sSQL = "SELECT id, mesto, filial, tip_compa, tiptehn, PSEVDONIM, NET_NAME, kabn, Spisan, OS, PRINTER_NAME_4,balans FROM kompy WHERE id =" & sID '& " AND PCL =0"
-                        sSQL = "SELECT id, mesto, filial, tip_compa, tiptehn, PSEVDONIM, NET_NAME, kabn, Spisan, OS, PRINTER_NAME_4,balans, (Select count(*) as t_n FROM Remont Where id_comp=" & sID & " and zakryt = false) as rem FROM kompy WHERE id =" & sID
+                        sSQL = "SELECT id, mesto, filial, tip_compa, tiptehn, PSEVDONIM, NET_NAME, kabn, Spisan, OS, PRINTER_NAME_4,balans, (Select count(*) as t_n FROM Remont Where id_comp=" & sID & " and zakryt = 0) as rem FROM kompy WHERE id =" & sID
 
                         rs = New Recordset
                         rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -2130,7 +2130,7 @@ ERR1:
 
                 FIND_TREE_TAG(frmComputers.lstGroups.Nodes, "C|" & tmpPCL)
 
-                sSQL = "SELECT id, mesto, filial, tip_compa, tiptehn, PSEVDONIM, NET_NAME, kabn, Spisan, OS, PRINTER_NAME_4,balans, (Select count(*) as t_n FROM Remont Where id_comp=kompy.id and zakryt = false) as rem FROM kompy WHERE id =" & sID '& " AND PCL =0"
+                sSQL = "SELECT id, mesto, filial, tip_compa, tiptehn, PSEVDONIM, NET_NAME, kabn, Spisan, OS, PRINTER_NAME_4,balans, (Select count(*) as t_n FROM Remont Where id_comp=kompy.id and zakryt = 0) as rem FROM kompy WHERE id =" & sID '& " AND PCL =0"
 
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -2340,7 +2340,7 @@ err_:
             Case Else
                 Dim sID As Integer
                 rs = New Recordset
-                rs.Open("Select * from CONFIGURE", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                rs.Open("Select ORG from CONFIGURE", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 With rs
 

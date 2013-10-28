@@ -524,7 +524,7 @@ Public Class frmNetMagazin
                     Else
 
                         rs1 = New Recordset
-                        rs1.Open("SELECT * FROM kompy where id=" & sIDs, DB7, CursorTypeEnum.adOpenDynamic,
+                        rs1.Open("SELECT id,NET_NAME,OTvetstvennyj FROM kompy where id=" & sIDs, DB7, CursorTypeEnum.adOpenDynamic,
                                  LockTypeEnum.adLockOptimistic)
 
                         With rs1
@@ -644,7 +644,7 @@ Public Class frmNetMagazin
                     Else
 
                         rs1 = New Recordset
-                        rs1.Open("SELECT * FROM kompy where id=" & sIDs, DB7, CursorTypeEnum.adOpenDynamic,
+                        rs1.Open("SELECT id,NET_NAME,OTvetstvennyj FROM kompy where id=" & sIDs, DB7, CursorTypeEnum.adOpenDynamic,
                                  LockTypeEnum.adLockOptimistic)
 
                         With rs1
@@ -891,7 +891,7 @@ Public Class frmNetMagazin
                 Dim sTXT As String
 
                 rs1 = New Recordset
-                rs1.Open("SELECT * FROM kompy where id=" & z1, DB7, CursorTypeEnum.adOpenDynamic,
+                rs1.Open("SELECT id,NET_NAME,OTvetstvennyj FROM kompy where id=" & z1, DB7, CursorTypeEnum.adOpenDynamic,
                          LockTypeEnum.adLockOptimistic)
 
 
@@ -996,7 +996,7 @@ Public Class frmNetMagazin
 
 
                 rs1 = New Recordset
-                rs1.Open("SELECT * FROM kompy where id=" & z1, DB7, CursorTypeEnum.adOpenDynamic,
+                rs1.Open("SELECT id,NET_NAME,OTvetstvennyj FROM kompy where id=" & z1, DB7, CursorTypeEnum.adOpenDynamic,
                          LockTypeEnum.adLockOptimistic)
 
                 With rs1

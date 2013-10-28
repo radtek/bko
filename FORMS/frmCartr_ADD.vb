@@ -57,7 +57,7 @@
         If Counter > 0 Then
             cmbSostUstr.Items.Clear()
             rs = New Recordset
-            rs.Open("SELECT * FROM kompy", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+            rs.Open("SELECT TipTehn,PRINTER_NAME_1,filial,mesto,id FROM kompy", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
             With rs
                 .MoveFirst()
@@ -159,7 +159,7 @@
 
             Dim BASECOMP As Recordset
             BASECOMP = New Recordset
-            BASECOMP.Open("SELECT * FROM kompy", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+            BASECOMP.Open("SELECT PRINTER_NAME_1,filial,mesto,id FROM kompy", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
             With BASECOMP
 
                 If Len(cmbSostUstr.Text) = 0 Then

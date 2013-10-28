@@ -39,7 +39,7 @@
 
         If frmNetMagazin.sBDO_Pref = "ROOT" And frmNetMagazin.sBDO_SVT_count <> 0 Then
 
-            sSQL = "Select * from kompy where id=" & frmNetMagazin.sBDO_SVT_count
+            sSQL = "Select id,filial,mesto,kabn from kompy where id=" & frmNetMagazin.sBDO_SVT_count
 
             rs = New Recordset
             rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)

@@ -290,7 +290,7 @@
                          CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         BASECOMP = New Recordset
-        BASECOMP.Open("SELECT * FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+        BASECOMP.Open("SELECT MB_NAME,Mb_Chip,Mb_Proizvod,Mb_Id FROM kompy WHERE id =" & frmComputers.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
                       LockTypeEnum.adLockOptimistic)
         With BASECOMP
 

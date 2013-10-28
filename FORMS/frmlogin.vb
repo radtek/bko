@@ -9,6 +9,7 @@ Public Class frmLogin
         txtPassword.Focus()
         txtPassword.SelectAll()
         txtPassword.Focus()
+        
     End Sub
 
     Private Sub Find_LANG()
@@ -274,7 +275,7 @@ Public Class frmLogin
         T_User.Open("SELECT count(*) as t_n FROM T_User where Name ='" & cmbUser.Text & "'", DB7,
                     CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-        With T_User
+      With T_User
             sCOUNT = .Fields("t_n").Value
         End With
         T_User.Close()
