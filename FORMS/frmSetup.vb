@@ -985,7 +985,6 @@ Public Class frmSetup
             .Fields("PO").Value = chkPO.Checked
             .Fields("SCLAD").Value = chkWarehause.Checked
 
-
             .Update()
         End With
 
@@ -1043,17 +1042,27 @@ Public Class frmSetup
 
         Dim sSQL As String
 
+        Dim strSimbol1, strSimbol2 As String
+        strSimbol1 = "'" : strSimbol2 = "."
+        txtSA.Text = Replace(txtSA.Text, strSimbol1, "")
+        txtORG.Text = Replace(txtORG.Text, strSimbol1, "")
+        txtPRG.Text = Replace(txtPRG.Text, strSimbol1, "")
+        txtMail.Text = Replace(txtMail.Text, strSimbol1, "")
+        txtBigBoss.Text = Replace(txtBigBoss.Text, strSimbol1, "")
 
-        If us > 0 Then
-            sSQL = "UPDATE CONFIGURE SET " &
-                    "SISADM='" & txtSA.Text & "'," &
-                    "ORG='" & txtORG.Text & "'," &
-                    "Name_Prog='" & txtPRG.Text & "'," &
-                    "nr='" & txtMail.Text & "'," &
-                    "nomer_compa='" & txtBigBoss.Text
-        Else
-            sSQL = "INSERT INTO CONFIGURE (SISADM,ORG,Name_Prog,nr,nomer_compa) VALUES ('" & txtSA.Text & "','" & txtORG.Text & "','" & txtPRG.Text & "','" & txtMail.Text & "','" & txtBigBoss.Text & "')"
-        End If
+        Select Case us
+
+            Case 0
+                sSQL = "INSERT INTO CONFIGURE (SISADM,ORG,Name_Prog,nr,nomer_compa) VALUES ('" & txtSA.Text & "','" & txtORG.Text & "','" & txtPRG.Text & "','" & txtMail.Text & "','" & txtBigBoss.Text & "')"
+            Case Else
+                sSQL = "UPDATE CONFIGURE SET " &
+                   "SISADM='" & txtSA.Text & "'," &
+                   "ORG='" & txtORG.Text & "'," &
+                   "Name_Prog='" & txtPRG.Text & "'," &
+                   "nr='" & txtMail.Text & "'," &
+                   "nomer_compa='" & txtBigBoss.Text & "'"
+
+        End Select
 
         DB7.Execute(sSQL)
 

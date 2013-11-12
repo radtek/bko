@@ -559,11 +559,11 @@ sAR:
 
             Case False
 
-                sSQL = "INSERT INTO kompy (PRINTER_NAME_1,PRINTER_SN_1,Ser_N_SIS,PRINTER_PROIZV_1,port_1,INV_NO_PRINTER,TIPtehn,PCL) VALUES ('" & frmComputers.cmbOTH.Text & "','" & frmComputers.txtOTHSN.Text & "','" & frmComputers.txtOTHSN.Text & "','" & frmComputers.PROiZV39.Text & "','" & frmComputers.txtOTHmemo.Text & "','" & frmComputers.txtOTHinnumber.Text & "','" & "','" & TipTehn & "'," & unaPCL & ")"
+                sSQL = "INSERT INTO kompy (PRINTER_NAME_1,PRINTER_SN_1,Ser_N_SIS,PRINTER_PROIZV_1,port_1,INV_NO_PRINTER,TIPtehn,PCL,tip_compa) VALUES ('" & frmComputers.cmbOTH.Text & "','" & frmComputers.txtOTHSN.Text & "','" & frmComputers.txtOTHSN.Text & "','" & frmComputers.PROiZV39.Text & "','" & frmComputers.txtOTHmemo.Text & "','" & frmComputers.txtOTHinnumber.Text & "','" & TipTehn & "'," & unaPCL & ",'" & frmComputers.cmbOTHConnect.Text & "')"
 
             Case True
 
-                sSQL = "UPDATE kompy SET PRINTER_NAME_1='" & frmComputers.cmbOTH.Text & "', PRINTER_SN_1='" & frmComputers.txtOTHSN.Text & "', Ser_N_SIS='" & frmComputers.txtOTHSN.Text & "', PRINTER_PROIZV_1='" & frmComputers.PROiZV39.Text & "', port_1='" & frmComputers.txtOTHmemo.Text & "', INV_NO_PRINTER='" & frmComputers.txtOTHinnumber.Text & "', TIPtehn='" & TipTehn & "', PCL=" & unaPCL & " WHERE id =" & sSID
+                sSQL = "UPDATE kompy SET PRINTER_NAME_1='" & frmComputers.cmbOTH.Text & "', PRINTER_SN_1='" & frmComputers.txtOTHSN.Text & "', Ser_N_SIS='" & frmComputers.txtOTHSN.Text & "', PRINTER_PROIZV_1='" & frmComputers.PROiZV39.Text & "', port_1='" & frmComputers.txtOTHmemo.Text & "', INV_NO_PRINTER='" & frmComputers.txtOTHinnumber.Text & "', TIPtehn='" & TipTehn & "', PCL=" & unaPCL & " , tip_compa='" & frmComputers.cmbOTHConnect.Text & "' WHERE id =" & sSID
 
         End Select
 
@@ -631,6 +631,7 @@ sAR:
 
         Exit Sub
 Err_:
+        MsgBox(Err.Description)
     End Sub
 
     Public Sub Save_T(Optional ByVal sSID As String = "")
@@ -1132,8 +1133,9 @@ sAR:
             "PRINTER_NAME_3='" & frmComputers.cmbPrinters3.Text & "'," &
             "PRINTER_SN_3='" & frmComputers.txtPrint3SN.Text & "'," &
             "PORT_3='" & frmComputers.txtPrint3Port.Text & "'," &
-            "PRINTER_PROIZV_3='" & frmComputers.PROizV36.Text & "' " &
-                " WHERE id =" & sSID
+            "PRINTER_PROIZV_3='" & frmComputers.PROizV36.Text & "', " &
+            "Garantia_Sist=" & frmComputers.rbSist.Checked &
+                 " WHERE id =" & sSID
 
         DB7.Execute(sSQL)
 

@@ -17,7 +17,7 @@ Module MOD_REF_TREE
     Private tmpTAGkey As String = ""
 
     Private Sub FILING_FILIAL()
-        On Error Resume Next
+        On Error GoTo err_
 
         If Len(FILIAL1) = 0 Then Exit Sub
 
@@ -35,14 +35,14 @@ Module MOD_REF_TREE
                 '    "SELECT id, mesto, filial, tip_compa, tiptehn, PSEVDONIM, NET_NAME, kabn, Spisan, OS, PRINTER_NAME_4,balans FROM kompy WHERE filial ='" &
                 '    FILIAL1 & "' AND mesto ='" & OTDEL1 & "' AND kabn ='" & KABINET1 &
                 '    "'  AND PCL =0 ORDER BY PSEVDONIM, tiptehn"
-                sSQL = "SELECT id, mesto, filial, tip_compa, tiptehn, PSEVDONIM, NET_NAME, kabn, Spisan, OS, PRINTER_NAME_4,balans, (Select count(*) as t_n FROM Remont Where id_comp=kompy.id and zakryt = '0') as rem FROM kompy WHERE filial ='" & FILIAL1 & "' AND mesto ='" & OTDEL1 & "' AND kabn ='" & KABINET1 & "'  AND PCL =0 ORDER BY PSEVDONIM, tiptehn"
+                sSQL = "SELECT id, mesto, filial, tip_compa, tiptehn, PSEVDONIM, NET_NAME, kabn, Spisan, OS, PRINTER_NAME_4,balans, (Select count(*) as t_n FROM Remont Where id_comp=kompy.id and zakryt = 0) as rem FROM kompy WHERE filial ='" & FILIAL1 & "' AND mesto ='" & OTDEL1 & "' AND kabn ='" & KABINET1 & "'  AND PCL =0 ORDER BY PSEVDONIM, tiptehn"
             Case 1
 
                 'sSQL4 =
                 '    "SELECT id, mesto, filial, tip_compa, tiptehn, PSEVDONIM, NET_NAME, kabn, Spisan, OS, PRINTER_NAME_4,balans FROM kompy WHERE filial ='" &
                 '    FILIAL1 & "' AND mesto ='" & OTDEL1 & "' AND kabn ='" & KABINET1 &
                 '    "' AND PCL =0 ORDER BY tiptehn, PSEVDONIM"
-                sSQL = "SELECT id, mesto, filial, tip_compa, tiptehn, PSEVDONIM, NET_NAME, kabn, Spisan, OS, PRINTER_NAME_4,balans, (Select count(*) as t_n FROM Remont Where id_comp=kompy.id and zakryt = '0') as rem FROM kompy WHERE filial ='" & FILIAL1 & "' AND mesto ='" & OTDEL1 & "' AND kabn ='" & KABINET1 & "'  AND PCL =0 ORDER BY tiptehn, PSEVDONIM"
+                sSQL = "SELECT id, mesto, filial, tip_compa, tiptehn, PSEVDONIM, NET_NAME, kabn, Spisan, OS, PRINTER_NAME_4,balans, (Select count(*) as t_n FROM Remont Where id_comp=kompy.id and zakryt = 0) as rem FROM kompy WHERE filial ='" & FILIAL1 & "' AND mesto ='" & OTDEL1 & "' AND kabn ='" & KABINET1 & "'  AND PCL =0 ORDER BY tiptehn, PSEVDONIM"
 
         End Select
 
@@ -74,6 +74,11 @@ Module MOD_REF_TREE
         End With
         rs3.Close()
         rs3 = Nothing
+
+        Exit Sub
+err_:
+
+
     End Sub
 
     Public Sub RefFilTree(ByVal lstgroups As TreeView)
@@ -1747,6 +1752,8 @@ ERR1:
                                  ByVal Spisan As String, ByVal balans As String, ByVal L_NAME As String,
                                  ByVal sNUM As Decimal)
 
+        On Error Resume Next
+
         Dim TEHNodeCNT As New TreeNode(L_NAME, sNUM, sNUM)
         TEHNodeCNT.Tag = "C|" & sID
         TEHNodeCNT.Text = L_NAME
@@ -1780,6 +1787,8 @@ ERR1:
 
     Public Sub checkOther(ByVal lstgroups As TreeView, ByVal sID As Integer, ByVal TEHNodeCNT As TreeNode,
                                  ByVal Spisan As String, ByVal balans As String)
+
+        On Error Resume Next
 
         Select Case SPVisible
 

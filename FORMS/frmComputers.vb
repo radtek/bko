@@ -4540,9 +4540,13 @@ err_:
                 ExLoadParTwo(cmbOTH.Text, PROiZV39, "spr_zip")
 
             Case "OT"
-                'ExLoadParTwo(cmbOTH.Text, PROiZV39, .Fields("A").Value)
+                'Если указан справочник то берем данные от туда, если нет то ...
 
-                If Len(cmbOTHConnect.Text) = 0 Then
+                On Error Resume Next
+
+                PROiZV39.Text = ""
+
+                If Len(cmbOTHConnect.Text) <> 0 Then
 
                     Dim rs As Recordset 'Объявляем рекордсет
                     Dim sSQL As String 'Переменная, где будет размещён SQL запрос
@@ -4559,11 +4563,14 @@ err_:
 
                         End If
 
-
                     End With
 
                     rs.Close()
                     rs = Nothing
+
+                Else
+
+                    ExLoadParTwo(cmbOTH.Text, PROiZV39, "SPR_OTH_DEV")
 
                 End If
 

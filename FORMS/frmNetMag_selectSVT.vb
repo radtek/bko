@@ -635,7 +635,7 @@
 
         Dim rs As Recordset
         rs = New Recordset
-        rs.Open("SELECT NET_NAME,OTvetstvennyj FROM kompy where id=" & sCNT, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+        rs.Open("SELECT NET_NAME,OTvetstvennyj,TipTehn FROM kompy where id=" & sCNT, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
         Dim sTXT As String
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
