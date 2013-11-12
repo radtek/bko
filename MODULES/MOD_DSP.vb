@@ -1429,9 +1429,11 @@ err_:
             If rs.Fields(lngCounter).Name = "id" Or rs.Fields(lngCounter).Name = "ID" Then
 
             Else
-                rs_ = New Recordset
-                rs_.Open("UPDATE kompy SET " & rs.Fields(lngCounter).Name & "='' WHERE " & rs.Fields(lngCounter).Name & " IS NULL", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                rs_ = Nothing
+                'rs_ = New Recordset
+                'rs_.Open("UPDATE kompy SET " & rs.Fields(lngCounter).Name & "='' WHERE " & rs.Fields(lngCounter).Name & " IS NULL", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                'rs_ = Nothing
+
+                DB7.Execute("UPDATE kompy SET " & rs.Fields(lngCounter).Name & "='' WHERE " & rs.Fields(lngCounter).Name & " IS NULL")
 
             End If
         Next

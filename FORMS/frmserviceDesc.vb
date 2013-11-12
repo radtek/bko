@@ -893,7 +893,7 @@ Public Class frmserviceDesc
         nodeRoot.Nodes.Add(TempNode2)
 
 
-        sSQL = "SELECT * FROM Remont WHERE Id like '%" & sFindText & "%' or Date like '%" & sFindText &
+        sSQL = "SELECT * FROM Remont where  Date like '%" & sFindText &
                "%' or Id_Comp like '%" & sFindText & "%' or Remont like '%" & sFindText & "%' or Uroven like '%" &
                sFindText & "%' or Master like '%" & sFindText & "%' or NomerRemKomp like '%" & sFindText &
                "%' or Comp_Name like '%" & sFindText & "%' or Mesto_Compa like '%" & sFindText & "%' or vip like '%" &
@@ -911,7 +911,7 @@ Public Class frmserviceDesc
         'sFindText = txtSearch.Text
 
         'sSQL3 = "SELECT * FROM kompy order by PSEVDONIM, filial"
-        sSQL3 = "SELECT * FROM kompy where ID like '%" & sFindText & "%' or CPU1 like '%" & sFindText &
+        sSQL3 = "SELECT * FROM kompy where  CPU1 like '%" & sFindText &
                 "%' or CPUmhz1 like '%" & sFindText & "%' or CPU2 like '%" & sFindText & "%' or CPUmhz2 like '%" &
                 sFindText & "%' or CPU3 like '%" & sFindText & "%' or CPUmhz3 like '%" & sFindText &
                 "%' or CPU4 like '%" & sFindText & "%' or CPUmhz4 like '%" & sFindText & "%' or Mb_Name like '%" & sFindText &

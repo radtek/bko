@@ -300,7 +300,17 @@ Public Class frmMain
 
         End Select
 
-        LBL_SUBD.Text = unamDB & " - " & Base_Name
+        Select Case unamDB
+
+            Case "MS Access"
+                LBL_SUBD.Text = unamDB & " - " & Base_Name
+            Case "MS Access 2007"
+                LBL_SUBD.Text = unamDB & " - " & Base_Name
+            Case Else
+                LBL_SUBD.Text = unamDB & " - " & DBtabl
+
+        End Select
+
         LBL_USER.Text = UserNames & "/" & uLevel
 
     End Sub

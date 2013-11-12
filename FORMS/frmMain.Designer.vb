@@ -158,7 +158,7 @@ Partial Class frmMain
         Me.MenuStrip.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip.MdiWindowListItem = Me.WindowsMenu
         Me.MenuStrip.Name = "MenuStrip"
-        Me.MenuStrip.Size = New System.Drawing.Size(984, 24)
+        Me.MenuStrip.Size = New System.Drawing.Size(1008, 24)
         Me.MenuStrip.TabIndex = 9
         Me.MenuStrip.Text = "MenuStrip"
         '
@@ -545,10 +545,10 @@ Partial Class frmMain
         'StatusStrip
         '
         Me.StatusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1, Me.LBL_STAT_1, Me.ToolStripStatusLabel2, Me.LBL_STAT_2, Me.LBL_STAT_3, Me.ToolStripStatusLabel3, Me.lblShed, Me.lblSplet, Me.lblRem, Me.lblMassLoadEverest, Me.ToolStripStatusLabel4, Me.LBL_SUBD, Me.DB_USE, Me.ToolStripStatusLabel5, Me.LBL_USER})
-        Me.StatusStrip.Location = New System.Drawing.Point(0, 638)
+        Me.StatusStrip.Location = New System.Drawing.Point(0, 706)
         Me.StatusStrip.Name = "StatusStrip"
         Me.StatusStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.ManagerRenderMode
-        Me.StatusStrip.Size = New System.Drawing.Size(984, 24)
+        Me.StatusStrip.Size = New System.Drawing.Size(1008, 24)
         Me.StatusStrip.TabIndex = 11
         Me.StatusStrip.Text = "StatusStrip"
         '
@@ -560,8 +560,8 @@ Partial Class frmMain
         'LBL_STAT_1
         '
         Me.LBL_STAT_1.BorderSides = CType((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) _
-            Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) _
-            Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom), System.Windows.Forms.ToolStripStatusLabelBorderSides)
+                    Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) _
+                    Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom), System.Windows.Forms.ToolStripStatusLabelBorderSides)
         Me.LBL_STAT_1.Name = "LBL_STAT_1"
         Me.LBL_STAT_1.Size = New System.Drawing.Size(127, 19)
         Me.LBL_STAT_1.Text = "Техники всего: __ шт."
@@ -575,7 +575,7 @@ Partial Class frmMain
         'LBL_STAT_2
         '
         Me.LBL_STAT_2.BorderSides = CType(((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) _
-            Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom), System.Windows.Forms.ToolStripStatusLabelBorderSides)
+                    Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom), System.Windows.Forms.ToolStripStatusLabelBorderSides)
         Me.LBL_STAT_2.Name = "LBL_STAT_2"
         Me.LBL_STAT_2.Size = New System.Drawing.Size(68, 19)
         Me.LBL_STAT_2.Text = "Техники в:"
@@ -583,7 +583,7 @@ Partial Class frmMain
         'LBL_STAT_3
         '
         Me.LBL_STAT_3.BorderSides = CType(((System.Windows.Forms.ToolStripStatusLabelBorderSides.Top Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) _
-            Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom), System.Windows.Forms.ToolStripStatusLabelBorderSides)
+                    Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom), System.Windows.Forms.ToolStripStatusLabelBorderSides)
         Me.LBL_STAT_3.Name = "LBL_STAT_3"
         Me.LBL_STAT_3.Size = New System.Drawing.Size(43, 19)
         Me.LBL_STAT_3.Text = "__ шт."
@@ -597,8 +597,8 @@ Partial Class frmMain
         'lblShed
         '
         Me.lblShed.BorderSides = CType((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) _
-            Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) _
-            Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom), System.Windows.Forms.ToolStripStatusLabelBorderSides)
+                    Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) _
+                    Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom), System.Windows.Forms.ToolStripStatusLabelBorderSides)
         Me.lblShed.DoubleClickEnabled = True
         Me.lblShed.Name = "lblShed"
         Me.lblShed.Size = New System.Drawing.Size(92, 19)
@@ -613,8 +613,8 @@ Partial Class frmMain
         'lblRem
         '
         Me.lblRem.BorderSides = CType((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) _
-            Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) _
-            Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom), System.Windows.Forms.ToolStripStatusLabelBorderSides)
+                    Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) _
+                    Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom), System.Windows.Forms.ToolStripStatusLabelBorderSides)
         Me.lblRem.DoubleClickEnabled = True
         Me.lblRem.Name = "lblRem"
         Me.lblRem.Size = New System.Drawing.Size(52, 19)
@@ -638,8 +638,8 @@ Partial Class frmMain
         'LBL_SUBD
         '
         Me.LBL_SUBD.BorderSides = CType((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) _
-            Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) _
-            Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom), System.Windows.Forms.ToolStripStatusLabelBorderSides)
+                    Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) _
+                    Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom), System.Windows.Forms.ToolStripStatusLabelBorderSides)
         Me.LBL_SUBD.Name = "LBL_SUBD"
         Me.LBL_SUBD.Size = New System.Drawing.Size(41, 19)
         Me.LBL_SUBD.Text = "СУБД"
@@ -662,8 +662,8 @@ Partial Class frmMain
         'LBL_USER
         '
         Me.LBL_USER.BorderSides = CType((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) _
-            Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) _
-            Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom), System.Windows.Forms.ToolStripStatusLabelBorderSides)
+                    Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) _
+                    Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom), System.Windows.Forms.ToolStripStatusLabelBorderSides)
         Me.LBL_USER.Name = "LBL_USER"
         Me.LBL_USER.Size = New System.Drawing.Size(88, 19)
         Me.LBL_USER.Text = "Пользователь"
@@ -675,7 +675,7 @@ Partial Class frmMain
         Me.ToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripDropDownButton1, Me.NewToolStripButton, Me.ToolStripSeparator1, Me.SaveInfTehButton, Me.ToolStripSeparator2, Me.ArhToolZipbutton, Me.ToolStripButton1})
         Me.ToolStrip.Location = New System.Drawing.Point(0, 24)
         Me.ToolStrip.Name = "ToolStrip"
-        Me.ToolStrip.Size = New System.Drawing.Size(984, 25)
+        Me.ToolStrip.Size = New System.Drawing.Size(1008, 25)
         Me.ToolStrip.TabIndex = 13
         Me.ToolStrip.Text = "ToolStrip"
         '
@@ -691,7 +691,7 @@ Partial Class frmMain
         '
         Me.ЗагрузитьИзEverestiniToolStripMenuItem.Name = "ЗагрузитьИзEverestiniToolStripMenuItem"
         Me.ЗагрузитьИзEverestiniToolStripMenuItem.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Alt) _
-            Or System.Windows.Forms.Keys.E), System.Windows.Forms.Keys)
+                    Or System.Windows.Forms.Keys.E), System.Windows.Forms.Keys)
         Me.ЗагрузитьИзEverestiniToolStripMenuItem.Size = New System.Drawing.Size(270, 22)
         Me.ЗагрузитьИзEverestiniToolStripMenuItem.Text = "Загрузить из Everest (ini)"
         '
@@ -699,7 +699,7 @@ Partial Class frmMain
         '
         Me.ЗагрузитьИзASTRA32ToolStripMenuItem.Name = "ЗагрузитьИзASTRA32ToolStripMenuItem"
         Me.ЗагрузитьИзASTRA32ToolStripMenuItem.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Alt) _
-            Or System.Windows.Forms.Keys.A), System.Windows.Forms.Keys)
+                    Or System.Windows.Forms.Keys.A), System.Windows.Forms.Keys)
         Me.ЗагрузитьИзASTRA32ToolStripMenuItem.Size = New System.Drawing.Size(270, 22)
         Me.ЗагрузитьИзASTRA32ToolStripMenuItem.Text = "Загрузить из ASTRA32"
         '
@@ -707,7 +707,7 @@ Partial Class frmMain
         '
         Me.ЗагрузитьЧерезWMIToolStripMenuItem.Name = "ЗагрузитьЧерезWMIToolStripMenuItem"
         Me.ЗагрузитьЧерезWMIToolStripMenuItem.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Alt) _
-            Or System.Windows.Forms.Keys.W), System.Windows.Forms.Keys)
+                    Or System.Windows.Forms.Keys.W), System.Windows.Forms.Keys)
         Me.ЗагрузитьЧерезWMIToolStripMenuItem.Size = New System.Drawing.Size(270, 22)
         Me.ЗагрузитьЧерезWMIToolStripMenuItem.Text = "Загрузить через WMI"
         '
@@ -722,7 +722,7 @@ Partial Class frmMain
         '
         Me.HANDINSERTToolStripMenuItem.Name = "HANDINSERTToolStripMenuItem"
         Me.HANDINSERTToolStripMenuItem.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Alt) _
-            Or System.Windows.Forms.Keys.R), System.Windows.Forms.Keys)
+                    Or System.Windows.Forms.Keys.R), System.Windows.Forms.Keys)
         Me.HANDINSERTToolStripMenuItem.Size = New System.Drawing.Size(270, 22)
         Me.HANDINSERTToolStripMenuItem.Text = "Ручной ввод"
         '
@@ -746,7 +746,7 @@ Partial Class frmMain
         '
         Me.СетевоеОборудованиеToolStripMenuItem.Name = "СетевоеОборудованиеToolStripMenuItem"
         Me.СетевоеОборудованиеToolStripMenuItem.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Alt) _
-            Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
+                    Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
         Me.СетевоеОборудованиеToolStripMenuItem.Size = New System.Drawing.Size(270, 22)
         Me.СетевоеОборудованиеToolStripMenuItem.Text = "Сетевое оборудование"
         '
@@ -934,7 +934,7 @@ Partial Class frmMain
         '
         Me.ДругоеОборудованиеToolStripMenuItem.Name = "ДругоеОборудованиеToolStripMenuItem"
         Me.ДругоеОборудованиеToolStripMenuItem.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Alt) _
-            Or System.Windows.Forms.Keys.O), System.Windows.Forms.Keys)
+                    Or System.Windows.Forms.Keys.O), System.Windows.Forms.Keys)
         Me.ДругоеОборудованиеToolStripMenuItem.Size = New System.Drawing.Size(270, 22)
         Me.ДругоеОборудованиеToolStripMenuItem.Text = "Другое оборудование"
         '
@@ -982,14 +982,14 @@ Partial Class frmMain
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(984, 662)
+        Me.ClientSize = New System.Drawing.Size(1008, 730)
         Me.Controls.Add(Me.ToolStrip)
         Me.Controls.Add(Me.MenuStrip)
         Me.Controls.Add(Me.StatusStrip)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.IsMdiContainer = True
         Me.MainMenuStrip = Me.MenuStrip
-        Me.MinimumSize = New System.Drawing.Size(1000, 700)
+        Me.MinimumSize = New System.Drawing.Size(1024, 768)
         Me.Name = "frmMain"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "БКО 1.7"

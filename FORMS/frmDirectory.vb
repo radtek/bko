@@ -2802,6 +2802,8 @@ Public Class frmDirectory
 
                 sPAR1 = cmbIcon.Text
                 sPAR2 = cmb1.Text
+                If Len(sPAR2) = 0 Then sPAR2 = "SPR_OTH_DEV"
+
 
                 If chkCont.Checked = True Then sPAR3 = 1 Else sPAR3 = ""
 
@@ -2925,6 +2927,11 @@ Public Class frmDirectory
             End Select
 
         Else
+
+            If Len(sPAR1) = 0 Then sPAR1 = "-"
+            If Len(sPAR2) = 0 Then sPAR2 = "-"
+            If Len(sPAR3) = 0 Then sPAR3 = "-"
+            If Len(sPRIM) = 0 Then sPRIM = "-"
 
             Select Case eDTI
 
