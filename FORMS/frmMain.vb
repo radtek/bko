@@ -20,7 +20,7 @@ Public Class frmMain
         Me.Show()
        ' My.Application.DoEvents()
 
-        If unamDB <> "MS Access" Or unamDB <> "MS Access 2007" Then ArhToolZipbutton.Enabled = False
+        If unamDB <> "MS Access" And unamDB <> "MS Access 2007" Then ArhToolZipbutton.Enabled = False
 
         Call SECUR_LEVEL()
 
