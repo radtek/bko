@@ -72,6 +72,10 @@
 
             Case 0
 
+                sSQL = "INSERT INTO Zametki (Master,Zametki,[Date],Id_Comp,Comp_name,Mesto_Compa) VALUES ('" & UserNames & "','" & "Смена ответственного c " & tmpTXT & " на " & tmpTXT2 & "','" & DateAndTime.Today & "'," & frmComputers.sCOUNT & "," & "''" & ",'" & sFIALIAL & "')"
+                DB7.Execute(sSQL)
+
+
             Case Else
 
                 DB7.Execute("UPDATE kompy SET OTvetstvennyj='" & tmpTXT2 & "' WHERE PCL=" & frmComputers.sCOUNT)
@@ -1734,7 +1738,20 @@ sAR:
 
             Case False
 
-                sSQL = "INSERT INTO kompy (PRINTER_NAME_1,PRINTER_SN_1,Ser_N_SIS,PRINTER_PROIZV_1,port_1,INV_NO_PRINTER,TIPtehn,PCL,[date],os,NET_IP_1,NET_MAC_1,port_2) VALUES ('" & frmComputers.cmbPRN.Text & "','" & frmComputers.txtPRNSN.Text & "','" & frmComputers.txtPRNSN.Text & "','" & frmComputers.PROiZV38.Text & "','" & frmComputers.cmbFormat.Text & "','" & "','" & frmComputers.txtPRNinnumber.Text & "','" & "','" & TipTehn & "','" & "'," & unaPCL & ",'" & Date.Today & "','" & frmComputers.cmbModCartr.Text & "','" & frmComputers.txtPrnIP.Text & "','" & frmComputers.txtPRNMAC.Text & "','" & frmComputers.cmbPRNConnect.Text & "')"
+                sSQL = "INSERT INTO kompy (PRINTER_NAME_1,PRINTER_SN_1,Ser_N_SIS,PRINTER_PROIZV_1,port_1,INV_NO_PRINTER,TIPtehn,PCL,[date],os,NET_IP_1,NET_MAC_1,port_2) VALUES ('" &
+                    frmComputers.cmbPRN.Text & "','" &
+                    frmComputers.txtPRNSN.Text & "','" &
+                    frmComputers.txtPRNSN.Text & "','" &
+                    frmComputers.PROiZV38.Text & "','" &
+                    frmComputers.cmbFormat.Text & "','" &
+                    frmComputers.txtPRNinnumber.Text & "','" &
+                    TipTehn & "'," &
+                    unaPCL & ",'" &
+                    Date.Today & "','" &
+                    frmComputers.cmbModCartr.Text & "','" &
+                    frmComputers.txtPrnIP.Text & "','" &
+                    frmComputers.txtPRNMAC.Text & "','" &
+                    frmComputers.cmbPRNConnect.Text & "')"
 
             Case True
 

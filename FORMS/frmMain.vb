@@ -719,120 +719,47 @@ error_Renamed:
 
         If DATAB = False Then Exit Sub
 
-        Dim rs As ADODB.Recordset
-        rs = New ADODB.Recordset
 
-        'On Error GoTo error
-        On Error Resume Next
+        If MsgBox("Будет очищена база" & vbCrLf & "Хотите продолжить?", MsgBoxStyle.YesNo, ProGramName) = MsgBoxResult.Yes Then
 
-        rs.Open("DELETE FROM T_Log", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-        rs = Nothing
-        rs = New ADODB.Recordset
-        rs.Open("DELETE FROM Garantia_sis", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-        rs = Nothing
-        rs = New ADODB.Recordset
-        rs.Open("DELETE FROM garant_comp", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-        rs = Nothing
-        rs = New ADODB.Recordset
-        rs.Open("DELETE FROM SPR_Master", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-        rs = Nothing
+            'On Error GoTo error
+            On Error Resume Next
 
-        rs = New ADODB.Recordset
-        rs.Open("DELETE FROM remonty_plus", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-        rs = Nothing
-        rs = New ADODB.Recordset
-        rs.Open("DELETE FROM Remont", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-        rs = Nothing
+            DB7.Execute("DELETE FROM T_Log")
+            DB7.Execute("DELETE FROM Garantia_sis")
+            DB7.Execute("DELETE FROM garant_comp")
+            DB7.Execute("DELETE FROM SPR_Master")
+            DB7.Execute("DELETE FROM remonty_plus")
+            DB7.Execute("DELETE FROM Remont")
+            DB7.Execute("DELETE FROM SOFT_INSTALL")
+            DB7.Execute("DELETE FROM Zametki")
+            DB7.Execute("DELETE FROM Update_Log")
+            DB7.Execute("DELETE FROM USER_COMP")
+            DB7.Execute("DELETE FROM tbl_bios")
+            DB7.Execute("DELETE FROM CARTRIDG_Z")
+            DB7.Execute("DELETE FROM CARTRIDG_D")
+            DB7.Execute("DELETE FROM CARTRIDG")
+            DB7.Execute("DELETE FROM AKT_SP_OS3")
+            DB7.Execute("DELETE FROM ActOS")
+            DB7.Execute("DELETE FROM TrebOvanie")
+            DB7.Execute("DELETE FROM dvig")
+            DB7.Execute("DELETE FROM SES_Pass")
+            DB7.Execute("DELETE FROM ZAM_OTD")
+            DB7.Execute("DELETE FROM OTD_O")
+            DB7.Execute("DELETE FROM SPR_OTV")
+            DB7.Execute("DELETE FROM SPR_KAB")
+            DB7.Execute("DELETE FROM SPR_OTD_FILIAL")
+            DB7.Execute("DELETE FROM SPR_MESTO")
+            DB7.Execute("DELETE FROM SPR_FILIAL")
+            DB7.Execute("DELETE FROM Sclad")
+            DB7.Execute("DELETE FROM Sheduler")
+            DB7.Execute("DELETE FROM net_port")
+            DB7.Execute("DELETE FROM tbl_ppr")
+            DB7.Execute("DELETE FROM kompy")
+            DB7.Execute("DELETE FROM SPR_USER")
+            DB7.Execute("DELETE FROM TBL_NET_MAG")
 
-        rs = New ADODB.Recordset
-        rs.Open("DELETE FROM SOFT_INSTALL", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-        rs = Nothing
-        rs = New ADODB.Recordset
-        rs.Open("DELETE FROM Zametki", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-        rs = Nothing
-        rs = New ADODB.Recordset
-        rs.Open("DELETE FROM Update_Log", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-        rs = Nothing
-        rs = New ADODB.Recordset
-        rs.Open("DELETE FROM USER_COMP", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-        rs = Nothing
-        rs = New ADODB.Recordset
-        rs.Open("DELETE FROM tbl_bios", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-        rs = Nothing
-
-        rs = New ADODB.Recordset
-        rs.Open("DELETE FROM CARTRIDG_Z", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-        rs = New ADODB.Recordset
-        rs.Open("DELETE FROM CARTRIDG_D", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-        rs = Nothing
-        rs = New ADODB.Recordset
-        rs.Open("DELETE FROM CARTRIDG", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-        rs = Nothing
-
-        rs = New ADODB.Recordset
-        rs.Open("DELETE FROM AKT_SP_OS3", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-        rs = Nothing
-        rs = New ADODB.Recordset
-        rs.Open("DELETE FROM ActOS", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-        rs = Nothing
-        rs = New ADODB.Recordset
-        rs.Open("DELETE FROM TrebOvanie", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-        rs = Nothing
-        rs = New ADODB.Recordset
-        rs.Open("DELETE FROM dvig", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-        rs = Nothing
-        rs = New ADODB.Recordset
-        rs.Open("DELETE FROM SES_Pass", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-        rs = Nothing
-        rs = New ADODB.Recordset
-        rs.Open("DELETE FROM ZAM_OTD", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-        rs = Nothing
-        rs = New ADODB.Recordset
-        rs.Open("DELETE FROM OTD_O", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-        rs = Nothing
-        rs = New ADODB.Recordset
-        rs.Open("DELETE FROM SPR_OTV", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-        rs = Nothing
-
-        rs = New ADODB.Recordset
-        rs.Open("DELETE FROM SPR_KAB", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-        rs = Nothing
-        rs = New ADODB.Recordset
-        rs.Open("DELETE FROM SPR_OTD_FILIAL", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-        rs = Nothing
-        rs = New ADODB.Recordset
-        rs.Open("DELETE FROM SPR_MESTO", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-        rs = Nothing
-        rs = New ADODB.Recordset
-        rs.Open("DELETE FROM SPR_FILIAL", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-        rs = Nothing
-
-        rs = New ADODB.Recordset
-        rs.Open("DELETE FROM Sclad", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-        rs = Nothing
-        rs = New ADODB.Recordset
-        rs.Open("DELETE FROM Sheduler", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-        rs = Nothing
-
-        rs = New ADODB.Recordset
-        rs.Open("DELETE FROM net_port", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-        rs = Nothing
-
-        rs = New ADODB.Recordset
-        rs.Open("DELETE FROM tbl_ppr", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-        rs = Nothing
-
-        rs = New ADODB.Recordset
-        rs.Open("DELETE FROM kompy", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-        rs = Nothing
-
-        rs = New ADODB.Recordset
-        rs.Open("DELETE FROM SPR_USER", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-        rs = Nothing
-
-        rs = New ADODB.Recordset
-        rs.Open("DELETE FROM TBL_NET_MAG", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-        rs = Nothing
+        End If
 
         Call frmComputers.STAT_INF()
         Call SHED_CHECK()
