@@ -719,6 +719,9 @@ error_Renamed:
 
         If DATAB = False Then Exit Sub
 
+        Dim MessageB As DialogResult = MessageBox.Show("Вы точно хотите удалить ВСЁ?", "Очистка базы", MessageBoxButtons.YesNo, MessageBoxIcon.Information)
+        If MessageB = DialogResult.No Then Exit Sub
+
         Dim rs As ADODB.Recordset
         rs = New ADODB.Recordset
 
