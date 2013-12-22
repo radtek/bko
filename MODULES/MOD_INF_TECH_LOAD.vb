@@ -763,6 +763,8 @@ Module MOD_INF_TECH_LOAD
             End With
             rs.Close()
             rs = Nothing
+
+            frmComputers.cmbPCL.Enabled = True
         End If
 
 

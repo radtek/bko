@@ -98,6 +98,7 @@
                     If TypeOf Ctl Is ListView Then Ctl.items.clear()
                     'If TypeOf Ctl Is CheckBox Then Ctl.checked = False
                     If TypeOf Ctl Is RadioButton Then Ctl.checked = False
+                    If TypeOf Ctl Is DateTimePicker Then Ctl.Value = Date.Today.Date
 
                     ' If TypeOf Ctl Is ToolStrip Then Ctl.rendermode = ToolStripRenderMode.System
 
@@ -118,6 +119,12 @@
         frmComputers.chkOTHspis.Checked = False
 
         frmComputers.treebranche.Text = A1
+
+
+
+
+
+
 
         System.Windows.Forms.Application.DoEvents()
 
@@ -1226,7 +1233,8 @@ Error_:
 
         End Select
 
-        If sCMB.Items.Count = 0 Then sCMB.Enabled = False
+
+        ' If sCMB.Items.Count = 0 Then sCMB.Enabled = False
 
         Exit Sub
 err_:
