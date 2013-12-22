@@ -830,7 +830,7 @@ Error_:
 
                             CartrAddToolStripMenuItem.Visible = True
                             FillComboNET(Me.cmbPRN, "name", "SPR_PRINTER", "", False, True)
-                            'CopyToolStripMenuItem.Enabled = False
+
                             UpdateToolStripMenuItem.Enabled = False
                             sSTAB2.Visible = True
                             sSTAB1.Visible = False
@@ -868,7 +868,7 @@ Error_:
                         Case "MFU"
                             CartrAddToolStripMenuItem.Visible = True
                             FillComboNET(Me.cmbPRN, "name", "SPR_MFU", "", False, True)
-                            'CopyToolStripMenuItem.Enabled = False
+
                             UpdateToolStripMenuItem.Enabled = False
                             sSTAB2.Visible = True
                             sSTAB1.Visible = False
@@ -903,7 +903,7 @@ Error_:
                         Case "KOpir"
                             CartrAddToolStripMenuItem.Visible = True
                             FillComboNET(Me.cmbPRN, "name", "SPR_KOPIR", "", False, True)
-                            'CopyToolStripMenuItem.Enabled = False
+
                             UpdateToolStripMenuItem.Enabled = False
                             sSTAB2.Visible = True
                             sSTAB1.Visible = False
@@ -944,7 +944,7 @@ Error_:
                             txtOTHIP.Visible = True
                             txtOTHMAC.Visible = True
 
-                            'CopyToolStripMenuItem.Enabled = False
+
                             UpdateToolStripMenuItem.Enabled = False
                             sSTAB3.Visible = True
                             sSTAB1.Visible = False
@@ -975,7 +975,7 @@ Error_:
                             txtOTHIP.Visible = False
                             txtOTHMAC.Visible = False
 
-                            'CopyToolStripMenuItem.Enabled = False
+
                             UpdateToolStripMenuItem.Enabled = False
                             sSTAB3.Visible = True
                             sSTAB1.Visible = False
@@ -1002,7 +1002,7 @@ Error_:
                             txtOTHIP.Visible = False
                             txtOTHMAC.Visible = False
 
-                            'CopyToolStripMenuItem.Enabled = False
+
                             UpdateToolStripMenuItem.Enabled = False
                             sSTAB3.Visible = True
                             sSTAB1.Visible = False
@@ -1030,7 +1030,7 @@ Error_:
                             txtOTHMAC.Visible = True
                             cmbOTHPCL.Visible = True
 
-                            'CopyToolStripMenuItem.Enabled = False
+
                             UpdateToolStripMenuItem.Enabled = False
                             sSTAB3.Visible = True
                             sSTAB1.Visible = False
@@ -1059,7 +1059,7 @@ Error_:
                             txtOTHIP.Visible = False
                             txtOTHMAC.Visible = False
 
-                            'CopyToolStripMenuItem.Enabled = False
+
                             UpdateToolStripMenuItem.Enabled = False
                             sSTAB3.Visible = True
                             sSTAB1.Visible = False
@@ -1087,7 +1087,7 @@ Error_:
                             txtOTHIP.Visible = False
                             txtOTHMAC.Visible = False
 
-                            'CopyToolStripMenuItem.Enabled = False
+
                             UpdateToolStripMenuItem.Enabled = False
                             sSTAB3.Visible = True
                             sSTAB1.Visible = False
@@ -1118,7 +1118,7 @@ Error_:
 
                             '   Me.txtOTHSN.Left = cmbOTH.Width + txtMonDum.Width + 10
                             '  Me.txtOTHSN.Width = PROiZV39.Left - (cmbOTH.Width + txtMonDum.Width + 15) '"214"
-                            
+
                             lblTipOther.Visible = False
                             cmbOTHConnect.Visible = False
                             lblOTMac.Visible = False
@@ -1148,7 +1148,7 @@ Error_:
 
                         Case "NET"
                             CartrAddToolStripMenuItem.Visible = False
-                            'CopyToolStripMenuItem.Enabled = False
+
                             UpdateToolStripMenuItem.Enabled = False
                             sSTAB3.Visible = False
                             sSTAB1.Visible = False
@@ -1170,7 +1170,7 @@ Error_:
                             txtOTHIP.Visible = False
                             txtOTHMAC.Visible = False
 
-                            'CopyToolStripMenuItem.Enabled = False
+
                             UpdateToolStripMenuItem.Enabled = False
                             sSTAB3.Visible = True
                             sSTAB1.Visible = False
@@ -1198,7 +1198,7 @@ Error_:
                             txtOTHIP.Visible = False
                             txtOTHMAC.Visible = False
 
-                            'CopyToolStripMenuItem.Enabled = False
+
                             UpdateToolStripMenuItem.Enabled = False
                             sSTAB3.Visible = True
                             sSTAB1.Visible = False
@@ -1227,7 +1227,7 @@ Error_:
                             txtOTHIP.Visible = True
                             txtOTHMAC.Visible = True
 
-                            'CopyToolStripMenuItem.Enabled = False
+
                             UpdateToolStripMenuItem.Enabled = False
                             sSTAB3.Visible = True
                             sSTAB1.Visible = False
@@ -1267,7 +1267,7 @@ Error_:
                             txtOTHIP.Visible = False
                             txtOTHMAC.Visible = False
 
-                            'CopyToolStripMenuItem.Enabled = False
+
                             UpdateToolStripMenuItem.Enabled = False
                             sSTAB3.Visible = True
                             sSTAB1.Visible = False
@@ -1295,7 +1295,7 @@ Error_:
                             txtOTHIP.Visible = False
                             txtOTHMAC.Visible = False
 
-                            'CopyToolStripMenuItem.Enabled = False
+
                             UpdateToolStripMenuItem.Enabled = False
                             sSTAB3.Visible = True
                             sSTAB1.Visible = False
@@ -1323,7 +1323,7 @@ Error_:
                             txtOTHIP.Visible = False
                             txtOTHMAC.Visible = False
 
-                            'CopyToolStripMenuItem.Enabled = False
+
                             UpdateToolStripMenuItem.Enabled = False
                             sSTAB3.Visible = True
                             sSTAB1.Visible = False
@@ -1353,7 +1353,7 @@ Error_:
                             txtOTHIP.Visible = False
                             txtOTHMAC.Visible = False
 
-                            'CopyToolStripMenuItem.Enabled = False
+
                             UpdateToolStripMenuItem.Enabled = False
                             sSTAB3.Visible = True
                             sSTAB1.Visible = False

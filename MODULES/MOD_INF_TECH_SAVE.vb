@@ -235,7 +235,7 @@ err_:
             Case True
                 Call SMENA_PCL(frmComputers.sCOUNT, frmComputers.cmbOTHPCL.Text)
 
-                Call DVIG_TEHN(frmComputers.cmbOTHFil.Text, frmComputers.cmbOTHDepart.Text, frmComputers.cmbOTHOffice.Text, frmComputers.cmbOTH.Text)
+                Call DVIG_TEHN(frmComputers.cmbOTHFil.Text, frmComputers.cmbOTHDepart.Text, frmComputers.cmbOTHOffice.Text, frmComputers.cmbOTH.Text, frmComputers.cmbOTHPCL.Text)
 
                 Select Case DV
 
@@ -416,7 +416,7 @@ Err_:
             Case True
                 Call SMENA_PCL(frmComputers.sCOUNT, frmComputers.cmbOTHPCL.Text)
 
-                Call DVIG_TEHN(frmComputers.cmbOTHFil.Text, frmComputers.cmbOTHDepart.Text, frmComputers.cmbOTHOffice.Text, frmComputers.cmbOTH.Text)
+                Call DVIG_TEHN(frmComputers.cmbOTHFil.Text, frmComputers.cmbOTHDepart.Text, frmComputers.cmbOTHOffice.Text, frmComputers.cmbOTH.Text, frmComputers.cmbOTHPCL.Text)
 
                 Select Case DV
 
@@ -435,84 +435,94 @@ Err_:
 
         End Select
 
+        Dim LNGIniFile As New IniFile(sLANGPATH)
+        Dim sTIP_COMPA As String
+
         Select Case TipTehn
 
             Case "OT"
-
+                
                 If Not RSExists("OTHER", "name", Trim(frmComputers.cmbOTHConnect.Text)) Then
                     AddOnePar(frmComputers.cmbOTHConnect.Text, "NAME", "spr_other", frmComputers.cmbOTHConnect)
                 End If
 
             Case "PHOTO"
-
+                sTIP_COMPA = LNGIniFile.GetString("frmMain", "33", "")
                 If Not RSExists("PHOTO", "name", Trim(frmComputers.cmbOTH.Text)) Then
                     AddTwoPar(frmComputers.cmbOTH.Text, frmComputers.PROiZV39.Text, "spr_photo", frmComputers.cmbOTH)
                 End If
 
             Case "FAX"
-
+                sTIP_COMPA = LNGIniFile.GetString("frmMain", "34", "")
                 If Not RSExists("FAX", "name", Trim(frmComputers.cmbOTH.Text)) Then
                     AddTwoPar(frmComputers.cmbOTH.Text, frmComputers.PROiZV39.Text, "spr_fax", frmComputers.cmbOTH)
                 End If
 
             Case "PHONE"
-
+                sTIP_COMPA = LNGIniFile.GetString("frmMain", "32", "")
                 If Not RSExists("PHONE", "name", Trim(frmComputers.cmbOTH.Text)) Then
                     AddTwoPar(frmComputers.cmbOTH.Text, frmComputers.PROiZV39.Text, "spr_phone", frmComputers.cmbOTH)
                 End If
 
             Case "ZIP"
-                'spr_zip
+
+                sTIP_COMPA = LNGIniFile.GetString("frmMain", "36", "")
+
                 If Not RSExists("spr_zip", "name", Trim(frmComputers.cmbOTH.Text)) Then
                     AddTwoPar(frmComputers.cmbOTH.Text, frmComputers.PROiZV39.Text, "spr_zip", frmComputers.cmbOTH)
                 End If
 
             Case "SCANER"
-
+                sTIP_COMPA = LNGIniFile.GetString("frmMain", "37", "")
                 If Not RSExists("SCANER", "name", Trim(frmComputers.cmbOTH.Text)) Then
                     AddTwoPar(frmComputers.cmbOTH.Text, frmComputers.PROiZV39.Text, "SPR_SCANER", frmComputers.cmbOTH)
                 End If
 
             Case "USB"
+                sTIP_COMPA = LNGIniFile.GetString("frmMain", "39", "")
                 If Not RSExists("USB", "name", Trim(frmComputers.cmbOTH.Text)) Then
                     AddTwoPar(frmComputers.cmbOTH.Text, frmComputers.PROiZV39.Text, "SPR_USB", frmComputers.cmbOTH)
                 End If
 
             Case "SOUND"
+                sTIP_COMPA = LNGIniFile.GetString("frmMain", "40", "")
                 If Not RSExists("ASISTEM", "name", Trim(frmComputers.cmbOTH.Text)) Then
                     AddTwoPar(frmComputers.cmbOTH.Text, frmComputers.PROiZV39.Text, "SPR_ASISTEM", frmComputers.cmbOTH)
                 End If
 
             Case "IBP"
-
+                sTIP_COMPA = LNGIniFile.GetString("frmMain", "41", "")
                 If Not RSExists("IBP", "name", Trim(frmComputers.cmbOTH.Text)) Then
                     AddTwoPar(frmComputers.cmbOTH.Text, frmComputers.PROiZV39.Text, "SPR_IBP", frmComputers.cmbOTH)
                 End If
 
             Case "FS"
+                sTIP_COMPA = LNGIniFile.GetString("frmMain", "46", "")
                 If Not RSExists("SPR_FS", "name", Trim(frmComputers.cmbOTH.Text)) Then
                     AddTwoPar(frmComputers.cmbOTH.Text, frmComputers.PROiZV39.Text, "SPR_FS", frmComputers.cmbOTH)
                 End If
 
             Case "KEYB"
-
+                sTIP_COMPA = LNGIniFile.GetString("frmMain", "44", "")
                 If Not RSExists("KEYBOARD", "name", Trim(frmComputers.cmbOTH.Text)) Then
                     AddTwoPar(frmComputers.cmbOTH.Text, frmComputers.PROiZV39.Text, "SPR_KEYBOARD", frmComputers.cmbOTH)
                 End If
 
             Case "MOUSE"
+                sTIP_COMPA = LNGIniFile.GetString("frmMain", "45", "")
                 If Not RSExists("MOUSE", "name", Trim(frmComputers.cmbOTH.Text)) Then
                     AddTwoPar(frmComputers.cmbOTH.Text, frmComputers.PROiZV39.Text, "SPR_MOUSE", frmComputers.cmbOTH)
                 End If
 
             Case "CNT"
+                sTIP_COMPA = LNGIniFile.GetString("frmMain", "CNTToolStripMenuItem", "")
 
                 If Not RSExists("OTHER", "name", Trim(frmComputers.cmbOTH.Text)) Then
                     AddOnePar(frmComputers.cmbOTH.Text, "NAME", "spr_other", frmComputers.cmbOTH)
                 End If
 
             Case Else
-
+                sTIP_COMPA = LNGIniFile.GetString("frmMain", "38", "")
                 If Not RSExists("OTHD", "name", Trim(frmComputers.cmbOTH.Text)) Then
                     AddTreePar(frmComputers.cmbOTH.Text, frmComputers.cmbOTHConnect.Text, frmComputers.PROiZV39.Text,
                                "SPR_OTH_DEV", frmComputers.cmbOTH)
@@ -563,7 +573,7 @@ sAR:
 
             Case False
 
-                sSQL = "INSERT INTO kompy (PRINTER_NAME_1,PRINTER_SN_1,Ser_N_SIS,PRINTER_PROIZV_1,port_1,INV_NO_PRINTER,TIPtehn,PCL,tip_compa) VALUES ('" & frmComputers.cmbOTH.Text & "','" & frmComputers.txtOTHSN.Text & "','" & frmComputers.txtOTHSN.Text & "','" & frmComputers.PROiZV39.Text & "','" & frmComputers.txtOTHmemo.Text & "','" & frmComputers.txtOTHinnumber.Text & "','" & TipTehn & "'," & unaPCL & ",'" & frmComputers.cmbOTHConnect.Text & "')"
+                sSQL = "INSERT INTO kompy (PRINTER_NAME_1,PRINTER_SN_1,Ser_N_SIS,PRINTER_PROIZV_1,port_1,INV_NO_PRINTER,TIPtehn,PCL,tip_compa) VALUES ('" & frmComputers.cmbOTH.Text & "','" & frmComputers.txtOTHSN.Text & "','" & frmComputers.txtOTHSN.Text & "','" & frmComputers.PROiZV39.Text & "','" & frmComputers.txtOTHmemo.Text & "','" & frmComputers.txtOTHinnumber.Text & "','" & TipTehn & "'," & unaPCL & ",'" & sTIP_COMPA & "')"
 
             Case True
 
@@ -696,7 +706,7 @@ Err_:
 
                 Call _
                     DVIG_TEHN(frmComputers.cmbBranch.Text, frmComputers.cmbDepartment.Text, frmComputers.cmbOffice.Text,
-                              frmComputers.txtSNAME.Text)
+                              frmComputers.txtSNAME.Text, frmComputers.cmbPCLK.Text)
 
                 Select Case DV
 
@@ -1645,7 +1655,7 @@ err_:
             Case True
                 Call SMENA_PCL(frmComputers.sCOUNT, frmComputers.cmbPCL.Text)
 
-                Call DVIG_TEHN(frmComputers.cmbPRNFil.Text, frmComputers.cmbPRNDepart.Text, frmComputers.cmbPRNOffice.Text, frmComputers.cmbPRN.Text)
+                Call DVIG_TEHN(frmComputers.cmbPRNFil.Text, frmComputers.cmbPRNDepart.Text, frmComputers.cmbPRNOffice.Text, frmComputers.cmbPRN.Text, frmComputers.cmbPCL.Text)
 
                 Select Case DV
 
@@ -1828,6 +1838,9 @@ Err_:
 
         On Error Resume Next
 
+        On Error GoTo err_
+
+
         Select Case Len(frmComputers.cmbNetDepart.Text)
 
             Case 0
@@ -1862,7 +1875,7 @@ Err_:
             Case True
                 Call SMENA_PCL(frmComputers.sCOUNT, frmComputers.cmbCNTNet.Text)
 
-                Call DVIG_TEHN(frmComputers.cmbNETBranch.Text, frmComputers.cmbNetDepart.Text, frmComputers.cmbNETOffice.Text, frmComputers.cmbDevNet.Text)
+                Call DVIG_TEHN(frmComputers.cmbNETBranch.Text, frmComputers.cmbNetDepart.Text, frmComputers.cmbNETOffice.Text, frmComputers.cmbDevNet.Text, frmComputers.cmbCNTNet.Text)
 
                 Select Case DV
 
@@ -1940,10 +1953,20 @@ sAR:
 
                 sSQL = "INSERT INTO kompy (PRINTER_NAME_1,PRINTER_SN_1,PRINTER_PROIZV_1,NET_IP_1,NET_MAC_1,PRINTER_SN_2,PRINTER_PROIZV_3,PRINTER_SN_3,PRINTER_NAME_4,PRINTER_PROIZV_4,PRINTER_SN_4," &
                         "port_2,port_1,Ser_N_SIS,TIPtehn,PCL) VALUES ('" &
-                        frmComputers.cmbNetDev.Text & "','" & frmComputers.cmbDevNet.Text & "','" & frmComputers.PROiZV40.Text & "','" & frmComputers.txtNetIP.Text & "','" & frmComputers.txtNetMac.Text & "','" &
-                        frmComputers.txtNetPort.Text & "','" & frmComputers.txtNetINN.Text & "','" & frmComputers.txtNetIsp.Text & "','" & frmComputers.cmbNetVkl.Text & "','" & frmComputers.cmbNetCable.Text & "','" &
-                        frmComputers.txtNetCableCat.Text & "','" & "','" & frmComputers.txtNetNumberPorts.Text & "','" &
-                        frmComputers.txtNetSN.Text & "','" & frmComputers.txtNetSN.Text & "','" &
+                        frmComputers.cmbNetDev.Text & "','" &
+                        frmComputers.cmbDevNet.Text & "','" &
+                        frmComputers.PROiZV40.Text & "','" &
+                        frmComputers.txtNetIP.Text & "','" &
+                        frmComputers.txtNetMac.Text & "','" &
+                        frmComputers.txtNetPort.Text & "','" &
+                        frmComputers.txtNetINN.Text & "','" &
+                        frmComputers.txtNetIsp.Text & "','" &
+                        frmComputers.cmbNetVkl.Text & "','" &
+                        frmComputers.cmbNetCable.Text & "','" &
+                        frmComputers.txtNetCableCat.Text & "','" &
+                        frmComputers.txtNetNumberPorts.Text & "','" &
+                        frmComputers.txtNetSN.Text & "','" &
+                        frmComputers.txtNetSN.Text & "','" &
                         TipTehn & "'," & unaPCL & ")"
 
             Case True
@@ -2020,17 +2043,60 @@ sAR:
 
         Call UpdateTree(tmpName, tmpTip, tmpID, tmpFil, tmpDep, tmpOff)
 
+
+        Exit Sub
+err_:
+        MsgBox(Err.Description)
     End Sub
 
-   Private Sub DVIG_TEHN(ByVal sFIALIAL As String, ByVal sOTDEL As String, ByVal sKABN As String,
-                          ByVal sNAMEs As String)
+    Private Sub DVIG_TEHN(ByVal sFIALIAL As String, ByVal sOTDEL As String, ByVal sKABN As String, ByVal sNAMEs As String, Optional ByVal pcl_txt As String = "")
         On Error GoTo Error_
         Dim rs As Recordset
         Dim Message, Title, Defaults As String
         Dim strTmp As String
         Dim sTmp As DateTime = DateTime.Now
-
+        Dim tNAME As Integer = 0
+        Dim tNAME2 As Integer = 0
+        Dim tNAME2s As String = ""
         'sNAMEs - переданное имя 
+
+        On Error Resume Next
+        'Проверяем контейнер
+
+        rs = New Recordset
+        rs.Open("SELECT id FROM kompy where NET_NAME ='" & pcl_txt & "' AND filial='" & sFIALIAL & "' AND mesto='" & sOTDEL & "' AND kabn='" & sKABN & "'", DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
+
+        With rs
+
+            tNAME = .Fields("id").Value
+
+        End With
+        rs.Close()
+        rs = Nothing
+
+        rs = New Recordset
+        rs.Open("SELECT pcl FROM kompy where id =" & frmComputers.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
+
+        Dim rs1 As Recordset
+
+        rs1 = New Recordset
+        rs1.Open("SELECT NET_NAME FROM kompy where id =" & rs.Fields("pcl").Value, DB7, CursorTypeEnum.adOpenDynamic,
+                LockTypeEnum.adLockOptimistic)
+
+
+        With rs1
+            tNAME2s = .Fields("NET_NAME").Value
+        End With
+        rs1.Close()
+        rs1 = Nothing
+        rs.Close()
+        rs = Nothing
+
+
+
+        'Проверяем место
 
         Dim iA, iB, iC As String
 
@@ -2064,46 +2130,50 @@ sAR:
 
                 DV = True
 
-            rs = New Recordset
-            rs.Open("SELECT filial,mesto,kabn FROM kompy where id =" & frmComputers.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
-                    LockTypeEnum.adLockOptimistic)
+                rs = New Recordset
+                rs.Open("SELECT filial,mesto,kabn FROM kompy where id =" & frmComputers.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                        LockTypeEnum.adLockOptimistic)
 
-            With rs
-                iA = .Fields("filial").Value
-                iB = .Fields("mesto").Value
-                iC = .Fields("kabn").Value
-            End With
-            rs.Close()
-            rs = Nothing
+                With rs
+                    iA = .Fields("filial").Value
+                    iB = .Fields("mesto").Value
+                    iC = .Fields("kabn").Value
+                End With
+                rs.Close()
+                rs = Nothing
 
 
-            If iB <> sOTDEL Or iA <> sFIALIAL Or iC <> sKABN Then
+                If iB <> sOTDEL Or iA <> sFIALIAL Or iC <> sKABN Or pcl_txt <> tNAME2s Then
 
-                DV = False
+                    DV = False
 
-                Message = "Укажите причину перемещения техники"
-                Title = "Перемещение техники"
-                Defaults = "Причина"
-                strTmp = InputBox(Message, Title, Defaults)
+                    Message = "Укажите причину перемещения техники"
+                    Title = "Перемещение техники"
+                    Defaults = "Причина"
+                    strTmp = InputBox(Message, Title, Defaults)
 
-                Select Case strTmp
+                    Select Case strTmp
 
-                    Case ""
-                        Sav = False
+                        Case ""
+                            Sav = False
 
-                        Exit Sub
-                    Case Else
-                        Sav = True
+                            Exit Sub
+                        Case Else
+                            Sav = True
 
-                End Select
+                    End Select
 
                     '                    sTmp = (DateTime.Now.Hour & ":" & DateTime.Now.Minute & ":" & DateTime.Now.Second)
 
-                If Len(iB) <> 0 Then iA = iA & "/" & iB
-                If Len(iC) <> 0 Then iA = iA & "/" & iC
+                    If Len(iB) <> 0 Then iA = iA & "/" & iB
+                    If Len(iC) <> 0 Then iA = iA & "/" & iC
 
-                If Len(sOTDEL) <> 0 Then sFIALIAL = sFIALIAL & "/" & sOTDEL
-                If Len(sKABN) <> 0 Then sFIALIAL = sFIALIAL & "/" & sKABN
+                    If Len(sOTDEL) <> 0 Then sFIALIAL = sFIALIAL & "/" & sOTDEL
+                    If Len(sKABN) <> 0 Then sFIALIAL = sFIALIAL & "/" & sKABN
+
+
+                    If pcl_txt <> tNAME2s Then iA = iA & "/" & tNAME2s
+                    If pcl_txt <> tNAME2s Then sFIALIAL = sFIALIAL & "/" & pcl_txt
 
 
                     Dim sSQL As String
@@ -2117,23 +2187,23 @@ sAR:
 
                     'Call SaveActivityToLogDB("Перемещение техники " & frmComputers.SelNde.Text & " из " & frmComputers.FilD & "/" & frmComputers.OtdD & " в " & sfilial & "/" & sOTDEL)
 
-                Dim langfile As New IniFile(sLANGPATH)
-                Call _
-                    SaveActivityToLogDB(
-                        langfile.GetString("frmComputers", "MSG52", "Перемещение техники") & " " &
-                        frmComputers.lstGroups.SelectedNode.Text)
+                    Dim langfile As New IniFile(sLANGPATH)
+                    Call _
+                        SaveActivityToLogDB(
+                            langfile.GetString("frmComputers", "MSG52", "Перемещение техники") & " " &
+                            frmComputers.lstGroups.SelectedNode.Text)
 
-                rs = New Recordset
-                rs.Open("SELECT count(*) as t_n FROM kompy where PCL=" & frmComputers.sCOUNT, DB7,
-                        CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                    rs = New Recordset
+                    rs.Open("SELECT count(*) as t_n FROM kompy where PCL=" & frmComputers.sCOUNT, DB7,
+                            CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                     Dim sCN As String
 
-                With rs
-                    sCN = .Fields("t_n").Value
-                End With
-                rs.Close()
-                rs = Nothing
+                    With rs
+                        sCN = .Fields("t_n").Value
+                    End With
+                    rs.Close()
+                    rs = Nothing
 
                     DV2 = True
 
@@ -2146,8 +2216,6 @@ sAR:
                             rs = New Recordset
                             rs.Open("SELECT id FROM kompy where PCL=" & frmComputers.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
                                     LockTypeEnum.adLockOptimistic)
-
-                            Dim rs1 As Recordset
 
                             With rs
                                 .MoveFirst()

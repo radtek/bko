@@ -3206,10 +3206,14 @@ Error_:
                     End If
 
 
-                    If Len(.Fields("filial").Value) = 0 Then _
-                        LvKompOtd.Items(CInt(intj)).SubItems.Add(.Fields("mesto").Value) Else _
-                        LvKompOtd.Items(CInt(intj)).SubItems.Add(
-                            .Fields("filial").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+                    If Len(.Fields("filial").Value) = 0 Then
+
+                        LvKompOtd.Items(CInt(intj)).SubItems.Add(.Fields("mesto").Value)
+                    Else
+                        LvKompOtd.Items(CInt(intj)).SubItems.Add(.Fields("filial").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+
+
+                    End If
 
                     '###################################################################
                     'Вычисляем поставщика
@@ -3287,6 +3291,7 @@ Error_:
 
                             ' LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
                             LvKompOtd.Items(CInt(intj)).SubItems.Add(langIni.GetString("frmReports", "B(57)", "Телефон"))
+
                             If Not IsDBNull(.Fields("PRINTER_SN_1").Value) Then
                                 LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("PRINTER_SN_1").Value)
                             Else
@@ -3305,6 +3310,7 @@ Error_:
 
                             ' LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
                             LvKompOtd.Items(CInt(intj)).SubItems.Add(langIni.GetString("frmReports", "B(58)", "Факс"))
+
                             If Not IsDBNull(.Fields("PRINTER_SN_1").Value) Then
                                 LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("PRINTER_SN_1").Value)
                             Else
@@ -3323,6 +3329,7 @@ Error_:
 
                             ' LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
                             LvKompOtd.Items(CInt(intj)).SubItems.Add(langIni.GetString("frmReports", "B(59)", "Сканер"))
+
                             If Not IsDBNull(.Fields("PRINTER_SN_1").Value) Then
                                 LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("PRINTER_SN_1").Value)
                             Else
@@ -3360,6 +3367,7 @@ Error_:
 
                             ' LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
                             LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("TIP_COMPA").Value)
+
                             If Not IsDBNull(.Fields("PRINTER_SN_1").Value) Then
                                 LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("PRINTER_SN_1").Value)
                             Else
@@ -3377,18 +3385,26 @@ Error_:
                         Case "KEYB"
 
                             ' LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
-                            LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("TIP_COMPA").Value)
+                            'LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("TIP_COMPA").Value)
+
+                            If Not IsDBNull(.Fields("TIP_COMPA").Value) Then
+                                LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("TIP_COMPA").Value)
+                            Else
+                                LvKompOtd.Items(CInt(intj)).SubItems.Add("-")
+                            End If
+
+
 
                             If Not IsDBNull(.Fields("PRINTER_SN_1").Value) Then
                                 LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("PRINTER_SN_1").Value)
                             Else
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add("")
+                                LvKompOtd.Items(CInt(intj)).SubItems.Add("-")
                             End If
 
                             If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
                                 LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("INV_NO_PRINTER").Value)
                             Else
-                                LvKompOtd.Items(CInt(intj)).SubItems.Add("")
+                                LvKompOtd.Items(CInt(intj)).SubItems.Add("-")
                             End If
 
 
