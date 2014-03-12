@@ -155,6 +155,7 @@ Partial Class frmReports
         Me.cmbPPR_Year = New System.Windows.Forms.ComboBox()
         Me.btnPPR_Update = New System.Windows.Forms.Button()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.rbAlltech = New System.Windows.Forms.RadioButton()
         Me.sSTAB1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.TableLayoutPanel3.SuspendLayout()
@@ -229,6 +230,7 @@ Partial Class frmReports
         Me.TableLayoutPanel3.Controls.Add(Me.Label13, 0, 2)
         Me.TableLayoutPanel3.Controls.Add(Me.cmbOffice, 1, 2)
         Me.TableLayoutPanel3.Controls.Add(Me.cmbOthers, 4, 0)
+        Me.TableLayoutPanel3.Controls.Add(Me.rbAlltech, 2, 1)
         Me.TableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel3.Location = New System.Drawing.Point(3, 3)
         Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
@@ -1759,6 +1761,17 @@ Partial Class frmReports
         Me.ToolTip1.IsBalloon = True
         Me.ToolTip1.ReshowDelay = 100
         '
+        'rbAlltech
+        '
+        Me.rbAlltech.AutoSize = True
+        Me.rbAlltech.Location = New System.Drawing.Point(357, 30)
+        Me.rbAlltech.Name = "rbAlltech"
+        Me.rbAlltech.Size = New System.Drawing.Size(87, 17)
+        Me.rbAlltech.TabIndex = 48
+        Me.rbAlltech.TabStop = True
+        Me.rbAlltech.Text = "Вся техника"
+        Me.rbAlltech.UseVisualStyleBackColor = True
+        '
         'frmReports
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1935,4 +1948,5 @@ Partial Class frmReports
     Friend WithEvents Label14 As System.Windows.Forms.Label
     Friend WithEvents cmbPPR_Year As System.Windows.Forms.ComboBox
     Friend WithEvents btnPPR_Update As System.Windows.Forms.Button
+    Friend WithEvents rbAlltech As System.Windows.Forms.RadioButton
 End Class

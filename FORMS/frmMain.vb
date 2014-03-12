@@ -63,24 +63,6 @@ Public Class frmMain
         SendFonts(Me)
     End Sub
 
-    Public Sub LANG_frmMain_1()
-
-        Me.Invoke(New MethodInvoker(AddressOf LANG_frmMain))
-
-    End Sub
-
-    Public Sub SHED_CHECK_1()
-
-        Me.Invoke(New MethodInvoker(AddressOf SHED_CHECK))
-
-    End Sub
-
-    Public Sub REM_CHECK_1()
-
-        Me.Invoke(New MethodInvoker(AddressOf REM_CHECK))
-
-    End Sub
-
     Private Sub load_ICONS()
 
         On Error Resume Next
@@ -136,9 +118,7 @@ Public Class frmMain
 
                 DB_USE.DropDown.Items.Clear()
 
-                ' Only get files that begin with the letter "c."
                 Dim dirs As String() = Directory.GetFiles(BasePath, "*.mdb")
-                ' Console.WriteLine("The number of files starting with c is {0}.", dirs.Length)
                 Dim dir As String
 
                 Dim B1 As New ToolStripButton
@@ -149,7 +129,6 @@ Public Class frmMain
 
                     Dim d() As String
                     d = Split(dir, "\")
-                    'd(d.Length - 1
                     sNameS(i) = d(d.Length - 1)
 
                     i = i + 1
@@ -175,9 +154,7 @@ Public Class frmMain
 
                 DB_USE.DropDown.Items.Clear()
 
-                ' Only get files that begin with the letter "c."
                 Dim dirs As String() = Directory.GetFiles(BasePath, "*.accdb")
-                ' Console.WriteLine("The number of files starting with c is {0}.", dirs.Length)
                 Dim dir As String
 
                 Dim B1 As New ToolStripButton
@@ -188,7 +165,6 @@ Public Class frmMain
 
                     Dim d() As String
                     d = Split(dir, "\")
-                    'd(d.Length - 1
                     sNameS(i) = d(d.Length - 1)
 
                     i = i + 1
@@ -215,6 +191,7 @@ Public Class frmMain
 
         ''Меняем шрифт
         Call SendFonts(Me)
+        'Загружаем иконки
         Me.BeginInvoke(New MethodInvoker(AddressOf load_ICONS))
         Call Tree_Icons_Feel(frmComputers.ilsCommands, "sCMP", "pic\tree\")
 
@@ -235,16 +212,10 @@ Public Class frmMain
         Me.Text = ProGramName & " " & My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor & "." & My.Application.Info.Version.Build & "." & My.Application.Info.Version.Revision
 
         'Напоминания есть или нет
-        'Dim newThread4 As New Thread(AddressOf SHED_CHECK_1)
-        'newThread4.Start()
-
-        Me.BeginInvoke(New MethodInvoker(AddressOf SHED_CHECK_1))
+        Me.BeginInvoke(New MethodInvoker(AddressOf SHED_CHECK))
 
         'Ремонты есть или нет
-        'Dim newThread5 As New Thread(AddressOf REM_CHECK_1)
-        'newThread5.Start()
-
-        Me.BeginInvoke(New MethodInvoker(AddressOf REM_CHECK_1))
+        Me.BeginInvoke(New MethodInvoker(AddressOf REM_CHECK))
 
         '###########################################################
 
@@ -320,7 +291,7 @@ Public Class frmMain
 
         Me.BeginInvoke(New MethodInvoker(AddressOf LOAD_COMPONENT))
 
-        Me.BeginInvoke(New MethodInvoker(AddressOf LANG_frmMain_1))
+        Me.BeginInvoke(New MethodInvoker(AddressOf LANG_frmMain))
 
         Dim sText As String
 
@@ -468,7 +439,6 @@ Public Class frmMain
 
         '###################################################################3
 
-
         Exit Sub
 err_:
         'MsgBox(Err.Description)
@@ -495,41 +465,6 @@ err_:
         Call RELOGIN()
 
         Exit Sub
-
-        'LoadDatabase()
-
-        'frmComputers.STAT_INF()
-        'Call SHED_CHECK()
-        'Call REM_CHECK()
-        'Call LoadSPR()
-
-
-        'Dim rs As ADODB.Recordset
-
-        'rs = New ADODB.Recordset
-
-        'rs.Open("SELECT * FROM CONFIGURE", DB7, ADODB.CursorTypeEnum.adOpenDynamic, ADODB.LockTypeEnum.adLockOptimistic)
-
-        'With rs
-        '    If Not IsDBNull(.Fields("Name_Prog").Value) Then ProGramName = .Fields("Name_Prog").Value
-        'End With
-
-        'rs.Close()
-        'rs = Nothing
-
-
-        'Dim LNGIniFile As New IniFile(sLANGPATH)
-
-        'If Len(ProGramName) = 0 Or ProGramName = Nothing Then ProGramName = LNGIniFile.GetString("frmSetup", "MSG7", "БКО") '"БКО"
-
-        'Me.Text = ProGramName & " " & My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor & "." & My.Application.Info.Version.Build & "." & My.Application.Info.Version.Revision
-
-
-        'RefFilTree(frmComputers.lstGroups)
-
-        'Me.Cursor = Cursors.Default
-
-
 
     End Sub
 
@@ -576,9 +511,6 @@ err_:
     Private Sub frmMain_Resize(ByVal eventSender As System.Object, ByVal eventArgs As System.EventArgs) Handles MyBase.Resize
 
         On Error GoTo error_Renamed
-
-        'If frmMain.Height < 8500 + 300 Then frmMain.Height = 8500 + 300
-        'If frmMain.Width < 12620 Then frmMain.Width = 12620
 
         If (Me.Height) < 750 Then Me.Height = 750
         If (Me.Width) < 1024 Then Me.Width = 1024
@@ -718,7 +650,6 @@ error_Renamed:
     Private Sub CleerDBToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CleerDBToolStripMenuItem.Click
 
         If DATAB = False Then Exit Sub
-
 
         If MsgBox("Будет очищена база" & vbCrLf & "Хотите продолжить?", MsgBoxStyle.YesNo, ProGramName) = MsgBoxResult.Yes Then
 

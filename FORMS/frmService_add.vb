@@ -162,7 +162,7 @@
                                         "MeMo='" & txtComent.Text & "'," &
                                         "Summ='" & RemCashe.Text & "'," &
                                         "GARANT='" & dtGarRem.Value & "'," &
-                                        "zakryt=" & chkClose.Checked & "," &
+                                        "zakryt=" & _chkZakryt & "," &
                                         "UserName='" & uUSERNAME & "' WHERE id=" & frmserviceDesc.rCOUNT
                             Case Else
                                 sSQL = "UPDATE Remont SET " &
@@ -226,7 +226,7 @@
                                 "[MeMo]='" & txtComent.Text & "'," &
                                 "[Summ]='" & RemCashe.Text & "'," &
                                 "GARANT='" & dtGarRem.Value & "'," &
-                                "zakryt=" & chkClose.Checked & "," &
+                                "zakryt=" & _chkZakryt & "," &
                                 "stopdate='" & Date.Today & "'," &
                                 "stoptime='" & strTime & "'," &
                                 "[UserName]='" & uUSERNAME & "' WHERE id=" & frmserviceDesc.rCOUNT
@@ -389,9 +389,9 @@ err_:
         Else
             gbS.Visible = False
             Me.Height = 535
-
             'UserNames
             cmbIst.Text = UserNames
+            dtGarRem.Value = Date.Today.AddDays(+30)
 
         End If
 
@@ -458,6 +458,8 @@ err_:
         lvRem2.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem2_2", "Дата"), 90, HorizontalAlignment.Left)
         lvRem2.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem2_3", "Мастер"), 100, HorizontalAlignment.Left)
         lvRem2.Columns.Add(LNGIniFile.GetString("frmserviceDesc", "lvRem2_4", "Описание"), 300, HorizontalAlignment.Left)
+
+
 
     End Sub
 

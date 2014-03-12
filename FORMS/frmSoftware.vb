@@ -660,35 +660,9 @@ Public Class frmSoftware
 
     Private Sub lstSoftware_ColumnClick(ByVal sender As Object, ByVal e As ColumnClickEventArgs) _
         Handles lstSoftware.ColumnClick
-        Dim new_sorting_column As ColumnHeader =
-                lstSoftware.Columns(e.Column)
-        Dim sort_order As SortOrder
-        If m_SortingColumn Is Nothing Then
-            sort_order = SortOrder.Ascending
-        Else
-            If new_sorting_column.Equals(m_SortingColumn) Then
-                If m_SortingColumn.Text.StartsWith("> ") Then
-                    sort_order = SortOrder.Descending
-                Else
-                    sort_order = SortOrder.Ascending
-                End If
-            Else
-                sort_order = SortOrder.Ascending
-            End If
 
-            m_SortingColumn.Text = m_SortingColumn.Text.Substring(2)
-        End If
+        SORTING_LV(lstSoftware, e)
 
-        m_SortingColumn = new_sorting_column
-        If sort_order = SortOrder.Ascending Then
-            m_SortingColumn.Text = "> " & m_SortingColumn.Text
-        Else
-            m_SortingColumn.Text = "< " & m_SortingColumn.Text
-        End If
-
-        lstSoftware.ListViewItemSorter = New ListViewComparer(e.Column, sort_order)
-
-        lstSoftware.Sort()
     End Sub
 
     Private Sub lstSoftware_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles lstSoftware.DoubleClick

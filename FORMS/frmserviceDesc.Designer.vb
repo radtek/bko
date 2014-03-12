@@ -65,7 +65,6 @@ Partial Class frmserviceDesc
         Me.mnu_Z_to_Office = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnu_z_rasp = New System.Windows.Forms.ToolStripMenuItem()
         Me.addServiseWork = New System.Windows.Forms.ToolStripMenuItem()
-        CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
@@ -471,7 +470,6 @@ Partial Class frmserviceDesc
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.SplitContainer1.Panel1.ResumeLayout(False)
         Me.SplitContainer1.Panel2.ResumeLayout(False)
-        CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer1.ResumeLayout(False)
         Me.gbTree.ResumeLayout(False)
         Me.TableLayoutPanel3.ResumeLayout(False)

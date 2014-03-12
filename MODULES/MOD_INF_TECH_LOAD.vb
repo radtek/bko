@@ -8,7 +8,7 @@ Module MOD_INF_TECH_LOAD
 
     Public Sub LOADnet(ByVal sID As String)
         On Error Resume Next
-        Dim unaPCL As String
+        Dim unaPCL As Integer
 
         Dim rs As Recordset 'Объявляем рекордсет
         Dim sSQL As String 'Переменная, где будет размещён SQL запрос
@@ -95,15 +95,22 @@ Module MOD_INF_TECH_LOAD
 
             If Not IsDBNull(.Fields("port_1").Value) Then frmComputers.txtNetSN.Text = .Fields("port_1").Value
 
-            If Not IsDBNull(.Fields("PCL").Value) Then unaPCL = .Fields("PCL").Value
+            If Not IsDBNull(.Fields("PCL").Value) Then
+                unaPCL = .Fields("PCL").Value
+            Else
+                unaPCL = 0
+
+            End If
+
 
         End With
 
         rs.Close()
         rs = Nothing
 
-        If Len(unaPCL) <> 0 Then
+        If unaPCL = 0 Then
 
+        Else
             rs = New Recordset
             rs.Open("Select NET_NAME From kompy where id=" & unaPCL, DB7, CursorTypeEnum.adOpenDynamic,
                     LockTypeEnum.adLockOptimistic)
@@ -354,8 +361,9 @@ Module MOD_INF_TECH_LOAD
     End Sub
 
     Public Sub LOADot(ByVal sID As String)
+
         On Error Resume Next
-        Dim unaPCL As String
+        Dim unaPCL As Integer
 
         Dim rs As Recordset 'Объявляем рекордсет
         Dim sSQL As String 'Переменная, где будет размещён SQL запрос
@@ -461,7 +469,13 @@ Module MOD_INF_TECH_LOAD
 
             If Not IsDBNull(.Fields("Spisan").Value) Then frmComputers.chkOTHspis.Checked = .Fields("Spisan").Value
             If Not IsDBNull(.Fields("Balans").Value) Then frmComputers.chkOTHNNb.Checked = .Fields("Balans").Value
-            If Not IsDBNull(.Fields("PCL").Value) Then unaPCL = .Fields("PCL").Value
+
+            If Not IsDBNull(.Fields("PCL").Value) Then
+                unaPCL = .Fields("PCL").Value
+            Else
+                unaPCL = 0
+
+            End If
 
             Select Case frmComputers.chkOTHspis.Checked
 
@@ -490,8 +504,8 @@ Module MOD_INF_TECH_LOAD
         rs.Close()
         rs = Nothing
 
-        If Len(unaPCL) <> 0 Then
-
+        If unaPCL = 0 Then
+        Else
             rs = New Recordset
             rs.Open("Select NET_NAME From kompy where id=" & unaPCL, DB7, CursorTypeEnum.adOpenDynamic,
                     LockTypeEnum.adLockOptimistic)
@@ -519,7 +533,7 @@ Module MOD_INF_TECH_LOAD
         Dim uname As String
         Dim rs1 As Recordset 'Объявляем рекордсет
         Dim sSQL1 As String 'Переменная, где будет размещён SQL запрос
-        Dim unaPCL As String
+        Dim unaPCL As Integer
 
         Dim rs As Recordset 'Объявляем рекордсет
         Dim sSQL As String 'Переменная, где будет размещён SQL запрос
@@ -642,14 +656,20 @@ Module MOD_INF_TECH_LOAD
                     frmComputers.dtPRNSpisanie.Visible = False
             End Select
 
-            If Not IsDBNull(.Fields("PCL").Value) Then unaPCL = .Fields("PCL").Value
+            If Not IsDBNull(.Fields("PCL").Value) Then
+                unaPCL = .Fields("PCL").Value
+            Else
+                unaPCL = 0
+
+            End If
 
             '###################################################################################
             'Ищем устройства использующие принтер
             '###################################################################################
-            Select Case Len(unaPCL)
+            Select Case unaPCL
 
                 Case 0
+
 
                     Select Case frmComputers.gbPRN_USTR.Visible
 
@@ -901,7 +921,7 @@ Module MOD_INF_TECH_LOAD
         On Error Resume Next
         zID = sID
 
-        Dim unaPCL As String
+        Dim unaPCL As Integer
 
         Dim rs As Recordset 'Объявляем рекордсет
         Dim sSQL As String 'Переменная, где будет размещён SQL запрос
@@ -1793,7 +1813,17 @@ Module MOD_INF_TECH_LOAD
 
 
             If Not IsDBNull(.Fields("Balans").Value) Then frmComputers.chkPCNNb.Checked = .Fields("Balans").Value
-            If Not IsDBNull(.Fields("PCL").Value) Then unaPCL = .Fields("PCL").Value
+
+            If Not IsDBNull(.Fields("PCL").Value) Then
+
+                unaPCL = .Fields("PCL").Value
+
+            Else
+
+                unaPCL = 0
+
+            End If
+
 
             'Получаем номер розетки если он есть
 
@@ -1838,7 +1868,9 @@ Module MOD_INF_TECH_LOAD
         rs.Close()
         rs = Nothing
 
-        If Len(unaPCL) <> 0 Then
+        If unaPCL = 0 Then
+
+        Else
 
             rs = New Recordset
             rs.Open("Select NET_NAME From kompy where id=" & unaPCL, DB7, CursorTypeEnum.adOpenDynamic,
@@ -1899,7 +1931,7 @@ Module MOD_INF_TECH_LOAD
 
     Public Sub LOADmon(ByVal sID As String)
         On Error Resume Next
-        Dim unaPCL As String
+        Dim unaPCL As Integer
         Dim rs As Recordset 'Объявляем рекордсет
         Dim sSQL As String 'Переменная, где будет размещён SQL запрос
 
@@ -1947,7 +1979,14 @@ Module MOD_INF_TECH_LOAD
 
             If Not IsDBNull(.Fields("Spisan").Value) Then frmComputers.chkOTHspis.Checked = .Fields("Spisan").Value
             If Not IsDBNull(.Fields("Balans").Value) Then frmComputers.chkOTHNNb.Checked = .Fields("Balans").Value
-            If Not IsDBNull(.Fields("PCL").Value) Then unaPCL = .Fields("PCL").Value
+
+            If Not IsDBNull(.Fields("PCL").Value) Then
+                unaPCL = .Fields("PCL").Value
+            Else
+                unaPCL = 0
+
+            End If
+
 
             Select Case frmComputers.chkOTHspis.Checked
 
@@ -1964,7 +2003,9 @@ Module MOD_INF_TECH_LOAD
         rs = Nothing
 
 
-        If Len(unaPCL) <> 0 Then
+        If unaPCL = 0 Then
+
+        Else
 
             rs = New Recordset
             rs.Open("Select NET_NAME From kompy where id=" & unaPCL, DB7, CursorTypeEnum.adOpenDynamic,
