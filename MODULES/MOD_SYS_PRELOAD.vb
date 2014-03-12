@@ -306,12 +306,45 @@ Module MOD_SYS_PRELOAD
 
         BasePath = BasePath & "\"
 
+        'Проверяем есть ли необхадимые каталоги, если нет то создаем
+        If IO.Directory.Exists(Directory.GetParent(Application.ExecutablePath).ToString & "\database") Then
+        Else
+            IO.Directory.CreateDirectory(Directory.GetParent(Application.ExecutablePath).ToString & "\database")
+        End If
+
+        If IO.Directory.Exists(Directory.GetParent(Application.ExecutablePath).ToString & "\arhiv") Then
+        Else
+            IO.Directory.CreateDirectory(Directory.GetParent(Application.ExecutablePath).ToString & "\arhiv")
+        End If
+
+        If IO.Directory.Exists(Directory.GetParent(Application.ExecutablePath).ToString & "\blanks") Then
+        Else
+            IO.Directory.CreateDirectory(Directory.GetParent(Application.ExecutablePath).ToString & "\blanks")
+        End If
+
+        If IO.Directory.Exists(Directory.GetParent(Application.ExecutablePath).ToString & "\img") Then
+        Else
+            IO.Directory.CreateDirectory(Directory.GetParent(Application.ExecutablePath).ToString & "\img")
+        End If
+
+        If IO.Directory.Exists(Directory.GetParent(Application.ExecutablePath).ToString & "\pic") Then
+        Else
+            IO.Directory.CreateDirectory(Directory.GetParent(Application.ExecutablePath).ToString & "\pic")
+        End If
+
+        If IO.Directory.Exists(Directory.GetParent(Application.ExecutablePath).ToString & "\lang") Then
+        Else
+            IO.Directory.CreateDirectory(Directory.GetParent(Application.ExecutablePath).ToString & "\lang")
+        End If
+
+
         'If BasePath = Nothing Or Len(BasePath) < 3 Then
 
         '    BasePath = Directory.GetParent(Application.ExecutablePath).ToString & "\database\"
         '    objIniFile.WriteString("general", "BasePath", BasePath)
         'End If
 
+        'Определяем каталог с базами данных
         Select Case BasePath
 
             Case Nothing
@@ -321,24 +354,35 @@ Module MOD_SYS_PRELOAD
 
         End Select
 
-
+        'определяем файл базы данных (для акеса)
         Base_Name = objIniFile.GetString("general", "file", "basekomp.mdb")
 
+        'Офисный пакет
         sOfficePACK = objIniFile.GetString("general", "Office", "OpenOffice.org")
 
+        'языковой пакет
         sLANGPATH = PrPath & "lang\" & objIniFile.GetString("general", "LANG", "ru.ini")
 
+        'Размер иконок
         sICONS = objIniFile.GetString("General", "ICONs", "24*24")
 
+        'Формат отчетов о компах
         sTechINF = objIniFile.GetString("General", "TechINF", "AIDA64(Everest)")
 
+        'Шрифт
         FontI = objIniFile.GetString("General", "chkFonts", "0")
 
+        'Как работаем с деревом
         TREE_UPDATE = objIniFile.GetString("General", "TREE_UPDATE", "0")
 
+        'Выделение в дереве
         remVisible = objIniFile.GetString("TREE", "REM", "0")
         NBVisible = objIniFile.GetString("TREE", "NB", "1")
         SPVisible = objIniFile.GetString("TREE", "SP", "1")
+        NbColor = objIniFile.GetString("TREE", "NbColor", "Black")
+        SpisanColor = objIniFile.GetString("TREE", "SpisanColor", "Black")
+        ServiceColor = objIniFile.GetString("TREE", "ServiceColor", "Yellow")
+
 
         Select Case sICONS
 
@@ -354,13 +398,12 @@ Module MOD_SYS_PRELOAD
 
 
         Call UNAME_GET()
-        Call iface_preload()
 
+        frmMain.BeginInvoke(New MethodInvoker(AddressOf iface_preload))
+        Application.DoEvents()
 
-        NbColor = objIniFile.GetString("Tree", "NbColor", "Black")
-        SpisanColor = objIniFile.GetString("Tree", "SpisanColor", "Black")
-        ServiceColor = objIniFile.GetString("Tree", "ServiceColor", "Yellow")
-
+        ' Call iface_preload()
+        ' Call UNAME_GET()
 
     End Sub
 
@@ -565,7 +608,6 @@ Module MOD_SYS_PRELOAD
                         frmDirectory.cmb1.Items.Add(oRS.Fields.Item("TABLE_NAME").Value)
 
                     End If
-
 
                 End If
                 oRS.MoveNext()

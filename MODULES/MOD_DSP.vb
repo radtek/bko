@@ -1,5 +1,8 @@
 ﻿Module mod_DSP
-    'Private allowedExtensions() As String = {".ico", ".jpg", ".png"}
+
+    Private m_SortingColumn As ColumnHeader
+
+
     Public Sub ResList(ByVal resizingListView As ListView)
 
         'resizingListView.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.HeaderSize)
@@ -119,12 +122,6 @@
         frmComputers.chkOTHspis.Checked = False
 
         frmComputers.treebranche.Text = A1
-
-
-
-
-
-
 
         System.Windows.Forms.Application.DoEvents()
 
@@ -941,7 +938,7 @@ Error_:
 
         strTime = Format(TimeOfDay, "hh:mm:ss")
         strDate = Split(Date.Today, " ")
-        
+
         Dim sSQL As String
 
         Select Case DB_N
@@ -960,9 +957,9 @@ Error_:
                 sSQL = "INSERT INTO T_Log (User_ID,Activity,[Date],[Time]) VALUES ('" & uSERID & "-on-" & uPCNAME & "','" & Aktivitas & "','" & strDate(0) & "','" & strTime & "')"
 
         End Select
-        
+
         DB7.Execute(sSQL)
-        
+
         'Dim rs As Recordset
         'rs = New Recordset
         'rs.Open("SELECT * FROM T_Log", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -1251,18 +1248,8 @@ err_:
 
         Dim rs As Recordset
         Dim sSQL As String
-
-        sSQL = "SELECT count(*) as t_n from spr_other where C='1'"
-        rs = New Recordset
-        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
         Dim A1 As String
 
-        With rs
-            A1 = .Fields("t_n").Value
-        End With
-        rs.Close()
-        rs = Nothing
 
         sCMB.Items.Clear()
 
@@ -1270,14 +1257,18 @@ err_:
 
 
             Case "PC"
+
+                sSQL = "Select count(*) as t_n From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "' and TipTehn='CNT' and Otvetstvennyj='" & tmpOTV & "'"
+
                 rs = New Recordset
-                rs.Open("Select count(*) as t_n From kompy where filial='" & sFIL & "' and mesto='" & sDEP & "' and kabn='" & sOFF & "' and TipTehn='CNT' and Otvetstvennyj='" & tmpOTV & "'", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 With rs
                     A1 = .Fields("t_n").Value
                 End With
                 rs.Close()
                 rs = Nothing
+
 
                 Select Case A1
 
@@ -1336,6 +1327,7 @@ err_:
 
 
         End Select
+
 
 
         Select Case A1
@@ -1452,6 +1444,40 @@ err_:
 
         frmMain.Cursor = Cursors.Default
 
+    End Sub
+
+    Public Sub SORTING_LV(ByVal LV As ListView, e As System.Windows.Forms.ColumnClickEventArgs)
+
+        Dim new_sorting_column As ColumnHeader =
+              LV.Columns(e.Column)
+        Dim sort_order As SortOrder
+        If m_SortingColumn Is Nothing Then
+            sort_order = SortOrder.Ascending
+        Else
+            If new_sorting_column.Equals(m_SortingColumn) Then
+                If m_SortingColumn.Text.StartsWith("> ") Then
+                    sort_order = SortOrder.Descending
+                Else
+                    sort_order = SortOrder.Ascending
+                End If
+            Else
+                sort_order = SortOrder.Ascending
+            End If
+
+            m_SortingColumn.Text = m_SortingColumn.Text.Substring(2)
+        End If
+
+        m_SortingColumn = new_sorting_column
+        If sort_order = SortOrder.Ascending Then
+            m_SortingColumn.Text = "> " & m_SortingColumn.Text
+        Else
+            m_SortingColumn.Text = "< " & m_SortingColumn.Text
+        End If
+
+        LV.ListViewItemSorter = New ListViewComparer(e.Column, sort_order)
+
+        LV.Sort()
 
     End Sub
+
 End Module

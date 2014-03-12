@@ -2266,35 +2266,9 @@ Public Class frmCRT3
 
     Private Sub lvCartZAP_ColumnClick(ByVal sender As Object, ByVal e As ColumnClickEventArgs) _
         Handles lvCartZAP.ColumnClick
-        Dim new_sorting_column As ColumnHeader =
-                lvCartZAP.Columns(e.Column)
-        Dim sort_order As SortOrder
-        If m_SortingColumn Is Nothing Then
-            sort_order = SortOrder.Ascending
-        Else
-            If new_sorting_column.Equals(m_SortingColumn) Then
-                If m_SortingColumn.Text.StartsWith("> ") Then
-                    sort_order = SortOrder.Descending
-                Else
-                    sort_order = SortOrder.Ascending
-                End If
-            Else
-                sort_order = SortOrder.Ascending
-            End If
 
-            m_SortingColumn.Text = m_SortingColumn.Text.Substring(2)
-        End If
+        SORTING_LV(lvCartZAP, e)
 
-        m_SortingColumn = new_sorting_column
-        If sort_order = SortOrder.Ascending Then
-            m_SortingColumn.Text = "> " & m_SortingColumn.Text
-        Else
-            m_SortingColumn.Text = "< " & m_SortingColumn.Text
-        End If
-
-        lvCartZAP.ListViewItemSorter = New ListViewComparer(e.Column, sort_order)
-
-        lvCartZAP.Sort()
     End Sub
 
     Private Sub lvCartZAP_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles lvCartZAP.DoubleClick
@@ -3478,35 +3452,9 @@ Public Class frmCRT3
 
     Private Sub lvCRTMove_ColumnClick(ByVal sender As Object, ByVal e As ColumnClickEventArgs) _
         Handles lvCRTMove.ColumnClick
-        Dim new_sorting_column As ColumnHeader =
-                lvCRTMove.Columns(e.Column)
-        Dim sort_order As SortOrder
-        If m_SortingColumn Is Nothing Then
-            sort_order = SortOrder.Ascending
-        Else
-            If new_sorting_column.Equals(m_SortingColumn) Then
-                If m_SortingColumn.Text.StartsWith("> ") Then
-                    sort_order = SortOrder.Descending
-                Else
-                    sort_order = SortOrder.Ascending
-                End If
-            Else
-                sort_order = SortOrder.Ascending
-            End If
 
-            m_SortingColumn.Text = m_SortingColumn.Text.Substring(2)
-        End If
+        SORTING_LV(lvCRTMove, e)
 
-        m_SortingColumn = new_sorting_column
-        If sort_order = SortOrder.Ascending Then
-            m_SortingColumn.Text = "> " & m_SortingColumn.Text
-        Else
-            m_SortingColumn.Text = "< " & m_SortingColumn.Text
-        End If
-
-        lvCRTMove.ListViewItemSorter = New ListViewComparer(e.Column, sort_order)
-
-        lvCRTMove.Sort()
     End Sub
 
     Private Sub lvCRTMove_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _

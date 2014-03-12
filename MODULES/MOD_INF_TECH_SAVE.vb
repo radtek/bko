@@ -567,17 +567,21 @@ sAR:
         If frmComputers.chkOTHspis.Checked = False Then _chkOTHspis = 0 Else _chkOTHspis = 1
         If frmComputers.chkOTHNNb.Checked = False Then _chkOTHNNb = 0 Else _chkOTHNNb = 1
 
+
+        'frmComputers.txtOTHIP.Text
+
+
         Dim sSQL As String
 
         Select Case frmComputers.EDT
 
             Case False
 
-                sSQL = "INSERT INTO kompy (PRINTER_NAME_1,PRINTER_SN_1,Ser_N_SIS,PRINTER_PROIZV_1,port_1,INV_NO_PRINTER,TIPtehn,PCL,tip_compa) VALUES ('" & frmComputers.cmbOTH.Text & "','" & frmComputers.txtOTHSN.Text & "','" & frmComputers.txtOTHSN.Text & "','" & frmComputers.PROiZV39.Text & "','" & frmComputers.txtOTHmemo.Text & "','" & frmComputers.txtOTHinnumber.Text & "','" & TipTehn & "'," & unaPCL & ",'" & sTIP_COMPA & "')"
+                sSQL = "INSERT INTO kompy (PRINTER_NAME_1,PRINTER_SN_1,Ser_N_SIS,PRINTER_PROIZV_1,port_1,INV_NO_PRINTER,TIPtehn,PCL,tip_compa,NET_IP_1) VALUES ('" & frmComputers.cmbOTH.Text & "','" & frmComputers.txtOTHSN.Text & "','" & frmComputers.txtOTHSN.Text & "','" & frmComputers.PROiZV39.Text & "','" & frmComputers.txtOTHmemo.Text & "','" & frmComputers.txtOTHinnumber.Text & "','" & TipTehn & "'," & unaPCL & ",'" & sTIP_COMPA & "','" & frmComputers.txtOTHIP.Text & "')"
 
             Case True
 
-                sSQL = "UPDATE kompy SET PRINTER_NAME_1='" & frmComputers.cmbOTH.Text & "', PRINTER_SN_1='" & frmComputers.txtOTHSN.Text & "', Ser_N_SIS='" & frmComputers.txtOTHSN.Text & "', PRINTER_PROIZV_1='" & frmComputers.PROiZV39.Text & "', port_1='" & frmComputers.txtOTHmemo.Text & "', INV_NO_PRINTER='" & frmComputers.txtOTHinnumber.Text & "', TIPtehn='" & TipTehn & "', PCL=" & unaPCL & " , tip_compa='" & frmComputers.cmbOTHConnect.Text & "' WHERE id =" & sSID
+                sSQL = "UPDATE kompy SET PRINTER_NAME_1='" & frmComputers.cmbOTH.Text & "', PRINTER_SN_1='" & frmComputers.txtOTHSN.Text & "', Ser_N_SIS='" & frmComputers.txtOTHSN.Text & "', PRINTER_PROIZV_1='" & frmComputers.PROiZV39.Text & "', port_1='" & frmComputers.txtOTHmemo.Text & "', INV_NO_PRINTER='" & frmComputers.txtOTHinnumber.Text & "', TIPtehn='" & TipTehn & "', PCL=" & unaPCL & " , tip_compa='" & frmComputers.cmbOTHConnect.Text & "', NET_IP_1='" & frmComputers.txtOTHIP.Text & "' WHERE id =" & sSID
 
         End Select
 
@@ -627,6 +631,16 @@ sAR:
         Call UPDATE_OPLATA(frmComputers.txtOTHSfN.Text, frmComputers.txtOTHcash.Text, frmComputers.txtOTHSumm.Text, frmComputers.txtOTHZay.Text, frmComputers.dtOTHdataVvoda.Value, frmComputers.dtOTHSFdate.Value, _chkOTHspis, _chkOTHNNb, frmComputers.dtOTHSpisanie.Value, sSID)
 
         Call SAVE_GARANT(sSID, frmComputers.cmbOTHPostav, frmComputers.dtGOTHPr, frmComputers.dtGOTHok)
+
+        Select Case TipTehn
+
+            Case "IBP"
+                sSQL = "UPDATE kompy SET SNMP_COMMUNITY='" & frmComputers.txtSNMP.Text & "', SNMP=" & frmComputers.chkSNMP.Checked & " WHERE id =" & sSID
+
+                DB7.Execute(sSQL)
+
+        End Select
+
 
         frmComputers.cmbOTH.BackColor = frmComputers.cmbOTH.BackColor
         frmComputers.cmbOTHFil.BackColor = frmComputers.cmbOTHFil.BackColor
@@ -3618,8 +3632,8 @@ Error_:
 
             If sTEMP3 = 0 Or sTEMP3 = 2 Then
 
-                sTEMP0 = rsdb.Fields("PRINTER_NAME_1").Value
-                sTEMP1 = rsdb.Fields("PORT_1").Value
+                If Not IsDBNull(.Fields("PRINTER_NAME_1").Value) Then sTEMP0 = .Fields("PRINTER_NAME_1").Value
+                If Not IsDBNull(.Fields("PORT_1").Value) Then sTEMP1 = .Fields("PORT_1").Value
 
                 sADD = False
 
@@ -3701,9 +3715,8 @@ Error_:
 
                 End If
 
-                sTEMP0 = rsdb.Fields("PRINTER_NAME_2").Value
-                sTEMP1 = rsdb.Fields("PORT_2").Value
-
+                If Not IsDBNull(.Fields("PRINTER_NAME_2").Value) Then sTEMP0 = .Fields("PRINTER_NAME_2").Value
+                If Not IsDBNull(.Fields("PORT_2").Value) Then sTEMP1 = .Fields("PORT_2").Value
 
                 If _
                     Left(sTEMP0, 2) <> "\\" And Left(sTEMP1, 2) <> "IP" And Len(sTEMP0) <> 0 And
@@ -3793,9 +3806,8 @@ Error_:
                 End If
 
 
-                sTEMP0 = rsdb.Fields("PRINTER_NAME_3").Value
-                sTEMP1 = rsdb.Fields("PORT_3").Value
-
+                If Not IsDBNull(.Fields("PRINTER_NAME_3").Value) Then sTEMP0 = .Fields("PRINTER_NAME_3").Value
+                If Not IsDBNull(.Fields("PORT_3").Value) Then sTEMP1 = .Fields("PORT_3").Value
 
                 If _
                     Left(sTEMP0, 2) <> "\\" And Left(sTEMP1, 2) <> "IP" And Len(sTEMP0) <> 0 And
@@ -3885,8 +3897,7 @@ Error_:
 
             If sTEMP3 = 0 Or sTEMP3 = 1 Then
                 'МОНИТОР
-                sTEMP0 = rsdb.Fields("MONITOR_NAME").Value
-
+                If Not IsDBNull(.Fields("MONITOR_NAME").Value) Then sTEMP0 = .Fields("MONITOR_NAME").Value
 
                 If Left(sTEMP0, 2) <> "Мо" And Len(sTEMP0) <> 0 Then
 
@@ -3957,7 +3968,8 @@ Error_:
 
             If sTEMP3 = 0 Or sTEMP3 = 3 Then
                 'ИБП
-                sTEMP0 = rsdb.Fields("IBP_NAME").Value
+
+                If Not IsDBNull(.Fields("IBP_NAME").Value) Then sTEMP0 = .Fields("IBP_NAME").Value
 
                 If Left(sTEMP0, 2) <> "Мо" And Len(sTEMP0) <> 0 Then
 
@@ -4032,7 +4044,7 @@ Error_:
             'Клавиатура+Мышь
             If sTEMP3 = 0 Or sTEMP3 = 4 Then
 
-                sTEMP0 = rsdb.Fields("KEYBOARD_NAME").Value
+                If Not IsDBNull(.Fields("KEYBOARD_NAME").Value) Then sTEMP0 = .Fields("KEYBOARD_NAME").Value
 
                 If Left(sTEMP0, 2) <> "Мо" And Len(sTEMP0) <> 0 Then
 
@@ -4106,7 +4118,7 @@ Error_:
 
                 '#########################################################
                 'Мышь
-                sTEMP0 = rsdb.Fields("MOUSE_NAME").Value
+                If Not IsDBNull(.Fields("MOUSE_NAME").Value) Then sTEMP0 = .Fields("MOUSE_NAME").Value
 
                 If Left(sTEMP0, 2) <> "Мо" And Len(sTEMP0) <> 0 Then
 
@@ -4184,7 +4196,7 @@ Error_:
             'Сетевой фильтр
             If sTEMP3 = 0 Or sTEMP3 = 5 Then
 
-                sTEMP0 = rsdb.Fields("FILTR_NAME").Value
+                If Not IsDBNull(.Fields("FILTR_NAME").Value) Then sTEMP0 = .Fields("FILTR_NAME").Value
 
                 If Left(sTEMP0, 2) <> "Мо" And Len(sTEMP0) <> 0 Then
 

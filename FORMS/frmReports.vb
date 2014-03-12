@@ -1831,35 +1831,9 @@ err:
 
     Private Sub lvReport2Cl_ColumnClick(ByVal sender As Object, ByVal e As ColumnClickEventArgs) _
         Handles lvReport2Cl.ColumnClick
-        Dim new_sorting_column As ColumnHeader =
-                lvReport2Cl.Columns(e.Column)
-        Dim sort_order As SortOrder
-        If m_SortingColumn Is Nothing Then
-            sort_order = SortOrder.Ascending
-        Else
-            If new_sorting_column.Equals(m_SortingColumn) Then
-                If m_SortingColumn.Text.StartsWith("> ") Then
-                    sort_order = SortOrder.Descending
-                Else
-                    sort_order = SortOrder.Ascending
-                End If
-            Else
-                sort_order = SortOrder.Ascending
-            End If
 
-            m_SortingColumn.Text = m_SortingColumn.Text.Substring(2)
-        End If
+        SORTING_LV(lvReport2Cl, e)
 
-        m_SortingColumn = new_sorting_column
-        If sort_order = SortOrder.Ascending Then
-            m_SortingColumn.Text = "> " & m_SortingColumn.Text
-        Else
-            m_SortingColumn.Text = "< " & m_SortingColumn.Text
-        End If
-
-        lvReport2Cl.ListViewItemSorter = New ListViewComparer(e.Column, sort_order)
-
-        lvReport2Cl.Sort()
     End Sub
 
     Private Sub btnRefresh_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnRefresh.Click
@@ -1878,35 +1852,9 @@ err:
 
     Private Sub lvRemont_ColumnClick(ByVal sender As Object, ByVal e As ColumnClickEventArgs) _
         Handles lvRemont.ColumnClick
-        Dim new_sorting_column As ColumnHeader =
-                lvRemont.Columns(e.Column)
-        Dim sort_order As SortOrder
-        If m_SortingColumn Is Nothing Then
-            sort_order = SortOrder.Ascending
-        Else
-            If new_sorting_column.Equals(m_SortingColumn) Then
-                If m_SortingColumn.Text.StartsWith("> ") Then
-                    sort_order = SortOrder.Descending
-                Else
-                    sort_order = SortOrder.Ascending
-                End If
-            Else
-                sort_order = SortOrder.Ascending
-            End If
 
-            m_SortingColumn.Text = m_SortingColumn.Text.Substring(2)
-        End If
+        SORTING_LV(lvRemont, e)
 
-        m_SortingColumn = new_sorting_column
-        If sort_order = SortOrder.Ascending Then
-            m_SortingColumn.Text = "> " & m_SortingColumn.Text
-        Else
-            m_SortingColumn.Text = "< " & m_SortingColumn.Text
-        End If
-
-        lvRemont.ListViewItemSorter = New ListViewComparer(e.Column, sort_order)
-
-        lvRemont.Sort()
     End Sub
 
 
@@ -2661,6 +2609,9 @@ err:
 
         If optOTH.Checked = True Then TIPST = "OTH"
 
+        If rbAlltech.Checked = True Then TIPST = "OTH"
+
+
 
         Select Case TIPST
 
@@ -2680,7 +2631,7 @@ err:
 
 
         Exit Sub
-        Error_:
+Error_:
         Debug.Print(Err.Description)
     End Sub
 
@@ -3009,156 +2960,178 @@ Error_:
         'cmbOthers<>pTEXT(1)
 
 
-        If cmbOthers.Text = pTEXT(1) Then
+        Select Case rbAlltech.Checked
 
-            If cmbBranche.Text = pTEXT(1) Then
-                sSQL = "SELECT * FROM kompy WHERE tiptehn <> 'PC' ORDER BY FILIAL, NET_NAME"
-            Else
-            End If
+            Case False
 
-            If cmbBranche.Text = pTEXT(2) Then
-                sSQL = "SELECT * FROM kompy WHERE mesto = '" & cmbDepartment.Text &
-                       "' and tiptehn <> 'PC' ORDER BY mesto, NET_NAME"
-            Else
-            End If
+                If cmbOthers.Text = pTEXT(1) Then
 
-            If cmbBranche.Text <> pTEXT(1) And cmbDepartment.Text <> pTEXT(1) And cmbBranche.Text <> pTEXT(2) Then
-                sSQL = "SELECT * FROM kompy WHERE tiptehn <> 'PC' and filial = '" & cmbBranche.Text & "' AND mesto = '" &
-                       cmbDepartment.Text & "' ORDER BY FILIAL, NET_NAME"
-            Else
-            End If
+                    If cmbBranche.Text = pTEXT(1) Then
+                        sSQL = "SELECT * FROM kompy WHERE tiptehn <> 'PC' ORDER BY FILIAL, NET_NAME"
+                    Else
+                    End If
 
+                    If cmbBranche.Text = pTEXT(2) Then
+                        sSQL = "SELECT * FROM kompy WHERE mesto = '" & cmbDepartment.Text &
+                               "' and tiptehn <> 'PC' ORDER BY mesto, NET_NAME"
+                    Else
+                    End If
 
-            If cmbBranche.Text <> pTEXT(1) And cmbDepartment.Text = pTEXT(1) And cmbOffice.Text = pTEXT(1) Then
-                sSQL = "SELECT * FROM kompy WHERE tiptehn <> 'PC' and filial = '" & cmbBranche.Text &
-                       "' ORDER BY FILIAL, NET_NAME"
-            Else
-            End If
+                    If cmbBranche.Text <> pTEXT(1) And cmbDepartment.Text <> pTEXT(1) And cmbBranche.Text <> pTEXT(2) Then
+                        sSQL = "SELECT * FROM kompy WHERE tiptehn <> 'PC' and filial = '" & cmbBranche.Text & "' AND mesto = '" &
+                               cmbDepartment.Text & "' ORDER BY FILIAL, NET_NAME"
+                    Else
+                    End If
 
+                    If cmbBranche.Text <> pTEXT(1) And cmbDepartment.Text = pTEXT(1) And cmbOffice.Text = pTEXT(1) Then
+                        sSQL = "SELECT * FROM kompy WHERE tiptehn <> 'PC' and filial = '" & cmbBranche.Text &
+                               "' ORDER BY FILIAL, NET_NAME"
+                    Else
+                    End If
 
-            If _
-                cmbBranche.Text <> pTEXT(1) And cmbDepartment.Text <> pTEXT(1) And cmbBranche.Text <> pTEXT(2) And
-                cmbOffice.Text <> pTEXT(1) Then
-                sSQL = "SELECT * FROM kompy WHERE tiptehn <> 'PC' and filial = '" & cmbBranche.Text & "' AND mesto = '" &
-                       cmbDepartment.Text & "' AND kabn='" & cmbOffice.Text & "' ORDER BY FILIAL, NET_NAME"
-            Else
-            End If
+                    If _
+                        cmbBranche.Text <> pTEXT(1) And cmbDepartment.Text <> pTEXT(1) And cmbBranche.Text <> pTEXT(2) And
+                        cmbOffice.Text <> pTEXT(1) Then
+                        sSQL = "SELECT * FROM kompy WHERE tiptehn <> 'PC' and filial = '" & cmbBranche.Text & "' AND mesto = '" &
+                               cmbDepartment.Text & "' AND kabn='" & cmbOffice.Text & "' ORDER BY FILIAL, NET_NAME"
+                    Else
+                    End If
 
-        Else
+                Else
 
-            Dim sTEXTP
+                    Dim sTEXTP
 
+                    Select Case cmbOthers.Text
 
-            Select Case cmbOthers.Text
+                        Case langIni.GetString("frmMain", "28", "Копир")
 
-                Case langIni.GetString("frmMain", "28", "Копир")
+                            sTEXTP = "KOpir"
 
-                    sTEXTP = "KOpir"
+                        Case langIni.GetString("frmMain", "29", "Принтер")
 
-                Case langIni.GetString("frmMain", "29", "Принтер")
+                            sTEXTP = "Printer"
 
-                    sTEXTP = "Printer"
+                        Case langIni.GetString("frmMain", "30", "МФУ")
 
+                            sTEXTP = "MFU"
 
-                Case langIni.GetString("frmMain", "30", "МФУ")
+                        Case langIni.GetString("frmMain", "31", "Сетевое оборудование")
 
-                    sTEXTP = "MFU"
+                            sTEXTP = "NET"
 
+                        Case langIni.GetString("frmMain", "32", "Телефон")
 
-                Case langIni.GetString("frmMain", "31", "Сетевое оборудование")
+                            sTEXTP = "PHONE"
 
-                    sTEXTP = "NET"
+                        Case langIni.GetString("frmMain", "33", "Фотоаппарат")
 
+                            sTEXTP = "PHOTO"
 
-                Case langIni.GetString("frmMain", "32", "Телефон")
+                        Case langIni.GetString("frmMain", "34", "Факс")
 
-                    sTEXTP = "PHONE"
+                            sTEXTP = "FAX"
 
-                Case langIni.GetString("frmMain", "33", "Фотоаппарат")
+                        Case langIni.GetString("frmMain", "35", "Монитор")
 
-                    sTEXTP = "PHOTO"
+                            sTEXTP = "MONITOR"
 
-                Case langIni.GetString("frmMain", "34", "Факс")
+                        Case langIni.GetString("frmMain", "36", "дисковод ZIP")
 
+                            sTEXTP = "ZIP"
 
-                    sTEXTP = "FAX"
+                        Case langIni.GetString("frmMain", "37", "Сканер")
 
+                            sTEXTP = "SCANER"
 
-                Case langIni.GetString("frmMain", "35", "Монитор")
+                        Case langIni.GetString("frmMain", "38", "Другое оборудование")
 
+                            sTEXTP = "OT"
 
-                    sTEXTP = "MONITOR"
+                        Case langIni.GetString("frmMain", "39", "USB Устройства")
 
-                Case langIni.GetString("frmMain", "36", "дисковод ZIP")
+                            sTEXTP = "USB"
 
-                    sTEXTP = "ZIP"
+                        Case langIni.GetString("frmMain", "40", "Акустические Системы")
 
-                Case langIni.GetString("frmMain", "37", "Сканер")
+                            sTEXTP = "SOUND"
 
-                    sTEXTP = "SCANER"
+                        Case langIni.GetString("frmMain", "41", "Бесперебойники")
 
-                Case langIni.GetString("frmMain", "38", "Другое оборудование")
+                            sTEXTP = "IBP"
 
-                    sTEXTP = "OT"
+                        Case Else
 
-                Case langIni.GetString("frmMain", "39", "USB Устройства")
+                    End Select
 
-                    sTEXTP = "USB"
+                    If cmbBranche.Text = pTEXT(1) Then
+                        sSQL = "SELECT * FROM kompy WHERE tiptehn ='" & sTEXTP & "' ORDER BY FILIAL, NET_NAME"
+                    Else
+                    End If
 
-                Case langIni.GetString("frmMain", "40", "Акустические Системы")
+                    If cmbBranche.Text = pTEXT(2) Then
+                        sSQL = "SELECT * FROM kompy WHERE mesto = '" & cmbDepartment.Text & "' and tiptehn = '" & sTEXTP &
+                               "' ORDER BY mesto, NET_NAME"
+                    Else
+                    End If
 
-                    sTEXTP = "SOUND"
+                    If cmbBranche.Text <> pTEXT(1) And cmbDepartment.Text <> pTEXT(1) And cmbBranche.Text <> pTEXT(2) Then
+                        sSQL = "SELECT * FROM kompy WHERE tiptehn = '" & sTEXTP & "' and filial = '" & cmbBranche.Text &
+                               "' AND mesto = '" & cmbDepartment.Text & "' ORDER BY FILIAL, NET_NAME"
+                    Else
+                    End If
 
-                Case langIni.GetString("frmMain", "41", "Бесперебойники")
+                    If cmbBranche.Text <> pTEXT(1) And cmbDepartment.Text = pTEXT(1) And cmbOffice.Text = pTEXT(1) Then
+                        sSQL = "SELECT * FROM kompy WHERE tiptehn = '" & sTEXTP & "' and filial = '" & cmbBranche.Text &
+                               "' ORDER BY FILIAL, NET_NAME"
+                    Else
+                    End If
 
-                    sTEXTP = "IBP"
+                    If _
+                        cmbBranche.Text <> pTEXT(1) And cmbDepartment.Text <> pTEXT(1) And cmbBranche.Text <> pTEXT(2) And
+                        cmbOffice.Text <> pTEXT(1) Then
+                        sSQL = "SELECT * FROM kompy WHERE tiptehn = '" & sTEXTP & "' and filial = '" & cmbBranche.Text &
+                               "' AND mesto = '" & cmbDepartment.Text & "' AND kabn='" & cmbOffice.Text &
+                               "' ORDER BY FILIAL, NET_NAME"
+                    Else
+                    End If
 
-                Case Else
+                End If
 
+            Case True
+                '#######################################################################
+                '#######################################################################
 
-            End Select
+                If cmbBranche.Text = pTEXT(1) Then
+                    sSQL = "SELECT * FROM kompy ORDER BY FILIAL, NET_NAME"
+                Else
+                End If
 
+                If cmbBranche.Text = pTEXT(2) Then
+                    sSQL = "SELECT * FROM kompy WHERE mesto = '" & cmbDepartment.Text & "' ORDER BY mesto, NET_NAME"
+                Else
+                End If
 
-            If cmbBranche.Text = pTEXT(1) Then
-                sSQL = "SELECT * FROM kompy WHERE tiptehn ='" & sTEXTP & "' ORDER BY FILIAL, NET_NAME"
-            Else
-            End If
+                If cmbBranche.Text <> pTEXT(1) And cmbDepartment.Text <> pTEXT(1) And cmbBranche.Text <> pTEXT(2) Then
+                    sSQL = "SELECT * FROM kompy WHERE filial = '" & cmbBranche.Text & "' AND mesto = '" & cmbDepartment.Text & "' ORDER BY FILIAL, NET_NAME"
+                Else
+                End If
 
-            If cmbBranche.Text = pTEXT(2) Then
-                sSQL = "SELECT * FROM kompy WHERE mesto = '" & cmbDepartment.Text & "' and tiptehn = '" & sTEXTP &
-                       "' ORDER BY mesto, NET_NAME"
-            Else
-            End If
+                If cmbBranche.Text <> pTEXT(1) And cmbDepartment.Text = pTEXT(1) And cmbOffice.Text = pTEXT(1) Then
+                    sSQL = "SELECT * FROM kompy WHERE filial = '" & cmbBranche.Text & "' ORDER BY FILIAL, NET_NAME"
+                Else
+                End If
 
-            If cmbBranche.Text <> pTEXT(1) And cmbDepartment.Text <> pTEXT(1) And cmbBranche.Text <> pTEXT(2) Then
-                sSQL = "SELECT * FROM kompy WHERE tiptehn = '" & sTEXTP & "' and filial = '" & cmbBranche.Text &
-                       "' AND mesto = '" & cmbDepartment.Text & "' ORDER BY FILIAL, NET_NAME"
-            Else
-            End If
+                If _
+                    cmbBranche.Text <> pTEXT(1) And cmbDepartment.Text <> pTEXT(1) And cmbBranche.Text <> pTEXT(2) And
+                    cmbOffice.Text <> pTEXT(1) Then
+                    sSQL = "SELECT * FROM kompy WHERE filial = '" & cmbBranche.Text & "' AND mesto = '" & cmbDepartment.Text & "' AND kabn='" & cmbOffice.Text & "' ORDER BY FILIAL, NET_NAME"
+                Else
+                End If
 
-
-            If cmbBranche.Text <> pTEXT(1) And cmbDepartment.Text = pTEXT(1) And cmbOffice.Text = pTEXT(1) Then
-                sSQL = "SELECT * FROM kompy WHERE tiptehn = '" & sTEXTP & "' and filial = '" & cmbBranche.Text &
-                       "' ORDER BY FILIAL, NET_NAME"
-            Else
-            End If
-
-
-            If _
-                cmbBranche.Text <> pTEXT(1) And cmbDepartment.Text <> pTEXT(1) And cmbBranche.Text <> pTEXT(2) And
-                cmbOffice.Text <> pTEXT(1) Then
-                sSQL = "SELECT * FROM kompy WHERE tiptehn = '" & sTEXTP & "' and filial = '" & cmbBranche.Text &
-                       "' AND mesto = '" & cmbDepartment.Text & "' AND kabn='" & cmbOffice.Text &
-                       "' ORDER BY FILIAL, NET_NAME"
-            Else
-            End If
-
-        End If
-
+        End Select
 
         rs = New Recordset
         rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockBatchOptimistic)
-
 
         LvKompOtd.Columns.Clear()
         LvKompOtd.Columns.Add(("№"), 1, HorizontalAlignment.Left)
@@ -3193,24 +3166,24 @@ Error_:
                     cmbBranche.Text = rs.Fields("filial").Value Then
 
 
-                    LvKompOtd.Items.Add(.Fields("Id").Value)
+                    LvKompOtd.Items.Add(rs.Fields("Id").Value)
 
                     If rs.Fields("tiptehn").Value = "MONITOR" Then
                         'LvKompOtd.Items.Add(.Fields("MONITOR_NAME").Value)
 
-                        LvKompOtd.Items(CInt(intj)).SubItems.Add(.Fields("MONITOR_NAME").Value)
+                        LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("MONITOR_NAME").Value)
                     Else
                         'LvKompOtd.Items.Add(.Fields("NET_NAME").Value)
-                        LvKompOtd.Items(CInt(intj)).SubItems.Add(.Fields("NET_NAME").Value)
+                        LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("NET_NAME").Value)
                         'mesto_.Visible = True
                     End If
 
 
                     If Len(.Fields("filial").Value) = 0 Then
 
-                        LvKompOtd.Items(CInt(intj)).SubItems.Add(.Fields("mesto").Value)
+                        LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("mesto").Value)
                     Else
-                        LvKompOtd.Items(CInt(intj)).SubItems.Add(.Fields("filial").Value & "/" & .Fields("mesto").Value & "/" & .Fields("kabn").Value)
+                        LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("filial").Value & "/" & rs.Fields("mesto").Value & "/" & rs.Fields("kabn").Value)
 
 
                     End If
@@ -3264,7 +3237,29 @@ Error_:
                         LvKompOtd.Items(CInt(intj)).SubItems.Add("")
                     End If
 
-                    Select Case .Fields("tiptehn").Value
+                    Select Case rs.Fields("tiptehn").Value
+
+
+                        Case "PC"
+
+                            ' LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
+
+                            LvKompOtd.Items(CInt(intj)).SubItems.Add(langIni.GetString("frmReports", "B(75)", "Компьютер"))
+
+                            If Not IsDBNull(.Fields("Ser_N_SIS").Value) Then
+                                LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("Ser_N_SIS").Value)
+                            Else
+                                LvKompOtd.Items(CInt(intj)).SubItems.Add("")
+                            End If
+
+                            If Not IsDBNull(.Fields("INV_NO_SYSTEM").Value) Then
+                                LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("INV_NO_SYSTEM").Value)
+                            Else
+                                LvKompOtd.Items(CInt(intj)).SubItems.Add("")
+                            End If
+
+                            'If chkTeh(49) = True Then LvKompOtd.Items(CInt(intj)).SubItems.Add(.Fields("DataVVoda").Value)
+                            'If chkTeh(50) = True Then LvKompOtd.Items(CInt(intj)).SubItems.Add(.Fields("SYS_PR").Value)
 
                         Case "PHOTO"
 
@@ -3609,6 +3604,25 @@ Error_:
 
                             ' LvKompOtd.Items(CInt(intj)).SubItems.Add(tUNAME)
 
+                        Case Else
+
+                            ' LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
+                            LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("TIP_COMPA").Value)
+
+                            If Not IsDBNull(.Fields("PRINTER_SN_1").Value) Then
+                                LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("PRINTER_SN_1").Value)
+                            Else
+                                LvKompOtd.Items(CInt(intj)).SubItems.Add("")
+                            End If
+
+                            If Not IsDBNull(.Fields("INV_NO_PRINTER").Value) Then
+                                LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("INV_NO_PRINTER").Value)
+                            Else
+                                LvKompOtd.Items(CInt(intj)).SubItems.Add("")
+                            End If
+
+                            ' LvKompOtd.Items(CInt(intj)).SubItems.Add(tUNAME)
+
                     End Select
 
                     If Not IsDBNull(.Fields("StoimRub").Value) Then
@@ -3644,6 +3658,13 @@ Error_:
                 .MoveNext()
             Loop
         End With
+
+        rs.Close()
+        rs = Nothing
+
+
+
+
 
         Exit Sub
 Error_:
@@ -4197,35 +4218,9 @@ err_:
 
     Private Sub LvKompOtd_ColumnClick(ByVal sender As Object, ByVal e As ColumnClickEventArgs) _
         Handles LvKompOtd.ColumnClick
-        Dim new_sorting_column As ColumnHeader =
-                LvKompOtd.Columns(e.Column)
-        Dim sort_order As SortOrder
-        If m_SortingColumn Is Nothing Then
-            sort_order = SortOrder.Ascending
-        Else
-            If new_sorting_column.Equals(m_SortingColumn) Then
-                If m_SortingColumn.Text.StartsWith("> ") Then
-                    sort_order = SortOrder.Descending
-                Else
-                    sort_order = SortOrder.Ascending
-                End If
-            Else
-                sort_order = SortOrder.Ascending
-            End If
 
-            m_SortingColumn.Text = m_SortingColumn.Text.Substring(2)
-        End If
+        SORTING_LV(LvKompOtd, e)
 
-        m_SortingColumn = new_sorting_column
-        If sort_order = SortOrder.Ascending Then
-            m_SortingColumn.Text = "> " & m_SortingColumn.Text
-        Else
-            m_SortingColumn.Text = "< " & m_SortingColumn.Text
-        End If
-
-        LvKompOtd.ListViewItemSorter = New ListViewComparer(e.Column, sort_order)
-
-        LvKompOtd.Sort()
     End Sub
 
     Private Sub cmbGar_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
@@ -6793,37 +6788,25 @@ Error_:
     End Sub
 
     Private Sub lstvPPR_ColumnClick(sender As Object, e As ColumnClickEventArgs) Handles lstvPPR.ColumnClick
-        Dim new_sorting_column As ColumnHeader =
-                lstvPPR.Columns(e.Column)
-        Dim sort_order As SortOrder
-        If m_SortingColumn Is Nothing Then
-            sort_order = SortOrder.Ascending
-        Else
-            If new_sorting_column.Equals(m_SortingColumn) Then
-                If m_SortingColumn.Text.StartsWith("> ") Then
-                    sort_order = SortOrder.Descending
-                Else
-                    sort_order = SortOrder.Ascending
-                End If
-            Else
-                sort_order = SortOrder.Ascending
-            End If
 
-            m_SortingColumn.Text = m_SortingColumn.Text.Substring(2)
-        End If
+        SORTING_LV(lstvPPR, e)
 
-        m_SortingColumn = new_sorting_column
-        If sort_order = SortOrder.Ascending Then
-            m_SortingColumn.Text = "> " & m_SortingColumn.Text
-        Else
-            m_SortingColumn.Text = "< " & m_SortingColumn.Text
-        End If
-
-        lstvPPR.ListViewItemSorter = New ListViewComparer(e.Column, sort_order)
-
-        lstvPPR.Sort()
     End Sub
 
     Private Sub lstvPPR_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstvPPR.SelectedIndexChanged
+    End Sub
+
+    Private Sub rbAlltech_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles rbAlltech.CheckedChanged
+
+        Dim langIni As New IniFile(sLANGPATH)
+
+        TIPST = "OTH"
+
+        gbSN.Enabled = False
+        gbPer.Enabled = False
+        gbInf.Enabled = False
+        cmbOthers.Visible = False
+
+
     End Sub
 End Class

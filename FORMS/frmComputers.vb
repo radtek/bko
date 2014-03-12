@@ -501,7 +501,7 @@ Public Class frmComputers
 
         'Дерево
 
-        System.Windows.Forms.Application.DoEvents()
+        ' System.Windows.Forms.Application.DoEvents()
 
         Me.BeginInvoke(New MethodInvoker(AddressOf R_T_LOAD))
 
@@ -755,11 +755,6 @@ Error_:
 
 
         Me.txtMonDum.Visible = False
-        'Me.txtOTHSN.Left = "331" 'esq 130612 
-        'Me.txtOTHSN.Width = "284" 'esq 130612 
-        'Me.txtOTHSN.Left = cmbOTH.Width + 10
-        'Me.txtOTHSN.Width = PROiZV39.Left - (cmbOTH.Width + 20) '"214"
-        'PROiZV39.left - (cmbOTH.Width +10)
 
         Me.cmbOTH.Items.Clear()
 
@@ -1111,13 +1106,6 @@ Error_:
                             FillComboNET(Me.cmbOTH, "Name", "SPR_MONITOR", "", False, True)
 
                             Me.txtMonDum.Visible = True
-                            'Me.txtOTHSN.Left = "471" 'esq 130612 
-                            'Me.txtOTHSN.Width = "146" 'esq 130612 
-                            ' Me.txtOTHSN.Left = "355"
-                            ' Me.txtOTHSN.Width = "108"
-
-                            '   Me.txtOTHSN.Left = cmbOTH.Width + txtMonDum.Width + 10
-                            '  Me.txtOTHSN.Width = PROiZV39.Left - (cmbOTH.Width + txtMonDum.Width + 15) '"214"
 
                             lblTipOther.Visible = False
                             cmbOTHConnect.Visible = False
@@ -1816,36 +1804,10 @@ err_:
 err_:
     End Sub
 
-    Private Sub lstSoftware_ColumnClick(ByVal sender As Object, ByVal e As ColumnClickEventArgs) _
-        Handles lstSoftware.ColumnClick
-        Dim new_sorting_column As ColumnHeader =
-                lstSoftware.Columns(e.Column)
-        Dim sort_order As SortOrder
-        If m_SortingColumn Is Nothing Then
-            sort_order = SortOrder.Ascending
-        Else
-            If new_sorting_column.Equals(m_SortingColumn) Then
-                If m_SortingColumn.Text.StartsWith("> ") Then
-                    sort_order = SortOrder.Descending
-                Else
-                    sort_order = SortOrder.Ascending
-                End If
-            Else
-                sort_order = SortOrder.Ascending
-            End If
+    Private Sub lstSoftware_ColumnClick(ByVal sender As Object, ByVal e As ColumnClickEventArgs) Handles lstSoftware.ColumnClick
 
-            m_SortingColumn.Text = m_SortingColumn.Text.Substring(2)
-        End If
+        SORTING_LV(lstSoftware, e)
 
-        m_SortingColumn = new_sorting_column
-        If sort_order = SortOrder.Ascending Then
-            m_SortingColumn.Text = "> " & m_SortingColumn.Text
-        Else
-            m_SortingColumn.Text = "< " & m_SortingColumn.Text
-        End If
-
-        lstSoftware.ListViewItemSorter = New ListViewComparer(e.Column, sort_order)
-        lstSoftware.Sort()
     End Sub
 
     Private Sub lstSoftware_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles lstSoftware.DoubleClick
@@ -3941,34 +3903,8 @@ err_:
     Private Sub lstUsers_ColumnClick(ByVal sender As Object, ByVal e As ColumnClickEventArgs) _
         Handles lstUsers.ColumnClick
 
-        Dim new_sorting_column As ColumnHeader = lstUsers.Columns(e.Column)
+        SORTING_LV(lstUsers, e)
 
-        Dim sort_order As SortOrder
-        If m_SortingColumn Is Nothing Then
-            sort_order = SortOrder.Ascending
-        Else
-            If new_sorting_column.Equals(m_SortingColumn) Then
-                If m_SortingColumn.Text.StartsWith("> ") Then
-                    sort_order = SortOrder.Descending
-                Else
-                    sort_order = SortOrder.Ascending
-                End If
-            Else
-                sort_order = SortOrder.Ascending
-            End If
-
-            m_SortingColumn.Text = m_SortingColumn.Text.Substring(2)
-        End If
-
-        m_SortingColumn = new_sorting_column
-        If sort_order = SortOrder.Ascending Then
-            m_SortingColumn.Text = "> " & m_SortingColumn.Text
-        Else
-            m_SortingColumn.Text = "< " & m_SortingColumn.Text
-        End If
-
-        lstUsers.ListViewItemSorter = New ListViewComparer(e.Column, sort_order)
-        lstUsers.Sort()
     End Sub
 
     Private Sub lstUsers_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles lstUsers.DoubleClick
@@ -4031,34 +3967,8 @@ err_:
     Private Sub lvRepair_ColumnClick(ByVal sender As Object, ByVal e As ColumnClickEventArgs) _
         Handles lvRepair.ColumnClick
 
-        Dim new_sorting_column As ColumnHeader = lvRepair.Columns(e.Column)
+        SORTING_LV(lvRepair, e)
 
-        Dim sort_order As SortOrder
-        If m_SortingColumn Is Nothing Then
-            sort_order = SortOrder.Ascending
-        Else
-            If new_sorting_column.Equals(m_SortingColumn) Then
-                If m_SortingColumn.Text.StartsWith("> ") Then
-                    sort_order = SortOrder.Descending
-                Else
-                    sort_order = SortOrder.Ascending
-                End If
-            Else
-                sort_order = SortOrder.Ascending
-            End If
-
-            m_SortingColumn.Text = m_SortingColumn.Text.Substring(2)
-        End If
-
-        m_SortingColumn = new_sorting_column
-        If sort_order = SortOrder.Ascending Then
-            m_SortingColumn.Text = "> " & m_SortingColumn.Text
-        Else
-            m_SortingColumn.Text = "< " & m_SortingColumn.Text
-        End If
-
-        lvRepair.ListViewItemSorter = New ListViewComparer(e.Column, sort_order)
-        lvRepair.Sort()
     End Sub
 
     Private Sub lvRepair_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles lvRepair.DoubleClick
@@ -4070,35 +3980,9 @@ err_:
     End Sub
 
     Private Sub lvNotes_ColumnClick(ByVal sender As Object, ByVal e As ColumnClickEventArgs) Handles lvNotes.ColumnClick
-        Dim new_sorting_column As ColumnHeader =
-                lvNotes.Columns(e.Column)
 
-        Dim sort_order As SortOrder
-        If m_SortingColumn Is Nothing Then
-            sort_order = SortOrder.Ascending
-        Else
-            If new_sorting_column.Equals(m_SortingColumn) Then
-                If m_SortingColumn.Text.StartsWith("> ") Then
-                    sort_order = SortOrder.Descending
-                Else
-                    sort_order = SortOrder.Ascending
-                End If
-            Else
-                sort_order = SortOrder.Ascending
-            End If
+        SORTING_LV(lvNotes, e)
 
-            m_SortingColumn.Text = m_SortingColumn.Text.Substring(2)
-        End If
-
-        m_SortingColumn = new_sorting_column
-        If sort_order = SortOrder.Ascending Then
-            m_SortingColumn.Text = "> " & m_SortingColumn.Text
-        Else
-            m_SortingColumn.Text = "< " & m_SortingColumn.Text
-        End If
-
-        lvNotes.ListViewItemSorter = New ListViewComparer(e.Column, sort_order)
-        lvNotes.Sort()
     End Sub
 
     Private Sub lvNotes_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles lvNotes.DoubleClick
@@ -4142,37 +4026,10 @@ err_:
         zCOUNT_LOAD(lvNotesPRN)
     End Sub
 
-    Private Sub lvNotesPRN_ColumnClick(ByVal sender As Object, ByVal e As ColumnClickEventArgs) _
-        Handles lvNotesPRN.ColumnClick
-        Dim new_sorting_column As ColumnHeader =
-                lvNotesPRN.Columns(e.Column)
+    Private Sub lvNotesPRN_ColumnClick(ByVal sender As Object, ByVal e As ColumnClickEventArgs) Handles lvNotesPRN.ColumnClick
 
-        Dim sort_order As SortOrder
-        If m_SortingColumn Is Nothing Then
-            sort_order = SortOrder.Ascending
-        Else
-            If new_sorting_column.Equals(m_SortingColumn) Then
-                If m_SortingColumn.Text.StartsWith("> ") Then
-                    sort_order = SortOrder.Descending
-                Else
-                    sort_order = SortOrder.Ascending
-                End If
-            Else
-                sort_order = SortOrder.Ascending
-            End If
+        SORTING_LV(lvNotesPRN, e)
 
-            m_SortingColumn.Text = m_SortingColumn.Text.Substring(2)
-        End If
-
-        m_SortingColumn = new_sorting_column
-        If sort_order = SortOrder.Ascending Then
-            m_SortingColumn.Text = "> " & m_SortingColumn.Text
-        Else
-            m_SortingColumn.Text = "< " & m_SortingColumn.Text
-        End If
-
-        lvNotesPRN.ListViewItemSorter = New ListViewComparer(e.Column, sort_order)
-        lvNotesPRN.Sort()
     End Sub
 
     Private Sub lvNotesPRN_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles lvNotesPRN.DoubleClick
@@ -4181,35 +4038,9 @@ err_:
 
     Private Sub lvRepairPRN_ColumnClick(ByVal sender As Object, ByVal e As ColumnClickEventArgs) _
         Handles lvRepairPRN.ColumnClick
-        Dim new_sorting_column As ColumnHeader =
-                lvRepairPRN.Columns(e.Column)
 
-        Dim sort_order As SortOrder
-        If m_SortingColumn Is Nothing Then
-            sort_order = SortOrder.Ascending
-        Else
-            If new_sorting_column.Equals(m_SortingColumn) Then
-                If m_SortingColumn.Text.StartsWith("> ") Then
-                    sort_order = SortOrder.Descending
-                Else
-                    sort_order = SortOrder.Ascending
-                End If
-            Else
-                sort_order = SortOrder.Ascending
-            End If
+        SORTING_LV(lvRepairPRN, e)
 
-            m_SortingColumn.Text = m_SortingColumn.Text.Substring(2)
-        End If
-
-        m_SortingColumn = new_sorting_column
-        If sort_order = SortOrder.Ascending Then
-            m_SortingColumn.Text = "> " & m_SortingColumn.Text
-        Else
-            m_SortingColumn.Text = "< " & m_SortingColumn.Text
-        End If
-
-        lvRepairPRN.ListViewItemSorter = New ListViewComparer(e.Column, sort_order)
-        lvRepairPRN.Sort()
     End Sub
 
     Private Sub lvRepairPRN_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles lvRepairPRN.DoubleClick
@@ -4226,35 +4057,9 @@ err_:
 
     Private Sub lvNotesNET_ColumnClick(ByVal sender As Object, ByVal e As ColumnClickEventArgs) _
         Handles lvNotesNET.ColumnClick
-        Dim new_sorting_column As ColumnHeader =
-                lvNotesNET.Columns(e.Column)
 
-        Dim sort_order As SortOrder
-        If m_SortingColumn Is Nothing Then
-            sort_order = SortOrder.Ascending
-        Else
-            If new_sorting_column.Equals(m_SortingColumn) Then
-                If m_SortingColumn.Text.StartsWith("> ") Then
-                    sort_order = SortOrder.Descending
-                Else
-                    sort_order = SortOrder.Ascending
-                End If
-            Else
-                sort_order = SortOrder.Ascending
-            End If
+        SORTING_LV(lvNotesNET, e)
 
-            m_SortingColumn.Text = m_SortingColumn.Text.Substring(2)
-        End If
-
-        m_SortingColumn = new_sorting_column
-        If sort_order = SortOrder.Ascending Then
-            m_SortingColumn.Text = "> " & m_SortingColumn.Text
-        Else
-            m_SortingColumn.Text = "< " & m_SortingColumn.Text
-        End If
-
-        lvNotesNET.ListViewItemSorter = New ListViewComparer(e.Column, sort_order)
-        lvNotesNET.Sort()
     End Sub
 
     Private Sub lvNotesNET_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles lvNotesNET.DoubleClick
@@ -4263,35 +4068,9 @@ err_:
 
     Private Sub lvRepairNET_ColumnClick(ByVal sender As Object, ByVal e As ColumnClickEventArgs) _
         Handles lvRepairNET.ColumnClick
-        Dim new_sorting_column As ColumnHeader =
-                lvRepairNET.Columns(e.Column)
 
-        Dim sort_order As SortOrder
-        If m_SortingColumn Is Nothing Then
-            sort_order = SortOrder.Ascending
-        Else
-            If new_sorting_column.Equals(m_SortingColumn) Then
-                If m_SortingColumn.Text.StartsWith("> ") Then
-                    sort_order = SortOrder.Descending
-                Else
-                    sort_order = SortOrder.Ascending
-                End If
-            Else
-                sort_order = SortOrder.Ascending
-            End If
+        SORTING_LV(lvRepairNET, e)
 
-            m_SortingColumn.Text = m_SortingColumn.Text.Substring(2)
-        End If
-
-        m_SortingColumn = new_sorting_column
-        If sort_order = SortOrder.Ascending Then
-            m_SortingColumn.Text = "> " & m_SortingColumn.Text
-        Else
-            m_SortingColumn.Text = "< " & m_SortingColumn.Text
-        End If
-
-        lvRepairNET.ListViewItemSorter = New ListViewComparer(e.Column, sort_order)
-        lvRepairNET.Sort()
     End Sub
 
     Private Sub lvRepairNET_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles lvRepairNET.DoubleClick
@@ -4300,35 +4079,9 @@ err_:
 
     Private Sub lvRepairOTH_ColumnClick(ByVal sender As Object, ByVal e As ColumnClickEventArgs) _
         Handles lvRepairOTH.ColumnClick
-        Dim new_sorting_column As ColumnHeader =
-                lvRepairOTH.Columns(e.Column)
 
-        Dim sort_order As SortOrder
-        If m_SortingColumn Is Nothing Then
-            sort_order = SortOrder.Ascending
-        Else
-            If new_sorting_column.Equals(m_SortingColumn) Then
-                If m_SortingColumn.Text.StartsWith("> ") Then
-                    sort_order = SortOrder.Descending
-                Else
-                    sort_order = SortOrder.Ascending
-                End If
-            Else
-                sort_order = SortOrder.Ascending
-            End If
+        SORTING_LV(lvRepairOTH, e)
 
-            m_SortingColumn.Text = m_SortingColumn.Text.Substring(2)
-        End If
-
-        m_SortingColumn = new_sorting_column
-        If sort_order = SortOrder.Ascending Then
-            m_SortingColumn.Text = "> " & m_SortingColumn.Text
-        Else
-            m_SortingColumn.Text = "< " & m_SortingColumn.Text
-        End If
-
-        lvRepairOTH.ListViewItemSorter = New ListViewComparer(e.Column, sort_order)
-        lvRepairOTH.Sort()
     End Sub
 
     Private Sub lvRepairOTH_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles lvRepairOTH.DoubleClick
@@ -4341,35 +4094,9 @@ err_:
 
     Private Sub lvNotesOTH_ColumnClick(ByVal sender As Object, ByVal e As ColumnClickEventArgs) _
         Handles lvNotesOTH.ColumnClick
-        Dim new_sorting_column As ColumnHeader =
-                lvNotesOTH.Columns(e.Column)
 
-        Dim sort_order As SortOrder
-        If m_SortingColumn Is Nothing Then
-            sort_order = SortOrder.Ascending
-        Else
-            If new_sorting_column.Equals(m_SortingColumn) Then
-                If m_SortingColumn.Text.StartsWith("> ") Then
-                    sort_order = SortOrder.Descending
-                Else
-                    sort_order = SortOrder.Ascending
-                End If
-            Else
-                sort_order = SortOrder.Ascending
-            End If
+        SORTING_LV(lvNotesOTH, e)
 
-            m_SortingColumn.Text = m_SortingColumn.Text.Substring(2)
-        End If
-
-        m_SortingColumn = new_sorting_column
-        If sort_order = SortOrder.Ascending Then
-            m_SortingColumn.Text = "> " & m_SortingColumn.Text
-        Else
-            m_SortingColumn.Text = "< " & m_SortingColumn.Text
-        End If
-
-        lvNotesOTH.ListViewItemSorter = New ListViewComparer(e.Column, sort_order)
-        lvNotesOTH.Sort()
     End Sub
 
     Private Sub lvNotesOTH_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles lvNotesOTH.DoubleClick
@@ -4462,35 +4189,9 @@ err_:
 
     Private Sub lvPRNCartr_ColumnClick(ByVal sender As Object, ByVal e As ColumnClickEventArgs) _
         Handles lvPRNCartr.ColumnClick
-        Dim new_sorting_column As ColumnHeader =
-                lvPRNCartr.Columns(e.Column)
 
-        Dim sort_order As SortOrder
-        If m_SortingColumn Is Nothing Then
-            sort_order = SortOrder.Ascending
-        Else
-            If new_sorting_column.Equals(m_SortingColumn) Then
-                If m_SortingColumn.Text.StartsWith("> ") Then
-                    sort_order = SortOrder.Descending
-                Else
-                    sort_order = SortOrder.Ascending
-                End If
-            Else
-                sort_order = SortOrder.Ascending
-            End If
+        SORTING_LV(lvPRNCartr, e)
 
-            m_SortingColumn.Text = m_SortingColumn.Text.Substring(2)
-        End If
-
-        m_SortingColumn = new_sorting_column
-        If sort_order = SortOrder.Ascending Then
-            m_SortingColumn.Text = "> " & m_SortingColumn.Text
-        Else
-            m_SortingColumn.Text = "< " & m_SortingColumn.Text
-        End If
-
-        lvPRNCartr.ListViewItemSorter = New ListViewComparer(e.Column, sort_order)
-        lvPRNCartr.Sort()
     End Sub
 
     Private Sub lvPRNCartr_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles lvPRNCartr.DoubleClick
@@ -4988,35 +4689,9 @@ Error_:
 
     Private Sub lvNetPort_ColumnClick(ByVal sender As Object, ByVal e As ColumnClickEventArgs) _
         Handles lvNetPort.ColumnClick
-        Dim new_sorting_column As ColumnHeader =
-                lvNetPort.Columns(e.Column)
 
-        Dim sort_order As SortOrder
-        If m_SortingColumn Is Nothing Then
-            sort_order = SortOrder.Ascending
-        Else
-            If new_sorting_column.Equals(m_SortingColumn) Then
-                If m_SortingColumn.Text.StartsWith("> ") Then
-                    sort_order = SortOrder.Descending
-                Else
-                    sort_order = SortOrder.Ascending
-                End If
-            Else
-                sort_order = SortOrder.Ascending
-            End If
+        SORTING_LV(lvNetPort, e)
 
-            m_SortingColumn.Text = m_SortingColumn.Text.Substring(2)
-        End If
-
-        m_SortingColumn = new_sorting_column
-        If sort_order = SortOrder.Ascending Then
-            m_SortingColumn.Text = "> " & m_SortingColumn.Text
-        Else
-            m_SortingColumn.Text = "< " & m_SortingColumn.Text
-        End If
-
-        lvNetPort.ListViewItemSorter = New ListViewComparer(e.Column, sort_order)
-        lvNetPort.Sort()
     End Sub
 
     Private Sub lvNetPort_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles lvNetPort.DoubleClick
@@ -5274,35 +4949,9 @@ Error_:
 
     Private Sub lvMovement_ColumnClick(ByVal sender As Object, ByVal e As ColumnClickEventArgs) _
         Handles lvMovement.ColumnClick
-        Dim new_sorting_column As ColumnHeader =
-                lvMovement.Columns(e.Column)
-        Dim sort_order As SortOrder
-        If m_SortingColumn Is Nothing Then
-            sort_order = SortOrder.Ascending
-        Else
-            If new_sorting_column.Equals(m_SortingColumn) Then
-                If m_SortingColumn.Text.StartsWith("> ") Then
-                    sort_order = SortOrder.Descending
-                Else
-                    sort_order = SortOrder.Ascending
-                End If
-            Else
-                sort_order = SortOrder.Ascending
-            End If
 
-            m_SortingColumn.Text = m_SortingColumn.Text.Substring(2)
-        End If
+        SORTING_LV(lvMovement, e)
 
-        m_SortingColumn = new_sorting_column
-        If sort_order = SortOrder.Ascending Then
-            m_SortingColumn.Text = "> " & m_SortingColumn.Text
-        Else
-            m_SortingColumn.Text = "< " & m_SortingColumn.Text
-        End If
-
-        lvMovement.ListViewItemSorter = New ListViewComparer(e.Column, sort_order)
-
-        lvMovement.Sort()
     End Sub
 
     Private Sub lvMovement_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles lvMovement.MouseUp
@@ -5330,35 +4979,9 @@ Error_:
 
     Private Sub lvMovementPRN_ColumnClick(ByVal sender As Object, ByVal e As ColumnClickEventArgs) _
         Handles lvMovementPRN.ColumnClick
-        Dim new_sorting_column As ColumnHeader =
-                lvMovementPRN.Columns(e.Column)
 
-        Dim sort_order As SortOrder
-        If m_SortingColumn Is Nothing Then
-            sort_order = SortOrder.Ascending
-        Else
-            If new_sorting_column.Equals(m_SortingColumn) Then
-                If m_SortingColumn.Text.StartsWith("> ") Then
-                    sort_order = SortOrder.Descending
-                Else
-                    sort_order = SortOrder.Ascending
-                End If
-            Else
-                sort_order = SortOrder.Ascending
-            End If
+        SORTING_LV(lvMovementPRN, e)
 
-            m_SortingColumn.Text = m_SortingColumn.Text.Substring(2)
-        End If
-
-        m_SortingColumn = new_sorting_column
-        If sort_order = SortOrder.Ascending Then
-            m_SortingColumn.Text = "> " & m_SortingColumn.Text
-        Else
-            m_SortingColumn.Text = "< " & m_SortingColumn.Text
-        End If
-
-        lvMovementPRN.ListViewItemSorter = New ListViewComparer(e.Column, sort_order)
-        lvMovementPRN.Sort()
     End Sub
 
     Private Sub lvMovementPRN_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles lvMovementPRN.MouseUp
@@ -5425,34 +5048,8 @@ Error_:
     Private Sub lvMovementNET_ColumnClick(ByVal sender As Object, ByVal e As ColumnClickEventArgs) _
         Handles lvMovementNET.ColumnClick
 
-        Dim new_sorting_column As ColumnHeader = lvMovementNET.Columns(e.Column)
+        SORTING_LV(lvMovementNET, e)
 
-        Dim sort_order As SortOrder
-        If m_SortingColumn Is Nothing Then
-            sort_order = SortOrder.Ascending
-        Else
-            If new_sorting_column.Equals(m_SortingColumn) Then
-                If m_SortingColumn.Text.StartsWith("> ") Then
-                    sort_order = SortOrder.Descending
-                Else
-                    sort_order = SortOrder.Ascending
-                End If
-            Else
-                sort_order = SortOrder.Ascending
-            End If
-
-            m_SortingColumn.Text = m_SortingColumn.Text.Substring(2)
-        End If
-
-        m_SortingColumn = new_sorting_column
-        If sort_order = SortOrder.Ascending Then
-            m_SortingColumn.Text = "> " & m_SortingColumn.Text
-        Else
-            m_SortingColumn.Text = "< " & m_SortingColumn.Text
-        End If
-
-        lvMovementNET.ListViewItemSorter = New ListViewComparer(e.Column, sort_order)
-        lvMovementNET.Sort()
     End Sub
 
     Private Sub lvMovementNET_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles lvMovementNET.MouseUp
@@ -5480,35 +5077,9 @@ Error_:
 
     Private Sub lvMovementOTH_ColumnClick(ByVal sender As Object, ByVal e As ColumnClickEventArgs) _
         Handles lvMovementOTH.ColumnClick
-        Dim new_sorting_column As ColumnHeader =
-                lvMovementOTH.Columns(e.Column)
 
-        Dim sort_order As SortOrder
-        If m_SortingColumn Is Nothing Then
-            sort_order = SortOrder.Ascending
-        Else
-            If new_sorting_column.Equals(m_SortingColumn) Then
-                If m_SortingColumn.Text.StartsWith("> ") Then
-                    sort_order = SortOrder.Descending
-                Else
-                    sort_order = SortOrder.Ascending
-                End If
-            Else
-                sort_order = SortOrder.Ascending
-            End If
+        SORTING_LV(lvMovementOTH, e)
 
-            m_SortingColumn.Text = m_SortingColumn.Text.Substring(2)
-        End If
-
-        m_SortingColumn = new_sorting_column
-        If sort_order = SortOrder.Ascending Then
-            m_SortingColumn.Text = "> " & m_SortingColumn.Text
-        Else
-            m_SortingColumn.Text = "< " & m_SortingColumn.Text
-        End If
-
-        lvMovementOTH.ListViewItemSorter = New ListViewComparer(e.Column, sort_order)
-        lvMovementOTH.Sort()
     End Sub
 
     Private Sub lvMovementOTH_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles lvMovementOTH.MouseUp

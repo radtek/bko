@@ -264,35 +264,9 @@
     End Sub
 
     Private Sub LvQ_ColumnClick(ByVal sender As Object, ByVal e As ColumnClickEventArgs) Handles LvQ.ColumnClick
-        Dim new_sorting_column As ColumnHeader =
-                LvQ.Columns(e.Column)
 
-        Dim sort_order As SortOrder
-        If m_SortingColumn Is Nothing Then
-            sort_order = SortOrder.Ascending
-        Else
-            If new_sorting_column.Equals(m_SortingColumn) Then
-                If m_SortingColumn.Text.StartsWith("> ") Then
-                    sort_order = SortOrder.Descending
-                Else
-                    sort_order = SortOrder.Ascending
-                End If
-            Else
-                sort_order = SortOrder.Ascending
-            End If
+        SORTING_LV(LvQ, e)
 
-            m_SortingColumn.Text = m_SortingColumn.Text.Substring(2)
-        End If
-
-        m_SortingColumn = new_sorting_column
-        If sort_order = SortOrder.Ascending Then
-            m_SortingColumn.Text = "> " & m_SortingColumn.Text
-        Else
-            m_SortingColumn.Text = "< " & m_SortingColumn.Text
-        End If
-
-        LvQ.ListViewItemSorter = New ListViewComparer(e.Column, sort_order)
-        LvQ.Sort()
     End Sub
 
     Private Sub LvQ_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles LvQ.SelectedIndexChanged

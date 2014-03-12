@@ -17,9 +17,10 @@ Public Class frmLogin
 
         Try
             ' Only get files that begin with the letter "c."
-            Dim dirs As String() = Directory.GetFiles(PrPath & "lang\", "*.ini")
+            Dim dirs() As String = Directory.GetFiles(PrPath & "lang\", "*.ini", SearchOption.TopDirectoryOnly)
             ' Console.WriteLine("The number of files starting with c is {0}.", dirs.Length)
             Dim dir As String
+
 
             For Each dir In dirs
                 Dim d() As String
@@ -42,7 +43,7 @@ Public Class frmLogin
 
                 Try
                     ' Only get files that begin with the letter "c."
-                    Dim dirs As String() = Directory.GetFiles(BasePath, "*.accdb")
+                    Dim dirs() As String = Directory.GetFiles(BasePath, "*.accdb", SearchOption.TopDirectoryOnly)
                     ' Console.WriteLine("The number of files starting with c is {0}.", dirs.Length)
                     Dim dir As String
 
@@ -56,11 +57,11 @@ Public Class frmLogin
                     'Console.WriteLine("The process failed: {0}", e1.ToString())
                 End Try
 
-            Case Else
+            Case "MS Access"
 
                 Try
                     ' Only get files that begin with the letter "c."
-                    Dim dirs As String() = Directory.GetFiles(BasePath, "*.mdb")
+                    Dim dirs() As String = Directory.GetFiles(BasePath, "*.mdb", SearchOption.TopDirectoryOnly)
                     ' Console.WriteLine("The number of files starting with c is {0}.", dirs.Length)
                     Dim dir As String
 
@@ -75,6 +76,7 @@ Public Class frmLogin
                 End Try
 
         End Select
+
 
 
 
