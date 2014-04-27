@@ -1,6 +1,6 @@
 ﻿
-
 Public Class frmDirectory
+    Private curr As Integer 'esq
     Private m_SortingColumn As ColumnHeader
     Private dSID As Integer
     Private eDTI As Boolean
@@ -292,6 +292,8 @@ Public Class frmDirectory
     Private Sub tvDirectory_AfterSelect(ByVal sender As Object, ByVal e As TreeViewEventArgs) _
         Handles tvDirectory.AfterSelect
 
+        curr = 0 'esq
+
         lvDirectory.Sorting = SortOrder.None
         lvDirectory.ListViewItemSorter = Nothing
 
@@ -334,12 +336,19 @@ Public Class frmDirectory
         Me.lvDirectory.Columns.Clear()
         Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", "id"), 20,
                                    HorizontalAlignment.Left)
-        Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory2", "Наименование"), 300,
+        Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory2", "Наименование"), 250,
                                    HorizontalAlignment.Left)
-        Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory3", "Производитель"), 300,
+        Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory3", "Производитель"), 250,
                                    HorizontalAlignment.Left)
+
+        'esq  добавил Тип ПО
+        If tvDirectory.SelectedNode.Text = objIniFile.GetString("frmDirectory", "MSG56", "Программное обеспечение") Then
+            Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "gb1", "Тип"), 100,
+                                       HorizontalAlignment.Left)
+        End If
+
         Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "MSG99", "Используется"), 70,
-                                   HorizontalAlignment.Left)
+                                    HorizontalAlignment.Left)
 
         FillComboNET(Me.cmbName3, "PROIZV", "SPR_PROIZV", "", False, True)
 
@@ -1291,12 +1300,13 @@ Public Class frmDirectory
 
                 FillComboNET(Me.cmbName2, "Name", "SPR_TIP_PO", "", False, True)
 
+                'esq  добавил Тип ПО
                 If unamDB <> "MS Access" Or unamDB <> "MS Access 2007" Then
                     sSQL =
-                        "SELECT SPR_PO.Id, SPR_PO.Name, SPR_PROIZV.PROIZV FROM SPR_PROIZV INNER JOIN SPR_PO ON (SPR_PROIZV.id = SPR_PO.Proizv) AND (SPR_PROIZV.iD = SPR_PO.Proizv) WHERE ((SPR_PO.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
+                        "SELECT SPR_PO.Id, SPR_PO.Name, SPR_PROIZV.PROIZV, SPR_PO.A FROM SPR_PROIZV INNER JOIN SPR_PO ON (SPR_PROIZV.id = SPR_PO.Proizv) AND (SPR_PROIZV.iD = SPR_PO.Proizv) WHERE ((SPR_PO.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
                 Else
                     sSQL =
-                        "SELECT SPR_PO.Id, SPR_PO.Name, SPR_PROIZV.PROIZV, (Select count(*) FROM SOFT_INSTALL where SOFT_INSTALL.Soft=SPR_PO.Name) as temp FROM SPR_PROIZV INNER JOIN SPR_PO ON (SPR_PROIZV.id = SPR_PO.Proizv) AND (SPR_PROIZV.iD = SPR_PO.Proizv) WHERE ((SPR_PO.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
+                        "SELECT SPR_PO.Id, SPR_PO.Name, SPR_PROIZV.PROIZV, SPR_PO.A, (Select count(*) FROM SOFT_INSTALL where SOFT_INSTALL.Soft=SPR_PO.Name) as temp FROM SPR_PROIZV INNER JOIN SPR_PO ON (SPR_PROIZV.id = SPR_PO.Proizv) AND (SPR_PROIZV.iD = SPR_PO.Proizv) WHERE ((SPR_PO.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
                 End If
 
 
@@ -1379,6 +1389,12 @@ Public Class frmDirectory
         rs.Close()
         rs = Nothing
 
+        'esq ******** отредактированый элемент -> в поле зрения
+        If (Not IsNothing(curr) = True) And (lvDirectory.Items.Count > 0) Then
+            lvDirectory.EnsureVisible(curr)
+            lvDirectory.Items(curr).Selected = True
+        End If
+        'esq ********
 
         ResList(Me.lvDirectory)
 
@@ -2923,11 +2939,40 @@ Public Class frmDirectory
                    "C='" & LTrim(sPAR3) & "'," &
                    "Prim='" & LTrim(sPRIM) & "'" & "WHERE id = " & dSID
 
+                    'esq **********
+                    Dim rs2 As Recordset
+
+                    rs2 = New Recordset
+                    rs2.Open("SELECT * FROM SPR_PROIZV WHERE ID=" & sPRID, DB7, CursorTypeEnum.adOpenDynamic,
+                             LockTypeEnum.adLockOptimistic)
+                    Dim S_PROIZV As String
+                    S_PROIZV = rs2.Fields("PROIZV").Value
+                    rs2.Close()
+                    rs2 = Nothing
+
+                    rs2 = New Recordset
+                    rs2.Open("SELECT * FROM SOFT_INSTALL WHERE Soft='" & LTrim(sNAME) & "'", DB7, CursorTypeEnum.adOpenDynamic,
+                             LockTypeEnum.adLockOptimistic)
+                    With rs2
+                        .MoveFirst()
+                        Do While Not .EOF
+                            .Fields("Publisher").Value = S_PROIZV
+                            .Fields("TIP").Value = LTrim(sPAR1)
+                            .Update()
+                            .MoveNext()
+                        Loop
+                    End With
+                    rs2.Close()
+                    rs2 = Nothing
+                    'esq **********
+
             End Select
 
         End If
 
         DB7.Execute(sSQL)
+
+        curr = lvDirectory.FocusedItem.Index 'esq
 
 Ar:
         Me.BeginInvoke(New MethodInvoker(AddressOf LOAD_LIST_SPR))

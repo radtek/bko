@@ -690,20 +690,19 @@ error_Renamed:
             DB7.Execute("DELETE FROM SPR_USER")
             DB7.Execute("DELETE FROM TBL_NET_MAG")
 
+
+            Call frmComputers.STAT_INF()
+            Call SHED_CHECK()
+            Call REM_CHECK()
+            Call COMPARE_DB()
+            Call LoadSPR()
+
+            RefFilTree(frmComputers.lstGroups)
+
+            Dim LNGIniFile As New IniFile(sLANGPATH)
+
+            MsgBox(LNGIniFile.GetString("frmMain", "MSG4", "Очистка базы завершено успешно!"), MsgBoxStyle.Information)
         End If
-
-        Call frmComputers.STAT_INF()
-        Call SHED_CHECK()
-        Call REM_CHECK()
-        Call COMPARE_DB()
-        Call LoadSPR()
-
-        RefFilTree(frmComputers.lstGroups)
-
-        Dim LNGIniFile As New IniFile(sLANGPATH)
-
-        MsgBox(LNGIniFile.GetString("frmMain", "MSG4", "Очистка базы завершено успешно!"), MsgBoxStyle.Information)
-        'Exit Sub
 
         Exit Sub
 Error_:
@@ -2540,4 +2539,104 @@ err_:
                 TreeORGANIZACIA.SelectedNode.Text)
     End Sub
 
+    Private Sub СинхронизацияПОToolStripMenuItem2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles СинхронизацияПОToolStripMenuItem2.Click
+        'esq *********
+        Dim rs, rs1, rs2 As Recordset
+        Dim sSQL, sSQL1, sSQL2, F1, H1 As String
+        Dim ID_PROIZV As Integer
+
+        ' сжатие SPR_PO
+        sSQL = "SELECT * FROM SPR_PO ORDER BY Name"
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+        With rs
+            .MoveFirst()
+            Do While Not .EOF
+                sSQL2 = "SELECT * FROM SOFT_INSTALL WHERE Soft='" & .Fields("Name").Value & "'"
+                'sSQL2 = "SELECT COUNT(*) AS TEMP FROM SOFT_INSTALL WHERE Soft='" & .Fields("Name").Value & "'"
+                rs2 = New Recordset
+                rs2.Open(sSQL2, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                'rs2.MoveFirst()
+                Select rs2.EOF
+                    Case True
+                        'Select Case rs2.Fields("TEMP").Value
+                        'Case 0
+                        .Delete()
+                        .MovePrevious()
+                    Case Else
+                End Select
+                rs2.Close()
+                rs2 = Nothing
+                .MoveNext()
+            Loop
+        End With
+
+        rs.Close()
+        rs = Nothing
+
+
+        ' заполнение SPR_PO
+        sSQL = "SELECT * FROM SOFT_INSTALL WHERE Soft not like '%update%' and Soft not like '%Обновление%' ORDER BY Soft"
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
+        With rs
+            .MoveFirst()
+            Do While Not .EOF
+
+                If F1 = "" Then
+                End If
+
+                If .Fields("Publisher").Value = "" Then
+                    F1 = "NoName"
+                Else
+                    F1 = .Fields("Publisher").Value
+                End If
+
+                rs2 = New Recordset
+                rs2.Open("SELECT * FROM SPR_PROIZV WHERE PROIZV='" & F1 & "'", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                Select Case rs2.EOF
+                    Case True
+                        sSQL1 = "INSERT INTO SPR_PROIZV (Proizv) VALUES ('" & F1 & "')"
+                        DB7.Execute(sSQL1)
+                        rs1 = New Recordset
+                        rs1.Open("SELECT * FROM SPR_PROIZV WHERE PROIZV='" & F1 & "'", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        ID_PROIZV = rs1.Fields("ID").Value
+                        rs1.Close()
+                        rs1 = Nothing
+                    Case Else
+                        ID_PROIZV = rs2.Fields("ID").Value
+                End Select
+                rs2.Close()
+                rs2 = Nothing
+
+                Dim strSimbol1 As String
+                strSimbol1 = "'"
+                H1 = .Fields("Soft").Value
+                If InStr(.Fields("Soft").Value, strSimbol1) Then
+                    H1 = Replace(.Fields("Soft").Value, strSimbol1, "")
+                    .Fields("Soft").Value = H1
+                    .Update()
+                End If
+
+                rs2 = New Recordset
+                sSQL2 = "SELECT * FROM SPR_PO WHERE Name='" & H1 & "'"
+                rs2.Open(sSQL2, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                Select Case rs2.EOF
+                    Case True
+                        sSQL1 = "INSERT INTO SPR_PO (Name,Proizv,A,B,C,Prim) VALUES ('" & H1 & "'," & ID_PROIZV & ",'','','','')"
+                        DB7.Execute(sSQL1)
+                    Case Else
+                End Select
+                rs2.Close()
+                rs2 = Nothing
+
+                .MoveNext()
+            Loop
+        End With
+
+        rs.Close()
+        rs = Nothing
+
+    End Sub
 End Class

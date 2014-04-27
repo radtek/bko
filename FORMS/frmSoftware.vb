@@ -844,7 +844,8 @@ Public Class frmSoftware
                 .Fields("d_o").Value = dtGok.Value
                 .Fields("Id_Comp").Value = sCOUNT
                 .Fields("Publisher").Value = cmbSoftPr.Text
-                .Fields("TIP").Value = cmbTipPo.Text
+                .Fields("TIP").Value = cmbTipPo.Text 'esq в SPR_PO не пишет; когда-нибудь надо разобраться
+                .Fields("NomerSoftKomp").Value = Me.lstSoftware.Items.Count + 1 'esq
                 .Update()
             End With
             rs2.Close()
@@ -1021,7 +1022,13 @@ Public Class frmSoftware
         Me.lstSoftware.Visible = True
     End Sub
 
-    Private Sub CheckBox1_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CheckBox1.CheckedChanged
+    Private Sub frmSoftware_KeyUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles MyBase.KeyUp
+
+        If e.Control And Keys.Enter Then
+
+            Me.btnAdd_Click(sender, e)
+
+        End If
 
     End Sub
 End Class

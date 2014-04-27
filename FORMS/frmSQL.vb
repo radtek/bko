@@ -221,7 +221,7 @@
             If Len(strTmp) = 0 Then Exit Sub
 
             Dim sSQL As String
-            sSQL = "INSERT INTO T_Que (name,sqlsq) VALUES ('" & strTmp & "','" & txtQ.Text & "')"
+            sSQL = "INSERT INTO T_Que (name,sqlsq) VALUES ('" & strTmp & "',""" & txtQ.Text & """)"
             DB7.Execute(sSQL)
 
             'With T_Que
