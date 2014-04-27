@@ -62,6 +62,7 @@ Partial Class frmSoftware
         Me.gbTree.SuspendLayout()
         Me.TableLayoutPanel3.SuspendLayout()
         Me.ToolStrip2.SuspendLayout()
+        CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
@@ -76,7 +77,7 @@ Partial Class frmSoftware
         Me.gbTree.Dock = System.Windows.Forms.DockStyle.Fill
         Me.gbTree.Location = New System.Drawing.Point(0, 0)
         Me.gbTree.Name = "gbTree"
-        Me.gbTree.Size = New System.Drawing.Size(306, 521)
+        Me.gbTree.Size = New System.Drawing.Size(308, 532)
         Me.gbTree.TabIndex = 0
         Me.gbTree.TabStop = False
         Me.gbTree.Text = "Дерево"
@@ -97,7 +98,7 @@ Partial Class frmSoftware
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel3.Size = New System.Drawing.Size(300, 502)
+        Me.TableLayoutPanel3.Size = New System.Drawing.Size(302, 513)
         Me.TableLayoutPanel3.TabIndex = 5
         '
         'treebranche
@@ -107,7 +108,7 @@ Partial Class frmSoftware
         Me.treebranche.FormattingEnabled = True
         Me.treebranche.Location = New System.Drawing.Point(3, 33)
         Me.treebranche.Name = "treebranche"
-        Me.treebranche.Size = New System.Drawing.Size(294, 21)
+        Me.treebranche.Size = New System.Drawing.Size(296, 21)
         Me.treebranche.TabIndex = 6
         '
         'txtSearch
@@ -115,7 +116,7 @@ Partial Class frmSoftware
         Me.txtSearch.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtSearch.Location = New System.Drawing.Point(3, 3)
         Me.txtSearch.Name = "txtSearch"
-        Me.txtSearch.Size = New System.Drawing.Size(259, 20)
+        Me.txtSearch.Size = New System.Drawing.Size(261, 20)
         Me.txtSearch.TabIndex = 2
         '
         'lstGroups
@@ -125,7 +126,7 @@ Partial Class frmSoftware
         Me.lstGroups.FullRowSelect = True
         Me.lstGroups.Location = New System.Drawing.Point(3, 63)
         Me.lstGroups.Name = "lstGroups"
-        Me.lstGroups.Size = New System.Drawing.Size(294, 436)
+        Me.lstGroups.Size = New System.Drawing.Size(296, 447)
         Me.lstGroups.TabIndex = 0
         '
         'ToolStrip2
@@ -133,7 +134,7 @@ Partial Class frmSoftware
         Me.ToolStrip2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ToolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
         Me.ToolStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnSearch})
-        Me.ToolStrip2.Location = New System.Drawing.Point(265, 0)
+        Me.ToolStrip2.Location = New System.Drawing.Point(267, 0)
         Me.ToolStrip2.Name = "ToolStrip2"
         Me.ToolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
         Me.ToolStrip2.Size = New System.Drawing.Size(35, 30)
@@ -161,8 +162,8 @@ Partial Class frmSoftware
         'SplitContainer1.Panel2
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.gbSoftware)
-        Me.SplitContainer1.Size = New System.Drawing.Size(997, 521)
-        Me.SplitContainer1.SplitterDistance = 306
+        Me.SplitContainer1.Size = New System.Drawing.Size(1004, 532)
+        Me.SplitContainer1.SplitterDistance = 308
         Me.SplitContainer1.TabIndex = 2
         '
         'gbSoftware
@@ -172,7 +173,7 @@ Partial Class frmSoftware
         Me.gbSoftware.Dock = System.Windows.Forms.DockStyle.Fill
         Me.gbSoftware.Location = New System.Drawing.Point(0, 0)
         Me.gbSoftware.Name = "gbSoftware"
-        Me.gbSoftware.Size = New System.Drawing.Size(687, 521)
+        Me.gbSoftware.Size = New System.Drawing.Size(692, 532)
         Me.gbSoftware.TabIndex = 0
         Me.gbSoftware.TabStop = False
         Me.gbSoftware.Text = "Установленное программное обеспечение"
@@ -213,7 +214,7 @@ Partial Class frmSoftware
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(681, 502)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(686, 513)
         Me.TableLayoutPanel1.TabIndex = 19
         '
         'cmbSoftware
@@ -225,7 +226,7 @@ Partial Class frmSoftware
         Me.cmbSoftware.FormattingEnabled = True
         Me.cmbSoftware.Location = New System.Drawing.Point(3, 3)
         Me.cmbSoftware.Name = "cmbSoftware"
-        Me.cmbSoftware.Size = New System.Drawing.Size(675, 21)
+        Me.cmbSoftware.Size = New System.Drawing.Size(680, 21)
         Me.cmbSoftware.TabIndex = 1
         '
         'lstSoftware
@@ -238,7 +239,7 @@ Partial Class frmSoftware
         Me.lstSoftware.Location = New System.Drawing.Point(3, 161)
         Me.lstSoftware.MultiSelect = False
         Me.lstSoftware.Name = "lstSoftware"
-        Me.lstSoftware.Size = New System.Drawing.Size(675, 338)
+        Me.lstSoftware.Size = New System.Drawing.Size(680, 349)
         Me.lstSoftware.TabIndex = 17
         Me.lstSoftware.UseCompatibleStateImageBehavior = False
         Me.lstSoftware.View = System.Windows.Forms.View.Details
@@ -249,7 +250,7 @@ Partial Class frmSoftware
         Me.CheckBox1.AutoSize = True
         Me.CheckBox1.Location = New System.Drawing.Point(545, 111)
         Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(133, 17)
+        Me.CheckBox1.Size = New System.Drawing.Size(138, 17)
         Me.CheckBox1.TabIndex = 18
         Me.CheckBox1.Text = "Беcсрочно"
         Me.CheckBox1.UseVisualStyleBackColor = True
@@ -293,7 +294,7 @@ Partial Class frmSoftware
         Me.cmbTipPo.FormattingEnabled = True
         Me.cmbTipPo.Location = New System.Drawing.Point(545, 30)
         Me.cmbTipPo.Name = "cmbTipPo"
-        Me.cmbTipPo.Size = New System.Drawing.Size(133, 21)
+        Me.cmbTipPo.Size = New System.Drawing.Size(138, 21)
         Me.cmbTipPo.TabIndex = 5
         '
         'Label4
@@ -358,7 +359,7 @@ Partial Class frmSoftware
         Me.cmbSoftPr.FormattingEnabled = True
         Me.cmbSoftPr.Location = New System.Drawing.Point(396, 70)
         Me.cmbSoftPr.Name = "cmbSoftPr"
-        Me.cmbSoftPr.Size = New System.Drawing.Size(282, 21)
+        Me.cmbSoftPr.Size = New System.Drawing.Size(287, 21)
         Me.cmbSoftPr.TabIndex = 9
         '
         'Label7
@@ -390,7 +391,7 @@ Partial Class frmSoftware
         Me.btnAdd.Image = CType(resources.GetObject("btnAdd.Image"), System.Drawing.Image)
         Me.btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(63, 22)
+        Me.btnAdd.Size = New System.Drawing.Size(69, 22)
         Me.btnAdd.Text = "Добавить"
         '
         'ToolStripSeparator1
@@ -404,7 +405,7 @@ Partial Class frmSoftware
         Me.btnDelete.Image = CType(resources.GetObject("btnDelete.Image"), System.Drawing.Image)
         Me.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(55, 22)
+        Me.btnDelete.Size = New System.Drawing.Size(60, 22)
         Me.btnDelete.Text = "Удалить"
         '
         'ToolStripSeparator2
@@ -418,7 +419,7 @@ Partial Class frmSoftware
         Me.btnCancel.Image = CType(resources.GetObject("btnCancel.Image"), System.Drawing.Image)
         Me.btnCancel.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(53, 22)
+        Me.btnCancel.Size = New System.Drawing.Size(56, 22)
         Me.btnCancel.Text = "Отмена"
         '
         'ToolStripSeparator3
@@ -432,7 +433,7 @@ Partial Class frmSoftware
         Me.ToolStripButton1.Image = CType(resources.GetObject("ToolStripButton1.Image"), System.Drawing.Image)
         Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton1.Name = "ToolStripButton1"
-        Me.ToolStripButton1.Size = New System.Drawing.Size(86, 22)
+        Me.ToolStripButton1.Size = New System.Drawing.Size(90, 22)
         Me.ToolStripButton1.Text = "Обновить ПО"
         '
         'ToolStripSeparator4
@@ -463,7 +464,7 @@ Partial Class frmSoftware
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(997, 521)
+        Me.ClientSize = New System.Drawing.Size(1004, 532)
         Me.Controls.Add(Me.SplitContainer1)
         Me.MinimumSize = New System.Drawing.Size(1012, 559)
         Me.Name = "frmSoftware"
@@ -476,6 +477,7 @@ Partial Class frmSoftware
         Me.ToolStrip2.PerformLayout()
         Me.SplitContainer1.Panel1.ResumeLayout(False)
         Me.SplitContainer1.Panel2.ResumeLayout(False)
+        CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer1.ResumeLayout(False)
         Me.gbSoftware.ResumeLayout(False)
         Me.gbSoftware.PerformLayout()

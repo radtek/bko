@@ -147,6 +147,7 @@ Partial Class frmMain
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.ArhToolZipbutton = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
+        Me.СинхронизацияПОToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip.SuspendLayout()
         Me.StatusStrip.SuspendLayout()
         Me.ToolStrip.SuspendLayout()
@@ -158,7 +159,7 @@ Partial Class frmMain
         Me.MenuStrip.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip.MdiWindowListItem = Me.WindowsMenu
         Me.MenuStrip.Name = "MenuStrip"
-        Me.MenuStrip.Size = New System.Drawing.Size(1008, 24)
+        Me.MenuStrip.Size = New System.Drawing.Size(1016, 24)
         Me.MenuStrip.TabIndex = 9
         Me.MenuStrip.Text = "MenuStrip"
         '
@@ -167,7 +168,7 @@ Partial Class frmMain
         Me.FileMenu.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripMenuItem, Me.ReloginToolStripMenuItem, Me.ToolStripSeparator5, Me.ПроверитьОбновлениеToolStripMenuItem, Me.MailToAuthors, Me.ФорумToolStripMenuItem, Me.BugTrackerToolStripMenuItem, Me.ToolStripSeparator3, Me.ExitToolStripMenuItem, Me.SaveToolStripMenuItem})
         Me.FileMenu.ImageTransparentColor = System.Drawing.SystemColors.ActiveBorder
         Me.FileMenu.Name = "FileMenu"
-        Me.FileMenu.Size = New System.Drawing.Size(79, 20)
+        Me.FileMenu.Size = New System.Drawing.Size(81, 20)
         Me.FileMenu.Text = "&Настройки"
         '
         'NewToolStripMenuItem
@@ -175,65 +176,65 @@ Partial Class frmMain
         Me.NewToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Black
         Me.NewToolStripMenuItem.Name = "NewToolStripMenuItem"
         Me.NewToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.N), System.Windows.Forms.Keys)
-        Me.NewToolStripMenuItem.Size = New System.Drawing.Size(246, 22)
+        Me.NewToolStripMenuItem.Size = New System.Drawing.Size(257, 22)
         Me.NewToolStripMenuItem.Text = "&Настройки"
         '
         'ReloginToolStripMenuItem
         '
         Me.ReloginToolStripMenuItem.Name = "ReloginToolStripMenuItem"
-        Me.ReloginToolStripMenuItem.Size = New System.Drawing.Size(246, 22)
+        Me.ReloginToolStripMenuItem.Size = New System.Drawing.Size(257, 22)
         Me.ReloginToolStripMenuItem.Text = "Relogin"
         '
         'ToolStripSeparator5
         '
         Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
-        Me.ToolStripSeparator5.Size = New System.Drawing.Size(243, 6)
+        Me.ToolStripSeparator5.Size = New System.Drawing.Size(254, 6)
         '
         'ПроверитьОбновлениеToolStripMenuItem
         '
         Me.ПроверитьОбновлениеToolStripMenuItem.Name = "ПроверитьОбновлениеToolStripMenuItem"
         Me.ПроверитьОбновлениеToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.U), System.Windows.Forms.Keys)
-        Me.ПроверитьОбновлениеToolStripMenuItem.Size = New System.Drawing.Size(246, 22)
+        Me.ПроверитьОбновлениеToolStripMenuItem.Size = New System.Drawing.Size(257, 22)
         Me.ПроверитьОбновлениеToolStripMenuItem.Text = "Проверить обновление"
         '
         'MailToAuthors
         '
         Me.MailToAuthors.Name = "MailToAuthors"
         Me.MailToAuthors.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.M), System.Windows.Forms.Keys)
-        Me.MailToAuthors.Size = New System.Drawing.Size(246, 22)
+        Me.MailToAuthors.Size = New System.Drawing.Size(257, 22)
         Me.MailToAuthors.Text = "Письмо авторам"
         '
         'ФорумToolStripMenuItem
         '
         Me.ФорумToolStripMenuItem.Name = "ФорумToolStripMenuItem"
         Me.ФорумToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.F), System.Windows.Forms.Keys)
-        Me.ФорумToolStripMenuItem.Size = New System.Drawing.Size(246, 22)
+        Me.ФорумToolStripMenuItem.Size = New System.Drawing.Size(257, 22)
         Me.ФорумToolStripMenuItem.Text = "Форум"
         '
         'BugTrackerToolStripMenuItem
         '
         Me.BugTrackerToolStripMenuItem.Name = "BugTrackerToolStripMenuItem"
         Me.BugTrackerToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.B), System.Windows.Forms.Keys)
-        Me.BugTrackerToolStripMenuItem.Size = New System.Drawing.Size(246, 22)
+        Me.BugTrackerToolStripMenuItem.Size = New System.Drawing.Size(257, 22)
         Me.BugTrackerToolStripMenuItem.Text = "BugTracker"
         '
         'ToolStripSeparator3
         '
         Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-        Me.ToolStripSeparator3.Size = New System.Drawing.Size(243, 6)
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(254, 6)
         '
         'ExitToolStripMenuItem
         '
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
         Me.ExitToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.E), System.Windows.Forms.Keys)
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(246, 22)
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(257, 22)
         Me.ExitToolStripMenuItem.Text = "В&ыход"
         '
         'SaveToolStripMenuItem
         '
         Me.SaveToolStripMenuItem.Name = "SaveToolStripMenuItem"
         Me.SaveToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
-        Me.SaveToolStripMenuItem.Size = New System.Drawing.Size(246, 22)
+        Me.SaveToolStripMenuItem.Size = New System.Drawing.Size(257, 22)
         Me.SaveToolStripMenuItem.Text = "Save"
         Me.SaveToolStripMenuItem.Visible = False
         '
@@ -241,153 +242,153 @@ Partial Class frmMain
         '
         Me.УчётToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FrmComputersMenuItem, Me.УчётЗаявокремонтовToolStripMenuItem, Me.УчётКартриджейToolStripMenuItem, Me.УчётПрограммногоОбеспеченияToolStripMenuItem, Me.СкладToolStripMenuItem, Me.netMagmnu})
         Me.УчётToolStripMenuItem.Name = "УчётToolStripMenuItem"
-        Me.УчётToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
+        Me.УчётToolStripMenuItem.Size = New System.Drawing.Size(47, 20)
         Me.УчётToolStripMenuItem.Text = "Учёт"
         '
         'FrmComputersMenuItem
         '
         Me.FrmComputersMenuItem.Name = "FrmComputersMenuItem"
         Me.FrmComputersMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.O), System.Windows.Forms.Keys)
-        Me.FrmComputersMenuItem.Size = New System.Drawing.Size(297, 22)
+        Me.FrmComputersMenuItem.Size = New System.Drawing.Size(307, 22)
         Me.FrmComputersMenuItem.Text = "Учёт оргтехники"
         '
         'УчётЗаявокремонтовToolStripMenuItem
         '
         Me.УчётЗаявокремонтовToolStripMenuItem.Name = "УчётЗаявокремонтовToolStripMenuItem"
         Me.УчётЗаявокремонтовToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.R), System.Windows.Forms.Keys)
-        Me.УчётЗаявокремонтовToolStripMenuItem.Size = New System.Drawing.Size(297, 22)
+        Me.УчётЗаявокремонтовToolStripMenuItem.Size = New System.Drawing.Size(307, 22)
         Me.УчётЗаявокремонтовToolStripMenuItem.Text = "Учёт заявок (ремонтов)"
         '
         'УчётКартриджейToolStripMenuItem
         '
         Me.УчётКартриджейToolStripMenuItem.Name = "УчётКартриджейToolStripMenuItem"
         Me.УчётКартриджейToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.C), System.Windows.Forms.Keys)
-        Me.УчётКартриджейToolStripMenuItem.Size = New System.Drawing.Size(297, 22)
+        Me.УчётКартриджейToolStripMenuItem.Size = New System.Drawing.Size(307, 22)
         Me.УчётКартриджейToolStripMenuItem.Text = "Учёт картриджей"
         '
         'УчётПрограммногоОбеспеченияToolStripMenuItem
         '
         Me.УчётПрограммногоОбеспеченияToolStripMenuItem.Name = "УчётПрограммногоОбеспеченияToolStripMenuItem"
         Me.УчётПрограммногоОбеспеченияToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.P), System.Windows.Forms.Keys)
-        Me.УчётПрограммногоОбеспеченияToolStripMenuItem.Size = New System.Drawing.Size(297, 22)
+        Me.УчётПрограммногоОбеспеченияToolStripMenuItem.Size = New System.Drawing.Size(307, 22)
         Me.УчётПрограммногоОбеспеченияToolStripMenuItem.Text = "Учёт программного обеспечения"
         '
         'СкладToolStripMenuItem
         '
         Me.СкладToolStripMenuItem.Name = "СкладToolStripMenuItem"
         Me.СкладToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
-        Me.СкладToolStripMenuItem.Size = New System.Drawing.Size(297, 22)
+        Me.СкладToolStripMenuItem.Size = New System.Drawing.Size(307, 22)
         Me.СкладToolStripMenuItem.Text = "Склад"
         '
         'netMagmnu
         '
         Me.netMagmnu.Name = "netMagmnu"
         Me.netMagmnu.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.N), System.Windows.Forms.Keys)
-        Me.netMagmnu.Size = New System.Drawing.Size(297, 22)
+        Me.netMagmnu.Size = New System.Drawing.Size(307, 22)
         Me.netMagmnu.Text = "Кабельные журналы"
         '
         'СправочникиToolStripMenuItem
         '
         Me.СправочникиToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.СправочникиОборудованияToolStripMenuItem, Me.ОрганизацияToolStripMenuItem})
         Me.СправочникиToolStripMenuItem.Name = "СправочникиToolStripMenuItem"
-        Me.СправочникиToolStripMenuItem.Size = New System.Drawing.Size(94, 20)
+        Me.СправочникиToolStripMenuItem.Size = New System.Drawing.Size(97, 20)
         Me.СправочникиToolStripMenuItem.Text = "Справочники"
         '
         'СправочникиОборудованияToolStripMenuItem
         '
         Me.СправочникиОборудованияToolStripMenuItem.Name = "СправочникиОборудованияToolStripMenuItem"
         Me.СправочникиОборудованияToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.D), System.Windows.Forms.Keys)
-        Me.СправочникиОборудованияToolStripMenuItem.Size = New System.Drawing.Size(269, 22)
+        Me.СправочникиОборудованияToolStripMenuItem.Size = New System.Drawing.Size(279, 22)
         Me.СправочникиОборудованияToolStripMenuItem.Text = "Справочники оборудования"
         '
         'ОрганизацияToolStripMenuItem
         '
         Me.ОрганизацияToolStripMenuItem.Name = "ОрганизацияToolStripMenuItem"
         Me.ОрганизацияToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.I), System.Windows.Forms.Keys)
-        Me.ОрганизацияToolStripMenuItem.Size = New System.Drawing.Size(269, 22)
+        Me.ОрганизацияToolStripMenuItem.Size = New System.Drawing.Size(279, 22)
         Me.ОрганизацияToolStripMenuItem.Text = "Организация"
         '
         'ОтчётыToolStripMenuItem
         '
         Me.ОтчётыToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.БланкиToolStripMenuItem, Me.ЖурналыПрограммыToolStripMenuItem, Me.АктытребованияToolStripMenuItem, Me.ИнвентаризацияToolStripMenuItem, Me.СтатистическиеОтчетыToolStripMenuItem})
         Me.ОтчётыToolStripMenuItem.Name = "ОтчётыToolStripMenuItem"
-        Me.ОтчётыToolStripMenuItem.Size = New System.Drawing.Size(60, 20)
+        Me.ОтчётыToolStripMenuItem.Size = New System.Drawing.Size(64, 20)
         Me.ОтчётыToolStripMenuItem.Text = "Отчёты"
         '
         'БланкиToolStripMenuItem
         '
         Me.БланкиToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ПаспортКомпьютераToolStripMenuItem, Me.ПаспортМФУToolStripMenuItem, Me.ПаспортСетевогоОборудованияToolStripMenuItem, Me.ПаспортПринтераToolStripMenuItem, Me.ПаспортКопираToolStripMenuItem, Me.ПаспортСканераToolStripMenuItem, Me.МойБланкToolStripMenuItem})
         Me.БланкиToolStripMenuItem.Name = "БланкиToolStripMenuItem"
-        Me.БланкиToolStripMenuItem.Size = New System.Drawing.Size(232, 22)
+        Me.БланкиToolStripMenuItem.Size = New System.Drawing.Size(237, 22)
         Me.БланкиToolStripMenuItem.Text = "Бланки"
         '
         'ПаспортКомпьютераToolStripMenuItem
         '
         Me.ПаспортКомпьютераToolStripMenuItem.Name = "ПаспортКомпьютераToolStripMenuItem"
-        Me.ПаспортКомпьютераToolStripMenuItem.Size = New System.Drawing.Size(256, 22)
+        Me.ПаспортКомпьютераToolStripMenuItem.Size = New System.Drawing.Size(269, 22)
         Me.ПаспортКомпьютераToolStripMenuItem.Text = "Паспорт компьютера"
         '
         'ПаспортМФУToolStripMenuItem
         '
         Me.ПаспортМФУToolStripMenuItem.Name = "ПаспортМФУToolStripMenuItem"
-        Me.ПаспортМФУToolStripMenuItem.Size = New System.Drawing.Size(256, 22)
+        Me.ПаспортМФУToolStripMenuItem.Size = New System.Drawing.Size(269, 22)
         Me.ПаспортМФУToolStripMenuItem.Text = "Паспорт МФУ"
         '
         'ПаспортСетевогоОборудованияToolStripMenuItem
         '
         Me.ПаспортСетевогоОборудованияToolStripMenuItem.Name = "ПаспортСетевогоОборудованияToolStripMenuItem"
-        Me.ПаспортСетевогоОборудованияToolStripMenuItem.Size = New System.Drawing.Size(256, 22)
+        Me.ПаспортСетевогоОборудованияToolStripMenuItem.Size = New System.Drawing.Size(269, 22)
         Me.ПаспортСетевогоОборудованияToolStripMenuItem.Text = "Паспорт Сетевого оборудования"
         '
         'ПаспортПринтераToolStripMenuItem
         '
         Me.ПаспортПринтераToolStripMenuItem.Name = "ПаспортПринтераToolStripMenuItem"
-        Me.ПаспортПринтераToolStripMenuItem.Size = New System.Drawing.Size(256, 22)
+        Me.ПаспортПринтераToolStripMenuItem.Size = New System.Drawing.Size(269, 22)
         Me.ПаспортПринтераToolStripMenuItem.Text = "Паспорт Принтера"
         '
         'ПаспортКопираToolStripMenuItem
         '
         Me.ПаспортКопираToolStripMenuItem.Name = "ПаспортКопираToolStripMenuItem"
-        Me.ПаспортКопираToolStripMenuItem.Size = New System.Drawing.Size(256, 22)
+        Me.ПаспортКопираToolStripMenuItem.Size = New System.Drawing.Size(269, 22)
         Me.ПаспортКопираToolStripMenuItem.Text = "Паспорт Копира"
         '
         'ПаспортСканераToolStripMenuItem
         '
         Me.ПаспортСканераToolStripMenuItem.Name = "ПаспортСканераToolStripMenuItem"
-        Me.ПаспортСканераToolStripMenuItem.Size = New System.Drawing.Size(256, 22)
+        Me.ПаспортСканераToolStripMenuItem.Size = New System.Drawing.Size(269, 22)
         Me.ПаспортСканераToolStripMenuItem.Text = "Паспорт сканера"
         '
         'МойБланкToolStripMenuItem
         '
         Me.МойБланкToolStripMenuItem.Name = "МойБланкToolStripMenuItem"
-        Me.МойБланкToolStripMenuItem.Size = New System.Drawing.Size(256, 22)
+        Me.МойБланкToolStripMenuItem.Size = New System.Drawing.Size(269, 22)
         Me.МойБланкToolStripMenuItem.Text = "Мой бланк"
         '
         'ЖурналыПрограммыToolStripMenuItem
         '
         Me.ЖурналыПрограммыToolStripMenuItem.Name = "ЖурналыПрограммыToolStripMenuItem"
         Me.ЖурналыПрограммыToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.L), System.Windows.Forms.Keys)
-        Me.ЖурналыПрограммыToolStripMenuItem.Size = New System.Drawing.Size(232, 22)
+        Me.ЖурналыПрограммыToolStripMenuItem.Size = New System.Drawing.Size(237, 22)
         Me.ЖурналыПрограммыToolStripMenuItem.Text = "Журналы программы"
         '
         'АктытребованияToolStripMenuItem
         '
         Me.АктытребованияToolStripMenuItem.Name = "АктытребованияToolStripMenuItem"
         Me.АктытребованияToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.T), System.Windows.Forms.Keys)
-        Me.АктытребованияToolStripMenuItem.Size = New System.Drawing.Size(232, 22)
+        Me.АктытребованияToolStripMenuItem.Size = New System.Drawing.Size(237, 22)
         Me.АктытребованияToolStripMenuItem.Text = "Акты-требования"
         '
         'ИнвентаризацияToolStripMenuItem
         '
         Me.ИнвентаризацияToolStripMenuItem.Name = "ИнвентаризацияToolStripMenuItem"
-        Me.ИнвентаризацияToolStripMenuItem.Size = New System.Drawing.Size(232, 22)
+        Me.ИнвентаризацияToolStripMenuItem.Size = New System.Drawing.Size(237, 22)
         Me.ИнвентаризацияToolStripMenuItem.Text = "Инвентаризация"
         '
         'СтатистическиеОтчетыToolStripMenuItem
         '
         Me.СтатистическиеОтчетыToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.РемонтыToolStripMenuItem, Me.Services_ADD})
         Me.СтатистическиеОтчетыToolStripMenuItem.Name = "СтатистическиеОтчетыToolStripMenuItem"
-        Me.СтатистическиеОтчетыToolStripMenuItem.Size = New System.Drawing.Size(232, 22)
+        Me.СтатистическиеОтчетыToolStripMenuItem.Size = New System.Drawing.Size(237, 22)
         Me.СтатистическиеОтчетыToolStripMenuItem.Text = "Статистические отчеты"
         Me.СтатистическиеОтчетыToolStripMenuItem.Visible = False
         '
@@ -395,65 +396,65 @@ Partial Class frmMain
         '
         Me.РемонтыToolStripMenuItem.Name = "РемонтыToolStripMenuItem"
         Me.РемонтыToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F11
-        Me.РемонтыToolStripMenuItem.Size = New System.Drawing.Size(201, 22)
+        Me.РемонтыToolStripMenuItem.Size = New System.Drawing.Size(214, 22)
         Me.РемонтыToolStripMenuItem.Text = "Ремонты"
         '
         'Services_ADD
         '
         Me.Services_ADD.Name = "Services_ADD"
         Me.Services_ADD.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.Z), System.Windows.Forms.Keys)
-        Me.Services_ADD.Size = New System.Drawing.Size(201, 22)
+        Me.Services_ADD.Size = New System.Drawing.Size(214, 22)
         Me.Services_ADD.Text = "Добавить заявку"
         '
         'ToolsMenu
         '
-        Me.ToolsMenu.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OptionsToolStripMenuItem, Me.ОбслуживаниеБДToolStripMenuItem, Me.QRCodeTestingToolStripMenuItem, Me.ПерегрузкаСрправочниковToolStripMenuItem})
+        Me.ToolsMenu.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OptionsToolStripMenuItem, Me.ОбслуживаниеБДToolStripMenuItem, Me.QRCodeTestingToolStripMenuItem, Me.ПерегрузкаСрправочниковToolStripMenuItem, Me.СинхронизацияПОToolStripMenuItem2})
         Me.ToolsMenu.Name = "ToolsMenu"
-        Me.ToolsMenu.Size = New System.Drawing.Size(59, 20)
+        Me.ToolsMenu.Size = New System.Drawing.Size(62, 20)
         Me.ToolsMenu.Text = "&Сервис"
         '
         'OptionsToolStripMenuItem
         '
         Me.OptionsToolStripMenuItem.Name = "OptionsToolStripMenuItem"
         Me.OptionsToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.N), System.Windows.Forms.Keys)
-        Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(251, 22)
+        Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(264, 22)
         Me.OptionsToolStripMenuItem.Text = "&Напоминания"
         '
         'ОбслуживаниеБДToolStripMenuItem
         '
         Me.ОбслуживаниеБДToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CompareDBToolStripMenuItem, Me.ЗапросыToolStripMenuItem, Me.CleerDBToolStripMenuItem, Me.ПроверитьФилиалыОтделыToolStripMenuItem})
         Me.ОбслуживаниеБДToolStripMenuItem.Name = "ОбслуживаниеБДToolStripMenuItem"
-        Me.ОбслуживаниеБДToolStripMenuItem.Size = New System.Drawing.Size(251, 22)
+        Me.ОбслуживаниеБДToolStripMenuItem.Size = New System.Drawing.Size(264, 22)
         Me.ОбслуживаниеБДToolStripMenuItem.Text = "Обслуживание БД"
         '
         'CompareDBToolStripMenuItem
         '
         Me.CompareDBToolStripMenuItem.Name = "CompareDBToolStripMenuItem"
-        Me.CompareDBToolStripMenuItem.Size = New System.Drawing.Size(191, 22)
+        Me.CompareDBToolStripMenuItem.Size = New System.Drawing.Size(199, 22)
         Me.CompareDBToolStripMenuItem.Text = "Сжатие"
         '
         'ЗапросыToolStripMenuItem
         '
         Me.ЗапросыToolStripMenuItem.Name = "ЗапросыToolStripMenuItem"
-        Me.ЗапросыToolStripMenuItem.Size = New System.Drawing.Size(191, 22)
+        Me.ЗапросыToolStripMenuItem.Size = New System.Drawing.Size(199, 22)
         Me.ЗапросыToolStripMenuItem.Text = "Запросы"
         '
         'CleerDBToolStripMenuItem
         '
         Me.CleerDBToolStripMenuItem.Name = "CleerDBToolStripMenuItem"
-        Me.CleerDBToolStripMenuItem.Size = New System.Drawing.Size(191, 22)
+        Me.CleerDBToolStripMenuItem.Size = New System.Drawing.Size(199, 22)
         Me.CleerDBToolStripMenuItem.Text = "Очистка"
         '
         'ПроверитьФилиалыОтделыToolStripMenuItem
         '
         Me.ПроверитьФилиалыОтделыToolStripMenuItem.Name = "ПроверитьФилиалыОтделыToolStripMenuItem"
-        Me.ПроверитьФилиалыОтделыToolStripMenuItem.Size = New System.Drawing.Size(191, 22)
+        Me.ПроверитьФилиалыОтделыToolStripMenuItem.Size = New System.Drawing.Size(199, 22)
         Me.ПроверитьФилиалыОтделыToolStripMenuItem.Text = "Проверить структуру"
         '
         'QRCodeTestingToolStripMenuItem
         '
         Me.QRCodeTestingToolStripMenuItem.Name = "QRCodeTestingToolStripMenuItem"
-        Me.QRCodeTestingToolStripMenuItem.Size = New System.Drawing.Size(251, 22)
+        Me.QRCodeTestingToolStripMenuItem.Size = New System.Drawing.Size(264, 22)
         Me.QRCodeTestingToolStripMenuItem.Text = "QR Code Testing"
         Me.QRCodeTestingToolStripMenuItem.Visible = False
         '
@@ -461,7 +462,7 @@ Partial Class frmMain
         '
         Me.ПерегрузкаСрправочниковToolStripMenuItem.Name = "ПерегрузкаСрправочниковToolStripMenuItem"
         Me.ПерегрузкаСрправочниковToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F12
-        Me.ПерегрузкаСрправочниковToolStripMenuItem.Size = New System.Drawing.Size(251, 22)
+        Me.ПерегрузкаСрправочниковToolStripMenuItem.Size = New System.Drawing.Size(264, 22)
         Me.ПерегрузкаСрправочниковToolStripMenuItem.Text = "Перегрузка срправочников"
         Me.ПерегрузкаСрправочниковToolStripMenuItem.Visible = False
         '
@@ -469,7 +470,7 @@ Partial Class frmMain
         '
         Me.ViewMenu.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolBarToolStripMenuItem, Me.StatusBarToolStripMenuItem, Me.LabelPanelToolStripMenuItem})
         Me.ViewMenu.Name = "ViewMenu"
-        Me.ViewMenu.Size = New System.Drawing.Size(39, 20)
+        Me.ViewMenu.Size = New System.Drawing.Size(41, 20)
         Me.ViewMenu.Text = "&Вид"
         '
         'ToolBarToolStripMenuItem
@@ -478,7 +479,7 @@ Partial Class frmMain
         Me.ToolBarToolStripMenuItem.CheckOnClick = True
         Me.ToolBarToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked
         Me.ToolBarToolStripMenuItem.Name = "ToolBarToolStripMenuItem"
-        Me.ToolBarToolStripMenuItem.Size = New System.Drawing.Size(196, 22)
+        Me.ToolBarToolStripMenuItem.Size = New System.Drawing.Size(204, 22)
         Me.ToolBarToolStripMenuItem.Text = "&Панель инструментов"
         '
         'StatusBarToolStripMenuItem
@@ -487,7 +488,7 @@ Partial Class frmMain
         Me.StatusBarToolStripMenuItem.CheckOnClick = True
         Me.StatusBarToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked
         Me.StatusBarToolStripMenuItem.Name = "StatusBarToolStripMenuItem"
-        Me.StatusBarToolStripMenuItem.Size = New System.Drawing.Size(196, 22)
+        Me.StatusBarToolStripMenuItem.Size = New System.Drawing.Size(204, 22)
         Me.StatusBarToolStripMenuItem.Text = "&Строка состояния"
         '
         'LabelPanelToolStripMenuItem
@@ -496,66 +497,66 @@ Partial Class frmMain
         Me.LabelPanelToolStripMenuItem.CheckOnClick = True
         Me.LabelPanelToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked
         Me.LabelPanelToolStripMenuItem.Name = "LabelPanelToolStripMenuItem"
-        Me.LabelPanelToolStripMenuItem.Size = New System.Drawing.Size(196, 22)
+        Me.LabelPanelToolStripMenuItem.Size = New System.Drawing.Size(204, 22)
         Me.LabelPanelToolStripMenuItem.Text = "&Надписи на панели"
         '
         'WindowsMenu
         '
         Me.WindowsMenu.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CascadeToolStripMenuItem, Me.TileVerticalToolStripMenuItem, Me.TileHorizontalToolStripMenuItem, Me.CloseAllToolStripMenuItem, Me.ArrangeIconsToolStripMenuItem})
         Me.WindowsMenu.Name = "WindowsMenu"
-        Me.WindowsMenu.Size = New System.Drawing.Size(47, 20)
+        Me.WindowsMenu.Size = New System.Drawing.Size(49, 20)
         Me.WindowsMenu.Text = "&Окна"
         '
         'CascadeToolStripMenuItem
         '
         Me.CascadeToolStripMenuItem.Name = "CascadeToolStripMenuItem"
-        Me.CascadeToolStripMenuItem.Size = New System.Drawing.Size(187, 22)
+        Me.CascadeToolStripMenuItem.Size = New System.Drawing.Size(196, 22)
         Me.CascadeToolStripMenuItem.Text = "&Каскадом"
         '
         'TileVerticalToolStripMenuItem
         '
         Me.TileVerticalToolStripMenuItem.Name = "TileVerticalToolStripMenuItem"
-        Me.TileVerticalToolStripMenuItem.Size = New System.Drawing.Size(187, 22)
+        Me.TileVerticalToolStripMenuItem.Size = New System.Drawing.Size(196, 22)
         Me.TileVerticalToolStripMenuItem.Text = "С&лева направо"
         '
         'TileHorizontalToolStripMenuItem
         '
         Me.TileHorizontalToolStripMenuItem.Name = "TileHorizontalToolStripMenuItem"
-        Me.TileHorizontalToolStripMenuItem.Size = New System.Drawing.Size(187, 22)
+        Me.TileHorizontalToolStripMenuItem.Size = New System.Drawing.Size(196, 22)
         Me.TileHorizontalToolStripMenuItem.Text = "С&верху вниз"
         '
         'CloseAllToolStripMenuItem
         '
         Me.CloseAllToolStripMenuItem.Name = "CloseAllToolStripMenuItem"
-        Me.CloseAllToolStripMenuItem.Size = New System.Drawing.Size(187, 22)
+        Me.CloseAllToolStripMenuItem.Size = New System.Drawing.Size(196, 22)
         Me.CloseAllToolStripMenuItem.Text = "&Закрыть все"
         '
         'ArrangeIconsToolStripMenuItem
         '
         Me.ArrangeIconsToolStripMenuItem.Name = "ArrangeIconsToolStripMenuItem"
-        Me.ArrangeIconsToolStripMenuItem.Size = New System.Drawing.Size(187, 22)
+        Me.ArrangeIconsToolStripMenuItem.Size = New System.Drawing.Size(196, 22)
         Me.ArrangeIconsToolStripMenuItem.Text = "&Упорядочить значки"
         '
         'HelpMenu
         '
         Me.HelpMenu.Name = "HelpMenu"
-        Me.HelpMenu.Size = New System.Drawing.Size(94, 20)
+        Me.HelpMenu.Size = New System.Drawing.Size(96, 20)
         Me.HelpMenu.Text = "&О программе"
         '
         'StatusStrip
         '
         Me.StatusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1, Me.LBL_STAT_1, Me.ToolStripStatusLabel2, Me.LBL_STAT_2, Me.LBL_STAT_3, Me.ToolStripStatusLabel3, Me.lblShed, Me.lblSplet, Me.lblRem, Me.lblMassLoadEverest, Me.ToolStripStatusLabel4, Me.LBL_SUBD, Me.DB_USE, Me.ToolStripStatusLabel5, Me.LBL_USER})
-        Me.StatusStrip.Location = New System.Drawing.Point(0, 706)
+        Me.StatusStrip.Location = New System.Drawing.Point(0, 716)
         Me.StatusStrip.Name = "StatusStrip"
         Me.StatusStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.ManagerRenderMode
-        Me.StatusStrip.Size = New System.Drawing.Size(1008, 24)
+        Me.StatusStrip.Size = New System.Drawing.Size(1016, 25)
         Me.StatusStrip.TabIndex = 11
         Me.StatusStrip.Text = "StatusStrip"
         '
         'ToolStripStatusLabel1
         '
         Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
-        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(0, 19)
+        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(0, 20)
         '
         'LBL_STAT_1
         '
@@ -563,13 +564,13 @@ Partial Class frmMain
                     Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) _
                     Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom), System.Windows.Forms.ToolStripStatusLabelBorderSides)
         Me.LBL_STAT_1.Name = "LBL_STAT_1"
-        Me.LBL_STAT_1.Size = New System.Drawing.Size(127, 19)
+        Me.LBL_STAT_1.Size = New System.Drawing.Size(143, 20)
         Me.LBL_STAT_1.Text = "Техники всего: __ шт."
         '
         'ToolStripStatusLabel2
         '
         Me.ToolStripStatusLabel2.Name = "ToolStripStatusLabel2"
-        Me.ToolStripStatusLabel2.Size = New System.Drawing.Size(10, 19)
+        Me.ToolStripStatusLabel2.Size = New System.Drawing.Size(14, 20)
         Me.ToolStripStatusLabel2.Text = "|"
         '
         'LBL_STAT_2
@@ -577,7 +578,7 @@ Partial Class frmMain
         Me.LBL_STAT_2.BorderSides = CType(((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) _
                     Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom), System.Windows.Forms.ToolStripStatusLabelBorderSides)
         Me.LBL_STAT_2.Name = "LBL_STAT_2"
-        Me.LBL_STAT_2.Size = New System.Drawing.Size(68, 19)
+        Me.LBL_STAT_2.Size = New System.Drawing.Size(76, 20)
         Me.LBL_STAT_2.Text = "Техники в:"
         '
         'LBL_STAT_3
@@ -585,13 +586,13 @@ Partial Class frmMain
         Me.LBL_STAT_3.BorderSides = CType(((System.Windows.Forms.ToolStripStatusLabelBorderSides.Top Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) _
                     Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom), System.Windows.Forms.ToolStripStatusLabelBorderSides)
         Me.LBL_STAT_3.Name = "LBL_STAT_3"
-        Me.LBL_STAT_3.Size = New System.Drawing.Size(43, 19)
+        Me.LBL_STAT_3.Size = New System.Drawing.Size(50, 20)
         Me.LBL_STAT_3.Text = "__ шт."
         '
         'ToolStripStatusLabel3
         '
         Me.ToolStripStatusLabel3.Name = "ToolStripStatusLabel3"
-        Me.ToolStripStatusLabel3.Size = New System.Drawing.Size(10, 19)
+        Me.ToolStripStatusLabel3.Size = New System.Drawing.Size(14, 20)
         Me.ToolStripStatusLabel3.Text = "|"
         '
         'lblShed
@@ -601,13 +602,13 @@ Partial Class frmMain
                     Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom), System.Windows.Forms.ToolStripStatusLabelBorderSides)
         Me.lblShed.DoubleClickEnabled = True
         Me.lblShed.Name = "lblShed"
-        Me.lblShed.Size = New System.Drawing.Size(92, 19)
+        Me.lblShed.Size = New System.Drawing.Size(96, 20)
         Me.lblShed.Text = "Напоминания:"
         '
         'lblSplet
         '
         Me.lblSplet.Name = "lblSplet"
-        Me.lblSplet.Size = New System.Drawing.Size(10, 19)
+        Me.lblSplet.Size = New System.Drawing.Size(14, 20)
         Me.lblSplet.Text = "|"
         '
         'lblRem
@@ -617,7 +618,7 @@ Partial Class frmMain
                     Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom), System.Windows.Forms.ToolStripStatusLabelBorderSides)
         Me.lblRem.DoubleClickEnabled = True
         Me.lblRem.Name = "lblRem"
-        Me.lblRem.Size = New System.Drawing.Size(52, 19)
+        Me.lblRem.Size = New System.Drawing.Size(58, 20)
         Me.lblRem.Text = "Заявки:"
         '
         'lblMassLoadEverest
@@ -632,7 +633,7 @@ Partial Class frmMain
         'ToolStripStatusLabel4
         '
         Me.ToolStripStatusLabel4.Name = "ToolStripStatusLabel4"
-        Me.ToolStripStatusLabel4.Size = New System.Drawing.Size(10, 19)
+        Me.ToolStripStatusLabel4.Size = New System.Drawing.Size(14, 20)
         Me.ToolStripStatusLabel4.Text = "|"
         '
         'LBL_SUBD
@@ -641,7 +642,7 @@ Partial Class frmMain
                     Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) _
                     Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom), System.Windows.Forms.ToolStripStatusLabelBorderSides)
         Me.LBL_SUBD.Name = "LBL_SUBD"
-        Me.LBL_SUBD.Size = New System.Drawing.Size(41, 19)
+        Me.LBL_SUBD.Size = New System.Drawing.Size(44, 20)
         Me.LBL_SUBD.Text = "СУБД"
         '
         'DB_USE
@@ -650,13 +651,13 @@ Partial Class frmMain
         Me.DB_USE.Image = CType(resources.GetObject("DB_USE.Image"), System.Drawing.Image)
         Me.DB_USE.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.DB_USE.Name = "DB_USE"
-        Me.DB_USE.Size = New System.Drawing.Size(87, 22)
+        Me.DB_USE.Size = New System.Drawing.Size(96, 23)
         Me.DB_USE.Text = "База данных"
         '
         'ToolStripStatusLabel5
         '
         Me.ToolStripStatusLabel5.Name = "ToolStripStatusLabel5"
-        Me.ToolStripStatusLabel5.Size = New System.Drawing.Size(10, 19)
+        Me.ToolStripStatusLabel5.Size = New System.Drawing.Size(14, 20)
         Me.ToolStripStatusLabel5.Text = "|"
         '
         'LBL_USER
@@ -665,7 +666,7 @@ Partial Class frmMain
                     Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) _
                     Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom), System.Windows.Forms.ToolStripStatusLabelBorderSides)
         Me.LBL_USER.Name = "LBL_USER"
-        Me.LBL_USER.Size = New System.Drawing.Size(88, 19)
+        Me.LBL_USER.Size = New System.Drawing.Size(95, 20)
         Me.LBL_USER.Text = "Пользователь"
         '
         'ToolStrip
@@ -675,7 +676,7 @@ Partial Class frmMain
         Me.ToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripDropDownButton1, Me.NewToolStripButton, Me.ToolStripSeparator1, Me.SaveInfTehButton, Me.ToolStripSeparator2, Me.ArhToolZipbutton, Me.ToolStripButton1})
         Me.ToolStrip.Location = New System.Drawing.Point(0, 24)
         Me.ToolStrip.Name = "ToolStrip"
-        Me.ToolStrip.Size = New System.Drawing.Size(1008, 25)
+        Me.ToolStrip.Size = New System.Drawing.Size(1016, 25)
         Me.ToolStrip.TabIndex = 13
         Me.ToolStrip.Text = "ToolStrip"
         '
@@ -684,7 +685,7 @@ Partial Class frmMain
         Me.ToolStripDropDownButton1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ЗагрузитьИзEverestiniToolStripMenuItem, Me.ЗагрузитьИзASTRA32ToolStripMenuItem, Me.ЗагрузитьЧерезWMIToolStripMenuItem, Me.ЗагрузитьИзCSVEverestToolStripMenuItem, Me.HANDINSERTToolStripMenuItem, Me.ToolStripMenuItem1, Me.CNTToolStripMenuItem, Me.ToolStripSeparator7, Me.СетевоеОборудованиеToolStripMenuItem, Me.ToolStripSeparator9, Me.ПерефирийныеУстройстваToolStripMenuItem, Me.КомплектующиеToolStripMenuItem, Me.ToolStripSeparator10, Me.ДругоеОборудованиеToolStripMenuItem})
         Me.ToolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripDropDownButton1.Name = "ToolStripDropDownButton1"
-        Me.ToolStripDropDownButton1.Size = New System.Drawing.Size(67, 22)
+        Me.ToolStripDropDownButton1.Size = New System.Drawing.Size(71, 22)
         Me.ToolStripDropDownButton1.Text = "Новый..."
         '
         'ЗагрузитьИзEverestiniToolStripMenuItem
@@ -692,7 +693,7 @@ Partial Class frmMain
         Me.ЗагрузитьИзEverestiniToolStripMenuItem.Name = "ЗагрузитьИзEverestiniToolStripMenuItem"
         Me.ЗагрузитьИзEverestiniToolStripMenuItem.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Alt) _
                     Or System.Windows.Forms.Keys.E), System.Windows.Forms.Keys)
-        Me.ЗагрузитьИзEverestiniToolStripMenuItem.Size = New System.Drawing.Size(270, 22)
+        Me.ЗагрузитьИзEverestiniToolStripMenuItem.Size = New System.Drawing.Size(290, 22)
         Me.ЗагрузитьИзEverestiniToolStripMenuItem.Text = "Загрузить из Everest (ini)"
         '
         'ЗагрузитьИзASTRA32ToolStripMenuItem
@@ -700,7 +701,7 @@ Partial Class frmMain
         Me.ЗагрузитьИзASTRA32ToolStripMenuItem.Name = "ЗагрузитьИзASTRA32ToolStripMenuItem"
         Me.ЗагрузитьИзASTRA32ToolStripMenuItem.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Alt) _
                     Or System.Windows.Forms.Keys.A), System.Windows.Forms.Keys)
-        Me.ЗагрузитьИзASTRA32ToolStripMenuItem.Size = New System.Drawing.Size(270, 22)
+        Me.ЗагрузитьИзASTRA32ToolStripMenuItem.Size = New System.Drawing.Size(290, 22)
         Me.ЗагрузитьИзASTRA32ToolStripMenuItem.Text = "Загрузить из ASTRA32"
         '
         'ЗагрузитьЧерезWMIToolStripMenuItem
@@ -708,13 +709,13 @@ Partial Class frmMain
         Me.ЗагрузитьЧерезWMIToolStripMenuItem.Name = "ЗагрузитьЧерезWMIToolStripMenuItem"
         Me.ЗагрузитьЧерезWMIToolStripMenuItem.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Alt) _
                     Or System.Windows.Forms.Keys.W), System.Windows.Forms.Keys)
-        Me.ЗагрузитьЧерезWMIToolStripMenuItem.Size = New System.Drawing.Size(270, 22)
+        Me.ЗагрузитьЧерезWMIToolStripMenuItem.Size = New System.Drawing.Size(290, 22)
         Me.ЗагрузитьЧерезWMIToolStripMenuItem.Text = "Загрузить через WMI"
         '
         'ЗагрузитьИзCSVEverestToolStripMenuItem
         '
         Me.ЗагрузитьИзCSVEverestToolStripMenuItem.Name = "ЗагрузитьИзCSVEverestToolStripMenuItem"
-        Me.ЗагрузитьИзCSVEverestToolStripMenuItem.Size = New System.Drawing.Size(270, 22)
+        Me.ЗагрузитьИзCSVEverestToolStripMenuItem.Size = New System.Drawing.Size(290, 22)
         Me.ЗагрузитьИзCSVEverestToolStripMenuItem.Text = "Загрузить из CSV Everest"
         Me.ЗагрузитьИзCSVEverestToolStripMenuItem.Visible = False
         '
@@ -723,143 +724,143 @@ Partial Class frmMain
         Me.HANDINSERTToolStripMenuItem.Name = "HANDINSERTToolStripMenuItem"
         Me.HANDINSERTToolStripMenuItem.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Alt) _
                     Or System.Windows.Forms.Keys.R), System.Windows.Forms.Keys)
-        Me.HANDINSERTToolStripMenuItem.Size = New System.Drawing.Size(270, 22)
+        Me.HANDINSERTToolStripMenuItem.Size = New System.Drawing.Size(290, 22)
         Me.HANDINSERTToolStripMenuItem.Text = "Ручной ввод"
         '
         'ToolStripMenuItem1
         '
         Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(267, 6)
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(287, 6)
         '
         'CNTToolStripMenuItem
         '
         Me.CNTToolStripMenuItem.Name = "CNTToolStripMenuItem"
-        Me.CNTToolStripMenuItem.Size = New System.Drawing.Size(270, 22)
+        Me.CNTToolStripMenuItem.Size = New System.Drawing.Size(290, 22)
         Me.CNTToolStripMenuItem.Text = "Контейнер"
         '
         'ToolStripSeparator7
         '
         Me.ToolStripSeparator7.Name = "ToolStripSeparator7"
-        Me.ToolStripSeparator7.Size = New System.Drawing.Size(267, 6)
+        Me.ToolStripSeparator7.Size = New System.Drawing.Size(287, 6)
         '
         'СетевоеОборудованиеToolStripMenuItem
         '
         Me.СетевоеОборудованиеToolStripMenuItem.Name = "СетевоеОборудованиеToolStripMenuItem"
         Me.СетевоеОборудованиеToolStripMenuItem.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Alt) _
                     Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
-        Me.СетевоеОборудованиеToolStripMenuItem.Size = New System.Drawing.Size(270, 22)
+        Me.СетевоеОборудованиеToolStripMenuItem.Size = New System.Drawing.Size(290, 22)
         Me.СетевоеОборудованиеToolStripMenuItem.Text = "Сетевое оборудование"
         '
         'ToolStripSeparator9
         '
         Me.ToolStripSeparator9.Name = "ToolStripSeparator9"
-        Me.ToolStripSeparator9.Size = New System.Drawing.Size(267, 6)
+        Me.ToolStripSeparator9.Size = New System.Drawing.Size(287, 6)
         '
         'ПерефирийныеУстройстваToolStripMenuItem
         '
         Me.ПерефирийныеУстройстваToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.USBУстройстваToolStripMenuItem, Me.АккустическиеСистемыToolStripMenuItem, Me.БесперебойникиToolStripMenuItem, Me.КлавиатураToolStripMenuItem, Me.МониторToolStripMenuItem, Me.МышьToolStripMenuItem, Me.СетевыеФильтрыToolStripMenuItem, Me.ToolStripSeparator6, Me.ПринтерToolStripMenuItem, Me.СканерToolStripMenuItem, Me.МФУToolStripMenuItem, Me.КопирToolStripMenuItem, Me.ToolStripSeparator4, Me.ДисководZIPToolStripMenuItem, Me.ТелефонToolStripMenuItem, Me.ФаксToolStripMenuItem, Me.ФотоаппаратToolStripMenuItem})
         Me.ПерефирийныеУстройстваToolStripMenuItem.Name = "ПерефирийныеУстройстваToolStripMenuItem"
-        Me.ПерефирийныеУстройстваToolStripMenuItem.Size = New System.Drawing.Size(270, 22)
+        Me.ПерефирийныеУстройстваToolStripMenuItem.Size = New System.Drawing.Size(290, 22)
         Me.ПерефирийныеУстройстваToolStripMenuItem.Text = "Перефирийные устройства"
         '
         'USBУстройстваToolStripMenuItem
         '
         Me.USBУстройстваToolStripMenuItem.Name = "USBУстройстваToolStripMenuItem"
-        Me.USBУстройстваToolStripMenuItem.Size = New System.Drawing.Size(207, 22)
+        Me.USBУстройстваToolStripMenuItem.Size = New System.Drawing.Size(214, 22)
         Me.USBУстройстваToolStripMenuItem.Text = "USB Устройства"
         '
         'АккустическиеСистемыToolStripMenuItem
         '
         Me.АккустическиеСистемыToolStripMenuItem.Name = "АккустическиеСистемыToolStripMenuItem"
-        Me.АккустическиеСистемыToolStripMenuItem.Size = New System.Drawing.Size(207, 22)
+        Me.АккустическиеСистемыToolStripMenuItem.Size = New System.Drawing.Size(214, 22)
         Me.АккустическиеСистемыToolStripMenuItem.Text = "Аккустические системы"
         '
         'БесперебойникиToolStripMenuItem
         '
         Me.БесперебойникиToolStripMenuItem.Name = "БесперебойникиToolStripMenuItem"
-        Me.БесперебойникиToolStripMenuItem.Size = New System.Drawing.Size(207, 22)
+        Me.БесперебойникиToolStripMenuItem.Size = New System.Drawing.Size(214, 22)
         Me.БесперебойникиToolStripMenuItem.Text = "Бесперебойники"
         '
         'КлавиатураToolStripMenuItem
         '
         Me.КлавиатураToolStripMenuItem.Name = "КлавиатураToolStripMenuItem"
-        Me.КлавиатураToolStripMenuItem.Size = New System.Drawing.Size(207, 22)
+        Me.КлавиатураToolStripMenuItem.Size = New System.Drawing.Size(214, 22)
         Me.КлавиатураToolStripMenuItem.Text = "Клавиатура"
         '
         'МониторToolStripMenuItem
         '
         Me.МониторToolStripMenuItem.Name = "МониторToolStripMenuItem"
-        Me.МониторToolStripMenuItem.Size = New System.Drawing.Size(207, 22)
+        Me.МониторToolStripMenuItem.Size = New System.Drawing.Size(214, 22)
         Me.МониторToolStripMenuItem.Text = "Монитор"
         '
         'МышьToolStripMenuItem
         '
         Me.МышьToolStripMenuItem.Name = "МышьToolStripMenuItem"
-        Me.МышьToolStripMenuItem.Size = New System.Drawing.Size(207, 22)
+        Me.МышьToolStripMenuItem.Size = New System.Drawing.Size(214, 22)
         Me.МышьToolStripMenuItem.Text = "Мышь"
         '
         'СетевыеФильтрыToolStripMenuItem
         '
         Me.СетевыеФильтрыToolStripMenuItem.Name = "СетевыеФильтрыToolStripMenuItem"
-        Me.СетевыеФильтрыToolStripMenuItem.Size = New System.Drawing.Size(207, 22)
+        Me.СетевыеФильтрыToolStripMenuItem.Size = New System.Drawing.Size(214, 22)
         Me.СетевыеФильтрыToolStripMenuItem.Text = "Сетевые фильтры"
         '
         'ToolStripSeparator6
         '
         Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
-        Me.ToolStripSeparator6.Size = New System.Drawing.Size(204, 6)
+        Me.ToolStripSeparator6.Size = New System.Drawing.Size(211, 6)
         '
         'ПринтерToolStripMenuItem
         '
         Me.ПринтерToolStripMenuItem.Name = "ПринтерToolStripMenuItem"
-        Me.ПринтерToolStripMenuItem.Size = New System.Drawing.Size(207, 22)
+        Me.ПринтерToolStripMenuItem.Size = New System.Drawing.Size(214, 22)
         Me.ПринтерToolStripMenuItem.Text = "Принтер"
         '
         'СканерToolStripMenuItem
         '
         Me.СканерToolStripMenuItem.Name = "СканерToolStripMenuItem"
-        Me.СканерToolStripMenuItem.Size = New System.Drawing.Size(207, 22)
+        Me.СканерToolStripMenuItem.Size = New System.Drawing.Size(214, 22)
         Me.СканерToolStripMenuItem.Text = "Сканер"
         '
         'МФУToolStripMenuItem
         '
         Me.МФУToolStripMenuItem.Name = "МФУToolStripMenuItem"
-        Me.МФУToolStripMenuItem.Size = New System.Drawing.Size(207, 22)
+        Me.МФУToolStripMenuItem.Size = New System.Drawing.Size(214, 22)
         Me.МФУToolStripMenuItem.Text = "МФУ"
         '
         'КопирToolStripMenuItem
         '
         Me.КопирToolStripMenuItem.Name = "КопирToolStripMenuItem"
-        Me.КопирToolStripMenuItem.Size = New System.Drawing.Size(207, 22)
+        Me.КопирToolStripMenuItem.Size = New System.Drawing.Size(214, 22)
         Me.КопирToolStripMenuItem.Text = "Копир"
         '
         'ToolStripSeparator4
         '
         Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
-        Me.ToolStripSeparator4.Size = New System.Drawing.Size(204, 6)
+        Me.ToolStripSeparator4.Size = New System.Drawing.Size(211, 6)
         '
         'ДисководZIPToolStripMenuItem
         '
         Me.ДисководZIPToolStripMenuItem.Name = "ДисководZIPToolStripMenuItem"
-        Me.ДисководZIPToolStripMenuItem.Size = New System.Drawing.Size(207, 22)
+        Me.ДисководZIPToolStripMenuItem.Size = New System.Drawing.Size(214, 22)
         Me.ДисководZIPToolStripMenuItem.Text = "Дисковод ZIP"
         '
         'ТелефонToolStripMenuItem
         '
         Me.ТелефонToolStripMenuItem.Name = "ТелефонToolStripMenuItem"
-        Me.ТелефонToolStripMenuItem.Size = New System.Drawing.Size(207, 22)
+        Me.ТелефонToolStripMenuItem.Size = New System.Drawing.Size(214, 22)
         Me.ТелефонToolStripMenuItem.Text = "Телефон"
         '
         'ФаксToolStripMenuItem
         '
         Me.ФаксToolStripMenuItem.Name = "ФаксToolStripMenuItem"
-        Me.ФаксToolStripMenuItem.Size = New System.Drawing.Size(207, 22)
+        Me.ФаксToolStripMenuItem.Size = New System.Drawing.Size(214, 22)
         Me.ФаксToolStripMenuItem.Text = "Факс"
         '
         'ФотоаппаратToolStripMenuItem
         '
         Me.ФотоаппаратToolStripMenuItem.Name = "ФотоаппаратToolStripMenuItem"
-        Me.ФотоаппаратToolStripMenuItem.Size = New System.Drawing.Size(207, 22)
+        Me.ФотоаппаратToolStripMenuItem.Size = New System.Drawing.Size(214, 22)
         Me.ФотоаппаратToolStripMenuItem.Text = "Фотоаппарат"
         '
         'КомплектующиеToolStripMenuItem
@@ -867,75 +868,75 @@ Partial Class frmMain
         Me.КомплектующиеToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ВидеокартыToolStripMenuItem, Me.ДисководыToolStripMenuItem, Me.ЖесткиеДискиToolStripMenuItem, Me.МатеринскиеПлатыToolStripMenuItem, Me.МодулиПамятиToolStripMenuItem, Me.ОптическиеНакопителиToolStripMenuItem, Me.ПроцессорToolStripMenuItem, Me.БлокПитанияToolStripMenuItem, Me.КорпусToolStripMenuItem})
         Me.КомплектующиеToolStripMenuItem.Enabled = False
         Me.КомплектующиеToolStripMenuItem.Name = "КомплектующиеToolStripMenuItem"
-        Me.КомплектующиеToolStripMenuItem.Size = New System.Drawing.Size(270, 22)
+        Me.КомплектующиеToolStripMenuItem.Size = New System.Drawing.Size(290, 22)
         Me.КомплектующиеToolStripMenuItem.Text = "Комплектующие (не работает)"
         Me.КомплектующиеToolStripMenuItem.Visible = False
         '
         'ВидеокартыToolStripMenuItem
         '
         Me.ВидеокартыToolStripMenuItem.Name = "ВидеокартыToolStripMenuItem"
-        Me.ВидеокартыToolStripMenuItem.Size = New System.Drawing.Size(208, 22)
+        Me.ВидеокартыToolStripMenuItem.Size = New System.Drawing.Size(217, 22)
         Me.ВидеокартыToolStripMenuItem.Text = "Видеокарты"
         '
         'ДисководыToolStripMenuItem
         '
         Me.ДисководыToolStripMenuItem.Name = "ДисководыToolStripMenuItem"
-        Me.ДисководыToolStripMenuItem.Size = New System.Drawing.Size(208, 22)
+        Me.ДисководыToolStripMenuItem.Size = New System.Drawing.Size(217, 22)
         Me.ДисководыToolStripMenuItem.Text = "Дисководы"
         '
         'ЖесткиеДискиToolStripMenuItem
         '
         Me.ЖесткиеДискиToolStripMenuItem.Name = "ЖесткиеДискиToolStripMenuItem"
-        Me.ЖесткиеДискиToolStripMenuItem.Size = New System.Drawing.Size(208, 22)
+        Me.ЖесткиеДискиToolStripMenuItem.Size = New System.Drawing.Size(217, 22)
         Me.ЖесткиеДискиToolStripMenuItem.Text = "Жесткие диски"
         '
         'МатеринскиеПлатыToolStripMenuItem
         '
         Me.МатеринскиеПлатыToolStripMenuItem.Name = "МатеринскиеПлатыToolStripMenuItem"
-        Me.МатеринскиеПлатыToolStripMenuItem.Size = New System.Drawing.Size(208, 22)
+        Me.МатеринскиеПлатыToolStripMenuItem.Size = New System.Drawing.Size(217, 22)
         Me.МатеринскиеПлатыToolStripMenuItem.Text = "Материнские платы"
         '
         'МодулиПамятиToolStripMenuItem
         '
         Me.МодулиПамятиToolStripMenuItem.Name = "МодулиПамятиToolStripMenuItem"
-        Me.МодулиПамятиToolStripMenuItem.Size = New System.Drawing.Size(208, 22)
+        Me.МодулиПамятиToolStripMenuItem.Size = New System.Drawing.Size(217, 22)
         Me.МодулиПамятиToolStripMenuItem.Text = "Модули памяти"
         '
         'ОптическиеНакопителиToolStripMenuItem
         '
         Me.ОптическиеНакопителиToolStripMenuItem.Name = "ОптическиеНакопителиToolStripMenuItem"
-        Me.ОптическиеНакопителиToolStripMenuItem.Size = New System.Drawing.Size(208, 22)
+        Me.ОптическиеНакопителиToolStripMenuItem.Size = New System.Drawing.Size(217, 22)
         Me.ОптическиеНакопителиToolStripMenuItem.Text = "Оптические накопители"
         '
         'ПроцессорToolStripMenuItem
         '
         Me.ПроцессорToolStripMenuItem.Name = "ПроцессорToolStripMenuItem"
-        Me.ПроцессорToolStripMenuItem.Size = New System.Drawing.Size(208, 22)
+        Me.ПроцессорToolStripMenuItem.Size = New System.Drawing.Size(217, 22)
         Me.ПроцессорToolStripMenuItem.Text = "Процессор"
         '
         'БлокПитанияToolStripMenuItem
         '
         Me.БлокПитанияToolStripMenuItem.Name = "БлокПитанияToolStripMenuItem"
-        Me.БлокПитанияToolStripMenuItem.Size = New System.Drawing.Size(208, 22)
+        Me.БлокПитанияToolStripMenuItem.Size = New System.Drawing.Size(217, 22)
         Me.БлокПитанияToolStripMenuItem.Text = "Блок питания"
         '
         'КорпусToolStripMenuItem
         '
         Me.КорпусToolStripMenuItem.Name = "КорпусToolStripMenuItem"
-        Me.КорпусToolStripMenuItem.Size = New System.Drawing.Size(208, 22)
+        Me.КорпусToolStripMenuItem.Size = New System.Drawing.Size(217, 22)
         Me.КорпусToolStripMenuItem.Text = "Корпус"
         '
         'ToolStripSeparator10
         '
         Me.ToolStripSeparator10.Name = "ToolStripSeparator10"
-        Me.ToolStripSeparator10.Size = New System.Drawing.Size(267, 6)
+        Me.ToolStripSeparator10.Size = New System.Drawing.Size(287, 6)
         '
         'ДругоеОборудованиеToolStripMenuItem
         '
         Me.ДругоеОборудованиеToolStripMenuItem.Name = "ДругоеОборудованиеToolStripMenuItem"
         Me.ДругоеОборудованиеToolStripMenuItem.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Alt) _
                     Or System.Windows.Forms.Keys.O), System.Windows.Forms.Keys)
-        Me.ДругоеОборудованиеToolStripMenuItem.Size = New System.Drawing.Size(270, 22)
+        Me.ДругоеОборудованиеToolStripMenuItem.Size = New System.Drawing.Size(290, 22)
         Me.ДругоеОборудованиеToolStripMenuItem.Text = "Другое оборудование"
         '
         'NewToolStripButton
@@ -954,7 +955,7 @@ Partial Class frmMain
         '
         Me.SaveInfTehButton.ImageTransparentColor = System.Drawing.Color.Black
         Me.SaveInfTehButton.Name = "SaveInfTehButton"
-        Me.SaveInfTehButton.Size = New System.Drawing.Size(69, 22)
+        Me.SaveInfTehButton.Size = New System.Drawing.Size(74, 22)
         Me.SaveInfTehButton.Text = "Сохранить"
         Me.SaveInfTehButton.ToolTipText = "Сохранить"
         '
@@ -967,22 +968,28 @@ Partial Class frmMain
         '
         Me.ArhToolZipbutton.ImageTransparentColor = System.Drawing.Color.Black
         Me.ArhToolZipbutton.Name = "ArhToolZipbutton"
-        Me.ArhToolZipbutton.Size = New System.Drawing.Size(70, 22)
+        Me.ArhToolZipbutton.Size = New System.Drawing.Size(75, 22)
         Me.ArhToolZipbutton.Text = "Архивация"
         '
         'ToolStripButton1
         '
         Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton1.Name = "ToolStripButton1"
-        Me.ToolStripButton1.Size = New System.Drawing.Size(52, 22)
+        Me.ToolStripButton1.Size = New System.Drawing.Size(56, 22)
         Me.ToolStripButton1.Text = "Отчеты"
+        '
+        'СинхронизацияПОToolStripMenuItem2
+        '
+        Me.СинхронизацияПОToolStripMenuItem2.Name = "СинхронизацияПОToolStripMenuItem2"
+        Me.СинхронизацияПОToolStripMenuItem2.Size = New System.Drawing.Size(273, 22)
+        Me.СинхронизацияПОToolStripMenuItem2.Text = "Синхронизация справочников ПО"
         '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(1008, 730)
+        Me.ClientSize = New System.Drawing.Size(1016, 741)
         Me.Controls.Add(Me.ToolStrip)
         Me.Controls.Add(Me.MenuStrip)
         Me.Controls.Add(Me.StatusStrip)
@@ -1125,5 +1132,6 @@ Partial Class frmMain
     Friend WithEvents DB_USE As System.Windows.Forms.ToolStripDropDownButton
     Friend WithEvents ReloginToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents Services_ADD As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents СинхронизацияПОToolStripMenuItem2 As System.Windows.Forms.ToolStripMenuItem
 
 End Class
