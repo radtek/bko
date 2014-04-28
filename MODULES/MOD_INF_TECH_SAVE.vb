@@ -1360,7 +1360,7 @@ err_:
                                 'esq ************************
                             Else
 
-                                sSQL = "UPDATE SOFT_INSTALL SET NomerSoftKomp='" & intj + 1 & "' WHERE Id_Comp= " & sSID & " AND Soft='" & H1 & "'"
+                                sSQL = "UPDATE SOFT_INSTALL SET NomerSoftKomp='" & intj + 1 & "',L_key='" & B1 & "' WHERE Id_Comp= " & sSID & " AND Soft='" & H1 & "'"
                                 DB7.Execute(sSQL)
 
                                 'esq ************************

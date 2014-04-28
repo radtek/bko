@@ -1050,10 +1050,11 @@ nextA:
 
         'esq 130611 *****************************
         Dim FSO As Object
-        Dim tINI As String
+        Dim tINI, oINI As String
         Dim l As Integer
 
         FSO = CreateObject("Scripting.FileSystemObject")
+        oINI = EverestFilePatch
         l = Len(EverestFilePatch)
         tINI = Left(EverestFilePatch, l - 4) & "-soft.ini"
         If FSO.FileExists(tINI) Then
@@ -1161,6 +1162,37 @@ ASE:
         frmComputers.lstSoftware.Items(intcount).SubItems.Add("Антивирус")
 
         intcount = intcount + 1
+
+        'esq ***** Лицензионный номер МСОфиса 
+        Dim L_name, L_key As String
+        Dim lstcount, n As Integer
+        If InStr(oINI, "-soft.ini") Then
+            l = Len(oINI)
+            n = InStr(oINI, "-soft.ini")
+            oINI = Left(oINI, n - 1) & ".ini"
+        End If
+        If FSO.FileExists(oINI) Then
+            Dim oIniFile As New IniFile(oINI)
+            For intj = 1 To 40
+                L_name = ""
+                L_key = ""
+                A = "Лицензии" & intj
+                L_name = oIniFile.GetString("Лицензии", A, "")
+                If Len(L_name) > 0 Then
+                    L_key = oIniFile.GetString("Лицензии", L_name & "|Ключ продукта", "")
+
+                    If InStr(L_name, "office", Microsoft.VisualBasic.CompareMethod.Text) > 0 Then
+                        For lstcount = 1 To 400
+                            If InStr(frmComputers.lstSoftware.Items(lstcount).SubItems.Item(2).Text, L_name) > 0 Then
+                                frmComputers.lstSoftware.Items(lstcount).SubItems.Item(3).Text = L_key
+                            End If
+                        Next
+                    End If
+                End If
+            Next
+        End If
+        'esq  *****************************
+
 
         Exit Sub
 Err_handler:
@@ -2179,6 +2211,7 @@ nextA:
 
         Call usersload() 'esq 130728
         Call textp_Upd(frmComputers.lstSoftware, frmComputers.sCOUNT) 'esq
+        Call SAVE_SOFT(frmComputers.lstSoftware, frmComputers.sCOUNT) 'esq
 
         Exit Sub
 Err_handler:
@@ -2201,10 +2234,11 @@ Err_handler:
 
         'esq *****************************
         Dim FSO As Object
-        Dim tINI As String
+        Dim tINI, oINI As String
         Dim l As Integer
 
         FSO = CreateObject("Scripting.FileSystemObject")
+        oINI = EverestFilePatch
         l = Len(EverestFilePatch)
         tINI = Left(EverestFilePatch, l - 4) & "-soft.ini"
         If FSO.FileExists(tINI) Then
@@ -2347,6 +2381,36 @@ A2:
             lstV.Items(intjk).SubItems.Add("Операционная система")
         End If
         'esq *****************************
+
+        'esq ***** Лицензионный номер МСОфиса 
+        Dim L_name, L_key As String
+        Dim lstcount, n As Integer
+        If InStr(oINI, "-soft.ini") Then
+            l = Len(oINI)
+            n = InStr(oINI, "-soft.ini")
+            oINI = Left(oINI, n - 1) & ".ini"
+        End If
+        If FSO.FileExists(oINI) Then
+            Dim oIniFile As New IniFile(oINI)
+            For intj = 1 To 40
+                L_name = ""
+                L_key = ""
+                A = "Лицензии" & intj
+                L_name = oIniFile.GetString("Лицензии", A, "")
+                If Len(L_name) > 0 Then
+                    L_key = oIniFile.GetString("Лицензии", L_name & "|Ключ продукта", "")
+
+                    If InStr(L_name, "office", Microsoft.VisualBasic.CompareMethod.Text) > 0 Then
+                        For lstcount = 1 To 400
+                            If InStr(lstV.Items(lstcount).SubItems.Item(2).Text, L_name) > 0 Then
+                                lstV.Items(lstcount).SubItems.Item(3).Text = L_key
+                            End If
+                        Next
+                    End If
+                End If
+            Next
+        End If
+        'esq  *****************************
 
         Exit Sub
 Err_handler:
