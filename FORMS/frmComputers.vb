@@ -2474,6 +2474,8 @@ err_:
         End If
 
         If Len(EverestFilePatch) > 3 Then Call EVEREST_UPDATE()
+        Call LOAD_SOFT(sCOUNT, Me.lstSoftware) 'esq
+
         Dim langfile As New IniFile(sLANGPATH)
 
 
