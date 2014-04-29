@@ -58,6 +58,7 @@ Partial Class frmSoftware
         Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.CheckBox2 = New System.Windows.Forms.CheckBox()
+        Me.CheckBox3_manual = New System.Windows.Forms.CheckBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.gbTree.SuspendLayout()
         Me.TableLayoutPanel3.SuspendLayout()
@@ -202,6 +203,7 @@ Partial Class frmSoftware
         Me.TableLayoutPanel1.Controls.Add(Me.Label7, 0, 4)
         Me.TableLayoutPanel1.Controls.Add(Me.ToolStrip1, 0, 6)
         Me.TableLayoutPanel1.Controls.Add(Me.CheckBox2, 2, 6)
+        Me.TableLayoutPanel1.Controls.Add(Me.CheckBox3_manual, 1, 5)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(3, 16)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
@@ -451,6 +453,16 @@ Partial Class frmSoftware
         Me.CheckBox2.Text = "Массовое удаление"
         Me.CheckBox2.UseVisualStyleBackColor = True
         '
+        'CheckBox3_manual
+        '
+        Me.CheckBox3_manual.AutoSize = True
+        Me.CheckBox3_manual.Location = New System.Drawing.Point(180, 110)
+        Me.CheckBox3_manual.Name = "CheckBox3_manual"
+        Me.CheckBox3_manual.Size = New System.Drawing.Size(137, 17)
+        Me.CheckBox3_manual.TabIndex = 21
+        Me.CheckBox3_manual.Text = "Установлено вручную"
+        Me.CheckBox3_manual.UseVisualStyleBackColor = True
+        '
         'Label1
         '
         Me.Label1.AutoSize = True
@@ -524,4 +536,5 @@ Partial Class frmSoftware
     Friend WithEvents btnSearch As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripButton1 As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripSeparator4 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents CheckBox3_manual As System.Windows.Forms.CheckBox
 End Class

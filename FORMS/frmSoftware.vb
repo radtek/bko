@@ -623,6 +623,8 @@ Public Class frmSoftware
                 If Not IsDBNull(.Fields("L_key").Value) Then txtLicKey.Text = .Fields("L_key").Value
                 If Not IsDBNull(.Fields("Publisher").Value) Then cmbSoftPr.Text = .Fields("Publisher").Value
 
+                If Not IsDBNull(.Fields("WO_SETUP").Value) Then Me.CheckBox3_manual.Checked = .Fields("WO_SETUP").Value 'esq 
+
                 'cmbTipPo
                 'txtLicKey
                 'cmbSoftPr
@@ -796,7 +798,7 @@ Public Class frmSoftware
 
 
         If Not (RSExists("PO", "Name", cmbSoftware.Text)) Then
-            AddTwoPar(Me.cmbSoftware.Text, Me.cmbSoftPr.Text, "SPR_PO", Me.cmbSoftware)
+            AddTreePar(Me.cmbSoftware.Text, Me.cmbTipPo.Text, Me.cmbSoftPr.Text, "SPR_PO", Me.cmbSoftware) 'esq сохраним ещё и тип ПО
         End If
 
         Dim rs2 As Recordset
@@ -822,6 +824,7 @@ Public Class frmSoftware
                 .Fields("Id_Comp").Value = sCOUNT
                 .Fields("Publisher").Value = cmbSoftPr.Text
                 .Fields("TIP").Value = cmbTipPo.Text
+                .Fields("WO_SETUP").Value = Me.CheckBox3_manual.Checked 'esq
                 .Update()
             End With
             rs2.Close()
@@ -844,8 +847,9 @@ Public Class frmSoftware
                 .Fields("d_o").Value = dtGok.Value
                 .Fields("Id_Comp").Value = sCOUNT
                 .Fields("Publisher").Value = cmbSoftPr.Text
-                .Fields("TIP").Value = cmbTipPo.Text 'esq в SPR_PO не пишет; когда-нибудь надо разобраться
+                .Fields("TIP").Value = cmbTipPo.Text
                 .Fields("NomerSoftKomp").Value = Me.lstSoftware.Items.Count + 1 'esq
+                .Fields("WO_SETUP").Value = Me.CheckBox3_manual.Checked 'esq
                 .Update()
             End With
             rs2.Close()
@@ -862,6 +866,7 @@ Public Class frmSoftware
         cmbSoftPr.Text = ""
         DTInstall.Value = Date.Today
         dtGok.Value = Date.Today
+        Me.CheckBox3_manual.Checked = False 'esq
 
         Call LOAD_SOFT(sCOUNT, Me.lstSoftware)
         Exit Sub
@@ -936,6 +941,7 @@ Public Class frmSoftware
         cmbSoftPr.Text = ""
         DTInstall.Value = Date.Today
         dtGok.Value = Date.Today
+        Me.CheckBox3_manual.Checked = False 'esq
     End Sub
 
     Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
@@ -1031,4 +1037,5 @@ Public Class frmSoftware
         End If
 
     End Sub
+
 End Class
