@@ -2266,7 +2266,9 @@ Err_handler:
         If po_count > 0 Then
             rs.MoveFirst()
             Do While Not rs.EOF
-                If InStr(EverAll_PO, "/" & Trim(rs.Fields("Soft").Value) & "/") = 0 Then
+                'esq +WO_SETUP
+                If rs.Fields("WO_SETUP").Value = True Then
+                ElseIf InStr(EverAll_PO, "/" & Trim(rs.Fields("Soft").Value) & "/") = 0 Then
                     rs.Delete()
                 Else
                     beg = InStr(EverAll_PO, "/" & Trim(rs.Fields("Soft").Value) & "/")

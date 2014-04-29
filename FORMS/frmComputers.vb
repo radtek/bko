@@ -1851,27 +1851,29 @@ err_:
 
         With rs1
 
-                If Not IsDBNull(.Fields("Soft").Value) Then cmbSoftware.Text = .Fields("Soft").Value
-                If Not IsDBNull(.Fields("t_lic").Value) Then cmbTipLicense.Text = .Fields("t_lic").Value
+            If Not IsDBNull(.Fields("Soft").Value) Then cmbSoftware.Text = .Fields("Soft").Value
+            If Not IsDBNull(.Fields("t_lic").Value) Then cmbTipLicense.Text = .Fields("t_lic").Value
 
-                If Not IsDBNull(.Fields("TIP").Value) Then cmbTipPo.Text = .Fields("TIP").Value
-                If Not IsDBNull(.Fields("L_key").Value) Then txtLicKey.Text = .Fields("L_key").Value
-                If Not IsDBNull(.Fields("Publisher").Value) Then cmbSoftPr.Text = .Fields("Publisher").Value
+            If Not IsDBNull(.Fields("TIP").Value) Then cmbTipPo.Text = .Fields("TIP").Value
+            If Not IsDBNull(.Fields("L_key").Value) Then txtLicKey.Text = .Fields("L_key").Value
+            If Not IsDBNull(.Fields("Publisher").Value) Then cmbSoftPr.Text = .Fields("Publisher").Value
 
-                If Not IsDBNull(.Fields("d_p").Value) Then sSw = .Fields("d_p").Value
-                If Not IsDBNull(.Fields("d_o").Value) Then sSw2 = .Fields("d_o").Value
+            If Not IsDBNull(.Fields("d_p").Value) Then sSw = .Fields("d_p").Value
+            If Not IsDBNull(.Fields("d_o").Value) Then sSw2 = .Fields("d_o").Value
 
-                If Len(sSw) = 0 Then
-                    sSw = Date.Today
-                End If
+            If Not IsDBNull(.Fields("WO_SETUP").Value) Then Me.CheckBox3_manual.Checked = .Fields("WO_SETUP").Value 'esq 
 
-                If Len(sSw2) = 0 Then
-                    sSw2 = Date.Today
-                End If
-                On Error GoTo A
+            If Len(sSw) = 0 Then
+                sSw = Date.Today
+            End If
 
-                DTInstall.Value = sSw 'Дата регистрации
-                dtGok.Value = sSw2 'Срок исполнения
+            If Len(sSw2) = 0 Then
+                sSw2 = Date.Today
+            End If
+            On Error GoTo A
+
+            DTInstall.Value = sSw 'Дата регистрации
+            dtGok.Value = sSw2 'Срок исполнения
 
         End With
 
@@ -6551,7 +6553,7 @@ Err_:
                     "Id_Comp=" & sCOUNT & "," &
                     "Publisher='" & cmbSoftPr.Text & "'," &
                     "TIP='" & cmbTipPo.Text & "' " &
-                    "WHERE Id=" & SoftCOUNT
+                    ",WO_SETUP=" & Me.CheckBox3_manual.Checked & " " & "WHERE Id=" & SoftCOUNT 'esq
 
             DB7.Execute(sSQL)
 
@@ -6560,9 +6562,9 @@ Err_:
                 SaveActivityToLogDB(
                     LNGIniFile.GetString("frmSoftware", "MSG6", "Добавление программного обеспечения для") & " " &
                     Me.lstGroups.SelectedNode.Text)
-
-            sSQL = "INSERT INTO SOFT_INSTALL (Soft,t_lic,L_key,d_p,d_o,Publisher,TIP,Id_Comp) VALUES ('" & cmbSoftware.Text &
-                 "','" & cmbTipLicense.Text & "','" & txtLicKey.Text & "','" & DTInstall.Value & "','" & dtGok.Value & "','" & cmbSoftPr.Text & "','" & cmbTipPo.Text & "'," & sCOUNT & ")"
+            'esq +WO_SETUP
+            sSQL = "INSERT INTO SOFT_INSTALL (Soft,t_lic,L_key,d_p,d_o,Publisher,TIP,Id_Comp,WO_SETUP) VALUES ('" & cmbSoftware.Text &
+                 "','" & cmbTipLicense.Text & "','" & txtLicKey.Text & "','" & DTInstall.Value & "','" & dtGok.Value & "','" & cmbSoftPr.Text & "','" & cmbTipPo.Text & "'," & sCOUNT & "," & Me.CheckBox3_manual.Checked & ")"
             DB7.Execute(sSQL)
 
         End If
@@ -6575,6 +6577,7 @@ Err_:
         cmbSoftPr.Text = ""
         DTInstall.Value = Date.Today
         dtGok.Value = Date.Today
+        Me.CheckBox3_manual.Checked = False 'esq
 
         Call LOAD_SOFT(sCOUNT, Me.lstSoftware)
         Exit Sub
@@ -6670,6 +6673,7 @@ err_:
         DTInstall.Value = Date.Today
         dtGok.Value = Date.Today
         gbSoftEd.Visible = False
+        Me.CheckBox3_manual.Checked = False 'esq
     End Sub
 
     Private Sub ToolStripButton1_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripButton1.Click
