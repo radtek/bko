@@ -822,13 +822,23 @@ Public Class frmSoftware
                 .Fields("d_p").Value = DTInstall.Value
                 .Fields("d_o").Value = dtGok.Value
                 .Fields("Id_Comp").Value = sCOUNT
-                .Fields("Publisher").Value = cmbSoftPr.Text
+                .Fields("Publisher").Value = Replace(cmbSoftPr.Text, "'", "") 'esq
                 .Fields("TIP").Value = cmbTipPo.Text
                 .Fields("WO_SETUP").Value = Me.CheckBox3_manual.Checked 'esq
                 .Update()
             End With
             rs2.Close()
             rs2 = Nothing
+
+            'esq добавление нового производителя ************************
+            cmbSoftPr.Text = Replace(cmbSoftPr.Text, "'", "")
+            If Not RSExists("PROYZV", "PROIZV", cmbSoftPr.Text) Then
+                Dim sSQL1 As String
+                sSQL1 = "INSERT INTO SPR_PROIZV (Proizv) VALUES ('" & cmbSoftPr.Text & "')"
+                DB7.Execute(sSQL1)
+            End If
+            'esq ************************
+
 
         Else
             Call _
@@ -855,6 +865,14 @@ Public Class frmSoftware
             rs2.Close()
             rs2 = Nothing
 
+            'esq добавление нового производителя ************************
+            cmbSoftPr.Text = Replace(cmbSoftPr.Text, "'", "")
+            If Not RSExists("PROYZV", "PROIZV", cmbSoftPr.Text) Then
+                Dim sSQL1 As String
+                sSQL1 = "INSERT INTO SPR_PROIZV (Proizv) VALUES ('" & cmbSoftPr.Text & "')"
+                DB7.Execute(sSQL1)
+            End If
+            'esq ************************
 
         End If
 
@@ -870,7 +888,7 @@ Public Class frmSoftware
 
         Call LOAD_SOFT(sCOUNT, Me.lstSoftware)
         Exit Sub
-        err_:
+err_:
 
         MsgBox(Err.Description)
     End Sub

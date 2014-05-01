@@ -6532,7 +6532,7 @@ Err_:
 
 
         If Not (RSExists("PO", "Name", cmbSoftware.Text)) Then
-            AddTwoPar(Me.cmbSoftware.Text, Me.cmbSoftPr.Text, "SPR_PO", Me.cmbSoftware)
+            AddTreePar(Me.cmbSoftware.Text, Me.cmbTipPo.Text, Me.cmbSoftPr.Text, "SPR_PO", Me.cmbSoftware) 'esq сохраним ещё и тип ПО
         End If
 
         Dim sSQL As String
@@ -6551,11 +6551,20 @@ Err_:
                     "d_p='" & DTInstall.Value & "'," &
                     "d_o='" & dtGok.Value & "'," &
                     "Id_Comp=" & sCOUNT & "," &
-                    "Publisher='" & cmbSoftPr.Text & "'," &
+                    "Publisher='" & Replace(cmbSoftPr.Text, "'", "") & "'," &
                     "TIP='" & cmbTipPo.Text & "' " &
                     ",WO_SETUP=" & Me.CheckBox3_manual.Checked & " " & "WHERE Id=" & SoftCOUNT 'esq
 
             DB7.Execute(sSQL)
+
+            'esq добавление нового производителя ************************
+            cmbSoftPr.Text = Replace(cmbSoftPr.Text, "'", "")
+            If Not RSExists("PROYZV", "PROIZV", cmbSoftPr.Text) Then
+                Dim sSQL1 As String
+                sSQL1 = "INSERT INTO SPR_PROIZV (Proizv) VALUES ('" & cmbSoftPr.Text & "')"
+                DB7.Execute(sSQL1)
+            End If
+            'esq ************************
 
         Else
             Call _

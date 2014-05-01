@@ -2545,6 +2545,7 @@ err_:
         Dim sSQL, sSQL1, sSQL2, F1, H1 As String
         Dim ID_PROIZV As Integer
 
+
         ' сжатие SPR_PO
         sSQL = "SELECT * FROM SPR_PO ORDER BY Name"
         rs = New Recordset
@@ -2553,14 +2554,10 @@ err_:
             .MoveFirst()
             Do While Not .EOF
                 sSQL2 = "SELECT * FROM SOFT_INSTALL WHERE Soft='" & .Fields("Name").Value & "'"
-                'sSQL2 = "SELECT COUNT(*) AS TEMP FROM SOFT_INSTALL WHERE Soft='" & .Fields("Name").Value & "'"
                 rs2 = New Recordset
                 rs2.Open(sSQL2, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                'rs2.MoveFirst()
-                Select rs2.EOF
+                Select Case rs2.EOF
                     Case True
-                        'Select Case rs2.Fields("TEMP").Value
-                        'Case 0
                         .Delete()
                         .MovePrevious()
                     Case Else
@@ -2570,7 +2567,43 @@ err_:
                 .MoveNext()
             Loop
         End With
+        rs.Close()
+        rs = Nothing
 
+
+        ' сжатие SPR_PROIZV
+        sSQL = "SELECT * FROM SPR_PROIZV ORDER BY Proizv DESC"
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+        With rs
+            .MoveFirst()
+            Do While Not .EOF
+                If InStr(.Fields("Proizv").Value, "'") > 0 Then
+                    .Fields("Proizv").Value = Replace(.Fields("Proizv").Value, "'", "")
+                    .Update()
+                End If
+                .MoveNext()
+            Loop
+            .MoveFirst()
+            Do While Not .EOF
+                sSQL2 = "SELECT * FROM SOFT_INSTALL WHERE Publisher='" & .Fields("Proizv").Value & "'"
+                rs2 = New Recordset
+                rs2.Open(sSQL2, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                Select Case rs2.EOF
+                    Case True
+                        Try
+                            sSQL1 = "DELETE FROM SPR_PROIZV WHERE Proizv='" & .Fields("Proizv").Value & "'"
+                            DB7.Execute(sSQL1)
+                            '.MovePrevious()
+                        Catch ex As Exception ' при удалении связанных записей
+                        End Try
+                    Case Else
+                End Select
+                rs2.Close()
+                rs2 = Nothing
+                .MoveNext()
+            Loop
+        End With
         rs.Close()
         rs = Nothing
 
@@ -2593,22 +2626,16 @@ err_:
                     F1 = .Fields("Publisher").Value
                 End If
 
-                rs2 = New Recordset
-                rs2.Open("SELECT * FROM SPR_PROIZV WHERE PROIZV='" & F1 & "'", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                Select Case rs2.EOF
-                    Case True
-                        sSQL1 = "INSERT INTO SPR_PROIZV (Proizv) VALUES ('" & F1 & "')"
-                        DB7.Execute(sSQL1)
-                        rs1 = New Recordset
-                        rs1.Open("SELECT * FROM SPR_PROIZV WHERE PROIZV='" & F1 & "'", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                        ID_PROIZV = rs1.Fields("ID").Value
-                        rs1.Close()
-                        rs1 = Nothing
-                    Case Else
-                        ID_PROIZV = rs2.Fields("ID").Value
-                End Select
-                rs2.Close()
-                rs2 = Nothing
+                F1 = Replace(F1, "'", "")
+                If Not RSExists("PROYZV", "PROIZV", F1) Then ' добавление нового производителя 
+                    sSQL1 = "INSERT INTO SPR_PROIZV (Proizv) VALUES ('" & F1 & "')"
+                    DB7.Execute(sSQL1)
+                End If
+                rs1 = New Recordset
+                rs1.Open("SELECT * FROM SPR_PROIZV WHERE PROIZV='" & F1 & "'", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                ID_PROIZV = rs1.Fields("ID").Value
+                rs1.Close()
+                rs1 = Nothing
 
                 Dim strSimbol1 As String
                 strSimbol1 = "'"
@@ -2619,17 +2646,10 @@ err_:
                     .Update()
                 End If
 
-                rs2 = New Recordset
-                sSQL2 = "SELECT * FROM SPR_PO WHERE Name='" & H1 & "'"
-                rs2.Open(sSQL2, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                Select Case rs2.EOF
-                    Case True
-                        sSQL1 = "INSERT INTO SPR_PO (Name,Proizv,A,B,C,Prim) VALUES ('" & H1 & "'," & ID_PROIZV & ",'','','','')"
-                        DB7.Execute(sSQL1)
-                    Case Else
-                End Select
-                rs2.Close()
-                rs2 = Nothing
+                If Not RSExists("PO", "Name", H1) Then ' добавление нового ПО 
+                    sSQL1 = "INSERT INTO SPR_PO (Name,Proizv,A,B,C,Prim) VALUES ('" & H1 & "'," & ID_PROIZV & ",'','','','')"
+                    DB7.Execute(sSQL1)
+                End If
 
                 .MoveNext()
             Loop
