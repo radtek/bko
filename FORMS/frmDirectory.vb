@@ -2554,7 +2554,7 @@ Public Class frmDirectory
 
                 Call LOAD_LIST_SPR()
 
-            btnDirAdd.Text = objIniFile.GetString("frmDirectory", "btnDirAdd", "Добавить")
+                btnDirAdd.Text = objIniFile.GetString("frmDirectory", "btnDirAdd", "Добавить")
                 eDTI = False
                 Exit Sub
 
@@ -2737,7 +2737,7 @@ Public Class frmDirectory
             Case objIniFile.GetString("frmDirectory", "MSG48", "Производители")
 
                 sTABLE = "0"
-
+                cmbName.Text = Replace(cmbName.Text, "'", "") 'esq
                 If eDTI = False Then
 
                     If Not (RSExists("PROYZV", "PROiZV", cmbName.Text)) Then

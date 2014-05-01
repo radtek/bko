@@ -1351,6 +1351,7 @@ err_:
                             Dim strSimbol1, strSimbol2 As String
                             strSimbol1 = "'" : strSimbol2 = "."
                             H1 = Replace(H1, strSimbol1, "")
+                            F1 = Replace(F1, strSimbol1, "") 'esq
 
                             If Not (RSExistsSoft(sSID, H1)) Then
 
@@ -1369,29 +1370,25 @@ err_:
                             'esq ************************
                             Dim rs2 As Recordset
                             Dim sSQL1, sSQL2 As String
+                            Dim ID_PROIZV As Integer
 
                             If F1 = "" Then
                                 F1 = "NoName"
                             End If
+                            If Not RSExists("PROYZV", "PROIZV", F1) Then ' добавление нового производителя 
+                                sSQL1 = "INSERT INTO SPR_PROIZV (Proizv) VALUES ('" & F1 & "')"
+                                DB7.Execute(sSQL1)
+                            End If
                             rs2 = New Recordset
-                            rs2.Open("SELECT * FROM SPR_PROIZV WHERE PROIZV='" & F1 & "'", DB7, CursorTypeEnum.adOpenDynamic,
-                                     LockTypeEnum.adLockOptimistic)
-                            Dim ID_PROIZV As Integer
+                            rs2.Open("SELECT * FROM SPR_PROIZV WHERE PROIZV='" & F1 & "'", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
                             ID_PROIZV = rs2.Fields("ID").Value
                             rs2.Close()
                             rs2 = Nothing
 
-                            rs2 = New Recordset
-                            sSQL2 = "SELECT * FROM SPR_PO WHERE Name='" & H1 & "'"
-                            rs2.Open(sSQL2, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                            Select Case rs2.EOF
-                                Case True
-                                    sSQL1 = "INSERT INTO SPR_PO (Name,Proizv,A,B,C,Prim) VALUES ('" & H1 & "'," & ID_PROIZV & ",'','','','')"
-                                    DB7.Execute(sSQL1)
-                                Case Else
-                            End Select
-                            rs2.Close()
-                            rs2 = Nothing
+                            If Not RSExists("PO", "Name", H1) Then ' добавление нового ПО 
+                                sSQL1 = "INSERT INTO SPR_PO (Name,Proizv,A,B,C,Prim) VALUES ('" & H1 & "'," & ID_PROIZV & ",'','','','')"
+                                DB7.Execute(sSQL1)
+                            End If
                             'esq ************************
 
                         Case Else
