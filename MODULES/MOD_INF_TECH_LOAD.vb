@@ -2051,11 +2051,11 @@ Module MOD_INF_TECH_LOAD
 
                 lstSoftware.Items.Add(.Fields("id").Value) 'col no. 1
 
-                If Not IsDBNull(.Fields("NomerSoftKomp").Value) Then _
-                    lstSoftware.Items(CInt(intCount)).SubItems.Add(.Fields("NomerSoftKomp").Value)
-
                 If Not IsDBNull(.Fields("Soft").Value) Then _
                     lstSoftware.Items(CInt(intCount)).SubItems.Add(.Fields("Soft").Value)
+
+                If Not IsDBNull(.Fields("VERS").Value) Then _
+                    lstSoftware.Items(CInt(intCount)).SubItems.Add(.Fields("VERS").Value)
 
                 If Not IsDBNull(.Fields("L_key").Value) Then
                     lstSoftware.Items(CInt(intCount)).SubItems.Add(.Fields("L_key").Value)
@@ -2167,7 +2167,7 @@ Module MOD_INF_TECH_LOAD
 
         Dim rs As Recordset 'Объявляем рекордсет
         Dim sSQL As String 'Переменная, где будет размещён SQL запрос
-        sSQL = "SELECT * FROM Zametki WHERE Id_Comp =" & sID & " ORDER BY date DESC, id DESC"
+        sSQL = "SELECT * FROM Zametki WHERE Id_Comp =" & sID & " ORDER BY D_T DESC, id DESC"
         rs = New Recordset
         rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
@@ -2184,8 +2184,8 @@ Module MOD_INF_TECH_LOAD
                     lstGroups.Items(CInt(intCount)).SubItems.Add("")
                 End If
 
-                If Not IsDBNull(.Fields("Date").Value) Then
-                    lstGroups.Items(CInt(intCount)).SubItems.Add(.Fields("Date").Value)
+                If Not IsDBNull(.Fields("D_T").Value) Then
+                    lstGroups.Items(CInt(intCount)).SubItems.Add(.Fields("D_T").Value)
                 Else
                     lstGroups.Items(CInt(intCount)).SubItems.Add("")
                 End If
@@ -2248,7 +2248,7 @@ Module MOD_INF_TECH_LOAD
         'Dim rs As ADODB.Recordset 'Объявляем рекордсет
         'Dim sSQL As String 'Переменная, где будет размещён SQL запрос
         sSQL = "SELECT * FROM Remont WHERE id_comp=" & sID & " and PREF='" & frmComputers.sPREF &
-               "' ORDER BY date DESC, id DESC"
+               "' ORDER BY D_T DESC, id DESC"
         rs = New Recordset
         rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
@@ -2297,8 +2297,8 @@ Module MOD_INF_TECH_LOAD
                     lstGroups.Items(CInt(intCount)).SubItems.Add("")
                 End If
 
-                If Not IsDBNull(.Fields("Date").Value) Then
-                    lstGroups.Items(CInt(intCount)).SubItems.Add(.Fields("Date").Value)
+                If Not IsDBNull(.Fields("D_T").Value) Then
+                    lstGroups.Items(CInt(intCount)).SubItems.Add(.Fields("D_T").Value)
                 Else
                     lstGroups.Items(CInt(intCount)).SubItems.Add("")
                 End If
@@ -2341,8 +2341,8 @@ Module MOD_INF_TECH_LOAD
                     lstGroups.Items(CInt(intCount)).SubItems.Add("")
                 End If
 
-                If Not IsDBNull(.Fields("UserName").Value) Then
-                    lstGroups.Items(CInt(intCount)).SubItems.Add(.Fields("UserName").Value)
+                If Not IsDBNull(.Fields("User_Name").Value) Then
+                    lstGroups.Items(CInt(intCount)).SubItems.Add(.Fields("User_Name").Value)
                 Else
                     lstGroups.Items(CInt(intCount)).SubItems.Add("")
                 End If
@@ -2405,7 +2405,7 @@ Module MOD_INF_TECH_LOAD
                 Dim rs As Recordset 'Объявляем рекордсет
                 Dim sSQL As String 'Переменная, где будет размещён SQL запрос
 
-                sSQL = "SELECT ID_comp, data, id, oldmesto, newmesto, prich, time FROM dvig where id_comp=" &
+                sSQL = "SELECT ID_comp, D_T, id, oldmesto, newmesto, prich, T_M FROM dvig where id_comp=" &
                        frmComputers.sCOUNT
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -2435,14 +2435,14 @@ Module MOD_INF_TECH_LOAD
                             lstGroup.Items(CInt(intCount)).SubItems.Add("")
                         End If
 
-                        If Not IsDBNull(.Fields("data").Value) Then
-                            lstGroup.Items(CInt(intCount)).SubItems.Add(.Fields("data").Value)
+                        If Not IsDBNull(.Fields("D_T").Value) Then
+                            lstGroup.Items(CInt(intCount)).SubItems.Add(.Fields("D_T").Value)
                         Else
                             lstGroup.Items(CInt(intCount)).SubItems.Add("")
                         End If
 
-                        If Not IsDBNull(.Fields("time").Value) Then
-                            lstGroup.Items(CInt(intCount)).SubItems.Add(.Fields("time").Value)
+                        If Not IsDBNull(.Fields("T_M").Value) Then
+                            lstGroup.Items(CInt(intCount)).SubItems.Add(.Fields("T_M").Value)
                         Else
                             lstGroup.Items(CInt(intCount)).SubItems.Add("")
                         End If
@@ -2477,9 +2477,9 @@ Module MOD_INF_TECH_LOAD
         With rsGa
 
             If Not IsDBNull(.Fields("Postav").Value) Then dPost.Text = .Fields("Postav").Value
-            If Not IsDBNull(.Fields("Day").Value) Then A = .Fields("Day").Value
-            If Not IsDBNull(.Fields("Month").Value) Then B = .Fields("Month").Value
-            If Not IsDBNull(.Fields("Year").Value) Then C = .Fields("Year").Value
+            If Not IsDBNull(.Fields("den").Value) Then A = .Fields("den").Value
+            If Not IsDBNull(.Fields("mesiac").Value) Then B = .Fields("mesiac").Value
+            If Not IsDBNull(.Fields("god").Value) Then C = .Fields("god").Value
 
             dDate = A & "." & B & "." & C
             dtp.Value = dDate
@@ -2585,7 +2585,7 @@ Module MOD_INF_TECH_LOAD
         rs.Close()
         rs = Nothing
 
-          Select sCN
+        Select Case sCN
 
             Case 0
 
@@ -2622,12 +2622,12 @@ Module MOD_INF_TECH_LOAD
         rs.Close()
         rs = Nothing
 
-        Select sCN
+        Select Case sCN
 
             Case 0
 
             Case Else
-                sSQL3 = "Select * FROM ZAM_OTD where ID_OTD='" & SerD & "' ORDER BY date DESC, id DESC"
+                sSQL3 = "Select * FROM ZAM_OTD where ID_OTD='" & SerD & "' ORDER BY D_T DESC, id DESC"
 
                 rs = New Recordset
                 rs.Open(sSQL3, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -2645,8 +2645,8 @@ Module MOD_INF_TECH_LOAD
                             frmComputers.lvNotesBR.Items(CInt(intCount)).SubItems.Add("")
                         End If
 
-                        If Not IsDBNull(.Fields("Date").Value) Then
-                            frmComputers.lvNotesBR.Items(CInt(intCount)).SubItems.Add(.Fields("Date").Value)
+                        If Not IsDBNull(.Fields("D_T").Value) Then
+                            frmComputers.lvNotesBR.Items(CInt(intCount)).SubItems.Add(.Fields("D_T").Value)
                         Else
                             frmComputers.lvNotesBR.Items(CInt(intCount)).SubItems.Add("")
                         End If
@@ -3053,7 +3053,7 @@ err_:
         rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
         With rs
-            a1 = .Fields("Date").Value
+            a1 = .Fields("D_T").Value
             b1 = .Fields("Id_Comp").Value
             c1 = .Fields("Remont").Value
             d1 = .Fields("Master").Value
@@ -3154,7 +3154,7 @@ err_:
             Exit Sub
         End If
 
-     If Len(frm) = 0 Then
+        If Len(frm) = 0 Then
 
             MsgBox("Не заполнен адрес для ответа", MsgBoxStyle.Information, ProGramName)
             Exit Sub
@@ -3219,7 +3219,7 @@ err_:
 
         MsgBox("Сообщение отправлено", MsgBoxStyle.Information, ProGramName)
         Exit Sub
-        err_:
+err_:
         MsgBox(Err.Description)
 
     End Sub

@@ -62,7 +62,7 @@
         sSQl = "SELECT * FROM T_Log"
 
 
-        '"SELECT id, user_ID, Activity, DATE_FORMAT(data,'%Y-%m-%d') AS out_data, Time FROM T_Log ORDER BY out_data DESC LIMIT 1" 
+        '"SELECT id, user_ID, Activity, D_T_FORMAT(data,'%Y-%m-%d') AS out_data, T_M FROM T_Log ORDER BY out_data DESC LIMIT 1" 
 
 
         If ZUG > 0 Then
@@ -77,7 +77,7 @@
                 Do While Not .EOF
                     ''My.Application.DoEvents()
 
-                    If DTLOG.Value <= .Fields("DATE").Value And DTLOG1.Value >= .Fields("DATE").Value Then
+                    If DTLOG.Value <= .Fields("D_T").Value And DTLOG1.Value >= .Fields("D_T").Value Then
 
                         lvLOG.Items.Add(.Fields("id").Value) 'col no. 1
 
@@ -93,14 +93,14 @@
                             lvLOG.Items(CInt(intCount)).SubItems.Add("")
                         End If
 
-                        If Not IsDBNull(.Fields("DATE").Value) Then
-                            lvLOG.Items(CInt(intCount)).SubItems.Add(.Fields("DATE").Value)
+                        If Not IsDBNull(.Fields("D_T").Value) Then
+                            lvLOG.Items(CInt(intCount)).SubItems.Add(.Fields("D_T").Value)
                         Else
                             lvLOG.Items(CInt(intCount)).SubItems.Add("")
                         End If
 
-                        If Not IsDBNull(.Fields("Time").Value) Then
-                            lvLOG.Items(CInt(intCount)).SubItems.Add(.Fields("Time").Value)
+                        If Not IsDBNull(.Fields("T_M").Value) Then
+                            lvLOG.Items(CInt(intCount)).SubItems.Add(.Fields("T_M").Value)
                         Else
                             lvLOG.Items(CInt(intCount)).SubItems.Add("")
                         End If
@@ -185,7 +185,7 @@ Err_:
                 Do While Not .EOF
 
 
-                    If DTLOG.Value <= .Fields("data").Value And DTLOG1.Value >= .Fields("data").Value Then
+                    If DTLOG.Value <= .Fields("D_T").Value And DTLOG1.Value >= .Fields("D_T").Value Then
 
                         lvLOG.Items.Add(.Fields("id").Value) 'col no. 1
 
@@ -221,14 +221,14 @@ Err_:
                             lvLOG.Items(CInt(intCount)).SubItems.Add("")
                         End If
 
-                        If Not IsDBNull(.Fields("data").Value) Then
-                            lvLOG.Items(CInt(intCount)).SubItems.Add(.Fields("data").Value)
+                        If Not IsDBNull(.Fields("D_T").Value) Then
+                            lvLOG.Items(CInt(intCount)).SubItems.Add(.Fields("D_T").Value)
                         Else
                             lvLOG.Items(CInt(intCount)).SubItems.Add("")
                         End If
 
-                        If Not IsDBNull(.Fields("time").Value) Then
-                            lvLOG.Items(CInt(intCount)).SubItems.Add(.Fields("time").Value)
+                        If Not IsDBNull(.Fields("T_M").Value) Then
+                            lvLOG.Items(CInt(intCount)).SubItems.Add(.Fields("T_M").Value)
                         Else
                             lvLOG.Items(CInt(intCount)).SubItems.Add("")
                         End If
@@ -353,7 +353,7 @@ Err_:
                 .MoveFirst()
                 Do While Not .EOF
 
-                    If DTLOG.Value <= .Fields("date").Value And DTLOG1.Value >= .Fields("date").Value Then
+                    If DTLOG.Value <= .Fields("D_T").Value And DTLOG1.Value >= .Fields("D_T").Value Then
 
 
                         lvLOG.Items.Add(.Fields("id").Value) 'col no. 1
@@ -384,14 +384,14 @@ Err_:
                             lvLOG.Items(CInt(intCount)).SubItems.Add("")
                         End If
 
-                        If Not IsDBNull(.Fields("date").Value) Then
-                            lvLOG.Items(CInt(intCount)).SubItems.Add(.Fields("date").Value)
+                        If Not IsDBNull(.Fields("D_T").Value) Then
+                            lvLOG.Items(CInt(intCount)).SubItems.Add(.Fields("D_T").Value)
                         Else
                             lvLOG.Items(CInt(intCount)).SubItems.Add("")
                         End If
 
-                        If Not IsDBNull(.Fields("time").Value) Then
-                            lvLOG.Items(CInt(intCount)).SubItems.Add(.Fields("time").Value)
+                        If Not IsDBNull(.Fields("T_M").Value) Then
+                            lvLOG.Items(CInt(intCount)).SubItems.Add(.Fields("T_M").Value)
                         Else
                             lvLOG.Items(CInt(intCount)).SubItems.Add("")
                         End If

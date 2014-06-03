@@ -2,7 +2,6 @@
 Imports Microsoft.Office.Interop.Word
 Imports System.Drawing
 
-
 Public Class frmComputers
     Private m_SortingColumn As ColumnHeader
     Private BTN As Decimal
@@ -489,7 +488,6 @@ Public Class frmComputers
         Call RESIZER()
         System.Windows.Forms.Application.DoEvents()
 
-
         'Подгружаем конки, язык, справочники...
         Me.BeginInvoke(New MethodInvoker(AddressOf PRELOAD_FORM))
 
@@ -689,10 +687,10 @@ Error_:
 
     Private Sub lstGroups_AfterSelect(ByVal sender As Object, ByVal e As TreeViewEventArgs) _
         Handles lstGroups.AfterSelect
-      
+
         Me.txtSNAME.BackColor = Me.txtSBSN.BackColor
 
-       Me.txtPSEUDONIM.BackColor = Me.txtSBSN.BackColor
+        Me.txtPSEUDONIM.BackColor = Me.txtSBSN.BackColor
         Me.cmbBranch.BackColor = Me.txtSBSN.BackColor
 
         pDRAG = False
@@ -763,6 +761,10 @@ Error_:
             Case "C"
                 CopyToolStripMenuItem.Enabled = True
                 UpdateToolStripMenuItem.Enabled = True
+
+                ОтделитьПринтерыИМониторыToolStripMenuItem.Visible = False
+                ВернутьПерефериюToolStripMenuItem.Visible = False
+
                 Me.EDT = True
 
                 sPREF = d(0)
@@ -774,596 +776,591 @@ Error_:
                 rs = New Recordset
                 rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
-                ОтделитьПринтерыИМониторыToolStripMenuItem.Visible = False
-                ВернутьПерефериюToolStripMenuItem.Visible = False
                 With rs
 
                     TipTehn = .Fields("tiptehn").Value
-
-                    Select Case .Fields("tiptehn").Value
-
-                        Case "PC"
-                            ОтделитьПринтерыИМониторыToolStripMenuItem.Visible = True
-
-                            Dim rs1 As Recordset
-                            Dim sSQL1 As String 'Переменная, где будет размещён SQL запрос
-                            sSQL1 = "SELECT count(*) as t_n FROM kompy WHERE PCL =" & d(1)
-                            rs1 = New Recordset
-                            rs1.Open(sSQL1, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                            Dim sCNTr As Integer
-
-                            With rs1
-
-                                sCNTr = .Fields("t_n").Value
-
-                            End With
-                            rs1.Close()
-                            rs1 = Nothing
-
-                            If sCNTr > 0 Then ВернутьПерефериюToolStripMenuItem.Visible = True
-
-                            CartrAddToolStripMenuItem.Visible = False
-                            sSTAB2.Visible = False
-                            sSTAB1.Visible = True
-                            sSTAB3.Visible = False
-                            sSTAB4.Visible = False
-                            sSTAB5.Visible = False
-
-                            'Call LOADt(d(1))
-
-                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
-                            Me.BeginInvoke(New MethodInvoker(AddressOf S_P_LOAD_t))
-                            Me.BeginInvoke(New MethodInvoker(AddressOf U_P_LOAD_t))
-                            Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
-                            Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
-                            Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
-
-                            My.Application.DoEvents()
-                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbPCLK, cmbResponsible.Text, d(1))
-
-                        Case "Printer"
-
-                            CartrAddToolStripMenuItem.Visible = True
-                            FillComboNET(Me.cmbPRN, "name", "SPR_PRINTER", "", False, True)
-
-                            UpdateToolStripMenuItem.Enabled = False
-                            sSTAB2.Visible = True
-                            sSTAB1.Visible = False
-                            sSTAB3.Visible = False
-                            sSTAB4.Visible = False
-                            sSTAB5.Visible = False
-                            Label83.Visible = True
-                            cmbPCL.Visible = True
-
-                            'Call LOADp(d(1))
-
-                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
-                            Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
-                            Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
-                            Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
-
-                            cmbFormat.Items.Clear()
-
-                            For intj = 1 To 5
-                                cmbFormat.Items.Add("A" & intj)
-                            Next
-
-                            cmbTIPCartridg.Items.Clear()
-                            cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG91", "Струйный"))
-                            cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG92", "Матричный"))
-                            cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG93", "Лазерный"))
-                            cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG94", "Барабан"))
-                            cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG95", "Термо Пленка"))
-                            cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG96", "Фотокондуктор"))
-
-                            My.Application.DoEvents()
-                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbPCL, cmbPRNotv.Text, d(1))
-                            'me.cmbPCL
-
-                        Case "MFU"
-                            CartrAddToolStripMenuItem.Visible = True
-                            FillComboNET(Me.cmbPRN, "name", "SPR_MFU", "", False, True)
-
-                            UpdateToolStripMenuItem.Enabled = False
-                            sSTAB2.Visible = True
-                            sSTAB1.Visible = False
-                            sSTAB3.Visible = False
-                            sSTAB4.Visible = False
-                            sSTAB5.Visible = False
-                            Label83.Visible = True
-                            cmbPCL.Visible = True
-
-                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
-                            Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
-                            Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
-                            Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
-
-                            cmbFormat.Items.Clear()
-
-                            For intj = 1 To 5
-                                cmbFormat.Items.Add("A" & intj)
-                            Next
-
-                            cmbTIPCartridg.Items.Clear()
-                            cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG91", "Струйный"))
-                            cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG92", "Матричный"))
-                            cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG93", "Лазерный"))
-                            cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG94", "Барабан"))
-                            cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG95", "Термо Пленка"))
-                            cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG96", "Фотокондуктор"))
-
-                            My.Application.DoEvents()
-                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbPCL, cmbPRNotv.Text, d(1))
-
-                        Case "KOpir"
-                            CartrAddToolStripMenuItem.Visible = True
-                            FillComboNET(Me.cmbPRN, "name", "SPR_KOPIR", "", False, True)
-
-                            UpdateToolStripMenuItem.Enabled = False
-                            sSTAB2.Visible = True
-                            sSTAB1.Visible = False
-                            sSTAB3.Visible = False
-                            sSTAB4.Visible = False
-                            sSTAB5.Visible = False
-
-                            Label83.Visible = False
-                            cmbPCL.Visible = False
-
-                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
-                            Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
-                            Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
-                            Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
-
-                            cmbFormat.Items.Clear()
-
-                            For intj = 1 To 5
-                                cmbFormat.Items.Add("A" & intj)
-                            Next
-
-                            cmbTIPCartridg.Items.Clear()
-                            cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG91", "Струйный"))
-                            cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG92", "Матричный"))
-                            cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG93", "Лазерный"))
-                            cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG94", "Барабан"))
-                            cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG95", "Термо Пленка"))
-                            cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG96", "Фотокондуктор"))
-
-                        Case "OT"
-
-                            CartrAddToolStripMenuItem.Visible = False
-                            FillComboNET(Me.cmbOTH, "name", "SPR_OTH_DEV", "", False, True)
-                            lblTipOther.Visible = True
-                            cmbOTHConnect.Visible = True
-                            lblOTMac.Visible = True
-                            lblOtIp.Visible = True
-                            txtOTHIP.Visible = True
-                            txtOTHMAC.Visible = True
-
-
-                            UpdateToolStripMenuItem.Enabled = False
-                            sSTAB3.Visible = True
-                            sSTAB1.Visible = False
-                            sSTAB2.Visible = False
-                            sSTAB4.Visible = False
-                            sSTAB5.Visible = False
-                            lblOTPCL.Visible = True
-                            cmbOTHPCL.Visible = True
-                            ' FillComboNET(Me.cmbOTHConnect, "name", "spr_other", "", False, True)
-                            FillComboNET(cmbOTHConnect, "name", "spr_other", "", False, True)
-
-                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
-                            Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
-                            Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
-                            Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
-
-                            My.Application.DoEvents()
-                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbOTHotv.Text, d(1))
-
-                        Case "PHOTO"
-                            CartrAddToolStripMenuItem.Visible = False
-                            FillComboNET(Me.cmbOTH, "name", "spr_photo", "", False, True)
-
-                            lblTipOther.Visible = False
-                            cmbOTHConnect.Visible = False
-                            lblOTMac.Visible = False
-                            lblOtIp.Visible = False
-                            txtOTHIP.Visible = False
-                            txtOTHMAC.Visible = False
-
-
-                            UpdateToolStripMenuItem.Enabled = False
-                            sSTAB3.Visible = True
-                            sSTAB1.Visible = False
-                            sSTAB2.Visible = False
-                            sSTAB4.Visible = False
-                            sSTAB5.Visible = False
-
-                            lblOTPCL.Visible = False
-                            cmbOTHPCL.Visible = False
-
-                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
-                            Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
-                            Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
-                            Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
-
-                        Case "FAX"
-                            CartrAddToolStripMenuItem.Visible = False
-                            FillComboNET(Me.cmbOTH, "name", "spr_fax", "", False, True)
-
-                            lblTipOther.Visible = False
-                            cmbOTHConnect.Visible = False
-                            lblOTMac.Visible = False
-                            lblOtIp.Visible = False
-                            txtOTHIP.Visible = False
-                            txtOTHMAC.Visible = False
-
-
-                            UpdateToolStripMenuItem.Enabled = False
-                            sSTAB3.Visible = True
-                            sSTAB1.Visible = False
-                            sSTAB2.Visible = False
-                            sSTAB4.Visible = False
-                            sSTAB5.Visible = False
-
-                            lblOTPCL.Visible = False
-                            cmbOTHPCL.Visible = False
-
-                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
-                            Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
-                            Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
-                            Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
-
-                        Case "PHONE"
-                            CartrAddToolStripMenuItem.Visible = False
-                            FillComboNET(Me.cmbOTH, "name", "spr_phone", "", False, True)
-
-                            lblTipOther.Visible = False
-                            cmbOTHConnect.Visible = False
-                            lblOTMac.Visible = True
-                            lblOtIp.Visible = True
-                            txtOTHIP.Visible = True
-                            txtOTHMAC.Visible = True
-                            cmbOTHPCL.Visible = True
-
-
-                            UpdateToolStripMenuItem.Enabled = False
-                            sSTAB3.Visible = True
-                            sSTAB1.Visible = False
-                            sSTAB2.Visible = False
-                            sSTAB4.Visible = False
-                            sSTAB5.Visible = False
-
-                            lblOTPCL.Visible = True
-
-                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
-                            Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
-                            Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
-                            Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
-
-                            My.Application.DoEvents()
-                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbOTHotv.Text, d(1))
-
-                        Case "ZIP"
-                            CartrAddToolStripMenuItem.Visible = False
-                            FillComboNET(Me.cmbOTH, "name", "spr_zip", "", False, True)
-
-                            lblTipOther.Visible = False
-                            cmbOTHConnect.Visible = False
-                            lblOTMac.Visible = False
-                            lblOtIp.Visible = False
-                            txtOTHIP.Visible = False
-                            txtOTHMAC.Visible = False
-
-
-                            UpdateToolStripMenuItem.Enabled = False
-                            sSTAB3.Visible = True
-                            sSTAB1.Visible = False
-                            sSTAB2.Visible = False
-                            sSTAB4.Visible = False
-                            sSTAB5.Visible = False
-                            lblOTPCL.Visible = True
-                            cmbOTHPCL.Visible = True
-
-                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
-                            Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
-                            Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
-                            Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
-
-                            My.Application.DoEvents()
-                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbOTHotv.Text, d(1))
-
-                        Case "SCANER"
-                            CartrAddToolStripMenuItem.Visible = False
-                            FillComboNET(Me.cmbOTH, "name", "SPR_SCANER", "", False, True)
-                            lblTipOther.Visible = False
-                            cmbOTHConnect.Visible = False
-                            lblOTMac.Visible = False
-                            lblOtIp.Visible = False
-                            txtOTHIP.Visible = False
-                            txtOTHMAC.Visible = False
-
-
-                            UpdateToolStripMenuItem.Enabled = False
-                            sSTAB3.Visible = True
-                            sSTAB1.Visible = False
-                            sSTAB2.Visible = False
-                            sSTAB4.Visible = False
-                            sSTAB5.Visible = False
-                            lblOTPCL.Visible = True
-                            cmbOTHPCL.Visible = True
-
-                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
-                            Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
-                            Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
-                            Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
-
-                            My.Application.DoEvents()
-                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbOTHotv.Text, d(1))
-
-                        Case "MONITOR"
-
-                            CartrAddToolStripMenuItem.Visible = False
-                            FillComboNET(Me.cmbOTH, "Name", "SPR_MONITOR", "", False, True)
-
-                            Me.txtMonDum.Visible = True
-
-                            lblTipOther.Visible = False
-                            cmbOTHConnect.Visible = False
-                            lblOTMac.Visible = False
-                            lblOtIp.Visible = False
-                            txtOTHIP.Visible = False
-                            txtOTHMAC.Visible = False
-                            lblOTPCL.Visible = True
-                            cmbOTHPCL.Visible = True
-
-                            ' CopyToolStripMenuItem.Enabled = False
-                            UpdateToolStripMenuItem.Enabled = False
-                            sSTAB3.Visible = True
-                            sSTAB1.Visible = False
-                            sSTAB2.Visible = False
-                            sSTAB4.Visible = False
-                            sSTAB5.Visible = False
-
-                            ' Call LOADmon(d(1))
-
-                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
-                            Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
-                            Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
-                            Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
-
-                            My.Application.DoEvents()
-                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbOTHotv.Text, d(1))
-
-                        Case "NET"
-                            CartrAddToolStripMenuItem.Visible = False
-
-                            UpdateToolStripMenuItem.Enabled = False
-                            sSTAB3.Visible = False
-                            sSTAB1.Visible = False
-                            sSTAB2.Visible = False
-                            sSTAB5.Visible = False
-                            sSTAB4.Visible = True
-
-                            Call LOADnet(d(1))
-                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbNETotv.Text, d(1))
-
-                            '--------------VIP_Graff Добавление новой перефирии Начало-----------------
-                        Case "USB"
-                            CartrAddToolStripMenuItem.Visible = False
-                            FillComboNET(Me.cmbOTH, "name", "SPR_USB", "", False, True)
-                            lblTipOther.Visible = False
-                            cmbOTHConnect.Visible = False
-                            lblOTMac.Visible = False
-                            lblOtIp.Visible = False
-                            txtOTHIP.Visible = False
-                            txtOTHMAC.Visible = False
-
-
-                            UpdateToolStripMenuItem.Enabled = False
-                            sSTAB3.Visible = True
-                            sSTAB1.Visible = False
-                            sSTAB2.Visible = False
-                            sSTAB4.Visible = False
-                            sSTAB5.Visible = False
-                            lblOTPCL.Visible = True
-                            cmbOTHPCL.Visible = True
-
-                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
-                            Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
-                            Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
-                            Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
-
-                            My.Application.DoEvents()
-                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbOTHotv.Text, d(1))
-
-                        Case "SOUND"
-                            CartrAddToolStripMenuItem.Visible = False
-                            FillComboNET(Me.cmbOTH, "name", "SPR_ASISTEM", "", False, True)
-                            lblTipOther.Visible = False
-                            cmbOTHConnect.Visible = False
-                            lblOTMac.Visible = False
-                            lblOtIp.Visible = False
-                            txtOTHIP.Visible = False
-                            txtOTHMAC.Visible = False
-
-
-                            UpdateToolStripMenuItem.Enabled = False
-                            sSTAB3.Visible = True
-                            sSTAB1.Visible = False
-                            sSTAB2.Visible = False
-                            sSTAB4.Visible = False
-                            sSTAB5.Visible = False
-                            lblOTPCL.Visible = True
-                            cmbOTHPCL.Visible = True
-
-
-                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
-                            Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
-                            Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
-                            Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
-
-                            My.Application.DoEvents()
-                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbOTHotv.Text, d(1))
-
-                        Case "IBP"
-                            CartrAddToolStripMenuItem.Visible = False
-                            FillComboNET(Me.cmbOTH, "name", "SPR_IBP", "", False, True)
-                            lblTipOther.Visible = False
-                            cmbOTHConnect.Visible = False
-                            lblOTMac.Visible = True
-                            lblOtIp.Visible = True
-                            txtOTHIP.Visible = True
-                            txtOTHMAC.Visible = True
-
-
-                            UpdateToolStripMenuItem.Enabled = False
-                            sSTAB3.Visible = True
-                            sSTAB1.Visible = False
-                            sSTAB2.Visible = False
-                            sSTAB4.Visible = False
-                            sSTAB5.Visible = False
-                            lblOTPCL.Visible = True
-                            cmbOTHPCL.Visible = True
-
-                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
-                            Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
-                            Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
-                            Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
-
-                            If chkSNMP.Checked = True Then
-                                ' chkSNMP.Visible = True
-                                lblSNMP.Visible = True
-                                txtSNMP.Visible = True
-                                gbSNMP.Visible = True
-                            Else
-                                ' chkSNMP.Visible = False
-                                lblSNMP.Visible = False
-                                txtSNMP.Visible = False
-                                gbSNMP.Visible = False
-                            End If
-
-                            My.Application.DoEvents()
-                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbOTHotv.Text, d(1))
-
-                        Case "FS"
-                            CartrAddToolStripMenuItem.Visible = False
-                            FillComboNET(Me.cmbOTH, "name", "SPR_FS", "", False, True)
-                            lblTipOther.Visible = False
-                            cmbOTHConnect.Visible = False
-                            lblOTMac.Visible = False
-                            lblOtIp.Visible = False
-                            txtOTHIP.Visible = False
-                            txtOTHMAC.Visible = False
-
-
-                            UpdateToolStripMenuItem.Enabled = False
-                            sSTAB3.Visible = True
-                            sSTAB1.Visible = False
-                            sSTAB2.Visible = False
-                            sSTAB4.Visible = False
-                            sSTAB5.Visible = False
-                            lblOTPCL.Visible = True
-                            cmbOTHPCL.Visible = True
-
-                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
-                            Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
-                            Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
-                            Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
-
-                            My.Application.DoEvents()
-                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbOTHotv.Text, d(1))
-
-                        Case "KEYB"
-                            CartrAddToolStripMenuItem.Visible = False
-                            FillComboNET(Me.cmbOTH, "name", "SPR_KEYBOARD", "", False, True)
-                            lblTipOther.Visible = False
-                            cmbOTHConnect.Visible = False
-                            lblOTMac.Visible = False
-                            lblOtIp.Visible = False
-                            txtOTHIP.Visible = False
-                            txtOTHMAC.Visible = False
-
-
-                            UpdateToolStripMenuItem.Enabled = False
-                            sSTAB3.Visible = True
-                            sSTAB1.Visible = False
-                            sSTAB2.Visible = False
-                            sSTAB4.Visible = False
-                            sSTAB5.Visible = False
-                            lblOTPCL.Visible = True
-                            cmbOTHPCL.Visible = True
-
-                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
-                            Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
-                            Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
-                            Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
-
-                            My.Application.DoEvents()
-                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbOTHotv.Text, d(1))
-
-                        Case "MOUSE"
-                            CartrAddToolStripMenuItem.Visible = False
-                            FillComboNET(Me.cmbOTH, "name", "SPR_MOUSE", "", False, True)
-                            lblTipOther.Visible = False
-                            cmbOTHConnect.Visible = False
-                            lblOTMac.Visible = False
-                            lblOtIp.Visible = False
-                            txtOTHIP.Visible = False
-                            txtOTHMAC.Visible = False
-
-
-                            UpdateToolStripMenuItem.Enabled = False
-                            sSTAB3.Visible = True
-                            sSTAB1.Visible = False
-                            sSTAB2.Visible = False
-                            sSTAB4.Visible = False
-                            sSTAB5.Visible = False
-                            lblOTPCL.Visible = True
-                            cmbOTHPCL.Visible = True
-
-                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
-                            Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
-                            Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
-                            Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
-
-                            My.Application.DoEvents()
-                            Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbOTHotv.Text, d(1))
-                            '--------------VIP_Graff Добавление новой перефирии Конец------------------
-
-                        Case "CNT"
-
-                            CartrAddToolStripMenuItem.Visible = False
-                            FillComboNET(Me.cmbOTH, "name", "SPR_other", "", False, True)
-                            lblTipOther.Visible = False
-                            cmbOTHConnect.Visible = False
-                            lblOTMac.Visible = False
-                            lblOtIp.Visible = False
-                            txtOTHIP.Visible = False
-                            txtOTHMAC.Visible = False
-
-
-                            UpdateToolStripMenuItem.Enabled = False
-                            sSTAB3.Visible = True
-                            sSTAB1.Visible = False
-                            sSTAB2.Visible = False
-                            sSTAB4.Visible = False
-                            sSTAB5.Visible = False
-                            lblOTPCL.Visible = False
-                            cmbOTHPCL.Visible = False
-
-                            'Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
-
-                            Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
-                            Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
-                            Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
-                            Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
-
-                    End Select
 
                 End With
 
                 rs.Close()
                 rs = Nothing
+
+                Select Case TipTehn
+
+                    Case "PC"
+                        ОтделитьПринтерыИМониторыToolStripMenuItem.Visible = True
+
+                        sSQL = "SELECT count(*) as t_n FROM kompy WHERE PCL =" & d(1)
+                        rs = New Recordset
+                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        Dim sCNTr As Integer
+
+                        With rs
+                            sCNTr = .Fields("t_n").Value
+                        End With
+                        rs.Close()
+                        rs = Nothing
+
+                        If sCNTr > 0 Then ВернутьПерефериюToolStripMenuItem.Visible = True
+
+                        CartrAddToolStripMenuItem.Visible = False
+                        sSTAB2.Visible = False
+                        sSTAB1.Visible = True
+                        sSTAB3.Visible = False
+                        sSTAB4.Visible = False
+                        sSTAB5.Visible = False
+
+                        'Call LOADt(d(1))
+
+                        Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf S_P_LOAD_t))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf U_P_LOAD_t))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
+
+                        My.Application.DoEvents()
+                        Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbPCLK, cmbResponsible.Text, d(1))
+
+                    Case "Printer"
+
+                        CartrAddToolStripMenuItem.Visible = True
+                        FillComboNET(Me.cmbPRN, "name", "SPR_PRINTER", "", False, True)
+
+                        UpdateToolStripMenuItem.Enabled = False
+                        sSTAB2.Visible = True
+                        sSTAB1.Visible = False
+                        sSTAB3.Visible = False
+                        sSTAB4.Visible = False
+                        sSTAB5.Visible = False
+                        Label83.Visible = True
+                        cmbPCL.Visible = True
+
+                        'Call LOADp(d(1))
+
+                        Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
+
+                        cmbFormat.Items.Clear()
+
+                        For intj = 1 To 5
+                            cmbFormat.Items.Add("A" & intj)
+                        Next
+
+                        cmbTIPCartridg.Items.Clear()
+                        cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG91", "Струйный"))
+                        cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG92", "Матричный"))
+                        cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG93", "Лазерный"))
+                        cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG94", "Барабан"))
+                        cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG95", "Термо Пленка"))
+                        cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG96", "Фотокондуктор"))
+
+                        My.Application.DoEvents()
+                        Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbPCL, cmbPRNotv.Text, d(1))
+                        'me.cmbPCL
+
+                    Case "MFU"
+                        CartrAddToolStripMenuItem.Visible = True
+                        FillComboNET(Me.cmbPRN, "name", "SPR_MFU", "", False, True)
+
+                        UpdateToolStripMenuItem.Enabled = False
+                        sSTAB2.Visible = True
+                        sSTAB1.Visible = False
+                        sSTAB3.Visible = False
+                        sSTAB4.Visible = False
+                        sSTAB5.Visible = False
+                        Label83.Visible = True
+                        cmbPCL.Visible = True
+
+                        Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
+
+                        cmbFormat.Items.Clear()
+
+                        For intj = 1 To 5
+                            cmbFormat.Items.Add("A" & intj)
+                        Next
+
+                        cmbTIPCartridg.Items.Clear()
+                        cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG91", "Струйный"))
+                        cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG92", "Матричный"))
+                        cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG93", "Лазерный"))
+                        cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG94", "Барабан"))
+                        cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG95", "Термо Пленка"))
+                        cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG96", "Фотокондуктор"))
+
+                        My.Application.DoEvents()
+                        Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbPCL, cmbPRNotv.Text, d(1))
+
+                    Case "KOpir"
+                        CartrAddToolStripMenuItem.Visible = True
+                        FillComboNET(Me.cmbPRN, "name", "SPR_KOPIR", "", False, True)
+
+                        UpdateToolStripMenuItem.Enabled = False
+                        sSTAB2.Visible = True
+                        sSTAB1.Visible = False
+                        sSTAB3.Visible = False
+                        sSTAB4.Visible = False
+                        sSTAB5.Visible = False
+
+                        Label83.Visible = False
+                        cmbPCL.Visible = False
+
+                        Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
+
+                        cmbFormat.Items.Clear()
+
+                        For intj = 1 To 5
+                            cmbFormat.Items.Add("A" & intj)
+                        Next
+
+                        cmbTIPCartridg.Items.Clear()
+                        cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG91", "Струйный"))
+                        cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG92", "Матричный"))
+                        cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG93", "Лазерный"))
+                        cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG94", "Барабан"))
+                        cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG95", "Термо Пленка"))
+                        cmbTIPCartridg.Items.Add(langfile.GetString("frmDirectory", "MSG96", "Фотокондуктор"))
+
+                    Case "OT"
+
+                        CartrAddToolStripMenuItem.Visible = False
+                        FillComboNET(Me.cmbOTH, "name", "SPR_OTH_DEV", "", False, True)
+                        lblTipOther.Visible = True
+                        cmbOTHConnect.Visible = True
+                        lblOTMac.Visible = True
+                        lblOtIp.Visible = True
+                        txtOTHIP.Visible = True
+                        txtOTHMAC.Visible = True
+
+
+                        UpdateToolStripMenuItem.Enabled = False
+                        sSTAB3.Visible = True
+                        sSTAB1.Visible = False
+                        sSTAB2.Visible = False
+                        sSTAB4.Visible = False
+                        sSTAB5.Visible = False
+                        lblOTPCL.Visible = True
+                        cmbOTHPCL.Visible = True
+                        ' FillComboNET(Me.cmbOTHConnect, "name", "spr_other", "", False, True)
+                        FillComboNET(cmbOTHConnect, "name", "spr_other", "", False, True)
+
+                        Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
+
+                        My.Application.DoEvents()
+                        Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbOTHotv.Text, d(1))
+
+                    Case "PHOTO"
+                        CartrAddToolStripMenuItem.Visible = False
+                        FillComboNET(Me.cmbOTH, "name", "spr_photo", "", False, True)
+
+                        lblTipOther.Visible = False
+                        cmbOTHConnect.Visible = False
+                        lblOTMac.Visible = False
+                        lblOtIp.Visible = False
+                        txtOTHIP.Visible = False
+                        txtOTHMAC.Visible = False
+
+
+                        UpdateToolStripMenuItem.Enabled = False
+                        sSTAB3.Visible = True
+                        sSTAB1.Visible = False
+                        sSTAB2.Visible = False
+                        sSTAB4.Visible = False
+                        sSTAB5.Visible = False
+
+                        lblOTPCL.Visible = False
+                        cmbOTHPCL.Visible = False
+
+                        Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
+
+                    Case "FAX"
+                        CartrAddToolStripMenuItem.Visible = False
+                        FillComboNET(Me.cmbOTH, "name", "spr_fax", "", False, True)
+
+                        lblTipOther.Visible = False
+                        cmbOTHConnect.Visible = False
+                        lblOTMac.Visible = False
+                        lblOtIp.Visible = False
+                        txtOTHIP.Visible = False
+                        txtOTHMAC.Visible = False
+
+
+                        UpdateToolStripMenuItem.Enabled = False
+                        sSTAB3.Visible = True
+                        sSTAB1.Visible = False
+                        sSTAB2.Visible = False
+                        sSTAB4.Visible = False
+                        sSTAB5.Visible = False
+
+                        lblOTPCL.Visible = False
+                        cmbOTHPCL.Visible = False
+
+                        Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
+
+                    Case "PHONE"
+                        CartrAddToolStripMenuItem.Visible = False
+                        FillComboNET(Me.cmbOTH, "name", "spr_phone", "", False, True)
+
+                        lblTipOther.Visible = False
+                        cmbOTHConnect.Visible = False
+                        lblOTMac.Visible = True
+                        lblOtIp.Visible = True
+                        txtOTHIP.Visible = True
+                        txtOTHMAC.Visible = True
+                        cmbOTHPCL.Visible = True
+
+
+                        UpdateToolStripMenuItem.Enabled = False
+                        sSTAB3.Visible = True
+                        sSTAB1.Visible = False
+                        sSTAB2.Visible = False
+                        sSTAB4.Visible = False
+                        sSTAB5.Visible = False
+
+                        lblOTPCL.Visible = True
+
+                        Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
+
+                        My.Application.DoEvents()
+                        Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbOTHotv.Text, d(1))
+
+                    Case "ZIP"
+                        CartrAddToolStripMenuItem.Visible = False
+                        FillComboNET(Me.cmbOTH, "name", "spr_zip", "", False, True)
+
+                        lblTipOther.Visible = False
+                        cmbOTHConnect.Visible = False
+                        lblOTMac.Visible = False
+                        lblOtIp.Visible = False
+                        txtOTHIP.Visible = False
+                        txtOTHMAC.Visible = False
+
+
+                        UpdateToolStripMenuItem.Enabled = False
+                        sSTAB3.Visible = True
+                        sSTAB1.Visible = False
+                        sSTAB2.Visible = False
+                        sSTAB4.Visible = False
+                        sSTAB5.Visible = False
+                        lblOTPCL.Visible = True
+                        cmbOTHPCL.Visible = True
+
+                        Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
+
+                        My.Application.DoEvents()
+                        Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbOTHotv.Text, d(1))
+
+                    Case "SCANER"
+                        CartrAddToolStripMenuItem.Visible = False
+                        FillComboNET(Me.cmbOTH, "name", "SPR_SCANER", "", False, True)
+                        lblTipOther.Visible = False
+                        cmbOTHConnect.Visible = False
+                        lblOTMac.Visible = False
+                        lblOtIp.Visible = False
+                        txtOTHIP.Visible = False
+                        txtOTHMAC.Visible = False
+
+
+                        UpdateToolStripMenuItem.Enabled = False
+                        sSTAB3.Visible = True
+                        sSTAB1.Visible = False
+                        sSTAB2.Visible = False
+                        sSTAB4.Visible = False
+                        sSTAB5.Visible = False
+                        lblOTPCL.Visible = True
+                        cmbOTHPCL.Visible = True
+
+                        Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
+
+                        My.Application.DoEvents()
+                        Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbOTHotv.Text, d(1))
+
+                    Case "MONITOR"
+
+                        CartrAddToolStripMenuItem.Visible = False
+                        FillComboNET(Me.cmbOTH, "Name", "SPR_MONITOR", "", False, True)
+
+                        Me.txtMonDum.Visible = True
+
+                        lblTipOther.Visible = False
+                        cmbOTHConnect.Visible = False
+                        lblOTMac.Visible = False
+                        lblOtIp.Visible = False
+                        txtOTHIP.Visible = False
+                        txtOTHMAC.Visible = False
+                        lblOTPCL.Visible = True
+                        cmbOTHPCL.Visible = True
+
+                        ' CopyToolStripMenuItem.Enabled = False
+                        UpdateToolStripMenuItem.Enabled = False
+                        sSTAB3.Visible = True
+                        sSTAB1.Visible = False
+                        sSTAB2.Visible = False
+                        sSTAB4.Visible = False
+                        sSTAB5.Visible = False
+
+                        ' Call LOADmon(d(1))
+
+                        Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
+
+                        My.Application.DoEvents()
+                        Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbOTHotv.Text, d(1))
+
+                    Case "NET"
+                        CartrAddToolStripMenuItem.Visible = False
+
+                        UpdateToolStripMenuItem.Enabled = False
+                        sSTAB3.Visible = False
+                        sSTAB1.Visible = False
+                        sSTAB2.Visible = False
+                        sSTAB5.Visible = False
+                        sSTAB4.Visible = True
+
+                        Call LOADnet(d(1))
+                        Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbNETotv.Text, d(1))
+
+                        '--------------VIP_Graff Добавление новой перефирии Начало-----------------
+                    Case "USB"
+                        CartrAddToolStripMenuItem.Visible = False
+                        FillComboNET(Me.cmbOTH, "name", "SPR_USB", "", False, True)
+                        lblTipOther.Visible = False
+                        cmbOTHConnect.Visible = False
+                        lblOTMac.Visible = False
+                        lblOtIp.Visible = False
+                        txtOTHIP.Visible = False
+                        txtOTHMAC.Visible = False
+
+
+                        UpdateToolStripMenuItem.Enabled = False
+                        sSTAB3.Visible = True
+                        sSTAB1.Visible = False
+                        sSTAB2.Visible = False
+                        sSTAB4.Visible = False
+                        sSTAB5.Visible = False
+                        lblOTPCL.Visible = True
+                        cmbOTHPCL.Visible = True
+
+                        Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
+
+                        My.Application.DoEvents()
+                        Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbOTHotv.Text, d(1))
+
+                    Case "SOUND"
+                        CartrAddToolStripMenuItem.Visible = False
+                        FillComboNET(Me.cmbOTH, "name", "SPR_ASISTEM", "", False, True)
+                        lblTipOther.Visible = False
+                        cmbOTHConnect.Visible = False
+                        lblOTMac.Visible = False
+                        lblOtIp.Visible = False
+                        txtOTHIP.Visible = False
+                        txtOTHMAC.Visible = False
+
+
+                        UpdateToolStripMenuItem.Enabled = False
+                        sSTAB3.Visible = True
+                        sSTAB1.Visible = False
+                        sSTAB2.Visible = False
+                        sSTAB4.Visible = False
+                        sSTAB5.Visible = False
+                        lblOTPCL.Visible = True
+                        cmbOTHPCL.Visible = True
+
+
+                        Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
+
+                        My.Application.DoEvents()
+                        Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbOTHotv.Text, d(1))
+
+                    Case "IBP"
+                        CartrAddToolStripMenuItem.Visible = False
+                        FillComboNET(Me.cmbOTH, "name", "SPR_IBP", "", False, True)
+                        lblTipOther.Visible = False
+                        cmbOTHConnect.Visible = False
+                        lblOTMac.Visible = True
+                        lblOtIp.Visible = True
+                        txtOTHIP.Visible = True
+                        txtOTHMAC.Visible = True
+
+
+                        UpdateToolStripMenuItem.Enabled = False
+                        sSTAB3.Visible = True
+                        sSTAB1.Visible = False
+                        sSTAB2.Visible = False
+                        sSTAB4.Visible = False
+                        sSTAB5.Visible = False
+                        lblOTPCL.Visible = True
+                        cmbOTHPCL.Visible = True
+
+                        Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
+
+                        If chkSNMP.Checked = True Then
+                            ' chkSNMP.Visible = True
+                            lblSNMP.Visible = True
+                            txtSNMP.Visible = True
+                            gbSNMP.Visible = True
+                        Else
+                            ' chkSNMP.Visible = False
+                            lblSNMP.Visible = False
+                            txtSNMP.Visible = False
+                            gbSNMP.Visible = False
+                        End If
+
+                        My.Application.DoEvents()
+                        Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbOTHotv.Text, d(1))
+
+                    Case "FS"
+                        CartrAddToolStripMenuItem.Visible = False
+                        FillComboNET(Me.cmbOTH, "name", "SPR_FS", "", False, True)
+                        lblTipOther.Visible = False
+                        cmbOTHConnect.Visible = False
+                        lblOTMac.Visible = False
+                        lblOtIp.Visible = False
+                        txtOTHIP.Visible = False
+                        txtOTHMAC.Visible = False
+
+
+                        UpdateToolStripMenuItem.Enabled = False
+                        sSTAB3.Visible = True
+                        sSTAB1.Visible = False
+                        sSTAB2.Visible = False
+                        sSTAB4.Visible = False
+                        sSTAB5.Visible = False
+                        lblOTPCL.Visible = True
+                        cmbOTHPCL.Visible = True
+
+                        Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
+
+                        My.Application.DoEvents()
+                        Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbOTHotv.Text, d(1))
+
+                    Case "KEYB"
+                        CartrAddToolStripMenuItem.Visible = False
+                        FillComboNET(Me.cmbOTH, "name", "SPR_KEYBOARD", "", False, True)
+                        lblTipOther.Visible = False
+                        cmbOTHConnect.Visible = False
+                        lblOTMac.Visible = False
+                        lblOtIp.Visible = False
+                        txtOTHIP.Visible = False
+                        txtOTHMAC.Visible = False
+
+
+                        UpdateToolStripMenuItem.Enabled = False
+                        sSTAB3.Visible = True
+                        sSTAB1.Visible = False
+                        sSTAB2.Visible = False
+                        sSTAB4.Visible = False
+                        sSTAB5.Visible = False
+                        lblOTPCL.Visible = True
+                        cmbOTHPCL.Visible = True
+
+                        Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
+
+                        My.Application.DoEvents()
+                        Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbOTHotv.Text, d(1))
+
+                    Case "MOUSE"
+                        CartrAddToolStripMenuItem.Visible = False
+                        FillComboNET(Me.cmbOTH, "name", "SPR_MOUSE", "", False, True)
+                        lblTipOther.Visible = False
+                        cmbOTHConnect.Visible = False
+                        lblOTMac.Visible = False
+                        lblOtIp.Visible = False
+                        txtOTHIP.Visible = False
+                        txtOTHMAC.Visible = False
+
+
+                        UpdateToolStripMenuItem.Enabled = False
+                        sSTAB3.Visible = True
+                        sSTAB1.Visible = False
+                        sSTAB2.Visible = False
+                        sSTAB4.Visible = False
+                        sSTAB5.Visible = False
+                        lblOTPCL.Visible = True
+                        cmbOTHPCL.Visible = True
+
+                        Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
+
+                        My.Application.DoEvents()
+                        Call LOAD_PCL(sBranch, sDepartment, sOffice, Me.cmbOTHPCL, cmbOTHotv.Text, d(1))
+                        '--------------VIP_Graff Добавление новой перефирии Конец------------------
+
+                    Case "CNT"
+
+                        CartrAddToolStripMenuItem.Visible = False
+                        FillComboNET(Me.cmbOTH, "name", "SPR_other", "", False, True)
+                        lblTipOther.Visible = False
+                        cmbOTHConnect.Visible = False
+                        lblOTMac.Visible = False
+                        lblOtIp.Visible = False
+                        txtOTHIP.Visible = False
+                        txtOTHMAC.Visible = False
+
+
+                        UpdateToolStripMenuItem.Enabled = False
+                        sSTAB3.Visible = True
+                        sSTAB1.Visible = False
+                        sSTAB2.Visible = False
+                        sSTAB4.Visible = False
+                        sSTAB5.Visible = False
+                        lblOTPCL.Visible = False
+                        cmbOTHPCL.Visible = False
+
+                        'Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
+
+                        Me.BeginInvoke(New MethodInvoker(AddressOf T_LOAD_T_1))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf N_P_LOAD_t))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf R_P_LOAD_t))
+                        Me.BeginInvoke(New MethodInvoker(AddressOf D_P_LOAD_t))
+
+                End Select
+
 
 
             Case "G"
@@ -1549,7 +1546,8 @@ Error_:
         End Select
     End Sub
 
-    Private Sub N_P_LOAD_t()
+    Public Sub N_P_LOAD_t()
+
         Select Case TipTehn
 
             Case "PC"
@@ -1569,8 +1567,8 @@ Error_:
             Case Else
                 Call LOAD_NOTES(sCOUNT, Me.lvNotesOTH)
 
-
         End Select
+
     End Sub
 
     Private Sub R_P_LOAD_t()
@@ -1729,7 +1727,7 @@ err_:
             Case Keys.Enter
 
                 lstGroups.Nodes.Clear()
-                
+
                 Me.BeginInvoke(New MethodInvoker(AddressOf S2_LOAD_t))
                 'newThread1.Priority = 3
 
@@ -1861,8 +1859,6 @@ err_:
             If Not IsDBNull(.Fields("d_p").Value) Then sSw = .Fields("d_p").Value
             If Not IsDBNull(.Fields("d_o").Value) Then sSw2 = .Fields("d_o").Value
 
-            If Not IsDBNull(.Fields("WO_SETUP").Value) Then Me.CheckBox3_manual.Checked = .Fields("WO_SETUP").Value 'esq 
-
             If Len(sSw) = 0 Then
                 sSw = Date.Today
             End If
@@ -1913,12 +1909,12 @@ A:
         Dim rs As Recordset
         rs = New Recordset
 
-        rs.Open("SELECT Date,Master,Zametki FROM Zametki WHERE id=" & zCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+        rs.Open("SELECT D_T,Master,Zametki FROM Zametki WHERE id=" & zCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
                 LockTypeEnum.adLockOptimistic)
 
         With rs
 
-            If Not IsDBNull(.Fields("Date").Value) Then dtdatenotes.Value = .Fields("Date").Value
+            If Not IsDBNull(.Fields("D_T").Value) Then dtdatenotes.Value = .Fields("D_T").Value
             If Not IsDBNull(.Fields("Master").Value) Then cmbNotesMaster.Text = .Fields("Master").Value
             If Not IsDBNull(.Fields("Zametki").Value) Then txtNotes.Text = .Fields("Zametki").Value
 
@@ -2066,7 +2062,7 @@ A:
                 'Мастер
 
 
-                If Not IsDBNull(.Fields("Date").Value) Then sSw = .Fields("Date").Value
+                If Not IsDBNull(.Fields("D_T").Value) Then sSw = .Fields("D_T").Value
                 If Not IsDBNull(.Fields("srok").Value) Then sSw2 = .Fields("srok").Value
 
                 If Len(sSw) = 0 Then
@@ -2096,10 +2092,10 @@ A:
                 If Not IsDBNull(.Fields("Uroven").Value) Then frmService_add.cmbKrit.Text = .Fields("Uroven").Value 'Тип
 
 
-                If Not IsDBNull(.Fields("MeMo").Value) Then frmService_add.txtComent.Text = .Fields("MeMo").Value _
+                If Not IsDBNull(.Fields("PAMIATKA").Value) Then frmService_add.txtComent.Text = .Fields("PAMIATKA").Value _
                 'Комментарий
 
-                If Not IsDBNull(.Fields("Summ").Value) Then frmService_add.RemCashe.Text = .Fields("Summ").Value _
+                If Not IsDBNull(.Fields("CUMMA").Value) Then frmService_add.RemCashe.Text = .Fields("CUMMA").Value _
                 'Комментарий
 
                 '.Fields("Summ").Value = RemCashe.Text 'Сумма
@@ -2476,8 +2472,6 @@ err_:
         End If
 
         If Len(EverestFilePatch) > 3 Then Call EVEREST_UPDATE()
-        Call LOAD_SOFT(sCOUNT, Me.lstSoftware) 'esq
-
         Dim langfile As New IniFile(sLANGPATH)
 
 
@@ -4005,12 +3999,12 @@ err_:
         Dim rs As Recordset
         rs = New Recordset
 
-        rs.Open("SELECT Date,Master,ZAMETKA FROM ZAM_OTD WHERE id=" & zCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+        rs.Open("SELECT D_T,Master,ZAMETKA FROM ZAM_OTD WHERE id=" & zCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
                 LockTypeEnum.adLockOptimistic)
 
         With rs
 
-            If Not IsDBNull(.Fields("Date").Value) Then Notesbrdate.Value = .Fields("Date").Value
+            If Not IsDBNull(.Fields("D_T").Value) Then Notesbrdate.Value = .Fields("D_T").Value
             If Not IsDBNull(.Fields("Master").Value) Then cmbBRMaster.Text = .Fields("Master").Value
             If Not IsDBNull(.Fields("ZAMETKA").Value) Then Notesbrtxt.Text = .Fields("ZAMETKA").Value
 
@@ -4603,7 +4597,7 @@ err_:
                 With PROYZV
 
                     uname = .Fields("proizv").Value
-                        
+
                 End With
 
                 PROiZV40.Text = uname
@@ -6033,7 +6027,7 @@ err_:
         rs.Close()
         rs = Nothing
 
-        
+
     End Sub
 
     Private Sub MnuSendEmail_Click(ByVal sender As Object, ByVal e As EventArgs) Handles MnuSendEmail.Click
@@ -6092,39 +6086,39 @@ err_1:
         MsgBox(Err.Description, MsgBoxStyle.Information, ProGramName)
     End Sub
 
-    Private Sub ТО1ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ТО1ToolStripMenuItem.Click
+    Private Sub ТО1ToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ТО1ToolStripMenuItem.Click
 
         TIP_TO = "TO1"
 
         frmPPR.ShowDialog(Me)
     End Sub
 
-    Private Sub ТО2ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ТО2ToolStripMenuItem.Click
+    Private Sub ТО2ToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ТО2ToolStripMenuItem.Click
         TIP_TO = "TO2"
         frmPPR.ShowDialog(Me)
     End Sub
 
-    Private Sub ТО3ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ТО3ToolStripMenuItem.Click
+    Private Sub ТО3ToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ТО3ToolStripMenuItem.Click
         TIP_TO = "TO3"
         frmPPR.ShowDialog(Me)
     End Sub
 
-    Private Sub ТО4ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ТО4ToolStripMenuItem.Click
+    Private Sub ТО4ToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ТО4ToolStripMenuItem.Click
         TIP_TO = "TO4"
         frmPPR.ShowDialog(Me)
     End Sub
 
-    Private Sub ТО5ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ТО5ToolStripMenuItem.Click
+    Private Sub ТО5ToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ТО5ToolStripMenuItem.Click
         TIP_TO = "TO5"
         frmPPR.ShowDialog(Me)
     End Sub
 
-    Private Sub ТО6ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ТО6ToolStripMenuItem.Click
+    Private Sub ТО6ToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ТО6ToolStripMenuItem.Click
         TIP_TO = "TO6"
         frmPPR.ShowDialog(Me)
     End Sub
 
-    Private Sub btnUserCancel_Click(sender As Object, e As EventArgs) Handles btnUserCancel.Click
+    Private Sub btnUserCancel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnUserCancel.Click
         Dim langfile As New IniFile(sLANGPATH)
 
         'esq 130713 импорт юзеров
@@ -6254,13 +6248,13 @@ err_1:
         End If
     End Sub
 
-    Private Sub treebranche_SelectedIndexChanged(sender As Object, e As EventArgs) Handles treebranche.SelectedIndexChanged
+    Private Sub treebranche_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles treebranche.SelectedIndexChanged
 
         Me.BeginInvoke(New MethodInvoker(AddressOf TreeBrancheDU))
 
     End Sub
 
-    Private Sub treebranche_SelectedValueChanged(sender As Object, e As EventArgs) _
+    Private Sub treebranche_SelectedValueChanged(ByVal sender As Object, ByVal e As EventArgs) _
       Handles treebranche.SelectedValueChanged
 
         Me.BeginInvoke(New MethodInvoker(AddressOf TreeBrancheDU))
@@ -6281,7 +6275,7 @@ err_1:
         lstGroups.ExpandAll()
     End Sub
 
-    Private Sub cmbOTHConnect_SelectedIndexChanged(sender As Object, e As EventArgs) _
+    Private Sub cmbOTHConnect_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
         Handles cmbOTHConnect.SelectedIndexChanged
         On Error GoTo err_
 
@@ -6364,7 +6358,7 @@ Err_:
         Handles lstUsers.SelectedIndexChanged
     End Sub
 
-    Private Sub mnu_Z_to_Office_Click(sender As System.Object, e As System.EventArgs) Handles mnu_Z_to_Office.Click
+    Private Sub mnu_Z_to_Office_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnu_Z_to_Office.Click
         If lvServices.Items.Count = 0 Then Exit Sub
 
         Dim z As Integer
@@ -6382,7 +6376,7 @@ Err_:
         ' Call SRASP2(rCOUNT, "\blanks\akt_z.dot")
     End Sub
 
-    Private Sub РаспискаToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles РаспискаToolStripMenuItem.Click
+    Private Sub РаспискаToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles РаспискаToolStripMenuItem.Click
         If lvServices.Items.Count = 0 Then Exit Sub
 
         Dim z As Integer
@@ -6398,7 +6392,7 @@ Err_:
         Call SRASP(r1COUNT)
     End Sub
 
-    Private Sub НарядToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles НарядToolStripMenuItem.Click
+    Private Sub НарядToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles НарядToolStripMenuItem.Click
         If lvServices.Items.Count = 0 Then Exit Sub
 
         Dim z As Integer
@@ -6414,7 +6408,7 @@ Err_:
 
     End Sub
 
-    Private Sub МатериальныйПропускToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles МатериальныйПропускToolStripMenuItem.Click
+    Private Sub МатериальныйПропускToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles МатериальныйПропускToolStripMenuItem.Click
         If lvServices.Items.Count = 0 Then Exit Sub
 
         Dim z As Integer
@@ -6429,7 +6423,7 @@ Err_:
         Call SRASP2(r1COUNT, PrPath & "blanks\mp.doc")
     End Sub
 
-    Private Sub БланкToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles БланкToolStripMenuItem.Click
+    Private Sub БланкToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles БланкToolStripMenuItem.Click
         If lvServices.Items.Count = 0 Then Exit Sub
 
         Dim z As Integer
@@ -6504,25 +6498,25 @@ Err_:
 
     End Sub
 
-    Private Sub chkPCspis_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles chkPCspis.CheckedChanged
+    Private Sub chkPCspis_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkPCspis.CheckedChanged
 
         If chkPCspis.Checked = True Then dtSpisanie.Visible = True Else dtSpisanie.Visible = False
 
     End Sub
 
-    Private Sub chkPRNspis_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles chkPRNspis.CheckedChanged
+    Private Sub chkPRNspis_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkPRNspis.CheckedChanged
         If chkPRNspis.Checked = True Then dtPRNSpisanie.Visible = True Else dtPRNSpisanie.Visible = False
     End Sub
 
-    Private Sub chkNETspis_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles chkNETspis.CheckedChanged
+    Private Sub chkNETspis_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkNETspis.CheckedChanged
         If chkNETspis.Checked = True Then dtNETSpisanie.Visible = True Else dtNETSpisanie.Visible = False
     End Sub
 
-    Private Sub lstSoftware_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles lstSoftware.SelectedIndexChanged
+    Private Sub lstSoftware_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lstSoftware.SelectedIndexChanged
 
     End Sub
 
-    Private Sub btnAdd_Click(sender As System.Object, e As System.EventArgs) Handles btnAdd.Click
+    Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
         gbSoftEd.Visible = False
         On Error GoTo err_
 
@@ -6532,7 +6526,7 @@ Err_:
 
 
         If Not (RSExists("PO", "Name", cmbSoftware.Text)) Then
-            AddTreePar(Me.cmbSoftware.Text, Me.cmbTipPo.Text, Me.cmbSoftPr.Text, "SPR_PO", Me.cmbSoftware) 'esq сохраним ещё и тип ПО
+            AddTwoPar(Me.cmbSoftware.Text, Me.cmbSoftPr.Text, "SPR_PO", Me.cmbSoftware)
         End If
 
         Dim sSQL As String
@@ -6551,29 +6545,20 @@ Err_:
                     "d_p='" & DTInstall.Value & "'," &
                     "d_o='" & dtGok.Value & "'," &
                     "Id_Comp=" & sCOUNT & "," &
-                    "Publisher='" & Replace(cmbSoftPr.Text, "'", "") & "'," &
+                    "Publisher='" & cmbSoftPr.Text & "'," &
                     "TIP='" & cmbTipPo.Text & "' " &
-                    ",WO_SETUP=" & Me.CheckBox3_manual.Checked & " " & "WHERE Id=" & SoftCOUNT 'esq
+                    "WHERE Id=" & SoftCOUNT
 
             DB7.Execute(sSQL)
-
-            'esq добавление нового производителя ************************
-            cmbSoftPr.Text = Replace(cmbSoftPr.Text, "'", "")
-            If Not RSExists("PROYZV", "PROIZV", cmbSoftPr.Text) Then
-                Dim sSQL1 As String
-                sSQL1 = "INSERT INTO SPR_PROIZV (Proizv) VALUES ('" & cmbSoftPr.Text & "')"
-                DB7.Execute(sSQL1)
-            End If
-            'esq ************************
 
         Else
             Call _
                 SaveActivityToLogDB(
                     LNGIniFile.GetString("frmSoftware", "MSG6", "Добавление программного обеспечения для") & " " &
                     Me.lstGroups.SelectedNode.Text)
-            'esq +WO_SETUP
-            sSQL = "INSERT INTO SOFT_INSTALL (Soft,t_lic,L_key,d_p,d_o,Publisher,TIP,Id_Comp,WO_SETUP) VALUES ('" & cmbSoftware.Text &
-                 "','" & cmbTipLicense.Text & "','" & txtLicKey.Text & "','" & DTInstall.Value & "','" & dtGok.Value & "','" & cmbSoftPr.Text & "','" & cmbTipPo.Text & "'," & sCOUNT & "," & Me.CheckBox3_manual.Checked & ")"
+
+            sSQL = "INSERT INTO SOFT_INSTALL (Soft,t_lic,L_key,d_p,d_o,Publisher,TIP,Id_Comp) VALUES ('" & cmbSoftware.Text &
+                 "','" & cmbTipLicense.Text & "','" & txtLicKey.Text & "','" & DTInstall.Value & "','" & dtGok.Value & "','" & cmbSoftPr.Text & "','" & cmbTipPo.Text & "'," & sCOUNT & ")"
             DB7.Execute(sSQL)
 
         End If
@@ -6586,7 +6571,6 @@ Err_:
         cmbSoftPr.Text = ""
         DTInstall.Value = Date.Today
         dtGok.Value = Date.Today
-        Me.CheckBox3_manual.Checked = False 'esq
 
         Call LOAD_SOFT(sCOUNT, Me.lstSoftware)
         Exit Sub
@@ -6596,7 +6580,7 @@ err_:
 
     End Sub
 
-    Private Sub btnDelete_Click(sender As System.Object, e As System.EventArgs) Handles btnDelete.Click
+    Private Sub btnDelete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDelete.Click
         If lstSoftware.Items.Count = 0 Then Exit Sub
 
         Dim z As Integer
@@ -6671,7 +6655,7 @@ err_:
         rs1 = Nothing
     End Sub
 
-    Private Sub btnCancel_Click(sender As System.Object, e As System.EventArgs) Handles btnCancel.Click
+    Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
         Dim LNGIniFile As New IniFile(sLANGPATH)
         btnAdd.Text = LNGIniFile.GetString("frmSoftware", "MSG2", "Добавить")
         cmbSoftware.Text = ""
@@ -6682,10 +6666,9 @@ err_:
         DTInstall.Value = Date.Today
         dtGok.Value = Date.Today
         gbSoftEd.Visible = False
-        Me.CheckBox3_manual.Checked = False 'esq
     End Sub
 
-    Private Sub ToolStripButton1_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripButton1.Click
+    Private Sub ToolStripButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton1.Click
 
         If TipTehn <> "PC" Then Exit Sub
         Me.lstSoftware.Visible = False
@@ -6769,7 +6752,7 @@ err_:
         Me.lstSoftware.Visible = True
     End Sub
 
-    Private Sub CheckBox2_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CheckBox2.CheckedChanged
+    Private Sub CheckBox2_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckBox2.CheckedChanged
         If CheckBox2.Checked = True Then
             lstSoftware.CheckBoxes = True
             lstSoftware.MultiSelect = True
@@ -6813,7 +6796,7 @@ err_:
         DV2 = True 'esq 130706 для обновления дерева при сохранении
     End Sub
 
-    Private Sub lvUSTR_PRINT_DoubleClick(sender As Object, e As System.EventArgs) Handles lvUSTR_PRINT.DoubleClick
+    Private Sub lvUSTR_PRINT_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvUSTR_PRINT.DoubleClick
 
         If lvUSTR_PRINT.Items.Count = 0 Then Exit Sub
 
@@ -6827,7 +6810,7 @@ err_:
     End Sub
 
 
-    
+
     Private Sub txtSearch_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtSearch.TextChanged
 
     End Sub

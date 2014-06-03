@@ -18,7 +18,7 @@ Public Class frmMain
     Private Sub frmMain_Activated(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Activated
 
         Me.Show()
-       ' My.Application.DoEvents()
+        ' My.Application.DoEvents()
 
         If unamDB <> "MS Access" And unamDB <> "MS Access 2007" Then ArhToolZipbutton.Enabled = False
 
@@ -742,10 +742,10 @@ Error_:
 
         End Select
 
-                Exit Sub
+        Exit Sub
 err_:
-                MsgBox(Err.Description, MsgBoxStyle.Information, ProGramName)
-                LoadDatabase()
+        MsgBox(Err.Description, MsgBoxStyle.Information, ProGramName)
+        LoadDatabase()
 
     End Sub
 
@@ -2539,7 +2539,7 @@ err_:
                 TreeORGANIZACIA.SelectedNode.Text)
     End Sub
 
-    Private Sub СинхронизацияПОToolStripMenuItem2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles СинхронизацияПОToolStripMenuItem2.Click
+    Private Sub СинхронизацияПОToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles СинхронизацияПОToolStripMenuItem.Click
         'esq *********
         Dim rs, rs1, rs2 As Recordset
         Dim sSQL, sSQL1, sSQL2, F1, H1 As String
@@ -2551,19 +2551,36 @@ err_:
         rs = New Recordset
         rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
         With rs
-            .MoveFirst()
+            H1 = ""
+            Try
+                '.MovePrevious()
+                .MoveFirst()
+            Catch ex As Exception
+            End Try
             Do While Not .EOF
-                sSQL2 = "SELECT * FROM SOFT_INSTALL WHERE Soft='" & .Fields("Name").Value & "'"
-                rs2 = New Recordset
-                rs2.Open(sSQL2, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-                Select Case rs2.EOF
-                    Case True
+                If H1 = .Fields("Name").Value Then
+                    Try
+                        H1 = .Fields("Name").Value
                         .Delete()
-                        .MovePrevious()
-                    Case Else
-                End Select
-                rs2.Close()
-                rs2 = Nothing
+                    Catch ex As Exception
+                    End Try
+                Else
+                    H1 = .Fields("Name").Value
+                    sSQL2 = "SELECT * FROM SOFT_INSTALL WHERE Soft='" & .Fields("Name").Value & "'"
+                    rs2 = New Recordset
+                    rs2.Open(sSQL2, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                    Select Case rs2.EOF
+                        Case True
+                            Try
+                                .Delete()
+                                .MovePrevious()
+                            Catch ex As Exception
+                            End Try
+                        Case Else
+                    End Select
+                    rs2.Close()
+                    rs2 = Nothing
+                End If
                 .MoveNext()
             Loop
         End With
@@ -2609,10 +2626,9 @@ err_:
 
 
         ' заполнение SPR_PO
-        sSQL = "SELECT * FROM SOFT_INSTALL WHERE Soft not like '%update%' and Soft not like '%Обновление%' ORDER BY Soft"
+        sSQL = "SELECT * FROM SOFT_INSTALL WHERE Soft not like '%update%' and Soft not like '%Обновление%' ORDER BY Soft DESC"
         rs = New Recordset
         rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-
         With rs
             .MoveFirst()
             Do While Not .EOF
@@ -2649,12 +2665,54 @@ err_:
                 If Not RSExists("PO", "Name", H1) Then ' добавление нового ПО 
                     sSQL1 = "INSERT INTO SPR_PO (Name,Proizv,A,B,C,Prim) VALUES ('" & H1 & "'," & ID_PROIZV & ",'','','','')"
                     DB7.Execute(sSQL1)
+                Else
+                    sSQL1 = "UPDATE SPR_PO set Proizv=" & ID_PROIZV & " WHERE Name='" & H1 & "'" 'esq
+                    DB7.Execute(sSQL1)
                 End If
 
                 .MoveNext()
             Loop
         End With
+        rs.Close()
+        rs = Nothing
 
+        ' обновление SOFT_INSTALL
+        sSQL = "SELECT * FROM SPR_PO ORDER BY Name"
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+        With rs
+            Try
+                .MoveFirst()
+            Catch ex As Exception
+            End Try
+            Do While Not .EOF
+
+                rs2 = New Recordset
+                rs2.Open("SELECT * FROM SPR_PROIZV WHERE ID=" & .Fields("Proizv").Value, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                Dim S_PROIZV As String
+                S_PROIZV = rs2.Fields("PROIZV").Value
+                rs2.Close()
+                rs2 = Nothing
+
+                rs2 = New Recordset
+                rs2.Open("SELECT * FROM SOFT_INSTALL WHERE Soft='" & .Fields("Name").Value & "' and (Not(Publisher='" & S_PROIZV &
+                         "') or Not(TIP='" & .Fields("A").Value & "'))",
+                         DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                Try
+                    rs2.MoveFirst()
+                    Do While Not rs2.EOF
+                        rs2.Fields("Publisher").Value = S_PROIZV
+                        rs2.Fields("TIP").Value = .Fields("A").Value
+                        rs2.Update()
+                        rs2.MoveNext()
+                    Loop
+                Catch ex As Exception
+                End Try
+                rs2.Close()
+                rs2 = Nothing
+                .MoveNext()
+            Loop
+        End With
         rs.Close()
         rs = Nothing
 

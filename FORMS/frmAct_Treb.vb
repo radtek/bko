@@ -445,7 +445,7 @@ Public Class frmAct_Treb
                 oSrch.setReplaceString("")
                 Debug.Print(oDoc.replaceAll(oSrch))
 
-                oSrch.setSearchString("Year")
+                oSrch.setSearchString("god")
                 oSrch.setReplaceString(u4$)
                 Debug.Print(oDoc.replaceAll(oSrch))
 
@@ -501,7 +501,7 @@ Public Class frmAct_Treb
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
 
 
                 'Дата акта
@@ -517,7 +517,7 @@ Public Class frmAct_Treb
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
                 'Организация
                 With Wrd.Selection.Find
                     .Text = "nmN"
@@ -531,7 +531,7 @@ Public Class frmAct_Treb
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
                 'Номер акта
 
                 With Wrd.Selection.Find
@@ -546,11 +546,11 @@ Public Class frmAct_Treb
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
 
                 'Тип ОС
                 With Wrd.Selection.Find
-                    .Text = "Year"
+                    .Text = "god"
                     .Replacement.Text = u4$ 'ostip.Text
                     .Forward = True
                     .Wrap = WdFindWrap.wdFindContinue
@@ -562,7 +562,7 @@ Public Class frmAct_Treb
                     .MatchAllWordForms = False
                 End With
 
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
                 'Тип ОС
                 With Wrd.Selection.Find
                     .Text = "Dtu"
@@ -577,7 +577,7 @@ Public Class frmAct_Treb
                     .MatchAllWordForms = False
                 End With
 
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
 
                 'Год выпуска
                 With Wrd.Selection.Find
@@ -593,7 +593,7 @@ Public Class frmAct_Treb
                     .MatchAllWordForms = False
                 End With
 
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
 
                 'Год выпуска
                 With Wrd.Selection.Find
@@ -609,7 +609,7 @@ Public Class frmAct_Treb
                     .MatchAllWordForms = False
                 End With
 
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
 
                 'Цена
                 With Wrd.Selection.Find
@@ -625,7 +625,7 @@ Public Class frmAct_Treb
                     .MatchAllWordForms = False
                 End With
 
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "DtPR"
@@ -640,7 +640,7 @@ Public Class frmAct_Treb
                     .MatchAllWordForms = False
                 End With
 
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "opis"
@@ -655,7 +655,7 @@ Public Class frmAct_Treb
                     .MatchAllWordForms = False
                 End With
 
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "nnm"
@@ -670,7 +670,7 @@ Public Class frmAct_Treb
                     .MatchAllWordForms = False
                 End With
 
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
                 WrdDc = Nothing
                 Wrd = Nothing
 
@@ -767,8 +767,8 @@ Public Class frmAct_Treb
                 oSrch.setReplaceString(u$)
                 Debug.Print(oDoc.replaceAll(oSrch))
 
-                oSrch.setSearchString("data")
-                oSrch.setReplaceString (Of Date)()
+                oSrch.setSearchString("D_T")
+                oSrch.setReplaceString(Of Date)()
                 Debug.Print(oDoc.replaceAll(oSrch))
 
                 oSrch.setSearchString("org")
@@ -825,12 +825,12 @@ Public Class frmAct_Treb
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
 
 
                 'Дата акта
                 With Wrd.Selection.Find
-                    .Text = "data"
+                    .Text = "D_T"
                     .Replacement.Text = Date.Today
                     .Forward = True
                     .Wrap = WdFindWrap.wdFindContinue
@@ -841,7 +841,7 @@ Public Class frmAct_Treb
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
                 'Организация
 
                 With Wrd.Selection.Find
@@ -856,7 +856,7 @@ Public Class frmAct_Treb
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
 
 
                 With Wrd.Selection.Find
@@ -871,7 +871,7 @@ Public Class frmAct_Treb
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
 
                 'Тип ОС
                 With Wrd.Selection.Find
@@ -887,7 +887,7 @@ Public Class frmAct_Treb
                     .MatchAllWordForms = False
                 End With
 
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
 
                 'Тип ОС
                 With Wrd.Selection.Find
@@ -903,7 +903,7 @@ Public Class frmAct_Treb
                     .MatchAllWordForms = False
                 End With
 
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
 
                 'Год выпуска
                 With Wrd.Selection.Find
@@ -919,7 +919,7 @@ Public Class frmAct_Treb
                     .MatchAllWordForms = False
                 End With
 
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
 
                 'Год выпуска
                 With Wrd.Selection.Find
@@ -935,7 +935,7 @@ Public Class frmAct_Treb
                     .MatchAllWordForms = False
                 End With
 
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
 
                 'Цена
 
@@ -952,7 +952,7 @@ Public Class frmAct_Treb
                     .MatchAllWordForms = False
                 End With
 
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
 
                 WrdDc = Nothing
                 Wrd = Nothing

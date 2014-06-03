@@ -1268,7 +1268,7 @@ Public Class frmCRT3
 
             txtSaleNumb.Text = .Fields("SCHET").Value
             txtCashe.Text = .Fields("Cena").Value
-            dtSale.Text = .Fields("data").Value
+            dtSale.Text = .Fields("D_T").Value
 
             Select Case .Fields("NZap").Value
 
@@ -1345,7 +1345,7 @@ Public Class frmCRT3
         ShowDialog(Me)
 
         Exit Sub
-        Error_:
+Error_:
         'frmCartr_ADD.Show(vbModal)
         MsgBox(Err.Description)
     End Sub
@@ -1414,7 +1414,7 @@ Public Class frmCRT3
         If zCOUNT > 0 Then
 
             rs = New Recordset
-            rs.Open("SELECT * FROM CARTRIDG_Z WHERE ID_C=" & rCOUNT & " ORDER BY DATAZAP DESC", DB7,
+            rs.Open("SELECT * FROM CARTRIDG_Z WHERE ID_C=" & rCOUNT & " ORDER BY D_TZAP DESC", DB7,
                     CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
             Dim intCount As Decimal = 0
@@ -1512,7 +1512,7 @@ Public Class frmCRT3
         ResList(Me.lvCartZAP)
         'CARTRIDG_Z.Close
         Exit Sub
-        Error_:
+Error_:
         Debug.Print(Err.Description)
     End Sub
 
@@ -1590,7 +1590,7 @@ Public Class frmCRT3
         OneStart = 1
 
         Exit Sub
-        err_:
+err_:
     End Sub
 
     Private Sub PreLoad()
@@ -1821,7 +1821,7 @@ Public Class frmCRT3
             .Fields("PROD").Value = uname4
             .Fields("SCHET").Value = txtSaleNumb.Text
             .Fields("Cena").Value = txtCashe.Text
-            .Fields("DATA").Value = dtSale.Value
+            .Fields("D_T").Value = dtSale.Value
             .Fields("NZap").Value = chkNezap.Checked
             .Fields("NeZap").Value = chkNZ.Checked
             .Fields("Iznos").Value = chkIznos.Checked
@@ -1988,7 +1988,7 @@ Public Class frmCRT3
                     'Create the Desktop 
                     objDesktop = objServiceManager.createInstance("com.sun.star.frame.Desktop")
                     'Open a new empty writer document 
-                    Dim args(- 1) As Object '<-- initializing the array with a -1 
+                    Dim args(-1) As Object '<-- initializing the array with a -1 
                     'Dim args(4) As Object 'a Visual Basic array 
                     'args(0) = MakePropertyValue("ReadOnly", True) 
                     ''args(1) = MakePropertyValue("Password", "secret") 
@@ -2853,8 +2853,8 @@ Public Class frmCRT3
                     .Fields("oldMesto").Value = iA
                     .Fields("NewMesto").Value = sTEXT
                     .Fields("prich").Value = strTmp
-                    .Fields("data").Value = Date.Today.Date
-                    .Fields("time").Value = sTmp
+                    .Fields("D_T").Value = Date.Today.Date
+                    .Fields("T_M").Value = sTmp
                     .Update()
                 End With
                 rs.Close()
@@ -2897,7 +2897,7 @@ Public Class frmCRT3
 
 
         Exit Sub
-        Error_:
+Error_:
         MsgBox(Err.Description, vbInformation, ProGramName)
     End Sub
 
@@ -2927,7 +2927,7 @@ Public Class frmCRT3
             Dim rs As Recordset 'Объявляем рекордсет
             Dim sSQL As String 'Переменная, где будет размещён SQL запрос
 
-            sSQL = "SELECT ID_comp, data, id, oldmesto, newmesto, prich, time FROM CARTRIDG_D where id_comp=" & sID &
+            sSQL = "SELECT ID_comp, D_T, id, oldmesto, newmesto, prich, T_M FROM CARTRIDG_D where id_comp=" & sID &
                    " ORDER BY id"
             rs = New Recordset
             rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -2957,14 +2957,14 @@ Public Class frmCRT3
                         lvCRTMove.Items(CInt(intCount)).SubItems.Add("")
                     End If
 
-                    If Not IsDBNull(.Fields("data").Value) Then
-                        lvCRTMove.Items(CInt(intCount)).SubItems.Add(.Fields("data").Value)
+                    If Not IsDBNull(.Fields("D_T").Value) Then
+                        lvCRTMove.Items(CInt(intCount)).SubItems.Add(.Fields("D_T").Value)
                     Else
                         lvCRTMove.Items(CInt(intCount)).SubItems.Add("")
                     End If
 
-                    If Not IsDBNull(.Fields("time").Value) Then
-                        lvCRTMove.Items(CInt(intCount)).SubItems.Add(.Fields("time").Value)
+                    If Not IsDBNull(.Fields("T_M").Value) Then
+                        lvCRTMove.Items(CInt(intCount)).SubItems.Add(.Fields("T_M").Value)
                     Else
                         lvCRTMove.Items(CInt(intCount)).SubItems.Add("")
                     End If
@@ -3123,7 +3123,7 @@ Public Class frmCRT3
                     If isThere(.Fields("Name").Value, sFindText, mde) = True Then GoTo FoundiR
 
 
-                FoundiR:
+FoundiR:
                 If Len(FINDTXT) = 0 Then
                 Else
 
@@ -3374,8 +3374,8 @@ Public Class frmCRT3
                     .Fields("oldMesto").Value = OldM
                     .Fields("NewMesto").Value = NewM
                     .Fields("prich").Value = strTmp
-                    .Fields("data").Value = Date.Today.Date
-                    .Fields("time").Value = sTmp
+                    .Fields("D_T").Value = Date.Today.Date
+                    .Fields("T_M").Value = sTmp
                     .Update()
                 End With
                 rs.Close()
@@ -3419,7 +3419,7 @@ Public Class frmCRT3
 
 
         Exit Sub
-        Error_:
+Error_:
         MsgBox(Err.Description, vbInformation, ProGramName)
     End Sub
 

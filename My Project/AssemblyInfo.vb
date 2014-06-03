@@ -11,7 +11,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("Программа учёта оргтехники")>
 <Assembly: AssemblyCompany("Squee&Dragon")>
 <Assembly: AssemblyProduct("База Компьютеров Организации")>
-<Assembly: AssemblyCopyright("Copyright © Alex Plotnikov 2013")>
+<Assembly: AssemblyCopyright("Copyright © Alex Plotnikov 2014")> 
 <Assembly: AssemblyTrademark("Squee&Dragon")>
 
 <Assembly: ComVisible(True)>
@@ -31,4 +31,5 @@ Imports System.Runtime.InteropServices
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
 <Assembly: AssemblyVersion("1.7.5.2")> 
-<Assembly: AssemblyFileVersion("1.7.5.2b")> 
+
+<Assembly: AssemblyFileVersionAttribute("1.7.5.2")> 

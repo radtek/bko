@@ -76,7 +76,7 @@ Partial Class frmDirectory
         Me.tvDirectory.Location = New System.Drawing.Point(3, 3)
         Me.tvDirectory.Name = "tvDirectory"
         Me.TableLayoutPanel1.SetRowSpan(Me.tvDirectory, 2)
-        Me.tvDirectory.Size = New System.Drawing.Size(302, 607)
+        Me.tvDirectory.Size = New System.Drawing.Size(302, 596)
         Me.tvDirectory.TabIndex = 0
         '
         'gbSpr
@@ -99,7 +99,7 @@ Partial Class frmDirectory
         Me.gbSpr.Controls.Add(Me.cmbName)
         Me.gbSpr.Controls.Add(Me.Label1)
         Me.gbSpr.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.gbSpr.Location = New System.Drawing.Point(311, 281)
+        Me.gbSpr.Location = New System.Drawing.Point(311, 270)
         Me.gbSpr.Name = "gbSpr"
         Me.gbSpr.Size = New System.Drawing.Size(695, 329)
         Me.gbSpr.TabIndex = 2
@@ -113,7 +113,7 @@ Partial Class frmDirectory
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnDirAdd, Me.ToolStripSeparator1, Me.Button2, Me.ToolStripSeparator2, Me.btnCancell, Me.ToolStripSeparator4, Me.ToolStripButton1, Me.ToolStripSeparator5, Me.Button3, Me.ToolStripSeparator3})
         Me.ToolStrip1.Location = New System.Drawing.Point(10, 265)
         Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.Size = New System.Drawing.Size(260, 25)
+        Me.ToolStrip1.Size = New System.Drawing.Size(243, 25)
         Me.ToolStrip1.TabIndex = 21
         Me.ToolStrip1.Text = "ToolStrip1"
         '
@@ -123,7 +123,7 @@ Partial Class frmDirectory
         Me.btnDirAdd.Image = CType(resources.GetObject("btnDirAdd.Image"), System.Drawing.Image)
         Me.btnDirAdd.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnDirAdd.Name = "btnDirAdd"
-        Me.btnDirAdd.Size = New System.Drawing.Size(69, 22)
+        Me.btnDirAdd.Size = New System.Drawing.Size(63, 22)
         Me.btnDirAdd.Text = "Добавить"
         '
         'ToolStripSeparator1
@@ -137,7 +137,7 @@ Partial Class frmDirectory
         Me.Button2.Image = CType(resources.GetObject("Button2.Image"), System.Drawing.Image)
         Me.Button2.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(60, 22)
+        Me.Button2.Size = New System.Drawing.Size(55, 22)
         Me.Button2.Text = "Удалить"
         '
         'ToolStripSeparator2
@@ -151,7 +151,7 @@ Partial Class frmDirectory
         Me.btnCancell.Image = CType(resources.GetObject("btnCancell.Image"), System.Drawing.Image)
         Me.btnCancell.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnCancell.Name = "btnCancell"
-        Me.btnCancell.Size = New System.Drawing.Size(56, 22)
+        Me.btnCancell.Size = New System.Drawing.Size(53, 22)
         Me.btnCancell.Text = "Отмена"
         '
         'ToolStripSeparator4
@@ -165,7 +165,7 @@ Partial Class frmDirectory
         Me.ToolStripButton1.Image = CType(resources.GetObject("ToolStripButton1.Image"), System.Drawing.Image)
         Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton1.Name = "ToolStripButton1"
-        Me.ToolStripButton1.Size = New System.Drawing.Size(70, 22)
+        Me.ToolStripButton1.Size = New System.Drawing.Size(67, 22)
         Me.ToolStripButton1.Text = "SNMP OID"
         Me.ToolStripButton1.Visible = False
         '
@@ -181,7 +181,7 @@ Partial Class frmDirectory
         Me.Button3.Image = CType(resources.GetObject("Button3.Image"), System.Drawing.Image)
         Me.Button3.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(48, 22)
+        Me.Button3.Size = New System.Drawing.Size(45, 22)
         Me.Button3.Text = "Выход"
         '
         'ToolStripSeparator3
@@ -400,7 +400,7 @@ Partial Class frmDirectory
         Me.lvDirectory.MultiSelect = False
         Me.lvDirectory.Name = "lvDirectory"
         Me.lvDirectory.ShowItemToolTips = True
-        Me.lvDirectory.Size = New System.Drawing.Size(695, 272)
+        Me.lvDirectory.Size = New System.Drawing.Size(695, 261)
         Me.lvDirectory.TabIndex = 16
         Me.lvDirectory.UseCompatibleStateImageBehavior = False
         Me.lvDirectory.View = System.Windows.Forms.View.Details
@@ -425,14 +425,14 @@ Partial Class frmDirectory
         Me.TableLayoutPanel1.RowCount = 2
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1009, 613)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1009, 602)
         Me.TableLayoutPanel1.TabIndex = 17
         '
         'frmDirectory
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1009, 613)
+        Me.ClientSize = New System.Drawing.Size(1009, 602)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.MinimumSize = New System.Drawing.Size(860, 640)
         Me.Name = "frmDirectory"

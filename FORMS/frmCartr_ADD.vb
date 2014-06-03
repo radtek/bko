@@ -248,7 +248,7 @@
             .Fields("PROD").Value = uname4
             .Fields("SCHET").Value = txtSaleNumb.Text
             .Fields("Cena").Value = txtCashe.Text
-            .Fields("DATA").Value = dtSale.Value
+            .Fields("D_T").Value = dtSale.Value
             .Fields("NZap").Value = chkNezap.Checked
             .Fields("NeZap").Value = chkNZ.Checked
             .Fields("Iznos").Value = chkIznos.Checked

@@ -159,15 +159,15 @@
                                         "otvetstv='" & cmbOtv.Text & "'," &
                                         "krit_rem='" & cmbTip.Text & "'," &
                                         "Uroven='" & cmbKrit.Text & "'," &
-                                        "MeMo='" & txtComent.Text & "'," &
-                                        "Summ='" & RemCashe.Text & "'," &
+                                        "PAMIATKA='" & txtComent.Text & "'," &
+                                        "Cumma='" & RemCashe.Text & "'," &
                                         "GARANT='" & dtGarRem.Value & "'," &
                                         "zakryt=" & _chkZakryt & "," &
-                                        "UserName='" & uUSERNAME & "' WHERE id=" & frmserviceDesc.rCOUNT
+                                        "User_Name='" & uUSERNAME & "' WHERE id=" & frmserviceDesc.rCOUNT
                             Case Else
                                 sSQL = "UPDATE Remont SET " &
                                         "Master='" & cmbMast.Text & "'," &
-                                        "[Date]='" & dtReg.Value & "'," &
+                                        "D_T='" & dtReg.Value & "'," &
                                         "Remont='" & txtRem.Text & "'," &
                                         "vip='" & cmbStatus.Text & "'," &
                                          "istochnik='" & cmbIst.Text & "'," &
@@ -177,11 +177,11 @@
                                          "otvetstv='" & cmbOtv.Text & "'," &
                                          "krit_rem='" & cmbTip.Text & "'," &
                                          "Uroven='" & cmbKrit.Text & "'," &
-                                         "[MeMo]='" & txtComent.Text & "'," &
-                                        "[Summ]='" & RemCashe.Text & "'," &
+                                         "PAMIATKA='" & txtComent.Text & "'," &
+                                        "Cumma='" & RemCashe.Text & "'," &
                                         "GARANT='" & dtGarRem.Value & "'," &
                                          "zakryt=" & _chkZakryt & "," &
-                                         "[UserName]='" & uUSERNAME & "' WHERE id=" & frmserviceDesc.rCOUNT
+                                         "User_Name='" & uUSERNAME & "' WHERE id=" & frmserviceDesc.rCOUNT
 
                         End Select
 
@@ -202,18 +202,18 @@
                                 "otvetstv='" & cmbOtv.Text & "'," &
                                 "krit_rem='" & cmbTip.Text & "'," &
                                 "Uroven='" & cmbKrit.Text & "'," &
-                                "MeMo='" & txtComent.Text & "'," &
-                                "Summ='" & RemCashe.Text & "'," &
+                                "PAMIATKA='" & txtComent.Text & "'," &
+                                "Cumma='" & RemCashe.Text & "'," &
                                 "GARANT='" & dtGarRem.Value & "'," &
                                 "zakryt=" & _chkZakryt & "," &
                                 "stopdate='" & Date.Today & "'," &
                                 "stoptime='" & strTime & "'," &
-                                "UserName='" & uUSERNAME & "' WHERE id=" & frmserviceDesc.rCOUNT
+                                "User_Name='" & uUSERNAME & "' WHERE id=" & frmserviceDesc.rCOUNT
 
                             Case Else
                                 sSQL = "UPDATE Remont SET " &
                                 "Master='" & cmbMast.Text & "'," &
-                                "[Date]='" & dtReg.Value & "'," &
+                                "D_T='" & dtReg.Value & "'," &
                                 "Remont='" & txtRem.Text & "'," &
                                 "vip='" & cmbStatus.Text & "'," &
                                 "istochnik='" & cmbIst.Text & "'," &
@@ -223,13 +223,13 @@
                                 "otvetstv='" & cmbOtv.Text & "'," &
                                 "krit_rem='" & cmbTip.Text & "'," &
                                 "Uroven='" & cmbKrit.Text & "'," &
-                                "[MeMo]='" & txtComent.Text & "'," &
-                                "[Summ]='" & RemCashe.Text & "'," &
+                                "PAMIATKA='" & txtComent.Text & "'," &
+                                "Cumma='" & RemCashe.Text & "'," &
                                 "GARANT='" & dtGarRem.Value & "'," &
                                 "zakryt=" & _chkZakryt & "," &
                                 "stopdate='" & Date.Today & "'," &
                                 "stoptime='" & strTime & "'," &
-                                "[UserName]='" & uUSERNAME & "' WHERE id=" & frmserviceDesc.rCOUNT
+                                "User_Name='" & uUSERNAME & "' WHERE id=" & frmserviceDesc.rCOUNT
 
                         End Select
 
@@ -246,7 +246,7 @@
 
                             Case "DSN"
 
-                                sSQL = "INSERT INTO Remont (Date,Id_Comp,Remont,Uroven,Master,NomerRemKomp,Comp_Name,Mesto_Compa,vip,UserName,istochnik,phone,srok,name_of_remont,otvetstv,krit_rem,MeMo,zakryt,PREF,Summ,starttime,startdate,GARANT) VALUES ('" &
+                                sSQL = "INSERT INTO Remont (Date,Id_Comp,Remont,Uroven,Master,NomerRemKomp,Comp_Name,Mesto_Compa,vip,User_Name,istochnik,phone,srok,name_of_remont,otvetstv,krit_rem,PAMIATKA,zakryt,PREF,Cumma,starttime,startdate,GARANT) VALUES ('" &
                                                 dtReg.Value & "'," & frmComputers.sCOUNT & ",'" & txtRem.Text & "','" & cmbKrit.Text & "','" &
                                                 cmbMast.Text & "','" & sCOUNTER + 1 & "','" & frmserviceDesc.rtxtC & "','" & unamZ & "','" &
                                                 cmbStatus.Text & "','" & uUSERNAME & "','" & cmbIst.Text & "','" & txtPhone.Text & "','" &
@@ -256,7 +256,7 @@
 
                             Case Else
 
-                                sSQL = "INSERT INTO Remont ([Date],Id_Comp,Remont,Uroven,Master,NomerRemKomp,Comp_Name,Mesto_Compa,vip,[UserName],istochnik,[phone],srok,name_of_remont,otvetstv,krit_rem,[MeMo],zakryt,[PREF],[Summ],starttime,startdate,GARANT) VALUES ('" &
+                                sSQL = "INSERT INTO Remont (D_T,Id_Comp,Remont,Uroven,Master,NomerRemKomp,Comp_Name,Mesto_Compa,vip,User_Name,istochnik,phone,srok,name_of_remont,otvetstv,krit_rem,PAMIATKA,zakryt,PREF,Cumma,starttime,startdate,GARANT) VALUES ('" &
                                                 dtReg.Value & "'," & frmComputers.sCOUNT & ",'" & txtRem.Text & "','" & cmbKrit.Text & "','" &
                                                 cmbMast.Text & "','" & sCOUNTER + 1 & "','" & frmserviceDesc.rtxtC & "','" & unamZ & "','" &
                                                 cmbStatus.Text & "','" & uUSERNAME & "','" & cmbIst.Text & "','" & txtPhone.Text & "','" &
@@ -274,7 +274,7 @@
 
                             Case "DSN"
 
-                                sSQL = "INSERT INTO Remont (Date,Id_Comp,Remont,Uroven,Master,NomerRemKomp,Comp_Name,Mesto_Compa,vip,UserName,istochnik,phone,srok,name_of_remont,otvetstv,krit_rem,MeMo,zakryt,PREF,Summ,starttime,stoptime, startdate,stopdate,GARANT) VALUES ('" &
+                                sSQL = "INSERT INTO Remont (Date,Id_Comp,Remont,Uroven,Master,NomerRemKomp,Comp_Name,Mesto_Compa,vip,User_Name,istochnik,phone,srok,name_of_remont,otvetstv,krit_rem,PAMIATKA,zakryt,PREF,Cumma,starttime,stoptime, startdate,stopdate,GARANT) VALUES ('" &
                                          dtReg.Value & "'," & frmComputers.sCOUNT & ",'" & txtRem.Text & "','" & cmbKrit.Text & "','" &
                                          cmbMast.Text & "','" & sCOUNTER + 1 & "','" & frmserviceDesc.rtxtC & "','" & unamZ & "','" &
                                          cmbStatus.Text & "','" & uUSERNAME & "','" & cmbIst.Text & "','" & txtPhone.Text & "','" &
@@ -284,7 +284,7 @@
 
                             Case Else
 
-                                sSQL = "INSERT INTO Remont ([Date],Id_Comp,Remont,Uroven,Master,NomerRemKomp,Comp_Name,Mesto_Compa,vip,[UserName],istochnik,[phone],srok,name_of_remont,otvetstv,krit_rem,[MeMo],zakryt,[PREF],[Summ],starttime,stoptime, startdate,stopdate,GARANT) VALUES ('" &
+                                sSQL = "INSERT INTO Remont (D_T,Id_Comp,Remont,Uroven,Master,NomerRemKomp,Comp_Name,Mesto_Compa,vip,User_Name,istochnik,phone,srok,name_of_remont,otvetstv,krit_rem,PAMIATKA,zakryt,PREF,Cumma,starttime,stoptime, startdate,stopdate,GARANT) VALUES ('" &
                                         dtReg.Value & "'," & frmComputers.sCOUNT & ",'" & txtRem.Text & "','" & cmbKrit.Text & "','" &
                                         cmbMast.Text & "','" & sCOUNTER + 1 & "','" & frmserviceDesc.rtxtC & "','" & unamZ & "','" &
                                         cmbStatus.Text & "','" & uUSERNAME & "','" & cmbIst.Text & "','" & txtPhone.Text & "','" &

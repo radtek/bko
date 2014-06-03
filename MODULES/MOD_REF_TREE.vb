@@ -102,6 +102,8 @@ err_:
         Dim zBranche As String
         zBranche = objIniFile.GetString("general", "branche", "")
 
+        lstgroups.BeginUpdate()
+
         Dim LNGIniFile As New IniFile(sLANGPATH)
 
         Select Case zBranche
@@ -441,6 +443,8 @@ err_:
             tNode.Expand()
 
         End If
+
+        lstgroups.EndUpdate()
 
 exitsub:
 

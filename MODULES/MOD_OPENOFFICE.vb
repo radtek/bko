@@ -818,7 +818,7 @@ Module MOD_OPENOFFICE
             insertIntoCell("D1", LNGIniFile.GetString("MOD_OPENOFFICE", "MSG43", "Дата"), objTable)
 
             rscount = New Recordset
-            rscount.Open("SELECT * FROM dvig WHERE id_comp=" & sID & " ORDER by data", DB7, CursorTypeEnum.adOpenDynamic,
+            rscount.Open("SELECT * FROM dvig WHERE id_comp=" & sID & " ORDER BY D_T", DB7, CursorTypeEnum.adOpenDynamic,
                          LockTypeEnum.adLockOptimistic)
 
             intj = 2
@@ -834,7 +834,7 @@ Module MOD_OPENOFFICE
                     insertIntoCell(iA, .Fields("oldMesto").Value, objTable)
                     insertIntoCell(iB, .Fields("NewMesto").Value, objTable)
                     insertIntoCell(iC, .Fields("Prich").Value, objTable)
-                    insertIntoCell(iD, .Fields("data").Value, objTable)
+                    insertIntoCell(iD, .Fields("D_T").Value, objTable)
                     intj = intj + 1
 
 
@@ -892,7 +892,7 @@ Module MOD_OPENOFFICE
             insertIntoCell("E1", LNGIniFile.GetString("MOD_OPENOFFICE", "MSG49", "Выполнение"), objTable)
 
             rscount = New Recordset
-            rscount.Open("SELECT * FROM Remont WHERE id_comp=" & sID & " ORDER by Date", DB7,
+            rscount.Open("SELECT * FROM Remont WHERE id_comp=" & sID & " ORDER BY D_T", DB7,
                          CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
             'Dim A As String
@@ -907,7 +907,7 @@ Module MOD_OPENOFFICE
                     iC = "C" & intj
                     iD = "D" & intj
                     iE = "E" & intj
-                    insertIntoCell(iA, .Fields("Date").Value, objTable)
+                    insertIntoCell(iA, .Fields("D_T").Value, objTable)
                     insertIntoCell(iB, .Fields("Remont").Value, objTable)
                     insertIntoCell(iC, .Fields("Master").Value, objTable)
                     insertIntoCell(iD, .Fields("Uroven").Value, objTable)
@@ -1448,7 +1448,7 @@ Module MOD_OPENOFFICE
                         insertIntoCell(A, .Fields("oldMesto"), objTable)
                         insertIntoCell(B, .Fields("NewMesto"), objTable)
                         insertIntoCell(C, .Fields("Prich"), objTable)
-                        insertIntoCell(D, .Fields("data"), objTable)
+                        insertIntoCell(D, .Fields("D_T"), objTable)
                         intj = intj + 1
 
 
@@ -1513,7 +1513,7 @@ Module MOD_OPENOFFICE
                 insertIntoCell("E1", LNGIniFile.GetString("MOD_OPENOFFICE", "MSG49", "Выполнение"), objTable)
 
                 rscount = New Recordset
-                rscount.Open("SELECT Date,Remont,Name,Uroven,vip FROM Remont WHERE id_comp=" & frmComputers.sCOUNT, DB7,
+                rscount.Open("SELECT D_T,Remont,Name,Uroven,vip FROM Remont WHERE id_comp=" & frmComputers.sCOUNT, DB7,
                              CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                 intj = 2
@@ -1526,7 +1526,7 @@ Module MOD_OPENOFFICE
                         C = "C" & intj
                         D = "D" & intj
                         E = "E" & intj
-                        insertIntoCell(A, .Fields("Date"), objTable)
+                        insertIntoCell(A, .Fields("D_T"), objTable)
                         insertIntoCell(B, .Fields("Remont"), objTable)
                         insertIntoCell(C, .Fields("Name"), objTable)
                         insertIntoCell(D, .Fields("Uroven"), objTable)
@@ -3779,7 +3779,7 @@ err_:
 
             intj = 2
             rscount = New Recordset
-            rscount.Open("SELECT * FROM dvig WHERE id_comp=" & sID & " ORDER by Data", DB7, CursorTypeEnum.adOpenDynamic,
+            rscount.Open("SELECT * FROM dvig WHERE id_comp=" & sID & " ORDER BY D_T", DB7, CursorTypeEnum.adOpenDynamic,
                          LockTypeEnum.adLockOptimistic)
 
             intj = 2
@@ -3790,7 +3790,7 @@ err_:
                     oTable.Cell(intj, 1).Range.Text = .Fields("oldMesto").Value
                     oTable.Cell(intj, 2).Range.Text = .Fields("NewMesto").Value
                     oTable.Cell(intj, 3).Range.Text = .Fields("Prich").Value
-                    oTable.Cell(intj, 4).Range.Text = .Fields("data").Value
+                    oTable.Cell(intj, 4).Range.Text = .Fields("D_T").Value
                     intj = intj + 1
 
                     .MoveNext()
@@ -3843,7 +3843,7 @@ err_:
             oTable.Cell(1, 5).Range.Text = LNGIniFile.GetString("MOD_OPENOFFICE", "MSG49", "Выполнение")
 
             rscount = New Recordset
-            rscount.Open("SELECT * FROM Remont WHERE id_comp=" & sID & " ORDER by Date", DB7,
+            rscount.Open("SELECT * FROM Remont WHERE id_comp=" & sID & " ORDER BY D_T", DB7,
                          CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
             'Dim A As String
@@ -3853,7 +3853,7 @@ err_:
                 .MoveFirst()
                 Do While Not .EOF = True
 
-                    oTable.Cell(intj, 1).Range.Text = .Fields("Date").Value
+                    oTable.Cell(intj, 1).Range.Text = .Fields("D_T").Value
                     oTable.Cell(intj, 2).Range.Text = .Fields("Remont").Value
                     oTable.Cell(intj, 3).Range.Text = .Fields("Master").Value
                     oTable.Cell(intj, 4).Range.Text = .Fields("Uroven").Value
@@ -4001,7 +4001,7 @@ err_:
 
                 If FirstColumn Then
                     If Not IsDBNull(rs.Fields(lngCounter).Value) Then
-                       
+
                         With Wrd.Selection.Find
                             .Text = rs.Fields(lngCounter).Name
                             .Replacement.Text = rs.Fields(lngCounter).Value
@@ -4369,7 +4369,7 @@ err_:
                         oTable.Cell(intj, 1).Range.Text = .Fields("oldMesto").Value
                         oTable.Cell(intj, 2).Range.Text = .Fields("NewMesto").Value
                         oTable.Cell(intj, 3).Range.Text = .Fields("Prich").Value
-                        oTable.Cell(intj, 4).Range.Text = .Fields("data").Value
+                        oTable.Cell(intj, 4).Range.Text = .Fields("D_T").Value
                         intj = intj + 1
 
                         .MoveNext()
@@ -4437,7 +4437,7 @@ err_:
                     .MoveFirst()
                     Do While Not .EOF = True
 
-                        oTable.Cell(intj, 1).Range.Text = .Fields("Date").Value
+                        oTable.Cell(intj, 1).Range.Text = .Fields("D_T").Value
                         oTable.Cell(intj, 2).Range.Text = .Fields("Remont").Value
                         oTable.Cell(intj, 3).Range.Text = .Fields("Master").Value
                         oTable.Cell(intj, 4).Range.Text = .Fields("Uroven").Value
@@ -4573,7 +4573,7 @@ err_:
             sMASTER = .Fields("Master").Value
 
             sISTOCHNIK = .Fields("istochnik").Value
-            sDATE = .Fields("Date").Value
+            sDATE = .Fields("D_T").Value
             sIDCMP = .Fields("Id_Comp").Value
 
         End With
@@ -4673,7 +4673,7 @@ err_:
             Case "OpenOffice.org"
                 Dim oSM As Object            'Root object for accessing OpenOffice FROM VB
                 Dim oDesk, oDoc As Object 'First objects FROM the API
-                Dim arg(- 1) As Object             'Ignore it for the moment !
+                Dim arg(-1) As Object             'Ignore it for the moment !
 
                 oSM = CreateObject("com.sun.star.ServiceManager")
 
@@ -4741,7 +4741,7 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "Объект"
@@ -4755,7 +4755,7 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "Модель"
@@ -4769,7 +4769,7 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "Дефект"
@@ -4783,7 +4783,7 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "Мастер"
@@ -4797,7 +4797,7 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
 
                 With Wrd.Selection.Find
                     .Text = "Число"
@@ -4811,14 +4811,14 @@ err_:
                     ' .MatchSoundsLike = False
                     .MatchAllWordForms = False
                 End With
-                Wrd.Selection.Find.Execute(Replace := WdReplace.wdReplaceAll)
+                Wrd.Selection.Find.Execute(Replace:=WdReplace.wdReplaceAll)
                 WrdDc = Nothing
                 Wrd = Nothing
 
         End Select
 
         Exit Sub
-        err_:
+err_:
         MsgBox(Err.Description, MsgBoxStyle.Critical, ProGramName)
     End Sub
 
@@ -4879,14 +4879,14 @@ err_:
             If Not IsDBNull(.Fields("srok").Value) Then sDATE = .Fields("srok").Value
             If Not IsDBNull(.Fields("Id_Comp").Value) Then sIDCMP = .Fields("Id_Comp").Value
             If Not IsDBNull(.Fields("Uroven").Value) Then sTIP = .Fields("Uroven").Value
-            If Not IsDBNull(.Fields("MeMo").Value) Then sMEMO = .Fields("MeMo").Value
+            If Not IsDBNull(.Fields("PAMIATKA").Value) Then sMEMO = .Fields("PAMIATKA").Value
 
             If Not IsDBNull(.Fields("starttime").Value) Then stTIME = .Fields("starttime").Value
             If Not IsDBNull(.Fields("startdate").Value) Then stDATE = .Fields("startdate").Value
 
             If Not IsDBNull(.Fields("stoptime").Value) Then spTIME = .Fields("stoptime").Value
             If Not IsDBNull(.Fields("stopdate").Value) Then spDATE = .Fields("stopdate").Value
-            If Not IsDBNull(.Fields("Summ").Value) Then spCena = .Fields("Summ").Value
+            If Not IsDBNull(.Fields("CUMMA").Value) Then spCena = .Fields("CUMMA").Value
             If Not IsDBNull(.Fields("GARANT").Value) Then sGAR = .Fields("GARANT").Value
 
         End With

@@ -60,7 +60,7 @@
         Dim sSQL As String 'Переменная, где будет размещён SQL запрос
 
         lstShed.Items.Clear()
-        sSQL = "SELECT id, DATA, OPIS, foruser FROM Sheduler order by DATA DESC"
+        sSQL = "SELECT id, D_T, OPIS, foruser FROM Sheduler ORDER BY D_T DESC"
 
         rs = New Recordset
         rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -74,8 +74,8 @@
             Do While Not .EOF
 
                 If _
-                    .Fields(1).Value <= Date.Today.AddDays(- 2) Or
-                    .Fields(1).Value >= Date.Today.AddDays(+ 2) And .Fields(3).Value <> UserNames Then
+                    .Fields(1).Value <= Date.Today.AddDays(-2) Or
+                    .Fields(1).Value >= Date.Today.AddDays(+2) And .Fields(3).Value <> UserNames Then
 
                 Else
 
@@ -114,7 +114,7 @@
         ResList(Me.lstShed)
 
         Exit Sub
-        Error_:
+Error_:
     End Sub
 
     Private Sub btnAll_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAll.Click
@@ -124,7 +124,7 @@
         Dim sSQL As String 'Переменная, где будет размещён SQL запрос
 
         lstShed.Items.Clear()
-        sSQL = "SELECT id, DATA, OPIS, foruser FROM Sheduler order by DATA DESC"
+        sSQL = "SELECT id, D_T, OPIS, foruser FROM Sheduler ORDER BY D_T DESC"
 
         rs = New Recordset
         rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
@@ -168,7 +168,7 @@
         ResList(Me.lstShed)
 
         Exit Sub
-        Error_:
+Error_:
     End Sub
 
     Private Sub lstShed_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles lstShed.DoubleClick
@@ -188,7 +188,7 @@
 
         With rs
 
-            If Not IsDBNull(.Fields("DATA").Value) Then DTSHED.Value = .Fields("DATA").Value
+            If Not IsDBNull(.Fields("D_T").Value) Then DTSHED.Value = .Fields("D_T").Value
             If Not IsDBNull(.Fields("OPIS").Value) Then txtShed.Text = .Fields("OPIS").Value
             If Not IsDBNull(.Fields("foruser").Value) Then cmbUser.Text = .Fields("foruser").Value
 
@@ -232,7 +232,7 @@
                 .AddNew()
             End If
 
-            .Fields("DATA").Value = DTSHED.Value
+            .Fields("D_T").Value = DTSHED.Value
             .Fields("OPIS").Value = txtShed.Text
             .Fields("foruser").Value = cmbUser.Text
             .Fields("FROMuser").Value = uSERID
@@ -249,7 +249,7 @@
         Call SHED_CHECK()
 
         Exit Sub
-        Error_:
+Error_:
     End Sub
 
     Private Sub btnDel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnDel.Click
