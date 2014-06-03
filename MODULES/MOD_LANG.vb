@@ -1114,22 +1114,16 @@ Module modLang
 
         lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstSOFT1", "id"), 20, HorizontalAlignment.Left)
 
-        lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstSOFT9", "Номер ПО"), 20, HorizontalAlignment.Left)
+        ' lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstSOFT9", "Номер ПО"), 20, HorizontalAlignment.Left)
 
-        lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstSOFT2", "Программное обеспечение"), 300,
-                              HorizontalAlignment.Left)
-        lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstSOFT3", "Лицензионный ключ"), 100,
-                              HorizontalAlignment.Left)
-        lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstSOFT4", "Лицензия"), 100,
-                              HorizontalAlignment.Left)
-        lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstSOFT5", "Дата установки"), 60,
-                              HorizontalAlignment.Left)
-        lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstSOFT6", "Дата окончания"), 60,
-                              HorizontalAlignment.Left)
-        lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstSOFT7", "Производитель"), 200,
-                              HorizontalAlignment.Left)
-        lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstSOFT8", "Тип программного обеспечения"), 100,
-                              HorizontalAlignment.Left)
+        lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstSOFT2", "Программное обеспечение"), 300, HorizontalAlignment.Left)
+        lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstSOFT10", "Версия"), 100, HorizontalAlignment.Left)
+        lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstSOFT3", "Лицензионный ключ"), 100, HorizontalAlignment.Left)
+        lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstSOFT4", "Лицензия"), 100, HorizontalAlignment.Left)
+        lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstSOFT5", "Дата установки"), 60, HorizontalAlignment.Left)
+        lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstSOFT6", "Дата окончания"), 60, HorizontalAlignment.Left)
+        lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstSOFT7", "Производитель"), 200, HorizontalAlignment.Left)
+        lstGroups.Columns.Add(objIniFile.GetString("frmComputers", "lstSOFT8", "Тип программного обеспечения"), 100, HorizontalAlignment.Left)
 
         'ResList(lstGroups)
     End Sub

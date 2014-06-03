@@ -1,4 +1,5 @@
 ﻿
+
 Public Class frmDirectory
     Private curr As Integer 'esq
     Private m_SortingColumn As ColumnHeader
@@ -293,7 +294,6 @@ Public Class frmDirectory
         Handles tvDirectory.AfterSelect
 
         curr = 0 'esq
-
         lvDirectory.Sorting = SortOrder.None
         lvDirectory.ListViewItemSorter = Nothing
 
@@ -336,19 +336,18 @@ Public Class frmDirectory
         Me.lvDirectory.Columns.Clear()
         Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory1", "id"), 20,
                                    HorizontalAlignment.Left)
-        Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory2", "Наименование"), 250,
+        Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory2", "Наименование"), 300,
                                    HorizontalAlignment.Left)
-        Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory3", "Производитель"), 250,
+        Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "lvDirectory3", "Производитель"), 300,
                                    HorizontalAlignment.Left)
-
-        'esq  добавил Тип ПО
+'esq  добавил Тип ПО
         If tvDirectory.SelectedNode.Text = objIniFile.GetString("frmDirectory", "MSG56", "Программное обеспечение") Then
             Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "gb1", "Тип"), 100,
                                        HorizontalAlignment.Left)
         End If
 
         Me.lvDirectory.Columns.Add(objIniFile.GetString("frmDirectory", "MSG99", "Используется"), 70,
-                                    HorizontalAlignment.Left)
+                                   HorizontalAlignment.Left)
 
         FillComboNET(Me.cmbName3, "PROIZV", "SPR_PROIZV", "", False, True)
 
@@ -1300,13 +1299,12 @@ Public Class frmDirectory
 
                 FillComboNET(Me.cmbName2, "Name", "SPR_TIP_PO", "", False, True)
 
-                'esq  добавил Тип ПО
                 If unamDB <> "MS Access" Or unamDB <> "MS Access 2007" Then
-                    sSQL =
-                        "SELECT SPR_PO.Id, SPR_PO.Name, SPR_PROIZV.PROIZV, SPR_PO.A FROM SPR_PROIZV INNER JOIN SPR_PO ON (SPR_PROIZV.id = SPR_PO.Proizv) AND (SPR_PROIZV.iD = SPR_PO.Proizv) WHERE ((SPR_PO.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
+                    'sSQL = "SELECT SPR_PO.Id, SPR_PO.Name, SPR_PROIZV.PROIZV FROM SPR_PROIZV INNER JOIN SPR_PO ON (SPR_PROIZV.id = SPR_PO.Proizv) AND (SPR_PROIZV.iD = SPR_PO.Proizv) WHERE ((SPR_PO.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
+                    sSQL = "SELECT SPR_PO.Id, SPR_PO.Name, SPR_PROIZV.PROIZV, SPR_PO.A FROM SPR_PROIZV INNER JOIN SPR_PO ON (SPR_PROIZV.id = SPR_PO.Proizv) AND (SPR_PROIZV.iD = SPR_PO.Proizv) WHERE ((SPR_PO.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
                 Else
                     sSQL =
-                        "SELECT SPR_PO.Id, SPR_PO.Name, SPR_PROIZV.PROIZV, SPR_PO.A, (Select count(*) FROM SOFT_INSTALL where SOFT_INSTALL.Soft=SPR_PO.Name) as temp FROM SPR_PROIZV INNER JOIN SPR_PO ON (SPR_PROIZV.id = SPR_PO.Proizv) AND (SPR_PROIZV.iD = SPR_PO.Proizv) WHERE ((SPR_PO.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
+                        "SELECT SPR_PO.Id, SPR_PO.Name, SPR_PROIZV.PROIZV, (Select count(*) FROM SOFT_INSTALL where SOFT_INSTALL.Soft=SPR_PO.Name) as temp FROM SPR_PROIZV INNER JOIN SPR_PO ON (SPR_PROIZV.id = SPR_PO.Proizv) AND (SPR_PROIZV.iD = SPR_PO.Proizv) WHERE ((SPR_PO.Proizv=SPR_PROIZV.iD)) ORDER BY NAME"
                 End If
 
 
@@ -1389,7 +1387,7 @@ Public Class frmDirectory
         rs.Close()
         rs = Nothing
 
-        'esq ******** отредактированый элемент -> в поле зрения
+'esq ******** отредактированый элемент -> в поле зрения
         If (Not IsNothing(curr) = True) And (lvDirectory.Items.Count > 0) Then
             lvDirectory.EnsureVisible(curr)
             lvDirectory.Items(curr).Selected = True
@@ -2554,7 +2552,7 @@ Public Class frmDirectory
 
                 Call LOAD_LIST_SPR()
 
-                btnDirAdd.Text = objIniFile.GetString("frmDirectory", "btnDirAdd", "Добавить")
+            btnDirAdd.Text = objIniFile.GetString("frmDirectory", "btnDirAdd", "Добавить")
                 eDTI = False
                 Exit Sub
 
@@ -2737,7 +2735,7 @@ Public Class frmDirectory
             Case objIniFile.GetString("frmDirectory", "MSG48", "Производители")
 
                 sTABLE = "0"
-                cmbName.Text = Replace(cmbName.Text, "'", "") 'esq
+cmbName.Text = Replace(cmbName.Text, "'", "") 'esq
                 If eDTI = False Then
 
                     If Not (RSExists("PROYZV", "PROiZV", cmbName.Text)) Then
@@ -2939,7 +2937,7 @@ Public Class frmDirectory
                    "C='" & LTrim(sPAR3) & "'," &
                    "Prim='" & LTrim(sPRIM) & "'" & "WHERE id = " & dSID
 
-                    'esq **********
+'esq **********
                     Dim rs2 As Recordset
 
                     rs2 = New Recordset
@@ -2965,15 +2963,13 @@ Public Class frmDirectory
                     rs2.Close()
                     rs2 = Nothing
                     'esq **********
-
             End Select
 
         End If
 
         DB7.Execute(sSQL)
 
-        curr = lvDirectory.FocusedItem.Index 'esq
-
+ curr = lvDirectory.FocusedItem.Index 'esq
 Ar:
         Me.BeginInvoke(New MethodInvoker(AddressOf LOAD_LIST_SPR))
         ' Call LOAD_LIST_SPR()

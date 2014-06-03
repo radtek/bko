@@ -97,6 +97,7 @@ Partial Class frmReports
         Me.Label13 = New System.Windows.Forms.Label()
         Me.cmbOffice = New System.Windows.Forms.ComboBox()
         Me.cmbOthers = New System.Windows.Forms.ComboBox()
+        Me.rbAlltech = New System.Windows.Forms.RadioButton()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.lblReport2Cl = New System.Windows.Forms.Label()
@@ -155,7 +156,6 @@ Partial Class frmReports
         Me.cmbPPR_Year = New System.Windows.Forms.ComboBox()
         Me.btnPPR_Update = New System.Windows.Forms.Button()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.rbAlltech = New System.Windows.Forms.RadioButton()
         Me.sSTAB1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.TableLayoutPanel3.SuspendLayout()
@@ -1060,6 +1060,17 @@ Partial Class frmReports
         Me.cmbOthers.TabIndex = 47
         Me.cmbOthers.Visible = False
         '
+        'rbAlltech
+        '
+        Me.rbAlltech.AutoSize = True
+        Me.rbAlltech.Location = New System.Drawing.Point(357, 30)
+        Me.rbAlltech.Name = "rbAlltech"
+        Me.rbAlltech.Size = New System.Drawing.Size(87, 17)
+        Me.rbAlltech.TabIndex = 48
+        Me.rbAlltech.TabStop = True
+        Me.rbAlltech.Text = "Вся техника"
+        Me.rbAlltech.UseVisualStyleBackColor = True
+        '
         'TabPage2
         '
         Me.TabPage2.Controls.Add(Me.TableLayoutPanel2)
@@ -1760,17 +1771,6 @@ Partial Class frmReports
         Me.ToolTip1.InitialDelay = 500
         Me.ToolTip1.IsBalloon = True
         Me.ToolTip1.ReshowDelay = 100
-        '
-        'rbAlltech
-        '
-        Me.rbAlltech.AutoSize = True
-        Me.rbAlltech.Location = New System.Drawing.Point(357, 30)
-        Me.rbAlltech.Name = "rbAlltech"
-        Me.rbAlltech.Size = New System.Drawing.Size(87, 17)
-        Me.rbAlltech.TabIndex = 48
-        Me.rbAlltech.TabStop = True
-        Me.rbAlltech.Text = "Вся техника"
-        Me.rbAlltech.UseVisualStyleBackColor = True
         '
         'frmReports
         '

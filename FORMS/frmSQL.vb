@@ -221,8 +221,14 @@
             If Len(strTmp) = 0 Then Exit Sub
 
             Dim sSQL As String
-            sSQL = "INSERT INTO T_Que (name,sqlsq) VALUES ('" & strTmp & "',""" & txtQ.Text & """)"
+ 'esq *********
+            If Not RSExists("T_Que", "Name", strTmp) Then
+                sSQL = "INSERT INTO T_Que (name,sqlsq) VALUES ('" & strTmp & "',""" & txtQ.Text & """)"
+            Else
+                sSQL = "UPDATE T_Que SET sqlsq=""" & txtQ.Text & """ WHERE Name='" & strTmp & "'"
+            End If
             DB7.Execute(sSQL)
+            'esq *********
 
             'With T_Que
             '    .AddNew()

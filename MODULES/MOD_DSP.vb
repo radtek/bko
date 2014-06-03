@@ -819,7 +819,7 @@
         End With
 
         Dim sSQL As String
-        sSQL = "INSERT INTO Update_Log (Id_Comp,Komcl_old,Kompl_new,[Date],[Time]) VALUES (" & frmComputers.sCOUNT & ",'" & A & "','" & A2 & "','" & Date.Today & "','" & strTime & "')"
+        sSQL = "INSERT INTO Update_Log (Id_Comp,Komcl_old,Kompl_new,D_T,T_M) VALUES (" & frmComputers.sCOUNT & ",'" & A & "','" & A2 & "','" & Date.Today & "','" & strTime & "')"
         DB7.Execute(sSQL)
 
 
@@ -832,15 +832,15 @@
         '    .Fields("Id_Comp").Value = frmComputers.sCOUNT
         '    .Fields("Komcl_old").Value = A
         '    .Fields("Kompl_new").Value = A2
-        '    .Fields("Date").Value = Date.Today
-        '    .Fields("Time").Value = strTime
+        '    .Fields("D_T").Value = Date.Today
+        '    .Fields("T_M").Value = strTime
 
         '    .Update()
         'End With
         'rs.Close()
         'rs = Nothing
 
-        'uLOG.Open "INSERT INTO Update_Log (Id_Comp, Komcl_old, Kompl_new, Date,Time) VALUES ('" & frmMain.nomerPCAbs & "', '" & A & "', '" & A2 & "', '" & strDate & "', '" & strTime & "')", DB7, adOpenDynamic, adLockOptimistic
+        'uLOG.Open "INSERT INTO Update_Log (Id_Comp, Komcl_old, Kompl_new, D_T,T_M) VALUES ('" & frmMain.nomerPCAbs & "', '" & A & "', '" & A2 & "', '" & strDate & "', '" & strTime & "')", DB7, adOpenDynamic, adLockOptimistic
 
 
         Exit Function
@@ -944,17 +944,17 @@ Error_:
         Select Case DB_N
 
             Case "DSN"
-                sSQL = "INSERT INTO T_Log (User_ID,Activity,Date,Time) VALUES ('" & uSERID & "-on-" & uPCNAME & "','" & Aktivitas & "','" & strDate(0) & "','" & strTime & "')"
+                sSQL = "INSERT INTO T_Log (User_ID,Activity,D_T,T_M) VALUES ('" & uSERID & "-on-" & uPCNAME & "','" & Aktivitas & "','" & strDate(0) & "','" & strTime & "')"
             Case "PostgreSQL"
-                sSQL = "INSERT INTO T_Log (User_ID,Activity,Date,Time) VALUES ('" & uSERID & "-on-" & uPCNAME & "','" & Aktivitas & "','" & strDate(0) & "','" & strTime & "')"
+                sSQL = "INSERT INTO T_Log (User_ID,Activity,D_T,T_M) VALUES ('" & uSERID & "-on-" & uPCNAME & "','" & Aktivitas & "','" & strDate(0) & "','" & strTime & "')"
 
             Case "MySQL"
 
-                sSQL = "INSERT INTO T_Log (User_ID,Activity,Date,Time) VALUES ('" & uSERID & "-on-" & uPCNAME & "','" & Aktivitas & "','" & strDate(0) & "','" & strTime & "')"
+                sSQL = "INSERT INTO T_Log (User_ID,Activity,D_T,T_M) VALUES ('" & uSERID & "-on-" & uPCNAME & "','" & Aktivitas & "','" & strDate(0) & "','" & strTime & "')"
 
             Case Else
 
-                sSQL = "INSERT INTO T_Log (User_ID,Activity,[Date],[Time]) VALUES ('" & uSERID & "-on-" & uPCNAME & "','" & Aktivitas & "','" & strDate(0) & "','" & strTime & "')"
+                sSQL = "INSERT INTO T_Log (User_ID,Activity,D_T,T_M) VALUES ('" & uSERID & "-on-" & uPCNAME & "','" & Aktivitas & "','" & strDate(0) & "','" & strTime & "')"
 
         End Select
 
@@ -968,8 +968,8 @@ Error_:
         '    .AddNew()
         '    .Fields("User_ID").Value = uSERID & "-on-" & uPCNAME
         '    .Fields("Activity").Value = Aktivitas
-        '    .Fields("Date").Value = Date.Today
-        '    .Fields("Time").Value = strTime
+        '    .Fields("D_T").Value = Date.Today
+        '    .Fields("T_M").Value = strTime
         '    .Update()
         'End With
         'rs.Close()

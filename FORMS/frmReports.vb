@@ -9,6 +9,7 @@ Public Class frmReports
     Private pTEXT(2) As String
     Private TIPST As String
 
+    Public tmp_mesta As String 'esq
 
     Private Sub frmReports_Activated(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Activated
 
@@ -199,14 +200,14 @@ Public Class frmReports
 
         poPs = langIni.GetString("frmReports", "MSG1", "Все")
 
-        'SELECT Remont.Id, Remont.Date, Remont.Id_Comp, Remont.Remont, Remont.Uroven, Remont.Master, Remont.NomerRemKomp, Remont.Comp_Name, Remont.Mesto_Compa, Remont.vip, Remont.UserName, Remont.istochnik, Remont.phone, Remont.srok, Remont.name_of_remont, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE master='" & CmbRemont.Text & "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt;
+        'SELECT Remont.Id, Remont.D_T, Remont.Id_Comp, Remont.Remont, Remont.Uroven, Remont.Master, Remont.NomerRemKomp, Remont.Comp_Name, Remont.Mesto_Compa, Remont.vip, Remont.UserName, Remont.istochnik, Remont.phone, Remont.srok, Remont.name_of_remont, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE master='" & CmbRemont.Text & "' ORDER BY Remont.D_T DESC, Remont.id DESC, Remont.zakryt;
 
         If CmbRemont.Text <> poPs And chkFltr.Checked = False And chkUroven.Checked = False And ChckVip.Checked = False _
             Then
-            ' sSQL = "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE master='" & CmbRemont.Text & "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
+            ' sSQL = "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE master='" & CmbRemont.Text & "' ORDER BY Remont.D_T DESC, Remont.id DESC, Remont.zakryt"
             sSQL =
                 "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE master='" &
-                CmbRemont.Text & "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
+                CmbRemont.Text & "' ORDER BY Remont.D_T DESC, Remont.id DESC, Remont.zakryt"
             rs = New Recordset
             rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
             GoTo ADR
@@ -217,7 +218,7 @@ Public Class frmReports
             sSQL =
                 "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE master='" &
                 CmbRemont.Text & "' AND uroven='" & cmbUr.Text &
-                "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
+                "' ORDER BY Remont.D_T DESC, Remont.id DESC, Remont.zakryt"
             rs = New Recordset
             rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
             GoTo ADR
@@ -228,7 +229,7 @@ Public Class frmReports
             sSQL =
                 "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE master='" &
                 CmbRemont.Text & "' AND uroven='" & cmbUr.Text & "' AND vip='" & cmbVip.Text &
-                "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
+                "' ORDER BY Remont.D_T DESC, Remont.id DESC, Remont.zakryt"
             rs = New Recordset
             rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
             GoTo ADR
@@ -239,7 +240,7 @@ Public Class frmReports
             sSQL =
                 "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE master='" &
                 CmbRemont.Text & "' AND vip='" & cmbVip.Text &
-                "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
+                "' ORDER BY Remont.D_T DESC, Remont.id DESC, Remont.zakryt"
             rs = New Recordset
             rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
             GoTo ADR
@@ -249,7 +250,7 @@ Public Class frmReports
         If CmbRemont.Text = poPs And chkFltr.Checked = False And chkUroven.Checked = False And ChckVip.Checked = False _
             Then
             sSQL =
-                "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
+                "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID ORDER BY Remont.D_T DESC, Remont.id DESC, Remont.zakryt"
             rs = New Recordset
             rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
             GoTo ADR
@@ -259,7 +260,7 @@ Public Class frmReports
             Then
             sSQL =
                 "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE uroven='" &
-                cmbUr.Text & "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
+                cmbUr.Text & "' ORDER BY Remont.D_T DESC, Remont.id DESC, Remont.zakryt"
             rs = New Recordset
             rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
             GoTo ADR
@@ -269,7 +270,7 @@ Public Class frmReports
             Then
             sSQL =
                 "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE uroven='" &
-                cmbUr.Text & "' AND vip='" & cmbVip.Text & "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
+                cmbUr.Text & "' AND vip='" & cmbVip.Text & "' ORDER BY Remont.D_T DESC, Remont.id DESC, Remont.zakryt"
             rs = New Recordset
             rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
             GoTo ADR
@@ -279,21 +280,30 @@ Public Class frmReports
             Then
             sSQL =
                 "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE vip='" &
-                cmbVip.Text & "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
+                cmbVip.Text & "' ORDER BY Remont.D_T DESC, Remont.id DESC, Remont.zakryt"
             rs = New Recordset
             rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
             GoTo ADR
         End If
         '#########
 
+
+        Dim D1, D2 As String
+
+        D1 = "#" & DTP.Value.Month & "/" & DTP.Value.Day & "/" & DTP.Value.Year & "#"
+
+        D2 = "#" & DTPD.Value.Month & "/" & DTPD.Value.Day & "/" & DTPD.Value.Year & "#"
+
+        ''Было АДДР2 поменял на АДДР
+
         If CmbRemont.Text <> poPs And chkFltr.Checked = True And chkUroven.Checked = False And ChckVip.Checked = False _
             Then
             sSQL =
                 "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE master='" &
-                CmbRemont.Text & "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
+                CmbRemont.Text & "' AND (Remont.D_T BETWEEN " & D1 & " AND " & D2 & ") ORDER BY Remont.D_T DESC, Remont.id DESC, Remont.zakryt"
             rs = New Recordset
             rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-            GoTo ADR2
+            GoTo ADR
         End If
 
         If CmbRemont.Text <> poPs And chkFltr.Checked = True And chkUroven.Checked = True And ChckVip.Checked = False _
@@ -301,10 +311,10 @@ Public Class frmReports
             sSQL =
                 "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE master='" &
                 CmbRemont.Text & "' AND uroven='" & cmbUr.Text &
-                "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
+                "' AND (Remont.D_T BETWEEN " & D1 & " AND " & D2 & ") ORDER BY Remont.D_T DESC, Remont.id DESC, Remont.zakryt"
             rs = New Recordset
             rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-            GoTo ADR2
+            GoTo ADR
         End If
 
         If CmbRemont.Text <> poPs And chkFltr.Checked = True And chkUroven.Checked = True And ChckVip.Checked = True _
@@ -312,10 +322,10 @@ Public Class frmReports
             sSQL =
                 "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE master='" &
                 CmbRemont.Text & "' AND uroven='" & cmbUr.Text & "' AND vip='" & cmbVip.Text &
-                "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
+                "' AND (Remont.D_T BETWEEN " & D1 & " AND " & D2 & ")  ORDER BY Remont.D_T DESC, Remont.id DESC, Remont.zakryt"
             rs = New Recordset
             rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-            GoTo ADR2
+            '  GoTo ADR2
         End If
 
         If CmbRemont.Text <> poPs And chkFltr.Checked = True And ChckVip.Checked = True And chkUroven.Checked = False _
@@ -323,48 +333,48 @@ Public Class frmReports
             sSQL =
                 "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE master='" &
                 CmbRemont.Text & "' AND vip='" & cmbVip.Text &
-                "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
+                "' AND (Remont.D_T BETWEEN " & D1 & " AND " & D2 & ")  ORDER BY Remont.D_T DESC, Remont.id DESC, Remont.zakryt"
             rs = New Recordset
             rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-            GoTo ADR2
+            GoTo ADR
         End If
 
         If CmbRemont.Text = poPs And chkFltr.Checked = True And chkUroven.Checked = False And ChckVip.Checked = False _
             Then
             sSQL =
-                "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
+                "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID where (Remont.D_T BETWEEN " & D1 & " AND " & D2 & ") ORDER BY Remont.D_T DESC, Remont.id DESC, Remont.zakryt"
             rs = New Recordset
             rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-            GoTo ADR2
+            GoTo ADR
         End If
 
         If CmbRemont.Text = poPs And chkFltr.Checked = True And chkUroven.Checked = True And ChckVip.Checked = False _
             Then
             sSQL =
                 "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE uroven='" &
-                cmbUr.Text & "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
+                cmbUr.Text & "' and (Remont.D_T BETWEEN " & D1 & " AND " & D2 & ") ORDER BY Remont.D_T DESC, Remont.id DESC, Remont.zakryt"
             rs = New Recordset
             rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-            GoTo ADR2
+            GoTo ADR
         End If
 
         If CmbRemont.Text = poPs And chkFltr.Checked = True And chkUroven.Checked = True And ChckVip.Checked = True Then
             sSQL =
                 "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE uroven='" &
-                cmbUr.Text & "' AND vip='" & cmbVip.Text & "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
+                cmbUr.Text & "' AND vip='" & cmbVip.Text & "' and (Remont.D_T BETWEEN " & D1 & " AND " & D2 & ") ORDER BY Remont.D_T DESC, Remont.id DESC, Remont.zakryt"
             rs = New Recordset
             rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-            GoTo ADR2
+            GoTo ADR
         End If
 
         If CmbRemont.Text = poPs And chkFltr.Checked = True And ChckVip.Checked = True And chkUroven.Checked = False _
             Then
             sSQL =
                 "SELECT Remont.*, kompy.Ser_N_SIS FROM Remont INNER JOIN kompy ON Remont.Id_Comp = kompy.ID AND Remont.Id_Comp = kompy.ID WHERE vip='" &
-                cmbVip.Text & "' ORDER BY Remont.date DESC, Remont.id DESC, Remont.zakryt"
+                cmbVip.Text & "' and (Remont.D_T BETWEEN " & D1 & " AND " & D2 & ") ORDER BY Remont.D_T DESC, Remont.id DESC, Remont.zakryt"
             rs = New Recordset
             rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
-            GoTo ADR2
+            GoTo ADR
         End If
 
         rs.Close()
@@ -406,7 +416,13 @@ ADR:
 
                         End Select
 
-                        lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("Date").Value)
+                        If Not IsDBNull(.Fields("D_T").Value) Then
+                            lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("D_T").Value)
+                        Else
+                            lvRemont.Items(CInt(intCount)).SubItems.Add("")
+
+                        End If
+
                         lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("Remont").Value)
 
                         If Not IsDBNull(.Fields("Uroven").Value) Then
@@ -444,8 +460,8 @@ ADR:
 
                         End If
 
-                        If Not IsDBNull(.Fields("UserName").Value) Then
-                            lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("UserName").Value)
+                        If Not IsDBNull(.Fields("User_Name").Value) Then
+                            lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("User_Name").Value)
                         Else
                             lvRemont.Items(CInt(intCount)).SubItems.Add("")
 
@@ -453,25 +469,31 @@ ADR:
 
 
                         If Not IsDBNull(.Fields("stoptime").Value) Then
-                            Dim A1 As Integer
-                            Dim A3, A2 As String
+                            If Not IsDBNull(.Fields("startdate").Value) Then
 
-                            Dim age As Integer
-                            age = DateDiff(DateInterval.Day, .Fields("startdate").Value, .Fields("stopdate").Value)
-                            A1 = DateDiff(DateInterval.Minute, .Fields("starttime").Value, .Fields("stoptime").Value)
+                                Dim A1 As Integer
+                                Dim A3, A2 As String
 
-                            A2 = (A1 \ 60)
-                            A1 = (A1 Mod 60)
+                                Dim age As Integer
+                                age = DateDiff(DateInterval.Day, .Fields("startdate").Value, .Fields("stopdate").Value)
+                                A1 = DateDiff(DateInterval.Minute, .Fields("starttime").Value, .Fields("stoptime").Value)
 
-                            A3 = age & " " & langIni.GetString("frmReports", "MSG42", "дн.") & " " & A2 & ":" & A1 & " " &
-                                 langIni.GetString("frmReports", "MSG43", "ч.")
+                                A2 = (A1 \ 60)
+                                A1 = (A1 Mod 60)
+
+                                A3 = age & " " & langIni.GetString("frmReports", "MSG42", "дн.") & " " & A2 & ":" & A1 & " " &
+                                     langIni.GetString("frmReports", "MSG43", "ч.")
 
 
-                            lvRemont.Items(CInt(intCount)).SubItems.Add(A3)
-                        Else
-                            lvRemont.Items(CInt(intCount)).SubItems.Add("")
+                                lvRemont.Items(CInt(intCount)).SubItems.Add(A3)
+                            Else
+
+                                lvRemont.Items(CInt(intCount)).SubItems.Add("")
+
+                            End If
 
                         End If
+
 
                         If Not IsDBNull(.Fields("Ser_N_SIS").Value) Then
                             lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("Ser_N_SIS").Value)
@@ -509,7 +531,15 @@ ADR:
 
                             End Select
 
-                            lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("Date").Value)
+                            'lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("D_T").Value)
+                            If Not IsDBNull(.Fields("D_T").Value) Then
+                                lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("D_T").Value)
+                            Else
+                                lvRemont.Items(CInt(intCount)).SubItems.Add("")
+
+                            End If
+
+
                             lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("Remont").Value)
 
                             If Not IsDBNull(.Fields("Uroven").Value) Then
@@ -547,8 +577,8 @@ ADR:
 
                             End If
 
-                            If Not IsDBNull(.Fields("UserName").Value) Then
-                                lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("UserName").Value)
+                            If Not IsDBNull(.Fields("User_Name").Value) Then
+                                lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("User_Name").Value)
                             Else
                                 lvRemont.Items(CInt(intCount)).SubItems.Add("")
 
@@ -556,21 +586,28 @@ ADR:
 
 
                             If Not IsDBNull(.Fields("stoptime").Value) Then
-                                Dim A1 As Integer
-                                Dim A3, A2 As String
-                                Dim age As Integer
-                                age = DateDiff(DateInterval.Day, .Fields("startdate").Value, .Fields("stopdate").Value)
-                                A1 = DateDiff(DateInterval.Minute, .Fields("starttime").Value, .Fields("stoptime").Value)
+                                If Not IsDBNull(.Fields("startdate").Value) Then
 
-                                A2 = (A1 \ 60)
-                                A1 = (A1 Mod 60)
+                                    Dim A1 As Integer
+                                    Dim A3, A2 As String
 
-                                A3 = age & " " & langIni.GetString("frmReports", "MSG42", "дн.") & " " & A2 & ":" & A1 &
-                                     " " & langIni.GetString("frmReports", "MSG43", "ч.")
+                                    Dim age As Integer
+                                    age = DateDiff(DateInterval.Day, .Fields("startdate").Value, .Fields("stopdate").Value)
+                                    A1 = DateDiff(DateInterval.Minute, .Fields("starttime").Value, .Fields("stoptime").Value)
 
-                                lvRemont.Items(CInt(intCount)).SubItems.Add(A3)
-                            Else
-                                lvRemont.Items(CInt(intCount)).SubItems.Add("")
+                                    A2 = (A1 \ 60)
+                                    A1 = (A1 Mod 60)
+
+                                    A3 = age & " " & langIni.GetString("frmReports", "MSG42", "дн.") & " " & A2 & ":" & A1 & " " &
+                                         langIni.GetString("frmReports", "MSG43", "ч.")
+
+
+                                    lvRemont.Items(CInt(intCount)).SubItems.Add(A3)
+                                Else
+
+                                    lvRemont.Items(CInt(intCount)).SubItems.Add("")
+
+                                End If
 
                             End If
 
@@ -601,247 +638,247 @@ ADR:
 
 
         Exit Sub
-ADR2:
+        'ADR2:
 
-        intCount = 0
+        '        intCount = 0
 
-        With rs
-            .MoveFirst()
-            Do While Not .EOF
+        '        With rs
+        '            .MoveFirst()
+        '            Do While Not .EOF
 
-                Select Case chkNZ.Checked
+        '                Select Case chkNZ.Checked
 
-                    Case False
+        '                    Case False
 
-                        SP = rs.Fields("Date").Value
-                        PP = rs.Fields("Date").Value
+        '                        SP = rs.Fields("D_T").Value
+        '                        PP = rs.Fields("D_T").Value
 
-                        If SP >= DTP.Value Then
-                            If SP <= DTPD.Value Then
+        '                        If SP >= DTP.Value Then
+        '                            If SP <= DTPD.Value Then
 
-                                If .Fields("zakryt").Value = 1 Or .Fields("zakryt").Value = True Then
-                                    uname = 0
-                                Else
-                                    uname = 1
-                                End If
+        '                                If .Fields("zakryt").Value = 1 Or .Fields("zakryt").Value = True Then
+        '                                    uname = 0
+        '                                Else
+        '                                    uname = 1
+        '                                End If
 
-                                Dim item As ListViewItem = lvRemont.Items.Add(.Fields("id").Value)
-                                item.ImageIndex = uname
+        '                                Dim item As ListViewItem = lvRemont.Items.Add(.Fields("id").Value)
+        '                                item.ImageIndex = uname
 
-                                Select Case uname
+        '                                Select Case uname
 
-                                    Case 0
+        '                                    Case 0
 
-                                    Case 1
+        '                                    Case 1
 
-                                        lvRemont.Items(CInt(intCount)).ForeColor = Color.FromName(ServiceColor)
-                                        lvRemont.Items(CInt(intCount)).BackColor = Color.Olive
+        '                                        lvRemont.Items(CInt(intCount)).ForeColor = Color.FromName(ServiceColor)
+        '                                        lvRemont.Items(CInt(intCount)).BackColor = Color.Olive
 
-                                End Select
+        '                                End Select
 
-                                lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("Date").Value)
-                                lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("Remont").Value)
+        '                                lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("D_T").Value)
+        '                                lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("Remont").Value)
 
-                                If Not IsDBNull(.Fields("Uroven").Value) Then
-                                    lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("Uroven").Value)
-                                Else
-                                    lvRemont.Items(CInt(intCount)).SubItems.Add("")
+        '                                If Not IsDBNull(.Fields("Uroven").Value) Then
+        '                                    lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("Uroven").Value)
+        '                                Else
+        '                                    lvRemont.Items(CInt(intCount)).SubItems.Add("")
 
-                                End If
+        '                                End If
 
-                                If Not IsDBNull(.Fields("Master").Value) Then
-                                    lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("Master").Value)
-                                Else
-                                    lvRemont.Items(CInt(intCount)).SubItems.Add("")
+        '                                If Not IsDBNull(.Fields("Master").Value) Then
+        '                                    lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("Master").Value)
+        '                                Else
+        '                                    lvRemont.Items(CInt(intCount)).SubItems.Add("")
 
-                                End If
+        '                                End If
 
-                                If Not IsDBNull(.Fields("Comp_Name").Value) Then
-                                    lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("Comp_Name").Value)
-                                Else
-                                    lvRemont.Items(CInt(intCount)).SubItems.Add("")
+        '                                If Not IsDBNull(.Fields("Comp_Name").Value) Then
+        '                                    lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("Comp_Name").Value)
+        '                                Else
+        '                                    lvRemont.Items(CInt(intCount)).SubItems.Add("")
 
-                                End If
+        '                                End If
 
-                                If Not IsDBNull(.Fields("Mesto_Compa").Value) Then
-                                    lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("Mesto_Compa").Value)
-                                Else
-                                    lvRemont.Items(CInt(intCount)).SubItems.Add("")
+        '                                If Not IsDBNull(.Fields("Mesto_Compa").Value) Then
+        '                                    lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("Mesto_Compa").Value)
+        '                                Else
+        '                                    lvRemont.Items(CInt(intCount)).SubItems.Add("")
 
-                                End If
+        '                                End If
 
-                                If Not IsDBNull(.Fields("vip").Value) Then
-                                    lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("vip").Value)
-                                Else
-                                    lvRemont.Items(CInt(intCount)).SubItems.Add("")
+        '                                If Not IsDBNull(.Fields("vip").Value) Then
+        '                                    lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("vip").Value)
+        '                                Else
+        '                                    lvRemont.Items(CInt(intCount)).SubItems.Add("")
 
-                                End If
+        '                                End If
 
-                                If Not IsDBNull(.Fields("UserName").Value) Then
-                                    lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("UserName").Value)
-                                Else
-                                    lvRemont.Items(CInt(intCount)).SubItems.Add("")
+        '                                If Not IsDBNull(.Fields("User_Name").Value) Then
+        '                                    lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("User_Name").Value)
+        '                                Else
+        '                                    lvRemont.Items(CInt(intCount)).SubItems.Add("")
 
-                                End If
+        '                                End If
 
-                                If Not IsDBNull(.Fields("stoptime").Value) Then
-                                    Dim A1 As Integer
-                                    Dim A3, A2 As String
-                                    Dim age As Integer
-                                    age = DateDiff(DateInterval.Day, .Fields("startdate").Value,
-                                                   .Fields("stopdate").Value)
-                                    A1 = DateDiff(DateInterval.Minute, .Fields("starttime").Value,
-                                                  .Fields("stoptime").Value)
+        '                                If Not IsDBNull(.Fields("stoptime").Value) Then
+        '                                    Dim A1 As Integer
+        '                                    Dim A3, A2 As String
+        '                                    Dim age As Integer
+        '                                    age = DateDiff(DateInterval.Day, .Fields("startdate").Value,
+        '                                                   .Fields("stopdate").Value)
+        '                                    A1 = DateDiff(DateInterval.Minute, .Fields("starttime").Value,
+        '                                                  .Fields("stoptime").Value)
 
-                                    A2 = (A1 \ 60)
-                                    A1 = (A1 Mod 60)
+        '                                    A2 = (A1 \ 60)
+        '                                    A1 = (A1 Mod 60)
 
-                                    A3 = age & " " & langIni.GetString("frmReports", "MSG42", "дн.") & " " & A2 & ":" &
-                                         A1 & " " & langIni.GetString("frmReports", "MSG43", "ч.")
+        '                                    A3 = age & " " & langIni.GetString("frmReports", "MSG42", "дн.") & " " & A2 & ":" &
+        '                                         A1 & " " & langIni.GetString("frmReports", "MSG43", "ч.")
 
-                                    lvRemont.Items(CInt(intCount)).SubItems.Add(A3)
-                                Else
-                                    lvRemont.Items(CInt(intCount)).SubItems.Add("")
+        '                                    lvRemont.Items(CInt(intCount)).SubItems.Add(A3)
+        '                                Else
+        '                                    lvRemont.Items(CInt(intCount)).SubItems.Add("")
 
-                                End If
+        '                                End If
 
-                                If Not IsDBNull(.Fields("Ser_N_SIS").Value) Then
-                                    lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("Ser_N_SIS").Value)
-                                Else
-                                    lvRemont.Items(CInt(intCount)).SubItems.Add("")
+        '                                If Not IsDBNull(.Fields("Ser_N_SIS").Value) Then
+        '                                    lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("Ser_N_SIS").Value)
+        '                                Else
+        '                                    lvRemont.Items(CInt(intCount)).SubItems.Add("")
 
-                                End If
+        '                                End If
 
-                                intCount = intCount + 1
+        '                                intCount = intCount + 1
 
-                            End If
+        '                            End If
 
-                        End If
+        '                        End If
 
 
-                    Case Else
+        '                    Case Else
 
 
-                        If .Fields("zakryt").Value = 0 Then
-                            SP = rs.Fields("Date").Value
-                            PP = rs.Fields("Date").Value
+        '                        If .Fields("zakryt").Value = 0 Then
+        '                            SP = rs.Fields("D_T").Value
+        '                            PP = rs.Fields("D_T").Value
 
-                            If SP >= DTP.Value Then
-                                If SP <= DTPD.Value Then
+        '                            If SP >= DTP.Value Then
+        '                                If SP <= DTPD.Value Then
 
-                                    If .Fields("zakryt").Value = 0 Then
+        '                                    If .Fields("zakryt").Value = 0 Then
 
-                                        If .Fields("zakryt").Value = 1 Or .Fields("zakryt").Value = True Then
-                                            uname = 0
-                                        Else
-                                            uname = 1
-                                        End If
+        '                                        If .Fields("zakryt").Value = 1 Or .Fields("zakryt").Value = True Then
+        '                                            uname = 0
+        '                                        Else
+        '                                            uname = 1
+        '                                        End If
 
 
-                                        Dim item As ListViewItem = lvRemont.Items.Add(.Fields("id").Value)
-                                        item.ImageIndex = uname
+        '                                        Dim item As ListViewItem = lvRemont.Items.Add(.Fields("id").Value)
+        '                                        item.ImageIndex = uname
 
-                                        Select Case uname
+        '                                        Select Case uname
 
-                                            Case 0
+        '                                            Case 0
 
-                                            Case 1
+        '                                            Case 1
 
-                                                lvRemont.Items(CInt(intCount)).ForeColor = Color.FromName(ServiceColor)
-                                                lvRemont.Items(CInt(intCount)).BackColor = Color.Olive
+        '                                                lvRemont.Items(CInt(intCount)).ForeColor = Color.FromName(ServiceColor)
+        '                                                lvRemont.Items(CInt(intCount)).BackColor = Color.Olive
 
-                                        End Select
+        '                                        End Select
 
-                                        lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("Date").Value)
-                                        lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("Remont").Value)
+        '                                        lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("D_T").Value)
+        '                                        lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("Remont").Value)
 
-                                        If Not IsDBNull(.Fields("Uroven").Value) Then
-                                            lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("Uroven").Value)
-                                        Else
-                                            lvRemont.Items(CInt(intCount)).SubItems.Add("")
+        '                                        If Not IsDBNull(.Fields("Uroven").Value) Then
+        '                                            lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("Uroven").Value)
+        '                                        Else
+        '                                            lvRemont.Items(CInt(intCount)).SubItems.Add("")
 
-                                        End If
+        '                                        End If
 
-                                        If Not IsDBNull(.Fields("Master").Value) Then
-                                            lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("Master").Value)
-                                        Else
-                                            lvRemont.Items(CInt(intCount)).SubItems.Add("")
+        '                                        If Not IsDBNull(.Fields("Master").Value) Then
+        '                                            lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("Master").Value)
+        '                                        Else
+        '                                            lvRemont.Items(CInt(intCount)).SubItems.Add("")
 
-                                        End If
+        '                                        End If
 
-                                        If Not IsDBNull(.Fields("Comp_Name").Value) Then
-                                            lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("Comp_Name").Value)
-                                        Else
-                                            lvRemont.Items(CInt(intCount)).SubItems.Add("")
+        '                                        If Not IsDBNull(.Fields("Comp_Name").Value) Then
+        '                                            lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("Comp_Name").Value)
+        '                                        Else
+        '                                            lvRemont.Items(CInt(intCount)).SubItems.Add("")
 
-                                        End If
+        '                                        End If
 
-                                        If Not IsDBNull(.Fields("Mesto_Compa").Value) Then
-                                            lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("Mesto_Compa").Value)
-                                        Else
-                                            lvRemont.Items(CInt(intCount)).SubItems.Add("")
+        '                                        If Not IsDBNull(.Fields("Mesto_Compa").Value) Then
+        '                                            lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("Mesto_Compa").Value)
+        '                                        Else
+        '                                            lvRemont.Items(CInt(intCount)).SubItems.Add("")
 
-                                        End If
+        '                                        End If
 
-                                        If Not IsDBNull(.Fields("vip").Value) Then
-                                            lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("vip").Value)
-                                        Else
-                                            lvRemont.Items(CInt(intCount)).SubItems.Add("")
+        '                                        If Not IsDBNull(.Fields("vip").Value) Then
+        '                                            lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("vip").Value)
+        '                                        Else
+        '                                            lvRemont.Items(CInt(intCount)).SubItems.Add("")
 
-                                        End If
+        '                                        End If
 
-                                        If Not IsDBNull(.Fields("UserName").Value) Then
-                                            lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("UserName").Value)
-                                        Else
-                                            lvRemont.Items(CInt(intCount)).SubItems.Add("")
+        '                                        If Not IsDBNull(.Fields("User_Name").Value) Then
+        '                                            lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("User_Name").Value)
+        '                                        Else
+        '                                            lvRemont.Items(CInt(intCount)).SubItems.Add("")
 
-                                        End If
+        '                                        End If
 
-                                        If Not IsDBNull(.Fields("stoptime").Value) Then
-                                            Dim A1 As Integer
-                                            Dim A3, A2 As String
-                                            Dim age As Integer
-                                            age = DateDiff(DateInterval.Day, .Fields("startdate").Value,
-                                                           .Fields("stopdate").Value)
-                                            A1 = DateDiff(DateInterval.Minute, .Fields("starttime").Value,
-                                                          .Fields("stoptime").Value)
+        '                                        If Not IsDBNull(.Fields("stoptime").Value) Then
+        '                                            Dim A1 As Integer
+        '                                            Dim A3, A2 As String
+        '                                            Dim age As Integer
+        '                                            age = DateDiff(DateInterval.Day, .Fields("startdate").Value,
+        '                                                           .Fields("stopdate").Value)
+        '                                            A1 = DateDiff(DateInterval.Minute, .Fields("starttime").Value,
+        '                                                          .Fields("stoptime").Value)
 
-                                            A2 = (A1 \ 60)
-                                            A1 = (A1 Mod 60)
+        '                                            A2 = (A1 \ 60)
+        '                                            A1 = (A1 Mod 60)
 
-                                            A3 = age & " " & langIni.GetString("frmReports", "MSG42", "дн.") & " " & A2 &
-                                                 ":" & A1 & " " & langIni.GetString("frmReports", "MSG43", "ч.")
+        '                                            A3 = age & " " & langIni.GetString("frmReports", "MSG42", "дн.") & " " & A2 &
+        '                                                 ":" & A1 & " " & langIni.GetString("frmReports", "MSG43", "ч.")
 
 
-                                            lvRemont.Items(CInt(intCount)).SubItems.Add(A3)
-                                        Else
-                                            lvRemont.Items(CInt(intCount)).SubItems.Add("")
+        '                                            lvRemont.Items(CInt(intCount)).SubItems.Add(A3)
+        '                                        Else
+        '                                            lvRemont.Items(CInt(intCount)).SubItems.Add("")
 
-                                        End If
+        '                                        End If
 
-                                        If Not IsDBNull(.Fields("Ser_N_SIS").Value) Then
-                                            lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("Ser_N_SIS").Value)
-                                        Else
-                                            lvRemont.Items(CInt(intCount)).SubItems.Add("")
+        '                                        If Not IsDBNull(.Fields("Ser_N_SIS").Value) Then
+        '                                            lvRemont.Items(CInt(intCount)).SubItems.Add(.Fields("Ser_N_SIS").Value)
+        '                                        Else
+        '                                            lvRemont.Items(CInt(intCount)).SubItems.Add("")
 
-                                        End If
+        '                                        End If
 
-                                        intCount = intCount + 1
-                                    End If
+        '                                        intCount = intCount + 1
+        '                                    End If
 
-                                End If
+        '                                End If
 
-                            End If
-                        End If
+        '                            End If
+        '                        End If
 
-                End Select
+        '                End Select
 
-                .MoveNext()
-            Loop
-        End With
+        '                .MoveNext()
+        '            Loop
+        '        End With
 
-        rs.Close()
-        rs = Nothing
+        '        rs.Close()
+        '        rs = Nothing
 
 
         Exit Sub
@@ -1815,7 +1852,7 @@ err:
         'ListViewRavn master_otch.lvReport2Cl, master_otch
 
         Exit Sub
-        Error_:
+Error_:
         'MsgBox(Err.Description)
     End Sub
 
@@ -1922,7 +1959,7 @@ err:
         End If
 
         Exit Sub
-        err_:
+err_:
         ' MsgBox(Err.Description, MsgBoxStyle.Information, ProGramName)
     End Sub
 
@@ -4761,7 +4798,7 @@ GCPC:
 
         rs3.Close()
         rs3 = Nothing
-        
+
         ResList(Me.lvGar)
 
         Exit Sub
@@ -4789,7 +4826,7 @@ Error_:
         End Select
 
         Exit Sub
-        Err_:
+Err_:
         MsgBox("Error " & Err.Number & " " & Err.Description)
     End Sub
 
@@ -4813,7 +4850,7 @@ Error_:
 
 
         Exit Sub
-        Err_:
+Err_:
         MsgBox("Error " & Err.Number & " " & Err.Description)
     End Sub
 
@@ -4837,7 +4874,7 @@ Error_:
 
 
         Exit Sub
-        Err_:
+Err_:
         MsgBox("Error " & Err.Number & " " & Err.Description)
     End Sub
 
@@ -5352,7 +5389,7 @@ Error_:
         Me.Cursor = Cursors.Default
 
         Exit Sub
-        err_:
+err_:
         Me.Cursor = Cursors.Default
         MsgBox(Err.Description)
     End Sub
@@ -5389,7 +5426,7 @@ Error_:
         rs.Close()
         rs = Nothing
 
-        err:
+err:
     End Sub
 
     Private Sub btnCashe_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCashe.Click
@@ -6062,11 +6099,11 @@ Error_:
 
                         Uname(2) = 0
 
-                        If Not IsDBNull(.Fields("Date").Value) Then Uname = Split(.Fields("Date").Value, ".")
+                        If Not IsDBNull(.Fields("D_T").Value) Then Uname = Split(.Fields("D_T").Value, ".")
 
                         If Uname(2) = cmbYearCashe.Text Then
 
-                            If .Fields("Summ").Value = 0 Or Len(.Fields("Summ").Value) = 0 Then
+                            If .Fields("CUMMA").Value = 0 Or Len(.Fields("CUMMA").Value) = 0 Then
 
 
                             Else
@@ -6077,14 +6114,14 @@ Error_:
                                     .Fields("Comp_Name").Value)
 
 
-                                If Not IsDBNull(.Fields("Summ").Value) Then
-                                    lvCashe.Items(intj).SubItems.Add(.Fields("Summ").Value)
+                                If Not IsDBNull(.Fields("CUMMA").Value) Then
+                                    lvCashe.Items(intj).SubItems.Add(.Fields("CUMMA").Value)
                                 Else
                                     lvCashe.Items(intj).SubItems.Add("")
                                 End If
 
-                                If Not IsDBNull(.Fields("Date").Value) Then
-                                    lvCashe.Items(intj).SubItems.Add(.Fields("Date").Value)
+                                If Not IsDBNull(.Fields("D_T").Value) Then
+                                    lvCashe.Items(intj).SubItems.Add(.Fields("D_T").Value)
                                 Else
                                     lvCashe.Items(intj).SubItems.Add("")
                                 End If
@@ -6094,7 +6131,7 @@ Error_:
 
                             End If
 
-                            Uname2 = Uname2 + .Fields("Summ").Value
+                            Uname2 = Uname2 + .Fields("CUMMA").Value
 
 
                         End If
@@ -6125,7 +6162,7 @@ Error_:
 
 
         Exit Sub
-        err_:
+err_:
         Me.Cursor = Cursors.Default
         MsgBox(Err.Description, MsgBoxStyle.Exclamation, ProGramName)
     End Sub
@@ -6152,7 +6189,7 @@ Error_:
 
 
         Exit Sub
-        Err_:
+Err_:
         MsgBox("Error " & Err.Number & " " & Err.Description)
     End Sub
 
@@ -6214,6 +6251,15 @@ Error_:
         If lvRemont.GetItemAt(e.X, e.Y) Is Nothing Then
             ToolTip1.RemoveAll()
         End If
+    End Sub
+
+    Private Sub lvReport2Cl_DoubleClick(sender As Object, e As System.EventArgs) Handles lvReport2Cl.DoubleClick
+        'esq
+        tmp_mesta = Me.lvReport2Cl.SelectedItems(0).Text
+        'frm_mesta.MdiParent = frmMain
+        frm_mesta.ShowDialog()
+        'frm_mesta.Show()
+        frm_mesta.Focus()
     End Sub
 
     Private Sub lvReport2Cl_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
@@ -6530,7 +6576,7 @@ Error_:
                 'Мастер
 
 
-                If Not IsDBNull(.Fields("Date").Value) Then sSw = .Fields("Date").Value
+                If Not IsDBNull(.Fields("D_T").Value) Then sSw = .Fields("D_T").Value
                 If Not IsDBNull(.Fields("srok").Value) Then sSw2 = .Fields("srok").Value
 
                 If Len(sSw) = 0 Then
@@ -6560,10 +6606,10 @@ Error_:
                 If Not IsDBNull(.Fields("Uroven").Value) Then frmService_add.cmbKrit.Text = .Fields("Uroven").Value 'Тип
 
 
-                If Not IsDBNull(.Fields("MeMo").Value) Then frmService_add.txtComent.Text = .Fields("MeMo").Value _
+                If Not IsDBNull(.Fields("PAMIATKA").Value) Then frmService_add.txtComent.Text = .Fields("PAMIATKA").Value _
                 'Комментарий
 
-                If Not IsDBNull(.Fields("Summ").Value) Then frmService_add.RemCashe.Text = .Fields("Summ").Value _
+                If Not IsDBNull(.Fields("CUMMA").Value) Then frmService_add.RemCashe.Text = .Fields("CUMMA").Value _
                 'Комментарий
 
                 '.Fields("Summ").Value = RemCashe.Text 'Сумма

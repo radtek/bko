@@ -175,12 +175,12 @@ Public Class frmserviceDesc
             Case False
 
                 sSQL = "SELECT * FROM Remont WHERE id_comp=" & frmComputers.sCOUNT & " and PREF='" & frmComputers.sPREF &
-                       "' ORDER BY date DESC, id DESC"
+                       "' ORDER BY D_T DESC, id DESC"
 
             Case True
 
                 sSQL = "SELECT * FROM Remont WHERE id_comp=" & frmComputers.sCOUNT & " AND zakryt=0 and PREF='" &
-                       frmComputers.sPREF & "' ORDER BY date DESC, id DESC"
+                       frmComputers.sPREF & "' ORDER BY D_T DESC, id DESC"
 
         End Select
 
@@ -235,8 +235,8 @@ Public Class frmserviceDesc
                 End If
 
 
-                If Not IsDBNull(.Fields("Date").Value) Then
-                    lstGroups.Items(CInt(intCount)).SubItems.Add(.Fields("Date").Value)
+                If Not IsDBNull(.Fields("D_T").Value) Then
+                    lstGroups.Items(CInt(intCount)).SubItems.Add(.Fields("D_T").Value)
                 Else
                     lstGroups.Items(CInt(intCount)).SubItems.Add("")
                 End If
@@ -271,8 +271,8 @@ Public Class frmserviceDesc
                     lstGroups.Items(CInt(intCount)).SubItems.Add("")
                 End If
 
-                If Not IsDBNull(.Fields("UserName").Value) Then
-                    lstGroups.Items(CInt(intCount)).SubItems.Add(.Fields("UserName").Value)
+                If Not IsDBNull(.Fields("User_Name").Value) Then
+                    lstGroups.Items(CInt(intCount)).SubItems.Add(.Fields("User_Name").Value)
                 Else
                     lstGroups.Items(CInt(intCount)).SubItems.Add("")
                 End If
@@ -332,7 +332,7 @@ Public Class frmserviceDesc
 
         If zSTR = 0 Then Exit Sub
 
-        sSQL = "SELECT * FROM Remont WHERE zakryt=0 ORDER BY date DESC, id DESC"
+        sSQL = "SELECT * FROM Remont WHERE zakryt=0 ORDER BY D_T DESC, id DESC"
 
 
         rs = New Recordset
@@ -384,8 +384,8 @@ Public Class frmserviceDesc
                     lstGroups.Items(CInt(intCount)).SubItems.Add("")
                 End If
 
-                If Not IsDBNull(.Fields("Date").Value) Then
-                    lstGroups.Items(CInt(intCount)).SubItems.Add(.Fields("Date").Value)
+                If Not IsDBNull(.Fields("D_T").Value) Then
+                    lstGroups.Items(CInt(intCount)).SubItems.Add(.Fields("D_T").Value)
                 Else
                     lstGroups.Items(CInt(intCount)).SubItems.Add("")
                 End If
@@ -420,8 +420,8 @@ Public Class frmserviceDesc
                     lstGroups.Items(CInt(intCount)).SubItems.Add("")
                 End If
 
-                If Not IsDBNull(.Fields("UserName").Value) Then
-                    lstGroups.Items(CInt(intCount)).SubItems.Add(.Fields("UserName").Value)
+                If Not IsDBNull(.Fields("User_Name").Value) Then
+                    lstGroups.Items(CInt(intCount)).SubItems.Add(.Fields("User_Name").Value)
                 Else
                     lstGroups.Items(CInt(intCount)).SubItems.Add("")
                 End If
@@ -507,7 +507,7 @@ Public Class frmserviceDesc
 
         Call load_rplus(sSID, sLIST)
 
-        err1_:
+err1_:
     End Sub
 
     Public Sub load_rplus(ByVal sSID As Integer, ByVal sLIST As ListView)
@@ -547,8 +547,8 @@ Public Class frmserviceDesc
 
                 sLIST.Items.Add(.Fields(0).Value) 'col no. 1
 
-                If Not IsDBNull(.Fields("data").Value) Then
-                    sLIST.Items(CInt(intj)).SubItems.Add(.Fields("data").Value)
+                If Not IsDBNull(.Fields("D_T").Value) Then
+                    sLIST.Items(CInt(intj)).SubItems.Add(.Fields("D_T").Value)
                 Else
                     sLIST.Items(CInt(intj)).SubItems.Add("")
                 End If
@@ -578,7 +578,7 @@ Public Class frmserviceDesc
         ResList(sLIST)
 
         Exit Sub
-        err_1:
+err_1:
         MsgBox(Err.Description, MsgBoxStyle.Information, ProGramName)
     End Sub
 
@@ -641,7 +641,7 @@ Public Class frmserviceDesc
                 'Мастер
 
 
-                If Not IsDBNull(.Fields("Date").Value) Then sSw = .Fields("Date").Value
+                If Not IsDBNull(.Fields("D_T").Value) Then sSw = .Fields("D_T").Value
                 If Not IsDBNull(.Fields("srok").Value) Then sSw2 = .Fields("srok").Value
 
                 If Len(sSw) = 0 Then
@@ -671,10 +671,10 @@ Public Class frmserviceDesc
                 If Not IsDBNull(.Fields("Uroven").Value) Then frmService_add.cmbKrit.Text = .Fields("Uroven").Value 'Тип
 
 
-                If Not IsDBNull(.Fields("MeMo").Value) Then frmService_add.txtComent.Text = .Fields("MeMo").Value _
+                If Not IsDBNull(.Fields("PAMIATKA").Value) Then frmService_add.txtComent.Text = .Fields("PAMIATKA").Value _
                 'Комментарий
 
-                If Not IsDBNull(.Fields("Summ").Value) Then frmService_add.RemCashe.Text = .Fields("Summ").Value 'Сумма
+                If Not IsDBNull(.Fields("CUMMA").Value) Then frmService_add.RemCashe.Text = .Fields("CUMMA").Value 'Сумма
 
                 If Not IsDBNull(.Fields("GARANT").Value) Then
                     frmService_add.dtGarRem.Value = .Fields("GARANT").Value 'Гарантия
@@ -687,7 +687,7 @@ Public Class frmserviceDesc
 
                 '.Fields("Summ").Value = RemCashe.Text 'Сумма
 
-                If .Fields("zakryt").Value = - 1 Then
+                If .Fields("zakryt").Value = -1 Then
                     frmService_add.chkClose.Checked = 1
                 Else
 
@@ -952,7 +952,7 @@ Public Class frmserviceDesc
 
                 Next
 
-                Foundit:
+Foundit:
 
 
                 If Len(FINDTXT) = 0 Then
@@ -1244,8 +1244,8 @@ Public Class frmserviceDesc
             Do While Not .EOF
                 FINDTXT = ""
 
-                If Not IsDBNull(.Fields("Date").Value) Then _
-                    If isThere(.Fields("Date").Value, sFindText, mde) = True Then GoTo FoundiR
+                If Not IsDBNull(.Fields("D_T").Value) Then _
+                    If isThere(.Fields("D_T").Value, sFindText, mde) = True Then GoTo FoundiR
                 If Not IsDBNull(.Fields("Remont").Value) Then _
                     If isThere(.Fields("Remont").Value, sFindText, mde) = True Then GoTo FoundiR
                 If Not IsDBNull(.Fields("Uroven").Value) Then _
@@ -1263,11 +1263,11 @@ Public Class frmserviceDesc
                 'If Not IsNull(.Fields("Name")) Then If isThere(.Fields("Name"), sFindText, mde) = True Then GoTo FoundiR:
                 If Not IsDBNull(.Fields("name_of_remont").Value) Then _
                     If isThere(.Fields("name_of_remont").Value, sFindText, mde) = True Then GoTo FoundiR
-                If Not IsDBNull(.Fields("MeMo").Value) Then _
-                    If isThere(.Fields("MeMo").Value, sFindText, mde) = True Then GoTo FoundiR
+                If Not IsDBNull(.Fields("PAMIATKA").Value) Then _
+                    If isThere(.Fields("PAMIATKA").Value, sFindText, mde) = True Then GoTo FoundiR
 
 
-                FoundiR:
+FoundiR:
                 If Len(FINDTXT) = 0 Then
                 Else
 
@@ -1280,7 +1280,7 @@ Public Class frmserviceDesc
                     With rs3
                         .MoveFirst()
                         Do While Not .EOF
-                            If GID <> - 1 Then
+                            If GID <> -1 Then
 
                                 Select Case .Fields("tiptehn").Value
 
@@ -1608,10 +1608,10 @@ Public Class frmserviceDesc
         lvRem.Items.Clear()
 
 
-        'sSQL3 = "SELECT * FROM Remont where id_comp =" & frmMain.nomerPCAbs & " order by Date desc"
+        'sSQL3 = "SELECT * FROM Remont where id_comp =" & frmMain.nomerPCAbs & " ORDER BY D_T desc"
         sSQL3 =
-            "SELECT id, NomerRemKomp, date, Remont, Uroven, Master, vip, username, zakryt FROM Remont WHERE id_comp=" &
-            frmComputers.sCOUNT & " ORDER BY date DESC, id DESC"
+            "SELECT id, NomerRemKomp, D_T, Remont, Uroven, Master, vip, username, zakryt FROM Remont WHERE id_comp=" &
+            frmComputers.sCOUNT & " ORDER BY D_T DESC, id DESC"
 
 
         rs3 = New Recordset
@@ -1655,7 +1655,7 @@ Public Class frmserviceDesc
 
                 Next
 
-                FoundiR:
+FoundiR:
                 If Len(FINDTXT) = 0 Then
 
                 Else
@@ -1671,8 +1671,8 @@ Public Class frmserviceDesc
                         lvRem.Items(CInt(intCount)).SubItems.Add("")
                     End If
 
-                    If Not IsDBNull(.Fields("Date").Value) Then
-                        lvRem.Items(CInt(intCount)).SubItems.Add(.Fields("Date").Value)
+                    If Not IsDBNull(.Fields("D_T").Value) Then
+                        lvRem.Items(CInt(intCount)).SubItems.Add(.Fields("D_T").Value)
                     Else
                         lvRem.Items(CInt(intCount)).SubItems.Add("")
                     End If
@@ -1701,8 +1701,8 @@ Public Class frmserviceDesc
                         lvRem.Items(CInt(intCount)).SubItems.Add("")
                     End If
 
-                    If Not IsDBNull(.Fields("UserName").Value) Then
-                        lvRem.Items(CInt(intCount)).SubItems.Add(.Fields("UserName").Value)
+                    If Not IsDBNull(.Fields("User_Name").Value) Then
+                        lvRem.Items(CInt(intCount)).SubItems.Add(.Fields("User_Name").Value)
                     Else
                         lvRem.Items(CInt(intCount)).SubItems.Add("")
                     End If
@@ -1719,7 +1719,7 @@ Public Class frmserviceDesc
         'txtSearch.Text = ""
 
         Exit Sub
-        Error_:
+Error_:
     End Sub
 
     Private Sub txtSearch_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtSearch.KeyDown
@@ -1765,8 +1765,8 @@ Public Class frmserviceDesc
                 frmservice_add_otvets.txtOtzyv.Text = .Fields("otzyv").Value
                 'If Not IsNull(.Fields("Name")) Then service_add_otvets.Combo1.Text = .Fields("Name") 'Мастер
                 frmservice_add_otvets.cmbMaster.Text = .Fields("Master").Value
-                'If Not IsNull(.Fields("Data")) Then service_add_otvets.DTPicker1.Value = .Fields("Data") 'Дата регистрации
-                frmservice_add_otvets.dtPic.Value = .Fields("Data").Value
+                'If Not IsNull(.Fields("D_T")) Then service_add_otvets.DTPicker1.Value = .Fields("D_T") 'Дата регистрации
+                frmservice_add_otvets.dtPic.Value = .Fields("D_T").Value
                 r1COUNT = .Fields("id_rem").Value
                 .MoveNext()
                 'DoEvents

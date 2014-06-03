@@ -342,7 +342,6 @@ Me.ToolStripSeparator22 = New System.Windows.Forms.ToolStripSeparator()
 Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
 Me.ToolStripSeparator23 = New System.Windows.Forms.ToolStripSeparator()
 Me.CheckBox2 = New System.Windows.Forms.CheckBox()
-Me.CheckBox3_manual = New System.Windows.Forms.CheckBox()
 Me.TabPage5 = New System.Windows.Forms.TabPage()
 Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
 Me.TableLayoutPanel4 = New System.Windows.Forms.TableLayoutPanel()
@@ -1679,7 +1678,7 @@ Me.TableLayoutPanel24.TabIndex = 1
 Me.PROizV4.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.PROizV4.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
 Me.TableLayoutPanel24.SetColumnSpan(Me.PROizV4, 2)
-Me.PROizV4.Cursor = System.Windows.Forms.Cursors.Default
+Me.PROizV4.Cursor = System.Windows.Forms.Cursors.WaitCursor
 Me.PROizV4.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV4.FormattingEnabled = true
 Me.PROizV4.Location = New System.Drawing.Point(476, 84)
@@ -1693,7 +1692,7 @@ Me.PROizV2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.PROizV2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
 Me.PROizV2.BackColor = System.Drawing.SystemColors.Window
 Me.TableLayoutPanel24.SetColumnSpan(Me.PROizV2, 2)
-Me.PROizV2.Cursor = System.Windows.Forms.Cursors.Default
+Me.PROizV2.Cursor = System.Windows.Forms.Cursors.WaitCursor
 Me.PROizV2.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV2.ForeColor = System.Drawing.SystemColors.WindowText
 Me.PROizV2.Location = New System.Drawing.Point(476, 30)
@@ -1707,7 +1706,7 @@ Me.PROizV2.TabIndex = 8
 Me.PROizV3.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.PROizV3.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
 Me.TableLayoutPanel24.SetColumnSpan(Me.PROizV3, 2)
-Me.PROizV3.Cursor = System.Windows.Forms.Cursors.Default
+Me.PROizV3.Cursor = System.Windows.Forms.Cursors.WaitCursor
 Me.PROizV3.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV3.FormattingEnabled = true
 Me.PROizV3.Location = New System.Drawing.Point(476, 57)
@@ -1719,7 +1718,7 @@ Me.PROizV3.TabIndex = 12
 '
 Me.cmbCPU1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.cmbCPU1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-Me.cmbCPU1.Cursor = System.Windows.Forms.Cursors.Default
+Me.cmbCPU1.Cursor = System.Windows.Forms.Cursors.WaitCursor
 Me.cmbCPU1.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbCPU1.FormattingEnabled = true
 Me.cmbCPU1.Location = New System.Drawing.Point(3, 3)
@@ -1739,7 +1738,7 @@ Me.txtSoc4.Tag = ""
 '
 Me.cmbCPU2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.cmbCPU2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-Me.cmbCPU2.Cursor = System.Windows.Forms.Cursors.Default
+Me.cmbCPU2.Cursor = System.Windows.Forms.Cursors.WaitCursor
 Me.cmbCPU2.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbCPU2.FormattingEnabled = true
 Me.cmbCPU2.Location = New System.Drawing.Point(3, 30)
@@ -1751,7 +1750,7 @@ Me.cmbCPU2.TabIndex = 5
 '
 Me.PROizV1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.PROizV1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-Me.PROizV1.Cursor = System.Windows.Forms.Cursors.Default
+Me.PROizV1.Cursor = System.Windows.Forms.Cursors.WaitCursor
 Me.PROizV1.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV1.FormattingEnabled = true
 Me.PROizV1.Location = New System.Drawing.Point(476, 3)
@@ -1763,7 +1762,7 @@ Me.PROizV1.TabIndex = 4
 '
 Me.cmbCPU3.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.cmbCPU3.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-Me.cmbCPU3.Cursor = System.Windows.Forms.Cursors.Default
+Me.cmbCPU3.Cursor = System.Windows.Forms.Cursors.WaitCursor
 Me.cmbCPU3.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbCPU3.FormattingEnabled = true
 Me.cmbCPU3.Location = New System.Drawing.Point(3, 57)
@@ -1791,7 +1790,7 @@ Me.txtMHZ4.Tag = ""
 '
 Me.cmbCPU4.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.cmbCPU4.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-Me.cmbCPU4.Cursor = System.Windows.Forms.Cursors.Default
+Me.cmbCPU4.Cursor = System.Windows.Forms.Cursors.WaitCursor
 Me.cmbCPU4.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbCPU4.FormattingEnabled = true
 Me.cmbCPU4.Location = New System.Drawing.Point(3, 84)
@@ -1864,7 +1863,7 @@ Me.bCPUPlus.Text = "+"
 '
 Me.gbSOUND.AutoSize = true
 Me.gbSOUND.Controls.Add(Me.TableLayoutPanel28)
-Me.gbSOUND.Cursor = System.Windows.Forms.Cursors.Hand
+Me.gbSOUND.Cursor = System.Windows.Forms.Cursors.WaitCursor
 Me.gbSOUND.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbSOUND.Location = New System.Drawing.Point(3, 775)
 Me.gbSOUND.Name = "gbSOUND"
@@ -1899,7 +1898,7 @@ Me.TableLayoutPanel28.TabIndex = 1
 Me.PROizV16.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.PROizV16.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
 Me.TableLayoutPanel28.SetColumnSpan(Me.PROizV16, 2)
-Me.PROizV16.Cursor = System.Windows.Forms.Cursors.Default
+Me.PROizV16.Cursor = System.Windows.Forms.Cursors.WaitCursor
 Me.PROizV16.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV16.FormattingEnabled = true
 Me.PROizV16.Location = New System.Drawing.Point(476, 3)
@@ -1999,7 +1998,7 @@ Me.txtChip.TabIndex = 9
 '
 Me.PROizV5.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.PROizV5.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-Me.PROizV5.Cursor = System.Windows.Forms.Cursors.Default
+Me.PROizV5.Cursor = System.Windows.Forms.Cursors.WaitCursor
 Me.PROizV5.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV5.FormattingEnabled = true
 Me.PROizV5.Location = New System.Drawing.Point(490, 3)
@@ -2023,7 +2022,7 @@ Me.cmbMB.TabIndex = 8
 '
 Me.gbSVGA.AutoSize = true
 Me.gbSVGA.Controls.Add(Me.TableLayoutPanel27)
-Me.gbSVGA.Cursor = System.Windows.Forms.Cursors.Hand
+Me.gbSVGA.Cursor = System.Windows.Forms.Cursors.WaitCursor
 Me.gbSVGA.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbSVGA.Location = New System.Drawing.Point(3, 696)
 Me.gbSVGA.Name = "gbSVGA"
@@ -2064,7 +2063,7 @@ Me.TableLayoutPanel27.TabIndex = 1
 Me.PROizV15.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.PROizV15.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
 Me.TableLayoutPanel27.SetColumnSpan(Me.PROizV15, 2)
-Me.PROizV15.Cursor = System.Windows.Forms.Cursors.Default
+Me.PROizV15.Cursor = System.Windows.Forms.Cursors.WaitCursor
 Me.PROizV15.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV15.FormattingEnabled = true
 Me.PROizV15.Location = New System.Drawing.Point(476, 30)
@@ -2083,7 +2082,7 @@ Me.txtSVGAs2.TabIndex = 14
 '
 Me.PROizV14.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.PROizV14.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-Me.PROizV14.Cursor = System.Windows.Forms.Cursors.Default
+Me.PROizV14.Cursor = System.Windows.Forms.Cursors.WaitCursor
 Me.PROizV14.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV14.FormattingEnabled = true
 Me.PROizV14.Location = New System.Drawing.Point(476, 3)
@@ -2231,7 +2230,7 @@ Me.TableLayoutPanel25.TabIndex = 1
 Me.PROizV9.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.PROizV9.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
 Me.TableLayoutPanel25.SetColumnSpan(Me.PROizV9, 2)
-Me.PROizV9.Cursor = System.Windows.Forms.Cursors.Default
+Me.PROizV9.Cursor = System.Windows.Forms.Cursors.WaitCursor
 Me.PROizV9.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV9.FormattingEnabled = true
 Me.PROizV9.Location = New System.Drawing.Point(476, 84)
@@ -2251,7 +2250,7 @@ Me.txtRamSN4.TabIndex = 30
 Me.PROizV8.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.PROizV8.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
 Me.TableLayoutPanel25.SetColumnSpan(Me.PROizV8, 2)
-Me.PROizV8.Cursor = System.Windows.Forms.Cursors.Default
+Me.PROizV8.Cursor = System.Windows.Forms.Cursors.WaitCursor
 Me.PROizV8.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV8.FormattingEnabled = true
 Me.PROizV8.Location = New System.Drawing.Point(476, 57)
@@ -2263,7 +2262,7 @@ Me.PROizV8.TabIndex = 27
 '
 Me.cmbRAM1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.cmbRAM1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-Me.cmbRAM1.Cursor = System.Windows.Forms.Cursors.Default
+Me.cmbRAM1.Cursor = System.Windows.Forms.Cursors.WaitCursor
 Me.cmbRAM1.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbRAM1.FormattingEnabled = true
 Me.cmbRAM1.Location = New System.Drawing.Point(3, 3)
@@ -2276,7 +2275,7 @@ Me.cmbRAM1.TabIndex = 16
 Me.PROizV7.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.PROizV7.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
 Me.TableLayoutPanel25.SetColumnSpan(Me.PROizV7, 2)
-Me.PROizV7.Cursor = System.Windows.Forms.Cursors.Default
+Me.PROizV7.Cursor = System.Windows.Forms.Cursors.WaitCursor
 Me.PROizV7.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV7.FormattingEnabled = true
 Me.PROizV7.Location = New System.Drawing.Point(476, 30)
@@ -2288,7 +2287,7 @@ Me.PROizV7.TabIndex = 23
 '
 Me.cmbRAM2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.cmbRAM2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-Me.cmbRAM2.Cursor = System.Windows.Forms.Cursors.Default
+Me.cmbRAM2.Cursor = System.Windows.Forms.Cursors.WaitCursor
 Me.cmbRAM2.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbRAM2.FormattingEnabled = true
 Me.cmbRAM2.Location = New System.Drawing.Point(3, 30)
@@ -2300,7 +2299,7 @@ Me.cmbRAM2.TabIndex = 20
 '
 Me.PROizV6.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.PROizV6.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-Me.PROizV6.Cursor = System.Windows.Forms.Cursors.Default
+Me.PROizV6.Cursor = System.Windows.Forms.Cursors.WaitCursor
 Me.PROizV6.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV6.FormattingEnabled = true
 Me.PROizV6.Location = New System.Drawing.Point(476, 3)
@@ -2326,7 +2325,7 @@ Me.txtRamS4.TabIndex = 29
 '
 Me.cmbRAM3.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.cmbRAM3.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-Me.cmbRAM3.Cursor = System.Windows.Forms.Cursors.Default
+Me.cmbRAM3.Cursor = System.Windows.Forms.Cursors.WaitCursor
 Me.cmbRAM3.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbRAM3.FormattingEnabled = true
 Me.cmbRAM3.Location = New System.Drawing.Point(3, 57)
@@ -2345,7 +2344,7 @@ Me.txtRamSN2.TabIndex = 22
 '
 Me.cmbRAM4.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.cmbRAM4.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-Me.cmbRAM4.Cursor = System.Windows.Forms.Cursors.Default
+Me.cmbRAM4.Cursor = System.Windows.Forms.Cursors.WaitCursor
 Me.cmbRAM4.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbRAM4.FormattingEnabled = true
 Me.cmbRAM4.Location = New System.Drawing.Point(3, 84)
@@ -2633,7 +2632,7 @@ Me.TableLayoutPanel26.TabIndex = 1
 Me.PROizV13.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.PROizV13.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
 Me.TableLayoutPanel26.SetColumnSpan(Me.PROizV13, 2)
-Me.PROizV13.Cursor = System.Windows.Forms.Cursors.Default
+Me.PROizV13.Cursor = System.Windows.Forms.Cursors.WaitCursor
 Me.PROizV13.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV13.FormattingEnabled = true
 Me.PROizV13.Location = New System.Drawing.Point(476, 84)
@@ -2653,7 +2652,7 @@ Me.txtHDDsN4.TabIndex = 30
 Me.PROizV12.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.PROizV12.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
 Me.TableLayoutPanel26.SetColumnSpan(Me.PROizV12, 2)
-Me.PROizV12.Cursor = System.Windows.Forms.Cursors.Default
+Me.PROizV12.Cursor = System.Windows.Forms.Cursors.WaitCursor
 Me.PROizV12.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV12.FormattingEnabled = true
 Me.PROizV12.Location = New System.Drawing.Point(476, 57)
@@ -2665,7 +2664,7 @@ Me.PROizV12.TabIndex = 27
 '
 Me.cmbHDD1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.cmbHDD1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-Me.cmbHDD1.Cursor = System.Windows.Forms.Cursors.Default
+Me.cmbHDD1.Cursor = System.Windows.Forms.Cursors.WaitCursor
 Me.cmbHDD1.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbHDD1.FormattingEnabled = true
 Me.cmbHDD1.Location = New System.Drawing.Point(3, 3)
@@ -2678,7 +2677,7 @@ Me.cmbHDD1.TabIndex = 16
 Me.PROizV11.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.PROizV11.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
 Me.TableLayoutPanel26.SetColumnSpan(Me.PROizV11, 2)
-Me.PROizV11.Cursor = System.Windows.Forms.Cursors.Default
+Me.PROizV11.Cursor = System.Windows.Forms.Cursors.WaitCursor
 Me.PROizV11.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV11.FormattingEnabled = true
 Me.PROizV11.Location = New System.Drawing.Point(476, 30)
@@ -2690,7 +2689,7 @@ Me.PROizV11.TabIndex = 23
 '
 Me.cmbHDD2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.cmbHDD2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-Me.cmbHDD2.Cursor = System.Windows.Forms.Cursors.Default
+Me.cmbHDD2.Cursor = System.Windows.Forms.Cursors.WaitCursor
 Me.cmbHDD2.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbHDD2.FormattingEnabled = true
 Me.cmbHDD2.Location = New System.Drawing.Point(3, 30)
@@ -2702,7 +2701,7 @@ Me.cmbHDD2.TabIndex = 20
 '
 Me.PROizV10.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.PROizV10.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-Me.PROizV10.Cursor = System.Windows.Forms.Cursors.Default
+Me.PROizV10.Cursor = System.Windows.Forms.Cursors.WaitCursor
 Me.PROizV10.Dock = System.Windows.Forms.DockStyle.Fill
 Me.PROizV10.FormattingEnabled = true
 Me.PROizV10.Location = New System.Drawing.Point(476, 3)
@@ -2728,7 +2727,7 @@ Me.txtHDDo4.TabIndex = 29
 '
 Me.cmbHDD3.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.cmbHDD3.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-Me.cmbHDD3.Cursor = System.Windows.Forms.Cursors.Default
+Me.cmbHDD3.Cursor = System.Windows.Forms.Cursors.WaitCursor
 Me.cmbHDD3.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbHDD3.FormattingEnabled = true
 Me.cmbHDD3.Location = New System.Drawing.Point(3, 57)
@@ -2740,7 +2739,7 @@ Me.cmbHDD3.TabIndex = 24
 '
 Me.cmbHDD4.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
 Me.cmbHDD4.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-Me.cmbHDD4.Cursor = System.Windows.Forms.Cursors.Default
+Me.cmbHDD4.Cursor = System.Windows.Forms.Cursors.WaitCursor
 Me.cmbHDD4.Dock = System.Windows.Forms.DockStyle.Fill
 Me.cmbHDD4.FormattingEnabled = true
 Me.cmbHDD4.Location = New System.Drawing.Point(3, 84)
@@ -2963,7 +2962,7 @@ Me.txtHDDsN8.TabIndex = 48
 '
 Me.gbOptical.AutoSize = true
 Me.gbOptical.Controls.Add(Me.TableLayoutPanel30)
-Me.gbOptical.Cursor = System.Windows.Forms.Cursors.Hand
+Me.gbOptical.Cursor = System.Windows.Forms.Cursors.WaitCursor
 Me.gbOptical.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbOptical.Location = New System.Drawing.Point(3, 827)
 Me.gbOptical.Name = "gbOptical"
@@ -3140,7 +3139,7 @@ Me.bOpticalPlus.Text = "+"
 '
 Me.gbNetwork.AutoSize = true
 Me.gbNetwork.Controls.Add(Me.TableLayoutPanel31)
-Me.gbNetwork.Cursor = System.Windows.Forms.Cursors.Hand
+Me.gbNetwork.Cursor = System.Windows.Forms.Cursors.WaitCursor
 Me.gbNetwork.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbNetwork.Location = New System.Drawing.Point(3, 933)
 Me.gbNetwork.Name = "gbNetwork"
@@ -3275,7 +3274,7 @@ Me.bNetPlus.Text = "+"
 '
 Me.gbFDD.AutoSize = true
 Me.gbFDD.Controls.Add(Me.TableLayoutPanel32)
-Me.gbFDD.Cursor = System.Windows.Forms.Cursors.Hand
+Me.gbFDD.Cursor = System.Windows.Forms.Cursors.WaitCursor
 Me.gbFDD.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbFDD.Location = New System.Drawing.Point(3, 1012)
 Me.gbFDD.Name = "gbFDD"
@@ -3339,7 +3338,7 @@ Me.txtSN.TabIndex = 5
 '
 Me.gbCreader.AutoSize = true
 Me.gbCreader.Controls.Add(Me.TableLayoutPanel33)
-Me.gbCreader.Cursor = System.Windows.Forms.Cursors.Hand
+Me.gbCreader.Cursor = System.Windows.Forms.Cursors.WaitCursor
 Me.gbCreader.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbCreader.Location = New System.Drawing.Point(3, 1064)
 Me.gbCreader.Name = "gbCreader"
@@ -3403,7 +3402,7 @@ Me.txtCreader1.TabIndex = 5
 '
 Me.gbModem.AutoSize = true
 Me.gbModem.Controls.Add(Me.TableLayoutPanel34)
-Me.gbModem.Cursor = System.Windows.Forms.Cursors.Hand
+Me.gbModem.Cursor = System.Windows.Forms.Cursors.WaitCursor
 Me.gbModem.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbModem.Location = New System.Drawing.Point(3, 1116)
 Me.gbModem.Name = "gbModem"
@@ -3467,7 +3466,7 @@ Me.txtModemSN.TabIndex = 5
 '
 Me.gbCase.AutoSize = true
 Me.gbCase.Controls.Add(Me.TableLayoutPanel35)
-Me.gbCase.Cursor = System.Windows.Forms.Cursors.Hand
+Me.gbCase.Cursor = System.Windows.Forms.Cursors.WaitCursor
 Me.gbCase.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbCase.Location = New System.Drawing.Point(3, 1168)
 Me.gbCase.Name = "gbCase"
@@ -3531,7 +3530,7 @@ Me.PROizV25.TabIndex = 6
 '
 Me.gbBP.AutoSize = true
 Me.gbBP.Controls.Add(Me.TableLayoutPanel36)
-Me.gbBP.Cursor = System.Windows.Forms.Cursors.Hand
+Me.gbBP.Cursor = System.Windows.Forms.Cursors.WaitCursor
 Me.gbBP.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbBP.Location = New System.Drawing.Point(3, 1220)
 Me.gbBP.Name = "gbBP"
@@ -3658,7 +3657,7 @@ Me.PROizV41.TabIndex = 5
 '
 Me.gbPCI.AutoSize = true
 Me.gbPCI.Controls.Add(Me.TableLayoutPanel38)
-Me.gbPCI.Cursor = System.Windows.Forms.Cursors.Hand
+Me.gbPCI.Cursor = System.Windows.Forms.Cursors.WaitCursor
 Me.gbPCI.Dock = System.Windows.Forms.DockStyle.Fill
 Me.gbPCI.Location = New System.Drawing.Point(3, 1324)
 Me.gbPCI.Name = "gbPCI"
@@ -4516,7 +4515,6 @@ Me.TableLayoutPanel13.Controls.Add(Me.cmbSoftPr, 2, 3)
 Me.TableLayoutPanel13.Controls.Add(Me.Label119, 0, 4)
 Me.TableLayoutPanel13.Controls.Add(Me.ToolStrip16, 0, 6)
 Me.TableLayoutPanel13.Controls.Add(Me.CheckBox2, 2, 6)
-Me.TableLayoutPanel13.Controls.Add(Me.CheckBox3_manual, 1, 5)
 Me.TableLayoutPanel13.Dock = System.Windows.Forms.DockStyle.Fill
 Me.TableLayoutPanel13.Location = New System.Drawing.Point(3, 16)
 Me.TableLayoutPanel13.Name = "TableLayoutPanel13"
@@ -4691,7 +4689,7 @@ Me.btnAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
 Me.btnAdd.Image = CType(resources.GetObject("btnAdd.Image"),System.Drawing.Image)
 Me.btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta
 Me.btnAdd.Name = "btnAdd"
-Me.btnAdd.Size = New System.Drawing.Size(69, 22)
+Me.btnAdd.Size = New System.Drawing.Size(63, 22)
 Me.btnAdd.Text = "Добавить"
 '
 'ToolStripSeparator20
@@ -4705,7 +4703,7 @@ Me.btnDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
 Me.btnDelete.Image = CType(resources.GetObject("btnDelete.Image"),System.Drawing.Image)
 Me.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta
 Me.btnDelete.Name = "btnDelete"
-Me.btnDelete.Size = New System.Drawing.Size(60, 22)
+Me.btnDelete.Size = New System.Drawing.Size(55, 22)
 Me.btnDelete.Text = "Удалить"
 '
 'ToolStripSeparator21
@@ -4719,7 +4717,7 @@ Me.btnCancel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
 Me.btnCancel.Image = CType(resources.GetObject("btnCancel.Image"),System.Drawing.Image)
 Me.btnCancel.ImageTransparentColor = System.Drawing.Color.Magenta
 Me.btnCancel.Name = "btnCancel"
-Me.btnCancel.Size = New System.Drawing.Size(56, 22)
+Me.btnCancel.Size = New System.Drawing.Size(53, 22)
 Me.btnCancel.Text = "Отмена"
 '
 'ToolStripSeparator22
@@ -4733,7 +4731,7 @@ Me.ToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyl
 Me.ToolStripButton1.Image = CType(resources.GetObject("ToolStripButton1.Image"),System.Drawing.Image)
 Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
 Me.ToolStripButton1.Name = "ToolStripButton1"
-Me.ToolStripButton1.Size = New System.Drawing.Size(90, 22)
+Me.ToolStripButton1.Size = New System.Drawing.Size(86, 22)
 Me.ToolStripButton1.Text = "Обновить ПО"
 '
 'ToolStripSeparator23
@@ -4750,16 +4748,6 @@ Me.CheckBox2.Size = New System.Drawing.Size(127, 17)
 Me.CheckBox2.TabIndex = 19
 Me.CheckBox2.Text = "Массовое удаление"
 Me.CheckBox2.UseVisualStyleBackColor = true
-'
-'CheckBox3_manual
-'
-Me.CheckBox3_manual.AutoSize = true
-Me.CheckBox3_manual.Location = New System.Drawing.Point(180, 110)
-Me.CheckBox3_manual.Name = "CheckBox3_manual"
-Me.CheckBox3_manual.Size = New System.Drawing.Size(137, 17)
-Me.CheckBox3_manual.TabIndex = 22
-Me.CheckBox3_manual.Text = "Установлено вручную"
-Me.CheckBox3_manual.UseVisualStyleBackColor = true
 '
 'TabPage5
 '
@@ -4833,10 +4821,10 @@ Me.ToolStrip1.Dock = System.Windows.Forms.DockStyle.Fill
 Me.ToolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
 Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cmdUserAdd, Me.ToolStripSeparator1, Me.cmdUserDel, Me.ToolStripSeparator2, Me.cmdUserPassEncript, Me.ToolStripSeparator3, Me.btnUserCancel, Me.ToolStripSeparator4})
 Me.ToolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow
-Me.ToolStrip1.Location = New System.Drawing.Point(551, 0)
+Me.ToolStrip1.Location = New System.Drawing.Point(557, 0)
 Me.ToolStrip1.Name = "ToolStrip1"
 Me.TableLayoutPanel4.SetRowSpan(Me.ToolStrip1, 5)
-Me.ToolStrip1.Size = New System.Drawing.Size(102, 125)
+Me.ToolStrip1.Size = New System.Drawing.Size(96, 125)
 Me.ToolStrip1.TabIndex = 44
 Me.ToolStrip1.Text = "ToolStrip1"
 '
@@ -4846,13 +4834,13 @@ Me.cmdUserAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
 Me.cmdUserAdd.Image = CType(resources.GetObject("cmdUserAdd.Image"),System.Drawing.Image)
 Me.cmdUserAdd.ImageTransparentColor = System.Drawing.Color.Magenta
 Me.cmdUserAdd.Name = "cmdUserAdd"
-Me.cmdUserAdd.Size = New System.Drawing.Size(100, 20)
+Me.cmdUserAdd.Size = New System.Drawing.Size(94, 19)
 Me.cmdUserAdd.Text = "Добавить"
 '
 'ToolStripSeparator1
 '
 Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-Me.ToolStripSeparator1.Size = New System.Drawing.Size(100, 6)
+Me.ToolStripSeparator1.Size = New System.Drawing.Size(94, 6)
 '
 'cmdUserDel
 '
@@ -4860,13 +4848,13 @@ Me.cmdUserDel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
 Me.cmdUserDel.Image = CType(resources.GetObject("cmdUserDel.Image"),System.Drawing.Image)
 Me.cmdUserDel.ImageTransparentColor = System.Drawing.Color.Magenta
 Me.cmdUserDel.Name = "cmdUserDel"
-Me.cmdUserDel.Size = New System.Drawing.Size(100, 20)
+Me.cmdUserDel.Size = New System.Drawing.Size(94, 19)
 Me.cmdUserDel.Text = "Удалить"
 '
 'ToolStripSeparator2
 '
 Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-Me.ToolStripSeparator2.Size = New System.Drawing.Size(100, 6)
+Me.ToolStripSeparator2.Size = New System.Drawing.Size(94, 6)
 '
 'cmdUserPassEncript
 '
@@ -4874,13 +4862,13 @@ Me.cmdUserPassEncript.DisplayStyle = System.Windows.Forms.ToolStripItemDisplaySt
 Me.cmdUserPassEncript.Image = CType(resources.GetObject("cmdUserPassEncript.Image"),System.Drawing.Image)
 Me.cmdUserPassEncript.ImageTransparentColor = System.Drawing.Color.Magenta
 Me.cmdUserPassEncript.Name = "cmdUserPassEncript"
-Me.cmdUserPassEncript.Size = New System.Drawing.Size(100, 20)
+Me.cmdUserPassEncript.Size = New System.Drawing.Size(94, 19)
 Me.cmdUserPassEncript.Text = "Расшифровать"
 '
 'ToolStripSeparator3
 '
 Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-Me.ToolStripSeparator3.Size = New System.Drawing.Size(100, 6)
+Me.ToolStripSeparator3.Size = New System.Drawing.Size(94, 6)
 '
 'btnUserCancel
 '
@@ -4888,13 +4876,13 @@ Me.btnUserCancel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.T
 Me.btnUserCancel.Image = CType(resources.GetObject("btnUserCancel.Image"),System.Drawing.Image)
 Me.btnUserCancel.ImageTransparentColor = System.Drawing.Color.Magenta
 Me.btnUserCancel.Name = "btnUserCancel"
-Me.btnUserCancel.Size = New System.Drawing.Size(100, 20)
+Me.btnUserCancel.Size = New System.Drawing.Size(94, 19)
 Me.btnUserCancel.Text = "Отмена"
 '
 'ToolStripSeparator4
 '
 Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
-Me.ToolStripSeparator4.Size = New System.Drawing.Size(100, 6)
+Me.ToolStripSeparator4.Size = New System.Drawing.Size(94, 6)
 '
 'txtUMEMO
 '
@@ -4920,17 +4908,17 @@ Me.Label36.Text = "Примечание:"
 'txtUserEmailPwd
 '
 Me.txtUserEmailPwd.Dock = System.Windows.Forms.DockStyle.Fill
-Me.txtUserEmailPwd.Location = New System.Drawing.Point(409, 78)
+Me.txtUserEmailPwd.Location = New System.Drawing.Point(412, 78)
 Me.txtUserEmailPwd.Name = "txtUserEmailPwd"
 Me.txtUserEmailPwd.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
-Me.txtUserEmailPwd.Size = New System.Drawing.Size(139, 20)
+Me.txtUserEmailPwd.Size = New System.Drawing.Size(142, 20)
 Me.txtUserEmailPwd.TabIndex = 44
 '
 'lblEmailPass
 '
 Me.lblEmailPass.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
 Me.lblEmailPass.AutoSize = true
-Me.lblEmailPass.Location = New System.Drawing.Point(257, 81)
+Me.lblEmailPass.Location = New System.Drawing.Point(260, 81)
 Me.lblEmailPass.Name = "lblEmailPass"
 Me.lblEmailPass.Size = New System.Drawing.Size(146, 13)
 Me.lblEmailPass.TabIndex = 43
@@ -4941,7 +4929,7 @@ Me.lblEmailPass.Text = "Пароль электронной почты"
 Me.txtUserEmail.Dock = System.Windows.Forms.DockStyle.Fill
 Me.txtUserEmail.Location = New System.Drawing.Point(112, 78)
 Me.txtUserEmail.Name = "txtUserEmail"
-Me.txtUserEmail.Size = New System.Drawing.Size(139, 20)
+Me.txtUserEmail.Size = New System.Drawing.Size(142, 20)
 Me.txtUserEmail.TabIndex = 42
 '
 'lblEMAIL
@@ -4957,16 +4945,16 @@ Me.lblEMAIL.Text = "Email"
 'txtUserJab
 '
 Me.txtUserJab.Dock = System.Windows.Forms.DockStyle.Fill
-Me.txtUserJab.Location = New System.Drawing.Point(409, 53)
+Me.txtUserJab.Location = New System.Drawing.Point(412, 53)
 Me.txtUserJab.Name = "txtUserJab"
-Me.txtUserJab.Size = New System.Drawing.Size(139, 20)
+Me.txtUserJab.Size = New System.Drawing.Size(142, 20)
 Me.txtUserJab.TabIndex = 40
 '
 'lblJabber
 '
 Me.lblJabber.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
 Me.lblJabber.AutoSize = true
-Me.lblJabber.Location = New System.Drawing.Point(257, 56)
+Me.lblJabber.Location = New System.Drawing.Point(260, 56)
 Me.lblJabber.Name = "lblJabber"
 Me.lblJabber.Size = New System.Drawing.Size(146, 13)
 Me.lblJabber.TabIndex = 39
@@ -4977,7 +4965,7 @@ Me.lblJabber.Text = "Jabber"
 Me.txtUserIcq.Dock = System.Windows.Forms.DockStyle.Fill
 Me.txtUserIcq.Location = New System.Drawing.Point(112, 53)
 Me.txtUserIcq.Name = "txtUserIcq"
-Me.txtUserIcq.Size = New System.Drawing.Size(139, 20)
+Me.txtUserIcq.Size = New System.Drawing.Size(142, 20)
 Me.txtUserIcq.TabIndex = 31
 '
 'lblICQ
@@ -5003,17 +4991,17 @@ Me.lblSurname.Text = "ФИО"
 'txtUserPass
 '
 Me.txtUserPass.Dock = System.Windows.Forms.DockStyle.Fill
-Me.txtUserPass.Location = New System.Drawing.Point(409, 3)
+Me.txtUserPass.Location = New System.Drawing.Point(412, 3)
 Me.txtUserPass.Name = "txtUserPass"
 Me.txtUserPass.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
-Me.txtUserPass.Size = New System.Drawing.Size(139, 20)
+Me.txtUserPass.Size = New System.Drawing.Size(142, 20)
 Me.txtUserPass.TabIndex = 25
 '
 'lbluserPassword
 '
 Me.lbluserPassword.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
 Me.lbluserPassword.AutoSize = true
-Me.lbluserPassword.Location = New System.Drawing.Point(257, 6)
+Me.lbluserPassword.Location = New System.Drawing.Point(260, 6)
 Me.lbluserPassword.Name = "lbluserPassword"
 Me.lbluserPassword.Size = New System.Drawing.Size(146, 13)
 Me.lbluserPassword.TabIndex = 24
@@ -5032,9 +5020,9 @@ Me.lblUsername.Text = "Имя пользователя"
 'ChkPDC
 '
 Me.ChkPDC.AutoSize = true
-Me.ChkPDC.Location = New System.Drawing.Point(409, 103)
+Me.ChkPDC.Location = New System.Drawing.Point(412, 103)
 Me.ChkPDC.Name = "ChkPDC"
-Me.ChkPDC.Size = New System.Drawing.Size(139, 17)
+Me.ChkPDC.Size = New System.Drawing.Size(142, 17)
 Me.ChkPDC.TabIndex = 47
 Me.ChkPDC.Text = "User AD (Samba, LDAP)"
 Me.ChkPDC.UseVisualStyleBackColor = true
@@ -5045,7 +5033,7 @@ Me.txtUserName.Dock = System.Windows.Forms.DockStyle.Fill
 Me.txtUserName.FormattingEnabled = true
 Me.txtUserName.Location = New System.Drawing.Point(112, 3)
 Me.txtUserName.Name = "txtUserName"
-Me.txtUserName.Size = New System.Drawing.Size(139, 21)
+Me.txtUserName.Size = New System.Drawing.Size(142, 21)
 Me.txtUserName.TabIndex = 48
 '
 'txtUserFIO
@@ -5055,7 +5043,7 @@ Me.txtUserFIO.Dock = System.Windows.Forms.DockStyle.Fill
 Me.txtUserFIO.FormattingEnabled = true
 Me.txtUserFIO.Location = New System.Drawing.Point(112, 28)
 Me.txtUserFIO.Name = "txtUserFIO"
-Me.txtUserFIO.Size = New System.Drawing.Size(436, 21)
+Me.txtUserFIO.Size = New System.Drawing.Size(442, 21)
 Me.txtUserFIO.TabIndex = 49
 '
 'lstUsers
@@ -5178,7 +5166,7 @@ Me.btnNotesAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Tex
 Me.btnNotesAdd.Image = CType(resources.GetObject("btnNotesAdd.Image"),System.Drawing.Image)
 Me.btnNotesAdd.ImageTransparentColor = System.Drawing.Color.Magenta
 Me.btnNotesAdd.Name = "btnNotesAdd"
-Me.btnNotesAdd.Size = New System.Drawing.Size(118, 20)
+Me.btnNotesAdd.Size = New System.Drawing.Size(118, 19)
 Me.btnNotesAdd.Text = "Добавить"
 '
 'ToolStripSeparator5
@@ -5192,7 +5180,7 @@ Me.btnNotesDel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Tex
 Me.btnNotesDel.Image = CType(resources.GetObject("btnNotesDel.Image"),System.Drawing.Image)
 Me.btnNotesDel.ImageTransparentColor = System.Drawing.Color.Magenta
 Me.btnNotesDel.Name = "btnNotesDel"
-Me.btnNotesDel.Size = New System.Drawing.Size(118, 20)
+Me.btnNotesDel.Size = New System.Drawing.Size(118, 19)
 Me.btnNotesDel.Text = "Удалить"
 '
 'ToolStripSeparator6
@@ -5206,7 +5194,7 @@ Me.btnNotesCancel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.
 Me.btnNotesCancel.Image = CType(resources.GetObject("btnNotesCancel.Image"),System.Drawing.Image)
 Me.btnNotesCancel.ImageTransparentColor = System.Drawing.Color.Magenta
 Me.btnNotesCancel.Name = "btnNotesCancel"
-Me.btnNotesCancel.Size = New System.Drawing.Size(118, 20)
+Me.btnNotesCancel.Size = New System.Drawing.Size(118, 19)
 Me.btnNotesCancel.Text = "Отмена"
 '
 'ToolStripSeparator7
@@ -5851,7 +5839,7 @@ Me.btnBRNotesAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.T
 Me.btnBRNotesAdd.Image = CType(resources.GetObject("btnBRNotesAdd.Image"),System.Drawing.Image)
 Me.btnBRNotesAdd.ImageTransparentColor = System.Drawing.Color.Magenta
 Me.btnBRNotesAdd.Name = "btnBRNotesAdd"
-Me.btnBRNotesAdd.Size = New System.Drawing.Size(118, 20)
+Me.btnBRNotesAdd.Size = New System.Drawing.Size(118, 19)
 Me.btnBRNotesAdd.Text = "Добавить"
 '
 'ToolStripSeparator8
@@ -5865,7 +5853,7 @@ Me.btnBRNotesDel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.T
 Me.btnBRNotesDel.Image = CType(resources.GetObject("btnBRNotesDel.Image"),System.Drawing.Image)
 Me.btnBRNotesDel.ImageTransparentColor = System.Drawing.Color.Magenta
 Me.btnBRNotesDel.Name = "btnBRNotesDel"
-Me.btnBRNotesDel.Size = New System.Drawing.Size(118, 20)
+Me.btnBRNotesDel.Size = New System.Drawing.Size(118, 19)
 Me.btnBRNotesDel.Text = "Удалить"
 '
 'ToolStripSeparator9
@@ -5879,7 +5867,7 @@ Me.btnBRNotesCancel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyl
 Me.btnBRNotesCancel.Image = CType(resources.GetObject("btnBRNotesCancel.Image"),System.Drawing.Image)
 Me.btnBRNotesCancel.ImageTransparentColor = System.Drawing.Color.Magenta
 Me.btnBRNotesCancel.Name = "btnBRNotesCancel"
-Me.btnBRNotesCancel.Size = New System.Drawing.Size(118, 20)
+Me.btnBRNotesCancel.Size = New System.Drawing.Size(118, 19)
 Me.btnBRNotesCancel.Text = "Отмена"
 '
 'ToolStripSeparator10
@@ -6863,7 +6851,7 @@ Me.btnPRNNotesAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.
 Me.btnPRNNotesAdd.Image = CType(resources.GetObject("btnPRNNotesAdd.Image"),System.Drawing.Image)
 Me.btnPRNNotesAdd.ImageTransparentColor = System.Drawing.Color.Magenta
 Me.btnPRNNotesAdd.Name = "btnPRNNotesAdd"
-Me.btnPRNNotesAdd.Size = New System.Drawing.Size(118, 20)
+Me.btnPRNNotesAdd.Size = New System.Drawing.Size(118, 19)
 Me.btnPRNNotesAdd.Text = "Добавить"
 '
 'ToolStripSeparator11
@@ -6877,7 +6865,7 @@ Me.btnPRNNotesDel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.
 Me.btnPRNNotesDel.Image = CType(resources.GetObject("btnPRNNotesDel.Image"),System.Drawing.Image)
 Me.btnPRNNotesDel.ImageTransparentColor = System.Drawing.Color.Magenta
 Me.btnPRNNotesDel.Name = "btnPRNNotesDel"
-Me.btnPRNNotesDel.Size = New System.Drawing.Size(118, 20)
+Me.btnPRNNotesDel.Size = New System.Drawing.Size(118, 19)
 Me.btnPRNNotesDel.Text = "Удалить"
 '
 'ToolStripSeparator12
@@ -6891,7 +6879,7 @@ Me.btnPRNNotesCancel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplaySty
 Me.btnPRNNotesCancel.Image = CType(resources.GetObject("btnPRNNotesCancel.Image"),System.Drawing.Image)
 Me.btnPRNNotesCancel.ImageTransparentColor = System.Drawing.Color.Magenta
 Me.btnPRNNotesCancel.Name = "btnPRNNotesCancel"
-Me.btnPRNNotesCancel.Size = New System.Drawing.Size(118, 20)
+Me.btnPRNNotesCancel.Size = New System.Drawing.Size(118, 19)
 Me.btnPRNNotesCancel.Text = "Отмена"
 '
 'ToolStripSeparator13
@@ -8015,7 +8003,7 @@ Me.btnNETAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
 Me.btnNETAdd.Image = CType(resources.GetObject("btnNETAdd.Image"),System.Drawing.Image)
 Me.btnNETAdd.ImageTransparentColor = System.Drawing.Color.Magenta
 Me.btnNETAdd.Name = "btnNETAdd"
-Me.btnNETAdd.Size = New System.Drawing.Size(118, 20)
+Me.btnNETAdd.Size = New System.Drawing.Size(118, 19)
 Me.btnNETAdd.Text = "Добавить"
 '
 'ToolStripSeparator14
@@ -8029,7 +8017,7 @@ Me.btnNETNotesDel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.
 Me.btnNETNotesDel.Image = CType(resources.GetObject("btnNETNotesDel.Image"),System.Drawing.Image)
 Me.btnNETNotesDel.ImageTransparentColor = System.Drawing.Color.Magenta
 Me.btnNETNotesDel.Name = "btnNETNotesDel"
-Me.btnNETNotesDel.Size = New System.Drawing.Size(118, 20)
+Me.btnNETNotesDel.Size = New System.Drawing.Size(118, 19)
 Me.btnNETNotesDel.Text = "Удалить"
 '
 'ToolStripSeparator15
@@ -8043,7 +8031,7 @@ Me.btnNETNotesCancel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplaySty
 Me.btnNETNotesCancel.Image = CType(resources.GetObject("btnNETNotesCancel.Image"),System.Drawing.Image)
 Me.btnNETNotesCancel.ImageTransparentColor = System.Drawing.Color.Magenta
 Me.btnNETNotesCancel.Name = "btnNETNotesCancel"
-Me.btnNETNotesCancel.Size = New System.Drawing.Size(118, 20)
+Me.btnNETNotesCancel.Size = New System.Drawing.Size(118, 19)
 Me.btnNETNotesCancel.Text = "Отмена"
 '
 'ToolStripSeparator16
@@ -9241,7 +9229,7 @@ Me.btnOTHAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
 Me.btnOTHAdd.Image = CType(resources.GetObject("btnOTHAdd.Image"),System.Drawing.Image)
 Me.btnOTHAdd.ImageTransparentColor = System.Drawing.Color.Magenta
 Me.btnOTHAdd.Name = "btnOTHAdd"
-Me.btnOTHAdd.Size = New System.Drawing.Size(118, 20)
+Me.btnOTHAdd.Size = New System.Drawing.Size(118, 19)
 Me.btnOTHAdd.Text = "Добавить"
 '
 'ToolStripSeparator17
@@ -9255,7 +9243,7 @@ Me.btnOTHNotesDel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.
 Me.btnOTHNotesDel.Image = CType(resources.GetObject("btnOTHNotesDel.Image"),System.Drawing.Image)
 Me.btnOTHNotesDel.ImageTransparentColor = System.Drawing.Color.Magenta
 Me.btnOTHNotesDel.Name = "btnOTHNotesDel"
-Me.btnOTHNotesDel.Size = New System.Drawing.Size(118, 20)
+Me.btnOTHNotesDel.Size = New System.Drawing.Size(118, 19)
 Me.btnOTHNotesDel.Text = "Удалить"
 '
 'ToolStripSeparator18
@@ -9269,7 +9257,7 @@ Me.btnOTHNotesCancel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplaySty
 Me.btnOTHNotesCancel.Image = CType(resources.GetObject("btnOTHNotesCancel.Image"),System.Drawing.Image)
 Me.btnOTHNotesCancel.ImageTransparentColor = System.Drawing.Color.Magenta
 Me.btnOTHNotesCancel.Name = "btnOTHNotesCancel"
-Me.btnOTHNotesCancel.Size = New System.Drawing.Size(118, 20)
+Me.btnOTHNotesCancel.Size = New System.Drawing.Size(118, 19)
 Me.btnOTHNotesCancel.Text = "Отмена"
 '
 'ToolStripSeparator19
@@ -9689,13 +9677,13 @@ Me.СостояниеУстройстваToolStripMenuItem.Visible = false
 'mnuSostOn
 '
 Me.mnuSostOn.Name = "mnuSostOn"
-Me.mnuSostOn.Size = New System.Drawing.Size(147, 22)
+Me.mnuSostOn.Size = New System.Drawing.Size(139, 22)
 Me.mnuSostOn.Text = "В работе"
 '
 'mnuSostOff
 '
 Me.mnuSostOff.Name = "mnuSostOff"
-Me.mnuSostOff.Size = New System.Drawing.Size(147, 22)
+Me.mnuSostOff.Size = New System.Drawing.Size(139, 22)
 Me.mnuSostOff.Text = "Не в работе"
 '
 'ППРToolStripMenuItem
@@ -9708,37 +9696,37 @@ Me.ППРToolStripMenuItem.Text = "ППР"
 'ТО1ToolStripMenuItem
 '
 Me.ТО1ToolStripMenuItem.Name = "ТО1ToolStripMenuItem"
-Me.ТО1ToolStripMenuItem.Size = New System.Drawing.Size(100, 22)
+Me.ТО1ToolStripMenuItem.Size = New System.Drawing.Size(96, 22)
 Me.ТО1ToolStripMenuItem.Text = "ТО1"
 '
 'ТО2ToolStripMenuItem
 '
 Me.ТО2ToolStripMenuItem.Name = "ТО2ToolStripMenuItem"
-Me.ТО2ToolStripMenuItem.Size = New System.Drawing.Size(100, 22)
+Me.ТО2ToolStripMenuItem.Size = New System.Drawing.Size(96, 22)
 Me.ТО2ToolStripMenuItem.Text = "ТО2"
 '
 'ТО3ToolStripMenuItem
 '
 Me.ТО3ToolStripMenuItem.Name = "ТО3ToolStripMenuItem"
-Me.ТО3ToolStripMenuItem.Size = New System.Drawing.Size(100, 22)
+Me.ТО3ToolStripMenuItem.Size = New System.Drawing.Size(96, 22)
 Me.ТО3ToolStripMenuItem.Text = "ТО3"
 '
 'ТО4ToolStripMenuItem
 '
 Me.ТО4ToolStripMenuItem.Name = "ТО4ToolStripMenuItem"
-Me.ТО4ToolStripMenuItem.Size = New System.Drawing.Size(100, 22)
+Me.ТО4ToolStripMenuItem.Size = New System.Drawing.Size(96, 22)
 Me.ТО4ToolStripMenuItem.Text = "ТО4"
 '
 'ТО5ToolStripMenuItem
 '
 Me.ТО5ToolStripMenuItem.Name = "ТО5ToolStripMenuItem"
-Me.ТО5ToolStripMenuItem.Size = New System.Drawing.Size(100, 22)
+Me.ТО5ToolStripMenuItem.Size = New System.Drawing.Size(96, 22)
 Me.ТО5ToolStripMenuItem.Text = "ТО5"
 '
 'ТО6ToolStripMenuItem
 '
 Me.ТО6ToolStripMenuItem.Name = "ТО6ToolStripMenuItem"
-Me.ТО6ToolStripMenuItem.Size = New System.Drawing.Size(100, 22)
+Me.ТО6ToolStripMenuItem.Size = New System.Drawing.Size(96, 22)
 Me.ТО6ToolStripMenuItem.Text = "ТО6"
 '
 'PingToolStripMenuItem
@@ -9901,31 +9889,31 @@ Me.ПечатьToolStripMenuItem.Text = "Печать"
 'mnu_Z_to_Office
 '
 Me.mnu_Z_to_Office.Name = "mnu_Z_to_Office"
-Me.mnu_Z_to_Office.Size = New System.Drawing.Size(214, 22)
+Me.mnu_Z_to_Office.Size = New System.Drawing.Size(207, 22)
 Me.mnu_Z_to_Office.Text = "Акт-Заявка"
 '
 'РаспискаToolStripMenuItem
 '
 Me.РаспискаToolStripMenuItem.Name = "РаспискаToolStripMenuItem"
-Me.РаспискаToolStripMenuItem.Size = New System.Drawing.Size(214, 22)
+Me.РаспискаToolStripMenuItem.Size = New System.Drawing.Size(207, 22)
 Me.РаспискаToolStripMenuItem.Text = "Расписка"
 '
 'НарядToolStripMenuItem
 '
 Me.НарядToolStripMenuItem.Name = "НарядToolStripMenuItem"
-Me.НарядToolStripMenuItem.Size = New System.Drawing.Size(214, 22)
+Me.НарядToolStripMenuItem.Size = New System.Drawing.Size(207, 22)
 Me.НарядToolStripMenuItem.Text = "Наряд"
 '
 'МатериальныйПропускToolStripMenuItem
 '
 Me.МатериальныйПропускToolStripMenuItem.Name = "МатериальныйПропускToolStripMenuItem"
-Me.МатериальныйПропускToolStripMenuItem.Size = New System.Drawing.Size(214, 22)
+Me.МатериальныйПропускToolStripMenuItem.Size = New System.Drawing.Size(207, 22)
 Me.МатериальныйПропускToolStripMenuItem.Text = "Материальный пропуск"
 '
 'БланкToolStripMenuItem
 '
 Me.БланкToolStripMenuItem.Name = "БланкToolStripMenuItem"
-Me.БланкToolStripMenuItem.Size = New System.Drawing.Size(214, 22)
+Me.БланкToolStripMenuItem.Size = New System.Drawing.Size(207, 22)
 Me.БланкToolStripMenuItem.Text = "Бланк"
 '
 'ilsCommands
@@ -9940,6 +9928,7 @@ Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
 Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
 Me.ClientSize = New System.Drawing.Size(957, 646)
 Me.Controls.Add(Me.spCont)
+Me.DoubleBuffered = true
 Me.Icon = CType(resources.GetObject("$this.Icon"),System.Drawing.Icon)
 Me.MinimumSize = New System.Drawing.Size(902, 601)
 Me.Name = "frmComputers"
@@ -11033,6 +11022,5 @@ End Sub
     Friend WithEvents CheckBox2 As System.Windows.Forms.CheckBox
     Friend WithEvents gbPRN_USTR As System.Windows.Forms.GroupBox
     Friend WithEvents lvUSTR_PRINT As System.Windows.Forms.ListView
-    Friend WithEvents CheckBox3_manual As System.Windows.Forms.CheckBox
 
 End Class

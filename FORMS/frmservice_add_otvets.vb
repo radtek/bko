@@ -109,7 +109,7 @@
             .AddNew()
             .Fields("otzyv").Value = txtOtzyv.Text
             .Fields("Master").Value = cmbMaster.Text
-            .Fields("Data").Value = dtPic.Value
+            .Fields("D_T").Value = dtPic.Value
             .Fields("id_rem").Value = frmserviceDesc.r1COUNT
             .Update()
         End With
@@ -164,7 +164,7 @@
             .Fields("Mesto_Compa").Value = uname 'Место установки устройства
             .Fields("istochnik").Value = "" 'Источник
             .Fields("Master").Value = cmbMaster.Text 'Мастер
-            .Fields("Date").Value = Date.Today 'Дата регистрации
+            .Fields("D_T").Value = Date.Today 'Дата регистрации
             .Fields("phone").Value = "" 'Телефон
             .Fields("srok").Value = Date.Today 'Срок исполнения
             .Fields("name_of_remont").Value = "" 'Название
@@ -173,7 +173,7 @@
             .Fields("otvetstv").Value = cmbOtv.Text 'Ответственный
             .Fields("krit_rem").Value = "" 'Критичность
             .Fields("Uroven").Value = cmbKrit.Text 'Тип
-            .Fields("MeMo").Value = "" 'Комментарий
+            .Fields("PAMIATKA").Value = "" 'Комментарий
             .Fields("PREF").Value = "C"
 
 
@@ -235,7 +235,7 @@
                 With rs
                     .Fields("otzyv").Value = txtOtzyv.Text
                     .Fields("Master").Value = cmbMaster.Text
-                    .Fields("Data").Value = dtPic.Value
+                    .Fields("D_T").Value = dtPic.Value
                     .Fields("id_rem").Value = frmserviceDesc.r1COUNT
                     .Update()
                 End With
@@ -289,7 +289,7 @@
                     .AddNew()
                     .Fields("otzyv").Value = txtOtzyv.Text
                     .Fields("Master").Value = cmbMaster.Text
-                    .Fields("Data").Value = dtPic.Value
+                    .Fields("D_T").Value = dtPic.Value
                     .Fields("id_rem").Value = frmserviceDesc.r1COUNT
                     .Update()
                 End With

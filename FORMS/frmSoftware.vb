@@ -2,7 +2,7 @@
 Public Class frmSoftware
     Private search_ As Boolean
     Private rCOUNT As Integer
-    Private sCOUNT As Integer
+    'Private frmComputers.sCOUNT As Integer
     Private m_SortingColumn As ColumnHeader
 
     Private Sub txtSearch_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtSearch.KeyDown
@@ -90,7 +90,7 @@ Public Class frmSoftware
                     If isThere(.Fields("TIP").Value, sFindText, mde) = True Then GoTo FoundiR
 
 
-                FoundiR:
+FoundiR:
                 If Len(FINDTXT) = 0 Then
                 Else
 
@@ -101,7 +101,7 @@ Public Class frmSoftware
                     With rs3
                         .MoveFirst()
                         Do While Not .EOF
-                            If GID <> - 1 Then
+                            If GID <> -1 Then
 
                                 Select Case .Fields("tiptehn").Value
 
@@ -547,28 +547,39 @@ Public Class frmSoftware
         End Select
 
 
+        Dim rs As Recordset
+        rs = New Recordset
+        rs.Open("SELECT tiptehn FROM kompy WHERE id =" & d(1), DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+
+        With rs
+            TipTehn = .Fields("tiptehn").Value
+        End With
+
+        rs.Close()
+        rs = Nothing
+
         Select Case d(0)
 
             Case "C"
 
                 Call LOAD_SOFT(d(1), Me.lstSoftware)
-                sCOUNT = d(1)
+                frmComputers.sCOUNT = d(1)
 
             Case "G"
                 lstSoftware.Items.Clear()
-                sCOUNT = 0
+                frmComputers.sCOUNT = 0
 
             Case "O"
                 lstSoftware.Items.Clear()
-                sCOUNT = 0
+                frmComputers.sCOUNT = 0
 
             Case "K"
                 lstSoftware.Items.Clear()
-                sCOUNT = 0
+                frmComputers.sCOUNT = 0
 
             Case Else
                 lstSoftware.Items.Clear()
-                sCOUNT = 0
+                frmComputers.sCOUNT = 0
 
 
         End Select
@@ -625,6 +636,7 @@ Public Class frmSoftware
 
                 If Not IsDBNull(.Fields("WO_SETUP").Value) Then Me.CheckBox3_manual.Checked = .Fields("WO_SETUP").Value 'esq 
 
+
                 'cmbTipPo
                 'txtLicKey
                 'cmbSoftPr
@@ -654,8 +666,8 @@ Public Class frmSoftware
         rs1 = Nothing
 
         Exit Sub
-        err_:
-        A:
+err_:
+A:
         DTInstall.Value = Date.Today
         dtGok.Value = Date.Today
     End Sub
@@ -794,11 +806,12 @@ Public Class frmSoftware
 
         If Len(cmbSoftware.Text) = 0 Then Exit Sub
 
-        If sCOUNT = 0 Or Len(sCOUNT) = 0 Then Exit Sub
+        If frmComputers.sCOUNT = 0 Or Len(frmComputers.sCOUNT) = 0 Then Exit Sub
 
 
         If Not (RSExists("PO", "Name", cmbSoftware.Text)) Then
-            AddTreePar(Me.cmbSoftware.Text, Me.cmbTipPo.Text, Me.cmbSoftPr.Text, "SPR_PO", Me.cmbSoftware) 'esq сохраним ещё и тип ПО
+            'AddTwoPar(Me.cmbSoftware.Text, Me.cmbSoftPr.Text, "SPR_PO", Me.cmbSoftware)
+  AddTreePar(Me.cmbSoftware.Text, Me.cmbTipPo.Text, Me.cmbSoftPr.Text, "SPR_PO", Me.cmbSoftware) 'esq сохраним ещё и тип ПО
         End If
 
         Dim rs2 As Recordset
@@ -821,7 +834,7 @@ Public Class frmSoftware
                 .Fields("L_key").Value = txtLicKey.Text
                 .Fields("d_p").Value = DTInstall.Value
                 .Fields("d_o").Value = dtGok.Value
-                .Fields("Id_Comp").Value = sCOUNT
+                .Fields("Id_Comp").Value = frmComputers.sCOUNT
                 .Fields("Publisher").Value = Replace(cmbSoftPr.Text, "'", "") 'esq
                 .Fields("TIP").Value = cmbTipPo.Text
                 .Fields("WO_SETUP").Value = Me.CheckBox3_manual.Checked 'esq
@@ -830,7 +843,7 @@ Public Class frmSoftware
             rs2.Close()
             rs2 = Nothing
 
-            'esq добавление нового производителя ************************
+ 'esq добавление нового производителя ************************
             cmbSoftPr.Text = Replace(cmbSoftPr.Text, "'", "")
             If Not RSExists("PROYZV", "PROIZV", cmbSoftPr.Text) Then
                 Dim sSQL1 As String
@@ -838,8 +851,6 @@ Public Class frmSoftware
                 DB7.Execute(sSQL1)
             End If
             'esq ************************
-
-
         Else
             Call _
                 SaveActivityToLogDB(
@@ -855,17 +866,18 @@ Public Class frmSoftware
                 .Fields("L_key").Value = txtLicKey.Text
                 .Fields("d_p").Value = DTInstall.Value
                 .Fields("d_o").Value = dtGok.Value
-                .Fields("Id_Comp").Value = sCOUNT
+                .Fields("Id_Comp").Value = frmComputers.sCOUNT
                 .Fields("Publisher").Value = cmbSoftPr.Text
                 .Fields("TIP").Value = cmbTipPo.Text
-                .Fields("NomerSoftKomp").Value = Me.lstSoftware.Items.Count + 1 'esq
+.Fields("NomerSoftKomp").Value = Me.lstSoftware.Items.Count + 1 'esq
                 .Fields("WO_SETUP").Value = Me.CheckBox3_manual.Checked 'esq
                 .Update()
             End With
             rs2.Close()
             rs2 = Nothing
 
-            'esq добавление нового производителя ************************
+
+       'esq добавление нового производителя ************************
             cmbSoftPr.Text = Replace(cmbSoftPr.Text, "'", "")
             If Not RSExists("PROYZV", "PROIZV", cmbSoftPr.Text) Then
                 Dim sSQL1 As String
@@ -886,7 +898,8 @@ Public Class frmSoftware
         dtGok.Value = Date.Today
         Me.CheckBox3_manual.Checked = False 'esq
 
-        Call LOAD_SOFT(sCOUNT, Me.lstSoftware)
+        Call LOAD_SOFT(frmComputers.sCOUNT, Me.lstSoftware)
+
         Exit Sub
 err_:
 
@@ -946,7 +959,7 @@ err_:
 
         End If
 
-        Call LOAD_SOFT(sCOUNT, Me.lstSoftware)
+        Call LOAD_SOFT(frmComputers.sCOUNT, Me.lstSoftware)
     End Sub
 
     Private Sub btnCancel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCancel.Click
@@ -959,7 +972,7 @@ err_:
         cmbSoftPr.Text = ""
         DTInstall.Value = Date.Today
         dtGok.Value = Date.Today
-        Me.CheckBox3_manual.Checked = False 'esq
+ Me.CheckBox3_manual.Checked = False 'esq
     End Sub
 
     Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
@@ -1001,7 +1014,7 @@ err_:
                 Dim rs As Recordset
                 Dim A1 As String
                 rs = New Recordset
-                rs.Open("SELECT NET_NAME FROM kompy where id=" & sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
+                rs.Open("SELECT NET_NAME FROM kompy where id=" & frmComputers.sCOUNT, DB7, CursorTypeEnum.adOpenDynamic,
                         LockTypeEnum.adLockOptimistic)
 
                 With rs
@@ -1027,7 +1040,7 @@ err_:
 
         End If
 
-        Call textp_Upd(Me.lstSoftware, sCOUNT) 'esq
+        Call textp_Upd(Me.lstSoftware, frmComputers.sCOUNT) 'esq
 
         Dim langfile As New IniFile(sLANGPATH)
 
@@ -1039,14 +1052,14 @@ err_:
 
         Me.lstSoftware.Visible = False
 
-        Call SAVE_SOFT(Me.lstSoftware, sCOUNT)
+        Call SAVE_SOFT(Me.lstSoftware, frmComputers.sCOUNT)
 
-        Call LOAD_SOFT(sCOUNT, Me.lstSoftware)
+        Call LOAD_SOFT(frmComputers.sCOUNT, Me.lstSoftware)
 
         Me.lstSoftware.Visible = True
     End Sub
 
-    Private Sub frmSoftware_KeyUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles MyBase.KeyUp
+Private Sub frmSoftware_KeyUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles MyBase.KeyUp
 
         If e.Control And Keys.Enter Then
 
@@ -1055,5 +1068,4 @@ err_:
         End If
 
     End Sub
-
 End Class

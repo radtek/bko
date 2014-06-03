@@ -155,6 +155,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="FORMS\frm_mesta.Designer.vb">
+      <DependentUpon>frm_mesta.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FORMS\frm_mesta.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FORMS\IniFile.vb" />
     <Compile Include="FORMS\frmAbout.Designer.vb">
       <DependentUpon>frmAbout.vb</DependentUpon>
@@ -507,6 +513,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FORMS\frmTreb_Act_treb.resx">
       <DependentUpon>frmTreb_Act_treb.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FORMS\frm_mesta.resx">
+      <DependentUpon>frm_mesta.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FORMS\frm_os3.resx">
       <DependentUpon>frm_os3.vb</DependentUpon>
