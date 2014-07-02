@@ -1414,7 +1414,7 @@ Error_:
         If zCOUNT > 0 Then
 
             rs = New Recordset
-            rs.Open("SELECT * FROM CARTRIDG_Z WHERE ID_C=" & rCOUNT & " ORDER BY D_TZAP DESC", DB7,
+            rs.Open("SELECT * FROM CARTRIDG_Z WHERE ID_C=" & rCOUNT & " ORDER BY datazap DESC", DB7,
                     CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
             Dim intCount As Decimal = 0
