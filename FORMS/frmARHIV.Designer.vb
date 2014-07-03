@@ -28,6 +28,7 @@ Partial Class frmARHIV
         Me.ProgressBar2 = New System.Windows.Forms.ProgressBar()
         Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
         Me.lbArh = New System.Windows.Forms.ListBox()
+        Me.lvArh = New System.Windows.Forms.ListView()
         Me.SuspendLayout()
         '
         'btnZipUp
@@ -78,16 +79,32 @@ Partial Class frmARHIV
         'lbArh
         '
         Me.lbArh.FormattingEnabled = True
-        Me.lbArh.Location = New System.Drawing.Point(3, 3)
+        Me.lbArh.Location = New System.Drawing.Point(3, 65)
         Me.lbArh.Name = "lbArh"
-        Me.lbArh.Size = New System.Drawing.Size(324, 368)
+        Me.lbArh.Size = New System.Drawing.Size(290, 303)
         Me.lbArh.TabIndex = 22
+        Me.lbArh.Visible = False
+        '
+        'lvArh
+        '
+        Me.lvArh.Dock = System.Windows.Forms.DockStyle.Top
+        Me.lvArh.FullRowSelect = True
+        Me.lvArh.GridLines = True
+        Me.lvArh.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable
+        Me.lvArh.Location = New System.Drawing.Point(0, 0)
+        Me.lvArh.Name = "lvArh"
+        Me.lvArh.Size = New System.Drawing.Size(331, 412)
+        Me.lvArh.Sorting = System.Windows.Forms.SortOrder.Ascending
+        Me.lvArh.TabIndex = 23
+        Me.lvArh.UseCompatibleStateImageBehavior = False
+        Me.lvArh.View = System.Windows.Forms.View.Details
         '
         'frmARHIV
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(331, 487)
+        Me.Controls.Add(Me.lvArh)
         Me.Controls.Add(Me.lbArh)
         Me.Controls.Add(Me.ProgressBar2)
         Me.Controls.Add(Me.ProgressBar1)
@@ -108,4 +125,5 @@ Partial Class frmARHIV
     Friend WithEvents ProgressBar2 As System.Windows.Forms.ProgressBar
     Friend WithEvents ProgressBar1 As System.Windows.Forms.ProgressBar
     Friend WithEvents lbArh As System.Windows.Forms.ListBox
+    Friend WithEvents lvArh As System.Windows.Forms.ListView
 End Class
