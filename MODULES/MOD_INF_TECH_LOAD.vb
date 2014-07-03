@@ -2054,10 +2054,13 @@ Module MOD_INF_TECH_LOAD
                 If Not IsDBNull(.Fields("Soft").Value) Then _
                     lstSoftware.Items(CInt(intCount)).SubItems.Add(.Fields("Soft").Value)
 
-                If Not IsDBNull(.Fields("VERS").Value) Then _
+                If Not IsDBNull(.Fields("VERS").Value) Then
                     lstSoftware.Items(CInt(intCount)).SubItems.Add(.Fields("VERS").Value)
+                Else 'esq
+                    lstSoftware.Items(CInt(intCount)).SubItems.Add("")
+                End If
 
-                If Not IsDBNull(.Fields("L_key").Value) Then
+                If (Not IsDBNull(.Fields("L_key").Value)) And (.Fields("L_key").Value <> "") Then
                     lstSoftware.Items(CInt(intCount)).SubItems.Add(.Fields("L_key").Value)
                 Else
                     lstSoftware.Items(CInt(intCount)).SubItems.Add("")

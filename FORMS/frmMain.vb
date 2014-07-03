@@ -616,7 +616,7 @@ error_Renamed:
     Private Sub ExitToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ExitToolStripMenuItem.Click
 
         Call UnLoadDatabase()
-        End
+        'End
 
     End Sub
 
@@ -2544,8 +2544,66 @@ err_:
         Dim rs, rs1, rs2 As Recordset
         Dim sSQL, sSQL1, sSQL2, F1, H1 As String
         Dim ID_PROIZV As Integer
+        Dim Upd As Boolean
 
+        ' выделение Версии из Наименования в SOFT_INSTALL
+        If MsgBox("Внимание! Экспериментальная функция!" + vbCrLf + _
+                  "Выделение Версии из Наименования в учёте ПО." + vbCrLf + _
+                  "За номер версии принимаются символы в конце наименования если:" + vbCrLf + _
+                  "- они заключены в <>;" + vbCrLf + _
+                  "- они заключены в () и включают цифрой;" + vbCrLf + _
+                  "- они содержат цифры и не менее одной точки." + vbCrLf + _
+                  "" + vbCrLf + _
+                  "Операция необратима! Если согласны - жмите ОК." + vbCrLf + vbCrLf + _
+                  "P.S. Предложения принимаются на форуме. После полного одобрения " + _
+                  "функция будет реализована и в импорте из эвереста.", vbOKCancel) = 2 Then GoTo ПропустимВерсии
+        'sSQL = "SELECT * FROM SOFT_INSTALL WHERE Soft not like '%update%' and Soft not like '%Обновление%' ORDER BY Soft DESC"
+        sSQL = "SELECT * FROM SOFT_INSTALL ORDER BY Soft DESC"
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+        With rs
+            Try
+                .MoveFirst()
+            Catch ex As Exception
+            End Try
+            Do While Not .EOF
+                'If IsDBNull(.Fields("VERS").Value) = True And InStr(.Fields("Soft").Value, "<") > 0 And InStr(.Fields("Soft").Value, ">") = Len(.Fields("Soft").Value) Then
+                '    F1 = Mid(.Fields("Soft").Value, InStr(.Fields("Soft").Value, "<") + 1, InStr(.Fields("Soft").Value, ">") - InStr(.Fields("Soft").Value, "<") - 1)
+                '    H1 = Trim(Mid(.Fields("Soft").Value, 1, InStr(.Fields("Soft").Value, "<") - 1))
+                '    .Fields("Soft").Value = H1
+                '    .Fields("VERS").Value = F1
+                '.Update()
+                F1 = ""
+                Call GetVers(.Fields("Soft").Value, F1, Upd)
+                If Upd = True Then
+                    .Fields("VERS").Value = F1
+                    .Update()
+                End If
+                .MoveNext()
+            Loop
+        End With
+        rs.Close()
+        rs = Nothing
+        sSQL = "SELECT * FROM SPR_PO ORDER BY Name DESC"
+        rs = New Recordset
+        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+        With rs
+            Try
+                .MoveFirst()
+            Catch ex As Exception
+            End Try
+            Do While Not .EOF
+                If InStr(.Fields("Name").Value, "<") > 0 And InStr(.Fields("Name").Value, ">") = Len(.Fields("Name").Value) Then
+                    .Fields("Name").Value = Trim(Mid(.Fields("Name").Value, 1, InStr(.Fields("Name").Value, "<") - 1))
+                    .Update()
+                End If
+                .MoveNext()
+            Loop
+        End With
+        rs.Close()
+        rs = Nothing
 
+ПропустимВерсии:
         ' сжатие SPR_PO
         sSQL = "SELECT * FROM SPR_PO ORDER BY Name"
         rs = New Recordset
@@ -2625,8 +2683,9 @@ err_:
         rs = Nothing
 
 
-        ' заполнение SPR_PO
-        sSQL = "SELECT * FROM SOFT_INSTALL WHERE Soft not like '%update%' and Soft not like '%Обновление%' ORDER BY Soft DESC"
+        ' обновление SPR_PO
+        'sSQL = "SELECT * FROM SOFT_INSTALL WHERE Soft not like '%update%' and Soft not like '%Обновление%' ORDER BY Soft DESC"
+        sSQL = "SELECT * FROM SOFT_INSTALL ORDER BY Soft DESC"
         rs = New Recordset
         rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
         With rs
@@ -2717,4 +2776,68 @@ err_:
         rs = Nothing
 
     End Sub
+
+    'esq *********
+    Public Sub GetVers(ByRef POname As String, Optional ByRef POvers As String = "", Optional ByRef Upd As Boolean = False)
+
+        If InStr(POname, "<") > 0 And InStr(POname, ">") = Len(POname) Then
+            POvers = Mid(POname, InStr(POname, "<") + 1, InStr(POname, ">") - InStr(POname, "<") - 1)
+            POname = Trim(Microsoft.VisualBasic.Left(POname, InStr(POname, "<") - 1))
+            Upd = True
+        End If
+
+        If InStr(POname, "(KB") > 0 And InStr(POname, ")") = Len(POname) Then
+            If IsNumeric(Mid(POname, InStr(POname, ")") - 1, 1)) Then
+                POvers = Mid(POname, InStr(POname, "(") + 1, InStr(POname, ")") - InStr(POname, "(") - 1)
+                POname = Trim(Microsoft.VisualBasic.Left(POname, InStr(POname, "(") - 1))
+                Upd = True
+                Exit Sub
+            End If
+        End If
+
+        Dim pnt As Integer = 0
+        Dim nv As Integer = Len(POname)
+        If InStrRev(POname, "(") > 0 And InStrRev(POname, ")") = Len(POname) Then
+            'If IsNumeric(Mid(POname, InStrRev(POname, "(") + 1, 1)) And IsNumeric(Mid(POname, InStrRev(POname, ")") - 1, 1)) Then
+            Do While nv > InStrRev(POname, "(")
+                If Mid(POname, nv, 1) Like "*[0-9]*" Then
+                    pnt = pnt + 1
+                End If
+                nv = nv - 1
+            Loop
+            If pnt >= 1 Then
+                POvers = Mid(POname, InStrRev(POname, "(") + 1, InStrRev(POname, ")") - InStrRev(POname, "(") - 1)
+                POname = Trim(Microsoft.VisualBasic.Left(POname, InStrRev(POname, "(") - 1))
+                Upd = True
+            End If
+        End If
+
+        Dim no As Integer
+        nv = Len(POname)
+        If nv > 0 Then
+            Do Until Mid(POname, nv, 1) Like "*[!0-9KB.]*" Or nv <= 1
+                If Mid(POname, nv, 1) Like "*[KB.]*" Then
+                    pnt = pnt + 1
+                End If
+                nv = nv - 1
+            Loop
+            no = nv
+            If Mid(POname, no, 1) Like "*[-. ]*" And pnt >= 1 Then
+                If Mid(POname, no - 1, 1) Like "*[-v.]*" Then
+                    no = no - 1
+                    If Mid(POname, no - 2, 1) Like "*[v]*" Then
+                        no = no - 1
+                    End If
+                End If
+            End If
+        End If
+        If pnt >= 1 Then
+            POvers = Microsoft.VisualBasic.Right(POname, Len(POname) - nv) + IIf(POvers = "", "", " (" + POvers + ")")
+            POname = Trim(Microsoft.VisualBasic.Left(POname, no - 1))
+            Upd = True
+            'Exit Sub
+        End If
+    End Sub
+    'esq *********
+
 End Class

@@ -1045,10 +1045,10 @@ nextA:
         Dim uname As String
         Dim A As String
         Dim DC As String
-        Dim uname1 As String
-        Dim uname2 As String
+        Dim unameИздатель As String
+        Dim unameДата As String
         Dim uname3 As String
-        Dim uname4 As String
+        Dim unameВерсия As String
 
         'esq 130611 *****************************
         Dim FSO As Object
@@ -1073,30 +1073,35 @@ nextA:
         intcount = 0
         For intj = 1 To 400
             uname = ""
-            uname1 = ""
-            uname2 = ""
+            unameИздатель = ""
+            unameДата = ""
 
             A = "Установленные программы" & intj
 
             uname = everIniFile.GetString("Установленные программы", A, "")
 
-            uname1 = everIniFile.GetString("Установленные программы", uname & "|Publisher", "")
-            uname4 = everIniFile.GetString("Установленные программы", uname & "|Версия", "")
+            unameИздатель = everIniFile.GetString("Установленные программы", uname & "|Publisher", "")
+            unameВерсия = everIniFile.GetString("Установленные программы", uname & "|Версия", "")
 
-            If Len(uname1) = 0 Then
-                uname1 = everIniFile.GetString("Установленные программы", uname & "|Издатель", "")
+            If Len(unameИздатель) = 0 Then
+                unameИздатель = everIniFile.GetString("Установленные программы", uname & "|Издатель", "")
             End If
 
-            uname2 = everIniFile.GetString("Установленные программы", uname & "|Дата", "")
+            unameДата = everIniFile.GetString("Установленные программы", uname & "|Дата", "")
 
-            If Not RSExists("PROYZV", "PROiZV", uname1) Then
-                AddPr(uname1)
+            If Not RSExists("PROYZV", "PROiZV", unameИздатель) Then
+                AddPr(unameИздатель)
             End If
 
+            'esq [***
+            If IsDBNull(unameВерсия) = True And InStr(uname, "<") > 0 And InStr(uname, ">") = Len(uname) Then
+                unameВерсия = Mid(uname, InStr(uname, "<") + 1, InStr(uname, ">") - InStr(uname, "<") - 1)
+                uname = Trim(Left(uname, InStr(uname, "<") - 1))
+            End If
+            'esq [***
 
-
-            If uname2 = "<N/A>" Then uname2 = Date.Today
-            If Len(uname) = 0 Then uname2 = Date.Today
+            If unameДата = "<N/A>" Then unameДата = Date.Today
+            If Len(uname) = 0 Then unameДата = Date.Today
 
             If Len(uname) = 0 Then
 
@@ -1123,12 +1128,12 @@ nextA:
                 frmComputers.lstSoftware.Items.Add(frmComputers.lstSoftware.Items.Count + 1)
                 ' frmComputers.lstSoftware.Items(intcount).SubItems.Add(frmComputers.lstSoftware.Items.Count)
                 frmComputers.lstSoftware.Items(intcount).SubItems.Add(uname)
-                frmComputers.lstSoftware.Items(intcount).SubItems.Add(uname4)
+                frmComputers.lstSoftware.Items(intcount).SubItems.Add(unameВерсия)
                 frmComputers.lstSoftware.Items(intcount).SubItems.Add(stLKEY)
                 frmComputers.lstSoftware.Items(intcount).SubItems.Add("")
-                frmComputers.lstSoftware.Items(intcount).SubItems.Add(uname2)
+                frmComputers.lstSoftware.Items(intcount).SubItems.Add(unameДата)
                 frmComputers.lstSoftware.Items(intcount).SubItems.Add(Date.Today)
-                frmComputers.lstSoftware.Items(intcount).SubItems.Add(uname1)
+                frmComputers.lstSoftware.Items(intcount).SubItems.Add(unameИздатель)
 
                 intcount = intcount + 1
 
@@ -1185,10 +1190,10 @@ ASE:
         'esq ***** Лицензионный номер МСОфиса 
         Dim L_name, L_key As String
         Dim lstcount, n As Integer
-        If InStr(oINI, "-soft.ini") Then
-            l = Len(oINI)
-            n = InStr(oINI, "-soft.ini")
-            oINI = Left(oINI, n - 1) & ".ini"
+        If InStr(EverestFilePatch, "-soft.ini") Then
+            l = Len(EverestFilePatch)
+            n = InStr(EverestFilePatch, "-soft.ini")
+            oINI = Left(EverestFilePatch, n - 1) & ".ini"
         End If
         If FSO.FileExists(oINI) Then
             Dim oIniFile As New IniFile(oINI)
@@ -1201,8 +1206,8 @@ ASE:
                     L_key = oIniFile.GetString("Лицензии", L_name & "|Ключ продукта", "")
 
                     If InStr(L_name, "office", Microsoft.VisualBasic.CompareMethod.Text) > 0 Then
-                        For lstcount = 1 To 400
-                            If InStr(frmComputers.lstSoftware.Items(lstcount).SubItems.Item(2).Text, L_name) > 0 Then
+                        For lstcount = 1 To frmComputers.lstSoftware.Items.Count - 1
+                            If InStr(frmComputers.lstSoftware.Items(lstcount).SubItems.Item(1).Text, L_name) > 0 Then
                                 frmComputers.lstSoftware.Items(lstcount).SubItems.Item(3).Text = L_key
                             End If
                         Next
@@ -2230,6 +2235,7 @@ nextA:
 
         Call usersload() 'esq 130728
         Call textp_Upd(frmComputers.lstSoftware, frmComputers.sCOUNT) 'esq
+        Call SAVE_SOFT(frmComputers.lstSoftware, frmComputers.sCOUNT) 'esq
 
         Exit Sub
 Err_handler:
@@ -2238,10 +2244,10 @@ Err_handler:
 
     Public Sub textp_Upd(ByVal lstV As ListView, ByVal sSID As Integer)
         Dim uname As String
-        Dim uname1 As String
-        Dim uname2 As String
+        Dim unameИздатель As String
+        Dim unameДата As String
         Dim uname3 As String
-        Dim uname4 As String
+        Dim unameВерсия As String
 
         Dim A As String
         Dim intj, intjk, beg, po_count As Integer 'esq
@@ -2252,13 +2258,13 @@ Err_handler:
         A = "Установленные программы"
         'lstV.ListItems.Clear
 
-        'esq *****************************
+        'esq [*****************************
         Dim FSO As Object
         Dim tINI, oINI As String
         Dim l As Integer
 
         FSO = CreateObject("Scripting.FileSystemObject")
-oINI = EverestFilePatch
+        oINI = EverestFilePatch
         l = Len(EverestFilePatch)
         tINI = Left(EverestFilePatch, l - 4) & "-soft.ini"
         If FSO.FileExists(tINI) Then
@@ -2302,7 +2308,7 @@ oINI = EverestFilePatch
         Call LOAD_SOFT(sSID, lstV)
 
         Dim everIniFile As New IniFile(EverestFilePatch)
-        'esq *****************************
+        'esq ]*****************************
 
         For intj = 1 To 400
 
@@ -2315,53 +2321,60 @@ oINI = EverestFilePatch
             If uname Like "Обновление" Then GoTo A2
 
 
-            uname1 = everIniFile.GetString("Установленные программы", uname & "|Publisher", "")
-            uname4 = everIniFile.GetString("Установленные программы", uname & "|Версия", "")
+            unameИздатель = everIniFile.GetString("Установленные программы", uname & "|Publisher", "")
+            unameВерсия = everIniFile.GetString("Установленные программы", uname & "|Версия", "")
 
-            If Len(uname1) = 0 Then
-                uname1 = everIniFile.GetString("Установленные программы", uname & "|Издатель", "")
+            If Len(unameИздатель) = 0 Then
+                unameИздатель = everIniFile.GetString("Установленные программы", uname & "|Издатель", "")
             End If
 
-            uname2 = everIniFile.GetString("Установленные программы", uname & "|Дата", "")
+            unameДата = everIniFile.GetString("Установленные программы", uname & "|Дата", "")
 
-            If Not RSExists("PROYZV", "PROiZV", uname1) Then
-                AddPr(uname1)
+            If Not RSExists("PROYZV", "PROiZV", unameИздатель) Then
+                AddPr(unameИздатель)
             End If
+
+            'esq [***
+            If IsDBNull(unameВерсия) = True And InStr(uname, "<") > 0 And InStr(uname, ">") = Len(uname) Then
+                unameВерсия = Mid(uname, InStr(uname, "<") + 1, InStr(uname, ">") - InStr(uname, "<") - 1)
+                uname = Trim(Left(uname, InStr(uname, "<") - 1))
+            End If
+            'esq [***
 
             If Len(uname) = 0 Then
 
                 If A = "Установленные программы1" Then
 
                     uname = everIniFile.GetString("Установленные программы", "Установленные программы2", "")
-                    uname1 = everIniFile.GetString("Установленные программы", uname & "|Publisher", "")
-                    uname4 = everIniFile.GetString("Установленные программы", uname & "|Версия", "")
+                    unameИздатель = everIniFile.GetString("Установленные программы", uname & "|Publisher", "")
+                    unameВерсия = everIniFile.GetString("Установленные программы", uname & "|Версия", "")
 
-                    If Len(uname1) = 0 Then
-                        uname1 = everIniFile.GetString("Установленные программы", uname & "|Издатель", "")
+                    If Len(unameИздатель) = 0 Then
+                        unameИздатель = everIniFile.GetString("Установленные программы", uname & "|Издатель", "")
                     End If
 
-                    uname2 = everIniFile.GetString("Установленные программы", uname & "|Дата", "")
+                    unameДата = everIniFile.GetString("Установленные программы", uname & "|Дата", "")
 
                     If Not (RSExistsSoft(sSID, uname)) Then 'esq frmComputers.sCOUNT
 
-                        If uname2 = "<N/A>" Then uname2 = Date.Today
-                        If Len(uname2) = 0 Then uname2 = Date.Today
+                        If unameДата = "<N/A>" Then unameДата = Date.Today
+                        If Len(unameДата) = 0 Then unameДата = Date.Today
 
                         lstV.Items.Add(lstV.Items.Count + 1)
-                        'esq *****************************
+                        'esq [*****************************
                         intjk = lstV.Items.Count - 1
 
                         ' lstV.Items(intjk).SubItems.Add(lstV.Items.Count + 1)
                         lstV.Items(intjk).SubItems.Add(uname)
-                        lstV.Items(intjk).SubItems.Add(uname4)
+                        lstV.Items(intjk).SubItems.Add(unameВерсия)
                         lstV.Items(intjk).SubItems.Add("")
                         lstV.Items(intjk).SubItems.Add("")
-                        lstV.Items(intjk).SubItems.Add(uname2)
+                        lstV.Items(intjk).SubItems.Add(unameДата)
                         lstV.Items(intjk).SubItems.Add(Date.Today)
-                        lstV.Items(intjk).SubItems.Add(uname1)
+                        lstV.Items(intjk).SubItems.Add(unameИздатель)
                         lstV.Items(intjk).SubItems.Add("")
                         'lstV.Items(intjk).EnsureVisible()
-                        'esq *****************************
+                        'esq ]*****************************
                     End If
                 End If
             Else
@@ -2371,25 +2384,25 @@ oINI = EverestFilePatch
 
                     If Not (RSExistsSoft(sSID, uname)) Then 'esq frmComputers.sCOUNT
                         'If SERT$ = 0 Then
-                        If uname2 = "<N/A>" Then uname2 = Date.Today
-                        If Len(uname2) = 0 Then uname2 = Date.Today
+                        If unameДата = "<N/A>" Then unameДата = Date.Today
+                        If Len(unameДата) = 0 Then unameДата = Date.Today
 
                         lstV.Items.Add(lstV.Items.Count + 1)
-                        'esq *****************************
+                        'esq [*****************************
                         intjk = lstV.Items.Count - 1
 
                         ' lstV.Items(intjk).SubItems.Add(lstV.Items.Count + 1)
                         lstV.Items(intjk).SubItems.Add(uname)
-                        lstV.Items(intjk).SubItems.Add(uname4)
+                        lstV.Items(intjk).SubItems.Add(unameВерсия)
                         lstV.Items(intjk).SubItems.Add("")
                         lstV.Items(intjk).SubItems.Add("")
-                        lstV.Items(intjk).SubItems.Add(uname2)
+                        lstV.Items(intjk).SubItems.Add(unameДата)
                         lstV.Items(intjk).SubItems.Add(Date.Today)
-                        lstV.Items(intjk).SubItems.Add(uname1)
+                        lstV.Items(intjk).SubItems.Add(unameИздатель)
                         lstV.Items(intjk).SubItems.Add("")
                         'lstV.ListItems(intj).SubItems(7) = uname2              
                         'lstV.Items(intjk).EnsureVisible()                      
-                        'esq *****************************
+                        'esq ]*****************************
                     End If
                 Else
                 End If
@@ -2397,7 +2410,7 @@ oINI = EverestFilePatch
 A2:
         Next
 
-        'esq *****************************
+        'esq [*****************************
         Dim OS_OS, SAGAZOD, B As String
         OS_OS = everIniFile.GetString("Операционная система", "Свойства операционной системы|Название ОС", "")
         SAGAZOD = everIniFile.GetString("Операционная система", "Лицензионная информация|Ключ продукта", "")
@@ -2407,8 +2420,8 @@ A2:
             lstV.Items.Add(lstV.Items.Count + 1)
             intjk = lstV.Items.Count - 1
 
-            lstV.Items(intjk).SubItems.Add(lstV.Items.Count + 1)
             lstV.Items(intjk).SubItems.Add(OS_OS)
+            lstV.Items(intjk).SubItems.Add("")
             lstV.Items(intjk).SubItems.Add(SAGAZOD)
             lstV.Items(intjk).SubItems.Add("")
             lstV.Items(intjk).SubItems.Add(Date.Today)
@@ -2416,9 +2429,9 @@ A2:
             lstV.Items(intjk).SubItems.Add("Microsoft Corporation")
             lstV.Items(intjk).SubItems.Add("Операционная система")
         End If
-        'esq *****************************
+        'esq ]*****************************
 
-   'esq ***** Лицензионный номер МСОфиса 
+        'esq [***** Лицензионный номер МСОфиса 
         Dim L_name, L_key As String
         Dim lstcount, n As Integer
         If InStr(oINI, "-soft.ini") Then
@@ -2437,8 +2450,8 @@ A2:
                     L_key = oIniFile.GetString("Лицензии", L_name & "|Ключ продукта", "")
 
                     If InStr(L_name, "office", Microsoft.VisualBasic.CompareMethod.Text) > 0 Then
-                        For lstcount = 1 To 400
-                            If InStr(lstV.Items(lstcount).SubItems.Item(2).Text, L_name) > 0 Then
+                        For lstcount = 1 To lstV.Items.Count - 1
+                            If InStr(lstV.Items(lstcount).SubItems.Item(1).Text, L_name) <> 0 Then
                                 lstV.Items(lstcount).SubItems.Item(3).Text = L_key
                             End If
                         Next
@@ -2446,7 +2459,7 @@ A2:
                 End If
             Next
         End If
-        'esq  **********
+        'esq  ]**********
         Exit Sub
 Err_handler:
     End Sub
@@ -2455,30 +2468,45 @@ Err_handler:
         On Error GoTo err_
         Dim everIniFile As New IniFile(EverestFilePatch)
         Dim uname1, uname2 As String
+        'esq [***** Лицензионный номер МСОфиса 
+        Dim FSO As Object
+        Dim oINI As String
+        Dim l, n As Integer
 
-        For intj = 1 To 50
+        FSO = CreateObject("Scripting.FileSystemObject")
 
-            uname1 = "Лицензии" & intj
-            uname2 = everIniFile.GetString("Лицензии", uname1, "")
+        If InStr(everIniFile.FileName, "-soft.ini") Then
+            l = Len(everIniFile.FileName)
+            n = InStr(everIniFile.FileName, "-soft.ini")
+            oINI = Left(everIniFile.FileName, n - 1) & ".ini"
+        End If
 
-            If Len(uname2) = 0 Then Exit Sub
+        If FSO.FileExists(oINI) Then
+            'esq  ]**********
+            For intj = 1 To 50
 
-            Select Case Len(uname2)
+                uname1 = "Лицензии" & intj
+                uname2 = everIniFile.GetString("Лицензии", uname1, "")
 
-                Case 0
+                If Len(uname2) = 0 Then Exit Sub
+
+                Select Case Len(uname2)
+
+                    Case 0
 
 
-                Case Else
+                    Case Else
 
-                    If sProg = uname2 Then
+                        If sProg = uname2 Then
 
-                        stLKEY = everIniFile.GetString("Лицензии", uname2 & "|Ключ продукта", "")
-                        Exit Sub
-                    End If
+                            stLKEY = everIniFile.GetString("Лицензии", uname2 & "|Ключ продукта", "")
+                            Exit Sub
+                        End If
 
-            End Select
+                End Select
 
-        Next
+            Next
+        End If 'esq
 
 
 err_:

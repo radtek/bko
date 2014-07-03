@@ -25,27 +25,63 @@ Public Class frmARHIV
 
         Call frmARHIV_Lang()
 
-        Me.find_file()
+        Call find_file() 'esq
+        'Me.find_file()
+
     End Sub
+
+    Class ListViewItemComparer
+        Implements IComparer
+
+        Private col As Integer
+
+        Public Sub New()
+            col = 0
+        End Sub
+
+        Public Sub New(ByVal column As Integer)
+            col = column
+        End Sub
+
+        Public Function Compare(ByVal y As Object, ByVal x As Object) As Integer _
+           Implements IComparer.Compare
+            Return [String].Compare(CType(x, ListViewItem).SubItems(col).Text, CType(y, ListViewItem).SubItems(col).Text)
+        End Function
+    End Class
 
     Private Sub find_file()
 
         lbArh.Items.Clear()
+        Me.lvArh.Items.Clear()
+        Me.lvArh.Columns.Clear()
+        Me.lvArh.Columns.Add("сорт", 3)
+        Me.lvArh.Columns.Add("Дата", 120, HorizontalAlignment.Left)
+        Me.lvArh.Columns.Add("Имя", 200, HorizontalAlignment.Left)
+        'Me.lvArh.HeaderStyle() = ColumnHeaderStyle.Nonclickable
+        Me.lvArh.Sorting() = SortOrder.Ascending
+        Me.lvArh.ListViewItemSorter() = New ListViewItemComparer(0)
+
 
         Try
             ' Only get files that begin with the letter "c."
             Dim dirs As String() = Directory.GetFiles(PrPath, "arhiv\*.zip")
             ' Console.WriteLine("The number of files starting with c is {0}.", dirs.Length)
             Dim dir As String
+            Dim cnt As Integer
 
             For Each dir In dirs
                 Dim d() As String
                 d = Split(dir, "\")
 
                 lbArh.Items.Add(d(d.Length - 1))
+                lvArh.Items.Add(Format(FileSystem.FileDateTime(dir), "yyMMddHHmmss"))
+                cnt = lvArh.Items.Count - 1
+                lvArh.Items(cnt).SubItems.Add(FileSystem.FileDateTime(dir))
+                lvArh.Items(cnt).SubItems.Add(d(d.Length - 1))
             Next
+            lvArh.Sort()
         Catch e1 As Exception
-            'Console.WriteLine("The process failed: {0}", e1.ToString())
+            Console.WriteLine("The process failed: {0}", e1.ToString())
         End Try
     End Sub
 
@@ -167,7 +203,8 @@ Public Class frmARHIV
                                               Me._nFilesCompleted,
                                               ((100 * Me._totalBytesAfterCompress) / CDbl(Me._totalBytesBeforeCompress)))
             Me.ResetState()
-            Me.find_file()
+            Call find_file() 'esq
+            'Me.find_file()
 
             LoadDatabase()
         End If
@@ -235,4 +272,5 @@ Public Class frmARHIV
         'Public ZipFlavor As Integer
         Public ZipName As String
     End Class
+
 End Class
