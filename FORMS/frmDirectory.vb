@@ -2230,7 +2230,6 @@ Public Class frmDirectory
             tvDirectory.SelectedNode.Text = objIniFile.GetString("frmDirectory", "MSG36", "Мастер") Or
             tvDirectory.SelectedNode.Text = objIniFile.GetString("frmDirectory", "MSG37", "Ответственный") Then
 
-
         Else
             If Len(cmbName3.Text) = 0 Then cmbName3.Text = "NoName"
 
@@ -2937,31 +2936,30 @@ cmbName.Text = Replace(cmbName.Text, "'", "") 'esq
                    "C='" & LTrim(sPAR3) & "'," &
                    "Prim='" & LTrim(sPRIM) & "'" & "WHERE id = " & dSID
 
-'esq **********
-                    Dim rs2 As Recordset
+                    'esq **********
+                    If sTABLE = "SPR_PO" Then
+                        Dim rs2 As Recordset
+                        rs2 = New Recordset
+                        rs2.Open("SELECT * FROM SPR_PROIZV WHERE ID=" & sPRID, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        Dim S_PROIZV As String
+                        S_PROIZV = rs2.Fields("PROIZV").Value
+                        rs2.Close()
+                        rs2 = Nothing
 
-                    rs2 = New Recordset
-                    rs2.Open("SELECT * FROM SPR_PROIZV WHERE ID=" & sPRID, DB7, CursorTypeEnum.adOpenDynamic,
-                             LockTypeEnum.adLockOptimistic)
-                    Dim S_PROIZV As String
-                    S_PROIZV = rs2.Fields("PROIZV").Value
-                    rs2.Close()
-                    rs2 = Nothing
-
-                    rs2 = New Recordset
-                    rs2.Open("SELECT * FROM SOFT_INSTALL WHERE Soft='" & LTrim(sNAME) & "'", DB7, CursorTypeEnum.adOpenDynamic,
-                             LockTypeEnum.adLockOptimistic)
-                    With rs2
-                        .MoveFirst()
-                        Do While Not .EOF
-                            .Fields("Publisher").Value = S_PROIZV
-                            .Fields("TIP").Value = LTrim(sPAR1)
-                            .Update()
-                            .MoveNext()
-                        Loop
-                    End With
-                    rs2.Close()
-                    rs2 = Nothing
+                        rs2 = New Recordset
+                        rs2.Open("SELECT * FROM SOFT_INSTALL WHERE Soft='" & LTrim(sNAME) & "'", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        With rs2
+                            .MoveFirst()
+                            Do While Not .EOF
+                                .Fields("Publisher").Value = S_PROIZV
+                                .Fields("TIP").Value = LTrim(sPAR1)
+                                .Update()
+                                .MoveNext()
+                            Loop
+                        End With
+                        rs2.Close()
+                        rs2 = Nothing
+                    End If
                     'esq **********
             End Select
 
