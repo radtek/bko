@@ -479,6 +479,22 @@ Public Class frmLogin
         T_User.Close()
         T_User = Nothing
 
+
+        'esq добавление поля для признака установки ПО вручную
+        ' используется для указания ПО, отсутствующего в реестре, т.е. для которого нет установщика
+        Dim sSQL2 As String
+        Dim rs2 As Recordset
+        rs2 = New Recordset
+        Try
+            rs2.Open("SELECT WO_SETUP FROM SOFT_INSTALL", DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+            rs2.Close()
+        Catch ex As Exception
+            sSQL2 = "ALTER TABLE SOFT_INSTALL ADD COLUMN WO_SETUP Bit" 'логическое
+            DB7.Execute(sSQL2)
+        End Try
+        rs2 = Nothing
+        'esq ****************
+
         Exit Sub
 err_:
         txtPassword.Text = ""
