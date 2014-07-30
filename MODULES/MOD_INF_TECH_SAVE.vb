@@ -4091,8 +4091,8 @@ Error_:
                             AddTwoPar(sTEMP0, rsdb.Fields("KEYBOARD_PROIZV").Value, "SPR_KEYBOARD", frmComputers.cmbOTH)
                         End If
 
-                        rs = New Recordset
-                        rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
+                        'esq rs = New Recordset
+                        'esq rs.Open(sSQL, DB7, CursorTypeEnum.adOpenDynamic, LockTypeEnum.adLockOptimistic)
 
                         sSQL = "INSERT INTO kompy (PRINTER_NAME_1,PRINTER_SN_1,PRINTER_PROIZV_1,OTvetstvennyj,TELEPHONE,NET_NAME,PSEVDONIM,PCL,TIPtehn,INV_NO_PRINTER,FILIAL,mesto,kabn," &
                            "SFAktNo,CenaRub,StoimRub,Zaiavk,DataVVoda,dataSF,Spisan,Balans) VALUES ('" &
