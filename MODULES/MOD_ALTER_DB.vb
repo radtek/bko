@@ -411,7 +411,7 @@ err_:
         End Select
 
 
-        DB7.Execute("UPDATE kompy SET RAM_5 =, RAM_SN_5 =, RAM_speed_5 =, RAM_PROIZV_5 =, RAM_6 =, RAM_SN_6 =, RAM_speed_6 =, RAM_PROIZV_6 =, RAM_7 =, RAM_SN_7 =, RAM_speed_7 =, RAM_PROIZV_7 =, RAM_8 =, RAM_SN_8 =, RAM_speed_8 =, RAM_PROIZV_8 =, HDD_Name_5 =, HDD_OB_5 =,HDD_SN_5 =,HDD_PROIZV_5 =, HDD_Name_6 =, HDD_OB_6 =,HDD_SN_6 =,HDD_PROIZV_6 =, HDD_Name_7 =, HDD_OB_7 =,HDD_SN_7 =,HDD_PROIZV_7 =, HDD_Name_8 =, HDD_OB_8 =,HDD_SN_8 =,HDD_PROIZV_8 =")
+        DB7.Execute("UPDATE kompy SET RAM_5='', RAM_SN_5='', RAM_speed_5='', RAM_PROIZV_5='', RAM_6='', RAM_SN_6='', RAM_speed_6='', RAM_PROIZV_6='', RAM_7='', RAM_SN_7='', RAM_speed_7='', RAM_PROIZV_7='', RAM_8='', RAM_SN_8='', RAM_speed_8='', RAM_PROIZV_8='', HDD_Name_5='', HDD_OB_5='',HDD_SN_5='',HDD_PROIZV_5='', HDD_Name_6='', HDD_OB_6='',HDD_SN_6='',HDD_PROIZV_6='', HDD_Name_7='', HDD_OB_7='',HDD_SN_7='',HDD_PROIZV_7='', HDD_Name_8='', HDD_OB_8='',HDD_SN_8='',HDD_PROIZV_8 =''")
 
         Call ALTER_DB_1735()
 
@@ -434,78 +434,78 @@ err_:
 
         Dim sSQL As String
 
-        sSQL = "UPDATE kompy SET NET_IP_1=PRINTER_NAME_2 WHERE TipTehn = NET And PRINTER_NAME_2 <> And NET_IP_1 <>"
+        sSQL = "UPDATE kompy SET NET_IP_1=PRINTER_NAME_2 WHERE TipTehn = 'NET' And PRINTER_NAME_2 <> '' And NET_IP_1 <>''"
 
         DB7.Execute(sSQL)
 
-        sSQL = "UPDATE kompy SET PRINTER_NAME_2= WHERE TipTehn = NET And PRINTER_NAME_2 <> And NET_IP_1 <>"
+        sSQL = "UPDATE kompy SET PRINTER_NAME_2='' WHERE TipTehn = 'NET' And PRINTER_NAME_2 <>'' And NET_IP_1 <>''"
 
         DB7.Execute(sSQL)
 
-        sSQL = "update kompy set Ser_N_SIS=MONITOR_SN Where tiptehn = MONITOR"
+        sSQL = "update kompy set Ser_N_SIS=MONITOR_SN Where tiptehn = 'MONITOR'"
 
         DB7.Execute(sSQL)
 
-        sSQL = "update kompy set Ser_N_SIS=port_1 Where tiptehn = NET"
+        sSQL = "update kompy set Ser_N_SIS=port_1 Where tiptehn ='NET'"
 
         DB7.Execute(sSQL)
 
-        sSQL = "update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = Printer"
+        sSQL = "update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = 'Printer'"
 
         DB7.Execute(sSQL)
 
-        sSQL = "update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = KOpir"
+        sSQL = "update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = 'KOpir'"
 
         DB7.Execute(sSQL)
 
-        sSQL = "update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = MFU"
+        sSQL = "update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = 'MFU'"
 
         DB7.Execute(sSQL)
-        sSQL = "update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = PHONE"
-
-        DB7.Execute(sSQL)
-
-        sSQL = "update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = PHOTO"
+        sSQL = "update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = 'PHONE'"
 
         DB7.Execute(sSQL)
 
-        sSQL = "update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = FAX"
+        sSQL = "update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = 'PHOTO'"
 
         DB7.Execute(sSQL)
 
-        sSQL = "update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = ZIP"
+        sSQL = "update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = 'FAX'"
 
         DB7.Execute(sSQL)
 
-        sSQL = "update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = OT"
+        sSQL = "update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = 'ZIP'"
 
         DB7.Execute(sSQL)
 
-        sSQL = "update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = USB"
+        sSQL = "update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = 'OT'"
 
         DB7.Execute(sSQL)
 
-        sSQL = "update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = SOUND"
+        sSQL = "update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = 'USB'"
 
         DB7.Execute(sSQL)
 
-        sSQL = "update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = IBP"
+        sSQL = "update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = 'SOUND'"
 
         DB7.Execute(sSQL)
 
-        sSQL = "update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = FS"
+        sSQL = "update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = 'IBP'"
 
         DB7.Execute(sSQL)
 
-        sSQL = "update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = KEYB"
+        sSQL = "update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = 'FS'"
 
         DB7.Execute(sSQL)
 
-        sSQL = "update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = MOUSE"
+        sSQL = "update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = 'KEYB'"
 
         DB7.Execute(sSQL)
 
-        sSQL = "update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = CNT"
+        sSQL = "update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = 'MOUSE'"
+
+        DB7.Execute(sSQL)
+
+        sSQL = "update kompy set Ser_N_SIS=PRINTER_SN_1 Where tiptehn = 'CNT'"
 
         DB7.Execute(sSQL)
 

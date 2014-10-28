@@ -525,7 +525,7 @@ Err_:
                 End If
 
             Case Else
-                sTIP_COMPA = LNGIniFile.GetString("frmMain", "38", "")
+                sTIP_COMPA = frmComputers.cmbOTHConnect.Text 'LNGIniFile.GetString("frmMain", "38", "")
                 If Not RSExists("OTHD", "name", Trim(frmComputers.cmbOTH.Text)) Then
                     AddTreePar(frmComputers.cmbOTH.Text, frmComputers.cmbOTHConnect.Text, frmComputers.PROiZV39.Text,
                                "SPR_OTH_DEV", frmComputers.cmbOTH)
