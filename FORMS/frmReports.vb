@@ -3225,6 +3225,9 @@ Error_:
 
                     End If
 
+
+
+
                     '###################################################################
                     'Вычисляем поставщика
                     '###################################################################
@@ -3268,7 +3271,7 @@ Error_:
                     '###################################################################
 
 
-                    If Not IsDBNull(.Fields("PRINTER_SN_1").Value) Then
+                    If Not IsDBNull(.Fields("OtvetstvennyJ").Value) Then
                         LvKompOtd.Items(CInt(intj)).SubItems.Add(rs.Fields("OtvetstvennyJ").Value)
                     Else
                         LvKompOtd.Items(CInt(intj)).SubItems.Add("")
